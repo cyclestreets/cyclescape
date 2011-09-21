@@ -11,6 +11,9 @@ gem 'pg'
 gem 'haml-rails'
 gem 'formtastic'
 
+# Back-end gems
+gem 'devise'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
