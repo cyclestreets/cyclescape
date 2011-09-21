@@ -37,13 +37,13 @@ group :development, :test do
   # IRB helpers
   gem 'wirble'
   gem 'hirb'
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-rails'
 end
 
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
-  gem 'rspec-core'
-  gem 'rspec-expectations'
-  gem 'rspec-rails'
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
 end
