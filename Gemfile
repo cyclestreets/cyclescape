@@ -7,6 +7,10 @@ gem 'rails', '3.1.0'
 
 gem 'pg'
 
+# Front-end gems
+gem 'haml-rails'
+gem 'formtastic'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
