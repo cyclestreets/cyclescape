@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Create root user
+unless User.where("id = 1").exists?
+  root = User.new(email: "root@cyclestreets.net", full_name: "Root", role: "admin",
+      password: "changeme", password_confirmation: "changeme")
+  root.skip_confirmation!
+  root.save!
+  User.update_all("id = 1", "id = #{root.id}")
+end
