@@ -42,4 +42,5 @@ group :test do
   gem 'rspec-core'
   gem 'rspec-expectations'
   gem 'rspec-rails'
+  gem 'factory_girl'
 end
