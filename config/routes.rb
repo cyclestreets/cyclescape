@@ -3,6 +3,10 @@ Cyclekit::Application.routes.draw do
 
   resource :dashboard
 
+  namespace :admin do
+    resources :groups
+  end
+
   root :to => "dashboards#show"
 
   # The priority is based upon order of creation:

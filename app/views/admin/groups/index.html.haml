@@ -1,0 +1,15 @@
+%header
+  %h1= t ".title"
+%section
+  .tasks
+    = link_to t(".new_group"), new_admin_group_path
+  %table
+    %thead
+      %th= t ".name"
+    %tbody
+      - @groups.each do |group|
+        %tr
+          %td= group.name
+          %td= mail_to group.email
+          %td.actions
+            = link_to t(".edit"), [:edit, :admin, group]
