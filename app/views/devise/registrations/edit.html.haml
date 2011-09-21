@@ -3,6 +3,14 @@
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
   = devise_error_messages!
   %div
+    = f.label :full_name
+    %br
+    = f.text_field :full_name
+  %div
+    = f.label :display_name
+    %br
+    = f.text_field :display_name
+  %div
     = f.label :email
     %br/
     = f.email_field :email
