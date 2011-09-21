@@ -1,6 +1,10 @@
 Cyclekit::Application.routes.draw do
   devise_for :users
 
+  resource :dashboard
+
+  root :to => "dashboards#show"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
