@@ -7,7 +7,6 @@ gem 'rails', '3.1.0'
 
 gem 'pg'
 
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -30,4 +29,7 @@ gem 'jquery-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+  gem 'rspec-core'
+  gem 'rspec-expectations'
+  gem 'rspec-rails'
 end
