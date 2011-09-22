@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
 
   validates :role, presence: true, inclusion: {in: ALLOWED_ROLES} 
 
+  def name
+    return display_name unless display_name.blank?
+    full_name
+  end
+
   private
 
   def set_default_role

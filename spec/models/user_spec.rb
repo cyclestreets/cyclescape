@@ -39,4 +39,18 @@ describe User do
       admin.role.should == "admin"
     end
   end
+
+  describe "name" do
+    subject { FactoryGirl.build(:stewie) }
+
+    it "should use the full name if no display name is set" do
+      subject.display_name = ""
+      subject.name.should == "Stewie Griffin"
+    end
+
+    it "should use the display name if set" do
+      subject.display_name = "Stewie"
+      subject.name.should == "Stewie"
+    end
+  end
 end
