@@ -5,9 +5,26 @@ body {
   font-size: 12px;
 }
 
-header.site > h1 {
+// Headings
+
+header > h1 {
   font: {
+    size: 36px;
     weight: bold;
-    size: 26px;
+  }
+}
+
+div.content {
+  h1 {
+    font: {
+      size: 24px;
+      weight: bold;
+    }
+  }
+  h2 {
+    font: {
+      size: 20px;
+      weight: bold;
+    }
   }
 }

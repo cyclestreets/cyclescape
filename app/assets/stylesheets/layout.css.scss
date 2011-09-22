@@ -1,5 +1,10 @@
 @import "grid";
 
-header.site, .flash-container, .content-container, footer.site {
+body > header, .flash-container, .content-container, body > footer {
   @include container;
+}
+
+body > header {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
