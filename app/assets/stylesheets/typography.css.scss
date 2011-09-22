@@ -1,0 +1,30 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+}
+
+// Headings
+
+header > h1 {
+  font: {
+    size: 36px;
+    weight: bold;
+  }
+}
+
+div.content {
+  h1 {
+    font: {
+      size: 24px;
+      weight: bold;
+    }
+  }
+  h2 {
+    font: {
+      size: 20px;
+      weight: bold;
+    }
+  }
+}
