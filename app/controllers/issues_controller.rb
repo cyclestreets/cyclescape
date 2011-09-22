@@ -15,8 +15,7 @@ class IssuesController < ApplicationController
   end
 
   def create
-    @issue = Issue.new(params[:issue])
-    @issue.created_by_id = current_user.id
+    @issue = current_user.issues.new(params[:issue])
 
     if @issue.save
       redirect_to action: :index
