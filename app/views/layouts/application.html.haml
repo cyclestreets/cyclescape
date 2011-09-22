@@ -6,4 +6,12 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body
-    = yield
+    %header
+      %h1 CycleKit
+    - [:alert, :notice].each do |type|
+      - if flash.key? type
+        .flash{class: type}
+          = flash[type]
+    .content
+      = yield
+    %footer
