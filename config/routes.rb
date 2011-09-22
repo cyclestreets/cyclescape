@@ -6,7 +6,7 @@ Cyclekit::Application.routes.draw do
   resources :issues
 
   namespace :admin do
-    resources :groups
+    resources :groups, :issue_categories
   end
 
   root :to => "dashboards#show"
