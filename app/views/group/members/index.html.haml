@@ -1,0 +1,14 @@
+%h1= t ".title", :group => @group.name
+
+%p= link_to t(".new_member"), action: :new
+
+%table
+  %thead
+    %th= t ".member_name"
+    %th= t "actions"
+  %tbody
+    - @members.each do |member|
+      %tr
+        %td= member.name
+        %td
+          = link_to t("edit"), "#"

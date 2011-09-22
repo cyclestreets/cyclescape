@@ -1,6 +1,10 @@
 # GB English translations for Ruby on Rails
 
 "en-GB":
+  group:
+    members:
+      index:
+        title: "Members of %{group}"
   date:
     formats:
       default: "%d-%m-%Y"

@@ -9,6 +9,10 @@ Cyclekit::Application.routes.draw do
     resources :groups, :issue_categories
   end
 
+  resources :groups do
+    resources :members, :controller => "group/members"
+  end
+
   root :to => "dashboards#show"
 
   # The priority is based upon order of creation:

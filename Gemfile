@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rspec-core'
   gem 'rspec-expectations'
   gem 'rspec-rails'
+  gem 'capybara'
 end
 
 group :test do
