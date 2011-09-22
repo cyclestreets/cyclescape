@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Group do
   describe "to be valid" do
-    subject { Factory.build(:group) }
+    subject { FactoryGirl.build(:group) }
 
     it "must have a name" do
       subject.name = ""

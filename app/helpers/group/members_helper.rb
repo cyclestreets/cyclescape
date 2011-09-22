@@ -1,0 +1,2 @@
+module Group::MembersHelper
+end
