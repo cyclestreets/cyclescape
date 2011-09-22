@@ -6,9 +6,11 @@
   %table
     %thead
       %th= t ".issue_title"
+      %th= t ".category"
       %th= t ".description"
     %tbody
       - @issues.each do |issue|
         %tr
           %td= issue.title
+          %td= issue.category.name
           %td= issue.description
