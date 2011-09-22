@@ -1,0 +1,70 @@
+// 960 Grid Definition
+
+// Configuration
+$num-columns: 12;
+$column-width: 60px;
+$gutter: 20px;
+$total-width: ($column-width + $gutter) * $num-columns;
+
+// Convenience variables
+$full-span: $num-columns;
+$half-span: $num-columns / 2;
+$one-quarter-span: $num-columns / 4;
+$three-quarter-span: $num-columns * (3/4);
+
+@mixin container {
+  margin-left: auto;
+  margin-right: auto;
+  width: $total-width; }
+
+@mixin column($span: 1, $pos: "middle") {
+  float: left;
+  position: relative;
+  width: $column-width * $span + $gutter * ($span - 1);
+  // Standard columns
+  @if $pos == "middle" and $span < $num-columns {
+    margin-left: $gutter / 2;
+    margin-right: $gutter / 2;
+  }
+  // Full width
+  @if $span == $num-columns {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  // First column
+  @if $pos == "first" {
+    margin-left: 0;
+    margin-right: $gutter / 2;
+  }
+  // Last column
+  @if $pos == "last" {
+    margin-left: $gutter / 2;
+    margin-right: 0;
+  }
+}
+
+@mixin first-column {
+  margin-left: 0; }
+
+@mixin last-column {
+  margin-right: 0; }
+
+@mixin prefix($span) {
+  padding-left: $column_width * $span + $gutter; }
+
+@mixin suffix($span) {
+  padding-right: $column_width * $span + $gutter; }
+
+@mixin push($span) {
+  left: $column_width * $span + $gutter; }
+
+@mixin pull($span) {
+  left: -1 * $column_width * $span + $gutter; }
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0; }
