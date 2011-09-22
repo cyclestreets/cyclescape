@@ -22,4 +22,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  # Render views in controller tests
+  config.render_views
 end
