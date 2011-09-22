@@ -1,5 +1,12 @@
 require 'spec_helper'
 
 describe Issue do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "to be valid" do
+    subject { FactoryGirl.create(:issue) }
+
+    it "must have a title" do
+      subject.title = ""
+      subject.should_not be_valid
+    end
+  end
 end
