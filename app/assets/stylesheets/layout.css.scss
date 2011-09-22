@@ -1,0 +1,5 @@
+@import "grid";
+
+header.site, .flash-container, .content-container, footer.site {
+  @include container;
+}

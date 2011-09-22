@@ -8,10 +8,11 @@
   %body
     %header
       %h1 CycleKit
-    - [:alert, :notice].each do |type|
-      - if flash.key? type
-        .flash{class: type}
-          = flash[type]
-    .content
+    .flash-container
+      - [:alert, :notice].each do |type|
+        - if flash.key? type
+          .flash{class: type}
+            = flash[type]
+    .content-container
       = yield
     %footer
