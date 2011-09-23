@@ -7,4 +7,6 @@ class Issue < ActiveRecord::Base
 
   validates :created_by, presence: true
   validates :category, presence: true
+
+  self.rgeo_factory_generator = RGeo::Geos.factory_generator
 end
