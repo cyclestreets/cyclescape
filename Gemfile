@@ -10,6 +10,7 @@ gem 'pg'
 # Front-end gems
 gem 'haml-rails'
 gem 'formtastic'
+gem 'map_layers'
 
 # Back-end gems
 gem 'devise'

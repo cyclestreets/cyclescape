@@ -81,6 +81,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    map_layers (0.0.3)
     mime-types (1.16)
     multi_json (1.0.3)
     nokogiri (1.5.0)
@@ -179,6 +180,7 @@ DEPENDENCIES
   haml-rails
   hirb
   jquery-rails
+  map_layers
   pg
   rails (= 3.1.0)
   rspec-core
