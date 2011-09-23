@@ -12,7 +12,6 @@ class IssuesController < ApplicationController
     @map = MapLayers::Map.new("map", displayProjection:  OpenLayers::Projection.new("EPSG:4326")) do |map, page|
       page << map.add_layer(MapLayers::OSM_MAPNIK)
       page << map.setCenter(OpenLayers::LonLat.new(@issue.location.x,@issue.location.y).transform(OpenLayers::Projection.new("EPSG:4326"), map.getProjectionObject()),15);
-      page << map.add_control(OpenLayers::Control::Permalink.new('permalink'))
     end
   end
 

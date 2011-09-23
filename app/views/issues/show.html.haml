@@ -5,5 +5,11 @@
     %li= "Added by #{@issue.created_by.full_name} on #{@issue.created_at}"
     %li= "Category: #{@issue.category.name}"
   %p= @issue.description
-  %div#map{ style: "height: 300px; width: 900px; border:1px solid black; margin-top: 3em"}
+  %div#map{ style: "height: 300px; width: 900px; border:1px solid black; margin-top: 3em" }
     != @map.to_html
+    %script{ defer: "defer", type: "text/javascript" }
+      var markers = new OpenLayers.Layer.Markers( "Markers", { projection: new OpenLayers.Projection("EPSG:4326") });
+      map.addLayer(markers);
+
+      var icon = new OpenLayers.Icon('/openlayers/img/marker-green.png');
+      markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(#{@issue.location.x},#{@issue.location.y}).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),icon));
