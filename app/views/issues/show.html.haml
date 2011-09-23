@@ -1,0 +1,7 @@
+%header
+  %h2= @issue.title
+%section
+  %ul
+    %li= "Added by #{@issue.created_by.full_name} on #{@issue.created_at}"
+    %li= "Category: #{@issue.category.name}"
+  %p= @issue.description

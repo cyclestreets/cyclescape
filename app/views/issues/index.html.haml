@@ -13,7 +13,7 @@
     %tbody
       - @issues.each do |issue|
         %tr
-          %td= issue.title
+          %td= link_to issue.title, issue
           %td= issue.category.name
           %td= issue.description
           %td= issue.location.x
