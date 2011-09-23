@@ -5,3 +5,5 @@
     %li= "Added by #{@issue.created_by.full_name} on #{@issue.created_at}"
     %li= "Category: #{@issue.category.name}"
   %p= @issue.description
+  %div#map{ style: "height: 300px; width: 900px; border:1px solid black; margin-top: 3em"}
+    != @map.to_html
