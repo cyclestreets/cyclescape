@@ -1,3 +1,219 @@
+PHP, MySQL and Apache on Lion:
+	http://www.coolestguyplanet.net/how-to-install-php-mysql-apache-on-os-x-10-6/
+though we don't need PHP or MySQL.
+
+
+Xcode (to get gcc compilers)
+	App Store
+
+
+
+Install git
+	sudo apt-get git
+	or on Mac it is built-in.
+
+
+DON'T USE apt-get because it gives you out-of-date stuff. Instead use RVM.
+RVM:
+	Follow http://beginrescueend.com/rvm/install/
+	- gets a bootstrap installer file. Do a Single user install, by getting and executing the script, adding it to the path for convenience, then reload the shell.
+	bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+	echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function' >> ~/.bash_profile
+	source .bash_profile
+
+
+
+Ruby comes with the OS. but is the wrong version so instead, use rvm. This is basically the Ruby Version Manager, that just handles adding Ruby.
+	rvm install 1.9.2	#
+	rvm use 1.9.2
+	# gem install rails	(was done earlier; not using sudo)
+	gem install rails -v=3.1
+[Both and Simon got "file lib not found" but only at the end of the documentation stage, not the gems themselves.]
+	gem install bundler
+		NB This will install bundler into the path (NB this path install feature only became available in ruby-1.9.2)
+	bundle install
+Note that in https://github.com/cyclestreets/toolkit/blob/master/Gemfile the Gemfile doesn't say which version of Ruby you need!!! (mad!)
+
+
+Go into project directory and add a .rvmrc file to avoid having to type "rvm use 1.9.2" the time; but you do need to be in that directory.
+	cd ~/rails/toolkit/
+	echo "rvm 1.9.2" > .rvmrc
+	# Note that the .gitignore file in the repository has .rvmrc added so that it won't end up in the repository.
+This means that next time you do "cd ~/rails/toolkit/" it will come up with a confirmation asking whether you want to read the file. Answer y to accept. This answer will be cached until such time as .rvmrc is changed. This works by rvm hooking into the shell in .bash_profile.
+
+
+
+---
+Bundler uses the 'Gemfile' and the command for this is 'bundle'
+
+Two ways of running rails applications:
+
+1) Quick, getting started way: go into the application, and do 'rails server', and that gives you http://0.0.0.0:3000/
+If more than needed, then rails server -p 3001 instead, and that will be a different port.
+
+2) Proper runtime way: Passenger.
+Passenger is basically "mod_rails" i.e. equivalent of mod_php.
+The DOCUMENT_ROOT basically is what Apache serves directly and takes precedence.
+If a file doesn't match, then Passenger takes over, uses its magic and Rail's magic to translate the path in the /url to the Rails app
+
+To install Passenger:
+# Use the ruby package manager, gem, to add the gem passenger
+gem install passenger
+
+
+
+The public/ subdirectory of an application is what it reads directly and will always serve 
+-----
+
+
+
+Passenger (basically mod-rails) - see http://www.modrails.com/install.html
+	gem install passenger
+	passenger-install-apache2-module
+	If passenger comes up with instructions to add Apache dependencies, do what it says - the Passenger guys have got it right.
+sudo pico -w /etc/apache2/other/passenger.conf
+   LoadModule passenger_module /Users/martin/.rvm/gems/ruby-1.9.2-p290/gems/passenger-3.0.9/ext/apache2/mod_passenger.so
+   PassengerRoot /Users/martin/.rvm/gems/ruby-1.9.2-p290/gems/passenger-3.0.9
+   PassengerRuby /Users/martin/.rvm/wrappers/ruby-1.9.2-p290/ruby
+Then restart Apache (on OSX this is best done using System Preferences > Sharing > Untick web sharing, then tick websharing.
+So now we have Rails available within Apache as a module.
+rvmsudo passenger-status lets you see the current status
+The passenger apache module will still see Ruby processes being spawned - it's not fully embedded in Apache like mod_php is.
+
+We now need a virtualhost for the site, which will include rails.
+Easiest way to add virtual hosts is to get Passenger Prefpane for Lion OSX. That will create the vhost in a new directory passenger_pane_vhosts/ .
+Go into the Prefpane and untick the lock and create a new entry and save. (This has the benefit that it creates a local host name (in practice this doesn't make entry in /etc/hosts but uses a newer architecture called Directory Services))
+(However the Passenger Prefpane seems to have a bug that it doesn't include/passenger_pane_vhosts/* into the main httpd.conf. So I have added:
+<IfModule passenger_module>
+  Include /private/etc/apache2/passenger_pane_vhosts/*.conf
+</IfModule>
+
+Note that the vhost had "RailsEnv Development" which tells the application to run in that context.
+
+
+
+[We might want to add an example ghost in the README.]
+
+
+For Github, you need to create a private key.
+	Go to GitHub profile, click SSH Keys. Click on the help on the right.
+	http://help.github.com/mac-set-up-git/
+		Ignore step 2 which is dodgy.
+	ssh-keygen -t rsa -C "martin@lucas-smith.co.uk"
+		Is sensible to create a new key for each machine, so that they can be rescinded.
+	less ~/.ssh/id_rsa.pub
+		ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0xqGjXdMfk6CkJsBPHwfc9AgZhPZXe5/gtiQkMN2V+qhpVxzGb1N4qzSD11aQYNhpP1wIgoE+KhNSIHLdvETvls57sKSJouZAZ4lkr7Lk6Q/Nm9LZnpEh+ZqkIRYVO6RWcaCioFcDRje/eXi6vtBm3I0uv6kPjdsLZqNRvUJHkDDuCPsvITV/8PBGvR7vuESnVSnvTyqh+/RbQxku5H2haO7mnaYc9JpQd2wZL111LqGGiJ0rnPYCr74hB/RRAstTVL7N+x13GWJdtMJQLrQVtoOD9hPuPaMv08iezXW6HLoL+ucUVEVOSfbEiWVTynYyFYiAowcj1je8fmEHWPyx martin@lucas-smith.co.uk
+	Paste that in at https://github.com/account/ssh
+	ssh -T git@github.com
+		Enter the password
+	
+
+Now we need to get PostgreSQL, the database system we are using.
+
+On Mac Lion 10.7: The best way to get Postgres etc is using 'homebrew', another package manager, to install it.
+Installing homebrew:
+	Installation details at https://github.com/mxcl/homebrew/wiki/installation
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/gist/323731)"
+
+Now install Postgres and Postgis. Note that homebrew doesn't allow you to specify a version, but Postgres' development path is much more stable than Ruby/Rails, so the latest version should hopefully work OK. Note also that the command is 'brew', not 'homebrew'!
+	brew install postgres postgis
+	# NB We got a download failed, but re-running the same command worked fine (seems like the host was momentarily down) - rerunning the brew command is safe.
+	We got Error: "Failed executing: make install". This is because on OSX Lion the newer compiler LLVM is the default, but not all the software has been tested with it yet, hence the failure; hopefully this will change soon. Therefore we did brew list to show what had been installed fine, then did "brew remove ossp-uuid postgresql proj readline" to remove that list of packages so we were back to a clean state. Then compiled with GCC instead.
+	brew install postgres postgis --use-gcc
+
+On Linux:
+	Ubuntu: Use the standard package manager to get postgresql. We used https://launchpad.net/~pitti/+archive/postgresql , which said to add ppa:pitti/postgresql to your system's Software Sources. Postgis is also needed; for this we used pap:ubuntigis/ubuntugis-unstable. [Ask Andy Allan what he recommends.]
+
+Start up postgres
+	"brew info postgres" will give some info. It says:
+	initdb /usr/local/var/postgres
+Add it to startup AND start now:
+  mkdir -p ~/Library/LaunchAgents
+  cp /usr/local/Cellar/postgresql/9.0.4/org.postgresql.postgres.plist ~/Library/LaunchAgents/
+  launchctl load -w ~/Library/LaunchAgents/org.postgresql.postgres.plist
+
+
+
+
+
+Worth getting pgAdmin, for visualising Postgres. This is a native (i.e. not a web-app) DBA tool for postgres, just click the icon to install.
+	http://www.pgadmin.org/download/ has standard GUI installer files.
+
+
+We now have all the server-side software and the ability to get things from GitHub under our username. We now have a developer machine.
+
+[MLS already had an application called 'abstracts' which would run at http://0.0.0.0:3000/ ]
+
+Now we can start work, so we now get the git repo from github.com/cyclestreets !
+
+
+
+cd ~/rails/		# i.e. go into our working area
+git clone git@github.com:cyclestreets/toolkit.git
+cd toolkit
+bundle install
+# We can do this at any time:
+git pull
+bundle install
+
+
+[We got: "Could not find devise-1.4.4 in any of the sources". See http://rubygems.org/gems/devise/versions/1.4.4
+so Shaun has updated the repo.]
+
+
+
+http://toolkit.byrd.cyclestreets.net/
+will now give a result!
+
+
+
+
+Now we need to add a database config for our setup.
+	cd ~/rails/toolkit/config
+	cp -pr database.example.yml database.yml
+	pico -w database.yml
+
+Edit that file to add a password. Make sure that the localhost line is not commented
+
+If any change to config/ gemfile/ and sometimes lib/ , you will need to do
+	touch tmp/restart.txt
+
+
+Create the user and database in Postgres:
+	createuser cyclekit -s -P -h localhost
+	# Create a database and a user who has access to it at the same time
+	createdb -E UTF8 -O cyclekit cyclekit_development -h localhost
+	# Also create a database for testing purposes
+	createdb -E UTF8 -O cyclekit cyclekit_test -h localhost
+
+
+Now update the database
+	rake db:migrate
+
+i.e. could use convenience one-liner, if you don't have any local changes:
+cd ~/rails/toolkit/ && git pull && bundle install && touch tmp/restart.txt && rake db:migrate
+
+rake db:seed
+seeds a user. This is in db/seeds.rb
+
+http://toolkit.byrd.cyclestreets.net/issues
+and log in as root@cyclestreets.net / changeme
+
+
+To run the tests:
+rake spec
+At first this will state permission denied; the database.yml needs to be added.
+This runs in the 'test' context (rather than development, which is how Apache is set up).
+Running rake spec will recreate the database; therefore if you get a permission denied error, you probably have pgAdmin or another progress connected to it.
+
+
+
+WHAT FOLLOWS IS THE DEFAULT RAILS README - which will be deleted in due course.
+
+
+
+
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
