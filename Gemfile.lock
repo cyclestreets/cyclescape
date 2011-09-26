@@ -125,6 +125,8 @@ GEM
       activerecord (>= 3.0.3)
       arel (>= 2.0.6)
       rgeo (>= 0.3.2)
+    rgeo-geojson (0.2.1)
+      rgeo (>= 0.2.8)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -189,6 +191,7 @@ DEPENDENCIES
   map_layers!
   pg
   rails (= 3.1.0)
+  rgeo-geojson
   rspec-core
   rspec-expectations
   rspec-rails

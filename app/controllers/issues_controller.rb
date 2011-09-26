@@ -1,5 +1,7 @@
 class IssuesController < ApplicationController
 
+  require 'rgeo/geo_json'
+
   before_filter :authenticate_user!, only: [:new, :create]
   
   def index
@@ -30,4 +32,10 @@ class IssuesController < ApplicationController
     end
   end
 
+  def location
+    @issue = Issue.find(params[:id])
+    respond_to do |format|
+      format.json { render json: RGeo::GeoJSON.encode(@issue.location) }
+    end
+  end
 end
