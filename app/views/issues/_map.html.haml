@@ -1,0 +1,14 @@
+- zoom = 16
+- @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", displayProjection:  OpenLayers::Projection.new("EPSG:4326")}) do |map, page|
+  - page << map.add_layer(MapLayers::OSM_MAPNIK)
+  - page << map.setCenter(OpenLayers::LonLat.new(location.x,location.y).transform(OpenLayers::Projection.new("EPSG:4326"), map.getProjectionObject()),zoom);
+
+%div#map{ style: "height: 300px; width: 900px; border:1px solid black; margin-top: 3em" }
+!= @map.to_html
+
+%script{ defer: "defer", type: "text/javascript" }
+  var markers = new OpenLayers.Layer.Markers( "Markers", { projection: new OpenLayers.Projection("EPSG:4326") });
+  map.addLayer(markers);
+
+  var icon = new OpenLayers.Icon('/openlayers/img/marker-green.png');
+  markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(#{marker.x},#{marker.y}).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),icon));

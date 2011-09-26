@@ -8,11 +8,6 @@ class IssuesController < ApplicationController
 
   def show
     @issue = Issue.find(params[:id])
-
-    @map = MapLayers::Map.new("map", displayProjection:  OpenLayers::Projection.new("EPSG:4326")) do |map, page|
-      page << map.add_layer(MapLayers::OSM_MAPNIK)
-      page << map.setCenter(OpenLayers::LonLat.new(@issue.location.x,@issue.location.y).transform(OpenLayers::Projection.new("EPSG:4326"), map.getProjectionObject()),15);
-    end
   end
 
   def new
