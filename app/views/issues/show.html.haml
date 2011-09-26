@@ -5,4 +5,4 @@
     %li= "Added by #{@issue.created_by.full_name} on #{@issue.created_at}"
     %li= "Category: #{@issue.category.name}"
   %p= @issue.description
-  = render partial: "map", locals: { location: @issue.location, marker: @issue.location, issue: @issue}
+  = render partial: "map", locals: { issue: @issue }
