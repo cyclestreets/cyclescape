@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable
   ALLOWED_ROLES = %w(member admin)
 
   has_many :memberships, class_name: "GroupMembership"
