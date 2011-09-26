@@ -21,8 +21,12 @@
     markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(#{marker.x},#{marker.y}).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),icon));
 - else
   %script{ defer: "defer", type: "text/javascript" }
-    var markers = new OpenLayers.Layer.Markers( "Markers", { projection: new OpenLayers.Projection("EPSG:4326") });
-    map.addLayer(markers);
-
-    var icon = new OpenLayers.Icon('/openlayers/img/marker-blue.png');
-    markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(#{marker.point_n(0).x},#{marker.point_n(0).y}).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),icon));
+    var marker = new OpenLayers.Layer.Vector("Marker",                 |
+                { protocol: new OpenLayers.Protocol.HTTP({             |
+                    url: '#{location_issue_path(issue, :json)}',       |
+                    format: new OpenLayers.Format.GeoJSON()            |
+                  }),                                                  |
+                  projection: new OpenLayers.Projection("EPSG:4326"),  |
+                  strategies: [new OpenLayers.Strategy.Fixed()]        |
+                });                                                    |
+    map.addLayer(marker);
