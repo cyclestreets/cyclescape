@@ -2,10 +2,12 @@
 
 The toolkit will be a dedicated website, free of charge to use.
 It will be split into two main sections:
+
 * Reporting a problem: a section open to anyone
 * Managing and solving problems: for campaigners and groups
 
 The toolkit aims to have the following outcomes:
+
 * Fundamentally, increased resolution of problems on the street/path network and therefore an improved cycling environment
 * Improved and better-organised working practices by local groups around the country through access to a new tool to help them manage the deluge of cycling problems that they get told about or wish to see resolved
 * Increased reporting of network deficiencies, i.e. increased involvement of local people
