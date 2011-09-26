@@ -28,6 +28,9 @@ RSpec.configure do |config|
   # Render views in controller tests
   config.render_views
 
+  config.include EmailSpec::Helpers
+  config.include EmailSpec::Matchers
+
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
