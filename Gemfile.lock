@@ -43,6 +43,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.2.2)
       ffi (~> 1.0.6)
+    database_cleaner (0.6.7)
     devise (1.4.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -169,6 +170,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara
+  database_cleaner
   devise
   devise_invitable
   email_spec
