@@ -1,14 +1,27 @@
 - zoom = 16
 - @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", displayProjection:  OpenLayers::Projection.new("EPSG:4326")}) do |map, page|
   - page << map.add_layer(MapLayers::OSM_MAPNIK)
-  - page << map.setCenter(OpenLayers::LonLat.new(location.x,location.y).transform(OpenLayers::Projection.new("EPSG:4326"), map.getProjectionObject()),zoom);
+  - if location.geometry_type == RGeo::Feature::Point
+    - page << map.setCenter(OpenLayers::LonLat.new(location.x,location.y).transform(OpenLayers::Projection.new("EPSG:4326"), map.getProjectionObject()),zoom);
+  - else
+    - bbox = RGeo::Cartesian::BoundingBox.new(location.factory)
+    - bbox.add(location)
+    - page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(OpenLayers::Projection.new("EPSG:4326"), map.getProjectionObject()))
 
 %div#map{ style: "height: 300px; width: 900px; border:1px solid black; margin-top: 3em" }
 != @map.to_html
 
-%script{ defer: "defer", type: "text/javascript" }
-  var markers = new OpenLayers.Layer.Markers( "Markers", { projection: new OpenLayers.Projection("EPSG:4326") });
-  map.addLayer(markers);
+- if marker.geometry_type == RGeo::Feature::Point
+  %script{ defer: "defer", type: "text/javascript" }
+    var markers = new OpenLayers.Layer.Markers( "Markers", { projection: new OpenLayers.Projection("EPSG:4326") });
+    map.addLayer(markers);
 
-  var icon = new OpenLayers.Icon('/openlayers/img/marker-green.png');
-  markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(#{marker.x},#{marker.y}).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),icon));
+    var icon = new OpenLayers.Icon('/openlayers/img/marker-green.png');
+    markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(#{marker.x},#{marker.y}).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),icon));
+- else
+  %script{ defer: "defer", type: "text/javascript" }
+    var markers = new OpenLayers.Layer.Markers( "Markers", { projection: new OpenLayers.Projection("EPSG:4326") });
+    map.addLayer(markers);
+
+    var icon = new OpenLayers.Icon('/openlayers/img/marker-blue.png');
+    markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(#{marker.point_n(0).x},#{marker.point_n(0).y}).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),icon));
