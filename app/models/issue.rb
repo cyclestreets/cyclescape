@@ -4,6 +4,8 @@ class Issue < ActiveRecord::Base
   has_many :threads, class_name: "MessageThread"
 
   validates :title, presence: true
+  validates :description, presence: true
+  validates :location, presence: true
 
   validates :created_by, presence: true
   validates :category, presence: true
