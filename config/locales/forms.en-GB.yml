@@ -1,6 +1,8 @@
 # Form fields, labels, hints, placeholders, and error messages
 
 "en-GB":
+  cancel: "Cancel"
+
   activerecord:
     errors:
       models:

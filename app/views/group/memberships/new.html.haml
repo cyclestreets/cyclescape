@@ -9,4 +9,6 @@
       = f2.inputs do
         = f2.input :full_name, hint: t("formtastic.hints.group_membership.full_name")
         = f2.input :email
-  = f.buttons
+  = f.buttons do
+    = f.commit_button
+    = cancel_link group_members_path
