@@ -32,7 +32,7 @@ class IssuesController < ApplicationController
     end
   end
 
-  def location
+  def geometry
     @issue = Issue.find(params[:id])
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(@issue.location) }

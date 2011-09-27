@@ -4,7 +4,7 @@ Cyclekit::Application.routes.draw do
   resource :dashboard
 
   resources :issues do
-    get 'location', :on => :member
+    get 'geometry', :on => :member
   end
 
   namespace :admin do
