@@ -5,6 +5,14 @@ class Group < ActiveRecord::Base
 
   validates :name, :short_name, presence: true
 
+  def committee_members
+    members.where("group_memberships.role = 'committee'")
+  end
+
+  def normal_members
+    members.where("group_memberships.role = 'member'")
+  end
+
   def to_param
     "#{id}-#{short_name}"
   end

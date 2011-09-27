@@ -2,6 +2,19 @@
 
 %p= link_to t(".new_member"), new_group_membership_path
 
+%h2= t ".committee"
+%table
+  %thead
+    %th= t ".member_name"
+    %th= t "actions"
+  %tbody
+    - @committee.each do |member|
+      %tr
+        %td= member.name
+        %td
+          = link_to t("edit"), "#"
+
+%h2= t ".members"
 %table
   %thead
     %th= t ".member_name"

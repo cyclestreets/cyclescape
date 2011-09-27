@@ -4,6 +4,9 @@ class GroupMembership < ActiveRecord::Base
   belongs_to :group
   belongs_to :user, autosave: true
 
+  scope :committee, where("role = 'committee'")
+  scope :normal, where("role = 'member'")
+
   before_validation :invite_user, :if => :new_record?
 
   validates :group_id, presence: true

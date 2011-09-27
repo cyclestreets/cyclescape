@@ -23,6 +23,8 @@
       index:
         title: "Members of %{group}"
         new_member: "New Member"
+        committee: "Committee"
+        members: "Members"
     memberships:
       new:
         title: "Invite New Member"
