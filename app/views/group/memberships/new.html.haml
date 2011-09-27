@@ -1,8 +1,5 @@
 %h1= t ".title"
 
-= debug @membership.errors
-= debug @membership.user.errors
-
 = semantic_form_for @membership do |f|
   = f.semantic_errors
   = f.inputs do
