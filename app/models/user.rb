@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     [role.to_sym]
   end
 
+  def root?
+    id == 1
+  end
+
   private
 
   def set_default_role
