@@ -69,4 +69,12 @@ describe User do
       subject.name.should == "Stewie"
     end
   end
+
+  context "declarative authorization interface" do
+    subject { FactoryGirl.build(:admin) }
+
+    it "should respond to role_symbols" do
+      subject.role_symbols.should == [:admin]
+    end
+  end
 end

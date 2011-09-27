@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     full_name
   end
 
+  def role_symbols
+    [role.to_sym]
+  end
+
   private
 
   def set_default_role
