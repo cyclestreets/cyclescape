@@ -8,7 +8,10 @@ Cyclekit::Application.routes.draw do
   end
 
   resources :groups do
-    resources :members, :controller => "group/members"
+    scope :module => "Group" do
+      resources :members
+      resources :memberships
+    end
   end
 
   root :to => "dashboards#show"

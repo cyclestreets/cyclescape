@@ -1,10 +1,44 @@
 # GB English translations for Ruby on Rails
 
 "en-GB":
+  activerecord:
+    models:
+      user: "Dude"
+    attributes:
+      user:
+        full_name: "Dandy"
+    errors:
+      models:
+        user:
+          attributes:
+            full_name:
+              blank: "Please enter a name"
+
+  admin:
+    groups:
+      index:
+        new_group: "New Group"
   group:
     members:
       index:
         title: "Members of %{group}"
+        new_member: "New Member"
+    memberships:
+      new:
+        title: "Invite New Member"
+
+  formtastic:
+    labels:
+      group_membership:
+        role: "Membership type"
+    hints:
+      group_membership:
+        role: "Select if they are a normal or committee member of the group."
+        full_name: "Please enter their name, they can change this when they accept the invite."
+    actions:
+      group_membership:
+        create: "Invite member"
+
   date:
     formats:
       default: "%d-%m-%Y"

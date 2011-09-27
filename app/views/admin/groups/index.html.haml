@@ -9,7 +9,8 @@
     %tbody
       - @groups.each do |group|
         %tr
-          %td= group.name
+          %td= link_to group.name, group
           %td= mail_to group.email
           %td.actions
             = link_to t(".edit"), [:edit, :admin, group]
+            = link_to t(".members"), [group, :members]
