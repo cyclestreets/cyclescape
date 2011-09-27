@@ -1,19 +1,6 @@
 # GB English translations for Ruby on Rails
 
 "en-GB":
-  activerecord:
-    models:
-      user: "Dude"
-    attributes:
-      user:
-        full_name: "Dandy"
-    errors:
-      models:
-        user:
-          attributes:
-            full_name:
-              blank: "Please enter a name"
-
   admin:
     groups:
       index:
