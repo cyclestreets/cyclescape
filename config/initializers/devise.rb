@@ -89,7 +89,7 @@ Devise.setup do |config|
 
   # Flag that force a record to be valid before being actually invited 
   # Default: false
-  # config.validate_on_invite = true
+  config.validate_on_invite = true
 
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
