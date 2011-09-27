@@ -5,6 +5,15 @@ body {
   font-size: 12px;
 }
 
+// Links
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 // Headings
 
 header > h1 {
@@ -26,5 +35,13 @@ div.content {
       size: 20px;
       weight: bold;
     }
+  }
+}
+
+// Tables
+
+table {
+  th {
+    font-weight: bold;
   }
 }
