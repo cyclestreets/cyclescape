@@ -31,6 +31,11 @@ describe User do
       subject.role = "oompah loompa"
       subject.should_not be_valid
     end
+
+    it "must have a full name" do
+      subject.full_name = ""
+      subject.should have(1).error_on(:full_name)
+    end
   end
 
   describe "with admin role" do
