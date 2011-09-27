@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110923112410) do
+ActiveRecord::Schema.define(:version => 20110926153130) do
 
   create_table "group_memberships", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20110923112410) do
     t.string   "full_name",                                             :null => false
     t.string   "display_name"
     t.string   "role",                                                  :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => ""
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -87,6 +87,11 @@ ActiveRecord::Schema.define(:version => 20110923112410) do
     t.datetime "disabled_at"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
+    t.string   "invitation_token",       :limit => 60
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
   end
+
+  add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
 
 end

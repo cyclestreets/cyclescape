@@ -31,6 +31,22 @@ describe User do
       subject.role = "oompah loompa"
       subject.should_not be_valid
     end
+
+    it "must have a full name" do
+      subject.full_name = ""
+      subject.should have(1).error_on(:full_name)
+    end
+
+    it "must have a password" do
+      subject.password = ""
+      subject.should have_at_least(1).error_on(:password)
+    end
+
+    it "must have a password unless being invited" do
+      subject.password = ""
+      subject.invite!
+      subject.should have(0).errors_on(:password)
+    end
   end
 
   describe "with admin role" do
@@ -51,6 +67,14 @@ describe User do
     it "should use the display name if set" do
       subject.display_name = "Stewie"
       subject.name.should == "Stewie"
+    end
+  end
+
+  context "declarative authorization interface" do
+    subject { FactoryGirl.build(:admin) }
+
+    it "should respond to role_symbols" do
+      subject.role_symbols.should == [:admin]
     end
   end
 end

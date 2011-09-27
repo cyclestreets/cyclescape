@@ -16,6 +16,8 @@ gem 'rgeo-geojson'
 # Back-end gems
 gem 'devise'
 gem 'activerecord-postgis-adapter'
+gem 'devise_invitable'
+gem 'declarative_authorization'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -44,6 +46,8 @@ group :development, :test do
   gem 'rspec-expectations'
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'email_spec'
+  gem 'database_cleaner'
 end
 
 group :test do
@@ -51,4 +55,5 @@ group :test do
   gem 'turn', :require => false
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
+  gem 'launchy'
 end

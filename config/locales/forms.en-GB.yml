@@ -1,0 +1,25 @@
+# Form fields, labels, hints, placeholders, and error messages
+
+"en-GB":
+  cancel: "Cancel"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            full_name:
+              blank: "Please enter a name"
+              email: "Please enter an email address"
+
+  formtastic:
+    labels:
+      group_membership:
+        role: "Membership type"
+    hints:
+      group_membership:
+        role: "Select if they are a normal or committee member of the group."
+        full_name: "Please enter their name, they can change this when they accept the invite."
+    actions:
+      group_membership:
+        create: "Invite member"

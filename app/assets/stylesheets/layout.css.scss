@@ -8,3 +8,18 @@ body > header {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+div.content {
+  h1, h2, h3 {
+    margin-bottom: 12px;
+  }
+}
+
+// Tables
+
+table {
+  margin-bottom: 12px;
+  td, th {
+    padding: 4px;
+  }
+}
