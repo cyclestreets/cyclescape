@@ -14,6 +14,7 @@ gem 'formtastic'
 # Back-end gems
 gem 'devise'
 gem 'devise_invitable'
+gem 'declarative_authorization'
 
 # Gems used only for assets and not required
 # in production environments by default.
