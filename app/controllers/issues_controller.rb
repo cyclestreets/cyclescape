@@ -20,7 +20,7 @@ class IssuesController < ApplicationController
     @issue = current_user.issues.new(params[:issue])
 
     if @issue.save
-      redirect_to action: :index
+      redirect_to @issue
     else
       render :new
     end
