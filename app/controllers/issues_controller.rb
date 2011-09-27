@@ -19,12 +19,6 @@ class IssuesController < ApplicationController
   def create
     @issue = current_user.issues.new(params[:issue])
 
-    # Fake some coordinates around cambridge
-    lat = 52.19 + (0.03 * rand)
-    lon = 0.09 + (0.08 * rand)
-
-    @issue.location = "POINT(#{lon} #{lat})"
-
     if @issue.save
       redirect_to action: :index
     else

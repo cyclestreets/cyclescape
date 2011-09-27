@@ -20,4 +20,11 @@ class Issue < ActiveRecord::Base
       return self.location.envelope.centroid
     end
   end
+
+  def loc_json=(json_str)
+    # Not clear why the factory is needed, should be taken care of by setting the srid on the factory_generator
+    # but that doesn't work.
+    factory = RGeo::Geos::Factory.new(srid: 4326)
+    self.location = RGeo::GeoJSON.decode(json_str, :geo_factory => factory, :json_parser => :json).geometry
+  end
 end
