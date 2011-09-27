@@ -36,6 +36,17 @@ describe User do
       subject.full_name = ""
       subject.should have(1).error_on(:full_name)
     end
+
+    it "must have a password" do
+      subject.password = ""
+      subject.should have_at_least(1).error_on(:password)
+    end
+
+    it "must have a password unless being invited" do
+      subject.password = ""
+      subject.invite!
+      subject.should have(0).errors_on(:password)
+    end
   end
 
   describe "with admin role" do

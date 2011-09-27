@@ -23,4 +23,9 @@ class User < ActiveRecord::Base
   def set_default_role
     self.role = "member"
   end
+
+  # Devise hook for password validation
+  def password_required?
+    !invitation_token.present? && super
+  end
 end
