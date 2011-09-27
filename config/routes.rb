@@ -3,7 +3,9 @@ Cyclekit::Application.routes.draw do
 
   resource :dashboard
 
-  resources :issues
+  resources :issues do
+    get 'geometry', :on => :member
+  end
 
   namespace :admin do
     resources :groups, :issue_categories

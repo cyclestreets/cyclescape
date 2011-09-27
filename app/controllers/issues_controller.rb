@@ -1,5 +1,7 @@
 class IssuesController < ApplicationController
 
+  require 'rgeo/geo_json'
+
   before_filter :authenticate_user!, only: [:new, :create]
   
   def index
@@ -18,10 +20,16 @@ class IssuesController < ApplicationController
     @issue = current_user.issues.new(params[:issue])
 
     if @issue.save
-      redirect_to action: :index
+      redirect_to @issue
     else
       render :new
     end
   end
 
+  def geometry
+    @issue = Issue.find(params[:id])
+    respond_to do |format|
+      format.json { render json: RGeo::GeoJSON.encode(@issue.location) }
+    end
+  end
 end

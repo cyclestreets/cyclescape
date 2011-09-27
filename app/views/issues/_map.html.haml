@@ -1,0 +1,26 @@
+- zoom = 16
+- projection = OpenLayers::Projection.new("EPSG:4326")
+- @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", displayProjection:  OpenLayers::Projection.new("EPSG:4326")}) do |map, page|
+  - page << map.add_layer(MapLayers::OSM_MAPNIK)
+  - page << map.add_control(OpenLayers::Control::LayerSwitcher.new)
+  - if issue.location.geometry_type == RGeo::Feature::Point
+    - page << map.setCenter(OpenLayers::LonLat.new(issue.location.x,issue.location.y).transform(projection, map.getProjectionObject()),zoom);
+
+    - markerlayer = MapLayers::JsVar.new('markerlayer')
+    - icon = MapLayers::JsVar.new('icon')
+    - page.assign(markerlayer, OpenLayers::Layer::Markers.new( "Location", { projection: projection }))
+    - page << map.addLayer(markerlayer)
+    - page.assign(icon, OpenLayers::Icon.new('/openlayers/img/marker-blue.png'))
+    - page << markerlayer.addMarker(OpenLayers::Marker.new(OpenLayers::LonLat.new(issue.location.x, issue.location.y).transform(projection, map.getProjectionObject()), icon))
+  - else
+    - bbox = RGeo::Cartesian::BoundingBox.new(issue.location.factory)
+    - bbox.add(issue.location)
+    - page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(OpenLayers::Projection.new("EPSG:4326"), map.getProjectionObject()))
+
+    - locationlayer = MapLayers::JsVar.new('locationlayer')
+    - protocol = OpenLayers::Protocol::HTTP.new( url: geometry_issue_path(issue, :json), format: OpenLayers::Format::GeoJSON.new )
+    - page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::Fixed.new() ]))
+    - page << map.addLayer(locationlayer)
+
+%div#map{ style: "height: 300px; width: 900px; border:1px solid black; margin-top: 3em" }
+!= @map.to_html

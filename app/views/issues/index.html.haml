@@ -8,9 +8,13 @@
       %th= t ".issue_title"
       %th= t ".category"
       %th= t ".description"
+      %th= t ".longitude"
+      %th= t ".latitude"
     %tbody
       - @issues.each do |issue|
         %tr
-          %td= issue.title
+          %td= link_to issue.title, issue
           %td= issue.category.name
           %td= issue.description
+          %td= issue.centre.x
+          %td= issue.centre.y
