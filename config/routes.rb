@@ -3,8 +3,10 @@ Cyclekit::Application.routes.draw do
 
   resource :dashboard
 
+  resources :issues
+
   namespace :admin do
-    resources :groups
+    resources :groups, :issue_categories
   end
 
   resources :groups do
