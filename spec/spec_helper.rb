@@ -33,7 +33,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation, except: %w(geometry_columns))
+    DatabaseCleaner.clean_with(:truncation, except: %w(geometry_columns spatial_ref_sys))
   end
 
   config.before(:each) do
