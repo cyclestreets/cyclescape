@@ -9,12 +9,13 @@ authorization do
   end
 
   role :guest do
-    has_permission_on :devise_sessions, to: :manage
+    has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
+                      :devise_invitations, to: :manage
   end
 end
 
 privileges do
   privilege :manage do
-    includes :create, :read, :update, :delete
+    includes :index, :new, :create, :show, :edit, :update, :destroy
   end
 end
