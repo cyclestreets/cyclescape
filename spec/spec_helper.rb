@@ -28,6 +28,7 @@ RSpec.configure do |config|
   # Render views in controller tests
   config.render_views
 
+  config.include Devise::TestHelpers, type: :controller
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
 
