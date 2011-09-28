@@ -1,6 +1,6 @@
 @import "grid";
 
-body > header, .flash-container, .content-container, body > footer {
+body > header, .control-bar, .flash-container, .content-container, body > footer {
   @include container;
 }
 

@@ -9,6 +9,11 @@
   %body
     %header
       %h1 CycleKit
+    .control-bar
+      - if current_user
+        .account
+          = current_user.name
+          = link_to "Sign out", destroy_user_session_path, method: "delete"
     .flash-container
       - [:alert, :notice].each do |type|
         - if flash.key? type
