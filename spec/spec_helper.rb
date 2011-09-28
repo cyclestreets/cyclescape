@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'email_spec'
 require 'database_cleaner'
+require 'declarative_authorization/maintenance'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -29,6 +30,7 @@ RSpec.configure do |config|
   config.render_views
 
   config.include Devise::TestHelpers, type: :controller
+  config.include Authorization::TestHelper, type: :controller
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
 
