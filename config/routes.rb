@@ -5,6 +5,7 @@ Cyclekit::Application.routes.draw do
 
   resources :issues do
     get 'geometry', :on => :member
+    get 'all_geometries', :on => :collection
   end
 
   namespace :admin do

@@ -1,0 +1,14 @@
+- zoom = 16
+- projection = OpenLayers::Projection.new("EPSG:4326")
+- @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", displayProjection:  OpenLayers::Projection.new("EPSG:4326")}) do |map, page|
+  - page << map.add_layer(MapLayers::OSM_MAPNIK)
+  - page << map.add_control(OpenLayers::Control::LayerSwitcher.new)
+  - page << map.setCenter(OpenLayers::LonLat.new(@start_location.x, @start_location.y).transform(projection, map.getProjectionObject()),zoom);
+
+  - vectorlayer = MapLayers::JsVar.new("vectorlayer")
+  - protocol = OpenLayers::Protocol::HTTP.new( url: all_geometries_issues_path(:json), format: OpenLayers::Format::GeoJSON.new )
+  - page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Issues", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::BBOX.new()]))
+  - page << map.add_layer(vectorlayer)
+
+%div#map{ style: "height: 300px; width: 100%; border:1px solid black; margin-top: 3em" }
+!= @map.to_html
