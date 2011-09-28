@@ -22,5 +22,5 @@
     - page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::Fixed.new() ]))
     - page << map.addLayer(locationlayer)
 
-%div#map{ style: "height: 300px; width: 900px; border:1px solid black; margin-top: 3em" }
+%div#map{ style: "height: 300px; width: 100%; border:1px solid black; margin-top: 3em" }
 != @map.to_html

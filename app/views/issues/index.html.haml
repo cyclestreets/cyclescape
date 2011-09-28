@@ -3,9 +3,11 @@
 %section
   .tasks
     = link_to t(".new_issue"), new_issue_path
+  %h2= t ".recent_issues"
   %table
     %thead
       %th= t ".issue_title"
+      %th= t ".name"
       %th= t ".category"
       %th= t ".description"
       %th= t ".longitude"
@@ -14,7 +16,10 @@
       - @issues.each do |issue|
         %tr
           %td= link_to issue.title, issue
+          %td= issue.created_by.name
           %td= issue.category.name
           %td= issue.description
           %td= issue.centre.x
           %td= issue.centre.y
+
+  = render "all_map"
