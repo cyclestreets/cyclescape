@@ -5,7 +5,7 @@ class IssuesController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :create]
   
   def index
-    @issues = Issue.all
+    @issues = Issue.order("created_at DESC").limit(10)
   end
 
   def show
