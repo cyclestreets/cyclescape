@@ -7,6 +7,6 @@ class ApplicationController < ActionController::Base
 
   def set_auth_user
     Authorization.current_user = current_user
-    Authorization.ignore_access_control(current_user.root?)
+    Authorization.ignore_access_control(current_user.root?) if current_user
   end
 end
