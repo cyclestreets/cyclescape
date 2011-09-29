@@ -6,6 +6,12 @@ authorization do
 
   role :member do
     includes :guest
+    has_permission_on :group_members, :group_memberships do
+      to :manage
+      # Don't know why this always denies permission
+      #if_attribute committee_members: contains { user }
+    end
+    has_permission_on :dashboards, to: :show
   end
 
   role :guest do

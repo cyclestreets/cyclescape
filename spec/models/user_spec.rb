@@ -51,7 +51,7 @@ describe User do
 
   describe "with admin role" do
     it "should have the admin role" do
-      admin = FactoryGirl.build(:admin)
+      admin = FactoryGirl.build(:stewie)
       admin.role.should == "admin"
     end
   end
@@ -71,7 +71,7 @@ describe User do
   end
 
   context "declarative authorization interface" do
-    subject { FactoryGirl.build(:admin) }
+    subject { FactoryGirl.build(:stewie) }
 
     it "should respond to role_symbols" do
       subject.role_symbols.should == [:admin]

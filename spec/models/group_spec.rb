@@ -14,4 +14,15 @@ describe Group do
       subject.should have(1).error_on(:short_name)
     end
   end
+
+  context "members" do
+    let(:membership) { FactoryGirl.create(:brian_at_quahogcc) }
+    let(:brian) { membership.user }
+
+    subject { membership.group }
+
+    it "should list committee members" do
+      subject.committee_members.should include(brian)
+    end
+  end
 end
