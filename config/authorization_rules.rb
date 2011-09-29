@@ -1,4 +1,8 @@
 authorization do
+  role :root do
+    has_omnipotence
+  end
+
   role :admin do
     includes :member
     has_permission_on :groups, :group_members, :group_memberships, to: :manage
