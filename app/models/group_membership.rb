@@ -7,7 +7,7 @@ class GroupMembership < ActiveRecord::Base
   scope :committee, where("role = 'committee'")
   scope :normal, where("role = 'member'")
 
-  before_validation :invite_user, :if => :new_record?
+  before_validation :invite_user_if_new
 
   validates :group_id, presence: true
   validates :role, inclusion: {in: ALLOWED_ROLES}
@@ -25,7 +25,8 @@ class GroupMembership < ActiveRecord::Base
 
   protected
 
-  def invite_user
-    user && user.invite!
+  def invite_user_if_new
+    user && user.new_record? && user.invite!
+    true
   end
 end
