@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def role_symbols
+    return [:root] if root?
     [role.to_sym]
   end
 

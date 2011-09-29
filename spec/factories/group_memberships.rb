@@ -7,11 +7,18 @@ FactoryGirl.define do
     trait :committee do
       role "committee"
     end
-  end
 
-  factory :stewie_at_quahogcc, :class => GroupMembership do
-    group :quahogcc
-    user :stewie
-    role "committee"
+    # Site admin but not committee member
+    factory :stewie_at_quahogcc do
+      association :group, factory: :quahogcc
+      association :user, factory: :stewie
+    end
+
+    # Committee member
+    factory :brian_at_quahogcc do
+      association :group, factory: :quahogcc
+      user { FactoryGirl.create(:brian) }  # Needs to already exist otherwise invitation will be sent
+      committee
+    end
   end
 end

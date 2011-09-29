@@ -7,6 +7,13 @@ class ApplicationController < ActionController::Base
 
   def set_auth_user
     Authorization.current_user = current_user
-    Authorization.ignore_access_control(current_user.root?) if current_user
+  end
+
+  def permission_denied
+    if Rails.env.test?
+      raise "permission denied"
+    else
+      redirect_to new_user_session_path
+    end
   end
 end

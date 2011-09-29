@@ -19,7 +19,7 @@ Cyclekit::Application.routes.draw do
     end
   end
 
-  root :to => "dashboards#show"
+  root :to => "home#show"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
