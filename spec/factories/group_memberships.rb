@@ -10,14 +10,14 @@ FactoryGirl.define do
 
     # Site admin but not committee member
     factory :stewie_at_quahogcc do
-      group :quahogcc
-      user :stewie
+      association :group, factory: :quahogcc
+      association :user, factory: :stewie
     end
 
     # Committee member
     factory :brian_at_quahogcc do
-      group :quahogcc
-      user :brian
+      association :group, factory: :quahogcc
+      association :user, factory: :brian
       committee
     end
   end
