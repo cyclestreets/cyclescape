@@ -23,3 +23,15 @@ table {
     padding: 4px;
   }
 }
+
+// Home page
+
+body.home {
+  .issues-area {
+    @include column($half-span, "first");
+  }
+
+  .groups-area {
+    @include column($half-span, "last");
+  }
+}

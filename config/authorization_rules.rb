@@ -21,6 +21,7 @@ authorization do
   role :guest do
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
                       :devise_invitations, to: :manage
+    has_permission_on :home, to: :show
   end
 end
 

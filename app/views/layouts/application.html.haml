@@ -6,14 +6,19 @@
     = javascript_include_tag "application"
     = csrf_meta_tags
     = javascript_include_tag "/openlayers/OpenLayers.js"
-  %body
+  %body{class: controller_path.gsub('/', '_')}
     %header
       %h1 CycleKit
     .control-bar
       - if current_user
         .account
-          = current_user.name
-          = link_to "Sign out", destroy_user_session_path, method: "delete"
+          %ul
+            %li= current_user.name
+            %li= link_to "Sign out", destroy_user_session_path, method: "delete"
+      - else
+        %ul
+          %li= link_to "Sign up", new_user_registration_path
+          %li= link_to "Sign in", new_user_session_path
     .flash-container
       - [:alert, :notice].each do |type|
         - if flash.key? type
