@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_denied
-    redirect_to new_user_session_path
+    if Rails.env.test?
+      raise "permission denied"
+    else
+      redirect_to new_user_session_path
+    end
   end
 end
