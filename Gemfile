@@ -10,7 +10,7 @@ gem 'pg'
 # Front-end gems
 gem 'haml-rails'
 gem 'formtastic'
-gem 'map_layers', :git => "git@github.com:gravitystorm/map_layers.git", :branch => "toolkit"
+gem 'map_layers'
 gem 'rgeo-geojson'
 
 # Back-end gems

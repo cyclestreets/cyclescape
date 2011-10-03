@@ -1,10 +1,3 @@
-GIT
-  remote: git@github.com:gravitystorm/map_layers.git
-  revision: 1fca1a5cc2a7aa91b57e578b485e346a0d55403a
-  branch: toolkit
-  specs:
-    map_layers (0.0.3)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -103,6 +96,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    map_layers (0.0.4)
     mime-types (1.16)
     multi_json (1.0.3)
     nokogiri (1.5.0)
@@ -222,7 +216,7 @@ DEPENDENCIES
   hirb
   jquery-rails
   launchy
-  map_layers!
+  map_layers
   pg
   rails (= 3.1.0)
   rgeo-geojson
