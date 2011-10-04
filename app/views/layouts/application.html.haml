@@ -11,6 +11,11 @@
       %h1 CycleKit
     .control-bar
       - if current_user
+        %nav.user-menu
+          %ul
+            %li= link_to t(".dashboard"), dashboard_path
+            - if permitted_to? :manage, :admin_groups
+              %li= link_to t(".admin"), admin_groups_path
         .account
           %ul
             %li= current_user.name

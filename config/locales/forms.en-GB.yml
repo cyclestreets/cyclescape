@@ -21,5 +21,6 @@
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name, they can change this when they accept the invite."
     actions:
+      update: "Save"
       group_membership:
         create: "Invite member"
