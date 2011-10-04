@@ -4,6 +4,7 @@
   admin:
     groups:
       index:
+        title: "Groups"
         new_group: "New Group"
   group:
     members:
@@ -15,6 +16,10 @@
     memberships:
       new:
         title: "Invite New Member"
+  layouts:
+    application:
+      dashboard: "My Dashboard"
+      admin: "Admin"
 
   date:
     formats:
