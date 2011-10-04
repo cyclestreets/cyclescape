@@ -16,12 +16,14 @@ authorization do
       #if_attribute committee_members: contains { user }
     end
     has_permission_on :dashboards, to: :show
+    has_permission_on :issues, to: [:new, :create]
   end
 
   role :guest do
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
                       :devise_invitations, to: :manage
     has_permission_on :home, to: :show
+    has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries]
   end
 end
 
