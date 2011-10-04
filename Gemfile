@@ -50,7 +50,7 @@ group :development, :test do
   gem 'email_spec'
   gem 'database_cleaner'
   gem 'ruby-debug19', require: 'ruby-debug'
-  gem 'spork'
+  gem 'spork', '~> 0.9.0.rc'
 end
 
 group :test do
