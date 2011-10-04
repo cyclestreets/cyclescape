@@ -1,7 +1,7 @@
 :ruby
   zoom = 16
   projection = OpenLayers::Projection.new("EPSG:4326")
-  @map = MapLayers::Map.new("map", {theme: "/assets/openlayers/theme/default/style.css", displayProjection:  OpenLayers::Projection.new("EPSG:4326")}) do |map, page|
+  @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", displayProjection:  OpenLayers::Projection.new("EPSG:4326")}) do |map, page|
     page << map.add_layer(MapLayers::OSM_MAPNIK)
     page << map.add_control(OpenLayers::Control::LayerSwitcher.new)
     if issue.location.geometry_type == RGeo::Feature::Point
@@ -11,7 +11,7 @@
       icon = MapLayers::JsVar.new('icon')
       page.assign(markerlayer, OpenLayers::Layer::Markers.new( "Location", { projection: projection }))
       page << map.addLayer(markerlayer)
-      page.assign(icon, OpenLayers::Icon.new('/assets/openlayers/img/marker-blue.png'))
+      page.assign(icon, OpenLayers::Icon.new('/openlayers/img/marker-blue.png'))
       page << markerlayer.addMarker(OpenLayers::Marker.new(OpenLayers::LonLat.new(issue.location.x, issue.location.y).transform(projection, map.getProjectionObject()), icon))
     else
       bbox = RGeo::Cartesian::BoundingBox.new(issue.location.factory)
