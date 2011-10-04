@@ -4,7 +4,7 @@
     %title Cyclekit
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
-    = javascript_include_tag "openlayers/OpenLayers.js"
+    = javascript_include_tag "openlayers/OpenLayers.js", cache: false
     = csrf_meta_tags
   %body{class: controller_path.gsub('/', '_')}
     %header
