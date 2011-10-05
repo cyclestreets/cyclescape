@@ -29,4 +29,12 @@ class Issue < ActiveRecord::Base
     factory = RGeo::Geos::Factory.new(srid: 4326)
     self.location = RGeo::GeoJSON.decode(json_str, :geo_factory => factory, :json_parser => :json).geometry
   end
+
+  def loc_json
+    if self.location
+      RGeo::GeoJSON.encode(self.location)
+    else
+      ""
+    end
+  end
 end
