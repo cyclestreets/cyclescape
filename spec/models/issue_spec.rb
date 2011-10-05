@@ -21,6 +21,11 @@ describe Issue do
       subject.centre.y.should < 90
       subject.centre.y.should > -90
     end
+
+    it "should have a geojson string" do
+      subject.loc_json.should be_a(String)
+      subject.loc_json.should eql(RGeo::GeoJSON.encode(subject.location).to_json)
+    end
   end
 
   describe "to be valid" do
@@ -41,9 +46,29 @@ describe Issue do
       subject.should_not be_valid
     end
 
-    it "must have a location " do
+    it "must have a location" do
       subject.location = nil
       subject.should_not be_valid
+    end
+
+    it "must return an empty geojson string when no location" do
+      subject.location = nil
+      subject.loc_json.should be_a(String)
+      subject.loc_json.should eq("")
+    end
+
+    it "should accept a valid geojson string" do
+      subject.location = nil
+      subject.should_not be_valid
+      subject.loc_json = '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
+      subject.should be_valid
+      subject.location.x.should eql(0.14)
+      subject.location.y.should eql(52.27)
+    end
+
+    it "should ignore a bogus geojson string" do
+      subject.loc_json = 'Garbage'
+      subject.should be_valid
     end
   end
 end

@@ -27,7 +27,8 @@ class Issue < ActiveRecord::Base
     # Not clear why the factory is needed, should be taken care of by setting the srid on the factory_generator
     # but that doesn't work.
     factory = RGeo::Geos::Factory.new(srid: 4326)
-    self.location = RGeo::GeoJSON.decode(json_str, :geo_factory => factory, :json_parser => :json).geometry
+    feature = RGeo::GeoJSON.decode(json_str, :geo_factory => factory, :json_parser => :json)
+    self.location = feature.geometry if feature
   end
 
   def loc_json
