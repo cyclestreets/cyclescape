@@ -13,11 +13,20 @@
   function feature_added(event) {
     toolbar.deactivate();
     modify.activate();
+    clearpanel.activate();
     serialize(event.feature);
   }
 
   function feature_modified(event) {
     serialize(event.feature);
+  }
+
+  function clear_features(event) {
+    clearpanel.deactivate();
+    modify.deactivate();
+    document.getElementById('issue_loc_json').value = "";
+    vectorlayer.removeAllFeatures();
+    toolbar.activate();
   }
 
 :ruby
@@ -35,6 +44,14 @@
     modify = MapLayers::JsVar.new("modify")
     page.assign(modify, OpenLayers::Control::ModifyFeature.new(vectorlayer))
     page << map.addControl(modify)
+
+    clearpanel = MapLayers::JsVar.new("clearpanel")
+    clearbutton = MapLayers::JsVar.new("clearbutton")
+    page.assign(clearpanel, OpenLayers::Control::Panel.new({displayClass: "olControlEditingToolbar"}))
+    page.assign(clearbutton, OpenLayers::Control::Button.new({title: "Clear", displayClass: "clearButton", trigger: :clear_features}))
+    page << clearpanel.addControls([clearbutton])
+    page << map.addControl(clearpanel)
+    page << clearpanel.deactivate()
   end
 
 %div#map{ style: "height: 300px; width: 100%; border:1px solid black; margin-top: 3em" }
