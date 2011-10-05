@@ -3,8 +3,9 @@
   googleproj = OpenLayers::Projection.new("EPSG:900913")
 
 :javascript
+  var format = new OpenLayers.Format.GeoJSON({internalProjection: new OpenLayers.Projection("EPSG:900913"), externalProjection : new OpenLayers.Projection("EPSG:4326")});
+
   function serialize(feature) {
-    var format = new OpenLayers.Format.GeoJSON({internalProjection: new OpenLayers.Projection("EPSG:900913"), externalProjection : new OpenLayers.Projection("EPSG:4326")});
     var str = format.write(feature);
     document.getElementById('issue_loc_json').value = str;
   }
@@ -56,5 +57,9 @@
 %div#map{ style: "height: 300px; width: 100%; border:1px solid black; margin-top: 3em" }
 != @map.to_html
 :javascript
-  vectorlayer.events.on({featureadded: feature_added})
-  vectorlayer.events.on({featuremodified: feature_modified})
+  vectorlayer.events.on({featureadded: feature_added});
+  vectorlayer.events.on({featuremodified: feature_modified});
+  if ( document.getElementById('issue_loc_json').value != '' ) {
+    vectorlayer.addFeatures( format.read(document.getElementById('issue_loc_json').value));
+    map.zoomToExtent(vectorlayer.features[0].geometry.bounds);
+  }
