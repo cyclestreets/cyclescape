@@ -17,6 +17,7 @@ authorization do
     end
     has_permission_on :dashboards, to: :show
     has_permission_on :issues, to: [:new, :create]
+    has_permission_on :message_threads, :messages, to: :manage
   end
 
   role :guest do
@@ -24,11 +25,16 @@ authorization do
                       :devise_invitations, to: :manage
     has_permission_on :home, to: :show
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries]
+    has_permission_on :message_threads, :messages, to: :view
   end
 end
 
 privileges do
   privilege :manage do
     includes :index, :new, :create, :show, :edit, :update, :destroy
+  end
+
+  privilege :view do
+    includes :index, :show
   end
 end
