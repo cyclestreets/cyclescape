@@ -1,0 +1,2 @@
+class MessageThreadsController < ApplicationController
+end
