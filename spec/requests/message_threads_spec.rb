@@ -1,0 +1,101 @@
+require "spec_helper"
+
+describe "Message threads" do
+  let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5) }
+
+  context "as a public user" do
+    context "index" do
+      before do
+        threads
+        visit threads_path
+      end
+
+      it "should list public message threads" do
+        threads.each do |thread|
+          page.should have_content(thread.title)
+        end
+      end
+
+      it "should not show private message threads"
+      it "should list threads by latest first"
+    end
+
+    context "show" do
+      before do
+        threads
+        @thread = threads.first
+        @messages = @thread.messages
+        visit threads_path
+        click_link @thread.title
+      end
+
+      it "should show the thread title" do
+        within(".thread h1") do
+          page.should have_content(@thread.title)
+        end
+      end
+
+      it "should show messages on a public thread" do
+        @messages.each do |message|
+          page.should have_content(message.body)
+        end
+      end
+
+      it "should not allow access to a private thread"
+    end
+  end
+
+  context "as a site user" do
+    include_context "signed in as a site user"
+
+    context "index" do
+      before do
+        threads
+        visit threads_path
+      end
+
+      it "should list all public message threads" do
+        threads.each do |thread|
+          page.should have_content(thread.title)
+        end
+      end
+
+      it "should list threads the user has created"
+      it "should list all threads the user has been invited to"
+    end
+  end
+
+  context "as a group member" do
+    include_context "signed in as a committee member"
+
+    context "index" do
+      before do
+        threads
+        visit threads_path
+      end
+
+      it "should list all public message threads" do
+        threads.each do |thread|
+          page.should have_content(thread.title)
+        end
+      end
+
+      it "should list threads belonging to my group"
+      it "should list threads belonging to all my groups"
+    end
+  end
+
+  context "as an admin user" do
+    include_context "signed in as admin"
+
+    context "index" do
+      before do
+        threads
+        visit threads_path
+      end
+
+      it "should list all message threads"
+    end
+  end
+end
