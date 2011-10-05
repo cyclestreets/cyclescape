@@ -32,7 +32,7 @@ class Issue < ActiveRecord::Base
 
   def loc_json
     if self.location
-      RGeo::GeoJSON.encode(self.location)
+      RGeo::GeoJSON.encode(self.location).to_json
     else
       ""
     end
