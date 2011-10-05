@@ -36,6 +36,9 @@ end
 shared_context "signed in as a site user" do
   include_context "signs in"
 
-  let!(:current_user) { FactoryGirl.create(:user) }
-  let!(:password) { FactoryGirl.attributes_for(:user)[:password] }
+  # Slightly different as user factory uses a sequence for password
+  # so we need to get the password at the same time
+  let!(:user_details) { FactoryGirl.attributes_for(:user) }
+  let!(:current_user) { FactoryGirl.create(:user, user_details) }
+  let!(:password) { user_details[:password] }
 end
