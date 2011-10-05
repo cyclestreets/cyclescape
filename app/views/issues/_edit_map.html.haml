@@ -10,8 +10,13 @@
     document.getElementById('issue_loc_json').value = str;
   }
 
-  function serialize_layer(event) {
+  function feature_added(event) {
     toolbar.deactivate();
+    modify.activate();
+    serialize(event.feature);
+  }
+
+  function feature_modified(event) {
     serialize(event.feature);
   }
 
@@ -27,9 +32,13 @@
     toolbar = MapLayers::JsVar.new("toolbar")
     page.assign(toolbar, OpenLayers::Control::EditingToolbar.new(vectorlayer))
     page << map.addControl(toolbar)
+    modify = MapLayers::JsVar.new("modify")
+    page.assign(modify, OpenLayers::Control::ModifyFeature.new(vectorlayer))
+    page << map.addControl(modify)
   end
 
 %div#map{ style: "height: 300px; width: 100%; border:1px solid black; margin-top: 3em" }
 != @map.to_html
 :javascript
-  vectorlayer.events.on({featureadded: serialize_layer})
+  vectorlayer.events.on({featureadded: feature_added})
+  vectorlayer.events.on({featuremodified: feature_modified})
