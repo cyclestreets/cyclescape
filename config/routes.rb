@@ -19,6 +19,10 @@ Cyclekit::Application.routes.draw do
     end
   end
 
+  resources :threads, controller: "MessageThread" do
+    resources :messages
+  end
+
   root :to => "home#show"
 
   # The priority is based upon order of creation:
