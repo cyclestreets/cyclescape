@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: group_memberships
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer         not null
+#  group_id   :integer         not null
+#  role       :string(255)     not null
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  deleted_at :datetime
+#
+
 FactoryGirl.define do
   factory :group_membership do
     group
