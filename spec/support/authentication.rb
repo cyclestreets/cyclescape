@@ -24,6 +24,15 @@ shared_context "signed in as a committee member" do
   let(:current_user) { membership.user }
 end
 
+shared_context "signed in as a group member" do
+  include_context "signs in"
+
+  let!(:membership) { FactoryGirl.create(:stewie_at_quahogcc) }
+  let!(:password) { FactoryGirl.attributes_for(:stewie)[:password] }
+  let(:current_group) { membership.group }
+  let(:current_user) { membership.user }
+end
+
 shared_context "signed in as a site user" do
   include_context "signs in"
 
