@@ -22,6 +22,8 @@
       protocol = OpenLayers::Protocol::HTTP.new( url: geometry_issue_path(issue, :json), format: OpenLayers::Format::GeoJSON.new )
       page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::Fixed.new() ]))
       page << map.addLayer(locationlayer)
+    end
+  end
 
 %div#map{ style: "height: 300px; width: 100%; border:1px solid black; margin-top: 3em" }
 != @map.to_html
