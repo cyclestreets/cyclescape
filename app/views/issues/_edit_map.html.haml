@@ -1,5 +1,4 @@
 :ruby
-  zoom = 16
   projection = OpenLayers::Projection.new("EPSG:4326")
   googleproj = OpenLayers::Projection.new("EPSG:900913")
 
@@ -33,7 +32,7 @@
   @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", projection: googleproj, displayProjection: projection}) do |map, page|
     page << map.add_layer(MapLayers::OSM_MAPNIK)
     page << map.add_control(OpenLayers::Control::LayerSwitcher.new)
-    page << map.setCenter(OpenLayers::LonLat.new(0.1477639423685, 52.27332049515).transform(projection, map.getProjectionObject()),zoom);
+    page << map.setCenter(OpenLayers::LonLat.new(@start_location.x, @start_location.y).transform(projection, map.getProjectionObject()),@start_location.z);
 
     vectorlayer = MapLayers::JsVar.new("vectorlayer")
     page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Vectors", projection: projection))

@@ -17,6 +17,7 @@ class IssuesController < ApplicationController
 
   def new
     @issue = Issue.new
+    @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 14)
   end
 
   def create
@@ -25,6 +26,7 @@ class IssuesController < ApplicationController
     if @issue.save
       redirect_to @issue
     else
+      @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 14)
       render :new
     end
   end
