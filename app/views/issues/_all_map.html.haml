@@ -2,7 +2,7 @@
   - page << map.setCenter(OpenLayers::LonLat.new(@start_location.x, @start_location.y).transform(projection, map.getProjectionObject()),@start_location.z);
 
   - vectorlayer = MapLayers::JsVar.new("vectorlayer")
-  - protocol = OpenLayers::Protocol::HTTP.new( url: all_geometries_issues_path(:json), format: OpenLayers::Format::GeoJSON.new )
+  - protocol = OpenLayers::Protocol::HTTP.new( url: all_geometries_issues_path(:json), format: :format_plain )
   - page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Issues", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::BBOX.new()]))
   - page << map.add_layer(vectorlayer)
 

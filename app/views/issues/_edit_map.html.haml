@@ -1,6 +1,4 @@
 :javascript
-  var format = new OpenLayers.Format.GeoJSON({internalProjection: new OpenLayers.Projection("EPSG:900913"), externalProjection : new OpenLayers.Projection("EPSG:4326")});
-
   function serialize(feature) {
     var str = format.write(feature);
     document.getElementById('issue_loc_json').value = str;

@@ -15,7 +15,7 @@
       page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
 
       locationlayer = MapLayers::JsVar.new('locationlayer')
-      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_group_profile_path(profile.group, :json), format: OpenLayers::Format::GeoJSON.new )
+      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_group_profile_path(profile.group, :json), format: :format_plain )
       page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::Fixed.new() ]))
       page << map.addLayer(locationlayer)
     end
