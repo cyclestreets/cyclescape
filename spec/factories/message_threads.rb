@@ -7,7 +7,6 @@
 #  created_by_id :integer         not null
 #  group_id      :integer
 #  title         :string(255)     not null
-#  description   :text            not null
 #  privacy       :string(255)     not null
 #  state         :string(255)     not null
 #  created_at    :datetime        not null
@@ -18,7 +17,6 @@ FactoryGirl.define do
   factory :message_thread do
     association :created_by, factory: :user
     sequence(:title) {|n| "Message Thread #{n}" }
-    description "Why are we discussing this?"
     privacy "public"
 
     trait :belongs_to_group do
