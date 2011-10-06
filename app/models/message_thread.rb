@@ -19,7 +19,7 @@ class MessageThread < ActiveRecord::Base
   belongs_to :created_by, class_name: "User"
   belongs_to :group
   belongs_to :issue
-  has_many :messages, foreign_key: "thread_id"
+  has_many :messages, foreign_key: "thread_id", autosave: true
 
   validates :title, :state, :created_by_id, presence: true
   validates :privacy, inclusion: {in: ALLOWED_PRIVACY}

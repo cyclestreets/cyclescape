@@ -1,6 +1,6 @@
 %nav
   %ol
-    %li= link_to t(".back"), thread_path
+    %li= link_to t(".back"), {action: :index}
 
 %section.thread
   %h1= @thread.title
