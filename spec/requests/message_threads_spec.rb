@@ -66,25 +66,6 @@ describe "Message threads" do
     end
   end
 
-  context "as a group member" do
-    include_context "signed in as a committee member"
-
-    context "index" do
-      before do
-        threads
-        visit threads_path
-      end
-
-      it "should list all public message threads" do
-        threads.each do |thread|
-          page.should have_content(thread.title)
-        end
-      end
-
-      it "should list threads belonging to my group"
-      it "should list threads belonging to all my groups"
-    end
-  end
 
   context "as an admin user" do
     include_context "signed in as admin"

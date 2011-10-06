@@ -18,6 +18,7 @@ authorization do
     has_permission_on :dashboards, to: :show
     has_permission_on :issues, to: [:new, :create]
     has_permission_on :message_threads, :messages, to: :manage
+    has_permission_on :group_message_threads, to: :manage
   end
 
   role :guest do
