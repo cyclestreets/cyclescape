@@ -1,6 +1,5 @@
 :ruby
   zoom = 16
-  projection = OpenLayers::Projection.new("EPSG:4326")
   @map = basic_map do |map, page|
     if issue.location.geometry_type == RGeo::Feature::Point
       page << map.setCenter(OpenLayers::LonLat.new(issue.location.x,issue.location.y).transform(projection, map.getProjectionObject()),zoom);
@@ -14,7 +13,7 @@
     else
       bbox = RGeo::Cartesian::BoundingBox.new(issue.location.factory)
       bbox.add(issue.location)
-      page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(OpenLayers::Projection.new("EPSG:4326"), map.getProjectionObject()))
+      page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
 
       locationlayer = MapLayers::JsVar.new('locationlayer')
       protocol = OpenLayers::Protocol::HTTP.new( url: geometry_issue_path(issue, :json), format: OpenLayers::Format::GeoJSON.new )

@@ -6,8 +6,6 @@ module ApplicationHelper
   end
 
   def basic_map(&block)
-    projection = OpenLayers::Projection.new("EPSG:4326")
-    googleproj = OpenLayers::Projection.new("EPSG:900913")
     @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", projection: googleproj, displayProjection: projection}) do |map, page|
       page << map.add_layer(MapLayers::OSM_MAPNIK)
       page << map.add_control(OpenLayers::Control::LayerSwitcher.new)
@@ -20,5 +18,13 @@ module ApplicationHelper
       page << map.add_layer(vectorlayer)
       yield(map, page) if block_given?
     end
+  end
+
+  def projection
+    OpenLayers::Projection.new("EPSG:4326")
+  end
+
+  def googleproj
+    OpenLayers::Projection.new("EPSG:900913")
   end
 end

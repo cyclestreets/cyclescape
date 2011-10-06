@@ -1,7 +1,3 @@
-:ruby
-  projection = OpenLayers::Projection.new("EPSG:4326")
-  googleproj = OpenLayers::Projection.new("EPSG:900913")
-
 :javascript
   var format = new OpenLayers.Format.GeoJSON({internalProjection: new OpenLayers.Projection("EPSG:900913"), externalProjection : new OpenLayers.Projection("EPSG:4326")});
 
