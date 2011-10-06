@@ -16,6 +16,9 @@ Cyclekit::Application.routes.draw do
     scope :module => "Group" do
       resources :members
       resources :memberships
+      resource :profile do
+        get 'geometry', :on => :member
+      end
     end
   end
 

@@ -1,0 +1,8 @@
+%h2= t ".description"
+%p= @profile.description or t ".no_description"
+
+%h2= t ".location"
+- if @profile.location
+  = render partial: "map", locals: { profile: @profile }
+- else
+  %p= t ".no_location"
