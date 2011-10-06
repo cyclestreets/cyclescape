@@ -1,5 +1,5 @@
 :javascript
-  var geo_field = "#{thing}_loc_json"
+  var geo_field = "#{thing.class.name.underscore}_loc_json"
 
   function serialize(feature) {
     var str = format.write(feature);
