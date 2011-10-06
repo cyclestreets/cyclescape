@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/ctran/annotate_models.git
+  revision: cfeec96c9ca0fa5035b10be3d73e798cc4fc52f7
+  specs:
+    annotate (2.4.1.beta1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -178,6 +184,7 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    state_machine (1.0.1)
     thin (1.2.11)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -204,6 +211,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter
+  annotate!
   capybara
   database_cleaner
   declarative_authorization
@@ -227,6 +235,7 @@ DEPENDENCIES
   sass-rails (~> 3.1.0)
   shoulda-matchers
   spork (~> 0.9.0.rc)
+  state_machine
   thin
   turn
   uglifier

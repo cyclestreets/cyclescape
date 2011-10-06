@@ -1,0 +1,12 @@
+%nav
+  %ol
+    %li= link_to t(".back"), {action: :index}
+
+%section.thread
+  %h1= @thread.title
+
+  - @messages.each do |message|
+    %article.message
+      = message.body
+
+= render "messages/new"

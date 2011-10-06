@@ -19,6 +19,7 @@ gem 'activerecord-postgis-adapter'
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
+gem 'state_machine'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -51,6 +52,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'ruby-debug19', require: 'ruby-debug'
   gem 'spork', '~> 0.9.0.rc'
+  gem 'annotate', git: 'git://github.com/ctran/annotate_models.git', require: false
 end
 
 group :test do
