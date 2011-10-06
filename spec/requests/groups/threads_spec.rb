@@ -30,15 +30,30 @@ describe "Group threads" do
 
       it "should create a new public thread" do
         fill_in "Title", with: thread_attrs[:title]
-        fill_in "Body", with: "Damn you, woman, awake from your damnable reverie!"
+        fill_in "Message", with: "Damn you, woman, awake from your damnable reverie!"
         select "Public", from: "Privacy"
         click_on "Create Thread"
-        within("h1") do
-          page.should have_content(thread_attrs[:title])
-        end
+        page.should have_content(thread_attrs[:title])
       end
 
       it "should create a new private thread"
+    end
+
+    context "showing a thread" do
+      before do
+        visit group_thread_path(current_group, thread)
+      end
+
+      it "should show the thread title" do
+        page.should have_content(thread.title)
+      end
+
+      it "should have fields to create a new message" do
+        page.should have_field("Message")
+      end
+
+      it "should display all the messages in chronological order"
+      it "should show who started the thread"
     end
   end
 end
