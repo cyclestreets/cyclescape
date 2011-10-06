@@ -7,7 +7,6 @@
 #  created_by_id :integer         not null
 #  group_id      :integer
 #  title         :string(255)     not null
-#  description   :text            not null
 #  privacy       :string(255)     not null
 #  state         :string(255)     not null
 #  created_at    :datetime        not null
