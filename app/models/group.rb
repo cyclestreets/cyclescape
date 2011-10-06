@@ -6,6 +6,8 @@ class Group < ActiveRecord::Base
 
   validates :name, :short_name, presence: true
 
+  after_create :create_default_profile, unless: :profile
+
   def committee_members
     members.where("group_memberships.role = 'committee'")
   end
@@ -16,5 +18,11 @@ class Group < ActiveRecord::Base
 
   def to_param
     "#{id}-#{short_name}"
+  end
+
+  protected
+
+  def create_default_profile
+    build_profile.save!
   end
 end
