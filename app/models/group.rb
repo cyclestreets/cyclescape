@@ -2,6 +2,7 @@ class Group < ActiveRecord::Base
   has_many :memberships, class_name: "GroupMembership"
   has_many :members, through: :memberships, source: :user
   has_many :threads, class_name: "MessageThread"
+  has_one :profile, class_name: "GroupProfile"
 
   validates :name, :short_name, presence: true
 
