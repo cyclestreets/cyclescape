@@ -23,7 +23,6 @@ describe Message do
 
   describe "validations" do
     it { should validate_presence_of(:created_by_id) }
-    it { should validate_presence_of(:thread_id) }
     it { should validate_presence_of(:body) }
   end
 end
