@@ -1,9 +1,7 @@
 :ruby
   zoom = 16
   projection = OpenLayers::Projection.new("EPSG:4326")
-  @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", displayProjection:  OpenLayers::Projection.new("EPSG:4326")}) do |map, page|
-    page << map.add_layer(MapLayers::OSM_MAPNIK)
-    page << map.add_control(OpenLayers::Control::LayerSwitcher.new)
+  @map = basic_map do |map, page|
     if issue.location.geometry_type == RGeo::Feature::Point
       page << map.setCenter(OpenLayers::LonLat.new(issue.location.x,issue.location.y).transform(projection, map.getProjectionObject()),zoom);
 
