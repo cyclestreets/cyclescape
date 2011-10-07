@@ -2,7 +2,12 @@
   %h2= @issue.title
 %section
   %ul
-    %li= "Added by #{@issue.created_by.full_name} on #{@issue.created_at}"
-    %li= "Category: #{@issue.category.name}"
+    %li= t ".added_by", name: @issue.created_by.name, time: @issue.created_at
+    %li= t ".category", category: @issue.category.name
   %p= @issue.description
+  %ul
+    - if permitted_to? :create, :message_thread
+      %li= link_to t(".new_public_thread"), new_thread_path(issue: @issue)
+    - user_groups.each do |group|
+      %li= link_to t(".new_group_thread", group: group.name), new_group_thread_path(group, issue: @issue)
   = render partial: "map", locals: { issue: @issue }

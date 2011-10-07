@@ -20,6 +20,12 @@
       index:
         title: "%{group}'s Threads"
         new_group_thread: "New Group Thread"
+  issues:
+    show:
+      added_by: "Added by %{name} on %{time}"
+      category: "Category: %{category}"
+      new_public_thread: "New Public Thread"
+      new_group_thread: "New %{group} Thread"
   layouts:
     application:
       dashboard: "My Dashboard"
