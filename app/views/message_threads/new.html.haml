@@ -1,0 +1,14 @@
+%section.new-thread
+  %h1= t ".title"
+  = semantic_form_for @thread, as: :thread, url: {action: :create} do |f|
+    = f.semantic_errors
+    = f.inputs do
+      = f.input :title
+      = f.input :privacy, as: :select, collection: MessageThread::ALLOWED_PRIVACY.map {|n| [n.capitalize, n] }
+      = semantic_fields_for @message do |f2|
+        = f2.semantic_errors
+        = f2.inputs :body
+    = f.buttons do
+      = f.commit_button
+      %li
+        = cancel_link

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: issues
+#
+#  id            :integer         not null, primary key
+#  created_by_id :integer         not null
+#  title         :string(255)     not null
+#  description   :text            not null
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
+#  deleted_at    :datetime
+#  category_id   :integer
+#  location      :spatial({:srid=
+#
+
 require 'spec_helper'
 
 describe Issue do

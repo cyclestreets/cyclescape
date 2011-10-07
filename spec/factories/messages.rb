@@ -13,16 +13,10 @@
 #  deleted_at     :datetime
 #
 
-require 'spec_helper'
-
-describe Message do
-  describe "associations" do
-    it { should belong_to(:created_by) }
-    it { should belong_to(:thread) }
-  end
-
-  describe "validations" do
-    it { should validate_presence_of(:created_by_id) }
-    it { should validate_presence_of(:body) }
+FactoryGirl.define do
+  factory :message do
+    association :created_by, factory: :user
+    association :thread, factory: :message_thread
+    body "Meg: I just want to kill myself I'm gonna go upstairs and eat a whole bowl of peanuts."
   end
 end

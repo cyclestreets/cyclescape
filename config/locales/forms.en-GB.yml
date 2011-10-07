@@ -16,11 +16,17 @@
     labels:
       group_membership:
         role: "Membership type"
+      message:
+        body: "Message"
     hints:
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name, they can change this when they accept the invite."
+      message_thread:
+        privacy: "Select if this thread should be visible to members of the group only or everyone."
     actions:
       update: "Save"
       group_membership:
         create: "Invite member"
+      message_thread:
+        create: "Create Thread"

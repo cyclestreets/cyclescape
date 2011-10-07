@@ -1,0 +1,9 @@
+%h1= t ".title", group: @group.name
+%nav
+  %ul
+    %li= link_to t(".new_group_thread"), {action: :new}
+%section.threads
+  - @threads.each do |thread|
+    %article.thread_summary
+      %h1= link_to thread.title, {action: :show, id: thread}
+      %p== Created #{time_ago_in_words(thread.created_at)} ago

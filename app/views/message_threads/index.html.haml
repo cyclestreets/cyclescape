@@ -1,0 +1,6 @@
+%section.threads
+  %h1= t ".title"
+  - @threads.each do |thread|
+    %article.thread_summary
+      %h1= link_to thread.title, {action: :show, id: thread}
+      %p== Created #{time_ago_in_words(thread.created_at)} ago
