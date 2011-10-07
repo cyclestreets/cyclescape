@@ -48,7 +48,7 @@
     page << clearpanel.deactivate()
   end
 
-%div#map{ style: "height: 300px; width: 100%; border:1px solid black; margin-top: 3em" }
+%div#map
 != @map.to_html
 :javascript
   vectorlayer.events.on({featureadded: feature_added});

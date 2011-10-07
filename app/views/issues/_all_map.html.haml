@@ -6,5 +6,5 @@
   - page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Issues", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::BBOX.new()]))
   - page << map.add_layer(vectorlayer)
 
-%div#map{ style: "height: 300px; width: 100%; border:1px solid black; margin-top: 3em" }
+%div#map
 != @map.to_html

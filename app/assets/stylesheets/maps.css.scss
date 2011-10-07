@@ -1,6 +1,13 @@
 
 // Maps
 
+#map {
+  height: 300px;
+  width: 100%;
+  border:1px solid black;
+  margin-top: 3em;
+}
+
 .olControlEditingToolbar .clearButtonItemInactive {
   width:  24px;
   height: 22px;
