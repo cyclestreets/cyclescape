@@ -1,13 +1,14 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.0'
-
-# Bundle edge Rails instead:
-# gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
 gem 'pg'
+gem 'activerecord-postgis-adapter'
+
+# Only uncomment the debugger if you are using it as it slows things down
+# gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
+gem 'jquery-rails'
 gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
@@ -15,7 +16,6 @@ gem 'rgeo-geojson'
 
 # Back-end gems
 gem 'devise'
-gem 'activerecord-postgis-adapter'
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
@@ -31,30 +31,18 @@ group :assets do
   gem 'uglifier'
 end
 
-gem 'jquery-rails'
-
-# Use unicorn as the web server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+group :development do
+  gem 'annotate', git: 'git://github.com/ctran/annotate_models.git', require: false
+end
 
 group :development, :test do
   # IRB helpers
   gem 'wirble'
   gem 'hirb'
+
   gem 'rspec-core'
-  gem 'rspec-expectations'
   gem 'rspec-rails'
-  gem 'capybara'
-  gem 'email_spec'
-  gem 'database_cleaner'
-  gem 'ruby-debug19', require: 'ruby-debug'
   gem 'spork', '~> 0.9.0.rc'
-  gem 'annotate', git: 'git://github.com/ctran/annotate_models.git', require: false
 end
 
 group :test do
@@ -63,4 +51,8 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'
+  gem 'capybara'
+  gem 'email_spec'
+  gem 'database_cleaner'
+  gem 'rspec-expectations'
 end
