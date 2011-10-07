@@ -20,5 +20,9 @@ FactoryGirl.define do
     location "POINT(-122 47)"
     association :created_by, factory: :user
     association :category, factory: :issue_category
+
+    factory :issue_with_json_loc do
+      loc_json '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
+    end
   end
 end
