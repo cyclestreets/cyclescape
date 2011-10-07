@@ -13,4 +13,5 @@
           %td= mail_to group.email
           %td.actions
             = link_to t(".edit"), [:edit, :admin, group]
+            = link_to t(".edit_profile"), [:edit, group, :profile]
             = link_to t(".members"), [group, :members]
