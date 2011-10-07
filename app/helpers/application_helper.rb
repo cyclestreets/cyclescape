@@ -28,4 +28,10 @@ module ApplicationHelper
   def googleproj
     OpenLayers::Projection.new("EPSG:900913")
   end
+
+  def user_groups(user = nil)
+    user ||= current_user
+    return [] if user.nil?
+    user.groups
+  end
 end
