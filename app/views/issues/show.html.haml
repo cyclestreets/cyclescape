@@ -6,7 +6,7 @@
     %li= t ".category", category: @issue.category.name
   %p= @issue.description
   %ul
-    - if permitted_to? :create, :message_thread
+    - if permitted_to? :create, :message_threads
       %li= link_to t(".new_public_thread"), new_thread_path(issue: @issue)
     - user_groups.each do |group|
       %li= link_to t(".new_group_thread", group: group.name), new_group_thread_path(group, issue: @issue)
