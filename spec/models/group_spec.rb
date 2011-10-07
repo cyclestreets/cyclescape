@@ -15,6 +15,14 @@ describe Group do
     end
   end
 
+  describe "newly created" do
+    subject { FactoryGirl.create(:group) }
+
+    it "must have a profile" do
+      subject.profile.should be_valid
+    end
+  end
+
   context "members" do
     let(:membership) { FactoryGirl.create(:brian_at_quahogcc) }
     let(:brian) { membership.user }
