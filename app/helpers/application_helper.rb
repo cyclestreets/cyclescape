@@ -17,10 +17,6 @@ module ApplicationHelper
       format_plain = MapLayers::JsVar.new("format_plain")
       page.assign(format_plain, OpenLayers::Format::GeoJSON.new)
 
-      vectorlayer = MapLayers::JsVar.new("vectorlayer")
-      page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Vectors", projection: projection))
-      page << map.add_layer(vectorlayer)
-
       yield(map, page) if block_given?
     end
   end
