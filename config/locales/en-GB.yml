@@ -28,6 +28,7 @@
       new_group_thread: "New %{group} Thread"
   layouts:
     application:
+      title: "CycleKit"
       dashboard: "My Dashboard"
       admin: "Admin"
 

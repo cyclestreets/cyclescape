@@ -8,7 +8,7 @@
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
   %body{class: controller_path.gsub('/', '_')}
     %header
-      %h1 CycleKit
+      %h1= link_to t(".title"), root_path
     .control-bar
       - if current_user
         %nav.user-menu
