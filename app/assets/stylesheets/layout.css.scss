@@ -26,6 +26,19 @@ table {
   }
 }
 
+// Buttons and pseudo-buttons
+
+a.button, input[type="submit"] {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px;
+  @include border-radius(5px);
+  margin: 6px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 // Nav bar
 
 nav.bar .inner {
@@ -81,15 +94,23 @@ body.home {
   }
 }
 
-// Buttons and pseudo-buttons
+// Threads
 
-a.button, input[type="submit"] {
-  cursor: pointer;
-  display: inline-block;
-  padding: 8px;
-  @include border-radius(5px);
-  margin: 6px;
-  &:hover {
-    text-decoration: none;
+section.thread {
+  @include column(9);
+  .info {
+    margin-top: 2px;
+    margin-bottom: 10px;
+  }
+}
+
+article.message {
+  @include column(9);
+  margin-bottom: 10px;
+  .details {
+    @include column(2, "first");
+  }
+  .body {
+    @include column(7, "last");
   }
 }

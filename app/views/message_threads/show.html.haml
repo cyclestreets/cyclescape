@@ -13,6 +13,9 @@
 
   - @messages.each do |message|
     %article.message
-      = message.body
+      .details
+        = message.created_by.name
+      .body
+        = message.body
 
-= render "messages/new"
+  = render "messages/new"
