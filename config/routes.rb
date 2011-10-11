@@ -6,7 +6,9 @@ Cyclekit::Application.routes.draw do
   resources :issues do
     get 'geometry', :on => :member
     get 'all_geometries', :on => :collection
-    resources :threads, controller: "message_threads"
+    scope module: "issue" do
+      resources :threads, controller: "message_threads"
+    end
   end
 
   namespace :admin do
@@ -14,7 +16,7 @@ Cyclekit::Application.routes.draw do
   end
 
   resources :groups do
-    scope :module => "Group" do
+    scope module: "group" do
       resources :members
       resources :memberships
       resources :threads, controller: "message_threads"

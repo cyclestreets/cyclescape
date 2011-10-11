@@ -20,6 +20,10 @@
       index:
         title: "%{group}'s Threads"
         new_group_thread: "New Group Thread"
+  issue:
+    message_threads:
+      new:
+        title: "New Thread on %{issue}"
   issues:
     show:
       added_by: "Added by %{name} on %{time}"
