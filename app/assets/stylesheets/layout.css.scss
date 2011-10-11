@@ -26,6 +26,19 @@ table {
   }
 }
 
+// Buttons and pseudo-buttons
+
+a.button, input[type="submit"] {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px;
+  @include border-radius(5px);
+  margin: 6px;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 // Nav bar
 
 nav.bar .inner {
@@ -48,9 +61,23 @@ nav.bar .inner {
   }
 }
 
+// Flash
+div.flash-container .flash {
+  padding: 6px;
+  padding-left: 12px;
+  margin: 2px;
+}
+
 // Sign in
 
 body.devise_sessions div.content {
+  @include column($half-span);
+  @include push(4);
+}
+
+// Sign up
+
+body.devise_registrations div.content {
   @include column($half-span);
   @include push(4);
 }
@@ -67,15 +94,23 @@ body.home {
   }
 }
 
-// Buttons and pseudo-buttons
+// Threads
 
-a.button {
-  cursor: pointer;
-  display: inline-block;
-  padding: 8px;
-  @include border-radius(5px);
-  margin: 6px;
-  &:hover {
-    text-decoration: none;
+section.thread {
+  @include column(9);
+  .info {
+    margin-top: 2px;
+    margin-bottom: 10px;
+  }
+}
+
+article.message {
+  @include column(9);
+  margin-bottom: 10px;
+  .details {
+    @include column(2, "first");
+  }
+  .body {
+    @include column(7, "last");
   }
 }

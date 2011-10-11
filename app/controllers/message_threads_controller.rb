@@ -21,7 +21,7 @@ class MessageThreadsController < ApplicationController
 
   def show
     load_thread
-    @messages = @thread.messages
+    @messages = @thread.messages.all
     @new_message = @thread.messages.build
   end
 

@@ -31,3 +31,16 @@ a.button {
     background: #afafaf;
   }
 }
+
+// Flash
+
+div.flash {
+  font-weight: bold;
+  border: 1px solid black;
+  @include border-radius(3px);
+}
+
+div.alert {
+  background-color: #d60000;
+  color: white;
+}
