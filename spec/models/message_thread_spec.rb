@@ -32,4 +32,21 @@ describe MessageThread do
     it { should allow_value("group").for(:privacy) }
     it { should_not allow_value("other").for(:privacy) }
   end
+
+  describe "privacy" do
+    subject { MessageThread.new }
+
+    it "should become private to group" do
+      subject.should_not be_private_to_group
+      subject.group = FactoryGirl.create(:group)
+      subject.privacy = "group"
+      subject.should be_private_to_group
+    end
+
+    it "should be public" do
+      subject.should_not be_public
+      subject.privacy = "public"
+      subject.should be_public
+    end
+  end
 end

@@ -86,4 +86,20 @@ describe Issue do
       subject.should be_valid
     end
   end
+
+  describe "threads" do
+    context "new thread" do
+      subject { FactoryGirl.create(:issue) }
+
+      it "should set the title to be the same as the issue" do
+        thread = subject.threads.build
+        thread.title.should == subject.title
+      end
+
+      it "should set the privacy to public by default" do
+        thread = subject.threads.build
+        thread.should be_public
+      end
+    end
+  end
 end

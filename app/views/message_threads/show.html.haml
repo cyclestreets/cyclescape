@@ -4,6 +4,12 @@
 
 %section.thread
   %h1= @thread.title
+  .info
+    .privacy
+      - if @thread.private_to_group?
+        = t ".private_to_group_message", group: @thread.group.name
+      - else
+        = t ".public_message"
 
   - @messages.each do |message|
     %article.message

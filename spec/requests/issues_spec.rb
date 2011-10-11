@@ -32,26 +32,32 @@ describe "Issues" do
   context "show" do
     let!(:issue) { FactoryGirl.create(:issue, category: issue_category) }
 
-    before do
-      visit issue_path(issue)
-    end
+    context "as a public user" do
+      before do
+        visit issue_path(issue)
+      end
 
-    it "should show the issue title" do
-      page.should have_content(issue.title)
-    end
+      it "should show the issue title" do
+        page.should have_content(issue.title)
+      end
 
-    it "should show the description" do
-      page.should have_content(issue.description)
-    end
+      it "should show the description" do
+        page.should have_content(issue.description)
+      end
 
-    it "should show the location"
+      it "should show the location"
 
-    it "should show the category" do
-      page.should have_content(issue.category.name)
+      it "should show the category" do
+        page.should have_content(issue.category.name)
+      end
     end
 
     context "as a site user" do
       include_context "signed in as a site user"
+
+      before do
+        visit issue_path(issue)
+      end
 
       it "should have a link to create a new public thread" do
         page.should have_link("New Public Thread")
@@ -60,6 +66,10 @@ describe "Issues" do
 
     context "as a group member" do
       include_context "signed in as a group member"
+
+      before do
+        visit issue_path(issue)
+      end
 
       it "should have a link to create a new public thread" do
         page.should have_link("New Public Thread")

@@ -21,12 +21,6 @@ class Group::MessageThreadsController < MessageThreadsController
     end
   end
 
-  def show
-    load_thread
-    @messages = @thread.messages
-    @new_message = @thread.messages.build
-  end
-
   protected
 
   def load_group
