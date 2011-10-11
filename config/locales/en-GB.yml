@@ -35,6 +35,10 @@
       title: "CycleKit"
       dashboard: "My Dashboard"
       admin: "Admin"
+  message_threads:
+    show:
+      private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
+      public_message: "Public: Everyone can view this thread and post messages."
 
   date:
     formats:
