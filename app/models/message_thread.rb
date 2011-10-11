@@ -26,4 +26,12 @@ class MessageThread < ActiveRecord::Base
 
   state_machine :state, initial: :new do
   end
+
+  def private_to_group?
+    group_id && privacy == "group"
+  end
+
+  def public?
+    privacy == "public"
+  end
 end
