@@ -42,5 +42,8 @@ form.formtastic {
     p.inline-errors, p.inline-hints {
       margin-left: 27%;
     }
+    &.boolean label {
+      padding-left: 27%;
+    }
   }
 }

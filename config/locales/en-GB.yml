@@ -10,6 +10,10 @@
     registrations:
       new:
         title: "Sign up"
+    sessions:
+      new:
+        title: "Sign in"
+        sign_in_button: "Sign in"
   group:
     members:
       index:
