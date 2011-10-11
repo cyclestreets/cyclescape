@@ -16,7 +16,7 @@
 class Issue < ActiveRecord::Base
   belongs_to :created_by, class_name: "User"
   belongs_to :category, class_name: "IssueCategory"
-  has_many :threads, class_name: "MessageThread"
+  has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults
 
   validates :title, presence: true
   validates :description, presence: true
@@ -52,5 +52,13 @@ class Issue < ActiveRecord::Base
     else
       ""
     end
+  end
+
+  protected
+
+  # Association callback
+  def set_new_thread_defaults(thread)
+    thread.title ||= title
+    thread.privacy ||= "public"
   end
 end
