@@ -1,11 +1,13 @@
 @import "grid";
+@import "utils";
 
-body > header, .control-bar, .flash-container, .content-container, body > footer {
+body > header > .inner, nav.bar, .flash-container, .content-container, body > footer {
   @include container;
 }
 
-body > header {
-  margin-top: 10px;
+body > header > .inner {
+  padding-top: 10px;
+  padding-bottom: 10px;
   margin-bottom: 10px;
 }
 
@@ -24,6 +26,35 @@ table {
   }
 }
 
+// Nav bar
+
+nav.bar .inner {
+  position: relative;
+  height: 12px;
+  padding: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  .account-menu {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+  }
+  ul li {
+    display: inline;
+    a {
+      padding: 5px;
+    }
+  }
+}
+
+// Sign in
+
+body.devise_sessions div.content {
+  @include column($half-span);
+  @include push(4);
+}
+
 // Home page
 
 body.home {
@@ -33,5 +64,18 @@ body.home {
 
   .groups-area {
     @include column($half-span, "last");
+  }
+}
+
+// Buttons and pseudo-buttons
+
+a.button {
+  cursor: pointer;
+  display: inline-block;
+  padding: 8px;
+  @include border-radius(5px);
+  margin: 6px;
+  &:hover {
+    text-decoration: none;
   }
 }

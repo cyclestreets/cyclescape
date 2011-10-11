@@ -1,0 +1,33 @@
+@import "utils";
+
+body > header {
+  background: #bfbfbf;
+  h1 a {
+    color: white;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+body > nav.bar > .inner {
+  border: 1px solid #bfbfbf;
+  @include border-radius(5px);
+}
+
+div.content h1 {
+  border-bottom: 1px solid #bfbfbf;
+}
+
+// Buttons and pseudo-buttons
+
+a.button {
+  border: 1px solid #bfbfbf;
+  background: #8e8e8e;
+  color: white;
+  font-weight: bold;
+  @include box-shadow;
+  &:hover {
+    background: #afafaf;
+  }
+}

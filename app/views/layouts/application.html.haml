@@ -7,23 +7,27 @@
     = csrf_meta_tags
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
   %body{class: controller_path.gsub('/', '_')}
-    %header
-      %h1= link_to t(".title"), root_path
-    .control-bar
-      - if current_user
-        %nav.user-menu
-          %ul
-            %li= link_to t(".dashboard"), dashboard_path
-            - if permitted_to? :manage, :admin_groups
-              %li= link_to t(".admin"), admin_groups_path
-        .account
-          %ul
-            %li= current_user.name
-            %li= link_to "Sign out", destroy_user_session_path, method: "delete"
-      - else
-        %ul
-          %li= link_to "Sign up", new_user_registration_path
-          %li= link_to "Sign in", new_user_session_path
+    %header.top
+      .inner
+        %h1= link_to t(".title"), root_path
+    %nav.bar
+      .inner
+        - if current_user
+          .main-menu
+            %ul
+              %li= link_to t(".dashboard"), dashboard_path
+              - if permitted_to? :manage, :admin_groups
+                %li= link_to t(".admin"), admin_groups_path
+          .account-menu
+            %ul
+              %li.name= current_user.name
+              %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"
+        - else
+          .public-menu
+          .account-menu
+            %ul
+              %li= link_to "Sign up", new_user_registration_path
+              %li= link_to "Sign in", new_user_session_path
     .flash-container
       - [:alert, :notice].each do |type|
         - if flash.key? type
