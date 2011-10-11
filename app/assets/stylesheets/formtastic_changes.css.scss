@@ -12,3 +12,35 @@ The following style may be *conditionally* included for improved support on olde
 form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
 
 --------------------------------------------------------------------------------------------------*/
+
+form.formtastic fieldset > ol {
+  // Right-align labels
+  > li label {
+    text-align: right;
+    padding-right: 2%;
+    padding-top: 5px;
+  }
+  // Some padding on text inputs
+  > li.stringish input {
+    padding: 2px;
+  }
+  > li {
+    &.string, &.password, &.numeric, &.email, &.url, &.phone, &.search {
+      input {
+        width: 70%;
+      }
+    }
+  }
+}
+
+// Fieldset widths
+form.formtastic {
+  fieldset.buttons {
+    padding-left: 27%;
+  }
+  fieldset > ol > li {
+    p.inline-errors, p.inline-hints {
+      margin-left: 27%;
+    }
+  }
+}

@@ -55,6 +55,13 @@ body.devise_sessions div.content {
   @include push(4);
 }
 
+// Sign up
+
+body.devise_registrations div.content {
+  @include column($half-span);
+  @include push(4);
+}
+
 // Home page
 
 body.home {
@@ -69,7 +76,7 @@ body.home {
 
 // Buttons and pseudo-buttons
 
-a.button {
+a.button, input[type="submit"] {
   cursor: pointer;
   display: inline-block;
   padding: 8px;

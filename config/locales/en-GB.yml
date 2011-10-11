@@ -6,6 +6,10 @@
       index:
         title: "Groups"
         new_group: "New Group"
+  devise:
+    registrations:
+      new:
+        title: "Sign up"
   group:
     members:
       index:
