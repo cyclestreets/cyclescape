@@ -5,7 +5,7 @@
   - @groups.each do |group|
     %section.group
       %h1= link_to group.name, group
-      %p= link_to t(".new_group_thread"), new_group_thread_path(group)
+      %p= link_to t(".new_group_thread"), new_group_thread_path(group), class: "button"
       %ul
         - group.threads.each do |thread|
           %li= link_to thread.title, group_thread_path(group, thread)
