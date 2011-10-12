@@ -5,6 +5,10 @@ class UserProfile < ActiveRecord::Base
 
   belongs_to :user
 
+  def picture_thumbnail
+    picture.thumb("80x80>")
+  end
+
   protected
 
   def generate_picture_path
