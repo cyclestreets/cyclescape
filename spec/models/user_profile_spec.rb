@@ -18,5 +18,11 @@ describe UserProfile do
       subject.picture_thumbnail.width.should == 80
       subject.picture_thumbnail.height.should == 80
     end
+
+    it "should not accept a text document for a picture" do
+      subject.should have(0).errors_on(:picture)
+      subject.picture = File.open(lorem_ipsum_path)
+      subject.should have(1).error_on(:picture)
+    end
   end
 end

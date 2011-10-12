@@ -5,6 +5,8 @@ class UserProfile < ActiveRecord::Base
 
   belongs_to :user
 
+  validates_property :mime_type, of: :picture, in: %w(image/jpeg image/png image/gif)
+
   def picture_thumbnail
     picture.thumb("80x80>")
   end
