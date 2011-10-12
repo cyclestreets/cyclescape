@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
   end
   alias_method_chain :profile, :auto_build
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+
   private
 
   def set_default_role
