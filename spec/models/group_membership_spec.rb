@@ -21,9 +21,7 @@ describe GroupMembership do
       subject.should have(1).error_on(:group_id)
     end
 
-    it "must belong to a user" do
-      subject.should have(1).error_on(:user_id)
-    end
+    it "must belong to a user (except association build on new won't set it!)"
 
     it "must have a role" do
       subject.should have(1).error_on(:role)
