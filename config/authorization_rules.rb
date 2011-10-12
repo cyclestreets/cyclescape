@@ -27,6 +27,7 @@ authorization do
     has_permission_on :home, to: :show
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries]
     has_permission_on :message_threads, :messages, to: :view
+    has_permission_on :user_profiles, to: :view
   end
 end
 

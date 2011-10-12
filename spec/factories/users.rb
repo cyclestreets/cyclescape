@@ -34,6 +34,10 @@ FactoryGirl.define do
       role "admin"
     end
 
+    trait :with_profile do
+      after_build {|u| FactoryGirl.build(:user_profile, user: u) }
+    end
+
     factory :stewie do
       email "stewie@example.com"
       full_name "Stewie Griffin"
@@ -50,5 +54,7 @@ FactoryGirl.define do
       password "BRI-D0G"
       password_confirmation "BRI-D0G"
     end
+
+    factory :stewie_with_profile, traits: [:with_profile]
   end
 end
