@@ -47,6 +47,7 @@
     show:
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
+      posted_date: "Posted %{time_ago} ago"
 
   date:
     formats:
