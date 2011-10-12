@@ -10,6 +10,12 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_denied
-    redirect_to new_user_session_path if current_user.nil?
+    if current_user.nil?
+      flash.alert = t("permission_denied_sign_in")
+      redirect_to new_user_session_path
+    else
+      flash.alert = t("permission_denied")
+      render status: :unauthorized, text: "You are not authorised to access that page."
+    end
   end
 end
