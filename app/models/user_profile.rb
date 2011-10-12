@@ -9,6 +9,6 @@ class UserProfile < ActiveRecord::Base
 
   def generate_picture_path
     hash = Digest::SHA1.file(picture.path).hexdigest
-    "attachments/user_profile/#{hash[0..6]}/#{hash}"
+    "profile_pictures/#{hash[0..2]}/#{hash[3..5]}/#{hash}"
   end
 end
