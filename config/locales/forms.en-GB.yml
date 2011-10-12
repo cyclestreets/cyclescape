@@ -28,5 +28,7 @@
       update: "Save"
       group_membership:
         create: "Invite member"
+      message:
+        create: "Post Message"
       message_thread:
         create: "Create Thread"

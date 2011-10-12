@@ -42,6 +42,14 @@ describe "Message threads" do
         end
       end
 
+      it "should show the authors of messages" do
+        @messages.each do |message|
+          within(dom_id_selector(message)) do
+            page.should have_content(message.created_by.name)
+          end
+        end
+      end
+
       it "should not allow access to a private thread"
     end
   end
@@ -63,6 +71,24 @@ describe "Message threads" do
 
       it "should list threads the user has created"
       it "should list all threads the user has been invited to"
+    end
+
+    context "show" do
+      before do
+        visit thread_path(thread)
+      end
+
+      it "should show all messages" do
+        thread.messages.each do |message|
+          page.should have_content(message.body)
+        end
+      end
+
+      it "should be able to post a new message" do
+        fill_in "Message", with: "Testing a new message!"
+        click_on "Post Message"
+        page.should have_content("Testing a new message!")
+      end
     end
   end
 

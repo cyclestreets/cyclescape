@@ -12,7 +12,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
-gem 'rgeo-geojson'
+gem 'rgeo-geojson', require: "rgeo/geo_json"
 
 # Back-end gems
 gem 'devise'
