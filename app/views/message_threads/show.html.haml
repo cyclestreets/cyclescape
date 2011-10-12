@@ -14,7 +14,7 @@
   - @messages.each do |message|
     %article.message{id: dom_id(message)}
       .details
-        .author= message.created_by.name
+        .author= link_to message.created_by.name, user_profile_path(message.created_by)
         %time{datetime: message.created_at}
           = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
       .body
