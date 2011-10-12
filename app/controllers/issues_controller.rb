@@ -1,7 +1,4 @@
 class IssuesController < ApplicationController
-
-  require 'rgeo/geo_json'
-
   before_filter :authenticate_user!, only: [:new, :create]
   
   def index

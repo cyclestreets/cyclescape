@@ -8,3 +8,4 @@ config/database.yml
 public/assets
 bin/
 routes.txt
+public/system

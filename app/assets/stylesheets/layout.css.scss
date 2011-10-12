@@ -114,3 +114,14 @@ article.message {
     @include column(7, "last");
   }
 }
+
+// User profile
+
+.user-profile-form {
+  .sidebar {
+    @include column(2, "first");
+  }
+  .form {
+    @include column(7, "last");
+  }
+}

@@ -1,7 +1,4 @@
 class Group::ProfilesController < ApplicationController
-
-  require 'rgeo/geo_json'
-
   def show
     @profile = Group.find(params[:group_id]).profile
   end

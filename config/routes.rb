@@ -30,6 +30,12 @@ Cyclekit::Application.routes.draw do
     resources :messages
   end
 
+  resources :users do
+    scope module: :user do
+      resource :profile
+    end
+  end
+
   root :to => "home#show"
 
   # The priority is based upon order of creation:

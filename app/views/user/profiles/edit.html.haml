@@ -1,0 +1,13 @@
+.user-profile-form
+  %h1= t ".title"
+  .sidebar
+    - if @profile.picture
+      = image_tag @profile.picture.url
+  .form
+    = semantic_form_for @profile, as: :user_profile, url: user_profile_path do |f|
+      = f.inputs do
+        = f.input :picture, as: :file
+        = f.input :retained_picture, as: :hidden
+        = f.input :website
+        = f.input :about
+      = f.buttons

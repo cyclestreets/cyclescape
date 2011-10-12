@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   has_many :issues, foreign_key: "created_by_id"
   has_many :created_threads, class_name: "MessageThread", foreign_key: "created_by_id"
   has_many :messages, foreign_key: "created_by_id"
+  has_one :profile, class_name: "UserProfile"
 
   before_validation :set_default_role, :unless => :role
 
@@ -49,6 +50,15 @@ class User < ActiveRecord::Base
 
   def root?
     id == 1
+  end
+
+  def profile_with_auto_build
+    profile_without_auto_build || build_profile
+  end
+  alias_method_chain :profile, :auto_build
+
+  def to_param
+    "#{id}-#{name.parameterize}"
   end
 
   private
