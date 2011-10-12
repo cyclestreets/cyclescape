@@ -18,7 +18,7 @@ authorization do
     has_permission_on :dashboards, to: :show
     has_permission_on :issues, to: [:new, :create]
     has_permission_on :message_threads, :messages, to: :manage
-    has_permission_on :group_message_threads, to: :manage
+    has_permission_on :group_message_threads, :issue_message_threads, to: :manage
     has_permission_on :user_profiles, to: :manage
   end
 
@@ -27,7 +27,7 @@ authorization do
                       :devise_invitations, :devise_passwords, to: :manage
     has_permission_on :home, to: :show
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries]
-    has_permission_on :message_threads, :messages, to: :view
+    has_permission_on :issue_message_threads, :message_threads, :messages, to: :view
     has_permission_on :user_profiles, to: :view
   end
 end

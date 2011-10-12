@@ -38,6 +38,9 @@
       category: "Category: %{category}"
       new_public_thread: "New Public Thread"
       new_group_thread: "New %{group} Thread"
+      group_private: "Private to %{group}"
+      group_public: "Public, by %{group}"
+      public: "Public"
   layouts:
     application:
       title: "CycleKit"
