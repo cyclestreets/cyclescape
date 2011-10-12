@@ -1,0 +1,7 @@
+.user-profile
+  %h1= @user.name
+  = link_to t(".edit"), action: :edit
+  - if @profile.picture
+    = image_tag @profile.picture.url
+  .about
+    = @profile.about

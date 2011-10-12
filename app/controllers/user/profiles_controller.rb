@@ -1,5 +1,5 @@
 class User::ProfilesController < ApplicationController
-  before_filter :load_profile
+  before_filter :load_user, :load_profile
 
   def show
   end
@@ -21,7 +21,11 @@ class User::ProfilesController < ApplicationController
 
   protected
 
+  def load_user
+    @user = User.find(params[:user_id])
+  end
+
   def load_profile
-    @profile = User.find(params[:user_id]).profile
+    @profile = @user.profile
   end
 end
