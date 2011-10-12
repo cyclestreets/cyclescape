@@ -52,6 +52,11 @@ class User < ActiveRecord::Base
     id == 1
   end
 
+  def profile_with_auto_build
+    profile_without_auto_build || build_profile
+  end
+  alias_method_chain :profile, :auto_build
+
   private
 
   def set_default_role

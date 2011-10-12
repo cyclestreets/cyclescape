@@ -101,4 +101,18 @@ describe User do
       subject.role_symbols.should == [:admin]
     end
   end
+
+  describe "profile association" do
+    subject { FactoryGirl.build(:user) }
+
+    it "should give a new blank profile if one doesn't already exist" do
+      subject.profile.should be_a(UserProfile)
+      subject.profile.should be_new_record
+    end
+
+    it "should give the actual user profile if one exists" do
+      profile = FactoryGirl.create(:user_profile, user: subject)
+      subject.profile.should == profile
+    end
+  end
 end
