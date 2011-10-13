@@ -45,6 +45,9 @@ Spork.prefork do
     config.before(:suite) do
       DatabaseCleaner.strategy = :transaction
       DatabaseCleaner.clean_with(:truncation, except: %w(geometry_columns spatial_ref_sys))
+
+      # Clear out DragonFly assets
+      FileUtils.rm_r("#{Rails.root}/public/system/dragonfly/test")
     end
 
     config.before(:each) do
