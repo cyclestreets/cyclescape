@@ -37,6 +37,17 @@ describe "Group memberships admin" do
         click_button "Invite member"
         page.should have_content("Please enter a name")
       end
+
+      context "with existing user" do
+        let(:new_member) { FactoryGirl.create(:user) }
+
+        it "should use an existing user if present" do
+          select "Member", from: "Membership type"
+          fill_in "Email", with: new_member.email
+          click_button "Invite member"
+          User.find_by_email(new_member.email).groups.should include(group)
+        end
+      end
     end
   end
 

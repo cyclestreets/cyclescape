@@ -20,6 +20,7 @@ class GroupMembership < ActiveRecord::Base
   scope :committee, where("role = 'committee'")
   scope :normal, where("role = 'member'")
 
+  before_validation :replace_with_existing_user
   before_validation :invite_user_if_new
 
   validates :group_id, presence: true
@@ -37,6 +38,14 @@ class GroupMembership < ActiveRecord::Base
   end
 
   protected
+
+  def replace_with_existing_user
+    if user
+      existing = User.find_by_email(user.email)
+      self.user = existing if existing
+    end
+    true
+  end
 
   def invite_user_if_new
     user && user.new_record? && user.invite!
