@@ -19,6 +19,7 @@ describe Message do
   describe "associations" do
     it { should belong_to(:created_by) }
     it { should belong_to(:thread) }
+    it { should belong_to(:component) }
   end
 
   describe "validations" do
