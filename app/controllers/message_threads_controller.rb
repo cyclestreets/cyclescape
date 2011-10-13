@@ -1,4 +1,7 @@
 class MessageThreadsController < ApplicationController
+  MESSAGE_COMPONENTS = [PhotoMessage]
+  helper_method :message_components
+
   def index
     @threads = MessageThread.all
   end
@@ -43,5 +46,9 @@ class MessageThreadsController < ApplicationController
 
   def load_thread
     @thread = MessageThread.find(params[:id])
+  end
+
+  def message_components
+    MESSAGE_COMPONENTS
   end
 end
