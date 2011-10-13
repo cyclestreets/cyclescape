@@ -26,4 +26,14 @@ describe Message do
     it { should validate_presence_of(:created_by_id) }
     it { should validate_presence_of(:body) }
   end
+
+  describe "component association" do
+    subject { FactoryGirl.create(:message) }
+
+    it "should accept a PhotoMessage" do
+      subject.component = FactoryGirl.create(:photo_message, message: subject)
+      subject.component_type.should == "PhotoMessage"
+      subject.should be_valid
+    end
+  end
 end
