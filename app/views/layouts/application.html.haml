@@ -18,9 +18,11 @@
               %li= link_to t(".dashboard"), dashboard_path
               - if permitted_to? :manage, :admin_groups
                 %li= link_to t(".admin"), admin_groups_path
+              %li= link_to t(".issues"), issues_path
+              %li= link_to t(".threads"), threads_path
           .account-menu
             %ul
-              %li.name= current_user.name
+              %li.name= link_to current_user.name, user_profile_path(current_user)
               %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"
         - else
           .public-menu
