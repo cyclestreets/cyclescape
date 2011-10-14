@@ -12,12 +12,15 @@
         = t ".public_message"
 
   - @messages.each do |message|
-    %article.message{id: dom_id(message)}
-      .details
-        .author= link_to message.created_by.name, user_profile_path(message.created_by)
-        %time{datetime: message.created_at}
-          = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
-      .body
-        = message.body
+    - if message.is_a?(Message)
+      %article.message{id: dom_id(message)}
+        .details
+          .author= link_to message.created_by.name, user_profile_path(message.created_by)
+          %time{datetime: message.created_at}
+            = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
+        .body
+          = message.body
+    - else
+      = render "message/#{message_controller_map(message)}/show"
 
   = render "messages/new"
