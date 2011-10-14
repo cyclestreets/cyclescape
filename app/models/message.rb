@@ -16,6 +16,8 @@
 class Message < ActiveRecord::Base
   belongs_to :thread, class_name: "MessageThread"
   belongs_to :created_by, class_name: "User"
+  belongs_to :component, polymorphic: true, autosave: true
 
-  validates :created_by_id, :body, presence: true
+  validates :created_by_id, presence: true
+  validates :body, presence: true, unless: :component
 end

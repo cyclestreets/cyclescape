@@ -28,4 +28,12 @@ Cyclekit::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Generators config
+  config.generators do |g|
+    g.assets false
+    g.helper false
+    g.javascripts false
+    g.stylesheets false
+  end
 end

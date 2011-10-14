@@ -1,0 +1,10 @@
+.new-photo-message
+  = semantic_form_for PhotoMessage.new, url: thread_photos_path(@thread), html: {multipart: true} do |f|
+    = f.inputs do
+      = f.input :photo, as: :file
+      = f.input :retained_photo, as: :hidden
+      = f.input :caption
+      = semantic_fields_for Message.new do |f2|
+        = f2.input :body
+    = f.buttons do
+      = f.commit_button

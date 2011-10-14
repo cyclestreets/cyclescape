@@ -28,6 +28,9 @@ Cyclekit::Application.routes.draw do
 
   resources :threads, controller: "message_threads" do
     resources :messages
+    scope module: :message do
+      resources :photos, only: [:create]
+    end
   end
 
   resources :users do

@@ -18,6 +18,7 @@
         %time{datetime: message.created_at}
           = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
       .body
+        - if message.component
+          = render "message/#{message_controller_map(message.component)}/show", message: message
         = message.body
-
   = render "messages/new"
