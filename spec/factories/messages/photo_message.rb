@@ -7,6 +7,7 @@ FactoryGirl.define do
 
     after_build do |o|
       o.thread = o.message.thread
+      o.message.update_attributes(component: o)
     end
   end
 end
