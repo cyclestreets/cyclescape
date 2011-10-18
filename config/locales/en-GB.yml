@@ -6,6 +6,9 @@
       index:
         title: "Groups"
         new_group: "New Group"
+        edit: "Edit"
+        edit_profile: "Edit Profile"
+        members: "Members"
   devise:
     registrations:
       new:
