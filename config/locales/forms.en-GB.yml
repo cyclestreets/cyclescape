@@ -16,6 +16,8 @@
     labels:
       group_membership:
         role: "Membership type"
+      link_message:
+        url: "URL"
       message:
         body: "Message"
     hints:

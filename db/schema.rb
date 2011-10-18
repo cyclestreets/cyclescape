@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111013104733) do
+ActiveRecord::Schema.define(:version => 20111014161111) do
 
   create_table "group_memberships", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(:version => 20111013104733) do
     t.datetime "deleted_at"
     t.integer  "category_id"
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
+  end
+
+  create_table "link_messages", :force => true do |t|
+    t.integer  "thread_id",     :null => false
+    t.integer  "message_id",    :null => false
+    t.integer  "created_by_id", :null => false
+    t.text     "url",           :null => false
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
   end
 
   create_table "message_threads", :force => true do |t|
