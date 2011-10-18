@@ -46,6 +46,10 @@
       title: "CycleKit"
       dashboard: "My Dashboard"
       admin: "Admin"
+  message_thread:
+    subscriptions:
+      create:
+        success: "Subscription created."
   message_threads:
     show:
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."

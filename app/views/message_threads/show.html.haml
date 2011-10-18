@@ -26,3 +26,7 @@
           = render "message/#{message_controller_map(message.component)}/show", message: message
         = message.body
   = render "messages/new"
+
+  %aside.sidebar
+    = form_tag thread_subscriptions_path(@thread) do
+      = submit_tag "Subscribe"
