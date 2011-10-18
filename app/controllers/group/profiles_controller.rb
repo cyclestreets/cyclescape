@@ -13,7 +13,7 @@ class Group::ProfilesController < ApplicationController
     @group = Group.find(params[:group_id])
 
     if @group.profile.update_attributes(params[:group_profile])
-      flash.notice = t(".profile_updated")
+      flash.notice = t("group.profiles.update.profile_updated")
       redirect_to action: :show
     else
       render :edit

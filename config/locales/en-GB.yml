@@ -28,6 +28,9 @@
       index:
         title: "%{group}'s Threads"
         new_group_thread: "New Group Thread"
+    profiles:
+      update:
+        profile_updated: "Profile Updated"
   issue:
     message_threads:
       new:
