@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
     full_name
   end
 
+  def name_with_email
+    "#{name} <#{email}>"
+  end
+
   def role_symbols
     return [:root] if root?
     [role.to_sym]

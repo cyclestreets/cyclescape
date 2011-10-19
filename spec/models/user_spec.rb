@@ -115,4 +115,17 @@ describe User do
       subject.profile.should == profile
     end
   end
+
+  context "name with email" do
+    subject { FactoryGirl.build(:user) }
+
+    it "should give email in valid format using chosen name" do
+      subject.name_with_email.should == "#{subject.name} <#{subject.email}>"
+    end
+
+    it "should use full name if display name is not set" do
+      subject.display_name = nil
+      subject.name_with_email.should == "#{subject.full_name} <#{subject.email}>"
+    end
+  end
 end
