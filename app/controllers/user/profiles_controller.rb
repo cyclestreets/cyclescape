@@ -13,6 +13,7 @@ class User::ProfilesController < ApplicationController
 
   def update
     if @profile.update_attributes(params[:user_profile])
+      flash.notice = t(".user.profiles.update.profile_updated")
       redirect_to action: :show
     else
       render :edit

@@ -27,7 +27,7 @@ class User::LocationsController < ApplicationController
     @location = current_user.locations.find(params[:id])
 
     if @location.update_attributes(params[:user_location])
-      flash.notice = t(".location_updated")
+      flash.notice = t(".user.locations.update.location_updated")
       redirect_to action: :index
     else
       render :edit
