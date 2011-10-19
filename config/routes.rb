@@ -40,6 +40,10 @@ Cyclekit::Application.routes.draw do
     end
   end
 
+  namespace :user do
+    resources :locations
+  end
+
   root :to => "home#show"
 
   # The priority is based upon order of creation:

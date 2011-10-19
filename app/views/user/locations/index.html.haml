@@ -1,0 +1,16 @@
+%h1= t ".my_locations"
+= link_to t(".new"), action: :new
+
+- if current_user.locations.count > 0
+  %table
+    %thead
+      %th= t ".category"
+      %th= t ".latitude"
+      %th= t ".longitude"
+    - current_user.locations.each do |l|
+      %tr
+        %td= l.category.name
+        %td= l.centre.y
+        %td= l.centre.x
+- else
+  %p= t ".no_locations_yet"
