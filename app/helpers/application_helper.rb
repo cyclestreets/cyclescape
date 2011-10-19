@@ -21,7 +21,7 @@ module ApplicationHelper
     end
   end
 
-  def tiny_display_map(object, &block)
+  def tiny_display_map(object, geometry_url, &block)
     zoom = 16
     html_id = "tinymap_#{object.id}"
     @map = MapLayers::Map.new(html_id, {theme: "/openlayers/theme/default/style.css", projection: googleproj, displayProjection: projection, controls: []}) do |map, page|
@@ -48,7 +48,7 @@ module ApplicationHelper
         page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
 
         locationlayer = MapLayers::JsVar.new('locationlayer')
-        protocol = OpenLayers::Protocol::HTTP.new( url: geometry_url(object), format: :format_plain )
+        protocol = OpenLayers::Protocol::HTTP.new( url: geometry_url, format: :format_plain )
         page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::Fixed.new() ]))
         page << map.addLayer(locationlayer)
       end
@@ -68,18 +68,5 @@ module ApplicationHelper
     user ||= current_user
     return [] if user.nil?
     user.groups
-  end
-
-  private
-
-  def geometry_url(object)
-    # I suspect there's some metaprogramming possible here
-    #
-    case object.class.name.underscore
-    when "user_location"
-      geometry_user_location_path(object, :json)
-    when "issue"
-      geometry_issue_path(object, :json)
-    end
   end
 end
