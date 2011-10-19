@@ -19,6 +19,7 @@ authorization do
     has_permission_on :group_message_threads, :issue_message_threads, to: :manage
     has_permission_on :issues, to: [:new, :create]
     has_permission_on :message_threads, :messages, to: :manage
+    has_permission_on :message_thread_subscriptions, to: [:create]
     has_permission_on :message_photos, :message_links, to: :create
     has_permission_on :user_profiles, to: :manage
   end
