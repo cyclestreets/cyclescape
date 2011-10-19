@@ -1,4 +1,6 @@
 class UserLocation < ActiveRecord::Base
+  include Locatable
+
   belongs_to :user
   belongs_to :category, class_name: "LocationCategory"
 
