@@ -5,15 +5,16 @@
   %table
     %thead
       %th= t ".category"
-      %th= t ".latitude"
-      %th= t ".longitude"
+      %th= t ".map"
       %th= t ".edit"
       %th= t ".delete"
     - current_user.locations.each do |l|
       %tr
         %td= l.category.name
-        %td= l.centre.y
-        %td= l.centre.x
+        %td
+          - m = tiny_display_map(l) do |map, page, html_id|
+            %div{id: html_id, class: "tinymap"}
+          != m.to_html
         %td= link_to t(".edit"), edit_user_location_path(l)
         %td= link_to t(".delete"), user_location_path(l), confirm: t(".confirm"), method: "delete"
 - else
