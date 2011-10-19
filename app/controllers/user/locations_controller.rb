@@ -17,4 +17,20 @@ class User::LocationsController < ApplicationController
       render :new
     end
   end
+
+  def edit
+    @location = current_user.locations.find(params[:id])
+    @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 10)
+  end
+
+  def update
+    @location = current_user.locations.find(params[:id])
+
+    if @location.update_attributes(params[:user_location])
+      flash.notice = t(".location_updated")
+      redirect_to action: :index
+    else
+      render :edit
+    end
+  end
 end

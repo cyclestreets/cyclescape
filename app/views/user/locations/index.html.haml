@@ -7,10 +7,12 @@
       %th= t ".category"
       %th= t ".latitude"
       %th= t ".longitude"
+      %th= t ".edit"
     - current_user.locations.each do |l|
       %tr
         %td= l.category.name
         %td= l.centre.y
         %td= l.centre.x
+        %td= link_to t(".edit"), edit_user_location_path(l)
 - else
   %p= t ".no_locations_yet"
