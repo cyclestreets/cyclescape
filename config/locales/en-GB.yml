@@ -53,6 +53,11 @@
       posted_date: "Posted %{time_ago} ago"
   user:
     locations:
+      destroy:
+        failure: "That location can't be deleted"
+        success: "Location deleted"
+      index:
+        confirm: "Are you sure?"
       update:
         location_updated: "Location Updated"
     profiles:

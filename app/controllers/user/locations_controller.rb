@@ -33,4 +33,13 @@ class User::LocationsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    if current_user.locations.find(params[:id]).destroy
+      flash.notice = t(".user.locations.destroy.success")
+    else
+      flash.notice = t(".user.locations.destroy.failure")
+    end
+    redirect_to action: :index
+  end
 end
