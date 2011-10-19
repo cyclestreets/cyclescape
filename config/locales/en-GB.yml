@@ -57,6 +57,18 @@
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
       posted_date: "Posted %{time_ago} ago"
+  user:
+    locations:
+      destroy:
+        failure: "That location can't be deleted"
+        success: "Location deleted"
+      index:
+        confirm: "Are you sure?"
+      update:
+        location_updated: "Location Updated"
+    profiles:
+      update:
+        profile_updated: "Profile Updated"
 
   date:
     formats:

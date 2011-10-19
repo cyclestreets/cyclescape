@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111014161111) do
+ActiveRecord::Schema.define(:version => 20111018155314) do
 
   create_table "group_memberships", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -67,6 +67,12 @@ ActiveRecord::Schema.define(:version => 20111014161111) do
     t.datetime "created_at"
   end
 
+  create_table "location_categories", :force => true do |t|
+    t.string   "name",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "message_threads", :force => true do |t|
     t.integer  "issue_id"
     t.integer  "created_by_id", :null => false
@@ -97,6 +103,14 @@ ActiveRecord::Schema.define(:version => 20111014161111) do
     t.string   "caption"
     t.text     "description"
     t.datetime "created_at",    :null => false
+  end
+
+  create_table "user_locations", :force => true do |t|
+    t.integer  "user_id",                                                 :null => false
+    t.integer  "category_id",                                             :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
+    t.spatial  "location",    :limit => {:srid=>4326, :type=>"geometry"}
   end
 
   create_table "user_profiles", :force => true do |t|

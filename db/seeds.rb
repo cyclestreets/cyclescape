@@ -15,10 +15,17 @@ unless User.where("id = 1").exists?
   User.update_all("id = 1", "id = #{root.id}")
 end
 
-# Create some categories
+# Create some issue categories
 unless IssueCategory.count > 3
   ["Cycle Parking", "Obstruction", "Road Environment", "Cycleway", "Enforcement", "Car Parking",
     "Temporary Closure", "Roadworks", "Bike Shop", "Pothole", "Destination"].each do |cat|
     IssueCategory.new(name: cat).save!
+  end
+end
+
+# Create some location categories
+unless LocationCategory.count > 3
+  ["Home", "Work", "Route to Work", "School Ride", "Weekend Ride", "Other"].each do |cat|
+    LocationCategory.new(name: cat).save!
   end
 end
