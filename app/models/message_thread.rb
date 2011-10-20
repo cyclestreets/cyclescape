@@ -21,6 +21,7 @@ class MessageThread < ActiveRecord::Base
   belongs_to :issue
   has_many :messages, foreign_key: "thread_id", autosave: true
   has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id"
+  has_many :subscribers, through: :subscriptions, source: :user
 
   validates :title, :state, :created_by_id, presence: true
   validates :privacy, inclusion: {in: ALLOWED_PRIVACY}

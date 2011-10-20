@@ -39,6 +39,7 @@ describe "Thread subscriptions" do
       end
 
       it "should send future messages on the thread by email" do
+        check "Send new messages to me by email"
         click_on "Subscribe"
         within(".new-message") do
           fill_in "Message", with: "Notification test"
