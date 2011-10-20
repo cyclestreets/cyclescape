@@ -47,5 +47,8 @@ module Cyclekit
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Set cache storage
+    config.cache_store = :redis_store
   end
 end

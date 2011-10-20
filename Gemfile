@@ -22,6 +22,8 @@ gem 'thin'
 gem 'state_machine'
 gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly'
+gem 'redis-store'
+gem 'resque'
 
 # Gems used only for assets and not required
 # in production environments by default.
