@@ -16,6 +16,7 @@ describe "Thread subscriptions" do
         page.should have_content("Subscription created.")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
+        current_user.thread_subscriptions.first.send_email.should be_false
       end
 
       it "should send a notification confirming the subscription" do
@@ -29,11 +30,12 @@ describe "Thread subscriptions" do
 
     context "for email" do
       it "should subscribe the user to the thread" do
+        check "Send new messages to me by email"
         click_on "Subscribe"
         page.should have_content("Subscription created.")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
-        current_user.thread_subscriptions.format.should == "email"
+        current_user.thread_subscriptions.first.send_email.should be_true
       end
 
       it "should send future messages on the thread by email" do
@@ -42,7 +44,7 @@ describe "Thread subscriptions" do
           fill_in "Message", with: "Notification test"
           click_on "Post Message"
         end
-        open_email(current_user.email)
+        open_email(current_user.email, with_subject: /^Re/)
         current_email.should have_subject("Re: #{thread.title}")
         current_email.should have_body_text(/Notification test/)
       end

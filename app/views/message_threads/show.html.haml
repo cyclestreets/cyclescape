@@ -28,5 +28,6 @@
   = render "messages/new"
 
   %aside.sidebar
-    = form_tag thread_subscriptions_path(@thread) do
-      = submit_tag "Subscribe"
+    = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: @thread, action: :create) do |f|
+      = f.inputs :send_email
+      = f.buttons
