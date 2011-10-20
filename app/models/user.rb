@@ -66,6 +66,10 @@ class User < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
 
+  def subscribed_to_thread?(thread)
+    thread_subscriptions.where("thread_id = ?", thread).exists?
+  end
+
   private
 
   def set_default_role
