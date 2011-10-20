@@ -7,42 +7,4 @@
   = render partial: "shared/edit_map", locals: {thing: @issue}
   = f.buttons
 
-- #Map search button
-%div#mapsearch
-  %span= t ".move_the_map_to"
-  %form#searchform{ action: "#", method: "get", style: "display:inline", onsubmit: "doSearch(); return false" }
-    %input#query{ type: "text", name: "street", value: "Putney, UK", onfocus: "this.value = (this.value=='Putney, UK')? '' : this.value;" }
-    %input{ type: "submit", value: "Go!" }
-  %span#results
-
-:javascript
-  var seqid = 0;
-  var zoom = 14;
-
-  function parseresult(response,thiscall) {
-    if (thiscall == seqid) { // if not, then another search has been made since this one, so ignore
-      if ($.isEmptyObject(response.results)) { // nothing found
-        $('#results').text("Sorry, we couldn't find "+response.query);
-      } else {
-        if ($.isArray(response.results.result)) { // multiple responses
-          result = response.results.result[0];
-        } else {
-          result = response.results.result;
-        }
-        map.setCenter(new OpenLayers.LonLat(result.longitude,result.latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),zoom);
-        $('#results').text('Showing '+ result.name+' near '+result.near);
-      }
-    }
-  }
-
-  function searchError() {
-    $('#results').text('Sorry, the search failed this time.');
-  }
-
-  function doSearch() {
-    seqid++;
-    var thiscall = seqid;
-    params = $('#searchform').serialize();
-    $.getJSON('#{GEOCODER_URL}&' + params, function(response){ parseresult(response,thiscall) });
-    $('#results').text('searching...');
-  }
+= render partial: "shared/map_search"
