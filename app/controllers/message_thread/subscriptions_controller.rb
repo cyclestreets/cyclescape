@@ -4,7 +4,7 @@ class MessageThread::SubscriptionsController < ApplicationController
   def create
     @subscription = @thread.subscriptions.build(user: current_user)
     if @subscription.save
-      flash.notice = "blah"
+      Notifications.thread_subscribed(@subscription).deliver
       set_flash_message(:success)
     else
       set_flash_message(:failure)
