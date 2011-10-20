@@ -8,11 +8,12 @@
   = f.buttons
 
 - #Map search button
-%form#searchform{ action: "#", method: "get", style: "display:inline", onsubmit: "doSearch(); return false" }
-  %input#query{ type: "text", name: "street", value: "Putney, UK", onfocus: "this.value = (this.value=='Putney, UK')? '' : this.value;" }
-  %input{ type: "submit", value: "Go!" }
-%span#results
-  Stuff goes here
+%div#mapsearch
+  %span= t ".move_the_map_to"
+  %form#searchform{ action: "#", method: "get", style: "display:inline", onsubmit: "doSearch(); return false" }
+    %input#query{ type: "text", name: "street", value: "Putney, UK", onfocus: "this.value = (this.value=='Putney, UK')? '' : this.value;" }
+    %input{ type: "submit", value: "Go!" }
+  %span#results
 
 :javascript
   var seqid = 0;
