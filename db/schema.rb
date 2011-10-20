@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111018143134) do
+ActiveRecord::Schema.define(:version => 20111020121546) do
 
   create_table "group_memberships", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -100,10 +100,11 @@ ActiveRecord::Schema.define(:version => 20111018143134) do
   end
 
   create_table "thread_subscriptions", :force => true do |t|
-    t.integer  "user_id",    :null => false
-    t.integer  "thread_id",  :null => false
-    t.datetime "created_at", :null => false
+    t.integer  "user_id",                       :null => false
+    t.integer  "thread_id",                     :null => false
+    t.datetime "created_at",                    :null => false
     t.datetime "deleted_at"
+    t.boolean  "send_email", :default => false, :null => false
   end
 
   create_table "user_profiles", :force => true do |t|
