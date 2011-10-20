@@ -1,0 +1,11 @@
+%h1= @group.name
+- if (@group.profile.location)
+  - m = tiny_display_map(@group.profile, geometry_group_profile_path(@group, :json)) do |map, page, html_id|
+    %div{id: html_id, class: "tinymap"}
+  != m.to_html
+- else
+  %p This group doesnt have a location yet
+%h2= t ".recent_threads"
+%ul
+- @recent_threads.each do |thread|
+  %li= link_to thread.title, group_thread_path(@group, thread)
