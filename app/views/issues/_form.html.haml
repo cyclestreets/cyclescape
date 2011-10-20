@@ -42,9 +42,6 @@
     seqid++;
     var thiscall = seqid;
     params = $('#searchform').serialize();
-    $.getJSON(
-      'http://www.cyclestreets.net/api/geocoder.json?&callback=?&key=b7af2f6899b5d784&' + params,
-      function(response) { parseresult(response,thiscall) }
-    );
+    $.getJSON('#{GEOCODER_URL}&' + params, function(response){ parseresult(response,thiscall) });
     $('#results').text('searching...');
   }
