@@ -41,7 +41,9 @@ Cyclekit::Application.routes.draw do
   end
 
   namespace :user do
-    resources :locations
+    resources :locations do
+      get 'geometry', :on => :member
+    end
   end
 
   root :to => "home#show"

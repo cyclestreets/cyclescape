@@ -42,4 +42,11 @@ class User::LocationsController < ApplicationController
     end
     redirect_to action: :index
   end
+
+  def geometry
+    @location = current_user.locations.find(params[:id])
+    respond_to do |format|
+      format.json { render json: RGeo::GeoJSON.encode(@location.location) }
+    end
+  end
 end
