@@ -24,4 +24,10 @@ class ApplicationController < ActionController::Base
       render status: :unauthorized, text: "You are not authorised to access that page."
     end
   end
+
+  def set_flash_message(type, options = {})
+    flash_key = if type == :success then :notice else :alert end
+    options.reverse_merge!(scope: "#{controller_path.gsub('/', '.')}.#{action_name}")
+    flash[flash_key] = I18n.t(type, options)
+  end
 end

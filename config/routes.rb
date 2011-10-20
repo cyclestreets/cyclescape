@@ -32,6 +32,9 @@ Cyclekit::Application.routes.draw do
       resources :photos, only: [:create]
       resources :links, only: [:create]
     end
+    scope module: :message_thread do
+      resources :subscriptions, only: [:create, :destroy]
+    end
   end
 
   resources :users do

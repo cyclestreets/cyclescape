@@ -20,6 +20,8 @@
         url: "URL"
       message:
         body: "Message"
+      thread_subscription:
+        send_email: "Send new messages to me by email"
     hints:
       group_membership:
         role: "Select if they are a normal or committee member of the group."
@@ -34,3 +36,6 @@
         create: "Post Message"
       message_thread:
         create: "Create Thread"
+      thread_subscription:
+        create: "Subscribe"
+        delete: "Unsubscribe"

@@ -22,6 +22,7 @@ describe MessageThread do
     it { should belong_to(:group) }
     it { should belong_to(:issue) }
     it { should have_many(:messages) }
+    it { should have_many(:subscriptions) }
   end
 
   describe "validations" do

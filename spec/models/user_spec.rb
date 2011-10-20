@@ -115,4 +115,41 @@ describe User do
       subject.profile.should == profile
     end
   end
+
+  context "name with email" do
+    subject { FactoryGirl.build(:user) }
+
+    it "should give email in valid format using chosen name" do
+      subject.name_with_email.should == "#{subject.name} <#{subject.email}>"
+    end
+
+    it "should use full name if display name is not set" do
+      subject.display_name = nil
+      subject.name_with_email.should == "#{subject.full_name} <#{subject.email}>"
+    end
+  end
+
+  context "thread subscriptions" do
+    subject { FactoryGirl.create(:user) }
+    let(:thread) { FactoryGirl.create(:message_thread) }
+
+    before do
+      thread.subscribers << subject
+    end
+
+    it "should have one thread subscription" do
+      subject.should have(1).thread_subscription
+    end
+
+    context "subscribed_to_thread?" do
+      it "should return true if user is subscribed to the thread" do
+        subject.subscribed_to_thread?(thread).should be_true
+      end
+
+      it "should return false if user is not subscribed" do
+        new_thread = FactoryGirl.create(:message_thread)
+        subject.subscribed_to_thread?(new_thread).should be_false
+      end
+    end
+  end
 end

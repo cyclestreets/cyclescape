@@ -32,6 +32,11 @@ class User < ActiveRecord::Base
   has_many :created_threads, class_name: "MessageThread", foreign_key: "created_by_id"
   has_many :messages, foreign_key: "created_by_id"
   has_many :locations, class_name: "UserLocation"
+  has_many :thread_subscriptions do
+    def to(thread)
+      where("thread_id = ?", thread).first
+    end
+  end
   has_one :profile, class_name: "UserProfile"
 
   before_validation :set_default_role, :unless => :role
@@ -42,6 +47,10 @@ class User < ActiveRecord::Base
   def name
     return display_name unless display_name.blank?
     full_name
+  end
+
+  def name_with_email
+    "#{name} <#{email}>"
   end
 
   def role_symbols
@@ -60,6 +69,10 @@ class User < ActiveRecord::Base
 
   def to_param
     "#{id}-#{name.parameterize}"
+  end
+
+  def subscribed_to_thread?(thread)
+    thread_subscriptions.where("thread_id = ?", thread).exists?
   end
 
   private
