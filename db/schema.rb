@@ -105,20 +105,20 @@ ActiveRecord::Schema.define(:version => 20111020121546) do
     t.datetime "created_at",    :null => false
   end
 
-  create_table "user_locations", :force => true do |t|
-    t.integer  "user_id",                                                 :null => false
-    t.integer  "category_id",                                             :null => false
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
-    t.spatial  "location",    :limit => {:srid=>4326, :type=>"geometry"}
-  end
-
   create_table "thread_subscriptions", :force => true do |t|
     t.integer  "user_id",                       :null => false
     t.integer  "thread_id",                     :null => false
     t.datetime "created_at",                    :null => false
     t.datetime "deleted_at"
     t.boolean  "send_email", :default => false, :null => false
+  end
+
+  create_table "user_locations", :force => true do |t|
+    t.integer  "user_id",                                                 :null => false
+    t.integer  "category_id",                                             :null => false
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
+    t.spatial  "location",    :limit => {:srid=>4326, :type=>"geometry"}
   end
 
   create_table "user_profiles", :force => true do |t|
