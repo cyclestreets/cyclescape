@@ -34,6 +34,11 @@
     profiles:
       update:
         profile_updated: "Profile Updated"
+  groups:
+    show:
+      no_issues: There are no issues in this group's area yet
+      no_location: This group doesn't have a location yet
+      no_threads: This group doesn't have any threads yet
   issue:
     message_threads:
       new:
