@@ -33,7 +33,7 @@ Cyclekit::Application.routes.draw do
       resources :links, only: [:create]
     end
     scope module: :message_thread do
-      resources :subscriptions, only: [:create]
+      resources :subscriptions, only: [:create, :destroy]
     end
   end
 

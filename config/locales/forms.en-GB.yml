@@ -38,3 +38,4 @@
         create: "Create Thread"
       thread_subscription:
         create: "Subscribe"
+        delete: "Unsubscribe"

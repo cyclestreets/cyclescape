@@ -31,7 +31,11 @@ class User < ActiveRecord::Base
   has_many :issues, foreign_key: "created_by_id"
   has_many :created_threads, class_name: "MessageThread", foreign_key: "created_by_id"
   has_many :messages, foreign_key: "created_by_id"
-  has_many :thread_subscriptions
+  has_many :thread_subscriptions do
+    def to(thread)
+      where("thread_id = ?", thread).first
+    end
+  end
   has_one :profile, class_name: "UserProfile"
 
   before_validation :set_default_role, :unless => :role
