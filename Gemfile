@@ -35,6 +35,10 @@ end
 
 group :development do
   gem 'annotate', git: 'git://github.com/ctran/annotate_models.git', require: false
+
+  # Following is required for Resque workers in development to load due to
+  # declarative_authorization development dependency when Rails engines are eager loaded
+  gem 'ruby_parser'
 end
 
 group :development, :test do
