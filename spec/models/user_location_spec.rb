@@ -57,4 +57,17 @@ describe UserLocation do
       subject.should be_valid
     end
   end
+
+  context "overlapping groups" do
+    subject { FactoryGirl.create(:user_location) }
+    let(:small_group_profile) { FactoryGirl.create(:small_group_profile) }
+    let(:big_group_profile) { FactoryGirl.create(:big_group_profile) }
+
+    it "should identify the correct overlapping groups" do
+      big_group_profile
+      small_group_profile
+      subject.overlapping_groups.should include(big_group_profile.group)
+      subject.overlapping_groups.should_not include(small_group_profile.group)
+    end
+  end
 end
