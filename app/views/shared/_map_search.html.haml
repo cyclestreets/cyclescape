@@ -1,13 +1,30 @@
 %div#map-search
   %span= t ".move_the_map_to"
-  %form#map-search-form{ action: "#", method: "get", onsubmit: "doSearch(); return false" }
-    %input#map-search-query{ type: "text", name: "street", value: "Putney, UK", onfocus: "this.value = (this.value=='Putney, UK')? '' : this.value;" }
+  %form#map-search-form{ action: "#", method: "get" }
+    %input#map-search-query{ type: "text", name: "street", value: "Putney, UK"}
     %input{ type: "submit", value: "Go!" }
   %span#map-search-results
 
 :javascript
   var seqid = 0;
   var zoom = 14;
+
+  $('#map-search-query').focus(function() { this.value = (this.value=='Putney, UK')? '' : this.value;});
+  $('#map-search-form').submit(function() { doSearch(); return false });
+
+  function doSearch() {
+    seqid++;
+    var thiscall = seqid;
+    params = $('#map-search-form').serialize();
+    var req = $.ajax({
+        url: '#{GEOCODER_URL}&' + params,
+        dataType: 'jsonp',
+        timeout: 10000
+    });
+    req.success(function(response){ parseresult(response, thiscall)});
+    req.error(function(response){ searchError()});
+    $('#map-search-results').text('Searching...');
+  }
 
   function parseresult(response,thiscall) {
     if (thiscall == seqid) { // if not, then another search has been made since this one, so ignore
@@ -27,18 +44,4 @@
 
   function searchError() {
     $('#map-search-results').text('Sorry, the search failed this time.');
-  }
-
-  function doSearch() {
-    seqid++;
-    var thiscall = seqid;
-    params = $('#map-search-form').serialize();
-    var req = $.ajax({
-        url: '#{GEOCODER_URL}&' + params,
-        dataType: 'jsonp',
-        timeout: 10000
-    });
-    req.success(function(response){ parseresult(response, thiscall)});
-    req.error(function(response){ searchError()});
-    $('#map-search-results').text('Searching...');
   }
