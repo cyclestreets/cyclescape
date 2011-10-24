@@ -1,6 +1,6 @@
 %div#map-search
   %span= t ".move_the_map_to"
-  %form#map-search-form{ action: "#", method: "get", style: "display:inline", onsubmit: "doSearch(); return false" }
+  %form#map-search-form{ action: "#", method: "get", onsubmit: "doSearch(); return false" }
     %input#map-search-query{ type: "text", name: "street", value: "Putney, UK", onfocus: "this.value = (this.value=='Putney, UK')? '' : this.value;" }
     %input{ type: "submit", value: "Go!" }
   %span#map-search-results
@@ -40,5 +40,5 @@
     });
     req.success(function(response){ parseresult(response, thiscall)});
     req.error(function(response){ searchError()});
-    $('#map-search-results').text('searching...');
+    $('#map-search-results').text('Searching...');
   }
