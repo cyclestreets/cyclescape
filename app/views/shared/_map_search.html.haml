@@ -19,7 +19,7 @@
         } else {
           result = response.results.result;
         }
-        map.setCenter(new OpenLayers.LonLat(result.longitude,result.latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),zoom);
+        #{map_id}.setCenter(new OpenLayers.LonLat(result.longitude,result.latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),zoom);
         $('#results').text('Showing '+ result.name+' near '+result.near);
       }
     }
