@@ -9,6 +9,7 @@
   function feature_added(event) {
     toolbar.deactivate();
     modify.activate();
+    modify.selectControl.select(event.feature);
     clearpanel.activate();
     serialize(event.feature);
   }
