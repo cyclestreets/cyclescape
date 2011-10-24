@@ -25,12 +25,19 @@
     toolbar.activate();
   }
 
+  var styleRules = [new OpenLayers.Rule({
+      symbolizer: {"Line" : {strokeWidth: 3}},
+      elseFilter: true
+      })]
+  var styleMap = new OpenLayers.StyleMap();
+  styleMap.styles["default"].addRules(styleRules);
+
 :ruby
   @map = basic_map do |map, page|
     page << map.setCenter(OpenLayers::LonLat.new(@start_location.x, @start_location.y).transform(projection, map.getProjectionObject()),@start_location.z);
 
     vectorlayer = MapLayers::JsVar.new("vectorlayer")
-    page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Vectors", projection: projection))
+    page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Vectors", {projection: projection, styleMap: :styleMap}))
     page << map.add_layer(vectorlayer)
     toolbar = MapLayers::JsVar.new("toolbar")
     page.assign(toolbar, OpenLayers::Control::EditingToolbar.new(vectorlayer))
