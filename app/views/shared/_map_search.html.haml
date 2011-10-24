@@ -1,9 +1,9 @@
-%div#mapsearch
+%div#map-search
   %span= t ".move_the_map_to"
-  %form#searchform{ action: "#", method: "get", style: "display:inline", onsubmit: "doSearch(); return false" }
-    %input#query{ type: "text", name: "street", value: "Putney, UK", onfocus: "this.value = (this.value=='Putney, UK')? '' : this.value;" }
+  %form#map-search-form{ action: "#", method: "get", style: "display:inline", onsubmit: "doSearch(); return false" }
+    %input#map-search-query{ type: "text", name: "street", value: "Putney, UK", onfocus: "this.value = (this.value=='Putney, UK')? '' : this.value;" }
     %input{ type: "submit", value: "Go!" }
-  %span#results
+  %span#map-search-results
 
 :javascript
   var seqid = 0;
@@ -12,7 +12,7 @@
   function parseresult(response,thiscall) {
     if (thiscall == seqid) { // if not, then another search has been made since this one, so ignore
       if ($.isEmptyObject(response.results)) { // nothing found
-        $('#results').text("Sorry, we couldn't find "+response.query);
+        $('#map-search-results').text("Sorry, we couldn't find "+response.query);
       } else {
         if ($.isArray(response.results.result)) { // multiple responses
           result = response.results.result[0];
@@ -20,19 +20,19 @@
           result = response.results.result;
         }
         #{map_id}.setCenter(new OpenLayers.LonLat(result.longitude,result.latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),zoom);
-        $('#results').text('Showing '+ result.name+' near '+result.near);
+        $('#map-search-results').text('Showing '+ result.name+' near '+result.near);
       }
     }
   }
 
   function searchError() {
-    $('#results').text('Sorry, the search failed this time.');
+    $('#map-search-results').text('Sorry, the search failed this time.');
   }
 
   function doSearch() {
     seqid++;
     var thiscall = seqid;
-    params = $('#searchform').serialize();
+    params = $('#map-search-form').serialize();
     $.getJSON('#{GEOCODER_URL}&' + params, function(response){ parseresult(response,thiscall) });
-    $('#results').text('searching...');
+    $('#map-search-results').text('searching...');
   }
