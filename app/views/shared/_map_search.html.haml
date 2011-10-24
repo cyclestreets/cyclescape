@@ -33,6 +33,12 @@
     seqid++;
     var thiscall = seqid;
     params = $('#map-search-form').serialize();
-    $.getJSON('#{GEOCODER_URL}&' + params, function(response){ parseresult(response,thiscall) });
+    var req = $.ajax({
+        url: '#{GEOCODER_URL}&' + params,
+        dataType: 'jsonp',
+        timeout: 10000
+    });
+    req.success(function(response){ parseresult(response, thiscall)});
+    req.error(function(response){ searchError()});
     $('#map-search-results').text('searching...');
   }
