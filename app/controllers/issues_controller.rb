@@ -37,10 +37,7 @@ class IssuesController < ApplicationController
 
   def all_geometries
     if params[:bbox]
-      minlon, minlat, maxlon, maxlat = params[:bbox].split(",").collect{|i| i.to_f}
-      f = Issue.rgeo_factory
-      bbox = RGeo::Cartesian::BoundingBox.new(f)
-      bbox.add(f.point(minlon, minlat)).add(f.point(maxlon, maxlat))
+      bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
       issues = Issue.intersects(bbox.to_geometry).order("created_at DESC").limit(50)
     else
       issues = Issue.order("created_at DESC").limit(50)
