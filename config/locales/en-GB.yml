@@ -9,6 +9,9 @@
         edit: "Edit"
         edit_profile: "Edit Profile"
         members: "Members"
+    issue_categories:
+      index:
+        title: "Issue Categories"
   devise:
     registrations:
       new:
@@ -66,6 +69,10 @@
       destroy:
         success: "Unsubscribed."
   message_threads:
+    index:
+      title: "Threads"
+    new:
+      title: "New Thread"
     show:
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
@@ -83,6 +90,8 @@
       update:
         location_updated: "Location Updated"
     profiles:
+      edit:
+        title: "Edit Profile"
       update:
         profile_updated: "Profile Updated"
 

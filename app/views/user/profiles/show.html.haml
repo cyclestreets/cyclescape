@@ -1,6 +1,8 @@
 .user-profile
   %h1= @user.name
-  = link_to t(".edit"), action: :edit
+  - if @user == current_user
+    = link_to t(".edit"), action: :edit
+    = link_to t(".update_account"), edit_user_registration_path
   - if @profile.picture
     = image_tag @profile.picture.url
   .about

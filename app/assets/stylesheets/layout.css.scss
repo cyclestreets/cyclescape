@@ -122,6 +122,6 @@ article.message {
     @include column(2, "first");
   }
   .form {
-    @include column(7, "last");
+    @include column(9, "last");
   }
 }
