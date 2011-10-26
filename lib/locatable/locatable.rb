@@ -9,6 +9,13 @@ module Locatable
     def intersects(l)
       where("st_intersects(location, ?)", l)
     end
+
+    # This could be improved by actually using the factory from the location column, rather
+    # than creating a new one and hardcoding the srid.
+    # However, there's a bug in Rgeo::ActiveRecord 0.4.0 that prevents rgeo_factory_for_column from working
+    def rgeo_factory
+      return RGeo::Geos::Factory.new(srid: 4326)
+    end
   end
 
   # Define an approximate centre of the issue, for convenience.
