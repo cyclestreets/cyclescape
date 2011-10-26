@@ -6,7 +6,11 @@ module ApplicationHelper
   end
 
   def basic_map(&block)
-    @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css", projection: googleproj, displayProjection: projection}) do |map, page|
+    @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css",
+                                      projection: googleproj,
+                                      displayProjection: projection,
+                                      controls: [OpenLayers::Control::PZ.new()]
+                                     }) do |map, page|
       page << map.add_layer(OpenLayers::Layer::OSM.new("OpenCycleMap", ["a", "b", "c"].map {|k| "http://#{k}.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"}))
       page << map.add_layer(MapLayers::OSM_MAPNIK)
       page << map.add_control(OpenLayers::Control::LayerSwitcher.new)
