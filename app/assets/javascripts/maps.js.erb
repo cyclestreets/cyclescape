@@ -28,31 +28,44 @@ var MapSearch = {
         dataType: ($.support.cors ? 'json' : 'jsonp'),
         timeout: 10000,
         success: function(response) {
-          self.parse_result(response, thiscall);
+          self.handle_result(response, thiscall);
         },
         error: this.handle_error,
     });
     $("#map-searching").show();
   },
 
-  parse_result: function(response, call_seq) {
+  handle_result: function(response, call_seq) {
     // if not, then another search has been made since this one, so ignore
     if (call_seq != this.seqid) return false;
     if ($.isEmptyObject(response.results)) { // nothing found
       $("#map-search-noresult").show();
       return;
     }
-    if ($.isArray(response.results.result)) { // multiple responses
-      result = response.results.result[0];
-    } else {
-      result = response.results.result;
-    }
+
+    var results = this.parse_result(response);
+    var result = results[0];
+
+    // Centre map on first result
     $('#map').trigger("recenter", {longitude: result.longitude, latitude: result.latitude, zoom: this.zoom});
     $("#map-searching").hide();
-    $("#map-search-results").
+    $("#map-search-main-result").
       find(".name").text(result.name).end().
       find(".near").text(result.near).end().
       show();
+
+    // Display search results
+    var list = $("<ol />");
+    $(results).each(function(i, item) {
+      list.append($("<li />").text(item.near));
+    });
+    $('#map-search-results').replaceWith(list).show();
+  },
+
+  parse_result: function(response) {
+    // Workaround for multiple responses from odd API
+    if ($.isArray(response.results.result)) return response.results.result;
+    return [response.results.result];
   },
 
   handle_error: function() {
@@ -62,7 +75,7 @@ var MapSearch = {
 
 $(function() {
   $("#map").bind("recenter", function(e, params) {
-    coords = new OpenLayers.LonLat(params.longitude, params.latitude).transform(MapSearch.projection(), map.getProjectionObject());
+    var coords = new OpenLayers.LonLat(params.longitude, params.latitude).transform(MapSearch.projection(), map.getProjectionObject());
     map.setCenter(coords, params.zoom);
   });
     
