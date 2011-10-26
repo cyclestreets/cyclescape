@@ -37,8 +37,8 @@ class IssuesController < ApplicationController
 
   def all_geometries
     if params[:bbox]
-      minlon, minlat, maxlon, maxlat = params[:bbox].split(",").collect{|i| i.to_f}
-      issues = Issue.where("st_intersects(location, setsrid('BOX3D(? ?, ? ?)'::box3d, 4326))", minlon, minlat, maxlon, maxlat).order("created_at DESC").limit(50)
+      bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
+      issues = Issue.intersects(bbox.to_geometry).order("created_at DESC").limit(50)
     else
       issues = Issue.order("created_at DESC").limit(50)
     end

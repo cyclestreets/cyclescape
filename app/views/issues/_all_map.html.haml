@@ -1,10 +1,3 @@
-- @map = basic_map do |map, page|
-  - page << map.setCenter(OpenLayers::LonLat.new(@start_location.x, @start_location.y).transform(projection, map.getProjectionObject()),@start_location.z);
-
-  - vectorlayer = MapLayers::JsVar.new("vectorlayer")
-  - protocol = OpenLayers::Protocol::HTTP.new( url: all_geometries_issues_path(:json), format: :format_plain )
-  - page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Issues", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::BBOX.new()]))
-  - page << map.add_layer(vectorlayer)
-
-%div#map
+- @map = display_bbox_map(@start_location, all_geometries_issues_path(:json)) do |map, page|
+  %div#map
 != @map.to_html

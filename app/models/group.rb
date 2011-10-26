@@ -30,6 +30,10 @@ class Group < ActiveRecord::Base
     members.where("group_memberships.role = 'member'")
   end
 
+  def recent_issues
+    Issue.intersects(profile.location).order("created_at DESC")
+  end
+
   def to_param
     "#{id}-#{short_name}"
   end

@@ -30,4 +30,11 @@ class ApplicationController < ActionController::Base
     options.reverse_merge!(scope: "#{controller_path.gsub('/', '.')}.#{action_name}")
     flash[flash_key] = I18n.t(type, options)
   end
+
+  # A method to convert an openlayers-format bbox string into an rgeo bbox object
+  def bbox_from_string(string, factory)
+    minlon, minlat, maxlon, maxlat = string.split(",").collect{|i| i.to_f}
+    bbox = RGeo::Cartesian::BoundingBox.new(factory)
+    bbox.add(factory.point(minlon, minlat)).add(factory.point(maxlon, maxlat))
+  end
 end

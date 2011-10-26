@@ -56,6 +56,23 @@ module ApplicationHelper
     end
   end
 
+  def display_bbox_map(start_location, geometry_bbox_url, &block)
+    map = basic_map do |map, page|
+      if start_location.geometry_type == RGeo::Feature::Point
+        page << map.setCenter(OpenLayers::LonLat.new(start_location.x, start_location.y).transform(projection, map.getProjectionObject()),start_location.z);
+      else
+        bbox = RGeo::Cartesian::BoundingBox.new(start_location.factory)
+        bbox.add(start_location)
+        page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
+      end
+      vectorlayer = MapLayers::JsVar.new("vectorlayer")
+      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_bbox_url, format: :format_plain )
+      page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Issues", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::BBOX.new()]))
+      page << map.add_layer(vectorlayer)
+      yield(map, page) if block_given?
+    end
+  end
+
   def projection
     OpenLayers::Projection.new("EPSG:4326")
   end
