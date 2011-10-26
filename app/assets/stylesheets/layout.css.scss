@@ -98,9 +98,20 @@ body.home {
 
 section.thread {
   @include column(9, "first");
+  header {
+    @include column(9);
+  }
   .info {
     margin-top: 2px;
     margin-bottom: 10px;
+  }
+  .issue {
+    .description {
+      @include column(4, "first");
+    }
+    .tinymap {
+      @include column(2);
+    }
   }
 }
 

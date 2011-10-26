@@ -11,6 +11,8 @@
           = t ".private_to_group_message", group: @thread.group.name
         - else
           = t ".public_message"
+      - if @thread.issue
+        = render "issue_panel", :issue => @thread.issue
 
   - @messages.each do |message|
     %article.message{id: dom_id(message)}
