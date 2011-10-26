@@ -1,6 +1,14 @@
 module Locatable
   def self.included(base)
     base.rgeo_factory_generator = RGeo::Geos.factory_generator
+    base.extend(ClassMethods)
+  end
+
+  module ClassMethods
+    # define an intersects method for arel queries
+    def intersects(l)
+      where("st_intersects(location, ?)", l)
+    end
   end
 
   # Define an approximate centre of the issue, for convenience.
