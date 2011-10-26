@@ -1,47 +1,14 @@
-%div#map-search
+#map-search
   %span= t ".move_the_map_to"
   %form#map-search-form{ action: "#", method: "get" }
     %input#map-search-query{ type: "text", name: "street", value: t(".example_search")}
     %input{ type: "submit", value: t(".submit") }
-  %span#map-search-results
-
-:javascript
-  var seqid = 0;
-  var zoom = 14;
-
-  $('#map-search-query').focus(function() { this.value = (this.value=='#{t(".example_search")}')? '' : this.value;});
-  $('#map-search-form').submit(function() { doSearch(); return false });
-
-  function doSearch() {
-    seqid++;
-    var thiscall = seqid;
-    params = $('#map-search-form').serialize();
-    var req = $.ajax({
-        url: '#{GEOCODER_URL}&' + params,
-        dataType: 'jsonp',
-        timeout: 10000
-    });
-    req.success(function(response){ parseresult(response, thiscall)});
-    req.error(function(response){ searchError()});
-    $('#map-search-results').text('#{t(".searching")}');
-  }
-
-  function parseresult(response,thiscall) {
-    if (thiscall == seqid) { // if not, then another search has been made since this one, so ignore
-      if ($.isEmptyObject(response.results)) { // nothing found
-        $('#map-search-results').text("#{t(".sorry_we_couldnt_find")} " + response.query);
-      } else {
-        if ($.isArray(response.results.result)) { // multiple responses
-          result = response.results.result[0];
-        } else {
-          result = response.results.result;
-        }
-        #{map_id}.setCenter(new OpenLayers.LonLat(result.longitude,result.latitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject()),zoom);
-        $('#map-search-results').text('#{t(".showing")} '+ result.name + ' #{t(".near")} '+result.near);
-      }
-    }
-  }
-
-  function searchError() {
-    $('#map-search-results').text('#{t(".search_failed")}');
-  }
+  #map-search-status
+    #map-search-failed.hide= t ".search_failed"
+    #map-searching.hide= t ".searching"
+    #map-search-noresult.hide= t ".sorry_we_couldnt_find"
+    #map-search-results.hide
+      = t(".showing")
+      %span.name
+      = t(".near")
+      %span.near

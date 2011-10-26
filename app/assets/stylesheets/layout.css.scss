@@ -1,6 +1,10 @@
 @import "grid";
 @import "utils";
 
+.hide {
+  display: none;
+}
+
 body > header > .inner, nav.bar, .flash-container, .content-container, body > footer {
   @include container;
 }
