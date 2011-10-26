@@ -3,13 +3,14 @@
     %li= link_to t(".back"), {action: :index}
 
 %section.thread
-  %h1= @thread.title
-  .info
-    .privacy
-      - if @thread.private_to_group?
-        = t ".private_to_group_message", group: @thread.group.name
-      - else
-        = t ".public_message"
+  %header
+    %h1= @thread.title
+    .info
+      .privacy
+        - if @thread.private_to_group?
+          = t ".private_to_group_message", group: @thread.group.name
+        - else
+          = t ".public_message"
 
   - @messages.each do |message|
     %article.message{id: dom_id(message)}
@@ -27,5 +28,5 @@
         = message.body
   = render "messages/new"
 
-  %aside.sidebar
-    = render "subscription_panel"
+%aside.sidebar
+  = render "subscription_panel"

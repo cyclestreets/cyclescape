@@ -97,11 +97,15 @@ body.home {
 // Threads
 
 section.thread {
-  @include column(9);
+  @include column(9, "first");
   .info {
     margin-top: 2px;
     margin-bottom: 10px;
   }
+}
+
+aside.sidebar {
+  @include column(3, "last");
 }
 
 article.message {
