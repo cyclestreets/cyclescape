@@ -4,7 +4,7 @@ describe "Link messages" do
   let(:thread) { FactoryGirl.create(:message_thread) }
 
   def link_form
-    within(".new-link-message") { yield }
+    within("#new-link-message") { yield }
   end
 
   context "new", as: :site_user do

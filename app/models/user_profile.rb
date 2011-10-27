@@ -8,7 +8,7 @@ class UserProfile < ActiveRecord::Base
   validates_property :mime_type, of: :picture, in: %w(image/jpeg image/png image/gif)
 
   def picture_thumbnail
-    picture.thumb("80x80>")
+    picture.thumb("50x50>")
   end
 
   protected

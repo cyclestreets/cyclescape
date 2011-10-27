@@ -3,29 +3,31 @@
     %li= link_to t(".back"), {action: :index}
 
 %section.thread
-  %h1= @thread.title
-  .info
-    .privacy
-      - if @thread.private_to_group?
-        = t ".private_to_group_message", group: @thread.group.name
-      - else
-        = t ".public_message"
+  %header
+    %h1= @thread.title
+    .info
+      .privacy
+        - if @thread.private_to_group?
+          = t ".private_to_group_message", group: @thread.group.name
+        - else
+          = t ".public_message"
+      - if @thread.issue
+        = render "issue_panel", :issue => @thread.issue
 
   - @messages.each do |message|
     %article.message{id: dom_id(message)}
       .details
         .author
-          = link_to message.created_by.name, user_profile_path(message.created_by)
           - if message.created_by.profile.picture
-            %br
-            = image_tag message.created_by.profile.picture_thumbnail.url
-        %time{datetime: message.created_at}
-          = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
+            = image_tag message.created_by.profile.picture_thumbnail.url, class: "thumbnail"
+          = link_to message.created_by.name, user_profile_path(message.created_by)
+          %time{datetime: message.created_at}
+            = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
       .body
         - if message.component
           = render "message/#{message_controller_map(message.component)}/show", message: message
         = message.body
   = render "messages/new"
 
-  %aside.sidebar
-    = render "subscription_panel"
+%aside.sidebar
+  = render "subscription_panel"

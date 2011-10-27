@@ -70,14 +70,14 @@ div.flash-container .flash {
 
 // Sign in
 
-body.devise_sessions div.content {
+body.devise-sessions div.content {
   @include column($half-span);
   @include push(4);
 }
 
 // Sign up
 
-body.devise_registrations div.content {
+body.devise-registrations div.content {
   @include column($half-span);
   @include push(4);
 }
@@ -97,21 +97,42 @@ body.home {
 // Threads
 
 section.thread {
-  @include column(9);
+  @include column(9, "first");
+  header {
+    @include column(9);
+  }
   .info {
     margin-top: 2px;
     margin-bottom: 10px;
   }
+  .issue {
+    .description {
+      @include column(4, "first");
+    }
+    .tinymap {
+      @include column(2);
+    }
+  }
+}
+
+aside.sidebar {
+  @include column(3, "last");
 }
 
 article.message {
   @include column(9);
   margin-bottom: 10px;
+  min-height: 60px;
   .details {
-    @include column(2, "first");
+    padding: 4px;
+    .thumbnail {
+      float: left;
+      margin-right: 10px;
+    }
   }
   .body {
-    @include column(7, "last");
+    padding: 4px;
+    margin-left: 60px
   }
 }
 

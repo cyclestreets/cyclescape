@@ -26,6 +26,7 @@ class MessageThreadsController < ApplicationController
     load_thread
     @messages = @thread.messages.all
     @new_message = @thread.messages.build
+    @subscribers = @thread.subscribers
   end
 
   def edit
