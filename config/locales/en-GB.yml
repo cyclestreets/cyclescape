@@ -81,6 +81,16 @@
       subscribed: "You are subscribed to this thread."
       subscribed_by_email: "You are subscribed by email to this thread."
       subscribers_list: "%{count_text} to this thread"
+  shared:
+    map_search:
+      example_search: "Putney, UK"
+      move_the_map_to: "Move the map to"
+      near: "near"
+      searching: "Searching..."
+      search_failed: "Sorry, the search failed this time."
+      showing: "Showing"
+      sorry_we_couldnt_find: "Sorry, we couldn't find"
+      submit: "Go!"
   user:
     locations:
       destroy:
