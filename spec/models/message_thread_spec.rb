@@ -50,4 +50,16 @@ describe MessageThread do
       subject.should be_public
     end
   end
+
+  describe "participants" do
+    it "should have zero participants" do
+      thread = FactoryGirl.create(:message_thread)
+      thread.participants.count.should == 0
+    end
+
+    it "should have one participant" do
+      thread = FactoryGirl.create(:message_thread_with_messages)
+      thread.participants.count.should == 1
+    end
+  end
 end
