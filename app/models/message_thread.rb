@@ -23,6 +23,9 @@ class MessageThread < ActiveRecord::Base
   has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id"
   has_many :subscribers, through: :subscriptions, source: :user
 
+  scope :public, where("privacy = 'public'")
+  scope :private, where("privacy = 'group'")
+
   validates :title, :state, :created_by_id, presence: true
   validates :privacy, inclusion: {in: ALLOWED_PRIVACY}
 
