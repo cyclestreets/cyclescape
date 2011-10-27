@@ -7,6 +7,7 @@
     %th= t ".created_at"
     %th= t ".updated_at"
     %th= t ".disabled_at"
+    %th= t ".edit"
   %tbody
     - @users.each do |user|
       %tr
@@ -16,3 +17,4 @@
         %td= user.created_at
         %td= user.updated_at
         %td= user.disabled_at
+        %td= link_to t(".edit"), edit_admin_user_path(user)

@@ -1,0 +1,7 @@
+= semantic_form_for @user,  url: [:admin, @user] do |f|
+  = f.inputs do
+    = f.input :email
+    = f.input :full_name
+    = f.input :display_name
+    = f.input :role
+  = f.buttons
