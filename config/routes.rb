@@ -13,6 +13,7 @@ Cyclekit::Application.routes.draw do
 
   namespace :admin do
     resources :groups, :issue_categories, :users
+    match "home" => "home#index"
   end
 
   resources :groups do
