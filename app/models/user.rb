@@ -75,6 +75,21 @@ class User < ActiveRecord::Base
     thread_subscriptions.where("thread_id = ?", thread).exists?
   end
 
+  def disabled
+    disabled_at?
+  end
+
+  def disabled=(d)
+    if d == "1" && !disabled_at?
+      disabled_at_will_change!
+      self.disabled_at = Time.now
+    end
+    if d == "0" && disabled_at?
+      disabled_at_will_change!
+      self.disabled_at = nil
+    end
+  end
+
   private
 
   def set_default_role

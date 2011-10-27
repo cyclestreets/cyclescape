@@ -1,10 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :no_disabled_users
   before_filter :set_auth_user
   before_filter :set_default_mailer_options
   filter_access_to :all
 
   protected
+
+  def no_disabled_users
+    if current_user.present? && current_user.disabled_at?
+      sign_out current_user
+      redirect_to root_path, :alert => t("application.account_disabled")
+    end
+  end
 
   def set_auth_user
     Authorization.current_user = current_user
