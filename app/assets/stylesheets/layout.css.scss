@@ -70,14 +70,14 @@ div.flash-container .flash {
 
 // Sign in
 
-body.devise_sessions div.content {
+body.devise-sessions div.content {
   @include column($half-span);
   @include push(4);
 }
 
 // Sign up
 
-body.devise_registrations div.content {
+body.devise-registrations div.content {
   @include column($half-span);
   @include push(4);
 }
