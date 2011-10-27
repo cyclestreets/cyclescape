@@ -31,6 +31,10 @@ describe User do
     it "must have a member role" do
       subject.role.should == "member"
     end
+
+    it "should be active" do
+      subject.disabled.should be_false
+    end
   end
 
   describe "to be valid" do
@@ -150,6 +154,23 @@ describe User do
         new_thread = FactoryGirl.create(:message_thread)
         subject.subscribed_to_thread?(new_thread).should be_false
       end
+    end
+  end
+
+  context "account disabling" do
+    subject { FactoryGirl.create(:user) }
+
+    it "should be disabled" do
+      subject.disabled = "1"
+      subject.disabled.should be_true
+      subject.disabled_at.should be_a_kind_of(Time)
+    end
+
+    it "should be enabled" do
+      subject.disabled = "1"
+      subject.disabled = "0"
+      subject.disabled.should be_false
+      subject.disabled_at.should be_nil
     end
   end
 end

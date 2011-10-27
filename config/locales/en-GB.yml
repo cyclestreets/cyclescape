@@ -12,6 +12,12 @@
     issue_categories:
       index:
         title: "Issue Categories"
+    users:
+      index:
+        created_at: "%{time_ago} ago"
+        disabled_at: "%{time_ago} ago"
+  application:
+    account_disabled: "Your account has been disabled by an administrator"
   devise:
     registrations:
       new:

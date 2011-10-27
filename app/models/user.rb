@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
     end
   end
   has_one :profile, class_name: "UserProfile"
+  accepts_nested_attributes_for :profile, update_only: true
 
   before_validation :set_default_role, :unless => :role
 
@@ -73,6 +74,21 @@ class User < ActiveRecord::Base
 
   def subscribed_to_thread?(thread)
     thread_subscriptions.where("thread_id = ?", thread).exists?
+  end
+
+  def disabled
+    disabled_at?
+  end
+
+  def disabled=(d)
+    if d == "1" && !disabled_at?
+      disabled_at_will_change!
+      self.disabled_at = Time.now
+    end
+    if d == "0" && disabled_at?
+      disabled_at_will_change!
+      self.disabled_at = nil
+    end
   end
 
   private
