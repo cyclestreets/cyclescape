@@ -1,0 +1,18 @@
+%h1= t ".users"
+%table
+  %thead
+    %th= t ".id"
+    %th= t ".display_name"
+    %th= t ".full_name"
+    %th= t ".created_at"
+    %th= t ".updated_at"
+    %th= t ".disabled_at"
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.display_name
+        %td= user.full_name
+        %td= user.created_at
+        %td= user.updated_at
+        %td= user.disabled_at
