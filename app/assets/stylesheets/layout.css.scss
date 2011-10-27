@@ -26,6 +26,14 @@ table {
   }
 }
 
+// Lists
+
+ul.horizontal, ol.horizontal {
+  li {
+    display: inline;
+  }
+}
+
 // Buttons and pseudo-buttons
 
 a.button, input[type="submit"] {
@@ -169,6 +177,24 @@ section.issues {
       float: left;
       width: 100%;
       padding: 4px;
+    }
+  }
+}
+
+body.issues article.issue {
+  @include column(9, "first");
+  section.details {
+    @include column(5, "first");
+  }
+  section.map {
+    @include column(4, "last");
+  }
+  section.threads {
+    @include column(9);
+    margin: 0;
+    article.thread {
+      @include column(3);
+      margin: 0;
     }
   }
 }

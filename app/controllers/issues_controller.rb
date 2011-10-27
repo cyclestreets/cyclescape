@@ -10,6 +10,7 @@ class IssuesController < ApplicationController
 
   def show
     @issue = Issue.find(params[:id])
+    @threads = @issue.threads
   end
 
   def new

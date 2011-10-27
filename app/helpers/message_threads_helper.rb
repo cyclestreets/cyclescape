@@ -19,4 +19,8 @@ module MessageThreadsHelper
     raise "Message controller not found for #{message.class.to_s.inspect}" if path.nil?
     path
   end
+
+  def message_truncate(message)
+    truncate message.body, length: 90, separator: "."
+  end
 end
