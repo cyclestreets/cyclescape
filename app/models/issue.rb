@@ -27,6 +27,10 @@ class Issue < ActiveRecord::Base
   validates :created_by, presence: true
   validates :category, presence: true
 
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
+
   protected
 
   # Association callback
