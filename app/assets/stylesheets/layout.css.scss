@@ -122,11 +122,17 @@ aside.sidebar {
 article.message {
   @include column(9);
   margin-bottom: 10px;
+  min-height: 60px;
   .details {
-    @include column(2, "first");
+    padding: 4px;
+    .thumbnail {
+      float: left;
+      margin-right: 10px;
+    }
   }
   .body {
-    @include column(7, "last");
+    padding: 4px;
+    margin-left: 60px
   }
 }
 

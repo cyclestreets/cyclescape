@@ -62,7 +62,7 @@
     show:
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
-      posted_date: "Posted %{time_ago} ago"
+      posted_date: "posted %{time_ago} ago"
     subscription_panel:
       subscribed: "You are subscribed to this thread."
       subscribed_by_email: "You are subscribed by email to this thread."
