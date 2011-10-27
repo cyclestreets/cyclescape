@@ -6,4 +6,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require openlayers_pz.js
+//= require openlayers_pz
