@@ -75,3 +75,29 @@ section.thread {
     }
   }
 }
+
+// Issues
+
+section.issues {
+  article.issue {
+    .wrapper {
+      @include border-radius(5px);
+      border: 1px solid gray;
+    }
+    header {
+      -webkit-border-top-left-radius: 5px;
+      -webkit-border-top-right-radius: 5px;
+      -moz-border-radius-topleft: 5px;
+      -moz-border-radius-topright: 5px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background: #cecece;
+      color: gray;
+      h3 a {
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+      }
+    }
+  }
+}
