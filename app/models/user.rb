@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
     end
   end
   has_one :profile, class_name: "UserProfile"
+  accepts_nested_attributes_for :profile, update_only: true
 
   before_validation :set_default_role, :unless => :role
 
