@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Cyclekit
+    %title= t ".title"
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -9,7 +9,7 @@
   %body{class: controller_path.tr("/_", "-")}
     %header.top
       .inner
-        %h1= link_to t(".title"), root_path
+        = link_to image_tag("header_logo.png", alt: t(".title")), root_path
     %nav.bar
       .inner
         - if current_user
