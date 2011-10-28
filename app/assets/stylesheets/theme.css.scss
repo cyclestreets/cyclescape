@@ -50,28 +50,26 @@ div.notice {
   color: white;
 }
 
-// Threads and messages
+// Message widget display
 
-section.thread {
-  article.message {
-    @include border-radius(5px);
-    border: 1px solid gray;
-    .details {
-      color: gray;
-      background: #d8d8d8;
-      -webkit-border-top-left-radius: 5px;
-      -webkit-border-top-right-radius: 5px;
-      -moz-border-radius-topleft: 5px;
-      -moz-border-radius-topright: 5px;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      .author a {
-        font-weight: bold;
-        color: black;
-      }
-      time {
-        font-size: 10px;
-      }
+article.message {
+  @include border-radius(5px);
+  border: 1px solid gray;
+  .details {
+    color: gray;
+    background: #d8d8d8;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    .author a {
+      font-weight: bold;
+      color: black;
+    }
+    time {
+      font-size: 10px;
     }
   }
 }
