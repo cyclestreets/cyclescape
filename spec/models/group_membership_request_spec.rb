@@ -56,4 +56,21 @@ describe GroupMembershipRequest do
       subject.status.should eql("rejected")
     end
   end
+
+  context "check group creation" do
+    subject { GroupMembershipRequest.new }
+    let(:user) { FactoryGirl.create(:stewie) }
+    let(:group) { FactoryGirl.create(:quahogcc) }
+    let(:boss) { FactoryGirl.create(:brian) }
+
+    it "should create group when confirmed" do
+      user.should have(0).groups
+      subject.user = user
+      subject.group = group
+      subject.actioned_by = boss
+      subject.confirm.should be_true
+      user.should have(1).groups
+      user.groups[0].should eql(group)
+    end
+  end
 end
