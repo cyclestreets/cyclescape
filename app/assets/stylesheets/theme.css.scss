@@ -53,6 +53,16 @@ div.notice {
   color: white;
 }
 
+// Compact thread display
+
+article.thread.compact {
+  @include border-radius(5px);
+  border: 1px solid gray;
+  &:hover {
+    background: #cecece;
+  }
+}
+
 // Message widget display
 
 article.message {
