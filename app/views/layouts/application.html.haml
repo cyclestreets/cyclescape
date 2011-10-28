@@ -22,7 +22,7 @@
               %li= link_to t(".threads"), threads_path
           .account-menu
             %ul
-              %li.name= link_to current_user.name, user_profile_path(current_user)
+              %li.name= link_to_profile current_user
               %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"
         - else
           .public-menu

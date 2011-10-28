@@ -3,7 +3,7 @@
     .author
       - if message.created_by.profile.picture
         = image_tag message.created_by.profile.picture_thumbnail.url, class: "thumbnail"
-      = link_to message.created_by.name, user_profile_path(message.created_by)
+      = link_to_profile message.created_by
       %time{datetime: message.created_at}
         = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
   .body
