@@ -9,6 +9,10 @@ class GroupMembershipRequest < ActiveRecord::Base
   validates :group, presence: true
 
   state_machine :status, :initial => :pending do
+    before_transition any => :confirmed do |request|
+      request.create_membership
+    end
+
     state :pending, :cancelled
 
     state :confirmed, :rejected do
@@ -30,5 +34,9 @@ class GroupMembershipRequest < ActiveRecord::Base
 
   def initalize
     super
+  end
+
+  def create_membership
+    group.memberships.new({user: user, role: "member"}).save
   end
 end
