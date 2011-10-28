@@ -1,5 +1,8 @@
 @import "utils";
 
+// Vars
+$details-text-color: gray;
+
 body > header {
   background: #bfbfbf;
   h1 a {
@@ -97,5 +100,12 @@ section.issues {
         color: black;
       }
     }
+  }
+}
+
+// Issue page
+article.issue {
+  section.details {
+    color: $details-text-color;
   }
 }

@@ -21,9 +21,7 @@
             %span.count= pluralize(thread.messages.count, "message") + ", "
             %span.participants= pluralize(thread.participants.count, "participant")
           %section.messages
-            - thread.messages.recent.each do |message|
-              %article.message
-                == "#{message_truncate message}"
+            = render collection: thread.messages.recent, partial: "messages/message"
 
     %ul.horizontal
       - if permitted_to? :create, :message_threads

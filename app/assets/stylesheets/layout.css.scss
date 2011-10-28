@@ -183,19 +183,23 @@ section.issues {
   }
 }
 
-body.issues article.issue {
-  @include column(9, "first");
-  section.details {
+// Issue page
+article.issue {
+  @include column($full-span);
+  .main {
     @include column(5, "first");
   }
-  section.map {
+  .additional {
     @include column(4, "last");
+    #map {
+      height: 200px;
+    }
   }
   section.threads {
     @include column(9);
     margin: 0;
     article.thread {
-      @include column(3);
+      @include column(5);
       margin: 0;
     }
   }
