@@ -15,6 +15,7 @@
 class Group < ActiveRecord::Base
   has_many :memberships, class_name: "GroupMembership"
   has_many :members, through: :memberships, source: :user
+  has_many :membership_requests, class_name: "GroupMembershipRequest"
   has_many :threads, class_name: "MessageThread"
   has_one :profile, class_name: "GroupProfile"
 
