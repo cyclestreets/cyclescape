@@ -10,12 +10,18 @@ class Group::MembershipRequestsController < ApplicationController
   end
 
   def create
-    @request = @group.membership_requests.build({user: current_user})
-
-    if @request.save
-      redirect_to @group, notice: t(".groups.membership_requested")
+    if current_user.groups.include?(@group)
+      redirect_to @group, alert: t(".group.membership_requests.create.already_member")
+    elsif current_user.membership_requests.where(group_id: @group.id)
+      redirect_to @group, alert: t(".group.membership_requests.create.already_asked")
     else
-      render :new
+      @request = @group.membership_requests.build({user: current_user})
+
+      if @request.save
+        redirect_to @group, notice: t(".group.membership_requests.create.requested")
+      else
+        render :new
+      end
     end
   end
 
