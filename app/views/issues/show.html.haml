@@ -1,13 +1,16 @@
 %article.issue
   %header
     %h2= @issue.title
-  %section.details
-    %ul
-      %li= t ".added_by", name: @issue.created_by.name, time: l(@issue.created_at.to_date)
-      %li= t ".category", category: @issue.category.name
-    %p= @issue.description
-  %section.map
-    = render partial: "map", locals: { issue: @issue }
+  .main
+    %section.details
+      %ul
+        %li= t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)
+        %li= t ".category_html", category: @issue.category.name
+    %section.description
+      = @issue.description
+  .additional
+    %section.map
+      = render partial: "map", locals: { issue: @issue }
   %section.threads
     - @threads.each do |thread|
       %article.thread

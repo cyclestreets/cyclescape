@@ -50,8 +50,8 @@
         title: "New Thread on %{issue}"
   issues:
     show:
-      added_by: "Added by %{name} on %{time}"
-      category: "Category: %{category}"
+      added_by_html: "Added by %{name} on %{time}"
+      category_html: "Category: %{category}"
       new_public_thread: "New Public Thread"
       new_group_thread: "New %{group} Thread"
       group_private: "Private to %{group}"
