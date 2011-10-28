@@ -49,6 +49,8 @@
       new:
         title: "New Thread on %{issue}"
   issues:
+    index:
+      title: "All Issues"
     show:
       added_by_html: "Added by %{name} on %{time}"
       category_html: "Category: %{category}"
