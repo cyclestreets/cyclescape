@@ -18,6 +18,8 @@ authorization do
       # Don't know why this always denies permission
       #if_attribute committee_members: contains { user }
     end
+    has_permission_on :group_membership_requests, to: [:new, :create, :cancel]
+    has_permission_on :group_memberhsip_requests, to: [:index, :confirm, :reject] # TODO only if committee
     has_permission_on :group_message_threads, :issue_message_threads, to: :manage
     has_permission_on :issues, to: [:new, :create]
     has_permission_on :message_threads, :messages, to: :manage

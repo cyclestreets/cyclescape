@@ -36,6 +36,10 @@
     memberships:
       new:
         title: "Invite New Member"
+    membership_requests:
+      new:
+        title: "Request membership of %{group_name}"
+        your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
     message_threads:
       index:
         title: "%{group}'s Threads"
