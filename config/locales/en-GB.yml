@@ -37,9 +37,21 @@
       new:
         title: "Invite New Member"
     membership_requests:
+      cancel:
+        success: "Membership request cancelled"
+      confirm:
+        failure: "There was a problem confirming this membership request"
+        success: "Membership confirmed"
+      index:
+        are_you_sure: "Are you sure?"
+        by: "by %{name}"
+        title: "Membership Requests for %{group}"
       new:
         title: "Request membership of %{group_name}"
         your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
+      reject:
+        failure: "There was a problem rejecting this membership request"
+        success: "Membership rejected"
     message_threads:
       index:
         title: "%{group}'s Threads"

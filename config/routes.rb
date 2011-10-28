@@ -20,7 +20,11 @@ Cyclekit::Application.routes.draw do
     scope module: "group" do
       resources :members
       resources :memberships
-      resources :membership_requests
+      resources :membership_requests do
+        post 'confirm', :on => :member
+        post 'reject', :on => :member
+        post 'cancel', :on => :member
+      end
       resources :threads, controller: "message_threads"
       resource :profile do
         get 'geometry', :on => :member
