@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Cyclekit
+    %title= t ".title"
     = stylesheet_link_tag    "application"
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
     = javascript_include_tag "application"
@@ -9,7 +9,7 @@
   %body{class: controller_path.tr("/_", "-")}
     %header.top
       .inner
-        %h1= link_to t(".title"), root_path
+        = link_to image_tag("header_logo.png", alt: t(".title")), root_path
     %nav.bar
       .inner
         - if current_user
@@ -22,7 +22,7 @@
               %li= link_to t(".threads"), threads_path
           .account-menu
             %ul
-              %li.name= link_to current_user.name, user_profile_path(current_user)
+              %li.name= link_to_profile current_user
               %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"
         - else
           .public-menu

@@ -18,6 +18,8 @@ class Message < ActiveRecord::Base
   belongs_to :created_by, class_name: "User"
   belongs_to :component, polymorphic: true, autosave: true
 
+  scope :recent, order("created_at DESC").limit(3)
+
   validates :created_by_id, presence: true
   validates :body, presence: true, unless: :component
 end

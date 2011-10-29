@@ -94,4 +94,14 @@ module ApplicationHelper
     return [] if user.nil?
     user.groups
   end
+
+  # Generate link to user or group profiles
+  def link_to_profile(item)
+    case item
+      when User
+        link_to item.name, user_profile_path(item)
+      when Group
+        link_to item.name, group_profile_path(item)
+    end
+  end
 end

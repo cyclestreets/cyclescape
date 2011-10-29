@@ -30,6 +30,14 @@ table {
   }
 }
 
+// Lists
+
+ul.horizontal, ol.horizontal {
+  li {
+    display: inline;
+  }
+}
+
 // Buttons and pseudo-buttons
 
 a.button, input[type="submit"] {
@@ -123,8 +131,21 @@ aside.sidebar {
   @include column(3, "last");
 }
 
+article.thread.compact {
+  margin-bottom: 8px;
+  .wrapper {
+    margin: 4px;
+  }
+  h3 {
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
 article.message {
-  @include column(9);
+  float: left;
+  width: 100%;
+  position: relative;
   margin-bottom: 10px;
   min-height: 60px;
   .details {
@@ -137,6 +158,65 @@ article.message {
   .body {
     padding: 4px;
     margin-left: 60px
+  }
+}
+
+// Issues
+
+section.issues {
+  .recent {
+    margin-top: 12px;
+  }
+  article.issue {
+    @include column(4);
+    .wrapper {
+      float: left;
+      width: 100%;
+    }
+    header {
+      padding: 4px;
+      margin-bottom: 4px;
+    }
+    h3 {
+      margin: 0;
+    }
+    .description {
+      float: left;
+      width: 200px;
+      margin: 4px;
+    }
+    .tinymap {
+      float: left;
+      width: 80px;
+      height: 80px;
+    }
+    .threads {
+      float: left;
+      width: 100%;
+      padding: 4px;
+    }
+  }
+}
+
+// Issue page
+article.issue {
+  @include column($full-span);
+  .main {
+    @include column(5, "first");
+  }
+  .additional {
+    @include column(4, "last");
+    #map {
+      height: 200px;
+    }
+  }
+  section.threads {
+    @include column(9);
+    margin: 0;
+    article.thread {
+      @include column(5);
+      margin: 0;
+    }
   }
 }
 

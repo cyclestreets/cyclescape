@@ -1,5 +1,8 @@
 @import "utils";
 
+// Vars
+$details-text-color: gray;
+
 body > header {
   background: #bfbfbf;
   h1 a {
@@ -50,28 +53,69 @@ div.notice {
   color: white;
 }
 
-// Threads and messages
+// Compact thread display
 
-section.thread {
-  article.message {
-    @include border-radius(5px);
-    border: 1px solid gray;
-    .details {
-      color: gray;
-      background: #d8d8d8;
+article.thread.compact {
+  @include border-radius(5px);
+  border: 1px solid gray;
+  &:hover {
+    background: #cecece;
+  }
+}
+
+// Message widget display
+
+article.message {
+  @include border-radius(5px);
+  border: 1px solid gray;
+  .details {
+    color: gray;
+    background: #d8d8d8;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    .author a {
+      font-weight: bold;
+      color: black;
+    }
+    time {
+      font-size: 10px;
+    }
+  }
+}
+
+// Issues
+
+section.issues {
+  article.issue {
+    .wrapper {
+      @include border-radius(5px);
+      border: 1px solid gray;
+    }
+    header {
       -webkit-border-top-left-radius: 5px;
       -webkit-border-top-right-radius: 5px;
       -moz-border-radius-topleft: 5px;
       -moz-border-radius-topright: 5px;
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
-      .author a {
+      background: #cecece;
+      color: gray;
+      h3 a {
+        font-size: 14px;
         font-weight: bold;
         color: black;
       }
-      time {
-        font-size: 10px;
-      }
     }
+  }
+}
+
+// Issue page
+article.issue {
+  section.details {
+    color: $details-text-color;
   }
 }

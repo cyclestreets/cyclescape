@@ -4,7 +4,7 @@
     .list
       %ul
         - @subscribers.each do |sub|
-          %li= link_to sub.name, user_profile_path(sub)
+          %li= link_to_profile sub
   .subscribe
     - if signed_in? && current_user.subscribed_to_thread?(@thread)
       - subscription = current_user.thread_subscriptions.to(@thread)

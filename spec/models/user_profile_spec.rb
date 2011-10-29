@@ -15,8 +15,8 @@ describe UserProfile do
 
     it "should provide a thumbnail of the picture" do
       subject.picture_thumbnail.should be_true
-      subject.picture_thumbnail.width.should == 80
-      subject.picture_thumbnail.height.should == 80
+      subject.picture_thumbnail.width.should == 50
+      subject.picture_thumbnail.height.should == 50
     end
 
     it "should not accept a text document for a picture" do
