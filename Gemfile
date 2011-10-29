@@ -12,7 +12,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
-gem 'rgeo-geojson', require: "rgeo/geo_json"
+gem 'rgeo-geojson', :require => "rgeo/geo_json"
 
 # Back-end gems
 gem 'devise'
@@ -20,7 +20,7 @@ gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
 gem 'state_machine'
-gem 'rack-cache', require: 'rack/cache'
+gem 'rack-cache', :require => 'rack/cache'
 gem 'dragonfly'
 
 # Gems used only for assets and not required
@@ -32,7 +32,7 @@ group :assets do
 end
 
 group :development do
-  gem 'annotate', git: 'git://github.com/ctran/annotate_models.git', require: false
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git', :require => false
 end
 
 group :development, :test do
