@@ -1,4 +1,4 @@
-Cyclekit::Application.routes.draw do
+Cyclescape::Application.routes.draw do
   devise_for :users
 
   resource :dashboard
