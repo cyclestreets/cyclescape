@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
 
   has_many :memberships, class_name: "GroupMembership"
   has_many :groups, through: :memberships
+  has_many :membership_requests, class_name: "GroupMembershipRequest"
+  has_many :actioned_membership_requests, foreign_key: "actioned_by_id", class_name: "GroupMembershipRequest"
   has_many :issues, foreign_key: "created_by_id"
   has_many :created_threads, class_name: "MessageThread", foreign_key: "created_by_id"
   has_many :messages, foreign_key: "created_by_id"
