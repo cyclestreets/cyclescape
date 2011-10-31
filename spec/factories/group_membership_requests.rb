@@ -4,5 +4,10 @@ FactoryGirl.define do
       group
       user
     end
+
+    factory :meg_joining_quahogcc do
+      association :user, factory: :meg
+      association :group, factory: :quahogcc
+    end
   end
 end
