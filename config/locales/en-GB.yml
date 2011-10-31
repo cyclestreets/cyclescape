@@ -85,7 +85,7 @@
       public: "Public"
   layouts:
     application:
-      title: "CycleKit"
+      title: "Cyclescape"
       dashboard: "My Dashboard"
       admin: "Admin"
   mailers:
