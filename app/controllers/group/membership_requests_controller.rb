@@ -29,6 +29,7 @@ class Group::MembershipRequestsController < ApplicationController
     @request = @group.membership_requests.find(params[:id])
     @request.actioned_by = current_user
     if @request.confirm
+      Notifications.group_membership_request_confirmed(@request).deliver
       set_flash_message(:success)
     else
       set_flash_message(:failure)

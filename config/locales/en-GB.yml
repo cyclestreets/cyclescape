@@ -88,6 +88,10 @@
       title: "CycleKit"
       dashboard: "My Dashboard"
       admin: "Admin"
+  mailers:
+    notifications:
+      gmr_confirmed:
+        subject: "You are now a member of %{group_name}"
   message_thread:
     subscriptions:
       create:
