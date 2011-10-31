@@ -27,8 +27,8 @@ end
 shared_context "signed in as a group member", as: :group_member do
   include_context "signs in"
 
-  let!(:membership) { FactoryGirl.create(:stewie_at_quahogcc) }
-  let!(:password) { FactoryGirl.attributes_for(:stewie)[:password] }
+  let!(:membership) { FactoryGirl.create(:chris_at_quahogcc) }
+  let!(:password) { FactoryGirl.attributes_for(:chris)[:password] }
   let(:current_group) { membership.group }
   let(:current_user) { membership.user }
 end
