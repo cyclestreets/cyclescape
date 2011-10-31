@@ -1,5 +1,7 @@
 class Group::MembershipRequestsController < ApplicationController
   before_filter :load_group
+  filter_access_to :cancel, attribute_check: true, model: GroupMembershipRequest
+  filter_access_to :all, attribute_check: true, model: Group
 
   def index
     @requests = @group.membership_requests.order("created_at desc")
