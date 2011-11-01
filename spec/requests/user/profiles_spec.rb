@@ -9,9 +9,27 @@ describe "User profiles" do
     page.should have_content(user.name)
   end
 
-  context "edit" do
-    it "should upload a picture"
-    it "should set the website address"
-    it "should set the biography"
+  context "edit", as: :site_user do
+    before do
+      visit edit_user_profile_path(current_user)
+    end
+
+    it "should upload a picture" do
+      attach_file "Picture", profile_photo_path
+      click_on "Save"
+      current_user.profile.picture.should be_true
+    end
+
+    it "should set the website address" do
+      fill_in "Website", with: "www.example.net"
+      click_on "Save"
+      current_user.profile.website.should == "http://www.example.net"
+    end
+
+    it "should set the biography" do
+      fill_in "About", with: lorem_ipsum
+      click_on "Save"
+      current_user.profile.about.should == lorem_ipsum
+    end
   end
 end

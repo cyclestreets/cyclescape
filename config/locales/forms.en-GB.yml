@@ -36,6 +36,8 @@
         create: "Post Message"
       message_thread:
         create: "Create Thread"
+      user_profile:
+        create: "Save"
       thread_subscription:
         create: "Subscribe"
         delete: "Unsubscribe"
