@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111028085444) do
+ActiveRecord::Schema.define(:version => 20111101154228) do
 
   create_table "group_membership_requests", :force => true do |t|
     t.integer  "user_id",        :null => false
@@ -112,6 +112,17 @@ ActiveRecord::Schema.define(:version => 20111028085444) do
     t.string   "caption"
     t.text     "description"
     t.datetime "created_at",    :null => false
+  end
+
+  create_table "site_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.text     "body",         :null => false
+    t.string   "context_url"
+    t.text     "context_data"
+    t.datetime "created_at",   :null => false
+    t.datetime "viewed_at"
   end
 
   create_table "thread_subscriptions", :force => true do |t|
