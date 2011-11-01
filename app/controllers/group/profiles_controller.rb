@@ -1,17 +1,19 @@
 class Group::ProfilesController < ApplicationController
+  before_filter :load_group
+  filter_access_to :edit, :update, attribute_check: true, model: Group
+  filter_access_to :all
+
   def show
-    @profile = Group.find(params[:group_id]).profile
+    @profile = @group.profile
   end
 
   def edit
-    @profile = Group.find(params[:group_id]).profile
+    @profile = @group.profile
     # This needs more thought!
     @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 10)
   end
 
   def update
-    @group = Group.find(params[:group_id])
-
     if @group.profile.update_attributes(params[:group_profile])
       flash.notice = t("group.profiles.update.profile_updated")
       redirect_to action: :show
@@ -21,9 +23,15 @@ class Group::ProfilesController < ApplicationController
   end
 
   def geometry
-    @profile = Group.find(params[:group_id]).profile
+    @profile = @group.profile
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(@profile.location) }
     end
+  end
+
+  protected
+
+  def load_group
+    @group = Group.find(params[:group_id])
   end
 end
