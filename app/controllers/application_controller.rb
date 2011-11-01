@@ -28,8 +28,7 @@ class ApplicationController < ActionController::Base
       flash.alert = t(".application.permission_denied_sign_in")
       redirect_to new_user_session_path
     else
-      flash.alert = t(".application.permission_denied")
-      render status: :unauthorized, text: "You are not authorised to access that page."
+      render status: :unauthorized, text: t(".application.permission_denied")
     end
   end
 
