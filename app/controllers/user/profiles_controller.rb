@@ -1,5 +1,7 @@
 class User::ProfilesController < ApplicationController
   before_filter :load_user, :load_profile
+  filter_access_to :edit, :create, :update, attribute_check: true, model: User
+  filter_access_to :all
 
   def show
   end
