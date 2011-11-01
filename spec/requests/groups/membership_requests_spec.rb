@@ -4,19 +4,17 @@ describe "Group Membership Requests" do
   let(:request) { FactoryGirl.create(:meg_joining_quahogcc) }
 
   # The first one fails, but the others pass. Hmmm.
-  (1..4).each do |i|
-    context "as a group member" do
-      include_context "signed in as a group member"
+  context "as a group member" do
+    include_context "signed in as a group member"
 
-       before do
-         visit group_membership_requests_path(request.group)
-       end
+      before do
+        visit group_membership_requests_path(request.group)
+      end
 
-      describe "viewing the requests" do
-        it "should refuse" do
-          visit group_membership_requests_path(request.group)
-          page.should have_content("You are not authorised to access that page.")
-        end
+    describe "viewing the requests" do
+      it "should refuse" do
+        visit group_membership_requests_path(request.group)
+        page.should have_content("You are not authorised to access that page.")
       end
     end
   end
