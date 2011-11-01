@@ -3,6 +3,8 @@
     %h1= t ".title"
   .tasks
     = link_to t(".new_issue"), new_issue_path, class: "button"
+  .search
+    = render "search"
   = render "all_map"
   .recent
     %h2= t ".recent_issues"

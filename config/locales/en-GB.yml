@@ -77,6 +77,12 @@
   issues:
     index:
       title: "All Issues"
+    search:
+      no_results_found: "No results found for '%{query}'."
+      results_found:
+        one: "One result found for '%{query}'."
+        other: "%{count} results found for '%{query}'"
+      title: "Issue Search Results"
     show:
       added_by_html: "Added by %{name} on %{time}"
       category_html: "Category: %{category}"
