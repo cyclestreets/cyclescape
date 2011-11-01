@@ -16,6 +16,8 @@
 class Issue < ActiveRecord::Base
   include Locatable
 
+  acts_as_indexed :fields => [:title, :description]
+
   belongs_to :created_by, class_name: "User"
   belongs_to :category, class_name: "IssueCategory"
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults
