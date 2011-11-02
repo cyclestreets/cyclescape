@@ -15,5 +15,5 @@ $ ->
         opacity: 0.9
 
   $("form[data-remote]")
-    .live "ajax:success", (data, status, xhr) ->
-      $(this).parents("wrapper:first").html(data)
+    .live "ajax:success", (e, data, status, xhr) ->
+      $(this).parents(".wrapper:first").html(data)
