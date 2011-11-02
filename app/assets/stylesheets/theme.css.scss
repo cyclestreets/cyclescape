@@ -59,6 +59,18 @@ div.notice {
   color: white;
 }
 
+// Tabs
+ul.tabs {
+  li {
+    a {
+      border: 1px solid #cecece;
+      &:hover, &.current {
+        background: #cecece;
+      }
+    }
+  }
+}
+
 // Compact thread display
 
 article.thread.compact {

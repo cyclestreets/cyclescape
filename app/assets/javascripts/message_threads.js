@@ -1,3 +1,3 @@
 $(function() {
-  $(".tabs").tabs();
+  $("ul.tabs").tabs("div.panes > div");
 });

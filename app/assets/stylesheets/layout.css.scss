@@ -81,10 +81,25 @@ nav.bar .inner {
 }
 
 // Flash
+
 div.flash-container .flash {
   padding: 6px;
   padding-left: 12px;
   margin: 2px;
+}
+
+// Tabs
+ul.tabs {
+  float: left;
+  width: 100%;
+  margin-bottom: 6px;
+  li {
+    a {
+      float: left;
+      display: block;
+      padding: 6px;
+    }
+  }
 }
 
 // Sign in
