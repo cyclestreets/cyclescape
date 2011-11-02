@@ -18,5 +18,12 @@ describe "Site feedback" do
       click_on "Send Feedback"
       page.should have_content("Thank you")
     end
+
+    it "should store the request URL with the comment" do
+      click_on "Feedback"
+      fill_in "Message", with: "This page broke!"
+      click_on "Send Feedback"
+      SiteComment.last.context_url.should == root_url
+    end
   end
 end
