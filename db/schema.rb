@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111028085444) do
+ActiveRecord::Schema.define(:version => 20111102110831) do
+
+  create_table "deadline_messages", :force => true do |t|
+    t.integer  "thread_id",         :null => false
+    t.integer  "message_id",        :null => false
+    t.integer  "created_by_id",     :null => false
+    t.datetime "deadline",          :null => false
+    t.string   "title",             :null => false
+    t.datetime "created_at"
+    t.datetime "invalidated_at"
+    t.integer  "invalidated_by_id"
+  end
 
   create_table "group_membership_requests", :force => true do |t|
     t.integer  "user_id",        :null => false
