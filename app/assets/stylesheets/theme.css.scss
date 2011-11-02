@@ -85,6 +85,16 @@ article.message {
       font-size: 10px;
     }
   }
+  .body {
+    .deadline {
+      h3 {
+        font-weight: bold;
+      }
+      .warning {
+        color: red;
+      }
+    }
+  }
 }
 
 // Issues

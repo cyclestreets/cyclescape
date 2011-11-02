@@ -114,6 +114,13 @@
       subscribed: "You are subscribed to this thread."
       subscribed_by_email: "You are subscribed by email to this thread."
       subscribers_list: "%{count_text} to this thread"
+  message:
+    deadlines:
+      show:
+        days_away:
+          zero: "Today!"
+          one: "Tomorrow!"
+          other: "%{count} days away!"
   messages:
     message:
       posted_date: "posted %{time_ago} ago"

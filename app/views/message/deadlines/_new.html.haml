@@ -1,7 +1,7 @@
 #new-deadline-message
   = semantic_form_for DeadlineMessage.new, url: thread_deadlines_path(@thread) do |f|
     = f.inputs do
-      = f.input :deadline
+      = f.input :deadline, as: :date
       = f.input :title
       = semantic_fields_for Message.new do |f2|
         = f2.input :body
