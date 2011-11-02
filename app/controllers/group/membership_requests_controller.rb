@@ -1,5 +1,7 @@
 class Group::MembershipRequestsController < ApplicationController
   before_filter :load_group
+  filter_access_to :cancel, attribute_check: true, model: GroupMembershipRequest
+  filter_access_to :all, attribute_check: true, model: Group
 
   def index
     @requests = @group.membership_requests.order("created_at desc")
@@ -12,7 +14,7 @@ class Group::MembershipRequestsController < ApplicationController
   def create
     if current_user.groups.include?(@group)
       redirect_to @group, alert: t(".group.membership_requests.create.already_member")
-    elsif current_user.membership_requests.where(group_id: @group.id)
+    elsif current_user.membership_requests.where(group_id: @group.id).count > 0
       redirect_to @group, alert: t(".group.membership_requests.create.already_asked")
     else
       @request = @group.membership_requests.build({user: current_user})

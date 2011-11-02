@@ -55,6 +55,22 @@ FactoryGirl.define do
       password_confirmation "BRI-D0G"
     end
 
+    factory :meg do
+      email "meg@example.com"
+      full_name "Meg Griffin"
+      display_name "Meg"
+      password "MegGriffin"
+      password_confirmation "MegGriffin"
+    end
+
+    factory :chris do
+      email "chris@example.com"
+      full_name "Chris Griffin"
+      display_name "Chris"
+      password "ChrisGriffin"
+      password_confirmation "ChrisGriffin"
+    end
+
     factory :stewie_with_profile, traits: [:with_profile]
   end
 end

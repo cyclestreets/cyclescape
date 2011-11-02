@@ -15,17 +15,33 @@ authorization do
     has_permission_on :dashboards, to: :show
     has_permission_on :group_members, :group_memberships do
       to :manage
-      # Don't know why this always denies permission
-      #if_attribute committee_members: contains { user }
+      if_attribute committee_members: contains { user }
     end
-    has_permission_on :group_membership_requests, to: [:new, :create, :cancel]
-    has_permission_on :group_membership_requests, to: [:index, :confirm, :reject] # TODO only if committee
+    has_permission_on :group_membership_requests do
+      to [:new, :create]
+    end
+    has_permission_on :group_membership_requests do
+      to :cancel
+      if_attribute user: is { user }
+    end
+    has_permission_on :group_membership_requests do
+      to [:index, :confirm, :reject]
+      if_attribute committee_members: contains { user }
+    end
     has_permission_on :group_message_threads, :issue_message_threads, to: :manage
+    has_permission_on :group_profiles do
+      to :manage
+      if_attribute committee_members: contains { user }
+    end
     has_permission_on :issues, to: [:new, :create]
     has_permission_on :message_threads, :messages, to: :manage
     has_permission_on :message_thread_subscriptions, to: [:create, :destroy]
     has_permission_on :message_photos, :message_links, to: :create
-    has_permission_on :user_profiles, to: :manage
+    has_permission_on :user_profiles do
+      to :manage
+      if_attribute id: is { user.id }
+    end
+    has_permission_on :user_profiles, to: :view
   end
 
   role :guest do

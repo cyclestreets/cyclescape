@@ -32,4 +32,18 @@ describe "User profiles" do
       current_user.profile.about.should == lorem_ipsum
     end
   end
+
+  context "permissions" do
+    include_context "signed in as a site user"
+
+    it "should let you edit your own profile" do
+      visit edit_user_profile_path(current_user)
+      page.should have_content("Edit Profile")
+    end
+
+    it "should prevent you editing someone elses" do
+      visit edit_user_profile_path(user)
+      page.should have_content("You are not authorised to access that page.")
+    end
+  end
 end
