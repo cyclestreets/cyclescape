@@ -6,7 +6,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-ui
 //= require maps
 //= require message_threads
 //= require openlayers_pz
