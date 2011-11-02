@@ -36,7 +36,7 @@ authorization do
     has_permission_on :issues, to: [:new, :create]
     has_permission_on :message_threads, :messages, to: :manage
     has_permission_on :message_thread_subscriptions, to: [:create, :destroy]
-    has_permission_on :message_photos, :message_links, to: :create
+    has_permission_on :message_photos, :message_links, :message_deadlines, to: :create
     has_permission_on :user_profiles do
       to :manage
       if_attribute id: is { user.id }

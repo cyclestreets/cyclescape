@@ -1,7 +1,8 @@
 module MessageThreadsHelper
   MESSAGE_CONTROLLER_MAP = {
     "PhotoMessage" => "photos",
-    "LinkMessage" => "links"
+    "LinkMessage" => "links",
+    "DeadlineMessage" => "deadlines"
   }
 
   def thread_type(thread)

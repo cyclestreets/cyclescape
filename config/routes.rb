@@ -37,6 +37,7 @@ Cyclescape::Application.routes.draw do
     scope module: :message do
       resources :photos, only: [:create]
       resources :links, only: [:create]
+      resources :deadlines, only: [:create]
     end
     scope module: :message_thread do
       resources :subscriptions, only: [:create, :destroy]
