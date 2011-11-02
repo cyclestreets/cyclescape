@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :no_disabled_users
   before_filter :set_auth_user
   before_filter :set_default_mailer_options
+  layout :set_xhr_layout
   filter_access_to :all
 
   protected
@@ -21,6 +22,10 @@ class ApplicationController < ActionController::Base
   def set_default_mailer_options
     ActionMailer::Base.default_url_options[:host] = request.host
     ActionMailer::Base.default_url_options[:port] = (request.port == 80) ? nil : request.port
+  end
+
+  def set_xhr_layout
+    if request.xhr? then nil else "application" end
   end
 
   def permission_denied
