@@ -55,7 +55,7 @@ describe "Group memberships admin" do
     include_context "signed in as a committee member"
 
     before do
-      visit new_group_membership_path(group)
+      visit new_group_membership_path(current_group)
     end
 
     context "new" do
