@@ -20,6 +20,8 @@
         url: "URL"
       message:
         body: "Message"
+      site_comment:
+        body: "Message"
       thread_subscription:
         send_email: "Send new messages to me by email"
     hints:
@@ -36,6 +38,8 @@
         create: "Post Message"
       message_thread:
         create: "Create Thread"
+      site_comment:
+        create: "Send Feedback"
       user_profile:
         create: "Save"
       thread_subscription:
