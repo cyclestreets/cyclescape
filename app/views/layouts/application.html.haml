@@ -4,6 +4,7 @@
     %title= t ".title"
     = stylesheet_link_tag    "application"
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
+    %script(src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js" type="text/javascript")
     = javascript_include_tag "application"
     = csrf_meta_tags
   %body{class: controller_path.tr("/_", "-")}
