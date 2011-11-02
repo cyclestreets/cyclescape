@@ -22,6 +22,12 @@ div.content h1 {
   border-bottom: 1px solid #bfbfbf;
 }
 
+#overlay {
+  background: white;
+  border: 1px solid #cecece;
+  @include border-radius(5px);
+}
+
 // Buttons and pseudo-buttons
 
 a.button {

@@ -21,6 +21,13 @@ div.content {
   }
 }
 
+#overlay {
+  display: none;
+  width: 400px;
+  padding: 10px;
+  z-index: 1000;
+}
+
 // Tables
 
 table {
