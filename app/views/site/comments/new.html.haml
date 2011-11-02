@@ -1,5 +1,6 @@
 .new-site-comment-form
-  = semantic_form_for @site_comment do |f|
+  %h1= t ".title"
+  = semantic_form_for @site_comment, remote: true do |f|
     = f.inputs do
       = f.input :body
       = f.input :name

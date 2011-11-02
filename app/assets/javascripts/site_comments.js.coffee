@@ -7,10 +7,13 @@ $ ->
           =>
             # Have to bind close link manually as it doesn't
             # seem to work with AJAX loading
-            console.log wrapper.find ".cancel a"
             wrapper.find(".cancel a").click =>
               this.close()
               false
       mask:
         color: "#ebecff"
         opacity: 0.9
+
+  $("form[data-remote]")
+    .live "ajax:success", (data, status, xhr) ->
+      $(this).parents("wrapper:first").html(data)

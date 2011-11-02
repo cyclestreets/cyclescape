@@ -5,6 +5,6 @@ class Site::CommentsController < ApplicationController
 
   def create
     @site_comment = SiteComment.create!(params[:site_comment])
-    render "thank_you"
+    render "success"
   end
 end
