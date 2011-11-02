@@ -36,6 +36,7 @@ authorization do
     has_permission_on :group_profiles, to: [:view, :geometry]
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries]
     has_permission_on :issue_message_threads, :message_threads, :messages, to: :view
+    has_permission_on :site_comments, to: [:new, :create]
     has_permission_on :user_profiles, to: :view
   end
 end

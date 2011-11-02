@@ -10,3 +10,4 @@
 //= require maps
 //= require message_threads
 //= require openlayers_pz
+//= require site_comments

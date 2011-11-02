@@ -90,6 +90,7 @@
       title: "Cyclescape"
       dashboard: "My Dashboard"
       admin: "Admin"
+      feedback: "Feedback"
   mailers:
     notifications:
       gmr_confirmed:
