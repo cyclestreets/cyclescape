@@ -22,6 +22,11 @@ var MapSearch = {
     var self = this;
     params = $("#map-search-form").serializeArray();
     params.push({name: "key", value: this.geocoder_key});
+    extents = this.map.getExtent().clone().transform(map.getProjectionObject(), this.projection());
+    params.push({name: "n", value: extents.top},
+                {name: "s", value: extents.bottom},
+                {name: "e", value: extents.right},
+                {name: "w", value: extents.left});
     $.ajax({
         url: this.geocoder_url,
         data: params,
@@ -80,6 +85,7 @@ $(function() {
   });
     
   $('#map-search-form').submit(function() {
+    MapSearch.set_map(map);
     MapSearch.search();
     return false;
   });
