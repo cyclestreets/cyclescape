@@ -62,7 +62,16 @@ var MapSearch = {
     // Display search results
     var list = $("<ol />");
     $(results).each(function(i, item) {
-      list.append($("<li />").text(item.near));
+      list.append(
+        $("<li />").
+        text(item.name + ' (' + item.near + ')').
+        click( function() {
+            $('#map').trigger("recenter", {longitude: item.longitude, latitude: item.latitude});
+            $("#map-search-main-result").
+              find(".name").text(item.name).end().
+              find(".near").text(item.near)
+        })
+      );
     });
     $('#map-search-results').replaceWith(list).show();
   },
