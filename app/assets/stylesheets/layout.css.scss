@@ -28,6 +28,10 @@ div.content {
   z-index: 1000;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 // Tables
 
 table {
@@ -103,6 +107,11 @@ ul.tabs {
   }
 }
 
+div.panes > div {
+  float: left;
+  width: 100%;
+}
+
 // Footer
 
 footer > .wrapper {
@@ -133,6 +142,15 @@ body.home {
 
   .groups-area {
     @include column($half-span, "last");
+  }
+}
+
+// User dashboard
+body.dashboards {
+  section {
+    &.issues, &.threads, &.other {
+      @include column(4);
+    }
   }
 }
 

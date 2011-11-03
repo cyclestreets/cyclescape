@@ -1,7 +1,7 @@
-%article.thread.compact
+%article.thread.compact.clickable
   .wrapper
     %header
-      %h3= link_to_if (permitted_to? :view, thread), thread.title, thread_path(thread)
+      %h3= link_to_if (permitted_to? :view, thread), thread.title, thread_path(thread), class: "primary-link"
       %span.privacy= thread_type(thread) + ", "
       %span.count= pluralize(thread.messages.count, "message") + ", "
       %span.participants= pluralize(thread.participants.count, "participant")

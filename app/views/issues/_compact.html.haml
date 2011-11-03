@@ -1,0 +1,20 @@
+- collapsed = false unless defined?(collapsed)
+%article.issue.collapsible
+  .wrapper
+    %header
+      %h3= link_to "#{issue.title} (#{issue.category.name})", issue
+      %span.author
+        = t ".created_by"
+        = link_to_profile issue.created_by
+      %time{datetime: issue.created_at}
+        = time_ago_in_words(issue.created_at) + " ago"
+    %div{class: ("collapse" if collapsed)}
+      .description
+        = truncate issue.description, length: 90, separator: "."
+      .map
+        - m = tiny_display_map(issue, geometry_issue_path(issue, :json)) do |map, page, html_id|
+          %div{id: html_id, class: "tinymap"}
+        != m.to_html
+      .threads
+        = pluralize(issue.threads.public.count, "public thread") + ", "
+        = pluralize(issue.threads.private.count, "private thread")
