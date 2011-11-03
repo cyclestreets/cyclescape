@@ -93,6 +93,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  # Returns issues that are within a small distance of their user_locations
+  def issues_near_locations
+    Issue.intersects(locations.map{ |l| l.location.buffer(0.00025) }.inject{ |geo, item| geo.union(item) })
+  end
+
   private
 
   def set_default_role
