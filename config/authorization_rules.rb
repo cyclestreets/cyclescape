@@ -37,6 +37,7 @@ authorization do
     has_permission_on :message_threads, :messages, to: :manage
     has_permission_on :message_thread_subscriptions, to: [:create, :destroy]
     has_permission_on :message_photos, :message_links, to: :create
+    has_permission_on :user_locations, to: [:manage, :geometry]
     has_permission_on :user_profiles do
       to :manage
       if_attribute id: is { user.id }
