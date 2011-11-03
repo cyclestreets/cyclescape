@@ -39,7 +39,8 @@
     .content-container
       .content
         = yield
+        #overlay
+          .wrapper
     %footer
-      = link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
-    #overlay
       .wrapper
+        = link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"

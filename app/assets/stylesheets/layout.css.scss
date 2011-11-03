@@ -89,6 +89,7 @@ div.flash-container .flash {
 }
 
 // Tabs
+
 ul.tabs {
   float: left;
   width: 100%;
@@ -100,6 +101,13 @@ ul.tabs {
       padding: 6px;
     }
   }
+}
+
+// Footer
+
+footer > .wrapper {
+  @include column($full-span);
+  margin-top: 200px;
 }
 
 // Sign in

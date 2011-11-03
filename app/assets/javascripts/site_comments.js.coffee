@@ -14,6 +14,6 @@ $ ->
         color: "#ebecff"
         opacity: 0.9
 
-  $("form[data-remote]")
+  $("#overlay form[data-remote]")
     .live "ajax:success", (e, data, status, xhr) ->
       $(this).parents(".wrapper:first").html(data)
