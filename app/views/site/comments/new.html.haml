@@ -1,0 +1,12 @@
+.new-site-comment-form
+  %h1= t ".title"
+  = semantic_form_for @site_comment, remote: true do |f|
+    = f.inputs do
+      = f.input :body
+      = f.input :name
+      = f.input :email
+      = f.input :context_url, as: :hidden, value: request.referer
+    = f.buttons do
+      = f.commit_button
+      %li
+        = cancel_link root_path

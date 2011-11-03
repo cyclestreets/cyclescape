@@ -5,6 +5,7 @@
     = stylesheet_link_tag    "application"
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
     = javascript_include_tag "application"
+    %script(src="http://cdn.jquerytools.org/1.2.6/all/jquery.tools.min.js" type="text/javascript")
     = csrf_meta_tags
   %body{class: controller_path.tr("/_", "-")}
     %header.top
@@ -38,4 +39,8 @@
     .content-container
       .content
         = yield
+        #overlay
+          .wrapper
     %footer
+      .wrapper
+        = link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"

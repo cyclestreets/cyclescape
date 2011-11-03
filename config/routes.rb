@@ -55,6 +55,10 @@ Cyclescape::Application.routes.draw do
     end
   end
 
+  namespace :site do
+    resources :comments
+  end
+
   root :to => "home#show"
 
   # The priority is based upon order of creation:

@@ -22,6 +22,12 @@ div.content h1 {
   border-bottom: 1px solid #bfbfbf;
 }
 
+#overlay {
+  background: white;
+  border: 1px solid #cecece;
+  @include border-radius(5px);
+}
+
 // Buttons and pseudo-buttons
 
 a.button {
@@ -51,6 +57,18 @@ div.alert {
 div.notice {
   background-color: #16c400;
   color: white;
+}
+
+// Tabs
+ul.tabs {
+  li {
+    a {
+      border: 1px solid #cecece;
+      &:hover, &.current {
+        background: #cecece;
+      }
+    }
+  }
 }
 
 // Compact thread display

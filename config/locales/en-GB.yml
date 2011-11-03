@@ -92,6 +92,7 @@
       title: "Cyclescape"
       dashboard: "My Dashboard"
       admin: "Admin"
+      feedback: "Feedback"
   mailers:
     notifications:
       gmr_confirmed:
@@ -127,6 +128,10 @@
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
       submit: "Go!"
+  site:
+    comments:
+      new:
+        title: "Feedback"
   user:
     locations:
       destroy:
