@@ -1,6 +1,6 @@
 %section.new-thread
   %h1= t ".title"
-  = semantic_form_for @thread, as: :thread, url: {action: :create} do |f|
+  = semantic_form_for @thread, as: :thread, url: {action: :create}, remote: true do |f|
     = f.semantic_errors
     = f.inputs do
       = f.input :title
