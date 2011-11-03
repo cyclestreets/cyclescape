@@ -6,8 +6,10 @@ module Locatable
 
   module ClassMethods
     # define an intersects method for arel queries
+    # Note - pass in the location as an array, otherwise .each is called on
+    # multipolygons and it serializes to multiple geometries.
     def intersects(l)
-      where("st_intersects(location, ?)", l)
+      where("st_intersects(location, ?)", [l])
     end
 
     # This could be improved by actually using the factory from the location column, rather
