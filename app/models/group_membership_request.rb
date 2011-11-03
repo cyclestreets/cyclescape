@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: group_membership_requests
+#
+#  id             :integer         not null, primary key
+#  user_id        :integer         not null
+#  group_id       :integer         not null
+#  status         :string(255)     not null
+#  actioned_by_id :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class GroupMembershipRequest < ActiveRecord::Base
   attr_protected :state_event
 
