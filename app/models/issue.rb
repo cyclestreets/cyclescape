@@ -15,6 +15,7 @@
 
 class Issue < ActiveRecord::Base
   include Locatable
+  include FakeDestroy
 
   belongs_to :created_by, class_name: "User"
   belongs_to :category, class_name: "IssueCategory"

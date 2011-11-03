@@ -20,7 +20,7 @@ class MessageThread < ActiveRecord::Base
   belongs_to :group
   belongs_to :issue
   has_many :messages, foreign_key: "thread_id", autosave: true
-  has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id"
+  has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id", conditions: "deleted_at IS NULL"
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, through: :messages, source: :created_by, uniq: true
 

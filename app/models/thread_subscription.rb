@@ -11,6 +11,8 @@
 #
 
 class ThreadSubscription < ActiveRecord::Base
+  include FakeDestroy
+
   belongs_to :user
   belongs_to :thread, class_name: "MessageThread"
 end
