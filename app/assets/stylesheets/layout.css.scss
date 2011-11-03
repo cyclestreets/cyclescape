@@ -103,6 +103,11 @@ ul.tabs {
   }
 }
 
+div.panes > div {
+  float: left;
+  width: 100%;
+}
+
 // Footer
 
 footer > .wrapper {
