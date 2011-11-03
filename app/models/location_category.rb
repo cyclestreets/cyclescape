@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: location_categories
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)     not null
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#
+
 class LocationCategory < ActiveRecord::Base
   has_many :user_locations, foreign_key: "category_id"
 
