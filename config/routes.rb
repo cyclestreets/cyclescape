@@ -52,6 +52,7 @@ Cyclescape::Application.routes.draw do
   namespace :user do
     resources :locations do
       get 'geometry', :on => :member
+      get 'combined_geometry', :on => :collection
     end
   end
 
