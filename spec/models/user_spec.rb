@@ -183,19 +183,19 @@ describe User do
     it "should return polygon for point" do
       subject.locations[0].location = point
       subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
-      subject.buffered_locations.should eql(subject.locations[0].location.buffer(0.001))
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return polygon for line" do
       subject.locations[0].location = line
       subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
-      subject.buffered_locations.should eql(subject.locations[0].location.buffer(0.001))
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return polygon for polygon" do
       subject.locations[0].location = polygon
       subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
-      subject.buffered_locations.should eql(subject.locations[0].location.buffer(0.001))
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return multipolygon for point, line and polygon combined" do
@@ -211,8 +211,9 @@ describe User do
     let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
 
     it "should return correct issues" do
+      a = 1 + Geo::USER_LOCATIONS_BUFFER / 2
       issue_in = FactoryGirl.create(:issue, location: 'POINT(0.5 0.5)')
-      issue_close = FactoryGirl.create(:issue, location: 'POINT(1.0005 1.0005)')
+      issue_close = FactoryGirl.create(:issue, location: "POINT(#{a} #{a})")
       issue_out = FactoryGirl.create(:issue, location: 'POINT(1.5 1.5)')
       subject.locations[0].location = polygon
       issues = subject.issues_near_locations
