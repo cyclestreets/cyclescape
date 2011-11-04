@@ -52,7 +52,7 @@ class User::LocationsController < ApplicationController
   end
 
   def combined_geometry
-    multi = current_user.buffered_user_locations
+    multi = current_user.buffered_locations
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(multi) }
     end
