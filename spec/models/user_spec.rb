@@ -172,5 +172,11 @@ describe User do
       subject.disabled.should be_false
       subject.disabled_at.should be_nil
     end
+
+    it "should work with mass-update" do
+      subject.update_attributes(disabled: "1")
+      subject.reload
+      subject.disabled.should be_true
+    end
   end
 end

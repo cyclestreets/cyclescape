@@ -84,11 +84,9 @@ class User < ActiveRecord::Base
 
   def disabled=(d)
     if d == "1" && !disabled_at?
-      disabled_at_will_change!
       self.disabled_at = Time.now
     end
     if d == "0" && disabled_at?
-      disabled_at_will_change!
       self.disabled_at = nil
     end
   end
