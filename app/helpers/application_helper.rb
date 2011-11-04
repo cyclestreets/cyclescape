@@ -7,7 +7,7 @@ module ApplicationHelper
 
   def basic_map(&block)
     @map = core_map("map") do |map, page|
-      page << map.add_layer(OpenLayers::Layer::OSM.new("OpenCycleMap", ["a", "b", "c"].map {|k| "http://#{k}.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"}))
+      page << map.add_layer(MapLayers::OPENCYCLEMAP)
       page << map.add_layer(MapLayers::OSM_MAPNIK)
 
       page << map.add_controls([OpenLayers::Control::PZ.new,
@@ -28,7 +28,7 @@ module ApplicationHelper
     zoom = 16
     html_id = "tinymap_#{object.id}"
     @map = core_map(html_id) do |map, page|
-      page << map.add_layer(OpenLayers::Layer::OSM.new("OpenCycleMap", ["a", "b", "c"].map {|k| "http://#{k}.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"}))
+      page << map.add_layer(MapLayers::OPENCYCLEMAP)
 
       format = MapLayers::JsVar.new("format")
       page.assign(format, OpenLayers::Format::GeoJSON.new(internalProjection: googleproj, externalProjection: projection))
