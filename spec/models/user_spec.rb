@@ -155,6 +155,29 @@ describe User do
         subject.subscribed_to_thread?(new_thread).should be_false
       end
     end
+
+    context "subscribed threads" do
+      it "should have one thread" do
+        subject.should have(1).subscribed_thread
+        subject.subscribed_threads.first.should == thread
+      end
+    end
+  end
+
+  context "involved threads" do
+    subject { FactoryGirl.create(:user) }
+    let(:thread) { FactoryGirl.create(:message_thread) }
+    let(:message) { FactoryGirl.create(:message, created_by: subject, thread: thread) }
+
+    it "should be empty" do
+      subject.involved_threads.should be_empty
+    end
+
+    it "should have a thread" do
+      message
+      subject.should have(1).involved_thread
+      subject.involved_threads.first.should == message.thread
+    end
   end
 
   context "account disabling" do

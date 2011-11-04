@@ -79,6 +79,10 @@ class User < ActiveRecord::Base
     thread_subscriptions.where("thread_id = ?", thread).exists?
   end
 
+  def involved_threads
+    MessageThread.with_messages_from(self)
+  end
+
   def disabled
     disabled_at?
   end
