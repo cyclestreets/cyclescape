@@ -14,11 +14,7 @@ module ApplicationHelper
                                 OpenLayers::Control::Navigation.new,
                                 OpenLayers::Control::LayerSwitcher.new])
 
-      format = MapLayers::JsVar.new("format")
-      page.assign(format, OpenLayers::Format::GeoJSON.new(internalProjection: googleproj, externalProjection: projection))
-
-      format_plain = MapLayers::JsVar.new("format_plain")
-      page.assign(format_plain, OpenLayers::Format::GeoJSON.new)
+      add_formats(page)
 
       yield(map, page) if block_given?
     end
@@ -30,11 +26,7 @@ module ApplicationHelper
     @map = core_map(html_id) do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
 
-      format = MapLayers::JsVar.new("format")
-      page.assign(format, OpenLayers::Format::GeoJSON.new(internalProjection: googleproj, externalProjection: projection))
-
-      format_plain = MapLayers::JsVar.new("format_plain")
-      page.assign(format_plain, OpenLayers::Format::GeoJSON.new)
+      add_formats(page)
 
       if object.location.geometry_type == RGeo::Feature::Point
         page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),zoom);
@@ -110,5 +102,13 @@ module ApplicationHelper
                                        }) do |map, page|
       yield(map, page) if block_given?
     end
+  end
+
+  def add_formats(page)
+    format = MapLayers::JsVar.new("format")
+    page.assign(format, OpenLayers::Format::GeoJSON.new(internalProjection: googleproj, externalProjection: projection))
+
+    format_plain = MapLayers::JsVar.new("format_plain")
+    page.assign(format_plain, OpenLayers::Format::GeoJSON.new)
   end
 end
