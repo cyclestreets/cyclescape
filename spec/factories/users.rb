@@ -38,6 +38,10 @@ FactoryGirl.define do
       after_build {|u| FactoryGirl.build(:user_profile, user: u) }
     end
 
+    trait :with_location do
+      after_build {|u| FactoryGirl.create(:user_location, user: u) }
+    end
+
     factory :stewie do
       email "stewie@example.com"
       full_name "Stewie Griffin"
@@ -72,5 +76,6 @@ FactoryGirl.define do
     end
 
     factory :stewie_with_profile, traits: [:with_profile]
+    factory :user_with_location, traits: [:with_location]
   end
 end

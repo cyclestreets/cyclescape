@@ -173,4 +173,36 @@ describe User do
       subject.disabled_at.should be_nil
     end
   end
+
+  context "buffered locations" do
+    subject { FactoryGirl.create(:user_with_location) }
+    let(:point) { 'POINT(-1 1)' }
+    let(:line) { 'LINESTRING (0 0, 0 1)' }
+    let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
+
+    it "should return polygon for point" do
+      subject.locations[0].location = point
+      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(0.001))
+    end
+
+    it "should return polygon for line" do
+      subject.locations[0].location = line
+      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(0.001))
+    end
+
+    it "should return polygon for polygon" do
+      subject.locations[0].location = polygon
+      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(0.001))
+    end
+
+    it "should return multipolygon for point, line and polygon combined" do
+      subject.locations[0].location = point
+      subject.locations.create({location: line})
+      subject.locations.create({location: polygon})
+      subject.buffered_locations.should be_an(RGeo::Geos::MultiPolygonImpl)
+    end
+  end
 end
