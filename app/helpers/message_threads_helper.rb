@@ -24,4 +24,9 @@ module MessageThreadsHelper
   def message_truncate(message)
     truncate message.body, length: 90, separator: "."
   end
+
+  def threads_list(threads, options = {})
+    defaults = {partial: "message_threads/compact", collection: threads, as: :thread}
+    render defaults.merge(options)
+  end
 end

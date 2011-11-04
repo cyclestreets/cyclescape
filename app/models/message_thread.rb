@@ -33,6 +33,10 @@ class MessageThread < ActiveRecord::Base
   state_machine :state, initial: :new do
   end
 
+  def self.with_messages_from(user)
+    where "EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)", user
+  end
+
   def private_to_group?
     group_id && privacy == "group"
   end

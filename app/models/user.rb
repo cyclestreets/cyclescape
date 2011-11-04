@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
       where("thread_id = ?", thread).first
     end
   end
+  has_many :subscribed_threads, through: :thread_subscriptions, source: :thread
   has_one :profile, class_name: "UserProfile"
   accepts_nested_attributes_for :profile, update_only: true
 
@@ -78,17 +79,19 @@ class User < ActiveRecord::Base
     thread_subscriptions.where("thread_id = ?", thread).exists?
   end
 
+  def involved_threads
+    MessageThread.with_messages_from(self)
+  end
+
   def disabled
     disabled_at?
   end
 
   def disabled=(d)
     if d == "1" && !disabled_at?
-      disabled_at_will_change!
       self.disabled_at = Time.now
     end
     if d == "0" && disabled_at?
-      disabled_at_will_change!
       self.disabled_at = nil
     end
   end
