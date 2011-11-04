@@ -61,4 +61,25 @@ describe MessageThread do
       thread.participants.count.should == 1
     end
   end
+
+  describe "with messages from" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:thread) { FactoryGirl.create(:message_thread) }
+    let(:message) { FactoryGirl.create(:message, thread: thread, created_by: user) }
+
+    it "should be empty" do
+      subject.with_messages_from(user).should be_empty
+    end
+
+    it "should find one thread" do
+      message
+      subject.with_messages_from(user).should have(1)
+    end
+
+    it "should only find one thread with multiple messages from same user" do
+      message
+      message2 = FactoryGirl.create(:message, thread: thread, created_by: user)
+      subject.with_messages_for(user).should have(1)
+    end
+  end
 end

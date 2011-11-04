@@ -26,7 +26,7 @@ class MessageThread < ActiveRecord::Base
 
   scope :public, where("privacy = 'public'")
   scope :private, where("privacy = 'group'")
-  scope :with_messages_from, ->(user) { {joins: :messages, conditions: ["messages.created_by_id = ?", user] } }
+  scope :with_messages_from, ->(user) { {joins: :messages, conditions: ["messages.created_by_id = ?", user], select: "DISTINCT(message_threads.*)" } }
 
   validates :title, :state, :created_by_id, presence: true
   validates :privacy, inclusion: {in: ALLOWED_PRIVACY}
