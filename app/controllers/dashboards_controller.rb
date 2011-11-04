@@ -4,5 +4,6 @@ class DashboardsController < ApplicationController
     @groups = @user.groups
     @relevant_issues = current_user.issues_near_locations
     @subscribed_threads = current_user.subscribed_threads.limit(4)
+    @involved_threads = current_user.involved_threads.limit(4)
   end
 end

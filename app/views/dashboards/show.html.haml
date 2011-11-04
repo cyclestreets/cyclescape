@@ -13,5 +13,9 @@
   = issues_list @relevant_issues, collapsed: true
 
 %section.other
-  %h2= t ".subscribed_threads"
-  = threads_list @subscribed_threads
+  .subscribed-threads
+    %h2= t ".subscribed_threads"
+    = threads_list @subscribed_threads
+  .involved-threads
+    %h2= t ".involved_threads"
+    = threads_list @involved_threads
