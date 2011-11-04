@@ -29,3 +29,11 @@
   padding: 0;
   margin: 0;
 }
+
+#map-search-results {
+  li {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

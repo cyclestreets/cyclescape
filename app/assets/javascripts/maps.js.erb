@@ -22,6 +22,11 @@ var MapSearch = {
     var self = this;
     params = $("#map-search-form").serializeArray();
     params.push({name: "key", value: this.geocoder_key});
+    extents = this.map.getExtent().clone().transform(map.getProjectionObject(), this.projection());
+    params.push({name: "n", value: extents.top},
+                {name: "s", value: extents.bottom},
+                {name: "e", value: extents.right},
+                {name: "w", value: extents.left});
     $.ajax({
         url: this.geocoder_url,
         data: params,
@@ -55,9 +60,18 @@ var MapSearch = {
       show();
 
     // Display search results
-    var list = $("<ol />");
+    var list = $('<ol id="map-search-results"/>');
     $(results).each(function(i, item) {
-      list.append($("<li />").text(item.near));
+      list.append(
+        $('<li />').
+        text(item.name + ' (' + item.near + ')').
+        click( function() {
+            $('#map').trigger("recenter", {longitude: item.longitude, latitude: item.latitude});
+            $("#map-search-main-result").
+              find(".name").text(item.name).end().
+              find(".near").text(item.near)
+        })
+      );
     });
     $('#map-search-results').replaceWith(list).show();
   },
@@ -80,6 +94,7 @@ $(function() {
   });
     
   $('#map-search-form').submit(function() {
+    MapSearch.set_map(map);
     MapSearch.search();
     return false;
   });
