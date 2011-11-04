@@ -102,4 +102,21 @@ describe Issue do
       end
     end
   end
+
+  describe "intersects" do
+    context "should accept a variety of geometry types" do
+      subject { FactoryGirl.create(:issue) }
+      let(:factory) { RGeo::Geos::Factory.new(srid: 4326) }
+
+      it "should accept a point" do
+        geom = factory.parse_wkt('POINT(-1 1)')
+        lambda { Issue.intersects(geom).all }.should_not raise_error
+      end
+
+      it "should accept a multipolygon" do
+        geom2 = factory.parse_wkt('MULTIPOLYGON (((0.0 0.0, 0.0 1.0, 1.0 1.0, 0.0 0.0)), ((0.0 4.0, 0.0 5.0, 1.0 5.0, 0.0 4.0)))')
+        lambda { Issue.intersects(geom2).all }.should_not raise_error
+      end
+    end
+  end
 end

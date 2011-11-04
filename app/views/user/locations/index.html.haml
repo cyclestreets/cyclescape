@@ -2,6 +2,9 @@
 = link_to t(".new"), action: :new
 
 - if current_user.locations.count > 0
+  - m = display_bbox_map(current_user.buffered_locations, combined_geometry_user_locations_path(:json))
+  %div{id: 'map'}
+  != m.to_html
   %table
     %thead
       %th= t ".category"
