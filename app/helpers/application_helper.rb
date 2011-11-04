@@ -6,15 +6,13 @@ module ApplicationHelper
   end
 
   def basic_map(&block)
-    @map = MapLayers::Map.new("map", {theme: "/openlayers/theme/default/style.css",
-                                      projection: googleproj,
-                                      displayProjection: projection,
-                                      controls: [OpenLayers::Control::PZ.new,
-                                                 OpenLayers::Control::Navigation.new,
-                                                 OpenLayers::Control::LayerSwitcher.new]
-                                     }) do |map, page|
+    @map = core_map("map") do |map, page|
       page << map.add_layer(OpenLayers::Layer::OSM.new("OpenCycleMap", ["a", "b", "c"].map {|k| "http://#{k}.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"}))
       page << map.add_layer(MapLayers::OSM_MAPNIK)
+
+      page << map.add_controls([OpenLayers::Control::PZ.new,
+                                OpenLayers::Control::Navigation.new,
+                                OpenLayers::Control::LayerSwitcher.new])
 
       format = MapLayers::JsVar.new("format")
       page.assign(format, OpenLayers::Format::GeoJSON.new(internalProjection: googleproj, externalProjection: projection))
@@ -29,11 +27,7 @@ module ApplicationHelper
   def tiny_display_map(object, geometry_url, &block)
     zoom = 16
     html_id = "tinymap_#{object.id}"
-    @map = MapLayers::Map.new(html_id, {theme: "/openlayers/theme/default/style.css",
-                                        projection: googleproj,
-                                        displayProjection: projection,
-                                        controls: []
-                                       }) do |map, page|
+    @map = core_map(html_id) do |map, page|
       page << map.add_layer(OpenLayers::Layer::OSM.new("OpenCycleMap", ["a", "b", "c"].map {|k| "http://#{k}.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"}))
 
       format = MapLayers::JsVar.new("format")
@@ -103,6 +97,18 @@ module ApplicationHelper
         link_to item.name, user_profile_path(item)
       when Group
         link_to item.name, group_profile_path(item)
+    end
+  end
+
+  protected
+
+  def core_map(html_id, &block)
+    map = MapLayers::Map.new(html_id, {theme: "/openlayers/theme/default/style.css",
+                                        projection: googleproj,
+                                        displayProjection: projection,
+                                        controls: []
+                                       }) do |map, page|
+      yield(map, page) if block_given?
     end
   end
 end
