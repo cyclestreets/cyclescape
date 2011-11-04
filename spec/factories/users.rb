@@ -49,6 +49,8 @@ FactoryGirl.define do
       password "Victory is mine!"
       password_confirmation "Victory is mine!"
       admin
+
+      factory :stewie_with_profile, traits: [:with_profile]
     end
 
     factory :brian do
@@ -75,7 +77,7 @@ FactoryGirl.define do
       password_confirmation "ChrisGriffin"
     end
 
-    factory :stewie_with_profile, traits: [:with_profile]
+
     factory :user_with_location, traits: [:with_location]
   end
 end
