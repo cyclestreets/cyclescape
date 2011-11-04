@@ -4,6 +4,7 @@
     %li= link_to t(".text_message"), "#new-text-message"
     %li= link_to t(".photo_message"), "#new-photo-message"
     %li= link_to t(".link_message"), "#new-link-message"
+    %li= link_to t(".deadline_message"), "#new-deadline-message"
   .panes
     #new-text-message
       = semantic_form_for @new_message, url: thread_messages_path(@thread) do |f|
@@ -13,3 +14,4 @@
           = f.commit_button
     = render "message/photos/new"
     = render "message/links/new"
+    = render "message/deadlines/new"
