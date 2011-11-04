@@ -10,6 +10,7 @@ module ApplicationHelper
                                       projection: googleproj,
                                       displayProjection: projection,
                                       controls: [OpenLayers::Control::PZ.new,
+                                                 OpenLayers::Control::Navigation.new,
                                                  OpenLayers::Control::LayerSwitcher.new]
                                      }) do |map, page|
       page << map.add_layer(OpenLayers::Layer::OSM.new("OpenCycleMap", ["a", "b", "c"].map {|k| "http://#{k}.tile.opencyclemap.org/cycle/${z}/${x}/${y}.png"}))
