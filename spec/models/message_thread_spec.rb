@@ -68,18 +68,18 @@ describe MessageThread do
     let(:message) { FactoryGirl.create(:message, thread: thread, created_by: user) }
 
     it "should be empty" do
-      subject.with_messages_from(user).should be_empty
+      MessageThread.with_messages_from(user).should be_empty
     end
 
     it "should find one thread" do
       message
-      subject.with_messages_from(user).should have(1)
+      MessageThread.with_messages_from(user).count.should == 1
     end
 
-    it "should only find one thread with multiple messages from same user" do
+    it "should only find one thread with multiple messages from the same user" do
       message
       message2 = FactoryGirl.create(:message, thread: thread, created_by: user)
-      subject.with_messages_for(user).should have(1)
+      MessageThread.with_messages_from(user).count.should == 1
     end
   end
 end
