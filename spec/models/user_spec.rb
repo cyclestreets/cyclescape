@@ -205,4 +205,22 @@ describe User do
       subject.buffered_locations.should be_an(RGeo::Geos::MultiPolygonImpl)
     end
   end
+
+  context "issues near locations" do
+    subject { FactoryGirl.create(:user_with_location) }
+    let(:meg) { FactoryGirl.create(:meg) }
+    let(:category) { FactoryGirl.create(:issue_category) }
+    let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
+
+    it "should return correct issues" do
+      issue_in = FactoryGirl.create(:issue, category: category, location: 'POINT(0.5 0.5)')
+      issue_close = FactoryGirl.create(:issue, category: category, location: 'POINT(1.0005 1.0005)')
+      issue_out = FactoryGirl.create(:issue, category: category, location: 'POINT(1.5 1.5)')
+      subject.locations[0].location = polygon
+      issues = subject.issues_near_locations
+      issues.count.should eql(2)
+      issues.should include(issue_in, issue_close)
+      issues.should_not include(issue_out)
+    end
+  end
 end
