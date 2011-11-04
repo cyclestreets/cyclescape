@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
       where("thread_id = ?", thread).first
     end
   end
+  has_many :subscribed_threads, through: :thread_subscriptions, source: :thread
   has_one :profile, class_name: "UserProfile"
   accepts_nested_attributes_for :profile, update_only: true
 
