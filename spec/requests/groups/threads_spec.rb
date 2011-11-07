@@ -36,7 +36,13 @@ describe "Group threads" do
         page.should have_content(thread_attrs[:title])
       end
 
-      it "should create a new private thread"
+      it "should create a new private thread" do
+        fill_in "Title", with: thread_attrs[:title]
+        fill_in "Message", with: "This is between you an me, but..."
+        select "Group", from: "Privacy"
+        click_on "Create Thread"
+        page.should have_content("Private: Only members of #{current_group.name}")
+      end
     end
 
     context "showing a thread" do
