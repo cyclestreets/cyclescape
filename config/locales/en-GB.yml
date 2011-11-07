@@ -9,6 +9,10 @@
         edit: "Edit"
         edit_profile: "Edit Profile"
         members: "Members"
+      create:
+        success: "Group created"
+      update:
+        success: "Group updated"
     issue_categories:
       index:
         title: "Issue Categories"

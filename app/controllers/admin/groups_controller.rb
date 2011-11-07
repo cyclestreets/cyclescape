@@ -11,6 +11,7 @@ class Admin::GroupsController < ApplicationController
     @group = Group.new(params[:group])
 
     if @group.save
+      set_flash_message(:success)
       redirect_to action: :index
     else
       render :new
@@ -25,7 +26,7 @@ class Admin::GroupsController < ApplicationController
     @group = Group.find(params[:id])
 
     if @group.update_attributes(params[:group])
-      flash.notice = t(".group_updated")
+      set_flash_message(:success)
       redirect_to action: :index
     else
       render :edit
