@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102110831) do
+ActiveRecord::Schema.define(:version => 20111107113246) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -51,13 +51,14 @@ ActiveRecord::Schema.define(:version => 20111102110831) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string   "name",        :null => false
-    t.string   "short_name",  :null => false
+    t.string   "name",                                         :null => false
+    t.string   "short_name",                                   :null => false
     t.string   "website"
     t.string   "email"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.datetime "disabled_at"
+    t.string   "default_thread_privacy", :default => "public", :null => false
   end
 
   create_table "issue_categories", :force => true do |t|
