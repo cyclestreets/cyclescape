@@ -155,6 +155,10 @@
     profiles:
       edit:
         title: "Edit Profile"
+      show:
+        edit: "Edit My Profile"
+        my_locations: "My Locations"
+        update_account: "Update My Account Details"
       update:
         profile_updated: "Profile Updated"
 
