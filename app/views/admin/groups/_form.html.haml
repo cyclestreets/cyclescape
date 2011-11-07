@@ -1,5 +1,10 @@
 = semantic_form_for @group, url: [:admin, @group] do |f|
-  = f.inputs :name, :short_name, :website, :email
+  = f.inputs do
+    = f.input :name
+    = f.input :short_name
+    = f.input :website
+    = f.input :email
+    = f.input :default_thread_privacy, as: :select, collection: MessageThread::ALLOWED_PRIVACY
   = f.buttons do
     = f.commit_button
     = cancel_link
