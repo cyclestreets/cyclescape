@@ -27,6 +27,11 @@ describe Group do
       subject.short_name = ""
       subject.should have(1).error_on(:short_name)
     end
+
+    it "must have a default thread privacy" do
+      subject.default_thread_privacy = ""
+      subject.should have(1).error_on(:default_thread_privacy)
+    end
   end
 
   describe "newly created" do
@@ -35,6 +40,16 @@ describe Group do
     it "must have a profile" do
       subject.profile.should be_valid
     end
+
+    it "should have a default thread privacy of public" do
+      subject.default_thread_privacy.should eql("public")
+    end
+  end
+
+  describe "validations" do
+    it { should allow_value("public").for(:default_thread_privacy) }
+    it { should allow_value("group").for(:default_thread_privacy) }
+    it { should_not allow_value("other").for(:default_thread_privacy) }
   end
 
   context "members" do
