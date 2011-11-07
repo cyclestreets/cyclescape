@@ -4,7 +4,7 @@
     = f.input :short_name
     = f.input :website
     = f.input :email
-    = f.input :default_thread_privacy, as: :select, collection: MessageThread::ALLOWED_PRIVACY
+    = f.input :default_thread_privacy, as: :select, collection: MessageThread::ALLOWED_PRIVACY.map {|n| [n.capitalize, n] }
   = f.buttons do
     = f.commit_button
     = cancel_link
