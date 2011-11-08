@@ -1,5 +1,5 @@
 :ruby
-  zoom = 16
+  zoom = Geo::POINT_ZOOM
   @map = basic_map do |map, page|
     if issue.location.geometry_type == RGeo::Feature::Point
       page << map.setCenter(OpenLayers::LonLat.new(issue.location.x,issue.location.y).transform(projection, map.getProjectionObject()),zoom);

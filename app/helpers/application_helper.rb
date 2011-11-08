@@ -21,7 +21,6 @@ module ApplicationHelper
   end
 
   def tiny_display_map(object, geometry_url, &block)
-    zoom = 16
     html_id = "tinymap_#{object.id}"
     @map = core_map(html_id) do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
@@ -29,7 +28,7 @@ module ApplicationHelper
       add_formats(page)
 
       if object.location.geometry_type == RGeo::Feature::Point
-        page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),zoom);
+        page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),Geo::POINT_ZOOM);
 
         markerlayer = MapLayers::JsVar.new('markerlayer')
         icon = MapLayers::JsVar.new('icon')
