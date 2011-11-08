@@ -4,7 +4,7 @@ class User::LocationsController < ApplicationController
 
   def new
     @location = current_user.locations.new
-    @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 14)
+    @start_location = Geo::NOWHERE_IN_PARTICULAR
   end
 
   def create
@@ -13,14 +13,14 @@ class User::LocationsController < ApplicationController
     if @location.save
       redirect_to action: :index
     else
-      @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 14)
+      @start_location = Geo::NOWHERE_IN_PARTICULAR
       render :new
     end
   end
 
   def edit
     @location = current_user.locations.find(params[:id])
-    @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 10)
+    @start_location = Geo::NOWHERE_IN_PARTICULAR
   end
 
   def update
