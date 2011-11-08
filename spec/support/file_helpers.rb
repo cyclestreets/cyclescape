@@ -13,3 +13,11 @@ end
 def profile_photo_path
   File.join(%w(spec support images profile-image.jpg))
 end
+
+def pdf_document_path
+  File.join(%w(spec support pdf use_cases.pdf))
+end
+
+def word_document_path
+  File.join(%w(spec support pdf use_cases.doc))
+end
