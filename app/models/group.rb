@@ -22,8 +22,6 @@ class Group < ActiveRecord::Base
   validates :name, :short_name, presence: true
   validates :default_thread_privacy, inclusion: {in: MessageThread::ALLOWED_PRIVACY}
 
-  before_validation :set_default_thread_privacy, :unless => :default_thread_privacy
-
   after_create :create_default_profile, unless: :profile
 
   def committee_members
@@ -46,9 +44,5 @@ class Group < ActiveRecord::Base
 
   def create_default_profile
     build_profile.save!
-  end
-
-  def set_default_thread_privacy
-    default_thread_privacy = "public"
   end
 end
