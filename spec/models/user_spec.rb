@@ -222,4 +222,37 @@ describe User do
       issues.should_not include(issue_out)
     end
   end
+
+  context "start location" do
+    subject { FactoryGirl.create(:user) }
+    let(:group) { FactoryGirl.create(:group) }
+    let(:group2) { FactoryGirl.create(:group) }
+    let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
+    let(:user_location) { FactoryGirl.build(:user_location) }
+
+    it "should return a relevant location" do
+      # start with nowhere
+      subject.start_location.should eql(Geo::NOWHERE_IN_PARTICULAR)
+
+      # add a group with no location
+      GroupMembership.create(user: subject, group: group, role: "member")
+      subject.reload
+      subject.start_location.should eql(Geo::NOWHERE_IN_PARTICULAR)
+
+      # add a group with a location
+      group2.profile.location = polygon
+      group2.profile.save!
+      GroupMembership.create(user: subject, group: group2, role: "member")
+      subject.reload
+      subject.start_location.should eql(group2.profile.location)
+
+      # Then add a user location
+      user_location.user = subject
+      user_location.save!
+      subject.start_location.should eql(user_location.location)
+
+      # Then test that the primary location category overrides it
+      # todo
+    end
+  end
 end

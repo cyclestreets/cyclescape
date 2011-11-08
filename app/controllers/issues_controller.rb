@@ -15,7 +15,7 @@ class IssuesController < ApplicationController
 
   def new
     @issue = Issue.new
-    @start_location = Geo::NOWHERE_IN_PARTICULAR
+    @start_location = current_user.start_location
   end
 
   def create

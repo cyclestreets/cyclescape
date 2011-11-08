@@ -102,6 +102,30 @@ class User < ActiveRecord::Base
     Issue.intersects(buffered_locations)
   end
 
+  def start_location
+    # Figure out a suitable starting location for the user, e.g. for adding new issues.
+
+    # First, the latest find a "primary" or "home" location.
+    l = locations.where(category_id: LocationCategory.first).last
+    return l.location unless l.blank?
+
+    # If not, take the latest location they have.
+    l = locations.last
+    return l.location unless l.blank?
+
+    # Figure out the group from the subdomain, and use that if possible
+    # group = <enter some code here>
+    # return group.profile.location if group.profile.location
+
+    # Take the location from the first of their groups that has a location
+    groups.each do |g|
+      return g.profile.location if g.profile.location
+    end
+
+    # Give up
+    return Geo::NOWHERE_IN_PARTICULAR
+  end
+
   private
 
   def set_default_role
