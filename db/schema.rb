@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107113246) do
+ActiveRecord::Schema.define(:version => 20111108162707) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(:version => 20111107113246) do
     t.datetime "deleted_at"
     t.integer  "category_id"
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
+  end
+
+  create_table "library_items", :force => true do |t|
+    t.string   "component_type",                                             :null => false
+    t.integer  "component_id",                                               :null => false
+    t.integer  "created_by_id",                                              :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
+    t.spatial  "location",       :limit => {:srid=>4326, :type=>"geometry"}
   end
 
   create_table "link_messages", :force => true do |t|
