@@ -1,4 +1,4 @@
-class LibraryItem < ActiveRecord::Base
+class Library::Item < ActiveRecord::Base
   include FakeDestroy
 
   belongs_to :component, polymorphic: true

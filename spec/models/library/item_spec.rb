@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe LibraryItem do
+describe Library::Item do
   pending "add some examples to (or delete) #{__FILE__}"
 end
