@@ -4,7 +4,7 @@ class User::LocationsController < ApplicationController
 
   def new
     @location = current_user.locations.new
-    @start_location = Geo::NOWHERE_IN_PARTICULAR
+    @start_location = current_user.start_location
   end
 
   def create

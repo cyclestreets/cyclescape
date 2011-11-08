@@ -4,8 +4,7 @@ class IssuesController < ApplicationController
   def index
     @issues = Issue.order("created_at DESC").limit(10)
 
-    # This needs more thought!
-    @start_location = Geo::NOWHERE_IN_PARTICULAR
+    @start_location = current_user.start_location
   end
 
   def show
