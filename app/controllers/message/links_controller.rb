@@ -10,9 +10,9 @@ class Message::LinksController < ApplicationController
     @message.component = @link
 
     if @message.save
-      flash.notice = "Link created."
+      set_flash_message(:success)
     else
-      flash.alert = "Link could not be created."
+      set_flash_message(:failure)
     end
     redirect_to thread_path(@thread)
   end

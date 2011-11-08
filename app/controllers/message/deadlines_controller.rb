@@ -10,9 +10,9 @@ class Message::DeadlinesController < ApplicationController
     @message.component = @deadline
 
     if @message.save
-      flash.notice = "Deadline created."
+      set_flash_message(:success)
     else
-      flash.alert = "Deadline could not be created."
+      set_flash_message(:failure)
     end
     redirect_to thread_path(@thread)
   end

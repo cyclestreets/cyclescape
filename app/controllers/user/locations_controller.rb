@@ -27,7 +27,7 @@ class User::LocationsController < ApplicationController
     @location = current_user.locations.find(params[:id])
 
     if @location.update_attributes(params[:user_location])
-      flash.notice = t(".user.locations.update.location_updated")
+      set_flash_message(:success)
       redirect_to action: :index
     else
       render :edit
@@ -36,9 +36,9 @@ class User::LocationsController < ApplicationController
 
   def destroy
     if current_user.locations.find(params[:id]).destroy
-      flash.notice = t(".user.locations.destroy.success")
+      set_flash_message(:success)
     else
-      flash.notice = t(".user.locations.destroy.failure")
+      set_flash_message(:failure)
     end
     redirect_to action: :index
   end

@@ -15,7 +15,7 @@ class Group::ProfilesController < ApplicationController
 
   def update
     if @group.profile.update_attributes(params[:group_profile])
-      flash.notice = t("group.profiles.update.profile_updated")
+      set_flash_message(:success)
       redirect_to action: :show
     else
       render :edit
