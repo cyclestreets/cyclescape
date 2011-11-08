@@ -11,3 +11,9 @@
     = image_tag @profile.picture.url
   .about
     = @profile.about
+  .groups
+    %p= t ".is_a_member_of_groups", name: @user.name, count: @user.groups.count
+    - if @user.groups.count > 0
+      %ol
+        - @user.groups.each do |g|
+          %li= link_to g.name, group_path(g)
