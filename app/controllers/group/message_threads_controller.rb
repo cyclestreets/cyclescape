@@ -6,7 +6,7 @@ class Group::MessageThreadsController < MessageThreadsController
   end
 
   def new
-    @thread = @group.threads.build
+    @thread = @group.threads.build({privacy: @group.default_thread_privacy})
     @message = @thread.messages.build
   end
 
