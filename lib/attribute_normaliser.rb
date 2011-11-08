@@ -5,7 +5,7 @@ module AttributeNormaliser
     end
 
     def normalise
-      if @val.nil? or @val.empty? or @val =~ %r{\A.*://}
+      if @val.blank? or @val =~ %r{\A.*://}
         @val
       else
         "http://#{@val}"
