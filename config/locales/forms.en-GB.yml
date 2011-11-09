@@ -16,6 +16,8 @@
     labels:
       group_membership:
         role: "Membership type"
+      library_document:
+        file: "Document"
       link_message:
         url: "URL"
       message:
@@ -34,6 +36,8 @@
       update: "Save"
       group_membership:
         create: "Invite member"
+      library/document:
+        create: "Upload"
       message:
         create: "Post Message"
       message_thread:

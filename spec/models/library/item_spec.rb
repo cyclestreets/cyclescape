@@ -22,6 +22,5 @@ describe Library::Item do
 
   describe "validations" do
     it { should validate_presence_of(:created_by) }
-    it { should validate_presence_of(:component) }
   end
 end
