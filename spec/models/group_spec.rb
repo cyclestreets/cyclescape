@@ -51,7 +51,7 @@ describe Group do
       it "should be unique" do
         subject.should validate_uniqueness_of(:short_name)
       end
-      
+
       it "should not allow bad characters" do
         ["£","$","%","^","&"].each do |char|
           subject.short_name = char
