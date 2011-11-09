@@ -3,8 +3,7 @@ class IssuesController < ApplicationController
   
   def index
     @issues = Issue.order("created_at DESC").limit(10)
-
-    @start_location = current_user.start_location
+    @start_location = index_start_location
   end
 
   def show
@@ -52,5 +51,14 @@ class IssuesController < ApplicationController
   def search
     @query = params[:q]
     @results = Issue.find_with_index(params[:q])
+  end
+
+  protected
+
+  def index_start_location
+    return current_user.start_location if current_user
+    # TODO return subdomain.group.location if subdomain
+    return @issues.last.location unless @issues.empty?
+    return Geo::NOWHERE_IN_PARTICULAR
   end
 end

@@ -81,6 +81,18 @@ describe "Issues" do
     end
   end
 
+  context "index" do
+    let!(:issue) { FactoryGirl.create(:issue, category: issue_category) }
+
+    before do
+      visit issues_path
+    end
+
+    it "should mention the issue title" do
+      page.should have_content(issue.title)
+    end
+  end
+
   context "search" do
     include_context "signed in as a site user"
     let(:issue) { FactoryGirl.create(:issue, category: issue_category) }
