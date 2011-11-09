@@ -48,4 +48,9 @@ class IssuesController < ApplicationController
       format.json { render json: RGeo::GeoJSON.encode(collection)}
     end
   end
+
+  def search
+    @query = params[:q]
+    @results = Issue.find_with_index(params[:q])
+  end
 end

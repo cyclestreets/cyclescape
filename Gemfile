@@ -22,6 +22,7 @@ gem 'thin'
 gem 'state_machine'
 gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly'
+gem 'acts_as_indexed'
 
 # Gems used only for assets and not required
 # in production environments by default.
