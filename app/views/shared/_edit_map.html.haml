@@ -1,5 +1,6 @@
 :javascript
   var geo_field = "#{thing.class.name.underscore}_loc_json"
+  var point_zoom = "#{Geo::POINT_ZOOM}"
 
   function serialize(feature) {
     var str = format.write(feature);
@@ -63,7 +64,14 @@
 :javascript
   vectorlayer.events.on({featureadded: feature_added});
   vectorlayer.events.on({featuremodified: feature_modified});
+  // This is also triggered if the user refreshes the page, and the browser persists
+  // the hidden form value. Ensures the map ends up where the feature is.
   if ( document.getElementById(geo_field).value != '' ) {
     vectorlayer.addFeatures( format.read(document.getElementById(geo_field).value));
-    map.zoomToExtent(vectorlayer.features[0].geometry.bounds);
+    geom = vectorlayer.features[0].geometry;
+    if (geom.CLASS_NAME == 'OpenLayers.Geometry.Point') {
+      map.setCenter(new OpenLayers.LonLat(geom.x, geom.y), point_zoom);
+    } else {
+      map.zoomToExtent(geom.bounds);
+    }
   }
