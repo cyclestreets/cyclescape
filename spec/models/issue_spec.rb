@@ -102,4 +102,20 @@ describe Issue do
       end
     end
   end
+
+  describe "find with index (search)" do
+    subject { FactoryGirl.create(:issue) }
+
+    it "should return the issue on title search" do
+      subject
+      results = Issue.find_with_index(subject.title)
+      results.should include(subject)
+    end
+
+    it "should return the issue on a description search" do
+      subject
+      results = Issue.find_with_index(subject.description)
+      results.should include(subject)
+    end
+  end
 end
