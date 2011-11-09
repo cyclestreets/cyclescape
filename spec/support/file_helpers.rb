@@ -15,9 +15,9 @@ def profile_photo_path
 end
 
 def pdf_document_path
-  File.join(%w(spec support pdf use_cases.pdf))
+  File.join(%w(spec support documents use_cases.pdf))
 end
 
 def word_document_path
-  File.join(%w(spec support pdf use_cases.doc))
+  File.join(%w(spec support documents use_cases.doc))
 end
