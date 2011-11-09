@@ -117,5 +117,19 @@ describe Issue do
       results = Issue.find_with_index(subject.description)
       results.should include(subject)
     end
+
+    it "should match partial searches" do
+      subject
+      results = Issue.find_with_index(subject.description.split[0])
+      results.should include(subject)
+      results = Issue.find_with_index(subject.description.split[-1])
+      results.should include(subject)
+    end
+
+    it "should not find gobbledy-gook" do
+      subject
+      results = Issue.find_with_index("asdfasdf12354")
+      results.should be_empty
+    end
   end
 end
