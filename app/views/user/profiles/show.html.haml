@@ -8,7 +8,7 @@
   .website
     = @profile.website
   - if @profile.picture
-    = image_tag @profile.picture.url
+    = image_tag @profile.picture.url, alt: "", title: t(".profile_picture_title", name: @user.name)
   .about
     = @profile.about
   .groups
