@@ -1,11 +1,19 @@
 .user-profile
   %h1= @user.name
   - if @user == current_user
-    = link_to t(".edit"), action: :edit
-    = link_to t(".update_account"), edit_user_registration_path
+    %ol
+      %li= link_to t(".edit"), action: :edit
+      %li= link_to t(".update_account"), edit_user_registration_path
+      %li= link_to t(".my_locations"), user_locations_path
   .website
     = @profile.website
   - if @profile.picture
     = image_tag @profile.picture.url
   .about
     = @profile.about
+  .groups
+    %p= t ".is_a_member_of_groups", name: @user.name, count: @user.groups.count
+    - if @user.groups.count > 0
+      %ol
+        - @user.groups.each do |g|
+          %li= link_to g.name, group_path(g)

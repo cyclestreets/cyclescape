@@ -11,7 +11,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
-      flash.notice = t(".user_updated")
+      set_flash_message(:success)
       redirect_to action: :index
     else
       render :edit

@@ -14,12 +14,18 @@
       update:
         success: "Group updated"
     issue_categories:
+      create:
+        success: "Category created"
       index:
         title: "Issue Categories"
+      update:
+        success: "Category updated"
     users:
       index:
         created_at: "%{time_ago} ago"
         disabled_at: "%{time_ago} ago"
+      update:
+        success: "User updated"
   application:
     account_disabled: "Your account has been disabled by an administrator"
     permission_denied: "You are not authorised to access that page."
@@ -68,7 +74,7 @@
         new_group_thread: "New Group Thread"
     profiles:
       update:
-        profile_updated: "Profile Updated"
+        success: "Profile Updated"
   groups:
     show:
       no_issues: There are no issues in this group's area yet
@@ -121,11 +127,22 @@
       subscribers_list: "%{count_text} to this thread"
   message:
     deadlines:
+      create:
+        failure: "Deadline could not be created."
+        success: "Deadline created."
       show:
         days_away:
           zero: "Today!"
           one: "Tomorrow!"
           other: "%{count} days away!"
+    link:
+      create:
+        failure: "Link could not be created."
+        success: "Link created."
+    photos:
+      create:
+        failure: "Could not create photo message."
+        success: "Photo uploaded."
   messages:
     message:
       posted_date: "posted %{time_ago} ago"
@@ -151,12 +168,20 @@
       index:
         confirm: "Are you sure?"
       update:
-        location_updated: "Location Updated"
+        success: "Location Updated"
     profiles:
       edit:
         title: "Edit Profile"
+      show:
+        edit: "Edit My Profile"
+        is_a_member_of_groups:
+          zero: "%{name} isn't a member of any groups yet"
+          one: "%{name} is a member of one group"
+          other: "%{name} is a member of %{count} groups"
+        my_locations: "My Locations"
+        update_account: "Update My Account Details"
       update:
-        profile_updated: "Profile Updated"
+        success: "Profile Updated"
 
   date:
     formats:

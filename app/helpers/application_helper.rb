@@ -21,7 +21,6 @@ module ApplicationHelper
   end
 
   def tiny_display_map(object, geometry_url, &block)
-    zoom = 16
     html_id = "tinymap_#{object.id}"
     @map = core_map(html_id) do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
@@ -29,7 +28,8 @@ module ApplicationHelper
       add_formats(page)
 
       if object.location.geometry_type == RGeo::Feature::Point
-        page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),zoom);
+        z = object.location.z || Geo::POINT_ZOOM
+        page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),z);
 
         markerlayer = MapLayers::JsVar.new('markerlayer')
         icon = MapLayers::JsVar.new('icon')
@@ -54,7 +54,8 @@ module ApplicationHelper
   def display_bbox_map(start_location, geometry_bbox_url, &block)
     map = basic_map do |map, page|
       if start_location.geometry_type == RGeo::Feature::Point
-        page << map.setCenter(OpenLayers::LonLat.new(start_location.x, start_location.y).transform(projection, map.getProjectionObject()),start_location.z);
+        z = start_location.z || Geo::POINT_ZOOM
+        page << map.setCenter(OpenLayers::LonLat.new(start_location.x, start_location.y).transform(projection, map.getProjectionObject()),z);
       else
         bbox = RGeo::Cartesian::BoundingBox.new(start_location.factory)
         bbox.add(start_location)

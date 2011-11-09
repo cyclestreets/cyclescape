@@ -10,12 +10,12 @@ class Group::ProfilesController < ApplicationController
   def edit
     @profile = @group.profile
     # This needs more thought!
-    @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 10)
+    @start_location = Geo::NOWHERE_IN_PARTICULAR
   end
 
   def update
     if @group.profile.update_attributes(params[:group_profile])
-      flash.notice = t("group.profiles.update.profile_updated")
+      set_flash_message(:success)
       redirect_to action: :show
     else
       render :edit

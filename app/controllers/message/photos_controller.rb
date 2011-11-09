@@ -10,9 +10,9 @@ class Message::PhotosController < ApplicationController
     @message.component = @photo
 
     if @message.save
-      flash.notice = "Photo uploaded."
+      set_flash_message(:success)
     else
-      flash.alert = "Could not create photo message."
+      set_flash_message(:failure)
     end
     redirect_to thread_path(@thread)
   end

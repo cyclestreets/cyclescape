@@ -4,8 +4,8 @@ $.support.cors = false;  // Delete this when origin control is added to CycleStr
 var MapSearch = {
   geocoder_url: "<%= Geocoder::URL %>",
   geocoder_key: "<%= Geocoder::API_KEY %>",
+  zoom: "<%= Geo::MAP_SEARCH_ZOOM %>",
   seqid: 0,
-  zoom: 14,
   map: null,
 
   set_map: function(map) {
