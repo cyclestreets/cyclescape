@@ -20,7 +20,7 @@ class User::LocationsController < ApplicationController
 
   def edit
     @location = current_user.locations.find(params[:id])
-    @start_location = Geo::NOWHERE_IN_PARTICULAR
+    @start_location = @location.location
   end
 
   def update
