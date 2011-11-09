@@ -87,8 +87,8 @@ ActiveRecord::Schema.define(:version => 20111108163613) do
   end
 
   create_table "library_items", :force => true do |t|
-    t.string   "component_type",                                             :null => false
-    t.integer  "component_id",                                               :null => false
+    t.integer  "component_id"
+    t.string   "component_type"
     t.integer  "created_by_id",                                              :null => false
     t.datetime "created_at",                                                 :null => false
     t.datetime "updated_at"
