@@ -44,6 +44,15 @@ Cyclescape::Application.routes.draw do
     end
   end
 
+  resource :library do
+    scope module: "library" do
+      resource :search, only: [:new] do
+        get :create, on: :collection
+      end
+      resources :documents
+    end
+  end
+
   resources :users do
     scope module: :user do
       resource :profile
