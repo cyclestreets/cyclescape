@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: library_documents
+#
+#  id              :integer         not null, primary key
+#  library_item_id :integer         not null
+#  title           :string(255)     not null
+#  file_uid        :string(255)
+#  file_name       :string(255)
+#  file_size       :integer
+#
+
 FactoryGirl.define do
   factory :library_document, class: "Library::Document" do
     item { FactoryGirl.build(:library_item) }
