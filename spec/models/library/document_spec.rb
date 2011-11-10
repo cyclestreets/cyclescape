@@ -13,7 +13,7 @@
 require 'spec_helper'
 
 describe Library::Document do
-  it { should belong_to(:item) }
+  it_behaves_like "a library component"
 
   it "should be valid" do
     doc = FactoryGirl.create(:library_document)
