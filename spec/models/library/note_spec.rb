@@ -7,4 +7,7 @@ describe Library::Note do
     note = FactoryGirl.create(:library_note)
     note.should be_valid
   end
+
+  it { should belong_to(:document) }
+  it { should validate_presence_of(:body) }
 end

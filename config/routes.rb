@@ -50,6 +50,7 @@ Cyclescape::Application.routes.draw do
         get :create, on: :collection
       end
       resources :documents
+      resources :notes
     end
   end
 

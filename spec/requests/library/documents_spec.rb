@@ -24,7 +24,6 @@ describe "Library documents" do
       attach_file "Document", pdf_document_path
       fill_in "Title", with: "Case studies"
       click_on "Upload"
-      puts Library::Document.all.inspect
       current_path.should == library_document_path(Library::Document.last)
       page.should have_content("Case studies")
       page.should have_link("Download")

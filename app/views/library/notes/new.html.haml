@@ -1,0 +1,8 @@
+.new.library.note
+  %h1= t ".title"
+  = semantic_form_for @note do |f|
+    = f.inputs do
+      = f.input :body
+    = f.buttons do
+      = f.commit_button
+      %li= cancel_link

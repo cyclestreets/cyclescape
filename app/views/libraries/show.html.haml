@@ -9,3 +9,8 @@
   %p= link_to t(".new_document"), new_library_document_path, rel: "#overlay"
   %ul
     = render partial: "library/documents/compact", collection: @recent_documents, as: :document
+
+%section.notes
+  %p= link_to t(".new_note"), new_library_note_path, rel: "#overlay"
+  %ul
+    = render partial: "library/notes/compact", collection: @recent_notes, as: :note
