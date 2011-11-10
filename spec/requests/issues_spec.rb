@@ -136,6 +136,13 @@ describe "Issues" do
         visit issue_path(issue)
         page.should_not have_content(delete_text)
       end
+
+      it "should not let you delete the page" do
+        visit issue_path(issue)
+        # Use the slightly-unofficial capybara mechanism to simulate a delete
+        page.driver.delete issue_path(issue)
+        page.should have_content("You are not authorised to access that page.")
+      end
     end
 
     context "as an admin" do
