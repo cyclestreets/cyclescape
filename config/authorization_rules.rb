@@ -36,7 +36,7 @@ authorization do
     has_permission_on :issues, to: [:new, :create]
     has_permission_on :message_threads, :messages, to: :manage
     has_permission_on :message_thread_subscriptions, to: [:create, :destroy]
-    has_permission_on :message_photos, :message_links, :message_deadlines, to: :create
+    has_permission_on :message_photos, :message_links, :message_deadlines, :message_library_items, to: :create
     has_permission_on :libraries, :library_documents, :library_notes, to: :manage
     has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :user_profiles do
