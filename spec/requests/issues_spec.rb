@@ -124,4 +124,33 @@ describe "Issues" do
       page.should have_content("No results found")
     end
   end
+
+  context "delete" do
+    let!(:issue) { FactoryGirl.create(:issue, category: issue_category) }
+    let(:delete_text) { "Delete this issue" }
+
+    context "as a site user" do
+      include_context "signed in as a site user"
+
+      it "should not show you a delete link" do
+        visit issue_path(issue)
+        page.should_not have_content(delete_text)
+      end
+    end
+
+    context "as an admin" do
+      include_context "signed in as admin"
+
+      it "should show you a delete link" do
+        visit issue_path(issue)
+        page.should have_content(delete_text)
+      end
+
+      it "should let you delete the issue" do
+        visit issue_path(issue)
+        click_on delete_text
+        page.should have_content("Issue deleted")
+      end
+    end
+  end
 end

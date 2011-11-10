@@ -27,6 +27,18 @@ class IssuesController < ApplicationController
     end
   end
 
+  def destroy
+    @issue = Issue.find(params[:id])
+
+    if @issue.destroy
+      set_flash_message(:success)
+      redirect_to issues_path
+    else
+      set_flash_message(:failure)
+      redirect_to @issue
+    end
+  end
+
   def geometry
     @issue = Issue.find(params[:id])
     respond_to do |format|
