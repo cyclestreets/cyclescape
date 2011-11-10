@@ -1,16 +1,19 @@
-%h1= t ".title"
-
-= semantic_form_for :search, url: library_search_path, method: :get do |f|
-  = f.inputs do
-    = f.input :query, label: "Search"
-  = f.buttons
+.head
+  %h1= t ".title"
+.search
+  = semantic_form_for :search, url: library_search_path, method: :get do |f|
+    = f.inputs do
+      = f.input :query, label: "Search"
+    = f.buttons
 
 %section.documents
-  %p= link_to t(".new_document"), new_library_document_path, rel: "#overlay"
+  %h2= t ".documents"
+  %p= link_to t(".new_document"), new_library_document_path, rel: "#overlay", class: "button"
   %ul
     = render partial: "library/documents/compact", collection: @recent_documents, as: :document
 
 %section.notes
-  %p= link_to t(".new_note"), new_library_note_path, rel: "#overlay"
+  %h2= t ".notes"
+  %p= link_to t(".new_note"), new_library_note_path, rel: "#overlay", class: "button"
   %ul
     = render partial: "library/notes/compact", collection: @recent_notes, as: :note

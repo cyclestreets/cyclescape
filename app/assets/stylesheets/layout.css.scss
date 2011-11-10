@@ -278,3 +278,17 @@ article.issue {
     @include column(9, "last");
   }
 }
+
+// Library
+
+body.libraries {
+  .head {
+    @include column($full-span);
+  }
+  .search {
+    @include column($full-span);
+  }
+  section.documents, section.notes {
+    @include column(4);
+  }
+}
