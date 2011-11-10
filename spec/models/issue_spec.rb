@@ -85,6 +85,10 @@ describe Issue do
       subject.loc_json = 'Garbage'
       subject.should be_valid
     end
+
+    it "should not be deleted" do
+      subject.deleted_at.should be_nil
+    end
   end
 
   describe "threads" do
@@ -147,6 +151,27 @@ describe Issue do
       subject
       results = Issue.find_with_index("asdfasdf12354")
       results.should be_empty
+    end
+  end
+
+  describe "destroyed" do
+    subject { FactoryGirl.create(:issue) }
+
+    before do
+      subject.destroy
+    end
+
+    it "shouldn't really destroy" do
+      subject.should be_valid
+      subject.deleted_at.should_not be_nil
+    end
+
+    it "shouldn't appear on a normal find" do
+      Issue.all.should_not include(subject)
+    end
+
+    it "should appear when the default scope is removed" do
+      Issue.unscoped.should include(subject)
     end
   end
 end
