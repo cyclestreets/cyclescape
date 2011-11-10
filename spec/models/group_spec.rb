@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # == Schema Information
 #
 # Table name: groups
@@ -43,6 +45,38 @@ describe Group do
 
     it "should have a default thread privacy of public" do
       subject.default_thread_privacy.should eql("public")
+    end
+
+    describe "short name" do
+      it "should be unique" do
+        subject.should validate_uniqueness_of(:short_name)
+      end
+
+      it "should not allow bad characters" do
+        ["£","$","%","^","&"].each do |char|
+          subject.short_name = char
+          subject.should have(1).error_on(:short_name)
+        end
+      end
+
+      it "should be short enough to be a subdomain" do
+        subject.short_name = "c"*64
+        subject.should have(1).error_on(:short_name)
+      end
+
+      it "should not be an important subdomain" do
+        %w{www ftp smtp imap}.each do |d|
+          subject.short_name = d
+          subject.should have(1).error_on(:short_name)
+        end
+      end
+
+      it "can't start or end with a hyphen" do
+        %w{ -foo foo-}.each do |d|
+          subject.short_name = d
+          subject.should have(1).error_on(:short_name)
+        end
+      end
     end
   end
 
