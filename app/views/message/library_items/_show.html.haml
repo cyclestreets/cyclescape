@@ -1,0 +1,4 @@
+.link{id: dom_id(message.component)}
+  %p
+    = message.component.item.component.class.model_name.humanize
+    = link_to message.component.item.title, message.component.item.component

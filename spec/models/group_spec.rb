@@ -4,14 +4,15 @@
 #
 # Table name: groups
 #
-#  id          :integer         not null, primary key
-#  name        :string(255)     not null
-#  short_name  :string(255)     not null
-#  website     :string(255)
-#  email       :string(255)
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#  disabled_at :datetime
+#  id                     :integer         not null, primary key
+#  name                   :string(255)     not null
+#  short_name             :string(255)     not null
+#  website                :string(255)
+#  email                  :string(255)
+#  created_at             :datetime        not null
+#  updated_at             :datetime        not null
+#  disabled_at            :datetime
+#  default_thread_privacy :string(255)     default("public"), not null
 #
 
 require 'spec_helper'

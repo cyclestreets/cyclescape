@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111107113246) do
+ActiveRecord::Schema.define(:version => 20111110151343) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -76,6 +76,37 @@ ActiveRecord::Schema.define(:version => 20111107113246) do
     t.datetime "deleted_at"
     t.integer  "category_id"
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
+  end
+
+  create_table "library_documents", :force => true do |t|
+    t.integer "library_item_id", :null => false
+    t.string  "title",           :null => false
+    t.string  "file_uid"
+    t.string  "file_name"
+    t.integer "file_size"
+  end
+
+  create_table "library_item_messages", :force => true do |t|
+    t.integer "thread_id",       :null => false
+    t.integer "message_id",      :null => false
+    t.integer "library_item_id", :null => false
+  end
+
+  create_table "library_items", :force => true do |t|
+    t.integer  "component_id"
+    t.string   "component_type"
+    t.integer  "created_by_id",                                              :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
+    t.spatial  "location",       :limit => {:srid=>4326, :type=>"geometry"}
+  end
+
+  create_table "library_notes", :force => true do |t|
+    t.integer "library_item_id",     :null => false
+    t.string  "title"
+    t.text    "body",                :null => false
+    t.integer "library_document_id"
   end
 
   create_table "link_messages", :force => true do |t|

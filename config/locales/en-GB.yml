@@ -109,6 +109,18 @@
       dashboard: "My Dashboard"
       admin: "Admin"
       feedback: "Feedback"
+  libraries:
+    show:
+      title: "Library"
+      documents: "Documents"
+      notes: "Notes"
+  library:
+    documents:
+      new:
+        title: "New Document"
+    notes:
+      new:
+        title: "New Note"
   mailers:
     notifications:
       gmr_confirmed:

@@ -39,9 +39,20 @@ Cyclescape::Application.routes.draw do
       resources :photos, only: [:create]
       resources :links, only: [:create]
       resources :deadlines, only: [:create]
+      resources :library_items, only: [:create]
     end
     scope module: :message_thread do
       resources :subscriptions, only: [:create, :destroy]
+    end
+  end
+
+  resource :library do
+    scope module: "library" do
+      resource :search, only: [:new] do
+        get :create, on: :collection
+      end
+      resources :documents
+      resources :notes
     end
   end
 

@@ -1,0 +1,5 @@
+.library.note
+  %p.details
+    = l @note.created_at
+    = link_to_profile @note.created_by
+  = @note.body
