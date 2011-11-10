@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111109173450) do
+ActiveRecord::Schema.define(:version => 20111110151343) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -84,6 +84,12 @@ ActiveRecord::Schema.define(:version => 20111109173450) do
     t.string  "file_uid"
     t.string  "file_name"
     t.integer "file_size"
+  end
+
+  create_table "library_item_messages", :force => true do |t|
+    t.integer "thread_id",       :null => false
+    t.integer "message_id",      :null => false
+    t.integer "library_item_id", :null => false
   end
 
   create_table "library_items", :force => true do |t|
