@@ -13,6 +13,14 @@ class Library::Component < ActiveRecord::Base
 
   validate :created_by, presence: true
 
+  def created_by
+    @created_by || item && item.created_by
+  end
+
+  def created_at
+    item && item.created_at
+  end
+
   protected
 
   def create_library_item
