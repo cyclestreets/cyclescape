@@ -1,0 +1,8 @@
+#new-library-item-message
+  = semantic_form_for LibraryItemMessage.new, url: thread_library_items_path(@thread) do |f|
+    = f.inputs do
+      = f.input :item
+      = semantic_fields_for Message.new do |f2|
+        = f2.input :body
+    = f.buttons do
+      = f.commit_button
