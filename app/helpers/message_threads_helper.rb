@@ -22,7 +22,7 @@ module MessageThreadsHelper
   end
 
   def message_truncate(message)
-    truncate message.body, length: 90, separator: "."
+    truncate message.body, length: 90, separator: ".", omission: "\u2026"
   end
 
   def threads_list(threads, options = {})

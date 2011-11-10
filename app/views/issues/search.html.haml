@@ -3,6 +3,6 @@
   %p= t(".results_found", count: @results.count, query: @query)
   %ul
     - @results.each do |issue|
-      %li= link_to(issue.title, issue_path(issue)) + " - #{issue.description.truncate(100)}"
+      %li= link_to(issue.title, issue_path(issue)) + " - #{issue.description.truncate(100, omission: "\u2026")}"
 - else
   %p= t(".no_results_found", query: @query)
