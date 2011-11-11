@@ -52,6 +52,25 @@ describe "Message threads" do
 
       it "should not allow access to a private thread"
     end
+
+    context "deleted issue" do
+      let(:thread_with_issue) { FactoryGirl.create(:issue_message_thread) }
+      let(:issue) { thread_with_issue.issue }
+
+      before do
+        #issue = thread_with_issue.issue
+        thread_with_issue.issue.destroy
+        visit thread_path(thread_with_issue)
+      end
+
+      it "should not show the issue" do
+        page.should_not have_content(issue.title)
+      end
+
+      it "should still show the thread" do
+        page.should have_content(thread_with_issue.title)
+      end
+    end
   end
 
   context "as a site user" do
