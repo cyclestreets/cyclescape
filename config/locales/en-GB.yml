@@ -207,7 +207,7 @@
     formats:
       default: "%d-%m-%Y"
       short: "%d %b"
-      long: "%d %B, %Y"
+      long: "%d %B %Y"
 
     day_names:
       - Sunday
