@@ -8,3 +8,6 @@ jQuery ->
     , ->
       $(this).find(".collapse").slideUp()
     .find(".collapse").hide()
+
+  $(":input.date").dateinput
+    format: "dddd, dd mmmm yyyy"
