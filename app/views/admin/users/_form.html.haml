@@ -1,0 +1,14 @@
+= semantic_form_for @user,  url: [:admin, @user] do |f|
+  = f.inputs do
+    = f.input :email
+    = f.input :full_name
+    = f.input :display_name
+    = f.input :role, as: :select, collection: User::ALLOWED_ROLES
+    = f.input :disabled, as: :boolean
+    = f.semantic_fields_for :profile do |profile|
+      = profile.inputs do
+        = profile.input :picture, as: :file
+        = profile.input :retained_picture, as: :hidden
+        = profile.input :website
+        = profile.input :about
+  = f.buttons

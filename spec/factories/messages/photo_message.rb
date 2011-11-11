@@ -3,7 +3,7 @@ FactoryGirl.define do
     association :created_by, factory: :user
     association :message, factory: :message
     sequence(:caption) {|n| "Imaginative photo caption #{n}" }
-    photo { Pathname.new(File.join(%w(spec support images abstract-100-100.jpg))) }
+    photo { Pathname.new(test_photo_path) }
 
     after_build do |o|
       o.thread = o.message.thread

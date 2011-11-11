@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Cyclekit::Application.load_tasks
+Cyclescape::Application.load_tasks

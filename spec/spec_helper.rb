@@ -49,6 +49,15 @@ Spork.prefork do
       # Clear out DragonFly assets
       dragonfly_path = "#{Rails.root}/public/system/dragonfly/test"
       FileUtils.rm_r(dragonfly_path) if File.exists?(dragonfly_path)
+
+      # Create the root user
+      unless User.where("id = 1").exists?
+        root = User.new(email: "root@cyclescape.org", full_name: "Root", role: "admin",
+            password: "changeme", password_confirmation: "changeme")
+        root.skip_confirmation!
+        root.save!
+        User.update_all("id = 1", "id = #{root.id}")
+      end
     end
 
     config.before(:each) do

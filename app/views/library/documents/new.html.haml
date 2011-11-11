@@ -1,0 +1,11 @@
+.library.document.new
+  %h1= t ".title"
+  = semantic_form_for @document do |f|
+    = f.inputs do
+      = f.input :file, as: :file
+      = f.input :retained_file, as: :hidden
+      = f.input :title
+    = f.buttons do
+      = f.commit_button
+      %li
+        = cancel_link

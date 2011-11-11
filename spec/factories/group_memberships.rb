@@ -33,5 +33,11 @@ FactoryGirl.define do
       user { FactoryGirl.create(:brian) }  # Needs to already exist otherwise invitation will be sent
       committee
     end
+
+    # Group member, nothing more
+    factory :chris_at_quahogcc do
+      association :group, factory: :quahogcc
+      user { FactoryGirl.create(:chris) }
+    end
   end
 end

@@ -16,9 +16,15 @@
     labels:
       group_membership:
         role: "Membership type"
+      library_document:
+        file: "Document"
+      library_note:
+        body: "Note"
       link_message:
         url: "URL"
       message:
+        body: "Message"
+      site_comment:
         body: "Message"
       thread_subscription:
         send_email: "Send new messages to me by email"
@@ -32,10 +38,18 @@
       update: "Save"
       group_membership:
         create: "Invite member"
+      library/document:
+        create: "Upload"
+      library/note:
+        create: "Create Note"
       message:
         create: "Post Message"
       message_thread:
         create: "Create Thread"
+      site_comment:
+        create: "Send Feedback"
+      user_profile:
+        create: "Save"
       thread_subscription:
         create: "Subscribe"
         delete: "Unsubscribe"

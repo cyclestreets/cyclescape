@@ -1,11 +1,21 @@
-.dashboard
-  %h1== Hello #{@user.full_name}
+%h1== Hello #{@user.full_name}
 
-%section.groups
+%section.threads
   - @groups.each do |group|
     %section.group
-      %h1= link_to group.name, group
+      %h2= link_to group.name, group
       %p= link_to t(".new_group_thread"), new_group_thread_path(group), class: "button"
-      %ul
-        - group.threads.each do |thread|
-          %li= link_to thread.title, group_thread_path(group, thread)
+      %section.threads
+        = threads_list group.threads
+
+%section.issues
+  %h2= t ".issues_in_your_area"
+  = issues_list @relevant_issues, collapsed: true
+
+%section.other
+  .subscribed-threads
+    %h2= t ".subscribed_threads"
+    = threads_list @subscribed_threads
+  .involved-threads
+    %h2= t ".involved_threads"
+    = threads_list @involved_threads

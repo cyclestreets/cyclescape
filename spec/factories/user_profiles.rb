@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: user_profiles
+#
+#  id          :integer         not null, primary key
+#  user_id     :integer         not null
+#  picture_uid :string(255)
+#  website     :string(255)
+#  about       :text
+#
+
 FactoryGirl.define do
   factory :user_profile do
     user

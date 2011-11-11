@@ -3,18 +3,17 @@ class IssuesController < ApplicationController
   
   def index
     @issues = Issue.order("created_at DESC").limit(10)
-
-    # This needs more thought!
-    @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 14)
+    @start_location = index_start_location
   end
 
   def show
     @issue = Issue.find(params[:id])
+    @threads = @issue.threads
   end
 
   def new
     @issue = Issue.new
-    @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 14)
+    @start_location = current_user.start_location
   end
 
   def create
@@ -23,7 +22,7 @@ class IssuesController < ApplicationController
     if @issue.save
       redirect_to @issue
     else
-      @start_location = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(0.1477639423685, 52.27332049515, 14)
+      @start_location = Geo::NOWHERE_IN_PARTICULAR
       render :new
     end
   end
@@ -37,8 +36,8 @@ class IssuesController < ApplicationController
 
   def all_geometries
     if params[:bbox]
-      minlon, minlat, maxlon, maxlat = params[:bbox].split(",").collect{|i| i.to_f}
-      issues = Issue.where("st_intersects(location, setsrid('BOX3D(? ?, ? ?)'::box3d, 4326))", minlon, minlat, maxlon, maxlat).order("created_at DESC").limit(50)
+      bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
+      issues = Issue.intersects(bbox.to_geometry).order("created_at DESC").limit(50)
     else
       issues = Issue.order("created_at DESC").limit(50)
     end
@@ -47,5 +46,19 @@ class IssuesController < ApplicationController
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection)}
     end
+  end
+
+  def search
+    @query = params[:q]
+    @results = Issue.find_with_index(params[:q])
+  end
+
+  protected
+
+  def index_start_location
+    return current_user.start_location if current_user
+    # TODO return subdomain.group.location if subdomain
+    return @issues.last.location unless @issues.empty?
+    return Geo::NOWHERE_IN_PARTICULAR
   end
 end

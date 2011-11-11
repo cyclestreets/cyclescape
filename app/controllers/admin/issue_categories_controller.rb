@@ -11,6 +11,7 @@ class Admin::IssueCategoriesController < ApplicationController
     @category = IssueCategory.new(params[:issue_category])
 
     if @category.save
+      set_flash_message(:success)
       redirect_to action: :index
     else
       render :new
@@ -25,7 +26,7 @@ class Admin::IssueCategoriesController < ApplicationController
     @category = IssueCategory.find(params[:id])
 
     if @category.update_attributes(params[:issue_category])
-      flash.notice = t(".category_updated")
+      set_flash_message(:success)
       redirect_to action: :index
     else
       render :edit

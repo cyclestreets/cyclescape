@@ -1,0 +1,7 @@
+.deadline{id: dom_id(message.component)}
+  %h3= l message.component.deadline.to_date, format: :long
+  - deadline = message.component.deadline.to_date
+  - diff = deadline - DateTime.now.to_date
+  - if diff >= 0 && diff < 8
+    %p.warning= t ".days_away", count: diff.to_i
+  %p= message.component.title

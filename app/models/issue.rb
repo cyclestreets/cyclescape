@@ -15,6 +15,9 @@
 
 class Issue < ActiveRecord::Base
   include Locatable
+  include FakeDestroy
+
+  acts_as_indexed :fields => [:title, :description]
 
   belongs_to :created_by, class_name: "User"
   belongs_to :category, class_name: "IssueCategory"
@@ -26,6 +29,10 @@ class Issue < ActiveRecord::Base
 
   validates :created_by, presence: true
   validates :category, presence: true
+
+  def to_param
+    "#{id}-#{title.parameterize}"
+  end
 
   protected
 

@@ -1,6 +1,10 @@
 @import "grid";
 @import "utils";
 
+.hide {
+  display: none;
+}
+
 body > header > .inner, nav.bar, .flash-container, .content-container, body > footer {
   @include container;
 }
@@ -17,12 +21,31 @@ div.content {
   }
 }
 
+#overlay {
+  display: none;
+  width: 400px;
+  padding: 10px;
+  z-index: 1000;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
 // Tables
 
 table {
   margin-bottom: 12px;
   td, th {
     padding: 4px;
+  }
+}
+
+// Lists
+
+ul.horizontal, ol.horizontal {
+  li {
+    display: inline;
   }
 }
 
@@ -62,22 +85,50 @@ nav.bar .inner {
 }
 
 // Flash
+
 div.flash-container .flash {
   padding: 6px;
   padding-left: 12px;
   margin: 2px;
 }
 
+// Tabs
+
+ul.tabs {
+  float: left;
+  width: 100%;
+  margin-bottom: 6px;
+  li {
+    a {
+      float: left;
+      display: block;
+      padding: 6px;
+    }
+  }
+}
+
+div.panes > div {
+  float: left;
+  width: 100%;
+}
+
+// Footer
+
+footer > .wrapper {
+  @include column($full-span);
+  margin-top: 200px;
+}
+
 // Sign in
 
-body.devise_sessions div.content {
+body.devise-sessions div.content {
   @include column($half-span);
   @include push(4);
 }
 
 // Sign up
 
-body.devise_registrations div.content {
+body.devise-registrations div.content {
   @include column($half-span);
   @include push(4);
 }
@@ -94,24 +145,126 @@ body.home {
   }
 }
 
+// User dashboard
+body.dashboards {
+  section {
+    &.issues, &.threads, &.other {
+      @include column(4);
+    }
+  }
+}
+
 // Threads
 
 section.thread {
-  @include column(9);
+  @include column(9, "first");
+  header {
+    @include column(9);
+  }
   .info {
     margin-top: 2px;
     margin-bottom: 10px;
   }
+  .issue {
+    .description {
+      @include column(4, "first");
+    }
+    .tinymap {
+      @include column(2);
+    }
+  }
+}
+
+aside.sidebar {
+  @include column(3, "last");
+}
+
+article.thread.compact {
+  margin-bottom: 8px;
+  .wrapper {
+    margin: 4px;
+  }
+  h3 {
+    font-weight: bold;
+    margin: 0;
+  }
 }
 
 article.message {
-  @include column(9);
+  float: left;
+  width: 100%;
+  position: relative;
   margin-bottom: 10px;
+  min-height: 60px;
   .details {
-    @include column(2, "first");
+    padding: 4px;
+    .thumbnail {
+      float: left;
+      margin-right: 10px;
+    }
   }
   .body {
-    @include column(7, "last");
+    padding: 4px;
+    margin-left: 60px
+  }
+}
+
+// Issues
+
+section.issues {
+  .recent {
+    margin-top: 12px;
+  }
+  article.issue {
+    @include column(4);
+    .wrapper {
+      float: left;
+      width: 100%;
+    }
+    header {
+      padding: 4px;
+      margin-bottom: 4px;
+    }
+    h3 {
+      margin: 0;
+    }
+    .description {
+      float: left;
+      width: 200px;
+      margin: 4px;
+    }
+    .tinymap {
+      float: left;
+      width: 80px;
+      height: 80px;
+    }
+    .threads {
+      float: left;
+      width: 100%;
+      padding: 4px;
+    }
+  }
+}
+
+// Issue page
+article.issue {
+  @include column($full-span);
+  .main {
+    @include column(5, "first");
+  }
+  .additional {
+    @include column(4, "last");
+    #map {
+      height: 200px;
+    }
+  }
+  section.threads {
+    @include column(9);
+    margin: 0;
+    article.thread {
+      @include column(5);
+      margin: 0;
+    }
   }
 }
 
@@ -122,6 +275,20 @@ article.message {
     @include column(2, "first");
   }
   .form {
-    @include column(7, "last");
+    @include column(9, "last");
+  }
+}
+
+// Library
+
+body.libraries {
+  .head {
+    @include column($full-span);
+  }
+  .search {
+    @include column($full-span);
+  }
+  section.documents, section.notes {
+    @include column(4);
   }
 }

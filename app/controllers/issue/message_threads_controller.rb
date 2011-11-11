@@ -8,6 +8,7 @@ class Issue::MessageThreadsController < MessageThreadsController
 
   def new
     @thread = @issue.threads.build
+    @thread.privacy = @group.default_thread_privacy if @group
     @message = @thread.messages.build
   end
 

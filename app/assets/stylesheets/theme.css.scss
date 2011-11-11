@@ -1,5 +1,8 @@
 @import "utils";
 
+// Vars
+$details-text-color: gray;
+
 body > header {
   background: #bfbfbf;
   h1 a {
@@ -17,6 +20,12 @@ body > nav.bar > .inner {
 
 div.content h1 {
   border-bottom: 1px solid #bfbfbf;
+}
+
+#overlay {
+  background: white;
+  border: 1px solid #cecece;
+  @include border-radius(5px);
 }
 
 // Buttons and pseudo-buttons
@@ -43,4 +52,98 @@ div.flash {
 div.alert {
   background-color: #d60000;
   color: white;
+}
+
+div.notice {
+  background-color: #16c400;
+  color: white;
+}
+
+// Tabs
+ul.tabs {
+  li {
+    a {
+      border: 1px solid #cecece;
+      &:hover, &.current {
+        background: #cecece;
+      }
+    }
+  }
+}
+
+// Compact thread display
+
+article.thread.compact {
+  @include border-radius(5px);
+  border: 1px solid gray;
+  &:hover {
+    background: #cecece;
+  }
+}
+
+// Message widget display
+
+article.message {
+  @include border-radius(5px);
+  border: 1px solid gray;
+  .details {
+    color: gray;
+    background: #d8d8d8;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    .author a {
+      font-weight: bold;
+      color: black;
+    }
+    time {
+      font-size: 10px;
+    }
+  }
+  .body {
+    .deadline {
+      h3 {
+        font-weight: bold;
+      }
+      .warning {
+        color: red;
+      }
+    }
+  }
+}
+
+// Issues
+
+section.issues {
+  article.issue {
+    .wrapper {
+      @include border-radius(5px);
+      border: 1px solid gray;
+    }
+    header {
+      -webkit-border-top-left-radius: 5px;
+      -webkit-border-top-right-radius: 5px;
+      -moz-border-radius-topleft: 5px;
+      -moz-border-radius-topright: 5px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      background: #cecece;
+      color: gray;
+      h3 a {
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+      }
+    }
+  }
+}
+
+// Issue page
+article.issue {
+  section.details {
+    color: $details-text-color;
+  }
 }

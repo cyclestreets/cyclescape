@@ -1,0 +1,31 @@
+%h1= @group.name
+- if (@group.profile.location)
+  - m = tiny_display_map(@group.profile, geometry_group_profile_path(@group, :json)) do |map, page, html_id|
+    %div{id: html_id, class: "tinymap"}
+  != m.to_html
+- else
+  %p= t ".no_location"
+
+%h2= t ".recent_threads"
+- if (@recent_threads.count > 0)
+  %ul
+  - @recent_threads.each do |thread|
+    %li= link_to thread.title, thread_path(thread)
+- else
+  %p= t ".no_threads"
+
+%h2= t ".recent_issues"
+- if (@recent_issues.count > 0)
+  %ul
+  - @recent_issues.each do |issue|
+    %li= link_to issue.title, issue_path(issue)
+- else
+  %p= t ".no_issues"
+
+- if (@group.profile.location)
+  - m2 = display_bbox_map(@group.profile.location, all_geometries_issues_path(:json)) do |map2, page2|
+    %div#map
+  != m2.to_html
+
+- if current_user && !@group.members.include?(current_user)
+  = link_to t(".join_this_group"), new_group_membership_request_path(@group)

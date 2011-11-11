@@ -1,0 +1,15 @@
+#map-search
+  %span= t ".move_the_map_to"
+  %form#map-search-form{ action: "#", method: "get" }
+    %input#map-search-query{ type: "text", name: "street", value: t(".example_search")}
+    %input{ type: "submit", value: t(".submit") }
+  #map-search-status
+    #map-search-failed.hide= t ".search_failed"
+    #map-searching.hide= t ".searching"
+    #map-search-noresult.hide= t ".sorry_we_couldnt_find"
+    #map-search-main-result.hide
+      = t(".showing")
+      %span.name
+      = t(".near")
+      %span.near
+    %ol#map-search-results.hide

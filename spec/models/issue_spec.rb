@@ -102,4 +102,51 @@ describe Issue do
       end
     end
   end
+
+  describe "intersects" do
+    context "should accept a variety of geometry types" do
+      subject { FactoryGirl.create(:issue) }
+      let(:factory) { RGeo::Geos::Factory.new(srid: 4326) }
+
+      it "should accept a point" do
+        geom = factory.parse_wkt('POINT(-1 1)')
+        lambda { Issue.intersects(geom).all }.should_not raise_error
+      end
+
+      it "should accept a multipolygon" do
+        geom2 = factory.parse_wkt('MULTIPOLYGON (((0.0 0.0, 0.0 1.0, 1.0 1.0, 0.0 0.0)), ((0.0 4.0, 0.0 5.0, 1.0 5.0, 0.0 4.0)))')
+        lambda { Issue.intersects(geom2).all }.should_not raise_error
+      end
+    end
+  end
+
+  describe "find with index (search)" do
+    subject { FactoryGirl.create(:issue) }
+
+    it "should return the issue on title search" do
+      subject
+      results = Issue.find_with_index(subject.title)
+      results.should include(subject)
+    end
+
+    it "should return the issue on a description search" do
+      subject
+      results = Issue.find_with_index(subject.description)
+      results.should include(subject)
+    end
+
+    it "should match partial searches" do
+      subject
+      results = Issue.find_with_index(subject.description.split[0])
+      results.should include(subject)
+      results = Issue.find_with_index(subject.description.split[-1])
+      results.should include(subject)
+    end
+
+    it "should not find gobbledy-gook" do
+      subject
+      results = Issue.find_with_index("asdfasdf12354")
+      results.should be_empty
+    end
+  end
 end

@@ -14,9 +14,13 @@
 #
 
 class Message < ActiveRecord::Base
+  include FakeDestroy
+
   belongs_to :thread, class_name: "MessageThread"
   belongs_to :created_by, class_name: "User"
   belongs_to :component, polymorphic: true, autosave: true
+
+  scope :recent, order("created_at DESC").limit(3)
 
   validates :created_by_id, presence: true
   validates :body, presence: true, unless: :component

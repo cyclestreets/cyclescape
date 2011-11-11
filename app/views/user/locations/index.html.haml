@@ -2,12 +2,16 @@
 = link_to t(".new"), action: :new
 
 - if current_user.locations.count > 0
+  - m = display_bbox_map(current_user.buffered_locations, combined_geometry_user_locations_path(:json))
+  %div{id: 'map'}
+  != m.to_html
   %table
     %thead
       %th= t ".category"
       %th= t ".map"
       %th= t ".edit"
       %th= t ".delete"
+      %th= t ".overlapping_groups"
     - current_user.locations.each do |l|
       %tr
         %td= l.category.name
@@ -17,5 +21,12 @@
           != m.to_html
         %td= link_to t(".edit"), edit_user_location_path(l)
         %td= link_to t(".delete"), user_location_path(l), confirm: t(".confirm"), method: "delete"
+        %td
+          - if l.overlapping_groups.count > 0
+            %ul
+              - l.overlapping_groups.each do |g|
+                %li= link_to g.name, group_path(g)
+          - else
+            %span= t ".no_overlapping_groups"
 - else
   %p= t ".no_locations_yet"

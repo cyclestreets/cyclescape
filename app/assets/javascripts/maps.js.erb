@@ -1,0 +1,101 @@
+
+$.support.cors = false;  // Delete this when origin control is added to CycleStreets API
+
+var MapSearch = {
+  geocoder_url: "<%= Geocoder::URL %>",
+  geocoder_key: "<%= Geocoder::API_KEY %>",
+  zoom: "<%= Geo::MAP_SEARCH_ZOOM %>",
+  seqid: 0,
+  map: null,
+
+  set_map: function(map) {
+    this.map = map;
+  },
+
+  projection: function() {
+    return new OpenLayers.Projection("EPSG:4326");
+  },
+
+  search: function() {
+    this.seqid++;
+    var thiscall = this.seqid;
+    var self = this;
+    params = $("#map-search-form").serializeArray();
+    params.push({name: "key", value: this.geocoder_key});
+    extents = this.map.getExtent().clone().transform(map.getProjectionObject(), this.projection());
+    params.push({name: "n", value: extents.top},
+                {name: "s", value: extents.bottom},
+                {name: "e", value: extents.right},
+                {name: "w", value: extents.left});
+    $.ajax({
+        url: this.geocoder_url,
+        data: params,
+        dataType: ($.support.cors ? 'json' : 'jsonp'),
+        timeout: 10000,
+        success: function(response) {
+          self.handle_result(response, thiscall);
+        },
+        error: this.handle_error,
+    });
+    $("#map-searching").show();
+  },
+
+  handle_result: function(response, call_seq) {
+    // if not, then another search has been made since this one, so ignore
+    if (call_seq != this.seqid) return false;
+    if ($.isEmptyObject(response.results)) { // nothing found
+      $("#map-search-noresult").show();
+      return;
+    }
+
+    var results = this.parse_result(response);
+    var result = results[0];
+
+    // Centre map on first result
+    $('#map').trigger("recenter", {longitude: result.longitude, latitude: result.latitude, zoom: this.zoom});
+    $("#map-searching").hide();
+    $("#map-search-main-result").
+      find(".name").text(result.name).end().
+      find(".near").text(result.near).end().
+      show();
+
+    // Display search results
+    var list = $('<ol id="map-search-results"/>');
+    $(results).each(function(i, item) {
+      list.append(
+        $('<li />').
+        text(item.name + ' (' + item.near + ')').
+        click( function() {
+            $('#map').trigger("recenter", {longitude: item.longitude, latitude: item.latitude});
+            $("#map-search-main-result").
+              find(".name").text(item.name).end().
+              find(".near").text(item.near)
+        })
+      );
+    });
+    $('#map-search-results').replaceWith(list).show();
+  },
+
+  parse_result: function(response) {
+    // Workaround for multiple responses from odd API
+    if ($.isArray(response.results.result)) return response.results.result;
+    return [response.results.result];
+  },
+
+  handle_error: function() {
+    $("#map-search-failed").show();
+  },
+}
+
+$(function() {
+  $("#map").bind("recenter", function(e, params) {
+    var coords = new OpenLayers.LonLat(params.longitude, params.latitude).transform(MapSearch.projection(), map.getProjectionObject());
+    map.setCenter(coords, params.zoom);
+  });
+    
+  $('#map-search-form').submit(function() {
+    MapSearch.set_map(map);
+    MapSearch.search();
+    return false;
+  });
+});

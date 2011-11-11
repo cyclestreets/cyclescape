@@ -1,5 +1,7 @@
 class User::ProfilesController < ApplicationController
   before_filter :load_user, :load_profile
+  filter_access_to :edit, :create, :update, attribute_check: true, model: User
+  filter_access_to :all
 
   def show
   end
@@ -13,7 +15,7 @@ class User::ProfilesController < ApplicationController
 
   def update
     if @profile.update_attributes(params[:user_profile])
-      flash.notice = t(".user.profiles.update.profile_updated")
+      set_flash_message(:success)
       redirect_to action: :show
     else
       render :edit

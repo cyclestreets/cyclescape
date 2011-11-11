@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: user_locations
+#
+#  id          :integer         not null, primary key
+#  user_id     :integer         not null
+#  category_id :integer         not null
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#  location    :spatial({:srid=
+#
+
 require 'spec_helper'
 
 describe UserLocation do
@@ -55,6 +67,19 @@ describe UserLocation do
     it "should ignore a bogus geojson string" do
       subject.loc_json = 'Garbage'
       subject.should be_valid
+    end
+  end
+
+  context "overlapping groups" do
+    subject { FactoryGirl.create(:user_location) }
+    let(:small_group_profile) { FactoryGirl.create(:small_group_profile) }
+    let(:big_group_profile) { FactoryGirl.create(:big_group_profile) }
+
+    it "should identify the correct overlapping groups" do
+      big_group_profile
+      small_group_profile
+      subject.overlapping_groups.should include(big_group_profile.group)
+      subject.overlapping_groups.should_not include(small_group_profile.group)
     end
   end
 end

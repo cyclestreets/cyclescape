@@ -1,4 +1,4 @@
-Cyclekit::Application.routes.draw do
+Cyclescape::Application.routes.draw do
   devise_for :users
 
   resource :dashboard
@@ -6,19 +6,26 @@ Cyclekit::Application.routes.draw do
   resources :issues do
     get 'geometry', :on => :member
     get 'all_geometries', :on => :collection
+    get 'search', :on => :collection
     scope module: "issue" do
       resources :threads, controller: "message_threads"
     end
   end
 
   namespace :admin do
-    resources :groups, :issue_categories
+    resources :groups, :issue_categories, :users
+    match "home" => "home#index"
   end
 
   resources :groups do
     scope module: "group" do
       resources :members
       resources :memberships
+      resources :membership_requests do
+        post 'confirm', :on => :member
+        post 'reject', :on => :member
+        post 'cancel', :on => :member
+      end
       resources :threads, controller: "message_threads"
       resource :profile do
         get 'geometry', :on => :member
@@ -31,9 +38,21 @@ Cyclekit::Application.routes.draw do
     scope module: :message do
       resources :photos, only: [:create]
       resources :links, only: [:create]
+      resources :deadlines, only: [:create]
+      resources :library_items, only: [:create]
     end
     scope module: :message_thread do
       resources :subscriptions, only: [:create, :destroy]
+    end
+  end
+
+  resource :library do
+    scope module: "library" do
+      resource :search, only: [:new] do
+        get :create, on: :collection
+      end
+      resources :documents
+      resources :notes
     end
   end
 
@@ -46,7 +65,12 @@ Cyclekit::Application.routes.draw do
   namespace :user do
     resources :locations do
       get 'geometry', :on => :member
+      get 'combined_geometry', :on => :collection
     end
+  end
+
+  namespace :site do
+    resources :comments
   end
 
   root :to => "home#show"

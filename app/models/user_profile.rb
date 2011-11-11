@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: user_profiles
+#
+#  id          :integer         not null, primary key
+#  user_id     :integer         not null
+#  picture_uid :string(255)
+#  website     :string(255)
+#  about       :text
+#
+
 class UserProfile < ActiveRecord::Base
   image_accessor :picture do
     storage_path :generate_picture_path
@@ -5,10 +16,15 @@ class UserProfile < ActiveRecord::Base
 
   belongs_to :user
 
+  validates :website, url: true
   validates_property :mime_type, of: :picture, in: %w(image/jpeg image/png image/gif)
 
   def picture_thumbnail
-    picture.thumb("80x80>")
+    picture.thumb("50x50>")
+  end
+
+  def website=(val)
+    write_attribute(:website, AttributeNormaliser::URL.new(val).normalise)
   end
 
   protected

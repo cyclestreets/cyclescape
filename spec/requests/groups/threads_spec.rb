@@ -36,7 +36,30 @@ describe "Group threads" do
         page.should have_content(thread_attrs[:title])
       end
 
-      it "should create a new private thread"
+      it "should create a new private thread" do
+        fill_in "Title", with: thread_attrs[:title]
+        fill_in "Message", with: "This is between you an me, but..."
+        select "Group", from: "Privacy"
+        click_on "Create Thread"
+        page.should have_content("Private: Only members of #{current_group.name}")
+      end
+
+      it "should default to a public group thread" do
+        find_field('Privacy').find('option[selected]').text.should eql("Public")
+      end
+    end
+
+    context "in a secretive group" do
+      before do
+        current_group.default_thread_privacy = "group"
+        current_group.save
+        visit group_threads_path(current_group)
+        click_link "New Group Thread"
+      end
+
+      it "should default to a private group thread" do
+        find_field('Privacy').find('option[selected]').text.should eql("Group")
+      end
     end
 
     context "showing a thread" do

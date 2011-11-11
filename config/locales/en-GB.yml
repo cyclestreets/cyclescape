@@ -9,6 +9,27 @@
         edit: "Edit"
         edit_profile: "Edit Profile"
         members: "Members"
+      create:
+        success: "Group created"
+      update:
+        success: "Group updated"
+    issue_categories:
+      create:
+        success: "Category created"
+      index:
+        title: "Issue Categories"
+      update:
+        success: "Category updated"
+    users:
+      index:
+        created_at: "%{time_ago} ago"
+        disabled_at: "%{time_ago} ago"
+      update:
+        success: "User updated"
+  application:
+    account_disabled: "Your account has been disabled by an administrator"
+    permission_denied: "You are not authorised to access that page."
+    permission_denied_sign_in: "Please sign in before accessing that page."
   devise:
     registrations:
       new:
@@ -27,21 +48,56 @@
     memberships:
       new:
         title: "Invite New Member"
+    membership_requests:
+      cancel:
+        success: "Membership request cancelled"
+      confirm:
+        failure: "There was a problem confirming this membership request"
+        success: "Membership confirmed"
+      create:
+        requested: "Membership has been requested"
+        already_asked: "You have already asked to join this group"
+        already_member: "You are already a member of this group"
+      index:
+        are_you_sure: "Are you sure?"
+        by: "by %{name}"
+        title: "Membership Requests for %{group}"
+      new:
+        title: "Request membership of %{group_name}"
+        your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
+      reject:
+        failure: "There was a problem rejecting this membership request"
+        success: "Membership rejected"
     message_threads:
       index:
         title: "%{group}'s Threads"
         new_group_thread: "New Group Thread"
     profiles:
       update:
-        profile_updated: "Profile Updated"
+        success: "Profile Updated"
+  groups:
+    show:
+      no_issues: There are no issues in this group's area yet
+      no_location: This group doesn't have a location yet
+      no_threads: This group doesn't have any threads yet
+      recent_issues: Recent Issues in this group's area
+      recent_threads: Recent Threads created by this group
   issue:
     message_threads:
       new:
         title: "New Thread on %{issue}"
   issues:
+    index:
+      title: "All Issues"
+    search:
+      no_results_found: "No results found for '%{query}'."
+      results_found:
+        one: "One result found for '%{query}'."
+        other: "%{count} results found for '%{query}'"
+      title: "Issue Search Results"
     show:
-      added_by: "Added by %{name} on %{time}"
-      category: "Category: %{category}"
+      added_by_html: "Added by %{name} on %{time}"
+      category_html: "Category: %{category}"
       new_public_thread: "New Public Thread"
       new_group_thread: "New %{group} Thread"
       group_private: "Private to %{group}"
@@ -49,9 +105,26 @@
       public: "Public"
   layouts:
     application:
-      title: "CycleKit"
+      title: "Cyclescape"
       dashboard: "My Dashboard"
       admin: "Admin"
+      feedback: "Feedback"
+  libraries:
+    show:
+      title: "Library"
+      documents: "Documents"
+      notes: "Notes"
+  library:
+    documents:
+      new:
+        title: "New Document"
+    notes:
+      new:
+        title: "New Note"
+  mailers:
+    notifications:
+      gmr_confirmed:
+        subject: "You are now a member of %{group_name}"
   message_thread:
     subscriptions:
       create:
@@ -59,13 +132,52 @@
       destroy:
         success: "Unsubscribed."
   message_threads:
+    index:
+      title: "Threads"
+    new:
+      title: "New Thread"
     show:
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
-      posted_date: "Posted %{time_ago} ago"
     subscription_panel:
       subscribed: "You are subscribed to this thread."
       subscribed_by_email: "You are subscribed by email to this thread."
+      subscribers_list: "%{count_text} to this thread"
+  message:
+    deadlines:
+      create:
+        failure: "Deadline could not be created."
+        success: "Deadline created."
+      show:
+        days_away:
+          zero: "Today!"
+          one: "Tomorrow!"
+          other: "%{count} days away!"
+    link:
+      create:
+        failure: "Link could not be created."
+        success: "Link created."
+    photos:
+      create:
+        failure: "Could not create photo message."
+        success: "Photo uploaded."
+  messages:
+    message:
+      posted_date: "posted %{time_ago} ago"
+  shared:
+    map_search:
+      example_search: "Putney, UK"
+      move_the_map_to: "Move the map to"
+      near: "near"
+      searching: "Searching..."
+      search_failed: "Sorry, the search failed this time."
+      showing: "Showing"
+      sorry_we_couldnt_find: "Sorry, we couldn't find"
+      submit: "Go!"
+  site:
+    comments:
+      new:
+        title: "Feedback"
   user:
     locations:
       destroy:
@@ -74,16 +186,28 @@
       index:
         confirm: "Are you sure?"
       update:
-        location_updated: "Location Updated"
+        success: "Location Updated"
     profiles:
+      edit:
+        title: "Edit Profile"
+        my_current_thumbnail_title: "My current profile picture"
+      show:
+        edit: "Edit My Profile"
+        is_a_member_of_groups:
+          zero: "%{name} isn't a member of any groups yet"
+          one: "%{name} is a member of one group"
+          other: "%{name} is a member of %{count} groups"
+        my_locations: "My Locations"
+        profile_picture_title: "%{name}'s picture"
+        update_account: "Update My Account Details"
       update:
-        profile_updated: "Profile Updated"
+        success: "Profile Updated"
 
   date:
     formats:
       default: "%d-%m-%Y"
       short: "%d %b"
-      long: "%d %B, %Y"
+      long: "%d %B %Y"
 
     day_names:
       - Sunday

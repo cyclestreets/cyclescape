@@ -1,10 +1,12 @@
 .bundle
 .rvmrc
+.rbenv-version
 db/*.sqlite3
 log/*.log
 tmp/
 .sass-cache/
 config/database.yml
+config/secret_token
 public/assets
 bin/
 routes.txt

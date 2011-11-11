@@ -89,6 +89,19 @@ describe "Message threads" do
         click_on "Post Message"
         page.should have_content("Testing a new message!")
       end
+
+      it "should show the number of subscribers" do
+        page.should have_content("0 subscribers")
+        click_on "Subscribe"
+        page.should have_content("1 subscriber")
+      end
+
+      it "should show the names of subscribers" do
+        click_on "Subscribe"
+        within(".subscription-panel") do
+          page.should have_content(current_user.name)
+        end
+      end
     end
   end
 

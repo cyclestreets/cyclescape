@@ -7,7 +7,6 @@
 #  created_by_id :integer         not null
 #  group_id      :integer
 #  title         :string(255)     not null
-#  description   :text            not null
 #  privacy       :string(255)     not null
 #  state         :string(255)     not null
 #  created_at    :datetime        not null
@@ -48,6 +47,39 @@ describe MessageThread do
       subject.should_not be_public
       subject.privacy = "public"
       subject.should be_public
+    end
+  end
+
+  describe "participants" do
+    it "should have zero participants" do
+      thread = FactoryGirl.create(:message_thread)
+      thread.participants.count.should == 0
+    end
+
+    it "should have one participant" do
+      thread = FactoryGirl.create(:message_thread_with_messages)
+      thread.participants.count.should == 1
+    end
+  end
+
+  describe "with messages from" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:thread) { FactoryGirl.create(:message_thread) }
+    let(:message) { FactoryGirl.create(:message, thread: thread, created_by: user) }
+
+    it "should be empty" do
+      MessageThread.with_messages_from(user).should be_empty
+    end
+
+    it "should find one thread" do
+      message
+      MessageThread.with_messages_from(user).count.should == 1
+    end
+
+    it "should only find one thread with multiple messages from the same user" do
+      message
+      message2 = FactoryGirl.create(:message, thread: thread, created_by: user)
+      MessageThread.with_messages_from(user).count.should == 1
     end
   end
 end

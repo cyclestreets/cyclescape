@@ -1,0 +1,22 @@
+%h1= t ".users"
+%table
+  %thead
+    %th= t ".id"
+    %th= t ".display_name"
+    %th= t ".full_name"
+    %th= t ".email"
+    %th= t ".role"
+    %th= t ".created"
+    %th= t ".disabled"
+    %th= t ".edit"
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.display_name
+        %td= user.full_name
+        %td= user.email
+        %td= user.role
+        %td= t ".created_at", time_ago: time_ago_in_words(user.created_at)
+        %td= t ".disabled_at", time_ago: time_ago_in_words(user.disabled_at) if user.disabled_at?
+        %td= link_to t(".edit"), edit_admin_user_path(user)

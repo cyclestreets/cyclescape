@@ -38,6 +38,10 @@ FactoryGirl.define do
       after_build {|u| FactoryGirl.build(:user_profile, user: u) }
     end
 
+    trait :with_location do
+      after_build {|u| FactoryGirl.create(:user_location, user: u) }
+    end
+
     factory :stewie do
       email "stewie@example.com"
       full_name "Stewie Griffin"
@@ -45,6 +49,8 @@ FactoryGirl.define do
       password "Victory is mine!"
       password_confirmation "Victory is mine!"
       admin
+
+      factory :stewie_with_profile, traits: [:with_profile]
     end
 
     factory :brian do
@@ -55,6 +61,23 @@ FactoryGirl.define do
       password_confirmation "BRI-D0G"
     end
 
-    factory :stewie_with_profile, traits: [:with_profile]
+    factory :meg do
+      email "meg@example.com"
+      full_name "Meg Griffin"
+      display_name "Meg"
+      password "MegGriffin"
+      password_confirmation "MegGriffin"
+    end
+
+    factory :chris do
+      email "chris@example.com"
+      full_name "Chris Griffin"
+      display_name "Chris"
+      password "ChrisGriffin"
+      password_confirmation "ChrisGriffin"
+    end
+
+
+    factory :user_with_location, traits: [:with_location]
   end
 end

@@ -4,7 +4,7 @@ describe "Photo messages" do
   let(:thread) { FactoryGirl.create(:message_thread) }
 
   def photo_form
-    within(".new-photo-message") { yield }
+    within("#new-photo-message") { yield }
   end
 
   context "new" do

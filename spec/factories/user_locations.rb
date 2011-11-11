@@ -1,6 +1,18 @@
+# == Schema Information
+#
+# Table name: user_locations
+#
+#  id          :integer         not null, primary key
+#  user_id     :integer         not null
+#  category_id :integer         not null
+#  created_at  :datetime        not null
+#  updated_at  :datetime        not null
+#  location    :spatial({:srid=
+#
+
 FactoryGirl.define do
   factory :user_location do
-    location "POINT(-122 47)"
+    location "POINT(2 2)"
     association :category, factory: :location_category
     association :user
 

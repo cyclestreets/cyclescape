@@ -11,7 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111020121546) do
+ActiveRecord::Schema.define(:version => 20111110151343) do
+
+  create_table "deadline_messages", :force => true do |t|
+    t.integer  "thread_id",         :null => false
+    t.integer  "message_id",        :null => false
+    t.integer  "created_by_id",     :null => false
+    t.datetime "deadline",          :null => false
+    t.string   "title",             :null => false
+    t.datetime "created_at"
+    t.datetime "invalidated_at"
+    t.integer  "invalidated_by_id"
+  end
+
+  create_table "group_membership_requests", :force => true do |t|
+    t.integer  "user_id",        :null => false
+    t.integer  "group_id",       :null => false
+    t.string   "status",         :null => false
+    t.integer  "actioned_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "group_memberships", :force => true do |t|
     t.integer  "user_id",    :null => false
@@ -31,13 +51,14 @@ ActiveRecord::Schema.define(:version => 20111020121546) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string   "name",        :null => false
-    t.string   "short_name",  :null => false
+    t.string   "name",                                         :null => false
+    t.string   "short_name",                                   :null => false
     t.string   "website"
     t.string   "email"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.datetime "disabled_at"
+    t.string   "default_thread_privacy", :default => "public", :null => false
   end
 
   create_table "issue_categories", :force => true do |t|
@@ -55,6 +76,37 @@ ActiveRecord::Schema.define(:version => 20111020121546) do
     t.datetime "deleted_at"
     t.integer  "category_id"
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
+  end
+
+  create_table "library_documents", :force => true do |t|
+    t.integer "library_item_id", :null => false
+    t.string  "title",           :null => false
+    t.string  "file_uid"
+    t.string  "file_name"
+    t.integer "file_size"
+  end
+
+  create_table "library_item_messages", :force => true do |t|
+    t.integer "thread_id",       :null => false
+    t.integer "message_id",      :null => false
+    t.integer "library_item_id", :null => false
+  end
+
+  create_table "library_items", :force => true do |t|
+    t.integer  "component_id"
+    t.string   "component_type"
+    t.integer  "created_by_id",                                              :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
+    t.spatial  "location",       :limit => {:srid=>4326, :type=>"geometry"}
+  end
+
+  create_table "library_notes", :force => true do |t|
+    t.integer "library_item_id",     :null => false
+    t.string  "title"
+    t.text    "body",                :null => false
+    t.integer "library_document_id"
   end
 
   create_table "link_messages", :force => true do |t|
@@ -103,6 +155,17 @@ ActiveRecord::Schema.define(:version => 20111020121546) do
     t.string   "caption"
     t.text     "description"
     t.datetime "created_at",    :null => false
+  end
+
+  create_table "site_comments", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.text     "body",         :null => false
+    t.string   "context_url"
+    t.text     "context_data"
+    t.datetime "created_at",   :null => false
+    t.datetime "viewed_at"
   end
 
   create_table "thread_subscriptions", :force => true do |t|

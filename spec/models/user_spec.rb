@@ -31,6 +31,10 @@ describe User do
     it "must have a member role" do
       subject.role.should == "member"
     end
+
+    it "should be active" do
+      subject.disabled.should be_false
+    end
   end
 
   describe "to be valid" do
@@ -150,6 +154,134 @@ describe User do
         new_thread = FactoryGirl.create(:message_thread)
         subject.subscribed_to_thread?(new_thread).should be_false
       end
+    end
+
+    context "subscribed threads" do
+      it "should have one thread" do
+        subject.should have(1).subscribed_thread
+        subject.subscribed_threads.first.should == thread
+      end
+    end
+  end
+
+  context "involved threads" do
+    subject { FactoryGirl.create(:user) }
+    let(:thread) { FactoryGirl.create(:message_thread) }
+    let(:message) { FactoryGirl.create(:message, created_by: subject, thread: thread) }
+
+    it "should be empty" do
+      subject.involved_threads.should be_empty
+    end
+
+    it "should have a thread" do
+      message
+      subject.should have(1).involved_thread
+      subject.involved_threads.first.should == message.thread
+    end
+  end
+
+  context "account disabling" do
+    subject { FactoryGirl.create(:user) }
+
+    it "should be disabled" do
+      subject.disabled = "1"
+      subject.disabled.should be_true
+      subject.disabled_at.should be_a_kind_of(Time)
+    end
+
+    it "should be enabled" do
+      subject.disabled = "1"
+      subject.disabled = "0"
+      subject.disabled.should be_false
+      subject.disabled_at.should be_nil
+    end
+
+    it "should work with mass-update" do
+      subject.update_attributes(disabled: "1")
+      subject.reload
+      subject.disabled.should be_true
+    end
+  end
+
+  context "buffered locations" do
+    subject { FactoryGirl.create(:user_with_location) }
+    let(:point) { 'POINT(-1 1)' }
+    let(:line) { 'LINESTRING (0 0, 0 1)' }
+    let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
+
+    it "should return polygon for point" do
+      subject.locations[0].location = point
+      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
+    end
+
+    it "should return polygon for line" do
+      subject.locations[0].location = line
+      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
+    end
+
+    it "should return polygon for polygon" do
+      subject.locations[0].location = polygon
+      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
+    end
+
+    it "should return multipolygon for point, line and polygon combined" do
+      subject.locations[0].location = point
+      subject.locations.create({location: line})
+      subject.locations.create({location: polygon})
+      subject.buffered_locations.should be_an(RGeo::Geos::MultiPolygonImpl)
+    end
+  end
+
+  context "issues near locations" do
+    subject { FactoryGirl.create(:user_with_location) }
+    let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
+
+    it "should return correct issues" do
+      a = 1 + Geo::USER_LOCATIONS_BUFFER / 2
+      issue_in = FactoryGirl.create(:issue, location: 'POINT(0.5 0.5)')
+      issue_close = FactoryGirl.create(:issue, location: "POINT(#{a} #{a})")
+      issue_out = FactoryGirl.create(:issue, location: 'POINT(1.5 1.5)')
+      subject.locations[0].location = polygon
+      issues = subject.issues_near_locations
+      issues.count.should eql(2)
+      issues.should include(issue_in, issue_close)
+      issues.should_not include(issue_out)
+    end
+  end
+
+  context "start location" do
+    subject { FactoryGirl.create(:user) }
+    let(:group) { FactoryGirl.create(:group) }
+    let(:group2) { FactoryGirl.create(:group) }
+    let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
+    let(:user_location) { FactoryGirl.build(:user_location) }
+
+    it "should return a relevant location" do
+      # start with nowhere
+      subject.start_location.should eql(Geo::NOWHERE_IN_PARTICULAR)
+
+      # add a group with no location
+      GroupMembership.create(user: subject, group: group, role: "member")
+      subject.reload
+      subject.start_location.should eql(Geo::NOWHERE_IN_PARTICULAR)
+
+      # add a group with a location
+      group2.profile.location = polygon
+      group2.profile.save!
+      GroupMembership.create(user: subject, group: group2, role: "member")
+      subject.reload
+      subject.start_location.should eql(group2.profile.location)
+
+      # Then add a user location
+      user_location.user = subject
+      user_location.save!
+      subject.start_location.should eql(user_location.location)
+
+      # Then test that the primary location category overrides it
+      # todo
     end
   end
 end

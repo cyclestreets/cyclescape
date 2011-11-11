@@ -1,14 +1,21 @@
 .subscription-panel
-  - if signed_in? && current_user.subscribed_to_thread?(@thread)
-    - subscription = current_user.thread_subscriptions.to(@thread)
-    - if subscription.send_email?
-      %p= t(".subscribed_by_email")
+  .subscribers
+    %p= t ".subscribers_list", count_text: pluralize(@subscribers.count, "subscriber")
+    .list
+      %ul
+        - @subscribers.each do |sub|
+          %li= link_to_profile sub
+  .subscribe
+    - if signed_in? && current_user.subscribed_to_thread?(@thread)
+      - subscription = current_user.thread_subscriptions.to(@thread)
+      - if subscription.send_email?
+        %p= t(".subscribed_by_email")
+      - else
+        %p= t(".subscribed")
+      = semantic_form_for subscription, url: thread_subscription_path(@thread, subscription, action: :destroy), method: :delete do |f|
+        = f.buttons do
+          = f.commit_button :delete
     - else
-      %p= t(".subscribed")
-    = semantic_form_for subscription, url: thread_subscription_path(@thread, subscription, action: :destroy), method: :delete do |f|
-      = f.buttons do
-        = f.commit_button :delete
-  - else
-    = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: @thread, action: :create) do |f|
-      = f.inputs :send_email
-      = f.buttons
+      = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: @thread, action: :create) do |f|
+        = f.inputs :send_email
+        = f.buttons

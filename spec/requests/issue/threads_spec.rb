@@ -51,6 +51,25 @@ describe "Issue threads" do
         page.should have_content("Awesome!")
         page.should have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
       end
+
+      it "should default to a public group thread" do
+        visit issue_path(issue)
+        click_on "New #{current_group.name} Thread"
+        find_field('Privacy').find('option[selected]').text.should eql("Public")
+      end
+
+      context "in a secretive group" do
+        before do
+          current_group.default_thread_privacy = "group"
+          current_group.save
+        end
+
+        it "should default to a private group thread" do
+          visit issue_path(issue)
+          click_on "New #{current_group.name} Thread"
+          find_field('Privacy').find('option[selected]').text.should eql("Group")
+        end
+      end
     end
   end
 end

@@ -1,28 +1,31 @@
 !!!
 %html
   %head
-    %title Cyclekit
+    %title= t ".title"
+    = favicon_link_tag 'favicon.ico', type: "image/x-icon"
     = stylesheet_link_tag    "application"
-    = javascript_include_tag "application"
-    = csrf_meta_tags
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
-  %body{class: controller_path.gsub('/', '_')}
+    = javascript_include_tag "application"
+    %script(src="http://cdn.jquerytools.org/1.2.6/all/jquery.tools.min.js" type="text/javascript")
+    = csrf_meta_tags
+  %body{class: controller_path.tr("/_", "-")}
     %header.top
       .inner
-        %h1= link_to t(".title"), root_path
+        = link_to image_tag("header_logo.png", alt: t(".title")), root_path
     %nav.bar
       .inner
         - if current_user
           .main-menu
             %ul
               %li= link_to t(".dashboard"), dashboard_path
-              - if permitted_to? :manage, :admin_groups
-                %li= link_to t(".admin"), admin_groups_path
+              - if permitted_to? :view, :admin_home
+                %li= link_to t(".admin"), admin_home_path
               %li= link_to t(".issues"), issues_path
               %li= link_to t(".threads"), threads_path
+              %li= link_to t(".library"), library_path
           .account-menu
             %ul
-              %li.name= link_to current_user.name, user_profile_path(current_user)
+              %li.name= link_to_profile current_user
               %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"
         - else
           .public-menu
@@ -38,4 +41,8 @@
     .content-container
       .content
         = yield
+        #overlay
+          .wrapper
     %footer
+      .wrapper
+        = link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"

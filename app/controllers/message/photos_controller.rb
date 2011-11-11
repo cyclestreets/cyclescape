@@ -1,6 +1,4 @@
-class Message::PhotosController < ApplicationController
-  before_filter :load_thread
-
+class Message::PhotosController < Message::BaseController
   def create
     @message = @thread.messages.build(params[:message].merge({created_by: current_user}))
     @photo = PhotoMessage.new(params[:photo_message].merge({
@@ -10,17 +8,10 @@ class Message::PhotosController < ApplicationController
     @message.component = @photo
 
     if @message.save
-      flash.notice = "Photo uploaded."
+      set_flash_message(:success)
     else
-      flash.alert = "Could not create photo message."
+      set_flash_message(:failure)
     end
     redirect_to thread_path(@thread)
-  end
-
-  protected
-
-  def load_thread
-    # Need to check if user has access?
-    @thread = MessageThread.find(params[:thread_id])
   end
 end

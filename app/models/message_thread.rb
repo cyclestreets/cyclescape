@@ -20,13 +20,21 @@ class MessageThread < ActiveRecord::Base
   belongs_to :group
   belongs_to :issue
   has_many :messages, foreign_key: "thread_id", autosave: true
-  has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id"
+  has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id", conditions: "deleted_at IS NULL"
   has_many :subscribers, through: :subscriptions, source: :user
+  has_many :participants, through: :messages, source: :created_by, uniq: true
+
+  scope :public, where("privacy = 'public'")
+  scope :private, where("privacy = 'group'")
 
   validates :title, :state, :created_by_id, presence: true
   validates :privacy, inclusion: {in: ALLOWED_PRIVACY}
 
   state_machine :state, initial: :new do
+  end
+
+  def self.with_messages_from(user)
+    where "EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)", user
   end
 
   def private_to_group?
