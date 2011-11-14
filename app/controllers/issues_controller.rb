@@ -65,6 +65,28 @@ class IssuesController < ApplicationController
     @results = Issue.find_with_index(params[:q])
   end
 
+  def vote_up
+    @issue = Issue.find(params[:id])
+    if current_user.voted_for?(@issue)
+      set_flash_message(:already)
+    else
+      current_user.vote_exclusively_for(@issue)
+      set_flash_message(:success)
+    end
+    redirect_to @issue
+  end
+
+  def vote_down
+    @issue = Issue.find(params[:id])
+    if current_user.voted_against?(@issue)
+      set_flash_message(:already)
+    else
+      current_user.vote_exclusively_against(@issue)
+      set_flash_message(:success)
+    end
+    redirect_to @issue
+  end
+
   protected
 
   def index_start_location

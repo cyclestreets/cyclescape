@@ -8,6 +8,15 @@
         %li= t ".category_html", category: @issue.category.name
     %section.description
       = @issue.description
+    %section.voting
+      %ul
+        %li
+          = link_to t(".vote_up"), vote_up_issue_path(@issue), method: :put
+          = " \u2714" if current_user && current_user.voted_for?(@issue)
+        %li= @issue.plusminus
+        %li
+          = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put
+          = " \u2714" if current_user && current_user.voted_against?(@issue)
   .additional
     %section.map
       = render partial: "map", locals: { issue: @issue }

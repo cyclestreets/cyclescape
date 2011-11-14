@@ -7,6 +7,8 @@ Cyclescape::Application.routes.draw do
     get 'geometry', :on => :member
     get 'all_geometries', :on => :collection
     get 'search', :on => :collection
+    put 'vote_up', :on => :member
+    put 'vote_down', :on => :member
     scope module: "issue" do
       resources :threads, controller: "message_threads"
     end
