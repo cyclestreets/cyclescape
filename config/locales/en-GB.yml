@@ -87,6 +87,9 @@
       new:
         title: "New Thread on %{issue}"
   issues:
+    destroy:
+      failure: "Can't delete that issue"
+      success: "Issue deleted"
     index:
       title: "All Issues"
     search:
@@ -98,6 +101,8 @@
     show:
       added_by_html: "Added by %{name} on %{time}"
       category_html: "Category: %{category}"
+      confirm_delete: "Are you sure?"
+      delete_issue: "Delete this issue"
       new_public_thread: "New Public Thread"
       new_group_thread: "New %{group} Thread"
       group_private: "Private to %{group}"

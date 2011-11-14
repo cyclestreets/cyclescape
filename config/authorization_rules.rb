@@ -8,6 +8,7 @@ authorization do
     has_permission_on :admin_groups, :group_members, :group_memberships, to: :manage
     has_permission_on :admin_users, :admin_issue_categories, to: :manage
     has_permission_on :admin_home, to: :view
+    has_permission_on :issues, to: :destroy
   end
 
   role :member do
