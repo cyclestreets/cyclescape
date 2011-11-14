@@ -41,6 +41,10 @@ describe Issue do
       subject.loc_json.should be_a(String)
       subject.loc_json.should eql(RGeo::GeoJSON.encode(subject.location).to_json)
     end
+
+    it "should have no votes" do
+      subject.votes_count.should be(0)
+    end
   end
 
   describe "to be valid" do
@@ -172,6 +176,47 @@ describe Issue do
 
     it "should appear when the default scope is removed" do
       Issue.unscoped.should include(subject)
+    end
+  end
+
+  describe "votes" do
+    subject { FactoryGirl.create(:issue) }
+    let(:brian) { FactoryGirl.create(:brian) }
+    let(:meg) { FactoryGirl.create(:meg) }
+
+    it "should allow upvoting" do
+      brian.vote_for(subject)
+      subject.votes_count.should eql(1)
+      subject.votes_for.should eql(1)
+      subject.votes_against.should eql(0)
+    end
+
+    it "should allow downvoting" do
+      brian.vote_against(subject)
+      subject.votes_against.should eql(1)
+    end
+
+    it "should not allow duplicate votes" do
+      brian.vote_for(subject)
+      lambda { brian.vote_for(subject) }.should raise_error
+    end
+
+    it "should allow a change of vote" do
+      brian.vote_against(subject)
+      brian.vote_exclusively_for(subject)
+      subject.votes_count.should eql(1)
+      subject.votes_for.should eql(1)
+      subject.votes_against.should eql(0)
+    end
+
+    it "should give a plusminus summary" do
+      brian.vote_for(subject)
+      meg.vote_for(subject)
+      subject.plusminus.should eql(2)
+      meg.vote_exclusively_against(subject)
+      subject.plusminus.should eql(0)
+      brian.vote_exclusively_against(subject)
+      subject.plusminus.should eql(-2)
     end
   end
 end
