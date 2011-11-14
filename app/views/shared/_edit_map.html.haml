@@ -70,6 +70,10 @@
 :javascript
   vectorlayer.events.on({featureadded: feature_added});
   vectorlayer.events.on({featuremodified: feature_modified});
+
+  // Set the default control to be drawing a point
+  toolbar.activateControl(toolbar.controls[1]);
+
   // This is also triggered if the user refreshes the page, and the browser persists
   // the hidden form value. Ensures the map ends up where the feature is.
   if ( document.getElementById(geo_field).value != '' ) {
