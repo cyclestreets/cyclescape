@@ -160,4 +160,71 @@ describe "Issues" do
       end
     end
   end
+
+  context "voting" do
+    let(:issue) { FactoryGirl.create(:issue, category: issue_category) }
+    let(:meg) { FactoryGirl.create(:meg) }
+
+    before do
+      meg.vote_for(issue)
+    end
+
+    context "as a visitor" do
+      before do
+        visit issue_path(issue)
+      end
+
+      it "should show the vote count" do
+        within(".voting") do
+          page.should have_content("1")
+        end
+      end
+
+      it "should not allow you to vote" do
+        click_on "Vote Up"
+        page.should have_content("Please sign in before accessing that page.")
+        issue.votes_count.should eql(1)
+      end
+    end
+
+    context "as a site user" do
+      include_context "signed in as a site user"
+      before do
+        visit issue_path(issue)
+      end
+
+      it "should allow you to vote up" do
+        click_on "Vote Up"
+        page.should have_content("You have voted up this issue")
+        within(".voting") do
+          page.should have_content("2")
+        end
+      end
+
+      it "should allow you to vote down" do
+        click_on "Vote Down"
+        page.should have_content("You have voted down this issue")
+        within(".voting") do
+          page.should have_content("0")
+        end
+      end
+
+      it "shouldn't count repeated votes" do
+        click_on "Vote Up"
+        click_on "Vote Up"
+        page.should have_content("You've already voted up this issue")
+        within(".voting") do
+          page.should have_content("2")
+        end
+      end
+
+      it "should allow you to change your vote" do
+        click_on "Vote Up"
+        click_on "Vote Down"
+        within(".voting") do
+          page.should have_content("0")
+        end
+      end
+    end
+  end
 end
