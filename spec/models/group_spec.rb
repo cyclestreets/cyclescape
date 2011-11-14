@@ -66,7 +66,7 @@ describe Group do
       end
 
       it "should not be an important subdomain" do
-        %w{www ftp smtp imap}.each do |d|
+        %w{www ftp smtp imap munin}.each do |d|
           subject.short_name = d
           subject.should have(1).error_on(:short_name)
         end
