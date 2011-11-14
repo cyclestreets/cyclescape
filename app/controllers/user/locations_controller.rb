@@ -3,8 +3,9 @@ class User::LocationsController < ApplicationController
   end
 
   def new
-    @location = current_user.locations.new
+    # Get the start location before creating a new blank one
     @start_location = current_user.start_location
+    @location = current_user.locations.new
   end
 
   def create
