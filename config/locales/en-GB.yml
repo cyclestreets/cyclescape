@@ -192,6 +192,8 @@
         title: "Feedback"
   user:
     locations:
+      create:
+        success: "Location Created"
       destroy:
         failure: "That location can't be deleted"
         success: "Location deleted"
