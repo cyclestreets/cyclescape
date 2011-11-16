@@ -30,7 +30,6 @@ class ApplicationController < ActionController::Base
 
   def permission_denied
     if current_user.nil?
-      flash.alert = t(".application.permission_denied_sign_in")
       authenticate_user!
     else
       render status: :unauthorized, text: t(".application.permission_denied")

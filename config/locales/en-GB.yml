@@ -29,7 +29,6 @@
   application:
     account_disabled: "Your account has been disabled by an administrator"
     permission_denied: "You are not authorised to access that page."
-    permission_denied_sign_in: "Please sign in before accessing that page."
   devise:
     registrations:
       new:
