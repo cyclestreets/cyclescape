@@ -21,7 +21,7 @@ describe "User locations" do
       find("#user_location_loc_json").set(location_attributes[:loc_json])
       click_on "Create User location"
 
-      #page.should have_content("Location created")
+      page.should have_content("Location Created")
       page.should have_content("Route to School")
     end
   end

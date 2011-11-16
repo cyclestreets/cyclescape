@@ -12,6 +12,7 @@ class User::LocationsController < ApplicationController
     @location = current_user.locations.new(params[:user_location])
 
     if @location.save
+      set_flash_message(:success)
       redirect_to action: :index
     else
       @start_location = Geo::NOWHERE_IN_PARTICULAR
