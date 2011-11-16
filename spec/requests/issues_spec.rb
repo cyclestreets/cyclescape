@@ -182,7 +182,7 @@ describe "Issues" do
 
       it "should not allow you to vote" do
         click_on "Vote Up"
-        page.should have_content("Please sign in before accessing that page.")
+        page.should have_content("You need to sign in or sign up before continuing.")
         issue.votes_count.should eql(1)
       end
     end
