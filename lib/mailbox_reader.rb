@@ -10,6 +10,9 @@ class MailboxReader
   end
 
   def self.mailboxes_config
-    @config ||= YAML::load(File.read(Rails.root + "config" + "mailboxes.yml"))
+    return @config if @config
+    config_path = File.read(Rails.root + "config" + "mailboxes.yml")
+    raise "Mailboxes config file not found at #{config_path}" unless File.exist?(config_path)
+    @config ||= YAML::load(config_path).with_indifferent_access
   end
 end
