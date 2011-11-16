@@ -18,6 +18,7 @@ class Issue < ActiveRecord::Base
   include FakeDestroy
 
   acts_as_indexed :fields => [:title, :description]
+  acts_as_voteable
 
   belongs_to :created_by, class_name: "User"
   belongs_to :category, class_name: "IssueCategory"
