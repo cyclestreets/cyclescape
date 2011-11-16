@@ -16,7 +16,7 @@ gem 'rgeo-geojson', require: "rgeo/geo_json"
 
 # Back-end gems
 gem 'devise'
-gem 'devise_invitable'
+gem 'devise_invitable', "0.5.6"
 gem 'declarative_authorization'
 gem 'thin'
 gem 'state_machine'
