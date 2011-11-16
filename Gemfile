@@ -24,6 +24,7 @@ gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly'
 gem 'acts_as_indexed'
 gem 'thumbs_up'
+gem 'exceptional'
 
 # Gems used only for assets and not required
 # in production environments by default.
