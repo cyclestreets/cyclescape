@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Message threads" do
-  let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
   let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5) }
 
   context "as a public user" do
