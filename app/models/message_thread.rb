@@ -14,6 +14,8 @@
 #
 
 class MessageThread < ActiveRecord::Base
+  include FakeDestroy
+
   ALLOWED_PRIVACY = %w(public group)
 
   belongs_to :created_by, class_name: "User"
@@ -26,6 +28,8 @@ class MessageThread < ActiveRecord::Base
 
   scope :public, where("privacy = 'public'")
   scope :private, where("privacy = 'group'")
+
+  default_scope where("deleted_at IS NULL")
 
   validates :title, :state, :created_by_id, presence: true
   validates :privacy, inclusion: {in: ALLOWED_PRIVACY}

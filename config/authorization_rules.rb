@@ -9,6 +9,7 @@ authorization do
     has_permission_on :admin_users, :admin_issue_categories, to: :manage
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: :destroy
+    has_permission_on :message_threads, to: :destroy
     has_permission_on :messages, to: :censor
   end
 
