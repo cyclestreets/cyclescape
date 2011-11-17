@@ -173,6 +173,8 @@
       create:
         failure: "Could not create photo message."
         success: "Photo uploaded."
+      show:
+        photo_alt: "A photo entitled %{caption}."
   messages:
     message:
       posted_date: "posted %{time_ago} ago"
