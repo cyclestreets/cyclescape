@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117131252) do
+ActiveRecord::Schema.define(:version => 20111117134428) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(:version => 20111117131252) do
 
   create_table "inbound_mails", :force => true do |t|
     t.string   "recipient",                        :null => false
-    t.text     "message",                          :null => false
+    t.text     "raw_message",                      :null => false
     t.datetime "created_at",                       :null => false
     t.datetime "processed_at"
     t.boolean  "process_error", :default => false, :null => false
