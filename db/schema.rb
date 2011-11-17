@@ -145,6 +145,8 @@ ActiveRecord::Schema.define(:version => 20111117134428) do
     t.string   "public_token"
   end
 
+  add_index "message_threads", ["public_token"], :name => "index_message_threads_on_public_token", :unique => true
+
   create_table "messages", :force => true do |t|
     t.integer  "created_by_id",  :null => false
     t.integer  "thread_id",      :null => false
