@@ -191,6 +191,7 @@ describe "Message threads" do
       it "should let you delete the thread" do
         click_on delete_thread
         page.should have_content("Thread deleted")
+        page.should_not have_content(thread.title)
       end
     end
   end
