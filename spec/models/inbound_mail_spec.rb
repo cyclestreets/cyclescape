@@ -25,4 +25,18 @@ describe InboundMail do
       mail.message.should be_a(Mail::Message)
     end
   end
+
+  context "factory" do
+    it "should have a known recipient" do
+      mail = FactoryGirl.build(:inbound_mail)
+      mail.recipient.should == "traumatic@strangeperil.co.uk"
+      mail.message.to.first.should == "traumatic@strangeperil.co.uk"
+    end
+
+    it "should adjust the recipients" do
+      mail = FactoryGirl.build(:inbound_mail, to: "quagmire@giggity.com")
+      mail.recipient.should == "quagmire@giggity.com"
+      mail.message.to.first.should == "quagmire@giggity.com"
+    end
+  end
 end
