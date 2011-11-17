@@ -51,6 +51,7 @@ group :development, :test do
   gem 'rspec-core'
   gem 'rspec-rails'
   gem 'spork', '~> 0.9.0.rc'
+  gem 'ruby-prof'
 end
 
 group :test do

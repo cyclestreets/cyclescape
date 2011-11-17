@@ -176,6 +176,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.7.0)
+    ruby-prof (0.10.8)
     ruby_parser (2.3.1)
       sexp_processor (~> 3.0)
     rubyzip (0.9.4)
@@ -257,6 +258,7 @@ DEPENDENCIES
   rspec-core
   rspec-expectations
   rspec-rails
+  ruby-prof
   ruby_parser
   sass-rails (~> 3.1.0)
   shoulda-matchers
