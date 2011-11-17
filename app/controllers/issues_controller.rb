@@ -3,6 +3,7 @@ class IssuesController < ApplicationController
   def index
     @issues = Issue.order("created_at DESC").limit(10)
     @start_location = index_start_location
+    @popular_issues = Issue.plusminus_tally(start_at: 2.weeks.ago) # only count recent votes
   end
 
   def show
