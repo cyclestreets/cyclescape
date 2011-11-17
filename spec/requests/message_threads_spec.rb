@@ -163,6 +163,8 @@ describe "Message threads" do
         page.should have_content("Message censored")
         page.should have_content("This message has been removed")
       end
+
+      it "should still show messages in order of creation and not updated"
     end
   end
 end
