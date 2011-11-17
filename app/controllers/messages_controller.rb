@@ -4,9 +4,7 @@ class MessagesController < ApplicationController
     @message = @thread.messages.build(params[:message].merge(created_by: current_user))
 
     if @message.save
-      @thread.subscribers.each do |sub|
-        ThreadMailer.new_message(@message, sub).deliver
-      end
+      ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
       redirect_to :back
     else
       raise "Invalid message"
