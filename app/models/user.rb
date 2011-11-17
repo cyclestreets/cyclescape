@@ -48,6 +48,13 @@ class User < ActiveRecord::Base
   validates :full_name, presence: true
   validates :role, presence: true, inclusion: {in: ALLOWED_ROLES} 
 
+  def self.find_or_invite(email_address, name = nil)
+    existing = find_by_email(email_address)
+    return existing if existing
+    name = email_address.split("@").first if name.nil?
+    User.invite!(full_name: name, email: email_address)
+  end
+
   def name
     return display_name unless display_name.blank?
     full_name
