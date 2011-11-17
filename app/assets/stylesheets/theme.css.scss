@@ -104,6 +104,9 @@ article.message {
     }
   }
   .body {
+    .censored {
+        color: gray;
+    }
     .deadline {
       h3 {
         font-weight: bold;

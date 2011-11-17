@@ -174,8 +174,13 @@
         failure: "Could not create photo message."
         success: "Photo uploaded."
   messages:
+    censor:
+      failure: "Could not censor message"
+      success: "Message censored"
     message:
       posted_date: "posted %{time_ago} ago"
+      censor: "Censor this message"
+      censored: "This message has been removed"
   shared:
     map_search:
       example_search: "Putney, UK"

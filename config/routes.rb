@@ -36,7 +36,9 @@ Cyclescape::Application.routes.draw do
   end
 
   resources :threads, controller: "message_threads" do
-    resources :messages
+    resources :messages do
+      put 'censor', :on => :member
+    end
     scope module: :message do
       resources :photos, only: [:create]
       resources :links, only: [:create]

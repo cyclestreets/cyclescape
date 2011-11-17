@@ -7,6 +7,12 @@
       %time{datetime: message.created_at}
         = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
   .body
-    - if message.component
-      = render "message/#{message_controller_map(message.component)}/show", message: message
-    = message.body
+    - if message.censored_at?
+      .censored= t ".censored"
+    - else
+      - if message.component
+        = render "message/#{message_controller_map(message.component)}/show", message: message
+      = message.body
+      - if permitted_to?(:censor)
+        .actions
+          = link_to t(".censor"), censor_thread_message_path(message.thread, message), method: :put

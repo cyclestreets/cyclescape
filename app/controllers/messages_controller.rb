@@ -12,4 +12,17 @@ class MessagesController < ApplicationController
       raise "Invalid message"
     end
   end
+
+  def censor
+    @thread = MessageThread.find(params[:thread_id])
+    @message = @thread.messages.find(params[:id])
+
+    @message.censored_at = Time.now
+    if @message.save
+      set_flash_message(:success)
+    else
+      set_flash_message(:failure)
+    end
+    redirect_to thread_path(@thread)
+  end
 end
