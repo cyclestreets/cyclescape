@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: library_notes
+#
+#  id                  :integer         not null, primary key
+#  library_item_id     :integer         not null
+#  title               :string(255)
+#  body                :text            not null
+#  library_document_id :integer
+#
+
 FactoryGirl.define do
   factory :library_note, class: "Library::Note" do
     sequence(:title) {|n| "Library note #{n}" }
