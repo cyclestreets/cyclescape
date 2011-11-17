@@ -28,6 +28,14 @@ describe Message do
     it { should validate_presence_of(:body) }
   end
 
+  describe "newly created" do
+    subject { FactoryGirl.create(:message) }
+
+    it "should not be censored" do
+      subject.censored_at.should be_nil
+    end
+  end
+
   describe "component association" do
     subject { FactoryGirl.create(:message) }
 

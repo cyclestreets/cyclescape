@@ -13,6 +13,6 @@
       - if message.component
         = render "message/#{message_controller_map(message.component)}/show", message: message
       = message.body
-      - if permitted_to?(:censor)
+      - if permitted_to?(:censor, message)
         .actions
           = link_to t(".censor"), censor_thread_message_path(message.thread, message), method: :put

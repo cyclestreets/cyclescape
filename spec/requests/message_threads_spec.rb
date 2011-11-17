@@ -3,6 +3,7 @@ require "spec_helper"
 describe "Message threads" do
   let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
   let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5) }
+  let(:censor_message) { "Censor this message" }
 
   context "as a public user" do
     context "index" do
@@ -121,6 +122,15 @@ describe "Message threads" do
           page.should have_content(current_user.name)
         end
       end
+
+      it "should not have a censor link" do
+        page.should_not have_content(censor_message)
+      end
+
+      it "should not let you censor a message" do
+        page.driver.put censor_thread_message_path(thread, thread.messages[0])
+        page.should have_content("You are not authorised to access that page.")
+      end
     end
   end
 
@@ -135,6 +145,24 @@ describe "Message threads" do
       end
 
       it "should list all message threads"
+    end
+
+    context "censoring" do
+
+      before do
+        visit thread_path(thread)
+      end
+
+      it "should provide a censor link" do
+        save_and_open_page
+        page.should have_content(censor_message)
+      end
+
+      it "should let you censor a message" do
+        click_on censor_message
+        page.should have_content("Message censored")
+        page.should have_content("This message has been removed")
+      end
     end
   end
 end
