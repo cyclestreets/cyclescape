@@ -29,3 +29,9 @@ unless LocationCategory.count > 3
     LocationCategory.new(name: cat).save!
   end
 end
+
+# Ensure all message threads have public tokens
+MessageThread.where("public_token IS NULL").each do |thread|
+  thread.set_public_token
+  thread.save!
+end
