@@ -17,8 +17,7 @@ class MessagesController < ApplicationController
     @thread = MessageThread.find(params[:thread_id])
     @message = @thread.messages.find(params[:id])
 
-    @message.censored_at = Time.now
-    if @message.save
+    if @message.censor!
       set_flash_message(:success)
     else
       set_flash_message(:failure)

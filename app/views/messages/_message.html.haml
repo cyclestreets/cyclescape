@@ -7,7 +7,7 @@
       %time{datetime: message.created_at}
         = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
   .body
-    - if message.censored_at?
+    - if message.censored?
       .censored= t ".censored"
     - else
       - if message.component
