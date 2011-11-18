@@ -8,7 +8,7 @@ gem 'activerecord-postgis-adapter'
 # gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
-gem 'jquery-rails'
+gem 'jquery-rails', "1.0.16"
 gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
