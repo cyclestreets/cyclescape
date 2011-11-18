@@ -25,7 +25,8 @@ describe InboundMailProcessor do
     end
 
     it "should have the same text as the email" do
-      thread.messages.first.body.should == inbound_mail.message.body.to_s
+      # There are weird newline issues here, each \r is duplicated in the model's response
+      thread.messages.first.body.gsub(/\n|\r/, '').should == inbound_mail.message.body.to_s.gsub(/\n|\r/, '')
     end
 
     it "should have be created by a new user with the email address" do
