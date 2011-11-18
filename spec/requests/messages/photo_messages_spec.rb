@@ -48,8 +48,8 @@ describe "Photo messages" do
       end
     end
 
-    it "should use the caption as the alt tag" do
-      page.should have_xpath("//img[@alt='#{photo_message.caption}']")
+    it "should have the caption as part of the alt tag" do
+      page.should have_xpath("//img/@alt[contains(., '#{photo_message.caption}')]")
     end
   end
 end

@@ -3,6 +3,8 @@
   .wrapper
     %header
       %h3= link_to "#{issue.title} (#{issue.category.name})", issue
+      %span.tally
+        = t ".tally", count: issue.plusminus
       %span.author
         = t ".created_by"
         = link_to_profile issue.created_by

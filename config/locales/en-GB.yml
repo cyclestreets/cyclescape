@@ -86,10 +86,13 @@
       new:
         title: "New Thread on %{issue}"
   issues:
+    compact:
+      tally: "(%{count})"
     destroy:
       failure: "Can't delete that issue"
       success: "Issue deleted"
     index:
+      popular: "Currently Popular Issues"
       title: "All Issues"
     search:
       no_results_found: "No results found for '%{query}'."
@@ -173,6 +176,8 @@
       create:
         failure: "Could not create photo message."
         success: "Photo uploaded."
+      show:
+        photo_alt: "A photo entitled %{caption}."
   messages:
     message:
       posted_date: "posted %{time_ago} ago"
