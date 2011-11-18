@@ -4,6 +4,6 @@ class AddDeletedAtToMessageThreads < ActiveRecord::Migration
   end
 
   def down
-    remove_column :message_threads, :datetime
+    remove_column :message_threads, :deleted_at
   end
 end

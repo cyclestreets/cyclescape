@@ -4,6 +4,6 @@ class AddCensoredAtToMessages < ActiveRecord::Migration
   end
 
   def down
-    remove_column :message, :datetime
+    remove_column :messages, :censored_at
   end
 end
