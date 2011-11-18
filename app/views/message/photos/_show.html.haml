@@ -1,4 +1,4 @@
 %figure.photo{id: dom_id(message.component)}
-  = image_tag message.component.photo_preview.url, title: message.component.caption, alt: t(".photo_alt", caption: message.component.caption)
+  = image_tag message.component.photo_preview.url, alt: t(".photo_alt", caption: message.component.caption)
   %figcaption
     = message.component.caption
