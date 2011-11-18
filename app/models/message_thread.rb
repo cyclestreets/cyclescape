@@ -28,8 +28,9 @@ class MessageThread < ActiveRecord::Base
 
   scope :public, where("privacy = 'public'")
   scope :private, where("privacy = 'group'")
-
   default_scope where(deleted_at: nil)
+
+  before_validation :set_public_token, on: :create
 
   validates :title, :state, :created_by_id, presence: true
   validates :privacy, inclusion: {in: ALLOWED_PRIVACY}
@@ -47,5 +48,15 @@ class MessageThread < ActiveRecord::Base
 
   def public?
     privacy == "public"
+  end
+
+  def set_public_token
+    self.public_token = generate_public_token
+  end
+
+  protected
+
+  def generate_public_token
+    SecureRandom.hex(10)
   end
 end

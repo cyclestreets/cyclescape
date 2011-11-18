@@ -21,3 +21,7 @@ end
 def word_document_path
   File.join(%w(spec support documents use_cases.doc))
 end
+
+def raw_email_path(type = "basic")
+  File.join(%W(spec support text #{type}_email.txt))
+end

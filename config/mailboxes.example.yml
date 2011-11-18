@@ -1,0 +1,5 @@
+primary:
+  address: "mail.server.net"
+  user_name: "user@example.com"
+  password: "secret"
+  authentication: "PLAIN"

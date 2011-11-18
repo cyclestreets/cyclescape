@@ -1,0 +1,67 @@
+Return-Path: <andrew@avito.co.uk>
+Delivered-To: traumatic@strangeperil.co.uk
+Received: from spool.mail.gandi.net (mspool2-d.mgt.gandi.net [10.0.21.133])
+  by nmboxes13-d.mgt.gandi.net (Postfix) with ESMTP id EB8C5185424
+  for <traumatic@strangeperil.co.uk>; Thu, 17 Nov 2011 17:38:13 +0100 (CET)
+Received: from mfilter7-d.gandi.net (mfilter7-d.gandi.net [217.70.178.136])
+  by spool.mail.gandi.net (Postfix) with ESMTP id E89681780CC
+  for <traumatic@strangeperil.co.uk>; Thu, 17 Nov 2011 17:38:13 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mfilter7-d.gandi.net
+Received: from spool.mail.gandi.net ([10.0.21.133])
+  by mfilter7-d.gandi.net (mfilter7-d.gandi.net [10.0.15.180]) (amavisd-new, port 10024)
+  with ESMTP id 4FVtCywNmIW0 for <traumatic@strangeperil.co.uk>;
+  Thu, 17 Nov 2011 17:38:12 +0100 (CET)
+X-Policy: 217.70.183.196 is whitelisted
+X-Policy: 217.70.183.196 is whitelisted
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
+  by spool.mail.gandi.net (Postfix) with ESMTP id B767C17803B
+  for <traumatic@strangeperil.co.uk>; Thu, 17 Nov 2011 17:38:12 +0100 (CET)
+X-Originating-IP: 217.70.178.144
+Received: from mfilter16-d.gandi.net (mfilter16-d.gandi.net [217.70.178.144])
+  by relay4-d.mail.gandi.net (Postfix) with ESMTP id B1C2E172089
+  for <traumatic@strangeperil.co.uk>; Thu, 17 Nov 2011 17:38:12 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mfilter16-d.gandi.net
+Received: from relay4-d.mail.gandi.net ([217.70.183.196])
+  by mfilter16-d.gandi.net (mfilter16-d.gandi.net [10.0.15.180]) (amavisd-new, port 10024)
+  with ESMTP id zt1EU2T+tl5G for <traumatic@strangeperil.co.uk>;
+  Thu, 17 Nov 2011 17:38:11 +0100 (CET)
+X-Originating-IP: 86.4.50.79
+Received: from Athena.local (cpc11-cmbg14-2-0-cust78.5-4.cable.virginmedia.com [86.4.50.79])
+  (Authenticated sender: andrew@strangeperil.co.uk)
+  by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 2BBF917208B
+  for <traumatic@strangeperil.co.uk>; Thu, 17 Nov 2011 17:38:09 +0100 (CET)
+Message-ID: <4EC53870.4060300@avito.co.uk>
+Date: Thu, 17 Nov 2011 16:38:08 +0000
+From: Andrew France <andrew@avito.co.uk>
+Organization: Avito
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:8.0) Gecko/20111105 Thunderbird/8.0
+MIME-Version: 1.0
+To: traumatic@strangeperil.co.uk
+Subject: Cupcakes
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+Cupcake ipsum dolor sit amet tart gummies. Sweet roll jelly pudding=20
+macaroon ice cream. Halvah apple pie sweet. Halvah bear claw pudding.=20
+Bonbon cake powder pastry. Jelly-o candy canes icing jelly macaroon.=20
+Candy topping chupa chups. Dessert biscuit biscuit gingerbread macaroon=20
+chupa chups wafer. Oat cake apple pie icing. Candy canes icing dessert.
+
+Chocolate cake toffee dessert biscuit tootsie roll powder chocolate=20
+jelly beans marzipan. Pastry tiramisu ice cream jujubes gummi bears.=20
+Caramels muffin cupcake candy. Caramels pie sweet roll. Jelly beans=20
+cupcake brownie. Chupa chups tootsie roll bonbon sesame snaps chocolate=20
+cake bear claw chocolate cake applicake cake. Jelly powder biscuit.=20
+Chupa chups ice cream candy canes icing muffin jelly beans marshmallow.=20
+Ice cream bonbon lemon drops lollipop. Croissant drage applicake=20
+topping liquorice.
+
+Andrew
+
+--=20
+Cupcaker
+Cambridge, UK (UTC)
+-------------------
+

@@ -133,6 +133,30 @@ describe User do
     end
   end
 
+  context "find_or_invite" do
+    let(:attrs) { FactoryGirl.attributes_for(:user) }
+
+    it "should find an existing user from their email" do
+      existing = User.create!(attrs)
+      User.find_or_invite(attrs[:email], attrs[:full_name]).should == existing
+    end
+
+    it "should invite a new user if their email is not found" do
+      user = User.find_or_invite(attrs[:email], attrs[:full_name])
+      user.should be_invited
+    end
+
+    it "should set the full name of an existing user if their email is not found" do
+      user = User.find_or_invite(attrs[:email], attrs[:full_name])
+      user.full_name.should == attrs[:full_name
+    ]end
+
+    it "should set the local-part as the full name if one is not provided" do
+      user = User.find_or_invite(attrs[:email])
+      user.full_name.should == attrs[:email].split("@").first
+    end
+  end
+
   context "thread subscriptions" do
     subject { FactoryGirl.create(:user) }
     let(:thread) { FactoryGirl.create(:message_thread) }

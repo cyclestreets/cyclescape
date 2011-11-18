@@ -82,4 +82,24 @@ describe MessageThread do
       MessageThread.with_messages_from(user).count.should == 1
     end
   end
+
+  context "public token" do
+    it "should be set after being created" do
+      thread = FactoryGirl.create(:message_thread)
+      thread.public_token.should be_true
+    end
+
+    it "should be a 10 digit alphanumeric string" do
+      thread = FactoryGirl.create(:message_thread)
+      thread.public_token.should match(/\A[0-9a-f]{20}\Z/)
+    end
+
+    it "should be set by set_public_token" do
+      thread = FactoryGirl.create(:message_thread)
+      thread.public_token = ""
+      thread.public_token.should be_blank
+      thread.set_public_token
+      thread.public_token.should_not be_blank
+    end
+  end
 end

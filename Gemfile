@@ -22,9 +22,12 @@ gem 'thin'
 gem 'state_machine'
 gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly'
+gem 'redis-store'
+gem 'resque'
 gem 'acts_as_indexed'
 gem 'thumbs_up'
 gem 'exceptional'
+gem 'foreman'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,6 +39,10 @@ end
 
 group :development do
   gem 'annotate', git: 'git://github.com/ctran/annotate_models.git', require: false
+
+  # Following is required for Resque workers in development to load due to
+  # declarative_authorization development dependency when Rails engines are eager loaded
+  gem 'ruby_parser'
 end
 
 group :development, :test do
@@ -46,6 +53,7 @@ group :development, :test do
   gem 'rspec-core'
   gem 'rspec-rails'
   gem 'spork', '~> 0.9.0.rc'
+  gem 'ruby-prof'
 end
 
 group :test do
