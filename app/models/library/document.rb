@@ -15,6 +15,9 @@ class Library::Document < Library::Component
     storage_path :generate_file_path
   end
 
+  validates :file, presence: true
+  validates :title, presence: true
+
   protected
 
   def generate_file_path

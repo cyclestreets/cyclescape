@@ -20,6 +20,11 @@ describe Library::Document do
     doc.should be_valid
   end
 
+  describe "validations" do
+    it { should validate_presence_of(:file) }
+    it { should validate_presence_of(:title) }
+  end
+
   context "link with library item" do
     let(:attrs) { FactoryGirl.attributes_for(:library_document) }
 
