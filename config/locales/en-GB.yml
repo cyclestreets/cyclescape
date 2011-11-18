@@ -1,6 +1,7 @@
 # GB English translations for Ruby on Rails
 
 "en-GB":
+  application_name: "Cyclescape"
   admin:
     groups:
       index:
