@@ -31,7 +31,7 @@ class Issue < ActiveRecord::Base
   validates :created_by, presence: true
   validates :category, presence: true
 
-  default_scope where("deleted_at IS NULL")
+  default_scope where(deleted_at: nil)
 
   def to_param
     "#{id}-#{title.parameterize}"

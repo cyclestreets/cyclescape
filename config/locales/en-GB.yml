@@ -147,11 +147,16 @@
       destroy:
         success: "Unsubscribed."
   message_threads:
+    destroy:
+      failure: "Couldn't delete the thread"
+      success: "Thread deleted"
     index:
       title: "Threads"
     new:
       title: "New Thread"
     show:
+      are_you_sure: "Are you sure?"
+      destroy: "Delete this thread"
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
     subscription_panel:
@@ -179,8 +184,13 @@
       show:
         photo_alt: "A photo entitled %{caption}."
   messages:
+    censor:
+      failure: "Could not censor message"
+      success: "Message censored"
     message:
       posted_date: "posted %{time_ago} ago"
+      censor: "Censor this message"
+      censored: "This message has been removed"
   shared:
     map_search:
       example_search: "Putney, UK"

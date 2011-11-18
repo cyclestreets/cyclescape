@@ -43,6 +43,18 @@ class MessageThreadsController < ApplicationController
     end
   end
 
+  def destroy
+    load_thread
+
+    if @thread.destroy
+      set_flash_message(:success)
+      redirect_to threads_path
+    else
+      set_flash_message(:failure)
+      redirect_to @thread
+    end
+  end
+
   protected
 
   def load_thread

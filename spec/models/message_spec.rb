@@ -11,6 +11,7 @@
 #  created_at     :datetime        not null
 #  updated_at     :datetime        not null
 #  deleted_at     :datetime
+#  censored_at    :datetime
 #
 
 require 'spec_helper'
@@ -25,6 +26,14 @@ describe Message do
   describe "validations" do
     it { should validate_presence_of(:created_by_id) }
     it { should validate_presence_of(:body) }
+  end
+
+  describe "newly created" do
+    subject { FactoryGirl.create(:message) }
+
+    it "should not be censored" do
+      subject.censored_at.should be_nil
+    end
   end
 
   describe "component association" do

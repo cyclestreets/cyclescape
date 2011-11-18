@@ -11,6 +11,7 @@
 #  created_at     :datetime        not null
 #  updated_at     :datetime        not null
 #  deleted_at     :datetime
+#  censored_at    :datetime
 #
 
 class Message < ActiveRecord::Base
@@ -24,4 +25,12 @@ class Message < ActiveRecord::Base
 
   validates :created_by_id, presence: true
   validates :body, presence: true, unless: :component
+
+  def censor!
+    update_attribute(:censored_at, Time.now)
+  end
+
+  def censored?
+    censored_at
+  end
 end

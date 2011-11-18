@@ -1,8 +1,10 @@
 require "spec_helper"
 
 describe "Message threads" do
-  let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
   let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5) }
+  let(:censor_message) { "Censor this message" }
+  let(:delete_thread) { "Delete this thread" }
 
   context "as a public user" do
     context "index" do
@@ -121,6 +123,30 @@ describe "Message threads" do
           page.should have_content(current_user.name)
         end
       end
+
+      it "should not have a censor link" do
+        page.should_not have_content(censor_message)
+      end
+
+      it "should not let you censor a message" do
+        page.driver.put censor_thread_message_path(thread, thread.messages[0])
+        page.should have_content("You are not authorised to access that page.")
+      end
+    end
+
+    context "delete" do
+      before do
+        visit thread_path(thread)
+      end
+
+      it "should not show a delete link" do
+        page.should_not have_content(delete_thread)
+      end
+
+      it "should not let you delete a thread" do
+        page.driver.delete thread_path(thread)
+        page.should have_content("You are not authorised to access that page.")
+      end
     end
   end
 
@@ -135,6 +161,38 @@ describe "Message threads" do
       end
 
       it "should list all message threads"
+    end
+
+    context "message censoring" do
+
+      before do
+        visit thread_path(thread)
+      end
+
+      it "should provide a censor link" do
+        page.should have_content(censor_message)
+      end
+
+      it "should let you censor a message" do
+        click_on censor_message
+        page.should have_content("Message censored")
+        page.should have_content("This message has been removed")
+      end
+
+      it "should still show messages in order of creation and not updated"
+    end
+
+    context "thread deletion" do
+
+      before do
+        visit thread_path(thread)
+      end
+
+      it "should let you delete the thread" do
+        click_on delete_thread
+        page.should have_content("Thread deleted")
+        page.should_not have_content(thread.title)
+      end
     end
   end
 end

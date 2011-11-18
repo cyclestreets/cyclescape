@@ -157,6 +157,7 @@ describe "Issues" do
         visit issue_path(issue)
         click_on delete_text
         page.should have_content("Issue deleted")
+        page.should_not have_content(issue.title)
       end
     end
   end

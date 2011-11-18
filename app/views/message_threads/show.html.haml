@@ -11,8 +11,12 @@
           = t ".private_to_group_message", group: @thread.group.name
         - else
           = t ".public_message"
+      - if permitted_to?(:destroy, @thread)
+        .actions
+          = link_to t(".destroy"), thread_path(@thread), method: :delete, confirm: t(".are_you_sure")
       - if @thread.issue
         = render "issue_panel", :issue => @thread.issue
+
 
   = render collection: @messages, partial: "messages/message"
   = render "messages/new"
