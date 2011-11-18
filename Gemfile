@@ -28,6 +28,7 @@ gem 'acts_as_indexed'
 gem 'thumbs_up'
 gem 'exceptional'
 gem 'foreman'
+gem 'whenever'
 
 # Gems used only for assets and not required
 # in production environments by default.
