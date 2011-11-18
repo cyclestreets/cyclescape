@@ -2,9 +2,10 @@ class MailboxReader
   def self.run
     mailboxes_config.each do |name, config|
       retriever = Mail::IMAP.new(config.symbolize_keys)
-      retriever.find_and_delete(what: :first).each do |message|
+      retriever.find(what: :first).each do |message|
         mail = InboundMail.new_from_message(message)
         mail.save!
+        Resque.enqueue(InboundMailProcessor, mail.id)
       end
     end
   end
