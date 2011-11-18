@@ -9,4 +9,4 @@
   .body
     - if message.component
       = render "message/#{message_controller_map(message.component)}/show", message: message
-    = message.body
+    = simple_format message.body
