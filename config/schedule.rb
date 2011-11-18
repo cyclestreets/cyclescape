@@ -18,3 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
+
+every 5.minutes do
+  runner "MailboxReader.run"
+end
