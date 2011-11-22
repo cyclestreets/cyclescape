@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/ctran/annotate_models.git
-  revision: fb73329243056a6d9a64878e5c543aba9b6417de
+  revision: ab62e8c131c9a67d687fa23ed5ee05c3bf450852
   specs:
     annotate (2.4.1.beta1)
 
@@ -82,10 +82,10 @@ GEM
       rack
     execjs (1.2.9)
       multi_json (~> 1.0)
-    factory_girl (2.2.0)
+    factory_girl (2.3.0)
       activesupport
-    factory_girl_rails (1.3.0)
-      factory_girl (~> 2.2.0)
+    factory_girl_rails (1.4.0)
+      factory_girl (~> 2.3.0)
       railties (>= 3.0.0)
     ffi (1.0.11)
     foreman (0.26.1)
@@ -184,19 +184,18 @@ GEM
       sexp_processor (~> 3.0)
     rubyzip (0.9.4)
     sass (3.1.10)
-    sass-rails (3.1.4)
+    sass-rails (3.1.5)
       actionpack (~> 3.1.0)
       railties (~> 3.1.0)
-      sass (>= 3.1.4)
-      sprockets (~> 2.0.0)
+      sass (~> 3.1.10)
       tilt (~> 1.3.2)
-    selenium-webdriver (2.12.2)
+    selenium-webdriver (2.13.0)
       childprocess (>= 0.2.1)
       ffi (~> 1.0.9)
       json_pure
       rubyzip
-    sexp_processor (3.0.7)
-    shoulda-matchers (1.0.0.beta3)
+    sexp_processor (3.0.8)
+    shoulda-matchers (1.0.0)
     sinatra (1.3.1)
       rack (~> 1.3, >= 1.3.4)
       rack-protection (~> 1.1, >= 1.1.2)
