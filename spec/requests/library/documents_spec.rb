@@ -36,7 +36,7 @@ describe "Library documents" do
     def add_note
       visit library_document_path(document)
       fill_in "Note", with: "Here's a note about this document."
-      click_on "Create Note"
+      click_on "Attach note"
     end
 
     it "should add a new note to the document" do

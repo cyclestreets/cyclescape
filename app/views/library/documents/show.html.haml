@@ -1,6 +1,9 @@
 %article.library.document
   %h1= @document.title
   %p= link_to t(".download"), @document.file.url
+%section.comments
+  %h2= t ".comments"
+  %p TODO
 %section.notes
   %h2= t ".notes"
   = render partial: "library/notes/note", collection: @notes

@@ -134,6 +134,12 @@
     documents:
       new:
         title: "New Document"
+      show:
+        download: "Download document"
+        comments: "Comments"
+        notes: "Notes"
+        attach_note: "Attach Note"
+        attach_note_instructions_html: "You can create new notes linked to this document. When referenced in a thread they will link to this document as well."
     notes:
       new:
         title: "New Note"
