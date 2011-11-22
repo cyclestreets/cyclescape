@@ -8,7 +8,7 @@
     = javascript_include_tag "application"
     %script(src="http://cdn.jquerytools.org/1.2.6/all/jquery.tools.min.js" type="text/javascript")
     = csrf_meta_tags
-  %body{class: controller_path.tr("/_", "-")}
+  %body{class: [Rails.env, controller_path.tr("/_", "-")].join(" ")}
     %header.top
       .inner
         = link_to image_tag("header_logo.png", alt: t(".title")), root_path
