@@ -42,6 +42,7 @@
         create: "Upload"
       library/note:
         create: "Create Note"
+        attach_to_document: "Attach note"
       message:
         create: "Post Message"
       message_thread:

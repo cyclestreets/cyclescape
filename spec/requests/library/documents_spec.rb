@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe "Library documents" do
-  context "as a public user" do
-    let(:document) { FactoryGirl.create(:library_document) }
+  let(:document) { FactoryGirl.create(:library_document) }
 
+  context "as a public user" do
     it "should show me the document page" do
       visit library_document_path(document)
       page.should have_content(document.title)
@@ -30,5 +30,25 @@ describe "Library documents" do
     end
 
     it "should update the document"
+  end
+
+  context "adding notes", as: :site_user do
+    def add_note
+      visit library_document_path(document)
+      fill_in "Note", with: "Here's a note about this document."
+      click_on "Attach note"
+    end
+
+    it "should add a new note to the document" do
+      add_note
+      page.should have_content(document.title)
+      page.should have_content("Notes")
+      page.should have_content("Here's a note about this document.")
+    end
+
+    it "should return me back to the document" do
+      add_note
+      current_path.should == library_document_path(document)
+    end
   end
 end

@@ -15,6 +15,11 @@ class Library::Document < Library::Component
     storage_path :generate_file_path
   end
 
+  has_many :notes, foreign_key: "library_document_id"
+
+  validates :file, presence: true
+  validates :title, presence: true
+
   protected
 
   def generate_file_path

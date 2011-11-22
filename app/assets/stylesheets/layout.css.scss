@@ -292,3 +292,17 @@ body.libraries {
     @include column(4);
   }
 }
+
+// Library documents
+
+body.library-documents {
+  article.library.document {
+    @include column($full-span);
+  }
+  section.comments {
+    @include column($half-span, "first");
+  }
+  section.notes {
+    @include column($half-span, "last");
+  }
+}

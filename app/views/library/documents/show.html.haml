@@ -1,3 +1,18 @@
 %article.library.document
   %h1= @document.title
   %p= link_to t(".download"), @document.file.url
+%section.comments
+  %h2= t ".comments"
+  %p TODO
+%section.notes
+  %h2= t ".notes"
+  = render partial: "library/notes/note", collection: @notes
+  .form
+    %h2= t ".attach_note"
+    %p= t ".attach_note_instructions_html"
+    = semantic_form_for @note do |f|
+      = f.inputs do
+        = f.input :body
+        = f.input :library_document_id, as: :hidden
+      = f.buttons do
+        = f.commit_button :attach_to_document

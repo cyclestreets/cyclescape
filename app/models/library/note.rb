@@ -15,6 +15,10 @@ class Library::Note < Library::Component
 
   validates :body, presence: true
 
+  def self.new_on_document(doc)
+    new document: doc
+  end
+
   def title
     field = read_attribute(:title)
     if field.blank?
@@ -22,5 +26,9 @@ class Library::Note < Library::Component
     else
       field
     end
+  end
+
+  def document?
+    library_document_id?
   end
 end
