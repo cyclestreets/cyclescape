@@ -16,6 +16,8 @@
 require 'spec_helper'
 
 describe MessageThread do
+  it_should_behave_like "a taggable model"
+
   describe "associations" do
     it { should belong_to(:created_by) }
     it { should belong_to(:group) }

@@ -15,6 +15,7 @@
 
 class MessageThread < ActiveRecord::Base
   include FakeDestroy
+  include Taggable
 
   ALLOWED_PRIVACY = %w(public group)
 
@@ -25,6 +26,7 @@ class MessageThread < ActiveRecord::Base
   has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id", conditions: {deleted_at: nil}
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, through: :messages, source: :created_by, uniq: true
+  has_and_belongs_to_many :tags, join_table: "message_thread_tags", foreign_key: "thread_id"
 
   scope :public, where("privacy = 'public'")
   scope :private, where("privacy = 'group'")
