@@ -10,7 +10,11 @@ class Library::NotesController < ApplicationController
     @note.created_by = current_user
 
     if @note.save
-      redirect_to library_note_path(@note)
+      if @note.document?
+        redirect_to library_document_path(@note.document)
+      else
+        redirect_to library_note_path(@note)
+      end
     else
       render :new
     end

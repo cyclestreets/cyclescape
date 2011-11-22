@@ -17,6 +17,8 @@ class Library::DocumentsController < ApplicationController
   end
 
   def show
+    @notes = @document.notes
+    @note = Library::Note.new_on_document(@document)
   end
 
   def edit
