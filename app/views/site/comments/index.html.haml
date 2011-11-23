@@ -7,12 +7,16 @@
       %th= t(".name")
       %th= t(".email")
       %th= t(".what")
+      %th= t(".where")
+      %th= t(".how")
     - @site_comments.each do |comment|
       %tr
-        %td= time_ago_in_words(comment.created_at)
+        %td= t ".when_ago", time_ago: time_ago_in_words(comment.created_at)
         %td= link_to(comment.user.name, user_path(comment.user)) if comment.user
         %td= comment.name
         %td= comment.email
         %td= comment.body
+        %td= comment.context_url
+        %td= comment.context_data
 - else
   = t ".no_comments"
