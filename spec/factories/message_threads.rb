@@ -38,6 +38,10 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_tags do
+      tags { FactoryGirl.build_list(:tag, 2) }
+    end
+
     factory :group_message_thread, traits: [:belongs_to_group]
     factory :issue_message_thread, traits: [:belongs_to_issue]
     factory :group_private_message_thread, traits: [:belongs_to_group, :private]

@@ -11,6 +11,8 @@
           = t ".private_to_group_message", group: @thread.group.name
         - else
           = t ".public_message"
+      .tags
+        = render_tags @thread
       - if permitted_to?(:destroy, @thread)
         .actions
           = link_to t(".destroy"), thread_path(@thread), method: :delete, confirm: t(".are_you_sure")

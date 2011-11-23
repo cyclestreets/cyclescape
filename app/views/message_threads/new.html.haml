@@ -8,6 +8,7 @@
       = semantic_fields_for @message do |f2|
         = f2.semantic_errors
         = f2.inputs :body
+      = f.input :tags_string, as: :tags
     = f.buttons do
       = f.commit_button
       %li
