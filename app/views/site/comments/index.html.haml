@@ -2,19 +2,21 @@
 - if @site_comments
   %table
     %thead
+      %th= t(".id")
       %th= t(".when")
       %th= t(".who")
-      %th= t(".name")
-      %th= t(".email")
       %th= t(".what")
       %th= t(".where")
       %th= t(".how")
     - @site_comments.each do |comment|
       %tr
+        %td= comment.id
         %td= t ".when_ago", time_ago: time_ago_in_words(comment.created_at)
-        %td= link_to(comment.user.name, user_path(comment.user)) if comment.user
-        %td= comment.name
-        %td= comment.email
+        %td
+          %ul
+            %li= link_to(comment.user.name, user_path(comment.user)) if comment.user
+            %li= comment.name
+            %li= comment.email
         %td= simple_format comment.body
         %td= comment.context_url
         %td= comment.context_data
