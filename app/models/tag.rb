@@ -2,7 +2,7 @@ class Tag < ActiveRecord::Base
   validates :name, presence: true
 
   def self.names
-    all.map {|tag| tag.name }
+    scoped.map {|tag| tag.name }
   end
 
   def self.grab(val)
@@ -10,8 +10,8 @@ class Tag < ActiveRecord::Base
   end
 
   def name=(val)
-    if val.respond_to?(:downcase)
-      write_attribute(:name, val.downcase)
+    if val.is_a?(String)
+      write_attribute(:name, val.strip.downcase)
     end
   end
 end

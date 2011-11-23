@@ -10,6 +10,9 @@ module Taggable
   protected
 
   def tags_from_string(val)
-    val.split.map {|str| Tag.grab(str) }
+    val.
+      delete("#!()[]{}").
+      split(/[,; ]+/).
+      map {|str| Tag.grab(str) }
   end
 end
