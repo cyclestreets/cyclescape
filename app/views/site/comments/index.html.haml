@@ -15,7 +15,7 @@
         %td= link_to(comment.user.name, user_path(comment.user)) if comment.user
         %td= comment.name
         %td= comment.email
-        %td= comment.body
+        %td= simple_format comment.body
         %td= comment.context_url
         %td= comment.context_data
 - else
