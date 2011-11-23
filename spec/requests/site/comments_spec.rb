@@ -25,5 +25,27 @@ describe "Site feedback" do
       click_on "Send Feedback"
       SiteComment.last.context_url.should == root_url
     end
+
+    it "should store the user if someone is logged in"
+  end
+
+  context "as a site user" do
+    include_context "signed in as a site user"
+    let!(:comment) { FactoryGirl.create(:site_comment) }
+
+    it "should not let you browse the feedback" do
+      visit site_comments_path
+      page.should have_content("You are not authorised to access that page.")
+    end
+  end
+
+  context "as an admin" do
+    include_context "signed in as admin"
+    let!(:comment) { FactoryGirl.create(:site_comment) }
+
+    it "should show the comments" do
+      visit site_comments_path
+      page.should have_content(comment.body[0..51]) #chokes on newline
+    end
   end
 end
