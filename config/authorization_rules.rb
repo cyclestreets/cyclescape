@@ -11,6 +11,7 @@ authorization do
     has_permission_on :issues, to: :destroy
     has_permission_on :message_threads, to: :destroy
     has_permission_on :messages, to: :censor
+    has_permission_on :site_comments, to: :manage
   end
 
   role :member do

@@ -1,4 +1,8 @@
 class Site::CommentsController < ApplicationController
+  def index
+    @site_comments = SiteComment.order("created_at desc")
+  end
+
   def new
     @site_comment = SiteComment.new(user: current_user)
   end

@@ -1,0 +1,18 @@
+%h1= t ".title"
+- if @site_comments
+  %table
+    %thead
+      %th= t(".when")
+      %th= t(".who")
+      %th= t(".name")
+      %th= t(".email")
+      %th= t(".what")
+    - @site_comments.each do |comment|
+      %tr
+        %td= time_ago_in_words(comment.created_at)
+        %td= link_to(comment.user.name, user_path(comment.user)) if comment.user
+        %td= comment.name
+        %td= comment.email
+        %td= comment.body
+- else
+  = t ".no_comments"

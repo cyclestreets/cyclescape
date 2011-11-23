@@ -210,6 +210,9 @@
       submit: "Go!"
   site:
     comments:
+      index:
+        title: "All Feedback"
+        no_comments: "No Feedback Yet"
       new:
         title: "Feedback"
   user:
