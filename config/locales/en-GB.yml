@@ -228,6 +228,13 @@
       posted_date: "posted %{time_ago} ago"
       censor: "Censor this message"
       censored: "This message has been removed"
+    new:
+      deadline_message: "Set a Deadline"
+      library_item_message: "Add from the Library"
+      link_message: "Add a Link"
+      new_message: "New message"
+      photo_message: "Upload a Photo"
+      text_message: "Add a Comment"
   shared:
     map_search:
       example_search: "Putney, UK"
