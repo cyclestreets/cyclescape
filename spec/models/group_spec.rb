@@ -82,9 +82,12 @@ describe Group do
   end
 
   describe "validations" do
+    subject { FactoryGirl.create(:group) }
+
     it { should allow_value("public").for(:default_thread_privacy) }
     it { should allow_value("group").for(:default_thread_privacy) }
     it { should_not allow_value("other").for(:default_thread_privacy) }
+    it { should validate_uniqueness_of(:name) }
   end
 
   context "members" do
