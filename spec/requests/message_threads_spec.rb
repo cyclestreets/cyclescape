@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Message threads" do
-  let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+  let(:thread) { FactoryGirl.create(:message_thread_with_messages, :with_tags) }
   let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5) }
   let(:censor_message) { "Censor this message" }
   let(:delete_thread) { "Delete this thread" }
@@ -99,38 +99,63 @@ describe "Message threads" do
         visit thread_path(thread)
       end
 
-      it "should show all messages" do
-        thread.messages.each do |message|
-          page.should have_content(message.body)
+      context "messages" do
+        it "should show all messages" do
+          thread.messages.each do |message|
+            page.should have_content(message.body)
+          end
+        end
+
+        it "should be able to post a new message" do
+          fill_in "Message", with: "Testing a new message!"
+          click_on "Post Message"
+          page.should have_content("Testing a new message!")
         end
       end
 
-      it "should be able to post a new message" do
-        fill_in "Message", with: "Testing a new message!"
-        click_on "Post Message"
-        page.should have_content("Testing a new message!")
-      end
+      context "subscribers" do
+        it "should show the number of subscribers" do
+          page.should have_content("0 subscribers")
+          click_on "Subscribe"
+          page.should have_content("1 subscriber")
+        end
 
-      it "should show the number of subscribers" do
-        page.should have_content("0 subscribers")
-        click_on "Subscribe"
-        page.should have_content("1 subscriber")
-      end
-
-      it "should show the names of subscribers" do
-        click_on "Subscribe"
-        within(".subscription-panel") do
-          page.should have_content(current_user.name)
+        it "should show the names of subscribers" do
+          click_on "Subscribe"
+          within(".subscription-panel") do
+            page.should have_content(current_user.name)
+          end
         end
       end
 
-      it "should not have a censor link" do
-        page.should_not have_content(censor_message)
+      context "censoring"  do
+        it "should not have a censor link" do
+          page.should_not have_content(censor_message)
+        end
+
+        it "should not let you censor a message" do
+          page.driver.put censor_thread_message_path(thread, thread.messages[0])
+          page.should have_content("You are not authorised to access that page.")
+        end
       end
 
-      it "should not let you censor a message" do
-        page.driver.put censor_thread_message_path(thread, thread.messages[0])
-        page.should have_content("You are not authorised to access that page.")
+      context "tags" do
+        it "should show the linked tags" do
+          thread.tags.each do |tag|
+            page.should have_content(tag.name)
+          end
+        end
+
+        it "should edit the tags" do
+          # This form is initially hidden
+          within("form.edit-tags") do
+            fill_in "Tags", with: "bike wheels"
+            click_on "Save"
+          end
+          # Page submission is AJAX but returns usable page fragment here
+          page.should have_content("bike")
+          page.should have_content("wheels")
+        end
       end
     end
 

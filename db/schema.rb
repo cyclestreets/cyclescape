@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117134428) do
+ActiveRecord::Schema.define(:version => 20111122174951) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -133,6 +133,13 @@ ActiveRecord::Schema.define(:version => 20111117134428) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "message_thread_tags", :id => false, :force => true do |t|
+    t.integer "thread_id", :null => false
+    t.integer "tag_id",    :null => false
+  end
+
+  add_index "message_thread_tags", ["thread_id", "tag_id"], :name => "index_message_thread_tags_on_thread_id_and_tag_id", :unique => true
+
   create_table "message_threads", :force => true do |t|
     t.integer  "issue_id"
     t.integer  "created_by_id", :null => false
@@ -142,8 +149,8 @@ ActiveRecord::Schema.define(:version => 20111117134428) do
     t.string   "state",         :null => false
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.datetime "deleted_at"
     t.string   "public_token"
+    t.datetime "deleted_at"
   end
 
   add_index "message_threads", ["public_token"], :name => "index_message_threads_on_public_token", :unique => true
@@ -180,6 +187,12 @@ ActiveRecord::Schema.define(:version => 20111117134428) do
     t.datetime "created_at",   :null => false
     t.datetime "viewed_at"
   end
+
+  create_table "tags", :force => true do |t|
+    t.string "name", :null => false
+  end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "thread_subscriptions", :force => true do |t|
     t.integer  "user_id",                       :null => false

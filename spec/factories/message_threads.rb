@@ -34,8 +34,12 @@ FactoryGirl.define do
     trait :with_messages do
       after_create do |mt|
         user = FactoryGirl.create(:user)  # To prevent creating 1 user per message
-        FactoryGirl.create_list(:message, 1 + Random.rand(4), thread: mt, created_by: user)
+        FactoryGirl.create_list(:message, 2, thread: mt, created_by: user)
       end
+    end
+
+    trait :with_tags do
+      tags { FactoryGirl.build_list(:tag, 2) }
     end
 
     factory :group_message_thread, traits: [:belongs_to_group]

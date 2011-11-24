@@ -47,6 +47,7 @@ Cyclescape::Application.routes.draw do
     end
     scope module: :message_thread do
       resources :subscriptions, only: [:create, :destroy]
+      resources :tags, only: [:update]
     end
   end
 
