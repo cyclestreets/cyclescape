@@ -254,7 +254,17 @@
         failure: "That location can't be deleted"
         success: "Location deleted"
       index:
+        category: "Category"
         confirm: "Are you sure?"
+        delete: "Delete"
+        edit: "Edit"
+        map: "Map"
+        my_locations: "My Locations"
+        new: "Add a new Location"
+        no_overlapping_groups: "No Overlapping Groups"
+        overlapping_groups: "Overlapping Groups"
+      new:
+        new_location: "New Location"
       update:
         success: "Location Updated"
     profiles:
