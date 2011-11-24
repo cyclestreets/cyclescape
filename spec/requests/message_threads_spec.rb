@@ -145,6 +145,17 @@ describe "Message threads" do
             page.should have_content(tag.name)
           end
         end
+
+        it "should edit the tags" do
+          # This form is initially hidden
+          within("form.edit-tags") do
+            fill_in "Tags", with: "bike wheels"
+            click_on "Save"
+          end
+          # Page submission is AJAX but returns usable page fragment here
+          page.should have_content("bike")
+          page.should have_content("wheels")
+        end
       end
     end
 
