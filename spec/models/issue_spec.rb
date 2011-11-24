@@ -16,6 +16,8 @@
 require 'spec_helper'
 
 describe Issue do
+  it_should_behave_like "a taggable model"
+
   describe "newly created" do
     subject { FactoryGirl.create(:issue) }
 
