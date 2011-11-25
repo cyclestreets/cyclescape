@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111125111841) do
+ActiveRecord::Schema.define(:version => 20111125130122) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -99,6 +99,13 @@ ActiveRecord::Schema.define(:version => 20111125111841) do
     t.integer "message_id",      :null => false
     t.integer "library_item_id", :null => false
   end
+
+  create_table "library_item_tags", :id => false, :force => true do |t|
+    t.integer "library_item_id", :null => false
+    t.integer "tag_id",          :null => false
+  end
+
+  add_index "library_item_tags", ["library_item_id", "tag_id"], :name => "index_library_item_tags_on_library_item_id_and_tag_id", :unique => true
 
   create_table "library_items", :force => true do |t|
     t.integer  "component_id"
