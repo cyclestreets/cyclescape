@@ -2,7 +2,7 @@
 %article.issue.collapsible
   .wrapper
     %header
-      %h3= link_to "#{issue.title} (#{issue.category.name})", issue
+      %h3= link_to issue.title, issue
       %span.tally
         = t ".tally", count: issue.plusminus
       %span.author

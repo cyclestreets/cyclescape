@@ -1,8 +1,6 @@
 require "spec_helper"
 
 describe "Issues" do
-
-  let!(:issue_category) { FactoryGirl.create(:issue_category) }
   let(:issue_values) { FactoryGirl.attributes_for(:issue_with_json_loc) }
 
   context "new" do
@@ -15,7 +13,6 @@ describe "Issues" do
 
       it "should create a new issue" do
         fill_in "Title", with: issue_values[:title]
-        select "Bike Parking", from: "Category"
         fill_in "Tags", with: "parking"
         fill_in "Description", with: issue_values[:description]
         # Note hidden map field
@@ -31,7 +28,7 @@ describe "Issues" do
   end
 
   context "show" do
-    let!(:issue) { FactoryGirl.create(:issue, category: issue_category) }
+    let!(:issue) { FactoryGirl.create(:issue) }
 
     context "as a public user" do
       before do
@@ -47,10 +44,6 @@ describe "Issues" do
       end
 
       it "should show the location"
-
-      it "should show the category" do
-        page.should have_content(issue.category.name)
-      end
     end
 
     context "as a site user" do
@@ -107,7 +100,7 @@ describe "Issues" do
   end
 
   context "index" do
-    let!(:issue) { FactoryGirl.create(:issue, category: issue_category) }
+    let!(:issue) { FactoryGirl.create(:issue) }
 
     before do
       visit issues_path
@@ -120,7 +113,7 @@ describe "Issues" do
 
   context "search" do
     include_context "signed in as a site user"
-    let(:issue) { FactoryGirl.create(:issue, category: issue_category) }
+    let(:issue) { FactoryGirl.create(:issue) }
 
     before do
       visit issues_path
@@ -151,7 +144,7 @@ describe "Issues" do
   end
 
   context "delete" do
-    let!(:issue) { FactoryGirl.create(:issue, category: issue_category) }
+    let!(:issue) { FactoryGirl.create(:issue) }
     let(:delete_text) { "Delete this issue" }
 
     context "as a site user" do
@@ -188,7 +181,7 @@ describe "Issues" do
   end
 
   context "voting" do
-    let(:issue) { FactoryGirl.create(:issue, category: issue_category) }
+    let(:issue) { FactoryGirl.create(:issue) }
     let(:meg) { FactoryGirl.create(:meg) }
 
     before do

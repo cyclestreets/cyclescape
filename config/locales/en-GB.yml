@@ -14,13 +14,6 @@
         success: "Group created"
       update:
         success: "Group updated"
-    issue_categories:
-      create:
-        success: "Category created"
-      index:
-        title: "Issue Categories"
-      update:
-        success: "Category updated"
     users:
       index:
         created_at: "%{time_ago} ago"
@@ -106,7 +99,6 @@
       title: "Issue Search Results"
     show:
       added_by_html: "Added by %{name} on %{time}"
-      category_html: "Category: %{category}"
       confirm_delete: "Are you sure?"
       delete_issue: "Delete this issue"
       new_public_thread: "New Public Thread"
