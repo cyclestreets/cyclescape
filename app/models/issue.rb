@@ -9,7 +9,6 @@
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
 #  deleted_at    :datetime
-#  category_id   :integer
 #  location      :spatial({:srid=
 #
 
@@ -22,7 +21,6 @@ class Issue < ActiveRecord::Base
   acts_as_voteable
 
   belongs_to :created_by, class_name: "User"
-  belongs_to :category, class_name: "IssueCategory"
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults
   has_and_belongs_to_many :tags, join_table: "issue_tags"
 
@@ -31,7 +29,6 @@ class Issue < ActiveRecord::Base
   validates :location, presence: true
 
   validates :created_by, presence: true
-  validates :category, presence: true
 
   default_scope where(deleted_at: nil)
 

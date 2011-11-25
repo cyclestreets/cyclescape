@@ -16,7 +16,7 @@ Cyclescape::Application.routes.draw do
   end
 
   namespace :admin do
-    resources :groups, :issue_categories, :users
+    resources :groups, :users
     match "home" => "home#index"
   end
 

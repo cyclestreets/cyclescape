@@ -9,7 +9,6 @@
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
 #  deleted_at    :datetime
-#  category_id   :integer
 #  location      :spatial({:srid=
 #
 
@@ -19,7 +18,6 @@ FactoryGirl.define do
     description "Whose leg do you have to hump to get a dry martini around here?"
     location "POINT(-122 47)"
     association :created_by, factory: :user
-    association :category, factory: :issue_category
 
     factory :issue_with_json_loc do
       loc_json '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
