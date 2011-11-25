@@ -16,6 +16,7 @@ describe "Issues" do
       it "should create a new issue" do
         fill_in "Title", with: issue_values[:title]
         select "Bike Parking", from: "Category"
+        fill_in "Tags", with: "parking"
         fill_in "Description", with: issue_values[:description]
         # Note hidden map field
         find("#issue_loc_json").set(issue_values[:loc_json])

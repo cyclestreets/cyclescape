@@ -2,6 +2,7 @@
   = f.inputs do
     = f.input :title
     = f.input :category
+    = f.input :tags_string, as: :tags
     = f.input :description
     = f.input :loc_json, as: :hidden
   = render partial: "shared/edit_map", locals: {thing: @issue}
