@@ -21,7 +21,7 @@ describe "Issues" do
         within(".content header") do
           page.should have_content(issue_values[:title])
         end
-        page.should have_content("Bike Parking")
+        page.should have_content("parking")
         page.should have_content(current_user.name)
       end
     end
