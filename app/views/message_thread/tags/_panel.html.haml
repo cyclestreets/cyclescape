@@ -3,5 +3,5 @@
     %ul
       - thread.tags.each do |tag|
         %li.tag= tag.name
-    = link_to "edit", "#", rel: "edit-tags", title: "Edit tags"
+    = link_to t(".edit_tags"), "#", rel: "edit-tags"
   = render partial: "message_thread/tags/edit", locals: {thread: thread}

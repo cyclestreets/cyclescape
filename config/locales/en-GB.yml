@@ -153,6 +153,9 @@
         success: "Subscription created."
       destroy:
         success: "Unsubscribed."
+    tags:
+      panel:
+        edit_tags: "edit"
   message_threads:
     destroy:
       failure: "Couldn't delete the thread"
