@@ -1,0 +1,7 @@
+.tags-panel
+  .tags
+    %ul
+      - issue.tags.each do |tag|
+        %li.tag= tag.name
+    = link_to t(".edit_tags"), "#", rel: "edit-tags"
+  = render partial: "issue/tags/edit", locals: {issue: issue}

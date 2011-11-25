@@ -86,6 +86,9 @@
     message_threads:
       new:
         title: "New Thread on %{issue}"
+    tags:
+      panel:
+        edit_tags: "edit"
   issues:
     compact:
       tally: "(%{count})"

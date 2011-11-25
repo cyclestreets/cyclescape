@@ -24,5 +24,9 @@ FactoryGirl.define do
     factory :issue_with_json_loc do
       loc_json '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
     end
+
+    trait :with_tags do
+      tags { FactoryGirl.build_list(:tag, 2) }
+    end
   end
 end
