@@ -86,6 +86,9 @@
     message_threads:
       new:
         title: "New Thread on %{issue}"
+    tags:
+      panel:
+        edit_tags: "edit"
   issues:
     compact:
       tally: "(%{count})"
@@ -153,6 +156,9 @@
         success: "Subscription created."
       destroy:
         success: "Unsubscribed."
+    tags:
+      panel:
+        edit_tags: "edit"
   message_threads:
     destroy:
       failure: "Couldn't delete the thread"

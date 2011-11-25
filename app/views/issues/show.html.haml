@@ -6,6 +6,8 @@
       %ul
         %li= t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)
         %li= t ".category_html", category: @issue.category.name
+    %section.tags
+      = render partial: "issue/tags/panel", locals: {issue: @issue}
     %section.description
       = @issue.description
     %section.voting

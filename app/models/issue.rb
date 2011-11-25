@@ -16,6 +16,7 @@
 class Issue < ActiveRecord::Base
   include Locatable
   include FakeDestroy
+  include Taggable
 
   acts_as_indexed :fields => [:title, :description]
   acts_as_voteable
@@ -23,6 +24,7 @@ class Issue < ActiveRecord::Base
   belongs_to :created_by, class_name: "User"
   belongs_to :category, class_name: "IssueCategory"
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults
+  has_and_belongs_to_many :tags, join_table: "issue_tags"
 
   validates :title, presence: true
   validates :description, presence: true

@@ -79,6 +79,30 @@ describe "Issues" do
         page.should have_link("New #{current_user.groups.first.name} Thread")
       end
     end
+
+    context "tags", as: :site_user do
+      let!(:issue) { FactoryGirl.create(:issue, :with_tags) }
+
+      before do
+        visit issue_path(issue)
+      end
+
+      it "should be shown" do
+        page.should have_content(issue.tags.first.name)
+        page.should have_content(issue.tags.second.name)
+      end
+
+      it "should be editable" do
+        # This form is initially hidden
+        within("form.edit-tags") do
+          fill_in "Tags", with: "pothole dangerous"
+          click_on "Save"
+        end
+        # Page submission is AJAX but returns usable page fragment here
+        page.should have_content("pothole")
+        page.should have_content("dangerous")
+      end
+    end
   end
 
   context "index" do

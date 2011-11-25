@@ -11,6 +11,7 @@ Cyclescape::Application.routes.draw do
     put 'vote_down', :on => :member
     scope module: "issue" do
       resources :threads, controller: "message_threads"
+      resource :tags, only: [:update]
     end
   end
 
@@ -47,7 +48,7 @@ Cyclescape::Application.routes.draw do
     end
     scope module: :message_thread do
       resources :subscriptions, only: [:create, :destroy]
-      resources :tags, only: [:update]
+      resource :tags, only: [:update]
     end
   end
 
