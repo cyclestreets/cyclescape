@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111124174206) do
+ActiveRecord::Schema.define(:version => 20111125111841) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -69,12 +69,6 @@ ActiveRecord::Schema.define(:version => 20111124174206) do
     t.boolean  "process_error", :default => false, :null => false
   end
 
-  create_table "issue_categories", :force => true do |t|
-    t.string   "name",       :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "issue_tags", :id => false, :force => true do |t|
     t.integer "issue_id", :null => false
     t.integer "tag_id",   :null => false
@@ -89,7 +83,6 @@ ActiveRecord::Schema.define(:version => 20111124174206) do
     t.datetime "created_at",                                                :null => false
     t.datetime "updated_at",                                                :null => false
     t.datetime "deleted_at"
-    t.integer  "category_id"
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
   end
 
