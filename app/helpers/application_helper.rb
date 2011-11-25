@@ -30,23 +30,21 @@ module ApplicationHelper
       if object.location.geometry_type == RGeo::Feature::Point
         z = object.location.z || Geo::POINT_ZOOM
         page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),z);
-
-        markerlayer = MapLayers::JsVar.new('markerlayer')
-        icon = MapLayers::JsVar.new('icon')
-        page.assign(markerlayer, OpenLayers::Layer::Markers.new( "Location", { projection: projection }))
-        page << map.addLayer(markerlayer)
-        page.assign(icon, OpenLayers::Icon.new('/openlayers/img/marker-blue.png'))
-        page << markerlayer.addMarker(OpenLayers::Marker.new(OpenLayers::LonLat.new(object.location.x, object.location.y).transform(projection, map.getProjectionObject()), icon))
       else
         bbox = RGeo::Cartesian::BoundingBox.new(object.location.factory)
         bbox.add(object.location)
         page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
-
-        locationlayer = MapLayers::JsVar.new('locationlayer')
-        protocol = OpenLayers::Protocol::HTTP.new( url: geometry_url, format: :format_plain )
-        page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::Fixed.new() ]))
-        page << map.addLayer(locationlayer)
       end
+
+      locationlayer = MapLayers::JsVar.new('locationlayer')
+      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_url, format: :format_plain )
+      page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location",
+                                                                protocol: protocol,
+                                                                projection: projection,
+                                                                styleMap: 'MapStyle.displayStyle()'.to_sym,
+                                                                strategies: [OpenLayers::Strategy::Fixed.new()]))
+      page << map.addLayer(locationlayer)
+
       yield(map, page, html_id) if block_given?
     end
   end
@@ -63,7 +61,11 @@ module ApplicationHelper
       end
       vectorlayer = MapLayers::JsVar.new("vectorlayer")
       protocol = OpenLayers::Protocol::HTTP.new( url: geometry_bbox_url, format: :format_plain )
-      page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Issues", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::BBOX.new()]))
+      page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Issues",
+                                                             protocol: protocol,
+                                                             projection: projection,
+                                                             styleMap: 'MapStyle.displayStyle()'.to_sym,
+                                                             strategies: [OpenLayers::Strategy::BBOX.new()]))
       page << map.add_layer(vectorlayer)
       yield(map, page) if block_given?
     end
