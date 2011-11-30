@@ -14,6 +14,20 @@
         success: "Group created"
       update:
         success: "Group updated"
+    home:
+      index:
+        admin_interface: "Admin Interface"
+        manage_comments: "Manage Comments"
+        manage_groups: "Manage Groups"
+        manage_issue_categories: "Manage Issue Categories"
+        manage_users: "Manage Users"
+    issue_categories:
+      create:
+        success: "Category created"
+      index:
+        title: "Issue Categories"
+      update:
+        success: "Category updated"
     users:
       index:
         created_at: "%{time_ago} ago"
@@ -23,6 +37,12 @@
   application:
     account_disabled: "Your account has been disabled by an administrator"
     permission_denied: "You are not authorised to access that page."
+  dashboards:
+    show:
+      involved_threads: "Involved Threads"
+      issues_in_your_area: "Issues in your area"
+      new_group_thread: "Start a new group thread"
+      subscribed_threads: "Subscribed Threads"
   devise:
     registrations:
       new:
@@ -75,6 +95,9 @@
       no_threads: This group doesn't have any threads yet
       recent_issues: Recent Issues in this group's area
       recent_threads: Recent Threads created by this group
+  home:
+    show:
+      new_issue: "Create New Issue"
   issue:
     message_threads:
       new:
@@ -84,12 +107,15 @@
         edit_tags: "edit"
   issues:
     compact:
+      created_by: "Created by"
       tally: "(%{count})"
     destroy:
       failure: "Can't delete that issue"
       success: "Issue deleted"
     index:
-      popular: "Currently Popular Issues"
+      new_issue: "Create new Issue"
+      popular_issues: "Currently Popular Issues"
+      recent_issues: "Recent Issues"
       title: "All Issues"
     search:
       no_results_found: "No results found for '%{query}'."
@@ -116,14 +142,19 @@
       success: "You have voted up this issue"
   layouts:
     application:
-      title: "Cyclescape"
-      dashboard: "My Dashboard"
       admin: "Admin"
+      dashboard: "My Dashboard"
       feedback: "Feedback"
+      issues: "Issues"
+      library: "Library"
+      threads: "Threads"
+      title: "Cyclescape"
   libraries:
     show:
       title: "Library"
       documents: "Documents"
+      new_document: "Upload new document\u00A0\u2026"
+      new_note: "Create new note\u00A0\u2026"
       notes: "Notes"
   library:
     documents:
@@ -152,6 +183,9 @@
       panel:
         edit_tags: "edit"
   message_threads:
+    compact:
+      group_private: "Group Private"
+      public: "Public"
     destroy:
       failure: "Couldn't delete the thread"
       success: "Thread deleted"
@@ -168,6 +202,9 @@
       subscribed: "You are subscribed to this thread."
       subscribed_by_email: "You are subscribed by email to this thread."
       subscribers_list: "%{count_text} to this thread"
+    widget:
+      group_private: "Group Private"
+      public: "Public"
   message:
     deadlines:
       create:
@@ -196,6 +233,13 @@
       posted_date: "posted %{time_ago} ago"
       censor: "Censor this message"
       censored: "This message has been removed"
+    new:
+      deadline_message: "Set a Deadline"
+      library_item_message: "Add from the Library"
+      link_message: "Add a Link"
+      new_message: "New message"
+      photo_message: "Upload a Photo"
+      text_message: "Add a Comment"
   shared:
     map_search:
       example_search: "Putney, UK"
@@ -222,7 +266,17 @@
         failure: "That location can't be deleted"
         success: "Location deleted"
       index:
+        category: "Category"
         confirm: "Are you sure?"
+        delete: "Delete"
+        edit: "Edit"
+        map: "Map"
+        my_locations: "My Locations"
+        new: "Add a new Location"
+        no_overlapping_groups: "No Overlapping Groups"
+        overlapping_groups: "Overlapping Groups"
+      new:
+        new_location: "New Location"
       update:
         success: "Location Updated"
     profiles:

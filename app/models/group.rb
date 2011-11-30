@@ -20,7 +20,7 @@ class Group < ActiveRecord::Base
   has_many :threads, class_name: "MessageThread"
   has_one :profile, class_name: "GroupProfile"
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :short_name, presence: true, uniqueness: true, subdomain: true
   validates :default_thread_privacy, inclusion: {in: MessageThread::ALLOWED_PRIVACY}
 
