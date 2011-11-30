@@ -1,5 +1,5 @@
 class Notifications < ActionMailer::Base
-  default from: "no-reply@cyclescape.net"
+  default from: Cyclescape::Application.config.default_email_from
 
   def thread_subscribed(subscription)
     @subscriber = subscription.user

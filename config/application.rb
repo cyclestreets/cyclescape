@@ -51,5 +51,9 @@ module Cyclescape
 
     # Set cache storage
     config.cache_store = :redis_store
+
+    # Default notification e-mail from address
+    config.default_email_from_domain = "cyclescape.org"
+    config.default_email_from = "Cyclescape <info@cyclescape.org>"
   end
 end
