@@ -5,8 +5,9 @@
       %li= link_to t(".edit"), action: :edit
       %li= link_to t(".update_account"), edit_user_registration_path
       %li= link_to t(".my_locations"), user_locations_path
-  .website
-    = link_to @profile.website, @profile.website, rel: :nofollow unless @profile.website.empty?
+  - if @profile.website?
+    .website
+      = link_to @profile.website, @profile.website, rel: :nofollow
   - if @profile.picture
     = image_tag @profile.picture.url, alt: "", title: t(".profile_picture_title", name: @user.name)
   .about
