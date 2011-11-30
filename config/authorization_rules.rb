@@ -44,6 +44,7 @@ authorization do
     has_permission_on :message_thread_tags, to: :update
     has_permission_on :message_photos, :message_links, :message_deadlines, :message_library_items, to: :create
     has_permission_on :libraries, :library_documents, :library_notes, to: :manage
+    has_permission_on :library_tags, to: :update
     has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :user_profiles do
       to :manage

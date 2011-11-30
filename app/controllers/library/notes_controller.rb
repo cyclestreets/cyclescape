@@ -21,6 +21,7 @@ class Library::NotesController < ApplicationController
   end
 
   def show
+    @tag_panel = TagPanelDecorator.new(@note.item, form_url: library_tag_path(@note.item))
   end
 
   def edit

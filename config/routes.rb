@@ -59,6 +59,7 @@ Cyclescape::Application.routes.draw do
       end
       resources :documents
       resources :notes
+      resources :tags, only: [:update]
     end
   end
 
