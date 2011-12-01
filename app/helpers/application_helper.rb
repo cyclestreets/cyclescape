@@ -95,6 +95,12 @@ module ApplicationHelper
     end
   end
 
+  def link_to_github_commit
+    commit = Rails.application.config.git_hash
+    url = Rails.application.config.github_project_url + "/commit/" + commit
+    link_to commit, url
+  end
+
   protected
 
   def core_map(html_id, &block)

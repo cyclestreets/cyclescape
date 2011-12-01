@@ -50,3 +50,4 @@
     %footer
       .wrapper
         = link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
+        = t(".application_version_html", version: link_to_github_commit)
