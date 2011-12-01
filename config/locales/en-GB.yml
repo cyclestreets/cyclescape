@@ -149,6 +149,7 @@
       library: "Library"
       threads: "Threads"
       title: "Cyclescape"
+      application_version_html: "Version: %{version}"
   libraries:
     show:
       title: "Library"

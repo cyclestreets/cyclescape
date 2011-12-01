@@ -13,6 +13,12 @@ describe "Global settings" do
     it "should set the authorization user to a guest" do
       Authorization.current_user.role_symbols.should include(:guest)
     end
+
+    it "should show the current Git version in the footer" do
+      within("footer") do
+        page.should have_content(Rails.application.config.git_hash)
+      end
+    end
   end
 
   context "signed in", as: :site_user do
