@@ -97,7 +97,17 @@ nav.sub .inner {
 
 // Account nav
 
-nav.account {
+nav.account .inner {
+  float: right;
+  width: 200px;
+  margin-top: 6px;
+
+  ul li {
+    display: inline;
+    a {
+      padding: 4px;
+    }
+  }
 }
 
 // Flash

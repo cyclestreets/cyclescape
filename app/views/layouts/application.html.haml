@@ -9,6 +9,17 @@
     %script(src="http://cdn.jquerytools.org/1.2.6/all/jquery.tools.min.js" type="text/javascript")
     = csrf_meta_tags
   %body{class: [Rails.env, controller_path.tr("/_", "-")].join(" ")}
+    %nav.account
+      .inner
+        %ul
+          - if current_user
+            %li.name= link_to_profile current_user
+            %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"
+          - else
+            - if permitted_to? :create, :devise_registrations
+              %li= link_to "Sign up", new_user_registration_path
+            - if permitted_to? :create, :devise_sessions
+              %li= link_to "Sign in", new_user_session_path
     %header.top
       .inner
         = link_to image_tag("header_logo.png", alt: t(".title")), root_path
@@ -26,17 +37,6 @@
       .inner
         .breadcrumb
         .search
-    %nav.account
-      .account-menu
-        %ul
-          - if current_user
-            %li.name= link_to_profile current_user
-            %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"
-          - else
-            - if permitted_to? :create, :devise_registrations
-              %li= link_to "Sign up", new_user_registration_path
-            - if permitted_to? :create, :devise_sessions
-              %li= link_to "Sign in", new_user_session_path
     .flash-container
       - [:alert, :notice].each do |type|
         - if flash.key? type
