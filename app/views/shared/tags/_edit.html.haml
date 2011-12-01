@@ -1,0 +1,7 @@
+.tag-form
+  = semantic_form_for context, url: form_url, remote: true, html: {class: "edit-tags", data: {type: "html"} } do |f|
+    = f.inputs do
+      = f.input :tags_string, as: :tags
+    = f.buttons do
+      = f.commit_button
+      = cancel_link cancel_url

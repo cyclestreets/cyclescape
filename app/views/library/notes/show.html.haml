@@ -1,5 +1,8 @@
-.library.note
-  %p.details
+%article.library.note
+  %section.details
     = l @note.created_at
     = link_to_profile @note.created_by
-  = @note.body
+  %section.tags
+    = @tag_panel.render
+  %section.note
+    = @note.body

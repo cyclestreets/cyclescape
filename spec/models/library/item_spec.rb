@@ -15,6 +15,8 @@
 require 'spec_helper'
 
 describe Library::Item do
+  it_should_behave_like "a taggable model"
+
   describe "associations" do
     it { should belong_to(:component) }
     it { should belong_to(:created_by) }
