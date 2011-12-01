@@ -40,5 +40,11 @@ describe Tag do
     it "should still make the tag lowercase" do
       Tag.grab("cHAiN").name.should == "chain"
     end
+
+    it "should find the tag if given mixed case" do
+      existing = Tag.create(name: "reflectors")
+      found = Tag.grab("Reflectors")
+      found.should == existing
+    end
   end
 end

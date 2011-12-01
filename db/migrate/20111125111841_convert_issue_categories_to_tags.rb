@@ -4,7 +4,7 @@ class ConvertIssueCategoriesToTags < ActiveRecord::Migration
     categories = execute("SELECT i.id, ic.name FROM issues i JOIN issue_categories ic ON i.category_id = ic.id").values
 
     # Create tags in advance to try to solve migration failure on production that looks
-    # like at transactional issue.
+    # like a transactional issue.
     categories.each do |cat|
       Tag.find_or_create_by_name(cat.second)
     end
