@@ -26,6 +26,11 @@ describe Message do
   describe "validations" do
     it { should validate_presence_of(:created_by_id) }
     it { should validate_presence_of(:body) }
+
+    it "should not require a body if a component is attached" do
+      subject.stub(component: true)
+      subject.should have(0).errors_on(:body)
+    end
   end
 
   describe "newly created" do
@@ -43,6 +48,23 @@ describe Message do
       subject.component = FactoryGirl.create(:photo_message, message: subject)
       subject.component_type.should == "PhotoMessage"
       subject.should be_valid
+    end
+  end
+
+  describe "body" do
+    it "should be blank if empty when component is attached" do
+      subject.stub(component: true)
+      subject.created_by_id = 1
+      subject.should be_valid
+      subject.body.should == ""
+    end
+
+    it "should be retained with an attached component" do
+      subject.stub(component: true)
+      subject.created_by_id = 1
+      subject.body = "Testing"
+      subject.should be_valid
+      subject.body.should == "Testing"
     end
   end
 end
