@@ -19,14 +19,6 @@ describe "Thread subscriptions" do
         current_user.thread_subscriptions.first.send_email.should be_false
       end
 
-      it "should send a notification confirming the subscription" do
-        click_on "Subscribe"
-        open_email(current_user.email)
-        current_email.should have_subject("Subscribed to \"#{thread.title}\"")
-        current_email.should have_body_text(/#{current_user.name}/)
-        current_email.should have_body_text(/You have subscribed to "#{thread.title}"/)
-      end
-
       it "should state I am subscribed" do
         click_on "Subscribe"
         page.should have_content("You are subscribed")
