@@ -57,7 +57,7 @@ module Cyclescape
     config.default_email_from = "Cyclescape <info@cyclescape.org>"
 
     # Git info
-    config.git_hash = `git rev-parse --short HEAD`
+    config.git_hash = `git rev-parse --short HEAD`.chomp
     config.github_project_url = "https://github.com/cyclestreets/toolkit"
   end
 end

@@ -16,7 +16,7 @@ describe "Global settings" do
 
     it "should show the current Git version in the footer" do
       within("footer") do
-        page.should have_content(`git rev-parse --short HEAD`)
+        page.should have_content(Rails.application.config.git_hash)
       end
     end
   end
