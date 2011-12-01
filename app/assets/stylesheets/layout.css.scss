@@ -5,7 +5,13 @@
   display: none;
 }
 
-body > header > .inner, nav.bar, .flash-container, .content-container, body > footer {
+body > header > .inner,
+nav.bar,
+nav.sub,
+nav.account,
+.flash-container,
+.content-container,
+body > footer {
   @include container;
 }
 
@@ -66,11 +72,9 @@ a.button, input[type="submit"] {
 
 nav.bar .inner {
   position: relative;
-  height: 12px;
-  padding: 10px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-  margin-bottom: 10px;
+  padding: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   .account-menu {
     position: absolute;
     right: 10px;
@@ -79,9 +83,21 @@ nav.bar .inner {
   ul li {
     display: inline;
     a {
-      padding: 5px;
+      padding: 8px;
     }
   }
+}
+
+// Sub nav
+
+nav.sub .inner {
+  position: relative;
+
+}
+
+// Account nav
+
+nav.account {
 }
 
 // Flash
