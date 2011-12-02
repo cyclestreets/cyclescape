@@ -3,7 +3,5 @@
     = f.inputs do
       = f.input :deadline, as: :date_picker
       = f.input :title
-      = semantic_fields_for Message.new do |f2|
-        = f2.input :body
     = f.buttons do
       = f.commit_button

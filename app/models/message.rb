@@ -21,6 +21,8 @@ class Message < ActiveRecord::Base
   belongs_to :created_by, class_name: "User"
   belongs_to :component, polymorphic: true, autosave: true
 
+  before_validation :init_blank_body, on: :create, if: :component
+
   scope :recent, order("created_at DESC").limit(3)
 
   validates :created_by_id, presence: true
@@ -32,5 +34,11 @@ class Message < ActiveRecord::Base
 
   def censored?
     censored_at
+  end
+
+  protected
+
+  def init_blank_body
+    self.body ||= ""
   end
 end

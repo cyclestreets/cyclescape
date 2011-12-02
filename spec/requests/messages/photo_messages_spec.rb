@@ -18,10 +18,8 @@ describe "Photo messages" do
       photo_form do
         attach_file("Photo", abstract_image_path)
         fill_in "Caption", with: "An abstract image"
-        fill_in "Message", with: "Here's some nice photos I took."
         click_on "Create Photo message"
       end
-      page.should have_content("Here's some nice photos I took.")
       page.should have_css(".photo img")
       within('figcaption') do
         page.should have_content("An abstract image")
