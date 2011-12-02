@@ -20,9 +20,12 @@
               %li= link_to "Sign up", new_user_registration_path
             - if permitted_to? :create, :devise_sessions
               %li= link_to "Sign in", new_user_session_path
+        %ul
+          %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
     %header.top
       .inner
-        = link_to image_tag("header_logo.png", alt: t(".title")), root_path
+        .logo
+          = link_to image_tag("header_logo.png", alt: t(".title")), root_path
     %nav.bar
       .inner
         .main-menu
@@ -49,5 +52,4 @@
           .wrapper
     %footer
       .wrapper
-        = link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
         = t(".application_version_html", version: link_to_github_commit)

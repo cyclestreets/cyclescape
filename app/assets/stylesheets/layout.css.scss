@@ -75,11 +75,6 @@ nav.bar .inner {
   padding: 12px;
   padding-top: 10px;
   padding-bottom: 10px;
-  .account-menu {
-    position: absolute;
-    right: 10px;
-    top: 6px;
-  }
   ul li {
     display: inline;
     a {
@@ -108,6 +103,11 @@ nav.account .inner {
       padding: 4px;
     }
   }
+}
+
+li#feedback a {
+  display: block;
+  padding: 8px;
 }
 
 // Flash
