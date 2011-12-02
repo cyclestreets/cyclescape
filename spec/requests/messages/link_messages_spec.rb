@@ -18,11 +18,9 @@ describe "Link messages" do
       link_form do
         fill_in "URL", with: link_message_attrs[:url]
         fill_in "Title", with: link_message_attrs[:title]
-        fill_in "Message", with: "I think this is useful."
         click_on "Create Link message"
       end
       page.should have_link(link_message_attrs[:title], href: link_message_attrs[:url])
-      page.should have_content("I think this is useful.")
     end
   end
 
