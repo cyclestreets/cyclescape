@@ -21,6 +21,10 @@ class PhotoMessage < MessageComponent
 
   validates :photo, presence: true
 
+  def photo_medium
+    photo.thumb("500x500>")
+  end
+
   def photo_preview
     photo.thumb("200x200>")
   end

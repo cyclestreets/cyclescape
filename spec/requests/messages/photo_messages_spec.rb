@@ -49,5 +49,20 @@ describe "Photo messages" do
     it "should have the caption as part of the alt tag" do
       page.should have_xpath("//img/@alt[contains(., '#{photo_message.caption}')]")
     end
+
+    context "the photo" do
+      it "should link to a larger version" do
+        page.should have_xpath("//a[@rel='#overlay' and @href='#{thread_photo_path(thread, photo_message)}']/img")
+      end
+
+      it "should display a larger version when clicked" do
+        # Reload the photo for the URL because the factory-created instance has
+        # the filename as additional information that we actually discard but is
+        # used in the URL generation if found.
+        photo_path = PhotoMessage.find(photo_message.id).photo_medium.url
+        find(:xpath, "//a[@href='#{thread_photo_path(thread, photo_message)}']").click
+        page.should have_xpath("//img[@src='#{photo_path}']")
+      end
+    end
   end
 end

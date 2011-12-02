@@ -7,7 +7,7 @@ $ ->
           =>
             # Have to bind close link manually as it doesn't
             # seem to work with AJAX loading
-            wrapper.find(".cancel a").click =>
+            wrapper.find(".cancel a, .close").click =>
               this.close()
               false
       mask:
