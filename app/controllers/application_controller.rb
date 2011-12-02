@@ -36,6 +36,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_sign_in_path_for(resource)
+    dashboard_path
+  end
+
   def set_flash_message(type, options = {})
     flash_key = if type == :success then :notice else :alert end
     options.reverse_merge!(scope: "#{controller_path.gsub('/', '.')}.#{action_name}")

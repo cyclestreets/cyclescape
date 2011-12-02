@@ -30,4 +30,17 @@ describe "Authentication and authorization" do
       page.current_path.should eql(new_issue_path)
     end
   end
+
+  context "when logging in" do
+    it "should direct you to your dashboard page" do
+      credentials = FactoryGirl.attributes_for(:user)
+      user = FactoryGirl.create(:user, credentials)
+      visit root_path
+      click_link "Sign in"
+      fill_in "Email", with: credentials[:email]
+      fill_in "Password", with: credentials[:password]
+      click_button "Sign in"
+      page.current_path.should == dashboard_path
+    end
+  end
 end
