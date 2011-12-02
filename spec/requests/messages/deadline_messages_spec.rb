@@ -17,12 +17,10 @@ describe "Deadline messages" do
       deadline_form do
         fill_in "Deadline", with: future_date.to_s
         fill_in "Title", with: "Submission deadline"
-        fill_in "Message", with: "Do this by then!"
         click_on "Create Deadline message"
       end
       page.should have_content(future_date.strftime("%d %B %Y"))
       page.should have_content("Submission deadline")
-      page.should have_content("Do this by then!")
     end
   end
 end
