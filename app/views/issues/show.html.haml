@@ -8,7 +8,7 @@
     %section.tags
       = render partial: "issue/tags/panel", locals: {issue: @issue}
     %section.description
-      = @issue.description
+      = simple_format @issue.description
     %section.voting
       %ul
         %li

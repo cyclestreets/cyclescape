@@ -1,5 +1,5 @@
 %h2= t ".description"
-%p= @profile.description or t ".no_description"
+%p= simple_format @profile.description or t ".no_description"
 
 %h2= t ".location"
 - if @profile.location

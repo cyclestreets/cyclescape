@@ -11,7 +11,7 @@
   - if @profile.picture
     = image_tag @profile.picture.url, alt: "", title: t(".profile_picture_title", name: @user.name)
   .about
-    = @profile.about
+    = simple_format @profile.about
   .groups
     %p= t ".is_a_member_of_groups", name: @user.name, count: @user.groups.count
     - if @user.groups.count > 0
