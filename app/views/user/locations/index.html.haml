@@ -16,7 +16,7 @@
       %tr
         %td= l.category.name
         %td
-          - m = tiny_display_map(l, geometry_user_location_path(l, :json)) do |map, page, dom_id|
+          - m = tiny_display_map(l, geometry_user_location_path(l, :json), "tinymap") do |map, page, dom_id|
             %div{id: dom_id, class: "tinymap"}
           != m.to_html
         %td= link_to t(".edit"), edit_user_location_path(l)

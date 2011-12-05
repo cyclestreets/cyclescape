@@ -20,8 +20,9 @@ module ApplicationHelper
     end
   end
 
-  def tiny_display_map(object, geometry_url, &block)
-    dom_id = dom_id(object, "tinymap")
+  # If you need to show the same tiny_display_map twice on the one page, give different prefixes
+  def tiny_display_map(object, geometry_url, prefix, &block)
+    dom_id = dom_id(object, prefix)
     @map = core_map(dom_id) do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
 
