@@ -8,7 +8,7 @@
   = render "all_map"
   .recent
     %h2= t ".recent_issues"
-    = render partial: "compact", collection: @issues, as: :issue, locals: {collapsed: true}
+    = render partial: "compact", collection: @issues, as: :issue, locals: {collapsed: true, prefix: "recent"}
   .popular
     %h2= t ".popular_issues"
-    = render partial: "compact", collection: @popular_issues, as: :issue, locals: {collapsed: true}
+    = render partial: "compact", collection: @popular_issues, as: :issue, locals: {collapsed: true, prefix: "popular"}

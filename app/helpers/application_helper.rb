@@ -20,9 +20,10 @@ module ApplicationHelper
     end
   end
 
-  def tiny_display_map(object, geometry_url, &block)
-    html_id = "tinymap_#{object.id}"
-    @map = core_map(html_id) do |map, page|
+  # If you need to show the same tiny_display_map twice on the one page, give different prefixes
+  def tiny_display_map(object, geometry_url, prefix, &block)
+    dom_id = dom_id(object, prefix)
+    @map = core_map(dom_id) do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
 
       add_formats(page)
@@ -45,7 +46,7 @@ module ApplicationHelper
                                                                 strategies: [OpenLayers::Strategy::Fixed.new()]))
       page << map.addLayer(locationlayer)
 
-      yield(map, page, html_id) if block_given?
+      yield(map, page, dom_id) if block_given?
     end
   end
 
@@ -103,8 +104,8 @@ module ApplicationHelper
 
   protected
 
-  def core_map(html_id, &block)
-    map = MapLayers::Map.new(html_id, {theme: "/openlayers/theme/default/style.css",
+  def core_map(dom_id, &block)
+    map = MapLayers::Map.new(dom_id, {theme: "/openlayers/theme/default/style.css",
                                         projection: googleproj,
                                         displayProjection: projection,
                                         controls: []

@@ -14,8 +14,8 @@
       .description
         = truncate issue.description, length: 90, separator: ".", omission: "\u2026"
       .map
-        - m = tiny_display_map(issue, geometry_issue_path(issue, :json)) do |map, page, html_id|
-          %div{id: html_id, class: "tinymap"}
+        - m = tiny_display_map(issue, geometry_issue_path(issue, :json), prefix) do |map, page, dom_id|
+          %div{id: dom_id, class: "tinymap"}
         != m.to_html
       .threads
         = pluralize(issue.threads.public.count, "public thread") + ", "
