@@ -113,7 +113,7 @@ describe "Issues" do
 
   context "search" do
     include_context "signed in as a site user"
-    let(:issue) { FactoryGirl.create(:issue) }
+    let(:issue) { FactoryGirl.create(:issue, :with_tags) }
 
     before do
       visit issues_path
@@ -129,6 +129,14 @@ describe "Issues" do
 
     it "should return results for a description search" do
       fill_in "Search for", with: issue.description
+      click_on "Search"
+
+      page.should have_content("Search Results")
+      page.should have_content(issue.title)
+    end
+
+    it "should return results for a tag search" do
+      fill_in "Search for", with: issue.tags.first.name
       click_on "Search"
 
       page.should have_content("Search Results")
