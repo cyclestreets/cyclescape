@@ -151,6 +151,12 @@
       title: "Cyclescape"
       application_version_html: "Version: %{version}"
   libraries:
+    search:
+      no_results_found: "No results found for '%{query}'."
+      results_found:
+        one: "One result found for '%{query}'."
+        other: "%{count} results found for '%{query}'"
+      title: "Library Search Results"
     show:
       title: "Library"
       documents: "Documents"
