@@ -3,6 +3,6 @@
   %p= t(".results_found", count: @results.count, query: @query)
   %ul
     - @results.each do |item|
-      %li= item.title
+      %li= link_to item.title, item.component
 - else
   %p= t(".no_results_found", query: @query)
