@@ -1,5 +1,4 @@
 class Issue::MessageThreadsController < MessageThreadsController
-  before_filter :load_group
   before_filter :load_issue
 
   def index
@@ -8,8 +7,8 @@ class Issue::MessageThreadsController < MessageThreadsController
 
   def new
     @thread = @issue.threads.build
-    @thread.privacy = @group.default_thread_privacy if @group
     @message = @thread.messages.build
+    @available_groups = current_user.groups
   end
 
   def create
@@ -19,6 +18,7 @@ class Issue::MessageThreadsController < MessageThreadsController
     if @thread.save
       redirect_to issue_thread_path(@issue, @thread)
     else
+      @available_groups = current_user.groups
       render :new
     end
   end
@@ -27,11 +27,5 @@ class Issue::MessageThreadsController < MessageThreadsController
 
   def load_issue
     @issue = Issue.find(params[:issue_id])
-  end
-
-  def load_group
-    if params[:group_id]
-      @group = current_user.groups.find(params[:group_id])
-    end
   end
 end

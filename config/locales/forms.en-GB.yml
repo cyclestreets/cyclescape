@@ -25,6 +25,7 @@
       message:
         body: "Message"
       message_thread:
+        group: "Owned by"
         tags_string: "Tags"
       site_comment:
         body: "Message"

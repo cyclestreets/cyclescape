@@ -54,7 +54,7 @@ describe "Issues" do
       end
 
       it "should have a link to create a new public thread" do
-        page.should have_link("New Public Thread")
+        page.should have_link("New Thread")
       end
     end
 
@@ -66,11 +66,7 @@ describe "Issues" do
       end
 
       it "should have a link to create a new public thread" do
-        page.should have_link("New Public Thread")
-      end
-
-      it "should have a link to create a new thread for the user's group" do
-        page.should have_link("New #{current_user.groups.first.name} Thread")
+        page.should have_link("New Thread")
       end
     end
 
