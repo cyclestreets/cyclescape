@@ -50,7 +50,7 @@ jQuery ->
             wrapper.html(data)
             # Have to bind close link manually as it doesn't
             # seem to work with AJAX loading
-            wrapper.find(".cancel a, .close").click =>
+            wrapper.on "click", ".cancel a, .close", =>
               this.close()
               false
           error: (xhr, status, error) =>

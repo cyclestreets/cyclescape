@@ -259,6 +259,9 @@
         when_ago: "%{time_ago} ago"
       new:
         title: "Feedback"
+      success:
+        thank_you: "Thank you for your feedback."
+        close: "< Back to site"
   user:
     locations:
       create:
