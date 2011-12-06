@@ -26,4 +26,9 @@ class Library::Document < Library::Component
     hash = Digest::SHA1.file(file.path).hexdigest
     "library/documents/#{hash[0..2]}/#{hash[3..5]}/#{hash}"
   end
+
+  def searchable_text
+    # would be great to also use text content from within pdfs etc
+    title
+  end
 end

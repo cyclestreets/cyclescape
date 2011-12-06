@@ -16,6 +16,8 @@ class Library::Item < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
+  acts_as_indexed :fields => [:searchable_text]
+
   belongs_to :component, polymorphic: true
   belongs_to :created_by, class_name: "User"
   has_and_belongs_to_many :tags, join_table: "library_item_tags", foreign_key: "library_item_id"
@@ -23,4 +25,5 @@ class Library::Item < ActiveRecord::Base
   validates_presence_of :created_by
 
   delegate :title, to: :component
+  delegate :searchable_text, to: :component
 end
