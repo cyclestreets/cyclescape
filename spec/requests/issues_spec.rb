@@ -141,6 +141,14 @@ describe "Issues" do
 
       page.should have_content("No results found")
     end
+
+    it "should not return deleted issues" do
+      fill_in "Search for", with: issue.title
+      issue.destroy
+      click_on "Search"
+
+      page.should have_content("No results found")
+    end
   end
 
   context "delete" do
