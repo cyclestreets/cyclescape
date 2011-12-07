@@ -124,7 +124,7 @@
                 }
               }
             }
-            &:last-child a: hover {
+            &:last-child a:hover {
               @include border-radius(0 0 6px 6px);
             }
           }

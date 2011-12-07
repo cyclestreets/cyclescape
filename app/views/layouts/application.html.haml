@@ -24,16 +24,15 @@
             - if permitted_to? :create, :devise_sessions
               %li= link_to "Sign in", new_user_session_path
             %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
-    %nav.bar
-      .inner
-        .main-menu
-          %ul
-            %li#menu-dashboard= link_to t(".dashboard"), dashboard_path
-            - if permitted_to? :view, :admin_home
-              %li#menu-admin= link_to t(".admin"), admin_home_path
-            %li#menu-issues= link_to t(".issues"), issues_path
-            %li#menu-threads= link_to t(".threads"), threads_path
-            %li#menu-library= link_to t(".library"), library_path
+    #main-nav
+      %nav.wrapper
+        %ul#navigation(role="navigation")
+          %li#menu-dashboard= link_to t(".dashboard"), dashboard_path
+          - if permitted_to? :view, :admin_home
+            %li#menu-admin= link_to t(".admin"), admin_home_path
+          %li#menu-issues= link_to t(".issues"), issues_path
+          %li#menu-threads= link_to t(".threads"), threads_path
+          %li#menu-library= link_to t(".library"), library_path
     %nav.sub
       .inner
         .breadcrumb
