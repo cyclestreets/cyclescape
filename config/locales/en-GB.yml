@@ -216,6 +216,10 @@
           zero: "Today!"
           one: "Tomorrow!"
           other: "%{count} days away!"
+    library_items:
+      create:
+        failure: "Could not add library item."
+        success: "Library item added."
     links:
       create:
         failure: "Link could not be created."
