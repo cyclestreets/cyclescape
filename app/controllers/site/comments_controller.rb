@@ -8,7 +8,12 @@ class Site::CommentsController < ApplicationController
   end
 
   def create
-    @site_comment = SiteComment.create!(params[:site_comment])
-    render "success"
+    @site_comment = SiteComment.new(params[:site_comment])
+
+    if @site_comment.save
+      render "success"
+    else
+      render "new", status: :conflict
+    end
   end
 end

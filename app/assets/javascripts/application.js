@@ -11,5 +11,4 @@
 //= require message_threads
 //= require openlayers_pz
 //= require ui
-//= require site_comments
 //= require tags

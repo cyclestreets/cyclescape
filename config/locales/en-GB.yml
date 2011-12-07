@@ -102,6 +102,7 @@
     message_threads:
       new:
         title: "New Thread on %{issue}"
+        everyone: "Everyone"
     tags:
       panel:
         edit_tags: "edit"
@@ -127,8 +128,7 @@
       added_by_html: "Added by %{name} on %{time}"
       confirm_delete: "Are you sure?"
       delete_issue: "Delete this issue"
-      new_public_thread: "New Public Thread"
-      new_group_thread: "New %{group} Thread"
+      new_thread: "New Thread"
       group_private: "Private to %{group}"
       group_public: "Public, by %{group}"
       public: "Public"
@@ -144,7 +144,7 @@
     application:
       admin: "Admin"
       dashboard: "My Dashboard"
-      feedback: "Feedback"
+      feedback: "Send us beta feedback"
       issues: "Issues"
       library: "Library"
       threads: "Threads"
@@ -272,6 +272,9 @@
         when_ago: "%{time_ago} ago"
       new:
         title: "Feedback"
+      success:
+        thank_you: "Thank you for your feedback."
+        close: "< Back to site"
   user:
     locations:
       create:

@@ -45,7 +45,7 @@ describe "Group threads" do
       end
 
       it "should default to a public group thread" do
-        find_field('Privacy').find('option[selected]').text.should eql("Public")
+        page.should have_select("Privacy", with: "Public")
       end
     end
 
@@ -58,7 +58,7 @@ describe "Group threads" do
       end
 
       it "should default to a private group thread" do
-        find_field('Privacy').find('option[selected]').text.should eql("Group")
+        page.should have_select("Privacy", with: "Group")
       end
     end
 

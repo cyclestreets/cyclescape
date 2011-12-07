@@ -9,7 +9,7 @@ describe "Issue threads" do
 
       it "should create a new public thread" do
         visit issue_path(issue)
-        click_on "New Public Thread"
+        click_on "New Thread"
         fill_in "Message", with: "Awesome!"
         click_on "Create Thread"
         page.should have_content(issue.title)
@@ -22,7 +22,7 @@ describe "Issue threads" do
 
       it "should still create a new public thread" do
         visit issue_path(issue)
-        click_on "New Public Thread"
+        click_on "New Thread"
         fill_in "Message", with: "Awesome!"
         click_on "Create Thread"
         page.should have_content(issue.title)
@@ -32,7 +32,8 @@ describe "Issue threads" do
 
       it "should create a new public group thread" do
         visit issue_path(issue)
-        click_on "New #{current_group.name} Thread"
+        click_on "New Thread"
+        select current_group.name, from: "Owned by"
         fill_in "Message", with: "Awesome!"
         select "Public", from: "Privacy"
         click_on "Create Thread"
@@ -43,32 +44,14 @@ describe "Issue threads" do
 
       it "should create a new private group thread" do
         visit issue_path(issue)
-        click_on "New #{current_group.name} Thread"
+        click_on "New Thread"
+        select current_group.name, from: "Owned by"
         fill_in "Message", with: "Awesome!"
         select "Group", from: "Privacy"
         click_on "Create Thread"
         page.should have_content(issue.title)
         page.should have_content("Awesome!")
         page.should have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
-      end
-
-      it "should default to a public group thread" do
-        visit issue_path(issue)
-        click_on "New #{current_group.name} Thread"
-        find_field('Privacy').find('option[selected]').text.should eql("Public")
-      end
-
-      context "in a secretive group" do
-        before do
-          current_group.default_thread_privacy = "group"
-          current_group.save
-        end
-
-        it "should default to a private group thread" do
-          visit issue_path(issue)
-          click_on "New #{current_group.name} Thread"
-          find_field('Privacy').find('option[selected]').text.should eql("Group")
-        end
       end
     end
   end

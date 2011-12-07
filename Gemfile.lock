@@ -104,7 +104,7 @@ GEM
     hike (1.2.1)
     hirb (0.6.0)
     i18n (0.6.0)
-    jquery-rails (1.0.16)
+    jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
     json (1.6.3)
@@ -256,7 +256,7 @@ DEPENDENCIES
   formtastic
   haml-rails
   hirb
-  jquery-rails (= 1.0.16)
+  jquery-rails
   launchy
   map_layers
   pg
