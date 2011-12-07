@@ -216,7 +216,11 @@
           zero: "Today!"
           one: "Tomorrow!"
           other: "%{count} days away!"
-    link:
+    library_items:
+      create:
+        failure: "Could not add library item."
+        success: "Library item added."
+    links:
       create:
         failure: "Link could not be created."
         success: "Link created."
@@ -230,6 +234,9 @@
     censor:
       failure: "Could not censor message"
       success: "Message censored"
+    create:
+      failure: "Could not add message"
+      success: "Message added"
     message:
       posted_date: "posted %{time_ago} ago"
       censor: "Censor this message"

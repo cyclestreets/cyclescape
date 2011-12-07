@@ -5,10 +5,11 @@ class MessagesController < ApplicationController
 
     if @message.save
       ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
-      redirect_to :back
+      set_flash_message(:success)
     else
-      raise "Invalid message"
+      set_flash_message(:failure)
     end
+    redirect_to thread_path(@thread)
   end
 
   def censor
