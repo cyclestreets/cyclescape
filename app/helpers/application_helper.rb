@@ -9,6 +9,7 @@ module ApplicationHelper
     @map = core_map("map") do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
       page << map.add_layer(MapLayers::OSM_MAPNIK)
+      page << map.add_layer(MapLayers::OS_STREETVIEW)
 
       page << map.add_controls([OpenLayers::Control::PZ.new,
                                 OpenLayers::Control::Navigation.new,

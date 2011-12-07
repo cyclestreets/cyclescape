@@ -202,6 +202,7 @@
       title: "New Thread"
     show:
       are_you_sure: "Are you sure?"
+      back: "Back"
       destroy: "Delete this thread"
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
@@ -224,8 +225,8 @@
           other: "%{count} days away!"
     library_items:
       create:
-        failure: "Could not add library item."
-        success: "Library item added."
+        failure: "Library item could not be added"
+        success: "Library item added"
     links:
       create:
         failure: "Link could not be created."
