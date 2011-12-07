@@ -1,262 +1,262 @@
 /* 10. PAGE CONTENT
 -------------------------------------------------------------- */
 #page {
-	background:$white;
-	padding:20px 0;
-	overflow:hidden;
-	#content {
-		.categories {
-			overflow:hidden;
-			p {
-				font-size:12px;
-				display:inline;
-				float:left;
-				color:$lightgrey;
-				margin:0 10px 5px 0;
-			}
-			ul {
-				@include list-reset;
-				display:inline;
-				float:left;
-				li {
-					a {
-						font-size:12px;
-						background:$grey;
-						color:$black;
-						margin-right:10px;
-						line-height:1;
-						padding:4px 6px;
-						@include border-radius(5px);
-						&:hover {
-							text-decoration:none;
-							background:$lightergrey;
-						}
-					}
-				}
-			}
-		}
-		.meta {
-			p {
-				font-size:12px;
-				color:$lightgrey;
-			}
-			a {
-				color:$grey2;
-			}
-		}
-		section {
-			header {
-				overflow:hidden;
-				h2 {
-					color:$colour1;
-					margin:0;
-					float:left;
-				}
-				button {
-					float:right;
-					@include button-reset-grad-text($colour2, $colour1, $colour2);
-				}
-			}
-			&.intro {
-				overflow:hidden;
-				margin-bottom:20px;
-				.readmore {
-					height:80px;
-					float:left;
-				}
-				.read-more-box {
-					float:right;
-					width:630px;
-				}
-			}
-		}
-	}
-	#sidebar {
-		.btn-green {
-			width:100%;
-			margin-bottom:20px;
-			padding:15px;
-			font-size:18px;
-		}
-		section {
-			padding:10px 0;
-			margin:0 0 20px 0;
-			border:1px solid $paneborder;
-			@include border-radius(10px);
-			h2 {
-				font-size:16px;
-				color:$grey3;
-				padding:0 10px;
-			}
-			h4 {
-				color:$colour1;
-				padding:0 10px;
-				margin-top:10px;
-			}
-			>a {
-				font-size:13px;
-				padding:0 10px;
-			}
-			form {
-				padding:0 10px;
-				overflow:hidden;
-				label {
-					margin-top:4px;
-					float:left;
-				}
-				select {
-					display:block;
-					float:right;
-					width:130px;
-				}
-			}
-			ul.sidebarlist {
-				@include list-reset-soft;
-				margin-top:10px;
-				border-top: 1px solid $paneborder;
-				li {
-					a {
-						background:$pane1;
-						display: block;
-						border-bottom: 1px solid $paneborder;
-						color:$lightblack;
-						overflow:hidden;
-						padding:10px;
-						&:hover{
-							text-decoration: none;
-							background: $pane2;
-						}
-					}
-				}
-			}
-			dl {
-				overflow:hidden;
-				margin-bottom:20px;
-				dt, dd {
-					float:left;
-					width:60px;
-					margin:0;
-					padding:5px 10px;
-					font-weight:normal;
-					border-top:1px solid $white;
-					background:$pane1;
-					&.title {
-						color:$white;
-						@include gradient($colour2, $colour1);
-					}
-				}
-				dd {
-					width:208px;
-					padding:5px 10px 5px 0;
-				}
-			}
-			&#resource-list {
-				padding-top:0;
-				h2 {
-					margin:0;
-					padding:8px 10px;
-					color:$white;
-					@include gradient($lightblack, $black);
-					@include border-radius(10px 10px 0 0);
-				}
-				ul {
-					@include list-reset;
-					margin-bottom:10px;
-					li {
-						background:$pane1;
-						display:block;
-						width:258px;
-						padding:10px 10px 10px 30px;
-						border-bottom:1px solid $paneborder;
-						&:hover {
-							background:$pane2;
-						}
-						h3 {
-							position:relative;
-							padding:0 36px 10px 0;
-							font: {
-								weight:normal;
-								size:14px;
-							}
-							span.check {
-								display:block;
-								position:absolute;
-								right:0;
-								top:0;
-								width:36px;
-								height:36px;
-								cursor:pointer;
-								background:url(../images/check.png) right -4px no-repeat;
-								&.checked {
-									background-image:url(../images/check-checked.png);
-								}
-							}
-						}
-						p {
-							font-size:12px;
-						}
-						a.btn-grey {
-							float:right;
-						}
-						&.open {
-							background:$pane2;
-						}
-					}
-				}
-			}
-		}
-	}
+  background: $white;
+  padding: 20px 0;
+  overflow: hidden;
+  #content {
+    .categories {
+      overflow: hidden;
+      p {
+        font-size: 12px;
+        display: inline;
+        float: left;
+        color: $lightgrey;
+        margin: 0 10px 5px 0;
+      }
+      ul {
+        @include list-reset;
+        display: inline;
+        float: left;
+        li {
+          a {
+            font-size: 12px;
+            background: $grey;
+            color: $black;
+            margin-right: 10px;
+            line-height: 1;
+            padding: 4px 6px;
+            @include border-radius(5px);
+            &:hover {
+              text-decoration: none;
+              background: $lightergrey;
+            }
+          }
+        }
+      }
+    }
+    .meta {
+      p {
+        font-size: 12px;
+        color: $lightgrey;
+      }
+      a {
+        color: $grey2;
+      }
+    }
+    section {
+      header {
+        overflow: hidden;
+        h2 {
+          color: $colour1;
+          margin: 0;
+          float: left;
+        }
+        button {
+          float: right;
+          @include button-reset-grad-text($colour2, $colour1, $colour2);
+        }
+      }
+      &.intro {
+        overflow: hidden;
+        margin-bottom: 20px;
+        .readmore {
+          height: 80px;
+          float: left;
+        }
+        .read-more-box {
+          float: right;
+          width: 630px;
+        }
+      }
+    }
+  }
+  #sidebar {
+    .btn-green {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 15px;
+      font-size: 18px;
+    }
+    section {
+      padding: 10px 0;
+      margin: 0 0 20px 0;
+      border: 1px solid $paneborder;
+      @include border-radius(10px);
+      h2 {
+        font-size: 16px;
+        color: $grey3;
+        padding: 0 10px;
+      }
+      h4 {
+        color: $colour1;
+        padding: 0 10px;
+        margin-top: 10px;
+      }
+      >a {
+        font-size: 13px;
+        padding: 0 10px;
+      }
+      form {
+        padding: 0 10px;
+        overflow: hidden;
+        label {
+          margin-top: 4px;
+          float: left;
+        }
+        select {
+          display: block;
+          float: right;
+          width: 130px;
+        }
+      }
+      ul.sidebarlist {
+        @include list-reset-soft;
+        margin-top: 10px;
+        border-top: 1px solid $paneborder;
+        li {
+          a {
+            background: $pane1;
+            display: block;
+            border-bottom: 1px solid $paneborder;
+            color: $lightblack;
+            overflow: hidden;
+            padding: 10px;
+            &:hover{
+              text-decoration: none;
+              background: $pane2;
+            }
+          }
+        }
+      }
+      dl {
+        overflow: hidden;
+        margin-bottom: 20px;
+        dt, dd {
+          float: left;
+          width: 60px;
+          margin: 0;
+          padding: 5px 10px;
+          font-weight: normal;
+          border-top: 1px solid $white;
+          background: $pane1;
+          &.title {
+            color: $white;
+            @include gradient($colour2, $colour1);
+          }
+        }
+        dd {
+          width: 208px;
+          padding: 5px 10px 5px 0;
+        }
+      }
+      &#resource-list {
+        padding-top: 0;
+        h2 {
+          margin: 0;
+          padding: 8px 10px;
+          color: $white;
+          @include gradient($lightblack, $black);
+          @include border-radius(10px 10px 0 0);
+        }
+        ul {
+          @include list-reset;
+          margin-bottom: 10px;
+          li {
+            background: $pane1;
+            display: block;
+            width: 258px;
+            padding: 10px 10px 10px 30px;
+            border-bottom: 1px solid $paneborder;
+            &:hover {
+              background: $pane2;
+            }
+            h3 {
+              position: relative;
+              padding: 0 36px 10px 0;
+              font: {
+                weight: normal;
+                size: 14px;
+              }
+              span.check {
+                display: block;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 36px;
+                height: 36px;
+                cursor: pointer;
+                background: url(../images/check.png) right -4px no-repeat;
+                &.checked {
+                  background-image: url(../images/check-checked.png);
+                }
+              }
+            }
+            p {
+              font-size: 12px;
+            }
+            a.btn-grey {
+              float: right;
+            }
+            &.open {
+              background: $pane2;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 /* Issue Page */
 #issue-intro {
-	overflow:hidden;
-	margin-bottom:30px;
-	a.intro-img {
-		float:left;
-		margin-right:20px;
-	}
-	.readmore {
-		width:400px;
-		height:180px;
-		float:left;
-		margin:0;
-	}
-	a.read-more-box {
-		width:400px;
-		float:right;
-	}
+  overflow: hidden;
+  margin-bottom: 30px;
+  a.intro-img {
+    float: left;
+    margin-right: 20px;
+  }
+  .readmore {
+    width: 400px;
+    height: 180px;
+    float: left;
+    margin: 0;
+  }
+  a.read-more-box {
+    width: 400px;
+    float: right;
+  }
 }
 
 #issue-replies {
-	header {
-		background:$grey;
-		padding:5px;
-		text-align:center;
-		.pagination {
-			@include inline-block;
-		}
-	}
+  header {
+    background: $grey;
+    padding: 5px;
+    text-align: center;
+    .pagination {
+      @include inline-block;
+    }
+  }
 }
 
 
 /* Location Page */
 #sidebar section#location {
-	padding-bottom:0;
-	ul.sidebarlist {
-		li {
-			a {
-				// font-size:13px;
-				padding:11px 45px 11px 10px;
-				background:$pane1 url(../images/sprite.png) 260px -227px no-repeat;
-				&:hover {
-					background:$pane2 url(../images/sprite.png) 260px -287px no-repeat;
-				}
-			}
-			&:last-child a {
-				border-bottom: none;
-				@include border-radius(0 0 10px 10px);
-			}
-		}
-	}
+  padding-bottom: 0;
+  ul.sidebarlist {
+    li {
+      a {
+        // font-size: 13px;
+        padding: 11px 45px 11px 10px;
+        background: $pane1 url(../images/sprite.png) 260px -227px no-repeat;
+        &:hover {
+          background: $pane2 url(../images/sprite.png) 260px -287px no-repeat;
+        }
+      }
+      &:last-child a {
+        border-bottom: none;
+        @include border-radius(0 0 10px 10px);
+      }
+    }
+  }
 }
