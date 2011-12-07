@@ -151,6 +151,12 @@
       title: "Cyclescape"
       application_version_html: "Version: %{version}"
   libraries:
+    search:
+      no_results_found: "No results found for '%{query}'."
+      results_found:
+        one: "One result found for '%{query}'."
+        other: "%{count} results found for '%{query}'"
+      title: "Library Search Results"
     show:
       title: "Library"
       documents: "Documents"
@@ -196,6 +202,7 @@
       title: "New Thread"
     show:
       are_you_sure: "Are you sure?"
+      back: "Back"
       destroy: "Delete this thread"
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
@@ -216,7 +223,11 @@
           zero: "Today!"
           one: "Tomorrow!"
           other: "%{count} days away!"
-    link:
+    library_items:
+      create:
+        failure: "Library item could not be added"
+        success: "Library item added"
+    links:
       create:
         failure: "Link could not be created."
         success: "Link created."
@@ -230,6 +241,9 @@
     censor:
       failure: "Could not censor message"
       success: "Message censored"
+    create:
+      failure: "Could not add message"
+      success: "Message added"
     message:
       posted_date: "posted %{time_ago} ago"
       censor: "Censor this message"

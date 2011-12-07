@@ -24,5 +24,29 @@ describe "Library" do
         page.should have_link(note.body.truncate(60))
       end
     end
+
+    context "search" do
+      before do
+        visit library_path
+      end
+
+      it "should find the first note" do
+        fill_in "Search", with: notes[0].title
+        click_on "Submit Search"
+
+        page.should have_content("Search Results")
+        page.should_not have_content("No results")
+        page.should have_content(notes[0].title)
+      end
+
+      it "should find the first document" do
+        fill_in "Search", with: documents[0].title
+        click_on "Submit Search"
+
+        page.should have_content("Search Results")
+        page.should_not have_content("No results")
+        page.should have_content(documents[0].title)
+      end
+    end
   end
 end

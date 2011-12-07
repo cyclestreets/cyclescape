@@ -53,10 +53,8 @@ Cyclescape::Application.routes.draw do
   end
 
   resource :library do
+    get 'search'
     scope module: "library" do
-      resource :search, only: [:new] do
-        get :create, on: :collection
-      end
       resources :documents
       resources :notes
       resources :tags, only: [:update]

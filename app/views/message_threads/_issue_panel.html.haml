@@ -3,6 +3,6 @@
     %p== Attached to issue #{link_to issue.title, issue_path(issue)}
     %p= issue.description
   .map
-    - m = tiny_display_map(issue, geometry_issue_path(issue, :json)) do |map, page, html_id|
-      %div{id: html_id, class: "tinymap"}
+    - m = tiny_display_map(issue, geometry_issue_path(issue, :json), "tinymap") do |map, page, dom_id|
+      %div{id: dom_id, class: "tinymap"}
     != m.to_html

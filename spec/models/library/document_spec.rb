@@ -29,6 +29,13 @@ describe Library::Document do
     it { should validate_presence_of(:title) }
   end
 
+  describe "searchable text" do
+    let(:doc) { FactoryGirl.create(:library_document) }
+    it "should have a searchable title" do
+      doc.searchable_text.should include doc.title
+    end
+  end
+
   context "link with library item" do
     let(:attrs) { FactoryGirl.attributes_for(:library_document) }
 

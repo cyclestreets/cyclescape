@@ -17,7 +17,7 @@ class Issue < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
-  acts_as_indexed :fields => [:title, :description]
+  acts_as_indexed :fields => [:title, :description, :tags_string]
   acts_as_voteable
 
   belongs_to :created_by, class_name: "User"
