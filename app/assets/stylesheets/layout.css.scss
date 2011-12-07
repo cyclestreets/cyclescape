@@ -5,6 +5,7 @@
   display: none;
 }
 
+.wrapper,
 body > header > .inner,
 nav.bar,
 nav.sub,
@@ -13,6 +14,7 @@ nav.account,
 .content-container,
 body > footer {
   @include container;
+  position: relative;
 }
 
 body > header > .inner {
@@ -103,11 +105,6 @@ nav.account .inner {
       padding: 4px;
     }
   }
-}
-
-li#feedback a {
-  display: block;
-  padding: 8px;
 }
 
 // Flash
