@@ -216,7 +216,7 @@
           zero: "Today!"
           one: "Tomorrow!"
           other: "%{count} days away!"
-    link:
+    links:
       create:
         failure: "Link could not be created."
         success: "Link created."
