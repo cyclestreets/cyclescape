@@ -31,4 +31,8 @@ class Library::Note < Library::Component
   def document?
     library_document_id?
   end
+
+  def searchable_text
+    [body,read_attribute(:title)].join(" ")
+  end
 end

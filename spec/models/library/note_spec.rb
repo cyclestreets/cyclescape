@@ -21,4 +21,16 @@ describe Library::Note do
 
   it { should belong_to(:document) }
   it { should validate_presence_of(:body) }
+
+  describe "searchable text" do
+    let(:note) { FactoryGirl.create(:library_note) }
+
+    it "should have a searchable title" do
+      note.searchable_text.should include(note.title)
+    end
+
+    it "should have a searchable body" do
+      note.searchable_text.should include(note.body)
+    end
+  end
 end
