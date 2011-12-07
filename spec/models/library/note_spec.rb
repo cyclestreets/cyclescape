@@ -26,11 +26,11 @@ describe Library::Note do
     let(:note) { FactoryGirl.create(:library_note) }
 
     it "should have a searchable title" do
-      note.searchable_text.should include (note.title)
+      note.searchable_text.should include(note.title)
     end
 
     it "should have a searchable body" do
-      note.searchable_text.should include (note.body)
+      note.searchable_text.should include(note.body)
     end
   end
 end
