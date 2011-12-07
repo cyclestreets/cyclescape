@@ -234,6 +234,9 @@
     censor:
       failure: "Could not censor message"
       success: "Message censored"
+    create:
+      failure: "Could not add message"
+      success: "Message added"
     message:
       posted_date: "posted %{time_ago} ago"
       censor: "Censor this message"
