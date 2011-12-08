@@ -1,3 +1,6 @@
+@import "colours";
+@import "utils";
+
 /* 5. FORMS
 -------------------------------------------------------------- */
 form {
@@ -55,7 +58,7 @@ form {
             top: 55px;
             width: 34px;
             height: 40px;
-            background: url(../images/big-arrow-right.png) 0 0 no-repeat;
+            background: image-url("big-arrow-right.png") 0 0 no-repeat;
           }
         }
       }

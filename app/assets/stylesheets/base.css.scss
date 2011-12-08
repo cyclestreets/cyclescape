@@ -124,7 +124,7 @@ a.read-more-box {
   display: block;
   padding: 54px 0 0 0;
   margin-top: -42px;
-  background: url(../images/read-more-box-bg.png) 0 0 repeat-x;
+  background: image-url("read-more-box-bg.png") 0 0 repeat-x;
   color: $grey3;
   text:  {
     decoration: none;
@@ -137,7 +137,7 @@ a.read-more-box {
     float: right;
     text-indent: -999999px;
     padding-right: 25px;
-    background: url(../images/arrow-down-grey.png) right 0 no-repeat;
+    background: image-url("arrow-down-grey.png") right 0 no-repeat;
   }
   &:hover span {
     text-indent: 0px;
@@ -146,7 +146,7 @@ a.read-more-box {
     background: none;
     span {
       margin-top: 0;
-      background: url(../images/arrow-up-grey.png) right 0 no-repeat;
+      background: image-url("arrow-up-grey.png") right 0 no-repeat;
     }
   }
 }
@@ -175,8 +175,8 @@ a.read-more-box {
   @include button-reset(0px);
   width: 8px;
   height: 8px;
-  background: url(../images/sprite.png) -60px -49px no-repeat;
+  background: image-url("sprite.png") -60px -49px no-repeat;
   &:hover {
-    background: url(../images/sprite.png) -60px -69px no-repeat;
+    background: image-url("sprite.png") -60px -69px no-repeat;
   }
 }

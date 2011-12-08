@@ -4,47 +4,47 @@
 /* 11. FOOTER
 -------------------------------------------------------------- */
 #site-footer {
-	background:$pane1;
-	border-top:4px solid $colour2;
-	height:180px;
+	background: $pane1;
+	border-top: 4px solid $colour2;
+	height: 180px;
 	#footer-top {
-		height:20px;
-		padding:15px 0;
-		border-bottom:1px solid $grey;
+		height: 20px;
+		padding: 15px 0;
+		border-bottom: 1px solid $grey;
 		nav {
-			float:left;
+			float: left;
 			ul {
 				@include list-reset;
-				overflow:visible;
+				overflow: visible;
 				li {
 					a {
-						margin-right:10px;
-						color:$black;
+						margin-right: 10px;
+						color: $black;
 						&.facebook,
 						&.twitter {
-							text-indent:-999999px;
-							width:26px;
-							height:26px;
-							margin-top:-2px;
-							background:url(../images/social-sprite.png) 0 0 no-repeat;
+							text-indent: -999999px;
+							width: 26px;
+							height: 26px;
+							margin-top: -2px;
+							background: image-url("social-sprite.png") 0 0 no-repeat;
 						}
 						&.twitter {
-							background-position:-40px 0;
+							background-position: -40px 0;
 						}
 					}
 					small {
-						color:$lightgrey2;
+						color: $lightgrey2;
 						a {
-							display:inline;
-							float:none;
+							display: inline;
+							float: none;
 						}
 					}
 				}
 			}
 		}
 		p {
-			float:right;
-			color:$lightgrey2;
+			float: right;
+			color: $lightgrey2;
 		}
 	}
 }
