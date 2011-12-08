@@ -78,6 +78,8 @@ Cyclescape::Application.routes.draw do
     resources :comments
   end
 
+  match "template/:action", controller: "home"
+
   root :to => "home#show"
 
   # The priority is based upon order of creation:
