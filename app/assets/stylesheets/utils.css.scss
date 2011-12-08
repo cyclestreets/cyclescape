@@ -32,6 +32,7 @@
   &:active {
     @include box-shadow(inset rgba(0, 0, 0, 0.7) 0 0 10px);
   }
+  
 }
 @mixin button-reset-grad-text($c1: $lightergrey, $c2: $lightgrey, $c3: $grey3, $c4: $white) {
   @include button-reset-text($c1, $c2, $c3, $c4);
@@ -55,7 +56,7 @@
 }
 
 // Button reset - usually used with an image
-@mixin button-reset {
+@mixin button-reset($rad: 2px) {
   cursor: pointer;
   display: block;
   border: none;
@@ -64,7 +65,7 @@
   width: auto;
   height: auto;
   text-indent: -999999px;
-  @include border-radius(2px);
+  @include border-radius($rad);
 }
 
 

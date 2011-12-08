@@ -170,3 +170,13 @@ a.read-more-box {
     text-decoration: none;
   }
 }
+
+.close {
+  @include button-reset(0px);
+  width: 8px;
+  height: 8px;
+  background: url(../images/sprite.png) -60px -49px no-repeat;
+  &:hover {
+    background: url(../images/sprite.png) -60px -69px no-repeat;
+  }
+}
