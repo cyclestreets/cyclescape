@@ -25,4 +25,13 @@ describe Library::Item do
   describe "validations" do
     it { should validate_presence_of(:created_by) }
   end
+
+  context "find with index" do
+    let!(:note) { FactoryGirl.create(:library_note) }
+
+    it "should be returned in a search query" do
+      results = Library::Item.find_with_index(note.title)
+      results.should include(note.item)
+    end
+  end
 end

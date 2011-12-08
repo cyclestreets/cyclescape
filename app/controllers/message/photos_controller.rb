@@ -14,4 +14,8 @@ class Message::PhotosController < Message::BaseController
     end
     redirect_to thread_path(@thread)
   end
+
+  def show
+    @photo = PhotoMessage.find(params[:id])
+  end
 end

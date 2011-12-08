@@ -1,7 +1,7 @@
 .head
   %h1= t ".title"
 .search
-  = semantic_form_for :search, url: library_search_path, method: :get do |f|
+  = semantic_form_for :search, url: search_library_path, method: :get do |f|
     = f.inputs do
       = f.input :query, label: "Search"
     = f.buttons

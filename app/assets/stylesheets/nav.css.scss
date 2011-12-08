@@ -1,0 +1,188 @@
+@import "utils";
+@import "colours";
+
+/* 8. MAIN NAV
+-------------------------------------------------------------- */
+#main-nav {
+  @include gradient($colour2, $colour1);
+  height: 40px;
+  z-index: 1;
+  nav {
+    ul#navigation {
+      @include list-reset;
+      position: relative;
+      overflow: visible;
+      li {
+        a {
+          color: $white;
+          font-size: 16px;
+          padding: 10px 20px;
+          &:hover {
+            text-decoration: none;
+            background: $colour3;
+          }
+          &.active {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    div.group-selector{
+      color: $white;
+      text-transform: uppercase;
+      font-size: 11px;
+      float: right;
+      padding-top: 16px;
+      .label {
+        margin-right: 10px;
+      }
+      a {
+        @include inline-block;
+        position: relative;
+        float: right;
+        color: $white;
+        text-transform: none;
+        font-size: 15px;
+        padding: 0 50px 12px 0;
+        margin-top: -4px;
+        .arrow {
+          position: absolute;
+          right: 0;
+          top: -12px;
+          width: 40px;
+          height: 40px;
+          display: block;
+          background: url(../images/arrow-down.png) center no-repeat;
+        }
+      }
+      ul#groups-list {
+        right: 999999px;
+        position: absolute;
+      }
+      &:hover {
+        a {
+          text-decoration: none;
+        }
+      }
+      &.open {
+        a {
+          .arrow {
+            width: 38px;
+            height: 39px;
+            border-top: 1px solid $paneborder;
+            border-left: 1px solid $paneborder;
+            border-right: 1px solid $paneborder;
+            background: $pane1 url(../images/arrow-down-hover.png) center no-repeat;
+          }
+        }
+        ul#groups-list {
+          @include list-reset;
+          position: absolute;
+          right: 0px;
+          top: 40px;
+          width: 300px;
+          padding: 0px;
+          z-index: 2;
+          background: $pane1;
+          border-left: 1px solid $paneborder;
+          border-right: 1px solid $paneborder;
+          @include border-radius(0 0 4px 4px);
+          @include box-shadow(rgba(0, 0, 0, 0.2) 0 2px 1px);
+          li {
+            a {
+              font-size: 14px;
+              position: relative;
+              padding: 6px 10px;
+              width: 278px;
+              margin: 0 0 -1px 0;
+              background: none;
+              display: block;
+              border-bottom: 1px solid $paneborder;
+              color: $lightblack;
+              &.active {
+                font-weight: bold;
+              }
+              &:hover{
+                text-decoration: none;
+                background: $pane2;
+              }
+              span {
+                display: block;
+                float: left;
+                width: 16px;
+                height: 16px;
+                border: 2px solid $white;
+                margin: 0 10px 0 0;
+                &.green {
+                  background: $green;
+                }
+                &.blue {
+                  background: $blue;
+                }
+                &.red {
+                  background: $red;
+                }
+              }
+            }
+            &:last-child a:hover {
+              @include border-radius(0 0 6px 6px);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* 9. BREADCRUMB / SEARCH
+-------------------------------------------------------------- */
+#crumb-search {
+  background: $pane1;
+  padding: 15px 0 14px 0;
+  height: 20px;
+  border-bottom: 1px solid $grey;
+  nav {
+    ul {
+      @include list-reset;
+      li {
+        color: $grey2;
+        font-size: 12px;
+        a {
+          color: $grey2;
+          font-size: 12px;
+          margin-right: 10px;
+          padding-right: 20px;
+          background: url(../images/chevron-r.png) right center no-repeat;
+        }
+      }
+    }
+  }
+  #site-search {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    border: 1px solid $grey;
+    input {
+      border: none;
+      background: $white;
+      padding: 5px 4px;
+      font-size: 14px;
+      margin: 0;
+      float: left;
+    }
+    button {
+      @include button-reset;
+      float: left;
+      background: $white url(../images/search.png) center 4px no-repeat;
+      width: 27px;
+      height: 27px;
+      @include border-radius(0);
+      &:hover {
+        background-position: center -19px;
+      }
+      &:active {
+        @include box-shadow(none);
+      }
+    }
+  }
+}

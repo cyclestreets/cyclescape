@@ -10,7 +10,7 @@ class Message::LibraryItemsController < Message::BaseController
     if @message.save
       set_flash_message(:success)
     else
-      set_flash_message(:error)
+      set_flash_message(:failure)
     end
     redirect_to thread_path(@thread)
   end

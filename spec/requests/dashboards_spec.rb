@@ -49,7 +49,18 @@ describe "User dashboards" do
     end
 
     context "issues" do
-      it "should show issues in my area"
+      let(:issue) { FactoryGirl.create(:issue) }
+
+      before do
+        # Give the current user a location that matches the issue
+        ul = current_user.locations.build(category: FactoryGirl.create(:location_category), location: issue.location)
+        ul.save
+        visit dashboard_path
+      end
+
+      it "should show issues in my area" do
+        page.should have_content(issue.title)
+      end
     end
   end
 end

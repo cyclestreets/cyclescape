@@ -41,7 +41,7 @@ Cyclescape::Application.routes.draw do
       put 'censor', :on => :member
     end
     scope module: :message do
-      resources :photos, only: [:create]
+      resources :photos, only: [:create, :show]
       resources :links, only: [:create]
       resources :deadlines, only: [:create]
       resources :library_items, only: [:create]
@@ -53,10 +53,8 @@ Cyclescape::Application.routes.draw do
   end
 
   resource :library do
+    get 'search'
     scope module: "library" do
-      resource :search, only: [:new] do
-        get :create, on: :collection
-      end
       resources :documents
       resources :notes
       resources :tags, only: [:update]

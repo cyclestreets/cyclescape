@@ -5,13 +5,13 @@ describe "Site feedback" do
     visit root_path
   end
 
-  context "as a public user", user: :public do
+  context "as a public user" do
     it "should be able to see the feedback link" do
-      page.should have_link("Feedback")
+      page.should have_link("Send us beta feedback")
     end
 
     it "should be able to send feedback" do
-      click_on "Feedback"
+      click_on "Send us beta feedback"
       fill_in "Message", with: "Your site is awesome!"
       fill_in "Name", with: "Bobby Jones"
       fill_in "Email", with: "bobby@example.com"
@@ -20,27 +20,21 @@ describe "Site feedback" do
     end
 
     it "should store the request URL with the comment" do
-      click_on "Feedback"
+      click_on "Send us beta feedback"
       fill_in "Message", with: "This page broke!"
       click_on "Send Feedback"
       SiteComment.last.context_url.should == root_url
     end
-
-    it "should store the user if someone is logged in"
   end
 
-  context "as a site user" do
-    include_context "signed in as a site user"
-    let!(:comment) { FactoryGirl.create(:site_comment) }
-
+  context as: :site_user do
     it "should not let you browse the feedback" do
       visit site_comments_path
       page.should have_content("You are not authorised to access that page.")
     end
   end
 
-  context "as an admin" do
-    include_context "signed in as admin"
+  context as: :admin do
     let!(:comment) { FactoryGirl.create(:site_comment) }
 
     it "should show the comments" do
