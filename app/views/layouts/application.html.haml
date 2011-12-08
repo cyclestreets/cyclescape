@@ -44,8 +44,8 @@
         - if flash.key? type
           .flash{class: type}
             = flash[type]
-    .content-container
-      .content
+    #page
+      .wrapper
         = yield
         #overlay
           .wrapper
