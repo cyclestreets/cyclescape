@@ -1,3 +1,6 @@
+@import "colours";
+@import "utils";
+
 /* 4. SHARED ELEMENTS
 -------------------------------------------------------------- */
 ul.following-thread {
@@ -55,16 +58,16 @@ ul.following-thread {
     }
     &.prev a {
       text-indent: -999999px;
-      background: $pane1 url(../images/sprite.png) 4px -42px no-repeat;
+      background: $pane1 image-url("sprite.png") 4px -42px no-repeat;
       &:hover {
-        background: $lightergrey url(../images/sprite.png) 4px -62px no-repeat;
+        background: $lightergrey image-url("sprite.png") 4px -62px no-repeat;
       }
     }
     &.next a {
       text-indent: -999999px;
-      background: $pane1 url(../images/sprite.png) 5px -82px no-repeat;
+      background: $pane1 image-url("sprite.png") 5px -82px no-repeat;
       &:hover {
-        background: $lightergrey url(../images/sprite.png) 5px -102px no-repeat;
+        background: $lightergrey image-url("sprite.png") 5px -102px no-repeat;
       }
     }
   }
@@ -112,15 +115,14 @@ ul.following-thread {
         position: absolute;
         right: 999999px;
         top: 0;
-        background: $pane1 url(../images/sprite.png) 0 0 no-repeat;
+        background: $pane1 image-url("sprite.png") 0 0 no-repeat;
         width: 32px;
         height: 21px;
         border: 1px solid $lightergrey;
         @include border-radius(2px);
         &:hover {
           cursor: pointer;
-          // border: 1px solid $grey2;
-          background: $pane2 url(../images/sprite.png) 0 -20px no-repeat;
+          background: $pane2 image-url("sprite.png") 0 -20px no-repeat;
         }
         ul {
           @include list-reset;
@@ -133,7 +135,7 @@ ul.following-thread {
       background: $pane1;
       border: 1px solid $grey;
       .read-more-box {
-        background: url(../images/read-more-box-bg-grey.png) 0 0 repeat-x;
+        background: image-url("read-more-box-bg-grey.png") 0 0 repeat-x;
         &.active {
           background: none;
         }
@@ -214,14 +216,14 @@ ul.following-thread {
       border: none;
       text-indent: -999999px;
       &.person {
-        background: url(../images/sprite.png) -3px -130px no-repeat;
+        background: image-url("sprite.png") -3px -130px no-repeat;
         &:hover {
           background-position: -43px -130px;
         }
       }
       &.zoom {
         margin-left: 5px;
-        background: url(../images/sprite.png) -3px -180px no-repeat;
+        background: image-url("sprite.png") -3px -180px no-repeat;
         &:hover {
           background-position: -43px -180px;
         }
@@ -260,7 +262,7 @@ ul.following-thread {
             width: 65px;
             height: 65px;
             border: 1px solid $lightgrey;
-            background: $paneborder url(../images/wysiwyg.png) 0 0 no-repeat;
+            background: $paneborder image-url("wysiwyg.png") 0 0 no-repeat;
             @include border-radius(10px);
             &.text {
               background-position: 16px 12px;
@@ -310,5 +312,37 @@ ul.following-thread {
         }
       }
     }
+  }
+}
+
+.tip {
+  position: absolute;
+  right: -290px;
+  top: 0;
+  z-index: 20;
+  width: 220px;
+  padding: 20px;
+  background: $black;
+  h4 {
+    color: $grey;
+  }
+  p {
+    color: $grey;
+    font-weight: normal;
+    line-height: 10px;
+  }
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .nub {
+    display: block;
+    width: 24px;
+    height: 20px;
+    position: absolute;
+    left: -24px;
+    top: 20px;
+    background: image-url("sprite.png") -44px -261px no-repeat;
   }
 }

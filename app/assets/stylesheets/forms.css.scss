@@ -1,13 +1,18 @@
+@import "colours";
+@import "utils";
+
 /* 5. FORMS
 -------------------------------------------------------------- */
 form {
+  position: relative;
+  overflow: hidden;
   ol {
     padding: 0;
     margin: 0;
     counter-reset: li;
     > li {
       position: relative;
-      overflow: hidden;
+      float: left;
       list-style: none;
       width: 590px;
       padding: 20px 20px 10px 60px;
@@ -24,7 +29,7 @@ form {
         left: 20px;
       }
       &.full-width {
-        width: auto;
+        width: 860px;
         padding-right: 40px;
         label {
           float: none;
@@ -53,7 +58,7 @@ form {
             top: 55px;
             width: 34px;
             height: 40px;
-            background: url(../images/big-arrow-right.png) 0 0 no-repeat;
+            background: image-url("big-arrow-right.png") 0 0 no-repeat;
           }
         }
       }
@@ -84,7 +89,7 @@ form {
   textarea {
     display: block;
     padding: 10px;
-    width: 400px;
+    width: 408px;
     font-size: 16px;
     color: $lightblack;
     float: left;
@@ -97,7 +102,7 @@ form {
   }
   textarea {
     height: 200px;
-    width: 550px;
+    width: 568px;
     margin: 10px 0;
   }
   button,
@@ -128,8 +133,9 @@ form {
     }
   }
   .submit {
-    float: right;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
     padding: 20px 40px;
-    margin-top: -70px;
   }
 }

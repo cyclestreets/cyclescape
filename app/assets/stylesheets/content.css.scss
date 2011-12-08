@@ -1,3 +1,6 @@
+@import "colours";
+@import "utils";
+
 /* 10. PAGE CONTENT
 -------------------------------------------------------------- */
 #page {
@@ -5,6 +8,14 @@
   padding: 20px 0;
   overflow: hidden;
   #content {
+    width: 630px;
+    margin-right: 30px;
+    float: left;
+    &.content-no-sidebar {
+      width: 960px;
+      margin-right: 0;
+      float: none;
+    }
     .categories {
       overflow: hidden;
       p {
@@ -72,6 +83,8 @@
     }
   }
   #sidebar {
+    width: 300px;
+    float: left;
     .btn-green {
       width: 100%;
       margin-bottom: 20px;
@@ -186,9 +199,9 @@
                 width: 36px;
                 height: 36px;
                 cursor: pointer;
-                background: url(../images/check.png) right -4px no-repeat;
+                background: image-url("check.png") right -4px no-repeat;
                 &.checked {
-                  background-image: url(../images/check-checked.png);
+                  background-image: image-url("check-checked.png");
                 }
               }
             }
@@ -248,9 +261,9 @@
       a {
         // font-size: 13px;
         padding: 11px 45px 11px 10px;
-        background: $pane1 url(../images/sprite.png) 260px -227px no-repeat;
+        background: $pane1 image-url("sprite.png") 260px -227px no-repeat;
         &:hover {
-          background: $pane2 url(../images/sprite.png) 260px -287px no-repeat;
+          background: $pane2 image-url("sprite.png") 260px -287px no-repeat;
         }
       }
       &:last-child a {

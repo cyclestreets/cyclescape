@@ -14,7 +14,7 @@
         %a#site-logo(href="#")Cyclescape
         = link_to image_tag("header_logo.png", alt: t(".title")), root_path, id: "site-title"
         %ul#top-menu
-          %li.about= link_to t(".title"), "#"
+          %li.about= link_to t(".title"), "#", class: "cyclescape-logo"
           - if current_user
             %li.name= link_to_profile current_user
             %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"
@@ -44,8 +44,8 @@
         - if flash.key? type
           .flash{class: type}
             = flash[type]
-    .content-container
-      .content
+    #page
+      .wrapper
         = yield
         #overlay
           .wrapper

@@ -47,7 +47,7 @@
           height: 24px;
           margin: 3px;
           text-indent: -999999px;
-          background: url(../images/logo.png) center no-repeat;
+          background: image-url("logo.png") center no-repeat;
         }
       }
       &.my-account {
@@ -64,7 +64,7 @@
             position: absolute;
             right: 0;
             top: 0;
-            background: url(../images/arrow-down.png) center no-repeat;
+            background: image-url("arrow-down.png") center no-repeat;
           }
         }
         &:hover {
@@ -78,7 +78,7 @@
             background: $pane1;
             text-decoration: none;
             .arrow {
-               background: url(../images/arrow-down-hover.png) center no-repeat;
+               background: image-url("arrow-down-hover.png") center no-repeat;
             }
           }
           ul {

@@ -12,4 +12,8 @@
  *= require "layout"
  *= require "maps"
  *= require "dateinput"
+ *= require "shared_elements"
+ *= require "forms"
+ *= require "content"
+ *= require "third_party"
 */
