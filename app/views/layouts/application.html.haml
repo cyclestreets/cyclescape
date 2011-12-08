@@ -33,10 +33,12 @@
           %li#menu-issues= link_to t(".issues"), issues_path
           %li#menu-threads= link_to t(".threads"), threads_path
           %li#menu-library= link_to t(".library"), library_path
-    %nav.sub
-      .inner
-        .breadcrumb
-        .search
+    #crumb-search
+      .wrapper
+        %nav
+          %ul
+            %li= link_to t(".home"), root_path
+            %li= link_to "Somewhere", "#"
     .flash-container
       - [:alert, :notice].each do |type|
         - if flash.key? type
