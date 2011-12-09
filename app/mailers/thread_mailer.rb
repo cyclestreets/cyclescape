@@ -6,6 +6,7 @@ class ThreadMailer < ActionMailer::Base
   end
 
   def new_photo_message(message, subscriber)
+    attachments['photo.jpg'] = message.component.photo_medium.data
     common(message, subscriber)
   end
 
