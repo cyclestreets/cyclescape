@@ -13,7 +13,7 @@
       margin-right: 0;
       float: none;
     }
-    .categories {
+    .tags {
       overflow: hidden;
       p {
         font-size: 12px;
@@ -84,9 +84,15 @@
     float: left;
     .btn-green {
       width: 100%;
-      margin-bottom: 20px;
       padding: 15px;
       font-size: 18px;
+    }
+    fieldset.buttons {
+      padding: 0;
+      li {
+        float: none;
+        padding: 0;
+      }
     }
     section {
       padding: 10px 0;
@@ -222,9 +228,10 @@
 #issue-intro {
   overflow: hidden;
   margin-bottom: 30px;
-  a.intro-img {
+  .map {
     float: left;
     margin-right: 20px;
+    width: 210px;
   }
   .readmore {
     width: 400px;

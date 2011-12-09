@@ -30,7 +30,7 @@
       site_comment:
         body: "Message"
       thread_subscription:
-        send_email: "Send new messages to me by email"
+        send_email: "Email new messages"
     hints:
       group_membership:
         role: "Select if they are a normal or committee member of the group."
