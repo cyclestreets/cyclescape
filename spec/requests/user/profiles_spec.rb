@@ -46,4 +46,21 @@ describe "User profiles" do
       page.should have_content("You are not authorised to access that page.")
     end
   end
+
+  context "adding to group" do
+    include_context "signed in as a committee member"
+    let(:user) { FactoryGirl.create(:meg) }
+
+    before do
+      visit user_profile_path(user)
+    end
+
+    it "should let you add the user to your group" do
+      page.should have_content("Add to group")
+      select "Member", from: "Membership type"
+      click_on "Invite member"
+      page.should have_content("Members of #{current_group.name}")
+      page.should have_content(user.name)
+    end
+  end
 end
