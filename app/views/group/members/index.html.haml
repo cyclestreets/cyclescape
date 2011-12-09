@@ -10,7 +10,8 @@
   %tbody
     - @committee.each do |member|
       %tr
-        %td= member.name
+        %td
+          = link_to member.name, user_profile_path(member)
         %td
           = link_to t("edit"), "#"
 
@@ -22,6 +23,7 @@
   %tbody
     - @members.each do |member|
       %tr
-        %td= member.name
+        %td
+          = link_to member.name, user_profile_path(member)
         %td
           = link_to t("edit"), "#"
