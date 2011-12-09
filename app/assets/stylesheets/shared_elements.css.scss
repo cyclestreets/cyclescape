@@ -145,7 +145,7 @@ section.thread {
     position: absolute;
   }
 }
-article:hover menu.tools, header:hover menu.tools {
+article:hover > menu.tools, header:hover > menu.tools {
   right: 0;
 }
 
@@ -157,7 +157,7 @@ article:hover menu.tools, header:hover menu.tools {
     padding: 20px 0;
     border-bottom: 3px solid $grey;
     overflow: hidden;
-    .reply-count {
+    .message-count {
       width: 60px;
       float: left;
       font-size: 12px;

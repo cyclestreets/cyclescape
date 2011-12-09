@@ -56,6 +56,10 @@ class MessageThread < ActiveRecord::Base
     self.public_token = generate_public_token
   end
 
+  def message_count
+    messages.count
+  end
+
   protected
 
   def generate_public_token

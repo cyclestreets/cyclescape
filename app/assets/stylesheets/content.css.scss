@@ -60,7 +60,7 @@
           margin: 0;
           float: left;
         }
-        button {
+        .button {
           float: right;
           @include button-reset-grad-text($colour2, $colour1, $colour2);
         }
