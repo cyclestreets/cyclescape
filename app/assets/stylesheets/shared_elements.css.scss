@@ -145,7 +145,7 @@ section.thread {
     position: absolute;
   }
 }
-article:hover menu.tools, header:hover menu.tools {
+article:hover > menu.tools, header:hover > menu.tools {
   right: 0;
 }
 

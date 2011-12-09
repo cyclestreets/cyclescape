@@ -13,7 +13,7 @@
       - if message.component
         = render "message/#{message_controller_map(message.component)}/show", message: message
       = simple_format message.body
-      %menu.tools
-        %ul
-          - if permitted_to?(:censor, message)
-            %li= link_to t(".censor"), censor_thread_message_path(message.thread, message), method: :put
+  %menu.tools
+    %ul
+      - if permitted_to?(:censor, message)
+        %li= link_to t(".censor"), censor_thread_message_path(message.thread, message), method: :put
