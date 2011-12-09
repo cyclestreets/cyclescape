@@ -302,6 +302,12 @@
         title: "Edit Profile"
         my_current_thumbnail_title: "My current profile picture"
       show:
+        add_to_groups:
+          one: "Add to group"
+          other: "Add to groups"
+        add_to_groups_explanation:
+          one: "You can add this user into your group."
+          other: "You can add this user to any of the groups shown."
         edit: "Edit My Profile"
         is_a_member_of_groups:
           zero: "%{name} isn't a member of any groups yet"
