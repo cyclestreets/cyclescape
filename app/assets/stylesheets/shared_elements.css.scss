@@ -234,7 +234,7 @@ article:hover menu.tools, header:hover menu.tools {
   }
 }
 
-.wysiwyg {
+section.new-message {
   background: $pane1;
   padding: 20px;
   margin-top: 40px;
@@ -269,7 +269,7 @@ article:hover menu.tools, header:hover menu.tools {
             &.text {
               background-position: 16px 12px;
             }
-            &.image {
+            &.photo {
               background-position: -60px 12px;
             }
             &.map {
@@ -278,7 +278,7 @@ article:hover menu.tools, header:hover menu.tools {
             &.link {
               background-position: -212px 12px;
             }
-            &.attach {
+            &.library {
               background-position: -288px 12px;
             }
           }
