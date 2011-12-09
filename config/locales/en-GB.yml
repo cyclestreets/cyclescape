@@ -54,10 +54,13 @@
   group:
     members:
       index:
-        title: "Members of %{group}"
-        new_member: "New Member"
+        actions: "Actions"
         committee: "Committee"
+        edit: "Edit"
+        member_name: "Member Name"
         members: "Members"
+        new_member: "New Member"
+        title: "Members of %{group}"
     memberships:
       new:
         title: "Invite New Member"

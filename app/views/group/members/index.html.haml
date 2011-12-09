@@ -6,24 +6,24 @@
 %table
   %thead
     %th= t ".member_name"
-    %th= t "actions"
+    %th= t ".actions"
   %tbody
     - @committee.each do |member|
       %tr
         %td
           = link_to member.name, user_profile_path(member)
         %td
-          = link_to t("edit"), "#"
+          = link_to t(".edit"), "#"
 
 %h2= t ".members"
 %table
   %thead
     %th= t ".member_name"
-    %th= t "actions"
+    %th= t ".actions"
   %tbody
     - @members.each do |member|
       %tr
         %td
           = link_to member.name, user_profile_path(member)
         %td
-          = link_to t("edit"), "#"
+          = link_to t(".edit"), "#"
