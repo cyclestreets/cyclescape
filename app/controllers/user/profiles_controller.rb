@@ -5,7 +5,7 @@ class User::ProfilesController < ApplicationController
 
   def show
     # Groups that the current user could invite this particular user to
-    @add_to_groups = (current_user.memberships.committee.collect{ |m| m.group } - @user.groups)
+    @add_to_groups = current_user ? (current_user.memberships.committee.collect{ |m| m.group } - @user.groups) : nil
   end
 
   def edit
