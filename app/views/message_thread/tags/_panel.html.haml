@@ -1,7 +1,9 @@
 .tags-panel
   .tags
+    %p= t ".tags"
     %ul
       - thread.tags.each do |tag|
-        %li.tag= tag.name
+        %li.tag
+          = link_to tag.name, "#"
     = link_to t(".edit_tags"), "#", rel: "edit-tags"
   = render partial: "message_thread/tags/edit", locals: {thread: thread}

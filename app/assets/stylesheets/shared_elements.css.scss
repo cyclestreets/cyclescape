@@ -1,6 +1,3 @@
-@import "colours";
-@import "utils";
-
 /* 4. SHARED ELEMENTS
 -------------------------------------------------------------- */
 ul.following-thread {
@@ -73,16 +70,16 @@ ul.following-thread {
   }
 }
 
-.thread {
+section.thread {
   @include list-reset-soft;
   margin: 20px 0;
-  li {
+  article.message {
     padding: 20px 10px;
     border-bottom: 3px solid $grey;
     &:last-child {
       border-bottom: none;
     }
-    a.thumb {
+    a.thumbnail {
       border: 4px solid $lightergrey;
       display: block;
       width: 42px;
@@ -90,16 +87,16 @@ ul.following-thread {
       float: left;
       margin-right: 20px;
     }
-    .item-content {
+    .author {
+      color: $lightgrey;
+      font: {
+        weight: normal;
+        size: 12px;
+      }
+    }
+    .body {
       overflow: hidden;
       position: relative;
-      h4 {
-        color: $lightgrey;
-        font: {
-          weight: normal;
-          size: 12px;
-        }
-      }
       .readmore {
         overflow: hidden;
         margin-top: 10px;
@@ -110,25 +107,6 @@ ul.following-thread {
       .read-more-box {
         width: 540px;
         float: right;
-      }
-      .tools {
-        position: absolute;
-        right: 999999px;
-        top: 0;
-        background: $pane1 image-url("sprite.png") 0 0 no-repeat;
-        width: 32px;
-        height: 21px;
-        border: 1px solid $lightergrey;
-        @include border-radius(2px);
-        &:hover {
-          cursor: pointer;
-          background: $pane2 image-url("sprite.png") 0 -20px no-repeat;
-        }
-        ul {
-          @include list-reset;
-          left: -999999px;
-          position: absolute;
-        }
       }
     }
     &.unread {
@@ -145,6 +123,30 @@ ul.following-thread {
       }
     }
   }
+}
+
+// Tools/actions menu hidden until item is hovered over
+.tools {
+  position: absolute;
+  right: 999999px;
+  top: 0;
+  background: $pane1 image-url("sprite.png") 0 0 no-repeat;
+  width: 32px;
+  height: 21px;
+  border: 1px solid $lightergrey;
+  @include border-radius(2px);
+  &:hover {
+    cursor: pointer;
+    background: $pane2 image-url("sprite.png") 0 -20px no-repeat;
+  }
+  ul {
+    @include list-reset;
+    left: -999999px;
+    position: absolute;
+  }
+}
+article:hover menu.tools, header:hover menu.tools {
+  right: 0;
 }
 
 .thread-list {
@@ -232,7 +234,7 @@ ul.following-thread {
   }
 }
 
-.wysiwyg {
+section.new-message {
   background: $pane1;
   padding: 20px;
   margin-top: 40px;
@@ -267,7 +269,7 @@ ul.following-thread {
             &.text {
               background-position: 16px 12px;
             }
-            &.image {
+            &.photo {
               background-position: -60px 12px;
             }
             &.map {
@@ -276,7 +278,7 @@ ul.following-thread {
             &.link {
               background-position: -212px 12px;
             }
-            &.attach {
+            &.library {
               background-position: -288px 12px;
             }
           }

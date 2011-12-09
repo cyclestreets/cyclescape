@@ -1,8 +1,8 @@
-.issue
-  .description
-    %p== Attached to issue #{link_to issue.title, issue_path(issue)}
-    %p= issue.description
+#issue-intro.issue
+  %p== Issue: #{link_to issue.title, issue_path(issue)}
   .map
     - m = tiny_display_map(issue, geometry_issue_path(issue, :json), "tinymap") do |map, page, dom_id|
       %div{id: dom_id, class: "tinymap"}
     != m.to_html
+  .description
+    %p= issue.description

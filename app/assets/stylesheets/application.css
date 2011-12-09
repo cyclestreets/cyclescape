@@ -4,16 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require "reset"
  *= require "jquery-ui"
- *= require "base"
- *= require "header"
- *= require "nav"
  *= require "formtastic"
  *= require "formtastic_changes"
- *= require "layout"
- *= require "maps"
- *= require "dateinput"
- *= require "shared_elements"
- *= require "forms"
- *= require "content"
- *= require "third_party"
+ *= require "screen"
 */

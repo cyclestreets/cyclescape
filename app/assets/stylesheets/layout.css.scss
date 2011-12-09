@@ -1,8 +1,9 @@
-@import "grid";
-@import "utils";
-
 .hide {
   display: none;
+}
+
+header {
+  position: relative;
 }
 
 .wrapper,
@@ -15,18 +16,6 @@ nav.account,
 body > footer {
   @include container;
   position: relative;
-}
-
-body > header > .inner {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
-div.content {
-  h1, h2, h3 {
-    margin-bottom: 12px;
-  }
 }
 
 #overlay {
@@ -57,56 +46,6 @@ ul.horizontal, ol.horizontal {
   }
 }
 
-// Buttons and pseudo-buttons
-
-a.button, input[type="submit"] {
-  cursor: pointer;
-  display: inline-block;
-  padding: 8px;
-  @include border-radius(5px);
-  margin: 6px;
-  &:hover {
-    text-decoration: none;
-  }
-}
-
-// Nav bar
-
-nav.bar .inner {
-  position: relative;
-  padding: 12px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  ul li {
-    display: inline;
-    a {
-      padding: 8px;
-    }
-  }
-}
-
-// Sub nav
-
-nav.sub .inner {
-  position: relative;
-
-}
-
-// Account nav
-
-nav.account .inner {
-  float: right;
-  width: 200px;
-  margin-top: 6px;
-
-  ul li {
-    display: inline;
-    a {
-      padding: 4px;
-    }
-  }
-}
-
 // Flash
 
 div.flash-container .flash {
@@ -133,13 +72,6 @@ ul.tabs {
 div.panes > div {
   float: left;
   width: 100%;
-}
-
-// Footer
-
-footer > .wrapper {
-  @include column($full-span);
-  margin-top: 200px;
 }
 
 // Sign in
@@ -175,31 +107,6 @@ body.dashboards {
       @include column(4);
     }
   }
-}
-
-// Threads
-
-section.thread {
-  @include column(9, "first");
-  header {
-    @include column(9);
-  }
-  .info {
-    margin-top: 2px;
-    margin-bottom: 10px;
-  }
-  .issue {
-    .description {
-      @include column(4, "first");
-    }
-    .tinymap {
-      @include column(2);
-    }
-  }
-}
-
-aside.sidebar {
-  @include column(3, "last");
 }
 
 article.thread.compact {
@@ -265,28 +172,6 @@ section.issues {
       float: left;
       width: 100%;
       padding: 4px;
-    }
-  }
-}
-
-// Issue page
-article.issue {
-  @include column($full-span);
-  .main {
-    @include column(5, "first");
-  }
-  .additional {
-    @include column(4, "last");
-    #map {
-      height: 200px;
-    }
-  }
-  section.threads {
-    @include column(9);
-    margin: 0;
-    article.thread {
-      @include column(5);
-      margin: 0;
     }
   }
 }
