@@ -199,6 +199,8 @@
         zero: "<span>No</span> messages"
         one: "<span>1</span> message"
         other: "<span>%{count}</span> messages"
+      created_by: "Created by"
+      created_at: "%{time_ago} ago"
     destroy:
       failure: "Couldn't delete the thread"
       success: "Thread deleted"
