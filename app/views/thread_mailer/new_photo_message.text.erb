@@ -1,0 +1,9 @@
+<%= @message.created_by.name %> added a photo to the thread
+
+<%= @message.component.caption %>
+<%= @message.component.description %>
+<%= @message.body %>
+
+--------
+Cyclescape thread: <%= thread_url(@message.thread) %>
+You can unsubscribe on the thread page.
