@@ -8,6 +8,7 @@ class Message::LinksController < Message::BaseController
     @message.component = @link
 
     if @message.save
+      ThreadNotifier.notify_subscribers(@thread, :new_link_message, @message)
       set_flash_message(:success)
     else
       set_flash_message(:failure)

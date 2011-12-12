@@ -14,6 +14,10 @@ class ThreadMailer < ActionMailer::Base
     common(message, subscriber)
   end
 
+  def new_link_message(message, subscriber)
+    common(message, subscriber)
+  end
+
   protected
 
   def common(message, subscriber)

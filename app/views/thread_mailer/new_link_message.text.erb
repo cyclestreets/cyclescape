@@ -1,0 +1,8 @@
+<%= @message.created_by.name %> added a link to the thread
+
+<<%= @message.component.url %>>
+<%= @message.component.title %>
+<%= @message.component.description %>
+--------
+Cyclescape thread: <%= thread_url(@message.thread) %>
+You can unsubscribe on the thread page.
