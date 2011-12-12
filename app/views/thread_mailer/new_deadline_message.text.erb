@@ -3,7 +3,4 @@
 <%= l @message.component.deadline.to_date, format: :long %>
 
 <%= @message.component.title %>
-
---------
-Cyclescape thread: <%= thread_url(@message.thread) %>
-You can unsubscribe on the thread page.
+<%= render partial: "footer" %>
