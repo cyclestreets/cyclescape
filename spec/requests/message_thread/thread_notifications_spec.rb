@@ -72,6 +72,9 @@ describe "thread notifications" do
 
       open_email(current_user.email)
       current_email.should have_body_text("Some words")
+      # The URL will actually link to a particular message_id anchor, but we don't know
+      # what that will be to test it.
+      pending "Figure out testing the url"
     end
   end
 end

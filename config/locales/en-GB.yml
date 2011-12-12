@@ -287,6 +287,7 @@
       added: "%{name} added a message to the thread."
     new_photo_message:
       added: "%{name} added a photo to the thread."
+      view_the_photo: "You can view the photo at the following url:"
     footer:
       thread: "Cyclescape thread"
       unsubscribe: "You can unsubscribe from notifications on the thread page."
