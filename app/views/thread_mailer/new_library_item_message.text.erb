@@ -1,0 +1,11 @@
+<%= @message.created_by.name %> added an item from the library to the thread
+
+<%= @message.component.item.title %>
+
+<<%= polymorphic_url @message.component.item.component %>>
+
+<%= @message.body %>
+
+--------
+Cyclescape thread: <%= thread_url(@message.thread) %>
+You can unsubscribe on the thread page.
