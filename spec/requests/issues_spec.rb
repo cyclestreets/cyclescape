@@ -18,7 +18,7 @@ describe "Issues" do
         # Note hidden map field
         find("#issue_loc_json").set(issue_values[:loc_json])
         click_on "Create Issue"
-        within(".content header") do
+        within("#content header") do
           page.should have_content(issue_values[:title])
         end
         page.should have_content("parking")

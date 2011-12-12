@@ -1,19 +1,35 @@
-%h1= t ".new_message"
-.new-message
-  %ul.tabs
-    %li= link_to t(".text_message"), "#new-text-message"
-    %li= link_to t(".photo_message"), "#new-photo-message"
-    %li= link_to t(".link_message"), "#new-link-message"
-    %li= link_to t(".deadline_message"), "#new-deadline-message"
-    %li= link_to t(".library_item_message"), "#new-library-item-message"
-  .panes
-    #new-text-message
-      = semantic_form_for @new_message, url: thread_messages_path(@thread) do |f|
-        = f.inputs do
-          = f.input :body
-        = f.buttons do
-          = f.commit_button
-    = render "message/photos/new"
-    = render "message/links/new"
-    = render "message/deadlines/new"
-    = render "message/library_items/new"
+%section.new-message
+  %h1= t ".new_message"
+  .tab-nav
+    %ul.tabs
+      %li
+        = link_to "#new-text-message" do
+          %span.text
+          = t ".text_message"
+      %li
+        = link_to "#new-photo-message" do
+          %span.photo
+          = t ".photo_message"
+      %li
+        = link_to "#new-link-message" do
+          %span.link
+          = t ".link_message"
+      %li
+        = link_to "#new-deadline-message" do
+          %span.deadline
+          = t ".deadline_message"
+      %li
+        = link_to "#new-library-item-message" do
+          %span.library
+          = t ".library_item_message"
+    .panes
+      #new-text-message
+        = semantic_form_for @new_message, url: thread_messages_path(@thread) do |f|
+          = f.inputs do
+            = f.input :body
+          = f.buttons do
+            = f.commit_button
+      = render "message/photos/new"
+      = render "message/links/new"
+      = render "message/deadlines/new"
+      = render "message/library_items/new"

@@ -2,6 +2,7 @@
 
 "en-GB":
   application_name: "Cyclescape"
+  tags: "Tags"
   admin:
     groups:
       index:
@@ -132,6 +133,7 @@
       group_private: "Private to %{group}"
       group_public: "Public, by %{group}"
       public: "Public"
+      threads: "Threads"
       vote_down: "Vote Down"
       vote_up: "Vote Up"
     vote_down:
@@ -193,6 +195,12 @@
     compact:
       group_private: "Group Private"
       public: "Public"
+      message_count_html:
+        zero: "<span>No</span> messages"
+        one: "<span>1</span> message"
+        other: "<span>%{count}</span> messages"
+      created_by: "Created by"
+      created_at: "%{time_ago} ago"
     destroy:
       failure: "Couldn't delete the thread"
       success: "Thread deleted"
@@ -249,12 +257,12 @@
       censor: "Censor this message"
       censored: "This message has been removed"
     new:
-      deadline_message: "Set a Deadline"
-      library_item_message: "Add from the Library"
-      link_message: "Add a Link"
+      deadline_message: "Deadline"
+      library_item_message: "Library"
+      link_message: "Link"
       new_message: "New message"
-      photo_message: "Upload a Photo"
-      text_message: "Add a Comment"
+      photo_message: "Photo"
+      text_message: "Text"
   shared:
     map_search:
       example_search: "Putney, UK"

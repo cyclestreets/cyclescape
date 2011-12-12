@@ -1,26 +1,22 @@
-%nav
-  %ol
-    %li= link_to t(".back"), {action: :index}
-
-%section.thread
+%section#content.thread
   %header
     %h1= @thread.title
-    .info
+    .meta
       .privacy
         - if @thread.private_to_group?
-          = t ".private_to_group_message", group: @thread.group.name
+          %p= t ".private_to_group_message", group: @thread.group.name
         - else
-          = t ".public_message"
+          %p= t ".public_message"
       = render partial: "message_thread/tags/panel", locals: {thread: @thread}
-      - if permitted_to?(:destroy, @thread)
-        .actions
-          = link_to t(".destroy"), thread_path(@thread), method: :delete, confirm: t(".are_you_sure")
-      - if @thread.issue
-        = render "issue_panel", :issue => @thread.issue
-
+    - if @thread.issue
+      = render "issue_panel", :issue => @thread.issue
+    - if permitted_to?(:destroy, @thread)
+      %menu.tools
+        %ul
+          %li= link_to t(".destroy"), thread_path(@thread), method: :delete, confirm: t(".are_you_sure")
 
   = render collection: @messages, partial: "messages/message"
   = render "messages/new"
 
-%aside.sidebar
+%aside#sidebar
   = render "subscription_panel"

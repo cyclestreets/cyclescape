@@ -1,0 +1,350 @@
+/* 4. SHARED ELEMENTS
+-------------------------------------------------------------- */
+ul.following-thread {
+  @include list-reset-soft;
+  margin: 10px 0 !important;
+  border-top: 1px solid $paneborder;
+  li {
+    a {
+      background: $pane1;
+      display: block;
+      border-bottom: 1px solid $paneborder;
+      color: $lightblack;
+      overflow: hidden;
+      padding: 5px;
+      &:hover{
+        text-decoration: none;
+        background: $pane2;
+      }
+      img.thumb {
+        float: left;
+        width: 20px;
+        height: 20px;
+        border: 2px solid $white;
+      }
+      p {
+        margin: 0 0 0 10px;
+        float: left;
+        strong {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.pagination ul {
+  @include list-reset;
+  li {
+    a {
+      background: $pane1;
+      margin: 0 2px;
+      padding-top: 1px;
+      width: 22px;
+      height: 21px;
+      text: {
+        align: center;
+        decoration: none;
+      }
+      color: $lightgrey2;
+      @include border-radius(5px);
+      &:hover {
+        color: $grey2;
+        background: $lightergrey;
+      }
+    }
+    &.prev a {
+      text-indent: -999999px;
+      background: $pane1 image-url("sprite.png") 4px -42px no-repeat;
+      &:hover {
+        background: $lightergrey image-url("sprite.png") 4px -62px no-repeat;
+      }
+    }
+    &.next a {
+      text-indent: -999999px;
+      background: $pane1 image-url("sprite.png") 5px -82px no-repeat;
+      &:hover {
+        background: $lightergrey image-url("sprite.png") 5px -102px no-repeat;
+      }
+    }
+  }
+}
+
+section.thread {
+  @include list-reset-soft;
+  margin: 20px 0;
+  article.message {
+    padding: 20px 10px;
+    border-bottom: 3px solid $grey;
+    &:last-child {
+      border-bottom: none;
+    }
+    a.thumbnail {
+      border: 4px solid $lightergrey;
+      display: block;
+      width: 42px;
+      height: 42px;
+      float: left;
+      margin-right: 20px;
+    }
+    .author {
+      color: $lightgrey;
+      font: {
+        weight: normal;
+        size: 12px;
+      }
+    }
+    .body {
+      overflow: hidden;
+      position: relative;
+      .readmore {
+        overflow: hidden;
+        margin-top: 10px;
+        width: 540px;
+        height: 75px;
+        float: left;
+      }
+      .read-more-box {
+        width: 540px;
+        float: right;
+      }
+    }
+    &.unread {
+      background: $pane1;
+      border: 1px solid $grey;
+      .read-more-box {
+        background: image-url("read-more-box-bg-grey.png") 0 0 repeat-x;
+        &.active {
+          background: none;
+        }
+      }
+      div .tools {
+        right: 0;
+      }
+    }
+  }
+}
+
+// Tools/actions menu hidden until item is hovered over
+.tools {
+  position: absolute;
+  right: 999999px;
+  top: 0;
+  background: $pane1 image-url("sprite.png") 0 0 no-repeat;
+  width: 32px;
+  height: 21px;
+  border: 1px solid $lightergrey;
+  @include border-radius(2px);
+  &:hover {
+    cursor: pointer;
+    background: $pane2 image-url("sprite.png") 0 -20px no-repeat;
+  }
+  ul {
+    @include list-reset;
+    left: -999999px;
+    position: absolute;
+  }
+}
+article:hover > menu.tools, header:hover > menu.tools {
+  right: 0;
+}
+
+.thread-list {
+  @include list-reset-soft;
+  margin: 20px 0;
+  border-top: 3px solid $grey;
+  li {
+    padding: 20px 0;
+    border-bottom: 3px solid $grey;
+    overflow: hidden;
+    .message-count {
+      width: 60px;
+      float: left;
+      font-size: 12px;
+      color: $lightgrey;
+      text-align: center;
+      span {
+        font: {
+          size: 24px;
+          weight: bold;
+        }
+        display: block;
+      }
+    }
+    .unread-count {
+      @extend .reply-count;
+      color: $colour1;
+    }
+    .item-content {
+      margin: 0 30px;
+      float: left;
+      width: 390px;
+      h4 {
+        margin: 3px 0 10px 0;
+      }
+    }
+    .permissions {
+      width: 60px;
+      float: right;
+      color: $lightgrey;
+      text: {
+        align: right;
+        transform: uppercase;
+      }
+      font: {
+        size: 11px;
+        weight: bold;
+      }
+    }
+  }
+}
+
+.mini-map {
+  position: relative;
+  padding: 0 10px;
+  .tools {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background: $white;
+    padding: 5px 10px 10px 5px;
+    @include border-radius(0 0 20px 0);
+    button {
+      display: block;
+      float: left;
+      width: 27px;
+      height: 27px;
+      border: none;
+      text-indent: -999999px;
+      &.person {
+        background: image-url("sprite.png") -3px -130px no-repeat;
+        &:hover {
+          background-position: -43px -130px;
+        }
+      }
+      &.zoom {
+        margin-left: 5px;
+        background: image-url("sprite.png") -3px -180px no-repeat;
+        &:hover {
+          background-position: -43px -180px;
+        }
+      }
+    }
+  }
+}
+
+section.new-message {
+  background: $pane1;
+  padding: 20px;
+  margin-top: 40px;
+  overflow: hidden;
+  h2 {
+    font-size: 16px;
+    color: $colour1;
+    float: left;
+  }
+  .tab-nav {
+    float: right;
+    ul {
+      @include list-reset;
+      li {
+        a {
+          width: 67px;
+          height: 90px;
+          margin-left: 10px;
+          color: $grey2;
+          text: {
+            transform: uppercase;
+            align: center;
+          }
+          font-size: 11px;
+          span {
+            display: block;
+            width: 65px;
+            height: 65px;
+            border: 1px solid $lightgrey;
+            background: $paneborder image-url("wysiwyg.png") 0 0 no-repeat;
+            @include border-radius(10px);
+            &.text {
+              background-position: 16px 12px;
+            }
+            &.photo {
+              background-position: -60px 12px;
+            }
+            &.map {
+              background-position: -137px 12px;
+            }
+            &.link {
+              background-position: -212px 12px;
+            }
+            &.library {
+              background-position: -288px 12px;
+            }
+          }
+          &:hover {
+            color: $lightblack;
+            text-decoration: none;
+            span {
+              background-color: $pane2;
+            }
+          }
+        }
+      }
+    }
+  }
+  .tab-wrapper {
+    clear: both;
+    .tab {
+      h3 {
+        color: $lightgrey2;
+      }
+      input.text-input,
+      textarea {
+        display: block;
+        padding: 10px;
+        width: 570px;
+        font-size: 16px;
+      }
+      .buttons {
+        float: right;
+        margin-top: 20px;
+        button {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.tip {
+  position: absolute;
+  right: -290px;
+  top: 0;
+  z-index: 20;
+  width: 220px;
+  padding: 20px;
+  background: $black;
+  h4 {
+    color: $grey;
+  }
+  p {
+    color: $grey;
+    font-weight: normal;
+    line-height: 10px;
+  }
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  .nub {
+    display: block;
+    width: 24px;
+    height: 20px;
+    position: absolute;
+    left: -24px;
+    top: 20px;
+    background: image-url("sprite.png") -44px -261px no-repeat;
+  }
+}

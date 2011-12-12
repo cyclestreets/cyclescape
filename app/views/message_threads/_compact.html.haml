@@ -1,7 +1,14 @@
-%article.thread.compact.clickable
-  .wrapper
-    %header
-      %h3= link_to_if (permitted_to? :view, thread), thread.title, thread_path(thread), class: "primary-link"
-      %span.privacy= thread_type(thread) + ", "
-      %span.count= pluralize(thread.messages.count, "message") + ", "
-      %span.participants= pluralize(thread.participants.count, "participant")
+%li
+  .message-count= t ".message_count_html", count: thread.message_count
+  .item-content
+    %h4= link_to_if (permitted_to? :view, thread), thread.title, thread_path(thread), class: "primary-link"
+    .tags
+      %p= t "tags"
+      %ul
+        = thread.tags.map {|t| content_tag(:li) { link_to t.name, "#" } }.join.html_safe
+    .meta
+      %p
+        = t ".created_by"
+        = link_to_profile(thread.created_by)
+        = t ".created_at", time_ago: time_ago_in_words(thread.created_at)
+  .permissions= thread_type(thread)

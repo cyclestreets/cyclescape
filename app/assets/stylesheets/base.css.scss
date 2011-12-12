@@ -1,0 +1,179 @@
+/* 2. BASIC TYPOGRAPHY, LINKS, BUTTONS, LISTS AND IMAGES
+-------------------------------------------------------------- */
+body {
+  background: $pane1;
+  // default highlight on buttons links etc
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  // Prevent mobile zooming while remain desktop zooming.
+  // github.com/shichuan/mobile-html5-boilerplate/issues/closed#issue/14
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: none;
+}
+
+// type
+body {
+  font-family:  'Helvetica', 'Arial', sans-serif;
+  color: $lightblack;
+  font-size: 100%;
+}
+
+p, h1, h2, h3 {
+  margin-bottom: 15px;
+  line-height: 20px;
+}
+h1, h2, h3, h4 {
+  color: $black;
+}
+p {
+  font-size: 14px;
+  line-height: 20px;
+}
+small {
+  font-size: 12px;
+  line-height: 15px;
+}
+.pre-title {
+  font-size: 18px;
+  color: $colour2;
+}
+
+h1 {
+  font:  {
+    size: 30px;
+    weight: normal;
+  }
+  line-height: 30px;
+}
+h2 {
+  font:  {
+    size: 18px;
+    weight: bold;
+  }
+  margin-bottom: 10px;
+}
+h3 {
+  font:  {
+    size: 16px;
+    weight: bold;
+  }
+  margin-bottom: 10px;
+}
+h4 {
+  font:  {
+    size: 14px;
+    weight: bold;
+  }
+}
+
+a {
+  color: $colour1;
+  text-decoration: none;
+  &:hover {
+    color: $colour2;
+    text-decoration: underline;
+  }
+}
+
+// lists
+ul, ol {
+  @include list-reset-copy;
+}
+
+ol li {
+  list-style: decimal;
+}
+
+dl {
+  dt {
+    font:  {
+      size: 14px;
+      weight: bold;
+    }
+    line-height: 20px;
+  }
+  dd {
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 5px;
+  }
+}
+
+// buttons
+button,
+input.submit,
+.btn-grey {
+  @include button-text-grey;
+}
+.btn-green {
+  @include button-text-green;
+}
+.btn-red {
+  @include button-text-red;
+}
+.btn-user-colour {
+  @include button-reset-grad-text($colour2, $colour1, $colour2);
+}
+
+.readmore {
+  overflow: hidden;
+}
+a.read-more-box {
+  display: block;
+  padding: 54px 0 0 0;
+  margin-top: -42px;
+  background: image-url("read-more-box-bg.png") 0 0 repeat-x;
+  color: $grey3;
+  text:  {
+    decoration: none;
+    transform: uppercase;
+  }
+  line-height: 1;
+  font-size: 11px;
+  span {
+    display: block;
+    float: right;
+    text-indent: -999999px;
+    padding-right: 25px;
+    background: image-url("arrow-down-grey.png") right 0 no-repeat;
+  }
+  &:hover span {
+    text-indent: 0px;
+  }
+  &.active {
+    background: none;
+    span {
+      margin-top: 0;
+      background: image-url("arrow-up-grey.png") right 0 no-repeat;
+    }
+  }
+}
+
+.load-more {
+  display: block;
+  margin: auto;
+  text-align: center;
+  font:  {
+    size: 16px;
+    weight: bold;
+  }
+  color: $grey2;
+  width: 120px;
+  padding: 10px;
+  border: 1px solid $paneborder;
+  @include border-radius(2px);
+  &:hover {
+    color: $grey2;
+    background: $pane1;
+    text-decoration: none;
+  }
+}
+
+.close {
+  @include button-reset(0px);
+  width: 8px;
+  height: 8px;
+  background: image-url("sprite.png") -60px -49px no-repeat;
+  &:hover {
+    background: image-url("sprite.png") -60px -69px no-repeat;
+  }
+}

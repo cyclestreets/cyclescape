@@ -1,0 +1,118 @@
+/* 7. HEADER
+-------------------------------------------------------------- */
+#site-header {
+  background: $white;
+  height: 70px;
+  padding-bottom: 10px;
+  .wrapper {
+    height: 70px;
+  }
+  a#site-logo {
+    display: block;
+    background: $grey;
+    width: 50px;
+    height: 50px;
+    text-indent: -999999px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+  a#site-title {
+    display: block;
+    width: 890px;
+    left: 70px;
+    bottom: 0;
+    font-size: 24px;
+    position: absolute;
+  }
+  ul#top-menu {
+    @include list-reset;
+    overflow: visible;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 32px;
+    @include gradient($lightgrey2, $grey2);
+    @include border-radius(0 0 5px 5px);
+    li {
+      margin-bottom: 5px;
+      a {
+        color: $white;
+        margin: 6px 15px 0 15px;
+        &.cyclescape-logo {
+          width: 106px;
+          height: 24px;
+          margin: 3px;
+          text-indent: -999999px;
+          background: image-url("logo.png") center no-repeat;
+        }
+      }
+      &.my-account {
+        a {
+          display: block;
+          position: relative;
+          margin: 0;
+          padding: 5px 31px 0 11px;
+          height: 27px;
+          .arrow {
+            display: block;
+            height: 31px;
+            width: 26px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: image-url("arrow-down.png") center no-repeat;
+          }
+        }
+        &:hover {
+          >a {
+            padding: 4px 30px 0 10px;
+            height: 27px;
+            border-top: 1px solid $paneborder;
+            border-left: 1px solid $paneborder;
+            border-right: 1px solid $paneborder;
+            color: $lightgrey2;
+            background: $pane1;
+            text-decoration: none;
+            .arrow {
+               background: image-url("arrow-down-hover.png") center no-repeat;
+            }
+          }
+          ul {
+            right: 0;
+          }
+        }
+        ul {
+          @include list-reset;
+          overflow: visible;
+          background: $grey2;
+          position: absolute;
+          right: 999999px;
+          top: 33px;
+          z-index: 2;
+          width: 150px;
+          @include border-radius(0 0 4px 4px);
+          @include box-shadow(rgba(0, 0, 0, 0.2) 0 2px 1px);
+          li {
+            a {
+              color: $lightblack;
+              border: 1px solid $paneborder;
+              padding: 6px 10px;
+              width: 128px;
+              margin: -1px 0;
+              background: $pane1;
+              float: none;
+              &:hover {
+                text-decoration: none;
+                background: $pane2;
+              }
+            }
+            &:last-child a {
+              @include border-radius(0 0 4px 4px);
+            }
+          }
+        }
+      }
+    }
+  }
+}

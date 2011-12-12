@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe "Thread subscriptions" do
   let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:subscribe_by_email_field) { I18n.t("formtastic.labels.thread_subscription.send_email") }
 
   context "site user subscribe" do
     include_context "signed in as a site user"
@@ -27,7 +28,7 @@ describe "Thread subscriptions" do
 
     context "for email" do
       it "should subscribe the user to the thread" do
-        check "Send new messages to me by email"
+        check subscribe_by_email_field
         click_on "Subscribe"
         page.should have_content("Subscription created.")
         current_user.thread_subscriptions.count.should == 1
@@ -36,7 +37,7 @@ describe "Thread subscriptions" do
       end
 
       it "should send future messages on the thread by email" do
-        check "Send new messages to me by email"
+        check subscribe_by_email_field
         click_on "Subscribe"
         within(".new-message") do
           fill_in "Message", with: "Notification test"
@@ -49,7 +50,7 @@ describe "Thread subscriptions" do
       end
 
       it "should state I am subscribed by email" do
-        check "Send new messages to me by email"
+        check subscribe_by_email_field
         click_on "Subscribe"
         page.should have_content("You are subscribed by email")
       end
