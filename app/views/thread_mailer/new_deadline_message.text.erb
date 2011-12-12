@@ -1,4 +1,4 @@
-<%= @message.created_by.name %> added a deadline to the thread
+<%= t ".added" , name: @message.created_by.name %>
 
 <%= l @message.component.deadline.to_date, format: :long %>
 
