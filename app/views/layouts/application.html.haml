@@ -23,7 +23,7 @@
               %li= link_to "Sign up", new_user_registration_path
             - if permitted_to? :create, :devise_sessions
               %li= link_to "Sign in", new_user_session_path
-            %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
+          %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
     #main-nav
       %nav.wrapper
         %ul#navigation(role="navigation")
