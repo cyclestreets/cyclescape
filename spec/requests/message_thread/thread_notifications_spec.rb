@@ -32,7 +32,7 @@ describe "thread notifications" do
         click_on "Create Link message"
       end
       open_email(current_user.email)
-      current_email.should have_body_text("<http://example.com>")
+      current_email.should have_body_text("http://example.com")
       current_email.should have_body_text("An example URL")
       current_email.should have_body_text("Some words")
     end
@@ -48,7 +48,7 @@ describe "thread notifications" do
       end
       open_email(current_user.email)
       current_email.should have_body_text(library_note.title)
-      current_email.should have_body_text("<#{polymorphic_url library_note}")
+      current_email.should have_body_text("#{polymorphic_url library_note}")
       current_email.should have_body_text("Some words")
     end
 

@@ -2,7 +2,7 @@
 
 <%= @message.component.item.title %>
 
-<<%= polymorphic_url @message.component.item.component %>>
+<%= polymorphic_url @message.component.item.component %>
 
 <%= @message.body %>
 <%= render partial: "footer" %>
