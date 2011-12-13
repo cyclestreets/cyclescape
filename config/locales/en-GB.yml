@@ -146,7 +146,7 @@
     application:
       admin: "Admin"
       dashboard: "My Dashboard"
-      feedback: "Send us beta feedback"
+      feedback: "Feedback"
       issues: "Issues"
       library: "Library"
       threads: "Threads"

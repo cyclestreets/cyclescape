@@ -348,3 +348,10 @@ section.new-message {
     background: image-url("sprite.png") -44px -261px no-repeat;
   }
 }
+
+#overlay {
+  @include border-radius(5px);
+  width: 640px;
+  background: white;
+  border: 1px solid black;
+}
