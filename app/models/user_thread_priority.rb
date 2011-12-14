@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: user_thread_priorities
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer         not null
+#  thread_id  :integer         not null
+#  priority   :integer         not null
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#
+
 class UserThreadPriority < ActiveRecord::Base
   PRIORITIES = { very_high: 10,
                  high: 8,

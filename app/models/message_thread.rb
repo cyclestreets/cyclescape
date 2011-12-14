@@ -11,6 +11,8 @@
 #  state         :string(255)     not null
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
+#  deleted_at    :datetime
+#  public_token  :string(255)
 #
 
 class MessageThread < ActiveRecord::Base
