@@ -44,7 +44,7 @@ jQuery ->
     .overlay
       onBeforeLoad: ->
         # Load the page given in the link HREF
-        wrapper = this.getOverlay().find(".wrapper")
+        wrapper = this.getOverlay().find(".inner")
         $.ajax this.getTrigger().attr("href"),
           success: (data, status, xhr) =>
             wrapper.html(data)
@@ -62,6 +62,6 @@ jQuery ->
 
   $("#overlay form[data-remote]")
     .live "ajax:success", (e, data, status, xhr) ->
-      $(this).parents(".wrapper:first").html(data)
+      $(this).parents(".inner:first").html(data)
     .live "ajax:error", (e, xhr, status, error) ->
-      $(this).parents(".wrapper:first").html(xhr.responseText)
+      $(this).parents(".inner:first").html(xhr.responseText)

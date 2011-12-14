@@ -3,6 +3,7 @@ require "spec_helper"
 describe "Thread subscriptions" do
   let(:thread) { FactoryGirl.create(:message_thread) }
   let(:subscribe_by_email_field) { I18n.t("formtastic.labels.thread_subscription.send_email") }
+  let(:subscribe_button) { find_button("Follow this thread") }
 
   context "site user subscribe" do
     include_context "signed in as a site user"
@@ -13,7 +14,7 @@ describe "Thread subscriptions" do
 
     context "for web" do
       it "should subscribe the user to the thread" do
-        click_on "Subscribe"
+        subscribe_button.click
         page.should have_content("Subscription created.")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
@@ -21,7 +22,7 @@ describe "Thread subscriptions" do
       end
 
       it "should state I am subscribed" do
-        click_on "Subscribe"
+        subscribe_button.click
         page.should have_content("You are subscribed")
       end
     end
@@ -29,7 +30,7 @@ describe "Thread subscriptions" do
     context "for email" do
       it "should subscribe the user to the thread" do
         check subscribe_by_email_field
-        click_on "Subscribe"
+        subscribe_button.click
         page.should have_content("Subscription created.")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
@@ -38,7 +39,7 @@ describe "Thread subscriptions" do
 
       it "should send future messages on the thread by email" do
         check subscribe_by_email_field
-        click_on "Subscribe"
+        subscribe_button.click
         within(".new-message") do
           fill_in "Message", with: "Notification test"
           click_on "Post Message"
@@ -51,26 +52,28 @@ describe "Thread subscriptions" do
 
       it "should state I am subscribed by email" do
         check subscribe_by_email_field
-        click_on "Subscribe"
+        subscribe_button.click
         page.should have_content("You are subscribed by email")
       end
     end
 
     context "cancelling" do
+      let(:unsubscribe_button) { find_button("Unfollow") }
+
       before do
-        click_on "Subscribe"
+        subscribe_button.click
       end
 
       it "should unsubscribe me" do
         current_user.should have(1).thread_subscription
-        click_on "Unsubscribe"
+        unsubscribe_button.click
         current_user.should have(0).thread_subscriptions
         page.should have_content("Unsubscribed")
       end
 
       it "should not send me any more messages" do
         email_count = all_emails.count
-        click_on "Unsubscribe"
+        unsubscribe_button.click
         within(".new-message") do
           fill_in "Message", with: "Notification test"
           click_on "Post Message"

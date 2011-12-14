@@ -1,5 +1,7 @@
 %section#content.thread
   %header
+    - if @issue
+      %p.pre-title= link_to @issue.title, issue_path(@issue)
     %h1= @thread.title
     .meta
       .privacy
@@ -8,8 +10,9 @@
         - else
           %p= t ".public_message"
       = render partial: "message_thread/tags/panel", locals: {thread: @thread}
-    - if @thread.issue
-      = render "issue_panel", :issue => @thread.issue
+    - if @issue
+      .description
+        %p= @issue.description
     - if permitted_to?(:destroy, @thread)
       %menu.tools
         %ul
@@ -19,4 +22,10 @@
   = render "messages/new"
 
 %aside#sidebar
-  = render "subscription_panel"
+  = render "subscribe_panel", thread: @thread
+  - if @issue
+    %section.map
+      - m = tiny_display_map(@issue, geometry_issue_path(@issue, :json), "minimap") do |map, page, dom_id|
+        %div{id: dom_id, class: "minimap"}
+      != m.to_html
+  = render "subscribers_panel", group: @thread.group, subscribers: @subscribers

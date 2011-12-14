@@ -7,11 +7,11 @@ describe "Site feedback" do
 
   context "as a public user" do
     it "should be able to see the feedback link" do
-      page.should have_link("Send us beta feedback")
+      page.should have_link("Feedback")
     end
 
     it "should be able to send feedback" do
-      click_on "Send us beta feedback"
+      click_on "Feedback"
       fill_in "Message", with: "Your site is awesome!"
       fill_in "Name", with: "Bobby Jones"
       fill_in "Email", with: "bobby@example.com"
@@ -20,7 +20,7 @@ describe "Site feedback" do
     end
 
     it "should store the request URL with the comment" do
-      click_on "Send us beta feedback"
+      click_on "Feedback"
       fill_in "Message", with: "This page broke!"
       click_on "Send Feedback"
       SiteComment.last.context_url.should == root_url

@@ -199,9 +199,14 @@ article:hover > menu.tools, header:hover > menu.tools {
   }
 }
 
-.mini-map {
+#page aside#sidebar section.map {
+  padding: 10px;
+}
+
+.minimap {
   position: relative;
   padding: 0 10px;
+  height: 210px;
   .tools {
     position: absolute;
     right: 0;
@@ -347,4 +352,11 @@ section.new-message {
     top: 20px;
     background: image-url("sprite.png") -44px -261px no-repeat;
   }
+}
+
+#overlay {
+  @include border-radius(5px);
+  width: 640px;
+  background: white;
+  border: 1px solid black;
 }

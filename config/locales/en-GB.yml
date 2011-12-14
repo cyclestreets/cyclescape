@@ -149,7 +149,7 @@
     application:
       admin: "Admin"
       dashboard: "My Dashboard"
-      feedback: "Send us beta feedback"
+      feedback: "Feedback"
       issues: "Issues"
       library: "Library"
       threads: "Threads"
@@ -217,10 +217,11 @@
       destroy: "Delete this thread"
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
-    subscription_panel:
+    subscribe_panel:
       subscribed: "You are subscribed to this thread."
       subscribed_by_email: "You are subscribed by email to this thread."
-      subscribers_list: "%{count_text} to this thread"
+    subscribers_panel:
+      subscribers: "Following this thread"
     widget:
       group_private: "Group Private"
       public: "Public"
