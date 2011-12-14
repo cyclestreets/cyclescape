@@ -7,7 +7,7 @@
       %p= t(".subscribed")
     = semantic_form_for subscription, url: thread_subscription_path(thread, subscription, action: :destroy), method: :delete do |f|
       = f.buttons do
-        = f.commit_button :delete
+        = f.commit_button :delete, button_html: {class: "btn-red"}
   - else
     = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: thread, action: :create) do |f|
       = f.inputs :send_email
