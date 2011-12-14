@@ -16,76 +16,77 @@ function readMore(elem, trig, h) {
     }
   });
 }
+
 $(function(){
-	/*
-	 * Hide/show on read more button
-	 */
-	$('p.readmore').addClass('closed');
-	//clicks
-	$('.intro .read-more-box').live('click', function(e){
-		e.preventDefault();
-		$readmore = $(this).prev('.readmore');
-		readMore($readmore, $(this), 80);
-	});
+  /*
+   * Hide/show on read more button
+   */
+  $('p.readmore').addClass('closed');
+  //clicks
+  $('.intro .read-more-box').live('click', function(e){
+    e.preventDefault();
+    $readmore = $(this).prev('.readmore');
+    readMore($readmore, $(this), 80);
+  });
 
-	$('#issue-intro .read-more-box').live('click', function(e){
-		e.preventDefault();
-		$readmore = $(this).prev('.readmore');
-		readMore($readmore, $(this), 180);
-	});
+  $('#issue-intro .read-more-box').live('click', function(e){
+    e.preventDefault();
+    $readmore = $(this).prev('.readmore');
+    readMore($readmore, $(this), 180);
+  });
 
-	$('.thread .read-more-box').live('click', function(e){
-		e.preventDefault();
-		$readmore = $(this).prev('.readmore');
-		readMore($readmore, $(this), 80);
-	});
+  $('.thread .read-more-box').live('click', function(e){
+    e.preventDefault();
+    $readmore = $(this).prev('.readmore');
+    readMore($readmore, $(this), 80);
+  });
 
 
-	/*
-	 * NOT BRILLIANT - resource list and checks
-	 */
-	$('#resource-list li').live('click', function(e){
-		e.preventDefault();
-		if ($(this).hasClass('open')) {
+  /*
+   * NOT BRILLIANT - resource list and checks
+   */
+  $('#resource-list li').live('click', function(e){
+    e.preventDefault();
+    if ($(this).hasClass('open')) {
       $(this).removeClass('open').addClass('closed');
       $('p, .btn-grey', $(this)).hide();
     } else {
       $(this).removeClass('closed').addClass('open');
       $('p, .btn-grey', $(this)).show();
     }
-	});
-	$('.check').click(function(){
-		$(this).toggleClass('checked');
-	});
+  });
+  $('.check').click(function(){
+    $(this).toggleClass('checked');
+  });
 
-	/*
-	 * group selector
-	 */
-	// hide on hover of my account
-	$('li.my-account').hover(function(e){
-		if ($('.group-selector').hasClass('open')) {
+  /*
+   * group selector
+   */
+  // hide on hover of my account
+  $('li.my-account').hover(function(e){
+    if ($('.group-selector').hasClass('open')) {
       $('.group-selector').removeClass('open').addClass('closed');
     }
-	});
-	// clicks
-	$('.group-selector').live('click', function(e){
-		e.preventDefault();
-		if ($(this).hasClass('open')) {
+  });
+  // clicks
+  $('.group-selector').live('click', function(e){
+    e.preventDefault();
+    if ($(this).hasClass('open')) {
       $(this).removeClass('open').addClass('closed');
     } else {
       $(this).removeClass('closed').addClass('open');
     }
-	});
+  });
 
-	/*
-	 * Tagging shiz
-	 */
-	var tags = ['Obstruction', 'Cycle Path', 'Car Parking Violation', 'Destination', 'Roadworks'];
+  /*
+   * Tagging shiz
+   */
+  var tags = ['Obstruction', 'Cycle Path', 'Car Parking Violation', 'Destination', 'Roadworks'];
 
     // Initialize Demo 2
-    $("#issue-tags").superblyTagField({
-        allowNewTags: true,
-        showTagsNumber: 10,
-        tags: tags
-    });
+  $("#issue-tags").superblyTagField({
+      allowNewTags: true,
+      showTagsNumber: 10,
+      tags: tags
+  });
 });
