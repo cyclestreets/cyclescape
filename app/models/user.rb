@@ -43,6 +43,8 @@ class User < ActiveRecord::Base
     end
   end
   has_many :subscribed_threads, through: :thread_subscriptions, source: :thread
+  has_many :thread_priorities, class_name: "UserThreadPriority"
+  has_many :prioritised_threads, through: :thread_priorities, source: :thread
   has_one :profile, class_name: "UserProfile"
   accepts_nested_attributes_for :profile, update_only: true
 

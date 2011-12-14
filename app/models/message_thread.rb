@@ -26,6 +26,7 @@ class MessageThread < ActiveRecord::Base
   has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id", conditions: {deleted_at: nil}
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, through: :messages, source: :created_by, uniq: true
+  has_many :user_priorities, class_name: "UserThreadPriority", foreign_key: "thread_id"
   has_and_belongs_to_many :tags, join_table: "message_thread_tags", foreign_key: "thread_id"
 
   scope :public, where("privacy = 'public'")
@@ -58,6 +59,10 @@ class MessageThread < ActiveRecord::Base
 
   def message_count
     messages.count
+  end
+
+  def priority_for(user)
+    user_priorities.where(user_id: user.id).first
   end
 
   protected

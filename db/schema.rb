@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111125130122) do
+ActiveRecord::Schema.define(:version => 20111214105224) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -156,8 +156,8 @@ ActiveRecord::Schema.define(:version => 20111125130122) do
     t.string   "state",         :null => false
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "public_token"
     t.datetime "deleted_at"
+    t.string   "public_token"
   end
 
   add_index "message_threads", ["public_token"], :name => "index_message_threads_on_public_token", :unique => true
@@ -222,6 +222,14 @@ ActiveRecord::Schema.define(:version => 20111125130122) do
     t.string  "picture_uid"
     t.string  "website"
     t.text    "about"
+  end
+
+  create_table "user_thread_priorities", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "thread_id",  :null => false
+    t.integer  "priority",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
