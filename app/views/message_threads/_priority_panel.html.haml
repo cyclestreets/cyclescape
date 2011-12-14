@@ -1,6 +1,6 @@
-.priority-panel
-  %h3= t ".thread_priority"
-  - if signed_in?
+- if signed_in?
+  .priority-panel
+    %h3= t ".thread_priority"
     - if current_user.prioritised_thread?(@thread)
       = semantic_form_for @thread.priority_for(current_user), url: thread_user_priorities_path(@thread) do |f|
         = f.inputs do
