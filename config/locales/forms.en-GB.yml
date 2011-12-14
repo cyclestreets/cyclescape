@@ -54,6 +54,8 @@
         create: "Send Feedback"
       user_profile:
         create: "Save"
+      user_thread_priority:
+        create: "Save"
       thread_subscription:
         create: "Subscribe"
         delete: "Unsubscribe"
