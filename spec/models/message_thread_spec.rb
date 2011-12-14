@@ -64,6 +64,16 @@ describe MessageThread do
     end
   end
 
+  describe "priorities" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:thread) { FactoryGirl.create(:message_thread) }
+    let!(:priority) { FactoryGirl.create(:user_thread_priority, user: user, thread: thread) }
+
+    it "should confirm that user has prioritised" do
+      thread.priority_for(user).should == priority
+    end
+  end
+
   describe "with messages from" do
     let(:user) { FactoryGirl.create(:user) }
     let(:thread) { FactoryGirl.create(:message_thread) }
