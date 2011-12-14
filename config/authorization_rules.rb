@@ -42,6 +42,7 @@ authorization do
     has_permission_on :message_threads, :messages, to: [:new, :create]
     has_permission_on :message_thread_subscriptions, to: [:create, :destroy]
     has_permission_on :message_thread_tags, to: :update
+    has_permission_on :message_thread_user_priorities, to: [:create, :update]
     has_permission_on :message_photos, :message_links, :message_deadlines, :message_library_items, to: :create
     has_permission_on :libraries, :library_documents, :library_notes, to: :manage
     has_permission_on :library_tags, to: :update

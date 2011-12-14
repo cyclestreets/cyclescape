@@ -95,6 +95,10 @@ class User < ActiveRecord::Base
     MessageThread.with_messages_from(self)
   end
 
+  def prioritised_thread?(thread)
+    thread_priorities.where(thread_id: thread.id).exists?
+  end
+
   def disabled
     disabled_at?
   end

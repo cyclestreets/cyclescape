@@ -194,6 +194,13 @@
     tags:
       panel:
         edit_tags: "edit"
+    user_priorities:
+      create:
+        success: "Priority saved"
+        failure: "Couldn't save your priority"
+      update:
+        success: "Priority updated"
+        failure: "Couldn't update your priority"
   message_threads:
     compact:
       group_private: "Group Private"
