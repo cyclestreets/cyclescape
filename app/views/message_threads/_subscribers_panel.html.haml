@@ -1,0 +1,12 @@
+%section.subscribers
+  %h2= t ".subscribers"
+  - if group
+    %dl
+      %dt.title= t ".owner"
+      %dd.title= link_to_profile group
+  %ul.following-thread
+    - subscribers.each do |sub|
+      %li
+        = link_to user_profile_path(sub) do
+          = image_tag sub.profile.picture_thumbnail.url, class: "thumb"
+          %p= sub.name

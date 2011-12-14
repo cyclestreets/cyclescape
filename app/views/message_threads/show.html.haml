@@ -22,8 +22,9 @@
   = render "messages/new"
 
 %aside#sidebar
-  = render "subscription_panel"
+  = render "subscribe_panel", thread: @thread
   %section.map
     - m = tiny_display_map(@issue, geometry_issue_path(@issue, :json), "minimap") do |map, page, dom_id|
       %div{id: dom_id, class: "minimap"}
     != m.to_html
+  = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
