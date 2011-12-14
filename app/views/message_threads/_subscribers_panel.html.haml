@@ -8,5 +8,6 @@
     - subscribers.each do |sub|
       %li
         = link_to user_profile_path(sub) do
-          = image_tag sub.profile.picture_thumbnail.url, class: "thumb"
+          - if sub.profile.picture
+            = image_tag sub.profile.picture_thumbnail.url, class: "thumb"
           %p= sub.name
