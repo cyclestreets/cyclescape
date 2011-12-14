@@ -24,6 +24,7 @@ class MessageThreadsController < ApplicationController
 
   def show
     load_thread
+    @issue = @thread.issue if @thread.issue
     @messages = @thread.messages.all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers

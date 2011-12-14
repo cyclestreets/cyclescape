@@ -55,5 +55,5 @@
       user_profile:
         create: "Save"
       thread_subscription:
-        create: "Subscribe"
-        delete: "Unsubscribe"
+        create: "Follow this thread"
+        delete: "Unfollow"
