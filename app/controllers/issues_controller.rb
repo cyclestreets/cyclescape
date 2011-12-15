@@ -22,7 +22,7 @@ class IssuesController < ApplicationController
     if @issue.save
       redirect_to @issue
     else
-      @start_location = Geo::NOWHERE_IN_PARTICULAR
+      @start_location = index_start_location
       render :new
     end
   end
