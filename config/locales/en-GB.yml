@@ -216,7 +216,7 @@
       success: "Thread deleted"
     index:
       latest_activity: "Latest activity %{ago} ago"
-      title: "Threads"
+      title: "Public Threads"
     new:
       title: "New Thread"
     show:

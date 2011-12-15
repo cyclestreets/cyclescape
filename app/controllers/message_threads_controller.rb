@@ -3,7 +3,7 @@ class MessageThreadsController < ApplicationController
   helper_method :message_components
 
   def index
-    @threads = MessageThread.all
+    @threads = MessageThread.public.order("updated_at desc")
   end
 
   def new
