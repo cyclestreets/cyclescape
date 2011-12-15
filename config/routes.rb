@@ -1,6 +1,10 @@
 Cyclescape::Application.routes.draw do
   devise_for :users
 
+  constraints(SubdomainConstraint) do
+    root :to => "groups#show"
+  end
+
   resource :dashboard
 
   resources :issues do

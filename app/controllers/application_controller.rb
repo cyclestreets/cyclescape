@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :no_disabled_users
   before_filter :set_auth_user
   before_filter :set_default_mailer_options
+  before_filter :load_group_from_subdomain
   layout :set_xhr_layout
   filter_access_to :all
 
@@ -27,6 +28,21 @@ class ApplicationController < ActionController::Base
   def set_xhr_layout
     if request.xhr? then nil else "application" end
   end
+
+  def load_group_from_subdomain
+    if is_group_subdomain?
+      @current_group = Group.find_by_short_name(request.subdomain)
+    end
+  end
+
+  def is_group_subdomain?
+    request.subdomain != "www"
+  end
+
+  def current_group
+    @current_group
+  end
+  helper_method :current_group
 
   def permission_denied
     if current_user.nil?
