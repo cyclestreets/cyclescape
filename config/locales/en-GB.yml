@@ -46,6 +46,8 @@
       subscribed_threads: "Subscribed Threads"
   devise:
     registrations:
+      edit:
+        title: 'Edit Account Details'
       new:
         title: "Sign up"
     sessions:
