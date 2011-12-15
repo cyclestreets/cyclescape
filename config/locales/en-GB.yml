@@ -561,3 +561,8 @@
 
       full_messages:
         format: "%{attribute} %{message}"
+
+  will_paginate:
+    next_label: "Next"
+    previous_label: "Previous"
+    page_gap: "\u2026"
