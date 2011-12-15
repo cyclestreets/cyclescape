@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-#every 5.minutes do
-#  runner "MailboxReader.run"
-#end
+every 5.minutes do
+  runner "MailboxReader.process_all_mailboxes"
+end
