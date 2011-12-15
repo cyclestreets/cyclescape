@@ -294,6 +294,12 @@
       success:
         thank_you: "Thank you for your feedback."
         close: "< Back to site"
+  thread_priorities:
+    very_high: "Top-priority"
+    high: "Important"
+    medium: "Moderately Important"
+    low: "Marginal Interest"
+    very_low: "Not of Interest"
   user:
     locations:
       create:

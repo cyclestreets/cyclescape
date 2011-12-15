@@ -12,7 +12,7 @@ describe "user priorities" do
 
     it "should let you choose a priority" do
       within (".priority-panel") do
-        select "Very_high", from: "Priority"
+        select I18n.t(".thread_priorities.very_high"), from: "Priority"
         click_on "Save"
       end
 
@@ -21,12 +21,12 @@ describe "user priorities" do
 
     it "should let you update a priority" do
       within (".priority-panel") do
-        select "Very_low", from: "Priority"
+        select I18n.t(".thread_priorities.very_low"), from: "Priority"
         click_on "Save"
       end
 
       within (".priority-panel") do
-        select "Medium", from: "Priority"
+        select I18n.t(".thread_priorities.medium"), from: "Priority"
         click_on "Save"
       end
 

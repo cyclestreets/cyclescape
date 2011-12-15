@@ -25,6 +25,6 @@ class UserThreadPriority < ActiveRecord::Base
   validates :thread, presence: true
 
   def self.priorities_map
-    PRIORITIES.map {|p,v| [p.to_s.capitalize, v] }
+    PRIORITIES.map {|p,v| [I18n.t(".thread_priorities.#{p.to_s}"), v] }
   end
 end
