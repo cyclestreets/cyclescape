@@ -215,6 +215,7 @@
       failure: "Couldn't delete the thread"
       success: "Thread deleted"
     index:
+      latest_activity: "Latest activity %{ago} ago"
       title: "Threads"
     new:
       title: "New Thread"

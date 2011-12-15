@@ -63,6 +63,10 @@ class MessageThread < ActiveRecord::Base
     messages.count
   end
 
+  def latest_activity_at
+    messages.empty? ? updated_at : messages.last.updated_at
+  end
+
   def priority_for(user)
     user_priorities.where(user_id: user.id).first
   end
