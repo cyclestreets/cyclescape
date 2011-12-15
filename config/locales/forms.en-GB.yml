@@ -39,17 +39,25 @@
         privacy: "Select if this thread should be visible to members of the group only or everyone."
     actions:
       update: "Save"
+      deadline_message:
+        create: "Add Deadline"
       group_membership:
         create: "Invite member"
+      library_item_message:
+        create: "Add Library Item"
       library/document:
         create: "Upload"
       library/note:
         create: "Create Note"
         attach_to_document: "Attach note"
+      link_message:
+        create: "Add Link"
       message:
         create: "Post Message"
       message_thread:
         create: "Create Thread"
+      photo_message:
+        create: "Add Photo"
       site_comment:
         create: "Send Feedback"
       user_profile:
