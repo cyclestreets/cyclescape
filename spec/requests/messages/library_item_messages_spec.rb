@@ -20,7 +20,7 @@ describe "Library item messages" do
       library_item_form do
         select notes.first.title, from: "Item"
         fill_in "Message", with: "This note seems relevant."
-        click_on "Create Library item message"
+        click_on "Add Library Item"
       end
       page.should have_link(notes.first.title)
       page.should have_content("This note seems relevant")
