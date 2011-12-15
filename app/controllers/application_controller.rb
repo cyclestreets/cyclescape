@@ -42,6 +42,7 @@ class ApplicationController < ActionController::Base
   def current_group
     @current_group
   end
+  helper_method :current_group
 
   def permission_denied
     if current_user.nil?
