@@ -114,15 +114,9 @@ describe "Message threads" do
       end
 
       context "subscribers" do
-        it "should show the number of subscribers" do
-          page.should have_content("0 subscribers")
-          click_on "Subscribe"
-          page.should have_content("1 subscriber")
-        end
-
         it "should show the names of subscribers" do
-          click_on "Subscribe"
-          within(".subscription-panel") do
+          click_on "Follow this thread"
+          within(".subscribers") do
             page.should have_content(current_user.name)
           end
         end
