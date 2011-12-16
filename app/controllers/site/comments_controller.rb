@@ -1,6 +1,6 @@
 class Site::CommentsController < ApplicationController
   def index
-    @site_comments = SiteComment.order("created_at desc")
+    @site_comments = SiteComment.order("created_at desc").page(params[:page])
   end
 
   def new

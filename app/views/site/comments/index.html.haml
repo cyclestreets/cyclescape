@@ -20,5 +20,6 @@
         %td= simple_format comment.body
         %td= comment.context_url
         %td= comment.context_data
+  = will_paginate @site_comments
 - else
   = t ".no_comments"
