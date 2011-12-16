@@ -8,7 +8,7 @@
       = f2.inputs do
         = f2.input :full_name, hint: t("formtastic.hints.group_membership.full_name")
         = f2.input :email
-    = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
+    = f.input :role, :as => :radio, :collection => f.object.class.allowed_roles_map
   = f.buttons do
     = f.commit_button
     = cancel_link group_members_path
