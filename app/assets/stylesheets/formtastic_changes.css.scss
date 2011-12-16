@@ -15,10 +15,10 @@ form.formtastic fieldset ol li fieldset legend { margin-left: -6px;}
 
 form.formtastic fieldset > ol {
   // Right-align labels
-  > li label {
+  > li.input .label {
     text-align: right;
-    padding-right: 2%;
-    padding-top: 5px;
+    width: 23%;
+    margin-right: 2%;
   }
   // Some padding on text inputs
   > li.stringish input {
@@ -39,11 +39,13 @@ form.formtastic {
     padding-left: 27%;
   }
   fieldset > ol > li.input {
-    p.inline-errors, p.inline-hints {
-      margin: 0.5em 0 0 27%;
-    }
     &.boolean label {
       padding-left: 27%;
     }
   }
+}
+
+// Fix colour override
+form.formtastic legend {
+  color: inherit;
 }
