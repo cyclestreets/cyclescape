@@ -65,3 +65,10 @@ jQuery ->
       $(this).parents(".inner:first").html(data)
     .live "ajax:error", (e, xhr, status, error) ->
       $(this).parents(".inner:first").html(xhr.responseText)
+
+  # Tools menu
+  $(document)
+    .on "click", "menu.tools", ->
+      $(this).toggleClass("reveal")
+    .on "mouseleave", "menu.tools", ->
+      $(this).removeClass("reveal")

@@ -141,8 +141,17 @@ section.thread {
   }
   ul {
     @include list-reset;
-    left: -999999px;
+    right: 999999px;
+    top: 20px;
     position: absolute;
+    width: 180px;
+    background: white;
+    @include border-radius(2px);
+    border: 1px solid $lightergrey;
+    padding: 6px;
+  }
+  &.reveal ul {
+    right: 0;
   }
 }
 article:hover > menu.tools, header:hover > menu.tools {
