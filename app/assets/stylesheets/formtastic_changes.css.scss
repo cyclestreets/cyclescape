@@ -49,3 +49,8 @@ form.formtastic {
 form.formtastic legend {
   color: inherit;
 }
+
+// Override the legend's label on radio choices
+form.formtastic .choices .label label {
+  position: static;
+}
