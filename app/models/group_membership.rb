@@ -20,6 +20,8 @@ class GroupMembership < ActiveRecord::Base
   scope :committee, where("role = 'committee'")
   scope :normal, where("role = 'member'")
 
+  after_initialize :set_default_role
+
   before_validation :replace_with_existing_user
   before_validation :invite_user_if_new
 
@@ -50,5 +52,9 @@ class GroupMembership < ActiveRecord::Base
   def invite_user_if_new
     user && user.new_record? && user.invite!
     true
+  end
+
+  def set_default_role
+    self.role ||= "member"
   end
 end

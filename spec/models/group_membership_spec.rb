@@ -24,12 +24,17 @@ describe GroupMembership do
     it "must belong to a user (except association build on new won't set it!)"
 
     it "must have a role" do
+      subject.role = ""
       subject.should have(1).error_on(:role)
     end
   end
 
   describe "role" do
     subject { GroupMembership.new }
+
+    it "should default to member" do
+      subject.role.should eql("member")
+    end
 
     it "may be 'committee'" do
       subject.role = "committee"
