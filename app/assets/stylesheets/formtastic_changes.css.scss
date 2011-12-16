@@ -38,9 +38,9 @@ form.formtastic {
   fieldset.buttons {
     padding-left: 27%;
   }
-  fieldset > ol > li {
+  fieldset > ol > li.input {
     p.inline-errors, p.inline-hints {
-      margin-left: 27%;
+      margin: 0.5em 0 0 27%;
     }
     &.boolean label {
       padding-left: 27%;

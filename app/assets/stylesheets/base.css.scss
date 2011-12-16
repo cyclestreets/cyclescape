@@ -79,7 +79,7 @@ ul, ol {
   @include list-reset-copy;
 }
 
-ol li {
+ol.numbered li {
   list-style: decimal;
 }
 
