@@ -204,6 +204,16 @@ describe User do
     end
   end
 
+  context "prioritised threads" do
+    subject { FactoryGirl.create(:user) }
+    let(:thread) { FactoryGirl.create(:message_thread) }
+    let!(:priority) { FactoryGirl.create(:user_thread_priority, user: subject, thread: thread) }
+
+    it "should contain the thread" do
+      subject.prioritised_threads.should include(thread)
+    end
+  end
+
   context "account disabling" do
     subject { FactoryGirl.create(:user) }
 

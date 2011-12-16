@@ -3,4 +3,5 @@
   - @threads.each do |thread|
     %article.thread_summary
       %h1= link_to thread.title, {action: :show, id: thread}
-      %p== Created #{time_ago_in_words(thread.created_at)} ago
+      %p= t ".latest_activity", ago: time_ago_in_words(thread.latest_activity_at)
+  = will_paginate @threads

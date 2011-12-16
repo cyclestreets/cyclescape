@@ -196,6 +196,13 @@
     tags:
       panel:
         edit_tags: "edit"
+    user_priorities:
+      create:
+        success: "Priority saved"
+        failure: "Couldn't save your priority"
+      update:
+        success: "Priority updated"
+        failure: "Couldn't update your priority"
   message_threads:
     compact:
       group_private: "Group Private"
@@ -210,7 +217,8 @@
       failure: "Couldn't delete the thread"
       success: "Thread deleted"
     index:
-      title: "Threads"
+      latest_activity: "Latest activity %{ago} ago"
+      title: "Public Threads"
     new:
       title: "New Thread"
     show:
@@ -290,6 +298,12 @@
       success:
         thank_you: "Thank you for your feedback."
         close: "< Back to site"
+  thread_priorities:
+    very_high: "Top-priority"
+    high: "Important"
+    medium: "Moderately Important"
+    low: "Marginal Interest"
+    very_low: "Not of Interest"
   user:
     locations:
       create:
@@ -550,3 +564,8 @@
 
       full_messages:
         format: "%{attribute} %{message}"
+
+  will_paginate:
+    next_label: "Next"
+    previous_label: "Previous"
+    page_gap: "\u2026"
