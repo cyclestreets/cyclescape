@@ -17,6 +17,9 @@ module ApplicationHelper
 
       add_formats(page)
 
+      page << 'MapDisplay.init(map)'
+      page << 'MapDisplay.setSavedLayers()'
+
       yield(map, page) if block_given?
     end
   end
