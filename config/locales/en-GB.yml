@@ -298,6 +298,21 @@
       success:
         thank_you: "Thank you for your feedback."
         close: "< Back to site"
+  thread_mailer:
+    new_deadline_message:
+      added: "%{name} added a deadline to the thread"
+    new_library_item_message:
+      added: "%{name} added an item from the library to the thread."
+    new_link_message:
+      added: "%{name} added a link to the thread."
+    new_message:
+      added: "%{name} added a message to the thread."
+    new_photo_message:
+      added: "%{name} added a photo to the thread."
+      view_the_photo: "You can view the photo at the following url:"
+    footer:
+      thread: "Cyclescape thread"
+      unsubscribe: "You can unsubscribe from notifications on the thread page."
   thread_priorities:
     very_high: "Top-priority"
     high: "Important"

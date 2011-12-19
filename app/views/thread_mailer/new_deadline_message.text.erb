@@ -1,0 +1,6 @@
+<%= t ".added" , name: @message.created_by.name %>
+
+<%= l @message.component.deadline.to_date, format: :long %>
+
+<%= @message.component.title %>
+<%= render partial: "footer" %>

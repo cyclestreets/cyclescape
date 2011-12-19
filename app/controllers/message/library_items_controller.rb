@@ -8,6 +8,7 @@ class Message::LibraryItemsController < Message::BaseController
     @message.component = @library_item
 
     if @message.save
+      ThreadNotifier.notify_subscribers(@thread, :new_library_item_message, @message)
       set_flash_message(:success)
     else
       set_flash_message(:failure)

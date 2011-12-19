@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Thread subscriptions" do
   let(:thread) { FactoryGirl.create(:message_thread) }
   let(:subscribe_by_email_field) { I18n.t("formtastic.labels.thread_subscription.send_email") }
-  let(:subscribe_button) { find_button("Follow this thread") }
+  let(:subscribe_button) { find_button(I18n.t("formtastic.actions.thread_subscription.create")) }
 
   context "site user subscribe" do
     include_context "signed in as a site user"
