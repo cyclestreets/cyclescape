@@ -192,6 +192,63 @@ describe "Issues" do
     end
   end
 
+  context "editing" do
+    let(:edit_text) { "Edit this issue" }
+
+    context "as an admin" do
+      include_context "signed in as admin"
+
+      let(:issue) { FactoryGirl.create(:issue) }
+
+      it "should show you an edit link" do
+        visit issue_path(issue)
+        page.should have_content(edit_text)
+      end
+
+      it "should let you edit the issue" do
+        visit issue_path(issue)
+        click_on edit_text
+        page.should have_content("Edit Issue")
+        fill_in "Title", with: "Something New"
+        #click_on "Save"
+        #current_path.should == issue_path(issue)
+        #page.should have_content("Something New")
+      end
+    end
+
+    context "as the creator" do
+      include_context "signed in as a site user"
+
+      context "recent" do
+        let(:issue) { FactoryGirl.create(:issue, created_by: current_user) }
+
+        it "should show you an edit link" do
+          visit issue_path(issue)
+          page.should have_content(edit_text)
+        end
+      end
+
+      context "long ago" do
+        let(:issue) { FactoryGirl.create(:issue, created_by: current_user, created_at: 2.days.ago) }
+
+        it "should not show you an edit link" do
+          visit issue_path(issue)
+          page.should_not have_content(edit_text)
+        end
+      end
+    end
+
+    context "as another user" do
+      include_context "signed in as a site user"
+      let(:issue) { FactoryGirl.create(:issue) }
+
+      it "should not show you an edit link" do
+        visit issue_path(issue)
+        page.should_not have_content(edit_text)
+      end
+    end
+  end
+
   context "voting" do
     let(:issue) { FactoryGirl.create(:issue) }
     let(:meg) { FactoryGirl.create(:meg) }
