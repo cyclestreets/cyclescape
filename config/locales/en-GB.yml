@@ -44,6 +44,7 @@
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
       subscribed_threads: "Subscribed Threads"
+      update_your_areas: "Update your areas"
   devise:
     registrations:
       edit:
