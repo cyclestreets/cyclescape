@@ -111,7 +111,7 @@
         everyone: "Everyone"
     tags:
       panel:
-        edit_tags: "edit"
+        edit_tags: "edit tags"
   issues:
     compact:
       created_by: "Created by"
