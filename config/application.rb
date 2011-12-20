@@ -52,6 +52,9 @@ module Cyclescape
     # Set cache storage
     config.cache_store = :redis_store
 
+    # ActionMailer default URL options
+    config.action_mailer.default_url_options = {host: "www.cyclescape.org"}
+
     # Default notification e-mail from address
     config.default_email_from_domain = "cyclescape.org"
     config.default_email_from = "Cyclescape <info@cyclescape.org>"

@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :no_disabled_users
   before_filter :set_auth_user
-  before_filter :set_default_mailer_options
   before_filter :load_group_from_subdomain
   layout :set_xhr_layout
   filter_access_to :all
@@ -18,11 +17,6 @@ class ApplicationController < ActionController::Base
 
   def set_auth_user
     Authorization.current_user = current_user
-  end
-
-  def set_default_mailer_options
-    ActionMailer::Base.default_url_options[:host] = request.host
-    ActionMailer::Base.default_url_options[:port] = (request.port == 80) ? nil : request.port
   end
 
   def set_xhr_layout
