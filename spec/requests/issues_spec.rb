@@ -210,9 +210,9 @@ describe "Issues" do
         click_on edit_text
         page.should have_content("Edit Issue")
         fill_in "Title", with: "Something New"
-        #click_on "Save"
-        #current_path.should == issue_path(issue)
-        #page.should have_content("Something New")
+        click_on "Save"
+        current_path.should == issue_path(issue)
+        page.should have_content("Something New")
       end
     end
 

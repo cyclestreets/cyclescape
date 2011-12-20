@@ -27,7 +27,7 @@ describe UserLocation do
 
     it "should have a geojson string" do
       subject.loc_json.should be_a(String)
-      subject.loc_json.should eql(RGeo::GeoJSON.encode(subject.location).to_json)
+      subject.loc_json.should eql(RGeo::GeoJSON.encode(RGeo::GeoJSON::Feature.new(subject.location)).to_json)
     end
   end
 
