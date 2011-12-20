@@ -41,7 +41,7 @@ module Cyclescape
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    config.filter_parameters += [:password, :password_confirmation]
 
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -51,6 +51,9 @@ module Cyclescape
 
     # Set cache storage
     config.cache_store = :redis_store
+
+    # ActionMailer default URL options
+    config.action_mailer.default_url_options = {host: "www.cyclescape.org"}
 
     # Default notification e-mail from address
     config.default_email_from_domain = "cyclescape.org"
