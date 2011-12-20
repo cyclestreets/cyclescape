@@ -40,7 +40,10 @@ MapDisplay = {
   },
 
   setSavedLayers: function() {
-    MapDisplay.setMapLayers(MapDisplay.getSavedLayers());
+    var savedLayers = MapDisplay.getSavedLayers();
+    if (savedLayers) {
+      MapDisplay.setMapLayers(savedLayers);
+    }
   },
 
   setMapLayers: function(layerConfig) {
@@ -71,11 +74,12 @@ MapDisplay = {
 
   getSavedLayers: function () {
     var cookietext = $.cookie('_cyclescape_location');
+    var layers;
     if (cookietext) {
       var cb = cookietext.split('|');
       //centre = lonLatToMercator( new OpenLayers.LonLat(cb[0], cb[1]));
       //zoom = cb[2];
-      var layers = cb[3];
+      layers = cb[3];
     }
     return layers;
   }
