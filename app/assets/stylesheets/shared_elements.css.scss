@@ -369,3 +369,9 @@ section.new-message {
   background: white;
   border: 1px solid black;
 }
+
+// Missing translation
+body.development span.translation_missing {
+  text-decoration: underline;
+  color: red;
+}
