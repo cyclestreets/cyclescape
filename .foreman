@@ -1,0 +1,1 @@
+concurrency: inbound_mail=1, outbound_mail=3, resque_web=1
