@@ -27,5 +27,9 @@ FactoryGirl.define do
         mail.raw_message = mesg.to_s
       end
     end
+
+    trait :multipart_text_only do
+      raw_message { File.read(raw_email_path("qp_text_only_multipart")) }
+    end
   end
 end

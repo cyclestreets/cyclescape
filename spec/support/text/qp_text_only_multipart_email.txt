@@ -1,0 +1,56 @@
+Return-path: <test@example.com>
+Envelope-to: thread-39d8ebb34665033d26f8@cyclescape.org
+Delivery-date: Tue, 20 Dec 2011 22:16:41 +0000
+Received: from mx.qwghlm.org ([93.93.128.59])
+	by yali.mythic-beasts.com with esmtp (Exim 4.69)
+	(envelope-from <test@example.com>)
+	id 1Rd7zF-0007Aj-RJ
+	for thread-39d8ebb34665033d26f8@cyclescape.org; Tue, 20 Dec 2011 22:16:41 +0000
+Received: from mvl (helo=localhost)
+	by mx.qwghlm.org with local-esmtp (Exim 4.69 #1 (Debian))
+	id 1Rd7zF-0001sU-P8
+	for <thread-39d8ebb34665033d26f8@cyclescape.org>; Tue, 20 Dec 2011 22:16:41 +0000
+Date: Tue, 20 Dec 2011 22:16:41 +0000 (GMT)
+From: Test <test@example.com>
+To: Cyclescape <thread-39d8ebb34665033d26f8@cyclescape.org>
+Subject: Re: A14 Consultation
+In-Reply-To: <4ef108fd73753_60d6dd71d8460a4@sebastian.mail>
+Message-ID: <alpine.DEB.1.10.1112202214400.6865@pling.qwghlm.org>
+References: <4ef108fd73753_60d6dd71d8460a4@sebastian.mail>
+User-Agent: Alpine 1.10 (DEB 962 2008-03-14)
+MIME-Version: 1.0
+Content-Type: MULTIPART/MIXED; BOUNDARY="1566390400-899224107-1324419401=:6865"
+Sender: Test <test@example.com>
+Delivered-To: cyclescape-thread-39d8ebb34665033d26f8@cyclescape.org
+X-BlackCat-To: cyclescape-thread-39d8ebb34665033d26f8@cyclescape.org
+
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+
+--1566390400-899224107-1324419401=:6865
+Content-Type: TEXT/PLAIN; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: QUOTED-PRINTABLE
+
+
+
+On Tue, 20 Dec 2011, Cyclescape wrote:
+
+> Robin Bird added a message to the thread.
+>
+> I believe the idea is that 20m will be used to work out what to do and=20
+> how much that would cost. I therefore think that we do need to push for=
+=20
+> cycle infrastructure along the A14 as a way of allowing them to justify=
+=20
+> not widening the road quiet so much.
+
+I think the =C2=A320m is actually to implement things though, not a feasibi=
+lity=20
+study. The current consultation seems to be about asking people what the=20
+=C2=A320m should be spent on:
+
+http://www.dft.gov.uk/consultations/dft-20111212
+
+"schemes delivered over the next two years"
+
+--1566390400-899224107-1324419401=:6865--
