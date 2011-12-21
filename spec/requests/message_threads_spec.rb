@@ -51,8 +51,6 @@ describe "Message threads" do
           end
         end
       end
-
-      it "should not allow access to a private thread"
     end
 
     context "deleted issue" do
