@@ -39,7 +39,7 @@ authorization do
     has_permission_on :issues, to: [:new, :create, :vote_up, :vote_down]
     has_permission_on :issue_tags, to: [:update]
     has_permission_on :messages, to: [:new, :create]
-    has_permission_on :message_threads, :issue_message_threads, to: [:new, :create]
+    has_permission_on :issue_message_threads, to: [:new, :create]
     has_permission_on :group_message_threads do
       to [:new, :create]
       if_attribute group: is_in { user.groups }
