@@ -214,4 +214,44 @@ describe "Message threads" do
       end
     end
   end
+
+  context "privacy" do
+    let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
+
+    context "as a guest" do
+      it "should not show the private thread" do
+        visit thread_path(private_thread)
+        page.should have_content("You need to sign in or sign up before continuing.")
+      end
+    end
+
+    context "as a signed in member" do
+      include_context "signed in as a site user"
+
+      it "should not show the private thread" do
+        visit thread_path(private_thread)
+        page.should have_content("You are not authorised to access that page.")
+      end
+    end
+
+    context "as a member of the correct group" do
+      include_context "signed in as a group member"
+
+      let(:group_private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
+
+      it "should show the private thread" do
+        visit thread_path(group_private_thread)
+        page.should have_content(group_private_thread.title)
+      end
+    end
+
+    context "as an admin" do
+      include_context "signed in as admin"
+
+      it "should let admins see any thread" do
+        visit thread_path(private_thread)
+        page.should have_content(private_thread.title)
+      end
+    end
+  end
 end

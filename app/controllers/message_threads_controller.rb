@@ -1,6 +1,7 @@
 class MessageThreadsController < ApplicationController
   MESSAGE_COMPONENTS = [PhotoMessage]
   helper_method :message_components
+  filter_access_to :show, attribute_check: true
 
   def index
     @threads = MessageThread.public.order("updated_at desc").page(params[:page])
