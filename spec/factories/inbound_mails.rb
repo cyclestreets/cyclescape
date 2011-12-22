@@ -16,7 +16,7 @@ FactoryGirl.define do
       to false
     end
 
-    recipient { to || "traumatic@strangeperil.co.uk" }
+    recipient { to || "cyclescape@example.com" }
     raw_message { File.read(raw_email_path("basic")) }
 
     after_build do |mail, proxy|
@@ -29,7 +29,7 @@ FactoryGirl.define do
     end
 
     trait :multipart_text_only do
-      raw_message { File.read(raw_email_path("qp_text_only_multipart")) }
+      raw_message { File.read(raw_email_path("qp_text_only_multipart"), encoding: "UTF-8") }
     end
   end
 end

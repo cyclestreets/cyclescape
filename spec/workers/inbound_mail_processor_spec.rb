@@ -16,7 +16,7 @@ describe InboundMailProcessor do
     let(:email_recipient) { "thread-#{thread.public_token}@cyclescape.org" }
     let(:inbound_mail) { FactoryGirl.create(:inbound_mail, to: email_recipient) }
 
-    context "message" do
+    context "plain text email" do
       before do
         subject.perform(inbound_mail.id)
       end
@@ -32,6 +32,26 @@ describe InboundMailProcessor do
 
       it "should have be created by a new user with the email address" do
         thread.messages.first.created_by.email.should == inbound_mail.message.from.first
+      end
+    end
+
+    context "multipart text-only email" do
+      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :multipart_text_only, to: email_recipient) }
+
+      before do
+        subject.perform(inbound_mail.id)
+      end
+
+      it "should create a new message on the thread" do
+        thread.should have(1).message
+      end
+
+      it "should have the same text as the email text part" do
+        # Still gsub'ing out newlines as they never match
+        message_body = thread.messages.first.body.gsub(/\n|\r/, '')
+        # We incorrectly get ASCII-8BIT encoding back and have to force it to UTF-8
+        email_body = inbound_mail.message.text_part.body.to_s.force_encoding("UTF-8").gsub(/\n|\r/, '')
+        message_body.should == email_body
       end
     end
 
