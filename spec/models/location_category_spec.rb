@@ -11,5 +11,25 @@
 require 'spec_helper'
 
 describe LocationCategory do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should validate_presence_of(:name) }
+
+  context "uniqueness" do
+    before do
+      FactoryGirl.create(:location_category)
+    end
+
+    it { should validate_uniqueness_of(:name) }
+  end
+
+  context "factory" do
+    it "should be valid and save" do
+      lc = FactoryGirl.build(:location_category)
+      lc.should be_valid
+      lc.save.should be_true
+    end
+  end
+
+  describe "associations" do
+    it { should have_many(:user_locations) }
+  end
 end
