@@ -10,6 +10,7 @@
 
 %section.issues
   %h2= t ".issues_in_your_area"
+  %p= link_to t(".update_your_areas"), user_locations_path
   = issues_list @relevant_issues, collapsed: true
 
 %section.other
