@@ -1,4 +1,5 @@
 class IssuesController < ApplicationController
+  filter_access_to [:edit, :update, :destroy], attribute_check: true
   
   def index
     @issues = Issue.order("created_at DESC").limit(10)
@@ -24,6 +25,22 @@ class IssuesController < ApplicationController
     else
       @start_location = index_start_location
       render :new
+    end
+  end
+
+  def edit
+    @issue = Issue.find(params[:id])
+    @start_location = @issue.location
+  end
+
+  def update
+    @issue = Issue.find(params[:id])
+
+    if @issue.update_attributes(params[:issue])
+      set_flash_message(:success)
+      redirect_to action: :show
+    else
+      render :edit
     end
   end
 
