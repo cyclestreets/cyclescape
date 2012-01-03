@@ -181,7 +181,7 @@ article:hover > menu.tools, header:hover > menu.tools {
       }
     }
     .unread-count {
-      @extend .reply-count;
+      @extend .message-count;
       color: $colour1;
     }
     .item-content {
@@ -193,56 +193,76 @@ article:hover > menu.tools, header:hover > menu.tools {
       }
     }
     .permissions {
-      width: 60px;
-      float: right;
-      color: $lightgrey;
-      text: {
-        align: right;
-        transform: uppercase;
-      }
-      font: {
-        size: 11px;
-        weight: bold;
-      }
+      float:right;
     }
   }
 }
+
+.meta {
+  p {
+    font-size: 12px;
+    color: $lightgrey;
+  }
+  a,
+  span {
+    color: $grey2;
+  }
+}
+
+.permissions {
+  width: 60px;
+  color: $lightgrey;
+  text: {
+    align: right;
+    transform: uppercase;
+  }
+  font: {
+    size: 11px;
+    weight: bold;
+  }
+}
+
+
 
 #page aside#sidebar section.map {
   padding: 10px;
 }
 
+
 .minimap {
   position: relative;
   padding: 0 10px;
   height: 210px;
-  .tools {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+}
+.map {
+  position: relative;
+  height:400px;
+}
+.map-tools {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: block;
+  background: $white;
+  padding: 5px 0 0 5px;
+  button {
     display: block;
-    background: $white;
-    padding: 5px 10px 10px 5px;
-    @include border-radius(0 0 20px 0);
-    button {
-      display: block;
-      float: left;
-      width: 27px;
-      height: 27px;
-      border: none;
-      text-indent: -999999px;
-      &.person {
-        background: image-url("sprite.png") -3px -130px no-repeat;
-        &:hover {
-          background-position: -43px -130px;
-        }
+    float: left;
+    width: 27px;
+    height: 27px;
+    border: none;
+    text-indent: -999999px;
+    &.person {
+      background: image-url("sprite.png") -3px -130px no-repeat;
+      &:hover {
+        background-position: -43px -130px;
       }
-      &.zoom {
-        margin-left: 5px;
-        background: image-url("sprite.png") -3px -180px no-repeat;
-        &:hover {
-          background-position: -43px -180px;
-        }
+    }
+    &.zoom {
+      margin-left: 5px;
+      background: image-url("sprite.png") -3px -180px no-repeat;
+      &:hover {
+        background-position: -43px -180px;
       }
     }
   }
@@ -258,58 +278,58 @@ section.new-message {
     color: $colour1;
     float: left;
   }
-  .tab-nav {
-    float: right;
-    ul {
-      @include list-reset;
-      li {
-        a {
-          width: 67px;
-          height: 90px;
-          margin-left: 10px;
-          color: $grey2;
-          text: {
-            transform: uppercase;
-            align: center;
+  ul.tabs {
+    @include list-reset;
+    li {
+      a {
+        width: 67px;
+        height: 90px;
+        margin-left: 10px;
+        color: $grey2;
+        text: {
+          transform: uppercase;
+          align: center;
+        }
+        font-size: 11px;
+        span {
+          display: block;
+          width: 65px;
+          height: 65px;
+          border: 1px solid $lightgrey;
+          background: $paneborder image-url("wysiwyg.png") 0 0 no-repeat;
+          @include border-radius(10px);
+          &.text {
+            background-position: 16px 12px;
           }
-          font-size: 11px;
+          &.photo {
+            background-position: -60px 12px;
+          }
+          &.map {
+            background-position: -137px 12px;
+          }
+          &.link {
+            background-position: -212px 12px;
+          }
+          &.library {
+            background-position: -288px 12px;
+          }
+          &.deadline {
+            background-position: -379px 12px;
+          }
+        }
+        &:hover {
+          color: $lightblack;
+          text-decoration: none;
           span {
-            display: block;
-            width: 65px;
-            height: 65px;
-            border: 1px solid $lightgrey;
-            background: $paneborder image-url("wysiwyg.png") 0 0 no-repeat;
-            @include border-radius(10px);
-            &.text {
-              background-position: 16px 12px;
-            }
-            &.photo {
-              background-position: -60px 12px;
-            }
-            &.map {
-              background-position: -137px 12px;
-            }
-            &.link {
-              background-position: -212px 12px;
-            }
-            &.library {
-              background-position: -288px 12px;
-            }
-          }
-          &:hover {
-            color: $lightblack;
-            text-decoration: none;
-            span {
-              background-color: $pane2;
-            }
+            background-color: $pane2;
           }
         }
       }
     }
   }
-  .tab-wrapper {
+  .panes {
     clear: both;
-    .tab {
+    .pane {
       h3 {
         color: $lightgrey2;
       }
@@ -374,4 +394,37 @@ section.new-message {
 body.development span.translation_missing {
   text-decoration: underline;
   color: red;
+}
+
+
+.image-scroller {
+  border: 1px solid $paneborder;
+  overflow:hidden;
+  @include border-radius(0 0 10px 10px);
+  .image-scroller-wrap {
+    height:200px;
+    overflow:hidden;
+  }
+  footer {
+    height:33px;
+    overflow:hidden;
+    background:$pane1;
+    @include border-radius(0 0 9px 9px);
+    p {
+      margin:7px 10px 0 10px;
+      float:left;
+      color:$grey2;
+      font: {
+        style:italic;
+        size:12px;
+      }
+    }
+    menu {
+      float:right;
+      a {
+        float:left;
+        border-left:1px solid $paneborder;
+      }
+    }
+  }
 }

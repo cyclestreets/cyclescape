@@ -1,9 +1,9 @@
-  <div id="page" role="main">
-    <div class="wrapper">
-      <article id="content">
+<div id="page" role="main" class="alt-layout">
+  <div class="wrapper">
+    <article id="content">
         <h1>Flyover subway is closed to cycles</h1>
         
-        <div class="categories">
+        <div class="tags">
           <p>Categories:</p>
           <ul>
             <li><a href="/">cycle path</a></li>
@@ -24,85 +24,61 @@
         <a href="/" class="read-more-box"><span>read more</span></a>
       </section>
 
+      <h2>Location</h2>
+      <section class="map">
+        <%= image_tag("exmap1.jpg", width: "570", height: "400") %>
+        <menu class="map-tools">
+          <button class="person">Person</button>
+          <button class="zoom">Zoom</button>
+        </menu>
+      </section>
+    </article>
+
+    <aside id="sidebar">
+      <button class="btn-green">Create new thread</button>
+
       <section>
         <header>
           <h2>Threads</h2>
-          <button>New Thread</button>
         </header>
-        <ul class="thread-list">
+        <ul class="sidebar-threadlist">
           <li>
-            <div class="reply-count"><span>3</span>replies</div>
-            <div class="unread-count"><span>1</span>unread</div>
-            <div class="item-content">
-              <h4><a href="/">Planning office discussions</a></h4>
-              <div class="categories">
-                <p>Categories:</p>
-                <ul>
-                  <li><a href="/">cycle path</a></li>
-                  <li><a href="/">crossings</a></li>
-                  <li><a href="/">obstructions</a></li>
-                </ul>
-              </div>
-              <div class="meta">
-                <p>Created by: <a href="/">supercooljames</a> 5 days ago</p>
-              </div>
+            <h4><a href="/">Planning office discussions</a></h4>
+            <div class="meta">
+              <p><a href="/">Cambridge Cycling Campaign</a> 5 days ago</p>
+            </div>
+
+            <div class="permissions">private</div>
+          </li>
+          <li>
+            <h4><a href="/">Planning office discussions</a></h4>
+
+            <div class="meta">
+              <p><a href="/">Placeford Cycles</a> 5 days ago</p>
             </div>
             <div class="permissions">private</div>
           </li>
           <li>
-            <div class="reply-count"><span>21</span>replies</div>
-            <div class="unread-count"><span>0</span>unread</div>
-            <div class="item-content">
-              <h4><a href="/">Planning office discussions</a></h4>
-              <div class="categories">
-                <p>Categories:</p>
-                <ul>
-                  <li><a href="/">cycle path</a></li>
-                  <li><a href="/">crossings</a></li>
-                  <li><a href="/">obstructions</a></li>
-                </ul>
-              </div>
-              <div class="meta">
-                <p>Created by: <a href="/">supercooljames</a> 5 days ago</p>
-              </div>
-            </div>
-            <div class="permissions">private</div>
-          </li>
-          <li>
-            <div class="reply-count"><span>13</span>replies</div>
-            <div class="unread-count"><span>4</span>unread</div>
-            <div class="item-content">
-              <h4><a href="/">Planning office discussions</a></h4>
-              <div class="categories">
-                <p>Categories:</p>
-                <ul>
-                  <li><a href="/">cycle path</a></li>
-                  <li><a href="/">crossings</a></li>
-                  <li><a href="/">obstructions</a></li>
-                </ul>
-              </div>
-              <div class="meta">
-                <p>Created by: <a href="/">supercooljames</a> 5 days ago</p>
-              </div>
+            <h4><a href="/">Planning office discussions</a></h4>
+
+            <div class="meta">
+              <p><a href="/">Cambridge Cycling Campaign</a> 5 days ago</p>
             </div>
             <div class="permissions">shared</div>
           </li>
         </ul>
       </section>
-    </article>
 
-    <aside id="sidebar">
-      <button class="btn-green">Follow this issue</button>
-      <section id="location">
-        <h2>Location</h2>
-        <!-- temp -->
-        <div class="mini-map">
-          <img src="/assets/images/minimap.jpg" />
-          <menu class="tools">
-            <button class="person">Person</button>
-            <button class="zoom">Zoom</button>
+      <section class="image-scroller">
+        <div class="image-scroller-wrap"></div>
+        <footer>
+          <p>3 images</p>
+          <menu>
+            <a href="/" class="btn-prev">prev</a>
+            <a href="/" class="btn-next">next</a>
           </menu>
-        </div>
-        <h4>Other local issues</h4>
-        <ul class="sidebarlist">
-          <li><a href="/">Crossing on Graham Stre
+        </footer>
+      </section>
+    </aside>
+  </div>
+</div>
