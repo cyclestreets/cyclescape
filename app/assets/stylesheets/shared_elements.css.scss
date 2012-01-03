@@ -277,58 +277,55 @@ section.new-message {
     color: $colour1;
     float: left;
   }
-  .tab-nav {
-    float: right;
-    ul {
-      @include list-reset;
-      li {
-        a {
-          width: 67px;
-          height: 90px;
-          margin-left: 10px;
-          color: $grey2;
-          text: {
-            transform: uppercase;
-            align: center;
+  ul.tabs {
+    @include list-reset;
+    li {
+      a {
+        width: 67px;
+        height: 90px;
+        margin-left: 10px;
+        color: $grey2;
+        text: {
+          transform: uppercase;
+          align: center;
+        }
+        font-size: 11px;
+        span {
+          display: block;
+          width: 65px;
+          height: 65px;
+          border: 1px solid $lightgrey;
+          background: $paneborder image-url("wysiwyg.png") 0 0 no-repeat;
+          @include border-radius(10px);
+          &.text {
+            background-position: 16px 12px;
           }
-          font-size: 11px;
+          &.photo {
+            background-position: -60px 12px;
+          }
+          &.map {
+            background-position: -137px 12px;
+          }
+          &.link {
+            background-position: -212px 12px;
+          }
+          &.library {
+            background-position: -288px 12px;
+          }
+        }
+        &:hover {
+          color: $lightblack;
+          text-decoration: none;
           span {
-            display: block;
-            width: 65px;
-            height: 65px;
-            border: 1px solid $lightgrey;
-            background: $paneborder image-url("wysiwyg.png") 0 0 no-repeat;
-            @include border-radius(10px);
-            &.text {
-              background-position: 16px 12px;
-            }
-            &.photo {
-              background-position: -60px 12px;
-            }
-            &.map {
-              background-position: -137px 12px;
-            }
-            &.link {
-              background-position: -212px 12px;
-            }
-            &.library {
-              background-position: -288px 12px;
-            }
-          }
-          &:hover {
-            color: $lightblack;
-            text-decoration: none;
-            span {
-              background-color: $pane2;
-            }
+            background-color: $pane2;
           }
         }
       }
     }
   }
-  .tab-wrapper {
+  .panes {
     clear: both;
-    .tab {
+    .pane {
       h3 {
         color: $lightgrey2;
       }
