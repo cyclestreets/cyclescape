@@ -313,6 +313,9 @@ section.new-message {
           &.library {
             background-position: -288px 12px;
           }
+          &.deadline {
+            background-position: -379px 12px;
+          }
         }
         &:hover {
           color: $lightblack;
