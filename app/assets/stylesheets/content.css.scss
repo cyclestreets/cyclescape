@@ -4,6 +4,14 @@
   background: $white;
   padding: 20px 0;
   overflow: hidden;
+  &.alt-layout {
+    #content {
+      width: 570px;
+    }
+    #sidebar {
+      width:360px;
+    }
+  }
   #content {
     width: 630px;
     margin-right: 30px;
@@ -43,15 +51,6 @@
         }
       }
     }
-    .meta {
-      p {
-        font-size: 12px;
-        color: $lightgrey;
-      }
-      a {
-        color: $grey2;
-      }
-    }
     section {
       header {
         overflow: hidden;
@@ -86,6 +85,7 @@
       width: 100%;
       padding: 15px;
       font-size: 18px;
+      margin-bottom:20px;
     }
     fieldset.buttons {
       padding: 0;
@@ -95,26 +95,27 @@
       }
     }
     section {
-      padding: 10px 0;
       margin: 0 0 20px 0;
-      border: 1px solid $paneborder;
-      @include border-radius(10px);
+      &.box {
+        padding: 10px 0;
+        border: 1px solid $paneborder;
+        @include border-radius(10px);
+        h2, h4, >a, form {
+          padding: 0 10px;
+        }
+      }
       h2 {
         font-size: 16px;
         color: $grey3;
-        padding: 0 10px;
       }
       h4 {
         color: $colour1;
-        padding: 0 10px;
         margin-top: 10px;
       }
       >a {
         font-size: 13px;
-        padding: 0 10px;
       }
       form {
-        padding: 0 10px;
         overflow: hidden;
         label {
           margin-top: 4px;
@@ -142,6 +143,19 @@
               text-decoration: none;
               background: $pane2;
             }
+          }
+        }
+      }
+      ul.sidebar-threadlist {
+        @include list-reset-soft;
+        li {
+          border-top:3px solid $grey;
+          overflow:hidden;
+          .meta {
+            float:left;
+          }
+          .permissions {
+            float:right;
           }
         }
       }
@@ -256,33 +270,130 @@
   }
 }
 
-
-/* Location Page */
-#sidebar section#location {
-  padding-bottom: 0;
-  ul.sidebarlist {
-    li {
-      a {
-        // font-size: 13px;
-        padding: 11px 45px 11px 10px;
-        background: $pane1 image-url("sprite.png") 260px -227px no-repeat;
-        &:hover {
-          background: $pane2 image-url("sprite.png") 260px -287px no-repeat;
-        }
-      }
-      &:last-child a {
-        border-bottom: none;
-        @include border-radius(0 0 10px 10px);
-      }
-    }
-  }
-}
-
 /* User locations page */
 section#user-locations {
   table {
     .tinymap {
       width: 200px;
+    }
+  }
+}
+
+
+/* User Profile */
+#user-details {
+  position:relative;
+  width:720px;
+  margin-left:240px;
+  header {
+    overflow:visible !important;
+    border-bottom:1px solid $paneborder;
+    margin-bottom:30px;
+    img.profile-pic {
+      position:absolute;
+      left:-240px;
+      top:0;
+    }
+    button {
+      position:absolute;
+      top:0;
+      right:0;
+    }
+  }
+  dl {
+    dt {
+      color: $lightgrey;
+      float:left;
+      width:80px;
+      font: {
+        style:italic;
+        weight:normal;
+        size:12px;
+      }
+      margin-bottom:30px;
+    }
+    dd {
+      color: $grey2;
+      float:left;
+      width:280px;
+      margin-bottom:30px;
+    }
+  }
+}
+#user-tabs {
+  clear:both;
+  nav {
+    margin-top:30px;
+    width:209px;
+    float:left;
+    background:$pane1;
+    border-top:1px solid $paneborder;
+    border-left:1px solid $paneborder;
+    border-bottom:1px solid $paneborder;
+    @include border-radius(10px 0 0 10px);
+    ul.tabs {
+      @include list-reset-soft;
+      li {
+        a {
+          position:relative;
+          width:159px;
+          height:20px;
+          padding:10px 40px 10px 10px;
+          color:$black;
+          font-size:13px;
+          border-bottom:1px solid $paneborder;
+          &.active {
+            background:$white;
+            border-right:1px solid $white;
+            z-index:2;
+            &:hover {
+              background:$white;
+              cursor:default;
+            }
+          }
+          &:hover {
+            text-decoration:none;
+            background:$pane2;
+          }
+          span.count {
+            display:block;
+            line-height:1;
+            font: {
+              size:11px;
+              weight:bold;
+            }
+            text-align:center;
+            letter-spacing:1px;
+            float:right;
+            color:$white;
+            padding:2px 4px;
+            margin-right:-30px;
+            background:$grey3;
+            border:2px solid $white;
+            @include border-radius(10px);
+            @include box-shadow(rgba(0, 0, 0, 0.3) 0 0 6px);
+          }
+        }
+        &:first-child a {
+          @include border-radius(10px 0 0 0);
+        }
+        &:last-child a {
+          border-bottom:none;
+          @include border-radius(0 0 0 10px);
+        }
+      }
+    }
+  }
+  .panes {
+    position:relative;
+    z-index:1;
+    float:left;
+    width:688px;
+    padding:30px;
+    border:1px solid $paneborder;
+    @include border-radius(10px);
+    .pane {
+      
     }
   }
 }

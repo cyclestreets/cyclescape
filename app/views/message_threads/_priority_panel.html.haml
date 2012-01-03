@@ -1,5 +1,5 @@
 - if signed_in?
-  %section.priority-panel
+  %section.priority-panel.box
     %h2= t ".thread_priority"
     = semantic_form_for (@thread.priority_for(current_user) || UserThreadPriority.new), url: thread_user_priorities_path(@thread) do |f|
       = f.inputs do

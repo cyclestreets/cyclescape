@@ -177,3 +177,21 @@ a.read-more-box {
     background: image-url("sprite.png") -60px -69px no-repeat;
   }
 }
+
+.btn-next,
+.btn-prev {
+  @include button-reset(0px);
+  width: 34px;
+  height: 34px;
+  background:image-url("sprite.png") 6px -430px no-repeat;
+  &:hover {
+    background-position:-34px -430px;
+  }
+}
+
+.btn-next {
+  background-position:8px -473px;
+  &:hover {
+    background-position:-32px -473px;
+  }
+}
