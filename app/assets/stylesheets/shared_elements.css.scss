@@ -233,16 +233,17 @@ article:hover > menu.tools, header:hover > menu.tools {
   padding: 0 10px;
   height: 210px;
 }
-.map {}
-.minimap .tools,
-.map .tools {
+.map {
+  position: relative;
+  height:400px;
+}
+.map-tools {
   position: absolute;
   right: 0;
   bottom: 0;
   display: block;
   background: $white;
-  padding: 5px 10px 10px 5px;
-  @include border-radius(0 0 20px 0);
+  padding: 5px 0 0 5px;
   button {
     display: block;
     float: left;
@@ -396,22 +397,33 @@ body.development span.translation_missing {
 
 
 .image-scroller {
-  height:240px;
   border: 1px solid $paneborder;
+  overflow:hidden;
   @include border-radius(0 0 10px 10px);
   .image-scroller-wrap {
     height:200px;
     overflow:hidden;
   }
   footer {
-    height:40px;
+    height:33px;
     overflow:hidden;
+    background:$pane1;
+    @include border-radius(0 0 9px 9px);
     p {
-      margin:0 10px;
+      margin:7px 10px 0 10px;
       float:left;
+      color:$grey2;
+      font: {
+        style:italic;
+        size:12px;
+      }
     }
     menu {
       float:right;
+      a {
+        float:left;
+        border-left:1px solid $paneborder;
+      }
     }
   }
 }

@@ -24,9 +24,13 @@
         <a href="/" class="read-more-box"><span>read more</span></a>
       </section>
 
+      <h2>Location</h2>
       <section class="map">
-        <h2>Location</h2>
         <%= image_tag("exmap1.jpg", width: "570", height: "400") %>
+        <menu class="map-tools">
+          <button class="person">Person</button>
+          <button class="zoom">Zoom</button>
+        </menu>
       </section>
     </article>
 
@@ -70,8 +74,8 @@
         <footer>
           <p>3 images</p>
           <menu>
-            <button>prev</button>
-            <button>next</button>
+            <a href="/" class="btn-prev">prev</a>
+            <a href="/" class="btn-next">next</a>
           </menu>
         </footer>
       </section>
