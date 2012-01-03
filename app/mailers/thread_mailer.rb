@@ -28,7 +28,7 @@ class ThreadMailer < ActionMailer::Base
     @message = message
     @thread = message.thread
     @subscriber = subscriber
-    email_from = ['"', t("application_name"),
+    email_from = ['"', message.created_by.name,
         '" <thread-', @thread.public_token, "@",
         Rails.application.config.default_email_from_domain, ">"]
     mail(to: subscriber.name_with_email,

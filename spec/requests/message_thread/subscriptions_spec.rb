@@ -47,7 +47,7 @@ describe "Thread subscriptions" do
         open_email(current_user.email, with_subject: /^Re/)
         current_email.should have_subject("Re: #{thread.title}")
         current_email.should have_body_text(/Notification test/)
-        current_email.should be_delivered_from("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
+        current_email.should be_delivered_from("#{current_user.name} <thread-#{thread.public_token}@cyclescape.org>")
       end
 
       it "should state I am subscribed by email" do

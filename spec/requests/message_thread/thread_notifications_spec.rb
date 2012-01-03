@@ -23,7 +23,7 @@ describe "thread notifications" do
       current_email.should have_subject("Re: #{thread.title}")
       current_email.should have_body_text(/Notification test/)
       current_email.should have_body_text(current_user.name)
-      current_email.should be_delivered_from("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
+      current_email.should be_delivered_from("#{current_user.name} <thread-#{thread.public_token}@cyclescape.org>")
     end
 
     it "should send an email for a link message" do
