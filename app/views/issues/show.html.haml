@@ -28,7 +28,7 @@
     %header
       %h2= t ".threads"
       - if permitted_to? :create, :issue_message_threads
-        %p= link_to t(".new_thread"), new_issue_thread_path(@issue), class: "button", rel: "#overlay"
+        %p= link_to t(".new_thread", count: @issue.threads.count), new_issue_thread_path(@issue), class: "button", rel: "#overlay"
     %ul.thread-list
       = render partial: "message_threads/compact", collection: @threads, as: :thread
 

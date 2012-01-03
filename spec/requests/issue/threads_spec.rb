@@ -9,7 +9,7 @@ describe "Issue threads" do
 
       it "should create a new public thread" do
         visit issue_path(issue)
-        click_on "New Thread"
+        click_on "Discuss"
         fill_in "Message", with: "Awesome!"
         click_on "Create Thread"
         page.should have_content(issue.title)
@@ -22,7 +22,7 @@ describe "Issue threads" do
 
       it "should still create a new public thread" do
         visit issue_path(issue)
-        click_on "New Thread"
+        click_on "Discuss"
         fill_in "Message", with: "Awesome!"
         click_on "Create Thread"
         page.should have_content(issue.title)
@@ -32,7 +32,7 @@ describe "Issue threads" do
 
       it "should create a new public group thread" do
         visit issue_path(issue)
-        click_on "New Thread"
+        click_on "Discuss"
         select current_group.name, from: "Owned by"
         fill_in "Message", with: "Awesome!"
         select "Public", from: "Privacy"
@@ -44,7 +44,7 @@ describe "Issue threads" do
 
       it "should create a new private group thread" do
         visit issue_path(issue)
-        click_on "New Thread"
+        click_on "Discuss"
         select current_group.name, from: "Owned by"
         fill_in "Message", with: "Awesome!"
         select "Group", from: "Privacy"

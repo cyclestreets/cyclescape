@@ -143,7 +143,10 @@
       confirm_delete: "Are you sure?"
       delete_issue: "Delete this issue"
       edit_issue: "Edit this issue"
-      new_thread: "New Thread"
+      new_thread:
+        zero: "Discuss"
+        one: "New Thread"
+        other: "New Thread"
       group_private: "Private to %{group}"
       group_public: "Public, by %{group}"
       public: "Public"
