@@ -17,7 +17,7 @@ describe "Library notes" do
     end
 
     it "should show the date when it was created" do
-      page.should have_content(I18n.localize(note.created_at))
+      page.should have_content(I18n.localize(note.created_at.to_date))
     end
   end
 
