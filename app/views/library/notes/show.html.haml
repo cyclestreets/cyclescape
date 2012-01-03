@@ -1,7 +1,6 @@
 %article.library.note
   %section.details
-    = l @note.created_at
-    = link_to_profile @note.created_by
+    %p= t ".added_by_html", name: link_to_profile(@note.created_by), time: l(@note.created_at.to_date)
   %section.tags
     = @tag_panel.render
   %section.note

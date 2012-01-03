@@ -186,6 +186,7 @@
       new:
         title: "New Document"
       show:
+        added_by_html: "Added by %{name} on %{time}"
         download: "Download document"
         comments: "Comments"
         notes: "Notes"
@@ -194,6 +195,8 @@
     notes:
       new:
         title: "New Note"
+      show:
+        added_by_html: "Added by %{name} on %{time}"
   mailers:
     notifications:
       gmr_confirmed:
