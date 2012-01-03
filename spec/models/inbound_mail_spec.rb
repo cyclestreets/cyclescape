@@ -41,8 +41,8 @@ describe InboundMail do
   context "factory" do
     it "should have a known recipient" do
       mail = FactoryGirl.build(:inbound_mail)
-      mail.recipient.should == "traumatic@strangeperil.co.uk"
-      mail.message.to.first.should == "traumatic@strangeperil.co.uk"
+      mail.recipient.should == "cyclescape@example.com"
+      mail.message.to.first.should == "cyclescape@example.com"
     end
 
     it "should adjust the recipients" do
