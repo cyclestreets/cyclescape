@@ -6,7 +6,6 @@
     = stylesheet_link_tag    "application"
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
     = javascript_include_tag "application"
-    %script(src="http://cdn.jquerytools.org/1.2.6/all/jquery.tools.min.js" type="text/javascript")
     = csrf_meta_tags
   %body{class: [Rails.env, controller_path.tr("/_", "-")].join(" ")}
     %header#site-header(role="banner")
