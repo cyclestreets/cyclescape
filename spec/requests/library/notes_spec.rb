@@ -29,4 +29,16 @@ describe "Library notes" do
       page.should have_content("Note text goes here")
     end
   end
+
+  context "with document" do
+    let(:note) { FactoryGirl.create(:library_note_with_document) }
+
+    before do
+      visit library_note_path(note)
+    end
+
+    it "should show the document title" do
+      page.should have_content(note.document.title)
+    end
+  end
 end

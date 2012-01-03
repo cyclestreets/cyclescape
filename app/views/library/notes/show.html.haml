@@ -1,6 +1,8 @@
 %article.library.note
   %section.details
     %p= t ".added_by_html", name: link_to_profile(@note.created_by), time: l(@note.created_at.to_date)
+    - if @note.document
+      = t ".note_on_document_html", document: link_to(@note.document.title, @note.document)
   %section.tags
     = @tag_panel.render
   %section.note
