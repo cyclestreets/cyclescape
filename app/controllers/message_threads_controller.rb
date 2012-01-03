@@ -1,25 +1,10 @@
 class MessageThreadsController < ApplicationController
   MESSAGE_COMPONENTS = [PhotoMessage]
   helper_method :message_components
+  filter_access_to :show, attribute_check: true
 
   def index
-    @threads = MessageThread.all
-  end
-
-  def new
-    @thread = MessageThread.new
-    @message = @thread.messages.build
-  end
-
-  def create
-    @thread = MessageThread.new(params[:thread].merge(created_by: current_user))
-    @message = @thread.messages.build(params[:message].merge(created_by: current_user))
-
-    if @thread.save
-      redirect_to action: :show, id: @thread
-    else
-      render :new
-    end
+    @threads = MessageThread.public.order("updated_at desc").page(params[:page])
   end
 
   def show

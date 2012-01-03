@@ -44,8 +44,11 @@
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
       subscribed_threads: "Subscribed Threads"
+      update_your_areas: "Update your areas"
   devise:
     registrations:
+      edit:
+        title: 'Edit Account Details'
       new:
         title: "Sign up"
     sessions:
@@ -55,10 +58,13 @@
   group:
     members:
       index:
-        title: "Members of %{group}"
-        new_member: "New Member"
+        actions: "Actions"
         committee: "Committee"
+        edit: "Edit"
+        member_name: "Member Name"
         members: "Members"
+        new_member: "New Member"
+        title: "Members of %{group}"
     memberships:
       new:
         title: "Invite New Member"
@@ -86,6 +92,9 @@
       index:
         title: "%{group}'s Threads"
         new_group_thread: "New Group Thread"
+      new:
+        for_group: "for %{name}"
+        title: "New Group Thread"
     profiles:
       update:
         success: "Profile Updated"
@@ -106,7 +115,7 @@
         everyone: "Everyone"
     tags:
       panel:
-        edit_tags: "edit"
+        edit_tags: "edit tags"
   issues:
     compact:
       created_by: "Created by"
@@ -114,11 +123,15 @@
     destroy:
       failure: "Can't delete that issue"
       success: "Issue deleted"
+    edit:
+      title: "Edit Issue"
     index:
       new_issue: "Create new Issue"
       popular_issues: "Currently Popular Issues"
       recent_issues: "Recent Issues"
       title: "All Issues"
+    new:
+      title: "New Issue"
     search:
       no_results_found: "No results found for '%{query}'."
       results_found:
@@ -129,6 +142,7 @@
       added_by_html: "Added by %{name} on %{time}"
       confirm_delete: "Are you sure?"
       delete_issue: "Delete this issue"
+      edit_issue: "Edit this issue"
       new_thread: "New Thread"
       group_private: "Private to %{group}"
       group_public: "Public, by %{group}"
@@ -136,6 +150,8 @@
       threads: "Threads"
       vote_down: "Vote Down"
       vote_up: "Vote Up"
+    update:
+      success: "Issue updated"
     vote_down:
       already: "You've already voted down this issue"
       success: "You have voted down this issue"
@@ -191,6 +207,13 @@
     tags:
       panel:
         edit_tags: "edit"
+    user_priorities:
+      create:
+        success: "Priority saved"
+        failure: "Couldn't save your priority"
+      update:
+        success: "Priority updated"
+        failure: "Couldn't update your priority"
   message_threads:
     compact:
       group_private: "Group Private"
@@ -205,7 +228,8 @@
       failure: "Couldn't delete the thread"
       success: "Thread deleted"
     index:
-      title: "Threads"
+      latest_activity: "Latest activity %{ago} ago"
+      title: "Public Threads"
     new:
       title: "New Thread"
     show:
@@ -285,6 +309,27 @@
       success:
         thank_you: "Thank you for your feedback."
         close: "< Back to site"
+  thread_mailer:
+    new_deadline_message:
+      added: "%{name} added a deadline to the thread"
+    new_library_item_message:
+      added: "%{name} added an item from the library to the thread."
+    new_link_message:
+      added: "%{name} added a link to the thread."
+    new_message:
+      added: "%{name} added a message to the thread."
+    new_photo_message:
+      added: "%{name} added a photo to the thread."
+      view_the_photo: "You can view the photo at the following url:"
+    footer:
+      thread: "Cyclescape thread"
+      unsubscribe: "You can unsubscribe from notifications on the thread page."
+  thread_priorities:
+    very_high: "Top-priority"
+    high: "Important"
+    medium: "Moderately Important"
+    low: "Marginal Interest"
+    very_low: "Not of Interest"
   user:
     locations:
       create:
@@ -311,6 +356,12 @@
         title: "Edit Profile"
         my_current_thumbnail_title: "My current profile picture"
       show:
+        add_to_groups:
+          one: "Add to group"
+          other: "Add to groups"
+        add_to_groups_explanation:
+          one: "You can add this user into your group."
+          other: "You can add this user to any of the groups shown."
         edit: "Edit My Profile"
         is_a_member_of_groups:
           zero: "%{name} isn't a member of any groups yet"
@@ -539,3 +590,8 @@
 
       full_messages:
         format: "%{attribute} %{message}"
+
+  will_paginate:
+    next_label: "Next"
+    previous_label: "Previous"
+    page_gap: "\u2026"

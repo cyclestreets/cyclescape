@@ -11,6 +11,8 @@
 #  state         :string(255)     not null
 #  created_at    :datetime        not null
 #  updated_at    :datetime        not null
+#  deleted_at    :datetime
+#  public_token  :string(255)
 #
 
 require 'spec_helper'
@@ -61,6 +63,16 @@ describe MessageThread do
     it "should have one participant" do
       thread = FactoryGirl.create(:message_thread_with_messages)
       thread.participants.count.should == 1
+    end
+  end
+
+  describe "priorities" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:thread) { FactoryGirl.create(:message_thread) }
+    let!(:priority) { FactoryGirl.create(:user_thread_priority, user: user, thread: thread) }
+
+    it "should confirm that user has prioritised" do
+      thread.priority_for(user).should == priority
     end
   end
 

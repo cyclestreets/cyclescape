@@ -3,5 +3,5 @@ module Geo
   POINT_ZOOM = 16
   MAP_SEARCH_ZOOM = 14
   # If you see this place, then there's a better choice of places to use.
-  NOWHERE_IN_PARTICULAR = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(-6.2248, 57.4658, 14)
+  NOWHERE_IN_PARTICULAR = RGeo::Geos::Factory.create({has_z_coordinate: true}).point(-1, 53, 6)
 end

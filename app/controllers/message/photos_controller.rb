@@ -8,6 +8,7 @@ class Message::PhotosController < Message::BaseController
     @message.component = @photo
 
     if @message.save
+      ThreadNotifier.notify_subscribers(@thread, :new_photo_message, @message)
       set_flash_message(:success)
     else
       set_flash_message(:failure)

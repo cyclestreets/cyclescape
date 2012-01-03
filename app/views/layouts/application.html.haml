@@ -11,10 +11,14 @@
   %body{class: [Rails.env, controller_path.tr("/_", "-")].join(" ")}
     %header#site-header(role="banner")
       .wrapper
-        %a#site-logo(href="#")Cyclescape
-        = link_to image_tag("header_logo.png", alt: t(".title")), root_path, id: "site-title"
+        - if current_group
+          = link_to root_path, id: "site-title" do
+            %h1= current_group.name
+        - else
+          %a#site-logo(href="#")
+          = link_to image_tag("header_logo.png", alt: t(".title")), root_path, id: "site-title"
         %ul#top-menu
-          %li.about= link_to t(".title"), "#", class: "cyclescape-logo"
+          %li.about= link_to t(".title"), root_url(subdomain: "www"), class: "cyclescape-logo"
           - if current_user
             %li.name= link_to_profile current_user
             %li.sign-out= link_to "Sign out", destroy_user_session_path, method: "delete"

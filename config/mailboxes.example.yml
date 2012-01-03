@@ -1,5 +1,8 @@
 primary:
-  address: "mail.server.net"
+  host: "mail.example.com"
   user_name: "user@example.com"
   password: "secret"
   authentication: "PLAIN"
+  mailbox: "INBOX"
+  mail_processor: "InboundMailProcessor"
+  days_to_retain: 10

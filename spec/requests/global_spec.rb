@@ -6,10 +6,6 @@ describe "Global settings" do
       visit root_path
     end
 
-    it "should set the mailer default URL to the current host" do
-      ActionMailer::Base.default_url_options[:host].should == "www.example.com"
-    end
-
     it "should set the authorization user to a guest" do
       Authorization.current_user.role_symbols.should include(:guest)
     end

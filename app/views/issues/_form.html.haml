@@ -4,6 +4,7 @@
     = f.input :tags_string, as: :tags
     = f.input :description
     = f.input :loc_json, as: :hidden
+  = f.semantic_errors :location
   = render partial: "shared/edit_map", locals: {thing: @issue}
   = f.buttons
 

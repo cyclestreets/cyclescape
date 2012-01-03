@@ -13,6 +13,7 @@ gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
 gem 'rgeo-geojson', require: "rgeo/geo_json"
+gem 'will_paginate', '~> 3.0'
 
 # Back-end gems
 gem 'devise'

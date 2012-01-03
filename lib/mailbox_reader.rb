@@ -1,19 +1,32 @@
-class MailboxReader
-  def self.run
-    mailboxes_config.each do |name, config|
-      retriever = Mail::IMAP.new(config.symbolize_keys)
-      retriever.find(what: :first).each do |message|
-        mail = InboundMail.new_from_message(message)
-        mail.save!
-        Resque.enqueue(InboundMailProcessor, mail.id)
+require "net/imap"
+
+class MailboxReader < MailboxProcessor
+  def run
+    begin
+      fetch_message_ids(config[:mailbox]).each do |mid|
+        # Fetch message from IMAP server
+        message = fetch_raw_message(mid)
+        # Save to database
+        ar_message = save_message(message)
+        # Mark message as read in IMAP mailbox
+        mark_as_seen(mid)
+        # Send to the mail processor
+        enqueue(ar_message)
       end
+    ensure
+      disconnect
     end
   end
 
-  def self.mailboxes_config
-    return @config if @config
-    config_path = Rails.root + "config" + "mailboxes.yml"
-    raise "Mailboxes config file not found at #{config_path}" unless config_path.exist?
-    @config ||= YAML::load(File.read(config_path)).with_indifferent_access
+  def save_message(message)
+    mail = Mail.new(message)
+    record = InboundMail.new_from_message(mail)
+    record.save!
+    record
+  end
+
+  def enqueue(ar_message)
+    processor = config[:mail_processor].constantize
+    Resque.enqueue(processor, ar_message.id)
   end
 end

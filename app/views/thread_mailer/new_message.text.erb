@@ -1,5 +1,4 @@
-<%= @message.body %>
+<%= t ".added", name: @message.created_by.name %>
 
---------
-Cyclescape thread: <%= thread_url(@message.thread) %>
-You can unsubscribe on the thread page.
+<%= @message.body %>
+<%= render partial: "footer" %>
