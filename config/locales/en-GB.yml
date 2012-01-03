@@ -11,6 +11,7 @@
         edit: "Edit"
         edit_profile: "Edit Profile"
         members: "Members"
+        name: "Group Name"
       create:
         success: "Group created"
       update:
@@ -31,8 +32,17 @@
         success: "Category updated"
     users:
       index:
+        created: "Created"
         created_at: "%{time_ago} ago"
+        disabled: "Disabled"
         disabled_at: "%{time_ago} ago"
+        display_name: "Display Name"
+        edit: "Edit"
+        email: "Email"
+        full_name: "Full Name"
+        id: "id"
+        role: "Role"
+        title: "Users"
       update:
         success: "User updated"
   application:
@@ -166,6 +176,7 @@
       admin: "Admin"
       dashboard: "My Dashboard"
       feedback: "Feedback"
+      home: "Home"
       issues: "Issues"
       library: "Library"
       threads: "Threads"
@@ -307,6 +318,9 @@
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
       submit: "Go!"
+    tags:
+      panel:
+        edit_tags: "Edit tags"
   site:
     comments:
       index:
