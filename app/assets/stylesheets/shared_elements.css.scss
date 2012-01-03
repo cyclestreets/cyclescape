@@ -193,56 +193,74 @@ article:hover > menu.tools, header:hover > menu.tools {
       }
     }
     .permissions {
-      width: 60px;
-      float: right;
-      color: $lightgrey;
-      text: {
-        align: right;
-        transform: uppercase;
-      }
-      font: {
-        size: 11px;
-        weight: bold;
-      }
+      float:right;
     }
   }
 }
+
+.meta {
+  p {
+    font-size: 12px;
+    color: $lightgrey;
+  }
+  a {
+    color: $grey2;
+  }
+}
+
+.permissions {
+  width: 60px;
+  color: $lightgrey;
+  text: {
+    align: right;
+    transform: uppercase;
+  }
+  font: {
+    size: 11px;
+    weight: bold;
+  }
+}
+
+
 
 #page aside#sidebar section.map {
   padding: 10px;
 }
 
+
 .minimap {
   position: relative;
   padding: 0 10px;
   height: 210px;
-  .tools {
-    position: absolute;
-    right: 0;
-    bottom: 0;
+}
+.map {}
+.minimap .tools,
+.map .tools {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: block;
+  background: $white;
+  padding: 5px 10px 10px 5px;
+  @include border-radius(0 0 20px 0);
+  button {
     display: block;
-    background: $white;
-    padding: 5px 10px 10px 5px;
-    @include border-radius(0 0 20px 0);
-    button {
-      display: block;
-      float: left;
-      width: 27px;
-      height: 27px;
-      border: none;
-      text-indent: -999999px;
-      &.person {
-        background: image-url("sprite.png") -3px -130px no-repeat;
-        &:hover {
-          background-position: -43px -130px;
-        }
+    float: left;
+    width: 27px;
+    height: 27px;
+    border: none;
+    text-indent: -999999px;
+    &.person {
+      background: image-url("sprite.png") -3px -130px no-repeat;
+      &:hover {
+        background-position: -43px -130px;
       }
-      &.zoom {
-        margin-left: 5px;
-        background: image-url("sprite.png") -3px -180px no-repeat;
-        &:hover {
-          background-position: -43px -180px;
-        }
+    }
+    &.zoom {
+      margin-left: 5px;
+      background: image-url("sprite.png") -3px -180px no-repeat;
+      &:hover {
+        background-position: -43px -180px;
       }
     }
   }
@@ -374,4 +392,26 @@ section.new-message {
 body.development span.translation_missing {
   text-decoration: underline;
   color: red;
+}
+
+
+.image-scroller {
+  height:240px;
+  border: 1px solid $paneborder;
+  @include border-radius(0 0 10px 10px);
+  .image-scroller-wrap {
+    height:200px;
+    overflow:hidden;
+  }
+  footer {
+    height:40px;
+    overflow:hidden;
+    p {
+      margin:0 10px;
+      float:left;
+    }
+    menu {
+      float:right;
+    }
+  }
 }
