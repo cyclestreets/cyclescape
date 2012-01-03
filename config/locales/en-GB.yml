@@ -264,6 +264,8 @@
       create:
         failure: "Library item could not be added"
         success: "Library item added"
+      show:
+        attached_to_html: "Attached to document: %{document}"
     links:
       create:
         failure: "Link could not be created."

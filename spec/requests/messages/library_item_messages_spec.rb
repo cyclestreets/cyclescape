@@ -34,7 +34,24 @@ describe "Library item messages" do
   context "note" do
     it "should have a link to the note"
     it "should show the content of the note"
-    it "should show a referenced document"
-    it "should link to a referenced document"
+
+    context "with document" do
+      include_context "signed in as a site user"
+      let!(:note) { FactoryGirl.create(:library_note_with_document) }
+
+      before do
+        visit thread_path(thread)
+        library_item_form do
+          select note.title, from: "Item"
+          fill_in "Message", with: "This note has a document attached."
+          click_on "Add Library Item"
+        end
+      end
+
+      it "should show a referenced document" do
+        page.should have_content("Attached to document")
+        page.should have_link(note.document.title)
+      end
+    end
   end
 end
