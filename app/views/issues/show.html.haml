@@ -14,7 +14,7 @@
     %section.tags
       = render partial: "issue/tags/panel", locals: {issue: @issue}
     %section.description
-      = simple_format @issue.description
+      = @issue.description
     %section.voting
       %ul
         %li
@@ -34,6 +34,6 @@
 
 %aside#sidebar
   %section.map
-    = render partial: "map", locals: { issue: @issue }
+    = @issue.map
   %section.photos
     = @issue.standard_photo_image
