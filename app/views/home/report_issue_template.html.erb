@@ -1,60 +1,60 @@
-  <div id="page" role="main">
-    <div class="wrapper">
-      <article id="content" class="content-no-sidebar">
-        <h1>Report an issue</h1>
-        <form>
-          <ol>
-            <li>
-              <label>Title your report</label>
-              <input type="text" class="text-input" />
-              <div class="tip">
-                <h4>This is a helper box</h4>
-                <p>This is some helper instructions for the field that the helper is pointed to. This is some helper instructions for the field that the helper is pointed to.</p>
-                <button type="button" class="close">close</button>
-                <span class="nub"></span>
-              </div>
-            </li>
-            <li>
-              <label>Add an image</label>
-              <button>Upload</button>
-              <div class="droparea"><p>drag and drop image here</p></div>
-            </li>
-            <li class="full-width">
-              <label>Provide a location</label>
-              <div class="radios">
-                <p class="marker-area">Add a marker or draw an area <input type="radio" name="location" value="marker-area" /></p>
-                <p>UK-wide <input type="radio" name="location" value="uk" /></p>
-                <p>Cambridge-wide <input type="radio" name="location" value="cambridge" /></p>
-              </div>
-              <div class="map">
-                <img src="/assets/images/bigmap.jpg" />
-              </div>
-            </li>
-            <li class="full-width with-user-image">
-              <label>Provide a location</label>
-              <div class="radios">
-                <p class="marker-area">Add a marker or draw an area <input type="radio" name="location" value="marker-area" /></p>
-                <p>UK-wide <input type="radio" name="location" value="uk" /></p>
-                <p>Cambridge-wide <input type="radio" name="location" value="cambridge" /></p>
-              </div>
-              <div class="user-image">
-                <span class="nub"></span>
-              </div>
-              <div class="map">
-                <img src="/assets/images/bigmap.jpg" />
-              </div>
-            </li>
-            <li>
-              <label>Tag your issue</label>
-              <input type="text" class="text-input" id="issue-tags" />
-            </li>
-            <li>
-              <label>Write a description</label>
-              <textarea></textarea>
-            </li>
-          </ol>
-          <button type="submit" class="btn-green submit">Send Report</button>
-        </form>
-      </article>
-    </div>
+<div id="page" role="main">
+  <div class="wrapper">
+    <article id="content" class="content-no-sidebar">
+      <h1>Report an issue</h1>
+      <form class="guided">
+        <ol>
+          <li>
+            <label>Title your report</label>
+            <input type="text" class="text-input" />
+            <div class="tip">
+              <h4>This is a helper box</h4>
+              <p>This is some helper instructions for the field that the helper is pointed to. This is some helper instructions for the field that the helper is pointed to.</p>
+              <button type="button" class="close">close</button>
+              <span class="nub"></span>
+            </div>
+          </li>
+          <li>
+            <label>Add an image</label>
+            <button>Upload</button>
+            <div class="droparea"><p>drag and drop image here</p></div>
+          </li>
+          <li class="full-width">
+            <label>Provide a location</label>
+            <div class="radios">
+              <p class="marker-area">Add a marker or draw an area <input type="radio" name="location" value="marker-area" /></p>
+              <p>UK-wide <input type="radio" name="location" value="uk" /></p>
+              <p>Cambridge-wide <input type="radio" name="location" value="cambridge" /></p>
+            </div>
+            <div class="map">
+              <%= image_tag("bigmap.jpg") %>
+            </div>
+          </li>
+          <li class="full-width with-user-image">
+            <label>Provide a location</label>
+            <div class="radios">
+              <p class="marker-area">Add a marker or draw an area <input type="radio" name="location" value="marker-area" /></p>
+              <p>UK-wide <input type="radio" name="location" value="uk" /></p>
+              <p>Cambridge-wide <input type="radio" name="location" value="cambridge" /></p>
+            </div>
+            <div class="user-image">
+              <span class="nub"></span>
+            </div>
+            <div class="map">
+              <%= image_tag("bigmap.jpg") %>
+            </div>
+          </li>
+          <li>
+            <label>Tag your issue</label>
+            <input type="text" class="text-input" id="issue-tags" />
+          </li>
+          <li>
+            <label>Write a description</label>
+            <textarea></textarea>
+          </li>
+        </ol>
+        <button type="submit" class="btn-green submit">Send Report</button>
+      </form>
+    </article>
   </div>
+</div>

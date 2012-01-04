@@ -236,7 +236,6 @@ article:hover > menu.tools, header:hover > menu.tools {
 }
 .map {
   position: relative;
-  height:400px;
 }
 .map-tools {
   position: absolute;
@@ -350,8 +349,8 @@ section.new-message {
     }
   }
 }
-
-.tip {
+.tip,
+form.guided .tip {
   position: absolute;
   right: -290px;
   top: 0;
@@ -371,6 +370,7 @@ section.new-message {
     position: absolute;
     top: 10px;
     right: 10px;
+    padding:0;
   }
   .nub {
     display: block;
