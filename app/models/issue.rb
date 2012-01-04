@@ -19,6 +19,9 @@ class Issue < ActiveRecord::Base
 
   acts_as_indexed :fields => [:title, :description, :tags_string]
   acts_as_voteable
+  image_accessor :photo do
+    storage_path :generate_photo_path
+  end
 
   belongs_to :created_by, class_name: "User"
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults
@@ -48,5 +51,10 @@ class Issue < ActiveRecord::Base
   def set_new_thread_defaults(thread)
     thread.title ||= title
     thread.privacy ||= "public"
+  end
+
+  def generate_photo_path
+    hash = Digest::SHA1.file(photo.path).hexdigest
+    "issue_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"
   end
 end

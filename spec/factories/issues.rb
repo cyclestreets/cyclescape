@@ -26,5 +26,9 @@ FactoryGirl.define do
     trait :with_tags do
       tags { FactoryGirl.build_list(:tag, 2) }
     end
+
+    trait :with_photo do
+      photo { File.read(test_photo_path) }
+    end
   end
 end

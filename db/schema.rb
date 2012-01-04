@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111214105224) do
+ActiveRecord::Schema.define(:version => 20120103175355) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20111214105224) do
     t.datetime "updated_at",                                                :null => false
     t.datetime "deleted_at"
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
+    t.string   "photo_uid"
   end
 
   create_table "library_documents", :force => true do |t|
@@ -156,8 +157,8 @@ ActiveRecord::Schema.define(:version => 20111214105224) do
     t.string   "state",         :null => false
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.datetime "deleted_at"
     t.string   "public_token"
+    t.datetime "deleted_at"
   end
 
   add_index "message_threads", ["public_token"], :name => "index_message_threads_on_public_token", :unique => true
