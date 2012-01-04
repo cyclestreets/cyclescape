@@ -428,3 +428,34 @@ body.development span.translation_missing {
     }
   }
 }
+
+ul.group-threads-list {
+  li {
+    span {
+      display: block;
+      float: left;
+      width: 16px;
+      height: 16px;
+      border: 2px solid $lightergrey;
+      margin: 0 10px 0 0;
+    }
+    &.green span {
+      background: $green;
+    }
+    &.blue span {
+      background: $blue;
+    }
+    &.red span {
+      background: $red;
+    }
+  }
+}
+
+ul.icon-list {
+  @include list-reset-soft;
+  li {
+    &.cal {
+      
+    }
+  }
+}
