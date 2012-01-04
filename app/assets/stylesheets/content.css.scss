@@ -406,6 +406,7 @@ section#user-locations {
     overflow:hidden;
     border-bottom:3px solid $paneborder;
     ul.tabs {
+      @include list-reset;
       li {
         a {
           
@@ -414,7 +415,11 @@ section#user-locations {
     }
   }
   .panes {
-    
+    .pane {
+      a.read-more-simple {
+        float:right;
+      }
+    }
   }
   table.dashboard-threads {
     width:100%;
@@ -428,11 +433,47 @@ section#user-locations {
             size:13px;
           }
         }
+        &.carparking {
+          padding-left:42px;
+          background: image-url("icons/m-carparking.png") 0 10px no-repeat;
+        }
+        &.cycle-parking {
+          padding-left:42px;
+          background: image-url("icons/m-cycle-parking.png") 0 10px no-repeat;
+        }
+        &.cycle-path {
+          padding-left:42px;
+          background: image-url("icons/m-cycle-path.png") 0 10px no-repeat;
+        }
+        &.misc {
+          padding-left:42px;
+          background: image-url("icons/m-misc.png") 0 10px no-repeat;
+        }
+        &.obstruction {
+          padding-left:42px;
+          background: image-url("icons/m-obstruction.png") 0 10px no-repeat;
+        }
+        &.planning {
+          padding-left:42px;
+          background: image-url("icons/m-planning.png") 0 10px no-repeat;
+        }
+        &.roadworks {
+          padding-left:42px;
+          background: image-url("icons/m-roadworks.png") 0 10px no-repeat;
+        }
+        h4 {
+          a {
+            color:$black;
+          }
+        }
         p {
           margin:0;
+          color:$lightgrey2;
+          font-size:13px;
         }
-        ul.icon-list {
+        ul.content-icon-list {
           li {
+            margin-bottom:10px;
           }
         }
       }
@@ -442,7 +483,9 @@ section#user-locations {
 
 #dashboard-threads-issues {
   clear:both;
+  float:left;
   overflow:hidden;
+  margin-top:30px;
   h2 {
     padding-bottom:10px;
     border-bottom:3px solid $paneborder;
@@ -466,6 +509,8 @@ section#user-locations {
           float:left;
           display:block;
           width:200px;
+          font-size:12px;
+          color:$lightgrey2;
         }
         div {
           float:left;
@@ -488,5 +533,9 @@ section#user-locations {
   #issues-map {
     width:360px;
     float:left;
+    .map {
+      width:360px;
+      height:360px;
+    }
   }
 }
