@@ -74,6 +74,10 @@ a {
   }
 }
 
+strong, b {
+  font-weight: bolder;
+}
+
 // lists
 ul, ol {
   @include list-reset-copy;
@@ -146,6 +150,18 @@ a.read-more-box {
       background: image-url("arrow-up-grey.png") right 0 no-repeat;
     }
   }
+}
+
+a.read-more-simple {
+  color: $grey3;
+  text:  {
+    decoration: none;
+    transform: uppercase;
+  }
+  line-height: 1;
+  font-size: 11px;
+  padding-right: 25px;
+  background: image-url("arrow-down-grey.png") right 0 no-repeat;
 }
 
 .load-more {

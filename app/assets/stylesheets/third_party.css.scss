@@ -71,6 +71,7 @@
 
 .superblySuggestItems{
   @include list-reset-soft;
+  display:none;
   background: $white;
   border: 1px solid $lightergrey;
   width: 150px;
