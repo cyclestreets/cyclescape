@@ -1,7 +1,7 @@
-%article.issue#content
+%article.issue#content.content-wide-sidebar
   %header
     %h1= @issue.title
-    - if (permitted_to?(:edit, @issue) || permitted_to?(:destroy, @issue))
+    - if permitted_to? [:edit, :destroy], @issue
       %menu.tools
         %ul
           - if permitted_to?(:edit, @issue)
@@ -25,11 +25,12 @@
           = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put
           = " \u2714" if current_user && current_user.voted_against?(@issue)
   %section.map
+    %h2= t ".location"
     = @issue.map
 
-%aside#sidebar
+%aside#sidebar.wide
   - if permitted_to? :create, :issue_message_threads
-    %p= link_to t(".new_thread"), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
+    = link_to t(".new_thread"), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
   %section.threads
     %header
       %h2= t ".threads"
