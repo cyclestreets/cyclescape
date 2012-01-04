@@ -58,8 +58,9 @@ class IssuesController < ApplicationController
 
   def geometry
     @issue = Issue.find(params[:id])
+    feature = RGeo::GeoJSON::EntityFactory.new.feature(@issue.location, @issue.id, {thumbnail: view_context.image_path("map-icons/m-misc.png")})
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(@issue.location) }
+      format.json { render json: RGeo::GeoJSON.encode(feature) }
     end
   end
 
