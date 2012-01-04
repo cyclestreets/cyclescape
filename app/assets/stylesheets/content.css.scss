@@ -4,14 +4,6 @@
   background: $white;
   padding: 20px 0;
   overflow: hidden;
-  &.alt-layout {
-    #content {
-      width: 570px;
-    }
-    #sidebar {
-      width:360px;
-    }
-  }
   #content {
     width: 630px;
     margin-right: 30px;
@@ -20,6 +12,9 @@
       width: 960px;
       margin-right: 0;
       float: none;
+    }
+    &.content-wide-sidebar {
+      width: 570px;
     }
     .tags {
       overflow: hidden;
@@ -81,6 +76,9 @@
   #sidebar {
     width: 300px;
     float: left;
+    &.wide {
+      width: 360px;
+    }
     .btn-green {
       width: 100%;
       padding: 15px;

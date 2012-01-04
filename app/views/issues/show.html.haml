@@ -24,16 +24,16 @@
         %li
           = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put
           = " \u2714" if current_user && current_user.voted_against?(@issue)
+  %section.map
+    = @issue.map
+
+%aside#sidebar
+  - if permitted_to? :create, :issue_message_threads
+    %p= link_to t(".new_thread"), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
   %section.threads
     %header
       %h2= t ".threads"
-      - if permitted_to? :create, :issue_message_threads
-        %p= link_to t(".new_thread"), new_issue_thread_path(@issue), class: "button", rel: "#overlay"
-    %ul.thread-list
+    %ul.sidebar-threadlist
       = render partial: "message_threads/compact", collection: @threads, as: :thread
-
-%aside#sidebar
-  %section.map
-    = @issue.map
   %section.photos
     = @issue.standard_photo_image
