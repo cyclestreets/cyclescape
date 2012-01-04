@@ -77,6 +77,22 @@ form.guided {
       weight: bold;
       size: 16px;
     }
+    span {
+      display:block;
+      font: {
+        style:italic;
+        weight: normal;
+        size: 14px;
+      }
+    }
+  }
+  li.tagfield p {
+    margin-left:160px;
+    font: {
+      style:italic;
+      weight: normal;
+      size: 14px;
+    }
   }
   p {
     color: $lightgrey2;

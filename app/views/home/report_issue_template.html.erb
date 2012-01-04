@@ -15,7 +15,7 @@
             </div>
           </li>
           <li>
-            <label>Add an image</label>
+            <label>Add an image <span>optional</span></label>
             <button>Upload</button>
             <div class="droparea"><p>drag and drop image here</p></div>
           </li>
@@ -44,9 +44,10 @@
               <%= image_tag("bigmap.jpg") %>
             </div>
           </li>
-          <li>
+          <li class="tagfield">
             <label>Tag your issue</label>
             <input type="text" class="text-input" id="issue-tags" />
+            <p>e.g. cycle parking, obstruction, 20mph</p>
           </li>
           <li>
             <label>Write a description</label>

@@ -87,6 +87,7 @@ $(function(){
   $("#issue-tags").superblyTagField({
       allowNewTags: true,
       showTagsNumber: 10,
+      addItemOnBlur: true,
       tags: tags
   });
 });
