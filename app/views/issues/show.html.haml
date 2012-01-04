@@ -35,3 +35,5 @@
 %aside#sidebar
   %section.map
     = render partial: "map", locals: { issue: @issue }
+  %section.photos
+    = @issue.standard_photo_image
