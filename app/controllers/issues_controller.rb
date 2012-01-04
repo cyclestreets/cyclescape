@@ -8,7 +8,8 @@ class IssuesController < ApplicationController
   end
 
   def show
-    @issue = Issue.find(params[:id])
+    issue = Issue.find(params[:id])
+    @issue = IssueDecorator.decorate(issue)
     @threads = @issue.threads
   end
 
