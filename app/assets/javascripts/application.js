@@ -11,6 +11,7 @@
 //= require superbly-tagfield.min
 //= require maps
 //= require map_display
+//= require map_popup
 //= require map_style
 //= require message_threads
 //= require openlayers_pz

@@ -66,6 +66,7 @@ module MapsHelper
                                                              styleMap: 'MapStyle.displayStyle()'.to_sym,
                                                              strategies: [OpenLayers::Strategy::BBOX.new()]))
       page << map.add_layer(vectorlayer)
+      page << 'MapPopup.init(map, vectorlayer)'
       yield(map, page) if block_given?
     end
   end

@@ -72,7 +72,9 @@ class IssuesController < ApplicationController
       issues = Issue.order("created_at DESC").limit(50)
     end
     factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(issues.map { | issue | factory.feature(issue.location, issue.id, {thumbnail: view_context.image_path("map-icons/m-misc.png")})})
+    collection = factory.feature_collection(issues.map { | issue | factory.feature(issue.location, issue.id, {thumbnail: view_context.image_path("map-icons/m-misc.png"),
+                                                                                                              title: issue.title,
+                                                                                                              description: issue.description})})
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection)}
     end
