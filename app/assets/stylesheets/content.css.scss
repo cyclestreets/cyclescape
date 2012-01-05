@@ -342,7 +342,7 @@ section#user-locations {
           color:$black;
           font-size:13px;
           border-bottom:1px solid $paneborder;
-          &.active {
+          &.current {
             background:$white;
             border-right:1px solid $white;
             z-index:2;
@@ -403,18 +403,40 @@ section#user-locations {
 
 #dashboard-tabs {
   nav {
-    overflow:hidden;
-    border-bottom:3px solid $paneborder;
+    // overflow:hidden;
+    border-bottom:1px solid $paneborder;
+    height:33px;
+    margin-bottom:15px;
     ul.tabs {
+      @include list-reset;
       li {
+        margin-right:10px;
         a {
-          
+          background:$pane1;
+          padding:6px 10px;
+          color:$lightgrey2;
+          border-top:1px solid $paneborder;
+          border-left:1px solid $paneborder;
+          border-right:1px solid $paneborder;
+          &.current {
+            color:$black;
+            background:$white;
+            border-bottom:1px solid $white;
+          }
+          &:hover {
+            text-decoration:none;
+            background:$pane2;
+          }
         }
       }
     }
   }
   .panes {
-    
+    .pane {
+      a.read-more-simple {
+        float:right;
+      }
+    }
   }
   table.dashboard-threads {
     width:100%;
@@ -427,12 +449,53 @@ section#user-locations {
             style:italic;
             size:13px;
           }
+          color:$lightgrey2;
+        }
+        &.carparking {
+          padding-left:42px;
+          background: image-url("icons/m-carparking.png") 0 10px no-repeat;
+        }
+        &.cycle-parking {
+          padding-left:42px;
+          background: image-url("icons/m-cycle-parking.png") 0 10px no-repeat;
+        }
+        &.cycle-path {
+          padding-left:42px;
+          background: image-url("icons/m-cycle-path.png") 0 10px no-repeat;
+        }
+        &.misc {
+          padding-left:42px;
+          background: image-url("icons/m-misc.png") 0 10px no-repeat;
+        }
+        &.obstruction {
+          padding-left:42px;
+          background: image-url("icons/m-obstruction.png") 0 10px no-repeat;
+        }
+        &.planning {
+          padding-left:42px;
+          background: image-url("icons/m-planning.png") 0 10px no-repeat;
+        }
+        &.roadworks {
+          padding-left:42px;
+          background: image-url("icons/m-roadworks.png") 0 10px no-repeat;
+        }
+        h4 {
+          a {
+            color:$black;
+          }
         }
         p {
           margin:0;
+          color:$lightgrey2;
+          font-size:13px;
         }
-        ul.icon-list {
+        ul.content-icon-list {
           li {
+            margin-bottom:10px;
+            font-size:13px;
+            &:last-child {
+              margin-bottom:0;
+            }
           }
         }
       }
@@ -442,7 +505,9 @@ section#user-locations {
 
 #dashboard-threads-issues {
   clear:both;
+  float:left;
   overflow:hidden;
+  margin-top:30px;
   h2 {
     padding-bottom:10px;
     border-bottom:3px solid $paneborder;
@@ -466,6 +531,8 @@ section#user-locations {
           float:left;
           display:block;
           width:200px;
+          font-size:12px;
+          color:$lightgrey2;
         }
         div {
           float:left;
@@ -488,5 +555,9 @@ section#user-locations {
   #issues-map {
     width:360px;
     float:left;
+    .map {
+      width:360px;
+      height:360px;
+    }
   }
 }

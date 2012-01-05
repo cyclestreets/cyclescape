@@ -451,11 +451,25 @@ ul.group-threads-list {
   }
 }
 
-ul.icon-list {
+ul.content-icon-list {
   @include list-reset-soft;
   li {
+    padding-left:30px;
+    background:image-url("content-icons.png") 0 3px no-repeat;
+    &.image {
+      background-position:0 3px;
+    }
     &.cal {
-      
+      background-position:0 -42px;
+    }
+    &.link {
+      background-position:0 -89px;
+    }
+    &.text {
+      background-position:0 -136px;
+    }
+    &.map-point {
+      background-position:0 -184px;
     }
   }
 }
