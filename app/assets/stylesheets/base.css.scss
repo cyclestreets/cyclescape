@@ -162,6 +162,10 @@ a.read-more-simple {
   font-size: 11px;
   padding-right: 25px;
   background: image-url("arrow-down-grey.png") right 0 no-repeat;
+  @include opacity(0.8);
+  &:hover {
+    @include opacity(1);
+  }
 }
 
 .load-more {
