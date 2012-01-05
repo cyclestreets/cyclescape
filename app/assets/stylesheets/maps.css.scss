@@ -39,7 +39,12 @@
 
 .olFramedCloudPopupContent {
   color: #ffffff;
-  h3 > a {
+  p {
+    font-style: italic;
+  }
+  a {
     color: #ffffff;
+    font-style: normal;
+    font-weight: bold;
   }
 }
