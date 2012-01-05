@@ -19,7 +19,7 @@ MapPopup = {
       feature.popup = new OpenLayers.Popup.FramedCloud("pop",
           feature.geometry.getBounds().getCenterLonLat(),
           null,
-          '<div class="markerContent"><h3><a href="'+feature.attributes.url+'">'+feature.attributes.title+'</a></h3><p>'+feature.attributes.description+'</p></div>',
+          '<h3><a href="'+feature.attributes.url+'">'+feature.attributes.title+'</a></h3><p>created by <a'+feature.attributes.description+'</p>',
           null,
           true,
           function() { MapPopup.map.getControl('selector').unselectAll(); }
