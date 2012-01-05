@@ -78,7 +78,7 @@ describe "Thread subscriptions" do
           fill_in "Message", with: "Notification test"
           click_on "Post Message"
         end
-        email_count.should == all_emails.count
+        all_emails.count.should == email_count
       end
     end
   end
