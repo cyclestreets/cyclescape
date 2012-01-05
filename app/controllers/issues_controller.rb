@@ -59,7 +59,7 @@ class IssuesController < ApplicationController
   def geometry
     @issue = Issue.find(params[:id])
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(@issue.loc_feature) }
+      format.json { render json: RGeo::GeoJSON.encode(issue_feature(@issue)) }
     end
   end
 
@@ -116,7 +116,9 @@ class IssuesController < ApplicationController
   def issue_feature(issue)
     issue.loc_feature({ thumbnail: view_context.image_path("map-icons/m-misc.png"),
                         title: issue.title,
-                        description: issue.description,
-                        url: view_context.url_for(issue)})
+                        url: view_context.url_for(issue),
+                        created_by: issue.created_by.name,
+                        created_by_url: view_context.url_for(issue.created_by)}
+)
   end
 end
