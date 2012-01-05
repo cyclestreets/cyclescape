@@ -403,13 +403,30 @@ section#user-locations {
 
 #dashboard-tabs {
   nav {
-    overflow:hidden;
-    border-bottom:3px solid $paneborder;
+    // overflow:hidden;
+    border-bottom:1px solid $paneborder;
+    height:33px;
+    margin-bottom:15px;
     ul.tabs {
       @include list-reset;
       li {
+        margin-right:10px;
         a {
-          
+          background:$pane1;
+          padding:6px 10px;
+          color:$lightgrey2;
+          border-top:1px solid $paneborder;
+          border-left:1px solid $paneborder;
+          border-right:1px solid $paneborder;
+          &.active {
+            color:$black;
+            background:$white;
+            border-bottom:1px solid $white;
+          }
+          &:hover {
+            text-decoration:none;
+            background:$pane2;
+          }
         }
       }
     }
@@ -432,6 +449,7 @@ section#user-locations {
             style:italic;
             size:13px;
           }
+          color:$lightgrey2;
         }
         &.carparking {
           padding-left:42px;
@@ -474,6 +492,10 @@ section#user-locations {
         ul.content-icon-list {
           li {
             margin-bottom:10px;
+            font-size:13px;
+            &:last-child {
+              margin-bottom:0;
+            }
           }
         }
       }
