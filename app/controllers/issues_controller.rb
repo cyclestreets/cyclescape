@@ -58,9 +58,8 @@ class IssuesController < ApplicationController
 
   def geometry
     @issue = Issue.find(params[:id])
-    feature = RGeo::GeoJSON::EntityFactory.new.feature(@issue.location, @issue.id, {thumbnail: view_context.image_path("map-icons/m-misc.png")})
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(feature) }
+      format.json { render json: RGeo::GeoJSON.encode(@issue.loc_feature) }
     end
   end
 
@@ -72,9 +71,7 @@ class IssuesController < ApplicationController
       issues = Issue.order("created_at DESC").limit(50)
     end
     factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(issues.map { | issue | factory.feature(issue.location, issue.id, {thumbnail: view_context.image_path("map-icons/m-misc.png"),
-                                                                                                              title: issue.title,
-                                                                                                              description: issue.description})})
+    collection = factory.feature_collection(issues.map { | issue | issue_feature(issue) })
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection)}
     end
@@ -114,5 +111,12 @@ class IssuesController < ApplicationController
     # TODO return subdomain.group.location if subdomain
     return @issues.first.location unless @issues.empty?
     return Geo::NOWHERE_IN_PARTICULAR
+  end
+
+  def issue_feature(issue)
+    issue.loc_feature({ thumbnail: view_context.image_path("map-icons/m-misc.png"),
+                        title: issue.title,
+                        description: issue.description,
+                        url: view_context.url_for(issue)})
   end
 end
