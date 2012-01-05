@@ -342,7 +342,7 @@ section#user-locations {
           color:$black;
           font-size:13px;
           border-bottom:1px solid $paneborder;
-          &.active {
+          &.current {
             background:$white;
             border-right:1px solid $white;
             z-index:2;
@@ -418,7 +418,7 @@ section#user-locations {
           border-top:1px solid $paneborder;
           border-left:1px solid $paneborder;
           border-right:1px solid $paneborder;
-          &.active {
+          &.current {
             color:$black;
             background:$white;
             border-bottom:1px solid $white;
