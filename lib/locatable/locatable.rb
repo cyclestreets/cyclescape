@@ -41,9 +41,17 @@ module Locatable
 
   def loc_json
     if self.location
-      RGeo::GeoJSON.encode(RGeo::GeoJSON::Feature.new(self.location)).to_json
+      RGeo::GeoJSON.encode(self.loc_feature).to_json
     else
       ""
+    end
+  end
+
+  def loc_feature(properties = nil)
+    if properties
+      RGeo::GeoJSON::Feature.new(self.location, self.id, properties)
+    else
+      RGeo::GeoJSON::Feature.new(self.location)
     end
   end
 end
