@@ -286,14 +286,12 @@
       text_message: "Text"
   shared:
     map_search:
-      example_search: "Putney, UK"
-      move_the_map_to: "Move the map to"
       near: "near"
       searching: "Searching..."
       search_failed: "Sorry, the search failed this time."
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
-      submit: "Go!"
+      submit: "Go"
   site:
     comments:
       index:

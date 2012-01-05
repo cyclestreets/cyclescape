@@ -3,6 +3,7 @@
     = f.input :title
     = f.input :photo, as: :file
     = f.input :retained_photo, as: :hidden
+    = f.input :loc_json, as: :hidden
     %li.input.full-width
       %label.label= t "formtastic.labels.issue.new.location"
       .map
@@ -11,6 +12,5 @@
         = render partial: "shared/map_search", locals: {map_id: "map"}
     = f.input :tags_string, as: :tags
     = f.input :description
-    = f.input :loc_json, as: :hidden
   = f.buttons do
     %li= button_tag t("formtastic.actions.issue.create"), type: "submit", class: "btn-green submit"

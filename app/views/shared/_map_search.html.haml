@@ -1,10 +1,9 @@
-#map-search
-  %span= t ".move_the_map_to"
-  %input#map-search-query{ type: "text", name: "street", value: t(".example_search")}
-  %input{ type: "submit", value: t(".submit") }
-  #map-search-status
+#map-search.map-search
+  = text_field_tag "map-query"
+  = button_tag t(".submit"), type: "button"
+  #map-search-status.hide
     #map-search-failed.hide= t ".search_failed"
-    #map-searching.hide= t ".searching"
+    #map-searching.hide= ajax_spinner_image
     #map-search-noresult.hide= t ".sorry_we_couldnt_find"
     #map-search-main-result.hide
       = t(".showing")
