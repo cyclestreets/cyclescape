@@ -13,6 +13,7 @@ MapPopup = {
     this.layer = l;
     m.addControl(new OpenLayers.Control.SelectFeature(l, {id: 'selector', onSelect: MapPopup.createPopup, onUnselect: MapPopup.destroyPopup }));
     m.getControl('selector').activate();
+    m.getControl('selector').handlers.feature.stopDown = false; // Allow click-drag on polygons to move the map
   },
 
   createPopup: function(feature) {
