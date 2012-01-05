@@ -35,6 +35,15 @@ describe "Thread subscriptions" do
         end
         all_emails.count.should == email_count
       end
+
+      it "should subscribe me to the thread automatically" do
+        current_user.subscribed_to_thread?(thread).should be_false
+        within(".new-message") do
+          fill_in "Message", with: "Given I'm interested enough to post, I should be subscribed"
+          click_on "Post Message"
+        end
+        current_user.subscribed_to_thread?(thread).should be_true
+      end
     end
 
     context "for email" do

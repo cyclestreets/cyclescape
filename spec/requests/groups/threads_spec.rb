@@ -34,6 +34,7 @@ describe "Group threads" do
         select "Public", from: "Privacy"
         click_on "Create Thread"
         page.should have_content(thread_attrs[:title])
+        current_user.subscribed_to_thread?(current_group.threads.last).should be_true
       end
 
       it "should create a new private thread" do

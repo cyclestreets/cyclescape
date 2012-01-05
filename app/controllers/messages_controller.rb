@@ -4,6 +4,7 @@ class MessagesController < ApplicationController
     @message = @thread.messages.build(params[:message].merge(created_by: current_user))
 
     if @message.save
+      @thread.subscriptions.create(user: current_user) unless current_user.subscribed_to_thread?(@thread)
       ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
       set_flash_message(:success)
     else
