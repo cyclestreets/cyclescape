@@ -201,9 +201,9 @@
   message_thread:
     subscriptions:
       create:
-        success: "Subscription created."
+        success: "You are now subscribed to this thread."
       destroy:
-        success: "Unsubscribed."
+        success: "You have unsubscribed from this thread."
     tags:
       panel:
         edit_tags: "edit"

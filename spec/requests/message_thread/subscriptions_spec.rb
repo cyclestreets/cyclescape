@@ -15,7 +15,7 @@ describe "Thread subscriptions" do
     context "for web" do
       it "should subscribe the user to the thread" do
         subscribe_button.click
-        page.should have_content("Subscription created.")
+        page.should have_content("You are now subscribed to this thread.")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
         current_user.thread_subscriptions.first.send_email.should be_false
@@ -31,7 +31,7 @@ describe "Thread subscriptions" do
       it "should subscribe the user to the thread" do
         check subscribe_by_email_field
         subscribe_button.click
-        page.should have_content("Subscription created.")
+        page.should have_content("You are now subscribed to this thread.")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
         current_user.thread_subscriptions.first.send_email.should be_true
@@ -68,7 +68,7 @@ describe "Thread subscriptions" do
         current_user.should have(1).thread_subscription
         unsubscribe_button.click
         current_user.should have(0).thread_subscriptions
-        page.should have_content("Unsubscribed")
+        page.should have_content("You have unsubscribed from this thread.")
       end
 
       it "should not send me any more messages" do
