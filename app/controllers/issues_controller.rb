@@ -118,7 +118,6 @@ class IssuesController < ApplicationController
                         title: issue.title,
                         url: view_context.url_for(issue),
                         created_by: issue.created_by.name,
-                        created_by_url: view_context.url_for(issue.created_by)}
-)
+                        created_by_url: view_context.url_for(issue.created_by)})
   end
 end
