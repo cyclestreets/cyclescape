@@ -131,7 +131,7 @@
       recent_issues: "Recent Issues"
       title: "All Issues"
     new:
-      title: "New Issue"
+      title: "Report an issue"
     search:
       no_results_found: "No results found for '%{query}'."
       results_found:

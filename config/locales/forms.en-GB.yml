@@ -16,6 +16,14 @@
     labels:
       group_membership:
         role: "Membership type"
+      issue:
+        new: &labels_issue_new
+          description: "Write a description"
+          location: "Provide a location"
+          photo: "Add a photo"
+          tags_string: "Tag your issue"
+          title: "Title your report"
+        create: *labels_issue_new
       library_document:
         file: "Document"
       library_note:
@@ -35,6 +43,11 @@
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name, they can change this when they accept the invite."
+      issue:
+        new: &hints_issue_new
+          photo: "(optional)"
+          tags_string: "e.g. cycle parking, obstruction, 20mph"
+        create: *hints_issue_new
       message_thread:
         privacy: "Select if this thread should be visible to members of the group only or everyone."
     actions:
@@ -43,6 +56,8 @@
         create: "Add Deadline"
       group_membership:
         create: "Invite member"
+      issue:
+        create: "Send Report"
       library_item_message:
         create: "Add Library Item"
       library/document:

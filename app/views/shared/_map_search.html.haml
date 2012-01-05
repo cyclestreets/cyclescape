@@ -1,8 +1,7 @@
 #map-search
   %span= t ".move_the_map_to"
-  %form#map-search-form{ action: "#", method: "get" }
-    %input#map-search-query{ type: "text", name: "street", value: t(".example_search")}
-    %input{ type: "submit", value: t(".submit") }
+  %input#map-search-query{ type: "text", name: "street", value: t(".example_search")}
+  %input{ type: "submit", value: t(".submit") }
   #map-search-status
     #map-search-failed.hide= t ".search_failed"
     #map-searching.hide= t ".searching"

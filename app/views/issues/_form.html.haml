@@ -1,13 +1,16 @@
-= semantic_form_for @issue do |f|
+= semantic_form_for @issue, html: {class: "guided"} do |f|
   = f.inputs do
     = f.input :title
     = f.input :photo, as: :file
     = f.input :retained_photo, as: :hidden
+    %li.input.full-width
+      %label.label= t "formtastic.labels.issue.new.location"
+      .map
+        = f.semantic_errors :location
+        = render partial: "shared/edit_map", locals: {thing: @issue}
+        = render partial: "shared/map_search", locals: {map_id: "map"}
     = f.input :tags_string, as: :tags
     = f.input :description
     = f.input :loc_json, as: :hidden
-  = f.semantic_errors :location
-  = render partial: "shared/edit_map", locals: {thing: @issue}
-  = f.buttons
-
-= render partial: "shared/map_search", locals: {map_id: "map"}
+  = f.buttons do
+    %li= button_tag t("formtastic.actions.issue.create"), type: "submit", class: "btn-green submit"
