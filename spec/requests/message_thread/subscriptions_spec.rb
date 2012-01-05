@@ -25,6 +25,16 @@ describe "Thread subscriptions" do
         subscribe_button.click
         page.should have_content("You are subscribed")
       end
+
+      it "should not send me an email when I post" do
+        email_count = all_emails.count
+        subscribe_button.click
+        within(".new-message") do
+          fill_in "Message", with: "All interesting stuff, but don't email me"
+          click_on "Post Message"
+        end
+        all_emails.count.should == email_count
+      end
     end
 
     context "for email" do
