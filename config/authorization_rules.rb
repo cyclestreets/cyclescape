@@ -86,7 +86,7 @@ end
 
 privileges do
   privilege :manage do
-    includes :index, :new, :create, :show, :edit, :update, :destroy
+    includes :view, :new, :create, :edit, :update, :destroy
   end
 
   privilege :view do
