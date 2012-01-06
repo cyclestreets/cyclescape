@@ -320,4 +320,31 @@ describe "Issues" do
       end
     end
   end
+
+  context "geojson" do
+    context "issue" do
+      let(:issue) { FactoryGirl.create(:issue) }
+
+      before do
+        visit geometry_issue_path(issue, format: :json)
+      end
+
+      it  "should return a thumbnail attribute" do
+        page.should have_content("thumbnail")
+      end
+    end
+
+    context "all issues" do
+      let!(:issue) { FactoryGirl.create(:issue) }
+
+      before do
+        visit all_geometries_issues_path(format: :json)
+      end
+
+      it "should return various attributes" do
+        page.should have_content("thumbnail")
+        page.should have_content("created_by_url")
+      end
+    end
+  end
 end

@@ -43,6 +43,20 @@ describe Issue do
       subject.loc_json.should eql(RGeo::GeoJSON.encode(RGeo::GeoJSON::Feature.new(subject.location)).to_json)
     end
 
+    it "should have a geojson feature representation" do
+      subject.loc_feature.should be_a(RGeo::GeoJSON::Feature)
+      subject.loc_feature.should eql(RGeo::GeoJSON::Feature.new(subject.location))
+      subject.loc_feature.geometry.should_not be_nil
+    end
+
+    it "should accept properties for feature" do
+      # see https://github.com/dazuma/rgeo-geojson/issues/5 for an RGeo bug that affects this test
+      # When fixed, the hash should be {foo: "bar") since that's how we call it in the main code.
+      f = subject.loc_feature({"foo" => "bar"})
+      f.properties.should_not be_nil
+      f.property("foo").should eql("bar")
+    end
+
     it "should have no votes" do
       subject.votes_count.should be(0)
     end

@@ -1,5 +1,5 @@
 module MapsHelper
-    def basic_map(&block)
+  def basic_map(&block)
     @map = core_map("map") do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
       page << map.add_layer(MapLayers::OSM_MAPNIK)
@@ -66,6 +66,7 @@ module MapsHelper
                                                              styleMap: 'MapStyle.displayStyle()'.to_sym,
                                                              strategies: [OpenLayers::Strategy::BBOX.new()]))
       page << map.add_layer(vectorlayer)
+      page << 'MapPopup.init(map, vectorlayer)'
       yield(map, page) if block_given?
     end
   end
