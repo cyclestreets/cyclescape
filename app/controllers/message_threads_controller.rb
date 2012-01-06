@@ -1,6 +1,4 @@
 class MessageThreadsController < ApplicationController
-  MESSAGE_COMPONENTS = [PhotoMessage]
-  helper_method :message_components
   filter_access_to :show, attribute_check: true
 
   def index
@@ -45,9 +43,5 @@ class MessageThreadsController < ApplicationController
 
   def load_thread
     @thread = MessageThread.find(params[:id])
-  end
-
-  def message_components
-    MESSAGE_COMPONENTS
   end
 end
