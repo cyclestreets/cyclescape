@@ -8,7 +8,7 @@ class ThreadNotifier
     send(method, *args)
   end
 
-  # Main entry point, begin notification of subscbribers to +thread+ with message +type+ and
+  # Main entry point, begin notification of subscribers to +thread+ with message +type+ and
   # optional +message+ object
   def self.notify_subscribers(thread, type, message = nil)
     Resque.enqueue(ThreadNotifier, :queue_messages_for_subscribers, thread.id, type, message ? message.id : nil)
