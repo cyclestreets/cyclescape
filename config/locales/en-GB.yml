@@ -235,6 +235,7 @@
         failure: "Couldn't update your priority"
   message_threads:
     compact:
+      group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
       created_at: "%{time_ago} ago"
