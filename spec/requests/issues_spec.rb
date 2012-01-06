@@ -59,7 +59,7 @@ describe "Issues" do
       end
 
       it "should have a link to create a new public thread" do
-        page.should have_link("New Thread")
+        page.should have_link("Discuss")
       end
     end
 
@@ -71,7 +71,7 @@ describe "Issues" do
       end
 
       it "should have a link to create a new public thread" do
-        page.should have_link("New Thread")
+        page.should have_link("Discuss")
       end
     end
 

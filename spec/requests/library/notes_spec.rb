@@ -17,7 +17,7 @@ describe "Library notes" do
     end
 
     it "should show the date when it was created" do
-      page.should have_content(I18n.localize(note.created_at))
+      page.should have_content(I18n.localize(note.created_at.to_date))
     end
   end
 
@@ -27,6 +27,18 @@ describe "Library notes" do
       fill_in "Note", with: "Note text goes here"
       click_on "Create Note"
       page.should have_content("Note text goes here")
+    end
+  end
+
+  context "with document" do
+    let(:note) { FactoryGirl.create(:library_note_with_document) }
+
+    before do
+      visit library_note_path(note)
+    end
+
+    it "should show the document title" do
+      page.should have_content(note.document.title)
     end
   end
 end

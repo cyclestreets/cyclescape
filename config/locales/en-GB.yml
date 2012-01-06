@@ -11,6 +11,7 @@
         edit: "Edit"
         edit_profile: "Edit Profile"
         members: "Members"
+        name: "Group Name"
       create:
         success: "Group created"
       update:
@@ -31,8 +32,17 @@
         success: "Category updated"
     users:
       index:
+        created: "Created"
         created_at: "%{time_ago} ago"
+        disabled: "Disabled"
         disabled_at: "%{time_ago} ago"
+        display_name: "Display Name"
+        edit: "Edit"
+        email: "Email"
+        full_name: "Full Name"
+        id: "id"
+        role: "Role"
+        title: "Users"
       update:
         success: "User updated"
   application:
@@ -143,7 +153,10 @@
       confirm_delete: "Are you sure?"
       delete_issue: "Delete this issue"
       edit_issue: "Edit this issue"
-      new_thread: "Create New Thread"
+      new_thread:
+        zero: "Discuss"
+        one: "New Thread"
+        other: "New Thread"
       group_private: "Private to %{group}"
       group_public: "Public, by %{group}"
       public: "Public"
@@ -164,6 +177,7 @@
       admin: "Admin"
       dashboard: "My Dashboard"
       feedback: "Feedback"
+      home: "Home"
       issues: "Issues"
       library: "Library"
       threads: "Threads"
@@ -187,6 +201,7 @@
       new:
         title: "New Document"
       show:
+        added_by_html: "Added by %{name} on %{time}"
         download: "Download document"
         comments: "Comments"
         notes: "Notes"
@@ -195,6 +210,9 @@
     notes:
       new:
         title: "New Note"
+      show:
+        added_by_html: "Added by %{name} on %{time}"
+        note_on_document_html: "Attached to document: %{document}"
   mailers:
     notifications:
       gmr_confirmed:
@@ -256,6 +274,8 @@
       create:
         failure: "Library item could not be added"
         success: "Library item added"
+      show:
+        attached_to_html: "Attached to document: %{document}"
     links:
       create:
         failure: "Link could not be created."
@@ -292,6 +312,9 @@
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
       submit: "Go"
+    tags:
+      panel:
+        edit_tags: "Edit tags"
   site:
     comments:
       index:

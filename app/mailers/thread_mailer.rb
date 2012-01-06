@@ -28,11 +28,12 @@ class ThreadMailer < ActionMailer::Base
     @message = message
     @thread = message.thread
     @subscriber = subscriber
-    email_from = ['"', t("application_name"),
-        '" <thread-', @thread.public_token, "@",
-        Rails.application.config.default_email_from_domain, ">"]
+    domain = Rails.application.config.default_email_from_domain
+    email_from = ['"', message.created_by.name, '" <notifications@', domain, ">"]
+    reply_to = ['"', I18n.t(".application_name"), '" <thread-', @thread.public_token, "@", domain, ">"]
     mail(to: subscriber.name_with_email,
          subject: "Re: #{@thread.title}",
-         from: email_from.join)
+         from: email_from.join,
+         reply_to: reply_to.join)
   end
 end

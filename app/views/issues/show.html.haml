@@ -30,11 +30,10 @@
 
 %aside#sidebar.wide
   - if permitted_to? :create, :issue_message_threads
-    = link_to t(".new_thread"), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
+    = link_to t(".new_thread", count: @issue.threads.count), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
   %section.threads
     %header
       %h2= t ".threads"
-    %ul.sidebar-threadlist
       = render partial: "message_threads/compact", collection: @threads, as: :thread
   %section.photos
     = @issue.standard_photo_image
