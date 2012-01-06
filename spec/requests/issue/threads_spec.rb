@@ -14,6 +14,7 @@ describe "Issue threads" do
         click_on "Create Thread"
         page.should have_content(issue.title)
         page.should have_content("Awesome!")
+        current_user.subscribed_to_thread?(issue.threads.last).should be_true
       end
     end
 

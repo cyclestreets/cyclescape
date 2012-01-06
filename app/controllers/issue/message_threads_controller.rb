@@ -16,6 +16,7 @@ class Issue::MessageThreadsController < MessageThreadsController
     @message = @thread.messages.build(params[:message].merge(created_by: current_user))
 
     if @thread.save
+      @thread.subscriptions.create(user: current_user)
       redirect_to issue_thread_path(@issue, @thread)
     else
       @available_groups = current_user.groups

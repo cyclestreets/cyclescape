@@ -17,7 +17,7 @@ class ThreadNotifier
   # Queue the notification for each subscriber
   def self.queue_messages_for_subscribers(thread_id, type, message_id)
     thread = MessageThread.find(thread_id)
-    thread.subscribers.each do |subscriber|
+    thread.email_subscribers.each do |subscriber|
       Resque.enqueue(ThreadNotifier, :send_notification, type, message_id, subscriber.id)
     end
   end
