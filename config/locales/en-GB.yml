@@ -131,7 +131,7 @@
       recent_issues: "Recent Issues"
       title: "All Issues"
     new:
-      title: "New Issue"
+      title: "Report an issue"
     search:
       no_results_found: "No results found for '%{query}'."
       results_found:
@@ -139,17 +139,18 @@
         other: "%{count} results found for '%{query}'"
       title: "Issue Search Results"
     show:
-      added_by_html: "Added by %{name} on %{time}"
+      added_by_html: "Reported by %{name} on %{time}"
       confirm_delete: "Are you sure?"
       delete_issue: "Delete this issue"
       edit_issue: "Edit this issue"
-      new_thread: "New Thread"
+      new_thread: "Create New Thread"
       group_private: "Private to %{group}"
       group_public: "Public, by %{group}"
       public: "Public"
       threads: "Threads"
       vote_down: "Vote Down"
       vote_up: "Vote Up"
+      location: "Location"
     update:
       success: "Issue updated"
     vote_down:
@@ -218,11 +219,6 @@
     compact:
       group_private: "Group Private"
       public: "Public"
-      message_count_html:
-        zero: "<span>No</span> messages"
-        one: "<span>1</span> message"
-        other: "<span>%{count}</span> messages"
-      created_by: "Created by"
       created_at: "%{time_ago} ago"
     destroy:
       failure: "Couldn't delete the thread"
@@ -290,14 +286,12 @@
       text_message: "Text"
   shared:
     map_search:
-      example_search: "Putney, UK"
-      move_the_map_to: "Move the map to"
       near: "near"
       searching: "Searching..."
       search_failed: "Sorry, the search failed this time."
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
-      submit: "Go!"
+      submit: "Go"
   site:
     comments:
       index:

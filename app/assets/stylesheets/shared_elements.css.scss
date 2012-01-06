@@ -236,7 +236,6 @@ article:hover > menu.tools, header:hover > menu.tools {
 }
 .map {
   position: relative;
-  height:400px;
 }
 .map-tools {
   position: absolute;
@@ -350,8 +349,8 @@ section.new-message {
     }
   }
 }
-
-.tip {
+.tip,
+form.guided .tip {
   position: absolute;
   right: -290px;
   top: 0;
@@ -371,6 +370,7 @@ section.new-message {
     position: absolute;
     top: 10px;
     right: 10px;
+    padding:0;
   }
   .nub {
     display: block;
@@ -425,6 +425,51 @@ body.development span.translation_missing {
         float:left;
         border-left:1px solid $paneborder;
       }
+    }
+  }
+}
+
+ul.group-threads-list {
+  li {
+    span {
+      display: block;
+      float: left;
+      width: 16px;
+      height: 16px;
+      border: 2px solid $lightergrey;
+      margin: 0 10px 0 0;
+    }
+    &.green span {
+      background: $green;
+    }
+    &.blue span {
+      background: $blue;
+    }
+    &.red span {
+      background: $red;
+    }
+  }
+}
+
+ul.content-icon-list {
+  @include list-reset-soft;
+  li {
+    padding-left:30px;
+    background:image-url("content-icons.png") 0 3px no-repeat;
+    &.image {
+      background-position:0 3px;
+    }
+    &.cal {
+      background-position:0 -42px;
+    }
+    &.link {
+      background-position:0 -89px;
+    }
+    &.text {
+      background-position:0 -136px;
+    }
+    &.map-point {
+      background-position:0 -184px;
     }
   }
 }

@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :no_disabled_users
   before_filter :set_auth_user
   before_filter :load_group_from_subdomain
+  before_filter :set_page_title
   layout :set_xhr_layout
   filter_access_to :all
 
@@ -28,6 +29,18 @@ class ApplicationController < ActionController::Base
       @current_group = Group.find_by_short_name(request.subdomain)
     end
   end
+
+  def set_page_title
+    key = "#{controller_path.tr("/", ".")}.#{params[:action]}.title"
+    page_title = I18n.translate(key, default: "")
+    app_title = I18n.translate("application_name")
+    @page_title = if page_title == "" then app_title else "#{page_title} - #{app_title}" end
+  end
+
+  def page_title
+    @page_title
+  end
+  helper_method :page_title
 
   def is_group_subdomain?
     request.subdomain != "www"

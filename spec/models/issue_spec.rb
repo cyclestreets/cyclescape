@@ -220,4 +220,17 @@ describe Issue do
       subject.plusminus.should eql(-2)
     end
   end
+
+  describe "with a photo" do
+    subject { FactoryGirl.create(:issue, :with_photo) }
+
+    it "should have a photo" do
+      subject.photo.should be_true  # Hard to find a proper test
+      subject.photo.mime_type.should == "image/jpeg"
+    end
+
+    it "should be stored in its own directory" do
+      subject.photo_uid.should =~ /issue_photos/
+    end
+  end
 end

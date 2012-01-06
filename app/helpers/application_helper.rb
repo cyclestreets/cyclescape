@@ -26,4 +26,8 @@ module ApplicationHelper
     url = Rails.application.config.github_project_url + "/commit/" + commit
     link_to commit, url
   end
+
+  def ajax_spinner_image
+    image_tag "spinner.gif"
+  end
 end
