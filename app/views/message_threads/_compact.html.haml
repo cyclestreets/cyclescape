@@ -1,7 +1,7 @@
 %li
   .message-count= t ".message_count_html", count: thread.message_count
   .item-content
-    %h4= link_to_if (permitted_to? :view, thread), thread.title, thread_path(thread), class: "primary-link"
+    %h4= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread), class: "primary-link"
     .tags
       %p= t "tags"
       %ul

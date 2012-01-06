@@ -49,7 +49,7 @@ authorization do
       if_attribute group: is_in { user.groups }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
-      to :view
+      to :show
       if_attribute private_to_group?: is { true }, group: is_in { user.groups }
     end
     has_permission_on :message_thread_subscriptions, to: [:create, :destroy]
@@ -75,9 +75,10 @@ authorization do
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries, :search]
     has_permission_on :libraries, :library_documents, :library_notes, to: [:view, :search]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
-      to :view
+      to :show
       if_attribute public?: is { true }
     end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :index
     has_permission_on :message_photos, to: :show
     has_permission_on :site_comments, to: [:new, :create]
     has_permission_on :user_profiles, to: :view
