@@ -242,6 +242,8 @@
       group_private: "Group Private"
       public: "Public"
       created_at: "%{time_ago} ago"
+    edit:
+      title: "Edit thread"
     destroy:
       failure: "Couldn't delete the thread"
       success: "Thread deleted"
@@ -255,6 +257,7 @@
     show:
       are_you_sure: "Are you sure?"
       back: "Back"
+      edit: "Edit this thread"
       destroy: "Delete this thread"
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
@@ -263,6 +266,8 @@
       subscribed_by_email: "You are subscribed by email to this thread."
     subscribers_panel:
       subscribers: "Following this thread"
+    update:
+      success: "Thread updated"
     widget:
       group_private: "Group Private"
       public: "Public"
