@@ -46,6 +46,8 @@ class User < ActiveRecord::Base
   has_many :thread_priorities, class_name: "UserThreadPriority"
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
   has_one :profile, class_name: "UserProfile"
+  has_one :prefs, class_name: "UserPref"
+
   accepts_nested_attributes_for :profile, update_only: true
 
   before_validation :set_default_role, :unless => :role
@@ -58,6 +60,12 @@ class User < ActiveRecord::Base
     return existing if existing
     name = email_address.split("@").first if name.nil?
     User.invite!(full_name: name, email: email_address)
+  end
+
+  def self.init_user_prefs
+    joins("LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id").
+      where("user_prefs.id IS NULL").
+      each {|u| u.create_user_prefs }
   end
 
   def name
@@ -145,7 +153,11 @@ class User < ActiveRecord::Base
     return Geo::NOWHERE_IN_PARTICULAR
   end
 
-  private
+  def create_user_prefs
+    build_prefs.save!
+  end
+
+  protected
 
   def set_default_role
     self.role = "member"
