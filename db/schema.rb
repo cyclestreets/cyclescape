@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120103175355) do
+ActiveRecord::Schema.define(:version => 20120106154635) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -217,6 +217,16 @@ ActiveRecord::Schema.define(:version => 20120103175355) do
     t.datetime "updated_at",                                              :null => false
     t.spatial  "location",    :limit => {:srid=>4326, :type=>"geometry"}
   end
+
+  create_table "user_prefs", :force => true do |t|
+    t.integer "user_id",                                            :null => false
+    t.boolean "notify_subscribed_threads",       :default => true,  :null => false
+    t.boolean "notify_new_home_locations_issue", :default => false, :null => false
+    t.boolean "notify_new_group_thread",         :default => true,  :null => false
+    t.boolean "notify_new_issue_thread",         :default => false, :null => false
+  end
+
+  add_index "user_prefs", ["user_id"], :name => "index_user_prefs_on_user_id", :unique => true
 
   create_table "user_profiles", :force => true do |t|
     t.integer "user_id",     :null => false
