@@ -157,8 +157,8 @@ ActiveRecord::Schema.define(:version => 20120103175355) do
     t.string   "state",         :null => false
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-    t.string   "public_token"
     t.datetime "deleted_at"
+    t.string   "public_token"
   end
 
   add_index "message_threads", ["public_token"], :name => "index_message_threads_on_public_token", :unique => true

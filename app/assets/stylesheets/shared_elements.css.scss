@@ -323,6 +323,9 @@ section.new-message {
             background-color: $pane2;
           }
         }
+        &.current span {
+          @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 0 6px);
+        }
       }
     }
   }

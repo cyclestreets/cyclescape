@@ -2,10 +2,138 @@
 // Maps
 
 #map {
-  height: 300px;
+  height: 350px;
   width: 100%;
   border:1px solid black;
   margin-top: 3em;
+}
+.map {
+  position:relative;
+  .map-tools-overlay {
+    position:absolute;
+    top:0;
+    right:0;
+    height:100%;
+    width:190px;
+    background:rgba(0, 0, 0, 0.8);
+    z-index:1010;
+    nav {
+      ul {
+        @include list-reset;
+        li {
+          a {
+            display:block;
+            color:$grey;
+            height:80px;
+            width:50px;
+            cursor:pointer;
+            font: {
+              weight:bold;
+              size:10px;
+            }
+            text: {
+              align:center;
+              transform:uppercase;
+            }
+            letter-spacing:1px;
+            span {
+              width:50px;
+              height:50px;
+              display:block;
+              border:1px solid $black;
+              background:$grey image-url("sprite.png") 4px -534px no-repeat;
+              @include border-radius(8px);
+              &.area {
+                background-position:4px -534px;
+              }
+              &.route {
+                background-position:4px -616px;
+              }
+              &.point {
+                background-position:13px -706px;
+              }
+            }
+            &:hover {
+              text-decoration:none;
+              span {
+                background-color:$pane2;
+              }
+            }
+            &.current span {
+              @include box-shadow(inset rgba(0, 0, 0, 0.7) 0 0 8px);
+            }
+          }
+        }
+      }
+    }
+    .panes {
+      padding:10px;
+      .pane {
+        h3, p {
+          color:$grey;
+        }
+        p {
+          display:block;
+          margin-bottom:10px;
+          font: {
+            weight:normal;
+            size:13px;
+            style:italic;
+          }
+        }
+      }
+    }
+    ul.undo-clear {
+      @include list-reset;
+      position:absolute;
+      bottom:10px;
+      left:10px;
+      li {
+        float:left;
+        margin-right:10px;
+        a {
+          display:block;
+          width:80px;
+          height:32px;
+          cursor:pointer;
+          span.txt {
+            color:$grey;
+            float:right;
+            margin-top:5px;
+            font: {
+              weight:bold;
+              size:10px;
+            }
+            letter-spacing:1px;
+            text: {
+              transform:uppercase;
+              align:right;
+            }
+          }
+          span.icon-undo,
+          span.icon-clear {
+            float:left;
+            width:30px;
+            height:30px;
+            display:block;
+            border:1px solid $lightgrey;
+            background:image-url("sprite.png") 3px -780px no-repeat;
+            @include border-radius(8px);
+          }
+          span.icon-clear {
+            background-position:4px -825px;
+          }
+          &:hover {
+            text-decoration:none;
+            span.icon-undo,
+            span.icon-clear {
+              border:1px solid $grey;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .tinymap {
