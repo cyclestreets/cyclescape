@@ -58,6 +58,7 @@
         create: "Invite member"
       issue:
         create: "Send Report"
+        update: "Save Report"
       library_item_message:
         create: "Add Library Item"
       library/document:

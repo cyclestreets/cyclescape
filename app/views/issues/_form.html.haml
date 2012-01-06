@@ -13,4 +13,4 @@
     = f.input :tags_string, as: :tags
     = f.input :description
   = f.buttons do
-    %li= button_tag t("formtastic.actions.issue.create"), type: "submit", class: "btn-green submit"
+    %li= button_tag t("formtastic.actions.issue.#{f.commit_button_i18n_key}"), type: "submit", class: "btn-green submit"
