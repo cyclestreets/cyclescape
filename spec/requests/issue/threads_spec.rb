@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe "Issue threads" do
   let!(:issue) { FactoryGirl.create(:issue) }
+  let(:edit_thread) { "Edit this thread" }
 
   context "new" do
     context "as a site user" do
@@ -53,6 +54,34 @@ describe "Issue threads" do
         page.should have_content(issue.title)
         page.should have_content("Awesome!")
         page.should have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
+      end
+    end
+  end
+
+  context "edit" do
+    let(:thread) { FactoryGirl.create(:message_thread, issue: issue, group: current_group) }
+
+    context "as a group member" do
+      include_context "signed in as a group member"
+
+      it "should not let you" do
+        visit issue_thread_path(issue, thread)
+        page.should have_content(issue.title)
+        page.should have_content(thread.title)
+        page.should_not have_content(edit_thread)
+      end
+    end
+
+    context "as a group committee member" do
+      include_context "signed in as a committee member"
+
+      it "should let you edit the thread" do
+        visit issue_thread_path(issue, thread)
+        click_on edit_thread
+        fill_in "Title", with: "New title please"
+        click_on "Save"
+        page.should have_content("Thread updated")
+        page.should have_content("New title please")
       end
     end
   end
