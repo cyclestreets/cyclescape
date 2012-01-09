@@ -1,6 +1,6 @@
 %li
   .item-content
-    %h4= link_to_if (permitted_to? :view, thread), thread.title, thread_path(thread), class: "primary-link"
+    %h4= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread), class: "primary-link"
     .meta
       %p
         - if thread.group

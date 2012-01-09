@@ -15,7 +15,7 @@ describe "Thread subscriptions" do
     context "for web" do
       it "should subscribe the user to the thread" do
         subscribe_button.click
-        page.should have_content("Subscription created.")
+        page.should have_content("You are now subscribed to this thread.")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
         current_user.thread_subscriptions.first.send_email.should be_false
@@ -25,13 +25,32 @@ describe "Thread subscriptions" do
         subscribe_button.click
         page.should have_content("You are subscribed")
       end
+
+      it "should not send me an email when I post" do
+        email_count = all_emails.count
+        subscribe_button.click
+        within(".new-message") do
+          fill_in "Message", with: "All interesting stuff, but don't email me"
+          click_on "Post Message"
+        end
+        all_emails.count.should == email_count
+      end
+
+      it "should subscribe me to the thread automatically" do
+        current_user.subscribed_to_thread?(thread).should be_false
+        within(".new-message") do
+          fill_in "Message", with: "Given I'm interested enough to post, I should be subscribed"
+          click_on "Post Message"
+        end
+        current_user.subscribed_to_thread?(thread).should be_true
+      end
     end
 
     context "for email" do
       it "should subscribe the user to the thread" do
         check subscribe_by_email_field
         subscribe_button.click
-        page.should have_content("Subscription created.")
+        page.should have_content("You are now subscribed to this thread.")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
         current_user.thread_subscriptions.first.send_email.should be_true
@@ -69,7 +88,7 @@ describe "Thread subscriptions" do
         current_user.should have(1).thread_subscription
         unsubscribe_button.click
         current_user.should have(0).thread_subscriptions
-        page.should have_content("Unsubscribed")
+        page.should have_content("You have unsubscribed from this thread.")
       end
 
       it "should not send me any more messages" do
@@ -79,7 +98,7 @@ describe "Thread subscriptions" do
           fill_in "Message", with: "Notification test"
           click_on "Post Message"
         end
-        email_count.should == all_emails.count
+        all_emails.count.should == email_count
       end
     end
   end

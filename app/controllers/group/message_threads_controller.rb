@@ -15,6 +15,7 @@ class Group::MessageThreadsController < MessageThreadsController
     @message = @thread.messages.build(params[:message].merge(created_by: current_user))
 
     if @thread.save
+      @thread.subscriptions.create(user: current_user)
       redirect_to group_thread_path(@group, @thread)
     else
       render :new

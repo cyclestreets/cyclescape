@@ -106,6 +106,8 @@
         for_group: "for %{name}"
         title: "New Group Thread"
     profiles:
+      edit:
+        title: "Edit Profile"
       update:
         success: "Profile Updated"
   groups:
@@ -220,12 +222,13 @@
   message_thread:
     subscriptions:
       create:
-        success: "Subscription created."
+        success: "You are now subscribed to this thread."
       destroy:
-        success: "Unsubscribed."
+        success: "You have unsubscribed from this thread."
     tags:
       panel:
         edit_tags: "edit"
+        tags: "tags"
     user_priorities:
       create:
         success: "Priority saved"
@@ -235,6 +238,7 @@
         failure: "Couldn't update your priority"
   message_threads:
     compact:
+      group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
       created_at: "%{time_ago} ago"
@@ -246,6 +250,8 @@
       title: "Public Threads"
     new:
       title: "New Thread"
+    priority_panel:
+      thread_priority: "Thread Priority"
     show:
       are_you_sure: "Are you sure?"
       back: "Back"
@@ -354,6 +360,8 @@
       destroy:
         failure: "That location can't be deleted"
         success: "Location deleted"
+      edit:
+        title: "Edit Location"
       index:
         category: "Category"
         confirm: "Are you sure?"

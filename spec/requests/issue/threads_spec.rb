@@ -14,6 +14,7 @@ describe "Issue threads" do
         click_on "Create Thread"
         page.should have_content(issue.title)
         page.should have_content("Awesome!")
+        current_user.subscribed_to_thread?(issue.threads.last).should be_true
       end
     end
 
@@ -52,6 +53,20 @@ describe "Issue threads" do
         page.should have_content(issue.title)
         page.should have_content("Awesome!")
         page.should have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
+      end
+    end
+  end
+
+  context "group private thread" do
+    let!(:thread) { FactoryGirl.create(:group_private_message_thread, issue: issue) }
+    context "as an admin" do
+      include_context "signed in as admin"
+
+      it "should show you a link to the thread" do
+        visit issue_path(issue)
+        page.should have_content(thread.title)
+        page.should have_content("Group Private")
+        page.should have_link(thread.title)
       end
     end
   end
