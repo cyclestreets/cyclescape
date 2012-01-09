@@ -19,11 +19,11 @@
       %ul
         %li
           = link_to t(".vote_up"), vote_up_issue_path(@issue), method: :put
-          = " \u2714" if current_user && current_user.voted_for?(@issue)
+          = " \u2714" if current_user && current_user.voted_for?(@issue.model)
         %li= @issue.plusminus
         %li
           = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put
-          = " \u2714" if current_user && current_user.voted_against?(@issue)
+          = " \u2714" if current_user && current_user.voted_against?(@issue.model)
   %section.map
     %h2= t ".location"
     = @issue.map
