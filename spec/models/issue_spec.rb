@@ -224,6 +224,13 @@ describe Issue do
       subject.votes_against.should eql(0)
     end
 
+    it "should allow votes to be cleared" do
+      brian.vote_for(subject)
+      brian.clear_votes(subject)
+      subject.votes_count.should eql(0)
+      brian.voted_for?(subject).should be_false
+    end
+
     it "should give a plusminus summary" do
       brian.vote_for(subject)
       meg.vote_for(subject)
