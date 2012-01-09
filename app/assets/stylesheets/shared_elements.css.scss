@@ -536,3 +536,14 @@ ul.library-list {
     }
   }
 }
+
+
+form.filters {
+  font-size:13px;
+  label {
+    color: $grey3;
+  }
+  select {
+    margin-right:20px;
+  }
+}
