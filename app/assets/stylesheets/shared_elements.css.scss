@@ -47,11 +47,13 @@ ul.following-thread {
         decoration: none;
       }
       color: $lightgrey2;
-      @include border-radius(5px);
       &:hover {
-        color: $grey2;
+        color: $pane1;
         background: $lightergrey;
       }
+    }
+    &.active a {
+      font-weight:bold;
     }
     &.prev a {
       text-indent: -999999px;
@@ -473,6 +475,64 @@ ul.content-icon-list {
     }
     &.map-point {
       background-position:0 -184px;
+    }
+  }
+}
+
+ul.library-list {
+  @include list-reset-soft;
+  border-top:2px solid $paneborder;
+  padding:20px 0 0 0;
+  overflow:hidden;
+  li {
+    float:left;
+    border-bottom:1px solid $paneborder;
+    margin-bottom:20px;
+    >span {
+      float:left;
+      display:block;
+      width:60px;
+      height:60px;
+      margin-right:30px;
+      background:image-url("wysiwyg.png") 22px 0 no-repeat;
+      &.doc {
+        background-position:-288px 0;
+      }
+      &.image {
+        background-position:-58px 0;
+      }
+      &.cal {
+        background-position:-376px 0;
+      }
+      &.link {
+        background-position:-210px 0;
+      }
+      &.text {
+        background-position:20px 0;
+      }
+      &.map-point {
+        background-position:-134px 0;
+      }
+    }
+    .lib-content {
+      float:left;
+      width:390px;
+      margin-right:30px;
+    }
+    .meta {
+      float:left;
+      width:120px;
+      font-style:italic;
+      p {
+        margin:0;
+        color:$lightgrey2;
+        span {
+          color:$lightgrey;
+        }
+      }
+      a {
+        color:$lightgrey2;
+      }
     }
   }
 }
