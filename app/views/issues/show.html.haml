@@ -18,12 +18,18 @@
     %section.voting
       %ul
         %li
-          = link_to t(".vote_up"), vote_up_issue_path(@issue), method: :put
-          = " \u2714" if current_user && current_user.voted_for?(@issue.model)
+          - if current_user && current_user.voted_for?(@issue.model)
+            = link_to t(".cancel_vote"), vote_clear_issue_path(@issue), method: :put
+            = " \u2714"
+          - else
+            = link_to t(".vote_up"), vote_up_issue_path(@issue), method: :put
         %li= @issue.plusminus
         %li
-          = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put
-          = " \u2714" if current_user && current_user.voted_against?(@issue.model)
+          - if current_user && current_user.voted_against?(@issue.model)
+            = link_to t(".cancel_vote"), vote_clear_issue_path(@issue), method: :put
+            = " \u2714"
+          - else
+            = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put
   %section.map
     %h2= t ".location"
     = @issue.map

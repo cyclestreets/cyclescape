@@ -105,6 +105,16 @@ class IssuesController < ApplicationController
     redirect_to @issue
   end
 
+  def vote_clear
+    @issue = Issue.find(params[:id])
+    if current_user.clear_votes(@issue)
+      set_flash_message(:success)
+    else
+      set_flash_message(:failure)
+    end
+    redirect_to @issue
+  end
+
   protected
 
   def index_start_location
