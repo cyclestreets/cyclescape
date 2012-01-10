@@ -16,6 +16,22 @@ describe "Issue threads" do
         page.should have_content("Awesome!")
         current_user.subscribed_to_thread?(issue.threads.last).should be_true
       end
+
+      it "should pre-fill the title for the thread" do
+        visit issue_path(issue)
+        click_on "Discuss"
+        find_field("Title").value.should eq(issue.title)
+      end
+
+      it "should not pre-fill the title for the second thread" do
+        visit issue_path(issue)
+        click_on "Discuss"
+        fill_in "Message", with: "Awesome!"
+        click_on "Create Thread"
+        visit issue_path(issue)
+        click_on "New Thread"
+        find_field("Title").value.should be_nil
+      end
     end
 
     context "as a group member" do
