@@ -49,7 +49,8 @@ MapEdit = {
     $(".map-tools-overlay .edit-undo").click(function() { MapEdit.undo_clicked(); });
     $(".map-tools-overlay .edit-clear").click(function() { MapEdit.clear_features(); });
     // Activate the default editing control
-    $(".map-tools-overlay .point").trigger('click');
+    this.current_control = this.map.getControl("point");
+    this.current_control.activate();
   },
 
   positionMap: function() {
