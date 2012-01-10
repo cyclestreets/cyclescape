@@ -26,26 +26,32 @@
       %ul.tabs
         %li
           %a
-            %span.area
-            area
+            %span.point
+            point
         %li
           %a
             %span.route
             route
         %li
           %a
-            %span.point
-            point
+            %span.area
+            area
     .panes
+      .pane
+        %h3 Draw a Point
+        %p Click the map to mark the point.
+        %p Drag the point to reposition.
+        %p Zoom in and pan to select the correct place.
+      .pane
+        %h3 Draw a Route
+        %p Click the points to mark a route on the map.
+        %p Double-click to complete the route.
+        %p Drag the grey points to create new corners.
       .pane
         %h3 Draw an Area
         %p Click the points to mark an area on the map.
         %p Double-click to complete the shape.
         %p Zoom in and pan to select the correct area.
-      .pane
-        %h3 Draw a Route
-      .pane
-        %h3 Draw a Point
     %ul.undo-clear
       %li
         %a.edit-undo
