@@ -27,41 +27,41 @@
         %li
           %a
             %span.point
-            point
+            = t ".point"
         %li
           %a
             %span.route
-            route
+            = t ".route"
         %li
           %a
             %span.area
-            area
+            = t ".area"
     .panes
       .pane
-        %h3 Draw a Point
-        %p Click the map to mark the point.
-        %p Drag the point to reposition.
-        %p Zoom in and pan to select the correct place.
+        %h3= t ".draw_point"
+        %p= t ".draw_point_1"
+        %p= t ".draw_point_2"
+        %p= t ".draw_point_3"
       .pane
-        %h3 Draw a Route
-        %p Click the points to mark a route on the map.
-        %p Double-click to complete the route.
-        %p Drag the grey points to create new corners.
+        %h3= t ".draw_route"
+        %p= t ".draw_route_1"
+        %p= t ".draw_route_2"
+        %p= t ".draw_route_3"
       .pane
-        %h3 Draw an Area
-        %p Click the points to mark an area on the map.
-        %p Double-click to complete the shape.
-        %p Zoom in and pan to select the correct area.
+        %h3= t ".draw_area"
+        %p= t ".draw_area_1"
+        %p= t ".draw_area_2"
+        %p= t ".draw_area_3"
     %ul.undo-clear
       %li
         %a.edit-undo
           %span.icon-undo
           %span.txt
-            undo
+            = t ".undo"
       %li
         %a.edit-clear
           %span.icon-clear
           %span.txt
-            clear
+            = t ".clear"
   = render partial: "shared/map_search", locals: {map_id: "map"}
   != @map.to_html
