@@ -12,6 +12,7 @@ authorization do
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :manage
     has_permission_on :messages, to: :censor
     has_permission_on :site_comments, to: :manage
+    has_permission_on :user_prefs, :user_profiles, to: :manage
   end
 
   role :member do
@@ -59,6 +60,10 @@ authorization do
     has_permission_on :libraries, :library_documents, :library_notes, to: :manage
     has_permission_on :library_tags, to: :update
     has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry]
+    has_permission_on :user_prefs do
+      to :manage
+      if_attribute id: is { user.id }
+    end
     has_permission_on :user_profiles do
       to :manage
       if_attribute id: is { user.id }

@@ -69,6 +69,7 @@ Cyclescape::Application.routes.draw do
   resources :users do
     scope module: :user do
       resource :profile
+      resource :prefs, only: [:edit, :update]
     end
   end
 
