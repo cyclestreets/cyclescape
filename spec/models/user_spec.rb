@@ -37,6 +37,23 @@ describe User do
     end
   end
 
+  describe "associations" do
+    it { should have_many(:memberships) }
+    it { should have_many(:groups) }
+    it { should have_many(:membership_requests) }
+    it { should have_many(:actioned_membership_requests) }
+    it { should have_many(:issues) }
+    it { should have_many(:created_threads) }
+    it { should have_many(:messages) }
+    it { should have_many(:locations) }
+    it { should have_many(:thread_subscriptions) }
+    it { should have_many(:subscribed_threads) }
+    it { should have_many(:thread_priorities) }
+    it { should have_many(:prioritised_threads) }
+    it { should have_one(:profile) }
+    it { should have_one(:prefs) }
+  end
+
   describe "to be valid" do
     subject { FactoryGirl.build(:user) }
 
