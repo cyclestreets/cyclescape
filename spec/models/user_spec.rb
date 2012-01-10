@@ -137,6 +137,14 @@ describe User do
     end
   end
 
+  describe "preferences" do
+    subject { FactoryGirl.create(:user) }
+
+    it "should be created with the user" do
+      subject.prefs.should be_a(UserPref)
+    end
+  end
+
   context "name with email" do
     subject { FactoryGirl.build(:user) }
 
