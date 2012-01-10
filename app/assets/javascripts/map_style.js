@@ -35,8 +35,8 @@ MapStyle = {
 
   editStyle: function() {
     var styleMap = new OpenLayers.StyleMap();
-    styleMap.styles["default"].addRules(this.displayRules);
-    styleMap.styles["select"].addRules(this.displayRules);
+    styleMap.styles["default"].addRules(this.editRules);
+    styleMap.styles["select"].addRules(this.editRules);
     styleMap.styles["temporary"].addRules(this.editRules);
     return styleMap;
   },

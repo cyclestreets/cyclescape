@@ -7,6 +7,42 @@
     %li.input.full-width
       %label.label= t "formtastic.labels.issue.new.location"
       .map
+        .map-tools-overlay
+          %nav
+            %ul.tabs
+              %li
+                %a
+                  %span.area
+                  area
+              %li
+                %a
+                  %span.route
+                  route
+              %li
+                %a
+                  %span.point
+                  point
+          .panes
+            .pane
+              %h3 Draw an Area
+              %p Click the points to mark an area on the map.
+              %p Double-click to complete the shape.
+              %p Zoom in and pan to select the correct area.
+            .pane
+              %h3 Draw a Route
+            .pane
+              %h3 Draw a Point
+          %ul.undo-clear
+            %li
+              %a
+                %span.icon-undo
+                %span.txt
+                  undo
+            %li
+              %a
+                %span.icon-clear
+                %span.txt
+                  clear
         = f.semantic_errors :location
         = render partial: "shared/edit_map", locals: {thing: @issue}
         = render partial: "shared/map_search", locals: {map_id: "map"}

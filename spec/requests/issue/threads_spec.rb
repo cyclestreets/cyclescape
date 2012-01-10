@@ -56,4 +56,18 @@ describe "Issue threads" do
       end
     end
   end
+
+  context "group private thread" do
+    let!(:thread) { FactoryGirl.create(:group_private_message_thread, issue: issue) }
+    context "as an admin" do
+      include_context "signed in as admin"
+
+      it "should show you a link to the thread" do
+        visit issue_path(issue)
+        page.should have_content(thread.title)
+        page.should have_content("Group Private")
+        page.should have_link(thread.title)
+      end
+    end
+  end
 end
