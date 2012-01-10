@@ -47,7 +47,7 @@ MapEdit = {
     $(".map-tools-overlay .route").click(function() { MapEdit.activate_control("path"); });
     $(".map-tools-overlay .point").click(function() { MapEdit.activate_control("point"); });
     $(".map-tools-overlay .edit-undo").click(function() { MapEdit.undo_clicked(); });
-    $(".map-tools-overlay .edit-clear").click(function() { MapEdit.clear_features(); });
+    $(".map-tools-overlay .edit-clear").click(function() { MapEdit.clear_clicked(); });
     // Activate the default editing control
     this.current_control = this.map.getControl("point");
     this.current_control.activate();
@@ -83,6 +83,15 @@ MapEdit = {
   undo_clicked: function() {
     if (this.current_control) {
       this.current_control.undo();
+    }
+  },
+
+  clear_clicked: function() {
+    if (this.current_control.active) {
+      this.current_control.cancel();
+    } else {
+      this.clear_features();
+      this.current_control.activate();
     }
   },
 
