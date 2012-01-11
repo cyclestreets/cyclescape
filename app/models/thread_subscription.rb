@@ -7,7 +7,6 @@
 #  thread_id  :integer         not null
 #  created_at :datetime        not null
 #  deleted_at :datetime
-#  send_email :boolean         default(FALSE), not null
 #
 
 class ThreadSubscription < ActiveRecord::Base
