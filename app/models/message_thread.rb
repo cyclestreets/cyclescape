@@ -48,7 +48,14 @@ class MessageThread < ActiveRecord::Base
   end
 
   def add_subscriber(user)
-    subscriptions.create(user: user)
+    found = user.thread_subscriptions.to(self)
+    if found
+      # Reset the subscription
+      found.undelete!
+      found
+    else
+      subscriptions.create(user: user)
+    end
   end
 
   def email_subscribers

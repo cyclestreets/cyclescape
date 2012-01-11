@@ -14,4 +14,8 @@ module FakeDestroy
   def deleted?
     self.deleted_at
   end
+
+  def undelete!
+    update_attribute(:deleted_at, nil)
+  end
 end

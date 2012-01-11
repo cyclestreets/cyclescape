@@ -98,6 +98,14 @@ describe "Thread subscriptions" do
         end
         all_emails.count.should == email_count
       end
+
+      it "should resubscribe me" do
+        current_user.should be_subscribed_to_thread(thread)
+        unsubscribe_button.click
+        current_user.should_not be_subscribed_to_thread(thread)
+        subscribe_button.click
+        current_user.should be_subscribed_to_thread(thread)
+      end
     end
   end
 end
