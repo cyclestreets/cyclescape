@@ -11,6 +11,7 @@ class MessageThreadsController < ApplicationController
     @messages = @thread.messages.all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers
+    @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
   end
 
   def edit
