@@ -1,8 +1,9 @@
-.search
-  = semantic_form_for :search, url: search_library_path, method: :get do |f|
-    = f.inputs do
-      = f.input :query, label: "Search"
-    = f.buttons
+- content_for :subnav do
+  .search
+    = form_tag({action: :search}, {method: :get, class: "filters"}) do
+      = label_tag t(".search")
+      = text_field_tag :query, params[:query]
+      = submit_tag t(".search_submit"), class: "submit"
 
 %section#content
   %h1= t ".latest"

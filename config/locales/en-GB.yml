@@ -196,6 +196,8 @@
       title: "Library"
       latest: "Latest"
       item_created: "Posted %{time_ago} ago"
+      search: "Search the library:"
+      search_submit: "Search"
   library:
     documents:
       new:
