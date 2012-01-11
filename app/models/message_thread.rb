@@ -27,8 +27,6 @@ class MessageThread < ActiveRecord::Base
   has_many :messages, foreign_key: "thread_id", autosave: true, order: 'created_at ASC'
   has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id", conditions: {deleted_at: nil}
   has_many :subscribers, through: :subscriptions, source: :user
-  has_many :email_subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id", conditions: {deleted_at: nil, send_email: true}
-  has_many :email_subscribers, through: :email_subscriptions, source: :user
   has_many :participants, through: :messages, source: :created_by, uniq: true
   has_many :user_priorities, class_name: "UserThreadPriority", foreign_key: "thread_id"
   has_and_belongs_to_many :tags, join_table: "message_thread_tags", foreign_key: "thread_id"
@@ -47,6 +45,21 @@ class MessageThread < ActiveRecord::Base
 
   def self.with_messages_from(user)
     where "EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)", user
+  end
+
+  def add_subscriber(user)
+    found = user.thread_subscriptions.to(self)
+    if found
+      # Reset the subscription
+      found.undelete!
+      found
+    else
+      subscriptions.create(user: user)
+    end
+  end
+
+  def email_subscribers
+    subscribers.joins(:prefs).where(user_prefs: {:notify_subscribed_threads => true})
   end
 
   def private_to_group?

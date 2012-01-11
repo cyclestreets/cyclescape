@@ -2,15 +2,14 @@ require "spec_helper"
 
 describe "thread notifications" do
   let(:thread) { FactoryGirl.create(:message_thread) }
-  let(:by_email_checkbox) { I18n.t("formtastic.labels.thread_subscription.send_email") }
   let(:subscribe_button) { find_button(I18n.t("formtastic.actions.thread_subscription.create")) }
 
   context "new messages" do
     include_context "signed in as a site user"
 
     before do
+      current_user.prefs.notify_subscribed_threads!
       visit thread_path(thread)
-      check by_email_checkbox
       subscribe_button.click
     end
 

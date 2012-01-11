@@ -27,3 +27,6 @@ MessageThread.where("public_token IS NULL").each do |thread|
   thread.set_public_token
   thread.save!
 end
+
+# Ensure all users have preferences
+User.init_user_prefs

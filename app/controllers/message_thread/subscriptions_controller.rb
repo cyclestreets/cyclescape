@@ -1,7 +1,6 @@
 class MessageThread::SubscriptionsController < MessageThread::BaseController
   def create
-    @subscription = @thread.subscriptions.build(params[:thread_subscription].merge(user: current_user))
-    if @subscription.save
+    if @thread.add_subscriber(current_user)
       set_flash_message(:success)
     else
       set_flash_message(:failure)
