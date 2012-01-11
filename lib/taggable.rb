@@ -1,4 +1,15 @@
 module Taggable
+  def self.included(base)
+    base.extend(ClassMethods)
+  end
+
+  module ClassMethods
+    def find_by_tags_from(taggable)
+      tags = Arel::Table.new(:tags)
+      joins(:tags).where(tags[:name].in(taggable.tags.map{ |t| t.name}))
+    end
+  end
+
   def tags_string
     tags.map(&:name).join(" ")
   end
