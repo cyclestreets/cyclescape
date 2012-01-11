@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
   protected
 
   def ssl_allowed_action?
-    (params[:controller] == 'users/sessions' && ['new', 'create'].include?(params[:action])) ||
-      (params[:controller] == 'users/registrations' && ['new', 'create', 'edit', 'update'].include?(params[:action])) ||
-      (params[:controller] == 'users/omniauth_callbacks')
+    (params[:controller] == 'devise/sessions' && ['new', 'create'].include?(params[:action])) ||
+      (params[:controller] == 'devise/registrations' && ['new', 'create', 'edit', 'update'].include?(params[:action])) ||
+      (params[:controller] == 'devise/omniauth_callbacks')
   end
 
   def ensure_proper_protocol
