@@ -495,21 +495,23 @@ ul.library-list {
       height:60px;
       margin-right:30px;
       background:image-url("wysiwyg.png") 22px 0 no-repeat;
-      &.doc {
+      &.library-document {
         background-position:-288px 0;
       }
-      &.image {
+      &.library-photo {
         background-position:-58px 0;
       }
+      // Unused
       &.cal {
         background-position:-376px 0;
       }
-      &.link {
+      &.library-link {
         background-position:-210px 0;
       }
-      &.text {
+      &.library-note {
         background-position:20px 0;
       }
+      // Unused
       &.map-point {
         background-position:-134px 0;
       }

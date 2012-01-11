@@ -194,10 +194,8 @@
       title: "Library Search Results"
     show:
       title: "Library"
-      documents: "Documents"
-      new_document: "Upload new document\u00A0\u2026"
-      new_note: "Create new note\u00A0\u2026"
-      notes: "Notes"
+      latest: "Latest"
+      item_created: "Posted %{time_ago} ago"
   library:
     documents:
       new:

@@ -30,4 +30,10 @@ module ApplicationHelper
   def ajax_spinner_image
     image_tag "spinner.gif"
   end
+
+  # Reimplementation of dom_class with hyphens instead of underscores
+  def dom_class(record_or_class)
+    name = ActiveModel::Naming.singular(record_or_class)
+    name.tr("_", "-")
+  end
 end

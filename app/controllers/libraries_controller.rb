@@ -1,7 +1,6 @@
 class LibrariesController < ApplicationController
   def show
-    @recent_documents = Library::Document.recent(5)
-    @recent_notes = Library::Note.recent(5)
+    @items = Library::ItemDecorator.decorate(Library::Item.by_most_recent.page(params[:page]))
   end
 
   def search
