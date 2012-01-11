@@ -19,6 +19,7 @@ class Library::DocumentsController < ApplicationController
   def show
     @notes = @document.notes
     @note = Library::Note.new_on_document(@document)
+    @tag_panel = TagPanelDecorator.new(@document.item, form_url: library_tag_path(@document.item))
   end
 
   def edit

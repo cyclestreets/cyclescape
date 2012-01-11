@@ -41,4 +41,23 @@ describe "Library notes" do
       page.should have_content(note.document.title)
     end
   end
+
+  context "tags" do
+    include_context "signed in as a site user"
+
+    before do
+      visit library_note_path(note)
+    end
+
+    it "should be taggable" do
+      click_on "Edit tags"
+      fill_in "Tags string", with: "cycle parking"
+      click_on "Save"
+      within ".tags-panel" do
+        within ".tags" do
+          page.should have_content("parking")
+        end
+      end
+    end
+  end
 end
