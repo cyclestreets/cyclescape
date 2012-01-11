@@ -47,6 +47,10 @@ class MessageThread < ActiveRecord::Base
     where "EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)", user
   end
 
+  def add_subscriber(user)
+    subscriptions.create(user: user)
+  end
+
   def email_subscribers
     subscribers.joins(:prefs).where(user_prefs: {:notify_subscribed_threads => true})
   end

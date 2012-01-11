@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   has_many :created_threads, class_name: "MessageThread", foreign_key: "created_by_id"
   has_many :messages, foreign_key: "created_by_id"
   has_many :locations, class_name: "UserLocation"
-  has_many :thread_subscriptions, conditions: {deleted_at: nil} do
+  has_many :thread_subscriptions do
     def to(thread)
       where("thread_id = ?", thread).first
     end
@@ -97,7 +97,11 @@ class User < ActiveRecord::Base
   end
 
   def subscribed_to_thread?(thread)
-    thread_subscriptions.where("thread_id = ?", thread).exists?
+    thread_subscriptions.active.to(thread)
+  end
+
+  def ever_subscribed_to_thread?(thread)
+    thread_subscriptions.to(thread)
   end
 
   def involved_threads

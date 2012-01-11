@@ -11,7 +11,11 @@ describe "Thread subscriptions" do
       visit thread_path(thread)
     end
 
-    context "for web" do
+    context "for web only" do
+      before do
+        current_user.prefs.update_attribute(:notify_subscribed_threads, false)
+      end
+
       it "should subscribe the user to the thread" do
         subscribe_button.click
         page.should have_content("You are now subscribed to this thread.")
@@ -79,9 +83,9 @@ describe "Thread subscriptions" do
       end
 
       it "should unsubscribe me" do
-        current_user.should have(1).thread_subscription
+        current_user.should be_subscribed_to_thread(thread)
         unsubscribe_button.click
-        current_user.should have(0).thread_subscriptions
+        current_user.should_not be_subscribed_to_thread(thread)
         page.should have_content("You have unsubscribed from this thread.")
       end
 
