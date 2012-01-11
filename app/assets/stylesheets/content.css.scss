@@ -79,13 +79,18 @@
     &.wide {
       width: 360px;
     }
+    button.btn-green {
+      width:100%;
+    }
     .btn-green {
       display: block;
+      margin-bottom:20px;
       padding: 15px;
       text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 20px;
+      font: {
+        size: 18px;
+        weight: bold;
+      }
     }
     fieldset.buttons {
       padding: 0;

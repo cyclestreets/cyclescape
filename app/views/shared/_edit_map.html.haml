@@ -2,31 +2,6 @@
   var geo_field = "#{thing.class.name.underscore}_loc_json"
   var point_zoom = "#{Geo::POINT_ZOOM}"
 
-  function serialize(feature) {
-    var str = format.write(feature);
-    document.getElementById(geo_field).value = str;
-  }
-
-  function feature_added(event) {
-    toolbar.deactivate();
-    modify.activate();
-    modify.selectControl.select(event.feature);
-    clearpanel.activate();
-    serialize(event.feature);
-  }
-
-  function feature_modified(event) {
-    serialize(event.feature);
-  }
-
-  function clear_features(event) {
-    clearpanel.deactivate();
-    modify.deactivate();
-    document.getElementById(geo_field).value = "";
-    vectorlayer.removeAllFeatures();
-    toolbar.activate();
-  }
-
 :ruby
   @map = basic_map do |map, page|
     if @start_location.geometry_type == RGeo::Feature::Point
@@ -41,39 +16,52 @@
     vectorlayer = MapLayers::JsVar.new("vectorlayer")
     page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Vectors", {projection: projection, styleMap: 'MapStyle.editStyle()'.to_sym}))
     page << map.add_layer(vectorlayer)
-    toolbar = MapLayers::JsVar.new("toolbar")
-    page.assign(toolbar, OpenLayers::Control::EditingToolbar.new(vectorlayer))
-    page << map.addControl(toolbar)
-    modify = MapLayers::JsVar.new("modify")
-    page.assign(modify, OpenLayers::Control::ModifyFeature.new(vectorlayer))
-    page << map.addControl(modify)
 
-    clearpanel = MapLayers::JsVar.new("clearpanel")
-    clearbutton = MapLayers::JsVar.new("clearbutton")
-    page.assign(clearpanel, OpenLayers::Control::Panel.new({displayClass: "olControlEditingToolbar"}))
-    page.assign(clearbutton, OpenLayers::Control::Button.new({title: "Clear", displayClass: "clearButton", trigger: :clear_features}))
-    page << clearpanel.addControls([clearbutton])
-    page << map.addControl(clearpanel)
-    page << clearpanel.deactivate()
+    page << 'MapEdit.init(map, vectorlayer, geo_field, point_zoom)'
   end
 
-%div#map
-!= @map.to_html
-:javascript
-  vectorlayer.events.on({featureadded: feature_added});
-  vectorlayer.events.on({featuremodified: feature_modified});
-
-  // Set the default control to be drawing a point
-  toolbar.activateControl(toolbar.controls[1]);
-
-  // This is also triggered if the user refreshes the page, and the browser persists
-  // the hidden form value. Ensures the map ends up where the feature is.
-  if ( document.getElementById(geo_field).value != '' ) {
-    vectorlayer.addFeatures( format.read(document.getElementById(geo_field).value));
-    geom = vectorlayer.features[0].geometry;
-    if (geom.CLASS_NAME == 'OpenLayers.Geometry.Point') {
-      map.setCenter(new OpenLayers.LonLat(geom.x, geom.y), point_zoom);
-    } else {
-      map.zoomToExtent(geom.bounds);
-    }
-  }
+%div#map.map.edit
+  .map-tools-overlay
+    %nav
+      %ul.tabs
+        %li
+          %a
+            %span.point
+            = t ".point"
+        %li
+          %a
+            %span.route
+            = t ".route"
+        %li
+          %a
+            %span.area
+            = t ".area"
+    .panes
+      .pane
+        %h3= t ".draw_point"
+        %p= t ".draw_point_1"
+        %p= t ".draw_point_2"
+        %p= t ".draw_point_3"
+      .pane
+        %h3= t ".draw_route"
+        %p= t ".draw_route_1"
+        %p= t ".draw_route_2"
+        %p= t ".draw_route_3"
+      .pane
+        %h3= t ".draw_area"
+        %p= t ".draw_area_1"
+        %p= t ".draw_area_2"
+        %p= t ".draw_area_3"
+    %ul.undo-clear
+      %li
+        %a.edit-undo
+          %span.icon-undo
+          %span.txt
+            = t ".undo"
+      %li
+        %a.edit-clear
+          %span.icon-clear
+          %span.txt
+            = t ".clear"
+  = render partial: "shared/map_search", locals: {map_id: "map"}
+  != @map.to_html
