@@ -38,10 +38,13 @@
           %li#menu-library= link_to t(".library"), library_path
     #crumb-search
       .wrapper
-        %nav
-          %ul
-            %li= link_to t(".home"), root_path
-            %li= link_to "Somewhere", "#"
+        - if content_for? :subnav
+          = content_for :subnav
+        - else
+          %nav
+            %ul
+              %li= link_to t(".home"), root_path
+              %li= link_to "Somewhere", "#"
     .flash-container
       - [:alert, :notice].each do |type|
         - if flash.key? type
