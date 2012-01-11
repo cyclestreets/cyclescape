@@ -248,6 +248,10 @@
     index:
       latest_activity: "Latest activity %{ago} ago"
       title: "Public Threads"
+    library_panel:
+      library: "Library"
+      no_library_items: "Couldn't find any relevant library items based on the thread tags."
+      tag_thread_guidance: "Add tags to this thread to find relevant library items."
     new:
       title: "New Thread"
     priority_panel:
