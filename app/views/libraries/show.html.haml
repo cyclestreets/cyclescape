@@ -1,8 +1,9 @@
 - content_for :subnav do
   .search
     = form_tag({action: :search}, {method: :get, class: "filters"}) do
-      = label_tag t(".search")
-      = text_field_tag :query, params[:query]
+      = label_tag do
+        = t(".search")
+        = text_field_tag :query, params[:query]
       = button_tag t(".search_submit"), class: "submit", value: "search"
       - if params[:query]
         = button_tag t(".clear_submit"), class: "submit", value: "clear"

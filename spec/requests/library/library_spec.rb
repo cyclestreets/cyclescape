@@ -17,18 +17,21 @@ describe "Library" do
 
     it "should have links to 5 recent notes" do
       notes.each do |note|
-        page.should have_link(note.body.truncate(60))
+        page.should have_link(note.title)
       end
     end
 
     context "search" do
+      let(:search_field) { I18n.t("libraries.show.search") }
+      let(:search_button) { I18n.t("libraries.show.search_submit") }
+
       before do
         visit library_path
       end
 
       it "should find the first note" do
-        fill_in "Search", with: notes[0].title
-        click_on "Submit Search"
+        fill_in search_field, with: notes[0].title
+        click_on search_button
 
         page.should have_content("Search Results")
         page.should_not have_content("No results")
@@ -36,8 +39,8 @@ describe "Library" do
       end
 
       it "should find the first document" do
-        fill_in "Search", with: documents[0].title
-        click_on "Submit Search"
+        fill_in search_field, with: documents[0].title
+        click_on search_button
 
         page.should have_content("Search Results")
         page.should_not have_content("No results")
@@ -46,8 +49,8 @@ describe "Library" do
 
       context "clear button" do
         it "should go to the library front page" do
-          fill_in "Search", with: "test"
-          click_on "Search"
+          fill_in search_field, with: "test"
+          click_on search_button
           page.should have_content("Results")
           click_on "Clear"
           page.current_path.should == library_path
