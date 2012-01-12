@@ -484,7 +484,7 @@ ul.content-icon-list {
   }
 }
 
-ul.library-list {
+ul.library-list, ul.library-selector {
   @include list-reset-soft;
   border-top:2px solid $paneborder;
   padding:20px 0 0 0;
@@ -493,7 +493,7 @@ ul.library-list {
     float:left;
     border-bottom:1px solid $paneborder;
     margin-bottom:20px;
-    >span {
+    span.icon {
       float:left;
       display:block;
       width:60px;

@@ -201,6 +201,13 @@
       search_submit: "Search"
       clear_submit: "Clear"
       results: "Results"
+      new_library_item: "Add Library Item"
+      new_note: "Note"
+      new_document: "Document"
+      new_item_title: "Select type"
+      new_item_description_html: "Select the type of item you would like to add to the library:"
+      new_note_description_html: "<strong>Notes</strong> are for short pieces of text for reference."
+      new_document_description_html: "<strong>Documents</strong> allow you to upload files."
   library:
     documents:
       new:

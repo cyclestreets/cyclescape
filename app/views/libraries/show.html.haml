@@ -20,3 +20,25 @@
           = item.link
         .meta
           = item.created_at
+
+%aside#sidebar
+  = link_to t(".new_library_item"), "#", rel: "#new-library-item-selector", class: "dialog btn-green"
+
+#new-library-item-selector.dialog.hide
+  %h1= t(".new_item_title")
+  %p= t(".new_item_description_html")
+  %ul.library-selector
+    %li
+      = link_to new_library_note_path do
+        %span.icon.library-note
+      = link_to new_library_note_path do
+        .name= t(".new_note")
+      .description
+        = t(".new_note_description_html")
+    %li
+      = link_to new_library_document_path do
+        %span.icon.library-document
+      = link_to new_library_document_path do
+        .name= t(".new_document")
+      .description
+        = t(".new_document_description_html")
