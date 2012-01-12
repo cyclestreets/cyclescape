@@ -8,6 +8,11 @@ module Taggable
       tags = Arel::Table.new(:tags)
       includes(:tags).where(tags[:name].in(taggable.tags.map{ |t| t.name}))
     end
+
+    def find_by_tag(tag)
+      tags = Arel::Table.new(:tags)
+      joins(:tags).where(tags[:name].eq(tag.name))
+    end
   end
 
   def tags_string
