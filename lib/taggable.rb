@@ -23,6 +23,14 @@ module Taggable
     self.tags = tags_from_string(val)
   end
 
+  def icon_from_tags
+    icon = nil
+    self.tags.order("name asc").each do |tag|
+      icon ||= tag.icon
+    end
+    icon
+  end
+
   protected
 
   def tags_from_string(val)
