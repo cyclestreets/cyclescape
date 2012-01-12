@@ -168,26 +168,8 @@ article:hover > menu.tools, header:hover > menu.tools {
     padding: 20px 0;
     border-bottom: 3px solid $grey;
     overflow: hidden;
-    .message-count {
-      width: 60px;
-      float: left;
-      font-size: 12px;
-      color: $lightgrey;
-      text-align: center;
-      span {
-        font: {
-          size: 24px;
-          weight: bold;
-        }
-        display: block;
-      }
-    }
-    .unread-count {
-      @extend .message-count;
-      color: $colour1;
-    }
     .item-content {
-      margin: 0 30px;
+      margin: 0 30px 0 0;
       float: left;
       width: 390px;
       h4 {
@@ -354,6 +336,7 @@ section.new-message {
     }
   }
 }
+
 .tip,
 form.guided .tip {
   position: absolute;
@@ -536,6 +519,60 @@ ul.library-list {
     }
   }
 }
+
+ul.issue-list {
+  @include list-reset-soft;
+  border-top:3px solid $paneborder;
+  padding:20px 0 0 0;
+  overflow:hidden;
+  li {
+    padding-bottom:20px;
+    border-bottom:3px solid $paneborder;
+    margin-bottom:20px;
+  }
+}
+
+.votes {
+  position:relative;
+  height:100px;
+  a.up,
+  a.down {
+    @include button-reset;
+    position:absolute;
+    width:20px;
+    height:12px;
+    background:image-url("sprite.png") -2px -904px no-repeat;
+    &:hover {
+      background-position:-42px -904px;
+    }
+  }
+  a.down {
+    background-position:-2px -953px;
+    bottom:0;
+    &:hover {
+      background-position:-42px -953px;
+    }
+  }
+  .vote-count {
+    top:30px;
+    width: 60px;
+    position:absolute;
+    font-size: 12px;
+    color: $colour1;
+    text-align: center;
+    span {
+      font: {
+        size: 24px;
+        weight: bold;
+      }
+      display: block;
+    }
+  }
+}
+
+
+
+
 
 
 form.filters {

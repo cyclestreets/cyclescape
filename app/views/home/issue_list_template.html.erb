@@ -1,0 +1,100 @@
+<article id="content" class="content-no-sidebar">
+  <section>
+    <h1>Recent issues</h1>
+    <a href="/">Report new issue</a>
+  </section>
+  <section id="issue-list-tabs">
+    <nav>
+      <ul class="tabs">
+        <li><a href="#" class="active">List</a></li>
+        <li><a href="#">Map</a></li>
+      </ul>
+    </nav>
+
+    <div class="panes">
+      <div class="pane">
+        <form class="filters">
+          <div class="search-box">
+            <label for="search">Search</label>
+            <input type="text" placeholder="Search" />
+          </div>
+
+          <button type="submit">go</button>
+
+          <label for="sort">Sort By</label>
+          <select id="sort">
+            <option>Latest First</option>
+            <option>Oldest First</option>
+            <option>Alphabetical</option>
+            <option>Reverse Alphabetical</option>
+          </select>
+        </form>
+
+        <menu class="pagination">
+          <ul>
+            <li class="prev"><a href="/">Prev</a></li>
+            <li><a href="/">1</a></li>
+            <li class="active"><a href="/">2</a></li>
+            <li><a href="/">3</a></li>
+            <li><a href="/">4</a></li>
+            <li><a href="/">5</a></li>
+            <li class="next"><a href="/">Next</a></li>
+          </ul>
+        </menu>
+
+        <ul class="issue-list">
+          <li>
+            <div class="map">
+              <%= image_tag("exmap3.png", width: "270", height: "180") %>
+            </div>
+            <div class="issue-content">
+              <h3><a href="/">Bus drivers and cyclists in harmony</a></h3>
+              <div class="meta">
+                <p>Created by: <a href="/">supercooljames</a> 5 days ago</p>
+                 <div class="tags">
+                  <p>Categories:</p>
+                  <ul>
+                    <li><a href="/">cycle path</a></li>
+                    <li><a href="/">crossings</a></li>
+                    <li><a href="/">obstructions</a></li>
+                  </ul>
+                </div>
+              </div>
+              <p>Various issues in Cambridge regarding bus driving and cyclist interactions. Work needs to be done to deal with this. (This is actually a city-wide issue, but I've marked this as the bus station for now.)</p>
+            </div>
+            <div class="votes">
+              <a href="/" class="up">vote up</a>
+              <div class="vote-count">
+                <span>3</span>
+                votes
+              </div>
+              <a href="/" class="down">vote down</a>
+            </div>
+          </li>
+          <li>
+            <div class="map">
+              <%= image_tag("exmap4.png", width: "270", height: "180") %>
+            </div>
+          </li>
+          <li>
+            <div class="map">
+              <%= image_tag("exmap5.png", width: "270", height: "180") %>
+            </div>
+          </li>
+        </ul>
+
+        <menu class="pagination">
+          <ul>
+            <li class="prev"><a href="/">Prev</a></li>
+            <li><a href="/">1</a></li>
+            <li class="active"><a href="/">2</a></li>
+            <li><a href="/">3</a></li>
+            <li><a href="/">4</a></li>
+            <li><a href="/">5</a></li>
+            <li class="next"><a href="/">Next</a></li>
+          </ul>
+        </menu>
+      </div>
+    </div>
+  </section>
+</article>

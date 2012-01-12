@@ -163,3 +163,23 @@ form.guided {
     padding: 20px 40px;
   }
 }
+
+
+.search-box {
+  position:relative;
+  label {
+    position:relative;
+    left:-999999px;
+  }
+  input {
+    border: 1px solid $grey;
+    background: $white image-url("search.png") right 4px no-repeat;
+    padding: 5px 4px;
+    font-size: 14px;
+    margin: 0;
+    float: left;
+    &:focus {
+      background-position: right -19px;
+    }
+  }
+}
