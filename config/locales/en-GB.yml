@@ -359,7 +359,7 @@
       library_items: "Library Items"
       no_results_found: "No results found"
       threads: "Threads"
-      title: "Things tagged '%{name}'"
+      heading: "Things tagged '%{name}'"
   thread_mailer:
     new_deadline_message:
       added: "%{name} added a deadline to the thread"
