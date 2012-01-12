@@ -243,8 +243,8 @@
   }
 }
 
-/* Issue Page */
-#issue-intro {
+/* Thread Page */
+#page #content section#thread-intro {
   overflow: hidden;
   margin-bottom: 30px;
   .map {
@@ -264,13 +264,16 @@
   }
 }
 
-#issue-replies {
+#thread-replies {
   header {
     background: $grey;
     padding: 5px;
     text-align: center;
     .pagination {
       @include inline-block;
+    }
+    button {
+      float:right;
     }
   }
 }

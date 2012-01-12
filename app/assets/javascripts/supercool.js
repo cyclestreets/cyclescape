@@ -23,24 +23,20 @@ $(function(){
    */
   $('p.readmore').addClass('closed');
   //clicks
-  $('.intro .read-more-box').live('click', function(e){
+  $('.read-more-box').live('click', function(e){
     e.preventDefault();
-    $readmore = $(this).prev('.readmore');
-    readMore($readmore, $(this), 80);
-  });
+    var h = '';
+    if ($(this).attr('rel')) {
+      // attribute exists
+      h = $(this).attr('rel');
+    } else {
+      // attribute does not exist
+      h = 80;
+    }
 
-  $('#issue-intro .read-more-box').live('click', function(e){
-    e.preventDefault();
     $readmore = $(this).prev('.readmore');
-    readMore($readmore, $(this), 180);
+    readMore($readmore, $(this), h);
   });
-
-  $('.thread .read-more-box').live('click', function(e){
-    e.preventDefault();
-    $readmore = $(this).prev('.readmore');
-    readMore($readmore, $(this), 80);
-  });
-
 
   /*
    * NOT BRILLIANT - resource list and checks
