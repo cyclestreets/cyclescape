@@ -10,6 +10,7 @@
 #  updated_at    :datetime        not null
 #  deleted_at    :datetime
 #  location      :spatial({:srid=
+#  photo_uid     :string(255)
 #
 
 FactoryGirl.define do
