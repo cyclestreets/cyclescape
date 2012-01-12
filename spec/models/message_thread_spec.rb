@@ -116,4 +116,29 @@ describe MessageThread do
       thread.public_token.should_not be_blank
     end
   end
+
+  describe "#add_message_from_email!" do
+    let(:mail) { FactoryGirl.create(:inbound_mail) }
+    let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+
+    it "should create a new message" do
+      message = thread.add_message_from_email!(mail)
+      message.should be_a(Message)
+      message.body.should_not be_blank
+    end
+
+    it "should create a message with the user info" do
+      message = thread.add_message_from_email!(mail)
+      message.created_by.name.should == mail.message.header[:from].display_names.first
+      message.created_by.email.should == mail.message.header[:from].addresses.first
+    end
+
+    context "signature removal" do
+      it "should remove double-dash signatures" do
+        mail.message.stub!(:body).and_return("Normal text here\n\n--\nSignature")
+        message = thread.add_message_from_email!(mail)
+        message.body.should == "Normal text here\n"
+      end
+    end
+  end
 end
