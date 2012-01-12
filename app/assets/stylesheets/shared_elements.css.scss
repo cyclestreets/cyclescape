@@ -388,11 +388,16 @@ form.guided .tip {
   }
 }
 
-#overlay {
+#overlay, div.dialog {
   @include border-radius(5px);
   width: 640px;
   background: white;
   border: 1px solid black;
+  padding: 8px;
+  > a.close {
+    float: right;
+    right: 8px;
+  }
 }
 
 // Missing translation
