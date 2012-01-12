@@ -185,6 +185,7 @@
       threads: "Threads"
       title: "Cyclescape"
       application_version_html: "Version: %{version}"
+      loading: "Please wait..."
   libraries:
     search:
       no_results_found: "No results found for '%{query}'."
@@ -194,10 +195,19 @@
       title: "Library Search Results"
     show:
       title: "Library"
-      documents: "Documents"
-      new_document: "Upload new document\u00A0\u2026"
-      new_note: "Create new note\u00A0\u2026"
-      notes: "Notes"
+      latest: "Latest"
+      item_created: "Posted %{time_ago} ago"
+      search: "Search the library:"
+      search_submit: "Search"
+      clear_submit: "Clear"
+      results: "Results"
+      new_library_item: "Add Library Item"
+      new_note: "Note"
+      new_document: "Document"
+      new_item_title: "Select type"
+      new_item_description_html: "Select the type of item you would like to add to the library:"
+      new_note_description_html: "<strong>Notes</strong> are for short pieces of text for reference."
+      new_document_description_html: "<strong>Documents</strong> allow you to upload files."
   library:
     documents:
       new:
