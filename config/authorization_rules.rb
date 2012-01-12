@@ -86,6 +86,7 @@ authorization do
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :index
     has_permission_on :message_photos, to: :show
     has_permission_on :site_comments, to: [:new, :create]
+    has_permission_on :tags, to: :show
     has_permission_on :user_profiles, to: :view
   end
 end

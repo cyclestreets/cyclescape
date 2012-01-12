@@ -84,6 +84,8 @@ Cyclescape::Application.routes.draw do
     resources :comments
   end
 
+  resources :tags
+
   match "template/:action", controller: "home"
 
   root :to => "home#show"
