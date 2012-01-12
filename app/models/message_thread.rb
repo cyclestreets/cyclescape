@@ -86,6 +86,15 @@ class MessageThread < ActiveRecord::Base
     user_priorities.where(user_id: user.id).first
   end
 
+  # for auth checks
+  def group_committee_members
+    if group_id
+      group.committee_members
+    else
+      []
+    end
+  end
+
   protected
 
   def generate_public_token

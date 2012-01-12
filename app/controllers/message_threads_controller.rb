@@ -1,5 +1,5 @@
 class MessageThreadsController < ApplicationController
-  filter_access_to :show, attribute_check: true
+  filter_access_to :show, :edit, :update, attribute_check: true
 
   def index
     @threads = MessageThread.public.order("updated_at desc").page(params[:page])
@@ -20,8 +20,9 @@ class MessageThreadsController < ApplicationController
   def update
     load_thread
 
-    if @thread.update_attributes
-      redirect_to action: :index
+    if @thread.update_attributes(params[:thread])
+      set_flash_message(:success)
+      redirect_to thread_path(@thread)
     else
       render :edit
     end

@@ -50,6 +50,10 @@ authorization do
       if_attribute group: is_in { user.groups }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
+      to [:edit, :update]
+      if_attribute group_committee_members: contains { user }
+    end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show
       if_attribute private_to_group?: is { true }, group: is_in { user.groups }
     end
