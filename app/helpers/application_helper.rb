@@ -32,8 +32,8 @@ module ApplicationHelper
   end
 
   # Reimplementation of dom_class with hyphens instead of underscores
-  def dom_class(record_or_class)
+  def dom_class(record_or_class, prefix = nil)
     name = ActiveModel::Naming.singular(record_or_class)
-    name.tr("_", "-")
+    (prefix ? "#{prefix}-#{name}" : name).tr("_", "-")
   end
 end
