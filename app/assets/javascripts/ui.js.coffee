@@ -68,6 +68,11 @@ jQuery ->
     .live "ajax:error", (e, xhr, status, error) ->
       $(this).parents(".inner:first").html(xhr.responseText)
 
+  $("a.dialog").overlay
+    mask:
+      color: "#000000"
+      opacity: 0.6
+
   # Tools menu
   $(document)
     .on "click", "menu.tools", ->
