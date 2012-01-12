@@ -10,6 +10,7 @@
 #  updated_at    :datetime        not null
 #  deleted_at    :datetime
 #  location      :spatial({:srid=
+#  photo_uid     :string(255)
 #
 
 require 'spec_helper'
@@ -50,11 +51,9 @@ describe Issue do
     end
 
     it "should accept properties for feature" do
-      # see https://github.com/dazuma/rgeo-geojson/issues/5 for an RGeo bug that affects this test
-      # When fixed, the hash should be {foo: "bar") since that's how we call it in the main code.
-      f = subject.loc_feature({"foo" => "bar"})
+      f = subject.loc_feature({foo: "bar"})
       f.properties.should_not be_nil
-      f.property("foo").should eql("bar")
+      f.property(:foo).should eql("bar")
     end
 
     it "should have no votes" do
@@ -222,6 +221,13 @@ describe Issue do
       subject.votes_count.should eql(1)
       subject.votes_for.should eql(1)
       subject.votes_against.should eql(0)
+    end
+
+    it "should allow votes to be cleared" do
+      brian.vote_for(subject)
+      brian.clear_votes(subject)
+      subject.votes_count.should eql(0)
+      brian.voted_for?(subject).should be_false
     end
 
     it "should give a plusminus summary" do

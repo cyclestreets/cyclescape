@@ -10,6 +10,7 @@
 #  updated_at    :datetime        not null
 #  deleted_at    :datetime
 #  location      :spatial({:srid=
+#  photo_uid     :string(255)
 #
 
 class Issue < ActiveRecord::Base
@@ -49,7 +50,7 @@ class Issue < ActiveRecord::Base
 
   # Association callback
   def set_new_thread_defaults(thread)
-    thread.title ||= title
+    thread.title ||= title if threads.count == 0
     thread.privacy ||= "public"
   end
 
