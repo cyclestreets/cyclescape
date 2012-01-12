@@ -28,6 +28,12 @@ describe "Library notes" do
       click_on "Create Note"
       page.should have_content("Note text goes here")
     end
+
+    it "should have a cancel link back to the library page" do
+      visit new_library_note_path
+      click_on "Cancel"
+      page.current_path.should == library_path
+    end
   end
 
   context "with document" do
