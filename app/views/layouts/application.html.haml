@@ -54,6 +54,9 @@
       .wrapper
         = yield
         #overlay
+          .loading
+            = image_tag "spinner.gif"
+            = t(".loading")
           .inner
     %footer
       .wrapper

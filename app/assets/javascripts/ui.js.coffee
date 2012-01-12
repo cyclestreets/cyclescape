@@ -48,6 +48,8 @@ jQuery ->
         $.ajax this.getTrigger().attr("href"),
           success: (data, status, xhr) =>
             wrapper.html(data)
+            # Hide loading spinner
+            wrapper.siblings(".loading").hide()
             # Have to bind close link manually as it doesn't
             # seem to work with AJAX loading
             wrapper.on "click", ".cancel a, .close", =>

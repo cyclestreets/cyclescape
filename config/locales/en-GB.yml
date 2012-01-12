@@ -185,6 +185,7 @@
       threads: "Threads"
       title: "Cyclescape"
       application_version_html: "Version: %{version}"
+      loading: "Please wait..."
   libraries:
     search:
       no_results_found: "No results found for '%{query}'."
