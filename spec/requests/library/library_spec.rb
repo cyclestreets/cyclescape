@@ -47,6 +47,16 @@ describe "Library" do
         page.should_not have_content("No results")
         page.should have_content(documents[0].title)
       end
+
+      context "clear button" do
+        it "should go to the library front page" do
+          fill_in "Search", with: "test"
+          click_on "Search"
+          page.should have_content("Results")
+          click_on "Clear"
+          page.current_path.should == library_path
+        end
+      end
     end
   end
 end

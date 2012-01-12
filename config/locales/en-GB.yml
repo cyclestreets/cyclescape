@@ -198,6 +198,8 @@
       item_created: "Posted %{time_ago} ago"
       search: "Search the library:"
       search_submit: "Search"
+      clear_submit: "Clear"
+      results: "Results"
   library:
     documents:
       new:
