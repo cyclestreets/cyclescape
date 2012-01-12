@@ -8,7 +8,7 @@ class Library::ItemDecorator < ApplicationDecorator
   end
 
   def icon
-    h.content_tag(:span, nil, class: h.dom_class(item.component))
+    h.content_tag(:span, nil, class: "icon #{h.dom_class(item.component)}")
   end
 
   def created_at
