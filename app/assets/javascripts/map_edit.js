@@ -43,11 +43,11 @@ MapEdit = {
       ];
     this.map.addControls(controls);
     // bind them to the buttons
-    $(".map-tools-overlay .area").click(function() { MapEdit.activate_control("polygon"); });
-    $(".map-tools-overlay .route").click(function() { MapEdit.activate_control("path"); });
-    $(".map-tools-overlay .point").click(function() { MapEdit.activate_control("point"); });
-    $(".map-tools-overlay .edit-undo").click(function() { MapEdit.undo_clicked(); });
-    $(".map-tools-overlay .edit-clear").click(function() { MapEdit.clear_clicked(); });
+    $(".map-tools-overlay li.area a").click(function() { MapEdit.activate_control("polygon"); });
+    $(".map-tools-overlay li.route a").click(function() { MapEdit.activate_control("path"); });
+    $(".map-tools-overlay li.point a").click(function() { MapEdit.activate_control("point"); });
+    $(".map-tools-overlay a.edit-undo").click(function() { MapEdit.undo_clicked(); });
+    $(".map-tools-overlay a.edit-clear").click(function() { MapEdit.clear_clicked(); });
     // Activate the default editing control
     this.current_control = this.map.getControl("point");
     this.current_control.activate();
