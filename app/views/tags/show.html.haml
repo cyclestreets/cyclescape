@@ -1,14 +1,26 @@
 %h1= t ".title", name: @tag.name
 
 %h2= t ".issues"
-%ol
-  - @issues.each do |i|
-    %li= link_to i.title, issue_path(i)
+.results
+  - if @issues.count == 0
+    %p= t ".no_results_found"
+  - else
+    %ol
+      - @issues.each do |i|
+        %li= link_to i.title, issue_path(i)
 %h2= t ".threads"
-%ol
-  - @threads.each do |t|
-    %li= link_to t.title, thread_path(t)
+.results
+  - if @threads.count == 0
+    %p= t ".no_results_found"
+  - else
+    %ol
+      - @threads.each do |t|
+        %li= link_to t.title, thread_path(t)
 %h2= t ".library_items"
-%ol
-  - @library_items.each do |item|
-    %li= link_to item.title, item.component
+.results
+  - if @library_items.count == 0
+    %p= t ".no_results_found"
+  - else
+    %ol
+      - @library_items.each do |item|
+        %li= link_to item.title, item.component

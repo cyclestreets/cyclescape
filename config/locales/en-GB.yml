@@ -353,6 +353,13 @@
       success:
         thank_you: "Thank you for your feedback."
         close: "< Back to site"
+  tags:
+    show:
+      issues: "Issues"
+      library_items: "Library Items"
+      no_results_found: "No results found"
+      threads: "Threads"
+      title: "Things tagged '%{name}'"
   thread_mailer:
     new_deadline_message:
       added: "%{name} added a deadline to the thread"
