@@ -13,6 +13,7 @@ Cyclescape::Application.routes.draw do
     get 'search', :on => :collection
     put 'vote_up', :on => :member
     put 'vote_down', :on => :member
+    put 'vote_clear', :on => :member
     scope module: "issue" do
       resources :threads, controller: "message_threads"
       resource :tags, only: [:update]
