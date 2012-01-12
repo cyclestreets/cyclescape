@@ -17,7 +17,8 @@
     page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Vectors", {projection: projection, styleMap: 'MapStyle.editStyle()'.to_sym}))
     page << map.add_layer(vectorlayer)
 
-    page << 'MapEdit.init(map, vectorlayer, geo_field, point_zoom)'
+    area_only = false unless area_only
+    page << "MapEdit.init(map, vectorlayer, geo_field, point_zoom, #{area_only})"
   end
 
 %div#map.map.edit

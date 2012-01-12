@@ -4,5 +4,5 @@
     = f.input :loc_json, as: :hidden
     .map
       = f.semantic_errors :location
-      = render partial: "shared/edit_map", locals: {thing: @profile}
+      = render partial: "shared/edit_map", locals: {thing: @profile, area_only: true}
   = f.buttons

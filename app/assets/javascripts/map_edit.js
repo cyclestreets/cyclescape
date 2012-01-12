@@ -7,13 +7,15 @@ MapEdit = {
   map: null,
   geo_field: null,
   point_zoom: null,
+  area_only: null,
   current_control: null,
 
-  init: function(m, v, g, p) {
+  init: function(m, v, g, p, a) {
     this.map = m;
     this.vectorlayer = v;
     this.geo_field = g;
     this.point_zoom = p;
+    this.area_only = a;
     this.registerEvents();
     this.addControls();
     this.positionMap();
@@ -49,8 +51,17 @@ MapEdit = {
     $(".map-tools-overlay a.edit-undo").click(function() { MapEdit.undo_clicked(); });
     $(".map-tools-overlay a.edit-clear").click(function() { MapEdit.clear_clicked(); });
     // Activate the default editing control
-    this.current_control = this.map.getControl("point");
-    this.current_control.activate();
+    if (this.area_only) {
+      this.current_control = this.map.getControl("polygon");
+      this.current_control.activate();
+      $(".map-tools-overlay li.point").remove();
+      $(".map-tools-overlay li.route").remove();
+      $(".map-tools-overlay .pane.point").remove();
+      $(".map-tools-overlay .pane.route").remove();
+    } else {
+      this.current_control = this.map.getControl("point");
+      this.current_control.activate();
+    }
   },
 
   positionMap: function() {
