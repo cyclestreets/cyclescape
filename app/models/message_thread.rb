@@ -58,6 +58,26 @@ class MessageThread < ActiveRecord::Base
     end
   end
 
+  def add_message_from_email!(mail)
+    from_address = mail.message.header[:from].addresses.first
+    from_name = mail.message.header[:from].display_names.first
+
+    user = User.find_or_invite(from_address, from_name)
+    raise "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
+
+    # For multipart messages we pull out the text/plain content
+    body = if mail.message.multipart?
+      mail.message.text_part.body
+    else
+      mail.message.body
+    end
+
+    parsed = EmailReplyParser.read(body.to_s)
+    stripped = parsed.fragments.select {|f| !f.hidden? }.join
+
+    messages.create!(body: stripped, created_by: user)
+  end
+
   def email_subscribers
     subscribers.joins(:prefs).where(user_prefs: {:notify_subscribed_threads => true})
   end
@@ -84,6 +104,15 @@ class MessageThread < ActiveRecord::Base
 
   def priority_for(user)
     user_priorities.where(user_id: user.id).first
+  end
+
+  # for auth checks
+  def group_committee_members
+    if group_id
+      group.committee_members
+    else
+      []
+    end
   end
 
   protected

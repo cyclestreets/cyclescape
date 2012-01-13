@@ -12,7 +12,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
-gem 'rgeo-geojson', require: "rgeo/geo_json"
+gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
 
 # Back-end gems
@@ -31,6 +31,7 @@ gem 'exceptional'
 gem 'foreman'
 gem 'whenever'
 gem 'draper'
+gem 'email_reply_parser'
 
 # Gems used only for assets and not required
 # in production environments by default.

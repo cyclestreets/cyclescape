@@ -5,7 +5,7 @@ authorization do
 
   role :admin do
     includes :member
-    has_permission_on :admin_groups, :group_members, :group_memberships, to: :manage
+    has_permission_on :admin_groups, :group_members, :group_memberships, :group_profiles, to: :manage
     has_permission_on :admin_users, to: :manage
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
@@ -37,7 +37,7 @@ authorization do
       to :manage
       if_attribute committee_members: contains { user }
     end
-    has_permission_on :issues, to: [:new, :create, :vote_up, :vote_down]
+    has_permission_on :issues, to: [:new, :create, :vote_up, :vote_down, :vote_clear]
     has_permission_on :issues do
       to [:edit, :update]
       if_attribute created_by: is { user }, created_at_as_i: is_in { 24.hours.ago.to_i..Time.now.to_i }
@@ -48,6 +48,10 @@ authorization do
     has_permission_on :group_message_threads do
       to [:new, :create]
       if_attribute group: is_in { user.groups }
+    end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
+      to [:edit, :update]
+      if_attribute group_committee_members: contains { user }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show

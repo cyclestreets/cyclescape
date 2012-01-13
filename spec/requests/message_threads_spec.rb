@@ -5,6 +5,7 @@ describe "Message threads" do
   let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5) }
   let(:censor_message) { "Censor this message" }
   let(:delete_thread) { "Delete this thread" }
+  let(:edit_thread) { "Edit this thread" }
 
   context "as a public user" do
     context "index" do
@@ -165,6 +166,21 @@ describe "Message threads" do
         page.should have_content("You are not authorised to access that page.")
       end
     end
+
+    context "edit" do
+      before do
+        visit thread_path(thread)
+      end
+
+      it "should not show an edit link" do
+        page.should_not have_content(edit_thread)
+      end
+
+      it "should not let you edit a thread" do
+        visit edit_thread_path(thread)
+        page.should have_content("You are not authorised to access that page.")
+      end
+    end
   end
 
 
@@ -209,6 +225,21 @@ describe "Message threads" do
         click_on delete_thread
         page.should have_content("Thread deleted")
         page.should_not have_content(thread.title)
+      end
+    end
+
+    context "thread editing" do
+      before do
+        visit thread_path(thread)
+      end
+
+      it "should let you edit the thread" do
+        click_on edit_thread
+        page.should have_content("Edit thread")
+        fill_in "Title", with: "New better title"
+        click_on "Save"
+        page.should have_content("Thread updated")
+        page.should have_content("New better title")
       end
     end
   end

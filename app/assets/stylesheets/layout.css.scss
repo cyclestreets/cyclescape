@@ -196,8 +196,18 @@ body.libraries {
   .search {
     @include column($full-span);
   }
-  section.documents, section.notes {
-    @include column(4);
+  ul.library-selector {
+    @include column(6);
+    @include push(1);
+    .icon {
+      @include column(1, "first");
+    }
+    .name {
+      @include column(1);
+    }
+    .description {
+      @include column(4, "last");
+    }
   }
 }
 

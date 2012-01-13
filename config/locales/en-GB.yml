@@ -163,11 +163,15 @@
       group_public: "Public, by %{group}"
       public: "Public"
       threads: "Threads"
+      vote_clear: "Clear Vote"
       vote_down: "Vote Down"
       vote_up: "Vote Up"
       location: "Location"
     update:
       success: "Issue updated"
+    vote_clear:
+      failure: "Your vote couldn't be cleared"
+      success: "Your vote has been cleared"
     vote_down:
       already: "You've already voted down this issue"
       success: "You have voted down this issue"
@@ -185,6 +189,7 @@
       threads: "Threads"
       title: "Cyclescape"
       application_version_html: "Version: %{version}"
+      loading: "Please wait..."
   libraries:
     search:
       no_results_found: "No results found for '%{query}'."
@@ -194,10 +199,19 @@
       title: "Library Search Results"
     show:
       title: "Library"
-      documents: "Documents"
-      new_document: "Upload new document\u00A0\u2026"
-      new_note: "Create new note\u00A0\u2026"
-      notes: "Notes"
+      latest: "Latest"
+      item_created: "Posted %{time_ago} ago"
+      search: "Search the library:"
+      search_submit: "Search"
+      clear_submit: "Clear"
+      results: "Results"
+      new_library_item: "Add Library Item"
+      new_note: "Note"
+      new_document: "Document"
+      new_item_title: "Select type"
+      new_item_description_html: "Select the type of item you would like to add to the library:"
+      new_note_description_html: "<strong>Notes</strong> are for short pieces of text for reference."
+      new_document_description_html: "<strong>Documents</strong> allow you to upload files."
   library:
     documents:
       new:
@@ -242,6 +256,8 @@
       group_private: "Group Private"
       public: "Public"
       created_at: "%{time_ago} ago"
+    edit:
+      title: "Edit thread"
     destroy:
       failure: "Couldn't delete the thread"
       success: "Thread deleted"
@@ -255,6 +271,7 @@
     show:
       are_you_sure: "Are you sure?"
       back: "Back"
+      edit: "Edit this thread"
       destroy: "Delete this thread"
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
@@ -262,6 +279,8 @@
       subscribed: "You are subscribed to this thread."
     subscribers_panel:
       subscribers: "Following this thread"
+    update:
+      success: "Thread updated"
     widget:
       group_private: "Group Private"
       public: "Public"
