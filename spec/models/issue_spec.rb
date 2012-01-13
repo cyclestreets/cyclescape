@@ -248,6 +248,19 @@ describe Issue do
     end
   end
 
+  context "finding from tags" do
+    let(:tag) { FactoryGirl.create(:tag) }
+    subject { FactoryGirl.create(:issue, tags: [tag]) }
+
+    it "should find the issue given a tag" do
+      Issue.find_by_tag(tag).should include(subject)
+    end
+
+    it "should find the issue given a taggable" do
+      Issue.find_by_tags_from(mock({tags: [tag]})).should include(subject)
+    end
+  end
+
   context "tags with icons" do
     subject { FactoryGirl.create(:issue) }
     let(:tag) { FactoryGirl.create(:tag) }
