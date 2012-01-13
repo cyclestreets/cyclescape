@@ -105,8 +105,11 @@
         padding: 10px 0;
         border: 1px solid $paneborder;
         @include border-radius(10px);
-        h2, h4, >a, form {
+        h2, h4, >a, form, .map {
           padding: 0 10px;
+        }
+        .map .map-tools {
+          right:10px;
         }
       }
       h2 {
@@ -194,47 +197,30 @@
           @include gradient($lightblack, $black);
           @include border-radius(10px 10px 0 0);
         }
-        ul {
-          @include list-reset;
+        ul.content-icon-list {
           margin-bottom: 10px;
           li {
-            background: $pane1;
-            display: block;
-            width: 258px;
-            padding: 10px 10px 10px 30px;
+            padding: 10px 10px 10px 40px;
             border-bottom: 1px solid $paneborder;
-            &:hover {
-              background: $pane2;
+            background-color: $pane1;
+            background-position:10px 13px;
+            &.image {
+              background-position:10px 13px;
             }
-            h3 {
-              position: relative;
-              padding: 0 36px 10px 0;
-              font: {
-                weight: normal;
-                size: 14px;
-              }
-              span.check {
-                display: block;
-                position: absolute;
-                right: 0;
-                top: 0;
-                width: 36px;
-                height: 36px;
-                cursor: pointer;
-                background: image-url("check.png") right -4px no-repeat;
-                &.checked {
-                  background-image: image-url("check-checked.png");
-                }
-              }
+            &.cal {
+              background-position:10px -94px;
             }
-            p {
-              font-size: 12px;
+            &.link {
+              background-position:10px -206px;
             }
-            a.btn-grey {
-              float: right;
+            &.text {
+              background-position:10px -316px;
             }
-            &.open {
-              background: $pane2;
+            &.map-point {
+              background-position:10px -426px;
+            }
+            &.doc {
+              background-position:10px -538px;
             }
           }
         }
@@ -609,9 +595,9 @@ section#user-locations {
   }
   .pagination {
     margin:15px 0;
+    text-align:center;
     ul {
-      display:table;
-      margin:0 auto;
+      @include inline-block;
     }
   }
 }

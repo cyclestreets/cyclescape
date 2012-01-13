@@ -197,6 +197,11 @@ a.read-more-simple {
   }
 }
 
+.fancy-down-arrow {
+  padding:10px 0 10px 40px !important;
+  background: image-url("sprite.png") 5px -1171px no-repeat;
+}
+
 .close {
   @include button-reset(0px);
   width: 8px;

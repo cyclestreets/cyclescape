@@ -39,23 +39,6 @@ $(function(){
   });
 
   /*
-   * NOT BRILLIANT - resource list and checks
-   */
-  $('#resource-list li').live('click', function(e){
-    e.preventDefault();
-    if ($(this).hasClass('open')) {
-      $(this).removeClass('open').addClass('closed');
-      $('p, .btn-grey', $(this)).hide();
-    } else {
-      $(this).removeClass('closed').addClass('open');
-      $('p, .btn-grey', $(this)).show();
-    }
-  });
-  $('.check').click(function(){
-    $(this).toggleClass('checked');
-  });
-
-  /*
    * group selector
    */
   // hide on hover of my account

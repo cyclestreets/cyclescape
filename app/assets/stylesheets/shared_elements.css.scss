@@ -218,8 +218,8 @@ article:hover > menu.tools, header:hover > menu.tools {
   padding: 0 10px;
   height: 210px;
 }
-.map {
-  position: relative;
+.map img {
+  display:block;
 }
 .map-tools {
   position: absolute;
@@ -453,16 +453,19 @@ ul.content-icon-list {
       background-position:0 3px;
     }
     &.cal {
-      background-position:0 -42px;
+      background-position:0 -104px;
     }
     &.link {
-      background-position:0 -89px;
+      background-position:0 -216px;
     }
     &.text {
-      background-position:0 -136px;
+      background-position:0 -326px;
     }
     &.map-point {
-      background-position:0 -184px;
+      background-position:0 -436px;
+    }
+    &.doc {
+      background-position:0 -548px;
     }
   }
 }
@@ -605,9 +608,6 @@ ul.issue-list {
     }
   }
 }
-
-
-
 
 
 

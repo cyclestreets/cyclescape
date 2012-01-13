@@ -148,38 +148,42 @@
 <aside id="sidebar">
   <button class="btn-green">Follow this thread</button>
   <!-- temp -->
-  <section>
-    <div class="mini-map">
-      <img src="/assets/images/minimap.jpg" />
-      <menu class="tools">
+  <section class="box">
+    <div class="map">
+      <%= image_tag("exmap3.png", width: "278") %>
+      <menu class="map-tools">
         <button class="person">Person</button>
         <button class="zoom">Zoom</button>
       </menu>
     </div>
   </section>
 
-  <section id="resource-list">
+  <section id="resource-list" class="box">
     <h2>Recommended Resources</h2>
-    <ul>
-      <li>
-        <h3>2011 National Road Safety<span class="check"></span></h3>
+    <ul class="content-icon-list">
+      <li class="image">
+        <a href="/">2011 National Road Safety</a>
       </li>
-      <li>
-        <h3>Cycle parking proposal for planning application<span class="check checked"></span></h3>
+      <li class="cal">
+        <a href="/">Cycle parking proposal for planning application</a>
       </li>
-      <li class="open">
-        <h3>DiscussionL Make cycle lanes wider<span class="check"></span></h3>
-        <p>A description should appear when you hover over the item. Items bloew will slide down and the description will be revealed.</p>
-        <a href="/" class="btn-grey">View resource</a>
+      <li class="text">
+        <a href="/">Recommend guidelines for UK cycle paths</a>
       </li>
-      <li>
-        <h3>Recommend guidelines for UK cycle paths<span class="check"></span></h3>
+      <li class="map-point">
+        <a href="/">DiscussionL Make cycle lanes wider</a>
+      </li>
+      <li class="link">
+        <a href="/">Recommend guidelines for UK cycle paths</a>
+      </li>
+      <li class="doc">
+        <a href="/">Recommend guidelines for UK cycle paths</a>
       </li>
     </ul>
-    <a href="/">View all resources</a>
+    <a href="/" class="fancy-down-arrow">Search library / add library item to thread</a>
   </section>
 
-  <section>
+  <section class="box">
     <form>
       <label>My priority:</label>
       <select>
@@ -189,7 +193,7 @@
     </form>
   </section>
 
-  <section>
+  <section class="box">
     <h2>Following this thread</h2>
     <dl>
       <dt class="title">Owner</dt>
