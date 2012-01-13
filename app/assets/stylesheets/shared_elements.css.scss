@@ -536,6 +536,34 @@ ul.issue-list {
     padding-bottom:20px;
     border-bottom:3px solid $paneborder;
     margin-bottom:20px;
+    overflow:hidden;
+    &:last-child {
+      margin-bottom:20px;
+    }
+    .map {
+      display:table-cell;
+      width:300px;
+      height:180px;
+      vertical-align:top;
+    }
+    .issue-content {
+      display:table-cell;
+      width:480px;
+      vertical-align:top;
+      padding-right:90px;
+      .meta {
+        margin-bottom:15px;
+      }
+    }
+    .votes-cell {
+      width:60px;
+      display:table-cell;
+      height:180px;
+      vertical-align:middle;
+      .votes {
+      }
+      // width:210px;
+    }
   }
 }
 
@@ -546,23 +574,24 @@ ul.issue-list {
   a.down {
     @include button-reset;
     position:absolute;
+    margin:0 10px;
     width:20px;
     height:12px;
-    background:image-url("sprite.png") -2px -904px no-repeat;
+    background:image-url("sprite.png") -3px -904px no-repeat;
     &:hover {
-      background-position:-42px -904px;
+      background-position:-43px -904px;
     }
   }
   a.down {
-    background-position:-2px -953px;
+    background-position:-3px -953px;
     bottom:0;
     &:hover {
-      background-position:-42px -953px;
+      background-position:-43px -953px;
     }
   }
   .vote-count {
     top:30px;
-    width: 60px;
+    width: 40px;
     position:absolute;
     font-size: 12px;
     color: $colour1;

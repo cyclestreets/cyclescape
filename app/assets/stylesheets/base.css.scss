@@ -111,6 +111,15 @@ input.submit,
 .btn-green {
   @include button-text-green;
 }
+.btn-big-green {
+  @include button-text-green;
+  padding: 15px;
+  text-align: center;
+  font: {
+    size: 18px;
+    weight: bold;
+  }
+}
 .btn-red {
   @include button-text-red;
 }

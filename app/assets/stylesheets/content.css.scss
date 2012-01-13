@@ -571,7 +571,47 @@ section#user-locations {
 }
 
 /* Issue List */
+#issue-list-header {
+  oveflow:hidden;
+  h1 {
+    float:left;
+  }
+  .btn-big-green {
+    float:right;
+  }
+}
 #issue-list-tabs {
+  clear:both;
   @extend #dashboard-tabs;
-  
+  .tabs a.list,
+  .tabs a.list:hover,
+  .tabs a.list.current {
+    padding-left:40px;
+    padding-right:20px;
+    background-image:image-url("sprite.png");
+    background-position:5px -1078px;
+    background-repeat: no-repeat;
+  }
+  .tabs a.map-pin,
+  .tabs a.map-pin:hover,
+  .tabs a.map-pin.current {
+    padding-left:40px;
+    padding-right:20px;
+    background-image:image-url("sprite.png");
+    background-position:5px -292px;
+    background-repeat: no-repeat;
+  }
+  .filters {
+    .search-box,
+    button {
+      margin-right:30px;
+    }
+  }
+  .pagination {
+    margin:15px 0;
+    ul {
+      display:table;
+      margin:0 auto;
+    }
+  }
 }

@@ -166,18 +166,20 @@ form.guided {
 
 
 .search-box {
+  display:inline-block;
   position:relative;
+  width:206px;
   label {
     position:relative;
     left:-999999px;
   }
   input {
+    width:180px;
     border: 1px solid $grey;
     background: $white image-url("search.png") right 4px no-repeat;
-    padding: 5px 4px;
+    padding: 5px 20px 5px 4px;
     font-size: 14px;
     margin: 0;
-    float: left;
     &:focus {
       background-position: right -19px;
     }
