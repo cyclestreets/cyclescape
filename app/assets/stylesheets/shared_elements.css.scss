@@ -72,10 +72,10 @@ ul.following-thread {
   }
 }
 
-ul.thread {
+article.thread {
   @include list-reset-soft;
   margin: 20px 0;
-  li {
+  section.message {
     padding: 20px 10px;
     border-bottom: 3px solid $grey;
     &:last-child {
@@ -89,7 +89,7 @@ ul.thread {
       float: left;
       margin-right: 20px;
     }
-    .item-content {
+    .body {
       overflow: hidden;
       position: relative;
       .author {
