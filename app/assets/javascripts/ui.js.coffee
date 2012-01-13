@@ -1,4 +1,7 @@
 jQuery ->
+  # Tabs
+  $("ul.tabs").tabs "> div.panes > div"
+
   # Crude way to make large blocks .clickable by definiting a.primary-link in them
   $(".clickable").live "click", (e) ->
     window.location.href = $(this).find("a.primary-link").attr("href")
