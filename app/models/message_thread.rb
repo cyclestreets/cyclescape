@@ -30,6 +30,7 @@ class MessageThread < ActiveRecord::Base
   has_many :participants, through: :messages, source: :created_by, uniq: true
   has_many :user_priorities, class_name: "UserThreadPriority", foreign_key: "thread_id"
   has_and_belongs_to_many :tags, join_table: "message_thread_tags", foreign_key: "thread_id"
+  has_one :latest_message, foreign_key: "thread_id", order: "created_at DESC", class_name: "Message"
 
   scope :public, where("privacy = 'public'")
   scope :private, where("privacy = 'group'")
