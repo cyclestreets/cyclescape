@@ -247,4 +247,28 @@ describe Issue do
       subject.photo_uid.should =~ /issue_photos/
     end
   end
+
+  context "tags with icons" do
+    subject { FactoryGirl.create(:issue) }
+    let(:tag) { FactoryGirl.create(:tag) }
+    let(:tag_with_icon) { FactoryGirl.create(:tag_with_icon) }
+    let(:tag_with_icon2) { FactoryGirl.create(:tag_with_icon) }
+
+    it "should return an icon identifier" do
+      subject.tags = [tag, tag_with_icon]
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
+    end
+
+    it "should return no icon identifier" do
+      subject.tags = [tag]
+      subject.icon_from_tags.should be_nil
+    end
+
+    it "should be consistent with respect to tag order" do
+      subject.tags_string = "#{tag_with_icon.name} #{tag_with_icon2.name}"
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
+      subject.tags_string = "#{tag_with_icon2.name} #{tag_with_icon.name}"
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
+    end
+  end
 end
