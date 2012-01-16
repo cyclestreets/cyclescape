@@ -211,6 +211,16 @@ a.read-more-simple {
     background: image-url("sprite.png") -60px -69px no-repeat;
   }
 }
+.close-alt {
+  @include button-reset(10px);
+  width: 8px;
+  height: 8px;
+  padding:5px;
+  background:$grey2 image-url("sprite.png") -55px -24px no-repeat;
+  &:hover {
+    background-color:$lightgrey2;
+  }
+}
 
 .btn-next,
 .btn-prev {
