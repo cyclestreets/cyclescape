@@ -690,6 +690,10 @@ section.new-message {
       position:relative;
       .search-box {
         line-height:0;
+        margin-right:10px;
+      }
+      button {
+        margin-right:10px;
       }
       span.nub {
         position:absolute;
