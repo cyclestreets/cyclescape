@@ -251,89 +251,6 @@ article:hover > menu.tools, header:hover > menu.tools {
   }
 }
 
-section.new-message {
-  padding: 20px;
-  margin-top: 40px;
-  overflow: hidden;
-  #compose-new {
-    background: $pane1;
-    ul.tabs {
-      @include list-reset;
-      li {
-        a {
-          width: 67px;
-          height: 90px;
-          margin-left: 10px;
-          color: $grey2;
-          text: {
-            transform: uppercase;
-            align: center;
-          }
-          font-size: 11px;
-          span {
-            display: block;
-            width: 65px;
-            height: 65px;
-            border: 1px solid $lightgrey;
-            background: $paneborder image-url("wysiwyg.png") 0 0 no-repeat;
-            @include border-radius(10px);
-            &.text {
-              background-position: 16px 12px;
-            }
-            &.photo {
-              background-position: -60px 12px;
-            }
-            &.map {
-              background-position: -137px 12px;
-            }
-            &.link {
-              background-position: -212px 12px;
-            }
-            &.library {
-              background-position: -288px 12px;
-            }
-            &.deadline {
-              background-position: -379px 12px;
-            }
-          }
-          &:hover {
-            color: $lightblack;
-            text-decoration: none;
-            span {
-              background-color: $pane2;
-            }
-          }
-          &.current span {
-            @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 0 6px);
-          }
-        }
-      }
-    }
-    .pane {
-      h3 {
-        color: $lightgrey2;
-      }
-      input.text-input,
-      textarea {
-        display: block;
-        padding: 10px;
-        width: 570px;
-        font-size: 16px;
-      }
-      .buttons {
-        float: right;
-        margin-top: 20px;
-        button {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-  .panes {
-    clear: both;
-  }
-}
-
 .tip,
 form.guided .tip {
   position: absolute;
@@ -604,5 +521,81 @@ form.filters {
   }
   select {
     margin-right:20px;
+  }
+}
+
+ul.styled-tabs {
+  @include list-reset;
+  border-bottom:1px solid $paneborder;
+  height:33px;
+  margin-bottom:15px;
+  overflow:visible;
+  li {
+    margin-right:10px;
+    a {
+      background:$pane1;
+      padding:6px 10px;
+      color:$lightgrey2;
+      border-top:1px solid $paneborder;
+      border-left:1px solid $paneborder;
+      border-right:1px solid $paneborder;
+      &.current,
+      &.current:hover {
+        color:$black;
+        background:$white;
+        border-bottom:1px solid $white;
+      }
+      &:hover {
+        text-decoration:none;
+        background:$pane2;
+      }
+    }
+  }
+}
+
+
+section.new-message {
+  clear:both;
+  margin-top: 40px;
+  overflow: hidden;
+  ul.styled-tabs {
+    li {
+      a {
+        padding-left:30px;
+      }
+    }
+  }
+
+
+  #compose-new {
+    background: $pane1;
+    ul.tabs {
+      @extend ul.content-icon-list;
+      li {
+        float:left;
+      }
+    }
+    .pane {
+      h3 {
+        color: $lightgrey2;
+      }
+      input.text-input,
+      textarea {
+        display: block;
+        padding: 10px;
+        width: 570px;
+        font-size: 16px;
+      }
+      .buttons {
+        float: right;
+        margin-top: 20px;
+        button {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .panes {
+    clear: both;
   }
 }
