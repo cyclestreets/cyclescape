@@ -1,4 +1,5 @@
 %section.new-message
+  %p.label Select
   %ul.tabs.styled-tabs
     %li
       = link_to "#compose-new" do
@@ -7,31 +8,26 @@
       = link_to "#from-library" do
         %span.from-library From Library
   .panes
-    #compose-new
+    #compose-new.pane
       %ul.tabs
         %li.text
           = link_to "#new-text-message" do
-            %span
             = t ".text_message"
         %li.image
           = link_to "#new-photo-message" do
-            %span
             = t ".photo_message"
         %li.map-point
           = link_to "#new-map-message" do
-            %span Map
+            Map
         %li.link
           = link_to "#new-link-message" do
-            %span
             = t ".link_message"
         %li.cal
           = link_to "#new-deadline-message" do
-            %span
             = t ".deadline_message"
         %li.doc
           = link_to "#new-attachment-message" do
-            %span
-              %p Attachment
+            Attachment
       .panes
         #new-text-message.pane
           = semantic_form_for @new_message, url: thread_messages_path(@thread) do |f|
@@ -46,5 +42,5 @@
         = render "message/deadlines/new"
         #new-map-massage.pane
           %p Attach a random file
-    #from-library
+    #from-library.pane
       = render "message/library_items/new"
