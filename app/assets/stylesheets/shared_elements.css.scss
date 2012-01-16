@@ -329,9 +329,6 @@ section.new-message {
       }
     }
   }
-
-
-
   .panes {
     clear: both;
   }
@@ -492,19 +489,11 @@ ul.library-list, ul.library-selector {
       &.library-photo {
         background-position:-58px 0;
       }
-      // Unused
-      &.cal {
-        background-position:-376px 0;
-      }
       &.library-link {
         background-position:-210px 0;
       }
       &.library-note {
         background-position:20px 0;
-      }
-      // Unused
-      &.map-point {
-        background-position:-134px 0;
       }
     }
     .lib-content {
@@ -563,9 +552,6 @@ ul.issue-list {
       display:table-cell;
       height:180px;
       vertical-align:middle;
-      .votes {
-      }
-      // width:210px;
     }
   }
 }
