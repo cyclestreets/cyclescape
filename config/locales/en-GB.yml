@@ -54,7 +54,18 @@
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
       subscribed_threads: "Subscribed Threads"
+      group_threads: "Group Threads"
+      group_threads_desc_html:
+        Recent threads with activity from your groups.
       update_your_areas: "Update your areas"
+      my_threads: "My Threads"
+      issues_nearby: "Issues Nearby"
+      posted:
+        message_html: "%{creator_link} posted a message"
+        deadline_message_html: "%{creator_link} posted a deadline"
+        photo_message_html: "%{creator_link} posted a photo"
+        link_message_html: "%{creator_link} posted a link"
+        library_item_message_html: "%{creator_link} added a library item"
   devise:
     registrations:
       edit:
