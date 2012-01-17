@@ -261,7 +261,7 @@ DEPENDENCIES
   email_reply_parser
   email_spec
   exceptional
-  factory_girl_rails
+  factory_girl_rails (~> 1.4.0)
   foreman
   formtastic
   haml-rails
