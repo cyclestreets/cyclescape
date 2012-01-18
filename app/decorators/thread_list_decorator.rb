@@ -16,4 +16,16 @@ class ThreadListDecorator < ApplicationDecorator
   def latest_activity_date
     "#{h.time_ago_in_words(thread.latest_message.created_at)} ago"
   end
+
+  def issue_title
+    thread.issue.title
+  end
+
+  def issue_link
+    h.link_to issue_title, thread.issue
+  end
+
+  def has_issue?
+    thread.issue
+  end
 end
