@@ -105,8 +105,11 @@
         padding: 10px 0;
         border: 1px solid $paneborder;
         @include border-radius(10px);
-        h2, h4, >a, form {
+        h2, h4, >a, form, .map {
           padding: 0 10px;
+        }
+        .map .map-tools {
+          right:10px;
         }
       }
       h2 {
@@ -194,47 +197,30 @@
           @include gradient($lightblack, $black);
           @include border-radius(10px 10px 0 0);
         }
-        ul {
-          @include list-reset;
+        ul.content-icon-list {
           margin-bottom: 10px;
           li {
-            background: $pane1;
-            display: block;
-            width: 258px;
-            padding: 10px 10px 10px 30px;
+            padding: 10px 10px 10px 40px;
             border-bottom: 1px solid $paneborder;
-            &:hover {
-              background: $pane2;
+            background-color: $pane1;
+            background-position:10px 13px;
+            &.image {
+              background-position:10px 13px;
             }
-            h3 {
-              position: relative;
-              padding: 0 36px 10px 0;
-              font: {
-                weight: normal;
-                size: 14px;
-              }
-              span.check {
-                display: block;
-                position: absolute;
-                right: 0;
-                top: 0;
-                width: 36px;
-                height: 36px;
-                cursor: pointer;
-                background: image-url("check.png") right -4px no-repeat;
-                &.checked {
-                  background-image: image-url("check-checked.png");
-                }
-              }
+            &.cal {
+              background-position:10px -94px;
             }
-            p {
-              font-size: 12px;
+            &.link {
+              background-position:10px -206px;
             }
-            a.btn-grey {
-              float: right;
+            &.text {
+              background-position:10px -316px;
             }
-            &.open {
-              background: $pane2;
+            &.map-point {
+              background-position:10px -426px;
+            }
+            &.doc {
+              background-position:10px -538px;
             }
           }
         }
@@ -243,8 +229,8 @@
   }
 }
 
-/* Issue Page */
-#issue-intro {
+/* Thread Page */
+#page #content section#thread-intro {
   overflow: hidden;
   margin-bottom: 30px;
   .map {
@@ -264,13 +250,16 @@
   }
 }
 
-#issue-replies {
+#thread-replies {
   header {
     background: $grey;
     padding: 5px;
     text-align: center;
     .pagination {
       @include inline-block;
+    }
+    button {
+      float:right;
     }
   }
 }
@@ -327,7 +316,8 @@ section#user-locations {
 }
 #user-tabs {
   clear:both;
-  nav {
+  ul.tabs {
+    @include list-reset-soft;
     margin-top:30px;
     width:209px;
     float:left;
@@ -336,56 +326,53 @@ section#user-locations {
     border-left:1px solid $paneborder;
     border-bottom:1px solid $paneborder;
     @include border-radius(10px 0 0 10px);
-    ul.tabs {
-      @include list-reset-soft;
-      li {
-        a {
-          position:relative;
-          width:159px;
-          height:20px;
-          padding:10px 40px 10px 10px;
-          color:$black;
-          font-size:13px;
-          border-bottom:1px solid $paneborder;
-          &.current {
-            background:$white;
-            border-right:1px solid $white;
-            z-index:2;
-            &:hover {
-              background:$white;
-              cursor:default;
-            }
-          }
+    li {
+      a {
+        position:relative;
+        width:159px;
+        height:20px;
+        padding:10px 40px 10px 10px;
+        color:$black;
+        font-size:13px;
+        border-bottom:1px solid $paneborder;
+        &.current {
+          background:$white;
+          border-right:1px solid $white;
+          z-index:2;
           &:hover {
-            text-decoration:none;
-            background:$pane2;
-          }
-          span.count {
-            display:block;
-            line-height:1;
-            font: {
-              size:11px;
-              weight:bold;
-            }
-            text-align:center;
-            letter-spacing:1px;
-            float:right;
-            color:$white;
-            padding:2px 4px;
-            margin-right:-30px;
-            background:$grey3;
-            border:2px solid $white;
-            @include border-radius(10px);
-            @include box-shadow(rgba(0, 0, 0, 0.3) 0 0 6px);
+            background:$white;
+            cursor:default;
           }
         }
-        &:first-child a {
-          @include border-radius(10px 0 0 0);
+        &:hover {
+          text-decoration:none;
+          background:$pane2;
         }
-        &:last-child a {
-          border-bottom:none;
-          @include border-radius(0 0 0 10px);
+        span.count {
+          display:block;
+          line-height:1;
+          font: {
+            size:11px;
+            weight:bold;
+          }
+          text-align:center;
+          letter-spacing:1px;
+          float:right;
+          color:$white;
+          padding:2px 4px;
+          margin-right:-30px;
+          background:$grey3;
+          border:2px solid $white;
+          @include border-radius(10px);
+          @include box-shadow(rgba(0, 0, 0, 0.3) 0 0 6px);
         }
+      }
+      &:first-child a {
+        @include border-radius(10px 0 0 0);
+      }
+      &:last-child a {
+        border-bottom:none;
+        @include border-radius(0 0 0 10px);
       }
     }
   }
@@ -407,35 +394,6 @@ section#user-locations {
 /* Dashbaord */
 
 #dashboard-tabs {
-  nav {
-    // overflow:hidden;
-    border-bottom:1px solid $paneborder;
-    height:33px;
-    margin-bottom:15px;
-    ul.tabs {
-      @include list-reset;
-      li {
-        margin-right:10px;
-        a {
-          background:$pane1;
-          padding:6px 10px;
-          color:$lightgrey2;
-          border-top:1px solid $paneborder;
-          border-left:1px solid $paneborder;
-          border-right:1px solid $paneborder;
-          &.current {
-            color:$black;
-            background:$white;
-            border-bottom:1px solid $white;
-          }
-          &:hover {
-            text-decoration:none;
-            background:$pane2;
-          }
-        }
-      }
-    }
-  }
   .panes {
     .pane {
       a.read-more-simple {
@@ -563,6 +521,51 @@ section#user-locations {
     .map {
       width:360px;
       height:360px;
+    }
+  }
+}
+
+/* Issue List */
+#issue-list-header {
+  oveflow:hidden;
+  h1 {
+    float:left;
+  }
+  .btn-big-green {
+    float:right;
+  }
+}
+#issue-list-tabs {
+  clear:both;
+  .tabs a.list,
+  .tabs a.list:hover,
+  .tabs a.list.current {
+    padding-left:40px;
+    padding-right:20px;
+    background-image:image-url("sprite.png");
+    background-position:5px -1078px;
+    background-repeat: no-repeat;
+  }
+  .tabs a.map-pin,
+  .tabs a.map-pin:hover,
+  .tabs a.map-pin.current {
+    padding-left:40px;
+    padding-right:20px;
+    background-image:image-url("sprite.png");
+    background-position:5px -292px;
+    background-repeat: no-repeat;
+  }
+  .filters {
+    .search-box,
+    button {
+      margin-right:30px;
+    }
+  }
+  .pagination {
+    margin:15px 0;
+    text-align:center;
+    ul {
+      @include inline-block;
     }
   }
 }

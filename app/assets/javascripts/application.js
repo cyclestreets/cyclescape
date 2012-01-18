@@ -14,7 +14,6 @@
 //= require map_edit
 //= require map_popup
 //= require map_style
-//= require message_threads
 //= require openlayers_pz
 //= require ui
 //= require tags

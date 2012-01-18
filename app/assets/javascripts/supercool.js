@@ -23,40 +23,19 @@ $(function(){
    */
   $('p.readmore').addClass('closed');
   //clicks
-  $('.intro .read-more-box').live('click', function(e){
+  $('.read-more-box').live('click', function(e){
     e.preventDefault();
-    $readmore = $(this).prev('.readmore');
-    readMore($readmore, $(this), 80);
-  });
-
-  $('#issue-intro .read-more-box').live('click', function(e){
-    e.preventDefault();
-    $readmore = $(this).prev('.readmore');
-    readMore($readmore, $(this), 180);
-  });
-
-  $('.thread .read-more-box').live('click', function(e){
-    e.preventDefault();
-    $readmore = $(this).prev('.readmore');
-    readMore($readmore, $(this), 80);
-  });
-
-
-  /*
-   * NOT BRILLIANT - resource list and checks
-   */
-  $('#resource-list li').live('click', function(e){
-    e.preventDefault();
-    if ($(this).hasClass('open')) {
-      $(this).removeClass('open').addClass('closed');
-      $('p, .btn-grey', $(this)).hide();
+    var h = '';
+    if ($(this).attr('rel')) {
+      // attribute exists
+      h = $(this).attr('rel');
     } else {
-      $(this).removeClass('closed').addClass('open');
-      $('p, .btn-grey', $(this)).show();
+      // attribute does not exist
+      h = 80;
     }
-  });
-  $('.check').click(function(){
-    $(this).toggleClass('checked');
+
+    $readmore = $(this).prev('.readmore');
+    readMore($readmore, $(this), h);
   });
 
   /*
