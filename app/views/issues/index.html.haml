@@ -13,5 +13,6 @@
           = render "search"
         %ul.issue-list
           = render partial: "compact", collection: @issues, as: :issue
+        = will_paginate @issues
       .pane
         = render "all_map"

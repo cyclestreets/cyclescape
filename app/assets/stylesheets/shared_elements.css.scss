@@ -33,42 +33,43 @@ ul.following-thread {
   }
 }
 
-.pagination ul {
-  @include list-reset;
-  li {
-    a {
-      background: $pane1;
-      margin: 0 2px;
-      padding-top: 1px;
-      width: 22px;
-      height: 21px;
-      text: {
-        align: center;
-        decoration: none;
-      }
-      color: $lightgrey2;
-      &:hover {
-        color: $pane1;
-        background: $lightergrey;
-      }
+// Will Paginate compatible styling
+.pagination {
+  a, em {
+    display: block;
+    float: left;
+    background: $pane1;
+    margin: 0 2px;
+    padding-top: 1px;
+    width: 22px;
+    height: 21px;
+    font-size: 14px;
+    text: {
+      align: center;
+      decoration: none;
     }
-    &.active a {
-      font-weight:bold;
+    color: $lightgrey2;
+    &:hover {
+      color: $pane1;
+      background: $lightergrey;
     }
-    &.prev a {
+    &.previous_page {
       text-indent: -999999px;
       background: $pane1 image-url("sprite.png") 4px -42px no-repeat;
       &:hover {
         background: $lightergrey image-url("sprite.png") 4px -62px no-repeat;
       }
     }
-    &.next a {
+    &.next_page {
       text-indent: -999999px;
       background: $pane1 image-url("sprite.png") 5px -82px no-repeat;
       &:hover {
         background: $lightergrey image-url("sprite.png") 5px -102px no-repeat;
       }
     }
+  }
+  em {
+    font-weight: bold;
   }
 }
 
