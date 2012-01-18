@@ -20,6 +20,7 @@ MapPopup = {
       feature.popup = new OpenLayers.Popup.FramedCloud("pop",
           feature.geometry.getBounds().getCenterLonLat(),
           null,
+          '<img src="' + feature.attributes.image_url + '" width="37" height="37">' +
           '<h3><a href="' + feature.attributes.url + '">' + feature.attributes.title + '</a></h3>' +
             '<p>created by <a href="' + feature.attributes.created_by_url + '">' + feature.attributes.created_by + '</p>',
           null,

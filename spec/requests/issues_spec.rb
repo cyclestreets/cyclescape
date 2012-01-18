@@ -83,8 +83,8 @@ describe "Issues" do
       end
 
       it "should be shown" do
-        page.should have_content(issue.tags.first.name)
-        page.should have_content(issue.tags.second.name)
+        page.should have_link(issue.tags.first.name)
+        page.should have_link(issue.tags.second.name)
       end
 
       it "should be editable" do

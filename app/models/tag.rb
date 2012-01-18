@@ -23,6 +23,10 @@ class Tag < ActiveRecord::Base
     end
   end
 
+  def to_param
+    name.parameterize
+  end
+
   protected
 
   def self.normalise(tag)

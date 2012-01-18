@@ -11,6 +11,8 @@ class MessageThreadsController < ApplicationController
     @messages = @thread.messages.all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers
+    @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
+    @tag_panel = TagPanelDecorator.new(@thread, form_url: thread_tags_path(@thread))
   end
 
   def edit

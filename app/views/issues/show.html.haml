@@ -12,7 +12,7 @@
     %section.meta
       %p= t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)
     %section.tags
-      = render partial: "issue/tags/panel", locals: {issue: @issue}
+      = @tag_panel.render
     %section.description
       = @issue.description
     %section.voting
