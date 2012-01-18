@@ -2,7 +2,7 @@ class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
   
   def index
-    @issues = Issue.order("created_at DESC").limit(10)
+    @issues = IssueDecorator.decorate(Issue.by_most_recent.limit(10).page(params[:page]))
     @start_location = index_start_location
     @popular_issues = Issue.plusminus_tally(start_at: 2.weeks.ago) # only count recent votes
   end

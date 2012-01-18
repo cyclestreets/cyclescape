@@ -459,9 +459,13 @@ ul.issue-list {
     }
     .map {
       display:table-cell;
-      width:300px;
+      width:270px;
       height:180px;
+      padding-right:30px;
       vertical-align:top;
+      .tinymap {
+        height: 180px;
+      }
     }
     .issue-content {
       display:table-cell;

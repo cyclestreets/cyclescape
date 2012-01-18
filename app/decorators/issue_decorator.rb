@@ -5,6 +5,10 @@ class IssueDecorator < ApplicationDecorator
     h.render partial: "map", locals: {issue: issue}
   end
 
+  def brief_description
+    h.truncate issue.description, length: 90, separator: ".", omission: "\u2026"
+  end
+
   def description
     h.simple_format issue.description
   end
@@ -36,6 +40,28 @@ class IssueDecorator < ApplicationDecorator
     icon ||= "misc" if default
     return "" if icon.nil?
     h.image_path "map-icons/#{size}-#{icon}.png"
+  end
+
+  def creator_link
+    h.t "issues.compact.created_by_html", creator_link: h.link_to_profile(issue.created_by)
+  end
+
+  def tags_list
+    h.render partial: "shared/tags/list", locals: {tags: issue.tags}
+  end
+
+  def thread_count
+    issue.threads.count
+  end
+
+  def creation_time
+    h.content_tag(:time, datetime: issue.created_at) do
+      h.time_ago_in_words(issue.created_at) + " ago"
+    end
+  end
+
+  def vote_count
+    issue.plusminus
   end
 
   protected

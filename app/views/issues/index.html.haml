@@ -1,14 +1,17 @@
-%section.issues
+%section.issues.content-no-sidebar#content
   %header
     %h1= t ".title"
-  .tasks
-    = link_to t(".new_issue"), new_issue_path, class: "button"
-  .search
-    = render "search"
-  = render "all_map"
-  .recent
-    %h2= t ".recent_issues"
-    = render partial: "compact", collection: @issues, as: :issue, locals: {collapsed: true, prefix: "recent"}
-  .popular
-    %h2= t ".popular_issues"
-    = render partial: "compact", collection: @popular_issues, as: :issue, locals: {collapsed: true, prefix: "popular"}
+    .tasks
+      = link_to t(".new_issue"), new_issue_path, class: "button"
+  #issue-list-tabs
+    %ul.tabs.styled-tabs
+      %li= link_to t(".list_tab"), "#", class: "list"
+      %li= link_to t(".map_tab"), "#", class: "map-pin"
+    .panes
+      .pane
+        .search
+          = render "search"
+        %ul.issue-list
+          = render partial: "compact", collection: @issues, as: :issue
+      .pane
+        = render "all_map"

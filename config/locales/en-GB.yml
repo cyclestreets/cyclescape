@@ -141,8 +141,11 @@
         edit_tags: "edit tags"
   issues:
     compact:
-      created_by: "Created by"
-      tally: "(%{count})"
+      created_by_html: "Created by %{creator_link}"
+      votes: "votes"
+      thread_count:
+        one: "1 thread"
+        other: "%{count} threads"
     destroy:
       failure: "Can't delete that issue"
       success: "Issue deleted"
@@ -150,9 +153,10 @@
       title: "Edit Issue"
     index:
       new_issue: "Create new Issue"
-      popular_issues: "Currently Popular Issues"
       recent_issues: "Recent Issues"
       title: "All Issues"
+      list_tab: "List"
+      map_tab: "Map"
     new:
       title: "Report an issue"
     search:
