@@ -30,6 +30,7 @@ class MessageThread < ActiveRecord::Base
   has_many :participants, through: :messages, source: :created_by, uniq: true
   has_many :user_priorities, class_name: "UserThreadPriority", foreign_key: "thread_id"
   has_and_belongs_to_many :tags, join_table: "message_thread_tags", foreign_key: "thread_id"
+  has_one :latest_message, foreign_key: "thread_id", order: "created_at DESC", class_name: "Message"
 
   scope :public, where("privacy = 'public'")
   scope :private, where("privacy = 'group'")
@@ -45,6 +46,12 @@ class MessageThread < ActiveRecord::Base
 
   def self.with_messages_from(user)
     where "EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)", user
+  end
+
+  def self.order_by_latest_message
+    rel = joins("JOIN (SELECT thread_id, MAX(created_at) AS created_at FROM messages m GROUP BY thread_id)" +
+                "AS latest ON latest.thread_id = message_threads.id")
+    rel.order("latest.created_at DESC")
   end
 
   def add_subscriber(user)
