@@ -156,6 +156,8 @@
       title: "Recent Issues"
       list_tab: "List"
       map_tab: "Map"
+      search_issues: "Search issues"
+      go_button: "Go"
     new:
       title: "Report an issue"
     search:

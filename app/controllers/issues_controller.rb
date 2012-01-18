@@ -2,9 +2,13 @@ class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
   
   def index
-    @issues = IssueDecorator.decorate(Issue.by_most_recent.paginate(page: params[:page]))
+    if @query
+      issues = Issue.find_with_index(@query)
+    else
+      issues = Issue.by_most_recent.paginate(page: params[:page])
+    end
+    @issues = IssueDecorator.decorate(issues)
     @start_location = index_start_location
-    @popular_issues = Issue.plusminus_tally(start_at: 2.weeks.ago) # only count recent votes
   end
 
   def show
@@ -80,8 +84,9 @@ class IssuesController < ApplicationController
   end
 
   def search
-    @query = params[:q]
-    @results = Issue.find_with_index(params[:q])
+    @query = params[:search]
+    index
+    render action: "index"
   end
 
   def vote_up

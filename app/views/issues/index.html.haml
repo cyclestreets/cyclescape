@@ -10,9 +10,14 @@
     .panes
       .pane
         .search
-          = render "search"
+          = form_tag({action: "search"}, {method: :get, class: "filters"}) do
+            .search-box
+              = label_tag :search, t(".search_issues")
+              = text_field_tag :search, params[:search], placeholder: t(".search_issues")
+            = button_tag t(".go_button")
         %ul.issue-list
           = render partial: "compact", collection: @issues, as: :issue
-        = will_paginate @issues
+        - if @issues.respond_to?(:total_pages)
+          = will_paginate @issues
       .pane
         = render "all_map"
