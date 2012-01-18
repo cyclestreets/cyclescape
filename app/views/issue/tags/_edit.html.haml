@@ -1,7 +1,0 @@
-.tag-form
-  = semantic_form_for issue, url: issue_tags_path(issue), remote: true, html: {class: "edit-tags", data: {type: "html"} } do |f|
-    = f.inputs do
-      = f.input :tags_string, as: :tags
-    = f.buttons do
-      = f.commit_button
-      = cancel_link issue_path(issue)

@@ -264,6 +264,10 @@
     index:
       latest_activity: "Latest activity %{ago} ago"
       title: "Public Threads"
+    library_panel:
+      library: "Library"
+      no_library_items: "Couldn't find any relevant library items based on the thread tags."
+      tag_thread_guidance: "Add tags to this thread to find relevant library items."
     new:
       title: "New Thread"
     priority_panel:
@@ -368,6 +372,13 @@
       success:
         thank_you: "Thank you for your feedback."
         close: "< Back to site"
+  tags:
+    show:
+      issues: "Issues"
+      library_items: "Library Items"
+      no_results_found: "No results found"
+      threads: "Threads"
+      heading: "Things tagged '%{name}'"
   thread_mailer:
     new_deadline_message:
       added: "%{name} added a deadline to the thread"

@@ -1,7 +1,0 @@
-.tag-form
-  = semantic_form_for thread, url: thread_tags_path(thread), remote: true, html: {class: "edit-tags", data: {type: "html"} } do |f|
-    = f.inputs do
-      = f.input :tags_string, as: :tags
-    = f.buttons do
-      = f.commit_button
-      = cancel_link thread_path(thread)
