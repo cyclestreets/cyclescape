@@ -21,9 +21,3 @@
         .vote-count
           %span= issue.vote_count
           = t(".votes")
-      -#
-        %span.tally
-          = t ".tally", count: issue.plusminus
-        .threads
-          = pluralize(issue.threads.public.count, "public thread") + ", "
-          = pluralize(issue.threads.private.count, "private thread")
