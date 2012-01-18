@@ -158,6 +158,7 @@
       map_tab: "Map"
       search_issues: "Search issues"
       go_button: "Go"
+      clear: "Clear"
     new:
       title: "Report an issue"
     search:
