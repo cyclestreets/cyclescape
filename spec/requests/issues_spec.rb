@@ -115,48 +115,47 @@ describe "Issues" do
   context "search" do
     include_context "signed in as a site user"
     let(:issue) { FactoryGirl.create(:issue, :with_tags) }
+    let(:search_field) { I18n.t("issues.index.search_issues") }
+    let(:search_button) { I18n.t("issues.index.search_button") }
 
     before do
       visit issues_path
     end
 
     it "should return results for a title search" do
-      fill_in "Search for", with: issue.title
-      click_on "Search"
+      fill_in search_field, with: issue.title
+      click_on search_button
 
-      page.should have_content("Search Results")
       page.should have_content(issue.title)
     end
 
     it "should return results for a description search" do
-      fill_in "Search for", with: issue.description
-      click_on "Search"
+      fill_in search_field, with: issue.description
+      click_on search_button
 
-      page.should have_content("Search Results")
       page.should have_content(issue.title)
     end
 
     it "should return results for a tag search" do
-      fill_in "Search for", with: issue.tags.first.name
-      click_on "Search"
+      fill_in search_field, with: issue.tags.first.name
+      click_on search_button
 
-      page.should have_content("Search Results")
       page.should have_content(issue.title)
     end
 
     it "should return no results for gibberish" do
-      fill_in "Search for", with: "abcdefgh12345"
-      click_on "Search"
+      fill_in search_field, with: "abcdefgh12345"
+      click_on search_button
 
-      page.should have_content("No results found")
+      page.should have_content("No issues found")
     end
 
     it "should not return deleted issues" do
-      fill_in "Search for", with: issue.title
+      fill_in search_field, with: issue.title
       issue.destroy
-      click_on "Search"
+      click_on search_button
 
-      page.should have_content("No results found")
+      page.should have_content("No issues found")
     end
   end
 

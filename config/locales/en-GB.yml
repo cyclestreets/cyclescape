@@ -157,16 +157,14 @@
       list_tab: "List"
       map_tab: "Map"
       search_issues: "Search issues"
-      go_button: "Go"
+      search_button: "Go"
       clear: "Clear"
+      no_results_found: "No issues found."
+      results_found:
+        one: "One issue found for '%{query}'."
+        other: "%{count} issues found for '%{query}'"
     new:
       title: "Report an issue"
-    search:
-      no_results_found: "No results found for '%{query}'."
-      results_found:
-        one: "One result found for '%{query}'."
-        other: "%{count} results found for '%{query}'"
-      title: "Issue Search Results"
     show:
       added_by_html: "Reported by %{name} on %{time}"
       confirm_delete: "Are you sure?"
