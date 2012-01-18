@@ -13,12 +13,12 @@ describe "Issues" do
 
       it "should create a new issue" do
         fill_in "Title", with: issue_values[:title]
-        attach_file "Photo", test_photo_path
-        fill_in "Tags", with: "parking"
-        fill_in "Description", with: issue_values[:description]
+        attach_file "Add a photo", test_photo_path
+        fill_in "Tag your issue", with: "parking"
+        fill_in "Write a description", with: issue_values[:description]
         # Note hidden map field
         find("#issue_loc_json").set(issue_values[:loc_json])
-        click_on "Create Issue"
+        click_on "Send Report"
         within("#content header") do
           page.should have_content(issue_values[:title])
         end
@@ -59,7 +59,7 @@ describe "Issues" do
       end
 
       it "should have a link to create a new public thread" do
-        page.should have_link("New Thread")
+        page.should have_link("Discuss")
       end
     end
 
@@ -71,7 +71,7 @@ describe "Issues" do
       end
 
       it "should have a link to create a new public thread" do
-        page.should have_link("New Thread")
+        page.should have_link("Discuss")
       end
     end
 
@@ -83,8 +83,8 @@ describe "Issues" do
       end
 
       it "should be shown" do
-        page.should have_content(issue.tags.first.name)
-        page.should have_content(issue.tags.second.name)
+        page.should have_link(issue.tags.first.name)
+        page.should have_link(issue.tags.second.name)
       end
 
       it "should be editable" do
@@ -304,11 +304,7 @@ describe "Issues" do
 
       it "shouldn't count repeated votes" do
         click_on "Vote Up"
-        click_on "Vote Up"
-        page.should have_content("You've already voted up this issue")
-        within(".voting") do
-          page.should have_content("2")
-        end
+        page.should_not have_content("Vote Up")
       end
 
       it "should allow you to change your vote" do
@@ -317,6 +313,45 @@ describe "Issues" do
         within(".voting") do
           page.should have_content("0")
         end
+      end
+
+      it "should allow you to cancel your vote" do
+        within(".voting") do
+          page.should have_content("1")
+        end
+        click_on "Vote Up"
+        click_on "Cancel Vote"
+        page.should have_content("Your vote has been cleared")
+        within(".voting") do
+          page.should have_content("1")
+        end
+      end
+    end
+  end
+
+  context "geojson" do
+    context "issue" do
+      let(:issue) { FactoryGirl.create(:issue) }
+
+      before do
+        visit geometry_issue_path(issue, format: :json)
+      end
+
+      it  "should return a thumbnail attribute" do
+        page.should have_content("thumbnail")
+      end
+    end
+
+    context "all issues" do
+      let!(:issue) { FactoryGirl.create(:issue) }
+
+      before do
+        visit all_geometries_issues_path(format: :json)
+      end
+
+      it "should return various attributes" do
+        page.should have_content("thumbnail")
+        page.should have_content("created_by_url")
       end
     end
   end

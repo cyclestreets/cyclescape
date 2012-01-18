@@ -5,13 +5,14 @@ authorization do
 
   role :admin do
     includes :member
-    has_permission_on :admin_groups, :group_members, :group_memberships, to: :manage
+    has_permission_on :admin_groups, :group_members, :group_memberships, :group_profiles, to: :manage
     has_permission_on :admin_users, to: :manage
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :manage
     has_permission_on :messages, to: :censor
     has_permission_on :site_comments, to: :manage
+    has_permission_on :user_prefs, :user_profiles, to: :manage
   end
 
   role :member do
@@ -36,7 +37,7 @@ authorization do
       to :manage
       if_attribute committee_members: contains { user }
     end
-    has_permission_on :issues, to: [:new, :create, :vote_up, :vote_down]
+    has_permission_on :issues, to: [:new, :create, :vote_up, :vote_down, :vote_clear]
     has_permission_on :issues do
       to [:edit, :update]
       if_attribute created_by: is { user }, created_at_as_i: is_in { 24.hours.ago.to_i..Time.now.to_i }
@@ -49,7 +50,11 @@ authorization do
       if_attribute group: is_in { user.groups }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
-      to :view
+      to [:edit, :update]
+      if_attribute group_committee_members: contains { user }
+    end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
+      to :show
       if_attribute private_to_group?: is { true }, group: is_in { user.groups }
     end
     has_permission_on :message_thread_subscriptions, to: [:create, :destroy]
@@ -59,6 +64,10 @@ authorization do
     has_permission_on :libraries, :library_documents, :library_notes, to: :manage
     has_permission_on :library_tags, to: :update
     has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry]
+    has_permission_on :user_prefs do
+      to :manage
+      if_attribute id: is { user.id }
+    end
     has_permission_on :user_profiles do
       to :manage
       if_attribute id: is { user.id }
@@ -75,18 +84,20 @@ authorization do
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries, :search]
     has_permission_on :libraries, :library_documents, :library_notes, to: [:view, :search]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
-      to :view
+      to :show
       if_attribute public?: is { true }
     end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :index
     has_permission_on :message_photos, to: :show
     has_permission_on :site_comments, to: [:new, :create]
+    has_permission_on :tags, to: :show
     has_permission_on :user_profiles, to: :view
   end
 end
 
 privileges do
   privilege :manage do
-    includes :index, :new, :create, :show, :edit, :update, :destroy
+    includes :view, :new, :create, :edit, :update, :destroy
   end
 
   privilege :view do

@@ -30,6 +30,7 @@ class MessageThread < ActiveRecord::Base
   has_many :participants, through: :messages, source: :created_by, uniq: true
   has_many :user_priorities, class_name: "UserThreadPriority", foreign_key: "thread_id"
   has_and_belongs_to_many :tags, join_table: "message_thread_tags", foreign_key: "thread_id"
+  has_one :latest_message, foreign_key: "thread_id", order: "created_at DESC", class_name: "Message"
 
   scope :public, where("privacy = 'public'")
   scope :private, where("privacy = 'group'")
@@ -45,6 +46,47 @@ class MessageThread < ActiveRecord::Base
 
   def self.with_messages_from(user)
     where "EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)", user
+  end
+
+  def self.order_by_latest_message
+    rel = joins("JOIN (SELECT thread_id, MAX(created_at) AS created_at FROM messages m GROUP BY thread_id)" +
+                "AS latest ON latest.thread_id = message_threads.id")
+    rel.order("latest.created_at DESC")
+  end
+
+  def add_subscriber(user)
+    found = user.thread_subscriptions.to(self)
+    if found
+      # Reset the subscription
+      found.undelete!
+      found
+    else
+      subscriptions.create(user: user)
+    end
+  end
+
+  def add_message_from_email!(mail)
+    from_address = mail.message.header[:from].addresses.first
+    from_name = mail.message.header[:from].display_names.first
+
+    user = User.find_or_invite(from_address, from_name)
+    raise "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
+
+    # For multipart messages we pull out the text/plain content
+    body = if mail.message.multipart?
+      mail.message.text_part.body
+    else
+      mail.message.body
+    end
+
+    parsed = EmailReplyParser.read(body.to_s)
+    stripped = parsed.fragments.select {|f| !f.hidden? }.join
+
+    messages.create!(body: stripped, created_by: user)
+  end
+
+  def email_subscribers
+    subscribers.joins(:prefs).where(user_prefs: {:notify_subscribed_threads => true})
   end
 
   def private_to_group?
@@ -69,6 +111,15 @@ class MessageThread < ActiveRecord::Base
 
   def priority_for(user)
     user_priorities.where(user_id: user.id).first
+  end
+
+  # for auth checks
+  def group_committee_members
+    if group_id
+      group.committee_members
+    else
+      []
+    end
   end
 
   protected

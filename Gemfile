@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.1.3'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -12,7 +12,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
-gem 'rgeo-geojson', require: "rgeo/geo_json"
+gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
 
 # Back-end gems
@@ -31,6 +31,7 @@ gem 'exceptional'
 gem 'foreman'
 gem 'whenever'
 gem 'draper'
+gem 'email_reply_parser'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -61,7 +62,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'factory_girl_rails'
+  gem 'factory_girl_rails', '~> 1.4.0'
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'capybara'

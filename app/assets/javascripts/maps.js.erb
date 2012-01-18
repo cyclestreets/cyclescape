@@ -20,8 +20,10 @@ var MapSearch = {
     this.seqid++;
     var thiscall = this.seqid;
     var self = this;
-    params = $("#map-search-form").serializeArray();
-    params.push({name: "key", value: this.geocoder_key});
+    params = [
+      {name: "street", value: $("#map-query").val()},
+      {name: "key", value: this.geocoder_key}
+    ]
     extents = this.map.getExtent().clone().transform(map.getProjectionObject(), this.projection());
     params.push({name: "n", value: extents.top},
                 {name: "s", value: extents.bottom},
@@ -37,7 +39,7 @@ var MapSearch = {
         },
         error: this.handle_error,
     });
-    $("#map-searching").show();
+    $("#map-search-status, #map-searching").show();
   },
 
   handle_result: function(response, call_seq) {
@@ -64,13 +66,14 @@ var MapSearch = {
     $(results).each(function(i, item) {
       list.append(
         $('<li />').
-        text(item.name + ' (' + item.near + ')').
-        click( function() {
+          html("<a href='#'>" + item.name + "(" + item.near + ")" + "</a>").
+          click(function() {
             $('#map').trigger("recenter", {longitude: item.longitude, latitude: item.latitude});
             $("#map-search-main-result").
               find(".name").text(item.name).end().
               find(".near").text(item.near)
-        })
+            return false;
+          })
       );
     });
     $('#map-search-results').replaceWith(list).show();
@@ -93,9 +96,22 @@ $(function() {
     map.setCenter(coords, params.zoom);
   });
     
-  $('#map-search-form').submit(function() {
-    MapSearch.set_map(map);
+  $(".map-search button").click(function() {
+    MapSearch.set_map(map);  // This is bad
     MapSearch.search();
     return false;
+  });
+  $(".map-search input[type='text']").bind("keydown", function(e) {
+    if (e.which == 13) {
+      $(this).parent().find("button:first").click();
+      return false;
+    }
+  });
+
+  $("#map-search").bind("mouseenter", function(e) {
+    $("#map-search-status").show();
+  });
+  $("#map-search-status").bind("mouseleave", function(e) {
+    $(this).hide();
   });
 });

@@ -26,7 +26,7 @@ describe ThreadNotifier do
   describe ".queue_messages_for_subscribers" do
     it "should create a job for each subscriber to a thread" do
       subscribers = [double(id: 101), double(id: 102)]
-      thread = double("thread", id: 31, subscribers: subscribers)
+      thread = double("thread", id: 31, email_subscribers: subscribers)
       MessageThread.should_receive(:find).with(thread.id).and_return(thread)
       Resque.should_receive(:enqueue).with(ThreadNotifier, :send_notification, "new_message", 32, 101)
       Resque.should_receive(:enqueue).with(ThreadNotifier, :send_notification, "new_message", 32, 102)

@@ -1,4 +1,7 @@
 .link{id: dom_id(message.component)}
   %p
-    = message.component.item.component.class.model_name.humanize
-    = link_to message.component.item.title, message.component.item.component
+    - item = message.component.item
+    = item.component.class.model_name.humanize
+    = link_to item.title, item.component
+    - if item.component.class == Library::Note && item.component.document?
+      %p= t ".attached_to_html", document: link_to(item.component.document.title, item.component.document)

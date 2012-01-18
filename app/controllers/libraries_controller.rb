@@ -1,12 +1,12 @@
 class LibrariesController < ApplicationController
   def show
-    @recent_documents = Library::Document.recent(5)
-    @recent_notes = Library::Note.recent(5)
+    @items = Library::ItemDecorator.decorate(Library::Item.by_most_recent.page(params[:page]))
   end
 
   def search
-    s = params[:search]
-    @query = s[:query]
-    @results = Library::Item.find_with_index(@query)
+    redirect_to action: :show and return if params[:button] == "clear"
+    @items = Library::Item.find_with_index(params[:query])
+    @items = Library::ItemDecorator.decorate(@items)
+    render :show
   end
 end

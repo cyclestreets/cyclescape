@@ -1,34 +1,124 @@
 %section.new-message
-  %h1= t ".new_message"
-  %ul.tabs
-    %li
-      = link_to "#new-text-message" do
-        %span.text
-        = t ".text_message"
-    %li
-      = link_to "#new-photo-message" do
-        %span.photo
-        = t ".photo_message"
-    %li
-      = link_to "#new-link-message" do
-        %span.link
-        = t ".link_message"
-    %li
-      = link_to "#new-deadline-message" do
-        %span.deadline
-        = t ".deadline_message"
-    %li
-      = link_to "#new-library-item-message" do
-        %span.library
-        = t ".library_item_message"
+  %p.label Select
+  %ul.tabs.styled-tabs
+    %li.compose-new
+      = link_to "#compose-new" do
+        %span Compose New
+    %li.from-library
+      = link_to "#from-library" do
+        %span From Library
+    %li.add-library-item
+      = link_to "#add-library-item" do
+        %span Add Library Item
   .panes
-    #new-text-message.pane
-      = semantic_form_for @new_message, url: thread_messages_path(@thread) do |f|
-        = f.inputs do
-          = f.input :body
-        = f.buttons do
-          = f.commit_button
-    = render "message/photos/new"
-    = render "message/links/new"
-    = render "message/deadlines/new"
-    = render "message/library_items/new"
+    #compose-new.pane
+      %ul.tabs
+        %li.text
+          = link_to "#new-text-message" do
+            Note
+            %span.nub
+        %li.image
+          = link_to "#new-photo-message" do
+            = t ".photo_message"
+            %span.nub
+        %li.map-point
+          = link_to "#new-map-message" do
+            Map
+            %span.nub
+        %li.link
+          = link_to "#new-link-message" do
+            = t ".link_message"
+            %span.nub
+        %li.cal
+          = link_to "#new-deadline-message" do
+            = t ".deadline_message"
+            %span.nub
+        %li.doc
+          = link_to "#new-attachment-message" do
+            Attachment
+            %span.nub
+      .panes
+        #new-text-message.pane
+          = semantic_form_for @new_message, url: thread_messages_path(@thread) do |f|
+            = f.inputs do
+              = f.input :body
+            = f.buttons do
+              = f.commit_button
+        = render "message/photos/new"
+        #new-map-massage.pane
+          %p Something map-like here
+        = render "message/links/new"
+        = render "message/deadlines/new"
+        #new-map-massage.pane
+          %p Attach a random file
+    #from-library.pane
+      / = render "message/library_items/new"
+      %form.filters
+        .search-box
+          %label{:for => "search"} Search issues
+          %input{:type => "text", :placeholder => "Search issues"}
+        
+        %button{:type => "submit"} go
+
+        %label{:for => "sort"} Sort By
+        %select{:id => "sort"}
+          %option Latest First
+          %option Oldest First
+          %option Alphabetical
+          %option Reverse Alphabetical
+        %span.nub
+      .library-content
+        %h3 Search results
+        %ul.content-icon-list
+          %li.link
+            .item-content
+              %h4
+                = link_to "#" do
+                  The national cycle route scheme
+              %p.meta This is a description of the item found in the library. There is no limit&hellip;
+            %a.btn-green{:href => "#"} Select &hellip;
+          %li.link
+            .item-content
+              %h4
+                = link_to "#" do
+                  Legislation on obstructions
+              %p.meta This is a description of the item found in the library. There is no limit there is no limit&hellip;
+            %a.btn-green{:href => "#"} Select &hellip;
+          %li.image
+            .item-content
+              %h4
+                = link_to "#" do
+                  Bad use of crossing markings
+              %p.meta This is a description of the item found in the library. 
+            %a.btn-green{:href => "#"} Select &hellip;
+          %li.cal
+            .item-content
+              %h4
+                = link_to "#" do
+                  UK-wide enforcement deadlines
+              %p.meta This is a description of the item found in the library.
+            %a.btn-green{:href => "#"} Select &hellip;
+          %li.doc
+            .item-content
+              %h4
+                = link_to "#" do
+                  Guidelines for cycle parking
+              %p.meta This is a description of the item found in the library. There is no limit&hellip;
+            %a.btn-green{:href => "#"} Select &hellip;
+        %a{:href => "#"} Cancel and browse library
+    #add-library-item.pane
+      %h2 Add item to thread
+      %a.btn-grey{:href => "#"} Back
+      .library-content
+        %form
+          %label{:for => "add-library-item-comment"} Replies
+          %textarea{:id => "add-library-item-comment", :placeholder => "Explain how this library item relates to the discussion thread"}
+        .library-item
+          %span.doc
+          .item-content
+            %h3 Cycle parking standards (London Cycle Network)
+            %p The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps over the lazy dog. The quick brown fox jumps.
+          .item-meta
+            %a.btn-grey{:href => "#"} View Document
+            %p PDF [35kb]
+      %a.btn-big-green{:href => "#"} Add to thread

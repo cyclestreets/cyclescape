@@ -3,6 +3,7 @@ require "spec_helper"
 describe "Group threads" do
   let(:thread) { FactoryGirl.create(:message_thread, group: current_group) }
   let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5, group: current_group) }
+  let(:edit_thread) { "Edit this thread" }
 
   context "as a group committee member" do
     include_context "signed in as a committee member"
@@ -34,6 +35,7 @@ describe "Group threads" do
         select "Public", from: "Privacy"
         click_on "Create Thread"
         page.should have_content(thread_attrs[:title])
+        current_user.subscribed_to_thread?(current_group.threads.last).should be_true
       end
 
       it "should create a new private thread" do
@@ -78,6 +80,21 @@ describe "Group threads" do
       it "should display all the messages in chronological order"
       it "should show who started the thread"
     end
+
+    context "edit a thread" do
+      before do
+        visit group_thread_path(current_group, thread)
+      end
+
+      it "should let you edit the thread" do
+        page.should have_content(edit_thread)
+        click_on edit_thread
+        fill_in "Title", with: "New, better, thread title"
+        click_on "Save"
+        page.should have_content "Thread updated"
+        page.should have_content "New, better, thread title"
+      end
+    end
   end
 
   context "privacy" do
@@ -107,6 +124,10 @@ describe "Group threads" do
       it "should show the private thread" do
         visit group_thread_path(group_private_thread.group, group_private_thread)
         page.should have_content(group_private_thread.title)
+      end
+
+      it "should not let you edit the thread" do
+        page.should_not have_content(edit_thread)
       end
     end
 

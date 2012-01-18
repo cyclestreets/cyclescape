@@ -7,7 +7,7 @@ form.guided {
     padding: 0;
     margin: 0;
     counter-reset: li;
-    > li {
+    > li.input {
       position: relative;
       float: left;
       list-style: none;
@@ -59,24 +59,29 @@ form.guided {
           }
         }
       }
-      input.text-input {
+      li.input.stringish input {
         margin-top: -10px;
       }
-      button {
+      > button {
         padding: 10px 30px;
         float: left;
       }
     }
   }
-  label {
+  fieldset {
+    padding-top: 1.5em;  // To compensate for Formtastic kludge
+  }
+  fieldset > ol > li.input > .label {
     color: $lightgrey2;
     display: block;
     width: 160px;
     float: left;
+    text-align: left;
     font: {
       weight: bold;
       size: 16px;
     }
+    margin-right: 0;
     span {
       display:block;
       font: {
@@ -86,10 +91,10 @@ form.guided {
       }
     }
   }
-  li.tagfield p {
-    margin-left:160px;
+  li.input p.inline-hints {
+    margin-left: 160px;
     font: {
-      style:italic;
+      style: italic;
       weight: normal;
       size: 14px;
     }
@@ -98,8 +103,9 @@ form.guided {
     color: $lightgrey2;
     display: inline;
   }
-  input.text-input,
-  textarea {
+  fieldset ol li.stringish input,
+  fieldset ol li input,
+  fieldset ol li.text textarea {
     display: block;
     padding: 10px;
     width: 408px;
@@ -113,10 +119,15 @@ form.guided {
       @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 0 1px);
     }
   }
-  textarea {
-    height: 200px;
-    width: 568px;
-    margin: 10px 0;
+  fieldset ol li.text {
+    label {
+      width: auto;
+    }
+    textarea {
+      height: 200px;
+      width: 568px;
+      margin: 10px 0;
+    }
   }
   button,
   .btn-green {
@@ -150,5 +161,27 @@ form.guided {
     right: 0;
     bottom: 10px;
     padding: 20px 40px;
+  }
+}
+
+
+.search-box {
+  display:inline-block;
+  position:relative;
+  width:206px;
+  label {
+    position:relative;
+    left:-999999px;
+  }
+  input {
+    width:180px;
+    border: 1px solid $grey;
+    background: $white image-url("search.png") right 4px no-repeat;
+    padding: 5px 20px 5px 4px;
+    font-size: 14px;
+    margin: 0;
+    &:focus {
+      background-position: right -19px;
+    }
   }
 }

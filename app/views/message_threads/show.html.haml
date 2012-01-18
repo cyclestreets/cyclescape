@@ -9,14 +9,18 @@
           %p= t ".private_to_group_message", group: @thread.group.name
         - else
           %p= t ".public_message"
-      = render partial: "message_thread/tags/panel", locals: {thread: @thread}
+      %section.tags
+        = @tag_panel.render
     - if @issue
       .description
         %p= @issue.description
-    - if permitted_to?(:destroy, @thread)
+    - if permitted_to? [:edit, :destroy], @thread
       %menu.tools
         %ul
-          %li= link_to t(".destroy"), thread_path(@thread), method: :delete, confirm: t(".are_you_sure")
+          - if permitted_to? :edit, @thread
+            %li= link_to t(".edit"), edit_thread_path(@thread)
+          - if permitted_to? :destroy, @thread
+            %li= link_to t(".destroy"), thread_path(@thread), method: :delete, confirm: t(".are_you_sure")
 
   = render collection: @messages, partial: "messages/message"
   = render "messages/new"
@@ -30,4 +34,5 @@
       != m.to_html
   = render "priority_panel"
   = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
+  = render "library_panel", items: @library_items, thread_tags: @thread.tags
 

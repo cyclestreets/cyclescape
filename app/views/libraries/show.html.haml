@@ -1,19 +1,45 @@
-.head
-  %h1= t ".title"
-.search
-  = semantic_form_for :search, url: search_library_path, method: :get do |f|
-    = f.inputs do
-      = f.input :query, label: "Search"
-    = f.buttons
+- content_for :subnav do
+  .search
+    = form_tag({action: :search}, {method: :get, class: "filters"}) do
+      = label_tag do
+        = t(".search")
+        = text_field_tag :query, params[:query]
+      = button_tag t(".search_submit"), class: "submit", value: "search"
+      - if params[:query]
+        = button_tag t(".clear_submit"), class: "submit", value: "clear"
 
-%section.documents
-  %h2= t ".documents"
-  %p= link_to t(".new_document"), new_library_document_path, rel: "#overlay", class: "button"
-  %ul
-    = render partial: "library/documents/compact", collection: @recent_documents, as: :document
+%section#content
+  - if params[:action] == "search"
+    %h1= t ".results"
+  - else
+    %h1= t ".latest"
+  %ul.library-list
+    - @items.each do |item|
+      %li
+        = item.icon
+        .lib-content
+          = item.link
+        .meta
+          = item.created_at
 
-%section.notes
-  %h2= t ".notes"
-  %p= link_to t(".new_note"), new_library_note_path, rel: "#overlay", class: "button"
-  %ul
-    = render partial: "library/notes/compact", collection: @recent_notes, as: :note
+%aside#sidebar
+  = link_to t(".new_library_item"), "#", rel: "#new-library-item-selector", class: "dialog btn-green"
+
+#new-library-item-selector.dialog.hide
+  %h1= t(".new_item_title")
+  %p= t(".new_item_description_html")
+  %ul.library-selector
+    %li
+      = link_to new_library_note_path do
+        %span.icon.library-note
+      = link_to new_library_note_path do
+        .name= t(".new_note")
+      .description
+        = t(".new_note_description_html")
+    %li
+      = link_to new_library_document_path do
+        %span.icon.library-document
+      = link_to new_library_document_path do
+        .name= t(".new_document")
+      .description
+        = t(".new_document_description_html")

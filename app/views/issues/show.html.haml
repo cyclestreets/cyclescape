@@ -12,29 +12,35 @@
     %section.meta
       %p= t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)
     %section.tags
-      = render partial: "issue/tags/panel", locals: {issue: @issue}
+      = @tag_panel.render
     %section.description
       = @issue.description
     %section.voting
       %ul
         %li
-          = link_to t(".vote_up"), vote_up_issue_path(@issue), method: :put
-          = " \u2714" if current_user && current_user.voted_for?(@issue)
+          - if current_user && current_user.voted_for?(@issue.model)
+            = link_to t(".cancel_vote"), vote_clear_issue_path(@issue), method: :put
+            = " \u2714"
+          - else
+            = link_to t(".vote_up"), vote_up_issue_path(@issue), method: :put
         %li= @issue.plusminus
         %li
-          = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put
-          = " \u2714" if current_user && current_user.voted_against?(@issue)
+          - if current_user && current_user.voted_against?(@issue.model)
+            = link_to t(".cancel_vote"), vote_clear_issue_path(@issue), method: :put
+            = " \u2714"
+          - else
+            = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put
   %section.map
     %h2= t ".location"
     = @issue.map
 
 %aside#sidebar.wide
   - if permitted_to? :create, :issue_message_threads
-    = link_to t(".new_thread"), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
+    = link_to t(".new_thread", count: @issue.threads.count), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
   %section.threads
     %header
       %h2= t ".threads"
-    %ul.sidebar-threadlist
-      = render partial: "message_threads/compact", collection: @threads, as: :thread
+      %ul.sidebar-threadlist
+        = render partial: "message_threads/compact", collection: @threads, as: :thread
   %section.photos
     = @issue.standard_photo_image

@@ -17,4 +17,8 @@ The toolkit aims to have the following outcomes:
 * Increased demonstration of partnership working between Local Authorities and local people
 * Potentially, consolidation of existing web-based systems, reducing the need for groups to maintain custom-written and highly-specific systems.
 
-The toolkit is being created by CycleStreets, who run the UK-wide cycle journey planner (at [cyclestreets.net](www.cyclestreets.net)), run ‘for cyclists, by cyclists’. As well as the cycle journey planner, which has planned almost a million routes in the UK, the CycleStreets website includes a Photomap campaigning tool used by cyclists to report problems and good practice, by locating photographs on a map.
+The toolkit is being created by CycleStreets, who run the UK-wide cycle journey planner (at [cyclestreets.net](http://www.cyclestreets.net)), run ‘for cyclists, by cyclists’. As well as the cycle journey planner, which has planned almost a million routes in the UK, the CycleStreets website includes a Photomap campaigning tool used by cyclists to report problems and good practice, by locating photographs on a map.
+
+# Project Tracker
+
+We use [Pivotal Tracker](http://www.pivotaltracker.com) for managing development, you can [view the Cyclescape project](https://www.pivotaltracker.com/projects/374689).

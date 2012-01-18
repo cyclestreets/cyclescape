@@ -10,6 +10,7 @@
 #  updated_at    :datetime        not null
 #  deleted_at    :datetime
 #  location      :spatial({:srid=
+#  photo_uid     :string(255)
 #
 
 require 'spec_helper'
@@ -41,6 +42,18 @@ describe Issue do
     it "should have a geojson string" do
       subject.loc_json.should be_a(String)
       subject.loc_json.should eql(RGeo::GeoJSON.encode(RGeo::GeoJSON::Feature.new(subject.location)).to_json)
+    end
+
+    it "should have a geojson feature representation" do
+      subject.loc_feature.should be_a(RGeo::GeoJSON::Feature)
+      subject.loc_feature.should eql(RGeo::GeoJSON::Feature.new(subject.location))
+      subject.loc_feature.geometry.should_not be_nil
+    end
+
+    it "should accept properties for feature" do
+      f = subject.loc_feature({foo: "bar"})
+      f.properties.should_not be_nil
+      f.property(:foo).should eql("bar")
     end
 
     it "should have no votes" do
@@ -210,6 +223,13 @@ describe Issue do
       subject.votes_against.should eql(0)
     end
 
+    it "should allow votes to be cleared" do
+      brian.vote_for(subject)
+      brian.clear_votes(subject)
+      subject.votes_count.should eql(0)
+      brian.voted_for?(subject).should be_false
+    end
+
     it "should give a plusminus summary" do
       brian.vote_for(subject)
       meg.vote_for(subject)
@@ -231,6 +251,43 @@ describe Issue do
 
     it "should be stored in its own directory" do
       subject.photo_uid.should =~ /issue_photos/
+    end
+  end
+
+  context "finding from tags" do
+    let(:tag) { FactoryGirl.create(:tag) }
+    subject { FactoryGirl.create(:issue, tags: [tag]) }
+
+    it "should find the issue given a tag" do
+      Issue.find_by_tag(tag).should include(subject)
+    end
+
+    it "should find the issue given a taggable" do
+      Issue.find_by_tags_from(mock({tags: [tag]})).should include(subject)
+    end
+  end
+
+  context "tags with icons" do
+    subject { FactoryGirl.create(:issue) }
+    let(:tag) { FactoryGirl.create(:tag) }
+    let(:tag_with_icon) { FactoryGirl.create(:tag_with_icon) }
+    let(:tag_with_icon2) { FactoryGirl.create(:tag_with_icon) }
+
+    it "should return an icon identifier" do
+      subject.tags = [tag, tag_with_icon]
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
+    end
+
+    it "should return no icon identifier" do
+      subject.tags = [tag]
+      subject.icon_from_tags.should be_nil
+    end
+
+    it "should be consistent with respect to tag order" do
+      subject.tags_string = "#{tag_with_icon.name} #{tag_with_icon2.name}"
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
+      subject.tags_string = "#{tag_with_icon2.name} #{tag_with_icon.name}"
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
     end
   end
 end

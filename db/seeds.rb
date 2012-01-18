@@ -27,3 +27,25 @@ MessageThread.where("public_token IS NULL").each do |thread|
   thread.set_public_token
   thread.save!
 end
+
+# Ensure all users have preferences
+User.init_user_prefs
+
+# Add icons to various tags, unless they have an icon set already
+# Make sure the icon variations are in the assets folder when adding it here.
+[{ name: "parking", icon: "cycle-parking" },
+ { name: "cycleparking", icon: "cycle-parking" },
+ { name: "carparking", icon: "car-parking" },
+ { name: "obstruction", icon: "obstruction" },
+ { name: "planning", icon: "planning" },
+ { name: "roadworks", icon: "roadworks" },
+ { name: "path", icon: "cycle-path" },
+ { name: "cyclepath", icon: "cycle-path" },
+ { name: "council", icon: "planning" },
+ { name: "gate", icon: "obstruction" }].each do |t|
+  tag = Tag.grab(t[:name])
+  if tag.icon.blank?
+    tag.icon = t[:icon]
+    tag.save
+  end
+end

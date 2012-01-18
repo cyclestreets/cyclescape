@@ -1,4 +1,7 @@
 jQuery ->
+  # Tabs
+  $("ul.tabs").tabs "> div.panes > div"
+
   # Crude way to make large blocks .clickable by definiting a.primary-link in them
   $(".clickable").live "click", (e) ->
     window.location.href = $(this).find("a.primary-link").attr("href")
@@ -48,6 +51,8 @@ jQuery ->
         $.ajax this.getTrigger().attr("href"),
           success: (data, status, xhr) =>
             wrapper.html(data)
+            # Hide loading spinner
+            wrapper.siblings(".loading").hide()
             # Have to bind close link manually as it doesn't
             # seem to work with AJAX loading
             wrapper.on "click", ".cancel a, .close", =>
@@ -65,6 +70,11 @@ jQuery ->
       $(this).parents(".inner:first").html(data)
     .live "ajax:error", (e, xhr, status, error) ->
       $(this).parents(".inner:first").html(xhr.responseText)
+
+  $("a.dialog").overlay
+    mask:
+      color: "#000000"
+      opacity: 0.6
 
   # Tools menu
   $(document)

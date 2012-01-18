@@ -5,9 +5,10 @@
       %li= link_to t(".edit"), action: :edit
       %li= link_to t(".update_account"), edit_user_registration_path
       %li= link_to t(".my_locations"), user_locations_path
+      %li= link_to t(".edit_preferences"), edit_user_prefs_path
   - if @user.website?
-    .website
-      = @user.website_link
+  .website
+    = @user.website_link
   = @user.picture_standard_image
   .about
     = @user.about

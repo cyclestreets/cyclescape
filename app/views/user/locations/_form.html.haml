@@ -2,7 +2,7 @@
   = f.inputs do
     = f.input :category
     = f.input :loc_json, as: :hidden
-  = render partial: "shared/edit_map", locals: {thing: @location}
+    .map
+      = f.semantic_errors :location
+      = render partial: "shared/edit_map", locals: {thing: @location}
   = f.buttons
-
-= render partial: "shared/map_search", locals: {map_id: "map"}

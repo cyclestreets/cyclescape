@@ -2,15 +2,14 @@ require "spec_helper"
 
 describe "thread notifications" do
   let(:thread) { FactoryGirl.create(:message_thread) }
-  let(:by_email_checkbox) { find_field(I18n.t("formtastic.labels.thread_subscription.send_email")) }
   let(:subscribe_button) { find_button(I18n.t("formtastic.actions.thread_subscription.create")) }
 
   context "new messages" do
     include_context "signed in as a site user"
 
     before do
+      current_user.prefs.notify_subscribed_threads!
       visit thread_path(thread)
-      by_email_checkbox.click
       subscribe_button.click
     end
 
@@ -23,7 +22,8 @@ describe "thread notifications" do
       current_email.should have_subject("Re: #{thread.title}")
       current_email.should have_body_text(/Notification test/)
       current_email.should have_body_text(current_user.name)
-      current_email.should be_delivered_from("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
+      current_email.should be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
+      current_email.should have_reply_to("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
     end
 
     it "should send an email for a link message" do

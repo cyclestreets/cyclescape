@@ -13,6 +13,7 @@ Cyclescape::Application.routes.draw do
     get 'search', :on => :collection
     put 'vote_up', :on => :member
     put 'vote_down', :on => :member
+    put 'vote_clear', :on => :member
     scope module: "issue" do
       resources :threads, controller: "message_threads"
       resource :tags, only: [:update]
@@ -69,6 +70,7 @@ Cyclescape::Application.routes.draw do
   resources :users do
     scope module: :user do
       resource :profile
+      resource :prefs, only: [:edit, :update]
     end
   end
 
@@ -82,6 +84,8 @@ Cyclescape::Application.routes.draw do
   namespace :site do
     resources :comments
   end
+
+  resources :tags
 
   match "template/:action", controller: "home"
 

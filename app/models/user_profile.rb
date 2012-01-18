@@ -23,6 +23,10 @@ class UserProfile < ActiveRecord::Base
     write_attribute(:website, AttributeNormaliser::URL.new(val).normalise)
   end
 
+  def picture_thumbnail
+    picture.thumb("50x50>")
+  end
+
   protected
 
   def generate_picture_path

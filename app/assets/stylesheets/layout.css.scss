@@ -22,7 +22,7 @@ body > footer {
   display: none;
   width: 500px;
   padding: 10px;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .clickable {
@@ -102,11 +102,6 @@ body.home {
 
 // User dashboard
 body.dashboards {
-  section {
-    &.issues, &.threads, &.other {
-      @include column(4);
-    }
-  }
 }
 
 article.thread.compact {
@@ -196,8 +191,18 @@ body.libraries {
   .search {
     @include column($full-span);
   }
-  section.documents, section.notes {
-    @include column(4);
+  ul.library-selector {
+    @include column(6);
+    @include push(1);
+    .icon {
+      @include column(1, "first");
+    }
+    .name {
+      @include column(1);
+    }
+    .description {
+      @include column(4, "last");
+    }
   }
 }
 

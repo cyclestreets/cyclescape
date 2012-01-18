@@ -16,6 +16,14 @@
     labels:
       group_membership:
         role: "Membership type"
+      issue:
+        new: &labels_issue_new
+          description: "Write a description"
+          location: "Provide a location"
+          photo: "Add a photo"
+          tags_string: "Tag your issue"
+          title: "Title your report"
+        create: *labels_issue_new
       library_document:
         file: "Document"
       library_note:
@@ -31,10 +39,20 @@
         body: "Message"
       thread_subscription:
         send_email: "Email new messages"
+      user_pref:
+        notify_subscribed_threads: "Send new messages by email on threads I have subscribed to"
+        notify_new_home_locations_issue: "Notify me by email when new issues are created near my home locations"
+        notify_new_group_thread: "Notify me by email when a new group thread is started"
+        notify_new_issue_thread: "Notify me when a new issue in my group's area is reported"
     hints:
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name, they can change this when they accept the invite."
+      issue:
+        new: &hints_issue_new
+          photo: "(optional)"
+          tags_string: "e.g. cycle parking, obstruction, 20mph"
+        create: *hints_issue_new
       message_thread:
         privacy: "Select if this thread should be visible to members of the group only or everyone."
     actions:
@@ -43,6 +61,9 @@
         create: "Add Deadline"
       group_membership:
         create: "Invite member"
+      issue:
+        create: "Send Report"
+        update: "Save Report"
       library_item_message:
         create: "Add Library Item"
       library/document:

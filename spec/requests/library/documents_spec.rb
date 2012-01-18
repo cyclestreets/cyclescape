@@ -18,7 +18,7 @@ describe "Library documents" do
     end
   end
 
-  context "as a site user", as: :site_user do
+  context "new", as: :site_user do
     it "should create a new document" do
       visit new_library_document_path
       attach_file "Document", pdf_document_path
@@ -27,6 +27,12 @@ describe "Library documents" do
       current_path.should == library_document_path(Library::Document.last)
       page.should have_content("Case studies")
       page.should have_link("Download")
+    end
+
+    it "should have a cancel link back to the library page" do
+      visit new_library_document_path
+      click_on "Cancel"
+      page.current_path.should == library_path
     end
 
     it "should update the document"
@@ -49,6 +55,25 @@ describe "Library documents" do
     it "should return me back to the document" do
       add_note
       current_path.should == library_document_path(document)
+    end
+  end
+
+  context "tags" do
+    include_context "signed in as a site user"
+
+    before do
+      visit library_document_path(document)
+    end
+
+    it "should be taggable" do
+      click_on "Edit tags"
+      fill_in "Tags string", with: "cycle parking"
+      click_on "Save"
+      within ".tags-panel" do
+        within ".tags" do
+          page.should have_content("parking")
+        end
+      end
     end
   end
 end

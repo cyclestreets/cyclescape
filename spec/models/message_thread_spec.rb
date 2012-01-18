@@ -97,6 +97,15 @@ describe MessageThread do
     end
   end
 
+  describe ".order_by_latest_message" do
+    it "should return threads with most recent messages first" do
+      threads = FactoryGirl.create_list(:message_thread, 3, :with_messages)
+      found = MessageThread.order_by_latest_message
+      found.should == threads.reverse
+      found.first.latest_message.created_at.should > found.last.latest_message.created_at
+    end
+  end
+
   context "public token" do
     it "should be set after being created" do
       thread = FactoryGirl.create(:message_thread)
@@ -114,6 +123,31 @@ describe MessageThread do
       thread.public_token.should be_blank
       thread.set_public_token
       thread.public_token.should_not be_blank
+    end
+  end
+
+  describe "#add_message_from_email!" do
+    let(:mail) { FactoryGirl.create(:inbound_mail) }
+    let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+
+    it "should create a new message" do
+      message = thread.add_message_from_email!(mail)
+      message.should be_a(Message)
+      message.body.should_not be_blank
+    end
+
+    it "should create a message with the user info" do
+      message = thread.add_message_from_email!(mail)
+      message.created_by.name.should == mail.message.header[:from].display_names.first
+      message.created_by.email.should == mail.message.header[:from].addresses.first
+    end
+
+    context "signature removal" do
+      it "should remove double-dash signatures" do
+        mail.message.stub!(:body).and_return("Normal text here\n\n--\nSignature")
+        message = thread.add_message_from_email!(mail)
+        message.body.should == "Normal text here\n"
+      end
     end
   end
 end
