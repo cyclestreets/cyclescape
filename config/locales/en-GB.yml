@@ -152,9 +152,8 @@
     edit:
       title: "Edit Issue"
     index:
-      new_issue: "Create new Issue"
-      recent_issues: "Recent Issues"
-      title: "All Issues"
+      new_issue: "Report new issue"
+      title: "Recent Issues"
       list_tab: "List"
       map_tab: "Map"
     new:

@@ -1,8 +1,8 @@
 %section.issues.content-no-sidebar#content
-  %header
+  %header#issue-list-header
     %h1= t ".title"
     .tasks
-      = link_to t(".new_issue"), new_issue_path, class: "button"
+      = link_to t(".new_issue"), new_issue_path, class: "btn-big-green"
   #issue-list-tabs
     %ul.tabs.styled-tabs
       %li= link_to t(".list_tab"), "#", class: "list"
