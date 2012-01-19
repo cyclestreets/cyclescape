@@ -36,6 +36,7 @@ class Issue < ActiveRecord::Base
 
   default_scope where(deleted_at: nil)
   scope :by_most_recent, order("created_at DESC")
+  scope :created_by, ->(user) { where(created_by_id: user) }
 
   def to_param
     "#{id}-#{title.parameterize}"

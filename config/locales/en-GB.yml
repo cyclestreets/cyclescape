@@ -450,6 +450,7 @@
         title: "Edit Profile"
         my_current_thumbnail_title: "My current profile picture"
       show:
+        about_label: "About:"
         add_to_groups:
           one: "Add to group"
           other: "Add to groups"
@@ -457,14 +458,20 @@
           one: "You can add this user into your group."
           other: "You can add this user to any of the groups shown."
         edit: "Edit My Profile"
+        edit_preferences: "Edit my preferences"
+        group_membership_label: "Groups:"
         is_a_member_of_groups:
           zero: "%{name} isn't a member of any groups yet"
           one: "%{name} is a member of one group"
           other: "%{name} is a member of %{count} groups"
         my_locations: "My Locations"
+        no_website: "None"
         profile_picture_title: "%{name}'s picture"
-        edit_preferences: "Edit my preferences"
+        recent_threads: "Recent Threads"
+        reported_issues: "Reported Issues"
         update_account: "Update My Account Details"
+        user_profile: "User Profile"
+        website_label: "Web site:"
       update:
         success: "Profile Updated"
 
