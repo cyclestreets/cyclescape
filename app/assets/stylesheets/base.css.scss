@@ -111,6 +111,15 @@ input.submit,
 .btn-green {
   @include button-text-green;
 }
+.btn-big-green {
+  @include button-text-green;
+  padding: 15px;
+  text-align: center;
+  font: {
+    size: 18px;
+    weight: bold;
+  }
+}
 .btn-red {
   @include button-text-red;
 }
@@ -188,6 +197,11 @@ a.read-more-simple {
   }
 }
 
+.fancy-down-arrow {
+  padding:10px 0 10px 40px !important;
+  background: image-url("sprite.png") 5px -1171px no-repeat;
+}
+
 .close {
   @include button-reset(0px);
   width: 8px;
@@ -195,6 +209,16 @@ a.read-more-simple {
   background: image-url("sprite.png") -60px -49px no-repeat;
   &:hover {
     background: image-url("sprite.png") -60px -69px no-repeat;
+  }
+}
+.close-alt {
+  @include button-reset(10px);
+  width: 8px;
+  height: 8px;
+  padding:5px;
+  background:$grey2 image-url("sprite.png") -55px -24px no-repeat;
+  &:hover {
+    background-color:$lightgrey2;
   }
 }
 

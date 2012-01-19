@@ -1,22 +1,23 @@
-- collapsed = false unless defined?(collapsed)
-%article.issue
-  .wrapper
-    %header
+%li
+  %article.issue
+    .map
+      - m = tiny_display_map(issue, geometry_issue_path(issue, :json), "list") do |map, page, dom_id|
+        %div{id: dom_id, class: "tinymap"}
+      != m.to_html
+    .issue-content
       %h3= link_to issue.title, issue
-      %span.tally
-        = t ".tally", count: issue.plusminus
-      %span.author
-        = t ".created_by"
-        = link_to_profile issue.created_by
-      %time{datetime: issue.created_at}
-        = time_ago_in_words(issue.created_at) + " ago"
-    %div{class: ("collapse" if collapsed)}
-      .description
-        = truncate issue.description, length: 90, separator: ".", omission: "\u2026"
-      .map
-        - m = tiny_display_map(issue, geometry_issue_path(issue, :json), prefix) do |map, page, dom_id|
-          %div{id: dom_id, class: "tinymap"}
-        != m.to_html
-      .threads
-        = pluralize(issue.threads.public.count, "public thread") + ", "
-        = pluralize(issue.threads.private.count, "private thread")
+      .meta
+        %p
+          = issue.creator_link
+          = issue.creation_time
+          \//
+          = t(".thread_count", count: issue.thread_count)
+        .tags
+          = issue.tags_list
+      %p
+        = issue.brief_description
+    .votes-cell
+      .votes
+        .vote-count
+          %span= issue.vote_count
+          = t(".votes")

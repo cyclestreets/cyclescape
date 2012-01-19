@@ -137,38 +137,6 @@ article.message {
 // Issues
 
 section.issues {
-  .recent {
-    margin-top: 12px;
-  }
-  article.issue {
-    @include column(4);
-    .wrapper {
-      float: left;
-      width: 100%;
-    }
-    header {
-      padding: 4px;
-      margin-bottom: 4px;
-    }
-    h3 {
-      margin: 0;
-    }
-    .description {
-      float: left;
-      width: 200px;
-      margin: 4px;
-    }
-    .tinymap {
-      float: left;
-      width: 80px;
-      height: 80px;
-    }
-    .threads {
-      float: left;
-      width: 100%;
-      padding: 4px;
-    }
-  }
 }
 
 // User profile

@@ -1,0 +1,4 @@
+%ul
+  - tags.each do |tag|
+    %li.tag
+      = link_to tag.name, tag_path(tag)

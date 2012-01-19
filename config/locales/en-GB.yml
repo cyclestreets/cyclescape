@@ -141,26 +141,30 @@
         edit_tags: "edit tags"
   issues:
     compact:
-      created_by: "Created by"
-      tally: "(%{count})"
+      created_by_html: "Created by %{creator_link}"
+      votes: "votes"
+      thread_count:
+        one: "1 thread"
+        other: "%{count} threads"
     destroy:
       failure: "Can't delete that issue"
       success: "Issue deleted"
     edit:
       title: "Edit Issue"
     index:
-      new_issue: "Create new Issue"
-      popular_issues: "Currently Popular Issues"
-      recent_issues: "Recent Issues"
-      title: "All Issues"
+      new_issue: "Report new issue"
+      title: "Issues"
+      list_tab: "List"
+      map_tab: "Map"
+      search_issues: "Search issues"
+      search_button: "Go"
+      clear: "Clear"
+      no_results_found: "No issues found."
+      results_found:
+        one: "One issue found for '%{query}'."
+        other: "%{count} issues found for '%{query}'"
     new:
       title: "Report an issue"
-    search:
-      no_results_found: "No results found for '%{query}'."
-      results_found:
-        one: "One result found for '%{query}'."
-        other: "%{count} results found for '%{query}'"
-      title: "Issue Search Results"
     show:
       added_by_html: "Reported by %{name} on %{time}"
       confirm_delete: "Are you sure?"

@@ -35,6 +35,7 @@ class Issue < ActiveRecord::Base
   validates :created_by, presence: true
 
   default_scope where(deleted_at: nil)
+  scope :by_most_recent, order("created_at DESC")
 
   def to_param
     "#{id}-#{title.parameterize}"

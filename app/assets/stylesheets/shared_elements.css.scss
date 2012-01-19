@@ -33,36 +33,34 @@ ul.following-thread {
   }
 }
 
-.pagination ul {
-  @include list-reset;
-  li {
-    a {
-      background: $pane1;
-      margin: 0 2px;
-      padding-top: 1px;
-      width: 22px;
-      height: 21px;
-      text: {
-        align: center;
-        decoration: none;
-      }
-      color: $lightgrey2;
-      &:hover {
-        color: $pane1;
-        background: $lightergrey;
-      }
+// Will Paginate compatible styling
+.pagination {
+  a, em {
+    display: block;
+    float: left;
+    background: $pane1;
+    margin: 0 2px;
+    padding-top: 1px;
+    width: 22px;
+    height: 21px;
+    font-size: 14px;
+    text: {
+      align: center;
+      decoration: none;
     }
-    &.active a {
-      font-weight:bold;
+    color: $lightgrey2;
+    &:hover {
+      color: $pane1;
+      background: $lightergrey;
     }
-    &.prev a {
+    &.previous_page {
       text-indent: -999999px;
       background: $pane1 image-url("sprite.png") 4px -42px no-repeat;
       &:hover {
         background: $lightergrey image-url("sprite.png") 4px -62px no-repeat;
       }
     }
-    &.next a {
+    &.next_page {
       text-indent: -999999px;
       background: $pane1 image-url("sprite.png") 5px -82px no-repeat;
       &:hover {
@@ -70,12 +68,15 @@ ul.following-thread {
       }
     }
   }
+  em {
+    font-weight: bold;
+  }
 }
 
-section.thread {
+article.thread {
   @include list-reset-soft;
   margin: 20px 0;
-  article.message {
+  section.message {
     padding: 20px 10px;
     border-bottom: 3px solid $grey;
     &:last-child {
@@ -89,16 +90,16 @@ section.thread {
       float: left;
       margin-right: 20px;
     }
-    .author {
-      color: $lightgrey;
-      font: {
-        weight: normal;
-        size: 12px;
-      }
-    }
     .body {
       overflow: hidden;
       position: relative;
+      .author {
+        color: $lightgrey;
+        font: {
+          weight: normal;
+          size: 12px;
+        }
+      }
       .readmore {
         overflow: hidden;
         margin-top: 10px;
@@ -168,26 +169,8 @@ article:hover > menu.tools, header:hover > menu.tools {
     padding: 20px 0;
     border-bottom: 3px solid $grey;
     overflow: hidden;
-    .message-count {
-      width: 60px;
-      float: left;
-      font-size: 12px;
-      color: $lightgrey;
-      text-align: center;
-      span {
-        font: {
-          size: 24px;
-          weight: bold;
-        }
-        display: block;
-      }
-    }
-    .unread-count {
-      @extend .message-count;
-      color: $colour1;
-    }
     .item-content {
-      margin: 0 30px;
+      margin: 0 30px 0 0;
       float: left;
       width: 390px;
       h4 {
@@ -236,8 +219,8 @@ article:hover > menu.tools, header:hover > menu.tools {
   padding: 0 10px;
   height: 210px;
 }
-.map {
-  position: relative;
+.map img {
+  display:block;
 }
 .map-tools {
   position: absolute;
@@ -269,91 +252,6 @@ article:hover > menu.tools, header:hover > menu.tools {
   }
 }
 
-section.new-message {
-  background: $pane1;
-  padding: 20px;
-  margin-top: 40px;
-  overflow: hidden;
-  h2 {
-    font-size: 16px;
-    color: $colour1;
-    float: left;
-  }
-  ul.tabs {
-    @include list-reset;
-    li {
-      a {
-        width: 67px;
-        height: 90px;
-        margin-left: 10px;
-        color: $grey2;
-        text: {
-          transform: uppercase;
-          align: center;
-        }
-        font-size: 11px;
-        span {
-          display: block;
-          width: 65px;
-          height: 65px;
-          border: 1px solid $lightgrey;
-          background: $paneborder image-url("wysiwyg.png") 0 0 no-repeat;
-          @include border-radius(10px);
-          &.text {
-            background-position: 16px 12px;
-          }
-          &.photo {
-            background-position: -60px 12px;
-          }
-          &.map {
-            background-position: -137px 12px;
-          }
-          &.link {
-            background-position: -212px 12px;
-          }
-          &.library {
-            background-position: -288px 12px;
-          }
-          &.deadline {
-            background-position: -379px 12px;
-          }
-        }
-        &:hover {
-          color: $lightblack;
-          text-decoration: none;
-          span {
-            background-color: $pane2;
-          }
-        }
-        &.current span {
-          @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 0 6px);
-        }
-      }
-    }
-  }
-  .panes {
-    clear: both;
-    .pane {
-      h3 {
-        color: $lightgrey2;
-      }
-      input.text-input,
-      textarea {
-        display: block;
-        padding: 10px;
-        width: 570px;
-        font-size: 16px;
-      }
-      .buttons {
-        float: right;
-        margin-top: 20px;
-        button {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-}
 .tip,
 form.guided .tip {
   position: absolute;
@@ -470,16 +368,19 @@ ul.content-icon-list {
       background-position:0 3px;
     }
     &.cal {
-      background-position:0 -42px;
+      background-position:0 -104px;
     }
     &.link {
-      background-position:0 -89px;
+      background-position:0 -216px;
     }
     &.text {
-      background-position:0 -136px;
+      background-position:0 -326px;
     }
     &.map-point {
-      background-position:0 -184px;
+      background-position:0 -436px;
+    }
+    &.doc {
+      background-position:0 -548px;
     }
   }
 }
@@ -544,6 +445,87 @@ ul.library-list, ul.library-selector {
   }
 }
 
+ul.issue-list {
+  @include list-reset-soft;
+  border-top:3px solid $paneborder;
+  padding:20px 0 0 0;
+  overflow:hidden;
+  li {
+    padding-bottom:20px;
+    border-bottom:3px solid $paneborder;
+    margin-bottom:20px;
+    overflow:hidden;
+    &:last-child {
+      margin-bottom:20px;
+    }
+    .map {
+      display:table-cell;
+      width:270px;
+      height:180px;
+      padding-right:30px;
+      vertical-align:top;
+      .tinymap {
+        height: 180px;
+      }
+    }
+    .issue-content {
+      display:table-cell;
+      width:480px;
+      vertical-align:top;
+      padding-right:90px;
+      .meta {
+        margin-bottom:15px;
+      }
+    }
+    .votes-cell {
+      width:60px;
+      display:table-cell;
+      height:180px;
+      vertical-align:middle;
+    }
+  }
+}
+
+.votes {
+  position:relative;
+  height:100px;
+  a.up,
+  a.down {
+    @include button-reset;
+    position:absolute;
+    margin:0 10px;
+    width:20px;
+    height:12px;
+    background:image-url("sprite.png") -3px -904px no-repeat;
+    &:hover {
+      background-position:-43px -904px;
+    }
+  }
+  a.down {
+    background-position:-3px -953px;
+    bottom:0;
+    &:hover {
+      background-position:-43px -953px;
+    }
+  }
+  .vote-count {
+    top:30px;
+    width: 40px;
+    position:absolute;
+    font-size: 12px;
+    color: $colour1;
+    text-align: center;
+    span {
+      font: {
+        size: 24px;
+        weight: bold;
+      }
+      display: block;
+    }
+  }
+}
+
+
 
 form.filters {
   font-size:13px;
@@ -552,5 +534,341 @@ form.filters {
   }
   select {
     margin-right:20px;
+  }
+}
+
+ul.styled-tabs {
+  @include list-reset;
+  border-bottom:1px solid $paneborder;
+  height:33px;
+  margin-bottom:15px;
+  overflow:visible;
+  li {
+    margin-right:10px;
+    a {
+      background:$pane1;
+      padding:6px 10px;
+      color:$lightgrey2;
+      border-top:1px solid $paneborder;
+      border-left:1px solid $paneborder;
+      border-right:1px solid $paneborder;
+      &.current,
+      &.current:hover {
+        color:$black;
+        background:$white;
+        border-bottom:1px solid $white;
+      }
+      &:hover {
+        text-decoration:none;
+        background:$pane2;
+      }
+    }
+  }
+}
+
+
+section.new-message {
+  clear:both;
+  margin-top: 40px;
+  overflow: hidden;
+  position:relative;
+  p.label {
+    position:absolute;
+    left:0;
+    top:6px;
+    color:$lightgrey2;
+    font-weight:bold;
+  }
+  ul.styled-tabs {
+    padding-left:60px;
+    margin-bottom:0;
+    li {
+      a {
+        padding-left:30px;
+        color:$white;
+        background-color:$lightgreen;
+        &.current,
+        &:hover.current {
+          background-color:$white;
+          color:$lightgrey2;
+        }
+        &:hover {
+          background-color:$darkgreen;
+        }
+      }
+      &.compose-new a {
+        background-image:image-url("sprite.png");
+        background-position:5px -1320px;
+        background-repeat:no-repeat;
+        &.current,
+        &:hover.current {
+          background-position:5px -1240px;
+        }
+      }
+      &.from-library a {
+        background-image:image-url("sprite.png");
+        background-position:5px -1473px;
+        background-repeat:no-repeat;
+        &.current,
+        &:hover.current {
+          background-position:5px -1403px;
+        }
+      }
+    }
+  }
+  >.panes {
+    clear:both;
+    border-left:1px solid $paneborder;
+    border-right:1px solid $paneborder;
+    border-bottom:1px solid $paneborder;
+    overflow:hidden;
+    .pane .pane {
+      background: $pane1;
+      padding:30px;
+      float:none;
+      width:auto;
+    }
+  }
+  #compose-new {
+    ul.tabs {
+      @include list-reset-soft;
+      float:none;
+      width:auto;
+      padding:15px;
+      height:20px;
+      border-bottom:1px solid $paneborder;
+      li {
+        float:left;
+        border-right:1px solid $paneborder;
+        padding-right:15px;
+        margin-right:15px;
+        &:last-child {
+          border-right:0;
+          padding-right:0;
+          margin-right:0;
+        }
+        &.image a {
+          background-position:0 3px;
+        }
+        &.cal a {
+          background-position:0 -104px;
+        }
+        &.link a {
+          background-position:0 -216px;
+        }
+        &.text a {
+          background-position:0 -326px;
+        }
+        &.map-point a {
+          background-position:0 -436px;
+        }
+        &.doc a {
+          background-position:0 -548px;
+        }
+        a {
+          position:relative;
+          padding:0 0 0 30px;
+          background:image-url("content-icons.png") 0 3px no-repeat;
+          color:$black;
+          zoom: 1;
+          filter: alpha(opacity=50);
+          opacity: 0.5;
+          &:hover,
+          &.current {
+            text-decoration: none;
+            filter: alpha(opacity=100);
+            opacity: 1;
+          }
+          span.nub {
+            position:absolute;
+            display:none;
+            top:35px;
+            width:22px;
+            height:16px;
+            background:image-url("sprite.png") -50px -105px no-repeat;
+          }
+          &.current {
+            span.nub {
+              display:block;
+            }
+          }
+        }
+      }
+    }
+  }
+  #from-library {
+    form.filters {
+      padding:15px;
+      border-bottom:1px solid $paneborder;
+      position:relative;
+      .search-box {
+        line-height:0;
+        margin-right:10px;
+      }
+      button {
+        margin-right:10px;
+      }
+      span.nub {
+        position:absolute;
+        display:block;
+        top:59px;
+        left:40px;
+        width:22px;
+        height:16px;
+        background:image-url("sprite.png") -50px -105px no-repeat;
+      }
+    }
+    .library-content {
+      background: $pane1;
+      padding:30px 30px 15px 30px;
+      >h3 {
+        color: $grey2;
+      }
+      >a {
+        color: $grey2;
+        font-size:13px;
+        text-decoration:underline;
+      }
+      ul.content-icon-list {
+        background:$white;
+        padding:15px;
+        margin-bottom:15px;
+        li {
+          padding-left:45px;
+          border-bottom:1px solid $paneborder;
+          overflow:hidden;
+          padding-bottom:15px;
+          margin-bottom:15px;
+          &:last-child {
+            border-bottom:0;
+            padding-bottom:0;
+            margin-bottom:0;
+          }
+          .btn-green {
+            float:right;
+            margin-top:10px;
+          }
+          .item-content {
+            float:left;
+            max-width:400px;
+            p.meta {
+              margin:5px 0 0 0;
+              color:$lightgrey2;
+              line-height:15px;
+              font: {
+                style:italic;
+                size:13px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  #add-library-item {
+    position:relative;
+    > h2 {
+      color:$lightblack;
+      display:block;
+      padding:30px;
+      margin:0;
+      font:  {
+        size: 26px;
+        weight: normal;
+      }
+    }
+    > .btn-grey {
+      position:absolute;
+      right:30px;
+      top:30px;
+    }
+    .library-content {
+      padding:0 30px 30px 30px;
+      overflow:hidden;
+      form {
+        label {
+          display:block;
+          color:$grey3;
+          margin-bottom:15px;
+          font: {
+            weight:bold;
+            size:16px;
+          }
+        }
+        textarea {
+          width:546px;
+          height:120px;
+          margin-bottom:30px;
+          padding:10px;
+          font-size:14px;
+          border:1px solid $lightergrey;
+          @include box-shadow(rgba(0, 0, 0, 0.3) 0 0 4px);
+          &::-webkit-input-placeholder {
+            color:$lightgrey;
+          }
+          &:-moz-placeholder {
+            color:$lightgrey;
+          }
+        }
+      }
+      .library-item {
+        position:relative;
+        span {
+          display:block;
+          width:40px;
+          height:40px;
+          position:absolute;
+          background:image-url("content-icons.png") 0 3px no-repeat;
+          &.image {
+            background-position:0 3px;
+          }
+          &.cal {
+            background-position:0 -104px;
+          }
+          &.link {
+            background-position:0 -216px;
+          }
+          &.text {
+            background-position:0 -326px;
+          }
+          &.map-point {
+            background-position:0 -436px;
+          }
+          &.doc {
+            background-position:0 -548px;
+          }
+        }
+        .item-content {
+          float:left;
+          max-width:360px;
+          margin-left:40px;
+          h3 {
+            color:$lightblack;
+          }
+          p {
+            font-size:13px;
+          }
+        }
+        .item-meta {
+          float:right;
+          p {
+            display:block;
+            color:$grey3;
+            margin:15px 0 0 0;
+            text-align:center;
+            font: {
+              style:italic;
+              size:13px;
+            }
+          }
+        }
+      }
+    }
+    .btn-big-green {
+      display:block;
+      float:right;
+      font-size:14px;
+      margin:0 30px 30px 0;
+    }
   }
 }

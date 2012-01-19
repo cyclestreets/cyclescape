@@ -1,14 +1,27 @@
-%section.issues
-  %header
+%section.issues.content-no-sidebar#content
+  %header#issue-list-header
     %h1= t ".title"
-  .tasks
-    = link_to t(".new_issue"), new_issue_path, class: "button"
-  .search
-    = render "search"
-  = render "all_map"
-  .recent
-    %h2= t ".recent_issues"
-    = render partial: "compact", collection: @issues, as: :issue, locals: {collapsed: true, prefix: "recent"}
-  .popular
-    %h2= t ".popular_issues"
-    = render partial: "compact", collection: @popular_issues, as: :issue, locals: {collapsed: true, prefix: "popular"}
+    .tasks
+      = link_to t(".new_issue"), new_issue_path, class: "btn-big-green"
+  #issue-list-tabs
+    %ul.tabs.styled-tabs
+      %li= link_to t(".list_tab"), "#", class: "list"
+      %li= link_to t(".map_tab"), "#", class: "map-pin"
+    .panes
+      .pane
+        .search
+          = form_tag({action: "search"}, {method: :get, class: "filters"}) do
+            .search-box
+              = label_tag :search, t(".search_issues")
+              = text_field_tag :search, params[:search], placeholder: t(".search_issues")
+            = button_tag t(".search_button")
+            - if @query
+              = link_to t(".clear"), {action: "index"}, class: "btn-grey"
+        %ul.issue-list
+          - if @issues.empty?
+            = t(".no_results_found")
+          = render partial: "compact", collection: @issues, as: :issue
+        - if @issues.respond_to?(:total_pages)
+          = will_paginate @issues
+      .pane
+        = render "all_map"
