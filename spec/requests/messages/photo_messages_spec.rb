@@ -38,7 +38,7 @@ describe "Photo messages" do
     it "should display the photo" do
       photo_message.should be_valid
       # Ugh, inconsistent naming!
-      page.should have_css("#photo-message_#{photo_message.id}")
+      page.should have_css("#photo_message_#{photo_message.id}")
     end
 
     it "should have a caption" do
