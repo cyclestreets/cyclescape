@@ -33,3 +33,11 @@
                   = f.input :user_id, as: :hidden, value: @user.id
                   = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
                 = f.buttons
+  %section#user-tabs
+    %ul.tabs
+      %li= link_to t(".recent_threads"), ""
+    .panes
+      .pane
+        %h2= t ".recent_threads"
+        %ul.thread-list
+          = render partial: "message_threads/compact", collection: @involved_threads, as: :thread
