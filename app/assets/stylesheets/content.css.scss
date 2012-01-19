@@ -79,8 +79,8 @@
     &.wide {
       width: 360px;
     }
-    button.btn-green {
-      width:100%;
+    input.btn-green, button.btn-green {
+      width: 100%;
     }
     .btn-green {
       display: block;
