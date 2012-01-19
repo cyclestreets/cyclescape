@@ -464,6 +464,7 @@
         no_website: "None"
         profile_picture_title: "%{name}'s picture"
         recent_threads: "Recent Threads"
+        reported_issues: "Reported Issues"
         update_account: "Update My Account Details"
         user_profile: "User Profile"
         website_label: "Web site:"

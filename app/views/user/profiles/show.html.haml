@@ -36,8 +36,13 @@
   %section#user-tabs
     %ul.tabs
       %li= link_to t(".recent_threads"), ""
+      %li= link_to t(".reported_issues"), ""
     .panes
       .pane
         %h2= t ".recent_threads"
         %ul.thread-list
           = render partial: "message_threads/compact", collection: @involved_threads, as: :thread
+      .pane
+        %h2= t ".reported_issues"
+        %ul.issue-list
+          = render partial: "issues/compact", collection: @reported_issues, as: :issue, locals: {prefix: "reported"}

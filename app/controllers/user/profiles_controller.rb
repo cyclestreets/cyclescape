@@ -5,8 +5,13 @@ class User::ProfilesController < ApplicationController
 
   def show
     @user = UserDecorator.decorate(@user)
+
     involved_threads = ThreadList.recent_involved_with(@user, 10)
     @involved_threads = ThreadListDecorator.decorate(involved_threads)
+
+    reported_issues = Issue.by_most_recent.created_by(@user)
+    @reported_issues = IssueDecorator.decorate(reported_issues)
+
     # Groups that the current user could invite this particular user to
     @add_to_groups = current_user ? (current_user.memberships.committee.collect{ |m| m.group } - @user.groups) : nil
   end
