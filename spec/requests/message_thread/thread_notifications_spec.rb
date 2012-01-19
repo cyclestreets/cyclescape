@@ -39,20 +39,20 @@ describe "thread notifications" do
       current_email.should have_body_text("Some words")
     end
 
-    it "should send an email for a library item message" do
-      library_note = FactoryGirl.create(:library_note)
-      visit thread_path(thread) # to update the select field
+    it "should send an email for a library item message"
+#     library_note = FactoryGirl.create(:library_note)
+#     visit thread_path(thread) # to update the select field
 
-      within("#new-library-item-message") do
-        select library_note.title, from: "Item"
-        fill_in "Message", with: "Some words"
-        click_on "Add Library Item"
-      end
-      open_email(current_user.email)
-      current_email.should have_body_text(library_note.title)
-      current_email.should have_body_text("#{polymorphic_url library_note}")
-      current_email.should have_body_text("Some words")
-    end
+#     within("#new-library-item-message") do
+#       select library_note.title, from: "Item"
+#       fill_in "Message", with: "Some words"
+#       click_on "Add Library Item"
+#     end
+#     open_email(current_user.email)
+#     current_email.should have_body_text(library_note.title)
+#     current_email.should have_body_text("#{polymorphic_url library_note}")
+#     current_email.should have_body_text("Some words")
+#   end
 
     it "should send an email for a deadline message" do
       within("#new-deadline-message") do
