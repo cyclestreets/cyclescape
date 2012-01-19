@@ -12,12 +12,18 @@ class UserDecorator < ApplicationDecorator
   end
 
   def website_link
-    h.link_to profile.website, profile.website, rel: :nofollow
+    if profile.website.blank?
+      h.t("user.profiles.show.no_website")
+    else
+      h.link_to profile.website, profile.website, rel: :nofollow
+    end
   end
 
   def picture_standard_image
     if profile.picture
-      h.image_tag picture_standard_url, alt: "", title: h.t("user.profiles.show.profile_picture_title", name: name)
+      h.image_tag picture_standard_url, alt: "",
+          title: h.t("user.profiles.show.profile_picture_title", name: name),
+          class: "profile-pic"
     end
   end
 
@@ -28,10 +34,20 @@ class UserDecorator < ApplicationDecorator
   end
 
   def picture_standard_url
-    profile.picture.thumb("250x250>").url
+    profile.picture.thumb("210x210>").url
   end
 
   def picture_thumbnail_url
     profile.picture.thumb("50x50>").url
+  end
+
+  def group_memberships
+    return h.t("user.profiles.no_groups") if user.memberships.empty?
+    items = user.memberships.map do |membership|
+      h.link_to_profile(membership.group) + " (#{membership.role.titleize})"
+    end
+    h.content_tag(:ul) do
+      items.map {|i| h.content_tag(:li, i) }.join.html_safe
+    end
   end
 end
