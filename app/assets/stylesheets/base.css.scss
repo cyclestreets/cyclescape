@@ -116,6 +116,7 @@ input.submit,
 }
 .btn-big-green {
   @include button-text-green;
+  @include inline-block;
   padding: 15px;
   text-align: center;
   font: {

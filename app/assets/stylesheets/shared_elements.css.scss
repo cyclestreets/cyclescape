@@ -859,3 +859,78 @@ section.new-message {
     }
   }
 }
+
+.top-box {
+  height: 140px;
+  margin-bottom: 20px;
+  h1 {
+    line-height:40px;
+    font-size:16px;
+    color:$lightgrey2;
+  }
+}
+
+.center-box {
+  background:$pane1;
+  border:spx solid $paneborder;
+  margin-bottom:30px;
+  h2 {
+    display:block;
+    color:$white;
+    padding:10px;
+    margin:0;
+    background:$black;
+    @include background(linear-gradient($black, $lightblack));
+  }
+  .inner {
+    padding:20px;
+    text-align:center;
+    p {
+      font-size:16px;
+      color:$grey2;
+    }
+  }
+}
+
+ul.latest-discussions {
+  @include list-reset-soft;
+  border-top:3px solid $paneborder;
+  li {
+    padding:10px 0 10px 90px;
+    border-bottom:1px solid $paneborder;
+    position:relative;
+    &.carparking {
+      background: image-url("icons/m-carparking.png") 10px 10px no-repeat;
+    }
+    &.cycle-parking {
+      background: image-url("icons/m-cycle-parking.png") 10px 10px no-repeat;
+    }
+    &.cycle-path {
+      background: image-url("icons/m-cycle-path.png") 10px 10px no-repeat;
+    }
+    &.misc {
+      background: image-url("icons/m-misc.png") 10px 10px no-repeat;
+    }
+    &.obstruction {
+      background: image-url("icons/m-obstruction.png") 10px 10px no-repeat;
+    }
+    &.planning {
+      background: image-url("icons/m-planning.png") 10px 10px no-repeat;
+    }
+    &.roadworks {
+      background: image-url("icons/m-roadworks.png") 10px 10px no-repeat;
+    }
+    h4, p {
+      width:450px;
+      margin:0;
+    }
+    p {
+      color:$lightgrey2;
+    }
+    .btn-green {
+      position:absolute;
+      right:0;
+      top:20px;
+    }
+  }
+}

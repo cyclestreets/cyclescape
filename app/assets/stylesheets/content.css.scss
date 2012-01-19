@@ -225,6 +225,11 @@
           }
         }
       }
+      &.twitter {
+        h2 {
+          color:$darkred;
+        }
+      }
     }
   }
 }
@@ -574,5 +579,60 @@ section#user-locations {
 body.home {
   #page {
     background:$white image-url("bg-strip.png") 0 0 repeat-x;
+  }
+}
+#how-it-works {
+  margin-top:30px;
+  width:960px;
+  float:left;
+  color:$white;
+  h1 {
+    font: {
+      style:italic;
+      weight:bold;
+      size:22px;
+    }
+    color:$grey2;
+  }
+  .inner {
+    overflow:hidden;
+    background:$grey2;
+    @include background(linear-gradient($grey2, $lightblack));
+    h3 {
+      color:$white;
+      font: {
+        size:19px;
+        weight:normal;
+      }
+    }
+    >div {
+      position:relative;
+      width:200px;
+      float:left;
+      padding:30px 30px 30px 90px;
+      background:image-url("sep-grad.png") 300px center no-repeat;
+      .icon {
+        overflow:visible;
+        display:block;
+        width:120px;
+        height:120px;
+        position:absolute;
+        left:-20px;
+        top:0;
+        background:image-url("homepage-icons.png") -30px -60px no-repeat;
+      }
+      &.report .icon {
+        // background position
+      }
+      &.advice .icon {
+        
+      }
+      &.find {
+        background:none;
+        .icon {
+
+        }
+      }
+    }
   }
 }
