@@ -569,3 +569,10 @@ section#user-locations {
     }
   }
 }
+
+/* Home Page */
+body.home {
+  #page {
+    background:$white image-url("bg-strip.png") 0 0 repeat-x;
+  }
+}
