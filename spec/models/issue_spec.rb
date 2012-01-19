@@ -290,4 +290,22 @@ describe Issue do
       subject.icon_from_tags.should eq(tag_with_icon.icon)
     end
   end
+
+  context "scopes" do
+    describe "by_most_recent" do
+      it "should set the order to be by created_at descending" do
+        Issue.by_most_recent.orders.first.should == "created_at DESC"
+      end
+    end
+
+    describe "created_by" do
+      it "should find issues created by the given user" do
+        user = FactoryGirl.create(:user)
+        owned_issues = FactoryGirl.create_list(:issue, 2, created_by: user)
+        other_issue = FactoryGirl.create(:issue)
+        Issue.count.should == 3
+        Issue.created_by(user).should == owned_issues
+      end
+    end
+  end
 end
