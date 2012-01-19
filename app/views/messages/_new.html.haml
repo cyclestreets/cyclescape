@@ -21,10 +21,11 @@
           = link_to "#new-photo-message" do
             = t ".photo_message"
             %span.nub
-        %li.map-point
-          = link_to "#new-map-message" do
-            Map
-            %span.nub
+        -#
+          %li.map-point
+            = link_to "#new-map-message" do
+              Map
+              %span.nub
         %li.link
           = link_to "#new-link-message" do
             = t ".link_message"
@@ -33,9 +34,10 @@
           = link_to "#new-deadline-message" do
             = t ".deadline_message"
             %span.nub
-        %li.doc
-          = link_to "#new-attachment-message" do
-            Attachment
+        -#
+          %li.doc
+            = link_to "#new-attachment-message" do
+              Attachment
             %span.nub
       .panes
         #new-text-message.pane
@@ -45,12 +47,8 @@
             = f.buttons do
               = f.commit_button
         = render "message/photos/new"
-        #new-map-massage.pane
-          %p Something map-like here
         = render "message/links/new"
         = render "message/deadlines/new"
-        #new-map-massage.pane
-          %p Attach a random file
     #from-library.pane
       / = render "message/library_items/new"
       %form.filters
