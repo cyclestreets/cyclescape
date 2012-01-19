@@ -102,11 +102,6 @@ body.home {
 
 // User dashboard
 body.dashboards {
-  section {
-    &.issues, &.threads, &.other {
-      @include column(4);
-    }
-  }
 }
 
 article.thread.compact {

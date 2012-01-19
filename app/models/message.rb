@@ -36,6 +36,10 @@ class Message < ActiveRecord::Base
     censored_at
   end
 
+  def component_name
+    (component ? component : self).class.model_name.underscore
+  end
+
   protected
 
   def init_blank_body

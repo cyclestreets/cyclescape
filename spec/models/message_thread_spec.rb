@@ -97,6 +97,15 @@ describe MessageThread do
     end
   end
 
+  describe ".order_by_latest_message" do
+    it "should return threads with most recent messages first" do
+      threads = FactoryGirl.create_list(:message_thread, 3, :with_messages)
+      found = MessageThread.order_by_latest_message
+      found.should == threads.reverse
+      found.first.latest_message.created_at.should > found.last.latest_message.created_at
+    end
+  end
+
   context "public token" do
     it "should be set after being created" do
       thread = FactoryGirl.create(:message_thread)
