@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.tools.min
+//= require knockout
 //= require superbly-tagfield.min
 //= require maps
 //= require map_display
