@@ -19,3 +19,4 @@
 //= require ui
 //= require tags
 //= require supercool
+//= require library_message
