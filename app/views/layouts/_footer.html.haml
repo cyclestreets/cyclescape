@@ -1,0 +1,13 @@
+%footer#site-footer(role="contentinfo")
+  .wrapper
+    #footer-top
+      %nav
+        %ul
+          %li
+            %a(href="https://www.facebook.com/CycleStreets" class="facebook") CycleStreets Facebook page
+          %li
+            %a(href="https://twitter.com/cyclescape" class="twitter") CycleStreets Twitter account
+          %li
+            %small= t(".github_page_link_html")
+          %li
+            %small= t(".application_version_html", version: link_to_github_commit)
