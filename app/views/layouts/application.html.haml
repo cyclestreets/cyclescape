@@ -58,6 +58,4 @@
             = image_tag "spinner.gif"
             = t(".loading")
           .inner
-    %footer
-      .wrapper
-        = t(".application_version_html", version: link_to_github_commit)
+    = render "layouts/footer"
