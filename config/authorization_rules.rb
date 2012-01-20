@@ -82,7 +82,7 @@ authorization do
     has_permission_on :groups, to: :view
     has_permission_on :group_profiles, to: [:view, :geometry]
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries, :search]
-    has_permission_on :libraries, :library_documents, :library_notes, to: [:view, :search]
+    has_permission_on :libraries, :library_documents, :library_notes, to: [:view, :search, :recent]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show
       if_attribute public?: is { true }
