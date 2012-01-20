@@ -41,7 +41,6 @@ jQuery ->
       target_select = $ this
       param = target_select.data("autoset-param")
       new_value = source_select.find("option:selected").data(param)
-      console.info source_select, target_select, param, new_value
       target_select.val(new_value)
 
   # When a select box is changed find any dependent elements and
