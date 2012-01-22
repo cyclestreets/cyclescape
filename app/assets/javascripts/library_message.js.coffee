@@ -1,5 +1,15 @@
-class LibrarySearchView
-  constructor: (@form, @panel) ->
+class LibraryMessageView
+  constructor: (@panel) ->
+    # Items loaded at the start
+    @initial_items = ko.observableArray()
+    # Current result set
+    @results = ko.observableArray()
+    # Currently selected result
+    @selected = ko.observable()
+
+    ko.applyBindings(this)
+
+    @form = @panel.find("form.library-search")
     # Rails will do the AJAX
     @form.data "remote", true
     @form.on "ajax:success", this.show_results
@@ -10,16 +20,18 @@ class LibrarySearchView
     @panel.on "click", "a.select", (e) ->
       self.select(ko.dataFor(this))
 
-    # Current result set
-    @results = ko.observableArray()
-    # Currently selected result
-    @selected = ko.observable()
+    this.fetch_initial_items()
+    @initial_items.subscribe (new_val) =>
+      @panel.find(".scrollable").trigger("update_height")
 
-  library_items: => @results
+  initial_items: => @initial_items
+  search_results: => @results
   selected: => @selected
 
   show_results: (event, data, status, xhr) =>
     @results(data)
+    @form.find("#library-recent").hide()
+    @form.find("#library-results").show()
     @form.trigger "update_height"
 
   show_error: (xhr, status, error) =>
@@ -28,33 +40,23 @@ class LibrarySearchView
   select: (item) =>
     @selected(item)
 
-jQuery ->
-  $("form.library-search")
-    .each ->
-      form = $(this)
-      target = $(form.attr("target"))
-      ko.applyBindings new LibrarySearchView(form, target), target.get(0)
-    .on "submit", ->
-      $("#library-recent").hide()
-      $("#library-results").show()
-
-class LibraryItemsView
-  constructor: (@panel, @url) ->
-    @items = ko.observableArray()
-    this.fetch_items()
-
-  library_items: => @items
-
-  fetch_items: ->
+  fetch_initial_items: =>
+    url = @panel.find("#library-recent").data("src")
     $.ajax
-      url: @panel.data("src")
+      url: url
       success: (data) =>
-        @items(data)
+        @initial_items(data)
 
 jQuery ->
-  $(".library-items").each ->
-    ko.applyBindings new LibraryItemsView($(this)), this
+  library_message_view = new LibraryMessageView($("#from-library"))
 
+  # Select button
   $("#from-library").on "click", "a.select", (e) ->
     scroller = $(this).parents(".scrollable:first").data("scrollable")
     scroller.next()
+    false
+
+  # Tab click event to update the height
+  $("section.new-message > ul.tabs").on "onClick", ->
+    scroller = $(this).parents("section:first").find(".scrollable")
+    scroller.trigger "update_height"
