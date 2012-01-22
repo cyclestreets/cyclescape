@@ -30,8 +30,8 @@ class LibraryMessageView
 
   show_results: (event, data, status, xhr) =>
     @results(data)
-    @form.find("#library-recent").hide()
-    @form.find("#library-results").show()
+    $("#library-recent").hide()
+    $("#library-results").show()
     @form.trigger "update_height"
 
   show_error: (xhr, status, error) =>
