@@ -63,7 +63,6 @@
               .library-results.hide#library-results
                 %h3 Search results
                 %ul.content-icon-list(data-bind="template: {name: 'library-item-template', foreach: search_results() }")
-                %a{:href => "#"} Cancel and browse library
 
           #add-library-item
             %h2 Add item to thread
@@ -79,7 +78,7 @@
                   .item-content
                     %h3(data-bind="text: title")
                     %p(data-bind="text: description")
-                  .item-meta
+                  .item-meta.hide
                     %a.btn-grey{:href => "#"} View Document
                     %p PDF [35kb]
                 %button.btn-big-green(type="submit") Add to thread
