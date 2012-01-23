@@ -4,9 +4,6 @@
   %p= link_to t(".download"), @document.file.url
   %section.tags
     = @tag_panel.render
-%section.comments
-  %h2= t ".comments"
-  %p TODO
 %section.notes
   %h2= t ".notes"
   = render partial: "library/notes/note", collection: @notes
