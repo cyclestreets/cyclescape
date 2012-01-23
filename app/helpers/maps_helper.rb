@@ -20,23 +20,8 @@ module MapsHelper
 
   def display_map(object, geometry_url, &block)
     @map = basic_map() do |map, page|
-      if object.location.geometry_type == RGeo::Feature::Point
-        z = object.location.z || Geo::POINT_ZOOM
-        page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),z);
-      else
-        bbox = RGeo::Cartesian::BoundingBox.new(object.location.factory)
-        bbox.add(object.location)
-        page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
-      end
-
-      locationlayer = MapLayers::JsVar.new('locationlayer')
-      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_url, format: :format_plain )
-      page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location",
-                                                                protocol: protocol,
-                                                                projection: projection,
-                                                                styleMap: 'MapStyle.displayStyle()'.to_sym,
-                                                                strategies: [OpenLayers::Strategy::Fixed.new()]))
-      page << map.addLayer(locationlayer)
+      centre_map(object.location, map, page)
+      add_location_layer("Location", geometry_url, OpenLayers::Strategy::Fixed.new(), map, page)
 
       yield(map, page) if block_given?
     end
@@ -47,26 +32,9 @@ module MapsHelper
     dom_id = dom_id(object, prefix)
     @map = core_map(dom_id) do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
-
       add_formats(page)
-
-      if object.location.geometry_type == RGeo::Feature::Point
-        z = object.location.z || Geo::POINT_ZOOM
-        page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),z);
-      else
-        bbox = RGeo::Cartesian::BoundingBox.new(object.location.factory)
-        bbox.add(object.location)
-        page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
-      end
-
-      locationlayer = MapLayers::JsVar.new('locationlayer')
-      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_url, format: :format_plain )
-      page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location",
-                                                                protocol: protocol,
-                                                                projection: projection,
-                                                                styleMap: 'MapStyle.displayStyle()'.to_sym,
-                                                                strategies: [OpenLayers::Strategy::Fixed.new()]))
-      page << map.addLayer(locationlayer)
+      centre_map(object.location, map, page)
+      add_location_layer("Location", geometry_url, OpenLayers::Strategy::Fixed.new(), map, page)
 
       yield(map, page, dom_id) if block_given?
     end
@@ -74,23 +42,10 @@ module MapsHelper
 
   def display_bbox_map(start_location, geometry_bbox_url, &block)
     map = basic_map do |map, page|
-      if start_location.geometry_type == RGeo::Feature::Point
-        z = start_location.z || Geo::POINT_ZOOM
-        page << map.setCenter(OpenLayers::LonLat.new(start_location.x, start_location.y).transform(projection, map.getProjectionObject()),z);
-      else
-        bbox = RGeo::Cartesian::BoundingBox.new(start_location.factory)
-        bbox.add(start_location)
-        page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
-      end
-      vectorlayer = MapLayers::JsVar.new("vectorlayer")
-      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_bbox_url, format: :format_plain )
-      page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Issues",
-                                                             protocol: protocol,
-                                                             projection: projection,
-                                                             styleMap: 'MapStyle.displayStyle()'.to_sym,
-                                                             strategies: [OpenLayers::Strategy::BBOX.new()]))
-      page << map.add_layer(vectorlayer)
+      centre_map(start_location, map, page)
+      add_location_layer("Issues", geometry_bbox_url, OpenLayers::Strategy::BBOX.new(), map, page)
       page << 'MapPopup.init(map, vectorlayer)'
+
       yield(map, page) if block_given?
     end
   end
@@ -121,5 +76,27 @@ module MapsHelper
 
     format_plain = MapLayers::JsVar.new("format_plain")
     page.assign(format_plain, OpenLayers::Format::GeoJSON.new)
+  end
+
+  def centre_map(location, map, page)
+    if location.geometry_type == RGeo::Feature::Point
+      z = location.z || Geo::POINT_ZOOM
+      page << map.setCenter(OpenLayers::LonLat.new(location.x,location.y).transform(projection, map.getProjectionObject()),z);
+    else
+      bbox = RGeo::Cartesian::BoundingBox.new(location.factory)
+      bbox.add(location)
+      page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
+    end
+  end
+
+  def add_location_layer(name, url, strategy, map, page)
+    locationlayer = MapLayers::JsVar.new('locationlayer')
+    protocol = OpenLayers::Protocol::HTTP.new( url: url, format: :format_plain )
+    page.assign(locationlayer, OpenLayers::Layer::Vector.new( name,
+                                                                protocol: protocol,
+                                                                projection: projection,
+                                                                styleMap: 'MapStyle.displayStyle()'.to_sym,
+                                                                strategies: [strategy]))
+    page << map.add_layer(locationlayer)
   end
 end
