@@ -18,6 +18,30 @@ module MapsHelper
     end
   end
 
+  def display_map(object, geometry_url, &block)
+    @map = basic_map() do |map, page|
+      if object.location.geometry_type == RGeo::Feature::Point
+        z = object.location.z || Geo::POINT_ZOOM
+        page << map.setCenter(OpenLayers::LonLat.new(object.location.x,object.location.y).transform(projection, map.getProjectionObject()),z);
+      else
+        bbox = RGeo::Cartesian::BoundingBox.new(object.location.factory)
+        bbox.add(object.location)
+        page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
+      end
+
+      locationlayer = MapLayers::JsVar.new('locationlayer')
+      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_url, format: :format_plain )
+      page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location",
+                                                                protocol: protocol,
+                                                                projection: projection,
+                                                                styleMap: 'MapStyle.displayStyle()'.to_sym,
+                                                                strategies: [OpenLayers::Strategy::Fixed.new()]))
+      page << map.addLayer(locationlayer)
+
+      yield(map, page) if block_given?
+    end
+  end
+
   # If you need to show the same tiny_display_map twice on the one page, give different prefixes
   def tiny_display_map(object, geometry_url, prefix, &block)
     dom_id = dom_id(object, prefix)

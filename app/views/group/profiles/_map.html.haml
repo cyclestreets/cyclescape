@@ -1,25 +1,3 @@
-:ruby
-  @map = basic_map do |map, page|
-    if profile.location.geometry_type == RGeo::Feature::Point
-      page << map.setCenter(OpenLayers::LonLat.new(profile.location.x,profile.location.y).transform(projection, map.getProjectionObject()),zoom);
-
-      markerlayer = MapLayers::JsVar.new('markerlayer')
-      icon = MapLayers::JsVar.new('icon')
-      page.assign(markerlayer, OpenLayers::Layer::Markers.new( "Location", { projection: projection }))
-      page << map.addLayer(markerlayer)
-      page.assign(icon, OpenLayers::Icon.new('/openlayers/img/marker-blue.png'))
-      page << markerlayer.addMarker(OpenLayers::Marker.new(OpenLayers::LonLat.new(profile.location.x, profile.location.y).transform(projection, map.getProjectionObject()), icon))
-    else
-      bbox = RGeo::Cartesian::BoundingBox.new(profile.location.factory)
-      bbox.add(profile.location)
-      page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
-
-      locationlayer = MapLayers::JsVar.new('locationlayer')
-      protocol = OpenLayers::Protocol::HTTP.new( url: geometry_group_profile_path(profile.group, :json), format: :format_plain )
-      page.assign(locationlayer, OpenLayers::Layer::Vector.new( "Location", protocol: protocol, projection: projection, strategies: [OpenLayers::Strategy::Fixed.new() ]))
-      page << map.addLayer(locationlayer)
-    end
-  end
-
-%div#map
-!= @map.to_html
+- m = display_map(@group.profile, geometry_group_profile_path(@group, :json)) do |map, page|
+  %div#map
+!= m.to_html
