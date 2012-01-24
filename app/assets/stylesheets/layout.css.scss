@@ -179,7 +179,18 @@ body.libraries {
 body.library-documents {
   article.library.document {
     @include column($full-span);
+    section.document {
+      padding-top: 20px;
+    }
     section.notes {
+      padding-top: 20px;
+    }
+  }
+}
+
+body.library-notes {
+  article.library {
+    section.note {
       padding-top: 20px;
     }
   }
