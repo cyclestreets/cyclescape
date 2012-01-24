@@ -16,7 +16,7 @@ describe "Library item messages" do
       visit thread_path(thread)
     end
 
-    it "should post a library item message" do
+    pending "should post a library item message" do
       library_item_form do
         select notes.first.title, from: "Item"
         fill_in "Message", with: "This note seems relevant."
@@ -48,7 +48,7 @@ describe "Library item messages" do
         end
       end
 
-      it "should show a referenced document" do
+      pending "should show a referenced document" do
         page.should have_content("Attached to document")
         page.should have_link(note.document.title)
       end
