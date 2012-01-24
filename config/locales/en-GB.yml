@@ -245,7 +245,7 @@
         title: "New Note"
       show:
         added_by_html: "Added by %{name} on %{time}"
-        note_on_document_html: "Attached to document: %{document}"
+        note_on_document_html: "This note is attached to a document: %{document}"
   mailers:
     notifications:
       gmr_confirmed:
