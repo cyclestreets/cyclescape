@@ -16,6 +16,14 @@
             .meta
               = item.created_at
 %aside#sidebar
+  %section.threads
+    %h2= t ".public_threads"
+    - unless @threads.empty?
+      %p= t ".threads_explanation"
+      %ul.sidebar-threadlist
+        = render partial: "message_threads/compact", collection: @threads, as: :thread
+    - else
+      %p= t ".no_threads"
   %section.new_note.box
     %h2= t ".attach_note"
     %p= t ".attach_note_instructions_html"

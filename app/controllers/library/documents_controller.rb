@@ -20,6 +20,7 @@ class Library::DocumentsController < ApplicationController
     @notes = Library::ItemDecorator.decorate(@document.notes.map{ |n| n.item })
     @note = Library::Note.new_on_document(@document)
     @tag_panel = TagPanelDecorator.new(@document.item, form_url: library_tag_path(@document.item))
+    @threads = @document.item.threads.public.order_by_latest_message.limit(10)
   end
 
   def edit
