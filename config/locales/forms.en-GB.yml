@@ -51,7 +51,7 @@
       issue:
         new: &hints_issue_new
           photo: "(optional)"
-          tags_string: "e.g. cycle parking, obstruction, 20mph"
+          tags_string: "e.g. parking obstruction roadworks path"
         create: *hints_issue_new
       message_thread:
         privacy: "Select if this thread should be visible to members of the group only or everyone."
