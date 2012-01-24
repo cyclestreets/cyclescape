@@ -119,6 +119,10 @@
     profiles:
       edit:
         title: "Edit Profile"
+      show:
+        description: "Description"
+        location: "Location"
+        no_location: "This group doesn't have any location details yet."
       update:
         success: "Profile Updated"
   groups:

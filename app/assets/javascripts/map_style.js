@@ -5,6 +5,7 @@ MapStyle = {
                               strokeOpacity: 0.9 },
                     "Point" : { graphicWidth: 32,
                                 graphicOpacity: 1.0,
+                                graphicYOffset: -32,
                                 externalGraphic: '${thumbnail}' },
                     "Polygon" : { strokeWidth: 2.5,
                                   strokeOpacity: 0.9,
