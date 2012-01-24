@@ -179,5 +179,8 @@ body.libraries {
 body.library-documents {
   article.library.document {
     @include column($full-span);
+    section.notes {
+      padding-top: 20px;
+    }
   }
 }
