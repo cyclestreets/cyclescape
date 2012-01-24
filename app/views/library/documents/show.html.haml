@@ -1,7 +1,7 @@
 %article#content.library.document
   %h1= @document.title
   %p= t ".added_by_html", name: link_to_profile(@document.created_by), time: l(@document.created_at.to_date)
-  %p= link_to t(".download"), @document.file.url
+  %h3= link_to t(".download"), @document.file.url
   %section.tags
     = @tag_panel.render
   %section.notes
