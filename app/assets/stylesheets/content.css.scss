@@ -622,15 +622,15 @@ body.home {
         background:image-url("homepage-icons.png") -30px -60px no-repeat;
       }
       &.report .icon {
-        // background position
+        background-position:-30px -60px;
       }
       &.advice .icon {
-        
+        background-position:-30px -320px;
       }
       &.find {
         background:none;
         .icon {
-
+          background-position:-30px -590px;
         }
       }
     }
