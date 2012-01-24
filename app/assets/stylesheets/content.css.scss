@@ -228,6 +228,24 @@
       &.twitter {
         h2 {
           color:$darkred;
+          padding-left:34px;
+          background:image-url("sprite.png") -3px -1605px no-repeat;
+        }
+        p {
+          color:$lightgrey2;
+          margin-bottom:5px;
+          &.meta {
+            font: {
+              style:italic;
+              size:13px;
+            }
+            color:$lightgrey;
+            float:left;
+          }
+        }
+        .btn-grey {
+          float:right;
+          font-size:12px;
         }
       }
     }
@@ -634,5 +652,80 @@ body.home {
         }
       }
     }
+  }
+}
+
+.homepage-groups {
+  margin:0 !important;
+  color:$white;
+  padding:15px 15px 15px 60px;
+  background:$darkred image-url("homepage-groups-pin.png") 0 0 no-repeat;
+  h2 {
+    color:$white !important;
+  }
+  p {
+    font-size:12px;
+    margin:0;
+  }
+}
+
+.homepage-search {
+  overflow:hidden;
+  margin-top:-5px !important;
+  .main-search-box {
+    float:right;
+  }
+}
+
+.homepage-find {
+  background:$black;
+  padding:15px;
+  h2 {
+    color:$white !important;
+  }
+  form {
+    label {
+      position:absolute;
+      left:-999999px;
+    }
+    input {
+      font-size:16px;
+      padding:6px;
+      width:190px;
+      border:none;
+    }
+    button {
+      font-size:16px;
+      padding:6px 9px;
+    }
+  }
+  ul.group-threads-list {
+    @include list-reset-soft;
+    li {
+      clear:both;
+      overflow:hidden;
+      padding:10px 0;
+      border-bottom:1px solid $paneborder;
+      &:last-child {
+        border-bottom:none;
+      }
+      span {
+        margin-top:3px;
+        border: 2px solid $white;
+      }
+      h4 {
+        margin:0 !important;
+        padding-left:30px;
+        a {
+          color:$white;
+        }
+      }
+      p.meta {
+        margin:0;
+        padding-left:30px;
+        color:$white;
+        font-size:12px;
+      }
+    } 
   }
 }

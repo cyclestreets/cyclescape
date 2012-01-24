@@ -54,14 +54,38 @@
 </article>
 
 <aside id="sidebar">
-  <section>
+  <section class="homepage-search">
+    <form class="main-search-box" role="search">
+      <input type="text" placeholder="Search" />
+      <button type="submit">Go</button>
+    </form>
+  </section>
+
+  <section class="homepage-groups">
     <h2>Cyclescape Groups</h2>
-    <p>Cyclescape is used by cycle campaign groups across the country. Find groups local to you and cycling routes here.</p>
+    <p>Cyclescape is used by <strong>cycle campaign groups</strong> across the country. <strong>Find groups local to you</strong> and see what they're working to fix.</p>
+  </section>
 
-    <h2>Local groups</h2>
-    <p>Something will happen here</p>
+  <section class="homepage-find">
+    <h2>Find group by name or postcode</h2>
+    <form>
+      <label>Your postcode or area</label>
+      <input type="text" placeholder="Your postcode or area" />
+      <button type="submit">Go</button>
+    </form>
 
-    <h2>Postcode search box</h2>
+    <ul class="group-threads-list">
+      <li class="green">
+        <span></span>
+        <h4><a href="/">Cambridge Cycling Campaign</a></h4>
+        <p class="meta">120 members</p>
+      </li>
+      <li class="blue">
+        <span></span>
+        <h4><a href="/">Another group name here</a></h4>
+        <p class="meta">56 members</p>
+      </li>
+    </ul>
   </section>
 
   <section class="twitter">
