@@ -14,6 +14,7 @@ gem 'formtastic'
 gem 'map_layers'
 gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
+gem 'rails_autolink'
 
 # Back-end gems
 gem 'devise'
