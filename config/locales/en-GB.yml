@@ -431,13 +431,22 @@
       edit:
         title: "Edit Location"
       index:
+        add_first_location: "add your first location"
+        all_my_locations: "All my locations"
         category: "Category"
+        combined_locations: "Combined locations"
+        combined_locations_guidance: "This map shows all of your locations combined together. We use this to help figure out which issues are relevant to you, and which groups you might be interested in."
+        combined_locations_guidance2_html: "If you want to receive notifications when issues are created in these areas, you can %{edit_prefs_link}."
         confirm: "Are you sure?"
         delete: "Delete"
         edit: "Edit"
+        edit_your_prefs: "edit your preferences"
         map: "Map"
         my_locations: "My Locations"
         new: "Add a new Location"
+        no_locations_yet: "You haven't set any locations yet!"
+        no_locations_guidance: "You can create locations for where you live, your route to work, where you like to go riding, and so on. This helps us figure out which issues are revelent to you, and which groups you might be interested in."
+        no_locations_guidance2_html: "To get started, you can %{first_location_link}."
         no_overlapping_groups: "No Overlapping Groups"
         overlapping_groups: "Overlapping Groups"
       new:
