@@ -419,33 +419,33 @@ section#user-locations {
           }
           color:$lightgrey2;
         }
-        &.carparking {
+        &.car-parking {
           padding-left:42px;
-          background: image-url("icons/m-carparking.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-car-parking.png") 0 10px no-repeat;
         }
         &.cycle-parking {
           padding-left:42px;
-          background: image-url("icons/m-cycle-parking.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-cycle-parking.png") 0 10px no-repeat;
         }
         &.cycle-path {
           padding-left:42px;
-          background: image-url("icons/m-cycle-path.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-cycle-path.png") 0 10px no-repeat;
         }
         &.misc {
           padding-left:42px;
-          background: image-url("icons/m-misc.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-misc.png") 0 10px no-repeat;
         }
         &.obstruction {
           padding-left:42px;
-          background: image-url("icons/m-obstruction.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-obstruction.png") 0 10px no-repeat;
         }
         &.planning {
           padding-left:42px;
-          background: image-url("icons/m-planning.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-planning.png") 0 10px no-repeat;
         }
         &.roadworks {
           padding-left:42px;
-          background: image-url("icons/m-roadworks.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-roadworks.png") 0 10px no-repeat;
         }
         h4 {
           a {
