@@ -110,6 +110,12 @@ describe "Message threads" do
           click_on "Post Message"
           page.should have_content("Testing a new message!")
         end
+
+        it "should auto link messages" do
+          fill_in "Message", with: "Testing autolink http://example.com"
+          click_on "Post Message"
+          page.should have_link("http://example.com")
+        end
       end
 
       context "subscribers" do

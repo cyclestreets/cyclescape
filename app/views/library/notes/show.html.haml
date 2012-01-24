@@ -6,4 +6,4 @@
   %section.tags
     = @tag_panel.render
   %section.note
-    = simple_format @note.body
+    = render partial: "note", locals: { note: @note }

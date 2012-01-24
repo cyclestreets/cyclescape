@@ -12,7 +12,7 @@
     - else
       - if message.component
         = render "message/#{message_controller_map(message.component)}/show", message: message
-      = simple_format message.body
+      = auto_link simple_format message.body
   %menu.tools
     %ul
       - if permitted_to?(:censor, message)
