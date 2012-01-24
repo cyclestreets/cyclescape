@@ -180,7 +180,4 @@ body.library-documents {
   article.library.document {
     @include column($full-span);
   }
-  section.notes {
-    @include column($half-span, "last");
-  }
 }
