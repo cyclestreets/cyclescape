@@ -54,7 +54,18 @@
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
       subscribed_threads: "Subscribed Threads"
+      group_threads: "Group Threads"
+      group_threads_desc_html:
+        Recent threads with activity from your groups.
       update_your_areas: "Update your areas"
+      my_threads: "My Threads"
+      issues_nearby: "Issues Nearby"
+      posted:
+        message_html: "%{creator_link} posted a message"
+        deadline_message_html: "%{creator_link} posted a deadline"
+        photo_message_html: "%{creator_link} posted a photo"
+        link_message_html: "%{creator_link} posted a link"
+        library_item_message_html: "%{creator_link} added a library item"
   devise:
     registrations:
       edit:
@@ -130,26 +141,30 @@
         edit_tags: "edit tags"
   issues:
     compact:
-      created_by: "Created by"
-      tally: "(%{count})"
+      created_by_html: "Created by %{creator_link}"
+      votes: "votes"
+      thread_count:
+        one: "1 thread"
+        other: "%{count} threads"
     destroy:
       failure: "Can't delete that issue"
       success: "Issue deleted"
     edit:
       title: "Edit Issue"
     index:
-      new_issue: "Create new Issue"
-      popular_issues: "Currently Popular Issues"
-      recent_issues: "Recent Issues"
-      title: "All Issues"
+      new_issue: "Report new issue"
+      title: "Issues"
+      list_tab: "List"
+      map_tab: "Map"
+      search_issues: "Search issues"
+      search_button: "Go"
+      clear: "Clear"
+      no_results_found: "No issues found."
+      results_found:
+        one: "One issue found for '%{query}'."
+        other: "%{count} issues found for '%{query}'"
     new:
       title: "Report an issue"
-    search:
-      no_results_found: "No results found for '%{query}'."
-      results_found:
-        one: "One result found for '%{query}'."
-        other: "%{count} results found for '%{query}'"
-      title: "Issue Search Results"
     show:
       added_by_html: "Reported by %{name} on %{time}"
       confirm_delete: "Are you sure?"
@@ -188,8 +203,10 @@
       library: "Library"
       threads: "Threads"
       title: "Cyclescape"
-      application_version_html: "Version: %{version}"
       loading: "Please wait..."
+    footer:
+      application_version_html: "Version ref: %{version}"
+      github_page_link_html: "View the source at <a href='https://github.com/cyclescape/toolkit'>GitHub</a>"
   libraries:
     search:
       no_results_found: "No results found for '%{query}'."
@@ -264,6 +281,10 @@
     index:
       latest_activity: "Latest activity %{ago} ago"
       title: "Public Threads"
+    library_panel:
+      library: "Library"
+      no_library_items: "Couldn't find any relevant library items based on the thread tags."
+      tag_thread_guidance: "Add tags to this thread to find relevant library items."
     new:
       title: "New Thread"
     priority_panel:
@@ -368,6 +389,13 @@
       success:
         thank_you: "Thank you for your feedback."
         close: "< Back to site"
+  tags:
+    show:
+      issues: "Issues"
+      library_items: "Library Items"
+      no_results_found: "No results found"
+      threads: "Threads"
+      heading: "Things tagged '%{name}'"
   thread_mailer:
     new_deadline_message:
       added: "%{name} added a deadline to the thread"
@@ -424,6 +452,7 @@
         title: "Edit Profile"
         my_current_thumbnail_title: "My current profile picture"
       show:
+        about_label: "About:"
         add_to_groups:
           one: "Add to group"
           other: "Add to groups"
@@ -431,14 +460,20 @@
           one: "You can add this user into your group."
           other: "You can add this user to any of the groups shown."
         edit: "Edit My Profile"
+        edit_preferences: "Edit my preferences"
+        group_membership_label: "Groups:"
         is_a_member_of_groups:
           zero: "%{name} isn't a member of any groups yet"
           one: "%{name} is a member of one group"
           other: "%{name} is a member of %{count} groups"
         my_locations: "My Locations"
+        no_website: "None"
         profile_picture_title: "%{name}'s picture"
-        edit_preferences: "Edit my preferences"
+        recent_threads: "Recent Threads"
+        reported_issues: "Reported Issues"
         update_account: "Update My Account Details"
+        user_profile: "User Profile"
+        website_label: "Web site:"
       update:
         success: "Profile Updated"
 

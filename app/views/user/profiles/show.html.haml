@@ -1,34 +1,48 @@
-.user-profile
-  %h1= @user.name
-  - if @user == current_user
-    %ol
-      %li= link_to t(".edit"), action: :edit
-      %li= link_to t(".update_account"), edit_user_registration_path
-      %li= link_to t(".my_locations"), user_locations_path
-      %li= link_to t(".edit_preferences"), edit_user_prefs_path
-  - if @profile.website?
-    .website
-      = link_to @profile.website, @profile.website, rel: :nofollow
-  - if @profile.picture
-    = image_tag @profile.picture.url, alt: "", title: t(".profile_picture_title", name: @user.name)
-  .about
-    = simple_format @profile.about
+- if @user == current_user
+  - content_for :subnav do
+    %menu
+      %ul.horizontal
+        %li= link_to t(".edit"), {action: :edit}, class: "btn-grey"
+        %li= link_to t(".update_account"), edit_user_registration_path, class: "btn-grey"
+        %li= link_to t(".my_locations"), user_locations_path, class: "btn-grey"
+        %li= link_to t(".edit_preferences"), edit_user_prefs_path, class: "btn-grey"
+%section.user-profile.content-no-sidebar#content
+  %section#user-details
+    %header
+      %p.pre-title= t(".user_profile")
+      %h1= @user.name
+      = @user.picture_standard_image
+    %dl
+      %dt= t(".about_label")
+      %dd= @user.about
+      %dt= t(".website_label")
+      %dd= @user.website_link
+      %dt= t(".group_membership_label")
+      %dd= @user.group_memberships
   .groups
-    %p= t ".is_a_member_of_groups", name: @user.name, count: @user.groups.count
-    - if @user.groups.count > 0
-      %ol
-        - @user.groups.each do |g|
-          %li= link_to g.name, group_path(g)
-  - unless @add_to_groups.blank?
-    .group-invites
-      %h2= t ".add_to_groups", count: @add_to_groups.count
-      %p= t ".add_to_groups_explanation", count: @add_to_groups.count
-      %ol
-        - @add_to_groups.each do |g|
-          %li
-            %h3= g.name
-            = semantic_form_for g.memberships.new, url: group_memberships_path(g) do |f|
-              = f.inputs do
-                = f.input :user_id, as: :hidden, value: @user.id
-                = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
-              = f.buttons
+    - unless @add_to_groups.blank?
+      .group-invites
+        %h2= t ".add_to_groups", count: @add_to_groups.count
+        %p= t ".add_to_groups_explanation", count: @add_to_groups.count
+        %ol
+          - @add_to_groups.each do |g|
+            %li
+              %h3= g.name
+              = semantic_form_for g.memberships.new, url: group_memberships_path(g) do |f|
+                = f.inputs do
+                  = f.input :user_id, as: :hidden, value: @user.id
+                  = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
+                = f.buttons
+  %section#user-tabs
+    %ul.tabs
+      %li= link_to t(".recent_threads"), ""
+      %li= link_to t(".reported_issues"), ""
+    .panes
+      .pane
+        %h2= t ".recent_threads"
+        %ul.thread-list
+          = render partial: "message_threads/compact", collection: @involved_threads, as: :thread
+      .pane
+        %h2= t ".reported_issues"
+        %ul.issue-list
+          = render partial: "issues/compact", collection: @reported_issues, as: :issue, locals: {prefix: "reported"}

@@ -2,15 +2,20 @@ class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
   
   def index
-    @issues = Issue.order("created_at DESC").limit(10)
+    if @query
+      issues = Issue.find_with_index(@query)
+    else
+      issues = Issue.by_most_recent.paginate(page: params[:page])
+    end
+    @issues = IssueDecorator.decorate(issues)
     @start_location = index_start_location
-    @popular_issues = Issue.plusminus_tally(start_at: 2.weeks.ago) # only count recent votes
   end
 
   def show
     issue = Issue.find(params[:id])
     @issue = IssueDecorator.decorate(issue)
     @threads = @issue.threads
+    @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
   end
 
   def new
@@ -60,7 +65,7 @@ class IssuesController < ApplicationController
   def geometry
     @issue = Issue.find(params[:id])
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(issue_feature(@issue)) }
+      format.json { render json: RGeo::GeoJSON.encode(issue_feature(IssueDecorator.decorate(@issue))) }
     end
   end
 
@@ -72,15 +77,16 @@ class IssuesController < ApplicationController
       issues = Issue.order("created_at DESC").limit(50)
     end
     factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(issues.map { | issue | issue_feature(issue) })
+    collection = factory.feature_collection(issues.map { | issue | issue_feature(IssueDecorator.decorate(issue)) })
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection)}
     end
   end
 
   def search
-    @query = params[:q]
-    @results = Issue.find_with_index(params[:q])
+    @query = params[:search]
+    index
+    render action: "index"
   end
 
   def vote_up
@@ -125,7 +131,8 @@ class IssuesController < ApplicationController
   end
 
   def issue_feature(issue)
-    issue.loc_feature({ thumbnail: view_context.image_path("map-icons/m-misc.png"),
+    issue.loc_feature({ thumbnail: issue.medium_icon_path,
+                        image_url: issue.tip_icon_path(false),
                         title: issue.title,
                         url: view_context.url_for(issue),
                         created_by: issue.created_by.name,

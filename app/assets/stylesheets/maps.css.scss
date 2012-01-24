@@ -177,6 +177,10 @@
 }
 
 .olFramedCloudPopupContent {
+  img {
+    float: left;
+    margin: 10px;
+  }
   color: #ffffff;
   p {
     font-style: italic;

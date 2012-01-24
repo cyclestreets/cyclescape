@@ -33,42 +33,43 @@ ul.following-thread {
   }
 }
 
-.pagination ul {
-  @include list-reset;
-  li {
-    a {
-      background: $pane1;
-      margin: 0 2px;
-      padding-top: 1px;
-      width: 22px;
-      height: 21px;
-      text: {
-        align: center;
-        decoration: none;
-      }
-      color: $lightgrey2;
-      &:hover {
-        color: $pane1;
-        background: $lightergrey;
-      }
+// Will Paginate compatible styling
+.pagination {
+  a, em {
+    display: block;
+    float: left;
+    background: $pane1;
+    margin: 0 2px;
+    padding-top: 1px;
+    width: 22px;
+    height: 21px;
+    font-size: 14px;
+    text: {
+      align: center;
+      decoration: none;
     }
-    &.active a {
-      font-weight:bold;
+    color: $lightgrey2;
+    &:hover {
+      color: $pane1;
+      background: $lightergrey;
     }
-    &.prev a {
+    &.previous_page {
       text-indent: -999999px;
       background: $pane1 image-url("sprite.png") 4px -42px no-repeat;
       &:hover {
         background: $lightergrey image-url("sprite.png") 4px -62px no-repeat;
       }
     }
-    &.next a {
+    &.next_page {
       text-indent: -999999px;
       background: $pane1 image-url("sprite.png") 5px -82px no-repeat;
       &:hover {
         background: $lightergrey image-url("sprite.png") 5px -102px no-repeat;
       }
     }
+  }
+  em {
+    font-weight: bold;
   }
 }
 
@@ -406,11 +407,19 @@ ul.library-list, ul.library-selector {
       &.library_photo {
         background-position:-58px 0;
       }
+      // Unused
+      &.cal {
+        background-position:-376px 0;
+      }
       &.library_link {
         background-position:-210px 0;
       }
       &.library_note {
         background-position:20px 0;
+      }
+      // Unused
+      &.map_point {
+        background-position:-134px 0;
       }
     }
     .lib-content {
@@ -451,9 +460,13 @@ ul.issue-list {
     }
     .map {
       display:table-cell;
-      width:300px;
+      width:270px;
       height:180px;
+      padding-right:30px;
       vertical-align:top;
+      .tinymap {
+        height: 180px;
+      }
     }
     .issue-content {
       display:table-cell;

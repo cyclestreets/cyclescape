@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120110150237) do
+ActiveRecord::Schema.define(:version => 20120112144109) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(:version => 20120110150237) do
 
   create_table "tags", :force => true do |t|
     t.string "name", :null => false
+    t.string "icon"
   end
 
   add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true

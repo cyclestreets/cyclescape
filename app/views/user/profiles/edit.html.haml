@@ -1,8 +1,7 @@
 .user-profile-form
   %h1= t ".title"
   .sidebar
-    - if @profile.picture
-      = image_tag @profile.picture_thumbnail.url, alt: "", title: t(".my_current_thumbnail_title")
+    = @user.thumbnail_image
   .form
     = semantic_form_for @profile, as: :user_profile, url: user_profile_path do |f|
       = f.inputs do

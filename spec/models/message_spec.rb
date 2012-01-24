@@ -67,4 +67,17 @@ describe Message do
       subject.body.should == "Testing"
     end
   end
+
+  describe "#component_name" do
+    it "should return the name of Message if there is no component" do
+      message = FactoryGirl.build(:message)
+      message.component_name.should == "message"
+    end
+
+    it "should return the name of the component" do
+      photo_message = FactoryGirl.build(:photo_message)
+      message = photo_message.message
+      message.component_name.should == "photo_message"
+    end
+  end
 end

@@ -4,23 +4,17 @@ describe "User dashboards" do
   context "show" do
     include_context "signed in as a group member"
 
-    before do
-      visit dashboard_path
-    end
-
     context "groups" do
-      it "should have all the groups I belong to" do
-        current_user.groups.count.should > 0
+      it "should list the latest threads from the groups I belong to" do
         current_user.groups.each do |group|
-          page.should have_content(group.name)
+          3.times do
+            # Use factory_with_trait syntax here as for some bug causes multiple
+            # creates with separate trait to fail
+            FactoryGirl.create(:message_thread_with_messages, group: group)
+          end
         end
-      end
-
-      it "should list the latest 3 threads from the groups I belong to" do
+        visit dashboard_path
         current_user.groups.each do |group|
-          FactoryGirl.create_list(:message_thread, 5, group: group)
-          group.threads.count.should == 5
-          visit dashboard_path
           group.threads.each do |thread|
             page.should have_content(thread.title)
           end
@@ -29,14 +23,7 @@ describe "User dashboards" do
     end
 
     context "threads" do
-      it "should list threads I'm subscribed to" do
-        subscription = FactoryGirl.create(:thread_subscription, user: current_user)
-        current_user.subscribed_threads.count.should > 0
-        visit dashboard_path
-        current_user.subscribed_threads.each do |thread|
-          page.should have_content(thread.title)
-        end
-      end
+      it "should list threads I'm subscribed to"
 
       it "should list threads I'm involved with" do
         messages = FactoryGirl.create_list(:message, 3, created_by: current_user)

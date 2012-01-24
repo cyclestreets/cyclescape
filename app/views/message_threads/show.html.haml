@@ -9,7 +9,8 @@
           %p= t ".private_to_group_message", group: @thread.group.name
         - else
           %p= t ".public_message"
-      = render partial: "message_thread/tags/panel", locals: {thread: @thread}
+      %section.tags
+        = @tag_panel.render
     - if @issue
       .description
         %p= @issue.description
@@ -33,4 +34,5 @@
       != m.to_html
   = render "priority_panel"
   = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
+  = render "library_panel", items: @library_items, thread_tags: @thread.tags
 

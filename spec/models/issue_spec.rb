@@ -253,4 +253,59 @@ describe Issue do
       subject.photo_uid.should =~ /issue_photos/
     end
   end
+
+  context "finding from tags" do
+    let(:tag) { FactoryGirl.create(:tag) }
+    subject { FactoryGirl.create(:issue, tags: [tag]) }
+
+    it "should find the issue given a tag" do
+      Issue.find_by_tag(tag).should include(subject)
+    end
+
+    it "should find the issue given a taggable" do
+      Issue.find_by_tags_from(mock({tags: [tag]})).should include(subject)
+    end
+  end
+
+  context "tags with icons" do
+    subject { FactoryGirl.create(:issue) }
+    let(:tag) { FactoryGirl.create(:tag) }
+    let(:tag_with_icon) { FactoryGirl.create(:tag_with_icon) }
+    let(:tag_with_icon2) { FactoryGirl.create(:tag_with_icon) }
+
+    it "should return an icon identifier" do
+      subject.tags = [tag, tag_with_icon]
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
+    end
+
+    it "should return no icon identifier" do
+      subject.tags = [tag]
+      subject.icon_from_tags.should be_nil
+    end
+
+    it "should be consistent with respect to tag order" do
+      subject.tags_string = "#{tag_with_icon.name} #{tag_with_icon2.name}"
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
+      subject.tags_string = "#{tag_with_icon2.name} #{tag_with_icon.name}"
+      subject.icon_from_tags.should eq(tag_with_icon.icon)
+    end
+  end
+
+  context "scopes" do
+    describe "by_most_recent" do
+      it "should set the order to be by created_at descending" do
+        Issue.by_most_recent.orders.first.should == "created_at DESC"
+      end
+    end
+
+    describe "created_by" do
+      it "should find issues created by the given user" do
+        user = FactoryGirl.create(:user)
+        owned_issues = FactoryGirl.create_list(:issue, 2, created_by: user)
+        other_issue = FactoryGirl.create(:issue)
+        Issue.count.should == 3
+        Issue.created_by(user).should == owned_issues
+      end
+    end
+  end
 end
