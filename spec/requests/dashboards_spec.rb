@@ -38,15 +38,37 @@ describe "User dashboards" do
     context "issues" do
       let(:issue) { FactoryGirl.create(:issue) }
 
-      before do
-        # Give the current user a location that matches the issue
-        ul = current_user.locations.build(category: FactoryGirl.create(:location_category), location: issue.location)
-        ul.save
-        visit dashboard_path
+      context "no locations" do
+        it "should give some guidance" do
+          visit dashboard_path
+          page.should have_content(I18n.t(".dashboards.show.no_locations_guidance"))
+        end
       end
 
-      it "should show issues in my area" do
-        page.should have_content(issue.title)
+      context "unhelpful location" do
+        before do
+          # Give the current user a location that doesn't match the issue
+          ul = current_user.locations.build(category: FactoryGirl.create(:location_category), location: "POINT(-90 -90)")
+          ul.save
+          visit dashboard_path
+        end
+
+        it "should give some more guidance" do
+          page.should have_content(I18n.t(".dashboards.show.add_another_location"))
+        end
+      end
+
+      context "matching location" do
+        before do
+          # Give the current user a location that matches the issue
+          ul = current_user.locations.build(category: FactoryGirl.create(:location_category), location: issue.location)
+          ul.save
+          visit dashboard_path
+        end
+
+        it "should show issues in my area" do
+          page.should have_content(issue.title)
+        end
       end
     end
   end

@@ -50,14 +50,18 @@
     permission_denied: "You are not authorised to access that page."
   dashboards:
     show:
+      add_a_new_issue: "add a new issue"
+      add_another_location: "add another location"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
+      no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
+      no_locations_guidance: "You haven't set any locations yet! If you add some locations, we can show you the issues nearby."
       subscribed_threads: "Subscribed Threads"
       group_threads: "Group Threads"
       group_threads_desc_html:
         Recent threads with activity from your groups.
-      update_your_areas: "Update your areas"
+      update_your_locations: "Update your locations"
       my_threads: "My Threads"
       issues_nearby: "Issues Nearby"
       posted:
