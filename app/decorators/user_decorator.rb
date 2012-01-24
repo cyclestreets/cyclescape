@@ -42,7 +42,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def group_memberships
-    return h.t("user.profiles.no_groups") if user.memberships.empty?
+    return h.t("user.profiles.show.no_groups") if user.memberships.empty?
     items = user.memberships.map do |membership|
       h.link_to_profile(membership.group) + " (#{membership.role.titleize})"
     end

@@ -452,6 +452,8 @@
         success: "Preferences saved"
         failure: "Your preferences could not be saved."
     profiles:
+      create:
+        success: "Profile Created"
       edit:
         title: "Edit Profile"
         my_current_thumbnail_title: "My current profile picture"
@@ -471,6 +473,7 @@
           one: "%{name} is a member of one group"
           other: "%{name} is a member of %{count} groups"
         my_locations: "My Locations"
+        no_groups: "None"
         no_website: "None"
         profile_picture_title: "%{name}'s picture"
         recent_threads: "Recent Threads"
