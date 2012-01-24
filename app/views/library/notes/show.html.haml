@@ -8,3 +8,12 @@
     = @tag_panel.render
   %section.note
     = render partial: "note", locals: { note: @note }
+%aside#sidebar
+  %section.threads
+    %h2= t ".public_threads"
+    - unless @threads.empty?
+      %p= t ".threads_explanation"
+      %ul.sidebar-threadlist
+        = render partial: "message_threads/compact", collection: @threads, as: :thread
+    - else
+      %p= t ".no_threads"
