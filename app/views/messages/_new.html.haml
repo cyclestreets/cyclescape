@@ -74,7 +74,7 @@
                   = semantic_fields_for Message.new do |f2|
                     = f2.input :body, input_html: {placeholder: "Explain how this library item relates to the discussion thread"}
                 .library-item
-                  %span.doc
+                  %span(data-bind="attr: {class: item_type}")
                   .item-content
                     %h3(data-bind="text: title")
                     %p(data-bind="text: description")

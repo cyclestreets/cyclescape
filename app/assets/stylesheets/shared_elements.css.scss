@@ -372,13 +372,13 @@ ul.content-icon-list {
     &.link {
       background-position:0 -216px;
     }
-    &.text {
+    &.library_note {
       background-position:0 -326px;
     }
     &.map-point {
       background-position:0 -436px;
     }
-    &.doc {
+    &.library_document {
       background-position:0 -548px;
     }
   }
@@ -818,13 +818,13 @@ section.new-message {
           &.link {
             background-position:0 -216px;
           }
-          &.text {
+          &.library_note {
             background-position:0 -326px;
           }
           &.map-point {
             background-position:0 -436px;
           }
-          &.doc {
+          &.library_document {
             background-position:0 -548px;
           }
         }
