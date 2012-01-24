@@ -373,13 +373,13 @@ ul.content-icon-list {
     &.link {
       background-position:0 -216px;
     }
-    &.text {
+    &.library_note {
       background-position:0 -326px;
     }
     &.map-point {
       background-position:0 -436px;
     }
-    &.doc {
+    &.library_document {
       background-position:0 -548px;
     }
   }
@@ -721,13 +721,8 @@ section.new-message {
     .library-content {
       background: $pane1;
       padding:30px 30px 15px 30px;
-      >h3 {
+      h3 {
         color: $grey2;
-      }
-      >a {
-        color: $grey2;
-        font-size:13px;
-        text-decoration:underline;
       }
       ul.content-icon-list {
         background:$white;
@@ -828,13 +823,13 @@ section.new-message {
           &.link {
             background-position:0 -216px;
           }
-          &.text {
+          &.library_note {
             background-position:0 -326px;
           }
           &.map-point {
             background-position:0 -436px;
           }
-          &.doc {
+          &.library_document {
             background-position:0 -548px;
           }
         }

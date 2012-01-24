@@ -60,6 +60,7 @@ Cyclescape::Application.routes.draw do
 
   resource :library do
     get 'search'
+    get 'recent'
     scope module: "library" do
       resources :documents
       resources :notes

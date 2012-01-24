@@ -108,7 +108,7 @@ input.submit,
 .btn-grey {
   @include button-text-grey;
 }
-.btn-green {
+.btn-green, .formtastic input.btn-green {
   @include button-text-green;
 }
 .btn-big-green {

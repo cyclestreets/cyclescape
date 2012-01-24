@@ -2,6 +2,19 @@ jQuery ->
   # Tabs
   $("ul.tabs").tabs "> div.panes > div"
 
+  # Scrollables
+  $("div.scrollable.autoheight")
+    .bind "update_height", (e, index) ->
+        # Update the height of the container to match the contents
+        scroller = $(this).data("scrollable")
+        index = scroller.getIndex() unless index
+        current_panel = $(scroller.getItems()[index])
+        wrapper = scroller.getRoot()
+        wrapper.animate({height: current_panel.outerHeight()}, 200)
+    .scrollable
+      onBeforeSeek: (e, index) ->
+        this.getRoot().trigger "update_height", [index]
+
   # Crude way to make large blocks .clickable by definiting a.primary-link in them
   $(".clickable").live "click", (e) ->
     window.location.href = $(this).find("a.primary-link").attr("href")
@@ -28,7 +41,6 @@ jQuery ->
       target_select = $ this
       param = target_select.data("autoset-param")
       new_value = source_select.find("option:selected").data(param)
-      console.info source_select, target_select, param, new_value
       target_select.val(new_value)
 
   # When a select box is changed find any dependent elements and
