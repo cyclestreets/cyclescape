@@ -17,36 +17,37 @@
     page.assign(vectorlayer, OpenLayers::Layer::Vector.new("Vectors", {projection: projection, styleMap: 'MapStyle.editStyle()'.to_sym}))
     page << map.add_layer(vectorlayer)
 
-    page << 'MapEdit.init(map, vectorlayer, geo_field, point_zoom)'
+    area_only = false unless area_only
+    page << "MapEdit.init(map, vectorlayer, geo_field, point_zoom, #{area_only})"
   end
 
 %div#map.map.edit
   .map-tools-overlay
     %ul.tabs
-      %li
+      %li.point
         %a
           %span.point
           = t ".point"
-      %li
+      %li.route
         %a
           %span.route
           = t ".route"
-      %li
+      %li.area
         %a
           %span.area
           = t ".area"
     .panes
-      .pane
+      .pane.point
         %h3= t ".draw_point"
         %p= t ".draw_point_1"
         %p= t ".draw_point_2"
         %p= t ".draw_point_3"
-      .pane
+      .pane.route
         %h3= t ".draw_route"
         %p= t ".draw_route_1"
         %p= t ".draw_route_2"
         %p= t ".draw_route_3"
-      .pane
+      .pane.area
         %h3= t ".draw_area"
         %p= t ".draw_area_1"
         %p= t ".draw_area_2"
