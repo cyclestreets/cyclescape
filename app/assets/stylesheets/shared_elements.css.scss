@@ -905,7 +905,7 @@ section.new-message {
   }
 }
 
-ul.latest-discussions {
+ul.threads {
   @include list-reset-soft;
   border-top:3px solid $paneborder;
   li {
@@ -944,6 +944,11 @@ ul.latest-discussions {
       position:absolute;
       right:0;
       top:20px;
+    }
+    .permissions {
+      position: absolute;
+      right: 0;
+      top: 10px;
     }
   }
 }

@@ -300,6 +300,11 @@
       group_private: "Group Private"
       public: "Public"
       created_at: "%{time_ago} ago"
+    list:
+      group_public: "Group Public"
+      group_private: "Group Private"
+      public: "Public"
+      created_at: "%{time_ago} ago"
     edit:
       title: "Edit thread"
     destroy:

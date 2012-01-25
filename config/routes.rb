@@ -87,6 +87,7 @@ Cyclescape::Application.routes.draw do
   end
 
   resources :tags
+  resource :home, only: [:show], controller: "home"
 
   match "template/:action", controller: "home"
 
