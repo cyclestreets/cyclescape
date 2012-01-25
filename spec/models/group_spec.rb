@@ -99,5 +99,16 @@ describe Group do
     it "should list committee members" do
       subject.committee_members.should include(brian)
     end
+
+    describe "#has_member?" do
+      it "should be true for Brian" do
+        subject.has_member?(brian).should be_true
+      end
+
+      it "should be false for another user" do
+        new_user = FactoryGirl.create(:user)
+        subject.has_member?(new_user).should be_false
+      end
+    end
   end
 end
