@@ -17,7 +17,7 @@ module ApplicationHelper
       when User
         link_to item.name, user_profile_path(item), options
       when Group
-        link_to item.name, group_profile_path(item), options
+        link_to item.name, group_path(item), options
     end
   end
 
