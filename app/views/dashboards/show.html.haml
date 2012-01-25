@@ -1,8 +1,7 @@
 .user-dashboard#dashboard-tabs
-  %nav
-    %ul.tabs
-      %li= link_to t(".my_threads"), "#my-threads"
-      %li= link_to t(".issues_nearby"), "#issues-nearby"
+  %ul.tabs.styled-tabs
+    %li= link_to t(".my_threads"), "#my-threads"
+    %li= link_to t(".issues_nearby"), "#issues-nearby"
 
   .panes
     #my-threads
