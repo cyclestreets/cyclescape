@@ -14,7 +14,6 @@
           = link_to root_path, id: "site-title" do
             %h1= current_group.name
         - else
-          %a#site-logo(href="#")
           = link_to image_tag("header_logo.png", alt: t(".title")), root_path, id: "site-title"
         %ul#top-menu
           %li.about= link_to t(".title"), root_url(subdomain: "www"), class: "cyclescape-logo"
