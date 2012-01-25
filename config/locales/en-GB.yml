@@ -150,8 +150,8 @@
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any threads yet
       our_areas: "Our Areas"
-      recent_issues: Recent Issues in this group's area
-      threads: "Latest Discussions"
+      recent_issues: "Recent Issues in this group's area"
+      recent_threads: "Latest Discussions"
   home:
     show:
       introduction_html:

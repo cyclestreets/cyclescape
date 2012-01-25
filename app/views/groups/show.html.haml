@@ -6,7 +6,8 @@
   %section.group-homepage-tabs
     %ul.tabs.styled-tabs
       %li= link_to t(".our_areas"), "#"
-      %li= link_to t(".threads"), "#"
+      %li= link_to t(".recent_threads"), "#"
+      %li= link_to t(".recent_issues"), "#"
     .panes
       .pane.area-map
         - if (@group.profile.location)
@@ -16,7 +17,6 @@
         - else
           %p= t ".no_location"
       .pane.recent-threads
-        %h2= t ".recent_threads"
         - if (@recent_threads.count > 0)
           %ul
           - @recent_threads.each do |thread|
@@ -24,7 +24,6 @@
         - else
           %p= t ".no_threads"
       .pane.recent-issues
-        %h2= t ".recent_issues"
         .issue-map
           - if (@group.profile.location)
             - m2 = display_bbox_map(@group.profile.location, all_geometries_issues_path(:json)) do |map2, page2|
