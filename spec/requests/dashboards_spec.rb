@@ -47,12 +47,21 @@ describe "User dashboards" do
 
       it "should list threads I'm subscribed to"
 
-      it "should list threads I'm involved with" do
-        messages = FactoryGirl.create_list(:message, 3, created_by: current_user)
-        current_user.involved_threads.count.should > 0
-        visit dashboard_path
-        messages.map {|m| m.thread }.each do |thread|
-          page.should have_content(thread.title)
+      context "with no threads" do
+        it "should give guidance" do
+          visit dashboard_path
+          page.should have_content(I18n.t(".dashboards.show.recent_threads"))
+        end
+      end
+
+      context "with threads" do
+        it "should list threads I'm involved with" do
+          messages = FactoryGirl.create_list(:message, 3, created_by: current_user)
+          current_user.involved_threads.count.should > 0
+          visit dashboard_path
+          messages.map {|m| m.thread }.each do |thread|
+            page.should have_content(thread.title)
+          end
         end
       end
     end

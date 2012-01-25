@@ -6,18 +6,22 @@
   .panes
     #my-threads
       %section.threads
-        %table.dashboard-threads
-          %tbody
-            - @involved_threads.each do |thread|
-              %tr
-                %td.title
-                  %h4= link_to thread.title, thread_path(thread)
-                  - if thread.has_issue?
-                    %p= thread.issue_link
-                %td.activity
-                  = thread.latest_activity
-                %td.meta
-                  = thread.latest_activity_date
+        - if @involved_threads.empty?
+          %p= t ".no_involved_threads_html", threads_link: link_to(t(".recent_threads"), threads_path),
+                                        add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path)
+        - else
+          %table.dashboard-threads
+            %tbody
+              - @involved_threads.each do |thread|
+                %tr
+                  %td.title
+                    %h4= link_to thread.title, thread_path(thread)
+                    - if thread.has_issue?
+                      %p= thread.issue_link
+                  %td.activity
+                    = thread.latest_activity
+                  %td.meta
+                    = thread.latest_activity_date
       #dashboard-threads-issues
         %section#group-threads
           %h2= t(".group_threads")
