@@ -81,6 +81,8 @@
         create: "Add Photo"
       site_comment:
         create: "Send Feedback"
+      user:
+        create: "Sign up"
       user_profile:
         create: "Save"
       user_thread_priority:

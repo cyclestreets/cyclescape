@@ -1,5 +1,5 @@
 Cyclescape::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :confirmations => "confirmations" }
 
   constraints(SubdomainConstraint) do
     root :to => "groups#show"
