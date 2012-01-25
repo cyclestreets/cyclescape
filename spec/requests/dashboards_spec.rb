@@ -74,7 +74,7 @@ describe "User dashboards" do
       context "no locations" do
         it "should give some guidance" do
           visit dashboard_path
-          page.should have_content(I18n.t(".dashboards.show.no_locations_guidance"))
+          page.should have_content(I18n.t(".dashboards.show.add_some_locations"))
         end
       end
 
