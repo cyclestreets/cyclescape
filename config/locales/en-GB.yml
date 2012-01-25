@@ -52,6 +52,7 @@
     show:
       add_a_new_issue: "add a new issue"
       add_another_location: "add another location"
+      add_some_locations: "add some locations"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
@@ -61,7 +62,7 @@
         help with, or maybe you could %{add_issue_link} instead?
       no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
       no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
-      no_locations_guidance: "You haven't set any locations yet! If you add some locations, we can show you the issues nearby."
+      no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby issues here."
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
