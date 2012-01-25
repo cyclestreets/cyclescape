@@ -237,13 +237,13 @@ article:hover > menu.tools, header:hover > menu.tools {
     border: none;
     text-indent: -999999px;
     &.person {
+      margin-right: 5px;
       background: image-url("sprite.png") -3px -130px no-repeat;
       &:hover {
         background-position: -43px -130px;
       }
     }
     &.zoom {
-      margin-left: 5px;
       background: image-url("sprite.png") -3px -180px no-repeat;
       &:hover {
         background-position: -43px -180px;
@@ -864,6 +864,120 @@ section.new-message {
       float:right;
       font-size:14px;
       margin:0 30px 30px 0;
+    }
+  }
+}
+
+.top-box {
+  min-height:160px;
+  margin-bottom: 30px;
+  h1 {
+    margin-top:5px;
+    line-height:35px;
+    font-size:16px;
+    color:$lightgrey2;
+  }
+}
+.group-top-box {
+  @extend .top-box;
+  margin-right:30px;
+}
+
+.center-box {
+  background:$pane1;
+  border:spx solid $paneborder;
+  margin-bottom:30px;
+  h2 {
+    display:block;
+    color:$white;
+    padding:10px;
+    margin:0;
+    background:$black;
+    @include background(linear-gradient($black, $lightblack));
+  }
+  .inner {
+    padding:20px;
+    text-align:center;
+    p {
+      font-size:16px;
+      color:$grey2;
+    }
+  }
+}
+
+ul.latest-discussions {
+  @include list-reset-soft;
+  border-top:3px solid $paneborder;
+  li {
+    padding:10px 0 10px 90px;
+    border-bottom:1px solid $paneborder;
+    position:relative;
+    &.car-parking {
+      background: image-url("map-icons/m-car-parking.png") 10px 10px no-repeat;
+    }
+    &.cycle-parking {
+      background: image-url("map-icons/m-cycle-parking.png") 10px 10px no-repeat;
+    }
+    &.cycle-path {
+      background: image-url("map-icons/m-cycle-path.png") 10px 10px no-repeat;
+    }
+    &.misc {
+      background: image-url("map-icons/m-misc.png") 10px 10px no-repeat;
+    }
+    &.obstruction {
+      background: image-url("map-icons/m-obstruction.png") 10px 10px no-repeat;
+    }
+    &.planning {
+      background: image-url("map-icons/m-planning.png") 10px 10px no-repeat;
+    }
+    &.roadworks {
+      background: image-url("map-icons/m-roadworks.png") 10px 10px no-repeat;
+    }
+    h4, p {
+      width:450px;
+      margin:0;
+    }
+    p {
+      color:$lightgrey2;
+    }
+    .btn-green {
+      position:absolute;
+      right:0;
+      top:20px;
+    }
+  }
+}
+
+.group-latest-discussions {
+  @extend .latest-discussions;
+  li:last-child {
+    border-bottom:none;
+  }
+}
+
+
+.main-search-box {
+  border: 1px solid $grey;
+  input {
+    border: none;
+    background: $white;
+    padding: 5px 4px;
+    font-size: 14px;
+    margin: 0;
+    float: left;
+  }
+  button {
+    @include button-reset;
+    float: left;
+    background: $white image-url("search.png") center 4px no-repeat;
+    width: 27px;
+    height: 27px;
+    @include border-radius(0);
+    &:hover {
+      background-position: center -19px;
+    }
+    &:active {
+      @include box-shadow(none);
     }
   }
 }

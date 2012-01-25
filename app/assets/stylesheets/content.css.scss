@@ -225,6 +225,37 @@
           }
         }
       }
+      &.twitter,
+      &.group-twitter {
+        overflow:hidden;
+        h2 {
+          color:$darkred;
+          padding-left:34px;
+          background:image-url("sprite.png") -3px -1605px no-repeat;
+        }
+        p {
+          color:$lightgrey2;
+          margin-bottom:5px;
+          &.meta {
+            font: {
+              style:italic;
+              size:13px;
+            }
+            color:$lightgrey;
+            float:left;
+          }
+        }
+        .btn-grey {
+          float:right;
+          font-size:12px;
+        }
+      }
+      &.group-twitter {
+        h2 {
+          color:$colour2;
+          background-position: -3px -1741px;
+        }
+      }
     }
   }
 }
@@ -414,33 +445,33 @@ section#user-locations {
           }
           color:$lightgrey2;
         }
-        &.carparking {
+        &.car-parking {
           padding-left:42px;
-          background: image-url("icons/m-carparking.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-car-parking.png") 0 10px no-repeat;
         }
         &.cycle-parking {
           padding-left:42px;
-          background: image-url("icons/m-cycle-parking.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-cycle-parking.png") 0 10px no-repeat;
         }
         &.cycle-path {
           padding-left:42px;
-          background: image-url("icons/m-cycle-path.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-cycle-path.png") 0 10px no-repeat;
         }
         &.misc {
           padding-left:42px;
-          background: image-url("icons/m-misc.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-misc.png") 0 10px no-repeat;
         }
         &.obstruction {
           padding-left:42px;
-          background: image-url("icons/m-obstruction.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-obstruction.png") 0 10px no-repeat;
         }
         &.planning {
           padding-left:42px;
-          background: image-url("icons/m-planning.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-planning.png") 0 10px no-repeat;
         }
         &.roadworks {
           padding-left:42px;
-          background: image-url("icons/m-roadworks.png") 0 10px no-repeat;
+          background: image-url("map-icons/m-roadworks.png") 0 10px no-repeat;
         }
         h4 {
           a {
@@ -567,5 +598,196 @@ section#user-locations {
     ul {
       @include inline-block;
     }
+  }
+}
+
+/* Home Page */
+body.home {
+  #page {
+    background:$white image-url("bg-strip.png") 0 0 repeat-x;
+  }
+}
+#how-it-works {
+  margin-top:30px;
+  width:960px;
+  float:left;
+  color:$white;
+  h1 {
+    font: {
+      style:italic;
+      weight:bold;
+      size:22px;
+    }
+    color:$grey2;
+  }
+  .inner {
+    overflow:hidden;
+    background:$grey2;
+    @include background(linear-gradient($grey2, $lightblack));
+    h3 {
+      color:$white;
+      font: {
+        size:19px;
+        weight:normal;
+      }
+    }
+    >div {
+      position:relative;
+      width:200px;
+      float:left;
+      padding:30px 30px 30px 90px;
+      background:image-url("sep-grad.png") 300px center no-repeat;
+      .icon {
+        overflow:visible;
+        display:block;
+        width:120px;
+        height:120px;
+        position:absolute;
+        left:-20px;
+        top:0;
+        background:image-url("homepage-icons.png") -30px -60px no-repeat;
+      }
+      &.report .icon {
+        background-position:-30px -60px;
+      }
+      &.advice .icon {
+        background-position:-30px -320px;
+      }
+      &.find {
+        background:none;
+        .icon {
+          background-position:-30px -590px;
+        }
+      }
+    }
+  }
+}
+
+.homepage-groups {
+  margin:0 !important;
+  color:$white;
+  padding:15px 15px 15px 60px;
+  background:$darkred image-url("homepage-groups-pin.png") 0 0 no-repeat;
+  h2 {
+    color:$white !important;
+  }
+  p {
+    font-size:12px;
+    margin:0;
+  }
+}
+
+.homepage-search {
+  overflow:hidden;
+  margin-top:-5px !important;
+  .main-search-box {
+    float:right;
+  }
+}
+
+.homepage-find {
+  background:$black;
+  padding:15px;
+  h2 {
+    color:$white !important;
+  }
+  form {
+    label {
+      position:absolute;
+      left:-999999px;
+    }
+    input {
+      font-size:16px;
+      padding:6px;
+      width:190px;
+      border:none;
+    }
+    button {
+      font-size:16px;
+      padding:6px 9px;
+    }
+  }
+  ul.group-threads-list {
+    @include list-reset-soft;
+    li {
+      clear:both;
+      overflow:hidden;
+      padding:10px 0;
+      border-bottom:1px solid $paneborder;
+      &:last-child {
+        border-bottom:none;
+      }
+      span {
+        margin-top:3px;
+        border: 2px solid $white;
+      }
+      h4 {
+        margin:0 !important;
+        padding-left:30px;
+        a {
+          color:$white;
+        }
+      }
+      p.meta {
+        margin:0;
+        padding-left:30px;
+        color:$white;
+        font-size:12px;
+      }
+    } 
+  }
+}
+
+/* Group Home Page */
+.group-homepage-tabs {
+  >.styled-tabs {
+    margin-bottom:0;
+  }
+  >.panes {
+    overflow:hidden;
+    padding:13px;
+    border-left:1px solid $paneborder;
+    border-bottom:1px solid $paneborder;
+    border-right:1px solid $paneborder;
+    @include border-radius(0 0 10px 10px);
+  }
+}
+
+#how-it-works-group {
+  @extend #how-it-works;
+  h1 {
+    color:$colour2;
+  }
+  .inner {
+    background:$colour2;
+    @include background(linear-gradient($colour2, $colour1));
+  }
+}
+
+.group-homepage-image-search {
+  position:relative;
+  height:160px;
+  margin-bottom:50px !important;
+  >img {
+    position:absolute;
+    top:-20px;
+    left:-30px;
+  }
+  .main-search-box {
+    position:absolute;
+    top:-5px;
+    right:20px;
+  }
+}
+
+.group-homepage-join {
+  overflow:hidden;
+  h2 {
+    color:$colour2 !important;
+  }
+  .btn-green {
+    float:right;
+    font-size:13px !important;
+    padding:7px 14px !important;
   }
 }
