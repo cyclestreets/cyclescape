@@ -237,13 +237,13 @@ article:hover > menu.tools, header:hover > menu.tools {
     border: none;
     text-indent: -999999px;
     &.person {
+      margin-right: 5px;
       background: image-url("sprite.png") -3px -130px no-repeat;
       &:hover {
         background-position: -43px -130px;
       }
     }
     &.zoom {
-      margin-left: 5px;
       background: image-url("sprite.png") -3px -180px no-repeat;
       &:hover {
         background-position: -43px -180px;
@@ -874,13 +874,18 @@ section.new-message {
 }
 
 .top-box {
-  height: 140px;
-  margin-bottom: 20px;
+  min-height:160px;
+  margin-bottom: 30px;
   h1 {
-    line-height:40px;
+    margin-top:5px;
+    line-height:35px;
     font-size:16px;
     color:$lightgrey2;
   }
+}
+.group-top-box {
+  @extend .top-box;
+  margin-right:30px;
 }
 
 .center-box {
@@ -945,6 +950,13 @@ ul.latest-discussions {
       right:0;
       top:20px;
     }
+  }
+}
+
+.group-latest-discussions {
+  @extend .latest-discussions;
+  li:last-child {
+    border-bottom:none;
   }
 }
 

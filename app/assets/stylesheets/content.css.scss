@@ -225,7 +225,9 @@
           }
         }
       }
-      &.twitter {
+      &.twitter,
+      &.group-twitter {
+        overflow:hidden;
         h2 {
           color:$darkred;
           padding-left:34px;
@@ -246,6 +248,12 @@
         .btn-grey {
           float:right;
           font-size:12px;
+        }
+      }
+      &.group-twitter {
+        h2 {
+          color:$colour2;
+          background-position: -3px -1741px;
         }
       }
     }
@@ -727,5 +735,59 @@ body.home {
         font-size:12px;
       }
     } 
+  }
+}
+
+/* Group Home Page */
+.group-homepage-tabs {
+  >.styled-tabs {
+    margin-bottom:0;
+  }
+  >.panes {
+    overflow:hidden;
+    padding:13px;
+    border-left:1px solid $paneborder;
+    border-bottom:1px solid $paneborder;
+    border-right:1px solid $paneborder;
+    @include border-radius(0 0 10px 10px);
+  }
+}
+
+#how-it-works-group {
+  @extend #how-it-works;
+  h1 {
+    color:$colour2;
+  }
+  .inner {
+    background:$colour2;
+    @include background(linear-gradient($colour2, $colour1));
+  }
+}
+
+.group-homepage-image-search {
+  position:relative;
+  height:160px;
+  margin-bottom:50px !important;
+  >img {
+    position:absolute;
+    top:-20px;
+    left:-30px;
+  }
+  .main-search-box {
+    position:absolute;
+    top:-5px;
+    right:20px;
+  }
+}
+
+.group-homepage-join {
+  overflow:hidden;
+  h2 {
+    color:$colour2 !important;
+  }
+  .btn-green {
+    float:right;
+    font-size:13px !important;
+    padding:7px 14px !important;
   }
 }
