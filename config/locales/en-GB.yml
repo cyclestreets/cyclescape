@@ -50,14 +50,26 @@
     permission_denied: "You are not authorised to access that page."
   dashboards:
     show:
+      add_a_new_issue: "add a new issue"
+      add_another_location: "add another location"
+      add_some_locations: "add some locations"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
+      no_involved_threads_html:
+        You haven't been involved in any threads yet. You could have a look
+        through the %{threads_link} and see if there's anything that you want to
+        help with, or maybe you could %{add_issue_link} instead?
+      no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
+      no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
+      no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby issues here."
+      no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
+      recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
       group_threads: "Group Threads"
       group_threads_desc_html:
         Recent threads with activity from your groups.
-      update_your_areas: "Update your areas"
+      update_your_locations: "Update your locations"
       my_threads: "My Threads"
       issues_nearby: "Issues Nearby"
       posted:
@@ -437,13 +449,22 @@
       edit:
         title: "Edit Location"
       index:
+        add_first_location: "add your first location"
+        all_my_locations: "All my locations"
         category: "Category"
+        combined_locations: "Combined locations"
+        combined_locations_guidance: "This map shows all of your locations combined together. We use this to help figure out which issues are relevant to you, and which groups you might be interested in."
+        combined_locations_guidance2_html: "If you want to receive notifications when issues are created in these areas, you can %{edit_prefs_link}."
         confirm: "Are you sure?"
         delete: "Delete"
         edit: "Edit"
+        edit_your_prefs: "edit your preferences"
         map: "Map"
         my_locations: "My Locations"
         new: "Add a new Location"
+        no_locations_yet: "You haven't set any locations yet!"
+        no_locations_guidance: "You can create locations for where you live, your route to work, where you like to go riding, and so on. This helps us figure out which issues are revelent to you, and which groups you might be interested in."
+        no_locations_guidance2_html: "To get started, you can %{first_location_link}."
         no_overlapping_groups: "No Overlapping Groups"
         overlapping_groups: "Overlapping Groups"
       new:
@@ -458,6 +479,8 @@
         success: "Preferences saved"
         failure: "Your preferences could not be saved."
     profiles:
+      create:
+        success: "Profile Created"
       edit:
         title: "Edit Profile"
         my_current_thumbnail_title: "My current profile picture"
@@ -477,6 +500,7 @@
           one: "%{name} is a member of one group"
           other: "%{name} is a member of %{count} groups"
         my_locations: "My Locations"
+        no_groups: "None"
         no_website: "None"
         profile_picture_title: "%{name}'s picture"
         recent_threads: "Recent Threads"
