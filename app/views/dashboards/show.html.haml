@@ -21,13 +21,18 @@
       #dashboard-threads-issues
         %section#group-threads
           %h2= t(".group_threads")
-          %ul.group-threads-list
-            - @group_threads.each do |thread|
-              %li
-                %span
-                = link_to_profile thread.group, class: "group-link"
-                %div
-                  %h4= link_to thread.title, thread_path(thread)
+          - if current_user.groups.empty?
+            %p= t ".no_user_groups"
+          - elsif @group_threads.empty?
+            %p= t ".no_group_threads"
+          - else
+            %ul.group-threads-list
+              - @group_threads.each do |thread|
+                %li
+                  %span
+                  = link_to_profile thread.group, class: "group-link"
+                  %div
+                    %h4= link_to thread.title, thread_path(thread)
     #issues-nearby
       %section.issues
         %h2= t ".issues_in_your_area"
