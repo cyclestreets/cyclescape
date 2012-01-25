@@ -177,6 +177,34 @@ article:hover > menu.tools, header:hover > menu.tools {
         margin: 3px 0 10px 0;
       }
     }
+    &.car-parking {
+      padding-left:42px;
+      background: image-url("map-icons/m-car-parking.png") 0 20px no-repeat;
+    }
+    &.cycle-parking {
+      padding-left:42px;
+      background: image-url("map-icons/m-cycle-parking.png") 0 20px no-repeat;
+    }
+    &.cycle-path {
+      padding-left:42px;
+      background: image-url("map-icons/m-cycle-path.png") 0 20px no-repeat;
+    }
+    &.misc {
+      padding-left:42px;
+      background: image-url("map-icons/m-misc.png") 0 20px no-repeat;
+    }
+    &.obstruction {
+      padding-left:42px;
+      background: image-url("map-icons/m-obstruction.png") 0 20px no-repeat;
+    }
+    &.planning {
+      padding-left:42px;
+      background: image-url("map-icons/m-planning.png") 0 20px no-repeat;
+    }
+    &.roadworks {
+      padding-left:42px;
+      background: image-url("map-icons/m-roadworks.png") 0 20px no-repeat;
+    }
     .permissions {
       float:right;
     }
