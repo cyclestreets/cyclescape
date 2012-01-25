@@ -34,6 +34,10 @@ class Group < ActiveRecord::Base
     members.where("group_memberships.role = 'member'")
   end
 
+  def has_member?(user)
+    members.include?(user)
+  end
+
   def recent_issues
     Issue.intersects(profile.location).order("created_at DESC")
   end

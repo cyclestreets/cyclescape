@@ -7,7 +7,13 @@ class GroupsController < ApplicationController
     end
 
     if @group
-      @recent_threads = @group.threads.order("created_at DESC").limit(10)
+      @group = GroupDecorator.decorate(@group)
+      if @group.has_member?(current_user)
+        recent_threads = ThreadList.recent_from_groups(@group, 10)
+      else
+        recent_threads = ThreadList.recent_public_from_groups(@group, 10)
+      end
+      @recent_threads = ThreadListDecorator.decorate(recent_threads)
       @recent_issues = @group.recent_issues.limit(10)
     else
       redirect_to root_url(subdomain: 'www')
