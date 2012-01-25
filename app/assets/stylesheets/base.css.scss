@@ -77,6 +77,9 @@ a {
 strong, b {
   font-weight: bolder;
 }
+em, i {
+  font-style: italic;
+}
 
 // lists
 ul, ol {
@@ -113,6 +116,7 @@ input.submit,
 }
 .btn-big-green {
   @include button-text-green;
+  @include inline-block;
   padding: 15px;
   text-align: center;
   font: {

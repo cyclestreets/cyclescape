@@ -28,4 +28,12 @@ class ThreadListDecorator < ApplicationDecorator
   def has_issue?
     thread.issue
   end
+
+  def icon_class
+    if has_issue?
+      # Might be nil
+      icon = thread.issue.icon_from_tags
+    end
+    icon ||= "misc"
+  end
 end

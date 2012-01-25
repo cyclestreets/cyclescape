@@ -154,32 +154,9 @@
       }
     }
   }
-  #site-search {
+  .main-search-box {
     position: absolute;
     right: 0;
     top: -5px;
-    border: 1px solid $grey;
-    input {
-      border: none;
-      background: $white;
-      padding: 5px 4px;
-      font-size: 14px;
-      margin: 0;
-      float: left;
-    }
-    button {
-      @include button-reset;
-      float: left;
-      background: $white image-url("search.png") center 4px no-repeat;
-      width: 27px;
-      height: 27px;
-      @include border-radius(0);
-      &:hover {
-        background-position: center -19px;
-      }
-      &:active {
-        @include box-shadow(none);
-      }
-    }
   }
 }

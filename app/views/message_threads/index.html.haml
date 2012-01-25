@@ -1,5 +1,5 @@
 %section.threads
   %h1= t ".title"
   %ul.thread-list
-    = render partial: "message_threads/compact", collection: @threads, as: :thread
+    = render partial: "message_threads/list", collection: @threads, as: :thread
   = will_paginate @threads

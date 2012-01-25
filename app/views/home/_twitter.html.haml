@@ -1,0 +1,27 @@
+%script(charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js")
+:javascript
+  new TWTR.Widget({
+    version: 2,
+    type: 'profile',
+    rpp: 2,
+    interval: 30000,
+    width: 'auto',
+    height: 300,
+    theme: {
+      shell: {
+        background: '#dedede',
+        color: '#000000'
+      },
+      tweets: {
+        background: '#ffffff',
+        color: '#000000',
+        links: '#005e00'
+      }
+    },
+    features: {
+      scrollbar: false,
+      loop: false,
+      live: false,
+      behavior: 'all'
+    }
+  }).render().setUser('Cyclescape').start();

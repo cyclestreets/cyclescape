@@ -146,7 +146,30 @@
       recent_threads: Recent Threads created by this group
   home:
     show:
-      new_issue: "Create New Issue"
+      introduction_html:
+        Cyclescape is an online campaigning toolkit for
+        cycle campaign groups around the UK
+      center_box_title:
+        Report your cycling issues here
+      center_box_html:
+        Non-existent cycle paths? Obstructions for cyclists? Lack of cycle parking?
+        Or an example of something done right?
+      report_an_issue: "Report an issue"
+      latest_discussions: "Latest Discussions"
+      groups_title: "Cyclescape Groups"
+      groups_intro_html:
+        Cyclescape is used by <strong>cycle campaign groups</strong> across
+        the country. <strong>Find groups local to you</strong> and see what
+        they're working to fix.
+      twitter_title: "Cyclescape on Twitter"
+    guide:
+      title: "How Cyclescape Works"
+      box_1_title: "Report cycling issues"
+      box_1_body: "Quickly raise issues on this site."
+      box_2_title: "Get advice from others"
+      box_2_body: "Discuss issues with members of cycling groups."
+      box_3_title: "Make a difference"
+      box_3_body: "Organise the action the group should take to resolve an issue."
   issue:
     message_threads:
       new:
@@ -291,6 +314,11 @@
         failure: "Couldn't update your priority"
   message_threads:
     compact:
+      group_public: "Group Public"
+      group_private: "Group Private"
+      public: "Public"
+      created_at: "%{time_ago} ago"
+    list:
       group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
