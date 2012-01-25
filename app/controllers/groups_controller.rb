@@ -6,6 +6,8 @@ class GroupsController < ApplicationController
       @group = current_group
     end
 
+    @group = GroupDecorator.decorate(@group)
+
     if @group
       @recent_threads = @group.threads.order("created_at DESC").limit(10)
       @recent_issues = @group.recent_issues.limit(10)
