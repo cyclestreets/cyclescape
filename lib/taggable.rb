@@ -24,11 +24,8 @@ module Taggable
   end
 
   def icon_from_tags
-    icon = nil
-    self.tags.order("name asc").each do |tag|
-      icon ||= tag.icon
-    end
-    icon
+    tag = tags.order("name").detect {|t| t.icon }
+    tag.icon if tag
   end
 
   protected
