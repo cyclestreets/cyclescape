@@ -52,6 +52,7 @@
         new: &hints_issue_new
           photo: "(optional)"
           tags_string: "e.g. parking obstruction roadworks path"
+          title: "Please be brief and specific."
         create: *hints_issue_new
       message_thread:
         privacy: "Select if this thread should be visible to members of the group only or everyone."
