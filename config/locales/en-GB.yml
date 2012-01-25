@@ -239,17 +239,23 @@
         title: "New Document"
       show:
         added_by_html: "Added by %{name} on %{time}"
+        attach_note: "Attach Note"
+        attach_note_instructions_html: "You can create new notes linked to this document. When referenced in a thread they will link to this document as well."
         download: "Download document"
         comments: "Comments"
         notes: "Notes"
-        attach_note: "Attach Note"
-        attach_note_instructions_html: "You can create new notes linked to this document. When referenced in a thread they will link to this document as well."
+        no_threads: "This note hasn't been included in any public threads. If you add the note to a public thread, the thread will be listed here."
+        public_threads: "Public Threads"
+        threads_explanation: "This note has been mentioned in these public threads:"
     notes:
       new:
         title: "New Note"
       show:
         added_by_html: "Added by %{name} on %{time}"
-        note_on_document_html: "Attached to document: %{document}"
+        note_on_document_html: "This note is attached to a document: %{document}"
+        no_threads: "This note hasn't been included in any public threads. If you add the note to a public thread, the thread will be listed here."
+        public_threads: "Public Threads"
+        threads_explanation: "This note has been mentioned in these public threads:"
   mailers:
     notifications:
       gmr_confirmed:

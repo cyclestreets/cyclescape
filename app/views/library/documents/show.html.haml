@@ -1,21 +1,39 @@
 %article#content.library.document
   %h1= @document.title
-  %p= t ".added_by_html", name: link_to_profile(@document.created_by), time: l(@document.created_at.to_date)
-  %p= link_to t(".download"), @document.file.url
+  %section.meta
+    %p= t ".added_by_html", name: link_to_profile(@document.created_by), time: l(@document.created_at.to_date)
   %section.tags
     = @tag_panel.render
-%section.comments
-  %h2= t ".comments"
-  %p TODO
-%section.notes
-  %h2= t ".notes"
-  = render partial: "library/notes/note", collection: @notes
-  .form
+  %section.document
+    = @item.icon
+    %h3= link_to t(".download"), @document.file.url
+  %section.notes
+    %h2= t ".notes"
+    - if @notes
+      %ul.library-list
+        - @notes.each do |item|
+          %li
+            = item.icon
+            .lib-content
+              = render partial: "library/notes/note", locals: { note: item.component }
+            .meta
+              = item.created_at
+%aside#sidebar
+  %section.threads
+    %h2= t ".public_threads"
+    - unless @threads.empty?
+      %p= t ".threads_explanation"
+      %ul.sidebar-threadlist
+        = render partial: "message_threads/compact", collection: @threads, as: :thread
+    - else
+      %p= t ".no_threads"
+  %section.new_note.box
     %h2= t ".attach_note"
     %p= t ".attach_note_instructions_html"
-    = semantic_form_for @note do |f|
-      = f.inputs do
-        = f.input :body
-        = f.input :library_document_id, as: :hidden
-      = f.buttons do
-        = f.commit_button :attach_to_document
+    .form
+      = semantic_form_for @note do |f|
+        = f.inputs do
+          = f.input :body
+          = f.input :library_document_id, as: :hidden
+        = f.buttons do
+          = f.commit_button :attach_to_document

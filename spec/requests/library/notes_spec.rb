@@ -29,6 +29,13 @@ describe "Library notes" do
       page.should have_content("Note text goes here")
     end
 
+    it "should auto link the text" do
+      visit new_library_note_path
+      fill_in "Note", with: "Text https://example.com more text"
+      click_on "Create Note"
+      page.should have_link("https://example.com")
+    end
+
     it "should have a cancel link back to the library page" do
       visit new_library_note_path
       click_on "Cancel"

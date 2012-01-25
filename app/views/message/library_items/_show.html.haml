@@ -1,7 +1,7 @@
 .link{id: dom_id(message.component)}
   %p
-    - item = message.component.item
-    = item.component.class.model_name.humanize
+    - item = Library::ItemDecorator.decorate(message.component.item)
+    = item.icon
     = link_to item.title, item.component
     - if item.component.class == Library::Note && item.component.document?
       %p= t ".attached_to_html", document: link_to(item.component.document.title, item.component.document)

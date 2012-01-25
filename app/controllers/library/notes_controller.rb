@@ -22,6 +22,8 @@ class Library::NotesController < ApplicationController
 
   def show
     @tag_panel = TagPanelDecorator.new(@note.item, form_url: library_tag_path(@note.item))
+    @threads = @note.item.threads.public.order_by_latest_message.limit(10)
+    @item = Library::ItemDecorator.decorate(@note.item)
   end
 
   def edit
