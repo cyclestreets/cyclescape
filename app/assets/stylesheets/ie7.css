@@ -1,7 +1,0 @@
-/* IE7 - Prevent Go button wrapping to next line */
-body.issues .search .search-box { display: inline; }
-
-/* IE7 - emulate display:table-cell for these listings */
-ul.issue-list .map { float: left; }
-ul.issue-list .issue-content { float: left; }
-ul.issue-list .votes-cell { float: left; }

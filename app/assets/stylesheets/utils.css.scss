@@ -2,6 +2,7 @@
 @mixin gradient($c1, $c2) {
   background: $c1;
   @include background(linear-gradient($c1, $c2));
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$c1}', endColorstr='#{$c2}', GradientType=0);
 }
 
 // Button reset with text

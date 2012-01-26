@@ -4,10 +4,6 @@
     %title= page_title
     = favicon_link_tag 'favicon.ico', type: "image/x-icon"
     = stylesheet_link_tag    "application"
-    /[if lt IE 9]
-      %script(src="//html5shiv.googlecode.com/svn/trunk/html5.js")
-    /[if lt IE 8]
-      = stylesheet_link_tag "ie7"
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
     = javascript_include_tag "application"
     = csrf_meta_tags
