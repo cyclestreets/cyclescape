@@ -63,7 +63,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'factory_girl_rails', '~> 1.4.0'
+  gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'
   gem 'capybara'
