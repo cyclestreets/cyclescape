@@ -33,6 +33,9 @@ form.guided {
         }
       }
       &.text {
+        .label {
+          width: 568px;
+        }
         > p.inline-hints {
           display: block;
           float: left;
