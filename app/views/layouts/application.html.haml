@@ -42,15 +42,10 @@
         - if current_user
           = render partial: "layouts/group_selector"
 
-    #crumb-search
-      .wrapper
-        - if content_for? :subnav
+    - if content_for? :subnav
+      #crumb-search
+        .wrapper
           = content_for :subnav
-        - else
-          %nav
-            %ul
-              %li= link_to t(".home"), root_path
-              %li= link_to "Somewhere", "#"
     .flash-container
       - [:alert, :notice].each do |type|
         - if flash.key? type
