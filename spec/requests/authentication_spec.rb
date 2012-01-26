@@ -43,4 +43,20 @@ describe "Authentication and authorization" do
       page.current_path.should == dashboard_path
     end
   end
+
+  context "when signing up" do
+    it "should direct you to your locations page" do
+      credentials = FactoryGirl.attributes_for(:user)
+      visit root_path
+      click_link "Sign up"
+      fill_in "Full name", with: credentials[:full_name]
+      fill_in "Email", with: credentials[:email]
+      fill_in "Password", with: credentials[:password]
+      fill_in "Password confirmation", with: credentials[:password]
+      click_button "Sign up"
+      open_email(credentials[:email])
+      visit_in_email("Confirm my account")
+      page.current_path.should == user_locations_path
+    end
+  end
 end
