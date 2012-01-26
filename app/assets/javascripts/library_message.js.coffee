@@ -48,15 +48,16 @@ class LibraryMessageView
         @initial_items(data)
 
 jQuery ->
-  library_message_view = new LibraryMessageView($("#from-library"))
+  if $("#from-library").length > 0
+    library_message_view = new LibraryMessageView($("#from-library"))
 
-  # Select button
-  $("#from-library").on "click", "a.select", (e) ->
-    scroller = $(this).parents(".scrollable:first").data("scrollable")
-    scroller.next()
-    false
+    # Select button
+    $("#from-library").on "click", "a.select", (e) ->
+      scroller = $(this).parents(".scrollable:first").data("scrollable")
+      scroller.next()
+      false
 
-  # Tab click event to update the height
-  $("section.new-message > ul.tabs").on "onClick", ->
-    scroller = $(this).parents("section:first").find(".scrollable")
-    scroller.trigger "update_height"
+    # Tab click event to update the height
+    $("section.new-message > ul.tabs").on "onClick", ->
+      scroller = $(this).parents("section:first").find(".scrollable")
+      scroller.trigger "update_height"

@@ -1,0 +1,13 @@
+.group-selector
+  %span.label= t(".group_selector")
+  %a
+    - if current_group
+      = current_group.name
+    - else
+      = t(".no_group")
+    %span.arrow
+  %ul#groups-list
+    - if current_group
+      %li= link_to t(".no_group"), root_url(subdomain: "www")
+    - current_user.groups.except {|g| g == current_group }.each do |group|
+      %li= link_to_group_home group

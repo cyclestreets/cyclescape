@@ -21,6 +21,10 @@ module ApplicationHelper
     end
   end
 
+  def link_to_group_home(group)
+    link_to group.name, root_url(subdomain: group.short_name)
+  end
+
   def link_to_github_commit
     commit = Rails.application.config.git_hash
     url = Rails.application.config.github_project_url + "/commit/" + commit

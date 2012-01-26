@@ -39,6 +39,9 @@
           %li#menu-issues= link_to t(".issues"), issues_path
           %li#menu-threads= link_to t(".threads"), threads_path
           %li#menu-library= link_to t(".library"), library_path
+        - if current_user
+          = render partial: "layouts/group_selector"
+
     #crumb-search
       .wrapper
         - if content_for? :subnav
