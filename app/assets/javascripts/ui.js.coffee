@@ -94,3 +94,6 @@ jQuery ->
       $(this).toggleClass("reveal")
     .on "mouseleave", "menu.tools", ->
       $(this).removeClass("reveal")
+
+  $("div.group-selector").on "click", (e) ->
+    $(this).toggleClass "open closed"

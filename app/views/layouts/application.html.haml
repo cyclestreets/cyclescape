@@ -39,6 +39,20 @@
           %li#menu-issues= link_to t(".issues"), issues_path
           %li#menu-threads= link_to t(".threads"), threads_path
           %li#menu-library= link_to t(".library"), library_path
+        .group-selector
+          %span.label= t(".group_selector")
+          %a
+            - if current_group
+              = current_group.name
+            - else
+              = t(".no_group")
+            %span.arrow
+          %ul#groups-list
+            - if current_group
+              %li= link_to t(".no_group"), root_url(subdomain: "www")
+            - current_user.groups.except {|g| g == current_group }.each do |group|
+              %li= link_to_profile group
+
     #crumb-search
       .wrapper
         - if content_for? :subnav
