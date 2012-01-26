@@ -32,6 +32,13 @@ form.guided {
           float: none;
         }
       }
+      &.text {
+        > p.inline-hints {
+          display: block;
+          float: left;
+          margin-left: 0;
+        }
+      }
       &.with-user-image {
         .map {
           clear: none;

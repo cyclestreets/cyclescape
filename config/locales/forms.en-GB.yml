@@ -50,6 +50,7 @@
         full_name: "Please enter their name, they can change this when they accept the invite."
       issue:
         new: &hints_issue_new
+          description: "Please give details about the problem and what effect it is having on cycling. Note that all issues are publicly viewable."
           photo: "(optional)"
           tags_string: "e.g. parking obstruction roadworks path"
           title: "Please be brief and specific."
