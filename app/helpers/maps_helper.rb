@@ -44,7 +44,7 @@ module MapsHelper
     map = basic_map do |map, page|
       centre_map(start_location, map, page)
       add_location_layer("Issues", geometry_bbox_url, OpenLayers::Strategy::BBOX.new(), map, page)
-      page << 'MapPopup.init(map, vectorlayer)'
+      page << 'MapPopup.init(map, locationlayer)'
 
       yield(map, page) if block_given?
     end
