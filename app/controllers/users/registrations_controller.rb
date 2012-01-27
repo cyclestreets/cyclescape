@@ -1,5 +1,4 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  force_ssl :only => [:new, :create, :edit, :update]
 
   protected
 
