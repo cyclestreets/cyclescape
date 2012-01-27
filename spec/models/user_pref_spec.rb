@@ -18,7 +18,7 @@ describe UserPref do
   describe "attributes" do
     booleans = %w(
       notify_subscribed_threads
-      notify_new_home_locations_issue
+      notify_new_user_locations_issue
       notify_new_group_thread
       notify_new_issue_thread
       )

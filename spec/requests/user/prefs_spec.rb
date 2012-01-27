@@ -27,8 +27,8 @@ describe "User preferences" do
     end
   end
 
-  describe "notify of new issues in home locations" do
-    let(:field) { get_field("notify_new_home_locations_issue") }
+  describe "notify of new issues in user locations" do
+    let(:field) { get_field("notify_new_user_locations_issue") }
 
     it "should default to off" do
       field.should_not be_checked
@@ -37,7 +37,7 @@ describe "User preferences" do
     it "should switch on" do
       field.set true
       click_on "Save"
-      User.find(current_user).prefs.notify_new_home_locations_issue.should be_true
+      User.find(current_user).prefs.notify_new_user_locations_issue.should be_true
     end
   end
 

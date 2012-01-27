@@ -69,6 +69,10 @@ class User < ActiveRecord::Base
       each {|u| u.create_user_prefs }
   end
 
+  def self.with_pref(name)
+    joins(:prefs).where(user_prefs: {name => true})
+  end
+
   def name
     return display_name unless display_name.blank?
     full_name
