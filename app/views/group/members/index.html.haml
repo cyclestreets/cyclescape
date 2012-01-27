@@ -14,6 +14,7 @@
           = link_to member.name, user_profile_path(member)
         %td
           = link_to t(".edit"), "#"
+        %td= link_to t(".delete"), group_membership_path(@group, @group.membership_for(member)), confirm: t(".confirm"), method: :delete
 
 %h2= t ".members"
 %table
@@ -27,3 +28,4 @@
           = link_to member.name, user_profile_path(member)
         %td
           = link_to t(".edit"), "#"
+        %td= link_to t(".delete"), group_membership_path(@group, @group.membership_for(member)), confirm: t(".confirm"), method: :delete

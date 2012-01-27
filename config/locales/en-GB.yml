@@ -93,6 +93,8 @@
       index:
         actions: "Actions"
         committee: "Committee"
+        confirm: "Are you sure?"
+        delete: "Remove from group"
         edit: "Edit"
         member_name: "Member Name"
         members: "Members"
@@ -101,6 +103,9 @@
     memberships:
       new:
         title: "Invite New Member"
+      destroy:
+        failure: "Couldn't remove member from group"
+        success: "Member removed from group"
     membership_requests:
       cancel:
         success: "Membership request cancelled"

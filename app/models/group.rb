@@ -46,6 +46,10 @@ class Group < ActiveRecord::Base
     "#{id}-#{short_name}"
   end
 
+  def membership_for(user)
+    memberships.where(user_id: user.id).first
+  end
+
   protected
 
   def create_default_profile
