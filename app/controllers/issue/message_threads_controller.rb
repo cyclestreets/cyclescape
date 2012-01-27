@@ -17,6 +17,7 @@ class Issue::MessageThreadsController < MessageThreadsController
 
     if @thread.save
       @thread.subscriptions.create(user: current_user)
+      UserNotifier.notify_new_thread(@thread)
       redirect_to issue_thread_path(@issue, @thread)
     else
       @available_groups = current_user.groups

@@ -7,4 +7,15 @@ class Notifications < ActionMailer::Base
     mail(to: @member.name_with_email,
          subject: t('.mailers.notifications.gmr_confirmed.subject', group_name: @group.name))
   end
+
+  # Send notification to member that thread has been created
+  def new_group_thread(thread, member)
+    @thread = thread
+    @group = thread.group
+    @member = member
+    raise "Thread does not belong to group" if @group.nil?
+    mail to: @member.name_with_email,
+         subject: t(".mailers.notifications.new_group_thread",
+           group_name: @group, thread_title: @thread.title)
+  end
 end

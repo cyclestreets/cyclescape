@@ -97,6 +97,10 @@ class MessageThread < ActiveRecord::Base
     privacy == "public"
   end
 
+  def has_issue?
+    issue_id
+  end
+
   def set_public_token
     self.public_token = generate_public_token
   end
