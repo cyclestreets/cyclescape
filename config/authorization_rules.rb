@@ -37,7 +37,7 @@ authorization do
       to :manage
       if_attribute committee_members: contains { user }
     end
-    has_permission_on :issues, to: [:new, :create, :vote_up, :vote_down, :vote_clear]
+    has_permission_on :issues, to: [:vote_up, :vote_down, :vote_clear]
     has_permission_on :issues do
       to [:edit, :update]
       if_attribute created_by: is { user }, created_at_as_i: is_in { 24.hours.ago.to_i..Time.now.to_i }
@@ -81,7 +81,7 @@ authorization do
     has_permission_on :home, to: :show
     has_permission_on :groups, to: :view
     has_permission_on :group_profiles, to: [:view, :geometry]
-    has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries, :search]
+    has_permission_on :issues, to: [:new, :create, :show, :index, :geometry, :all_geometries, :search]
     has_permission_on :libraries, :library_documents, :library_notes, to: [:view, :search, :recent]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show

@@ -193,11 +193,16 @@
       thread_count:
         one: "1 thread"
         other: "%{count} threads"
+    create:
+      already_taken: "That email address has already been taken. Perhaps you could sign in?"
     destroy:
       failure: "Can't delete that issue"
       success: "Issue deleted"
     edit:
       title: "Edit Issue"
+    form:
+      existing_users_login_html: "You aren't logged in. Do you have a cyclescape login already? If so, please %{sign_in_link} before continuing."
+      existing_users_login2: "Otherwise, fill in your email and full name here."
     index:
       new_issue: "Report new issue"
       title: "Issues"

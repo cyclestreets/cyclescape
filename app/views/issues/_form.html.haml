@@ -1,5 +1,13 @@
 = semantic_form_for @issue, html: {class: "guided"} do |f|
   = f.inputs do
+    - unless current_user
+      %p= t ".existing_users_login_html", sign_in_link: link_to(t(".sign_in"), new_user_session_path)
+      %p= t ".existing_users_login2"
+      .inline-signup
+        = f.semantic_fields_for :user do |f2|
+          = f2.inputs do
+            = f2.input :email
+            = f2.input :full_name
     = f.input :title
     = f.input :photo, as: :file
     = f.input :retained_photo, as: :hidden
@@ -10,5 +18,6 @@
       = render partial: "shared/edit_map", locals: {thing: @issue}
     = f.input :tags_string, as: :tags
     = f.input :description
+
   = f.buttons do
     %li= button_tag t("formtastic.actions.issue.#{f.commit_button_i18n_key}"), type: "submit", class: "btn-green submit"

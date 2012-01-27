@@ -20,11 +20,29 @@ class IssuesController < ApplicationController
 
   def new
     @issue = Issue.new
-    @start_location = current_user.start_location
+    if current_user
+      @start_location = current_user.start_location
+    else
+      @issues = [Issue.last]
+      @start_location = index_start_location
+    end
   end
 
   def create
-    @issue = current_user.issues.new(params[:issue])
+    if current_user
+      @issue = current_user.issues.new(params[:issue])
+    else
+      user_params = params[:issue].delete(:user)
+      user = User.find_by_email(user_params[:email])
+      if user
+        set_flash_message(:already_taken)
+        @issue = Issue.new(params[:issue]) # for render :new
+      else
+        user = User.new(user_params)
+        user.invite!
+        @issue = user.issues.new(params[:issue])
+      end
+    end
 
     if @issue.save
       redirect_to @issue
@@ -126,7 +144,9 @@ class IssuesController < ApplicationController
   def index_start_location
     return current_user.start_location if current_user && current_user.start_location != Geo::NOWHERE_IN_PARTICULAR
     # TODO return subdomain.group.location if subdomain
-    return @issues.first.location unless @issues.empty?
+    if @issues
+      return @issues.first.location unless @issues.empty?
+    end
     return Geo::NOWHERE_IN_PARTICULAR
   end
 

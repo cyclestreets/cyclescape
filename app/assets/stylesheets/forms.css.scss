@@ -70,6 +70,9 @@ form.guided {
   }
   fieldset {
     padding-top: 1.5em;  // To compensate for Formtastic kludge
+    .inline-signup {
+      margin: 0 150px;
+    }
   }
   fieldset > ol > li.input > .label {
     color: $lightgrey2;
