@@ -45,18 +45,30 @@ describe "Authentication and authorization" do
   end
 
   context "when signing up" do
-    it "should direct you to your locations page" do
-      credentials = FactoryGirl.attributes_for(:user)
+    before do
+      @credentials = FactoryGirl.attributes_for(:user)
       visit root_path
       click_link "Sign up"
-      fill_in "Full name", with: credentials[:full_name]
-      fill_in "Email", with: credentials[:email]
-      fill_in "Password", with: credentials[:password]
-      fill_in "Password confirmation", with: credentials[:password]
+      fill_in "Full name", with: @credentials[:full_name]
+      fill_in "Email", with: @credentials[:email]
+      fill_in "Password", with: @credentials[:password]
+      fill_in "Password confirmation", with: @credentials[:password]
       click_button "Sign up"
-      open_email(credentials[:email])
+      open_email(@credentials[:email])
+    end
+
+    it "should direct you to your locations page" do
       visit_in_email("Confirm my account")
       page.current_path.should == user_locations_path
+    end
+
+    it "should resend your confirmation email, if you ask for it" do
+      all_emails.count.should eql(1)
+      visit new_user_session_path
+      click_link "Didn't receive confirmation instructions?"
+      fill_in "Email", with: @credentials[:email]
+      click_button "Resend confirmation instructions"
+      all_emails.count.should eql(2)
     end
   end
 end
