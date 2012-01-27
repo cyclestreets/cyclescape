@@ -8,12 +8,7 @@
     %th= t ".member_name"
     %th= t ".actions"
   %tbody
-    - @committee.each do |member|
-      %tr
-        %td
-          = link_to member.name, user_profile_path(member)
-        %td
-          = link_to t(".edit"), "#"
+    = render partial: "member", collection: @committee
 
 %h2= t ".members"
 %table
@@ -21,9 +16,4 @@
     %th= t ".member_name"
     %th= t ".actions"
   %tbody
-    - @members.each do |member|
-      %tr
-        %td
-          = link_to member.name, user_profile_path(member)
-        %td
-          = link_to t(".edit"), "#"
+    = render partial: "member", collection: @members

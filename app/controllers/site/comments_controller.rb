@@ -10,6 +10,8 @@ class Site::CommentsController < ApplicationController
   def create
     @site_comment = SiteComment.new(params[:site_comment])
 
+    @site_comment.user = current_user if current_user
+
     if @site_comment.save
       render "success"
     else

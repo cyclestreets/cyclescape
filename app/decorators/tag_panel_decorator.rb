@@ -1,14 +1,15 @@
 class TagPanelDecorator < ApplicationDecorator
-  attr_accessor :context, :form_url, :cancel_url
+  attr_accessor :context, :form_url, :cancel_url, :auth_context
 
   def initialize(context, options = {})
     self.context = context
     self.form_url = options[:form_url] || h.url_for([context, :tags])
     self.cancel_url = options[:cancel_url] || h.url_for
+    self.auth_context = options[:auth_context] || ((context.respond_to?(:model) ? context.model : context).class.model_name.underscore + "_tags").to_sym
   end
 
   def render
-    locals = {context: context, form_url: form_url, cancel_url: cancel_url}
+    locals = {context: context, form_url: form_url, cancel_url: cancel_url, auth_context: auth_context}
     h.content_tag(:div, class: "tags-panel") do
       panel = h.render partial: "shared/tags/panel", locals: locals
       form = h.render partial: "shared/tags/edit", locals: locals

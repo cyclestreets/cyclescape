@@ -52,6 +52,10 @@ describe "Message threads" do
           end
         end
       end
+
+      it "should not show a link to edit tags" do
+        page.should_not have_content(I18n.t(".shared.tags.panel.edit_tags"))
+      end
     end
 
     context "deleted issue" do

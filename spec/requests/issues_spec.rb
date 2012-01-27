@@ -49,6 +49,10 @@ describe "Issues" do
       it "should show the photo" do
         page.should have_selector("img.issue-photo")
       end
+
+      it "should not show you an edit tags link" do
+        page.should_not have_content(I18n.t(".shared.tags.panel.edit_tags"))
+      end
     end
 
     context "as a site user" do

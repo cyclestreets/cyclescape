@@ -2,4 +2,5 @@
   %ul
     - context.tags.each do |tag|
       %li.tag= link_to tag.name, tag_path(tag)
-  = link_to t(".edit_tags"), "#", rel: "edit-tags"
+  - if permitted_to?(:update, auth_context)
+    = link_to t(".edit_tags"), "#", rel: "edit-tags"

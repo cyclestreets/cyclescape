@@ -19,6 +19,10 @@ describe "Library notes" do
     it "should show the date when it was created" do
       page.should have_content(I18n.localize(note.created_at.to_date))
     end
+
+    it "should not show a link to edit tags" do
+      page.should_not have_content(I18n.t(".shared.tags.panel.edit_tags"))
+    end
   end
 
   context "new", as: :site_user do

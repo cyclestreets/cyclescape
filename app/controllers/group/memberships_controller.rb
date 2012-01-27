@@ -17,6 +17,18 @@ class Group::MembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @membership = @group.memberships.find(params[:id])
+
+    if @membership.destroy
+      set_flash_message(:success)
+    else
+      set_flash_message(:failure)
+    end
+
+    redirect_to group_members_path
+  end
+
   protected
 
   def load_group
