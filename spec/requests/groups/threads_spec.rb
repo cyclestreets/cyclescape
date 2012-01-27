@@ -49,6 +49,19 @@ describe "Group threads" do
       it "should default to a public group thread" do
         page.should have_select("Privacy", with: "Public")
       end
+
+      context "notifications" do
+        it "should send a notification to group members" do
+          membership = FactoryGirl.create(:group_membership, group: current_group)
+          notifiee = membership.user
+          notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+          fill_in "Title", with: thread_attrs[:title]
+          fill_in "Message", with: "This is between you an me, but..."
+          click_on "Create Thread"
+          email = open_last_email_for(notifiee.email)
+          email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
+        end
+      end
     end
 
     context "in a secretive group" do

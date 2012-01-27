@@ -15,7 +15,7 @@ class Notifications < ActionMailer::Base
     @member = member
     raise "Thread does not belong to group" if @group.nil?
     mail to: @member.name_with_email,
-         subject: t(".mailers.notifications.new_group_thread",
-           group_name: @group, thread_title: @thread.title)
+         subject: t("mailers.notifications.new_group_thread.subject",
+           group_name: @group.name, thread_title: @thread.title)
   end
 end

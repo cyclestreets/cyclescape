@@ -71,6 +71,19 @@ describe "Issue threads" do
         page.should have_content("Awesome!")
         page.should have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
       end
+
+      it "should send a notification to other group members" do
+        membership = FactoryGirl.create(:group_membership, group: current_group)
+        notifiee = membership.user
+        notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+        visit issue_path(issue)
+        click_on "Discuss"
+        select current_group.name, from: "Owned by"
+        fill_in "Message", with: "Awesome!"
+        click_on "Create Thread"
+        email = open_last_email_for(notifiee.email)
+        email.should have_subject("[Cyclescape] \"#{issue.title}\" (#{current_group.name})")
+      end
     end
   end
 
