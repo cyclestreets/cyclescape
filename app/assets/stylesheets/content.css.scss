@@ -181,6 +181,9 @@
           &.title {
             color: $white;
             @include gradient($colour2, $colour1);
+            a {
+              color: $white;
+            }
           }
         }
         dd {
