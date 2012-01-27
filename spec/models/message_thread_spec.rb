@@ -150,4 +150,12 @@ describe MessageThread do
       end
     end
   end
+
+  describe "#first_message" do
+    let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+
+    it "should return the oldest message on the thread" do
+      thread.first_message.should == thread.messages.order("created_at").first
+    end
+  end
 end

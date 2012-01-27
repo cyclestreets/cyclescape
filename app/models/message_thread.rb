@@ -105,6 +105,10 @@ class MessageThread < ActiveRecord::Base
     messages.count
   end
 
+  def first_message
+    messages.order("id").first
+  end
+
   def latest_activity_at
     messages.empty? ? updated_at : messages.last.updated_at
   end
