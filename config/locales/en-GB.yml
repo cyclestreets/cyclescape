@@ -93,13 +93,14 @@
       index:
         actions: "Actions"
         committee: "Committee"
-        confirm: "Are you sure?"
-        delete: "Remove from group"
-        edit: "Edit"
         member_name: "Member Name"
         members: "Members"
         new_member: "New Member"
         title: "Members of %{group}"
+      member:
+        confirm: "Are you sure?"
+        delete: "Remove from group"
+        edit: "Edit"
     memberships:
       new:
         title: "Invite New Member"
