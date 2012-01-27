@@ -4,17 +4,23 @@ describe "Library documents" do
   let(:document) { FactoryGirl.create(:library_document) }
 
   context "as a public user" do
-    it "should show me the document page" do
+    before do
       visit library_document_path(document)
+    end
+
+    it "should show me the document page" do
       page.should have_content(document.title)
       page.should have_link("Download")
     end
 
     it "should download the document" do
-      visit library_document_path(document)
       click_on "Download"
       page.response_headers["Content-Type"].should == document.file.mime_type
       page.response_headers["Content-Disposition"].should include("filename=\"#{document.file_name}\"")
+    end
+
+    it "should not show a link to edit tags" do
+      page.should_not have_content(I18n.t(".shared.tags.panel.edit_tags"))
     end
   end
 
