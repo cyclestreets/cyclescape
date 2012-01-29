@@ -18,4 +18,13 @@ class Notifications < ActionMailer::Base
          subject: t("mailers.notifications.new_group_thread.subject",
            group_name: @group.name, thread_title: @thread.title)
   end
+
+  def new_user_location_issue(user, issue, category)
+    @user = user
+    @issue = issue
+    @category = category
+    mail to: @user.name_with_email,
+         subject: t("mailers.notifications.new_user_location_issue.subject",
+                    category: category.name.downcase)
+  end
 end

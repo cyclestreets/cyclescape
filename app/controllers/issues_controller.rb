@@ -27,6 +27,7 @@ class IssuesController < ApplicationController
     @issue = current_user.issues.new(params[:issue])
 
     if @issue.save
+      NewIssueNotifier.new_issue(@issue)
       redirect_to @issue
     else
       @start_location = index_start_location

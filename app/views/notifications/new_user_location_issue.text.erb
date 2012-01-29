@@ -1,0 +1,21 @@
+Hi <%= @user.name %>,
+
+A new issue with the title "<%= @issue.title %>" has been reported near
+your <%= @category.name %> location.
+
+You can view the issue at:
+<%= url_for(@issue) %>
+
+Regards,
+Cyclescape
+
+
+You have received this message because your preferences indicate that you
+would like us to notify you when new issues are reported near your
+given locations.
+
+To stop this notification, edit your user preferences at:
+<%= edit_user_prefs_url(@user) %>
+
+You can add or remove your locations at:
+<%= user_locations_url %>
