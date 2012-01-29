@@ -526,14 +526,14 @@ ul.issue-list {
     width:20px;
     height:12px;
     background:image-url("sprite.png") -3px -904px no-repeat;
-    &:hover {
+    &:hover, &.selected {
       background-position:-43px -904px;
     }
   }
   a.down {
     background-position:-3px -953px;
     bottom:0;
-    &:hover {
+    &:hover, &.selected {
       background-position:-43px -953px;
     }
   }

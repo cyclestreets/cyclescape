@@ -265,13 +265,17 @@ describe "Issues" do
       meg.vote_for(issue)
     end
 
+    def within_voting_panel(&block)
+      within(".voting", &block)
+    end
+
     context "as a visitor" do
       before do
         visit issue_path(issue)
       end
 
       it "should show the vote count" do
-        within(".voting") do
+        within_voting_panel do
           page.should have_content("1")
         end
       end
@@ -292,7 +296,7 @@ describe "Issues" do
       it "should allow you to vote up" do
         click_on "Vote Up"
         page.should have_content("You have voted up this issue")
-        within(".voting") do
+        within_voting_panel do
           page.should have_content("2")
         end
       end
@@ -300,7 +304,7 @@ describe "Issues" do
       it "should allow you to vote down" do
         click_on "Vote Down"
         page.should have_content("You have voted down this issue")
-        within(".voting") do
+        within_voting_panel do
           page.should have_content("0")
         end
       end
@@ -313,19 +317,23 @@ describe "Issues" do
       it "should allow you to change your vote" do
         click_on "Vote Up"
         click_on "Vote Down"
-        within(".voting") do
+        within_voting_panel do
           page.should have_content("0")
         end
       end
 
       it "should allow you to cancel your vote" do
-        within(".voting") do
+        within_voting_panel do
           page.should have_content("1")
+          click_on "Vote Up"
         end
-        click_on "Vote Up"
-        click_on "Cancel Vote"
+        # Keep these blocks seperate otherwise first page reference
+        # is retained
+        within_voting_panel do
+          click_on "Cancel"
+        end
         page.should have_content("Your vote has been cleared")
-        within(".voting") do
+        within_voting_panel do
           page.should have_content("1")
         end
       end
