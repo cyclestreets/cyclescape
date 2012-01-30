@@ -43,6 +43,11 @@
       %h2= t ".join_title"
       %p= t ".join_body", group: @group.name
       = link_to t(".join_this_group"), new_group_membership_request_path(@group), class: "btn-green"
+  - if current_user && @group.committee_members.include?(current_user)
+    %section.box
+      %h2= t ".group_management"
+      %p= link_to t(".edit_group_profile"), edit_group_profile_path(@group)
+      %p= link_to t(".edit_group_members"), group_members_path(@group)
   %section.box
     %h2= t ".group_organisers"
     %ul.following-thread

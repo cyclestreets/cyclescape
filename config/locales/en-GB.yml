@@ -145,6 +145,9 @@
         success: "Profile Updated"
   groups:
     show:
+      edit_group_profile: "Edit the group profile"
+      edit_group_members: "Edit the membership list"
+      group_management: "Group Management"
       group_organisers: "Group Organisers"
       join_body:
         To take part in discussions and threads here you will need to join
