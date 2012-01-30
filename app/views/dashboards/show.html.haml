@@ -47,4 +47,5 @@
                                       add_location_link: link_to(t(".add_another_location"), user_locations_path)
         - else
           %p= link_to t(".update_your_locations"), user_locations_path
-          = issues_list @relevant_issues, collapsed: true
+          %ul.issue-list
+            = issues_list @relevant_issues, collapsed: true
