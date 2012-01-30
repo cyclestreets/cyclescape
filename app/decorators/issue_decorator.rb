@@ -10,7 +10,7 @@ class IssueDecorator < ApplicationDecorator
   end
 
   def description
-    h.simple_format issue.description
+    h.auto_link h.simple_format issue.description
   end
 
   def standard_photo_image
