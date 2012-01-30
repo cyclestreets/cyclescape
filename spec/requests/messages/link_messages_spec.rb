@@ -22,6 +22,15 @@ describe "Link messages" do
       end
       page.should have_link(link_message_attrs[:title], href: link_message_attrs[:url])
     end
+
+    it "should accept a url with whitespace" do
+      link_form do
+        fill_in "URL", with: "  #{link_message_attrs[:url]}  "
+        fill_in "Title", with: link_message_attrs[:title]
+        click_on "Add Link"
+      end
+      page.should have_link(link_message_attrs[:title], href: link_message_attrs[:url])
+    end
   end
 
   context "show" do
