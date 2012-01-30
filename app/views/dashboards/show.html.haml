@@ -1,50 +1,52 @@
-.user-dashboard#dashboard-tabs
-  %ul.tabs.styled-tabs
-    %li= link_to t(".my_threads"), "#my-threads"
-    %li= link_to t(".issues_nearby"), "#issues-nearby"
+%section#content.content-no-sidebar
+  .user-dashboard#dashboard-tabs
+    %ul.tabs.styled-tabs
+      %li= link_to t(".my_threads"), "#my-threads"
+      %li= link_to t(".issues_nearby"), "#issues-nearby"
 
-  .panes
-    #my-threads
-      %section.threads
-        - if @involved_threads.empty?
-          %p= t ".no_involved_threads_html", threads_link: link_to(t(".recent_threads"), threads_path),
-                                        add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path)
-        - else
-          %table.dashboard-threads
-            %tbody
-              - @involved_threads.each do |thread|
-                %tr
-                  %td.title
-                    %h4= link_to thread.title, thread_path(thread)
-                    - if thread.has_issue?
-                      %p= thread.issue_link
-                  %td.activity
-                    = thread.latest_activity
-                  %td.meta
-                    = thread.latest_activity_date
-      #dashboard-threads-issues
-        %section#group-threads
-          %h2= t(".group_threads")
-          - if current_user.groups.empty?
-            %p= t ".no_user_groups"
-          - elsif @group_threads.empty?
-            %p= t ".no_group_threads"
+    .panes
+      #my-threads
+        %section.threads
+          - if @involved_threads.empty?
+            %p= t ".no_involved_threads_html", threads_link: link_to(t(".recent_threads"), threads_path),
+                                          add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path)
           - else
-            %ul.group-threads-list
-              - @group_threads.each do |thread|
-                %li
-                  %span
-                  = link_to_profile thread.group, class: "group-link"
-                  %div
-                    %h4= link_to thread.title, thread_path(thread)
-    #issues-nearby
-      %section.issues
-        %h2= t ".issues_in_your_area"
-        - if current_user.locations.empty?
-          %p= t ".no_locations_guidance_html", add_some_locations_link: link_to(t(".add_some_locations"), user_locations_path)
-        - elsif @relevant_issues.empty?
-          %p= t ".no_issues_nearby_html", add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path),
-                                      add_location_link: link_to(t(".add_another_location"), user_locations_path)
-        - else
-          %p= link_to t(".update_your_locations"), user_locations_path
-          = issues_list @relevant_issues, collapsed: true
+            %table.dashboard-threads
+              %tbody
+                - @involved_threads.each do |thread|
+                  %tr
+                    %td.title
+                      %h4= link_to thread.title, thread_path(thread)
+                      - if thread.has_issue?
+                        %p= thread.issue_link
+                    %td.activity
+                      = thread.latest_activity
+                    %td.meta
+                      = thread.latest_activity_date
+        #dashboard-threads-issues
+          %section#group-threads
+            %h2= t(".group_threads")
+            - if current_user.groups.empty?
+              %p= t ".no_user_groups"
+            - elsif @group_threads.empty?
+              %p= t ".no_group_threads"
+            - else
+              %ul.group-threads-list
+                - @group_threads.each do |thread|
+                  %li
+                    %span
+                    = link_to_profile thread.group, class: "group-link"
+                    %div
+                      %h4= link_to thread.title, thread_path(thread)
+      #issues-nearby
+        %section.issues
+          %h2= t ".issues_in_your_area"
+          - if current_user.locations.empty?
+            %p= t ".no_locations_guidance_html", add_some_locations_link: link_to(t(".add_some_locations"), user_locations_path)
+          - elsif @relevant_issues.empty?
+            %p= t ".no_issues_nearby_html", add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path),
+                                        add_location_link: link_to(t(".add_another_location"), user_locations_path)
+          - else
+            %p= link_to t(".update_your_locations"), user_locations_path
+            %ul.issue-list
+              = issues_list @relevant_issues, collapsed: true
