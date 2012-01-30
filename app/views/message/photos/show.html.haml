@@ -1,6 +1,5 @@
 .photo
   = image_tag @photo.photo_medium.url,
-      alt: t(".photo_alt", caption: @photo.caption),
-      class: "close"
+      alt: t(".photo_alt", caption: @photo.caption)
   %figcaption
     = @photo.caption
