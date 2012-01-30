@@ -59,6 +59,11 @@ shared_examples "a taggable model" do
         subject.tags.first.name.should == "one"
         subject.tags.second.name.should == "two"
       end
+
+      it "should ignore duplicates" do
+        subject.tags_string = "one one one"
+        subject.should have(1).tags
+      end
     end
   end
 end
