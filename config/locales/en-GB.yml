@@ -93,9 +93,15 @@
       index:
         actions: "Actions"
         committee: "Committee"
+        committee_guidance: "Committee members can manage the group membership list, change the groups profile and update group thread information."
+        group_members_guidance: "On this page you can view the existing members of your group, invite new people and remove members from the group."
+        invite_directly: "you can invite them directly"
         member_name: "Member Name"
         members: "Members"
-        new_member: "New Member"
+        new_members_guidance_html:
+          You can add members to this group in two ways. If you know their email address, %{invite_directly_link}.
+          If they are already using Cyclescape, click on their name and you can add them from their user profile page.
+        normal_members_guidance: "Normal members get access to your private group threads, and can create new group threads."
         title: "Members of %{group}"
       member:
         confirm: "Are you sure?"
@@ -149,6 +155,7 @@
       edit_group_members: "Edit the membership list"
       group_management: "Group Management"
       group_organisers: "Group Organisers"
+      group_request_pending: "You request to join this group is pending."
       join_body:
         To take part in discussions and threads here you will need to join
         the %{group} first. We can then provide you with
@@ -545,8 +552,8 @@
       show:
         about_label: "About:"
         add_to_groups:
-          one: "Add to group"
-          other: "Add to groups"
+          one: "Add %{name} to your group"
+          other: "Add %{name} to your groups"
         add_to_groups_explanation:
           one: "You can add this user into your group."
           other: "You can add this user to any of the groups shown."

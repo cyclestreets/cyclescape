@@ -166,6 +166,10 @@ class User < ActiveRecord::Base
     build_prefs.save!
   end
 
+  def membership_request_pending_for?(group)
+    return self.membership_requests.where(group_id: group.id, status: :pending).count > 0
+  end
+
   protected
 
   def set_default_role

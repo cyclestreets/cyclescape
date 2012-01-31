@@ -56,7 +56,7 @@ describe "User profiles" do
     end
 
     it "should let you add the user to your group" do
-      page.should have_content("Add to group")
+      page.should have_content("Add #{user.name} to your group")
       select "Member", from: "Membership type"
       click_on "Invite member"
       page.should have_content("Members of #{current_group.name}")

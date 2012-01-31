@@ -1,30 +1,42 @@
 require 'spec_helper'
 
 describe "Group members" do
-  include_context "signed in as admin"
+  context "as a group member" do
+    include_context "signed in as a group member"
 
-  before do
-    @group = FactoryGirl.create(:group)
+    before do
+      visit group_members_path(current_group)
+    end
+
+    it "should not let you view the page" do
+      page.should have_content("You are not authorised to access that page.")
+    end
   end
 
-  context "index" do
-    before do
-      @memberships = FactoryGirl.create_list(:group_membership, 4, group: @group)
-      visit group_members_path(@group)
-    end
+  context "as a committee member" do
+    include_context "signed in as a committee member"
 
-    it "should display the user name" do
-      page.should have_content("Stewie")
-    end
-
-    it "lists the member names" do
-      @memberships.each do |member|
-        page.should have_content(member.user.name)
+    context "index" do
+      before do
+        @memberships = FactoryGirl.create_list(:group_membership, 4, group: current_group)
+        visit group_members_path(current_group)
       end
-    end
 
-    it "should have a link to create a new member" do
-      find_link('New Member').should be_visible
+      it "should display the user name of the committee member" do
+        within(".committee") do
+          page.should have_content(current_user.name)
+        end
+      end
+
+      it "lists the member names" do
+        @memberships.each do |member|
+          page.should have_content(member.user.name)
+        end
+      end
+
+      it "should have a link to create a new member" do
+        find_link('you can invite them directly').should be_visible
+      end
     end
   end
 end

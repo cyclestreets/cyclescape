@@ -42,7 +42,10 @@
     %section.group-homepage-join
       %h2= t ".join_title"
       %p= t ".join_body", group: @group.name
-      = link_to t(".join_this_group"), new_group_membership_request_path(@group), class: "btn-green"
+      - if current_user.membership_request_pending_for?(@group)
+        %p= t ".group_request_pending"
+      - else
+        = link_to t(".join_this_group"), new_group_membership_request_path(@group), class: "btn-green"
   - if current_user && @group.committee_members.include?(current_user)
     %section.box
       %h2= t ".group_management"

@@ -343,4 +343,22 @@ describe User do
       # todo
     end
   end
+
+  context "pending group membership requests" do
+    subject { FactoryGirl.create(:user) }
+    let(:group) { FactoryGirl.create(:group) }
+
+    it "should know if a group membership request is pending" do
+      subject.membership_request_pending_for?(group).should be_false
+      g = GroupMembershipRequest.create(user: subject, group: group)
+      subject.reload
+      subject.membership_request_pending_for?(group).should be_true
+
+      g.actioned_by = subject
+      g.status = :confirmed
+      g.save!
+      subject.reload
+      subject.membership_request_pending_for?(group).should be_false
+    end
+  end
 end

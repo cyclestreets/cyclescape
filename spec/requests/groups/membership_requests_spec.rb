@@ -30,12 +30,31 @@ describe "Group Membership Requests" do
   end
 
   context "as the original user" do
+    include_context "signed in as a site user"
+    let(:group) { FactoryGirl.create(:group) }
+
+    before do
+      visit group_path(group)
+      click_link I18n.t(".groups.show.join_this_group")
+      click_button "Create Group membership request"
+    end
+
     describe "cancelling the request" do
       it "should cancel the request"
     end
 
     describe "signing up again" do
-      it "should not let you"
+      it "should not show a link on the page" do
+        visit group_path(group)
+        page.should_not have_content(I18n.t(".groups.join_this_group"))
+        page.should have_content(I18n.t(".groups.show.group_request_pending"))
+      end
+
+      it "should not let you go directly" do
+        visit new_group_membership_request_path(group)
+        click_button "Create Group membership request"
+        page.should have_content(I18n.t(".group.membership_requests.create.already_asked"))
+      end
     end
   end
 

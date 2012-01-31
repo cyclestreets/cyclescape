@@ -19,10 +19,10 @@
       %dd= @user.website_link
       %dt= t(".group_membership_label")
       %dd= @user.group_memberships
-  .groups
+  %section#groups
     - unless @add_to_groups.blank?
       .group-invites
-        %h2= t ".add_to_groups", count: @add_to_groups.count
+        %h2= t ".add_to_groups", count: @add_to_groups.count, name: @user.name
         %p= t ".add_to_groups_explanation", count: @add_to_groups.count
         %ol
           - @add_to_groups.each do |g|
