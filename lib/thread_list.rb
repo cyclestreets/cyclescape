@@ -8,11 +8,11 @@ class ThreadList
   end
 
   def self.issue_threads_from_group(group)
-    group.threads.with_issue
+    group.threads.order_by_latest_message.with_issue
   end
 
   def self.general_threads_from_group(group)
-    group.threads.without_issue
+    group.threads.order_by_latest_message.without_issue
   end
 
   def self.recent_involved_with(user, limit)
