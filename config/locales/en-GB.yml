@@ -545,8 +545,8 @@
       show:
         about_label: "About:"
         add_to_groups:
-          one: "Add to group"
-          other: "Add to groups"
+          one: "Add %{name} to your group"
+          other: "Add %{name} to your groups"
         add_to_groups_explanation:
           one: "You can add this user into your group."
           other: "You can add this user to any of the groups shown."
