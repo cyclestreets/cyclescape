@@ -1,4 +1,4 @@
-class UserNotifier
+class NewThreadNotifier
   def self.queue
     :outbound_mail
   end
@@ -8,19 +8,19 @@ class UserNotifier
   end
 
   def self.notify_new_thread(thread)
-    Resque.enqueue(UserNotifier, :queue_new_thread, thread.id)
+    Resque.enqueue(NewThreadNotifier, :queue_new_thread, thread.id)
   end
 
   def self.queue_new_thread(thread_id)
     thread = MessageThread.find(thread_id)
-    Resque.enqueue(UserNotifier, :notify_new_group_thread, thread.id) if thread.group
+    Resque.enqueue(NewThreadNotifier, :notify_new_group_thread, thread.id) if thread.group
   end
 
   def self.notify_new_group_thread(thread_id)
     thread = MessageThread.find(thread_id)
     members = thread.group.members.with_pref(:notify_new_group_thread)
     members.each do |member|
-      Resque.enqueue(UserNotifier, :send_new_group_thread_notification, thread.id, member.id)
+      Resque.enqueue(NewThreadNotifier, :send_new_group_thread_notification, thread.id, member.id)
     end
   end
 

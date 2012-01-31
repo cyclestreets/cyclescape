@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe UserNotifier do
-  subject { UserNotifier }
+describe NewThreadNotifier do
+  subject { NewThreadNotifier }
 
   # Queueing interface
   it { subject.queue.should == :outbound_mail }
@@ -10,7 +10,7 @@ describe UserNotifier do
   describe ".notify_new_thread" do
     it "should queue queue_new_thread with the thread id" do
       thread = mock("thread", id: 99)
-      Resque.should_receive(:enqueue).with(UserNotifier, :queue_new_thread, 99)
+      Resque.should_receive(:enqueue).with(NewThreadNotifier, :queue_new_thread, 99)
       subject.notify_new_thread(thread)
     end
   end
@@ -19,7 +19,7 @@ describe UserNotifier do
     it "should queue notify_new_group_thread if thread belongs to a group" do
       thread = mock("thread", id: 99, group: mock("group"))
       MessageThread.stub!(:find).with(99).and_return { thread }
-      Resque.should_receive(:enqueue).with(UserNotifier, :notify_new_group_thread, 99).and_return(nil)
+      Resque.should_receive(:enqueue).with(NewThreadNotifier, :notify_new_group_thread, 99).and_return(nil)
       subject.queue_new_thread(99)
     end
   end

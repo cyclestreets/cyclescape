@@ -331,6 +331,8 @@
         subject: "You are now a member of %{group_name}"
       new_group_thread:
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
+      new_user_location_issue:
+        subject: "[Cyclescape] New issue reported near your %{category} location"
   message_thread:
     subscriptions:
       create:
