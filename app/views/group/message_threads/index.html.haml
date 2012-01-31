@@ -10,10 +10,10 @@
     .pane
       %p= t ".issue_threads_description", group_name: @group.name
       %ul.thread-list
-        = render partial: "message_threads/list", collection: @issue_threads, as: :thread
+        = render_threads_list @issue_threads
       = will_paginate @issue_threads, param_name: "issue_threads_page", params: {anchor: "issue-threads"}
     .pane
       %p= t ".general_threads_description"
       %ul.thread-list
-        = render partial: "message_threads/list", collection: @general_threads, as: :thread
+        = render_threads_list @general_threads
       = will_paginate @general_threads, param_name: "general_threads_page", params: {anchor: "general-threads"}
