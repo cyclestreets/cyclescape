@@ -1,8 +1,10 @@
 %h1= t ".title", :group => @group.name
 
-%p= link_to t(".new_member"), new_group_membership_path
+%p= t ".group_members_guidance"
+%p= t ".new_members_guidance_html", invite_directly_link: link_to(t(".invite_directly"), new_group_membership_path)
 
 %h2= t ".committee"
+%p= t ".committee_guidance"
 %table
   %thead
     %th= t ".member_name"
@@ -11,6 +13,7 @@
     = render partial: "member", collection: @committee
 
 %h2= t ".members"
+%p= t ".normal_members_guidance"
 %table
   %thead
     %th= t ".member_name"

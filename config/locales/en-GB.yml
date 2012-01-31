@@ -93,9 +93,15 @@
       index:
         actions: "Actions"
         committee: "Committee"
+        committee_guidance: "Committee members can manage the group membership list, change the groups profile and update group thread information."
+        group_members_guidance: "On this page you can view the existing members of your group, invite new people and remove members from the group."
+        invite_directly: "you can invite them directly"
         member_name: "Member Name"
         members: "Members"
-        new_member: "New Member"
+        new_members_guidance_html:
+          You can add members to this group in two ways. If you know their email address, %{invite_directly_link}.
+          If they are already using Cyclescape, click on their name and you can add them from their user profile page.
+        normal_members_guidance: "Normal members get access to your private group threads, and can create new group threads."
         title: "Members of %{group}"
       member:
         confirm: "Are you sure?"
