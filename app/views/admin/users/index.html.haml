@@ -14,7 +14,7 @@
       %tr
         %td= user.id
         %td= user.display_name
-        %td= user.full_name
+        %td= link_to user.full_name, user_profile_path(user)
         %td= user.email
         %td= user.role
         %td= t ".created_at", time_ago: time_ago_in_words(user.created_at)
