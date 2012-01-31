@@ -85,7 +85,7 @@
 
 // Template for library items
 %script(type="text/html" id="library-item-template")
-  %li(data-bind="attr: {class: item_type}")
+  %li(data-bind="attr: {'class': item_type}")
     .item-content
       %h4(data-bind="html: link")
       %p.meta(data-bind="text: description")
