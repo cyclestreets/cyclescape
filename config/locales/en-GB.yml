@@ -155,6 +155,7 @@
       edit_group_members: "Edit the membership list"
       group_management: "Group Management"
       group_organisers: "Group Organisers"
+      group_request_pending: "You request to join this group is pending."
       join_body:
         To take part in discussions and threads here you will need to join
         the %{group} first. We can then provide you with
