@@ -46,4 +46,5 @@
         %ul.sidebar-threadlist
           = render partial: "message_threads/compact", collection: @threads, as: :thread
   %section.photos
-    = @issue.standard_photo_image
+    = link_to issue_photo_path(@issue), rel: "#overlay" do
+      = @issue.standard_photo_image
