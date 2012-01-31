@@ -66,6 +66,14 @@ describe "Issues" do
       it "should not show you an edit tags link" do
         page.should_not have_content(I18n.t(".shared.tags.panel.edit_tags"))
       end
+
+      it "should show you a twitter link" do
+        # Note that the twitter link is an unobtrusive link, which is then massively mangled by JS
+        # So this tests the unobtrustive version, not the iframe that you'll end up with in the browser.
+        page.should have_link("Tweet")
+        find_link("Tweet")["data-via"].should eql("cyclescape")
+        find_link("Tweet")["data-text"].should eql(issue.title)
+      end
     end
 
     context "as a site user" do
