@@ -3,6 +3,11 @@
 %p= t ".group_members_guidance"
 %p= t ".new_members_guidance_html", invite_directly_link: link_to(t(".invite_directly"), new_group_membership_path)
 
+- if @pending_requests
+  %p= t ".you_have_pending_members_html", review_pending_requests_link: link_to(t(".review_pending"), group_membership_requests_path)
+- else
+  %p= t ".review_membership_requests_html", review_membership_requests_link: link_to(t(".review_requests"), group_membership_requests_path)
+
 %section.committee
   %h2= t ".committee"
   %p= t ".committee_guidance"

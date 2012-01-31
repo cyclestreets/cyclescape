@@ -5,6 +5,7 @@ class Group::MembersController < ApplicationController
   def index
     @committee = @group.committee_members.all
     @members = @group.normal_members.all
+    @pending_requests = ( @group.membership_requests.where(status: :pending).count > 0 )
   end
 
   protected
