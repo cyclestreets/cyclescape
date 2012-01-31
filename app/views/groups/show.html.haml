@@ -17,12 +17,11 @@
         - else
           %p= t ".no_location"
       .pane.recent-threads
-        - if (@recent_threads.count > 0)
-          %ul
-            - @recent_threads.each do |thread|
-              %li= link_to thread.title, thread_path(thread)
-        - else
+        - if @recent_threads.empty?
           %p= t ".no_threads"
+        - else
+          %ul.thread-list
+            = render_threads_list @recent_threads
       .pane.recent-issues
         .issue-map
           - if (@group.profile.location)
@@ -30,12 +29,11 @@
               %div#map
             != m2.to_html
         .issue-list
-          - if (@recent_issues.count > 0)
-            %ul
-              - @recent_issues.each do |issue|
-                %li= link_to issue.title, issue_path(issue)
-          - else
+          - if @recent_issues.empty?
             %p= t ".no_issues"
+          - else
+            %ul.issue-list
+              = render partial: "issues/compact", collection: @recent_issues, as: :issue
 
 %aside#sidebar
   - if current_user && !@group.members.include?(current_user)

@@ -26,8 +26,13 @@ module MessageThreadsHelper
     truncate message.body, length: 90, separator: ".", omission: "\u2026"
   end
 
-  def threads_list(threads, options = {})
+  def render_compact_threads_list(threads, options = {})
     defaults = {partial: "message_threads/compact", collection: threads, as: :thread}
+    render defaults.merge(options)
+  end
+
+  def render_threads_list(threads, options = {})
+    defaults = {partial: "message_threads/list", collection: threads, as: :thread}
     render defaults.merge(options)
   end
 end

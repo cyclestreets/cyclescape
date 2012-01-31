@@ -14,7 +14,7 @@ class GroupsController < ApplicationController
         recent_threads = ThreadList.recent_public_from_groups(@group, 10)
       end
       @recent_threads = ThreadListDecorator.decorate(recent_threads)
-      @recent_issues = @group.recent_issues.limit(10)
+      @recent_issues = IssueDecorator.decorate(@group.recent_issues.limit(10))
     else
       redirect_to root_url(subdomain: 'www')
     end
