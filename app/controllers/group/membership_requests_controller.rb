@@ -14,7 +14,7 @@ class Group::MembershipRequestsController < ApplicationController
   def create
     if current_user.groups.include?(@group)
       redirect_to @group, alert: t(".group.membership_requests.create.already_member")
-    elsif current_user.membership_requests.where(group_id: @group.id).count > 0
+    elsif current_user.membership_request_pending_for?(@group)
       redirect_to @group, alert: t(".group.membership_requests.create.already_asked")
     else
       @request = @group.membership_requests.build({user: current_user})
