@@ -228,6 +228,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    tweet-button (0.1.0)
     tzinfo (0.3.31)
     uglifier (1.2.3)
       execjs (>= 0.3.0)
@@ -289,6 +290,7 @@ DEPENDENCIES
   state_machine
   thin
   thumbs_up
+  tweet-button
   uglifier
   whenever
   will_paginate (~> 3.0)

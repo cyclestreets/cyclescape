@@ -15,6 +15,7 @@ gem 'map_layers'
 gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
 gem 'rails_autolink'
+gem 'tweet-button'
 
 # Back-end gems
 gem 'devise'

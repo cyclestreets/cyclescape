@@ -47,3 +47,5 @@
           = render partial: "message_threads/compact", collection: @threads, as: :thread
   %section.photos
     = @issue.standard_photo_image
+  %section.social
+    = tweet_button( text: @issue.title )
