@@ -62,5 +62,8 @@ module Cyclescape
     # Git info
     config.git_hash = `git rev-parse --short HEAD`.chomp
     config.github_project_url = "https://github.com/cyclestreets/toolkit"
+
+    # Google analytics
+    config.analytics = {google: {account_id: "UA-28721275-1", base_domain: "cyclescape.org"}}
   end
 end

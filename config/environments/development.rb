@@ -36,4 +36,7 @@ Cyclescape::Application.configure do
     g.javascripts false
     g.stylesheets false
   end
+
+  # Disable analytics
+  config.analytics = {}
 end
