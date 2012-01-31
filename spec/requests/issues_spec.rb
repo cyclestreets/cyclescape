@@ -25,6 +25,19 @@ describe "Issues" do
         page.should have_content("parking")
         page.should have_content(current_user.name)
       end
+
+      it "must not barf on duplicate tags" do
+        fill_in "Title", with: issue_values[:title]
+        fill_in "Write a description", with: issue_values[:description]
+        find("#issue_loc_json").set(issue_values[:loc_json])
+
+        fill_in "Tag your issue", with: "parking parking"
+
+        click_on "Send Report"
+        within("#content header") do
+          page.should have_content(issue_values[:title])
+        end
+      end
     end
   end
 

@@ -34,6 +34,7 @@ module Taggable
     val.
       delete("#!()[]{}").
       split(/[,; ]+/).
+      uniq.
       map {|str| Tag.grab(str) }
   end
 end

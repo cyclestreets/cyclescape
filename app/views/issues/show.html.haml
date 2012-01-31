@@ -38,7 +38,12 @@
   %section.threads
     %header
       %h2= t ".threads"
-      %ul.sidebar-threadlist
-        = render partial: "message_threads/compact", collection: @threads, as: :thread
+      - if @threads.empty?
+        %p= t ".no_threads_yet"
+        - unless current_user
+          %p= t ".sign_in_to_discuss_html", sign_in_link: link_to(t(".sign_in"), new_user_session_path)
+      - else
+        %ul.sidebar-threadlist
+          = render partial: "message_threads/compact", collection: @threads, as: :thread
   %section.photos
     = @issue.standard_photo_image
