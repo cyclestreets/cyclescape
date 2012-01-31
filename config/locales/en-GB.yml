@@ -102,7 +102,11 @@
           You can add members to this group in two ways. If you know their email address, %{invite_directly_link}.
           If they are already using Cyclescape, click on their name and you can add them from their user profile page.
         normal_members_guidance: "Normal members get access to your private group threads, and can create new group threads."
+        review_membership_requests_html: "Users of the site can also apply to join this group. You can %{review_membership_requests_link}."
+        review_pending: "pending membership requests"
+        review_requests: "review the requests history"
         title: "Members of %{group}"
+        you_have_pending_members_html: "You have %{review_pending_requests_link}! Please review them and take appropriate actions."
       member:
         confirm: "Are you sure?"
         delete: "Remove from group"
@@ -124,9 +128,16 @@
         already_asked: "You have already asked to join this group"
         already_member: "You are already a member of this group"
       index:
+        actioned_by: "Actioned By"
         are_you_sure: "Are you sure?"
         by: "by %{name}"
+        confirm: "Confirm"
+        created_at: "%{time_ago} ago"
+        reject: "Reject"
+        requested_at: "Requested At"
+        status: "Status"
         title: "Membership Requests for %{group}"
+        user: "User"
       new:
         title: "Request membership of %{group_name}"
         your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."

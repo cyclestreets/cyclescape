@@ -7,7 +7,7 @@ module MapsHelper
 
       page << map.add_controls([OpenLayers::Control::PZ.new,
                                 OpenLayers::Control::Navigation.new,
-                                OpenLayers::Control::LayerSwitcher.new])
+                                OpenLayers::Control::LayerSwitcher.new({roundedCornerColor: "#575757"})])
 
       add_formats(page)
 

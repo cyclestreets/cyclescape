@@ -37,6 +37,19 @@ describe "Group members" do
       it "should have a link to create a new member" do
         find_link('you can invite them directly').should be_visible
       end
+
+      it "should let you review the membership request history" do
+        page.should have_link(I18n.t(".group.members.index.review_requests"))
+      end
+    end
+
+    context "pending membership requests" do
+      let!(:gmr) { FactoryGirl.create(:pending_gmr, group: current_group) }
+
+      it "should encourage you to review pending membership requests" do
+        visit group_members_path(current_group)
+        page.should have_link(I18n.t(".group.members.index.review_pending"))
+      end
     end
   end
 end
