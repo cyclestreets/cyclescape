@@ -36,10 +36,8 @@ describe NewIssueNotifier do
     end
 
     describe ".notify_new_user_location_issue" do
-      it "should send a notification with the given user, issue, and category" do
-
-        subject.notify_new_user_location_issue(
-      end
+      # Hard to isolate and test
+      it "should send a notification with the given user, issue, and category"
     end
   end
 end

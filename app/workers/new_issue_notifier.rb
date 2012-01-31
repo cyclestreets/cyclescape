@@ -28,15 +28,16 @@ class NewIssueNotifier
         where(user_prefs: {notify_new_user_locations_issue: true})
 
     locations.each do |loc|
-      opts = {user_id: loc.user_id, category_id: loc.category_id, issue_id: issue.id}
+      # Symbol keys are converted to strings by Resque
+      opts = {"user_id" => loc.user_id, "category_id" => loc.category_id, "issue_id" => issue.id}
       Resque.enqueue(NewIssueNotifier, :notify_new_user_location_issue, opts)
     end
   end
 
   def self.notify_new_user_location_issue(opts)
-    user = User.find(opts[:user_id])
-    issue = Issue.find(opts[:issue_id])
-    category = LocationCategory.find(opts[:category_id])
+    user = User.find(opts["user_id"])
+    issue = Issue.find(opts["issue_id"])
+    category = LocationCategory.find(opts["category_id"])
     Notifications.new_user_location_issue(user, issue, category).deliver
   end
 end

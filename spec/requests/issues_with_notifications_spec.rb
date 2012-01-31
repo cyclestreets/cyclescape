@@ -7,7 +7,12 @@ describe "Issue notifications" do
 
   context "on a new issue" do
     describe "for users with overlapping issues" do
-      let(:user_location) { FactoryGirl.create(:user_location, loc_json: issue_values[:loc_json]) }
+      let(:user) { FactoryGirl.create(:user) }
+      let!(:user_location) { FactoryGirl.create(:user_location, user: user, loc_json: issue_values[:loc_json]) }
+
+      before do
+        user.prefs.update_attribute(:notify_new_user_locations_issue, true)
+      end
 
       it "should send a notification" do
         visit new_issue_path
@@ -16,8 +21,8 @@ describe "Issue notifications" do
         find("#issue_loc_json").set(issue_values[:loc_json])
         click_on "Send Report"
         page.should have_content(issue_values[:title])
-        category_name = user_location.category.name
-        email = open_last_email_for(current_user.email)
+        category_name = user_location.category.name.downcase
+        email = open_last_email_for(user_location.user.email)
         email.should have_subject("[Cyclescape] New issue reported near your #{category_name} location")
       end
     end
