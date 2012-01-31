@@ -3,20 +3,22 @@
 %p= t ".group_members_guidance"
 %p= t ".new_members_guidance_html", invite_directly_link: link_to(t(".invite_directly"), new_group_membership_path)
 
-%h2= t ".committee"
-%p= t ".committee_guidance"
-%table
-  %thead
-    %th= t ".member_name"
-    %th= t ".actions"
-  %tbody
-    = render partial: "member", collection: @committee
+%section.committee
+  %h2= t ".committee"
+  %p= t ".committee_guidance"
+  %table
+    %thead
+      %th= t ".member_name"
+      %th= t ".actions"
+    %tbody
+      = render partial: "member", collection: @committee
 
-%h2= t ".members"
-%p= t ".normal_members_guidance"
-%table
-  %thead
-    %th= t ".member_name"
-    %th= t ".actions"
-  %tbody
-    = render partial: "member", collection: @members
+%section.members
+  %h2= t ".members"
+  %p= t ".normal_members_guidance"
+  %table
+    %thead
+      %th= t ".member_name"
+      %th= t ".actions"
+    %tbody
+      = render partial: "member", collection: @members
