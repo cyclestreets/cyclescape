@@ -7,6 +7,14 @@ class ThreadList
     MessageThread.public.where(group_id: groups).order_by_latest_message.limit(limit)
   end
 
+  def self.issue_threads_from_group(group)
+    group.threads.order_by_latest_message.with_issue
+  end
+
+  def self.general_threads_from_group(group)
+    group.threads.order_by_latest_message.without_issue
+  end
+
   def self.recent_involved_with(user, limit)
     user.involved_threads.order_by_latest_message.limit(limit)
   end

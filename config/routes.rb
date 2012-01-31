@@ -3,6 +3,7 @@ Cyclescape::Application.routes.draw do
 
   constraints(SubdomainConstraint) do
     root :to => "groups#show"
+    resources :threads, controller: "group/message_threads"
   end
 
   resource :dashboard

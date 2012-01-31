@@ -2,7 +2,11 @@ class Group::MessageThreadsController < MessageThreadsController
   before_filter :load_group
 
   def index
-    @threads = @group.threads
+    issue_threads = ThreadList.issue_threads_from_group(@group).paginate(page: params[:issue_threads_page])
+    @issue_threads = ThreadListDecorator.decorate(issue_threads)
+
+    general_threads = ThreadList.general_threads_from_group(@group).paginate(page: params[:general_threads_page])
+    @general_threads = ThreadListDecorator.decorate(general_threads)
   end
 
   def new
@@ -26,7 +30,7 @@ class Group::MessageThreadsController < MessageThreadsController
   protected
 
   def load_group
-    @group = Group.find(params[:group_id])
+    @group = Group.find(params[:group_id] || current_group)
   end
 
   def load_thread

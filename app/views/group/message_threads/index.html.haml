@@ -1,9 +1,19 @@
 %h1= t ".title", group: @group.name
 %nav
   %ul
-    %li= link_to t(".new_group_thread"), {action: :new}
+    %li= link_to t(".new_group_thread"), {action: :new}, class: "btn-green"
 %section.threads
-  - @threads.each do |thread|
-    %article.thread_summary
-      %h1= link_to thread.title, {action: :show, id: thread}
-      %p== Created #{time_ago_in_words(thread.created_at)} ago
+  %ul.tabs.styled-tabs
+    %li= link_to t(".issue_threads"), "#issue-threads"
+    %li= link_to t(".general_threads"), "#general-threads"
+  .panes
+    .pane
+      %p= t ".issue_threads_description", group_name: @group.name
+      %ul.thread-list
+        = render partial: "message_threads/list", collection: @issue_threads, as: :thread
+      = will_paginate @issue_threads, param_name: "issue_threads_page", params: {anchor: "issue-threads"}
+    .pane
+      %p= t ".general_threads_description"
+      %ul.thread-list
+        = render partial: "message_threads/list", collection: @general_threads, as: :thread
+      = will_paginate @general_threads, param_name: "general_threads_page", params: {anchor: "general-threads"}

@@ -34,6 +34,8 @@ class MessageThread < ActiveRecord::Base
 
   scope :public, where("privacy = 'public'")
   scope :private, where("privacy = 'group'")
+  scope :with_issue, where("issue_id IS NOT NULL")
+  scope :without_issue, where("issue_id IS NULL")
   default_scope where(deleted_at: nil)
 
   before_validation :set_public_token, on: :create

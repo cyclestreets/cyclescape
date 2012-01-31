@@ -50,6 +50,10 @@ class Group < ActiveRecord::Base
     memberships.where(user_id: user.id).first
   end
 
+  def subdomain
+    short_name
+  end
+
   protected
 
   def create_default_profile

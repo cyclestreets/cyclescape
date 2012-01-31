@@ -1,9 +1,12 @@
 require "spec_helper"
 
-describe "Group threads" do
+describe "Group threads", use: :subdomain do
   let(:thread) { FactoryGirl.create(:message_thread, group: current_group) }
   let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5, group: current_group) }
   let(:edit_thread) { "Edit this thread" }
+
+  before { set_subdomain(current_group.subdomain) if defined?(current_group) }
+  after  { unset_subdomain if defined?(current_group) }
 
   context "as a group committee member" do
     include_context "signed in as a committee member"
