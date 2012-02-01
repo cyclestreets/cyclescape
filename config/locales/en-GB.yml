@@ -216,6 +216,10 @@
       new:
         title: "New Thread on %{issue}"
         everyone: "Everyone"
+    photos:
+      show:
+        photo_alt: "The photo for %{caption}."
+        view_original: "View original photo."
     tags:
       panel:
         edit_tags: "edit tags"

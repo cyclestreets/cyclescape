@@ -1,0 +1,4 @@
+.photo
+  = image_tag @issue.photo.thumb("600x600>").url,
+      alt: t(".photo_alt", caption: @issue.title)
+  %p= link_to t(".view_original"), @issue.photo.url

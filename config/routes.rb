@@ -16,6 +16,7 @@ Cyclescape::Application.routes.draw do
     put 'vote_down', :on => :member
     put 'vote_clear', :on => :member
     scope module: "issue" do
+      resource :photo, only: [:show]
       resources :threads, controller: "message_threads"
       resource :tags, only: [:update]
     end

@@ -63,6 +63,13 @@ describe "Issues" do
         page.should have_selector("img.issue-photo")
       end
 
+      it "should show the photo with a link to a larger version" do
+        within("section.photos") do
+          find("a").click
+        end
+        find(".photo img")[:alt].should include(issue.title)
+      end
+
       it "should not show you an edit tags link" do
         page.should_not have_content(I18n.t(".shared.tags.panel.edit_tags"))
       end
