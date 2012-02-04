@@ -151,4 +151,21 @@ describe "Issue threads" do
       end
     end
   end
+
+  context "when showing" do
+    context "a non-group public thread in a subdomain", use: :subdomain do
+      include_context "signed in as a group member"
+
+      let!(:thread) { FactoryGirl.create(:message_thread, issue: issue) }
+
+      before { set_subdomain(current_group.short_name) }
+      after  { unset_subdomain }
+
+      it "should be accessible" do
+        visit issue_path(issue)
+        click_on thread.title
+        page.should have_content(thread.title)
+      end
+    end
+  end
 end
