@@ -53,6 +53,8 @@ class User < ActiveRecord::Base
   before_validation :set_default_role, :unless => :role
   after_create :create_user_prefs
 
+  scope :active, where("disabled_at IS NULL AND confirmed_at IS NOT NULL")
+
   validates :full_name, presence: true
   validates :role, presence: true, inclusion: {in: ALLOWED_ROLES} 
 
