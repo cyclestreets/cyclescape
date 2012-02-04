@@ -32,8 +32,4 @@ class Group::MessageThreadsController < MessageThreadsController
   def load_group
     @group = Group.find(params[:group_id] || current_group)
   end
-
-  def load_thread
-    @thread = @group.threads.find(params[:id])
-  end
 end
