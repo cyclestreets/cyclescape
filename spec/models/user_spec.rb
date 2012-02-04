@@ -361,4 +361,11 @@ describe User do
       subject.membership_request_pending_for?(group).should be_false
     end
   end
+
+  context "confirmation" do
+    it "should not be confirmed" do
+      user = FactoryGirl.create(:user, :unconfirmed)
+      user.should_not be_confirmed
+    end
+  end
 end
