@@ -9,12 +9,16 @@ Cyclescape::Application.routes.draw do
   resource :dashboard
 
   resources :issues do
-    get 'geometry', :on => :member
-    get 'all_geometries', :on => :collection
-    get 'search', :on => :collection
-    put 'vote_up', :on => :member
-    put 'vote_down', :on => :member
-    put 'vote_clear', :on => :member
+    member do
+      get "geometry"
+      put "vote_up"
+      put "vote_down"
+      put "vote_clear"
+    end
+    collection do
+      get "all_geometries"
+      get "search"
+    end
     scope module: "issue" do
       resource :photo, only: [:show]
       resources :threads, controller: "message_threads"
@@ -32,9 +36,11 @@ Cyclescape::Application.routes.draw do
       resources :members
       resources :memberships
       resources :membership_requests do
-        post 'confirm', :on => :member
-        post 'reject', :on => :member
-        post 'cancel', :on => :member
+        member do
+          post "confirm"
+          post "reject"
+          post "cancel"
+        end
       end
       resources :threads, controller: "message_threads"
       resource :profile do
