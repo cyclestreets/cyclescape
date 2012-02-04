@@ -54,15 +54,29 @@ describe "Group threads", use: :subdomain do
       end
 
       context "notifications" do
+        def fill_in_thread
+          fill_in "Title", with: thread_attrs[:title]
+          fill_in "Message", with: "This is between you an me, but..."
+          click_on "Create Thread"
+        end
+
         it "should send a notification to group members" do
           membership = FactoryGirl.create(:group_membership, group: current_group)
           notifiee = membership.user
           notifiee.prefs.update_attribute(:notify_new_group_thread, true)
-          fill_in "Title", with: thread_attrs[:title]
-          fill_in "Message", with: "This is between you an me, but..."
-          click_on "Create Thread"
+          fill_in_thread
           email = open_last_email_for(notifiee.email)
           email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
+        end
+
+        it "should not be sent if the group member has not confirmed" do
+          user = FactoryGirl.create(:user, :unconfirmed)
+          membership = FactoryGirl.create(:group_membership, group: current_group, user: user)
+          reset_mailer  # Clear out confirmation email
+          notifiee = membership.user
+          notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+          fill_in_thread
+          open_last_email_for(notifiee.email).should be_nil
         end
       end
     end

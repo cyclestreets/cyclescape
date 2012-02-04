@@ -18,7 +18,7 @@ class NewThreadNotifier
 
   def self.notify_new_group_thread(thread_id)
     thread = MessageThread.find(thread_id)
-    members = thread.group.members.with_pref(:notify_new_group_thread)
+    members = thread.group.members.active.with_pref(:notify_new_group_thread)
     members.each do |member|
       Resque.enqueue(NewThreadNotifier, :send_new_group_thread_notification, thread.id, member.id)
     end
