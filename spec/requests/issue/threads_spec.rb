@@ -72,17 +72,40 @@ describe "Issue threads" do
         page.should have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
       end
 
-      it "should send a notification to other group members" do
-        membership = FactoryGirl.create(:group_membership, group: current_group)
-        notifiee = membership.user
-        notifiee.prefs.update_attribute(:notify_new_group_thread, true)
-        visit issue_path(issue)
-        click_on "Discuss"
-        select current_group.name, from: "Owned by"
-        fill_in "Message", with: "Awesome!"
-        click_on "Create Thread"
-        email = open_last_email_for(notifiee.email)
-        email.should have_subject("[Cyclescape] \"#{issue.title}\" (#{current_group.name})")
+      context "notification" do
+        let(:user) { FactoryGirl.create(:user) }
+        # Non-conflicting name
+        let(:group_membership) { FactoryGirl.create(:group_membership, group: current_group, user: user) }
+        let(:notifiee) { group_membership.user }
+
+        before do
+          notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+          reset_mailer
+        end
+
+        def create_thread
+          visit issue_path(issue)
+          click_on "Discuss"
+          select current_group.name, from: "Owned by"
+          fill_in "Message", with: "Awesome!"
+          click_on "Create Thread"
+        end
+
+        it "should be sent to other group members" do
+          create_thread
+          email = open_last_email_for(notifiee.email)
+          email.should have_subject("[Cyclescape] \"#{issue.title}\" (#{current_group.name})")
+        end
+
+        context "with an unconfirmed user" do
+          let(:user) { FactoryGirl.create(:user, :unconfirmed) }
+
+          it "should not receive it" do
+            create_thread
+            email = open_last_email_for(notifiee.email)
+            email.should be_nil
+          end
+        end
       end
     end
   end
