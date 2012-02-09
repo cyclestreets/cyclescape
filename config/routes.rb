@@ -6,7 +6,7 @@ Cyclescape::Application.routes.draw do
     resources :threads, controller: "group/message_threads"
   end
 
-  resource :dashboard
+  resource :overview, as: :dashboard, controller: "dashboards"
 
   resources :issues do
     member do
