@@ -40,8 +40,8 @@ gem 'email_reply_parser'
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
+  gem 'compass-rails'
   gem 'uglifier'
-  gem 'compass', "> 0.12.alpha"
 end
 
 group :development do

@@ -65,6 +65,8 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-rails (1.0.0.rc.2)
+      compass (~> 0.12.rc.0)
     daemons (1.1.8)
     database_cleaner (0.7.1)
     declarative_authorization (0.5.5)
@@ -254,7 +256,7 @@ DEPENDENCIES
   annotate!
   capybara
   coffee-rails (~> 3.1.0)
-  compass (> 0.12.alpha)
+  compass-rails
   database_cleaner
   declarative_authorization
   devise
