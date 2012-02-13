@@ -2,8 +2,9 @@
 -------------------------------------------------------------- */
 #page {
   background: $white;
-  padding: 20px 0;
+  padding: 20px 0 30px;
   overflow: hidden;
+  min-height: 450px;
   #content {
     width: 630px;
     margin-right: 30px;
