@@ -3,6 +3,8 @@ Hi <%= raw @user.name %>,
 A new issue with the title "<%= raw @issue.title %>" has been reported near
 your <%= @category.name %> location.
 
+<%= raw @issue.description %>
+
 You can view the issue at:
 <%= issue_url(@issue) %>
 
