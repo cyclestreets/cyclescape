@@ -1,4 +1,11 @@
 %header
   %h1= t ".title"
 %section
-  = render "form"
+  = semantic_form_for @thread, as: :thread, url: thread_path(@thread) do |f|
+    = f.inputs do
+      = f.input :title
+      = f.input :group
+      = f.input :privacy, as: :select, collection: MessageThread::ALLOWED_PRIVACY.map {|n| [n.capitalize, n] }
+    = f.buttons do
+      = f.commit_button
+      %li= cancel_link thread_path(@thread)
