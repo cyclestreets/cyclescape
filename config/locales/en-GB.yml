@@ -384,6 +384,9 @@
       created_at: "%{time_ago} ago"
     edit:
       title: "Edit thread"
+      description_html:
+        Administrators can fix up thread options here.
+        <strong>Warning:</strong> your group may have a policy about changing thread privacy.
     destroy:
       failure: "Couldn't delete the thread"
       success: "Thread deleted"

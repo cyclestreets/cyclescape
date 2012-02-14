@@ -1,5 +1,6 @@
 %header
   %h1= t ".title"
+  %p= t ".description_html"
 %section
   = semantic_form_for @thread, as: :thread, url: thread_path(@thread) do |f|
     = f.inputs do
