@@ -1,8 +1,8 @@
-<%= t ".added" , name: @message.created_by.name %>
+<%= raw t ".added" , name: @message.created_by.name %>
 
-<%= @message.component.caption %>
-<%= @message.component.description %>
-<%= @message.body %>
+<%= raw @message.component.caption %>
+<%= raw @message.component.description %>
+<%= raw @message.body %>
 <%= t ".view_the_photo" %>
 <%= thread_path(@message.thread, only_path: false) + "#message-#{@message.id}" %>
 <%= render partial: "footer" %>

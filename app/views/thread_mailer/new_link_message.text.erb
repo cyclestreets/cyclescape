@@ -1,6 +1,6 @@
-<%= t ".added" , name: @message.created_by.name %>
+<%= raw t ".added" , name: @message.created_by.name %>
 
-<%= @message.component.url %>
-<%= @message.component.title %>
-<%= @message.component.description %>
+<%= raw @message.component.url %>
+<%= raw @message.component.title %>
+<%= raw @message.component.description %>
 <%= render partial: "footer" %>

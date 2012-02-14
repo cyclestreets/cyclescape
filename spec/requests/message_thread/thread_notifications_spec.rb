@@ -78,5 +78,51 @@ describe "thread notifications" do
       # what that will be to test it.
       pending "Figure out testing the url"
     end
+
+    context "html encoding" do
+      it "should not escape text messages" do
+        within("#new-text-message") do
+          fill_in "Message", with: "A & B"
+          click_on "Post Message"
+        end
+
+        open_email(current_user.email)
+        current_email.should have_body_text("A & B")
+      end
+
+      it "should not escape link messages" do
+        within("#new-link-message") do
+          fill_in "URL", with: "example.com?foo&bar"
+          fill_in "Title", with: "An example URL with & symbols"
+          fill_in "Description", with: "Some words & some more words"
+          click_on "Add Link"
+        end
+        open_email(current_user.email)
+        current_email.should have_body_text("http://example.com?foo&bar")
+        current_email.should have_body_text("An example URL with & symbols")
+        current_email.should have_body_text("Some words & some more words")
+      end
+
+      it "should not escape deadline messages" do
+        within("#new-deadline-message") do
+          fill_in "Deadline", with: "Wednesday, 07 December 2011" # format the date picker returns
+          fill_in "Title", with: "Planning application deadline & so on"
+          click_on "Add Deadline"
+        end
+        open_email(current_user.email)
+        current_email.should have_body_text("Planning application deadline & so on")
+      end
+
+      it "should not escape photo messages" do
+        within("#new-photo-message") do
+          attach_file "Photo", abstract_image_path
+          fill_in "Caption", with: "Some words & some more words"
+          click_on "Add Photo"
+        end
+
+        open_email(current_user.email)
+        current_email.should have_body_text("Some words & some more words")
+      end
+    end
   end
 end

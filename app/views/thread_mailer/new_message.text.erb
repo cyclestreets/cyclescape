@@ -1,4 +1,4 @@
-<%= t ".added", name: @message.created_by.name %>
+<%= raw t ".added", name: @message.created_by.name %>
 
-<%= @message.body %>
+<%= raw @message.body %>
 <%= render partial: "footer" %>
