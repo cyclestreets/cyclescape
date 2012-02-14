@@ -251,6 +251,39 @@ describe "Message threads" do
         page.should have_content("Thread updated")
         page.should have_content("New better title")
       end
+
+      it "should let you set a group as the owner" do
+        group = FactoryGirl.create(:group)
+        click_on edit_thread
+        select group.name, from: "Owned by"
+        click_on "Save"
+        page.should have_content(thread.title)
+        page.should have_content(group.name)
+      end
+    end
+
+    context "editing a group thread" do
+      let!(:thread) { FactoryGirl.create(:group_message_thread) }
+      let!(:other_group) { FactoryGirl.create(:group) }
+
+      it "should let you assign to another group" do
+        visit edit_thread_path(thread)
+        page.should have_select("Owned by", with: thread.group.name)
+        select other_group.name, from: "Owned by"
+        click_on "Save"
+        page.should have_content(thread.title)
+        page.should have_content(other_group.name)
+        page.should have_no_content(thread.group.name)
+      end
+
+      it "should let you change the privacy setting" do
+        visit edit_thread_path(thread)
+        page.should have_select("Privacy", with: "Public")
+        select "Group", from: "Privacy"
+        click_on "Save"
+        page.should have_content(thread.title)
+        page.should have_content("Private")
+      end
     end
   end
 

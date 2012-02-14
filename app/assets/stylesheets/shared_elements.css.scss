@@ -73,10 +73,10 @@ ul.following-thread {
   }
 }
 
-article.thread {
+section.thread {
   @include list-reset-soft;
   margin: 20px 0;
-  section.message {
+  article.message {
     padding: 20px 10px;
     border-bottom: 3px solid $grey;
     &:last-child {
@@ -90,16 +90,16 @@ article.thread {
       float: left;
       margin-right: 20px;
     }
+    .author {
+      color: $lightgrey;
+      font: {
+        weight: normal;
+        size: 12px;
+      }
+    }
     .body {
       overflow: hidden;
       position: relative;
-      .author {
-        color: $lightgrey;
-        font: {
-          weight: normal;
-          size: 12px;
-        }
-      }
       .readmore {
         overflow: hidden;
         margin-top: 10px;
@@ -215,6 +215,7 @@ article:hover > menu.tools, header:hover > menu.tools {
   p {
     font-size: 12px;
     color: $lightgrey;
+    margin-bottom: 8px;
   }
   a,
   span {
