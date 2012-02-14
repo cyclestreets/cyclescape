@@ -1,6 +1,6 @@
-Hi <%= @member.name %>,
+Hi <%= raw @member.name %>,
 
-Your request to join group "<%= @group.name %>" has been successful.
+Your request to join group "<%= raw @group.name %>" has been successful.
 
 <%= group_url(@group) %>
 

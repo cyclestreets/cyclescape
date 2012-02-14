@@ -26,6 +26,15 @@ describe "Group Membership Requests" do
         open_email(gmr.user.email)
         current_email.should have_subject("You are now a member of #{gmr.group.name}")
       end
+
+      it "should not html escape the name of the group" do
+        current_group.name = "A & B"
+        current_group.save
+        visit group_membership_requests_path(gmr.group)
+        click_on "Confirm"
+        open_email(gmr.user.email)
+        current_email.should have_body_text("A & B")
+      end
     end
   end
 
