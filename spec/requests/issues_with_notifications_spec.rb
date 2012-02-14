@@ -38,6 +38,20 @@ describe "Issue notifications" do
         email.should_not have_body_text("&amp;")
         email.should have_body_text(/Test containing A & B/)
       end
+
+      context "multiple overlapping locations" do
+        let!(:user_location2) { FactoryGirl.create(:user_location, user: user, loc_json: issue_values[:loc_json]) }
+
+        it "should not send multiple emails to the same user" do
+          email_count = all_emails.count
+          visit new_issue_path
+          fill_in "Title", with: "Test"
+          fill_in "Write a description", with: "Something & something else"
+          find("#issue_loc_json").set(issue_values[:loc_json])
+          click_on "Send Report"
+          all_emails.count.should eql(email_count + 1)
+        end
+      end
     end
   end
 end
