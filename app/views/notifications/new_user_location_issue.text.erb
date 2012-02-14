@@ -1,4 +1,4 @@
-Hi <%= @user.name %>,
+Hi <%= raw @user.name %>,
 
 A new issue with the title "<%= raw @issue.title %>" has been reported near
 your <%= @category.name %> location.
