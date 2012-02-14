@@ -72,6 +72,24 @@ describe "Issue threads" do
         page.should have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
       end
 
+      context "in a subdomain", use: :current_subdomain do
+        it "should default to be owned by the current group" do
+          visit issue_path(issue)
+          click_on "Discuss"
+          # Done twice so it's clear what's failing, as the error is confusing
+          page.should have_select("Owned by")
+          page.should have_select("Owned by", selected: current_group.name)
+        end
+
+        it "should default to the group's privacy setting" do
+          current_group.update_attribute(:default_thread_privacy, "group")
+          visit issue_path(issue)
+          click_on "Discuss"
+          page.should have_select("Privacy")
+          find_field("Privacy").value.should == "group"
+        end
+      end
+
       context "notification" do
         let(:user) { FactoryGirl.create(:user) }
         # Non-conflicting name
@@ -153,13 +171,10 @@ describe "Issue threads" do
   end
 
   context "when showing" do
-    context "a non-group public thread in a subdomain", use: :subdomain do
+    context "a non-group public thread in a subdomain", use: :current_subdomain do
       include_context "signed in as a group member"
 
       let!(:thread) { FactoryGirl.create(:message_thread, issue: issue) }
-
-      before { set_subdomain(current_group.short_name) }
-      after  { unset_subdomain }
 
       it "should be accessible" do
         visit issue_path(issue)

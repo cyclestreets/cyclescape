@@ -7,6 +7,10 @@ class Issue::MessageThreadsController < MessageThreadsController
 
   def new
     @thread = @issue.threads.build
+    if current_group
+      @thread.group = current_group
+      @thread.privacy = current_group.default_thread_privacy
+    end
     @message = @thread.messages.build
     @available_groups = current_user.groups
   end
