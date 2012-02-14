@@ -1,8 +1,8 @@
-<%= t ".added" , name: @message.created_by.name %>
+<%= raw t ".added" , name: @message.created_by.name %>
 
-<%= @message.component.item.title %>
+<%= raw @message.component.item.title %>
 
-<%= polymorphic_url @message.component.item.component %>
+<%= raw polymorphic_url @message.component.item.component %>
 
-<%= @message.body %>
+<%= raw @message.body %>
 <%= render partial: "footer" %>
