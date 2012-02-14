@@ -10,6 +10,6 @@
 
 FactoryGirl.define do
   factory :location_category do
-    name "Route to School"
+    sequence(:name) {|n| "User location category #{n}" }
   end
 end
