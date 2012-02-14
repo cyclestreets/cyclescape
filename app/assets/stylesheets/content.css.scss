@@ -768,6 +768,9 @@ body.home {
     border-right:1px solid $paneborder;
     @include border-radius(0 0 10px 10px);
   }
+  .area-map .tinymap {
+    height: 300px;
+  }
 }
 
 #how-it-works-group {
