@@ -51,8 +51,17 @@ ul.horizontal, ol.horizontal {
 div.flash-container .flash {
   padding: 6px;
   padding-left: 12px;
-  margin: 20px 0;
-  border: 1px solid red;
+  margin: 10px;
+  font-weight: bold;
+  @include border-radius(5px);
+  &.alert {
+    background: $red;
+    color: white;
+  }
+  &.notice {
+    background: $lightgreen;
+    color: white;
+  }
 }
 
 // Tabs
