@@ -1,6 +1,6 @@
 Hi <%= @user.name %>,
 
-A new issue with the title "<%= @issue.title %>" has been reported near
+A new issue with the title "<%= raw @issue.title %>" has been reported near
 your <%= @category.name %> location.
 
 You can view the issue at:

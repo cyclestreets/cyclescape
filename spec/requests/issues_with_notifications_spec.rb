@@ -25,6 +25,17 @@ describe "Issue notifications" do
         email = open_last_email_for(user_location.user.email)
         email.should have_subject("[Cyclescape] New issue reported near your #{category_name} location")
       end
+
+      it "should not include html entities in the subject" do
+        visit new_issue_path
+        fill_in "Title", with: "Test containing A & B"
+        fill_in "Write a description", with: issue_values[:description]
+        find("#issue_loc_json").set(issue_values[:loc_json])
+        click_on "Send Report"
+        email = open_last_email_for(user_location.user.email)
+        email.should_not have_body_text("&amp;")
+        email.should have_body_text(/Test containing A & B/)
+      end
     end
   end
 end
