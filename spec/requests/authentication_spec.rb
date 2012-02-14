@@ -26,7 +26,7 @@ describe "Authentication and authorization" do
       fill_in "Password", with: password
       click_button "Sign in"
 
-      page.should have_content("Signed in")
+      page.should have_content("signed in")
       page.current_path.should eql(new_issue_path)
     end
   end

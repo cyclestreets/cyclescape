@@ -4,7 +4,7 @@ shared_context "signs in" do
     fill_in "Email", with: current_user.email
     fill_in "Password", with: password
     click_button "Sign in"
-    page.should have_content("Signed in")
+    page.should have_content("signed in")
   end
 end
 

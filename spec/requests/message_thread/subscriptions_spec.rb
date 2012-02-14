@@ -18,7 +18,7 @@ describe "Thread subscriptions" do
 
       it "should subscribe the user to the thread" do
         subscribe_button.click
-        page.should have_content("You are now subscribed to this thread.")
+        page.should have_content("You are now subscribed to this thread")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
       end
@@ -56,7 +56,7 @@ describe "Thread subscriptions" do
 
       it "should subscribe the user to the thread" do
         subscribe_button.click
-        page.should have_content("You are now subscribed to this thread.")
+        page.should have_content("You are now subscribed to this thread")
         current_user.thread_subscriptions.count.should == 1
         current_user.thread_subscriptions.first.thread.should == thread
       end
@@ -86,7 +86,7 @@ describe "Thread subscriptions" do
         current_user.should be_subscribed_to_thread(thread)
         unsubscribe_button.click
         current_user.should_not be_subscribed_to_thread(thread)
-        page.should have_content("You have unsubscribed from this thread.")
+        page.should have_content("You have unsubscribed from this thread")
       end
 
       it "should not send me any more messages" do
