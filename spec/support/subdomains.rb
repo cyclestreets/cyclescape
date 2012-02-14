@@ -8,3 +8,10 @@ shared_context "with subdomain", use: :subdomain do
     Capybara.default_host = @original_default_host
   end
 end
+
+shared_context "with current group subdomain", use: :current_subdomain do
+  include_context "with subdomain"
+
+  before { set_subdomain(current_group.short_name) }
+  after  { unset_subdomain }
+end
