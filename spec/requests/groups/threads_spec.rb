@@ -69,6 +69,19 @@ describe "Group threads", use: :subdomain do
           email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
         end
 
+        it "should not send html entities in the notification" do
+          membership = FactoryGirl.create(:group_membership, group: current_group)
+          notifiee = membership.user
+          notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+          fill_in "Title", with: "Something like A & B"
+          fill_in "Message", with: "A & B is something important"
+          click_on "Create Thread"
+          email = open_last_email_for(notifiee.email)
+          email.should have_subject(/like A & B/)
+          email.should have_body_text("A & B is")
+          email.should_not have_body_text("&amp;")
+        end
+
         it "should not be sent if the group member has not confirmed" do
           user = FactoryGirl.create(:user, :unconfirmed)
           membership = FactoryGirl.create(:group_membership, group: current_group, user: user)

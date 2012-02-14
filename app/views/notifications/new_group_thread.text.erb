@@ -1,15 +1,15 @@
-Hi <%= @member.name %>,
+Hi <%= raw @member.name %>,
 
 <% if @thread.has_issue? %>
-A new thread titled "<%= @thread.title %>" has been created on issue
-"<%= @thread.issue.title %>" for the <%= @group.name %> group.
+A new thread titled "<%= raw @thread.title %>" has been created on issue
+"<%= raw @thread.issue.title %>" for the <%= raw @group.name %> group.
 <% else %>
-A new thread titled "<%= @thread.title %>" has been created for the
-<%= @group.name %> group.
+A new thread titled "<%= raw @thread.title %>" has been created for the
+<%= raw @group.name %> group.
 <% end %>
 
-<%= @thread.first_message.created_by.name %> wrote:
-<%= @thread.first_message.body %>
+<%= raw @thread.first_message.created_by.name %> wrote:
+<%= raw @thread.first_message.body %>
 
 On thread:
 <%= thread_url(@thread) %>
