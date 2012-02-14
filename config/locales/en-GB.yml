@@ -357,9 +357,9 @@
   message_thread:
     subscriptions:
       create:
-        success: "You are now subscribed to this thread."
+        success: "You are now subscribed to this thread"
       destroy:
-        success: "You have unsubscribed from this thread."
+        success: "You have unsubscribed from this thread"
     tags:
       panel:
         edit_tags: "edit"
@@ -418,8 +418,8 @@
   message:
     deadlines:
       create:
-        failure: "Deadline could not be created."
-        success: "Deadline created."
+        failure: "Deadline could not be created"
+        success: "Deadline created"
       show:
         days_away:
           zero: "Today!"
@@ -433,12 +433,12 @@
         attached_to_html: "Attached to document: %{document}"
     links:
       create:
-        failure: "Link could not be created."
-        success: "Link created."
+        failure: "Link could not be created"
+        success: "Link posted"
     photos:
       create:
-        failure: "Could not create photo message."
-        success: "Photo uploaded."
+        failure: "Could not create photo message"
+        success: "Photo uploaded"
       show:
         photo_alt: "A photo entitled %{caption}."
   messages:
@@ -447,7 +447,7 @@
       success: "Message censored"
     create:
       failure: "Could not add message"
-      success: "Message added"
+      success: "Message successfully posted"
     message:
       posted_date: "posted %{time_ago} ago"
       censor: "Censor this message"
@@ -497,7 +497,7 @@
       new:
         title: "Feedback"
       success:
-        thank_you: "Thank you for your feedback."
+        thank_you: "Thank you for your feedback"
         close: "< Back to site"
   tags:
     show:
@@ -565,7 +565,7 @@
         back: "Return to your profile"
       update:
         success: "Preferences saved"
-        failure: "Your preferences could not be saved."
+        failure: "Your preferences could not be saved"
     profiles:
       create:
         success: "Profile Created"
