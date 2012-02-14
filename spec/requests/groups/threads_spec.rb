@@ -4,6 +4,7 @@ describe "Group threads", use: :subdomain do
   let(:thread) { FactoryGirl.create(:message_thread, group: current_group) }
   let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5, group: current_group) }
   let(:edit_thread) { "Edit this thread" }
+  let(:delete_thread) { "Delete this thread" }
 
   before { set_subdomain(current_group.subdomain) if defined?(current_group) }
   after  { unset_subdomain if defined?(current_group) }
@@ -123,6 +124,25 @@ describe "Group threads", use: :subdomain do
         click_on "Save"
         page.should have_content "Thread updated"
         page.should have_content "New, better, thread title"
+      end
+    end
+  end
+
+  context "thread deletion" do
+    context "as an admin user" do
+      include_context "signed in as admin"
+
+      let(:group) { FactoryGirl.create(:group) }
+      let(:thread) { FactoryGirl.create(:message_thread, group: group) }
+
+      before do
+        visit group_thread_path(group, thread)
+      end
+
+      it "should let you delete the thread" do
+        click_on delete_thread
+        page.should have_content("Thread deleted")
+        page.should_not have_content(thread.title)
       end
     end
   end
