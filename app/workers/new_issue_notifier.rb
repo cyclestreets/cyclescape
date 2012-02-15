@@ -21,9 +21,9 @@ class NewIssueNotifier
     # Expand radius of issue location
     buffered_location = issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
-    # Retrieve user and category IDs from user locations that intersect with the issue
+    # Retrieve user locations that intersect with the issue
     # and where the user has the notification preference on
-    locations = UserLocation.intersects(buffered_location).select(["user_locations.user_id AS user_id", :category_id]).
+    locations = UserLocation.intersects(buffered_location).
         joins(:user => :prefs).
         where(user_prefs: {notify_new_user_locations_issue: true})
 
