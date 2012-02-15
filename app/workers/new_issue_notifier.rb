@@ -27,7 +27,21 @@ class NewIssueNotifier
         joins(:user => :prefs).
         where(user_prefs: {notify_new_user_locations_issue: true})
 
+    # Filter the returned locations to ensure only one location is returned per user,
+    # and that it is the smallest (i.e. most relevant) location. Refactoring this into
+    # the Arel query above is left as an exercise for the reader.
+    l2 = []
     locations.each do |loc|
+      a = l2.detect{|l| l.user_id = loc.user_id }
+      if a == nil
+        l2 << loc
+      elsif a.location.buffer(0.0001).area > loc.location.buffer(0.0001).area # buffer slightly, to turn points into polygons
+        l2.delete(a)
+        l2 << loc
+      end
+    end
+
+    l2.each do |loc|
       # Symbol keys are converted to strings by Resque
       opts = {"user_id" => loc.user_id, "category_id" => loc.category_id, "issue_id" => issue.id}
       Resque.enqueue(NewIssueNotifier, :notify_new_user_location_issue, opts)
