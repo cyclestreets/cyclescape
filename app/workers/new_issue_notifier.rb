@@ -32,7 +32,7 @@ class NewIssueNotifier
     # the Arel query above is left as an exercise for the reader.
     l2 = []
     locations.each do |loc|
-      a = l2.detect{|l| l.user_id = loc.user_id }
+      a = l2.detect{|l| l.user_id == loc.user_id }
       if a == nil
         l2 << loc
       elsif a.location.buffer(0.0001).area > loc.location.buffer(0.0001).area # buffer slightly, to turn points into polygons
