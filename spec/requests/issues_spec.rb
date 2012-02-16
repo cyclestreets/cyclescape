@@ -57,6 +57,12 @@ describe "Issues" do
         page.should have_content(issue.description)
       end
 
+      it "should set the page title" do
+        within "title" do
+          page.should have_content(issue.title)
+        end
+      end
+
       it "should show the location"
 
       it "should show the photo" do
