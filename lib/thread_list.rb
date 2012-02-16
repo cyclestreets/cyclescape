@@ -19,6 +19,10 @@ class ThreadList
     user.involved_threads.order_by_latest_message.limit(limit)
   end
 
+  def self.public_recent_involved_with(user, limit)
+    recent_involved_with(user, limit).public
+  end
+
   def self.recent_public
     MessageThread.public.order_by_latest_message
   end
