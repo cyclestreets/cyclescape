@@ -63,4 +63,25 @@ describe "User profiles" do
       page.should have_content(user.name)
     end
   end
+
+  describe "thread list", as: :site_user do
+    let(:threads) { FactoryGirl.create_list(:message_thread, 3) }
+    let(:first_messages) { FactoryGirl.create_list(:message, 3, thread: threads.first, created_by: current_user) }
+    let(:second_messages) { FactoryGirl.create(:message, thread: threads.second, created_by: current_user) }
+
+    it "should show recent threads the user has posted to" do
+      first_messages and second_messages
+      visit user_profile_path(current_user)
+      page.should have_content(threads.first.title)
+      page.should have_content(threads.second.title)
+    end
+
+    it "should not show private threads" do
+      threads.first.update_attribute(:privacy, "group")
+      first_messages and second_messages
+      visit user_profile_path(current_user)
+      page.should have_no_content(threads.first.title)
+      page.should have_content(threads.second.title)
+    end
+  end
 end

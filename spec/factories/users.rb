@@ -54,7 +54,10 @@ FactoryGirl.define do
       password_confirmation "Victory is mine!"
       admin
 
-      factory :stewie_with_profile, traits: [:with_profile]
+      factory :stewie_with_profile do
+        # This is repeated here due to with_profile trait not being found
+        after_build {|u| FactoryGirl.build(:user_profile, user: u) }
+      end
     end
 
     factory :brian do

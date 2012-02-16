@@ -6,7 +6,7 @@ class User::ProfilesController < ApplicationController
   def show
     @user = UserDecorator.decorate(@user)
 
-    involved_threads = ThreadList.recent_involved_with(@user, 10)
+    involved_threads = ThreadList.public_recent_involved_with(@user, 10)
     @involved_threads = ThreadListDecorator.decorate(involved_threads)
 
     reported_issues = Issue.by_most_recent.created_by(@user)
