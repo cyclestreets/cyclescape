@@ -83,6 +83,25 @@ describe "Issues" do
       end
     end
 
+    context "with threads" do
+      context "as a public user" do
+        let!(:issue) { FactoryGirl.create(:issue) }
+        let(:other_group) { FactoryGirl.create(:group) }
+        let!(:public_thread) { FactoryGirl.create(:message_thread, issue: issue) }
+        let!(:private_thread) { FactoryGirl.create(:message_thread, :private, group: other_group, issue: issue) }
+
+        it "should link to the public thread" do
+          visit issue_path(issue)
+          page.should have_link(public_thread.title, href: thread_path(public_thread))
+        end
+
+        it "should censor the private thread title" do
+          visit issue_path(issue)
+          page.should have_content("[Private thread]")
+        end
+      end
+    end
+
     context "as a site user" do
       include_context "signed in as a site user"
 

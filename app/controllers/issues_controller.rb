@@ -14,7 +14,7 @@ class IssuesController < ApplicationController
   def show
     issue = Issue.find(params[:id])
     @issue = IssueDecorator.decorate(issue)
-    @threads = @issue.threads
+    @threads = ThreadListDecorator.decorate(@issue.threads)
     @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
   end
 
