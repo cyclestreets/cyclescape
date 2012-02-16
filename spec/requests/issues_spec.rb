@@ -132,15 +132,32 @@ describe "Issues" do
     end
   end
 
-  context "index" do
-    let!(:issue) { FactoryGirl.create(:issue) }
+  describe "index" do
+    context "as a public user" do
+      let!(:issues) { FactoryGirl.create_list(:issue, 3) }
 
-    before do
-      visit issues_path
-    end
+      it "should have the issue titles" do
+        visit issues_path
+        issues.each do |issue|
+          page.should have_content(issue.title)
+        end
+      end
 
-    it "should mention the issue title" do
-      page.should have_content(issue.title)
+      it "should have the issue descriptions" do
+        visit issues_path
+        issues.each do |issue|
+          page.should have_content(issue.description)
+        end
+      end
+
+      it "should list issues by most recent first" do
+        visit issues_path
+        issues.reverse.each_with_index do |issue, i|
+          within("ul.issue-list > li:nth-of-type(#{i + 1})") do
+            page.should have_content(issue.title)
+          end
+        end
+      end
     end
   end
 
