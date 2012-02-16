@@ -8,6 +8,7 @@ class MessageThreadsController < ApplicationController
 
   def show
     load_thread
+    set_page_title @thread.title
     @issue = IssueDecorator.decorate(@thread.issue) if @thread.issue
     @messages = @thread.messages.all
     @new_message = @thread.messages.build

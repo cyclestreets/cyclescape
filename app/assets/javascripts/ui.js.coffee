@@ -32,27 +32,43 @@ jQuery ->
   $(":input.date").dateinput
     format: "dddd, dd mmmm yyyy"
 
-  # When a select box is changed search for other selects that
-  # are linked via the autoset and autoset-param data attributes
-  # and update them with the new value.
-  $(document).on "change", "select", ->
-    source_select = $ this
-    $("select[data-autoset='##{this.id}']").each ->
-      target_select = $ this
-      param = target_select.data("autoset-param")
-      new_value = source_select.find("option:selected").data(param)
-      target_select.val(new_value)
+  # Automatic setting of values and visibility from select drop-downs
+  AutoSet = {
+    selector: "select"
 
-  # When a select box is changed find any dependent elements and
-  # hide or show based on whether the new value is blank or not.
-  $(document).on "change", "select", ->
-    source_select = $ this
-    $("*[data-dependent='##{this.id}']").each ->
-      target = $ this
-      if source_select.val() != ""
-        target.show()
-      else
-        target.hide()
+    trigger_all: (source_select) ->
+      this.update_value(source_select)
+      this.update_visibility(source_select)
+
+    # When a select box is changed search for other selects that
+    # are linked via the autoset and autoset-param data attributes
+    # and update them with the new value.
+    update_value: (source_select) ->
+      console.log "source_select", source_select
+      $("select[data-autoset='##{source_select.attr("id")}']").each ->
+        target_select = $ this
+        param = target_select.data("autoset-param")
+        new_value = source_select.find("option:selected").data(param)
+        target_select.val(new_value)
+
+    # When a select box is changed find any dependent elements and
+    # hide or show based on whether the new value is blank or not.
+    update_visibility: (source_select) ->
+      console.log "source_select", source_select
+      $("*[data-dependent='##{source_select.attr("id")}']").each ->
+        target = $ this
+        if source_select.val() != ""
+          target.show()
+        else
+          target.hide()
+  }
+
+  $(document).on "change", AutoSet.selector, ->
+    AutoSet.trigger_all($(this))
+
+  $(document).on "ajaxSuccess", (e) ->
+    $(AutoSet.selector).each ->
+      AutoSet.trigger_all($(this))
 
   # Modal overlay links
   $("a[rel='#overlay']")

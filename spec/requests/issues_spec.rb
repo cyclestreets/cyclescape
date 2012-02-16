@@ -57,6 +57,12 @@ describe "Issues" do
         page.should have_content(issue.description)
       end
 
+      it "should set the page title" do
+        within "title" do
+          page.should have_content(issue.title)
+        end
+      end
+
       it "should show the location"
 
       it "should show the photo" do
@@ -80,6 +86,25 @@ describe "Issues" do
         page.should have_link("Tweet")
         find_link("Tweet")["data-via"].should eql("cyclescape")
         find_link("Tweet")["data-text"].should eql(issue.title)
+      end
+    end
+
+    context "with threads" do
+      context "as a public user" do
+        let!(:issue) { FactoryGirl.create(:issue) }
+        let(:other_group) { FactoryGirl.create(:group) }
+        let!(:public_thread) { FactoryGirl.create(:message_thread, issue: issue) }
+        let!(:private_thread) { FactoryGirl.create(:message_thread, :private, group: other_group, issue: issue) }
+
+        it "should link to the public thread" do
+          visit issue_path(issue)
+          page.should have_link(public_thread.title, href: thread_path(public_thread))
+        end
+
+        it "should censor the private thread title" do
+          visit issue_path(issue)
+          page.should have_content("[Private thread]")
+        end
       end
     end
 
@@ -132,15 +157,32 @@ describe "Issues" do
     end
   end
 
-  context "index" do
-    let!(:issue) { FactoryGirl.create(:issue) }
+  describe "index" do
+    context "as a public user" do
+      let!(:issues) { FactoryGirl.create_list(:issue, 3) }
 
-    before do
-      visit issues_path
-    end
+      it "should have the issue titles" do
+        visit issues_path
+        issues.each do |issue|
+          page.should have_content(issue.title)
+        end
+      end
 
-    it "should mention the issue title" do
-      page.should have_content(issue.title)
+      it "should have the issue descriptions" do
+        visit issues_path
+        issues.each do |issue|
+          page.should have_content(issue.description)
+        end
+      end
+
+      it "should list issues by most recent first" do
+        visit issues_path
+        issues.reverse.each_with_index do |issue, i|
+          within("ul.issue-list > li:nth-of-type(#{i + 1})") do
+            page.should have_content(issue.title)
+          end
+        end
+      end
     end
   end
 
