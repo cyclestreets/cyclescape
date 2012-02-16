@@ -56,6 +56,12 @@ describe "Message threads" do
       it "should not show a link to edit tags" do
         page.should_not have_content(I18n.t(".shared.tags.panel.edit_tags"))
       end
+
+      it "should set the page title" do
+        within "title" do
+          page.should have_content(@thread.title)
+        end
+      end
     end
 
     context "deleted issue" do
