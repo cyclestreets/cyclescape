@@ -17,6 +17,14 @@ class ThreadListDecorator < ApplicationDecorator
     "#{h.time_ago_in_words(thread.latest_message.created_at)} ago"
   end
 
+  def title
+    if h.permitted_to? :show, thread
+      thread.title
+    else
+      I18n.t("decorators.thread_list.private_thread_title")
+    end
+  end
+
   def issue_title
     thread.issue.title
   end
