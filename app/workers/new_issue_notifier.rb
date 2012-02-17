@@ -21,13 +21,21 @@ class NewIssueNotifier
     # Expand radius of issue location
     buffered_location = issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
-    # Retrieve user and category IDs from user locations that intersect with the issue
+    # Retrieve user locations that intersect with the issue
     # and where the user has the notification preference on
-    locations = UserLocation.intersects(buffered_location).select(["user_locations.user_id AS user_id", :category_id]).
+    locations = UserLocation.intersects(buffered_location).
         joins(:user => :prefs).
-        where(user_prefs: {notify_new_user_locations_issue: true})
+        where(user_prefs: {notify_new_user_locations_issue: true}).
+        all
 
-    locations.each do |loc|
+    # Filter the returned locations to ensure only one location is returned per user,
+    # and that it is the smallest (i.e. most relevant) location. Refactoring this into
+    # the Arel query above is left as an exercise for the reader.
+    filtered = locations.group_by(&:user_id).map do |user_id, locs|
+      locs.sort_by {|loc| loc.location.buffer(0.0001).area }.first
+    end
+
+    filtered.each do |loc|
       # Symbol keys are converted to strings by Resque
       opts = {"user_id" => loc.user_id, "category_id" => loc.category_id, "issue_id" => issue.id}
       Resque.enqueue(NewIssueNotifier, :notify_new_user_location_issue, opts)
