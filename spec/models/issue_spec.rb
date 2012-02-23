@@ -225,7 +225,7 @@ describe Issue do
 
     it "should allow votes to be cleared" do
       brian.vote_for(subject)
-      brian.clear_votes(subject)
+      brian.unvote_for(subject)
       subject.votes_count.should eql(0)
       brian.voted_for?(subject).should be_false
     end
