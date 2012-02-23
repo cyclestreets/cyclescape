@@ -292,7 +292,7 @@ DEPENDENCIES
   spork (~> 0.9.0.rc)
   state_machine
   thin
-  thumbs_up
+  thumbs_up (~> 0.4)
   tweet-button
   uglifier
   whenever
