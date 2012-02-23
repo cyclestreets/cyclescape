@@ -265,6 +265,7 @@
       public: "Public"
       sign_in: "sign in"
       sign_in_to_discuss_html: "You can %{sign_in_link} to start the discussion."
+      sign_in_to_vote_html: "Please %{sign_in_link} to vote."
       threads: "Threads"
       vote_clear: "Clear Vote"
       vote_down: "Vote Down"
