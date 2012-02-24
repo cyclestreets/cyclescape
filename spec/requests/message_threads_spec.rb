@@ -98,17 +98,23 @@ describe "Message threads" do
     context "index" do
       before do
         threads
-        visit threads_path
       end
 
       it "should list all public message threads" do
+        visit threads_path
         threads.each do |thread|
           page.should have_content(thread.title)
         end
       end
 
-      it "should list threads the user has created"
-      it "should list all threads the user has been invited to"
+      it "should indicate which threads I follow" do
+        first = threads.first
+        first.add_subscriber(current_user)
+        visit threads_path
+        within("li[data-thread-id='#{first.id}']") do
+          page.should have_content("Following")
+        end
+      end
     end
 
     context "show" do
