@@ -64,6 +64,11 @@ shared_examples "a taggable model" do
         subject.tags_string = "one one one"
         subject.should have(1).tags
       end
+
+      it "should ignore invalid chars" do
+        subject.tags_string = "one = & two"
+        subject.should have(2).tags
+      end
     end
   end
 end
