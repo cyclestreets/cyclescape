@@ -621,8 +621,24 @@ section.new-message {
   }
   .access-denied {
     font-size: 12px;
-    margin-left: 150px;
     margin-bottom: 10px;
+  }
+  #new-text-message {
+    li#message_body_input {
+      label {
+        position: absolute;
+        left: -99999px;
+      }
+      textarea {
+        width: 565px;
+        height: 15em;
+        padding: 4px;
+        line-height: 1.4em;
+      }
+    }
+    fieldset.buttons {
+      padding: 0;
+    }
   }
   ul.styled-tabs {
     padding-left:60px;
