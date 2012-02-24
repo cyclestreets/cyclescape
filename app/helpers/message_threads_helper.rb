@@ -35,4 +35,8 @@ module MessageThreadsHelper
     defaults = {partial: "message_threads/list", collection: threads, as: :thread}
     render defaults.merge(options)
   end
+
+  def cannot_post?
+    not permitted_to? :create, :messages
+  end
 end
