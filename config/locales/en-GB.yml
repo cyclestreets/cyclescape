@@ -3,6 +3,7 @@
 "en-GB":
   application_name: "Cyclescape"
   tags: "Tags"
+  sign_in: "sign in"  # Used for links
   admin:
     groups:
       index:
@@ -265,6 +266,7 @@
       public: "Public"
       sign_in: "sign in"
       sign_in_to_discuss_html: "You can %{sign_in_link} to start the discussion."
+      sign_in_to_vote_html: "Please %{sign_in_link} to vote."
       threads: "Threads"
       vote_clear: "Clear Vote"
       vote_down: "Vote Down"
@@ -298,6 +300,7 @@
     footer:
       application_version_html: "Version ref: %{version}"
       github_page_link_html: "View the source at <a href='https://github.com/cyclestreets/toolkit/'>GitHub</a>"
+      whats_new: "What's New"
     group_selector:
       group_selector: "Group"
       no_group: "No Group"
@@ -461,6 +464,7 @@
       link_message: "Link"
       new_message: "New message"
       photo_message: "Photo"
+      sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
   shared:
     edit_map:
@@ -509,6 +513,7 @@
       no_results_found: "No results found"
       threads: "Threads"
       heading: "Things tagged '%{name}'"
+      unrecognised: "Couldn't find the tag '%{name}'"
   thread_mailer:
     new_deadline_message:
       added: "%{name} added a deadline to the thread"

@@ -519,6 +519,7 @@ ul.issue-list {
 .votes {
   position:relative;
   height:100px;
+  width: 80px;
   a.up,
   a.down {
     @include button-reset;
@@ -552,6 +553,15 @@ ul.issue-list {
       }
       display: block;
     }
+  }
+  .access-denied {
+    position: relative;
+    top: 30px;
+    left: 40px;
+    font-size: 12px;
+    color: $lightgrey;
+    margin: 4px;
+    a { color: $lightgrey; }
   }
 }
 
@@ -608,6 +618,27 @@ section.new-message {
     top:6px;
     color:$lightgrey2;
     font-weight:bold;
+  }
+  .access-denied {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+  #new-text-message {
+    li#message_body_input {
+      label {
+        position: absolute;
+        left: -99999px;
+      }
+      textarea {
+        width: 565px;
+        height: 15em;
+        padding: 4px;
+        line-height: 1.4em;
+      }
+    }
+    fieldset.buttons {
+      padding: 0;
+    }
   }
   ul.styled-tabs {
     padding-left:60px;
@@ -964,8 +995,8 @@ ul.threads {
       background: image-url("map-icons/m-roadworks.png") 10px 10px no-repeat;
     }
     h4, p {
-      width:450px;
-      margin:0;
+      width: 450px;
+      margin: 0;
     }
     p {
       color:$lightgrey2;
@@ -975,10 +1006,21 @@ ul.threads {
       right:0;
       top:20px;
     }
-    .permissions {
+    .status {
       position: absolute;
-      right: 0;
       top: 10px;
+      right: 0;
+      width: 70px;
+      .following {
+        font-size: 11px;
+        font-weight: bold;
+        color: $darkgreen;
+        text-align: right;
+        text-transform: uppercase;
+      }
+      .permissions {
+        width: auto;
+      }
     }
   }
 }
