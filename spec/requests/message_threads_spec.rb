@@ -62,6 +62,14 @@ describe "Message threads" do
           page.should have_content(@thread.title)
         end
       end
+
+      it "should disable the message input" do
+        find("#message_body")[:disabled].should == "disabled"
+      end
+
+      it "should display a notice saying the user must sign in to post" do
+        page.should have_content("Please sign in to post a message")
+      end
     end
 
     context "deleted issue" do
@@ -125,6 +133,10 @@ describe "Message threads" do
           fill_in "Message", with: "Testing autolink http://example.com"
           click_on "Post Message"
           page.should have_link("http://example.com")
+        end
+
+        it "should not be disabled as it is for guests" do
+          page.should have_no_content("Please sign in to post a message")
         end
       end
 

@@ -28,6 +28,8 @@
           = link_to t(".cancel_vote"), vote_clear_issue_path(@issue), method: :put, class: "down selected"
         - else
           = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put, class: "down"
+        - if not permitted_to? :vote_up, :issues
+          .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)
   %section.map
     %h2= t ".location"
     = @issue.map

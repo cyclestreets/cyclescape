@@ -355,6 +355,10 @@ describe "Issues" do
         page.should have_content("You need to sign in or sign up before continuing.")
         issue.votes_count.should eql(1)
       end
+
+      it "should have a message saying they need to sign in" do
+        page.should have_content("Please sign in to vote")
+      end
     end
 
     context "as a site user" do

@@ -38,4 +38,8 @@ module ApplicationHelper
   def ajax_spinner_image
     image_tag "spinner.gif"
   end
+
+  def link_to_sign_in
+    link_to t("sign_in"), new_user_session_path
+  end
 end
