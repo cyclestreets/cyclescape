@@ -298,6 +298,7 @@
     footer:
       application_version_html: "Version ref: %{version}"
       github_page_link_html: "View the source at <a href='https://github.com/cyclestreets/toolkit/'>GitHub</a>"
+      whats_new: "What's New"
     group_selector:
       group_selector: "Group"
       no_group: "No Group"

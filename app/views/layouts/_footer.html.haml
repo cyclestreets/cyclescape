@@ -11,3 +11,5 @@
             %small= t(".github_page_link_html")
           %li
             %small= t(".application_version_html", version: link_to_github_commit)
+          %li
+            %small= link_to t(".whats_new"), page_path("changelog")
