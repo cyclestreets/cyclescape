@@ -98,6 +98,7 @@ Cyclescape::Application.routes.draw do
   resource :home, only: [:show], controller: "home"
 
   match "template/:action", controller: "home"
+  match "pages/:page", controller: "pages", action: "show", as: :page, via: :get
 
   root :to => "home#show"
 
