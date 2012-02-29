@@ -357,6 +357,9 @@
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
       new_user_location_issue:
         subject: "[Cyclescape] New issue reported near your %{category} location"
+    thread_mailer:
+      common:
+        subject: "Re: [Cyclescape] %{title}"
   message_thread:
     subscriptions:
       create:

@@ -32,7 +32,7 @@ class ThreadMailer < ActionMailer::Base
     email_from = ['"', message.created_by.name, '" <notifications@', domain, ">"]
     reply_to = ['"', I18n.t(".application_name"), '" <thread-', @thread.public_token, "@", domain, ">"]
     mail(to: subscriber.name_with_email,
-         subject: "Re: #{@thread.title}",
+         subject: t("mailers.thread_mailer.common.subject", title: @thread.title),
          from: email_from.join,
          reply_to: reply_to.join)
   end
