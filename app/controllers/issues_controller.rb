@@ -2,20 +2,13 @@ class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
   
   def index
-    if current_group
-      if @query
-        issues = Issue.intersects(current_group.profile.location).find_with_index(@query)
-      else
-        issues = Issue.intersects(current_group.profile.location).by_most_recent.paginate(page: params[:page])
-      end
+    # FIXME: this is confusing design, the query param is set by the search action
+    if @query
+      issues = Issue.find_with_index(@query)
     else
       issues = Issue.by_most_recent.paginate(page: params[:page])
-      if @query
-        issues = Issue.find_with_index(@query)
-      else
-        issues = Issue.by_most_recent.paginate(page: params[:page])
-      end
     end
+
     @issues = IssueDecorator.decorate(issues)
     @start_location = index_start_location
   end

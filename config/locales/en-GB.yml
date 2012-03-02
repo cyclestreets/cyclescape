@@ -90,6 +90,9 @@
         title: "Sign in"
         sign_in_button: "Sign in"
   group:
+    issues:
+      index:
+        title: "Issues in the area of %{group_name}"
     members:
       index:
         actions: "Actions"

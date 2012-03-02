@@ -1,3 +1,4 @@
+# Note inheritance
 class Group::MessageThreadsController < MessageThreadsController
   before_filter :load_group
 
