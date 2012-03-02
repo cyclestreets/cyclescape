@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_auth_user
   before_filter :load_group_from_subdomain
   before_filter :set_page_title
+  after_filter :remember_current_group
   layout :set_xhr_layout
   filter_access_to :all
 
@@ -24,11 +25,15 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource_or_scope)
-    dashboard_path(:protocol => 'http')
+    if current_user.remembered_group?
+      dashboard_url(protocol: "http", subdomain: current_user.remembered_group.short_name)
+    else
+      dashboard_url(protocol: "http")
+    end
   end
 
   def after_sign_out_path_for(resource_or_scope)
-    root_url(:protocol => 'http')
+    root_url(protocol: "http")
   end
 
   def no_disabled_users
@@ -76,6 +81,13 @@ class ApplicationController < ActionController::Base
     @current_group
   end
   helper_method :current_group
+
+  def remember_current_group
+    return unless current_user
+    # Poor man's skip_filter to avoid a new Devise-inherited controller
+    return if params[:controller] == "devise/sessions"
+    current_user.update_remembered_group(current_group)
+  end
 
   def permission_denied
     if current_user.nil?
