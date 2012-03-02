@@ -54,12 +54,13 @@ describe "Authentication and authorization" do
       end
       page.current_url.should == group_url
       click_on "Sign out"
+      page.should have_no_content(current_user.name)
       visit root_path
       click_link "Sign in"
       fill_in "Email", with: current_user.email
       fill_in "Password", with: password
       click_button "Sign in"
-      page.current_url.should == group_url
+      page.current_url.should == dashboard_url(subdomain: current_group.short_name)
     end
   end
 

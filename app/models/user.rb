@@ -178,6 +178,10 @@ class User < ActiveRecord::Base
     update_attribute(:remembered_group_id, group ? group.id : nil)
   end
 
+  def remembered_group?
+    remembered_group_id
+  end
+
   protected
 
   def set_default_role
