@@ -129,7 +129,7 @@ class IssuesController < ApplicationController
 
   def index_start_location
     return current_user.start_location if current_user && current_user.start_location != Geo::NOWHERE_IN_PARTICULAR
-    # TODO return subdomain.group.location if subdomain
+    return current_group.start_location if current_group && current_group.start_location
     return @issues.first.location unless @issues.empty?
     return Geo::NOWHERE_IN_PARTICULAR
   end
