@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_auth_user
   before_filter :load_group_from_subdomain
   before_filter :set_page_title
+  before_filter :remember_current_group
   layout :set_xhr_layout
   filter_access_to :all
 
@@ -76,6 +77,11 @@ class ApplicationController < ActionController::Base
     @current_group
   end
   helper_method :current_group
+
+  def remember_current_group
+    return unless current_user
+    current_user.update_remembered_group(current_group)
+  end
 
   def permission_denied
     if current_user.nil?

@@ -47,6 +47,7 @@ class User < ActiveRecord::Base
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
   has_one :profile, class_name: "UserProfile"
   has_one :prefs, class_name: "UserPref"
+  belongs_to :remembered_group, class_name: "Group"
 
   accepts_nested_attributes_for :profile, update_only: true
 
@@ -170,6 +171,11 @@ class User < ActiveRecord::Base
 
   def membership_request_pending_for?(group)
     return self.membership_requests.where(group_id: group.id, status: :pending).count > 0
+  end
+
+  def update_remembered_group(group)
+    # Not using association to avoid validation checks
+    update_attribute(:remembered_group_id, group ? group.id : nil)
   end
 
   protected
