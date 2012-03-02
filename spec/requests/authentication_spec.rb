@@ -44,6 +44,25 @@ describe "Authentication and authorization" do
     end
   end
 
+  describe "remember subdomains when logging in" do
+    include_context "signed in as a group member"
+
+    it "should return me to my last-used subdomain" do
+      group_url = "http://#{current_group.short_name}.example.com/"
+      within ".group-selector" do
+        click_on current_group.name
+      end
+      page.current_url.should == group_url
+      click_on "Sign out"
+      visit root_path
+      click_link "Sign in"
+      fill_in "Email", with: current_user.email
+      fill_in "Password", with: password
+      click_button "Sign in"
+      page.current_url.should == group_url
+    end
+  end
+
   context "when signing up" do
     before do
       @credentials = FactoryGirl.attributes_for(:user)
