@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126155837) do
+ActiveRecord::Schema.define(:version => 20120302170043) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -261,6 +261,7 @@ ActiveRecord::Schema.define(:version => 20120126155837) do
     t.string   "invitation_token",       :limit => 60
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
+    t.integer  "remembered_group_id"
   end
 
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
