@@ -179,7 +179,7 @@ class User < ActiveRecord::Base
   end
 
   def remembered_group?
-    remembered_group_id
+    remembered_group
   end
 
   protected
