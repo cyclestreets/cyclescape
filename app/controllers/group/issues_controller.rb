@@ -3,7 +3,7 @@ class Group::IssuesController < IssuesController
   filter_access_to :all, context: :issues
 
   def index
-    set_page_title t(".title", group_name: current_group.name)
+    set_page_title t("group.issues.index.title", group_name: current_group.name)
 
     # FIXME: bad design, @query is set by search action
     if @query
