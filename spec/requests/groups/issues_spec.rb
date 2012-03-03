@@ -4,7 +4,10 @@ describe "Issues in a group subdomain" do
   include_context "signed in as a group member"
   include_context "with current group subdomain"
 
-  let!(:group_profile) { FactoryGirl.create(:big_group_profile, group: current_group) }
+  before do
+    # Groups create empty profiles automatically, so just update the existing one
+    current_group.profile.update_attributes(FactoryGirl.attributes_for(:big_group_profile))
+  end
 
   context "index" do
     let(:location_inside_group) { "POINT (10 10)" }
