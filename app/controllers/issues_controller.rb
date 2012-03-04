@@ -2,11 +2,13 @@ class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
   
   def index
+    # FIXME: this is confusing design, the query param is set by the search action
     if @query
       issues = Issue.find_with_index(@query)
     else
       issues = Issue.by_most_recent.paginate(page: params[:page])
     end
+
     @issues = IssueDecorator.decorate(issues)
     @start_location = index_start_location
   end
@@ -127,7 +129,7 @@ class IssuesController < ApplicationController
 
   def index_start_location
     return current_user.start_location if current_user && current_user.start_location != Geo::NOWHERE_IN_PARTICULAR
-    # TODO return subdomain.group.location if subdomain
+    return current_group.start_location if current_group && current_group.start_location
     return @issues.first.location unless @issues.empty?
     return Geo::NOWHERE_IN_PARTICULAR
   end

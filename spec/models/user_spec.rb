@@ -52,6 +52,7 @@ describe User do
     it { should have_many(:prioritised_threads) }
     it { should have_one(:profile) }
     it { should have_one(:prefs) }
+    it { should belong_to(:remembered_group) }
   end
 
   describe "to be valid" do
@@ -366,6 +367,24 @@ describe User do
     it "should not be confirmed" do
       user = FactoryGirl.create(:user, :unconfirmed)
       user.should_not be_confirmed
+    end
+  end
+
+  describe "#update_remembered_group" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:group) { FactoryGirl.create(:group) }
+
+    it "should update remembered_group_id given a group" do
+      user.remembered_group_id.should be_nil
+      user.update_remembered_group(group)
+      user.remembered_group_id.should == group.id
+    end
+
+    it "should set the remembered_group_id to nil" do
+      user.update_remembered_group(group)
+      user.remembered_group_id.should == group.id
+      user.update_remembered_group(nil)
+      user.remembered_group_id.should be_nil
     end
   end
 end
