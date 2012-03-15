@@ -135,6 +135,7 @@ describe "Issue threads" do
       let(:notifiee) { FactoryGirl.create(:user) }
       let!(:notifiee_location_big) { FactoryGirl.create(:user_location, user: notifiee, location: issue.location.buffer(1)) }
       let!(:notifiee_location_small) { FactoryGirl.create(:user_location, user: notifiee, location: issue.location.buffer(0.1)) }
+      let!(:user_location) { FactoryGirl.create(:user_location, user: current_user, location: issue.location.buffer(1)) }
 
       before do
         current_user.prefs.update_attribute(:notify_new_group_thread, false)
@@ -183,7 +184,13 @@ describe "Issue threads" do
         email.should be_nil
       end
 
-      it "should not send a notification to the person who started the thread"
+      it "should not send a notification to the person who started the thread" do
+        current_user.prefs.update_attribute(:notify_new_user_locations_issue_thread, true)
+        create_thread
+        email = open_last_email_for(current_user.email)
+        email.should be_nil
+      end
+
       it "should not send a notification to anyone who is auto-subscribed to the thread"
     end
 
