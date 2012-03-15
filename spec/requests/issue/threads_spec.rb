@@ -130,13 +130,14 @@ describe "Issue threads" do
     context "user locations notifications" do
       # when a thread is created on an issue, and that issue overlaps a users locations, send notifications
 
-      include_context "signed in as a site user"
+      include_context "signed in as a group member"
 
       let(:notifiee) { FactoryGirl.create(:user) }
       let!(:notifiee_location_big) { FactoryGirl.create(:user_location, user: notifiee, location: issue.location.buffer(1)) }
       let!(:notifiee_location_small) { FactoryGirl.create(:user_location, user: notifiee, location: issue.location.buffer(0.1)) }
 
       before do
+        current_user.prefs.update_attribute(:notify_new_group_thread, false)
         notifiee.prefs.update_attribute(:notify_new_user_locations_issue_thread, true)
         reset_mailer
       end
@@ -166,7 +167,22 @@ describe "Issue threads" do
         all_emails.count.should eql(email_count + 1)
       end
 
-      it "should not send a notification if they don't have permission to view the thread"
+      it "should not send a notification if they don't have permission to view the thread" do
+        visit issue_path(issue)
+        click_on "Discuss"
+        fill_in "Title", with: "Super secrets"
+        select current_group.name, from: "Owned by"
+        select "Group", from: "Privacy"
+        fill_in "Message", with: "Don't tell anyone, but..."
+
+        email_count = all_emails.count
+        click_on "Create Thread"
+        all_emails.count.should eql(email_count)
+
+        email = open_last_email_for(notifiee.email)
+        email.should be_nil
+      end
+
       it "should not send a notification to the person who started the thread"
       it "should not send a notification to anyone who is auto-subscribed to the thread"
     end

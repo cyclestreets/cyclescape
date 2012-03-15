@@ -50,8 +50,9 @@ class NewThreadNotifier
     end
 
     filtered.each do |loc|
+      # Only send notifications to people who have permission to read the thread
+      next unless Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user }
 
-      # Only send notifications to people who have permission to read the thread!!!!
       # Don't send notifications to people who are already auto-subscribed to the thread!!!!
 
       # Symbol keys are converted to strings by Resque
