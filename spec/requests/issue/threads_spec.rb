@@ -191,7 +191,12 @@ describe "Issue threads" do
         email.should be_nil
       end
 
-      it "should not send a notification to anyone who is auto-subscribed to the thread"
+      it "should not send a notification to anyone who is auto-subscribed to the thread" do
+        notifiee.prefs.update_attribute(:subscribe_new_user_location_issue_thread, true)
+        create_thread
+        email = open_last_email_for(notifiee.email)
+        email.should be_nil
+      end
     end
 
     context "automatic subscriptions" do

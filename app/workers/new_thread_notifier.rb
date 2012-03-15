@@ -50,8 +50,8 @@ class NewThreadNotifier
     end
 
     filtered.each do |loc|
-      # Don't send a notification to the person creating the thread
-      next if loc.user == thread.created_by
+      # Don't send a notification if they are already (auto) subscribed to the thread
+      next if loc.user.subscribed_to_thread?(thread)
 
       # Only send notifications to people who have permission to read the thread
       next unless Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user }
