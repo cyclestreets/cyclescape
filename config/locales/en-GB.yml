@@ -566,6 +566,8 @@
         success: "Location Updated"
     prefs:
       edit:
+        email_notifications: "Email notifications"
+        thread_subscriptions: "Thread subscriptions"
         title: "Manage Your Preferences"
         back: "Return to your profile"
       update:

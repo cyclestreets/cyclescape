@@ -43,8 +43,10 @@
         notify_subscribed_threads: "Send new messages by email on threads I have subscribed to"
         notify_new_user_locations_issue: "Notify me by email when new issues are created near my locations"
         notify_new_group_thread: "Notify me by email when a new group thread is started"
-        notify_new_issue_thread: "Notify me when a new issue in my group's area is reported"
+        notify_new_issue_thread: "Notify me by email when a new issue in my group's area is reported"
         notify_new_user_locations_issue_thread: "Notify me by email when a thread is started on any issues near my locations"
+        subscribe_new_group_thread: "Automatically subscribe me to all new threads across all of my groups"
+        subscribe_new_user_location_issue_thread: "Automatically subscribe me to all new threads on all issues near my locations"
     hints:
       group_membership:
         role: "Select if they are a normal or committee member of the group."

@@ -3,9 +3,13 @@
   %p= link_to t(".back"), user_profile_path
   = semantic_form_for @prefs, url: user_prefs_path do |f|
     = f.inputs do
+      %h2= t ".email_notifications"
       = f.input :notify_subscribed_threads
       = f.input :notify_new_user_locations_issue
       = f.input :notify_new_group_thread
       = f.input :notify_new_issue_thread
       = f.input :notify_new_user_locations_issue_thread
+      %h2= t ".thread_subscriptions"
+      = f.input :subscribe_new_group_thread
+      = f.input :subscribe_new_user_location_issue_thread
     = f.buttons
