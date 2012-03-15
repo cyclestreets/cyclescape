@@ -19,7 +19,7 @@ describe "thread notifications" do
         click_on "Post Message"
       end
       open_email(current_user.email, with_subject: /^Re/)
-      current_email.should have_subject("Re: #{thread.title}")
+      current_email.should have_subject("Re: [Cyclescape] #{thread.title}")
       current_email.should have_body_text(/Notification test/)
       current_email.should have_body_text(current_user.name)
       current_email.should be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")

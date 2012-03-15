@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require "spec_helper"
 
 describe "Issues" do
@@ -32,6 +33,19 @@ describe "Issues" do
         find("#issue_loc_json").set(issue_values[:loc_json])
 
         fill_in "Tag your issue", with: "parking parking"
+
+        click_on "Send Report"
+        within("#content header") do
+          page.should have_content(issue_values[:title])
+        end
+      end
+
+      it "must not barf on nasty tags" do
+        fill_in "Title", with: issue_values[:title]
+        fill_in "Write a description", with: issue_values[:description]
+        find("#issue_loc_json").set(issue_values[:loc_json])
+
+        fill_in "Tag your issue", with: "equals = êquals"
 
         click_on "Send Report"
         within("#content header") do
@@ -354,6 +368,10 @@ describe "Issues" do
         click_on "Vote Up"
         page.should have_content("You need to sign in or sign up before continuing.")
         issue.votes_count.should eql(1)
+      end
+
+      it "should have a message saying they need to sign in" do
+        page.should have_content("Please sign in to vote")
       end
     end
 

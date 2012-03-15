@@ -54,6 +54,10 @@ class Group < ActiveRecord::Base
     short_name
   end
 
+  def start_location
+    profile && profile.location
+  end
+
   protected
 
   def create_default_profile

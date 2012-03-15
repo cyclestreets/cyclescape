@@ -1,4 +1,4 @@
-%li{class: thread.icon_class}
+%li{class: thread.icon_class, data: {'thread-id' => thread.id}}
   .item-content
     %h4= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread), class: "primary-link"
     .meta
@@ -8,4 +8,6 @@
           %br
         = link_to_profile(thread.created_by)
         = t ".created_at", time_ago: time_ago_in_words(thread.created_at)
-  .permissions= thread_type(thread)
+  .status
+    = thread.following_status
+    .permissions= thread_type(thread)

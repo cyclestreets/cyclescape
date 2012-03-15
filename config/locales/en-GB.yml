@@ -3,6 +3,7 @@
 "en-GB":
   application_name: "Cyclescape"
   tags: "Tags"
+  sign_in: "sign in"  # Used for links
   admin:
     groups:
       index:
@@ -89,6 +90,9 @@
         title: "Sign in"
         sign_in_button: "Sign in"
   group:
+    issues:
+      index:
+        title: "Issues in the area of %{group_name}"
     members:
       index:
         actions: "Actions"
@@ -181,7 +185,7 @@
       join_this_group: "Join this group"
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
-      no_threads: This group doesn't have any threads yet
+      no_threads: This group doesn't have any public threads
       our_areas: "Our Areas"
       recent_issues: "Recent Issues in this group's area"
       recent_threads: "Latest Discussions"
@@ -265,6 +269,7 @@
       public: "Public"
       sign_in: "sign in"
       sign_in_to_discuss_html: "You can %{sign_in_link} to start the discussion."
+      sign_in_to_vote_html: "Please %{sign_in_link} to vote."
       threads: "Threads"
       vote_clear: "Clear Vote"
       vote_down: "Vote Down"
@@ -298,6 +303,7 @@
     footer:
       application_version_html: "Version ref: %{version}"
       github_page_link_html: "View the source at <a href='https://github.com/cyclestreets/toolkit/'>GitHub</a>"
+      whats_new: "What's New"
     group_selector:
       group_selector: "Group"
       no_group: "No Group"
@@ -356,6 +362,9 @@
         subject: "[Cyclescape] New issue reported near your %{category} location"
       new_user_location_issue_thread:
         subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
+    thread_mailer:
+      common:
+        subject: "Re: [Cyclescape] %{title}"
   message_thread:
     subscriptions:
       create:
@@ -463,6 +472,7 @@
       link_message: "Link"
       new_message: "New message"
       photo_message: "Photo"
+      sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
   shared:
     edit_map:
@@ -511,6 +521,7 @@
       no_results_found: "No results found"
       threads: "Threads"
       heading: "Things tagged '%{name}'"
+      unrecognised: "Couldn't find the tag '%{name}'"
   thread_mailer:
     new_deadline_message:
       added: "%{name} added a deadline to the thread"

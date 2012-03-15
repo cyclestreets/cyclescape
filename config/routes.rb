@@ -1,30 +1,36 @@
 Cyclescape::Application.routes.draw do
+  # Pretty evil but beats copy pasting
+  def issues_route(opts = {})
+    resources :issues, opts do
+      member do
+        get "geometry"
+        put "vote_up"
+        put "vote_down"
+        put "vote_clear"
+      end
+      collection do
+        get "all_geometries"
+        get "search"
+      end
+      scope module: "issue" do
+        resource :photo, only: [:show]
+        resources :threads, controller: "message_threads"
+        resource :tags, only: [:update]
+      end
+    end
+  end
+
   devise_for :users, :controllers => { :confirmations => "confirmations" }
 
   constraints(SubdomainConstraint) do
     root :to => "groups#show"
     resources :threads, controller: "group/message_threads"
+    issues_route controller: "group/issues"
   end
 
   resource :overview, as: :dashboard, controller: "dashboards"
 
-  resources :issues do
-    member do
-      get "geometry"
-      put "vote_up"
-      put "vote_down"
-      put "vote_clear"
-    end
-    collection do
-      get "all_geometries"
-      get "search"
-    end
-    scope module: "issue" do
-      resource :photo, only: [:show]
-      resources :threads, controller: "message_threads"
-      resource :tags, only: [:update]
-    end
-  end
+  issues_route
 
   namespace :admin do
     resources :groups, :users
@@ -98,6 +104,7 @@ Cyclescape::Application.routes.draw do
   resource :home, only: [:show], controller: "home"
 
   match "template/:action", controller: "home"
+  match "pages/:page", controller: "pages", action: "show", as: :page, via: :get
 
   root :to => "home#show"
 
