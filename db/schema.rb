@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120302170043) do
+ActiveRecord::Schema.define(:version => 20120315185530) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(:version => 20120302170043) do
     t.boolean "notify_subscribed_threads",                :default => true,  :null => false
     t.boolean "notify_new_user_locations_issue",          :default => false, :null => false
     t.boolean "notify_new_group_thread",                  :default => true,  :null => false
-    t.boolean "notify_new_issue_thread",                  :default => false, :null => false
+    t.boolean "notify_new_group_location_issue",          :default => false, :null => false
     t.boolean "notify_new_user_locations_issue_thread",   :default => false, :null => false
     t.boolean "subscribe_new_group_thread",               :default => false, :null => false
     t.boolean "subscribe_new_user_location_issue_thread", :default => false, :null => false
