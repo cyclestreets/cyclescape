@@ -49,4 +49,25 @@ class MessageThreadsController < ApplicationController
   def load_thread
     @thread = MessageThread.find(params[:id])
   end
+
+  def subscribe_users(thread)
+    subscribe_group_users(thread) if thread.group
+    subscribe_issue_users(thread) if thread.issue
+  end
+
+  def subscribe_group_users(thread)
+    members = thread.group.members.active.with_pref(:subscribe_new_group_thread)
+    members.each{ |member| thread.subscriptions.create(user: member) unless member.subscribed_to_thread?(thread) }
+  end
+
+  def subscribe_issue_users(thread)
+    buffered_location = thread.issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
+
+    locations = UserLocation.intersects(buffered_location).
+        joins(:user => :prefs).
+        where(user_prefs: {subscribe_new_user_location_issue_thread: true}).
+        all
+
+    locations.each{ |loc| thread.subscriptions.create(user: loc.user) unless loc.user.subscribed_to_thread?(thread) }
+  end
 end

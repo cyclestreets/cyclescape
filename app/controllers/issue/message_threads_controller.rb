@@ -21,6 +21,7 @@ class Issue::MessageThreadsController < MessageThreadsController
 
     if @thread.save
       @thread.subscriptions.create(user: current_user)
+      subscribe_users(@thread)
       NewThreadNotifier.notify_new_thread(@thread)
       redirect_to issue_thread_path(@issue, @thread)
     else

@@ -186,6 +186,33 @@ describe "Issue threads" do
       it "should not send a notification to the person who started the thread"
       it "should not send a notification to anyone who is auto-subscribed to the thread"
     end
+
+    context "automatic subscriptions" do
+      include_context "signed in as a site user"
+
+      let(:subscriber) { FactoryGirl.create(:user) }
+      let!(:subscriber_location) { FactoryGirl.create(:user_location, user: subscriber, location: issue.location.buffer(1)) }
+
+      def create_thread
+        visit issue_path(issue)
+        click_on "Discuss"
+        fill_in "Title", with: "Lorem & Ipsum"
+        fill_in "Message", with: "Something or other"
+        click_on "Create Thread"
+      end
+
+
+      it "should not automatically subscribe people with overlapping locations" do
+        create_thread
+        subscriber.subscribed_to_thread?(issue.threads.last).should be_false
+      end
+
+      it "should subscribe when the preference is set" do
+        subscriber.prefs.update_attribute(:subscribe_new_user_location_issue_thread, true)
+        create_thread
+        subscriber.subscribed_to_thread?(issue.threads.last).should be_true
+      end
+    end
   end
 
   context "edit" do
