@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126155837) do
+ActiveRecord::Schema.define(:version => 20120223172654) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -219,11 +219,14 @@ ActiveRecord::Schema.define(:version => 20120126155837) do
   end
 
   create_table "user_prefs", :force => true do |t|
-    t.integer "user_id",                                            :null => false
-    t.boolean "notify_subscribed_threads",       :default => true,  :null => false
-    t.boolean "notify_new_user_locations_issue", :default => false, :null => false
-    t.boolean "notify_new_group_thread",         :default => true,  :null => false
-    t.boolean "notify_new_issue_thread",         :default => false, :null => false
+    t.integer "user_id",                                                     :null => false
+    t.boolean "notify_subscribed_threads",                :default => true,  :null => false
+    t.boolean "notify_new_user_locations_issue",          :default => false, :null => false
+    t.boolean "notify_new_group_thread",                  :default => true,  :null => false
+    t.boolean "notify_new_issue_thread",                  :default => false, :null => false
+    t.boolean "notify_new_user_locations_issue_thread",   :default => false, :null => false
+    t.boolean "subscribe_new_group_thread",               :default => false, :null => false
+    t.boolean "subscribe_new_user_location_issue_thread", :default => false, :null => false
   end
 
   add_index "user_prefs", ["user_id"], :name => "index_user_prefs_on_user_id", :unique => true
