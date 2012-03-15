@@ -90,7 +90,7 @@ describe "Issue threads" do
         end
       end
 
-      context "notification" do
+      context "group thread notification" do
         let(:user) { FactoryGirl.create(:user) }
         # Non-conflicting name
         let(:group_membership) { FactoryGirl.create(:group_membership, group: current_group, user: user) }
@@ -125,6 +125,50 @@ describe "Issue threads" do
           end
         end
       end
+    end
+
+    context "user locations notifications" do
+      # when a thread is created on an issue, and that issue overlaps a users locations, send notifications
+
+      include_context "signed in as a site user"
+
+      let(:notifiee) { FactoryGirl.create(:user) }
+      let!(:notifiee_location_big) { FactoryGirl.create(:user_location, user: notifiee, location: issue.location.buffer(1)) }
+      let!(:notifiee_location_small) { FactoryGirl.create(:user_location, user: notifiee, location: issue.location.buffer(0.1)) }
+
+      before do
+        notifiee.prefs.update_attribute(:notify_new_user_locations_issue_thread, true)
+        reset_mailer
+      end
+
+      def create_thread
+        visit issue_path(issue)
+        click_on "Discuss"
+        fill_in "Title", with: "Lorem & Ipsum"
+        fill_in "Message", with: "Something or other"
+        click_on "Create Thread"
+      end
+
+      it "should send a notification" do
+        create_thread
+        email = open_last_email_for(notifiee.email)
+        email.should have_subject("[Cyclescape] New thread started on issue \"#{issue.title}\"")
+        email.should have_body_text(issue.title)
+        email.should have_body_text("Lorem & Ipsum")
+        email.should have_body_text("Something or other")
+        email.should have_body_text(current_user.name)
+        #email.should contain the issue title, thread title and first message contents
+      end
+
+      it "should not send multiple notifications to the same person" do
+        email_count = all_emails.count
+        create_thread
+        all_emails.count.should eql(email_count + 1)
+      end
+
+      it "should not send a notification if they don't have permission to view the thread"
+      it "should not send a notification to the person who started the thread"
+      it "should not send a notification to anyone who is auto-subscribed to the thread"
     end
   end
 
