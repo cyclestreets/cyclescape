@@ -7,7 +7,7 @@ module MailerHelper
   # Thread-specific email address
   # No name in the address to stop it being added to automatic client address books
   def thread_address(thread)
-    "#<thread-#{thread.public_token}@#{domain}>"
+    "<thread-#{thread.public_token}@#{domain}>"
   end
 
   # Notifications are sent from a fixed email but with different names

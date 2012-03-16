@@ -114,7 +114,7 @@ describe "Issue threads" do
           open_last_email_for(notifiee.email)
           current_email.should have_subject("[Cyclescape] \"#{issue.title}\" (#{current_group.name})")
           current_email.should be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
-          current_email.header[:reply_to].addrs.first.to_s.should match(/<thread-.*@cyclescape.org>/)
+          current_email.header[:reply_to].addrs.first.to_s.should match(/thread-.*@cyclescape.org/)
         end
 
         context "with an unconfirmed user" do
