@@ -43,7 +43,7 @@ module MapsHelper
   def display_bbox_map(start_location, geometry_bbox_url, &block)
     map = basic_map do |map, page|
       centre_map(start_location, map, page)
-      add_location_layer("Issues", geometry_bbox_url, OpenLayers::Strategy::BBOX.new(), map, page)
+      add_location_layer("Issues", geometry_bbox_url, OpenLayers::Strategy::BBOX.new(resFactor: 3, ratio: 1.5), map, page)
       page << 'MapPopup.init(map, locationlayer)'
 
       yield(map, page) if block_given?
