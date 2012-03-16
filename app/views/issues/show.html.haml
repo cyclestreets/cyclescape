@@ -47,8 +47,9 @@
       - else
         %ul.sidebar-threadlist
           = render partial: "message_threads/compact", collection: @threads, as: :thread
-  %section.photos
-    = link_to issue_photo_path(@issue), rel: "#overlay" do
-      = @issue.standard_photo_image
+  - if @issue.photo
+    %section.photos
+      = link_to issue_photo_path(@issue), rel: "#overlay" do
+        = @issue.standard_photo_image
   %section.social
     = tweet_button( text: @issue.title )

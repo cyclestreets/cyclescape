@@ -56,7 +56,7 @@ describe "Issues" do
   end
 
   context "show" do
-    let!(:issue) { FactoryGirl.create(:issue, :with_photo) }
+    let!(:issue) { FactoryGirl.create(:issue) }
 
     context "as a public user" do
       before do
@@ -79,15 +79,28 @@ describe "Issues" do
 
       it "should show the location"
 
-      it "should show the photo" do
-        page.should have_selector("img.issue-photo")
+      context "with photo" do
+        let!(:issue) { FactoryGirl.create(:issue, :with_photo) }
+
+        it "should show the photo" do
+          page.should have_selector("img.issue-photo")
+        end
+
+        it "should show the photo with a link to a larger version" do
+          within("section.photos") do
+            find("a").click
+          end
+          find(".photo img")[:alt].should include(issue.title)
+        end
+
+        it "should have the photo link" do
+          # restating the above test, in order to prove the negative version, next.
+          page.source.should include(issue_photo_path(issue))
+        end
       end
 
-      it "should show the photo with a link to a larger version" do
-        within("section.photos") do
-          find("a").click
-        end
-        find(".photo img")[:alt].should include(issue.title)
+      it "should not show you the photo link (without a photo)" do
+        page.source.should_not include(issue_photo_path(issue))
       end
 
       it "should not show you an edit tags link" do
