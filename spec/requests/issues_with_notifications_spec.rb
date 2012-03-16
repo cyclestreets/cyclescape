@@ -23,10 +23,7 @@ describe "Issue notifications" do
       end
 
       it "should send a notification" do
-        visit new_issue_path
-        fill_in "Title", with: issue_values[:title]
-        fill_in "Write a description", with: issue_values[:description]
-        find("#issue_loc_json").set(issue_values[:loc_json])
+        fill_in_issue
         click_on "Send Report"
         page.should have_content(issue_values[:title])
         category_name = user_location.category.name.downcase
@@ -37,10 +34,9 @@ describe "Issue notifications" do
       end
 
       it "should not include html entities in the message" do
-        visit new_issue_path
+        fill_in_issue
         fill_in "Title", with: "Test containing A & B"
         fill_in "Write a description", with: "Something & something else"
-        find("#issue_loc_json").set(issue_values[:loc_json])
         click_on "Send Report"
         email = open_last_email_for(user_location.user.email)
         email.should_not have_body_text("&amp;")
@@ -91,7 +87,6 @@ describe "Issue notifications" do
       fill_in "Title", with: "Test"
       fill_in "Write a description", with: "Something & something else"
       find("#issue_loc_json").set(user_location.loc_json)
-
     end
 
     it "should not send multiple emails to the same user" do
