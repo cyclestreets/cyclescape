@@ -76,7 +76,7 @@ class IssuesController < ApplicationController
   def all_geometries
     if params[:bbox]
       bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
-      issues = Issue.intersects(bbox.to_geometry).order("created_at DESC").limit(50)
+      issues = Issue.intersects_not_covered(bbox.to_geometry).order("created_at DESC").limit(50)
     else
       issues = Issue.order("created_at DESC").limit(50)
     end

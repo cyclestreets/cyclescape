@@ -140,6 +140,35 @@ describe Issue do
         lambda { Issue.intersects(geom2).all }.should_not raise_error
       end
     end
+
+    context "different issue locations" do
+      let(:factory) { RGeo::Geos::Factory.new(srid: 4326) }
+      let(:polygon) { 'POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))' }
+      let!(:issue_entirely_surrounding) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0, 0 3, 3 3, 3 0, 0 0))') }
+      let!(:issue_entirely_contained) { FactoryGirl.create(:issue, location: 'POLYGON ((1.2 1.2, 1.2 1.8, 1.8 1.8, 1.8 1.2, 1.2 1.2))') }
+      let!(:issue_not_intersecting) { FactoryGirl.create(:issue, location: 'POLYGON ((10 10, 10 20, 20 20, 20 10, 10 10))' ) }
+      let!(:issue_half_in_half_out) { FactoryGirl.create(:issue, location: 'POLYGON ((0 1.2, 0 1.8, 3 1.8, 3 1.2, 0 1.2))' ) }
+
+      it "should return intersecting issues" do
+        bbox = factory.parse_wkt(polygon)
+        issues = Issue.intersects(bbox).all
+        issues.length.should eql(3)
+        issues.should include(issue_entirely_surrounding)
+        issues.should include(issue_entirely_contained)
+        issues.should include(issue_half_in_half_out)
+        issues.should_not include(issue_not_intersecting)
+      end
+
+      it "should return intersecting but not covering issues" do
+        bbox = factory.parse_wkt(polygon)
+        issues = Issue.intersects_not_covered(bbox).all
+        issues.length.should eql(2)
+        issues.should include(issue_entirely_contained)
+        issues.should include(issue_half_in_half_out)
+        issues.should_not include(issue_entirely_surrounding)
+        issues.should_not include(issue_not_intersecting)
+      end
+    end
   end
 
   describe "find with index (search)" do
