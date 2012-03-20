@@ -103,6 +103,12 @@ describe "Issues" do
         page.source.should_not include(issue_photo_path(issue))
       end
 
+      it "should raise a 404 exception if the photo path is accessed on an issue without a photo" do
+        lambda {
+          visit issue_photo_path(issue)
+        }.should raise_error(ActionController::RoutingError)
+      end
+
       it "should not show you an edit tags link" do
         page.should_not have_content(I18n.t(".shared.tags.panel.edit_tags"))
       end
