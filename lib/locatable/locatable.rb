@@ -12,6 +12,11 @@ module Locatable
       where("st_intersects(location, ?)", [l])
     end
 
+    # define a variant of intersects that doesn't include entirely surrouding polygons
+    def intersects_not_covered(l)
+      intersects(l).where("not st_coveredby(?, location)", [l])
+    end
+
     # This could be improved by actually using the factory from the location column, rather
     # than creating a new one and hardcoding the srid.
     # However, there's a bug in Rgeo::ActiveRecord 0.4.0 that prevents rgeo_factory_for_column from working
