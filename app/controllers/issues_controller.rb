@@ -33,7 +33,7 @@ class IssuesController < ApplicationController
       NewIssueNotifier.new_issue(@issue)
       redirect_to @issue
     else
-      @start_location = index_start_location
+      @start_location = current_user.start_location
       render :new
     end
   end
