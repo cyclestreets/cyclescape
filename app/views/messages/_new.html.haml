@@ -33,8 +33,8 @@
             %span.nub
         %li.doc
           = link_to "#new-document-message" do
-            Attachment
-          %span.nub
+            = t ".document_message"
+            %span.nub
       .panes
         #new-text-message.pane
           - if cannot_post?

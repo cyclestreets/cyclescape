@@ -472,6 +472,7 @@
       censored: "This message has been removed"
     new:
       deadline_message: "Deadline"
+      document_message: "Attachment"
       library_item_message: "Library"
       link_message: "Link"
       new_message: "New message"
