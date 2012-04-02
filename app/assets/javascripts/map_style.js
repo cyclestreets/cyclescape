@@ -2,15 +2,18 @@ MapStyle = {
   displayRules: [new OpenLayers.Rule({
       symbolizer: {"Line" : { strokeWidth: 8,
                               strokeColor: '#333333',
+                              graphicZIndex: 2,
                               strokeOpacity: 0.9 },
                     "Point" : { graphicWidth: 32,
                                 graphicOpacity: 1.0,
                                 graphicYOffset: -32,
+                                graphicZIndex: 3,
                                 externalGraphic: '${thumbnail}' },
                     "Polygon" : { strokeWidth: 2.5,
                                   strokeOpacity: 0.9,
                                   strokeColor: '#333333',
                                   fillOpacity: 0.5,
+                                  graphicZIndex: 1,
                                   fillColor: '#ffffff' }
       },
       elseFilter: true
