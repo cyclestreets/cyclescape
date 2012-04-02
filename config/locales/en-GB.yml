@@ -437,6 +437,12 @@
           zero: "Today!"
           one: "Tomorrow!"
           other: "%{count} days away!"
+    documents:
+      create:
+        failure: "Could not add attachment"
+        success: "Attachment added"
+      show:
+        download: "Download Attachment"
     library_items:
       create:
         failure: "Library item could not be added"
