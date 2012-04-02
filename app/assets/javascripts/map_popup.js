@@ -25,7 +25,7 @@ MapPopup = {
             '<p>created by <a href="' + feature.attributes.created_by_url + '">' + feature.attributes.created_by + '</p>',
           null,
           true,
-          function() { MapPopup.map.getControl('selector').unselectAll(); }
+          function() { MapPopup.map.getControl('selector').unselectAll(); this.destroy(); }
       );
       map.addPopup(feature.popup);
   },
