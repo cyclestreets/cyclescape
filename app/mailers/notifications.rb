@@ -31,4 +31,25 @@ class Notifications < ActionMailer::Base
          subject: t("mailers.notifications.new_user_location_issue.subject",
                     category: category.name.downcase)
   end
+
+  # Send a notification to a user that a thread has started on an issue in their area
+  def new_user_location_issue_thread(thread, user_location)
+    @thread = thread
+    @user_location = user_location
+    @user = user_location.user
+    @message = thread.messages.first
+    raise "Thread does not have an issue" unless @thread.issue
+    mail to: @user.name_with_email,
+         subject: t('.mailers.notifications.new_user_location_issue_thread.subject',
+                   issue_title: @thread.issue.title)
+  end
+
+  def new_group_location_issue(user, group, issue)
+    @user = user
+    @group = group
+    @issue = issue
+    mail to: @user.name_with_email,
+         subject: t('.mailers.notifications.new_group_location_issue.subject',
+                    group_name: @group.name)
+  end
 end

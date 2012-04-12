@@ -28,6 +28,12 @@ describe "Group threads", use: :subdomain do
     context "new thread" do
       let(:thread_attrs) { FactoryGirl.attributes_for(:message_thread) }
 
+      def fill_in_thread
+        fill_in "Title", with: thread_attrs[:title]
+        fill_in "Message", with: "This is between you an me, but..."
+        click_on "Create Thread"
+      end
+
       before do
         visit group_threads_path(current_group)
         click_link "New Group Thread"
@@ -55,12 +61,6 @@ describe "Group threads", use: :subdomain do
       end
 
       context "notifications" do
-        def fill_in_thread
-          fill_in "Title", with: thread_attrs[:title]
-          fill_in "Message", with: "This is between you an me, but..."
-          click_on "Create Thread"
-        end
-
         it "should send a notification to group members" do
           membership = FactoryGirl.create(:group_membership, group: current_group)
           notifiee = membership.user
@@ -91,6 +91,22 @@ describe "Group threads", use: :subdomain do
           notifiee.prefs.update_attribute(:notify_new_group_thread, true)
           fill_in_thread
           open_last_email_for(notifiee.email).should be_nil
+        end
+      end
+
+      context "automatic subscriptions" do
+        let!(:group_membership) { FactoryGirl.create(:group_membership, group: current_group) }
+        let!(:subscriber) { group_membership.user }
+
+        it "should not subscribe people automatically" do
+          fill_in_thread
+          subscriber.subscribed_to_thread?(current_group.threads.last).should be_false
+        end
+
+        it "should subscribe people with the correct preference" do
+          subscriber.prefs.update_attribute(:subscribe_new_group_thread, true)
+          fill_in_thread
+          subscriber.subscribed_to_thread?(current_group.threads.last).should be_true
         end
       end
     end
