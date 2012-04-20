@@ -20,6 +20,7 @@
 #  invitation_token       :string(60)
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
+#  remembered_group_id    :integer
 #
 
 FactoryGirl.define do

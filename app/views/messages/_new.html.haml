@@ -31,10 +31,9 @@
           = link_to "#new-deadline-message" do
             = t ".deadline_message"
             %span.nub
-        -#
-          %li.doc
-            = link_to "#new-attachment-message" do
-              Attachment
+        %li.doc
+          = link_to "#new-document-message" do
+            = t ".document_message"
             %span.nub
       .panes
         #new-text-message.pane
@@ -48,6 +47,7 @@
         = render "message/photos/new"
         = render "message/links/new"
         = render "message/deadlines/new"
+        = render "message/documents/new"
     #from-library.pane
       .scrollable.autoheight
         .panels

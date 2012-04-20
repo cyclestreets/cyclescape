@@ -437,6 +437,12 @@
           zero: "Today!"
           one: "Tomorrow!"
           other: "%{count} days away!"
+    documents:
+      create:
+        failure: "Could not add attachment"
+        success: "Attachment added"
+      show:
+        download: "Download Attachment"
     library_items:
       create:
         failure: "Library item could not be added"
@@ -466,6 +472,7 @@
       censored: "This message has been removed"
     new:
       deadline_message: "Deadline"
+      document_message: "Attachment"
       library_item_message: "Library"
       link_message: "Link"
       new_message: "New message"

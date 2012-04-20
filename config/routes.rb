@@ -64,6 +64,7 @@ Cyclescape::Application.routes.draw do
       resources :links, only: [:create]
       resources :deadlines, only: [:create]
       resources :library_items, only: [:create]
+      resources :documents, only: [:create, :show]
     end
     scope module: :message_thread do
       resources :subscriptions, only: [:create, :destroy]
