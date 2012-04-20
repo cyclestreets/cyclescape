@@ -3,7 +3,8 @@ module MessageThreadsHelper
     "PhotoMessage" => "photos",
     "LinkMessage" => "links",
     "DeadlineMessage" => "deadlines",
-    "LibraryItemMessage" => "library_items"
+    "LibraryItemMessage" => "library_items",
+    "DocumentMessage" => "documents"
   }
 
   def thread_type(thread)

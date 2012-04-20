@@ -61,6 +61,8 @@
       update: "Save"
       deadline_message:
         create: "Add Deadline"
+      document_message:
+        create: "Add Attachment"
       group_membership:
         create: "Invite member"
       issue:

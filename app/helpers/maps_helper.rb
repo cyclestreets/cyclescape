@@ -96,6 +96,7 @@ module MapsHelper
                                                                 protocol: protocol,
                                                                 projection: projection,
                                                                 styleMap: 'MapStyle.displayStyle()'.to_sym,
+                                                                rendererOptions: {yOrdering: true, zIndexing: true},
                                                                 strategies: [strategy]))
     page << map.add_layer(locationlayer)
   end
