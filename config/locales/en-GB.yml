@@ -54,9 +54,11 @@
       add_a_new_issue: "add a new issue"
       add_another_location: "add another location"
       add_some_locations: "add some locations"
+      deadlines: "Deadlines"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
+      no_upcoming_deadline_threads: "You aren't involved in any threads with upcoming deadlines."
       no_involved_threads_html:
         You haven't been involved in any threads yet. You could have a look
         through the %{threads_link} and see if there's anything that you want to
