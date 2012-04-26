@@ -39,6 +39,7 @@ MapCollisions = {
                       })
                   });
     this.layer = l;
+    l.setVisibility(false);
     m.addLayer(l);
     m.addControl(new OpenLayers.Control.SelectFeature(l, {id: 'collSelector', onSelect: MapCollisions.createPopup, onUnselect: MapCollisions.destroyPopup }));
     m.getControl('collSelector').activate();
