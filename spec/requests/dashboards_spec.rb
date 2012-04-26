@@ -104,5 +104,27 @@ describe "User dashboards" do
         end
       end
     end
+
+    context "deadlines" do
+      include_context "signed in as a site user"
+
+      context "no deadlines" do
+        it "should give a warning" do
+          visit dashboard_path
+          page.should have_content(I18n.t(".dashboards.show.no_upcoming_deadline_threads"))
+        end
+      end
+
+      context "with a deadline" do
+        let!(:message) { FactoryGirl.create(:message, created_by: current_user) }
+        let!(:deadline) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: message.thread)) }
+
+        it "should show the deadline" do
+          visit dashboard_path
+          page.should have_content(deadline.title)
+          page.should have_content(I18n.l(deadline.deadline.to_date, format: :long))
+        end
+      end
+    end
   end
 end
