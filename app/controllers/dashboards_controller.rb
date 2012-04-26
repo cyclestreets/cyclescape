@@ -12,5 +12,8 @@ class DashboardsController < ApplicationController
 
     group_threads = ThreadList.recent_from_groups(current_user.groups, 8)
     @group_threads = ThreadListDecorator.decorate(group_threads)
+
+    deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 8)
+    @deadline_threads = ThreadListDecorator.decorate(deadline_threads)
   end
 end
