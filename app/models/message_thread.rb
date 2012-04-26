@@ -132,7 +132,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def upcoming_deadline_messages
-    messages.joins("JOIN deadline_messages dm ON messages.component_id = dm.id").
+    messages.except(:order).joins("JOIN deadline_messages dm ON messages.component_id = dm.id").
       where("messages.component_type = 'DeadlineMessage'").
       where("dm.deadline > now()").
       order("dm.deadline ASC")

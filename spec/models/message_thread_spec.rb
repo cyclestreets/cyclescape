@@ -97,6 +97,33 @@ describe MessageThread do
     end
   end
 
+  describe "upcoming deadlines" do
+    let(:thread) { FactoryGirl.create(:message_thread) }
+    let(:deadline_message_old) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now - 10.days)}
+    let(:deadline_message_soon) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now + 2.days)}
+    let(:deadline_message_later) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now + 100.days)}
+
+    it "should return one thread with upcoming deadlines" do
+      deadline_message_soon
+      deadline_message_later
+      MessageThread.with_upcoming_deadlines.count.should == 1
+    end
+
+    it "should ingnore threads with old deadlines" do
+      deadline_message_old
+      MessageThread.with_upcoming_deadlines.count.should == 0
+    end
+
+    it "should return deadline messages in order" do
+      deadline_message_old
+      deadline_message_later
+      deadline_message_soon
+      messages = thread.upcoming_deadline_messages
+      messages.count.should == 2
+      messages.first.should == deadline_message_soon.message
+    end
+  end
+
   describe ".order_by_latest_message" do
     it "should return threads with most recent messages first" do
       threads = FactoryGirl.create_list(:message_thread, 3, :with_messages)
