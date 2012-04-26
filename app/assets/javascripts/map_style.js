@@ -50,5 +50,17 @@ MapStyle = {
     styleMap.styles["default"].addRules(this.displayRules);
     styleMap.styles["select"].addRules(this.displayRules);
     return styleMap;
+  },
+
+  collisionStyle: function() {
+    var lookup = {
+      fatal: { strokeColor: '#aa0000', fillColor: '#ff0000', pointRadius: 10 },
+      serious: { strokeColor: '#e44500', fillColor: '#ff8814', pointRadius: 8 },
+      slight: { strokeColor: '#a7932f', fillColor: '#fcff00', pointRadius: 6 }
+    }
+    var styleMap = new OpenLayers.StyleMap();
+    styleMap.addUniqueValueRules("default", "severity", lookup);
+    styleMap.addUniqueValueRules("select", "severity", lookup);
+    return styleMap;
   }
 }

@@ -1,3 +1,4 @@
 - m = display_map(issue, geometry_issue_path(issue, :json)) do |map, page|
+  - add_collision_layer(map, page)
   %div#map
 != m.to_html

@@ -26,4 +26,8 @@ class ThreadList
   def self.recent_public
     MessageThread.public.order_by_latest_message
   end
+
+  def self.with_upcoming_deadlines(user, limit)
+    user.involved_threads.with_upcoming_deadlines.limit(limit)
+  end
 end

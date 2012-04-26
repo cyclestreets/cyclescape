@@ -3,6 +3,7 @@
     %ul.tabs.styled-tabs
       %li= link_to t(".my_threads"), "#my-threads"
       %li= link_to t(".issues_nearby"), "#issues-nearby"
+      %li= link_to t(".deadlines"), "#deadlines"
 
     .panes
       #my-threads
@@ -50,3 +51,24 @@
             %p= link_to t(".update_your_locations"), user_locations_path
             %ul.issue-list
               = issues_list @relevant_issues, collapsed: true
+      #deadlines
+        %section.threads
+          - if @deadline_threads.empty?
+            %p= t ".no_upcoming_deadline_threads"
+          - else
+            %table.dashboard-threads
+              %tbody
+                - @deadline_threads.each do |thread|
+                  %tr
+                    %td.title
+                      %h4= link_to thread.title, thread_path(thread)
+                      - if thread.has_issue?
+                        %p= thread.issue_link
+                    %td.activity
+                      %ul.content-icon-list
+                        - thread.upcoming_deadline_messages.each do |message|
+                          %li.cal
+                            %h4= l message.component.deadline.to_date, format: :long
+                            %p= message.component.title
+                    %td.meta
+                      = thread.latest_activity_date
