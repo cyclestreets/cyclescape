@@ -79,7 +79,6 @@ OpenLayers.Format.FlatJSON = OpenLayers.Class(OpenLayers.Format, {
         }
         var res = this.getResultArray(obj);
         if (!res){
-            alert("no results");
             OpenLayers.Console.error("Can't find the results Array : "+ json);
             return;
         }
