@@ -1,0 +1,64 @@
+/**
+ *
+ * Displaying collision information, with popups
+ *
+ */
+
+MapCollisions = {
+  collisions_url: "<%= Geo::COLLISIONS_URL %>",
+  collisions_key: "<%= Geo::COLLISIONS_API_KEY %>",
+  map: null,
+  layer: null,
+
+  init: function(m) {
+    this.map = m;
+    l = new OpenLayers.Layer.Vector("Collisions", {
+                      projection: new OpenLayers.Projection("EPSG:4326"),
+                      strategies: [new OpenLayers.Strategy.BBOX({resFactor: 3, ratio: 1.5})],
+                      protocol: new OpenLayers.Protocol.Script({
+                          url: this.collisions_url,
+                          format: new OpenLayers.Format.FlatJSON({
+                              getResultArray : function(obj){ return obj.collisions.collision},
+                              getLat : function(obj) { return obj.latitude },
+                              getLon : function(obj) { return obj.longitude }
+                          }),
+                          params: {
+                              key: this.collisions_key
+                          },
+                          filterToParams: function(filter, params) {
+                              // serialise BBOX into n/s/e/w url parameters
+                              if (filter.type === OpenLayers.Filter.Spatial.BBOX) {
+                                  params.w = filter.value.toArray()[0];
+                                  params.s = filter.value.toArray()[1];
+                                  params.e = filter.value.toArray()[2];
+                                  params.n = filter.value.toArray()[3];
+                              }
+                              return params;
+                          }
+                      })
+                  });
+    this.layer = l;
+    m.addLayer(l);
+    m.addControl(new OpenLayers.Control.SelectFeature(l, {id: 'collSelector', onSelect: MapCollisions.createPopup, onUnselect: MapCollisions.destroyPopup }));
+    m.getControl('collSelector').activate();
+    m.getControl('collSelector').handlers.feature.stopDown = false; // Allow click-drag on polygons to move the map
+  },
+
+  createPopup: function(feature) {
+      feature.popup = new OpenLayers.Popup.FramedCloud("pop",
+          feature.geometry.getBounds().getCenterLonLat(),
+          null,
+          '<h3><a href="' + feature.attributes.url + '">' + feature.attributes.id + '</a></h3>' +
+            '<p>' + feature.attributes.severity + '</p>',
+          null,
+          true,
+          function() { MapCollisions.map.getControl('collSelector').unselectAll(); this.destroy(); }
+      );
+      map.addPopup(feature.popup);
+  },
+
+  destroyPopup: function(feature) {
+      feature.popup.destroy();
+      feature.popup = null;
+  }
+}
