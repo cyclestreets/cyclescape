@@ -15,6 +15,7 @@ MapCollisions = {
     l = new OpenLayers.Layer.Vector("Collisions", {
                       projection: new OpenLayers.Projection("EPSG:4326"),
                       strategies: [new OpenLayers.Strategy.BBOX({resFactor: 3, ratio: 1.5})],
+                      styleMap: MapStyle.collisionStyle(),
                       protocol: new OpenLayers.Protocol.Script({
                           url: this.collisions_url,
                           format: new OpenLayers.Format.FlatJSON({
