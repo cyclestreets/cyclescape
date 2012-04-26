@@ -56,6 +56,18 @@ class MessageThread < ActiveRecord::Base
     rel.order("latest.created_at DESC")
   end
 
+  def self.with_upcoming_deadlines
+    rel = joins("JOIN (SELECT m.thread_id, MIN(deadline) AS deadline
+                  FROM messages m
+                  JOIN deadline_messages dm ON m.component_id = dm.id
+                  WHERE m.component_type = 'DeadlineMessage'
+                    AND dm.deadline > now()
+                  GROUP BY m.thread_id)
+                AS m2
+                ON m2.thread_id = message_threads.id")
+    rel.order("m2.deadline ASC")
+  end
+
   def add_subscriber(user)
     found = user.thread_subscriptions.to(self)
     if found
@@ -117,6 +129,13 @@ class MessageThread < ActiveRecord::Base
 
   def latest_activity_at
     messages.empty? ? updated_at : messages.last.updated_at
+  end
+
+  def upcoming_deadline_messages
+    messages.joins("JOIN deadline_messages dm ON messages.component_id = dm.id").
+      where("messages.component_type = 'DeadlineMessage'").
+      where("dm.deadline > now()").
+      order("dm.deadline ASC")
   end
 
   def priority_for(user)
