@@ -100,4 +100,8 @@ module MapsHelper
                                                                 strategies: [strategy]))
     page << map.add_layer(locationlayer)
   end
+
+  def add_collision_layer(map, page)
+    page << 'MapCollisions.init(map)'
+  end
 end
