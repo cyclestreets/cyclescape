@@ -532,6 +532,9 @@
   thread_mailer:
     new_deadline_message:
       added: "%{name} added a deadline to the thread"
+    new_document_message:
+      added: "%{name} added an attachment to the thread"
+      view_the_document: "You can view the attachment at the following url:"
     new_library_item_message:
       added: "%{name} added an item from the library to the thread."
     new_link_message:

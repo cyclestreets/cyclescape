@@ -1,0 +1,7 @@
+<%= raw t ".added" , name: @message.created_by.name %>
+
+<%= raw @message.component.title %>
+<%= raw @message.body %>
+<%= t ".view_the_document" %>
+<%= thread_path(@message.thread, only_path: false) + "#message-#{@message.id}" %>
+<%= render partial: "footer" %>
