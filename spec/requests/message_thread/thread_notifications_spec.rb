@@ -79,6 +79,21 @@ describe "thread notifications" do
       pending "Figure out testing the url"
     end
 
+    it "should send and email for a document message" do
+      within("#new-document-message") do
+        attach_file "File", pdf_document_path
+        fill_in "Title", with: "Some more words"
+        click_on "Add Attachment"
+      end
+
+      open_email(current_user.email)
+      current_email.should have_body_text("Some more words")
+      current_email.should have_body_text("added an attachment to the thread")
+      current_email.should have_body_text(I18n.t(".thread_mailer.new_document_message.view_the_document"))
+      # See above
+      pending "Figure out testing the url"
+    end
+
     context "html encoding" do
       it "should not escape text messages" do
         within("#new-text-message") do
