@@ -16,11 +16,15 @@ ul.following-thread {
         text-decoration: none;
         background: $pane2;
       }
-      img.thumb {
+      .thumb {
         float: left;
-        width: 20px;
-        height: 20px;
-        border: 2px solid $white;
+        width: 24px;
+        height: 24px;
+        img {
+          width: 20px;
+          height: 20px;
+          border: 2px solid $white;
+        }
       }
       p {
         margin: 0 0 0 10px;
