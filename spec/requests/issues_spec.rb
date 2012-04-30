@@ -193,6 +193,7 @@ describe "Issues" do
   describe "index" do
     context "as a public user" do
       let!(:issues) { FactoryGirl.create_list(:issue, 3) }
+      let(:voter) { FactoryGirl.create(:user) }
 
       it "should have the issue titles" do
         visit issues_path
@@ -214,6 +215,18 @@ describe "Issues" do
           within("ul.issue-list > li:nth-of-type(#{i + 1})") do
             page.should have_content(issue.title)
           end
+        end
+      end
+
+      it "should show popular upvoted issues" do
+        voter.vote_for(issues[0])
+        voter.vote_against(issues[1])
+
+        visit issues_path
+        within("#popular-pane") do
+          page.should have_content(issues[0].title)
+          page.should_not have_content(issues[1].title)
+          page.should_not have_content(issues[2].title)
         end
       end
     end

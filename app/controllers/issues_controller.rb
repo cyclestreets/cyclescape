@@ -10,6 +10,8 @@ class IssuesController < ApplicationController
     end
 
     @issues = IssueDecorator.decorate(issues)
+    popular_issues = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
+    @popular_issues = IssueDecorator.decorate(popular_issues)
     @start_location = index_start_location
   end
 
