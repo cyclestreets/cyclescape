@@ -5,12 +5,13 @@ class IssuesController < ApplicationController
     # FIXME: this is confusing design, the query param is set by the search action
     if @query
       issues = Issue.find_with_index(@query)
+      popular_issues = Issue.with_query(@query).plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
     else
       issues = Issue.by_most_recent.paginate(page: params[:page])
+      popular_issues = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
     end
 
     @issues = IssueDecorator.decorate(issues)
-    popular_issues = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
     @popular_issues = IssueDecorator.decorate(popular_issues)
     @start_location = index_start_location
   end
