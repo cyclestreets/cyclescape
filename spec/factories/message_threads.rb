@@ -29,6 +29,10 @@ FactoryGirl.define do
       privacy "group"
     end
 
+    trait :committee do
+      privacy "committee"
+    end
+
     trait :belongs_to_issue do
       issue
     end
@@ -47,6 +51,7 @@ FactoryGirl.define do
     factory :group_message_thread, traits: [:belongs_to_group]
     factory :issue_message_thread, traits: [:belongs_to_issue]
     factory :group_private_message_thread, traits: [:belongs_to_group, :private]
+    factory :group_committee_message_thread, traits: [:belongs_to_group, :committee]
     factory :message_thread_with_messages, traits: [:with_messages]
   end
 end
