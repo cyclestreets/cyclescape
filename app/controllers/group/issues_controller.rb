@@ -8,11 +8,14 @@ class Group::IssuesController < IssuesController
     # FIXME: bad design, @query is set by search action
     if @query
       issues = Issue.intersects(current_group.profile.location).find_with_index(@query)
+      popular_issues = Issue.intersects(current_group.profile.location).with_query(@query).plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
     else
       issues = Issue.intersects(current_group.profile.location).by_most_recent.paginate(page: params[:page])
+      popular_issues = Issue.intersects(current_group.profile.location).plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
     end
 
     @issues = IssueDecorator.decorate(issues)
+    @popular_issues = IssueDecorator.decorate(popular_issues)
     @start_location = index_start_location
   end
 end

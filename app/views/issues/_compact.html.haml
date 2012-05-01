@@ -1,7 +1,8 @@
 %li
   %article.issue
     .map
-      - m = tiny_display_map(issue, geometry_issue_path(issue, :json), "list") do |map, page, dom_id|
+      - prefix = "list" unless local_assigns.has_key? :prefix
+      - m = tiny_display_map(issue, geometry_issue_path(issue, :json), prefix) do |map, page, dom_id|
         %div{id: dom_id, class: "tinymap"}
       != m.to_html
     .issue-content
