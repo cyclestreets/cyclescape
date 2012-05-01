@@ -384,11 +384,13 @@
         failure: "Couldn't update your priority"
   message_threads:
     compact:
+      group_committee: "Group Committee"
       group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
       created_at: "%{time_ago} ago"
     list:
+      group_committee: "Group Committee"
       group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
@@ -417,6 +419,7 @@
       back: "Back"
       edit: "Edit this thread"
       destroy: "Delete this thread"
+      private_to_committee_message: "Private: Only committee members of %{group} can view and post messages to this thread."
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
     subscribe_panel:
