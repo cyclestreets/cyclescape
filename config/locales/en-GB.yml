@@ -246,6 +246,7 @@
       title: "Issues"
       list_tab: "List"
       map_tab: "Map"
+      popular_tab: "Popular"
       search_issues: "Search issues"
       search_button: "Go"
       clear: "Clear"

@@ -7,6 +7,7 @@
     %ul.tabs.styled-tabs
       %li= link_to t(".list_tab"), "#", class: "list"
       %li= link_to t(".map_tab"), "#", class: "map-pin"
+      %li= link_to t(".popular_tab"), "#", class: "list"
     .panes
       .pane
         .search
@@ -25,3 +26,10 @@
           = will_paginate @issues
       .pane
         = render "all_map"
+      .pane#popular-pane
+        %ul.issue-list
+          - if @popular_issues.empty?
+            = t(".no_popular_issues")
+          = render partial: "compact", collection: @popular_issues, as: :issue, locals: {prefix: "popular"}
+        - if @popular_issues.respond_to?(:total_pages)
+          = will_paginate @popular_issues
