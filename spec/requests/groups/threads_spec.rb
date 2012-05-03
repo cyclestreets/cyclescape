@@ -50,6 +50,14 @@ describe "Group threads", use: :subdomain do
         page.should have_content("Private: Only members of #{current_group.name}")
       end
 
+      it "should create a new committee thread" do
+        fill_in "Title", with: thread_attrs[:title]
+        fill_in "Message", with: "This is between you an me, but..."
+        select "Committee", from: "Privacy"
+        click_on "Create Thread"
+        page.should have_content("Private: Only committee members of #{current_group.name}")
+      end
+
       it "should default to a public group thread" do
         page.should have_select("Privacy", with: "Public")
       end
@@ -137,6 +145,22 @@ describe "Group threads", use: :subdomain do
         click_on "Save"
         page.should have_content "Thread updated"
         page.should have_content "New, better, thread title"
+      end
+    end
+  end
+
+  context "as a group member" do
+    include_context "signed in as a group member"
+
+    context "new threads" do
+      before do
+        visit group_threads_path(current_group)
+        click_link "New Group Thread"
+      end
+
+      it "should not let you create committee threads" do
+        page.should have_select("Privacy", options: ['Group'])
+        page.should_not have_select("Privacy", options: ['Committee'])
       end
     end
   end
