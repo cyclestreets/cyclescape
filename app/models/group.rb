@@ -58,6 +58,14 @@ class Group < ActiveRecord::Base
     profile && profile.location
   end
 
+  def thread_privacy_options_for(user)
+    if committee_members.include?(user)
+      MessageThread::ALLOWED_PRIVACY
+    else
+      MessageThread::ALLOWED_PRIVACY - ["committee"]
+    end
+  end
+
   protected
 
   def create_default_profile
