@@ -61,7 +61,19 @@ authorization do
       to :show
       if_attribute private_to_group?: is { true }, group: is_in { user.groups }
     end
-    has_permission_on :message_thread_subscriptions, to: [:create, :destroy]
+    has_permission_on :message_thread_subscriptions, to: :destroy
+    has_permission_on :message_thread_subscriptions do
+      to [:create]
+      if_attribute public?: is { true }
+    end
+    has_permission_on :message_thread_subscriptions do
+      to [:create]
+      if_attribute private_to_group?: is { true }, group: is_in { user.groups }
+    end
+    has_permission_on :message_thread_subscriptions do
+      to [:create]
+      if_attribute private_to_committee?: is { true }, group_committee_members: contains { user }
+    end
     has_permission_on :message_thread_tags, to: :update
     has_permission_on :message_thread_user_priorities, to: [:create, :update]
     has_permission_on :message_photos, :message_links, :message_deadlines, :message_library_items, :message_documents, to: :create

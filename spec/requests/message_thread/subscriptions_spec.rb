@@ -108,4 +108,56 @@ describe "Thread subscriptions" do
       end
     end
   end
+
+  context "to private threads" do
+    # These checks involve detecting faked post data, where someone is trying to
+    # subscribe to threads that they don't have access to view.
+
+    def attempt_subscription(t)
+      page.driver.post thread_subscriptions_path(t)
+      t.reload
+    end
+
+    context "as a site user" do
+      include_context "signed in as a site user"
+
+      let(:public_thread) { FactoryGirl.create(:thread) }
+      let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
+      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread) }
+
+      # First, prove the positive case. Use this as a template.
+      it "should let you subscribe to a public thread" do
+        thread.subscribers.should_not include(current_user)
+        attempt_subscription(thread)
+        thread.subscribers.should include(current_user)
+      end
+
+      it "should not let a site member subscribe to a private thread" do
+        attempt_subscription(private_thread)
+        private_thread.subscribers.should_not include(current_user)
+      end
+
+      it "should not let a site member subscribe to a committee thread" do
+        attempt_subscription(committee_thread)
+        committee_thread.subscribers.should_not include(current_user)
+      end
+    end
+
+    context "as a group member" do
+      include_context "signed in as a group member"
+
+      let(:private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
+      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+
+      it "should let a group member subscribe to a private thread" do
+        attempt_subscription(private_thread)
+        private_thread.subscribers.should include(current_user)
+      end
+
+      it "should not let a group member subscribe to a committee thread" do
+        attempt_subscription(committee_thread)
+        committee_thread.subscribers.should_not include(current_user)
+      end
+    end
+  end
 end
