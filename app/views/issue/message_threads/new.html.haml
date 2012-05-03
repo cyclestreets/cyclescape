@@ -6,12 +6,12 @@
       = f.input :title
       - if not @available_groups.empty?
         = f.input :group,
-            collection: [[t(".everyone"), nil]] + @available_groups.map {|g| [g.name, g.id, "data-privacy" => g.default_thread_privacy] },
+            collection: [[t(".everyone"), nil, "data-privacy-options" => "{}"]] + @available_groups.map {|g| [g.name, g.id, "data-privacy" => g.default_thread_privacy, "data-privacy-options" => Hash[g.thread_privacy_options_for(current_user).map { |n| [n, n.capitalize]}].to_json] },
             include_blank: false
         = f.input :privacy,
             as: :select,
             collection: MessageThread::ALLOWED_PRIVACY.map {|n| [n.capitalize, n] },
-            input_html: {"data-autoset" => "#thread_group_id", "data-autoset-param" => "privacy"},
+            input_html: {"data-autoset" => "#thread_group_id", "data-autoset-param" => "privacy", "data-auto-options" => "#thread_group_id", "data-auto-options-param" => "privacy-options"},
             wrapper_html: {class: "hide", "data-dependent" => "#thread_group_id"}
       = semantic_fields_for @message do |f2|
         = f2.semantic_errors
