@@ -100,6 +100,31 @@ describe "Group threads", use: :subdomain do
           fill_in_thread
           open_last_email_for(notifiee.email).should be_nil
         end
+
+        context "on committee-only threads" do
+          it "should not send a notification to a normal member" do
+            membership = FactoryGirl.create(:group_membership, group: current_group)
+            notifiee = membership.user
+            notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+            fill_in "Title", with: thread_attrs[:title]
+            fill_in "Message", with: "Something"
+            select "Committee", from: "Privacy"
+            click_on "Create Thread"
+            open_last_email_for(notifiee.email).should be_nil
+          end
+
+          it "should send a notification to a committee member" do
+            membership = FactoryGirl.create(:group_membership, group: current_group, role: "committee")
+            notifiee = membership.user
+            notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+            fill_in "Title", with: thread_attrs[:title]
+            fill_in "Message", with: "Something"
+            select "Committee", from: "Privacy"
+            click_on "Create Thread"
+            email = open_last_email_for(notifiee.email)
+            email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
+          end
+        end
       end
     end
 
