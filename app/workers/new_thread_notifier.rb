@@ -18,7 +18,11 @@ class NewThreadNotifier
 
   def self.notify_new_group_thread(thread_id)
     thread = MessageThread.find(thread_id)
-    members = thread.group.members.active.with_pref(:notify_new_group_thread)
+    if thread.private_to_committee?
+      members = thread.group.committee_members.active.with_pref(:notify_new_group_thread)
+    else
+      members = thread.group.members.active.with_pref(:notify_new_group_thread)
+    end
     members.each do |member|
       Resque.enqueue(NewThreadNotifier, :send_new_group_thread_notification, thread.id, member.id)
     end

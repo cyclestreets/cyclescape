@@ -313,10 +313,16 @@ describe "Message threads" do
 
   context "privacy" do
     let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
+    let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread) }
 
     context "as a guest" do
       it "should not show the private thread" do
         visit thread_path(private_thread)
+        page.should have_content("You need to sign in or sign up before continuing.")
+      end
+
+      it "should not show the committee thread" do
+        visit thread_path(committee_thread)
         page.should have_content("You need to sign in or sign up before continuing.")
       end
     end
@@ -328,16 +334,44 @@ describe "Message threads" do
         visit thread_path(private_thread)
         page.should have_content("You are not authorised to access that page.")
       end
+
+      it "should not show the committee thread" do
+        visit thread_path(committee_thread)
+        page.should have_content("You are not authorised to access that page.")
+      end
     end
 
     context "as a member of the correct group" do
       include_context "signed in as a group member"
 
       let(:group_private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
+      let(:group_committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
 
       it "should show the private thread" do
         visit thread_path(group_private_thread)
         page.should have_content(group_private_thread.title)
+      end
+
+      it "should not show the committee thread" do
+        visit thread_path(group_committee_thread)
+        page.should have_content("You are not authorised to access that page.")
+      end
+    end
+
+    context "as a committee member of the correct group" do
+      include_context "signed in as a committee member"
+
+      let(:group_private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
+      let(:group_committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+
+      it "should show the private thread" do
+        visit thread_path(group_private_thread)
+        page.should have_content(group_private_thread.title)
+      end
+
+      it "should show the committee thread" do
+        visit thread_path(group_committee_thread)
+        page.should have_content(group_committee_thread.title)
       end
     end
 
@@ -347,6 +381,9 @@ describe "Message threads" do
       it "should let admins see any thread" do
         visit thread_path(private_thread)
         page.should have_content(private_thread.title)
+
+        visit thread_path(committee_thread)
+        page.should have_content(committee_thread.title)
       end
     end
   end

@@ -50,6 +50,14 @@ describe "Group threads", use: :subdomain do
         page.should have_content("Private: Only members of #{current_group.name}")
       end
 
+      it "should create a new committee thread" do
+        fill_in "Title", with: thread_attrs[:title]
+        fill_in "Message", with: "This is between you an me, but..."
+        select "Committee", from: "Privacy"
+        click_on "Create Thread"
+        page.should have_content("Private: Only committee members of #{current_group.name}")
+      end
+
       it "should default to a public group thread" do
         page.should have_select("Privacy", with: "Public")
       end
@@ -91,6 +99,31 @@ describe "Group threads", use: :subdomain do
           notifiee.prefs.update_attribute(:notify_new_group_thread, true)
           fill_in_thread
           open_last_email_for(notifiee.email).should be_nil
+        end
+
+        context "on committee-only threads" do
+          it "should not send a notification to a normal member" do
+            membership = FactoryGirl.create(:group_membership, group: current_group)
+            notifiee = membership.user
+            notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+            fill_in "Title", with: thread_attrs[:title]
+            fill_in "Message", with: "Something"
+            select "Committee", from: "Privacy"
+            click_on "Create Thread"
+            open_last_email_for(notifiee.email).should be_nil
+          end
+
+          it "should send a notification to a committee member" do
+            membership = FactoryGirl.create(:group_membership, group: current_group, role: "committee")
+            notifiee = membership.user
+            notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+            fill_in "Title", with: thread_attrs[:title]
+            fill_in "Message", with: "Something"
+            select "Committee", from: "Privacy"
+            click_on "Create Thread"
+            email = open_last_email_for(notifiee.email)
+            email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
+          end
         end
       end
     end
@@ -137,6 +170,22 @@ describe "Group threads", use: :subdomain do
         click_on "Save"
         page.should have_content "Thread updated"
         page.should have_content "New, better, thread title"
+      end
+    end
+  end
+
+  context "as a group member" do
+    include_context "signed in as a group member"
+
+    context "new threads" do
+      before do
+        visit group_threads_path(current_group)
+        click_link "New Group Thread"
+      end
+
+      it "should not let you create committee threads" do
+        page.should have_select("Privacy", options: ['Group'])
+        page.should_not have_select("Privacy", options: ['Committee'])
       end
     end
   end

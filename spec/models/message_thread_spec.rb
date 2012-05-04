@@ -34,6 +34,7 @@ describe MessageThread do
     it { should validate_presence_of(:created_by_id) }
     it { should allow_value("public").for(:privacy) }
     it { should allow_value("group").for(:privacy) }
+    it { should allow_value("committee").for(:privacy) }
     it { should_not allow_value("other").for(:privacy) }
   end
 
@@ -45,6 +46,17 @@ describe MessageThread do
       subject.group = FactoryGirl.create(:group)
       subject.privacy = "group"
       subject.should be_private_to_group
+      subject.should_not be_private_to_committee
+      subject.should_not be_public
+    end
+
+    it "should become private to committee" do
+      subject.should_not be_private_to_committee
+      subject.group = FactoryGirl.create(:group)
+      subject.privacy = "committee"
+      subject.should be_private_to_committee
+      subject.should_not be_private_to_group
+      subject.should_not be_public
     end
 
     it "should be public" do

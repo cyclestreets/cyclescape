@@ -110,5 +110,16 @@ describe Group do
         subject.has_member?(new_user).should be_false
       end
     end
+
+    describe "thread privacy options" do
+      it "should include committee for brian" do
+        subject.thread_privacy_options_for(brian).should include("committee")
+      end
+
+      it "should not include committee for another user" do
+        new_user = FactoryGirl.create(:user)
+        subject.thread_privacy_options_for(new_user).should_not include("committee")
+      end
+    end
   end
 end
