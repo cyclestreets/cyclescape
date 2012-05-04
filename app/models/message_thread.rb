@@ -19,7 +19,7 @@ class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
-  ALLOWED_PRIVACY = %w(public group)
+  ALLOWED_PRIVACY = %w(public group committee)
 
   belongs_to :created_by, class_name: "User"
   belongs_to :group
@@ -101,6 +101,10 @@ class MessageThread < ActiveRecord::Base
 
   def email_subscribers
     subscribers.joins(:prefs).where(user_prefs: {:notify_subscribed_threads => true})
+  end
+
+  def private_to_committee?
+    group_id && privacy == "committee"
   end
 
   def private_to_group?

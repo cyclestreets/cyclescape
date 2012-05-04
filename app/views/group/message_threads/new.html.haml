@@ -5,7 +5,7 @@
     = f.semantic_errors
     = f.inputs do
       = f.input :title
-      = f.input :privacy, as: :select, collection: MessageThread::ALLOWED_PRIVACY.map {|n| [n.capitalize, n] }
+      = f.input :privacy, as: :select, collection: @thread.group.thread_privacy_options_for(current_user).map {|n| [n.capitalize, n] }
       = semantic_fields_for @message do |f2|
         = f2.semantic_errors
         = f2.inputs :body

@@ -37,8 +37,20 @@ jQuery ->
     selector: "select"
 
     trigger_all: (source_select) ->
+      this.update_options(source_select)
       this.update_value(source_select)
       this.update_visibility(source_select)
+
+    # When a select box is changed search for other selects that
+    # are linked via the auto-options and auto-options-param data
+    # attributes and update the target select box with the new options.
+    update_options: (source_select) ->
+      console.log "source_select", source_select
+      $("select[data-auto-options='##{source_select.attr("id")}']").each ->
+        target_select = $ this
+        param = target_select.data("auto-options-param")
+        new_options = source_select.find("option:selected").data(param)
+        target_select.empty().addOption(new_options, false)
 
     # When a select box is changed search for other selects that
     # are linked via the autoset and autoset-param data attributes

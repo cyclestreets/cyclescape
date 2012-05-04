@@ -5,7 +5,9 @@
     %h1= @thread.title
     .meta
       .privacy
-        - if @thread.private_to_group?
+        - if @thread.private_to_committee?
+          %p= t ".private_to_committee_message", group: @thread.group.name
+        - elsif @thread.private_to_group?
           %p= t ".private_to_group_message", group: @thread.group.name
         - else
           %p= t ".public_message"

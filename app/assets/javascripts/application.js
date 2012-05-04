@@ -7,6 +7,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.cookie
+//= require jquery.selectboxes
 //= require jquery.tools.min
 //= require knockout
 //= require superbly-tagfield.min
