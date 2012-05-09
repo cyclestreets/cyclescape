@@ -109,6 +109,9 @@
         padding: 5px;
         font: { size: 14px; }
       }
+      p > img {
+        vertical-align: middle;
+      }
     }
     section {
       margin: 0 0 20px 0;

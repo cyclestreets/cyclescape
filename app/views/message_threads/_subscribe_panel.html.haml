@@ -1,7 +1,9 @@
 .subscribe
   - if signed_in? && current_user.subscribed_to_thread?(thread)
     - subscription = current_user.thread_subscriptions.to(thread)
-    %p= t(".subscribed")
+    %p
+      = image_tag("check-checked.png")
+      = t(".subscribed")
     = semantic_form_for subscription, url: thread_subscription_path(thread, subscription, action: :destroy), method: :delete do |f|
       = f.buttons do
         = f.commit_button :delete, button_html: {class: "btn-grey btn-unsubscribe"}
