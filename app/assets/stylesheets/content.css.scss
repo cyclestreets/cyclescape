@@ -84,10 +84,10 @@
     &.wide {
       width: 360px;
     }
-    input.btn-green, button.btn-green {
+    input.btn-green, button.btn-green, input.btn-grey {
       width: 100%;
     }
-    .btn-green {
+    .btn-green, .btn-grey {
       display: block;
       margin-bottom:20px;
       padding: 15px;
@@ -102,6 +102,12 @@
       li {
         float: none;
         padding: 0;
+      }
+    }
+    .subscribe {
+      .btn-unsubscribe {
+        padding: 5px;
+        font: { size: 14px; }
       }
     }
     section {
