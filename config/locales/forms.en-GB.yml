@@ -93,4 +93,4 @@
         create: "Save"
       thread_subscription:
         create: "Follow this thread"
-        delete: "Unfollow"
+        delete: "Unfollow this thread"
