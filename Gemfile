@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.3'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -38,10 +38,10 @@ gem 'email_reply_parser'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
-  gem 'uglifier'
+  gem 'uglifier', '>= 1.0.3'
 end
 
 group :development do
