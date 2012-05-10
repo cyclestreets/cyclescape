@@ -19,7 +19,7 @@ gem 'tweet-button'
 
 # Back-end gems
 gem 'devise'
-gem 'devise_invitable', "0.5.6"
+gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
 gem 'state_machine'
