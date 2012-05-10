@@ -34,6 +34,7 @@ gem 'foreman'
 gem 'whenever'
 gem 'draper'
 gem 'email_reply_parser'
+gem 'memoist'
 
 # Gems used only for assets and not required
 # in production environments by default.
