@@ -53,6 +53,23 @@ describe InboundMailProcessor do
       end
     end
 
+    context "multipart email containing iso-8859-1 quoted-printable text" do
+      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :multipart_iso_8859_1, to: email_recipient) }
+
+      before do
+        subject.perform(inbound_mail.id)
+      end
+
+      it "should create a new message on the thread" do
+        thread.should have(1).message
+      end
+
+      it "should have the same text as the email text part" do
+        message_body = thread.messages.first.body
+        message_body.should == "\n\nOn Tue, 20 Dec 2011, Cyclescape wrote:\n\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do and\n> how much that would cost. I therefore think that we do need to push for\n> cycle infrastructure along the A14 as a way of allowing them to justify\n> not widening the road quiet so much.\nI think the £20m is actually to implement things though, not a feasibility\nstudy. The current consultation seems to be about asking people what the\n£20m should be spent on:\n\nhttp://www.dft.gov.uk/consultations/dft-20111212\n\n\"schemes delivered over the next two years\""
+      end
+    end
+
     context "notifications" do
       it "should be sent out" do
         ThreadNotifier.should_receive(:notify_subscribers) do |thread, type, message|
