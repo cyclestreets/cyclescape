@@ -50,7 +50,8 @@ class GroupMembership < ActiveRecord::Base
   end
 
   def invite_user_if_new
-    user && user.new_record? && user.invite!
+    # includes hack to trigger before_validation on user model
+    user && user.new_record? && (user.valid? || true) && user.invite!
     true
   end
 

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.3'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -19,7 +19,7 @@ gem 'tweet-button'
 
 # Back-end gems
 gem 'devise'
-gem 'devise_invitable', "0.5.6"
+gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
 gem 'state_machine'
@@ -34,14 +34,15 @@ gem 'foreman'
 gem 'whenever'
 gem 'draper'
 gem 'email_reply_parser'
+gem 'memoist'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
-  gem 'uglifier'
+  gem 'uglifier', '>= 1.0.3'
 end
 
 group :development do
