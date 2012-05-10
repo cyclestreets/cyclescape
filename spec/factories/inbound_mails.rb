@@ -31,5 +31,9 @@ FactoryGirl.define do
     trait :multipart_text_only do
       raw_message { File.read(raw_email_path("qp_text_only_multipart"), encoding: "UTF-8") }
     end
+
+    trait :multipart_iso_8859_1 do
+      raw_message { File.read(raw_email_path("qp_text_only_multipart_iso-8859-1")) }
+    end
   end
 end

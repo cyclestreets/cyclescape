@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "Group subdomains", use: :subdomain do
   context "valid domains" do
-    let(:group) { Factory.create(:group) }
+    let(:group) { FactoryGirl.create(:group) }
 
     before do
       set_subdomain(group.short_name)
@@ -22,7 +22,7 @@ describe "Group subdomains", use: :subdomain do
       end
 
       it "should not override the group page (bug)" do
-        other_group = Factory.create(:group)
+        other_group = FactoryGirl.create(:group)
         visit group_path(other_group)
         page.should have_content(other_group.name)
       end

@@ -11,7 +11,7 @@
 #
 
 class InboundMail < ActiveRecord::Base
-  extend ActiveSupport::Memoizable
+  extend Memoist
 
   validates :recipient, :raw_message, presence: true
 

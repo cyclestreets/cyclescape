@@ -31,7 +31,7 @@ describe InboundMail do
   end
 
   context "message" do
-    let(:mail) { Factory.create(:inbound_mail) }
+    let(:mail) { FactoryGirl.create(:inbound_mail) }
 
     it "should return a Mail::Message object" do
       mail.message.should be_a(Mail::Message)

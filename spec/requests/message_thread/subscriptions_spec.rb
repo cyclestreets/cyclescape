@@ -25,7 +25,7 @@ describe "Thread subscriptions" do
 
       it "should state I am subscribed" do
         subscribe_button.click
-        page.should have_content("You are subscribed")
+        page.should have_content(I18n.t(".message_threads.subscribe_panel.subscribed"))
       end
 
       it "should not send me an email when I post" do

@@ -20,6 +20,7 @@ describe "Authentication and authorization" do
     let!(:password) { user_details[:password] }
 
     it "should redirect you to the original page after login" do
+      pending "this feature is being rethought"
       visit new_issue_path
       page.current_path.should eql(new_user_session_path)
       fill_in "Email", with: current_user.email
