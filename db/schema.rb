@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510130818) do
+ActiveRecord::Schema.define(:version => 20120510141551) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20120510130818) do
     t.integer "thread_id",       :null => false
     t.integer "message_id",      :null => false
     t.integer "library_item_id", :null => false
+    t.integer "created_by_id"
   end
 
   create_table "library_item_tags", :id => false, :force => true do |t|
