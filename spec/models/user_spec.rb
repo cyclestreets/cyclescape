@@ -91,6 +91,7 @@ describe User do
 
     it "must have a password unless being invited" do
       subject.password = ""
+      subject.valid? # trigger before_validation to set default role
       subject.invite!
       subject.should have(0).errors_on(:password)
     end
