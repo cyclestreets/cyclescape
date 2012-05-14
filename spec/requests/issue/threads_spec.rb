@@ -108,7 +108,8 @@ describe "Issue threads" do
         let(:notifiee) { group_membership.user }
 
         before do
-          notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+          notifiee.prefs.update_attribute(:involve_my_groups, "notify")
+          notifiee.prefs.update_attribute(:enable_email, true)
           reset_mailer
         end
 
@@ -151,8 +152,9 @@ describe "Issue threads" do
       let!(:user_location) { FactoryGirl.create(:user_location, user: current_user, location: issue.location.buffer(1)) }
 
       before do
-        current_user.prefs.update_attribute(:notify_new_group_thread, false)
-        notifiee.prefs.update_attribute(:notify_new_user_locations_issue_thread, true)
+        current_user.prefs.update_attribute(:involve_my_groups, "none")
+        notifiee.prefs.update_attribute(:involve_my_locations, "notify")
+        notifiee.prefs.update_attribute(:enable_email, true)
         reset_mailer
       end
 
@@ -198,14 +200,15 @@ describe "Issue threads" do
       end
 
       it "should not send a notification to the person who started the thread" do
-        current_user.prefs.update_attribute(:notify_new_user_locations_issue_thread, true)
+        current_user.prefs.update_attribute(:involve_my_locations, "notify")
+        current_user.prefs.update_attribute(:enable_email, true)
         create_thread
         email = open_last_email_for(current_user.email)
         email.should be_nil
       end
 
       it "should not send a notification to anyone who is auto-subscribed to the thread" do
-        notifiee.prefs.update_attribute(:subscribe_new_user_location_issue_thread, true)
+        notifiee.prefs.update_attribute(:involve_my_locations, "subscribe")
         create_thread
         email = open_last_email_for(notifiee.email)
         email.should be_nil

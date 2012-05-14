@@ -19,10 +19,17 @@ class NewThreadNotifier
 
   def self.notify_new_group_thread(thread_id)
     thread = MessageThread.find(thread_id)
+
+    # Figure out the correct preference combination, depending on whether the thread has an issue or
+    # is just an "administrative" thread.
+    t = UserPref.arel_table
+    pref = t[:involve_my_groups].in(["notify", "subscribe"])
+    constraint = thread.issue ? pref : pref.and(t[:involve_my_groups_admin].eq(true))
+
     if thread.private_to_committee?
-      members = thread.group.committee_members.active.with_pref(:notify_new_group_thread)
+      members = thread.group.committee_members.active.joins(:prefs).where(constraint)
     else
-      members = thread.group.members.active.with_pref(:notify_new_group_thread)
+      members = thread.group.members.active.joins(:prefs).where(constraint)
     end
     members.each do |member|
       Resque.enqueue(NewThreadNotifier, :send_new_group_thread_notification, thread.id, member.id)
@@ -32,7 +39,7 @@ class NewThreadNotifier
   def self.send_new_group_thread_notification(thread_id, user_id)
     thread = MessageThread.find(thread_id)
     user = User.find(user_id)
-    Notifications.new_group_thread(thread, user).deliver
+    Notifications.new_group_thread(thread, user).deliver if user.prefs.enable_email
   end
 
   def self.notify_new_user_location_issue_thread(thread_id)
@@ -43,7 +50,7 @@ class NewThreadNotifier
     # and where the user has the notification preference on
     locations = UserLocation.intersects(buffered_location).
         joins(:user => :prefs).
-        where(user_prefs: {notify_new_user_locations_issue_thread: true}).
+        where(UserPref.arel_table[:involve_my_locations].in(["notify", "subscribe"])).
         all
 
     # Filter the returned locations to ensure only one location is returned per user,
@@ -69,6 +76,6 @@ class NewThreadNotifier
   def self.send_new_user_location_thread_notification(opts)
     thread = MessageThread.find(opts["thread_id"])
     user_location = UserLocation.find(opts["user_location_id"])
-    Notifications.new_user_location_issue_thread(thread, user_location).deliver
+    Notifications.new_user_location_issue_thread(thread, user_location).deliver if user_location.user.prefs.enable_email
   end
 end
