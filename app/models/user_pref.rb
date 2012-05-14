@@ -16,6 +16,11 @@
 class UserPref < ActiveRecord::Base
   belongs_to :user
 
+  INVOLVEMENT_OPTIONS = %w(none notify subscribe)
+
+  validates :involve_my_locations, inclusion: { in: INVOLVEMENT_OPTIONS }
+  validates :involve_my_groups, inclusion: { in: INVOLVEMENT_OPTIONS }
+
   def notify_subscribed_threads!
     update_attribute(:notify_subscribed_threads, true)
   end

@@ -19,7 +19,8 @@ describe "Issue notifications" do
       let!(:user_location) { FactoryGirl.create(:user_location, user: user, loc_json: issue_values[:loc_json]) }
 
       before do
-        user.prefs.update_attribute(:notify_new_user_locations_issue, true)
+        user.prefs.update_attribute(:involve_my_locations, "notify")
+        user.prefs.update_attribute(:enable_email, true)
       end
 
       it "should send a notification" do
@@ -42,6 +43,22 @@ describe "Issue notifications" do
         email.should_not have_body_text("&amp;")
         email.should have_body_text(/Test containing A & B/)
       end
+
+      it "should send an email when the preference is to subscribe" do
+        user.prefs.update_attribute(:involve_my_locations, "subscribe")
+        fill_in_issue
+        click_on "Send Report"
+        email = open_last_email_for(user.email)
+        email.should_not be_nil
+      end
+
+      it "should not send an email when the emails aren't enabled" do
+        user.prefs.update_attribute(:enable_email, false)
+        fill_in_issue
+        click_on "Send Report"
+        email = open_last_email_for(user.email)
+        email.should be_nil
+      end
     end
 
     describe "for users in groups with overlapping locations" do
@@ -50,7 +67,8 @@ describe "Issue notifications" do
       let!(:group_membership) { FactoryGirl.create(:group_membership, user: notifiee, group: group_profile.group) }
 
       before do
-        notifiee.prefs.update_attribute(:notify_new_group_location_issue, true)
+        notifiee.prefs.update_attribute(:involve_my_groups, "notify")
+        notifiee.prefs.update_attribute(:enable_email, true)
       end
 
       it "should send a notification" do
@@ -63,7 +81,7 @@ describe "Issue notifications" do
       end
 
       it "shouldn't send a notification if the user doesn't want it" do
-        notifiee.prefs.update_attribute(:notify_new_group_location_issue, false)
+        notifiee.prefs.update_attribute(:involve_my_groups, "none")
         fill_in_issue
         click_on "Send Report"
         email = open_last_email_for(notifiee.email)
@@ -81,8 +99,10 @@ describe "Issue notifications" do
 
 
     before do
-      user.prefs.update_attribute(:notify_new_user_locations_issue, true)
-      user2.prefs.update_attribute(:notify_new_user_locations_issue, true)
+      user.prefs.update_attribute(:involve_my_locations, "notify")
+      user.prefs.update_attribute(:enable_email, true)
+      user2.prefs.update_attribute(:involve_my_locations, "notify")
+      user2.prefs.update_attribute(:enable_email, true)
       visit new_issue_path
       fill_in "Title", with: "Test"
       fill_in "Write a description", with: "Something & something else"
