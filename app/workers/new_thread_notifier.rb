@@ -60,8 +60,6 @@ class NewThreadNotifier
       # Only send notifications to people who have permission to read the thread
       next unless Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user }
 
-      # Don't send notifications to people who are already auto-subscribed to the thread!!!!
-
       # Symbol keys are converted to strings by Resque
       opts = { "thread_id" => thread.id, "user_location_id" => loc.id}
       Resque.enqueue(NewThreadNotifier, :send_new_user_location_thread_notification, opts)
