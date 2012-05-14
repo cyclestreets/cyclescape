@@ -363,6 +363,8 @@
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
       new_user_location_issue:
         subject: "[Cyclescape] New issue reported near your %{category} location"
+      new_user_location_issue_thread:
+        subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
     thread_mailer:
       common:
         subject: "Re: [Cyclescape] %{title}"
@@ -591,6 +593,8 @@
         success: "Location Updated"
     prefs:
       edit:
+        email_notifications: "Email notifications"
+        thread_subscriptions: "Thread subscriptions"
         title: "Manage Your Preferences"
         back: "Return to your profile"
       update:

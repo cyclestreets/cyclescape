@@ -23,7 +23,10 @@ describe UserPref do
       notify_subscribed_threads
       notify_new_user_locations_issue
       notify_new_group_thread
-      notify_new_issue_thread
+      notify_new_group_location_issue
+      notify_new_user_locations_issue_thread
+      subscribe_new_group_thread
+      subscribe_new_user_location_issue_thread
       )
 
     booleans.each do |attr|

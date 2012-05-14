@@ -55,8 +55,8 @@ describe "User preferences" do
     end
   end
 
-  describe "notification of new threads on group issues" do
-    let(:field) { get_field("notify_new_issue_thread") }
+  describe "notification of new issues in the group's area" do
+    let(:field) { get_field("notify_new_group_location_issue") }
 
     it "should default to off" do
       field.should_not be_checked
@@ -65,7 +65,49 @@ describe "User preferences" do
     it "should switch on" do
       field.set true
       click_on "Save"
-      User.find(current_user).prefs.notify_new_issue_thread.should be_true
+      User.find(current_user).prefs.notify_new_group_location_issue.should be_true
+    end
+  end
+
+  describe "notification of new thread on issues in the user's locations" do
+    let(:field) { get_field("notify_new_user_locations_issue_thread") }
+
+    it "should default to off" do
+      field.should_not be_checked
+    end
+
+    it "should switch on" do
+      field.set true
+      click_on "Save"
+      User.find(current_user).prefs.notify_new_user_locations_issue_thread.should be_true
+    end
+  end
+
+  describe "subscribe automatically to new group threads" do
+    let(:field) { get_field("subscribe_new_group_thread") }
+
+    it "should default to off" do
+      field.should_not be_checked
+    end
+
+    it "should switch on" do
+      field.set true
+      click_on "Save"
+      User.find(current_user).prefs.subscribe_new_group_thread.should be_true
+    end
+  end
+
+  describe "subscribe automatically to new user location issue threads" do
+    let(:field) { get_field("subscribe_new_user_location_issue_thread") }
+
+    it "should default to off" do
+      field.should_not be_checked
+    end
+
+    it "should switch on" do
+      field.set true
+      click_on "Save"
+      User.find(current_user).prefs.subscribe_new_user_location_issue_thread.should be_true
     end
   end
 end
