@@ -162,7 +162,8 @@ describe "Group threads", use: :subdomain do
         end
 
         it "should subscribe people with the correct preference" do
-          subscriber.prefs.update_attribute(:subscribe_new_group_thread, true)
+          subscriber.prefs.update_attribute(:involve_my_groups, "subscribe")
+          subscriber.prefs.update_attribute(:involve_my_groups_admin, true)
           fill_in_thread
           subscriber.subscribed_to_thread?(current_group.threads.last).should be_true
         end

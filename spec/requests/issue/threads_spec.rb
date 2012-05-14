@@ -229,16 +229,15 @@ describe "Issue threads" do
         click_on "Create Thread"
       end
 
-
-      it "should not automatically subscribe people with overlapping locations" do
-        create_thread
-        subscriber.subscribed_to_thread?(issue.threads.last).should be_false
-      end
-
-      it "should subscribe when the preference is set" do
-        subscriber.prefs.update_attribute(:subscribe_new_user_location_issue_thread, true)
+      it "should automatically subscribe people with overlapping locations" do
         create_thread
         subscriber.subscribed_to_thread?(issue.threads.last).should be_true
+      end
+
+      it "should not subscribe when the preference is not set" do
+        subscriber.prefs.update_attribute(:involve_my_locations, "notify")
+        create_thread
+        subscriber.subscribed_to_thread?(issue.threads.last).should be_false
       end
     end
   end

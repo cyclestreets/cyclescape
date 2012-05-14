@@ -56,7 +56,11 @@ class MessageThreadsController < ApplicationController
   end
 
   def subscribe_group_users(thread)
-    members = thread.group.members.active.with_pref(:subscribe_new_group_thread)
+    # If it's an "administrative" discussion, don't subscribe without extra pref
+    t = UserPref.arel_table
+    pref = t[:involve_my_groups].eq("subscribe")
+    constraint = thread.issue ? pref : pref.and(t[:involve_my_groups_admin].eq(true))
+    members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each{ |member| thread.subscriptions.create(user: member) unless member.subscribed_to_thread?(thread) }
   end
 
@@ -65,7 +69,7 @@ class MessageThreadsController < ApplicationController
 
     locations = UserLocation.intersects(buffered_location).
         joins(:user => :prefs).
-        where(user_prefs: {subscribe_new_user_location_issue_thread: true}).
+        where(user_prefs: {involve_my_locations: "subscribe"}).
         all
 
     locations.each{ |loc| thread.subscriptions.create(user: loc.user) unless loc.user.subscribed_to_thread?(thread) }
