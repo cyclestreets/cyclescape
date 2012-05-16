@@ -7,9 +7,6 @@ class DashboardsController < ApplicationController
 
     @subscribed_threads = ThreadListDecorator.decorate(current_user.subscribed_threads.limit(8))
 
-    involved_threads = ThreadList.recent_involved_with(current_user, 8)
-    @involved_threads = ThreadListDecorator.decorate(involved_threads)
-
     group_threads = ThreadList.recent_from_groups(current_user.groups, 8)
     @group_threads = ThreadListDecorator.decorate(group_threads)
 

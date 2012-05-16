@@ -55,8 +55,9 @@ describe "User dashboards" do
       end
 
       context "with threads" do
-        it "should list threads I'm involved with" do
+        it "should list threads I've subscribed to" do
           messages = FactoryGirl.create_list(:message, 3, created_by: current_user)
+          messages.each { |m| m.thread.add_subscriber(current_user) }
           current_user.involved_threads.count.should > 0
           visit dashboard_path
           messages.map {|m| m.thread }.each do |thread|
@@ -120,6 +121,7 @@ describe "User dashboards" do
         let!(:deadline) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: message.thread)) }
 
         it "should show the deadline" do
+          deadline.thread.add_subscriber(current_user)
           visit dashboard_path
           page.should have_content(deadline.title)
           page.should have_content(I18n.l(deadline.deadline.to_date, format: :long))
