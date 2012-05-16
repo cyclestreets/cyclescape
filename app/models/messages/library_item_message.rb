@@ -6,6 +6,7 @@
 #  thread_id       :integer         not null
 #  message_id      :integer         not null
 #  library_item_id :integer         not null
+#  created_by_id   :integer
 #
 
 class LibraryItemMessage < MessageComponent

@@ -2,15 +2,12 @@
 #
 # Table name: user_prefs
 #
-#  id                                       :integer         not null, primary key
-#  user_id                                  :integer         not null
-#  notify_subscribed_threads                :boolean         default(TRUE), not null
-#  notify_new_user_locations_issue          :boolean         default(FALSE), not null
-#  notify_new_group_thread                  :boolean         default(TRUE), not null
-#  notify_new_group_location_issue          :boolean         default(FALSE), not null
-#  notify_new_user_locations_issue_thread   :boolean         default(FALSE), not null
-#  subscribe_new_group_thread               :boolean         default(FALSE), not null
-#  subscribe_new_user_location_issue_thread :boolean         default(FALSE), not null
+#  id                      :integer         not null, primary key
+#  user_id                 :integer         not null
+#  involve_my_locations    :string(255)     default("subscribe"), not null
+#  involve_my_groups       :string(255)     default("notify"), not null
+#  involve_my_groups_admin :boolean         default(FALSE), not null
+#  enable_email            :boolean         default(FALSE), not null
 #
 
 require 'spec_helper'
