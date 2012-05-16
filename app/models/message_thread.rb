@@ -136,6 +136,10 @@ class MessageThread < ActiveRecord::Base
     messages.empty? ? updated_at : messages.last.updated_at
   end
 
+  def latest_activity_by
+    messages.empty? ? created_by : messages.last.created_by
+  end
+
   def upcoming_deadline_messages
     messages.except(:order).joins("JOIN deadline_messages dm ON messages.component_id = dm.id").
       where("messages.component_type = 'DeadlineMessage'").

@@ -393,13 +393,13 @@
       group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
-      created_at: "%{time_ago} ago"
+      posted_at: "posted %{time_ago} ago"
     list:
       group_committee: "Group Committee"
       group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
-      created_at: "%{time_ago} ago"
+      posted_at: "posted %{time_ago} ago"
     edit:
       title: "Edit thread"
       description_html:
