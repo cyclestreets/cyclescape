@@ -554,7 +554,7 @@
       view_the_photo: "You can view the photo at the following url:"
     footer:
       thread: "Cyclescape thread"
-      unsubscribe: "You can unsubscribe from notifications on the thread page."
+      unsubscribe: "You can stop following this thread by visiting the link above."
   thread_priorities:
     very_high: "Top-priority"
     high: "Important"

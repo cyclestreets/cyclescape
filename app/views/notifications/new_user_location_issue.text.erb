@@ -1,15 +1,16 @@
-A new issue with the title "<%= raw @issue.title %>" has been reported near
-your <%= @category.name %> location.
+<%= raw @issue.created_by.name %> has reported a new issue
+near your <%= @category.name %> location.
+
+"<%= raw @issue.title %>"
 
 <%= raw @issue.description %>
 
-You can view the issue at:
+You can view the issue, and start a new discussion, at:
 <%= issue_url(@issue) %>
 
 --------
 You have received this message because your preferences indicate that you
-would like us to notify you when new issues are reported near your
-given locations.
+would like us to notify you on matters in your area.
 
 To stop these notifications, edit your user preferences at:
 <%= edit_user_prefs_url(@user) %>

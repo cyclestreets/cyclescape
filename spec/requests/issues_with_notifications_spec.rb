@@ -32,6 +32,7 @@ describe "Issue notifications" do
         email.should have_subject("[Cyclescape] New issue reported near your #{category_name} location")
         email.should have_body_text(issue_values[:title])
         email.should have_body_text(issue_values[:description])
+        email.should have_body_text(current_user.name)
       end
 
       it "should not include html entities in the message" do
