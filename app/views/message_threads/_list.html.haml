@@ -6,8 +6,8 @@
         - if thread.group
           = link_to_profile(thread.group)
           %br
-        = link_to_profile(thread.created_by)
-        = t ".created_at", time_ago: time_ago_in_words(thread.created_at)
+        = link_to_profile(thread.latest_activity_by)
+        = t ".posted_at", time_ago: time_ago_in_words(thread.latest_activity_at)
   .status
     = thread.following_status
     .permissions= thread_type(thread)

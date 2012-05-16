@@ -28,6 +28,6 @@ class ThreadList
   end
 
   def self.with_upcoming_deadlines(user, limit)
-    user.involved_threads.with_upcoming_deadlines.limit(limit)
+    user.subscribed_threads.with_upcoming_deadlines.limit(limit)
   end
 end
