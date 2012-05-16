@@ -59,8 +59,8 @@
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
       no_upcoming_deadline_threads: "You aren't involved in any threads with upcoming deadlines."
-      no_involved_threads_html:
-        You haven't been involved in any threads yet. You could have a look
+      no_subscribed_threads_html:
+        You aren't following any threads yet. You could have a look
         through the %{threads_link} and see if there's anything that you want to
         help with, or maybe you could %{add_issue_link} instead?
       no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
@@ -393,13 +393,13 @@
       group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
-      created_at: "%{time_ago} ago"
+      posted_at: "posted %{time_ago} ago"
     list:
       group_committee: "Group Committee"
       group_public: "Group Public"
       group_private: "Group Private"
       public: "Public"
-      created_at: "%{time_ago} ago"
+      posted_at: "posted %{time_ago} ago"
     edit:
       title: "Edit thread"
       description_html:
