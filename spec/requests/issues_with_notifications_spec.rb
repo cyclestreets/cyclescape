@@ -76,6 +76,7 @@ describe "Issue notifications" do
         fill_in_issue
         click_on "Send Report"
         email = open_last_email_for(notifiee.email)
+        email.should have_subject("[Cyclescape] New issue reported in #{group_profile.group.name}'s area")
         email.should have_body_text("in the #{group_profile.group.name}'s area")
         email.should have_body_text(issue_values[:description])
         email.should have_body_text(issue_values[:title])
