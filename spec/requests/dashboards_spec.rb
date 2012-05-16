@@ -119,12 +119,19 @@ describe "User dashboards" do
       context "with a deadline" do
         let!(:message) { FactoryGirl.create(:message, created_by: current_user) }
         let!(:deadline) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: message.thread)) }
+        let!(:censored_deadline) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: message.thread, censored_at: Time.now)) }
 
         it "should show the deadline" do
           deadline.thread.add_subscriber(current_user)
           visit dashboard_path
           page.should have_content(deadline.title)
           page.should have_content(I18n.l(deadline.deadline.to_date, format: :long))
+        end
+
+        it "should not show censored deadlines" do
+          censored_deadline.thread.add_subscriber(current_user)
+          visit dashboard_path
+          page.should_not have_content(censored_deadline.title)
         end
       end
     end

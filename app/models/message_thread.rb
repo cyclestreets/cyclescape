@@ -62,6 +62,7 @@ class MessageThread < ActiveRecord::Base
                   JOIN deadline_messages dm ON m.component_id = dm.id
                   WHERE m.component_type = 'DeadlineMessage'
                     AND dm.deadline > now()
+                    AND m.censored_at IS NULL
                   GROUP BY m.thread_id)
                 AS m2
                 ON m2.thread_id = message_threads.id")
@@ -139,6 +140,7 @@ class MessageThread < ActiveRecord::Base
     messages.except(:order).joins("JOIN deadline_messages dm ON messages.component_id = dm.id").
       where("messages.component_type = 'DeadlineMessage'").
       where("dm.deadline > now()").
+      where("messages.censored_at IS NULL").
       order("dm.deadline ASC")
   end
 
