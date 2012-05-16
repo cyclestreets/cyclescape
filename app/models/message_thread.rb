@@ -100,7 +100,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def email_subscribers
-    subscribers.joins(:prefs).where(user_prefs: {:notify_subscribed_threads => true})
+    subscribers.joins(:prefs).where(user_prefs: {:enable_email => true})
   end
 
   def private_to_committee?
