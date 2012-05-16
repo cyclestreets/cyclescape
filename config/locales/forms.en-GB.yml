@@ -41,9 +41,9 @@
         send_email: "Email new messages"
       user_pref:
         enable_email: "Enable email notifications"
-        involve_my_locations: "Involve me in matters near my locations"
-        involve_my_groups: "Involve me in my groups matters"
-        involve_my_groups_admin: "Involve me in my groups administrative discussions"
+        involve_my_locations: "Matters near my locations"
+        involve_my_groups: "My groups matters"
+        involve_my_groups_admin: "Also involve me in my groups administrative discussions"
     hints:
       group_membership:
         role: "Select if they are a normal or committee member of the group."

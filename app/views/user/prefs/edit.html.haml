@@ -6,10 +6,12 @@
       %h2= t ".involvement"
       = f.input :involve_my_locations,
           as: :radio,
-          collection: UserPref::INVOLVEMENT_OPTIONS.map {|n| [n.capitalize, n] }
+          collection: UserPref::INVOLVEMENT_OPTIONS.map {|n| [t(".#{n}"), n] }
       = f.input :involve_my_groups,
           as: :radio,
-          collection: UserPref::INVOLVEMENT_OPTIONS.map {|n| [n.capitalize, n] }
+          collection: UserPref::INVOLVEMENT_OPTIONS.map {|n| [t(".#{n}"), n] }
       = f.input :involve_my_groups_admin
+      %h2= t ".notification_types"
+      %p= t ".notification_types_guidance"
       = f.input :enable_email
     = f.buttons

@@ -14,17 +14,17 @@ describe "User preferences" do
   describe "involvement in user location matters" do
     it "should default to subscribed" do
       within("#user_pref_involve_my_locations_input") do
-        page.should have_checked_field("Subscribe")
+        page.should have_checked_field(I18n.t(".user.prefs.edit.subscribe"))
       end
     end
 
     it "should change to none" do
       within("#user_pref_involve_my_locations_input") do
-        page.choose("None")
+        page.choose(I18n.t(".user.prefs.edit.none"))
       end
       click_on "Save"
       within("#user_pref_involve_my_locations_input") do
-        page.should have_checked_field("None")
+        page.should have_checked_field(I18n.t(".user.prefs.edit.none"))
       end
       current_user.reload
       current_user.prefs.involve_my_locations.should eql("none")
@@ -34,20 +34,20 @@ describe "User preferences" do
   describe "involvement in group matters" do
     it "should default to notify" do
       within("#user_pref_involve_my_groups_input") do
-        page.should have_checked_field("Notify")
-        page.should_not have_checked_field("Subscribe")
-        page.should_not have_checked_field("None")
+        page.should have_checked_field(I18n.t(".user.prefs.edit.notify"))
+        page.should_not have_checked_field(I18n.t(".user.prefs.edit.subscribe"))
+        page.should_not have_checked_field(I18n.t(".user.prefs.edit.none"))
       end
     end
 
     it "should change to subscribed" do
       within("#user_pref_involve_my_groups_input") do
-        page.choose("Subscribe")
+        page.choose(I18n.t(".user.prefs.edit.subscribe"))
       end
       click_on "Save"
       within("#user_pref_involve_my_groups_input") do
-        page.should have_checked_field("Subscribe")
-        page.should_not have_checked_field("Notify")
+        page.should have_checked_field(I18n.t(".user.prefs.edit.subscribe"))
+        page.should_not have_checked_field(I18n.t(".user.prefs.edit.notify"))
       end
       current_user.reload
       current_user.prefs.involve_my_groups.should eql("subscribe")
