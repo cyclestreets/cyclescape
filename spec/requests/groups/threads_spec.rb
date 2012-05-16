@@ -167,6 +167,36 @@ describe "Group threads", use: :subdomain do
           fill_in_thread
           subscriber.subscribed_to_thread?(current_group.threads.last).should be_true
         end
+
+        it "should not subscribe normal members to committee threads" do
+          subscriber.prefs.update_attribute(:involve_my_groups, "subscribe")
+          subscriber.prefs.update_attribute(:involve_my_groups_admin, true)
+          fill_in "Title", with: "Committee Thread"
+          fill_in "Message", with: "Something secret"
+          select "Committee", from: "Privacy"
+          click_on "Create Thread"
+          subscriber.subscribed_to_thread?(current_group.threads.last).should be_false
+        end
+
+        context "to private group threads" do
+          let(:issue) { FactoryGirl.create(:issue) }
+          let(:stranger) { FactoryGirl.create(:user) }
+          let!(:stranger_location) { FactoryGirl.create(:user_location, user: stranger, location: issue.location.buffer(1)) }
+
+          it "should not autosubscribe non-members with overlapping areas" do
+            stranger.prefs.update_attribute(:involve_my_locations, "subscribe")
+
+            visit issue_path(issue)
+            click_on "Discuss"
+            fill_in "Title", with: "Private thread"
+            fill_in "Message", with: "Something or other"
+            select "Group", from: "Privacy"
+            click_on "Create Thread"
+
+            current_group.threads.last.privacy.should eql("group")
+            stranger.subscribed_to_thread?(current_group.threads.last).should be_false
+          end
+        end
       end
     end
 
