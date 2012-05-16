@@ -51,7 +51,7 @@ describe "Thread subscriptions" do
     context "for email" do
       before do
         # Set the user to receive emails
-        current_user.prefs.notify_subscribed_threads!
+        current_user.prefs.update_attribute(:enable_email, true)
       end
 
       it "should subscribe the user to the thread" do
