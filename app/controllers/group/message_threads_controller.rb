@@ -22,6 +22,8 @@ class Group::MessageThreadsController < MessageThreadsController
     if @thread.save
       @thread.subscriptions.create(user: current_user)
       subscribe_users(@thread)
+      ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
+
       NewThreadNotifier.notify_new_thread(@thread)
       redirect_to group_thread_path(@group, @thread)
     else

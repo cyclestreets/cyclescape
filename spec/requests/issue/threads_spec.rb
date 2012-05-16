@@ -199,19 +199,28 @@ describe "Issue threads" do
         email.should be_nil
       end
 
-      it "should not send a notification to the person who started the thread" do
+      it "should send a new message notification to the person who started the thread" do
         current_user.prefs.update_attribute(:involve_my_locations, "notify")
         current_user.prefs.update_attribute(:enable_email, true)
         create_thread
-        email = open_last_email_for(current_user.email)
-        email.should be_nil
+
+        mailbox = mailbox_for(current_user.email)
+        mailbox.count.should eql(1)
+        email = mailbox.last
+
+        # The sender should receive a message notification, not a new thread notification
+        email.should_not have_subject(/New thread started/)
+        email.should have_subject("[Cyclescape] Lorem & Ipsum") # first message, so no Re:
       end
 
-      it "should not send a notification to anyone who is auto-subscribed to the thread" do
+      it "should send a new message notification to anyone who is auto-subscribed to the thread" do
         notifiee.prefs.update_attribute(:involve_my_locations, "subscribe")
         create_thread
-        email = open_last_email_for(notifiee.email)
-        email.should be_nil
+
+        mailbox = mailbox_for(notifiee.email)
+        mailbox.count.should eql(1)
+        email = mailbox.last
+        email.should have_subject("[Cyclescape] Lorem & Ipsum")
       end
     end
 
