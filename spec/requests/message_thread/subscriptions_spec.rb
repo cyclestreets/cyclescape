@@ -13,7 +13,7 @@ describe "Thread subscriptions" do
 
     context "for web only" do
       before do
-        current_user.prefs.update_attribute(:notify_subscribed_threads, false)
+        current_user.prefs.update_attribute(:enable_email, false)
       end
 
       it "should subscribe the user to the thread" do
