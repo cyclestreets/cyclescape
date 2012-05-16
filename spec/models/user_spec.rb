@@ -21,6 +21,9 @@
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
 #  remembered_group_id    :integer
+#  invitation_limit       :integer
+#  invited_by_id          :integer
+#  invited_by_type        :string(255)
 #
 
 require 'spec_helper'

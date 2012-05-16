@@ -3,8 +3,15 @@
   %p= link_to t(".back"), user_profile_path
   = semantic_form_for @prefs, url: user_prefs_path do |f|
     = f.inputs do
-      = f.input :notify_subscribed_threads
-      = f.input :notify_new_user_locations_issue
-      = f.input :notify_new_group_thread
-      = f.input :notify_new_issue_thread
+      %h2= t ".involvement"
+      = f.input :involve_my_locations,
+          as: :radio,
+          collection: UserPref::INVOLVEMENT_OPTIONS.map {|n| [t(".#{n}"), n] }
+      = f.input :involve_my_groups,
+          as: :radio,
+          collection: UserPref::INVOLVEMENT_OPTIONS.map {|n| [t(".#{n}"), n] }
+      = f.input :involve_my_groups_admin
+      %h2= t ".notification_types"
+      %p= t ".notification_types_guidance"
+      = f.input :enable_email
     = f.buttons

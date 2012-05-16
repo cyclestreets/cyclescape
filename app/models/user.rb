@@ -21,6 +21,9 @@
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
 #  remembered_group_id    :integer
+#  invitation_limit       :integer
+#  invited_by_id          :integer
+#  invited_by_type        :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -71,10 +74,6 @@ class User < ActiveRecord::Base
     joins("LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id").
       where("user_prefs.id IS NULL").
       each {|u| u.create_user_prefs }
-  end
-
-  def self.with_pref(name)
-    joins(:prefs).where(user_prefs: {name => true})
   end
 
   def name

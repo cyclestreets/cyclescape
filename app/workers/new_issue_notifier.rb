@@ -15,6 +15,7 @@ class NewIssueNotifier
   def self.process_new_issue(id)
     issue = Issue.find(id)
     process_for_user_locations(issue)
+    process_for_group_locations(issue)
   end
 
   def self.process_for_user_locations(issue)
@@ -22,10 +23,10 @@ class NewIssueNotifier
     buffered_location = issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
     # Retrieve user locations that intersect with the issue
-    # and where the user has the notification preference on
+    # and where the user has user locations involvement preference on
     locations = UserLocation.intersects(buffered_location).
         joins(:user => :prefs).
-        where(user_prefs: {notify_new_user_locations_issue: true}).
+        where(UserPref.arel_table[:involve_my_locations].in(["notify", "subscribe"])).
         all
 
     # Filter the returned locations to ensure only one location is returned per user,
@@ -46,6 +47,26 @@ class NewIssueNotifier
     user = User.find(opts["user_id"])
     issue = Issue.find(opts["issue_id"])
     category = LocationCategory.find(opts["category_id"])
-    Notifications.new_user_location_issue(user, issue, category).deliver
+    Notifications.new_user_location_issue(user, issue, category).deliver if user.prefs.enable_email
+  end
+
+  def self.process_for_group_locations(issue)
+    group_profiles = GroupProfile.intersects(issue.location).all
+    group_profiles.each do |profile|
+      users = profile.group.members.joins(:prefs).
+          where(UserPref.arel_table[:involve_my_groups].in(["notify", "subscribe"])).
+          all
+      users.each do |user|
+        opts = { "user_id" => user.id, "group_id" => profile.group.id, "issue_id" => issue.id }
+        Resque.enqueue(NewIssueNotifier, :notify_new_group_location_issue, opts)
+      end
+    end
+  end
+
+  def self.notify_new_group_location_issue(opts)
+    user = User.find(opts["user_id"])
+    group = Group.find(opts["group_id"])
+    issue = Issue.find(opts["issue_id"])
+    Notifications.new_group_location_issue(user, group, issue).deliver if user.prefs.enable_email
   end
 end

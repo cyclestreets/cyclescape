@@ -1,0 +1,20 @@
+A new thread has been started on the issue "<%= raw @thread.issue.title %>"
+near your <%= @user_location.category.name %> area.
+
+<%= raw @thread.title %>
+Thread started by <%= raw @message.created_by.name %>
+
+<%= raw @message.body %>
+
+You can read the whole thread, and subscribe to it at:
+<%= thread_url(@thread) %>
+
+--------
+You have received this message because your preferences indicate that you
+would like us to notify you on matters in your area.
+
+To stop these notifications, edit your user preferences at:
+<%= edit_user_prefs_url(@user) %>
+
+You can add or remove your locations at:
+<%= user_locations_url %>

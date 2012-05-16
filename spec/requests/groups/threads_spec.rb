@@ -28,6 +28,12 @@ describe "Group threads", use: :subdomain do
     context "new thread" do
       let(:thread_attrs) { FactoryGirl.attributes_for(:message_thread) }
 
+      def fill_in_thread
+        fill_in "Title", with: thread_attrs[:title]
+        fill_in "Message", with: "This is between you an me, but..."
+        click_on "Create Thread"
+      end
+
       before do
         visit group_threads_path(current_group)
         click_link "New Group Thread"
@@ -63,16 +69,17 @@ describe "Group threads", use: :subdomain do
       end
 
       context "notifications" do
-        def fill_in_thread
-          fill_in "Title", with: thread_attrs[:title]
-          fill_in "Message", with: "This is between you an me, but..."
-          click_on "Create Thread"
+
+        def enable_group_thread_prefs_for(u)
+          u.prefs.update_attribute(:involve_my_groups, "notify")
+          u.prefs.update_attribute(:involve_my_groups_admin, true)
+          u.prefs.update_attribute(:enable_email, true)
         end
 
         it "should send a notification to group members" do
           membership = FactoryGirl.create(:group_membership, group: current_group)
           notifiee = membership.user
-          notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+          enable_group_thread_prefs_for(notifiee)
           fill_in_thread
           email = open_last_email_for(notifiee.email)
           email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
@@ -81,7 +88,7 @@ describe "Group threads", use: :subdomain do
         it "should not send html entities in the notification" do
           membership = FactoryGirl.create(:group_membership, group: current_group)
           notifiee = membership.user
-          notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+          enable_group_thread_prefs_for(notifiee)
           fill_in "Title", with: "Something like A & B"
           fill_in "Message", with: "A & B is something important"
           click_on "Create Thread"
@@ -91,12 +98,30 @@ describe "Group threads", use: :subdomain do
           email.should_not have_body_text("&amp;")
         end
 
+        it "should not send emails if the notifiee dislikes emails" do
+          membership = FactoryGirl.create(:group_membership, group: current_group)
+          notifiee = membership.user
+          enable_group_thread_prefs_for(notifiee)
+          notifiee.prefs.update_attribute(:enable_email, false)
+          fill_in_thread
+          open_last_email_for(notifiee.email).should be_nil
+        end
+
+        it "should not send emails if the notifiee dislikes administrative fluff" do
+          membership = FactoryGirl.create(:group_membership, group: current_group)
+          notifiee = membership.user
+          enable_group_thread_prefs_for(notifiee)
+          notifiee.prefs.update_attribute(:involve_my_groups_admin, false)
+          fill_in_thread
+          open_last_email_for(notifiee.email).should be_nil
+        end
+
         it "should not be sent if the group member has not confirmed" do
           user = FactoryGirl.create(:user, :unconfirmed)
           membership = FactoryGirl.create(:group_membership, group: current_group, user: user)
           reset_mailer  # Clear out confirmation email
           notifiee = membership.user
-          notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+          enable_group_thread_prefs_for(notifiee)
           fill_in_thread
           open_last_email_for(notifiee.email).should be_nil
         end
@@ -105,7 +130,7 @@ describe "Group threads", use: :subdomain do
           it "should not send a notification to a normal member" do
             membership = FactoryGirl.create(:group_membership, group: current_group)
             notifiee = membership.user
-            notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+            enable_group_thread_prefs_for(notifiee)
             fill_in "Title", with: thread_attrs[:title]
             fill_in "Message", with: "Something"
             select "Committee", from: "Privacy"
@@ -116,13 +141,60 @@ describe "Group threads", use: :subdomain do
           it "should send a notification to a committee member" do
             membership = FactoryGirl.create(:group_membership, group: current_group, role: "committee")
             notifiee = membership.user
-            notifiee.prefs.update_attribute(:notify_new_group_thread, true)
+            enable_group_thread_prefs_for(notifiee)
             fill_in "Title", with: thread_attrs[:title]
             fill_in "Message", with: "Something"
             select "Committee", from: "Privacy"
             click_on "Create Thread"
             email = open_last_email_for(notifiee.email)
             email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
+          end
+        end
+      end
+
+      context "automatic subscriptions" do
+        let!(:group_membership) { FactoryGirl.create(:group_membership, group: current_group) }
+        let!(:subscriber) { group_membership.user }
+
+        it "should not subscribe people automatically" do
+          fill_in_thread
+          subscriber.subscribed_to_thread?(current_group.threads.last).should be_false
+        end
+
+        it "should subscribe people with the correct preference" do
+          subscriber.prefs.update_attribute(:involve_my_groups, "subscribe")
+          subscriber.prefs.update_attribute(:involve_my_groups_admin, true)
+          fill_in_thread
+          subscriber.subscribed_to_thread?(current_group.threads.last).should be_true
+        end
+
+        it "should not subscribe normal members to committee threads" do
+          subscriber.prefs.update_attribute(:involve_my_groups, "subscribe")
+          subscriber.prefs.update_attribute(:involve_my_groups_admin, true)
+          fill_in "Title", with: "Committee Thread"
+          fill_in "Message", with: "Something secret"
+          select "Committee", from: "Privacy"
+          click_on "Create Thread"
+          subscriber.subscribed_to_thread?(current_group.threads.last).should be_false
+        end
+
+        context "to private group threads" do
+          let(:issue) { FactoryGirl.create(:issue) }
+          let(:stranger) { FactoryGirl.create(:user) }
+          let!(:stranger_location) { FactoryGirl.create(:user_location, user: stranger, location: issue.location.buffer(1)) }
+
+          it "should not autosubscribe non-members with overlapping areas" do
+            stranger.prefs.update_attribute(:involve_my_locations, "subscribe")
+
+            visit issue_path(issue)
+            click_on "Discuss"
+            fill_in "Title", with: "Private thread"
+            fill_in "Message", with: "Something or other"
+            select "Group", from: "Privacy"
+            click_on "Create Thread"
+
+            current_group.threads.last.privacy.should eql("group")
+            stranger.subscribed_to_thread?(current_group.threads.last).should be_false
           end
         end
       end
