@@ -367,7 +367,9 @@
         subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
     thread_mailer:
       common:
-        subject: "Re: [Cyclescape] %{title}"
+        subject:
+          one: "[Cyclescape] %{title}"
+          other: "Re: [Cyclescape] %{title}"
   message_thread:
     subscriptions:
       create:
