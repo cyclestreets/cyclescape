@@ -36,7 +36,7 @@ class ThreadMailer < ActionMailer::Base
     email_from = user_notification_address(message.created_by)
     reply_to = thread_address(@thread)
     mail(to: subscriber.name_with_email,
-         subject: t("mailers.thread_mailer.common.subject", title: @thread.title),
+         subject: t("mailers.thread_mailer.common.subject", title: @thread.title, count: @thread.message_count),
          from: email_from,
          reply_to: reply_to)
   end

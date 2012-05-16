@@ -40,10 +40,10 @@
       thread_subscription:
         send_email: "Email new messages"
       user_pref:
-        notify_subscribed_threads: "Send new messages by email on threads I have subscribed to"
-        notify_new_user_locations_issue: "Notify me by email when new issues are created near my locations"
-        notify_new_group_thread: "Notify me by email when a new group thread is started"
-        notify_new_issue_thread: "Notify me when a new issue in my group's area is reported"
+        enable_email: "Enable email notifications"
+        involve_my_locations: "Matters near my locations"
+        involve_my_groups: "My groups matters"
+        involve_my_groups_admin: "Also involve me in my groups administrative discussions"
     hints:
       group_membership:
         role: "Select if they are a normal or committee member of the group."

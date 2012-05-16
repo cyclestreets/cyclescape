@@ -1,5 +1,5 @@
 <%= raw @issue.created_by.name %> has reported a new issue
-near your <%= @category.name %> location.
+in the <%= @group.name %>'s area.
 
 "<%= raw @issue.title %>"
 
@@ -10,10 +10,7 @@ You can view the issue, and start a new discussion, at:
 
 --------
 You have received this message because your preferences indicate that you
-would like us to notify you on matters in your area.
+would like us to notify you on matters in your group.
 
 To stop these notifications, edit your user preferences at:
 <%= edit_user_prefs_url(@user) %>
-
-You can add or remove your locations at:
-<%= user_locations_url %>
