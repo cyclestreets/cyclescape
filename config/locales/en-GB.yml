@@ -78,6 +78,7 @@
       posted:
         message_html: "%{creator_link} posted a message"
         deadline_message_html: "%{creator_link} posted a deadline"
+        document_message_html: "%{creator_link} posted an attachment"
         photo_message_html: "%{creator_link} posted a photo"
         link_message_html: "%{creator_link} posted a link"
         library_item_message_html: "%{creator_link} added a library item"
