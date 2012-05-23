@@ -16,6 +16,7 @@ class InboundMailProcessor
 
     # This raises an exception if it fails
     message = thread.add_message_from_email!(mail)
+    thread.add_subscriber(message.created_by) unless message.created_by.ever_subscribed_to_thread?(thread)
     ThreadNotifier.notify_subscribers(thread, :new_message, message)
   end
 end

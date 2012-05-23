@@ -34,6 +34,10 @@ describe InboundMailProcessor do
       it "should have be created by a new user with the email address" do
         thread.messages.first.created_by.email.should == inbound_mail.message.from.first
       end
+
+      it "should subscribe the user to the thread" do
+        thread.messages.first.created_by.subscribed_to_thread?(thread).should be_true
+      end
     end
 
     context "multipart text-only email" do
