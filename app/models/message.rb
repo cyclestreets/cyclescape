@@ -48,6 +48,7 @@ class Message < ActiveRecord::Base
 
   def update_thread_search
     thread.update_index if thread
+    true
   end
 
   protected
