@@ -46,7 +46,8 @@ class User < ActiveRecord::Base
       where("thread_id = ?", thread).first
     end
   end
-  has_many :subscribed_threads, through: :thread_subscriptions, source: :thread
+  # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
+  has_many :subscribed_threads, through: :thread_subscriptions, source: :thread, conditions: 'thread_subscriptions.deleted_at is NULL'
   has_many :thread_priorities, class_name: "UserThreadPriority"
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
   has_one :profile, class_name: "UserProfile"

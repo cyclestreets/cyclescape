@@ -216,6 +216,14 @@ describe User do
         subject.should have(1).subscribed_thread
         subject.subscribed_threads.first.should == thread
       end
+
+      it "should not include thread when unsubscribed" do
+        subject.subscribed_threads.should include(thread)
+        subscription = subject.thread_subscriptions.to(thread)
+        subscription.destroy
+        subject.reload
+        subject.subscribed_threads.should_not include(thread)
+      end
     end
   end
 
