@@ -9,5 +9,9 @@ FactoryGirl.define do
       o.thread = o.message.thread
       o.message.update_attributes(component: o)
     end
+
+    factory :photo_message_with_description do
+      sequence(:description) { |n| "This photo shows #{n} bottles of beer." }
+    end
   end
 end

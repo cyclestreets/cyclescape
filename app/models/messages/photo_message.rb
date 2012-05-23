@@ -33,6 +33,10 @@ class PhotoMessage < MessageComponent
     photo.thumb("50x50>")
   end
 
+  def searchable_text
+    [caption, description].join(" ")
+  end
+
   protected
 
   def generate_photo_path

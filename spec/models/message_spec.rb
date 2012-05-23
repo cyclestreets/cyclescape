@@ -80,4 +80,17 @@ describe Message do
       message.component_name.should == "photo_message"
     end
   end
+
+  describe "searchable text" do
+    it "should return the body if there's no component" do
+      message = FactoryGirl.create(:message)
+      message.searchable_text.should == message.body
+    end
+
+    it "should return both the body and the component's text if there's a component" do
+      message = FactoryGirl.create(:photo_message).message
+      message.searchable_text.should include(message.body)
+      message.searchable_text.should include(message.component.searchable_text)
+    end
+  end
 end

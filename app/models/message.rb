@@ -40,6 +40,10 @@ class Message < ActiveRecord::Base
     (component ? component : self).class.model_name.underscore
   end
 
+  def searchable_text
+    component ? "#{body} #{component.searchable_text}" : body
+  end
+
   protected
 
   def init_blank_body
