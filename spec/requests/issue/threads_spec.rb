@@ -174,7 +174,8 @@ describe "Issue threads" do
         email.should have_body_text("Lorem & Ipsum")
         email.should have_body_text("Something or other")
         email.should have_body_text(current_user.name)
-        #email.should contain the issue title, thread title and first message contents
+        email.should be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
+        email.header[:reply_to].addrs.first.to_s.should match(/thread-.*@cyclescape.org/)
       end
 
       it "should not send multiple notifications to the same person" do

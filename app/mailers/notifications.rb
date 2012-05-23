@@ -40,6 +40,8 @@ class Notifications < ActionMailer::Base
     @message = thread.messages.first
     raise "Thread does not have an issue" unless @thread.issue
     mail to: @user.name_with_email,
+         from: user_notification_address(@message.created_by),
+         reply_to: thread_address(@thread),
          subject: t('.mailers.notifications.new_user_location_issue_thread.subject',
                    issue_title: @thread.issue.title)
   end
