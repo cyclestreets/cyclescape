@@ -23,6 +23,8 @@ class Message < ActiveRecord::Base
 
   before_validation :init_blank_body, on: :create, if: :component
 
+  after_save :update_thread_search
+
   scope :recent, order("created_at DESC").limit(3)
 
   validates :created_by_id, presence: true
@@ -42,6 +44,10 @@ class Message < ActiveRecord::Base
 
   def searchable_text
     component ? "#{body} #{component.searchable_text}" : body
+  end
+
+  def update_thread_search
+    thread.update_index if thread
   end
 
   protected

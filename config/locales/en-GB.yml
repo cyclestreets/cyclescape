@@ -414,6 +414,8 @@
       success: "Thread deleted"
     index:
       latest_activity: "Latest activity %{ago} ago"
+      search: "Search all threads:"
+      search_submit: "Search"
       title: "Public Threads"
     library_panel:
       library: "Library"
@@ -423,6 +425,15 @@
       title: "New Thread"
     priority_panel:
       thread_priority: "Thread Priority"
+    search:
+      clear_submit: "Clear"
+      no_results_found: "No results found for '%{query}'."
+      results_found:
+        one: "One result found for '%{query}'."
+        other: "%{count} results found for '%{query}'"
+      search: "Search all threads:"
+      search_submit: "Search"
+      title: "Thread Search Results"
     show:
       are_you_sure: "Are you sure?"
       back: "Back"

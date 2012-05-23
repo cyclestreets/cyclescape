@@ -387,4 +387,61 @@ describe "Message threads" do
       end
     end
   end
+
+  context "search" do
+    before do
+        [thread, private_thread, committee_thread].each do |t|
+          m = t.messages.new(body: "Findable with bananas", created_by: FactoryGirl.create(:user))
+          m.save!
+          t.reload
+        end
+    end
+
+    describe "as a guest" do
+      let(:thread) { FactoryGirl.create(:message_thread) }
+      let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
+      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread) }
+
+      it "should show one result" do
+        visit threads_path
+        fill_in "Search all threads", with: "bananas"
+        click_on "Search"
+        page.should have_content(thread.title)
+        page.should_not have_content(private_thread.title)
+        page.should_not have_content(committee_thread.title)
+      end
+    end
+
+    describe "as a group member" do
+      include_context "signed in as a group member"
+
+      let(:private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
+      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+
+      it "should show two results" do
+        visit threads_path
+        fill_in "Search all threads", with: "bananas"
+        click_on "Search"
+        page.should have_content(thread.title)
+        page.should have_content(private_thread.title)
+        page.should_not have_content(committee_thread.title)
+      end
+    end
+
+    describe "as a committee member" do
+      include_context "signed in as a committee member"
+
+      let(:private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
+      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+
+      it "should show three results" do
+        visit threads_path
+        fill_in "Search all threads", with: "bananas"
+        click_on "Search"
+        page.should have_content(thread.title)
+        page.should have_content(private_thread.title)
+        page.should have_content(committee_thread.title)
+      end
+    end
+  end
 end
