@@ -19,6 +19,8 @@ class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
+  acts_as_indexed :fields => [:title, :messages_text, :tags_string]
+
   ALLOWED_PRIVACY = %w(public group committee)
 
   belongs_to :created_by, class_name: "User"
@@ -150,6 +152,10 @@ class MessageThread < ActiveRecord::Base
 
   def priority_for(user)
     user_priorities.where(user_id: user.id).first
+  end
+
+  def messages_text
+    messages.map { |m| m.searchable_text }.join(" ")
   end
 
   # for auth checks
