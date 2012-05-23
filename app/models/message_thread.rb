@@ -155,7 +155,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def messages_text
-    messages.map { |m| m.searchable_text }.join(" ")
+    messages.all.map { |m| m.searchable_text }.join(" ")
   end
 
   # for auth checks
