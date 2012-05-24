@@ -63,6 +63,10 @@
         You aren't following any threads yet. You could have a look
         through the %{threads_link} and see if there's anything that you want to
         help with, or maybe you could %{add_issue_link} instead?
+      no_prioritised_threads_html:
+        You haven't prioritised any threads yet. You could have a look
+        through the %{threads_link} and see if there's anything that you think is
+        important, or maybe you could %{add_issue_link} instead?
       no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
       no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
       no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby issues here."
@@ -73,6 +77,7 @@
       group_threads_desc_html:
         Recent threads with activity from your groups.
       update_your_locations: "Update your locations"
+      my_priorities: "My Priorities"
       my_threads: "My Threads"
       issues_nearby: "Issues Nearby"
       posted:

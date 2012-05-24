@@ -27,4 +27,8 @@ class UserThreadPriority < ActiveRecord::Base
   def self.priorities_map
     PRIORITIES.map {|p,v| [I18n.t(".thread_priorities.#{p.to_s}"), v] }
   end
+
+  def label
+    PRIORITIES.key(priority)
+  end
 end
