@@ -70,7 +70,7 @@ class MessageThreadsController < ApplicationController
     constraint = thread.issue ? pref : pref.and(t[:involve_my_groups_admin].eq(true))
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
-      if Authorization::Engine.instance.permit? :show, { object: thread, user: member }
+      if Authorization::Engine.instance.permit? :show, { object: thread, user: member, user_roles: [:member, :guest] }
         thread.subscriptions.create(user: member) unless member.subscribed_to_thread?(thread)
       end
     end
@@ -85,7 +85,7 @@ class MessageThreadsController < ApplicationController
         all
 
     locations.each do |loc|
-      if Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user }
+      if Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user, user_roles: [:member, :guest] }
         thread.subscriptions.create(user: loc.user) unless loc.user.subscribed_to_thread?(thread)
       end
     end

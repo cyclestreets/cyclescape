@@ -15,4 +15,25 @@ class DashboardsController < ApplicationController
 
     @prioritised_threads = ThreadListDecorator.decorate(current_user.prioritised_threads.order("priority desc").order_by_latest_message.limit(20))
   end
+
+  def search
+    # Ideally, this would be delegated to the different controllers.
+
+    @query = params[:query]
+
+    # Threads, with permission check
+    unfiltered_results = MessageThread.find_with_index(@query)
+    results = unfiltered_results.select{ |t| permitted_to?(:show, t) }
+    @threads = ThreadListDecorator.decorate(results)
+
+    # Issues
+    issues = Issue.find_with_index(@query)
+    @issues = IssueDecorator.decorate(issues)
+
+    # Library Items
+    library_items = Library::Item.find_with_index(@query)
+    @library_items = Library::ItemDecorator.decorate(library_items)
+
+    # Users? Groups?
+  end
 end

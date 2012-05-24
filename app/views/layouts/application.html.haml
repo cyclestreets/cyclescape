@@ -46,6 +46,10 @@
       #crumb-search
         .wrapper
           = content_for :subnav
+    - else
+      #crumb-search
+        .wrapper
+          = render partial: "layouts/search"
     .flash-container
       - [:alert, :notice].each do |type|
         - if flash.key? type

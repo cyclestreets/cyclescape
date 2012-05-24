@@ -182,10 +182,10 @@ describe "Group threads", use: :subdomain do
           let(:issue) { FactoryGirl.create(:issue) }
           let(:stranger) { FactoryGirl.create(:user) }
           let!(:stranger_location) { FactoryGirl.create(:user_location, user: stranger, location: issue.location.buffer(1)) }
+          let(:stewie) { FactoryGirl.create(:stewie) }
+          let!(:stewie_location) { FactoryGirl.create(:user_location, user: stewie, location: issue.location.buffer(1)) }
 
-          it "should not autosubscribe non-members with overlapping areas" do
-            stranger.prefs.update_attribute(:involve_my_locations, "subscribe")
-
+          def create_private_group_thread
             visit issue_path(issue)
             click_on "Discuss"
             fill_in "Title", with: "Private thread"
@@ -194,7 +194,21 @@ describe "Group threads", use: :subdomain do
             click_on "Create Thread"
 
             current_group.threads.last.privacy.should eql("group")
+          end
+
+          it "should not autosubscribe non-members with overlapping areas" do
+            stranger.prefs.update_attribute(:involve_my_locations, "subscribe")
+            create_private_group_thread
+
             stranger.subscribed_to_thread?(current_group.threads.last).should be_false
+          end
+
+          it "should not autosubscribe administrators with overlapping areas" do
+            # because it gets annoying fast, trust me.
+            stewie.prefs.update_attribute(:involve_my_locations, "subscribe")
+            create_private_group_thread
+
+            stewie.subscribed_to_thread?(current_group.threads.last).should be_false
           end
         end
       end
