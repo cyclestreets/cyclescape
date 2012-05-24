@@ -104,7 +104,7 @@ authorization do
       to :show
       if_attribute public?: is { true }
     end
-    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :index
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: [:index, :search]
     has_permission_on :message_photos, to: :show
     has_permission_on :pages, to: :show
     has_permission_on :site_comments, to: [:new, :create]

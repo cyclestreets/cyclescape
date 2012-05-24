@@ -44,4 +44,16 @@ describe PhotoMessage do
       subject.photo_preview.height.should == 200
     end
   end
+
+  context "searchable text" do
+    subject { FactoryGirl.create(:photo_message_with_description) }
+
+    it "should contain the caption" do
+      subject.searchable_text.should include(subject.caption)
+    end
+
+    it "should contain the description" do
+      subject.searchable_text.should include(subject.description)
+    end
+  end
 end

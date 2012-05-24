@@ -59,6 +59,9 @@ Cyclescape::Application.routes.draw do
     resources :messages do
       put 'censor', :on => :member
     end
+    collection do
+      get "search"
+    end
     scope module: :message do
       resources :photos, only: [:create, :show]
       resources :links, only: [:create]

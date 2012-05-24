@@ -8,8 +8,10 @@
       - if params[:query]
         = button_tag t(".clear_submit"), class: "submit", value: "clear"
 
-%section.threads
-  %h1= t ".title"
+%h1= t(".title")
+- if @results.count > 0
+  %p= t(".results_found", count: @results.count, query: @query)
   %ul.thread-list
-    = render partial: "message_threads/list", collection: @threads, as: :thread
-  = will_paginate @threads
+    = render partial: "message_threads/list", collection: @results, as: :thread
+- else
+  %p= t(".no_results_found", query: @query)
