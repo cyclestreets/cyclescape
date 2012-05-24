@@ -28,7 +28,9 @@ Cyclescape::Application.routes.draw do
     issues_route controller: "group/issues"
   end
 
-  resource :overview, as: :dashboard, controller: "dashboards"
+  resource :overview, as: :dashboard, controller: "dashboards" do
+    get 'search'
+  end
 
   issues_route
 

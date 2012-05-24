@@ -1,0 +1,26 @@
+%h1= t(".title")
+- if @threads.count == 0 and @issues.count == 0 and @library_items.count == 0
+  %p= t(".no_results_found", query: @query)
+- else
+  %section.content-no-sidebar#content
+    %ul.tabs.styled-tabs
+      %li= link_to t(".thread_results"), "#thread-results"
+      %li= link_to t(".issue_results"), "#issue-results"
+      %li= link_to t(".library_results"), "#library-results"
+    .panes
+      .pane
+        %p= t(".threads_found", count: @threads.count, query: @query)
+        - if @threads.count > 0
+          %ul.thread-list
+            = render partial: "message_threads/list", collection: @threads, as: :thread
+      .pane
+        %p= t(".issues_found", count: @issues.count, query: @query)
+        - if @issues.count > 0
+          %ul.issue-list
+            = render partial: "issues/compact", collection: @issues, as: :issue
+      .pane
+        %p= t(".library_items_found", count: @library_items.count, query: @query)
+        - if @library_items.count > 0
+          %ul
+            - @library_items.each do |item|
+              %li= link_to item.title, item.component

@@ -87,6 +87,24 @@
         photo_message_html: "%{creator_link} posted a photo"
         link_message_html: "%{creator_link} posted a link"
         library_item_message_html: "%{creator_link} added a library item"
+    search:
+      no_results_found: "No results found for '%{query}'"
+      thread_results: "Threads"
+      issue_results: "Issues"
+      library_results: "Library"
+      threads_found:
+        zero: "No threads found for '%{query}'"
+        one: "One thread found for '%{query}'"
+        other: "%{count} threads found for '%{query}'"
+      issues_found:
+        zero: "No issues found for '%{query}'"
+        one: "One issue found for '%{query}'"
+        other: "%{count} issues found for '%{query}'"
+      library_items_found:
+        zero: "No library items found for '%{query}'"
+        one: "One library item found for '%{query}'"
+        other: "%{count} library items found for '%{query}'"
+      title: "Search Results"
   devise:
     registrations:
       edit:
@@ -316,6 +334,9 @@
     group_selector:
       group_selector: "Group"
       no_group: "No Group"
+    search:
+      search: "Search"
+      search_button: "Go"
   libraries:
     search:
       no_results_found: "No results found for '%{query}'."

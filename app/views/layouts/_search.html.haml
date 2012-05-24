@@ -1,0 +1,5 @@
+.main-search-box
+  = form_tag(search_dashboard_path, {method: :get, class: "filters"}) do
+    = text_field_tag :query, params[:query], placeholder: t(".search")
+    = button_tag t(".search_button")
+
