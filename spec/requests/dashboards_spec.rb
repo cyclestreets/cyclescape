@@ -161,5 +161,30 @@ describe "User dashboards" do
         end
       end
     end
+
+    context "search" do
+      include_context "signed in as a site user"
+
+      let!(:thread) { FactoryGirl.create(:message_thread, title: "bananas") }
+      let!(:issue) { FactoryGirl.create(:issue, title: "bananas also") }
+      let!(:library_note) { FactoryGirl.create(:library_document, title: "more bananas") }
+      let(:search_button) { I18n.t("layouts.search.search_button") }
+
+      it "should find some bananas" do
+        visit dashboard_path
+        within('.main-search-box') do
+          fill_in "query", with: "bananas"
+          click_on search_button
+        end
+
+        page.should have_content("One thread")
+        page.should have_content("One issue")
+        page.should have_content("One library item")
+
+        page.should have_content(thread.title)
+        page.should have_content(issue.title)
+        page.should have_content(library_note.title)
+      end
+    end
   end
 end
