@@ -106,6 +106,32 @@ describe "User dashboards" do
       end
     end
 
+    context "priorities" do
+      include_context "signed in as a site user"
+
+      context "no priorities" do
+        it "should give a warning" do
+          visit dashboard_path
+          within("#my-priorities") do
+            page.should have_content(I18n.t(".dashboards.show.add_a_new_issue"))
+          end
+        end
+      end
+
+      context "with prioritised threads" do
+        let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+        let!(:priority) { FactoryGirl.create(:user_thread_priority, thread: thread, user: current_user) }
+
+        it "should show the thread" do
+          visit dashboard_path
+          within("#my-priorities") do
+            page.should have_content(thread.title)
+            page.should have_content(I18n.t("thread_priorities.#{priority.label}"))
+          end
+        end
+      end
+    end
+
     context "deadlines" do
       include_context "signed in as a site user"
 

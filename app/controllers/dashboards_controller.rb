@@ -12,5 +12,7 @@ class DashboardsController < ApplicationController
 
     deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 8)
     @deadline_threads = ThreadListDecorator.decorate(deadline_threads)
+
+    @prioritised_threads = ThreadListDecorator.decorate(current_user.prioritised_threads.order("priority desc").order_by_latest_message.limit(20))
   end
 end
