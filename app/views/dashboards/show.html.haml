@@ -3,6 +3,7 @@
     %ul.tabs.styled-tabs
       %li= link_to t(".my_threads"), "#my-threads"
       %li= link_to t(".issues_nearby"), "#issues-nearby"
+      %li= link_to t(".my_priorities"), "#my-priorities"
       %li= link_to t(".deadlines"), "#deadlines"
 
     .panes
@@ -51,6 +52,24 @@
             %p= link_to t(".update_your_locations"), user_locations_path
             %ul.issue-list
               = issues_list @relevant_issues, collapsed: true
+      #my-priorities
+        %section.threads
+          - if @prioritised_threads.empty?
+            %p= t ".no_prioritised_threads_html", threads_link: link_to(t(".recent_threads"), threads_path),
+                                          add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path)
+          - else
+            %table.dashboard-threads
+              %tbody
+                - @prioritised_threads.each do |thread|
+                  %tr
+                    %td.title
+                      %h4= link_to thread.title, thread_path(thread)
+                      - if thread.has_issue?
+                        %p= thread.issue_link
+                    %td.activity
+                      = thread.latest_activity
+                    %td.meta
+                      = t "thread_priorities.#{thread.priority_for(current_user).label}"
       #deadlines
         %section.threads
           - if @deadline_threads.empty?

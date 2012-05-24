@@ -197,4 +197,14 @@ describe MessageThread do
       thread.first_message.should == thread.messages.order("created_at").first
     end
   end
+
+  describe "messages text" do
+    let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+
+    it "should return the text from all the messages" do
+      thread.messages.each do |m|
+        thread.messages_text.should include(m.searchable_text)
+      end
+    end
+  end
 end
