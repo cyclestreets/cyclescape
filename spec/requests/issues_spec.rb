@@ -243,37 +243,47 @@ describe "Issues" do
     end
 
     it "should return results for a title search" do
-      fill_in search_field, with: issue.title
-      click_on search_button
+      within('#page') do
+        fill_in search_field, with: issue.title
+        click_on search_button
+      end
 
       page.should have_content(issue.title)
     end
 
     it "should return results for a description search" do
-      fill_in search_field, with: issue.description
-      click_on search_button
+      within('#page') do
+        fill_in search_field, with: issue.description
+        click_on search_button
+      end
 
       page.should have_content(issue.title)
     end
 
     it "should return results for a tag search" do
-      fill_in search_field, with: issue.tags.first.name
-      click_on search_button
+      within('#page') do
+        fill_in search_field, with: issue.tags.first.name
+        click_on search_button
+      end
 
       page.should have_content(issue.title)
     end
 
     it "should return no results for gibberish" do
-      fill_in search_field, with: "abcdefgh12345"
-      click_on search_button
+      within('#page') do
+        fill_in search_field, with: "abcdefgh12345"
+        click_on search_button
+      end
 
       page.should have_content("No issues found")
     end
 
     it "should not return deleted issues" do
-      fill_in search_field, with: issue.title
-      issue.destroy
-      click_on search_button
+      within('#page') do
+        fill_in search_field, with: issue.title
+        issue.destroy
+        click_on search_button
+      end
 
       page.should have_content("No issues found")
     end

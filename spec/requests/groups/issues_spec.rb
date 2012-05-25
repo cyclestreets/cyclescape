@@ -39,8 +39,10 @@ describe "Issues in a group subdomain" do
 
       it "should return issues in the group's area" do
         visit issues_path
-        fill_in search_field, with: issues.first.title
-        click_on search_button
+        within('#page') do
+          fill_in search_field, with: issues.first.title
+          click_on search_button
+        end
         page.should have_link(issues.first.title, href: issue_path(issues.first))
         page.should have_no_content(outside_issue.title)
       end
@@ -49,8 +51,10 @@ describe "Issues in a group subdomain" do
         # FIXME: this test needs fixing, still shows results when none were expected
         return pending
         visit issues_path
-        fill_in search_field, with: outside_issue.title
-        click_on search_button
+        within('#page') do
+          fill_in search_field, with: outside_issue.title
+          click_on search_button
+        end
         page.should have_content("No issues found")
       end
     end
