@@ -6,6 +6,7 @@
   .panes
     .pane
       %p= t ".issue_threads_description", group_name: @group.name
+      %p= t ".issue_threads_addition_description"
       %ul.threads
         = render_threads_list @issue_threads
       = will_paginate @issue_threads, param_name: "issue_threads_page", params: {anchor: "issue-threads"}
