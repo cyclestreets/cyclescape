@@ -77,9 +77,9 @@
       group_threads_desc_html:
         Recent threads with activity from your groups.
       update_your_locations: "Update your locations"
-      my_priorities: "My Priorities"
-      my_threads: "My Threads"
-      issues_nearby: "Issues Nearby"
+      my_priorities: "My priorities"
+      my_threads: "My subscribed threads"
+      issues_nearby: "Latest issues nearby"
       posted:
         message_html: "%{creator_link} posted a message"
         deadline_message_html: "%{creator_link} posted a deadline"
