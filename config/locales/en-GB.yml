@@ -346,7 +346,9 @@
       title: "Library Search Results"
     show:
       title: "Library"
-      latest: "Latest"
+      overview_description_html: "The Library contains <strong>reusable resources</strong> for campaigning. Please add items you think might be useful in future."
+      overview_usage: "You can link to library items from discussion threads."
+      latest: "Latest items"
       item_created: "Posted %{time_ago} ago"
       search: "Search the library:"
       search_submit: "Search"
