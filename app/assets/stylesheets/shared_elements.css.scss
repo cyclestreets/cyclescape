@@ -1,6 +1,6 @@
 /* 4. SHARED ELEMENTS
 -------------------------------------------------------------- */
-ul.following-thread {
+ul.thread-metadata-listings {
   @include list-reset-soft;
   margin: 10px 0 !important;
   border-top: 1px solid $paneborder;
@@ -27,8 +27,7 @@ ul.following-thread {
         }
       }
       p {
-        margin: 0 0 0 10px;
-        float: left;
+        margin: 0 0 0 34px;
         strong {
           font-weight: bold;
         }

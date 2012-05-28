@@ -5,6 +5,10 @@
   - elsif items.empty?
     %p= t ".no_library_items"
   - else
-    %ul
+    %ul.thread-metadata-listings
       - items.each do |item|
-        %li= link_to item.title, item.component
+        %li
+          = link_to item.component do
+            %span.thumb
+            %p= item.title
+

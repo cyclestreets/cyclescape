@@ -4,7 +4,7 @@
     %dl
       %dt.title= t ".owner"
       %dd.title= link_to_profile group
-  %ul.following-thread
+  %ul.thread-metadata-listings
     - subscribers.each do |sub|
       %li
         = link_to user_profile_path(sub) do
