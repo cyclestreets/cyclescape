@@ -177,7 +177,7 @@
     message_threads:
       index:
         title: "Group Threads"
-        new_group_thread: "New Group Thread"
+        new_group_thread: "New Group Administrative thread"
         issue_threads: "Issue discussions"
         issue_threads_description: "These are public and private issue-based discussions belonging to %{group_name} on reported issues."
         issue_threads_addition_description: "To start a new issue-based discussion thread, go to the relevant issue."
