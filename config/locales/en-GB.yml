@@ -71,6 +71,7 @@
       no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
       no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby issues here."
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
+      planning_applications: "Planning Applications"
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
       group_threads: "Group Threads"

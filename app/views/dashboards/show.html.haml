@@ -5,6 +5,7 @@
       %li= link_to t(".issues_nearby"), "#issues-nearby"
       %li= link_to t(".my_priorities"), "#my-priorities"
       %li= link_to t(".deadlines"), "#deadlines"
+      %li= link_to t(".planning_applications"), "#planning"
 
     .panes
       #my-threads
@@ -91,3 +92,20 @@
                             %p= message.component.title
                     %td.meta
                       = thread.latest_activity_date
+      #planning
+        %section.planning_applications
+          - if @planning_applications.empty?
+            %p= t ".no_planning_applications"
+          - else
+            %table.dashboard-planning-applications
+              %tbody
+                - @planning_applications.each do |plan|
+                  %tr
+                    %td.title
+                      %h4= link_to plan.title, planning_application_path(plan)
+                      - if plan.has_issue?
+                        %p= plan.issue_link
+                    %td
+                      %p= plan.council_name
+                    %td
+                      %p= plan.uid

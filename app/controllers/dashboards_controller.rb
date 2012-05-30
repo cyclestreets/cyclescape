@@ -14,6 +14,8 @@ class DashboardsController < ApplicationController
     @deadline_threads = ThreadListDecorator.decorate(deadline_threads)
 
     @prioritised_threads = ThreadListDecorator.decorate(current_user.prioritised_threads.order("priority desc").order_by_latest_message.limit(20))
+
+    @planning_applications = PlanningApplicationDecorator.decorate(current_user.planning_applications_near_locations.order("created_at DESC"))
   end
 
   def search
