@@ -88,6 +88,11 @@ Cyclescape::Application.routes.draw do
     end
   end
 
+  resources :planning_applications do
+    get 'geometry', :on => :member
+    get 'convert', :on => :member
+  end
+
   resources :users do
     scope module: :user do
       resource :profile

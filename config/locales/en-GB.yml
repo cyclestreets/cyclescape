@@ -530,6 +530,19 @@
       photo_message: "Photo"
       sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
+  planning_applications:
+    show:
+      address_label: "Address:"
+      convert_to_issue: "Convert to an Issue"
+      council_label: "Council:"
+      data_from_openlylocal_html: "Planning application data is sourced from %{openlylocal_link}"
+      data_source: "Data Source"
+      location: "Location (based on postcode)"
+      openlylocal: "OpenlyLocal"
+      uid_label: "Application Reference:"
+      view_application_record: "View planning application record on OpenlyLocal"
+      view_council_record: "View %{council} record on OpenlyLocal"
+      view_official_application: "View official application"
   shared:
     edit_map:
       area: "area"

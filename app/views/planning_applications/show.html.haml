@@ -1,0 +1,27 @@
+%article.planning_application#content.content-wide-sidebar
+  %header
+    %h1= truncate @planning_application.title, length: 40, separator: ' '
+  %p= @planning_application.description
+  %dl
+    %dt= t(".address_label")
+    %dd= @planning_application.address
+    %dt= t(".uid_label")
+    %dd= @planning_application.uid
+    %dt= t(".council_label")
+    %dd= @planning_application.council_name
+
+  %section.map
+    %h2= t ".location"
+    = @planning_application.map
+
+
+%aside#sidebar.wide
+  - if permitted_to? :create, :issues
+    = link_to t(".convert_to_issue"), convert_planning_application_path(@planning_application), class: "btn-green"
+  %section.source.box
+    %header
+      %h2= t ".data_source"
+      %p= t ".data_from_openlylocal_html", openlylocal_link: link_to(t(".openlylocal"), "http://www.openlylocal.com")
+      %ul
+        %li= link_to t(".view_application_record"), @planning_application.openlylocal_url
+        %li= link_to t(".view_council_record", council: @planning_application.council_name), @planning_application.openlylocal_council_url
