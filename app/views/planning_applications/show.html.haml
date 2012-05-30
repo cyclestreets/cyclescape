@@ -17,7 +17,7 @@
 
 %aside#sidebar.wide
   - if permitted_to? :create, :issues
-    = link_to t(".convert_to_issue"), convert_planning_application_path(@planning_application), class: "btn-green"
+    = link_to t(".convert_to_issue"), new_planning_application_issue_path(@planning_application), class: "btn-green"
   %section.source.box
     %header
       %h2= t ".data_source"

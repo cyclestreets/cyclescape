@@ -90,7 +90,9 @@ Cyclescape::Application.routes.draw do
 
   resources :planning_applications do
     get 'geometry', :on => :member
-    get 'convert', :on => :member
+    scope module: "planning_application" do
+      resource :issue
+    end
   end
 
   resources :users do

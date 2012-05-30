@@ -79,7 +79,8 @@ authorization do
     has_permission_on :message_photos, :message_links, :message_deadlines, :message_library_items, :message_documents, to: :create
     has_permission_on :libraries, :library_documents, :library_notes, to: :manage
     has_permission_on :library_tags, to: :update
-    has_permission_on :planning_applications, to: [:view, :convert, :geometry, :all_geometries]
+    has_permission_on :planning_applications, to: [:view, :geometry, :all_geometries]
+    has_permission_on :planning_application_issues, to: [:new, :create]
     has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :user_prefs do
       to :manage
