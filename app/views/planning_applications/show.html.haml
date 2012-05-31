@@ -9,6 +9,8 @@
     %dd= @planning_application.uid
     %dt= t(".council_label")
     %dd= @planning_application.council_name
+    %dt= t(".official_application_label")
+    %dd= link_to t(".official_application"), @planning_application.url
 
   %section.map
     %h2= t ".location"

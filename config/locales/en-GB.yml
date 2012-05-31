@@ -539,6 +539,8 @@
       data_from_openlylocal_html: "Planning application data is sourced from %{openlylocal_link}"
       data_source: "Data Source"
       location: "Location (based on postcode)"
+      official_application: "View on council website"
+      official_application_label: "Official Application:"
       openlylocal: "OpenlyLocal"
       related_issue: "Related Issue"
       related_issue_guidance: "This planning application has a related issue:"
