@@ -540,6 +540,8 @@
       data_source: "Data Source"
       location: "Location (based on postcode)"
       openlylocal: "OpenlyLocal"
+      related_issue: "Related Issue"
+      related_issue_guidance: "This planning application has a related issue:"
       uid_label: "Application Reference:"
       view_application_record: "View planning application record on OpenlyLocal"
       view_council_record: "View %{council} record on OpenlyLocal"

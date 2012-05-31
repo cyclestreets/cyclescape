@@ -1,0 +1,15 @@
+Nested
+= semantic_form_for @issue, url: {action: :create}, html: {class: "guided"} do |f|
+  = f.inputs do
+    = f.input :title
+    = f.input :photo, as: :file
+    = f.input :retained_photo, as: :hidden
+    = f.input :loc_json, as: :hidden
+    %li.input.full-width
+      %label.label= t "formtastic.labels.issue.new.location"
+      = f.semantic_errors :location
+      = render partial: "shared/edit_map", locals: {thing: @issue}
+    = f.input :tags_string, as: :tags
+    = f.input :description
+  = f.buttons do
+    %li= button_tag t("formtastic.actions.issue.#{f.commit_button_i18n_key}"), type: "submit", class: "btn-green submit"
