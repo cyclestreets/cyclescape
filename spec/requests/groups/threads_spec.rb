@@ -36,7 +36,7 @@ describe "Group threads", use: :subdomain do
 
       before do
         visit group_threads_path(current_group)
-        click_link "New Group Thread"
+        click_link I18n.translate("group.message_threads.index.new_group_thread")
       end
 
       it "should create a new public thread" do
