@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120530133834) do
+ActiveRecord::Schema.define(:version => 20120531183533) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -198,13 +198,13 @@ ActiveRecord::Schema.define(:version => 20120530133834) do
 
   create_table "planning_applications", :force => true do |t|
     t.integer  "openlylocal_id",                                                      :null => false
-    t.string   "openlylocal_url"
-    t.string   "address"
+    t.text     "openlylocal_url"
+    t.text     "address"
     t.string   "postcode"
     t.text     "description"
     t.string   "council_name"
     t.string   "openlylocal_council_url"
-    t.string   "url"
+    t.text     "url"
     t.string   "uid",                                                                 :null => false
     t.integer  "issue_id"
     t.datetime "created_at",                                                          :null => false
