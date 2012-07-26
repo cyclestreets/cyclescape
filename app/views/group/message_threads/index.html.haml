@@ -1,7 +1,4 @@
 %h1= t ".title", group: @group.name
-%nav
-  %ul
-    %li= link_to t(".new_group_thread"), {action: :new}, class: "btn-green"
 %section.threads
   %ul.tabs.styled-tabs
     %li= link_to t(".issue_threads"), "#issue-threads"
@@ -9,11 +6,15 @@
   .panes
     .pane
       %p= t ".issue_threads_description", group_name: @group.name
+      %p= t ".issue_threads_addition_description"
       %ul.threads
         = render_threads_list @issue_threads
       = will_paginate @issue_threads, param_name: "issue_threads_page", params: {anchor: "issue-threads"}
     .pane
       %p= t ".general_threads_description"
+      %nav
+        %ul
+          %li= link_to t(".new_group_thread"), {action: :new}, class: "btn-green"
       %ul.threads
         = render_threads_list @general_threads
       = will_paginate @general_threads, param_name: "general_threads_page", params: {anchor: "general-threads"}
