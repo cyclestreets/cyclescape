@@ -1,0 +1,27 @@
+class AddIndexes < ActiveRecord::Migration
+  def change
+    add_index(:groups, :short_name)
+    add_index(:group_memberships, :group_id)
+    add_index(:group_memberships, :user_id)
+    add_index(:group_membership_requests, :user_id)
+    add_index(:group_membership_requests, :group_id)
+    add_index(:group_profiles, :group_id)
+    add_index(:issues, :created_by_id)
+    add_index(:messages, :thread_id)
+    add_index(:messages, :created_by_id)
+    add_index(:message_threads, :created_by_id)
+    add_index(:message_threads, :issue_id)
+    add_index(:message_threads, :group_id)
+    add_index(:thread_subscriptions, :user_id)
+    add_index(:thread_subscriptions, :thread_id)
+    add_index(:users, :email)
+    add_index(:user_locations, :user_id)
+    add_index(:user_prefs, :involve_my_locations)
+    add_index(:user_prefs, :involve_my_groups)
+    add_index(:user_prefs, :involve_my_groups_admin)
+    add_index(:user_prefs, :enable_email)
+    add_index(:user_profiles, :user_id)
+    add_index(:user_thread_priorities, :user_id)
+    add_index(:user_thread_priorities, :thread_id)
+  end
+end
