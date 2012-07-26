@@ -288,6 +288,7 @@ DEPENDENCIES
   rspec-rails
   ruby-prof
   ruby_parser
+  rubyzip
   sass-rails (~> 3.2.3)
   shoulda-matchers
   spork (~> 0.9.0.rc)
