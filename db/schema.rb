@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726161512) do
+ActiveRecord::Schema.define(:version => 20120726164632) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20120726161512) do
   end
 
   add_index "group_profiles", ["group_id"], :name => "index_group_profiles_on_group_id"
+  add_index "group_profiles", ["location"], :name => "index_group_profiles_on_location", :spatial => true
 
   create_table "groups", :force => true do |t|
     t.string   "name",                                         :null => false
@@ -108,6 +109,7 @@ ActiveRecord::Schema.define(:version => 20120726161512) do
   end
 
   add_index "issues", ["created_by_id"], :name => "index_issues_on_created_by_id"
+  add_index "issues", ["location"], :name => "index_issues_on_location", :spatial => true
 
   create_table "library_documents", :force => true do |t|
     t.integer "library_item_id", :null => false
@@ -140,6 +142,8 @@ ActiveRecord::Schema.define(:version => 20120726161512) do
     t.datetime "deleted_at"
     t.spatial  "location",       :limit => {:srid=>4326, :type=>"geometry"}
   end
+
+  add_index "library_items", ["location"], :name => "index_library_items_on_location", :spatial => true
 
   create_table "library_notes", :force => true do |t|
     t.integer "library_item_id",     :null => false
@@ -252,6 +256,7 @@ ActiveRecord::Schema.define(:version => 20120726161512) do
     t.spatial  "location",    :limit => {:srid=>4326, :type=>"geometry"}
   end
 
+  add_index "user_locations", ["location"], :name => "index_user_locations_on_location", :spatial => true
   add_index "user_locations", ["user_id"], :name => "index_user_locations_on_user_id"
 
   create_table "user_prefs", :force => true do |t|
