@@ -93,7 +93,7 @@ describe "Issue threads" do
         end
 
         it "should default to the group's privacy setting" do
-          current_group.update_attribute(:default_thread_privacy, "group")
+          current_group.update_column(:default_thread_privacy, "group")
           visit issue_path(issue)
           click_on "Discuss"
           page.should have_select("Privacy")
@@ -108,8 +108,8 @@ describe "Issue threads" do
         let(:notifiee) { group_membership.user }
 
         before do
-          notifiee.prefs.update_attribute(:involve_my_groups, "notify")
-          notifiee.prefs.update_attribute(:enable_email, true)
+          notifiee.prefs.update_column(:involve_my_groups, "notify")
+          notifiee.prefs.update_column(:enable_email, true)
           reset_mailer
         end
 
@@ -152,9 +152,9 @@ describe "Issue threads" do
       let!(:user_location) { FactoryGirl.create(:user_location, user: current_user, location: issue.location.buffer(1)) }
 
       before do
-        current_user.prefs.update_attribute(:involve_my_groups, "none")
-        notifiee.prefs.update_attribute(:involve_my_locations, "notify")
-        notifiee.prefs.update_attribute(:enable_email, true)
+        current_user.prefs.update_column(:involve_my_groups, "none")
+        notifiee.prefs.update_column(:involve_my_locations, "notify")
+        notifiee.prefs.update_column(:enable_email, true)
         reset_mailer
       end
 
@@ -201,8 +201,8 @@ describe "Issue threads" do
       end
 
       it "should send a new message notification to the person who started the thread" do
-        current_user.prefs.update_attribute(:involve_my_locations, "notify")
-        current_user.prefs.update_attribute(:enable_email, true)
+        current_user.prefs.update_column(:involve_my_locations, "notify")
+        current_user.prefs.update_column(:enable_email, true)
         create_thread
 
         mailbox = mailbox_for(current_user.email)
@@ -215,7 +215,7 @@ describe "Issue threads" do
       end
 
       it "should send a new message notification to anyone who is auto-subscribed to the thread" do
-        notifiee.prefs.update_attribute(:involve_my_locations, "subscribe")
+        notifiee.prefs.update_column(:involve_my_locations, "subscribe")
         create_thread
 
         mailbox = mailbox_for(notifiee.email)
@@ -245,7 +245,7 @@ describe "Issue threads" do
       end
 
       it "should not subscribe when the preference is not set" do
-        subscriber.prefs.update_attribute(:involve_my_locations, "notify")
+        subscriber.prefs.update_column(:involve_my_locations, "notify")
         create_thread
         subscriber.subscribed_to_thread?(issue.threads.last).should be_false
       end

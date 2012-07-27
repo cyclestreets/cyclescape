@@ -13,7 +13,7 @@ describe "Thread subscriptions" do
 
     context "for web only" do
       before do
-        current_user.prefs.update_attribute(:enable_email, false)
+        current_user.prefs.update_column(:enable_email, false)
       end
 
       it "should subscribe the user to the thread" do
@@ -51,7 +51,7 @@ describe "Thread subscriptions" do
     context "for email" do
       before do
         # Set the user to receive emails
-        current_user.prefs.update_attribute(:enable_email, true)
+        current_user.prefs.update_column(:enable_email, true)
       end
 
       it "should subscribe the user to the thread" do

@@ -31,7 +31,7 @@ class Message < ActiveRecord::Base
   validates :body, presence: true, unless: :component
 
   def censor!
-    update_attribute(:censored_at, Time.now)
+    update_attributes(censored_at: Time.now)
   end
 
   def censored?

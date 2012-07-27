@@ -8,7 +8,7 @@ describe "thread notifications" do
     include_context "signed in as a site user"
 
     before do
-      current_user.prefs.update_attribute(:enable_email, true)
+      current_user.prefs.update_column(:enable_email, true)
       visit thread_path(thread)
       subscribe_button.click
     end

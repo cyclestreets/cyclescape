@@ -26,7 +26,7 @@ class SiteComment < ActiveRecord::Base
   end
 
   def viewed!
-    update_attribute(:viewed_at, Time.now)
+    update_attributes(viewed_at: Time.now)
   end
 
   protected

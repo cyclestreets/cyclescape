@@ -8,7 +8,7 @@ module FakeDestroy
   end
 
   def destroy_with_fake(really = false)
-    if really then destroy_without_fake else update_attribute(:deleted_at, Time.now) end
+    if really then destroy_without_fake else update_attributes(deleted_at: Time.now) end
   end
 
   def deleted?
@@ -16,6 +16,6 @@ module FakeDestroy
   end
 
   def undelete!
-    update_attribute(:deleted_at, nil)
+    update_attributes(deleted_at: nil)
   end
 end
