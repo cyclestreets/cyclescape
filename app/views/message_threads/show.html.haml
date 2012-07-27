@@ -22,7 +22,7 @@
           - if permitted_to? :edit, @thread
             %li= link_to t(".edit"), edit_thread_path(@thread)
           - if permitted_to? :destroy, @thread
-            %li= link_to t(".destroy"), thread_path(@thread), method: :delete, confirm: t(".are_you_sure")
+            %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t(".are_you_sure") }
 
   = render collection: @messages, partial: "messages/message"
   = render "messages/new"
