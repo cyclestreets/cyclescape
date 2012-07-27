@@ -174,7 +174,7 @@ describe User do
 
     it "should invite a new user if their email is not found" do
       user = User.find_or_invite(attrs[:email], attrs[:full_name])
-      user.should be_invited
+      user.should be_invited_to_sign_up
     end
 
     it "should set the full name of an existing user if their email is not found" do
