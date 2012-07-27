@@ -128,7 +128,7 @@ describe Issue do
   describe "intersects" do
     context "should accept a variety of geometry types" do
       subject { FactoryGirl.create(:issue) }
-      let(:factory) { RGeo::Geos::Factory.new(srid: 4326) }
+      let(:factory) { RGeo::Geos.factory(srid: 4326) }
 
       it "should accept a point" do
         geom = factory.parse_wkt('POINT(-1 1)')
@@ -142,7 +142,7 @@ describe Issue do
     end
 
     context "different issue locations" do
-      let(:factory) { RGeo::Geos::Factory.new(srid: 4326) }
+      let(:factory) { RGeo::Geos.factory(srid: 4326) }
       let(:polygon) { 'POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))' }
       let!(:issue_entirely_surrounding) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0, 0 3, 3 3, 3 0, 0 0))') }
       let!(:issue_entirely_contained) { FactoryGirl.create(:issue, location: 'POLYGON ((1.2 1.2, 1.2 1.8, 1.8 1.8, 1.8 1.2, 1.2 1.2))') }

@@ -284,19 +284,19 @@ describe User do
 
     it "should return polygon for point" do
       subject.locations[0].location = point
-      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.geometry_type.type_name.should eq("Polygon")
       subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return polygon for line" do
       subject.locations[0].location = line
-      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.geometry_type.type_name.should eq("Polygon")
       subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return polygon for polygon" do
       subject.locations[0].location = polygon
-      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.geometry_type.type_name.should eq("Polygon")
       subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
@@ -304,7 +304,7 @@ describe User do
       subject.locations[0].location = point
       subject.locations.create({location: line})
       subject.locations.create({location: polygon})
-      subject.buffered_locations.should be_an(RGeo::Geos::MultiPolygonImpl)
+      subject.buffered_locations.geometry_type.type_name.should eq("MultiPolygon")
     end
   end
 
