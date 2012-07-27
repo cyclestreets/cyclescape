@@ -1,10 +1,3 @@
-GIT
-  remote: git://github.com/ctran/annotate_models.git
-  revision: 26f3d91e5dd1acc92e80b593f67d07e799a62d43
-  specs:
-    annotate (2.5.0.pre3)
-      rake
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -40,6 +33,8 @@ GEM
       multi_json (~> 1.0)
     acts_as_indexed (0.7.8)
     addressable (2.2.8)
+    annotate (2.5.0.pre3)
+      rake
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
@@ -256,7 +251,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgis-adapter
   acts_as_indexed
-  annotate!
+  annotate (>= 2.5.0.pre1)
   capybara
   coffee-rails (~> 3.2.1)
   compass-rails

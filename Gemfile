@@ -46,7 +46,7 @@ group :assets do
 end
 
 group :development do
-  gem 'annotate', git: 'git://github.com/ctran/annotate_models.git', require: false
+  gem 'annotate', '>=2.5.0.pre1', require: false
 
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded
