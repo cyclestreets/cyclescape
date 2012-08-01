@@ -24,7 +24,8 @@ class Library::Component < ActiveRecord::Base
   protected
 
   def create_library_item
-    item = build_item(created_by: created_by)
+    item = build_item
+    item.created_by = created_by
     item.save!
     self.item = item
   end
