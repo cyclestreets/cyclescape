@@ -16,8 +16,10 @@ class Group::MessageThreadsController < MessageThreadsController
   end
 
   def create
-    @thread = @group.threads.build(params[:thread].merge(created_by: current_user))
-    @message = @thread.messages.build(params[:message].merge(created_by: current_user))
+    @thread = @group.threads.build(params[:thread])
+    @thread.created_by = current_user
+    @message = @thread.messages.build(params[:message])
+    @message.created_by = current_user
 
     if @thread.save
       @thread.subscriptions.create({user: current_user}, without_protection: true)

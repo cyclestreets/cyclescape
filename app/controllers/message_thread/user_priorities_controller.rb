@@ -1,6 +1,7 @@
 class MessageThread::UserPrioritiesController < MessageThread::BaseController
   def create
-    utp = @thread.user_priorities.build(user_id: current_user.id)
+    utp = @thread.user_priorities.build
+    utp.user = current_user
 
     if utp.update_attributes(params[:user_thread_priority])
       set_flash_message(:success)
