@@ -17,7 +17,7 @@
 class Message < ActiveRecord::Base
   include FakeDestroy
 
-  attr_accessible :body
+  attr_accessible :body, :component
 
   belongs_to :thread, class_name: "MessageThread"
   belongs_to :created_by, class_name: "User"
