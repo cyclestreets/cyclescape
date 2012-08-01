@@ -86,7 +86,7 @@ class MessageThreadsController < ApplicationController
 
     locations.each do |loc|
       if Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user, user_roles: [:member, :guest] }
-        thread.subscriptions.create(user: loc.user) unless loc.user.subscribed_to_thread?(thread)
+        thread.subscriptions.create({user: loc.user}, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
       end
     end
   end
