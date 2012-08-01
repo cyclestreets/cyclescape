@@ -19,6 +19,8 @@ class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
+  attr_accessible :title, :privacy, :group_id, :tags_string
+
   acts_as_indexed :fields => [:title, :messages_text, :tags_string]
 
   ALLOWED_PRIVACY = %w(public group committee)
