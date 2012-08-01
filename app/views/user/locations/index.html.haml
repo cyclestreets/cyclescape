@@ -29,7 +29,7 @@
                 %div{id: dom_id, class: "tinymap"}
               != m.to_html
             %td= link_to t(".edit"), edit_user_location_path(l)
-            %td= link_to t(".delete"), user_location_path(l), confirm: t(".confirm"), method: "delete"
+            %td= link_to t(".delete"), user_location_path(l), data: { confirm: t(".confirm") }, method: "delete"
             %td
               - if l.overlapping_groups.count > 0
                 %ul

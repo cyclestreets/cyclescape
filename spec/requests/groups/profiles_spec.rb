@@ -39,6 +39,14 @@ describe "Group profiles" do
         visit edit_group_profile_path(current_group)
         page.should have_content("Edit Profile")
       end
+
+      it "should work" do
+        visit edit_group_profile_path(current_group)
+        fill_in :description, with: "Updated description"
+        click_on "Save"
+        visit group_profile_path(current_group)
+        page.should have_content("Updated description")
+      end
     end
   end
 

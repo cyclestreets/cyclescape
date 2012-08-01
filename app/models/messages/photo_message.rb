@@ -14,6 +14,7 @@
 
 class PhotoMessage < MessageComponent
   # Core associations defined in MessageComponent
+  attr_accessible :photo, :retained_photo, :caption, :description
 
   image_accessor :photo do
     storage_path :generate_photo_path

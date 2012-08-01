@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:title) {|n| "Imaginative deadline title #{n}" }
     sequence(:deadline) { |n| Time.now + n.days }
 
-    after_build do |o|
+    after(:build) do |o|
       o.thread = o.message.thread
       o.message.update_attributes(component: o)
     end

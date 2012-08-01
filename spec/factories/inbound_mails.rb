@@ -19,7 +19,7 @@ FactoryGirl.define do
     recipient { to || "cyclescape@example.com" }
     raw_message { File.read(raw_email_path("basic")) }
 
-    after_build do |mail, proxy|
+    after(:build) do |mail, proxy|
       if proxy.to
         # Get a Mail object, rewrite the recipient and save
         mesg = mail.message

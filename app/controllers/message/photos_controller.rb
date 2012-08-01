@@ -1,10 +1,13 @@
 class Message::PhotosController < Message::BaseController
   def create
-    @message = @thread.messages.build(created_by: current_user)
-    @photo = PhotoMessage.new(params[:photo_message].merge({
-        thread: @thread,
-        message: @message,
-        created_by: current_user}))
+    @message = @thread.messages.build
+    @message.created_by = current_user
+
+    @photo = PhotoMessage.new(params[:photo_message])
+    @photo.thread = @thread
+    @photo.message = @message
+    @photo.created_by = current_user
+
     @message.component = @photo
 
     if @message.save

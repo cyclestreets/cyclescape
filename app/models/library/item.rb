@@ -16,6 +16,8 @@ class Library::Item < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
+  attr_accessible :component, :tags_string
+
   acts_as_indexed :fields => [:search]
 
   belongs_to :component, polymorphic: true

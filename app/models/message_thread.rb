@@ -19,6 +19,8 @@ class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
+  attr_accessible :title, :privacy, :group_id, :tags_string
+
   acts_as_indexed :fields => [:title, :messages_text, :tags_string]
 
   ALLOWED_PRIVACY = %w(public group committee)
@@ -78,7 +80,7 @@ class MessageThread < ActiveRecord::Base
       found.undelete!
       found
     else
-      subscriptions.create(user: user)
+      subscriptions.create({user: user}, without_protection: true)
     end
   end
 
@@ -99,7 +101,7 @@ class MessageThread < ActiveRecord::Base
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select {|f| !f.hidden? }.join
 
-    messages.create!(body: stripped, created_by: user)
+    messages.create!({body: stripped, created_by: user}, without_protection: true)
   end
 
   def email_subscribers

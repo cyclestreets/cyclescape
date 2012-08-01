@@ -23,8 +23,8 @@ describe NewIssueNotifier do
       let(:location) { FactoryGirl.create(:user_location, loc_json: issue.loc_json, user: user) }
 
       before do
-        user.prefs.update_attribute(:involve_my_locations, "notify")
-        user.prefs.update_attribute(:enable_email, true)
+        user.prefs.update_column(:involve_my_locations, "notify")
+        user.prefs.update_column(:enable_email, true)
       end
 
       it "should add a buffer to the issue location"

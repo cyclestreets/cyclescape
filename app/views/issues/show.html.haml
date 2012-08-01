@@ -7,7 +7,7 @@
           - if permitted_to?(:edit, @issue)
             %li= link_to t(".edit_issue"), edit_issue_path(@issue)
           - if permitted_to?(:destroy, @issue)
-            %li= link_to t(".delete_issue"), issue_path(@issue), confirm: t(".confirm_delete"), method: :delete
+            %li= link_to t(".delete_issue"), issue_path(@issue), data: { confirm: t(".confirm_delete") }, method: :delete
   .main
     %section.meta
       %p= t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)

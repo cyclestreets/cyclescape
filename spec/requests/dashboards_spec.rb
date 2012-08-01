@@ -82,7 +82,9 @@ describe "User dashboards" do
       context "unhelpful location" do
         before do
           # Give the current user a location that doesn't match the issue
-          ul = current_user.locations.build(category: FactoryGirl.create(:location_category), location: "POINT(-90 -90)")
+          ul = current_user.locations.new
+          ul.category = FactoryGirl.create(:location_category)
+          ul.location = "POINT(-90 -90)"
           ul.save
           visit dashboard_path
         end
@@ -95,7 +97,9 @@ describe "User dashboards" do
       context "matching location" do
         before do
           # Give the current user a location that matches the issue
-          ul = current_user.locations.build(category: FactoryGirl.create(:location_category), location: issue.location)
+          ul = current_user.locations.new
+          ul.category = FactoryGirl.create(:location_category)
+          ul.location = issue.location
           ul.save
           visit dashboard_path
         end

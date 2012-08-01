@@ -11,6 +11,8 @@
 #
 
 class UserThreadPriority < ActiveRecord::Base
+  attr_accessible :priority
+
   PRIORITIES = { very_high: 10,
                  high: 8,
                  medium: 6,

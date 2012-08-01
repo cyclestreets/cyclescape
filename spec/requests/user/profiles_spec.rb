@@ -77,7 +77,7 @@ describe "User profiles" do
     end
 
     it "should not show private threads" do
-      threads.first.update_attribute(:privacy, "group")
+      threads.first.update_column(:privacy, "group")
       first_messages and second_messages
       visit user_profile_path(current_user)
       page.should have_no_content(threads.first.title)

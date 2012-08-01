@@ -4,7 +4,7 @@ class Site::CommentsController < ApplicationController
   end
 
   def new
-    @site_comment = SiteComment.new(user: current_user)
+    @site_comment = current_user ? current_user.site_comments.new : SiteComment.new
   end
 
   def create

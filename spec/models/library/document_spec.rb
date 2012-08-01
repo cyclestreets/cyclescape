@@ -40,13 +40,13 @@ describe Library::Document do
     let(:attrs) { FactoryGirl.attributes_for(:library_document) }
 
     it "should create a library item automatically" do
-      doc = Library::Document.new(attrs)
+      doc = Library::Document.new(attrs, without_protection: true)
       doc.save!.should be_true
       doc.item.should be_true
     end
 
     it "should create an item with reciprocal component links" do
-      doc = Library::Document.new(attrs)
+      doc = Library::Document.new(attrs, without_protection: true)
       doc.save!.should be_true
       doc.item.component_type.should == "Library::Document"
       doc.item.component_id.should == doc.id
