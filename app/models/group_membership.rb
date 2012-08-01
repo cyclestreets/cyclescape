@@ -12,6 +12,8 @@
 #
 
 class GroupMembership < ActiveRecord::Base
+  attr_accessible :user_id, :role, :user_attributes
+
   ALLOWED_ROLES = %w(committee member)
 
   belongs_to :group
