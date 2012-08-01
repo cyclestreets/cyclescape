@@ -28,8 +28,8 @@ class SiteComment < ActiveRecord::Base
   end
 
   def viewed!
-    viewed_at = Time.now
-    save
+    self.viewed_at = Time.now
+    save!
   end
 
   protected
