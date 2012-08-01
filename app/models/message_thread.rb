@@ -80,7 +80,7 @@ class MessageThread < ActiveRecord::Base
       found.undelete!
       found
     else
-      subscriptions.create(user: user)
+      subscriptions.create({user: user}, without_protection: true)
     end
   end
 
