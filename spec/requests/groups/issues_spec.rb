@@ -6,7 +6,8 @@ describe "Issues in a group subdomain" do
 
   before do
     # Groups create empty profiles automatically, so just update the existing one
-    current_group.profile.update_attributes(FactoryGirl.attributes_for(:big_group_profile))
+    current_group.profile.location = "POLYGON ((0 0, 0 100, 100 100, 100 0, 0 0))"
+    current_group.profile.save!
   end
 
   context "index" do
