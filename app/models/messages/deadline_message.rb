@@ -14,6 +14,8 @@
 #
 
 class DeadlineMessage < MessageComponent
+  attr_accessible :deadline, :title
+
   validates :deadline, presence: true
   validates :title, presence: true
 end

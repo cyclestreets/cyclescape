@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
   def create
     @thread = MessageThread.find(params[:thread_id])
-    @message = @thread.messages.build(params[:message].merge(created_by: current_user))
+    @message = @thread.messages.build(params[:message])
+    @message.created_by = current_user
 
     if @message.save
       @thread.add_subscriber(current_user) unless current_user.ever_subscribed_to_thread?(@thread)

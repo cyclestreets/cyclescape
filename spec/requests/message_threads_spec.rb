@@ -391,7 +391,8 @@ describe "Message threads" do
   context "search" do
     before do
         [thread, private_thread, committee_thread].each do |t|
-          m = t.messages.new(body: "Findable with bananas", created_by: FactoryGirl.create(:user))
+          m = t.messages.new(body: "Findable with bananas")
+          m.created_by = FactoryGirl.create(:user)
           m.save!
           t.reload
         end

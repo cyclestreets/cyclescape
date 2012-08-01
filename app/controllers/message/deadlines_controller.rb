@@ -1,10 +1,13 @@
 class Message::DeadlinesController < Message::BaseController
   def create
-    @message = @thread.messages.build(created_by: current_user)
-    @deadline = DeadlineMessage.new(params[:deadline_message].merge({
-        thread: @thread,
-        message: @message,
-        created_by: current_user}))
+    @message = @thread.messages.build
+    @message.created_by = current_user
+
+    @deadline = DeadlineMessage.new(params[:deadline_message])
+    @deadline.thread = @thread
+    @deadline.message = @message
+    @deadline.created_by = current_user
+
     @message.component = @deadline
 
     if @message.save
