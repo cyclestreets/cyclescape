@@ -101,7 +101,7 @@ class MessageThread < ActiveRecord::Base
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select {|f| !f.hidden? }.join
 
-    messages.create!(body: stripped, created_by: user)
+    messages.create!({body: stripped, created_by: user}, without_protection: true)
   end
 
   def email_subscribers
