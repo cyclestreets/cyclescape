@@ -392,9 +392,9 @@
       new_group_thread:
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
       new_group_location_issue:
-        subject: "[Cyclescape] New issue reported in %{group_name}'s area"
+        subject: "[Cyclescape] New issue - \"%{issue_title}\" (%{group_name})"
       new_user_location_issue:
-        subject: "[Cyclescape] New issue reported near your %{category} location"
+        subject: "[Cyclescape] New issue - \"%{issue_title}\""
       new_user_location_issue_thread:
         subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
 

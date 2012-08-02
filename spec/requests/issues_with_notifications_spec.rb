@@ -29,7 +29,7 @@ describe "Issue notifications" do
         page.should have_content(issue_values[:title])
         category_name = user_location.category.name.downcase
         email = open_last_email_for(user_location.user.email)
-        email.should have_subject("[Cyclescape] New issue reported near your #{category_name} location")
+        email.should have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\"")
         email.should have_body_text(issue_values[:title])
         email.should have_body_text(issue_values[:description])
         email.should have_body_text(current_user.name)
@@ -76,7 +76,7 @@ describe "Issue notifications" do
         fill_in_issue
         click_on "Send Report"
         email = open_last_email_for(notifiee.email)
-        email.should have_subject("[Cyclescape] New issue reported in #{group_profile.group.name}'s area")
+        email.should have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\" (#{group_profile.group.name})")
         email.should have_body_text("in the #{group_profile.group.name}'s area")
         email.should have_body_text(issue_values[:description])
         email.should have_body_text(issue_values[:title])
