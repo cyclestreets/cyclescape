@@ -516,6 +516,7 @@
         success: "Photo uploaded"
       show:
         photo_alt: "A photo entitled %{caption}."
+        view_original_image: "View the original image"
   messages:
     censor:
       failure: "Could not censor message"
