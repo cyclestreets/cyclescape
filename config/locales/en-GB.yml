@@ -163,6 +163,7 @@
         by: "by %{name}"
         confirm: "Confirm"
         created_at: "%{time_ago} ago"
+        no_requests_yet: "There have been no membership requests for this group yet."
         reject: "Reject"
         requested_at: "Requested At"
         status: "Status"
