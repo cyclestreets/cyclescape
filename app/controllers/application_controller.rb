@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   def ensure_proper_protocol
     if request.ssl? && !ssl_allowed_action?
       flash.keep
-      redirect_to "http://" + request.host + request.fullpath
+      redirect_to "http://" + request.host + request.fullpath # FIXME not safe for domains with ports
     end
   end
 
