@@ -52,6 +52,10 @@ class Group < ActiveRecord::Base
     memberships.where(user_id: user.id).first
   end
 
+  def pending_membership_requests
+    membership_requests.where(status: :pending)
+  end
+
   def subdomain
     short_name
   end

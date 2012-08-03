@@ -217,6 +217,10 @@
       our_areas: "Our Areas"
       recent_issues: "Recent Issues in this group's area"
       recent_threads: "Latest Discussions"
+      view_membership_requests:
+        zero: "Review Membership Requests"
+        one: "View Pending Membership Request"
+        other: "View Pending Membership Requests"
   home:
     show:
       introduction_html:

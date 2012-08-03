@@ -49,6 +49,7 @@
       %h2= t ".group_management"
       %p= link_to t(".edit_group_profile"), edit_group_profile_path(@group)
       %p= link_to t(".edit_group_members"), group_members_path(@group)
+      %p= link_to t(".view_membership_requests", count: @group.pending_membership_requests.count), group_membership_requests_path(@group)
   %section.box
     %h2= t ".group_organisers"
     %ul.following-thread
