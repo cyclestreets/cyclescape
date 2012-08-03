@@ -52,6 +52,11 @@
       %p= link_to t(".view_membership_requests", count: @group.pending_membership_requests.count), group_membership_requests_path(@group)
   %section.box
     %h2= t ".group_organisers"
-    %ul.following-thread
+    %ul.thread-metadata-listings
       - @group.committee_members.each do |member|
-        %li= link_to_profile member
+        %li
+          = link_to user_profile_path(member) do
+            %span.thumb
+              - if member.profile.picture
+                = image_tag member.profile.picture_thumbnail.url
+            %p= member.name
