@@ -28,7 +28,12 @@
   &:active {
     @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 0 8px);
   }
-  
+  &:disabled {
+    // not sure if hardcoding particular colours is best?
+    color: $grey3;
+    background: $grey;
+    border: 1px solid $grey3;
+  }
 }
 @mixin button-reset-grad-text($c1: $lightergrey, $c2: $lightgrey, $c3: $grey3, $c4: $white) {
   @include button-reset-text($c1, $c2, $c3, $c4);

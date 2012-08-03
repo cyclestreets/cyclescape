@@ -59,6 +59,7 @@
         privacy: "Select if this thread should be visible to members of the group only or everyone."
     actions:
       update: "Save"
+      saving: "Saving\u2026"
       deadline_message:
         create: "Add Deadline"
       document_message:
