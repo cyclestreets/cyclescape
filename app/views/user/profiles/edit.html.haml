@@ -7,6 +7,8 @@
       = f.inputs do
         = f.input :picture, as: :file
         = f.input :retained_picture, as: :hidden
+        - if @profile.picture
+          = f.input :remove_picture, as: :boolean
         = f.input :website
         = f.input :about
       = f.buttons
