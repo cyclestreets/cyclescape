@@ -114,6 +114,9 @@ section.thread {
         width: 540px;
         float: right;
       }
+      .censored {
+        color: $lightgrey;
+      }
     }
     &.unread {
       background: $pane1;
