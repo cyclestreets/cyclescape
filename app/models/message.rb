@@ -51,7 +51,7 @@ class Message < ActiveRecord::Base
 
   def update_thread_search
     logger.debug(debug_msg("Updating thread search..."))
-    thread.update_index if thread
+    SearchUpdater.update_thread(thread) if thread
     logger.debug(debug_msg("Finished updating thread search..."))
     true
   end

@@ -10,7 +10,7 @@
 #
 
 class UserProfile < ActiveRecord::Base
-  attr_accessible :picture, :retained_picture, :website, :about
+  attr_accessible :picture, :retained_picture, :remove_picture, :website, :about
 
   image_accessor :picture do
     storage_path :generate_picture_path

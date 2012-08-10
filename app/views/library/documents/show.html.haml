@@ -33,7 +33,7 @@
     .form
       = semantic_form_for @note do |f|
         = f.inputs do
-          = f.input :body
+          = f.input :body, input_html: { rows: 10 }
           = f.input :library_document_id, as: :hidden
         = f.buttons do
           = f.commit_button :attach_to_document

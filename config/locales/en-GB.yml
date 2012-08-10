@@ -55,6 +55,7 @@
       add_another_location: "add another location"
       add_some_locations: "add some locations"
       deadlines: "Deadlines and dates"
+      deadline_posted: "posted %{at}"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
@@ -277,13 +278,9 @@
       list_tab: "List"
       map_tab: "Map"
       popular_tab: "Popular"
-      search_issues: "Search issues"
       search_button: "Go"
       clear: "Clear"
       no_results_found: "No issues found."
-      results_found:
-        one: "One issue found for '%{query}'."
-        other: "%{count} issues found for '%{query}'"
     new:
       title: "Report an issue"
     show:

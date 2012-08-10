@@ -90,4 +90,4 @@
                             %h4= l message.component.deadline.to_date, format: :long
                             %p= message.component.title
                     %td.meta
-                      = thread.latest_activity_date
+                      = t ".deadline_posted", at: thread.latest_activity_date

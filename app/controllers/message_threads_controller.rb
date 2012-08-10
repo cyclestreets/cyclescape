@@ -44,14 +44,6 @@ class MessageThreadsController < ApplicationController
     end
   end
 
-  def search
-    redirect_to action: :index and return if params[:button] == "clear"
-    @query = params[:query]
-    unfiltered_results = MessageThread.find_with_index(params[:query])
-    results = unfiltered_results.select{ |t| permitted_to?(:show, t) }
-    @results = ThreadListDecorator.decorate(results)
-  end
-
   protected
 
   def load_thread

@@ -235,15 +235,17 @@ describe "Issues" do
   context "search" do
     include_context "signed in as a site user"
     let(:issue) { FactoryGirl.create(:issue, :with_tags) }
-    let(:search_field) { I18n.t("issues.index.search_issues") }
-    let(:search_button) { I18n.t("issues.index.search_button") }
+    # main search box doesn't have any I18n'd content, just a js-based placeholder.
+    # use the id of the field instead.
+    let(:search_field) { "query" }
+    let(:search_button) { I18n.t("layouts.search.search_button") }
 
     before do
       visit issues_path
     end
 
     it "should return results for a title search" do
-      within('#page') do
+      within('.main-search-box') do
         fill_in search_field, with: issue.title
         click_on search_button
       end
@@ -252,7 +254,7 @@ describe "Issues" do
     end
 
     it "should return results for a description search" do
-      within('#page') do
+      within('.main-search-box') do
         fill_in search_field, with: issue.description
         click_on search_button
       end
@@ -261,7 +263,7 @@ describe "Issues" do
     end
 
     it "should return results for a tag search" do
-      within('#page') do
+      within('.main-search-box') do
         fill_in search_field, with: issue.tags.first.name
         click_on search_button
       end
@@ -270,22 +272,22 @@ describe "Issues" do
     end
 
     it "should return no results for gibberish" do
-      within('#page') do
+      within('.main-search-box') do
         fill_in search_field, with: "abcdefgh12345"
         click_on search_button
       end
 
-      page.should have_content("No issues found")
+      page.should have_content("No results found")
     end
 
     it "should not return deleted issues" do
-      within('#page') do
+      within('.main-search-box') do
         fill_in search_field, with: issue.title
         issue.destroy
         click_on search_button
       end
 
-      page.should have_content("No issues found")
+      page.should have_content("No results found")
     end
   end
 
