@@ -55,6 +55,7 @@
       add_another_location: "add another location"
       add_some_locations: "add some locations"
       deadlines: "Deadlines and dates"
+      deadline_posted: "posted %{at}"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
