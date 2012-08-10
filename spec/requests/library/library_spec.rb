@@ -22,16 +22,18 @@ describe "Library" do
     end
 
     context "search" do
-      let(:search_field) { I18n.t("libraries.show.search") }
-      let(:search_button) { I18n.t("libraries.show.search_submit") }
+      let(:search_field) { "query" }
+      let(:search_button) { I18n.t("layouts.search.search_button") }
 
       before do
         visit library_path
       end
 
       it "should find the first note" do
-        fill_in search_field, with: notes[0].title
-        click_on search_button
+        within('.main-search-box') do
+          fill_in search_field, with: notes[0].title
+          click_on search_button
+        end
 
         page.should have_content("Search Results")
         page.should_not have_content("No results")
@@ -39,22 +41,14 @@ describe "Library" do
       end
 
       it "should find the first document" do
-        fill_in search_field, with: documents[0].title
-        click_on search_button
+        within('.main-search-box') do
+          fill_in search_field, with: documents[0].title
+          click_on search_button
+        end
 
         page.should have_content("Search Results")
         page.should_not have_content("No results")
         page.should have_content(documents[0].title)
-      end
-
-      context "clear button" do
-        it "should go to the library front page" do
-          fill_in search_field, with: "test"
-          click_on search_button
-          page.should have_content("Results")
-          click_on "Clear"
-          page.current_path.should == library_path
-        end
       end
     end
   end

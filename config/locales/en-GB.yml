@@ -277,13 +277,9 @@
       list_tab: "List"
       map_tab: "Map"
       popular_tab: "Popular"
-      search_issues: "Search issues"
       search_button: "Go"
       clear: "Clear"
       no_results_found: "No issues found."
-      results_found:
-        one: "One issue found for '%{query}'."
-        other: "%{count} issues found for '%{query}'"
     new:
       title: "Report an issue"
     show:

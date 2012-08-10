@@ -10,7 +10,6 @@ Cyclescape::Application.routes.draw do
       end
       collection do
         get "all_geometries"
-        get "search"
       end
       scope module: "issue" do
         resource :photo, only: [:show]
@@ -60,9 +59,6 @@ Cyclescape::Application.routes.draw do
   resources :threads, controller: "message_threads" do
     resources :messages do
       put 'censor', :on => :member
-    end
-    collection do
-      get "search"
     end
     scope module: :message do
       resources :photos, only: [:create, :show]

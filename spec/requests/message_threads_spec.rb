@@ -389,6 +389,9 @@ describe "Message threads" do
   end
 
   context "search" do
+    let(:search_field) { "query" }
+    let(:search_button) { I18n.t("layouts.search.search_button") }
+
     before do
         [thread, private_thread, committee_thread].each do |t|
           m = t.messages.new(body: "Findable with bananas")
@@ -405,8 +408,10 @@ describe "Message threads" do
 
       it "should show one result" do
         visit threads_path
-        fill_in "Search all threads", with: "bananas"
-        click_on "Search"
+        within('.main-search-box') do
+          fill_in search_field, with: "bananas"
+          click_on search_button
+        end
         page.should have_content(thread.title)
         page.should_not have_content(private_thread.title)
         page.should_not have_content(committee_thread.title)
@@ -421,8 +426,10 @@ describe "Message threads" do
 
       it "should show two results" do
         visit threads_path
-        fill_in "Search all threads", with: "bananas"
-        click_on "Search"
+        within('.main-search-box') do
+          fill_in search_field, with: "bananas"
+          click_on search_button
+        end
         page.should have_content(thread.title)
         page.should have_content(private_thread.title)
         page.should_not have_content(committee_thread.title)
@@ -437,8 +444,10 @@ describe "Message threads" do
 
       it "should show three results" do
         visit threads_path
-        fill_in "Search all threads", with: "bananas"
-        click_on "Search"
+        within('.main-search-box') do
+          fill_in search_field, with: "bananas"
+          click_on search_button
+        end
         page.should have_content(thread.title)
         page.should have_content(private_thread.title)
         page.should have_content(committee_thread.title)
