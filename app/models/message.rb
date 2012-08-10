@@ -50,7 +50,9 @@ class Message < ActiveRecord::Base
   end
 
   def update_thread_search
+    logger.debug(debug_msg("Updating thread search..."))
     thread.update_index if thread
+    logger.debug(debug_msg("Finished updating thread search..."))
     true
   end
 
@@ -58,5 +60,16 @@ class Message < ActiveRecord::Base
 
   def init_blank_body
     self.body ||= ""
+  end
+
+    # Formatting grabbed from ruby stdlib
+  def timestamp_with_usec
+    time = Time.now
+    time.strftime("%Y-%m-%dT%H:%M:%S.") << "%06d " % time.usec
+  end
+
+  # Oh, rails, how I hate your shielding of Logger formatters from me
+  def debug_msg(msg)
+    "[#{timestamp_with_usec}] #{msg}"
   end
 end
