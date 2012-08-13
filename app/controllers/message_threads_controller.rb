@@ -2,7 +2,7 @@ class MessageThreadsController < ApplicationController
   filter_access_to :show, :edit, :update, attribute_check: true
 
   def index
-    threads = ThreadList.recent_public.page(params[:page])
+    threads = ThreadList.recent_public.page(params[:page]).includes(:issue, :group)
     @threads = ThreadListDecorator.decorate(threads)
   end
 
