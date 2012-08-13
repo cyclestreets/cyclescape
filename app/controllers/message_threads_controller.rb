@@ -10,7 +10,7 @@ class MessageThreadsController < ApplicationController
     load_thread
     set_page_title @thread.title
     @issue = IssueDecorator.decorate(@thread.issue) if @thread.issue
-    @messages = @thread.messages.all
+    @messages = @thread.messages.includes({created_by: :profile}, :component).all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers
     @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
