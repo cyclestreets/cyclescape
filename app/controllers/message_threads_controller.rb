@@ -2,7 +2,7 @@ class MessageThreadsController < ApplicationController
   filter_access_to :show, :edit, :update, attribute_check: true
 
   def index
-    threads = ThreadList.recent_public.page(params[:page])
+    threads = ThreadList.recent_public.page(params[:page]).includes(:issue, :group)
     @threads = ThreadListDecorator.decorate(threads)
   end
 
@@ -10,7 +10,7 @@ class MessageThreadsController < ApplicationController
     load_thread
     set_page_title @thread.title
     @issue = IssueDecorator.decorate(@thread.issue) if @thread.issue
-    @messages = @thread.messages.all
+    @messages = @thread.messages.includes({created_by: :profile}, :component).all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers
     @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
