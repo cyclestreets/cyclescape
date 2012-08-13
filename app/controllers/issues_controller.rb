@@ -2,8 +2,8 @@ class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
 
   def index
-    issues = Issue.by_most_recent.paginate(page: params[:page])
-    popular_issues = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
+    issues = Issue.by_most_recent.paginate(page: params[:page]).includes(:created_by)
+    popular_issues = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).includes(:created_by)
 
     @issues = IssueDecorator.decorate(issues)
     @popular_issues = IssueDecorator.decorate(popular_issues)
@@ -14,7 +14,7 @@ class IssuesController < ApplicationController
     issue = Issue.find(params[:id])
     @issue = IssueDecorator.decorate(issue)
     set_page_title @issue.title
-    @threads = ThreadListDecorator.decorate(@issue.threads)
+    @threads = ThreadListDecorator.decorate(@issue.threads.includes(:group))
     @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
   end
 
