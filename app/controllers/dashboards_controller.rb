@@ -3,17 +3,19 @@ class DashboardsController < ApplicationController
     @user = current_user
     @groups = @user.groups
 
-    @relevant_issues = IssueDecorator.decorate(current_user.issues_near_locations.order("updated_at DESC"))
+    @relevant_issues = IssueDecorator.decorate(current_user.issues_near_locations.order("updated_at DESC").includes(:created_by, :tags))
 
-    @subscribed_threads = ThreadListDecorator.decorate(current_user.subscribed_threads.order_by_latest_message.limit(8))
+    subscribed_threads = current_user.subscribed_threads.order_by_latest_message.limit(8).includes(:issue, {latest_message: [:component, :created_by]})
+    @subscribed_threads = ThreadListDecorator.decorate(subscribed_threads)
 
-    group_threads = ThreadList.recent_from_groups(current_user.groups, 8)
+    group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes({issue: :tags}, :group)
     @group_threads = ThreadListDecorator.decorate(group_threads)
 
-    deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 8)
+    deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 8).includes(:issue)
     @deadline_threads = ThreadListDecorator.decorate(deadline_threads)
 
-    @prioritised_threads = ThreadListDecorator.decorate(current_user.prioritised_threads.order("priority desc").order_by_latest_message.limit(20))
+    prioritised_threads = current_user.prioritised_threads.order("priority desc").order_by_latest_message.limit(20).includes(:issue, {latest_message: [:component, :created_by]})
+    @prioritised_threads = ThreadListDecorator.decorate(prioritised_threads)
   end
 
   def search
