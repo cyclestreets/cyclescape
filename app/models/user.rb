@@ -178,7 +178,8 @@ class User < ActiveRecord::Base
 
   def update_remembered_group(group)
     # Not using association to avoid validation checks
-    update_column(:remembered_group_id, group ? group.id : nil)
+    new_id = group ? group.id : nil
+    update_column(:remembered_group_id, new_id) unless self.remembered_group_id == new_id
   end
 
   def remembered_group?
