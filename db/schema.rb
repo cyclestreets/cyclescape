@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726164632) do
+ActiveRecord::Schema.define(:version => 20120817142607) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -59,11 +59,12 @@ ActiveRecord::Schema.define(:version => 20120726164632) do
   add_index "group_memberships", ["user_id"], :name => "index_group_memberships_on_user_id"
 
   create_table "group_profiles", :force => true do |t|
-    t.integer  "group_id",                                                :null => false
+    t.integer  "group_id",                                                         :null => false
     t.text     "description"
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
-    t.spatial  "location",    :limit => {:srid=>4326, :type=>"geometry"}
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
+    t.spatial  "location",             :limit => {:srid=>4326, :type=>"geometry"}
+    t.text     "joining_instructions"
   end
 
   add_index "group_profiles", ["group_id"], :name => "index_group_profiles_on_group_id"
