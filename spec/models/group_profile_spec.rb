@@ -26,6 +26,11 @@ describe GroupProfile do
       subject.should be_valid
     end
 
+    it "can have blank joining instructions" do
+      subject.joining_instructions = nil
+      subject.should be_valid
+    end
+
     it "should accept a valid geojson string" do
       subject.location = nil
       subject.loc_json = '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
