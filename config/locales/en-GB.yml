@@ -205,7 +205,7 @@
       edit_group_members: "Edit the membership list"
       group_management: "Group Management"
       group_organisers: "Group Organisers"
-      group_request_pending: "You request to join this group is pending."
+      group_request_pending: "Your request to join this group is pending."
       join_body:
         You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_title: "Join our Cyclescape group"
