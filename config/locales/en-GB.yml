@@ -207,9 +207,7 @@
       group_organisers: "Group Organisers"
       group_request_pending: "You request to join this group is pending."
       join_body:
-        To take part in discussions and threads here you will need to join
-        the %{group} first. We can then provide you with
-        access details to this site.
+        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_title: "Join our Cyclescape group"
       join_this_group: "Join this group"
       no_issues: There are no issues in this group's area yet
