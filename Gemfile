@@ -32,7 +32,7 @@ gem 'thumbs_up', '~> 0.4.6'
 gem 'exceptional'
 gem 'foreman'
 gem 'whenever'
-gem 'draper'
+gem 'draper', '0.15.0' # pin due to failing tests: maybe when https://github.com/jcasimir/draper/pull/288 is released.
 gem 'email_reply_parser'
 gem 'memoist'
 
