@@ -646,6 +646,13 @@ section.new-message {
       padding: 0;
     }
   }
+  #new-link-message {
+    li#link_message_description_input {
+      textarea {
+        height: 10em;
+      }
+    }
+  }
   ul.styled-tabs {
     padding-left:60px;
     margin-bottom:0;
