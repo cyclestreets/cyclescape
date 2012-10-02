@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.autosize
 //= require jquery.cookie
 //= require jquery.selectboxes
 //= require jquery.tools.min
