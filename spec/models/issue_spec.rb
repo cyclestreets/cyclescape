@@ -333,7 +333,7 @@ describe Issue do
         owned_issues = FactoryGirl.create_list(:issue, 2, created_by: user)
         other_issue = FactoryGirl.create(:issue)
         Issue.count.should == 3
-        Issue.created_by(user).should == owned_issues
+        Issue.created_by(user).should match_array(owned_issues)
       end
     end
   end
