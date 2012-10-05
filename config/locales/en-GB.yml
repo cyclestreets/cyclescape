@@ -54,6 +54,10 @@
       add_a_new_issue: "add a new issue"
       add_another_location: "add another location"
       add_some_locations: "add some locations"
+      days_away:
+        zero: "Today!"
+        one: "Tomorrow!"
+        other: "%{count} days away"
       deadlines: "Deadlines and dates"
       deadline_thread_updated: "thread updated %{at}"
       involved_threads: "Involved Threads"

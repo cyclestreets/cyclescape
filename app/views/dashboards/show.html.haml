@@ -89,5 +89,9 @@
                           %li.cal
                             %h4= l message.component.deadline.to_date, format: :long
                             %p= message.component.title
+                            - deadline = message.component.deadline.to_date
+                            - diff = deadline - DateTime.now.to_date
+                            - if diff >= 0 && diff < 30
+                              %p.warning= t ".days_away", count: diff.to_i
                     %td.meta
                       = t ".deadline_thread_updated", at: thread.latest_activity_date
