@@ -109,6 +109,7 @@ describe User do
 
   describe "name" do
     subject { FactoryGirl.build(:stewie) }
+    let(:brian) { FactoryGirl.create(:brian) }
 
     it "should use the full name if no display name is set" do
       subject.display_name = ""
@@ -118,6 +119,17 @@ describe User do
     it "should use the display name if set" do
       subject.display_name = "Stewie"
       subject.name.should == "Stewie"
+    end
+
+    it "should allow blank display names, but not duplicates" do
+      brian.display_name.should == "Brian"
+      subject.display_name = "Brian"
+      subject.should have(1).errors_on(:display_name)
+
+      brian.display_name = nil
+      brian.save!
+      subject.display_name = nil
+      subject.should have(0).errors_on(:display_name)
     end
   end
 
