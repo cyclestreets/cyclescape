@@ -10,7 +10,7 @@ gem 'activerecord-postgis-adapter'
 # Front-end gems
 gem 'jquery-rails', '2.0.3' # pin due to incompatible jquery-tools vs jquery 1.8. See https://github.com/cyclestreets/toolkit/issues/75
 gem 'haml-rails'
-gem 'formtastic', '~> 2.0.2'
+gem 'formtastic'
 gem 'map_layers'
 gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
