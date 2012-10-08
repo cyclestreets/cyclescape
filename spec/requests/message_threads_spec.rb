@@ -284,6 +284,15 @@ describe "Message threads" do
         page.should have_content(thread.title)
         page.should have_content(group.name)
       end
+
+      it "should let you pick an issue to assign the thread to" do
+        issue = FactoryGirl.create(:issue)
+        click_on edit_thread
+        select "#{issue.id} - #{issue.title}", from: "Issue"
+        click_on "Save"
+        page.should have_content(thread.title)
+        page.should have_content(issue.title)
+      end
     end
 
     context "editing a group thread" do

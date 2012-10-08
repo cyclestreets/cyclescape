@@ -7,6 +7,7 @@
       = f.input :title
       = f.input :group
       = f.input :privacy, as: :select, collection: MessageThread::ALLOWED_PRIVACY.map {|n| [n.capitalize, n] }
+      = f.input :issue, as: :select, collection: Issue.by_most_recent, member_label: Proc.new {|i| "#{i.id} - #{i.title}" }
     = f.buttons do
       = f.commit_button
       %li= cancel_link thread_path(@thread)
