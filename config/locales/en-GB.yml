@@ -282,6 +282,7 @@
       popular_tab: "Popular"
       search_button: "Go"
       clear: "Clear"
+      no_popular_issues: "No issues have been voted on recently."
       no_results_found: "No issues found."
     new:
       title: "Report an issue"
