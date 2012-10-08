@@ -458,7 +458,7 @@
     new:
       title: "New Thread"
     priority_panel:
-      thread_priority: "Thread Priority"
+      thread_priority: "My Thread Priority"
     search:
       clear_submit: "Clear"
       no_results_found: "No results found for '%{query}'."
