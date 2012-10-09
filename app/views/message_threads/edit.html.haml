@@ -10,4 +10,4 @@
       = f.input :issue, as: :select, collection: Issue.by_most_recent, member_label: Proc.new {|i| "#{i.id} - #{i.title}" }
     = f.actions do
       = f.action :submit
-      = f.action :cancel, url: thread_path(@thread)
+      = cancel_link thread_path(@thread)

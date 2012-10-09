@@ -7,4 +7,4 @@
     = f.input :default_thread_privacy, as: :select, collection: (MessageThread::ALLOWED_PRIVACY - ["committee"]).map {|n| [n.capitalize, n] }
   = f.actions do
     = f.action :submit
-    = f.action :cancel
+    = cancel_link
