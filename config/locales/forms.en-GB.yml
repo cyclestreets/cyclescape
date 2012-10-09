@@ -62,6 +62,7 @@
     actions:
       update: "Save"
       saving: "Saving\u2026"
+      cancel: "Cancel"
       deadline_message:
         create: "Add Deadline"
       document_message:
