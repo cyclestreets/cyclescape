@@ -29,6 +29,10 @@ Spork.prefork do
   include ApplicationHelper
   include DeviseHelper
 
+  # Spork and Formtastic don't play nice
+  # https://github.com/justinfrench/formtastic/issues/851
+  Dir["app/inputs/*_input.rb"].each { |f| require File.basename(f) }
+
   RSpec.configure do |config|
     # == Mock Framework
     #
