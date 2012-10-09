@@ -32,7 +32,7 @@
                 = f.inputs do
                   = f.input :user_id, as: :hidden, value: @user.id
                   = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
-                = f.buttons
+                = f.actions
   %section#user-tabs
     %ul.tabs
       %li= link_to t(".recent_threads"), ""

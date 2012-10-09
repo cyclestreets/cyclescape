@@ -5,6 +5,6 @@
     = f.input :website
     = f.input :email
     = f.input :default_thread_privacy, as: :select, collection: (MessageThread::ALLOWED_PRIVACY - ["committee"]).map {|n| [n.capitalize, n] }
-  = f.buttons do
-    = f.commit_button
-    = cancel_link
+  = f.actions do
+    = f.action :submit
+    = f.action :cancel

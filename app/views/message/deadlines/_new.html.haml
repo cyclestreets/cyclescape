@@ -3,5 +3,5 @@
     = f.inputs do
       = f.input :deadline, as: :date_picker, :label => t(".deadline_date")
       = f.input :title
-    = f.buttons do
-      = f.commit_button t(".submit"), button_html: {class: "btn-green"}
+    = f.actions do
+      = f.action :submit, label: t(".submit"), button_html: {class: "btn-green"}

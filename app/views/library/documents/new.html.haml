@@ -5,6 +5,6 @@
       = f.input :file, as: :file
       = f.input :retained_file, as: :hidden
       = f.input :title
-    = f.buttons do
-      = f.commit_button
-      = cancel_link library_path
+    = f.actions do
+      = f.action :submit
+      = f.action :cancel, url: library_path

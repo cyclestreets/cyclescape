@@ -6,6 +6,6 @@
       = f.input :name
       = f.input :email
       = f.input :context_url, as: :hidden, value: request.referer
-    = f.buttons do
-      = f.commit_button button_html: { data: { disable_with: t("formtastic.actions.saving") } }
-      = cancel_link root_path
+    = f.actions do
+      = f.action :submit, button_html: { data: { disable_with: t("formtastic.actions.saving") } }
+      = f.action :cancel, url: root_path

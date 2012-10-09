@@ -3,6 +3,6 @@
   = semantic_form_for @note do |f|
     = f.inputs do
       = f.input :body, input_html: { rows: 15 }
-    = f.buttons do
-      = f.commit_button
-      = cancel_link library_path
+    = f.actions do
+      = f.action :submit
+      = f.action :cancel, url: library_path
