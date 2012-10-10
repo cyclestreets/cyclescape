@@ -32,6 +32,11 @@ en-GB:
       send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
       send_paranoid_instructions: 'If your e-mail exists on our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
       confirmed: 'Your account was successfully confirmed. You are now signed in.'
+    invitations:
+      edit:
+        title: 'Confirm your account'
+        info: 'You have been invited to join Cyclescape, please complete your account registration including creating a password so that you can login. You can change your name and email address to the one that you prefer to use for this site.'
+        commit_button: 'Confirm account'
     registrations:
       signed_up: 'Welcome! You have signed up successfully.'
       updated: 'You updated your account successfully.'
