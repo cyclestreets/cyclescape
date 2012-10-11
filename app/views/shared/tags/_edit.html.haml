@@ -4,5 +4,5 @@
       = f.inputs do
         = f.input :tags_string, as: :tags
       = f.buttons do
-        = f.commit_button
+        = f.commit_button button_html: {class: "submit btn-green"}
         = cancel_link cancel_url
