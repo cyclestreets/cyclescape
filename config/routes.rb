@@ -10,7 +10,6 @@ Cyclescape::Application.routes.draw do
       end
       collection do
         get "all_geometries"
-        get "autocomplete_tag_name"
       end
       scope module: "issue" do
         resource :photo, only: [:show]
@@ -103,7 +102,9 @@ Cyclescape::Application.routes.draw do
     resources :comments
   end
 
-  resources :tags
+  resources :tags do
+    get "autocomplete_tag_name", :as => :autocomplete, :on => :collection
+  end
   resource :home, only: [:show], controller: "home"
 
   match "template/:action", controller: "home"

@@ -498,28 +498,4 @@ describe "Issues" do
       end
     end
   end
-
-  context "autocomplete_tag_name" do
-    let(:tag) { FactoryGirl.create(:tag) }
-
-    it "should return a tag from a full name tag search" do
-      visit autocomplete_tag_name_issues_path(term: tag.name)
-      page.should have_content("\"label\":\"#{tag.name}\"")
-    end
-
-    it "should return a tag from a partial search start" do
-      visit autocomplete_tag_name_issues_path(term: tag.name[0,2])
-      page.should have_content("\"label\":\"#{tag.name}\"")
-    end
-
-    it "should return a tag from a partial search end" do
-      visit autocomplete_tag_name_issues_path(term: tag.name[-2,2])
-      page.should have_content("\"label\":\"#{tag.name}\"")
-    end
-
-    it "should return a tag from a partial search middle" do
-      visit autocomplete_tag_name_issues_path(term: tag.name[-4,2])
-      page.should have_content("\"label\":\"#{tag.name}\"")
-    end
-  end
 end

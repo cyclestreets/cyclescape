@@ -1,6 +1,5 @@
 class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
-  autocomplete :tag, :name, full: true
 
   def index
     issues = Issue.by_most_recent.paginate(page: params[:page]).includes(:created_by)
