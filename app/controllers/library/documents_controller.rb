@@ -9,7 +9,7 @@ class Library::DocumentsController < ApplicationController
     @document = Library::Document.new(params[:library_document])
     @document.created_by = current_user
 
-    if @document.save!
+    if @document.save
       redirect_to library_document_path(@document)
     else
       render :new
