@@ -8,6 +8,6 @@
       = f.input :email
       = f.input :password
       = f.input :password_confirmation
-    = f.buttons do
-      = f.commit_button
+    = f.actions do
+      = f.action :submit
   = render :partial => "devise/shared/links"

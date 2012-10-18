@@ -171,6 +171,7 @@ form.guided {
     right: 0;
     bottom: 10px;
     padding: 20px 40px;
+    width: auto;
   }
 }
 
@@ -202,4 +203,8 @@ form#user_new {
   padding-bottom: 3em;
   border-bottom: 1px solid #ccc;
   margin-bottom: 1.2em;
+}
+
+form .inputs .map {
+  margin-bottom: 25px;
 }

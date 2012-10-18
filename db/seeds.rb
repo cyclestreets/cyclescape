@@ -8,8 +8,9 @@
 
 # Create root user
 unless User.where("id = 1").exists?
-  root = User.new(email: "root@cyclestreets.net", full_name: "Root", role: "admin",
+  root = User.new(email: "root@cyclestreets.net", full_name: "Root",
       password: "changeme", password_confirmation: "changeme")
+  root.role = "admin"
   root.skip_confirmation!
   root.save!
   User.update_all("id = 1", "id = #{root.id}")

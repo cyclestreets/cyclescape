@@ -54,8 +54,12 @@
       add_a_new_issue: "add a new issue"
       add_another_location: "add another location"
       add_some_locations: "add some locations"
+      days_away:
+        zero: "Today!"
+        one: "Tomorrow!"
+        other: "%{count} days away"
       deadlines: "Deadlines and dates"
-      deadline_posted: "posted %{at}"
+      deadline_thread_updated: "thread updated %{at}"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
@@ -205,11 +209,9 @@
       edit_group_members: "Edit the membership list"
       group_management: "Group Management"
       group_organisers: "Group Organisers"
-      group_request_pending: "You request to join this group is pending."
+      group_request_pending: "Your request to join this group is pending."
       join_body:
-        To take part in discussions and threads here you will need to join
-        the %{group} first. We can then provide you with
-        access details to this site.
+        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_title: "Join our Cyclescape group"
       join_this_group: "Join this group"
       no_issues: There are no issues in this group's area yet
@@ -280,6 +282,7 @@
       popular_tab: "Popular"
       search_button: "Go"
       clear: "Clear"
+      no_popular_issues: "No issues have been voted on recently."
       no_results_found: "No issues found."
     new:
       title: "Report an issue"
@@ -455,7 +458,7 @@
     new:
       title: "New Thread"
     priority_panel:
-      thread_priority: "Thread Priority"
+      thread_priority: "My Thread Priority"
     search:
       clear_submit: "Clear"
       no_results_found: "No results found for '%{query}'."
@@ -539,6 +542,9 @@
       photo_message: "Photo"
       sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
+  pages:
+    changelog:
+      github_history_link_html: "<a href='https://github.com/cyclestreets/toolkit/commits/master/'>GitHub</a>"
   shared:
     edit_map:
       area: "area"
@@ -577,7 +583,8 @@
       new:
         title: "Feedback"
       success:
-        thank_you: "Thank you for your feedback"
+        thank_you_title: "Thank you for your feedback!"
+        thank_you_longform: "One of our developers will read your feedback and use it to help plan upcoming work and new features. Unfortunately we can't respond individually to every feedback comment that we receive."
         close: "< Back to site"
   tags:
     show:

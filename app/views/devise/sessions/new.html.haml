@@ -6,6 +6,6 @@
       = f.input :password
       - if devise_mapping.rememberable?
         = f.input :remember_me, as: :boolean
-    = f.buttons do
-      = f.commit_button t(".sign_in_button")
+    = f.actions do
+      = f.action :submit, label: t(".sign_in_button")
   = render :partial => "devise/shared/links"

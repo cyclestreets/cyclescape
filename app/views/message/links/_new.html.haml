@@ -3,6 +3,6 @@
     = f.inputs do
       = f.input :url, as: :string
       = f.input :title
-      = f.input :description
-    = f.buttons do
-      = f.commit_button button_html: {class: "btn-green"}
+      = f.input :description, input_html: { class: 'autosize' }
+    = f.actions do
+      = f.action :submit, button_html: {class: "btn-green"}

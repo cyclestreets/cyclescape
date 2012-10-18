@@ -93,7 +93,7 @@ section.thread {
       float: left;
       margin-right: 20px;
     }
-    .author {
+    .author, a.permalink {
       color: $lightgrey;
       font: {
         weight: normal;
@@ -642,8 +642,15 @@ section.new-message {
         line-height: 1.4em;
       }
     }
-    fieldset.buttons {
+    fieldset.actions {
       padding: 0;
+    }
+  }
+  #new-link-message {
+    li#link_message_description_input {
+      textarea {
+        height: 10em;
+      }
     }
   }
   ul.styled-tabs {

@@ -1,5 +1,36 @@
 #changelog
   %h1 What's New
+  %p
+    This is a summary of new features added to the site. You can see the full development history on
+    = t(".github_history_link_html")
+
+  %article
+    %h2 18/10/2012
+    %ul
+      %li Committee members can now add issues to administrative threads, or change the issue on an existing issue thread
+      %li Tags now have autocomplete suggestions - type a few characters to see matching tags
+      %li You can link directly to messages more easily - click on the posting time to see the url
+      %li Fixed a bug with document creation not giving friendly error messages
+
+  %article
+    %h2 05/10/2012
+    %ul
+      %li Textareas now automatically resize as they fill up with text, making longer comments easier to write
+      %li Duplicate display names are no longer allowed (matching full names are of course permitted)
+
+  %article
+    %h2 17/08/2012
+    %ul
+      %li Reduce duplicate messages by disabling submit button after posting
+      %li Rework the logic for where you end up after signing in - should now handle more situations gracefully
+      %li Improvements to message posting speed by making thread search update an asynchronous process
+      %li Groups can now have custom joining instructions
+
+  %article
+    %h2 01/08/2012
+    %ul
+      %li Added a global search, instead of individual thread/issue/library searches
+      %li Security updates
 
   %article
     %h2 24/05/2012
@@ -11,6 +42,7 @@
       %li Fixed bug with subject of new group location issue notifications
       %li Fixed bug with display of attachment messages in some thread summaries
       %li Fixed bug with unsubscribed threads showing up in dashboard
+
   %article
     %h2 16/05/2012
     %ul

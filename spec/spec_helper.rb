@@ -10,6 +10,7 @@ Spork.prefork do
 
   # Spork workaround to stop Devise loading the User model in the prefork
   require "rails/application"
+
   Spork.trap_method(Rails::Application::RoutesReloader, :reload!)
 
   require File.expand_path("../../config/environment", __FILE__)
@@ -18,6 +19,19 @@ Spork.prefork do
   require 'email_spec'
   require 'database_cleaner'
   require 'declarative_authorization/maintenance'
+
+  # Include the helpers by hand, to work around a spork bug
+  # https://github.com/sporkrb/spork/issues/109
+  # https://github.com/sporkrb/spork-rails/issues/6
+  # These aren't needed when running rspec directly.
+  # Remove these when the bug is fixed!
+
+  include ApplicationHelper
+  include DeviseHelper
+
+  # Spork and Formtastic don't play nice
+  # https://github.com/justinfrench/formtastic/issues/851
+  Dir["app/inputs/*_input.rb"].each { |f| require File.basename(f) }
 
   RSpec.configure do |config|
     # == Mock Framework

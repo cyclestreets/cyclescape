@@ -41,9 +41,9 @@
             .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
           = semantic_form_for @new_message, url: thread_messages_path(@thread) do |f|
             = f.inputs do
-              = f.input :body, input_html: {disabled: cannot_post?}
-            = f.buttons do
-              = f.commit_button button_html: { class: "btn-green", disabled: cannot_post?, data: { disable_with: t("formtastic.actions.saving") } }
+              = f.input :body, input_html: { class: 'autosize', disabled: cannot_post?}
+            = f.actions do
+              = f.action :submit, button_html: { class: "btn-green", disabled: cannot_post?, data: { disable_with: t("formtastic.actions.saving") } }
         = render "message/photos/new"
         = render "message/links/new"
         = render "message/deadlines/new"

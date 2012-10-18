@@ -39,7 +39,11 @@
   - if current_user && !@group.members.include?(current_user)
     %section.group-homepage-join
       %h2= t ".join_title"
-      %p= t ".join_body", group: @group.name
+      - if @group.profile.joining_instructions
+        %p= auto_link simple_format @group.profile.joining_instructions
+      - else
+        %p= t ".join_body", group: @group.name
+
       - if current_user.membership_request_pending_for?(@group)
         %p= t ".group_request_pending"
       - else

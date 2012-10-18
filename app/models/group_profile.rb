@@ -13,7 +13,7 @@
 class GroupProfile < ActiveRecord::Base
   include Locatable
 
-  attr_accessible :description, :loc_json
+  attr_accessible :description, :joining_instructions, :loc_json
 
   belongs_to :group
 end

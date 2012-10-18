@@ -41,6 +41,12 @@ describe "Library documents" do
       page.current_path.should == library_path
     end
 
+    it "should tell the user when they don't fill in the fields" do
+      visit new_library_document_path
+      click_on "Upload"
+      page.should have_content("can't be blank")
+    end
+
     it "should update the document"
   end
 

@@ -125,3 +125,6 @@ jQuery ->
 
   $("div.group-selector").on "click", (e) ->
     $(this).toggleClass "open closed"
+
+  # Autosize text areas, but only with the right CSS class
+  $("textarea.autosize").autosize();

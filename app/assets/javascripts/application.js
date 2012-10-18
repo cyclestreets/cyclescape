@@ -6,9 +6,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.autosize
 //= require jquery.cookie
 //= require jquery.selectboxes
 //= require jquery.tools.min
+//= require jquery.ui.autocomplete
+//= require autocomplete-rails
 //= require knockout
 //= require superbly-tagfield.min
 //= require maps

@@ -48,6 +48,8 @@
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name, they can change this when they accept the invite."
+      group_profile:
+        joining_instructions: "The joining instructions are text that's shown to people who want to join this Cyclescape group. You might want to direct them to pay for membership elsewhere first, for example, or you might be happy for everyone and anyone to join your Cyclescape group. You can leave this blank."
       issue:
         new: &hints_issue_new
           description: "Please give details about the problem and what effect it is having on cycling. Note that all issues are publicly viewable."
@@ -60,6 +62,7 @@
     actions:
       update: "Save"
       saving: "Saving\u2026"
+      cancel: "Cancel"
       deadline_message:
         create: "Add Deadline"
       document_message:
