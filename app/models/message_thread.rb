@@ -106,14 +106,16 @@ class MessageThread < ActiveRecord::Base
     # Attachments
     mail.message.attachments.each do |attachment|
       if attachment.content_type.start_with?('image/')
-        message = messages.build({created_by: user}, without_protection: true)
-        photo = PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
-        photo.thread = self
-        photo.message = message
-        photo.created_by = user
-        message.component = photo
-        message.save
+        component = PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
+      else
+        component = DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
       end
+      message = messages.build({created_by: user}, without_protection: true)
+      component.thread = self
+      component.message = message
+      component.created_by = user
+      message.component = component
+      message.save
     end
 
     return m
