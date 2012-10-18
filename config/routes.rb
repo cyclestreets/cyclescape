@@ -102,7 +102,9 @@ Cyclescape::Application.routes.draw do
     resources :comments
   end
 
-  resources :tags
+  resources :tags do
+    get "autocomplete_tag_name", :as => :autocomplete, :on => :collection
+  end
   resource :home, only: [:show], controller: "home"
 
   match "template/:action", controller: "home"
