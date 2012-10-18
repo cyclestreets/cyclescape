@@ -12,6 +12,7 @@ gem 'jquery-rails', '2.0.3' # pin due to incompatible jquery-tools vs jquery 1.8
 gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
+gem 'rails3-jquery-autocomplete'
 gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
 gem 'rails_autolink'
@@ -43,6 +44,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-ui-rails'
 end
 
 group :development do

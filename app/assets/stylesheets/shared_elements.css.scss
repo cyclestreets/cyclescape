@@ -93,7 +93,7 @@ section.thread {
       float: left;
       margin-right: 20px;
     }
-    .author {
+    .author, a.permalink {
       color: $lightgrey;
       font: {
         weight: normal;
