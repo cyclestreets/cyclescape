@@ -137,6 +137,13 @@
   &.edit {
     .olControlLayerSwitcher {
       right: 190px;
+      .layersDiv {
+        opacity: 0.85;
+        filter: alpha(opacity=85);  // IE8 and lower
+        background:rgba(0, 0, 0, 0.85);
+        padding-right: 0;
+        padding-left: 0;
+      }
       font: {
         size: 13px;
       }
