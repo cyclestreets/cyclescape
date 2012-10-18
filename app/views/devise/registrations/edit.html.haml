@@ -9,8 +9,8 @@
       = f.input :password
       = f.input :password_confirmation
       = f.input :current_password
-    = f.buttons do
-      = f.commit_button
+    = f.actions do
+      = f.action :submit
   = render :partial => "devise/shared/links"
 .cancel-form
   %h2 Cancel my account

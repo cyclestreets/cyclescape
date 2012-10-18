@@ -10,6 +10,6 @@
         = f2.semantic_errors
         = f2.input :body, input_html: { rows: 15 }
       = f.input :tags_string, as: :tags
-    = f.buttons do
-      = f.commit_button
+    = f.actions do
+      = f.action :submit
       = cancel_link

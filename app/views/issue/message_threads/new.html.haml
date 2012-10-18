@@ -16,6 +16,6 @@
       = semantic_fields_for @message do |f2|
         = f2.semantic_errors
         = f2.input :body, input_html: { rows: 15 }
-    = f.buttons do
-      = f.commit_button
+    = f.actions do
+      = f.action :submit
       = cancel_link
