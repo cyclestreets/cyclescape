@@ -542,6 +542,9 @@
       photo_message: "Photo"
       sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
+  pages:
+    changelog:
+      github_history_link_html: "<a href='https://github.com/cyclestreets/toolkit/commits/master/'>GitHub</a>"
   shared:
     edit_map:
       area: "area"
