@@ -134,9 +134,12 @@
       }
     }
   }
-  .edit {
+  &.edit {
     .olControlLayerSwitcher {
       right: 190px;
+      font: {
+        size: 13px;
+      }
     }
   }
 }
