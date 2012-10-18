@@ -74,6 +74,31 @@ describe InboundMailProcessor do
       end
     end
 
+    context "multipart email with image attachment" do
+      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :with_attached_image, to: email_recipient) }
+
+      before do
+        subject.perform(inbound_mail.id)
+      end
+
+      it "should create two new messages on the thread" do
+        thread.should have(2).messages
+      end
+
+      it "should have the first message as the plain text part" do
+        message_body = thread.messages[0].body
+        message_body.should == "This email has an attached image.\n\nAndy"
+      end
+
+      it "should have the second image as a photo message" do
+        message = thread.messages[1]
+        message.component.should be_a(PhotoMessage)
+        message.component.caption.should == "abstract-100-100.jpg"
+        message.component.photo.format.should == :jpeg
+        message.component.photo.width.should eql(100)
+      end
+    end
+
     context "notifications" do
       it "should be sent out" do
         ThreadNotifier.should_receive(:notify_subscribers) do |thread, type, message|

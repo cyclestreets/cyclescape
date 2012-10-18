@@ -101,7 +101,22 @@ class MessageThread < ActiveRecord::Base
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select {|f| !f.hidden? }.join
 
-    messages.create!({body: stripped, created_by: user}, without_protection: true)
+    m = messages.create!({body: stripped, created_by: user}, without_protection: true)
+
+    # Attachments
+    mail.message.attachments.each do |attachment|
+      if attachment.content_type.start_with?('image/')
+        message = messages.build({created_by: user}, without_protection: true)
+        photo = PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
+        photo.thread = self
+        photo.message = message
+        photo.created_by = user
+        message.component = photo
+        message.save
+      end
+    end
+
+    return m
   end
 
   def email_subscribers
