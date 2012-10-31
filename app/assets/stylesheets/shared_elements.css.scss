@@ -186,8 +186,14 @@ article:hover > menu.tools, header:hover > menu.tools {
     .status {
       float: left;
       color: $grey2;
-      .following img {
-        vertical-align: middle;
+      .following {
+        font-size: 11px;
+        font-weight: bold;
+        color: $darkgreen;
+        text-transform: uppercase;
+        img {
+          vertical-align: middle;
+        }
       }
     }
     &.car-parking {
