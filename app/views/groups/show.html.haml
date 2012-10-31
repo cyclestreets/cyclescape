@@ -20,7 +20,7 @@
         - if @recent_threads.empty?
           %p= t ".no_threads"
         - else
-          %ul.thread-list
+          %ul.thread-list.group-latest-discussions
             = render_threads_list @recent_threads
       .pane.recent-issues
         .issue-map
