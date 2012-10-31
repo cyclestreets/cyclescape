@@ -26,8 +26,11 @@
         create: *labels_issue_new
         edit: *labels_issue_new
         update: *labels_issue_new
+        tags_string: "Tags"
       library_document:
         file: "Document"
+      library_item:
+        tags_string: "Tags"
       library_note:
         body: "Note"
       link_message:
