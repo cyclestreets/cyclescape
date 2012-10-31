@@ -183,6 +183,13 @@ article:hover > menu.tools, header:hover > menu.tools {
         margin: 3px 0 10px 0;
       }
     }
+    .status {
+      float: left;
+      color: $grey2;
+      .following img {
+        vertical-align: middle;
+      }
+    }
     &.car-parking {
       padding-left:42px;
       background: image-url("map-icons/m-car-parking.png") 0 20px no-repeat;
