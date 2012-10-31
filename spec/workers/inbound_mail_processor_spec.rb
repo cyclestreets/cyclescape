@@ -115,7 +115,7 @@ describe InboundMailProcessor do
         message_body.should == "This email has an attached file.\n\nAndy"
       end
 
-      it "should ahve the second message as an attachment message" do
+      it "should have the second message as an attachment message" do
         message = thread.messages[1]
         message.component.should be_a(DocumentMessage)
         message.component.title.should == "use_cases.pdf"
@@ -132,6 +132,17 @@ describe InboundMailProcessor do
           message.should be_a(Message)
         end
         subject.perform(inbound_mail.id)
+      end
+
+      context "with attachments" do
+        let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :with_attached_image, to: email_recipient) }
+
+        it "should send multiple notifications" do
+          ThreadNotifier.should_receive(:notify_subscribers).with(kind_of(MessageThread), :new_message, kind_of(Message))
+          ThreadNotifier.should_receive(:notify_subscribers).with(kind_of(MessageThread), :new_photo_message, kind_of(Message))
+
+          subject.perform(inbound_mail.id)
+        end
       end
     end
   end

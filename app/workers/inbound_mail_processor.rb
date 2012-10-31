@@ -15,8 +15,10 @@ class InboundMailProcessor
     raise "Thread #{thread_token.inspect} not found" if thread.nil?
 
     # This raises an exception if it fails
-    message = thread.add_message_from_email!(mail)
-    thread.add_subscriber(message.created_by) unless message.created_by.ever_subscribed_to_thread?(thread)
-    ThreadNotifier.notify_subscribers(thread, :new_message, message)
+    messages = thread.add_messages_from_email!(mail)
+    thread.add_subscriber(messages.first.created_by) unless messages.first.created_by.ever_subscribed_to_thread?(thread)
+    messages.each do |message|
+      ThreadNotifier.notify_subscribers(thread, ["new", message.component_name].join("_").to_sym, message)
+    end
   end
 end
