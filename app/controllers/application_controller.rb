@@ -80,6 +80,9 @@ class ApplicationController < ActionController::Base
   def load_group_from_subdomain
     if is_group_subdomain?
       @current_group = Group.find_by_short_name(request.subdomain)
+      unless @current_group
+        redirect_to(subdomain: 'www')
+      end
     end
   end
 
