@@ -84,7 +84,7 @@ class MessageThread < ActiveRecord::Base
     end
   end
 
-  def add_message_from_email!(mail)
+  def add_messages_from_email!(mail)
     from_address = mail.message.header[:from].addresses.first
     from_name = mail.message.header[:from].display_names.first
 
@@ -101,7 +101,9 @@ class MessageThread < ActiveRecord::Base
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select {|f| !f.hidden? }.join
 
-    m = messages.create!({body: stripped, created_by: user}, without_protection: true)
+    m = []
+
+    m << messages.create!({body: stripped, created_by: user}, without_protection: true)
 
     # Attachments
     mail.message.attachments.each do |attachment|
@@ -115,7 +117,8 @@ class MessageThread < ActiveRecord::Base
       component.message = message
       component.created_by = user
       message.component = component
-      message.save
+      message.save!
+      m << message
     end
 
     return m

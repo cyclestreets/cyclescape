@@ -170,13 +170,14 @@ describe MessageThread do
     let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
 
     it "should create a new message" do
-      message = thread.add_message_from_email!(mail)
-      message.should be_a(Message)
-      message.body.should_not be_blank
+      messages = thread.add_messages_from_email!(mail)
+      messages.should have(1).item
+      messages.first.should be_a(Message)
+      messages.first.body.should_not be_blank
     end
 
     it "should create a message with the user info" do
-      message = thread.add_message_from_email!(mail)
+      message = thread.add_messages_from_email!(mail).first
       message.created_by.name.should == mail.message.header[:from].display_names.first
       message.created_by.email.should == mail.message.header[:from].addresses.first
     end
@@ -184,8 +185,19 @@ describe MessageThread do
     context "signature removal" do
       it "should remove double-dash signatures" do
         mail.message.stub!(:decoded).and_return("Normal text here\n\n--\nSignature")
-        message = thread.add_message_from_email!(mail)
+        message = thread.add_messages_from_email!(mail).first
         message.body.should == "Normal text here\n"
+      end
+    end
+
+    context "with attachments" do
+      let(:mail) { FactoryGirl.create(:inbound_mail, :with_attached_image) }
+
+      it "should create two messages" do
+        messages = thread.add_messages_from_email!(mail)
+        messages.should have(2).items
+        messages[0].should be_a(Message)
+        messages[1].component.should be_a(PhotoMessage)
       end
     end
   end
