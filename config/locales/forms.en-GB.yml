@@ -24,6 +24,8 @@
           tags_string: "Tag your issue"
           title: "Title your report"
         create: *labels_issue_new
+        edit: *labels_issue_new
+        update: *labels_issue_new
       library_document:
         file: "Document"
       library_note:
@@ -57,6 +59,8 @@
           tags_string: "e.g. parking obstruction roadworks path"
           title: "Please be brief and specific."
         create: *hints_issue_new
+        edit: *hints_issue_new
+        update: *hints_issue_new
       message_thread:
         privacy: "Select if this thread should be visible to members of the group only or everyone."
     actions:
