@@ -992,6 +992,14 @@ section.new-message {
   }
 }
 
+ul.latest-discussions {
+  li {
+    .status {
+      float: right;
+    }
+  }
+}
+
 .group-latest-discussions {
   @extend .latest-discussions;
   li:last-child {
