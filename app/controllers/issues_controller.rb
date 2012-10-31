@@ -47,6 +47,7 @@ class IssuesController < ApplicationController
       set_flash_message(:success)
       redirect_to action: :show
     else
+      @start_location = current_user.start_location
       render :edit
     end
   end
