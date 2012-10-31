@@ -24,8 +24,13 @@
           tags_string: "Tag your issue"
           title: "Title your report"
         create: *labels_issue_new
+        edit: *labels_issue_new
+        update: *labels_issue_new
+        tags_string: "Tags"
       library_document:
         file: "Document"
+      library_item:
+        tags_string: "Tags"
       library_note:
         body: "Note"
       link_message:
@@ -57,6 +62,8 @@
           tags_string: "e.g. parking obstruction roadworks path"
           title: "Please be brief and specific."
         create: *hints_issue_new
+        edit: *hints_issue_new
+        update: *hints_issue_new
       message_thread:
         privacy: "Select if this thread should be visible to members of the group only or everyone."
     actions:
@@ -72,6 +79,9 @@
       issue:
         create: "Send Report"
         update: "Save Report"
+        update_tags: "Update Tags"
+      library_item:
+        update_tags: "Update Tags"
       library_item_message:
         create: "Add Library Item"
       library/document:
@@ -85,6 +95,7 @@
         create: "Post Message"
       message_thread:
         create: "Create Thread"
+        update_tags: "Update Tags"
       photo_message:
         create: "Add Photo"
       site_comment:

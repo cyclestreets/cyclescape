@@ -7,7 +7,7 @@
     .pane
       %p= t ".issue_threads_description", group_name: @group.name
       %p= t ".issue_threads_addition_description"
-      %ul.threads
+      %ul.thread-list
         = render_threads_list @issue_threads
       = will_paginate @issue_threads, param_name: "issue_threads_page", params: {anchor: "issue-threads"}
     .pane
@@ -15,6 +15,6 @@
       %nav
         %ul
           %li= link_to t(".new_group_thread"), {action: :new}, class: "btn-green"
-      %ul.threads
+      %ul.thread-list
         = render_threads_list @general_threads
       = will_paginate @general_threads, param_name: "general_threads_page", params: {anchor: "general-threads"}

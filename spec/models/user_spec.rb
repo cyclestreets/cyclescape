@@ -126,9 +126,9 @@ describe User do
       subject.display_name = "Brian"
       subject.should have(1).errors_on(:display_name)
 
-      brian.display_name = nil
+      brian.display_name = ""
       brian.save!
-      subject.display_name = nil
+      subject.display_name = ""
       subject.should have(0).errors_on(:display_name)
     end
   end

@@ -24,10 +24,10 @@ describe "Home page" do
 
     it "should be ordered by most recent activity first" do
       visit home_path
-      within("ul.threads li:first") do
+      within("ul.thread-list li:first") do
         page.should have_content(threads.last.title)
       end
-      within("ul.threads li:last") do
+      within("ul.thread-list li:last") do
         page.should have_content(threads[1].title)
       end
     end

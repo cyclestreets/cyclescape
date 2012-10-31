@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   scope :active, where("disabled_at IS NULL AND confirmed_at IS NOT NULL")
 
   validates :full_name, presence: true
-  validates :display_name, uniqueness: true, allow_nil: true
+  validates :display_name, uniqueness: true, allow_blank: true
   validates :role, presence: true, inclusion: {in: ALLOWED_ROLES} 
 
   def self.find_or_invite(email_address, name = nil)

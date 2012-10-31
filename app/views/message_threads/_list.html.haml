@@ -10,4 +10,4 @@
         = t ".posted_at", time_ago: time_ago_in_words(thread.latest_activity_at)
   .status
     = thread.following_status
-    .permissions= thread_type(thread)
+  .permissions= thread_type(thread)

@@ -8,7 +8,7 @@
       = link_to t(".report_an_issue"), new_issue_path, class: "btn-big-green"
   %section
     %h2= t ".latest_discussions"
-    %ul.threads.latest-discussions
+    %ul.thread-list.latest-discussions
       - @latest_threads.each do |thread|
         = render partial: "message_threads/list", locals: {thread: thread}
 

@@ -181,7 +181,7 @@ describe "Issues" do
         # This form is initially hidden
         within("form.edit-tags") do
           fill_in "Tags", with: "pothole dangerous"
-          click_on "Save"
+          click_on I18n.t(".formtastic.actions.issue.update_tags")
         end
         # Page submission is AJAX but returns usable page fragment here
         page.should have_content("pothole")

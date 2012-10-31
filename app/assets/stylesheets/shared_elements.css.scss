@@ -167,7 +167,7 @@ article:hover > menu.tools, header:hover > menu.tools {
   right: 0;
 }
 
-.thread-list {
+ul.thread-list {
   @include list-reset-soft;
   margin: 20px 0;
   border-top: 3px solid $grey;
@@ -181,6 +181,19 @@ article:hover > menu.tools, header:hover > menu.tools {
       width: 390px;
       h4 {
         margin: 3px 0 10px 0;
+      }
+    }
+    .status {
+      float: left;
+      color: $grey2;
+      .following {
+        font-size: 11px;
+        font-weight: bold;
+        color: $darkgreen;
+        text-transform: uppercase;
+        img {
+          vertical-align: middle;
+        }
       }
     }
     &.car-parking {
@@ -979,61 +992,10 @@ section.new-message {
   }
 }
 
-ul.threads {
-  @include list-reset-soft;
-  border-top:3px solid $paneborder;
+ul.latest-discussions {
   li {
-    padding:10px 0 10px 90px;
-    border-bottom:1px solid $paneborder;
-    position:relative;
-    &.car-parking {
-      background: image-url("map-icons/m-car-parking.png") 10px 10px no-repeat;
-    }
-    &.cycle-parking {
-      background: image-url("map-icons/m-cycle-parking.png") 10px 10px no-repeat;
-    }
-    &.cycle-path {
-      background: image-url("map-icons/m-cycle-path.png") 10px 10px no-repeat;
-    }
-    &.misc {
-      background: image-url("map-icons/m-misc.png") 10px 10px no-repeat;
-    }
-    &.obstruction {
-      background: image-url("map-icons/m-obstruction.png") 10px 10px no-repeat;
-    }
-    &.planning {
-      background: image-url("map-icons/m-planning.png") 10px 10px no-repeat;
-    }
-    &.roadworks {
-      background: image-url("map-icons/m-roadworks.png") 10px 10px no-repeat;
-    }
-    h4, p {
-      width: 450px;
-      margin: 0;
-    }
-    p {
-      color:$lightgrey2;
-    }
-    .btn-green {
-      position:absolute;
-      right:0;
-      top:20px;
-    }
     .status {
-      position: absolute;
-      top: 10px;
-      right: 0;
-      width: 70px;
-      .following {
-        font-size: 11px;
-        font-weight: bold;
-        color: $darkgreen;
-        text-align: right;
-        text-transform: uppercase;
-      }
-      .permissions {
-        width: auto;
-      }
+      float: right;
     }
   }
 }
