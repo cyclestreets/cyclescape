@@ -79,6 +79,9 @@
       issue:
         create: "Send Report"
         update: "Save Report"
+        update_tags: "Update Tags"
+      library_item:
+        update_tags: "Update Tags"
       library_item_message:
         create: "Add Library Item"
       library/document:
@@ -92,6 +95,7 @@
         create: "Post Message"
       message_thread:
         create: "Create Thread"
+        update_tags: "Update Tags"
       photo_message:
         create: "Add Photo"
       site_comment:
