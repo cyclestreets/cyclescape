@@ -103,7 +103,7 @@ class ApplicationController < ActionController::Base
   helper_method :page_title
 
   def is_group_subdomain?
-    request.subdomain != "www"
+    !request.subdomain.blank? && request.subdomain != "www"
   end
 
   def current_group
