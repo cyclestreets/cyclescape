@@ -67,8 +67,7 @@ require 'progressbar'
 
     ActiveRecord::Base.transaction do
       csv = CSV.foreach(@csv_path, headers: true, header_converters: :symbol) do |row|
-        record = PlanningApplication.find_by_openlylocal_id(row[:openlylocal_id])
-        record = PlanningApplication.new unless record
+        record = PlanningApplication.find_or_initialize_by_openlylocal_id(row[:openlylocal_id])
         [:openlylocal_id, :openlylocal_url, :address, :postcode, :description, :council_name, :url, :uid].each do |symbol|
           record[symbol] = row[symbol]
         end
