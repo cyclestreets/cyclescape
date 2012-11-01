@@ -29,7 +29,7 @@ class Notifications < ActionMailer::Base
     @category = category
     mail to: @user.name_with_email,
          subject: t("mailers.notifications.new_user_location_issue.subject",
-                    category: category.name.downcase)
+                    issue_title: @issue.title)
   end
 
   # Send a notification to a user that a thread has started on an issue in their area
@@ -52,6 +52,6 @@ class Notifications < ActionMailer::Base
     @issue = issue
     mail to: @user.name_with_email,
          subject: t('.mailers.notifications.new_group_location_issue.subject',
-                    group_name: @group.name)
+                    group_name: @group.name, issue_title: @issue.title)
   end
 end

@@ -2,7 +2,7 @@ class MessageThreadsController < ApplicationController
   filter_access_to :show, :edit, :update, attribute_check: true
 
   def index
-    threads = ThreadList.recent_public.page(params[:page])
+    threads = ThreadList.recent_public.page(params[:page]).includes(:issue, :group)
     @threads = ThreadListDecorator.decorate(threads)
   end
 
@@ -10,7 +10,7 @@ class MessageThreadsController < ApplicationController
     load_thread
     set_page_title @thread.title
     @issue = IssueDecorator.decorate(@thread.issue) if @thread.issue
-    @messages = @thread.messages.all
+    @messages = @thread.messages.includes({created_by: :profile}, :component).all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers
     @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
@@ -44,14 +44,6 @@ class MessageThreadsController < ApplicationController
     end
   end
 
-  def search
-    redirect_to action: :index and return if params[:button] == "clear"
-    @query = params[:query]
-    unfiltered_results = MessageThread.find_with_index(params[:query])
-    results = unfiltered_results.select{ |t| permitted_to?(:show, t) }
-    @results = ThreadListDecorator.decorate(results)
-  end
-
   protected
 
   def load_thread
@@ -71,7 +63,7 @@ class MessageThreadsController < ApplicationController
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
       if Authorization::Engine.instance.permit? :show, { object: thread, user: member, user_roles: [:member, :guest] }
-        thread.subscriptions.create(user: member) unless member.subscribed_to_thread?(thread)
+        thread.subscriptions.create({user: member}, without_protection: true) unless member.subscribed_to_thread?(thread)
       end
     end
   end
@@ -86,7 +78,7 @@ class MessageThreadsController < ApplicationController
 
     locations.each do |loc|
       if Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user, user_roles: [:member, :guest] }
-        thread.subscriptions.create(user: loc.user) unless loc.user.subscribed_to_thread?(thread)
+        thread.subscriptions.create({user: loc.user}, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
       end
     end
   end

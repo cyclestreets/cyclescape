@@ -177,7 +177,7 @@ describe "Message threads" do
           # This form is initially hidden
           within("form.edit-tags") do
             fill_in "Tags", with: "bike wheels"
-            click_on "Save"
+            click_on I18n.t(".formtastic.actions.message_thread.update_tags")
           end
           # Page submission is AJAX but returns usable page fragment here
           page.should have_content("bike")
@@ -284,6 +284,15 @@ describe "Message threads" do
         page.should have_content(thread.title)
         page.should have_content(group.name)
       end
+
+      it "should let you pick an issue to assign the thread to" do
+        issue = FactoryGirl.create(:issue)
+        click_on edit_thread
+        select "#{issue.id} - #{issue.title}", from: "Issue"
+        click_on "Save"
+        page.should have_content(thread.title)
+        page.should have_content(issue.title)
+      end
     end
 
     context "editing a group thread" do
@@ -389,9 +398,13 @@ describe "Message threads" do
   end
 
   context "search" do
+    let(:search_field) { "query" }
+    let(:search_button) { I18n.t("layouts.search.search_button") }
+
     before do
         [thread, private_thread, committee_thread].each do |t|
-          m = t.messages.new(body: "Findable with bananas", created_by: FactoryGirl.create(:user))
+          m = t.messages.new(body: "Findable with bananas")
+          m.created_by = FactoryGirl.create(:user)
           m.save!
           t.reload
         end
@@ -404,8 +417,10 @@ describe "Message threads" do
 
       it "should show one result" do
         visit threads_path
-        fill_in "Search all threads", with: "bananas"
-        click_on "Search"
+        within('.main-search-box') do
+          fill_in search_field, with: "bananas"
+          click_on search_button
+        end
         page.should have_content(thread.title)
         page.should_not have_content(private_thread.title)
         page.should_not have_content(committee_thread.title)
@@ -420,8 +435,10 @@ describe "Message threads" do
 
       it "should show two results" do
         visit threads_path
-        fill_in "Search all threads", with: "bananas"
-        click_on "Search"
+        within('.main-search-box') do
+          fill_in search_field, with: "bananas"
+          click_on search_button
+        end
         page.should have_content(thread.title)
         page.should have_content(private_thread.title)
         page.should_not have_content(committee_thread.title)
@@ -436,8 +453,10 @@ describe "Message threads" do
 
       it "should show three results" do
         visit threads_path
-        fill_in "Search all threads", with: "bananas"
-        click_on "Search"
+        within('.main-search-box') do
+          fill_in search_field, with: "bananas"
+          click_on search_button
+        end
         page.should have_content(thread.title)
         page.should have_content(private_thread.title)
         page.should have_content(committee_thread.title)

@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :load_group_from_subdomain
   before_filter :set_page_title
   after_filter :remember_current_group
+  after_filter :store_location
   layout :set_xhr_layout
   filter_access_to :all
 
@@ -20,15 +21,40 @@ class ApplicationController < ActionController::Base
   def ensure_proper_protocol
     if request.ssl? && !ssl_allowed_action?
       flash.keep
-      redirect_to "http://" + request.host + request.fullpath
+      redirect_to "http://" + request.host + request.fullpath # FIXME not safe for domains with ports
     end
   end
 
+  # We want to tightly control where users end up after signing in.
+  # If they hit a protected resource, devise has stored the location they were attempting
+  # If they volunteer to sign in, we've previously stored the location using after_filters in the devise cookie
+  # If they were on the front page, we want to redirect them to the dashboard instead
+  # If they have a remembered_group, then we want to inject the subdomain into any of the above
+  # We need to do all of that without messing up domains or ports
+  # ... and we need to make sure they go back to an http page, so that non-https maps can load.
   def after_sign_in_path_for(resource_or_scope)
-    if current_user.remembered_group?
-      dashboard_url(protocol: "http", subdomain: current_user.remembered_group.short_name)
+    s = stored_location_for(resource_or_scope) # nb returns and deletes
+    if s && s[0] == "/" && s != "/"
+      s.slice!(0) # remove the leading slash
+      if current_user.remembered_group?
+        # is there a cleaner way than using root_url?
+        root_url(protocol: "http", subdomain: current_user.remembered_group.short_name) + s
+      else
+        root_url(protocol: "http") + s
+      end
     else
-      dashboard_url(protocol: "http")
+      if current_user.remembered_group?
+        dashboard_url(protocol: "http", subdomain: current_user.remembered_group.short_name)
+      else
+        dashboard_url(protocol: "http")
+      end
+    end
+  end
+
+  # continuously store the location, for redirecting after login
+  def store_location
+    if request.get? && request.format.html? && !request.xhr? && !devise_controller?
+      session[:"user_return_to"] = request.fullpath
     end
   end
 
@@ -54,6 +80,9 @@ class ApplicationController < ActionController::Base
   def load_group_from_subdomain
     if is_group_subdomain?
       @current_group = Group.find_by_short_name(request.subdomain)
+      unless @current_group
+        redirect_to(subdomain: 'www')
+      end
     end
   end
 
@@ -74,7 +103,7 @@ class ApplicationController < ActionController::Base
   helper_method :page_title
 
   def is_group_subdomain?
-    request.subdomain != "www"
+    !request.subdomain.blank? && request.subdomain != "www"
   end
 
   def current_group
@@ -108,5 +137,16 @@ class ApplicationController < ActionController::Base
     minlon, minlat, maxlon, maxlat = string.split(",").collect{|i| i.to_f}
     bbox = RGeo::Cartesian::BoundingBox.new(factory)
     bbox.add(factory.point(minlon, minlat)).add(factory.point(maxlon, maxlat))
+  end
+
+  # Formatting grabbed from ruby stdlib
+  def timestamp_with_usec
+    time = Time.now
+    time.strftime("%Y-%m-%dT%H:%M:%S.") << "%06d " % time.usec
+  end
+
+  # Oh, rails, how I hate your shielding of Logger formatters from me
+  def debug_msg(msg)
+    "[#{timestamp_with_usec}] #{msg}"
   end
 end

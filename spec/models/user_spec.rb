@@ -109,6 +109,7 @@ describe User do
 
   describe "name" do
     subject { FactoryGirl.build(:stewie) }
+    let(:brian) { FactoryGirl.create(:brian) }
 
     it "should use the full name if no display name is set" do
       subject.display_name = ""
@@ -118,6 +119,17 @@ describe User do
     it "should use the display name if set" do
       subject.display_name = "Stewie"
       subject.name.should == "Stewie"
+    end
+
+    it "should allow blank display names, but not duplicates" do
+      brian.display_name.should == "Brian"
+      subject.display_name = "Brian"
+      subject.should have(1).errors_on(:display_name)
+
+      brian.display_name = ""
+      brian.save!
+      subject.display_name = ""
+      subject.should have(0).errors_on(:display_name)
     end
   end
 
@@ -174,7 +186,7 @@ describe User do
 
     it "should invite a new user if their email is not found" do
       user = User.find_or_invite(attrs[:email], attrs[:full_name])
-      user.should be_invited
+      user.should be_invited_to_sign_up
     end
 
     it "should set the full name of an existing user if their email is not found" do
@@ -284,27 +296,27 @@ describe User do
 
     it "should return polygon for point" do
       subject.locations[0].location = point
-      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.geometry_type.type_name.should eq("Polygon")
       subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return polygon for line" do
       subject.locations[0].location = line
-      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.geometry_type.type_name.should eq("Polygon")
       subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return polygon for polygon" do
       subject.locations[0].location = polygon
-      subject.buffered_locations.should be_an(RGeo::Geos::PolygonImpl)
+      subject.buffered_locations.geometry_type.type_name.should eq("Polygon")
       subject.buffered_locations.should eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return multipolygon for point, line and polygon combined" do
       subject.locations[0].location = point
-      subject.locations.create({location: line})
-      subject.locations.create({location: polygon})
-      subject.buffered_locations.should be_an(RGeo::Geos::MultiPolygonImpl)
+      subject.locations.create({location: line}, without_protection: true)
+      subject.locations.create({location: polygon}, without_protection: true)
+      subject.buffered_locations.geometry_type.type_name.should eq("MultiPolygon")
     end
   end
 
@@ -337,14 +349,14 @@ describe User do
       subject.start_location.should eql(Geo::NOWHERE_IN_PARTICULAR)
 
       # add a group with no location
-      GroupMembership.create(user: subject, group: group, role: "member")
+      GroupMembership.create({user: subject, group: group, role: "member"}, without_protection: true)
       subject.reload
       subject.start_location.should eql(Geo::NOWHERE_IN_PARTICULAR)
 
       # add a group with a location
       group2.profile.location = polygon
       group2.profile.save!
-      GroupMembership.create(user: subject, group: group2, role: "member")
+      GroupMembership.create({user: subject, group: group2, role: "member"}, without_protection: true)
       subject.reload
       subject.start_location.should eql(group2.profile.location)
 

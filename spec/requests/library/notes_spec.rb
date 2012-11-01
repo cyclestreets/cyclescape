@@ -68,8 +68,8 @@ describe "Library notes" do
 
     it "should be taggable" do
       click_on "Edit tags"
-      fill_in "Tags string", with: "cycle parking"
-      click_on "Save"
+      fill_in "Tags", with: "cycle parking"
+      click_on I18n.t(".formtastic.actions.library_item.update_tags")
       within ".tags-panel" do
         within ".tags" do
           page.should have_content("parking")

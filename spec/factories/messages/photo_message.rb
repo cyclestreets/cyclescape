@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:caption) {|n| "Imaginative photo caption #{n}" }
     photo { Pathname.new(test_photo_path) }
 
-    after_build do |o|
+    after(:build) do |o|
       o.thread = o.message.thread
       o.message.update_attributes(component: o)
     end

@@ -14,6 +14,8 @@
 #
 
 class SiteComment < ActiveRecord::Base
+  attr_accessible :name, :email, :body, :context_url, :context_data
+
   belongs_to :user
 
   after_initialize :set_user_details
@@ -26,7 +28,8 @@ class SiteComment < ActiveRecord::Base
   end
 
   def viewed!
-    update_attribute(:viewed_at, Time.now)
+    self.viewed_at = Time.now
+    save!
   end
 
   protected

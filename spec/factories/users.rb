@@ -32,22 +32,22 @@ FactoryGirl.define do
     sequence(:full_name) {|n| "User #{n}" }
     sequence(:password) {|n| "password#{n}" }
     sequence(:password_confirmation) {|n| "password#{n}" }
-    after_build {|u| u.skip_confirmation! }
+    after(:build) {|u| u.skip_confirmation! }
 
     trait :admin do
       role "admin"
     end
 
     trait :with_profile do
-      after_build {|u| FactoryGirl.build(:user_profile, user: u) }
+      after(:build) {|u| FactoryGirl.build(:user_profile, user: u) }
     end
 
     trait :with_location do
-      after_build {|u| FactoryGirl.create(:user_location, user: u) }
+      after(:build) {|u| FactoryGirl.create(:user_location, user: u) }
     end
 
     trait :unconfirmed do
-      after_build {|u| u.confirmed_at = nil }
+      after(:build) {|u| u.confirmed_at = nil }
     end
 
     factory :stewie do
@@ -60,7 +60,7 @@ FactoryGirl.define do
 
       factory :stewie_with_profile do
         # This is repeated here due to with_profile trait not being found
-        after_build {|u| FactoryGirl.build(:user_profile, user: u) }
+        after(:build) {|u| FactoryGirl.build(:user_profile, user: u) }
       end
     end
 

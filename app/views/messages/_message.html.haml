@@ -5,11 +5,13 @@
         - if message.created_by.profile.picture
           = image_tag message.created_by.profile.picture_thumbnail.url, alt: ""
       = link_to_profile message.created_by
-      %time{datetime: message.created_at}
-        = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
+      = link_to({anchor: dom_id(message)}, class: "permalink") do
+        %time{datetime: message.created_at}
+          = t ".posted_date", time_ago: time_ago_in_words(message.created_at)
   .body
     - if message.censored?
-      .censored= t ".censored"
+      .censored
+        %p= t ".censored"
     - else
       - if message.component
         = render "message/#{message_controller_map(message.component)}/show", message: message

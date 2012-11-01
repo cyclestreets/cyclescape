@@ -14,7 +14,7 @@
         %td= t ".when_ago", time_ago: time_ago_in_words(comment.created_at)
         %td
           %ul
-            %li= comment.user ? link_to(comment.user.name, user_path(comment.user)) : comment.name
+            %li= comment.user ? link_to_profile(comment.user) : comment.name
             %li= comment.email
         %td= simple_format comment.body
         %td= link_to comment.context_url, comment.context_url

@@ -22,6 +22,10 @@ describe "Group members" do
         visit group_members_path(current_group)
       end
 
+      it "should display the group name in the page title" do
+        page.should have_selector('title', text: current_group.name)
+      end
+
       it "should display the user name of the committee member" do
         within(".committee") do
           page.should have_content(current_user.name)

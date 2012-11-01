@@ -1,0 +1,20 @@
+.edit-user-form
+  %h1= t ".title"
+  %p
+    = t ".info"
+  = semantic_form_for resource, as: resource_name, url: invitation_path(resource_name), html: {method: :put} do |f|
+    = devise_error_messages!
+    = f.inputs do
+      = f.input :invitation_token, as: :hidden
+      = f.input :full_name
+      = f.input :display_name
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation
+    = f.actions do
+      = f.action :submit, label: t(".commit_button")
+.cancel-form
+  %h2 Cancel my account
+  %p
+    Unhappy? #{link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete}.
+  = link_to "Back", :back

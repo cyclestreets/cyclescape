@@ -18,6 +18,8 @@ class Issue < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
+  attr_accessible :title, :description, :loc_json, :photo, :retained_photo, :tags_string
+
   acts_as_indexed :fields => [:title, :description, :tags_string]
   acts_as_voteable
   image_accessor :photo do

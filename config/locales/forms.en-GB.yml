@@ -24,8 +24,13 @@
           tags_string: "Tag your issue"
           title: "Title your report"
         create: *labels_issue_new
+        edit: *labels_issue_new
+        update: *labels_issue_new
+        tags_string: "Tags"
       library_document:
         file: "Document"
+      library_item:
+        tags_string: "Tags"
       library_note:
         body: "Note"
       link_message:
@@ -48,6 +53,8 @@
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name, they can change this when they accept the invite."
+      group_profile:
+        joining_instructions: "The joining instructions are text that's shown to people who want to join this Cyclescape group. You might want to direct them to pay for membership elsewhere first, for example, or you might be happy for everyone and anyone to join your Cyclescape group. You can leave this blank."
       issue:
         new: &hints_issue_new
           description: "Please give details about the problem and what effect it is having on cycling. Note that all issues are publicly viewable."
@@ -55,10 +62,14 @@
           tags_string: "e.g. parking obstruction roadworks path"
           title: "Please be brief and specific."
         create: *hints_issue_new
+        edit: *hints_issue_new
+        update: *hints_issue_new
       message_thread:
         privacy: "Select if this thread should be visible to members of the group only or everyone."
     actions:
       update: "Save"
+      saving: "Saving\u2026"
+      cancel: "Cancel"
       deadline_message:
         create: "Add Deadline"
       document_message:
@@ -68,6 +79,9 @@
       issue:
         create: "Send Report"
         update: "Save Report"
+        update_tags: "Update Tags"
+      library_item:
+        update_tags: "Update Tags"
       library_item_message:
         create: "Add Library Item"
       library/document:
@@ -81,6 +95,7 @@
         create: "Post Message"
       message_thread:
         create: "Create Thread"
+        update_tags: "Update Tags"
       photo_message:
         create: "Add Photo"
       site_comment:

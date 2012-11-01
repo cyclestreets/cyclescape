@@ -8,7 +8,7 @@ describe "thread notifications" do
     include_context "signed in as a site user"
 
     before do
-      current_user.prefs.update_attribute(:enable_email, true)
+      current_user.prefs.update_column(:enable_email, true)
       visit thread_path(thread)
       subscribe_button.click
     end
@@ -58,7 +58,7 @@ describe "thread notifications" do
       within("#new-deadline-message") do
         fill_in "Deadline", with: "Wednesday, 07 December 2011" # format the date picker returns
         fill_in "Title", with: "Planning application deadline"
-        click_on "Add Deadline"
+        click_on I18n.t("message.deadlines.new.submit")
       end
       open_email(current_user.email)
       current_email.should have_body_text("Planning application deadline")
@@ -122,7 +122,7 @@ describe "thread notifications" do
         within("#new-deadline-message") do
           fill_in "Deadline", with: "Wednesday, 07 December 2011" # format the date picker returns
           fill_in "Title", with: "Planning application deadline & so on"
-          click_on "Add Deadline"
+          click_on I18n.t("message.deadlines.new.submit")
         end
         open_email(current_user.email)
         current_email.should have_body_text("Planning application deadline & so on")

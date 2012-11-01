@@ -1,18 +1,8 @@
-- content_for :subnav do
-  .search
-    = form_tag({action: :search}, {method: :get, class: "filters"}) do
-      = label_tag do
-        = t(".search")
-        = text_field_tag :query, params[:query]
-      = button_tag t(".search_submit"), class: "submit", value: "search"
-      - if params[:query]
-        = button_tag t(".clear_submit"), class: "submit", value: "clear"
-
 %section#content
-  - if params[:action] == "search"
-    %h1= t ".results"
-  - else
-    %h1= t ".latest"
+  %h1= t ".title"
+  %p= t ".overview_description_html"
+  %p= t ".overview_usage"
+  %h2= t ".latest"
   %ul.library-list
     - @items.each do |item|
       %li

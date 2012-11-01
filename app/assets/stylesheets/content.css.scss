@@ -97,7 +97,7 @@
         weight: bold;
       }
     }
-    fieldset.buttons {
+    fieldset.actions {
       padding: 0;
       li {
         float: none;
@@ -549,7 +549,7 @@ section#user-locations {
           color:$lightgrey2;
         }
         div {
-          float:left;
+          margin-left: 230px;
           p {
             margin:0;
             color:$lightgrey2;

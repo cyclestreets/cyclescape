@@ -10,7 +10,6 @@ Cyclescape::Application.routes.draw do
       end
       collection do
         get "all_geometries"
-        get "search"
       end
       scope module: "issue" do
         resource :photo, only: [:show]
@@ -61,9 +60,6 @@ Cyclescape::Application.routes.draw do
     resources :messages do
       put 'censor', :on => :member
     end
-    collection do
-      get "search"
-    end
     scope module: :message do
       resources :photos, only: [:create, :show]
       resources :links, only: [:create]
@@ -113,7 +109,9 @@ Cyclescape::Application.routes.draw do
     resources :comments
   end
 
-  resources :tags
+  resources :tags do
+    get "autocomplete_tag_name", :as => :autocomplete, :on => :collection
+  end
   resource :home, only: [:show], controller: "home"
 
   match "template/:action", controller: "home"

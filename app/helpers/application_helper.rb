@@ -4,7 +4,7 @@ module ApplicationHelper
   TweetButton.default_tweet_button_options = { via: "cyclescape", count: "horizontal" }
 
   def cancel_link(url = {action: :index})
-    content_tag("li", class: "cancel") do
+    content_tag("li", class: "action link_action cancel") do
       link_to t("cancel"), url
     end
   end

@@ -50,6 +50,9 @@ class GroupMembershipRequest < ActiveRecord::Base
   end
 
   def create_membership
-    group.memberships.new({user: user, role: "member"}).save
+    membership = group.memberships.new
+    membership.user = user
+    membership.role = "member"
+    membership.save!
   end
 end

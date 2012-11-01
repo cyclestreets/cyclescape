@@ -14,6 +14,8 @@
 #
 
 class Group < ActiveRecord::Base
+  attr_accessible :name, :short_name, :website, :email, :default_thread_privacy
+
   has_many :memberships, class_name: "GroupMembership"
   has_many :members, through: :memberships, source: :user
   has_many :membership_requests, class_name: "GroupMembershipRequest"
@@ -48,6 +50,10 @@ class Group < ActiveRecord::Base
 
   def membership_for(user)
     memberships.where(user_id: user.id).first
+  end
+
+  def pending_membership_requests
+    membership_requests.where(status: :pending)
   end
 
   def subdomain

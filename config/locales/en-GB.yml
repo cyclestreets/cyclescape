@@ -54,11 +54,16 @@
       add_a_new_issue: "add a new issue"
       add_another_location: "add another location"
       add_some_locations: "add some locations"
-      deadlines: "Deadlines"
+      days_away:
+        zero: "Today!"
+        one: "Tomorrow!"
+        other: "%{count} days away"
+      deadlines: "Deadlines and dates"
+      deadline_thread_updated: "thread updated %{at}"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
-      no_upcoming_deadline_threads: "You aren't involved in any threads with upcoming deadlines."
+      no_upcoming_deadline_threads: "You aren't involved in any threads with upcoming deadlines or dates."
       no_subscribed_threads_html:
         You aren't following any threads yet. You could have a look
         through the %{threads_link} and see if there's anything that you want to
@@ -78,12 +83,12 @@
       group_threads_desc_html:
         Recent threads with activity from your groups.
       update_your_locations: "Update your locations"
-      my_priorities: "My Priorities"
-      my_threads: "My Threads"
-      issues_nearby: "Issues Nearby"
+      my_priorities: "My priorities"
+      my_threads: "My subscribed threads"
+      issues_nearby: "Latest issues nearby"
       posted:
         message_html: "%{creator_link} posted a message"
-        deadline_message_html: "%{creator_link} posted a deadline"
+        deadline_message_html: "%{creator_link} posted a deadline/date"
         document_message_html: "%{creator_link} posted an attachment"
         photo_message_html: "%{creator_link} posted a photo"
         link_message_html: "%{creator_link} posted a link"
@@ -164,6 +169,7 @@
         by: "by %{name}"
         confirm: "Confirm"
         created_at: "%{time_ago} ago"
+        no_requests_yet: "There have been no membership requests for this group yet."
         reject: "Reject"
         requested_at: "Requested At"
         status: "Status"
@@ -178,9 +184,10 @@
     message_threads:
       index:
         title: "Group Threads"
-        new_group_thread: "New Group Thread"
+        new_group_thread: "New Group Administrative thread"
         issue_threads: "Issue discussions"
-        issue_threads_description: "These are public and private discussions belonging to %{group_name} on reported issues."
+        issue_threads_description: "These are public and private issue-based discussions belonging to %{group_name} on reported issues."
+        issue_threads_addition_description: "To start a new issue-based discussion thread, go to the relevant issue."
         general_threads: "Administrative discussions"
         general_threads_description: "These are public and private general discussions for administrative purposes, e.g. arranging a general meeting."
       new:
@@ -203,11 +210,9 @@
       edit_group_members: "Edit the membership list"
       group_management: "Group Management"
       group_organisers: "Group Organisers"
-      group_request_pending: "You request to join this group is pending."
+      group_request_pending: "Your request to join this group is pending."
       join_body:
-        To take part in discussions and threads here you will need to join
-        the %{group} first. We can then provide you with
-        access details to this site.
+        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_title: "Join our Cyclescape group"
       join_this_group: "Join this group"
       no_issues: There are no issues in this group's area yet
@@ -216,6 +221,10 @@
       our_areas: "Our Areas"
       recent_issues: "Recent Issues in this group's area"
       recent_threads: "Latest Discussions"
+      view_membership_requests:
+        zero: "Review Membership Requests"
+        one: "View Pending Membership Request"
+        other: "View Pending Membership Requests"
   home:
     show:
       introduction_html:
@@ -272,13 +281,10 @@
       list_tab: "List"
       map_tab: "Map"
       popular_tab: "Popular"
-      search_issues: "Search issues"
       search_button: "Go"
       clear: "Clear"
+      no_popular_issues: "No issues have been voted on recently."
       no_results_found: "No issues found."
-      results_found:
-        one: "One issue found for '%{query}'."
-        other: "%{count} issues found for '%{query}'"
     new:
       title: "Report an issue"
     show:
@@ -347,7 +353,9 @@
       title: "Library Search Results"
     show:
       title: "Library"
-      latest: "Latest"
+      overview_description_html: "The Library contains <strong>reusable resources</strong> for campaigning. Please add items you think might be useful in future."
+      overview_usage: "You can link to library items from discussion threads."
+      latest: "Latest items"
       item_created: "Posted %{time_ago} ago"
       search: "Search the library:"
       search_submit: "Search"
@@ -390,9 +398,9 @@
       new_group_thread:
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
       new_group_location_issue:
-        subject: "[Cyclescape] New issue reported in %{group_name}'s area"
+        subject: "[Cyclescape] New issue - \"%{issue_title}\" (%{group_name})"
       new_user_location_issue:
-        subject: "[Cyclescape] New issue reported near your %{category} location"
+        subject: "[Cyclescape] New issue - \"%{issue_title}\""
       new_user_location_issue_thread:
         subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
 
@@ -451,7 +459,7 @@
     new:
       title: "New Thread"
     priority_panel:
-      thread_priority: "Thread Priority"
+      thread_priority: "My Thread Priority"
     search:
       clear_submit: "Clear"
       no_results_found: "No results found for '%{query}'."
@@ -481,9 +489,12 @@
       public: "Public"
   message:
     deadlines:
+      new:
+        deadline_date: "Deadline/date"
+        submit: "Add deadline/date"
       create:
-        failure: "Deadline could not be created"
-        success: "Deadline created"
+        failure: "Deadline/date could not be created"
+        success: "Deadline/date created"
       show:
         days_away:
           zero: "Today!"
@@ -511,6 +522,7 @@
         success: "Photo uploaded"
       show:
         photo_alt: "A photo entitled %{caption}."
+        view_original_image: "View the original image"
   messages:
     censor:
       failure: "Could not censor message"
@@ -523,7 +535,7 @@
       censor: "Censor this message"
       censored: "This message has been removed"
     new:
-      deadline_message: "Deadline"
+      deadline_message: "Deadline/date"
       document_message: "Attachment"
       library_item_message: "Library"
       link_message: "Link"
@@ -531,6 +543,9 @@
       photo_message: "Photo"
       sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
+  pages:
+    changelog:
+      github_history_link_html: "<a href='https://github.com/cyclestreets/toolkit/commits/master/'>GitHub</a>"
   planning_applications:
     show:
       address_label: "Address:"
@@ -586,7 +601,8 @@
       new:
         title: "Feedback"
       success:
-        thank_you: "Thank you for your feedback"
+        thank_you_title: "Thank you for your feedback!"
+        thank_you_longform: "One of our developers will read your feedback and use it to help plan upcoming work and new features. Unfortunately we can't respond individually to every feedback comment that we receive."
         close: "< Back to site"
   tags:
     show:
@@ -598,7 +614,7 @@
       unrecognised: "Couldn't find the tag '%{name}'"
   thread_mailer:
     new_deadline_message:
-      added: "%{name} added a deadline to the thread"
+      added: "%{name} added a deadline/date to the thread"
     new_document_message:
       added: "%{name} added an attachment to the thread"
       view_the_document: "You can view the attachment at the following url:"

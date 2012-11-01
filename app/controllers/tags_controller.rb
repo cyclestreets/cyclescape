@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  autocomplete :tag, :name, full: true
+
   def show
     @tag = Tag.find_by_name(params[:id])
     if @tag

@@ -34,11 +34,11 @@
       %nav.wrapper
         %ul#navigation(role="navigation")
           %li#menu-dashboard= link_to t(".dashboard"), dashboard_path
-          - if permitted_to? :view, :admin_home
-            %li#menu-admin= link_to t(".admin"), admin_home_path
           %li#menu-issues= link_to t(".issues"), issues_path
           %li#menu-threads= link_to t(".threads"), threads_path
           %li#menu-library= link_to t(".library"), library_path
+          - if permitted_to? :view, :admin_home
+            %li#menu-admin= link_to t(".admin"), admin_home_path
         - if current_user && !current_user.groups.empty?
           = render partial: "layouts/group_selector"
 

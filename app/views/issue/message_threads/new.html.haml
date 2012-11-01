@@ -15,7 +15,7 @@
             wrapper_html: {class: "hide", "data-dependent" => "#thread_group_id"}
       = semantic_fields_for @message do |f2|
         = f2.semantic_errors
-        = f2.inputs :body
-    = f.buttons do
-      = f.commit_button
+        = f2.input :body, input_html: { rows: 15 }
+    = f.actions do
+      = f.action :submit
       = cancel_link

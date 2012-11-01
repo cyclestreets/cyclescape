@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.3'
+gem 'rails', '3.2.8'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -8,10 +8,11 @@ gem 'activerecord-postgis-adapter'
 # gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
-gem 'jquery-rails'
+gem 'jquery-rails', '2.0.3' # pin due to incompatible jquery-tools vs jquery 1.8. See https://github.com/cyclestreets/toolkit/issues/75
 gem 'haml-rails'
-gem 'formtastic', '~> 2.0.2'
+gem 'formtastic'
 gem 'map_layers'
+gem 'rails3-jquery-autocomplete'
 gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
 gem 'rails_autolink'
@@ -32,7 +33,7 @@ gem 'thumbs_up', '~> 0.4.6'
 gem 'exceptional'
 gem 'foreman'
 gem 'whenever'
-gem 'draper'
+gem 'draper', '0.15.0' # pin due to failing tests: maybe when https://github.com/jcasimir/draper/pull/288 is released.
 gem 'email_reply_parser'
 gem 'memoist'
 gem 'rubyzip'
@@ -44,10 +45,12 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
+  gem 'jquery-ui-rails'
 end
 
 group :development do
-  gem 'annotate', git: 'git://github.com/ctran/annotate_models.git', require: false
+  gem 'annotate', '>=2.5.0.pre1', require: false
+  gem 'bullet'
 
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded
@@ -61,7 +64,7 @@ group :development, :test do
 
   gem 'rspec-core'
   gem 'rspec-rails'
-  gem 'spork', '~> 0.9.0.rc'
+  gem 'spork'
   gem 'ruby-prof'
 end
 

@@ -19,6 +19,8 @@ class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
+  attr_accessible :title, :privacy, :group_id, :issue_id, :tags_string
+
   acts_as_indexed :fields => [:title, :messages_text, :tags_string]
 
   ALLOWED_PRIVACY = %w(public group committee)
@@ -63,7 +65,7 @@ class MessageThread < ActiveRecord::Base
                   FROM messages m
                   JOIN deadline_messages dm ON m.component_id = dm.id
                   WHERE m.component_type = 'DeadlineMessage'
-                    AND dm.deadline > now()
+                    AND dm.deadline >= current_date
                     AND m.censored_at IS NULL
                   GROUP BY m.thread_id)
                 AS m2
@@ -78,11 +80,11 @@ class MessageThread < ActiveRecord::Base
       found.undelete!
       found
     else
-      subscriptions.create(user: user)
+      subscriptions.create({user: user}, without_protection: true)
     end
   end
 
-  def add_message_from_email!(mail)
+  def add_messages_from_email!(mail)
     from_address = mail.message.header[:from].addresses.first
     from_name = mail.message.header[:from].display_names.first
 
@@ -99,7 +101,27 @@ class MessageThread < ActiveRecord::Base
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select {|f| !f.hidden? }.join
 
-    messages.create!(body: stripped, created_by: user)
+    m = []
+
+    m << messages.create!({body: stripped, created_by: user}, without_protection: true)
+
+    # Attachments
+    mail.message.attachments.each do |attachment|
+      if attachment.content_type.start_with?('image/')
+        component = PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
+      else
+        component = DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
+      end
+      message = messages.build({created_by: user}, without_protection: true)
+      component.thread = self
+      component.message = message
+      component.created_by = user
+      message.component = component
+      message.save!
+      m << message
+    end
+
+    return m
   end
 
   def email_subscribers
@@ -145,7 +167,7 @@ class MessageThread < ActiveRecord::Base
   def upcoming_deadline_messages
     messages.except(:order).joins("JOIN deadline_messages dm ON messages.component_id = dm.id").
       where("messages.component_type = 'DeadlineMessage'").
-      where("dm.deadline > now()").
+      where("dm.deadline >= current_date").
       where("messages.censored_at IS NULL").
       order("dm.deadline ASC")
   end

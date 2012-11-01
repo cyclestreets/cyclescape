@@ -19,7 +19,7 @@ FactoryGirl.define do
     recipient { to || "cyclescape@example.com" }
     raw_message { File.read(raw_email_path("basic")) }
 
-    after_build do |mail, proxy|
+    after(:build) do |mail, proxy|
       if proxy.to
         # Get a Mail object, rewrite the recipient and save
         mesg = mail.message
@@ -34,6 +34,14 @@ FactoryGirl.define do
 
     trait :multipart_iso_8859_1 do
       raw_message { File.read(raw_email_path("qp_text_only_multipart_iso-8859-1")) }
+    end
+
+    trait :with_attached_image do
+      raw_message { File.read(raw_email_path("attached_image")) }
+    end
+
+    trait :with_attached_file do
+      raw_message { File.read(raw_email_path("attached_file")) }
     end
   end
 end

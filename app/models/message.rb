@@ -17,6 +17,8 @@
 class Message < ActiveRecord::Base
   include FakeDestroy
 
+  attr_accessible :body, :component
+
   belongs_to :thread, class_name: "MessageThread"
   belongs_to :created_by, class_name: "User"
   belongs_to :component, polymorphic: true, autosave: true
@@ -31,7 +33,8 @@ class Message < ActiveRecord::Base
   validates :body, presence: true, unless: :component
 
   def censor!
-    update_attribute(:censored_at, Time.now)
+    self.censored_at = Time.now
+    save!
   end
 
   def censored?
@@ -47,7 +50,7 @@ class Message < ActiveRecord::Base
   end
 
   def update_thread_search
-    thread.update_index if thread
+    SearchUpdater.update_thread(thread) if thread
     true
   end
 

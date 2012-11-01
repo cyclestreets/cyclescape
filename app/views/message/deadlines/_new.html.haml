@@ -1,7 +1,7 @@
 #new-deadline-message.pane
   = semantic_form_for DeadlineMessage.new, url: thread_deadlines_path(@thread) do |f|
     = f.inputs do
-      = f.input :deadline, as: :date_picker
+      = f.input :deadline, as: :date_picker, :label => t(".deadline_date")
       = f.input :title
-    = f.buttons do
-      = f.commit_button button_html: {class: "btn-green"}
+    = f.actions do
+      = f.action :submit, label: t(".submit"), button_html: {class: "btn-green"}

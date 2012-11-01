@@ -15,9 +15,9 @@
     right:0;
     height:100%;
     width:190px;
-    opacity: 0.8;
-    filter: alpha(opacity=80);  // IE8 and lower
-    background:rgba(0, 0, 0, 0.8);
+    opacity: 0.85;
+    filter: alpha(opacity=85);  // IE8 and lower
+    background:rgba(0, 0, 0, 0.85);
     z-index:1010;
     ul.tabs {
       @include list-reset;
@@ -134,9 +134,19 @@
       }
     }
   }
-  .edit {
+  &.edit {
     .olControlLayerSwitcher {
       right: 190px;
+      .layersDiv {
+        opacity: 0.85;
+        filter: alpha(opacity=85);  // IE8 and lower
+        background:rgba(0, 0, 0, 0.85);
+        padding-right: 0;
+        padding-left: 0;
+      }
+      font: {
+        size: 13px;
+      }
     }
   }
 }

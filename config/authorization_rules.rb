@@ -17,7 +17,7 @@ authorization do
 
   role :member do
     includes :guest
-    has_permission_on :dashboards, to: [:show, :search]
+    has_permission_on :dashboards, to: [:show]
     has_permission_on :group_members, :group_memberships do
       to :manage
       if_attribute committee_members: contains { user }
@@ -94,6 +94,7 @@ authorization do
   end
 
   role :guest do
+    has_permission_on :dashboards, to: [:search]
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
                       :devise_invitations, :devise_passwords, to: :manage
     has_permission_on :home, to: :show
@@ -110,7 +111,7 @@ authorization do
     has_permission_on :message_photos, to: :show
     has_permission_on :pages, to: :show
     has_permission_on :site_comments, to: [:new, :create]
-    has_permission_on :tags, to: :show
+    has_permission_on :tags, to: [:show, :autocomplete_tag_name]
     has_permission_on :user_profiles, to: :view
   end
 end

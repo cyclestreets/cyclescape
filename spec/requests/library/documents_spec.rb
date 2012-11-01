@@ -41,6 +41,12 @@ describe "Library documents" do
       page.current_path.should == library_path
     end
 
+    it "should tell the user when they don't fill in the fields" do
+      visit new_library_document_path
+      click_on "Upload"
+      page.should have_content("can't be blank")
+    end
+
     it "should update the document"
   end
 
@@ -73,8 +79,8 @@ describe "Library documents" do
 
     it "should be taggable" do
       click_on "Edit tags"
-      fill_in "Tags string", with: "cycle parking"
-      click_on "Save"
+      fill_in "Tags", with: "cycle parking"
+      click_on I18n.t(".formtastic.actions.library_item.update_tags")
       within ".tags-panel" do
         within ".tags" do
           page.should have_content("parking")

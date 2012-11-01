@@ -30,9 +30,9 @@
               %h3= g.name
               = semantic_form_for g.memberships.new, url: group_memberships_path(g) do |f|
                 = f.inputs do
-                  = f.input :user_id, as: :hidden, value: @user.id
+                  = f.input :user_id, as: :hidden, input_html: { value: @user.id }
                   = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
-                = f.buttons
+                = f.actions
   %section#user-tabs
     %ul.tabs
       %li= link_to t(".recent_threads"), ""

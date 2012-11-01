@@ -1,15 +1,9 @@
 class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
-  
+
   def index
-    # FIXME: this is confusing design, the query param is set by the search action
-    if @query
-      issues = Issue.find_with_index(@query)
-      popular_issues = Issue.with_query(@query).plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
-    else
-      issues = Issue.by_most_recent.paginate(page: params[:page])
-      popular_issues = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
-    end
+    issues = Issue.by_most_recent.paginate(page: params[:page]).includes(:created_by)
+    popular_issues = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).includes(:created_by)
 
     @issues = IssueDecorator.decorate(issues)
     @popular_issues = IssueDecorator.decorate(popular_issues)
@@ -20,7 +14,7 @@ class IssuesController < ApplicationController
     issue = Issue.find(params[:id])
     @issue = IssueDecorator.decorate(issue)
     set_page_title @issue.title
-    @threads = ThreadListDecorator.decorate(@issue.threads)
+    @threads = ThreadListDecorator.decorate(@issue.threads.includes(:group))
     @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
   end
 
@@ -53,6 +47,7 @@ class IssuesController < ApplicationController
       set_flash_message(:success)
       redirect_to action: :show
     else
+      @start_location = current_user.start_location
       render :edit
     end
   end
@@ -88,12 +83,6 @@ class IssuesController < ApplicationController
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection)}
     end
-  end
-
-  def search
-    @query = params[:search]
-    index
-    render action: "index"
   end
 
   def vote_up

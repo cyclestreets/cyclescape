@@ -16,7 +16,7 @@ FactoryGirl.define do
     sequence(:title) {|n| "Document #{n}" }
     file { Pathname.new(pdf_document_path) }
 
-    after_build do |o|
+    after(:build) do |o|
       o.item.update_attributes(component: o)
     end
 

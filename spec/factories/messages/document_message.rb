@@ -5,7 +5,7 @@ FactoryGirl.define do
     sequence(:title) {|n| "Imaginative file title #{n}" }
     file { Pathname.new(pdf_document_path) }
 
-    after_build do |o|
+    after(:build) do |o|
       o.thread = o.message.thread
       o.message.update_attributes(component: o)
     end

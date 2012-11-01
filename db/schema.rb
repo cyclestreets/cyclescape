@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120531183533) do
+ActiveRecord::Schema.define(:version => 20120817142607) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.datetime "updated_at"
   end
 
+  add_index "group_membership_requests", ["group_id"], :name => "index_group_membership_requests_on_group_id"
+  add_index "group_membership_requests", ["user_id"], :name => "index_group_membership_requests_on_user_id"
+
   create_table "group_memberships", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "group_id",   :null => false
@@ -52,13 +55,20 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.datetime "deleted_at"
   end
 
+  add_index "group_memberships", ["group_id"], :name => "index_group_memberships_on_group_id"
+  add_index "group_memberships", ["user_id"], :name => "index_group_memberships_on_user_id"
+
   create_table "group_profiles", :force => true do |t|
-    t.integer  "group_id",                                                :null => false
+    t.integer  "group_id",                                                         :null => false
     t.text     "description"
-    t.datetime "created_at",                                              :null => false
-    t.datetime "updated_at",                                              :null => false
-    t.spatial  "location",    :limit => {:srid=>4326, :type=>"geometry"}
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
+    t.spatial  "location",             :limit => {:srid=>4326, :type=>"geometry"}
+    t.text     "joining_instructions"
   end
+
+  add_index "group_profiles", ["group_id"], :name => "index_group_profiles_on_group_id"
+  add_index "group_profiles", ["location"], :name => "index_group_profiles_on_location", :spatial => true
 
   create_table "groups", :force => true do |t|
     t.string   "name",                                         :null => false
@@ -70,6 +80,8 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.datetime "disabled_at"
     t.string   "default_thread_privacy", :default => "public", :null => false
   end
+
+  add_index "groups", ["short_name"], :name => "index_groups_on_short_name"
 
   create_table "inbound_mails", :force => true do |t|
     t.string   "recipient",                        :null => false
@@ -96,6 +108,9 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
     t.string   "photo_uid"
   end
+
+  add_index "issues", ["created_by_id"], :name => "index_issues_on_created_by_id"
+  add_index "issues", ["location"], :name => "index_issues_on_location", :spatial => true
 
   create_table "library_documents", :force => true do |t|
     t.integer "library_item_id", :null => false
@@ -128,6 +143,8 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.datetime "deleted_at"
     t.spatial  "location",       :limit => {:srid=>4326, :type=>"geometry"}
   end
+
+  add_index "library_items", ["location"], :name => "index_library_items_on_location", :spatial => true
 
   create_table "library_notes", :force => true do |t|
     t.integer "library_item_id",     :null => false
@@ -172,6 +189,9 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.string   "public_token"
   end
 
+  add_index "message_threads", ["created_by_id"], :name => "index_message_threads_on_created_by_id"
+  add_index "message_threads", ["group_id"], :name => "index_message_threads_on_group_id"
+  add_index "message_threads", ["issue_id"], :name => "index_message_threads_on_issue_id"
   add_index "message_threads", ["public_token"], :name => "index_message_threads_on_public_token", :unique => true
 
   create_table "messages", :force => true do |t|
@@ -185,6 +205,9 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.datetime "deleted_at"
     t.datetime "censored_at"
   end
+
+  add_index "messages", ["created_by_id"], :name => "index_messages_on_created_by_id"
+  add_index "messages", ["thread_id"], :name => "index_messages_on_thread_id"
 
   create_table "photo_messages", :force => true do |t|
     t.integer  "thread_id",     :null => false
@@ -239,6 +262,11 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.datetime "deleted_at"
   end
 
+  add_index "thread_subscriptions", ["thread_id"], :name => "index_thread_subscriptions_on_thread_id"
+  add_index "thread_subscriptions", ["thread_id"], :name => "sub_thread_id"
+  add_index "thread_subscriptions", ["user_id"], :name => "index_thread_subscriptions_on_user_id"
+  add_index "thread_subscriptions", ["user_id"], :name => "sub_user_id"
+
   create_table "user_locations", :force => true do |t|
     t.integer  "user_id",                                                 :null => false
     t.integer  "category_id",                                             :null => false
@@ -246,6 +274,9 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.datetime "updated_at",                                              :null => false
     t.spatial  "location",    :limit => {:srid=>4326, :type=>"geometry"}
   end
+
+  add_index "user_locations", ["location"], :name => "index_user_locations_on_location", :spatial => true
+  add_index "user_locations", ["user_id"], :name => "index_user_locations_on_user_id"
 
   create_table "user_prefs", :force => true do |t|
     t.integer "user_id",                                          :null => false
@@ -255,6 +286,10 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.boolean "enable_email",            :default => false,       :null => false
   end
 
+  add_index "user_prefs", ["enable_email"], :name => "index_user_prefs_on_enable_email"
+  add_index "user_prefs", ["involve_my_groups"], :name => "index_user_prefs_on_involve_my_groups"
+  add_index "user_prefs", ["involve_my_groups_admin"], :name => "index_user_prefs_on_involve_my_groups_admin"
+  add_index "user_prefs", ["involve_my_locations"], :name => "index_user_prefs_on_involve_my_locations"
   add_index "user_prefs", ["user_id"], :name => "index_user_prefs_on_user_id", :unique => true
 
   create_table "user_profiles", :force => true do |t|
@@ -264,6 +299,8 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.text    "about"
   end
 
+  add_index "user_profiles", ["user_id"], :name => "index_user_profiles_on_user_id"
+
   create_table "user_thread_priorities", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "thread_id",  :null => false
@@ -271,6 +308,9 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "user_thread_priorities", ["thread_id"], :name => "index_user_thread_priorities_on_thread_id"
+  add_index "user_thread_priorities", ["user_id"], :name => "index_user_thread_priorities_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -296,6 +336,7 @@ ActiveRecord::Schema.define(:version => 20120531183533) do
     t.string   "invited_by_type"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["invitation_token"], :name => "index_users_on_invitation_token"
 
   create_table "votes", :force => true do |t|

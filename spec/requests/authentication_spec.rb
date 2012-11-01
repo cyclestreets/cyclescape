@@ -20,7 +20,6 @@ describe "Authentication and authorization" do
     let!(:password) { user_details[:password] }
 
     it "should redirect you to the original page after login" do
-      pending "this feature is being rethought"
       visit new_issue_path
       page.current_path.should eql(new_user_session_path)
       fill_in "Email", with: current_user.email
@@ -32,16 +31,24 @@ describe "Authentication and authorization" do
     end
   end
 
-  context "when logging in" do
-    it "should direct you to your dashboard page" do
+  context "when choosing to log in" do
+    def choose_to_log_in_from(path)
       credentials = FactoryGirl.attributes_for(:user)
       user = FactoryGirl.create(:user, credentials)
-      visit root_path
+      visit path
       click_link "Sign in"
       fill_in "Email", with: credentials[:email]
       fill_in "Password", with: credentials[:password]
       click_button "Sign in"
+    end
+    it "should direct you to your dashboard page instead of homepage" do
+      choose_to_log_in_from(root_path)
       page.current_path.should == dashboard_path
+    end
+
+    it "should otherwise direct you page to where you started" do
+      choose_to_log_in_from(issues_path)
+      page.current_path.should == issues_path
     end
   end
 

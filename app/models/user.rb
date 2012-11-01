@@ -27,6 +27,7 @@
 #
 
 class User < ActiveRecord::Base
+  attr_accessible :email, :full_name, :display_name, :password, :password_confirmation, :disabled
 
   acts_as_voter
 
@@ -50,6 +51,7 @@ class User < ActiveRecord::Base
   has_many :subscribed_threads, through: :thread_subscriptions, source: :thread, conditions: 'thread_subscriptions.deleted_at is NULL'
   has_many :thread_priorities, class_name: "UserThreadPriority"
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
+  has_many :site_comments
   has_one :profile, class_name: "UserProfile"
   has_one :prefs, class_name: "UserPref"
   belongs_to :remembered_group, class_name: "Group"
@@ -62,6 +64,7 @@ class User < ActiveRecord::Base
   scope :active, where("disabled_at IS NULL AND confirmed_at IS NOT NULL")
 
   validates :full_name, presence: true
+  validates :display_name, uniqueness: true, allow_blank: true
   validates :role, presence: true, inclusion: {in: ALLOWED_ROLES} 
 
   def self.find_or_invite(email_address, name = nil)
@@ -180,7 +183,8 @@ class User < ActiveRecord::Base
 
   def update_remembered_group(group)
     # Not using association to avoid validation checks
-    update_attribute(:remembered_group_id, group ? group.id : nil)
+    new_id = group ? group.id : nil
+    update_column(:remembered_group_id, new_id) unless self.remembered_group_id == new_id
   end
 
   def remembered_group?

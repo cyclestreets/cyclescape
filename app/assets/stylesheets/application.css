@@ -4,6 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require "reset"
  *= require "jquery-ui"
+ *= require "jquery.ui.autocomplete"
  *= require "formtastic"
  *= require "formtastic_changes"
  *= require "screen"

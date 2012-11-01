@@ -40,5 +40,10 @@ describe "Group subdomains", use: :subdomain do
       visit "/"
       page.current_host.should == "http://www.example.com"
     end
+
+    it "should redirect you to www on other pages too" do
+      visit "/issues"
+      page.current_host.should == "http://www.example.com"
+    end
   end
 end
