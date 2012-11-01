@@ -37,6 +37,7 @@ gem 'draper', '0.15.0' # pin due to failing tests: maybe when https://github.com
 gem 'email_reply_parser'
 gem 'memoist'
 gem 'rubyzip'
+gem 'ruby-progressbar'
 
 # Gems used only for assets and not required
 # in production environments by default.
