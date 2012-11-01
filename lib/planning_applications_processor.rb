@@ -49,6 +49,9 @@ require 'progressbar'
   # report already, and if we do, we still need to update the details using the csv.
   # Receiving daily files, with only the records that have been updated that day,
   # would be ideal.
+  # As the number of planning applications stored with openlylocal increases over time
+  # (the file contains all historical applications) then not only does the database
+  # size increase, but the effort to process each update does too.
 
   def process_csv
     @csv_path = '/home/andy/temp/cyclestreets/planning applications/planning_applications.head10k.csv'
