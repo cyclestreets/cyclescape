@@ -44,6 +44,12 @@ require 'progressbar'
       system("unzip -p #{@tempfile.path} > #{@csv_path}")
     end
 
+  # The biggest problem that we have with processing the csv is that it all comes
+  # as one giant updated file. We need to check every record to see if we have that
+  # report already, and if we do, we still need to update the details using the csv.
+  # Receiving daily files, with only the records that have been updated that day,
+  # would be ideal.
+
   def process_csv
     @csv_path = '/home/andy/temp/cyclestreets/planning applications/planning_applications.head10k.csv'
 
