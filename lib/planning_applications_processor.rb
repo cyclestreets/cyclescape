@@ -12,8 +12,8 @@ require 'progressbar'
 
   def run
     begin
-      #fetch_zipfile
-      #unzip_file
+      fetch_zipfile
+      unzip_file
       process_csv
     ensure
       cleanup
@@ -54,7 +54,7 @@ require 'progressbar'
   # size increase, but the effort to process each update does too.
 
   def process_csv
-    @csv_path = '/home/andy/temp/cyclestreets/planning applications/planning_applications.head10k.csv'
+    #@csv_path = '/home/andy/temp/cyclestreets/planning applications/planning_applications.head10k.csv'
 
     # use wc for optimal speed :-)
     csv_length = %x{wc -l "#{@csv_path}"}.to_i
@@ -73,7 +73,7 @@ require 'progressbar'
         end
         record[:openlylocal_council_url] = row[:council_openlylocal_url]
         record.location = "POINT(#{row[:lng]} #{row[:lat]})"
-        # Unhandled symbols:
+        # Unhandled columns in csv (these need db columns if we want to keep them):
         # updated_at retrieved_at decision status date_received date_validated start_date
         record.save!
         pbar.inc
