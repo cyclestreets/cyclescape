@@ -38,56 +38,12 @@ require 'progressbar'
     @tempfile.close
   end
 
-#   def process_csv
-#     puts @tempfile.path
-#     Zip::ZipInputStream::open(@tempfile.path) do |io|
-#       io.get_next_entry
-#       puts io.read
-#       csv = CSV.new(io.read, headers: true)
-#       csv.each do |row|
-#         puts row.uid
-#       end
-#     end
-#   end
-
-#   def unzip_file
-#     @csv_file = Tempfile.new('cyclekit-unzip')
-#     @csv_file.binmode
-# 
-#     Zip::ZipFile::open(@tempfile.path) do |zipfile|
-#       entry = zipfile.find_entry("planning_applications.head.csv")
-#       zipfile.extract(entry, @csv_file.path)
-#     end
-#   end
-  
-#   def unzip_file
-#     @csv_path = Tempfile.new('cyclekit-unzip').path
-# 
-#     puts @tempfile.path
-#     Zip::ZipFile::open(@tempfile.path) do |zipfile|
-#       entry = zipfile.find_entry("planning_applications.head.csv")
-#       zipfile.extract(entry, @csv_path)
-#     end
-#   end
-
     def unzip_file
       @tempfile.open
       @csv_path = Tempfile.new('cyclekit-unzip').path
       system("unzip -p #{@tempfile.path} > #{@csv_path}")
     end
 
-#   def unzip_file
-#     csv_path = Tempfile.new('cyclekit-unzip').path
-#     
-#     @csv_file.binmode
-# 
-#     Zip::ZipInputStream::open(@tempfile.path) do |io|
-#       entry = io.get_next_entry
-#       @csv_file.write(entry.get_input_stream.read)
-#         #entry.extract(@csv_file.path)
-#     end
-#   end
-  
   def process_csv
     @csv_path = '/home/andy/temp/cyclestreets/planning applications/planning_applications.head10k.csv'
 
