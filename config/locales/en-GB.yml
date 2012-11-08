@@ -370,7 +370,7 @@
   library:
     documents:
       new:
-        title: "New Document"
+        title: "New Library Document"
       show:
         added_by_html: "Added by %{name} on %{time}"
         attach_note: "Attach Note"
@@ -383,7 +383,7 @@
         threads_explanation: "This document has been mentioned in these public threads:"
     notes:
       new:
-        title: "New Note"
+        title: "New Library Note"
       show:
         added_by_html: "Added by %{name} on %{time}"
         note_on_document_html: "This note is attached to a document: %{document}"
