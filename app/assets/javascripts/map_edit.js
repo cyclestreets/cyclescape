@@ -115,7 +115,7 @@ MapEdit = {
     this.map.getControl("polygon").deactivate();
     this.map.getControl("path").deactivate();
     this.map.getControl("point").deactivate();
-    modify = this.map.getControl("modify");
+    var modify = this.map.getControl("modify");
     modify.activate();
     modify.selectControl.select(event.feature);
     MapEdit.serialize(event.feature);
