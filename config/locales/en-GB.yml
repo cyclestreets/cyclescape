@@ -378,16 +378,16 @@
         download: "Download document"
         comments: "Comments"
         notes: "Notes"
-        no_threads: "This note hasn't been included in any public threads. If you add the note to a public thread, the thread will be listed here."
+        no_threads: "This document hasn't been included in any public threads. If you add this document to a public thread, the thread will be listed here."
         public_threads: "Public Threads"
-        threads_explanation: "This note has been mentioned in these public threads:"
+        threads_explanation: "This document has been mentioned in these public threads:"
     notes:
       new:
         title: "New Note"
       show:
         added_by_html: "Added by %{name} on %{time}"
         note_on_document_html: "This note is attached to a document: %{document}"
-        no_threads: "This note hasn't been included in any public threads. If you add the note to a public thread, the thread will be listed here."
+        no_threads: "This note hasn't been included in any public threads. If you add this note to a public thread, the thread will be listed here."
         public_threads: "Public Threads"
         threads_explanation: "This note has been mentioned in these public threads:"
   mailers:
