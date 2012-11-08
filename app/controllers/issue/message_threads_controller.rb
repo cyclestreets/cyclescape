@@ -18,6 +18,7 @@ class Issue::MessageThreadsController < MessageThreadsController
   def create
     @thread = @issue.threads.build(params[:thread])
     @thread.created_by = current_user
+    @thread.tags = @issue.tags
     @message = @thread.messages.build(params[:message])
     @message.created_by = current_user
 

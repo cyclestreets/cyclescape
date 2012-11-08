@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe "Issue threads" do
   let!(:issue) { FactoryGirl.create(:issue) }
+  let(:issue_with_tags) { FactoryGirl.create(:issue, :with_tags) }
   let(:edit_thread) { "Edit this thread" }
 
   context "new" do
@@ -32,6 +33,14 @@ describe "Issue threads" do
         visit issue_path(issue)
         click_on "New Thread"
         find_field("Title").value.should be_nil
+      end
+
+      it "should copy the tags from the issue" do
+        visit issue_path(issue_with_tags)
+        click_on "Discuss"
+        fill_in "Message", with: "Foo"
+        click_on "Create Thread"
+        MessageThread.last.tags.length.should > 0
       end
     end
 
