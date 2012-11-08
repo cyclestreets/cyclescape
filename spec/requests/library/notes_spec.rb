@@ -40,6 +40,14 @@ describe "Library notes" do
       page.should have_link("https://example.com")
     end
 
+    it "should create tags for the note" do
+      visit new_library_note_path
+      fill_in "Note", with: "blah blah blah"
+      fill_in "Tags", with: "one two three"
+      click_on "Create Note"
+      page.should have_content("three")
+    end
+
     it "should have a cancel link back to the library page" do
       visit new_library_note_path
       click_on "Cancel"

@@ -29,10 +29,12 @@
         tags_string: "Tags"
       library_document:
         file: "Document"
+        tags_string: "Tags"
       library_item:
         tags_string: "Tags"
       library_note:
         body: "Note"
+        tags_string: "Tags"
       link_message:
         url: "URL"
       message:
