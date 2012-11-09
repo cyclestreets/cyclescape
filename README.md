@@ -1,7 +1,12 @@
 # Cycle Campaigning Toolkit
 
-The toolkit will be a dedicated website, free of charge to use.
-It will be split into two main sections:
+This toolkit is a Ruby on Rails web application created to facilitate cycle campaigning.
+
+The software has been developed to power the [Cyclescape](http://www.cyclescape.org)
+campaigning website, and you can help improve it or take the software and customise
+it for your own needs.
+
+It is split into two main sections:
 
 * Reporting a problem: a section open to anyone
 * Managing and solving problems: for campaigners and groups
@@ -19,6 +24,8 @@ The toolkit aims to have the following outcomes:
 
 The toolkit is being created by CycleStreets, who run the UK-wide cycle journey planner (at [cyclestreets.net](http://www.cyclestreets.net)), run ‘for cyclists, by cyclists’. As well as the cycle journey planner, which has planned almost a million routes in the UK, the CycleStreets website includes a Photomap campaigning tool used by cyclists to report problems and good practice, by locating photographs on a map.
 
-# Project Tracker
+# Project Development
 
-We use [Pivotal Tracker](http://www.pivotaltracker.com) for managing development, you can [view the Cyclescape project](https://www.pivotaltracker.com/projects/374689).
+We use [Github](https://github.com/cyclestreets/toolkit) for managing development, you can clone the repository, or report bugs there.
+
+Pull requests are *very* welcome! Additional developer notes are available on the github wiki.
