@@ -433,6 +433,7 @@
       public: "Public"
       posted_at: "posted %{time_ago} ago"
     list:
+      discussion_on_issue: "A discussion on issue"
       group_committee: "Group Committee"
       group_public: "Group Public"
       group_private: "Group Private"
