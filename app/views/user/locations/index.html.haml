@@ -11,7 +11,14 @@
       - m = display_bbox_map(current_user.buffered_locations, combined_geometry_user_locations_path(:json))
       %div{id: 'map'}
       != m.to_html
-      %p= t ".combined_locations_guidance2_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
+      %p
+        - case current_user.prefs.involve_my_locations
+        - when "none"
+          = t ".combined_locations_guidance_none_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
+        - when "notify"
+          = t ".combined_locations_guidance_notify_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
+        - when "subscribe"
+          = t ".combined_locations_guidance_subscribe_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
     %section.list
       %h2= t ".all_my_locations"
       %table
