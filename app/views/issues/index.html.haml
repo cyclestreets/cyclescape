@@ -4,21 +4,21 @@
     .tasks
       = link_to t(".new_issue"), new_issue_path, class: "btn-big-green"
   #issue-list-tabs
-    %ul.tabs.styled-tabs
-      %li= link_to t(".list_tab"), "#", class: "list"
-      %li= link_to t(".map_tab"), "#", class: "map-pin"
-      %li= link_to t(".popular_tab"), "#", class: "list"
+    %ul.tabs.styled-tabs.with-history
+      %li= link_to t(".list_tab"), "#list-pane", class: "list"
+      %li= link_to t(".map_tab"), "#map-pane", class: "map-pin"
+      %li= link_to t(".popular_tab"), "#popular-pane", class: "list"
     .panes
-      .pane
+      #list-pane.pane
         %ul.issue-list
           - if @issues.empty?
             = t(".no_results_found")
           = render partial: "compact", collection: @issues, as: :issue
         - if @issues.respond_to?(:total_pages)
           = will_paginate @issues
-      .pane
+      #map-pane.pane
         = render "all_map"
-      .pane#popular-pane
+      #popular-pane.pane
         %ul.issue-list
           - if @popular_issues.empty?
             = t(".no_popular_issues")

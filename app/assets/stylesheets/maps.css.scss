@@ -16,6 +16,7 @@
     height:100%;
     width:190px;
     opacity: 0.85;
+    background-color: black; // IE8 and lower
     filter: alpha(opacity=85);  // IE8 and lower
     background:rgba(0, 0, 0, 0.85);
     z-index:1010;

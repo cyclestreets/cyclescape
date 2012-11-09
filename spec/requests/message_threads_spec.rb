@@ -115,6 +115,12 @@ describe "Message threads" do
           page.should have_content("Following")
         end
       end
+
+      it "should link to the issue" do
+        issue_thread = FactoryGirl.create(:issue_message_thread, :with_messages)
+        visit threads_path
+        page.should have_link(issue_thread.issue.title)
+      end
     end
 
     context "show" do

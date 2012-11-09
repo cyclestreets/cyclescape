@@ -296,7 +296,7 @@ describe "Group threads", use: :subdomain do
   end
 
   context "privacy" do
-    let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
+    let(:private_thread) { FactoryGirl.create(:group_private_message_thread, :with_messages) }
 
     context "as a guest" do
       it "should not show the private thread" do
@@ -335,6 +335,23 @@ describe "Group threads", use: :subdomain do
       it "should let admins see any thread" do
         visit group_thread_path(private_thread.group, private_thread)
         page.should have_content(private_thread.title)
+      end
+    end
+
+    context "thread listing as a site user" do
+      include_context "signed in as a site user"
+
+      before do
+        visit group_threads_path(private_thread.group)
+      end
+
+      it "should not show the title of private threads" do
+        page.should_not have_content(private_thread.title)
+        page.should have_content(I18n.t("decorators.thread_list.private_thread_title"))
+      end
+
+      it "should not show the last user who posted" do
+        page.should_not have_link(private_thread.latest_activity_by.name)
       end
     end
   end

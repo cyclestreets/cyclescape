@@ -1,6 +1,7 @@
 jQuery ->
   # Tabs
-  $("ul.tabs").tabs "> div.panes > div"
+  $("ul.tabs").tabs("> div.panes > div")
+  $("ul.tabs.with-history").tabs("> div.panes > div", { history: true })
 
   # Scrollables
   $("div.scrollable.autoheight")

@@ -6,6 +6,7 @@
         - if thread.group
           = link_to_profile(thread.group)
           %br
-        = link_to_profile(thread.latest_activity_by)
-        = t ".posted_at", time_ago: time_ago_in_words(thread.latest_activity_at)
+        - if permitted_to? :show, thread
+          = link_to_profile(thread.latest_activity_by)
+          = t ".posted_at", time_ago: time_ago_in_words(thread.latest_activity_at)
   .permissions= thread_type(thread)

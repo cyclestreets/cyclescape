@@ -2,7 +2,8 @@
 class Library::Component < ActiveRecord::Base
   self.abstract_class = true
 
-  attr_accessor :created_by
+  attr_accessor :created_by, :tags_string
+  attr_accessible :tags_string
 
   belongs_to :item, class_name: "Library::Item", foreign_key: "library_item_id"
 
@@ -26,6 +27,7 @@ class Library::Component < ActiveRecord::Base
   def create_library_item
     item = build_item
     item.created_by = created_by
+    item.tags_string = tags_string if tags_string
     item.save!
     self.item = item
   end

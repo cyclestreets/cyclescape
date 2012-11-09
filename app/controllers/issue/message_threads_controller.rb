@@ -18,6 +18,7 @@ class Issue::MessageThreadsController < MessageThreadsController
   def create
     @thread = @issue.threads.build(params[:thread])
     @thread.created_by = current_user
+    @thread.tags = @issue.tags
     @message = @thread.messages.build(params[:message])
     @message.created_by = current_user
 
@@ -27,7 +28,7 @@ class Issue::MessageThreadsController < MessageThreadsController
       ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
 
       NewThreadNotifier.notify_new_thread(@thread)
-      redirect_to issue_thread_path(@issue, @thread)
+      redirect_to thread_path(@thread)
     else
       @available_groups = current_user.groups
       render :new

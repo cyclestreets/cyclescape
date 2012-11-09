@@ -95,6 +95,7 @@ Cyclescape::Application.routes.draw do
     resources :locations do
       get 'geometry', :on => :member
       get 'combined_geometry', :on => :collection
+      post 'subscribe_to_threads', :on => :collection
     end
   end
 

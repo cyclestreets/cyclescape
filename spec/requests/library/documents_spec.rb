@@ -47,6 +47,15 @@ describe "Library documents" do
       page.should have_content("can't be blank")
     end
 
+    it "should create tags for the document" do
+      visit new_library_document_path
+      attach_file "Document", pdf_document_path
+      fill_in "Title", with: "Case studies"
+      fill_in "Tags", with: "one two three"
+      click_on "Upload"
+      page.should have_content("three")
+    end
+
     it "should update the document"
   end
 

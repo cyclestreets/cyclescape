@@ -370,7 +370,7 @@
   library:
     documents:
       new:
-        title: "New Document"
+        title: "New Library Document"
       show:
         added_by_html: "Added by %{name} on %{time}"
         attach_note: "Attach Note"
@@ -378,16 +378,16 @@
         download: "Download document"
         comments: "Comments"
         notes: "Notes"
-        no_threads: "This note hasn't been included in any public threads. If you add the note to a public thread, the thread will be listed here."
+        no_threads: "This document hasn't been included in any public threads. If you add this document to a public thread, the thread will be listed here."
         public_threads: "Public Threads"
-        threads_explanation: "This note has been mentioned in these public threads:"
+        threads_explanation: "This document has been mentioned in these public threads:"
     notes:
       new:
-        title: "New Note"
+        title: "New Library Note"
       show:
         added_by_html: "Added by %{name} on %{time}"
         note_on_document_html: "This note is attached to a document: %{document}"
-        no_threads: "This note hasn't been included in any public threads. If you add the note to a public thread, the thread will be listed here."
+        no_threads: "This note hasn't been included in any public threads. If you add this note to a public thread, the thread will be listed here."
         public_threads: "Public Threads"
         threads_explanation: "This note has been mentioned in these public threads:"
   mailers:
@@ -433,6 +433,7 @@
       public: "Public"
       posted_at: "posted %{time_ago} ago"
     list:
+      discussion_on_issue: "A discussion on issue"
       group_committee: "Group Committee"
       group_public: "Group Public"
       group_private: "Group Private"
@@ -630,10 +631,13 @@
       index:
         add_first_location: "add your first location"
         all_my_locations: "All my locations"
+        catch_up_guidance_html: "To catch up on existing discussions, you can %{subscribe_existing_link} in these areas."
         category: "Category"
         combined_locations: "Combined locations"
         combined_locations_guidance: "This map shows all of your locations combined together. We use this to help figure out which issues are relevant to you, and which groups you might be interested in."
-        combined_locations_guidance2_html: "If you want to receive notifications when issues are created in these areas, you can %{edit_prefs_link}."
+        combined_locations_guidance_none_html: "If you want to receive notifications when issues are created in these areas, and optionally follow the discussion threads on those issues, you can %{edit_prefs_link}."
+        combined_locations_guidance_notify_html: "You currently receive notifications when issues are created in these areas, but aren't automatically following discussion threads on those issues. To change these settings, you can %{edit_prefs_link}."
+        combined_locations_guidance_subscribe_html: "You currently receive notifications when issues are created in these areas, and are following all discussion threads on those issues. To change these settings, you can %{edit_prefs_link}."
         confirm: "Are you sure?"
         delete: "Delete"
         edit: "Edit"
@@ -646,8 +650,14 @@
         no_locations_guidance2_html: "To get started, you can %{first_location_link}."
         no_overlapping_groups: "No Overlapping Groups"
         overlapping_groups: "Overlapping Groups"
+        subscribe_existing_threads: "follow all existing threads"
       new:
         new_location: "New Location"
+      subscribe_to_threads:
+        subscribed_to_threads:
+          zero: "We couldn't find any additional threads for you to follow."
+          one: "You're now following one additional thread."
+          other: "You're now following %{count} additional threads."
       update:
         success: "Location Updated"
     prefs:
