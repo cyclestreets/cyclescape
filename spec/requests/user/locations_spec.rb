@@ -67,5 +67,23 @@ describe "User locations" do
         page.should have_content("Location deleted")
       end
     end
+
+    context "catching up on threads" do
+      let!(:location) { FactoryGirl.create(:user_location, user: current_user) }
+
+      it "should subscribe you to threads" do
+        current_user.prefs.update_column(:involve_my_locations, "none")
+        issue = FactoryGirl.create(:issue, location: current_user.buffered_locations.centroid)
+        Issue.intersects(current_user.buffered_locations).should_not be_empty
+        thread = FactoryGirl.create(:message_thread, issue: issue)
+        current_user.subscribed_to_thread?(thread).should be_false
+
+        visit user_locations_path
+        click_on I18n.t(".user.locations.index.subscribe_existing_threads")
+
+        page.should have_content(I18n.t(".user.locations.subscribe_to_threads.subscribed_to_threads", count: 1))
+        current_user.subscribed_to_thread?(thread).should be_true
+      end
+    end
   end
 end
