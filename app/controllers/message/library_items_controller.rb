@@ -11,6 +11,7 @@ class Message::LibraryItemsController < Message::BaseController
     @message.component = @library_item
 
     if @message.save
+      @thread.add_subscriber(current_user) unless current_user.ever_subscribed_to_thread?(@thread)
       ThreadNotifier.notify_subscribers(@thread, :new_library_item_message, @message)
       set_flash_message(:success)
     else

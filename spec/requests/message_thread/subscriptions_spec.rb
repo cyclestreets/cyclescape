@@ -38,13 +38,36 @@ describe "Thread subscriptions" do
         all_emails.count.should == email_count
       end
 
-      it "should subscribe me to the thread automatically" do
-        current_user.subscribed_to_thread?(thread).should be_false
-        within(".new-message") do
-          fill_in "Message", with: "Given I'm interested enough to post, I should be subscribed"
-          click_on "Post Message"
+      context "automatically" do
+        it "should subscribe me when I post a message" do
+          current_user.subscribed_to_thread?(thread).should be_false
+          within(".new-message") do
+            fill_in "Message", with: "Given I'm interested enough to post, I should be subscribed"
+            click_on "Post Message"
+          end
+          current_user.subscribed_to_thread?(thread).should be_true
         end
-        current_user.subscribed_to_thread?(thread).should be_true
+
+        # check some of the other message types too.
+        it "should subscribe me when I post a deadline" do
+          current_user.subscribed_to_thread?(thread).should be_false
+          within("#new-deadline-message") do
+            fill_in "Deadline", with: Date.current.to_s
+            fill_in "Title", with: "Submission deadline"
+            click_on I18n.t("message.deadlines.new.submit")
+          end
+          current_user.subscribed_to_thread?(thread).should be_true
+        end
+
+        it "should subscribe me when I post a photo" do
+          current_user.subscribed_to_thread?(thread).should be_false
+          within("#new-photo-message") do
+              attach_file("Photo", abstract_image_path)
+              fill_in "Caption", with: "An abstract image"
+              click_on "Add Photo"
+          end
+          current_user.subscribed_to_thread?(thread).should be_true
+        end
       end
     end
 
