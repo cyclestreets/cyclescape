@@ -151,7 +151,19 @@ article.message {
 
 // Issues
 
-section.issues {
+body.issues {
+  article.issue {
+    section.voting {
+      float: right;
+    }
+    .map {
+      clear: both;
+    }
+    section.description {
+      margin-right: 70px;
+      margin-top: 15px;
+    }
+  }
 }
 
 // User profile
