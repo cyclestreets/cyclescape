@@ -536,14 +536,15 @@ ul.issue-list {
 }
 
 .votes {
-  position:relative;
-  height:100px;
-  width: 80px;
+  position: relative;
+  height: 130px;
+  width: 60px;
+  margin: 0 0 15px 10px;
   a.up,
   a.down {
     @include button-reset;
     position:absolute;
-    margin:0 10px;
+    margin:0 20px;
     width:20px;
     height:12px;
     background:image-url("sprite.png") -3px -904px no-repeat;
@@ -553,14 +554,14 @@ ul.issue-list {
   }
   a.down {
     background-position:-3px -953px;
-    bottom:0;
+    top: 70px;
     &:hover, &.selected {
       background-position:-43px -953px;
     }
   }
   .vote-count {
-    top:30px;
-    width: 40px;
+    top: 20px;
+    width: 60px;
     position:absolute;
     font-size: 12px;
     color: $colour1;
@@ -575,11 +576,10 @@ ul.issue-list {
   }
   .access-denied {
     position: relative;
-    top: 30px;
-    left: 40px;
+    text-align: center;
+    top: 90px;
     font-size: 12px;
     color: $lightgrey;
-    margin: 4px;
     a { color: $lightgrey; }
   }
 }
