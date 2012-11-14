@@ -2,7 +2,7 @@
   = f.inputs do
     = f.input :description
     = f.input :loc_json, as: :hidden
-    .map
+    %li.input
       = f.semantic_errors :location
       = render partial: "shared/edit_map", locals: {thing: @profile, area_only: true}
     = f.input :joining_instructions
