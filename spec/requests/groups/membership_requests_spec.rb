@@ -35,6 +35,13 @@ describe "Group Membership Requests" do
         open_email(gmr.user.email)
         current_email.should have_body_text("A & B")
       end
+
+      it "should let you view the user profile" do
+        visit group_membership_requests_path(gmr.group)
+        click_on gmr.user.name
+        page.should have_content(gmr.user.name)
+        current_path.should eql(user_profile_path(gmr.user))
+      end
     end
 
     describe "when being inviting a new member" do
