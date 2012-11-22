@@ -2,5 +2,5 @@
   %td
     = link_to member.name, user_profile_path(member)
   %td
-    = link_to t(".edit"), "#"
+    = link_to t(".edit"), edit_group_membership_path(@group, @group.membership_for(member))
   %td= link_to t(".delete"), group_membership_path(@group, @group.membership_for(member)), data: { confirm: t(".confirm") }, method: :delete

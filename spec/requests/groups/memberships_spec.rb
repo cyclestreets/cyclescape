@@ -75,5 +75,26 @@ describe "Group memberships admin" do
         email.subject.should =~ /Invitation/
       end
     end
+
+    context "edit" do
+      let(:meg) { FactoryGirl.create(:meg) }
+
+      it "should let you promote a member into the committee" do
+        membership = FactoryGirl.create(:group_membership, group: current_group, user: meg)
+        current_group.committee_members.should_not include(meg)
+
+        visit group_members_path(current_group)
+        within(".members") do
+          click_on "Edit membership"
+        end
+        choose "Committee"
+        click_on "Save"
+
+        within(".committee") do
+         page.should have_content(meg.name)
+        end
+        current_group.committee_members.should include(meg)
+      end
+    end
   end
 end

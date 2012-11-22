@@ -145,13 +145,15 @@
       member:
         confirm: "Are you sure?"
         delete: "Remove from group"
-        edit: "Edit"
+        edit: "Edit membership"
     memberships:
       new:
         title: "Invite New Member"
       destroy:
         failure: "Couldn't remove member from group"
         success: "Member removed from group"
+      edit:
+        title: "Edit group membership for %{user_name}"
     membership_requests:
       cancel:
         success: "Membership request cancelled"
