@@ -59,7 +59,7 @@ MapEdit = {
       $(".map-tools-overlay .pane.point").remove();
       $(".map-tools-overlay .pane.route").remove();
     } else {
-      this.current_control = this.map.getControl("point");
+      this.current_control = this.map.getControl("polygon");
       this.current_control.activate();
     }
   },

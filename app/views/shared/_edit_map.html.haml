@@ -24,34 +24,35 @@
 %div#map.map.edit
   .map-tools-overlay
     %ul.tabs
-      %li.point
-        %a
-          %span.point
-          = t ".point"
-      %li.route
-        %a
-          %span.route
-          = t ".route"
       %li.area
         %a
           %span.area
           = t ".area"
+      %li.route
+        %a
+          %span.route
+          = t ".route"
+      %li.point
+        %a
+          %span.point
+          = t ".point"
+
     .panes
-      .pane.point
-        %h3= t ".draw_point"
-        %p= t ".draw_point_1"
-        %p= t ".draw_point_2"
-        %p= t ".draw_point_3"
-      .pane.route
-        %h3= t ".draw_route"
-        %p= t ".draw_route_1"
-        %p= t ".draw_route_2"
-        %p= t ".draw_route_3"
       .pane.area
         %h3= t ".draw_area"
         %p= t ".draw_area_1"
         %p= t ".draw_area_2"
         %p= t ".draw_area_3"
+      .pane.route
+        %h3= t ".draw_route"
+        %p= t ".draw_route_1"
+        %p= t ".draw_route_2"
+        %p= t ".draw_route_3"
+      .pane.point
+        %h3= t ".draw_point"
+        %p= t ".draw_point_1"
+        %p= t ".draw_point_2"
+        %p= t ".draw_point_3"
     %ul.undo-clear
       %li
         %a.edit-undo
