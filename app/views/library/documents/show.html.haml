@@ -6,7 +6,9 @@
     = @tag_panel.render
   %section.document
     = @item.icon
-    %h3= link_to t(".download"), @document.file.url
+    %h3
+      = link_to t(".download"), @document.file.url
+      = "(#{number_to_human_size(@document.file_size)})"
   %section.notes
     %h2= t ".notes"
     - if @notes
