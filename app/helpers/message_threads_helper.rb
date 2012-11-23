@@ -7,6 +7,15 @@ module MessageThreadsHelper
     "DocumentMessage" => "documents"
   }
 
+  MESSAGE_LIBRARY_MAP = {
+    "PhotoMessage" => nil,
+    "LinkMessage" => nil,
+    "DeadlineMessage" => nil,
+    "LibraryItemMessage" => nil,
+    "DocumentMessage" => "document",
+    "Message" => "note"
+  }
+
   def thread_type(thread)
     if thread.private_to_committee?
       t(".group_committee", group: thread.group.name)
@@ -23,6 +32,11 @@ module MessageThreadsHelper
     path = MESSAGE_CONTROLLER_MAP[message.class.to_s]
     raise "Message controller not found for #{message.class.to_s.inspect}" if path.nil?
     path
+  end
+
+  def library_type_for(message)
+    obj = message.component ? message.component : message
+    MESSAGE_LIBRARY_MAP[obj.class.to_s]
   end
 
   def message_truncate(message)
