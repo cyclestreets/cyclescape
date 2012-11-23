@@ -73,6 +73,9 @@ Spork.prefork do
         root.save!
         User.update_all("id = 1", "id = #{root.id}")
       end
+
+      # Disable the observers so that their behaviour can be tested independently
+      ActiveRecord::Base.observers.disable :all
     end
 
     config.before(:each) do
