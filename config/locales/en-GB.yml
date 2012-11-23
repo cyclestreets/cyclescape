@@ -819,7 +819,7 @@
           byte:
             one:   "Byte"
             other: "Bytes"
-          kb: "KB"
+          kb: "kB"
           mb: "MB"
           gb: "GB"
           tb: "TB"
