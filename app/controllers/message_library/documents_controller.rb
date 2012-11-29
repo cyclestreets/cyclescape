@@ -1,4 +1,4 @@
-class Message::Library::DocumentsController < Library::DocumentsController
+class MessageLibrary::DocumentsController < Library::DocumentsController
   def new
     @message = Message.find(params[:message_id])
     @document = Library::Document.new
