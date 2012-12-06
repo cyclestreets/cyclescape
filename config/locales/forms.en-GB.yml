@@ -88,6 +88,7 @@
         create: "Add Library Item"
       library/document:
         create: "Upload"
+        document_from_message: "Add to Library"
       library/note:
         create: "Create Note"
         attach_to_document: "Attach note"

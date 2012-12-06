@@ -16,8 +16,13 @@
       - if message.component
         = render "message/#{message_controller_map(message.component)}/show", message: message
       = auto_link simple_format message.body
-  - if permitted_to? [:censor], message
+  - if permitted_to?([:censor], message) || library_type_for(message)
     %menu.tools
       %ul
         - if permitted_to?(:censor, message)
           %li= link_to t(".censor"), censor_thread_message_path(message.thread, message), method: :put
+        - case library_type_for(message)
+        - when "note"
+          %li= link_to t(".create_note"), new_thread_message_note_path(message.thread, message)
+        - when "document"
+          %li= link_to t(".create_document"), new_thread_message_document_path(message.thread, message)
