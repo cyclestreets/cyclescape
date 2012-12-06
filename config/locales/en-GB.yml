@@ -525,6 +525,10 @@
       show:
         photo_alt: "A photo entitled %{caption}."
         view_original_image: "View the original image"
+  message_library:
+    documents:
+      new:
+        title: "New Library Document"
   messages:
     censor:
       failure: "Could not censor message"
@@ -536,6 +540,8 @@
       posted_date: "posted %{time_ago} ago"
       censor: "Censor this message"
       censored: "This message has been removed"
+      create_note: "Create Library Note"
+      create_document: "Create Library Document"
     new:
       deadline_message: "Deadline/date"
       document_message: "Attachment"
