@@ -32,7 +32,7 @@ describe NewIssueNotifier do
       it "should queue a notification for each user that has preference set" do
         opts = {"user_id" => user.id, "category_id" => location.category_id, "issue_id" => issue.id}
         Resque.should_receive(:enqueue).with(NewIssueNotifier, :notify_new_user_location_issue, opts)
-        subject.process_for_user_locations(issue)
+        subject.process_new_issue(issue)
       end
     end
 
