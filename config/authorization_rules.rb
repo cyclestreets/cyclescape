@@ -9,6 +9,7 @@ authorization do
     has_permission_on :admin_users, to: :manage
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
+    has_permission_on :library_documents, :library_notes, to: [:edit, :update]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :manage
     has_permission_on :messages, to: :censor
     has_permission_on :site_comments, to: :manage
