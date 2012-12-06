@@ -85,4 +85,58 @@ describe "Library notes" do
       end
     end
   end
+
+  context "edit" do
+    let(:edit_text) { I18n.t(".library.notes.show.edit") }
+    context "as an admin" do
+      include_context "signed in as admin"
+
+      it "should show you a link" do
+        visit library_note_path(note)
+        page.should have_link(edit_text)
+      end
+
+      it "should let you edit the note" do
+        visit library_note_path(note)
+        click_on edit_text
+
+        page.should have_content(I18n.t(".library.notes.edit.title"))
+        fill_in 'Note', with: "Something New and Very Useful"
+        click_on 'Save'
+        current_path.should == library_note_path(note)
+        page.should have_content("Something New and Very Useful")
+      end
+    end
+
+    context "as the creator" do
+      include_context "signed in as a site user"
+
+      context "recent" do
+        let(:note) { FactoryGirl.create(:library_note, created_by: current_user) }
+        it "should show you a link" do
+          visit library_note_path(note)
+          page.should have_link(edit_text)
+        end
+      end
+
+      context "long ago" do
+        let(:note) { FactoryGirl.create(:library_note, created_by: current_user) }
+        it "should not show you a link" do
+          note.item.update_attribute(:created_at, 2.days.ago)
+
+          visit library_note_path(note)
+          page.should_not have_link(edit_text)
+        end
+      end
+    end
+
+    context "as another user" do
+      include_context "signed in as a site user"
+
+      it "should not show you a link" do
+        visit library_note_path(note)
+        page.should_not have_link(edit_text)
+      end
+    end
+  end
 end
