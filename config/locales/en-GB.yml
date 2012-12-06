@@ -384,14 +384,19 @@
         public_threads: "Public Threads"
         threads_explanation: "This document has been mentioned in these public threads:"
     notes:
+      edit:
+        title: "Edit Library Note"
       new:
         title: "New Library Note"
       show:
         added_by_html: "Added by %{name} on %{time}"
+        edit: "Edit Note"
         note_on_document_html: "This note is attached to a document: %{document}"
         no_threads: "This note hasn't been included in any public threads. If you add this note to a public thread, the thread will be listed here."
         public_threads: "Public Threads"
         threads_explanation: "This note has been mentioned in these public threads:"
+      update:
+        success: "Library Note Updated"
   mailers:
     notifications:
       gmr_confirmed:

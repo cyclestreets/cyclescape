@@ -1,0 +1,8 @@
+.edit.library.note
+  %h1= t ".title"
+  = semantic_form_for @note do |f|
+    = f.inputs do
+      = f.input :body, input_html: { rows: 15 }
+    = f.actions do
+      = f.action :submit
+      = cancel_link library_path
