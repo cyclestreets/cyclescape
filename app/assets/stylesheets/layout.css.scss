@@ -151,7 +151,8 @@ article.message {
 
 // Issues
 
-body.issues {
+body.issues,
+body.group-issues {
   article.issue {
     section.voting {
       float: right;
