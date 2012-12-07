@@ -150,6 +150,32 @@ describe "Group threads", use: :subdomain do
             email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
           end
         end
+
+        context "group threads on an issue" do
+          let(:location) { "POLYGON ((-10 41, 10 41, 10 61, -10 61, -10 41))" }
+          let(:user) { FactoryGirl.create(:user) }
+          let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: location) }
+          let!(:group_membership) { FactoryGirl.create(:group_membership, user: user, group: current_group) }
+          let!(:issue) { FactoryGirl.create(:issue, location: user_location.location) }
+
+          before do
+            enable_group_thread_prefs_for(user)
+            user.prefs.update_column(:involve_my_locations, "notify")
+            visit issue_path(issue)
+            click_on "Discuss"
+            fill_in "Title", with: thread_attrs[:title]
+            fill_in "Message", with: "Something"
+            select current_group.name, from: "Owned by"
+          end
+
+          # The user would normally receive an email since it's a new group thread,
+          # but it's also a new thread on an issue within one of their locations.
+          it "should not send two emails to the same person" do
+            email_count = all_emails.count
+            click_on "Create Thread"
+            all_emails.count.should eql(email_count + 1)
+          end
+        end
       end
 
       context "automatic subscriptions" do

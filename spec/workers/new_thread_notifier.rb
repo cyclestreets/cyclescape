@@ -16,12 +16,7 @@ describe NewThreadNotifier do
   end
 
   describe ".queue_new_thread" do
-    it "should queue notify_new_group_thread if thread belongs to a group" do
-      thread = mock("thread", id: 99, group: mock("group"))
-      MessageThread.stub!(:find).with(99).and_return { thread }
-      Resque.should_receive(:enqueue).with(NewThreadNotifier, :notify_new_group_thread, 99).and_return(nil)
-      subject.queue_new_thread(99)
-    end
+    it "should queue notify_new_group_thread if thread belongs to a group"
   end
 
   describe ".notify_new_group_thread" do

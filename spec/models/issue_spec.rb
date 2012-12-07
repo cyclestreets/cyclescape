@@ -109,6 +109,46 @@ describe Issue do
     end
   end
 
+  describe "location sizes" do
+    let(:factory) { RGeo::Geos.factory(srid: 4326) }
+
+    describe "for a point" do
+      subject { FactoryGirl.create(:issue, location: 'POINT(1 1)') }
+      it "should return a zero size for points" do
+        subject.size.should eql(0.0)
+      end
+
+      it "should return 0 for the size ratio" do
+        geom = factory.parse_wkt('POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))')
+        subject.size_ratio(geom).should eql(0.0)
+      end
+    end
+
+    describe "for a polygon" do
+      subject { FactoryGirl.create(:issue, location: 'POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))') }
+
+      it "should return the area for polygons" do
+        subject.size.should eql(1.0)
+      end
+
+      it "shoud give the correct size ratio" do
+        geom = factory.parse_wkt('POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))')
+        subject.size_ratio(geom).should eql(0.25)
+      end
+
+      it "should cope with degenerate bboxes" do
+        geom = factory.parse_wkt('POLYGON((1 1, 1 3, 1 3, 1 1, 1 1))')
+        geom.area.should eql(0.0)
+        subject.size_ratio(geom).should eql(0.0)
+      end
+
+      it "should cope with non-polygon bboxes" do
+        geom = factory.parse_wkt('POINT(1 1)')
+        subject.size_ratio(geom).should eql(0.0)
+      end
+    end
+  end
+
   describe "threads" do
     context "new thread" do
       subject { FactoryGirl.create(:issue) }

@@ -137,4 +137,30 @@ describe "Issue notifications" do
       end
     end
   end
+
+  context "overlapping group and user locations" do
+    let(:location) { "POLYGON ((-10 41, 10 41, 10 61, -10 61, -10 41))" }
+    let(:user) { FactoryGirl.create(:user) }
+    let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: location) }
+    let!(:group_profile) { FactoryGirl.create(:group_profile, location: location) }
+    let!(:group_membership) { FactoryGirl.create(:group_membership, user: user, group: group_profile.group) }
+
+    before do
+      user.prefs.update_column(:involve_my_locations, "notify")
+      user.prefs.update_column(:involve_my_groups, "notify")
+      user.prefs.update_column(:enable_email, true)
+      visit new_issue_path
+      fill_in "Title", with: "Test"
+      fill_in "Write a description", with: "Interesting, but you only need to tell me once"
+      find("#issue_loc_json").set(user_location.loc_json)
+    end
+
+    # The user would normally receive two emails - one for the issue being within the group's area,
+    # and a second email since the issue is also in one of their user locations.
+    it "should only send one email to the user" do
+      email_count = all_emails.count
+      click_on "Send Report"
+      all_emails.count.should eql(email_count + 1)
+    end
+  end
 end

@@ -27,7 +27,7 @@ class Group::MessageThreadsController < MessageThreadsController
       ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
 
       NewThreadNotifier.notify_new_thread(@thread)
-      redirect_to group_thread_path(@group, @thread)
+      redirect_to thread_path(@thread)
     else
       render :new
     end

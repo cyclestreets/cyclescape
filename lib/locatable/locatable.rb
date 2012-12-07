@@ -36,6 +36,26 @@ module Locatable
     end
   end
 
+  # Returns the size of the location. Returns 0 for anything other than polygons.
+  def size
+    case self.location.geometry_type
+    when RGeo::Feature::Polygon
+      return self.location.area
+    else
+      return 0.0
+    end
+  end
+
+  # Returns the ratio of the location vs the supplied geometry. Useful for seeing if the feature is larger
+  # than a bounding box, for example.
+  def size_ratio(geom)
+    if geom && geom.geometry_type == RGeo::Feature::Polygon && geom.area > 0
+      return self.size.to_f / geom.area
+    else
+      return 0.0
+    end
+  end
+
   def loc_json=(json_str)
     # Not clear why the factory is needed, should be taken care of by setting the srid on the factory_generator
     # but that doesn't work.

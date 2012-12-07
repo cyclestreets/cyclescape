@@ -290,7 +290,7 @@ describe "Issue threads" do
   end
 
   context "group private thread" do
-    let!(:thread) { FactoryGirl.create(:group_private_message_thread, issue: issue) }
+    let!(:thread) { FactoryGirl.create(:group_private_message_thread_with_messages, issue: issue) }
     context "as an admin" do
       include_context "signed in as admin"
 
@@ -307,7 +307,7 @@ describe "Issue threads" do
     context "a non-group public thread in a subdomain", use: :current_subdomain do
       include_context "signed in as a group member"
 
-      let!(:thread) { FactoryGirl.create(:message_thread, issue: issue) }
+      let!(:thread) { FactoryGirl.create(:message_thread_with_messages, issue: issue) }
 
       it "should be accessible" do
         visit issue_path(issue)

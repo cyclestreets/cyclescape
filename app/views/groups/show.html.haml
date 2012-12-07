@@ -1,7 +1,7 @@
 %article#content
   %section.top-box.group-top-box
     %h1= @group.name
-    %p= @group.description
+    %p= auto_link simple_format @group.description
 
   %section.group-homepage-tabs
     %ul.tabs.styled-tabs.with-history

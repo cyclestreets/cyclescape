@@ -9,6 +9,7 @@ authorization do
     has_permission_on :admin_users, to: :manage
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
+    has_permission_on :library_documents, :library_notes, to: [:edit, :update]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :manage
     has_permission_on :messages, to: :censor
     has_permission_on :site_comments, to: :manage
@@ -44,6 +45,8 @@ authorization do
     end
     has_permission_on :issue_tags, to: [:update]
     has_permission_on :messages, to: [:new, :create]
+    has_permission_on :message_library_notes, to: [:new, :create]
+    has_permission_on :message_library_documents, to: [:new, :create]
     has_permission_on :issue_message_threads, to: [:new, :create]
     has_permission_on :group_message_threads do
       to [:new, :create]
@@ -77,7 +80,12 @@ authorization do
     has_permission_on :message_thread_tags, to: :update
     has_permission_on :message_thread_user_priorities, to: [:create, :update]
     has_permission_on :message_photos, :message_links, :message_deadlines, :message_library_items, :message_documents, to: :create
-    has_permission_on :libraries, :library_documents, :library_notes, to: :manage
+    has_permission_on :libraries, :library_documents, :library_notes, to: [:index, :new, :create, :show]
+    has_permission_on :library_documents, :library_notes do
+      to [:edit, :update]
+      if_attribute created_by: is { user }, created_at_as_i: is_in { 60.minutes.ago.to_i..Time.now.to_i }
+    end
+
     has_permission_on :library_tags, to: :update
     has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry, :subscribe_to_threads]
     has_permission_on :user_prefs do

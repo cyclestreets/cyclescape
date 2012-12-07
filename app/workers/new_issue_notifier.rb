@@ -14,11 +14,16 @@ class NewIssueNotifier
 
   def self.process_new_issue(id)
     issue = Issue.find(id)
-    process_for_user_locations(issue)
-    process_for_group_locations(issue)
+
+    l1 = list_for_group_locations(issue)
+    l2 = list_for_user_locations(issue)
+    # merge the two lists, which are keyed on user id. This ensure each user only receives one notification.
+    l1.merge(l2).each_value do |v|
+      Resque.enqueue(NewIssueNotifier, v[:type], v[:opts])
+    end
   end
 
-  def self.process_for_user_locations(issue)
+  def self.list_for_user_locations(issue)
     # Expand radius of issue location
     buffered_location = issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
@@ -36,11 +41,16 @@ class NewIssueNotifier
       locs.sort_by {|loc| loc.location.buffer(0.0001).area }.first
     end
 
+    # Create a hash keyed on user_id, containing the type of notification (actually the method name)
+    # and the options for each message
+    list = {}
     filtered.each do |loc|
       # Symbol keys are converted to strings by Resque
-      opts = {"user_id" => loc.user_id, "category_id" => loc.category_id, "issue_id" => issue.id}
-      Resque.enqueue(NewIssueNotifier, :notify_new_user_location_issue, opts)
+      opts = { "user_id" => loc.user_id, "category_id" => loc.category_id, "issue_id" => issue.id }
+      list[loc.user_id] = { type: :notify_new_user_location_issue, opts: opts }
     end
+
+    list
   end
 
   def self.notify_new_user_location_issue(opts)
@@ -50,17 +60,23 @@ class NewIssueNotifier
     Notifications.new_user_location_issue(user, issue, category).deliver if user.prefs.enable_email
   end
 
-  def self.process_for_group_locations(issue)
+  def self.list_for_group_locations(issue)
     group_profiles = GroupProfile.intersects(issue.location).all
+
+    # Create a hash keyed on the user id, containing the type of notification (actually the method name)
+    # and the options for each message
+    list = {}
     group_profiles.each do |profile|
       users = profile.group.members.joins(:prefs).
           where(UserPref.arel_table[:involve_my_groups].in(["notify", "subscribe"])).
           all
       users.each do |user|
         opts = { "user_id" => user.id, "group_id" => profile.group.id, "issue_id" => issue.id }
-        Resque.enqueue(NewIssueNotifier, :notify_new_group_location_issue, opts)
+        list[user.id] = { type: :notify_new_group_location_issue, opts: opts }
       end
     end
+
+    list
   end
 
   def self.notify_new_group_location_issue(opts)

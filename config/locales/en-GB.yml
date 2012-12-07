@@ -183,6 +183,9 @@
         failure: "There was a problem rejecting this membership request"
         success: "Membership rejected"
     message_threads:
+      destroy:
+        failure: "Couldn't delete thread"
+        success: "Thread deleted"
       index:
         title: "Group Threads"
         new_group_thread: "New Group Administrative thread"
@@ -384,14 +387,19 @@
         public_threads: "Public Threads"
         threads_explanation: "This document has been mentioned in these public threads:"
     notes:
+      edit:
+        title: "Edit Library Note"
       new:
         title: "New Library Note"
       show:
         added_by_html: "Added by %{name} on %{time}"
+        edit: "Edit Note"
         note_on_document_html: "This note is attached to a document: %{document}"
         no_threads: "This note hasn't been included in any public threads. If you add this note to a public thread, the thread will be listed here."
         public_threads: "Public Threads"
         threads_explanation: "This note has been mentioned in these public threads:"
+      update:
+        success: "Library Note Updated"
   mailers:
     notifications:
       gmr_confirmed:
@@ -525,6 +533,10 @@
       show:
         photo_alt: "A photo entitled %{caption}."
         view_original_image: "View the original image"
+  message_library:
+    documents:
+      new:
+        title: "New Library Document"
   messages:
     censor:
       failure: "Could not censor message"
@@ -536,6 +548,8 @@
       posted_date: "posted %{time_ago} ago"
       censor: "Censor this message"
       censored: "This message has been removed"
+      create_note: "Create Library Note"
+      create_document: "Create Library Document"
     new:
       deadline_message: "Deadline/date"
       document_message: "Attachment"
