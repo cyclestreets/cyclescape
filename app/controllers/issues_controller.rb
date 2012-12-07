@@ -76,10 +76,11 @@ class IssuesController < ApplicationController
       bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
       issues = Issue.intersects_not_covered(bbox.to_geometry).order("created_at DESC").limit(50)
     else
+      bbox = nil
       issues = Issue.order("created_at DESC").limit(50)
     end
     factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(issues.map { | issue | issue_feature(IssueDecorator.decorate(issue)) })
+    collection = factory.feature_collection(issues.map { | issue | issue_feature(IssueDecorator.decorate(issue), bbox) })
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection)}
     end
@@ -126,10 +127,12 @@ class IssuesController < ApplicationController
     return Geo::NOWHERE_IN_PARTICULAR
   end
 
-  def issue_feature(issue)
+  def issue_feature(issue, bbox = nil)
+    geom = bbox.to_geometry if bbox
     issue.loc_feature({ thumbnail: issue.medium_icon_path,
                         image_url: issue.tip_icon_path(false),
                         title: issue.title,
+                        size_ratio: issue.size_ratio(geom),
                         url: view_context.url_for(issue),
                         created_by: issue.created_by.name,
                         created_by_url: view_context.url_for(issue.created_by)})
