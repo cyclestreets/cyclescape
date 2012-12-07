@@ -1,20 +1,65 @@
 MapStyle = {
-  displayRules: [new OpenLayers.Rule({
+  displayRules: [
+    new OpenLayers.Rule({
+        filter: new OpenLayers.Filter.Comparison({
+          type: OpenLayers.Filter.Comparison.GREATER_THAN,
+          property: "size_ratio",
+          value: 0.1,
+        }),
+        symbolizer: {"Line" : { strokeWidth: 8,
+                                strokeColor: '#333333',
+                                graphicZIndex: 2,
+                                strokeOpacity: 0.9 },
+                      "Point" : { graphicWidth: 32,
+                                  graphicOpacity: 1.0,
+                                  graphicYOffset: -32,
+                                  graphicZIndex: 3,
+                                  externalGraphic: '${thumbnail}' },
+                      "Polygon" : { strokeWidth: 2.5,
+                                    strokeOpacity: 0.9,
+                                    strokeColor: '#333333',
+                                    fillOpacity: 0.1,
+                                    graphicZIndex: 1,
+                                    fillColor: '#ffffff' }
+        },
+        elseFilter: false
+    }),
+    new OpenLayers.Rule({
+        symbolizer: {"Line" : { strokeWidth: 8,
+                                strokeColor: '#333333',
+                                graphicZIndex: 2,
+                                strokeOpacity: 0.9 },
+                      "Point" : { graphicWidth: 32,
+                                  graphicOpacity: 1.0,
+                                  graphicYOffset: -32,
+                                  graphicZIndex: 3,
+                                  externalGraphic: '${thumbnail}' },
+                      "Polygon" : { strokeWidth: 2.5,
+                                    strokeOpacity: 0.9,
+                                    strokeColor: '#333333',
+                                    fillOpacity: 0.5,
+                                    graphicZIndex: 1,
+                                    fillColor: '#ffffff' }
+        },
+        elseFilter: true
+    })
+  ],
+  displaySelectRules: [new OpenLayers.Rule({
       symbolizer: {"Line" : { strokeWidth: 8,
-                              strokeColor: '#333333',
-                              graphicZIndex: 2,
+                              strokeColor: '#007000',
+                              graphicZIndex: 5,
                               strokeOpacity: 0.9 },
-                    "Point" : { graphicWidth: 32,
-                                graphicOpacity: 1.0,
-                                graphicYOffset: -32,
-                                graphicZIndex: 3,
-                                externalGraphic: '${thumbnail}' },
+                      "Point" : { graphicWidth: 32,
+                                  graphicOpacity: 1.0,
+                                  graphicYOffset: -32,
+                                  graphicZIndex: 5,
+                                  externalGraphic: '${thumbnail}' },
                     "Polygon" : { strokeWidth: 2.5,
                                   strokeOpacity: 0.9,
-                                  strokeColor: '#333333',
+                                  strokeColor: '#007000',
                                   fillOpacity: 0.5,
-                                  graphicZIndex: 1,
-                                  fillColor: '#ffffff' }
+                                  graphicZIndex: 5,
+                                  fillColor: '#ccffcc' }
       },
       elseFilter: true
   })],
@@ -48,7 +93,7 @@ MapStyle = {
   displayStyle: function() {
     var styleMap = new OpenLayers.StyleMap();
     styleMap.styles["default"].addRules(this.displayRules);
-    styleMap.styles["select"].addRules(this.displayRules);
+    styleMap.styles["select"].addRules(this.displaySelectRules);
     return styleMap;
   },
 
