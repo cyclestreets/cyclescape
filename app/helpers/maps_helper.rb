@@ -96,7 +96,9 @@ module MapsHelper
                                                                 protocol: protocol,
                                                                 projection: projection,
                                                                 styleMap: 'MapStyle.displayStyle()'.to_sym,
-                                                                rendererOptions: {yOrdering: true, zIndexing: true},
+                                                                rendererOptions: {yOrdering: false, # yOrdering would be nice on points,
+                                                                                                    # but then breaks area-sorting on polygons
+                                                                                  zIndexing: true},
                                                                 strategies: [strategy]))
     page << map.add_layer(locationlayer)
   end
