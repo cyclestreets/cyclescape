@@ -154,6 +154,9 @@
         success: "Member removed from group"
       edit:
         title: "Edit group membership for %{user_name}"
+      update:
+        failure: "Couldn't update the group membership"
+        success: "Group membership updated"
     membership_requests:
       cancel:
         success: "Membership request cancelled"
