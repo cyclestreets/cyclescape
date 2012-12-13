@@ -14,3 +14,4 @@ $ ->
   $("form.edit-tags").live "ajax:success", (e, data, status, xhr) ->
     $("div.tags").html(data.tagpanel).show()
     $("div.tag-form").hide()
+    $("section.library.box").replaceWith(data.librarypanel) if data.librarypanel
