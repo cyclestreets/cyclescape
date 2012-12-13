@@ -12,5 +12,5 @@ $ ->
     false
 
   $("form.edit-tags").live "ajax:success", (e, data, status, xhr) ->
-    $("div.tags").html(data).show()
+    $("div.tags").html(data.tagpanel).show()
     $("div.tag-form").hide()
