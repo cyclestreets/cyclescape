@@ -188,6 +188,8 @@ describe "Message threads" do
           # Page submission is AJAX and returns json
           page.source.should have_content("bike")
           page.source.should have_content("wheels")
+          # Check the response has information for the library panel.
+          JSON.parse(page.source)["librarypanel"].should_not be_nil
         end
       end
     end
