@@ -185,9 +185,9 @@ describe "Message threads" do
             fill_in "Tags", with: "bike wheels"
             click_on I18n.t(".formtastic.actions.message_thread.update_tags")
           end
-          # Page submission is AJAX but returns usable page fragment here
-          page.should have_content("bike")
-          page.should have_content("wheels")
+          # Page submission is AJAX and returns json
+          page.source.should have_content("bike")
+          page.source.should have_content("wheels")
         end
       end
     end

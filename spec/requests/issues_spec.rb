@@ -183,9 +183,9 @@ describe "Issues" do
           fill_in "Tags", with: "pothole dangerous"
           click_on I18n.t(".formtastic.actions.issue.update_tags")
         end
-        # Page submission is AJAX but returns usable page fragment here
-        page.should have_content("pothole")
-        page.should have_content("dangerous")
+        # Page submission is AJAX and returns json
+        page.source.should have_content("pothole")
+        page.source.should have_content("dangerous")
       end
     end
   end
