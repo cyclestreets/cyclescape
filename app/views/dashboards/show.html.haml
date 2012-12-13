@@ -44,7 +44,9 @@
         %section.issues
           %h2= t ".issues_in_your_area"
           - if current_user.locations.empty?
-            %p= t ".no_locations_guidance_html", add_some_locations_link: link_to(t(".add_some_locations"), user_locations_path)
+            %p.warning
+              = image_tag 'warning.png'
+              = t ".no_locations_guidance_html", add_some_locations_link: link_to(t(".add_some_locations"), user_locations_path)
           - elsif @relevant_issues.empty?
             %p= t ".no_issues_nearby_html", add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path),
                                         add_location_link: link_to(t(".add_another_location"), user_locations_path)

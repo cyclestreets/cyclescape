@@ -48,6 +48,8 @@
                 %span= t ".no_overlapping_groups"
   - else
     %h2= t ".no_locations_yet"
-    %p= t ".no_locations_guidance"
+    %p.warning
+      = image_tag 'warning.png'
+      = t ".no_locations_guidance"
     %p= t ".no_locations_guidance2_html", first_location_link: link_to(t(".add_first_location"), new_user_location_path)
 %aside#sidebar
