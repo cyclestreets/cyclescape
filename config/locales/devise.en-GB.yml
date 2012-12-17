@@ -47,6 +47,7 @@ en-GB:
       edit:
         confirm: 'Are you sure?'
         cancel_account: 'cancel your account'
+        cancel_header: 'Cancel my account'
         unhappy_with_account_html: 'If you are unhappy with your account, you can %{confirm_link}.'
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
