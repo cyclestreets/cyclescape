@@ -1,11 +1,6 @@
 - if @user == current_user
   - content_for :subnav do
-    %menu
-      %ul.horizontal
-        %li= link_to t(".edit"), {action: :edit}, class: "btn-grey"
-        %li= link_to t(".update_account"), edit_user_registration_path, class: "btn-grey"
-        %li= link_to t(".my_locations"), user_locations_path, class: "btn-grey"
-        %li= link_to t(".edit_preferences"), edit_user_prefs_path, class: "btn-grey"
+    = render "shared/profile_menu"
 %section.user-profile.content-no-sidebar#content
   %section#user-details
     %header

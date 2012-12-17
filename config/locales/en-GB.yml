@@ -591,6 +591,11 @@
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
       submit: "Go"
+    profile_menu:
+      edit: "Edit My Profile"
+      edit_preferences: "Edit my preferences"
+      my_locations: "My Locations"
+      update_account: "Update My Account Details"
     tags:
       panel:
         edit_tags: "Edit tags"
@@ -706,20 +711,16 @@
         add_to_groups_explanation:
           one: "You can add this user into your group."
           other: "You can add this user to any of the groups shown."
-        edit: "Edit My Profile"
-        edit_preferences: "Edit my preferences"
         group_membership_label: "Groups:"
         is_a_member_of_groups:
           zero: "%{name} isn't a member of any groups yet"
           one: "%{name} is a member of one group"
           other: "%{name} is a member of %{count} groups"
-        my_locations: "My Locations"
         no_groups: "None"
         no_website: "None"
         profile_picture_title: "%{name}'s picture"
         recent_threads: "Recent Threads"
         reported_issues: "Reported Issues"
-        update_account: "Update My Account Details"
         user_profile: "User Profile"
         website_label: "Web site:"
       update:
