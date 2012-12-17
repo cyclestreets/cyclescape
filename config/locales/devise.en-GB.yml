@@ -37,6 +37,10 @@ en-GB:
         title: 'Confirm your account'
         info: 'You have been invited to join Cyclescape, please complete your account registration including creating a password so that you can login. You can change your name and email address to the one that you prefer to use for this site.'
         commit_button: 'Confirm account'
+        confirm: 'Are you sure?'
+        cancel_account: 'cancel your account'
+        cancel_header: 'Cancel my account'
+        unhappy_with_account_html: 'If you are unhappy with your account, you can %{confirm_link}.'
     registrations:
       signed_up: 'Welcome! You have signed up successfully.'
       updated: 'You updated your account successfully.'
