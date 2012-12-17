@@ -51,7 +51,15 @@
         involve_my_locations: "Matters near my locations"
         involve_my_groups: "My groups matters"
         involve_my_groups_admin: "Also involve me in my groups administrative discussions"
+      user:
+        edit:
+          password: "New Password"
+          password_confirmation: "New Password Confirmation"
     hints:
+      user:
+        edit:
+          password: "Leave this blank to keep your current password."
+          current_password: "Please confirm your current password to make changes on this page."
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name, they can change this when they accept the invite."
@@ -105,6 +113,7 @@
         create: "Send Feedback"
       user:
         create: "Sign up"
+        update: "Update Account"
       user_profile:
         create: "Save"
       user_thread_priority:
