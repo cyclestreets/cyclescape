@@ -2,12 +2,12 @@
 #
 # Table name: user_locations
 #
-#  id          :integer         not null, primary key
-#  user_id     :integer         not null
-#  category_id :integer         not null
-#  created_at  :datetime        not null
-#  updated_at  :datetime        not null
-#  location    :spatial({:srid=
+#  id          :integer          not null, primary key
+#  user_id     :integer          not null
+#  category_id :integer          not null
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  location    :spatial({:srid=>
 #
 
 class UserLocation < ActiveRecord::Base

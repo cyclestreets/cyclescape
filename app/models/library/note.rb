@@ -2,10 +2,10 @@
 #
 # Table name: library_notes
 #
-#  id                  :integer         not null, primary key
-#  library_item_id     :integer         not null
+#  id                  :integer          not null, primary key
+#  library_item_id     :integer          not null
 #  title               :string(255)
-#  body                :text            not null
+#  body                :text             not null
 #  library_document_id :integer
 #
 
