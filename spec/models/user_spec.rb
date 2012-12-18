@@ -265,6 +265,19 @@ describe User do
     end
   end
 
+  context "thread views" do
+    subject { FactoryGirl.create(:user) }
+    let!(:thread_view) { FactoryGirl.create(:thread_view, user: subject) }
+
+    it "should indicate the user has viewed the thread" do
+      subject.viewed_thread?(thread_view.thread).should be_true
+    end
+
+    it "should give the time the user last viewed the thread" do
+      subject.viewed_thread_at(thread_view.thread).to_i.should eql(thread_view.viewed_at.to_i)
+    end
+  end
+
   context "account disabling" do
     subject { FactoryGirl.create(:user) }
 
