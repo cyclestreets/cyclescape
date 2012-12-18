@@ -124,6 +124,14 @@ class User < ActiveRecord::Base
     thread_priorities.where(thread_id: thread.id).exists?
   end
 
+  def viewed_thread?(thread)
+    thread_views.where(thread_id: thread.id).exists?
+  end
+
+  def viewed_thread_at(thread)
+    thread_views.where(thread_id: thread.id).first.viewed_at
+  end
+
   def disabled
     disabled_at?
   end
