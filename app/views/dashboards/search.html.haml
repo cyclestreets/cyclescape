@@ -4,20 +4,20 @@
 - else
   %section.content-no-sidebar#content
     %ul.tabs.styled-tabs.with-history
-      %li= link_to t(".thread_results"), "#thread-results"
       %li= link_to t(".issue_results"), "#issue-results"
+      %li= link_to t(".thread_results"), "#thread-results"
       %li= link_to t(".library_results"), "#library-results"
     .panes
-      #thread-results.pane
-        %p= t(".threads_found", count: @threads.count, query: @query)
-        - if @threads.count > 0
-          %ul.thread-list
-            = render partial: "message_threads/list", collection: @threads, as: :thread
       #issue-results.pane
         %p= t(".issues_found", count: @issues.count, query: @query)
         - if @issues.count > 0
           %ul.issue-list
             = render partial: "issues/compact", collection: @issues, as: :issue
+      #thread-results.pane
+        %p= t(".threads_found", count: @threads.count, query: @query)
+        - if @threads.count > 0
+          %ul.thread-list
+            = render partial: "message_threads/list", collection: @threads, as: :thread
       #library-results.pane
         %p= t(".library_items_found", count: @library_items.count, query: @query)
         - if @library_items.count > 0
