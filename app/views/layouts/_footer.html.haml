@@ -13,3 +13,18 @@
             %small= t(".application_version_html", version: link_to_github_commit)
           %li
             %small= link_to t(".whats_new"), page_path("changelog")
+    %div{:id => 'supportlogos'}
+      %p= t(".supportlogos_introduction")
+      %ul
+        %li
+          = link_to image_tag("supportlogos/cyclestreets.png", title: t(".funding_from_and_created_by", :name => 'CycleStreets')), 'http://www.cyclestreets.net/', :target => "_blank"
+        %li
+          = link_to image_tag("supportlogos/geovation.png", title: t(".funding_from", :name => 'GeoVation')), 'http://www.geovation.org.uk/', :target => "_blank"
+        %li
+          = link_to image_tag("supportlogos/lushcharitypot.png", title: t(".funding_from", :name => 'Lush Charity Pot')), 'https://www.lush.co.uk/our-values/charity-support', :target => "_blank"
+        %li
+          = link_to image_tag("supportlogos/cambridgesustainablecity.png", title: t(".funding_from", :name => 'Cambridge Sustainable City')), 'http://www.cambridge.gov.uk/ccm/navigation/environment-and-recycling/sustainable-city/', {:target => "_blank", :class => 'cambridgeonly'}
+        %li
+          = link_to image_tag("supportlogos/ctc.png", title: t(".funding_from", :name => 'CTC')), 'http://www.ctc.org.uk/', :target => "_blank"
+        %li
+          = link_to image_tag("supportlogos/openlylocal.png", title: t(".planning_application_data")), 'http://openlylocal.com/', :target => "_blank"
