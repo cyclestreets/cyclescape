@@ -22,8 +22,9 @@
           = link_to image_tag("supportlogos/geovation.png", {title: t(".funding_from", :name => 'GeoVation'), :alt => 'Logo'}), 'http://www.geovation.org.uk/', :target => "_blank"
         %li
           = link_to image_tag("supportlogos/lushcharitypot.png", {title: t(".funding_from", :name => 'Lush Charity Pot'), :alt => 'Logo'}), 'https://www.lush.co.uk/our-values/charity-support', :target => "_blank"
-        %li
-          = link_to image_tag("supportlogos/cambridgesustainablecity.png", {title: t(".funding_from", :name => 'Cambridge Sustainable City'), :alt => 'Logo'}), 'http://www.cambridge.gov.uk/ccm/navigation/environment-and-recycling/sustainable-city/', :target => "_blank"
+        - if group_subdomain?('camcycle')
+          %li
+            = link_to image_tag("supportlogos/cambridgesustainablecity.png", {title: t(".funding_from", :name => 'Cambridge Sustainable City'), :alt => 'Logo'}), 'http://www.cambridge.gov.uk/ccm/navigation/environment-and-recycling/sustainable-city/', :target => "_blank"
         %li
           = link_to image_tag("supportlogos/ctc.png", {title: t(".funding_from", :name => 'CTC'), :alt => 'Logo'}), 'http://www.ctc.org.uk/', :target => "_blank"
         %li
