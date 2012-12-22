@@ -94,9 +94,9 @@
         library_item_message_html: "%{creator_link} added a library item"
     search:
       no_results_found: "No results found for '%{query}'"
-      thread_results: "Threads"
-      issue_results: "Issues"
-      library_results: "Library"
+      thread_results: "Threads (%{count})"
+      issue_results: "Issues (%{count})"
+      library_results: "Library (%{count})"
       threads_found:
         zero: "No threads found for '%{query}'"
         one: "One thread found for '%{query}'"
