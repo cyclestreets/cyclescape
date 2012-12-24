@@ -37,6 +37,9 @@ class NewThreadNotifier
 
     list = {}
     members.each do |member|
+      # Don't send a notification if they are already (auto) subscribed to the thread
+      next if member.subscribed_to_thread?(thread)
+
       opts = { "thread_id" => thread.id, "member_id" => member.id }
       list[member.id] = { type: :send_new_group_thread_notification, opts: opts }
     end

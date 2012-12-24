@@ -126,6 +126,18 @@ describe "Group threads", use: :subdomain do
           open_last_email_for(notifiee.email).should be_nil
         end
 
+        it "should not send double notifications to auto-subscribers" do
+          # if you auto-subscribe, you shouldn't also get the new thread notification.
+          membership = FactoryGirl.create(:group_membership, group: current_group)
+          notifiee = membership.user
+          enable_group_thread_prefs_for(notifiee)
+          notifiee.prefs.update_column(:involve_my_groups, "subscribe")
+          fill_in_thread
+
+          mailbox = mailbox_for(notifiee.email)
+          mailbox.count.should eql(1)
+        end
+
         context "on committee-only threads" do
           it "should not send a notification to a normal member" do
             membership = FactoryGirl.create(:group_membership, group: current_group)

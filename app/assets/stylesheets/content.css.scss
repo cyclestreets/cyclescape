@@ -516,6 +516,11 @@ section#user-locations {
       }
     }
   }
+  section.issues {
+    p.warning > img {
+      float: left;
+    }
+  }
 }
 
 #dashboard-threads-issues {
@@ -627,6 +632,12 @@ section#user-locations {
   oveflow:hidden;
   .btn-big-green {
     float:right;
+  }
+}
+
+#user-locations {
+  p.warning > img {
+    float: left;
   }
 }
 

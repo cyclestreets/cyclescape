@@ -90,11 +90,7 @@ describe "Library documents" do
       click_on "Edit tags"
       fill_in "Tags", with: "cycle parking"
       click_on I18n.t(".formtastic.actions.library_item.update_tags")
-      within ".tags-panel" do
-        within ".tags" do
-          page.should have_content("parking")
-        end
-      end
+      JSON.parse(page.source)["tagspanel"].should have_content("parking")
     end
   end
 end

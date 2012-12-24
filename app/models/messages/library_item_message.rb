@@ -2,10 +2,10 @@
 #
 # Table name: library_item_messages
 #
-#  id              :integer         not null, primary key
-#  thread_id       :integer         not null
-#  message_id      :integer         not null
-#  library_item_id :integer         not null
+#  id              :integer          not null, primary key
+#  thread_id       :integer          not null
+#  message_id      :integer          not null
+#  library_item_id :integer          not null
 #  created_by_id   :integer
 #
 

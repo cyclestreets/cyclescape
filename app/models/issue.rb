@@ -2,14 +2,14 @@
 #
 # Table name: issues
 #
-#  id            :integer         not null, primary key
-#  created_by_id :integer         not null
-#  title         :string(255)     not null
-#  description   :text            not null
-#  created_at    :datetime        not null
-#  updated_at    :datetime        not null
+#  id            :integer          not null, primary key
+#  created_by_id :integer          not null
+#  title         :string(255)      not null
+#  description   :text             not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #  deleted_at    :datetime
-#  location      :spatial({:srid=
+#  location      :spatial({:srid=>
 #  photo_uid     :string(255)
 #
 

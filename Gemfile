@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.9'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -71,7 +71,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'
-  gem 'capybara'
+  gem 'capybara', '~> 1.1.2' # pin for now, pending upgrade to 2.0
   gem 'email_spec'
   gem 'database_cleaner'
   gem 'rspec-expectations'
