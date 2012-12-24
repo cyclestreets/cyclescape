@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   layout :set_xhr_layout
   filter_access_to :all
+  helper_method :group_subdomain?
 
   protected
 
@@ -104,6 +105,10 @@ class ApplicationController < ActionController::Base
 
   def is_group_subdomain?
     !request.subdomain.blank? && request.subdomain != "www"
+  end
+
+  def group_subdomain?(group = nil)
+    !request.subdomain.blank? && request.subdomain == group
   end
 
   def current_group
