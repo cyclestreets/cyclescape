@@ -212,16 +212,24 @@
       update:
         success: "Profile Updated"
   groups:
+    index:
+      list_tab: "List"
+      map_tab: "Map"
+      new_group: "Create new group"
+      title: "Groups directory"
+    compact:
+      no_location: This group doesn't have a location yet.
+    join:
+      join_body:
+        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
+      join_this_group: "Join this group"
     show:
       edit_group_profile: "Edit the group profile"
       edit_group_members: "Edit the membership list"
       group_management: "Group Management"
       group_organisers: "Group Organisers"
       group_request_pending: "Your request to join this group is pending."
-      join_body:
-        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_title: "Join our Cyclescape group"
-      join_this_group: "Join this group"
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public threads

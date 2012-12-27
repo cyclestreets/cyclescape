@@ -44,4 +44,16 @@ describe "Groups" do
       end
     end
   end
+  
+  describe "index" do
+    let(:profile_2) { FactoryGirl.create(:group_profile)}
+    before do
+      visit groups_path
+    end
+    
+    it "should show both group names" do
+      page.should have_content(profile.group.name)
+      page.should have_content(profile_2.group.name)
+    end
+  end
 end

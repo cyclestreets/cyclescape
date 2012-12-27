@@ -494,7 +494,8 @@ ul.library-list, ul.library-selector {
   }
 }
 
-ul.issue-list {
+ul.issue-list,
+ul.group-list {
   @include list-reset-soft;
   border-top:3px solid $paneborder;
   padding:20px 0 0 0;
@@ -517,20 +518,29 @@ ul.issue-list {
         height: 180px;
       }
     }
-    .issue-content {
+    .issue-content,
+    .group-content {
       display:table-cell;
       width:480px;
       vertical-align:top;
-      padding-right:90px;
       .meta {
         margin-bottom:15px;
       }
+    }
+    .issue-content {
+      padding-right:90px;
     }
     .votes-cell {
       width:60px;
       display:table-cell;
       height:180px;
       vertical-align:middle;
+    }
+    .group-actions {
+      width:200px;
+      display:table-cell;
+      height:180px;
+      vertical-align:top;
     }
   }
 }

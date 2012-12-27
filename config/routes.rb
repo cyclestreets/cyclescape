@@ -53,6 +53,9 @@ Cyclescape::Application.routes.draw do
       resource :profile do
         get 'geometry', :on => :member
       end
+      collection do
+        get "all_geometries"
+      end
     end
   end
 

@@ -1,0 +1,19 @@
+%section.groups.content-no-sidebar#content
+  %header#group-list-header
+    %h1= t ".title"
+    .tasks
+      = link_to t(".new_group"), new_group_path, class: "btn-big-green"
+  #group-list-tabs
+    %ul.tabs.styled-tabs
+      %li= link_to t(".list_tab"), "#", class: "list"
+      %li= link_to t(".map_tab"), "#", class: "map-pin"
+    .panes
+      .pane
+        %ul.group-list
+          - if @groups.empty?
+            = t(".no_results_found")
+          = render partial: "compact", collection: @groups, as: :group
+        - if @groups.respond_to?(:total_pages)
+          = will_paginate @groups
+      .pane
+        = render "all_map"
