@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   def ssl_allowed_action?
     (params[:controller] == 'devise/sessions' && ['new', 'create'].include?(params[:action])) ||
       (params[:controller] == 'devise/registrations' && ['new', 'create', 'edit', 'update'].include?(params[:action])) ||
+      (params[:controller] == 'devise_invitable/registrations' && ['new', 'create', 'edit', 'update'].include?(params[:action])) ||
       (params[:controller] == 'devise/omniauth_callbacks')
   end
 
