@@ -24,9 +24,12 @@ p, h1, h2, h3 {
 h1, h2, h3, h4 {
   color: $black;
 }
-p {
+p, td, table {
   font-size: 14px;
   line-height: 20px;
+}
+th {
+  font-weight: bold;
 }
 small {
   font-size: 12px;
