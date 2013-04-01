@@ -333,13 +333,18 @@
   layouts:
     application:
       admin: "Admin"
+      admin_tooltip: "Admin area, for system administrators"
       dashboard: "My Cyclescape"
+      dashboard_tooltip: "Your personal dashboard, showing updates on discussion threads you are subscribed to"
       feedback: "Feedback"
       home: "Home"
       issues: "Issues"
+      issues_tooltip: "Reported problems, browsable on the map or as a list"
       library: "Library"
+      library_tooltip: "Reusable resources for campaigning"
       loading: "Please wait..."
       threads: "Discussion threads"
+      threads_tooltip: "Discussions on each issue"
       title: "Cyclescape"
     footer:
       application_version_html: "Version ref: %{version}"
