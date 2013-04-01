@@ -339,7 +339,7 @@
       issues: "Issues"
       library: "Library"
       loading: "Please wait..."
-      threads: "Threads"
+      threads: "Discussion threads"
       title: "Cyclescape"
     footer:
       application_version_html: "Version ref: %{version}"
