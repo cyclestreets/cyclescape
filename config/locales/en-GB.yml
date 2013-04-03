@@ -217,8 +217,8 @@
     show:
       edit_group_profile: "Edit the group profile"
       edit_group_members: "Edit the membership list"
-      group_management: "Group Management"
-      group_organisers: "Group Organisers"
+      group_management: "Group management"
+      group_organisers: "Group organisers"
       group_request_pending: "Your request to join this group is pending."
       join_body:
         You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
