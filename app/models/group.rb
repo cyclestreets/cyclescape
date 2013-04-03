@@ -29,11 +29,11 @@ class Group < ActiveRecord::Base
   after_create :create_default_profile, unless: :profile
 
   def committee_members
-    members.where("group_memberships.role = 'committee'")
+    members.where("group_memberships.role = 'committee'").order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")
   end
 
   def normal_members
-    members.where("group_memberships.role = 'member'")
+    members.where("group_memberships.role = 'member'").order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")
   end
 
   def has_member?(user)
