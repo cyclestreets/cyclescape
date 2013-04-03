@@ -16,16 +16,6 @@ ul.thread-metadata-listings {
         text-decoration: none;
         background: $pane2;
       }
-      .thumb {
-        float: left;
-        width: 24px;
-        height: 24px;
-        img {
-          width: 20px;
-          height: 20px;
-          border: 2px solid $white;
-        }
-      }
       p {
         margin: 0 0 0 34px;
         strong {
@@ -35,6 +25,18 @@ ul.thread-metadata-listings {
     }
   }
 }
+
+a .thumb {
+  float: left;
+  width: 24px;
+  height: 24px;
+  img, span {
+    width: 20px;
+    height: 20px;
+    border: 2px solid $white;
+  }
+}
+
 
 // Will Paginate compatible styling
 .pagination {
