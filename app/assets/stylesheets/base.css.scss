@@ -85,8 +85,11 @@ a {
   text-decoration: none;
   &:hover {
     color: $colour2;
-    text-decoration: underline;
+    border-bottom: 1px solid $colour2;
   }
+}
+p a {
+  border-bottom: 1px solid #eee;
 }
 
 strong, b {
