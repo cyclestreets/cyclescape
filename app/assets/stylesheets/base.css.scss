@@ -83,13 +83,17 @@ h4 {
 a {
   color: $colour1;
   text-decoration: none;
-  &:hover {
-    color: $colour2;
-    border-bottom: 1px solid $colour2;
-  }
 }
-p a {
+#page a:hover {
+  color: $colour2;
+  border-bottom: 1px solid $colour2;
+}
+
+p a, ul.bullets li a {
   border-bottom: 1px solid #eee;
+  &:hover {
+    border-bottom-color: $colour2;
+  }
 }
 
 strong, b {
@@ -102,6 +106,17 @@ em, i {
 // lists
 ul, ol {
   @include list-reset-copy;
+}
+
+ul.bullets {
+  padding-left: 5px;
+  margin-left: 5px;
+}
+ul.bullets li {
+  list-style: square;
+  padding-left: 5px;
+  margin-left: 5px;
+  margin-bottom: 2px;
 }
 
 ol.numbered li {
