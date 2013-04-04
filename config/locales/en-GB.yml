@@ -656,6 +656,7 @@
     very_low: "Not of Interest"
   user:
     locations:
+      submit_button: "Save this location"
       create:
         success: "Location Created"
       destroy:
@@ -687,7 +688,9 @@
         overlapping_groups: "Overlapping Groups"
         subscribe_existing_threads: "follow all existing threads"
       new:
-        new_location: "New Location"
+        new_location: "Add a new location"
+        introduction: "By setting a location, this helps us figure out which issues are relevant to you."
+        drawing_help: "You can draw an area, a route or a location - select this from the panel on the right. Then draw on the map, and click the save button below."
       subscribe_to_threads:
         subscribed_to_threads:
           zero: "We couldn't find any additional threads for you to follow."

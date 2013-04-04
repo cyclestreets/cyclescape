@@ -151,7 +151,7 @@ input.submit,
 .btn-green, .formtastic input.btn-green {
   @include button-text-green;
 }
-.btn-big-green {
+.btn-big-green, .formtastic input.btn-big-green {
   @include button-text-green;
   @include inline-block;
   padding: 15px;
