@@ -1,4 +1,6 @@
-%h1= t ".title", :group => @group.name
+= render partial: "group/tabs"
+
+%h2= t ".title", :group => @group.name
 
 %p= t ".group_members_guidance"
 %p= t ".new_members_guidance_introduction"
@@ -8,12 +10,13 @@
 
 
 - if @pending_requests
+  %h3= t ".pending_requests"
   %p= t ".you_have_pending_members_html", review_pending_requests_link: link_to(t(".review_pending"), group_membership_requests_path)
 - else
   %p= t ".review_membership_requests_html", review_membership_requests_link: link_to(t(".review_requests"), group_membership_requests_path)
 
 %section.committee
-  %h2= t ".committee"
+  %h3= t ".committee"
   %p= t ".committee_guidance"
   %table.regulated
     %thead
@@ -23,7 +26,7 @@
       = render partial: "member", collection: @committee
 
 %section.members
-  %h2= t ".ordinary_members"
+  %h3= t ".ordinary_members"
   %p= t ".ordinary_members_guidance"
   %table.regulated
     %thead

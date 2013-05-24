@@ -1,4 +1,6 @@
-%h1= t ".title", group: @group.name
+= render partial: "group/tabs"
+
+%h2= t ".title", group: @group.name
 
 - if @requests.length == 0
   %p= t ".no_requests_yet"
