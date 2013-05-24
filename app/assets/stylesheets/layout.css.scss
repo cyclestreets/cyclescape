@@ -165,13 +165,16 @@ body.group-issues {
       margin-top: 15px;
     }
   }
-  p.administrative_matters {
-    color: #d7d7d7;
-    a {
-      color: #ccc;
-    }
+}
+
+
+p.comment {
+  color: #d7d7d7;
+  a {
+    color: #ccc;
   }
 }
+
 
 #issue-list-header {
   padding-bottom: 0.6em;

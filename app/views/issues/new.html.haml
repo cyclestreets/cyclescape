@@ -3,5 +3,5 @@
     %h1= t ".title"
     %p= t ".new_issue_introduction"
     - if current_group
-      %p.administrative_matters= t ".admin_thread_pointer_html", administrative_matters_link: link_to(t(".administrative_matters"), new_thread_path)
+      %p.comment= t ".admin_thread_pointer_html", administrative_matters_link: link_to(t(".administrative_matters"), new_thread_path)
   = render "form"
