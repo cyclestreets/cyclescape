@@ -13,6 +13,7 @@
             %p= t ".no_subscribed_threads_html", threads_link: link_to(t(".recent_threads"), threads_path),
                                           add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path)
           - else
+            %p= t(".my_threads_introduction")
             %table.dashboard-threads
               %tbody
                 - @subscribed_threads.each do |thread|
@@ -51,7 +52,7 @@
             %p= t ".no_issues_nearby_html", add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path),
                                         add_location_link: link_to(t(".add_another_location"), user_locations_path)
           - else
-            %p= link_to t(".update_your_locations"), user_locations_path
+            %p= t ".my_issues_nearby_introduction_html", areas_you_are_watching_link: link_to(t(".areas_you_are_watching"), user_locations_path)
             %ul.issue-list
               = issues_list @relevant_issues, collapsed: true
       #my-priorities
@@ -60,6 +61,7 @@
             %p= t ".no_prioritised_threads_html", threads_link: link_to(t(".recent_threads"), threads_path),
                                           add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path)
           - else
+            %p= t ".my_priorities_introduction"
             %table.dashboard-threads
               %tbody
                 - @prioritised_threads.each do |thread|
@@ -77,6 +79,7 @@
           - if @deadline_threads.empty?
             %p= t ".no_upcoming_deadline_threads"
           - else
+            %p= t ".my_upcoming_deadline_introduction"
             %table.dashboard-threads
               %tbody
                 - @deadline_threads.each do |thread|
