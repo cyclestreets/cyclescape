@@ -306,6 +306,9 @@
       report_new_issue: "report a new issue"
     new:
       title: "Report an issue"
+      new_issue_introduction: "Know of something stopping more people cycling, or that causes problems for existing cyclists? Or something that could do? Report it below."
+      admin_thread_pointer_html: "You can %{administrative_matters_link} with no geographical context (e.g. organising a general meeting) in the group admin threads section."
+      administrative_matters: "add a purely administrative matter"
     show:
       added_by_html: "Reported by %{name} on %{time}"
       cancel_vote: "Cancel"
