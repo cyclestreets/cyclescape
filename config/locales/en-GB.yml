@@ -292,12 +292,18 @@
       new_issue: "Report new issue"
       title: "Issues"
       list_tab: "List"
+      list_introduction: "Reported issues, most recent first:"
       map_tab: "Map"
+      map_introduction: "This map shows all issues, whether points, routes, or areas:"
       popular_tab: "Popular"
+      popular_introduction: "The most popular issues, based on the number of votes:"
       search_button: "Go"
       clear: "Clear"
       no_popular_issues: "No issues have been voted on recently."
       no_results_found: "No issues found."
+      title_introduction: "This section lists reported issues - problems on the street network and related matters."
+      title_introduction_report_html: "You can %{report_new_issue_link} using the button on the right."
+      report_new_issue: "report a new issue"
     new:
       title: "Report an issue"
     show:

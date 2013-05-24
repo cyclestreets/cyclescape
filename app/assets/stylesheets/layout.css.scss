@@ -167,6 +167,13 @@ body.group-issues {
   }
 }
 
+#issue-list-header {
+  padding-bottom: 0.6em;
+  p {
+    clear: left;
+  }
+}
+
 // User profile
 
 .user-profile-form {

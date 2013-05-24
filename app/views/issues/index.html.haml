@@ -3,6 +3,8 @@
     %h1= t ".title"
     .tasks
       = link_to t(".new_issue"), new_issue_path, class: "btn-big-green"
+    %p= t ".title_introduction", class: "clearleft"
+    %p= t ".title_introduction_report_html", report_new_issue_link: link_to(t(".report_new_issue"), new_issue_path)
   #issue-list-tabs
     %ul.tabs.styled-tabs.with-history
       %li= link_to t(".list_tab"), "#list-pane", class: "list"
@@ -10,6 +12,7 @@
       %li= link_to t(".popular_tab"), "#popular-pane", class: "list"
     .panes
       #list-pane.pane
+        %p= t ".list_introduction"
         %ul.issue-list
           - if @issues.empty?
             = t(".no_results_found")
@@ -17,8 +20,10 @@
         - if @issues.respond_to?(:total_pages)
           = will_paginate @issues
       #map-pane.pane
+        %p= t ".map_introduction"
         = render "all_map"
       #popular-pane.pane
+        %p= t ".popular_introduction"
         %ul.issue-list
           - if @popular_issues.empty?
             = t(".no_popular_issues")
