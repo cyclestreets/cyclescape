@@ -13,6 +13,10 @@
             %small= t(".application_version_html", version: link_to_github_commit)
           %li
             %small= link_to t(".whats_new"), page_path("changelog")
+          %li
+            %small= link_to t(".cyclescape_blog"), 'http://blog.cyclescape.org/'
+          %li
+            %small= link_to t(".user_guide"), 'http://blog.cyclescape.org/guide/'
     %div{:id => 'supportlogos'}
       %p= t(".supportlogos_introduction")
       %ul

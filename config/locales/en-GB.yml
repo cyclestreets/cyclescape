@@ -385,6 +385,8 @@
       funding_from: "Funding from %{name}"
       funding_from_and_created_by: "Funding from and created by %{name}"
       planning_application_data: "Planning application data from Openly Local"
+      cyclescape_blog: "Cyclescape blog"
+      user_guide: "User guide"
     group_selector:
       group_selector: "Group"
       no_group: "No Group"
