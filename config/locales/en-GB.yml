@@ -495,10 +495,9 @@
       public: "Public"
       posted_at: "posted %{time_ago} ago"
     edit:
-      title: "Edit thread"
-      description_html:
-        Administrators can fix up thread options here.
-        <strong>Warning:</strong> your group may have a policy about changing thread privacy.
+      title: "Edit thread properties"
+      description: "As a group administrator, you can fix up thread properties here."
+      thread_fix_warning_html: "<strong>Warning:</strong> your group may have a policy about changing thread privacy."
     destroy:
       failure: "Couldn't delete the thread"
       success: "Thread deleted"

@@ -1,6 +1,7 @@
 %header
   %h1= t ".title"
-  %p= t ".description_html"
+  %p= t ".description"
+  %p= t ".thread_fix_warning_html"
 %section
   = semantic_form_for @thread, as: :thread, url: thread_path(@thread) do |f|
     = f.inputs do

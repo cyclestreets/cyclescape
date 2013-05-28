@@ -80,7 +80,8 @@
         edit: *hints_issue_new
         update: *hints_issue_new
       message_thread:
-        privacy: "Select if this thread should be visible to members of the group only or everyone."
+        privacy: "This specifies who can see and edit this discussion thread."
+        issue: "This specifies which issue this discussion thread is attached to. If none, this will be an administrative thread."
     actions:
       update: "Save"
       saving: "Saving\u2026"
