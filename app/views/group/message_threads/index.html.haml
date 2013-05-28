@@ -5,6 +5,7 @@
     %li= link_to t(".general_threads"), "#general-threads"
   .panes
     #issue-threads.pane
+      %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
       %p= t ".issue_threads_description", group_name: @group.name
       %p= t ".issue_threads_addition_description"
       %ul.thread-list
