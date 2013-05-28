@@ -64,7 +64,7 @@
           password: "Leave this blank to keep your current password."
           current_password: "Please confirm your current password to make changes on this page."
       group:
-        short_name: "Must be lower-case a-z only"
+        short_name: "Must be lower-case alphanumeric; a-z, 0-9"
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name; they can change this when they accept the invite."
