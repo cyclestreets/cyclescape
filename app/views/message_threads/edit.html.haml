@@ -10,5 +10,5 @@
       = f.input :privacy, as: :select, collection: MessageThread::ALLOWED_PRIVACY.map {|n| [n.capitalize, n] }
       = f.input :issue, as: :select, collection: Issue.by_most_recent, member_label: Proc.new {|i| "#{i.id} - #{i.title}" }
     = f.actions do
-      = f.action :submit
+      = f.action :submit, button_html: {class: "btn-green submit"}
       = cancel_link thread_path(@thread)
