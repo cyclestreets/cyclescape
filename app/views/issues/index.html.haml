@@ -4,6 +4,7 @@
     .tasks
       = link_to t(".new_issue"), new_issue_path, class: "btn-big-green"
     %p= t ".title_introduction", class: "clearleft"
+    %P= t ".introduction_geographical_basis"
     %p= t ".title_introduction_report_html", report_new_issue_link: link_to(t(".report_new_issue"), new_issue_path)
   #issue-list-tabs
     %ul.tabs.styled-tabs.with-history
@@ -12,7 +13,10 @@
       %li= link_to t(".popular_tab"), "#popular-pane", class: "list"
     .panes
       #list-pane.pane
-        %p= t ".list_introduction"
+        - if current_group
+          %p= t ".list_introduction_groupwise_html", area_of_group_link: link_to(t(".area_of_group", group_name: current_group.name), root_path)
+        - else
+          %p= t ".list_introduction"
         %ul.issue-list
           - if @issues.empty?
             = t(".no_results_found")

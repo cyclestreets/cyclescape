@@ -303,6 +303,8 @@
       title: "Issues"
       list_tab: "List"
       list_introduction: "Reported issues, most recent first:"
+      list_introduction_groupwise_html: "Reported issues, most recent first, limited to the %{area_of_group_link}:"
+      area_of_group: "area of %{group_name}"
       map_tab: "Map"
       map_introduction: "This map shows all issues, whether points, routes, or areas:"
       popular_tab: "Popular"
@@ -312,6 +314,7 @@
       no_popular_issues: "No issues have been voted on recently."
       no_results_found: "No issues found."
       title_introduction: "This section lists reported issues - problems on the street network and related matters."
+      introduction_geographical_basis: "Issues always relate to some geographical location, whether very local or perhaps city-wide."
       title_introduction_report_html: "You can %{report_new_issue_link} using the button on the right."
       report_new_issue: "report a new issue"
     new:
