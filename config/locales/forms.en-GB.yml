@@ -52,8 +52,8 @@
       user_pref:
         enable_email: "Enable email notifications"
         involve_my_locations: "Matters near my locations"
-        involve_my_groups: "My groups matters"
-        involve_my_groups_admin: "Also involve me in my groups administrative discussions"
+        involve_my_groups: "My group's matters"
+        involve_my_groups_admin: "Also involve me in my group's administrative discussions"
       user:
         edit:
           password: "New Password"
@@ -67,14 +67,14 @@
         short_name: "Must be lower-case a-z only"
       group_membership:
         role: "Select if they are a normal or committee member of the group."
-        full_name: "Please enter their name, they can change this when they accept the invite."
+        full_name: "Please enter their name; they can change this when they accept the invite."
       group_profile:
         joining_instructions: "The joining instructions are shown to people who want to join this Cyclescape group. You might want to direct people to pay for membership elsewhere first, for example, or you might be happy for everyone and anyone to join your Cyclescape group. You can leave this blank."
       issue:
         new: &hints_issue_new
           description: "Please give details about the problem and what effect it is having on cycling. Note that all issues are publicly viewable."
           photo: "(optional)"
-          tags_string: "e.g. parking obstruction roadworks path"
+          tags_string: "e.g. cycleparking obstruction roadworks path"
           title: "Please be brief and specific."
         create: *hints_issue_new
         edit: *hints_issue_new
