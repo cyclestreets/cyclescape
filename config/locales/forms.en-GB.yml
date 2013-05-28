@@ -14,6 +14,9 @@
 
   formtastic:
     labels:
+      group:
+        name: "Name of the group"
+        short_name: "Subdomain"
       group_membership:
         role: "Membership type"
       issue:
@@ -60,11 +63,13 @@
         edit:
           password: "Leave this blank to keep your current password."
           current_password: "Please confirm your current password to make changes on this page."
+      group:
+        short_name: "Must be lower-case a-z only"
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name, they can change this when they accept the invite."
       group_profile:
-        joining_instructions: "The joining instructions are text that's shown to people who want to join this Cyclescape group. You might want to direct them to pay for membership elsewhere first, for example, or you might be happy for everyone and anyone to join your Cyclescape group. You can leave this blank."
+        joining_instructions: "The joining instructions are shown to people who want to join this Cyclescape group. You might want to direct people to pay for membership elsewhere first, for example, or you might be happy for everyone and anyone to join your Cyclescape group. You can leave this blank."
       issue:
         new: &hints_issue_new
           description: "Please give details about the problem and what effect it is having on cycling. Note that all issues are publicly viewable."

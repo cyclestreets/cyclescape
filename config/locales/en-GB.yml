@@ -8,13 +8,16 @@
     groups:
       index:
         title: "Groups"
-        new_group: "New Group"
+        new_group: "New group"
         edit: "Edit"
         edit_profile: "Edit Profile"
         members: "Members"
         name: "Group Name"
       create:
         success: "Group created"
+      new:
+        title: "Add a new group"
+        introduction: "As a system administrator, you can use this form to create a new group."
       update:
         success: "Group updated"
     home:
@@ -141,7 +144,7 @@
       index:
         actions: "Actions"
         committee: "Committee members"
-        committee_guidance: "Committee members can manage the group membership list, change the groups profile and update group thread information."
+        committee_guidance: "Committee members can manage the group membership list, change the group's profile and update group thread information."
         group_members_guidance: "On this page you can view the existing members of your group, invite new people and remove members from the group."
         invite_directly: "you can invite them directly"
         member_name: "Member name"
