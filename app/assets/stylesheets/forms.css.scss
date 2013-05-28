@@ -209,18 +209,20 @@ form .inputs .map {
   margin-bottom: 25px;
 }
 
-form#new_user {
-  padding: 10px;
-  margin-bottom: 25px;
-  input#user_email,
-  input#user_password {
-    font-size: 20px;
-    color: #603;
-    padding: 8px;
-    width: 350px;
-  }
-  #user_submit_action input {
-    font-size: 24px;
+body.devise-sessions {
+  form#new_user {
+    padding: 10px;
+    margin-bottom: 25px;
+    input#user_email,
+    input#user_password {
+      font-size: 20px;
+      color: #603;
+      padding: 8px;
+      width: 350px;
+    }
+    #user_submit_action input {
+      font-size: 24px;
+    }
   }
 }
 
