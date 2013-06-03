@@ -22,4 +22,4 @@
         %td= t ".created_at", time_ago: time_ago_in_words(user.created_at)
         %td= t ".disabled_at", time_ago: time_ago_in_words(user.disabled_at) if user.disabled_at?
         %td= link_to t(".edit"), edit_admin_user_path(user)
-        %td= link_to t(".preferences"), edit_user_prefs_path(current_user)
+        %td= link_to t(".preferences"), edit_user_prefs_path(user)
