@@ -43,12 +43,13 @@
         disabled: "Disabled"
         disabled_at: "%{time_ago} ago"
         display_name: "Display Name"
-        edit: "Edit"
+        edit: "User details"
         email: "Email"
         full_name: "Full Name"
         id: "id"
         role: "Role"
         title: "Users"
+        preferences: "Preferences"
       update:
         success: "User updated"
   application:
