@@ -191,11 +191,12 @@
         by: "by %{name}"
         confirm: "Confirm"
         created_at: "%{time_ago} ago"
+        email: "E-mail address"
         no_requests_yet: "There have been no membership requests for this group yet."
         reject: "Reject"
         requested_at: "Requested At"
         status: "Status"
-        title: "Membership Requests for %{group}"
+        title: "Membership requests for %{group}"
         user: "User"
       new:
         title: "Request membership of %{group_name}"
