@@ -78,6 +78,13 @@ a .thumb {
   }
 }
 
+body.site-comments {
+  .pagination {
+    height: 1.5em;
+    margin: 1em 0;
+  }
+}
+
 section.thread {
   @include list-reset-soft;
   margin: 20px 0;
