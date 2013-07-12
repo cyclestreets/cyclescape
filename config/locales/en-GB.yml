@@ -450,7 +450,7 @@
   mailers:
     notifications:
       gmr_confirmed:
-        subject: "You are now a member of %{group_name}"
+        subject: "You are now a member of the Cyclescape group for %{group_name}"
       new_group_thread:
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
       new_group_location_issue:
