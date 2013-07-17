@@ -4,7 +4,7 @@ class Group::MembershipRequestsController < ApplicationController
   filter_access_to :all, attribute_check: true, model: Group
 
   def index
-    @requests = @group.membership_requests.order("created_at desc")
+    @requests = @group.membership_requests.order("created_at desc").includes(:user)
   end
 
   def new
