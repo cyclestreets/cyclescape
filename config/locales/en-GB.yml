@@ -692,7 +692,6 @@
     very_low: "Not of Interest"
   user:
     locations:
-      submit_button: "Save this location"
       create:
         success: "Location Created"
       destroy:
