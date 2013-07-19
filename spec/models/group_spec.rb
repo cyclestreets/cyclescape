@@ -71,7 +71,7 @@ describe Group do
         end
       end
 
-      it "can't start or end with a hyphen" do
+      it "can't contain a hyphen" do
         %w{ -foo foo-}.each do |d|
           subject.short_name = d
           subject.should have(1).error_on(:short_name)
