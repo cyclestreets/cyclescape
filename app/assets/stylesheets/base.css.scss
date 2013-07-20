@@ -24,10 +24,29 @@ p, h1, h2, h3 {
 h1, h2, h3, h4 {
   color: $black;
 }
-p {
+p, td, table {
   font-size: 14px;
   line-height: 20px;
 }
+th {
+  font-weight: bold;
+}
+table {
+  border-collapse: collapse;
+  td, th {
+    border-bottom: 1px solid #e9e9e9;
+    padding: 6px 4px 2px;
+    vertical-align: top;
+    text-align: left;
+  }
+  tr:first-child {
+    border-top: 1px solid #e9e9e9;
+  }
+}
+table.regulated td:first-child {
+  width: 200px;
+}
+
 small {
   font-size: 12px;
   line-height: 15px;
@@ -68,9 +87,16 @@ h4 {
 a {
   color: $colour1;
   text-decoration: none;
+}
+#page a:hover {
+  color: $colour2;
+  border-bottom: 1px solid $colour2;
+}
+
+p a, ul.bullets li a {
+  border-bottom: 1px solid #eee;
   &:hover {
-    color: $colour2;
-    text-decoration: underline;
+    border-bottom-color: $colour2;
   }
 }
 
@@ -84,6 +110,17 @@ em, i {
 // lists
 ul, ol {
   @include list-reset-copy;
+}
+
+ul.bullets {
+  padding-left: 5px;
+  margin-left: 5px;
+}
+ul.bullets li {
+  list-style: square;
+  padding-left: 5px;
+  margin-left: 5px;
+  margin-bottom: 2px;
 }
 
 ol.numbered li {
@@ -114,7 +151,7 @@ input.submit,
 .btn-green, .formtastic input.btn-green {
   @include button-text-green;
 }
-.btn-big-green {
+.btn-big-green, .formtastic input.btn-big-green {
   @include button-text-green;
   @include inline-block;
   padding: 15px;

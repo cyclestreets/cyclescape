@@ -102,7 +102,7 @@ authorization do
   role :guest do
     has_permission_on :dashboards, to: [:search]
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
-                      :devise_invitations, :devise_passwords, to: :manage
+                      :devise_invitations, :devise_passwords, :devise_invitable_registrations, to: :manage
     has_permission_on :home, to: :show
     has_permission_on :groups, to: :view
     has_permission_on :group_profiles, to: [:view, :geometry]

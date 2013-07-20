@@ -2,10 +2,10 @@
 #
 # Table name: votes
 #
-#  id            :integer         not null, primary key
-#  vote          :boolean         default(FALSE)
-#  voteable_id   :integer         not null
-#  voteable_type :string(255)     not null
+#  id            :integer          not null, primary key
+#  vote          :boolean          default(FALSE)
+#  voteable_id   :integer          not null
+#  voteable_type :string(255)      not null
 #  voter_id      :integer
 #  voter_type    :string(255)
 #  created_at    :datetime

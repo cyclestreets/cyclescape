@@ -1,5 +1,6 @@
 %h1= t ".title"
 - if @site_comments
+  = will_paginate @site_comments
   %table
     %thead
       %th= t(".id")

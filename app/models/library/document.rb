@@ -2,9 +2,9 @@
 #
 # Table name: library_documents
 #
-#  id              :integer         not null, primary key
-#  library_item_id :integer         not null
-#  title           :string(255)     not null
+#  id              :integer          not null, primary key
+#  library_item_id :integer          not null
+#  title           :string(255)      not null
 #  file_uid        :string(255)
 #  file_name       :string(255)
 #  file_size       :integer

@@ -12,3 +12,4 @@ public/assets
 bin/
 routes.txt
 public/system
+.DS_Store

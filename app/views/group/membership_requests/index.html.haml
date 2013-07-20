@@ -1,4 +1,6 @@
-%h1= t ".title", group: @group.name
+= render partial: "group/tabs"
+
+%h2= t ".title", group: @group.name
 
 - if @requests.length == 0
   %p= t ".no_requests_yet"
@@ -6,6 +8,7 @@
   %table
     %thead
       %th= t ".user"
+      %th= t ".email"
       %th= t ".requested_at"
       %th= t ".status"
       %th= t ".actioned_by"
@@ -14,6 +17,7 @@
     - @requests.each do |r|
       %tr
         %td= link_to_profile(r.user)
+        %td= r.user.email
         %td= t ".created_at", time_ago: time_ago_in_words(r.created_at)
         %td= r.status
         %td= link_to t(".by", name: r.actioned_by.name), user_path(r.actioned_by) if r.rejected? || r.confirmed?

@@ -2,12 +2,12 @@
 #
 # Table name: inbound_mails
 #
-#  id            :integer         not null, primary key
-#  recipient     :string(255)     not null
-#  raw_message   :text            not null
-#  created_at    :datetime        not null
+#  id            :integer          not null, primary key
+#  recipient     :string(255)      not null
+#  raw_message   :text             not null
+#  created_at    :datetime         not null
 #  processed_at  :datetime
-#  process_error :boolean         default(FALSE), not null
+#  process_error :boolean          default(FALSE), not null
 #
 
 class InboundMail < ActiveRecord::Base

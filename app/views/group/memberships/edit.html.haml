@@ -1,4 +1,6 @@
-%h1= t ".title", user_name: @membership.user.name
+= render partial: "group/tabs"
+
+%h2= t ".title", user_name: @membership.user.name
 
 = semantic_form_for @membership, url: group_membership_path(@group, @membership) do |f|
   = f.semantic_errors
