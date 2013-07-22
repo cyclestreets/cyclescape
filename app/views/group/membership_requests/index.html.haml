@@ -17,7 +17,7 @@
     - @requests.each do |r|
       %tr
         %td= link_to_profile(r.user)
-        %td= link_to r.user.email
+        %td= auto_link r.user.email
         %td= t ".created_at", time_ago: time_ago_in_words(r.created_at)
         %td= r.status
         %td= link_to t(".by", name: r.actioned_by.name), user_path(r.actioned_by) if r.rejected? || r.confirmed?
