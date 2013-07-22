@@ -146,6 +146,7 @@
         actions: "Actions"
         committee: "Committee members"
         committee_guidance: "Committee members can manage the group membership list, change the group's profile and update group thread information."
+        email: "E-mail address"
         group_members_guidance: "On this page you can view the existing members of your group, invite new people and remove members from the group."
         invite_directly: "you can invite them directly"
         member_name: "Member name"

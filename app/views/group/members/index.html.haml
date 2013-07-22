@@ -21,6 +21,7 @@
   %table.regulated
     %thead
       %th= t ".member_name"
+      %th= t ".email"
       %th{:colspan => 2}= t ".actions"
     %tbody
       = render partial: "member", collection: @committee
@@ -31,6 +32,7 @@
   %table.regulated
     %thead
       %th= t ".member_name"
+      %th= t ".email"
       %th{:colspan => 2}= t ".actions"
     %tbody
       = render partial: "member", collection: @members
