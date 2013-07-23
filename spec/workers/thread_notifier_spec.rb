@@ -39,7 +39,7 @@ describe ThreadNotifier do
       thread = double("thread")
       subscriber = double("subscriber", id: 201)
       subscribers = double("subscribers")
-      thread.stub!(:subscribers).and_return(subscribers)
+      thread.stub(:subscribers).and_return(subscribers)
       message = double("message", id: 32, thread: thread)
       mail = double("mail")
 

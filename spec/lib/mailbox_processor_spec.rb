@@ -12,8 +12,8 @@ describe MailboxProcessor do
     subject { MailboxProcessor.new(config) }
 
     before do
-      Net::IMAP.stub!(:new).and_return(imap)
-      imap.stub!(:authenticate).and_return(imap)
+      Net::IMAP.stub(:new).and_return(imap)
+      imap.stub(:authenticate).and_return(imap)
     end
 
     it "should connect to the given host" do
@@ -32,9 +32,9 @@ describe MailboxProcessor do
 
     describe "#fetch_message_ids" do
       before do
-        subject.stub!(:imap).and_return(imap)
-        imap.stub!(:select)
-        imap.stub!(:uid_search)
+        subject.stub(:imap).and_return(imap)
+        imap.stub(:select)
+        imap.stub(:uid_search)
       end
         
       it "should access the given mailbox" do
@@ -57,9 +57,9 @@ describe MailboxProcessor do
       let(:message) { message = double("message", attr: {"RFC822" => "Mail text"}) }
 
       before do
-        subject.stub!(:imap).and_return(imap)
-        imap.stub!(:uid_fetch).and_return([message])
-        imap.stub!(:uid_store)
+        subject.stub(:imap).and_return(imap)
+        imap.stub(:uid_fetch).and_return([message])
+        imap.stub(:uid_store)
       end
 
       it "should fetch the given message and ask for RFC822 format" do

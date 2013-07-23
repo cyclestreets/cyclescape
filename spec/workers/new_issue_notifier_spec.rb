@@ -3,7 +3,7 @@ require "spec_helper"
 describe NewIssueNotifier do
   subject { NewIssueNotifier }
 
-  let(:issue) { mock("issue", id: 99) }
+  let(:issue) { double("issue", id: 99) }
 
   # Queueing interface
   it { should respond_to(:perform) }
