@@ -272,7 +272,7 @@ DEPENDENCIES
   compass-rails
   database_cleaner
   declarative_authorization
-  devise
+  devise (= 2.1.2)
   devise_invitable
   dragonfly
   draper (= 0.15.0)
