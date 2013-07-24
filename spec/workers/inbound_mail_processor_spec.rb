@@ -145,5 +145,17 @@ describe InboundMailProcessor do
         end
       end
     end
+
+    context "with an encoded subject" do
+      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :encoded_subject, to: email_recipient) }
+
+      before do
+        subject.perform(inbound_mail.id)
+      end
+
+      it "should work without throwing an encoding error" do
+        thread.should have(1).message
+      end
+    end
   end
 end

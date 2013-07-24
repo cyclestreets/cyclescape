@@ -1,0 +1,42 @@
+Return-path: <foo@example.net>
+Envelope-to: thread-1234567890abcdef@cyclescape.org
+Delivery-date: Tue, 14 May 2013 10:52:16 +0100
+Received: from ab134-57.foo.example.com ([192.168.1.1])
+    by mail.example.net with esmtp (Exim 4.72)
+    (envelope-from <foo@example.net>)
+    id 1UcBu1-0001yp-11
+    for thread-1234567890abcdef@cyclescape.org; Tue, 14 May 2013 10:52:16 +0100
+Received: from [10.1.1.1] (btle.info [192.168.1.1])
+    (using TLSv1 with cipher AES128-SHA (128/128 bits))
+    (No client certificate requested)
+    (Authenticated sender: foo)
+    by ab134-57.foo.example.com (Postfix) with ESMTPSA id BF8BAD6002;
+    Tue, 14 May 2013 09:52:15 +0000 (UTC)
+Content-Type: text/plain; charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 6.3 \(1234\))
+Subject: =?iso-8859-1?Q?Re=3A_=5BCyclescape=5D_Something_for_Something?=
+ =?iso-8859-1?Q?=3B_=A31m_budget?=
+From: Foo Bar <foo@example.net>
+In-Reply-To: <12341234_12341234@api.mail>
+Date: Tue, 14 May 2013 10:52:15 +0100
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <BF098BE1-1234-1234-1234-36A17875AC1D@example.net>
+References: <12341234_12341234@api.mail>
+To: thread-1234567890abcdef@cyclescape.org
+X-Mailer: Apple Mail (2.1234)
+Delivered-To: thread-1234567890abcdef@cyclescape.org
+X-BlackCat-To: thread-1234567890abcdef@cyclescape.org
+Status: RO
+X-Status:
+X-Keywords:
+X-UID: 1
+
+Lorem Lorem ipsum dolor sit amet, consectetur adipisicing elit
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, =
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, =
+Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+
+    - Foo
+
+
