@@ -126,6 +126,18 @@ describe "Group threads", use: :subdomain do
           open_last_email_for(notifiee.email).should be_nil
         end
 
+        it "should not send double notifications to auto-subscribers" do
+          # if you auto-subscribe, you shouldn't also get the new thread notification.
+          membership = FactoryGirl.create(:group_membership, group: current_group)
+          notifiee = membership.user
+          enable_group_thread_prefs_for(notifiee)
+          notifiee.prefs.update_column(:involve_my_groups, "subscribe")
+          fill_in_thread
+
+          mailbox = mailbox_for(notifiee.email)
+          mailbox.count.should eql(1)
+        end
+
         context "on committee-only threads" do
           it "should not send a notification to a normal member" do
             membership = FactoryGirl.create(:group_membership, group: current_group)
@@ -148,6 +160,32 @@ describe "Group threads", use: :subdomain do
             click_on "Create Thread"
             email = open_last_email_for(notifiee.email)
             email.should have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
+          end
+        end
+
+        context "group threads on an issue" do
+          let(:location) { "POLYGON ((-10 41, 10 41, 10 61, -10 61, -10 41))" }
+          let(:user) { FactoryGirl.create(:user) }
+          let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: location) }
+          let!(:group_membership) { FactoryGirl.create(:group_membership, user: user, group: current_group) }
+          let!(:issue) { FactoryGirl.create(:issue, location: user_location.location) }
+
+          before do
+            enable_group_thread_prefs_for(user)
+            user.prefs.update_column(:involve_my_locations, "notify")
+            visit issue_path(issue)
+            click_on "Discuss"
+            fill_in "Title", with: thread_attrs[:title]
+            fill_in "Message", with: "Something"
+            select current_group.name, from: "Owned by"
+          end
+
+          # The user would normally receive an email since it's a new group thread,
+          # but it's also a new thread on an issue within one of their locations.
+          it "should not send two emails to the same person" do
+            email_count = all_emails.count
+            click_on "Create Thread"
+            all_emails.count.should eql(email_count + 1)
           end
         end
       end
@@ -296,7 +334,7 @@ describe "Group threads", use: :subdomain do
   end
 
   context "privacy" do
-    let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
+    let(:private_thread) { FactoryGirl.create(:group_private_message_thread, :with_messages) }
 
     context "as a guest" do
       it "should not show the private thread" do
@@ -335,6 +373,23 @@ describe "Group threads", use: :subdomain do
       it "should let admins see any thread" do
         visit group_thread_path(private_thread.group, private_thread)
         page.should have_content(private_thread.title)
+      end
+    end
+
+    context "thread listing as a site user" do
+      include_context "signed in as a site user"
+
+      before do
+        visit group_threads_path(private_thread.group)
+      end
+
+      it "should not show the title of private threads" do
+        page.should_not have_content(private_thread.title)
+        page.should have_content(I18n.t("decorators.thread_list.private_thread_title"))
+      end
+
+      it "should not show the last user who posted" do
+        page.should_not have_link(private_thread.latest_activity_by.name)
       end
     end
   end

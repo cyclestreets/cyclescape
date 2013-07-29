@@ -1,16 +1,17 @@
 %h1= t ".title", group: @group.name
 %section.threads
-  %ul.tabs.styled-tabs
+  %ul.tabs.styled-tabs.with-history
     %li= link_to t(".issue_threads"), "#issue-threads"
     %li= link_to t(".general_threads"), "#general-threads"
   .panes
-    .pane
+    #issue-threads.pane
+      %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
       %p= t ".issue_threads_description", group_name: @group.name
       %p= t ".issue_threads_addition_description"
       %ul.thread-list
         = render_threads_list @issue_threads
       = will_paginate @issue_threads, param_name: "issue_threads_page", params: {anchor: "issue-threads"}
-    .pane
+    #general-threads.pane
       %p= t ".general_threads_description"
       %nav
         %ul

@@ -1,5 +1,10 @@
 %article#content.library.note
-  %h1= @note.title
+  %header
+    %h1= @note.title
+    - if permitted_to?(:edit, @note)
+      %menu.tools
+        %ul
+          %li= link_to t(".edit"), edit_library_note_path(@note)
   %section.meta
     %p= t ".added_by_html", name: link_to_profile(@note.created_by), time: l(@note.created_at.to_date)
     - if @note.document

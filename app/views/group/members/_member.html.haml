@@ -1,6 +1,13 @@
 %tr
   %td
-    = link_to member.name, user_profile_path(member)
+    = link_to user_profile_path(member) do
+      - if member.profile.picture
+        = image_tag member.profile.picture_thumbnail.url, :class => "thumb"
+      - else
+        %span.thumb
+      &nbsp;
+      = member.name
+  %td= auto_link member.email
   %td
-    = link_to t(".edit"), "#"
+    = link_to t(".edit"), edit_group_membership_path(@group, @group.membership_for(member))
   %td= link_to t(".delete"), group_membership_path(@group, @group.membership_for(member)), data: { confirm: t(".confirm") }, method: :delete

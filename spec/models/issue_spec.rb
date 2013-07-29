@@ -2,14 +2,14 @@
 #
 # Table name: issues
 #
-#  id            :integer         not null, primary key
-#  created_by_id :integer         not null
-#  title         :string(255)     not null
-#  description   :text            not null
-#  created_at    :datetime        not null
-#  updated_at    :datetime        not null
+#  id            :integer          not null, primary key
+#  created_by_id :integer          not null
+#  title         :string(255)      not null
+#  description   :text             not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #  deleted_at    :datetime
-#  location      :spatial({:srid=
+#  location      :spatial({:srid=>
 #  photo_uid     :string(255)
 #
 
@@ -106,6 +106,46 @@ describe Issue do
 
     it "should not be deleted" do
       subject.deleted_at.should be_nil
+    end
+  end
+
+  describe "location sizes" do
+    let(:factory) { RGeo::Geos.factory(srid: 4326) }
+
+    describe "for a point" do
+      subject { FactoryGirl.create(:issue, location: 'POINT(1 1)') }
+      it "should return a zero size for points" do
+        subject.size.should eql(0.0)
+      end
+
+      it "should return 0 for the size ratio" do
+        geom = factory.parse_wkt('POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))')
+        subject.size_ratio(geom).should eql(0.0)
+      end
+    end
+
+    describe "for a polygon" do
+      subject { FactoryGirl.create(:issue, location: 'POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))') }
+
+      it "should return the area for polygons" do
+        subject.size.should eql(1.0)
+      end
+
+      it "shoud give the correct size ratio" do
+        geom = factory.parse_wkt('POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))')
+        subject.size_ratio(geom).should eql(0.25)
+      end
+
+      it "should cope with degenerate bboxes" do
+        geom = factory.parse_wkt('POLYGON((1 1, 1 3, 1 3, 1 1, 1 1))')
+        geom.area.should eql(0.0)
+        subject.size_ratio(geom).should eql(0.0)
+      end
+
+      it "should cope with non-polygon bboxes" do
+        geom = factory.parse_wkt('POINT(1 1)')
+        subject.size_ratio(geom).should eql(0.0)
+      end
     end
   end
 
@@ -292,7 +332,7 @@ describe Issue do
     end
 
     it "should find the issue given a taggable" do
-      Issue.find_by_tags_from(mock({tags: [tag]})).should include(subject)
+      Issue.find_by_tags_from(double({tags: [tag]})).should include(subject)
     end
   end
 

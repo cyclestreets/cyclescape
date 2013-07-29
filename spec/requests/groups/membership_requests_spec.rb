@@ -24,7 +24,7 @@ describe "Group Membership Requests" do
         visit group_membership_requests_path(gmr.group)
         click_on "Confirm"
         open_email(gmr.user.email)
-        current_email.should have_subject("You are now a member of #{gmr.group.name}")
+        current_email.should have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
       end
 
       it "should not html escape the name of the group" do
@@ -34,6 +34,13 @@ describe "Group Membership Requests" do
         click_on "Confirm"
         open_email(gmr.user.email)
         current_email.should have_body_text("A & B")
+      end
+
+      it "should let you view the user profile" do
+        visit group_membership_requests_path(gmr.group)
+        click_on gmr.user.name
+        page.should have_content(gmr.user.name)
+        current_path.should eql(user_profile_path(gmr.user))
       end
     end
 
@@ -50,8 +57,8 @@ describe "Group Membership Requests" do
       it "should let you complete the invitation by filling in just the password and confirmation" do
         user = User.find_by_email(@credentials[:email])
         visit accept_user_invitation_path(invitation_token: user.invitation_token)
-        fill_in "Password", with: "Password1"
-        fill_in "Password confirmation", with: "Password1"
+        fill_in "New Password", with: "Password1"
+        fill_in "New Password Confirmation", with: "Password1"
         click_button "Confirm account"
         page.should have_content("Your password was set successfully. You are now signed in.")
       end
@@ -62,8 +69,8 @@ describe "Group Membership Requests" do
         fill_in "Full name", with: "Shaun McDonald"
         fill_in "Display name", with: "smsm1"
         fill_in "Email", with: "some_other_email@example.com"
-        fill_in "Password", with: "Password1"
-        fill_in "Password confirmation", with: "Password1"
+        fill_in "New Password", with: "Password1"
+        fill_in "New Password Confirmation", with: "Password1"
         click_button "Confirm account"
         page.should have_content("Your password was set successfully. You are now signed in.")
         User.find_by_email(@credentials[:email]).should be_nil

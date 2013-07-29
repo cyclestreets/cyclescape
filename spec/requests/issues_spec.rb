@@ -126,8 +126,8 @@ describe "Issues" do
       context "as a public user" do
         let!(:issue) { FactoryGirl.create(:issue) }
         let(:other_group) { FactoryGirl.create(:group) }
-        let!(:public_thread) { FactoryGirl.create(:message_thread, issue: issue) }
-        let!(:private_thread) { FactoryGirl.create(:message_thread, :private, group: other_group, issue: issue) }
+        let!(:public_thread) { FactoryGirl.create(:message_thread_with_messages, issue: issue) }
+        let!(:private_thread) { FactoryGirl.create(:message_thread_with_messages, :private, group: other_group, issue: issue) }
 
         it "should link to the public thread" do
           visit issue_path(issue)
@@ -183,9 +183,9 @@ describe "Issues" do
           fill_in "Tags", with: "pothole dangerous"
           click_on I18n.t(".formtastic.actions.issue.update_tags")
         end
-        # Page submission is AJAX but returns usable page fragment here
-        page.should have_content("pothole")
-        page.should have_content("dangerous")
+        # Page submission is AJAX and returns json
+        page.source.should have_content("pothole")
+        page.source.should have_content("dangerous")
       end
     end
   end

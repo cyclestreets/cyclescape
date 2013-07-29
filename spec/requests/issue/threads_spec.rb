@@ -2,6 +2,7 @@ require "spec_helper"
 
 describe "Issue threads" do
   let!(:issue) { FactoryGirl.create(:issue) }
+  let(:issue_with_tags) { FactoryGirl.create(:issue, :with_tags) }
   let(:edit_thread) { "Edit this thread" }
 
   context "new" do
@@ -32,6 +33,14 @@ describe "Issue threads" do
         visit issue_path(issue)
         click_on "New Thread"
         find_field("Title").value.should be_nil
+      end
+
+      it "should copy the tags from the issue" do
+        visit issue_path(issue_with_tags)
+        click_on "Discuss"
+        fill_in "Message", with: "Foo"
+        click_on "Create Thread"
+        MessageThread.last.tags.length.should > 0
       end
     end
 
@@ -281,7 +290,7 @@ describe "Issue threads" do
   end
 
   context "group private thread" do
-    let!(:thread) { FactoryGirl.create(:group_private_message_thread, issue: issue) }
+    let!(:thread) { FactoryGirl.create(:group_private_message_thread_with_messages, issue: issue) }
     context "as an admin" do
       include_context "signed in as admin"
 
@@ -298,7 +307,7 @@ describe "Issue threads" do
     context "a non-group public thread in a subdomain", use: :current_subdomain do
       include_context "signed in as a group member"
 
-      let!(:thread) { FactoryGirl.create(:message_thread, issue: issue) }
+      let!(:thread) { FactoryGirl.create(:message_thread_with_messages, issue: issue) }
 
       it "should be accessible" do
         visit issue_path(issue)

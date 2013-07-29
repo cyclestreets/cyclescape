@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120817142607) do
+ActiveRecord::Schema.define(:version => 20121224124917) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -266,6 +266,15 @@ ActiveRecord::Schema.define(:version => 20120817142607) do
   add_index "thread_subscriptions", ["thread_id"], :name => "sub_thread_id"
   add_index "thread_subscriptions", ["user_id"], :name => "index_thread_subscriptions_on_user_id"
   add_index "thread_subscriptions", ["user_id"], :name => "sub_user_id"
+
+  create_table "thread_views", :force => true do |t|
+    t.integer  "user_id",   :null => false
+    t.integer  "thread_id", :null => false
+    t.datetime "viewed_at", :null => false
+  end
+
+  add_index "thread_views", ["user_id", "thread_id"], :name => "index_thread_views_on_user_id_and_thread_id", :unique => true
+  add_index "thread_views", ["user_id"], :name => "index_thread_views_on_user_id"
 
   create_table "user_locations", :force => true do |t|
     t.integer  "user_id",                                                 :null => false

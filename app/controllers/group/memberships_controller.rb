@@ -17,6 +17,22 @@ class Group::MembershipsController < ApplicationController
     end
   end
 
+  def edit
+    @membership = @group.memberships.find(params[:id])
+  end
+
+  def update
+    @membership = @group.memberships.find(params[:id])
+
+    if @membership.update_attributes(params[:group_membership])
+      set_flash_message(:success)
+      redirect_to group_members_path
+    else
+      set_flash_message(:failure)
+      render :edit
+    end
+  end
+
   def destroy
     @membership = @group.memberships.find(params[:id])
 

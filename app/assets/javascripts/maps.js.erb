@@ -37,7 +37,7 @@ var MapSearch = {
         success: function(response) {
           self.handle_result(response, thiscall);
         },
-        error: this.handle_error,
+        error: this.handle_error
     });
     $("#map-search-status, #map-searching").show();
   },
@@ -87,7 +87,7 @@ var MapSearch = {
 
   handle_error: function() {
     $("#map-search-failed").show();
-  },
+  }
 }
 
 $(function() {

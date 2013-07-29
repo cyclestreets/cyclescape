@@ -2,15 +2,15 @@
 #
 # Table name: groups
 #
-#  id                     :integer         not null, primary key
-#  name                   :string(255)     not null
-#  short_name             :string(255)     not null
+#  id                     :integer          not null, primary key
+#  name                   :string(255)      not null
+#  short_name             :string(255)      not null
 #  website                :string(255)
 #  email                  :string(255)
-#  created_at             :datetime        not null
-#  updated_at             :datetime        not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #  disabled_at            :datetime
-#  default_thread_privacy :string(255)     default("public"), not null
+#  default_thread_privacy :string(255)      default("public"), not null
 #
 
 class Group < ActiveRecord::Base
@@ -29,11 +29,11 @@ class Group < ActiveRecord::Base
   after_create :create_default_profile, unless: :profile
 
   def committee_members
-    members.where("group_memberships.role = 'committee'")
+    members.where("group_memberships.role = 'committee'").order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")
   end
 
   def normal_members
-    members.where("group_memberships.role = 'member'")
+    members.where("group_memberships.role = 'member'").order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")
   end
 
   def has_member?(user)

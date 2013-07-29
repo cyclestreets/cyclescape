@@ -59,7 +59,7 @@ MapEdit = {
       $(".map-tools-overlay .pane.point").remove();
       $(".map-tools-overlay .pane.route").remove();
     } else {
-      this.current_control = this.map.getControl("point");
+      this.current_control = this.map.getControl("polygon");
       this.current_control.activate();
     }
   },
@@ -67,8 +67,8 @@ MapEdit = {
   positionMap: function() {
     // This is also triggered if the user refreshes the page, and the browser persists
     // the hidden form value. Ensures the map ends up where the feature is.
-    if ( document.getElementById(geo_field).value != '' ) {
-      vectorlayer.addFeatures( format.read(document.getElementById(geo_field).value));
+    if ( document.getElementById(this.geo_field).value != '' ) {
+      vectorlayer.addFeatures( format.read(document.getElementById(this.geo_field).value));
       geom = vectorlayer.features[0].geometry;
       if (geom.CLASS_NAME == 'OpenLayers.Geometry.Point') {
         map.setCenter(new OpenLayers.LonLat(geom.x, geom.y), point_zoom);
@@ -108,14 +108,14 @@ MapEdit = {
 
   serialize: function(feature) {
     var str = format.write(feature);
-    document.getElementById(geo_field).value = str;
+    document.getElementById(this.geo_field).value = str;
   },
 
   feature_added: function(event) {
     this.map.getControl("polygon").deactivate();
     this.map.getControl("path").deactivate();
     this.map.getControl("point").deactivate();
-    modify = this.map.getControl("modify");
+    var modify = this.map.getControl("modify");
     modify.activate();
     modify.selectControl.select(event.feature);
     MapEdit.serialize(event.feature);
@@ -127,7 +127,7 @@ MapEdit = {
 
   clear_features: function(event) {
     this.map.getControl("modify").deactivate();
-    document.getElementById(geo_field).value = "";
+    document.getElementById(this.geo_field).value = "";
     vectorlayer.removeAllFeatures();
   }
 };

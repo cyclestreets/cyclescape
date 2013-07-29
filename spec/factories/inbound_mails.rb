@@ -43,5 +43,9 @@ FactoryGirl.define do
     trait :with_attached_file do
       raw_message { File.read(raw_email_path("attached_file")) }
     end
+
+    trait :encoded_subject do
+      raw_message { File.read(raw_email_path("encoded_subject")) }
+    end
   end
 end

@@ -15,6 +15,14 @@ class MessageThreadsController < ApplicationController
     @subscribers = @thread.subscribers
     @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
     @tag_panel = TagPanelDecorator.new(@thread, form_url: thread_tags_path(@thread))
+
+    @view_from = nil
+    if current_user
+      if current_user.viewed_thread?(@thread)
+        @view_from = @messages.detect{|m| m.created_at >= current_user.viewed_thread_at(@thread)} || @messages.last
+      end
+      ThreadRecorder.thread_viewed(@thread, current_user)
+    end
   end
 
   def edit

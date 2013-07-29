@@ -2,12 +2,12 @@
 #
 # Table name: users
 #
-#  id                     :integer         not null, primary key
-#  email                  :string(255)     default(""), not null
-#  full_name              :string(255)     not null
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  full_name              :string(255)      not null
 #  display_name           :string(255)
-#  role                   :string(255)     not null
-#  encrypted_password     :string(128)     default("")
+#  role                   :string(255)      not null
+#  encrypted_password     :string(128)      default("")
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
@@ -15,8 +15,8 @@
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  disabled_at            :datetime
-#  created_at             :datetime        not null
-#  updated_at             :datetime        not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #  invitation_token       :string(60)
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
@@ -51,6 +51,7 @@ class User < ActiveRecord::Base
   has_many :subscribed_threads, through: :thread_subscriptions, source: :thread, conditions: 'thread_subscriptions.deleted_at is NULL'
   has_many :thread_priorities, class_name: "UserThreadPriority"
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
+  has_many :thread_views
   has_many :site_comments
   has_one :profile, class_name: "UserProfile"
   has_one :prefs, class_name: "UserPref"
@@ -121,6 +122,14 @@ class User < ActiveRecord::Base
 
   def prioritised_thread?(thread)
     thread_priorities.where(thread_id: thread.id).exists?
+  end
+
+  def viewed_thread?(thread)
+    thread_views.where(thread_id: thread.id).exists?
+  end
+
+  def viewed_thread_at(thread)
+    thread_views.where(thread_id: thread.id).first.viewed_at
   end
 
   def disabled

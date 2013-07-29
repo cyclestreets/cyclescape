@@ -3,22 +3,31 @@
     %h1= t ".title"
     .tasks
       = link_to t(".new_issue"), new_issue_path, class: "btn-big-green"
+    %p= t ".title_introduction", class: "clearleft"
+    %P= t ".introduction_geographical_basis"
+    %p= t ".title_introduction_report_html", report_new_issue_link: link_to(t(".report_new_issue"), new_issue_path)
   #issue-list-tabs
-    %ul.tabs.styled-tabs
-      %li= link_to t(".list_tab"), "#", class: "list"
-      %li= link_to t(".map_tab"), "#", class: "map-pin"
-      %li= link_to t(".popular_tab"), "#", class: "list"
+    %ul.tabs.styled-tabs.with-history
+      %li= link_to t(".list_tab"), "#list-pane", class: "list"
+      %li= link_to t(".map_tab"), "#map-pane", class: "map-pin"
+      %li= link_to t(".popular_tab"), "#popular-pane", class: "list"
     .panes
-      .pane
+      #list-pane.pane
+        - if current_group
+          %p= t ".list_introduction_groupwise_html", area_of_group_link: link_to(t(".area_of_group", group_name: current_group.name), root_path)
+        - else
+          %p= t ".list_introduction"
         %ul.issue-list
           - if @issues.empty?
             = t(".no_results_found")
           = render partial: "compact", collection: @issues, as: :issue
         - if @issues.respond_to?(:total_pages)
           = will_paginate @issues
-      .pane
+      #map-pane.pane
+        %p= t ".map_introduction"
         = render "all_map"
-      .pane#popular-pane
+      #popular-pane.pane
+        %p= t ".popular_introduction"
         %ul.issue-list
           - if @popular_issues.empty?
             = t(".no_popular_issues")

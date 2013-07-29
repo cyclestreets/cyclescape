@@ -21,6 +21,13 @@ describe "Groups" do
       page.should_not have_content(profile.joining_instructions)
     end
 
+    it "should autolink the group description" do
+      profile.update_attribute(:description, "contains a link: http://www.example.com")
+      visit group_path(profile.group)
+
+      page.should have_link("http://www.example.com")
+    end
+
     context "logged in user" do
       include_context "signed in as a site user"
 

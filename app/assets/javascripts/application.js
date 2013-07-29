@@ -25,3 +25,4 @@
 //= require ui
 //= require tags
 //= require library_message
+//= require thread_scroller

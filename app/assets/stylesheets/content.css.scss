@@ -35,7 +35,8 @@
             font-size: 12px;
             background: $grey;
             color: $black;
-            margin-right: 10px;
+            margin-right: 5px;
+            margin-bottom: 2px;
             line-height: 1;
             padding: 4px 6px;
             @include border-radius(5px);
@@ -515,6 +516,11 @@ section#user-locations {
       }
     }
   }
+  section.issues {
+    p.warning > img {
+      float: left;
+    }
+  }
 }
 
 #dashboard-threads-issues {
@@ -626,6 +632,12 @@ section#user-locations {
   oveflow:hidden;
   .btn-big-green {
     float:right;
+  }
+}
+
+#user-locations {
+  p.warning > img {
+    float: left;
   }
 }
 

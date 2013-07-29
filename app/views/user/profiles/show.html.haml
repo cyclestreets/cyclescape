@@ -1,11 +1,5 @@
 - if @user == current_user
-  - content_for :subnav do
-    %menu
-      %ul.horizontal
-        %li= link_to t(".edit"), {action: :edit}, class: "btn-grey"
-        %li= link_to t(".update_account"), edit_user_registration_path, class: "btn-grey"
-        %li= link_to t(".my_locations"), user_locations_path, class: "btn-grey"
-        %li= link_to t(".edit_preferences"), edit_user_prefs_path, class: "btn-grey"
+  = render "shared/profile_menu"
 %section.user-profile.content-no-sidebar#content
   %section#user-details
     %header
@@ -34,15 +28,15 @@
                   = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
                 = f.actions
   %section#user-tabs
-    %ul.tabs
-      %li= link_to t(".recent_threads"), ""
-      %li= link_to t(".reported_issues"), ""
+    %ul.tabs.with-history
+      %li= link_to t(".recent_threads"), "#recent-threads"
+      %li= link_to t(".reported_issues"), "#reported-issues"
     .panes
-      .pane
+      #recent-threads.pane
         %h2= t ".recent_threads"
         %ul.thread-list
           = render partial: "message_threads/compact", collection: @involved_threads, as: :thread
-      .pane
+      #reported-issues.pane
         %h2= t ".reported_issues"
         %ul.issue-list
           = render partial: "issues/compact", collection: @reported_issues, as: :issue, locals: {prefix: "reported"}

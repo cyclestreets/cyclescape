@@ -11,6 +11,7 @@ class Message::DeadlinesController < Message::BaseController
     @message.component = @deadline
 
     if @message.save
+      @thread.add_subscriber(current_user) unless current_user.ever_subscribed_to_thread?(@thread)
       ThreadNotifier.notify_subscribers(@thread, :new_deadline_message, @message)
       set_flash_message(:success)
     else

@@ -9,12 +9,6 @@
           - if permitted_to?(:destroy, @issue)
             %li= link_to t(".delete_issue"), issue_path(@issue), data: { confirm: t(".confirm_delete") }, method: :delete
   .main
-    %section.meta
-      %p= t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)
-    %section.tags
-      = @tag_panel.render
-    %section.description
-      = @issue.description
     %section.voting
       .votes
         - if current_user && current_user.voted_for?(@issue.model)
@@ -30,6 +24,12 @@
           = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put, class: "down"
         - if not permitted_to? :vote_up, :issues
           .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)
+    %section.meta
+      %p= t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)
+    %section.tags
+      = @tag_panel.render
+    %section.description
+      = @issue.description
   %section.map
     %h2= t ".location"
     = @issue.map

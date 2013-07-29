@@ -45,6 +45,20 @@ class User::LocationsController < ApplicationController
     redirect_to action: :index
   end
 
+  def subscribe_to_threads
+    num_threads = 0
+    Issue.intersects(current_user.buffered_locations).each do |issue|
+      issue.threads.each do |thread|
+        if permitted_to?(:show, thread) && !current_user.subscribed_to_thread?(thread)
+          thread.add_subscriber(current_user)
+          num_threads += 1
+        end
+      end
+    end
+    flash[:notice] = I18n.t(".user.locations.subscribe_to_threads.subscribed_to_threads", count: num_threads)
+    redirect_to action: :index
+  end
+
   def geometry
     @location = current_user.locations.find(params[:id])
     respond_to do |format|

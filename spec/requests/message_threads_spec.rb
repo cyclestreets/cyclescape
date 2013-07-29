@@ -115,6 +115,12 @@ describe "Message threads" do
           page.should have_content("Following")
         end
       end
+
+      it "should link to the issue" do
+        issue_thread = FactoryGirl.create(:issue_message_thread, :with_messages)
+        visit threads_path
+        page.should have_link(issue_thread.issue.title)
+      end
     end
 
     context "show" do
@@ -179,9 +185,11 @@ describe "Message threads" do
             fill_in "Tags", with: "bike wheels"
             click_on I18n.t(".formtastic.actions.message_thread.update_tags")
           end
-          # Page submission is AJAX but returns usable page fragment here
-          page.should have_content("bike")
-          page.should have_content("wheels")
+          # Page submission is AJAX and returns json
+          page.source.should have_content("bike")
+          page.source.should have_content("wheels")
+          # Check the response has information for the library panel.
+          JSON.parse(page.source)["librarypanel"].should_not be_nil
         end
       end
     end

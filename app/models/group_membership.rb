@@ -2,12 +2,12 @@
 #
 # Table name: group_memberships
 #
-#  id         :integer         not null, primary key
-#  user_id    :integer         not null
-#  group_id   :integer         not null
-#  role       :string(255)     not null
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id         :integer          not null, primary key
+#  user_id    :integer          not null
+#  group_id   :integer          not null
+#  role       :string(255)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #  deleted_at :datetime
 #
 
@@ -53,7 +53,9 @@ class GroupMembership < ActiveRecord::Base
 
   def invite_user_if_new
     # includes hack to trigger before_validation on user model
-    user && user.new_record? && (user.valid? || true) && user.invite!
+    if user && user.new_record? && (user.valid? || true) && user.email? && user.full_name?
+      user.invite!
+    end
     true
   end
 

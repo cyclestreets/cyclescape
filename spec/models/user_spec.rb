@@ -2,12 +2,12 @@
 #
 # Table name: users
 #
-#  id                     :integer         not null, primary key
-#  email                  :string(255)     default(""), not null
-#  full_name              :string(255)     not null
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  full_name              :string(255)      not null
 #  display_name           :string(255)
-#  role                   :string(255)     not null
-#  encrypted_password     :string(128)     default("")
+#  role                   :string(255)      not null
+#  encrypted_password     :string(128)      default("")
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
@@ -15,8 +15,8 @@
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
 #  disabled_at            :datetime
-#  created_at             :datetime        not null
-#  updated_at             :datetime        not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #  invitation_token       :string(60)
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
@@ -262,6 +262,19 @@ describe User do
 
     it "should contain the thread" do
       subject.prioritised_threads.should include(thread)
+    end
+  end
+
+  context "thread views" do
+    subject { FactoryGirl.create(:user) }
+    let!(:thread_view) { FactoryGirl.create(:thread_view, user: subject) }
+
+    it "should indicate the user has viewed the thread" do
+      subject.viewed_thread?(thread_view.thread).should be_true
+    end
+
+    it "should give the time the user last viewed the thread" do
+      subject.viewed_thread_at(thread_view.thread).to_i.should eql(thread_view.viewed_at.to_i)
     end
   end
 

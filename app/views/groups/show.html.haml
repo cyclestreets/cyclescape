@@ -1,28 +1,28 @@
 %article#content
   %section.top-box.group-top-box
     %h1= @group.name
-    %p= @group.description
+    %p= auto_link simple_format @group.description
 
   %section.group-homepage-tabs
-    %ul.tabs.styled-tabs
-      %li= link_to t(".our_areas"), "#"
-      %li= link_to t(".recent_threads"), "#"
-      %li= link_to t(".recent_issues"), "#"
+    %ul.tabs.styled-tabs.with-history
+      %li= link_to t(".our_areas"), "#area-map"
+      %li= link_to t(".recent_threads"), "#recent-threads"
+      %li= link_to t(".recent_issues"), "#recent-issues"
     .panes
-      .pane.area-map
+      #area-map.pane.area-map
         - if (@group.profile.location)
           - m = tiny_display_map(@group.profile, geometry_group_profile_path(@group, :json), "tinymap") do |map, page, dom_id|
             %div{id: dom_id, class: "tinymap"}
           != m.to_html
         - else
           %p= t ".no_location"
-      .pane.recent-threads
+      #recent-threads.pane.recent-threads
         - if @recent_threads.empty?
           %p= t ".no_threads"
         - else
           %ul.thread-list.group-latest-discussions
             = render_threads_list @recent_threads
-      .pane.recent-issues
+      #recent-issues.pane.recent-issues
         .issue-map
           - if (@group.profile.location)
             - m2 = display_bbox_map(@group.profile.location, all_geometries_issues_path(:json)) do |map2, page2|
@@ -51,9 +51,16 @@
   - if current_user && @group.committee_members.include?(current_user)
     %section.box
       %h2= t ".group_management"
-      %p= link_to t(".edit_group_profile"), edit_group_profile_path(@group)
-      %p= link_to t(".edit_group_members"), group_members_path(@group)
-      %p= link_to t(".view_membership_requests", count: @group.pending_membership_requests.count), group_membership_requests_path(@group)
+      %ul.thread-metadata-listings
+        %li 
+          = link_to edit_group_profile_path(@group) do
+            %p= t(".edit_group_profile")
+        %li
+          = link_to group_members_path(@group) do
+            %p= t(".edit_group_members")
+        %li
+          = link_to group_membership_requests_path(@group) do
+            %p= t(".view_membership_requests", count: @group.pending_membership_requests.count)
   %section.box
     %h2= t ".group_organisers"
     %ul.thread-metadata-listings

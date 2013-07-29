@@ -1,3 +1,4 @@
+= render "shared/profile_menu"
 %section#user-locations
   %header#user-locations-header
     .tasks
@@ -11,7 +12,16 @@
       - m = display_bbox_map(current_user.buffered_locations, combined_geometry_user_locations_path(:json))
       %div{id: 'map'}
       != m.to_html
-      %p= t ".combined_locations_guidance2_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
+      %p
+        - case current_user.prefs.involve_my_locations
+        - when "none"
+          = t ".combined_locations_guidance_none_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
+        - when "notify"
+          = t ".combined_locations_guidance_notify_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
+        - when "subscribe"
+          = t ".combined_locations_guidance_subscribe_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
+        = t ".catch_up_guidance_html",
+            subscribe_existing_link: link_to(t(".subscribe_existing_threads"), subscribe_to_threads_user_locations_path, method: :post)
     %section.list
       %h2= t ".all_my_locations"
       %table
@@ -39,6 +49,8 @@
                 %span= t ".no_overlapping_groups"
   - else
     %h2= t ".no_locations_yet"
-    %p= t ".no_locations_guidance"
+    %p.warning
+      = image_tag 'warning.png'
+      = t ".no_locations_guidance"
     %p= t ".no_locations_guidance2_html", first_location_link: link_to(t(".add_first_location"), new_user_location_path)
 %aside#sidebar

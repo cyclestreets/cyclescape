@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.13'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -19,7 +19,7 @@ gem 'rails_autolink'
 gem 'tweet-button'
 
 # Back-end gems
-gem 'devise'
+gem 'devise', '2.1.2' # pin due to failing tests on 3.0.0 - perhaps attr_accessible related. See https://github.com/plataformatec/devise/issues/2515
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
@@ -73,7 +73,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'
-  gem 'capybara'
+  gem 'capybara', '~> 1.1.2' # pin for now, pending upgrade to 2.0
   gem 'email_spec'
   gem 'database_cleaner'
   gem 'rspec-expectations'

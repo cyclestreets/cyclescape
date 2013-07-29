@@ -1,8 +1,9 @@
 = semantic_form_for @location do |f|
   = f.inputs do
+    = f.input :category
     = f.input :loc_json, as: :hidden
-    .map
+    %li.input
       = f.semantic_errors :location
       = render partial: "shared/edit_map", locals: {thing: @location}
-    = f.input :category
-  = f.actions
+  = f.actions do
+    = f.action :submit, :button_html => {:class => "btn-big-green"}

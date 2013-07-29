@@ -7,8 +7,9 @@ class SubdomainValidator < ActiveModel::EachValidator
     end
 
     object.errors[attribute] << 'must have between 1 and 63 letters' unless (1..63) === value.length
-    object.errors[attribute] << 'cannot start with a hyphen' unless value =~ /^[^-]/i
-    object.errors[attribute] << 'cannot end with a hyphen' unless value =~ /[^-]$/i
-    object.errors[attribute] << 'must be alphanumeric; A-Z, 0-9 or hyphen' unless value =~ /^[a-z0-9\-]*$/i
+    # We've removed hyphens from our implementation, but they would otherwise be valid in the middle of the subdomain.
+    # object.errors[attribute] << 'cannot start with a hyphen' unless value =~ /^[^-]/i
+    # object.errors[attribute] << 'cannot end with a hyphen' unless value =~ /[^-]$/i
+    object.errors[attribute] << 'must be lower-case alphanumeric; a-z, 0-9' unless value =~ /^[a-z0-9]+$/
   end
 end

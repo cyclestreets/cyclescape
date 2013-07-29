@@ -54,3 +54,46 @@ form.formtastic legend {
 form.formtastic .choices .label label {
   position: static;
 }
+
+// Hints
+.formtastic .input .inline-hints {
+  color:#aaa;
+  margin-top: 2px;
+  font-style: italic;
+  font-size: 13px;
+}
+
+
+// Tags form - inline all elements and align
+.tag-form {
+  form.formtastic fieldset {
+    display: inline;
+  }
+  form.formtastic fieldset.inputs {
+    li {
+      margin: 0;
+      padding: 0;
+    }
+    > ol > li.input .label {
+      width: auto;
+      margin-right: 12px;
+    }
+  }
+  form.formtastic .stringish input {
+    margin-right: 6px;
+    width: 350px;
+  }
+  form.formtastic fieldset.actions {
+    height: 24px;
+    padding-left: 0;
+  }
+}
+body.issues, body.group-issues {
+  .tag-form {
+    form.formtastic .stringish input {
+      width: 250px;
+    }
+  }
+}
+
+

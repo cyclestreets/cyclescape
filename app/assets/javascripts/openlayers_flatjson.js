@@ -37,7 +37,7 @@ OpenLayers.Format.FlatJSON = OpenLayers.Class(OpenLayers.Format, {
      * Returns:
      * <Object> An array of items.
      */
-    getResultArray: function(obj){ return obj.results},
+    getResultArray: function (obj) { return obj.results; },
 
     /**
      * Method: getLat
@@ -50,7 +50,7 @@ OpenLayers.Format.FlatJSON = OpenLayers.Class(OpenLayers.Format, {
      * Returns:
      * A number
      */
-    getLat: function(obj){ return obj.lat },
+    getLat: function (obj) { return obj.lat; },
     /**
      * Method: getLon
      * Return the longitude value contained in the obj.
@@ -62,35 +62,34 @@ OpenLayers.Format.FlatJSON = OpenLayers.Class(OpenLayers.Format, {
      * Returns:
      * A number
      */
-    getLon: function(obj){ return obj.lon },
+    getLon: function (obj) { return obj.lon; },
 
-    read: function(json, type, filter) {
-        var results = null;
-        var obj = null;
+    read: function (json, type, filter) {
+        var results = null, obj = null, res;
         if (typeof json == "string") {
             obj = OpenLayers.Format.JSON.prototype.read.apply(this,
                                                               [json, filter]);
         } else {
             obj = json;
         }
-        if(!obj) {
+        if (!obj) {
             OpenLayers.Console.error("Bad JSON: " + json);
             return;
         }
-        var res = this.getResultArray(obj);
-        if (!res){
-            OpenLayers.Console.error("Can't find the results Array : "+ json);
+        res = this.getResultArray(obj);
+        if (!res) {
+            OpenLayers.Console.error("Can't find the results Array : " + json);
             return;
         }
-        results = this.parseFeatures(res,this);
+        results = this.parseFeatures(res, this);
         return results;
     },
 
-    parseFeatures: function(obj,format){
-        var features = [];
-        for (var i = 0; i< obj.length; i++){
-            var feat = this.parseFeature(obj[i],format);
-            if (feat) features.push(feat);
+    parseFeatures: function (obj, format) {
+        var features = [], i;
+        for (i = 0; i < obj.length; i++) {
+            var feat = this.parseFeature(obj[i], format);
+            if (feat) { features.push(feat); }
         }
         return features;
     },
@@ -107,21 +106,20 @@ OpenLayers.Format.FlatJSON = OpenLayers.Class(OpenLayers.Format, {
      * Returns:
      * {<OpenLayers.Feature.Vector>} A feature.
      */
-    parseFeature: function(obj,format) {
-        var feature, geometry, attributes, bbox;
-        attributes=new Object();
-        for (att in obj){
-            attributes[att]=obj[att];
+    parseFeature: function (obj, format) {
+        var feature, geometry, attributes, bbox, att, lat, lon;
+        attributes = {};
+        for (att in obj) {
+            attributes[att] = obj[att];
         }
 
         try {
-            var lat, lon;
             lat = format.getLat(obj);
             lon = format.getLon(obj);
-            if (isNaN(parseFloat(lat)) || !isFinite(lat)) return;
-            if (isNaN(parseFloat(lon)) || !isFinite(lon)) return;
-            geometry = new OpenLayers.Geometry.Point(lon,lat);
-        } catch(err) {
+            if (isNaN(parseFloat(lat)) || !isFinite(lat)) { return; }
+            if (isNaN(parseFloat(lon)) || !isFinite(lon)) { return; }
+            geometry = new OpenLayers.Geometry.Point(lon, lat);
+        } catch (err) {
             // deal with bad geometries
             //throw err;
             return;
@@ -130,10 +128,10 @@ OpenLayers.Format.FlatJSON = OpenLayers.Class(OpenLayers.Format, {
         bbox = (geometry && geometry.bbox) || obj.bbox;
 
         feature = new OpenLayers.Feature.Vector(geometry, attributes);
-        if(bbox) {
+        if (bbox) {
             feature.bounds = OpenLayers.Bounds.fromArray(bbox);
         }
-        if(obj.id) {
+        if (obj.id) {
             feature.fid = obj.id;
         }
         return feature;

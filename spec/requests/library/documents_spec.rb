@@ -47,6 +47,15 @@ describe "Library documents" do
       page.should have_content("can't be blank")
     end
 
+    it "should create tags for the document" do
+      visit new_library_document_path
+      attach_file "Document", pdf_document_path
+      fill_in "Title", with: "Case studies"
+      fill_in "Tags", with: "one two three"
+      click_on "Upload"
+      page.should have_content("three")
+    end
+
     it "should update the document"
   end
 
@@ -81,11 +90,7 @@ describe "Library documents" do
       click_on "Edit tags"
       fill_in "Tags", with: "cycle parking"
       click_on I18n.t(".formtastic.actions.library_item.update_tags")
-      within ".tags-panel" do
-        within ".tags" do
-          page.should have_content("parking")
-        end
-      end
+      JSON.parse(page.source)["tagspanel"].should have_content("parking")
     end
   end
 end

@@ -24,7 +24,7 @@
           - if permitted_to? :destroy, @thread
             %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t(".are_you_sure") }
 
-  = render collection: @messages, partial: "messages/message"
+  = render collection: @messages, partial: "messages/message", locals: { view_from: @view_from }
   = render "messages/new"
 
 %aside#sidebar

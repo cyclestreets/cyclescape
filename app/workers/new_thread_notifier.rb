@@ -13,13 +13,16 @@ class NewThreadNotifier
 
   def self.queue_new_thread(thread_id)
     thread = MessageThread.find(thread_id)
-    Resque.enqueue(NewThreadNotifier, :notify_new_group_thread, thread.id) if thread.group
-    Resque.enqueue(NewThreadNotifier, :notify_new_user_location_issue_thread, thread.id) if thread.issue
+
+    l1 = thread.group ? list_for_new_group_thread(thread) : {}
+    l2 = thread.issue ? list_for_new_user_location_issue_thread(thread) : {}
+    # merge the two lists, which are keyed on user id. This ensure each user only receives one notification.
+    l1.merge(l2).each_value do |v|
+      Resque.enqueue(NewThreadNotifier, v[:type], v[:opts])
+    end
   end
 
-  def self.notify_new_group_thread(thread_id)
-    thread = MessageThread.find(thread_id)
-
+  def self.list_for_new_group_thread(thread)
     # Figure out the correct preference combination, depending on whether the thread has an issue or
     # is just an "administrative" thread.
     t = UserPref.arel_table
@@ -31,19 +34,26 @@ class NewThreadNotifier
     else
       members = thread.group.members.active.joins(:prefs).where(constraint)
     end
+
+    list = {}
     members.each do |member|
-      Resque.enqueue(NewThreadNotifier, :send_new_group_thread_notification, thread.id, member.id)
+      # Don't send a notification if they are already (auto) subscribed to the thread
+      next if member.subscribed_to_thread?(thread)
+
+      opts = { "thread_id" => thread.id, "member_id" => member.id }
+      list[member.id] = { type: :send_new_group_thread_notification, opts: opts }
     end
+
+    list
   end
 
-  def self.send_new_group_thread_notification(thread_id, user_id)
-    thread = MessageThread.find(thread_id)
-    user = User.find(user_id)
+  def self.send_new_group_thread_notification(opts)
+    thread = MessageThread.find(opts["thread_id"])
+    user = User.find(opts["member_id"])
     Notifications.new_group_thread(thread, user).deliver if user.prefs.enable_email
   end
 
-  def self.notify_new_user_location_issue_thread(thread_id)
-    thread = MessageThread.find(thread_id)
+  def self.list_for_new_user_location_issue_thread(thread)
     buffered_location = thread.issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
     # Retrieve user locations that intersect with the issue
@@ -60,6 +70,7 @@ class NewThreadNotifier
       locs.sort_by {|loc| loc.location.buffer(0.0001).area }.first
     end
 
+    list = {}
     filtered.each do |loc|
       # Don't send a notification if they are already (auto) subscribed to the thread
       next if loc.user.subscribed_to_thread?(thread)
@@ -69,8 +80,10 @@ class NewThreadNotifier
 
       # Symbol keys are converted to strings by Resque
       opts = { "thread_id" => thread.id, "user_location_id" => loc.id}
-      Resque.enqueue(NewThreadNotifier, :send_new_user_location_thread_notification, opts)
+      list[loc.user.id] = { type: :send_new_user_location_thread_notification, opts: opts }
     end
+
+    list
   end
 
   def self.send_new_user_location_thread_notification(opts)

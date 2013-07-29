@@ -2,11 +2,11 @@
 #
 # Table name: document_messages
 #
-#  id            :integer         not null, primary key
-#  thread_id     :integer         not null
-#  message_id    :integer         not null
-#  created_by_id :integer         not null
-#  title         :string(255)     not null
+#  id            :integer          not null, primary key
+#  thread_id     :integer          not null
+#  message_id    :integer          not null
+#  created_by_id :integer          not null
+#  title         :string(255)      not null
 #  file_uid      :string(255)
 #  file_name     :string(255)
 #  file_size     :integer

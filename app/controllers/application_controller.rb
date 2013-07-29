@@ -9,12 +9,14 @@ class ApplicationController < ActionController::Base
   after_filter :store_location
   layout :set_xhr_layout
   filter_access_to :all
+  helper_method :group_subdomain?
 
   protected
 
   def ssl_allowed_action?
     (params[:controller] == 'devise/sessions' && ['new', 'create'].include?(params[:action])) ||
       (params[:controller] == 'devise/registrations' && ['new', 'create', 'edit', 'update'].include?(params[:action])) ||
+      (params[:controller] == 'devise_invitable/registrations' && ['new', 'create', 'edit', 'update'].include?(params[:action])) ||
       (params[:controller] == 'devise/omniauth_callbacks')
   end
 
@@ -104,6 +106,10 @@ class ApplicationController < ActionController::Base
 
   def is_group_subdomain?
     !request.subdomain.blank? && request.subdomain != "www"
+  end
+
+  def group_subdomain?(group = nil)
+    !request.subdomain.blank? && request.subdomain == group
   end
 
   def current_group

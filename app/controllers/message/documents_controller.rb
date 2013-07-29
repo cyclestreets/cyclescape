@@ -11,6 +11,7 @@ class Message::DocumentsController < Message::BaseController
     @message.component = @document
 
     if @message.save
+      @thread.add_subscriber(current_user) unless current_user.ever_subscribed_to_thread?(@thread)
       ThreadNotifier.notify_subscribers(@thread, :new_document_message, @message)
       set_flash_message(:success)
     else

@@ -38,7 +38,7 @@ describe "User profiles" do
 
     it "should let you edit your own profile" do
       visit edit_user_profile_path(current_user)
-      page.should have_content("Edit Profile")
+      page.should have_content(I18n.t(".shared.profile_menu.edit"))
     end
 
     it "should prevent you editing someone elses" do
