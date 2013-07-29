@@ -1,7 +1,5 @@
 class PlanningApplicationsProcessor
 
-require 'net/http'
-require 'tempfile'
 require 'csv'
 require 'progressbar'
 
@@ -54,8 +52,6 @@ require 'progressbar'
   # size increase, but the effort to process each update does too.
 
   def process_csv
-    #@csv_path = '/home/andy/temp/cyclestreets/planning applications/planning_applications.head10k.csv'
-
     # use wc for optimal speed :-)
     csv_length = %x{wc -l "#{@csv_path}"}.to_i
 
