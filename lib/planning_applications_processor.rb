@@ -38,11 +38,11 @@ require 'progressbar'
     @tempfile.close
   end
 
-    def unzip_file
-      @tempfile.open
-      @csv_path = Tempfile.new('cyclekit-unzip').path
-      system("unzip -p #{@tempfile.path} > #{@csv_path}")
-    end
+  def unzip_file
+    @tempfile.open
+    @csv_path = Tempfile.new('cyclekit-unzip').path
+    system("unzip -p #{@tempfile.path} > #{@csv_path}")
+  end
 
   # The biggest problem that we have with processing the csv is that it all comes
   # as one giant updated file. We need to check every record to see if we have that
