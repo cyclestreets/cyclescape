@@ -20,7 +20,7 @@ require 'progressbar'
 
   def fetch_zipfile
     # Ensure that we don't have the file in memory when downloading
-    uri = URI("http://thunderflames.org/temp/planning_applications.zip")
+    uri = URI(Rails.application.config.planning_applications_url)
     @tempfile = Tempfile.new('cyclekit-zip')
     @tempfile.binmode
 

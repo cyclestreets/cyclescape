@@ -71,5 +71,8 @@ module Cyclescape
 
     # Google analytics
     config.analytics = {google: {account_id: "UA-28721275-1", base_domain: "cyclescape.org"}}
+
+    # Planning applications
+    config.planning_applications_url = "http://thunderflames.org/temp/planning_applications.zip"
   end
 end
