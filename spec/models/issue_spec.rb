@@ -332,7 +332,7 @@ describe Issue do
     end
 
     it "should find the issue given a taggable" do
-      Issue.find_by_tags_from(mock({tags: [tag]})).should include(subject)
+      Issue.find_by_tags_from(double({tags: [tag]})).should include(subject)
     end
   end
 

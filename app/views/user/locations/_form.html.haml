@@ -6,4 +6,4 @@
       = f.semantic_errors :location
       = render partial: "shared/edit_map", locals: {thing: @location}
   = f.actions do
-    = f.action :submit, :label => t("user.locations.submit_button"), :button_html => {:class => "btn-big-green"}
+    = f.action :submit, :button_html => {:class => "btn-big-green"}

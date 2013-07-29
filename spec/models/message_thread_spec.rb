@@ -184,7 +184,7 @@ describe MessageThread do
 
     context "signature removal" do
       it "should remove double-dash signatures" do
-        mail.message.stub!(:decoded).and_return("Normal text here\n\n--\nSignature")
+        mail.message.stub(:decoded).and_return("Normal text here\n\n--\nSignature")
         message = thread.add_messages_from_email!(mail).first
         message.body.should == "Normal text here\n"
       end

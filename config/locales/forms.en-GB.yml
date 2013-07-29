@@ -120,6 +120,8 @@
       user:
         create: "Sign up"
         update: "Update Account"
+      user_location:
+        create: "Save this location"
       user_profile:
         create: "Save"
       user_thread_priority:

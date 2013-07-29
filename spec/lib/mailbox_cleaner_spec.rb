@@ -21,7 +21,7 @@ describe MailboxCleaner do
 
   describe "#delete_message" do
     it "should delete the message with given ID" do
-      subject.stub!(:imap).and_return(imap)
+      subject.stub(:imap).and_return(imap)
       imap.should_receive(:uid_store).with(31, "+FLAGS", [:Deleted])
       subject.delete_message(31)
     end

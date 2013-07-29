@@ -40,7 +40,7 @@ describe Library::Item do
     let!(:item2) { FactoryGirl.create(:library_item, tags_string: "bananas") }
 
     it "should return both notes" do
-      thread = mock(tags: [mock(name: "foo"), mock(name: "bananas")])
+      thread = double(tags: [double(name: "foo"), double(name: "bananas")])
       items = Library::Item.find_by_tags_from(thread)
       items.should include(item)
       items.should include(item2)
@@ -48,7 +48,7 @@ describe Library::Item do
     end
 
     it "shouldn't return the same item twice" do
-      thread = mock(tags: [mock(name: "foo"), mock(name: "bar")])
+      thread = double(tags: [double(name: "foo"), double(name: "bar")])
       items = Library::Item.find_by_tags_from(thread)
       items.should include(item)
       items.should_not include(item2)

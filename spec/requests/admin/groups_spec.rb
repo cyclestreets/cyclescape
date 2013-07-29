@@ -20,12 +20,12 @@ describe "Groups admin" do
 
   context "new" do
     before do
-      click_link "New Group"
+      click_link I18n.t(".admin.groups.index.new_group")
     end
 
     it "should let you create a new group" do
       fill_in "Name", with: "Placeford Cycling"
-      fill_in "Short name", with: "placefordcc"
+      fill_in "Subdomain", with: "placefordcc"
       fill_in "Website", with: "http://www.placefordcc.com"
       click_on "Create Group"
       Group.where("name = 'Placeford Cycling'").count.should == 1
@@ -45,7 +45,7 @@ describe "Groups admin" do
 
     it "should show the current group details" do
       page.should have_field("Name", with: group.name)
-      page.should have_field("Short name", with: group.short_name)
+      page.should have_field("Subdomain", with: group.short_name)
       page.should have_field("Website", with: group.website)
     end
 
