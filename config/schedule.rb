@@ -23,3 +23,8 @@ every 5.minutes do
   runner "MailboxReader.process_all_mailboxes"
   env :MAILTO, 'cyclescape-errors@cyclestreets.net'
 end
+
+every 1.day, at: '1:02 am' do
+  runner "PlanningApplicationsProcessor.process_planning_applications"
+  env :MAILTO, 'cyclescape-errors@cyclestreets.net'
+end
