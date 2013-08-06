@@ -55,6 +55,14 @@ describe PlanningApplicationsProcessor do
       plan.postcode.should eql("SW12 0AH")
     end
 
-    it "should update old records with new information"
+    it "should update old records with new information" do
+      planning_app = FactoryGirl.create(:planning_application, openlylocal_id: 261)
+      planning_app.openlylocal_id.should eql(261)
+      planning_app.postcode.should_not eql("SW12 0AH")
+      subject.process_csv
+      planning_app.reload
+      planning_app.postcode.should eql("SW12 0AH")
+      PlanningApplication.count.should eql(2)
+    end
   end
 end
