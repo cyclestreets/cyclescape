@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe PlanningApplicationsProcessor do
-  let(:config) do
-    {host: "mail.example.com", user_name: "user@example.com", password: "secret",
-      authentication: "PLAIN", mailbox: "INBOX", mail_processor: "MailProcessor"}
-  end
 
   describe "fetching zipfile" do
     # This should have some kind of whizz-bang test to ensure
