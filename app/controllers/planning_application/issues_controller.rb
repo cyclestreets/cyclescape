@@ -3,7 +3,7 @@ class PlanningApplication::IssuesController < IssuesController
 
   def new
     @issue = @planning_application.build_issue
-    @issue.title = @planning_application.title #truncated
+    @issue.title = @planning_application.title
     @issue.location = @planning_application.location
     @issue.description = @planning_application.description
     @issue.tags_string = "planning"
