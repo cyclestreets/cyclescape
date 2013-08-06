@@ -33,7 +33,7 @@ class PlanningApplication < ActiveRecord::Base
   end
 
   def title
-    if description
+    if !description.empty?
       [uid, description].join(" ")
     else
       [uid, council_name].join(" ")
