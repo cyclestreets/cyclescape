@@ -126,6 +126,7 @@ GEM
     json (1.8.0)
     launchy (2.3.0)
       addressable (~> 2.3)
+    lockfile (2.1.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -285,6 +286,7 @@ DEPENDENCIES
   jquery-rails (= 2.0.3)
   jquery-ui-rails
   launchy
+  lockfile
   map_layers
   memoist
   pg

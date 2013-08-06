@@ -2,10 +2,14 @@ class PlanningApplicationsProcessor
 
 require 'csv'
 require 'progressbar'
+require 'lockfile'
 
   def self.process_planning_applications
-    processor = self.new
-    processor.run
+    lockfile = Rails.root.join('tmp', 'pids', 'planning_applications.lock')
+    Lockfile(lockfile, :retries => 0) do
+      processor = self.new
+      processor.run
+    end
   end
 
   def run
