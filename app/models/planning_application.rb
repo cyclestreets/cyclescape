@@ -22,7 +22,6 @@ class PlanningApplication < ActiveRecord::Base
   include Locatable
 
   belongs_to :issue
-  attr_accessible :address, :openlaylocal_url, :openlylocal_id, :postcode
 
   validates :openlylocal_id, presence: true
   validates :openlylocal_url, presence: true
