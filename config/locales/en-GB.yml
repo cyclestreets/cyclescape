@@ -615,6 +615,10 @@
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/toolkit/commits/master/'>GitHub</a>."
+  planning_application:
+    issues:
+      new:
+        already: "There's already an issue for that planning application"
   planning_applications:
     show:
       address_label: "Address:"
