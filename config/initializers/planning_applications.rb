@@ -1,3 +1,3 @@
 module PlanningApplications
-  URL = "http://thunderflames.org/temp/planning_applications.zip"
+  URL = "http://openlylocal.com/councils/planning_applications.zip"
 end
