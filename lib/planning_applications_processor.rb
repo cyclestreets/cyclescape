@@ -80,6 +80,13 @@ require 'progressbar'
   end
 
   def cleanup
-    @tempfile.close if @tempfile
+    if @tempfile
+      @tempfile.close
+      @tempfile.unlink
+    end
+    if @csv_file
+      @csv_file.close
+      @csv_file.unlink
+    end
   end
 end
