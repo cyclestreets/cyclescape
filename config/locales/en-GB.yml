@@ -67,6 +67,7 @@
         other: "%{count} days away"
       deadlines: "Deadlines and dates"
       deadline_thread_updated: "thread updated %{at}"
+      issues_lower: "issues"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
@@ -87,10 +88,11 @@
         important, or maybe you could %{add_issue_link} instead?
       no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
       no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
-      no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby issues here."
-      no_planning_applications: "There are no planning applications in your area."
+      no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby %{things} here."
+      no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
       planning_applications: "Planning Applications"
+      planning_applications_lower: "planning applications"
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
       group_threads: "Group Threads"
@@ -618,6 +620,7 @@
   planning_application:
     issues:
       new:
+        title: "New issue from Planning Application"
         already: "There's already an issue for that planning application"
   planning_applications:
     show:

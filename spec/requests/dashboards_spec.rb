@@ -166,6 +166,55 @@ describe "User dashboards" do
       end
     end
 
+    context "planning applications" do
+      include_context "signed in as a site user"
+
+      let(:planning_application) { FactoryGirl.create(:planning_application) }
+
+      context "no locations" do
+        it "should give some guidance" do
+          visit dashboard_path
+          within("#planning") do
+            page.should have_content(I18n.t(".dashboards.show.add_some_locations"))
+          end
+        end
+      end
+
+      context "unhelpful location" do
+        before do
+          # Give the current user a location that doesn't match the planning_application
+          ul = current_user.locations.new
+          ul.category = FactoryGirl.create(:location_category)
+          ul.location = "POINT(-90 -90)"
+          ul.save
+          visit dashboard_path
+        end
+
+        it "should give some more guidance" do
+          within("#planning") do
+            page.should have_content(I18n.t(".dashboards.show.add_another_location"))
+          end
+        end
+      end
+
+      context "matching location" do
+        before do
+          # Give the current user a location that matches the planning_application
+          ul = current_user.locations.new
+          ul.category = FactoryGirl.create(:location_category)
+          ul.location = planning_application.location
+          ul.save
+          visit dashboard_path
+        end
+
+        it "should show planning applications in my area" do
+          within("#planning") do
+            page.should have_content(planning_application.title)
+          end
+        end
+      end
+    end
+
     context "search" do
       include_context "signed in as a site user"
 
