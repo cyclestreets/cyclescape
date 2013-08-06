@@ -56,4 +56,29 @@ describe "Planning Applications" do
       end
     end
   end
+
+  context "with issue" do
+    let(:planning_application) { FactoryGirl.create(:planning_application, :with_issue) }
+
+    context "as a signed in user" do
+      include_context "signed in as a site user"
+
+      it "should not let you convert to an issue" do
+        visit planning_application_path(planning_application)
+        page.should_not have_link(I18n.t(".planning_applications.show.convert_to_issue"))
+      end
+
+      it "should have a link to the existing issue" do
+        # Don't check for the link text, since it'll be a bit similar to other text from the planning application
+        visit planning_application_path(planning_application)
+        page.source.should include(issue_path(planning_application.issue))
+      end
+
+      it "shouldn't let you try to get to the form directly" do
+        visit new_planning_application_issue_path(planning_application)
+        current_path.should eql(planning_application_path(planning_application))
+        page.should have_content(I18n.t(".planning_application.issues.new.already"))
+      end
+    end
+  end
 end
