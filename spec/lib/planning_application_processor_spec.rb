@@ -1,6 +1,15 @@
 require 'spec_helper'
 
 describe PlanningApplicationsProcessor do
+  describe "multiple instances" do
+    # It's not entirely inconceivable (read: likely) that this will
+    # take more than a whole day to run. Since we're dealing with entire
+    # dumps, we're better off skipping a day rather than gumming up with
+    # multiple instances. I have no idea how to go about testing this
+    it "should not permit multiple instances" do
+      pending
+    end
+  end
 
   describe "fetching zipfile" do
     # This should have some kind of whizz-bang test to ensure
