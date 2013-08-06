@@ -21,5 +21,43 @@
 require 'spec_helper'
 
 describe PlanningApplication do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "newly created" do
+    subject { FactoryGirl.create(:planning_application) }
+
+    it "should have an openlylocal id" do
+      subject.openlylocal_id.should_not be_nil
+    end
+
+    it "should not have an issue" do
+      subject.issue.should be_nil
+    end
+
+    it "should have an appropriate title" do
+      subject.title.should include(subject.uid)
+      subject.title.should include(subject.description)
+    end
+
+    it "should have an appropriate title when there's no description" do
+      subject.description = ""
+      subject.title.should include(subject.uid)
+      subject.title.should include(subject.council_name)
+    end
+  end
+
+  describe "to be valid" do
+    subject { FactoryGirl.create(:planning_application) }
+
+    it "should have a location" do
+      subject.location = ""
+      subject.should_not be_valid
+    end
+  end
+
+  context "with an issue" do
+    subject { FactoryGirl.create(:planning_application, :with_issue) }
+
+    it "should have an issue" do
+      subject.issue.should_not be_nil
+    end
+  end
 end
