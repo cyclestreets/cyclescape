@@ -5,10 +5,10 @@
   %dl
     %dt= t(".address_label")
     %dd= @planning_application.address
-    %dt= t(".uid_label")
-    %dd= @planning_application.uid
     %dt= t(".council_label")
     %dd= @planning_application.council_name
+    %dt= t(".uid_label")
+    %dd= @planning_application.uid
     %dt= t(".official_application_label")
     %dd= link_to t(".official_application"), @planning_application.url
 

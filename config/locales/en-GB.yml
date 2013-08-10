@@ -620,22 +620,24 @@
   planning_application:
     issues:
       new:
-        title: "New issue from Planning Application"
         already: "There's already an issue for that planning application"
+        application_reference: "Application reference"
+        title: "New issue from Planning Application"
+        title_prefix: "Planning application"
   planning_applications:
     show:
       address_label: "Address:"
       convert_to_issue: "Convert to an Issue"
       council_label: "Council:"
       data_from_openlylocal_html: "Planning application data is sourced from %{openlylocal_link}"
-      data_source: "Data Source"
+      data_source: "Data source"
       location: "Location (based on postcode)"
       official_application: "View on council website"
-      official_application_label: "Official Application:"
+      official_application_label: "Official application:"
       openlylocal: "OpenlyLocal"
-      related_issue: "Related Issue"
-      related_issue_guidance: "This planning application has a related issue:"
-      uid_label: "Application Reference:"
+      related_issue: "Related issue"
+      related_issue_guidance: "This planning application has been converted to an issue:"
+      uid_label: "Application reference:"
       view_application_record: "View planning application record on OpenlyLocal"
       view_council_record: "View %{council} record on OpenlyLocal"
       view_official_application: "View official application"
