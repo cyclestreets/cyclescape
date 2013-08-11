@@ -5,7 +5,7 @@ class PlanningApplicationDecorator < ApplicationDecorator
   end
 
   def issue_link
-    h.link_to issue_title, planning_application.issue
+    h.link_to issue.title, planning_application.issue
   end
 
   def map
