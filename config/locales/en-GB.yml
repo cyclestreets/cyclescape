@@ -91,7 +91,7 @@
       no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby %{things} here."
       no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
-      planning_applications: "Planning Applications"
+      planning_applications: "Planning applications"
       planning_applications_lower: "planning applications"
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
@@ -625,6 +625,10 @@
         title: "New issue from Planning Application"
         title_prefix: "Planning application"
   planning_applications:
+    index:
+      planning_applications: "Planning applications"
+      pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
+      explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
     show:
       address_label: "Address:"
       convert_to_issue: "Convert to an Issue"
