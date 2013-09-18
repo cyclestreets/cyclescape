@@ -1,0 +1,169 @@
+# Form fields, labels, hints, placeholders, and error messages
+
+"cs-CZ":
+  cancel: "Zrušit"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            full_name:
+              blank: "Prosím zadejte jméno"
+              email: "Prosím zadejte emailovou adresu"
+
+  formtastic:
+    labels:
+      group:
+        name: "Název skupiny"
+        short_name: "Subdoména"
+        website: "Webová stránka"
+        default_thread_privacy: "Výchozí viditelnost diskuzí"
+      group_profile:
+        description: "Popis"
+        joining_instructions: "Instrukce pro nové členy"
+      group_membership:
+        role: "Typ členství"
+      issue:
+        new: &labels_issue_new
+          description: "Napište popis"
+          location: "Zvolte oblast"
+          photo: "Přidejte fotografii"
+          tags_string: "Přidejte štítek k vašemu podnětu"
+          title: "Zvolte nadpis vašeho hlášení"
+        create: *labels_issue_new
+        edit: *labels_issue_new
+        update: *labels_issue_new
+        tags_string: "Štítky"
+      library_document:
+        file: "Dokument"
+        tags_string: "Štítky"
+        title: "Titulek"
+      library_item:
+        tags_string: "Štítky"
+      library_note:
+        body: "Poznámka"
+        tags_string: "Štítky"
+      link_message:
+        url: "URL"
+        title: "Titulek"
+        description: "Popis"
+      document_message:
+        file: "Soubor"
+        title: "Titulek"
+      deadline_message:
+        title: "Titulek"
+      photo_message:
+        photo: "Fotografie"
+        caption: "Nadpis"
+      message:
+        body: "Zpráva"
+      message_thread:
+        group: "Skupina"
+        tags_string: "Štítky"
+        title: "Titulek"
+        privacy: "Viditelnost"
+      site_comment:
+        body: "Zpráva"
+        name: "Jméno"
+      thread_subscription:
+        send_email: "Poslat nové zprávy emailem"
+      user_pref:
+        enable_email: "Zapnout upozornění pomocí emailu"
+        involve_my_locations: "Záležitosti v mém okolí"
+        involve_my_groups: "Záležitosti mých místních skupin"
+        involve_my_groups_admin: "Taktéž mě zahrňte do všeobecných diskuzí mých místních skupin"
+      user:
+        new:
+          email: "Email"
+          password: "Heslo"
+          remember_me: "Zapamatovat si mě"
+          full_name: "Plné jméno"
+          display_name: "Zobrazované jméno"
+          password_confirmation: "Ověření hesla"
+        edit:
+          full_name: "Plné jméno"
+          display_name: "Zobrazené jméno"
+          disabled: "Neaktivní"
+          password: "Nové heslo"
+          password_confirmation: "Potvrzení nového hesla"
+          current_password: "Současné heslo"
+      user_profile:
+        picture: "Obrázek"
+        remove_picture: "Odstranit obrázek"
+        website: "Webová stránka"
+        about: "O uživateli"
+    hints:
+      user:
+        edit:
+          password: "Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo."
+          current_password: "Prosím potvrďte vaše stávající heslo, abyste mohli udělat změny na této stránce."
+      group:
+        short_name: "Musí být malé alfanumerické znaky; a-z, 0-9"
+      group_membership:
+        role: "Vyberte, jestli jde o normální členy nebo správce místní skupiny."
+        full_name: "Prosím zadejte jejich jméno, až přijmou pozvánku, tak si ho budou si ho moci změnit."
+      group_profile:
+        joining_instructions: "Instrukce, které jsou ukázány lidem, kteří se chtějí zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné."
+      issue:
+        new: &hints_issue_new
+          description: "Prosím popište podrobnosti vašeho problému a jaký to má dopad na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně přístupné."
+          photo: "(nepovinné)"
+          tags_string: "např. stojan překážka cyklostezka údržba"
+          title: "Prosím buďte struční a konkrétní."
+        create: *hints_issue_new
+        edit: *hints_issue_new
+        update: *hints_issue_new
+      message_thread:
+        privacy: "Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno."
+        issue: "Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud k žádným, toto vlákno bude vytvořeno jako všeobecná diskuze."
+    actions:
+      create: "Vytvořit %{model}"
+      update: "Uložit"
+      saving: "Ukládám\u2026"
+      cancel: "Zrušit"
+      deadline_message:
+        create: "Vložit termín"
+      document_message:
+        create: "Vložit přílohu"
+      group_membership_request:
+          create: "Vytvořit žádost o členství ve skupině"
+      group_membership:
+        create: "Pozvat člena"
+      issue:
+        create: "Odeslat hlášení"
+        update: "Uložit hlášení"
+        update_tags: "Upravit štítky"
+      library_item:
+        update_tags: "Upravit štítky"
+      library_item_message:
+        create: "Přidat položku knihovny"
+      library/document:
+        create: "Nahrát"
+        document_from_message: "Přidat do knihovny"
+      library/note:
+        create: "Vytvořit poznámku"
+        attach_to_document: "Přiložit poznámku"
+      link_message:
+        create: "Přidat odkaz"
+      message:
+        create: "Odeslat zprávu"
+      message_thread:
+        create: "Vytvořit diskuzní vlákno"
+        update_tags: "Upravit diskuzní vlákno"
+      photo_message:
+        create: "Přidat fotografii"
+      site_comment:
+        create: "Zaslat zpětnou vazbu"
+      user:
+        create: "Registrovat se"
+        update: "Upravit účet"
+      user_location:
+        create: "Uložit tuto oblast"
+      user_profile:
+        create: "Uložit"
+      user_thread_priority:
+        create: "Uložit"
+      thread_subscription:
+        create: "Sledovat toto vlákno"
+        delete: "Přestat sledovat toto vlákno"
