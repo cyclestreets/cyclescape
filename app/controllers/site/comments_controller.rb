@@ -18,4 +18,15 @@ class Site::CommentsController < ApplicationController
       render "new", status: :conflict
     end
   end
+
+  def destroy
+    @site_comment = SiteComment.find(params[:id])
+
+    if @site_comment.destroy
+      set_flash_message(:success)
+    else
+      set_flash_message(:failure)
+    end
+    redirect_to site_comments_path
+  end
 end
