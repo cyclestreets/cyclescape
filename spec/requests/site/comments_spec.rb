@@ -41,5 +41,13 @@ describe "Site feedback" do
       visit site_comments_path
       page.should have_content(comment.body[0..51]) #chokes on newline
     end
+
+    it "should allow deleting" do
+      SiteComment.count.should eql(1)
+      visit site_comments_path
+      click_on I18n.t(".site.comments.index.delete_comment")
+      page.should have_content(I18n.t(".site.comments.destroy.success"))
+      SiteComment.count.should eql(0)
+    end
   end
 end
