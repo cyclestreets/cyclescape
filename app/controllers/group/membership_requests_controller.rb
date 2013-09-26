@@ -4,10 +4,14 @@ class Group::MembershipRequestsController < ApplicationController
   filter_access_to :all, attribute_check: true, model: Group
 
   def index
+    set_page_title t("group.membership_requests.index.title", group: @group.name)
+
     @requests = @group.membership_requests.order("created_at desc").includes(:user)
   end
 
   def new
+    set_page_title t("group.membership_requests.new.title", group_name: @group.name)
+
     @request = @group.membership_requests.build
   end
 
