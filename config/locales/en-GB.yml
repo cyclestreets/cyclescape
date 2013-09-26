@@ -657,9 +657,15 @@
       index:
         confirm_delete: "Are you sure?"
         delete_comment: "Delete"
+        how: "How"
+        id: "ID"
         no_comments: "No Feedback Yet"
         title: "All Feedback"
+        what: "What"
+        when: "When"
         when_ago: "%{time_ago} ago"
+        where: "Where"
+        who: "Who"
       new:
         title: "Feedback"
       success:
