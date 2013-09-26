@@ -8,9 +8,11 @@
     groups:
       index:
         title: "Groups"
-        new_group: "New group"
+        actions: "Actions"
+        new_group: "Create a new group"
         edit: "Edit"
         edit_profile: "Edit Profile"
+        group_email: "Group Email"
         members: "Members"
         name: "Group Name"
       create:
