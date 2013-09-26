@@ -212,7 +212,7 @@
         failure: "Couldn't delete thread"
         success: "Thread deleted"
       index:
-        title: "Discussion threads of %{group}"
+        title: "Discussion threads for %{group}"
         threads_explanation_html: "Each of the %{issues_link} may have one or more discussion threads."
         issues: "issues"
         new_group_thread: "New Group Administrative thread"
