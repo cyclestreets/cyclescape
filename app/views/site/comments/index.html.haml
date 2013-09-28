@@ -9,6 +9,7 @@
       %th= t(".what")
       %th= t(".where")
       %th= t(".how")
+      %th
     - @site_comments.each do |comment|
       %tr
         %td= comment.id
@@ -20,6 +21,7 @@
         %td= simple_format comment.body
         %td= link_to comment.context_url, comment.context_url
         %td= comment.context_data
+        %td= link_to t(".delete_comment"), site_comment_path(comment), data: { confirm: t(".confirm_delete") }, method: :delete
   = will_paginate @site_comments
 - else
   = t ".no_comments"

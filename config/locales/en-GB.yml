@@ -8,9 +8,11 @@
     groups:
       index:
         title: "Groups"
-        new_group: "New group"
+        actions: "Actions"
+        new_group: "Create a new group"
         edit: "Edit"
         edit_profile: "Edit Profile"
+        group_email: "Group Email"
         members: "Members"
         name: "Group Name"
       create:
@@ -214,7 +216,7 @@
         failure: "Couldn't delete thread"
         success: "Thread deleted"
       index:
-        title: "Discussion threads of %{group}"
+        title: "Discussion threads for %{group}"
         threads_explanation_html: "Each of the %{issues_link} may have one or more discussion threads."
         issues: "issues"
         new_group_thread: "New Group Administrative thread"
@@ -681,10 +683,21 @@
         edit_tags: "Edit tags"
   site:
     comments:
+      destroy:
+        failure: "Couldn't remove comment"
+        success: "Comment deleted"
       index:
+        confirm_delete: "Are you sure?"
+        delete_comment: "Delete"
+        how: "How"
+        id: "ID"
         no_comments: "No Feedback Yet"
         title: "All Feedback"
+        what: "What"
+        when: "When"
         when_ago: "%{time_ago} ago"
+        where: "Where"
+        who: "Who"
       new:
         title: "Feedback"
       success:
