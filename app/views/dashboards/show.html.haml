@@ -105,6 +105,7 @@
                       = t ".deadline_thread_updated", at: thread.latest_activity_date
       #planning
         %section.planning_applications
+          %h2= t ".planning_applications_in_your_area"
           - if current_user.locations.empty?
             %p.warning
               = image_tag 'warning.png'
@@ -113,13 +114,18 @@
           - elsif @planning_applications.empty?
             %p= t ".no_planning_applications_nearby_html", add_location_link: link_to(t(".add_another_location"), user_locations_path)
           - else
-            %table.dashboard-planning-applications
+            %p= t ".planning_applications_introduction"
+            %table.dashboard-planning-applications.listing
               %tbody
                 - @planning_applications.each do |plan|
                   %tr
+                    %td
+                      %div.map
+                        = plan.tinymap
                     %td.title
-                      %h4= link_to plan.title, planning_application_path(plan)
+                      %h3= link_to plan.title, planning_application_path(plan)
                       - if plan.has_issue?
+                        %p= t ".converted_to_issue"
                         %p= plan.issue_link
                     %td
                       %p= plan.council_name

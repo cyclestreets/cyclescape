@@ -63,6 +63,7 @@
       add_another_location: "add another location"
       add_some_locations: "add some locations"
       areas_you_are_watching: "areas you are watching"
+      converted_to_issue: "Converted to Issue:"
       days_away:
         zero: "Today!"
         one: "Tomorrow!"
@@ -95,6 +96,8 @@
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
       planning_applications: "Planning applications"
       planning_applications_lower: "planning applications"
+      planning_applications_in_your_area: "Planning applications in your area"
+      planning_applications_introduction: "These are the most recent planning applications (courtesy of the Openly Local website) in your area:"
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
       group_threads: "Group Threads"

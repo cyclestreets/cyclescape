@@ -1,0 +1,4 @@
+- m = tiny_display_map(planning_application, geometry_planning_application_path(planning_application, :json), "tinymap") do |map, page, dom_id|
+  %div{id: dom_id, class: "tinymap"}
+!= m.to_html
+

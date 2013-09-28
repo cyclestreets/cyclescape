@@ -9,7 +9,11 @@ class PlanningApplicationDecorator < ApplicationDecorator
   end
 
   def map
-    h.render partial: "map", locals: {planning_application: planning_application}
+    h.render partial: "planning_applications/map", locals: {planning_application: planning_application}
+  end
+
+  def tinymap
+    h.render partial: "planning_applications/tinymap", locals: {planning_application: planning_application}
   end
 
   def medium_icon_path(default=true)
