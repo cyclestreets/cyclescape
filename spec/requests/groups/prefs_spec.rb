@@ -46,9 +46,39 @@ describe "Group prefs" do
         end
       end
 
-      it "should let you pick a committee member as membership secretary"
-      it "should let you deselect the membership secretary"
-      it "should warn about blank emails"
+      it "should let you pick a committee member as membership secretary" do
+        membership = FactoryGirl.create(:group_membership, group: current_group, role: "committee")
+        visit edit_group_prefs_path(current_group)
+
+        select membership.user.name, from: "Membership secretary"
+        click_on "Save"
+        current_group.reload
+        current_group.prefs.membership_secretary.should eql(membership.user)
+      end
+
+      it "should let you deselect the membership secretary" do
+        membership = FactoryGirl.create(:group_membership, group: current_group, role: "committee")
+        current_group.prefs.membership_secretary = membership.user
+        current_group.prefs.save!
+
+        visit edit_group_prefs_path(current_group)
+        select "", from: "Membership secretary"
+        click_on "Save"
+        current_group.reload
+        current_group.prefs.membership_secretary.should be_nil
+      end
+
+      it "should warn about blank emails" do
+        current_group.email = ""
+        current_group.save
+        visit edit_group_prefs_path(current_group)
+
+        current_group.email.should be_blank
+        current_group.prefs.membership_secretary.should be_blank
+        current_group.prefs.notify_membership_requests.should be_true
+        # ... therefore ...
+        page.should have_content(I18n.t(".group.prefs.edit.no_email_warning"))
+      end
     end
   end
 
