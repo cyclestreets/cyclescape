@@ -9,6 +9,20 @@ class Notifications < ActionMailer::Base
          subject: t('.mailers.notifications.gmr_confirmed.subject', group_name: @group.name))
   end
 
+  def new_group_membership_request(request)
+    @user = request.user
+    @group = request.group
+    if @group.prefs.notify_membership_requests?
+      if @group.prefs.membership_secretary
+        mail to: @group.prefs.membership_secretary.name_with_email,
+             subject: t('.mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
+      elsif !@group.email.blank?
+        mail to: @group.name_with_email,
+             subject: t('.mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
+      end
+    end
+  end
+
   # Send notification to member that thread has been created
   def new_group_thread(thread, member)
     @thread = thread

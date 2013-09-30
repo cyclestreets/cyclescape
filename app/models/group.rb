@@ -50,6 +50,10 @@ class Group < ActiveRecord::Base
     "#{id}-#{short_name}"
   end
 
+  def name_with_email
+    "#{name} <#{email}>"
+  end
+
   def membership_for(user)
     memberships.where(user_id: user.id).first
   end

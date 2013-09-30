@@ -25,6 +25,7 @@ class Group::MembershipRequestsController < ApplicationController
 
       if @request.save
         redirect_to @group, notice: t(".group.membership_requests.create.requested")
+        Notifications.new_group_membership_request(@request).deliver
       else
         render :new
       end

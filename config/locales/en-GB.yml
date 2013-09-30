@@ -464,6 +464,8 @@
     notifications:
       gmr_confirmed:
         subject: "You are now a member of the Cyclescape group for %{group_name}"
+      new_gmr:
+        subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
       new_group_thread:
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
       new_group_location_issue:
