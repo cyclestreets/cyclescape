@@ -13,5 +13,17 @@
 require 'spec_helper'
 
 describe GroupPref do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:group) }
+
+  describe "attributes" do
+    booleans = %w(
+      notify_membership_requests
+      )
+
+    booleans.each do |attr|
+      it "should respond to #{attr} with true or false" do
+        subject.send(attr).should_not be_nil
+      end
+    end
+  end
 end
