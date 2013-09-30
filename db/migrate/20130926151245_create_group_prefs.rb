@@ -8,7 +8,7 @@ class CreateGroupPrefs < ActiveRecord::Migration
   def up
     create_table :group_prefs do |t|
       t.integer :group_id, null: false
-      t.integer :membship_secretary_id
+      t.integer :membership_secretary_id
       t.boolean :notify_membership_requests, null: false, default: true
       t.timestamps
     end

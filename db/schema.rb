@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20130926151245) do
 
   create_table "group_prefs", :force => true do |t|
     t.integer  "group_id",                                     :null => false
-    t.integer  "membship_secretary_id"
+    t.integer  "membership_secretary_id"
     t.boolean  "notify_membership_requests", :default => true, :null => false
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
