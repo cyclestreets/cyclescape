@@ -11,6 +11,7 @@
         actions: "Actions"
         new_group: "Create a new group"
         edit: "Edit"
+        edit_prefs: "Edit Prefs"
         edit_profile: "Edit Profile"
         group_email: "Group Email"
         members: "Members"
