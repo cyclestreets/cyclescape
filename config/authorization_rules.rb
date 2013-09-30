@@ -34,6 +34,10 @@ authorization do
       to [:index, :confirm, :reject]
       if_attribute committee_members: contains { user }
     end
+    has_permission_on :group_prefs do
+      to :manage
+      if_attribute committee_members: contains { user }
+    end
     has_permission_on :group_profiles do
       to :manage
       if_attribute committee_members: contains { user }

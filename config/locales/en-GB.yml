@@ -135,6 +135,7 @@
         title: "Sign in"
         sign_in_button: "Sign in"
   group:
+    group_prefs_tab: "Group preferences"
     group_profile_tab: "Group profile"
     group_management: "Group management"
     membership_list_tab: "Membership list"
@@ -226,6 +227,13 @@
         title: "New Group Thread"
       update:
         success: "Thread updated"
+    prefs:
+      edit:
+        no_email_warning: "Warning! Your settings indicate that you want notifications sent to your group, but there is no email address recorded for this group. Either choose a membership secretary, or ask for your group email to be set by a site administrator."
+        title: "Edit Preferences"
+      update:
+        failure: "Couldn't update preferences"
+        success: "Preferences Updated"
     profiles:
       edit:
         title: "Edit Profile"
@@ -238,6 +246,7 @@
   groups:
     show:
       edit_group_profile: "Edit the group profile"
+      edit_group_prefs: "Edit the group preferences"
       edit_group_members: "Edit the membership list"
       group_management: "Group management"
       group_organisers: "Group organisers"
