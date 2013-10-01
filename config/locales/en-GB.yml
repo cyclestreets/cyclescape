@@ -207,6 +207,10 @@
         status: "Status"
         title: "Membership requests for %{group}"
         user: "User"
+        membership_status:
+          confirmed: "Confirmed"
+          pending: "Pending"
+          unconfirmed: "Unconfirmed"
       new:
         title: "Request membership of %{group_name}"
         your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
@@ -737,6 +741,16 @@
     medium: "Moderately Important"
     low: "Marginal Interest"
     very_low: "Not of Interest"
+  thread_privacy_options:
+    public: "Public"
+    group: "Group"
+    committee: "Committee"
+  user_roles:
+    member: "Member"
+    admin: "Admin"
+  group_membership_roles:
+    member: "Member"
+    committee: "Committee"
   user:
     locations:
       create:

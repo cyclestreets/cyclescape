@@ -68,6 +68,10 @@ class User < ActiveRecord::Base
   validates :display_name, uniqueness: true, allow_blank: true
   validates :role, presence: true, inclusion: {in: ALLOWED_ROLES} 
 
+  def self.user_roles_map
+    ALLOWED_ROLES.map {|p,v| [I18n.t(".user_roles.#{p.to_s}"), v] }
+  end
+
   def self.find_or_invite(email_address, name = nil)
     existing = find_by_email(email_address)
     return existing if existing
