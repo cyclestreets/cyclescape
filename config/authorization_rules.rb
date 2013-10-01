@@ -5,7 +5,7 @@ authorization do
 
   role :admin do
     includes :member
-    has_permission_on :admin_groups, :group_members, :group_memberships, :group_membership_requests, :group_profiles, to: :manage
+    has_permission_on :admin_groups, :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
     has_permission_on :admin_users, to: :manage
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
@@ -32,6 +32,10 @@ authorization do
     end
     has_permission_on :group_membership_requests do
       to [:index, :confirm, :reject]
+      if_attribute committee_members: contains { user }
+    end
+    has_permission_on :group_prefs do
+      to :manage
       if_attribute committee_members: contains { user }
     end
     has_permission_on :group_profiles do
