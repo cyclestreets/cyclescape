@@ -397,7 +397,7 @@
       issues_tooltip: "Podané podněty zobrazené na mapě nebo jako seznam"
       library: "Knihovna"
       library_tooltip: "Znovupoužitelné zdroje"
-      loading: "Prosím čekejte..."
+      loading: "Prosím čekejte\u2026"
       threads: "Diskuzní vlákna"
       threads_tooltip: "Všechna diskuzní témata"
       title: "Cyklisté sobě"
@@ -626,7 +626,7 @@
       compose_new: "Vytvořit novou"
       from_library: "Z knihovny"
       recently_added: "Nedávno přidané"
-      select_button: 'Vybrat...'
+      select_button: "Vybrat\u2026"
       search_results: "Výsledky vyhledávání"
       go: "Vyhledat"
       back: "Zpět"
@@ -668,7 +668,7 @@
       undo: "zpět"
     map_search:
       near: "poblíž"
-      searching: "Hledám..."
+      searching: "Hledám\u2026"
       search_failed: "Hledání bohužel selhalo."
       showing: "Ukazuji"
       sorry_we_couldnt_find: "Bohužel se nepodařilo nic najít."

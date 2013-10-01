@@ -400,7 +400,7 @@
       issues_tooltip: "Reported problems, browsable on the map or as a list"
       library: "Library"
       library_tooltip: "Reusable resources for campaigning"
-      loading: "Please wait..."
+      loading: "Please wait\u2026"
       threads: "Discussion threads"
       threads_tooltip: "Discussions on each issue"
       title: "Cyclescape"
@@ -673,7 +673,7 @@
       undo: "undo"
     map_search:
       near: "near"
-      searching: "Searching..."
+      searching: "Searching\u2026"
       search_failed: "Sorry, the search failed this time."
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
