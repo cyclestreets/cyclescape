@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224124917) do
+ActiveRecord::Schema.define(:version => 20130926151245) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -57,6 +57,16 @@ ActiveRecord::Schema.define(:version => 20121224124917) do
 
   add_index "group_memberships", ["group_id"], :name => "index_group_memberships_on_group_id"
   add_index "group_memberships", ["user_id"], :name => "index_group_memberships_on_user_id"
+
+  create_table "group_prefs", :force => true do |t|
+    t.integer  "group_id",                                     :null => false
+    t.integer  "membership_secretary_id"
+    t.boolean  "notify_membership_requests", :default => true, :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "group_prefs", ["group_id"], :name => "index_group_prefs_on_group_id", :unique => true
 
   create_table "group_profiles", :force => true do |t|
     t.integer  "group_id",                                                         :null => false

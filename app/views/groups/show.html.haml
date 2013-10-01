@@ -52,9 +52,12 @@
     %section.box
       %h2= t ".group_management"
       %ul.thread-metadata-listings
-        %li 
+        %li
           = link_to edit_group_profile_path(@group) do
             %p= t(".edit_group_profile")
+        %li
+          = link_to edit_group_prefs_path(@group) do
+            %p= t(".edit_group_prefs")
         %li
           = link_to group_members_path(@group) do
             %p= t(".edit_group_members")

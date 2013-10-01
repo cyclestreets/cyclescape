@@ -116,4 +116,50 @@ describe "Group Membership Requests" do
       it "should not cancel the request"
     end
   end
+
+  context "new request notifications" do
+    include_context "signed in as a site user"
+    let(:group) { FactoryGirl.create(:group) }
+
+    before do
+      visit group_path(group)
+      click_link I18n.t(".groups.show.join_this_group")
+    end
+
+    context "with notifications turned off" do
+      it "should not send an email" do
+        group.prefs.notify_membership_requests = false
+        group.prefs.save!
+
+        click_button "Create Group membership request"
+        all_emails.count.should eql(0)
+      end
+    end
+
+    context "without a membership secretary" do
+      it "should send an email to the group" do
+        click_button "Create Group membership request"
+
+        open_email(group.email)
+        current_email.subject.should include(current_user.name)
+        current_email.subject.should include(group.name)
+        current_email.should have_body_text("You can confirm or reject the membership request")
+      end
+    end
+
+    context "with a membership secretary" do
+      let (:membership_secretary) { FactoryGirl.create(:user) }
+
+      it "should send an email to the membership secretary" do
+        group.prefs.membership_secretary = membership_secretary
+        group.prefs.save!
+        click_button "Create Group membership request"
+
+        open_email(membership_secretary.email)
+        current_email.subject.should include(current_user.name)
+        current_email.subject.should include(group.name)
+        current_email.should have_body_text("You can confirm or reject the membership request")
+      end
+    end
+  end
 end

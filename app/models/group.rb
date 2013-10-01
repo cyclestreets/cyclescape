@@ -21,12 +21,14 @@ class Group < ActiveRecord::Base
   has_many :membership_requests, class_name: "GroupMembershipRequest"
   has_many :threads, class_name: "MessageThread"
   has_one :profile, class_name: "GroupProfile"
+  has_one :prefs, class_name: "GroupPref"
 
   validates :name, presence: true, uniqueness: true
   validates :short_name, presence: true, uniqueness: true, subdomain: true
   validates :default_thread_privacy, inclusion: {in: MessageThread::ALLOWED_PRIVACY}
 
   after_create :create_default_profile, unless: :profile
+  after_create :create_default_prefs, unless: :prefs
 
   def committee_members
     members.where("group_memberships.role = 'committee'").order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")
@@ -46,6 +48,10 @@ class Group < ActiveRecord::Base
 
   def to_param
     "#{id}-#{short_name}"
+  end
+
+  def name_with_email
+    "#{name} <#{email}>"
   end
 
   def membership_for(user)
@@ -76,5 +82,9 @@ class Group < ActiveRecord::Base
 
   def create_default_profile
     build_profile.save!
+  end
+
+  def create_default_prefs
+    build_prefs.save!
   end
 end
