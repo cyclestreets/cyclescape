@@ -1,0 +1,92 @@
+#
+# Czech translation for Devise - config/locales/devise.cz.yml
+# 'cs' locale by https://github.com/bver
+# Feel free to correct my translation.
+#
+# Note: devise.failure.invalid was intentionally changed from "email" to "identity" -
+# - not all configurations use config.authentication_keys = [ :email ]
+#
+# Additional translations at http://github.com/plataformatec/devise/wiki/I18n
+
+cs-CZ:
+  errors:
+    messages:
+      expired: "nenalezen, prosím vyžádejte si nový"
+      not_found: "nenalezen"
+      already_confirmed: "byl již potvrzen, prosím, zkuste se přihlásit"
+      not_locked: "nebyl uzamčen"
+      not_saved:
+        one: "%{resource} nebyl uložen kvůli chybě:"
+        other: "%{resource} nebyl uložen kvůli %{count} chybám:"
+
+  devise:
+    shared:
+      links:
+         sign_up: "Registrovat"
+         sign_in: "Přihlásit"
+         forgot_password: "Zapomenuté heslo?"
+         no_confirmation_instructions: "Nepřišel vám email s potvrzením registrace?"
+         no_unlock_instructions: "Nepřišel vám email s instrukcemi pro odblokování účtu?"
+    failure:
+      already_authenticated: 'Přihlášení již proběhlo.'
+      unauthenticated: 'Musíte se zaregistrovat nebo přihlásit, pak můžete pokračovat.'
+      unconfirmed: 'Musíte potvrdit svůj účet, pak můžete pokračovat.'
+      locked: 'Váš účet je uzamčen.'
+      invalid: 'Neplatná identita nebo heslo.'
+      invalid_token: 'Neplatný ověřovací symbol.'
+      timeout: 'Vaše relace vypršela, přihlašte se prosím znovu, pak můžete pokračovat.'
+      inactive: 'Váš účet ještě nebyl aktivován.'
+    sessions:
+      signed_in: 'Přihlášení úspěšné.'
+      signed_out: 'Odhlášení úspěšné.'
+    passwords:
+      new:
+         forgot_password: "Zapomenuté heslo?"
+         send_reset_instuctions: "Odeslat instrukce k obnovení hesla"
+      send_instructions: 'Za několik minut obdržíte email s instrukcemi k nastavení nového hesla.'
+      updated: 'Vaše heslo bylo úspěšně změněno. Nyní jste přihlášen(a).'
+      send_paranoid_instructions: "Pokud je váš email uložen v naší databázi, obdržíte email s odkazem pro obnovení hesla"
+    confirmations:
+      new:
+         resend_confirmation: "Znovu odeslat email s potvrzením registrace"
+         resend_confirmation_submit: "Odeslat potvrzení"
+      send_instructions: 'Za několik minut obdržíte email s instrukcemi k potvrzení vašeho účtu.'
+      send_paranoid_instructions: 'Pokud je váš email uložen v naší databázi, několik minut obdržíte email s instrukcemi k potvrzení vašeho účtu.'
+      confirmed: 'Váš účet byl úspěšně potvrzen. Nyní jste přihlášen(a).'
+    invitations:
+      edit:
+        title: 'Potvrďte váš účet'
+        info: 'Byl jste pozván, aby jste se připojil k portálu Cyklisté sobě. Aby jste byly schopni se přihlásit, prosím doplňte údaje k vašemu účtu o heslo. Můžete také změnit vaši emailovou adresu na takovou, kterou chcete s touto službou používat.'
+        commit_button: 'Potvrdit účet'
+        confirm: 'Skutečně?'
+        cancel_account: 'zrušit účet'
+        cancel_header: 'Zrušit účet'
+        unhappy_with_account_html: 'Pokud se svým účtem nejste spokojeni, můžete %{confirm_link}.'
+    registrations:
+      signed_up: 'Vítejte! Registrace byla úspěšná.'
+      updated: 'Váš účet byl úspěšně aktualizován.'
+      destroyed: 'Nashle! Váš účet byl úspěšně zrušen. Doufáme, že se brzy opět uvidíme.'
+      inactive_signed_up: 'Registrace byla úspěšná. Nicméně, nemůžete se přihlásit, protože: "%{reason}".'
+      signed_up_but_unconfirmed: 'Zpráva s potvrzovacím odkazem byla odeslána na vaši emailovou adresu. Prosím, pro aktivaci vašeho účtu otevřete tento odkaz.'
+      signed_up_but_inactive: 'Registrace byla úspěšná. Ještě se ale nemůžete přihlásit, protože váš účet nebyl aktivován.'
+      signed_up_but_locked: 'Registrace byla úspěšná. Nemůžete se ale přihlásit, protože váš účet byl zablokován.'
+      edit:
+        confirm: 'Skutečně?'
+        cancel_account: 'zrušit účet'
+        cancel_header: 'Zrušit účet'
+        unhappy_with_account_html: 'Pokud se svým účtem nejste spokojeni, můžete %{confirm_link}.'
+        back: "Zpět"
+    unlocks:
+      send_instructions: 'Za několik minut obdržíte email s instrukcemi, jak odemknout svůj účet.'
+      unlocked: 'Váš účet byl úspěšně odemknut. Nyní jste přihlášen(a).'
+      send_paranoid_instructions: 'Pokud váš účet existuje, během několika minut dostanete email s instrukcemi jak postupovat dál.'
+    omniauth_callbacks:
+      success: 'Úspěšná autorizace z účtu %{kind}.'
+      failure: 'Není možné autorizovat z %{kind}, protože: "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Potvrzovací instrukce'
+      reset_password_instructions:
+        subject: 'Instrukce k nastavení nového hesla'
+      unlock_instructions:
+        subject: 'Instrukce k odemknutí účtu'

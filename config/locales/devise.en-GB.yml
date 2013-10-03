@@ -12,6 +12,13 @@ en-GB:
         other: "%{count} errors prohibited this %{resource} from being saved:"
 
   devise:
+    shared:
+      links:
+         sign_in: "Sign in"
+         sign_up: "Sign up"
+         forgot_password: "Forgot your password?"
+         no_confirmation_instructions: "Didn't receive confirmation instructions?"
+         no_unlock_instructions: "Didn't receive unlock instructions?"
     failure:
       already_authenticated: 'You are already signed in.'
       unauthenticated: 'You need to sign in or sign up before continuing.'
@@ -25,10 +32,16 @@ en-GB:
       signed_in: 'You are signed in'
       signed_out: 'You have signed out'
     passwords:
+      new:
+         forgot_password: "Forgot your password?"
+         send_reset_instuctions: "Send me reset password instructions"
       send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
       updated: 'Your password was changed successfully. You are now signed in.'
       send_paranoid_instructions: "If your e-mail exists on our database, you will receive a password recovery link on your e-mail"
     confirmations:
+      new:
+         resend_confirmation: "Resend confirmation instructions"
+         resend_confirmation_submit: "Resend confirmation instructions"
       send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
       send_paranoid_instructions: 'If your e-mail exists on our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
       confirmed: 'Your account was successfully confirmed. You are now signed in.'
@@ -53,6 +66,7 @@ en-GB:
         cancel_account: 'cancel your account'
         cancel_header: 'Cancel my account'
         unhappy_with_account_html: 'If you are unhappy with your account, you can %{confirm_link}.'
+        back: "Back"
     unlocks:
       send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
       unlocked: 'Your account was successfully unlocked. You are now signed in.'

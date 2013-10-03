@@ -50,6 +50,14 @@ class MessageThread < ActiveRecord::Base
   state_machine :state, initial: :new do
   end
 
+  def self.non_committee_privacies_map
+    (ALLOWED_PRIVACY - ["committee"]).map {|n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+  end
+
+  def self.privacies_map
+    ALLOWED_PRIVACY.map {|n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+  end
+
   def self.with_messages_from(user)
     where "EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)", user
   end

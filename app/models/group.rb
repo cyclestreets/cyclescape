@@ -78,6 +78,10 @@ class Group < ActiveRecord::Base
     end
   end
 
+  def thread_privacy_options_map_for(user)
+    thread_privacy_options_for(user).map {|n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+  end
+
   protected
 
   def create_default_profile
