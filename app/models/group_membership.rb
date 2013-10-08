@@ -34,7 +34,7 @@ class GroupMembership < ActiveRecord::Base
   accepts_nested_attributes_for :user
 
   def self.allowed_roles_map
-    ALLOWED_ROLES.map {|r| [r.capitalize, r] }
+    ALLOWED_ROLES.map {|r| [I18n.t(".group_membership_roles.#{r.to_s}"), r] }
   end
 
   def role=(val)

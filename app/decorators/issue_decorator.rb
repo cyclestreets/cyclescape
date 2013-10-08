@@ -56,7 +56,7 @@ class IssueDecorator < ApplicationDecorator
 
   def creation_time
     h.content_tag(:time, datetime: issue.created_at) do
-      h.time_ago_in_words(issue.created_at) + " ago"
+      I18n.t("issues.show.issue_created_at", time_ago: h.time_ago_in_words(issue.created_at))
     end
   end
 

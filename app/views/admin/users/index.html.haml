@@ -18,7 +18,7 @@
         %td= user.display_name
         %td= link_to user.full_name, user_profile_path(user)
         %td= user.email
-        %td= user.role
+        %td= t "user_roles.#{user.role}"
         %td= t ".created_at", time_ago: time_ago_in_words(user.created_at)
         %td= t ".disabled_at", time_ago: time_ago_in_words(user.disabled_at) if user.disabled_at?
         %td= link_to t(".edit"), edit_admin_user_path(user)

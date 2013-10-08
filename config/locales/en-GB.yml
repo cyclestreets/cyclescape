@@ -23,6 +23,8 @@
         introduction: "As a system administrator, you can use this form to create a new group."
       update:
         success: "Group updated"
+      edit:
+         edit_group: "Edit group"
     home:
       index:
         admin_interface: "Administrative area"
@@ -55,6 +57,8 @@
         preferences: "Preferences"
       update:
         success: "User updated"
+      edit:
+        edit_user: "Edit user"
   application:
     account_disabled: "Your account has been disabled by an administrator"
     permission_denied: "You are not authorised to access that page."
@@ -203,6 +207,10 @@
         status: "Status"
         title: "Membership requests for %{group}"
         user: "User"
+        membership_status:
+          confirmed: "Confirmed"
+          pending: "Pending"
+          unconfirmed: "Unconfirmed"
       new:
         title: "Request membership of %{group_name}"
         your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
@@ -341,6 +349,7 @@
       admin_thread_pointer_html: "You can %{administrative_matters_link} with no geographical context (e.g. organising a general meeting) in the group admin threads section."
       administrative_matters: "add a purely administrative matter"
     show:
+      issue_created_at: "%{time_ago} ago"
       added_by_html: "Reported by %{name} on %{time}"
       cancel_vote: "Cancel"
       confirm_delete: "Are you sure?"
@@ -382,13 +391,16 @@
       admin_tooltip: "Admin area, for system administrators"
       dashboard: "My Cyclescape"
       dashboard_tooltip: "Your personal dashboard, showing updates on discussion threads you are subscribed to"
+      sign_out: "Sign out"
+      sign_in: "Sign in"
+      sign_up: "Sign up"
       feedback: "Feedback"
       home: "Home"
       issues: "Issues"
       issues_tooltip: "Reported problems, browsable on the map or as a list"
       library: "Library"
       library_tooltip: "Reusable resources for campaigning"
-      loading: "Please wait..."
+      loading: "Please wait\u2026"
       threads: "Discussion threads"
       threads_tooltip: "Discussions on each issue"
       title: "Cyclescape"
@@ -616,6 +628,19 @@
       create_note: "Create Library Note"
       create_document: "Create Library Document"
     new:
+      compose_new: "Compose New"
+      from_library: "From Library"
+      recently_added: "Recently added"
+      select_button: "Select\u2026"
+      search_results: "Search Results"
+      go: "Go"
+      back: "Back"
+      select_header: "Select"
+      add_item_to_thread: "Add item to thread"
+      explain_library_item: "Explain how this library item relates to the discussion thread"
+      view_document: "View Document"
+      add_to_thread: "Add to thread"
+      search_issues: "Search issues"
       deadline_message: "Deadline/date"
       document_message: "Attachment"
       library_item_message: "Library"
@@ -648,7 +673,7 @@
       undo: "undo"
     map_search:
       near: "near"
-      searching: "Searching..."
+      searching: "Searching\u2026"
       search_failed: "Sorry, the search failed this time."
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
@@ -716,6 +741,16 @@
     medium: "Moderately Important"
     low: "Marginal Interest"
     very_low: "Not of Interest"
+  thread_privacy_options:
+    public: "Public"
+    group: "Group"
+    committee: "Committee"
+  user_roles:
+    member: "Member"
+    admin: "Admin"
+  group_membership_roles:
+    member: "Member"
+    committee: "Committee"
   user:
     locations:
       create:
