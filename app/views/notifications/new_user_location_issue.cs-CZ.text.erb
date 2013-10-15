@@ -1,0 +1,19 @@
+<%= raw @issue.created_by.name %> založil podnět
+poblíž vaší oblasti typu <%= @category.name %>.
+
+"<%= raw @issue.title %>"
+
+<%= raw @issue.description %>
+
+Na nově založený podnět se můžete podívat na:
+<%= issue_url(@issue) %>
+
+--------
+Tuto zprávu jste dostali, protože máte ve vašem profilu nastaveno odesílání
+záležitostí týkajících se vaší oblasti.
+
+Pro odhlášení těchto zpráv použijte následující odkaz:
+<%= edit_user_prefs_url(@user) %>
+
+Vaši oblast můžete přidat nebo odebrat na:
+<%= user_locations_url %>
