@@ -21,6 +21,7 @@ class SiteComment < ActiveRecord::Base
   after_initialize :set_user_details
 
   validates :body, presence: true
+  validate :body_does_not_contain_spam
   validates :context_url, url: true
 
   def viewed?
@@ -40,4 +41,11 @@ class SiteComment < ActiveRecord::Base
       self.email = user.email
     end
   end
+  
+  def body_does_not_contain_spam
+    unless self.body !~ /(<a ([^>]+)>|<\/a>|\[url\]|\[url=|\[\/url\])/i
+      errors.add(:body, "The message cannot contain HTML.")
+    end
+  end
+  
 end

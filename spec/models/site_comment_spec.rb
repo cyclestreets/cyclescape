@@ -30,6 +30,16 @@ describe SiteComment do
       comment.context_url = "blah"
       comment.should have(1).error_on(:context_url)
     end
+
+    it "should not accept spam" do
+      comment = SiteComment.new
+      comment.body = "Normal feedback without spam"
+      comment.should have(0).errors_on(:body)
+      comment.body = "Spam <a href='www.spammylink.example.com'>link</a>"
+      comment.should have(1).error_on(:body)
+      comment.body = "Spam [url='www.spammylink.example.com']link[/url]"
+      comment.should have(1).error_on(:body)
+    end
   end
 
   context "viewing" do
