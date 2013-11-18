@@ -8,6 +8,7 @@
   %table
     %thead
       %th= t ".user"
+      %th= t ".full_name"
       %th= t ".email"
       %th= t ".requested_at"
       %th= t ".status"
@@ -17,6 +18,7 @@
     - @requests.each do |r|
       %tr
         %td= link_to_profile(r.user)
+        %td= r.user.full_name
         %td= auto_link r.user.email
         %td= t ".created_at", time_ago: time_ago_in_words(r.created_at)
         %td= t ".membership_status.#{r.status}"
