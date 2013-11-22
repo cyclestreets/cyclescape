@@ -19,7 +19,7 @@ gem 'rails_autolink'
 gem 'tweet-button'
 
 # Back-end gems
-gem 'devise', '2.1.2' # pin due to failing tests on 3.0.0 - perhaps attr_accessible related. See https://github.com/plataformatec/devise/issues/2515
+gem 'devise', '~> 2.1.2' # pin due to failing tests on 3.0.0 - perhaps attr_accessible related. See https://github.com/plataformatec/devise/issues/2515
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
