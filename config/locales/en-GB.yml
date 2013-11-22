@@ -239,7 +239,8 @@
       new_group: "Create new group"
       title: "Groups directory"
     compact:
-      no_location: This group doesn't have a location yet.
+      already_member: "You are already a member of this group"
+      no_location: "This group doesn't have a location yet."
     join:
       join_body:
         You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.

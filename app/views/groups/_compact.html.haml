@@ -16,5 +16,4 @@
       - if current_user && !group.members.include?(current_user)
         = render partial: "join", locals: {group: group}
       - else
-        %p
-          You are already a member of this group
+        %p= t ".already_member"
