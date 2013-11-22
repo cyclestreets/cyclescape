@@ -63,7 +63,8 @@ group :development, :test do
 
   gem 'rspec-core'
   gem 'rspec-rails'
-  gem 'spork'
+  gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'ruby-prof'
 end
 
