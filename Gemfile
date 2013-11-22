@@ -48,7 +48,7 @@ group :assets do
 end
 
 group :development do
-  gem 'annotate', '>=2.5.0.pre1', require: false
+  gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
 
   # Following is required for Resque workers in development to load due to
