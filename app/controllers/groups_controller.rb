@@ -58,9 +58,6 @@ class GroupsController < ApplicationController
                         title: group.name,
                         #size_ratio: group.size_ratio(geom),
                         #url: view_context.url_for(group.profile),
-                        # FIXME: This next line can't decide if it wants to have group.short_name or
-                        # group.profile.group.short_name the error is:
-                        # uninitialized constant Group::GroupsController
                         url: root_url(subdomain: group.short_name),
                         description: group.trunctated_description})
   end
