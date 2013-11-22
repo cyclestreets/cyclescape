@@ -245,12 +245,12 @@
       join_body:
         You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_this_group: "Join this group"
+      group_request_pending: "Your request to join this group is pending."
     show:
       edit_group_profile: "Edit the group profile"
       edit_group_members: "Edit the membership list"
       group_management: "Group management"
       group_organisers: "Group organisers"
-      group_request_pending: "Your request to join this group is pending."
       join_title: "Join our Cyclescape group"
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
