@@ -59,7 +59,7 @@ class GroupsController < ApplicationController
                         #size_ratio: group.size_ratio(geom),
                         #url: view_context.url_for(group.profile),
                         url: root_url(subdomain: group.short_name),
-                        description: group.trunctated_description})
+                        description: view_context.auto_link(group.trunctated_description)})
   end
 
 end
