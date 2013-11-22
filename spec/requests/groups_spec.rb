@@ -40,11 +40,11 @@ describe "Groups" do
         profile.save!
         visit group_path(profile.group)
 
-        page.should have_content(I18n.t("groups.show.join_body" , group: profile.group.name))
+        page.should have_content(I18n.t("groups.join.join_body" , group: profile.group.name))
       end
     end
   end
-  
+
   describe "index" do
     let(:profile_2) { FactoryGirl.create(:group_profile)}
     before do
