@@ -279,8 +279,9 @@
       groups_title: "Cyclescape Groups"
       groups_intro_html:
         Cyclescape is used by <strong>cycle campaign groups</strong> across
-        the country. <strong>Find groups local to you</strong> and see what
+        the country. <strong>%{groups_link}</strong> and see what
         they're working to fix.
+      find_local_groups: "Find groups local to you"
       twitter_title: "Cyclescape on Twitter"
     guide:
       title: "How Cyclescape Works"
