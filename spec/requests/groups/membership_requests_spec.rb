@@ -99,7 +99,7 @@ describe "Group Membership Requests" do
     describe "signing up again" do
       it "should not show a link on the page" do
         visit group_path(group)
-        page.should_not have_content(I18n.t(".groups.join_this_group"))
+        page.should_not have_content(I18n.t(".groups.join.join_this_group"))
         page.should have_content(I18n.t(".groups.join.group_request_pending"))
       end
 
