@@ -13,7 +13,7 @@
       %p
         = auto_link simple_format group.description
     .group-actions
-      - if current_user && !group.members.include?(current_user)
-        = render partial: "join", locals: {group: group}
-      - else
+      - if current_user && group.members.include?(current_user)
         %p= t ".already_member"
+      - else
+        = render partial: "join", locals: {group: group}
