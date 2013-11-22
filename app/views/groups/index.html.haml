@@ -1,8 +1,6 @@
 %section.groups.content-no-sidebar#content
   %header#group-list-header
     %h1= t ".title"
-    .tasks
-      = link_to t(".new_group"), new_group_path, class: "btn-big-green"
   #group-list-tabs
     %ul.tabs.styled-tabs
       %li= link_to t(".list_tab"), "#", class: "list"
@@ -17,3 +15,4 @@
           = will_paginate @groups
       .pane
         = render "all_map"
+  %p= t ".new_group_instructions_html", feedback_link: link_to(t(".send_some_feedback"), new_site_comment_path)
