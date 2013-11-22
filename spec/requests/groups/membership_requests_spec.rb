@@ -123,7 +123,7 @@ describe "Group Membership Requests" do
 
     before do
       visit group_path(group)
-      click_link I18n.t(".groups.show.join_this_group")
+      click_link I18n.t(".groups.join.join_this_group")
     end
 
     context "with notifications turned off" do
