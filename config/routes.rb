@@ -55,6 +55,9 @@ Cyclescape::Application.routes.draw do
       end
       resource :prefs, only: [:edit, :update]
     end
+    collection do
+      get "all_geometries"
+    end
   end
 
   resources :threads, controller: "message_threads" do

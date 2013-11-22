@@ -15,7 +15,7 @@
 %aside#sidebar
   %section.homepage-groups
     %h2= t ".groups_title"
-    %p= t ".groups_intro_html"
+    %p= t ".groups_intro_html", groups_link: link_to(t(".find_local_groups"), groups_path)
   %section.twitter
     = render partial: "twitter"
 

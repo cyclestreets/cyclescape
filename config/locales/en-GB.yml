@@ -254,17 +254,28 @@
       update:
         success: "Profile Updated"
   groups:
+    index:
+      list_tab: "List"
+      map_tab: "Map"
+      new_group: "Create new group"
+      new_group_instructions_html: "To create a group on Cyclescape for your local cycling campaign please %{feedback_link} and we'll get back in touch with you soon."
+      send_some_feedback: "send some feedback"
+      title: "Groups directory"
+    compact:
+      already_member: "You are already a member of this group"
+      no_location: "This group doesn't have a location yet."
+    join:
+      join_body:
+        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
+      join_this_group: "Join this group"
+      group_request_pending: "Your request to join this group is pending."
     show:
       edit_group_profile: "Edit the group profile"
       edit_group_prefs: "Edit the group preferences"
       edit_group_members: "Edit the membership list"
       group_management: "Group management"
       group_organisers: "Group organisers"
-      group_request_pending: "Your request to join this group is pending."
-      join_body:
-        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_title: "Join our Cyclescape group"
-      join_this_group: "Join this group"
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public threads
@@ -290,8 +301,9 @@
       groups_title: "Cyclescape Groups"
       groups_intro_html:
         Cyclescape is used by <strong>cycle campaign groups</strong> across
-        the country. <strong>Find groups local to you</strong> and see what
+        the country. <strong>%{groups_link}</strong> and see what
         they're working to fix.
+      find_local_groups: "Find groups local to you"
       twitter_title: "Cyclescape on Twitter"
     guide:
       title: "How Cyclescape Works"

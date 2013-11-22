@@ -50,6 +50,16 @@ module MapsHelper
     end
   end
 
+  def display_group_bbox_map(start_location, geometry_bbox_url, &block)
+    map = basic_map do |map, page|
+      centre_map(start_location, map, page)
+      add_location_layer("Groups", geometry_bbox_url, OpenLayers::Strategy::BBOX.new(resFactor: 3, ratio: 1.5), map, page)
+      page << 'MapGroupPopup.init(map, locationlayer)'
+
+      yield(map, page) if block_given?
+    end
+  end
+
   def projection
     OpenLayers::Projection.new("EPSG:4326")
   end

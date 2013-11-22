@@ -1,0 +1,19 @@
+%li
+  %article.group
+    .map
+      - if (group.profile.location)
+        - m = tiny_display_map(group.profile, geometry_group_profile_path(group, :json), "tinymap") do |map, page, dom_id|
+          %div{id: dom_id, class: "tinymap"}
+        != m.to_html
+      - else
+        %p= t ".no_location"
+    .group-content
+      %h3= link_to group.name, group
+      .meta
+      %p
+        = auto_link simple_format group.description
+    .group-actions
+      - if current_user && group.members.include?(current_user)
+        %p= t ".already_member"
+      - else
+        = render partial: "join", locals: {group: group}

@@ -88,7 +88,7 @@ describe "Group Membership Requests" do
 
     before do
       visit group_path(group)
-      click_link I18n.t(".groups.show.join_this_group")
+      click_link I18n.t(".groups.join.join_this_group")
       click_button "Create Group membership request"
     end
 
@@ -99,8 +99,8 @@ describe "Group Membership Requests" do
     describe "signing up again" do
       it "should not show a link on the page" do
         visit group_path(group)
-        page.should_not have_content(I18n.t(".groups.join_this_group"))
-        page.should have_content(I18n.t(".groups.show.group_request_pending"))
+        page.should_not have_content(I18n.t(".groups.join.join_this_group"))
+        page.should have_content(I18n.t(".groups.join.group_request_pending"))
       end
 
       it "should not let you go directly" do

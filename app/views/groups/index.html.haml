@@ -1,0 +1,18 @@
+%section.groups.content-no-sidebar#content
+  %header#group-list-header
+    %h1= t ".title"
+  #group-list-tabs
+    %ul.tabs.styled-tabs
+      %li= link_to t(".list_tab"), "#", class: "list"
+      %li= link_to t(".map_tab"), "#", class: "map-pin"
+    .panes
+      .pane
+        %ul.group-list
+          - if @groups.empty?
+            = t(".no_results_found")
+          = render partial: "compact", collection: @groups, as: :group
+        - if @groups.respond_to?(:total_pages)
+          = will_paginate @groups
+      .pane
+        = render "all_map"
+  %p= t ".new_group_instructions_html", feedback_link: link_to(t(".send_some_feedback"), new_site_comment_path)
