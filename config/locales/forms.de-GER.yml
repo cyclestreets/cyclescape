@@ -1,0 +1,136 @@
+﻿# Form fields, labels, hints, placeholders, and error messages
+
+"de-GER":
+  cancel: "Abbrechen" # Cancel
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            full_name:
+              blank: "Bitte gebe einen Namen ein" # Please enter a name
+              email: "Bitte gebe eine Email-Adresse ein" # Please enter an email address
+
+  formtastic:
+    labels:
+      group:
+        name: "Name der Gruppe" # Name of the group
+        short_name: "Subdomain"
+      group_membership:
+        role: "Art der Mitgliedschaft" # Membership type
+      group_pref:
+        notify_membership_requests: "Benachrichtigung bei Antrag auf Mitgliedschaft aktivieren" # Enable membership request notifications
+      issue:
+        new: &labels_issue_new
+          description: "Write a description" # Erstelle eine Beschreibung
+          location: "Teile Deinen Standort mit" # Provide a location
+          photo: "Füge ein Foto hinzu" # Add a photo
+          tags_string: "Kennzeichne Dein Thema" Tag your issue
+          title: "Betitel Deinen Bericht" # Title your report
+        create: *labels_issue_new
+        edit: *labels_issue_new
+        update: *labels_issue_new
+        tags_string: "Tags" # Tags
+      library_document:
+        file: "Dokument" # Document
+        tags_string: "Tags" # Tags
+      library_item:
+        tags_string: "Tags" # Tags
+      library_note:
+        body: "Note"
+        tags_string: "Tags" # Tags
+      link_message:
+        url: "URL"
+      message:
+        body: "Nachricht" # Message
+      message_thread:
+        group: "Gehört" # Owned by
+        tags_string: "Tags"  # Tags
+      site_comment:
+        body: "Nachricht" # Message
+      thread_subscription:
+        send_email: "Maile eine neue Nachricht" # Email new messages
+      user_pref:
+        enable_email: "Email-Benachrichtigung aktivieren" # Enable email notifications
+        involve_my_locations: "Vorfälle in der Nähe Deines Standortes" # Matters near my locations
+        involve_my_groups: "Angelegenheiten meiner Gruppe" # My group's matters
+        involve_my_groups_admin: "Beziehe mich ebenso an administrativen Diskussionen meiner Gruppe ein" # Also involve me in my group's administrative discussions
+      user:
+        edit:
+          password: "Neues Passwort" # New Password
+          password_confirmation: "Neue Passwort Bestätigung" # New Password Confirmation
+    hints:
+      user:
+        edit:
+          password: "Lasse dies frei, um Dein aktuelles Passwort zu behalten." # Leave this blank to keep your current password.
+          current_password: "Bitte bestätige Dein aktuelles Passwort, um Änderungen auf dieser Seite durchzuführen." # Please confirm your current password to make changes on this page.
+      group:
+        short_name: "Dürfen nur alphanumerische Kleinbuchstaben sein ; a-z, 0-9" # Must be lower-case alphanumeric; a-z, 0-9
+      group_membership:
+        role: "Wähle, ob sie normale oder Komitee-Mitglieder der Gruppe sind." # Select if they are a normal or committee member of the group.
+        full_name: "Bitte gib ihren Namen ein; sie können es ändern, wenn sie die Einladung akzeptiert haben." # Please enter their name; they can change this when they accept the invite.
+      group_pref:
+        notify_membership_requests: "Eine Benarichtigung wird versandt, wenn ein Cyclescape-Mitglied dieser Gruppe beitreten möchte." # Notifications will be sent when a Cyclescape user asks to join this group
+        membership_secretary: "Wähle optional einen Verwalter für Mitgliedschaften, der Mitglieder-Benachrichtigungen erhält. Trage nichts ein, wenn Benachrichtigungen zur Gruppen-Emailadresse gesendet werden sollen.  " # Choose an optional membership secretary who will receive membership notification emails. Leave blank for notifications to be sent to the group email address.
+      group_profile:
+        joining_instructions: "Die Mitgliedschafts-Beschreibung wird Leuten gezeigt, die dieser Cyclescape-Gruppe beitreten wollen. Vielleicht möchtest Du zum Beispiel Leute zuerst anweisen, für die Mitgliedschaft an anderer Stelle zu zahlen, oder Du bist glücklich über alle und jeden, der deiner Gruppe beitreten möchte. Du kannst das unausgefüllt lassen " # The joining instructions are shown to people who want to join this Cyclescape group. You might want to direct people to pay for membership elsewhere first, for example, or you might be happy for everyone and anyone to join your Cyclescape group. You can leave this blank.
+      issue:
+        new: &hints_issue_new
+          description: "Bitte erkläre Details über das Problem und welchen Effekt es auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich sind." # Please give details about the problem and what effect it is having on cycling. Note that all issues are publicly viewable.
+          photo: "(optional)" # (optional)
+          tags_string: "z. B. Fahrradparken, Hindernis, Baustelle, Weg" # e.g. cycleparking obstruction roadworks path
+          title: "Bitte fasse Dich kurz und sei sachlich." # Please be brief and specific.
+        create: *hints_issue_new
+        edit: *hints_issue_new
+        update: *hints_issue_new
+      message_thread:
+        privacy: "Dies gibt an, wer diese Diskussion sehen und bearbeiten kann." # This specifies who can see and edit this discussion thread.
+        issue: "Die gibt an, welches Thema dieser Diskussion angfügt. Wenn nicht, wird dies eine administrative Diskussion sein." # This specifies which issue this discussion thread is attached to. If none, this will be an administrative thread.
+    actions:
+      update: "Speichern" # Save
+      saving: "Speichere\u2026"# Saving\u2026
+      cancel: "Abbrechen" # Cancel
+      deadline_message:
+        create: "Stichtag hinzufügen" # Add Deadline
+      document_message:
+        create: "Anhang hinzufügen" # Add Attachment
+      group_membership:
+        create: "Mitglied einladen" # Invite member
+      issue:
+        create: "Bericht senden" # Send Report
+        update: "Bericht speichern" Save Report
+        update_tags: "Tags aktualisieren" # Update Tags
+      library_item:
+        update_tags: "Tags aktualisieren" # Update Tags
+      library_item_message:
+        create: "Sammlungseintrag hinzufügen" # Add Library Item
+      library/document:
+        create: "Upload" # Upload
+        document_from_message: "Zur Sammlung hinzufügen" # Add to Library
+      library/note:
+        create: "Notiz erstellen" # Create Note
+        attach_to_document: "Notiz anheften" # Attach note
+      link_message:
+        create: "Link hinzufügen" # Add Link
+      message:
+        create: "Nachricht posten" # Post Message
+      message_thread:
+        create: "Diskussion erstellen" # Create Thread
+        update_tags: "Tags aktualisieren"
+      photo_message:
+        create: "Foto hinzufügen" # Add Photo
+      site_comment:
+        create: "Feedback senden" # Send Feedback
+      user:
+        create: "Registrieren" # Sign up
+        update: "Account aktualisieren" # Update Account
+      user_location:
+        create: "Diesen Standort speichern" # Save this location
+      user_profile:
+        create: "Speichern" # Save
+      user_thread_priority:
+        create: "Speichern" # Save
+      thread_subscription:
+        create: "Dieser Diskussion folgen" # Follow this thread
+        delete: "Dieser Diskussion nicht mher folgen" # Unfollow this thread

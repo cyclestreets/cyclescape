@@ -1,0 +1,7 @@
+﻿# GER German translations for keys used in Decorators
+
+"de-GER":
+  decorators:
+    thread_list:
+      private_thread_title: "[Private Diskussion]" # [Private thread]
+      following: "Folgend" # Following
