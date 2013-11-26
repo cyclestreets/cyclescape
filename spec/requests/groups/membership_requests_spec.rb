@@ -44,7 +44,7 @@ describe "Group Membership Requests" do
       end
     end
 
-    describe "when being inviting a new member" do
+    describe "when being invited as a new member" do
       before do
         visit new_group_membership_path(group_id: current_group)
         @credentials = FactoryGirl.attributes_for(:user)
@@ -62,7 +62,7 @@ describe "Group Membership Requests" do
         click_button "Confirm account"
         page.should have_content("Your password was set successfully. You are now signed in.")
       end
-      
+
       it "should let you complete the invitation and change name and email" do
         user = User.find_by_email(@credentials[:email])
         visit accept_user_invitation_path(invitation_token: user.invitation_token)
