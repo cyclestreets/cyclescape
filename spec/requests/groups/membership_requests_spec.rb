@@ -123,6 +123,32 @@ describe "Group Membership Requests" do
     end
   end
 
+  context "as a guest" do
+    let(:group) { FactoryGirl.create(:group) }
+    let!(:user_details) { FactoryGirl.attributes_for(:user) }
+
+    # This is one long test!
+    it "should let you sign up and request membership" do
+      visit group_path(group)
+      click_link I18n.t(".groups.join.join_this_group")
+      page.should have_content("You need to sign in or sign up before continuing.")
+
+      click_on "Sign up"
+      fill_in "Full name", with: user_details[:full_name]
+      fill_in "Email", with: user_details[:email]
+      fill_in "Password", with: user_details[:password]
+      fill_in "Password confirmation", with: user_details[:password]
+      click_button "Sign up"
+      page.should have_content("A message with a confirmation link has been sent to your email address.")
+
+      open_email(user_details[:email])
+      visit_in_email "Confirm my account"
+      page.should have_content("Your account was successfully confirmed.")
+
+      current_path.should eql(new_group_membership_request_path(group))
+    end
+  end
+
   context "new request notifications" do
     include_context "signed in as a site user"
     let(:group) { FactoryGirl.create(:group) }
