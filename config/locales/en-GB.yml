@@ -220,7 +220,7 @@
         requested: "Membership has been requested"
         already_asked: "You have already asked to join this group"
         already_member: "You are already a member of this group"
-      index:
+      index: &group_membership_requests_index
         actioned_by: "Actioned By"
         are_you_sure: "Are you sure?"
         by: "by %{name}"
@@ -244,6 +244,9 @@
       reject:
         failure: "There was a problem rejecting this membership request"
         success: "Membership rejected"
+      review:
+        <<: *group_membership_requests_index
+        title: "Review a membership request for %{group}"
     message_threads:
       destroy:
         failure: "Couldn't delete thread"

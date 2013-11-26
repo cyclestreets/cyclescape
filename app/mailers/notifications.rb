@@ -12,6 +12,7 @@ class Notifications < ActionMailer::Base
   def new_group_membership_request(request)
     @user = request.user
     @group = request.group
+    @request = request
     if @group.prefs.notify_membership_requests?
       if @group.prefs.membership_secretary
         mail to: @group.prefs.membership_secretary.name_with_email,

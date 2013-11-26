@@ -32,7 +32,7 @@ authorization do
       if_attribute user: is { user }
     end
     has_permission_on :group_membership_requests do
-      to [:index, :confirm, :reject]
+      to [:index, :review, :confirm, :reject]
       if_attribute committee_members: contains { user }
     end
     has_permission_on :group_prefs do

@@ -32,6 +32,12 @@ class Group::MembershipRequestsController < ApplicationController
     end
   end
 
+  # Review an individual membership request - useful for including in notifications
+  # for large groups with many pending membership requests.
+  def review
+    @request = @group.membership_requests.find(params[:id])
+  end
+
   def confirm
     @request = @group.membership_requests.find(params[:id])
     @request.actioned_by = current_user

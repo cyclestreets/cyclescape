@@ -52,6 +52,7 @@ Cyclescape::Application.routes.draw do
       resources :memberships
       resources :membership_requests do
         member do
+          get "review"
           post "confirm"
           post "reject"
           post "cancel"

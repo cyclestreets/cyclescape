@@ -42,6 +42,13 @@ describe "Group Membership Requests" do
         page.should have_content(gmr.user.name)
         current_path.should eql(user_profile_path(gmr.user))
       end
+
+      it "should let you review individual requests" do
+        visit review_group_membership_request_path(gmr.group, gmr.id)
+        click_on "Confirm"
+        open_email(gmr.user.email)
+        current_email.should have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
+      end
     end
 
     describe "when being invited as a new member" do
@@ -79,7 +86,6 @@ describe "Group Membership Requests" do
         updated_user.display_name.should eq "smsm1"
       end
     end
-    
   end
 
   context "as the original user" do
@@ -144,6 +150,9 @@ describe "Group Membership Requests" do
         current_email.subject.should include(current_user.name)
         current_email.subject.should include(group.name)
         current_email.should have_body_text("You can confirm or reject the membership request")
+
+        current_email.should have_body_text review_group_membership_request_url(group, group.pending_membership_requests.last)
+        current_email.should have_body_text group_membership_requests_url(group)
       end
     end
 
