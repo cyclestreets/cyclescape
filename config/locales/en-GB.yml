@@ -40,6 +40,31 @@
         title: "Issue Categories"
       update:
         success: "Category updated"
+    user:
+      locations:
+        create:
+          success: "Location Created"
+        edit:
+          title: "Edit location for %{user_name}"
+        index:
+          all_user_locations: "All locations for %{user_name}"
+          category: "Category"
+          combined_locations: "Combined Locations"
+          combined_locations_guidance: "This is the combined location for this user."
+          confirm: "Are you sure?"
+          delete: "Delete"
+          edit: "Edit"
+          map: "Map"
+          new: "New location"
+          no_locations_yet: "This user has no locations yet."
+          no_locations_guidance: "As an administrator, you can add their first location."
+          no_overlapping_groups: "No overlapping groups"
+          title: "User locations for %{user_name}"
+          overlapping_groups: "Overlapping Groups"
+        new:
+          title: "New location for %{user_name}"
+        update:
+          success: "Location Updated"
     users:
       index:
         created: "Created"
@@ -55,6 +80,7 @@
         role: "Role"
         title: "Users"
         preferences: "Preferences"
+        locations: "Locations"
       update:
         success: "User updated"
       edit:

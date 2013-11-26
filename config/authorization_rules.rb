@@ -7,6 +7,7 @@ authorization do
     includes :member
     has_permission_on :admin_groups, :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
     has_permission_on :admin_users, to: :manage
+    has_permission_on :admin_user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
     has_permission_on :library_documents, :library_notes, to: [:edit, :update]

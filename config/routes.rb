@@ -34,7 +34,15 @@ Cyclescape::Application.routes.draw do
   issues_route
 
   namespace :admin do
-    resources :groups, :users
+    resources :groups
+    resources :users do
+      scope module: "user" do
+        resources :locations do
+          get 'geometry', :on => :member
+          get 'combined_geometry', :on => :collection
+        end
+      end
+    end
     match "home" => "home#index"
   end
 
