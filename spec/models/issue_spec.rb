@@ -147,6 +147,19 @@ describe Issue do
         subject.size_ratio(geom).should eql(0.0)
       end
     end
+
+    describe "too large" do
+      subject { FactoryGirl.create(:issue) }
+
+      it "should be invalid" do
+        large_wkt = 'POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))'
+        geom = factory.parse_wkt(large_wkt)
+        geom.area.should be >= Geo::ISSUE_MAX_AREA
+        subject.location = large_wkt
+        subject.should_not be_valid
+        subject.should have(1).error_on(:size)
+      end
+    end
   end
 
   describe "threads" do

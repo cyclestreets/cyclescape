@@ -6,6 +6,10 @@
   activerecord:
     errors:
       models:
+        issue:
+          attributes:
+            size:
+              less_than: "of the issue is too large."
         user:
           attributes:
             full_name:

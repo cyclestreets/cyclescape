@@ -7,6 +7,7 @@
     %li.input.full-width
       %label.label= t "formtastic.labels.issue.new.location"
       = f.semantic_errors :location
+      = f.semantic_errors :size
       = render partial: "shared/edit_map", locals: {thing: @issue}
     = f.input :tags_string, as: :tags
     = f.input :description
