@@ -81,4 +81,20 @@ describe "Issues in a group subdomain" do
       end
     end
   end
+
+  context "editing" do
+    let(:issue) { FactoryGirl.create(:issue, created_by: current_user) }
+    let(:edit_text) { "Edit this issue" }
+
+    # Check decl_auth context is set correctly for nested controller
+    it "should let you edit the issue" do
+      visit issue_path(issue)
+      click_on edit_text
+      page.should have_content("Edit Issue")
+      fill_in "Title", with: "Something New"
+      click_on "Save"
+      current_path.should == issue_path(issue)
+      page.should have_content("Something New")
+    end
+  end
 end
