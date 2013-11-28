@@ -40,6 +40,31 @@
         title: "Issue Categories"
       update:
         success: "Category updated"
+    user:
+      locations:
+        create:
+          success: "Location Created"
+        edit:
+          title: "Edit location for %{user_name}"
+        index:
+          all_user_locations: "All locations for %{user_name}"
+          category: "Category"
+          combined_locations: "Combined Locations"
+          combined_locations_guidance: "This is the combined location for this user."
+          confirm: "Are you sure?"
+          delete: "Delete"
+          edit: "Edit"
+          map: "Map"
+          new: "New location"
+          no_locations_yet: "This user has no locations yet."
+          no_locations_guidance: "As an administrator, you can add their first location."
+          no_overlapping_groups: "No overlapping groups"
+          title: "User locations for %{user_name}"
+          overlapping_groups: "Overlapping Groups"
+        new:
+          title: "New location for %{user_name}"
+        update:
+          success: "Location Updated"
     users:
       index:
         created: "Created"
@@ -55,6 +80,7 @@
         role: "Role"
         title: "Users"
         preferences: "Preferences"
+        locations: "Locations"
       update:
         success: "User updated"
       edit:
@@ -194,7 +220,7 @@
         requested: "Membership has been requested"
         already_asked: "You have already asked to join this group"
         already_member: "You are already a member of this group"
-      index:
+      index: &group_membership_requests_index
         actioned_by: "Actioned By"
         are_you_sure: "Are you sure?"
         by: "by %{name}"
@@ -218,6 +244,9 @@
       reject:
         failure: "There was a problem rejecting this membership request"
         success: "Membership rejected"
+      review:
+        <<: *group_membership_requests_index
+        title: "Review a membership request for %{group}"
     message_threads:
       destroy:
         failure: "Couldn't delete thread"
@@ -254,17 +283,28 @@
       update:
         success: "Profile Updated"
   groups:
+    index:
+      list_tab: "List"
+      map_tab: "Map"
+      new_group: "Create new group"
+      new_group_instructions_html: "To create a group on Cyclescape for your local cycling campaign please %{feedback_link} and we'll get back in touch with you soon."
+      send_some_feedback: "send some feedback"
+      title: "Groups directory"
+    compact:
+      already_member: "You are already a member of this group"
+      no_location: "This group doesn't have a location yet."
+    join:
+      join_body:
+        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
+      join_this_group: "Join this group"
+      group_request_pending: "Your request to join this group is pending."
     show:
       edit_group_profile: "Edit the group profile"
       edit_group_prefs: "Edit the group preferences"
       edit_group_members: "Edit the membership list"
       group_management: "Group management"
       group_organisers: "Group organisers"
-      group_request_pending: "Your request to join this group is pending."
-      join_body:
-        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_title: "Join our Cyclescape group"
-      join_this_group: "Join this group"
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public threads
@@ -290,8 +330,9 @@
       groups_title: "Cyclescape Groups"
       groups_intro_html:
         Cyclescape is used by <strong>cycle campaign groups</strong> across
-        the country. <strong>Find groups local to you</strong> and see what
+        the country. <strong>%{groups_link}</strong> and see what
         they're working to fix.
+      find_local_groups: "Find groups local to you"
       twitter_title: "Cyclescape on Twitter"
     guide:
       title: "How Cyclescape Works"

@@ -6,6 +6,10 @@
   activerecord:
     errors:
       models:
+        issue:
+          attributes:
+            size:
+              less_than: "of the issue is too large."
         user:
           attributes:
             full_name:
@@ -62,9 +66,13 @@
           password_confirmation: "New Password Confirmation"
     hints:
       user:
+        new: &hints_user_new
+          display_name: "Optional - this can be a nickname or pseudonym and will be shown instead of your full name to other users."
+          full_name: "Please enter your full name. If you ask to join a group, this will always be shown to the group administrators."
         edit:
           password: "Leave this blank to keep your current password."
           current_password: "Please confirm your current password to make changes on this page."
+          <<: *hints_user_new
       group:
         short_name: "Must be lower-case alphanumeric; a-z, 0-9"
       group_membership:

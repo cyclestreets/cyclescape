@@ -33,6 +33,7 @@ class Issue < ActiveRecord::Base
   validates :title, presence: true
   validates :description, presence: true
   validates :location, presence: true
+  validates :size, numericality: { less_than: Geo::ISSUE_MAX_AREA }
 
   validates :created_by, presence: true
 

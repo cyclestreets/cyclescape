@@ -34,7 +34,15 @@ Cyclescape::Application.routes.draw do
   issues_route
 
   namespace :admin do
-    resources :groups, :users
+    resources :groups
+    resources :users do
+      scope module: "user" do
+        resources :locations do
+          get 'geometry', :on => :member
+          get 'combined_geometry', :on => :collection
+        end
+      end
+    end
     match "home" => "home#index"
   end
 
@@ -44,6 +52,7 @@ Cyclescape::Application.routes.draw do
       resources :memberships
       resources :membership_requests do
         member do
+          get "review"
           post "confirm"
           post "reject"
           post "cancel"
@@ -54,6 +63,9 @@ Cyclescape::Application.routes.draw do
         get 'geometry', :on => :member
       end
       resource :prefs, only: [:edit, :update]
+    end
+    collection do
+      get "all_geometries"
     end
   end
 

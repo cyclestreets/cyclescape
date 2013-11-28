@@ -164,7 +164,7 @@ describe "Group threads", use: :subdomain do
         end
 
         context "group threads on an issue" do
-          let(:location) { "POLYGON ((-10 41, 10 41, 10 61, -10 61, -10 41))" }
+          let(:location) { "POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))" }
           let(:user) { FactoryGirl.create(:user) }
           let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: location) }
           let!(:group_membership) { FactoryGirl.create(:group_membership, user: user, group: current_group) }

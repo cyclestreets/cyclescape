@@ -1,0 +1,9 @@
+- if group.profile.joining_instructions
+  %p= auto_link simple_format group.profile.joining_instructions
+- else
+  %p= t ".join_body", group: group.name
+
+- if current_user && current_user.membership_request_pending_for?(group)
+  %p= t ".group_request_pending"
+- else
+  = link_to t(".join_this_group"), new_group_membership_request_path(group), class: "btn-green"

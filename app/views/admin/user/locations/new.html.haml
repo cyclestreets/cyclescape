@@ -1,0 +1,12 @@
+%header
+  %h1= t ".title", user_name: @user.name
+%section
+  = semantic_form_for @location, url: admin_user_locations_path(@user) do |f|
+    = f.inputs do
+      = f.input :category
+      = f.input :loc_json, as: :hidden
+      %li.input
+        = f.semantic_errors :location
+        = render partial: "shared/edit_map", locals: {thing: @location}
+    = f.actions do
+      = f.action :submit, :button_html => {:class => "btn-big-green"}

@@ -582,8 +582,9 @@ section#user-locations {
   }
 }
 
-/* Issue List */
-#issue-list-header {
+/* Issue/Group List */
+#issue-list-header,
+#group-list-header {
   oveflow:hidden;
   h1 {
     float:left;
@@ -592,7 +593,8 @@ section#user-locations {
     float:right;
   }
 }
-#issue-list-tabs {
+#issue-list-tabs,
+#group-list-tabs {
   clear:both;
   .tabs a.list,
   .tabs a.list:hover,
@@ -714,6 +716,14 @@ body.home {
   p {
     font-size:12px;
     margin:0;
+  }
+  /* It's not ideal, but it's better than dark green on red */
+  a {
+    color: $white !important;
+    &:hover {
+      color: $white !important;
+      border-bottom-color: $white !important;
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.15'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -19,7 +19,7 @@ gem 'rails_autolink'
 gem 'tweet-button'
 
 # Back-end gems
-gem 'devise', '2.1.2' # pin due to failing tests on 3.0.0 - perhaps attr_accessible related. See https://github.com/plataformatec/devise/issues/2515
+gem 'devise', '~> 2.1.2' # pin due to failing tests on 3.0.0 - perhaps attr_accessible related. See https://github.com/plataformatec/devise/issues/2515
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
@@ -48,7 +48,7 @@ group :assets do
 end
 
 group :development do
-  gem 'annotate', '>=2.5.0.pre1', require: false
+  gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
 
   # Following is required for Resque workers in development to load due to
@@ -63,7 +63,8 @@ group :development, :test do
 
   gem 'rspec-core'
   gem 'rspec-rails'
-  gem 'spork'
+  gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'ruby-prof'
 end
 

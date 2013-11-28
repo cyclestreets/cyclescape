@@ -38,11 +38,15 @@ module Locatable
 
   # Returns the size of the location. Returns 0 for anything other than polygons.
   def size
-    case self.location.geometry_type
-    when RGeo::Feature::Polygon
-      return self.location.area
-    else
+    if self.location.nil?
       return 0.0
+    else
+      case self.location.geometry_type
+      when RGeo::Feature::Polygon
+        return self.location.area.to_f
+      else
+        return 0.0
+      end
     end
   end
 

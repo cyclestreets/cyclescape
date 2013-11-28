@@ -7,6 +7,7 @@ authorization do
     includes :member
     has_permission_on :admin_groups, :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
     has_permission_on :admin_users, to: :manage
+    has_permission_on :admin_user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
     has_permission_on :library_documents, :library_notes, to: [:edit, :update]
@@ -31,7 +32,7 @@ authorization do
       if_attribute user: is { user }
     end
     has_permission_on :group_membership_requests do
-      to [:index, :confirm, :reject]
+      to [:index, :review, :confirm, :reject]
       if_attribute committee_members: contains { user }
     end
     has_permission_on :group_prefs do
@@ -108,7 +109,7 @@ authorization do
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
                       :devise_invitations, :devise_passwords, :devise_invitable_registrations, to: :manage
     has_permission_on :home, to: :show
-    has_permission_on :groups, to: :view
+    has_permission_on :groups, to: [:view, :all_geometries]
     has_permission_on :group_profiles, to: [:view, :geometry]
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries, :search]
     has_permission_on :issue_photos, to: [:show]

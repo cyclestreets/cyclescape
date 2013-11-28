@@ -125,15 +125,15 @@ describe Issue do
     end
 
     describe "for a polygon" do
-      subject { FactoryGirl.create(:issue, location: 'POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))') }
+      subject { FactoryGirl.create(:issue, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
 
       it "should return the area for polygons" do
-        subject.size.should eql(1.0)
+        subject.size.should be_within(0.0001).of(0.01)
       end
 
       it "shoud give the correct size ratio" do
         geom = factory.parse_wkt('POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))')
-        subject.size_ratio(geom).should eql(0.25)
+        subject.size_ratio(geom).should be_within(0.0001).of(0.0025)
       end
 
       it "should cope with degenerate bboxes" do
@@ -145,6 +145,19 @@ describe Issue do
       it "should cope with non-polygon bboxes" do
         geom = factory.parse_wkt('POINT(1 1)')
         subject.size_ratio(geom).should eql(0.0)
+      end
+    end
+
+    describe "too large" do
+      subject { FactoryGirl.create(:issue) }
+
+      it "should be invalid" do
+        large_wkt = 'POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))'
+        geom = factory.parse_wkt(large_wkt)
+        geom.area.should be >= Geo::ISSUE_MAX_AREA
+        subject.location = large_wkt
+        subject.should_not be_valid
+        subject.should have(1).error_on(:size)
       end
     end
   end
@@ -183,11 +196,11 @@ describe Issue do
 
     context "different issue locations" do
       let(:factory) { RGeo::Geos.factory(srid: 4326) }
-      let(:polygon) { 'POLYGON ((1 1, 1 2, 2 2, 2 1, 1 1))' }
-      let!(:issue_entirely_surrounding) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0, 0 3, 3 3, 3 0, 0 0))') }
-      let!(:issue_entirely_contained) { FactoryGirl.create(:issue, location: 'POLYGON ((1.2 1.2, 1.2 1.8, 1.8 1.8, 1.8 1.2, 1.2 1.2))') }
-      let!(:issue_not_intersecting) { FactoryGirl.create(:issue, location: 'POLYGON ((10 10, 10 20, 20 20, 20 10, 10 10))' ) }
-      let!(:issue_half_in_half_out) { FactoryGirl.create(:issue, location: 'POLYGON ((0 1.2, 0 1.8, 3 1.8, 3 1.2, 0 1.2))' ) }
+      let(:polygon) { 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))' }
+      let!(:issue_entirely_surrounding) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0, 0 0.3, 0.3 0.3, 0.3 0, 0 0))') }
+      let!(:issue_entirely_contained) { FactoryGirl.create(:issue, location: 'POLYGON ((0.12 0.12, 0.12 0.18, 0.18 0.18, 0.18 0.12, 0.12 0.12))') }
+      let!(:issue_not_intersecting) { FactoryGirl.create(:issue, location: 'POLYGON ((1.1 1.1, 1.1 1.2, 1.2 1.2, 1.2 1.1, 1.1 1.1))' ) }
+      let!(:issue_half_in_half_out) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0.12, 0 0.18, 0.3 0.18, 0.3 0.12, 0 0.12))' ) }
 
       it "should return intersecting issues" do
         bbox = factory.parse_wkt(polygon)

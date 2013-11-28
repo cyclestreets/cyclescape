@@ -40,8 +40,22 @@ describe "Groups" do
         profile.save!
         visit group_path(profile.group)
 
-        page.should have_content(I18n.t("groups.show.join_body" , group: profile.group.name))
+        page.should have_content(I18n.t("groups.join.join_body" , group: profile.group.name))
       end
+    end
+  end
+
+  describe "index" do
+    let!(:profile_2) { FactoryGirl.create(:group_profile)}
+    let!(:profile_3) { FactoryGirl.create(:group_profile)}
+
+    before do
+      visit groups_path
+    end
+
+    it "should show both group names" do
+      page.should have_content(profile_2.group.name)
+      page.should have_content(profile_3.group.name)
     end
   end
 end
