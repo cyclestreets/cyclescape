@@ -95,9 +95,9 @@ describe "Issue notifications" do
   context "multiple overlapping locations" do
     let(:user) { FactoryGirl.create(:user) }
     let(:user2) { FactoryGirl.create(:user) }
-    let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: "POLYGON ((-10 41, 10 41, 10 61, -10 61, -10 41))") }
+    let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: "POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))") }
     let!(:user_location_big) { FactoryGirl.create(:user_location, user: user, location: user_location.location.buffer(1)) }
-    let!(:user_location_small) { FactoryGirl.create(:user_location, user: user, location: user_location.location.buffer(-1)) }
+    let!(:user_location_small) { FactoryGirl.create(:user_location, user: user, location: user_location.location.buffer(-0.01)) }
 
 
     before do
@@ -122,9 +122,9 @@ describe "Issue notifications" do
     end
 
     context "multiple users" do
-      let!(:user2_location) { FactoryGirl.create(:user_location, user: user2, location: "POLYGON ((-10 41, 10 41, 10 61, -10 61, -10 41))") }
+      let!(:user2_location) { FactoryGirl.create(:user_location, user: user2, location: "POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))") }
       let!(:user2_location_big) { FactoryGirl.create(:user_location, user: user2, location: user_location.location.buffer(1)) }
-      let!(:user2_location_small) { FactoryGirl.create(:user_location, user: user2, location: user_location.location.buffer(-1)) }
+      let!(:user2_location_small) { FactoryGirl.create(:user_location, user: user2, location: user_location.location.buffer(-0.01)) }
 
       it "should send one email to multiple users" do
         email_count = all_emails.count
@@ -139,7 +139,7 @@ describe "Issue notifications" do
   end
 
   context "overlapping group and user locations" do
-    let(:location) { "POLYGON ((-10 41, 10 41, 10 61, -10 61, -10 41))" }
+    let(:location) { "POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))" }
     let(:user) { FactoryGirl.create(:user) }
     let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: location) }
     let!(:group_profile) { FactoryGirl.create(:group_profile, location: location) }
