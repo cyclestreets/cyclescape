@@ -24,6 +24,7 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  deleted_at             :datetime
 #
 
 require 'spec_helper'
@@ -298,6 +299,22 @@ describe User do
       subject.update_attributes(disabled: "1")
       subject.reload
       subject.disabled.should be_true
+    end
+  end
+
+  context "account deleting" do
+    subject { FactoryGirl.create(:user) }
+
+    it "should appear to be deleted" do
+      subject
+      User.all.should include(subject)
+      subject.delete
+      User.all.should_not include(subject)
+    end
+
+    it "should not really be deleted" do
+      subject.delete
+      User.with_deleted.all.should include(subject)
     end
   end
 

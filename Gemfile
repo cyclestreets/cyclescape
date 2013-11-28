@@ -36,6 +36,7 @@ gem 'whenever'
 gem 'draper', '0.15.0' # pin due to failing tests: maybe when https://github.com/jcasimir/draper/pull/288 is released.
 gem 'email_reply_parser'
 gem 'memoist'
+gem 'paranoia', '~> 1.0'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -24,12 +24,14 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  deleted_at             :datetime
 #
 
 class User < ActiveRecord::Base
   attr_accessible :email, :full_name, :display_name, :password, :password_confirmation, :disabled
 
   acts_as_voter
+  acts_as_paranoid
 
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable
   ALLOWED_ROLES = %w(member admin)
