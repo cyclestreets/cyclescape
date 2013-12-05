@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   before_destroy :remove_group_memberships
   before_destroy :remove_thread_subscriptions
 
-  scope :active, where("disabled_at IS NULL AND confirmed_at IS NOT NULL AND deleted_at IS NULL")
+  scope :active, where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL')
 
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
