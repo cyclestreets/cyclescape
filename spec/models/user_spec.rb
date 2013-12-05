@@ -324,12 +324,10 @@ describe User do
       subject.name.should include(subject.id.to_s)
     end
 
-    context "with profile" do
-      it "should clear the profile" do
-        # Exact behaviour tested elsewhere
-        subject.profile.should_receive(:clear).and_return(true)
-        subject.destroy
-      end
+    it "should clear the profile" do
+      # Exact behaviour tested elsewhere
+      subject.profile.should_receive(:clear).and_return(true)
+      subject.destroy
     end
 
     context "with locations" do
