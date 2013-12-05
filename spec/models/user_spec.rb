@@ -308,13 +308,39 @@ describe User do
     it "should appear to be deleted" do
       subject
       User.all.should include(subject)
-      subject.delete
+      subject.destroy
       User.all.should_not include(subject)
     end
 
     it "should not really be deleted" do
-      subject.delete
+      subject.destroy
       User.with_deleted.all.should include(subject)
+    end
+
+    it "should remove the display name and obfuscate the full name" do
+      subject.destroy
+      subject.display_name.should be_nil
+      subject.name.should include("deleted")
+      subject.name.should include(subject.id.to_s)
+    end
+
+    context "with profile" do
+      it "should clear the profile" do
+        # Exact behaviour tested elsewhere
+        subject.profile.should_receive(:clear).and_return(true)
+        subject.destroy
+      end
+    end
+
+    context "with locations" do
+      subject { FactoryGirl.create(:user, :with_location) }
+
+      it "should remove the user location" do
+        subject.destroy
+        subject.reload
+        subject.locations.should be_empty
+        UserLocation.all.size.should eq(0)
+      end
     end
   end
 

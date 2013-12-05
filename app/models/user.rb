@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
   before_validation :set_default_role, :unless => :role
   after_create :create_user_prefs
 
+  before_destroy :obfuscate_name
+  before_destroy :clear_profile
+  before_destroy :remove_locations
+
   scope :active, where("disabled_at IS NULL AND confirmed_at IS NOT NULL AND deleted_at IS NULL")
 
   validates :full_name, presence: true
@@ -200,6 +204,21 @@ class User < ActiveRecord::Base
 
   def remembered_group?
     remembered_group
+  end
+
+  def obfuscate_name
+    self.full_name = "User #{self.id} (deleted)"
+    self.display_name = nil
+  end
+
+  def clear_profile
+    self.profile.clear
+  end
+
+  def remove_locations
+    self.locations.each do |location|
+      location.destroy
+    end
   end
 
   protected
