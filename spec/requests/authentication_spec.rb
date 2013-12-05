@@ -114,4 +114,52 @@ describe "Authentication and authorization" do
       all_emails.count.should eql(2)
     end
   end
+
+  context "when closing my account" do
+    let!(:user_details) { FactoryGirl.attributes_for(:user) }
+    let!(:current_user) { FactoryGirl.create(:user, user_details) }
+    let!(:password) { user_details[:password] }
+
+    def sign_in
+      visit new_user_session_path
+      fill_in "Email", with: current_user.email
+      fill_in "Password", with: password
+      click_button "Sign in"
+    end
+
+    def cancel_account
+      visit edit_user_registration_path
+      click_on I18n.t(".devise.registrations.edit.cancel_account")
+    end
+
+    it "should tell me the account has been cancelled" do
+      sign_in
+      cancel_account
+      page.current_path.should == root_path
+      page.should have_content(I18n.t(".devise.registrations.destroyed"))
+    end
+
+    it "should log me out" do
+      sign_in
+      cancel_account
+      visit dashboard_path
+      page.should have_content("You need to sign in or sign up before continuing.")
+    end
+
+    it "should not let me log back in" do
+      sign_in
+      cancel_account
+      sign_in
+      page.should have_content(I18n.t(".devise.failure.invalid"))
+    end
+
+    it "should not let me recover my password" do
+      sign_in
+      cancel_account
+      visit new_user_password_path
+      fill_in "Email", with: user_details[:email]
+      click_on I18n.t(".devise.passwords.new.send_reset_instuctions")
+      page.should have_content "Email not found"
+    end
+  end
 end
