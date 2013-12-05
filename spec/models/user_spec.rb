@@ -342,6 +342,30 @@ describe User do
         UserLocation.all.size.should eq(0)
       end
     end
+
+    context "subscribed to thread" do
+      let!(:thread_subscription) { FactoryGirl.create(:thread_subscription, user: subject) }
+
+      it "should unsubscribe user from threads" do
+        subject.subscribed_threads.size.should eql(1)
+        subject.destroy
+        subject.reload
+        subject.subscribed_threads.size.should eql(0)
+        thread_subscription.thread.subscribers.should_not include(subject)
+      end
+    end
+
+    context "in a group" do
+      let!(:group_membership) { FactoryGirl.create(:group_membership, user: subject) }
+
+      it "should remove member from the group" do
+        subject.groups.size.should eql(1)
+        subject.destroy
+        subject.reload
+        subject.groups.size.should eql(0)
+        group_membership.group.members.should_not include(subject)
+      end
+    end
   end
 
   context "buffered locations" do

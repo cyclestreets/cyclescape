@@ -67,6 +67,8 @@ class User < ActiveRecord::Base
   before_destroy :obfuscate_name
   before_destroy :clear_profile
   before_destroy :remove_locations
+  before_destroy :remove_group_memberships
+  before_destroy :remove_thread_subscriptions
 
   scope :active, where("disabled_at IS NULL AND confirmed_at IS NOT NULL AND deleted_at IS NULL")
 
@@ -218,6 +220,18 @@ class User < ActiveRecord::Base
   def remove_locations
     self.locations.each do |location|
       location.destroy
+    end
+  end
+
+  def remove_group_memberships
+    self.memberships.each do |membership|
+      membership.destroy
+    end
+  end
+
+  def remove_thread_subscriptions
+    self.thread_subscriptions.each do |subscription|
+      subscription.destroy
     end
   end
 
