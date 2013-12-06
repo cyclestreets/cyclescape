@@ -88,20 +88,51 @@ describe MessageThreadObserver do
       end
 
       context "to committee" do
-        it "should unsubscribe group members"
-        it "should leave committee members subscribed"
+        it "should unsubscribe group members" do
+          thread.add_subscriber(member)
+          thread.subscribers.should include(member)
+          MessageThread.observers.enable :message_thread_observer do
+            thread.privacy = "committee"
+            thread.save
+          end
+          thread.reload
+          thread.subscribers.should_not include(member)
+        end
+
+        it "should leave committee members subscribed" do
+          thread.add_subscriber(committee_member)
+          thread.subscribers.should include(committee_member)
+          MessageThread.observers.enable :message_thread_observer do
+            thread.privacy = "committee"
+            thread.save
+          end
+          thread.reload
+          thread.subscribers.should include(committee_member)
+        end
       end
     end
 
     context "from committee" do
-      let(:thread) { FactoryGirl.build(:message_thread, :belongs_to_group, :committee) }
+      let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :committee) }
 
       context "to group" do
-        it "should subscribe group members"
+        it "should attempt to subscribe group members" do
+          ThreadSubscriber.should_receive(:subscribe_users).with(thread)
+          MessageThread.observers.enable :message_thread_observer do
+            thread.privacy = "group"
+            thread.save
+          end
+        end
       end
 
       context "to public" do
-        it "should subscribe people with overlapping locations"
+        it "should subscribe people with overlapping locations" do
+          ThreadSubscriber.should_receive(:subscribe_users).with(thread)
+          MessageThread.observers.enable :message_thread_observer do
+            thread.privacy = "public"
+            thread.save
+          end
+        end
       end
     end
   end
