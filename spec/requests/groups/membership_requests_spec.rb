@@ -126,6 +126,7 @@ describe "Group Membership Requests" do
   context "new request notifications" do
     include_context "signed in as a site user"
     let(:group) { FactoryGirl.create(:group) }
+    let(:message) { "My membership number is 1234" }
 
     before do
       visit group_path(group)
@@ -168,6 +169,24 @@ describe "Group Membership Requests" do
         current_email.subject.should include(current_user.name)
         current_email.subject.should include(group.name)
         current_email.should have_body_text("You can confirm or reject the membership request")
+      end
+    end
+
+    context "member message" do
+      it "should include it in the email" do
+        fill_in "Message", with: message
+        click_button I18n.t(".formtastic.actions.group_membership_request.create")
+
+        open_email(group.email)
+        current_email.should have_body_text("They included a message with their request:")
+        current_email.should have_body_text(message)
+      end
+
+      it "should indicate if they didn't include a message" do
+        click_button I18n.t(".formtastic.actions.group_membership_request.create")
+
+        open_email(group.email)
+        current_email.should have_body_text("They did not include a message with their request")
       end
     end
   end
