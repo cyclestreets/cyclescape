@@ -95,7 +95,7 @@ describe "Group Membership Requests" do
     before do
       visit group_path(group)
       click_link I18n.t(".groups.join.join_this_group")
-      click_button "Create Group membership request"
+      click_button I18n.t(".formtastic.actions.group_membership_request.create")
     end
 
     describe "cancelling the request" do
@@ -111,7 +111,7 @@ describe "Group Membership Requests" do
 
       it "should not let you go directly" do
         visit new_group_membership_request_path(group)
-        click_button "Create Group membership request"
+        click_button I18n.t(".formtastic.actions.group_membership_request.create")
         page.should have_content(I18n.t(".group.membership_requests.create.already_asked"))
       end
     end
@@ -137,14 +137,14 @@ describe "Group Membership Requests" do
         group.prefs.notify_membership_requests = false
         group.prefs.save!
 
-        click_button "Create Group membership request"
+        click_button I18n.t(".formtastic.actions.group_membership_request.create")
         all_emails.count.should eql(0)
       end
     end
 
     context "without a membership secretary" do
       it "should send an email to the group" do
-        click_button "Create Group membership request"
+        click_button I18n.t(".formtastic.actions.group_membership_request.create")
 
         open_email(group.email)
         current_email.subject.should include(current_user.name)
@@ -162,7 +162,7 @@ describe "Group Membership Requests" do
       it "should send an email to the membership secretary" do
         group.prefs.membership_secretary = membership_secretary
         group.prefs.save!
-        click_button "Create Group membership request"
+        click_button I18n.t(".formtastic.actions.group_membership_request.create")
 
         open_email(membership_secretary.email)
         current_email.subject.should include(current_user.name)
