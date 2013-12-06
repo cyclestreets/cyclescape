@@ -49,6 +49,27 @@ describe "Group Membership Requests" do
         open_email(gmr.user.email)
         current_email.should have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
       end
+
+      it "should show there was no message when reviewing" do
+        visit review_group_membership_request_path(gmr.group, gmr.id)
+        page.should have_content(I18n.t(".group.membership_requests.review.no_message"))
+      end
+
+      context "with a message" do
+        let(:message) { "My membership number is 012345" }
+        let(:gmr) { FactoryGirl.create(:group_membership_request, group: current_group, user: meg, message: message) }
+
+        it "should indicate there's a message when viewing the list" do
+          visit group_membership_requests_path(gmr.group)
+          page.should have_link(I18n.t(".group.membership_requests.index.view_message"))
+        end
+
+        it "should show the message when reviewing" do
+          visit review_group_membership_request_path(gmr.group, gmr.id)
+          page.should have_content(I18n.t(".group.membership_requests.review.message"))
+          page.should have_content(message)
+        end
+      end
     end
 
     describe "when being invited as a new member" do
