@@ -77,7 +77,13 @@ describe MessageThreadObserver do
       let(:thread) { FactoryGirl.build(:message_thread, :belongs_to_group, :private) }
 
       context "to public" do
-        it "should try subscribe people who might have access"
+        it "should try subscribe people who might have access" do
+          ThreadSubscriber.should_receive(:subscribe_users).with(thread)
+          MessageThread.observers.enable :message_thread_observer do
+            thread.privacy = "public"
+            thread.save
+          end
+        end
       end
 
       context "to committee" do

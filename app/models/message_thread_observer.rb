@@ -12,10 +12,10 @@ class MessageThreadObserver < ActiveRecord::Observer
             subscriber.thread_subscriptions.to(thread).destroy unless thread.group.members.include?(subscriber)
           end
         elsif thread.privacy_was == "committee"
-          NewThreadNotifier.notify_new_thread(thread)
+          ThreadSubscriber.subscribe_users(thread)
         end
       when "public"
-        NewThreadNotifier.notify_new_thread(thread)
+        ThreadSubscriber.subscribe_users(thread)
       end
     end
   end
