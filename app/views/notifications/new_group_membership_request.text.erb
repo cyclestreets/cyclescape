@@ -1,5 +1,13 @@
 "<%= raw @user.name %>" has requested to join the Cyclescape group for "<%= raw @group.name %>".
 
+<% if @request.message.blank? %>
+They did not include a message with their request
+<% else %>
+They included a message with their request:
+
+<%= @request.message %>
+<% end %>
+
 You can confirm or reject the membership request at:
 
 <%= review_group_membership_request_url(@group, @request) %>

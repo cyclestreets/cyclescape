@@ -21,7 +21,8 @@ class Group::MembershipRequestsController < ApplicationController
     elsif current_user.membership_request_pending_for?(@group)
       redirect_to @group, alert: t(".group.membership_requests.create.already_asked")
     else
-      @request = @group.membership_requests.build({user: current_user})
+      @request = @group.membership_requests.new(params[:group_membership_request])
+      @request.user = current_user
 
       if @request.save
         redirect_to @group, notice: t(".group.membership_requests.create.requested")

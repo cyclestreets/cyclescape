@@ -49,6 +49,27 @@ describe "Group Membership Requests" do
         open_email(gmr.user.email)
         current_email.should have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
       end
+
+      it "should show there was no message when reviewing" do
+        visit review_group_membership_request_path(gmr.group, gmr.id)
+        page.should have_content(I18n.t(".group.membership_requests.review.no_message"))
+      end
+
+      context "with a message" do
+        let(:message) { "My membership number is 012345" }
+        let(:gmr) { FactoryGirl.create(:group_membership_request, group: current_group, user: meg, message: message) }
+
+        it "should indicate there's a message when viewing the list" do
+          visit group_membership_requests_path(gmr.group)
+          page.should have_link(I18n.t(".group.membership_requests.index.view_message"))
+        end
+
+        it "should show the message when reviewing" do
+          visit review_group_membership_request_path(gmr.group, gmr.id)
+          page.should have_content(I18n.t(".group.membership_requests.review.message"))
+          page.should have_content(message)
+        end
+      end
     end
 
     describe "when being invited as a new member" do
@@ -126,6 +147,7 @@ describe "Group Membership Requests" do
   context "new request notifications" do
     include_context "signed in as a site user"
     let(:group) { FactoryGirl.create(:group) }
+    let(:message) { "My membership number is 1234" }
 
     before do
       visit group_path(group)
@@ -168,6 +190,24 @@ describe "Group Membership Requests" do
         current_email.subject.should include(current_user.name)
         current_email.subject.should include(group.name)
         current_email.should have_body_text("You can confirm or reject the membership request")
+      end
+    end
+
+    context "member message" do
+      it "should include it in the email" do
+        fill_in "Message", with: message
+        click_button I18n.t(".formtastic.actions.group_membership_request.create")
+
+        open_email(group.email)
+        current_email.should have_body_text("They included a message with their request:")
+        current_email.should have_body_text(message)
+      end
+
+      it "should indicate if they didn't include a message" do
+        click_button I18n.t(".formtastic.actions.group_membership_request.create")
+
+        open_email(group.email)
+        current_email.should have_body_text("They did not include a message with their request")
       end
     end
   end

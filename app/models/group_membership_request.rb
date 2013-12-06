@@ -9,10 +9,12 @@
 #  actioned_by_id :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  message        :text
 #
 
 class GroupMembershipRequest < ActiveRecord::Base
   attr_protected :state_event
+  attr_accessible :message
 
   belongs_to :group
   belongs_to :user

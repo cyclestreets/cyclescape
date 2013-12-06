@@ -227,6 +227,8 @@
         confirm: "Confirm"
         created_at: "%{time_ago} ago"
         email: "E-mail address"
+        view_message: "View..."
+        message: "Message"
         no_requests_yet: "There have been no membership requests for this group yet."
         full_name: "Full name"
         reject: "Reject"
@@ -247,6 +249,8 @@
       review:
         <<: *group_membership_requests_index
         title: "Review a membership request for %{group}"
+        message: "The user included this message with their request:"
+        no_message: "There was no message included with this membership request."
     message_threads:
       destroy:
         failure: "Couldn't delete thread"

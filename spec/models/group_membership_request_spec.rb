@@ -9,6 +9,7 @@
 #  actioned_by_id :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  message        :text
 #
 
 require 'spec_helper'
@@ -27,6 +28,10 @@ describe GroupMembershipRequest do
 
     it "must be pending" do
       subject.status.should eql("pending")
+    end
+
+    it "has an optional message" do
+      subject.should have(0).error_on(:message)
     end
   end
 
