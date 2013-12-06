@@ -1,6 +1,8 @@
 %h1= t ".title", group_name: @group.name
 
-.explain= t ".your_membership_request_will"
+%p= auto_link simple_format @group.profile.joining_instructions
+.explain
+  %p= t ".your_membership_request_will"
 
 = semantic_form_for @request do |f|
   = f.semantic_errors
