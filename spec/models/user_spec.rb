@@ -454,7 +454,7 @@ describe User do
 
     it "should know if a group membership request is pending" do
       subject.membership_request_pending_for?(group).should be_false
-      g = GroupMembershipRequest.create(user: subject, group: group)
+      g = FactoryGirl.create(:group_membership_request, user: subject, group: group)
       subject.reload
       subject.membership_request_pending_for?(group).should be_true
 
