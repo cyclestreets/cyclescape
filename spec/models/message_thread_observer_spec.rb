@@ -16,13 +16,14 @@ describe MessageThreadObserver do
   end
 
   context "privacy" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:membership) { FactoryGirl.create(:group_membership, group: thread.group) }
+    let(:member) { membership.user }
+    let(:committee_membership) { FactoryGirl.create(:group_membership, group: thread.group, role: "committee") }
+    let(:committee_member) { committee_membership.user }
+
     context "from public" do
       let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group) }
-      let(:user) { FactoryGirl.create(:user) }
-      let(:membership) { FactoryGirl.create(:group_membership, group: thread.group) }
-      let(:member) { membership.user }
-      let(:committee_membership) { FactoryGirl.create(:group_membership, group: thread.group, role: "committee") }
-      let(:committee_member) { committee_membership.user }
 
       context "to group" do
         it "should unsubscribe non-group members" do
@@ -74,7 +75,7 @@ describe MessageThreadObserver do
     end
 
     context "from group private" do
-      let(:thread) { FactoryGirl.build(:message_thread, :belongs_to_group, :private) }
+      let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :private) }
 
       context "to public" do
         it "should try subscribe people who might have access" do
