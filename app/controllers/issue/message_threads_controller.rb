@@ -24,7 +24,7 @@ class Issue::MessageThreadsController < MessageThreadsController
 
     if @thread.save
       @thread.subscriptions.create({user: current_user}, without_protection: true)
-      subscribe_users(@thread)
+      ThreadSubscriber.subscribe_users(@thread)
       ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
 
       NewThreadNotifier.notify_new_thread(@thread)
