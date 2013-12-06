@@ -5,7 +5,7 @@ describe "Group Membership Requests" do
 
   context "as a group member" do
     include_context "signed in as a group member"
-    let(:gmr) { GroupMembershipRequest.create({group: current_group, user: meg}) }
+    let(:gmr) { FactoryGirl.create(:group_membership_request, group: current_group, user: meg) }
 
     describe "viewing the requests" do
       it "should refuse" do
@@ -17,7 +17,7 @@ describe "Group Membership Requests" do
 
   context "as a committee member" do
     include_context "signed in as a committee member"
-    let(:gmr) { GroupMembershipRequest.create({group: current_group, user: meg}) }
+    let(:gmr) { FactoryGirl.create(:group_membership_request, group: current_group, user: meg) }
 
     describe "confirming a request" do
       it "should send a notification" do
