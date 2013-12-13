@@ -433,6 +433,8 @@
       admin_tooltip: "Admin area, for system administrators"
       dashboard: "My Cyclescape"
       dashboard_tooltip: "Your personal dashboard, showing updates on discussion threads you are subscribed to"
+      about: "About"
+      user_guide: "User guide"
       sign_out: "Sign out"
       sign_in: "Sign in"
       sign_up: "Sign up"
