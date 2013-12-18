@@ -136,4 +136,84 @@ describe MessageThreadObserver do
       end
     end
   end
+
+  context "issue" do
+    context "added" do
+      let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group) }
+      let(:private_thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :private) }
+      let(:user_location) { FactoryGirl.create(:user_location) }
+      let(:issue) { FactoryGirl.create(:issue, location: user_location.location) }
+
+      it "should subscribe people with overlapping locations" do
+        MessageThread.observers.enable :message_thread_observer do
+          thread.issue = issue
+          thread.save
+        end
+        thread.reload
+        thread.subscribers.should include(user_location.user)
+      end
+
+      it "should not subscribe people who can't view it" do
+        MessageThread.observers.enable :message_thread_observer do
+          private_thread.issue = issue
+          private_thread.save
+        end
+        thread.reload
+        thread.subscribers.should_not include(user_location.user)
+      end
+    end
+
+    context "removed" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:thread) { FactoryGirl.create(:issue_message_thread) }
+      let!(:subscription) { FactoryGirl.create(:thread_subscription, thread: thread, user: user) }
+
+      it "should remove people" do
+        thread.subscribers.should include(user)
+        MessageThread.observers.enable :message_thread_observer do
+          thread.issue = nil
+          thread.save
+        end
+        thread.reload
+        thread.subscribers.should_not include(user)
+      end
+
+      it "should leave people subscribed if they have participated" do
+        m = FactoryGirl.create(:message, thread: thread, created_by: user)
+        thread.subscribers.should include(user)
+        thread.participants.should include(user)
+        MessageThread.observers.enable :message_thread_observer do
+          thread.issue = nil
+          thread.save
+        end
+        thread.reload
+        thread.subscribers.should include(user)
+      end
+
+      context "becomes group administrative thread" do
+        let(:thread) { FactoryGirl.create(:group_message_thread) }
+        let(:group_membership) { FactoryGirl.create(:group_membership, group: thread.group) }
+        let(:member) { group_membership.user }
+        let!(:subscription) { FactoryGirl.create(:thread_subscription, thread: thread, user: member) }
+
+        before do
+          member.prefs.involve_my_groups_admin = true
+          member.save
+        end
+
+        it "should leave people subscribed if they have their administrative pref set" do
+          MessageThread.observers.enable :message_thread_observer do
+            thread.issue = nil
+            thread.save
+          end
+          thread.reload
+          thread.subscribers.should include(member)
+        end
+      end
+    end
+
+    context "changed" do
+      it "should not remove and then add the same person again"
+    end
+  end
 end
