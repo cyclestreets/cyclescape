@@ -113,4 +113,50 @@ describe GroupMembershipObserver do
       end
     end
   end
+
+  context "leaving group" do
+    let(:group_membership) { FactoryGirl.create(:group_membership, group: thread.group) }
+    let(:user) { group_membership.user }
+
+    context "committee threads" do
+      let(:thread) { FactoryGirl.create(:group_message_thread, :committee) }
+
+      it "should unsubscribe you" do
+        thread.add_subscriber(user)
+        thread.subscribers.should include(user)
+        GroupMembership.observers.enable :group_membership_observer do
+          group_membership.destroy
+        end
+        thread.reload
+        thread.subscribers.should_not include(user)
+      end
+    end
+
+    context "private threads" do
+      let(:thread) { FactoryGirl.create(:group_message_thread, :private) }
+
+      it "should unsubscribe you" do
+        thread.add_subscriber(user)
+        thread.subscribers.should include(user)
+        GroupMembership.observers.enable :group_membership_observer do
+          group_membership.destroy
+        end
+        thread.reload
+        thread.subscribers.should_not include(user)
+      end
+    end
+
+    context "public threads" do
+      let(:thread) { FactoryGirl.create(:group_message_thread) }
+      it "should leave you subscribed to group public threads" do
+        thread.add_subscriber(user)
+        thread.subscribers.should include(user)
+        GroupMembership.observers.enable :group_membership_observer do
+          group_membership.destroy
+        end
+        thread.reload
+        thread.subscribers.should include(user)
+      end
+    end
+  end
 end
