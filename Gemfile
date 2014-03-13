@@ -25,7 +25,7 @@ gem 'declarative_authorization'
 gem 'thin'
 gem 'state_machine'
 gem 'rack-cache', require: 'rack/cache'
-gem 'dragonfly'
+gem 'dragonfly', '~> 0.9.15' # pin to delay the upgrade to 1.x
 gem 'redis-store', '~> 1.0.0'
 gem 'resque'
 gem 'acts_as_indexed'

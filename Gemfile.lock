@@ -273,7 +273,7 @@ DEPENDENCIES
   declarative_authorization
   devise (~> 2.1.2)
   devise_invitable
-  dragonfly
+  dragonfly (~> 0.9.15)
   draper (= 0.15.0)
   email_reply_parser
   email_spec
