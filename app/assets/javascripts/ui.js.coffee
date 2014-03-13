@@ -121,6 +121,8 @@ jQuery ->
   $(document)
     .on "click", "menu.tools", ->
       $(this).toggleClass("reveal")
+    .on "touchend", "menu.tools", ->
+      $(this).addClass("reveal")
     .on "mouseleave", "menu.tools", ->
       $(this).removeClass("reveal")
 
