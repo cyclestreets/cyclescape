@@ -24,6 +24,7 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  deleted_at             :datetime
 #
 
 require 'spec_helper'
@@ -301,6 +302,70 @@ describe User do
     end
   end
 
+  context "account deleting" do
+    subject { FactoryGirl.create(:user) }
+
+    it "should appear to be deleted" do
+      subject
+      User.all.should include(subject)
+      subject.destroy
+      User.all.should_not include(subject)
+    end
+
+    it "should not really be deleted" do
+      subject.destroy
+      User.with_deleted.all.should include(subject)
+    end
+
+    it "should remove the display name and obfuscate the full name" do
+      subject.destroy
+      subject.display_name.should be_nil
+      subject.name.should include("deleted")
+      subject.name.should include(subject.id.to_s)
+    end
+
+    it "should clear the profile" do
+      # Exact behaviour tested elsewhere
+      subject.profile.should_receive(:clear).and_return(true)
+      subject.destroy
+    end
+
+    context "with locations" do
+      subject { FactoryGirl.create(:user, :with_location) }
+
+      it "should remove the user location" do
+        subject.destroy
+        subject.reload
+        subject.locations.should be_empty
+        UserLocation.all.size.should eq(0)
+      end
+    end
+
+    context "subscribed to thread" do
+      let!(:thread_subscription) { FactoryGirl.create(:thread_subscription, user: subject) }
+
+      it "should unsubscribe user from threads" do
+        subject.subscribed_threads.size.should eql(1)
+        subject.destroy
+        subject.reload
+        subject.subscribed_threads.size.should eql(0)
+        thread_subscription.thread.subscribers.should_not include(subject)
+      end
+    end
+
+    context "in a group" do
+      let!(:group_membership) { FactoryGirl.create(:group_membership, user: subject) }
+
+      it "should remove member from the group" do
+        subject.groups.size.should eql(1)
+        subject.destroy
+        subject.reload
+        subject.groups.size.should eql(0)
+        group_membership.group.members.should_not include(subject)
+      end
+    end
+  end
+
   context "buffered locations" do
     subject { FactoryGirl.create(:user_with_location) }
     let(:point) { 'POINT(-1 1)' }
@@ -389,7 +454,7 @@ describe User do
 
     it "should know if a group membership request is pending" do
       subject.membership_request_pending_for?(group).should be_false
-      g = GroupMembershipRequest.create(user: subject, group: group)
+      g = FactoryGirl.create(:group_membership_request, user: subject, group: group)
       subject.reload
       subject.membership_request_pending_for?(group).should be_true
 

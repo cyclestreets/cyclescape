@@ -76,4 +76,29 @@ describe UserProfile do
       subject.should have(0).errors_on(:website)
     end
   end
+
+  context "clearing" do
+    subject { FactoryGirl.create(:user_profile) }
+
+    it "should remove the website" do
+      subject.website.should_not be_nil
+      subject.clear
+      subject.reload # check it was saved
+      subject.website.should be_nil
+    end
+
+    it "should remove the about text" do
+      subject.about.should_not be_nil
+      subject.clear
+      subject.reload
+      subject.about.should be_nil
+    end
+
+    it "should remove the picture" do
+      subject.picture.should_not be_nil
+      subject.clear
+      subject.reload
+      subject.picture.should be_nil
+    end
+  end
 end

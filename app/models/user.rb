@@ -24,12 +24,14 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  deleted_at             :datetime
 #
 
 class User < ActiveRecord::Base
   attr_accessible :email, :full_name, :display_name, :password, :password_confirmation, :disabled
 
   acts_as_voter
+  acts_as_paranoid
 
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable
   ALLOWED_ROLES = %w(member admin)
@@ -62,7 +64,13 @@ class User < ActiveRecord::Base
   before_validation :set_default_role, :unless => :role
   after_create :create_user_prefs
 
-  scope :active, where("disabled_at IS NULL AND confirmed_at IS NOT NULL")
+  before_destroy :obfuscate_name
+  before_destroy :clear_profile
+  before_destroy :remove_locations
+  before_destroy :remove_group_memberships
+  before_destroy :remove_thread_subscriptions
+
+  scope :active, where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL')
 
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
@@ -198,6 +206,33 @@ class User < ActiveRecord::Base
 
   def remembered_group?
     remembered_group
+  end
+
+  def obfuscate_name
+    self.full_name = "User #{self.id} (deleted)"
+    self.display_name = nil
+  end
+
+  def clear_profile
+    self.profile.clear
+  end
+
+  def remove_locations
+    self.locations.each do |location|
+      location.destroy
+    end
+  end
+
+  def remove_group_memberships
+    self.memberships.each do |membership|
+      membership.destroy
+    end
+  end
+
+  def remove_thread_subscriptions
+    self.thread_subscriptions.each do |subscription|
+      subscription.destroy
+    end
   end
 
   protected

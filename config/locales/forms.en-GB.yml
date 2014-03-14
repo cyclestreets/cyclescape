@@ -78,6 +78,8 @@
       group_membership:
         role: "Select if they are a normal or committee member of the group."
         full_name: "Please enter their name; they can change this when they accept the invite."
+      group_membership_request:
+        message: "You can optionally send the group administrators any additional information you feel is appropriate, such as a group membership number."
       group_pref:
         notify_membership_requests: "Notifications will be sent when a Cyclescape user asks to join this group"
         membership_secretary: "Choose an optional membership secretary who will receive membership notification emails. Leave blank for notifications to be sent to the group email address."
@@ -105,6 +107,8 @@
         create: "Add Attachment"
       group_membership:
         create: "Invite member"
+      group_membership_request:
+        create: "Request Group Membership"
       issue:
         create: "Send Report"
         update: "Save Report"

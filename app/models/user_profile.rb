@@ -29,6 +29,10 @@ class UserProfile < ActiveRecord::Base
     picture.thumb("50x50>")
   end
 
+  def clear
+    update_attributes(picture: nil, website: nil, about: nil)
+  end
+
   protected
 
   def generate_picture_path
