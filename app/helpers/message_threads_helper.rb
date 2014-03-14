@@ -44,12 +44,12 @@ module MessageThreadsHelper
   end
 
   def render_compact_threads_list(threads, options = {})
-    defaults = {partial: "message_threads/compact", collection: threads, as: :thread}
+    defaults = { partial: "message_threads/compact", collection: threads, as: :thread }
     render defaults.merge(options)
   end
 
   def render_threads_list(threads, options = {})
-    defaults = {partial: "message_threads/list", collection: threads, as: :thread}
+    defaults = { partial: "message_threads/list", collection: threads, as: :thread }
     render defaults.merge(options)
   end
 

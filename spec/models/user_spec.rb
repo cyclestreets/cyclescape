@@ -392,8 +392,8 @@ describe User do
 
     it "should return multipolygon for point, line and polygon combined" do
       subject.locations[0].location = point
-      subject.locations.create({location: line}, without_protection: true)
-      subject.locations.create({location: polygon}, without_protection: true)
+      subject.locations.create({ location: line }, without_protection: true)
+      subject.locations.create({ location: polygon }, without_protection: true)
       subject.buffered_locations.geometry_type.type_name.should eq("MultiPolygon")
     end
   end
@@ -427,14 +427,14 @@ describe User do
       subject.start_location.should eql(Geo::NOWHERE_IN_PARTICULAR)
 
       # add a group with no location
-      GroupMembership.create({user: subject, group: group, role: "member"}, without_protection: true)
+      GroupMembership.create({ user: subject, group: group, role: "member" }, without_protection: true)
       subject.reload
       subject.start_location.should eql(Geo::NOWHERE_IN_PARTICULAR)
 
       # add a group with a location
       group2.profile.location = polygon
       group2.profile.save!
-      GroupMembership.create({user: subject, group: group2, role: "member"}, without_protection: true)
+      GroupMembership.create({ user: subject, group: group2, role: "member" }, without_protection: true)
       subject.reload
       subject.start_location.should eql(group2.profile.location)
 

@@ -29,7 +29,7 @@ class MessageThread < ActiveRecord::Base
   belongs_to :group
   belongs_to :issue
   has_many :messages, foreign_key: "thread_id", autosave: true, order: 'created_at ASC'
-  has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id", conditions: {deleted_at: nil}
+  has_many :subscriptions, class_name: "ThreadSubscription", foreign_key: "thread_id", conditions: { deleted_at: nil }
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, through: :messages, source: :created_by, uniq: true
   has_many :user_priorities, class_name: "UserThreadPriority", foreign_key: "thread_id"
@@ -45,7 +45,7 @@ class MessageThread < ActiveRecord::Base
   before_validation :set_public_token, on: :create
 
   validates :title, :state, :created_by_id, presence: true
-  validates :privacy, inclusion: {in: ALLOWED_PRIVACY}
+  validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
 
   state_machine :state, initial: :new do
   end
@@ -88,7 +88,7 @@ class MessageThread < ActiveRecord::Base
       found.undelete!
       found
     else
-      subscriptions.create({user: user}, without_protection: true)
+      subscriptions.create({ user: user }, without_protection: true)
     end
   end
 
@@ -111,7 +111,7 @@ class MessageThread < ActiveRecord::Base
 
     m = []
 
-    m << messages.create!({body: stripped, created_by: user}, without_protection: true)
+    m << messages.create!({ body: stripped, created_by: user }, without_protection: true)
 
     # Attachments
     mail.message.attachments.each do |attachment|
@@ -120,7 +120,7 @@ class MessageThread < ActiveRecord::Base
       else
         component = DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
       end
-      message = messages.build({created_by: user}, without_protection: true)
+      message = messages.build({ created_by: user }, without_protection: true)
       component.thread = self
       component.message = message
       component.created_by = user
@@ -133,7 +133,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def email_subscribers
-    subscribers.joins(:prefs).where(user_prefs: {:enable_email => true})
+    subscribers.joins(:prefs).where(user_prefs: { :enable_email => true })
   end
 
   def private_to_committee?

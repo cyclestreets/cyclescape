@@ -10,7 +10,7 @@ class MessageThreadsController < ApplicationController
     load_thread
     set_page_title @thread.title
     @issue = IssueDecorator.decorate(@thread.issue) if @thread.issue
-    @messages = @thread.messages.includes({created_by: :profile}, :component).all
+    @messages = @thread.messages.includes({ created_by: :profile }, :component).all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers
     @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
@@ -71,7 +71,7 @@ class MessageThreadsController < ApplicationController
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
       if Authorization::Engine.instance.permit? :show,  object: thread, user: member, user_roles: [:member, :guest]
-        thread.subscriptions.create({user: member}, without_protection: true) unless member.subscribed_to_thread?(thread)
+        thread.subscriptions.create({ user: member }, without_protection: true) unless member.subscribed_to_thread?(thread)
       end
     end
   end
@@ -81,12 +81,12 @@ class MessageThreadsController < ApplicationController
 
     locations = UserLocation.intersects(buffered_location).
         joins(:user => :prefs).
-        where(user_prefs: {involve_my_locations: "subscribe"}).
+        where(user_prefs: { involve_my_locations: "subscribe" }).
         all
 
     locations.each do |loc|
       if Authorization::Engine.instance.permit? :show,  object: thread, user: loc.user, user_roles: [:member, :guest]
-        thread.subscriptions.create({user: loc.user}, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
+        thread.subscriptions.create({ user: loc.user }, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
       end
     end
   end

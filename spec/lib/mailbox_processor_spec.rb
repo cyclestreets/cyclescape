@@ -2,8 +2,8 @@ require "spec_helper"
 
 describe MailboxProcessor do
   let(:config) do
-    {host: "mail.example.com", user_name: "user@example.com", password: "secret",
-     authentication: "PLAIN", mailbox: "INBOX", mail_processor: "MailProcessor"}
+    { host: "mail.example.com", user_name: "user@example.com", password: "secret",
+      authentication: "PLAIN", mailbox: "INBOX", mail_processor: "MailProcessor" }
   end
 
   let(:imap) { double("IMAP connection") }
@@ -54,7 +54,7 @@ describe MailboxProcessor do
     end
 
     describe "#fetch_message" do
-      let(:message) { message = double("message", attr: {"RFC822" => "Mail text"}) }
+      let(:message) { message = double("message", attr: { "RFC822" => "Mail text" }) }
 
       before do
         subject.stub(:imap).and_return(imap)

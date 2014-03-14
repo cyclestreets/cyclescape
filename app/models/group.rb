@@ -25,7 +25,7 @@ class Group < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
   validates :short_name, presence: true, uniqueness: true, subdomain: true
-  validates :default_thread_privacy, inclusion: {in: MessageThread::ALLOWED_PRIVACY}
+  validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }
 
   after_create :create_default_profile, unless: :profile
   after_create :create_default_prefs, unless: :prefs

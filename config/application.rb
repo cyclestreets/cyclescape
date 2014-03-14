@@ -61,7 +61,7 @@ module Cyclescape
     config.cache_store = :redis_store
 
     # ActionMailer default URL options
-    config.action_mailer.default_url_options = {host: "www.cyclescape.org"}
+    config.action_mailer.default_url_options = { host: "www.cyclescape.org" }
 
     # Default notification e-mail from address
     config.default_email_from_domain = "cyclescape.org"
@@ -72,6 +72,6 @@ module Cyclescape
     config.github_project_url = "https://github.com/cyclestreets/toolkit"
 
     # Google analytics
-    config.analytics = {google: {account_id: "UA-28721275-1", base_domain: "cyclescape.org"}}
+    config.analytics = { google: { account_id: "UA-28721275-1", base_domain: "cyclescape.org" } }
   end
 end

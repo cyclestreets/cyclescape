@@ -74,7 +74,7 @@ class User < ActiveRecord::Base
 
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
-  validates :role, presence: true, inclusion: {in: ALLOWED_ROLES}
+  validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
 
   def self.user_roles_map
     ALLOWED_ROLES.map {|n| [I18n.t(".user_roles.#{n.to_s}"), n] }

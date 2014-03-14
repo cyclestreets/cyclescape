@@ -28,7 +28,7 @@ class GroupMembership < ActiveRecord::Base
   before_validation :invite_user_if_new
 
   validates :group_id, presence: true
-  validates :role, inclusion: {in: ALLOWED_ROLES}
+  validates :role, inclusion: { in: ALLOWED_ROLES }
   validates_associated :user
 
   accepts_nested_attributes_for :user

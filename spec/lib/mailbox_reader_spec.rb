@@ -4,8 +4,8 @@ MailProcessor = nil
 
 describe MailboxReader do
   let(:config) do
-    {host: "mail.example.com", user_name: "user@example.com", password: "secret",
-     authentication: "PLAIN", mailbox: "INBOX", mail_processor: "MailProcessor"}
+    { host: "mail.example.com", user_name: "user@example.com", password: "secret",
+      authentication: "PLAIN", mailbox: "INBOX", mail_processor: "MailProcessor" }
   end
 
   let(:imap) { double("IMAP connection") }

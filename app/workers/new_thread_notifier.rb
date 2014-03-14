@@ -79,7 +79,7 @@ class NewThreadNotifier
       next unless Authorization::Engine.instance.permit? :show,  object: thread, user: loc.user
 
       # Symbol keys are converted to strings by Resque
-      opts = { "thread_id" => thread.id, "user_location_id" => loc.id}
+      opts = { "thread_id" => thread.id, "user_location_id" => loc.id }
       list[loc.user.id] = { type: :send_new_user_location_thread_notification, opts: opts }
     end
 

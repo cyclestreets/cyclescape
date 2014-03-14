@@ -8,7 +8,7 @@ class DashboardsController < ApplicationController
     subscribed_threads = current_user.subscribed_threads.order_by_latest_message.limit(12).includes(:issue, latest_message: [:component, :created_by])
     @subscribed_threads = ThreadListDecorator.decorate(subscribed_threads)
 
-    group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes({issue: :tags}, :group)
+    group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes({ issue: :tags }, :group)
     @group_threads = ThreadListDecorator.decorate(group_threads)
 
     deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 12).includes(:issue)

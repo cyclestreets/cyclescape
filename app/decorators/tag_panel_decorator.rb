@@ -9,7 +9,7 @@ class TagPanelDecorator < ApplicationDecorator
   end
 
   def render
-    locals = {context: context, form_url: form_url, cancel_url: cancel_url, auth_context: auth_context}
+    locals = { context: context, form_url: form_url, cancel_url: cancel_url, auth_context: auth_context }
     h.content_tag(:div, class: "tags-panel") do
       panel = h.render partial: "shared/tags/panel", locals: locals
       form = h.render partial: "shared/tags/edit", locals: locals

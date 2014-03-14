@@ -205,12 +205,6 @@ SpaceAroundEqualsInParameterDefault:
 SpaceAroundOperators:
   Enabled: false
 
-# Offence count: 116
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
-SpaceInsideHashLiteralBraces:
-  Enabled: false
-
 # Offence count: 6
 # Cop supports --auto-correct.
 SpaceInsideParens:

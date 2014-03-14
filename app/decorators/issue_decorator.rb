@@ -2,7 +2,7 @@ class IssueDecorator < ApplicationDecorator
   decorates :issue
 
   def map
-    h.render partial: "map", locals: {issue: issue}
+    h.render partial: "map", locals: { issue: issue }
   end
 
   def brief_description
@@ -47,7 +47,7 @@ class IssueDecorator < ApplicationDecorator
   end
 
   def tags_list
-    h.render partial: "shared/tags/list", locals: {tags: issue.tags}
+    h.render partial: "shared/tags/list", locals: { tags: issue.tags }
   end
 
   def thread_count
