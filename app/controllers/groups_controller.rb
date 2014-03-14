@@ -53,12 +53,8 @@ class GroupsController < ApplicationController
   def group_feature(group, bbox = nil)
     geom = bbox.to_geometry if bbox
 
-    group.loc_feature( # thumbnail: group.medium_icon_path,
-                        # image_url: issue.tip_icon_path(false),
-                        title: group.name,
-                        # size_ratio: group.size_ratio(geom),
-                        # url: view_context.url_for(group.profile),
-                        url: root_url(subdomain: group.short_name),
-                        description: view_context.auto_link(group.trunctated_description))
+    group.loc_feature(title: group.name,
+                      url: root_url(subdomain: group.short_name),
+                      description: view_context.auto_link(group.trunctated_description))
   end
 end
