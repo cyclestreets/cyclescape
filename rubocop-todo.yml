@@ -17,12 +17,6 @@ AmbiguousOperator:
 BlockAlignment:
   Enabled: false
 
-# Offence count: 16
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-BracesAroundHashParameters:
-  Enabled: false
-
 # Offence count: 2
 CaseEquality:
   Enabled: false

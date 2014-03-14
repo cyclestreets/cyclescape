@@ -7,7 +7,7 @@ module MapsHelper
 
       page << map.add_controls([OpenLayers::Control::PZ.new,
                                 OpenLayers::Control::Navigation.new,
-                                OpenLayers::Control::LayerSwitcher.new({roundedCornerColor: "#575757"})])
+                                OpenLayers::Control::LayerSwitcher.new(roundedCornerColor: "#575757")])
 
       add_formats(page)
 
@@ -71,11 +71,11 @@ module MapsHelper
   protected
 
   def core_map(dom_id, &block)
-    map = MapLayers::Map.new(dom_id, {theme: "/openlayers/theme/default/style.css",
-                                      projection: googleproj,
-                                      displayProjection: projection,
-                                      controls: []
-                                       }) do |map, page|
+    map = MapLayers::Map.new(dom_id, theme: "/openlayers/theme/default/style.css",
+                                     projection: googleproj,
+                                     displayProjection: projection,
+                                     controls: []
+                                       ) do |map, page|
       yield(map, page) if block_given?
     end
   end

@@ -51,7 +51,7 @@ describe Issue do
     end
 
     it "should accept properties for feature" do
-      f = subject.loc_feature({foo: "bar"})
+      f = subject.loc_feature(foo: "bar")
       f.properties.should_not be_nil
       f.property(:foo).should eql("bar")
     end
@@ -345,7 +345,7 @@ describe Issue do
     end
 
     it "should find the issue given a taggable" do
-      Issue.find_by_tags_from(double({tags: [tag]})).should include(subject)
+      Issue.find_by_tags_from(double(tags: [tag])).should include(subject)
     end
   end
 
