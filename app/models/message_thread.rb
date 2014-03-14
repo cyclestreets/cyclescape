@@ -63,7 +63,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def self.order_by_latest_message
-    rel = joins("JOIN (SELECT thread_id, MAX(created_at) AS created_at FROM messages m GROUP BY thread_id)" +
+    rel = joins("JOIN (SELECT thread_id, MAX(created_at) AS created_at FROM messages m GROUP BY thread_id)" \
                 "AS latest ON latest.thread_id = message_threads.id")
     rel.order("latest.created_at DESC")
   end

@@ -96,11 +96,6 @@ IndentationWidth:
 Lambda:
   Enabled: false
 
-# Offence count: 1
-# Cop supports --auto-correct.
-LineEndConcatenation:
-  Enabled: false
-
 # Offence count: 777
 LineLength:
   Max: 931
