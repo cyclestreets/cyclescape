@@ -173,11 +173,6 @@ ShadowingOuterLocalVariable:
 SingleLineBlockParams:
   Enabled: false
 
-# Offence count: 5
-# Cop supports --auto-correct.
-SpaceAroundEqualsInParameterDefault:
-  Enabled: false
-
 # Offence count: 9
 # Cop supports --auto-correct.
 SpaceAroundOperators:

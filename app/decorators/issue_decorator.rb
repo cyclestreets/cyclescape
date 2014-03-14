@@ -18,23 +18,23 @@ class IssueDecorator < ApplicationDecorator
     h.image_tag standard_photo_url, class: "issue-photo"
   end
 
-  def small_icon_path(default=true)
+  def small_icon_path(default = true)
     icon_path("s", default)
   end
 
-  def medium_icon_path(default=true)
+  def medium_icon_path(default = true)
     icon_path("m", default)
   end
 
-  def large_icon_path(default=true)
+  def large_icon_path(default = true)
     icon_path("l", default)
   end
 
-  def tip_icon_path(default=true)
+  def tip_icon_path(default = true)
     icon_path("tip", default)
   end
 
-  def icon_path(size, default=true)
+  def icon_path(size, default = true)
     icon = nil
     icon ||= icon_from_tags
     icon ||= "misc" if default
