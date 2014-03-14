@@ -35,7 +35,7 @@ FactoryGirl.define do
     after(:build) { |u| u.skip_confirmation! }
 
     trait :admin do
-      role "admin"
+      role 'admin'
     end
 
     trait :with_profile do
@@ -51,11 +51,11 @@ FactoryGirl.define do
     end
 
     factory :stewie do
-      email "stewie@example.com"
-      full_name "Stewie Griffin"
-      display_name "Stewie"
-      password "Victory is mine!"
-      password_confirmation "Victory is mine!"
+      email 'stewie@example.com'
+      full_name 'Stewie Griffin'
+      display_name 'Stewie'
+      password 'Victory is mine!'
+      password_confirmation 'Victory is mine!'
       admin
 
       factory :stewie_with_profile do
@@ -65,27 +65,27 @@ FactoryGirl.define do
     end
 
     factory :brian do
-      email "brian@example.com"
-      full_name "Brian Griffin"
-      display_name "Brian"
-      password "BRI-D0G"
-      password_confirmation "BRI-D0G"
+      email 'brian@example.com'
+      full_name 'Brian Griffin'
+      display_name 'Brian'
+      password 'BRI-D0G'
+      password_confirmation 'BRI-D0G'
     end
 
     factory :meg do
-      email "meg@example.com"
-      full_name "Meg Griffin"
-      display_name "Meg"
-      password "MegGriffin"
-      password_confirmation "MegGriffin"
+      email 'meg@example.com'
+      full_name 'Meg Griffin'
+      display_name 'Meg'
+      password 'MegGriffin'
+      password_confirmation 'MegGriffin'
     end
 
     factory :chris do
-      email "chris@example.com"
-      full_name "Chris Griffin"
-      display_name "Chris"
-      password "ChrisGriffin"
-      password_confirmation "ChrisGriffin"
+      email 'chris@example.com'
+      full_name 'Chris Griffin'
+      display_name 'Chris'
+      password 'ChrisGriffin'
+      password_confirmation 'ChrisGriffin'
     end
 
     factory :user_with_location, traits: [:with_location]

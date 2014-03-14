@@ -18,7 +18,7 @@ class InboundMailProcessor
     messages = thread.add_messages_from_email!(mail)
     thread.add_subscriber(messages.first.created_by) unless messages.first.created_by.ever_subscribed_to_thread?(thread)
     messages.each do |message|
-      ThreadNotifier.notify_subscribers(thread, ["new", message.component_name].join("_").to_sym, message)
+      ThreadNotifier.notify_subscribers(thread, ['new', message.component_name].join('_').to_sym, message)
     end
   end
 end

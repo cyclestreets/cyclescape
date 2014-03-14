@@ -1,11 +1,11 @@
 module ApplicationHelper
   include TweetButton
 
-  TweetButton.default_tweet_button_options = { via: "cyclescape", count: "horizontal" }
+  TweetButton.default_tweet_button_options = { via: 'cyclescape', count: 'horizontal' }
 
   def cancel_link(url = { action: :index })
-    content_tag("li", class: "action link_action cancel") do
-      link_to t("cancel"), url
+    content_tag('li', class: 'action link_action cancel') do
+      link_to t('cancel'), url
     end
   end
 
@@ -31,15 +31,15 @@ module ApplicationHelper
 
   def link_to_github_commit
     commit = Rails.application.config.git_hash
-    url = Rails.application.config.github_project_url + "/commit/" + commit
+    url = Rails.application.config.github_project_url + '/commit/' + commit
     link_to commit, url
   end
 
   def ajax_spinner_image
-    image_tag "spinner.gif"
+    image_tag 'spinner.gif'
   end
 
   def link_to_sign_in
-    link_to t("sign_in"), new_user_session_path
+    link_to t('sign_in'), new_user_session_path
   end
 end

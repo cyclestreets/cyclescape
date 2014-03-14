@@ -66,7 +66,7 @@ class MessageThreadsController < ApplicationController
   def subscribe_group_users(thread)
     # If it's an "administrative" discussion, don't subscribe without extra pref
     t = UserPref.arel_table
-    pref = t[:involve_my_groups].eq("subscribe")
+    pref = t[:involve_my_groups].eq('subscribe')
     constraint = thread.issue ? pref : pref.and(t[:involve_my_groups_admin].eq(true))
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
@@ -81,7 +81,7 @@ class MessageThreadsController < ApplicationController
 
     locations = UserLocation.intersects(buffered_location).
         joins(user: :prefs).
-        where(user_prefs: { involve_my_locations: "subscribe" }).
+        where(user_prefs: { involve_my_locations: 'subscribe' }).
         all
 
     locations.each do |loc|

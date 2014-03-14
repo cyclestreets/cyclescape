@@ -1,8 +1,8 @@
 require 'rubygems'
 
-ENV["RAILS_ENV"] ||= 'test'
+ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path("../../config/environment", __FILE__)
+require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'email_spec'
@@ -11,7 +11,7 @@ require 'declarative_authorization/maintenance'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   # == Mock Framework
@@ -45,13 +45,13 @@ RSpec.configure do |config|
     FileUtils.rm_r(dragonfly_path) if File.exists?(dragonfly_path)
 
     # Create the root user
-    unless User.where("id = 1").exists?
-      root = User.new(email: "root@cyclescape.org", full_name: "Root",
-                      password: "changeme", password_confirmation: "changeme")
-      root.role = "admin"
+    unless User.where('id = 1').exists?
+      root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
+                      password: 'changeme', password_confirmation: 'changeme')
+      root.role = 'admin'
       root.skip_confirmation!
       root.save!
-      User.update_all("id = 1", "id = #{root.id}")
+      User.update_all('id = 1', "id = #{root.id}")
     end
 
     # Disable the observers so that their behaviour can be tested independently

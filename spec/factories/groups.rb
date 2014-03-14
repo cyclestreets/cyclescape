@@ -25,10 +25,10 @@ FactoryGirl.define do
     end
 
     factory :quahogcc do
-      name "Quahog Cycling Campaign"
-      short_name "quahogcc"
-      website "http://www.quahogcc.com"
-      email "louis@quahogcc.com"
+      name 'Quahog Cycling Campaign'
+      short_name 'quahogcc'
+      website 'http://www.quahogcc.com'
+      email 'louis@quahogcc.com'
     end
   end
 end

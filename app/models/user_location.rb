@@ -16,13 +16,13 @@ class UserLocation < ActiveRecord::Base
   attr_accessible :category_id, :loc_json
 
   belongs_to :user
-  belongs_to :category, class_name: "LocationCategory"
+  belongs_to :category, class_name: 'LocationCategory'
 
   validates :location, presence: true
   validates :user, presence: true
   validates :category, presence: true
 
   def overlapping_groups
-    GroupProfile.where("st_intersects(location, ?)", self.location).order("st_area(location) asc").map { |p| p.group }
+    GroupProfile.where('st_intersects(location, ?)', self.location).order('st_area(location) asc').map { |p| p.group }
   end
 end

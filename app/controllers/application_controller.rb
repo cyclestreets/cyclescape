@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def ensure_proper_protocol
     if request.ssl? && !ssl_allowed_action?
       flash.keep
-      redirect_to "http://" + request.host + request.fullpath # FIXME not safe for domains with ports
+      redirect_to 'http://' + request.host + request.fullpath # FIXME not safe for domains with ports
     end
   end
 
@@ -36,19 +36,19 @@ class ApplicationController < ActionController::Base
   # ... and we need to make sure they go back to an http page, so that non-https maps can load.
   def after_sign_in_path_for(resource_or_scope)
     s = stored_location_for(resource_or_scope) # nb returns and deletes
-    if s && s[0] == "/" && s != "/"
+    if s && s[0] == '/' && s != '/'
       s.slice!(0) # remove the leading slash
       if current_user.remembered_group?
         # is there a cleaner way than using root_url?
-        root_url(protocol: "http", subdomain: current_user.remembered_group.short_name) + s
+        root_url(protocol: 'http', subdomain: current_user.remembered_group.short_name) + s
       else
-        root_url(protocol: "http") + s
+        root_url(protocol: 'http') + s
       end
     else
       if current_user.remembered_group?
-        dashboard_url(protocol: "http", subdomain: current_user.remembered_group.short_name)
+        dashboard_url(protocol: 'http', subdomain: current_user.remembered_group.short_name)
       else
-        dashboard_url(protocol: "http")
+        dashboard_url(protocol: 'http')
       end
     end
   end
@@ -61,13 +61,13 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(resource_or_scope)
-    root_url(protocol: "http")
+    root_url(protocol: 'http')
   end
 
   def no_disabled_users
     if current_user.present? && current_user.disabled_at?
       sign_out current_user
-      redirect_to root_path, alert: t("application.account_disabled")
+      redirect_to root_path, alert: t('application.account_disabled')
     end
   end
 
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_xhr_layout
-    if request.xhr? then nil else "application" end
+    if request.xhr? then nil else 'application' end
   end
 
   def load_group_from_subdomain
@@ -93,10 +93,10 @@ class ApplicationController < ActionController::Base
       page_title = title
     else
       key = "#{controller_path.tr("/", ".")}.#{params[:action]}.title"
-      page_title = I18n.translate(key, default: "")
+      page_title = I18n.translate(key, default: '')
     end
-    app_title = I18n.translate("application_name")
-    @page_title = if page_title == "" then app_title else "#{page_title} - #{app_title}" end
+    app_title = I18n.translate('application_name')
+    @page_title = if page_title == '' then app_title else "#{page_title} - #{app_title}" end
   end
 
   def page_title
@@ -105,7 +105,7 @@ class ApplicationController < ActionController::Base
   helper_method :page_title
 
   def is_group_subdomain?
-    !request.subdomain.blank? && request.subdomain != "www"
+    !request.subdomain.blank? && request.subdomain != 'www'
   end
 
   def group_subdomain?(group = nil)
@@ -120,7 +120,7 @@ class ApplicationController < ActionController::Base
   def remember_current_group
     return unless current_user
     # Poor man's skip_filter to avoid a new Devise-inherited controller
-    return if params[:controller] == "devise/sessions"
+    return if params[:controller] == 'devise/sessions'
     current_user.update_remembered_group(current_group)
   end
 
@@ -128,7 +128,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       authenticate_user!
     else
-      render status: :unauthorized, text: t(".application.permission_denied")
+      render status: :unauthorized, text: t('.application.permission_denied')
     end
   end
 
@@ -140,7 +140,7 @@ class ApplicationController < ActionController::Base
 
   # A method to convert an openlayers-format bbox string into an rgeo bbox object
   def bbox_from_string(string, factory)
-    minlon, minlat, maxlon, maxlat = string.split(",").collect { |i| i.to_f }
+    minlon, minlat, maxlon, maxlat = string.split(',').collect { |i| i.to_f }
     bbox = RGeo::Cartesian::BoundingBox.new(factory)
     bbox.add(factory.point(minlon, minlat)).add(factory.point(maxlon, maxlat))
   end
@@ -148,7 +148,7 @@ class ApplicationController < ActionController::Base
   # Formatting grabbed from ruby stdlib
   def timestamp_with_usec
     time = Time.now
-    time.strftime("%Y-%m-%dT%H:%M:%S.") << "%06d " % time.usec
+    time.strftime('%Y-%m-%dT%H:%M:%S.') << '%06d ' % time.usec
   end
 
   # Oh, rails, how I hate your shielding of Logger formatters from me

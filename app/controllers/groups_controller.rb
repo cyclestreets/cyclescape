@@ -30,10 +30,10 @@ class GroupsController < ApplicationController
   def all_geometries
     if params[:bbox]
       bbox = bbox_from_string(params[:bbox], GroupProfile.rgeo_factory)
-      group_profiles = GroupProfile.intersects(bbox.to_geometry).order("created_at DESC").limit(50)
+      group_profiles = GroupProfile.intersects(bbox.to_geometry).order('created_at DESC').limit(50)
     else
       bbox = nil
-      group_profiles = GroupProfile.order("created_at DESC").limit(50)
+      group_profiles = GroupProfile.order('created_at DESC').limit(50)
     end
     factory = RGeo::GeoJSON::EntityFactory.new
     collection = factory.feature_collection(group_profiles.sort_by! { |o| o.size }.reverse.map { | group_profile | group_feature(GroupDecorator.decorate(group_profile.group), bbox) })

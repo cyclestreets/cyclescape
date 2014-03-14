@@ -9,12 +9,12 @@ module Locatable
     # Note - pass in the location as an array, otherwise .each is called on
     # multipolygons and it serializes to multiple geometries.
     def intersects(l)
-      where("st_intersects(location, ?)", [l])
+      where('st_intersects(location, ?)', [l])
     end
 
     # define a variant of intersects that doesn't include entirely surrouding polygons
     def intersects_not_covered(l)
-      intersects(l).where("not st_coveredby(?, location)", [l])
+      intersects(l).where('not st_coveredby(?, location)', [l])
     end
 
     # This could be improved by actually using the factory from the location column, rather
@@ -72,7 +72,7 @@ module Locatable
     if self.location
       RGeo::GeoJSON.encode(self.loc_feature).to_json
     else
-      ""
+      ''
     end
   end
 

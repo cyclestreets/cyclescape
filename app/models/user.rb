@@ -36,28 +36,28 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable
   ALLOWED_ROLES = %w(member admin)
 
-  has_many :memberships, class_name: "GroupMembership"
+  has_many :memberships, class_name: 'GroupMembership'
   has_many :groups, through: :memberships
-  has_many :membership_requests, class_name: "GroupMembershipRequest"
-  has_many :actioned_membership_requests, foreign_key: "actioned_by_id", class_name: "GroupMembershipRequest"
-  has_many :issues, foreign_key: "created_by_id"
-  has_many :created_threads, class_name: "MessageThread", foreign_key: "created_by_id"
-  has_many :messages, foreign_key: "created_by_id"
-  has_many :locations, class_name: "UserLocation"
+  has_many :membership_requests, class_name: 'GroupMembershipRequest'
+  has_many :actioned_membership_requests, foreign_key: 'actioned_by_id', class_name: 'GroupMembershipRequest'
+  has_many :issues, foreign_key: 'created_by_id'
+  has_many :created_threads, class_name: 'MessageThread', foreign_key: 'created_by_id'
+  has_many :messages, foreign_key: 'created_by_id'
+  has_many :locations, class_name: 'UserLocation'
   has_many :thread_subscriptions do
     def to(thread)
-      where("thread_id = ?", thread).first
+      where('thread_id = ?', thread).first
     end
   end
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
   has_many :subscribed_threads, through: :thread_subscriptions, source: :thread, conditions: 'thread_subscriptions.deleted_at is NULL'
-  has_many :thread_priorities, class_name: "UserThreadPriority"
+  has_many :thread_priorities, class_name: 'UserThreadPriority'
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
   has_many :thread_views
   has_many :site_comments
-  has_one :profile, class_name: "UserProfile"
-  has_one :prefs, class_name: "UserPref"
-  belongs_to :remembered_group, class_name: "Group"
+  has_one :profile, class_name: 'UserProfile'
+  has_one :prefs, class_name: 'UserPref'
+  belongs_to :remembered_group, class_name: 'Group'
 
   accepts_nested_attributes_for :profile, update_only: true
 
@@ -83,13 +83,13 @@ class User < ActiveRecord::Base
   def self.find_or_invite(email_address, name = nil)
     existing = find_by_email(email_address)
     return existing if existing
-    name = email_address.split("@").first if name.nil?
+    name = email_address.split('@').first if name.nil?
     User.invite!(full_name: name, email: email_address)
   end
 
   def self.init_user_prefs
-    joins("LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id").
-      where("user_prefs.id IS NULL").
+    joins('LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id').
+      where('user_prefs.id IS NULL').
       each { |u| u.create_user_prefs }
   end
 
@@ -149,10 +149,10 @@ class User < ActiveRecord::Base
   end
 
   def disabled=(d)
-    if d == "1" && !disabled_at?
+    if d == '1' && !disabled_at?
       self.disabled_at = Time.now
     end
-    if d == "0" && disabled_at?
+    if d == '0' && disabled_at?
       self.disabled_at = nil
     end
   end
@@ -238,7 +238,7 @@ class User < ActiveRecord::Base
   protected
 
   def set_default_role
-    self.role = "member"
+    self.role = 'member'
   end
 
   # Devise hook for password validation

@@ -14,25 +14,25 @@
 require 'spec_helper'
 
 describe GroupProfile do
-  describe "to be valid" do
+  describe 'to be valid' do
     subject { FactoryGirl.create(:group_profile) }
 
-    it "can have a blank description" do
+    it 'can have a blank description' do
       subject.description = nil
       subject.should be_valid
     end
 
-    it "can have a blank location" do
+    it 'can have a blank location' do
       subject.location = nil
       subject.should be_valid
     end
 
-    it "can have blank joining instructions" do
+    it 'can have blank joining instructions' do
       subject.joining_instructions = nil
       subject.should be_valid
     end
 
-    it "should accept a valid geojson string" do
+    it 'should accept a valid geojson string' do
       subject.location = nil
       subject.loc_json = '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
       subject.should be_valid
@@ -40,7 +40,7 @@ describe GroupProfile do
       subject.location.y.should eql(52.27)
     end
 
-    it "should ignore a bogus geojson string" do
+    it 'should ignore a bogus geojson string' do
       subject.location = nil
       subject.loc_json = 'Garbage'
       subject.should be_valid

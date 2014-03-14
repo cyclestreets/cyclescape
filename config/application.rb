@@ -37,10 +37,10 @@ module Cyclescape
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = "en-GB"
+    config.i18n.default_locale = 'en-GB'
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
@@ -61,17 +61,17 @@ module Cyclescape
     config.cache_store = :redis_store
 
     # ActionMailer default URL options
-    config.action_mailer.default_url_options = { host: "www.cyclescape.org" }
+    config.action_mailer.default_url_options = { host: 'www.cyclescape.org' }
 
     # Default notification e-mail from address
-    config.default_email_from_domain = "cyclescape.org"
-    config.default_email_from = "Cyclescape <info@cyclescape.org>"
+    config.default_email_from_domain = 'cyclescape.org'
+    config.default_email_from = 'Cyclescape <info@cyclescape.org>'
 
     # Git info
     config.git_hash = `git rev-parse --short HEAD`.chomp
-    config.github_project_url = "https://github.com/cyclestreets/toolkit"
+    config.github_project_url = 'https://github.com/cyclestreets/toolkit'
 
     # Google analytics
-    config.analytics = { google: { account_id: "UA-28721275-1", base_domain: "cyclescape.org" } }
+    config.analytics = { google: { account_id: 'UA-28721275-1', base_domain: 'cyclescape.org' } }
   end
 end

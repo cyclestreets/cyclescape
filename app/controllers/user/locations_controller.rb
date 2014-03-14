@@ -55,14 +55,14 @@ class User::LocationsController < ApplicationController
         end
       end
     end
-    flash[:notice] = I18n.t(".user.locations.subscribe_to_threads.subscribed_to_threads", count: num_threads)
+    flash[:notice] = I18n.t('.user.locations.subscribe_to_threads.subscribed_to_threads', count: num_threads)
     redirect_to action: :index
   end
 
   def geometry
     @location = current_user.locations.find(params[:id])
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(@location.loc_feature(thumbnail: view_context.image_path("map-icons/m-misc.png"))) }
+      format.json { render json: RGeo::GeoJSON.encode(@location.loc_feature(thumbnail: view_context.image_path('map-icons/m-misc.png'))) }
     end
   end
 

@@ -30,11 +30,11 @@ class Notifications < ActionMailer::Base
     @group = thread.group
     @message_author = thread.first_message.created_by
     @member = member
-    fail "Thread does not belong to group" if @group.nil?
+    fail 'Thread does not belong to group' if @group.nil?
     mail to: @member.name_with_email,
          from: user_notification_address(@message_author),
          reply_to: thread_address(@thread),
-         subject: t("mailers.notifications.new_group_thread.subject",
+         subject: t('mailers.notifications.new_group_thread.subject',
                     group_name: @group.name, thread_title: @thread.title)
   end
 
@@ -43,7 +43,7 @@ class Notifications < ActionMailer::Base
     @issue = issue
     @category = category
     mail to: @user.name_with_email,
-         subject: t("mailers.notifications.new_user_location_issue.subject",
+         subject: t('mailers.notifications.new_user_location_issue.subject',
                     issue_title: @issue.title)
   end
 
@@ -53,7 +53,7 @@ class Notifications < ActionMailer::Base
     @user_location = user_location
     @user = user_location.user
     @message = thread.messages.first
-    fail "Thread does not have an issue" unless @thread.issue
+    fail 'Thread does not have an issue' unless @thread.issue
     mail to: @user.name_with_email,
          from: user_notification_address(@message.created_by),
          reply_to: thread_address(@thread),

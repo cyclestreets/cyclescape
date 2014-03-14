@@ -12,6 +12,6 @@ module MailerHelper
 
   # Notifications are sent from a fixed email but with different names
   def user_notification_address(user)
-    ['"', user.name, '" <notifications@', domain, ">"].join
+    ['"', user.name, '" <notifications@', domain, '>'].join
   end
 end

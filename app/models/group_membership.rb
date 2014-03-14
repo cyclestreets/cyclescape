@@ -60,6 +60,6 @@ class GroupMembership < ActiveRecord::Base
   end
 
   def set_default_role
-    self.role ||= "member"
+    self.role ||= 'member'
   end
 end

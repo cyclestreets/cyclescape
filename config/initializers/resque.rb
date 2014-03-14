@@ -1,4 +1,4 @@
-Resque.redis.namespace = "resque:Cyclescape"
+Resque.redis.namespace = 'resque:Cyclescape'
 Resque.inline = true if Rails.env.test?
 
 # This seems to be required so that prepared statements don't fail due to

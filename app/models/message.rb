@@ -19,15 +19,15 @@ class Message < ActiveRecord::Base
 
   attr_accessible :body, :component
 
-  belongs_to :thread, class_name: "MessageThread"
-  belongs_to :created_by, class_name: "User"
+  belongs_to :thread, class_name: 'MessageThread'
+  belongs_to :created_by, class_name: 'User'
   belongs_to :component, polymorphic: true, autosave: true
 
   before_validation :init_blank_body, on: :create, if: :component
 
   after_save :update_thread_search
 
-  scope :recent, order("created_at DESC").limit(3)
+  scope :recent, order('created_at DESC').limit(3)
 
   validates :created_by_id, presence: true
   validates :body, presence: true, unless: :component
@@ -57,6 +57,6 @@ class Message < ActiveRecord::Base
   protected
 
   def init_blank_body
-    self.body ||= ""
+    self.body ||= ''
   end
 end

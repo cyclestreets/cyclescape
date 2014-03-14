@@ -3,7 +3,7 @@ class DashboardsController < ApplicationController
     @user = current_user
     @groups = @user.groups
 
-    @relevant_issues = IssueDecorator.decorate(current_user.issues_near_locations.order("updated_at DESC").limit(12).includes(:created_by, :tags))
+    @relevant_issues = IssueDecorator.decorate(current_user.issues_near_locations.order('updated_at DESC').limit(12).includes(:created_by, :tags))
 
     subscribed_threads = current_user.subscribed_threads.order_by_latest_message.limit(12).includes(:issue, latest_message: [:component, :created_by])
     @subscribed_threads = ThreadListDecorator.decorate(subscribed_threads)
@@ -14,7 +14,7 @@ class DashboardsController < ApplicationController
     deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 12).includes(:issue)
     @deadline_threads = ThreadListDecorator.decorate(deadline_threads)
 
-    prioritised_threads = current_user.prioritised_threads.order("priority desc").order_by_latest_message.limit(20).includes(:issue, latest_message: [:component, :created_by])
+    prioritised_threads = current_user.prioritised_threads.order('priority desc').order_by_latest_message.limit(20).includes(:issue, latest_message: [:component, :created_by])
     @prioritised_threads = ThreadListDecorator.decorate(prioritised_threads)
   end
 

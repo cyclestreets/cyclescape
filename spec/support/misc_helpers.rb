@@ -1,5 +1,5 @@
 def lorem_ipsum
-  text = ""
+  text = ''
   File.open(lorem_ipsum_path) { |f| text = f.read }
   text
 end

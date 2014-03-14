@@ -16,7 +16,7 @@ module Taggable
   end
 
   def tags_string
-    tags.map(&:name).join(" ")
+    tags.map(&:name).join(' ')
   end
 
   def tags_string=(val)
@@ -24,7 +24,7 @@ module Taggable
   end
 
   def icon_from_tags
-    tag = tags.order("name").detect { |t| t.icon }
+    tag = tags.order('name').detect { |t| t.icon }
     tag.icon if tag
   end
 
@@ -32,7 +32,7 @@ module Taggable
 
   def tags_from_string(val)
     val.
-      delete("#!()[]{}").
+      delete('#!()[]{}').
       split(/[,; ]+/).
       map { |str| str.parameterize }.
       uniq.
