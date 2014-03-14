@@ -19,10 +19,10 @@ Cyclescape::Application.routes.draw do
     end
   end
 
-  devise_for :users, :controllers => { :confirmations => "confirmations" }
+  devise_for :users, controllers: { confirmations: "confirmations" }
 
   constraints(SubdomainConstraint) do
-    root :to => "groups#show"
+    root to: "groups#show"
     resources :threads, controller: "group/message_threads"
     issues_route controller: "group/issues"
   end
@@ -38,8 +38,8 @@ Cyclescape::Application.routes.draw do
     resources :users do
       scope module: "user" do
         resources :locations do
-          get 'geometry', :on => :member
-          get 'combined_geometry', :on => :collection
+          get 'geometry', on: :member
+          get 'combined_geometry', on: :collection
         end
       end
     end
@@ -60,7 +60,7 @@ Cyclescape::Application.routes.draw do
       end
       resources :threads, controller: "message_threads"
       resource :profile do
-        get 'geometry', :on => :member
+        get 'geometry', on: :member
       end
       resource :prefs, only: [:edit, :update]
     end
@@ -71,7 +71,7 @@ Cyclescape::Application.routes.draw do
 
   resources :threads, controller: "message_threads" do
     resources :messages do
-      put 'censor', :on => :member
+      put 'censor', on: :member
       resources :documents, controller: "message_library/documents"
       resources :notes, controller: "message_library/notes"
     end
@@ -108,9 +108,9 @@ Cyclescape::Application.routes.draw do
 
   namespace :user do
     resources :locations do
-      get 'geometry', :on => :member
-      get 'combined_geometry', :on => :collection
-      post 'subscribe_to_threads', :on => :collection
+      get 'geometry', on: :member
+      get 'combined_geometry', on: :collection
+      post 'subscribe_to_threads', on: :collection
     end
   end
 
@@ -119,14 +119,14 @@ Cyclescape::Application.routes.draw do
   end
 
   resources :tags do
-    get "autocomplete_tag_name", :as => :autocomplete, :on => :collection
+    get "autocomplete_tag_name", as: :autocomplete, on: :collection
   end
   resource :home, only: [:show], controller: "home"
 
   match "template/:action", controller: "home"
   match "pages/:page", controller: "pages", action: "show", as: :page, via: :get
 
-  root :to => "home#show"
+  root to: "home#show"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

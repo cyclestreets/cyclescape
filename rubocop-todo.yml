@@ -78,12 +78,6 @@ FavorSprintf:
 HasAndBelongsToMany:
   Enabled: false
 
-# Offence count: 283
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-HashSyntax:
-  Enabled: false
-
 # Offence count: 5
 IfUnlessModifier:
   Enabled: false

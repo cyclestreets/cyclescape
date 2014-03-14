@@ -61,7 +61,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :profile, update_only: true
 
-  before_validation :set_default_role, :unless => :role
+  before_validation :set_default_role, unless: :role
   after_create :create_user_prefs
 
   before_destroy :obfuscate_name

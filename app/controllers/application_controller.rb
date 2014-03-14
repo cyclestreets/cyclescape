@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
   def no_disabled_users
     if current_user.present? && current_user.disabled_at?
       sign_out current_user
-      redirect_to root_path, :alert => t("application.account_disabled")
+      redirect_to root_path, alert: t("application.account_disabled")
     end
   end
 

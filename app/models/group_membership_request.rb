@@ -23,7 +23,7 @@ class GroupMembershipRequest < ActiveRecord::Base
   validates :user, presence: true
   validates :group, presence: true
 
-  state_machine :status, :initial => :pending do
+  state_machine :status, initial: :pending do
     before_transition any => :confirmed do |request|
       request.create_membership
     end
@@ -35,15 +35,15 @@ class GroupMembershipRequest < ActiveRecord::Base
     end
 
     event :confirm do
-      transition :pending => :confirmed
+      transition pending: :confirmed
     end
 
     event :reject do
-      transition :pending => :rejected
+      transition pending: :rejected
     end
 
     event :cancel do
-      transition :pending => :cancelled
+      transition pending: :cancelled
     end
   end
 

@@ -21,7 +21,7 @@ class MessageThread < ActiveRecord::Base
 
   attr_accessible :title, :privacy, :group_id, :issue_id, :tags_string
 
-  acts_as_indexed :fields => [:title, :messages_text, :tags_string]
+  acts_as_indexed fields: [:title, :messages_text, :tags_string]
 
   ALLOWED_PRIVACY = %w(public group committee)
 
@@ -133,7 +133,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def email_subscribers
-    subscribers.joins(:prefs).where(user_prefs: { :enable_email => true })
+    subscribers.joins(:prefs).where(user_prefs: { enable_email: true })
   end
 
   def private_to_committee?

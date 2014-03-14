@@ -18,7 +18,7 @@ class Library::Item < ActiveRecord::Base
 
   attr_accessible :component, :tags_string
 
-  acts_as_indexed :fields => [:search]
+  acts_as_indexed fields: [:search]
 
   belongs_to :component, polymorphic: true
   belongs_to :created_by, class_name: "User"

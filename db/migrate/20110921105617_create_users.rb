@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :full_name, null: false
       t.string :display_name
       t.string :role, null: false
-      t.string :encrypted_password, :null => false, :default => ""
+      t.string :encrypted_password, null: false, default: ""
       t.string   :confirmation_token
       t.datetime :confirmed_at
       t.datetime :confirmation_sent_at

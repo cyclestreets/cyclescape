@@ -64,7 +64,7 @@ module Locatable
     # Not clear why the factory is needed, should be taken care of by setting the srid on the factory_generator
     # but that doesn't work.
     factory = RGeo::Geos.factory(srid: 4326)
-    feature = RGeo::GeoJSON.decode(json_str, :geo_factory => factory, :json_parser => :json)
+    feature = RGeo::GeoJSON.decode(json_str, geo_factory: factory, json_parser: :json)
     self.location = feature.geometry if feature
   end
 

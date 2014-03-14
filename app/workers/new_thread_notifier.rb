@@ -59,7 +59,7 @@ class NewThreadNotifier
     # Retrieve user locations that intersect with the issue
     # and where the user has the notification preference on
     locations = UserLocation.intersects(buffered_location).
-        joins(:user => :prefs).
+        joins(user: :prefs).
         where(UserPref.arel_table[:involve_my_locations].in(["notify", "subscribe"])).
         all
 

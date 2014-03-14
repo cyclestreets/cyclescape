@@ -80,7 +80,7 @@ class MessageThreadsController < ApplicationController
     buffered_location = thread.issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
     locations = UserLocation.intersects(buffered_location).
-        joins(:user => :prefs).
+        joins(user: :prefs).
         where(user_prefs: { involve_my_locations: "subscribe" }).
         all
 

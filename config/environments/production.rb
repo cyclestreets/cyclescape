@@ -59,6 +59,6 @@ Cyclescape::Application.configure do
   config.active_support.deprecation = :notify
 
   # Make sure appropriate pages are served over SSL
-  config.to_prepare { Devise::SessionsController.force_ssl :only => [:new, :create] }
-  config.to_prepare { Devise::RegistrationsController.force_ssl :only => [:new, :create, :edit, :update] }
+  config.to_prepare { Devise::SessionsController.force_ssl only: [:new, :create] }
+  config.to_prepare { Devise::RegistrationsController.force_ssl only: [:new, :create, :edit, :update] }
 end
