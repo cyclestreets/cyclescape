@@ -1,775 +1,763 @@
-﻿# GER German translations for Ruby on Rails
+﻿# German translations for Ruby on Rails
 
-"de-GER":
-  application_name: "Cyclescape" 
+"de-DE":
+  application_name: "Cyclescape"
   tags: "Label"
-  sign_in: "Anmelden"  # Used for links
+  sign_in: "Anmelden"
   admin:
     groups:
       index:
-        title: "Gruppen" # groups 
-        new_group: "Neue Gruppe" # New Group
-        edit: "Editieren" # Edit
-        edit_profile: "Profil bearbeiten" # Edit Profile
-        members: "Mitglieder" # Members
-        name: "Gruppenname" # Group Name
+        title: "Gruppen"
+        new_group: "Neue Gruppe"
+        edit: "Editieren"
+        edit_profile: "Profil bearbeiten"
+        members: "Mitglieder"
+        name: "Gruppenname"
       create:
-        success: "Gruppe erstellt" # Group created
+        success: "Gruppe erstellt"
       update:
-        success: "Gruppe aktualisiert" # Group updated
+        success: "Gruppe aktualisiert"
     home:
       index:
-        admin_interface: "Admininstrationsbereich" # Administrative area
-        admin_interface_introduction: "Dieser Bereich enthält Administratorfunktionen, die nur für Administratoren verfügbar sind." # This section contains administrative functions, available to system administrators only.
-        manage_comments: "Kommentare verwalten" # Manage comments
-        manage_groups: "Gruppen verwalten" # Manage groups
-        manage_issue_categories: "Themenkategorien verwalten" # Manage Issue Categories
-        manage_users: "Anwender verwalten" # Manage users
+        admin_interface: "Admininstrationsbereich"
+        admin_interface_introduction: "Dieser Bereich enthält Administratorfunktionen, die nur für Administratoren verfügbar sind."
+        manage_comments: "Kommentare verwalten"
+        manage_groups: "Gruppen verwalten"
+        manage_issue_categories: "Themenkategorien verwalten"
+        manage_users: "Anwender verwalten"
     issue_categories:
       create:
-        success: "Kategorie erstellt" # Category created
+        success: "Kategorie erstellt"
       index:
-        title: "Themenkategorien" # Issue Categories
+        title: "Themenkategorien"
       update:
-        success: "Kategorie aktualisiert" # Category updated
+        success: "Kategorie aktualisiert"
     users:
       index:
-        created: "Erstellt" # Created
-        created_at: "vor %{time_ago}" # %{time_ago} ago
-        introduction: "Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaft die sie haben könnten)." # This page lists all users on the system (irrespective of any group membership they may have).
-        disabled: "Deaktiviert" # Disabled
-        disabled_at: " vor %{time_ago}" # %{time_ago} ago
-        display_name: "Anzeigename" # Display Name
-        edit: "Editieren" # Edit
+        created: "Erstellt"
+        created_at: "vor %{time_ago}"
+        introduction: "Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaft die sie haben könnten)."
+        disabled: "Deaktiviert"
+        disabled_at: " vor %{time_ago}"
+        display_name: "Anzeigename"
+        edit: "Editieren"
         email: "Email"
-        full_name: "Vollständiger Name" # Full Name
-        id: "ID" # id
-        role: "Funktion" # Role
-        title: "Benutzer" # Users
+        full_name: "Vollständiger Name"
+        id: "ID"
+        role: "Funktion"
+        title: "Benutzer"
       update:
-        success: "Benutzer aktualisiert" # User updated
+        success: "Benutzer aktualisiert"
   application:
-    account_disabled: "Dein Zugang wurde durch einen Administrator gesperrt. # Your account has been disabled by an administrator
-    permission_denied: "Zum Aufruf dieser Seite bist Du nicht autorisiert." # You are not authorised to access that page.
+    account_disabled: "Dein Zugang wurde durch einen Administrator gesperrt."
+    permission_denied: "Zum Aufruf dieser Seite bist Du nicht autorisiert."
   dashboards:
     show:
-      add_a_new_issue: "Neues Thema hinzufügen" # add a new issue
-      add_another_location: "Neuen Ort hinzufügen" # add another location
-      add_some_locations: "Einige Orte hinzufügen" # add some location
-      areas_you_are_watching: "Beobachtete Gebiete" # reas you are watching
+      add_a_new_issue: "Neues Thema hinzufügen"
+      add_another_location: "Neuen Ort hinzufügen"
+      add_some_locations: "Einige Orte hinzufügen"
+      areas_you_are_watching: "Beobachtete Gebiete"
       days_away:
-        zero: "Heute!" # Today!
-        one: "Übermorgen!" # Tomorrow!
-        other: "%{count} Tage her" # %{count} days away
-      deadlines: "Fälligkeiten und Termine" # Deadlines and dates
-      deadline_thread_updated: "Diskussion aktualisiert %{at}" # thread updated %{at} 
-      involved_threads: "Beteiligte Diskussionen" # Involved Threads
-      issues_in_your_area: "Themen in deinem Gebiet" # Issues in your area
-      new_group_thread: "Neue Diskussion in der Gruppe starten" # Start a new group thread 
-      my_issues_nearby_introduction_html: "Themen im %{areas_you_are_watching_link} werden unten angezeigt, jeweils das Jüngste zuerst." # Issues in the %{areas_you_are_watching_link} are shown below, most recent first.
-      my_issues_nearby_issues_pointer_html: "(Du kannst auch %{browse_all_other_issues_link} außerhalb deiner Gebiete.)"  # (You can also %{browse_all_other_issues_link} from outside your area(s).)
-      browse_all_other_issues: "Browse alle anderen Themen" # browse all other issues
-      my_priorities_introduction: "Dies ist eine Auflistung aller von dir gesetzter Prioritäten. Die wichtigsten zuerst:" # This is a listing of the priorities you have set, most important first:
-      my_threads_introduction: "Letzte Aktualisierung deiner abonierten Disskusinsfäden :" # Latest updates on the discussion threads you are subscribed to:
-      my_upcoming_deadline_introduction: "Anstehende Fristen und Termine innerhalb der von dir abonnierten Diskussionen:" # Upcoming deadlines and dates within the discussion threads you are subscribed to:
-      no_upcoming_deadline_threads: "Du bist nicht an Diskussion beteiligt, bald fällig oder terminiert sind." # You aren't involved in any threads with upcoming deadlines or dates.
+        zero: "Heute!"
+        one: "Übermorgen!"
+        other: "%{count} Tage her"
+      deadlines: "Fälligkeiten und Termine"
+      deadline_thread_updated: "Diskussion aktualisiert %{at}"
+      involved_threads: "Beteiligte Diskussionen"
+      issues_in_your_area: "Themen in deinem Gebiet"
+      new_group_thread: "Neue Diskussion in der Gruppe starten"
+      my_issues_nearby_introduction_html: "Themen im %{areas_you_are_watching_link} werden unten angezeigt, jeweils das Jüngste zuerst."
+      my_issues_nearby_issues_pointer_html: "(Du kannst auch %{browse_all_other_issues_link} außerhalb deiner Gebiete.)"
+      browse_all_other_issues: "Browse alle anderen Themen"
+      my_priorities_introduction: "Dies ist eine Auflistung aller von dir gesetzter Prioritäten. Die wichtigsten zuerst:"
+      my_threads_introduction: "Letzte Aktualisierung deiner abonierten Disskusinsfäden:"
+      my_upcoming_deadline_introduction: "Anstehende Fristen und Termine innerhalb der von dir abonnierten Diskussionen:"
+      no_upcoming_deadline_threads: "Du bist nicht an Diskussion beteiligt, bald fällig oder terminiert sind."
       no_subscribed_threads_html:
-        # You aren't following any threads yet. You could have a look
-        # through the %{threads_link} and see if there's anything that you want to
-        # help with, or maybe you could %{add_issue_link} instead?
         Du beobachtest keine Diskussion. 
         Du könntest %{threads_link} durchschauen, um zu sehen, ob du dort
         helfen kannst. Oder vielleicht könntest du stattdessen %{add_issue_link}?
       no_prioritised_threads_html:
-        #You haven't prioritised any threads yet. You could have a look
-        #through the %{threads_link} and see if there's anything that you think is
-        #important, or maybe you could %{add_issue_link} instead?
         Bisher hast du keine Diskussion priorisiert.
         Du könntest %{threads_link} durchschauen, um zu sehen ob etwas wichtiges für dich dabei ist.
         Oder vielleicht könntest du stattdessen %{add_issue_link}?
-      no_issues_nearby_html: "Es gibt kein Thema in Deinem Gebiet. Du könntest %{add_issue_link}, oder %{add_location_link}" #There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}.
-      no_group_threads: "Bisher enthält keiner Deiner Gruppen Diskussionen. Du könntest eine neue Konversation beginnen" #None of your groups have any threads yet. You could start a new conversation!
-      no_locations_guidance_html: "Bisher hast Du keine Orte markiert! Wenn Du %{add_some_locations_link} werden wir Dir hier Themen in Deiner Nähe zeigen." #You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby issues here.
-      no_user_groups: "Du bist noch keine Mitglied einer Gruppe! Die neusten Diskussionen werden angezeigt, wenn Du dich bei einer Gruppe anmeldest." # You aren't a member of any groups yet! When you join some groups, the latest threads will show up here.
-      recent_threads: "neuste Diskussionen" # recent threads
-      subscribed_threads: "abonnierte Diskussionen" # subscribed Threads
-      group_threads: "Diskussionsgruppen" # Group Threads
+      no_issues_nearby_html: "Es gibt kein Thema in Deinem Gebiet. Du könntest %{add_issue_link}, oder %{add_location_link}"
+      no_group_threads: "Bisher enthält keiner Deiner Gruppen Diskussionen. Du könntest eine neue Konversation beginnen"
+      no_locations_guidance_html: "Bisher hast Du keine Orte markiert! Wenn Du %{add_some_locations_link} werden wir Dir hier Themen in Deiner Nähe zeigen."
+      no_user_groups: "Du bist noch keine Mitglied einer Gruppe! Die neusten Diskussionen werden angezeigt, wenn Du dich bei einer Gruppe anmeldest."
+      recent_threads: "neuste Diskussionen"
+      subscribed_threads: "abonnierte Diskussionen"
+      group_threads: "Diskussionsgruppen"
       group_threads_desc_html:
         Neuste Diskussionen mit Aktivitäten Deiner Gruppen.
-        # Recent threads with activity from your groups.
-      my_priorities: "Meine Prioritäten" # My priorities"
-      my_threads: "Meine abonnierten Diskussionen" # My subscribed threads
-      issues_nearby: "Letzte Themen in der Nähe" #Latest issues nearby
+      my_priorities: "Meine Prioritäten"
+      my_threads: "Meine abonnierten Diskussionen"
+      issues_nearby: "Letzte Themen in der Nähe"
       posted:
-        message_html: "%{creator_link} hat eine Nachricht veröffentlicht" # %{creator_link} posted a message
-        deadline_message_html: "%{creator_link} hat einen Termin veröffentlicht" # %{creator_link} posted a deadline/date
-        document_message_html: "%{creator_link} schickte einen Anhang" # %{creator_link} posted an attachment
-        photo_message_html: "%{creator_link} schickte ein Foto" # %{creator_link} posted a photo
-        link_message_html: "%{creator_link} schickte einen Link" # %{creator_link} posted a link
-        library_item_message_html: "%{creator_link} fügte einen Datebankeintrag hinzu" # %{creator_link} added a library item
+        message_html: "%{creator_link} hat eine Nachricht veröffentlicht"
+        deadline_message_html: "%{creator_link} hat einen Termin veröffentlicht"
+        document_message_html: "%{creator_link} schickte einen Anhang"
+        photo_message_html: "%{creator_link} schickte ein Foto"
+        link_message_html: "%{creator_link} schickte einen Link"
+        library_item_message_html: "%{creator_link} fügte einen Datebankeintrag hinzu"
     search:
-      no_results_found: "Keine Ergebnisse für '%{query}' gefunden" # No results found for '%{query}'
-      thread_results: "Diskussionen (%{count})" # Threads (%{count})
-      issue_results: "Themen (%{count})" # Issues (%{count})
-      library_results: "Datenbank (%{count})" # Library (%{count})
+      no_results_found: "Keine Ergebnisse für '%{query}' gefunden"
+      thread_results: "Diskussionen (%{count})"
+      issue_results: "Themen (%{count})"
+      library_results: "Datenbank (%{count})"
       threads_found:
-        zero: "Keine Diskussionen für '%{query}' gefunden." # No threads found for '%{query}'.
-        one: "Eine Diskussion für '%{query}' gefunden:" # One thread found for '%{query}':
-        other: "%{count} Diskussionen für '%{query}' gefunden:" # %{count} threads found for '%{query}':
+        zero: "Keine Diskussionen für '%{query}' gefunden."
+        one: "Eine Diskussion für '%{query}' gefunden:"
+        other: "%{count} Diskussionen für '%{query}' gefunden:"
       issues_found:
-        zero: "Keine Themen für '%{query}' gefunden." # No issues found for '%{query}'.
-        one: "Ein Thema unter '%{query}' gefunden" # One issue found for '%{query}':
-        other: "%{count} Themen für '%{query}' gefunden:" # %{count} issues found for '%{query}':
+        zero: "Keine Themen für '%{query}' gefunden."
+        one: "Ein Thema unter '%{query}' gefunden"
+        other: "%{count} Themen für '%{query}' gefunden:"
       library_items_found:
-        zero: "Keine Datenbankeinträge für '%{query}' gefunden." # No library items found for '%{query}'.
-        one: "Ein Datenbankeintrag für '%{query}' gefunden:" # One library item found for '%{query}':
-        other: "%{count} Datenbankeinträge für '%{query}' gefunden:" # %{count} library items found for '%{query}':
-      title: "Suchergebnisse" # Search Results
+        zero: "Keine Datenbankeinträge für '%{query}' gefunden."
+        one: "Ein Datenbankeintrag für '%{query}' gefunden:"
+        other: "%{count} Datenbankeinträge für '%{query}' gefunden:"
+      title: "Suchergebnisse"
   devise:
     registrations:
       edit:
-        title: 'Meine Konto Detaisl aktualisieren' # Update My Account Details
+        title: 'Meine Konto Detaisl aktualisieren'
       new:
-        title: "Registrieren" # Sign up
+        title: "Registrieren"
     sessions:
       new:
-        title: "Anmelden" # Sign in
+        title: "Anmelden"
         sign_in_button: "Anmelden"
   group:
-    group_profile_tab: "Gruppenprofil" # Group profile
-    group_management: "Gruppenmanagement" # Group management
-    membership_list_tab: "Mitgliederliste" # Membership list
-    membership_requests_tab: "Mitglieder Anfrage" # Membership requests
-    home_page_tab: "Homepage" # Home page
+    group_profile_tab: "Gruppenprofil"
+    group_management: "Gruppenmanagement"
+    membership_list_tab: "Mitgliederliste"
+    membership_requests_tab: "Mitglieder Anfrage"
+    home_page_tab: "Homepage"
     issues:
       index:
-        title: "Thema in dem Gebiet von %{group_name}" # Issues in the area of %{group_name}
+        title: "Thema in dem Gebiet von %{group_name}"
     members:
       index:
-        actions: "Aktionen" # Actions
-        committee: "Ausschuss Mitglieder" # Committee members
-        committee_guidance: "Ausschussmitglieder können die Mitgliederliste verwalten, Gruppenprofile ändern und Diskussionen in Gruppen aktualisieren" # Committee members can manage the group membership list, change the groups profile and update group thread information.
-        group_members_guidance: "Auf dieser Seite siehst Du die Mitglieder deiner Gruppe, lade Leute ein und entferne Mitgielder dieser Gruppe." # On this page you can view the existing members of your group, invite new people and remove members from the group.
-        invite_directly: "du kannst sie direkt einladen" # you can invite them directly
-        member_name: "Mietgliedname" # Member name
-        ordinary_members: "Ordentliche Mitglieder" # Ordinary members
-        new_members_guidance_introduction: "Um ein Mitglied hinzuzufügen:" # To add a member:
-        new_members_guidance_method1_html: "Wenn du seine Email-Adresse kennst, %{invite_directly_link} " # If you know their email address, %{invite_directly_link}
-        new_members_guidance_method2_html: "Wenn sie Cyclescape bereits benutzen, klicke auf ihren Benutzernamen aus dem Disskuisonsfaden, und füge sie aus ihrem Mitgliederprofil heraus hinzu" # If they are already using Cyclescape, click on their name from within a discussion thread, and you can add them from their user profile page.
-        ordinary_members_guidance: "Ordentliche Mitglieder bekommen Zugang zu den Diskussionen deiner privaten Gruppe und können neue Diskussionen erstellen." # Ordinary members get access to your private group threads, and can create new group threads.
-        pending_requests: "Ausstehende Anfragen" # Pending requests
-        review_membership_requests_html: "Nutzer der Seite könen ebenfalls dieser Gruppe beitreten. Du kannst %{review_membership_requests_link} " # Users of the site can also apply to join this group. You can %{review_membership_requests_link}.
-        review_pending: "Ausstehende Mitgliederanfragen" # pending membership requests
-        review_requests: "Überprüfen der Anfragenhistorie" # review the requests history
-        title: "Mitglieder von %{group}" # Members of %{group}
-        you_have_pending_members_html: "Du hast %{review_pending_requests_link}! Bitte überprüfe sie und ergreife geeignete Maßnahmen" # You have %{review_pending_requests_link}! Please review them and take appropriate actions. 
+        actions: "Aktionen"
+        committee: "Ausschuss Mitglieder"
+        committee_guidance: "Ausschussmitglieder können die Mitgliederliste verwalten, Gruppenprofile ändern und Diskussionen in Gruppen aktualisieren"
+        group_members_guidance: "Auf dieser Seite siehst Du die Mitglieder deiner Gruppe, lade Leute ein und entferne Mitgielder dieser Gruppe."
+        invite_directly: "du kannst sie direkt einladen"
+        member_name: "Mietgliedname"
+        ordinary_members: "Ordentliche Mitglieder"
+        new_members_guidance_introduction: "Um ein Mitglied hinzuzufügen:"
+        new_members_guidance_method1_html: "Wenn du seine Email-Adresse kennst, %{invite_directly_link} "
+        new_members_guidance_method2_html: "Wenn sie Cyclescape bereits benutzen, klicke auf ihren Benutzernamen aus dem Disskuisonsfaden, und füge sie aus ihrem Mitgliederprofil heraus hinzu"
+        ordinary_members_guidance: "Ordentliche Mitglieder bekommen Zugang zu den Diskussionen deiner privaten Gruppe und können neue Diskussionen erstellen."
+        pending_requests: "Ausstehende Anfragen"
+        review_membership_requests_html: "Nutzer der Seite könen ebenfalls dieser Gruppe beitreten. Du kannst %{review_membership_requests_link} "
+        review_pending: "Ausstehende Mitgliederanfragen"
+        review_requests: "Überprüfen der Anfragenhistorie"
+        title: "Mitglieder von %{group}"
+        you_have_pending_members_html: "Du hast %{review_pending_requests_link}! Bitte überprüfe sie und ergreife geeignete Maßnahmen"
       member:
-        confirm: "Bist Du sicher?" # Are you sure?
-        delete: "Aus der Gruppe entfernen" # Remove from group
-        edit: "Mitgliedschaft bearbeiten" # Edit membership
+        confirm: "Bist Du sicher?"
+        delete: "Aus der Gruppe entfernen"
+        edit: "Mitgliedschaft bearbeiten"
     memberships:
       new:
-        title: "Neues Mitglied einladen" # Invite New Member
+        title: "Neues Mitglied einladen"
       destroy:
-        failure: "Mitglied konnte nich aus der Gruppe entfernt werden" # Couldn't remove member from group
-        success: "Mitglied wurde aus der Gruppe entfernt" # Member removed from group
+        failure: "Mitglied konnte nich aus der Gruppe entfernt werden"
+        success: "Mitglied wurde aus der Gruppe entfernt"
       edit:
-        title: "Gruppenmitgliedschaft bearbeiten für %{user_name}" # Edit group membership for %{user_name}
+        title: "Gruppenmitgliedschaft bearbeiten für %{user_name}"
       update:
-        failure: "Die Gruppenmitgliedschaft konnte nicht aktualisiert werden" # Couldn't update the group membership
-        success: "Die Gruppenmitgliedschaft wurde aktualisiert" # Group membership updated
+        failure: "Die Gruppenmitgliedschaft konnte nicht aktualisiert werden"
+        success: "Die Gruppenmitgliedschaft wurde aktualisiert"
     membership_requests:
       cancel:
-        success: "Der Antrag auf Mitgliedschaft wurde abgelehnt" # Membership request cancelled
+        success: "Der Antrag auf Mitgliedschaft wurde abgelehnt"
       confirm:
-        failure: "Bei der Bestätigung der Mitgliederanfrage trat ein Problem auf" # There was a problem confirming this membership request
-        success: "Mitgliedschaft bestätigt" # Membership confirmed
+        failure: "Bei der Bestätigung der Mitgliederanfrage trat ein Problem auf"
+        success: "Mitgliedschaft bestätigt"
       create:
-        requested: "Die Mitgliedschaft wurde beantragt" # Membership has been requested
-        already_asked: "Du hast bereits eine Anfrga gestellt dieser Gruppe beizutreten" # You have already asked to join this group
-        already_member: "Du bist bereits Mitglied dieser Gruppe" # You are already a member of this group
+        requested: "Die Mitgliedschaft wurde beantragt"
+        already_asked: "Du hast bereits eine Anfrga gestellt dieser Gruppe beizutreten"
+        already_member: "Du bist bereits Mitglied dieser Gruppe"
       index:
-        actioned_by: "Durchgeführt durch" # Actioned By
-        are_you_sure: "Bist du sicher ?" # Are you sure?
-        by: "durch %{name}" # by %{name}
-        confirm: "Bestätigen" # Confirm
-        created_at: "vor %{time_ago}" # %{time_ago} ago
-        no_requests_yet: "Für diese Gruppe gab es bisher keine Mitgleidsanfragen." # There have been no membership requests for this group yet.
-        reject: "Ablehnen" # Reject
-        requested_at: "Angefragt durch" # Requested At
-        status: "Status" # Status
-        title: "Mitgliedschaft für %{group} bestätigt" # Membership Requests for %{group}
-        user: "Benutzer" # User
+        actioned_by: "Durchgeführt durch"
+        are_you_sure: "Bist du sicher ?"
+        by: "durch %{name}"
+        confirm: "Bestätigen"
+        created_at: "vor %{time_ago}"
+        no_requests_yet: "Für diese Gruppe gab es bisher keine Mitgleidsanfragen."
+        reject: "Ablehnen"
+        requested_at: "Angefragt durch"
+        status: "Status"
+        title: "Mitgliedschaft für %{group} bestätigt"
+        user: "Benutzer"
       new:
-        title: "Mitgliedsantrag aus %{group_name}" # Request membership of %{group_name}
-        your_membership_request_will: "Dein Mitgliedsantrag wird zur Begutachtung an die Ausschussmitglieder geleitet." # Your membership request will be passed on to the committee members of the group to consider.
+        title: "Mitgliedsantrag aus %{group_name}"
+        your_membership_request_will: "Dein Mitgliedsantrag wird zur Begutachtung an die Ausschussmitglieder geleitet."
       reject:
-        failure: "Bei der Ablehnung des Mitgliedschaftsantrags ist ein Problem aufgetretetn" # There was a problem rejecting this membership request
-        success: "Mitgliedschaft abgelehnt" # Membership rejected
+        failure: "Bei der Ablehnung des Mitgliedschaftsantrags ist ein Problem aufgetretetn"
+        success: "Mitgliedschaft abgelehnt"
     message_threads:
       destroy:
-        failure: "Der Diskussionsfaden konnte nicht gelöscht werden" # Couldn't delete thread
-        success: "Der Diskussionfaden wurde gelöscht" # Thread deleted
+        failure: "Der Diskussionsfaden konnte nicht gelöscht werden"
+        success: "Der Diskussionfaden wurde gelöscht"
       index:
-        title: "Diskussionsgruppe" # Group Threads
-        new_group_thread: "Neue Gruppe administrative Diskussionen" # New Group Administrative thread
-        issue_threads: "Themen Diskussionen" # Issue discussions
-        issue_threads_description: "Dies sind öffentliche und private themenbezogene Diskussionen über gemeldetet Diskussionen gehörend zu %{group_name}" # These are public and private issue-based discussions belonging to %{group_name} on reported issues.
-        issue_threads_addition_description: "Gehe zum relevanten Thema, um eine neuen themenbezogene Diskussionsfaden zu starten" # To start a new issue-based discussion thread, go to the relevant issue.
-        general_threads: "Administrative Diskussionen" # Administrative discussions
-        general_threads_description: "Dies sind öffentliche und private Diskussionen für administrative Zwecke, wie z. B. das Arrangieren einer allgemeinen Besprechung" # These are public and private general discussions for administrative purposes, e.g. arranging a general meeting.
+        title: "Diskussionsgruppe"
+        new_group_thread: "Neue Gruppe administrative Diskussionen"
+        issue_threads: "Themen Diskussionen"
+        issue_threads_description: "Dies sind öffentliche und private themenbezogene Diskussionen über gemeldetet Diskussionen gehörend zu %{group_name}"
+        issue_threads_addition_description: "Gehe zum relevanten Thema, um eine neuen themenbezogene Diskussionsfaden zu starten"
+        general_threads: "Administrative Diskussionen"
+        general_threads_description: "Dies sind öffentliche und private Diskussionen für administrative Zwecke, wie z. B. das Arrangieren einer allgemeinen Besprechung"
       new:
-        for_group: "für %{name}" # for %{name}
-        title: "Neue Diskussionsgruppe" # New Group Thread
+        for_group: "für %{name}"
+        title: "Neue Diskussionsgruppe"
       update:
-        success: "Diskussion wurde aktualisiert" # Thread updated
+        success: "Diskussion wurde aktualisiert"
     profiles:
       edit:
-        title: "Prfil bearbeiten" # Edit Profile
+        title: "Prfil bearbeiten"
       show:
-        description: "Beschreibung" # Description
-        location: "Standort" # Location
-        no_location: "Diese Gruppe hat noch keine Details zu Standorten" # This group doesn't have any location details yet.
+        description: "Beschreibung"
+        location: "Standort"
+        no_location: "Diese Gruppe hat noch keine Details zu Standorten"
       update:
-        success: "Profil aktualisiert" # Profile Updated
+        success: "Profil aktualisiert"
   groups:
     show:
-      edit_group_profile: "Gruppenprofil bearbeiten" # Edit the group profile
-      edit_group_members: "Mitgliederliste bearbeiten" # Edit the membership list
-      group_management: "Gruppenverwaltung" # Group management
-      group_organisers: "Gruppenorganisatoren" # Group organisers
-      group_request_pending: "Dein Antrag auf Zugehörigkeit der Gruppe ist ausstehend" # Your request to join this group is pending.
+      edit_group_profile: "Gruppenprofil bearbeiten"
+      edit_group_members: "Mitgliederliste bearbeiten"
+      group_management: "Gruppenverwaltung"
+      group_organisers: "Gruppenorganisatoren"
+      group_request_pending: "Dein Antrag auf Zugehörigkeit der Gruppe ist ausstehend"
       join_body:
-         Du kannst eine Mitgliedschaft dieser Cyclescape-Gruppe beantragen, wenn Du an den Aktivitäten der %{group} beteiligt sein möchtest # You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
-      join_title: "Trete unserer Cyclescape-Gruppe bei" # Join our Cyclescape group
-      join_this_group: "Trete dieser Gruppe bei" # Join this group
-      no_issues: In diesem Gruppenbereich gibt es keine Themen # There are no issues in this group's area yet
-      no_location: Diese Gruppe hat noch keinen Standort # This group doesn't have a location yet
-      no_threads: Diese Gruppe hat noch keine öffentlichen Diskussionen # This group doesn't have any public threads
-      our_areas: "Unsere Gebiete" # Our Areas
-      recent_issues: "Letzte Themen in diesem Gruppenbereich" # Recent Issues in this group's area
-      recent_threads: "Neueste Diskussionen" # Latest Discussions
+         Du kannst eine Mitgliedschaft dieser Cyclescape-Gruppe beantragen, wenn Du an den Aktivitäten der %{group} beteiligt sein möchtest
+      join_title: "Trete unserer Cyclescape-Gruppe bei"
+      join_this_group: "Trete dieser Gruppe bei"
+      no_issues: In diesem Gruppenbereich gibt es keine Themen
+      no_location: Diese Gruppe hat noch keinen Standort
+      no_threads: Diese Gruppe hat noch keine öffentlichen Diskussionen
+      our_areas: "Unsere Gebiete"
+      recent_issues: "Letzte Themen in diesem Gruppenbereich"
+      recent_threads: "Neueste Diskussionen"
       view_membership_requests:
-        zero: "Mitgliedsanträge begutachten" # Review membership requests
-        one: "Ausstehende Mitgliedsanträge anschauen" # View pending membership request
-        other: "Ausstehende Mitgliedsanträge anschauen (%{count})" # View pending membership requests (%{count})
+        zero: "Mitgliedsanträge begutachten"
+        one: "Ausstehende Mitgliedsanträge anschauen"
+        other: "Ausstehende Mitgliedsanträge anschauen (%{count})"
   home:
     show:
       introduction_html:
-        Cyclescape ist ein Online-Kampagnen-Werkzeug für Fahrrad-Kampagnen-Gruppen # Cyclescape is an online campaigning toolkit for
-        cycle campaign groups around the UK
+        Cyclescape ist ein Online-Kampagnen-Werkzeug für Fahrrad-Kampagnen-Gruppen
       center_box_title:
-        Berichte hier über Dein Fahrradthema # Report your cycling issues here
+        Berichte hier über Dein Fahrradthema
       center_box_html:
         Kein vorhandener Radweg? Hindernisse für Radfahrer? Zu wenig Fahrradparkplätze vorhanden? Oder auch ein Beispiel für gut gemachte Dinge?
-        # Non-existent cycle paths? Obstructions for cyclists? Lack of cycle parking? Or an example of something done right?
-      report_an_issue: "Über ein Thema Berichten" # Report an issue
-      latest_discussions: "Neuste Diskussionen" # Latest Discussions
-      groups_title: "Cyclscape Gruppen" # Cyclescape Groups
+      report_an_issue: "Über ein Thema Berichten"
+      latest_discussions: "Neuste Diskussionen"
+      groups_title: "Cyclscape Gruppen"
       groups_intro_html:
        Cyclescape wird von <strong>Fahrrad-Kampagnen-Gruppen</strong> quer durchs
        Land benutzt. <strong>Finde Gruppen in Deiner nähe</strong> und schau Dir an
        woran sie gerade arbeiten. 
-       # Cyclescape is used by <strong>cycle campaign groups</strong> across
-       # the country. <strong>Find groups local to you</strong> and see what
-       # they're working to fix.
       twitter_title: "Cyclescape on Twitter"
     guide:
-      title: "Wie Cyclescape funktioniert" # How Cyclescape Works
-      box_1_title: "Berichte über ein Thema" # Report cycling issues
-      box_1_body: "Themen schnell nach oben schieben" # Quickly raise issues on this site.
-      box_2_title: "Bekomme Hilfe von anderen" # Get advice from others
-      box_2_body: "Diskutiere über Themen mit Mitgliedern aus Fahrradgruppen" # Discuss issues with members of cycling groups.
-      box_3_title: "Mache einen Unterschied" # Make a difference
-      box_3_body: "Organisiere eine Aktion, welche die Gruppe angehen sollte, um ein Problem zu lösen" # Organise the action the group should take to resolve an issue.
+      title: "Wie Cyclescape funktioniert"
+      box_1_title: "Berichte über ein Thema"
+      box_1_body: "Themen schnell nach oben schieben"
+      box_2_title: "Bekomme Hilfe von anderen"
+      box_2_body: "Diskutiere über Themen mit Mitgliedern aus Fahrradgruppen"
+      box_3_title: "Mache einen Unterschied"
+      box_3_body: "Organisiere eine Aktion, welche die Gruppe angehen sollte, um ein Problem zu lösen"
   issue:
     message_threads:
       new:
-        title: "Neue Diskussion um %{issue}" # New Thread on %{issue}
-        everyone: "Jeder" # Everyone
+        title: "Neue Diskussion um %{issue}"
+        everyone: "Jeder"
     photos:
       show:
-        photo_alt: "Das Fotot für %{caption}." # The photo for %{caption}.
-        view_original: "Originalfoto anschauen." # View original photo.
+        photo_alt: "Das Fotot für %{caption}."
+        view_original: "Originalfoto anschauen."
     tags:
       panel:
-        edit_tags: "Label bearbeiten" # edit tags
+        edit_tags: "Label bearbeiten"
   issues:
     compact:
-      created_by_html: "Erstellt von %{creator_link}" # Created by %{creator_link}
-      votes: "Stimmen" # votes
+      created_by_html: "Erstellt von %{creator_link}"
+      votes: "Stimmen"
       thread_count:
-        one: "1 diskussion" # 1 thread
-        other: "%{count} Diskussionen" # %{count} threads
+        one: "1 diskussion"
+        other: "%{count} Diskussionen"
     destroy:
-      failure: "Dieses Thema kann nicht gelöscht werden" # Can't delete that issue
-      success: "Thema gelöscht" Issue deleted
+      failure: "Dieses Thema kann nicht gelöscht werden"
+      success: "Thema gelöscht"
     edit:
-      title: "Thema bearbeiten" # Edit Issue
+      title: "Thema bearbeiten"
     index:
-      new_issue: "Berichte über ein neues Thema" # Report new issue
-      title: "Themen" # Issues
-      list_tab: "Liste" # List
-      list_introduction: "Berichtete Themen, neueste zuerst:" # Reported issues, most recent first:
-      map_tab: "Karte" # Map
-      map_introduction: "Diese Karte zeigt alle Themen, egal ob Punkte, Routen oder Areale:" # This map shows all issues, whether points, routes, or areas:
-      popular_tab: "Beliebt" # Popular
-      popular_introduction: "Die beliebtesten Themen, basierend auf die Anzahl der Stimmen:" # The most popular issues, based on the number of votes:
-      search_button: "Start" # Go
-      clear: "Löschen" # Clear
-      no_popular_issues: "In letzter Zeit wurden keine Themen gewählt." # No issues have been voted on recently.
-      no_results_found: "Kein Thema gefunden." # No issues found
-      title_introduction: "In diesem Abschnitt werden Probleme gemeldet - Probleme im Straßennetz und damit zusammenhängenden Fragen." # This section lists reported issues - problems on the street network and related matters.
-      title_introduction_report_html: "Du kannst %{report_new_issue_link} indem Du den Knopf rechts benutzt." # You can %{report_new_issue_link} using the button on the right.
-      report_new_issue: "Berichte von einem neuen Fall" # report a new issue
+      new_issue: "Berichte über ein neues Thema"
+      title: "Themen"
+      list_tab: "Liste"
+      list_introduction: "Berichtete Themen, neueste zuerst:"
+      map_tab: "Karte"
+      map_introduction: "Diese Karte zeigt alle Themen, egal ob Punkte, Routen oder Areale:"
+      popular_tab: "Beliebt"
+      popular_introduction: "Die beliebtesten Themen, basierend auf die Anzahl der Stimmen:"
+      search_button: "Start"
+      clear: "Löschen"
+      no_popular_issues: "In letzter Zeit wurden keine Themen gewählt."
+      no_results_found: "Kein Thema gefunden."
+      title_introduction: "In diesem Abschnitt werden Probleme gemeldet - Probleme im Straßennetz und damit zusammenhängenden Fragen."
+      title_introduction_report_html: "Du kannst %{report_new_issue_link} indem Du den Knopf rechts benutzt."
+      report_new_issue: "Berichte von einem neuen Fall"
     new:
-      title: "Berichte von einem Fall" # Report an issue
-      new_issue_introduction: "Du weiß von etwas, dass mehr Menschen davon abhält Rad zu fahren, oder etwas das Probleme für bestehene Radfahrer verursacht? Oder etwas was man tun könnt? Berichte davon unten." # Know of something stopping more people cycling, or that causes problems for existing cyclists? Or something that could do? Report it below.
-      admin_thread_pointer_html: "Du kannst %{administrative_matters_link} ohne geografischen Context (z. B. ein Hauptversammlung organisieren) in der Gruppe Admin Diskkussion Abschnitt" # You can %{administrative_matters_link} with no geographical context (e.g. organising a general meeting) in the group admin threads section.
-      administrative_matters: "Füge eine rein administrative Angelegenheit hinzu" # add a purely administrative matter
+      title: "Berichte von einem Fall"
+      new_issue_introduction: "Du weiß von etwas, dass mehr Menschen davon abhält Rad zu fahren, oder etwas das Probleme für bestehene Radfahrer verursacht? Oder etwas was man tun könnt? Berichte davon unten."
+      admin_thread_pointer_html: "Du kannst %{administrative_matters_link} ohne geografischen Context (z. B. ein Hauptversammlung organisieren) in der Gruppe Admin Diskkussion Abschnitt"
+      administrative_matters: "Füge eine rein administrative Angelegenheit hinzu"
     show:
-      added_by_html: "Berichtet von %{name} am %{time}" # Reported by %{name} on %{time}
-      cancel_vote: "Abbrechen" # Cancel
-      confirm_delete: "Bist Du sicher?" # Are you sure? 
-      delete_issue: "Diesen Fall löschen" # Delete this issue
-      edit_issue: "Diesen Fall bearbeiten" # Edit this issue
+      added_by_html: "Berichtet von %{name} am %{time}"
+      cancel_vote: "Abbrechen"
+      confirm_delete: "Bist Du sicher?"
+      delete_issue: "Diesen Fall löschen"
+      edit_issue: "Diesen Fall bearbeiten"
       new_thread:
-        zero: "Diskutieren" # Discuss
-        one: "Neues Thema" # New Thread
-        other: "Neues Thema" New Thread
-      no_threads_yet: "Es gibt noch keine Diskussionen zu diesem Thema." # There are no discussion threads for this issue yet.
-      group_private: "Privat für %{group}" # Private to %{group}
-      group_public: "Öffentlich, von %{group}" Public, by %{group}
-      public: "Öffentlich" # Public
-      sign_in: "Anmelden" # sign in
-      sign_in_to_discuss_html: "Du kannst %{sign_in_link}, um eine Diskussion zu starten" # You can %{sign_in_link} to start the discussion.
-      sign_in_to_vote_html: "Bitte %{sign_in_link}, um zu wählen." # Please %{sign_in_link} to vote
-      threads: "Diskussionen" # Threads
-      vote_clear: "Abstimmung löschen" # Clear Vote
-      vote_down: "Daumen hoch" # Vote Down
-      vote_up: "Daumen runter" # Vote Up
+        zero: "Diskutieren"
+        one: "Neues Thema"
+        other: "Neues Thema"
+      no_threads_yet: "Es gibt noch keine Diskussionen zu diesem Thema."
+      group_private: "Privat für %{group}"
+      group_public: "Öffentlich, von %{group}"
+      public: "Öffentlich"
+      sign_in: "Anmelden"
+      sign_in_to_discuss_html: "Du kannst %{sign_in_link}, um eine Diskussion zu starten"
+      sign_in_to_vote_html: "Bitte %{sign_in_link}, um zu wählen."
+      threads: "Diskussionen"
+      vote_clear: "Abstimmung löschen"
+      vote_down: "Daumen hoch"
+      vote_up: "Daumen runter"
       votes:
-        one: "Stimme" # vote
-        other: "Stimmen" # votes
-      location: "Location" # Location
+        one: "Stimme"
+        other: "Stimmen"
+      location: "Location"
     update:
-      success: "Fall wurde aktualisiert" # Issue updated
+      success: "Fall wurde aktualisiert"
     vote_clear:
-      failure: "Deine Stimme konnte nicht gelöscht werden" # Your vote couldn't be cleared
-      success: "Deine Stimme wurde gelöscht" # Your vote has been cleared
+      failure: "Deine Stimme konnte nicht gelöscht werden"
+      success: "Deine Stimme wurde gelöscht"
     vote_down:
-      already: "Du hast über dieses Thema bereits negativ abgestimmt" # You've already voted down this issue
-      success: "Du hast für dieses Thema negativ gestimmt" # You have voted down this issue
+      already: "Du hast über dieses Thema bereits negativ abgestimmt"
+      success: "Du hast für dieses Thema negativ gestimmt"
     vote_up:
-      already: "Du hast über dieses Thema bereits positiv abgestimmt" # You've already voted up this issue
-      success: "Du hast für dieses Thema positiv gestimmt" # You have voted up this issue
+      already: "Du hast über dieses Thema bereits positiv abgestimmt"
+      success: "Du hast für dieses Thema positiv gestimmt"
   layouts:
     application:
-      admin: "Admin" # Admin
-      admin_tooltip: "Admin-Bereich, für System-Administratoren" # Admin area, for system administrators
-      dashboard: "Mein Cyclescape" # My Cyclescape
-      dashboard_tooltip: "Dein persönliches Dashboard zeigt Dir Updates in Diskussionen, die Du abonniert hast" # Your personal dashboard, showing updates on discussion threads you are subscribed to
-      feedback: "Feedback" # Feedback
-      home: "Home" # Home
-      issues: "Themen" # Issues
-      issues_tooltip: "Berichtete Probleme, auf der Karte oder in einer Liste durchsuchbar" # Reported problems, browsable on the map or as a list
-      library: "Sammlung" # Library
-      library_tooltip: "Wiederverwendbaren Ressourcen für die Kampagne" # Reusable resources for campaigning
-      loading: "Bitte warten..." # Please wait...
-      threads: "Diskussuionen" # Discussion threads
-      threads_tooltip: "Diskussionen zu jedem Thema" # Discussions on each issue
-      title: "Cyclescape" # Cyclescape
+      admin: "Admin"
+      admin_tooltip: "Admin-Bereich, für System-Administratoren"
+      dashboard: "Mein Cyclescape"
+      dashboard_tooltip: "Dein persönliches Dashboard zeigt Dir Updates in Diskussionen, die Du abonniert hast"
+      feedback: "Feedback"
+      home: "Home"
+      issues: "Themen"
+      issues_tooltip: "Berichtete Probleme, auf der Karte oder in einer Liste durchsuchbar"
+      library: "Sammlung"
+      library_tooltip: "Wiederverwendbaren Ressourcen für die Kampagne"
+      loading: "Bitte warten..."
+      threads: "Diskussuionen"
+      threads_tooltip: "Diskussionen zu jedem Thema"
+      title: "Cyclescape"
     footer:
-      application_version_html: "Version ref: %{version}" # Version ref: %{version}
-      github_page_link_html: "Einblick in den Quellcode auf <a href='https://github.com/cyclestreets/toolkit/'>GitHub</a>" # View the source at <a href='https://github.com/cyclestreets/toolkit/'>GitHub</a>
-      whats_new: "Was ist neu" # What's New
-      supportlogos_introduction: "Cyclescape wurde möglich dank der großzügigen Unterstützung von:" # Cyclescape has been made possible thanks to generous support from:
-      funding_from: "Finanziert von from %{name}" # Funding from %{name}
-      funding_from_and_created_by: "Mittel aus und erstellt von %{name}" # Funding from and created by %{name}
-      planning_application_data: "Planungsanwendungsdaten von Openly Local" # Planning application data from Openly Local
+      application_version_html: "Version ref: %{version}"
+      github_page_link_html: "Einblick in den Quellcode auf <a href='https://github.com/cyclestreets/toolkit/'>GitHub</a>"
+      whats_new: "Was ist neu"
+      supportlogos_introduction: "Cyclescape wurde möglich dank der großzügigen Unterstützung von:"
+      funding_from: "Finanziert von from %{name}"
+      funding_from_and_created_by: "Mittel aus und erstellt von %{name}"
+      planning_application_data: "Planungsanwendungsdaten von Openly Local"
     group_selector:
-      group_selector: "Gruppe " # Group
-      no_group: "Keine Gruppe" # No Group
+      group_selector: "Gruppe "
+      no_group: "Keine Gruppe"
     search:
-      search: "Suchen" # Search
-      search_button: "Los" # Go
+      search: "Suchen"
+      search_button: "Los"
   libraries:
     search:
-      no_results_found: "Keine Ergebnisse für '%{query}' gefunden." # No results found for '%{query}'.
+      no_results_found: "Keine Ergebnisse für '%{query}' gefunden."
       results_found:
-        one: "Ein Ergebniss für '%{query}' gefunden." # One result found for '%{query}'.
-        other: "%{count} Ergebnisse für '%{query}' gefunden" # %{count} results found for '%{query}'
-      title: "Sucheregbnisse aus der Sammlung" # Library Search Results
+        one: "Ein Ergebniss für '%{query}' gefunden."
+        other: "%{count} Ergebnisse für '%{query}' gefunden"
+      title: "Sucheregbnisse aus der Sammlung"
     show:
-      title: "Sammlung" # Library
-      overview_description_html: "Die Sammlung enthält <strong>wiederverwendbare Ressourcen</strong> für Kampagnen. Bitte füge Elemente ein, die dir für die Zukunft nützlich erscheinen" # The Library contains <strong>reusable resources</strong> for campaigning. Please add items you think might be useful in future.
-      overview_usage: "Du kannst Inhalte von Sammlungen in einer Diskussion verlinken." # You can link to library items from discussion threads.
-      latest: "Letzte Artikel" # Latest items
-      item_created: "Vor %{time_ago} gepostet" # Posted %{time_ago} ago
-      search: "Sammlung durchsuchen:" # Search the library:
-      search_submit: "Suchen" # Search
-      clear_submit: "Löschen" # Clear
-      results: "Ergebnisse" # Results
-      new_library_item: "Sammlungsinhalt hinzufügen" # Add Library Item
-      new_note: "Notiz" # Note
-      new_document: "Dokument" # Document
-      new_item_title: "Typ auswählen" # Select type
-      new_item_description_html: "Wähle den Inhaltstyp, den Du zur Sammlung hinzufügen möchtest:" # Select the type of item you would like to add to the library:
-      new_note_description_html: "<strong>Hinweise</strong> sind für kurze Textstücke als Referenz." # <strong>Notes</strong> are for short pieces of text for reference.
-      new_document_description_html: "<strong>Dokumente</strong> erlaubt Dir Dateien hochzuladen." # <strong>Documents</strong> allow you to upload files.
+      title: "Sammlung"
+      overview_description_html: "Die Sammlung enthält <strong>wiederverwendbare Ressourcen</strong> für Kampagnen. Bitte füge Elemente ein, die dir für die Zukunft nützlich erscheinen"
+      overview_usage: "Du kannst Inhalte von Sammlungen in einer Diskussion verlinken."
+      latest: "Letzte Artikel"
+      item_created: "Vor %{time_ago} gepostet"
+      search: "Sammlung durchsuchen:"
+      search_submit: "Suchen"
+      clear_submit: "Löschen"
+      results: "Ergebnisse"
+      new_library_item: "Sammlungsinhalt hinzufügen"
+      new_note: "Notiz"
+      new_document: "Dokument"
+      new_item_title: "Typ auswählen"
+      new_item_description_html: "Wähle den Inhaltstyp, den Du zur Sammlung hinzufügen möchtest:"
+      new_note_description_html: "<strong>Hinweise</strong> sind für kurze Textstücke als Referenz."
+      new_document_description_html: "<strong>Dokumente</strong> erlaubt Dir Dateien hochzuladen."
   library:
     documents:
       new:
-        title: "Neues Sammlungs-Dokument" # New Library Document
+        title: "Neues Sammlungs-Dokument"
       show:
-        added_by_html: "Hinzugefügt von %{name} um %{time}" # Added by %{name} on %{time}
-        attach_note: "Notiz anfügen" # Attach Note
-        attach_note_instructions_html: "Du kannst neue Notizen erstellen, die mit diesem Dokument verknüpft sind. Wird in einer Diskussion darauf verwiesen, wird ebenso dieses Dokument verlinkt" # You can create new notes linked to this document. When referenced in a thread they will link to this document as well.
-        download: "Dokument herunterladen" # Download document
-        comments: "Kommentare" # Comments
-        notes: "Notizen" # Notes
-        no_threads: "Dieses Dokument wurde in keiner öffentlichen Diskussion einbezogen. Wenn Du dieses Dokument einer öffentlichen Diskussion hinzufügst, wird die Diskussion dort aufgelistet." # This document hasn't been included in any public threads. If you add this document to a public thread, the thread will be listed here.
+        added_by_html: "Hinzugefügt von %{name} um %{time}"
+        attach_note: "Notiz anfügen"
+        attach_note_instructions_html: "Du kannst neue Notizen erstellen, die mit diesem Dokument verknüpft sind. Wird in einer Diskussion darauf verwiesen, wird ebenso dieses Dokument verlinkt"
+        download: "Dokument herunterladen"
+        comments: "Kommentare"
+        notes: "Notizen"
+        no_threads: "Dieses Dokument wurde in keiner öffentlichen Diskussion einbezogen. Wenn Du dieses Dokument einer öffentlichen Diskussion hinzufügst, wird die Diskussion dort aufgelistet."
         public_threads: "Public Threads"
-        threads_explanation: "Dieses Dokument wurde in folgenden öffentlichen Diskussionen erwähnt:" # This document has been mentioned in these public threads:
+        threads_explanation: "Dieses Dokument wurde in folgenden öffentlichen Diskussionen erwähnt:"
     notes:
       edit:
-        title: "Sammlungs Notiz bearbeiten" # Edit Library Note
+        title: "Sammlungs Notiz bearbeiten"
       new:
-        title: "Neue Sammlungs Notiz" # New Library Note
+        title: "Neue Sammlungs Notiz"
       show:
-        added_by_html: "Hinzugefügt von %{name} um %{time}" # Added by %{name} on %{time}
-        edit: "Notiz bearbeiten" # Edit Note
-        note_on_document_html: "Diese Notiz wurde einem Dokument angehängt: %{document}" # This note is attached to a document: %{document}
-        no_threads: "Diese Notiz wurde in keiner öffentlichen Diskussion erwähnt. Wenn Du diese Notiz einer öffentlichen Diskussion hinzufügst, wird die Diskussion dort aufgelistet" # This note hasn't been included in any public threads. If you add this note to a public thread, the thread will be listed here.
-        public_threads: "Öffentliche Diskussionen" # Public Threads
-        threads_explanation: "Diese Notiz wure in folgenden öffentlichen Diskussionen genannt:" # This note has been mentioned in these public threads:
+        added_by_html: "Hinzugefügt von %{name} um %{time}"
+        edit: "Notiz bearbeiten"
+        note_on_document_html: "Diese Notiz wurde einem Dokument angehängt: %{document}"
+        no_threads: "Diese Notiz wurde in keiner öffentlichen Diskussion erwähnt. Wenn Du diese Notiz einer öffentlichen Diskussion hinzufügst, wird die Diskussion dort aufgelistet"
+        public_threads: "Öffentliche Diskussionen"
+        threads_explanation: "Diese Notiz wure in folgenden öffentlichen Diskussionen genannt:"
       update:
-        success: "Sammlungs Notiz wurde aktualisiert" # Library Note Updated
+        success: "Sammlungs Notiz wurde aktualisiert"
   mailers:
     notifications:
       gmr_confirmed:
-        subject: "Du bist nun ein Mitglied von %{group_name}" # You are now a member of %{group_name}
+        subject: "Du bist nun ein Mitglied von %{group_name}"
       new_group_thread:
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
       new_group_location_issue:
-        subject: "[Cyclescape] Neues Thema - \"%{issue_title}\" (%{group_name})" # [Cyclescape] New issue - \"%{issue_title}\" (%{group_name})
+        subject: "[Cyclescape] Neues Thema - \"%{issue_title}\" (%{group_name})"
       new_user_location_issue:
-        subject: "[Cyclescape] Neues Thema - \"%{issue_title}\"" # "[Cyclescape] New issue - \"%{issue_title}\"
+        subject: "[Cyclescape] Neues Thema - \"%{issue_title}\""
       new_user_location_issue_thread:
-        subject: "[Cyclescape] Start einer neuen Diskussion um das Thema \"%{issue_title}\"" # [Cyclescape] New thread started on issue \"%{issue_title}\
+        subject: "[Cyclescape] Start einer neuen Diskussion um das Thema \"%{issue_title}\""
 
     thread_mailer:
       common:
         subject:
-          one: "[Cyclescape] %{title}"  
-          other: "Re: [Cyclescape] %{title}" 
+          one: "[Cyclescape] %{title}"
+          other: "Re: [Cyclescape] %{title}"
   message_thread:
     subscriptions:
       create:
-        success: "Du hast jetzt diese Diskussion aboniert" # You are now subscribed to this thread
+        success: "Du hast jetzt diese Diskussion aboniert"
       destroy:
-        success: "Du hast dich von dieser Diskussion abgemeldet" # You have unsubscribed from this thread
+        success: "Du hast dich von dieser Diskussion abgemeldet"
     tags:
       panel:
-        edit_tags: "Bearbeiten" # unsubscribed
-        tags: "Tags" # tags
+        edit_tags: "Bearbeiten"
+        tags: "Tags"
     user_priorities:
       create:
-        success: "Priorität gespeichert" # Priority saved
-        failure: "Deine Priorität konnte nicht gespeichert werden" # Couldn't save your priority
+        success: "Priorität gespeichert"
+        failure: "Deine Priorität konnte nicht gespeichert werden"
       update:
-        success: "Priorität aktualisiert" # Priority updated
-        failure: "Deine Priorität konnte nicht aktualisiert werden" # Couldn't update your priority
+        success: "Priorität aktualisiert"
+        failure: "Deine Priorität konnte nicht aktualisiert werden"
   message_threads:
     compact:
-      group_committee: "Gruppen Committee" # Group Committee
-      group_public: "Öffentliche Gruppe" # Group Public
-      group_private: "Private Gruppe" # Group Private
-      public: "Öffentlich" # Public
-      posted_at: "vor %{time_ago} gepostet" # posted %{time_ago} ago
+      group_committee: "Gruppen Committee"
+      group_public: "Öffentliche Gruppe"
+      group_private: "Private Gruppe"
+      public: "Öffentlich"
+      posted_at: "vor %{time_ago} gepostet"
     list:
-      discussion_on_issue: "Eine Diskussion zum Thema" # A discussion on issue
-      group_committee: "Gruppen Committee" # Group Committee
-      group_public: "Öffentliche Gruppe" # Group Public
-      group_private: "Private Gruppe" # Group Private
-      public: "Öffentlich" # Public
-      posted_at: "vor %{time_ago} gepostet" # posted %{time_ago} ago
+      discussion_on_issue: "Eine Diskussion zum Thema"
+      group_committee: "Gruppen Committee"
+      group_public: "Öffentliche Gruppe"
+      group_private: "Private Gruppe"
+      public: "Öffentlich"
+      posted_at: "vor %{time_ago} gepostet"
     edit:
-      title: "Diskussion bearbeiten" # Edit thread
+      title: "Diskussion bearbeiten"
       description_html:
-        Administrators can fix up thread options here. # Administrators can fix up thread options here.
-        <strong>Warning:</strong> Deine Gruppe hat vielleicht eine Regel für Änderungen in Geheimhaltung von Diskussionen. # Unklar </strong> your group may have a policy about changing thread privacy.
+        Administrators can fix up thread options here.
+        <strong>Warning:</strong> Deine Gruppe hat vielleicht eine Regel für Änderungen in Geheimhaltung von Diskussionen.
     destroy:
-      failure: "Konnte diese Diskussion nicht löschen" # Couldn't delete the thread
-      success: "Diskussion gelöscht" # Thread deleted
+      failure: "Konnte diese Diskussion nicht löschen"
+      success: "Diskussion gelöscht"
     index:
-      latest_activity: "Letzte Aktivität liegt %{ago} zurück" # Latest activity %{ago} ago
-      search: "Suche in allen Diskussionen:" # Search all threads:
-      search_submit: "Suchen" # Search
-      title: "Öffentliche Diskussionen" # Public Threads
+      latest_activity: "Letzte Aktivität liegt %{ago} zurück"
+      search: "Suche in allen Diskussionen:"
+      search_submit: "Suchen"
+      title: "Öffentliche Diskussionen"
     library_panel:
-      library: "Sammlung" # Library
-      no_library_items: "Basierend auf den Tags in der Diskussion, konnten keine relevanten Einträge in der Sammlung gefunden werden." # Couldn't find any relevant library items based on the thread tags.
-      tag_thread_guidance: "Füge Tags zur Diskussion hinzu, um relevante Einträge in der Sammlung zu finden." # Add tags to this thread to find relevant library items.
+      library: "Sammlung"
+      no_library_items: "Basierend auf den Tags in der Diskussion, konnten keine relevanten Einträge in der Sammlung gefunden werden."
+      tag_thread_guidance: "Füge Tags zur Diskussion hinzu, um relevante Einträge in der Sammlung zu finden."
     new:
-      title: "Neue Diskussion" # New Thread
+      title: "Neue Diskussion"
     priority_panel:
-      thread_priority: "Meine Priorität der Diskussion" # My Thread Priority
+      thread_priority: "Meine Priorität der Diskussion"
     search:
-      clear_submit: "Löschen" # Clear
-      no_results_found: "Für '%{query}' wurden keine Ergebnisse gefunden." # No results found for '%{query}'.
+      clear_submit: "Löschen"
+      no_results_found: "Für '%{query}' wurden keine Ergebnisse gefunden."
       results_found:
-        one: "Für '%{query}' wurde ein Ergebnis gefunden." # One result found for '%{query}'.
-        other: "Für '%{query}' wurden %{count} Ergebnisse gefunden " # %{count} results found for '%{query}
-      search: "Alle Diskussionen durchsuchen:" # Search all threads:
-      search_submit: "Suchen" # Search
-      title: "Suchergebnisse aus Diskussionen" # Thread Search Results
+        one: "Für '%{query}' wurde ein Ergebnis gefunden."
+        other: "Für '%{query}' wurden %{count} Ergebnisse gefunden "
+      search: "Alle Diskussionen durchsuchen:"
+      search_submit: "Suchen"
+      title: "Suchergebnisse aus Diskussionen"
     show:
-      are_you_sure: "Bist Du sicher?" # Are you sure?
-      back: "Zurück" # Back
-      edit: "Diese Diskussion bearbeiten" # Edit this thread
-      destroy: "Diese Diskussion löschen" # Delete this thread
-      private_to_committee_message: "Privat: Nur Committee-Mitglieder von %{group} können Beiträge in dieser Diskussion lesen und posten." # Private: Only committee members of %{group} can view and post messages to this thread.
-      private_to_group_message: "Privat: Nur Mitglieder von %{group} können Beiträge in dieser Diskussion lesen und posten." # Private: Only members of %{group} can view and post messages to this thread.
-      public_message: "Öffentlich: Jeder in dieser Diskussion kann Beiträge lesen und posten." # Public: Everyone can view this thread and post messages.
+      are_you_sure: "Bist Du sicher?"
+      back: "Zurück"
+      edit: "Diese Diskussion bearbeiten"
+      destroy: "Diese Diskussion löschen"
+      private_to_committee_message: "Privat: Nur Committee-Mitglieder von %{group} können Beiträge in dieser Diskussion lesen und posten."
+      private_to_group_message: "Privat: Nur Mitglieder von %{group} können Beiträge in dieser Diskussion lesen und posten."
+      public_message: "Öffentlich: Jeder in dieser Diskussion kann Beiträge lesen und posten."
     subscribe_panel:
-      subscribed: "Du folgst dieser Diskussion." # You are following this thread.
+      subscribed: "Du folgst dieser Diskussion."
     subscribers_panel:
-      owner: "Inhaber" # Owner
-      subscribers: "Dieser Diskussion folgen" # Following this thread
+      owner: "Inhaber"
+      subscribers: "Dieser Diskussion folgen"
     update:
-      success: "Diskussion aktualisiert" # Thread updated
+      success: "Diskussion aktualisiert"
     widget:
-      group_private: "Private Gruppe" # Group Private
-      public: "Öffentlich" # Public
+      group_private: "Private Gruppe"
+      public: "Öffentlich"
   message:
     deadlines:
       new:
-        deadline_date: "Stichtag/date" # Deadline/date
-        submit: "Stichtag hinzufügen/date" # Add deadline/date
+        deadline_date: "Stichtag/date"
+        submit: "Stichtag hinzufügen/date"
       create:
-        failure: "Stichtag/date kann nicht erstellt werden" # Deadline/date could not be created
-        success: "Stichtag/date erstellt" # Deadline/date created
+        failure: "Stichtag/date kann nicht erstellt werden"
+        success: "Stichtag/date erstellt"
       show:
         days_away:
-          zero: "Heute!" # Today!
-          one: "Morgen!" # Tomorrow!
-          other: "In %{count} Tagen!" # %{count} days away!
+          zero: "Heute!"
+          one: "Morgen!"
+          other: "In %{count} Tagen!"
     documents:
       create:
-        failure: "Konnte Anhang nicht hinzufügen" # Could not add attachment
-        success: "Anhang hinzugefügt" # Attachment added
+        failure: "Konnte Anhang nicht hinzufügen"
+        success: "Anhang hinzugefügt"
       show:
-        download: "Anhang herunterladen" # Download Attachment
+        download: "Anhang herunterladen"
     library_items:
       create:
-        failure: "Sammlungseintrag konnte nicht hinzugefügt werden" # Library item could not be added
-        success: "Sammlungseintrag hinzugefügt" # Library item added
+        failure: "Sammlungseintrag konnte nicht hinzugefügt werden"
+        success: "Sammlungseintrag hinzugefügt"
       show:
-        attached_to_html: "Zu Dokument %{document} hinzugefügt" # Attached to document: %{document}
+        attached_to_html: "Zu Dokument %{document} hinzugefügt"
     links:
       create:
-        failure: "Link konnte nicht erstellt werden" # Link could not be created
-        success: "Link wurde geposted" # 
+        failure: "Link konnte nicht erstellt werden"
+        success: "Link wurde geposted"
     photos:
       create:
-        failure: "Fotomeldung konnte nicht erstellt werden" # Could not create photo message
-        success: "Foto wurde hochgeladen" # Photo uploaded
+        failure: "Fotomeldung konnte nicht erstellt werden"
+        success: "Foto wurde hochgeladen"
       show:
-        photo_alt: "Ein Foto Titel %{caption}." # A photo entitled %{caption}. Unklar
-        view_original_image: "Zeige das Originalbild" # View the original image
+        photo_alt: "Ein Foto Titel %{caption}."
+        view_original_image: "Zeige das Originalbild"
   message_library:
     documents:
       new:
-        title: "Neues Sammlungs-Dokument" # New Library Document
+        title: "Neues Sammlungs-Dokument"
   messages:
     censor:
-      failure: "Konnte Nachricht nicht zensieren" # Could not censor message
-      success: "Nachricht zensiert" # Message censored
+      failure: "Konnte Nachricht nicht zensieren"
+      success: "Nachricht zensiert"
     create:
-      failure: "Konnte Nachricht nicht hinzufügen" # Could not add message
-      success: "Nachricht erfolgreich gesendet" # Message successfully posted
+      failure: "Konnte Nachricht nicht hinzufügen"
+      success: "Nachricht erfolgreich gesendet"
     message:
-      posted_date: "vor %{time_ago} gesendet" # posted %{time_ago} ago
-      censor: "Zensiere diese Nachricht" # Censor this message
-      censored: "Diese Nachricht wurde entfernt" # This message has been removed
-      create_note: "Sammlungsbeitrag erstellen" # Create Library Note
-      create_document: "Sammlungs-Dokument erstellen" # Create Library Document
+      posted_date: "vor %{time_ago} gesendet"
+      censor: "Zensiere diese Nachricht"
+      censored: "Diese Nachricht wurde entfernt"
+      create_note: "Sammlungsbeitrag erstellen"
+      create_document: "Sammlungs-Dokument erstellen"
     new:
-      deadline_message: "Stichtag/date" # Deadline/date
-      document_message: "Anhang" # Attachment
-      library_item_message: "Sammlung" # Library
-      link_message: "Link" # Link
-      new_message: "Neue Nachricht" # New message
-      photo_message: "Foto" # Photo
-      sign_in_to_post_html: "Bitte %{sign_in_link} um eine Nachricht zu posten." # Please %{sign_in_link} to post a message.
-      text_message: "Text" # Text
+      deadline_message: "Stichtag/date"
+      document_message: "Anhang"
+      library_item_message: "Sammlung"
+      link_message: "Link"
+      new_message: "Neue Nachricht"
+      photo_message: "Foto"
+      sign_in_to_post_html: "Bitte %{sign_in_link} um eine Nachricht zu posten."
+      text_message: "Text"
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/toolkit/commits/master/'>GitHub</a>"
   shared:
     edit_map:
-      area: "Bereich" # area
-      clear: "Löschen" # clear
-      draw_area: "Einen Bereich einzeichnen" # Draw an Area
-      draw_area_1: "Klicke auf die Punkte, um einen Bereich in der Karte zu markieren." # Click the points to mark an area on the map.
-      draw_area_2: "Einen Doppelklick, um die Form abzuschließen." # Double-click to complete the shape.
-      draw_area_3: "Vergrößern und schieben, um den richtigen Bereich zu wählen." # Zoom in and pan to select the correct area.
-      draw_point: "Zeichne einen Punkt" # Draw a Point
-      draw_point_1: "Klicke auf die Karte, um den Punkt zu markieren" # Click the map to mark the point.
-      draw_point_2: "Ziehe den Punkt um neu zu positionieren." # Drag the point to reposition.
-      draw_point_3: "Vergrößern und schieben, um den richtigen Platz zu wählen." # Zoom in and pan to select the correct place.
-      draw_route: "Zeichne eine Route" # Draw a Route
-      draw_route_1: "Klicke die Punkte, um eine Route auf der Karte zu markieren." # Click the points to mark a route on the map.
-      draw_route_2: "Doppel-Klick um die Route fertigzustellen." # Double-click to complete the route.
-      draw_route_3: "Ziehe die grauen Punkte, um eine neue Ecke zu erstellen." # Drag the grey points to create new corners.
-      point: "Punkt" # point
-      route: "Route" # route
-      undo: "Rückgängig machen" # undo
+      area: "Bereich"
+      clear: "Löschen"
+      draw_area: "Einen Bereich einzeichnen"
+      draw_area_1: "Klicke auf die Punkte, um einen Bereich in der Karte zu markieren."
+      draw_area_2: "Einen Doppelklick, um die Form abzuschließen."
+      draw_area_3: "Vergrößern und schieben, um den richtigen Bereich zu wählen."
+      draw_point: "Zeichne einen Punkt"
+      draw_point_1: "Klicke auf die Karte, um den Punkt zu markieren"
+      draw_point_2: "Ziehe den Punkt um neu zu positionieren."
+      draw_point_3: "Vergrößern und schieben, um den richtigen Platz zu wählen."
+      draw_route: "Zeichne eine Route"
+      draw_route_1: "Klicke die Punkte, um eine Route auf der Karte zu markieren."
+      draw_route_2: "Doppel-Klick um die Route fertigzustellen."
+      draw_route_3: "Ziehe die grauen Punkte, um eine neue Ecke zu erstellen."
+      point: "Punkt"
+      route: "Route"
+      undo: "Rückgängig machen"
     map_search:
-      near: "In der Nähe" # near
-      searching: "Suche..." # Searching...
-      search_failed: "Es tut mir leid, die Suche war diesmal nicht erfolgreich." # Sorry, the search failed this time.
-      showing: "Anzeigen" # Showing
-      sorry_we_couldnt_find: "Leider konnten wir es nicht finden" # Sorry, we couldn't find
-      submit: "Los" # Go
+      near: "In der Nähe"
+      searching: "Suche..."
+      search_failed: "Es tut mir leid, die Suche war diesmal nicht erfolgreich."
+      showing: "Anzeigen"
+      sorry_we_couldnt_find: "Leider konnten wir es nicht finden"
+      submit: "Los"
     profile_menu:
-      edit: "Mein Profil bearbeiten" # Edit My Profile
-      edit_preferences: "Meine Einstellungen verwalten" # Manage My Preferences
-      my_locations: "Meine Standorte" # My Locations
-      update_account: "Meine Konteneinstellungen aktualisieren" # Update My Account Details
+      edit: "Mein Profil bearbeiten"
+      edit_preferences: "Meine Einstellungen verwalten"
+      my_locations: "Meine Standorte"
+      update_account: "Meine Konteneinstellungen aktualisieren"
     tags:
       panel:
-        edit_tags: "Tags bearbeiten" # Edit tags
+        edit_tags: "Tags bearbeiten"
   site:
     comments:
       index:
-        no_comments: "Noch kein Kommentar" # No Feedback Yet
-        title: "Alle Kommentare" # All Feedback
-        when_ago: "%{time_ago} zurück" # %{time_ago} ago
+        no_comments: "Noch kein Kommentar"
+        title: "Alle Kommentare"
+        when_ago: "%{time_ago} zurück"
       new:
-        title: "Kommentare" # Feedback
+        title: "Kommentare"
       success:
-        thank_you_title: "Danke für deinen Kommentar!" # Thank you for your feedback!
-        thank_you_longform: "Einer unserer Entwickler wird Deinen Kommentar lesen und diese für spätere Entwicklungen berücksichtigen. Leider können wir nicht auf jede Rückmeldung persönlich antworten, die wir erhalten." # One of our developers will read your feedback and use it to help plan upcoming work and new features. Unfortunately we can't respond individually to every feedback comment that we receive.
-        close: "< Zurück zur Seite" # < Back to site
+        thank_you_title: "Danke für deinen Kommentar!"
+        thank_you_longform: "Einer unserer Entwickler wird Deinen Kommentar lesen und diese für spätere Entwicklungen berücksichtigen. Leider können wir nicht auf jede Rückmeldung persönlich antworten, die wir erhalten."
+        close: "< Zurück zur Seite"
   tags:
     show:
       issues: "Issues"
       library_items: "Library Items"
       no_results_found: "No results found"
-      threads: "Diskussionen" # Threads
-      heading: "Dinge mit %{name}' getaggt" #Things tagged '%{name}'
-      unrecognised: "Kann den Tag '%{name}' nicht finden" # Couldn't find the tag '%{name}'
+      threads: "Diskussionen"
+      heading: "Dinge mit %{name}' getaggt"
+      unrecognised: "Kann den Tag '%{name}' nicht finden"
   thread_mailer:
     new_deadline_message:
-      added: "%{name} fügte einen Stichtag/date zur Diskussion hinzu" # %{name} added a deadline/date to the thread
+      added: "%{name} fügte einen Stichtag/date zur Diskussion hinzu"
     new_document_message:
-      added: "%{name} fügte einen Anhang zur Diskussion hinzu" # %{name} added an attachment to the thread
-      view_the_document: "Unter folgdender URL kannst Du den Anhang anschauen:" # You can view the attachment at the following url:
+      added: "%{name} fügte einen Anhang zur Diskussion hinzu"
+      view_the_document: "Unter folgdender URL kannst Du den Anhang anschauen:"
     new_library_item_message:
-      added: "%{name} fügte einen Eintrag zur Sammlung hinzu." # %{name} added an item from the library to the thread.
+      added: "%{name} fügte einen Eintrag zur Sammlung hinzu."
     new_link_message:
-      added: "%{name} fügte einen Link zur Diskussion hinzu." # %{name} added a link to the thread.
+      added: "%{name} fügte einen Link zur Diskussion hinzu."
     new_message:
-      added: "%{name} fügte eine Nachricht zur Diskussion hinzu." # %{name} added a message to the thread
+      added: "%{name} fügte eine Nachricht zur Diskussion hinzu."
     new_photo_message:
-      added: "%{name} fügte ein Foto der Diskussion hinzu." # %{name} added a photo to the thread
-      view_the_photo: "Unter folgdender URL kannst Du das Foto anschauen:" # You can view the photo at the following url:
+      added: "%{name} fügte ein Foto der Diskussion hinzu."
+      view_the_photo: "Unter folgdender URL kannst Du das Foto anschauen:"
     footer:
-      thread: "Cyclescape Diskussion" # Cyclescape thread
-      unsubscribe: "Durch den Link oben, kannst Du das Abo dieser Diskussion beenden." # You can stop following this thread by visiting the link above.
+      thread: "Cyclescape Diskussion"
+      unsubscribe: "Durch den Link oben, kannst Du das Abo dieser Diskussion beenden."
   thread_priorities:
-    very_high: "Oberste Priorität" # Top-priority
-    high: "Wichtig" # Important
-    medium: "Mäßig wichtig" # Moderately Important
-    low: "Marginal interessant" # Marginal Interest
-    very_low: "Nicht von Interesse" # Not of Interest
+    very_high: "Oberste Priorität"
+    high: "Wichtig"
+    medium: "Mäßig wichtig"
+    low: "Marginal interessant"
+    very_low: "Nicht von Interesse"
   user:
     locations:
-      submit_button: "Diesen Ort speichern" # Save this location
+      submit_button: "Diesen Ort speichern"
       create:
-        success: "Standort erstellt" # Location Created
+        success: "Standort erstellt"
       destroy:
-        failure: "Dieser Standort kann nicht gelöscht werden" # That location can't be deleted
-        success: "Standort gelöscht" # Location deleted
+        failure: "Dieser Standort kann nicht gelöscht werden"
+        success: "Standort gelöscht"
       edit:
-        title: "Standort bearbeiten" # Edit Location
+        title: "Standort bearbeiten"
       index:
-        add_first_location: "Füge Deinen ersten Standort hinzu" # add your first location
-        all_my_locations: "Alle meine Standorte" # All my locations
-        catch_up_guidance_html: "Um sich über bestehende Diskussionen auf dem Laufenden zu halten, kannst Du dich in diesen Bereichen %{subscribe_existing_link}." # To catch up on existing discussions, you can %{subscribe_existing_link} in these areas.
-        category: "Kategorie" # Category
-        combined_locations: "Kombinierte Standorte" # Combined locations
-        combined_locations_guidance: "Diese Karte zeigt alle Deine Standorte zusammen. Wir nutzen dies, um herauszufinden, welche Themen für Dich relevant sind, und an welchen Gruppen Du interessiert sein könntest." # This map shows all of your locations combined together. We use this to help figure out which issues are relevant to you, and which groups you might be interested in.
-        combined_locations_guidance_none_html: "Möchtest Du Benarichtigungen erhalten wenn Themen in diesem Bereich erstellt werden, und optional Diskussionen zu diesem Themen aboniert wurden, kannst Du %{edit_prefs_link}" # If you want to receive notifications when issues are created in these areas, and optionally follow the discussion threads on those issues, you can %{edit_prefs_link}.
-        combined_locations_guidance_notify_html: "Du erhälst aktuell Benarichtigungen, wenn Themen zu diesen Bereichen erstellt werden, aber keine Diskussionen zu diesem Thema aboniert wurden. Um diese Einstellung zu ändern kannst Du %{edit_prefs_link}." # You currently receive notifications when issues are created in these areas, but aren't automatically following discussion threads on those issues. To change these settings, you can %{edit_prefs_link}.
-        combined_locations_guidance_subscribe_html: "Du erhälst aktuell Benarichtigungen, wenn Themen zu diesem Bereich erstellt, und alle Diksussionen zu diesem Thema abonniert wurden. Um diese Einstellung zu ändern kannst Du %{edit_prefs_link}." # You currently receive notifications when issues are created in these areas, and are following all discussion threads on those issues. To change these settings, you can %{edit_prefs_link}.
-        confirm: "Bist Du sicher?" # Are you sure?
-        delete: "Löschen" # Delete
-        edit: "Bearbeiten" # Edit
-        edit_your_prefs: "Bearbeite Deine Einstellungen" # edit your preferences
-        map: "Karte" # Map
-        my_locations: "Meine Standorte" # My Locations
-        new: "Neuen Standort hinzufügen" # Add a new Location
-        no_locations_yet: "Du hast bisher keine Standorte erstellt!" # You haven't set any locations yet!
-        no_locations_guidance: "Du kannst Standorte erstellen für Dein zu Hause, für Deinen Weg zur Arbeit, oder wo Du gerne fahren würdest, und so weiter. Die hilft uns herauszufinden, welche Themen für Dich relevant sind, und an welchen Gruppen Du interessiert sein könntest." # You can create locations for where you live, your route to work, where you like to go riding, and so on. This helps us figure out which issues are relevant to you, and which groups you might be interested in.
-        no_locations_guidance2_html: "Um zu starten, kannst Du %{first_location_link}." # To get started, you can %{first_location_link}.
-        no_overlapping_groups: "Keine überlappenden Gruppen" # No Overlapping Groups
-        overlapping_groups: "Überlappende Gruppen" # Overlapping Groups
-        subscribe_existing_threads: "Folge allen vorhandenen Diskussionen." # follow all existing threads
+        add_first_location: "Füge Deinen ersten Standort hinzu"
+        all_my_locations: "Alle meine Standorte"
+        catch_up_guidance_html: "Um sich über bestehende Diskussionen auf dem Laufenden zu halten, kannst Du dich in diesen Bereichen %{subscribe_existing_link}."
+        category: "Kategorie"
+        combined_locations: "Kombinierte Standorte"
+        combined_locations_guidance: "Diese Karte zeigt alle Deine Standorte zusammen. Wir nutzen dies, um herauszufinden, welche Themen für Dich relevant sind, und an welchen Gruppen Du interessiert sein könntest."
+        combined_locations_guidance_none_html: "Möchtest Du Benarichtigungen erhalten wenn Themen in diesem Bereich erstellt werden, und optional Diskussionen zu diesem Themen aboniert wurden, kannst Du %{edit_prefs_link}"
+        combined_locations_guidance_notify_html: "Du erhälst aktuell Benarichtigungen, wenn Themen zu diesen Bereichen erstellt werden, aber keine Diskussionen zu diesem Thema aboniert wurden. Um diese Einstellung zu ändern kannst Du %{edit_prefs_link}."
+        combined_locations_guidance_subscribe_html: "Du erhälst aktuell Benarichtigungen, wenn Themen zu diesem Bereich erstellt, und alle Diksussionen zu diesem Thema abonniert wurden. Um diese Einstellung zu ändern kannst Du %{edit_prefs_link}."
+        confirm: "Bist Du sicher?"
+        delete: "Löschen"
+        edit: "Bearbeiten"
+        edit_your_prefs: "Bearbeite Deine Einstellungen"
+        map: "Karte"
+        my_locations: "Meine Standorte"
+        new: "Neuen Standort hinzufügen"
+        no_locations_yet: "Du hast bisher keine Standorte erstellt!"
+        no_locations_guidance: "Du kannst Standorte erstellen für Dein zu Hause, für Deinen Weg zur Arbeit, oder wo Du gerne fahren würdest, und so weiter. Die hilft uns herauszufinden, welche Themen für Dich relevant sind, und an welchen Gruppen Du interessiert sein könntest." 
+        no_locations_guidance2_html: "Um zu starten, kannst Du %{first_location_link}."
+        no_overlapping_groups: "Keine überlappenden Gruppen"
+        overlapping_groups: "Überlappende Gruppen"
+        subscribe_existing_threads: "Folge allen vorhandenen Diskussionen."
       new:
-        new_location: "Füge einen neuen Standort hinzu" # Add a new location
-        introduction: "Das Hinzufügen eines Standorts hilft uns herauszufinden, welche Thema für die relevant ist." # By setting a location, this helps us figure out which issues are relevant to you.
-        drawing_help: "Du kannst einen Bereich, eine Route oder einen Standort einzeichnen - wähle dies im Panel rechts. Dann zeichne in die Karte und drücke den Speichern Button unten. " # You can draw an area, a route or a location - select this from the panel on the right. Then draw on the map, and click the save button below.
+        new_location: "Füge einen neuen Standort hinzu"
+        introduction: "Das Hinzufügen eines Standorts hilft uns herauszufinden, welche Thema für die relevant ist."
+        drawing_help: "Du kannst einen Bereich, eine Route oder einen Standort einzeichnen - wähle dies im Panel rechts. Dann zeichne in die Karte und drücke den Speichern Button unten. "
       subscribe_to_threads:
         subscribed_to_threads:
-          zero: "Wir konnten keine weiteren Diskussionen finden, die Du folgend könntest." # We couldn't find any additional threads for you to follow.
-          one: "Du folgst einer weiteren Diskussion." # You're now following one additional thread.
-          other: "Du folgst nun %{count} weiteren Diskussionen." # You're now following %{count} additional threads.
+          zero: "Wir konnten keine weiteren Diskussionen finden, die Du folgend könntest."
+          one: "Du folgst einer weiteren Diskussion."
+          other: "Du folgst nun %{count} weiteren Diskussionen."
       update:
-        success: "Standort aktualisiert" # Location Updated
+        success: "Standort aktualisiert"
     prefs:
       edit:
-        involvement: "Beteilige mich an:" # Involve me in:
-        notification_types: "Benarichtigungs Arten" # Notification types
-        notification_types_guidance: "Du kannst wählen, wie Du für die unterschiedlichen Ereignisse oben benachrichtigt werden möchtest. Zur Zeit ist nur eine Benachrichtigung über Email möglich." # You can choose how you'd like to be notified for the different events above. At the moment, only email notifications are available.
-        title: "Meine Einstellungen verwalten" # Manage My Preferences
-        back: "Kehre zu Deinem Profil zurück" # Return to your profile
-        none: "Keine Benachrichtigungen" # No notifications
-        notify: "Benachrichtige mich über neue Ereignisse und wenn Diskussionen erstellt werden." # Notify me of new issues and when new threads are started
-        subscribe: "Benachrichtige mich über neue Ereignisse und folge automatisch allen neuen Diskussionen" # Notify me of new issues and automatically follow all new threads
+        involvement: "Beteilige mich an:"
+        notification_types: "Benarichtigungs Arten"
+        notification_types_guidance: "Du kannst wählen, wie Du für die unterschiedlichen Ereignisse oben benachrichtigt werden möchtest. Zur Zeit ist nur eine Benachrichtigung über Email möglich."
+        title: "Meine Einstellungen verwalten"
+        back: "Kehre zu Deinem Profil zurück"
+        none: "Keine Benachrichtigungen"
+        notify: "Benachrichtige mich über neue Ereignisse und wenn Diskussionen erstellt werden."
+        subscribe: "Benachrichtige mich über neue Ereignisse und folge automatisch allen neuen Diskussionen"
       update:
-        success: "Einstellungen gespeichert" # Preferences saved
-        failure: "Deine Einstellungen konnten nicht gespeichert werden" # Your preferences could not be saved
+        success: "Einstellungen gespeichert"
+        failure: "Deine Einstellungen konnten nicht gespeichert werden"
     profiles:
       create:
-        success: "Profil erstellt" # Profile Created
+        success: "Profil erstellt"
       edit:
-        title: "Mein Profil bearbeiten" # Edit My Profile
-        my_current_thumbnail_title: "Mein aktuelles Profilbild" # My current profile picture
+        title: "Mein Profil bearbeiten"
+        my_current_thumbnail_title: "Mein aktuelles Profilbild"
       show:
-        about_label: "Über:" # About:
+        about_label: "Über:"
         add_to_groups:
-          one: "Füge %{name} zu Deiner Gruppe hinzu" # Add %{name} to your group
-          other: "Füge %{name} zu Deinen Gruppen hinzu" # Add %{name} to your groups
+          one: "Füge %{name} zu Deiner Gruppe hinzu"
+          other: "Füge %{name} zu Deinen Gruppen hinzu"
         add_to_groups_explanation:
-          one: "Du kannst diesen Benutzer zu Deiner Gruppe hinzufügen." # You can add this user into your group.
-          other: "Du kannst diesen Benutzer zu allen angezeigten Gruppen hinzufügen." # You can add this user to any of the groups shown.
-        group_membership_label: "Gruppen:" # Groups:
+          one: "Du kannst diesen Benutzer zu Deiner Gruppe hinzufügen."
+          other: "Du kannst diesen Benutzer zu allen angezeigten Gruppen hinzufügen."
+        group_membership_label: "Gruppen:"
         is_a_member_of_groups:
-          zero: "%{name} ist noch kein Mitglied irgendeiner Gruppe" # %{name} isn't a member of any groups yet
-          one: "%{name} ist ein Mitglied einer Gruppe" # %{name} is a member of one group
-          other: "%{name} ist ein Mitglied von %{count} Gruppen" # %{name} is a member of %{count} groups
-        no_groups: "Keine" # None
-        no_website: "Keine" # None
-        profile_picture_title: "%{name}'s Foto" # %{name}'s picture
-        recent_threads: "Aktuelle Diskussionen" # Recent Threads
-        reported_issues: "Gemeldete  Themen" # Reported Issues
-        user_profile: "Benutzerprofil" # User Profile
-        website_label: "Webseite:" # Web site:
+          zero: "%{name} ist noch kein Mitglied irgendeiner Gruppe"
+          one: "%{name} ist ein Mitglied einer Gruppe"
+          other: "%{name} ist ein Mitglied von %{count} Gruppen"
+        no_groups: "Keine"
+        no_website: "Keine"
+        profile_picture_title: "%{name}'s Foto"
+        recent_threads: "Aktuelle Diskussionen"
+        reported_issues: "Gemeldete  Themen"
+        user_profile: "Benutzerprofil"
+        website_label: "Webseite:"
       update:
-        success: "Profil aktualisiert" # Profile Updated
+        success: "Profil aktualisiert"
 
   date:
     formats:
@@ -838,11 +826,11 @@
   support:
     array:
       words_connector: ", "
-      two_words_connector: " und " # and
-      last_word_connector: ", und " # , and
+      two_words_connector: " und "
+      last_word_connector: ", und "
 
     select:
-      prompt: "Bitte wähle" # Please select
+      prompt: "Bitte wähle"
 
   number:
     format:
@@ -898,98 +886,98 @@
 
   datetime:
     distance_in_words:
-      half_a_minute: "halbe Minute" # half a minute
+      half_a_minute: "halbe Minute"
       less_than_x_seconds:
-        one:   "weniger als 1 Sekunde" # less than 1 second
-        other: "weniger als %{count} Sekunden" # less than %{count} seconds
+        one:   "weniger als 1 Sekunde"
+        other: "weniger als %{count} Sekunden"
       x_seconds:
-        one:   "1 Sekunde" # 1 second
-        other: "%{count} Sekunden" # %{count} seconds
+        one:   "1 Sekunde"
+        other: "%{count} Sekunden"
       less_than_x_minutes:
-        one:   "weniger als eine Minute" # less than a minute
-        other: "weniger als %{count} Minuten" # less than %{count} minutes
+        one:   "weniger als eine Minute"
+        other: "weniger als %{count} Minuten"
       x_minutes:
-        one:   "1 Minute" # 1 minute
-        other: "%{count} Minuten" # %{count} minutes
+        one:   "1 Minute"
+        other: "%{count} Minuten"
       about_x_hours:
-        one:   "ungefähr 1 Stunde" # about 1 hour
-        other: "ungefähr %{count} Stunden" # about %{count} hours
+        one:   "ungefähr 1 Stunde"
+        other: "ungefähr %{count} Stunden"
       x_days:
-        one:   "1 Tag" # 1 day
-        other: "%{count} Tage" # %{count} days
+        one:   "1 Tag"
+        other: "%{count} Tage"
       about_x_months:
-        one:   "ungefähr 1 Monat" # about 1 month
-        other: "ungefähr %{count} Monate" # about %{count} months
+        one:   "ungefähr 1 Monat"
+        other: "ungefähr %{count} Monate"
       x_months:
-        one:   "1 Monat" # 1 month
-        other: "%{count} Monate" # %{count} months
+        one:   "1 Monat"
+        other: "%{count} Monate"
       about_x_years:
-        one:   "ungefähr 1 Jahr" # about 1 year
-        other: "ungefähr %{count} Jahre" # about %{count} years
+        one:   "ungefähr 1 Jahr"
+        other: "ungefähr %{count} Jahre"
       over_x_years:
-        one:   "über 1 Jahr" # over 1 year
-        other: "über %{count} Jahre" # over %{count} years
+        one:   "über 1 Jahr"
+        other: "über %{count} Jahre"
       almost_x_years:
-        one:   "ungefähr 1 Jahr" # almost 1 year
-        other: "ungefähr %{count} Jahre" # almost %{count} years
+        one:   "ungefähr 1 Jahr"
+        other: "ungefähr %{count} Jahre"
     prompts:
-      year:   "Jahr" # Year
-      month:  "Monat" # Month
-      day:    "Tag" # Day
-      hour:   "Stunde" # Hour
-      minute: "Minute" # Minute
-      second: "Sekunde" # Seconds
+      year:   "Jahr"
+      month:  "Monat"
+      day:    "Tag"
+      hour:   "Stunde"
+      minute: "Minute"
+      second: "Sekunde"
 
   helpers:
     select:
-      prompt: "Bitte wähle" # Please select
+      prompt: "Bitte wähle"
 
     submit:
-      create: 'Erstelle %{model}' # Create %{model}
-      update: 'Aktualisiere %{model}' # Update %{model}
-      submit: 'Speichere %{model}' # Save %{model}
+      create: 'Erstelle %{model}'
+      update: 'Aktualisiere %{model}'
+      submit: 'Speichere %{model}'
 
   errors:
-    format: "%{attribute} %{message}" 
+    format: "%{attribute} %{message}"
 
     messages: &errors_messages
-      inclusion: "ist nicht in der Liste enthalten" # is not included in the list
-      exclusion: "ist reserviert" # is reserved
-      invalid: "ist ungültig" # is invalid
-      confirmation: "stimmt nicht mit der Bestätigung überein" # doesn't match confirmation
-      accepted: "muss akzeptiert werden" # must be accepted
-      empty: "darf nicht leer sein" # can't be empty
-      blank: "muss ausgefüllt sein" # can't be blank
-      too_long: "ist zu lang (Maximum ist %{count} Zeichen)" # is too long (maximum is %{count} characters)
-      too_short: "ist zu kurz (Minimum ist %{count} Zeichen)" # is too short (minimum is %{count} characters)
-      wrong_length: "hat die falsche Länge (sollte %{count} Zeichen enthalten)" # is the wrong length (should be %{count} characters)
-      not_a_number: "ist keine Zahl" # is not a number
-      not_an_integer: "muss eine ganze Zahl sein" # must be an integer
-      greater_than: "muss größer sein als %{count}" # must be greater than %{count}
-      greater_than_or_equal_to: "muss größer oder gleich %{count} sein" # must be greater than or equal to %{count}
-      equal_to: "muss gleich %{count} sein" # must be equal to %{count}
-      less_than: "muss weniger als %{count} sein" # must be less than %{count}
-      less_than_or_equal_to: "muss weniger oder gleich %{count} sein" # must be less than or equal to %{count}
-      odd: "muss ungerade sein" # must be odd
-      even: "muss gerade sein" # must be even
+      inclusion: "ist nicht in der Liste enthalten"
+      exclusion: "ist reserviert"
+      invalid: "ist ungültig"
+      confirmation: "stimmt nicht mit der Bestätigung überein"
+      accepted: "muss akzeptiert werden"
+      empty: "darf nicht leer sein"
+      blank: "muss ausgefüllt sein"
+      too_long: "ist zu lang (Maximum ist %{count} Zeichen)"
+      too_short: "ist zu kurz (Minimum ist %{count} Zeichen)"
+      wrong_length: "hat die falsche Länge (sollte %{count} Zeichen enthalten)"
+      not_a_number: "ist keine Zahl"
+      not_an_integer: "muss eine ganze Zahl sein"
+      greater_than: "muss größer sein als %{count}"
+      greater_than_or_equal_to: "muss größer oder gleich %{count} sein"
+      equal_to: "muss gleich %{count} sein"
+      less_than: "muss weniger als %{count} sein"
+      less_than_or_equal_to: "muss weniger oder gleich %{count} sein"
+      odd: "muss ungerade sein"
+      even: "muss gerade sein"
 
   activerecord:
     errors:
       template:
         header:
-          one:    "1 Fehler verhinderte,dass %{model} gespeichert werden konnte" # 1 error prohibited this %{model} from being saved
-          other:  "%{count} Fehler verhinderten, dass %{model} gespeichert werden konnten" # %{count} errors prohibited this %{model} from being saved
-        body: "Es gab Probleme mit den folgenden Feldern:" # There were problems with the following fields:
+          one:    "1 Fehler verhinderte,dass %{model} gespeichert werden konnte"
+          other:  "%{count} Fehler verhinderten, dass %{model} gespeichert werden konnten"
+        body: "Es gab Probleme mit den folgenden Feldern:"
 
       messages:
-        taken: "wurde bereits gemacht" # has already been taken
-        record_invalid: "Validierung fehlgeschlagen: %{errors}" # Validation failed: %{errors}
+        taken: "wurde bereits gemacht"
+        record_invalid: "Validierung fehlgeschlagen: %{errors}"
         <<: *errors_messages
 
       full_messages:
         format: "%{attribute} %{message}"
 
   will_paginate:
-    next_label: "Nächste" # Next
-    previous_label: "Vorherrige" # Previous
+    next_label: "Nächste"
+    previous_label: "Vorherrige"
     page_gap: "\u2026"
