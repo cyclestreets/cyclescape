@@ -29,4 +29,5 @@ type = YAML
 source_file = config/locales/en-GB.yml
 source_lang = en-GB
 trans.cs-CZ = config/locales/cs-CZ.yml
+trans.de-DE = config/locales/de-DE.yml
 type = YAML
