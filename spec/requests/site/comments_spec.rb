@@ -39,7 +39,7 @@ describe "Site feedback" do
 
     it "should show the comments" do
       visit site_comments_path
-      page.should have_content(comment.body[0..51]) #chokes on newline
+      page.should have_content(comment.body[0..51]) # chokes on newline
     end
 
     it "should allow deleting" do

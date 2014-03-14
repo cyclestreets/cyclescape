@@ -96,11 +96,6 @@ IndentationWidth:
 Lambda:
   Enabled: false
 
-# Offence count: 7
-# Cop supports --auto-correct.
-LeadingCommentSpace:
-  Enabled: false
-
 # Offence count: 1
 # Cop supports --auto-correct.
 LineEndConcatenation:

@@ -77,7 +77,7 @@ describe "Message threads" do
       let(:issue) { thread_with_issue.issue }
 
       before do
-        #issue = thread_with_issue.issue
+        # issue = thread_with_issue.issue
         thread_with_issue.issue.destroy
         visit thread_path(thread_with_issue)
       end
