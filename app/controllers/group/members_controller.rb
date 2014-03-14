@@ -7,7 +7,7 @@ class Group::MembersController < ApplicationController
 
     @committee = @group.committee_members.all
     @members = @group.normal_members.all
-    @pending_requests = ( @group.pending_membership_requests.count > 0 )
+    @pending_requests = (@group.pending_membership_requests.count > 0)
   end
 
   protected

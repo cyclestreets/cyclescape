@@ -129,12 +129,12 @@ class IssuesController < ApplicationController
 
   def issue_feature(issue, bbox = nil)
     geom = bbox.to_geometry if bbox
-    issue.loc_feature( thumbnail: issue.medium_icon_path,
-                       image_url: issue.tip_icon_path(false),
-                       title: issue.title,
-                       size_ratio: issue.size_ratio(geom),
-                       url: view_context.url_for(issue),
-                       created_by: issue.created_by.name,
-                       created_by_url: view_context.url_for(issue.created_by))
+    issue.loc_feature(thumbnail: issue.medium_icon_path,
+                      image_url: issue.tip_icon_path(false),
+                      title: issue.title,
+                      size_ratio: issue.size_ratio(geom),
+                      url: view_context.url_for(issue),
+                      created_by: issue.created_by.name,
+                      created_by_url: view_context.url_for(issue.created_by))
   end
 end

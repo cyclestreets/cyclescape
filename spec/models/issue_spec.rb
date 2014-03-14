@@ -199,8 +199,8 @@ describe Issue do
       let(:polygon) { 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))' }
       let!(:issue_entirely_surrounding) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0, 0 0.3, 0.3 0.3, 0.3 0, 0 0))') }
       let!(:issue_entirely_contained) { FactoryGirl.create(:issue, location: 'POLYGON ((0.12 0.12, 0.12 0.18, 0.18 0.18, 0.18 0.12, 0.12 0.12))') }
-      let!(:issue_not_intersecting) { FactoryGirl.create(:issue, location: 'POLYGON ((1.1 1.1, 1.1 1.2, 1.2 1.2, 1.2 1.1, 1.1 1.1))' ) }
-      let!(:issue_half_in_half_out) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0.12, 0 0.18, 0.3 0.18, 0.3 0.12, 0 0.12))' ) }
+      let!(:issue_not_intersecting) { FactoryGirl.create(:issue, location: 'POLYGON ((1.1 1.1, 1.1 1.2, 1.2 1.2, 1.2 1.1, 1.1 1.1))') }
+      let!(:issue_half_in_half_out) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0.12, 0 0.18, 0.3 0.18, 0.3 0.12, 0 0.12))') }
 
       it 'should return intersecting issues' do
         bbox = factory.parse_wkt(polygon)

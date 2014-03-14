@@ -101,15 +101,15 @@ module MapsHelper
 
   def add_location_layer(name, url, strategy, map, page)
     locationlayer = MapLayers::JsVar.new('locationlayer')
-    protocol = OpenLayers::Protocol::HTTP.new( url: url, format: :format_plain )
-    page.assign(locationlayer, OpenLayers::Layer::Vector.new( name,
-                                                              protocol: protocol,
-                                                              projection: projection,
-                                                              styleMap: 'MapStyle.displayStyle()'.to_sym,
-                                                              rendererOptions: { yOrdering: false, # yOrdering would be nice on points,
-                                                                                                  # but then breaks area-sorting on polygons
-                                                                                 zIndexing: true },
-                                                              strategies: [strategy]))
+    protocol = OpenLayers::Protocol::HTTP.new(url: url, format: :format_plain)
+    page.assign(locationlayer, OpenLayers::Layer::Vector.new(name,
+                                                             protocol: protocol,
+                                                             projection: projection,
+                                                             styleMap: 'MapStyle.displayStyle()'.to_sym,
+                                                             rendererOptions: { yOrdering: false, # yOrdering would be nice on points,
+                                                                                                 # but then breaks area-sorting on polygons
+                                                                                zIndexing: true },
+                                                             strategies: [strategy]))
     page << map.add_layer(locationlayer)
   end
 
