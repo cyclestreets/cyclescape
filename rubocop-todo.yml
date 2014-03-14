@@ -227,11 +227,6 @@ SpaceInsideParens:
 StringLiterals:
   Enabled: false
 
-# Offence count: 1
-# Cop supports --auto-correct.
-TrailingBlankLines:
-  Enabled: false
-
 # Offence count: 5
 # Configuration parameters: ExactNameMatch, AllowPredicates, Whitelist.
 TrivialAccessors:
