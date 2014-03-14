@@ -12,7 +12,7 @@ class InboundMailProcessor
 
   def self.deliver_thread_reply(mail, thread_token)
     thread = MessageThread.find_by_public_token(thread_token)
-    raise "Thread #{thread_token.inspect} not found" if thread.nil?
+    fail "Thread #{thread_token.inspect} not found" if thread.nil?
 
     # This raises an exception if it fails
     messages = thread.add_messages_from_email!(mail)

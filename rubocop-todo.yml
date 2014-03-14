@@ -184,12 +184,6 @@ Semicolon:
 ShadowingOuterLocalVariable:
   Enabled: false
 
-# Offence count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-SignalException:
-  Enabled: false
-
 # Offence count: 1
 # Configuration parameters: Methods.
 SingleLineBlockParams:

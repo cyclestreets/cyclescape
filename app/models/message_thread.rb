@@ -97,7 +97,7 @@ class MessageThread < ActiveRecord::Base
     from_name = mail.message.header[:from].display_names.first
 
     user = User.find_or_invite(from_address, from_name)
-    raise "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
+    fail "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
 
     # For multipart messages we pull out the text/plain content
     text = if mail.message.multipart?

@@ -30,7 +30,7 @@ class Notifications < ActionMailer::Base
     @group = thread.group
     @message_author = thread.first_message.created_by
     @member = member
-    raise "Thread does not belong to group" if @group.nil?
+    fail "Thread does not belong to group" if @group.nil?
     mail to: @member.name_with_email,
          from: user_notification_address(@message_author),
          reply_to: thread_address(@thread),
@@ -53,7 +53,7 @@ class Notifications < ActionMailer::Base
     @user_location = user_location
     @user = user_location.user
     @message = thread.messages.first
-    raise "Thread does not have an issue" unless @thread.issue
+    fail "Thread does not have an issue" unless @thread.issue
     mail to: @user.name_with_email,
          from: user_notification_address(@message.created_by),
          reply_to: thread_address(@thread),

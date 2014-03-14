@@ -30,7 +30,7 @@ module MessageThreadsHelper
 
   def message_controller_map(message)
     path = MESSAGE_CONTROLLER_MAP[message.class.to_s]
-    raise "Message controller not found for #{message.class.to_s.inspect}" if path.nil?
+    fail "Message controller not found for #{message.class.to_s.inspect}" if path.nil?
     path
   end
 
