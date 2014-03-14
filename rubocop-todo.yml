@@ -194,8 +194,3 @@ Validation:
 # Offence count: 45
 Void:
   Enabled: false
-
-# Offence count: 16
-# Cop supports --auto-correct.
-WordArray:
-  MinSize: 4

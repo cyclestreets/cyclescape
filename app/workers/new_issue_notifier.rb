@@ -31,7 +31,7 @@ class NewIssueNotifier
     # and where the user has user locations involvement preference on
     locations = UserLocation.intersects(buffered_location).
         joins(user: :prefs).
-        where(UserPref.arel_table[:involve_my_locations].in(['notify', 'subscribe'])).
+        where(UserPref.arel_table[:involve_my_locations].in(%w(notify subscribe))).
         all
 
     # Filter the returned locations to ensure only one location is returned per user,
@@ -68,7 +68,7 @@ class NewIssueNotifier
     list = {}
     group_profiles.each do |profile|
       users = profile.group.members.joins(:prefs).
-          where(UserPref.arel_table[:involve_my_groups].in(['notify', 'subscribe'])).
+          where(UserPref.arel_table[:involve_my_groups].in(%w(notify subscribe))).
           all
       users.each do |user|
         opts = { 'user_id' => user.id, 'group_id' => profile.group.id, 'issue_id' => issue.id }

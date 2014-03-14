@@ -26,7 +26,7 @@ class NewThreadNotifier
     # Figure out the correct preference combination, depending on whether the thread has an issue or
     # is just an "administrative" thread.
     t = UserPref.arel_table
-    pref = t[:involve_my_groups].in(['notify', 'subscribe'])
+    pref = t[:involve_my_groups].in(%w(notify subscribe))
     constraint = thread.issue ? pref : pref.and(t[:involve_my_groups_admin].eq(true))
 
     if thread.private_to_committee?
@@ -60,7 +60,7 @@ class NewThreadNotifier
     # and where the user has the notification preference on
     locations = UserLocation.intersects(buffered_location).
         joins(user: :prefs).
-        where(UserPref.arel_table[:involve_my_locations].in(['notify', 'subscribe'])).
+        where(UserPref.arel_table[:involve_my_locations].in(%w(notify subscribe))).
         all
 
     # Filter the returned locations to ensure only one location is returned per user,
