@@ -120,7 +120,7 @@ describe InboundMailProcessor do
         message.component.should be_a(DocumentMessage)
         message.component.title.should == "use_cases.pdf"
         message.component.file.format.should == :pdf
-        message.component.file.size.should eql(77825)
+        message.component.file.size.should eql(77_825)
       end
     end
 

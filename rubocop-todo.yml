@@ -112,11 +112,6 @@ MethodLength:
 Not:
   Enabled: false
 
-# Offence count: 2
-# Cop supports --auto-correct.
-NumericLiterals:
-  MinDigits: 14
-
 # Offence count: 3
 OneLineConditional:
   Enabled: false
