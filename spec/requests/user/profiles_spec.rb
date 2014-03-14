@@ -70,7 +70,7 @@ describe "User profiles" do
     let(:second_messages) { FactoryGirl.create(:message, thread: threads.second, created_by: current_user) }
 
     it "should show recent threads the user has posted to" do
-      first_messages and second_messages
+      first_messages && second_messages
       visit user_profile_path(current_user)
       page.should have_content(threads.first.title)
       page.should have_content(threads.second.title)
@@ -78,7 +78,7 @@ describe "User profiles" do
 
     it "should not show private threads" do
       threads.first.update_column(:privacy, "group")
-      first_messages and second_messages
+      first_messages && second_messages
       visit user_profile_path(current_user)
       page.should have_no_content(threads.first.title)
       page.should have_content(threads.second.title)

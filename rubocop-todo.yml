@@ -13,11 +13,6 @@ AccessorMethodName:
 AmbiguousOperator:
   Enabled: false
 
-# Offence count: 5
-# Cop supports --auto-correct.
-AndOr:
-  Enabled: false
-
 # Offence count: 1
 BlockAlignment:
   Enabled: false

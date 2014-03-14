@@ -55,7 +55,7 @@ class ThreadListDecorator < ApplicationDecorator
   end
 
   def following_status
-    if h.current_user and h.current_user.subscribed_to_thread?(thread)
+    if h.current_user && h.current_user.subscribed_to_thread?(thread)
       h.content_tag(:div, class: "following") do
         h.concat(h.image_tag("check-checked.png"))
         h.concat(I18n.t("decorators.thread_list.following"))
