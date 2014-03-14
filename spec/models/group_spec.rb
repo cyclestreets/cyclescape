@@ -60,7 +60,7 @@ describe Group do
       end
 
       it "should be short enough to be a subdomain" do
-        subject.short_name = "c"*64
+        subject.short_name = "c" * 64
         subject.should have(1).error_on(:short_name)
       end
 
