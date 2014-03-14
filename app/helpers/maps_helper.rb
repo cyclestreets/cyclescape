@@ -19,9 +19,9 @@ module MapsHelper
   end
 
   def display_map(object, geometry_url, &block)
-    @map = basic_map() do |map, page|
+    @map = basic_map do |map, page|
       centre_map(object.location, map, page)
-      add_location_layer('Location', geometry_url, OpenLayers::Strategy::Fixed.new(), map, page)
+      add_location_layer('Location', geometry_url, OpenLayers::Strategy::Fixed.new, map, page)
 
       yield(map, page) if block_given?
     end
@@ -34,7 +34,7 @@ module MapsHelper
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
       add_formats(page)
       centre_map(object.location, map, page)
-      add_location_layer('Location', geometry_url, OpenLayers::Strategy::Fixed.new(), map, page)
+      add_location_layer('Location', geometry_url, OpenLayers::Strategy::Fixed.new, map, page)
 
       yield(map, page, dom_id) if block_given?
     end
@@ -91,11 +91,11 @@ module MapsHelper
   def centre_map(location, map, page)
     if location.geometry_type == RGeo::Feature::Point
       z = location.z || Geo::POINT_ZOOM
-      page << map.setCenter(OpenLayers::LonLat.new(location.x, location.y).transform(projection, map.getProjectionObject()), z);
+      page << map.setCenter(OpenLayers::LonLat.new(location.x, location.y).transform(projection, map.getProjectionObject), z);
     else
       bbox = RGeo::Cartesian::BoundingBox.new(location.factory)
       bbox.add(location)
-      page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject()))
+      page << map.zoomToExtent(OpenLayers::Bounds.new(bbox.min_x, bbox.min_y, bbox.max_x, bbox.max_y).transform(projection, map.getProjectionObject))
     end
   end
 

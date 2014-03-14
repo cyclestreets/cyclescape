@@ -98,11 +98,6 @@ LineLength:
 LiteralInCondition:
   Enabled: false
 
-# Offence count: 5
-# Cop supports --auto-correct.
-MethodCallParentheses:
-  Enabled: false
-
 # Offence count: 30
 # Configuration parameters: CountComments.
 MethodLength:
