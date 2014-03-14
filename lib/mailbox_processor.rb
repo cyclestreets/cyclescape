@@ -12,7 +12,7 @@ class MailboxProcessor
     return @config if @config
     config_path = Rails.root + "config" + "mailboxes.yml"
     raise "Mailboxes config file not found at #{config_path}" unless config_path.exist?
-    @config ||= YAML::load(File.read(config_path)).with_indifferent_access
+    @config ||= YAML.load(File.read(config_path)).with_indifferent_access
   end
 
   def initialize(config = {})

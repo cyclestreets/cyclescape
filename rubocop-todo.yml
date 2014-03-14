@@ -38,11 +38,6 @@ CollectionMethods:
   Enabled: false
 
 # Offence count: 2
-# Cop supports --auto-correct.
-ColonMethodCall:
-  Enabled: false
-
-# Offence count: 2
 # Configuration parameters: Keywords.
 CommentAnnotation:
   Enabled: false
