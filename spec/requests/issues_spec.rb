@@ -104,9 +104,9 @@ describe "Issues" do
       end
 
       it "should raise a 404 exception if the photo path is accessed on an issue without a photo" do
-        lambda {
+        lambda do
           visit issue_photo_path(issue)
-        }.should raise_error(ActionController::RoutingError)
+        end.should raise_error(ActionController::RoutingError)
       end
 
       it "should not show you an edit tags link" do
