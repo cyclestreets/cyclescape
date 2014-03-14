@@ -73,11 +73,6 @@ EndAlignment:
 FavorSprintf:
   Enabled: false
 
-# Offence count: 10
-# Cop supports --auto-correct.
-FinalNewline:
-  Enabled: false
-
 # Offence count: 3
 # Configuration parameters: IncludePaths.
 HasAndBelongsToMany:
