@@ -232,11 +232,6 @@ StringLiterals:
 TrailingBlankLines:
   Enabled: false
 
-# Offence count: 26
-# Cop supports --auto-correct.
-TrailingWhitespace:
-  Enabled: false
-
 # Offence count: 5
 # Configuration parameters: ExactNameMatch, AllowPredicates, Whitelist.
 TrivialAccessors:

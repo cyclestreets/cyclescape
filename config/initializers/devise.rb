@@ -87,7 +87,7 @@ Devise.setup do |config|
   # The key to be used to check existing users when sending an invitation
   # config.invite_key = :email
 
-  # Flag that force a record to be valid before being actually invited 
+  # Flag that force a record to be valid before being actually invited
   # Default: false
   config.validate_on_invite = true
 

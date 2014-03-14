@@ -20,7 +20,7 @@ describe MailboxProcessor do
       Net::IMAP.should_receive(:new).with(config[:host])
       subject.establish_connection
     end
-      
+
     it "should use the given connection details" do
       imap.should_receive(:authenticate).with(config[:authentication], config[:user_name], config[:password])
       subject.establish_connection
@@ -36,7 +36,7 @@ describe MailboxProcessor do
         imap.stub(:select)
         imap.stub(:uid_search)
       end
-        
+
       it "should access the given mailbox" do
         imap.should_receive(:select).with("MYMAIL")
         subject.fetch_message_ids("MYMAIL")
