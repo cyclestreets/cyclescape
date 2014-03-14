@@ -29,3 +29,11 @@ The toolkit is being created by CycleStreets, who run the UK-wide cycle journey 
 We use [Github](https://github.com/cyclestreets/toolkit) for managing development, you can clone the repository, or report bugs there.
 
 Pull requests are *very* welcome! Additional developer notes are available on the github wiki.
+
+# Translations
+
+Translations are managed using the [Transifex](https://www.transifex.com) platform. After signing up, you can go to the [Cyclescape project page](https://www.transifex.com/projects/p/cyclescape/), select a language and click Translate now to start translating.
+
+The words in braces preceded by a percent, for example %{name}, should not be translated into a new language: it's replaced with the group name when rails presents the text. So a German translation of `Request membership of %{group_name}` would look like `Mitgliedsantrag aus %{group_name}`
+
+At the moment, the translations are not used by the application, but are useful for custom deployments.
