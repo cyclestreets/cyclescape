@@ -42,7 +42,7 @@ class Library::Note < Library::Component
   end
 
   def searchable_text
-    [body,read_attribute(:title)].join(" ")
+    [body, read_attribute(:title)].join(" ")
   end
 
   # For authorization rules - doing range detection on TimeWithZones

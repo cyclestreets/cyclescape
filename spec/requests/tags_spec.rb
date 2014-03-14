@@ -33,17 +33,17 @@ describe "autocomplete_tags" do
     end
 
     it "should return a tag from a partial search start" do
-      visit autocomplete_tags_path(term: tag.name[0,2])
+      visit autocomplete_tags_path(term: tag.name[0, 2])
       page.should have_content("\"label\":\"#{tag.name}\"")
     end
 
     it "should return a tag from a partial search end" do
-      visit autocomplete_tags_path(term: tag.name[-2,2])
+      visit autocomplete_tags_path(term: tag.name[-2, 2])
       page.should have_content("\"label\":\"#{tag.name}\"")
     end
 
     it "should return a tag from a partial search middle" do
-      visit autocomplete_tags_path(term: tag.name[-4,2])
+      visit autocomplete_tags_path(term: tag.name[-4, 2])
       page.should have_content("\"label\":\"#{tag.name}\"")
     end
   end

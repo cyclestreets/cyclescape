@@ -53,7 +53,7 @@ describe Group do
       end
 
       it "should not allow bad characters" do
-        ["£","$","%","^","&"].each do |char|
+        ["£", "$", "%", "^", "&"].each do |char|
           subject.short_name = char
           subject.should have(1).error_on(:short_name)
         end

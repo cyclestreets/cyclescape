@@ -189,11 +189,6 @@ ShadowingOuterLocalVariable:
 SingleLineBlockParams:
   Enabled: false
 
-# Offence count: 11
-# Cop supports --auto-correct.
-SpaceAfterComma:
-  Enabled: false
-
 # Offence count: 81
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
