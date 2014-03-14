@@ -225,7 +225,6 @@ describe "Message threads" do
     end
   end
 
-
   context "as an admin user" do
     include_context "signed in as admin"
 

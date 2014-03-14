@@ -99,7 +99,6 @@ describe "Issue notifications" do
     let!(:user_location_big) { FactoryGirl.create(:user_location, user: user, location: user_location.location.buffer(1)) }
     let!(:user_location_small) { FactoryGirl.create(:user_location, user: user, location: user_location.location.buffer(-0.01)) }
 
-
     before do
       user.prefs.update_column(:involve_my_locations, "notify")
       user.prefs.update_column(:enable_email, true)

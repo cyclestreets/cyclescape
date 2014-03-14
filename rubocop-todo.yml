@@ -64,11 +64,6 @@ Documentation:
 DotPosition:
   Enabled: false
 
-# Offence count: 5
-# Cop supports --auto-correct.
-EmptyLines:
-  Enabled: false
-
 # Offence count: 8
 # Cop supports --auto-correct.
 EmptyLinesAroundBody:
