@@ -28,22 +28,22 @@ module Locatable
   # Define an approximate centre of the issue, for convenience.
   # Note that the line or polygon might be nowhere near this centre
   def centre
-    case self.location.geometry_type
+    case location.geometry_type
     when RGeo::Feature::Point
-      return self.location
+      return location
     else
-      return self.location.envelope.centroid
+      return location.envelope.centroid
     end
   end
 
   # Returns the size of the location. Returns 0 for anything other than polygons.
   def size
-    if self.location.nil?
+    if location.nil?
       return 0.0
     else
-      case self.location.geometry_type
+      case location.geometry_type
       when RGeo::Feature::Polygon
-        return self.location.area.to_f
+        return location.area.to_f
       else
         return 0.0
       end
@@ -54,7 +54,7 @@ module Locatable
   # than a bounding box, for example.
   def size_ratio(geom)
     if geom && geom.geometry_type == RGeo::Feature::Polygon && geom.area > 0
-      return self.size.to_f / geom.area
+      return size.to_f / geom.area
     else
       return 0.0
     end
@@ -69,8 +69,8 @@ module Locatable
   end
 
   def loc_json
-    if self.location
-      RGeo::GeoJSON.encode(self.loc_feature).to_json
+    if location
+      RGeo::GeoJSON.encode(loc_feature).to_json
     else
       ''
     end
@@ -78,9 +78,9 @@ module Locatable
 
   def loc_feature(properties = nil)
     if properties
-      RGeo::GeoJSON::Feature.new(self.location, self.id, properties)
+      RGeo::GeoJSON::Feature.new(location, id, properties)
     else
-      RGeo::GeoJSON::Feature.new(self.location)
+      RGeo::GeoJSON::Feature.new(location)
     end
   end
 end

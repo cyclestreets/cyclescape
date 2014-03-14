@@ -140,11 +140,6 @@ RedundantBegin:
 RedundantReturn:
   Enabled: false
 
-# Offence count: 26
-# Cop supports --auto-correct.
-RedundantSelf:
-  Enabled: false
-
 # Offence count: 1
 RegexpLiteral:
   MaxSlashes: 2

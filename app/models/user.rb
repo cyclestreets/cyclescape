@@ -195,13 +195,13 @@ class User < ActiveRecord::Base
   end
 
   def membership_request_pending_for?(group)
-    return self.membership_requests.where(group_id: group.id, status: :pending).count > 0
+    return membership_requests.where(group_id: group.id, status: :pending).count > 0
   end
 
   def update_remembered_group(group)
     # Not using association to avoid validation checks
     new_id = group ? group.id : nil
-    update_column(:remembered_group_id, new_id) unless self.remembered_group_id == new_id
+    update_column(:remembered_group_id, new_id) unless remembered_group_id == new_id
   end
 
   def remembered_group?
@@ -209,28 +209,28 @@ class User < ActiveRecord::Base
   end
 
   def obfuscate_name
-    self.full_name = "User #{self.id} (deleted)"
+    self.full_name = "User #{id} (deleted)"
     self.display_name = nil
   end
 
   def clear_profile
-    self.profile.clear
+    profile.clear
   end
 
   def remove_locations
-    self.locations.each do |location|
+    locations.each do |location|
       location.destroy
     end
   end
 
   def remove_group_memberships
-    self.memberships.each do |membership|
+    memberships.each do |membership|
       membership.destroy
     end
   end
 
   def remove_thread_subscriptions
-    self.thread_subscriptions.each do |subscription|
+    thread_subscriptions.each do |subscription|
       subscription.destroy
     end
   end

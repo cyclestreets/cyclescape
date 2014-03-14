@@ -17,7 +17,7 @@ module FakeDestroy
   end
 
   def deleted?
-    self.deleted_at
+    deleted_at
   end
 
   def undelete!

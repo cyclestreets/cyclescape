@@ -36,6 +36,6 @@ class Library::Item < ActiveRecord::Base
   protected
 
   def search
-    searchable_text if self.component
+    searchable_text if component
   end
 end

@@ -3,7 +3,7 @@ class MailboxProcessor
 
   def self.process_all_mailboxes
     mailboxes_config.each do |name, config|
-      reader = self.new(config)
+      reader = new(config)
       reader.run
     end
   end

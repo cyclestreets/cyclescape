@@ -33,7 +33,7 @@ class Library::Component < ActiveRecord::Base
   end
 
   def update_library_item
-    self.item.update_attributes(component: self)
-    self.item.update_index
+    item.update_attributes(component: self)
+    item.update_index
   end
 end
