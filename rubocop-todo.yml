@@ -126,11 +126,6 @@ PredicateName:
   Enabled: false
 
 # Offence count: 1
-# Cop supports --auto-correct.
-Proc:
-  Enabled: false
-
-# Offence count: 1
 # Configuration parameters: SupportedStyles.
 RaiseArgs:
   EnforcedStyle: compact
