@@ -58,7 +58,7 @@ class Notifications < ActionMailer::Base
          from: user_notification_address(@message.created_by),
          reply_to: thread_address(@thread),
          subject: t('.mailers.notifications.new_user_location_issue_thread.subject',
-                   issue_title: @thread.issue.title)
+                    issue_title: @thread.issue.title)
   end
 
   def new_group_location_issue(user, group, issue)

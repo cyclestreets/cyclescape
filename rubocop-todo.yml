@@ -15,11 +15,6 @@ AccessorMethodName:
 AlignHash:
   Enabled: false
 
-# Offence count: 2
-# Cop supports --auto-correct.
-AlignParameters:
-  Enabled: false
-
 # Offence count: 1
 AmbiguousOperator:
   Enabled: false
