@@ -64,11 +64,6 @@ Documentation:
 DotPosition:
   Enabled: false
 
-# Offence count: 8
-# Cop supports --auto-correct.
-EmptyLinesAroundBody:
-  Enabled: false
-
 # Offence count: 1
 # Configuration parameters: AlignWith, SupportedStyles.
 EndAlignment:

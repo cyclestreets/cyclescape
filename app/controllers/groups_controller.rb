@@ -61,5 +61,4 @@ class GroupsController < ApplicationController
                         url: root_url(subdomain: group.short_name),
                         description: view_context.auto_link(group.trunctated_description))
   end
-
 end

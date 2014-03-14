@@ -1,5 +1,4 @@
 class ConfirmationsController < Devise::ConfirmationsController
-
   # Copy the method here, otherwise rails breaks when trying to find the template
   def new
     build_resource({})
