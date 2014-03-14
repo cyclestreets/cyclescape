@@ -3,7 +3,7 @@ require "spec_helper"
 describe MailboxCleaner do
   let(:config) do
     {host: "mail.example.com", user_name: "user@example.com", password: "secret",
-      authentication: "PLAIN", mailbox: "INBOX", days_to_retain: 10}
+     authentication: "PLAIN", mailbox: "INBOX", days_to_retain: 10}
   end
 
   let(:imap) { double("IMAP connection") }

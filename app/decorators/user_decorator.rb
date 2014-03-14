@@ -22,8 +22,8 @@ class UserDecorator < ApplicationDecorator
   def picture_standard_image
     if profile.picture
       h.image_tag picture_standard_url, alt: "",
-          title: h.t("user.profiles.show.profile_picture_title", name: name),
-          class: "profile-pic"
+                                        title: h.t("user.profiles.show.profile_picture_title", name: name),
+                                        class: "profile-pic"
     end
   end
 

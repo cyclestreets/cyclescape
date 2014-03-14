@@ -47,7 +47,7 @@ RSpec.configure do |config|
     # Create the root user
     unless User.where("id = 1").exists?
       root = User.new(email: "root@cyclescape.org", full_name: "Root",
-          password: "changeme", password_confirmation: "changeme")
+                      password: "changeme", password_confirmation: "changeme")
       root.role = "admin"
       root.skip_confirmation!
       root.save!

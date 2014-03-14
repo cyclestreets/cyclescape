@@ -72,9 +72,9 @@ module MapsHelper
 
   def core_map(dom_id, &block)
     map = MapLayers::Map.new(dom_id, {theme: "/openlayers/theme/default/style.css",
-                                        projection: googleproj,
-                                        displayProjection: projection,
-                                        controls: []
+                                      projection: googleproj,
+                                      displayProjection: projection,
+                                      controls: []
                                        }) do |map, page|
       yield(map, page) if block_given?
     end

@@ -9,12 +9,6 @@
 AccessorMethodName:
   Enabled: false
 
-# Offence count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedHashRocketStyle, EnforcedColonStyle.
-AlignHash:
-  Enabled: false
-
 # Offence count: 1
 AmbiguousOperator:
   Enabled: false

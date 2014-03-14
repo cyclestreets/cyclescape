@@ -3,7 +3,7 @@ require "spec_helper"
 describe MailboxProcessor do
   let(:config) do
     {host: "mail.example.com", user_name: "user@example.com", password: "secret",
-      authentication: "PLAIN", mailbox: "INBOX", mail_processor: "MailProcessor"}
+     authentication: "PLAIN", mailbox: "INBOX", mail_processor: "MailProcessor"}
   end
 
   let(:imap) { double("IMAP connection") }
