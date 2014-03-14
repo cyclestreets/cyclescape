@@ -6,7 +6,7 @@ module Taggable
   module ClassMethods
     def find_by_tags_from(taggable)
       tags = Arel::Table.new(:tags)
-      includes(:tags).where(tags[:name].in(taggable.tags.map{ |t| t.name}))
+      includes(:tags).where(tags[:name].in(taggable.tags.map { |t| t.name }))
     end
 
     def find_by_tag(tag)
@@ -24,7 +24,7 @@ module Taggable
   end
 
   def icon_from_tags
-    tag = tags.order("name").detect {|t| t.icon }
+    tag = tags.order("name").detect { |t| t.icon }
     tag.icon if tag
   end
 
@@ -34,9 +34,9 @@ module Taggable
     val.
       delete("#!()[]{}").
       split(/[,; ]+/).
-      map {|str| str.parameterize }.
+      map { |str| str.parameterize }.
       uniq.
-      delete_if {|str| str == '' }.
-      map {|str| Tag.grab(str) }
+      delete_if { |str| str == '' }.
+      map { |str| Tag.grab(str) }
   end
 end

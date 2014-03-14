@@ -2,7 +2,7 @@ class MailboxCleaner < MailboxProcessor
   def run
     begin
       ids = fetch_message_ids(config[:mailbox], search_query(config[:days_to_retain]))
-      ids.each {|id| delete_message(id) }
+      ids.each { |id| delete_message(id) }
       imap.close
     ensure
       disconnect

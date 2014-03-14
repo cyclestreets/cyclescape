@@ -46,8 +46,8 @@ describe "Groups" do
   end
 
   describe "index" do
-    let!(:profile_2) { FactoryGirl.create(:group_profile)}
-    let!(:profile_3) { FactoryGirl.create(:group_profile)}
+    let!(:profile_2) { FactoryGirl.create(:group_profile) }
+    let!(:profile_3) { FactoryGirl.create(:group_profile) }
 
     before do
       visit groups_path

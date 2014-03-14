@@ -47,7 +47,7 @@ class UserDecorator < ApplicationDecorator
       h.link_to_profile(membership.group) + " (#{membership.role.titleize})"
     end
     h.content_tag(:ul) do
-      items.map {|i| h.content_tag(:li, i) }.join.html_safe
+      items.map { |i| h.content_tag(:li, i) }.join.html_safe
     end
   end
 end

@@ -15,10 +15,10 @@
 
 FactoryGirl.define do
   factory :group do
-    sequence(:name) {|n| "Campaign Group #{n}" }
-    sequence(:short_name) {|n| "cc#{n}" }
-    sequence(:website) {|n| "http://www.cc#{n}.com" }
-    sequence(:email) {|n| "admin@cc#{n}.com" }
+    sequence(:name) { |n| "Campaign Group #{n}" }
+    sequence(:short_name) { |n| "cc#{n}" }
+    sequence(:website) { |n| "http://www.cc#{n}.com" }
+    sequence(:email) { |n| "admin@cc#{n}.com" }
 
     trait :disabled do
       disabled_at { DateTime.now }

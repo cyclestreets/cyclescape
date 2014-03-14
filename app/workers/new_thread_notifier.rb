@@ -67,7 +67,7 @@ class NewThreadNotifier
     # and that it is the smallest (i.e. most relevant) location. Refactoring this into
     # the Arel query above is left as an exercise for the reader.
     filtered = locations.group_by(&:user_id).map do |user_id, locs|
-      locs.sort_by {|loc| loc.location.buffer(0.0001).area }.first
+      locs.sort_by { |loc| loc.location.buffer(0.0001).area }.first
     end
 
     list = {}

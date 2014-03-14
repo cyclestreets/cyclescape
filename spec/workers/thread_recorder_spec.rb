@@ -4,7 +4,7 @@ describe ThreadRecorder do
   subject { ThreadRecorder }
 
   # Queuing interface
-  it { subject.queue.should == :thread_views}
+  it { subject.queue.should == :thread_views }
   it { subject.should respond_to(:perform) }
 
   describe ".perform" do

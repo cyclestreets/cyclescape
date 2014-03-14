@@ -15,7 +15,7 @@
 
 FactoryGirl.define do
   factory :issue do
-    sequence(:title) {|n| "Issue #{n}" }
+    sequence(:title) { |n| "Issue #{n}" }
     description "Whose leg do you have to hump to get a dry martini around here?"
     location "POINT(-122 47)"
     association :created_by, factory: :user

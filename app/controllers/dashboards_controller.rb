@@ -25,7 +25,7 @@ class DashboardsController < ApplicationController
 
     # Threads, with permission check
     unfiltered_results = MessageThread.find_with_index(@query)
-    results = unfiltered_results.select{ |t| permitted_to?(:show, t) }
+    results = unfiltered_results.select { |t| permitted_to?(:show, t) }
     @threads = ThreadListDecorator.decorate(results)
 
     # Issues

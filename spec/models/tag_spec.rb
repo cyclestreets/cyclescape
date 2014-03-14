@@ -27,7 +27,7 @@ describe Tag do
 
     it "should return the tag names as an array" do
       tags
-      Tag.names.should == tags.map {|tag| tag.name }
+      Tag.names.should == tags.map { |tag| tag.name }
     end
   end
 

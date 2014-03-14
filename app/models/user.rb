@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
 
   def self.user_roles_map
-    ALLOWED_ROLES.map {|n| [I18n.t(".user_roles.#{n.to_s}"), n] }
+    ALLOWED_ROLES.map { |n| [I18n.t(".user_roles.#{n.to_s}"), n] }
   end
 
   def self.find_or_invite(email_address, name = nil)
@@ -90,7 +90,7 @@ class User < ActiveRecord::Base
   def self.init_user_prefs
     joins("LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id").
       where("user_prefs.id IS NULL").
-      each {|u| u.create_user_prefs }
+      each { |u| u.create_user_prefs }
   end
 
   def name
@@ -158,7 +158,7 @@ class User < ActiveRecord::Base
   end
 
   def buffered_locations
-    locations.map{ |l| l.location.buffer(Geo::USER_LOCATIONS_BUFFER) }.inject{ |geo, item| geo.union(item) }
+    locations.map { |l| l.location.buffer(Geo::USER_LOCATIONS_BUFFER) }.inject { |geo, item| geo.union(item) }
   end
 
   # Returns issues that are within a small distance of their user_locations

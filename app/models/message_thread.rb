@@ -51,11 +51,11 @@ class MessageThread < ActiveRecord::Base
   end
 
   def self.non_committee_privacies_map
-    (ALLOWED_PRIVACY - ["committee"]).map {|n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+    (ALLOWED_PRIVACY - ["committee"]).map { |n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
   end
 
   def self.privacies_map
-    ALLOWED_PRIVACY.map {|n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+    ALLOWED_PRIVACY.map { |n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
   end
 
   def self.with_messages_from(user)
@@ -107,7 +107,7 @@ class MessageThread < ActiveRecord::Base
     end
 
     parsed = EmailReplyParser.read(text)
-    stripped = parsed.fragments.select {|f| !f.hidden? }.join
+    stripped = parsed.fragments.select { |f| !f.hidden? }.join
 
     m = []
 

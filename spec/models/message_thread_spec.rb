@@ -111,9 +111,9 @@ describe MessageThread do
 
   describe "upcoming deadlines" do
     let(:thread) { FactoryGirl.create(:message_thread) }
-    let(:deadline_message_old) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now - 10.days)}
-    let(:deadline_message_soon) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now + 2.days)}
-    let(:deadline_message_later) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now + 100.days)}
+    let(:deadline_message_old) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now - 10.days) }
+    let(:deadline_message_soon) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now + 2.days) }
+    let(:deadline_message_later) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now + 100.days) }
 
     it "should return one thread with upcoming deadlines" do
       deadline_message_soon

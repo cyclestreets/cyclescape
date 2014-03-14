@@ -80,9 +80,9 @@ class IssuesController < ApplicationController
       issues = Issue.order("created_at DESC").limit(50)
     end
     factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(issues.sort_by!{|o| o.size}.reverse.map { | issue | issue_feature(IssueDecorator.decorate(issue), bbox) })
+    collection = factory.feature_collection(issues.sort_by! { |o| o.size }.reverse.map { | issue | issue_feature(IssueDecorator.decorate(issue), bbox) })
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(collection)}
+      format.json { render json: RGeo::GeoJSON.encode(collection) }
     end
   end
 

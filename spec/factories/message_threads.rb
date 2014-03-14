@@ -18,7 +18,7 @@
 FactoryGirl.define do
   factory :message_thread do
     association :created_by, factory: :user
-    sequence(:title) {|n| "Message Thread #{n}" }
+    sequence(:title) { |n| "Message Thread #{n}" }
     privacy "public"
 
     trait :belongs_to_group do

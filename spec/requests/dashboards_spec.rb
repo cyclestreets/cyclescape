@@ -60,7 +60,7 @@ describe "User dashboards" do
           messages.each { |m| m.thread.add_subscriber(current_user) }
           current_user.involved_threads.count.should > 0
           visit dashboard_path
-          messages.map {|m| m.thread }.each do |thread|
+          messages.map { |m| m.thread }.each do |thread|
             page.should have_content(thread.title)
           end
         end

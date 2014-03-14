@@ -7,7 +7,7 @@ class Library::Component < ActiveRecord::Base
 
   belongs_to :item, class_name: "Library::Item", foreign_key: "library_item_id"
 
-  scope :recent, lambda {|num| includes(:item).order("library_items.created_at DESC").limit(num) }
+  scope :recent, lambda { |num| includes(:item).order("library_items.created_at DESC").limit(num) }
 
   before_create :create_library_item, unless: :item
   after_create :update_library_item

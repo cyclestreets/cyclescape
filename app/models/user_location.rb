@@ -23,6 +23,6 @@ class UserLocation < ActiveRecord::Base
   validates :category, presence: true
 
   def overlapping_groups
-    GroupProfile.where("st_intersects(location, ?)", self.location).order("st_area(location) asc").map{ |p| p.group}
+    GroupProfile.where("st_intersects(location, ?)", self.location).order("st_area(location) asc").map { |p| p.group }
   end
 end
