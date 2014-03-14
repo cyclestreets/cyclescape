@@ -120,11 +120,6 @@ OneLineConditional:
 ParenthesesAsGroupedExpression:
   Enabled: false
 
-# Offence count: 1
-# Cop supports --auto-correct.
-PerlBackrefs:
-  Enabled: false
-
 # Offence count: 4
 # Configuration parameters: NamePrefixBlacklist.
 PredicateName:

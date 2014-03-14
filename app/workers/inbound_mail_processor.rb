@@ -6,7 +6,7 @@ class InboundMailProcessor
   def self.perform(mail_id)
     mail = InboundMail.find(mail_id)
     if mail.message.to.first.match(/^thread-([^@]+)/)
-      deliver_thread_reply(mail, $1)
+      deliver_thread_reply(mail, Regexp.last_match[1])
     end
   end
 
