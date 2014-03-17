@@ -69,10 +69,6 @@ DotPosition:
 EndAlignment:
   Enabled: false
 
-# Offence count: 1
-FavorSprintf:
-  Enabled: false
-
 # Offence count: 3
 # Configuration parameters: IncludePaths.
 HasAndBelongsToMany:

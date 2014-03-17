@@ -148,7 +148,7 @@ class ApplicationController < ActionController::Base
   # Formatting grabbed from ruby stdlib
   def timestamp_with_usec
     time = Time.now
-    time.strftime('%Y-%m-%dT%H:%M:%S.') << '%06d ' % time.usec
+    time.strftime('%Y-%m-%dT%H:%M:%S.') + format('%06d ', time.usec)
   end
 
   # Oh, rails, how I hate your shielding of Logger formatters from me
