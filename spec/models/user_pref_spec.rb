@@ -15,7 +15,7 @@ require 'spec_helper'
 describe UserPref do
   it { should belong_to(:user) }
 
-  describe "attributes" do
+  describe 'attributes' do
     booleans = %w(
       involve_my_groups_admin
       enable_email

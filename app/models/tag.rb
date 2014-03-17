@@ -13,7 +13,7 @@ class Tag < ActiveRecord::Base
   validates :name, presence: true
 
   def self.names
-    scoped.map {|tag| tag.name }
+    scoped.map { |tag| tag.name }
   end
 
   def self.grab(val)

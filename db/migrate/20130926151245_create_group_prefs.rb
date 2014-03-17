@@ -1,8 +1,7 @@
 class CreateGroupPrefs < ActiveRecord::Migration
-
   # Inline 'stub' class so we can create prefs for all groups during migration
   class Group < ActiveRecord::Base
-    has_one :prefs, class_name: "GroupPref"
+    has_one :prefs, class_name: 'GroupPref'
   end
 
   def up

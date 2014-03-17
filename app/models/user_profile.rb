@@ -26,7 +26,11 @@ class UserProfile < ActiveRecord::Base
   end
 
   def picture_thumbnail
-    picture.thumb("50x50>")
+    picture.thumb('50x50>')
+  end
+
+  def clear
+    update_attributes(picture: nil, website: nil, about: nil)
   end
 
   protected

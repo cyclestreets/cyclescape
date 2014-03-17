@@ -23,19 +23,19 @@ class PhotoMessage < MessageComponent
   validates :photo, presence: true
 
   def photo_medium
-    photo.thumb("600x600>")
+    photo.thumb('600x600>')
   end
 
   def photo_preview
-    photo.thumb("200x200>")
+    photo.thumb('200x200>')
   end
 
   def photo_thumbnail
-    photo.thumb("50x50>")
+    photo.thumb('50x50>')
   end
 
   def searchable_text
-    [caption, description].join(" ")
+    [caption, description].join(' ')
   end
 
   protected

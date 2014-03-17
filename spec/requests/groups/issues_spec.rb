@@ -1,21 +1,21 @@
-require "spec_helper"
+require 'spec_helper'
 
-describe "Issues in a group subdomain" do
-  include_context "signed in as a group member"
-  include_context "with current group subdomain"
+describe 'Issues in a group subdomain' do
+  include_context 'signed in as a group member'
+  include_context 'with current group subdomain'
 
-  let(:location_inside_group) { "POINT (10 10)" }
-  let(:location_outside_group) { "POINT (200 200)" }
+  let(:location_inside_group) { 'POINT (10 10)' }
+  let(:location_outside_group) { 'POINT (200 200)' }
   let!(:issues) { FactoryGirl.create_list(:issue, 2, location: location_inside_group) }
   let!(:outside_issue) { FactoryGirl.create(:issue, location: location_outside_group) }
 
   before do
     # Groups create empty profiles automatically, so just update the existing one
-    current_group.profile.location = "POLYGON ((0 0, 0 100, 100 100, 100 0, 0 0))"
+    current_group.profile.location = 'POLYGON ((0 0, 0 100, 100 100, 100 0, 0 0))'
     current_group.profile.save!
   end
 
-  context "index" do
+  context 'index' do
     it "should show issues in the group's area" do
       visit issues_path
       issues.each do |issue|
@@ -29,14 +29,14 @@ describe "Issues in a group subdomain" do
       page.should have_no_content(outside_issue.title)
     end
 
-    it "should set the page title" do
+    it 'should set the page title' do
       visit issues_path
-      page.should have_selector("title", content: I18n.t("group.issues.index.title", group_name: current_group.name))
+      page.should have_selector('title', content: I18n.t('group.issues.index.title', group_name: current_group.name))
     end
 
-    context "with search" do
-      let(:search_field) { "query" }
-      let(:search_button) { I18n.t("layouts.search.search_button") }
+    context 'with search' do
+      let(:search_field) { 'query' }
+      let(:search_button) { I18n.t('layouts.search.search_button') }
 
       it "should return issues in the group's area" do
         # FIXME: group restrictions aren't yet implemented for global search
@@ -58,13 +58,13 @@ describe "Issues in a group subdomain" do
           fill_in search_field, with: outside_issue.title
           click_on search_button
         end
-        page.should have_content("No issues found")
+        page.should have_content('No issues found')
       end
     end
   end
 
-  context "geojson" do
-    context "all issues" do
+  context 'geojson' do
+    context 'all issues' do
       it "should show issues in the group's area" do
         visit all_geometries_issues_path(format: :json)
 
@@ -82,19 +82,19 @@ describe "Issues in a group subdomain" do
     end
   end
 
-  context "editing" do
+  context 'editing' do
     let(:issue) { FactoryGirl.create(:issue, created_by: current_user) }
-    let(:edit_text) { "Edit this issue" }
+    let(:edit_text) { 'Edit this issue' }
 
     # Check decl_auth context is set correctly for nested controller
-    it "should let you edit the issue" do
+    it 'should let you edit the issue' do
       visit issue_path(issue)
       click_on edit_text
-      page.should have_content("Edit Issue")
-      fill_in "Title", with: "Something New"
-      click_on "Save"
+      page.should have_content('Edit Issue')
+      fill_in 'Title', with: 'Something New'
+      click_on 'Save'
       current_path.should == issue_path(issue)
-      page.should have_content("Something New")
+      page.should have_content('Something New')
     end
   end
 end

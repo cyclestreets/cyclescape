@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :user_location do
-    location "POINT(2 2)"
+    location 'POINT(2 2)'
     association :category, factory: :location_category
     association :user
 

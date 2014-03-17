@@ -4,27 +4,28 @@ class Group::MembershipRequestsController < ApplicationController
   filter_access_to :all, attribute_check: true, model: Group
 
   def index
-    set_page_title t("group.membership_requests.index.title", group: @group.name)
+    set_page_title t('group.membership_requests.index.title', group: @group.name)
 
-    @requests = @group.membership_requests.order("created_at desc").includes(:user)
+    @requests = @group.membership_requests.order('created_at desc').includes(:user)
   end
 
   def new
-    set_page_title t("group.membership_requests.new.title", group_name: @group.name)
+    set_page_title t('group.membership_requests.new.title', group_name: @group.name)
 
     @request = @group.membership_requests.build
   end
 
   def create
     if current_user.groups.include?(@group)
-      redirect_to @group, alert: t(".group.membership_requests.create.already_member")
+      redirect_to @group, alert: t('.group.membership_requests.create.already_member')
     elsif current_user.membership_request_pending_for?(@group)
-      redirect_to @group, alert: t(".group.membership_requests.create.already_asked")
+      redirect_to @group, alert: t('.group.membership_requests.create.already_asked')
     else
-      @request = @group.membership_requests.build({user: current_user})
+      @request = @group.membership_requests.new(params[:group_membership_request])
+      @request.user = current_user
 
       if @request.save
-        redirect_to @group, notice: t(".group.membership_requests.create.requested")
+        redirect_to @group, notice: t('.group.membership_requests.create.requested')
         Notifications.new_group_membership_request(@request).deliver
       else
         render :new

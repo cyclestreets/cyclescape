@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.15'
+gem 'rails', '3.2.17'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -25,7 +25,7 @@ gem 'declarative_authorization'
 gem 'thin'
 gem 'state_machine'
 gem 'rack-cache', require: 'rack/cache'
-gem 'dragonfly'
+gem 'dragonfly', '~> 0.9.15' # pin to delay the upgrade to 1.x
 gem 'redis-store', '~> 1.0.0'
 gem 'resque'
 gem 'acts_as_indexed'
@@ -36,6 +36,7 @@ gem 'whenever'
 gem 'draper', '0.15.0' # pin due to failing tests: maybe when https://github.com/jcasimir/draper/pull/288 is released.
 gem 'email_reply_parser'
 gem 'memoist'
+gem 'paranoia', '~> 1.0'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -50,6 +51,7 @@ end
 group :development do
   gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
+  gem 'rubocop'
 
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded

@@ -15,7 +15,7 @@ require 'spec_helper'
 describe GroupPref do
   it { should belong_to(:group) }
 
-  describe "attributes" do
+  describe 'attributes' do
     booleans = %w(
       notify_membership_requests
       )

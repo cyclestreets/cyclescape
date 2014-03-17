@@ -1,6 +1,6 @@
 class Site::CommentsController < ApplicationController
   def index
-    @site_comments = SiteComment.order("created_at desc").page(params[:page])
+    @site_comments = SiteComment.order('created_at desc').page(params[:page])
   end
 
   def new
@@ -13,9 +13,9 @@ class Site::CommentsController < ApplicationController
     @site_comment.user = current_user if current_user
 
     if @site_comment.save
-      render "success"
+      render 'success'
     else
-      render "new", status: :conflict
+      render 'new', status: :conflict
     end
   end
 

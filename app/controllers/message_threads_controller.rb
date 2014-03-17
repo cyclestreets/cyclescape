@@ -10,7 +10,7 @@ class MessageThreadsController < ApplicationController
     load_thread
     set_page_title @thread.title
     @issue = IssueDecorator.decorate(@thread.issue) if @thread.issue
-    @messages = @thread.messages.includes({created_by: :profile}, :component).all
+    @messages = @thread.messages.includes({ created_by: :profile }, :component).all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers
     @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
@@ -19,7 +19,7 @@ class MessageThreadsController < ApplicationController
     @view_from = nil
     if current_user
       if current_user.viewed_thread?(@thread)
-        @view_from = @messages.detect{|m| m.created_at >= current_user.viewed_thread_at(@thread)} || @messages.last
+        @view_from = @messages.detect { |m| m.created_at >= current_user.viewed_thread_at(@thread) } || @messages.last
       end
       ThreadRecorder.thread_viewed(@thread, current_user)
     end
@@ -66,12 +66,12 @@ class MessageThreadsController < ApplicationController
   def subscribe_group_users(thread)
     # If it's an "administrative" discussion, don't subscribe without extra pref
     t = UserPref.arel_table
-    pref = t[:involve_my_groups].eq("subscribe")
+    pref = t[:involve_my_groups].eq('subscribe')
     constraint = thread.issue ? pref : pref.and(t[:involve_my_groups_admin].eq(true))
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
-      if Authorization::Engine.instance.permit? :show, { object: thread, user: member, user_roles: [:member, :guest] }
-        thread.subscriptions.create({user: member}, without_protection: true) unless member.subscribed_to_thread?(thread)
+      if Authorization::Engine.instance.permit? :show,  object: thread, user: member, user_roles: [:member, :guest]
+        thread.subscriptions.create({ user: member }, without_protection: true) unless member.subscribed_to_thread?(thread)
       end
     end
   end
@@ -80,13 +80,13 @@ class MessageThreadsController < ApplicationController
     buffered_location = thread.issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
     locations = UserLocation.intersects(buffered_location).
-        joins(:user => :prefs).
-        where(user_prefs: {involve_my_locations: "subscribe"}).
+        joins(user: :prefs).
+        where(user_prefs: { involve_my_locations: 'subscribe' }).
         all
 
     locations.each do |loc|
-      if Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user, user_roles: [:member, :guest] }
-        thread.subscriptions.create({user: loc.user}, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
+      if Authorization::Engine.instance.permit? :show,  object: thread, user: loc.user, user_roles: [:member, :guest]
+        thread.subscriptions.create({ user: loc.user }, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
       end
     end
   end

@@ -15,10 +15,10 @@ FactoryGirl.define do
   factory :group_membership do
     group
     user
-    role "member"
+    role 'member'
 
     trait :committee do
-      role "committee"
+      role 'committee'
     end
 
     # Site admin but not committee member

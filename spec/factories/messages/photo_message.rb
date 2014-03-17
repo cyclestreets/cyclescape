@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :photo_message do
     association :created_by, factory: :user
     association :message, factory: :message
-    sequence(:caption) {|n| "Imaginative photo caption #{n}" }
+    sequence(:caption) { |n| "Imaginative photo caption #{n}" }
     photo { Pathname.new(test_photo_path) }
 
     after(:build) do |o|

@@ -12,68 +12,93 @@
 require 'spec_helper'
 
 describe UserProfile do
-  context "associations" do
+  context 'associations' do
     it { should belong_to(:user) }
   end
 
-  context "picture" do
+  context 'picture' do
     subject { FactoryGirl.create(:user_profile) }
 
-    it "should accept and save a picture" do
+    it 'should accept and save a picture' do
       subject.picture_uid.should_not be_blank
-      subject.picture.mime_type.should == "image/jpeg"
+      subject.picture.mime_type.should == 'image/jpeg'
     end
 
-    it "should provide a thumbnail of the picture" do
+    it 'should provide a thumbnail of the picture' do
       subject.picture_thumbnail.should be_true
       subject.picture_thumbnail.width.should == 50
       subject.picture_thumbnail.height.should == 50
     end
 
-    it "should not accept a text document for a picture" do
+    it 'should not accept a text document for a picture' do
       subject.should have(0).errors_on(:picture)
       subject.picture = File.open(lorem_ipsum_path)
       subject.should have(1).error_on(:picture)
     end
   end
 
-  context "url" do
+  context 'url' do
     subject { FactoryGirl.create(:user_profile) }
 
-    it "should allow a valid URL with HTTP protocol" do
-      subject.website = "http://en.wikipedia.org/wiki/Family_Guy"
+    it 'should allow a valid URL with HTTP protocol' do
+      subject.website = 'http://en.wikipedia.org/wiki/Family_Guy'
       subject.should have(0).errors_on(:website)
     end
 
-    it "should allow a valid URL with HTTPS protocol" do
-      subject.website = "https://en.wikipedia.org/wiki/Family_Guy"
+    it 'should allow a valid URL with HTTPS protocol' do
+      subject.website = 'https://en.wikipedia.org/wiki/Family_Guy'
       subject.should have(0).errors_on(:website)
     end
 
-    it "should allow a valid URL without protocol" do
-      subject.website = "en.wikipedia.org/wiki/Family_Guy"
+    it 'should allow a valid URL without protocol' do
+      subject.website = 'en.wikipedia.org/wiki/Family_Guy'
       subject.should have(0).errors_on(:website)
     end
 
-    it "should prefix the HTTP protocol on a URL without protocol" do
-      subject.website = "en.wikipedia.org/wiki/Family_Guy"
-      subject.website.should == "http://en.wikipedia.org/wiki/Family_Guy"
+    it 'should prefix the HTTP protocol on a URL without protocol' do
+      subject.website = 'en.wikipedia.org/wiki/Family_Guy'
+      subject.website.should == 'http://en.wikipedia.org/wiki/Family_Guy'
     end
 
-    it "should not allow a URL with FTP protocol" do
-      subject.website = "ftp://en.wikipedia.org/wiki/Family_Guy"
+    it 'should not allow a URL with FTP protocol' do
+      subject.website = 'ftp://en.wikipedia.org/wiki/Family_Guy'
       subject.should have(1).error_on(:website)
     end
 
-    it "should not allow an invalid URL" do
-      subject.website = "w[iki]pedia.org/wiki/Family_Guy"
+    it 'should not allow an invalid URL' do
+      subject.website = 'w[iki]pedia.org/wiki/Family_Guy'
       subject.should have(1).error_on(:website)
     end
 
-    it "should accept a blank url" do
-      subject.website = ""
-      subject.website.should === ""
+    it 'should accept a blank url' do
+      subject.website = ''
+      subject.website.should === ''
       subject.should have(0).errors_on(:website)
+    end
+  end
+
+  context 'clearing' do
+    subject { FactoryGirl.create(:user_profile) }
+
+    it 'should remove the website' do
+      subject.website.should_not be_nil
+      subject.clear
+      subject.reload # check it was saved
+      subject.website.should be_nil
+    end
+
+    it 'should remove the about text' do
+      subject.about.should_not be_nil
+      subject.clear
+      subject.reload
+      subject.about.should be_nil
+    end
+
+    it 'should remove the picture' do
+      subject.picture.should_not be_nil
+      subject.clear
+      subject.reload
+      subject.picture.should be_nil
     end
   end
 end

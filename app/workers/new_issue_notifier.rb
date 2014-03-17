@@ -30,15 +30,15 @@ class NewIssueNotifier
     # Retrieve user locations that intersect with the issue
     # and where the user has user locations involvement preference on
     locations = UserLocation.intersects(buffered_location).
-        joins(:user => :prefs).
-        where(UserPref.arel_table[:involve_my_locations].in(["notify", "subscribe"])).
+        joins(user: :prefs).
+        where(UserPref.arel_table[:involve_my_locations].in(%w(notify subscribe))).
         all
 
     # Filter the returned locations to ensure only one location is returned per user,
     # and that it is the smallest (i.e. most relevant) location. Refactoring this into
     # the Arel query above is left as an exercise for the reader.
     filtered = locations.group_by(&:user_id).map do |user_id, locs|
-      locs.sort_by {|loc| loc.location.buffer(0.0001).area }.first
+      locs.sort_by { |loc| loc.location.buffer(0.0001).area }.first
     end
 
     # Create a hash keyed on user_id, containing the type of notification (actually the method name)
@@ -46,7 +46,7 @@ class NewIssueNotifier
     list = {}
     filtered.each do |loc|
       # Symbol keys are converted to strings by Resque
-      opts = { "user_id" => loc.user_id, "category_id" => loc.category_id, "issue_id" => issue.id }
+      opts = { 'user_id' => loc.user_id, 'category_id' => loc.category_id, 'issue_id' => issue.id }
       list[loc.user_id] = { type: :notify_new_user_location_issue, opts: opts }
     end
 
@@ -54,9 +54,9 @@ class NewIssueNotifier
   end
 
   def self.notify_new_user_location_issue(opts)
-    user = User.find(opts["user_id"])
-    issue = Issue.find(opts["issue_id"])
-    category = LocationCategory.find(opts["category_id"])
+    user = User.find(opts['user_id'])
+    issue = Issue.find(opts['issue_id'])
+    category = LocationCategory.find(opts['category_id'])
     Notifications.new_user_location_issue(user, issue, category).deliver if user.prefs.enable_email
   end
 
@@ -68,10 +68,10 @@ class NewIssueNotifier
     list = {}
     group_profiles.each do |profile|
       users = profile.group.members.joins(:prefs).
-          where(UserPref.arel_table[:involve_my_groups].in(["notify", "subscribe"])).
+          where(UserPref.arel_table[:involve_my_groups].in(%w(notify subscribe))).
           all
       users.each do |user|
-        opts = { "user_id" => user.id, "group_id" => profile.group.id, "issue_id" => issue.id }
+        opts = { 'user_id' => user.id, 'group_id' => profile.group.id, 'issue_id' => issue.id }
         list[user.id] = { type: :notify_new_group_location_issue, opts: opts }
       end
     end
@@ -80,9 +80,9 @@ class NewIssueNotifier
   end
 
   def self.notify_new_group_location_issue(opts)
-    user = User.find(opts["user_id"])
-    group = Group.find(opts["group_id"])
-    issue = Issue.find(opts["issue_id"])
+    user = User.find(opts['user_id'])
+    group = Group.find(opts['group_id'])
+    issue = Issue.find(opts['issue_id'])
     Notifications.new_group_location_issue(user, group, issue).deliver if user.prefs.enable_email
   end
 end
