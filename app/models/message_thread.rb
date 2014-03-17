@@ -100,11 +100,11 @@ class MessageThread < ActiveRecord::Base
     fail "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
 
     # For multipart messages we pull out the text/plain content
-    text = if mail.message.multipart?
-      mail.message.text_part.decoded
-    else
-      mail.message.decoded
-    end
+    text =  if mail.message.multipart?
+              mail.message.text_part.decoded
+            else
+              mail.message.decoded
+            end
 
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select { |f| !f.hidden? }.join

@@ -64,11 +64,6 @@ Documentation:
 DotPosition:
   Enabled: false
 
-# Offence count: 1
-# Configuration parameters: AlignWith, SupportedStyles.
-EndAlignment:
-  Enabled: false
-
 # Offence count: 3
 # Configuration parameters: IncludePaths.
 HasAndBelongsToMany:
