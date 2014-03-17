@@ -27,12 +27,13 @@ describe 'Issue notifications' do
         fill_in_issue
         click_on 'Send Report'
         page.should have_content(issue_values[:title])
-        category_name = user_location.category.name.downcase
+        category_name = user_location.category.name
         email = open_last_email_for(user_location.user.email)
         email.should have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\"")
         email.should have_body_text(issue_values[:title])
         email.should have_body_text(issue_values[:description])
         email.should have_body_text(current_user.name)
+        email.should have_body_text(category_name)
       end
 
       it 'should not include html entities in the message' do
