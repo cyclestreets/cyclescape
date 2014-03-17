@@ -51,7 +51,7 @@ class ThreadListDecorator < ApplicationDecorator
       # Might be nil
       icon = thread.issue.icon_from_tags
     end
-    icon ||= 'misc'
+    icon || 'misc'
   end
 
   def following_status
