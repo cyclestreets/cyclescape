@@ -1,6 +1,6 @@
 module MapsHelper
   def basic_map(&block)
-    @map = core_map('map') do |map, page|
+    core_map('map') do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
       page << map.add_layer(MapLayers::OSM_MAPNIK)
       page << map.add_layer(MapLayers::OS_STREETVIEW)
@@ -19,7 +19,7 @@ module MapsHelper
   end
 
   def display_map(object, geometry_url, &block)
-    @map = basic_map do |map, page|
+    basic_map do |map, page|
       centre_map(object.location, map, page)
       add_location_layer('Location', geometry_url, OpenLayers::Strategy::Fixed.new, map, page)
 
@@ -30,7 +30,7 @@ module MapsHelper
   # If you need to show the same tiny_display_map twice on the one page, give different prefixes
   def tiny_display_map(object, geometry_url, prefix, &block)
     dom_id = dom_id(object, prefix)
-    @map = core_map(dom_id) do |map, page|
+    core_map(dom_id) do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
       add_formats(page)
       centre_map(object.location, map, page)
@@ -41,7 +41,7 @@ module MapsHelper
   end
 
   def display_bbox_map(start_location, geometry_bbox_url, &block)
-    map = basic_map do |map, page|
+    basic_map do |map, page|
       centre_map(start_location, map, page)
       add_location_layer('Issues', geometry_bbox_url, OpenLayers::Strategy::BBOX.new(resFactor: 3, ratio: 1.5), map, page)
       page << 'MapPopup.init(map, locationlayer)'
@@ -51,7 +51,7 @@ module MapsHelper
   end
 
   def display_group_bbox_map(start_location, geometry_bbox_url, &block)
-    map = basic_map do |map, page|
+    basic_map do |map, page|
       centre_map(start_location, map, page)
       add_location_layer('Groups', geometry_bbox_url, OpenLayers::Strategy::BBOX.new(resFactor: 3, ratio: 1.5), map, page)
       page << 'MapGroupPopup.init(map, locationlayer)'
@@ -71,11 +71,11 @@ module MapsHelper
   protected
 
   def core_map(dom_id, &block)
-    map = MapLayers::Map.new(dom_id, theme: '/openlayers/theme/default/style.css',
-                                     projection: googleproj,
-                                     displayProjection: projection,
-                                     controls: []
-                                       ) do |map, page|
+    MapLayers::Map.new(dom_id, theme: '/openlayers/theme/default/style.css',
+                               projection: googleproj,
+                               displayProjection: projection,
+                               controls: []
+                       ) do |map, page|
       yield(map, page) if block_given?
     end
   end

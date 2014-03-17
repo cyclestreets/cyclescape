@@ -80,7 +80,7 @@ describe 'Group memberships admin' do
       let(:meg) { FactoryGirl.create(:meg) }
 
       it 'should let you promote a member into the committee' do
-        membership = FactoryGirl.create(:group_membership, group: current_group, user: meg)
+        FactoryGirl.create(:group_membership, group: current_group, user: meg)
         current_group.committee_members.should_not include(meg)
 
         visit group_members_path(current_group)

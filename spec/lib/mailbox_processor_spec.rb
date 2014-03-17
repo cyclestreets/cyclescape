@@ -54,7 +54,7 @@ describe MailboxProcessor do
     end
 
     describe '#fetch_message' do
-      let(:message) { message = double('message', attr: { 'RFC822' => 'Mail text' }) }
+      let(:message) { double('message', attr: { 'RFC822' => 'Mail text' }) }
 
       before do
         subject.stub(:imap).and_return(imap)

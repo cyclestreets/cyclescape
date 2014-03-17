@@ -167,10 +167,6 @@ TrivialAccessors:
 UnreachableCode:
   Enabled: false
 
-# Offence count: 15
-UselessAssignment:
-  Enabled: false
-
 # Offence count: 3
 # Configuration parameters: IncludePaths.
 Validation:

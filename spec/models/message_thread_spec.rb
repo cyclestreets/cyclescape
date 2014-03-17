@@ -104,7 +104,7 @@ describe MessageThread do
 
     it 'should only find one thread with multiple messages from the same user' do
       message
-      message2 = FactoryGirl.create(:message, thread: thread, created_by: user)
+      FactoryGirl.create(:message, thread: thread, created_by: user) # second message in same thread
       MessageThread.with_messages_from(user).count.should == 1
     end
   end

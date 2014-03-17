@@ -384,7 +384,7 @@ describe Issue do
       it 'should find issues created by the given user' do
         user = FactoryGirl.create(:user)
         owned_issues = FactoryGirl.create_list(:issue, 2, created_by: user)
-        other_issue = FactoryGirl.create(:issue)
+        FactoryGirl.create(:issue)
         Issue.count.should == 3
         Issue.created_by(user).should match_array(owned_issues)
       end

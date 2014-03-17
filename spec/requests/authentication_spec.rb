@@ -34,13 +34,14 @@ describe 'Authentication and authorization' do
   context 'when choosing to log in' do
     def choose_to_log_in_from(path)
       credentials = FactoryGirl.attributes_for(:user)
-      user = FactoryGirl.create(:user, credentials)
+      FactoryGirl.create(:user, credentials)
       visit path
       click_link 'Sign in'
       fill_in 'Email', with: credentials[:email]
       fill_in 'Password', with: credentials[:password]
       click_button 'Sign in'
     end
+
     it 'should direct you to your dashboard page instead of homepage' do
       choose_to_log_in_from(root_path)
       page.current_path.should == dashboard_path
