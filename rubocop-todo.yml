@@ -140,11 +140,6 @@ RedundantReturn:
 RegexpLiteral:
   MaxSlashes: 2
 
-# Offence count: 1
-# Configuration parameters: AllowAsExpressionSeparator.
-Semicolon:
-  Enabled: false
-
 # Offence count: 3
 ShadowingOuterLocalVariable:
   Enabled: false

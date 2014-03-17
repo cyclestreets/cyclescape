@@ -91,7 +91,7 @@ module MapsHelper
   def centre_map(location, map, page)
     if location.geometry_type == RGeo::Feature::Point
       z = location.z || Geo::POINT_ZOOM
-      page << map.setCenter(OpenLayers::LonLat.new(location.x, location.y).transform(projection, map.getProjectionObject), z);
+      page << map.setCenter(OpenLayers::LonLat.new(location.x, location.y).transform(projection, map.getProjectionObject), z)
     else
       bbox = RGeo::Cartesian::BoundingBox.new(location.factory)
       bbox.add(location)
