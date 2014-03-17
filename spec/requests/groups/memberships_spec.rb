@@ -91,7 +91,7 @@ describe 'Group memberships admin' do
         click_on 'Save'
 
         within('.committee') do
-         page.should have_content(meg.name)
+          page.should have_content(meg.name)
         end
         current_group.committee_members.should include(meg)
       end

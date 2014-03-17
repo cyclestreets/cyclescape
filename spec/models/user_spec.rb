@@ -192,8 +192,8 @@ describe User do
 
     it 'should set the full name of an existing user if their email is not found' do
       user = User.find_or_invite(attrs[:email], attrs[:full_name])
-      user.full_name.should == attrs[:full_name
-    ]end
+      user.full_name.should == attrs[:full_name]
+    end
 
     it 'should set the local-part as the full name if one is not provided' do
       user = User.find_or_invite(attrs[:email])

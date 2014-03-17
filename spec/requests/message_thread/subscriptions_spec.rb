@@ -62,9 +62,9 @@ describe 'Thread subscriptions' do
         it 'should subscribe me when I post a photo' do
           current_user.subscribed_to_thread?(thread).should be_false
           within('#new-photo-message') do
-              attach_file('Photo', abstract_image_path)
-              fill_in 'Caption', with: 'An abstract image'
-              click_on 'Add Photo'
+            attach_file('Photo', abstract_image_path)
+            fill_in 'Caption', with: 'An abstract image'
+            click_on 'Add Photo'
           end
           current_user.subscribed_to_thread?(thread).should be_true
         end

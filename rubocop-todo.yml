@@ -73,10 +73,6 @@ HasAndBelongsToMany:
 IfUnlessModifier:
   Enabled: false
 
-# Offence count: 4
-IndentationWidth:
-  Enabled: false
-
 # Offence count: 11
 Lambda:
   Enabled: false

@@ -409,12 +409,12 @@ describe 'Message threads' do
     let(:search_button) { I18n.t('layouts.search.search_button') }
 
     before do
-        [thread, private_thread, committee_thread].each do |t|
-          m = t.messages.new(body: 'Findable with bananas')
-          m.created_by = FactoryGirl.create(:user)
-          m.save!
-          t.reload
-        end
+      [thread, private_thread, committee_thread].each do |t|
+        m = t.messages.new(body: 'Findable with bananas')
+        m.created_by = FactoryGirl.create(:user)
+        m.save!
+        t.reload
+      end
     end
 
     describe 'as a guest' do
