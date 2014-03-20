@@ -10,7 +10,7 @@ class MessageThreadsController < ApplicationController
     load_thread
     set_page_title @thread.title
     @issue = IssueDecorator.decorate(@thread.issue) if @thread.issue
-    @messages = @thread.messages.includes({created_by: :profile}, :component).all
+    @messages = @thread.messages.includes({ created_by: :profile }, :component).all
     @new_message = @thread.messages.build
     @subscribers = @thread.subscribers
     @library_items = Library::Item.find_by_tags_from(@thread).limit(5)
@@ -19,7 +19,7 @@ class MessageThreadsController < ApplicationController
     @view_from = nil
     if current_user
       if current_user.viewed_thread?(@thread)
-        @view_from = @messages.detect{|m| m.created_at >= current_user.viewed_thread_at(@thread)} || @messages.last
+        @view_from = @messages.detect { |m| m.created_at >= current_user.viewed_thread_at(@thread) } || @messages.last
       end
       ThreadRecorder.thread_viewed(@thread, current_user)
     end

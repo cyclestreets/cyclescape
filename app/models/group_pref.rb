@@ -14,5 +14,5 @@ class GroupPref < ActiveRecord::Base
   attr_accessible :membership_secretary_id, :notify_membership_requests
 
   belongs_to :group
-  belongs_to :membership_secretary, class_name: "User"
+  belongs_to :membership_secretary, class_name: 'User'
 end

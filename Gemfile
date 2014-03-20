@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.16'
+gem 'rails', '3.2.17'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -25,7 +25,7 @@ gem 'declarative_authorization'
 gem 'thin'
 gem 'state_machine'
 gem 'rack-cache', require: 'rack/cache'
-gem 'dragonfly'
+gem 'dragonfly', '~> 0.9.15' # pin to delay the upgrade to 1.x
 gem 'redis-store', '~> 1.0.0'
 gem 'resque'
 gem 'acts_as_indexed'
@@ -51,6 +51,7 @@ end
 group :development do
   gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
+  gem 'rubocop'
 
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded

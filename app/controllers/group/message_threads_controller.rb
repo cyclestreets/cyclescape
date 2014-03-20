@@ -3,7 +3,7 @@ class Group::MessageThreadsController < MessageThreadsController
   before_filter :load_group
 
   def index
-    set_page_title t("group.message_threads.index.title", group: @group.name)
+    set_page_title t('group.message_threads.index.title', group: @group.name)
 
     issue_threads = ThreadList.issue_threads_from_group(@group).paginate(page: params[:issue_threads_page])
     @issue_threads = ThreadListDecorator.decorate(issue_threads)
@@ -13,7 +13,7 @@ class Group::MessageThreadsController < MessageThreadsController
   end
 
   def new
-    @thread = @group.threads.build({privacy: @group.default_thread_privacy})
+    @thread = @group.threads.build(privacy: @group.default_thread_privacy)
     @message = @thread.messages.build
   end
 
@@ -24,7 +24,8 @@ class Group::MessageThreadsController < MessageThreadsController
     @message.created_by = current_user
 
     if @thread.save
-      @thread.subscriptions.create({user: current_user}, without_protection: true)
+
+      @thread.subscriptions.create({ user: current_user }, without_protection: true)
       ThreadSubscriber.subscribe_users(@thread)
       ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
 

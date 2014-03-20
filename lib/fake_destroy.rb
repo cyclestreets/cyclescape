@@ -1,8 +1,8 @@
 module FakeDestroy
   def self.included(base)
     base.instance_eval do
-      scope :active, where("deleted_at IS NULL")
-      scope :deleted, where("deleted_at IS NOT NULL")
+      scope :active, where('deleted_at IS NULL')
+      scope :deleted, where('deleted_at IS NOT NULL')
       alias_method_chain :destroy, :fake
     end
   end
@@ -17,7 +17,7 @@ module FakeDestroy
   end
 
   def deleted?
-    self.deleted_at
+    deleted_at
   end
 
   def undelete!

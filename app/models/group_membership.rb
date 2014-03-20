@@ -28,13 +28,13 @@ class GroupMembership < ActiveRecord::Base
   before_validation :invite_user_if_new
 
   validates :group_id, presence: true
-  validates :role, inclusion: {in: ALLOWED_ROLES}
+  validates :role, inclusion: { in: ALLOWED_ROLES }
   validates_associated :user
 
   accepts_nested_attributes_for :user
 
   def self.allowed_roles_map
-    ALLOWED_ROLES.map {|r| [I18n.t(".group_membership_roles.#{r.to_s}"), r] }
+    ALLOWED_ROLES.map { |r| [I18n.t(".group_membership_roles.#{r.to_s}"), r] }
   end
 
   def role=(val)
@@ -60,6 +60,6 @@ class GroupMembership < ActiveRecord::Base
   end
 
   def set_default_role
-    self.role ||= "member"
+    self.role ||= 'member'
   end
 end

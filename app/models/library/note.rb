@@ -13,7 +13,7 @@ class Library::Note < Library::Component
   attr_accessible :title, :body, :document, :library_document_id
 
   # Optional reference to a library document
-  belongs_to :document, class_name: "Library::Document", foreign_key: "library_document_id"
+  belongs_to :document, class_name: 'Library::Document', foreign_key: 'library_document_id'
 
   validates :body, presence: true
 
@@ -42,7 +42,7 @@ class Library::Note < Library::Component
   end
 
   def searchable_text
-    [body,read_attribute(:title)].join(" ")
+    [body, read_attribute(:title)].join(' ')
   end
 
   # For authorization rules - doing range detection on TimeWithZones

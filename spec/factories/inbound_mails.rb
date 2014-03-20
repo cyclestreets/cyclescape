@@ -16,8 +16,8 @@ FactoryGirl.define do
       to false
     end
 
-    recipient { to || "cyclescape@example.com" }
-    raw_message { File.read(raw_email_path("basic")) }
+    recipient { to || 'cyclescape@example.com' }
+    raw_message { File.read(raw_email_path('basic')) }
 
     after(:build) do |mail, proxy|
       if proxy.to
@@ -29,23 +29,23 @@ FactoryGirl.define do
     end
 
     trait :multipart_text_only do
-      raw_message { File.read(raw_email_path("qp_text_only_multipart"), encoding: "UTF-8") }
+      raw_message { File.read(raw_email_path('qp_text_only_multipart'), encoding: 'UTF-8') }
     end
 
     trait :multipart_iso_8859_1 do
-      raw_message { File.read(raw_email_path("qp_text_only_multipart_iso-8859-1")) }
+      raw_message { File.read(raw_email_path('qp_text_only_multipart_iso-8859-1')) }
     end
 
     trait :with_attached_image do
-      raw_message { File.read(raw_email_path("attached_image")) }
+      raw_message { File.read(raw_email_path('attached_image')) }
     end
 
     trait :with_attached_file do
-      raw_message { File.read(raw_email_path("attached_file")) }
+      raw_message { File.read(raw_email_path('attached_file')) }
     end
 
     trait :encoded_subject do
-      raw_message { File.read(raw_email_path("encoded_subject")) }
+      raw_message { File.read(raw_email_path('encoded_subject')) }
     end
   end
 end

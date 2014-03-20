@@ -26,7 +26,7 @@ class UserProfile < ActiveRecord::Base
   end
 
   def picture_thumbnail
-    picture.thumb("50x50>")
+    picture.thumb('50x50>')
   end
 
   def clear

@@ -21,6 +21,9 @@
           = link_to image_tag("header_logo.png", alt: t(".title")), root_path, id: "site-title"
         %ul#top-menu
           %li.about= link_to t(".title"), root_url(subdomain: "www"), class: "cyclescape-logo"
+          %li=link_to t(".about"), "http://blog.cyclescape.org/about/"
+          %li=link_to t(".user_guide"), "http://blog.cyclescape.org/guide/"
+          %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
           - if current_user
             %li.name= link_to_profile current_user
             %li.sign-out= link_to t(".sign_out"), destroy_user_session_path, method: "delete"
@@ -29,7 +32,6 @@
               %li= link_to t(".sign_up"), new_user_registration_path
             - if permitted_to? :create, :devise_sessions
               %li= link_to t(".sign_in"), new_user_session_path
-          %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
     #main-nav
       %nav.wrapper
         %ul#navigation(role="navigation")
