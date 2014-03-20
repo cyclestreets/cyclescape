@@ -17,12 +17,16 @@ describe UserPrefObserver do
   end
 
   context 'administrative discussions' do
+    let(:group_membership) { FactoryGirl.create(:group_membership) }
+    let(:group_thread) { FactoryGirl.create(:message_thread, group: group_membership.group) }
+    let(:group_issue_thread) { FactoryGirl.create(:issue_message_thread, group: group_membership.group) }
+    let(:group_private_thread) { FactoryGirl.create(:message_thread, group: group_membership.group, privacy: 'committee') }
+    let(:user) { group_membership.user }
+
     context 'when enabling pref' do
-      let(:group_membership) { FactoryGirl.create(:group_membership) }
-      let(:group_thread) { FactoryGirl.create(:message_thread, group: group_membership.group) }
-      let(:group_issue_thread) { FactoryGirl.create(:issue_message_thread, group: group_membership.group) }
-      let(:group_private_thread) { FactoryGirl.create(:message_thread, group: group_membership.group, privacy: 'committee') }
-      let(:user) { group_membership.user }
+      before do
+        user.prefs.update_column(:involve_my_groups_admin, false)
+      end
 
       it 'should subscribe to group administrative threads' do
         group_thread.subscribers.should_not include(user)
@@ -64,6 +68,34 @@ describe UserPrefObserver do
         end
         group_thread.reload
         group_thread.subscribers.should_not include(user)
+      end
+    end
+
+    context 'when disabling pref' do
+      before do
+        user.prefs.update_column(:involve_my_groups_admin, true)
+      end
+
+      it 'should unsubscribe you from administrative threads' do
+        group_thread.add_subscriber(user)
+        group_thread.subscribers.should include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_groups_admin = false
+          user.prefs.save
+        end
+        group_thread.reload
+        group_thread.subscribers.should_not include(user)
+      end
+
+      it 'should not unsubcribe you from issue threads' do
+        group_issue_thread.add_subscriber(user)
+        group_issue_thread.subscribers.should include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_groups_admin = false
+          user.prefs.save
+        end
+        group_issue_thread.reload
+        group_issue_thread.subscribers.should include(user)
       end
     end
   end
