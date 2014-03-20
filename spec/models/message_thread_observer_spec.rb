@@ -3,10 +3,10 @@ require 'spec_helper'
 describe MessageThreadObserver do
   subject { MessageThreadObserver.instance }
 
-  context "basic checks" do
+  context 'basic checks' do
     let(:thread) { FactoryGirl.build(:message_thread) }
 
-    it "should notice when MessageThreads are saved" do
+    it 'should notice when MessageThreads are saved' do
       subject.should_receive(:after_save)
 
       MessageThread.observers.enable :message_thread_observer do
@@ -15,33 +15,33 @@ describe MessageThreadObserver do
     end
   end
 
-  context "privacy" do
+  context 'privacy' do
     let(:user) { FactoryGirl.create(:user) }
     let(:membership) { FactoryGirl.create(:group_membership, group: thread.group) }
     let(:member) { membership.user }
-    let(:committee_membership) { FactoryGirl.create(:group_membership, group: thread.group, role: "committee") }
+    let(:committee_membership) { FactoryGirl.create(:group_membership, group: thread.group, role: 'committee') }
     let(:committee_member) { committee_membership.user }
 
-    context "from public" do
+    context 'from public' do
       let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group) }
 
-      context "to group" do
-        it "should unsubscribe non-group members" do
+      context 'to group' do
+        it 'should unsubscribe non-group members' do
           thread.add_subscriber(user)
           thread.subscribers.should include(user)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "group"
+            thread.privacy = 'group'
             thread.save
           end
           thread.reload
           thread.subscribers.should_not include(user)
         end
 
-        it "should leave group members subscribed" do
+        it 'should leave group members subscribed' do
           thread.add_subscriber(member)
           thread.subscribers.should include(member)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "group"
+            thread.privacy = 'group'
             thread.save
           end
           thread.reload
@@ -49,23 +49,23 @@ describe MessageThreadObserver do
         end
       end
 
-      context "to committee" do
-        it "should unsubscribe group members" do
+      context 'to committee' do
+        it 'should unsubscribe group members' do
           thread.add_subscriber(member)
           thread.subscribers.should include(member)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "committee"
+            thread.privacy = 'committee'
             thread.save
           end
           thread.reload
           thread.subscribers.should_not include(member)
         end
 
-        it "should leave committee members subscribed" do
+        it 'should leave committee members subscribed' do
           thread.add_subscriber(committee_member)
           thread.subscribers.should include(committee_member)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "committee"
+            thread.privacy = 'committee'
             thread.save
           end
           thread.reload
@@ -74,36 +74,36 @@ describe MessageThreadObserver do
       end
     end
 
-    context "from group private" do
+    context 'from group private' do
       let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :private) }
 
-      context "to public" do
-        it "should try subscribe people who might have access" do
+      context 'to public' do
+        it 'should try subscribe people who might have access' do
           ThreadSubscriber.should_receive(:subscribe_users).with(thread)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "public"
+            thread.privacy = 'public'
             thread.save
           end
         end
       end
 
-      context "to committee" do
-        it "should unsubscribe group members" do
+      context 'to committee' do
+        it 'should unsubscribe group members' do
           thread.add_subscriber(member)
           thread.subscribers.should include(member)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "committee"
+            thread.privacy = 'committee'
             thread.save
           end
           thread.reload
           thread.subscribers.should_not include(member)
         end
 
-        it "should leave committee members subscribed" do
+        it 'should leave committee members subscribed' do
           thread.add_subscriber(committee_member)
           thread.subscribers.should include(committee_member)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "committee"
+            thread.privacy = 'committee'
             thread.save
           end
           thread.reload
@@ -112,24 +112,24 @@ describe MessageThreadObserver do
       end
     end
 
-    context "from committee" do
+    context 'from committee' do
       let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :committee) }
 
-      context "to group" do
-        it "should attempt to subscribe group members" do
+      context 'to group' do
+        it 'should attempt to subscribe group members' do
           ThreadSubscriber.should_receive(:subscribe_users).with(thread)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "group"
+            thread.privacy = 'group'
             thread.save
           end
         end
       end
 
-      context "to public" do
-        it "should subscribe people with overlapping locations" do
+      context 'to public' do
+        it 'should subscribe people with overlapping locations' do
           ThreadSubscriber.should_receive(:subscribe_users).with(thread)
           MessageThread.observers.enable :message_thread_observer do
-            thread.privacy = "public"
+            thread.privacy = 'public'
             thread.save
           end
         end
@@ -137,14 +137,14 @@ describe MessageThreadObserver do
     end
   end
 
-  context "issue" do
-    context "added" do
+  context 'issue' do
+    context 'added' do
       let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group) }
       let(:private_thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :private) }
       let(:user_location) { FactoryGirl.create(:user_location) }
       let(:issue) { FactoryGirl.create(:issue, location: user_location.location) }
 
-      it "should subscribe people with overlapping locations" do
+      it 'should subscribe people with overlapping locations' do
         MessageThread.observers.enable :message_thread_observer do
           thread.issue = issue
           thread.save
@@ -163,12 +163,12 @@ describe MessageThreadObserver do
       end
     end
 
-    context "removed" do
+    context 'removed' do
       let(:user) { FactoryGirl.create(:user) }
       let(:thread) { FactoryGirl.create(:issue_message_thread) }
       let!(:subscription) { FactoryGirl.create(:thread_subscription, thread: thread, user: user) }
 
-      it "should remove people" do
+      it 'should remove people' do
         thread.subscribers.should include(user)
         MessageThread.observers.enable :message_thread_observer do
           thread.issue = nil
@@ -178,7 +178,7 @@ describe MessageThreadObserver do
         thread.subscribers.should_not include(user)
       end
 
-      it "should leave people subscribed if they have participated" do
+      it 'should leave people subscribed if they have participated' do
         m = FactoryGirl.create(:message, thread: thread, created_by: user)
         thread.subscribers.should include(user)
         thread.participants.should include(user)
@@ -190,7 +190,7 @@ describe MessageThreadObserver do
         thread.subscribers.should include(user)
       end
 
-      context "becomes group administrative thread" do
+      context 'becomes group administrative thread' do
         let(:thread) { FactoryGirl.create(:group_message_thread) }
         let(:group_membership) { FactoryGirl.create(:group_membership, group: thread.group) }
         let(:member) { group_membership.user }
@@ -201,7 +201,7 @@ describe MessageThreadObserver do
           member.save
         end
 
-        it "should leave people subscribed if they have their administrative pref set" do
+        it 'should leave people subscribed if they have their administrative pref set' do
           MessageThread.observers.enable :message_thread_observer do
             thread.issue = nil
             thread.save
@@ -212,19 +212,19 @@ describe MessageThreadObserver do
       end
     end
 
-    context "changed" do
-      it "should not remove and then add the same person again"
+    context 'changed' do
+      it 'should not remove and then add the same person again'
     end
   end
 
-  context "group" do
-    context "added" do
-      it "should subscribe people with group preference set"
+  context 'group' do
+    context 'added' do
+      it 'should subscribe people with group preference set'
     end
 
-    context "removed" do
-      it "should leave people subscribed if they have participated"
-      it "should remove people"
+    context 'removed' do
+      it 'should leave people subscribed if they have participated'
+      it 'should remove people'
     end
   end
 end

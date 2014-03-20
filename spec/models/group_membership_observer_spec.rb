@@ -64,14 +64,14 @@ describe GroupMembershipObserver do
     end
   end
 
-  context "joining group" do
+  context 'joining group' do
     let(:thread) { FactoryGirl.create(:group_message_thread, :belongs_to_issue) }
     let(:group_membership) { FactoryGirl.build(:group_membership, group: thread.group) }
     let(:user) { group_membership.user }
     let(:private_thread) { FactoryGirl.create(:group_private_message_thread, :belongs_to_issue) }
 
-    it "should subscribe the user to any group threads" do
-      user.prefs.update_column(:involve_my_groups, "subscribe")
+    it 'should subscribe the user to any group threads' do
+      user.prefs.update_column(:involve_my_groups, 'subscribe')
       thread.subscribers.should_not include(user)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.save
@@ -80,8 +80,8 @@ describe GroupMembershipObserver do
       thread.subscribers.should include(user)
     end
 
-    it "should not subscribe normal members to committee threads" do
-      user.prefs.update_column(:involve_my_groups, "subscribe")
+    it 'should not subscribe normal members to committee threads' do
+      user.prefs.update_column(:involve_my_groups, 'subscribe')
       private_thread.subscribers.should_not include(user)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.save
@@ -90,7 +90,7 @@ describe GroupMembershipObserver do
       private_thread.subscribers.should_not include(user)
     end
 
-    it "should not subscribe without the correct pref" do
+    it 'should not subscribe without the correct pref' do
       thread.subscribers.should_not include(user)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.save
@@ -99,10 +99,10 @@ describe GroupMembershipObserver do
       thread.subscribers.should_not include(user)
     end
 
-    context "admin threads" do
+    context 'admin threads' do
       let(:thread) { FactoryGirl.create(:group_message_thread) }
 
-      it "should subscribe to thread with pref set" do
+      it 'should subscribe to thread with pref set' do
         user.prefs.update_column(:involve_my_groups_admin, true)
         thread.subscribers.should_not include(user)
         GroupMembership.observers.enable :group_membership_observer do
@@ -114,14 +114,14 @@ describe GroupMembershipObserver do
     end
   end
 
-  context "leaving group" do
+  context 'leaving group' do
     let(:group_membership) { FactoryGirl.create(:group_membership, group: thread.group) }
     let(:user) { group_membership.user }
 
-    context "committee threads" do
+    context 'committee threads' do
       let(:thread) { FactoryGirl.create(:group_message_thread, :committee) }
 
-      it "should unsubscribe you" do
+      it 'should unsubscribe you' do
         thread.add_subscriber(user)
         thread.subscribers.should include(user)
         GroupMembership.observers.enable :group_membership_observer do
@@ -132,10 +132,10 @@ describe GroupMembershipObserver do
       end
     end
 
-    context "private threads" do
+    context 'private threads' do
       let(:thread) { FactoryGirl.create(:group_message_thread, :private) }
 
-      it "should unsubscribe you" do
+      it 'should unsubscribe you' do
         thread.add_subscriber(user)
         thread.subscribers.should include(user)
         GroupMembership.observers.enable :group_membership_observer do
@@ -146,9 +146,9 @@ describe GroupMembershipObserver do
       end
     end
 
-    context "public threads" do
+    context 'public threads' do
       let(:thread) { FactoryGirl.create(:group_message_thread) }
-      it "should leave you subscribed to group public threads" do
+      it 'should leave you subscribed to group public threads' do
         thread.add_subscriber(user)
         thread.subscribers.should include(user)
         GroupMembership.observers.enable :group_membership_observer do

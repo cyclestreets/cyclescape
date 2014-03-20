@@ -12,12 +12,12 @@ class ThreadSubscriber
   def self.subscribe_group_users(thread)
     # If it's an "administrative" discussion, don't subscribe without extra pref
     t = UserPref.arel_table
-    pref = t[:involve_my_groups].eq("subscribe")
+    pref = t[:involve_my_groups].eq('subscribe')
     constraint = thread.issue ? pref : pref.and(t[:involve_my_groups_admin].eq(true))
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
-      if Authorization::Engine.instance.permit? :show, { object: thread, user: member, user_roles: [:member, :guest] }
-        thread.subscriptions.create({user: member}, without_protection: true) unless member.subscribed_to_thread?(thread)
+      if Authorization::Engine.instance.permit? :show,  object: thread, user: member, user_roles: [:member, :guest]
+        thread.subscriptions.create({ user: member }, without_protection: true) unless member.subscribed_to_thread?(thread)
       end
     end
   end
@@ -26,13 +26,13 @@ class ThreadSubscriber
     buffered_location = thread.issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
     locations = UserLocation.intersects(buffered_location).
-        joins(:user => :prefs).
-        where(user_prefs: {involve_my_locations: "subscribe"}).
+        joins(user: :prefs).
+        where(user_prefs: { involve_my_locations: 'subscribe' }).
         all
 
     locations.each do |loc|
-      if Authorization::Engine.instance.permit? :show, { object: thread, user: loc.user, user_roles: [:member, :guest] }
-        thread.subscriptions.create({user: loc.user}, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
+      if Authorization::Engine.instance.permit? :show,  object: thread, user: loc.user, user_roles: [:member, :guest]
+        thread.subscriptions.create({ user: loc.user }, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
       end
     end
   end
