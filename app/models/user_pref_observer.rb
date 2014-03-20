@@ -18,6 +18,19 @@ class UserPrefObserver < ActiveRecord::Observer
         end
       end
     end
+
+    if pref.involve_my_groups_changed?
+      if pref.involve_my_groups == 'subscribe'
+        user = pref.user
+        user.groups.each do |group|
+          group.threads.with_issue.each do |thread|
+            if permissions_check(user, thread) && !user.ever_subscribed_to_thread?(thread)
+              thread.add_subscriber(user)
+            end
+          end
+        end
+      end
+    end
   end
 
   def permissions_check(user, thread)

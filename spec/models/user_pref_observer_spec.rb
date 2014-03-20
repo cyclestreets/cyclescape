@@ -99,4 +99,60 @@ describe UserPrefObserver do
       end
     end
   end
+
+  context 'involve my group issue discussions' do
+    let(:group_membership) { FactoryGirl.create(:group_membership) }
+    let(:group_thread) { FactoryGirl.create(:message_thread, group: group_membership.group) }
+    let(:group_issue_thread) { FactoryGirl.create(:issue_message_thread, group: group_membership.group) }
+    let(:group_private_thread) { FactoryGirl.create(:issue_message_thread, group: group_membership.group, privacy: 'committee') }
+    let(:user) { group_membership.user }
+
+    context 'when preference becomes subscribe' do
+      before do
+        user.prefs.update_column(:involve_my_groups, 'none')
+      end
+
+      it 'should not subscribe to group administrative threads' do
+        group_thread.subscribers.should_not include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_groups = 'subscribe'
+          user.prefs.save
+        end
+        group_thread.reload
+        group_thread.subscribers.should_not include(user)
+      end
+
+      it 'should subscribe to issue threads' do
+        group_issue_thread.subscribers.should_not include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_groups = 'subscribe'
+          user.prefs.save
+        end
+        group_issue_thread.reload
+        group_issue_thread.subscribers.should include(user)
+      end
+
+      it 'should not subscribe to issue threads if user has no permissions' do
+        group_private_thread.subscribers.should_not include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_groups = 'subscribe'
+          user.prefs.save
+        end
+        group_private_thread.reload
+        group_private_thread.subscribers.should_not include(user)
+      end
+
+      it 'should not subscribe to threads that have been previously unsubscribed' do
+        group_issue_thread.add_subscriber(user)
+        user.thread_subscriptions.to(group_issue_thread).destroy
+        group_issue_thread.subscribers.should_not include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_groups = 'subscribe'
+          user.prefs.save
+        end
+        group_issue_thread.reload
+        group_issue_thread.subscribers.should_not include(user)
+      end
+    end
+  end
 end
