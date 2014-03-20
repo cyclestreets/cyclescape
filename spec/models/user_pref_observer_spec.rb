@@ -202,4 +202,76 @@ describe UserPrefObserver do
       end
     end
   end
+
+  context 'involve my locations discussions' do
+    let(:issue_thread) { FactoryGirl.create(:issue_message_thread) }
+    let(:user_location) { FactoryGirl.create(:user_location, location: issue_thread.issue.location) }
+    let(:user) { user_location.user }
+
+    context 'when pref becomes subscribe' do
+      before do
+        user.prefs.update_column(:involve_my_locations, 'none') # could be 'notify' too
+      end
+
+      it 'should subscribe you to overlapping threads' do
+        issue_thread.subscribers.should_not include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_locations = 'subscribe'
+          user.prefs.save
+        end
+        issue_thread.reload
+        issue_thread.subscribers.should include(user)
+      end
+
+      it 'should not subscribe you to private threads' do
+        issue_thread.update_column(:privacy, 'private')
+        issue_thread.subscribers.should_not include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_locations = 'subscribe'
+          user.prefs.save
+        end
+        issue_thread.reload
+        issue_thread.subscribers.should_not include(user)
+      end
+    end
+
+    context 'when pref is no longer subscribe' do
+      before do
+        user.prefs.update_column(:involve_my_locations, 'subscribe')
+      end
+
+      it 'should unsubscribe from threads' do
+        issue_thread.add_subscriber(user)
+        issue_thread.subscribers.should include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_locations = 'none'
+          user.prefs.save
+        end
+        issue_thread.reload
+        issue_thread.subscribers.should_not include(user)
+      end
+
+      context 'when involve by groups is subscribe' do
+        let(:group_membership) { FactoryGirl.create(:group_membership, user: user) }
+
+        before do
+          user.prefs.update_column(:involve_my_groups, 'subscribe')
+          issue_thread.group = group_membership.group
+          issue_thread.save
+        end
+
+        it 'should not unsubscribe from group threads' do
+          issue_thread.add_subscriber(user)
+          user.groups.should include(issue_thread.group)
+          issue_thread.subscribers.should include(user)
+          UserPref.observers.enable :user_pref_observer do
+            user.prefs.involve_my_locations = 'none'
+            user.prefs.save
+          end
+          issue_thread.reload
+          issue_thread.subscribers.should include(user)
+        end
+      end
+    end
+  end
 end
