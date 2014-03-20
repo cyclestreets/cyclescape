@@ -811,7 +811,6 @@
       index:
         add_first_location: "add your first location"
         all_my_locations: "All my locations"
-        catch_up_guidance_html: "To catch up on existing discussions, you can %{subscribe_existing_link} in these areas."
         category: "Category"
         combined_locations: "Combined locations"
         combined_locations_guidance: "This map shows all of your locations combined together. We use this to help figure out which issues are relevant to you, and which groups you might be interested in."
@@ -830,7 +829,6 @@
         no_locations_guidance2_html: "To get started, you can %{first_location_link}."
         no_overlapping_groups: "No Overlapping Groups"
         overlapping_groups: "Overlapping Groups"
-        subscribe_existing_threads: "follow all existing threads"
       new:
         new_location: "Add a new location"
         introduction: "By setting a location, this helps us figure out which issues are relevant to you."

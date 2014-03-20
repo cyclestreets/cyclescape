@@ -20,8 +20,6 @@
           = t ".combined_locations_guidance_notify_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
         - when "subscribe"
           = t ".combined_locations_guidance_subscribe_html", edit_prefs_link: link_to(t(".edit_your_prefs"), edit_user_prefs_path(current_user))
-        = t ".catch_up_guidance_html",
-            subscribe_existing_link: link_to(t(".subscribe_existing_threads"), subscribe_to_threads_user_locations_path, method: :post)
     %section.list
       %h2= t ".all_my_locations"
       %table
