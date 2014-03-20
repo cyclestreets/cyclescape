@@ -12,6 +12,28 @@ class UserLocationObserver < ActiveRecord::Observer
     end
   end
 
+  def after_destroy(user_location)
+    user = user_location.user
+    if user.prefs.involve_my_locations == 'subscribe'
+      Issue.intersects(user_location.location).each do |issue|
+        issue.threads.each do |thread|
+          if user.subscribed_to_thread?(thread)
+            unless ( user.prefs.involve_my_locations == 'subscribe' &&
+                     user.buffered_locations &&
+                     thread.issue.location.intersects?(user.buffered_locations)
+                   ) || (
+                     thread.group &&
+                     thread.group.members.include?(user) &&
+                     user.prefs.involve_my_groups == 'subscribe'
+                   )
+              user.thread_subscriptions.to(thread).destroy
+            end
+          end
+        end
+      end
+    end
+  end
+
   private
 
   def permissions_check(user, thread)

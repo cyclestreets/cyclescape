@@ -64,4 +64,57 @@ describe UserLocationObserver do
       end
     end
   end
+
+  context 'destroying a location' do
+    let(:issue) { FactoryGirl.create(:issue) }
+    let!(:thread) { FactoryGirl.create(:issue_message_thread, issue: issue) }
+    let(:user_location) { FactoryGirl.create(:user_location, location: issue.location) }
+    let(:user) { user_location.user }
+
+    before do
+      user.prefs.update_column(:involve_my_locations, 'subscribe')
+      thread.add_subscriber(user)
+    end
+
+    it 'should remove subscription' do
+      thread.subscribers.should include(user)
+      UserLocation.observers.enable :user_location_observer do
+        user_location.destroy
+      end
+      thread.reload
+      thread.subscribers.should_not include(user)
+    end
+
+    context 'with another overlapping location' do
+      let!(:user_location2) { FactoryGirl.create(:user_location, user: user, location: issue.location) }
+
+      it 'should not remove subscription' do
+        thread.subscribers.should include(user)
+        UserLocation.observers.enable :user_location_observer do
+          user_location.destroy
+        end
+        thread.reload
+        thread.subscribers.should include(user)
+      end
+    end
+
+    context 'with a group thread and involve_my_groups set to subscribe' do
+      let!(:group_membership) { FactoryGirl.create(:group_membership, user: user) }
+
+      before do
+        thread.group = group_membership.group
+        thread.save
+        user.prefs.update_column(:involve_my_groups, 'subscribe')
+      end
+
+      it 'should not remove subscription' do
+        thread.subscribers.should include(user)
+        UserLocation.observers.enable :user_location_observer do
+          user_location.destroy
+        end
+        thread.reload
+        thread.subscribers.should include(user)
+      end
+    end
+  end
 end
