@@ -109,7 +109,7 @@ describe UserPrefObserver do
 
     context 'when preference becomes subscribe' do
       before do
-        user.prefs.update_column(:involve_my_groups, 'none')
+        user.prefs.update_column(:involve_my_groups, 'none') # could be 'notify' too
       end
 
       it 'should not subscribe to group administrative threads' do
@@ -152,6 +152,53 @@ describe UserPrefObserver do
         end
         group_issue_thread.reload
         group_issue_thread.subscribers.should_not include(user)
+      end
+    end
+
+    context 'when preference is no longer subscribe' do
+      before do
+        user.prefs.update_column(:involve_my_groups, 'subscribe')
+      end
+
+      it 'should unsubscribe from issue threads' do
+        group_issue_thread.add_subscriber(user)
+        group_issue_thread.subscribers.should include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_groups = 'none'
+          user.prefs.save
+        end
+        group_issue_thread.reload
+        group_issue_thread.subscribers.should_not include(user)
+      end
+
+      it 'should not unsubcribe from administrative threads' do
+        group_thread.add_subscriber(user)
+        group_thread.subscribers.should include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_groups = 'none'
+          user.prefs.save
+        end
+        group_thread.reload
+        group_thread.subscribers.should include(user)
+      end
+
+      context 'when involve my locations is subscribe' do
+        let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: group_issue_thread.issue.location) }
+
+        before do
+          user.prefs.update_column(:involve_my_locations, 'subscribe')
+        end
+
+        it 'should not unsubscribe from issue in user locations' do
+          group_issue_thread.add_subscriber(user)
+          group_issue_thread.subscribers.should include(user)
+          UserPref.observers.enable :user_pref_observer do
+            user.prefs.involve_my_groups = 'none'
+            user.prefs.save
+          end
+          group_issue_thread.reload
+          group_issue_thread.subscribers.should include(user)
+        end
       end
     end
   end
