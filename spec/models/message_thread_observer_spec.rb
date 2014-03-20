@@ -179,7 +179,7 @@ describe MessageThreadObserver do
       end
 
       it 'should leave people subscribed if they have participated' do
-        m = FactoryGirl.create(:message, thread: thread, created_by: user)
+        FactoryGirl.create(:message, thread: thread, created_by: user)
         thread.subscribers.should include(user)
         thread.participants.should include(user)
         MessageThread.observers.enable :message_thread_observer do
