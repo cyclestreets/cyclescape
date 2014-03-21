@@ -24,4 +24,39 @@ class GroupMembershipObserver < ActiveRecord::Observer
       end
     end
   end
+
+  def after_create(group_membership)
+    user = group_membership.user
+    group = group_membership.group
+    if user.prefs.involve_my_groups == 'subscribe'
+      group.threads.each do |thread|
+        if permissions_check(user, thread) && thread.has_issue? && !user.ever_subscribed_to_thread?(thread)
+          thread.add_subscriber(user)
+        end
+      end
+    end
+
+    if user.prefs.involve_my_groups_admin == true
+      group.threads.each do |thread|
+        if permissions_check(user, thread) && !thread.has_issue? && !user.ever_subscribed_to_thread?(thread)
+          thread.add_subscriber(user)
+        end
+      end
+    end
+  end
+
+  def after_destroy(group_membership)
+    user = group_membership.user
+    group = group_membership.group
+    user.subscribed_threads.where(group_id: group.id, privacy: ['committee', 'group']).each do |thread|
+      subscription = user.thread_subscriptions.to(thread)
+      subscription.destroy if subscription
+    end
+  end
+
+  private
+
+  def permissions_check(user, thread)
+    Authorization::Engine.instance.permit? :show, { object: thread, user: user, user_roles: [:member, :guest] }
+  end
 end
