@@ -26,7 +26,7 @@ describe 'Group memberships admin' do
         choose 'Member'
         fill_in 'Full name', with: 'Brian Griffin'
         fill_in 'Email', with: 'briang@example.com'
-        click_button 'Invite member'
+        click_button 'Add member'
         User.find_by_email('briang@example.com').should be_true
         email = open_email 'briang@example.com'
         email.subject.should =~ /Invitation/
@@ -34,7 +34,7 @@ describe 'Group memberships admin' do
 
       it 'should display an error if a name is not given' do
         choose 'Member'
-        click_button 'Invite member'
+        click_button 'Add member'
         page.should have_content('Please enter a name')
       end
 
@@ -44,7 +44,7 @@ describe 'Group memberships admin' do
         it 'should use an existing user if present' do
           choose 'Member'
           fill_in 'Email', with: new_member.email
-          click_button 'Invite member'
+          click_button 'Add member'
           User.find_by_email(new_member.email).groups.should include(group)
         end
       end
