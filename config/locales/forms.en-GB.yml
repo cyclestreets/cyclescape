@@ -76,8 +76,9 @@
       group:
         short_name: "Must be lower-case alphanumeric; a-z, 0-9"
       group_membership:
+        email: "Please enter their email. If this matches an existing Cyclescape account they will be added to the group immediately. Otherwise an invitation to join Cyclescape will be sent to this address."
+        full_name: "Please enter their name; they can change this later."
         role: "Select if they are a normal or committee member of the group."
-        full_name: "Please enter their name; they can change this when they accept the invite."
       group_membership_request:
         message: "You can optionally send the group administrators any additional information you feel is appropriate, such as a group membership number."
       group_pref:
@@ -106,7 +107,7 @@
       document_message:
         create: "Add Attachment"
       group_membership:
-        create: "Invite member"
+        create: "Add member"
       group_membership_request:
         create: "Request Group Membership"
       issue:

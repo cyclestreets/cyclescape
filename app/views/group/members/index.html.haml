@@ -5,7 +5,7 @@
 %p= t ".group_members_guidance"
 %p= t ".new_members_guidance_introduction"
 %ul.bullets
-  %li= t ".new_members_guidance_method1_html", invite_directly_link: link_to(t(".invite_directly"), new_group_membership_path)
+  %li= t ".new_members_guidance_method1_html", add_directly_link: link_to(t(".add_directly"), new_group_membership_path)
   %li= t ".new_members_guidance_method2_html"
 
 
@@ -22,6 +22,7 @@
     %thead
       %th= t ".member_name"
       %th= t ".email"
+      %th= t ".group_joining_date"
       %th{:colspan => 2}= t ".actions"
     %tbody
       = render partial: "member", collection: @committee
@@ -33,6 +34,7 @@
     %thead
       %th= t ".member_name"
       %th= t ".email"
+      %th= t ".group_joining_date"
       %th{:colspan => 2}= t ".actions"
     %tbody
       = render partial: "member", collection: @members

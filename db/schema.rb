@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131206112436) do
+ActiveRecord::Schema.define(:version => 20140326164405) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(:version => 20131206112436) do
     t.text     "context_data"
     t.datetime "created_at",   :null => false
     t.datetime "viewed_at"
+    t.datetime "deleted_at"
   end
 
   create_table "tags", :force => true do |t|

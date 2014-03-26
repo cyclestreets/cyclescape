@@ -78,7 +78,7 @@ describe 'Group Membership Requests' do
         @credentials = FactoryGirl.attributes_for(:user)
         fill_in 'Full name', with: @credentials[:full_name]
         fill_in 'Email', with: @credentials[:email]
-        click_on 'Invite member'
+        click_on 'Add member'
         click_on 'Sign out'
       end
 

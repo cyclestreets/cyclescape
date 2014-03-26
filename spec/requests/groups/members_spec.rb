@@ -39,7 +39,7 @@ describe 'Group members' do
       end
 
       it 'should have a link to create a new member' do
-        find_link('you can invite them directly').should be_visible
+        find_link('you can add them directly').should be_visible
       end
 
       it 'should let you review the membership request history' do

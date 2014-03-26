@@ -36,7 +36,7 @@
               = render partial: "issues/compact", collection: @recent_issues, as: :issue
 
 %aside#sidebar
-  - if current_user && !@group.members.include?(current_user)
+  - unless current_user && @group.members.include?(current_user)
     %section.group-homepage-join
       %h2= t ".join_title"
       = render partial: "join", locals: {group: @group}

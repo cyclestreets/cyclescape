@@ -178,18 +178,19 @@
     members:
       index:
         actions: "Actions"
+        add_directly: "you can add them directly"
         committee: "Committee members"
         committee_guidance: "Committee members can manage the group membership list, change the group's profile and update group thread information."
         email: "E-mail address"
-        group_members_guidance: "On this page you can view the existing members of your group, invite new people and remove members from the group."
-        invite_directly: "you can invite them directly"
+        group_joining_date: "Group joining date"
+        group_members_guidance: "On this page you can view the existing members of your group, add new people and remove members from the group."
         member_name: "Member name"
         ordinary_members: "Ordinary members"
         new_members_guidance_introduction: "To add a member:"
-        new_members_guidance_method1_html: "If you know their email address, %{invite_directly_link}"
+        new_members_guidance_method1_html: "If you know their email address, %{add_directly_link}."
         new_members_guidance_method2_html: "If they are already using Cyclescape, click on their name from within a discussion thread, and you can add them from their user profile page."
         ordinary_members_guidance: "Ordinary members get access to your private group threads, and can create new group threads."
-        pending_requests: "Pending requests"
+        pending_requests: "Pending membership requests"
         review_membership_requests_html: "Users of the site can also apply to join this group. You can %{review_membership_requests_link}."
         review_pending: "pending membership requests"
         review_requests: "review the requests history"
@@ -199,9 +200,11 @@
         confirm: "Are you sure?"
         delete: "Remove from group"
         edit: "Edit membership"
+        joining_date: "%{time_ago} ago"
+        invite_pending: "Invite pending"
     memberships:
       new:
-        title: "Invite New Member"
+        title: "Add new member"
       destroy:
         failure: "Couldn't remove member from group"
         success: "Member removed from group"
@@ -522,6 +525,8 @@
         success: "Library Note Updated"
   mailers:
     notifications:
+      added_to_group:
+        subject: "You are now a member of the Cyclescape group for %{group_name}"
       gmr_confirmed:
         subject: "You are now a member of the Cyclescape group for %{group_name}"
       new_gmr:
@@ -688,7 +693,7 @@
       explain_library_item: "Explain how this library item relates to the discussion thread"
       view_document: "View Document"
       add_to_thread: "Add to thread"
-      search_issues: "Search issues"
+      search_library: "Search library"
       deadline_message: "Deadline/date"
       document_message: "Attachment"
       library_item_message: "Library"
