@@ -693,7 +693,7 @@
       explain_library_item: "Explain how this library item relates to the discussion thread"
       view_document: "View Document"
       add_to_thread: "Add to thread"
-      search_issues: "Search issues"
+      search_library: "Search library"
       deadline_message: "Deadline/date"
       document_message: "Attachment"
       library_item_message: "Library"

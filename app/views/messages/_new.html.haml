@@ -57,8 +57,8 @@
           .listing
             = form_tag search_library_path(format: :json), {method: :get, class: "library-search filters", target: "#library-results"} do
               .search-box
-                = label_tag :query, t(".search_issues")
-                = text_field_tag :query, nil, placeholder: t(".search_issues")
+                = label_tag :query, t(".search_library")
+                = text_field_tag :query, nil, placeholder: t(".search_library")
               %button{:type => "submit"}
                 = t ".go"
               %span.nub
