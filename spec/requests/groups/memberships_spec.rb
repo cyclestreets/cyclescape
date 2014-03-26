@@ -65,14 +65,32 @@ describe 'Group memberships admin' do
     end
 
     context 'create' do
-      it 'should create a new group member and send an invitation email' do
-        choose 'Member'
-        fill_in 'Full name', with: 'Meg Griffin'
-        fill_in 'Email', with: 'meg@example.com'
-        click_button 'Invite member'
-        User.find_by_email('meg@example.com').should be_true
-        email = open_email 'meg@example.com'
-        email.subject.should =~ /Invitation/
+      context 'for unregistered users'
+        it 'should create a new group member and send an invitation email' do
+          choose 'Member'
+          fill_in 'Full name', with: 'Meg Griffin'
+          fill_in 'Email', with: 'meg@example.com'
+          click_button 'Add member'
+          User.find_by_email('meg@example.com').should be_true
+          email = open_email 'meg@example.com'
+          email.subject.should =~ /Invitation/
+
+          # Ensure they only get one invitation email and not e.g. added to group email
+          all_emails.count.should eql(1)
+        end
+
+      context 'for existing users' do
+        let(:new_member) { FactoryGirl.create(:user) }
+
+        it 'should send a confirmation email' do
+          choose 'Member'
+          fill_in 'Email', with: new_member.email
+          click_button 'Add member'
+          email = open_email new_member.email
+          email.subject.should =~ /You are now a member/
+
+          all_emails.count.should eql(1)
+        end
       end
     end
 

@@ -24,6 +24,14 @@ class Notifications < ActionMailer::Base
     end
   end
 
+  # Send a notification to a user that they have been added to a group
+  def added_to_group(membership)
+    @member = membership.user
+    @group = membership.group
+    mail(to: @member.name_with_email,
+         subject: t('.mailers.notifications.added_to_group.subject', group_name: @group.name))
+  end
+
   # Send notification to member that thread has been created
   def new_group_thread(thread, member)
     @thread = thread

@@ -525,6 +525,8 @@
         success: "Library Note Updated"
   mailers:
     notifications:
+      added_to_group:
+        subject: "You are now a member of the Cyclescape group for %{group_name}"
       gmr_confirmed:
         subject: "You are now a member of the Cyclescape group for %{group_name}"
       new_gmr:
