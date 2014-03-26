@@ -57,4 +57,18 @@ describe SiteComment do
       subject.viewed?.should be_true
     end
   end
+
+  context 'deleting' do
+    subject { FactoryGirl.create(:site_comment) }
+
+    it 'should appear to be destroyed' do
+      subject.destroy
+      SiteComment.all.should be_empty
+    end
+
+    it 'should not actually be deleted' do
+      subject.destroy
+      SiteComment.with_deleted.length.should eql(1)
+    end
+  end
 end

@@ -15,6 +15,7 @@
 
 class SiteComment < ActiveRecord::Base
   attr_accessible :name, :email, :body, :context_url, :context_data
+  acts_as_paranoid
 
   belongs_to :user
 
