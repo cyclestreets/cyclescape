@@ -14,7 +14,7 @@ describe Message::LibraryItemsController do
       post :create, library_item_message: { library_item_id: library_item.id },
                     message: { body: 'this is a useful item' },
                     thread_id: thread.id
-      response.status.should be(200)
+      response.status.should be(302)
     end
   end
 end
