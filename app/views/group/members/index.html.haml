@@ -22,6 +22,7 @@
     %thead
       %th= t ".member_name"
       %th= t ".email"
+      %th= t ".group_joining_date"
       %th{:colspan => 2}= t ".actions"
     %tbody
       = render partial: "member", collection: @committee
@@ -33,6 +34,7 @@
     %thead
       %th= t ".member_name"
       %th= t ".email"
+      %th= t ".group_joining_date"
       %th{:colspan => 2}= t ".actions"
     %tbody
       = render partial: "member", collection: @members

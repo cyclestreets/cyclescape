@@ -199,6 +199,8 @@
         confirm: "Are you sure?"
         delete: "Remove from group"
         edit: "Edit membership"
+        joining_date: "%{time_ago} ago"
+        invite_pending: "Invite pending"
     memberships:
       new:
         title: "Invite New Member"

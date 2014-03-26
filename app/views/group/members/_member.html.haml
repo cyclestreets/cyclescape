@@ -9,5 +9,10 @@
       = member.name
   %td= auto_link member.email
   %td
+    - if member.accepted_or_not_invited?
+      = t ".joining_date", time_ago: time_ago_in_words(@group.membership_for(member).created_at)
+    - else
+      = t ".invite_pending"
+  %td
     = link_to t(".edit"), edit_group_membership_path(@group, @group.membership_for(member))
   %td= link_to t(".delete"), group_membership_path(@group, @group.membership_for(member)), data: { confirm: t(".confirm") }, method: :delete
