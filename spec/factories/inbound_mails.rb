@@ -47,5 +47,9 @@ FactoryGirl.define do
     trait :encoded_subject do
       raw_message { File.read(raw_email_path('encoded_subject')) }
     end
+
+    trait :reply_below_quote do
+      raw_message { File.read(raw_email_path('reply_below_quote')) }
+    end
   end
 end

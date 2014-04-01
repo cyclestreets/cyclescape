@@ -53,7 +53,7 @@ describe InboundMailProcessor do
 
       it 'should have the same text as the email text part' do
         message_body = thread.messages.first.body
-        message_body.should == "\nOn Tue, 20 Dec 2011, Cyclescape wrote:\n\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do and\n> how much that would cost. I therefore think that we do need to push for\n> cycle infrastructure along the A14 as a way of allowing them to justify\n> not widening the road quiet so much.\nI think the £20m is actually to implement things though, not a feasibility\nstudy. The current consultation seems to be about asking people what the\n£20m should be spent on:\n\nhttp://www.dft.gov.uk/consultations/dft-20111212\n\n\"schemes delivered over the next two years\"\n"
+        message_body.should == "\nOn Tue, 20 Dec 2011, Cyclescape wrote:\n\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do and\n> how much that would cost. I therefore think that we do need to push for\n> cycle infrastructure along the A14 as a way of allowing them to justify\n> not widening the road quiet so much.\n\nI think the £20m is actually to implement things though, not a feasibility\nstudy. The current consultation seems to be about asking people what the\n£20m should be spent on:\n\nhttp://www.dft.gov.uk/consultations/dft-20111212\n\n\"schemes delivered over the next two years\"\n"
       end
     end
 
@@ -70,7 +70,7 @@ describe InboundMailProcessor do
 
       it 'should have the same text as the email text part' do
         message_body = thread.messages.first.body
-        message_body.should == "\nOn Tue, 20 Dec 2011, Cyclescape wrote:\n\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do and\n> how much that would cost. I therefore think that we do need to push for\n> cycle infrastructure along the A14 as a way of allowing them to justify\n> not widening the road quiet so much.\nI think the £20m is actually to implement things though, not a feasibility\nstudy. The current consultation seems to be about asking people what the\n£20m should be spent on:\n\nhttp://www.dft.gov.uk/consultations/dft-20111212\n\n\"schemes delivered over the next two years\"\n"
+        message_body.should == "\nOn Tue, 20 Dec 2011, Cyclescape wrote:\n\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do and\n> how much that would cost. I therefore think that we do need to push for\n> cycle infrastructure along the A14 as a way of allowing them to justify\n> not widening the road quiet so much.\n\nI think the £20m is actually to implement things though, not a feasibility\nstudy. The current consultation seems to be about asking people what the\n£20m should be spent on:\n\nhttp://www.dft.gov.uk/consultations/dft-20111212\n\n\"schemes delivered over the next two years\"\n"
       end
     end
 
@@ -155,6 +155,19 @@ describe InboundMailProcessor do
 
       it 'should work without throwing an encoding error' do
         thread.should have(1).message
+      end
+    end
+
+    context 'with a reply below a quote' do
+      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :reply_below_quote, to: email_recipient) }
+
+      before do
+        subject.perform(inbound_mail.id)
+      end
+
+      it "should preserve the blank line between quote and reply" do
+        message_body = thread.messages[0].body
+        message_body.should eql("On Tue, 20 Dec 2011, Cyclescape wrote:\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do\n\nI believe this is the case too\n\nAndy\n")
       end
     end
   end

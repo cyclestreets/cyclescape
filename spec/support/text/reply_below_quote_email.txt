@@ -1,0 +1,25 @@
+Return-Path: <andrew@example.com>
+Delivered-To: cyclescape@example.com
+Received: from spool.mail.gandi.net (mspool2-d.mgt.gandi.net [10.0.21.133])
+  by nmboxes13-d.mgt.gandi.net (Postfix) with ESMTP id EB8C5185424
+  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:13 +0100 (CET)
+Message-ID: <4EC53870.4060300@avito.co.uk>
+Date: Thu, 17 Nov 2011 16:38:08 +0000
+From: Andrew France <andrew@example.com>
+Organization: Avito
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:8.0) Gecko/20111105 Thunderbird/8.0
+MIME-Version: 1.0
+To: cyclescape@example.com
+Subject: Cupcakes
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
+
+
+On Tue, 20 Dec 2011, Cyclescape wrote:
+> Robin Bird added a message to the thread.
+>
+> I believe the idea is that 20m will be used to work out what to do
+
+I believe this is the case too
+
+Andy
