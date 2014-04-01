@@ -54,6 +54,6 @@ module ApplicationHelper
   end
 
   def time_tag_with_title(date_or_time, &block)
-    time_tag(date_or_time, title: l(date_or_time), &block)
+    time_tag(date_or_time, title: l(date_or_time, format: :long), &block)
   end
 end
