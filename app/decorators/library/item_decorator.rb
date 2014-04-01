@@ -12,7 +12,7 @@ class Library::ItemDecorator < ApplicationDecorator
   end
 
   def created_at
-    h.content_tag(:time, datetime: item.created_at, title: item.created_at.to_s(:long)) do
+    h.time_tag_with_title(item.created_at) do
       h.t('libraries.show.item_created', time_ago: h.time_ago_in_words(item.created_at))
     end
   end
