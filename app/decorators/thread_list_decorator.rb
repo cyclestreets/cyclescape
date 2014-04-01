@@ -23,7 +23,7 @@ class ThreadListDecorator < ApplicationDecorator
   end
 
   def latest_activity_date
-    "#{h.time_ago_in_words(thread.latest_message.created_at)} ago"
+    thread.latest_message.created_at
   end
 
   def title

@@ -25,7 +25,8 @@
                     %td.activity
                       = thread.latest_activity
                     %td.meta
-                      = thread.latest_activity_date
+                      = time_tag_with_title(thread.latest_activity_date) do
+                        - t ".thread_latest_activity", time_ago: time_ago_in_words(thread.latest_activity_date)
         #dashboard-threads-issues
           %section#group-threads
             %h2= t(".group_threads")
@@ -100,4 +101,5 @@
                             - if diff >= 0 && diff < 30
                               %p.warning= t ".days_away", count: diff.to_i
                     %td.meta
-                      = t ".deadline_thread_updated", at: thread.latest_activity_date
+                      = time_tag_with_title(thread.latest_activity_date) do
+                        - t ".deadline_thread_updated", time_ago: time_ago_in_words(thread.latest_activity_date)
