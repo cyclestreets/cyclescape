@@ -553,6 +553,12 @@ ul.group-list {
       display:table-cell;
       height:180px;
       vertical-align:top;
+      p {
+        width:180px; // otherwise links won't break
+        a {
+          word-wrap: break-word;
+        }
+      }
     }
   }
 }
