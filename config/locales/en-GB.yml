@@ -99,7 +99,7 @@
         one: "Tomorrow!"
         other: "%{count} days away"
       deadlines: "Deadlines and dates"
-      deadline_thread_updated: "thread updated %{at}"
+      deadline_thread_updated: "thread updated %{time_ago} ago"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
@@ -124,6 +124,7 @@
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
+      thread_latest_activity: "%{time_ago} ago"
       group_threads: "Group Threads"
       group_threads_desc_html:
         Recent threads with activity from your groups.

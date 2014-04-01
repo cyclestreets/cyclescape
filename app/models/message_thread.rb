@@ -107,7 +107,7 @@ class MessageThread < ActiveRecord::Base
             end
 
     parsed = EmailReplyParser.read(text)
-    stripped = parsed.fragments.select { |f| !f.hidden? }.join
+    stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")
 
     m = []
 
