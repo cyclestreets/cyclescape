@@ -788,7 +788,7 @@
       added: "%{name} added a photo to the thread."
       view_the_photo: "You can view the photo at the following url:"
     footer:
-      thread: "Cyclescape thread"
+      thread: "Cyclescape discussion thread"
       unsubscribe: "You can stop following this thread by visiting the link above."
   thread_priorities:
     very_high: "Top-priority"
