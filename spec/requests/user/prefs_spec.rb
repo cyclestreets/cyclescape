@@ -83,4 +83,26 @@ describe 'User preferences' do
       current_user.prefs.enable_email.should be_true
     end
   end
+
+  describe 'profile visibility' do
+    let(:field) { get_field('profile_visibility') }
+
+    it 'should default to everyone' do
+      within('#user_pref_profile_visibility_input') do
+        page.should have_checked_field(I18n.t('.user.prefs.edit.profile_public'))
+      end
+    end
+
+    it 'should change to group' do
+      within('#user_pref_profile_visibility_input') do
+        page.choose(I18n.t('.user.prefs.edit.profile_group'))
+      end
+      click_on 'Save'
+      within('#user_pref_profile_visibility_input') do
+        page.should have_checked_field(I18n.t('.user.prefs.edit.profile_group'))
+      end
+      current_user.reload
+      current_user.prefs.profile_visibility.should eql('group')
+    end
+  end
 end

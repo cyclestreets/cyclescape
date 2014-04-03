@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140326164405) do
+ActiveRecord::Schema.define(:version => 20140403150540) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -287,6 +287,7 @@ ActiveRecord::Schema.define(:version => 20140326164405) do
     t.string  "involve_my_groups",       :default => "notify",    :null => false
     t.boolean "involve_my_groups_admin", :default => false,       :null => false
     t.boolean "enable_email",            :default => false,       :null => false
+    t.string  "profile_visibility",      :default => "public",    :null => false
   end
 
   add_index "user_prefs", ["enable_email"], :name => "index_user_prefs_on_enable_email"
