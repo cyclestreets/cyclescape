@@ -7,7 +7,12 @@
 #  category_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  location    :spatial({:srid=>
+#  location    :spatial          geometry, 4326
+#
+# Indexes
+#
+#  index_user_locations_on_location  (location)
+#  index_user_locations_on_user_id   (user_id)
 #
 
 require 'spec_helper'

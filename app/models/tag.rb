@@ -6,6 +6,10 @@
 #  name :string(255)      not null
 #  icon :string(255)
 #
+# Indexes
+#
+#  index_tags_on_name  (name) UNIQUE
+#
 
 class Tag < ActiveRecord::Base
   attr_accessible :name

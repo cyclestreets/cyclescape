@@ -2,17 +2,24 @@
 #
 # Table name: message_threads
 #
-#  id            :integer         not null, primary key
+#  id            :integer          not null, primary key
 #  issue_id      :integer
-#  created_by_id :integer         not null
+#  created_by_id :integer          not null
 #  group_id      :integer
-#  title         :string(255)     not null
-#  privacy       :string(255)     not null
-#  state         :string(255)     not null
-#  created_at    :datetime        not null
-#  updated_at    :datetime        not null
+#  title         :string(255)      not null
+#  privacy       :string(255)      not null
+#  state         :string(255)      not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #  deleted_at    :datetime
 #  public_token  :string(255)
+#
+# Indexes
+#
+#  index_message_threads_on_created_by_id  (created_by_id)
+#  index_message_threads_on_group_id       (group_id)
+#  index_message_threads_on_issue_id       (issue_id)
+#  index_message_threads_on_public_token   (public_token) UNIQUE
 #
 
 FactoryGirl.define do

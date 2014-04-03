@@ -11,6 +11,12 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #
+# Indexes
+#
+#  fk_one_vote_per_user_per_entity               (voter_id,voter_type,voteable_id,voteable_type) UNIQUE
+#  index_votes_on_voteable_id_and_voteable_type  (voteable_id,voteable_type)
+#  index_votes_on_voter_id_and_voter_type        (voter_id,voter_type)
+#
 
 class Vote < ActiveRecord::Base
   scope :for_voter, lambda { |*args| where(['voter_id = ? AND voter_type = ?', args.first.id, args.first.class.name]) }

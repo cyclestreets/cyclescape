@@ -2,16 +2,21 @@
 #
 # Table name: messages
 #
-#  id             :integer         not null, primary key
-#  created_by_id  :integer         not null
-#  thread_id      :integer         not null
-#  body           :text            not null
+#  id             :integer          not null, primary key
+#  created_by_id  :integer          not null
+#  thread_id      :integer          not null
+#  body           :text             not null
 #  component_id   :integer
 #  component_type :string(255)
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #  deleted_at     :datetime
 #  censored_at    :datetime
+#
+# Indexes
+#
+#  index_messages_on_created_by_id  (created_by_id)
+#  index_messages_on_thread_id      (thread_id)
 #
 
 FactoryGirl.define do

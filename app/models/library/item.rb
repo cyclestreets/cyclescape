@@ -9,7 +9,11 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime
 #  deleted_at     :datetime
-#  location       :spatial({:srid=>
+#  location       :spatial          geometry, 4326
+#
+# Indexes
+#
+#  index_library_items_on_location  (location)
 #
 
 class Library::Item < ActiveRecord::Base

@@ -13,6 +13,11 @@
 #  deleted_at     :datetime
 #  censored_at    :datetime
 #
+# Indexes
+#
+#  index_messages_on_created_by_id  (created_by_id)
+#  index_messages_on_thread_id      (thread_id)
+#
 
 class Message < ActiveRecord::Base
   include FakeDestroy

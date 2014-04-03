@@ -7,6 +7,11 @@
 #  thread_id :integer          not null
 #  viewed_at :datetime         not null
 #
+# Indexes
+#
+#  index_thread_views_on_user_id                (user_id)
+#  index_thread_views_on_user_id_and_thread_id  (user_id,thread_id) UNIQUE
+#
 
 require 'spec_helper'
 

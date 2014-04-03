@@ -11,6 +11,11 @@
 #  updated_at     :datetime
 #  message        :text
 #
+# Indexes
+#
+#  index_group_membership_requests_on_group_id  (group_id)
+#  index_group_membership_requests_on_user_id   (user_id)
+#
 
 class GroupMembershipRequest < ActiveRecord::Base
   attr_protected :state_event

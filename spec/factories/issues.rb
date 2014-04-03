@@ -2,15 +2,20 @@
 #
 # Table name: issues
 #
-#  id            :integer         not null, primary key
-#  created_by_id :integer         not null
-#  title         :string(255)     not null
-#  description   :text            not null
-#  created_at    :datetime        not null
-#  updated_at    :datetime        not null
+#  id            :integer          not null, primary key
+#  created_by_id :integer          not null
+#  title         :string(255)      not null
+#  description   :text             not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #  deleted_at    :datetime
-#  location      :spatial({:srid=
+#  location      :spatial          geometry, 4326
 #  photo_uid     :string(255)
+#
+# Indexes
+#
+#  index_issues_on_created_by_id  (created_by_id)
+#  index_issues_on_location       (location)
 #
 
 FactoryGirl.define do

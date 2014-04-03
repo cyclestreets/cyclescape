@@ -12,6 +12,10 @@
 #  disabled_at            :datetime
 #  default_thread_privacy :string(255)      default("public"), not null
 #
+# Indexes
+#
+#  index_groups_on_short_name  (short_name)
+#
 
 class Group < ActiveRecord::Base
   attr_accessible :name, :short_name, :website, :email, :default_thread_privacy
