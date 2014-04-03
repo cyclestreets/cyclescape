@@ -140,4 +140,70 @@ describe 'thread notifications' do
       end
     end
   end
+
+  context 'privacy' do
+    context 'public threads' do
+      include_context 'signed in as a site user'
+
+      before do
+        current_user.prefs.update_column(:enable_email, true)
+        visit thread_path(thread)
+        subscribe_button.click
+      end
+
+      it 'should state that the thread is public' do
+        within('#new-text-message') do
+          fill_in 'Message', with: 'Notification test'
+          click_on 'Post Message'
+        end
+
+        open_email(current_user.email)
+        current_email.should have_body_text('Everyone can view')
+      end
+    end
+
+    context 'private threads' do
+      include_context 'signed in as a group member'
+
+      let(:thread) { FactoryGirl.create(:message_thread_with_messages, :private, group: current_group) }
+
+      before do
+        current_user.prefs.update_column(:enable_email, true)
+        visit thread_path(thread)
+        subscribe_button.click
+      end
+
+      it 'should state that the thread is private' do
+        within('#new-text-message') do
+          fill_in 'Message', with: 'Notification test'
+          click_on 'Post Message'
+        end
+
+        open_email(current_user.email)
+        current_email.should have_body_text('Only members of')
+      end
+    end
+
+    context 'committee threads' do
+      include_context 'signed in as a committee member'
+
+      let(:thread) { FactoryGirl.create(:message_thread_with_messages, :committee, group: current_group) }
+
+      before do
+        current_user.prefs.update_column(:enable_email, true)
+        visit thread_path(thread)
+        subscribe_button.click
+      end
+
+      it 'should state that the thread is private' do
+        within('#new-text-message') do
+          fill_in 'Message', with: 'Notification test'
+          click_on 'Post Message'
+        end
+
+        open_email(current_user.email)
+        current_email.should have_body_text('Only committee members of')
+      end
+    end
+  end
 end
