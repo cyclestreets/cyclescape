@@ -253,6 +253,14 @@ describe 'Issue threads' do
         subscriber.subscribed_to_thread?(issue.threads.last).should be_true
       end
 
+      it 'should only subscribe the thread creator once' do
+        FactoryGirl.create(:user_location, user: current_user, location: issue.location.buffer(1))
+        MessageThread.observers.enable :message_thread_observer do
+          create_thread
+        end
+        current_user.thread_subscriptions.count.should == 1
+      end
+
       it 'should not subscribe when the preference is not set' do
         subscriber.prefs.update_column(:involve_my_locations, 'notify')
         create_thread
