@@ -396,6 +396,7 @@
     new:
       title: "Report an issue"
       new_issue_introduction: "Know of something stopping more people cycling, or that causes problems for existing cyclists? Or something that could do? Report it below."
+      new_issue_privacy_warning: "Please note that all issues are publicly viewable. If you wish, you can create a private discussion on this issue, after it has been reported."
       admin_thread_pointer_html: "You can %{administrative_matters_link} with no geographical context (e.g. organising a general meeting) in the group admin threads section."
       administrative_matters: "add a purely administrative matter"
     show:
@@ -787,7 +788,7 @@
       added: "%{name} added a photo to the thread."
       view_the_photo: "You can view the photo at the following url:"
     footer:
-      thread: "Cyclescape thread"
+      thread: "Cyclescape discussion thread"
       unsubscribe: "You can stop following this thread by visiting the link above."
   thread_priorities:
     very_high: "Top-priority"
@@ -856,6 +857,11 @@
         none: "No notifications"
         notify: "Notify me of new issues and when new threads are started"
         subscribe: "Notify me of new issues and automatically follow all new threads"
+        profile: "Profile visibility"
+        profile_guidance_html: "You can choose to restrict who gets to view %{profile_link}."
+        your_profile: "your profile"
+        profile_public: "Everyone"
+        profile_group: "Only members in my groups"
       update:
         success: "Preferences saved"
         failure: "Your preferences could not be saved"

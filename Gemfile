@@ -52,6 +52,7 @@ group :development do
   gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
   gem 'rubocop'
+  gem 'haml-lint'
 
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded
@@ -62,6 +63,7 @@ group :development, :test do
   # IRB helpers
   gem 'wirble'
   gem 'hirb'
+  gem 'pry'
 
   gem 'rspec-core'
   gem 'rspec-rails'

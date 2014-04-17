@@ -11,6 +11,7 @@
 #  context_data :text
 #  created_at   :datetime         not null
 #  viewed_at    :datetime
+#  deleted_at   :datetime
 #
 
 class SiteComment < ActiveRecord::Base

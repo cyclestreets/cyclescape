@@ -206,6 +206,15 @@ describe 'Group threads', use: :subdomain do
           subscriber.subscribed_to_thread?(current_group.threads.last).should be_true
         end
 
+        it 'should only subscribe the thread creator once' do
+          current_user.prefs.update_column(:involve_my_groups, 'subscribe')
+          current_user.prefs.update_column(:involve_my_groups_admin, true)
+          MessageThread.observers.enable :message_thread_observer do
+            fill_in_thread
+          end
+          current_user.thread_subscriptions.count.should == 1
+        end
+
         it 'should not subscribe normal members to committee threads' do
           subscriber.prefs.update_column(:involve_my_groups, 'subscribe')
           subscriber.prefs.update_column(:involve_my_groups_admin, true)

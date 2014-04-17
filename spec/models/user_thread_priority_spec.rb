@@ -9,6 +9,11 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_user_thread_priorities_on_thread_id  (thread_id)
+#  index_user_thread_priorities_on_user_id    (user_id)
+#
 
 require 'spec_helper'
 

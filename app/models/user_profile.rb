@@ -8,6 +8,10 @@
 #  website     :string(255)
 #  about       :text
 #
+# Indexes
+#
+#  index_user_profiles_on_user_id  (user_id)
+#
 
 class UserProfile < ActiveRecord::Base
   attr_accessible :picture, :retained_picture, :remove_picture, :website, :about

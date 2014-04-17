@@ -1,7 +1,7 @@
 inherit_from: rubocop-todo.yml
 AllCops:
   RunRailsCops: true
-  Excludes:
+  Exclude:
    - db/schema.rb
    - vendor/**
 Encoding:

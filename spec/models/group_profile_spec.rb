@@ -7,8 +7,13 @@
 #  description          :text
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  location             :spatial({:srid=>
+#  location             :spatial          geometry, 4326
 #  joining_instructions :text
+#
+# Indexes
+#
+#  index_group_profiles_on_group_id  (group_id)
+#  index_group_profiles_on_location  (location)
 #
 
 require 'spec_helper'

@@ -114,7 +114,7 @@ RaiseArgs:
 
 # Offence count: 2
 # Configuration parameters: IncludePaths.
-ReadAttribute:
+ReadWriteAttribute:
   Enabled: false
 
 # Offence count: 2

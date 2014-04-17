@@ -10,6 +10,11 @@
 #  updated_at :datetime         not null
 #  deleted_at :datetime
 #
+# Indexes
+#
+#  index_group_memberships_on_group_id  (group_id)
+#  index_group_memberships_on_user_id   (user_id)
+#
 
 require 'spec_helper'
 

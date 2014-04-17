@@ -13,6 +13,10 @@
 #  disabled_at            :datetime
 #  default_thread_privacy :string(255)      default("public"), not null
 #
+# Indexes
+#
+#  index_groups_on_short_name  (short_name)
+#
 
 require 'spec_helper'
 

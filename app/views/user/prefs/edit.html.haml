@@ -15,4 +15,9 @@
       %h2= t ".notification_types"
       %p= t ".notification_types_guidance"
       = f.input :enable_email
+      %h2= t ".profile"
+      %p= t ".profile_guidance_html", profile_link: link_to(t(".your_profile"), user_profile_path(current_user))
+      = f.input :profile_visibility,
+          as: :radio,
+          collection: UserPref::PROFILE_OPTIONS.map {|n| [t(".profile_#{n}"), n] }
     = f.actions
