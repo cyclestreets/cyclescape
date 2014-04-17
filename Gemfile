@@ -63,6 +63,7 @@ group :development, :test do
   # IRB helpers
   gem 'wirble'
   gem 'hirb'
+  gem 'pry'
 
   gem 'rspec-core'
   gem 'rspec-rails'
