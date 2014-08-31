@@ -50,7 +50,7 @@ MapCollisions = {
       feature.popup = new OpenLayers.Popup.FramedCloud("pop",
           feature.geometry.getBounds().getCenterLonLat(),
           null,
-          '<h3><a href="' + feature.attributes.url + '">Collision ' + feature.attributes.accref + ' in ' + feature.attributes.accyr + '</a></h3>' +
+          '<h3><a href="' + feature.attributes.url + '">Collision ' + feature.attributes.id + '</a></h3>' +
             '<p>Date and time: ' + feature.attributes.datetime + '</p>' +
             '<p>Severity: ' + feature.attributes.severity + '</p>' +
             '<p><a href="' + feature.attributes.url + '">View full, detailed report at CycleStreets</a></p>',
