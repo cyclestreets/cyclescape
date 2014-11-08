@@ -403,7 +403,7 @@
       title: "Cyklisté sobě"
     footer:
       application_version_html: "Verze aplikace: %{version}"
-      github_page_link_html: "Zdrojové kódy jsou dostupné na <a href='https://github.com/cyclestreets/toolkit/'>GitHubu</a>"
+      github_page_link_html: "Zdrojové kódy jsou dostupné na <a href='https://github.com/cyclestreets/cyclescape/'>GitHubu</a>"
       whats_new: "Co je nového?"
       supportlogos_introduction: "Vznik Cyclescape byl umožněn podporou:"
       funding_from: "Za podpory %{name}"
@@ -646,7 +646,7 @@
       text_message: "Text"
   pages:
     changelog:
-      github_history_link_html: "<a href='https://github.com/cyclestreets/toolkit/commits/master/'>GitHub</a>."
+      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
   shared:
     edit_map:
       area: "oblast"

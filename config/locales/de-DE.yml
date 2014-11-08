@@ -369,7 +369,7 @@
       title: "Cyclescape"
     footer:
       application_version_html: "Version ref: %{version}"
-      github_page_link_html: "Einblick in den Quellcode auf <a href='https://github.com/cyclestreets/toolkit/'>GitHub</a>"
+      github_page_link_html: "Einblick in den Quellcode auf <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>"
       whats_new: "Was ist neu"
       supportlogos_introduction: "Cyclescape wurde möglich dank der großzügigen Unterstützung von:"
       funding_from: "Finanziert von from %{name}"
@@ -594,7 +594,7 @@
       text_message: "Text"
   pages:
     changelog:
-      github_history_link_html: "<a href='https://github.com/cyclestreets/toolkit/commits/master/'>GitHub</a>"
+      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>"
   shared:
     edit_map:
       area: "Bereich"
