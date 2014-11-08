@@ -174,8 +174,22 @@
     membership_requests_tab: "Membership requests"
     home_page_tab: "Home page"
     issues:
+      destroy:
+        failure: "Can't delete that issue"
+        success: "Issue deleted"
       index:
         title: "Issues in the area of %{group_name}"
+      update:
+        success: "Issue updated"
+      vote_clear:
+        failure: "Your vote couldn't be cleared"
+        success: "Your vote has been cleared"
+      vote_down:
+        already: "You've already voted down this issue"
+        success: "You have voted down this issue"
+      vote_up:
+        already: "You've already voted up this issue"
+        success: "You have voted up this issue"
     members:
       index:
         actions: "Actions"
