@@ -803,7 +803,7 @@
       view_the_photo: "You can view the photo at the following url:"
     footer:
       thread: "Cyclescape discussion thread"
-      unsubscribe: "You can stop following this thread by visiting the link above."
+      unsubscribe: "You can stop following this thread by visiting the link above and clicking 'unfollow this thread'."
   thread_priorities:
     very_high: "Top-priority"
     high: "Important"
