@@ -3,5 +3,5 @@
 <%= raw @message.component.title %>
 <%= raw @message.body %>
 <%= t ".view_the_document" %>
-<%= thread_path(@message.thread, only_path: false) + "#message-#{@message.id}" %>
+<%= @message.component.file.url(host: "http://cyclestreets.net") %>
 <%= render partial: "footer" %>
