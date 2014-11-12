@@ -58,9 +58,7 @@ describe 'Message threads' do
       end
 
       it 'should set the page title' do
-        within 'title' do
-          page.should have_content(@thread.title)
-        end
+        page.should have_title(@thread.title)
       end
 
       it 'should disable the message input' do

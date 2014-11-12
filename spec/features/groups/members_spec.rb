@@ -23,7 +23,7 @@ describe 'Group members' do
       end
 
       it 'should display the group name in the page title' do
-        page.should have_selector('title', text: current_group.name)
+        page.should have_title(current_group.name)
       end
 
       it 'should display the user name of the committee member' do

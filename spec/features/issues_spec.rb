@@ -72,9 +72,7 @@ describe 'Issues' do
       end
 
       it 'should set the page title' do
-        within 'title' do
-          page.should have_content(issue.title)
-        end
+        page.should have_title(issue.title)
       end
 
       it 'should show the location'

@@ -31,7 +31,7 @@ describe 'Issues in a group subdomain' do
 
     it 'should set the page title' do
       visit issues_path
-      page.should have_selector('title', content: I18n.t('group.issues.index.title', group_name: current_group.name))
+      page.should have_title(I18n.t('group.issues.index.title', group_name: current_group.name))
     end
 
     context 'with search' do
