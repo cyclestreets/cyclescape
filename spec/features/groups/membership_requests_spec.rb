@@ -85,7 +85,7 @@ describe 'Group Membership Requests' do
       it 'should let you complete the invitation by filling in just the password and confirmation' do
         user = User.find_by_email(@credentials[:email])
         visit accept_user_invitation_path(invitation_token: user.invitation_token)
-        fill_in 'New Password', with: 'Password1'
+        fill_in 'New Password', with: 'Password1', match: :first
         fill_in 'New Password Confirmation', with: 'Password1'
         click_button 'Confirm account'
         page.should have_content('Your password was set successfully. You are now signed in.')
@@ -97,7 +97,7 @@ describe 'Group Membership Requests' do
         fill_in 'Full name', with: 'Shaun McDonald'
         fill_in 'Display name', with: 'smsm1'
         fill_in 'Email', with: 'some_other_email@example.com'
-        fill_in 'New Password', with: 'Password1'
+        fill_in 'New Password', with: 'Password1', match: :first
         fill_in 'New Password Confirmation', with: 'Password1'
         click_button 'Confirm account'
         page.should have_content('Your password was set successfully. You are now signed in.')

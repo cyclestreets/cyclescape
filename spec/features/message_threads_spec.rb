@@ -62,7 +62,7 @@ describe 'Message threads' do
       end
 
       it 'should disable the message input' do
-        find('#message_body')[:disabled].should == 'disabled'
+        find('#message_body', match: :first)[:disabled].should == 'disabled'
       end
 
       it 'should display a notice saying the user must sign in to post' do
@@ -134,13 +134,13 @@ describe 'Message threads' do
         end
 
         it 'should be able to post a new message' do
-          fill_in 'Message', with: 'Testing a new message!'
+          fill_in 'Message', with: 'Testing a new message!', match: :first
           click_on 'Post Message'
           page.should have_content('Testing a new message!')
         end
 
         it 'should auto link messages' do
-          fill_in 'Message', with: 'Testing autolink http://example.com'
+          fill_in 'Message', with: 'Testing autolink http://example.com', match: :first
           click_on 'Post Message'
           page.should have_link('http://example.com')
         end
@@ -246,7 +246,7 @@ describe 'Message threads' do
       end
 
       it 'should let you censor a message' do
-        click_on censor_message
+        click_on censor_message, match: :first
         page.should have_content('Message censored')
         page.should have_content('This message has been removed')
       end

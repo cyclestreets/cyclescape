@@ -14,7 +14,7 @@ describe 'Library Messages' do
         # Positive test for negative variants, below
         page.should have_content('Create')
 
-        within '.message' do
+        within '.message', match: :first do
           click_on I18n.t('.messages.message.create_note')
         end
 
@@ -33,7 +33,7 @@ describe 'Library Messages' do
         # Positive test for negative variants, below
         page.should have_content('Create')
 
-        within '.message' do
+        within '.message', match: :first do
           click_on I18n.t('.messages.message.create_document')
         end
 
@@ -45,7 +45,7 @@ describe 'Library Messages' do
 
       it 'should fill show the right form' do
         visit thread_path(message.thread)
-        within '.message' do
+        within '.message', match: :first do
           click_on I18n.t('.messages.message.create_document')
         end
 
@@ -55,7 +55,7 @@ describe 'Library Messages' do
 
       it 'should end up with the correct document' do
         visit thread_path(message.thread)
-        within '.message' do
+        within '.message', match: :first do
           click_on I18n.t('.messages.message.create_document')
         end
 

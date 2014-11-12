@@ -32,7 +32,7 @@ describe 'Thread subscriptions' do
         email_count = all_emails.count
         subscribe_button.click
         within('.new-message') do
-          fill_in 'Message', with: "All interesting stuff, but don't email me"
+          fill_in 'Message', with: "All interesting stuff, but don't email me", match: :first
           click_on 'Post Message'
         end
         all_emails.count.should == email_count
@@ -42,7 +42,7 @@ describe 'Thread subscriptions' do
         it 'should subscribe me when I post a message' do
           current_user.subscribed_to_thread?(thread).should be_false
           within('.new-message') do
-            fill_in 'Message', with: "Given I'm interested enough to post, I should be subscribed"
+            fill_in 'Message', with: "Given I'm interested enough to post, I should be subscribed", match: :first
             click_on 'Post Message'
           end
           current_user.subscribed_to_thread?(thread).should be_true
@@ -87,7 +87,7 @@ describe 'Thread subscriptions' do
       it 'should send future messages on the thread by email' do
         subscribe_button.click
         within('.new-message') do
-          fill_in 'Message', with: 'Notification test'
+          fill_in 'Message', with: 'Notification test', match: :first
           click_on 'Post Message'
         end
         open_email(current_user.email, with_subject: /^Re/)
@@ -116,7 +116,7 @@ describe 'Thread subscriptions' do
         email_count = all_emails.count
         unsubscribe_button.click
         within('.new-message') do
-          fill_in 'Message', with: 'Notification test'
+          fill_in 'Message', with: 'Notification test', match: :first
           click_on 'Post Message'
         end
         all_emails.count.should == email_count
