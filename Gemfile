@@ -42,6 +42,7 @@ gem 'paranoia', '~> 1.0'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass', '~> 3.2.18' # pin sass - https://github.com/cyclestreets/cyclescape/issues/337
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'

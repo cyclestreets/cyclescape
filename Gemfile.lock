@@ -339,6 +339,7 @@ DEPENDENCIES
   rubocop
   ruby-prof
   ruby_parser
+  sass (~> 3.2.18)
   sass-rails (~> 3.2.3)
   shoulda-matchers
   spring
