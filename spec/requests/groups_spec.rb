@@ -17,8 +17,8 @@ describe 'Groups' do
       page.should have_content(profile.description)
     end
 
-    it 'should not show the joining instructions' do
-      page.should_not have_content(profile.joining_instructions)
+    it 'should show the joining instructions' do
+      page.should have_content(profile.joining_instructions)
     end
 
     it 'should autolink the group description' do
