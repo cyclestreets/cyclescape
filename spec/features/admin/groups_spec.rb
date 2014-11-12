@@ -39,7 +39,7 @@ describe 'Groups admin' do
 
     before do
       within('table tr:first') do
-        click_on 'Edit'
+        click_on 'Edit', match: :first
       end
     end
 
