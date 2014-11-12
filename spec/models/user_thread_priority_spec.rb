@@ -26,6 +26,6 @@ describe UserThreadPriority do
   end
 
   describe 'validations' do
-    it { should ensure_inclusion_of(:priority).in_range(1..10) }
+    it { should validate_inclusion_of(:priority).in_range(1..10) }
   end
 end
