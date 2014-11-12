@@ -311,7 +311,7 @@ DEPENDENCIES
   exceptional
   factory_girl_rails
   foreman
-  formtastic
+  formtastic (~> 2.2.1)
   haml-lint
   haml-rails
   hirb
@@ -330,9 +330,9 @@ DEPENDENCIES
   redis-store (~> 1.0.0)
   resque
   rgeo-geojson
-  rspec-core
+  rspec-core (~> 2.14.0)
   rspec-expectations
-  rspec-rails
+  rspec-rails (~> 2.14.2)
   rubocop
   ruby-prof
   ruby_parser

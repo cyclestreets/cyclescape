@@ -10,7 +10,7 @@ gem 'activerecord-postgis-adapter'
 # Front-end gems
 gem 'jquery-rails', '2.0.3' # pin due to incompatible jquery-tools vs jquery 1.8. See https://github.com/cyclestreets/cyclescape/issues/75
 gem 'haml-rails'
-gem 'formtastic'
+gem 'formtastic', '~> 2.2.1' # pin pending upgrades
 gem 'map_layers'
 gem 'rails3-jquery-autocomplete'
 gem 'rgeo-geojson'
@@ -65,8 +65,8 @@ group :development, :test do
   gem 'hirb'
   gem 'pry'
 
-  gem 'rspec-core'
-  gem 'rspec-rails'
+  gem 'rspec-core', '~> 2.14.0' # pin pending capybara upgrade
+  gem 'rspec-rails', '~> 2.14.2' # pin as above
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'ruby-prof'
