@@ -45,7 +45,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-ui-rails'
+  gem 'jquery-ui-rails', '~> 4.2.0' # pin pending upgrade
 end
 
 group :development do
