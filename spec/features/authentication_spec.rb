@@ -95,7 +95,7 @@ describe 'Authentication and authorization' do
       click_link 'Sign up'
       fill_in 'Full name', with: @credentials[:full_name]
       fill_in 'Email', with: @credentials[:email]
-      fill_in 'Password', with: @credentials[:password]
+      fill_in 'Password', with: @credentials[:password], match: :first
       fill_in 'Password confirmation', with: @credentials[:password]
       click_button 'Sign up'
       open_email(@credentials[:email])
