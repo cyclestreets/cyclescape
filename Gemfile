@@ -66,8 +66,7 @@ group :development, :test do
   gem 'hirb'
   gem 'pry'
 
-  gem 'rspec-core', '~> 2.14.0' # pin pending capybara upgrade
-  gem 'rspec-rails', '~> 2.14.2' # pin as above
+  gem 'rspec-rails', '~> 2.99.0' # pin to compatibility version
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'ruby-prof'
@@ -81,5 +80,4 @@ group :test do
   gem 'selenium-webdriver'
   gem 'email_spec'
   gem 'database_cleaner'
-  gem 'rspec-expectations'
 end
