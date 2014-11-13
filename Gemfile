@@ -77,7 +77,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'
-  gem 'capybara', '~> 2.1.0'
+  gem 'capybara', '~> 2.3.0'
   gem 'selenium-webdriver'
   gem 'email_spec'
   gem 'database_cleaner'
