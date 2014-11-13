@@ -65,7 +65,7 @@ describe 'Group threads', use: :subdomain do
       end
 
       it 'should default to a public group thread' do
-        page.should have_select('Privacy', with: 'Public')
+        page.should have_select('Privacy', selected: 'Public')
       end
 
       context 'notifications' do
@@ -270,7 +270,7 @@ describe 'Group threads', use: :subdomain do
       end
 
       it 'should default to a private group thread' do
-        page.should have_select('Privacy', with: 'Group')
+        page.should have_select('Privacy', selected: 'Group')
       end
     end
 

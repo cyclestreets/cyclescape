@@ -306,7 +306,7 @@ describe 'Message threads' do
 
       it 'should let you assign to another group' do
         visit edit_thread_path(thread)
-        page.should have_select('Owned by', with: thread.group.name)
+        page.should have_select('Owned by', selected: thread.group.name)
         select other_group.name, from: 'Owned by'
         click_on 'Save'
         page.should have_content(thread.title)
@@ -316,7 +316,7 @@ describe 'Message threads' do
 
       it 'should let you change the privacy setting' do
         visit edit_thread_path(thread)
-        page.should have_select('Privacy', with: 'Public')
+        page.should have_select('Privacy', selected: 'Public')
         select 'Group', from: 'Privacy'
         click_on 'Save'
         page.should have_content(thread.title)
