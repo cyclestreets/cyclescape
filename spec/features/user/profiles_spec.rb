@@ -29,7 +29,7 @@ describe 'User profiles' do
     it 'should set the biography' do
       fill_in 'About', with: lorem_ipsum
       click_on 'Save'
-      current_user.profile.about.should == lorem_ipsum
+      current_user.profile.about.should == lorem_ipsum.gsub(/\n/, "\r\n")
     end
   end
 
