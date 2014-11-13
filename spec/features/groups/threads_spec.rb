@@ -317,8 +317,8 @@ describe 'Group threads', use: :subdomain do
       end
 
       it 'should not let you create committee threads' do
-        page.should have_select('Privacy', options: ['Group'])
-        page.should_not have_select('Privacy', options: ['Committee'])
+        page.should have_select('Privacy', with_options: ['Group'])
+        page.should_not have_select('Privacy', with_options: ['Committee'])
       end
     end
   end
