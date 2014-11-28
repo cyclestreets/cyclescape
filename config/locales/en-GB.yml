@@ -467,6 +467,8 @@
       planning_application_data: "Planning application data from Openly Local"
       cyclescape_blog: "Cyclescape blog"
       user_guide: "User guide"
+      facebook_page: "CycleStreets Facebook page"
+      twitter_page: "CycleStreets Twitter account"
     group_selector:
       group_selector: "Group"
       no_group: "No Group"
