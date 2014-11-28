@@ -6,11 +6,31 @@
   activerecord:
     errors:
       models:
+        issue:
+          attributes:
+            size:
+              less_than: "podnět je příliš velký."
         user:
           attributes:
             full_name:
               blank: "Prosím zadejte jméno"
               email: "Prosím zadejte emailovou adresu"
+    models:
+      user: "Uživatel"
+
+    attributes:
+      user_location:
+        location: "Oblast"
+      user:
+        password: "Heslo"
+        current_password: "Současné heslo"
+        full_name: "Plné jméno"
+        email: "Email"
+        password_confirmation: "Ověření hesla"
+        display_name: "Zobrazené jméno"
+      group_pref:
+        membership_secretary: "Správce členství ve skupině"
+        notify_membership_requests: "Upozornit na nové žádosti o členství"
 
   formtastic:
     labels:
@@ -24,13 +44,15 @@
         joining_instructions: "Instrukce pro nové členy"
       group_membership:
         role: "Typ členství"
+      group_pref:
+        notify_membership_requests: "Zapnout upozornění na žádosti o členství"
       issue:
         new: &labels_issue_new
           description: "Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku. Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další stránce budete začít diskusní vlákno o tomto problému."
           location: "Zvolte oblast"
           photo: "Přidejte fotografii"
           tags_string: "Přidejte štítek k vašemu podnětu"
-          title: "Zvolte nadpis vašeho hlášení"
+          title: "Zvolte nadpis vašeho podnětu"
         create: *labels_issue_new
         edit: *labels_issue_new
         update: *labels_issue_new
@@ -63,6 +85,7 @@
         tags_string: "Štítky"
         title: "Titulek"
         privacy: "Viditelnost"
+        issue: "Podnět"
       site_comment:
         body: "Zpráva"
         name: "Jméno"
@@ -73,21 +96,17 @@
         involve_my_locations: "Záležitosti v mém okolí"
         involve_my_groups: "Záležitosti mých místních skupin"
         involve_my_groups_admin: "Taktéž mě zahrňte do všeobecných diskuzí mých místních skupin"
+      user_location:
+        category: "Typ oblasti"
       user:
-        new:
-          email: "Email"
-          password: "Heslo"
+        new: &labels_user_new
           remember_me: "Zapamatovat si mě"
-          full_name: "Plné jméno"
-          display_name: "Zobrazované jméno"
-          password_confirmation: "Ověření hesla"
-        edit:
-          full_name: "Plné jméno"
-          display_name: "Zobrazené jméno"
+        create: *labels_user_new
+        edit: &labels_user_edit
           disabled: "Neaktivní"
           password: "Nové heslo"
           password_confirmation: "Potvrzení nového hesla"
-          current_password: "Současné heslo"
+        update: *labels_user_edit
       user_profile:
         picture: "Obrázek"
         remove_picture: "Odstranit obrázek"
@@ -95,14 +114,21 @@
         about: "O uživateli"
     hints:
       user:
+        new: &hints_user_new
+          display_name: "Volitelné - může být přezdívka nebo pseudonym, který bude zobrazen ostatním uživatelům místo plného jména."
+          full_name: "Prosím poskytněte své plné jméno. Pokud požádáte o členství v místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny."
         edit:
           password: "Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo."
           current_password: "Prosím potvrďte vaše stávající heslo, abyste mohli udělat změny na této stránce."
+          <<: *hints_user_new
       group:
         short_name: "Musí být malé alfanumerické znaky; a-z, 0-9"
       group_membership:
         role: "Vyberte, jestli jde o normální členy nebo správce místní skupiny."
         full_name: "Prosím zadejte jejich jméno, až přijmou pozvánku, tak si ho budou si ho moci změnit."
+      group_pref:
+        notify_membership_requests: "Upozornění bude zasláno pokaždé, když se nějaký uživatel připojí k této místní skupině"
+        membership_secretary: "Volitelně vyberte správce členství ve skupině, který bude emailem dostávat upozornění na nové žádosti o členství. Pokud zanecháte pole prázdné, tak budou upozornění přicházet na email místní skupiny."
       group_profile:
         joining_instructions: "Instrukce, které jsou ukázány lidem, kteří se chtějí zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné."
       issue:
@@ -126,13 +152,15 @@
         create: "Vložit termín"
       document_message:
         create: "Vložit přílohu"
+      group:
+        create: "Vytvořit skupinu"
       group_membership_request:
-          create: "Vytvořit žádost o členství ve skupině"
+          create: "Požádat o členství ve skupině"
       group_membership:
         create: "Pozvat člena"
       issue:
-        create: "Odeslat hlášení"
-        update: "Uložit hlášení"
+        create: "Odeslat podnět"
+        update: "Uložit podnět"
         update_tags: "Upravit štítky"
       library_item:
         update_tags: "Upravit štítky"
