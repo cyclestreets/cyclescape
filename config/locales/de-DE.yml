@@ -41,6 +41,8 @@
       index:
         created: "Erstellt"
         created_at: "vor %{time_ago}"
+        last_seen: "Letzte Anmendlung"
+        last_seen_at: "vor %{time_ago}"
         introduction: "Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaft die sie haben könnten)."
         disabled: "Deaktiviert"
         disabled_at: " vor %{time_ago}"

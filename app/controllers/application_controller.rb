@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_auth_user
   before_filter :load_group_from_subdomain
   before_filter :set_page_title
+  before_filter :set_last_seen_at, if: proc { |p| user_signed_in? && (session[:last_seen_at] == nil || session[:last_seen_at] < 15.minutes.ago) }
   after_filter :remember_current_group
   after_filter :store_location
   layout :set_xhr_layout
@@ -182,5 +183,11 @@ class ApplicationController < ActionController::Base
   # Oh, rails, how I hate your shielding of Logger formatters from me
   def debug_msg(msg)
     "[#{timestamp_with_usec}] #{msg}"
+  end
+
+  private
+  def set_last_seen_at
+    current_user.update_attribute(:last_seen_at, Time.now)
+    session[:last_seen_at] = Time.now
   end
 end
