@@ -37,3 +37,6 @@ Translations are managed using the [Transifex](https://www.transifex.com) platfo
 The words in braces preceded by a percent, for example %{name}, should not be translated into a new language: it's replaced with the group name when rails presents the text. So a German translation of `Request membership of %{group_name}` would look like `Mitgliedsantrag aus %{group_name}`
 
 At the moment, the translations are not used by the application, but are useful for custom deployments.
+
+ * http://www.cyclescape.org/
+ * http://www.cyklistesobe.cz/
