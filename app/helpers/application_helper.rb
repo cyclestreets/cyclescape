@@ -56,4 +56,12 @@ module ApplicationHelper
   def time_tag_with_title(date_or_time, &block)
     time_tag(date_or_time, title: l(date_or_time, format: :long), &block)
   end
+
+  def current_user_can_view(other_user, annon = t("annon"))
+    if other_user.prefs.profile_visibility == 'public' || other_user == current_user || other_user.groups.include?(current_user.try(:groups))
+      yield
+    else
+      annon
+    end
+  end
 end

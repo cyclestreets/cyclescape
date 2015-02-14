@@ -2,10 +2,11 @@
 %article.message{ id: dom_id(message), class: scroll_class }
   .details
     .author
-      %span.thumbnail
-        - if message.created_by.profile.picture
-          = image_tag message.created_by.profile.picture_thumbnail.url, alt: ""
-      = link_to_profile message.created_by
+      = current_user_can_view(message.created_by) do
+        %span.thumbnail
+          - if message.created_by.profile.picture
+            = image_tag message.created_by.profile.picture_thumbnail.url, alt: ""
+        = link_to_profile message.created_by
       = time_tag_with_title(message.created_at) do
         - t ".posted_date", time_ago: time_ago_in_words(message.created_at)
   .body

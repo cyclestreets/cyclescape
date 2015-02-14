@@ -9,7 +9,8 @@
       %h3= link_to issue.title, issue
       .meta
         %p
-          = issue.creator_link
+          = current_user_can_view(issue.created_by) do
+            = issue.creator_link
           = issue.creation_time
           \//
           = t(".thread_count", count: issue.thread_count)
