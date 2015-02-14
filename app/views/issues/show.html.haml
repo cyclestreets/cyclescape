@@ -25,7 +25,9 @@
         - if not permitted_to? :vote_up, :issues
           .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)
     %section.meta
-      %p= t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)
+      %p
+      = current_user_can_view(@issue.created_by, t(".added_by_html", name: t('anon'), time: l(@issue.created_at.to_date))) do
+        = t ".added_by_html", name: link_to_profile(@issue.created_by), time: l(@issue.created_at.to_date)
     %section.tags
       = @tag_panel.render
     %section.description

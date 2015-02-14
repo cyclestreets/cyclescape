@@ -3,6 +3,7 @@
 "cs-CZ":
   application_name: "Cyklisté sobě"
   tags: "Štítky"
+  annon: "Anonymní"
   sign_in: "přihlásit"  # Used for links
   admin:
     groups:
@@ -280,7 +281,7 @@
         Zde můžete nahlásit váš cyklistický podnět
       center_box_html:
         Neexistující cyklostezka? Překážka bránící v provozu? Chybějící cyklostojan?
-        Nebo příklad, kde bylo něco uděláno správně? 
+        Nebo příklad, kde bylo něco uděláno správně?
       report_an_issue: "Přidat podnět"
       latest_discussions: "Poslední diskuze"
       groups_title: "Místní skupiny Cyklisté sobě"

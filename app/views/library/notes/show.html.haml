@@ -6,7 +6,9 @@
         %ul
           %li= link_to t(".edit"), edit_library_note_path(@note)
   %section.meta
-    %p= t ".added_by_html", name: link_to_profile(@note.created_by), time: l(@note.created_at.to_date)
+    %p
+      = current_user_can_view(@note.created_by, t(".added_by_html", name: t('annon'), time: l(@note.created_at.to_date))) do
+        = t ".added_by_html", name: link_to_profile(@note.created_by), time: l(@note.created_at.to_date)
     - if @note.document
       %p= t ".note_on_document_html", document: link_to(@note.document.title, @note.document)
   %section.tags

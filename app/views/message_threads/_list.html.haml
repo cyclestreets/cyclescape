@@ -11,7 +11,8 @@
             = t ".discussion_on_issue"
             = link_to(thread.issue.title, issue_path(thread.issue))
             %br
-          = link_to_profile(thread.latest_activity_by)
+          = current_user_can_view(thread.latest_activity_by) do
+            = link_to_profile(thread.latest_activity_by)
           = time_tag_with_title(thread.latest_activity_at) do
             - t ".posted_at", time_ago: time_ago_in_words(thread.latest_activity_at)
   .status

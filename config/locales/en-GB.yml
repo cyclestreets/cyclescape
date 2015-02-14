@@ -3,6 +3,7 @@
 "en-GB":
   application_name: "Cyclescape"
   tags: "Tags"
+  annon: "Annon"
   sign_in: "sign in"  # Used for links
   admin:
     groups:

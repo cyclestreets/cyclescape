@@ -1,7 +1,9 @@
 %article#content.library.document
   %h1= @document.title
   %section.meta
-    %p= t ".added_by_html", name: link_to_profile(@document.created_by), time: l(@document.created_at.to_date)
+    %p
+      = current_user_can_view(@document.created_by, t(".added_by_html", name: t("annon"), time: l(@document.created_at.to_date))) do
+        = t ".added_by_html", name: link_to_profile(@document.created_by), time: l(@document.created_at.to_date)
   %section.tags
     = @tag_panel.render
   %section.document
