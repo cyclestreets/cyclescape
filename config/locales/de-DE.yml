@@ -3,7 +3,7 @@
 "de-DE":
   application_name: "Cyclescape"
   tags: "Label"
-  annon: "Anonym"
+  anon: "Anonym"
   sign_in: "Anmelden"
   admin:
     groups:
