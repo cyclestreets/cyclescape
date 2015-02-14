@@ -3,7 +3,7 @@
 "cs-CZ":
   application_name: "Cyklisté sobě"
   tags: "Štítky"
-  annon: "Anonymní"
+  anon: "Anonymní"
   sign_in: "přihlásit"  # Used for links
   admin:
     groups:
