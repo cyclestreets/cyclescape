@@ -7,7 +7,7 @@ describe GroupMembershipObserver do
     let(:gm) { FactoryGirl.build(:group_membership) }
 
     it 'should notice when GroupMembships are saved' do
-      subject.should_receive(:after_save)
+      expect(subject).to receive(:after_save)
 
       GroupMembership.observers.enable :group_membership_observer do
         gm.save
@@ -22,26 +22,26 @@ describe GroupMembershipObserver do
     it 'should subscribe user to committee threads if their preference is set' do
       user = group_membership.user
       user.prefs.update_column(:involve_my_groups, 'subscribe')
-      thread.subscribers.should_not include(user)
-      thread.group.members.should_not include(user)
+      expect(thread.subscribers).not_to include(user)
+      expect(thread.group.members).not_to include(user)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.role = 'committee'
         group_membership.save
       end
       thread.reload
-      thread.subscribers.should include(user)
+      expect(thread.subscribers).to include(user)
     end
 
     it "should not subscribe them if they don't want subscribing" do
       user = group_membership.user
       user.prefs.update_column(:involve_my_groups, 'notify')
-      thread.subscribers.should_not include(user)
+      expect(thread.subscribers).not_to include(user)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.role = 'committee'
         group_membership.save
       end
       thread.reload
-      thread.subscribers.should_not include(user)
+      expect(thread.subscribers).not_to include(user)
     end
   end
 
@@ -52,7 +52,7 @@ describe GroupMembershipObserver do
     it 'should unsubscribe ex-committee members from committee only threads' do
       user = group_membership.user
       thread.add_subscriber(user)
-      thread.subscribers.should include(user)
+      expect(thread.subscribers).to include(user)
 
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.role = 'member'
@@ -60,7 +60,7 @@ describe GroupMembershipObserver do
       end
 
       thread.reload
-      thread.subscribers.should_not include(user)
+      expect(thread.subscribers).not_to include(user)
     end
   end
 
@@ -72,31 +72,31 @@ describe GroupMembershipObserver do
 
     it 'should subscribe the user to any group threads' do
       user.prefs.update_column(:involve_my_groups, 'subscribe')
-      thread.subscribers.should_not include(user)
+      expect(thread.subscribers).not_to include(user)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.save
       end
       thread.reload
-      thread.subscribers.should include(user)
+      expect(thread.subscribers).to include(user)
     end
 
     it 'should not subscribe normal members to committee threads' do
       user.prefs.update_column(:involve_my_groups, 'subscribe')
-      private_thread.subscribers.should_not include(user)
+      expect(private_thread.subscribers).not_to include(user)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.save
       end
       private_thread.reload
-      private_thread.subscribers.should_not include(user)
+      expect(private_thread.subscribers).not_to include(user)
     end
 
     it 'should not subscribe without the correct pref' do
-      thread.subscribers.should_not include(user)
+      expect(thread.subscribers).not_to include(user)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.save
       end
       thread.reload
-      thread.subscribers.should_not include(user)
+      expect(thread.subscribers).not_to include(user)
     end
 
     context 'admin threads' do
@@ -104,12 +104,12 @@ describe GroupMembershipObserver do
 
       it 'should subscribe to thread with pref set' do
         user.prefs.update_column(:involve_my_groups_admin, true)
-        thread.subscribers.should_not include(user)
+        expect(thread.subscribers).not_to include(user)
         GroupMembership.observers.enable :group_membership_observer do
           group_membership.save
         end
         thread.reload
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
       end
     end
   end
@@ -123,12 +123,12 @@ describe GroupMembershipObserver do
 
       it 'should unsubscribe you' do
         thread.add_subscriber(user)
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
         GroupMembership.observers.enable :group_membership_observer do
           group_membership.destroy
         end
         thread.reload
-        thread.subscribers.should_not include(user)
+        expect(thread.subscribers).not_to include(user)
       end
     end
 
@@ -137,12 +137,12 @@ describe GroupMembershipObserver do
 
       it 'should unsubscribe you' do
         thread.add_subscriber(user)
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
         GroupMembership.observers.enable :group_membership_observer do
           group_membership.destroy
         end
         thread.reload
-        thread.subscribers.should_not include(user)
+        expect(thread.subscribers).not_to include(user)
       end
     end
 
@@ -150,12 +150,12 @@ describe GroupMembershipObserver do
       let(:thread) { FactoryGirl.create(:group_message_thread) }
       it 'should leave you subscribed to group public threads' do
         thread.add_subscriber(user)
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
         GroupMembership.observers.enable :group_membership_observer do
           group_membership.destroy
         end
         thread.reload
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
       end
     end
   end

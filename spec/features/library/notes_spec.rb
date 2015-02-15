@@ -9,19 +9,19 @@ describe 'Library notes' do
     end
 
     it 'should show the note body' do
-      page.should have_content(note.body)
+      expect(page).to have_content(note.body)
     end
 
     it "should link to the creator's profile" do
-      page.should have_link(note.created_by.name)
+      expect(page).to have_link(note.created_by.name)
     end
 
     it 'should show the date when it was created' do
-      page.should have_content(I18n.localize(note.created_at.to_date))
+      expect(page).to have_content(I18n.localize(note.created_at.to_date))
     end
 
     it 'should not show a link to edit tags' do
-      page.should_not have_content(I18n.t('.shared.tags.panel.edit_tags'))
+      expect(page).not_to have_content(I18n.t('.shared.tags.panel.edit_tags'))
     end
   end
 
@@ -30,14 +30,14 @@ describe 'Library notes' do
       visit new_library_note_path
       fill_in 'Note', with: 'Note text goes here'
       click_on 'Create Note'
-      page.should have_content('Note text goes here')
+      expect(page).to have_content('Note text goes here')
     end
 
     it 'should auto link the text' do
       visit new_library_note_path
       fill_in 'Note', with: 'Text https://example.com more text'
       click_on 'Create Note'
-      page.should have_link('https://example.com')
+      expect(page).to have_link('https://example.com')
     end
 
     it 'should create tags for the note' do
@@ -45,13 +45,13 @@ describe 'Library notes' do
       fill_in 'Note', with: 'blah blah blah'
       fill_in 'Tags', with: 'one two three'
       click_on 'Create Note'
-      page.should have_content('three')
+      expect(page).to have_content('three')
     end
 
     it 'should have a cancel link back to the library page' do
       visit new_library_note_path
       click_on 'Cancel'
-      page.current_path.should == library_path
+      expect(page.current_path).to eq(library_path)
     end
   end
 
@@ -63,7 +63,7 @@ describe 'Library notes' do
     end
 
     it 'should show the document title' do
-      page.should have_content(note.document.title)
+      expect(page).to have_content(note.document.title)
     end
   end
 
@@ -78,7 +78,7 @@ describe 'Library notes' do
       click_on 'Edit tags'
       fill_in 'Tags', with: 'cycle parking'
       click_on I18n.t('.formtastic.actions.library_item.update_tags')
-      JSON.parse(page.source)['tagspanel'].should have_content('parking')
+      expect(JSON.parse(page.source)['tagspanel']).to have_content('parking')
     end
   end
 
@@ -89,18 +89,18 @@ describe 'Library notes' do
 
       it 'should show you a link' do
         visit library_note_path(note)
-        page.should have_link(edit_text)
+        expect(page).to have_link(edit_text)
       end
 
       it 'should let you edit the note' do
         visit library_note_path(note)
         click_on edit_text
 
-        page.should have_content(I18n.t('.library.notes.edit.title'))
+        expect(page).to have_content(I18n.t('.library.notes.edit.title'))
         fill_in 'Note', with: 'Something New and Very Useful'
         click_on 'Save'
-        current_path.should == library_note_path(note)
-        page.should have_content('Something New and Very Useful')
+        expect(current_path).to eq(library_note_path(note))
+        expect(page).to have_content('Something New and Very Useful')
       end
     end
 
@@ -111,7 +111,7 @@ describe 'Library notes' do
         let(:note) { FactoryGirl.create(:library_note, created_by: current_user) }
         it 'should show you a link' do
           visit library_note_path(note)
-          page.should have_link(edit_text)
+          expect(page).to have_link(edit_text)
         end
       end
 
@@ -121,7 +121,7 @@ describe 'Library notes' do
           note.item.update_attribute(:created_at, 2.days.ago)
 
           visit library_note_path(note)
-          page.should_not have_link(edit_text)
+          expect(page).not_to have_link(edit_text)
         end
       end
     end
@@ -131,7 +131,7 @@ describe 'Library notes' do
 
       it 'should not show you a link' do
         visit library_note_path(note)
-        page.should_not have_link(edit_text)
+        expect(page).not_to have_link(edit_text)
       end
     end
   end

@@ -9,7 +9,7 @@ describe 'Group members' do
     end
 
     it 'should not let you view the page' do
-      page.should have_content('You are not authorised to access that page.')
+      expect(page).to have_content('You are not authorised to access that page.')
     end
   end
 
@@ -23,27 +23,27 @@ describe 'Group members' do
       end
 
       it 'should display the group name in the page title' do
-        page.should have_title(current_group.name)
+        expect(page).to have_title(current_group.name)
       end
 
       it 'should display the user name of the committee member' do
         within('.committee') do
-          page.should have_content(current_user.name)
+          expect(page).to have_content(current_user.name)
         end
       end
 
       it 'lists the member names' do
         @memberships.each do |member|
-          page.should have_content(member.user.name)
+          expect(page).to have_content(member.user.name)
         end
       end
 
       it 'should have a link to create a new member' do
-        find_link('you can add them directly').should be_visible
+        expect(find_link('you can add them directly')).to be_visible
       end
 
       it 'should let you review the membership request history' do
-        page.should have_link(I18n.t('.group.members.index.review_requests'))
+        expect(page).to have_link(I18n.t('.group.members.index.review_requests'))
       end
     end
 
@@ -52,7 +52,7 @@ describe 'Group members' do
 
       it 'should encourage you to review pending membership requests' do
         visit group_members_path(current_group)
-        page.should have_link(I18n.t('.group.members.index.review_pending'))
+        expect(page).to have_link(I18n.t('.group.members.index.review_pending'))
       end
     end
   end

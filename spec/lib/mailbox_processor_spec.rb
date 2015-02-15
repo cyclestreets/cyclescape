@@ -12,17 +12,17 @@ describe MailboxProcessor do
     subject { MailboxProcessor.new(config) }
 
     before do
-      Net::IMAP.stub(:new).and_return(imap)
-      imap.stub(:authenticate).and_return(imap)
+      allow(Net::IMAP).to receive(:new).and_return(imap)
+      allow(imap).to receive(:authenticate).and_return(imap)
     end
 
     it 'should connect to the given host' do
-      Net::IMAP.should_receive(:new).with(config[:host])
+      expect(Net::IMAP).to receive(:new).with(config[:host])
       subject.establish_connection
     end
 
     it 'should use the given connection details' do
-      imap.should_receive(:authenticate).with(config[:authentication], config[:user_name], config[:password])
+      expect(imap).to receive(:authenticate).with(config[:authentication], config[:user_name], config[:password])
       subject.establish_connection
     end
   end
@@ -32,24 +32,24 @@ describe MailboxProcessor do
 
     describe '#fetch_message_ids' do
       before do
-        subject.stub(:imap).and_return(imap)
-        imap.stub(:select)
-        imap.stub(:uid_search)
+        allow(subject).to receive(:imap).and_return(imap)
+        allow(imap).to receive(:select)
+        allow(imap).to receive(:uid_search)
       end
 
       it 'should access the given mailbox' do
-        imap.should_receive(:select).with('MYMAIL')
+        expect(imap).to receive(:select).with('MYMAIL')
         subject.fetch_message_ids('MYMAIL')
       end
 
       it 'should search for unseen messages by default' do
-        imap.should_receive(:uid_search).with(['UNSEEN'])
+        expect(imap).to receive(:uid_search).with(['UNSEEN'])
         subject.fetch_message_ids('MYMAIL')
       end
 
       it 'should return the search results' do
-        imap.should_receive(:uid_search).and_return(:results)
-        subject.fetch_message_ids('MYMAIL').should == :results
+        expect(imap).to receive(:uid_search).and_return(:results)
+        expect(subject.fetch_message_ids('MYMAIL')).to eq(:results)
       end
     end
 
@@ -57,23 +57,23 @@ describe MailboxProcessor do
       let(:message) { double('message', attr: { 'RFC822' => 'Mail text' }) }
 
       before do
-        subject.stub(:imap).and_return(imap)
-        imap.stub(:uid_fetch).and_return([message])
-        imap.stub(:uid_store)
+        allow(subject).to receive(:imap).and_return(imap)
+        allow(imap).to receive(:uid_fetch).and_return([message])
+        allow(imap).to receive(:uid_store)
       end
 
       it 'should fetch the given message and ask for RFC822 format' do
-        imap.should_receive(:uid_fetch).with(31, ['RFC822'])
+        expect(imap).to receive(:uid_fetch).with(31, ['RFC822'])
         subject.fetch_raw_message(31)
       end
 
       it 'should unset the seen flag' do
-        imap.should_receive(:uid_store).with(31, '-FLAGS', [:Seen])
+        expect(imap).to receive(:uid_store).with(31, '-FLAGS', [:Seen])
         subject.fetch_raw_message(31)
       end
 
       it 'should return the message text' do
-        subject.fetch_raw_message(31).should == 'Mail text'
+        expect(subject.fetch_raw_message(31)).to eq('Mail text')
       end
     end
   end

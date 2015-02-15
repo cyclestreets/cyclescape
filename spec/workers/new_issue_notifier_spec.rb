@@ -6,12 +6,12 @@ describe NewIssueNotifier do
   let(:issue) { double('issue', id: 99) }
 
   # Queueing interface
-  it { should respond_to(:perform) }
-  it { subject.queue.should == :outbound_mail }
+  it { is_expected.to respond_to(:perform) }
+  it { expect(subject.queue).to eq(:outbound_mail) }
 
   describe '.new_issue' do
     it 'should queue process_new_issue with the issue ID' do
-      Resque.should_receive(:enqueue).with(NewIssueNotifier, :process_new_issue, 99)
+      expect(Resque).to receive(:enqueue).with(NewIssueNotifier, :process_new_issue, 99)
       subject.new_issue(issue)
     end
   end
@@ -31,7 +31,7 @@ describe NewIssueNotifier do
       it 'should find all user locations that intersect with the issue location'
       it 'should queue a notification for each user that has preference set' do
         opts = { 'user_id' => user.id, 'category_id' => location.category_id, 'issue_id' => issue.id }
-        Resque.should_receive(:enqueue).with(NewIssueNotifier, :notify_new_user_location_issue, opts)
+        expect(Resque).to receive(:enqueue).with(NewIssueNotifier, :notify_new_user_location_issue, opts)
         subject.process_new_issue(issue)
       end
     end

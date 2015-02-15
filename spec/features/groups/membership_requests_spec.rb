@@ -10,7 +10,7 @@ describe 'Group Membership Requests' do
     describe 'viewing the requests' do
       it 'should refuse' do
         visit group_membership_requests_path(gmr.group)
-        page.should have_content('You are not authorised to access that page.')
+        expect(page).to have_content('You are not authorised to access that page.')
       end
     end
   end
@@ -24,7 +24,7 @@ describe 'Group Membership Requests' do
         visit group_membership_requests_path(gmr.group)
         click_on 'Confirm'
         open_email(gmr.user.email)
-        current_email.should have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
+        expect(current_email).to have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
       end
 
       it 'should not html escape the name of the group' do
@@ -33,26 +33,26 @@ describe 'Group Membership Requests' do
         visit group_membership_requests_path(gmr.group)
         click_on 'Confirm'
         open_email(gmr.user.email)
-        current_email.should have_body_text('A & B')
+        expect(current_email).to have_body_text('A & B')
       end
 
       it 'should let you view the user profile' do
         visit group_membership_requests_path(gmr.group)
         click_on gmr.user.name
-        page.should have_content(gmr.user.name)
-        current_path.should eql(user_profile_path(gmr.user))
+        expect(page).to have_content(gmr.user.name)
+        expect(current_path).to eql(user_profile_path(gmr.user))
       end
 
       it 'should let you review individual requests' do
         visit review_group_membership_request_path(gmr.group, gmr.id)
         click_on 'Confirm'
         open_email(gmr.user.email)
-        current_email.should have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
+        expect(current_email).to have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
       end
 
       it 'should show there was no message when reviewing' do
         visit review_group_membership_request_path(gmr.group, gmr.id)
-        page.should have_content(I18n.t('.group.membership_requests.review.no_message'))
+        expect(page).to have_content(I18n.t('.group.membership_requests.review.no_message'))
       end
 
       context 'with a message' do
@@ -61,13 +61,13 @@ describe 'Group Membership Requests' do
 
         it "should indicate there's a message when viewing the list" do
           visit group_membership_requests_path(gmr.group)
-          page.should have_link(I18n.t('.group.membership_requests.index.view_message'))
+          expect(page).to have_link(I18n.t('.group.membership_requests.index.view_message'))
         end
 
         it 'should show the message when reviewing' do
           visit review_group_membership_request_path(gmr.group, gmr.id)
-          page.should have_content(I18n.t('.group.membership_requests.review.message'))
-          page.should have_content(message)
+          expect(page).to have_content(I18n.t('.group.membership_requests.review.message'))
+          expect(page).to have_content(message)
         end
       end
     end
@@ -88,7 +88,7 @@ describe 'Group Membership Requests' do
         fill_in 'New Password', with: 'Password1', match: :first
         fill_in 'New Password Confirmation', with: 'Password1'
         click_button 'Confirm account'
-        page.should have_content('Your password was set successfully. You are now signed in.')
+        expect(page).to have_content('Your password was set successfully. You are now signed in.')
       end
 
       it 'should let you complete the invitation and change name and email' do
@@ -100,11 +100,11 @@ describe 'Group Membership Requests' do
         fill_in 'New Password', with: 'Password1', match: :first
         fill_in 'New Password Confirmation', with: 'Password1'
         click_button 'Confirm account'
-        page.should have_content('Your password was set successfully. You are now signed in.')
-        User.find_by_email(@credentials[:email]).should be_nil
+        expect(page).to have_content('Your password was set successfully. You are now signed in.')
+        expect(User.find_by_email(@credentials[:email])).to be_nil
         updated_user = User.find_by_email('some_other_email@example.com')
-        updated_user.full_name.should eq 'Shaun McDonald'
-        updated_user.display_name.should eq 'smsm1'
+        expect(updated_user.full_name).to eq 'Shaun McDonald'
+        expect(updated_user.display_name).to eq 'smsm1'
       end
     end
   end
@@ -126,14 +126,14 @@ describe 'Group Membership Requests' do
     describe 'signing up again' do
       it 'should not show a link on the page' do
         visit group_path(group)
-        page.should_not have_content(I18n.t('.groups.join.join_this_group'))
-        page.should have_content(I18n.t('.groups.join.group_request_pending'))
+        expect(page).not_to have_content(I18n.t('.groups.join.join_this_group'))
+        expect(page).to have_content(I18n.t('.groups.join.group_request_pending'))
       end
 
       it 'should not let you go directly' do
         visit new_group_membership_request_path(group)
         click_button I18n.t('.formtastic.actions.group_membership_request.create')
-        page.should have_content(I18n.t('.group.membership_requests.create.already_asked'))
+        expect(page).to have_content(I18n.t('.group.membership_requests.create.already_asked'))
       end
     end
   end
@@ -160,7 +160,7 @@ describe 'Group Membership Requests' do
         group.prefs.save!
 
         click_button I18n.t('.formtastic.actions.group_membership_request.create')
-        all_emails.count.should eql(0)
+        expect(all_emails.count).to eql(0)
       end
     end
 
@@ -169,12 +169,12 @@ describe 'Group Membership Requests' do
         click_button I18n.t('.formtastic.actions.group_membership_request.create')
 
         open_email(group.email)
-        current_email.subject.should include(current_user.name)
-        current_email.subject.should include(group.name)
-        current_email.should have_body_text('You can confirm or reject the membership request')
+        expect(current_email.subject).to include(current_user.name)
+        expect(current_email.subject).to include(group.name)
+        expect(current_email).to have_body_text('You can confirm or reject the membership request')
 
-        current_email.should have_body_text review_group_membership_request_url(group, group.pending_membership_requests.last)
-        current_email.should have_body_text group_membership_requests_url(group)
+        expect(current_email).to have_body_text review_group_membership_request_url(group, group.pending_membership_requests.last)
+        expect(current_email).to have_body_text group_membership_requests_url(group)
       end
     end
 
@@ -187,9 +187,9 @@ describe 'Group Membership Requests' do
         click_button I18n.t('.formtastic.actions.group_membership_request.create')
 
         open_email(membership_secretary.email)
-        current_email.subject.should include(current_user.name)
-        current_email.subject.should include(group.name)
-        current_email.should have_body_text('You can confirm or reject the membership request')
+        expect(current_email.subject).to include(current_user.name)
+        expect(current_email.subject).to include(group.name)
+        expect(current_email).to have_body_text('You can confirm or reject the membership request')
       end
     end
 
@@ -199,15 +199,15 @@ describe 'Group Membership Requests' do
         click_button I18n.t('.formtastic.actions.group_membership_request.create')
 
         open_email(group.email)
-        current_email.should have_body_text('They included a message with their request:')
-        current_email.should have_body_text(message)
+        expect(current_email).to have_body_text('They included a message with their request:')
+        expect(current_email).to have_body_text(message)
       end
 
       it "should indicate if they didn't include a message" do
         click_button I18n.t('.formtastic.actions.group_membership_request.create')
 
         open_email(group.email)
-        current_email.should have_body_text('They did not include a message with their request')
+        expect(current_email).to have_body_text('They did not include a message with their request')
       end
     end
   end

@@ -66,13 +66,14 @@ group :development, :test do
   gem 'hirb'
   gem 'pry'
 
-  gem 'rspec-rails', '~> 2.99.0' # pin to compatibility version
+  gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'ruby-prof'
 end
 
 group :test do
+  gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'

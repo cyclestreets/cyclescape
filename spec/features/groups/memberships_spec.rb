@@ -12,8 +12,8 @@ describe 'Group memberships admin' do
       end
 
       it 'should show the new member form' do
-        page.should have_field('Full name')
-        page.should have_field('Email')
+        expect(page).to have_field('Full name')
+        expect(page).to have_field('Email')
       end
     end
 
@@ -27,15 +27,15 @@ describe 'Group memberships admin' do
         fill_in 'Full name', with: 'Brian Griffin'
         fill_in 'Email', with: 'briang@example.com'
         click_button 'Add member'
-        User.find_by_email('briang@example.com').should be_true
+        expect(User.find_by_email('briang@example.com')).to be_truthy
         email = open_email 'briang@example.com'
-        email.subject.should =~ /Invitation/
+        expect(email.subject).to match(/Invitation/)
       end
 
       it 'should display an error if a name is not given' do
         choose 'Member'
         click_button 'Add member'
-        page.should have_content('Please enter a name')
+        expect(page).to have_content('Please enter a name')
       end
 
       context 'with existing user' do
@@ -45,7 +45,7 @@ describe 'Group memberships admin' do
           choose 'Member'
           fill_in 'Email', with: new_member.email
           click_button 'Add member'
-          User.find_by_email(new_member.email).groups.should include(group)
+          expect(User.find_by_email(new_member.email).groups).to include(group)
         end
       end
     end
@@ -60,7 +60,7 @@ describe 'Group memberships admin' do
 
     context 'new' do
       it 'should show the page' do
-        page.status_code.should == 200
+        expect(page.status_code).to eq(200)
       end
     end
 
@@ -71,12 +71,12 @@ describe 'Group memberships admin' do
           fill_in 'Full name', with: 'Meg Griffin'
           fill_in 'Email', with: 'meg@example.com'
           click_button 'Add member'
-          User.find_by_email('meg@example.com').should be_true
+          expect(User.find_by_email('meg@example.com')).to be_truthy
           email = open_email 'meg@example.com'
-          email.subject.should =~ /Invitation/
+          expect(email.subject).to match(/Invitation/)
 
           # Ensure they only get one invitation email and not e.g. added to group email
-          all_emails.count.should eql(1)
+          expect(all_emails.count).to eql(1)
         end
 
       context 'for existing users' do
@@ -87,9 +87,9 @@ describe 'Group memberships admin' do
           fill_in 'Email', with: new_member.email
           click_button 'Add member'
           email = open_email new_member.email
-          email.subject.should =~ /You are now a member/
+          expect(email.subject).to match(/You are now a member/)
 
-          all_emails.count.should eql(1)
+          expect(all_emails.count).to eql(1)
         end
       end
     end
@@ -99,7 +99,7 @@ describe 'Group memberships admin' do
 
       it 'should let you promote a member into the committee' do
         FactoryGirl.create(:group_membership, group: current_group, user: meg)
-        current_group.committee_members.should_not include(meg)
+        expect(current_group.committee_members).not_to include(meg)
 
         visit group_members_path(current_group)
         within('.members') do
@@ -109,9 +109,9 @@ describe 'Group memberships admin' do
         click_on 'Save'
 
         within('.committee') do
-          page.should have_content(meg.name)
+          expect(page).to have_content(meg.name)
         end
-        current_group.committee_members.should include(meg)
+        expect(current_group.committee_members).to include(meg)
       end
     end
   end

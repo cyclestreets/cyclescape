@@ -13,18 +13,18 @@ describe 'Group subdomains', use: :subdomain do
     context 'accessed as a public user' do
       it 'should show the group page at the root' do
         visit '/'
-        page.should have_content(group.name)
+        expect(page).to have_content(group.name)
       end
 
       it 'should have the subdomain in the URL' do
         visit '/'
-        page.current_host.should == "http://#{group.short_name}.example.com"
+        expect(page.current_host).to eq("http://#{group.short_name}.example.com")
       end
 
       it 'should not override the group page (bug)' do
         other_group = FactoryGirl.create(:group)
         visit group_path(other_group)
-        page.should have_content(other_group.name)
+        expect(page).to have_content(other_group.name)
       end
     end
   end
@@ -38,12 +38,12 @@ describe 'Group subdomains', use: :subdomain do
 
     it 'should redirect you to www' do
       visit '/'
-      page.current_host.should == 'http://www.example.com'
+      expect(page.current_host).to eq('http://www.example.com')
     end
 
     it 'should redirect you to www on other pages too' do
       visit '/issues'
-      page.current_host.should == 'http://www.example.com'
+      expect(page.current_host).to eq('http://www.example.com')
     end
   end
 end

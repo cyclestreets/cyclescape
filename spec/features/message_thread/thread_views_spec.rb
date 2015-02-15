@@ -12,7 +12,7 @@ describe 'thread views' do
 
     it 'should output a page with the correct class' do
       visit thread_path(thread)
-      page.should have_css('article.message.thread-view-from-here')
+      expect(page).to have_css('article.message.thread-view-from-here')
     end
   end
 end

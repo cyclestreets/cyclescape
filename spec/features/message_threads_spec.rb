@@ -16,7 +16,7 @@ describe 'Message threads' do
 
       it 'should list public message threads' do
         threads.each do |thread|
-          page.should have_content(thread.title)
+          expect(page).to have_content(thread.title)
         end
       end
 
@@ -35,38 +35,38 @@ describe 'Message threads' do
 
       it 'should show the thread title' do
         within('.thread h1') do
-          page.should have_content(@thread.title)
+          expect(page).to have_content(@thread.title)
         end
       end
 
       it 'should show messages on a public thread' do
         @messages.each do |message|
-          page.should have_content(message.body)
+          expect(page).to have_content(message.body)
         end
       end
 
       it 'should show the authors of messages' do
         @messages.each do |message|
           within(dom_id_selector(message)) do
-            page.should have_content(message.created_by.name)
+            expect(page).to have_content(message.created_by.name)
           end
         end
       end
 
       it 'should not show a link to edit tags' do
-        page.should_not have_content(I18n.t('.shared.tags.panel.edit_tags'))
+        expect(page).not_to have_content(I18n.t('.shared.tags.panel.edit_tags'))
       end
 
       it 'should set the page title' do
-        page.should have_title(@thread.title)
+        expect(page).to have_title(@thread.title)
       end
 
       it 'should disable the message input' do
-        find('#message_body', match: :first)[:disabled].should == 'disabled'
+        expect(find('#message_body', match: :first)[:disabled]).to eq('disabled')
       end
 
       it 'should display a notice saying the user must sign in to post' do
-        page.should have_content('Please sign in to post a message')
+        expect(page).to have_content('Please sign in to post a message')
       end
     end
 
@@ -81,11 +81,11 @@ describe 'Message threads' do
       end
 
       it 'should not show the issue' do
-        page.should_not have_content(issue.title)
+        expect(page).not_to have_content(issue.title)
       end
 
       it 'should still show the thread' do
-        page.should have_content(thread_with_issue.title)
+        expect(page).to have_content(thread_with_issue.title)
       end
     end
   end
@@ -101,7 +101,7 @@ describe 'Message threads' do
       it 'should list all public message threads' do
         visit threads_path
         threads.each do |thread|
-          page.should have_content(thread.title)
+          expect(page).to have_content(thread.title)
         end
       end
 
@@ -110,14 +110,14 @@ describe 'Message threads' do
         first.add_subscriber(current_user)
         visit threads_path
         within("li[data-thread-id='#{first.id}']") do
-          page.should have_content('Following')
+          expect(page).to have_content('Following')
         end
       end
 
       it 'should link to the issue' do
         issue_thread = FactoryGirl.create(:issue_message_thread, :with_messages)
         visit threads_path
-        page.should have_link(issue_thread.issue.title)
+        expect(page).to have_link(issue_thread.issue.title)
       end
     end
 
@@ -129,24 +129,24 @@ describe 'Message threads' do
       context 'messages' do
         it 'should show all messages' do
           thread.messages.each do |message|
-            page.should have_content(message.body)
+            expect(page).to have_content(message.body)
           end
         end
 
         it 'should be able to post a new message' do
           fill_in 'Message', with: 'Testing a new message!', match: :first
           click_on 'Post Message'
-          page.should have_content('Testing a new message!')
+          expect(page).to have_content('Testing a new message!')
         end
 
         it 'should auto link messages' do
           fill_in 'Message', with: 'Testing autolink http://example.com', match: :first
           click_on 'Post Message'
-          page.should have_link('http://example.com')
+          expect(page).to have_link('http://example.com')
         end
 
         it 'should not be disabled as it is for guests' do
-          page.should have_no_content('Please sign in to post a message')
+          expect(page).to have_no_content('Please sign in to post a message')
         end
       end
 
@@ -154,26 +154,26 @@ describe 'Message threads' do
         it 'should show the names of subscribers' do
           click_on 'Follow this thread'
           within('.subscribers') do
-            page.should have_content(current_user.name)
+            expect(page).to have_content(current_user.name)
           end
         end
       end
 
       context 'censoring'  do
         it 'should not have a censor link' do
-          page.should_not have_content(censor_message)
+          expect(page).not_to have_content(censor_message)
         end
 
         it 'should not let you censor a message' do
           page.driver.put censor_thread_message_path(thread, thread.messages[0])
-          page.should have_content('You are not authorised to access that page.')
+          expect(page).to have_content('You are not authorised to access that page.')
         end
       end
 
       context 'tags' do
         it 'should show the linked tags' do
           thread.tags.each do |tag|
-            page.should have_content(tag.name)
+            expect(page).to have_content(tag.name)
           end
         end
 
@@ -184,10 +184,10 @@ describe 'Message threads' do
             click_on I18n.t('.formtastic.actions.message_thread.update_tags')
           end
           # Page submission is AJAX and returns json
-          page.source.should have_content('bike')
-          page.source.should have_content('wheels')
+          expect(page.source).to have_content('bike')
+          expect(page.source).to have_content('wheels')
           # Check the response has information for the library panel.
-          JSON.parse(page.source)['librarypanel'].should_not be_nil
+          expect(JSON.parse(page.source)['librarypanel']).not_to be_nil
         end
       end
     end
@@ -198,12 +198,12 @@ describe 'Message threads' do
       end
 
       it 'should not show a delete link' do
-        page.should_not have_content(delete_thread)
+        expect(page).not_to have_content(delete_thread)
       end
 
       it 'should not let you delete a thread' do
         page.driver.delete thread_path(thread)
-        page.should have_content('You are not authorised to access that page.')
+        expect(page).to have_content('You are not authorised to access that page.')
       end
     end
 
@@ -213,12 +213,12 @@ describe 'Message threads' do
       end
 
       it 'should not show an edit link' do
-        page.should_not have_content(edit_thread)
+        expect(page).not_to have_content(edit_thread)
       end
 
       it 'should not let you edit a thread' do
         visit edit_thread_path(thread)
-        page.should have_content('You are not authorised to access that page.')
+        expect(page).to have_content('You are not authorised to access that page.')
       end
     end
   end
@@ -242,13 +242,13 @@ describe 'Message threads' do
       end
 
       it 'should provide a censor link' do
-        page.should have_content(censor_message)
+        expect(page).to have_content(censor_message)
       end
 
       it 'should let you censor a message' do
         click_on censor_message, match: :first
-        page.should have_content('Message censored')
-        page.should have_content('This message has been removed')
+        expect(page).to have_content('Message censored')
+        expect(page).to have_content('This message has been removed')
       end
 
       it 'should still show messages in order of creation and not updated'
@@ -262,8 +262,8 @@ describe 'Message threads' do
 
       it 'should let you delete the thread' do
         click_on delete_thread
-        page.should have_content('Thread deleted')
-        page.should_not have_content(thread.title)
+        expect(page).to have_content('Thread deleted')
+        expect(page).not_to have_content(thread.title)
       end
     end
 
@@ -274,11 +274,11 @@ describe 'Message threads' do
 
       it 'should let you edit the thread' do
         click_on edit_thread
-        page.should have_content('Edit thread')
+        expect(page).to have_content('Edit thread')
         fill_in 'Title', with: 'New better title'
         click_on 'Save'
-        page.should have_content('Thread updated')
-        page.should have_content('New better title')
+        expect(page).to have_content('Thread updated')
+        expect(page).to have_content('New better title')
       end
 
       it 'should let you set a group as the owner' do
@@ -286,8 +286,8 @@ describe 'Message threads' do
         click_on edit_thread
         select group.name, from: 'Owned by'
         click_on 'Save'
-        page.should have_content(thread.title)
-        page.should have_content(group.name)
+        expect(page).to have_content(thread.title)
+        expect(page).to have_content(group.name)
       end
 
       it 'should let you pick an issue to assign the thread to' do
@@ -295,8 +295,8 @@ describe 'Message threads' do
         click_on edit_thread
         select "#{issue.id} - #{issue.title}", from: 'Issue'
         click_on 'Save'
-        page.should have_content(thread.title)
-        page.should have_content(issue.title)
+        expect(page).to have_content(thread.title)
+        expect(page).to have_content(issue.title)
       end
     end
 
@@ -306,21 +306,21 @@ describe 'Message threads' do
 
       it 'should let you assign to another group' do
         visit edit_thread_path(thread)
-        page.should have_select('Owned by', selected: thread.group.name)
+        expect(page).to have_select('Owned by', selected: thread.group.name)
         select other_group.name, from: 'Owned by'
         click_on 'Save'
-        page.should have_content(thread.title)
-        page.should have_content(other_group.name)
-        page.should have_no_content(thread.group.name)
+        expect(page).to have_content(thread.title)
+        expect(page).to have_content(other_group.name)
+        expect(page).to have_no_content(thread.group.name)
       end
 
       it 'should let you change the privacy setting' do
         visit edit_thread_path(thread)
-        page.should have_select('Privacy', selected: 'Public')
+        expect(page).to have_select('Privacy', selected: 'Public')
         select 'Group', from: 'Privacy'
         click_on 'Save'
-        page.should have_content(thread.title)
-        page.should have_content('Private')
+        expect(page).to have_content(thread.title)
+        expect(page).to have_content('Private')
       end
     end
   end
@@ -332,12 +332,12 @@ describe 'Message threads' do
     context 'as a guest' do
       it 'should not show the private thread' do
         visit thread_path(private_thread)
-        page.should have_content('You need to sign in or sign up before continuing.')
+        expect(page).to have_content('You need to sign in or sign up before continuing.')
       end
 
       it 'should not show the committee thread' do
         visit thread_path(committee_thread)
-        page.should have_content('You need to sign in or sign up before continuing.')
+        expect(page).to have_content('You need to sign in or sign up before continuing.')
       end
     end
 
@@ -346,12 +346,12 @@ describe 'Message threads' do
 
       it 'should not show the private thread' do
         visit thread_path(private_thread)
-        page.should have_content('You are not authorised to access that page.')
+        expect(page).to have_content('You are not authorised to access that page.')
       end
 
       it 'should not show the committee thread' do
         visit thread_path(committee_thread)
-        page.should have_content('You are not authorised to access that page.')
+        expect(page).to have_content('You are not authorised to access that page.')
       end
     end
 
@@ -363,12 +363,12 @@ describe 'Message threads' do
 
       it 'should show the private thread' do
         visit thread_path(group_private_thread)
-        page.should have_content(group_private_thread.title)
+        expect(page).to have_content(group_private_thread.title)
       end
 
       it 'should not show the committee thread' do
         visit thread_path(group_committee_thread)
-        page.should have_content('You are not authorised to access that page.')
+        expect(page).to have_content('You are not authorised to access that page.')
       end
     end
 
@@ -380,12 +380,12 @@ describe 'Message threads' do
 
       it 'should show the private thread' do
         visit thread_path(group_private_thread)
-        page.should have_content(group_private_thread.title)
+        expect(page).to have_content(group_private_thread.title)
       end
 
       it 'should show the committee thread' do
         visit thread_path(group_committee_thread)
-        page.should have_content(group_committee_thread.title)
+        expect(page).to have_content(group_committee_thread.title)
       end
     end
 
@@ -394,10 +394,10 @@ describe 'Message threads' do
 
       it 'should let admins see any thread' do
         visit thread_path(private_thread)
-        page.should have_content(private_thread.title)
+        expect(page).to have_content(private_thread.title)
 
         visit thread_path(committee_thread)
-        page.should have_content(committee_thread.title)
+        expect(page).to have_content(committee_thread.title)
       end
     end
   end
@@ -426,9 +426,9 @@ describe 'Message threads' do
           fill_in search_field, with: 'bananas'
           click_on search_button
         end
-        page.should have_content(thread.title)
-        page.should_not have_content(private_thread.title)
-        page.should_not have_content(committee_thread.title)
+        expect(page).to have_content(thread.title)
+        expect(page).not_to have_content(private_thread.title)
+        expect(page).not_to have_content(committee_thread.title)
       end
     end
 
@@ -444,9 +444,9 @@ describe 'Message threads' do
           fill_in search_field, with: 'bananas'
           click_on search_button
         end
-        page.should have_content(thread.title)
-        page.should have_content(private_thread.title)
-        page.should_not have_content(committee_thread.title)
+        expect(page).to have_content(thread.title)
+        expect(page).to have_content(private_thread.title)
+        expect(page).not_to have_content(committee_thread.title)
       end
     end
 
@@ -462,9 +462,9 @@ describe 'Message threads' do
           fill_in search_field, with: 'bananas'
           click_on search_button
         end
-        page.should have_content(thread.title)
-        page.should have_content(private_thread.title)
-        page.should have_content(committee_thread.title)
+        expect(page).to have_content(thread.title)
+        expect(page).to have_content(private_thread.title)
+        expect(page).to have_content(committee_thread.title)
       end
     end
   end

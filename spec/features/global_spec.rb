@@ -7,19 +7,19 @@ describe 'Global settings' do
     end
 
     it 'should set the authorization user to a guest' do
-      Authorization.current_user.role_symbols.should include(:guest)
+      expect(Authorization.current_user.role_symbols).to include(:guest)
     end
 
     it 'should show the current Git version in the footer' do
       within('footer') do
-        page.should have_content(Rails.application.config.git_hash)
+        expect(page).to have_content(Rails.application.config.git_hash)
       end
     end
   end
 
   context 'signed in', as: :site_user do
     it 'should set the authorization user to the signed in one' do
-      Authorization.current_user.should == current_user
+      expect(Authorization.current_user).to eq(current_user)
     end
   end
 end

@@ -14,6 +14,6 @@ describe 'User accounts' do
       click_on current_user.name
     end
     click_on I18n.t('.shared.profile_menu.update_account')
-    page.should have_content(I18n.t('.devise.registrations.edit.title'))
+    expect(page).to have_content(I18n.t('.devise.registrations.edit.title'))
   end
 end

@@ -15,7 +15,7 @@ describe 'Group profiles' do
 
       it 'should show you the profile' do
         visit group_profile_path(group)
-        page.should have_content(group.profile.description)
+        expect(page).to have_content(group.profile.description)
       end
     end
   end
@@ -26,7 +26,7 @@ describe 'Group profiles' do
     describe 'editing the group profile' do
       it 'should refuse' do
         visit edit_group_profile_path(current_group)
-        page.should have_content('You are not authorised to access that page.')
+        expect(page).to have_content('You are not authorised to access that page.')
       end
     end
   end
@@ -37,7 +37,7 @@ describe 'Group profiles' do
     describe 'editing the group profile' do
       it 'should be permitted' do
         visit edit_group_profile_path(current_group)
-        page.should have_content('Edit Profile')
+        expect(page).to have_content('Edit Profile')
       end
 
       it 'should work' do
@@ -45,7 +45,7 @@ describe 'Group profiles' do
         fill_in 'Description', with: 'Updated description'
         click_on 'Save'
         visit group_profile_path(current_group)
-        page.should have_content('Updated description')
+        expect(page).to have_content('Updated description')
       end
     end
   end
@@ -57,7 +57,7 @@ describe 'Group profiles' do
       let(:group) { FactoryGirl.create(:quahogcc) }
       it 'should be permitted' do
         visit edit_group_profile_path(group)
-        page.should have_content('Edit Profile')
+        expect(page).to have_content('Edit Profile')
       end
     end
   end

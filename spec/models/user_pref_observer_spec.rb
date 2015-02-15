@@ -9,7 +9,7 @@ describe UserPrefObserver do
     it 'should notice when UserPrefs are saved' do
       user # triggers initial creation events which we want to ignore
 
-      subject.should_receive(:after_save)
+      expect(subject).to receive(:after_save)
       UserPref.observers.enable :user_pref_observer do
         user.prefs.save
       end
@@ -29,45 +29,45 @@ describe UserPrefObserver do
       end
 
       it 'should subscribe to group administrative threads' do
-        group_thread.subscribers.should_not include(user)
+        expect(group_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups_admin = true
           user.prefs.save
         end
         group_thread.reload
-        group_thread.subscribers.should include(user)
+        expect(group_thread.subscribers).to include(user)
       end
 
       it 'should not subscribe to group issue threads' do
-        group_issue_thread.subscribers.should_not include(user)
+        expect(group_issue_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups_admin = true
           user.prefs.save
         end
         group_issue_thread.reload
-        group_issue_thread.subscribers.should_not include(user)
+        expect(group_issue_thread.subscribers).not_to include(user)
       end
 
       it 'should not subscribe to committee admin threads if user not on committee' do
-        group_private_thread.subscribers.should_not include(user)
+        expect(group_private_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups_admin = true
           user.prefs.save
         end
         group_private_thread.reload
-        group_private_thread.subscribers.should_not include(user)
+        expect(group_private_thread.subscribers).not_to include(user)
       end
 
       it 'should not subscribe to threads that have been previously unsubscribed' do
         group_thread.add_subscriber(user)
         user.thread_subscriptions.to(group_thread).destroy
-        group_thread.subscribers.should_not include(user)
+        expect(group_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups_admin = true
           user.prefs.save
         end
         group_thread.reload
-        group_thread.subscribers.should_not include(user)
+        expect(group_thread.subscribers).not_to include(user)
       end
     end
 
@@ -78,24 +78,24 @@ describe UserPrefObserver do
 
       it 'should unsubscribe you from administrative threads' do
         group_thread.add_subscriber(user)
-        group_thread.subscribers.should include(user)
+        expect(group_thread.subscribers).to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups_admin = false
           user.prefs.save
         end
         group_thread.reload
-        group_thread.subscribers.should_not include(user)
+        expect(group_thread.subscribers).not_to include(user)
       end
 
       it 'should not unsubcribe you from issue threads' do
         group_issue_thread.add_subscriber(user)
-        group_issue_thread.subscribers.should include(user)
+        expect(group_issue_thread.subscribers).to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups_admin = false
           user.prefs.save
         end
         group_issue_thread.reload
-        group_issue_thread.subscribers.should include(user)
+        expect(group_issue_thread.subscribers).to include(user)
       end
     end
   end
@@ -113,45 +113,45 @@ describe UserPrefObserver do
       end
 
       it 'should not subscribe to group administrative threads' do
-        group_thread.subscribers.should_not include(user)
+        expect(group_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups = 'subscribe'
           user.prefs.save
         end
         group_thread.reload
-        group_thread.subscribers.should_not include(user)
+        expect(group_thread.subscribers).not_to include(user)
       end
 
       it 'should subscribe to issue threads' do
-        group_issue_thread.subscribers.should_not include(user)
+        expect(group_issue_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups = 'subscribe'
           user.prefs.save
         end
         group_issue_thread.reload
-        group_issue_thread.subscribers.should include(user)
+        expect(group_issue_thread.subscribers).to include(user)
       end
 
       it 'should not subscribe to issue threads if user has no permissions' do
-        group_private_thread.subscribers.should_not include(user)
+        expect(group_private_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups = 'subscribe'
           user.prefs.save
         end
         group_private_thread.reload
-        group_private_thread.subscribers.should_not include(user)
+        expect(group_private_thread.subscribers).not_to include(user)
       end
 
       it 'should not subscribe to threads that have been previously unsubscribed' do
         group_issue_thread.add_subscriber(user)
         user.thread_subscriptions.to(group_issue_thread).destroy
-        group_issue_thread.subscribers.should_not include(user)
+        expect(group_issue_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups = 'subscribe'
           user.prefs.save
         end
         group_issue_thread.reload
-        group_issue_thread.subscribers.should_not include(user)
+        expect(group_issue_thread.subscribers).not_to include(user)
       end
     end
 
@@ -162,24 +162,24 @@ describe UserPrefObserver do
 
       it 'should unsubscribe from issue threads' do
         group_issue_thread.add_subscriber(user)
-        group_issue_thread.subscribers.should include(user)
+        expect(group_issue_thread.subscribers).to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups = 'none'
           user.prefs.save
         end
         group_issue_thread.reload
-        group_issue_thread.subscribers.should_not include(user)
+        expect(group_issue_thread.subscribers).not_to include(user)
       end
 
       it 'should not unsubcribe from administrative threads' do
         group_thread.add_subscriber(user)
-        group_thread.subscribers.should include(user)
+        expect(group_thread.subscribers).to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_groups = 'none'
           user.prefs.save
         end
         group_thread.reload
-        group_thread.subscribers.should include(user)
+        expect(group_thread.subscribers).to include(user)
       end
 
       context 'when involve my locations is subscribe' do
@@ -191,13 +191,13 @@ describe UserPrefObserver do
 
         it 'should not unsubscribe from issue in user locations' do
           group_issue_thread.add_subscriber(user)
-          group_issue_thread.subscribers.should include(user)
+          expect(group_issue_thread.subscribers).to include(user)
           UserPref.observers.enable :user_pref_observer do
             user.prefs.involve_my_groups = 'none'
             user.prefs.save
           end
           group_issue_thread.reload
-          group_issue_thread.subscribers.should include(user)
+          expect(group_issue_thread.subscribers).to include(user)
         end
       end
     end
@@ -214,24 +214,24 @@ describe UserPrefObserver do
       end
 
       it 'should subscribe you to overlapping threads' do
-        issue_thread.subscribers.should_not include(user)
+        expect(issue_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_locations = 'subscribe'
           user.prefs.save
         end
         issue_thread.reload
-        issue_thread.subscribers.should include(user)
+        expect(issue_thread.subscribers).to include(user)
       end
 
       it 'should not subscribe you to private threads' do
         issue_thread.update_column(:privacy, 'private')
-        issue_thread.subscribers.should_not include(user)
+        expect(issue_thread.subscribers).not_to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_locations = 'subscribe'
           user.prefs.save
         end
         issue_thread.reload
-        issue_thread.subscribers.should_not include(user)
+        expect(issue_thread.subscribers).not_to include(user)
       end
     end
 
@@ -242,13 +242,13 @@ describe UserPrefObserver do
 
       it 'should unsubscribe from threads' do
         issue_thread.add_subscriber(user)
-        issue_thread.subscribers.should include(user)
+        expect(issue_thread.subscribers).to include(user)
         UserPref.observers.enable :user_pref_observer do
           user.prefs.involve_my_locations = 'none'
           user.prefs.save
         end
         issue_thread.reload
-        issue_thread.subscribers.should_not include(user)
+        expect(issue_thread.subscribers).not_to include(user)
       end
 
       context 'when involve by groups is subscribe' do
@@ -262,14 +262,14 @@ describe UserPrefObserver do
 
         it 'should not unsubscribe from group threads' do
           issue_thread.add_subscriber(user)
-          user.groups.should include(issue_thread.group)
-          issue_thread.subscribers.should include(user)
+          expect(user.groups).to include(issue_thread.group)
+          expect(issue_thread.subscribers).to include(user)
           UserPref.observers.enable :user_pref_observer do
             user.prefs.involve_my_locations = 'none'
             user.prefs.save
           end
           issue_thread.reload
-          issue_thread.subscribers.should include(user)
+          expect(issue_thread.subscribers).to include(user)
         end
       end
     end

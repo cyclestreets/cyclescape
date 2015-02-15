@@ -10,19 +10,19 @@ describe MailboxCleaner do
 
   describe '#search_query' do
     it 'should search for seen messages' do
-      subject.search_query(10).should include('SEEN')
+      expect(subject.search_query(10)).to include('SEEN')
     end
 
     it 'should do a SENTBEFORE search based on days param' do
-      subject.search_query(10).should include('SENTBEFORE')
-      subject.search_query(10).last.should match(/[0-9]{2}-\w{3}-\d{4}/)
+      expect(subject.search_query(10)).to include('SENTBEFORE')
+      expect(subject.search_query(10).last).to match(/[0-9]{2}-\w{3}-\d{4}/)
     end
   end
 
   describe '#delete_message' do
     it 'should delete the message with given ID' do
-      subject.stub(:imap).and_return(imap)
-      imap.should_receive(:uid_store).with(31, '+FLAGS', [:Deleted])
+      allow(subject).to receive(:imap).and_return(imap)
+      expect(imap).to receive(:uid_store).with(31, '+FLAGS', [:Deleted])
       subject.delete_message(31)
     end
   end
