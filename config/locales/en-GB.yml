@@ -174,8 +174,22 @@
     membership_requests_tab: "Membership requests"
     home_page_tab: "Home page"
     issues:
+      destroy:
+        failure: "Can't delete that issue"
+        success: "Issue deleted"
       index:
         title: "Issues in the area of %{group_name}"
+      update:
+        success: "Issue updated"
+      vote_clear:
+        failure: "Your vote couldn't be cleared"
+        success: "Your vote has been cleared"
+      vote_down:
+        already: "You've already voted down this issue"
+        success: "You have voted down this issue"
+      vote_up:
+        already: "You've already voted up this issue"
+        success: "You have voted up this issue"
     members:
       index:
         actions: "Actions"
@@ -789,7 +803,7 @@
       view_the_photo: "You can view the photo at the following url:"
     footer:
       thread: "Cyclescape discussion thread"
-      unsubscribe: "You can stop following this thread by visiting the link above."
+      unsubscribe: "You can stop following this thread by visiting the link above and clicking 'unfollow this thread'."
   thread_priorities:
     very_high: "Top-priority"
     high: "Important"
