@@ -9,7 +9,7 @@
       %h3= link_to issue.title, issue
       .meta
         %p
-          = current_user_can_view(issue.created_by) do
+          - if permitted_to? :view_profile, issue.created_by
             = issue.creator_link
           = issue.creation_time
           \//

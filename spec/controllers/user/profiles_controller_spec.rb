@@ -63,7 +63,6 @@ describe User::ProfilesController do
         end
 
         it 'should be visible' do
-          #binding.pry
           get :show, user_id: user.id
           assigns(:profile_visible).should be_true
         end

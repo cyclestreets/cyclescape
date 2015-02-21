@@ -7,8 +7,11 @@
           %li= link_to t(".edit"), edit_library_note_path(@note)
   %section.meta
     %p
-      = current_user_can_view(@note.created_by, t(".added_by_html", name: t('anon'), time: l(@note.created_at.to_date))) do
-        = t ".added_by_html", name: link_to_profile(@note.created_by), time: l(@note.created_at.to_date)
+      - if permitted_to? :view_profile, @note.created_by
+        - profile_link = link_to_profile @note.created_by
+      - else
+        - profile_link = t 'anon'
+      = t ".added_by_html", name: profile_link, time: l(@note.created_at.to_date)
     - if @note.document
       %p= t ".note_on_document_html", document: link_to(@note.document.title, @note.document)
   %section.tags
