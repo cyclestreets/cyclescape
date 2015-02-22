@@ -353,6 +353,7 @@
   issue:
     message_threads:
       new:
+        new_hint: "This is where a discussion about the issue is started. \n There could be many different discussion threads that one issue creates \n e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
         title: "New Thread on %{issue}"
         everyone: "Everyone"
     photos:

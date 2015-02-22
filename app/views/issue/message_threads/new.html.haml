@@ -1,5 +1,9 @@
 %section.new-thread
   %h1= t ".title", issue: @issue.title
+  - if @issue.threads.count == 0
+    %div.meta
+      %p
+        %i= simple_format t ".new_hint"
   = semantic_form_for @thread, as: :thread, url: {action: :create}, html: {class: 'guided-remote'} do |f|
     = f.semantic_errors
     = f.inputs do
