@@ -175,6 +175,17 @@ form.guided {
   }
 }
 
+form.guided-remote {
+  @extend form.guided;
+
+  fieldset ol li.stringish input,
+  fieldset ol li input {
+    width: 338px;
+  }
+  fieldset ol li.text textarea {
+    width: 498px;
+  }
+}
 
 .search-box {
   display:inline-block;
