@@ -2,7 +2,8 @@ class Issue::MessageThreadsController < MessageThreadsController
   before_filter :load_issue
 
   def index
-    @threads = @issue.threads
+    threads = @issue.threads.order_by_latest_message.page(params[:page])
+    @threads = ThreadListDecorator.decorate(threads)
   end
 
   def new

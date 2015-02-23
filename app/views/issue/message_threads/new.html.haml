@@ -22,4 +22,4 @@
         = f2.input :body, input_html: { rows: 15 }
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green submit"}
-      = cancel_link
+      = cancel_link issue_path(@issue)
