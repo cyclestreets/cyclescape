@@ -4,7 +4,7 @@
     %div.meta
       %p
         %i= simple_format t ".new_hint"
-  = semantic_form_for @thread, as: :thread, url: {action: :create}, html: {class: 'guided-remote'} do |f|
+  = semantic_form_for @thread, as: :thread, url: {action: :create}, html: {class: 'guided'} do |f|
     = f.semantic_errors
     = f.inputs do
       = f.input :title
@@ -21,5 +21,5 @@
         = f2.semantic_errors
         = f2.input :body, input_html: { rows: 15 }
     = f.actions do
-      = f.action :submit
+      = f.action :submit, button_html: {class: "btn-green submit"}
       = cancel_link
