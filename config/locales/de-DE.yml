@@ -757,6 +757,7 @@
         reported_issues: "Gemeldete  Themen"
         user_profile: "Benutzerprofil"
         website_label: "Webseite:"
+        full_name: "Vollständiger Name"
       update:
         success: "Profil aktualisiert"
 
