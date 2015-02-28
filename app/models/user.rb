@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
   before_destroy :remove_thread_subscriptions
 
   scope :active, where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL')
+  scope :public, joins(:prefs).where(user_prefs: {profile_visibility: 'public'})
 
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
@@ -218,6 +219,10 @@ class User < ActiveRecord::Base
     self.display_name = nil
   end
 
+  def display_name_or_anon
+    display_name || I18n.t('anon')
+  end
+
   def clear_profile
     profile.clear
   end
@@ -240,7 +245,19 @@ class User < ActiveRecord::Base
     end
   end
 
+  def can_view(other_users)
+    viewable_by_public_ids = other_users.public.pluck :id
+
+    my_group_ids = groups.pluck :id
+
+    in_my_groups = other_users.joins(:memberships).where(group_memberships: {group_id: my_group_ids}).pluck :id
+
+    self.class.where id: (in_my_groups + viewable_by_public_ids + [id]).compact
+  end
+
+
   protected
+
 
   def set_default_role
     self.role = 'member'

@@ -3,6 +3,7 @@
 "de-DE":
   application_name: "Cyclescape"
   tags: "Label"
+  anon: "Anonym"
   sign_in: "Anmelden"
   admin:
     groups:
@@ -756,6 +757,7 @@
         reported_issues: "Gemeldete  Themen"
         user_profile: "Benutzerprofil"
         website_label: "Webseite:"
+        full_name: "Vollständiger Name"
       update:
         success: "Profil aktualisiert"
 

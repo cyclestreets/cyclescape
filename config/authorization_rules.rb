@@ -15,6 +15,7 @@ authorization do
     has_permission_on :messages, to: :censor
     has_permission_on :site_comments, to: :manage
     has_permission_on :user_prefs, :user_profiles, to: :manage
+    has_permission_on :users, to: [:view_profile, :view_full_name]
   end
 
   role :member do
@@ -102,9 +103,22 @@ authorization do
       if_attribute id: is { user.id }
     end
     has_permission_on :user_profiles, to: :view
+    has_permission_on :users do
+      to :view_full_name
+      if_attribute id: is { user.id }
+      if_attribute groups: intersects_with { user.groups }
+    end
+    has_permission_on :users, to: :view_profile do
+      if_permitted_to :view_full_name
+      if_attribute prefs: { profile_visibility: 'public' }
+    end
   end
 
   role :guest do
+    has_permission_on :users do
+      to :view_profile
+      if_attribute prefs: { profile_visibility: 'public' }
+    end
     has_permission_on :dashboards, to: [:search]
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
                       :devise_invitations, :devise_passwords, :devise_invitable_registrations, to: :manage
