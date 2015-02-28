@@ -219,6 +219,10 @@ class User < ActiveRecord::Base
     self.display_name = nil
   end
 
+  def display_name_or_anon
+    display_name || I18n.t('anon')
+  end
+
   def clear_profile
     profile.clear
   end

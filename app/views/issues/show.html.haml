@@ -29,7 +29,7 @@
       - if permitted_to? :view_profile, @issue.created_by
         - profile_link = link_to_profile @issue.created_by
       - else
-        - profile_link = t 'anon'
+        - profile_link = @issue.created_by.display_name_or_anon
       = t ".added_by_html", name: profile_link, time: l(@issue.created_at.to_date)
     %section.tags
       = @tag_panel.render

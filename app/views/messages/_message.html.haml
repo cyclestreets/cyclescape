@@ -8,7 +8,7 @@
             = image_tag message.created_by.profile.picture_thumbnail.url, alt: ""
         = link_to_profile message.created_by
       - else
-        =t('anon')
+        = message.created_by.display_name_or_anon
       = link_to thread_path(anchor: dom_id(message)), class: "permalink" do
         - time_tag_with_title(message.created_at) do
           - t ".posted_date", time_ago: time_ago_in_words(message.created_at)
