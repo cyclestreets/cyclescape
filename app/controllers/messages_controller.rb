@@ -25,11 +25,4 @@ class MessagesController < ApplicationController
     end
     redirect_to thread_path(@thread)
   end
-
-  def show
-    @thread = MessageThread.find(params[:thread_id])
-    @message = @thread.messages.find(params[:id])
-
-    redirect_to @message.component.file.url
-  end
 end
