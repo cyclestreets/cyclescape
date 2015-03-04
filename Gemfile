@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.17'
+gem 'rails', '3.2.20'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -10,7 +10,7 @@ gem 'activerecord-postgis-adapter'
 # Front-end gems
 gem 'jquery-rails', '2.0.3' # pin due to incompatible jquery-tools vs jquery 1.8. See https://github.com/cyclestreets/cyclescape/issues/75
 gem 'haml-rails'
-gem 'formtastic'
+gem 'formtastic', '~> 2.2.1' # pin pending upgrades
 gem 'map_layers'
 gem 'rails3-jquery-autocomplete'
 gem 'rgeo-geojson'
@@ -42,10 +42,11 @@ gem 'paranoia', '~> 1.0'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
+  gem 'sass', '~> 3.2.18' # pin sass - https://github.com/cyclestreets/cyclescape/issues/337
   gem 'coffee-rails', '~> 3.2.1'
   gem 'compass-rails'
   gem 'uglifier', '>= 1.0.3'
-  gem 'jquery-ui-rails'
+  gem 'jquery-ui-rails', '~> 4.2.0' # pin pending upgrade
 end
 
 group :development do
@@ -65,7 +66,6 @@ group :development, :test do
   gem 'hirb'
   gem 'pry'
 
-  gem 'rspec-core'
   gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'
@@ -73,11 +73,12 @@ group :development, :test do
 end
 
 group :test do
+  gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'
-  gem 'capybara', '~> 1.1.2' # pin for now, pending upgrade to 2.0
+  gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'email_spec'
   gem 'database_cleaner'
-  gem 'rspec-expectations'
 end

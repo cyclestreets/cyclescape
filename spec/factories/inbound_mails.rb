@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :inbound_mail do
-    ignore do
+    transient do
       to false
     end
 

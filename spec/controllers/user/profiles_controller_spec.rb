@@ -8,7 +8,7 @@ describe User::ProfilesController do
       context 'as a guest' do
         it 'should be visible' do
           get :show, user_id: user.id
-          assigns(:profile_visible).should be_true
+          expect(assigns(:profile_visible)).to be_truthy
         end
       end
     end
@@ -21,7 +21,7 @@ describe User::ProfilesController do
       context 'as a guest' do
         it 'should be hidden' do
           get :show, user_id: user.id
-          assigns(:profile_visible).should be_false
+          expect(assigns(:profile_visible)).to be_falsey
         end
       end
 
@@ -36,7 +36,7 @@ describe User::ProfilesController do
         it 'should be visible' do
           current_user.prefs.update_column(:profile_visibility, 'group')
           get :show, user_id: current_user.id # NB current_user
-          assigns(:profile_visible).should be_true
+          expect(assigns(:profile_visible)).to be_truthy
         end
       end
 
@@ -49,7 +49,7 @@ describe User::ProfilesController do
 
         it 'should be hidden' do
           get :show, user_id: user.id
-          assigns(:profile_visible).should be_false
+          expect(assigns(:profile_visible)).to be_falsey
         end
       end
 
@@ -65,7 +65,7 @@ describe User::ProfilesController do
         it 'should be visible' do
           #binding.pry
           get :show, user_id: user.id
-          assigns(:profile_visible).should be_true
+          expect(assigns(:profile_visible)).to be_truthy
         end
       end
 
@@ -78,7 +78,7 @@ describe User::ProfilesController do
 
         it 'should be visible regardless of groups' do
           get :show, user_id: user.id
-          assigns(:profile_visible).should be_true
+          expect(assigns(:profile_visible)).to be_truthy
         end
       end
     end
