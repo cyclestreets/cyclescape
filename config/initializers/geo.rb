@@ -7,5 +7,5 @@ module Geo
   ISSUE_MAX_AREA = 0.1 # square degrees
 
   COLLISIONS_API_KEY = 'b7af2f6899b5d784'
-  COLLISIONS_URL = 'http://cyclestreets.net/api/collisions.json'
+  COLLISIONS_URL = 'https://api.cyclestreets.net/v2/collisions.locations'
 end
