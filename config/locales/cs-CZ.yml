@@ -300,6 +300,7 @@
   issue:
     message_threads:
       new:
+        new_hint: "To je místo, kde se spustí diskusi o tomto problému. \ n Tam by mohlo být mnoho různých diskusních vláken, že jedna otázka vytváří \ n např Nové plány aplikace může mít vliv na provoz na silnici a ovlivňují přístup cyklu do lesa."
         title: "Nové vlákno na téma %{issue}"
         everyone: "Každý"
     photos:

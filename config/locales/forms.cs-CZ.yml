@@ -26,7 +26,7 @@
         role: "Typ členství"
       issue:
         new: &labels_issue_new
-          description: "Napište popis"
+          description: "Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku. Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další stránce budete začít diskusní vlákno o tomto problému."
           location: "Zvolte oblast"
           photo: "Přidejte fotografii"
           tags_string: "Přidejte štítek k vašemu podnětu"
