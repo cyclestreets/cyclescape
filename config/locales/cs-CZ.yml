@@ -11,6 +11,7 @@
         actions: "Akce"
         new_group: "Vytvořit novou skupinu"
         edit: "Upravit"
+        edit_prefs: "Upravit nastavení"
         edit_profile: "Upravit profil"
         group_email: "Email skupiny"
         members: "Členové"
@@ -28,7 +29,7 @@
       index:
         admin_interface: "Správa"
         admin_interface_introduction: "Tento oddíl obsahuje funkce správy dostupné pouze správcům."
-        manage_comments: "Spravovat komentáře"
+        manage_comments: "Spravovat zpětné vazby"
         manage_groups: "Spravovat skupiny"
         manage_issue_categories: "Spravovat kategorie podnětů"
         manage_users: "Spravovat uživatele"
@@ -39,6 +40,32 @@
         title: "Kategorie podnětů"
       update:
         success: "Kategorie vytvořena"
+    user:
+      locations:
+        create:
+          success: "Oblast působnosti vytvořena"
+        edit:
+          title: "Upravit oblast působnosti uživatele %{user_name}"
+        index:
+          all_user_locations: "Všechny oblasti působnosti pro %{user_name}"
+          category: "Kategorie"
+          combined_locations: "Kombinovaná umístění"
+          combined_locations_guidance: "Toto jsou zkombinované oblasti působnosti pro tohoto uživatele."
+          combined_locations_guidance: "Tato mapa ukazuje všechna umístění vybraného uživatele zkombinovaná dohromady."
+          confirm: "Skutečně?"
+          delete: "Smazat"
+          edit: "Upravit"
+          map: "Mapa"
+          new: "Nová oblast"
+          no_locations_yet: "Tento uživatel nemá zatím žádné oblasti působnosti."
+          no_locations_guidance: "Jako administrátor můžete přidat jeho první oblast."
+          no_overlapping_groups: "Žádné spádové místní skupiny"
+          title: "Oblasti uživatele %{user_name}"
+          overlapping_groups: "Spádové místní skupiny"
+        new:
+          title: "Nová oblast pro %{user_name}"
+        update:
+          success: "Oblast upravena"
     users:
       index:
         created: "Vytvořeno"
@@ -54,6 +81,7 @@
         role: "Role"
         title: "Uživatelé"
         preferences: "Nastavení"
+        locations: "Oblasti působnosti"
       update:
         success: "Uživatel upraven"
       edit:
@@ -100,7 +128,7 @@
         Nejnovější diskuzní vlákna na kterých pracovala některá z vašich místních skupin.
       my_priorities: "Důležitost"
       my_threads: "Odebíraná vlákna"
-      issues_nearby: "Nejnovější podněty poblíž"
+      issues_nearby: "Podněty v blízkosti"
       posted:
         message_html: "%{creator_link} zaslal zprávu"
         deadline_message_html: "%{creator_link} zaslal termín/datum"
@@ -137,6 +165,7 @@
         title: "Přihlásit"
         sign_in_button: "Přihlásit"
   group:
+    group_prefs_tab: "Nastavení skupiny"
     group_profile_tab: "Profil místní skupiny"
     group_management: "Správa místní skupiny"
     membership_list_tab: "Seznam členů"
@@ -165,7 +194,7 @@
         member_name: "Jméno člena"
         ordinary_members: "Obyčejní členové"
         new_members_guidance_introduction: "Pokud chcete přidat členy:"
-        new_members_guidance_method1_html: "Pokud znáte jejich emailové adresy můžete %{invite_directly_link}"
+        new_members_guidance_method1_html: "Pokud znáte jejich emailové adresy můžete %{add_directly_link}."
         new_members_guidance_method2_html: "Pokud již používají Cyklisté sobě, klikněte na jejich jméno v diskuzním vlákně a můžete je přidat z jejich profilové stránky."
         ordinary_members_guidance: "Obyčejní členové mají přístup do soukromých vláken skupiny a mohou vytvářet nová skupinová vlákna."
         pending_requests: "Nevyřízené žádosti"
@@ -199,7 +228,7 @@
         requested: "Žádost o členství byla vytvořena"
         already_asked: "Již jste žádal o členství v místní skupině"
         already_member: "Už jste členem této místní skupiny"
-      index:
+      index: &group_membership_requests_index
         actioned_by: "Uskutečnil"
         are_you_sure: "Skutečně?"
         by: "%{name}"
@@ -207,11 +236,12 @@
         created_at: "před %{time_ago}"
         email: "E-mailová adresa"
         no_requests_yet: "Pro tuto místní skupinu zatím neexistují žádné žádosti o členství."
+        full_name: "Plné jméno"
         reject: "Zamítnout"
         requested_at: "Žádáno"
         status: "Stav"
         title: "Žádost o členství v místní skupině %{group}"
-        user: "Uživatel"
+        user: "Uživatel (zobrazené jméno)"
         membership_status:
           confirmed: "Potvrzeno"
           pending: "Čeká"
@@ -222,6 +252,9 @@
       reject:
         failure: "Při zamítání žádosti o členství v místni skupině se vyskytl problém"
         success: "Členství v místní skupině zamítnuto"
+      review:
+        <<: *group_membership_requests_index
+        title: "Posoudit žádost o členství ve skupině %{group}"
     message_threads:
       destroy:
         failure: "Nemohu smazat vlákno"
@@ -231,7 +264,7 @@
         threads_explanation_html: "Každý z %{issues_link} může mít jedno nebo více diskuzních vláken."
         issues: "podnětů"
         new_group_thread: "Diskuze místní skupiny o obecných tématech"
-        issue_threads: "Diskuze o podnětu"
+        issue_threads: "Diskuze o podnětech"
         issue_threads_description: "Toto jsou soukromé i veřejné diskuze místní skupiny %{group_name} o jejích podnětech, nejnovější jsou řazené dopředu."
         issue_threads_addition_description: "Pro založení diskuzního vlákna o podnětu přejděte na příslušný podnět."
         general_threads: "Diskuze o obecných tématech"
@@ -241,6 +274,13 @@
         title: "Nové vlákno místní skupiny"
       update:
         success: "Vlákno upraveno"
+    prefs:
+      edit:
+        no_email_warning: "Varování! Nastavili jste, že chcete odesílat oznámení do vaší skupiny, ale není nastaven žádný skupinový email. Buďto si zvolte správce členství ve skupině, nebo požádejte aby byl váš skupinový email nastaven administrátorem stránky."
+        title: "Upravit nastavení"
+      update:
+        failure: "Nemohu upravit nastavení"
+        success: "Nastavení upravena"
     profiles:
       edit:
         title: "Upravit profil"
@@ -251,12 +291,28 @@
       update:
         success: "Profil upraven"
   groups:
+    index:
+      list_tab: "Seznam"
+      map_tab: "Mapa"
+      new_group: "Vytvořit novou skupinu"
+      new_group_instructions_html: "Pro vytvoření vaší místní cyklistické skupiny na webu Cyklisté sobě prosím %{feedback_link} a my vám brzy odpovíme."
+      send_some_feedback: "pošlete zpětnou vazbu"
+      title: "Adresář skupiny"
+    compact:
+      already_member: "Již jste členem této skupiny"
+      no_location: "Tato skupina ještě nemá určenou oblast působnosti."
+    join:
+      join_body:
+        Pokud se chcete zapojit do aktivit %{group}, můžete požádat o členství v této místní skupině Cyklisté sobě.
+      join_this_group: "Připojit se k této skupině"
+      group_request_pending: "Vaše žádost o připojení k této místní skupině se zpracovává."
     show:
       edit_group_profile: "Upravit profil místní skupiny"
+      edit_group_prefs: "Upravit nastavení místní skupiny"
       edit_group_members: "Upravit seznam členů místní skupiny"
       group_management: "Správa místní skupiny"
       group_organisers: "Správci místní skupiny"
-      group_request_pending: "Vaše žádost o členství této místní skupiny se vyřizuje."
+      group_request_pending: "Vaše žádost o připojení k této místní skupině se zpracovává."
       join_body:
         Můžete požádat o členství v místní skupině Cyklisté sobě, pokud se chcete podílet na aktivitách skupiny %{group}.
       join_title: "Přidejte se k naší místní skupině Cyklisté sobě"
@@ -277,7 +333,7 @@
         Cyklisté sobě je nástroj na podporu místních skupin
         snažících se o zlepšení podmínek pro jízdu na kole ve svém okolí.
       center_box_title:
-        Zde můžete nahlásit váš cyklistický podnět
+        Zde můžete navrhnout, jak zlepšit podmínky pro jízdu na kole
       center_box_html:
         Neexistující cyklostezka? Překážka bránící v provozu? Chybějící cyklostojan?
         Nebo příklad, kde bylo něco uděláno správně? 
@@ -290,11 +346,11 @@
         a zjistěte jaké problémy se snaží řešit.
       twitter_title: "Cyclescape na Twitteru"
     guide:
-      title: "Jak fungují Cyklisté sobě"
-      box_1_title: "Přidejte cyklistický podnět"
+      title: "Jak funguje tento web"
+      box_1_title: "Přidejte  podnět"
       box_1_body: "Rychle upozorněte na problém, který vás trápí."
       box_2_title: "Získejte rady od ostatních"
-      box_2_body: "Prodiskutujte podnět se členy místní skupiny Cyklisté sobě."
+      box_2_body: "Prodiskutujte podnět s lidmi, které zajímá stejná čtvrť nebo oblast."
       box_3_title: "Prosaďte změnu"
       box_3_body: "Vytvořte akční skupinu a prosaďte změnu."
   issue:
@@ -354,8 +410,8 @@
       edit_issue: "Upravit tento podnět"
       new_thread:
         zero: "Diskutujte"
-        one: "Nové vlákno"
-        other: "Nová vlákna"
+        one: "Nové diskuzní vlákno"
+        other: "Nová diskuzní vlákna"
       no_threads_yet: "O tomto podnětu zatím neexistují žádná diskuzní vlákna."
       group_private: "Soukromé pro %{group}"
       group_public: "Veřejné od %{group}"
@@ -386,12 +442,14 @@
     application:
       admin: "Administrace"
       admin_tooltip: "Administrace, určeno pro systémové administrátory"
-      dashboard: "Moje podněty"
+      dashboard: "Moje stránka"
       dashboard_tooltip: "Vaše přístrojová deska, ukazuje aktualizace diskuzních vláken do kterých jste zapsáni."
+      about: "O stránkách"
+      user_guide: "Uživatelský manuál"
       sign_out: "Odhlásit"
       sign_in: "Přihlásit"
       sign_up: "Registrovat"
-      feedback: "Zpětná vazba"
+      feedback: "Napište nám"
       home: "Domů"
       issues: "Podněty"
       issues_tooltip: "Podané podněty zobrazené na mapě nebo jako seznam"
@@ -407,10 +465,12 @@
       whats_new: "Co je nového?"
       supportlogos_introduction: "Vznik Cyclescape byl umožněn podporou:"
       funding_from: "Za podpory %{name}"
-      funding_from_and_created_by: "Funding from and created by %{name}"
+      funding_from_and_created_by: "Web Cyklisté sobě byl podpořen %{name}"
       planning_application_data: "Planning application data from Openly Local"
       cyclescape_blog: "Blog Cyclescape"
       user_guide: "Uživatelská příručka"
+      facebook_page: "Stránka na Facebooku"
+      twitter_page: "Stránka na Twitteru"
     group_selector:
       group_selector: "Skupina"
       no_group: "Bez skupiny"
@@ -473,6 +533,8 @@
     notifications:
       gmr_confirmed:
         subject: "Nyní jste členy místní skupiny Cyklisté sobě %{group_name}"
+      new_gmr:
+        subject: "[Cyklisté sobě] %{user_name} chce vstoupit do skupiny %{group_name}"
       new_group_thread:
         subject: "[Cyklisté sobě] \"%{thread_title}\" (%{group_name})"
       new_group_location_issue:
@@ -675,14 +737,17 @@
       submit: "Přejít"
     profile_menu:
       edit: "Upravit profil"
-      edit_preferences: "Spravovat nastavení"
+      edit_preferences: "Správa notifikací"
       my_locations: "Oblasti působnosti"
-      update_account: "Upravit podrobnosti uživatelského účtu"
+      update_account: "Základní nastavení účtu"
     tags:
       panel:
         edit_tags: "Upravit štítky"
   site:
     comments:
+      destroy:
+        failure: "Nepodařilo se smazat zpětnou vazbu"
+        success: "Zpětná vazba úspěšně smazána"
       index:
         confirm_delete: "Skutečně?"
         delete_comment: "Smazat"
@@ -701,9 +766,6 @@
         thank_you_title: "Děkujeme za vaší zpětnou vazbu!"
         thank_you_longform: "Vaše zpětná vazba nám pomůže rozhodnout se, na jakých vylepšeních budeme pracovat. Váš komentář si přečte některý z našich vývojářů, bohužel však nejsme schopní na každý z nich individuálně odpovídat."
         close: "< Návrat na stránku"
-      destroy:
-        failure: "Nepodařilo se smazat zpětnou vazbu"
-        success: "Zpětná vazba úspěšně smazána"
   tags:
     show:
       issues: "Podněty"
@@ -714,7 +776,7 @@
       unrecognised: "Nemohu najít žádnou položku označenou štítkem '%{name}'"
   thread_mailer:
     new_deadline_message:
-      added: "%{name} přidal deadline/datum k tomuto diskuznímu vláknu"
+      added: "%{name} přidal termín/datum k tomuto diskuznímu vláknu"
     new_document_message:
       added: "%{name} přidal přílohu k tomuto diskuznímu vláknu"
       view_the_document: "Přílohu můžete vidět na následující adrese:"
@@ -757,7 +819,7 @@
         title: "Upravit umístění"
       index:
         add_first_location: "přidat první umístění"
-        all_my_locations: "Všechny má umístění"
+        all_my_locations: "Všechna má umístění"
         catch_up_guidance_html: "Pro zachycení existujících diskuzí, můžete %{subscribe_existing_link} v těchto oblastech."
         category: "Kategorie"
         combined_locations: "Kombinovaná umístění"
@@ -775,8 +837,8 @@
         no_locations_yet: "Zatím jste nenastavili žádné oblasti!"
         no_locations_guidance: "Můžete vytvořit oblasti pro místo kde žijete, vaši cestu do práce, kde rádi jezdíte atd. To pomůže zjistit, které záležitosti by se vás mohli týkat a které skupiny by vás mohli zajímat."
         no_locations_guidance2_html: "Pro začátek můžete %{first_location_link}."
-        no_overlapping_groups: "Žádné překrývající se oblasti"
-        overlapping_groups: "Překrývající se oblasti"
+        no_overlapping_groups: "Žádné spádové místní skupiny"
+        overlapping_groups: "Spádové místní skupiny"
         subscribe_existing_threads: "následovat všechna existující vlákna"
       new:
         new_location: "Přidejte novou oblast"
@@ -794,7 +856,7 @@
         involvement: "Zahrnout mě do:"
         notification_types: "Typ upozornění"
         notification_types_guidance: "Můžete vybrat jak budete informováni o jednotlivých záležitostech nahoře. V současné době jsou dostupná pouze emailová oznámení."
-        title: "Spravovat má nastavení"
+        title: "Správa notifikací"
         back: "Návrat na váš profil"
         none: "Žádná upozornění"
         notify: "Zasílat upozornění o nových podnětech a nově založených diskuzních vláknech"
@@ -1015,8 +1077,8 @@
     messages: &errors_messages
       inclusion: "není v seznamu povolených hodnot"
       exclusion: "je vyhrazeno pro jiný účel"
-      invalid: "není dobře vyplněn"
-      confirmation: "nebylo potvrzeno"
+      invalid: "není správně vyplněn"
+      confirmation: "neodpovídá ověření hesla"
       accepted: "musí být potvrzeno"
       empty: "nesmí být prázdný/é"
       blank: "je třeba vyplnit"
