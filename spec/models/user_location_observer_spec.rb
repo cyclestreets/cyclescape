@@ -7,7 +7,7 @@ describe UserLocationObserver do
     let(:ul) { FactoryGirl.build(:user_location) }
 
     it 'should notice when UserLocations are saved' do
-      subject.should_receive(:after_save)
+      expect(subject).to receive(:after_save)
 
       UserLocation.observers.enable :user_location_observer do
         ul.save
@@ -28,16 +28,16 @@ describe UserLocationObserver do
       end
 
       it 'should subscribe users to existing threads' do
-        thread.subscribers.should_not include(user)
+        expect(thread.subscribers).not_to include(user)
         UserLocation.observers.enable :user_location_observer do
           user_location.save
         end
         thread.reload
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
       end
 
       it 'should not subscribe users to private threads' do
-        group.members.should_not include(user)
+        expect(group.members).not_to include(user)
         thread.group = group
         thread.privacy = 'group'
         thread.save
@@ -45,7 +45,7 @@ describe UserLocationObserver do
           user_location.save
         end
         thread.reload
-        thread.subscribers.should_not include(user)
+        expect(thread.subscribers).not_to include(user)
       end
     end
 
@@ -55,12 +55,12 @@ describe UserLocationObserver do
       end
 
       it 'should not subscribe users to existing threads' do
-        thread.subscribers.should_not include(user)
+        expect(thread.subscribers).not_to include(user)
         UserLocation.observers.enable :user_location_observer do
           user_location.save
         end
         thread.reload
-        thread.subscribers.should_not include(user)
+        expect(thread.subscribers).not_to include(user)
       end
     end
   end
@@ -77,24 +77,24 @@ describe UserLocationObserver do
     end
 
     it 'should remove subscription' do
-      thread.subscribers.should include(user)
+      expect(thread.subscribers).to include(user)
       UserLocation.observers.enable :user_location_observer do
         user_location.destroy
       end
       thread.reload
-      thread.subscribers.should_not include(user)
+      expect(thread.subscribers).not_to include(user)
     end
 
     context 'with another overlapping location' do
       let!(:user_location2) { FactoryGirl.create(:user_location, user: user, location: issue.location) }
 
       it 'should not remove subscription' do
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
         UserLocation.observers.enable :user_location_observer do
           user_location.destroy
         end
         thread.reload
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
       end
     end
 
@@ -108,12 +108,12 @@ describe UserLocationObserver do
       end
 
       it 'should not remove subscription' do
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
         UserLocation.observers.enable :user_location_observer do
           user_location.destroy
         end
         thread.reload
-        thread.subscribers.should include(user)
+        expect(thread.subscribers).to include(user)
       end
     end
   end

@@ -4,13 +4,13 @@ describe NewThreadNotifier do
   subject { NewThreadNotifier }
 
   # Queueing interface
-  it { subject.queue.should == :outbound_mail }
-  it { should respond_to(:perform) }
+  it { expect(subject.queue).to eq(:outbound_mail) }
+  it { is_expected.to respond_to(:perform) }
 
   describe '.notify_new_thread' do
     it 'should queue queue_new_thread with the thread id' do
-      thread = mock('thread', id: 99)
-      Resque.should_receive(:enqueue).with(NewThreadNotifier, :queue_new_thread, 99)
+      thread = double('thread', id: 99)
+      expect(Resque).to receive(:enqueue).with(NewThreadNotifier, :queue_new_thread, 99)
       subject.notify_new_thread(thread)
     end
   end

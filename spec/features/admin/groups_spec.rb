@@ -11,9 +11,9 @@ describe 'Groups admin' do
 
   context 'index' do
     it 'should list all the groups' do
-      groups.should_not be_empty
+      expect(groups).not_to be_empty
       groups.each do |g|
-        page.should have_content(g.name)
+        expect(page).to have_content(g.name)
       end
     end
   end
@@ -28,9 +28,9 @@ describe 'Groups admin' do
       fill_in 'Subdomain', with: 'placefordcc'
       fill_in 'Website', with: 'http://www.placefordcc.com'
       click_on 'Create Group'
-      Group.where("name = 'Placeford Cycling'").count.should == 1
-      current_path.should == admin_groups_path
-      page.should have_content('Placeford Cycling')
+      expect(Group.where("name = 'Placeford Cycling'").count).to eq(1)
+      expect(current_path).to eq(admin_groups_path)
+      expect(page).to have_content('Placeford Cycling')
     end
   end
 
@@ -44,16 +44,16 @@ describe 'Groups admin' do
     end
 
     it 'should show the current group details' do
-      page.should have_field('Name', with: group.name)
-      page.should have_field('Subdomain', with: group.short_name)
-      page.should have_field('Website', with: group.website)
+      expect(page).to have_field('Name', with: group.name)
+      expect(page).to have_field('Subdomain', with: group.short_name)
+      expect(page).to have_field('Website', with: group.website)
     end
 
     it 'should update the group' do
       fill_in 'Name', with: 'Placeford Cycling Campaign'
       click_on 'Save'
-      page.current_path.should == admin_groups_path
-      page.should have_content('Placeford Cycling Campaign')
+      expect(page.current_path).to eq(admin_groups_path)
+      expect(page).to have_content('Placeford Cycling Campaign')
     end
   end
 end

@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe ThreadSubscription do
   describe 'associations' do
-    it { should belong_to(:user) }
-    it { should belong_to(:thread) }
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:thread) }
   end
 end

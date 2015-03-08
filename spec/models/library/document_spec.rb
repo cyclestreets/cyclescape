@@ -17,22 +17,22 @@ describe Library::Document do
 
   it 'should be valid' do
     doc = FactoryGirl.create(:library_document)
-    doc.should be_valid
+    expect(doc).to be_valid
   end
 
   describe 'associations' do
-    it { should have_many(:notes) }
+    it { is_expected.to have_many(:notes) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:file) }
-    it { should validate_presence_of(:title) }
+    it { is_expected.to validate_presence_of(:file) }
+    it { is_expected.to validate_presence_of(:title) }
   end
 
   describe 'searchable text' do
     let(:doc) { FactoryGirl.create(:library_document) }
     it 'should have a searchable title' do
-      doc.searchable_text.should include doc.title
+      expect(doc.searchable_text).to include doc.title
     end
   end
 
@@ -41,16 +41,16 @@ describe Library::Document do
 
     it 'should create a library item automatically' do
       doc = Library::Document.new(attrs, without_protection: true)
-      doc.save!.should be_true
-      doc.item.should be_true
+      expect(doc.save!).to be_truthy
+      expect(doc.item).to be_truthy
     end
 
     it 'should create an item with reciprocal component links' do
       doc = Library::Document.new(attrs, without_protection: true)
-      doc.save!.should be_true
-      doc.item.component_type.should == 'Library::Document'
-      doc.item.component_id.should == doc.id
-      Library::Item.find(doc.library_item_id).component.should == doc
+      expect(doc.save!).to be_truthy
+      expect(doc.item.component_type).to eq('Library::Document')
+      expect(doc.item.component_id).to eq(doc.id)
+      expect(Library::Item.find(doc.library_item_id).component).to eq(doc)
     end
   end
 end

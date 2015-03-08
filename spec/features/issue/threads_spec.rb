@@ -14,15 +14,15 @@ describe 'Issue threads' do
         click_on 'Discuss'
         fill_in 'Message', with: 'Awesome!'
         click_on 'Create Thread'
-        page.should have_content(issue.title)
-        page.should have_content('Awesome!')
-        current_user.subscribed_to_thread?(issue.threads.last).should be_true
+        expect(page).to have_content(issue.title)
+        expect(page).to have_content('Awesome!')
+        expect(current_user.subscribed_to_thread?(issue.threads.last)).to be_truthy
       end
 
       it 'should pre-fill the title for the thread' do
         visit issue_path(issue)
         click_on 'Discuss'
-        find_field('Title').value.should eq(issue.title)
+        expect(find_field('Title').value).to eq(issue.title)
       end
 
       it 'should not pre-fill the title for the second thread' do
@@ -32,7 +32,7 @@ describe 'Issue threads' do
         click_on 'Create Thread'
         visit issue_path(issue)
         click_on 'New Thread'
-        find_field('Title').value.should be_nil
+        expect(find_field('Title').value).to be_nil
       end
 
       it 'should copy the tags from the issue' do
@@ -40,7 +40,7 @@ describe 'Issue threads' do
         click_on 'Discuss'
         fill_in 'Message', with: 'Foo'
         click_on 'Create Thread'
-        MessageThread.last.tags.length.should > 0
+        expect(MessageThread.last.tags.length).to be > 0
       end
     end
 
@@ -52,9 +52,9 @@ describe 'Issue threads' do
         click_on 'Discuss'
         fill_in 'Message', with: 'Awesome!'
         click_on 'Create Thread'
-        page.should have_content(issue.title)
-        page.should have_content('Awesome!')
-        page.should have_content('Public: Everyone can view this thread and post messages.')
+        expect(page).to have_content(issue.title)
+        expect(page).to have_content('Awesome!')
+        expect(page).to have_content('Public: Everyone can view this thread and post messages.')
       end
 
       it 'should create a new public group thread' do
@@ -64,9 +64,9 @@ describe 'Issue threads' do
         fill_in 'Message', with: 'Awesome!'
         select 'Public', from: 'Privacy'
         click_on 'Create Thread'
-        page.should have_content(issue.title)
-        page.should have_content('Awesome!')
-        page.should have_content('Public: Everyone can view this thread and post messages.')
+        expect(page).to have_content(issue.title)
+        expect(page).to have_content('Awesome!')
+        expect(page).to have_content('Public: Everyone can view this thread and post messages.')
       end
 
       it 'should create a new private group thread' do
@@ -76,9 +76,9 @@ describe 'Issue threads' do
         fill_in 'Message', with: 'Awesome!'
         select 'Group', from: 'Privacy'
         click_on 'Create Thread'
-        page.should have_content(issue.title)
-        page.should have_content('Awesome!')
-        page.should have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
+        expect(page).to have_content(issue.title)
+        expect(page).to have_content('Awesome!')
+        expect(page).to have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
       end
 
       it 'should not create a new committee thread' do
@@ -86,10 +86,9 @@ describe 'Issue threads' do
         click_on 'Discuss'
         select current_group.name, from: 'Owned by'
         fill_in 'Message', with: "This won't work"
-        pending 'need to use a javascript driver' do
-          page.should have_select('Privacy', options: ['Group'])
-          page.should_not have_select('Privacy', options: ['Committee'])
-        end
+        skip 'need to use a javascript driver'
+        page.should have_select('Privacy', options: ['Group'])
+        page.should_not have_select('Privacy', options: ['Committee'])
       end
 
       context 'in a subdomain', use: :current_subdomain do
@@ -97,16 +96,16 @@ describe 'Issue threads' do
           visit issue_path(issue)
           click_on 'Discuss'
           # Done twice so it's clear what's failing, as the error is confusing
-          page.should have_select('Owned by')
-          page.should have_select('Owned by', selected: current_group.name)
+          expect(page).to have_select('Owned by')
+          expect(page).to have_select('Owned by', selected: current_group.name)
         end
 
         it "should default to the group's privacy setting" do
           current_group.update_column(:default_thread_privacy, 'group')
           visit issue_path(issue)
           click_on 'Discuss'
-          page.should have_select('Privacy')
-          find_field('Privacy').value.should == 'group'
+          expect(page).to have_select('Privacy')
+          expect(find_field('Privacy').value).to eq('group')
         end
       end
 
@@ -133,9 +132,9 @@ describe 'Issue threads' do
         it 'should be sent to other group members' do
           create_thread
           open_last_email_for(notifiee.email)
-          current_email.should have_subject("[Cyclescape] \"#{issue.title}\" (#{current_group.name})")
-          current_email.should be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
-          current_email.header[:reply_to].addrs.first.to_s.should match(/thread-.*@cyclescape.org/)
+          expect(current_email).to have_subject("[Cyclescape] \"#{issue.title}\" (#{current_group.name})")
+          expect(current_email).to be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
+          expect(current_email.header[:reply_to].addrs.first.to_s).to match(/thread-.*@cyclescape.org/)
         end
 
         context 'with an unconfirmed user' do
@@ -144,7 +143,7 @@ describe 'Issue threads' do
           it 'should not receive it' do
             create_thread
             email = open_last_email_for(notifiee.email)
-            email.should be_nil
+            expect(email).to be_nil
           end
         end
       end
@@ -178,19 +177,19 @@ describe 'Issue threads' do
       it 'should send a notification' do
         create_thread
         email = open_last_email_for(notifiee.email)
-        email.should have_subject("[Cyclescape] New thread started on issue \"#{issue.title}\"")
-        email.should have_body_text(issue.title)
-        email.should have_body_text('Lorem & Ipsum')
-        email.should have_body_text('Something or other')
-        email.should have_body_text(current_user.name)
-        email.should be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
-        email.header[:reply_to].addrs.first.to_s.should match(/thread-.*@cyclescape.org/)
+        expect(email).to have_subject("[Cyclescape] New thread started on issue \"#{issue.title}\"")
+        expect(email).to have_body_text(issue.title)
+        expect(email).to have_body_text('Lorem & Ipsum')
+        expect(email).to have_body_text('Something or other')
+        expect(email).to have_body_text(current_user.name)
+        expect(email).to be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
+        expect(email.header[:reply_to].addrs.first.to_s).to match(/thread-.*@cyclescape.org/)
       end
 
       it 'should not send multiple notifications to the same person' do
         email_count = all_emails.count
         create_thread
-        all_emails.count.should eql(email_count + 1)
+        expect(all_emails.count).to eql(email_count + 1)
       end
 
       it "should not send a notification if they don't have permission to view the thread" do
@@ -203,10 +202,10 @@ describe 'Issue threads' do
 
         email_count = all_emails.count
         click_on 'Create Thread'
-        all_emails.count.should eql(email_count)
+        expect(all_emails.count).to eql(email_count)
 
         email = open_last_email_for(notifiee.email)
-        email.should be_nil
+        expect(email).to be_nil
       end
 
       it 'should send a new message notification to the person who started the thread' do
@@ -215,12 +214,12 @@ describe 'Issue threads' do
         create_thread
 
         mailbox = mailbox_for(current_user.email)
-        mailbox.count.should eql(1)
+        expect(mailbox.count).to eql(1)
         email = mailbox.last
 
         # The sender should receive a message notification, not a new thread notification
-        email.should_not have_subject(/New thread started/)
-        email.should have_subject('[Cyclescape] Lorem & Ipsum') # first message, so no Re:
+        expect(email).not_to have_subject(/New thread started/)
+        expect(email).to have_subject('[Cyclescape] Lorem & Ipsum') # first message, so no Re:
       end
 
       it 'should send a new message notification to anyone who is auto-subscribed to the thread' do
@@ -228,9 +227,9 @@ describe 'Issue threads' do
         create_thread
 
         mailbox = mailbox_for(notifiee.email)
-        mailbox.count.should eql(1)
+        expect(mailbox.count).to eql(1)
         email = mailbox.last
-        email.should have_subject('[Cyclescape] Lorem & Ipsum')
+        expect(email).to have_subject('[Cyclescape] Lorem & Ipsum')
       end
     end
 
@@ -250,7 +249,7 @@ describe 'Issue threads' do
 
       it 'should automatically subscribe people with overlapping locations' do
         create_thread
-        subscriber.subscribed_to_thread?(issue.threads.last).should be_true
+        expect(subscriber.subscribed_to_thread?(issue.threads.last)).to be_truthy
       end
 
       it 'should only subscribe the thread creator once' do
@@ -258,13 +257,13 @@ describe 'Issue threads' do
         MessageThread.observers.enable :message_thread_observer do
           create_thread
         end
-        current_user.thread_subscriptions.count.should == 1
+        expect(current_user.thread_subscriptions.count).to eq(1)
       end
 
       it 'should not subscribe when the preference is not set' do
         subscriber.prefs.update_column(:involve_my_locations, 'notify')
         create_thread
-        subscriber.subscribed_to_thread?(issue.threads.last).should be_false
+        expect(subscriber.subscribed_to_thread?(issue.threads.last)).to be_falsey
       end
     end
   end
@@ -277,9 +276,9 @@ describe 'Issue threads' do
 
       it 'should not let you' do
         visit issue_thread_path(issue, thread)
-        page.should have_content(issue.title)
-        page.should have_content(thread.title)
-        page.should_not have_content(edit_thread)
+        expect(page).to have_content(issue.title)
+        expect(page).to have_content(thread.title)
+        expect(page).not_to have_content(edit_thread)
       end
     end
 
@@ -291,8 +290,8 @@ describe 'Issue threads' do
         click_on edit_thread
         fill_in 'Title', with: 'New title please'
         click_on 'Save'
-        page.should have_content('Thread updated')
-        page.should have_content('New title please')
+        expect(page).to have_content('Thread updated')
+        expect(page).to have_content('New title please')
       end
     end
   end
@@ -304,9 +303,9 @@ describe 'Issue threads' do
 
       it 'should show you a link to the thread' do
         visit issue_path(issue)
-        page.should have_content(thread.title)
-        page.should have_content('Group Private')
-        page.should have_link(thread.title)
+        expect(page).to have_content(thread.title)
+        expect(page).to have_content('Group Private')
+        expect(page).to have_link(thread.title)
       end
     end
   end
@@ -320,7 +319,7 @@ describe 'Issue threads' do
       it 'should be accessible' do
         visit issue_path(issue)
         click_on thread.title
-        page.should have_content(thread.title)
+        expect(page).to have_content(thread.title)
       end
     end
   end

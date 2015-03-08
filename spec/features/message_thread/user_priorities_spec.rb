@@ -16,7 +16,7 @@ describe 'user priorities' do
         click_on 'Save'
       end
 
-      page.should have_content('Priority saved')
+      expect(page).to have_content('Priority saved')
     end
 
     it 'should let you update a priority' do
@@ -30,7 +30,7 @@ describe 'user priorities' do
         click_on 'Save'
       end
 
-      page.should have_content('Priority updated')
+      expect(page).to have_content('Priority updated')
     end
   end
 end

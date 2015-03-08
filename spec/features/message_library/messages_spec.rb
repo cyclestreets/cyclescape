@@ -12,15 +12,15 @@ describe 'Library Messages' do
         visit thread_path(message.thread)
 
         # Positive test for negative variants, below
-        page.should have_content('Create')
+        expect(page).to have_content('Create')
 
         within '.message', match: :first do
           click_on I18n.t('.messages.message.create_note')
         end
 
         click_on 'Create Note'
-        page.current_path.should == library_note_path(Library::Note.last)
-        page.should have_content(message.body)
+        expect(page.current_path).to eq(library_note_path(Library::Note.last))
+        expect(page).to have_content(message.body)
       end
     end
 
@@ -31,16 +31,16 @@ describe 'Library Messages' do
         visit thread_path(message.thread)
 
         # Positive test for negative variants, below
-        page.should have_content('Create')
+        expect(page).to have_content('Create')
 
         within '.message', match: :first do
           click_on I18n.t('.messages.message.create_document')
         end
 
         click_on 'Add to Library'
-        page.current_path.should == library_document_path(Library::Document.last)
-        page.should have_content(message.title)
-        page.should have_link('Download document')
+        expect(page.current_path).to eq(library_document_path(Library::Document.last))
+        expect(page).to have_content(message.title)
+        expect(page).to have_link('Download document')
       end
 
       it 'should fill show the right form' do
@@ -49,8 +49,8 @@ describe 'Library Messages' do
           click_on I18n.t('.messages.message.create_document')
         end
 
-        page.should have_field('Title')
-        page.should_not have_field('Document')
+        expect(page).to have_field('Title')
+        expect(page).not_to have_field('Document')
       end
 
       it 'should end up with the correct document' do
@@ -60,7 +60,7 @@ describe 'Library Messages' do
         end
 
         click_on 'Add to Library'
-        message.file.size.should eq(Library::Document.last.file.size)
+        expect(message.file.size).to eq(Library::Document.last.file.size)
       end
     end
 
@@ -70,7 +70,7 @@ describe 'Library Messages' do
       it 'should not let you create a library item' do
         visit thread_path(message.thread)
 
-        page.should_not have_content 'Create'
+        expect(page).not_to have_content 'Create'
       end
     end
 
@@ -80,7 +80,7 @@ describe 'Library Messages' do
       it 'should not let you create a library item' do
         visit thread_path(message.thread)
 
-        page.should_not have_content 'Create'
+        expect(page).not_to have_content 'Create'
       end
     end
 
@@ -90,7 +90,7 @@ describe 'Library Messages' do
       it 'should not let you create a library item' do
         visit thread_path(message.thread)
 
-        page.should_not have_content 'Create'
+        expect(page).not_to have_content 'Create'
       end
     end
 
@@ -101,7 +101,7 @@ describe 'Library Messages' do
         message.message.save! # required for overly-complex reasons involving components-in-components
         visit thread_path(message.thread)
 
-        page.should_not have_content 'Create'
+        expect(page).not_to have_content 'Create'
       end
     end
 

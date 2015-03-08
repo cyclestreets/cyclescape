@@ -11,13 +11,13 @@ describe 'Library' do
 
     it 'should have links to 5 recent documents' do
       documents.each do |doc|
-        page.should have_link(doc.title)
+        expect(page).to have_link(doc.title)
       end
     end
 
     it 'should have links to 5 recent notes' do
       notes.each do |note|
-        page.should have_link(note.title)
+        expect(page).to have_link(note.title)
       end
     end
 
@@ -35,9 +35,9 @@ describe 'Library' do
           click_on search_button
         end
 
-        page.should have_content('Search Results')
-        page.should_not have_content('No results')
-        page.should have_content(notes[0].title)
+        expect(page).to have_content('Search Results')
+        expect(page).not_to have_content('No results')
+        expect(page).to have_content(notes[0].title)
       end
 
       it 'should find the first document' do
@@ -46,9 +46,9 @@ describe 'Library' do
           click_on search_button
         end
 
-        page.should have_content('Search Results')
-        page.should_not have_content('No results')
-        page.should have_content(documents[0].title)
+        expect(page).to have_content('Search Results')
+        expect(page).not_to have_content('No results')
+        expect(page).to have_content(documents[0].title)
       end
     end
   end

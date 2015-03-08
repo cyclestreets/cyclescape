@@ -8,7 +8,7 @@ describe 'User dashboards' do
 
         it 'should have guidance about the lack of groups' do
           visit dashboard_path
-          page.should have_content(I18n.t('.dashboards.show.no_user_groups'))
+          expect(page).to have_content(I18n.t('.dashboards.show.no_user_groups'))
         end
       end
 
@@ -18,7 +18,7 @@ describe 'User dashboards' do
         context 'that has no threads' do
           it 'should have guidance about the lack of threads' do
             visit dashboard_path
-            page.should have_content(I18n.t('.dashboards.show.no_group_threads'))
+            expect(page).to have_content(I18n.t('.dashboards.show.no_group_threads'))
           end
         end
 
@@ -34,7 +34,7 @@ describe 'User dashboards' do
             visit dashboard_path
             current_user.groups.each do |group|
               group.threads.each do |thread|
-                page.should have_content(thread.title)
+                expect(page).to have_content(thread.title)
               end
             end
           end
@@ -50,7 +50,7 @@ describe 'User dashboards' do
       context 'with no threads' do
         it 'should give guidance' do
           visit dashboard_path
-          page.should have_content(I18n.t('.dashboards.show.recent_threads'))
+          expect(page).to have_content(I18n.t('.dashboards.show.recent_threads'))
         end
       end
 
@@ -58,10 +58,10 @@ describe 'User dashboards' do
         it "should list threads I've subscribed to" do
           messages = FactoryGirl.create_list(:message, 3, created_by: current_user)
           messages.each { |m| m.thread.add_subscriber(current_user) }
-          current_user.involved_threads.count.should > 0
+          expect(current_user.involved_threads.count).to be > 0
           visit dashboard_path
           messages.map { |m| m.thread }.each do |thread|
-            page.should have_content(thread.title)
+            expect(page).to have_content(thread.title)
           end
         end
       end
@@ -75,7 +75,7 @@ describe 'User dashboards' do
       context 'no locations' do
         it 'should give some guidance' do
           visit dashboard_path
-          page.should have_content(I18n.t('.dashboards.show.add_some_locations'))
+          expect(page).to have_content(I18n.t('.dashboards.show.add_some_locations'))
         end
       end
 
@@ -90,7 +90,7 @@ describe 'User dashboards' do
         end
 
         it 'should give some more guidance' do
-          page.should have_content(I18n.t('.dashboards.show.add_another_location'))
+          expect(page).to have_content(I18n.t('.dashboards.show.add_another_location'))
         end
       end
 
@@ -105,7 +105,7 @@ describe 'User dashboards' do
         end
 
         it 'should show issues in my area' do
-          page.should have_content(issue.title)
+          expect(page).to have_content(issue.title)
         end
       end
     end
@@ -117,7 +117,7 @@ describe 'User dashboards' do
         it 'should give a warning' do
           visit dashboard_path
           within('#my-priorities') do
-            page.should have_content(I18n.t('.dashboards.show.add_a_new_issue'))
+            expect(page).to have_content(I18n.t('.dashboards.show.add_a_new_issue'))
           end
         end
       end
@@ -129,8 +129,8 @@ describe 'User dashboards' do
         it 'should show the thread' do
           visit dashboard_path
           within('#my-priorities') do
-            page.should have_content(thread.title)
-            page.should have_content(I18n.t("thread_priorities.#{priority.label}"))
+            expect(page).to have_content(thread.title)
+            expect(page).to have_content(I18n.t("thread_priorities.#{priority.label}"))
           end
         end
       end
@@ -142,7 +142,7 @@ describe 'User dashboards' do
       context 'no deadlines' do
         it 'should give a warning' do
           visit dashboard_path
-          page.should have_content(I18n.t('.dashboards.show.no_upcoming_deadline_threads'))
+          expect(page).to have_content(I18n.t('.dashboards.show.no_upcoming_deadline_threads'))
         end
       end
 
@@ -154,14 +154,14 @@ describe 'User dashboards' do
         it 'should show the deadline' do
           deadline.thread.add_subscriber(current_user)
           visit dashboard_path
-          page.should have_content(deadline.title)
-          page.should have_content(I18n.l(deadline.deadline.to_date, format: :long))
+          expect(page).to have_content(deadline.title)
+          expect(page).to have_content(I18n.l(deadline.deadline.to_date, format: :long))
         end
 
         it 'should not show censored deadlines' do
           censored_deadline.thread.add_subscriber(current_user)
           visit dashboard_path
-          page.should_not have_content(censored_deadline.title)
+          expect(page).not_to have_content(censored_deadline.title)
         end
       end
     end
@@ -181,13 +181,13 @@ describe 'User dashboards' do
           click_on search_button
         end
 
-        page.should have_content('One thread')
-        page.should have_content('One issue')
-        page.should have_content('One library item')
+        expect(page).to have_content('One thread')
+        expect(page).to have_content('One issue')
+        expect(page).to have_content('One library item')
 
-        page.should have_content(thread.title)
-        page.should have_content(issue.title)
-        page.should have_content(library_note.title)
+        expect(page).to have_content(thread.title)
+        expect(page).to have_content(issue.title)
+        expect(page).to have_content(library_note.title)
       end
     end
   end

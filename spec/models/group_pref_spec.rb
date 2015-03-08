@@ -17,7 +17,7 @@
 require 'spec_helper'
 
 describe GroupPref do
-  it { should belong_to(:group) }
+  it { is_expected.to belong_to(:group) }
 
   describe 'attributes' do
     booleans = %w(
@@ -26,7 +26,7 @@ describe GroupPref do
 
     booleans.each do |attr|
       it "should respond to #{attr} with true or false" do
-        subject.send(attr).should_not be_nil
+        expect(subject.send(attr)).not_to be_nil
       end
     end
   end

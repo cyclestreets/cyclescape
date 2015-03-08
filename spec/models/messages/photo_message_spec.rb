@@ -16,26 +16,26 @@ require 'spec_helper'
 
 describe PhotoMessage do
   describe 'associations' do
-    it { should belong_to(:message) }
-    it { should belong_to(:thread) }
-    it { should belong_to(:created_by) }
+    it { is_expected.to belong_to(:message) }
+    it { is_expected.to belong_to(:thread) }
+    it { is_expected.to belong_to(:created_by) }
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:photo) }
+    it { is_expected.to validate_presence_of(:photo) }
   end
 
   context 'factory' do
     subject { FactoryGirl.create(:photo_message) }
 
-    it { should be_valid }
+    it { is_expected.to be_valid }
 
     it 'should have a thread' do
-      subject.thread.should be_a(MessageThread)
+      expect(subject.thread).to be_a(MessageThread)
     end
 
     it 'should have a message' do
-      subject.message.should be_a(Message)
+      expect(subject.message).to be_a(Message)
     end
   end
 
@@ -43,9 +43,9 @@ describe PhotoMessage do
     subject { FactoryGirl.create(:photo_message) }
 
     it 'should provide a thumbnail of the photo' do
-      subject.photo_thumbnail.should be_true
-      subject.photo_thumbnail.width.should == 46
-      subject.photo_thumbnail.height.should == 50
+      expect(subject.photo_thumbnail).to be_truthy
+      expect(subject.photo_thumbnail.width).to eq(46)
+      expect(subject.photo_thumbnail.height).to eq(50)
     end
   end
 
@@ -53,9 +53,9 @@ describe PhotoMessage do
     subject { FactoryGirl.create(:photo_message) }
 
     it 'should provide a preview size of the photo' do
-      subject.photo_preview.should be_true
-      subject.photo_preview.width.should == 182
-      subject.photo_preview.height.should == 200
+      expect(subject.photo_preview).to be_truthy
+      expect(subject.photo_preview.width).to eq(182)
+      expect(subject.photo_preview.height).to eq(200)
     end
   end
 
@@ -63,11 +63,11 @@ describe PhotoMessage do
     subject { FactoryGirl.create(:photo_message_with_description) }
 
     it 'should contain the caption' do
-      subject.searchable_text.should include(subject.caption)
+      expect(subject.searchable_text).to include(subject.caption)
     end
 
     it 'should contain the description' do
-      subject.searchable_text.should include(subject.description)
+      expect(subject.searchable_text).to include(subject.description)
     end
   end
 end

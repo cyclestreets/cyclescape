@@ -19,11 +19,11 @@ describe 'thread notifications' do
         click_on 'Post Message'
       end
       open_email(current_user.email, with_subject: /^Re/)
-      current_email.should have_subject("Re: [Cyclescape] #{thread.title}")
-      current_email.should have_body_text(/Notification test/)
-      current_email.should have_body_text(current_user.name)
-      current_email.should be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
-      current_email.should have_reply_to("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
+      expect(current_email).to have_subject("Re: [Cyclescape] #{thread.title}")
+      expect(current_email).to have_body_text(/Notification test/)
+      expect(current_email).to have_body_text(current_user.name)
+      expect(current_email).to be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
+      expect(current_email).to have_reply_to("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
     end
 
     it 'should send an email for a link message' do
@@ -34,9 +34,9 @@ describe 'thread notifications' do
         click_on 'Add Link'
       end
       open_email(current_user.email)
-      current_email.should have_body_text('http://example.com')
-      current_email.should have_body_text('An example URL')
-      current_email.should have_body_text('Some words')
+      expect(current_email).to have_body_text('http://example.com')
+      expect(current_email).to have_body_text('An example URL')
+      expect(current_email).to have_body_text('Some words')
     end
 
     it 'should send an email for a library item message'
@@ -61,8 +61,8 @@ describe 'thread notifications' do
         click_on I18n.t('message.deadlines.new.submit')
       end
       open_email(current_user.email)
-      current_email.should have_body_text('Planning application deadline')
-      current_email.should have_body_text('07 December 2011') # format used in display
+      expect(current_email).to have_body_text('Planning application deadline')
+      expect(current_email).to have_body_text('07 December 2011') # format used in display
     end
 
     it 'should send an email for a photo message' do
@@ -73,10 +73,10 @@ describe 'thread notifications' do
       end
 
       open_email(current_user.email)
-      current_email.should have_body_text('Some words')
+      expect(current_email).to have_body_text('Some words')
       # The URL will actually link to a particular message_id anchor, but we don't know
       # what that will be to test it.
-      pending 'Figure out testing the url'
+      skip 'Figure out testing the url'
     end
 
     it 'should send and email for a document message' do
@@ -87,11 +87,11 @@ describe 'thread notifications' do
       end
 
       open_email(current_user.email)
-      current_email.should have_body_text('Some more words')
-      current_email.should have_body_text('added an attachment to the thread')
-      current_email.should have_body_text(I18n.t('.thread_mailer.new_document_message.view_the_document'))
+      expect(current_email).to have_body_text('Some more words')
+      expect(current_email).to have_body_text('added an attachment to the thread')
+      expect(current_email).to have_body_text(I18n.t('.thread_mailer.new_document_message.view_the_document'))
       # See above
-      pending 'Figure out testing the url'
+      skip 'Figure out testing the url'
     end
 
     context 'html encoding' do
@@ -102,7 +102,7 @@ describe 'thread notifications' do
         end
 
         open_email(current_user.email)
-        current_email.should have_body_text('A & B')
+        expect(current_email).to have_body_text('A & B')
       end
 
       it 'should not escape link messages' do
@@ -113,9 +113,9 @@ describe 'thread notifications' do
           click_on 'Add Link'
         end
         open_email(current_user.email)
-        current_email.should have_body_text('http://example.com?foo&bar')
-        current_email.should have_body_text('An example URL with & symbols')
-        current_email.should have_body_text('Some words & some more words')
+        expect(current_email).to have_body_text('http://example.com?foo&bar')
+        expect(current_email).to have_body_text('An example URL with & symbols')
+        expect(current_email).to have_body_text('Some words & some more words')
       end
 
       it 'should not escape deadline messages' do
@@ -125,7 +125,7 @@ describe 'thread notifications' do
           click_on I18n.t('message.deadlines.new.submit')
         end
         open_email(current_user.email)
-        current_email.should have_body_text('Planning application deadline & so on')
+        expect(current_email).to have_body_text('Planning application deadline & so on')
       end
 
       it 'should not escape photo messages' do
@@ -136,7 +136,7 @@ describe 'thread notifications' do
         end
 
         open_email(current_user.email)
-        current_email.should have_body_text('Some words & some more words')
+        expect(current_email).to have_body_text('Some words & some more words')
       end
     end
   end
@@ -158,7 +158,7 @@ describe 'thread notifications' do
         end
 
         open_email(current_user.email)
-        current_email.should have_body_text('Everyone can view')
+        expect(current_email).to have_body_text('Everyone can view')
       end
     end
 
@@ -180,7 +180,7 @@ describe 'thread notifications' do
         end
 
         open_email(current_user.email)
-        current_email.should have_body_text('Only members of')
+        expect(current_email).to have_body_text('Only members of')
       end
     end
 
@@ -202,7 +202,7 @@ describe 'thread notifications' do
         end
 
         open_email(current_user.email)
-        current_email.should have_body_text('Only committee members of')
+        expect(current_email).to have_body_text('Only committee members of')
       end
     end
   end
