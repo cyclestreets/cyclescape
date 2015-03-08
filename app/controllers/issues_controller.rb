@@ -28,7 +28,7 @@ class IssuesController < ApplicationController
 
     if @issue.save
       NewIssueNotifier.new_issue(@issue)
-      redirect_to @issue
+      redirect_to new_issue_thread_path(@issue)
     else
       @start_location = current_user.start_location
       render :new

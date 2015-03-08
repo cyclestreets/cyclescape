@@ -77,7 +77,7 @@
         joining_instructions: "Die Mitgliedschafts-Beschreibung wird Leuten gezeigt, die dieser Cyclescape-Gruppe beitreten wollen. Vielleicht möchtest Du zum Beispiel Leute zuerst anweisen, für die Mitgliedschaft an anderer Stelle zu zahlen, oder Du bist glücklich über alle und jeden, der deiner Gruppe beitreten möchte. Du kannst das unausgefüllt lassen."
       issue:
         new: &hints_issue_new
-          description: "Bitte erkläre Details über das Problem und welchen Effekt es auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich sind."
+          description: "Bitte erkläre Details über das Problem und welchen Effekt es auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema zu starten."
           photo: "(optional)"
           tags_string: "z. B. Fahrradparken, Hindernis, Baustelle, Weg"
           title: "Bitte fasse Dich kurz und sei sachlich."
