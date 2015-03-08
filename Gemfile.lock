@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/nikolai-b/acts_as_indexed.git
+  revision: 2fe79d873354e82f16fe5f60495faf4fff6fee71
+  specs:
+    acts_as_indexed (0.8.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -31,7 +37,6 @@ GEM
     activesupport (3.2.20)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
-    acts_as_indexed (0.8.3)
     addressable (2.3.6)
     annotate (2.6.5)
       activerecord (>= 2.3.0)
@@ -295,7 +300,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter
-  acts_as_indexed
+  acts_as_indexed!
   annotate (>= 2.5.0)
   bullet
   capybara

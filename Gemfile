@@ -28,7 +28,7 @@ gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly', '~> 0.9.15' # pin to delay the upgrade to 1.x
 gem 'redis-store', '~> 1.0.0'
 gem 'resque'
-gem 'acts_as_indexed'
+gem 'acts_as_indexed', github: 'nikolai-b/acts_as_indexed'
 gem 'thumbs_up', '~> 0.4.6'
 gem 'exceptional'
 gem 'foreman'
