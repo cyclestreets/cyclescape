@@ -20,6 +20,8 @@ describe 'Issues' do
         # Note hidden map field
         find('#issue_loc_json').set(issue_values[:loc_json])
         click_on 'Send Report'
+        expect(page).to have_content("New Thread on #{issue_values[:title]}")
+        click_on 'Create Thread'
         within('#content header') do
           expect(page).to have_content(issue_values[:title])
         end
@@ -35,6 +37,7 @@ describe 'Issues' do
         fill_in 'Tag your issue', with: 'parking parking'
 
         click_on 'Send Report'
+        click_on 'Create Thread'
         within('#content header') do
           expect(page).to have_content(issue_values[:title])
         end
@@ -48,6 +51,7 @@ describe 'Issues' do
         fill_in 'Tag your issue', with: 'equals = êquals'
 
         click_on 'Send Report'
+        click_on 'Create Thread'
         within('#content header') do
           expect(page).to have_content(issue_values[:title])
         end
