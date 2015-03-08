@@ -273,6 +273,7 @@
   issue:
     message_threads:
       new:
+        new_hint: "Dies ist, wo eine Diskussion über die Frage begonnen wird. \ n Es könnte viele unterschiedliche Diskussionsstränge, die eine Ausgabe erzeugt \ n zB sein ein neuer Bauantrag kann Verkehr auf einer Straße beeinflussen und beeinflussen Zyklus Zugang zu den Wäldern. "
         title: "Neue Diskussion um %{issue}"
         everyone: "Jeder"
     photos:
