@@ -6,6 +6,9 @@ authorization do
   role :admin do
     includes :member
     has_permission_on :admin_groups, :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
+    has_permission_on :group_requests do
+      to [:index, :review, :confirm, :reject]
+    end
     has_permission_on :admin_users, to: :manage
     has_permission_on :admin_user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :admin_home, to: :view
@@ -20,6 +23,13 @@ authorization do
   role :member do
     includes :guest
     has_permission_on :dashboards, to: [:show]
+    has_permission_on :group_requests do
+      to [:new, :create]
+    end
+    has_permission_on :group_requests do
+      to :cancel
+      if_attribute user: is { user }
+    end
     has_permission_on :group_members, :group_memberships do
       to :manage
       if_attribute committee_members: contains { user }

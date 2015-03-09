@@ -1,0 +1,29 @@
+%h1 Listing group_requests
+
+%table
+  %tr
+    %th Status
+    %th User
+    %th Name
+    %th Subdomain
+    %th Website
+    %th Email
+    %th
+    %th
+    %th
+
+  - @group_requests.each do |group_request|
+    %tr
+      %td= group_request.status
+      %td= group_request.user_id
+      %td= group_request.name
+      %td= group_request.subdomain
+      %td= group_request.website
+      %td= group_request.email
+      %td= link_to 'Show', group_request
+      %td= link_to 'Edit', edit_group_request_path(group_request)
+      %td= link_to 'Destroy', group_request, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Group request', new_group_request_path
