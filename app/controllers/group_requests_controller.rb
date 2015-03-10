@@ -1,33 +1,38 @@
 class GroupRequestsController < ApplicationController
-  before_filter :load_group_request, only: [:show, :edit, :update, :destroy, :review, :confirm]
-  filter_access_to :all, attribute_check: true, model: Group
+  before_filter :load_group_request, only: [:show, :edit, :update, :destroy, :review, :confirm, :reject]
 
   def index
     @requests = GroupRequest.order('created_at desc').includes(:user)
   end
 
   def new
-    @request = GroupRequest.build
+    @request = GroupRequest.new
   end
 
   def create
+    @request = GroupRequest.new params[:group_request]
     @request.user = current_user
 
     if @request.save
-      redirect_to @group, notice: t('.group_requests.create.requested')
-      Notifications.new_group_request(@request).deliver
+      User.admin.each do |admin|
+        Notifications.new_group_request(@request, admin).deliver
+      end
+      redirect_to '/', notice: t('.group_requests.create.requested')
     else
       render :new
     end
   end
 
   def review
+
   end
 
   def confirm
     @request.actioned_by = current_user
     if @request.confirm
-      Notifications.group_request_confirmed(@request).deliver
+      @group = Group.find_by_name(@request.name)
+      Notifications.group_request_confirmed(@group, @request).deliver
+      @request.destroy
       set_flash_message(:success)
     else
       set_flash_message(:failure)
@@ -39,6 +44,7 @@ class GroupRequestsController < ApplicationController
     @request.actioned_by = current_user
     if @request.reject
       set_flash_message(:success)
+      @request.destroy
     else
       set_flash_message(:failure)
     end
@@ -57,6 +63,6 @@ class GroupRequestsController < ApplicationController
   protected
 
   def load_group_request
-    @group = GroupRequest.find(params[:group_id])
+    @request = GroupRequest.find(params[:id])
   end
 end

@@ -9,6 +9,20 @@ class Notifications < ActionMailer::Base
          subject: t('.mailers.notifications.gmr_confirmed.subject', group_name: @group.name))
   end
 
+  def new_group_request(request, admin)
+    @request = request
+    mail(to: admin.name_with_email,
+         subject: t('.mailers.notifications.new_group_request.subject',
+                    group_name: @request.name, user_name: @request.user.full_name))
+  end
+
+  def group_request_confirmed(group, request)
+    @user = request.user
+    @group = group
+    mail(to: @user,
+         subject: t('.mailers.notifications.new_group_confirmed.subject', group_name: @group.name))
+  end
+
   def new_group_membership_request(request)
     @user = request.user
     @group = request.group
