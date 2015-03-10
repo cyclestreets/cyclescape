@@ -90,6 +90,9 @@ describe GroupMembershipRequest do
       expect(user.groups.size).to eq(0)
       subject.user = user
       subject.group = group
+      expect { subject.confirm! }.to raise_error
+      expect(user.groups.size).to eq(0)
+
       subject.actioned_by = boss
       expect(subject.confirm).to be_truthy
       expect(user.groups.size).to eq(1)

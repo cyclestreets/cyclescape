@@ -4,13 +4,14 @@ class GroupRequest < ActiveRecord::Base
   belongs_to :user
   belongs_to :actioned_by, class_name: 'User'
 
-  attr_accessible :email, :name, :short_name, :website, :default_thread_privacy
+  attr_accessible :email, :name, :short_name, :website, :default_thread_privacy, :message
   validates :user, :name, :short_name, :email, presence: true
   validates :name, :short_name, :email, uniqueness: true
   validate :name_is_not_taken, :short_name_is_not_taken, :email_is_not_taken
+  validate :short_name, format: { with: /\A[a-z0-9]+\z/ }
 
   state_machine :status, initial: :pending do
-    before_transition any => :confirmed do |request|
+    after_transition any => :confirmed do |request|
       request.create_group
     end
 
@@ -39,7 +40,6 @@ class GroupRequest < ActiveRecord::Base
     membership.user = user
     membership.role = 'committee'
     membership.save!
-    delete
   end
 
   private

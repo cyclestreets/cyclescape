@@ -10,7 +10,7 @@ describe GroupRequest do
     it 'must have a user' do
       expect(subject).to have(1).error_on(:user)
       subject.user = user
-      expect(subject).to have(1).error_on(:user)
+      expect(subject).to have(0).error_on(:user)
     end
 
     it 'must be pending' do
@@ -22,7 +22,7 @@ describe GroupRequest do
     end
   end
 
-  describe 'must not conflict with current groups' do
+  describe 'must not conflict with existing groups' do
     subject { FactoryGirl.create(:group_request) }
 
     it 'with its name' do
@@ -52,12 +52,9 @@ describe GroupRequest do
     end
 
     it 'can be confirmed' do
-      binding.pry
       expect { subject.confirm! }.to raise_error
       subject.actioned_by = boss
       expect { subject.confirm! }.not_to raise_error
-      expect(subject).to be_valid
-      expect(subject.status).to eql('confirmed')
     end
 
     it 'can be rejected' do
@@ -70,15 +67,13 @@ describe GroupRequest do
   end
 
   context 'check group creation' do
-    subject { described_class.new }
+    subject { FactoryGirl.create :group_request, user: user, actioned_by: boss}
     let(:boss) { FactoryGirl.create(:brian) }
 
     it 'should create group when confirmed' do
-      subject.user = user
-      subject.actioned_by = boss
       expect(user.reload.groups.size).to eq(0)
 
-      expect{subject.confirm}.to change{Group.size}.by(1)
+      expect{subject.confirm}.to change{Group.count}.by(1)
       expect(Group.last.committee_members).to include(user)
     end
   end
