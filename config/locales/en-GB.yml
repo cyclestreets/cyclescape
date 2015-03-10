@@ -31,6 +31,7 @@
         admin_interface_introduction: "This section contains administrative functions, available to system administrators only."
         manage_comments: "Manage comments"
         manage_groups: "Manage groups"
+        manage_group_requests: "Manage group requests"
         manage_issue_categories: "Manage Issue Categories"
         manage_users: "Manage users"
     issue_categories:
@@ -337,6 +338,29 @@
         zero: "Review membership requests"
         one: "View pending membership request"
         other: "View pending membership requests (%{count})"
+  group_requests:
+    create:
+      requested: You have requested a new campaigning group, you will be notifed when it is created
+    new:
+      new_group_request_introduction: We moderate requests for new groups.
+    index: &group_requests_index
+      <<: *group_membership_requests_index
+      name: Requested Name
+      review: Review
+      actions: Actions
+      new_group: Create a New Group
+      group_email: Email
+    review:
+      <<: *group_requests_index
+      short_name: Short name
+      website: Website
+    confirm:
+      success: Group created
+      failure: Failed to create Group
+    reject:
+      success: Group request rejected and deleted
+      failure: Failed to reject group request
+
   home:
     show:
       introduction_html:
@@ -468,6 +492,8 @@
       issues_tooltip: "Reported problems, browsable on the map or as a list"
       library: "Library"
       library_tooltip: "Reusable resources for campaigning"
+      group_request_tooltip: Request a the creation of a new campaigning group
+      group_request: New Group
       loading: "Please wait\u2026"
       threads: "Discussion threads"
       threads_tooltip: "Discussions on each issue"
@@ -546,6 +572,8 @@
         subject: "You are now a member of the Cyclescape group for %{group_name}"
       gmr_confirmed:
         subject: "You are now a member of the Cyclescape group for %{group_name}"
+      new_group_request:
+        subject: "[Cyclescape] %{user_name} wants to create %{group_name}"
       new_gmr:
         subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
       new_group_thread:

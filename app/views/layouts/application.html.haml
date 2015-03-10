@@ -39,6 +39,8 @@
           %li#menu-issues= link_to t(".issues"), issues_path, title: t(".issues_tooltip")
           %li#menu-threads= link_to t(".threads"), threads_path, title: t(".threads_tooltip")
           %li#menu-library= link_to t(".library"), library_path, title: t(".library_tooltip")
+          - if permitted_to? :new, :group_requests
+            %li#request-group= link_to t('.group_request'), new_group_request_path, title: t('.group_request_tooltip')
           - if permitted_to? :view, :admin_home
             %li#menu-admin= link_to t(".admin"), admin_home_path, title: t(".admin_tooltip")
         - if current_user && !current_user.groups.empty?

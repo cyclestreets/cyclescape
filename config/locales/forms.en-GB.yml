@@ -75,6 +75,10 @@
           <<: *hints_user_new
       group:
         short_name: "Must be lower-case alphanumeric; a-z, 0-9"
+      group_request:
+        short_name: "Must be lower-case alphanumeric; a-z, 0-9"
+        email: A public email address for the group
+        message: A short message to explain the group (helps us stop spam requests)
       group_membership:
         email: "Please enter their email. If this matches an existing Cyclescape account they will be added to the group immediately. Otherwise an invitation to join Cyclescape will be sent to this address."
         full_name: "Please enter their name; they can change this later."

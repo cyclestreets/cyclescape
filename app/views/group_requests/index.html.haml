@@ -1,29 +1,29 @@
-%h1 Listing group_requests
+%section
+  .tasks
+    %p= link_to t(".new_group"), new_admin_group_path
 
-%table
-  %tr
-    %th Status
-    %th User
-    %th Name
-    %th Subdomain
-    %th Website
-    %th Email
-    %th
-    %th
-    %th
-
-  - @group_requests.each do |group_request|
-    %tr
-      %td= group_request.status
-      %td= group_request.user_id
-      %td= group_request.name
-      %td= group_request.subdomain
-      %td= group_request.website
-      %td= group_request.email
-      %td= link_to 'Show', group_request
-      %td= link_to 'Edit', edit_group_request_path(group_request)
-      %td= link_to 'Destroy', group_request, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Group request', new_group_request_path
+  - if @requests.length == 0
+    %p= t ".no_requests_yet"
+  - else
+    %table
+      %thead
+        %th= t ".user"
+        %th= t ".name"
+        %th= t ".group_email"
+        %th= t ".message"
+        %th= t ".requested_at"
+        %th= t ".status"
+        %th{colspan: 3}= t ".actions"
+      %tbody
+        - @requests.each do |r|
+          %tr
+            %td= link_to_profile(r.user)
+            %td= link_to r.name, r
+            %td= auto_link r.email
+            %td= link_to t(".view_message"), review_group_request_path(r) unless r.message.blank?
+            %td
+              = time_tag_with_title(r.created_at) do
+                - t ".created_at", time_ago: time_ago_in_words(r.created_at)
+            %td= link_to t(".review"), review_group_request_path(r)
+            %td= link_to t(".confirm"), confirm_group_request_path(r), method: :post, data: { confirm: t(".are_you_sure") } if r.pending?
+            %td= link_to t(".reject"), reject_group_request_path(r), method: :post, data: { confirm: t(".are_you_sure") } if r.pending?
