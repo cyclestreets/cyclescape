@@ -1,4 +1,4 @@
-require "net/imap"
+require 'net/imap'
 
 class MailboxReader < MailboxProcessor
   def run

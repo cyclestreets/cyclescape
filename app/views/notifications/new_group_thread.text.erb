@@ -1,6 +1,6 @@
 <% if @thread.has_issue? %>
-A new thread titled "<%= raw @thread.title %>" has been created on issue
-"<%= raw @thread.issue.title %>" for the <%= raw @group.name %> group.
+A new discussion titled "<%= raw @thread.title %>" has been created on
+issue "<%= raw @thread.issue.title %>" for the <%= raw @group.name %> group.
 <% else %>
 A new administrative discussion titled "<%= raw @thread.title %>" has
 been created for the <%= raw @group.name %> group.
@@ -9,8 +9,8 @@ been created for the <%= raw @group.name %> group.
 <%= raw @thread.first_message.created_by.name %> wrote:
 <%= raw @thread.first_message.body %>
 
-You aren't subscribed to this thread, so you won't receive any more updates.
-You can read the whole thread, and subscribe to it at:
+You aren't subscribed to this discussion thread, so you won't receive any
+more updates. You can read the whole thread, and subscribe to it at:
 <%= thread_url(@thread) %>
 
 --------

@@ -9,17 +9,40 @@ class Notifications < ActionMailer::Base
          subject: t('.mailers.notifications.gmr_confirmed.subject', group_name: @group.name))
   end
 
+  def new_group_membership_request(request)
+    @user = request.user
+    @group = request.group
+    @request = request
+    if @group.prefs.notify_membership_requests?
+      if @group.prefs.membership_secretary
+        mail to: @group.prefs.membership_secretary.name_with_email,
+             subject: t('.mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
+      elsif !@group.email.blank?
+        mail to: @group.name_with_email,
+             subject: t('.mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
+      end
+    end
+  end
+
+  # Send a notification to a user that they have been added to a group
+  def added_to_group(membership)
+    @member = membership.user
+    @group = membership.group
+    mail(to: @member.name_with_email,
+         subject: t('.mailers.notifications.added_to_group.subject', group_name: @group.name))
+  end
+
   # Send notification to member that thread has been created
   def new_group_thread(thread, member)
     @thread = thread
     @group = thread.group
     @message_author = thread.first_message.created_by
     @member = member
-    raise "Thread does not belong to group" if @group.nil?
+    fail 'Thread does not belong to group' if @group.nil?
     mail to: @member.name_with_email,
          from: user_notification_address(@message_author),
          reply_to: thread_address(@thread),
-         subject: t("mailers.notifications.new_group_thread.subject",
+         subject: t('mailers.notifications.new_group_thread.subject',
                     group_name: @group.name, thread_title: @thread.title)
   end
 
@@ -28,7 +51,7 @@ class Notifications < ActionMailer::Base
     @issue = issue
     @category = category
     mail to: @user.name_with_email,
-         subject: t("mailers.notifications.new_user_location_issue.subject",
+         subject: t('mailers.notifications.new_user_location_issue.subject',
                     issue_title: @issue.title)
   end
 
@@ -38,12 +61,12 @@ class Notifications < ActionMailer::Base
     @user_location = user_location
     @user = user_location.user
     @message = thread.messages.first
-    raise "Thread does not have an issue" unless @thread.issue
+    fail 'Thread does not have an issue' unless @thread.issue
     mail to: @user.name_with_email,
          from: user_notification_address(@message.created_by),
          reply_to: thread_address(@thread),
          subject: t('.mailers.notifications.new_user_location_issue_thread.subject',
-                   issue_title: @thread.issue.title)
+                    issue_title: @thread.issue.title)
   end
 
   def new_group_location_issue(user, group, issue)

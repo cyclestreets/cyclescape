@@ -6,6 +6,10 @@
 #  name :string(255)      not null
 #  icon :string(255)
 #
+# Indexes
+#
+#  index_tags_on_name  (name) UNIQUE
+#
 
 class Tag < ActiveRecord::Base
   attr_accessible :name
@@ -13,7 +17,7 @@ class Tag < ActiveRecord::Base
   validates :name, presence: true
 
   def self.names
-    scoped.map {|tag| tag.name }
+    scoped.map { |tag| tag.name }
   end
 
   def self.grab(val)

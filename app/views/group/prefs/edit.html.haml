@@ -1,0 +1,11 @@
+= render partial: "group/tabs"
+
+%header
+- if @group.prefs.notify_membership_requests && @group.prefs.membership_secretary.nil? && @group.email.blank?
+  %p.warning
+    = image_tag 'warning-24.png'
+    = t ".no_email_warning"
+
+%h2= t ".title"
+%section
+  = render "form"

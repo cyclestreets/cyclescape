@@ -25,7 +25,7 @@ class Group::ProfilesController < ApplicationController
   def geometry
     @profile = @group.profile
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(@profile.loc_feature(thumbnail: view_context.image_path("map-icons/m-misc.png"))) }
+      format.json { render json: RGeo::GeoJSON.encode(@profile.loc_feature(thumbnail: view_context.image_path('map-icons/m-misc.png'))) }
     end
   end
 

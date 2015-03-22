@@ -15,9 +15,9 @@
 development:
   adapter: postgis
   encoding: unicode
-  database: cyclekit_development
+  database: cyclescape_development
   pool: 5
-  username: cyclekit
+  username: cyclescape
   password:
   script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5
 
@@ -42,17 +42,17 @@ development:
 test:
   adapter: postgis
   encoding: unicode
-  database: cyclekit_test
+  database: cyclescape_test
   pool: 5
-  username: cyclekit
+  username: cyclescape
   password:
   script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5
 
 production:
   adapter: postgis
   encoding: unicode
-  database: cyclekit_production
+  database: cyclescape_production
   pool: 5
-  username: cyclekit
+  username: cyclescape
   password:
   script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5

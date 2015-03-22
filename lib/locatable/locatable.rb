@@ -9,12 +9,12 @@ module Locatable
     # Note - pass in the location as an array, otherwise .each is called on
     # multipolygons and it serializes to multiple geometries.
     def intersects(l)
-      where("st_intersects(location, ?)", [l])
+      where('st_intersects(location, ?)', [l])
     end
 
     # define a variant of intersects that doesn't include entirely surrouding polygons
     def intersects_not_covered(l)
-      intersects(l).where("not st_coveredby(?, location)", [l])
+      intersects(l).where('not st_coveredby(?, location)', [l])
     end
 
     # This could be improved by actually using the factory from the location column, rather
@@ -28,21 +28,25 @@ module Locatable
   # Define an approximate centre of the issue, for convenience.
   # Note that the line or polygon might be nowhere near this centre
   def centre
-    case self.location.geometry_type
+    case location.geometry_type
     when RGeo::Feature::Point
-      return self.location
+      return location
     else
-      return self.location.envelope.centroid
+      return location.envelope.centroid
     end
   end
 
   # Returns the size of the location. Returns 0 for anything other than polygons.
   def size
-    case self.location.geometry_type
-    when RGeo::Feature::Polygon
-      return self.location.area
-    else
+    if location.nil?
       return 0.0
+    else
+      case location.geometry_type
+      when RGeo::Feature::Polygon
+        return location.area.to_f
+      else
+        return 0.0
+      end
     end
   end
 
@@ -50,7 +54,7 @@ module Locatable
   # than a bounding box, for example.
   def size_ratio(geom)
     if geom && geom.geometry_type == RGeo::Feature::Polygon && geom.area > 0
-      return self.size.to_f / geom.area
+      return size.to_f / geom.area
     else
       return 0.0
     end
@@ -60,23 +64,23 @@ module Locatable
     # Not clear why the factory is needed, should be taken care of by setting the srid on the factory_generator
     # but that doesn't work.
     factory = RGeo::Geos.factory(srid: 4326)
-    feature = RGeo::GeoJSON.decode(json_str, :geo_factory => factory, :json_parser => :json)
+    feature = RGeo::GeoJSON.decode(json_str, geo_factory: factory, json_parser: :json)
     self.location = feature.geometry if feature
   end
 
   def loc_json
-    if self.location
-      RGeo::GeoJSON.encode(self.loc_feature).to_json
+    if location
+      RGeo::GeoJSON.encode(loc_feature).to_json
     else
-      ""
+      ''
     end
   end
 
   def loc_feature(properties = nil)
     if properties
-      RGeo::GeoJSON::Feature.new(self.location, self.id, properties)
+      RGeo::GeoJSON::Feature.new(location, id, properties)
     else
-      RGeo::GeoJSON::Feature.new(self.location)
+      RGeo::GeoJSON::Feature.new(location)
     end
   end
 end

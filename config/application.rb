@@ -5,7 +5,7 @@ require 'active_record/connection_adapters/postgis_adapter/railtie'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require *Rails.groups(:assets => %w(development test))
+  Bundler.require *Rails.groups(assets: %w(development test))
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
@@ -27,18 +27,20 @@ module Cyclescape
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
-    config.active_record.observers = :group_membership_observer
+    config.active_record.observers = :group_membership_observer, :message_thread_observer, :user_location_observer, :user_pref_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
+    config.i18n.enforce_available_locales = true
+
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = "en-GB"
+    config.i18n.default_locale = 'en-GB'
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
+    config.encoding = 'utf-8'
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
@@ -59,15 +61,15 @@ module Cyclescape
     config.cache_store = :redis_store
 
     # ActionMailer default URL options
-    config.action_mailer.default_url_options = {host: "www.cyclescape.org"}
+    config.action_mailer.default_url_options = { host: 'www.cyclescape.org' }
 
     # Default notification e-mail from address
-    config.default_email_from_domain = "cyclescape.org"
-    config.default_email_from = "Cyclescape <info@cyclescape.org>"
+    config.default_email_from_domain = 'cyclescape.org'
+    config.default_email_from = 'Cyclescape <info@cyclescape.org>'
 
     # Git info
     config.git_hash = `git rev-parse --short HEAD`.chomp
-    config.github_project_url = "https://github.com/cyclestreets/toolkit"
+    config.github_project_url = 'https://github.com/cyclestreets/cyclescape'
 
     # Google analytics
     config.analytics = {google: {account_id: "UA-28721275-1", base_domain: "cyclescape.org"}}

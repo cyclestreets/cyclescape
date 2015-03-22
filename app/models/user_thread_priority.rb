@@ -9,6 +9,11 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_user_thread_priorities_on_thread_id  (thread_id)
+#  index_user_thread_priorities_on_user_id    (user_id)
+#
 
 class UserThreadPriority < ActiveRecord::Base
   attr_accessible :priority
@@ -20,14 +25,14 @@ class UserThreadPriority < ActiveRecord::Base
                  very_low: 1 }
 
   belongs_to :user
-  belongs_to :thread, class_name: "MessageThread"
+  belongs_to :thread, class_name: 'MessageThread'
 
   validates :priority, inclusion: 1..10
   validates :user, presence: true
   validates :thread, presence: true
 
   def self.priorities_map
-    PRIORITIES.map {|p,v| [I18n.t(".thread_priorities.#{p.to_s}"), v] }
+    PRIORITIES.map { |p, v| [I18n.t(".thread_priorities.#{p.to_s}"), v] }
   end
 
   def label

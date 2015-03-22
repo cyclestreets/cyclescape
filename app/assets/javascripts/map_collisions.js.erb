@@ -18,21 +18,16 @@ MapCollisions = {
                       styleMap: MapStyle.collisionStyle(),
                       protocol: new OpenLayers.Protocol.Script({
                           url: this.collisions_url,
-                          format: new OpenLayers.Format.FlatJSON({
-                              getResultArray : function(obj){ return obj.collisions.collision},
-                              getLat : function(obj) { return obj.latitude },
-                              getLon : function(obj) { return obj.longitude }
-                          }),
+                          format: new OpenLayers.Format.GeoJSON(),
                           params: {
-                              key: this.collisions_key
+                              key: this.collisions_key,
+                              fields: 'id,latitude,longitude,datetime,severity,url',
+                              datetime: 'friendly'
                           },
                           filterToParams: function(filter, params) {
-                              // serialise BBOX into n/s/e/w url parameters
+                              // Obtain BBOX as string
                               if (filter.type === OpenLayers.Filter.Spatial.BBOX) {
-                                  params.w = filter.value.toArray()[0];
-                                  params.s = filter.value.toArray()[1];
-                                  params.e = filter.value.toArray()[2];
-                                  params.n = filter.value.toArray()[3];
+                                  params.bbox = filter.value.toBBOX();
                               }
                               return params;
                           }
@@ -50,7 +45,7 @@ MapCollisions = {
       feature.popup = new OpenLayers.Popup.FramedCloud("pop",
           feature.geometry.getBounds().getCenterLonLat(),
           null,
-          '<h3><a href="' + feature.attributes.url + '">Collision ' + feature.attributes.accref + ' in ' + feature.attributes.accyr + '</a></h3>' +
+          '<h3><a href="' + feature.attributes.url + '">Collision ' + feature.attributes.id + '</a></h3>' +
             '<p>Date and time: ' + feature.attributes.datetime + '</p>' +
             '<p>Severity: ' + feature.attributes.severity + '</p>' +
             '<p><a href="' + feature.attributes.url + '">View full, detailed report at CycleStreets</a></p>',

@@ -11,9 +11,9 @@
 #
 
 FactoryGirl.define do
-  factory :library_document, class: "Library::Document" do
+  factory :library_document, class: 'Library::Document' do
     item { FactoryGirl.build(:library_item) }
-    sequence(:title) {|n| "Document #{n}" }
+    sequence(:title) { |n| "Document #{n}" }
     file { Pathname.new(pdf_document_path) }
 
     after(:build) do |o|

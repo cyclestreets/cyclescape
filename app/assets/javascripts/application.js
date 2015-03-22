@@ -19,9 +19,9 @@
 //= require map_display
 //= require map_edit
 //= require map_popup
+//= require map_group_popup
 //= require map_style
 //= require openlayers_pz
-//= require openlayers_flatjson
 //= require ui
 //= require tags
 //= require library_message

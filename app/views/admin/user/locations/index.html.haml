@@ -1,0 +1,44 @@
+%section#user-locations
+  %header#user-locations-header
+    .tasks
+      = link_to t(".new"), new_admin_user_location_path(@user), class: "btn-big-green"
+    %h1= t ".title", user_name: @user.name
+
+  - if @user.locations.count > 0
+    %section.combined
+      %h2= t ".combined_locations"
+      %p= t ".combined_locations_guidance"
+      - m = display_bbox_map(@user.buffered_locations, combined_geometry_admin_user_locations_path(@user, :json))
+      %div{id: 'map'}
+      != m.to_html
+    %section.list
+      %h2= t ".all_user_locations", user_name: @user.name
+      %table
+        %thead
+          %th= t ".category"
+          %th= t ".map"
+          %th= t ".edit"
+          %th= t ".delete"
+          %th= t ".overlapping_groups"
+        - @user.locations.each do |l|
+          %tr
+            %td= l.category.name
+            %td
+              - m = tiny_display_map(l, geometry_admin_user_location_path(@user, l, :json), "tinymap") do |map, page, dom_id|
+                %div{id: dom_id, class: "tinymap"}
+              != m.to_html
+            %td= link_to t(".edit"), edit_admin_user_location_path(@user, l)
+            %td= link_to t(".delete"), admin_user_location_path(@user, l), data: { confirm: t(".confirm") }, method: "delete"
+            %td
+              - if l.overlapping_groups.count > 0
+                %ul
+                  - l.overlapping_groups.each do |g|
+                    %li= link_to g.name, group_path(g)
+              - else
+                %span= t ".no_overlapping_groups"
+  - else
+    %h2= t ".no_locations_yet"
+    %p.warning
+      = image_tag 'warning.png'
+      = t ".no_locations_guidance"
+%aside#sidebar

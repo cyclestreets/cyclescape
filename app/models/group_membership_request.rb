@@ -9,19 +9,26 @@
 #  actioned_by_id :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  message        :text
+#
+# Indexes
+#
+#  index_group_membership_requests_on_group_id  (group_id)
+#  index_group_membership_requests_on_user_id   (user_id)
 #
 
 class GroupMembershipRequest < ActiveRecord::Base
   attr_protected :state_event
+  attr_accessible :message
 
   belongs_to :group
   belongs_to :user
-  belongs_to :actioned_by, class_name: "User"
+  belongs_to :actioned_by, class_name: 'User'
 
   validates :user, presence: true
   validates :group, presence: true
 
-  state_machine :status, :initial => :pending do
+  state_machine :status, initial: :pending do
     before_transition any => :confirmed do |request|
       request.create_membership
     end
@@ -33,15 +40,15 @@ class GroupMembershipRequest < ActiveRecord::Base
     end
 
     event :confirm do
-      transition :pending => :confirmed
+      transition pending: :confirmed
     end
 
     event :reject do
-      transition :pending => :rejected
+      transition pending: :rejected
     end
 
     event :cancel do
-      transition :pending => :cancelled
+      transition pending: :cancelled
     end
   end
 
@@ -52,7 +59,7 @@ class GroupMembershipRequest < ActiveRecord::Base
   def create_membership
     membership = group.memberships.new
     membership.user = user
-    membership.role = "member"
+    membership.role = 'member'
     membership.save!
   end
 end

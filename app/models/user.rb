@@ -24,61 +24,78 @@
 #  invitation_limit       :integer
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
+#  deleted_at             :datetime
+#
+# Indexes
+#
+#  index_users_on_email             (email)
+#  index_users_on_invitation_token  (invitation_token)
 #
 
 class User < ActiveRecord::Base
   attr_accessible :email, :full_name, :display_name, :password, :password_confirmation, :disabled
 
   acts_as_voter
+  acts_as_paranoid
 
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable
   ALLOWED_ROLES = %w(member admin)
 
-  has_many :memberships, class_name: "GroupMembership"
+  has_many :memberships, class_name: 'GroupMembership'
   has_many :groups, through: :memberships
-  has_many :membership_requests, class_name: "GroupMembershipRequest"
-  has_many :actioned_membership_requests, foreign_key: "actioned_by_id", class_name: "GroupMembershipRequest"
-  has_many :issues, foreign_key: "created_by_id"
-  has_many :created_threads, class_name: "MessageThread", foreign_key: "created_by_id"
-  has_many :messages, foreign_key: "created_by_id"
-  has_many :locations, class_name: "UserLocation"
+  has_many :membership_requests, class_name: 'GroupMembershipRequest'
+  has_many :actioned_membership_requests, foreign_key: 'actioned_by_id', class_name: 'GroupMembershipRequest'
+  has_many :issues, foreign_key: 'created_by_id'
+  has_many :created_threads, class_name: 'MessageThread', foreign_key: 'created_by_id'
+  has_many :messages, foreign_key: 'created_by_id'
+  has_many :locations, class_name: 'UserLocation'
   has_many :thread_subscriptions do
     def to(thread)
-      where("thread_id = ?", thread).first
+      where('thread_id = ?', thread).first
     end
   end
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
   has_many :subscribed_threads, through: :thread_subscriptions, source: :thread, conditions: 'thread_subscriptions.deleted_at is NULL'
-  has_many :thread_priorities, class_name: "UserThreadPriority"
+  has_many :thread_priorities, class_name: 'UserThreadPriority'
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
   has_many :thread_views
   has_many :site_comments
-  has_one :profile, class_name: "UserProfile"
-  has_one :prefs, class_name: "UserPref"
-  belongs_to :remembered_group, class_name: "Group"
+  has_one :profile, class_name: 'UserProfile'
+  has_one :prefs, class_name: 'UserPref'
+  belongs_to :remembered_group, class_name: 'Group'
 
   accepts_nested_attributes_for :profile, update_only: true
 
-  before_validation :set_default_role, :unless => :role
+  before_validation :set_default_role, unless: :role
   after_create :create_user_prefs
 
-  scope :active, where("disabled_at IS NULL AND confirmed_at IS NOT NULL")
+  before_destroy :obfuscate_name
+  before_destroy :clear_profile
+  before_destroy :remove_locations
+  before_destroy :remove_group_memberships
+  before_destroy :remove_thread_subscriptions
+
+  scope :active, where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL')
 
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
-  validates :role, presence: true, inclusion: {in: ALLOWED_ROLES} 
+  validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
+
+  def self.user_roles_map
+    ALLOWED_ROLES.map { |n| [I18n.t(".user_roles.#{n.to_s}"), n] }
+  end
 
   def self.find_or_invite(email_address, name = nil)
     existing = find_by_email(email_address)
     return existing if existing
-    name = email_address.split("@").first if name.nil?
+    name = email_address.split('@').first if name.nil?
     User.invite!(full_name: name, email: email_address)
   end
 
   def self.init_user_prefs
-    joins("LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id").
-      where("user_prefs.id IS NULL").
-      each {|u| u.create_user_prefs }
+    joins('LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id').
+      where('user_prefs.id IS NULL').
+      each { |u| u.create_user_prefs }
   end
 
   def name
@@ -137,16 +154,16 @@ class User < ActiveRecord::Base
   end
 
   def disabled=(d)
-    if d == "1" && !disabled_at?
+    if d == '1' && !disabled_at?
       self.disabled_at = Time.now
     end
-    if d == "0" && disabled_at?
+    if d == '0' && disabled_at?
       self.disabled_at = nil
     end
   end
 
   def buffered_locations
-    locations.map{ |l| l.location.buffer(Geo::USER_LOCATIONS_BUFFER) }.inject{ |geo, item| geo.union(item) }
+    locations.map { |l| l.location.buffer(Geo::USER_LOCATIONS_BUFFER) }.inject { |geo, item| geo.union(item) }
   end
 
   # Returns issues that are within a small distance of their user_locations
@@ -187,23 +204,50 @@ class User < ActiveRecord::Base
   end
 
   def membership_request_pending_for?(group)
-    return self.membership_requests.where(group_id: group.id, status: :pending).count > 0
+    return membership_requests.where(group_id: group.id, status: :pending).count > 0
   end
 
   def update_remembered_group(group)
     # Not using association to avoid validation checks
     new_id = group ? group.id : nil
-    update_column(:remembered_group_id, new_id) unless self.remembered_group_id == new_id
+    update_column(:remembered_group_id, new_id) unless remembered_group_id == new_id
   end
 
   def remembered_group?
     remembered_group
   end
 
+  def obfuscate_name
+    self.full_name = "User #{id} (deleted)"
+    self.display_name = nil
+  end
+
+  def clear_profile
+    profile.clear
+  end
+
+  def remove_locations
+    locations.each do |location|
+      location.destroy
+    end
+  end
+
+  def remove_group_memberships
+    memberships.each do |membership|
+      membership.destroy
+    end
+  end
+
+  def remove_thread_subscriptions
+    thread_subscriptions.each do |subscription|
+      subscription.destroy
+    end
+  end
+
   protected
 
   def set_default_role
-    self.role = "member"
+    self.role = 'member'
   end
 
   # Devise hook for password validation

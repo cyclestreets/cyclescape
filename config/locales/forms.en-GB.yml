@@ -6,6 +6,10 @@
   activerecord:
     errors:
       models:
+        issue:
+          attributes:
+            size:
+              less_than: "of the issue is too large."
         user:
           attributes:
             full_name:
@@ -19,6 +23,8 @@
         short_name: "Subdomain"
       group_membership:
         role: "Membership type"
+      group_pref:
+        notify_membership_requests: "Enable membership request notifications"
       issue:
         new: &labels_issue_new
           description: "Write a description"
@@ -60,19 +66,29 @@
           password_confirmation: "New Password Confirmation"
     hints:
       user:
+        new: &hints_user_new
+          display_name: "Optional - this can be a nickname or pseudonym and will be shown instead of your full name to other users."
+          full_name: "Please enter your full name. If you ask to join a group, this will always be shown to the group administrators."
         edit:
           password: "Leave this blank to keep your current password."
           current_password: "Please confirm your current password to make changes on this page."
+          <<: *hints_user_new
       group:
         short_name: "Must be lower-case alphanumeric; a-z, 0-9"
       group_membership:
+        email: "Please enter their email. If this matches an existing Cyclescape account they will be added to the group immediately. Otherwise an invitation to join Cyclescape will be sent to this address."
+        full_name: "Please enter their name; they can change this later."
         role: "Select if they are a normal or committee member of the group."
-        full_name: "Please enter their name; they can change this when they accept the invite."
+      group_membership_request:
+        message: "You can optionally send the group administrators any additional information you feel is appropriate, such as a group membership number."
+      group_pref:
+        notify_membership_requests: "Notifications will be sent when a Cyclescape user asks to join this group"
+        membership_secretary: "Choose an optional membership secretary who will receive membership notification emails. Leave blank for notifications to be sent to the group email address."
       group_profile:
         joining_instructions: "The joining instructions are shown to people who want to join this Cyclescape group. You might want to direct people to pay for membership elsewhere first, for example, or you might be happy for everyone and anyone to join your Cyclescape group. You can leave this blank."
       issue:
         new: &hints_issue_new
-          description: "Please give details about the problem and what effect it is having on cycling. Note that all issues are publicly viewable."
+          description: "Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue."
           photo: "(optional)"
           tags_string: "e.g. cycleparking obstruction roadworks path"
           title: "Please be brief and specific."
@@ -91,7 +107,9 @@
       document_message:
         create: "Add Attachment"
       group_membership:
-        create: "Invite member"
+        create: "Add member"
+      group_membership_request:
+        create: "Request Group Membership"
       issue:
         create: "Send Report"
         update: "Save Report"

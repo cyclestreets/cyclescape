@@ -8,10 +8,17 @@
 #  created_at :datetime         not null
 #  deleted_at :datetime
 #
+# Indexes
+#
+#  index_thread_subscriptions_on_thread_id  (thread_id)
+#  index_thread_subscriptions_on_user_id    (user_id)
+#  sub_thread_id                            (thread_id)
+#  sub_user_id                              (user_id)
+#
 
 class ThreadSubscription < ActiveRecord::Base
   include FakeDestroy
 
   belongs_to :user
-  belongs_to :thread, class_name: "MessageThread"
+  belongs_to :thread, class_name: 'MessageThread'
 end

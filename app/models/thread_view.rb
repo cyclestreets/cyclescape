@@ -7,10 +7,15 @@
 #  thread_id :integer          not null
 #  viewed_at :datetime         not null
 #
+# Indexes
+#
+#  index_thread_views_on_user_id                (user_id)
+#  index_thread_views_on_user_id_and_thread_id  (user_id,thread_id) UNIQUE
+#
 
 class ThreadView < ActiveRecord::Base
   belongs_to :user
-  belongs_to :thread, class_name: "MessageThread"
+  belongs_to :thread, class_name: 'MessageThread'
 
   validates :user, presence: true
   validates :thread, presence: true

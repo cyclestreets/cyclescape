@@ -3,5 +3,6 @@
 %ul.styled-tabs
   %li= link_to t("group.home_page_tab"), group_path(@group)
   %li= link_to t("group.group_profile_tab"), edit_group_profile_path(@group)
+  %li= link_to t("group.group_prefs_tab"), edit_group_prefs_path(@group)
   %li= link_to t("group.membership_list_tab"), group_members_path(@group)
   %li= link_to t("group.membership_requests_tab"), group_membership_requests_path(@group)

@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :document_message do
     association :created_by, factory: :user
     association :message, factory: :message
-    sequence(:title) {|n| "Imaginative file title #{n}" }
+    sequence(:title) { |n| "Imaginative file title #{n}" }
     file { Pathname.new(pdf_document_path) }
 
     after(:build) do |o|

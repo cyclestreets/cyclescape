@@ -7,7 +7,12 @@
 #  category_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  location    :spatial({:srid=>
+#  location    :spatial          geometry, 4326
+#
+# Indexes
+#
+#  index_user_locations_on_location  (location)
+#  index_user_locations_on_user_id   (user_id)
 #
 
 class UserLocation < ActiveRecord::Base
@@ -16,13 +21,13 @@ class UserLocation < ActiveRecord::Base
   attr_accessible :category_id, :loc_json
 
   belongs_to :user
-  belongs_to :category, class_name: "LocationCategory"
+  belongs_to :category, class_name: 'LocationCategory'
 
   validates :location, presence: true
   validates :user, presence: true
   validates :category, presence: true
 
   def overlapping_groups
-    GroupProfile.where("st_intersects(location, ?)", self.location).order("st_area(location) asc").map{ |p| p.group}
+    GroupProfile.where('st_intersects(location, ?)', location).order('st_area(location) asc').map { |p| p.group }
   end
 end

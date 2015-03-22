@@ -11,40 +11,65 @@
 #  context_data :text
 #  created_at   :datetime         not null
 #  viewed_at    :datetime
+#  deleted_at   :datetime
 #
 
 require 'spec_helper'
 
 describe SiteComment do
-  describe "associations" do
-    it { should belong_to(:user) }
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
   end
 
-  describe "validations" do
-    it { should validate_presence_of(:body) }
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:body) }
 
-    it "should only allow a valid URL" do
+    it 'should only allow a valid URL' do
       comment = SiteComment.new
-      comment.context_url = "http://www.example.com"
-      comment.should have(0).errors_on(:context_url)
-      comment.context_url = "blah"
-      comment.should have(1).error_on(:context_url)
+      comment.context_url = 'http://www.example.com'
+      expect(comment).to have(0).errors_on(:context_url)
+      comment.context_url = 'blah'
+      expect(comment).to have(1).error_on(:context_url)
+    end
+
+    it 'should not accept spam' do
+      comment = SiteComment.new
+      comment.body = 'Normal feedback without spam'
+      expect(comment).to have(0).errors_on(:body)
+      comment.body = "Spam <a href='www.spammylink.example.com'>link</a>"
+      expect(comment).to have(1).error_on(:body)
+      comment.body = "Spam [url='www.spammylink.example.com']link[/url]"
+      expect(comment).to have(1).error_on(:body)
     end
   end
 
-  context "viewing" do
+  context 'viewing' do
     subject { FactoryGirl.create(:site_comment) }
 
-    it "should update the viewed timestamp when viewed" do
-      subject.viewed_at.should be_nil
+    it 'should update the viewed timestamp when viewed' do
+      expect(subject.viewed_at).to be_nil
       subject.viewed!
-      subject.viewed_at.should_not be_nil
+      expect(subject.viewed_at).not_to be_nil
     end
 
-    it "should respond to viewed?" do
-      subject.viewed?.should be_false
+    it 'should respond to viewed?' do
+      expect(subject.viewed?).to be_falsey
       subject.viewed!
-      subject.viewed?.should be_true
+      expect(subject.viewed?).to be_truthy
+    end
+  end
+
+  context 'deleting' do
+    subject { FactoryGirl.create(:site_comment) }
+
+    it 'should appear to be destroyed' do
+      subject.destroy
+      expect(SiteComment.all).to be_empty
+    end
+
+    it 'should not actually be deleted' do
+      subject.destroy
+      expect(SiteComment.with_deleted.length).to eql(1)
     end
   end
 end

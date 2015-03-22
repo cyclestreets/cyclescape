@@ -3,64 +3,77 @@ Cyclescape::Application.routes.draw do
   def issues_route(opts = {})
     resources :issues, opts do
       member do
-        get "geometry"
-        put "vote_up"
-        put "vote_down"
-        put "vote_clear"
+        get 'geometry'
+        put 'vote_up'
+        put 'vote_down'
+        put 'vote_clear'
       end
       collection do
-        get "all_geometries"
+        get 'all_geometries'
       end
-      scope module: "issue" do
+      scope module: 'issue' do
         resource :photo, only: [:show]
-        resources :threads, controller: "message_threads"
+        resources :threads, controller: 'message_threads'
         resource :tags, only: [:update]
       end
     end
   end
 
-  devise_for :users, :controllers => { :confirmations => "confirmations" }
+  devise_for :users, controllers: { confirmations: 'confirmations' }
 
   constraints(SubdomainConstraint) do
-    root :to => "groups#show"
-    resources :threads, controller: "group/message_threads"
-    issues_route controller: "group/issues"
+    root to: 'groups#show'
+    resources :threads, controller: 'group/message_threads'
+    issues_route controller: 'group/issues'
   end
 
-  resource :overview, as: :dashboard, controller: "dashboards" do
+  resource :overview, as: :dashboard, controller: 'dashboards' do
     get 'search'
   end
 
   issues_route
 
   namespace :admin do
-    resources :groups, :users
-    match "home" => "home#index"
+    resources :groups
+    resources :users do
+      scope module: 'user' do
+        resources :locations do
+          get 'geometry', on: :member
+          get 'combined_geometry', on: :collection
+        end
+      end
+    end
+    match 'home' => 'home#index'
   end
 
   resources :groups do
-    scope module: "group" do
+    scope module: 'group' do
       resources :members
       resources :memberships
       resources :membership_requests do
         member do
-          post "confirm"
-          post "reject"
-          post "cancel"
+          get 'review'
+          post 'confirm'
+          post 'reject'
+          post 'cancel'
         end
       end
-      resources :threads, controller: "message_threads"
+      resources :threads, controller: 'message_threads'
       resource :profile do
-        get 'geometry', :on => :member
+        get 'geometry', on: :member
       end
+      resource :prefs, only: [:edit, :update]
+    end
+    collection do
+      get 'all_geometries'
     end
   end
 
-  resources :threads, controller: "message_threads" do
+  resources :threads, controller: 'message_threads' do
     resources :messages do
-      put 'censor', :on => :member
-      resources :documents, controller: "message_library/documents"
-      resources :notes, controller: "message_library/notes"
+      put 'censor', on: :member
+      resources :documents, controller: 'message_library/documents'
+      resources :notes, controller: 'message_library/notes'
     end
     scope module: :message do
       resources :photos, only: [:create, :show]
@@ -79,7 +92,7 @@ Cyclescape::Application.routes.draw do
   resource :library do
     get 'search'
     get 'recent'
-    scope module: "library" do
+    scope module: 'library' do
       resources :documents
       resources :notes
       resources :tags, only: [:update]
@@ -102,9 +115,9 @@ Cyclescape::Application.routes.draw do
 
   namespace :user do
     resources :locations do
-      get 'geometry', :on => :member
-      get 'combined_geometry', :on => :collection
-      post 'subscribe_to_threads', :on => :collection
+      get 'geometry', on: :member
+      get 'combined_geometry', on: :collection
+      post 'subscribe_to_threads', on: :collection
     end
   end
 
@@ -113,14 +126,14 @@ Cyclescape::Application.routes.draw do
   end
 
   resources :tags do
-    get "autocomplete_tag_name", :as => :autocomplete, :on => :collection
+    get 'autocomplete_tag_name', as: :autocomplete, on: :collection
   end
-  resource :home, only: [:show], controller: "home"
+  resource :home, only: [:show], controller: 'home'
 
-  match "template/:action", controller: "home"
-  match "pages/:page", controller: "pages", action: "show", as: :page, via: :get
+  match 'template/:action', controller: 'home'
+  match 'pages/:page', controller: 'pages', action: 'show', as: :page, via: :get
 
-  root :to => "home#show"
+  root to: 'home#show'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,136 @@
+﻿# Form fields, labels, hints, placeholders, and error messages
+
+"de-DE":
+  cancel: "Abbrechen"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            full_name:
+              blank: "Bitte gebe einen Namen ein"
+              email: "Bitte gebe eine Email-Adresse ein"
+
+  formtastic:
+    labels:
+      group:
+        name: "Name der Gruppe"
+        short_name: "Subdomain"
+      group_membership:
+        role: "Art der Mitgliedschaft"
+      group_pref:
+        notify_membership_requests: "Benachrichtigung bei Antrag auf Mitgliedschaft aktivieren"
+      issue:
+        new: &labels_issue_new
+          description: "Erstelle eine Beschreibung"
+          location: "Teile Deinen Standort mit"
+          photo: "Füge ein Foto hinzu"
+          tags_string: "Kennzeichne Dein Thema"
+          title: "Betitel Deinen Bericht"
+        create: *labels_issue_new
+        edit: *labels_issue_new
+        update: *labels_issue_new
+        tags_string: "Tags"
+      library_document:
+        file: "Dokument"
+        tags_string: "Tags"
+      library_item:
+        tags_string: "Tags"
+      library_note:
+        body: "Note"
+        tags_string: "Tags"
+      link_message:
+        url: "URL"
+      message:
+        body: "Nachricht"
+      message_thread:
+        group: "Gehört"
+        tags_string: "Tags"
+      site_comment:
+        body: "Nachricht"
+      thread_subscription:
+        send_email: "Maile eine neue Nachricht"
+      user_pref:
+        enable_email: "Email-Benachrichtigung aktivieren"
+        involve_my_locations: "Vorfälle in der Nähe Deines Standortes"
+        involve_my_groups: "Angelegenheiten meiner Gruppe"
+        involve_my_groups_admin: "Beziehe mich ebenso an administrativen Diskussionen meiner Gruppe ein"
+      user:
+        edit:
+          password: "Neues Passwort"
+          password_confirmation: "Neue Passwort Bestätigung"
+    hints:
+      user:
+        edit:
+          password: "Lasse dies frei, um Dein aktuelles Passwort zu behalten."
+          current_password: "Bitte bestätige Dein aktuelles Passwort, um Änderungen auf dieser Seite durchzuführen."
+      group:
+        short_name: "Dürfen nur alphanumerische Kleinbuchstaben sein ; a-z, 0-9"
+      group_membership:
+        role: "Wähle, ob sie normale oder Komitee-Mitglieder der Gruppe sind."
+        full_name: "Bitte gib ihren Namen ein; sie können es ändern, wenn sie die Einladung akzeptiert haben."
+      group_pref:
+        notify_membership_requests: "Eine Benarichtigung wird versandt, wenn ein Cyclescape-Mitglied dieser Gruppe beitreten möchte."
+        membership_secretary: "Wähle optional einen Verwalter für Mitgliedschaften, der Mitglieder-Benachrichtigungen erhält. Trage nichts ein, wenn Benachrichtigungen zur Gruppen-Emailadresse gesendet werden sollen."
+      group_profile:
+        joining_instructions: "Die Mitgliedschafts-Beschreibung wird Leuten gezeigt, die dieser Cyclescape-Gruppe beitreten wollen. Vielleicht möchtest Du zum Beispiel Leute zuerst anweisen, für die Mitgliedschaft an anderer Stelle zu zahlen, oder Du bist glücklich über alle und jeden, der deiner Gruppe beitreten möchte. Du kannst das unausgefüllt lassen."
+      issue:
+        new: &hints_issue_new
+          description: "Bitte erkläre Details über das Problem und welchen Effekt es auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema zu starten."
+          photo: "(optional)"
+          tags_string: "z. B. Fahrradparken, Hindernis, Baustelle, Weg"
+          title: "Bitte fasse Dich kurz und sei sachlich."
+        create: *hints_issue_new
+        edit: *hints_issue_new
+        update: *hints_issue_new
+      message_thread:
+        privacy: "Dies gibt an, wer diese Diskussion sehen und bearbeiten kann."
+        issue: "Die gibt an, welches Thema dieser Diskussion angfügt. Wenn nicht, wird dies eine administrative Diskussion sein."
+    actions:
+      update: "Speichern"
+      saving: "Speichere\u2026"
+      cancel: "Abbrechen"
+      deadline_message:
+        create: "Stichtag hinzufügen"
+      document_message:
+        create: "Anhang hinzufügen"
+      group_membership:
+        create: "Mitglied einladen"
+      issue:
+        create: "Bericht senden"
+        update: "Bericht speichern"
+        update_tags: "Tags aktualisieren"
+      library_item:
+        update_tags: "Tags aktualisieren"
+      library_item_message:
+        create: "Sammlungseintrag hinzufügen"
+      library/document:
+        create: "Upload"
+        document_from_message: "Zur Sammlung hinzufügen"
+      library/note:
+        create: "Notiz erstellen"
+        attach_to_document: "Notiz anheften"
+      link_message:
+        create: "Link hinzufügen"
+      message:
+        create: "Nachricht posten"
+      message_thread:
+        create: "Diskussion erstellen"
+        update_tags: "Tags aktualisieren"
+      photo_message:
+        create: "Foto hinzufügen"
+      site_comment:
+        create: "Feedback senden"
+      user:
+        create: "Registrieren"
+        update: "Account aktualisieren"
+      user_location:
+        create: "Diesen Standort speichern"
+      user_profile:
+        create: "Speichern"
+      user_thread_priority:
+        create: "Speichern"
+      thread_subscription:
+        create: "Dieser Diskussion folgen"
+        delete: "Dieser Diskussion nicht mher folgen"

@@ -143,10 +143,10 @@ section.thread {
   }
 }
 
-// Tools/actions menu hidden until item is hovered over
+// Tools/actions menu hidden until item is clicked/tapped
 .tools {
   position: absolute;
-  right: 999999px;
+  right: 0;
   top: 0;
   background: $pane1 image-url("sprite.png") 0 0 no-repeat;
   width: 32px;
@@ -159,7 +159,7 @@ section.thread {
   }
   ul {
     @include list-reset;
-    right: 999999px;
+    right: 0;
     top: 20px;
     position: absolute;
     width: 180px;
@@ -167,11 +167,14 @@ section.thread {
     @include border-radius(2px);
     border: 1px solid $lightergrey;
     padding: 6px;
+    display: none;
+    z-index: 100;
   }
   &.reveal ul {
-    right: 0;
+    display: block;
   }
 }
+
 article:hover > menu.tools, header:hover > menu.tools {
   right: 0;
 }
@@ -503,7 +506,8 @@ ul.library-list, ul.library-selector {
   }
 }
 
-ul.issue-list {
+ul.issue-list,
+ul.group-list {
   @include list-reset-soft;
   border-top:3px solid $paneborder;
   padding:20px 0 0 0;
@@ -526,20 +530,35 @@ ul.issue-list {
         height: 180px;
       }
     }
-    .issue-content {
+    .issue-content,
+    .group-content {
       display:table-cell;
       width:480px;
       vertical-align:top;
-      padding-right:90px;
       .meta {
         margin-bottom:15px;
       }
+    }
+    .issue-content {
+      padding-right:90px;
     }
     .votes-cell {
       width:60px;
       display:table-cell;
       height:180px;
       vertical-align:middle;
+    }
+    .group-actions {
+      width:180px;
+      display:table-cell;
+      height:180px;
+      vertical-align:top;
+      p {
+        width:180px; // otherwise links won't break
+        a {
+          word-wrap: break-word;
+        }
+      }
     }
   }
 }

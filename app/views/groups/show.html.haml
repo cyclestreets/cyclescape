@@ -36,25 +36,20 @@
               = render partial: "issues/compact", collection: @recent_issues, as: :issue
 
 %aside#sidebar
-  - if current_user && !@group.members.include?(current_user)
+  - unless current_user && @group.members.include?(current_user)
     %section.group-homepage-join
       %h2= t ".join_title"
-      - if @group.profile.joining_instructions
-        %p= auto_link simple_format @group.profile.joining_instructions
-      - else
-        %p= t ".join_body", group: @group.name
-
-      - if current_user.membership_request_pending_for?(@group)
-        %p= t ".group_request_pending"
-      - else
-        = link_to t(".join_this_group"), new_group_membership_request_path(@group), class: "btn-green"
+      = render partial: "join", locals: {group: @group}
   - if current_user && @group.committee_members.include?(current_user)
     %section.box
       %h2= t ".group_management"
       %ul.thread-metadata-listings
-        %li 
+        %li
           = link_to edit_group_profile_path(@group) do
             %p= t(".edit_group_profile")
+        %li
+          = link_to edit_group_prefs_path(@group) do
+            %p= t(".edit_group_prefs")
         %li
           = link_to group_members_path(@group) do
             %p= t(".edit_group_members")

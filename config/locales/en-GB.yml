@@ -11,6 +11,7 @@
         actions: "Actions"
         new_group: "Create a new group"
         edit: "Edit"
+        edit_prefs: "Edit Prefs"
         edit_profile: "Edit Profile"
         group_email: "Group Email"
         members: "Members"
@@ -22,6 +23,8 @@
         introduction: "As a system administrator, you can use this form to create a new group."
       update:
         success: "Group updated"
+      edit:
+         edit_group: "Edit group"
     home:
       index:
         admin_interface: "Administrative area"
@@ -37,6 +40,31 @@
         title: "Issue Categories"
       update:
         success: "Category updated"
+    user:
+      locations:
+        create:
+          success: "Location Created"
+        edit:
+          title: "Edit location for %{user_name}"
+        index:
+          all_user_locations: "All locations for %{user_name}"
+          category: "Category"
+          combined_locations: "Combined Locations"
+          combined_locations_guidance: "This is the combined location for this user."
+          confirm: "Are you sure?"
+          delete: "Delete"
+          edit: "Edit"
+          map: "Map"
+          new: "New location"
+          no_locations_yet: "This user has no locations yet."
+          no_locations_guidance: "As an administrator, you can add their first location."
+          no_overlapping_groups: "No overlapping groups"
+          title: "User locations for %{user_name}"
+          overlapping_groups: "Overlapping Groups"
+        new:
+          title: "New location for %{user_name}"
+        update:
+          success: "Location Updated"
     users:
       index:
         created: "Created"
@@ -52,8 +80,11 @@
         role: "Role"
         title: "Users"
         preferences: "Preferences"
+        locations: "Locations"
       update:
         success: "User updated"
+      edit:
+        edit_user: "Edit user"
   application:
     account_disabled: "Your account has been disabled by an administrator"
     permission_denied: "You are not authorised to access that page."
@@ -69,7 +100,7 @@
         one: "Tomorrow!"
         other: "%{count} days away"
       deadlines: "Deadlines and dates"
-      deadline_thread_updated: "thread updated %{at}"
+      deadline_thread_updated: "thread updated %{time_ago} ago"
       issues_lower: "issues"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
@@ -100,6 +131,7 @@
       planning_applications_introduction: "These are the most recent planning applications (courtesy of the Openly Local website) in your area:"
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
+      thread_latest_activity: "%{time_ago} ago"
       group_threads: "Group Threads"
       group_threads_desc_html:
         Recent threads with activity from your groups.
@@ -142,29 +174,45 @@
         title: "Sign in"
         sign_in_button: "Sign in"
   group:
+    group_prefs_tab: "Group preferences"
     group_profile_tab: "Group profile"
     group_management: "Group management"
     membership_list_tab: "Membership list"
     membership_requests_tab: "Membership requests"
     home_page_tab: "Home page"
     issues:
+      destroy:
+        failure: "Can't delete that issue"
+        success: "Issue deleted"
       index:
         title: "Issues in the area of %{group_name}"
+      update:
+        success: "Issue updated"
+      vote_clear:
+        failure: "Your vote couldn't be cleared"
+        success: "Your vote has been cleared"
+      vote_down:
+        already: "You've already voted down this issue"
+        success: "You have voted down this issue"
+      vote_up:
+        already: "You've already voted up this issue"
+        success: "You have voted up this issue"
     members:
       index:
         actions: "Actions"
+        add_directly: "you can add them directly"
         committee: "Committee members"
         committee_guidance: "Committee members can manage the group membership list, change the group's profile and update group thread information."
         email: "E-mail address"
-        group_members_guidance: "On this page you can view the existing members of your group, invite new people and remove members from the group."
-        invite_directly: "you can invite them directly"
+        group_joining_date: "Group joining date"
+        group_members_guidance: "On this page you can view the existing members of your group, add new people and remove members from the group."
         member_name: "Member name"
         ordinary_members: "Ordinary members"
         new_members_guidance_introduction: "To add a member:"
-        new_members_guidance_method1_html: "If you know their email address, %{invite_directly_link}"
+        new_members_guidance_method1_html: "If you know their email address, %{add_directly_link}."
         new_members_guidance_method2_html: "If they are already using Cyclescape, click on their name from within a discussion thread, and you can add them from their user profile page."
         ordinary_members_guidance: "Ordinary members get access to your private group threads, and can create new group threads."
-        pending_requests: "Pending requests"
+        pending_requests: "Pending membership requests"
         review_membership_requests_html: "Users of the site can also apply to join this group. You can %{review_membership_requests_link}."
         review_pending: "pending membership requests"
         review_requests: "review the requests history"
@@ -174,9 +222,11 @@
         confirm: "Are you sure?"
         delete: "Remove from group"
         edit: "Edit membership"
+        joining_date: "%{time_ago} ago"
+        invite_pending: "Invite pending"
     memberships:
       new:
-        title: "Invite New Member"
+        title: "Add new member"
       destroy:
         failure: "Couldn't remove member from group"
         success: "Member removed from group"
@@ -195,25 +245,37 @@
         requested: "Membership has been requested"
         already_asked: "You have already asked to join this group"
         already_member: "You are already a member of this group"
-      index:
+      index: &group_membership_requests_index
         actioned_by: "Actioned By"
         are_you_sure: "Are you sure?"
         by: "by %{name}"
         confirm: "Confirm"
         created_at: "%{time_ago} ago"
         email: "E-mail address"
+        view_message: "View..."
+        message: "Message"
         no_requests_yet: "There have been no membership requests for this group yet."
+        full_name: "Full name"
         reject: "Reject"
         requested_at: "Requested At"
         status: "Status"
         title: "Membership requests for %{group}"
-        user: "User"
+        user: "User (display name)"
+        membership_status:
+          confirmed: "Confirmed"
+          pending: "Pending"
+          unconfirmed: "Unconfirmed"
       new:
         title: "Request membership of %{group_name}"
         your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
       reject:
         failure: "There was a problem rejecting this membership request"
         success: "Membership rejected"
+      review:
+        <<: *group_membership_requests_index
+        title: "Review a membership request for %{group}"
+        message: "The user included this message with their request:"
+        no_message: "There was no message included with this membership request."
     message_threads:
       destroy:
         failure: "Couldn't delete thread"
@@ -233,6 +295,13 @@
         title: "New Group Thread"
       update:
         success: "Thread updated"
+    prefs:
+      edit:
+        no_email_warning: "Warning! Your settings indicate that you want notifications sent to your group, but there is no email address recorded for this group. Either choose a membership secretary, or ask for your group email to be set by a site administrator."
+        title: "Edit Preferences"
+      update:
+        failure: "Couldn't update preferences"
+        success: "Preferences Updated"
     profiles:
       edit:
         title: "Edit Profile"
@@ -243,16 +312,28 @@
       update:
         success: "Profile Updated"
   groups:
+    index:
+      list_tab: "List"
+      map_tab: "Map"
+      new_group: "Create new group"
+      new_group_instructions_html: "To create a group on Cyclescape for your local cycling campaign please %{feedback_link} and we'll get back in touch with you soon."
+      send_some_feedback: "send some feedback"
+      title: "Groups directory"
+    compact:
+      already_member: "You are already a member of this group"
+      no_location: "This group doesn't have a location yet."
+    join:
+      join_body:
+        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
+      join_this_group: "Join this group"
+      group_request_pending: "Your request to join this group is pending."
     show:
       edit_group_profile: "Edit the group profile"
+      edit_group_prefs: "Edit the group preferences"
       edit_group_members: "Edit the membership list"
       group_management: "Group management"
       group_organisers: "Group organisers"
-      group_request_pending: "Your request to join this group is pending."
-      join_body:
-        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
       join_title: "Join our Cyclescape group"
-      join_this_group: "Join this group"
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public threads
@@ -278,8 +359,9 @@
       groups_title: "Cyclescape Groups"
       groups_intro_html:
         Cyclescape is used by <strong>cycle campaign groups</strong> across
-        the country. <strong>Find groups local to you</strong> and see what
+        the country. <strong>%{groups_link}</strong> and see what
         they're working to fix.
+      find_local_groups: "Find groups local to you"
       twitter_title: "Cyclescape on Twitter"
     guide:
       title: "How Cyclescape Works"
@@ -292,6 +374,7 @@
   issue:
     message_threads:
       new:
+        new_hint: "This is where a discussion about the issue is started. \n There could be many different discussion threads that one issue creates \n e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
         title: "New Thread on %{issue}"
         everyone: "Everyone"
     photos:
@@ -335,9 +418,11 @@
     new:
       title: "Report an issue"
       new_issue_introduction: "Know of something stopping more people cycling, or that causes problems for existing cyclists? Or something that could do? Report it below."
+      new_issue_privacy_warning: "Please note that all issues are publicly viewable. If you wish, you can create a private discussion on this issue, after it has been reported."
       admin_thread_pointer_html: "You can %{administrative_matters_link} with no geographical context (e.g. organising a general meeting) in the group admin threads section."
       administrative_matters: "add a purely administrative matter"
     show:
+      issue_created_at: "%{time_ago} ago"
       added_by_html: "Reported by %{name} on %{time}"
       cancel_vote: "Cancel"
       confirm_delete: "Are you sure?"
@@ -379,19 +464,24 @@
       admin_tooltip: "Admin area, for system administrators"
       dashboard: "My Cyclescape"
       dashboard_tooltip: "Your personal dashboard, showing updates on discussion threads you are subscribed to"
+      about: "About"
+      user_guide: "User guide"
+      sign_out: "Sign out"
+      sign_in: "Sign in"
+      sign_up: "Sign up"
       feedback: "Feedback"
       home: "Home"
       issues: "Issues"
       issues_tooltip: "Reported problems, browsable on the map or as a list"
       library: "Library"
       library_tooltip: "Reusable resources for campaigning"
-      loading: "Please wait..."
+      loading: "Please wait\u2026"
       threads: "Discussion threads"
       threads_tooltip: "Discussions on each issue"
       title: "Cyclescape"
     footer:
       application_version_html: "Version ref: %{version}"
-      github_page_link_html: "View the source at <a href='https://github.com/cyclestreets/toolkit/'>GitHub</a>"
+      github_page_link_html: "View the source at <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>"
       whats_new: "What's new?"
       supportlogos_introduction: "Cyclescape has been made possible thanks to generous support from:"
       funding_from: "Funding from %{name}"
@@ -459,8 +549,12 @@
         success: "Library Note Updated"
   mailers:
     notifications:
+      added_to_group:
+        subject: "You are now a member of the Cyclescape group for %{group_name}"
       gmr_confirmed:
         subject: "You are now a member of the Cyclescape group for %{group_name}"
+      new_gmr:
+        subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
       new_group_thread:
         subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
       new_group_location_issue:
@@ -611,6 +705,19 @@
       create_note: "Create Library Note"
       create_document: "Create Library Document"
     new:
+      compose_new: "Compose New"
+      from_library: "From Library"
+      recently_added: "Recently added"
+      select_button: "Select\u2026"
+      search_results: "Search Results"
+      go: "Go"
+      back: "Back"
+      select_header: "Select"
+      add_item_to_thread: "Add item to thread"
+      explain_library_item: "Explain how this library item relates to the discussion thread"
+      view_document: "View Document"
+      add_to_thread: "Add to thread"
+      search_library: "Search library"
       deadline_message: "Deadline/date"
       document_message: "Attachment"
       library_item_message: "Library"
@@ -621,7 +728,7 @@
       text_message: "Text"
   pages:
     changelog:
-      github_history_link_html: "<a href='https://github.com/cyclestreets/toolkit/commits/master/'>GitHub</a>."
+      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
   planning_application:
     issues:
       new:
@@ -671,7 +778,7 @@
       undo: "undo"
     map_search:
       near: "near"
-      searching: "Searching..."
+      searching: "Searching\u2026"
       search_failed: "Sorry, the search failed this time."
       showing: "Showing"
       sorry_we_couldnt_find: "Sorry, we couldn't find"
@@ -731,14 +838,24 @@
       added: "%{name} added a photo to the thread."
       view_the_photo: "You can view the photo at the following url:"
     footer:
-      thread: "Cyclescape thread"
-      unsubscribe: "You can stop following this thread by visiting the link above."
+      thread: "Cyclescape discussion thread"
+      unsubscribe: "You can stop following this thread by visiting the link above and clicking 'unfollow this thread'."
   thread_priorities:
     very_high: "Top-priority"
     high: "Important"
     medium: "Moderately Important"
     low: "Marginal Interest"
     very_low: "Not of Interest"
+  thread_privacy_options:
+    public: "Public"
+    group: "Group"
+    committee: "Committee"
+  user_roles:
+    member: "Member"
+    admin: "Admin"
+  group_membership_roles:
+    member: "Member"
+    committee: "Committee"
   user:
     locations:
       create:
@@ -751,7 +868,6 @@
       index:
         add_first_location: "add your first location"
         all_my_locations: "All my locations"
-        catch_up_guidance_html: "To catch up on existing discussions, you can %{subscribe_existing_link} in these areas."
         category: "Category"
         combined_locations: "Combined locations"
         combined_locations_guidance: "This map shows all of your locations combined together. We use this to help figure out which issues are relevant to you, and which groups you might be interested in."
@@ -770,7 +886,6 @@
         no_locations_guidance2_html: "To get started, you can %{first_location_link}."
         no_overlapping_groups: "No Overlapping Groups"
         overlapping_groups: "Overlapping Groups"
-        subscribe_existing_threads: "follow all existing threads"
       new:
         new_location: "Add a new location"
         introduction: "By setting a location, this helps us figure out which issues are relevant to you."
@@ -792,6 +907,11 @@
         none: "No notifications"
         notify: "Notify me of new issues and when new threads are started"
         subscribe: "Notify me of new issues and automatically follow all new threads"
+        profile: "Profile visibility"
+        profile_guidance_html: "You can choose to restrict who gets to view %{profile_link}."
+        your_profile: "your profile"
+        profile_public: "Everyone"
+        profile_group: "Only members in my groups"
       update:
         success: "Preferences saved"
         failure: "Your preferences could not be saved"

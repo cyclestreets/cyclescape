@@ -13,7 +13,20 @@ class User::ProfilesController < ApplicationController
     @reported_issues = IssueDecorator.decorate(reported_issues)
 
     # Groups that the current user could invite this particular user to
-    @add_to_groups = current_user ? (current_user.memberships.committee.collect{ |m| m.group } - @user.groups) : nil
+    @add_to_groups = current_user ? (current_user.memberships.committee.collect { |m| m.group } - @user.groups) : nil
+
+    @profile_visible = false
+    if @user == current_user
+      @profile_visible = true
+    elsif @user.prefs.profile_visibility == 'public'
+      @profile_visible = true
+    elsif @user.prefs.profile_visibility == 'group' &&
+          current_user &&
+          !(@user.groups & current_user.groups).empty? # intersection of arrays
+      @profile_visible = true
+    elsif current_user && current_user.role == 'admin'
+      @profile_visible = true
+    end
   end
 
   def edit

@@ -7,7 +7,7 @@
       = f2.semantic_errors
       = f2.inputs do
         = f2.input :full_name, hint: t("formtastic.hints.group_membership.full_name")
-        = f2.input :email
+        = f2.input :email, hint: t("formtastic.hints.group_membership.email")
     = f.input :role, :as => :radio, :collection => f.object.class.allowed_roles_map
   = f.actions do
     = f.action :submit

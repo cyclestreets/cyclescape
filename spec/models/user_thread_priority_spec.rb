@@ -9,18 +9,23 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_user_thread_priorities_on_thread_id  (thread_id)
+#  index_user_thread_priorities_on_user_id    (user_id)
+#
 
 require 'spec_helper'
 
 describe UserThreadPriority do
   let(:subect) { FactoryGirl.create(:user_thread_priority) }
 
-  describe "associations" do
-    it { should belong_to(:user) }
-    it { should belong_to(:thread) }
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:thread) }
   end
 
-  describe "validations" do
-    it { should ensure_inclusion_of(:priority).in_range(1..10) }
+  describe 'validations' do
+    it { is_expected.to validate_inclusion_of(:priority).in_range(1..10) }
   end
 end

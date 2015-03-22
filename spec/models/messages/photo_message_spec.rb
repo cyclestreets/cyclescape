@@ -12,62 +12,62 @@
 #  created_at    :datetime         not null
 #
 
-require "spec_helper"
+require 'spec_helper'
 
 describe PhotoMessage do
-  describe "associations" do
-    it { should belong_to(:message) }
-    it { should belong_to(:thread) }
-    it { should belong_to(:created_by) }
+  describe 'associations' do
+    it { is_expected.to belong_to(:message) }
+    it { is_expected.to belong_to(:thread) }
+    it { is_expected.to belong_to(:created_by) }
   end
 
-  describe "validations" do
-    it { should validate_presence_of(:photo) }
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:photo) }
   end
 
-  context "factory" do
+  context 'factory' do
     subject { FactoryGirl.create(:photo_message) }
 
-    it { should be_valid }
+    it { is_expected.to be_valid }
 
-    it "should have a thread" do
-      subject.thread.should be_a(MessageThread)
+    it 'should have a thread' do
+      expect(subject.thread).to be_a(MessageThread)
     end
 
-    it "should have a message" do
-      subject.message.should be_a(Message)
+    it 'should have a message' do
+      expect(subject.message).to be_a(Message)
     end
   end
 
-  context "photo thumbnail" do
+  context 'photo thumbnail' do
     subject { FactoryGirl.create(:photo_message) }
 
-    it "should provide a thumbnail of the photo" do
-      subject.photo_thumbnail.should be_true
-      subject.photo_thumbnail.width.should == 46
-      subject.photo_thumbnail.height.should == 50
+    it 'should provide a thumbnail of the photo' do
+      expect(subject.photo_thumbnail).to be_truthy
+      expect(subject.photo_thumbnail.width).to eq(46)
+      expect(subject.photo_thumbnail.height).to eq(50)
     end
   end
 
-  context "photo preview" do
+  context 'photo preview' do
     subject { FactoryGirl.create(:photo_message) }
 
-    it "should provide a preview size of the photo" do
-      subject.photo_preview.should be_true
-      subject.photo_preview.width.should == 182
-      subject.photo_preview.height.should == 200
+    it 'should provide a preview size of the photo' do
+      expect(subject.photo_preview).to be_truthy
+      expect(subject.photo_preview.width).to eq(182)
+      expect(subject.photo_preview.height).to eq(200)
     end
   end
 
-  context "searchable text" do
+  context 'searchable text' do
     subject { FactoryGirl.create(:photo_message_with_description) }
 
-    it "should contain the caption" do
-      subject.searchable_text.should include(subject.caption)
+    it 'should contain the caption' do
+      expect(subject.searchable_text).to include(subject.caption)
     end
 
-    it "should contain the description" do
-      subject.searchable_text.should include(subject.description)
+    it 'should contain the description' do
+      expect(subject.searchable_text).to include(subject.description)
     end
   end
 end

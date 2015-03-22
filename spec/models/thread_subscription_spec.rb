@@ -8,12 +8,19 @@
 #  created_at :datetime         not null
 #  deleted_at :datetime
 #
+# Indexes
+#
+#  index_thread_subscriptions_on_thread_id  (thread_id)
+#  index_thread_subscriptions_on_user_id    (user_id)
+#  sub_thread_id                            (thread_id)
+#  sub_user_id                              (user_id)
+#
 
 require 'spec_helper'
 
 describe ThreadSubscription do
-  describe "associations" do
-    it { should belong_to(:user) }
-    it { should belong_to(:thread) }
+  describe 'associations' do
+    it { is_expected.to belong_to(:user) }
+    it { is_expected.to belong_to(:thread) }
   end
 end

@@ -1,0 +1,984 @@
+﻿# German translations for Ruby on Rails
+
+"de-DE":
+  application_name: "Cyclescape"
+  tags: "Label"
+  sign_in: "Anmelden"
+  admin:
+    groups:
+      index:
+        title: "Gruppen"
+        new_group: "Neue Gruppe"
+        edit: "Editieren"
+        edit_profile: "Profil bearbeiten"
+        members: "Mitglieder"
+        name: "Gruppenname"
+      create:
+        success: "Gruppe erstellt"
+      update:
+        success: "Gruppe aktualisiert"
+    home:
+      index:
+        admin_interface: "Admininstrationsbereich"
+        admin_interface_introduction: "Dieser Bereich enthält Administratorfunktionen, die nur für Administratoren verfügbar sind."
+        manage_comments: "Kommentare verwalten"
+        manage_groups: "Gruppen verwalten"
+        manage_issue_categories: "Themenkategorien verwalten"
+        manage_users: "Anwender verwalten"
+    issue_categories:
+      create:
+        success: "Kategorie erstellt"
+      index:
+        title: "Themenkategorien"
+      update:
+        success: "Kategorie aktualisiert"
+    users:
+      index:
+        created: "Erstellt"
+        created_at: "vor %{time_ago}"
+        introduction: "Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaft die sie haben könnten)."
+        disabled: "Deaktiviert"
+        disabled_at: " vor %{time_ago}"
+        display_name: "Anzeigename"
+        edit: "Editieren"
+        email: "Email"
+        full_name: "Vollständiger Name"
+        id: "ID"
+        role: "Funktion"
+        title: "Benutzer"
+      update:
+        success: "Benutzer aktualisiert"
+  application:
+    account_disabled: "Dein Zugang wurde durch einen Administrator gesperrt."
+    permission_denied: "Zum Aufruf dieser Seite bist Du nicht autorisiert."
+  dashboards:
+    show:
+      add_a_new_issue: "Neues Thema hinzufügen"
+      add_another_location: "Neuen Ort hinzufügen"
+      add_some_locations: "Einige Orte hinzufügen"
+      areas_you_are_watching: "Beobachtete Gebiete"
+      days_away:
+        zero: "Heute!"
+        one: "Übermorgen!"
+        other: "%{count} Tage her"
+      deadlines: "Fälligkeiten und Termine"
+      deadline_thread_updated: "Diskussion aktualisiert %{at}"
+      involved_threads: "Beteiligte Diskussionen"
+      issues_in_your_area: "Themen in deinem Gebiet"
+      new_group_thread: "Neue Diskussion in der Gruppe starten"
+      my_issues_nearby_introduction_html: "Themen im %{areas_you_are_watching_link} werden unten angezeigt, jeweils das Jüngste zuerst."
+      my_issues_nearby_issues_pointer_html: "(Du kannst auch %{browse_all_other_issues_link} außerhalb deiner Gebiete.)"
+      browse_all_other_issues: "Browse alle anderen Themen"
+      my_priorities_introduction: "Dies ist eine Auflistung aller von dir gesetzter Prioritäten. Die wichtigsten zuerst:"
+      my_threads_introduction: "Letzte Aktualisierung deiner abonierten Disskusinsfäden:"
+      my_upcoming_deadline_introduction: "Anstehende Fristen und Termine innerhalb der von dir abonnierten Diskussionen:"
+      no_upcoming_deadline_threads: "Du bist nicht an Diskussion beteiligt, bald fällig oder terminiert sind."
+      no_subscribed_threads_html:
+        Du beobachtest keine Diskussion. 
+        Du könntest %{threads_link} durchschauen, um zu sehen, ob du dort
+        helfen kannst. Oder vielleicht könntest du stattdessen %{add_issue_link}?
+      no_prioritised_threads_html:
+        Bisher hast du keine Diskussion priorisiert.
+        Du könntest %{threads_link} durchschauen, um zu sehen ob etwas wichtiges für dich dabei ist.
+        Oder vielleicht könntest du stattdessen %{add_issue_link}?
+      no_issues_nearby_html: "Es gibt kein Thema in Deinem Gebiet. Du könntest %{add_issue_link}, oder %{add_location_link}"
+      no_group_threads: "Bisher enthält keiner Deiner Gruppen Diskussionen. Du könntest eine neue Konversation beginnen"
+      no_locations_guidance_html: "Bisher hast Du keine Orte markiert! Wenn Du %{add_some_locations_link} werden wir Dir hier Themen in Deiner Nähe zeigen."
+      no_user_groups: "Du bist noch keine Mitglied einer Gruppe! Die neusten Diskussionen werden angezeigt, wenn Du dich bei einer Gruppe anmeldest."
+      recent_threads: "neuste Diskussionen"
+      subscribed_threads: "abonnierte Diskussionen"
+      group_threads: "Diskussionsgruppen"
+      group_threads_desc_html:
+        Neuste Diskussionen mit Aktivitäten Deiner Gruppen.
+      my_priorities: "Meine Prioritäten"
+      my_threads: "Meine abonnierten Diskussionen"
+      issues_nearby: "Letzte Themen in der Nähe"
+      posted:
+        message_html: "%{creator_link} hat eine Nachricht veröffentlicht"
+        deadline_message_html: "%{creator_link} hat einen Termin veröffentlicht"
+        document_message_html: "%{creator_link} schickte einen Anhang"
+        photo_message_html: "%{creator_link} schickte ein Foto"
+        link_message_html: "%{creator_link} schickte einen Link"
+        library_item_message_html: "%{creator_link} fügte einen Datebankeintrag hinzu"
+    search:
+      no_results_found: "Keine Ergebnisse für '%{query}' gefunden"
+      thread_results: "Diskussionen (%{count})"
+      issue_results: "Themen (%{count})"
+      library_results: "Datenbank (%{count})"
+      threads_found:
+        zero: "Keine Diskussionen für '%{query}' gefunden."
+        one: "Eine Diskussion für '%{query}' gefunden:"
+        other: "%{count} Diskussionen für '%{query}' gefunden:"
+      issues_found:
+        zero: "Keine Themen für '%{query}' gefunden."
+        one: "Ein Thema unter '%{query}' gefunden"
+        other: "%{count} Themen für '%{query}' gefunden:"
+      library_items_found:
+        zero: "Keine Datenbankeinträge für '%{query}' gefunden."
+        one: "Ein Datenbankeintrag für '%{query}' gefunden:"
+        other: "%{count} Datenbankeinträge für '%{query}' gefunden:"
+      title: "Suchergebnisse"
+  devise:
+    registrations:
+      edit:
+        title: 'Meine Konto Detaisl aktualisieren'
+      new:
+        title: "Registrieren"
+    sessions:
+      new:
+        title: "Anmelden"
+        sign_in_button: "Anmelden"
+  group:
+    group_profile_tab: "Gruppenprofil"
+    group_management: "Gruppenmanagement"
+    membership_list_tab: "Mitgliederliste"
+    membership_requests_tab: "Mitglieder Anfrage"
+    home_page_tab: "Homepage"
+    issues:
+      index:
+        title: "Thema in dem Gebiet von %{group_name}"
+    members:
+      index:
+        actions: "Aktionen"
+        committee: "Ausschuss Mitglieder"
+        committee_guidance: "Ausschussmitglieder können die Mitgliederliste verwalten, Gruppenprofile ändern und Diskussionen in Gruppen aktualisieren"
+        group_members_guidance: "Auf dieser Seite siehst Du die Mitglieder deiner Gruppe, lade Leute ein und entferne Mitgielder dieser Gruppe."
+        invite_directly: "du kannst sie direkt einladen"
+        member_name: "Mietgliedname"
+        ordinary_members: "Ordentliche Mitglieder"
+        new_members_guidance_introduction: "Um ein Mitglied hinzuzufügen:"
+        new_members_guidance_method1_html: "Wenn du seine Email-Adresse kennst, %{invite_directly_link} "
+        new_members_guidance_method2_html: "Wenn sie Cyclescape bereits benutzen, klicke auf ihren Benutzernamen aus dem Disskuisonsfaden, und füge sie aus ihrem Mitgliederprofil heraus hinzu"
+        ordinary_members_guidance: "Ordentliche Mitglieder bekommen Zugang zu den Diskussionen deiner privaten Gruppe und können neue Diskussionen erstellen."
+        pending_requests: "Ausstehende Anfragen"
+        review_membership_requests_html: "Nutzer der Seite könen ebenfalls dieser Gruppe beitreten. Du kannst %{review_membership_requests_link} "
+        review_pending: "Ausstehende Mitgliederanfragen"
+        review_requests: "Überprüfen der Anfragenhistorie"
+        title: "Mitglieder von %{group}"
+        you_have_pending_members_html: "Du hast %{review_pending_requests_link}! Bitte überprüfe sie und ergreife geeignete Maßnahmen"
+      member:
+        confirm: "Bist Du sicher?"
+        delete: "Aus der Gruppe entfernen"
+        edit: "Mitgliedschaft bearbeiten"
+    memberships:
+      new:
+        title: "Neues Mitglied einladen"
+      destroy:
+        failure: "Mitglied konnte nich aus der Gruppe entfernt werden"
+        success: "Mitglied wurde aus der Gruppe entfernt"
+      edit:
+        title: "Gruppenmitgliedschaft bearbeiten für %{user_name}"
+      update:
+        failure: "Die Gruppenmitgliedschaft konnte nicht aktualisiert werden"
+        success: "Die Gruppenmitgliedschaft wurde aktualisiert"
+    membership_requests:
+      cancel:
+        success: "Der Antrag auf Mitgliedschaft wurde abgelehnt"
+      confirm:
+        failure: "Bei der Bestätigung der Mitgliederanfrage trat ein Problem auf"
+        success: "Mitgliedschaft bestätigt"
+      create:
+        requested: "Die Mitgliedschaft wurde beantragt"
+        already_asked: "Du hast bereits eine Anfrga gestellt dieser Gruppe beizutreten"
+        already_member: "Du bist bereits Mitglied dieser Gruppe"
+      index:
+        actioned_by: "Durchgeführt durch"
+        are_you_sure: "Bist du sicher ?"
+        by: "durch %{name}"
+        confirm: "Bestätigen"
+        created_at: "vor %{time_ago}"
+        no_requests_yet: "Für diese Gruppe gab es bisher keine Mitgleidsanfragen."
+        reject: "Ablehnen"
+        requested_at: "Angefragt durch"
+        status: "Status"
+        title: "Mitgliedschaft für %{group} bestätigt"
+        user: "Benutzer"
+      new:
+        title: "Mitgliedsantrag aus %{group_name}"
+        your_membership_request_will: "Dein Mitgliedsantrag wird zur Begutachtung an die Ausschussmitglieder geleitet."
+      reject:
+        failure: "Bei der Ablehnung des Mitgliedschaftsantrags ist ein Problem aufgetretetn"
+        success: "Mitgliedschaft abgelehnt"
+    message_threads:
+      destroy:
+        failure: "Der Diskussionsfaden konnte nicht gelöscht werden"
+        success: "Der Diskussionfaden wurde gelöscht"
+      index:
+        title: "Diskussionsgruppe"
+        new_group_thread: "Neue Gruppe administrative Diskussionen"
+        issue_threads: "Themen Diskussionen"
+        issue_threads_description: "Dies sind öffentliche und private themenbezogene Diskussionen über gemeldetet Diskussionen gehörend zu %{group_name}"
+        issue_threads_addition_description: "Gehe zum relevanten Thema, um eine neuen themenbezogene Diskussionsfaden zu starten"
+        general_threads: "Administrative Diskussionen"
+        general_threads_description: "Dies sind öffentliche und private Diskussionen für administrative Zwecke, wie z. B. das Arrangieren einer allgemeinen Besprechung"
+      new:
+        for_group: "für %{name}"
+        title: "Neue Diskussionsgruppe"
+      update:
+        success: "Diskussion wurde aktualisiert"
+    profiles:
+      edit:
+        title: "Prfil bearbeiten"
+      show:
+        description: "Beschreibung"
+        location: "Standort"
+        no_location: "Diese Gruppe hat noch keine Details zu Standorten"
+      update:
+        success: "Profil aktualisiert"
+  groups:
+    show:
+      edit_group_profile: "Gruppenprofil bearbeiten"
+      edit_group_members: "Mitgliederliste bearbeiten"
+      group_management: "Gruppenverwaltung"
+      group_organisers: "Gruppenorganisatoren"
+      group_request_pending: "Dein Antrag auf Zugehörigkeit der Gruppe ist ausstehend"
+      join_body:
+         Du kannst eine Mitgliedschaft dieser Cyclescape-Gruppe beantragen, wenn Du an den Aktivitäten der %{group} beteiligt sein möchtest
+      join_title: "Trete unserer Cyclescape-Gruppe bei"
+      join_this_group: "Trete dieser Gruppe bei"
+      no_issues: In diesem Gruppenbereich gibt es keine Themen
+      no_location: Diese Gruppe hat noch keinen Standort
+      no_threads: Diese Gruppe hat noch keine öffentlichen Diskussionen
+      our_areas: "Unsere Gebiete"
+      recent_issues: "Letzte Themen in diesem Gruppenbereich"
+      recent_threads: "Neueste Diskussionen"
+      view_membership_requests:
+        zero: "Mitgliedsanträge begutachten"
+        one: "Ausstehende Mitgliedsanträge anschauen"
+        other: "Ausstehende Mitgliedsanträge anschauen (%{count})"
+  home:
+    show:
+      introduction_html:
+        Cyclescape ist ein Online-Kampagnen-Werkzeug für Fahrrad-Kampagnen-Gruppen
+      center_box_title:
+        Berichte hier über Dein Fahrradthema
+      center_box_html:
+        Kein vorhandener Radweg? Hindernisse für Radfahrer? Zu wenig Fahrradparkplätze vorhanden? Oder auch ein Beispiel für gut gemachte Dinge?
+      report_an_issue: "Über ein Thema Berichten"
+      latest_discussions: "Neuste Diskussionen"
+      groups_title: "Cyclscape Gruppen"
+      groups_intro_html:
+       Cyclescape wird von <strong>Fahrrad-Kampagnen-Gruppen</strong> quer durchs
+       Land benutzt. <strong>Finde Gruppen in Deiner nähe</strong> und schau Dir an
+       woran sie gerade arbeiten. 
+      twitter_title: "Cyclescape on Twitter"
+    guide:
+      title: "Wie Cyclescape funktioniert"
+      box_1_title: "Berichte über ein Thema"
+      box_1_body: "Themen schnell nach oben schieben"
+      box_2_title: "Bekomme Hilfe von anderen"
+      box_2_body: "Diskutiere über Themen mit Mitgliedern aus Fahrradgruppen"
+      box_3_title: "Mache einen Unterschied"
+      box_3_body: "Organisiere eine Aktion, welche die Gruppe angehen sollte, um ein Problem zu lösen"
+  issue:
+    message_threads:
+      new:
+        new_hint: "Dies ist, wo eine Diskussion über die Frage begonnen wird. \ n Es könnte viele unterschiedliche Diskussionsstränge, die eine Ausgabe erzeugt \ n zB sein ein neuer Bauantrag kann Verkehr auf einer Straße beeinflussen und beeinflussen Zyklus Zugang zu den Wäldern. "
+        title: "Neue Diskussion um %{issue}"
+        everyone: "Jeder"
+    photos:
+      show:
+        photo_alt: "Das Fotot für %{caption}."
+        view_original: "Originalfoto anschauen."
+    tags:
+      panel:
+        edit_tags: "Label bearbeiten"
+  issues:
+    compact:
+      created_by_html: "Erstellt von %{creator_link}"
+      votes: "Stimmen"
+      thread_count:
+        one: "1 diskussion"
+        other: "%{count} Diskussionen"
+    destroy:
+      failure: "Dieses Thema kann nicht gelöscht werden"
+      success: "Thema gelöscht"
+    edit:
+      title: "Thema bearbeiten"
+    index:
+      new_issue: "Berichte über ein neues Thema"
+      title: "Themen"
+      list_tab: "Liste"
+      list_introduction: "Berichtete Themen, neueste zuerst:"
+      map_tab: "Karte"
+      map_introduction: "Diese Karte zeigt alle Themen, egal ob Punkte, Routen oder Areale:"
+      popular_tab: "Beliebt"
+      popular_introduction: "Die beliebtesten Themen, basierend auf die Anzahl der Stimmen:"
+      search_button: "Start"
+      clear: "Löschen"
+      no_popular_issues: "In letzter Zeit wurden keine Themen gewählt."
+      no_results_found: "Kein Thema gefunden."
+      title_introduction: "In diesem Abschnitt werden Probleme gemeldet - Probleme im Straßennetz und damit zusammenhängenden Fragen."
+      title_introduction_report_html: "Du kannst %{report_new_issue_link} indem Du den Knopf rechts benutzt."
+      report_new_issue: "Berichte von einem neuen Fall"
+    new:
+      title: "Berichte von einem Fall"
+      new_issue_introduction: "Du weiß von etwas, dass mehr Menschen davon abhält Rad zu fahren, oder etwas das Probleme für bestehene Radfahrer verursacht? Oder etwas was man tun könnt? Berichte davon unten."
+      admin_thread_pointer_html: "Du kannst %{administrative_matters_link} ohne geografischen Context (z. B. ein Hauptversammlung organisieren) in der Gruppe Admin Diskkussion Abschnitt"
+      administrative_matters: "Füge eine rein administrative Angelegenheit hinzu"
+    show:
+      added_by_html: "Berichtet von %{name} am %{time}"
+      cancel_vote: "Abbrechen"
+      confirm_delete: "Bist Du sicher?"
+      delete_issue: "Diesen Fall löschen"
+      edit_issue: "Diesen Fall bearbeiten"
+      new_thread:
+        zero: "Diskutieren"
+        one: "Neues Thema"
+        other: "Neues Thema"
+      no_threads_yet: "Es gibt noch keine Diskussionen zu diesem Thema."
+      group_private: "Privat für %{group}"
+      group_public: "Öffentlich, von %{group}"
+      public: "Öffentlich"
+      sign_in: "Anmelden"
+      sign_in_to_discuss_html: "Du kannst %{sign_in_link}, um eine Diskussion zu starten"
+      sign_in_to_vote_html: "Bitte %{sign_in_link}, um zu wählen."
+      threads: "Diskussionen"
+      vote_clear: "Abstimmung löschen"
+      vote_down: "Daumen hoch"
+      vote_up: "Daumen runter"
+      votes:
+        one: "Stimme"
+        other: "Stimmen"
+      location: "Location"
+    update:
+      success: "Fall wurde aktualisiert"
+    vote_clear:
+      failure: "Deine Stimme konnte nicht gelöscht werden"
+      success: "Deine Stimme wurde gelöscht"
+    vote_down:
+      already: "Du hast über dieses Thema bereits negativ abgestimmt"
+      success: "Du hast für dieses Thema negativ gestimmt"
+    vote_up:
+      already: "Du hast über dieses Thema bereits positiv abgestimmt"
+      success: "Du hast für dieses Thema positiv gestimmt"
+  layouts:
+    application:
+      admin: "Admin"
+      admin_tooltip: "Admin-Bereich, für System-Administratoren"
+      dashboard: "Mein Cyclescape"
+      dashboard_tooltip: "Dein persönliches Dashboard zeigt Dir Updates in Diskussionen, die Du abonniert hast"
+      feedback: "Feedback"
+      home: "Home"
+      issues: "Themen"
+      issues_tooltip: "Berichtete Probleme, auf der Karte oder in einer Liste durchsuchbar"
+      library: "Sammlung"
+      library_tooltip: "Wiederverwendbaren Ressourcen für die Kampagne"
+      loading: "Bitte warten..."
+      threads: "Diskussuionen"
+      threads_tooltip: "Diskussionen zu jedem Thema"
+      title: "Cyclescape"
+    footer:
+      application_version_html: "Version ref: %{version}"
+      github_page_link_html: "Einblick in den Quellcode auf <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>"
+      whats_new: "Was ist neu"
+      supportlogos_introduction: "Cyclescape wurde möglich dank der großzügigen Unterstützung von:"
+      funding_from: "Finanziert von from %{name}"
+      funding_from_and_created_by: "Mittel aus und erstellt von %{name}"
+      planning_application_data: "Planungsanwendungsdaten von Openly Local"
+    group_selector:
+      group_selector: "Gruppe "
+      no_group: "Keine Gruppe"
+    search:
+      search: "Suchen"
+      search_button: "Los"
+  libraries:
+    search:
+      no_results_found: "Keine Ergebnisse für '%{query}' gefunden."
+      results_found:
+        one: "Ein Ergebniss für '%{query}' gefunden."
+        other: "%{count} Ergebnisse für '%{query}' gefunden"
+      title: "Sucheregbnisse aus der Sammlung"
+    show:
+      title: "Sammlung"
+      overview_description_html: "Die Sammlung enthält <strong>wiederverwendbare Ressourcen</strong> für Kampagnen. Bitte füge Elemente ein, die dir für die Zukunft nützlich erscheinen"
+      overview_usage: "Du kannst Inhalte von Sammlungen in einer Diskussion verlinken."
+      latest: "Letzte Artikel"
+      item_created: "Vor %{time_ago} gepostet"
+      search: "Sammlung durchsuchen:"
+      search_submit: "Suchen"
+      clear_submit: "Löschen"
+      results: "Ergebnisse"
+      new_library_item: "Sammlungsinhalt hinzufügen"
+      new_note: "Notiz"
+      new_document: "Dokument"
+      new_item_title: "Typ auswählen"
+      new_item_description_html: "Wähle den Inhaltstyp, den Du zur Sammlung hinzufügen möchtest:"
+      new_note_description_html: "<strong>Hinweise</strong> sind für kurze Textstücke als Referenz."
+      new_document_description_html: "<strong>Dokumente</strong> erlaubt Dir Dateien hochzuladen."
+  library:
+    documents:
+      new:
+        title: "Neues Sammlungs-Dokument"
+      show:
+        added_by_html: "Hinzugefügt von %{name} um %{time}"
+        attach_note: "Notiz anfügen"
+        attach_note_instructions_html: "Du kannst neue Notizen erstellen, die mit diesem Dokument verknüpft sind. Wird in einer Diskussion darauf verwiesen, wird ebenso dieses Dokument verlinkt"
+        download: "Dokument herunterladen"
+        comments: "Kommentare"
+        notes: "Notizen"
+        no_threads: "Dieses Dokument wurde in keiner öffentlichen Diskussion einbezogen. Wenn Du dieses Dokument einer öffentlichen Diskussion hinzufügst, wird die Diskussion dort aufgelistet."
+        public_threads: "Public Threads"
+        threads_explanation: "Dieses Dokument wurde in folgenden öffentlichen Diskussionen erwähnt:"
+    notes:
+      edit:
+        title: "Sammlungs Notiz bearbeiten"
+      new:
+        title: "Neue Sammlungs Notiz"
+      show:
+        added_by_html: "Hinzugefügt von %{name} um %{time}"
+        edit: "Notiz bearbeiten"
+        note_on_document_html: "Diese Notiz wurde einem Dokument angehängt: %{document}"
+        no_threads: "Diese Notiz wurde in keiner öffentlichen Diskussion erwähnt. Wenn Du diese Notiz einer öffentlichen Diskussion hinzufügst, wird die Diskussion dort aufgelistet"
+        public_threads: "Öffentliche Diskussionen"
+        threads_explanation: "Diese Notiz wure in folgenden öffentlichen Diskussionen genannt:"
+      update:
+        success: "Sammlungs Notiz wurde aktualisiert"
+  mailers:
+    notifications:
+      gmr_confirmed:
+        subject: "Du bist nun ein Mitglied von %{group_name}"
+      new_group_thread:
+        subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
+      new_group_location_issue:
+        subject: "[Cyclescape] Neues Thema - \"%{issue_title}\" (%{group_name})"
+      new_user_location_issue:
+        subject: "[Cyclescape] Neues Thema - \"%{issue_title}\""
+      new_user_location_issue_thread:
+        subject: "[Cyclescape] Start einer neuen Diskussion um das Thema \"%{issue_title}\""
+
+    thread_mailer:
+      common:
+        subject:
+          one: "[Cyclescape] %{title}"
+          other: "Re: [Cyclescape] %{title}"
+  message_thread:
+    subscriptions:
+      create:
+        success: "Du hast jetzt diese Diskussion aboniert"
+      destroy:
+        success: "Du hast dich von dieser Diskussion abgemeldet"
+    tags:
+      panel:
+        edit_tags: "Bearbeiten"
+        tags: "Tags"
+    user_priorities:
+      create:
+        success: "Priorität gespeichert"
+        failure: "Deine Priorität konnte nicht gespeichert werden"
+      update:
+        success: "Priorität aktualisiert"
+        failure: "Deine Priorität konnte nicht aktualisiert werden"
+  message_threads:
+    compact:
+      group_committee: "Gruppen Committee"
+      group_public: "Öffentliche Gruppe"
+      group_private: "Private Gruppe"
+      public: "Öffentlich"
+      posted_at: "vor %{time_ago} gepostet"
+    list:
+      discussion_on_issue: "Eine Diskussion zum Thema"
+      group_committee: "Gruppen Committee"
+      group_public: "Öffentliche Gruppe"
+      group_private: "Private Gruppe"
+      public: "Öffentlich"
+      posted_at: "vor %{time_ago} gepostet"
+    edit:
+      title: "Diskussion bearbeiten"
+      description_html:
+        Administrators can fix up thread options here.
+        <strong>Warning:</strong> Deine Gruppe hat vielleicht eine Regel für Änderungen in Geheimhaltung von Diskussionen.
+    destroy:
+      failure: "Konnte diese Diskussion nicht löschen"
+      success: "Diskussion gelöscht"
+    index:
+      latest_activity: "Letzte Aktivität liegt %{ago} zurück"
+      search: "Suche in allen Diskussionen:"
+      search_submit: "Suchen"
+      title: "Öffentliche Diskussionen"
+    library_panel:
+      library: "Sammlung"
+      no_library_items: "Basierend auf den Tags in der Diskussion, konnten keine relevanten Einträge in der Sammlung gefunden werden."
+      tag_thread_guidance: "Füge Tags zur Diskussion hinzu, um relevante Einträge in der Sammlung zu finden."
+    new:
+      title: "Neue Diskussion"
+    priority_panel:
+      thread_priority: "Meine Priorität der Diskussion"
+    search:
+      clear_submit: "Löschen"
+      no_results_found: "Für '%{query}' wurden keine Ergebnisse gefunden."
+      results_found:
+        one: "Für '%{query}' wurde ein Ergebnis gefunden."
+        other: "Für '%{query}' wurden %{count} Ergebnisse gefunden "
+      search: "Alle Diskussionen durchsuchen:"
+      search_submit: "Suchen"
+      title: "Suchergebnisse aus Diskussionen"
+    show:
+      are_you_sure: "Bist Du sicher?"
+      back: "Zurück"
+      edit: "Diese Diskussion bearbeiten"
+      destroy: "Diese Diskussion löschen"
+      private_to_committee_message: "Privat: Nur Committee-Mitglieder von %{group} können Beiträge in dieser Diskussion lesen und posten."
+      private_to_group_message: "Privat: Nur Mitglieder von %{group} können Beiträge in dieser Diskussion lesen und posten."
+      public_message: "Öffentlich: Jeder in dieser Diskussion kann Beiträge lesen und posten."
+    subscribe_panel:
+      subscribed: "Du folgst dieser Diskussion."
+    subscribers_panel:
+      owner: "Inhaber"
+      subscribers: "Dieser Diskussion folgen"
+    update:
+      success: "Diskussion aktualisiert"
+    widget:
+      group_private: "Private Gruppe"
+      public: "Öffentlich"
+  message:
+    deadlines:
+      new:
+        deadline_date: "Stichtag/date"
+        submit: "Stichtag hinzufügen/date"
+      create:
+        failure: "Stichtag/date kann nicht erstellt werden"
+        success: "Stichtag/date erstellt"
+      show:
+        days_away:
+          zero: "Heute!"
+          one: "Morgen!"
+          other: "In %{count} Tagen!"
+    documents:
+      create:
+        failure: "Konnte Anhang nicht hinzufügen"
+        success: "Anhang hinzugefügt"
+      show:
+        download: "Anhang herunterladen"
+    library_items:
+      create:
+        failure: "Sammlungseintrag konnte nicht hinzugefügt werden"
+        success: "Sammlungseintrag hinzugefügt"
+      show:
+        attached_to_html: "Zu Dokument %{document} hinzugefügt"
+    links:
+      create:
+        failure: "Link konnte nicht erstellt werden"
+        success: "Link wurde geposted"
+    photos:
+      create:
+        failure: "Fotomeldung konnte nicht erstellt werden"
+        success: "Foto wurde hochgeladen"
+      show:
+        photo_alt: "Ein Foto Titel %{caption}."
+        view_original_image: "Zeige das Originalbild"
+  message_library:
+    documents:
+      new:
+        title: "Neues Sammlungs-Dokument"
+  messages:
+    censor:
+      failure: "Konnte Nachricht nicht zensieren"
+      success: "Nachricht zensiert"
+    create:
+      failure: "Konnte Nachricht nicht hinzufügen"
+      success: "Nachricht erfolgreich gesendet"
+    message:
+      posted_date: "vor %{time_ago} gesendet"
+      censor: "Zensiere diese Nachricht"
+      censored: "Diese Nachricht wurde entfernt"
+      create_note: "Sammlungsbeitrag erstellen"
+      create_document: "Sammlungs-Dokument erstellen"
+    new:
+      deadline_message: "Stichtag/date"
+      document_message: "Anhang"
+      library_item_message: "Sammlung"
+      link_message: "Link"
+      new_message: "Neue Nachricht"
+      photo_message: "Foto"
+      sign_in_to_post_html: "Bitte %{sign_in_link} um eine Nachricht zu posten."
+      text_message: "Text"
+  pages:
+    changelog:
+      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>"
+  shared:
+    edit_map:
+      area: "Bereich"
+      clear: "Löschen"
+      draw_area: "Einen Bereich einzeichnen"
+      draw_area_1: "Klicke auf die Punkte, um einen Bereich in der Karte zu markieren."
+      draw_area_2: "Einen Doppelklick, um die Form abzuschließen."
+      draw_area_3: "Vergrößern und schieben, um den richtigen Bereich zu wählen."
+      draw_point: "Zeichne einen Punkt"
+      draw_point_1: "Klicke auf die Karte, um den Punkt zu markieren"
+      draw_point_2: "Ziehe den Punkt um neu zu positionieren."
+      draw_point_3: "Vergrößern und schieben, um den richtigen Platz zu wählen."
+      draw_route: "Zeichne eine Route"
+      draw_route_1: "Klicke die Punkte, um eine Route auf der Karte zu markieren."
+      draw_route_2: "Doppel-Klick um die Route fertigzustellen."
+      draw_route_3: "Ziehe die grauen Punkte, um eine neue Ecke zu erstellen."
+      point: "Punkt"
+      route: "Route"
+      undo: "Rückgängig machen"
+    map_search:
+      near: "In der Nähe"
+      searching: "Suche..."
+      search_failed: "Es tut mir leid, die Suche war diesmal nicht erfolgreich."
+      showing: "Anzeigen"
+      sorry_we_couldnt_find: "Leider konnten wir es nicht finden"
+      submit: "Los"
+    profile_menu:
+      edit: "Mein Profil bearbeiten"
+      edit_preferences: "Meine Einstellungen verwalten"
+      my_locations: "Meine Standorte"
+      update_account: "Meine Konteneinstellungen aktualisieren"
+    tags:
+      panel:
+        edit_tags: "Tags bearbeiten"
+  site:
+    comments:
+      index:
+        no_comments: "Noch kein Kommentar"
+        title: "Alle Kommentare"
+        when_ago: "%{time_ago} zurück"
+      new:
+        title: "Kommentare"
+      success:
+        thank_you_title: "Danke für deinen Kommentar!"
+        thank_you_longform: "Einer unserer Entwickler wird Deinen Kommentar lesen und diese für spätere Entwicklungen berücksichtigen. Leider können wir nicht auf jede Rückmeldung persönlich antworten, die wir erhalten."
+        close: "< Zurück zur Seite"
+  tags:
+    show:
+      issues: "Issues"
+      library_items: "Library Items"
+      no_results_found: "No results found"
+      threads: "Diskussionen"
+      heading: "Dinge mit %{name}' getaggt"
+      unrecognised: "Kann den Tag '%{name}' nicht finden"
+  thread_mailer:
+    new_deadline_message:
+      added: "%{name} fügte einen Stichtag/date zur Diskussion hinzu"
+    new_document_message:
+      added: "%{name} fügte einen Anhang zur Diskussion hinzu"
+      view_the_document: "Unter folgdender URL kannst Du den Anhang anschauen:"
+    new_library_item_message:
+      added: "%{name} fügte einen Eintrag zur Sammlung hinzu."
+    new_link_message:
+      added: "%{name} fügte einen Link zur Diskussion hinzu."
+    new_message:
+      added: "%{name} fügte eine Nachricht zur Diskussion hinzu."
+    new_photo_message:
+      added: "%{name} fügte ein Foto der Diskussion hinzu."
+      view_the_photo: "Unter folgdender URL kannst Du das Foto anschauen:"
+    footer:
+      thread: "Cyclescape Diskussion"
+      unsubscribe: "Durch den Link oben, kannst Du das Abo dieser Diskussion beenden."
+  thread_priorities:
+    very_high: "Oberste Priorität"
+    high: "Wichtig"
+    medium: "Mäßig wichtig"
+    low: "Marginal interessant"
+    very_low: "Nicht von Interesse"
+  user:
+    locations:
+      submit_button: "Diesen Ort speichern"
+      create:
+        success: "Standort erstellt"
+      destroy:
+        failure: "Dieser Standort kann nicht gelöscht werden"
+        success: "Standort gelöscht"
+      edit:
+        title: "Standort bearbeiten"
+      index:
+        add_first_location: "Füge Deinen ersten Standort hinzu"
+        all_my_locations: "Alle meine Standorte"
+        catch_up_guidance_html: "Um sich über bestehende Diskussionen auf dem Laufenden zu halten, kannst Du dich in diesen Bereichen %{subscribe_existing_link}."
+        category: "Kategorie"
+        combined_locations: "Kombinierte Standorte"
+        combined_locations_guidance: "Diese Karte zeigt alle Deine Standorte zusammen. Wir nutzen dies, um herauszufinden, welche Themen für Dich relevant sind, und an welchen Gruppen Du interessiert sein könntest."
+        combined_locations_guidance_none_html: "Möchtest Du Benarichtigungen erhalten wenn Themen in diesem Bereich erstellt werden, und optional Diskussionen zu diesem Themen aboniert wurden, kannst Du %{edit_prefs_link}"
+        combined_locations_guidance_notify_html: "Du erhälst aktuell Benarichtigungen, wenn Themen zu diesen Bereichen erstellt werden, aber keine Diskussionen zu diesem Thema aboniert wurden. Um diese Einstellung zu ändern kannst Du %{edit_prefs_link}."
+        combined_locations_guidance_subscribe_html: "Du erhälst aktuell Benarichtigungen, wenn Themen zu diesem Bereich erstellt, und alle Diksussionen zu diesem Thema abonniert wurden. Um diese Einstellung zu ändern kannst Du %{edit_prefs_link}."
+        confirm: "Bist Du sicher?"
+        delete: "Löschen"
+        edit: "Bearbeiten"
+        edit_your_prefs: "Bearbeite Deine Einstellungen"
+        map: "Karte"
+        my_locations: "Meine Standorte"
+        new: "Neuen Standort hinzufügen"
+        no_locations_yet: "Du hast bisher keine Standorte erstellt!"
+        no_locations_guidance: "Du kannst Standorte erstellen für Dein zu Hause, für Deinen Weg zur Arbeit, oder wo Du gerne fahren würdest, und so weiter. Die hilft uns herauszufinden, welche Themen für Dich relevant sind, und an welchen Gruppen Du interessiert sein könntest." 
+        no_locations_guidance2_html: "Um zu starten, kannst Du %{first_location_link}."
+        no_overlapping_groups: "Keine überlappenden Gruppen"
+        overlapping_groups: "Überlappende Gruppen"
+        subscribe_existing_threads: "Folge allen vorhandenen Diskussionen."
+      new:
+        new_location: "Füge einen neuen Standort hinzu"
+        introduction: "Das Hinzufügen eines Standorts hilft uns herauszufinden, welche Thema für die relevant ist."
+        drawing_help: "Du kannst einen Bereich, eine Route oder einen Standort einzeichnen - wähle dies im Panel rechts. Dann zeichne in die Karte und drücke den Speichern Button unten. "
+      subscribe_to_threads:
+        subscribed_to_threads:
+          zero: "Wir konnten keine weiteren Diskussionen finden, die Du folgend könntest."
+          one: "Du folgst einer weiteren Diskussion."
+          other: "Du folgst nun %{count} weiteren Diskussionen."
+      update:
+        success: "Standort aktualisiert"
+    prefs:
+      edit:
+        involvement: "Beteilige mich an:"
+        notification_types: "Benarichtigungs Arten"
+        notification_types_guidance: "Du kannst wählen, wie Du für die unterschiedlichen Ereignisse oben benachrichtigt werden möchtest. Zur Zeit ist nur eine Benachrichtigung über Email möglich."
+        title: "Meine Einstellungen verwalten"
+        back: "Kehre zu Deinem Profil zurück"
+        none: "Keine Benachrichtigungen"
+        notify: "Benachrichtige mich über neue Ereignisse und wenn Diskussionen erstellt werden."
+        subscribe: "Benachrichtige mich über neue Ereignisse und folge automatisch allen neuen Diskussionen"
+      update:
+        success: "Einstellungen gespeichert"
+        failure: "Deine Einstellungen konnten nicht gespeichert werden"
+    profiles:
+      create:
+        success: "Profil erstellt"
+      edit:
+        title: "Mein Profil bearbeiten"
+        my_current_thumbnail_title: "Mein aktuelles Profilbild"
+      show:
+        about_label: "Über:"
+        add_to_groups:
+          one: "Füge %{name} zu Deiner Gruppe hinzu"
+          other: "Füge %{name} zu Deinen Gruppen hinzu"
+        add_to_groups_explanation:
+          one: "Du kannst diesen Benutzer zu Deiner Gruppe hinzufügen."
+          other: "Du kannst diesen Benutzer zu allen angezeigten Gruppen hinzufügen."
+        group_membership_label: "Gruppen:"
+        is_a_member_of_groups:
+          zero: "%{name} ist noch kein Mitglied irgendeiner Gruppe"
+          one: "%{name} ist ein Mitglied einer Gruppe"
+          other: "%{name} ist ein Mitglied von %{count} Gruppen"
+        no_groups: "Keine"
+        no_website: "Keine"
+        profile_picture_title: "%{name}'s Foto"
+        recent_threads: "Aktuelle Diskussionen"
+        reported_issues: "Gemeldete  Themen"
+        user_profile: "Benutzerprofil"
+        website_label: "Webseite:"
+      update:
+        success: "Profil aktualisiert"
+
+  date:
+    formats:
+      default: "%d-%m-%Y"
+      short: "%d %b"
+      long: "%d %B %Y"
+
+    day_names:
+      - Sonntag 
+      - Montag 
+      - Dienstag
+      - Mittwoch
+      - Donnerstag
+      - Freitag
+      - Samstag
+    abbr_day_names:
+      - Son
+      - Mon
+      - Die
+      - Mi
+      - Do
+      - Fr
+      - Sa
+
+    month_names:
+      - ~
+      - Januar
+      - Februar
+      - März
+      - April
+      - Mai
+      - Juni
+      - Juli
+      - August
+      - September
+      - Oktober
+      - November
+      - Dezember
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - Mai
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Okt
+      - Nov
+      - Dez
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%d %B, %Y %H:%M"
+    am: "am"
+    pm: "pm"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " und "
+      last_word_connector: ", und "
+
+    select:
+      prompt: "Bitte wähle"
+
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: "%u%n"
+        unit: "£"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+    percentage:
+      format:
+        delimiter: ""
+
+    precision:
+      format:
+        delimiter: ""
+
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one:   "Byte"
+            other: "Bytes"
+          kb: "kB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: Tausend # Thousand
+          million: Millionen # Million
+          billion: Billionen # Billion
+          trillion: Trillionen # Trillion
+          quadrillion: Quadrillionen # Quadrillion
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "halbe Minute"
+      less_than_x_seconds:
+        one:   "weniger als 1 Sekunde"
+        other: "weniger als %{count} Sekunden"
+      x_seconds:
+        one:   "1 Sekunde"
+        other: "%{count} Sekunden"
+      less_than_x_minutes:
+        one:   "weniger als eine Minute"
+        other: "weniger als %{count} Minuten"
+      x_minutes:
+        one:   "1 Minute"
+        other: "%{count} Minuten"
+      about_x_hours:
+        one:   "ungefähr 1 Stunde"
+        other: "ungefähr %{count} Stunden"
+      x_days:
+        one:   "1 Tag"
+        other: "%{count} Tage"
+      about_x_months:
+        one:   "ungefähr 1 Monat"
+        other: "ungefähr %{count} Monate"
+      x_months:
+        one:   "1 Monat"
+        other: "%{count} Monate"
+      about_x_years:
+        one:   "ungefähr 1 Jahr"
+        other: "ungefähr %{count} Jahre"
+      over_x_years:
+        one:   "über 1 Jahr"
+        other: "über %{count} Jahre"
+      almost_x_years:
+        one:   "ungefähr 1 Jahr"
+        other: "ungefähr %{count} Jahre"
+    prompts:
+      year:   "Jahr"
+      month:  "Monat"
+      day:    "Tag"
+      hour:   "Stunde"
+      minute: "Minute"
+      second: "Sekunde"
+
+  helpers:
+    select:
+      prompt: "Bitte wähle"
+
+    submit:
+      create: 'Erstelle %{model}'
+      update: 'Aktualisiere %{model}'
+      submit: 'Speichere %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages: &errors_messages
+      inclusion: "ist nicht in der Liste enthalten"
+      exclusion: "ist reserviert"
+      invalid: "ist ungültig"
+      confirmation: "stimmt nicht mit der Bestätigung überein"
+      accepted: "muss akzeptiert werden"
+      empty: "darf nicht leer sein"
+      blank: "muss ausgefüllt sein"
+      too_long: "ist zu lang (Maximum ist %{count} Zeichen)"
+      too_short: "ist zu kurz (Minimum ist %{count} Zeichen)"
+      wrong_length: "hat die falsche Länge (sollte %{count} Zeichen enthalten)"
+      not_a_number: "ist keine Zahl"
+      not_an_integer: "muss eine ganze Zahl sein"
+      greater_than: "muss größer sein als %{count}"
+      greater_than_or_equal_to: "muss größer oder gleich %{count} sein"
+      equal_to: "muss gleich %{count} sein"
+      less_than: "muss weniger als %{count} sein"
+      less_than_or_equal_to: "muss weniger oder gleich %{count} sein"
+      odd: "muss ungerade sein"
+      even: "muss gerade sein"
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one:    "1 Fehler verhinderte,dass %{model} gespeichert werden konnte"
+          other:  "%{count} Fehler verhinderten, dass %{model} gespeichert werden konnten"
+        body: "Es gab Probleme mit den folgenden Feldern:"
+
+      messages:
+        taken: "wurde bereits gemacht"
+        record_invalid: "Validierung fehlgeschlagen: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute} %{message}"
+
+  will_paginate:
+    next_label: "Nächste"
+    previous_label: "Vorherrige"
+    page_gap: "\u2026"

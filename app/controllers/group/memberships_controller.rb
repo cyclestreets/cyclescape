@@ -11,6 +11,9 @@ class Group::MembershipsController < ApplicationController
     @membership = @group.memberships.new(params[:group_membership])
 
     if @membership.save
+      if @membership.user.accepted_or_not_invited?
+        Notifications.added_to_group(@membership).deliver
+      end
       redirect_to group_members_path
     else
       render :new

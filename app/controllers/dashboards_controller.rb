@@ -3,18 +3,18 @@ class DashboardsController < ApplicationController
     @user = current_user
     @groups = @user.groups
 
-    @relevant_issues = IssueDecorator.decorate(current_user.issues_near_locations.order("updated_at DESC").limit(12).includes(:created_by, :tags))
+    @relevant_issues = IssueDecorator.decorate(current_user.issues_near_locations.order('updated_at DESC').limit(12).includes(:created_by, :tags))
 
-    subscribed_threads = current_user.subscribed_threads.order_by_latest_message.limit(12).includes(:issue, {latest_message: [:component, :created_by]})
+    subscribed_threads = current_user.subscribed_threads.order_by_latest_message.limit(12).includes(:issue, latest_message: [:component, :created_by])
     @subscribed_threads = ThreadListDecorator.decorate(subscribed_threads)
 
-    group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes({issue: :tags}, :group)
+    group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes({ issue: :tags }, :group)
     @group_threads = ThreadListDecorator.decorate(group_threads)
 
     deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 12).includes(:issue)
     @deadline_threads = ThreadListDecorator.decorate(deadline_threads)
 
-    prioritised_threads = current_user.prioritised_threads.order("priority desc").order_by_latest_message.limit(20).includes(:issue, {latest_message: [:component, :created_by]})
+    prioritised_threads = current_user.prioritised_threads.order('priority desc').order_by_latest_message.limit(20).includes(:issue, latest_message: [:component, :created_by])
     @prioritised_threads = ThreadListDecorator.decorate(prioritised_threads)
 
     planning_applications = current_user.planning_applications_near_locations.order("created_at DESC").limit(50)
@@ -28,7 +28,7 @@ class DashboardsController < ApplicationController
 
     # Threads, with permission check
     unfiltered_results = MessageThread.find_with_index(@query)
-    results = unfiltered_results.select{ |t| permitted_to?(:show, t) }
+    results = unfiltered_results.select { |t| permitted_to?(:show, t) }
     @threads = ThreadListDecorator.decorate(results)
 
     # Issues
