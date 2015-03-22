@@ -6,7 +6,7 @@
     %dt= t(".address_label")
     %dd= @planning_application.address
     %dt= t(".council_label")
-    %dd= @planning_application.council_name
+    %dd= @planning_application.authority_name
     %dt= t(".uid_label")
     %dd= @planning_application.uid
     %dt= t(".official_application_label")
@@ -28,6 +28,4 @@
   %section.source.box
     %header
       %h2= t ".data_source"
-    %p= t ".data_from_openlylocal_html", openlylocal_link: link_to(t(".openlylocal"), "http://www.openlylocal.com")
-    %p= link_to t(".view_application_record"), @planning_application.openlylocal_url
-    %p= link_to t(".view_council_record", council: @planning_application.council_name), @planning_application.openlylocal_council_url
+    %p= t ".data_from_html", link: link_to(t(".planit"), "http://www.planit.org.uk")

@@ -25,6 +25,6 @@ every 5.minutes do
 end
 
 every 1.day, at: '1:02 am' do
-  runner "PlanningApplicationsProcessor.process_planning_applications"
+  runner "PlanningApplicationWorker.new.process!"
   env :MAILTO, 'cyclescape-errors@cyclestreets.net'
 end

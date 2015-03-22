@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150309201417) do
+ActiveRecord::Schema.define(:version => 20150322101706) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -249,12 +249,9 @@ ActiveRecord::Schema.define(:version => 20150309201417) do
   end
 
   create_table "planning_applications", :force => true do |t|
-    t.integer  "openlylocal_id",                                                      :null => false
-    t.text     "openlylocal_url"
     t.text     "address"
     t.string   "postcode"
     t.text     "description"
-    t.string   "council_name"
     t.string   "openlylocal_council_url"
     t.text     "url"
     t.string   "uid",                                                                 :null => false
@@ -262,9 +259,11 @@ ActiveRecord::Schema.define(:version => 20150309201417) do
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
     t.spatial  "location",                :limit => {:srid=>4326, :type=>"geometry"}
+    t.string   "authority_name"
   end
 
   add_index "planning_applications", ["issue_id"], :name => "index_planning_applications_on_issue_id"
+  add_index "planning_applications", ["uid"], :name => "index_planning_applications_on_uid", :unique => true
 
   create_table "site_comments", :force => true do |t|
     t.integer  "user_id"

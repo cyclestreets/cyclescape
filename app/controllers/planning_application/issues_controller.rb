@@ -6,7 +6,7 @@ class PlanningApplication::IssuesController < IssuesController
     @issue = @planning_application.build_issue
     @issue.title = t("planning_application.issues.new.title_prefix") + ": ".to_s + @planning_application.title
     @issue.location = @planning_application.location
-    @issue.description = @planning_application.description + "\n\n".to_s + @planning_application.address + "\n\n".to_s + @planning_application.url + "\n\n".to_s +  @planning_application.council_name + "\n".to_s + t("planning_application.issues.new.application_reference") + ": ".to_s + @planning_application.uid
+    @issue.description = @planning_application.description + "\n\n".to_s + @planning_application.address + "\n\n".to_s + @planning_application.url + "\n\n".to_s +  @planning_application.authority_name + "\n".to_s + t("planning_application.issues.new.application_reference") + ": ".to_s + @planning_application.uid
     @issue.tags_string = "planning"
     @start_location = @planning_application.location
   end

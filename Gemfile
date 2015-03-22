@@ -36,9 +36,7 @@ gem 'whenever'
 gem 'draper', '0.15.0' # pin due to failing tests: maybe when https://github.com/jcasimir/draper/pull/288 is released.
 gem 'email_reply_parser'
 gem 'memoist'
-gem 'rubyzip'
-gem 'ruby-progressbar'
-gem 'lockfile'
+gem 'excon'
 gem 'paranoia', '~> 1.0'
 
 # Gems used only for assets and not required
@@ -64,11 +62,7 @@ group :development do
 end
 
 group :development, :test do
-  # IRB helpers
-  gem 'wirble'
-  gem 'hirb'
   gem 'pry'
-
   gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'
@@ -84,4 +78,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'email_spec'
   gem 'database_cleaner'
+  gem 'webmock'
 end

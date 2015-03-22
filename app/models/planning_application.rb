@@ -23,9 +23,8 @@ class PlanningApplication < ActiveRecord::Base
 
   belongs_to :issue
 
-  validates :openlylocal_id, presence: true
-  validates :openlylocal_url, presence: true
-  validates :location, presence: true
+  validates :uid, :url, :location, presence: true
+  validates :uid, uniqueness: true
 
   def has_issue?
     issue_id
@@ -35,7 +34,7 @@ class PlanningApplication < ActiveRecord::Base
     if !description.empty?
       [uid, description].join(" ")
     else
-      [uid, council_name].join(" ")
+      [uid, authority_name].join(" ")
     end
   end
 end
