@@ -34,28 +34,29 @@ describe PlanningApplicationWorker do
   let(:planning_record) do
     {
       'doc_type' => 'PlanApplic',
-      'name' => '15/01331/TCA',
-      'description' => 'do this and that',
+      'name' => '07/0811/FUL',
+      'description' => 'make shop bigger',
       'when_updated' => '2015-03-21T03:37:00.690000+00:00',
       'authority_id' => 22,
       'source_url' => 'http://www.gov.uk/planing/123',
-      'authority_name' => 'Bath',
-      'link' => 'http://www.planit.org.uk/planapplic/15/01331/TCA/',
-      'postcode' => 'BA1 1AA',
-      'address' => 'Sandy Gates, BA1 1AA',
-      'lat' => 51.419359,
-      'lng' => -2.431002,
+      'authority_name' => 'Cambridge',
+      'link' => 'http://www.planit.org.uk/planapplic/07/0811/FUL',
+      'postcode' => 'CB1 3AN',
+      'address' => '163 - 167 Mill Road Cambridge Cambridgeshire CB1 3AN',
+      'lat' => 51.459,
+      'lng' => -2.4302,
       'start_date' => '2015-03-19',
-      'uid' => '123',
+      'uid' => '07/0811/FUL',
       'url' => 'http://www.example.com'
     }
   end
 
   it 'should pull in planning applications, rejecting invalid ones' do
-    expect{ subject.process! }.to change{ PlanningApplication.count }.by(2) 
+    expect{ subject.process! }.to change{ PlanningApplication.count }.by(2)
     expect(cam_req).to have_been_made
     expect(london_req).to have_been_made
-    planning_ap = PlanningApplication.find_by_uid('123')
-    expect(planning_ap.address).to eq('Sandy Gates, BA1 1AA')
+    planning_ap = PlanningApplication.find_by_uid('07/0811/FUL')
+    expect(planning_ap.address).to eq('163 - 167 Mill Road Cambridge Cambridgeshire CB1 3AN')
+    expect(planning_ap.start_date).to eq('2015-03-19'.to_date)
   end
 end

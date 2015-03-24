@@ -1,4 +1,6 @@
 class PlanningApplicationWorker
+  # Update to use
+  # http://planit.org.uk/find/areas/json
   LOCAL_AUTHORITIES = [
     'Aberdeen', 'Aberdeenshire', 'Adur Worthing', 'Allerdale', 'Angus', 'Antrim', 'Ards', 'Armagh',
     'Arun', 'Babergh', 'Barnet', 'Barnsley', 'Basingstoke', 'Bath', 'Birmingham', 'Blackburn',
@@ -45,7 +47,7 @@ class PlanningApplicationWorker
         next unless remote_pa['lng'] && remote_pa['uid'] && remote_pa['url']
 
         db_app = PlanningApplication.find_or_initialize_by_uid(remote_pa['uid'])
-        [:address, :postcode, :description, :authority_name, :url].each do |attr|
+        [:address, :postcode, :description, :authority_name, :url, :start_date].each do |attr|
           db_app[attr] = remote_pa[attr.to_s]
         end
         db_app.location = "POINT(#{remote_pa['lng']} #{remote_pa['lat']})"
