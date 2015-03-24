@@ -105,6 +105,7 @@
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
+      convert_to_issue_html: "Convert to an Issue &hellip;"
       my_issues_nearby_introduction_html: "Issues in the %{areas_you_are_watching_link} are shown below, most recent first."
       my_issues_nearby_issues_pointer_html: "(You can also %{browse_all_other_issues_link} from outside your area(s).)"
       browse_all_other_issues: "browse all other issues"
@@ -121,14 +122,17 @@
         through the %{threads_link} and see if there's anything that you think is
         important, or maybe you could %{add_issue_link} instead?
       no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
+      location:
+        one: location
+        other: locations
       no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
       no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby %{things} here."
       no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
       planning_applications: "Planning applications"
       planning_applications_lower: "planning applications"
-      planning_applications_in_your_area: "Planning applications in your area"
-      planning_applications_introduction: "These are the most recent planning applications (courtesy of the PlanIt website) in your area:"
+      planning_applications_in_your_area: "Planning applications in your %{location}"
+      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
       thread_latest_activity: "%{time_ago} ago"
@@ -743,7 +747,7 @@
       explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
     show:
       address_label: "Address:"
-      convert_to_issue: "Convert to an Issue"
+      convert_to_issue_html: "Convert to an Issue &hellip;"
       council_label: "Council:"
       data_source: "Data source"
       data_from_html: "Planning application data is sourced from %{link}"
@@ -755,6 +759,7 @@
       related_issue_guidance: "This planning application has been converted to an issue:"
       uid_label: "Application reference:"
       view_official_application: "View official application"
+      start_date: 'Date application was made:'
   shared:
     edit_map:
       area: "area"

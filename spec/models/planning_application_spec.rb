@@ -38,7 +38,7 @@ describe PlanningApplication do
     end
 
     it "should have an appropriate title when there's no description" do
-      subject.description = ""
+      subject.description = nil
       expect(subject.title).to include(subject.uid)
       expect(subject.title).to include(subject.authority_name)
     end

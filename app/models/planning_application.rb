@@ -31,7 +31,7 @@ class PlanningApplication < ActiveRecord::Base
   end
 
   def title
-    if !description.empty?
+    if description.try(:present?)
       [uid, description].join(" ")
     else
       [uid, authority_name].join(" ")

@@ -5,7 +5,7 @@
       %li= link_to t(".issues_nearby"), "#issues-nearby"
       %li= link_to t(".my_priorities"), "#my-priorities"
       %li= link_to t(".deadlines"), "#deadlines"
-      %li= link_to t(".planning_applications"), "#planning"
+      %li= link_to t(".planning_applications"), "#planning-applications"
 
     .panes
       #my-threads
@@ -105,9 +105,9 @@
                     %td.meta
                       = time_tag_with_title(thread.latest_activity_date) do
                         - t ".deadline_thread_updated", time_ago: time_ago_in_words(thread.latest_activity_date)
-      #planning
+      #planning-applications
         %section.planning_applications
-          %h2= t ".planning_applications_in_your_area"
+          %h2= t ".planning_applications_in_your_area", location: t('.location', count: current_user.locations.count)
           - if current_user.locations.empty?
             %p.warning
               = image_tag 'warning.png'
@@ -116,7 +116,7 @@
           - elsif @planning_applications.empty?
             %p= t ".no_planning_applications_nearby_html", add_location_link: link_to(t(".add_another_location"), user_locations_path)
           - else
-            %p= t ".planning_applications_introduction"
+            %p= t ".planning_applications_introduction_html", location_link: link_to(t(".location", count: current_user.locations.count), user_locations_path)
             %table.dashboard-planning-applications.listing
               %tbody
                 - @planning_applications.each do |plan|
@@ -129,6 +129,9 @@
                       - if plan.has_issue?
                         %p= t ".converted_to_issue"
                         %p= plan.issue_link
+                      -else
+                        = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(plan), class: "btn-green"
+
                     %td
                       %p= plan.authority_name
                     %td
