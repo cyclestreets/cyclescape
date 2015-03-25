@@ -100,6 +100,7 @@ Cyclescape::Application.routes.draw do
   end
 
   resources :planning_applications do
+    get 'search', on: :collection
     get 'geometry', :on => :member
     scope module: "planning_application" do
       resource :issue

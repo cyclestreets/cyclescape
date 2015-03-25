@@ -1,0 +1,31 @@
+%h1= t(".page_title", q: @query)
+- if @planning_applications.count == 0
+  %p= t(".no_results_found")
+-else
+= form_tag(search_planning_applications_path, {method: :get, class: "filters"}) do
+  = text_field_tag :q, params[:q], placeholder: t(".planning_applications_search")
+  = button_tag t(".planning_application_search_button")
+
+%p= link_to(t(".your_planning_applications"), dashboard_path + "#planning-applications")
+%table.dashboard-planning-applications.listing
+  %tbody
+    - @planning_applications.each do |plan|
+      %tr
+        %td
+          %div.map
+            = plan.tinymap
+        %td.title
+          %h3= link_to (truncate plan.title, length: 200, separator: ' '), planning_application_path(plan)
+          - if plan.has_issue?
+            %p= t ".converted_to_issue"
+            %p= plan.issue_link
+          -else
+            = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(plan), class: "btn-green"
+
+        %td
+          %p= plan.authority_name
+        %td
+          %p= plan.uid
+
+- if @planning_applications.respond_to?(:total_pages)
+  = will_paginate @planning_applications

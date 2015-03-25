@@ -12,6 +12,12 @@ class PlanningApplicationsController < ApplicationController
     end
   end
 
+  def search
+    @query = params[:q]
+    planning_applications = PlanningApplication.where("uid LIKE ?", "%#{@query}%").paginate(page: params[:page])
+    @planning_applications = PlanningApplicationDecorator.decorate(planning_applications)
+  end
+
   protected
 
   def planning_application_feature(planning_application)

@@ -88,6 +88,34 @@
   application:
     account_disabled: "Your account has been disabled by an administrator"
     permission_denied: "You are not authorised to access that page."
+  planning_applications:
+    index:
+      planning_applications: "Planning applications"
+      pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
+      explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
+    show:
+      address_label: "Address:"
+      convert_to_issue_html: "Convert to an Issue &hellip;"
+      council_label: "Council:"
+      data_source: "Data source"
+      data_from_html: "Planning application data is sourced from %{link}"
+      location: "Location"
+      official_application: "View on council website"
+      official_application_label: "Official application:"
+      planit: "PlanIt"
+      related_issue: "Related issue"
+      related_issue_guidance: "This planning application has been converted to an issue:"
+      uid_label: "Application reference:"
+      view_official_application: "View official application"
+      start_date: 'Date application was made:'
+    search: &planning_applications_search
+      page_title: "Search Results for '%{q}'"
+      convert_to_issue_html: "Convert to an Issue &hellip;"
+      planning_applications: "Planning applications"
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: "No results found"
+      your_planning_applications: "Your local planning applications"
   dashboards:
     show:
       add_a_new_issue: "add a new issue"
@@ -105,7 +133,6 @@
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
-      convert_to_issue_html: "Convert to an Issue &hellip;"
       my_issues_nearby_introduction_html: "Issues in the %{areas_you_are_watching_link} are shown below, most recent first."
       my_issues_nearby_issues_pointer_html: "(You can also %{browse_all_other_issues_link} from outside your area(s).)"
       browse_all_other_issues: "browse all other issues"
@@ -129,9 +156,10 @@
       no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby %{things} here."
       no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
-      planning_applications: "Planning applications"
-      planning_applications_lower: "planning applications"
+      <<: *planning_applications_search
       planning_applications_in_your_area: "Planning applications in your %{location}"
+      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
+      planning_applications_lower: "planning applications"
       planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
@@ -740,26 +768,6 @@
         application_reference: "Application reference"
         title: "New issue from Planning Application"
         title_prefix: "Planning application"
-  planning_applications:
-    index:
-      planning_applications: "Planning applications"
-      pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
-      explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
-    show:
-      address_label: "Address:"
-      convert_to_issue_html: "Convert to an Issue &hellip;"
-      council_label: "Council:"
-      data_source: "Data source"
-      data_from_html: "Planning application data is sourced from %{link}"
-      location: "Location"
-      official_application: "View on council website"
-      official_application_label: "Official application:"
-      planit: "PlanIt"
-      related_issue: "Related issue"
-      related_issue_guidance: "This planning application has been converted to an issue:"
-      uid_label: "Application reference:"
-      view_official_application: "View official application"
-      start_date: 'Date application was made:'
   shared:
     edit_map:
       area: "area"
