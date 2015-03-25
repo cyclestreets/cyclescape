@@ -117,6 +117,12 @@
             %p= t ".no_planning_applications_nearby_html", add_location_link: link_to(t(".add_another_location"), user_locations_path)
           - else
             %p= t ".planning_applications_introduction_html", location_link: link_to(t(".location", count: current_user.locations.count), user_locations_path)
+
+            - if @planning_applications.respond_to?(:total_pages)
+              = will_paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
+            %br
+            %br
+
             %table.dashboard-planning-applications.listing
               %tbody
                 - @planning_applications.each do |plan|
@@ -136,3 +142,6 @@
                       %p= plan.authority_name
                     %td
                       %p= plan.uid
+
+        - if @planning_applications.respond_to?(:total_pages)
+          = will_paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
