@@ -18,6 +18,12 @@ class PlanningApplicationsController < ApplicationController
     @planning_applications = PlanningApplicationDecorator.decorate(planning_applications)
   end
 
+  def show_uid
+    planning_application = PlanningApplication.find_by_uid(params[:uid])
+    @planning_application = PlanningApplicationDecorator.decorate(planning_application)
+    render action: :show
+  end
+
   protected
 
   def planning_application_feature(planning_application)

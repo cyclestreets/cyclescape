@@ -135,7 +135,7 @@
                       %div.map
                         = plan.tinymap
                     %td.title
-                      %h3= link_to (truncate plan.title, length: 200, separator: ' '), planning_application_path(plan)
+                      %h3= link_to (truncate plan.title, length: 200, separator: ' '), planning_application_path("uid/#{plan.uid}")
                       - if plan.has_issue?
                         %p= t ".converted_to_issue"
                         %p= plan.issue_link

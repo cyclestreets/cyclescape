@@ -101,6 +101,7 @@ Cyclescape::Application.routes.draw do
 
   resources :planning_applications do
     get 'search', on: :collection
+    get 'uid/*uid', to: :show_uid, on: :collection
     get 'geometry', :on => :member
     scope module: "planning_application" do
       resource :issue
