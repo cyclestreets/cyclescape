@@ -20,8 +20,8 @@ class PlanningApplicationWorker
     'West Suffolk', 'Weymouth', 'Wiltshire',
   ].freeze
 
-  def initialize(start_date = (Date.today - 2.days))
-    @start_date = start_date
+  def initialize(end_date = (Date.today - 5.days))
+    @end_date = end_date
   end
 
   def process!
@@ -58,7 +58,7 @@ class PlanningApplicationWorker
 
   def generate_authority_requests(authority )
     {method: :get, idempotent: true, query:
-     {auth: authority, start_date: @start_date.to_s, end_date: (@start_date + 1.day).to_s, pg_sz: 500}}
+     {auth: authority, start_date: (@end_date - 7.days).to_s, end_date: @end_date.to_s, pg_sz: 500, sort: '-start_date'}}
   end
 
 end

@@ -9,7 +9,7 @@ describe PlanningApplicationWorker do
     no_url = planning_record.dup.tap {|pr| pr.delete 'url' }
     planning_record_alt = planning_record.merge('uid' => '345')
     stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-      with(query: {auth: 'London', start_date: (Date.today - 2.days).to_s, end_date: Date.yesterday, pg_sz: 500},
+      with(query: {auth: 'London', start_date: (Date.today - 12.days).to_s, end_date: (Date.today - 5.days), sort: '-start_date', pg_sz: 500},
            headers: {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Host'=>'www.planit.org.uk:80'}).
       to_return(status: 200, body: {
              'count' => 1,
@@ -22,7 +22,7 @@ describe PlanningApplicationWorker do
     no_lat = planning_record.dup.tap {|pr| pr.delete 'lng' }
     no_uid = planning_record.dup.tap {|pr| pr.delete 'uid' }
     stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-      with(query: {auth: 'Cambridge', start_date: (Date.today - 2.days).to_s, end_date: Date.yesterday, pg_sz: 500},
+      with(query: {auth: 'Cambridge', start_date: (Date.today - 12.days).to_s, end_date: (Date.today - 5.days), sort: '-start_date', pg_sz: 500},
            headers: {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Host'=>'www.planit.org.uk:80'}).
       to_return(status: 200, body: {
              'count' => 1,
