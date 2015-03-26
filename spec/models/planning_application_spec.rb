@@ -21,8 +21,9 @@
 require 'spec_helper'
 
 describe PlanningApplication do
+  subject { FactoryGirl.build(:planning_application) }
+
   describe "newly created" do
-    subject { FactoryGirl.create(:planning_application) }
     it { is_expected.to validate_presence_of(:uid) }
     it { is_expected.to validate_presence_of(:url) }
     it { is_expected.to validate_presence_of(:location) }
@@ -49,6 +50,29 @@ describe PlanningApplication do
 
     it "should have an issue" do
       expect(subject.issue).to_not be_nil
+    end
+  end
+
+  it 'should have an ordered scope' do
+    subject.save!
+    expect(described_class.ordered.count).to eq(1)
+  end
+
+  it 'should have an not hidden scope' do
+    FactoryGirl.create(:planning_application, hidden: true)
+    FactoryGirl.create(:planning_application, hidden: false)
+    expect(described_class.not_hidden.count).to eq(1)
+  end
+
+  context 'with old planning applications' do
+    before do
+      FactoryGirl.create(:planning_application, created_at: 9.months.ago)
+      FactoryGirl.create(:planning_application, :with_issue, created_at: 9.months.ago)
+      FactoryGirl.create(:planning_application, created_at: 7.months.ago)
+    end
+
+    it 'should remove old planning applications more than 8 months old' do
+      expect{ described_class.remove_old }.to change{ described_class.count }.from(3).to(2)
     end
   end
 end

@@ -19,12 +19,22 @@
 #
 
 class PlanningApplication < ActiveRecord::Base
+  attr_accessible :hidden
+
   include Locatable
 
   belongs_to :issue
+  scope :not_hidden, where(hidden: false)
+  scope :ordered, order('created_at DESC')
 
   validates :uid, :url, :location, presence: true
   validates :uid, uniqueness: true
+
+  class << self
+    def remove_old
+      where('created_at < ?', 8.months.ago).where(issue_id: nil).delete_all
+    end
+  end
 
   def has_issue?
     issue_id

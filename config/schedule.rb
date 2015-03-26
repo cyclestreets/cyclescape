@@ -28,3 +28,8 @@ every 1.day, at: '1:02 am' do
   runner "PlanningApplicationWorker.new.process!"
   env :MAILTO, 'cyclescape-errors@cyclestreets.net'
 end
+
+every 1.day, at: '2:02 am' do
+  runner "PlanningApplication.remove_old"
+  env :MAILTO, 'cyclescape-errors@cyclestreets.net'
+end
