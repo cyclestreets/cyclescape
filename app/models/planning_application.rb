@@ -47,4 +47,8 @@ class PlanningApplication < ActiveRecord::Base
       [uid, authority_name].join(" ")
     end
   end
+
+  def hide!
+    update_attributes(hidden: true)
+  end
 end

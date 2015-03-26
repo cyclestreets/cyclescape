@@ -75,4 +75,9 @@ describe PlanningApplication do
       expect{ described_class.remove_old }.to change{ described_class.count }.from(3).to(2)
     end
   end
+
+  it 'should be hiddable' do
+    subject.save!
+    expect{ subject.hide! }.to change{ subject.hidden }.from(false).to(true)
+  end
 end

@@ -100,9 +100,10 @@ Cyclescape::Application.routes.draw do
   end
 
   resources :planning_applications do
-    get 'search', on: :collection
+    get :search, on: :collection
     get 'uid/*uid', to: :show_uid, on: :collection
-    get 'geometry', :on => :member
+    get :geometry, on: :member
+    put :hide, on: :member
     scope module: "planning_application" do
       resource :issue
     end

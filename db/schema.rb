@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150324230603) do
+ActiveRecord::Schema.define(:version => 20150326182229) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20150324230603) do
     t.integer  "group_id",       :null => false
     t.string   "status",         :null => false
     t.integer  "actioned_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.text     "message"
   end
 
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(:version => 20150324230603) do
     t.text     "description"
     t.datetime "created_at",                                                       :null => false
     t.datetime "updated_at",                                                       :null => false
-    t.text     "joining_instructions"
     t.spatial  "location",             :limit => {:srid=>4326, :type=>"geometry"}
+    t.text     "joining_instructions"
   end
 
   add_index "group_profiles", ["group_id"], :name => "index_group_profiles_on_group_id"
@@ -134,8 +134,8 @@ ActiveRecord::Schema.define(:version => 20150324230603) do
     t.datetime "created_at",                                                :null => false
     t.datetime "updated_at",                                                :null => false
     t.datetime "deleted_at"
-    t.string   "photo_uid"
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
+    t.string   "photo_uid"
   end
 
   add_index "issues", ["created_by_id"], :name => "index_issues_on_created_by_id"
@@ -254,13 +254,14 @@ ActiveRecord::Schema.define(:version => 20150324230603) do
     t.text     "description"
     t.string   "openlylocal_council_url"
     t.text     "url"
-    t.string   "uid",                                                                 :null => false
+    t.string   "uid",                                                                                    :null => false
     t.integer  "issue_id"
-    t.datetime "created_at",                                                          :null => false
-    t.datetime "updated_at",                                                          :null => false
+    t.datetime "created_at",                                                                             :null => false
+    t.datetime "updated_at",                                                                             :null => false
     t.spatial  "location",                :limit => {:srid=>4326, :type=>"geometry"}
     t.string   "authority_name"
     t.date     "start_date"
+    t.boolean  "hidden",                                                              :default => false, :null => false
   end
 
   add_index "planning_applications", ["issue_id"], :name => "index_planning_applications_on_issue_id"
@@ -293,9 +294,7 @@ ActiveRecord::Schema.define(:version => 20150324230603) do
   end
 
   add_index "thread_subscriptions", ["thread_id"], :name => "index_thread_subscriptions_on_thread_id"
-  add_index "thread_subscriptions", ["thread_id"], :name => "sub_thread_id"
   add_index "thread_subscriptions", ["user_id"], :name => "index_thread_subscriptions_on_user_id"
-  add_index "thread_subscriptions", ["user_id"], :name => "sub_user_id"
 
   create_table "thread_views", :force => true do |t|
     t.integer  "user_id",   :null => false
@@ -353,11 +352,11 @@ ActiveRecord::Schema.define(:version => 20150324230603) do
   add_index "user_thread_priorities", ["user_id"], :name => "index_user_thread_priorities_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "full_name",                                             :null => false
+    t.string   "email",                                                :null => false
+    t.string   "full_name",                                            :null => false
     t.string   "display_name"
-    t.string   "role",                                                  :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => ""
+    t.string   "role",                                                 :null => false
+    t.string   "encrypted_password",                   :default => ""
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -365,8 +364,8 @@ ActiveRecord::Schema.define(:version => 20150324230603) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "disabled_at"
-    t.datetime "created_at",                                            :null => false
-    t.datetime "updated_at",                                            :null => false
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
     t.string   "invitation_token",       :limit => 60
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
@@ -386,8 +385,8 @@ ActiveRecord::Schema.define(:version => 20150324230603) do
     t.string   "voteable_type",                    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"

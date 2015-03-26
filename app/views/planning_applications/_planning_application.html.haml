@@ -1,0 +1,19 @@
+%tr
+  %td
+    %div.map
+      = planning_application.tinymap
+  %td.title
+    %h3= link_to (truncate planning_application.title, length: 200, separator: ' '), planning_application_path("uid/#{planning_application.uid}")
+    - if planning_application.has_issue?
+      %p= t ".converted_to_issue"
+      %p= planning_application.issue_link
+    -else
+      = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(planning_application), class: "btn-green"
+      &nbsp;
+      = link_to t(".hide"), hide_planning_application_path(planning_application), method: :put, data: { confirm: t(".confirm")}, class: "btn-red"
+
+  %td
+    %p= planning_application.authority_name
+  %td
+    %p= planning_application.uid
+

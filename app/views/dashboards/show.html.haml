@@ -129,23 +129,7 @@
 
             %table.dashboard-planning-applications.listing
               %tbody
-                - @planning_applications.each do |plan|
-                  %tr
-                    %td
-                      %div.map
-                        = plan.tinymap
-                    %td.title
-                      %h3= link_to (truncate plan.title, length: 200, separator: ' '), planning_application_path("uid/#{plan.uid}")
-                      - if plan.has_issue?
-                        %p= t ".converted_to_issue"
-                        %p= plan.issue_link
-                      -else
-                        = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(plan), class: "btn-green"
-
-                    %td
-                      %p= plan.authority_name
-                    %td
-                      %p= plan.uid
+                = render partial: 'planning_applications/planning_application', collection: @planning_applications, as: :planning_application
 
         - if @planning_applications.respond_to?(:total_pages)
           = will_paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
