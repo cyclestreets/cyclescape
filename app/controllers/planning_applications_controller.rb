@@ -1,5 +1,6 @@
 class PlanningApplicationsController < ApplicationController
   before_filter :set_planning_application, on: [:show, :show_uid, :geometry]
+  respond_to :js, only: [:hide]
 
   def show
   end
@@ -21,12 +22,10 @@ class PlanningApplicationsController < ApplicationController
   end
 
   def hide
-    if @planning_application.planning_application.hide!
-      set_flash_message(:success)
-    else
-      set_flash_message(:failure)
+    @planning_application.planning_application.hide!
+    respond_to do |format|
+      format.js {}
     end
-    head :no_content #should be refresh
   end
 
   protected

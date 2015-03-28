@@ -92,7 +92,7 @@ authorization do
     end
 
     has_permission_on :library_tags, to: :update
-    has_permission_on :planning_applications, to: [:view, :geometry, :all_geometries, :search, :show_uid]
+    has_permission_on :planning_applications, to: [:view, :geometry, :all_geometries, :search, :show_uid, :hide]
     has_permission_on :planning_application_issues, to: [:new, :create]
     has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry, :subscribe_to_threads]
     has_permission_on :user_prefs do
