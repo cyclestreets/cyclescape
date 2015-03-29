@@ -437,7 +437,7 @@ section#user-locations {
     border:1px solid $paneborder;
     @include border-radius(10px);
     .pane {
-      
+
     }
   }
 }
@@ -784,7 +784,7 @@ body.home {
         color:$white;
         font-size:12px;
       }
-    } 
+    }
   }
 }
 
@@ -850,4 +850,20 @@ body.home {
   p.warning > img {
     float: left;
   }
+}
+
+.tagItem {
+  margin: 1px;
+  position: relative;
+  padding: 1px 5px 0 4px;
+  overflow: visible;
+  float: left;
+  color: $grey;
+  height: 21px;
+  font: {
+    size: 14px;
+    weight: normal;
+  }
+  background: $lightergrey;
+  @include border-radius(4px 4px 4px 4px);
 }

@@ -3,7 +3,13 @@
     %div.map
       = planning_application.tinymap
   %td.title
-    %h3= link_to (truncate planning_application.title, length: 200, separator: ' '),
+    - if planning_application.part_hidden?
+      - title_length = 100
+      .tagItem
+        = 'Part Hidden'
+    -else
+      - title_length = 200
+    %h3= link_to (truncate planning_application.title, length: title_length, separator: ' '),
       planning_application_path("uid/#{planning_application.uid}") # Ugly hack to use uid (which has '/'s) in url
     - if planning_application.has_issue?
       %p= t ".converted_to_issue"
