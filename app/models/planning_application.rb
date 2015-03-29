@@ -20,11 +20,13 @@
 
 class PlanningApplication < ActiveRecord::Base
   attr_accessible :hidden
+  NOS_HIDE_VOTES = 2
 
   include Locatable
 
   belongs_to :issue
-  scope :not_hidden, where(hidden: false)
+  has_many :hide_votes
+  scope :not_hidden, where('hide_votes_count < ?', NOS_HIDE_VOTES)
   scope :ordered, order('created_at DESC')
 
   validates :uid, :url, :location, presence: true
@@ -48,7 +50,7 @@ class PlanningApplication < ActiveRecord::Base
     end
   end
 
-  def hide!
-    update_attributes(hidden: true)
+  def part_hidden?
+    hide_votes_count > 0 && hide_votes_count < NOS_HIDE_VOTES
   end
 end

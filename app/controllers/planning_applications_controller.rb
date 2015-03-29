@@ -22,7 +22,12 @@ class PlanningApplicationsController < ApplicationController
   end
 
   def hide
-    @planning_application.planning_application.hide!
+    @planning_application = PlanningApplication.find(params[:id])
+    @hide_vote = @planning_application.hide_votes.new
+    @hide_vote.user = current_user
+    @hide_vote.save
+    @planning_application.reload
+
     respond_to do |format|
       format.js {}
     end

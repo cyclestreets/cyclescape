@@ -21,7 +21,7 @@
 require 'spec_helper'
 
 describe PlanningApplication do
-  subject { FactoryGirl.build(:planning_application) }
+  subject        { FactoryGirl.build(:planning_application) }
 
   describe "newly created" do
     it { is_expected.to validate_presence_of(:uid) }
@@ -59,9 +59,18 @@ describe PlanningApplication do
   end
 
   it 'should have an not hidden scope' do
-    FactoryGirl.create(:planning_application, hidden: true)
-    FactoryGirl.create(:planning_application, hidden: false)
-    expect(described_class.not_hidden.count).to eq(1)
+    not_hidden = FactoryGirl.create(:planning_application)
+
+    once_hidden = FactoryGirl.create(:planning_application)
+    FactoryGirl.create(:hide_vote, planning_application: once_hidden)
+
+    twice_hidden = FactoryGirl.create(:planning_application)
+    FactoryGirl.create(:hide_vote, planning_application: twice_hidden)
+    FactoryGirl.create(:hide_vote, planning_application: twice_hidden)
+
+    not_hidden = described_class.not_hidden
+    expect(not_hidden.size).to eq(2)
+    expect(not_hidden).to_not include(twice_hidden)
   end
 
   context 'with old planning applications' do
@@ -74,10 +83,5 @@ describe PlanningApplication do
     it 'should remove old planning applications more than 8 months old' do
       expect{ described_class.remove_old }.to change{ described_class.count }.from(3).to(2)
     end
-  end
-
-  it 'should be hiddable' do
-    subject.save!
-    expect{ subject.hide! }.to change{ subject.hidden }.from(false).to(true)
   end
 end

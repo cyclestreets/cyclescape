@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150326182229) do
+ActiveRecord::Schema.define(:version => 20150329094656) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -111,6 +111,15 @@ ActiveRecord::Schema.define(:version => 20150326182229) do
   end
 
   add_index "groups", ["short_name"], :name => "index_groups_on_short_name"
+
+  create_table "hide_votes", :force => true do |t|
+    t.integer  "planning_application_id"
+    t.integer  "user_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "hide_votes", ["planning_application_id", "user_id"], :name => "index_hide_votes_on_planning_application_id_and_user_id", :unique => true
 
   create_table "inbound_mails", :force => true do |t|
     t.string   "recipient",                        :null => false
@@ -254,14 +263,14 @@ ActiveRecord::Schema.define(:version => 20150326182229) do
     t.text     "description"
     t.string   "openlylocal_council_url"
     t.text     "url"
-    t.string   "uid",                                                                                    :null => false
+    t.string   "uid",                                                                                :null => false
     t.integer  "issue_id"
-    t.datetime "created_at",                                                                             :null => false
-    t.datetime "updated_at",                                                                             :null => false
+    t.datetime "created_at",                                                                         :null => false
+    t.datetime "updated_at",                                                                         :null => false
     t.spatial  "location",                :limit => {:srid=>4326, :type=>"geometry"}
     t.string   "authority_name"
     t.date     "start_date"
-    t.boolean  "hidden",                                                              :default => false, :null => false
+    t.integer  "hide_votes_count",                                                    :default => 0
   end
 
   add_index "planning_applications", ["issue_id"], :name => "index_planning_applications_on_issue_id"
