@@ -120,8 +120,9 @@
       planning_application_search_button: Search Applications by Reference
       no_results_found: "No results found"
       your_planning_applications: "Your local planning applications"
-      hide: Hide (when not relavent to anyone)
-      confirm: This will be hidden for everyone, are you sure?
+      hide: Vote to hide
+      confirm: If enough users vote to hide this application it will be hidden for everyone, are you sure?
+      part_hidden: Part Hidden
   dashboards:
     show:
       add_a_new_issue: "add a new issue"
