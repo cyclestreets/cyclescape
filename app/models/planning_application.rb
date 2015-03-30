@@ -26,6 +26,7 @@ class PlanningApplication < ActiveRecord::Base
 
   belongs_to :issue
   has_many :hide_votes
+  has_many :users, through: :hide_votes
   scope :not_hidden, where('hide_votes_count < ?', NOS_HIDE_VOTES)
   scope :ordered, order('created_at DESC')
 
@@ -52,5 +53,9 @@ class PlanningApplication < ActiveRecord::Base
 
   def part_hidden?
     hide_votes_count > 0 && hide_votes_count < NOS_HIDE_VOTES
+  end
+
+  def fully_hidden?
+    hide_votes_count >= NOS_HIDE_VOTES
   end
 end

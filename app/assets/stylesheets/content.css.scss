@@ -852,7 +852,7 @@ body.home {
   }
 }
 
-.tagItem {
+.tag-item {
   font-size: 11px;
   line-height: 1;
   padding: 5px 7px;
@@ -867,4 +867,9 @@ body.home {
     weight: normal;
   }
   background: $lightergrey;
+}
+
+.tag-item-m {
+  @extend .tag-item;
+  font-size: 14px;
 }

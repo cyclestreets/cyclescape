@@ -1,6 +1,6 @@
 class PlanningApplicationsController < ApplicationController
   before_filter :set_planning_application, on: [:show, :show_uid, :geometry]
-  respond_to :js, only: [:hide]
+  respond_to :js, only: [:hide, :unhide]
 
   def show
   end
@@ -23,11 +23,17 @@ class PlanningApplicationsController < ApplicationController
 
   def hide
     @planning_application = PlanningApplication.find(params[:id])
-    @hide_vote = @planning_application.hide_votes.new
-    @hide_vote.user = current_user
+    @hide_vote = @planning_application.hide_votes.new.tap {|pl| pl.user = current_user}
     @hide_vote.save
-    @planning_application.reload
 
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  def unhide
+    @planning_application = PlanningApplication.find(params[:id])
+    @planning_application.hide_votes.find_by_user_id(current_user.id).destroy
     respond_to do |format|
       format.js {}
     end

@@ -28,6 +28,8 @@ describe PlanningApplication do
     it { is_expected.to validate_presence_of(:url) }
     it { is_expected.to validate_presence_of(:location) }
     it { is_expected.to validate_uniqueness_of(:uid) }
+    it { is_expected.to have_many(:hide_votes) }
+    it { is_expected.to have_many(:users).through(:hide_votes) }
 
     it "should not have an issue" do
       expect(subject.issue).to be_nil
@@ -57,6 +59,29 @@ describe PlanningApplication do
     subject.save!
     expect(described_class.ordered.count).to eq(1)
   end
+
+  context 'with one vote to hide' do
+    before do
+      subject.save!
+      FactoryGirl.create(:hide_vote, planning_application: subject)
+    end
+
+    it 'should be part hidden' do
+      expect(subject.reload.part_hidden?).to be true
+    end
+  end
+
+  context 'with two votes to hide' do
+    before do
+      subject.save!
+      2.times { FactoryGirl.create(:hide_vote, planning_application: subject) }
+    end
+
+    it 'should have be fully hidden' do
+      expect(subject.reload.fully_hidden?).to be true
+    end
+  end
+
 
   it 'should have an not hidden scope' do
     not_hidden = FactoryGirl.create(:planning_application)

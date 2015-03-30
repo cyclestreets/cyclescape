@@ -1,6 +1,13 @@
 %article.planning_application#content.content-wide-sidebar
   %header
     %h1= truncate @planning_application.title, length: 80, separator: ' '
+    .tag-item-m
+      - if @planning_application.part_hidden?
+        = t ".part_hidden"
+      - elsif @planning_application.fully_hidden?
+        = t ".hidden"
+    %br
+    %br
   %p= @planning_application.description
   %dl
     %dt= t(".address_label")
@@ -27,6 +34,12 @@
       %p= link_to @planning_application.issue.title, issue_path(@planning_application.issue)
   - elsif permitted_to? :create, :issues
     = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(@planning_application), class: "btn-green"
+    - if @planning_application.users.include? current_user
+      = link_to t(".unhide"), unhide_planning_application_path(@planning_application),
+        method: :put, class: "btn-grey", remote: :true
+    -else
+      = link_to t(".hide"), hide_planning_application_path(@planning_application),
+        method: :put, data: { confirm: t(".confirm")}, class: "btn-grey", remote: :true
   %section.source.box
     %header
       %h2= t ".data_source"

@@ -97,9 +97,20 @@
       planning_applications: "Planning applications"
       pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
       explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
+    planning_application: &planning_applications_search
+      page_title: "Search Results for '%{q}'"
+      convert_to_issue_html: "Convert to an Issue &hellip;"
+      planning_applications: "Planning applications"
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: "No results found"
+      your_planning_applications: "Your local planning applications"
+      hide: Vote to hide
+      unhide: Remove my vote
+      confirm: If enough users vote to hide this application it will be hidden for everyone, are you sure?
+      part_hidden: Part Hidden
     show:
       address_label: "Address:"
-      convert_to_issue_html: "Convert to an Issue &hellip;"
       council_label: "Council:"
       data_source: "Data source"
       data_from_html: "Planning application data is sourced from %{link}"
@@ -112,17 +123,10 @@
       uid_label: "Application reference:"
       view_official_application: "View official application"
       start_date: 'Date application was made:'
-    planning_application: &planning_applications_search
-      page_title: "Search Results for '%{q}'"
-      convert_to_issue_html: "Convert to an Issue &hellip;"
-      planning_applications: "Planning applications"
-      planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: "No results found"
-      your_planning_applications: "Your local planning applications"
-      hide: Vote to hide
-      confirm: If enough users vote to hide this application it will be hidden for everyone, are you sure?
-      part_hidden: Part Hidden
+      hidden: Hidden (will not appear in anyones dashboard)
+      <<: *planning_applications_search
+    search:
+      <<: *planning_applications_search
   dashboards:
     show:
       add_a_new_issue: "add a new issue"
