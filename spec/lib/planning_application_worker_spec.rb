@@ -5,11 +5,12 @@ describe PlanningApplicationWorker do
     stub_const("#{described_class}::LOCAL_AUTHORITIES", ['London', 'Cambridge'] )
   end
 
+  let(:planning_record_alt) { planning_record.merge('uid' => '345') }
+
   let!(:london_req) do
     no_url = planning_record.dup.tap {|pr| pr.delete 'url' }
-    planning_record_alt = planning_record.merge('uid' => '345')
     stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-      with(query: {auth: 'London', start_date: (Date.today - 12.days).to_s, end_date: (Date.today - 5.days), sort: '-start_date', pg_sz: 500},
+      with(query: {auth: 'London', start_date: (Date.today - 15.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500},
            headers: {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Host'=>'www.planit.org.uk:80'}).
       to_return(status: 200, body: {
              'count' => 1,
@@ -22,12 +23,10 @@ describe PlanningApplicationWorker do
     no_lat = planning_record.dup.tap {|pr| pr.delete 'lng' }
     no_uid = planning_record.dup.tap {|pr| pr.delete 'uid' }
     stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-      with(query: {auth: 'Cambridge', start_date: (Date.today - 12.days).to_s, end_date: (Date.today - 5.days), sort: '-start_date', pg_sz: 500},
+      with(query: {auth: 'Cambridge', start_date: (Date.today - 15.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500},
            headers: {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Host'=>'www.planit.org.uk:80'}).
       to_return(status: 200, body: {
-             'count' => 1,
-             'page_size' => 500,
-             'records' => [ no_uid, planning_record, no_lat ]
+             'count' => 1, 'page_size' => 500, 'records' => [ no_uid, planning_record, no_lat ]
            }.to_json)
   end
 
@@ -58,5 +57,51 @@ describe PlanningApplicationWorker do
     planning_ap = PlanningApplication.find_by_uid('07/0811/FUL')
     expect(planning_ap.address).to eq('163 - 167 Mill Road Cambridge Cambridgeshire CB1 3AN')
     expect(planning_ap.start_date).to eq('2015-03-19'.to_date)
+  end
+
+  context 'with an authority with more than 500 planning applications' do
+    before do
+      stub_const("#{described_class}::LOCAL_AUTHORITIES", ['Multi Page LA'] )
+    end
+
+    let!(:multi_page_tot_req) do
+      stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
+        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 15.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500}).
+        to_return(status: 200, body: {
+          'count' => 500, 'page_size' => 500, 'records' => [ planning_record ]
+        }.to_json)
+    end
+
+    let!(:multi_page_0_req) do
+      stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
+        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 15.days).to_s, end_date: (Date.today - 10.days), sort: '-start_date', pg_sz: 500}).
+        to_return(status: 200, body: {
+          'count' => 500, 'page_size' => 500, 'records' => [ planning_record ]
+        }.to_json)
+    end
+
+    let!(:multi_page_1_req) do
+      stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
+        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 10.days).to_s, end_date: (Date.today - 5.days), sort: '-start_date', pg_sz: 500}).
+        to_return(status: 200, body: {
+          'count' => 500, 'page_size' => 500, 'records' => [ planning_record ]
+        }.to_json)
+    end
+
+    let!(:multi_page_2_req) do
+      stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
+        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 5.days).to_s, end_date: (Date.today - 0.days), sort: '-start_date', pg_sz: 500}).
+        to_return(status: 200, body: {
+          'count' => 500, 'page_size' => 500, 'records' => [ planning_record_alt ]
+        }.to_json)
+    end
+
+    it 'should split the reqs into five day intervals' do
+      expect{ subject.process! }.to change{ PlanningApplication.count }.by(2)
+
+      [multi_page_tot_req, multi_page_0_req, multi_page_1_req, multi_page_2_req].each do |req|
+        expect(req).to have_been_made
+      end
+    end
   end
 end

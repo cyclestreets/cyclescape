@@ -20,7 +20,7 @@ class PlanningApplicationWorker
     'West Suffolk', 'Weymouth', 'Wiltshire',
   ].freeze
 
-  def initialize(end_date = (Date.today - 5.days))
+  def initialize(end_date = (Date.today))
     @end_date = end_date
   end
 
@@ -38,7 +38,15 @@ class PlanningApplicationWorker
   end
 
   def get_authorty(authority)
-    JSON.load(conn.request(generate_authority_requests(authority)).body)['records']
+    total = JSON.load(conn.request(generate_authority_requests(authority)).body)
+    if total['count'] == 500
+      multi_total = (0..2).map do |days_offset|
+        JSON.load(conn.request(generate_authority_requests(authority, days_offset)).body)
+      end
+      multi_total.map{ |resp| resp['records']}
+    else
+      total['records']
+    end
   end
 
   def add_applications(planning_applications)
@@ -56,9 +64,18 @@ class PlanningApplicationWorker
     end
   end
 
-  def generate_authority_requests(authority )
-    {method: :get, idempotent: true, query:
-     {auth: authority, start_date: (@end_date - 7.days).to_s, end_date: @end_date.to_s, pg_sz: 500, sort: '-start_date'}}
-  end
+  def generate_authority_requests(authority, days_offset = nil)
+    dates = { start_date: (@end_date - 15.days), end_date: @end_date }
 
+    if days_offset
+      dates = { start_date: (@end_date - 15.days + (5*days_offset).days),
+                end_date:   (@end_date - 10.days + (5*days_offset).days) }
+    end
+
+    {method: :get, idempotent: true, query:
+     {auth: authority,
+      start_date: dates[:start_date].to_s,
+      end_date: dates[:end_date].to_s,
+      pg_sz: 500, sort: '-start_date'}}
+  end
 end
