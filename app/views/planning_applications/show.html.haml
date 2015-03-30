@@ -1,13 +1,12 @@
 %article.planning_application#content.content-wide-sidebar
   %header
     %h1= truncate @planning_application.title, length: 80, separator: ' '
-    .tag-item-m
-      - if @planning_application.part_hidden?
+    - if @planning_application.part_hidden?
+      .tag-item-m
         = t ".part_hidden"
-      - elsif @planning_application.fully_hidden?
+    - elsif @planning_application.fully_hidden?
+      .tag-item-m
         = t ".hidden"
-    %br
-    %br
   %p= @planning_application.description
   %dl
     %dt= t(".address_label")
