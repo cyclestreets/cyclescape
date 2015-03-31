@@ -99,6 +99,17 @@ Cyclescape::Application.routes.draw do
     end
   end
 
+  resources :planning_applications do
+    get :search, on: :collection
+    get 'uid/*uid', to: :show_uid, on: :collection
+    get :geometry, on: :member
+    put :hide, on: :member
+    put :unhide, on: :member
+    scope module: "planning_application" do
+      resource :issue
+    end
+  end
+
   resources :users do
     scope module: :user do
       resource :profile

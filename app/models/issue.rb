@@ -31,9 +31,10 @@ class Issue < ActiveRecord::Base
     storage_path :generate_photo_path
   end
 
-  belongs_to :created_by, class_name: 'User'
-  has_many :threads, class_name: 'MessageThread', after_add: :set_new_thread_defaults
-  has_and_belongs_to_many :tags, join_table: 'issue_tags'
+  belongs_to :created_by, class_name: "User"
+  has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults
+  has_and_belongs_to_many :tags, join_table: "issue_tags"
+  has_one :planning_application
 
   validates :title, presence: true
   validates :description, presence: true

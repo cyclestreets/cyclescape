@@ -5,6 +5,7 @@
       %li= link_to t(".issues_nearby"), "#issues-nearby"
       %li= link_to t(".my_priorities"), "#my-priorities"
       %li= link_to t(".deadlines"), "#deadlines"
+      %li= link_to t(".planning_applications"), "#planning-applications"
 
     .panes
       #my-threads
@@ -48,7 +49,8 @@
           - if current_user.locations.empty?
             %p.warning
               = image_tag 'warning.png'
-              = t ".no_locations_guidance_html", add_some_locations_link: link_to(t(".add_some_locations"), user_locations_path)
+              = t ".no_locations_guidance_html", add_some_locations_link: link_to(t(".add_some_locations"), user_locations_path),
+                                                  things: t(".issues_lower")
           - elsif @relevant_issues.empty?
             %p= t ".no_issues_nearby_html", add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path),
                                         add_location_link: link_to(t(".add_another_location"), user_locations_path)
@@ -103,3 +105,34 @@
                     %td.meta
                       = time_tag_with_title(thread.latest_activity_date) do
                         - t ".deadline_thread_updated", time_ago: time_ago_in_words(thread.latest_activity_date)
+      #planning-applications
+        %section.planning_applications
+          %h2= t ".planning_applications_in_your_area", location: t('.location', count: current_user.locations.count)
+          %br
+          = form_tag(search_planning_applications_path, {method: :get, class: "filters"}) do
+            = text_field_tag :q, params[:q], placeholder: t(".planning_applications_search")
+            = button_tag t(".planning_application_search_button")
+            %br
+            %br
+
+          - if current_user.locations.empty?
+            %p.warning
+              = image_tag 'warning.png'
+              = t ".no_locations_guidance_html", add_some_locations_link: link_to(t(".add_some_locations"), user_locations_path),
+                                                  things: t(".planning_applications_lower")
+          - elsif @planning_applications.empty?
+            %p= t ".no_planning_applications_nearby_html", add_location_link: link_to(t(".add_another_location"), user_locations_path)
+          - else
+            %p= t ".planning_applications_introduction_html", location_link: link_to(t(".location", count: current_user.locations.count), user_locations_path)
+
+            - if @planning_applications.respond_to?(:total_pages)
+              = will_paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
+            %br
+            %br
+
+            %table.dashboard-planning-applications.listing
+              %tbody
+                = render partial: 'planning_applications/planning_application', collection: @planning_applications, as: :planning_application
+
+        - if @planning_applications.respond_to?(:total_pages)
+          = will_paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}

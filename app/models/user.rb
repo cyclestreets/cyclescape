@@ -173,6 +173,10 @@ class User < ActiveRecord::Base
     Issue.intersects(buffered_locations)
   end
 
+  def planning_applications_near_locations
+    PlanningApplication.intersects(buffered_locations)
+  end
+
   def start_location
     # Figure out a suitable starting location for the user, e.g. for adding new issues.
 

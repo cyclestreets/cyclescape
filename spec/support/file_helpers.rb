@@ -25,3 +25,7 @@ end
 def raw_email_path(type = 'basic')
   File.join(%W(spec support text #{type}_email.txt))
 end
+
+def planning_applications_path
+  File.join(%w(spec support text planning_applications.csv))
+end

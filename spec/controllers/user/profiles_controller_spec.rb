@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User::ProfilesController do
+describe User::ProfilesController, type: :controller do
   context 'profile visibility' do
     let(:user) { FactoryGirl.create(:user) }
 

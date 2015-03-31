@@ -16,6 +16,10 @@ class DashboardsController < ApplicationController
 
     prioritised_threads = current_user.prioritised_threads.order('priority desc').order_by_latest_message.limit(20).includes(:issue, latest_message: [:component, :created_by])
     @prioritised_threads = ThreadListDecorator.decorate(prioritised_threads)
+
+    planning_applications = current_user.planning_applications_near_locations.ordered
+      .not_hidden.paginate(page: params[:planning_page])
+    @planning_applications = PlanningApplicationDecorator.decorate(planning_applications)
   end
 
   def search

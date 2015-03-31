@@ -1,0 +1,45 @@
+%article.planning_application#content.content-wide-sidebar
+  %header
+    %h1= truncate @planning_application.title, length: 80, separator: ' '
+    - if @planning_application.part_hidden?
+      .tag-item-m
+        = t ".part_hidden"
+    - elsif @planning_application.fully_hidden?
+      .tag-item-m
+        = t ".hidden"
+  %p= @planning_application.description
+  %dl
+    %dt= t(".address_label")
+    %dd= @planning_application.address
+    %dt= t(".council_label")
+    %dd= @planning_application.authority_name
+    %dt= t(".uid_label")
+    %dd= @planning_application.uid
+    %dt= t(".start_date")
+    %dd= @planning_application.start_date
+    %dt= t(".official_application_label")
+    %dd= link_to t(".official_application"), @planning_application.url
+
+  %section.map
+    %h2= t ".location"
+    = @planning_application.map
+
+
+%aside#sidebar.wide
+  - if @planning_application.has_issue?
+    %section.issue.box
+      %h2= t ".related_issue"
+      %p= t ".related_issue_guidance"
+      %p= link_to @planning_application.issue.title, issue_path(@planning_application.issue)
+  - elsif permitted_to? :create, :issues
+    = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(@planning_application), class: "btn-green"
+    - if @planning_application.users.include? current_user
+      = link_to t(".unhide"), unhide_planning_application_path(@planning_application),
+        method: :put, class: "btn-grey", remote: :true
+    -else
+      = link_to t(".hide"), hide_planning_application_path(@planning_application),
+        method: :put, data: { confirm: t(".confirm")}, class: "btn-grey", remote: :true
+  %section.source.box
+    %header
+      %h2= t ".data_source"
+    %p= t ".data_from_html", link: link_to(t(".planit"), "http://www.planit.org.uk")
