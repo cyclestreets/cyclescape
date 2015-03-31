@@ -7,6 +7,6 @@ describe PlanningApplicationsController, type: :controller do
     it { is_expected.to route(:get, '/planning_applications/1/geometry').to(action: :geometry, id: 1) }
     it { is_expected.to route(:get, '/planning_applications/search').to(action: :search) }
     it { is_expected.to route(:put, '/planning_applications/1/hide').to(action: :hide, id: 1) }
-    it { is_expected.to route(:put, '/planning_applications/1/hide').to(action: :unhide, id: 1) }
+    it { is_expected.to route(:put, '/planning_applications/1/unhide').to(action: :unhide, id: 1) }
   end
 end
