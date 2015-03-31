@@ -33,7 +33,7 @@ end
 # PlanIt limit the results to 500.
 #
 # To get the past 6 months run this
-# (1..180).step(7).each {|n_day| PlanningApplicationWorker.new(n_day.days.ago.to_date).process! }
+# (1..180).step(15).each {|n_day| PlanningApplicationWorker.new(n_day.days.ago.to_date).process! }
 every 1.day, at: '1:02 am' do
   runner "PlanningApplicationWorker.new.process!"
   env :MAILTO, 'cyclescape-errors@cyclestreets.net'
