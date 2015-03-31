@@ -108,9 +108,12 @@
       #planning-applications
         %section.planning_applications
           %h2= t ".planning_applications_in_your_area", location: t('.location', count: current_user.locations.count)
+          %br
           = form_tag(search_planning_applications_path, {method: :get, class: "filters"}) do
             = text_field_tag :q, params[:q], placeholder: t(".planning_applications_search")
             = button_tag t(".planning_application_search_button")
+            %br
+            %br
 
           - if current_user.locations.empty?
             %p.warning
