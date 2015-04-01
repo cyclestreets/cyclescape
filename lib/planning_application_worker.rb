@@ -65,10 +65,10 @@ class PlanningApplicationWorker
   end
 
   def generate_authority_requests(authority, days_offset = nil)
-    dates = { start_date: (@end_date - 15.days), end_date: @end_date }
+    dates = { start_date: (@end_date - 14.days), end_date: @end_date }
 
     if days_offset
-      dates = { start_date: (@end_date - 15.days + (5*days_offset).days),
+      dates = { start_date: (@end_date - 14.days + (5*days_offset).days),
                 end_date:   (@end_date - 10.days + (5*days_offset).days) }
     end
 

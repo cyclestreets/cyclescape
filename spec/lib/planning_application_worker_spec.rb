@@ -10,7 +10,7 @@ describe PlanningApplicationWorker do
   let!(:london_req) do
     no_url = planning_record.dup.tap {|pr| pr.delete 'url' }
     stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-      with(query: {auth: 'London', start_date: (Date.today - 15.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500},
+      with(query: {auth: 'London', start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500},
            headers: {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Host'=>'www.planit.org.uk:80'}).
       to_return(status: 200, body: {
              'count' => 1,
@@ -23,7 +23,7 @@ describe PlanningApplicationWorker do
     no_lat = planning_record.dup.tap {|pr| pr.delete 'lng' }
     no_uid = planning_record.dup.tap {|pr| pr.delete 'uid' }
     stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-      with(query: {auth: 'Cambridge', start_date: (Date.today - 15.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500},
+      with(query: {auth: 'Cambridge', start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500},
            headers: {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Host'=>'www.planit.org.uk:80'}).
       to_return(status: 200, body: {
              'count' => 1, 'page_size' => 500, 'records' => [ no_uid, planning_record, no_lat ]
@@ -66,7 +66,7 @@ describe PlanningApplicationWorker do
 
     let!(:multi_page_tot_req) do
       stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 15.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500}).
+        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500}).
         to_return(status: 200, body: {
           'count' => 500, 'page_size' => 500, 'records' => [ planning_record ]
         }.to_json)
@@ -74,7 +74,7 @@ describe PlanningApplicationWorker do
 
     let!(:multi_page_0_req) do
       stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 15.days).to_s, end_date: (Date.today - 10.days), sort: '-start_date', pg_sz: 500}).
+        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 14.days).to_s, end_date: (Date.today - 10.days), sort: '-start_date', pg_sz: 500}).
         to_return(status: 200, body: {
           'count' => 500, 'page_size' => 500, 'records' => [ planning_record ]
         }.to_json)
@@ -82,7 +82,7 @@ describe PlanningApplicationWorker do
 
     let!(:multi_page_1_req) do
       stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 10.days).to_s, end_date: (Date.today - 5.days), sort: '-start_date', pg_sz: 500}).
+        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 9.days).to_s, end_date: (Date.today - 5.days), sort: '-start_date', pg_sz: 500}).
         to_return(status: 200, body: {
           'count' => 500, 'page_size' => 500, 'records' => [ planning_record ]
         }.to_json)
@@ -90,7 +90,7 @@ describe PlanningApplicationWorker do
 
     let!(:multi_page_2_req) do
       stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
-        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 5.days).to_s, end_date: (Date.today - 0.days), sort: '-start_date', pg_sz: 500}).
+        with(query: {auth: 'Multi Page LA', start_date: (Date.today - 4.days).to_s, end_date: (Date.today - 0.days), sort: '-start_date', pg_sz: 500}).
         to_return(status: 200, body: {
           'count' => 500, 'page_size' => 500, 'records' => [ planning_record_alt ]
         }.to_json)
