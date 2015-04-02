@@ -30,6 +30,7 @@ class PlanningApplicationsController < ApplicationController
 
     respond_to do |format|
       format.js {}
+      format.html { render :show }
     end
   end
 
@@ -41,6 +42,7 @@ class PlanningApplicationsController < ApplicationController
 
     respond_to do |format|
       format.js {}
+      format.html { render :show }
     end
   end
 
