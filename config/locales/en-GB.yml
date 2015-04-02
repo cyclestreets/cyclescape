@@ -107,7 +107,7 @@
       your_planning_applications: "Your local planning applications"
       hide: Vote to hide
       unhide: Remove my vote
-      confirm: If enough users vote to hide this application it will be hidden for everyone, are you sure?
+      hide_tooltip: If enough users vote to hide this application it will be hidden for everyone
       part_hidden: Part Hidden
     show:
       address_label: "Address:"
