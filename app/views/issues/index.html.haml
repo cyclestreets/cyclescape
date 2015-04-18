@@ -33,4 +33,4 @@
             = t(".no_popular_issues")
           = render partial: "compact", collection: @popular_issues, as: :issue, locals: {prefix: "popular"}
         - if @popular_issues.respond_to?(:total_pages)
-          = will_paginate @popular_issues
+          = will_paginate @popular_issues, param_name: :pop_issues_page, params: {anchor: 'popular-pane'}
