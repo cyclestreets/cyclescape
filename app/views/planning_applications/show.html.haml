@@ -35,10 +35,10 @@
     = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(@planning_application), class: "btn-green"
     - if @planning_application.users.include? current_user
       = link_to t(".unhide"), unhide_planning_application_path(@planning_application),
-        method: :put, class: "btn-grey", remote: :true
+        method: :put, class: "btn-grey"
     -else
       = link_to t(".hide"), hide_planning_application_path(@planning_application),
-        method: :put, data: { confirm: t(".confirm")}, class: "btn-grey", remote: :true
+        method: :put, title: t('.hide_tooltip'), class: "btn-grey"
   %section.source.box
     %header
       %h2= t ".data_source"

@@ -28,7 +28,7 @@ class PlanningApplication < ActiveRecord::Base
   has_many :hide_votes
   has_many :users, through: :hide_votes
   scope :not_hidden, where('hide_votes_count < ?', NOS_HIDE_VOTES)
-  scope :ordered, order('created_at DESC')
+  scope :ordered, order('start_date DESC')
 
   validates :uid, :url, :location, presence: true
   validates :uid, uniqueness: true
