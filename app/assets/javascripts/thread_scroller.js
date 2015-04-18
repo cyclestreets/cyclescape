@@ -1,7 +1,8 @@
 $(document).ready(function() {
-  if(!window.location.hash) {
+  offset = $(".thread-view-from-here").offset()
+  if(!window.location.hash && offset) {
     $('html, body').animate({
-        scrollTop: $(".thread-view-from-here").offset().top
+        scrollTop: offset.top
     }, 2000);
   }
 });
