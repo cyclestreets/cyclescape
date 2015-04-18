@@ -730,6 +730,11 @@
       show:
         photo_alt: "A photo entitled %{caption}."
         view_original_image: "View the original image"
+    street_view:
+      create:
+        failure: "Street View could not be added"
+        success: "Street View added"
+
   message_library:
     documents:
       new:
@@ -769,6 +774,7 @@
       photo_message: "Photo"
       sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
+      street_view_message: Street View
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
@@ -849,7 +855,7 @@
       added: "%{name} added a deadline/date to the thread"
     new_document_message:
       added: "%{name} added an attachment to the thread"
-      view_the_document: "You can view the attachment at the following url:"
+      view_the_document: "You can view the attachment at:"
     new_library_item_message:
       added: "%{name} added an item from the library to the thread."
     new_link_message:
@@ -858,7 +864,11 @@
       added: "%{name} added a message to the thread."
     new_photo_message:
       added: "%{name} added a photo to the thread."
-      view_the_photo: "You can view the photo at the following url:"
+      view_the_photo: "You can view the photo at:"
+    new_street_view_message:
+      added: "%{name} added a street view to the thread."
+      view_the_street_view: "You can see the Street View at:"
+
     footer:
       thread: "Cyclescape discussion thread"
       unsubscribe: "You can stop following this thread by visiting the link above and clicking 'unfollow this thread'."

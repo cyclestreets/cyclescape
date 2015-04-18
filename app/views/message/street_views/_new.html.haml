@@ -1,0 +1,17 @@
+%script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&key=#{Rails.application.config.google_map_key}"}
+= javascript_include_tag "street_view"
+#new-street-view-message.pane
+  #streetViewPano
+  %br/
+  = semantic_form_for StreetViewMessage.new, url: thread_street_views_path(@thread) do |f|
+    = f.inputs do
+      = f.input :caption
+      = f.input :heading, as: :hidden
+      = text_field_tag :street_view_message_location_string, nil, class: :hidden
+      = f.input :pitch, as: :hidden
+    = f.actions do
+      = f.action :submit, button_html: {class: "btn-green"}
+
+:javascript
+  var svLat = #{@issue.location.x};
+  var svLong = #{@issue.location.y};
