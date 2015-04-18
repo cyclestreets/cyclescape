@@ -78,6 +78,7 @@ Cyclescape::Application.routes.draw do
     scope module: :message do
       resources :photos, only: [:create, :show]
       resources :links, only: [:create]
+      resources :street_views, only: [:create]
       resources :deadlines, only: [:create]
       resources :library_items, only: [:create]
       resources :documents, only: [:create, :show]
