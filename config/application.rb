@@ -76,8 +76,5 @@ module Cyclescape
 
     # Planning applications
     config.planning_applications_url = "http://www.planit.org.uk/find/applics/json"
-
-    # Google Maps API
-    config.google_map_key = 'AIzaSyCJnMLChA1FkibGUI0L7WgJyKnN3L5vqzs'
   end
 end

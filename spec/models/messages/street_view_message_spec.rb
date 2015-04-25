@@ -15,8 +15,8 @@ describe StreetViewMessage, type: :model do
   end
 
   it 'sets location from a string' do
-    subject.set_location('-1, 53')
-    expect(subject.location.x).to eq(-1)
-    expect(subject.location.y).to eq(53)
+    subject.set_location('(53.456, -1.123)')
+    expect(subject.location.x).to eq(-1.123)
+    expect(subject.location.y).to eq(53.456)
   end
 end

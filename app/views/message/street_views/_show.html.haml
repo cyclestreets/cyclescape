@@ -1,11 +1,11 @@
-%script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&key=#{Rails.application.config.google_map_key}"}
-= javascript_include_tag "street_view_show"
 .link{id: dom_id(message.component)}
-  #streetViewPano
+  .streetViewPano{id: "streetViewPano#{message.component.id}"}
   %p= simple_format message.component.caption
 
 :javascript
-  var svLat   = #{message.component.location.x};
-  var svLong  = #{message.component.location.y};
-  var svHead  = #{message.component.heading};
-  var svPitch = #{message.component.pitch};
+  streetViews.push({id: #{message.component.id},
+    lat: #{message.component.location.x},
+    long: #{message.component.location.y},
+    head: #{message.component.heading},
+    pitch: #{message.component.pitch}
+    });

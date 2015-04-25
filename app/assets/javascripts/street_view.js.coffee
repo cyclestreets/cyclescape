@@ -1,6 +1,6 @@
 $(document).ready ->
-  issue = new (google.maps.LatLng)(svLong, svLat)
-  sv = new google.maps.StreetViewService()
+  issue = new (google.maps.LatLng)(svLongNew, svLatNew)
+  svs = new google.maps.StreetViewService()
   panorama = null
 
   processSVData =  (data, status) ->
@@ -15,7 +15,7 @@ $(document).ready ->
 
       panorama.setVisible(true)
     else
-      pano = $("#pano").text('')
+      pano = $("#newStreetViewPano").text('')
       warningList = $('<ul>').addClass('bullets')
       warningList.append $('<li>').text('Within 200m of the issue no Street View has been found')
       pano.prepend warningList
@@ -30,15 +30,35 @@ $(document).ready ->
     $("#street_view_message_pitch").val panorama.getPov().pitch
     return
 
-  initialize = ->
-    panorama = new google.maps.StreetViewPanorama(document.getElementById("streetViewPano"))
+  addStreetView = (sv) ->
+    issue = new (google.maps.LatLng)(sv.long, sv.lat)
 
-    sv.getPanoramaByLocation(issue, 200, processSVData)
+    panoramaOptions = {
+      position: issue,
+      pov: {
+        heading: sv.head,
+        pitch: sv.pitch
+      },
+      visible: true
+    }
+    new google.maps.StreetViewPanorama(document.getElementById("streetViewPano#{sv.id}"), panoramaOptions)
+    return
+
+  initialize = ->
+    panorama = new google.maps.StreetViewPanorama(document.getElementById("newStreetViewPano"))
+
+    svs.getPanoramaByLocation(issue, 200, processSVData)
 
     google.maps.event.addListener panorama, 'position_changed', ->
       updateLocation()
     google.maps.event.addListener panorama, 'pov_changed', ->
       updatePov()
+
+    # http://stackoverflow.com/questions/14861975/resize-google-maps-when-tabs-are-triggered
+    $("a[href$='#new-street-view-message']").click( (e)->
+         google.maps.event.trigger(panorama, 'resize') )
+
+    addStreetView(streetView) for streetView in streetViews
 
     return
 

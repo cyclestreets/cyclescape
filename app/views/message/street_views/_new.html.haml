@@ -1,7 +1,5 @@
-%script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&key=#{Rails.application.config.google_map_key}"}
-= javascript_include_tag "street_view"
 #new-street-view-message.pane
-  #streetViewPano
+  .streetViewPano{id: 'newStreetViewPano'}
   %br/
   = semantic_form_for StreetViewMessage.new, url: thread_street_views_path(@thread) do |f|
     = f.inputs do
@@ -13,5 +11,5 @@
       = f.action :submit, button_html: {class: "btn-green"}
 
 :javascript
-  var svLat = #{@issue.location.x};
-  var svLong = #{@issue.location.y};
+  var svLatNew = #{@issue.location.x};
+  var svLongNew = #{@issue.location.y};
