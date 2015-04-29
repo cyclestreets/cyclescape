@@ -11,5 +11,5 @@
       = f.action :submit, button_html: {class: "btn-green"}
 
 :javascript
-  var svLatNew = #{@issue.location.x};
-  var svLongNew = #{@issue.location.y};
+  var svLatNew = #{@issue.centre.x};
+  var svLongNew = #{@issue.centre.y};
