@@ -1,6 +1,6 @@
 .link{id: dom_id(message.component)}
-  .streetViewPano{id: "streetViewPano#{message.component.id}"}
   %p= simple_format message.component.caption
+  .streetViewPano{id: "streetViewPano#{message.component.id}"}
 
 :javascript
   streetViews.push({id: #{message.component.id},

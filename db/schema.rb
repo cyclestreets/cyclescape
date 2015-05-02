@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150417093810) do
+ActiveRecord::Schema.define(:version => 20150502112442) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -294,10 +294,10 @@ ActiveRecord::Schema.define(:version => 20150417093810) do
     t.integer  "created_by_id"
     t.decimal  "heading"
     t.decimal  "pitch"
-    t.string   "caption"
     t.datetime "created_at",                                                :null => false
     t.datetime "updated_at",                                                :null => false
     t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
+    t.text     "caption"
   end
 
   add_index "street_view_messages", ["location"], :name => "index_street_view_messages_on_location", :spatial => true

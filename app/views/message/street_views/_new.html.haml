@@ -1,12 +1,13 @@
 #new-street-view-message.pane
-  .streetViewPano{id: 'newStreetViewPano'}
-  %br/
   = semantic_form_for StreetViewMessage.new, url: thread_street_views_path(@thread) do |f|
     = f.inputs do
       = f.input :caption
       = f.input :heading, as: :hidden
       = text_field_tag :street_view_message_location_string, nil, class: :hidden
       = f.input :pitch, as: :hidden
+
+    .streetViewPano{id: 'newStreetViewPano'}
+    %br/
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green"}
 
