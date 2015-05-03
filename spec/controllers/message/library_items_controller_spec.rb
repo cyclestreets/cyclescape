@@ -15,6 +15,7 @@ describe Message::LibraryItemsController do
                     message: { body: 'this is a useful item' },
                     thread_id: thread.id
       expect(response.status).to be(302)
+      expect(LibraryItemMessage.last.library_item_id).to eq(library_item.id)
     end
   end
 end
