@@ -9,10 +9,32 @@ describe MailboxReader do
   end
 
   let(:imap) { double('IMAP connection') }
+  let(:message) { File.read(raw_email_path) }
+
+  describe '#run' do
+    subject { MailboxReader.new(config) }
+    before do
+      allow(subject).to receive(:fetch_message_ids).and_return([12345])
+      allow(subject).to receive(:fetch_raw_message).with(12345).and_return(message)
+      allow(subject).to receive(:save_message).with(message).and_raise('cannot save')
+    end
+
+    it 'ensures mail with errors is marked as read' do
+      expect(subject).to receive(:mark_as_seen).with(12345).once
+
+      expect{ subject.run }.to raise_error
+    end
+
+    it 'ensures connections are disconnected' do
+      expect(subject).to receive(:disconnect).once
+
+      expect{ subject.run }.to raise_error
+    end
+
+  end
 
   describe 'saving messages' do
     subject { MailboxReader.new(config) }
-    let(:message) { File.read(raw_email_path) }
 
     describe '#save_message' do
       it 'should create a saved record from the raw message' do

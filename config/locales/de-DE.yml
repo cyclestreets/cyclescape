@@ -99,6 +99,7 @@
         document_message_html: "%{creator_link} schickte einen Anhang"
         photo_message_html: "%{creator_link} schickte ein Foto"
         link_message_html: "%{creator_link} schickte einen Link"
+        street_view_message_html: "%{creator_link} schickte einen Street View"
         library_item_message_html: "%{creator_link} fügte einen Datebankeintrag hinzu"
     search:
       no_results_found: "Keine Ergebnisse für '%{query}' gefunden"
@@ -567,6 +568,10 @@
       show:
         photo_alt: "Ein Foto Titel %{caption}."
         view_original_image: "Zeige das Originalbild"
+    street_views:
+      create:
+        failure: "Street View hinzugefügt"
+        success: "Street View nicht hinzufügen"
   message_library:
     documents:
       new:
@@ -655,7 +660,7 @@
       added: "%{name} fügte einen Stichtag/date zur Diskussion hinzu"
     new_document_message:
       added: "%{name} fügte einen Anhang zur Diskussion hinzu"
-      view_the_document: "Unter folgdender URL kannst Du den Anhang anschauen:"
+      view_the_document: "Sie können das Anhang zu sehen:"
     new_library_item_message:
       added: "%{name} fügte einen Eintrag zur Sammlung hinzu."
     new_link_message:
@@ -664,7 +669,10 @@
       added: "%{name} fügte eine Nachricht zur Diskussion hinzu."
     new_photo_message:
       added: "%{name} fügte ein Foto der Diskussion hinzu."
-      view_the_photo: "Unter folgdender URL kannst Du das Foto anschauen:"
+      view_the_photo: "Sie können das Foto zu sehen:"
+    new_street_view_message:
+      added: "%{name} fügte ein Street View der Diskussion hinzu."
+      view_the_street_view: "Sie können das Street View zu sehen:"
     footer:
       thread: "Cyclescape Diskussion"
       unsubscribe: "Durch den Link oben, kannst Du das Abo dieser Diskussion beenden."

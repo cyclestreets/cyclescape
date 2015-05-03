@@ -94,7 +94,8 @@ authorization do
     end
     has_permission_on :message_thread_tags, to: :update
     has_permission_on :message_thread_user_priorities, to: [:create, :update]
-    has_permission_on :message_photos, :message_links, :message_deadlines, :message_library_items, :message_documents, to: :create
+    has_permission_on :message_photos, :message_links, :message_deadlines,
+      :message_library_items, :message_documents, :message_street_views, to: :create
     has_permission_on :libraries, :library_documents, :library_notes, to: [:index, :new, :create, :show]
     has_permission_on :library_documents, :library_notes do
       to [:edit, :update]
@@ -102,6 +103,8 @@ authorization do
     end
 
     has_permission_on :library_tags, to: :update
+    has_permission_on :planning_applications, to: [:view, :geometry, :all_geometries, :search, :show_uid, :hide, :unhide]
+    has_permission_on :planning_application_issues, to: [:new, :create]
     has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry, :subscribe_to_threads]
     has_permission_on :user_prefs do
       to :manage

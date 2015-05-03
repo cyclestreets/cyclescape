@@ -65,6 +65,16 @@ describe User do
     it { is_expected.to belong_to(:remembered_group) }
   end
 
+  describe 'permissions' do
+    it { should_not allow_mass_assignment_of(:role) }
+    it { should allow_mass_assignment_of(:role).as(:admin) }
+
+    [:email, :full_name, :display_name, :password, :password_confirmation, :disabled].each do |attr|
+      it { should allow_mass_assignment_of(attr) }
+      it { should allow_mass_assignment_of(attr).as(:admin) }
+    end
+  end
+
   describe 'to be valid' do
     subject { FactoryGirl.build(:user) }
 

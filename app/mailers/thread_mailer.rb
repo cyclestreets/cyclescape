@@ -2,29 +2,13 @@ class ThreadMailer < ActionMailer::Base
   include MailerHelper
   default from: Rails.application.config.default_email_from
 
-  def new_message(message, subscriber)
-    common(message, subscriber)
-  end
-
-  def new_photo_message(message, subscriber)
-    # attachments['photo.jpg'] = message.component.photo_medium.data
-    common(message, subscriber)
-  end
-
-  def new_deadline_message(message, subscriber)
-    common(message, subscriber)
-  end
-
-  def new_link_message(message, subscriber)
-    common(message, subscriber)
-  end
-
-  def new_library_item_message(message, subscriber)
-    common(message, subscriber)
-  end
-
-  def new_document_message(message, subscriber)
-    common(message, subscriber)
+  [:new_message, :new_photo_message, :new_deadline_message, 
+   :new_document_message, :new_link_message, :new_library_item_message,
+   :new_street_view_message,
+  ].each do |message_type|
+    define_method message_type do |message, subscriber|
+      common(message, subscriber)
+    end
   end
 
   protected

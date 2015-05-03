@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150309201417) do
+ActiveRecord::Schema.define(:version => 20150502112442) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -111,6 +111,15 @@ ActiveRecord::Schema.define(:version => 20150309201417) do
   end
 
   add_index "groups", ["short_name"], :name => "index_groups_on_short_name"
+
+  create_table "hide_votes", :force => true do |t|
+    t.integer  "planning_application_id"
+    t.integer  "user_id"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+  end
+
+  add_index "hide_votes", ["planning_application_id", "user_id"], :name => "index_hide_votes_on_planning_application_id_and_user_id", :unique => true
 
   create_table "inbound_mails", :force => true do |t|
     t.string   "recipient",                        :null => false
@@ -248,6 +257,25 @@ ActiveRecord::Schema.define(:version => 20150309201417) do
     t.datetime "created_at",    :null => false
   end
 
+  create_table "planning_applications", :force => true do |t|
+    t.text     "address"
+    t.string   "postcode"
+    t.text     "description"
+    t.string   "openlylocal_council_url"
+    t.text     "url"
+    t.string   "uid",                                                                                :null => false
+    t.integer  "issue_id"
+    t.datetime "created_at",                                                                         :null => false
+    t.datetime "updated_at",                                                                         :null => false
+    t.spatial  "location",                :limit => {:srid=>4326, :type=>"geometry"}
+    t.string   "authority_name"
+    t.date     "start_date"
+    t.integer  "hide_votes_count",                                                    :default => 0
+  end
+
+  add_index "planning_applications", ["issue_id"], :name => "index_planning_applications_on_issue_id"
+  add_index "planning_applications", ["uid"], :name => "index_planning_applications_on_uid", :unique => true
+
   create_table "site_comments", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -259,6 +287,22 @@ ActiveRecord::Schema.define(:version => 20150309201417) do
     t.datetime "viewed_at"
     t.datetime "deleted_at"
   end
+
+  create_table "street_view_messages", :force => true do |t|
+    t.integer  "message_id"
+    t.integer  "thread_id"
+    t.integer  "created_by_id"
+    t.decimal  "heading"
+    t.decimal  "pitch"
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+    t.spatial  "location",      :limit => {:srid=>4326, :type=>"geometry"}
+    t.text     "caption"
+  end
+
+  add_index "street_view_messages", ["location"], :name => "index_street_view_messages_on_location", :spatial => true
+  add_index "street_view_messages", ["message_id"], :name => "index_street_view_messages_on_message_id"
+  add_index "street_view_messages", ["thread_id"], :name => "index_street_view_messages_on_thread_id"
 
   create_table "tags", :force => true do |t|
     t.string "name", :null => false

@@ -34,6 +34,8 @@
 
 class User < ActiveRecord::Base
   attr_accessible :email, :full_name, :display_name, :password, :password_confirmation, :disabled
+  attr_protected :role
+  attr_protected :encrypted_password, as: :admin
 
   acts_as_voter
   acts_as_paranoid
@@ -170,6 +172,10 @@ class User < ActiveRecord::Base
   # Returns issues that are within a small distance of their user_locations
   def issues_near_locations
     Issue.intersects(buffered_locations)
+  end
+
+  def planning_applications_near_locations
+    PlanningApplication.intersects(buffered_locations)
   end
 
   def start_location

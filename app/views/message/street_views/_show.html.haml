@@ -1,0 +1,11 @@
+.link{id: dom_id(message.component)}
+  %p= simple_format message.component.caption
+  .streetViewPano{id: "streetViewPano#{message.component.id}"}
+
+:javascript
+  streetViews.push({id: #{message.component.id},
+    lat: #{message.component.location.x},
+    long: #{message.component.location.y},
+    head: #{message.component.heading},
+    pitch: #{message.component.pitch}
+    });

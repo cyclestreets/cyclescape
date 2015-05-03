@@ -88,6 +88,7 @@ Cyclescape::Application.routes.draw do
     scope module: :message do
       resources :photos, only: [:create, :show]
       resources :links, only: [:create]
+      resources :street_views, only: [:create]
       resources :deadlines, only: [:create]
       resources :library_items, only: [:create]
       resources :documents, only: [:create, :show]
@@ -106,6 +107,17 @@ Cyclescape::Application.routes.draw do
       resources :documents
       resources :notes
       resources :tags, only: [:update]
+    end
+  end
+
+  resources :planning_applications do
+    get :search, on: :collection
+    get 'uid/*uid', to: :show_uid, on: :collection
+    get :geometry, on: :member
+    put :hide, on: :member
+    put :unhide, on: :member
+    scope module: "planning_application" do
+      resource :issue
     end
   end
 

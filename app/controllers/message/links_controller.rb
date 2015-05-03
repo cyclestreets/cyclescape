@@ -1,22 +1,11 @@
 class Message::LinksController < Message::BaseController
-  def create
-    @message = @thread.messages.build
-    @message.created_by = current_user
+  protected
 
-    @link = LinkMessage.new(params[:link_message])
-    @link.thread = @thread
-    @link.message = @message
-    @link.created_by = current_user
+  def component
+    @link ||= LinkMessage.new(params[:link_message])
+  end
 
-    @message.component = @link
-
-    if @message.save
-      @thread.add_subscriber(current_user) unless current_user.ever_subscribed_to_thread?(@thread)
-      ThreadNotifier.notify_subscribers(@thread, :new_link_message, @message)
-      set_flash_message(:success)
-    else
-      set_flash_message(:failure)
-    end
-    redirect_to thread_path(@thread)
+  def notification_name
+    :new_link_message
   end
 end
