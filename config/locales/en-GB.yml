@@ -187,6 +187,7 @@
         document_message_html: "%{creator_link} posted an attachment"
         photo_message_html: "%{creator_link} posted a photo"
         link_message_html: "%{creator_link} posted a link"
+        street_view_message_html: "%{creator_link} posted a street view"
         library_item_message_html: "%{creator_link} added a library item"
     search:
       no_results_found: "No results found for '%{query}'"
@@ -730,7 +731,7 @@
       show:
         photo_alt: "A photo entitled %{caption}."
         view_original_image: "View the original image"
-    street_view:
+    street_views:
       create:
         failure: "Street View could not be added"
         success: "Street View added"

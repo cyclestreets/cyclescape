@@ -102,12 +102,13 @@
       my_threads: "Odebíraná vlákna"
       issues_nearby: "Nejnovější podněty poblíž"
       posted:
-        message_html: "%{creator_link} zaslal zprávu"
-        deadline_message_html: "%{creator_link} zaslal termín/datum"
-        document_message_html: "%{creator_link} zaslal přílohu"
-        photo_message_html: "%{creator_link} zaslal fotografii"
-        link_message_html: "%{creator_link} zaslal odkaz"
-        library_item_message_html: "%{creator_link} zaslal položku knihovny"
+        message_html: "%{creator_link} zaslali zprávu"
+        deadline_message_html: "%{creator_link} zaslali termín/datum"
+        document_message_html: "%{creator_link} zaslali přílohu"
+        photo_message_html: "%{creator_link} zaslali fotografii"
+        link_message_html: "%{creator_link} zaslali odkaz"
+        street_view_message_html: "%{creator_link} vyslán Street View"
+        library_item_message_html: "%{creator_link} zaslali položku knihovny"
     search:
       no_results_found: "Žádné výsledky pro '%{query}'"
       thread_results: "Vlákna (%{count})"
@@ -280,7 +281,7 @@
         Zde můžete nahlásit váš cyklistický podnět
       center_box_html:
         Neexistující cyklostezka? Překážka bránící v provozu? Chybějící cyklostojan?
-        Nebo příklad, kde bylo něco uděláno správně? 
+        Nebo příklad, kde bylo něco uděláno správně?
       report_an_issue: "Přidat podnět"
       latest_discussions: "Poslední diskuze"
       groups_title: "Místní skupiny Cyklisté sobě"
@@ -606,6 +607,10 @@
       show:
         photo_alt: "Titulek fotografie: %{caption}."
         view_original_image: "Zobrazit původní obrázek"
+    street_views:
+      create:
+        failure: "Street View nebyl vytvořen"
+        success: "Street View vytvořil"
   message_library:
     documents:
       new:
@@ -618,7 +623,7 @@
       failure: "Nemohu odeslat zprávu"
       success: "Zpráva úspěšně odeslána"
     message:
-      posted_date: "zaslal před %{time_ago}"
+      posted_date: "zaslali před %{time_ago}"
       censor: "Cenzurovat tuto zprávu"
       censored: "Tato zpráva byla odebrána"
       create_note: "Vytvořit poznámku v knihovně"
@@ -718,7 +723,7 @@
       added: "%{name} přidal deadline/datum k tomuto diskuznímu vláknu"
     new_document_message:
       added: "%{name} přidal přílohu k tomuto diskuznímu vláknu"
-      view_the_document: "Přílohu můžete vidět na následující adrese:"
+      view_the_document: "Přílohu můžete vidět na:"
     new_library_item_message:
       added: "%{name} přidal položku z knihovny k tomuto diskuznímu vláknu."
     new_link_message:
@@ -727,7 +732,10 @@
       added: "%{name} přidal zprávu k tomuto diskuznímu vláknu."
     new_photo_message:
       added: "%{name} přidal fotografii k tomuto diskuznímu vláknu."
-      view_the_photo: "Fotku si můžete prohlédnout na následující adrese:"
+      view_the_photo: "Fotku si můžete prohlédnout na:"
+    new_street_view_message:
+      added: "%{name} přidal Street View k závitu."
+      view_the_street_view: "Street View si můžete vidět na:"
     footer:
       thread: "Vlákno Cyklisté sobě"
       unsubscribe: "Pokud navštívíte odkaz nahoře, můžete přestat sledovat toto vlákno."
