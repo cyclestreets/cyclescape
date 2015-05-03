@@ -548,8 +548,6 @@
       issues_tooltip: "Reported problems, browsable on the map or as a list"
       library: "Library"
       library_tooltip: "Reusable resources for campaigning"
-      group_request_tooltip: Request a the creation of a new campaigning group
-      group_request: New Group
       loading: "Please wait\u2026"
       threads: "Discussion threads"
       threads_tooltip: "Discussions on each issue"
@@ -856,6 +854,8 @@
       edit_preferences: "Manage My Preferences"
       my_locations: "My Locations"
       update_account: "Update My Account Details"
+      group_request_tooltip: Request the creation of a new campaigning group
+      group_request: Request New Group
     tags:
       panel:
         edit_tags: "Edit tags"
