@@ -27,3 +27,5 @@
             %td= link_to t(".review"), review_group_request_path(r)
             %td= link_to t(".confirm"), confirm_group_request_path(r), method: :post, data: { confirm: t(".are_you_sure") } if r.pending?
             %td= link_to t(".reject"), reject_group_request_path(r), method: :post, data: { confirm: t(".are_you_sure") } if r.pending?
+            %td= link_to t(".destroy"), group_request_path(r), method: :delete, data: { confirm: t(".are_you_sure") } if r.confirmed? || r.rejected?
+

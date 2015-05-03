@@ -7,7 +7,7 @@ authorization do
     includes :member
     has_permission_on :admin_groups, :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
     has_permission_on :group_requests do
-      to [:index, :review, :confirm, :reject]
+      to [:index, :review, :confirm, :reject, :destroy]
     end
     has_permission_on :admin_users, to: :manage
     has_permission_on :admin_user_locations, to: [:manage, :geometry, :combined_geometry]

@@ -259,6 +259,7 @@
           confirmed: "Confirmed"
           pending: "Pending"
           unconfirmed: "Unconfirmed"
+          rejected: Rejected
       new:
         title: "Request membership of %{group_name}"
         your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
@@ -350,6 +351,7 @@
       actions: Actions
       new_group: Create a New Group
       group_email: Email
+      destroy: Remove request
     review:
       <<: *group_requests_index
       short_name: Short name
@@ -357,8 +359,11 @@
     confirm:
       success: Group created
       failure: Failed to create Group
+    destroy:
+      success: Group Request removed
+      failure: Failed to remove Group Request
     reject:
-      success: Group request rejected and deleted
+      success: Group request rejected
       failure: Failed to reject group request
 
   home:
@@ -584,6 +589,10 @@
         subject: "[Cyclescape] New issue - \"%{issue_title}\""
       new_user_location_issue_thread:
         subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
+      group_request_confirmed:
+        subject: "[Cyclescape] New Group \"%{group_name}}\" has been created"
+      new_group_request:
+        subject: "[Cyclescape] New Group \"%{group_name}\" has been requested by \"%{user_name}\""
 
     thread_mailer:
       common:

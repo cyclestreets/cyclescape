@@ -1,134 +1,112 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe GroupRequestsController, :type => :controller do
 
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) { FactoryGirl.attributes_for(:group_request) }
+  let(:group_request)    { FactoryGirl.create(:group_request) }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  context 'as a site user' do
+    let(:user) { FactoryGirl.create(:user) }
 
-  let(:valid_session) { {} }
+    before do
+      sign_in user
+    end
 
-  describe "GET #index" do
-    it "assigns all group_requests as @group_requests" do
-      group_request = GroupRequest.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:group_requests)).to eq([group_request])
+    describe "POST #create" do
+      context "with valid params" do
+        it "creates a new GroupRequest" do
+          expect {
+            post :create, {:group_request => valid_attributes}
+          }.to change(GroupRequest, :count).by(1)
+        end
+
+        it "redirects to the root" do
+          post :create, {:group_request => valid_attributes}
+
+          expect(response).to redirect_to('/')
+        end
+
+        it 'sends an email to all admins' do
+          post :create, {:group_request => valid_attributes}
+          mail = ActionMailer::Base.deliveries.last
+
+          expect(mail.subject).to eq(I18n.t('mailers.notifications.new_group_request.subject',
+                                            group_name: valid_attributes[:name],
+                                            user_name: user.name))
+          expect(mail.to).to include('root@cyclescape.org')
+        end
+
+      end
+    end
+
+    describe "GET #new" do
+      it "assigns a new group_request as @request" do
+        get :new
+        expect(assigns(:request)).to be_a_new(GroupRequest)
+      end
     end
   end
 
-  describe "GET #show" do
-    it "assigns the requested group_request as @group_request" do
-      group_request = GroupRequest.create! valid_attributes
-      get :show, {:id => group_request.to_param}, valid_session
-      expect(assigns(:group_request)).to eq(group_request)
-    end
-  end
+  context 'as a site admin with a group request' do
+    let(:admin) { FactoryGirl.create(:user, :admin) }
 
-  describe "GET #new" do
-    it "assigns a new group_request as @group_request" do
-      get :new, {}, valid_session
-      expect(assigns(:group_request)).to be_a_new(GroupRequest)
+    before do
+      sign_in admin
+      group_request
     end
-  end
 
-  describe "GET #edit" do
-    it "assigns the requested group_request as @group_request" do
-      group_request = GroupRequest.create! valid_attributes
-      get :edit, {:id => group_request.to_param}, valid_session
-      expect(assigns(:group_request)).to eq(group_request)
+    describe "GET #index" do
+      it "assigns all group_requests as @requests" do
+        get :index
+        expect(assigns(:requests)).to eq([group_request])
+      end
     end
-  end
 
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new GroupRequest" do
+    describe "GET #review" do
+      it "assigns the requested group_request as @request" do
+        get :review, {:id => group_request.to_param}
+        expect(assigns(:request)).to eq(group_request)
+      end
+    end
+
+    describe "POST #reject" do
+      it "assigns the requested group_request as @request" do
+        post :reject, {:id => group_request.to_param}
+        expect(flash[:notice]).to be_present
+      end
+    end
+
+    describe "POST #confirm" do
+      before do
+        post :confirm, {:id => group_request.to_param}
+      end
+
+      it "sets the flash" do
+        expect(flash[:notice]).to be_present
+      end
+
+      it 'emails the new groups owner' do
+        mail = ActionMailer::Base.deliveries.last
+
+        expect(mail.subject).to eq(I18n.t('mailers.notifications.group_request_confirmed.subject',
+                                          group_name: group_request.name))
+
+        expect(mail.to.first).to eq(group_request.user.email)
+      end
+
+    end
+
+    describe "DELETE #destroy" do
+      it "destroys the requested group_request" do
         expect {
-          post :create, {:group_request => valid_attributes}, valid_session
-        }.to change(GroupRequest, :count).by(1)
+          delete :destroy, {:id => group_request.to_param}
+        }.to change(GroupRequest, :count).by(-1)
       end
 
-      it "assigns a newly created group_request as @group_request" do
-        post :create, {:group_request => valid_attributes}, valid_session
-        expect(assigns(:group_request)).to be_a(GroupRequest)
-        expect(assigns(:group_request)).to be_persisted
+      it "redirects to the group_requests list" do
+        delete :destroy, {:id => group_request.to_param}
+        expect(response).to redirect_to(group_requests_url)
       end
-
-      it "redirects to the created group_request" do
-        post :create, {:group_request => valid_attributes}, valid_session
-        expect(response).to redirect_to(GroupRequest.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved group_request as @group_request" do
-        post :create, {:group_request => invalid_attributes}, valid_session
-        expect(assigns(:group_request)).to be_a_new(GroupRequest)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:group_request => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested group_request" do
-        group_request = GroupRequest.create! valid_attributes
-        put :update, {:id => group_request.to_param, :group_request => new_attributes}, valid_session
-        group_request.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "assigns the requested group_request as @group_request" do
-        group_request = GroupRequest.create! valid_attributes
-        put :update, {:id => group_request.to_param, :group_request => valid_attributes}, valid_session
-        expect(assigns(:group_request)).to eq(group_request)
-      end
-
-      it "redirects to the group_request" do
-        group_request = GroupRequest.create! valid_attributes
-        put :update, {:id => group_request.to_param, :group_request => valid_attributes}, valid_session
-        expect(response).to redirect_to(group_request)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the group_request as @group_request" do
-        group_request = GroupRequest.create! valid_attributes
-        put :update, {:id => group_request.to_param, :group_request => invalid_attributes}, valid_session
-        expect(assigns(:group_request)).to eq(group_request)
-      end
-
-      it "re-renders the 'edit' template" do
-        group_request = GroupRequest.create! valid_attributes
-        put :update, {:id => group_request.to_param, :group_request => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
-      end
-    end
-  end
-
-  describe "DELETE #destroy" do
-    it "destroys the requested group_request" do
-      group_request = GroupRequest.create! valid_attributes
-      expect {
-        delete :destroy, {:id => group_request.to_param}, valid_session
-      }.to change(GroupRequest, :count).by(-1)
-    end
-
-    it "redirects to the group_requests list" do
-      group_request = GroupRequest.create! valid_attributes
-      delete :destroy, {:id => group_request.to_param}, valid_session
-      expect(response).to redirect_to(group_requests_url)
     end
   end
 end

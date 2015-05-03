@@ -14,9 +14,7 @@ class GroupRequestsController < ApplicationController
     @request.user = current_user
 
     if @request.save
-      User.admin.each do |admin|
-        Notifications.new_group_request(@request, admin).deliver
-      end
+      Notifications.new_group_request(@request, User.admin).deliver
       redirect_to '/', notice: t('.group_requests.create.requested')
     else
       render :new
@@ -29,10 +27,9 @@ class GroupRequestsController < ApplicationController
 
   def confirm
     @request.actioned_by = current_user
-    if @request.confirm
-      @group = Group.find_by_name(@request.name)
+    if res = @request.confirm
+      @group = Group.find_by_name!(@request.name)
       Notifications.group_request_confirmed(@group, @request).deliver
-      @request.destroy
       set_flash_message(:success)
     else
       set_flash_message(:failure)
@@ -44,7 +41,15 @@ class GroupRequestsController < ApplicationController
     @request.actioned_by = current_user
     if @request.reject
       set_flash_message(:success)
-      @request.destroy
+    else
+      set_flash_message(:failure)
+    end
+    redirect_to action: :index
+  end
+
+  def destroy
+    if @request.destroy
+      set_flash_message(:success)
     else
       set_flash_message(:failure)
     end

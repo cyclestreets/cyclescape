@@ -11,8 +11,8 @@ class GroupRequest < ActiveRecord::Base
   validate :short_name, format: { with: /\A[a-z0-9]+\z/ }
 
   state_machine :status, initial: :pending do
-    after_transition any => :confirmed do |request|
-      request.create_group
+    after_transition any => :confirmed do |request, transition|
+      transition.rollback unless request.create_group
     end
 
     state :pending, :cancelled
@@ -39,7 +39,7 @@ class GroupRequest < ActiveRecord::Base
     membership = group.memberships.new
     membership.user = user
     membership.role = 'committee'
-    membership.save!
+    membership.save
   end
 
   private

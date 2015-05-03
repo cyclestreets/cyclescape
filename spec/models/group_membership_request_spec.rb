@@ -99,4 +99,5 @@ describe GroupMembershipRequest do
       expect(user.groups[0]).to eql(group)
     end
   end
+
 end
