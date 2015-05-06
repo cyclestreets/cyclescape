@@ -1,10 +1,11 @@
 shared_context 'signs in' do
+  include Capybara::DSL
   before do
     visit new_user_session_path
     fill_in 'Email', with: current_user.email
     fill_in 'Password', with: password
     click_button 'Sign in'
-    page.should have_content('signed in')
+    expect(page).to have_content('signed in')
   end
 end
 

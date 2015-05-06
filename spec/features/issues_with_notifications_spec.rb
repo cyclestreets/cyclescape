@@ -26,14 +26,14 @@ describe 'Issue notifications' do
       it 'should send a notification' do
         fill_in_issue
         click_on 'Send Report'
-        page.should have_content(issue_values[:title])
+        expect(page).to have_content(issue_values[:title])
         category_name = user_location.category.name
         email = open_last_email_for(user_location.user.email)
-        email.should have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\"")
-        email.should have_body_text(issue_values[:title])
-        email.should have_body_text(issue_values[:description])
-        email.should have_body_text(current_user.name)
-        email.should have_body_text(category_name)
+        expect(email).to have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\"")
+        expect(email).to have_body_text(issue_values[:title])
+        expect(email).to have_body_text(issue_values[:description])
+        expect(email).to have_body_text(current_user.name)
+        expect(email).to have_body_text(category_name)
       end
 
       it 'should not include html entities in the message' do
@@ -42,8 +42,8 @@ describe 'Issue notifications' do
         fill_in 'Write a description', with: 'Something & something else'
         click_on 'Send Report'
         email = open_last_email_for(user_location.user.email)
-        email.should_not have_body_text('&amp;')
-        email.should have_body_text(/Test containing A & B/)
+        expect(email).not_to have_body_text('&amp;')
+        expect(email).to have_body_text(/Test containing A & B/)
       end
 
       it 'should send an email when the preference is to subscribe' do
@@ -51,7 +51,7 @@ describe 'Issue notifications' do
         fill_in_issue
         click_on 'Send Report'
         email = open_last_email_for(user.email)
-        email.should_not be_nil
+        expect(email).not_to be_nil
       end
 
       it "should not send an email when the emails aren't enabled" do
@@ -59,7 +59,7 @@ describe 'Issue notifications' do
         fill_in_issue
         click_on 'Send Report'
         email = open_last_email_for(user.email)
-        email.should be_nil
+        expect(email).to be_nil
       end
     end
 
@@ -77,10 +77,10 @@ describe 'Issue notifications' do
         fill_in_issue
         click_on 'Send Report'
         email = open_last_email_for(notifiee.email)
-        email.should have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\" (#{group_profile.group.name})")
-        email.should have_body_text("in the #{group_profile.group.name}'s area")
-        email.should have_body_text(issue_values[:description])
-        email.should have_body_text(issue_values[:title])
+        expect(email).to have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\" (#{group_profile.group.name})")
+        expect(email).to have_body_text("in the #{group_profile.group.name}'s area")
+        expect(email).to have_body_text(issue_values[:description])
+        expect(email).to have_body_text(issue_values[:title])
       end
 
       it "shouldn't send a notification if the user doesn't want it" do
@@ -88,7 +88,7 @@ describe 'Issue notifications' do
         fill_in_issue
         click_on 'Send Report'
         email = open_last_email_for(notifiee.email)
-        email.should be_nil
+        expect(email).to be_nil
       end
     end
   end
@@ -114,11 +114,11 @@ describe 'Issue notifications' do
     it 'should not send multiple emails to the same user' do
       email_count = all_emails.count
       click_on 'Send Report'
-      all_emails.count.should eql(email_count + 1)
+      expect(all_emails.count).to eql(email_count + 1)
       open_email(user_location.user.email)
-      current_email.should have_body_text(user_location_small.category.name)
-      current_email.should_not have_body_text(user_location_big.category.name)
-      current_email.should_not have_body_text(user_location.category.name)
+      expect(current_email).to have_body_text(user_location_small.category.name)
+      expect(current_email).not_to have_body_text(user_location_big.category.name)
+      expect(current_email).not_to have_body_text(user_location.category.name)
     end
 
     context 'multiple users' do
@@ -129,11 +129,11 @@ describe 'Issue notifications' do
       it 'should send one email to multiple users' do
         email_count = all_emails.count
         click_on 'Send Report'
-        all_emails.count.should eql(email_count + 2)
+        expect(all_emails.count).to eql(email_count + 2)
         open_email(user.email)
-        current_email.should have_body_text(user_location_small.category.name)
+        expect(current_email).to have_body_text(user_location_small.category.name)
         open_email(user2.email)
-        current_email.should have_body_text(user2_location_small.category.name)
+        expect(current_email).to have_body_text(user2_location_small.category.name)
       end
     end
   end
@@ -160,7 +160,7 @@ describe 'Issue notifications' do
     it 'should only send one email to the user' do
       email_count = all_emails.count
       click_on 'Send Report'
-      all_emails.count.should eql(email_count + 1)
+      expect(all_emails.count).to eql(email_count + 1)
     end
   end
 end

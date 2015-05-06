@@ -5,8 +5,8 @@ describe 'User profiles' do
 
   it "should display Stewie's profile" do
     visit user_profile_path(user)
-    current_path.should == "/users/#{user.id}-#{user.name.parameterize}/profile"
-    page.should have_content(user.name)
+    expect(current_path).to eq("/users/#{user.id}-#{user.name.parameterize}/profile")
+    expect(page).to have_content(user.name)
   end
 
   context 'edit', as: :site_user do
@@ -17,19 +17,19 @@ describe 'User profiles' do
     it 'should upload a picture' do
       attach_file 'Picture', profile_photo_path
       click_on 'Save'
-      current_user.profile.picture.should be_true
+      expect(current_user.profile.picture).to be_truthy
     end
 
     it 'should set the website address' do
       fill_in 'Website', with: 'www.example.net'
       click_on 'Save'
-      current_user.profile.website.should == 'http://www.example.net'
+      expect(current_user.profile.website).to eq('http://www.example.net')
     end
 
     it 'should set the biography' do
       fill_in 'About', with: lorem_ipsum
       click_on 'Save'
-      current_user.profile.about.should == lorem_ipsum.gsub(/\n/, "\r\n")
+      expect(current_user.profile.about).to eq(lorem_ipsum.gsub(/\n/, "\r\n"))
     end
   end
 
@@ -38,12 +38,12 @@ describe 'User profiles' do
 
     it 'should let you edit your own profile' do
       visit edit_user_profile_path(current_user)
-      page.should have_content(I18n.t('.shared.profile_menu.edit'))
+      expect(page).to have_content(I18n.t('.shared.profile_menu.edit'))
     end
 
     it 'should prevent you editing someone elses' do
       visit edit_user_profile_path(user)
-      page.should have_content('You are not authorised to access that page.')
+      expect(page).to have_content('You are not authorised to access that page.')
     end
   end
 
@@ -56,11 +56,11 @@ describe 'User profiles' do
     end
 
     it 'should let you add the user to your group' do
-      page.should have_content("Add #{user.name} to your group")
+      expect(page).to have_content("Add #{user.name} to your group")
       select 'Member', from: 'Membership type'
       click_on 'Add member'
-      page.should have_content("Members of #{current_group.name}")
-      page.should have_content(user.name)
+      expect(page).to have_content("Members of #{current_group.name}")
+      expect(page).to have_content(user.name)
     end
   end
 
@@ -72,16 +72,16 @@ describe 'User profiles' do
     it 'should show recent threads the user has posted to' do
       first_messages && second_messages
       visit user_profile_path(current_user)
-      page.should have_content(threads.first.title)
-      page.should have_content(threads.second.title)
+      expect(page).to have_content(threads.first.title)
+      expect(page).to have_content(threads.second.title)
     end
 
     it 'should not show private threads' do
       threads.first.update_column(:privacy, 'group')
       first_messages && second_messages
       visit user_profile_path(current_user)
-      page.should have_no_content(threads.first.title)
-      page.should have_content(threads.second.title)
+      expect(page).to have_no_content(threads.first.title)
+      expect(page).to have_content(threads.second.title)
     end
   end
 end

@@ -10,7 +10,7 @@ describe MessageThreadsController do
     context 'as a guest' do
       it 'should not assign a message to view from' do
         get :show, id: thread.id
-        assigns(:view_from).should be_nil
+        expect(assigns(:view_from)).to be_nil
       end
     end
 
@@ -24,7 +24,7 @@ describe MessageThreadsController do
       context "who hasn't viewed the thread before" do
         it 'should not assign a message to view from' do
           get :show, id: thread
-          assigns(:view_from).should be_nil
+          expect(assigns(:view_from)).to be_nil
         end
       end
 
@@ -32,7 +32,7 @@ describe MessageThreadsController do
         it 'should assign the final message' do
           FactoryGirl.create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 1.day)
           get :show, id: thread
-          assigns(:view_from).should eql(thread.messages.last)
+          expect(assigns(:view_from)).to eql(thread.messages.last)
         end
       end
 
@@ -40,7 +40,7 @@ describe MessageThreadsController do
         it 'should assign the first of the new messages' do
           FactoryGirl.create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 3.5.days)
           get :show, id: thread
-          assigns(:view_from).should eql(message_b)
+          expect(assigns(:view_from)).to eql(message_b)
         end
       end
     end

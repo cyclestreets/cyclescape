@@ -3,7 +3,10 @@ class IssuesController < ApplicationController
 
   def index
     issues = Issue.by_most_recent.paginate(page: params[:page]).includes(:created_by)
-    popular_issues = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).includes(:created_by)
+
+    # work around till https://github.com/bouchard/thumbs_up/issues/64 is fixed
+    popular_issue_ids = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).map &:id
+    popular_issues = Issue.where(id: popular_issue_ids).paginate(page: params[:pop_issues_page]).includes(:created_by)
 
     @issues = IssueDecorator.decorate(issues)
     @popular_issues = IssueDecorator.decorate(popular_issues)
@@ -28,7 +31,7 @@ class IssuesController < ApplicationController
 
     if @issue.save
       NewIssueNotifier.new_issue(@issue)
-      redirect_to @issue
+      redirect_to new_issue_thread_path(@issue)
     else
       @start_location = current_user.start_location
       render :new

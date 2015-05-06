@@ -46,7 +46,6 @@ jQuery ->
     # are linked via the auto-options and auto-options-param data
     # attributes and update the target select box with the new options.
     update_options: (source_select) ->
-      console.log "source_select", source_select
       $("select[data-auto-options='##{source_select.attr("id")}']").each ->
         target_select = $ this
         param = target_select.data("auto-options-param")
@@ -57,7 +56,6 @@ jQuery ->
     # are linked via the autoset and autoset-param data attributes
     # and update them with the new value.
     update_value: (source_select) ->
-      console.log "source_select", source_select
       $("select[data-autoset='##{source_select.attr("id")}']").each ->
         target_select = $ this
         param = target_select.data("autoset-param")
@@ -67,7 +65,6 @@ jQuery ->
     # When a select box is changed find any dependent elements and
     # hide or show based on whether the new value is blank or not.
     update_visibility: (source_select) ->
-      console.log "source_select", source_select
       $("*[data-dependent='##{source_select.attr("id")}']").each ->
         target = $ this
         if source_select.val() != ""

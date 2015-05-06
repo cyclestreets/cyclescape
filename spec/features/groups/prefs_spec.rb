@@ -12,7 +12,7 @@ describe 'Group prefs' do
     describe 'editing the group preferences' do
       it 'should refuse' do
         visit edit_group_prefs_path(current_group)
-        page.should have_content('You are not authorised to access that page.')
+        expect(page).to have_content('You are not authorised to access that page.')
       end
     end
   end
@@ -23,7 +23,7 @@ describe 'Group prefs' do
     describe 'editing the group preferences' do
       it 'should be permitted' do
         visit edit_group_prefs_path(current_group)
-        page.should have_content('Edit Preferences')
+        expect(page).to have_content('Edit Preferences')
       end
 
       describe 'membership notifications' do
@@ -34,15 +34,15 @@ describe 'Group prefs' do
         end
 
         it 'should default to on' do
-          field.should be_checked
+          expect(field).to be_checked
         end
 
         it 'should let you turn them off' do
           field.set false
           click_on 'Save'
-          page.should have_content(I18n.t('.group.prefs.update.success'))
+          expect(page).to have_content(I18n.t('.group.prefs.update.success'))
           current_group.reload
-          current_group.prefs.notify_membership_requests.should be_false
+          expect(current_group.prefs.notify_membership_requests).to be_falsey
         end
       end
 
@@ -53,7 +53,7 @@ describe 'Group prefs' do
         select membership.user.name, from: 'Membership secretary'
         click_on 'Save'
         current_group.reload
-        current_group.prefs.membership_secretary.should eql(membership.user)
+        expect(current_group.prefs.membership_secretary).to eql(membership.user)
       end
 
       it 'should let you deselect the membership secretary' do
@@ -65,7 +65,7 @@ describe 'Group prefs' do
         select '', from: 'Membership secretary'
         click_on 'Save'
         current_group.reload
-        current_group.prefs.membership_secretary.should be_nil
+        expect(current_group.prefs.membership_secretary).to be_nil
       end
 
       it 'should warn about blank emails' do
@@ -73,11 +73,11 @@ describe 'Group prefs' do
         current_group.save
         visit edit_group_prefs_path(current_group)
 
-        current_group.email.should be_blank
-        current_group.prefs.membership_secretary.should be_blank
-        current_group.prefs.notify_membership_requests.should be_true
+        expect(current_group.email).to be_blank
+        expect(current_group.prefs.membership_secretary).to be_blank
+        expect(current_group.prefs.notify_membership_requests).to be_truthy
         # ... therefore ...
-        page.should have_content(I18n.t('.group.prefs.edit.no_email_warning'))
+        expect(page).to have_content(I18n.t('.group.prefs.edit.no_email_warning'))
       end
     end
   end
@@ -89,7 +89,7 @@ describe 'Group prefs' do
       let(:group) { FactoryGirl.create(:quahogcc) }
       it 'should be permitted' do
         visit edit_group_prefs_path(group)
-        page.should have_content('Edit Preferences')
+        expect(page).to have_content('Edit Preferences')
       end
     end
   end

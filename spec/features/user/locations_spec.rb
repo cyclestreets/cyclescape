@@ -10,19 +10,19 @@ describe 'User locations' do
 
     it 'should show a page for a new user' do
       visit user_locations_path
-      page.should have_content('My Locations')
+      expect(page).to have_content('My Locations')
     end
 
     it 'should let you add a new location' do
       visit new_user_location_path
-      page.should have_content(I18n.t('.user.locations.new.new_location'))
+      expect(page).to have_content(I18n.t('.user.locations.new.new_location'))
       select location_category.name, from: 'Category'
       # Note hidden map field
       find('#user_location_loc_json').set(location_attributes[:loc_json])
       click_on I18n.t('.formtastic.actions.user_location.create')
 
-      page.should have_content('Location Created')
-      page.should have_content(location_category.name)
+      expect(page).to have_content('Location Created')
+      expect(page).to have_content(location_category.name)
     end
 
     context 'with a location' do
@@ -35,15 +35,15 @@ describe 'User locations' do
       it 'should give appropriate guidance based on your settings' do
         current_user.prefs.update_column(:involve_my_locations, 'none')
         visit user_locations_path
-        page.should have_content(guidance_text('.combined_locations_guidance_none_html'))
+        expect(page).to have_content(guidance_text('.combined_locations_guidance_none_html'))
 
         current_user.prefs.update_column(:involve_my_locations, 'notify')
         visit user_locations_path
-        page.should have_content(guidance_text('.combined_locations_guidance_notify_html'))
+        expect(page).to have_content(guidance_text('.combined_locations_guidance_notify_html'))
 
         current_user.prefs.update_column(:involve_my_locations, 'subscribe')
         visit user_locations_path
-        page.should have_content(guidance_text('.combined_locations_guidance_subscribe_html'))
+        expect(page).to have_content(guidance_text('.combined_locations_guidance_subscribe_html'))
       end
     end
 
@@ -54,17 +54,17 @@ describe 'User locations' do
         visit user_locations_path
         click_on 'Edit' # hmm, edit the right one?
 
-        page.should have_content('Edit Location')
+        expect(page).to have_content('Edit Location')
         find('#user_location_loc_json').set(location_attributes[:loc_json])
         click_on 'Save'
 
-        page.should have_content('Location Updated')
+        expect(page).to have_content('Location Updated')
       end
 
       it 'should let you delete a location' do
         visit user_locations_path
         click_on 'Delete'
-        page.should have_content('Location deleted')
+        expect(page).to have_content('Location deleted')
       end
     end
   end

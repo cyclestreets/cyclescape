@@ -28,7 +28,7 @@ gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly', '~> 0.9.15' # pin to delay the upgrade to 1.x
 gem 'redis-store', '~> 1.0.0'
 gem 'resque'
-gem 'acts_as_indexed'
+gem 'acts_as_indexed', github: 'nikolai-b/acts_as_indexed'
 gem 'thumbs_up', '~> 0.4.6'
 gem 'exceptional'
 gem 'foreman'
@@ -36,6 +36,7 @@ gem 'whenever'
 gem 'draper', '0.15.0' # pin due to failing tests: maybe when https://github.com/jcasimir/draper/pull/288 is released.
 gem 'email_reply_parser'
 gem 'memoist'
+gem 'excon'
 gem 'paranoia', '~> 1.0'
 
 # Gems used only for assets and not required
@@ -61,19 +62,15 @@ group :development do
 end
 
 group :development, :test do
-  # IRB helpers
-  gem 'wirble'
-  gem 'hirb'
   gem 'pry'
-
-  gem 'rspec-core', '~> 2.14.0' # pin pending capybara upgrade
-  gem 'rspec-rails', '~> 2.14.2' # pin as above
+  gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'ruby-prof'
 end
 
 group :test do
+  gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'launchy'
@@ -81,5 +78,5 @@ group :test do
   gem 'selenium-webdriver'
   gem 'email_spec'
   gem 'database_cleaner'
-  gem 'rspec-expectations'
+  gem 'webmock'
 end

@@ -1,7 +1,7 @@
 
 --------
 <%= t ".thread" %>:
-<%= thread_url(@thread) %>
+<%= thread_url(@thread, anchor: dom_id(@message)) %>
 
 <% if @thread.private_to_committee? %>
 Only committee members of <%= raw @thread.group.name %> can view

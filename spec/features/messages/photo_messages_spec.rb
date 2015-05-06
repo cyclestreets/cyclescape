@@ -20,9 +20,9 @@ describe 'Photo messages' do
         fill_in 'Caption', with: 'An abstract image'
         click_on 'Add Photo'
       end
-      page.should have_css('.photo img')
+      expect(page).to have_css('.photo img')
       within('figcaption') do
-        page.should have_content('An abstract image')
+        expect(page).to have_content('An abstract image')
       end
     end
   end
@@ -36,24 +36,24 @@ describe 'Photo messages' do
     end
 
     it 'should display the photo' do
-      photo_message.should be_valid
+      expect(photo_message).to be_valid
       # Ugh, inconsistent naming!
-      page.should have_css("#photo_message_#{photo_message.id}")
+      expect(page).to have_css("#photo_message_#{photo_message.id}")
     end
 
     it 'should have a caption' do
       within('figcaption') do
-        page.should have_content(photo_message.caption)
+        expect(page).to have_content(photo_message.caption)
       end
     end
 
     it 'should have the caption as part of the alt tag' do
-      page.should have_xpath("//img/@alt[contains(., '#{photo_message.caption}')]")
+      expect(page).to have_xpath("//img/@alt[contains(., '#{photo_message.caption}')]")
     end
 
     context 'the photo' do
       it 'should link to a larger version' do
-        page.should have_xpath("//a[@rel='#overlay' and @href='#{thread_photo_path(thread, photo_message)}']/img")
+        expect(page).to have_xpath("//a[@rel='#overlay' and @href='#{thread_photo_path(thread, photo_message)}']/img")
       end
 
       it 'should display a larger version when clicked' do
@@ -62,7 +62,7 @@ describe 'Photo messages' do
         # used in the URL generation if found.
         photo_path = PhotoMessage.find(photo_message.id).photo_medium.url
         find(:xpath, "//a[@href='#{thread_photo_path(thread, photo_message)}']").click
-        page.should have_xpath("//img[@src='#{photo_path}']")
+        expect(page).to have_xpath("//img[@src='#{photo_path}']")
       end
     end
   end

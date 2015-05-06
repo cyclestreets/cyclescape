@@ -21,9 +21,9 @@ describe 'Document messages' do
         click_on 'Add Attachment'
       end
 
-      page.should have_content('Attachment added')
-      page.should have_content('An important document')
-      page.should have_link('Download Attachment')
+      expect(page).to have_content('Attachment added')
+      expect(page).to have_content('An important document')
+      expect(page).to have_link('Download Attachment')
     end
   end
 
@@ -36,14 +36,14 @@ describe 'Document messages' do
     end
 
     it 'should show the title and have a link' do
-      page.should have_content(document_message.title)
-      page.should have_link('Download Attachment')
+      expect(page).to have_content(document_message.title)
+      expect(page).to have_link('Download Attachment')
     end
 
     it 'should download the document' do
       click_on 'Download'
-      page.response_headers['Content-Type'].should == document_message.file.mime_type
-      page.response_headers['Content-Disposition'].should include("filename=\"#{document_message.file_name}\"")
+      expect(page.response_headers['Content-Type']).to eq(document_message.file.mime_type)
+      expect(page.response_headers['Content-Disposition']).to include("filename=\"#{document_message.file_name}\"")
     end
   end
 end

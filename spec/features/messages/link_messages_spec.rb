@@ -20,7 +20,7 @@ describe 'Link messages' do
         fill_in 'Title', with: link_message_attrs[:title]
         click_on 'Add Link'
       end
-      page.should have_link(link_message_attrs[:title], href: link_message_attrs[:url])
+      expect(page).to have_link(link_message_attrs[:title], href: link_message_attrs[:url])
     end
 
     it 'should accept a url with whitespace' do
@@ -29,7 +29,7 @@ describe 'Link messages' do
         fill_in 'Title', with: link_message_attrs[:title]
         click_on 'Add Link'
       end
-      page.should have_link(link_message_attrs[:title], href: link_message_attrs[:url])
+      expect(page).to have_link(link_message_attrs[:title], href: link_message_attrs[:url])
     end
   end
 
@@ -42,11 +42,11 @@ describe 'Link messages' do
     end
 
     it 'should display the link title and have correct URL' do
-      page.should have_link(link_message.title, href: link_message.url)
+      expect(page).to have_link(link_message.title, href: link_message.url)
     end
 
     it 'should display the message' do
-      page.should have_content(message.body)
+      expect(page).to have_content(message.body)
     end
   end
 end

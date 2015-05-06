@@ -11,7 +11,7 @@ form.guided {
       position: relative;
       float: left;
       list-style: none;
-      width: 590px;
+      width: 90%;
       padding: 20px 20px 10px 60px;
       background: $pane1;
       color: $lightergrey;
@@ -118,7 +118,7 @@ form.guided {
   fieldset ol li.text textarea {
     display: block;
     padding: 10px;
-    width: 408px;
+    width: 53%;
     font-size: 16px;
     color: $lightblack;
     float: left;
@@ -135,7 +135,7 @@ form.guided {
     }
     textarea {
       height: 200px;
-      width: 568px;
+      width: 80%;
       margin: 10px 0;
     }
   }
@@ -174,7 +174,6 @@ form.guided {
     width: auto;
   }
 }
-
 
 .search-box {
   display:inline-block;

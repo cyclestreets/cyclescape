@@ -5,6 +5,7 @@
   tags: "Tags"
   anon: "Anon"
   sign_in: "sign in"  # Used for links
+  confirm: "Are you sure?"
   admin:
     groups:
       index:
@@ -89,18 +90,58 @@
   application:
     account_disabled: "Your account has been disabled by an administrator"
     permission_denied: "You are not authorised to access that page."
+  planning_applications:
+    hide:
+      success: Planning application hidden from overview
+      failure: Could not hide that application
+    index:
+      planning_applications: "Planning applications"
+      pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
+      explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
+    planning_application: &planning_applications_search
+      page_title: "Search Results for '%{q}'"
+      convert_to_issue_html: "Convert to an Issue &hellip;"
+      planning_applications: "Planning applications"
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: "No results found"
+      your_planning_applications: "Your local planning applications"
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden for everyone
+      part_hidden: Part Hidden
+    show:
+      address_label: "Address:"
+      council_label: "Council:"
+      data_source: "Data source"
+      data_from_html: "Planning application data is sourced from %{link}"
+      location: "Location"
+      official_application: "View on council website"
+      official_application_label: "Official application:"
+      planit: "PlanIt"
+      related_issue: "Related issue"
+      related_issue_guidance: "This planning application has been converted to an issue:"
+      uid_label: "Application reference:"
+      view_official_application: "View official application"
+      start_date: 'Date application was made:'
+      hidden: Hidden (will not appear in anyones dashboard)
+      <<: *planning_applications_search
+    search:
+      <<: *planning_applications_search
   dashboards:
     show:
       add_a_new_issue: "add a new issue"
       add_another_location: "add another location"
       add_some_locations: "add some locations"
       areas_you_are_watching: "areas you are watching"
+      converted_to_issue: "Converted to Issue:"
       days_away:
         zero: "Today!"
         one: "Tomorrow!"
         other: "%{count} days away"
       deadlines: "Deadlines and dates"
       deadline_thread_updated: "thread updated %{time_ago} ago"
+      issues_lower: "issues"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
       new_group_thread: "Start a new group thread"
@@ -120,9 +161,18 @@
         through the %{threads_link} and see if there's anything that you think is
         important, or maybe you could %{add_issue_link} instead?
       no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
+      location:
+        one: location
+        other: locations
       no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
-      no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby issues here."
+      no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby %{things} here."
+      no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
       no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
+      <<: *planning_applications_search
+      planning_applications_in_your_area: "Planning applications in your %{location}"
+      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
+      planning_applications_lower: "planning applications"
+      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
       recent_threads: "recent threads"
       subscribed_threads: "Subscribed Threads"
       thread_latest_activity: "%{time_ago} ago"
@@ -138,6 +188,7 @@
         document_message_html: "%{creator_link} posted an attachment"
         photo_message_html: "%{creator_link} posted a photo"
         link_message_html: "%{creator_link} posted a link"
+        street_view_message_html: "%{creator_link} posted a street view"
         library_item_message_html: "%{creator_link} added a library item"
     search:
       no_results_found: "No results found for '%{query}'"
@@ -368,6 +419,7 @@
   issue:
     message_threads:
       new:
+        new_hint: "This is where a discussion about the issue is started. \n There could be many different discussion threads that one issue creates \n e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
         title: "New Thread on %{issue}"
         everyone: "Everyone"
     photos:
@@ -479,9 +531,11 @@
       supportlogos_introduction: "Cyclescape has been made possible thanks to generous support from:"
       funding_from: "Funding from %{name}"
       funding_from_and_created_by: "Funding from and created by %{name}"
-      planning_application_data: "Planning application data from Openly Local"
+      planning_application_data: "Planning application data from PlanIt"
       cyclescape_blog: "Cyclescape blog"
       user_guide: "User guide"
+      facebook_page: "CycleStreets Facebook page"
+      twitter_page: "CycleStreets Twitter account"
     group_selector:
       group_selector: "Group"
       no_group: "No Group"
@@ -680,6 +734,11 @@
       show:
         photo_alt: "A photo entitled %{caption}."
         view_original_image: "View the original image"
+    street_views:
+      create:
+        failure: "Street View could not be added"
+        success: "Street View added"
+
   message_library:
     documents:
       new:
@@ -719,9 +778,17 @@
       photo_message: "Photo"
       sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
+      street_view_message: Street View
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
+  planning_application:
+    issues:
+      new:
+        already: "There's already an issue for that planning application"
+        application_reference: "Application reference"
+        title: "New issue from Planning Application"
+        title_prefix: "Planning application"
   shared:
     edit_map:
       area: "area"
@@ -792,7 +859,7 @@
       added: "%{name} added a deadline/date to the thread"
     new_document_message:
       added: "%{name} added an attachment to the thread"
-      view_the_document: "You can view the attachment at the following url:"
+      view_the_document: "You can view the attachment at:"
     new_library_item_message:
       added: "%{name} added an item from the library to the thread."
     new_link_message:
@@ -801,7 +868,11 @@
       added: "%{name} added a message to the thread."
     new_photo_message:
       added: "%{name} added a photo to the thread."
-      view_the_photo: "You can view the photo at the following url:"
+      view_the_photo: "You can view the photo at:"
+    new_street_view_message:
+      added: "%{name} added a street view to the thread."
+      view_the_street_view: "You can see the Street View at:"
+
     footer:
       thread: "Cyclescape discussion thread"
       unsubscribe: "You can stop following this thread by visiting the link above and clicking 'unfollow this thread'."

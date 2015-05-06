@@ -18,14 +18,14 @@ describe 'Thread subscriptions' do
 
       it 'should subscribe the user to the thread' do
         subscribe_button.click
-        page.should have_content('You are now subscribed to this thread')
-        current_user.thread_subscriptions.count.should == 1
-        current_user.thread_subscriptions.first.thread.should == thread
+        expect(page).to have_content('You are now subscribed to this thread')
+        expect(current_user.thread_subscriptions.count).to eq(1)
+        expect(current_user.thread_subscriptions.first.thread).to eq(thread)
       end
 
       it 'should state I am subscribed' do
         subscribe_button.click
-        page.should have_content(I18n.t('.message_threads.subscribe_panel.subscribed'))
+        expect(page).to have_content(I18n.t('.message_threads.subscribe_panel.subscribed'))
       end
 
       it 'should not send me an email when I post' do
@@ -35,38 +35,38 @@ describe 'Thread subscriptions' do
           fill_in 'Message', with: "All interesting stuff, but don't email me", match: :first
           click_on 'Post Message'
         end
-        all_emails.count.should == email_count
+        expect(all_emails.count).to eq(email_count)
       end
 
       context 'automatically' do
         it 'should subscribe me when I post a message' do
-          current_user.subscribed_to_thread?(thread).should be_false
+          expect(current_user.subscribed_to_thread?(thread)).to be_falsey
           within('.new-message') do
             fill_in 'Message', with: "Given I'm interested enough to post, I should be subscribed", match: :first
             click_on 'Post Message'
           end
-          current_user.subscribed_to_thread?(thread).should be_true
+          expect(current_user.subscribed_to_thread?(thread)).to be_truthy
         end
 
         # check some of the other message types too.
         it 'should subscribe me when I post a deadline' do
-          current_user.subscribed_to_thread?(thread).should be_false
+          expect(current_user.subscribed_to_thread?(thread)).to be_falsey
           within('#new-deadline-message') do
             fill_in 'Deadline', with: Date.current.to_s
             fill_in 'Title', with: 'Submission deadline'
             click_on I18n.t('message.deadlines.new.submit')
           end
-          current_user.subscribed_to_thread?(thread).should be_true
+          expect(current_user.subscribed_to_thread?(thread)).to be_truthy
         end
 
         it 'should subscribe me when I post a photo' do
-          current_user.subscribed_to_thread?(thread).should be_false
+          expect(current_user.subscribed_to_thread?(thread)).to be_falsey
           within('#new-photo-message') do
             attach_file('Photo', abstract_image_path)
             fill_in 'Caption', with: 'An abstract image'
             click_on 'Add Photo'
           end
-          current_user.subscribed_to_thread?(thread).should be_true
+          expect(current_user.subscribed_to_thread?(thread)).to be_truthy
         end
       end
     end
@@ -79,9 +79,9 @@ describe 'Thread subscriptions' do
 
       it 'should subscribe the user to the thread' do
         subscribe_button.click
-        page.should have_content('You are now subscribed to this thread')
-        current_user.thread_subscriptions.count.should == 1
-        current_user.thread_subscriptions.first.thread.should == thread
+        expect(page).to have_content('You are now subscribed to this thread')
+        expect(current_user.thread_subscriptions.count).to eq(1)
+        expect(current_user.thread_subscriptions.first.thread).to eq(thread)
       end
 
       it 'should send future messages on the thread by email' do
@@ -91,10 +91,10 @@ describe 'Thread subscriptions' do
           click_on 'Post Message'
         end
         open_email(current_user.email, with_subject: /^Re/)
-        current_email.should have_subject("Re: [Cyclescape] #{thread.title}")
-        current_email.should have_body_text(/Notification test/)
-        current_email.should be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
-        current_email.should have_reply_to("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
+        expect(current_email).to have_subject("Re: [Cyclescape] #{thread.title}")
+        expect(current_email).to have_body_text(/Notification test/)
+        expect(current_email).to be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
+        expect(current_email).to have_reply_to("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
       end
     end
 
@@ -106,10 +106,10 @@ describe 'Thread subscriptions' do
       end
 
       it 'should unsubscribe me' do
-        current_user.should be_subscribed_to_thread(thread)
+        expect(current_user).to be_subscribed_to_thread(thread)
         unsubscribe_button.click
-        current_user.should_not be_subscribed_to_thread(thread)
-        page.should have_content('You have unsubscribed from this thread')
+        expect(current_user).not_to be_subscribed_to_thread(thread)
+        expect(page).to have_content('You have unsubscribed from this thread')
       end
 
       it 'should not send me any more messages' do
@@ -119,15 +119,15 @@ describe 'Thread subscriptions' do
           fill_in 'Message', with: 'Notification test', match: :first
           click_on 'Post Message'
         end
-        all_emails.count.should == email_count
+        expect(all_emails.count).to eq(email_count)
       end
 
       it 'should resubscribe me' do
-        current_user.should be_subscribed_to_thread(thread)
+        expect(current_user).to be_subscribed_to_thread(thread)
         unsubscribe_button.click
-        current_user.should_not be_subscribed_to_thread(thread)
+        expect(current_user).not_to be_subscribed_to_thread(thread)
         subscribe_button.click
-        current_user.should be_subscribed_to_thread(thread)
+        expect(current_user).to be_subscribed_to_thread(thread)
       end
     end
   end
@@ -150,19 +150,19 @@ describe 'Thread subscriptions' do
 
       # First, prove the positive case. Use this as a template.
       it 'should let you subscribe to a public thread' do
-        thread.subscribers.should_not include(current_user)
+        expect(thread.subscribers).not_to include(current_user)
         attempt_subscription(thread)
-        thread.subscribers.should include(current_user)
+        expect(thread.subscribers).to include(current_user)
       end
 
       it 'should not let a site member subscribe to a private thread' do
         attempt_subscription(private_thread)
-        private_thread.subscribers.should_not include(current_user)
+        expect(private_thread.subscribers).not_to include(current_user)
       end
 
       it 'should not let a site member subscribe to a committee thread' do
         attempt_subscription(committee_thread)
-        committee_thread.subscribers.should_not include(current_user)
+        expect(committee_thread.subscribers).not_to include(current_user)
       end
     end
 
@@ -174,12 +174,12 @@ describe 'Thread subscriptions' do
 
       it 'should let a group member subscribe to a private thread' do
         attempt_subscription(private_thread)
-        private_thread.subscribers.should include(current_user)
+        expect(private_thread.subscribers).to include(current_user)
       end
 
       it 'should not let a group member subscribe to a committee thread' do
         attempt_subscription(committee_thread)
-        committee_thread.subscribers.should_not include(current_user)
+        expect(committee_thread.subscribers).not_to include(current_user)
       end
     end
   end

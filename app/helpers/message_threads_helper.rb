@@ -4,7 +4,8 @@ module MessageThreadsHelper
     'LinkMessage' => 'links',
     'DeadlineMessage' => 'deadlines',
     'LibraryItemMessage' => 'library_items',
-    'DocumentMessage' => 'documents'
+    'DocumentMessage' => 'documents',
+    'StreetViewMessage' => 'street_views',
   }
 
   MESSAGE_LIBRARY_MAP = {
@@ -13,7 +14,8 @@ module MessageThreadsHelper
     'DeadlineMessage' => nil,
     'LibraryItemMessage' => nil,
     'DocumentMessage' => 'document',
-    'Message' => 'note'
+    'Message' => 'note',
+    'StreetViewMessage' => nil,
   }
 
   def thread_type(thread)

@@ -14,7 +14,8 @@ describe Message::LibraryItemsController do
       post :create, library_item_message: { library_item_id: library_item.id },
                     message: { body: 'this is a useful item' },
                     thread_id: thread.id
-      response.status.should be(302)
+      expect(response.status).to be(302)
+      expect(LibraryItemMessage.last.library_item_id).to eq(library_item.id)
     end
   end
 end

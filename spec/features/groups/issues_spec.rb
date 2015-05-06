@@ -19,19 +19,19 @@ describe 'Issues in a group subdomain' do
     it "should show issues in the group's area" do
       visit issues_path
       issues.each do |issue|
-        page.should have_content(issue.title)
+        expect(page).to have_content(issue.title)
       end
     end
 
     it "should not show issues outside the group's area" do
       outside_issue
       visit issues_path
-      page.should have_no_content(outside_issue.title)
+      expect(page).to have_no_content(outside_issue.title)
     end
 
     it 'should set the page title' do
       visit issues_path
-      page.should have_title(I18n.t('group.issues.index.title', group_name: current_group.name))
+      expect(page).to have_title(I18n.t('group.issues.index.title', group_name: current_group.name))
     end
 
     context 'with search' do
@@ -40,25 +40,25 @@ describe 'Issues in a group subdomain' do
 
       it "should return issues in the group's area" do
         # FIXME: group restrictions aren't yet implemented for global search
-        return pending
+        return skip
         visit issues_path
         within('.main-search-box') do
           fill_in search_field, with: issues.first.title
           click_on search_button
         end
-        page.should have_link(issues.first.title, href: issue_path(issues.first))
-        page.should have_no_content(outside_issue.title)
+        expect(page).to have_link(issues.first.title, href: issue_path(issues.first))
+        expect(page).to have_no_content(outside_issue.title)
       end
 
       it "should not return issues outside the group's area" do
         # FIXME: this test needs fixing, still shows results when none were expected
-        return pending
+        return skip
         visit issues_path
         within('.main-search-box') do
           fill_in search_field, with: outside_issue.title
           click_on search_button
         end
-        page.should have_content('No issues found')
+        expect(page).to have_content('No issues found')
       end
     end
   end
@@ -69,7 +69,7 @@ describe 'Issues in a group subdomain' do
         visit all_geometries_issues_path(format: :json)
 
         issues.each do |issue|
-          page.should have_content(issue.title)
+          expect(page).to have_content(issue.title)
         end
       end
 
@@ -77,7 +77,7 @@ describe 'Issues in a group subdomain' do
         outside_issue
         visit all_geometries_issues_path(format: :json)
 
-        page.should have_no_content(outside_issue.title)
+        expect(page).to have_no_content(outside_issue.title)
       end
     end
   end
@@ -90,11 +90,11 @@ describe 'Issues in a group subdomain' do
     it 'should let you edit the issue' do
       visit issue_path(issue)
       click_on edit_text
-      page.should have_content('Edit Issue')
+      expect(page).to have_content('Edit Issue')
       fill_in 'Title', with: 'Something New'
       click_on 'Save'
-      current_path.should == issue_path(issue)
-      page.should have_content('Something New')
+      expect(current_path).to eq(issue_path(issue))
+      expect(page).to have_content('Something New')
     end
   end
 end

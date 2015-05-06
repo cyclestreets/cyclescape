@@ -179,6 +179,12 @@ class MessageThread < ActiveRecord::Base
     messages.empty? ? created_by : messages.last.created_by
   end
 
+  def default_centre
+    location = Issue.unscoped.find(issue_id) if issue_id
+    location = location || group.try(:profile) || created_by.locations.first
+    location.try(:centre) || Geo::NOWHERE_IN_PARTICULAR
+  end
+
   def upcoming_deadline_messages
     messages.except(:order).joins('JOIN deadline_messages dm ON messages.component_id = dm.id').
       where("messages.component_type = 'DeadlineMessage'").
