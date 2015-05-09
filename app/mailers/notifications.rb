@@ -23,6 +23,13 @@ class Notifications < ActionMailer::Base
          subject: t('.mailers.notifications.group_request_confirmed.subject', group_name: @group.name))
   end
 
+  def group_request_rejected(request)
+    @request = request
+    user = request.user
+    mail(to: user.email,
+         subject: t('.mailers.notifications.group_request_rejected.subject', group_request_name: @request.name))
+  end
+
   def new_group_membership_request(request)
     @user = request.user
     @group = request.group

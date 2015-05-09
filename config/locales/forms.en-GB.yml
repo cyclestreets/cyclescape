@@ -112,6 +112,8 @@
         create: "Add Attachment"
       group_membership:
         create: "Add member"
+      group_request:
+        update: Reject Group Request
       group_membership_request:
         create: "Request Group Membership"
       issue:

@@ -69,14 +69,28 @@ RSpec.describe GroupRequestsController, :type => :controller do
       end
     end
 
-    describe "POST #reject" do
-      it "assigns the requested group_request as @request" do
-        post :reject, {:id => group_request.to_param}
+    describe "PUT #reject" do
+      before do
+        post :reject, {id: group_request.to_param, group_request: {rejection_message: 'Sorry!'}}
+      end
+
+      it 'sets the flash' do
         expect(flash[:notice]).to be_present
       end
+
+      it 'emails the requester' do
+        mail = ActionMailer::Base.deliveries.last
+
+        expect(mail.subject).to eq(I18n.t('mailers.notifications.group_request_rejected.subject',
+                                          group_request_name: group_request.name))
+
+        expect(mail.to.first).to eq(group_request.user.email)
+        expect(mail.body).to include('Sorry!')
+      end
+
     end
 
-    describe "POST #confirm" do
+    describe "PUT #confirm" do
       before do
         post :confirm, {:id => group_request.to_param}
       end

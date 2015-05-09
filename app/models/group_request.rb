@@ -4,7 +4,7 @@ class GroupRequest < ActiveRecord::Base
   belongs_to :user
   belongs_to :actioned_by, class_name: 'User'
 
-  attr_accessible :email, :name, :short_name, :website, :default_thread_privacy, :message
+  attr_accessible :email, :name, :short_name, :website, :default_thread_privacy, :message, :rejection_message
   validates :user, :name, :short_name, :email, presence: true
   validates :name, :short_name, :email, uniqueness: true
   validate :name_is_not_taken, :short_name_is_not_taken, :email_is_not_taken

@@ -73,9 +73,8 @@ Cyclescape::Application.routes.draw do
   resources :group_requests do
     member do
       get 'review'
-      post 'confirm'
-      post 'reject'
-      post 'cancel'
+      put 'confirm'
+      put 'reject'
     end
   end
 
