@@ -51,6 +51,8 @@ group :assets do
 end
 
 group :development do
+  gem 'letter_opener'
+  gem 'quiet_assets'
   gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
   gem 'rubocop'
