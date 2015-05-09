@@ -172,6 +172,49 @@ describe MessageThread do
     end
   end
 
+  describe 'default_centre' do
+
+    context 'with deleted issue' do
+      subject { FactoryGirl.create(:message_thread, :belongs_to_issue) }
+      let!(:issue_centre) { subject.issue.centre }
+
+      before { subject.issue.destroy }
+
+      it 'still has the issues\' centre' do
+        expect(subject.default_centre).to eq(issue_centre)
+      end
+    end
+
+    context 'with a group with a profile but no issue' do
+      subject { FactoryGirl.create(:message_thread, :belongs_to_group) }
+      before do
+        FactoryGirl.create :group_profile, group: subject.group
+        subject.reload
+      end
+
+      it "still has the groups' centre" do
+        expect(subject.default_centre).to eq(subject.group.profile.centre)
+      end
+    end
+
+    context 'with a group with no profile, no issue, but created by a user with a profile' do
+      let(:user) { FactoryGirl.create :user, :with_location }
+      subject { FactoryGirl.create(:message_thread, created_by: user) }
+
+      it "still has users' centre" do
+        expect(subject.default_centre).to eq(user.locations.first.centre)
+      end
+    end
+
+    context 'with a group with no profile, no issue, and created by a user without a profile' do
+      subject { FactoryGirl.create(:message_thread) }
+
+      it "has a random centre" do
+        expect(subject.default_centre).to_not be_nil
+      end
+    end
+  end
+
   describe '#add_message_from_email!' do
     let(:mail) { FactoryGirl.create(:inbound_mail) }
     let(:thread) { FactoryGirl.create(:message_thread_with_messages) }

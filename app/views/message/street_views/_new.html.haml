@@ -8,9 +8,11 @@
 
     .streetViewPano{id: 'newStreetViewPano'}
     %br/
+    .streetViewPano{id: 'newStreetViewMap'}
+    %br/
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green"}
 
 :javascript
-  var svLatNew = #{@issue.centre.x};
-  var svLongNew = #{@issue.centre.y};
+  var svLatNew = #{@thread.default_centre.x};
+  var svLongNew = #{@thread.default_centre.y};

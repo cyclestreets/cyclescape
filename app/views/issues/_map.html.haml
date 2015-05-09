@@ -1,4 +1,21 @@
+.label
+  = check_box_tag('collisions')
+  Collisions
+
+  = check_box_tag('location', 1, true)
+  Location
+
 - m = display_map(issue, geometry_issue_path(issue, :json)) do |map, page|
   - add_collision_layer(map, page)
   %div#map
+
 != m.to_html
+
+:javascript
+  $('#collisions').change(function() {
+    map.getLayersByName('Collisions')[0].setVisibility(this.checked);
+  });
+
+  $('#location').change(function() {
+    map.getLayersByName('Location')[0].setVisibility(this.checked);
+  });
