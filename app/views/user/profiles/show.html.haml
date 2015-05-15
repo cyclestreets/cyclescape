@@ -1,49 +1,45 @@
 - if @user == current_user
   = render "shared/profile_menu"
 %section.user-profile.content-no-sidebar#content
-  - if @profile_visible
-    %section#user-details
-      %header
-        %p.pre-title= t(".user_profile")
-        %h1= @user.name
-        = @user.picture_standard_image
-      %dl
-        - if permitted_to? :view_full_name, @user
-          %dt= t(".full_name")
-          %dd= @user.full_name
-        %dt= t(".about_label")
-        %dd= @user.about
-        %dt= t(".website_label")
-        %dd= @user.website_link
-        %dt= t(".group_membership_label")
-        %dd= @user.group_memberships
-    %section#groups
-      - unless @add_to_groups.blank?
-        .group-invites
-          %h2= t ".add_to_groups", count: @add_to_groups.count, name: @user.name
-          %p= t ".add_to_groups_explanation", count: @add_to_groups.count
-          %ol
-            - @add_to_groups.each do |g|
-              %li
-                %h3= g.name
-                = semantic_form_for g.memberships.new, url: group_memberships_path(g) do |f|
-                  = f.inputs do
-                    = f.input :user_id, as: :hidden, input_html: { value: @user.id }
-                    = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
-                  = f.actions
-    %section#user-tabs
-      %ul.tabs.with-history
-        %li= link_to t(".recent_threads"), "#recent-threads"
-        %li= link_to t(".reported_issues"), "#reported-issues"
-      .panes
-        #recent-threads.pane
-          %h2= t ".recent_threads"
-          %ul.thread-list
-            = render partial: "message_threads/compact", collection: @involved_threads, as: :thread
-        #reported-issues.pane
-          %h2= t ".reported_issues"
-          %ul.issue-list
-            = render partial: "issues/compact", collection: @reported_issues, as: :issue, locals: {prefix: "reported"}
-  - else
-    %h1= t ".profile_hidden"
-    %p= t ".profile_hidden_guidance"
+  %section#user-details
+    %header
+      %p.pre-title= t(".user_profile")
+      %h1= @user.name
+      = @user.picture_standard_image
+    %dl
+      - if permitted_to? :view_full_name, @user
+        %dt= t(".full_name")
+        %dd= @user.full_name
+      %dt= t(".about_label")
+      %dd= @user.about
+      %dt= t(".website_label")
+      %dd= @user.website_link
+      %dt= t(".group_membership_label")
+      %dd= @user.group_memberships
+  %section#groups
+    - unless @add_to_groups.blank?
+      .group-invites
+        %h2= t ".add_to_groups", count: @add_to_groups.count, name: @user.name
+        %p= t ".add_to_groups_explanation", count: @add_to_groups.count
+        %ol
+          - @add_to_groups.each do |g|
+            %li
+              %h3= g.name
+              = semantic_form_for g.memberships.new, url: group_memberships_path(g) do |f|
+                = f.inputs do
+                  = f.input :user_id, as: :hidden, input_html: { value: @user.id }
+                  = f.input :role, :as => :select, :collection => f.object.class.allowed_roles_map
+                = f.actions
+  %section#user-tabs
+    %ul.tabs.with-history
+      %li= link_to t(".recent_threads"), "#recent-threads"
+      %li= link_to t(".reported_issues"), "#reported-issues"
+    .panes
+      #recent-threads.pane
+        %h2= t ".recent_threads"
+        %ul.thread-list
+          = render partial: "message_threads/compact", collection: @involved_threads, as: :thread
+      #reported-issues.pane
+        %h2= t ".reported_issues"
+        %ul.issue-list
+          = render partial: "issues/compact", collection: @reported_issues, as: :issue, locals: {prefix: "reported"}

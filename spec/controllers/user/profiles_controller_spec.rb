@@ -8,7 +8,7 @@ describe User::ProfilesController, type: :controller do
       context 'as a guest' do
         it 'should be visible' do
           get :show, user_id: user.id
-          expect(assigns(:profile_visible)).to be_truthy
+          expect(response).to be_success
         end
       end
     end
@@ -20,8 +20,7 @@ describe User::ProfilesController, type: :controller do
 
       context 'as a guest' do
         it 'should be hidden' do
-          get :show, user_id: user.id
-          expect(assigns(:profile_visible)).to be_falsey
+          expect {get :show, user_id: user.id}.to raise_error(ActionController::RoutingError)
         end
       end
 
@@ -36,7 +35,7 @@ describe User::ProfilesController, type: :controller do
         it 'should be visible' do
           current_user.prefs.update_column(:profile_visibility, 'group')
           get :show, user_id: current_user.id # NB current_user
-          expect(assigns(:profile_visible)).to be_truthy
+          expect(response).to be_success
         end
       end
 
@@ -48,8 +47,7 @@ describe User::ProfilesController, type: :controller do
         end
 
         it 'should be hidden' do
-          get :show, user_id: user.id
-          expect(assigns(:profile_visible)).to be_falsey
+          expect {get :show, user_id: user.id}.to raise_error(ActionController::RoutingError)
         end
       end
 
@@ -64,7 +62,7 @@ describe User::ProfilesController, type: :controller do
 
         it 'should be visible' do
           get :show, user_id: user.id
-          expect(assigns(:profile_visible)).to be_truthy
+          expect(response).to be_success
         end
       end
 
@@ -77,7 +75,7 @@ describe User::ProfilesController, type: :controller do
 
         it 'should be visible regardless of groups' do
           get :show, user_id: user.id
-          expect(assigns(:profile_visible)).to be_truthy
+          expect(response).to be_success
         end
       end
     end

@@ -4,6 +4,8 @@ class User::ProfilesController < ApplicationController
   filter_access_to :all
 
   def show
+    raise ActionController::RoutingError.new('Not Found') unless permitted_to? :view_profile, @user
+
     @user = UserDecorator.decorate(@user)
 
     involved_threads = ThreadList.public_recent_involved_with(@user, 10).includes(:group)
@@ -14,8 +16,6 @@ class User::ProfilesController < ApplicationController
 
     # Groups that the current user could invite this particular user to
     @add_to_groups = current_user ? (current_user.memberships.committee.collect { |m| m.group } - @user.groups) : nil
-
-    @profile_visible = permitted_to? :view_profile, @user
   end
 
   def edit
