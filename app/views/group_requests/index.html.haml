@@ -10,7 +10,6 @@
         %th= t ".user"
         %th= t ".name"
         %th= t ".group_email"
-        %th= t ".message"
         %th= t ".requested_at"
         %th= t ".status"
         %th{colspan: 3}= t ".actions"
@@ -20,7 +19,6 @@
             %td= link_to_profile(r.user)
             %td= link_to r.name, r
             %td= auto_link r.email
-            %td= link_to t(".view_message"), review_group_request_path(r) unless r.message.blank?
             %td
               = time_tag_with_title(r.created_at) do
                 - t ".created_at", time_ago: time_ago_in_words(r.created_at)

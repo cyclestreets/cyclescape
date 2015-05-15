@@ -3,10 +3,9 @@ require 'spec_helper'
 describe GroupRequest do
   let(:user) { FactoryGirl.create(:user) }
   let(:group) { FactoryGirl.create(:group) }
+  let(:boss) { FactoryGirl.create(:user) }
 
   describe 'newly created' do
-    subject { described_class.new }
-
     it 'must have a user' do
       expect(subject).to have(1).error_on(:user)
       subject.user = user
@@ -20,6 +19,10 @@ describe GroupRequest do
     it 'has an optional message' do
       expect(subject).to have(0).error_on(:message)
     end
+
+    it { is_expected.to allow_value('public').for(:default_thread_privacy) }
+    it { is_expected.to allow_value('group').for(:default_thread_privacy) }
+    it { is_expected.not_to allow_value('other').for(:default_thread_privacy) }
   end
 
   describe 'must not conflict with existing groups' do
@@ -39,11 +42,16 @@ describe GroupRequest do
       subject.email = group.email
       expect(subject).to have(1).error_on(:email)
     end
+
+    it 'except when confirmed' do
+      subject.actioned_by = boss
+      subject.confirm!
+      expect(subject).to be_valid
+    end
   end
 
   context 'pending request' do
     subject { FactoryGirl.create(:group_request) }
-    let(:boss) { FactoryGirl.create(:user) }
 
     it 'can be cancelled' do
       subject.cancel

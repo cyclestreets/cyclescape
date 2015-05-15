@@ -7,8 +7,9 @@ class GroupRequest < ActiveRecord::Base
   attr_accessible :email, :name, :short_name, :website, :default_thread_privacy, :message, :rejection_message
   validates :user, :name, :short_name, :email, presence: true
   validates :name, :short_name, :email, uniqueness: true
-  validate :name_is_not_taken, :short_name_is_not_taken, :email_is_not_taken
-  validate :short_name, format: { with: /\A[a-z0-9]+\z/ }
+  validate :name_is_not_taken, :short_name_is_not_taken, :email_is_not_taken, unless: :confirmed?
+  validates :short_name, subdomain: true
+  validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }
 
   state_machine :status, initial: :pending do
     after_transition any => :confirmed do |request, transition|
@@ -36,10 +37,14 @@ class GroupRequest < ActiveRecord::Base
 
   def create_group
     group = Group.create attributes.slice('name', 'short_name', 'website', 'email', 'default_thread_privacy')
-    membership = group.memberships.new
-    membership.user = user
-    membership.role = 'committee'
-    membership.save
+    if group.valid?
+      membership = group.memberships.new
+      membership.user = user
+      membership.role = 'committee'
+      membership.save
+    else
+      false
+    end
   end
 
   private
