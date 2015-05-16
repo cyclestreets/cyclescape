@@ -296,10 +296,10 @@ describe User do
 
   it 'should have public scope' do
     private_user = FactoryGirl.create(:user)
-    private_user.prefs.update_attributes profile_visibility: 'group'
+    private_user.profile.update_attributes visibility: 'group'
 
     public_user = FactoryGirl.create(:user)
-    public_user.prefs.update_attributes profile_visibility: 'public'
+    public_user.profile.update_attributes visibility: 'public'
 
     public_users = described_class.public
     expect(public_users).to include(public_user)
@@ -318,16 +318,16 @@ describe User do
     it 'should be check if other users are viewable' do
       private_user_in_same_group = FactoryGirl.create(:user, full_name: 'private_user_in_same_group')
       FactoryGirl.create(:group_membership, user: private_user_in_same_group, group: group)
-      private_user_in_same_group.prefs.update_attributes profile_visibility: 'group'
+      private_user_in_same_group.profile.update_attributes visibility: 'group'
 
       private_user_in_different_group = FactoryGirl.create(:user, full_name: 'private_user_in_different_group')
       FactoryGirl.create(:group_membership, user: private_user_in_different_group, group: other_group)
-      private_user_in_different_group.prefs.update_attributes profile_visibility: 'group'
+      private_user_in_different_group.profile.update_attributes visibility: 'group'
 
       public_user = FactoryGirl.create(:user, full_name: 'public user')
-      public_user.prefs.update_attributes profile_visibility: 'public'
+      public_user.profile.update_attributes visibility: 'public'
 
-      expect(subject.can_view(User.scoped)).to match_array([subject, private_user_in_same_group, public_user, User.find_by_full_name('Root')])
+      expect(subject.can_view(User.scoped)).to match_array([subject, private_user_in_same_group, public_user])
     end
   end
 

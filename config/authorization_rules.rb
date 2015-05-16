@@ -113,14 +113,14 @@ authorization do
     end
     has_permission_on :users, to: :view_profile do
       if_permitted_to :view_full_name
-      if_attribute prefs: { profile_visibility: 'public' }
+      if_attribute profile: { visibility: 'public' }
     end
   end
 
   role :guest do
     has_permission_on :users do
       to :view_profile
-      if_attribute prefs: { profile_visibility: 'public' }
+      if_attribute profile: { visibility: 'public' }
     end
     has_permission_on :dashboards, to: [:search]
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,

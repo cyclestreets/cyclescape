@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe User::ProfilesController, type: :controller do
   context 'profile visibility' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user_profile) { FactoryGirl.create(:user_profile) }
+    let(:user) { user_profile.user }
 
     context 'with public profile' do
       context 'as a guest' do
@@ -15,7 +16,7 @@ describe User::ProfilesController, type: :controller do
 
     context 'with group-only profile' do
       before do
-        user.prefs.update_column(:profile_visibility, 'group')
+        user.profile.update_column(:visibility, 'group')
       end
 
       context 'as a guest' do
@@ -28,12 +29,11 @@ describe User::ProfilesController, type: :controller do
         include_context 'signed in as a site user'
 
         before do
-          current_user.prefs.update_column(:profile_visibility, 'group')
-          sign_in current_user
+          FactoryGirl.create :user_profile, user: current_user, visibility: 'group'
+          sign_in current_user.reload
         end
 
         it 'should be visible' do
-          current_user.prefs.update_column(:profile_visibility, 'group')
           get :show, user_id: current_user.id # NB current_user
           expect(response).to be_success
         end

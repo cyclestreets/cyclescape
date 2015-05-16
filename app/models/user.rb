@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
   before_destroy :remove_thread_subscriptions
 
   scope :active, where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL')
-  scope :public, joins(:prefs).where(user_prefs: {profile_visibility: 'public'})
+  scope :public, joins(:profile).where(user_profiles: {visibility: 'public'})
 
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true

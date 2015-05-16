@@ -943,11 +943,7 @@
         none: "No notifications"
         notify: "Notify me of new issues and when new threads are started"
         subscribe: "Notify me of new issues and automatically follow all new threads"
-        profile: "Profile visibility"
-        profile_guidance_html: "You can choose to restrict who gets to view %{profile_link}."
         your_profile: "your profile"
-        profile_public: "Everyone"
-        profile_group: "Only members in my groups"
       update:
         success: "Preferences saved"
         failure: "Your preferences could not be saved"
@@ -955,8 +951,11 @@
       create:
         success: "Profile Created"
       edit:
-        title: "Edit My Profile"
-        my_current_thumbnail_title: "My current profile picture"
+        title: Edit My Profile
+        my_current_thumbnail_title: My current profile picture
+        profile_public: Everyone
+        profile_group: Only members of my groups
+        visibility_guidance_html: You can choose to restrict who gets to view your profile.
       show:
         about_label: "About:"
         add_to_groups:
