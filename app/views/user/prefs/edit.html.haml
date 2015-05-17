@@ -1,7 +1,7 @@
 = render "shared/profile_menu"
 .edit-user-prefs
   %h1= t ".title"
-  %p= link_to t(".back"), user_profile_path(@user)
+  %p= link_to t(".back"), current_user_profile_path
   = semantic_form_for @prefs, url: user_prefs_path(@user) do |f|
     = f.inputs do
       %h2= t ".involvement"
@@ -16,8 +16,5 @@
       %p= t ".notification_types_guidance"
       = f.input :enable_email
       %h2= t ".profile"
-      %p= t ".profile_guidance_html", profile_link: link_to(t(".your_profile"), user_profile_path(current_user))
-      = f.input :profile_visibility,
-          as: :radio,
-          collection: UserPref::PROFILE_OPTIONS.map {|n| [t(".profile_#{n}"), n] }
+      %p= t ".profile_guidance_html", profile_link: link_to(t(".your_profile"), current_user_profile_path)
     = f.actions

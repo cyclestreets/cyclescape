@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe User::ProfilesController, type: :controller do
+  describe 'routing' do
+    it { is_expected.to route(:get, '/profile').to(action: :show) }
+    it { is_expected.to route(:get, '/profile/edit').to(action: :edit) }
+    it { is_expected.to route(:get, '/users/1/profile').to(action: :show, user_id: 1) }
+    it { is_expected.to route(:get, '/users/1/profile/edit').to(action: :edit, user_id: '1') }
+    it { is_expected.to route(:put, '/users/1/profile').to(action: :update, user_id: '1') }
+  end
+
   context 'profile visibility' do
     let(:user) { FactoryGirl.create(:user) }
 
