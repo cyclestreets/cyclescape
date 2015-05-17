@@ -1,10 +1,10 @@
 = semantic_form_for @request, html: {class: 'guided'} do |f|
   = f.inputs do
     = f.input :name
-    = f.input :short_name
-    = f.input :website
+    = f.input :short_name, input_html: { style: "width:160px;" }
+    = f.input :website, placeholder: 'http:// ...'
     = f.input :email
-    = f.input :message
-    = f.input :default_thread_privacy, as: :select, collection: MessageThread::non_committee_privacies_map, include_blank: false
+    = f.input :message, input_html: { rows: "2", style: 'height:auto;' }
+    = f.input :default_thread_privacy, as: :select, collection: MessageThread::non_committee_privacies_map, selected: ''
   = f.actions do
     = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}

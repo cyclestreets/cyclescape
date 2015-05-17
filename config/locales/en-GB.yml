@@ -921,8 +921,8 @@
     low: "Marginal Interest"
     very_low: "Not of Interest"
   thread_privacy_options:
-    public: "Public"
-    group: "Group"
+    public: Public (everyone)
+    group: Group (members only)
     committee: "Committee"
   user_roles:
     member: "Member"
