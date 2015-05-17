@@ -1,10 +1,18 @@
 = semantic_form_for @request, html: {class: 'guided'} do |f|
   = f.inputs do
     = f.input :name
-    = f.input :short_name, input_html: { style: "width:160px;" }
+    = f.input :short_name, input_html: { style: "width:110px;" }
     = f.input :website, placeholder: 'http:// ...'
     = f.input :email
     = f.input :message, input_html: { rows: "2", style: 'height:auto;' }
     = f.input :default_thread_privacy, as: :select, collection: MessageThread::non_committee_privacies_map, selected: ''
   = f.actions do
     = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
+
+:coffeescript
+  shortName = $('#group_request_short_name')
+  shortName.after $('<input id="group_request_webname" readonly disabled style="width:230px">')
+  $('#group_request_webname').val( '.cyclesctreets.org')
+
+  shortName.change () ->
+    $('#group_request_webname').val(@.value + '.cyclesctreets.org')
