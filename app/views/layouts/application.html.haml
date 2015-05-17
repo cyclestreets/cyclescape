@@ -25,7 +25,7 @@
           %li=link_to t(".user_guide"), "http://blog.cyclescape.org/guide/"
           %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
           - if current_user
-            %li.name= link_to_profile current_user
+            %li.name= link_to current_user.name, current_user_profile_path
             %li.sign-out= link_to t(".sign_out"), destroy_user_session_path, method: "delete"
           - else
             - if permitted_to? :create, :devise_registrations
