@@ -593,6 +593,12 @@ section#user-locations {
     float:right;
   }
 }
+.pull-left {
+  float: left !important;
+}
+.pull-right {
+  float: right !important;
+}
 #issue-list-tabs,
 #group-list-tabs {
   clear:both;
