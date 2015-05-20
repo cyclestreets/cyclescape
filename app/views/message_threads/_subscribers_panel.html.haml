@@ -6,6 +6,7 @@
       %dd.title= link_to_profile group
   %ul.thread-metadata-listings
     - subscribers.each do |sub|
+      - next if sub.prefs.profile_visibility == 'group'
       %li
         = link_to user_profile_path(sub) do
           %span.thumb

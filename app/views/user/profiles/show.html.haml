@@ -8,6 +8,9 @@
         %h1= @user.name
         = @user.picture_standard_image
       %dl
+        - if permitted_to? :view_full_name, @user
+          %dt= t(".full_name")
+          %dd= @user.full_name
         %dt= t(".about_label")
         %dd= @user.about
         %dt= t(".website_label")

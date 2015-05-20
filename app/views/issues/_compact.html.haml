@@ -9,7 +9,10 @@
       %h3= link_to issue.title, issue
       .meta
         %p
-          = issue.creator_link
+          - if permitted_to? :view_profile, issue.created_by
+            = issue.creator_link
+          - else
+            = issue.created_by.display_name_or_anon
           = issue.creation_time
           \//
           = t(".thread_count", count: issue.thread_count)

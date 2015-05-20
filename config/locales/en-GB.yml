@@ -3,6 +3,7 @@
 "en-GB":
   application_name: "Cyclescape"
   tags: "Tags"
+  anon: "Anon"
   sign_in: "sign in"  # Used for links
   confirm: "Are you sure?"
   admin:
@@ -976,6 +977,7 @@
         reported_issues: "Reported Issues"
         user_profile: "User Profile"
         website_label: "Web site:"
+        full_name: Full Name
       update:
         success: "Profile Updated"
 

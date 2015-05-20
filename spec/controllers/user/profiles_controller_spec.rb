@@ -63,7 +63,6 @@ describe User::ProfilesController, type: :controller do
         end
 
         it 'should be visible' do
-          #binding.pry
           get :show, user_id: user.id
           expect(assigns(:profile_visible)).to be_truthy
         end
