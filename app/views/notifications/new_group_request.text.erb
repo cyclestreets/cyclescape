@@ -1,0 +1,18 @@
+"<%= raw @request.user.full_name %>" has requested to create the Cyclescape group "<%= raw @request.name %>".
+
+<% if @request.message.blank? %>
+They did not include a message with their request
+<% else %>
+They included a message with their request:
+
+<%= @request.message %>
+<% end %>
+
+You can confirm or reject the group request at:
+
+<%= review_group_request_url(@request) %>
+
+You can review all your group requests at:
+
+<%= group_requests_url %>
+

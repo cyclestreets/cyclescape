@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150502112442) do
+ActiveRecord::Schema.define(:version => 20150509090309) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20150502112442) do
     t.text     "message"
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
+    t.text     "rejection_message"
   end
 
   add_index "group_requests", ["name"], :name => "index_group_requests_on_name", :unique => true

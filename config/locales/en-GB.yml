@@ -32,6 +32,7 @@
         admin_interface_introduction: "This section contains administrative functions, available to system administrators only."
         manage_comments: "Manage comments"
         manage_groups: "Manage groups"
+        manage_group_requests: "Manage group requests"
         manage_issue_categories: "Manage Issue Categories"
         manage_users: "Manage users"
     issue_categories:
@@ -309,6 +310,7 @@
           confirmed: "Confirmed"
           pending: "Pending"
           unconfirmed: "Unconfirmed"
+          rejected: Rejected
       new:
         title: "Request membership of %{group_name}"
         your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
@@ -363,6 +365,7 @@
       new_group_instructions_html: "To create a group on Cyclescape for your local cycling campaign please %{feedback_link} and we'll get back in touch with you soon."
       send_some_feedback: "send some feedback"
       title: "Groups directory"
+      group_request: Request New Group
     compact:
       already_member: "You are already a member of this group"
       no_location: "This group doesn't have a location yet."
@@ -388,6 +391,34 @@
         zero: "Review membership requests"
         one: "View pending membership request"
         other: "View pending membership requests (%{count})"
+  group_requests:
+    create:
+      requested: You have requested a new campaigning group, you will be notifed when it is created
+    new:
+      new_group_request_introduction: We moderate requests for new groups. You will be set as the first Committee member of the group, enabling you to administer it.
+    index: &group_requests_index
+      <<: *group_membership_requests_index
+      name: Requested Name
+      review: Review
+      actions: Actions
+      new_group: Create a New Group
+      group_email: Email
+      destroy: Remove request
+      no_message: There was no message included with this group request.
+    review:
+      <<: *group_requests_index
+      short_name: Short name
+      website: Website
+    confirm:
+      success: Group created
+      failure: Failed to create Group
+    destroy:
+      success: Group Request removed
+      failure: Failed to remove Group Request
+    reject:
+      success: Group request rejected
+      failure: Failed to reject group request
+
   home:
     show:
       introduction_html:
@@ -599,6 +630,8 @@
         subject: "You are now a member of the Cyclescape group for %{group_name}"
       gmr_confirmed:
         subject: "You are now a member of the Cyclescape group for %{group_name}"
+      new_group_request:
+        subject: "[Cyclescape] %{user_name} wants to create %{group_name}"
       new_gmr:
         subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
       new_group_thread:
@@ -609,6 +642,12 @@
         subject: "[Cyclescape] New issue - \"%{issue_title}\""
       new_user_location_issue_thread:
         subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
+      group_request_confirmed:
+        subject: "[Cyclescape] New Group \"%{group_name}}\" has been created"
+      group_request_rejected:
+        subject: "[Cyclescape] New Group \"%{group_request_name}}\" has been not been created"
+      new_group_request:
+        subject: "[Cyclescape] New Group \"%{group_name}\" has been requested by \"%{user_name}\""
 
     thread_mailer:
       common:
@@ -882,8 +921,8 @@
     low: "Marginal Interest"
     very_low: "Not of Interest"
   thread_privacy_options:
-    public: "Public"
-    group: "Group"
+    public: Public (everyone)
+    group: Group (members only)
     committee: "Committee"
   user_roles:
     member: "Member"

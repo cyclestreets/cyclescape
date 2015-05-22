@@ -1,0 +1,39 @@
+%table
+  %thead
+    %th= t ".user"
+    %th= t ".name"
+    %th= t ".short_name"
+    %th= t ".website"
+    %th= t ".email"
+    %th= t ".requested_at"
+    %th= t ".status"
+    %th= t ".actioned_by"
+    %th
+    %th
+  %tr
+    %td= link_to_profile(@request.user)
+    %td= @request.name
+    %td= @request.short_name
+    %td= @request.website
+    %td= @request.email
+    %td
+      = time_tag_with_title(@request.created_at) do
+        - t ".created_at", time_ago: time_ago_in_words(@request.created_at)
+    %td= t ".membership_status.#{@request.status}"
+    %td= link_to t(".by", name: @request.actioned_by.name), user_path(@request.actioned_by) if @request.rejected? || @request.confirmed?
+    %td= link_to t(".confirm"), confirm_group_request_path(@request), method: :put, data: { confirm: t(".are_you_sure") } if @request.pending?
+    %td= link_to t(".destroy"), group_request_path(@request), method: :delete, data: { confirm: t(".are_you_sure") } if @request.confirmed? || @request.rejected?
+
+- if @request.message.blank?
+  %p= t ".no_message"
+- else
+  %p= t ".message"
+  %p= auto_link simple_format @request.message
+
+- if @request.pending?
+  = semantic_form_for @request, url: reject_group_request_path(@request), html: {class: 'guided'} do |f|
+    = f.inputs do
+      = f.input :rejection_message
+    = f.actions do
+      = f.action :submit, label: true, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
+

@@ -21,6 +21,12 @@
       group:
         name: "Name of the group"
         short_name: "Subdomain"
+      group_request:
+        name: Name of the group
+        short_name: Web address
+        website: Your organisation's main website
+        email: Your organisation's main e-mail address
+        default_thread_privacy: Default privacy for discussion threads
       group_membership:
         role: "Membership type"
       group_pref:
@@ -75,6 +81,9 @@
           <<: *hints_user_new
       group:
         short_name: "Must be lower-case alphanumeric; a-z, 0-9"
+      group_request:
+        short_name: Must be lower-case or numbers
+        message: A short message to explain the group (helps us stop spam requests)
       group_membership:
         email: "Please enter their email. If this matches an existing Cyclescape account they will be added to the group immediately. Otherwise an invitation to join Cyclescape will be sent to this address."
         full_name: "Please enter their name; they can change this later."
@@ -108,6 +117,8 @@
         create: "Add Attachment"
       group_membership:
         create: "Add member"
+      group_request:
+        update: Reject Group Request
       group_membership_request:
         create: "Request Group Membership"
       issue:

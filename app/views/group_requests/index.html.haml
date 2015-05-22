@@ -1,0 +1,28 @@
+%section
+  .tasks
+    %p= link_to t(".new_group"), new_admin_group_path
+
+  - if @requests.length == 0
+    %p= t ".no_requests_yet"
+  - else
+    %table
+      %thead
+        %th= t ".user"
+        %th= t ".name"
+        %th= t ".group_email"
+        %th= t ".requested_at"
+        %th= t ".status"
+        %th{colspan: 3}= t ".actions"
+      %tbody
+        - @requests.each do |r|
+          %tr
+            %td= link_to_profile(r.user)
+            %td= link_to r.name, r
+            %td= auto_link r.email
+            %td
+              = time_tag_with_title(r.created_at) do
+                - t ".created_at", time_ago: time_ago_in_words(r.created_at)
+            %td= link_to t(".review"), review_group_request_path(r)
+            %td= link_to t(".confirm"), confirm_group_request_path(r), method: :put, data: { confirm: t(".are_you_sure") } if r.pending?
+            %td= link_to t(".destroy"), group_request_path(r), method: :delete, data: { confirm: t(".are_you_sure") } if r.confirmed? || r.rejected?
+
