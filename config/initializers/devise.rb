@@ -224,4 +224,7 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+
+  # Added during Devise upgrade
+  config.password_length = 6..128
 end

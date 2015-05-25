@@ -24,6 +24,7 @@ en-GB:
       unauthenticated: 'You need to sign in or sign up before continuing.'
       unconfirmed: 'Your account has not yet been confirmed. Please check your e-mail and follow the link you will have been sent.'
       locked: 'Your account is locked.'
+      not_found_in_database: 'Invalid email or password.'
       invalid: 'Invalid email or password.'
       invalid_token: 'Invalid authentication token.'
       timeout: 'Your session expired, please sign in again to continue.'
