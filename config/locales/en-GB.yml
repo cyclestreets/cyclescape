@@ -3,6 +3,7 @@
 "en-GB":
   application_name: "Cyclescape"
   tags: "Tags"
+  anon: "Anon"
   sign_in: "sign in"  # Used for links
   confirm: "Are you sure?"
   admin:
@@ -855,7 +856,7 @@
       submit: "Go"
     profile_menu:
       edit: "Edit My Profile"
-      edit_preferences: "Manage My Preferences"
+      edit_preferences: Subscription Preferences
       my_locations: "My Locations"
       update_account: "Update My Account Details"
     tags:
@@ -976,16 +977,12 @@
         involvement: "Involve me in:"
         notification_types: "Notification types"
         notification_types_guidance: "You can choose how you'd like to be notified for the different events above. At the moment, only email notifications are available."
-        title: "Manage My Preferences"
+        title: Subscription Preferences
         back: "Return to your profile"
         none: "No notifications"
         notify: "Notify me of new issues and when new threads are started"
         subscribe: "Notify me of new issues and automatically follow all new threads"
-        profile: "Profile visibility"
-        profile_guidance_html: "You can choose to restrict who gets to view %{profile_link}."
         your_profile: "your profile"
-        profile_public: "Everyone"
-        profile_group: "Only members in my groups"
       update:
         success: "Preferences saved"
         failure: "Your preferences could not be saved"
@@ -993,8 +990,11 @@
       create:
         success: "Profile Created"
       edit:
-        title: "Edit My Profile"
-        my_current_thumbnail_title: "My current profile picture"
+        title: Edit My Profile
+        my_current_thumbnail_title: My current profile picture
+        profile_public: Everyone
+        profile_group: Only members of my groups
+        visibility_guidance_html: You can choose to restrict who gets to view your profile.
       show:
         about_label: "About:"
         add_to_groups:
@@ -1015,6 +1015,7 @@
         reported_issues: "Reported Issues"
         user_profile: "User Profile"
         website_label: "Web site:"
+        full_name: Full Name
       update:
         success: "Profile Updated"
 

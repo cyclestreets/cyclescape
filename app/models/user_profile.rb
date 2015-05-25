@@ -14,7 +14,8 @@
 #
 
 class UserProfile < ActiveRecord::Base
-  attr_accessible :picture, :retained_picture, :remove_picture, :website, :about, as: [:default, 'admin']
+  attr_accessible :picture, :retained_picture, :remove_picture, :website, :visibility, :about, as: [:default, 'admin']
+  VISIBILITY_OPTIONS = %w(public group).freeze
 
   image_accessor :picture do
     storage_path :generate_picture_path
@@ -23,6 +24,8 @@ class UserProfile < ActiveRecord::Base
   belongs_to :user
 
   validates :website, url: true
+  validates :visibility, inclusion: { in: VISIBILITY_OPTIONS }
+
   validates_property :mime_type, of: :picture, in: %w(image/jpeg image/png image/gif)
 
   def website=(val)

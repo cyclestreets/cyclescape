@@ -31,6 +31,24 @@ describe 'User profiles' do
       click_on 'Save'
       expect(current_user.profile.about).to eq(lorem_ipsum.gsub(/\n/, "\r\n"))
     end
+
+    describe 'profile visibility' do
+      it 'should default to everyone' do
+        within('#user_profile_visibility_input') do
+          expect(page).to have_checked_field(I18n.t('.user.profiles.edit.profile_public'))
+        end
+      end
+
+      it 'should change to group' do
+        within('#user_profile_visibility_input') do
+          page.choose(I18n.t('.user.profiles.edit.profile_group'))
+        end
+        click_on 'Save'
+        current_user.reload
+        expect(current_user.profile.visibility).to eql('group')
+      end
+    end
+
   end
 
   context 'permissions' do
@@ -84,4 +102,6 @@ describe 'User profiles' do
       expect(page).to have_content(threads.second.title)
     end
   end
+
+
 end

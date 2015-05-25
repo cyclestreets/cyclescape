@@ -38,7 +38,6 @@ describe UserPref do
     strings = %w(
       involve_my_locations
       involve_my_groups
-      profile_visibility
       )
 
     strings.each do |attr|

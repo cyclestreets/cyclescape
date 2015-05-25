@@ -73,8 +73,8 @@
     hints:
       user:
         new: &hints_user_new
-          display_name: "Optional - this can be a nickname or pseudonym and will be shown instead of your full name to other users."
-          full_name: "Please enter your full name. If you ask to join a group, this will always be shown to the group administrators."
+          display_name: "If you set a display name, it will be shown to people who cannot see your profile."
+          full_name: "Please enter your full name. It will be shown to all the people who can see your profile."
         edit:
           password: "Leave this blank to keep your current password."
           current_password: "Please confirm your current password to make changes on this page."

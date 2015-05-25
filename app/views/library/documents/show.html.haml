@@ -1,7 +1,12 @@
 %article#content.library.document
   %h1= @document.title
   %section.meta
-    %p= t ".added_by_html", name: link_to_profile(@document.created_by), time: l(@document.created_at.to_date)
+    %p
+      - if permitted_to?(:view_profile, @document.created_by)
+        - profile_link = link_to_profile @document.created_by
+      - else
+        - profile_link = @document.created_by.display_name_or_anon
+      = t ".added_by_html", name: profile_link, time: l(@document.created_at.to_date)
   %section.tags
     = @tag_panel.render
   %section.document

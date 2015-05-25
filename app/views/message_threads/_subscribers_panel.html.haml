@@ -7,8 +7,11 @@
   %ul.thread-metadata-listings
     - subscribers.each do |sub|
       %li
-        = link_to user_profile_path(sub) do
-          %span.thumb
-            - if sub.profile.picture
-              = image_tag sub.profile.picture_thumbnail.url
-          %p= sub.name
+        - if permitted_to?(:view_profile, sub)
+          = link_to user_profile_path(sub) do
+            %span.thumb
+              - if sub.profile.picture
+                = image_tag sub.profile.picture_thumbnail.url
+            %p= sub.name
+        - else
+          sub.display_name_or_anon
