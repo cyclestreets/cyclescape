@@ -316,8 +316,8 @@ describe 'Message threads' do
 
       it 'should let you change the privacy setting' do
         visit edit_thread_path(thread)
-        expect(page).to have_select('Privacy', selected: 'Public')
-        select 'Group', from: 'Privacy'
+        expect(page).to have_select('Privacy', selected: I18n.t('thread_privacy_options.public'))
+        select I18n.t('thread_privacy_options.group'), from: 'Privacy'
         click_on 'Save'
         expect(page).to have_content(thread.title)
         expect(page).to have_content('Private')

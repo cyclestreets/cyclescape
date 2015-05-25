@@ -186,11 +186,8 @@ describe MessageThread do
     end
 
     context 'with a group with a profile but no issue' do
-      subject { FactoryGirl.create(:message_thread, :belongs_to_group) }
-      before do
-        FactoryGirl.create :group_profile, group: subject.group
-        subject.reload
-      end
+      subject { FactoryGirl.create(:message_thread, group: group) }
+      let(:group) { FactoryGirl.create :group, :with_profile }
 
       it "still has the groups' centre" do
         expect(subject.default_centre).to eq(subject.group.profile.centre)

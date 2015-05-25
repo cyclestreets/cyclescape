@@ -24,6 +24,10 @@ FactoryGirl.define do
     sequence(:website) { |n| "http://www.cc#{n}.com" }
     sequence(:email) { |n| "admin@cc#{n}.com" }
 
+    trait :with_profile do
+      association :profile, factory: :group_profile
+    end
+
     trait :disabled do
       disabled_at { DateTime.now }
     end

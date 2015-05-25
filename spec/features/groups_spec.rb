@@ -2,15 +2,16 @@
 require 'spec_helper'
 
 describe 'Groups' do
-  let(:profile) { FactoryGirl.create(:group_profile) }
+  let(:group) { FactoryGirl.create(:group, :with_profile) }
+  let(:profile) { group.profile }
 
   describe 'show' do
     before do
-      visit group_path(profile.group)
+      visit group_path(group)
     end
 
     it 'should show the name of the group' do
-      expect(page).to have_content(profile.group.name)
+      expect(page).to have_content(group.name)
     end
 
     it 'should show the group description' do
@@ -23,7 +24,7 @@ describe 'Groups' do
 
     it 'should autolink the group description' do
       profile.update_attribute(:description, 'contains a link: http://www.example.com')
-      visit group_path(profile.group)
+      visit group_path(group)
 
       expect(page).to have_link('http://www.example.com')
     end
@@ -38,7 +39,7 @@ describe 'Groups' do
       it 'should show default joining instructions if none are set' do
         profile.joining_instructions = nil
         profile.save!
-        visit group_path(profile.group)
+        visit group_path(group)
 
         expect(page).to have_content(I18n.t('groups.join.join_body' , group: profile.group.name))
       end
