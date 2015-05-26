@@ -1,6 +1,8 @@
 %section.groups.content-no-sidebar#content
   %header#group-list-header
     %h1= t ".title"
+    .tasks
+      = link_to t(".group_request"), new_group_request_path, class: "btn-green", style: 'float: right'
   #group-list-tabs
     %ul.tabs.styled-tabs
       %li= link_to t(".list_tab"), "#", class: "list"

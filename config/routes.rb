@@ -1,4 +1,5 @@
 Cyclescape::Application.routes.draw do
+
   # Pretty evil but beats copy pasting
   def issues_route(opts = {})
     resources :issues, opts do
@@ -71,6 +72,14 @@ Cyclescape::Application.routes.draw do
     end
     collection do
       get 'all_geometries'
+    end
+  end
+
+  resources :group_requests do
+    member do
+      get 'review'
+      put 'confirm'
+      put 'reject'
     end
   end
 

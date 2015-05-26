@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Status:
+  = @group_request.status
+%p
+  %b User:
+  = @group_request.user_id
+%p
+  %b Name:
+  = @group_request.name
+%p
+  %b Subdomain:
+  = @group_request.subdomain
+%p
+  %b Website:
+  = @group_request.website
+%p
+  %b Email:
+  = @group_request.email
+
+= link_to 'Edit', edit_group_request_path(@group_request)
+\|
+= link_to 'Back', group_requests_path

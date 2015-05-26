@@ -32,6 +32,7 @@ cs-CZ:
       unauthenticated: 'Musíte se zaregistrovat nebo přihlásit, pak můžete pokračovat.'
       unconfirmed: 'Musíte potvrdit svůj účet, pak můžete pokračovat.'
       locked: 'Váš účet je uzamčen.'
+      not_found_in_database: 'Neplatná e-mail nebo heslo.'
       invalid: 'Neplatná identita nebo heslo.'
       invalid_token: 'Neplatný ověřovací symbol.'
       timeout: 'Vaše relace vypršela, přihlašte se prosím znovu, pak můžete pokračovat.'

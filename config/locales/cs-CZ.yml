@@ -3,6 +3,7 @@
 "cs-CZ":
   application_name: "Cyklisté sobě"
   tags: "Štítky"
+  anon: "Anonymní"
   sign_in: "přihlásit"  # Used for links
   admin:
     groups:
@@ -899,6 +900,7 @@
         reported_issues: "Podané podněty"
         user_profile: "Uživatelský profil"
         website_label: "Webová stránka:"
+        full_name: "Plné jméno"
       update:
         success: "Profil upraven"
 

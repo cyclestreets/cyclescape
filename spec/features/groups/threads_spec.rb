@@ -65,7 +65,7 @@ describe 'Group threads', use: :subdomain do
       end
 
       it 'should default to a public group thread' do
-        expect(page).to have_select('Privacy', selected: 'Public')
+        expect(page).to have_select('Privacy', selected: I18n.t('thread_privacy_options.public'))
       end
 
       context 'notifications' do
@@ -270,7 +270,7 @@ describe 'Group threads', use: :subdomain do
       end
 
       it 'should default to a private group thread' do
-        expect(page).to have_select('Privacy', selected: 'Group')
+        expect(page).to have_select('Privacy', selected: I18n.t('thread_privacy_options.group'))
       end
     end
 

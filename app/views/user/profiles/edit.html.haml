@@ -12,4 +12,9 @@
           = f.input :remove_picture, as: :boolean
         = f.input :website
         = f.input :about
+        %p= t ".visibility_guidance_html"
+        = f.input :visibility,
+            as: :radio,
+            collection: UserProfile::VISIBILITY_OPTIONS.map {|n| [t(".profile_#{n}"), n] }
+
       = f.actions

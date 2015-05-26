@@ -15,6 +15,4 @@
       %h2= t ".notification_types"
       %p= t ".notification_types_guidance"
       = f.input :enable_email
-      %h2= t ".profile"
-      %p= t ".profile_guidance_html", profile_link: link_to(t(".your_profile"), current_user_profile_path)
     = f.actions
