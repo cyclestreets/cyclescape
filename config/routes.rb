@@ -22,10 +22,12 @@ Cyclescape::Application.routes.draw do
 
   devise_for :users, controllers: { confirmations: 'confirmations' }
 
-  get 'profile/edit', to: "user/profiles#edit", as: :current_user_profile_edit
-  get 'profile/preferences', to: "user/prefs#edit", as: :current_user_prefs_edit
-  get 'profile/location', to: "user/locations#index", as: :current_user_locations
-  get 'profile', to: "user/profiles#show", as: :current_user_profile
+  scope 'settings' do
+    get '/edit', to: "user/profiles#edit", as: :current_user_profile_edit
+    get '/preferences', to: "user/prefs#edit", as: :current_user_prefs_edit
+    get '/location', to: "user/locations#index", as: :current_user_locations
+    get '/', to: "user/profiles#show", as: :current_user_profile
+  end
 
   constraints(SubdomainConstraint) do
     root to: 'groups#show'
