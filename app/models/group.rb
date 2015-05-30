@@ -18,7 +18,7 @@
 #
 
 class Group < ActiveRecord::Base
-  attr_accessible :name, :short_name, :website, :email, :default_thread_privacy
+  include ActiveModel::ForbiddenAttributesProtection
 
   has_many :memberships, class_name: 'GroupMembership'
   has_many :members, through: :memberships, source: :user

@@ -1,4 +1,6 @@
 class Admin::GroupsController < ApplicationController
+  before_filter :load_group, only: [:edit, :update]
+
   def index
     @groups = Group.all
   end
@@ -8,7 +10,7 @@ class Admin::GroupsController < ApplicationController
   end
 
   def create
-    @group = Group.new(params[:group])
+    @group = Group.new(permitted_params)
 
     if @group.save
       set_flash_message(:success)
@@ -19,17 +21,25 @@ class Admin::GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find(params[:id])
   end
 
   def update
-    @group = Group.find(params[:id])
-
-    if @group.update_attributes(params[:group])
-      set_flash_message(:success)
+    if @group.update_attributes permitted_params
+      set_flash_message :success
       redirect_to action: :index
     else
       render :edit
     end
   end
+
+  protected
+
+  def permitted_params
+    params.require(:group).permit :name, :short_name, :website, :email, :default_thread_privacy
+  end
+
+  def load_group
+    @group ||= Group.find params[:id]
+  end
+
 end

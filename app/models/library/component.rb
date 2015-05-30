@@ -1,9 +1,10 @@
 # Base class for implementing components of Library Items.
 class Library::Component < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
   self.abstract_class = true
 
   attr_accessor :created_by, :tags_string
-  attr_accessible :tags_string
 
   belongs_to :item, class_name: 'Library::Item', foreign_key: 'library_item_id'
 
@@ -33,7 +34,7 @@ class Library::Component < ActiveRecord::Base
   end
 
   def update_library_item
-    item.update_attributes(component: self)
+    item.update_attribute(:component, self)
     item.update_index
   end
 end

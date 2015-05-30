@@ -6,7 +6,7 @@ class Library::DocumentsController < ApplicationController
   end
 
   def create
-    @document = Library::Document.new(params[:library_document])
+    @document = Library::Document.new(permitted_params)
     @document.created_by = current_user
 
     if @document.save
@@ -28,7 +28,7 @@ class Library::DocumentsController < ApplicationController
   end
 
   def update
-    if @document.update_attributes(params[:document])
+    if @document.update_attributes(permitted_params)
       redirect_to library_document_path(@document)
     else
       render :edit
@@ -45,5 +45,9 @@ class Library::DocumentsController < ApplicationController
 
   def load_document
     @document = Library::Document.find(params[:id])
+  end
+
+  def permitted_params
+    params.require(:library_document).permit :title, :file, :retained_file, :tags_string
   end
 end

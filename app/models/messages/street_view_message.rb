@@ -1,6 +1,4 @@
 class StreetViewMessage < MessageComponent
-  attr_accessible :caption, :heading, :pitch
-
   validates :caption, :heading, :pitch, :location, presence: true
 
   def set_location(location_string)

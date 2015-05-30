@@ -7,7 +7,7 @@ class Library::NotesController < ApplicationController
   end
 
   def create
-    @note = Library::Note.new(params[:library_note])
+    @note = Library::Note.new(permitted_params)
     @note.created_by = current_user
 
     if @note.save
@@ -31,7 +31,7 @@ class Library::NotesController < ApplicationController
   end
 
   def update
-    if @note.update_attributes(params[:library_note])
+    if @note.update_attributes(permitted_params)
       set_flash_message(:success)
       redirect_to library_note_path(@note)
     else
@@ -48,5 +48,9 @@ class Library::NotesController < ApplicationController
 
   def load_note
     @note = Library::Note.find(params[:id])
+  end
+
+  def permitted_params
+    params.require(:library_note).permit(:tags_string, :body, :library_document_id)
   end
 end

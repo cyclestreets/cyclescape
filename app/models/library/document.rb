@@ -11,7 +11,7 @@
 #
 
 class Library::Document < Library::Component
-  attr_accessible :title, :file, :retained_file
+  include ActiveModel::ForbiddenAttributesProtection
 
   file_accessor :file do
     storage_path :generate_file_path

@@ -1,5 +1,5 @@
 class GroupRequest < ActiveRecord::Base
-  attr_protected :state_event
+  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :user
   belongs_to :actioned_by, class_name: 'User'

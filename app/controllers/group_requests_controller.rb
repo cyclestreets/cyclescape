@@ -10,7 +10,7 @@ class GroupRequestsController < ApplicationController
   end
 
   def create
-    @request = GroupRequest.new params[:group_request]
+    @request = GroupRequest.new permitted_params
     @request.user = current_user
 
     if @request.save
@@ -28,18 +28,17 @@ class GroupRequestsController < ApplicationController
   def confirm
     @request.actioned_by = current_user
     if res = @request.confirm
-      @group = Group.find_by_name!(@request.name)
+      @group = Group.find_by_name! @request.name
       Notifications.group_request_confirmed(@group, @request).deliver
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to action: :index
   end
 
   def reject
     @request.actioned_by = current_user
-    @request.update_attributes params[:group_request]
     if @request.reject
       Notifications.group_request_rejected(@request).deliver
       set_flash_message(:success)
@@ -60,9 +59,9 @@ class GroupRequestsController < ApplicationController
 
   def cancel
     if @request.user == current_user && @request.cancel
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to @group
   end
@@ -70,6 +69,10 @@ class GroupRequestsController < ApplicationController
   protected
 
   def load_group_request
-    @request = GroupRequest.find(params[:id])
+    @request = GroupRequest.find params[:id]
+  end
+
+  def permitted_params
+    params.require(:group_request).permit :name, :short_name, :website, :email, :default_thread_privacy, :message
   end
 end

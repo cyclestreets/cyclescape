@@ -1,4 +1,6 @@
 class IssuesController < ApplicationController
+  before_filter :load_issue, only: [:show, :edit, :update, :destroy, :geometry,
+                                    :vote_up, :vote_down, :vote_clear]
   filter_access_to [:edit, :update, :destroy], attribute_check: true
 
   def index
@@ -14,8 +16,7 @@ class IssuesController < ApplicationController
   end
 
   def show
-    issue = Issue.find(params[:id])
-    @issue = IssueDecorator.decorate(issue)
+    @issue = IssueDecorator.decorate(@issue)
     set_page_title @issue.title
     @threads = ThreadListDecorator.decorate(@issue.threads.order_by_latest_message.includes(:group))
     @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
@@ -27,7 +28,7 @@ class IssuesController < ApplicationController
   end
 
   def create
-    @issue = current_user.issues.new(params[:issue])
+    @issue = current_user.issues.new permitted_params
 
     if @issue.save
       NewIssueNotifier.new_issue(@issue)
@@ -39,14 +40,11 @@ class IssuesController < ApplicationController
   end
 
   def edit
-    @issue = Issue.find(params[:id])
     @start_location = @issue.location
   end
 
   def update
-    @issue = Issue.find(params[:id])
-
-    if @issue.update_attributes(params[:issue])
+    if @issue.update_attributes permitted_params
       set_flash_message(:success)
       redirect_to action: :show
     else
@@ -56,8 +54,6 @@ class IssuesController < ApplicationController
   end
 
   def destroy
-    @issue = Issue.find(params[:id])
-
     if @issue.destroy
       set_flash_message(:success)
       redirect_to issues_path
@@ -68,7 +64,6 @@ class IssuesController < ApplicationController
   end
 
   def geometry
-    @issue = Issue.find(params[:id])
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(issue_feature(IssueDecorator.decorate(@issue))) }
     end
@@ -90,33 +85,30 @@ class IssuesController < ApplicationController
   end
 
   def vote_up
-    @issue = Issue.find(params[:id])
-    if current_user.voted_for?(@issue)
-      set_flash_message(:already)
+    if current_user.voted_for? @issue
+      set_flash_message :already
     else
-      current_user.vote_exclusively_for(@issue)
-      set_flash_message(:success)
+      current_user.vote_exclusively_for @issue
+      set_flash_message :success
     end
     redirect_to @issue
   end
 
   def vote_down
-    @issue = Issue.find(params[:id])
-    if current_user.voted_against?(@issue)
-      set_flash_message(:already)
+    if current_user.voted_against? @issue
+      set_flash_message :already
     else
-      current_user.vote_exclusively_against(@issue)
-      set_flash_message(:success)
+      current_user.vote_exclusively_against @issue
+      set_flash_message :success
     end
     redirect_to @issue
   end
 
   def vote_clear
-    @issue = Issue.find(params[:id])
-    if current_user.clear_votes(@issue)
-      set_flash_message(:success)
+    if current_user.clear_votes @issue
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to @issue
   end
@@ -139,5 +131,14 @@ class IssuesController < ApplicationController
                       url: view_context.url_for(issue),
                       created_by: issue.created_by.name,
                       created_by_url: view_context.url_for(issue.created_by))
+  end
+
+  def load_issue
+    @issue ||= Issue.find(params[:id])
+  end
+
+  def permitted_params
+    params.require(:issue).permit :title, :photo, :retained_photo, :loc_json, :tags_string,
+      :description
   end
 end

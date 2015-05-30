@@ -13,8 +13,6 @@
 #
 
 class LinkMessage < MessageComponent
-  attr_accessible :url, :title, :description
-
   validates :url, url: true, presence: true
 
   # Normalize URL
