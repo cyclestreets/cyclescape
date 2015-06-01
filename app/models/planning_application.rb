@@ -30,7 +30,7 @@ class PlanningApplication < ActiveRecord::Base
   scope :not_hidden, where('hide_votes_count < ?', NOS_HIDE_VOTES)
   scope :ordered, order('start_date DESC')
 
-  validates :uid, :url, :location, presence: true
+  validates :uid, :url, presence: true
   validates :uid, uniqueness: true
 
   class << self

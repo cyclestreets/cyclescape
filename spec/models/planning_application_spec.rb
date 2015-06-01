@@ -26,7 +26,6 @@ describe PlanningApplication do
   describe "newly created" do
     it { is_expected.to validate_presence_of(:uid) }
     it { is_expected.to validate_presence_of(:url) }
-    it { is_expected.to validate_presence_of(:location) }
     it { is_expected.to validate_uniqueness_of(:uid) }
     it { is_expected.to have_many(:hide_votes) }
     it { is_expected.to have_many(:users).through(:hide_votes) }

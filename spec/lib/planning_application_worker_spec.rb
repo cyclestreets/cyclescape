@@ -20,7 +20,7 @@ describe PlanningApplicationWorker do
   end
 
   let!(:cam_req) do
-    no_lat = planning_record.dup.tap {|pr| pr.delete 'lng' }
+    no_lat = planning_record.dup.merge('uid'=>'123').tap {|pr| pr.delete 'lng' }
     no_uid = planning_record.dup.tap {|pr| pr.delete 'uid' }
     stub_request(:get, 'http://www.planit.org.uk/find/applics/json').
       with(query: {auth: 'Cambridge', start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: '-start_date', pg_sz: 500},
@@ -51,7 +51,7 @@ describe PlanningApplicationWorker do
   end
 
   it 'should pull in planning applications, rejecting invalid ones' do
-    expect{ subject.process! }.to change{ PlanningApplication.count }.by(2)
+    expect{ subject.process! }.to change{ PlanningApplication.count }.by(3)
     expect(cam_req).to have_been_made
     expect(london_req).to have_been_made
     planning_ap = PlanningApplication.find_by_uid('07/0811/FUL')
