@@ -58,4 +58,18 @@ class PlanningApplication < ActiveRecord::Base
   def fully_hidden?
     hide_votes_count >= NOS_HIDE_VOTES
   end
+
+  def populate_issue
+    build_issue.tap do |issue|
+      issue.title = "#{I18n.t("planning_application.issues.new.title_prefix")} : #{title}"
+      issue.location = location
+      issue.description = <<-EOS
+        #{description}\n\n
+        #{address}\n\n
+        #{url}\n\n#{authority_name}\n
+        #{I18n.t("planning_application.issues.new.application_reference")} : #{uid}
+      EOS
+      issue.tags_string = "planning"
+    end
+  end
 end

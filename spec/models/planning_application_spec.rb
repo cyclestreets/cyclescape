@@ -44,6 +44,14 @@ describe PlanningApplication do
       expect(subject.title).to include(subject.uid)
       expect(subject.title).to include(subject.authority_name)
     end
+
+    it 'should populate an issue' do
+      subject.save!
+      issue = subject.populate_issue
+      expect(issue.title).to include(subject.title)
+      expect(issue.description).to include(subject.description)
+      expect(issue.location).to eq(subject.location)
+    end
   end
 
   context "with an issue" do
