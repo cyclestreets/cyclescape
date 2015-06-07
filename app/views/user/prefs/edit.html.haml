@@ -17,4 +17,7 @@
       = f.input :enable_email
       %h2= t ".profile"
       %p= t ".profile_guidance_html", profile_link: link_to(t(".your_profile"), current_user_profile_path)
+      = f.input :profile_visibility,
+          as: :radio,
+          collection: UserPref::PROFILE_OPTIONS.map {|n| [t(".profile_#{n}"), n] }
     = f.actions
