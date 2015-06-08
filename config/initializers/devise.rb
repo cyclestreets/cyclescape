@@ -1,5 +1,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
+secret_token = '6b5699eece58391acf4c14096463bbc5deb13fe0338e739f86b9fa9acaaf111664daad4800a73e8ce257b3b592c0ac5c5a5ae5d8d476f9b3d7228af6310da452'
+secret_file = File.expand_path('../../devise_secret_token', __FILE__)
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -227,4 +229,8 @@ Devise.setup do |config|
 
   # Added during Devise upgrade
   config.password_length = 6..128
+
+  # remove code below (its meant to be temp here during upgrade)
+  config.allow_insecure_token_lookup = true
+  config.secret_key = File.exists?(secret_file) ? File.read(secret_file).strip : secret_token
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150602084648) do
+ActiveRecord::Schema.define(:version => 20150608082449) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -393,7 +393,7 @@ ActiveRecord::Schema.define(:version => 20150602084648) do
     t.datetime "disabled_at"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
-    t.string   "invitation_token",       :limit => 60
+    t.string   "invitation_token"
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "remembered_group_id"
