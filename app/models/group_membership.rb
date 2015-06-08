@@ -17,7 +17,7 @@
 #
 
 class GroupMembership < ActiveRecord::Base
-  attr_accessible :user_id, :role, :user_attributes
+  include ActiveModel::ForbiddenAttributesProtection
 
   ALLOWED_ROLES = %w(committee member)
 

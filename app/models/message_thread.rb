@@ -23,10 +23,9 @@
 #
 
 class MessageThread < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   include FakeDestroy
   include Taggable
-
-  attr_accessible :title, :privacy, :group_id, :issue_id, :tags_string
 
   acts_as_indexed fields: [:title, :messages_text, :tags_string]
 

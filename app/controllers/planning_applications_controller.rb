@@ -22,11 +22,11 @@ class PlanningApplicationsController < ApplicationController
   end
 
   def hide
-    planning_application = PlanningApplication.find(params[:id])
+    planning_application = PlanningApplication.find params[:id]
     hide_vote = planning_application.hide_votes.new.tap {|pl| pl.user = current_user}
     hide_vote.save
 
-    @planning_application = PlanningApplicationDecorator.decorate(planning_application.reload)
+    @planning_application = PlanningApplicationDecorator.decorate planning_application.reload
 
     respond_to do |format|
       format.js {}
@@ -35,7 +35,7 @@ class PlanningApplicationsController < ApplicationController
   end
 
   def unhide
-    planning_application = PlanningApplication.find(params[:id])
+    planning_application = PlanningApplication.find params[:id]
     planning_application.hide_votes.find_by_user_id(current_user.id).destroy
 
     @planning_application = PlanningApplicationDecorator.decorate(planning_application.reload)

@@ -28,8 +28,8 @@ class User::ProfilesController < ApplicationController
   end
 
   def update
-    if @user.profile.update_attributes(params[:user_profile])
-      set_flash_message(:success)
+    if @user.profile.update_attributes permitted_params
+      set_flash_message :success
       redirect_to action: :show
     else
       render :edit
@@ -41,5 +41,9 @@ class User::ProfilesController < ApplicationController
   def load_user
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
     permission_denied unless @user
+  end
+
+  def permitted_params
+    params.require(:user_profile).permit :picture, :retained_picture, :remove_picture, :website, :visibility, :about
   end
 end

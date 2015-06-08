@@ -17,9 +17,8 @@
 #
 
 class GroupProfile < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   include Locatable
-
-  attr_accessible :description, :joining_instructions, :loc_json
 
   belongs_to :group
 end

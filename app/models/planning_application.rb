@@ -19,7 +19,7 @@
 #
 
 class PlanningApplication < ActiveRecord::Base
-  attr_accessible :hidden
+  include ActiveModel::ForbiddenAttributesProtection
   NOS_HIDE_VOTES = 2
 
   include Locatable

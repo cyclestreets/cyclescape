@@ -14,7 +14,7 @@ class Admin::User::LocationsController < ApplicationController
   end
 
   def create
-    @location = @user.locations.new(params[:user_location])
+    @location = @user.locations.new permitted_params
 
     if @location.save
       set_flash_message(:success)
@@ -35,7 +35,7 @@ class Admin::User::LocationsController < ApplicationController
   def update
     @location = @user.locations.find(params[:id])
 
-    if @location.update_attributes(params[:user_location])
+    if @location.update_attributes permitted_params
       set_flash_message(:success)
       redirect_to action: :index
     else
@@ -61,5 +61,9 @@ class Admin::User::LocationsController < ApplicationController
 
   def load_user
     @user = User.find(params[:user_id])
+  end
+
+  def permitted_params
+    params.require(:user_location).permit :category_id, :loc_json
   end
 end

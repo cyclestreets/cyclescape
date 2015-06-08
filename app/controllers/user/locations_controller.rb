@@ -9,10 +9,10 @@ class User::LocationsController < ApplicationController
   end
 
   def create
-    @location = current_user.locations.new(params[:user_location])
+    @location = current_user.locations.new permitted_params
 
     if @location.save
-      set_flash_message(:success)
+      set_flash_message :success
       redirect_to action: :index
     else
       @start_location = Geo::NOWHERE_IN_PARTICULAR
@@ -21,15 +21,15 @@ class User::LocationsController < ApplicationController
   end
 
   def edit
-    @location = current_user.locations.find(params[:id])
+    @location = current_user.locations.find params[:id]
     @start_location = @location.location
   end
 
   def update
-    @location = current_user.locations.find(params[:id])
+    @location = current_user.locations.find params[:id]
 
-    if @location.update_attributes(params[:user_location])
-      set_flash_message(:success)
+    if @location.update_attributes permitted_params
+      set_flash_message :success
       redirect_to action: :index
     else
       render :edit
@@ -38,15 +38,15 @@ class User::LocationsController < ApplicationController
 
   def destroy
     if current_user.locations.find(params[:id]).destroy
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to action: :index
   end
 
   def geometry
-    @location = current_user.locations.find(params[:id])
+    @location = current_user.locations.find params[:id]
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(@location.loc_feature(thumbnail: view_context.image_path('map-icons/m-misc.png'))) }
     end
@@ -57,5 +57,11 @@ class User::LocationsController < ApplicationController
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(multi) }
     end
+  end
+
+  protected
+
+  def permitted_params
+    params.require(:user_location).permit :category_id, :loc_json
   end
 end

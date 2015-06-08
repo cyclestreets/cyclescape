@@ -14,8 +14,8 @@ class Group::ProfilesController < ApplicationController
   end
 
   def update
-    if @group.profile.update_attributes(params[:group_profile])
-      set_flash_message(:success)
+    if @group.profile.update_attributes permitted_params
+      set_flash_message :success
       redirect_to action: :show
     else
       render :edit
@@ -32,6 +32,10 @@ class Group::ProfilesController < ApplicationController
   protected
 
   def load_group
-    @group = Group.find(params[:group_id])
+    @group = Group.find params[:group_id]
+  end
+
+  def permitted_params
+    params.require(:group_profile).permit :description, :joining_instructions, :loc_json
   end
 end

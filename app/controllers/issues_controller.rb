@@ -31,8 +31,8 @@ class IssuesController < ApplicationController
     @issue = current_user.issues.new permitted_params
 
     if @issue.save
-      NewIssueNotifier.new_issue(@issue)
-      redirect_to new_issue_thread_path(@issue)
+      NewIssueNotifier.new_issue @issue
+      redirect_to new_issue_thread_path @issue
     else
       @start_location = current_user.start_location
       render :new
@@ -45,7 +45,7 @@ class IssuesController < ApplicationController
 
   def update
     if @issue.update_attributes permitted_params
-      set_flash_message(:success)
+      set_flash_message :success
       redirect_to action: :show
     else
       @start_location = current_user.start_location
@@ -55,10 +55,10 @@ class IssuesController < ApplicationController
 
   def destroy
     if @issue.destroy
-      set_flash_message(:success)
+      set_flash_message :success
       redirect_to issues_path
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
       redirect_to @issue
     end
   end

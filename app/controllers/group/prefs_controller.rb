@@ -10,10 +10,10 @@ class Group::PrefsController < ApplicationController
 
   def update
     @prefs = @group.prefs
-    if @prefs.update_attributes(params[:group_pref])
-      set_flash_message(:success)
+    if @prefs.update_attributes permitted_params
+      set_flash_message :success
     else
-      set_falsh_message(:failure)
+      set_falsh_message :failure
     end
     redirect_to action: 'edit'
   end
@@ -21,6 +21,10 @@ class Group::PrefsController < ApplicationController
   protected
 
   def load_group
-    @group = Group.find(params[:group_id])
+    @group = Group.find params[:group_id]
+  end
+
+  def permitted_params
+    params.require(:group_pref).permit :membership_secretary_id, :notify_membership_requests 
   end
 end

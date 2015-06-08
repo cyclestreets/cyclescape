@@ -42,18 +42,18 @@ class GroupRequestsController < ApplicationController
     @request.update_attribute :rejection_message, params[:group_request][:rejection_message]
     if @request.reject
       Notifications.group_request_rejected(@request).deliver
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to action: :index
   end
 
   def destroy
     if @request.destroy
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to action: :index
   end

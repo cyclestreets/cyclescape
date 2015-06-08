@@ -18,8 +18,7 @@
 #
 
 class GroupMembershipRequest < ActiveRecord::Base
-  attr_protected :state_event
-  attr_accessible :message
+  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :group
   belongs_to :user

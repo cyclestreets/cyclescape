@@ -9,28 +9,28 @@ class Group::MessageThreadsController < MessageThreadsController
     @issue_threads = ThreadListDecorator.decorate(issue_threads)
 
     general_threads = ThreadList.general_threads_from_group(@group).paginate(page: params[:general_threads_page])
-    @general_threads = ThreadListDecorator.decorate(general_threads)
+    @general_threads = ThreadListDecorator.decorate general_threads
   end
 
   def new
-    @thread = @group.threads.build(privacy: @group.default_thread_privacy)
+    @thread = @group.threads.build privacy: @group.default_thread_privacy
     @message = @thread.messages.build
   end
 
   def create
-    @thread = @group.threads.build(params[:thread])
+    @thread = @group.threads.build permitted_params
     @thread.created_by = current_user
-    @message = @thread.messages.build(params[:message])
+    @message = @thread.messages.build permitted_message_params
     @message.created_by = current_user
 
     if @thread.save
 
       @thread.subscriptions.create({ user: current_user }, without_protection: true) unless current_user.subscribed_to_thread?(@thread)
-      ThreadSubscriber.subscribe_users(@thread)
+      ThreadSubscriber.subscribe_users @thread
       ThreadNotifier.notify_subscribers(@thread, :new_message, @message)
 
-      NewThreadNotifier.notify_new_thread(@thread)
-      redirect_to thread_path(@thread)
+      NewThreadNotifier.notify_new_thread @thread
+      redirect_to thread_path @thread
     else
       render :new
     end
@@ -41,4 +41,9 @@ class Group::MessageThreadsController < MessageThreadsController
   def load_group
     @group = Group.find(params[:group_id] || current_group)
   end
+
+  def permitted_message_params
+    params.require(:message).permit :body, :component
+  end
+
 end

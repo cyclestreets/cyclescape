@@ -8,13 +8,13 @@ class GroupsController < ApplicationController
 
   def show
     if params[:id]
-      @group = Group.find(params[:id])
+      @group = Group.find params[:id]
     elsif current_group
       @group = current_group
     end
 
     if @group
-      @group = GroupDecorator.decorate(@group)
+      @group = GroupDecorator.decorate @group
       if @group.has_member?(current_user)
         recent_threads = ThreadList.recent_from_groups(@group, 10).includes(:issue, :group)
       else

@@ -20,9 +20,8 @@
 #
 
 class Message < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
   include FakeDestroy
-
-  attr_accessible :body, :component
 
   belongs_to :thread, class_name: 'MessageThread'
   belongs_to :created_by, class_name: 'User'

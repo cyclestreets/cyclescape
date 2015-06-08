@@ -14,7 +14,7 @@
 #
 
 class UserProfile < ActiveRecord::Base
-  attr_accessible :picture, :retained_picture, :remove_picture, :website, :visibility, :about, as: [:default, 'admin']
+  include ActiveModel::ForbiddenAttributesProtection
   VISIBILITY_OPTIONS = %w(public group).freeze
 
   image_accessor :picture do

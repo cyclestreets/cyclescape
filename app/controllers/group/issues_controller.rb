@@ -9,8 +9,8 @@ class Group::IssuesController < IssuesController
     issues = Issue.intersects(current_group.profile.location).by_most_recent.paginate(page: params[:page])
     popular_issues = Issue.intersects(current_group.profile.location).plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
 
-    @issues = IssueDecorator.decorate(issues)
-    @popular_issues = IssueDecorator.decorate(popular_issues)
+    @issues = IssueDecorator.decorate issues
+    @popular_issues = IssueDecorator.decorate popular_issues
     @start_location = index_start_location
   end
 

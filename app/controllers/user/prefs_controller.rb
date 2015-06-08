@@ -9,7 +9,7 @@ class User::PrefsController < ApplicationController
   def update
     @prefs = @user.prefs
 
-    if @prefs.update_attributes(params[:user_pref])
+    if @prefs.update_attributes permitted_params
       set_flash_message :success
     else
       set_flash_message :failure
@@ -22,5 +22,9 @@ class User::PrefsController < ApplicationController
   def load_user
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
     permission_denied unless @user
+  end
+
+  def permitted_params
+    params.require(:user_pref).permit :involve_my_locations, :involve_my_groups, :involve_my_groups_admin, :enable_email
   end
 end

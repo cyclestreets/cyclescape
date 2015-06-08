@@ -19,7 +19,7 @@
 #
 
 class UserPref < ActiveRecord::Base
-  attr_accessible :involve_my_locations, :involve_my_groups, :involve_my_groups_admin, :enable_email
+  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :user
 
