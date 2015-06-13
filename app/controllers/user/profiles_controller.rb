@@ -28,7 +28,7 @@ class User::ProfilesController < ApplicationController
   end
 
   def update
-    if @user.profile.update_attributes permitted_params
+    if @user.profile.update_columns permitted_params
       set_flash_message :success
       redirect_to action: :show
     else

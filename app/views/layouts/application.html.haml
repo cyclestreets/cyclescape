@@ -3,13 +3,13 @@
   %head
     %title= page_title
     = favicon_link_tag 'favicon.ico', type: "image/x-icon"
-    = stylesheet_link_tag    "application"
+    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
     /[if lt IE 9]
       %script(src="//html5shiv.googlecode.com/svn/trunk/html5.js")
     /[if lt IE 8]
       = stylesheet_link_tag "ie7"
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
-    = javascript_include_tag "application"
+    = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body{class: [Rails.env, controller_path.tr("/_", "-")].join(" ")}
     %header#site-header(role="banner")

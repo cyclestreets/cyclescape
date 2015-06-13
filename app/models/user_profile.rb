@@ -14,7 +14,6 @@
 #
 
 class UserProfile < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   VISIBILITY_OPTIONS = %w(public group).freeze
 
   image_accessor :picture do
@@ -37,7 +36,7 @@ class UserProfile < ActiveRecord::Base
   end
 
   def clear
-    update_attributes(picture: nil, website: nil, about: nil)
+    update_columns(picture: nil, website: nil, about: nil)
   end
 
   protected

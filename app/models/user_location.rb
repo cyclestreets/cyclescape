@@ -16,7 +16,6 @@
 #
 
 class UserLocation < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   include Locatable
 
   belongs_to :user

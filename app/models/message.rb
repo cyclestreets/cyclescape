@@ -20,7 +20,6 @@
 #
 
 class Message < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   include FakeDestroy
 
   belongs_to :thread, class_name: 'MessageThread'
@@ -31,7 +30,7 @@ class Message < ActiveRecord::Base
 
   after_save :update_thread_search
 
-  scope :recent, order('created_at DESC').limit(3)
+  scope :recent, -> { order('created_at DESC').limit(3) }
 
   validates :created_by_id, presence: true
   validates :body, presence: true, unless: :component

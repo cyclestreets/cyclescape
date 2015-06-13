@@ -9,7 +9,7 @@ class User::PrefsController < ApplicationController
   def update
     @prefs = @user.prefs
 
-    if @prefs.update_attributes permitted_params
+    if @prefs.update_columns permitted_params
       set_flash_message :success
     else
       set_flash_message :failure

@@ -10,7 +10,7 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find params[:id]
 
-    if @user.update_attributes(permitted_params, as: current_user.role)
+    if @user.update_columns(permitted_params, as: current_user.role)
       set_flash_message :success
       redirect_to action: :index
     else

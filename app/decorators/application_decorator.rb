@@ -1,9 +1,10 @@
-class ApplicationDecorator < Draper::Base
+class ApplicationDecorator < Draper::Decorator
   # Set the correct authorizaton context from the model class name when
   # automatically called from permitted_to? in views.
   def self.decl_auth_context
     model_class.name.tableize.to_sym
   end
+  delegate_all
 
   # Lazy Helpers
   #   PRO: Call Rails helpers without the h. proxy

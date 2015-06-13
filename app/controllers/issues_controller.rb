@@ -44,7 +44,7 @@ class IssuesController < ApplicationController
   end
 
   def update
-    if @issue.update_attributes permitted_params
+    if @issue.update_columns permitted_params
       set_flash_message :success
       redirect_to action: :show
     else

@@ -19,7 +19,6 @@
 #
 
 class Issue < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   include Locatable
   include FakeDestroy
@@ -43,8 +42,8 @@ class Issue < ActiveRecord::Base
 
   validates :created_by, presence: true
 
-  default_scope where(deleted_at: nil)
-  scope :by_most_recent, order('created_at DESC')
+  default_scope {where(deleted_at: nil)}
+  scope :by_most_recent, -> { order('created_at DESC') }
   scope :created_by, ->(user) { where(created_by_id: user) }
 
   def to_param

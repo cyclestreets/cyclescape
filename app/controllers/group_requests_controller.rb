@@ -39,7 +39,7 @@ class GroupRequestsController < ApplicationController
 
   def reject
     @request.actioned_by = current_user
-    @request.update_attribute :rejection_message, params[:group_request][:rejection_message]
+    @request.update_column :rejection_message, params[:group_request][:rejection_message]
     if @request.reject
       Notifications.group_request_rejected(@request).deliver
       set_flash_message :success

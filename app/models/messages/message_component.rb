@@ -1,5 +1,4 @@
 class MessageComponent < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   self.abstract_class = true
 

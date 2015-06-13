@@ -35,7 +35,7 @@ class Admin::User::LocationsController < ApplicationController
   def update
     @location = @user.locations.find(params[:id])
 
-    if @location.update_attributes permitted_params
+    if @location.update_columns permitted_params
       set_flash_message(:success)
       redirect_to action: :index
     else

@@ -9,7 +9,7 @@
   %section
     %h2= t ".latest_discussions"
     %ul.thread-list.latest-discussions
-      - @latest_threads.each do |thread|
+      - @latest_threads.object.each do |thread|
         = render partial: "message_threads/list", locals: {thread: thread}
 
 %aside#sidebar

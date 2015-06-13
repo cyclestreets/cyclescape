@@ -1,4 +1,4 @@
-class GroupRequestDecorator < Draper::Base
+class GroupRequestDecorator < Draper::Decorator
   decorates :group_request
 
   # Accessing Helpers

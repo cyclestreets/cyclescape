@@ -17,7 +17,6 @@
 #
 
 class GroupProfile < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   include Locatable
 
   belongs_to :group

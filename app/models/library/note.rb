@@ -10,7 +10,6 @@
 #
 
 class Library::Note < Library::Component
-  include ActiveModel::ForbiddenAttributesProtection
 
   # Optional reference to a library document
   belongs_to :document, class_name: 'Library::Document', foreign_key: 'library_document_id'

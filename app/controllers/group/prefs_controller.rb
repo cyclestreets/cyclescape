@@ -10,7 +10,7 @@ class Group::PrefsController < ApplicationController
 
   def update
     @prefs = @group.prefs
-    if @prefs.update_attributes permitted_params
+    if @prefs.update_columns permitted_params
       set_flash_message :success
     else
       set_falsh_message :failure

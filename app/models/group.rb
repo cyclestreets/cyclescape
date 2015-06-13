@@ -18,7 +18,6 @@
 #
 
 class Group < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   has_many :memberships, class_name: 'GroupMembership'
   has_many :members, through: :memberships, source: :user

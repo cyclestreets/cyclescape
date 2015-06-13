@@ -9,7 +9,7 @@ class MessageThreadsController < ApplicationController
   def show
     set_page_title thread.title
     @issue = IssueDecorator.decorate(thread.issue) if thread.issue
-    @messages = thread.messages.includes({ created_by: :profile }, :component).all
+    @messages = thread.messages.includes({ created_by: :profile }, :component).to_a
     @new_message = thread.messages.build
     @library_items = Library::Item.find_by_tags_from(thread).limit(5)
     @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
@@ -32,7 +32,7 @@ class MessageThreadsController < ApplicationController
   end
 
   def update
-    if thread.update_attributes permitted_params
+    if thread.update_columns permitted_params
       set_flash_message :success
       redirect_to thread_path thread
     else

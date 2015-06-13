@@ -1,6 +1,6 @@
 /* tagfield */
 .superblyTagfieldDiv{
-  @extend input.text-input;
+  @extend input.text-input !optional;
   padding: 5px !important;
   background: $white;
 }
@@ -8,12 +8,12 @@
 .superblyTagfieldClearer{
   clear: both;
 }
-  
+
 .superblyTagfieldDiv ul{
   margin: 0;
   padding: 0;
 }
-  
+
 .superblyTagfield{
   /* if no javascript */
   outline: none;
@@ -22,7 +22,7 @@
   border: solid 1px;
   background: $white;
 }
-   
+
 .superblyTagInput{
   border: none;
   outline: none;

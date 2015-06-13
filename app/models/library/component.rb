@@ -1,6 +1,5 @@
 # Base class for implementing components of Library Items.
 class Library::Component < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   self.abstract_class = true
 
@@ -8,7 +7,7 @@ class Library::Component < ActiveRecord::Base
 
   belongs_to :item, class_name: 'Library::Item', foreign_key: 'library_item_id'
 
-  scope :recent, lambda { |num| includes(:item).order('library_items.created_at DESC').limit(num) }
+  scope :recent, -> num { includes(:item).order('library_items.created_at DESC').limit(num) }
 
   before_create :create_library_item, unless: :item
   after_create :update_library_item
@@ -34,7 +33,7 @@ class Library::Component < ActiveRecord::Base
   end
 
   def update_library_item
-    item.update_attribute(:component, self)
+    item.update_column(:component, self)
     item.update_index
   end
 end

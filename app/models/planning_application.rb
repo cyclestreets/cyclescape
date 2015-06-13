@@ -19,7 +19,6 @@
 #
 
 class PlanningApplication < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   NOS_HIDE_VOTES = 2
 
   include Locatable
@@ -27,8 +26,8 @@ class PlanningApplication < ActiveRecord::Base
   belongs_to :issue
   has_many :hide_votes
   has_many :users, through: :hide_votes
-  scope :not_hidden, where('hide_votes_count < ?', NOS_HIDE_VOTES)
-  scope :ordered, order('start_date DESC')
+  scope :not_hidden, -> { where('hide_votes_count < ?', NOS_HIDE_VOTES) }
+  scope :ordered, -> { order('start_date DESC') }
 
   validates :uid, :url, presence: true
   validates :uid, uniqueness: true

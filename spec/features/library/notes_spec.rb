@@ -118,7 +118,7 @@ describe 'Library notes' do
       context 'long ago' do
         let(:note) { FactoryGirl.create(:library_note, created_by: current_user) }
         it 'should not show you a link' do
-          note.item.update_attribute(:created_at, 2.days.ago)
+          note.item.update_column(:created_at, 2.days.ago)
 
           visit library_note_path(note)
           expect(page).not_to have_link(edit_text)

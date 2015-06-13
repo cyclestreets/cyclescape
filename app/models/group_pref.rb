@@ -15,7 +15,6 @@
 #
 
 class GroupPref < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :group
   belongs_to :membership_secretary, class_name: 'User'

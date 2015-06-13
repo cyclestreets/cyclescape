@@ -17,7 +17,7 @@ FactoryGirl.define do
     file { Pathname.new(pdf_document_path) }
 
     after(:build) do |o|
-      o.item.update_attribute(:component, o)
+      o.item.update_column(:component, o)
     end
 
     factory :word_library_document do

@@ -30,7 +30,7 @@ Cyclescape::Application.routes.draw do
   end
 
   constraints(SubdomainConstraint) do
-    root to: 'groups#show'
+    #root to: 'groups#show'
     resources :threads, controller: 'group/message_threads'
     issues_route controller: 'group/issues'
   end
@@ -51,7 +51,7 @@ Cyclescape::Application.routes.draw do
         end
       end
     end
-    match 'home' => 'home#index'
+    get 'home' => 'home#index'
   end
 
   resources :groups do
@@ -151,8 +151,8 @@ Cyclescape::Application.routes.draw do
   end
   resource :home, only: [:show], controller: 'home'
 
-  match 'template/:action', controller: 'home'
-  match 'pages/:page', controller: 'pages', action: 'show', as: :page, via: :get
+  get 'template/:action', controller: 'home'
+  get 'pages/:page', controller: 'pages', action: 'show', as: :page
 
   root to: 'home#show'
 end

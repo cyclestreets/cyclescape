@@ -19,7 +19,6 @@
 #
 
 class UserPref < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :user
 

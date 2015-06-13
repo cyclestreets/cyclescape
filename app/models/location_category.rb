@@ -1,5 +1,4 @@
 class LocationCategory < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   has_many :user_locations, foreign_key: 'category_id'
 

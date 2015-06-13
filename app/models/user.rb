@@ -33,7 +33,6 @@
 #
 
 class User < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   acts_as_voter
   acts_as_paranoid
@@ -55,7 +54,8 @@ class User < ActiveRecord::Base
     end
   end
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
-  has_many :subscribed_threads, through: :thread_subscriptions, source: :thread, conditions: 'thread_subscriptions.deleted_at is NULL'
+  has_many :subscribed_threads, -> { where('thread_subscriptions.deleted_at is NULL') },
+    through: :thread_subscriptions, source: :thread
   has_many :thread_priorities, class_name: 'UserThreadPriority'
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
   has_many :thread_views
@@ -75,9 +75,9 @@ class User < ActiveRecord::Base
   before_destroy :remove_group_memberships
   before_destroy :remove_thread_subscriptions
 
-  scope :active, where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL')
-  scope :admin,  where(role: 'admin')
-  scope :public, joins(:profile).where(user_profiles: {visibility: 'public'})
+  scope :active, -> { where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL') }
+  scope :admin,  -> { where(role: 'admin') }
+  scope :is_public, -> { joins(:profile).where(user_profiles: {visibility: 'public'}) }
 
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
@@ -251,7 +251,7 @@ class User < ActiveRecord::Base
   end
 
   def can_view(other_users)
-    viewable_by_public_ids = other_users.public.pluck :id
+    viewable_by_public_ids = other_users.is_public.pluck :id
 
     my_group_ids = groups.pluck :id
 

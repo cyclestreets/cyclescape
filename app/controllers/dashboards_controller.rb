@@ -5,7 +5,8 @@ class DashboardsController < ApplicationController
 
     @relevant_issues = IssueDecorator.decorate(current_user.issues_near_locations.order('updated_at DESC').limit(12).includes(:created_by, :tags))
 
-    subscribed_threads = current_user.subscribed_threads.order_by_latest_message.limit(12).includes(:issue, latest_message: [:component, :created_by])
+    subscribed_threads = current_user.subscribed_threads.order_by_latest_message.
+      limit(12).includes(:issue, latest_message: [:component, :created_by])
     @subscribed_threads = ThreadListDecorator.decorate(subscribed_threads)
 
     group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes({ issue: :tags }, :group)

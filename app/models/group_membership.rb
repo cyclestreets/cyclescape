@@ -17,15 +17,14 @@
 #
 
 class GroupMembership < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   ALLOWED_ROLES = %w(committee member)
 
   belongs_to :group
   belongs_to :user, autosave: true
 
-  scope :committee, where("role = 'committee'")
-  scope :normal, where("role = 'member'")
+  scope :committee, -> { where("role = 'committee'") }
+  scope :normal, -> { where("role = 'member'") }
 
   after_initialize :set_default_role
 

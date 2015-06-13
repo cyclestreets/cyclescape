@@ -24,7 +24,7 @@ class Admin::GroupsController < ApplicationController
   end
 
   def update
-    if @group.update_attributes permitted_params
+    if @group.update_columns permitted_params
       set_flash_message :success
       redirect_to action: :index
     else

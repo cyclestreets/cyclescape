@@ -23,7 +23,6 @@
 #
 
 class MessageThread < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   include FakeDestroy
   include Taggable
 
@@ -34,19 +33,19 @@ class MessageThread < ActiveRecord::Base
   belongs_to :created_by, class_name: 'User'
   belongs_to :group
   belongs_to :issue
-  has_many :messages, foreign_key: 'thread_id', autosave: true, order: 'created_at ASC'
-  has_many :subscriptions, class_name: 'ThreadSubscription', foreign_key: 'thread_id', conditions: { deleted_at: nil }
+  has_many :messages, -> { order('created_at ASC') }, foreign_key: 'thread_id', autosave: true
+  has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: 'ThreadSubscription', foreign_key: 'thread_id'
   has_many :subscribers, through: :subscriptions, source: :user
-  has_many :participants, through: :messages, source: :created_by, uniq: true
+  has_many :participants, -> { (uniq(true)) }, through: :messages, source: :created_by
   has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id'
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
-  has_one :latest_message, foreign_key: 'thread_id', order: 'created_at DESC', class_name: 'Message'
+  has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
-  scope :public, where("privacy = 'public'")
-  scope :private, where("privacy = 'group'")
-  scope :with_issue, where('issue_id IS NOT NULL')
-  scope :without_issue, where('issue_id IS NULL')
-  default_scope where(deleted_at: nil)
+  scope :public, -> { where("privacy = 'public'") }
+  scope :private, -> { where("privacy = 'group'") }
+  scope :with_issue, -> { where('issue_id IS NOT NULL') }
+  scope :without_issue, -> { where('issue_id IS NULL') }
+  default_scope { where(deleted_at: nil) }
 
   before_validation :set_public_token, on: :create
 
@@ -202,7 +201,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def messages_text
-    messages.all.map(&:searchable_text).join(' ')
+    messages.map(&:searchable_text).join(' ')
   end
 
   # for auth checks

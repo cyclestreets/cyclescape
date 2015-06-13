@@ -16,7 +16,6 @@
 #
 
 class UserThreadPriority < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
   PRIORITIES = { very_high: 10,
                  high: 8,
                  medium: 6,

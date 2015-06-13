@@ -28,7 +28,7 @@ class Library::DocumentsController < ApplicationController
   end
 
   def update
-    if @document.update_attributes permitted_params
+    if @document.update_columns permitted_params
       redirect_to library_document_path @document
     else
       render :edit

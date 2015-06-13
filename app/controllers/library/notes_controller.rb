@@ -31,7 +31,7 @@ class Library::NotesController < ApplicationController
   end
 
   def update
-    if @note.update_attributes permitted_params
+    if @note.update_columns permitted_params
       set_flash_message :success
       redirect_to library_note_path @note
     else
