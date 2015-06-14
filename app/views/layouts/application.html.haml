@@ -54,7 +54,7 @@
           = render partial: "layouts/search"
     .flash-container
       - [:alert, :notice].each do |type|
-        - if flash.key? type
+        - if flash[type]
           .flash{class: type}
             = flash[type]
     #page
