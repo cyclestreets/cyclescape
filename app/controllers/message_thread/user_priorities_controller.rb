@@ -3,7 +3,7 @@ class MessageThread::UserPrioritiesController < MessageThread::BaseController
     utp = @thread.user_priorities.build
     utp.user = current_user
 
-    if utp.update_columns permitted_params
+    if utp.update permitted_params
       set_flash_message :success
     else
       set_flash_message :failure
@@ -14,7 +14,7 @@ class MessageThread::UserPrioritiesController < MessageThread::BaseController
   def update
     utp = @thread.priority_for current_user
 
-    if utp.update_columns permitted_params
+    if utp.update permitted_params
       set_flash_message :success
     else
       set_flash_message :failure

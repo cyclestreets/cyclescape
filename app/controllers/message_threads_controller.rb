@@ -32,7 +32,7 @@ class MessageThreadsController < ApplicationController
   end
 
   def update
-    if thread.update_columns permitted_params
+    if thread.update permitted_params
       set_flash_message :success
       redirect_to thread_path thread
     else

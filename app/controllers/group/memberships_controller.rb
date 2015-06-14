@@ -27,7 +27,7 @@ class Group::MembershipsController < ApplicationController
   def update
     @membership = @group.memberships.find params[:id]
 
-    if @membership.update_columns permitted_params
+    if @membership.update permitted_params
       set_flash_message :success
       redirect_to group_members_path
     else

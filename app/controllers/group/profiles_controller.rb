@@ -14,7 +14,7 @@ class Group::ProfilesController < ApplicationController
   end
 
   def update
-    if @group.profile.update_columns permitted_params
+    if @group.profile.update permitted_params
       set_flash_message :success
       redirect_to action: :show
     else
