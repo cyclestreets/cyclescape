@@ -37,7 +37,7 @@ gem 'draper', '~> 1.0'
 gem 'email_reply_parser'
 gem 'memoist'
 gem 'excon'
-gem 'paranoia', '~> 1.0'
+gem 'paranoia', '~> 2.0'
 
 gem 'sass-rails'
 gem 'sass'
