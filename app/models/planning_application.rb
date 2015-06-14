@@ -2,20 +2,25 @@
 #
 # Table name: planning_applications
 #
-#  id                      :integer         not null, primary key
-#  openlylocal_id          :integer         not null
-#  openlylocal_url         :string(255)
-#  address                 :string(255)
+#  id                      :integer          not null, primary key
+#  address                 :text
 #  postcode                :string(255)
 #  description             :text
-#  council_name            :string(255)
 #  openlylocal_council_url :string(255)
-#  url                     :string(255)
-#  uid                     :string(255)     not null
+#  url                     :text
+#  uid                     :string(255)      not null
 #  issue_id                :integer
-#  created_at              :datetime        not null
-#  updated_at              :datetime        not null
-#  location                :spatial({:srid=
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  location                :spatial          geometry, 4326
+#  authority_name          :string(255)
+#  start_date              :date
+#  hide_votes_count        :integer          default(0)
+#
+# Indexes
+#
+#  index_planning_applications_on_issue_id  (issue_id)
+#  index_planning_applications_on_uid       (uid) UNIQUE
 #
 
 class PlanningApplication < ActiveRecord::Base

@@ -12,8 +12,6 @@
 #
 #  index_thread_subscriptions_on_thread_id  (thread_id)
 #  index_thread_subscriptions_on_user_id    (user_id)
-#  sub_thread_id                            (thread_id)
-#  sub_user_id                              (user_id)
 #
 
 class ThreadSubscription < ActiveRecord::Base

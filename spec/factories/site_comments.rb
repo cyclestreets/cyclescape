@@ -1,19 +1,3 @@
-# == Schema Information
-#
-# Table name: site_comments
-#
-#  id           :integer          not null, primary key
-#  user_id      :integer
-#  name         :string(255)
-#  email        :string(255)
-#  body         :text             not null
-#  context_url  :string(255)
-#  context_data :text
-#  created_at   :datetime         not null
-#  viewed_at    :datetime
-#  deleted_at   :datetime
-#
-
 FactoryGirl.define do
   factory :site_comment do
     body "Meg: Mom, I can't clean, I've got stuff to do. Lois:\nMeg, we all know you don't have stuff to do"

@@ -1,21 +1,3 @@
-# == Schema Information
-#
-# Table name: group_profiles
-#
-#  id                   :integer          not null, primary key
-#  group_id             :integer          not null
-#  description          :text
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  location             :spatial          geometry, 4326
-#  joining_instructions :text
-#
-# Indexes
-#
-#  index_group_profiles_on_group_id  (group_id)
-#  index_group_profiles_on_location  (location)
-#
-
 FactoryGirl.define do
   factory :group_profile do
     description 'This is a group of people who want to do some stuff. It probably involves cycling, but you can never be certain about that'

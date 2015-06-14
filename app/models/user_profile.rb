@@ -7,6 +7,7 @@
 #  picture_uid :string(255)
 #  website     :string(255)
 #  about       :text
+#  visibility  :string(255)      default("public"), not null
 #
 # Indexes
 #

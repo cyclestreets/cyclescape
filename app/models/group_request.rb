@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: group_requests
+#
+#  id                     :integer          not null, primary key
+#  status                 :string(255)
+#  user_id                :integer          not null
+#  actioned_by_id         :integer
+#  name                   :string(255)      not null
+#  short_name             :string(255)      not null
+#  default_thread_privacy :string(255)      default("public"), not null
+#  website                :string(255)
+#  email                  :string(255)      not null
+#  message                :text
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  rejection_message      :text
+#
+# Indexes
+#
+#  index_group_requests_on_name        (name) UNIQUE
+#  index_group_requests_on_short_name  (short_name) UNIQUE
+#  index_group_requests_on_user_id     (user_id)
+#
+
 class GroupRequest < ActiveRecord::Base
 
   belongs_to :user

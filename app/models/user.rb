@@ -17,7 +17,7 @@
 #  disabled_at            :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  invitation_token       :string(60)
+#  invitation_token       :string(255)
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
 #  remembered_group_id    :integer
@@ -25,6 +25,7 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
 #  deleted_at             :datetime
+#  invitation_created_at  :datetime
 #
 # Indexes
 #
