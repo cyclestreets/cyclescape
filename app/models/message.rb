@@ -45,7 +45,7 @@ class Message < ActiveRecord::Base
   end
 
   def component_name
-    (component ? component : self).class.model_name.underscore
+    (component ? component : self).class.name.underscore
   end
 
   def searchable_text

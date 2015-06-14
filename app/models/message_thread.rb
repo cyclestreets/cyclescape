@@ -41,10 +41,10 @@ class MessageThread < ActiveRecord::Base
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
   has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
-  scope :public, -> { where("privacy = 'public'") }
-  scope :private, -> { where("privacy = 'group'") }
-  scope :with_issue, -> { where('issue_id IS NOT NULL') }
-  scope :without_issue, -> { where('issue_id IS NULL') }
+  scope :public, -> { where(privacy: 'public') }
+  scope :private, -> { where(privacy: 'group') }
+  scope :with_issue, -> { where.not(issue_id: nil) }
+  scope :without_issue, -> { where(issue_id: nil) }
   default_scope { where(deleted_at: nil) }
 
   before_validation :set_public_token, on: :create
@@ -93,7 +93,7 @@ class MessageThread < ActiveRecord::Base
       found.undelete!
       found
     else
-      subscriptions.create({ user: user }, without_protection: true)
+      subscriptions.create( user: user )
     end
   end
 
@@ -116,7 +116,7 @@ class MessageThread < ActiveRecord::Base
 
     m = []
 
-    m << messages.create!({ body: stripped, created_by: user }, without_protection: true)
+    m << messages.create!( body: stripped, created_by: user )
 
     # Attachments
     mail.message.attachments.each do |attachment|
@@ -125,7 +125,7 @@ class MessageThread < ActiveRecord::Base
       else
         component = DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
       end
-      message = messages.build({ created_by: user }, without_protection: true)
+      message = messages.build( created_by: user )
       component.thread = self
       component.message = message
       component.created_by = user

@@ -60,8 +60,7 @@ class NewThreadNotifier
     # and where the user has the notification preference on
     locations = UserLocation.intersects(buffered_location).
         joins(user: :prefs).
-        where(UserPref.arel_table[:involve_my_locations].in(%w(notify subscribe))).
-        all
+        where(UserPref.arel_table[:involve_my_locations].in(%w(notify subscribe)))
 
     # Filter the returned locations to ensure only one location is returned per user,
     # and that it is the smallest (i.e. most relevant) location. Refactoring this into

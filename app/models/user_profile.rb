@@ -36,7 +36,7 @@ class UserProfile < ActiveRecord::Base
   end
 
   def clear
-    update_columns(picture: nil, website: nil, about: nil)
+    update(picture: nil, website: nil, about: nil)
   end
 
   protected
