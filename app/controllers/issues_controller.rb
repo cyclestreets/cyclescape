@@ -17,7 +17,7 @@ class IssuesController < ApplicationController
     @issue = IssueDecorator.decorate issue
     set_page_title @issue.title
     @threads = ThreadListDecorator.decorate_collection @issue.threads.order_by_latest_message.includes(:group)
-    @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
+    @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue), cancel_url: issue_path(@issue))
   end
 
   def new

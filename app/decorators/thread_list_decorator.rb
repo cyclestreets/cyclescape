@@ -1,5 +1,10 @@
 class ThreadListDecorator < ApplicationDecorator
   alias_method :thread, :source
+
+  def self.decl_auth_context
+    :message_threads
+  end
+
   MESSAGE_ICON_MAP = {
     'photo_message' => 'image',
     'link_message' => 'link',
