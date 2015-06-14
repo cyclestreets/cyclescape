@@ -1,6 +1,4 @@
 class IssuesController < ApplicationController
-  before_filter :load_issue, only: [:show, :edit, :update, :destroy, :geometry,
-                                    :vote_up, :vote_down, :vote_clear]
   filter_access_to [:edit, :update, :destroy], attribute_check: true
 
   def index
@@ -16,10 +14,10 @@ class IssuesController < ApplicationController
   end
 
   def show
-    @issue = IssueDecorator.decorate @issue
+    @issue = IssueDecorator.decorate issue
     set_page_title @issue.title
     @threads = ThreadListDecorator.decorate_collection @issue.threads.order_by_latest_message.includes(:group)
-    @tag_panel = TagPanelDecorator.new @issue, form_url: issue_tags_path(@issue)
+    @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
   end
 
   def new
@@ -40,11 +38,11 @@ class IssuesController < ApplicationController
   end
 
   def edit
-    @start_location = @issue.location
+    @start_location = issue.location
   end
 
   def update
-    if @issue.update permitted_params
+    if issue.update permitted_params
       set_flash_message :success
       redirect_to action: :show
     else
@@ -54,18 +52,18 @@ class IssuesController < ApplicationController
   end
 
   def destroy
-    if @issue.destroy
+    if issue.destroy
       set_flash_message :success
       redirect_to issues_path
     else
       set_flash_message :failure
-      redirect_to @issue
+      redirect_to issue
     end
   end
 
   def geometry
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(issue_feature(IssueDecorator.decorate(@issue))) }
+      format.json { render json: RGeo::GeoJSON.encode(issue_feature(IssueDecorator.decorate(issue))) }
     end
   end
 
@@ -85,32 +83,32 @@ class IssuesController < ApplicationController
   end
 
   def vote_up
-    if current_user.voted_for? @issue
+    if current_user.voted_for? issue
       set_flash_message :already
     else
-      current_user.vote_exclusively_for @issue
+      current_user.vote_exclusively_for issue
       set_flash_message :success
     end
-    redirect_to @issue
+    redirect_to issue
   end
 
   def vote_down
-    if current_user.voted_against? @issue
+    if current_user.voted_against? issue
       set_flash_message :already
     else
-      current_user.vote_exclusively_against @issue
+      current_user.vote_exclusively_against issue
       set_flash_message :success
     end
-    redirect_to @issue
+    redirect_to issue
   end
 
   def vote_clear
-    if current_user.clear_votes @issue
+    if current_user.clear_votes issue
       set_flash_message :success
     else
       set_flash_message :failure
     end
-    redirect_to @issue
+    redirect_to issue
   end
 
   protected
@@ -133,7 +131,7 @@ class IssuesController < ApplicationController
                       created_by_url: view_context.url_for(issue.created_by))
   end
 
-  def load_issue
+  def issue
     @issue ||= Issue.find(params[:id])
   end
 
