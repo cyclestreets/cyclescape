@@ -5,7 +5,7 @@ class TagPanelDecorator < ApplicationDecorator
     self.context = context
     self.form_url = options[:form_url] || h.url_for([context, :tags])
     self.cancel_url = options[:cancel_url] || h.url_for
-    self.auth_context = options[:auth_context] || ((context.respond_to?(:model) ? context.model : context).class.model_name.underscore + '_tags').to_sym
+    self.auth_context = options[:auth_context] || ((context.respond_to?(:model) ? context.model : context).class.name.underscore + '_tags').to_sym
   end
 
   def render

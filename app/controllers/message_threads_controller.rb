@@ -3,12 +3,12 @@ class MessageThreadsController < ApplicationController
 
   def index
     threads = ThreadList.recent_public.page(params[:page]).includes(:issue, :group)
-    @threads = ThreadListDecorator.decorate threads
+    @threads = ThreadListDecorator.decorate_collection threads
   end
 
   def show
     set_page_title thread.title
-    @issue = IssueDecorator.decorate(thread.issue) if thread.issue
+    @issue = IssueDecorator.decorate thread.issue if thread.issue
     @messages = thread.messages.includes({ created_by: :profile }, :component).to_a
     @new_message = thread.messages.build
     @library_items = Library::Item.find_by_tags_from(thread).limit(5)
@@ -23,7 +23,7 @@ class MessageThreadsController < ApplicationController
       end
       ThreadRecorder.thread_viewed thread, current_user
     else
-      @subscribers = thread.subscribers.public
+      @subscribers = thread.subscribers.is_public
     end
   end
 

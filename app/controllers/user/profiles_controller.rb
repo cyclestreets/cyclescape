@@ -9,10 +9,10 @@ class User::ProfilesController < ApplicationController
     @user = UserDecorator.decorate(@user)
 
     involved_threads = ThreadList.public_recent_involved_with(@user, 10).includes(:group)
-    @involved_threads = ThreadListDecorator.decorate(involved_threads)
+    @involved_threads = ThreadListDecorator.decorate_collection(involved_threads)
 
     reported_issues = Issue.by_most_recent.created_by(@user)
-    @reported_issues = IssueDecorator.decorate(reported_issues)
+    @reported_issues = IssueDecorator.decorate_collection(reported_issues)
 
     # Groups that the current user could invite this particular user to
     @add_to_groups = current_user ? (current_user.memberships.committee.collect { |m| m.group } - @user.groups) : nil

@@ -4,7 +4,7 @@ class Issue::MessageThreadsController < MessageThreadsController
 
   def index
     threads = @issue.threads.order_by_latest_message.page params[:page]
-    @threads = ThreadListDecorator.decorate threads
+    @threads = ThreadListDecorator.decorate_collection threads
   end
 
   def new
@@ -26,7 +26,7 @@ class Issue::MessageThreadsController < MessageThreadsController
     @message.created_by = current_user
 
     if @thread.save
-      @thread.subscriptions.create({ user: current_user }, without_protection: true) unless current_user.subscribed_to_thread?(@thread)
+      @thread.subscriptions.create( user: current_user ) unless current_user.subscribed_to_thread?(@thread)
       ThreadSubscriber.subscribe_users @thread
       ThreadNotifier.notify_subscribers @thread, :new_message, @message
 

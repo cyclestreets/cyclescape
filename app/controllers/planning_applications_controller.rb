@@ -14,7 +14,7 @@ class PlanningApplicationsController < ApplicationController
   def search
     @query = params[:q]
     planning_applications = PlanningApplication.where("uid LIKE ?", "%#{@query}%").paginate(page: params[:page])
-    @planning_applications = PlanningApplicationDecorator.decorate(planning_applications)
+    @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications
   end
 
   def show_uid
@@ -38,7 +38,7 @@ class PlanningApplicationsController < ApplicationController
     planning_application = PlanningApplication.find params[:id]
     planning_application.hide_votes.find_by_user_id(current_user.id).destroy
 
-    @planning_application = PlanningApplicationDecorator.decorate(planning_application.reload)
+    @planning_application = PlanningApplicationDecorator.decorate planning_application.reload
 
     respond_to do |format|
       format.js {}
@@ -54,7 +54,7 @@ class PlanningApplicationsController < ApplicationController
                            else
                              PlanningApplication.find_by_uid(params[:uid])
                            end
-    @planning_application = PlanningApplicationDecorator.decorate(planning_application)
+    @planning_application = PlanningApplicationDecorator.decorate planning_application
   end
 
   def planning_application_feature(planning_application)

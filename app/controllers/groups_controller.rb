@@ -2,7 +2,7 @@ class GroupsController < ApplicationController
   def index
     groups = Group.paginate(page: params[:page])
 
-    @groups = GroupDecorator.decorate(groups)
+    @groups = GroupDecorator.decorate_collection groups
     @start_location = index_start_location
   end
 
@@ -20,8 +20,8 @@ class GroupsController < ApplicationController
       else
         recent_threads = ThreadList.recent_public_from_groups(@group, 10).includes(:issue, :group)
       end
-      @recent_threads = ThreadListDecorator.decorate(recent_threads)
-      @recent_issues = IssueDecorator.decorate(@group.recent_issues.limit(10).includes(:created_by))
+      @recent_threads = ThreadListDecorator.decorate_collection recent_threads
+      @recent_issues = IssueDecorator.decorate_collection @group.recent_issues.limit(10).includes(:created_by)
     else
       redirect_to root_url(subdomain: 'www')
     end

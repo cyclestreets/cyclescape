@@ -10,16 +10,16 @@ class IssuesController < ApplicationController
     popular_issue_ids = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).map &:id
     popular_issues = Issue.where(id: popular_issue_ids).paginate(page: params[:pop_issues_page]).includes(:created_by)
 
-    @issues = IssueDecorator.decorate(issues)
-    @popular_issues = IssueDecorator.decorate(popular_issues)
+    @issues = IssueDecorator.decorate_collection issues
+    @popular_issues = IssueDecorator.decorate_collection popular_issues
     @start_location = index_start_location
   end
 
   def show
-    @issue = IssueDecorator.decorate(@issue)
+    @issue = IssueDecorator.decorate @issue
     set_page_title @issue.title
-    @threads = ThreadListDecorator.decorate(@issue.threads.order_by_latest_message.includes(:group))
-    @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
+    @threads = ThreadListDecorator.decorate_collection @issue.threads.order_by_latest_message.includes(:group)
+    @tag_panel = TagPanelDecorator.new @issue, form_url: issue_tags_path(@issue)
   end
 
   def new
@@ -44,7 +44,7 @@ class IssuesController < ApplicationController
   end
 
   def update
-    if @issue.update_columns permitted_params
+    if @issue.update permitted_params
       set_flash_message :success
       redirect_to action: :show
     else
