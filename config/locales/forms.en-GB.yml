@@ -18,6 +18,7 @@
 
   formtastic:
     labels:
+      tags_string: "Tags"
       group:
         name: "Name of the group"
         short_name: "Subdomain"
@@ -41,22 +42,17 @@
         create: *labels_issue_new
         edit: *labels_issue_new
         update: *labels_issue_new
-        tags_string: "Tags"
-      library_document:
+      library/document:
         file: "Document"
-        tags_string: "Tags"
-      library_item:
-        tags_string: "Tags"
-      library_note:
+      library/item:
+      library/note:
         body: "Note"
-        tags_string: "Tags"
       link_message:
         url: "URL"
       message:
         body: "Message"
       message_thread:
         group: "Owned by"
-        tags_string: "Tags"
       site_comment:
         body: "Message"
       thread_subscription:
@@ -111,6 +107,7 @@
       update: "Save"
       saving: "Saving\u2026"
       cancel: "Cancel"
+      update_tags: "Update Tags"
       deadline_message:
         create: "Add Deadline"
       document_message:
@@ -124,9 +121,6 @@
       issue:
         create: "Send Report"
         update: "Save Report"
-        update_tags: "Update Tags"
-      library_item:
-        update_tags: "Update Tags"
       library_item_message:
         create: "Add Library Item"
       library/document:
@@ -141,7 +135,6 @@
         create: "Post Message"
       message_thread:
         create: "Create Thread"
-        update_tags: "Update Tags"
       photo_message:
         create: "Add Photo"
       site_comment:

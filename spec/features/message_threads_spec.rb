@@ -75,7 +75,6 @@ describe 'Message threads' do
       let(:issue) { thread_with_issue.issue }
 
       before do
-        # issue = thread_with_issue.issue
         thread_with_issue.issue.destroy
         visit thread_path(thread_with_issue)
       end
@@ -181,7 +180,7 @@ describe 'Message threads' do
           # This form is initially hidden
           within('form.edit-tags') do
             fill_in 'Tags', with: 'bike wheels'
-            click_on I18n.t('.formtastic.actions.message_thread.update_tags')
+            click_on I18n.t('.formtastic.actions.update_tags')
           end
           # Page submission is AJAX and returns json
           expect(page.source).to have_content('bike')

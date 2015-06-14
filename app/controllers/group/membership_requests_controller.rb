@@ -17,15 +17,15 @@ class Group::MembershipRequestsController < ApplicationController
 
   def create
     if current_user.groups.include? @group
-      redirect_to @group, alert: t('.group.membership_requests.create.already_member')
+      redirect_to @group, alert: t('group.membership_requests.create.already_member')
     elsif current_user.membership_request_pending_for? @group
-      redirect_to @group, alert: t('.group.membership_requests.create.already_asked')
+      redirect_to @group, alert: t('group.membership_requests.create.already_asked')
     else
       @request = @group.membership_requests.new permitted_params
       @request.user = current_user
 
       if @request.save
-        redirect_to @group, notice: t('.group.membership_requests.create.requested')
+        redirect_to @group, notice: t('group.membership_requests.create.requested')
         Notifications.new_group_membership_request(@request).deliver
       else
         render :new
