@@ -15,12 +15,13 @@ describe InboundMailProcessor do
   context 'thread reply mail' do
     let(:thread) { FactoryGirl.create(:message_thread) }
     let(:email_recipient) { "thread-#{thread.public_token}@cyclescape.org" }
-    let(:inbound_mail) { FactoryGirl.create(:inbound_mail, to: email_recipient) }
+    before do
+      subject.perform(inbound_mail.id)
+      thread.reload
+    end
 
     context 'plain text email' do
-      before do
-        subject.perform(inbound_mail.id)
-      end
+      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, to: email_recipient) }
 
       it 'should create a new message on the thread' do
         expect(thread.messages.size).to eq(1)
@@ -28,7 +29,8 @@ describe InboundMailProcessor do
 
       it 'should have the same text as the email' do
         # There are weird newline issues here, each \r is duplicated in the model's response
-        expect(thread.messages.first.body).to eq("Hi,\n\nCupcake ipsum dolor sit amet tart gummies. Sweet roll jelly pudding\nmacaroon ice cream. Halvah apple pie sweet. Halvah bear claw pudding.\nBonbon cake powder pastry. Jelly-o candy canes icing jelly macaroon.\nCandy topping chupa chups. Dessert biscuit biscuit gingerbread macaroon\nchupa chups wafer. Oat cake apple pie icing. Candy canes icing dessert.\n\nChocolate cake toffee dessert biscuit tootsie roll powder chocolate\njelly beans marzipan. Pastry tiramisu ice cream jujubes gummi bears.\nCaramels muffin cupcake candy. Caramels pie sweet roll. Jelly beans\ncupcake brownie. Chupa chups tootsie roll bonbon sesame snaps chocolate\ncake bear claw chocolate cake applicake cake. Jelly powder biscuit.\nChupa chups ice cream candy canes icing muffin jelly beans marshmallow.\nIce cream bonbon lemon drops lollipop. Croissant drage applicake\ntopping liquorice.\n\nAndrew\n")
+        expect(thread.messages.first.body).
+          to eq("Hi,\n\nCupcake ipsum dolor sit amet tart gummies. Sweet roll jelly pudding\nmacaroon ice cream. Halvah apple pie sweet. Halvah bear claw pudding.\nBonbon cake powder pastry. Jelly-o candy canes icing jelly macaroon.\nCandy topping chupa chups. Dessert biscuit biscuit gingerbread macaroon\nchupa chups wafer. Oat cake apple pie icing. Candy canes icing dessert.\n\nChocolate cake toffee dessert biscuit tootsie roll powder chocolate\njelly beans marzipan. Pastry tiramisu ice cream jujubes gummi bears.\nCaramels muffin cupcake candy. Caramels pie sweet roll. Jelly beans\ncupcake brownie. Chupa chups tootsie roll bonbon sesame snaps chocolate\ncake bear claw chocolate cake applicake cake. Jelly powder biscuit.\nChupa chups ice cream candy canes icing muffin jelly beans marshmallow.\nIce cream bonbon lemon drops lollipop. Croissant drage applicake\ntopping liquorice.\n\nAndrew\n")
       end
 
       it 'should have be created by a new user with the email address' do
@@ -38,14 +40,19 @@ describe InboundMailProcessor do
       it 'should subscribe the user to the thread' do
         expect(thread.messages.first.created_by.subscribed_to_thread?(thread)).to be_truthy
       end
+
+      it 'should be sent out' do
+        expect(ThreadNotifier).to receive(:notify_subscribers) do |thread, type, message|
+          expect(thread).to be_a(MessageThread)
+          expect(type).to eq(:new_message)
+          expect(message).to be_a(Message)
+        end
+        subject.perform(inbound_mail.id)
+      end
     end
 
     context 'multipart text-only email' do
       let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :multipart_text_only, to: email_recipient) }
-
-      before do
-        subject.perform(inbound_mail.id)
-      end
 
       it 'should create a new message on the thread' do
         expect(thread.messages.size).to eq(1)
@@ -60,10 +67,6 @@ describe InboundMailProcessor do
     context 'multipart email containing iso-8859-1 quoted-printable text' do
       let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :multipart_iso_8859_1, to: email_recipient) }
 
-      before do
-        subject.perform(inbound_mail.id)
-      end
-
       it 'should create a new message on the thread' do
         expect(thread.messages.size).to eq(1)
       end
@@ -76,10 +79,6 @@ describe InboundMailProcessor do
 
     context 'multipart email with image attachment' do
       let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :with_attached_image, to: email_recipient) }
-
-      before do
-        subject.perform(inbound_mail.id)
-      end
 
       it 'should create two new messages on the thread' do
         expect(thread.messages.size).to eq(2)
@@ -97,14 +96,17 @@ describe InboundMailProcessor do
         expect(message.component.photo.format).to eq(:jpeg)
         expect(message.component.photo.width).to eql(100)
       end
+
+      it 'should send multiple notifications' do
+        expect(ThreadNotifier).to receive(:notify_subscribers).with(kind_of(MessageThread), :new_message, kind_of(Message))
+        expect(ThreadNotifier).to receive(:notify_subscribers).with(kind_of(MessageThread), :new_photo_message, kind_of(Message))
+
+        subject.perform(inbound_mail.id)
+      end
     end
 
     context 'multipart email with file attachment' do
       let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :with_attached_file, to: email_recipient) }
-
-      before do
-        subject.perform(inbound_mail.id)
-      end
 
       it 'should create two new messages on the thread' do
         expect(thread.messages.size).to eq(2)
@@ -124,34 +126,8 @@ describe InboundMailProcessor do
       end
     end
 
-    context 'notifications' do
-      it 'should be sent out' do
-        expect(ThreadNotifier).to receive(:notify_subscribers) do |thread, type, message|
-          expect(thread).to be_a(MessageThread)
-          expect(type).to eq(:new_message)
-          expect(message).to be_a(Message)
-        end
-        subject.perform(inbound_mail.id)
-      end
-
-      context 'with attachments' do
-        let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :with_attached_image, to: email_recipient) }
-
-        it 'should send multiple notifications' do
-          expect(ThreadNotifier).to receive(:notify_subscribers).with(kind_of(MessageThread), :new_message, kind_of(Message))
-          expect(ThreadNotifier).to receive(:notify_subscribers).with(kind_of(MessageThread), :new_photo_message, kind_of(Message))
-
-          subject.perform(inbound_mail.id)
-        end
-      end
-    end
-
     context 'with an encoded subject' do
       let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :encoded_subject, to: email_recipient) }
-
-      before do
-        subject.perform(inbound_mail.id)
-      end
 
       it 'should work without throwing an encoding error' do
         expect(thread.messages.size).to eq(1)
@@ -160,10 +136,6 @@ describe InboundMailProcessor do
 
     context 'with a reply below a quote' do
       let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :reply_below_quote, to: email_recipient) }
-
-      before do
-        subject.perform(inbound_mail.id)
-      end
 
       it "should preserve the blank line between quote and reply" do
         message_body = thread.messages[0].body
