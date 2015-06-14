@@ -317,7 +317,7 @@ describe User do
       public_user = FactoryGirl.create(:user, full_name: 'public user')
       public_user.profile.update visibility: 'public'
 
-      expect(subject.can_view(User.scoped)).to match_array([subject, private_user_in_same_group, public_user])
+      expect(subject.can_view(User.all)).to match_array([subject, private_user_in_same_group, public_user])
     end
   end
 
@@ -356,7 +356,7 @@ describe User do
 
     it 'should not really be deleted' do
       subject.destroy
-      expect(User.with_deleted.all).to include(subject)
+      expect(User.with_deleted).to include(subject)
     end
 
     it 'should remove the display name and obfuscate the full name' do

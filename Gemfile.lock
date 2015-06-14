@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/nikolai-b/acts_as_indexed.git
-  revision: 2fe79d873354e82f16fe5f60495faf4fff6fee71
+  revision: 90eb9c220451e7d8eca47f6b70ab5eb5d19b9442
   specs:
     acts_as_indexed (0.8.3)
 

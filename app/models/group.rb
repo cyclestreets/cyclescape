@@ -34,11 +34,13 @@ class Group < ActiveRecord::Base
   after_create :create_default_prefs, unless: :prefs
 
   def committee_members
-    members.where("group_memberships.role = 'committee'").order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")
+    members.includes(:memberships).where(group_memberships: {role: 'committee'}).
+      order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
   end
 
   def normal_members
-    members.where("group_memberships.role = 'member'").order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")
+    members.includes(:memberships).where(group_memberships: {role: 'member'})
+      .order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
   end
 
   def has_member?(user)

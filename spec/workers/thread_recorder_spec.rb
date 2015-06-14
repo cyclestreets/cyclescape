@@ -31,14 +31,15 @@ describe ThreadRecorder do
 
     it 'should record the time the thread was viewed at' do
       subject.record_thread_viewed(thread.id, user.id, time.to_s)
-      expect(ThreadView.find_by_thread_id_and_user_id(thread.id, user.id).viewed_at.to_i).to eql(time.to_i)
+      expect(ThreadView.where(thread_id: thread.id,user_id: user.id).first.viewed_at.to_i).to eql(time.to_i)
     end
 
     it 'should update the ThreadView record, not add another one' do
       subject.record_thread_viewed(thread.id, user.id, time.to_s)
       subject.record_thread_viewed(thread.id, user.id, time2.to_s)
-      expect(ThreadView.find_all_by_thread_id_and_user_id(thread.id, user.id).length).to eql(1)
-      expect(ThreadView.find_by_thread_id_and_user_id(thread.id, user.id).viewed_at.to_i).to eql(time2.to_i)
+      thread_views = ThreadView.where(thread_id: thread.id, user_id: user.id)
+      expect(thread_views.size).to eql(1)
+      expect(thread_views.first.viewed_at.to_i).to eql(time2.to_i)
     end
   end
 end

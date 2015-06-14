@@ -6,12 +6,12 @@ module Taggable
   module ClassMethods
     def find_by_tags_from(taggable)
       tags = Arel::Table.new(:tags)
-      includes(:tags).where(tags[:name].in(taggable.tags.map { |t| t.name }))
+      includes(:tags).where(tags[:name].in(taggable.tags.map { |t| t.name })).references(:tags)
     end
 
     def find_by_tag(tag)
       tags = Arel::Table.new(:tags)
-      joins(:tags).where(tags[:name].eq(tag.name))
+      includes(:tags).where(tags[:name].eq(tag.name)).references(:tags)
     end
   end
 
