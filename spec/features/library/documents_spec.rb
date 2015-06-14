@@ -89,7 +89,7 @@ describe 'Library documents' do
     it 'should be taggable' do
       click_on 'Edit tags'
       fill_in 'Tags', with: 'cycle parking'
-      click_on I18n.t('.formtastic.actions.library/item.update_tags')
+      click_on I18n.t('.formtastic.actions.update_tags')
       expect(JSON.parse(page.source)['tagspanel']).to have_content('parking')
     end
   end
