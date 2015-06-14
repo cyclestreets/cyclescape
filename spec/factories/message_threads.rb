@@ -48,6 +48,7 @@ FactoryGirl.define do
       after(:create) do |mt|
         user = FactoryGirl.create(:user)  # To prevent creating 1 user per message
         FactoryGirl.create_list(:message, 2, thread: mt, created_by: user)
+        mt.reload
       end
     end
 

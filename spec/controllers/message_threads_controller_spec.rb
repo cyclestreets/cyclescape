@@ -31,6 +31,7 @@ describe MessageThreadsController do
       context 'who viewed the thread and no messages have been posted since' do
         it 'should assign the final message' do
           FactoryGirl.create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 1.day)
+          thread.reload
           get :show, id: thread
           expect(assigns(:view_from)).to eql(thread.messages.last)
         end

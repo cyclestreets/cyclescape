@@ -284,14 +284,14 @@ describe User do
     end
   end
 
-  it 'should have public scope' do
+  it 'should have is_public scope' do
     private_user = FactoryGirl.create(:user)
     private_user.profile.update visibility: 'group'
 
     public_user = FactoryGirl.create(:user)
     public_user.profile.update visibility: 'public'
 
-    public_users = described_class.public
+    public_users = described_class.is_public
     expect(public_users).to include(public_user)
     expect(public_users).to_not include(private_user)
   end
