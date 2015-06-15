@@ -8,7 +8,7 @@ describe 'User preferences' do
   end
 
   before do
-    visit edit_user_prefs_path(current_user)
+    visit current_user_prefs_edit_path
   end
 
   describe 'involvement in user location matters' do

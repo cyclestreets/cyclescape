@@ -8,6 +8,6 @@ class ConfirmationsController < Devise::ConfirmationsController
 
   # The path used after confirmation.
   def after_confirmation_path_for(resource_name, resource)
-    user_locations_path(protocol: 'http')
+    current_user_locations_path(protocol: 'http')
   end
 end

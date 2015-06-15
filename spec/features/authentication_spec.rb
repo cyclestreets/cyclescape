@@ -103,7 +103,7 @@ describe 'Authentication and authorization' do
 
     it 'should direct you to your locations page' do
       visit_in_email('Confirm my account')
-      expect(page.current_path).to eq(user_locations_path)
+      expect(page.current_path).to eq(current_user_locations_path)
     end
 
     it 'should resend your confirmation email, if you ask for it' do
