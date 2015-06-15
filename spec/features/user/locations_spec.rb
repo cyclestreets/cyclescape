@@ -9,7 +9,7 @@ describe 'User locations' do
     include_context 'signed in as a site user'
 
     it 'should show a page for a new user' do
-      visit user_locations_path
+      visit current_user_locations_path
       expect(page).to have_content('My Locations')
     end
 
@@ -34,15 +34,15 @@ describe 'User locations' do
 
       it 'should give appropriate guidance based on your settings' do
         current_user.prefs.update_column(:involve_my_locations, 'none')
-        visit user_locations_path
+        visit current_user_locations_path
         expect(page).to have_content(guidance_text('.combined_locations_guidance_none_html'))
 
         current_user.prefs.update_column(:involve_my_locations, 'notify')
-        visit user_locations_path
+        visit current_user_locations_path
         expect(page).to have_content(guidance_text('.combined_locations_guidance_notify_html'))
 
         current_user.prefs.update_column(:involve_my_locations, 'subscribe')
-        visit user_locations_path
+        visit current_user_locations_path
         expect(page).to have_content(guidance_text('.combined_locations_guidance_subscribe_html'))
       end
     end
@@ -51,7 +51,7 @@ describe 'User locations' do
       let!(:location) { FactoryGirl.create(:user_location, user: current_user, category: location_category) }
 
       it 'should let you edit an existing location' do
-        visit user_locations_path
+        visit current_user_locations_path
         click_on 'Edit' # hmm, edit the right one?
 
         expect(page).to have_content('Edit Location')
@@ -62,7 +62,7 @@ describe 'User locations' do
       end
 
       it 'should let you delete a location' do
-        visit user_locations_path
+        visit current_user_locations_path
         click_on 'Delete'
         expect(page).to have_content('Location deleted')
       end

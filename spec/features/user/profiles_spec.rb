@@ -11,7 +11,7 @@ describe 'User profiles' do
 
   context 'edit', as: :site_user do
     before do
-      visit edit_user_profile_path(current_user)
+      visit current_user_profile_edit_path
     end
 
     it 'should upload a picture' do
@@ -55,7 +55,7 @@ describe 'User profiles' do
     include_context 'signed in as a site user'
 
     it 'should let you edit your own profile' do
-      visit edit_user_profile_path(current_user)
+      visit current_user_profile_edit_path
       expect(page).to have_content(I18n.t('.shared.profile_menu.edit'))
     end
 
