@@ -373,6 +373,7 @@
     footer:
       application_version_html: "Version ref: %{version}"
       github_page_link_html: "Einblick in den Quellcode auf <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>"
+      privacy: 'Datenschutzerklärung'
       whats_new: "Was ist neu"
       supportlogos_introduction: "Cyclescape wurde möglich dank der großzügigen Unterstützung von:"
       funding_from: "Finanziert von from %{name}"

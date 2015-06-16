@@ -6,8 +6,7 @@
     = t(".github_history_link_html")
   %article
     %h2 01/06/2015
-    %ul
-      %li User friendly URLs for profile, location and preferences edit
+    %ul.bullets
       %li Privacy Updates
       %h3 Before
       %ul
@@ -18,35 +17,39 @@
         %li users now can see the full name (in the profile) of anyone who is in the same group
         %li if you have profile visibility set to group (in the user preferences) then their profile will not be visible publicly (only to members in one of your groups)
 
+    %h2 01/06/2015
+    %ul.bullets
+      %li User friendly URLs for profile, location and preferences edit
+
     %h2 25/05/2015
-    %ul
+    %ul.bullets
       %li Add a checkbox for collision data on issue map
       %li Add new group request form
       %li Update Devise (how users log in)
 
     %h2 03/05/2015
-    %ul
+    %ul.bullets
       %li Add Street View message type
       %li Add more missing translations
       %li Paginate popular issues
 
   %article
     %h2 02/04/2015
-    %ul
+    %ul.bullets
       %li Pull Planning Applications from PlanIt
       %li Add local Planning Applications to MyCyclescape
       %li Add Planning Application search and voting to hide
 
   %article
     %h2 08/03/2015
-    %ul
+    %ul.bullets
       %li Add some missing translations
       %li Make message link permanent
       %li Upgrade many libraries
 
   %article
     %h2 17/04/2014
-    %ul
+    %ul.bullets
       %li Fix a bug where thread creators could end up subscribed twice
       %li Ensure that all thread emails mention the thread privacy setting
       %li Add more warnings that all issue information is public
@@ -54,58 +57,58 @@
 
   %article
     %h2 01/04/2014
-    %ul
+    %ul.bullets
       %li Line-breaks between quoted text and reply are preserved when posting via email
       %li All "2 months ago" style links now show you the actual date when you hover over them
       %li Style improvement to the group page listing
 
   %article
     %h2 27/03/2014
-    %ul
+    %ul.bullets
       %li Rephrase lots of the working around adding users to groups, to reduce confusion
       %li Users get notified when they are added to a group
       %li Adding library item messages has been fixed
 
   %article
     %h2 14/03/2014
-    %ul
+    %ul.bullets
       %li Cyclescape can now be translated using Transifex
       %li Added lots of functionality for subscribing and unsubscribing from threads when joining/leaving groups, adding/deleting locations and changing preferences
 
   %article
     %h2 13/12/2013
-    %ul
+    %ul.bullets
       %li Support for the tools menu on touchscreens
       %li Add about and userguide links to the header
 
   %article
     %h2 5/12/2013
-    %ul
+    %ul.bullets
       %li Enable users to cancel their accounts and cleanly handle group memberships etc
       %li Allow users to specify a message when asking to join a group - can be used for membership numbers etc
 
   %article
     %h2 27/11/2013
-    %ul
+    %ul.bullets
       %li Add a maximum size for issues
       %li Allow group membership secretaries to review individual membership requests
       %li Allow group membership secretaries to approve individual membership requests via the email notification
 
   %article
     %h2 22/11/2013
-    %ul
+    %ul.bullets
       %li Link to the groups gallery from the front page
       %li Make links in group descriptions clickable on maps and in the compact listing
 
   %article
     %h2 15/10/2013
-    %ul
+    %ul.bullets
       %li Avoid autoscrolling when linking to a specific message
       %li Lots of localisation fixes to support Czech translations
 
   %article
     %h2 30/9/2013
-    %ul
+    %ul.bullets
       %li Support basic threading in message thread email notifications
       %li Fix some broken page titles and missing translations
       %li Allow admins to delete site comments (helps deal with spam)
@@ -114,25 +117,25 @@
 
   %article
     %h2 31/7/2013
-    %ul
+    %ul.bullets
       %li Limit the number of issues shown on your overview
       %li Improvements to the group membership management
 
   %article
     %h2 13/8/2013
-    %ul
+    %ul.bullets
       %li Planning applications now integrated - thanks to a data feed courtesty of OpenlyLocal. Planning applications are listed on the My Cyclescape page, and each can be promoted to an issue like any other.
 
   %article
     %h2 25/5/2013
-    %ul
+    %ul.bullets
       %li Various labelling added around the site to clarify various features
       %li My Cyclescape subscribed threads listing increased to 12 items
       %li Various improvements to administrative area
 
   %article
     %h2 7/12/2012
-    %ul
+    %ul.bullets
       %li Areas are now the default type when adding locations and issues
       %li File sizes are shown for attachments and library documents
       %li Messages can be promoted into library items, depending on the message type
@@ -143,13 +146,13 @@
 
   %article
     %h2 14/11/2012
-    %ul
+    %ul.bullets
       %li Fixed the map drawing interface on IE7
       %li Improved layout of the voting buttons on the issue page
 
   %article
     %h2 09/11/2012
-    %ul
+    %ul.bullets
       %li Email attachments sent to a thread will create new photo or attachment messages as appropriate
       %li Fix bugs in the map when editing issues on IE8
       %li Tags are copied from issues onto new threads
@@ -164,7 +167,7 @@
 
   %article
     %h2 18/10/2012
-    %ul
+    %ul.bullets
       %li Committee members can now add issues to administrative threads, or change the issue on an existing issue thread
       %li Tags now have autocomplete suggestions - type a few characters to see matching tags
       %li You can link directly to messages more easily - click on the posting time to see the url
@@ -172,13 +175,13 @@
 
   %article
     %h2 05/10/2012
-    %ul
+    %ul.bullets
       %li Textareas now automatically resize as they fill up with text, making longer comments easier to write
       %li Duplicate display names are no longer allowed (matching full names are of course permitted)
 
   %article
     %h2 17/08/2012
-    %ul
+    %ul.bullets
       %li Reduce duplicate messages by disabling submit button after posting
       %li Rework the logic for where you end up after signing in - should now handle more situations gracefully
       %li Improvements to message posting speed by making thread search update an asynchronous process
@@ -186,13 +189,13 @@
 
   %article
     %h2 01/08/2012
-    %ul
+    %ul.bullets
       %li Added a global search, instead of individual thread/issue/library searches
       %li Security updates
 
   %article
     %h2 24/05/2012
-    %ul
+    %ul.bullets
       %li Thread search! Shows results from all public threads and private threads that you have access to
       %li Added a new "User Priorities" tab to the dashboard, showing your prioritised threads
       %li Replying to a new thread notification will now subscribe you to that thread
@@ -203,7 +206,7 @@
 
   %article
     %h2 16/05/2012
-    %ul
+    %ul.bullets
       %li Complete rework of preferences options. You should check yours now!
       %li Notifications for new issues and new threads on relevant issues
       %li Options to subscribe automatically to all threads
@@ -214,47 +217,47 @@
 
   %article
     %h2 10/05/2012
-    %ul
+    %ul.bullets
       %li Upgrade of underlying Rails technology to the 3.2 series.
       %li Fixed bug with incoming emails. Messages from some people were being lost if they contained £ symbols
       %li Less ugly thread unfollow button
 
   %article
     %h2 04/05/2012
-    %ul
+    %ul.bullets
       %li Added committee-only threads
       %li Show recently popular issues tab on the Issue overview page
 
   %article
     %h2 30/04/2012
-    %ul
+    %ul.bullets
       %li Fixed notification emails for attachment messages
       %li Improved alignment of avatar images
 
   %article
     %h2 26/04/2012
-    %ul
+    %ul.bullets
       %li Collisions layer added to maps on issue pages
       %li Deadline tab added to overview page
       %li Thread activity icons fixed
 
   %article
     %h2 20/04/2012
-    %ul
+    %ul.bullets
       %li Improvements to the display of overlapping issues on the map
       %li Attachments can be added to threads
       %li Fixed bugs with popups not disappearing
 
   %article
     %h2 04/03/2012
-    %ul
+    %ul.bullets
       %li Issues list in group context only shows issues in that group's area.
       %li Logging in returns the user to the last group they were in.
       %li New thread notifications can be replied to.
 
   %article
     %h2 24/02/2012
-    %ul
+    %ul.bullets
       %li Added what's new page.
       %li Added following indicator to main thread lists.
       %li Increased message box size.
