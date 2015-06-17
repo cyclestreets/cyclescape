@@ -28,6 +28,12 @@ Cyclescape::Application.routes.draw do
     get '/locations', to: "user/locations#index", as: :current_user_locations
     get '/', to: "user/profiles#show", as: :current_user_profile
   end
+  devise_scope :user do
+    scope 'settings' do
+      get '/account', to: 'devise_invitable/registrations#edit', as: :edit_user_registration
+      put '/account', to: 'users/registrations#update'
+    end
+  end
 
   constraints(SubdomainConstraint) do
     root to: 'groups#show'
