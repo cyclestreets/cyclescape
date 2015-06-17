@@ -355,6 +355,8 @@
         description: "Description"
         location: "Location"
         no_location: "This group doesn't have any location details yet."
+        no_picture: "Add a picture to make your group welcoming."
+        picture: "Picture"
       update:
         success: "Profile Updated"
   groups:

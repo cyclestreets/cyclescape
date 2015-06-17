@@ -21,6 +21,19 @@ require 'spec_helper'
 describe GroupProfile do
   describe 'to be valid' do
     subject { FactoryGirl.create(:group_profile) }
+    context 'picture' do
+      subject { FactoryGirl.create(:group_profile, :with_picture) }
+
+      it 'should accept and save a picture' do
+        expect(subject.picture_uid).not_to be_blank
+        expect(subject.picture.mime_type).to eq('image/jpeg')
+      end
+
+      it 'should provide a thumbnail of the picture' do
+        expect(subject.picture_thumbnail.width).to eq(330)
+        expect(subject.picture_thumbnail.height).to eq(192)
+      end
+    end
 
     it 'can have a blank description' do
       subject.description = nil

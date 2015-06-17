@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150509090309) do
+ActiveRecord::Schema.define(:version => 20150617214308) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(:version => 20150509090309) do
     t.integer  "group_id",       :null => false
     t.string   "status",         :null => false
     t.integer  "actioned_by_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.text     "message"
   end
 
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20150509090309) do
     t.datetime "updated_at",                                                       :null => false
     t.spatial  "location",             :limit => {:srid=>4326, :type=>"geometry"}
     t.text     "joining_instructions"
+    t.string   "picture_uid"
+    t.string   "picture_name"
   end
 
   add_index "group_profiles", ["group_id"], :name => "index_group_profiles_on_group_id"
@@ -378,11 +380,11 @@ ActiveRecord::Schema.define(:version => 20150509090309) do
   add_index "user_thread_priorities", ["user_id"], :name => "index_user_thread_priorities_on_user_id"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                                :null => false
-    t.string   "full_name",                                            :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "full_name",                                             :null => false
     t.string   "display_name"
-    t.string   "role",                                                 :null => false
-    t.string   "encrypted_password",                   :default => ""
+    t.string   "role",                                                  :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => ""
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -390,8 +392,8 @@ ActiveRecord::Schema.define(:version => 20150509090309) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "disabled_at"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.string   "invitation_token",       :limit => 60
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
@@ -411,8 +413,8 @@ ActiveRecord::Schema.define(:version => 20150509090309) do
     t.string   "voteable_type",                    :null => false
     t.integer  "voter_id"
     t.string   "voter_type"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "votes", ["voteable_id", "voteable_type"], :name => "index_votes_on_voteable_id_and_voteable_type"
