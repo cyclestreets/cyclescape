@@ -567,6 +567,8 @@
       user_guide: "User guide"
       facebook_page: "CycleStreets Facebook page"
       twitter_page: "CycleStreets Twitter account"
+      osm_credit_html: "Map data &copy; <a href='http://www.openstreetmap.org'>
+        OpenStreetMap</a> contributors available under vailable under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open Database Licence</a>."
     group_selector:
       group_selector: "Group"
       no_group: "No Group"
