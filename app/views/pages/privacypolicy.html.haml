@@ -12,7 +12,7 @@
 %p
   We provide privacy controls that enable you to avoid your name being shown publicly on the internet while still
   visible to fellow members in a discussion. These are available on the
-  #{link_to 'account details', edit_user_registration } page, and consist of two fields:
+  #{link_to 'account details', edit_user_registration_path } page, and consist of two fields:
 %ul.bullets
   %li your real name (visible to members of groups you are in); and
   %li an optional display name (for all other situations); if you don't set one, you'll be shown as anonymous.
@@ -35,10 +35,10 @@
 %p
   In order to foster a sense of community, we provide each member of the site with a user profile.
   This shows only the details you have chosen to enter on the
-  #{link_to 'Edit my profile', current_user_profile_edit_url } page.
+  #{link_to 'Edit my profile', current_user_profile_edit_path } page.
 %p
   You can disable your user profile at any time (again via the
-  #{link_to 'Edit my profile', current_user_profile_edit_url } page), so that it is not visible to others.
+  #{link_to 'Edit my profile', current_user_profile_edit_path } page), so that it is not visible to others.
 %h2 Cookies
 %p
   In common with most websites, this website uses cookies, which are small pieces of information
@@ -62,7 +62,6 @@
   %li
     when we are required or authorised by law, court order, regulatory or governmental
     authority to disclose your personal data
-  %li if required to protect the rights, property or safety of the University of Cambridge, its members or others.
 %h2 Data collected
 %p
   In common with most websites, this site automatically logs certain information about every

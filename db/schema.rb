@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150602084648) do
+ActiveRecord::Schema.define(:version => 20150617214308) do
 
   create_table "deadline_messages", :force => true do |t|
     t.integer  "thread_id",         :null => false
@@ -76,6 +76,8 @@ ActiveRecord::Schema.define(:version => 20150602084648) do
     t.datetime "updated_at",                                                       :null => false
     t.spatial  "location",             :limit => {:srid=>4326, :type=>"geometry"}
     t.text     "joining_instructions"
+    t.string   "picture_uid"
+    t.string   "picture_name"
   end
 
   add_index "group_profiles", ["group_id"], :name => "index_group_profiles_on_group_id"
