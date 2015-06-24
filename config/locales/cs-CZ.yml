@@ -94,6 +94,44 @@
   application:
     account_disabled: "Váš účet byl deaktivován správcem"
     permission_denied: "Nemáte oprávnění přistupovat k této stránce."
+  planning_applications:
+    hide:
+      success: Planning application hidden from overview
+      failure: Could not hide that application
+    index:
+      planning_applications: "Planning applications"
+      pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
+      explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
+    planning_application: &planning_applications_search
+      page_title: "Search Results for '%{q}'"
+      convert_to_issue_html: "Convert to an Issue &hellip;"
+      planning_applications: "Planning applications"
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: "No results found"
+      your_planning_applications: "Your local planning applications"
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden for everyone
+      part_hidden: Part Hidden
+    show:
+      address_label: "Address:"
+      council_label: "Council:"
+      data_source: "Data source"
+      data_from_html: "Planning application data is sourced from %{link}"
+      location: "Location"
+      official_application: "View on council website"
+      official_application_label: "Official application:"
+      planit: "PlanIt"
+      related_issue: "Related issue"
+      related_issue_guidance: "This planning application has been converted to an issue:"
+      uid_label: "Application reference:"
+      view_official_application: "View official application"
+      start_date: 'Date application was made:'
+      hidden: Hidden (will not appear in anyones dashboard)
+      <<: *planning_applications_search
+    search:
+      <<: *planning_applications_search
   dashboards:
     show:
       add_a_new_issue: "přidat nový podnět"
@@ -107,6 +145,7 @@
         other: "Za %{count} dní"
       deadlines: "Termíny a data"
       deadline_thread_updated: "vlákno upraveno %{at}"
+      issues_lower: "podněty"
       involved_threads: "Zahrnutá vlákna"
       issues_in_your_area: "Podněty ve vaší oblasti"
       new_group_thread: "Založit nové diskuzní vlákno místní skupiny"
@@ -117,7 +156,6 @@
       my_threads_introduction: "Nejnovější aktualizace diskuzních vláken, do kterých jste zapsáni:"
       my_upcoming_deadline_introduction: "Nastávající termíny a data v diskuzních vláknech do kterých jste zapsáni:"
       no_upcoming_deadline_threads: "Nejste zapsáni do žádného vlákna s nastávajícími termíny nebo daty."
-      no_upcoming_deadline_threads: "Nejste zapojeni v žádnch diskuzních vláknech s nastávajícími termíny nebo daty."
       no_subscribed_threads_html:
         Zatím neodebíráte žádná vlákna. Můžete se podívat na %{threads_link},
         jestli tam není něco, s čím byste mohli pomoci, nebo můžete %{add_issue_link}?
@@ -125,6 +163,9 @@
         Zatím jste nezadali důležitost žádnému vláknu. Můžete se podívat na %{threads_link}
         jestli tam nenajdete něco důležitého, nebo můžete %{add_issue_link}.
       no_issues_nearby_html: "Žádné podněty nejsou hlášeny ve vaší oblasti zájmu. Můžete %{add_issue_link}, nebo %{add_location_link}."
+      location:
+        one: umístění
+        other: umístění
       no_group_threads: "Žádná z vašich místních skupin nemá žádné diskuzní vlákno. Můžete započít novou konverzaci!"
       no_locations_guidance_html: "Nenastavili jste žádné oblasti zájmu! Pokud %{add_some_locations_link}, zobrazí se vám zde nejbližší podněty."
       no_user_groups: "Zatím nejste členem žádné místní skupiny! Jestliže se k nějaké připojíte, zde se vám zobrazí nejnověji diskutovaná vlákna."
@@ -132,16 +173,16 @@
       subscribed_threads: "Odebíraná diskuzní vlákna"
       group_threads: "Témata místních skupin"
       no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
-      no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
+      no_user_groups: "Zatím nejste členem žádné místní skupiny! Jakmile se k nějaké skupině připojíte, budou se zde zobrazovat její diskuze."
       <<: *planning_applications_search
       planning_applications_in_your_area: "Planning applications in your %{location}"
       planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
       planning_applications_lower: "planning applications"
       planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
-      recent_threads: "recent threads"
-      subscribed_threads: "Subscribed Threads"
-      thread_latest_activity: "%{time_ago} ago"
-      group_threads: "Group Threads"
+      recent_threads: "nedávná vlákna"
+      subscribed_threads: "Zapsaná vlákna"
+      thread_latest_activity: "před %{time_ago}"
+      group_threads: "Diskuzní vlákna místních skupin"
       group_threads_desc_html:
         Nejnovější diskuzní vlákna na kterých pracovala některá z vašich místních skupin.
       my_priorities: "Důležitost"
@@ -265,6 +306,12 @@
         confirm: "Potvrdit"
         created_at: "před %{time_ago}"
         email: "E-mailová adresa"
+        view_message: "Zobrazit..."
+        message: "Zpráva"
+        no_requests_yet: "Zatím nebyly podány žádné žádosti o členství v této skupině."
+        full_name: "Plné jméno"
+        reject: "Zamítnout"
+        requested_at: "Odesláno"
         no_requests_yet: "Pro tuto místní skupinu zatím neexistují žádné žádosti o členství."
         full_name: "Plné jméno"
         reject: "Zamítnout"
@@ -466,6 +513,7 @@
     new:
       title: "Přidat podnět"
       new_issue_introduction: "Víte o něčem, co brání více lidem používat jízdní kolo, nebo něco co způsobuje problémy existujícím cyklistům? Nebo o něčem, co by se mohlo udělat? Nahlaste problém níže."
+      new_issue_privacy_warning: "Mějte na paměti, že všechny podněty jsou zobrazené veřejně. K podnětu je ale možné udělat soukromé vlákno, jakmile bude odeslán."
       admin_thread_pointer_html: "%{administrative_matters_link} bez vazby na nějaké území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny."
       administrative_matters: "Čistě administrativní záležitosti"
     show:
@@ -753,6 +801,7 @@
       create:
         failure: "Street View nebyl vytvořen"
         success: "Street View vytvořil"
+
   message_library:
     documents:
       new:
@@ -792,9 +841,17 @@
       photo_message: "Fotografie"
       sign_in_to_post_html: "Abyste mohli odeslat zprávu, musíte se %{sign_in_link}."
       text_message: "Text"
+      street_view_message: Street View
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
+  planning_application:
+    issues:
+      new:
+        already: "There's already an issue for that planning application"
+        application_reference: "Application reference"
+        title: "New issue from Planning Application"
+        title_prefix: "Planning application"
   shared:
     edit_map:
       area: "oblast"
@@ -878,6 +935,7 @@
     new_street_view_message:
       added: "%{name} přidal Street View k závitu."
       view_the_street_view: "Street View si můžete vidět na:"
+
     footer:
       thread: "Vlákno Cyklisté sobě"
       unsubscribe: "Pokud navštívíte odkaz nahoře, můžete přestat sledovat toto vlákno."
@@ -950,6 +1008,7 @@
         none: "Žádná upozornění"
         notify: "Zasílat upozornění o nových podnětech a nově založených diskuzních vláknech"
         subscribe: "Zasílat upozornění na nové podněty a nová diskuzní vlákna automaticky"
+        your_profile: "váš profil"
       update:
         success: "Nastavení uložena"
         failure: "Vaše nastavení nemohou být uložena"
@@ -959,6 +1018,9 @@
       edit:
         title: "Upravit profil"
         my_current_thumbnail_title: "Současný profilový obrázek"
+        profile_public: Everyone
+        profile_group: Only members of my groups
+        visibility_guidance_html: You can choose to restrict who gets to view your profile.
       show:
         about_label: "O profilu:"
         add_to_groups:
@@ -1105,8 +1167,8 @@
           thousand: Tisíc
           million: Milión
           billion: Miliarda
-          trillion: Trilión
-          quadrillion: Quadrilión
+          trillion: Bilión
+          quadrillion: Biliarda
 
   datetime:
     distance_in_words:
