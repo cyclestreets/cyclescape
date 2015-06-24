@@ -430,6 +430,8 @@
         one: "hlas"
         other: "hlasy"
       location: "Umístění"
+    map:
+      show_collisions: "Ukázat nehody (funguje jen ve Velké Británii)"
     update:
       success: "Podnět upraven"
     vote_clear:
