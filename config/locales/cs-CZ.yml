@@ -96,10 +96,10 @@
     permission_denied: "Nemáte oprávnění přistupovat k této stránce."
   dashboards:
     show:
-      add_a_new_issue: "add a new issue"
-      add_another_location: "add another location"
-      add_some_locations: "add some locations"
-      areas_you_are_watching: "areas you are watching"
+      add_a_new_issue: "přidat nový podnět"
+      add_another_location: "přidat další oblast"
+      add_some_locations: "přidat oblasti"
+      areas_you_are_watching: "oblasti, které sledujete"
       converted_to_issue: "Převedeno na podnět:"
       days_away:
         zero: "Dnes!"
