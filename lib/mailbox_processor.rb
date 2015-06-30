@@ -1,6 +1,3 @@
-# from http://www.subelsky.com/2014/05/fixing-socketerror-getaddrinfo-name-or.html
-require "resolv-replace.rb"
-
 class MailboxProcessor
   attr_accessor :config
 
