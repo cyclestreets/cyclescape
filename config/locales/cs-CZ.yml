@@ -414,31 +414,31 @@
         other: "Zobrazit neschválené žádosti o členství (%{count})"
   group_requests:
     create:
-      requested: You have requested a new campaigning group, you will be notifed when it is created
+      requested: Právě jste požádali o vytvoření místní skupiny. Jakmile bude vytvořena, budete o tom informování.
     new:
-      new_group_request_introduction: We moderate requests for new groups. You will be set as the first Committee member of the group, enabling you to administer it.
+      new_group_request_introduction: Žádosti o založení místní skupiny jsou moderované. Po založení budete členem vedení skupiny, což vám umožní její administraci.
     index: &group_requests_index
       <<: *group_membership_requests_index
-      name: Requested Name
-      review: Review
-      actions: Actions
-      new_group: Create a New Group
+      name: Požadovaný název
+      review: Revize
+      actions: Akce
+      new_group: Založit novou místní skupinu
       group_email: Email
-      destroy: Remove request
-      no_message: There was no message included with this group request.
+      destroy: Odstranit požadavek
+      no_message: Žádná zpráva nebyla k žádosti o založení místní skupiny připojena
     review:
       <<: *group_requests_index
-      short_name: Short name
-      website: Website
+      short_name: Subdoména
+      website: Webová stránka
     confirm:
-      success: Group created
-      failure: Failed to create Group
+      success: Místní skupina založena
+      failure: Založit místní skupinu se nezdařilo
     destroy:
-      success: Group Request removed
-      failure: Failed to remove Group Request
+      success: Požadavek na založení místní skupiny odstraněn
+      failure: Odstranění požadavku na založení místní skupiny se nezdařilo
     reject:
-      success: Group request rejected
-      failure: Failed to reject group request
+      success: Požadavek na založení místní skupiny odmítnut
+      failure: Odmítnutí požadavku na založení místní skupiny se nezdařilo
 
   home:
     show:
@@ -668,9 +668,9 @@
       new_user_location_issue_thread:
         subject: "[Cyklisté sobě] Nové diskuzní vlákno založeno pro \"%{issue_title}\""
       group_request_confirmed:
-        subject: "[Cyclescape] Nová skupina \"%{group_name}}\" byla založena"
+        subject: "[Cyclescape] Nová skupina \"%{group_name}\" byla založena"
       group_request_rejected:
-        subject: "[Cyclescape] Nová skupina \"%{group_request_name}}\" nebyla založena"
+        subject: "[Cyclescape] Nová skupina \"%{group_request_name}\" nebyla založena"
       new_group_request:
         subject: "[Cyclescape] Uživatel \"%{user_name}\" požaduje založení nové skupiny \"%{group_name}\""
 
@@ -1256,7 +1256,7 @@
         body: "Vyskytly se problémy na následujících položkách:"
 
       messages:
-        taken: "jste už použili"
+        taken: "již je použito"
         record_invalid: "Validáce byla neuspešná: %{errors}"
         <<: *errors_messages
 

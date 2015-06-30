@@ -39,6 +39,14 @@
         short_name: "Subdoména"
         website: "Webová stránka"
         default_thread_privacy: "Výchozí viditelnost diskuzí"
+      group_request:
+        name: Jméno
+        short_name: Webová adresa
+        website: Webové stránky
+        email: Emailová adresa
+        message: Zpráva
+        default_thread_privacy: Výchozí viditelnost
+        submit: "Požádat o vytvoření místnní skupiny"
       group_profile:
         description: "Popis"
         joining_instructions: "Instrukce pro nové členy"
@@ -128,7 +136,7 @@
         short_name: Malá písmena nebo číslice
         message: Krátký popis účelu skupiny (slouží jako ochrana proti spamu)
       group_membership:
-        role: "Vyberte, jestli jde o normální členy nebo správce místní skupiny."
+        email: "Prosím zadejte jejich email. Pokud se shoduje s emailem existujícího uživatele Cyklisté sobě, bude přímo přidán do skupiny. Jinak mu bude odeslána pozvánka."
         full_name: "Prosím zadejte jejich jméno, až přijmou pozvánku, tak si ho budou si ho moci změnit."
         role: "Vyberte, jestli jsou normální členové, nebo správci skupiny."
       group_membership_request:
