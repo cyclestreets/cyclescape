@@ -1,21 +1,23 @@
 <% if @thread.has_issue? %>
-A new thread titled "<%= raw @thread.title %>" has been created on issue
-"<%= raw @thread.issue.title %>" for the <%= raw @group.name %> group.
+   K podnětu "<%= raw @thread.issue.title %>" bylo přidáno nové diskuzní
+   vlákno "<%= raw @thread.title %>" místní skupiny <%= raw @group.name %>.
 <% else %>
-A new administrative discussion titled "<%= raw @thread.title %>" has
-been created for the <%= raw @group.name %> group.
+   Nová administrativní diskuze "<%= raw @thread.title %>" byla přidána
+   k místní skupině <%= raw @group.name %>.
 <% end %>
 
-<%= raw @thread.first_message.created_by.name %> wrote:
+<%= raw @thread.first_message.created_by.name %> napsal:
 <%= raw @thread.first_message.body %>
 
-You aren't subscribed to this thread, so you won't receive any more updates.
-You can read the whole thread, and subscribe to it at:
+Nejste zapsáni k tomuto diskznímu vláknu, takže o něm už nebudete dostávat
+žádné další aktualizace.
+Diskuzní vlákno si můžete zapsat a přečíst si celou diskuzi na:
 <%= thread_url(@thread) %>
 
 --------
-You have received this message because your preferences indicate that you
-would like us to notify you on matters in your group.
 
-To stop these notifications, edit your user preferences at:
+Tuto zprávu jste dostali, protože máte ve vašem profilu nastaveno odesílání
+záležitostí týkajících se vaší místní skupiny.
+
+Pro odhlášení těchto zpráv můžete změnit nastavení na:
 <%= edit_user_prefs_url(@member) %>
