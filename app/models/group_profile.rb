@@ -18,6 +18,11 @@
 
 class GroupProfile < ActiveRecord::Base
   include Locatable
+  image_accessor :picture
+
+  def picture_thumbnail
+    picture.thumb('330x192#')
+  end
 
   belongs_to :group
 end

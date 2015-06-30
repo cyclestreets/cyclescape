@@ -2,13 +2,13 @@ class PlanningApplicationWorker
   # Update to use
   # http://planit.org.uk/find/areas/json
   LOCAL_AUTHORITIES = [
-    'Aberdeen', 'Aberdeenshire', 'Adur Worthing', 'Allerdale', 'Angus', 'Antrim', 'Ards', 'Armagh', 'Arun', 'Ashfield', 'Babergh',
+    'Aberdeen', 'Aberdeenshire', 'Allerdale', 'Angus', 'Antrim', 'Ards', 'Armagh', 'Arun', 'Ashfield', 'Babergh',
     'Barnet', 'Barnsley', 'Basingstoke', 'Bath', 'Birmingham', 'Blackburn', 'Boston', 'Breckland', 'Brecon Beacons', 'Brent',
     'Brighton', 'Broadland', 'Broxbourne', 'Burnley', 'Bury', 'Cairngorms', 'Cambridge', 'Cambridgeshire', 'Camden', 'Cannock Chase',
     'Canterbury', 'Carlisle', 'Carmarthenshire', 'Castle Point', 'Central Bedfordshire', 'Ceredigion', 'Charnwood', 'Cheshire East',
     'Christchurch', 'Colchester', 'Conwy', 'Cornwall', 'Coventry', 'Craven', 'Croydon', 'Darlington', 'Dartmoor', 'Derbyshire',
     'Dorset', 'Durham', 'Durham (Crook)', 'Durham (Easington)', 'Durham (Sedgefield)', 'Ealing', 'East Staffordshire', 'Epping Forest',
-    'Exmoor', 'Flintshire', 'Guernsey Island', 'Hackney', 'Halton', 'Hampshire', 'Haringey', 'Hart', 'Hartlepool', 'Havering',
+    'Exmoor', 'Flintshire', 'Hackney', 'Halton', 'Hampshire', 'Haringey', 'Hart', 'Hartlepool', 'Havering',
     'Herefordshire', 'High Peak', 'Ipswich', 'Isle of Man', 'Isle of Wight', 'Islington', 'Jersey', 'Kensington', 'Lake District',
     'Lancashire', 'Lichfield', 'Lincoln', 'Lincolnshire', 'Liverpool', 'Loch Lomond', 'Luton', 'Malvern Hills', 'Manchester',
     'Mendip', 'Merthyr Tydfil', 'Merton', 'Middlesbrough', 'Norfolk', 'North Somerset', 'North Warwickshire', 'North York Moors',

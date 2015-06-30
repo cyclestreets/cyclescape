@@ -19,7 +19,11 @@
             %small= link_to t(".cyclescape_blog"), 'http://blog.cyclescape.org/'
           %li
             %small= link_to t(".user_guide"), 'http://blog.cyclescape.org/guide/'
+          %li
+            %small= link_to t(".privacy"), page_path('privacypolicy')
     %div{:id => 'supportlogos'}
+
+      %p= t(".osm_credit_html")
       %p= t(".supportlogos_introduction")
       %ul
         %li

@@ -106,7 +106,7 @@ describe 'Authentication and authorization' do
       fill_in 'Password', with: @credentials[:password], match: :first
       fill_in 'Email', with: @credentials[:email]
       click_button 'Sign in'
-      expect(page.current_path).to eq(user_locations_path)
+      expect(page.current_path).to eq(current_user_locations_path)
     end
 
     it 'should resend your confirmation email, if you ask for it' do

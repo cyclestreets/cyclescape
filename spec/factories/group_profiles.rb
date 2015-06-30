@@ -5,6 +5,10 @@ FactoryGirl.define do
     location 'POINT(-122 47)'
     association :group, factory: :group
 
+    trait :with_picture do
+      picture { Pathname.new(File.join(%w(spec support images abstract-100-100.jpg))) }
+    end
+
     factory :small_group_profile do
       location 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))'
     end

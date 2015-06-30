@@ -36,6 +36,6 @@ class Group::ProfilesController < ApplicationController
   end
 
   def permitted_params
-    params.require(:group_profile).permit :description, :joining_instructions, :loc_json
+    params.require(:group_profile).permit :description, :joining_instructions, :loc_json, :picture, :retained_picture
   end
 end

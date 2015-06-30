@@ -356,6 +356,8 @@
         description: "Description"
         location: "Location"
         no_location: "This group doesn't have any location details yet."
+        no_picture: "Add a picture to make your group welcoming."
+        picture: "Picture"
       update:
         success: "Profile Updated"
   groups:
@@ -564,9 +566,12 @@
       funding_from_and_created_by: "Funding from and created by %{name}"
       planning_application_data: "Planning application data from PlanIt"
       cyclescape_blog: "Cyclescape blog"
+      privacy: Privacy Policy
       user_guide: "User guide"
       facebook_page: "CycleStreets Facebook page"
       twitter_page: "CycleStreets Twitter account"
+      osm_credit_html: "Map data &copy; <a href='http://www.openstreetmap.org'>
+        OpenStreetMap</a> contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open Database Licence</a>."
     group_selector:
       group_selector: "Group"
       no_group: "No Group"

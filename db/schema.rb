@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20150608082449) do
     t.datetime "updated_at",                                                    null: false
     t.spatial  "location",             limit: {:srid=>4326, :type=>"geometry"}
     t.text     "joining_instructions"
+    t.string   "picture_uid"
+    t.string   "picture_name"
   end
 
   add_index "group_profiles", ["group_id"], :name => "index_group_profiles_on_group_id"

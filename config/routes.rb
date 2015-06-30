@@ -25,8 +25,14 @@ Cyclescape::Application.routes.draw do
   scope 'settings' do
     get '/edit', to: "user/profiles#edit", as: :current_user_profile_edit
     get '/preferences', to: "user/prefs#edit", as: :current_user_prefs_edit
-    get '/location', to: "user/locations#index", as: :current_user_locations
+    get '/locations', to: "user/locations#index", as: :current_user_locations
     get '/', to: "user/profiles#show", as: :current_user_profile
+  end
+  devise_scope :user do
+    scope 'settings' do
+      get '/account', to: 'devise_invitable/registrations#edit', as: :edit_user_registration
+      put '/account', to: 'users/registrations#update'
+    end
   end
 
   constraints(SubdomainConstraint) do
