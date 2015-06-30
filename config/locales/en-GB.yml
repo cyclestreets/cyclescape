@@ -649,9 +649,9 @@
       new_user_location_issue_thread:
         subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
       group_request_confirmed:
-        subject: "[Cyclescape] New Group \"%{group_name}}\" has been created"
+        subject: "[Cyclescape] New Group \"%{group_name}\" has been created"
       group_request_rejected:
-        subject: "[Cyclescape] New Group \"%{group_request_name}}\" has been not been created"
+        subject: "[Cyclescape] New Group \"%{group_request_name}\" has been not been created"
       new_group_request:
         subject: "[Cyclescape] New Group \"%{group_name}\" has been requested by \"%{user_name}\""
 
