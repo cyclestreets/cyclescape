@@ -20,20 +20,15 @@ Cyclescape::Application.routes.draw do
     end
   end
 
-  devise_for :users, controllers: { confirmations: 'confirmations' }
+  devise_for :users, controllers: { confirmations: 'confirmations' }, skip: :registrations
 
   scope 'settings' do
-    get '/edit', to: "user/profiles#edit", as: :current_user_profile_edit
+    get '/profile', to: "user/profiles#edit", as: :current_user_profile_edit
     get '/preferences', to: "user/prefs#edit", as: :current_user_prefs_edit
     get '/locations', to: "user/locations#index", as: :current_user_locations
     get '/', to: "user/profiles#show", as: :current_user_profile
   end
-  devise_scope :user do
-    scope 'settings' do
-      get '/account', to: 'devise_invitable/registrations#edit', as: :edit_user_registration
-      put '/account', to: 'users/registrations#update'
-    end
-  end
+  devise_for :users, controllers: { confirmations: 'confirmations' }, only: :registrations, path: 'settings'
 
   constraints(SubdomainConstraint) do
     #root to: 'groups#show'
