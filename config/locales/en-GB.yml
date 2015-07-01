@@ -826,6 +826,9 @@
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
+      header: "What's new?"
+      introduction: "This is a summary of new features added to the site.
+       You can see the full development history on"
   planning_application:
     issues:
       new:
