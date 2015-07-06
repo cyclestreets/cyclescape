@@ -15,7 +15,7 @@ gem 'map_layers'
 gem 'rails3-jquery-autocomplete'
 gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
-gem 'rails_autolink', '= 1.1.0' # pin due to ruby 1.9.3 requirement in 1.1.5 and later. Last known good version
+gem 'rails_autolink'
 gem 'tweet-button'
 
 # Back-end gems
@@ -33,7 +33,7 @@ gem 'thumbs_up', '~> 0.4.6'
 gem 'exceptional'
 gem 'foreman'
 gem 'whenever'
-gem 'draper', '~> 1.0'
+gem 'draper'
 gem 'email_reply_parser'
 gem 'memoist'
 gem 'excon'

@@ -88,7 +88,7 @@ GEM
       sprockets (< 2.13)
     crack (0.4.2)
       safe_yaml (~> 1.0.0)
-    daemons (1.2.2)
+    daemons (1.2.3)
     database_cleaner (1.4.1)
     declarative_authorization (0.5.7)
     devise (3.1.2)
@@ -104,7 +104,7 @@ GEM
     dragonfly (0.9.15)
       multi_json (~> 1.0)
       rack
-    draper (1.4.0)
+    draper (2.1.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -124,7 +124,7 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    ffi (1.9.8)
+    ffi (1.9.10)
     foreman (0.78.0)
       thor (~> 0.19.1)
     formtastic (2.3.1)
@@ -167,16 +167,16 @@ GEM
     mini_portile (0.6.2)
     minitest (4.7.5)
     mono_logger (1.1.0)
-    multi_json (1.11.1)
+    multi_json (1.11.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
     parallel (1.6.0)
-    parallel_tests (1.3.9)
+    parallel_tests (1.5.1)
       parallel
-    paranoia (2.1.2)
+    paranoia (2.1.3)
       activerecord (~> 4.0)
-    parser (2.2.2.5)
+    parser (2.3.0.pre.2)
       ast (>= 1.1, < 3.0)
     pg (0.18.2)
     powerpack (0.1.1)
@@ -189,7 +189,7 @@ GEM
       pry (~> 0.10)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
-    rack (1.5.3)
+    rack (1.5.5)
     rack-cache (1.2)
       rack (>= 0.4)
     rack-protection (1.5.3)
@@ -204,11 +204,11 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.13)
       sprockets-rails (~> 2.0)
-    rails-observers (0.1.1)
-      railties (~> 4.0.0.beta)
+    rails-observers (0.1.2)
+      activemodel (~> 4.0)
     rails3-jquery-autocomplete (1.0.15)
       rails (>= 3.2)
-    rails_autolink (1.1.0)
+    rails_autolink (1.1.6)
       rails (> 3.1)
     railties (4.0.13)
       actionpack (= 4.0.13)
@@ -283,7 +283,7 @@ GEM
       sexp_processor (~> 4.1)
     rubyzip (1.1.7)
     safe_yaml (1.0.4)
-    sass (3.4.14)
+    sass (3.4.15)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
@@ -306,12 +306,12 @@ GEM
     spring (1.3.6)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
-    sprockets (2.12.3)
+    sprockets (2.12.4)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.3.1)
+    sprockets-rails (2.3.2)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
@@ -364,7 +364,7 @@ DEPENDENCIES
   devise (~> 3.1.0)
   devise_invitable
   dragonfly (~> 0.9.15)
-  draper (~> 1.0)
+  draper
   email_reply_parser
   email_spec
   exceptional
@@ -390,7 +390,7 @@ DEPENDENCIES
   rails (~> 4.0.0)
   rails-observers
   rails3-jquery-autocomplete
-  rails_autolink (= 1.1.0)
+  rails_autolink
   redis-rails
   resque
   rgeo-geojson
