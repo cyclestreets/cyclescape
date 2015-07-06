@@ -48,11 +48,8 @@ class MessageThread < ActiveRecord::Base
 
   before_validation :set_public_token, on: :create
 
-  validates :title, :state, :created_by_id, presence: true
+  validates :title, :created_by_id, presence: true
   validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
-
-  state_machine :state, initial: :new do
-  end
 
   def self.non_committee_privacies_map
     (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }

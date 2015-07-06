@@ -13,7 +13,6 @@ describe MessageThread do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_presence_of(:state) }
     it { is_expected.to validate_presence_of(:created_by_id) }
     it { is_expected.to allow_value('public').for(:privacy) }
     it { is_expected.to allow_value('group').for(:privacy) }
