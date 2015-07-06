@@ -24,6 +24,7 @@
 #
 
 class GroupRequest < ActiveRecord::Base
+  include AASM
 
   belongs_to :user
   belongs_to :actioned_by, class_name: 'User'
@@ -34,27 +35,23 @@ class GroupRequest < ActiveRecord::Base
   validates :short_name, subdomain: true
   validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }
 
-  state_machine :status, initial: :pending do
-    after_transition any => :confirmed do |request, transition|
-      transition.rollback unless request.create_group
-    end
+  aasm column: 'status' do
+    state :pending, initial: true
+    state :cancelled
 
-    state :pending, :cancelled
-
-    state :confirmed, :rejected do
-      validates :actioned_by, presence: true
-    end
+    state :confirmed, before_enter: :create_group
+    state :rejected
 
     event :confirm do
-      transition pending: :confirmed
+      transitions from: :pending, to: :confirmed, guard: :actioned_by
     end
 
     event :reject do
-      transition pending: :rejected
+      transitions from: :pending, to: :rejected, guard: :actioned_by
     end
 
     event :cancel do
-      transition pending: :cancelled
+      transitions from: :pending, to: :cancelled
     end
   end
 

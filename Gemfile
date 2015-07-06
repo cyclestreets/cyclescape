@@ -23,7 +23,7 @@ gem 'devise', '~> 3.1.0'
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
-gem 'state_machine'
+gem 'aasm'
 gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly', '~> 0.9.15' # pin to delay the upgrade to 1.x
 gem 'redis-rails'
