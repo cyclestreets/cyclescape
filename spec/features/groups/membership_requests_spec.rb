@@ -83,19 +83,7 @@ describe 'Group Membership Requests' do
         click_on 'Sign out'
       end
 
-      it 'should let you complete the invitation by filling in just the password and confirmation' do
-        sleep 0.1
-        mail = ActionMailer::Base.deliveries.last
-        invitation_token = mail.body.raw_source.match(/invitation_token=(\w+)/)[1]
-        visit accept_user_invitation_path(invitation_token: invitation_token)
-        fill_in 'New Password', with: 'Password1', match: :first
-        fill_in 'New Password Confirmation', with: 'Password1'
-        click_button 'Confirm account'
-        expect(page).to have_content('Your password was set successfully. You are now signed in.')
-      end
-
       it 'should let you complete the invitation and change name and email' do
-        sleep 0.1
         mail = ActionMailer::Base.deliveries.last
         invitation_token = mail.body.raw_source.match(/invitation_token=(\w+)/)[1]
         visit accept_user_invitation_path(invitation_token: invitation_token)
