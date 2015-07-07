@@ -39,10 +39,10 @@ gem 'memoist'
 gem 'excon'
 gem 'paranoia', '~> 2.0'
 
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.3'
 gem 'sass'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'compass-rails', '~> 2.0.2'
+gem 'compass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-ui-rails', '~> 4.2.0' # pin pending upgrade
 gem 'turbolinks'

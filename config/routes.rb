@@ -1,4 +1,4 @@
-Cyclescape::Application.routes.draw do
+Rails.application.routes.draw do
 
   # Pretty evil but beats copy pasting
   def issues_route(opts = {})
