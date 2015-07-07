@@ -76,7 +76,7 @@ describe GroupMembershipRequest do
 
       subject.actioned_by = boss
       expect(subject.confirm).to be_truthy
-      expect(user.groups.size).to eq(1)
+      expect(user.reload.groups.size).to eq(1)
       expect(user.groups[0]).to eql(group)
     end
   end

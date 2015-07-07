@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -53,9 +53,6 @@ group :development do
   gem 'quiet_assets'
   gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
-  gem 'rubocop'
-  gem 'haml-lint'
-
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded
   gem 'ruby_parser'
