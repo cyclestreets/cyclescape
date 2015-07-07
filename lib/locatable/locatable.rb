@@ -1,6 +1,5 @@
 module Locatable
   def self.included(base)
-    base.rgeo_factory_generator = RGeo::Geos.factory_generator
     base.extend(ClassMethods)
   end
 

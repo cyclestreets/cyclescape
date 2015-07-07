@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-require 'active_record/connection_adapters/postgis_adapter/railtie'
 secret_file = File.expand_path('../secret_key_base', __FILE__)
 
 Bundler.require(*Rails.groups)
