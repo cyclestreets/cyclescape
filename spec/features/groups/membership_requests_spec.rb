@@ -73,18 +73,21 @@ describe 'Group Membership Requests' do
     end
 
     describe 'when being invited as a new member' do
+      let(:credentials) { FactoryGirl.attributes_for(:user) }
+
       before do
         visit new_group_membership_path(group_id: current_group)
-        @credentials = FactoryGirl.attributes_for(:user)
-        fill_in 'Full name', with: @credentials[:full_name]
-        fill_in 'Email', with: @credentials[:email]
+        fill_in 'Full name', with: credentials[:full_name]
+        fill_in 'Email', with: credentials[:email]
         click_on 'Add member'
         click_on 'Sign out'
       end
 
       it 'should let you complete the invitation by filling in just the password and confirmation' do
-        user = User.find_by_email(@credentials[:email])
-        visit accept_user_invitation_path(invitation_token: user.invitation_token)
+        sleep 0.1
+        mail = ActionMailer::Base.deliveries.last
+        invitation_token = mail.body.raw_source.match(/invitation_token=(\w+)/)[1]
+        visit accept_user_invitation_path(invitation_token: invitation_token)
         fill_in 'New Password', with: 'Password1', match: :first
         fill_in 'New Password Confirmation', with: 'Password1'
         click_button 'Confirm account'
@@ -92,8 +95,10 @@ describe 'Group Membership Requests' do
       end
 
       it 'should let you complete the invitation and change name and email' do
-        user = User.find_by_email(@credentials[:email])
-        visit accept_user_invitation_path(invitation_token: user.invitation_token)
+        sleep 0.1
+        mail = ActionMailer::Base.deliveries.last
+        invitation_token = mail.body.raw_source.match(/invitation_token=(\w+)/)[1]
+        visit accept_user_invitation_path(invitation_token: invitation_token)
         fill_in 'Full name', with: 'Shaun McDonald'
         fill_in 'Display name', with: 'smsm1'
         fill_in 'Email', with: 'some_other_email@example.com'
@@ -101,7 +106,7 @@ describe 'Group Membership Requests' do
         fill_in 'New Password Confirmation', with: 'Password1'
         click_button 'Confirm account'
         expect(page).to have_content('Your password was set successfully. You are now signed in.')
-        expect(User.find_by_email(@credentials[:email])).to be_nil
+        expect(User.find_by_email(credentials[:email])).to be_nil
         updated_user = User.find_by_email('some_other_email@example.com')
         expect(updated_user.full_name).to eq 'Shaun McDonald'
         expect(updated_user.display_name).to eq 'smsm1'

@@ -19,7 +19,7 @@ gem 'rails_autolink'
 gem 'tweet-button'
 
 # Back-end gems
-gem 'devise', '~> 3.1.0'
+gem 'devise', '~> 3.4.0'
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
