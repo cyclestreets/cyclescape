@@ -2,6 +2,8 @@
   %p
     - item = Library::ItemDecorator.decorate(message.component.item)
     = item.icon
+    = message.body
+  %p
     = link_to item.title, item.component
     - if item.component.class == Library::Note && item.component.document?
       %p= t ".attached_to_html", document: link_to(item.component.document.title, item.component.document)

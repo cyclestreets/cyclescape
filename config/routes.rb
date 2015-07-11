@@ -31,7 +31,7 @@ Cyclescape::Application.routes.draw do
   devise_for :users, controllers: { confirmations: 'confirmations' }, only: :registrations, path: 'settings'
 
   constraints(SubdomainConstraint) do
-    #root to: 'groups#show'
+    root to: 'groups#show', as: :subroot
     resources :threads, controller: 'group/message_threads'
     issues_route controller: 'group/issues'
   end
