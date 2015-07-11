@@ -5,7 +5,7 @@ class LibraryMessageView
     # Current result set
     @results = ko.observableArray()
     # Currently selected result
-    @selected = ko.observable()
+    @selected_item = ko.observableArray()
 
     ko.applyBindings(this)
 
@@ -26,7 +26,7 @@ class LibraryMessageView
 
   initial_items: => @initial_items
   search_results: => @results
-  selected: => @selected
+  selected: => @selected_item
 
   show_results: (event, data, status, xhr) =>
     @results(data)
@@ -38,7 +38,7 @@ class LibraryMessageView
     console.log xhr, status, error
 
   select: (item) =>
-    @selected(item)
+    @selected_item([item])
 
   fetch_initial_items: =>
     url = @panel.find("#library-recent").data("src")
