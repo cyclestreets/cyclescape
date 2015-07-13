@@ -366,7 +366,6 @@
       list_tab: "List"
       map_tab: "Map"
       new_group: "Create new group"
-      new_group_instructions_html: "To create a group on Cyclescape for your local cycling campaign please %{feedback_link} and we'll get back in touch with you soon."
       send_some_feedback: "send some feedback"
       title: "Groups directory"
       group_request: Request New Group
