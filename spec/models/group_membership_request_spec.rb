@@ -23,8 +23,8 @@ describe GroupMembershipRequest do
 
   describe 'to be valid' do
     subject { GroupMembershipRequest.new }
-    let(:user) { FactoryGirl.create(:user) }
-    let(:group) { FactoryGirl.create(:group) }
+    let(:user) { create(:user) }
+    let(:group) { create(:group) }
 
     it 'needs a user and a group' do
       expect(subject).not_to be_valid
@@ -35,8 +35,8 @@ describe GroupMembershipRequest do
   end
 
   context 'pending request' do
-    subject { FactoryGirl.create(:pending_gmr) }
-    let(:boss) { FactoryGirl.create(:user) }
+    subject { create(:pending_gmr) }
+    let(:boss) { create(:user) }
 
     it 'can be cancelled' do
       subject.cancel
@@ -63,9 +63,9 @@ describe GroupMembershipRequest do
 
   context 'check group creation' do
     subject { GroupMembershipRequest.new }
-    let(:user) { FactoryGirl.create(:stewie) }
-    let(:group) { FactoryGirl.create(:quahogcc) }
-    let(:boss) { FactoryGirl.create(:brian) }
+    let(:user) { create(:stewie) }
+    let(:group) { create(:quahogcc) }
+    let(:boss) { create(:brian) }
 
     it 'should create group when confirmed' do
       expect(user.groups.size).to eq(0)

@@ -4,7 +4,7 @@ describe GroupMembershipObserver do
   subject { GroupMembershipObserver.instance }
 
   context 'basic checks' do
-    let(:gm) { FactoryGirl.build(:group_membership) }
+    let(:gm) { build(:group_membership) }
 
     it 'should notice when GroupMembships are saved' do
       expect(subject).to receive(:after_save)
@@ -16,8 +16,8 @@ describe GroupMembershipObserver do
   end
 
   context 'new committee members' do
-    let(:thread) { FactoryGirl.create(:group_committee_message_thread) }
-    let(:group_membership) { FactoryGirl.build(:group_membership, group: thread.group) }
+    let(:thread) { create(:group_committee_message_thread) }
+    let(:group_membership) { build(:group_membership, group: thread.group) }
 
     it 'should subscribe user to committee threads if their preference is set' do
       user = group_membership.user
@@ -46,8 +46,8 @@ describe GroupMembershipObserver do
   end
 
   context 'kicking out committee members' do
-    let(:thread) { FactoryGirl.create(:group_committee_message_thread) }
-    let(:group_membership) { FactoryGirl.create(:group_membership, group: thread.group, role: 'committee') }
+    let(:thread) { create(:group_committee_message_thread) }
+    let(:group_membership) { create(:group_membership, group: thread.group, role: 'committee') }
 
     it 'should unsubscribe ex-committee members from committee only threads' do
       user = group_membership.user
@@ -65,10 +65,10 @@ describe GroupMembershipObserver do
   end
 
   context 'joining group' do
-    let(:thread) { FactoryGirl.create(:group_message_thread, :belongs_to_issue) }
-    let(:group_membership) { FactoryGirl.build(:group_membership, group: thread.group) }
+    let(:thread) { create(:group_message_thread, :belongs_to_issue) }
+    let(:group_membership) { build(:group_membership, group: thread.group) }
     let(:user) { group_membership.user }
-    let(:private_thread) { FactoryGirl.create(:group_private_message_thread, :belongs_to_issue) }
+    let(:private_thread) { create(:group_private_message_thread, :belongs_to_issue) }
 
     it 'should subscribe the user to any group threads' do
       user.prefs.update_column(:involve_my_groups, 'subscribe')
@@ -100,7 +100,7 @@ describe GroupMembershipObserver do
     end
 
     context 'admin threads' do
-      let(:thread) { FactoryGirl.create(:group_message_thread) }
+      let(:thread) { create(:group_message_thread) }
 
       it 'should subscribe to thread with pref set' do
         user.prefs.update_column(:involve_my_groups_admin, true)
@@ -115,11 +115,11 @@ describe GroupMembershipObserver do
   end
 
   context 'leaving group' do
-    let(:group_membership) { FactoryGirl.create(:group_membership, group: thread.group) }
+    let(:group_membership) { create(:group_membership, group: thread.group) }
     let(:user) { group_membership.user }
 
     context 'committee threads' do
-      let(:thread) { FactoryGirl.create(:group_message_thread, :committee) }
+      let(:thread) { create(:group_message_thread, :committee) }
 
       it 'should unsubscribe you' do
         thread.add_subscriber(user)
@@ -133,7 +133,7 @@ describe GroupMembershipObserver do
     end
 
     context 'private threads' do
-      let(:thread) { FactoryGirl.create(:group_message_thread, :private) }
+      let(:thread) { create(:group_message_thread, :private) }
 
       it 'should unsubscribe you' do
         thread.add_subscriber(user)
@@ -147,7 +147,7 @@ describe GroupMembershipObserver do
     end
 
     context 'public threads' do
-      let(:thread) { FactoryGirl.create(:group_message_thread) }
+      let(:thread) { create(:group_message_thread) }
       it 'should leave you subscribed to group public threads' do
         thread.add_subscriber(user)
         expect(thread.subscribers).to include(user)

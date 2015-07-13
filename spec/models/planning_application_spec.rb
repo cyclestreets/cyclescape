@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PlanningApplication do
-  subject        { FactoryGirl.build(:planning_application) }
+  subject        { build(:planning_application) }
 
   describe "newly created" do
     it { is_expected.to validate_presence_of(:uid) }
@@ -35,7 +35,7 @@ describe PlanningApplication do
   end
 
   context "with an issue" do
-    subject { FactoryGirl.create(:planning_application, :with_issue) }
+    subject { create(:planning_application, :with_issue) }
 
     it "should have an issue" do
       expect(subject.issue).to_not be_nil
@@ -50,7 +50,7 @@ describe PlanningApplication do
   context 'with one vote to hide' do
     before do
       subject.save!
-      FactoryGirl.create(:hide_vote, planning_application: subject)
+      create(:hide_vote, planning_application: subject)
     end
 
     it 'should be part hidden' do
@@ -61,7 +61,7 @@ describe PlanningApplication do
   context 'with two votes to hide' do
     before do
       subject.save!
-      2.times { FactoryGirl.create(:hide_vote, planning_application: subject) }
+      2.times { create(:hide_vote, planning_application: subject) }
     end
 
     it 'should have be fully hidden' do
@@ -71,14 +71,14 @@ describe PlanningApplication do
 
 
   it 'should have an not hidden scope' do
-    not_hidden = FactoryGirl.create(:planning_application)
+    not_hidden = create(:planning_application)
 
-    once_hidden = FactoryGirl.create(:planning_application)
-    FactoryGirl.create(:hide_vote, planning_application: once_hidden)
+    once_hidden = create(:planning_application)
+    create(:hide_vote, planning_application: once_hidden)
 
-    twice_hidden = FactoryGirl.create(:planning_application)
-    FactoryGirl.create(:hide_vote, planning_application: twice_hidden)
-    FactoryGirl.create(:hide_vote, planning_application: twice_hidden)
+    twice_hidden = create(:planning_application)
+    create(:hide_vote, planning_application: twice_hidden)
+    create(:hide_vote, planning_application: twice_hidden)
 
     not_hidden = described_class.not_hidden
     expect(not_hidden.size).to eq(2)
@@ -87,9 +87,9 @@ describe PlanningApplication do
 
   context 'with old planning applications' do
     before do
-      FactoryGirl.create(:planning_application, created_at: 9.months.ago)
-      FactoryGirl.create(:planning_application, :with_issue, created_at: 9.months.ago)
-      FactoryGirl.create(:planning_application, created_at: 7.months.ago)
+      create(:planning_application, created_at: 9.months.ago)
+      create(:planning_application, :with_issue, created_at: 9.months.ago)
+      create(:planning_application, created_at: 7.months.ago)
     end
 
     it 'should remove old planning applications more than 8 months old' do

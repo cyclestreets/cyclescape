@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe 'Group Membership Requests' do
-  let(:meg) { FactoryGirl.create(:meg) }
+  let(:meg) { create(:meg) }
 
   context 'as a group member' do
     include_context 'signed in as a group member'
-    let(:gmr) { FactoryGirl.create(:group_membership_request, group: current_group, user: meg) }
+    let(:gmr) { create(:group_membership_request, group: current_group, user: meg) }
 
     describe 'viewing the requests' do
       it 'should refuse' do
@@ -17,7 +17,7 @@ describe 'Group Membership Requests' do
 
   context 'as a committee member' do
     include_context 'signed in as a committee member'
-    let(:gmr) { FactoryGirl.create(:group_membership_request, group: current_group, user: meg) }
+    let(:gmr) { create(:group_membership_request, group: current_group, user: meg) }
 
     describe 'confirming a request' do
       it 'should send a notification' do
@@ -57,7 +57,7 @@ describe 'Group Membership Requests' do
 
       context 'with a message' do
         let(:message) { 'My membership number is 012345' }
-        let(:gmr) { FactoryGirl.create(:group_membership_request, group: current_group, user: meg, message: message) }
+        let(:gmr) { create(:group_membership_request, group: current_group, user: meg, message: message) }
 
         it "should indicate there's a message when viewing the list" do
           visit group_membership_requests_path(gmr.group)
@@ -75,7 +75,7 @@ describe 'Group Membership Requests' do
     describe 'when being invited as a new member' do
       before do
         visit new_group_membership_path(group_id: current_group)
-        @credentials = FactoryGirl.attributes_for(:user)
+        @credentials = attributes_for(:user)
         fill_in 'Full name', with: @credentials[:full_name]
         fill_in 'Email', with: @credentials[:email]
         click_on 'Add member'
@@ -111,7 +111,7 @@ describe 'Group Membership Requests' do
 
   context 'as the original user' do
     include_context 'signed in as a site user'
-    let(:group) { FactoryGirl.create(:group) }
+    let(:group) { create(:group) }
 
     before do
       visit group_path(group)
@@ -146,7 +146,7 @@ describe 'Group Membership Requests' do
 
   context 'new request notifications' do
     include_context 'signed in as a site user'
-    let(:group) { FactoryGirl.create(:group) }
+    let(:group) { create(:group) }
     let(:message) { 'My membership number is 1234' }
 
     before do
@@ -179,7 +179,7 @@ describe 'Group Membership Requests' do
     end
 
     context 'with a membership secretary' do
-      let (:membership_secretary) { FactoryGirl.create(:user) }
+      let (:membership_secretary) { create(:user) }
 
       it 'should send an email to the membership secretary' do
         group.prefs.membership_secretary = membership_secretary

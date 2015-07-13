@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe 'Issues' do
-  let(:issue_values) { FactoryGirl.attributes_for(:issue_with_json_loc) }
+  let(:issue_values) { attributes_for(:issue_with_json_loc) }
 
   context 'new' do
     context 'as site member' do
@@ -60,7 +60,7 @@ describe 'Issues' do
   end
 
   context 'show' do
-    let!(:issue) { FactoryGirl.create(:issue) }
+    let!(:issue) { create(:issue) }
 
     context 'as a public user' do
       before do
@@ -82,7 +82,7 @@ describe 'Issues' do
       it 'should show the location'
 
       context 'with photo' do
-        let!(:issue) { FactoryGirl.create(:issue, :with_photo) }
+        let!(:issue) { create(:issue, :with_photo) }
 
         it 'should show the photo' do
           expect(page).to have_selector('img.issue-photo')
@@ -126,10 +126,10 @@ describe 'Issues' do
 
     context 'with threads' do
       context 'as a public user' do
-        let!(:issue) { FactoryGirl.create(:issue) }
-        let(:other_group) { FactoryGirl.create(:group) }
-        let!(:public_thread) { FactoryGirl.create(:message_thread_with_messages, issue: issue) }
-        let!(:private_thread) { FactoryGirl.create(:message_thread_with_messages, :private, group: other_group, issue: issue) }
+        let!(:issue) { create(:issue) }
+        let(:other_group) { create(:group) }
+        let!(:public_thread) { create(:message_thread_with_messages, issue: issue) }
+        let!(:private_thread) { create(:message_thread_with_messages, :private, group: other_group, issue: issue) }
 
         it 'should link to the public thread' do
           visit issue_path(issue)
@@ -168,7 +168,7 @@ describe 'Issues' do
     end
 
     context 'tags', as: :site_user do
-      let!(:issue) { FactoryGirl.create(:issue, :with_tags) }
+      let!(:issue) { create(:issue, :with_tags) }
 
       before do
         visit issue_path(issue)
@@ -194,8 +194,8 @@ describe 'Issues' do
 
   describe 'index' do
     context 'as a public user' do
-      let!(:issues) { FactoryGirl.create_list(:issue, 3) }
-      let(:voter) { FactoryGirl.create(:user) }
+      let!(:issues) { create_list(:issue, 3) }
+      let(:voter) { create(:user) }
 
       it 'should have the issue titles' do
         visit issues_path
@@ -236,7 +236,7 @@ describe 'Issues' do
 
   context 'search' do
     include_context 'signed in as a site user'
-    let(:issue) { FactoryGirl.create(:issue, :with_tags) }
+    let(:issue) { create(:issue, :with_tags) }
     # main search box doesn't have any I18n'd content, just a js-based placeholder.
     # use the id of the field instead.
     let(:search_field) { 'query' }
@@ -294,7 +294,7 @@ describe 'Issues' do
   end
 
   context 'delete' do
-    let!(:issue) { FactoryGirl.create(:issue) }
+    let!(:issue) { create(:issue) }
     let(:delete_text) { 'Delete this issue' }
 
     context 'as a site user' do
@@ -336,7 +336,7 @@ describe 'Issues' do
     context 'as an admin' do
       include_context 'signed in as admin'
 
-      let(:issue) { FactoryGirl.create(:issue) }
+      let(:issue) { create(:issue) }
 
       it 'should show you an edit link' do
         visit issue_path(issue)
@@ -358,7 +358,7 @@ describe 'Issues' do
       include_context 'signed in as a site user'
 
       context 'recent' do
-        let(:issue) { FactoryGirl.create(:issue, created_by: current_user) }
+        let(:issue) { create(:issue, created_by: current_user) }
 
         it 'should show you an edit link' do
           visit issue_path(issue)
@@ -367,7 +367,7 @@ describe 'Issues' do
       end
 
       context 'long ago' do
-        let(:issue) { FactoryGirl.create(:issue, created_by: current_user, created_at: 2.days.ago) }
+        let(:issue) { create(:issue, created_by: current_user, created_at: 2.days.ago) }
 
         it 'should not show you an edit link' do
           visit issue_path(issue)
@@ -378,7 +378,7 @@ describe 'Issues' do
 
     context 'as another user' do
       include_context 'signed in as a site user'
-      let(:issue) { FactoryGirl.create(:issue) }
+      let(:issue) { create(:issue) }
 
       it 'should not show you an edit link' do
         visit issue_path(issue)
@@ -388,8 +388,8 @@ describe 'Issues' do
   end
 
   context 'voting' do
-    let(:issue) { FactoryGirl.create(:issue) }
-    let(:meg) { FactoryGirl.create(:meg) }
+    let(:issue) { create(:issue) }
+    let(:meg) { create(:meg) }
 
     before do
       meg.vote_for(issue)
@@ -476,7 +476,7 @@ describe 'Issues' do
 
   context 'geojson' do
     context 'issue' do
-      let(:issue) { FactoryGirl.create(:issue) }
+      let(:issue) { create(:issue) }
 
       before do
         visit geometry_issue_path(issue, format: :json)
@@ -488,7 +488,7 @@ describe 'Issues' do
     end
 
     context 'all issues' do
-      let!(:issue) { FactoryGirl.create(:issue) }
+      let!(:issue) { create(:issue) }
 
       before do
         visit all_geometries_issues_path(format: :json)

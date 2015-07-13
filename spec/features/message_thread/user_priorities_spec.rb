@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'user priorities' do
-  let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:thread) { create(:message_thread) }
 
   context 'site user prioritise' do
     include_context 'signed in as a site user'

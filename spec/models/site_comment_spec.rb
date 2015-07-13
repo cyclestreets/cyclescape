@@ -28,7 +28,7 @@ describe SiteComment do
   end
 
   context 'viewing' do
-    subject { FactoryGirl.create(:site_comment) }
+    subject { create(:site_comment) }
 
     it 'should update the viewed timestamp when viewed' do
       expect(subject.viewed_at).to be_nil
@@ -44,7 +44,7 @@ describe SiteComment do
   end
 
   context 'deleting' do
-    subject { FactoryGirl.create(:site_comment) }
+    subject { create(:site_comment) }
 
     it 'should appear to be destroyed' do
       subject.destroy

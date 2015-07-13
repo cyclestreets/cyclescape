@@ -15,8 +15,8 @@ describe 'Authentication and authorization' do
   end
 
   context 'when visiting a page that requires login' do
-    let!(:user_details) { FactoryGirl.attributes_for(:user) }
-    let!(:current_user) { FactoryGirl.create(:user, user_details) }
+    let!(:user_details) { attributes_for(:user) }
+    let!(:current_user) { create(:user, user_details) }
     let!(:password) { user_details[:password] }
 
     it 'should redirect you to the original page after login' do
@@ -33,8 +33,8 @@ describe 'Authentication and authorization' do
 
   context 'when choosing to log in' do
     def choose_to_log_in_from(path)
-      credentials = FactoryGirl.attributes_for(:user)
-      FactoryGirl.create(:user, credentials)
+      credentials = attributes_for(:user)
+      create(:user, credentials)
       visit path
       click_link 'Sign in'
       fill_in 'Email', with: credentials[:email]
@@ -90,7 +90,7 @@ describe 'Authentication and authorization' do
 
   context 'when signing up' do
     before do
-      @credentials = FactoryGirl.attributes_for(:user)
+      @credentials = attributes_for(:user)
       visit root_path
       click_link 'Sign up'
       fill_in 'Full name', with: @credentials[:full_name]
@@ -120,8 +120,8 @@ describe 'Authentication and authorization' do
   end
 
   context 'when closing my account' do
-    let!(:user_details) { FactoryGirl.attributes_for(:user) }
-    let!(:current_user) { FactoryGirl.create(:user, user_details) }
+    let!(:user_details) { attributes_for(:user) }
+    let!(:current_user) { create(:user, user_details) }
     let!(:password) { user_details[:password] }
 
     def sign_in

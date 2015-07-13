@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Issue threads' do
-  let!(:issue) { FactoryGirl.create(:issue) }
-  let(:issue_with_tags) { FactoryGirl.create(:issue, :with_tags) }
+  let!(:issue) { create(:issue) }
+  let(:issue_with_tags) { create(:issue, :with_tags) }
   let(:edit_thread) { 'Edit this thread' }
 
   context 'new' do
@@ -110,9 +110,9 @@ describe 'Issue threads' do
       end
 
       context 'group thread notification' do
-        let(:user) { FactoryGirl.create(:user) }
+        let(:user) { create(:user) }
         # Non-conflicting name
-        let(:group_membership) { FactoryGirl.create(:group_membership, group: current_group, user: user) }
+        let(:group_membership) { create(:group_membership, group: current_group, user: user) }
         let(:notifiee) { group_membership.user }
 
         before do
@@ -138,7 +138,7 @@ describe 'Issue threads' do
         end
 
         context 'with an unconfirmed user' do
-          let(:user) { FactoryGirl.create(:user, :unconfirmed) }
+          let(:user) { create(:user, :unconfirmed) }
 
           it 'should not receive it' do
             create_thread
@@ -154,10 +154,10 @@ describe 'Issue threads' do
 
       include_context 'signed in as a group member'
 
-      let(:notifiee) { FactoryGirl.create(:user) }
-      let!(:notifiee_location_big) { FactoryGirl.create(:user_location, user: notifiee, location: issue.location.buffer(1)) }
-      let!(:notifiee_location_small) { FactoryGirl.create(:user_location, user: notifiee, location: issue.location.buffer(0.1)) }
-      let!(:user_location) { FactoryGirl.create(:user_location, user: current_user, location: issue.location.buffer(1)) }
+      let(:notifiee) { create(:user) }
+      let!(:notifiee_location_big) { create(:user_location, user: notifiee, location: issue.location.buffer(1)) }
+      let!(:notifiee_location_small) { create(:user_location, user: notifiee, location: issue.location.buffer(0.1)) }
+      let!(:user_location) { create(:user_location, user: current_user, location: issue.location.buffer(1)) }
 
       before do
         current_user.prefs.update_column(:involve_my_groups, 'none')
@@ -236,8 +236,8 @@ describe 'Issue threads' do
     context 'automatic subscriptions' do
       include_context 'signed in as a site user'
 
-      let(:subscriber) { FactoryGirl.create(:user) }
-      let!(:subscriber_location) { FactoryGirl.create(:user_location, user: subscriber, location: issue.location.buffer(1)) }
+      let(:subscriber) { create(:user) }
+      let!(:subscriber_location) { create(:user_location, user: subscriber, location: issue.location.buffer(1)) }
 
       def create_thread
         visit issue_path(issue)
@@ -253,7 +253,7 @@ describe 'Issue threads' do
       end
 
       it 'should only subscribe the thread creator once' do
-        FactoryGirl.create(:user_location, user: current_user, location: issue.location.buffer(1))
+        create(:user_location, user: current_user, location: issue.location.buffer(1))
         MessageThread.observers.enable :message_thread_observer do
           create_thread
         end
@@ -269,7 +269,7 @@ describe 'Issue threads' do
   end
 
   context 'edit' do
-    let(:thread) { FactoryGirl.create(:message_thread, issue: issue, group: current_group) }
+    let(:thread) { create(:message_thread, issue: issue, group: current_group) }
 
     context 'as a group member' do
       include_context 'signed in as a group member'
@@ -297,7 +297,7 @@ describe 'Issue threads' do
   end
 
   context 'group private thread' do
-    let!(:thread) { FactoryGirl.create(:group_private_message_thread_with_messages, issue: issue) }
+    let!(:thread) { create(:group_private_message_thread_with_messages, issue: issue) }
     context 'as an admin' do
       include_context 'signed in as admin'
 
@@ -314,7 +314,7 @@ describe 'Issue threads' do
     context 'a non-group public thread in a subdomain', use: :current_subdomain do
       include_context 'signed in as a group member'
 
-      let!(:thread) { FactoryGirl.create(:message_thread_with_messages, issue: issue) }
+      let!(:thread) { create(:message_thread_with_messages, issue: issue) }
 
       it 'should be accessible' do
         visit issue_path(issue)

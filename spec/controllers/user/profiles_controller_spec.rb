@@ -9,7 +9,7 @@ describe User::ProfilesController, type: :controller do
   end
 
   context 'profile visibility' do
-    let(:user_profile) { FactoryGirl.create(:user_profile) }
+    let(:user_profile) { create(:user_profile) }
     let(:user) { user_profile.user }
 
     context 'with public profile' do
@@ -36,7 +36,7 @@ describe User::ProfilesController, type: :controller do
         include_context 'signed in as a site user'
 
         before do
-          FactoryGirl.create :user_profile, user: current_user, visibility: 'group'
+          create :user_profile, user: current_user, visibility: 'group'
           warden.set_user current_user.reload
         end
 
@@ -61,7 +61,7 @@ describe User::ProfilesController, type: :controller do
       context 'as a group member' do
         include_context 'signed in as a group member'
 
-        let!(:group_membership) { FactoryGirl.create(:group_membership, user: user, group: current_group) }
+        let!(:group_membership) { create(:group_membership, user: user, group: current_group) }
 
         before do
           sign_in current_user

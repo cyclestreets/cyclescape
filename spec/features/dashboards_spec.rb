@@ -28,7 +28,7 @@ describe 'User dashboards' do
               3.times do
                 # Use factory_with_trait syntax here as for some bug causes multiple
                 # creates with separate trait to fail
-                FactoryGirl.create(:message_thread_with_messages, group: group)
+                create(:message_thread_with_messages, group: group)
               end
             end
             visit dashboard_path
@@ -56,7 +56,7 @@ describe 'User dashboards' do
 
       context 'with threads' do
         it "should list threads I've subscribed to" do
-          messages = FactoryGirl.create_list(:message, 3, created_by: current_user)
+          messages = create_list(:message, 3, created_by: current_user)
           messages.each { |m| m.thread.add_subscriber(current_user) }
           expect(current_user.involved_threads.count).to be > 0
           visit dashboard_path
@@ -70,7 +70,7 @@ describe 'User dashboards' do
     context 'issues' do
       include_context 'signed in as a site user'
 
-      let(:issue) { FactoryGirl.create(:issue) }
+      let(:issue) { create(:issue) }
 
       context 'no locations' do
         it 'should give some guidance' do
@@ -83,7 +83,7 @@ describe 'User dashboards' do
         before do
           # Give the current user a location that doesn't match the issue
           ul = current_user.locations.new
-          ul.category = FactoryGirl.create(:location_category)
+          ul.category = create(:location_category)
           ul.location = 'POINT(-90 -90)'
           ul.save
           visit dashboard_path
@@ -98,7 +98,7 @@ describe 'User dashboards' do
         before do
           # Give the current user a location that matches the issue
           ul = current_user.locations.new
-          ul.category = FactoryGirl.create(:location_category)
+          ul.category = create(:location_category)
           ul.location = issue.location
           ul.save
           visit dashboard_path
@@ -123,8 +123,8 @@ describe 'User dashboards' do
       end
 
       context 'with prioritised threads' do
-        let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
-        let!(:priority) { FactoryGirl.create(:user_thread_priority, thread: thread, user: current_user) }
+        let(:thread) { create(:message_thread_with_messages) }
+        let!(:priority) { create(:user_thread_priority, thread: thread, user: current_user) }
 
         it 'should show the thread' do
           visit dashboard_path
@@ -147,9 +147,9 @@ describe 'User dashboards' do
       end
 
       context 'with a deadline' do
-        let!(:message) { FactoryGirl.create(:message, created_by: current_user) }
-        let!(:deadline) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: message.thread)) }
-        let!(:censored_deadline) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: message.thread, censored_at: Time.now)) }
+        let!(:message) { create(:message, created_by: current_user) }
+        let!(:deadline) { create(:deadline_message, message: create(:message, thread: message.thread)) }
+        let!(:censored_deadline) { create(:deadline_message, message: create(:message, thread: message.thread, censored_at: Time.now)) }
 
         it 'should show the deadline' do
           deadline.thread.add_subscriber(current_user)
@@ -169,9 +169,9 @@ describe 'User dashboards' do
     context 'search' do
       include_context 'signed in as a site user'
 
-      let!(:thread) { FactoryGirl.create(:message_thread, title: 'bananas') }
-      let!(:issue) { FactoryGirl.create(:issue, title: 'bananas also') }
-      let!(:library_note) { FactoryGirl.create(:library_document, title: 'more bananas') }
+      let!(:thread) { create(:message_thread, title: 'bananas') }
+      let!(:issue) { create(:issue, title: 'bananas also') }
+      let!(:library_note) { create(:library_document, title: 'more bananas') }
       let(:search_button) { I18n.t('layouts.search.search_button') }
 
       it 'should find some bananas' do

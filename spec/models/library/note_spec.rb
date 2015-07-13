@@ -4,7 +4,7 @@ describe Library::Note do
   it_behaves_like 'a library component'
 
   it 'should be valid' do
-    note = FactoryGirl.create(:library_note)
+    note = create(:library_note)
     expect(note).to be_valid
   end
 
@@ -12,7 +12,7 @@ describe Library::Note do
   it { is_expected.to validate_presence_of(:body) }
 
   describe 'searchable text' do
-    let(:note) { FactoryGirl.create(:library_note) }
+    let(:note) { create(:library_note) }
 
     it 'should have a searchable title' do
       expect(note.searchable_text).to include(note.title)

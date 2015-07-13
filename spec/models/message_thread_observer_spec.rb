@@ -4,7 +4,7 @@ describe MessageThreadObserver do
   subject { MessageThreadObserver.instance }
 
   context 'basic checks' do
-    let(:thread) { FactoryGirl.build(:message_thread) }
+    let(:thread) { build(:message_thread) }
 
     it 'should notice when MessageThreads are saved' do
       expect(subject).to receive(:after_save)
@@ -16,14 +16,14 @@ describe MessageThreadObserver do
   end
 
   context 'privacy' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:membership) { FactoryGirl.create(:group_membership, group: thread.group) }
+    let(:user) { create(:user) }
+    let(:membership) { create(:group_membership, group: thread.group) }
     let(:member) { membership.user }
-    let(:committee_membership) { FactoryGirl.create(:group_membership, group: thread.group, role: 'committee') }
+    let(:committee_membership) { create(:group_membership, group: thread.group, role: 'committee') }
     let(:committee_member) { committee_membership.user }
 
     context 'from public' do
-      let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group) }
+      let(:thread) { create(:message_thread, :belongs_to_group) }
 
       context 'to group' do
         it 'should unsubscribe non-group members' do
@@ -75,7 +75,7 @@ describe MessageThreadObserver do
     end
 
     context 'from group private' do
-      let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :private) }
+      let(:thread) { create(:message_thread, :belongs_to_group, :private) }
 
       context 'to public' do
         it 'should try subscribe people who might have access' do
@@ -113,7 +113,7 @@ describe MessageThreadObserver do
     end
 
     context 'from committee' do
-      let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :committee) }
+      let(:thread) { create(:message_thread, :belongs_to_group, :committee) }
 
       context 'to group' do
         it 'should attempt to subscribe group members' do
@@ -139,10 +139,10 @@ describe MessageThreadObserver do
 
   context 'issue' do
     context 'added' do
-      let(:thread) { FactoryGirl.create(:message_thread, :belongs_to_group) }
-      let(:private_thread) { FactoryGirl.create(:message_thread, :belongs_to_group, :private) }
-      let(:user_location) { FactoryGirl.create(:user_location) }
-      let(:issue) { FactoryGirl.create(:issue, location: user_location.location) }
+      let(:thread) { create(:message_thread, :belongs_to_group) }
+      let(:private_thread) { create(:message_thread, :belongs_to_group, :private) }
+      let(:user_location) { create(:user_location) }
+      let(:issue) { create(:issue, location: user_location.location) }
 
       it 'should subscribe people with overlapping locations' do
         MessageThread.observers.enable :message_thread_observer do
@@ -164,9 +164,9 @@ describe MessageThreadObserver do
     end
 
     context 'removed' do
-      let(:user) { FactoryGirl.create(:user) }
-      let(:thread) { FactoryGirl.create(:issue_message_thread) }
-      let!(:subscription) { FactoryGirl.create(:thread_subscription, thread: thread, user: user) }
+      let(:user) { create(:user) }
+      let(:thread) { create(:issue_message_thread) }
+      let!(:subscription) { create(:thread_subscription, thread: thread, user: user) }
 
       it 'should remove people' do
         expect(thread.subscribers).to include(user)
@@ -179,7 +179,7 @@ describe MessageThreadObserver do
       end
 
       it 'should leave people subscribed if they have participated' do
-        FactoryGirl.create(:message, thread: thread, created_by: user)
+        create(:message, thread: thread, created_by: user)
         expect(thread.subscribers).to include(user)
         expect(thread.participants).to include(user)
         MessageThread.observers.enable :message_thread_observer do
@@ -191,10 +191,10 @@ describe MessageThreadObserver do
       end
 
       context 'becomes group administrative thread' do
-        let(:thread) { FactoryGirl.create(:group_message_thread) }
-        let(:group_membership) { FactoryGirl.create(:group_membership, group: thread.group) }
+        let(:thread) { create(:group_message_thread) }
+        let(:group_membership) { create(:group_membership, group: thread.group) }
         let(:member) { group_membership.user }
-        let!(:subscription) { FactoryGirl.create(:thread_subscription, thread: thread, user: member) }
+        let!(:subscription) { create(:thread_subscription, thread: thread, user: member) }
 
         before do
           member.prefs.involve_my_groups_admin = true

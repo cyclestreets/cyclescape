@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe UserLocation do
   describe 'newly created' do
-    subject { FactoryGirl.create(:user_location) }
+    subject { create(:user_location) }
 
     it 'must have a user' do
       expect(subject.user).to be_valid
@@ -20,7 +20,7 @@ describe UserLocation do
   end
 
   describe 'to be valid' do
-    subject { FactoryGirl.build(:user_location) }
+    subject { build(:user_location) }
 
     it 'must have a user' do
       subject.user = nil
@@ -59,9 +59,9 @@ describe UserLocation do
   end
 
   context 'overlapping groups' do
-    subject { FactoryGirl.create(:user_location) }
-    let(:small_group_profile) { FactoryGirl.create(:small_group_profile) }
-    let(:big_group_profile) { FactoryGirl.create(:big_group_profile) }
+    subject { create(:user_location) }
+    let(:small_group_profile) { create(:small_group_profile) }
+    let(:big_group_profile) { create(:big_group_profile) }
 
     it 'should identify the correct overlapping groups' do
       big_group_profile

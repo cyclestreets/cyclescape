@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe GroupProfile do
   describe 'to be valid' do
-    subject { FactoryGirl.create(:group_profile) }
+    subject { create(:group_profile) }
     context 'picture' do
-      subject { FactoryGirl.create(:group_profile, :with_picture) }
+      subject { create(:group_profile, :with_picture) }
 
       it 'should accept and save a picture' do
         expect(subject.picture_uid).not_to be_blank

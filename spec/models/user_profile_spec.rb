@@ -10,7 +10,7 @@ describe UserProfile do
   end
 
   context 'picture' do
-    subject { FactoryGirl.create(:user_profile) }
+    subject { create(:user_profile) }
 
     it 'should accept and save a picture' do
       expect(subject.picture_uid).not_to be_blank
@@ -31,7 +31,7 @@ describe UserProfile do
   end
 
   context 'url' do
-    subject { FactoryGirl.create(:user_profile) }
+    subject { create(:user_profile) }
 
     it 'should allow a valid URL with HTTP protocol' do
       subject.website = 'http://en.wikipedia.org/wiki/Family_Guy'
@@ -71,7 +71,7 @@ describe UserProfile do
   end
 
   context 'clearing' do
-    subject { FactoryGirl.create(:user_profile) }
+    subject { create(:user_profile) }
 
     it 'should remove the website' do
       expect(subject.website).not_to be_nil

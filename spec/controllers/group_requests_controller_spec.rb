@@ -2,11 +2,11 @@ require 'spec_helper'
 
 RSpec.describe GroupRequestsController, type: :controller do
 
-  let(:valid_attributes) { FactoryGirl.attributes_for(:group_request) }
-  let(:group_request)    { FactoryGirl.create(:group_request) }
+  let(:valid_attributes) { attributes_for(:group_request) }
+  let(:group_request)    { create(:group_request) }
 
   context 'as a site user' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
 
     before do
       warden.set_user user
@@ -49,7 +49,7 @@ RSpec.describe GroupRequestsController, type: :controller do
   end
 
   context 'as a site admin with a group request' do
-    let(:admin) { FactoryGirl.create(:user, :admin) }
+    let(:admin) { create(:user, :admin) }
 
     before do
       warden.set_user admin

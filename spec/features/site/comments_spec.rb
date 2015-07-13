@@ -37,7 +37,7 @@ describe 'Site feedback' do
   end
 
   context as: :admin do
-    let!(:comment) { FactoryGirl.create(:site_comment) }
+    let!(:comment) { create(:site_comment) }
     include_context 'signed in as admin'
 
     it 'should show the comments' do

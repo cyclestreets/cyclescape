@@ -6,7 +6,7 @@ describe 'Library Messages' do
     include_context 'signed in as a site user'
 
     context 'plain messages' do
-      let(:message) { FactoryGirl.create(:message) }
+      let(:message) { create(:message) }
 
       it 'should create a library note from a message' do
         visit thread_path(message.thread)
@@ -25,7 +25,7 @@ describe 'Library Messages' do
     end
 
     context 'document messages' do
-      let(:message) { FactoryGirl.create(:document_message) }
+      let(:message) { create(:document_message) }
 
       it 'should create a library document from a document message' do
         visit thread_path(message.thread)
@@ -65,7 +65,7 @@ describe 'Library Messages' do
     end
 
     context 'photo messages' do
-      let(:message) { FactoryGirl.create(:photo_message) }
+      let(:message) { create(:photo_message) }
 
       it 'should not let you create a library item' do
         visit thread_path(message.thread)
@@ -75,7 +75,7 @@ describe 'Library Messages' do
     end
 
     context 'deadline messages' do
-      let(:message) { FactoryGirl.create(:deadline_message) }
+      let(:message) { create(:deadline_message) }
 
       it 'should not let you create a library item' do
         visit thread_path(message.thread)
@@ -85,7 +85,7 @@ describe 'Library Messages' do
     end
 
     context 'url messages' do
-      let(:message) { FactoryGirl.create(:link_message) }
+      let(:message) { create(:link_message) }
 
       it 'should not let you create a library item' do
         visit thread_path(message.thread)
@@ -95,7 +95,7 @@ describe 'Library Messages' do
     end
 
     context 'library item messages' do
-      let(:message) { FactoryGirl.create(:library_item_message_with_document) }
+      let(:message) { create(:library_item_message_with_document) }
 
       it 'should not let the world implode' do
         message.message.save! # required for overly-complex reasons involving components-in-components

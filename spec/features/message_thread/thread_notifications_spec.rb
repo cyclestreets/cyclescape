@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'thread notifications' do
-  let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+  let(:thread) { create(:message_thread_with_messages) }
   let(:subscribe_button) { find_button(I18n.t('formtastic.actions.thread_subscription.create')) }
 
   context 'new messages' do
@@ -40,7 +40,7 @@ describe 'thread notifications' do
     end
 
     it 'should send an email for a library item message'
-#     library_note = FactoryGirl.create(:library_note)
+#     library_note = create(:library_note)
 #     visit thread_path(thread) # to update the select field
 
 #     within("#new-library-item-message") do
@@ -165,7 +165,7 @@ describe 'thread notifications' do
     context 'private threads' do
       include_context 'signed in as a group member'
 
-      let(:thread) { FactoryGirl.create(:message_thread_with_messages, :private, group: current_group) }
+      let(:thread) { create(:message_thread_with_messages, :private, group: current_group) }
 
       before do
         current_user.prefs.update_column(:enable_email, true)
@@ -187,7 +187,7 @@ describe 'thread notifications' do
     context 'committee threads' do
       include_context 'signed in as a committee member'
 
-      let(:thread) { FactoryGirl.create(:message_thread_with_messages, :committee, group: current_group) }
+      let(:thread) { create(:message_thread_with_messages, :committee, group: current_group) }
 
       before do
         current_user.prefs.update_column(:enable_email, true)

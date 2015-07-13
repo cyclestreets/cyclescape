@@ -13,7 +13,7 @@ describe Library::Item do
   end
 
   context 'find with index' do
-    let!(:note) { FactoryGirl.create(:library_note) }
+    let!(:note) { create(:library_note) }
 
     it 'should be returned in a search query' do
       results = Library::Item.find_with_index(note.title)
@@ -22,8 +22,8 @@ describe Library::Item do
   end
 
   context 'find by tags' do
-    let!(:item) { FactoryGirl.create(:library_item, tags_string: 'foo bar baz') }
-    let!(:item2) { FactoryGirl.create(:library_item, tags_string: 'bananas') }
+    let!(:item) { create(:library_item, tags_string: 'foo bar baz') }
+    let!(:item2) { create(:library_item, tags_string: 'bananas') }
 
     it 'should return both notes' do
       thread = double(tags: [double(name: 'foo'), double(name: 'bananas')])

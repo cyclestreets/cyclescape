@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Message::LibraryItemsController do
   context 'as a site user' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:thread) { FactoryGirl.create(:message_thread) }
-    let(:library_item) { FactoryGirl.create(:library_item) }
+    let(:user) { create(:user) }
+    let(:thread) { create(:message_thread) }
+    let(:library_item) { create(:library_item) }
     let(:last_added) { LibraryItemMessage.last }
 
     before do

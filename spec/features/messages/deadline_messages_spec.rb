@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Deadline messages' do
-  let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:thread) { create(:message_thread) }
 
   def deadline_form
     within('#new-deadline-message') { yield }

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe 'Tags' do
-  let(:tag) { FactoryGirl.create(:tag) }
-  let!(:thread) { FactoryGirl.create(:message_thread, tags: [tag]) }
-  let!(:issue) { FactoryGirl.create(:issue, tags: [tag]) }
-  let!(:library_note) { FactoryGirl.create(:library_note) }
-  let!(:bogus_tag) { FactoryGirl.build(:tag, name: 'unfindable') }
+  let(:tag) { create(:tag) }
+  let!(:thread) { create(:message_thread, tags: [tag]) }
+  let!(:issue) { create(:issue, tags: [tag]) }
+  let!(:library_note) { create(:library_note) }
+  let!(:bogus_tag) { build(:tag, name: 'unfindable') }
 
   it 'should show results' do
     library_note.item.tags = [tag]
@@ -25,7 +25,7 @@ end
 
 describe 'autocomplete_tags' do
   context 'autocomplete_tag_name' do
-    let(:tag) { FactoryGirl.create(:tag) }
+    let(:tag) { create(:tag) }
 
     it 'should return a tag from a full name tag search' do
       visit autocomplete_tags_path(term: tag.name)

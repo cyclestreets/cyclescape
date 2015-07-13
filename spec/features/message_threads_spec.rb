@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Message threads' do
-  let(:thread) { FactoryGirl.create(:message_thread_with_messages, :with_tags) }
-  let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5) }
+  let(:thread) { create(:message_thread_with_messages, :with_tags) }
+  let(:threads) { create_list(:message_thread_with_messages, 5) }
   let(:censor_message) { 'Censor this message' }
   let(:delete_thread) { 'Delete this thread' }
   let(:edit_thread) { 'Edit this thread' }
@@ -71,7 +71,7 @@ describe 'Message threads' do
     end
 
     context 'deleted issue' do
-      let(:thread_with_issue) { FactoryGirl.create(:issue_message_thread) }
+      let(:thread_with_issue) { create(:issue_message_thread) }
       let(:issue) { thread_with_issue.issue }
 
       before do
@@ -114,7 +114,7 @@ describe 'Message threads' do
       end
 
       it 'should link to the issue' do
-        issue_thread = FactoryGirl.create(:issue_message_thread, :with_messages)
+        issue_thread = create(:issue_message_thread, :with_messages)
         visit threads_path
         expect(page).to have_link(issue_thread.issue.title)
       end
@@ -281,7 +281,7 @@ describe 'Message threads' do
       end
 
       it 'should let you set a group as the owner' do
-        group = FactoryGirl.create(:group)
+        group = create(:group)
         click_on edit_thread
         select group.name, from: 'Owned by'
         click_on 'Save'
@@ -290,7 +290,7 @@ describe 'Message threads' do
       end
 
       it 'should let you pick an issue to assign the thread to' do
-        issue = FactoryGirl.create(:issue)
+        issue = create(:issue)
         click_on edit_thread
         select "#{issue.id} - #{issue.title}", from: 'Issue'
         click_on 'Save'
@@ -300,8 +300,8 @@ describe 'Message threads' do
     end
 
     context 'editing a group thread' do
-      let!(:thread) { FactoryGirl.create(:group_message_thread) }
-      let!(:other_group) { FactoryGirl.create(:group) }
+      let!(:thread) { create(:group_message_thread) }
+      let!(:other_group) { create(:group) }
 
       it 'should let you assign to another group' do
         visit edit_thread_path(thread)
@@ -325,8 +325,8 @@ describe 'Message threads' do
   end
 
   context 'privacy' do
-    let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
-    let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread) }
+    let(:private_thread) { create(:group_private_message_thread) }
+    let(:committee_thread) { create(:group_committee_message_thread) }
 
     context 'as a guest' do
       it 'should not show the private thread' do
@@ -357,8 +357,8 @@ describe 'Message threads' do
     context 'as a member of the correct group' do
       include_context 'signed in as a group member'
 
-      let(:group_private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
-      let(:group_committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+      let(:group_private_thread) { create(:group_private_message_thread, group: current_group) }
+      let(:group_committee_thread) { create(:group_committee_message_thread, group: current_group) }
 
       it 'should show the private thread' do
         visit thread_path(group_private_thread)
@@ -374,8 +374,8 @@ describe 'Message threads' do
     context 'as a committee member of the correct group' do
       include_context 'signed in as a committee member'
 
-      let(:group_private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
-      let(:group_committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+      let(:group_private_thread) { create(:group_private_message_thread, group: current_group) }
+      let(:group_committee_thread) { create(:group_committee_message_thread, group: current_group) }
 
       it 'should show the private thread' do
         visit thread_path(group_private_thread)
@@ -408,16 +408,16 @@ describe 'Message threads' do
     before do
       [thread, private_thread, committee_thread].each do |t|
         m = t.messages.new(body: 'Findable with bananas')
-        m.created_by = FactoryGirl.create(:user)
+        m.created_by = create(:user)
         m.save!
         t.reload
       end
     end
 
     describe 'as a guest' do
-      let(:thread) { FactoryGirl.create(:message_thread) }
-      let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
-      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread) }
+      let(:thread) { create(:message_thread) }
+      let(:private_thread) { create(:group_private_message_thread) }
+      let(:committee_thread) { create(:group_committee_message_thread) }
 
       it 'should show one result' do
         visit threads_path
@@ -434,8 +434,8 @@ describe 'Message threads' do
     describe 'as a group member' do
       include_context 'signed in as a group member'
 
-      let(:private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
-      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+      let(:private_thread) { create(:group_private_message_thread, group: current_group) }
+      let(:committee_thread) { create(:group_committee_message_thread, group: current_group) }
 
       it 'should show two results' do
         visit threads_path
@@ -452,8 +452,8 @@ describe 'Message threads' do
     describe 'as a committee member' do
       include_context 'signed in as a committee member'
 
-      let(:private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
-      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+      let(:private_thread) { create(:group_private_message_thread, group: current_group) }
+      let(:committee_thread) { create(:group_committee_message_thread, group: current_group) }
 
       it 'should show three results' do
         visit threads_path
