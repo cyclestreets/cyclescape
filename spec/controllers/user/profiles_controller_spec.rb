@@ -37,7 +37,7 @@ describe User::ProfilesController, type: :controller do
 
         before do
           FactoryGirl.create :user_profile, user: current_user, visibility: 'group'
-          sign_in current_user.reload
+          warden.set_user current_user.reload
         end
 
         it 'should be visible' do

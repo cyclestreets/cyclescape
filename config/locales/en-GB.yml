@@ -303,6 +303,7 @@
         no_requests_yet: "There have been no membership requests for this group yet."
         full_name: "Full name"
         reject: "Reject"
+        review: Review
         requested_at: "Requested At"
         status: "Status"
         title: "Membership requests for %{group}"

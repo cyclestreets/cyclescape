@@ -240,6 +240,7 @@
         no_requests_yet: "Pro tuto místní skupinu zatím neexistují žádné žádosti o členství."
         full_name: "Plné jméno"
         reject: "Zamítnout"
+        review: "Projděte"
         requested_at: "Žádáno"
         status: "Stav"
         title: "Žádost o členství v místní skupině %{group}"

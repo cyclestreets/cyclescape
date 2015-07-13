@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe GroupRequestsController, :type => :controller do
+RSpec.describe GroupRequestsController, type: :controller do
 
   let(:valid_attributes) { FactoryGirl.attributes_for(:group_request) }
   let(:group_request)    { FactoryGirl.create(:group_request) }
@@ -9,25 +9,27 @@ RSpec.describe GroupRequestsController, :type => :controller do
     let(:user) { FactoryGirl.create(:user) }
 
     before do
-      sign_in user
+      warden.set_user user
     end
 
     describe "POST #create" do
+      it "creates a new GroupRequest" do
+        expect {
+          post :create, group_request: valid_attributes
+        }.to change(GroupRequest, :count).by(1)
+      end
+
       context "with valid params" do
-        it "creates a new GroupRequest" do
-          expect {
-            post :create, {:group_request => valid_attributes}
-          }.to change(GroupRequest, :count).by(1)
+        before do
+          post :create, group_request: valid_attributes
         end
 
         it "redirects to the root" do
-          post :create, {:group_request => valid_attributes}
-
           expect(response).to redirect_to('/')
         end
 
         it 'sends an email to all admins' do
-          post :create, {:group_request => valid_attributes}
+          post :create, group_request: valid_attributes
           mail = ActionMailer::Base.deliveries.last
 
           expect(mail.subject).to eq(I18n.t('mailers.notifications.new_group_request.subject',
@@ -35,7 +37,6 @@ RSpec.describe GroupRequestsController, :type => :controller do
                                             user_name: user.name))
           expect(mail.to).to include('root@cyclescape.org')
         end
-
       end
     end
 
@@ -51,7 +52,7 @@ RSpec.describe GroupRequestsController, :type => :controller do
     let(:admin) { FactoryGirl.create(:user, :admin) }
 
     before do
-      sign_in admin
+      warden.set_user admin
       group_request
     end
 
@@ -64,7 +65,7 @@ RSpec.describe GroupRequestsController, :type => :controller do
 
     describe "GET #review" do
       it "assigns the requested group_request as @request" do
-        get :review, {:id => group_request.to_param}
+        get :review, id: group_request.to_param
         expect(assigns(:request)).to eq(group_request)
       end
     end
