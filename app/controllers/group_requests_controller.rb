@@ -15,7 +15,7 @@ class GroupRequestsController < ApplicationController
 
     if @request.save
       Notifications.new_group_request(@request, User.admin).deliver
-      redirect_to '/', notice: t('.group_requests.create.requested')
+      redirect_to '/', notice: t('group_requests.create.requested')
     else
       render :new
     end

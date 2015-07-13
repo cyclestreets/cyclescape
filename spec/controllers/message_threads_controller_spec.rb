@@ -18,7 +18,7 @@ describe MessageThreadsController do
       let(:user) { FactoryGirl.create(:user) }
 
       before do
-        sign_in user
+        warden.set_user user
       end
 
       context "who hasn't viewed the thread before" do

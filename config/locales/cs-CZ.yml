@@ -240,6 +240,7 @@
         no_requests_yet: "Pro tuto místní skupinu zatím neexistují žádné žádosti o členství."
         full_name: "Plné jméno"
         reject: "Zamítnout"
+        review: "Projděte"
         requested_at: "Žádáno"
         status: "Stav"
         title: "Žádost o členství v místní skupině %{group}"
@@ -297,7 +298,6 @@
       list_tab: "Seznam"
       map_tab: "Mapa"
       new_group: "Vytvořit novou skupinu"
-      new_group_instructions_html: "Pro vytvoření vaší místní cyklistické skupiny na webu Cyklisté sobě prosím %{feedback_link} a my vám brzy odpovíme."
       send_some_feedback: "pošlete zpětnou vazbu"
       title: "Adresář skupiny"
     compact:
