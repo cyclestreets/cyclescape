@@ -1,0 +1,1248 @@
+# GB English translations for Ruby on Rails
+
+"es-MX":
+  application_name: "Cyclescape"
+  tags: "Etiquetas"
+  anon: "Anónimo"
+  sign_in: "ingresar"  # Used for links
+  confirm: "¿Estas seguro?"
+  admin:
+    groups:
+      index:
+        title: "Grupos"
+        actions: "Acciones"
+        new_group: "Crear nuevo grupo"
+        edit: "Editar"
+        edit_prefs: "Editar Preferencias"
+        edit_profile: "Editar Perfil"
+        group_email: "Correo del Grupo"
+        members: "Miembros"
+        name: "Nombre del Grupo"
+      create:
+        success: "Groupo creado"
+      new:
+        title: "Añadir nuevo grupo"
+        introduction: "Como administrador de sistemas, puedes usar este formulario para crear nuevos grupos."
+      update:
+        success: "Groupo actualizado"
+      edit:
+         edit_group: "Editar groupo"
+    home:
+      index:
+        admin_interface: "Area Administrativa"
+        admin_interface_introduction: "Esta sección contiene funciones administrativas, solo disponibles para administradores."
+        manage_comments: "Gestionar commentarios"
+        manage_groups: "Gestionar groupos"
+        manage_group_requests: "Gestionar peticiones de groupos"
+        manage_issue_categories: "Gestionar categorias de problemas"
+        manage_users: "Gestionar usuarios"
+    issue_categories:
+      create:
+        success: "Categoría creada"
+      index:
+        title: "Categorias de Problemas"
+      update:
+        success: "Categoría actualizada"
+    user:
+      locations:
+        create:
+          success: "Ubicación creada"
+        edit:
+          title: "Editar ubicación de %{user_name}"
+        index:
+          all_user_locations: "Todas las ubicaciones de %{user_name}"
+          category: "Categoría"
+          combined_locations: "Ubicaciones Combinadas"
+          combined_locations_guidance: "Esta es la ubicación combinda de este usuario."
+          confirm: "¿Estas seguro?"
+          delete: "Borrar"
+          edit: "Editar"
+          map: "Mapa"
+          new: "Nueva ubicación"
+          no_locations_yet: "Este usuario todavía no tiene ubicaciones."
+          no_locations_guidance: "Como administrador, puedes añadir su primera ubicación."
+          no_overlapping_groups: "No hay grupos sobrelapados"
+          title: "Ubicaciones del usuario %{user_name}"
+          overlapping_groups: "Groupos sobrelapados"
+        new:
+          title: "Nueva ubicación para %{user_name}"
+        update:
+          success: "Ubicación Actualizada"
+    users:
+      index:
+        created: "Creado"
+        created_at: "hace %{time_ago}"
+        introduction: "Esta pagina muestra todos los usuarios en el sistema (independientemente de las membresias de grupos que tengan)."
+        disabled: "Desactivado"
+        disabled_at: "hace %{time_ago}"
+        display_name: "Nombre Público"
+        edit: "Detalles del usuario"
+        email: "Correo electrónico"
+        full_name: "Nombre completo"
+        id: "id"
+        role: "Cargo"
+        title: "Usuarios"
+        preferences: "Preferencias"
+        locations: "Ubicaciones"
+      update:
+        success: "Usuario actualizado"
+      edit:
+        edit_user: "Editar usuario"
+  application:
+    account_disabled: "Tu cuenta ha sido desactivada por un administrador"
+    permission_denied: "No estas autorizado para esta pagina."
+  planning_applications:
+    hide:
+      success: "Aplicacion de planeacion ocultada del resumen"
+      failure: "No se pudo ocultar esa aplicacion"
+    index:
+      planning_applications: "Aplicaciones de planeación"
+      pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
+      explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
+    planning_application: &planning_applications_search
+      page_title: "Search Results for '%{q}'"
+      convert_to_issue_html: "Convert to an Issue &hellip;"
+      planning_applications: "Planning applications"
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: "No results found"
+      your_planning_applications: "Your local planning applications"
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden for everyone
+      part_hidden: Part Hidden
+    show:
+      address_label: "Address:"
+      council_label: "Council:"
+      data_source: "Data source"
+      data_from_html: "Planning application data is sourced from %{link}"
+      location: "Location"
+      official_application: "View on council website"
+      official_application_label: "Official application:"
+      planit: "PlanIt"
+      related_issue: "Related issue"
+      related_issue_guidance: "This planning application has been converted to an issue:"
+      uid_label: "Application reference:"
+      view_official_application: "View official application"
+      start_date: 'Date application was made:'
+      hidden: Hidden (will not appear in anyones dashboard)
+      <<: *planning_applications_search
+    search:
+      <<: *planning_applications_search
+  dashboards:
+    show:
+      add_a_new_issue: "add a new issue"
+      add_another_location: "add another location"
+      add_some_locations: "add some locations"
+      areas_you_are_watching: "areas you are watching"
+      converted_to_issue: "Converted to Issue:"
+      days_away:
+        zero: "Today!"
+        one: "Tomorrow!"
+        other: "%{count} days away"
+      deadlines: "Deadlines and dates"
+      deadline_thread_updated: "thread updated %{time_ago} ago"
+      issues_lower: "issues"
+      involved_threads: "Involved Threads"
+      issues_in_your_area: "Issues in your area"
+      new_group_thread: "Start a new group thread"
+      my_issues_nearby_introduction_html: "Issues in the %{areas_you_are_watching_link} are shown below, most recent first."
+      my_issues_nearby_issues_pointer_html: "(You can also %{browse_all_other_issues_link} from outside your area(s).)"
+      browse_all_other_issues: "browse all other issues"
+      my_priorities_introduction: "This is a listing of the priorities you have set, most important first:"
+      my_threads_introduction: "Latest updates on the discussion threads you are subscribed to:"
+      my_upcoming_deadline_introduction: "Upcoming deadlines and dates within the discussion threads you are subscribed to:"
+      no_upcoming_deadline_threads: "You aren't involved in any discussion threads with upcoming deadlines or dates."
+      no_subscribed_threads_html:
+        You aren't following any threads yet. You could have a look
+        through the %{threads_link} and see if there's anything that you want to
+        help with, or maybe you could %{add_issue_link} instead?
+      no_prioritised_threads_html:
+        You haven't prioritised any threads yet. You could have a look
+        through the %{threads_link} and see if there's anything that you think is
+        important, or maybe you could %{add_issue_link} instead?
+      no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
+      location:
+        one: location
+        other: locations
+      no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
+      no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby %{things} here."
+      no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
+      no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
+      <<: *planning_applications_search
+      planning_applications_in_your_area: "Planning applications in your %{location}"
+      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
+      planning_applications_lower: "planning applications"
+      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
+      recent_threads: "recent threads"
+      subscribed_threads: "Subscribed Threads"
+      thread_latest_activity: "%{time_ago} ago"
+      group_threads: "Group Threads"
+      group_threads_desc_html:
+        Recent threads with activity from your groups.
+      my_priorities: "My priorities"
+      my_threads: "My subscribed threads"
+      issues_nearby: "Latest issues nearby"
+      posted:
+        message_html: "%{creator_link} posted a message"
+        deadline_message_html: "%{creator_link} posted a deadline/date"
+        document_message_html: "%{creator_link} posted an attachment"
+        photo_message_html: "%{creator_link} posted a photo"
+        link_message_html: "%{creator_link} posted a link"
+        street_view_message_html: "%{creator_link} posted a street view"
+        library_item_message_html: "%{creator_link} added a library item"
+    search:
+      no_results_found: "No results found for '%{query}'"
+      thread_results: "Threads (%{count})"
+      issue_results: "Issues (%{count})"
+      library_results: "Library (%{count})"
+      threads_found:
+        zero: "No threads found for '%{query}'."
+        one: "One thread found for '%{query}':"
+        other: "%{count} threads found for '%{query}':"
+      issues_found:
+        zero: "No issues found for '%{query}'."
+        one: "One issue found for '%{query}':"
+        other: "%{count} issues found for '%{query}':"
+      library_items_found:
+        zero: "No library items found for '%{query}'."
+        one: "One library item found for '%{query}':"
+        other: "%{count} library items found for '%{query}':"
+      title: "Search Results"
+  devise:
+    registrations:
+      edit:
+        title: 'Update My Account Details'
+      new:
+        title: "Sign up"
+    sessions:
+      new:
+        title: "Sign in"
+        sign_in_button: "Sign in"
+  group:
+    group_prefs_tab: "Group preferences"
+    group_profile_tab: "Group profile"
+    group_management: "Group management"
+    membership_list_tab: "Membership list"
+    membership_requests_tab: "Membership requests"
+    home_page_tab: "Home page"
+    issues:
+      destroy:
+        failure: "Can't delete that issue"
+        success: "Issue deleted"
+      index:
+        title: "Issues in the area of %{group_name}"
+      update:
+        success: "Issue updated"
+      vote_clear:
+        failure: "Your vote couldn't be cleared"
+        success: "Your vote has been cleared"
+      vote_down:
+        already: "You've already voted down this issue"
+        success: "You have voted down this issue"
+      vote_up:
+        already: "You've already voted up this issue"
+        success: "You have voted up this issue"
+    members:
+      index:
+        actions: "Actions"
+        add_directly: "you can add them directly"
+        committee: "Committee members"
+        committee_guidance: "Committee members can manage the group membership list, change the group's profile and update group thread information."
+        email: "E-mail address"
+        group_joining_date: "Group joining date"
+        group_members_guidance: "On this page you can view the existing members of your group, add new people and remove members from the group."
+        member_name: "Member name"
+        ordinary_members: "Ordinary members"
+        new_members_guidance_introduction: "To add a member:"
+        new_members_guidance_method1_html: "If you know their email address, %{add_directly_link}."
+        new_members_guidance_method2_html: "If they are already using Cyclescape, click on their name from within a discussion thread, and you can add them from their user profile page."
+        ordinary_members_guidance: "Ordinary members get access to your private group threads, and can create new group threads."
+        pending_requests: "Pending membership requests"
+        review_membership_requests_html: "Users of the site can also apply to join this group. You can %{review_membership_requests_link}."
+        review_pending: "pending membership requests"
+        review_requests: "review the requests history"
+        title: "Members of %{group}"
+        you_have_pending_members_html: "You have %{review_pending_requests_link}! Please review them and take appropriate actions."
+      member:
+        confirm: "¿Estas seguro?"
+        delete: "Remove from group"
+        edit: "Editar membership"
+        joining_date: "%{time_ago} ago"
+        invite_pending: "Invite pending"
+    memberships:
+      new:
+        title: "Add new member"
+      destroy:
+        failure: "Couldn't remove member from group"
+        success: "Member removed from group"
+      edit:
+        title: "Editar group membership for %{user_name}"
+      update:
+        failure: "Couldn't update the group membership"
+        success: "Group membership updated"
+    membership_requests:
+      cancel:
+        success: "Membership request cancelled"
+      confirm:
+        failure: "There was a problem confirming this membership request"
+        success: "Membership confirmed"
+      create:
+        requested: "Membership has been requested"
+        already_asked: "You have already asked to join this group"
+        already_member: "You are already a member of this group"
+      index: &group_membership_requests_index
+        actioned_by: "Actioned By"
+        are_you_sure: "¿Estas seguro?"
+        by: "by %{name}"
+        confirm: "Confirm"
+        created_at: "%{time_ago} ago"
+        email: "E-mail address"
+        view_message: "View..."
+        message: "Message"
+        no_requests_yet: "There have been no membership requests for this group yet."
+        full_name: "Full name"
+        reject: "Reject"
+        review: Review
+        requested_at: "Requested At"
+        status: "Status"
+        title: "Membership requests for %{group}"
+        user: "User (display name)"
+        membership_status:
+          confirmed: "Confirmed"
+          pending: "Pending"
+          unconfirmed: "Unconfirmed"
+          rejected: Rejected
+      new:
+        title: "Request membership of %{group_name}"
+        your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
+      reject:
+        failure: "There was a problem rejecting this membership request"
+        success: "Membership rejected"
+      review:
+        <<: *group_membership_requests_index
+        title: "Review a membership request for %{group}"
+        message: "The user included this message with their request:"
+        no_message: "There was no message included with this membership request."
+    message_threads:
+      destroy:
+        failure: "Couldn't delete thread"
+        success: "Thread deleted"
+      index:
+        title: "Discussion threads for %{group}"
+        threads_explanation_html: "Each of the %{issues_link} may have one or more discussion threads."
+        issues: "issues"
+        new_group_thread: "New Group Administrative thread"
+        issue_threads: "Issue discussions"
+        issue_threads_description: "These are public and private issue-based discussions belonging to %{group_name} on reported issues, shown most recent first."
+        issue_threads_addition_description: "To start a new issue-based discussion thread, go to the relevant issue."
+        general_threads: "Administrative discussions"
+        general_threads_description: "These are public and private general discussions for administrative purposes, e.g. arranging a general meeting."
+      new:
+        for_group: "for %{name}"
+        title: "New Group Thread"
+      update:
+        success: "Thread updated"
+    prefs:
+      edit:
+        no_email_warning: "Warning! Your settings indicate that you want notifications sent to your group, but there is no email address recorded for this group. Either choose a membership secretary, or ask for your group email to be set by a site administrator."
+        title: "Editar Preferences"
+      update:
+        failure: "Couldn't update preferences"
+        success: "Preferences Updated"
+    profiles:
+      edit:
+        title: "Editar Profile"
+      show:
+        description: "Description"
+        location: "Location"
+        no_location: "This group doesn't have any location details yet."
+        no_picture: "Add a picture to make your group welcoming."
+        picture: "Picture"
+      update:
+        success: "Profile Updated"
+  groups:
+    index:
+      list_tab: "List"
+      map_tab: "Map"
+      new_group: "Create new group"
+      send_some_feedback: "send some feedback"
+      title: "Groups directory"
+      group_request: Request New Group
+    compact:
+      already_member: "You are already a member of this group"
+      no_location: "This group doesn't have a location yet."
+    join:
+      join_body:
+        You can request membership of this Cyclescape group, if you want to be involved in the %{group} activities.
+      join_this_group: "Join this group"
+      group_request_pending: "Your request to join this group is pending."
+    show:
+      edit_group_profile: "Editar the group profile"
+      edit_group_prefs: "Editar the group preferences"
+      edit_group_members: "Editar the membership list"
+      group_management: "Group management"
+      group_organisers: "Group organisers"
+      join_title: "Join our Cyclescape group"
+      no_issues: There are no issues in this group's area yet
+      no_location: This group doesn't have a location yet
+      no_threads: This group doesn't have any public threads
+      our_areas: "Our Areas"
+      recent_issues: "Recent Issues in this group's area"
+      recent_threads: "Latest Discussions"
+      view_membership_requests:
+        zero: "Review membership requests"
+        one: "View pending membership request"
+        other: "View pending membership requests (%{count})"
+  group_requests:
+    create:
+      requested: You have requested a new campaigning group, you will be notifed when it is created
+    new:
+      new_group_request_introduction: We moderate requests for new groups. You will be set as the first Committee member of the group, enabling you to administer it.
+    index: &group_requests_index
+      <<: *group_membership_requests_index
+      name: Requested Name
+      review: Review
+      actions: Actions
+      new_group: Create a New Group
+      group_email: Email
+      destroy: Remove request
+      no_message: There was no message included with this group request.
+    review:
+      <<: *group_requests_index
+      short_name: Short name
+      website: Website
+    confirm:
+      success: Group created
+      failure: Failed to create Group
+    destroy:
+      success: Group Request removed
+      failure: Failed to remove Group Request
+    reject:
+      success: Group request rejected
+      failure: Failed to reject group request
+
+  home:
+    show:
+      introduction_html:
+        Cyclescape is an online campaigning toolkit for
+        cycle campaign groups around the UK
+      center_box_title:
+        Report your cycling issues here
+      center_box_html:
+        Non-existent cycle paths? Obstructions for cyclists? Lack of cycle parking?
+        Or an example of something done right?
+      report_an_issue: "Report an issue"
+      latest_discussions: "Latest Discussions"
+      groups_title: "Cyclescape Groups"
+      groups_intro_html:
+        Cyclescape is used by <strong>cycle campaign groups</strong> across
+        the country. <strong>%{groups_link}</strong> and see what
+        they're working to fix.
+      find_local_groups: "Find groups local to you"
+      twitter_title: "Cyclescape on Twitter"
+    guide:
+      title: "How Cyclescape Works"
+      box_1_title: "Report cycling issues"
+      box_1_body: "Quickly raise issues on this site."
+      box_2_title: "Get advice from others"
+      box_2_body: "Discuss issues with members of cycling groups."
+      box_3_title: "Make a difference"
+      box_3_body: "Organise the action the group should take to resolve an issue."
+  issue:
+    message_threads:
+      new:
+        new_hint: "This is where a discussion about the issue is started. \n There could be many different discussion threads that one issue creates \n e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
+        title: "New Thread on %{issue}"
+        everyone: "Everyone"
+    photos:
+      show:
+        photo_alt: "The photo for %{caption}."
+        view_original: "View original photo."
+    tags:
+      panel:
+        edit_tags: "Editar tags"
+  issues:
+    compact:
+      created_by_html: "Created by %{creator_link}"
+      votes: "votes"
+      thread_count:
+        one: "1 thread"
+        other: "%{count} threads"
+    destroy:
+      failure: "Can't delete that issue"
+      success: "Issue deleted"
+    edit:
+      title: "Editar Issue"
+    index:
+      new_issue: "Report new issue"
+      title: "Issues"
+      list_tab: "List"
+      list_introduction: "Reported issues, most recent first:"
+      list_introduction_groupwise_html: "Reported issues, most recent first, limited to the %{area_of_group_link}:"
+      area_of_group: "area of %{group_name}"
+      map_tab: "Map"
+      map_introduction: "This map shows all issues, whether points, routes, or areas:"
+      popular_tab: "Popular"
+      popular_introduction: "The most popular issues, based on the number of votes:"
+      search_button: "Go"
+      clear: "Clear"
+      no_popular_issues: "No issues have been voted on recently."
+      no_results_found: "No issues found."
+      title_introduction: "This section lists reported issues - problems on the street network and related matters."
+      introduction_geographical_basis: "Issues always relate to some geographical location, whether very local or perhaps city-wide."
+      title_introduction_report_html: "You can %{report_new_issue_link} using the button on the right."
+      report_new_issue: "report a new issue"
+    new:
+      title: "Report an issue"
+      new_issue_introduction: "Know of something stopping more people cycling, or that causes problems for existing cyclists? Or something that could do? Report it below."
+      new_issue_privacy_warning: "Please note that all issues are publicly viewable. If you wish, you can create a private discussion on this issue, after it has been reported."
+      admin_thread_pointer_html: "You can %{administrative_matters_link} with no geographical context (e.g. organising a general meeting) in the group admin threads section."
+      administrative_matters: "add a purely administrative matter"
+    show:
+      issue_created_at: "%{time_ago} ago"
+      added_by_html: "Reported by %{name} on %{time}"
+      cancel_vote: "Cancel"
+      confirm_delete: "¿Estas seguro?"
+      delete_issue: "Delete this issue"
+      edit_issue: "Editar this issue"
+      new_thread:
+        zero: "Discuss"
+        one: "New Thread"
+        other: "New Thread"
+      no_threads_yet: "There are no discussion threads for this issue yet."
+      group_private: "Private to %{group}"
+      group_public: "Public, by %{group}"
+      public: "Public"
+      sign_in: "sign in"
+      sign_in_to_discuss_html: "You can %{sign_in_link} to start the discussion."
+      sign_in_to_vote_html: "Please %{sign_in_link} to vote."
+      threads: "Threads"
+      vote_clear: "Clear Vote"
+      vote_down: "Vote Down"
+      vote_up: "Vote Up"
+      votes:
+        one: "vote"
+        other: "votes"
+      location: "Location"
+    update:
+      success: "Issue updated"
+    vote_clear:
+      failure: "Your vote couldn't be cleared"
+      success: "Your vote has been cleared"
+    vote_down:
+      already: "You've already voted down this issue"
+      success: "You have voted down this issue"
+    vote_up:
+      already: "You've already voted up this issue"
+      success: "You have voted up this issue"
+  layouts:
+    application:
+      admin: "Admin"
+      admin_tooltip: "Admin area, for system administrators"
+      dashboard: "My Cyclescape"
+      dashboard_tooltip: "Your personal dashboard, showing updates on discussion threads you are subscribed to"
+      about: "About"
+      user_guide: "User guide"
+      sign_out: "Sign out"
+      sign_in: "Sign in"
+      sign_up: "Sign up"
+      feedback: "Feedback"
+      home: "Home"
+      issues: "Issues"
+      issues_tooltip: "Reported problems, browsable on the map or as a list"
+      library: "Library"
+      library_tooltip: "Reusable resources for campaigning"
+      loading: "Please wait\u2026"
+      threads: "Discussion threads"
+      threads_tooltip: "Discussions on each issue"
+      title: "Cyclescape"
+    footer:
+      application_version_html: "Version ref: %{version}"
+      github_page_link_html: "View the source at <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>"
+      whats_new: "What's new?"
+      supportlogos_introduction: "Cyclescape has been made possible thanks to generous support from:"
+      funding_from: "Funding from %{name}"
+      funding_from_and_created_by: "Funding from and created by %{name}"
+      planning_application_data: "Planning application data from PlanIt"
+      cyclescape_blog: "Cyclescape blog"
+      privacy: Privacy Policy
+      user_guide: "User guide"
+      facebook_page: "CycleStreets Facebook page"
+      twitter_page: "CycleStreets Twitter account"
+      osm_credit_html: "Map data &copy; <a href='http://www.openstreetmap.org'>
+        OpenStreetMap</a> contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open Database Licence</a>."
+    group_selector:
+      group_selector: "Group"
+      no_group: "No Group"
+    search:
+      search: "Search"
+      search_button: "Go"
+  libraries:
+    search:
+      no_results_found: "No results found for '%{query}'."
+      results_found:
+        one: "One result found for '%{query}'."
+        other: "%{count} results found for '%{query}'"
+      title: "Library Search Results"
+    show:
+      title: "Library"
+      overview_description_html: "The Library contains <strong>reusable resources</strong> for campaigning. Please add items you think might be useful in future."
+      overview_usage: "You can link to library items from discussion threads."
+      latest: "Latest items"
+      item_created: "Posted %{time_ago} ago"
+      search: "Search the library:"
+      search_submit: "Search"
+      clear_submit: "Clear"
+      results: "Results"
+      new_library_item: "Add Library Item"
+      new_note: "Note"
+      new_document: "Document"
+      new_item_title: "Select type"
+      new_item_description_html: "Select the type of item you would like to add to the library:"
+      new_note_description_html: "<strong>Notes</strong> are for short pieces of text for reference."
+      new_document_description_html: "<strong>Documents</strong> allow you to upload files."
+  library:
+    documents:
+      new:
+        title: "New Library Document"
+      show:
+        added_by_html: "Added by %{name} on %{time}"
+        attach_note: "Attach Note"
+        attach_note_instructions_html: "You can create new notes linked to this document. When referenced in a thread they will link to this document as well."
+        download: "Download document"
+        comments: "Comments"
+        notes: "Notes"
+        no_threads: "This document hasn't been included in any public threads. If you add this document to a public thread, the thread will be listed here."
+        public_threads: "Public Threads"
+        threads_explanation: "This document has been mentioned in these public threads:"
+    notes:
+      edit:
+        title: "Editar Library Note"
+      new:
+        title: "New Library Note"
+      show:
+        added_by_html: "Added by %{name} on %{time}"
+        edit: "Editar Note"
+        note_on_document_html: "This note is attached to a document: %{document}"
+        no_threads: "This note hasn't been included in any public threads. If you add this note to a public thread, the thread will be listed here."
+        public_threads: "Public Threads"
+        threads_explanation: "This note has been mentioned in these public threads:"
+      update:
+        success: "Library Note Updated"
+  mailers:
+    notifications:
+      added_to_group:
+        subject: "You are now a member of the Cyclescape group for %{group_name}"
+      gmr_confirmed:
+        subject: "You are now a member of the Cyclescape group for %{group_name}"
+      new_group_request:
+        subject: "[Cyclescape] %{user_name} wants to create %{group_name}"
+      new_gmr:
+        subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
+      new_group_thread:
+        subject: "[Cyclescape] \"%{thread_title}\" (%{group_name})"
+      new_group_location_issue:
+        subject: "[Cyclescape] New issue - \"%{issue_title}\" (%{group_name})"
+      new_user_location_issue:
+        subject: "[Cyclescape] New issue - \"%{issue_title}\""
+      new_user_location_issue_thread:
+        subject: "[Cyclescape] New thread started on issue \"%{issue_title}\""
+      group_request_confirmed:
+        subject: "[Cyclescape] New Group \"%{group_name}}\" has been created"
+      group_request_rejected:
+        subject: "[Cyclescape] New Group \"%{group_request_name}}\" has been not been created"
+      new_group_request:
+        subject: "[Cyclescape] New Group \"%{group_name}\" has been requested by \"%{user_name}\""
+
+    thread_mailer:
+      common:
+        subject:
+          one: "[Cyclescape] %{title}"
+          other: "Re: [Cyclescape] %{title}"
+  message_thread:
+    subscriptions:
+      create:
+        success: "You are now subscribed to this thread"
+      destroy:
+        success: "You have unsubscribed from this thread"
+    tags:
+      panel:
+        edit_tags: "Editar"
+        tags: "tags"
+    user_priorities:
+      create:
+        success: "Priority saved"
+        failure: "Couldn't save your priority"
+      update:
+        success: "Priority updated"
+        failure: "Couldn't update your priority"
+  message_threads:
+    compact:
+      group_committee: "Group Committee"
+      group_public: "Group Public"
+      group_private: "Group Private"
+      public: "Public"
+      posted_at: "posted %{time_ago} ago"
+    list:
+      discussion_on_issue: "A discussion on issue"
+      group_committee: "Group Committee"
+      group_public: "Group Public"
+      group_private: "Group Private"
+      public: "Public"
+      posted_at: "posted %{time_ago} ago"
+    edit:
+      title: "Editar thread properties"
+      description: "As a group administrator, you can fix up thread properties here."
+      thread_fix_warning_html: "<strong>Warning:</strong> your group may have a policy about changing thread privacy."
+    destroy:
+      failure: "Couldn't delete the thread"
+      success: "Thread deleted"
+    index:
+      latest_activity: "Latest activity %{ago} ago"
+      search: "Search all threads:"
+      search_submit: "Search"
+      title: "Discussion threads (public)"
+      threads_explanation_html: "Each of the %{issues_link} may have one or more discussion threads, shown below (most recently-updated first)."
+      issues: "issues"
+      introduction: "Below are latest updates on discussion threads (across all of Cyclescape) that are public (including those owned by groups and/or administrative.)"
+      introduction_group_pointer: "To show only discussions from a group you are a member of, use the group switcher on the top right."
+    library_panel:
+      library: "Library"
+      no_library_items: "Couldn't find any relevant library items based on the thread tags."
+      tag_thread_guidance: "Add tags to this thread to find relevant library items."
+    new:
+      title: "New Thread"
+    priority_panel:
+      thread_priority: "My Thread Priority"
+    search:
+      clear_submit: "Clear"
+      no_results_found: "No results found for '%{query}'."
+      results_found:
+        one: "One result found for '%{query}'."
+        other: "%{count} results found for '%{query}'"
+      search: "Search all threads:"
+      search_submit: "Search"
+      title: "Thread Search Results"
+    show:
+      are_you_sure: "¿Estas seguro?"
+      back: "Back"
+      edit: "Editar this thread"
+      destroy: "Delete this thread"
+      private_to_committee_message: "Private: Only committee members of %{group} can view and post messages to this thread."
+      private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
+      public_message: "Public: Everyone can view this thread and post messages."
+    subscribe_panel:
+      subscribed: "You are following this thread."
+    subscribers_panel:
+      owner: "Owner"
+      subscribers: "Following this thread"
+    update:
+      success: "Thread updated"
+    widget:
+      group_private: "Group Private"
+      public: "Public"
+  message:
+    deadlines:
+      new:
+        deadline_date: "Deadline/date"
+        submit: "Add deadline/date"
+      create:
+        failure: "Deadline/date could not be created"
+        success: "Deadline/date created"
+      show:
+        days_away:
+          zero: "Today!"
+          one: "Tomorrow!"
+          other: "%{count} days away!"
+    documents:
+      create:
+        failure: "Could not add attachment"
+        success: "Attachment added"
+      show:
+        download: "Download Attachment"
+    library_items:
+      create:
+        failure: "Library item could not be added"
+        success: "Library item added"
+      show:
+        attached_to_html: "Attached to document: %{document}"
+    links:
+      create:
+        failure: "Link could not be created"
+        success: "Link posted"
+    photos:
+      create:
+        failure: "Could not create photo message"
+        success: "Photo uploaded"
+      show:
+        photo_alt: "A photo entitled %{caption}."
+        view_original_image: "View the original image"
+    street_views:
+      create:
+        failure: "Street View could not be added"
+        success: "Street View added"
+
+  message_library:
+    documents:
+      new:
+        title: "New Library Document"
+  messages:
+    censor:
+      failure: "Could not censor message"
+      success: "Message censored"
+    create:
+      failure: "Could not add message"
+      success: "Message successfully posted"
+    message:
+      posted_date: "posted %{time_ago} ago"
+      censor: "Censor this message"
+      censored: "This message has been removed"
+      create_note: "Create Library Note"
+      create_document: "Create Library Document"
+    new:
+      compose_new: "Compose New"
+      from_library: "From Library"
+      recently_added: "Recently added"
+      select_button: "Select\u2026"
+      search_results: "Search Results"
+      go: "Go"
+      back: "Back"
+      select_header: "Select"
+      add_item_to_thread: "Add item to thread"
+      explain_library_item: "Explain how this library item relates to the discussion thread"
+      view_document: "View Document"
+      add_to_thread: "Add to thread"
+      search_library: "Search library"
+      deadline_message: "Deadline/date"
+      document_message: "Attachment"
+      library_item_message: "Library"
+      link_message: "Link"
+      new_message: "New message"
+      photo_message: "Photo"
+      sign_in_to_post_html: "Please %{sign_in_link} to post a message."
+      text_message: "Text"
+      street_view_message: Street View
+  pages:
+    changelog:
+      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
+  planning_application:
+    issues:
+      new:
+        already: "There's already an issue for that planning application"
+        application_reference: "Application reference"
+        title: "New issue from Planning Application"
+        title_prefix: "Planning application"
+  shared:
+    edit_map:
+      area: "area"
+      clear: "clear"
+      draw_area: "Draw an Area"
+      draw_area_1: "Click the points to mark an area on the map."
+      draw_area_2: "Double-click to complete the shape."
+      draw_area_3: "Zoom in and pan to select the correct area."
+      draw_point: "Draw a Point"
+      draw_point_1: "Click the map to mark the point."
+      draw_point_2: "Drag the point to reposition."
+      draw_point_3: "Zoom in and pan to select the correct place."
+      draw_route: "Draw a Route"
+      draw_route_1: "Click the points to mark a route on the map."
+      draw_route_2: "Double-click to complete the route."
+      draw_route_3: "Drag the grey points to create new corners."
+      point: "point"
+      route: "route"
+      undo: "undo"
+    map_search:
+      near: "near"
+      searching: "Searching\u2026"
+      search_failed: "Sorry, the search failed this time."
+      showing: "Showing"
+      sorry_we_couldnt_find: "Sorry, we couldn't find"
+      submit: "Go"
+    profile_menu:
+      edit: "Editar My Profile"
+      edit_preferences: Subscription Preferences
+      my_locations: "My Locations"
+      update_account: "Update My Account Details"
+    tags:
+      panel:
+        edit_tags: "Editar tags"
+  site:
+    comments:
+      destroy:
+        failure: "Couldn't remove comment"
+        success: "Comment deleted"
+      index:
+        confirm_delete: "¿Estas seguro?"
+        delete_comment: "Borrar"
+        how: "How"
+        id: "ID"
+        no_comments: "No Feedback Yet"
+        title: "All Feedback"
+        what: "What"
+        when: "When"
+        when_ago: "%{time_ago} ago"
+        where: "Where"
+        who: "Who"
+      new:
+        title: "Feedback"
+      success:
+        thank_you_title: "Thank you for your feedback!"
+        thank_you_longform: "One of our developers will read your feedback and use it to help plan upcoming work and new features. Unfortunately we can't respond individually to every feedback comment that we receive."
+        close: "< Back to site"
+  tags:
+    show:
+      issues: "Issues"
+      library_items: "Library Items"
+      no_results_found: "No results found"
+      threads: "Threads"
+      heading: "Things tagged '%{name}'"
+      unrecognised: "Couldn't find the tag '%{name}'"
+  thread_mailer:
+    new_deadline_message:
+      added: "%{name} added a deadline/date to the thread"
+    new_document_message:
+      added: "%{name} added an attachment to the thread"
+      view_the_document: "You can view the attachment at:"
+    new_library_item_message:
+      added: "%{name} added an item from the library to the thread."
+    new_link_message:
+      added: "%{name} added a link to the thread."
+    new_message:
+      added: "%{name} added a message to the thread."
+    new_photo_message:
+      added: "%{name} added a photo to the thread."
+      view_the_photo: "You can view the photo at:"
+    new_street_view_message:
+      added: "%{name} added a street view to the thread."
+      view_the_street_view: "You can see the Street View at:"
+
+    footer:
+      thread: "Cyclescape discussion thread"
+      unsubscribe: "You can stop following this thread by visiting the link above and clicking 'unfollow this thread'."
+  thread_priorities:
+    very_high: "Top-priority"
+    high: "Important"
+    medium: "Moderately Important"
+    low: "Marginal Interest"
+    very_low: "Not of Interest"
+  thread_privacy_options:
+    public: Public (everyone)
+    group: Group (members only)
+    committee: "Committee"
+  user_roles:
+    member: "Member"
+    admin: "Admin"
+  group_membership_roles:
+    member: "Member"
+    committee: "Committee"
+  user:
+    locations:
+      create:
+        success: "Location Created"
+      destroy:
+        failure: "That location can't be deleted"
+        success: "Location deleted"
+      edit:
+        title: "Editar Location"
+      index:
+        add_first_location: "add your first location"
+        all_my_locations: "All my locations"
+        category: "Category"
+        combined_locations: "Combined locations"
+        combined_locations_guidance: "This map shows all of your locations combined together. We use this to help figure out which issues are relevant to you, and which groups you might be interested in."
+        combined_locations_guidance_none_html: "If you want to receive notifications when issues are created in these areas, and optionally follow the discussion threads on those issues, you can %{edit_prefs_link}."
+        combined_locations_guidance_notify_html: "You currently receive notifications when issues are created in these areas, but aren't automatically following discussion threads on those issues. To change these settings, you can %{edit_prefs_link}."
+        combined_locations_guidance_subscribe_html: "You currently receive notifications when issues are created in these areas, and are following all discussion threads on those issues. To change these settings, you can %{edit_prefs_link}."
+        confirm: "¿Estas seguro?"
+        delete: "Borrar"
+        edit: "Editar"
+        edit_your_prefs: "Editar your preferences"
+        map: "Map"
+        my_locations: "My Locations"
+        new: "Add a new Location"
+        no_locations_yet: "You haven't set any locations yet!"
+        no_locations_guidance: "You can create locations for where you live, your route to work, where you like to go riding, and so on. This helps us figure out which issues are relevant to you, and which groups you might be interested in."
+        no_locations_guidance2_html: "To get started, you can %{first_location_link}."
+        no_overlapping_groups: "No Overlapping Groups"
+        overlapping_groups: "Overlapping Groups"
+      new:
+        new_location: "Add a new location"
+        introduction: "By setting a location, this helps us figure out which issues are relevant to you."
+        drawing_help: "You can draw an area, a route or a location - select this from the panel on the right. Then draw on the map, and click the save button below."
+      subscribe_to_threads:
+        subscribed_to_threads:
+          zero: "We couldn't find any additional threads for you to follow."
+          one: "You're now following one additional thread."
+          other: "You're now following %{count} additional threads."
+      update:
+        success: "Location Updated"
+    prefs:
+      edit:
+        involvement: "Involve me in:"
+        notification_types: "Notification types"
+        notification_types_guidance: "You can choose how you'd like to be notified for the different events above. At the moment, only email notifications are available."
+        title: Subscription Preferences
+        back: "Return to your profile"
+        none: "No notifications"
+        notify: "Notify me of new issues and when new threads are started"
+        subscribe: "Notify me of new issues and automatically follow all new threads"
+        your_profile: "your profile"
+      update:
+        success: "Preferences saved"
+        failure: "Your preferences could not be saved"
+    profiles:
+      create:
+        success: "Profile Created"
+      edit:
+        title: Edit My Profile
+        my_current_thumbnail_title: My current profile picture
+        profile_public: Everyone
+        profile_group: Only members of my groups
+        visibility_guidance_html: You can choose to restrict who gets to view your profile.
+      show:
+        about_label: "About:"
+        add_to_groups:
+          one: "Add %{name} to your group"
+          other: "Add %{name} to your groups"
+        add_to_groups_explanation:
+          one: "You can add this user into your group."
+          other: "You can add this user to any of the groups shown."
+        group_membership_label: "Groups:"
+        is_a_member_of_groups:
+          zero: "%{name} isn't a member of any groups yet"
+          one: "%{name} is a member of one group"
+          other: "%{name} is a member of %{count} groups"
+        no_groups: "None"
+        no_website: "None"
+        profile_picture_title: "%{name}'s picture"
+        recent_threads: "Recent Threads"
+        reported_issues: "Reported Issues"
+        user_profile: "User Profile"
+        website_label: "Web site:"
+        full_name: Full Name
+      update:
+        success: "Profile Updated"
+
+  date:
+    formats:
+      default: "%d-%m-%Y"
+      short: "%d %b"
+      long: "%d %B %Y"
+
+    day_names:
+      - Sunday
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      - Saturday
+    abbr_day_names:
+      - Sun
+      - Mon
+      - Tue
+      - Wed
+      - Thu
+      - Fri
+      - Sat
+
+    month_names:
+      - ~
+      - January
+      - February
+      - March
+      - April
+      - May
+      - June
+      - July
+      - August
+      - September
+      - October
+      - November
+      - December
+    abbr_month_names:
+      - ~
+      - Jan
+      - Feb
+      - Mar
+      - Apr
+      - May
+      - Jun
+      - Jul
+      - Aug
+      - Sep
+      - Oct
+      - Nov
+      - Dec
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%d %b %H:%M"
+      long: "%d %B, %Y %H:%M"
+    am: "am"
+    pm: "pm"
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " and "
+      last_word_connector: ", and "
+
+    select:
+      prompt: "Please select"
+
+  number:
+    format:
+      separator: "."
+      delimiter: ","
+      precision: 3
+      significant: false
+      strip_insignificant_zeros: false
+
+    currency:
+      format:
+        format: "%u%n"
+        unit: "£"
+        separator: "."
+        delimiter: ","
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+
+    percentage:
+      format:
+        delimiter: ""
+
+    precision:
+      format:
+        delimiter: ""
+
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one:   "Byte"
+            other: "Bytes"
+          kb: "kB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: Thousand
+          million: Million
+          billion: Billion
+          trillion: Trillion
+          quadrillion: Quadrillion
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "half a minute"
+      less_than_x_seconds:
+        one:   "less than 1 second"
+        other: "less than %{count} seconds"
+      x_seconds:
+        one:   "1 second"
+        other: "%{count} seconds"
+      less_than_x_minutes:
+        one:   "less than a minute"
+        other: "less than %{count} minutes"
+      x_minutes:
+        one:   "1 minute"
+        other: "%{count} minutes"
+      about_x_hours:
+        one:   "about 1 hour"
+        other: "about %{count} hours"
+      x_days:
+        one:   "1 day"
+        other: "%{count} days"
+      about_x_months:
+        one:   "about 1 month"
+        other: "about %{count} months"
+      x_months:
+        one:   "1 month"
+        other: "%{count} months"
+      about_x_years:
+        one:   "about 1 year"
+        other: "about %{count} years"
+      over_x_years:
+        one:   "over 1 year"
+        other: "over %{count} years"
+      almost_x_years:
+        one:   "almost 1 year"
+        other: "almost %{count} years"
+    prompts:
+      year:   "Year"
+      month:  "Month"
+      day:    "Day"
+      hour:   "Hour"
+      minute: "Minute"
+      second: "Seconds"
+
+  helpers:
+    select:
+      prompt: "Please select"
+
+    submit:
+      create: 'Create %{model}'
+      update: 'Update %{model}'
+      submit: 'Save %{model}'
+
+  errors:
+    format: "%{attribute} %{message}"
+
+    messages: &errors_messages
+      inclusion: "is not included in the list"
+      exclusion: "is reserved"
+      invalid: "is invalid"
+      confirmation: "doesn't match confirmation"
+      accepted: "must be accepted"
+      empty: "can't be empty"
+      blank: "can't be blank"
+      too_long: "is too long (maximum is %{count} characters)"
+      too_short: "is too short (minimum is %{count} characters)"
+      wrong_length: "is the wrong length (should be %{count} characters)"
+      not_a_number: "is not a number"
+      not_an_integer: "must be an integer"
+      greater_than: "must be greater than %{count}"
+      greater_than_or_equal_to: "must be greater than or equal to %{count}"
+      equal_to: "must be equal to %{count}"
+      less_than: "must be less than %{count}"
+      less_than_or_equal_to: "must be less than or equal to %{count}"
+      odd: "must be odd"
+      even: "must be even"
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one:    "1 error prohibited this %{model} from being saved"
+          other:  "%{count} errors prohibited this %{model} from being saved"
+        body: "There were problems with the following fields:"
+
+      messages:
+        taken: "has already been taken"
+        record_invalid: "Validation failed: %{errors}"
+        <<: *errors_messages
+
+      full_messages:
+        format: "%{attribute} %{message}"
+
+  will_paginate:
+    next_label: "Next"
+    previous_label: "Previous"
+    page_gap: "\u2026"
