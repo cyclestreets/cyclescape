@@ -85,7 +85,7 @@ class User < ActiveRecord::Base
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
 
   def self.user_roles_map
-    ALLOWED_ROLES.map { |n| [I18n.t(".user_roles.#{n.to_s}"), n] }
+    ALLOWED_ROLES.map { |n| [I18n.t("user_roles.#{n.to_s}"), n] }
   end
 
   def self.find_or_invite(email_address, name = nil)

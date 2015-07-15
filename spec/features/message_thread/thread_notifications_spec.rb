@@ -62,7 +62,7 @@ describe 'thread notifications' do
       end
       open_email(current_user.email)
       expect(current_email).to have_body_text('Planning application deadline')
-      expect(current_email).to have_body_text('07 December 2011') # format used in display
+      expect(current_email).to have_body_text('07 December, 2011') # format used in display
     end
 
     it 'should send an email for a photo message' do

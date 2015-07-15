@@ -19,7 +19,7 @@ describe 'Deadline messages' do
         fill_in 'Title', with: 'Submission deadline'
         click_on I18n.t('message.deadlines.new.submit')
       end
-      expect(page).to have_content(future_date.strftime('%d %B %Y'))
+      expect(page).to have_content(future_date.strftime('%d %B, %Y'))
       expect(page).to have_content('Submission deadline')
     end
   end
