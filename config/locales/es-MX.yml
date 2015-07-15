@@ -97,118 +97,117 @@
       failure: "No se pudo ocultar esa aplicacion"
     index:
       planning_applications: "Aplicaciones de planeación"
-      pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
-      explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
+      pointer_to_dashboard_html: "Puedes navegar las aplicaciones de planeación en tu area en la pagina %{dashboard_planning_link}."
+      explanation: "Puedes promover cualquier aplicacion de planeación de un problema de tal forma que sea como cualquier otro problema enviado."
     planning_application: &planning_applications_search
-      page_title: "Search Results for '%{q}'"
-      convert_to_issue_html: "Convert to an Issue &hellip;"
-      planning_applications: "Planning applications"
-      planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: "No results found"
-      your_planning_applications: "Your local planning applications"
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden for everyone
-      part_hidden: Part Hidden
+      page_title: "Resultados de busqueda para '%{q}'"
+      convert_to_issue_html: "Convertir a un Problema &hellip;"
+      planning_applications: "Aplicaciones de planeación"
+      planning_applications_search: "e.g. (07/0811/FUL)"
+      planning_application_search_button: "Buscar aplicaciones por Referencia"
+      no_results_found: "No se encontro ningun resultado"
+      your_planning_applications: "Tus aplicaciones de planeación"
+      hide: "Votar para ocultar"
+      unhide: "Quitar mi voto"
+      hide_tooltip: "Si suficientes personas votan para ocultar esta aplicación sera ocultada para todos."
+      part_hidden: "Parte Oculta"
     show:
-      address_label: "Address:"
-      council_label: "Council:"
-      data_source: "Data source"
-      data_from_html: "Planning application data is sourced from %{link}"
-      location: "Location"
-      official_application: "View on council website"
-      official_application_label: "Official application:"
-      planit: "PlanIt"
-      related_issue: "Related issue"
-      related_issue_guidance: "This planning application has been converted to an issue:"
-      uid_label: "Application reference:"
-      view_official_application: "View official application"
-      start_date: 'Date application was made:'
-      hidden: Hidden (will not appear in anyones dashboard)
+      address_label: "Dirección:"
+      council_label: "Canciller:"
+      data_source: "Fuente de datos"
+      data_from_html: "Los datos de la aplicación de planeación proviene de %{link}"
+      location: "Ubicación"
+      official_application: "Ver en pagina "
+      official_application_label: "Aplicación oficial:"
+      planit: "PlaneaLo"
+      related_issue: "Problemas relacionados"
+      related_issue_guidance: "Esta aplicación de planeación ha sido convertido a un Problema:"
+      uid_label: "Referencia de Aplicación:"
+      view_official_application: "Ver aplicación oficial"
+      start_date: "Fecha que la aplicación fue realizada:"
+      hidden: "Oculto (no aparecerá en la pagina principal de nadie)"
       <<: *planning_applications_search
     search:
       <<: *planning_applications_search
   dashboards:
     show:
-      add_a_new_issue: "add a new issue"
-      add_another_location: "add another location"
-      add_some_locations: "add some locations"
-      areas_you_are_watching: "areas you are watching"
-      converted_to_issue: "Converted to Issue:"
+      add_a_new_issue: "añadir nuevo problema"
+      add_another_location: "añadir otra ubicación"
+      add_some_locations: "añadir algunas ubicaciones"
+      areas_you_are_watching: "areas que estas vigilando"
+      converted_to_issue: "Convertido en un problema:"
       days_away:
-        zero: "Today!"
-        one: "Tomorrow!"
-        other: "%{count} days away"
-      deadlines: "Deadlines and dates"
-      deadline_thread_updated: "thread updated %{time_ago} ago"
-      issues_lower: "issues"
-      involved_threads: "Involved Threads"
-      issues_in_your_area: "Issues in your area"
-      new_group_thread: "Start a new group thread"
-      my_issues_nearby_introduction_html: "Issues in the %{areas_you_are_watching_link} are shown below, most recent first."
+        zero: "Hoy!"
+        one: "Mañana!"
+        other: "faltan %{count} días"
+      deadlines: "Fin de plazo y fechas"
+      deadline_thread_updated: "hilo actualizado hace %{time_ago}"
+      issues_lower: "problemas"
+      involved_threads: "Hilos Involucrados"
+      issues_in_your_area: "Problemas en tu area"
+      new_group_thread: "Iniciar nuevo hilo grupal"
+      my_issues_nearby_introduction_html: "Problemas en %{areas_you_are_watching_link} se muestran abajo, lo más reciente primero."
       my_issues_nearby_issues_pointer_html: "(You can also %{browse_all_other_issues_link} from outside your area(s).)"
-      browse_all_other_issues: "browse all other issues"
-      my_priorities_introduction: "This is a listing of the priorities you have set, most important first:"
-      my_threads_introduction: "Latest updates on the discussion threads you are subscribed to:"
-      my_upcoming_deadline_introduction: "Upcoming deadlines and dates within the discussion threads you are subscribed to:"
-      no_upcoming_deadline_threads: "You aren't involved in any discussion threads with upcoming deadlines or dates."
+      browse_all_other_issues: "navegar todos los otros problemas"
+      my_priorities_introduction: "Esta es una lista de todas las prioridades que has establecido, lo más importante primero:"
+      my_threads_introduction: "Ultimas actualizaciones de los hilos que estas suscrito:"
+      my_upcoming_deadline_introduction: "Fines de plazo proximos y fechas dentro de los hilos de discusion a los que estas suscrito:"
+      no_upcoming_deadline_threads: "No estas suscrito en ningún hilo de discusion con fines de plazo o fechas proximas."
       no_subscribed_threads_html:
-        You aren't following any threads yet. You could have a look
-        through the %{threads_link} and see if there's anything that you want to
-        help with, or maybe you could %{add_issue_link} instead?
+        "Todavía no estas siguiendo ningun hilo. Puedes echar un vistazo
+        a traves de %{threads_link} y ver si hay algo en lo que te gustaría
+        ayudar o puedes añadir %{add_issue_link} ?"
       no_prioritised_threads_html:
-        You haven't prioritised any threads yet. You could have a look
-        through the %{threads_link} and see if there's anything that you think is
-        important, or maybe you could %{add_issue_link} instead?
-      no_issues_nearby_html: "There's no issues in your area. You could %{add_issue_link}, or %{add_location_link}."
+        "Todavía no has priorizado ningun hilo. Puedes echar un vistazo
+        a traves de  %{threads_link} y ver si hay algo que pienses sea
+        importante, o quizas puedes %{add_issue_link} ?"
+      no_issues_nearby_html: "No hay problemas en tu area. Puedes %{add_issue_link} o %{add_location_link}."
       location:
-        one: location
-        other: locations
-      no_group_threads: "None of your groups have any threads yet. You could start a new conversation!"
-      no_locations_guidance_html: "You haven't set any locations yet! If you %{add_some_locations_link}, we will show you the nearby %{things} here."
-      no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
-      no_user_groups: "You aren't a member of any groups yet! When you join some groups, the latest threads will show up here."
+        one: "ubicación"
+        other: "ubicaciones"
+      no_group_threads: "Ninguno de tus grupos tiene hilos; Puedes iniciar una nueva conversación."
+      no_locations_guidance_html: "Tadavía no has establecido ninguna ubicación. Si %{add_some_locations_link}, te mostraremos las %{things} ahí."
+      no_planning_applications_nearby_html: "No hay aplicaciones de planeacion en tu area. Puedes %{add_location_link}."
+      no_user_groups: "Todavía no eres miembro de ningun grupo. Cuando te unas a alguno, los hilos recientes apareceran aquí."
       <<: *planning_applications_search
-      planning_applications_in_your_area: "Planning applications in your %{location}"
-      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
-      planning_applications_lower: "planning applications"
-      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
-      recent_threads: "recent threads"
-      subscribed_threads: "Subscribed Threads"
-      thread_latest_activity: "%{time_ago} ago"
-      group_threads: "Group Threads"
+      planning_applications_in_your_area: "aplicaciones de planeación en tu %{location}"
+      planning_applications_introduction_html: "Estas son las aplicaciones de planeación más reciente (cortesía del sitio web PlanIt) en tu %{location_link}:"
+      planning_applications_lower: "aplicaciones de planeación"
+      recent_threads: "hilos recientes"
+      subscribed_threads: "Hilos Suscritos"
+      thread_latest_activity: "hace %{time_ago}"
+      group_threads: "Hilos de Grupo"
       group_threads_desc_html:
-        Recent threads with activity from your groups.
-      my_priorities: "My priorities"
-      my_threads: "My subscribed threads"
-      issues_nearby: "Latest issues nearby"
+        "Hilos recientes con actividad de tus grupos."
+      my_priorities: "Mis prioridades"
+      my_threads: "Mis suscripciones de hilos"
+      issues_nearby: "Ultimos problemas cercanos"
       posted:
-        message_html: "%{creator_link} posted a message"
-        deadline_message_html: "%{creator_link} posted a deadline/date"
-        document_message_html: "%{creator_link} posted an attachment"
-        photo_message_html: "%{creator_link} posted a photo"
-        link_message_html: "%{creator_link} posted a link"
-        street_view_message_html: "%{creator_link} posted a street view"
-        library_item_message_html: "%{creator_link} added a library item"
+        message_html: "%{creator_link} publico un mensaje"
+        deadline_message_html: "%{creator_link} publico un fin de plazo/fecha"
+        document_message_html: "%{creator_link} publico un adjunto"
+        photo_message_html: "%{creator_link} publico una foto"
+        link_message_html: "%{creator_link} publico un enlace"
+        street_view_message_html: "%{creator_link} publico un StreetView"
+        library_item_message_html: "%{creator_link} añadio un articulo de biblioteca"
     search:
-      no_results_found: "No results found for '%{query}'"
-      thread_results: "Threads (%{count})"
-      issue_results: "Issues (%{count})"
-      library_results: "Library (%{count})"
+      no_results_found: "No se encontre ningun resultado para '%{query}'"
+      thread_results: "Hilos (%{count})"
+      issue_results: "Problemas (%{count})"
+      library_results: "Biblioteca (%{count})"
       threads_found:
-        zero: "No threads found for '%{query}'."
-        one: "One thread found for '%{query}':"
-        other: "%{count} threads found for '%{query}':"
+        zero: "Ningun hilo encontrado para '%{query}'."
+        one: "Un hilo ecnontrado para '%{query}':"
+        other: "%{count} hilos encontrados para '%{query}':"
       issues_found:
-        zero: "No issues found for '%{query}'."
-        one: "One issue found for '%{query}':"
-        other: "%{count} issues found for '%{query}':"
+        zero: "Ningun problema encontrado para '%{query}'."
+        one: "Un problema encontrado para '%{query}':"
+        other: "%{count} problemas encontrado para '%{query}':"
       library_items_found:
-        zero: "No library items found for '%{query}'."
-        one: "One library item found for '%{query}':"
-        other: "%{count} library items found for '%{query}':"
-      title: "Search Results"
+        zero: "Ningun articulo de biblioteca encontrado para '%{query}'."
+        one: "Un articulo de biblioteca encontrado para '%{query}':"
+        other: "%{count} articulos de biblioteca encontrado para '%{query}':"
+      title: "Resultados de Busqueda"
   devise:
     registrations:
       edit:
@@ -580,10 +579,10 @@
       search_button: "Go"
   libraries:
     search:
-      no_results_found: "No results found for '%{query}'."
+      no_results_found: "No results encontrado para '%{query}'."
       results_found:
-        one: "One result found for '%{query}'."
-        other: "%{count} results found for '%{query}'"
+        one: "One result encontrado para '%{query}'."
+        other: "%{count} results encontrado para '%{query}'"
       title: "Library Search Results"
     show:
       title: "Library"
@@ -717,10 +716,10 @@
       thread_priority: "My Thread Priority"
     search:
       clear_submit: "Clear"
-      no_results_found: "No results found for '%{query}'."
+      no_results_found: "No results encontrado para '%{query}'."
       results_found:
-        one: "One result found for '%{query}'."
-        other: "%{count} results found for '%{query}'"
+        one: "One result encontrado para '%{query}'."
+        other: "%{count} results encontrado para '%{query}'"
       search: "Search all threads:"
       search_submit: "Search"
       title: "Thread Search Results"
