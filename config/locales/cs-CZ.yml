@@ -848,7 +848,6 @@
       header: "Co je nového?"
       introduction: "Toto je přehled nedávných změn na tété stránce.
     Kompletní detailní historii vývoje můžete sledovat na"
->>>>>>> 168d672... translate header of changelog through locale
   planning_application:
     issues:
       new:
