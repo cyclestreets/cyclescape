@@ -163,6 +163,7 @@
       create: "Vytvořit %{model}"
       update: "Uložit"
       saving: "Ukládám\u2026"
+      update_tags: "Upravit štítky"
       cancel: "Zrušit"
       deadline_message:
         create: "Vložit termín"
@@ -181,9 +182,7 @@
       issue:
         create: "Odeslat podnět"
         update: "Uložit podnět"
-        update_tags: "Upravit štítky"
       library_item:
-        update_tags: "Upravit štítky"
       library_item_message:
         create: "Přidat položku knihovny"
       library/document:
@@ -198,7 +197,6 @@
         create: "Odeslat zprávu"
       message_thread:
         create: "Vytvořit diskuzní vlákno"
-        update_tags: "Upravit diskuzní vlákno"
       photo_message:
         create: "Přidat fotografii"
       site_comment:

@@ -19,7 +19,6 @@
 class GroupProfile < ActiveRecord::Base
   include Locatable
   image_accessor :picture
-  attr_accessible :description, :joining_instructions, :loc_json, :picture, :retained_picture
 
   def picture_thumbnail
     picture.thumb('330x192#')

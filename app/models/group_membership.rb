@@ -17,15 +17,14 @@
 #
 
 class GroupMembership < ActiveRecord::Base
-  attr_accessible :user_id, :role, :user_attributes
 
   ALLOWED_ROLES = %w(committee member)
 
   belongs_to :group
   belongs_to :user, autosave: true
 
-  scope :committee, where("role = 'committee'")
-  scope :normal, where("role = 'member'")
+  scope :committee, -> { where("role = 'committee'") }
+  scope :normal, -> { where("role = 'member'") }
 
   after_initialize :set_default_role
 
@@ -39,7 +38,7 @@ class GroupMembership < ActiveRecord::Base
   accepts_nested_attributes_for :user
 
   def self.allowed_roles_map
-    ALLOWED_ROLES.map { |r| [I18n.t(".group_membership_roles.#{r.to_s}"), r] }
+    ALLOWED_ROLES.map { |r| [I18n.t("group_membership_roles.#{r.to_s}"), r] }
   end
 
   def role=(val)

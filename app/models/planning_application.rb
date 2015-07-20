@@ -2,24 +2,28 @@
 #
 # Table name: planning_applications
 #
-#  id                      :integer         not null, primary key
-#  openlylocal_id          :integer         not null
-#  openlylocal_url         :string(255)
-#  address                 :string(255)
+#  id                      :integer          not null, primary key
+#  address                 :text
 #  postcode                :string(255)
 #  description             :text
-#  council_name            :string(255)
 #  openlylocal_council_url :string(255)
-#  url                     :string(255)
-#  uid                     :string(255)     not null
+#  url                     :text
+#  uid                     :string(255)      not null
 #  issue_id                :integer
-#  created_at              :datetime        not null
-#  updated_at              :datetime        not null
-#  location                :spatial({:srid=
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  location                :spatial          geometry, 4326
+#  authority_name          :string(255)
+#  start_date              :date
+#  hide_votes_count        :integer          default(0)
+#
+# Indexes
+#
+#  index_planning_applications_on_issue_id  (issue_id)
+#  index_planning_applications_on_uid       (uid) UNIQUE
 #
 
 class PlanningApplication < ActiveRecord::Base
-  attr_accessible :hidden
   NOS_HIDE_VOTES = 2
 
   include Locatable
@@ -27,8 +31,8 @@ class PlanningApplication < ActiveRecord::Base
   belongs_to :issue
   has_many :hide_votes
   has_many :users, through: :hide_votes
-  scope :not_hidden, where('hide_votes_count < ?', NOS_HIDE_VOTES)
-  scope :ordered, order('start_date DESC')
+  scope :not_hidden, -> { where('hide_votes_count < ?', NOS_HIDE_VOTES) }
+  scope :ordered, -> { order('start_date DESC') }
 
   validates :uid, :url, presence: true
   validates :uid, uniqueness: true

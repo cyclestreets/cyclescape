@@ -31,8 +31,7 @@ class NewIssueNotifier
     # and where the user has user locations involvement preference on
     locations = UserLocation.intersects(buffered_location).
         joins(user: :prefs).
-        where(UserPref.arel_table[:involve_my_locations].in(%w(notify subscribe))).
-        all
+        where(UserPref.arel_table[:involve_my_locations].in(%w(notify subscribe)))
 
     # Filter the returned locations to ensure only one location is returned per user,
     # and that it is the smallest (i.e. most relevant) location. Refactoring this into
@@ -61,15 +60,14 @@ class NewIssueNotifier
   end
 
   def self.list_for_group_locations(issue)
-    group_profiles = GroupProfile.intersects(issue.location).all
+    group_profiles = GroupProfile.intersects(issue.location)
 
     # Create a hash keyed on the user id, containing the type of notification (actually the method name)
     # and the options for each message
     list = {}
     group_profiles.each do |profile|
       users = profile.group.members.joins(:prefs).
-          where(UserPref.arel_table[:involve_my_groups].in(%w(notify subscribe))).
-          all
+          where(UserPref.arel_table[:involve_my_groups].in(%w(notify subscribe)))
       users.each do |user|
         opts = { 'user_id' => user.id, 'group_id' => profile.group.id, 'issue_id' => issue.id }
         list[user.id] = { type: :notify_new_group_location_issue, opts: opts }

@@ -8,7 +8,7 @@ class Group::MembershipsController < ApplicationController
   end
 
   def create
-    @membership = @group.memberships.new(params[:group_membership])
+    @membership = @group.memberships.new permitted_params
 
     if @membership.save
       if @membership.user.accepted_or_not_invited?
@@ -21,28 +21,28 @@ class Group::MembershipsController < ApplicationController
   end
 
   def edit
-    @membership = @group.memberships.find(params[:id])
+    @membership = @group.memberships.find params[:id]
   end
 
   def update
-    @membership = @group.memberships.find(params[:id])
+    @membership = @group.memberships.find params[:id]
 
-    if @membership.update_attributes(params[:group_membership])
-      set_flash_message(:success)
+    if @membership.update permitted_params
+      set_flash_message :success
       redirect_to group_members_path
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
       render :edit
     end
   end
 
   def destroy
-    @membership = @group.memberships.find(params[:id])
+    @membership = @group.memberships.find params[:id]
 
     if @membership.destroy
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
 
     redirect_to group_members_path
@@ -51,6 +51,10 @@ class Group::MembershipsController < ApplicationController
   protected
 
   def load_group
-    @group = Group.find(params[:group_id])
+    @group = Group.find params[:group_id]
+  end
+
+  def permitted_params
+    params.require(:group_membership).permit :user_id, :role, user_attributes: [:full_name, :email]
   end
 end

@@ -19,11 +19,10 @@
 #
 
 class Issue < ActiveRecord::Base
+
   include Locatable
   include FakeDestroy
   include Taggable
-
-  attr_accessible :title, :description, :loc_json, :photo, :retained_photo, :tags_string
 
   acts_as_indexed fields: [:title, :description, :tags_string]
   acts_as_voteable
@@ -43,8 +42,8 @@ class Issue < ActiveRecord::Base
 
   validates :created_by, presence: true
 
-  default_scope where(deleted_at: nil)
-  scope :by_most_recent, order('created_at DESC')
+  default_scope {where(deleted_at: nil)}
+  scope :by_most_recent, -> { order('created_at DESC') }
   scope :created_by, ->(user) { where(created_by_id: user) }
 
   def to_param

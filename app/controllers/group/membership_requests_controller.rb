@@ -16,16 +16,16 @@ class Group::MembershipRequestsController < ApplicationController
   end
 
   def create
-    if current_user.groups.include?(@group)
-      redirect_to @group, alert: t('.group.membership_requests.create.already_member')
-    elsif current_user.membership_request_pending_for?(@group)
-      redirect_to @group, alert: t('.group.membership_requests.create.already_asked')
+    if current_user.groups.include? @group
+      redirect_to @group, alert: t('group.membership_requests.create.already_member')
+    elsif current_user.membership_request_pending_for? @group
+      redirect_to @group, alert: t('group.membership_requests.create.already_asked')
     else
-      @request = @group.membership_requests.new(params[:group_membership_request])
+      @request = @group.membership_requests.new permitted_params
       @request.user = current_user
 
       if @request.save
-        redirect_to @group, notice: t('.group.membership_requests.create.requested')
+        redirect_to @group, notice: t('group.membership_requests.create.requested')
         Notifications.new_group_membership_request(@request).deliver
       else
         render :new
@@ -36,38 +36,38 @@ class Group::MembershipRequestsController < ApplicationController
   # Review an individual membership request - useful for including in notifications
   # for large groups with many pending membership requests.
   def review
-    @request = @group.membership_requests.find(params[:id])
+    @request = @group.membership_requests.find params[:id]
   end
 
   def confirm
-    @request = @group.membership_requests.find(params[:id])
+    @request = @group.membership_requests.find params[:id]
     @request.actioned_by = current_user
     if @request.confirm
       Notifications.group_membership_request_confirmed(@request).deliver
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to action: :index
   end
 
   def reject
-    @request = @group.membership_requests.find(params[:id])
+    @request = @group.membership_requests.find params[:id]
     @request.actioned_by = current_user
     if @request.reject
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to action: :index
   end
 
   def cancel
-    @request = @group.membership_requests.find(params[:id])
+    @request = @group.membership_requests.find params[:id]
     if @request.user == current_user && @request.cancel
-      set_flash_message(:success)
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
     redirect_to @group
   end
@@ -75,6 +75,10 @@ class Group::MembershipRequestsController < ApplicationController
   protected
 
   def load_group
-    @group = Group.find(params[:group_id])
+    @group = Group.find params[:group_id]
+  end
+
+  def permitted_params
+    params.require(:group_membership_request).permit :message
   end
 end

@@ -1,4 +1,10 @@
 class ThreadListDecorator < ApplicationDecorator
+  alias_method :thread, :source
+
+  def self.decl_auth_context
+    :message_threads
+  end
+
   MESSAGE_ICON_MAP = {
     'photo_message' => 'image',
     'link_message' => 'link',
@@ -7,10 +13,6 @@ class ThreadListDecorator < ApplicationDecorator
     'document_message' => 'library_document',
     'message' => 'library_note'
   }
-
-  def thread
-    @model
-  end
 
   def latest_activity
     latest = thread.latest_message

@@ -1,7 +1,5 @@
 class Library::ItemDecorator < ApplicationDecorator
-  def item
-    @model
-  end
+  alias_method :item, :source
 
   def link
     h.link_to item.title, h.url_for(item.component)

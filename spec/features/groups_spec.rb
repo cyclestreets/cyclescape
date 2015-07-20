@@ -23,7 +23,7 @@ describe 'Groups' do
     end
 
     it 'should autolink the group description' do
-      profile.update_attribute(:description, 'contains a link: http://www.example.com')
+      profile.update_column(:description, 'contains a link: http://www.example.com')
       visit group_path(group)
 
       expect(page).to have_link('http://www.example.com')

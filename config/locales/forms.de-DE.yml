@@ -32,12 +32,12 @@
         edit: *labels_issue_new
         update: *labels_issue_new
         tags_string: "Tags"
-      library_document:
+      library/document:
         file: "Dokument"
         tags_string: "Tags"
-      library_item:
+      library/item:
         tags_string: "Tags"
-      library_note:
+      library/note:
         body: "Note"
         tags_string: "Tags"
       link_message:
@@ -91,6 +91,7 @@
       update: "Speichern"
       saving: "Speichere\u2026"
       cancel: "Abbrechen"
+      update_tags: "Tags aktualisieren"
       deadline_message:
         create: "Stichtag hinzufügen"
       document_message:
@@ -100,9 +101,6 @@
       issue:
         create: "Bericht senden"
         update: "Bericht speichern"
-        update_tags: "Tags aktualisieren"
-      library_item:
-        update_tags: "Tags aktualisieren"
       library_item_message:
         create: "Sammlungseintrag hinzufügen"
       library/document:
@@ -117,7 +115,6 @@
         create: "Nachricht posten"
       message_thread:
         create: "Diskussion erstellen"
-        update_tags: "Tags aktualisieren"
       photo_message:
         create: "Foto hinzufügen"
       site_comment:

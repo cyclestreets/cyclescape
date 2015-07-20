@@ -5,6 +5,7 @@ describe Message::LibraryItemsController do
     let(:user) { FactoryGirl.create(:user) }
     let(:thread) { FactoryGirl.create(:message_thread) }
     let(:library_item) { FactoryGirl.create(:library_item) }
+    let(:last_added) { LibraryItemMessage.last }
 
     before do
       sign_in user
@@ -15,7 +16,8 @@ describe Message::LibraryItemsController do
                     message: { body: 'this is a useful item' },
                     thread_id: thread.id
       expect(response.status).to be(302)
-      expect(LibraryItemMessage.last.library_item_id).to eq(library_item.id)
+      expect(last_added.library_item_id).to eq(library_item.id)
+      expect(last_added.message.body).to eq('this is a useful item')
     end
   end
 end

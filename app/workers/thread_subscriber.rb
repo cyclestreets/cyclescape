@@ -17,7 +17,7 @@ class ThreadSubscriber
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
       if Authorization::Engine.instance.permit? :show,  object: thread, user: member, user_roles: [:member, :guest]
-        thread.subscriptions.create({ user: member }, without_protection: true) unless member.subscribed_to_thread?(thread)
+        thread.subscriptions.create( user: member ) unless member.subscribed_to_thread?(thread)
       end
     end
   end
@@ -27,12 +27,11 @@ class ThreadSubscriber
 
     locations = UserLocation.intersects(buffered_location).
         joins(user: :prefs).
-        where(user_prefs: { involve_my_locations: 'subscribe' }).
-        all
+        where(user_prefs: { involve_my_locations: 'subscribe' })
 
     locations.each do |loc|
       if Authorization::Engine.instance.permit? :show,  object: thread, user: loc.user, user_roles: [:member, :guest]
-        thread.subscriptions.create({ user: loc.user }, without_protection: true) unless loc.user.subscribed_to_thread?(thread)
+        thread.subscriptions.create( user: loc.user ) unless loc.user.subscribed_to_thread?(thread)
       end
     end
   end

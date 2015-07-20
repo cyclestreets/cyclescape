@@ -1,8 +1,5 @@
 class PlanningApplicationDecorator < ApplicationDecorator
-
-  def planning_application
-    @model
-  end
+  alias_method :planning_application, :source
 
   def issue_link
     h.link_to issue.title, planning_application.issue

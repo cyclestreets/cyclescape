@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery with: :exception
   before_filter :ensure_proper_protocol
   before_filter :no_disabled_users
   before_filter :set_auth_user
@@ -10,8 +10,14 @@ class ApplicationController < ActionController::Base
   layout :set_xhr_layout
   filter_access_to :all
   helper_method :group_subdomain?
+  before_filter :configure_permitted_parameters, if: :devise_controller?
 
   protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :full_name
+    devise_parameter_sanitizer.for(:accept_invitation).push *[:full_name, :display_name, :email]
+  end
 
   def ssl_allowed_action?
     (params[:controller] == 'devise/sessions' && %w(new create).include?(params[:action])) ||
@@ -128,7 +134,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       authenticate_user!
     else
-      render status: :unauthorized, text: t('.application.permission_denied')
+      render status: :unauthorized, text: t('application.permission_denied')
     end
   end
 

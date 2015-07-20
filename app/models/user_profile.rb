@@ -7,6 +7,7 @@
 #  picture_uid :string(255)
 #  website     :string(255)
 #  about       :text
+#  visibility  :string(255)      default("public"), not null
 #
 # Indexes
 #
@@ -14,7 +15,6 @@
 #
 
 class UserProfile < ActiveRecord::Base
-  attr_accessible :picture, :retained_picture, :remove_picture, :website, :visibility, :about, as: [:default, 'admin']
   VISIBILITY_OPTIONS = %w(public group).freeze
 
   image_accessor :picture do
@@ -37,7 +37,7 @@ class UserProfile < ActiveRecord::Base
   end
 
   def clear
-    update_attributes(picture: nil, website: nil, about: nil)
+    update(picture: nil, website: nil, about: nil)
   end
 
   protected

@@ -183,7 +183,7 @@ describe 'Issues' do
         # This form is initially hidden
         within('form.edit-tags') do
           fill_in 'Tags', with: 'pothole dangerous'
-          click_on I18n.t('.formtastic.actions.issue.update_tags')
+          click_on I18n.t('.formtastic.actions.update_tags')
         end
         # Page submission is AJAX and returns json
         expect(page.source).to have_content('pothole')

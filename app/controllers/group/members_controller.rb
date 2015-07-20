@@ -5,8 +5,8 @@ class Group::MembersController < ApplicationController
   def index
     set_page_title t('group.members.index.title', group: @group.name)
 
-    @committee = @group.committee_members.all
-    @members = @group.normal_members.all
+    @committee = @group.committee_members
+    @members = @group.normal_members
     @pending_requests = (@group.pending_membership_requests.count > 0)
   end
 

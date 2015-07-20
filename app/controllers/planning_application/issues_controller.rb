@@ -8,12 +8,12 @@ class PlanningApplication::IssuesController < IssuesController
   end
 
   def create
-    @issue = current_user.issues.new(params[:issue])
+    @issue = current_user.issues.new permitted_params
 
     if @issue.save
       @planning_application.issue = @issue
       @planning_application.save!
-      NewIssueNotifier.new_issue(@issue)
+      NewIssueNotifier.new_issue @issue
       redirect_to @issue
     else
       @start_location = current_user.start_location
@@ -24,13 +24,13 @@ class PlanningApplication::IssuesController < IssuesController
   protected
 
   def load_planning_application
-    @planning_application = PlanningApplication.find(params[:planning_application_id])
+    @planning_application = PlanningApplication.find params[:planning_application_id]
   end
 
   def check_for_issue
     if @planning_application.issue
-      set_flash_message(:already)
-      redirect_to planning_application_path(@planning_application)
+      set_flash_message :already
+      redirect_to planning_application_path @planning_application
     end
   end
 end

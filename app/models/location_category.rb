@@ -9,7 +9,6 @@
 #
 
 class LocationCategory < ActiveRecord::Base
-  attr_accessible :name
 
   has_many :user_locations, foreign_key: 'category_id'
 

@@ -2,13 +2,13 @@ class PlanningApplicationWorker
   # Update to use
   # http://planit.org.uk/find/areas/json
   LOCAL_AUTHORITIES = [
-    'Aberdeen', 'Aberdeenshire', 'Adur Worthing', 'Allerdale', 'Angus', 'Antrim', 'Ards', 'Armagh', 'Arun', 'Ashfield', 'Babergh',
+    'Aberdeen', 'Aberdeenshire', 'Allerdale', 'Angus', 'Antrim', 'Ards', 'Armagh', 'Arun', 'Ashfield', 'Babergh',
     'Barnet', 'Barnsley', 'Basingstoke', 'Bath', 'Birmingham', 'Blackburn', 'Boston', 'Breckland', 'Brecon Beacons', 'Brent',
     'Brighton', 'Broadland', 'Broxbourne', 'Burnley', 'Bury', 'Cairngorms', 'Cambridge', 'Cambridgeshire', 'Camden', 'Cannock Chase',
     'Canterbury', 'Carlisle', 'Carmarthenshire', 'Castle Point', 'Central Bedfordshire', 'Ceredigion', 'Charnwood', 'Cheshire East',
     'Christchurch', 'Colchester', 'Conwy', 'Cornwall', 'Coventry', 'Craven', 'Croydon', 'Darlington', 'Dartmoor', 'Derbyshire',
     'Dorset', 'Durham', 'Durham (Crook)', 'Durham (Easington)', 'Durham (Sedgefield)', 'Ealing', 'East Staffordshire', 'Epping Forest',
-    'Exmoor', 'Flintshire', 'Guernsey Island', 'Hackney', 'Halton', 'Hampshire', 'Haringey', 'Hart', 'Hartlepool', 'Havering',
+    'Exmoor', 'Flintshire', 'Hackney', 'Halton', 'Hampshire', 'Haringey', 'Hart', 'Hartlepool', 'Havering',
     'Herefordshire', 'High Peak', 'Ipswich', 'Isle of Man', 'Isle of Wight', 'Islington', 'Jersey', 'Kensington', 'Lake District',
     'Lancashire', 'Lichfield', 'Lincoln', 'Lincolnshire', 'Liverpool', 'Loch Lomond', 'Luton', 'Malvern Hills', 'Manchester',
     'Mendip', 'Merthyr Tydfil', 'Merton', 'Middlesbrough', 'Norfolk', 'North Somerset', 'North Warwickshire', 'North York Moors',
@@ -55,7 +55,7 @@ class PlanningApplicationWorker
       planning_applications.each do |remote_pa|
         next unless remote_pa['uid'] && remote_pa['url']
 
-        db_app = PlanningApplication.find_or_initialize_by_uid(remote_pa['uid'])
+        db_app = PlanningApplication.find_or_initialize_by uid: remote_pa['uid']
         [:address, :postcode, :description, :authority_name, :url, :start_date].each do |attr|
           db_app[attr] = remote_pa[attr.to_s]
         end

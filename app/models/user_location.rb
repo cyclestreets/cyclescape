@@ -18,8 +18,6 @@
 class UserLocation < ActiveRecord::Base
   include Locatable
 
-  attr_accessible :category_id, :loc_json
-
   belongs_to :user
   belongs_to :category, class_name: 'LocationCategory'
 

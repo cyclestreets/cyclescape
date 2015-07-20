@@ -22,8 +22,6 @@
 class Message < ActiveRecord::Base
   include FakeDestroy
 
-  attr_accessible :body, :component
-
   belongs_to :thread, class_name: 'MessageThread'
   belongs_to :created_by, class_name: 'User'
   belongs_to :component, polymorphic: true, autosave: true
@@ -32,7 +30,7 @@ class Message < ActiveRecord::Base
 
   after_save :update_thread_search
 
-  scope :recent, order('created_at DESC').limit(3)
+  scope :recent, -> { order('created_at DESC').limit(3) }
 
   validates :created_by_id, presence: true
   validates :body, presence: true, unless: :component
@@ -47,7 +45,7 @@ class Message < ActiveRecord::Base
   end
 
   def component_name
-    (component ? component : self).class.model_name.underscore
+    (component ? component : self).class.name.underscore
   end
 
   def searchable_text

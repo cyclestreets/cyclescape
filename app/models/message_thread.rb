@@ -26,8 +26,6 @@ class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
-  attr_accessible :title, :privacy, :group_id, :issue_id, :tags_string
-
   acts_as_indexed fields: [:title, :messages_text, :tags_string]
 
   ALLOWED_PRIVACY = %w(public group committee)
@@ -35,19 +33,19 @@ class MessageThread < ActiveRecord::Base
   belongs_to :created_by, class_name: 'User'
   belongs_to :group
   belongs_to :issue
-  has_many :messages, foreign_key: 'thread_id', autosave: true, order: 'created_at ASC'
-  has_many :subscriptions, class_name: 'ThreadSubscription', foreign_key: 'thread_id', conditions: { deleted_at: nil }
+  has_many :messages, -> { order('created_at ASC') }, foreign_key: 'thread_id', autosave: true
+  has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: 'ThreadSubscription', foreign_key: 'thread_id'
   has_many :subscribers, through: :subscriptions, source: :user
-  has_many :participants, through: :messages, source: :created_by, uniq: true
+  has_many :participants, -> { (uniq(true)) }, through: :messages, source: :created_by
   has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id'
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
-  has_one :latest_message, foreign_key: 'thread_id', order: 'created_at DESC', class_name: 'Message'
+  has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
-  scope :public, where("privacy = 'public'")
-  scope :private, where("privacy = 'group'")
-  scope :with_issue, where('issue_id IS NOT NULL')
-  scope :without_issue, where('issue_id IS NULL')
-  default_scope where(deleted_at: nil)
+  scope :public, -> { where(privacy: 'public') }
+  scope :private, -> { where(privacy: 'group') }
+  scope :with_issue, -> { where.not(issue_id: nil) }
+  scope :without_issue, -> { where(issue_id: nil) }
+  default_scope { where(deleted_at: nil) }
 
   before_validation :set_public_token, on: :create
 
@@ -58,11 +56,11 @@ class MessageThread < ActiveRecord::Base
   end
 
   def self.non_committee_privacies_map
-    (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+    (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
   end
 
   def self.privacies_map
-    ALLOWED_PRIVACY.map { |n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+    ALLOWED_PRIVACY.map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
   end
 
   def self.with_messages_from(user)
@@ -95,7 +93,7 @@ class MessageThread < ActiveRecord::Base
       found.undelete!
       found
     else
-      subscriptions.create({ user: user }, without_protection: true)
+      subscriptions.create( user: user )
     end
   end
 
@@ -118,7 +116,7 @@ class MessageThread < ActiveRecord::Base
 
     m = []
 
-    m << messages.create!({ body: stripped, created_by: user }, without_protection: true)
+    m << messages.create!( body: stripped, created_by: user )
 
     # Attachments
     mail.message.attachments.each do |attachment|
@@ -127,7 +125,7 @@ class MessageThread < ActiveRecord::Base
       else
         component = DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
       end
-      message = messages.build({ created_by: user }, without_protection: true)
+      message = messages.build( created_by: user )
       component.thread = self
       component.message = message
       component.created_by = user
@@ -203,7 +201,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def messages_text
-    messages.all.map(&:searchable_text).join(' ')
+    messages.map(&:searchable_text).join(' ')
   end
 
   # for auth checks

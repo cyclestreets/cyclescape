@@ -15,7 +15,7 @@ class ThreadRecorder
 
   # Update the database with when the thread was last viewed
   def self.record_thread_viewed(thread_id, user_id, time_str)
-    view = ThreadView.find_or_initialize_by_thread_id_and_user_id(thread_id, user_id)
+    view = ThreadView.find_or_initialize_by(thread_id: thread_id, user_id: user_id)
     view.viewed_at = time_str
     view.save!
   end

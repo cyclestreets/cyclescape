@@ -17,7 +17,7 @@
 #  disabled_at            :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  invitation_token       :string(60)
+#  invitation_token       :string(255)
 #  invitation_sent_at     :datetime
 #  invitation_accepted_at :datetime
 #  remembered_group_id    :integer
@@ -25,6 +25,7 @@
 #  invited_by_id          :integer
 #  invited_by_type        :string(255)
 #  deleted_at             :datetime
+#  invitation_created_at  :datetime
 #
 # Indexes
 #
@@ -33,9 +34,6 @@
 #
 
 class User < ActiveRecord::Base
-  attr_accessible :email, :full_name, :display_name, :password, :password_confirmation, :disabled
-  attr_protected :role
-  attr_protected :encrypted_password, as: :admin
 
   acts_as_voter
   acts_as_paranoid
@@ -57,7 +55,8 @@ class User < ActiveRecord::Base
     end
   end
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
-  has_many :subscribed_threads, through: :thread_subscriptions, source: :thread, conditions: 'thread_subscriptions.deleted_at is NULL'
+  has_many :subscribed_threads, -> { where('thread_subscriptions.deleted_at is NULL') },
+    through: :thread_subscriptions, source: :thread
   has_many :thread_priorities, class_name: 'UserThreadPriority'
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
   has_many :thread_views
@@ -77,16 +76,16 @@ class User < ActiveRecord::Base
   before_destroy :remove_group_memberships
   before_destroy :remove_thread_subscriptions
 
-  scope :active, where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL')
-  scope :admin,  where(role: 'admin')
-  scope :public, joins(:profile).where(user_profiles: {visibility: 'public'})
+  scope :active, -> { where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL') }
+  scope :admin,  -> { where(role: 'admin') }
+  scope :is_public, -> { joins(:profile).where(user_profiles: {visibility: 'public'}) }
 
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
 
   def self.user_roles_map
-    ALLOWED_ROLES.map { |n| [I18n.t(".user_roles.#{n.to_s}"), n] }
+    ALLOWED_ROLES.map { |n| [I18n.t("user_roles.#{n.to_s}"), n] }
   end
 
   def self.find_or_invite(email_address, name = nil)
@@ -253,7 +252,7 @@ class User < ActiveRecord::Base
   end
 
   def can_view(other_users)
-    viewable_by_public_ids = other_users.public.pluck :id
+    viewable_by_public_ids = other_users.is_public.pluck :id
 
     my_group_ids = groups.pluck :id
 

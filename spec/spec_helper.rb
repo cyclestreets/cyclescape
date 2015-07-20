@@ -47,13 +47,13 @@ RSpec.configure do |config|
     FileUtils.rm_r(dragonfly_path) if File.exists?(dragonfly_path)
 
     # Create the root user
-    unless User.where('id = 1').exists?
+    unless User.where(id: 1).exists?
       root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
                       password: 'changeme', password_confirmation: 'changeme')
       root.role = 'admin'
       root.skip_confirmation!
       root.save!
-      User.update_all('id = 1', "id = #{root.id}")
+      User.where(id: 1).update_all(id: "#{root.id}")
     end
 
     # Disable the observers so that their behaviour can be tested independently
@@ -76,4 +76,5 @@ RSpec.configure do |config|
   end
 
   config.infer_spec_type_from_file_location!
+  config.include AbstractController::Translation
 end

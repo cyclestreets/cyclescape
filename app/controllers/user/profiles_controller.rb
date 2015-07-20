@@ -9,10 +9,10 @@ class User::ProfilesController < ApplicationController
     @user = UserDecorator.decorate(@user)
 
     involved_threads = ThreadList.public_recent_involved_with(@user, 10).includes(:group)
-    @involved_threads = ThreadListDecorator.decorate(involved_threads)
+    @involved_threads = ThreadListDecorator.decorate_collection(involved_threads)
 
     reported_issues = Issue.by_most_recent.created_by(@user)
-    @reported_issues = IssueDecorator.decorate(reported_issues)
+    @reported_issues = IssueDecorator.decorate_collection(reported_issues)
 
     # Groups that the current user could invite this particular user to
     @add_to_groups = current_user ? (current_user.memberships.committee.collect { |m| m.group } - @user.groups) : nil
@@ -28,8 +28,8 @@ class User::ProfilesController < ApplicationController
   end
 
   def update
-    if @user.profile.update_attributes(params[:user_profile])
-      set_flash_message(:success)
+    if @user.profile.update permitted_params
+      set_flash_message :success
       redirect_to action: :show
     else
       render :edit
@@ -41,5 +41,9 @@ class User::ProfilesController < ApplicationController
   def load_user
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
     permission_denied unless @user
+  end
+
+  def permitted_params
+    params.require(:user_profile).permit :picture, :retained_picture, :remove_picture, :website, :visibility, :about
   end
 end

@@ -48,8 +48,8 @@ describe 'Site feedback' do
     it 'should allow deleting' do
       expect(SiteComment.count).to eql(1)
       visit site_comments_path
-      click_on I18n.t('.site.comments.index.delete_comment')
-      expect(page).to have_content(I18n.t('.site.comments.destroy.success'))
+      click_on I18n.t('site.comments.index.delete_comment')
+      expect(page).to have_content(I18n.t('site.comments.destroy.success'))
       expect(SiteComment.count).to eql(0)
     end
   end

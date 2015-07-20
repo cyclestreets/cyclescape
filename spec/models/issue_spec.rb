@@ -1,23 +1,3 @@
-# == Schema Information
-#
-# Table name: issues
-#
-#  id            :integer          not null, primary key
-#  created_by_id :integer          not null
-#  title         :string(255)      not null
-#  description   :text             not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  deleted_at    :datetime
-#  location      :spatial          geometry, 4326
-#  photo_uid     :string(255)
-#
-# Indexes
-#
-#  index_issues_on_created_by_id  (created_by_id)
-#  index_issues_on_location       (location)
-#
-
 require 'spec_helper'
 
 describe Issue do
@@ -190,12 +170,12 @@ describe Issue do
 
       it 'should accept a point' do
         geom = factory.parse_wkt('POINT(-1 1)')
-        expect { Issue.intersects(geom).all }.not_to raise_error
+        expect { Issue.intersects(geom).to_a }.not_to raise_error
       end
 
       it 'should accept a multipolygon' do
         geom2 = factory.parse_wkt('MULTIPOLYGON (((0.0 0.0, 0.0 1.0, 1.0 1.0, 0.0 0.0)), ((0.0 4.0, 0.0 5.0, 1.0 5.0, 0.0 4.0)))')
-        expect { Issue.intersects(geom2).all }.not_to raise_error
+        expect { Issue.intersects(geom2).to_a }.not_to raise_error
       end
     end
 
@@ -209,7 +189,7 @@ describe Issue do
 
       it 'should return intersecting issues' do
         bbox = factory.parse_wkt(polygon)
-        issues = Issue.intersects(bbox).all
+        issues = Issue.intersects(bbox).to_a
         expect(issues.length).to eql(3)
         expect(issues).to include(issue_entirely_surrounding)
         expect(issues).to include(issue_entirely_contained)
@@ -219,7 +199,7 @@ describe Issue do
 
       it 'should return intersecting but not covering issues' do
         bbox = factory.parse_wkt(polygon)
-        issues = Issue.intersects_not_covered(bbox).all
+        issues = Issue.intersects_not_covered(bbox).to_a
         expect(issues.length).to eql(2)
         expect(issues).to include(issue_entirely_contained)
         expect(issues).to include(issue_half_in_half_out)

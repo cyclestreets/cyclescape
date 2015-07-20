@@ -7,10 +7,13 @@ class Group::IssuesController < IssuesController
     set_page_title t('group.issues.index.title', group_name: current_group.name)
 
     issues = Issue.intersects(current_group.profile.location).by_most_recent.paginate(page: params[:page])
-    popular_issues = Issue.intersects(current_group.profile.location).plusminus_tally(start_at: 8.weeks.ago, at_least: 1)
 
-    @issues = IssueDecorator.decorate(issues)
-    @popular_issues = IssueDecorator.decorate(popular_issues)
+    # work around till https://github.com/bouchard/thumbs_up/issues/64 is fixed
+    popular_issue_ids = Issue.intersects(current_group.profile.location).plusminus_tally(start_at: 8.weeks.ago, at_least: 1).pluck :id
+    popular_issues = Issue.where(id: popular_issue_ids).paginate(page: params[:pop_issues_page]).includes(:created_by)
+
+    @issues = IssueDecorator.decorate_collection issues
+    @popular_issues = IssueDecorator.decorate_collection popular_issues
     @start_location = index_start_location
   end
 

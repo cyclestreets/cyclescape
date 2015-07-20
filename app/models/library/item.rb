@@ -17,10 +17,9 @@
 #
 
 class Library::Item < ActiveRecord::Base
+
   include FakeDestroy
   include Taggable
-
-  attr_accessible :component, :tags_string
 
   acts_as_indexed fields: [:search]
 
@@ -30,7 +29,7 @@ class Library::Item < ActiveRecord::Base
   has_many :library_item_messages, foreign_key: 'library_item_id'
   has_many :threads, through: :library_item_messages
 
-  scope :by_most_recent, order('created_at DESC')
+  scope :by_most_recent, -> { order('created_at DESC') }
 
   validates_presence_of :created_by
 

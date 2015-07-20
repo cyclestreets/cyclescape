@@ -1,4 +1,5 @@
 class MessageComponent < ActiveRecord::Base
+
   self.abstract_class = true
 
   belongs_to :message

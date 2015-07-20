@@ -8,17 +8,16 @@ class IssuesController < ApplicationController
     popular_issue_ids = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).map &:id
     popular_issues = Issue.where(id: popular_issue_ids).paginate(page: params[:pop_issues_page]).includes(:created_by)
 
-    @issues = IssueDecorator.decorate(issues)
-    @popular_issues = IssueDecorator.decorate(popular_issues)
+    @issues = IssueDecorator.decorate_collection issues
+    @popular_issues = IssueDecorator.decorate_collection popular_issues
     @start_location = index_start_location
   end
 
   def show
-    issue = Issue.find(params[:id])
-    @issue = IssueDecorator.decorate(issue)
+    @issue = IssueDecorator.decorate issue
     set_page_title @issue.title
-    @threads = ThreadListDecorator.decorate(@issue.threads.order_by_latest_message.includes(:group))
-    @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue))
+    @threads = ThreadListDecorator.decorate_collection @issue.threads.order_by_latest_message.includes(:group)
+    @tag_panel = TagPanelDecorator.new(@issue, form_url: issue_tags_path(@issue), cancel_url: issue_path(@issue))
   end
 
   def new
@@ -27,11 +26,11 @@ class IssuesController < ApplicationController
   end
 
   def create
-    @issue = current_user.issues.new(params[:issue])
+    @issue = current_user.issues.new permitted_params
 
     if @issue.save
-      NewIssueNotifier.new_issue(@issue)
-      redirect_to new_issue_thread_path(@issue)
+      NewIssueNotifier.new_issue @issue
+      redirect_to new_issue_thread_path @issue
     else
       @start_location = current_user.start_location
       render :new
@@ -39,15 +38,12 @@ class IssuesController < ApplicationController
   end
 
   def edit
-    @issue = Issue.find(params[:id])
-    @start_location = @issue.location
+    @start_location = issue.location
   end
 
   def update
-    @issue = Issue.find(params[:id])
-
-    if @issue.update_attributes(params[:issue])
-      set_flash_message(:success)
+    if issue.update permitted_params
+      set_flash_message :success
       redirect_to action: :show
     else
       @start_location = current_user.start_location
@@ -56,21 +52,18 @@ class IssuesController < ApplicationController
   end
 
   def destroy
-    @issue = Issue.find(params[:id])
-
-    if @issue.destroy
-      set_flash_message(:success)
+    if issue.destroy
+      set_flash_message :success
       redirect_to issues_path
     else
-      set_flash_message(:failure)
-      redirect_to @issue
+      set_flash_message :failure
+      redirect_to issue
     end
   end
 
   def geometry
-    @issue = Issue.find(params[:id])
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(issue_feature(IssueDecorator.decorate(@issue))) }
+      format.json { render json: RGeo::GeoJSON.encode(issue_feature(IssueDecorator.decorate(issue))) }
     end
   end
 
@@ -90,35 +83,32 @@ class IssuesController < ApplicationController
   end
 
   def vote_up
-    @issue = Issue.find(params[:id])
-    if current_user.voted_for?(@issue)
-      set_flash_message(:already)
+    if current_user.voted_for? issue
+      set_flash_message :already
     else
-      current_user.vote_exclusively_for(@issue)
-      set_flash_message(:success)
+      current_user.vote_exclusively_for issue
+      set_flash_message :success
     end
-    redirect_to @issue
+    redirect_to issue
   end
 
   def vote_down
-    @issue = Issue.find(params[:id])
-    if current_user.voted_against?(@issue)
-      set_flash_message(:already)
+    if current_user.voted_against? issue
+      set_flash_message :already
     else
-      current_user.vote_exclusively_against(@issue)
-      set_flash_message(:success)
+      current_user.vote_exclusively_against issue
+      set_flash_message :success
     end
-    redirect_to @issue
+    redirect_to issue
   end
 
   def vote_clear
-    @issue = Issue.find(params[:id])
-    if current_user.clear_votes(@issue)
-      set_flash_message(:success)
+    if current_user.clear_votes issue
+      set_flash_message :success
     else
-      set_flash_message(:failure)
+      set_flash_message :failure
     end
-    redirect_to @issue
+    redirect_to issue
   end
 
   protected
@@ -139,5 +129,14 @@ class IssuesController < ApplicationController
                       url: view_context.url_for(issue),
                       created_by: issue.created_by.name,
                       created_by_url: view_context.url_for(issue.created_by))
+  end
+
+  def issue
+    @issue ||= Issue.find(params[:id])
+  end
+
+  def permitted_params
+    params.require(:issue).permit :title, :photo, :retained_photo, :loc_json, :tags_string,
+      :description
   end
 end

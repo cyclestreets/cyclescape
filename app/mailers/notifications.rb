@@ -6,13 +6,13 @@ class Notifications < ActionMailer::Base
     @member = request.user
     @group = request.group
     mail(to: @member.name_with_email,
-         subject: t('.mailers.notifications.gmr_confirmed.subject', group_name: @group.name))
+         subject: t('mailers.notifications.gmr_confirmed.subject', group_name: @group.name))
   end
 
   def new_group_request(request, admins)
     @request = request
     mail(to: admins.map(&:email),
-         subject: t('.mailers.notifications.new_group_request.subject',
+         subject: t('mailers.notifications.new_group_request.subject',
                     group_name: @request.name, user_name: @request.user.full_name))
   end
 
@@ -20,14 +20,14 @@ class Notifications < ActionMailer::Base
     @user = request.user
     @group = group
     mail(to: @user.email,
-         subject: t('.mailers.notifications.group_request_confirmed.subject', group_name: @group.name))
+         subject: t('mailers.notifications.group_request_confirmed.subject', group_name: @group.name))
   end
 
   def group_request_rejected(request)
     @request = request
     user = request.user
     mail(to: user.email,
-         subject: t('.mailers.notifications.group_request_rejected.subject', group_request_name: @request.name))
+         subject: t('mailers.notifications.group_request_rejected.subject', group_request_name: @request.name))
   end
 
   def new_group_membership_request(request)
@@ -37,10 +37,10 @@ class Notifications < ActionMailer::Base
     if @group.prefs.notify_membership_requests?
       if @group.prefs.membership_secretary
         mail to: @group.prefs.membership_secretary.name_with_email,
-             subject: t('.mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
+             subject: t('mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
       elsif !@group.email.blank?
         mail to: @group.name_with_email,
-             subject: t('.mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
+             subject: t('mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
       end
     end
   end
@@ -50,7 +50,7 @@ class Notifications < ActionMailer::Base
     @member = membership.user
     @group = membership.group
     mail(to: @member.name_with_email,
-         subject: t('.mailers.notifications.added_to_group.subject', group_name: @group.name))
+         subject: t('mailers.notifications.added_to_group.subject', group_name: @group.name))
   end
 
   # Send notification to member that thread has been created
@@ -86,7 +86,7 @@ class Notifications < ActionMailer::Base
     mail to: @user.name_with_email,
          from: user_notification_address(@message.created_by),
          reply_to: thread_address(@thread),
-         subject: t('.mailers.notifications.new_user_location_issue_thread.subject',
+         subject: t('mailers.notifications.new_user_location_issue_thread.subject',
                     issue_title: @thread.issue.title)
   end
 
@@ -95,7 +95,7 @@ class Notifications < ActionMailer::Base
     @group = group
     @issue = issue
     mail to: @user.name_with_email,
-         subject: t('.mailers.notifications.new_group_location_issue.subject',
+         subject: t('mailers.notifications.new_group_location_issue.subject',
                     group_name: @group.name, issue_title: @issue.title)
   end
 end

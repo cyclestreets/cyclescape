@@ -13,15 +13,11 @@
 #
 
 class DocumentMessage < MessageComponent
-  # Core associations defined in MessageComponent
-  attr_accessible :title, :file, :retained_file
-
   file_accessor :file do
     storage_path :generate_file_path
   end
 
-  validates :file, presence: true
-  validates :title, presence: true
+  validates :file, :title, presence: true
 
   protected
 

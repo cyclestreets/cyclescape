@@ -77,7 +77,7 @@ describe 'Library notes' do
     it 'should be taggable' do
       click_on 'Edit tags'
       fill_in 'Tags', with: 'cycle parking'
-      click_on I18n.t('.formtastic.actions.library_item.update_tags')
+      click_on I18n.t('.formtastic.actions.update_tags')
       expect(JSON.parse(page.source)['tagspanel']).to have_content('parking')
     end
   end
@@ -118,7 +118,7 @@ describe 'Library notes' do
       context 'long ago' do
         let(:note) { FactoryGirl.create(:library_note, created_by: current_user) }
         it 'should not show you a link' do
-          note.item.update_attribute(:created_at, 2.days.ago)
+          note.item.update_column(:created_at, 2.days.ago)
 
           visit library_note_path(note)
           expect(page).not_to have_link(edit_text)

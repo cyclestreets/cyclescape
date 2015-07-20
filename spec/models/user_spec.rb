@@ -1,37 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
-#  full_name              :string(255)      not null
-#  display_name           :string(255)
-#  role                   :string(255)      not null
-#  encrypted_password     :string(128)      default("")
-#  confirmation_token     :string(255)
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  disabled_at            :datetime
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  invitation_token       :string(60)
-#  invitation_sent_at     :datetime
-#  invitation_accepted_at :datetime
-#  remembered_group_id    :integer
-#  invitation_limit       :integer
-#  invited_by_id          :integer
-#  invited_by_type        :string(255)
-#  deleted_at             :datetime
-#
-# Indexes
-#
-#  index_users_on_email             (email)
-#  index_users_on_invitation_token  (invitation_token)
-#
-
 require 'spec_helper'
 
 describe User do
@@ -63,16 +29,6 @@ describe User do
     it { is_expected.to have_one(:profile) }
     it { is_expected.to have_one(:prefs) }
     it { is_expected.to belong_to(:remembered_group) }
-  end
-
-  describe 'permissions' do
-    it { should_not allow_mass_assignment_of(:role) }
-    it { should allow_mass_assignment_of(:role).as(:admin) }
-
-    [:email, :full_name, :display_name, :password, :password_confirmation, :disabled].each do |attr|
-      it { should allow_mass_assignment_of(attr) }
-      it { should allow_mass_assignment_of(attr).as(:admin) }
-    end
   end
 
   describe 'to be valid' do
@@ -294,14 +250,14 @@ describe User do
     end
   end
 
-  it 'should have public scope' do
+  it 'should have is_public scope' do
     private_user = FactoryGirl.create(:user)
-    private_user.profile.update_attributes visibility: 'group'
+    private_user.profile.update visibility: 'group'
 
     public_user = FactoryGirl.create(:user)
-    public_user.profile.update_attributes visibility: 'public'
+    public_user.profile.update visibility: 'public'
 
-    public_users = described_class.public
+    public_users = described_class.is_public
     expect(public_users).to include(public_user)
     expect(public_users).to_not include(private_user)
   end
@@ -318,16 +274,16 @@ describe User do
     it 'should be check if other users are viewable' do
       private_user_in_same_group = FactoryGirl.create(:user, full_name: 'private_user_in_same_group')
       FactoryGirl.create(:group_membership, user: private_user_in_same_group, group: group)
-      private_user_in_same_group.profile.update_attributes visibility: 'group'
+      private_user_in_same_group.profile.update visibility: 'group'
 
       private_user_in_different_group = FactoryGirl.create(:user, full_name: 'private_user_in_different_group')
       FactoryGirl.create(:group_membership, user: private_user_in_different_group, group: other_group)
-      private_user_in_different_group.profile.update_attributes visibility: 'group'
+      private_user_in_different_group.profile.update visibility: 'group'
 
       public_user = FactoryGirl.create(:user, full_name: 'public user')
-      public_user.profile.update_attributes visibility: 'public'
+      public_user.profile.update visibility: 'public'
 
-      expect(subject.can_view(User.scoped)).to match_array([subject, private_user_in_same_group, public_user])
+      expect(subject.can_view(User.all)).to match_array([subject, private_user_in_same_group, public_user])
     end
   end
 
@@ -348,7 +304,7 @@ describe User do
     end
 
     it 'should work with mass-update' do
-      subject.update_attributes(disabled: '1')
+      subject.update(disabled: '1')
       subject.reload
       expect(subject.disabled).to be_truthy
     end
@@ -366,7 +322,7 @@ describe User do
 
     it 'should not really be deleted' do
       subject.destroy
-      expect(User.with_deleted.all).to include(subject)
+      expect(User.with_deleted).to include(subject)
     end
 
     it 'should remove the display name and obfuscate the full name' do
@@ -444,8 +400,8 @@ describe User do
 
     it 'should return multipolygon for point, line and polygon combined' do
       subject.locations[0].location = point
-      subject.locations.create({ location: line }, without_protection: true)
-      subject.locations.create({ location: polygon }, without_protection: true)
+      subject.locations.create( location: line )
+      subject.locations.create( location: polygon )
       expect(subject.buffered_locations.geometry_type.type_name).to eq('MultiPolygon')
     end
   end
@@ -479,14 +435,14 @@ describe User do
       expect(subject.start_location).to eql(Geo::NOWHERE_IN_PARTICULAR)
 
       # add a group with no location
-      GroupMembership.create({ user: subject, group: group, role: 'member' }, without_protection: true)
+      GroupMembership.create( user: subject, group: group, role: 'member' )
       subject.reload
       expect(subject.start_location).to eql(Geo::NOWHERE_IN_PARTICULAR)
 
       # add a group with a location
       group2.profile.location = polygon
       group2.profile.save!
-      GroupMembership.create({ user: subject, group: group2, role: 'member' }, without_protection: true)
+      GroupMembership.create( user: subject, group: group2, role: 'member' )
       subject.reload
       expect(subject.start_location).to eql(group2.profile.location)
 

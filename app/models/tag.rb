@@ -12,16 +12,14 @@
 #
 
 class Tag < ActiveRecord::Base
-  attr_accessible :name
-
   validates :name, presence: true
 
   def self.names
-    scoped.map { |tag| tag.name }
+    all.map { |tag| tag.name }
   end
 
   def self.grab(val)
-    find_or_create_by_name(normalise(val))
+    find_or_create_by(name: normalise(val))
   end
 
   def name=(val)

@@ -103,6 +103,9 @@ describe 'Authentication and authorization' do
 
     it 'should direct you to your locations page' do
       visit_in_email('Confirm my account')
+      fill_in 'Password', with: @credentials[:password], match: :first
+      fill_in 'Email', with: @credentials[:email]
+      click_button 'Sign in'
       expect(page.current_path).to eq(current_user_locations_path)
     end
 

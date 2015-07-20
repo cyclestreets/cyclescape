@@ -7,7 +7,7 @@ FactoryGirl.define do
 
     after(:build) do |o|
       o.thread = o.message.thread
-      o.message.update_attributes(component: o)
+      o.message.update(component: o)
     end
 
     factory :photo_message_with_description do

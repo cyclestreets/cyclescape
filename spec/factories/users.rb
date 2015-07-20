@@ -1,37 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
-#  full_name              :string(255)      not null
-#  display_name           :string(255)
-#  role                   :string(255)      not null
-#  encrypted_password     :string(128)      default("")
-#  confirmation_token     :string(255)
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  disabled_at            :datetime
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  invitation_token       :string(60)
-#  invitation_sent_at     :datetime
-#  invitation_accepted_at :datetime
-#  remembered_group_id    :integer
-#  invitation_limit       :integer
-#  invited_by_id          :integer
-#  invited_by_type        :string(255)
-#  deleted_at             :datetime
-#
-# Indexes
-#
-#  index_users_on_email             (email)
-#  index_users_on_invitation_token  (invitation_token)
-#
-
 FactoryGirl.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }

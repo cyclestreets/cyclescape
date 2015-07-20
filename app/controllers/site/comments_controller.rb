@@ -1,6 +1,6 @@
 class Site::CommentsController < ApplicationController
   def index
-    @site_comments = SiteComment.order('created_at desc').page(params[:page])
+    @site_comments = SiteComment.order('created_at desc').page params[:page]
   end
 
   def new
@@ -8,7 +8,7 @@ class Site::CommentsController < ApplicationController
   end
 
   def create
-    @site_comment = SiteComment.new(params[:site_comment])
+    @site_comment = SiteComment.new permitted_params
 
     @site_comment.user = current_user if current_user
 
@@ -20,7 +20,7 @@ class Site::CommentsController < ApplicationController
   end
 
   def destroy
-    @site_comment = SiteComment.find(params[:id])
+    @site_comment = SiteComment.find params[:id]
 
     if @site_comment.destroy
       set_flash_message(:success)
@@ -28,5 +28,11 @@ class Site::CommentsController < ApplicationController
       set_flash_message(:failure)
     end
     redirect_to site_comments_path
+  end
+
+  protected
+
+  def permitted_params
+    params.require(:site_comment).permit :name, :email, :body, :context_url, :context_data
   end
 end

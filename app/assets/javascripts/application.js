@@ -11,6 +11,7 @@
 //= require jquery.selectboxes
 //= require jquery.tools.min
 //= require jquery.ui.autocomplete
+//= require turbolinks
 //= require autocomplete-rails
 //= require knockout
 //= require superbly-tagfield.min

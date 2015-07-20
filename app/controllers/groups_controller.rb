@@ -2,26 +2,26 @@ class GroupsController < ApplicationController
   def index
     groups = Group.paginate(page: params[:page])
 
-    @groups = GroupDecorator.decorate(groups)
+    @groups = GroupDecorator.decorate_collection groups
     @start_location = index_start_location
   end
 
   def show
     if params[:id]
-      @group = Group.find(params[:id])
+      @group = Group.find params[:id]
     elsif current_group
       @group = current_group
     end
 
     if @group
-      @group = GroupDecorator.decorate(@group)
+      @group = GroupDecorator.decorate @group
       if @group.has_member?(current_user)
         recent_threads = ThreadList.recent_from_groups(@group, 10).includes(:issue, :group)
       else
         recent_threads = ThreadList.recent_public_from_groups(@group, 10).includes(:issue, :group)
       end
-      @recent_threads = ThreadListDecorator.decorate(recent_threads)
-      @recent_issues = IssueDecorator.decorate(@group.recent_issues.limit(10).includes(:created_by))
+      @recent_threads = ThreadListDecorator.decorate_collection recent_threads
+      @recent_issues = IssueDecorator.decorate_collection @group.recent_issues.limit(10).includes(:created_by)
     else
       redirect_to root_url(subdomain: 'www')
     end
@@ -57,5 +57,7 @@ class GroupsController < ApplicationController
                       size_ratio: group.profile.size_ratio(geom),
                       url: root_url(subdomain: group.short_name),
                       description: view_context.auto_link(group.trunctated_description))
+
   end
+
 end
