@@ -47,6 +47,8 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-ui-rails', '~> 4.2.0' # pin pending upgrade
 gem 'turbolinks'
 gem 'rails-observers'
+gem 'rails-i18n', '~> 4.0.0'
+gem 'will-paginate-i18n'
 
 group :development do
   gem 'letter_opener'

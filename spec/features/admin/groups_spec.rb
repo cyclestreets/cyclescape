@@ -20,7 +20,7 @@ describe 'Groups admin' do
 
   context 'new' do
     before do
-      click_link I18n.t('.admin.groups.index.new_group')
+      click_link I18n.t('admin.groups.index.new_group')
     end
 
     it 'should let you create a new group' do

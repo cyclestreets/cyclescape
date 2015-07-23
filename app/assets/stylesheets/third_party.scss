@@ -94,3 +94,6 @@
     background: $pane1;
   }
 }
+
+// Patches up jQuery-UI for now
+#overlay { width: inherit !important; }

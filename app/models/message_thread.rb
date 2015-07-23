@@ -56,11 +56,11 @@ class MessageThread < ActiveRecord::Base
   end
 
   def self.non_committee_privacies_map
-    (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+    (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
   end
 
   def self.privacies_map
-    ALLOWED_PRIVACY.map { |n| [I18n.t(".thread_privacy_options.#{n.to_s}"), n] }
+    ALLOWED_PRIVACY.map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
   end
 
   def self.with_messages_from(user)
