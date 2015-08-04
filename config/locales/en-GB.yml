@@ -524,6 +524,8 @@
         one: "vote"
         other: "votes"
       location: "Location"
+    map:
+      show_collisions: Show Collisions
     update:
       success: "Issue updated"
     vote_clear:
