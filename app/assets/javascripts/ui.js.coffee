@@ -1,23 +1,9 @@
 jQuery ->
   # Tabs
-  $("ul.tabs").tabs("> div.panes > div")
-  $("ul.tabs.with-history").tabs("> div.panes > div", { history: true })
-
-  # Scrollables
-  $("div.scrollable.autoheight")
-    .bind "update_height", (e, index) ->
-        # Update the height of the container to match the contents
-        scroller = $(this).data("scrollable")
-        index = scroller.getIndex() unless index
-        current_panel = $(scroller.getItems()[index])
-        wrapper = scroller.getRoot()
-        wrapper.animate({height: current_panel.outerHeight()}, 200)
-    .scrollable
-      onBeforeSeek: (e, index) ->
-        this.getRoot().trigger "update_height", [index]
+  $("ul.tabs").tabs()
 
   # Crude way to make large blocks .clickable by definiting a.primary-link in them
-  $(".clickable").live "click", (e) ->
+  $(".clickable").click ->
     window.location.href = $(this).find("a.primary-link").attr("href")
 
   # When .collapsible item is hovered in/out the .collapse elements inside
@@ -30,8 +16,8 @@ jQuery ->
     .find(".collapse").hide()
 
   # Apply date selector to all date inputs
-  $(":input.date").dateinput
-    format: "dddd, dd mmmm yyyy"
+  $(":input.date").datepicker
+    dateFormat: "dddd, dd mmmm yyyy"
 
   # Automatic setting of values and visibility from select drop-downs
   AutoSet = {

@@ -9,8 +9,9 @@
 //= require jquery.autosize
 //= require jquery.cookie
 //= require jquery.selectboxes
-//= require jquery.tools.min
-//= require jquery.ui.autocomplete
+//= require jquery-ui/autocomplete
+//= require jquery-ui/tabs
+//= require jquery-ui/datepicker
 //= require turbolinks
 //= require autocomplete-rails
 //= require knockout
