@@ -39,9 +39,18 @@
         short_name: "Subdoména"
         website: "Webová stránka"
         default_thread_privacy: "Výchozí viditelnost diskuzí"
+      group_request:
+        name: Jméno
+        short_name: Webová adresa
+        website: Webové stránky
+        email: Emailová adresa
+        message: Zpráva
+        default_thread_privacy: Výchozí viditelnost
+        submit: "Požádat o vytvoření místnní skupiny"
       group_profile:
         description: "Popis"
         joining_instructions: "Instrukce pro nové členy"
+        default_thread_privacy: Počáteční oprávnění pro diskuzní vlákna
       group_membership:
         role: "Typ členství"
       group_pref:
@@ -123,14 +132,21 @@
           <<: *hints_user_new
       group:
         short_name: "Musí být malé alfanumerické znaky; a-z, 0-9"
+      group_request:
+        short_name: Malá písmena nebo číslice
+        message: Krátký popis účelu skupiny (slouží jako ochrana proti spamu)
       group_membership:
-        role: "Vyberte, jestli jde o normální členy nebo správce místní skupiny."
+        email: "Prosím zadejte jejich email. Pokud se shoduje s emailem existujícího uživatele Cyklisté sobě, bude přímo přidán do skupiny. Jinak mu bude odeslána pozvánka."
         full_name: "Prosím zadejte jejich jméno, až přijmou pozvánku, tak si ho budou si ho moci změnit."
+        role: "Vyberte, jestli jsou normální členové, nebo správci skupiny."
+      group_membership_request:
+        message: "Volitelně můžete poslat správcům skupiny jakékoliv další informace, které uznáte za vhodné, například počet jejích členů."
       group_pref:
         notify_membership_requests: "Upozornění bude zasláno pokaždé, když se nějaký uživatel připojí k této místní skupině"
         membership_secretary: "Volitelně vyberte správce členství ve skupině, který bude emailem dostávat upozornění na nové žádosti o členství. Pokud zanecháte pole prázdné, tak budou upozornění přicházet na email místní skupiny."
       group_profile:
         joining_instructions: "Instrukce, které jsou ukázány lidem, kteří se chtějí zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné."
+        picture: "Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů"
       issue:
         new: &hints_issue_new
           description: "Prosím popište podrobnosti vašeho problému a jaký to má dopad na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně přístupné."
@@ -159,6 +175,10 @@
           create: "Požádat o členství ve skupině"
       group_membership:
         create: "Pozvat člena"
+      group_request:
+        update: Odmítnout požadavek na zřízení skupiny
+      group_membership_request:
+        create: "Požadavek na zřízení skupiny"
       issue:
         create: "Odeslat podnět"
         update: "Uložit podnět"

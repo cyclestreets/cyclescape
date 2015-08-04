@@ -1,0 +1,5 @@
+%p
+  Dobrý den, #{@resource.email}!
+%p Váš účet byl zablokován z důvodu příliš mnoha neúspěšných pokusů o přihlášení.
+%p Pro odblokování účtu klikněte na níže uvedený odkaz.
+%p= link_to 'Odblokovat účet', unlock_url(@resource, :unlock_token => @resource.unlock_token)

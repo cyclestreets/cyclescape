@@ -1,0 +1,21 @@
+Bylo založeno nové diskuzní vlákno "<%= raw @thread.issue.title %>"
+poblíž vaší <%= @user_location.category.name %> oblasti.
+
+<%= raw @thread.title %>
+Vlákno založil <%= raw @message.created_by.name %>
+
+<%= raw @message.body %>
+
+Nejste přihlášení k odběru tohoto vlákna, takže o něm nedostanete žádné další zprávy.
+Přečíst si celé vlákno, případně se zapsat k odběru můžete na:
+<%= thread_url(@thread) %>
+
+--------
+Tuto zprávu jste dostali, protože máte ve vašem profilu nastaveno odesílání
+záležitostí týkajících se vaší oblasti.
+
+Pro odhlášení těchto zpráv použijte následující odkaz:
+<%= edit_user_prefs_url(@user) %>
+
+Vaši oblast můžete přidat nebo odebrat na:
+<%= user_locations_url %>
