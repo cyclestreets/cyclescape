@@ -66,28 +66,47 @@ jQuery ->
     $(AutoSet.selector).each ->
       AutoSet.trigger_all($(this))
 
+
   # Modal overlay links
-  $("a[rel='#overlay']")
-    .overlay
-      onBeforeLoad: ->
-        # Load the page given in the link HREF
-        wrapper = this.getOverlay().find(".inner")
-        $.ajax this.getTrigger().attr("href"),
-          success: (data, status, xhr) =>
-            wrapper.html(data)
-            # Hide loading spinner
-            wrapper.siblings(".loading").hide()
-            # Have to bind close link manually as it doesn't
-            # seem to work with AJAX loading
-            wrapper.on "click", ".cancel a, .close", =>
-              this.close()
-              false
-          error: (xhr, status, error) =>
-            # Basic error display
-            wrapper.html(xhr.responseText)
-      mask:
-        color: "black"
-        opacity: 0.6
+  $("a[rel='#overlay']").one 'click', (e) ->
+    e.preventDefault()
+    dialog = $('#overlay').dialog(
+      autoOpen: false
+      modal: true
+      width: 900
+      height: 700
+    ).dialog('option', 'title', 'Loading...').dialog 'open'
+    dialog.parent().css('z-index', '9999')
+    dialog.load(@href, ->
+      dialog.dialog('option', 'title', dialog.find('h1').text())
+      dialog.find('h1').remove()
+      dialog.on "click", ".cancel a, .close", (e) ->
+        e.preventDefault()
+        dialog.dialog('close')
+      return
+    )
+    return
+  return
+
+  # $("a[rel='#overlay']")
+  #   .dialog({modal: true}).
+  #     wrapper = this.getOverlay().find(".inner")
+  #     $.ajax this.getTrigger().attr("href"),
+  #       success: (data, status, xhr) =>
+  #         wrapper.html(data)
+  #         # Hide loading spinner
+  #         wrapper.siblings(".loading").hide()
+  #         # Have to bind close link manually as it doesn't
+  #         # seem to work with AJAX loading
+  #         wrapper.on "click", ".cancel a, .close", =>
+  #           @close()
+  #           false
+  #       error: (xhr, status, error) =>
+  #         # Basic error display
+  #         wrapper.html(xhr.responseText)
+  #     mask:
+  #       color: "black"
+  #       opacity: 0.6
 
   $("#overlay form[data-remote]")
     .live "ajax:success", (e, data, status, xhr) ->

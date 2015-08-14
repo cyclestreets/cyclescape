@@ -9,7 +9,7 @@ $ ->
     $("div.tag-form").show()
     return
 
-  $("form.edit-tags").live "ajax:success", (e, data, status, xhr) ->
+  $("form.edit-tags").on "ajax:success", (e, data, status, xhr) ->
     $("div.tags-panel").replaceWith(data.tagspanel)
     $("div.tags").show()
     $("div.tag-form").hide()
