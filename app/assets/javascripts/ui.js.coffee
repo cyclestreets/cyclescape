@@ -88,7 +88,7 @@ jQuery ->
         wrapper = this.getOverlay().find(".inner")
         $.ajax this.getTrigger().attr("href"),
           success: (data, status, xhr) =>
-            wrapper.html(data)
+            wrapper.append($('<div/>').append(data).find('#page'))
             # Hide loading spinner
             wrapper.siblings(".loading").hide()
             # Have to bind close link manually as it doesn't
