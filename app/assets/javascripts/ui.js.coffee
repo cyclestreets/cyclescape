@@ -68,25 +68,25 @@ jQuery ->
 
 
   # Modal overlay links
-  $("a[rel='#overlay']").one 'click', (e) ->
+  $("a[rel='#overlay']").click (e) ->
     e.preventDefault()
     dialog = $('#overlay').dialog(
       autoOpen: false
       modal: true
-      width: 900
+      width: 802
       height: 700
     ).dialog('option', 'title', 'Loading...').dialog 'open'
     dialog.parent().css('z-index', '9999')
-    dialog.load(@href, ->
+
+    dialog.load("#{@href} #page>.wrapper", ->
       dialog.dialog('option', 'title', dialog.find('h1').text())
       dialog.find('h1').remove()
       dialog.on "click", ".cancel a, .close", (e) ->
         e.preventDefault()
         dialog.dialog('close')
       return
-    )
+    ) unless dialog.find('#page').length
     return
-  return
 
   # $("a[rel='#overlay']")
   #   .dialog({modal: true}).
