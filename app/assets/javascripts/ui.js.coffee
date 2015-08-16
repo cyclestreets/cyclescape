@@ -1,6 +1,6 @@
 jQuery ->
   # Tabs
-  $("ul.tabs").tabs()
+  $(".has-ui-tabs").tabs()
 
   # Crude way to make large blocks .clickable by definiting a.primary-link in them
   $(".clickable").click ->
@@ -62,7 +62,7 @@ jQuery ->
   $(document).on "change", AutoSet.selector, ->
     AutoSet.trigger_all($(this))
 
-  $(document).on "ajaxSuccess", (e) ->
+  $(document).ajaxSuccess (e) ->
     $(AutoSet.selector).each ->
       AutoSet.trigger_all($(this))
 
@@ -109,15 +109,10 @@ jQuery ->
   #       opacity: 0.6
 
   $("#overlay form[data-remote]")
-    .live "ajax:success", (e, data, status, xhr) ->
+    .ajaxSuccess (e, data, status, xhr) ->
       $(this).parents(".inner:first").html(data)
-    .live "ajax:error", (e, xhr, status, error) ->
+    .ajaxError (e, xhr, status, error) ->
       $(this).parents(".inner:first").html(xhr.responseText)
-
-  $("a.dialog").overlay
-    mask:
-      color: "#000000"
-      opacity: 0.6
 
   # Tools menu
   $(document)
