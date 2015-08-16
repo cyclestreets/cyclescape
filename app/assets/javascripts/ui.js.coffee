@@ -88,26 +88,6 @@ jQuery ->
     ) unless dialog.find('#page').length
     return
 
-  # $("a[rel='#overlay']")
-  #   .dialog({modal: true}).
-  #     wrapper = this.getOverlay().find(".inner")
-  #     $.ajax this.getTrigger().attr("href"),
-  #       success: (data, status, xhr) =>
-  #         wrapper.html(data)
-  #         # Hide loading spinner
-  #         wrapper.siblings(".loading").hide()
-  #         # Have to bind close link manually as it doesn't
-  #         # seem to work with AJAX loading
-  #         wrapper.on "click", ".cancel a, .close", =>
-  #           @close()
-  #           false
-  #       error: (xhr, status, error) =>
-  #         # Basic error display
-  #         wrapper.html(xhr.responseText)
-  #     mask:
-  #       color: "black"
-  #       opacity: 0.6
-
   $("#overlay form[data-remote]")
     .ajaxSuccess (e, data, status, xhr) ->
       $(this).parents(".inner:first").html(data)

@@ -1,0 +1,4 @@
+%p
+  #{@resource.email}, vítejte!
+%p Váš účet můžete potvrdit pomocí následujícího odkazu:
+%p= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token)
