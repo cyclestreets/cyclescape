@@ -5,12 +5,15 @@
 // the compiled file.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery.autosize
 //= require jquery.cookie
 //= require jquery.selectboxes
-//= require jquery.tools.min
-//= require jquery.ui.autocomplete
+//= require jquery-ui/autocomplete
+//= require jquery-ui/tabs
+//= require jquery-ui/datepicker
+//= require jquery-ui/dialog
 //= require turbolinks
 //= require autocomplete-rails
 //= require knockout

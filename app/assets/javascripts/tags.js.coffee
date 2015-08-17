@@ -1,18 +1,20 @@
 $ ->
-  $("div.tag-form").hide()
-
-  $("div.tag-form li.cancel a").live "click", ->
+  $("div.tag-form li.cancel a").click ->
     $("div.tags").show()
     $("div.tag-form").hide()
-    false
+    return
 
-  $("a[rel='edit-tags']").live "click", ->
+  $("a[rel='edit-tags']").click ->
     $("div.tags").hide()
     $("div.tag-form").show()
-    false
+    return
 
-  $("form.edit-tags").live "ajax:success", (e, data, status, xhr) ->
+  $("form.edit-tags").on "ajax:success", (e, data, status, xhr) ->
     $("div.tags-panel").replaceWith(data.tagspanel)
     $("div.tags").show()
     $("div.tag-form").hide()
     $("section.library.box").replaceWith(data.librarypanel) if data.librarypanel
+    return
+
+  $("div.tag-form").hide()
+  return
