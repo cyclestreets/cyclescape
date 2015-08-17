@@ -1,4 +1,11 @@
 Cyclescape::Application.routes.draw do
+  namespace :api do
+    defaults format: 'json' do
+      namespace :v1 do
+        resources :issues, only: :index
+      end
+    end
+  end
 
   # Pretty evil but beats copy pasting
   def issues_route(opts = {})
