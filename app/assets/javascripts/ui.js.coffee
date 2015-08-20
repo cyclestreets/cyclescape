@@ -17,7 +17,7 @@ jQuery ->
 
   # Apply date selector to all date inputs
   $(":input.date").datepicker
-    dateFormat: "dddd, dd mmmm yyyy"
+    dateFormat: "DD, dd MM yy"
 
   # Automatic setting of values and visibility from select drop-downs
   AutoSet = {
@@ -72,12 +72,17 @@ jQuery ->
     e.preventDefault()
     dialog = $('#overlay').dialog(
       autoOpen: false
+      resizable: false
+      draggable: false
       modal: true
       width: 802
       height: 700
+      dialogClass: 'no-close'
+      beforeClose: ->
+        $("body").css({ overflow: 'inherit' })
     ).dialog('option', 'title', 'Loading...').dialog 'open'
     dialog.parent().css('z-index', '9999')
-
+    $("body").css({ overflow: 'hidden' })
     dialog.load("#{@href} #page>.wrapper", ->
       dialog.dialog('option', 'title', dialog.find('h1').text())
       dialog.find('h1').remove()
