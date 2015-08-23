@@ -9,4 +9,5 @@
  *= require "formtastic"
  *= require "formtastic_changes"
  *= require "screen"
+ *= require "slick"
 */
