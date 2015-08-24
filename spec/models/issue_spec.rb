@@ -384,9 +384,9 @@ describe Issue do
         with_other_tags = create :issue, tags: [tag1, tag3]
         create :issue
 
-        expect(described_class.has_tags(['tag1'])).to match_array([with_tags, with_other_tags])
-        expect(described_class.has_tags(['tag1', 'tag2'])).to match_array([with_tags])
-        expect(described_class.has_tags([])).to match_array([])
+        expect(described_class.where_tag_names_in(['tag1'])).to match_array([with_tags, with_other_tags])
+        expect(described_class.where_tag_names_in(['tag1', 'tag2'])).to match_array([with_tags])
+        expect(described_class.where_tag_names_in([])).to match_array([])
       end
     end
   end
