@@ -6,6 +6,11 @@
   anon: "Anon"
   sign_in: "sign in"  # Used for links
   confirm: "Are you sure?"
+  days_away:
+    zero: "Today!"
+    one: "Tomorrow!"
+    other: "%{count} days away"
+  deadline_date: "Deadline/date"
   admin:
     groups:
       index:
@@ -136,10 +141,6 @@
       add_some_locations: "add some locations"
       areas_you_are_watching: "areas you are watching"
       converted_to_issue: "Converted to Issue:"
-      days_away:
-        zero: "Today!"
-        one: "Tomorrow!"
-        other: "%{count} days away"
       deadlines: "Deadlines and dates"
       deadline_thread_updated: "thread updated %{time_ago} ago"
       issues_lower: "issues"
@@ -746,16 +747,10 @@
   message:
     deadlines:
       new:
-        deadline_date: "Deadline/date"
         submit: "Add deadline/date"
       create:
         failure: "Deadline/date could not be created"
         success: "Deadline/date created"
-      show:
-        days_away:
-          zero: "Today!"
-          one: "Tomorrow!"
-          other: "%{count} days away!"
     documents:
       create:
         failure: "Could not add attachment"

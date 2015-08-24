@@ -96,12 +96,10 @@
                       %ul.content-icon-list
                         - thread.upcoming_deadline_messages.each do |message|
                           %li.cal
-                            %h4= l message.component.deadline.to_date, format: :long
-                            %p= message.component.title
                             - deadline = message.component.deadline.to_date
-                            - diff = deadline - DateTime.now.to_date
-                            - if diff >= 0 && diff < 30
-                              %p.warning= t ".days_away", count: diff.to_i
+                            %h4= l deadline, format: :long
+                            %p= message.component.title
+                            = render partial: "shared/deadline", locals: {deadline: deadline}
                     %td.meta
                       = time_tag_with_title(thread.latest_activity_date) do
                         - t ".deadline_thread_updated", time_ago: time_ago_in_words(thread.latest_activity_date)

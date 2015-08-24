@@ -5,6 +5,10 @@
   tags: "Label"
   anon: "Anonym"
   sign_in: "Anmelden"
+  days_away:
+    zero: "Heute!"
+    one: "Übermorgen!"
+    other: "%{count} Tage her"
   admin:
     groups:
       index:
@@ -58,10 +62,6 @@
       add_another_location: "Neuen Ort hinzufügen"
       add_some_locations: "Einige Orte hinzufügen"
       areas_you_are_watching: "Beobachtete Gebiete"
-      days_away:
-        zero: "Heute!"
-        one: "Übermorgen!"
-        other: "%{count} Tage her"
       deadlines: "Fälligkeiten und Termine"
       deadline_thread_updated: "Diskussion aktualisiert %{at}"
       involved_threads: "Beteiligte Diskussionen"

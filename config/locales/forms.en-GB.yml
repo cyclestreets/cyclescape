@@ -95,6 +95,7 @@
       issue:
         new: &hints_issue_new
           description: "Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue."
+          deadline: "(optional)"
           photo: "(optional)"
           tags_string: "e.g. cycleparking obstruction roadworks path"
           title: "Please be brief and specific."

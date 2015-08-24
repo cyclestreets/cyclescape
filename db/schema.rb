@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608082449) do
+ActiveRecord::Schema.define(version: 20150824101733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20150608082449) do
     t.datetime "deleted_at"
     t.spatial  "location",      limit: {:srid=>4326, :type=>"geometry"}
     t.string   "photo_uid"
+    t.datetime "deadline"
   end
 
   add_index "issues", ["created_by_id"], :name => "index_issues_on_created_by_id"
@@ -227,7 +228,7 @@ ActiveRecord::Schema.define(version: 20150608082449) do
     t.integer  "group_id"
     t.string   "title",         null: false
     t.string   "privacy",       null: false
-    t.string   "state",         null: false
+    t.string   "state"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.datetime "deleted_at"

@@ -35,6 +35,12 @@
       = @tag_panel.render
     %section.description
       = @issue.description
+    - if @issue.deadline
+      %section.deadline
+        - deadline = @issue.deadline.to_date
+        = deadline
+        = render partial: "shared/deadline", locals: {deadline: deadline}
+
   %section.map
     %h2= t ".location"
     = @issue.map
