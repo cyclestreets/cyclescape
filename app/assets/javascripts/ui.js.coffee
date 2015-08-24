@@ -1,6 +1,6 @@
 jQuery ->
   # Tabs
-  $(".has-ui-tabs").tabs()
+  $(".tabs").parent().tabs()
 
   # Crude way to make large blocks .clickable by definiting a.primary-link in them
   $(".clickable").click ->
