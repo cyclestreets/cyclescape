@@ -266,7 +266,6 @@
     margin-top: -8px;
 }
 
-.ui-datepicker td span,
-.ui-datepicker td a {
-	text-align: center;
+.ui-datepicker table.ui-datepicker-calendar td span, .ui-datepicker table.ui-datepicker-calendar td a{
+  text-align: center;
 }
