@@ -21,8 +21,6 @@ class LibraryMessageView
       self.select(ko.dataFor(this))
 
     this.fetch_initial_items()
-    @initial_items.subscribe (new_val) =>
-      @panel.find(".scrollable").trigger("update_height")
 
   initial_items: => @initial_items
   search_results: => @results
@@ -32,7 +30,7 @@ class LibraryMessageView
     @results(data)
     $("#library-recent").hide()
     $("#library-results").show()
-    @form.trigger "update_height"
+    $('.scrollable').slick('setPosition')
 
   show_error: (xhr, status, error) =>
     console.log xhr, status, error
@@ -48,16 +46,24 @@ class LibraryMessageView
         @initial_items(data)
 
 jQuery ->
+  scroller = $('.scrollable')
+  scroller.slick(
+    dots: false
+    arrows: false
+    adaptiveHeight: true
+    draggable: false
+  )
+
   if $("#from-library").length > 0
     library_message_view = new LibraryMessageView($("#from-library"))
 
     # Select button
     $("#from-library").on "click", "a.select", (e) ->
-      scroller = $(this).parents(".scrollable:first").data("scrollable")
-      scroller.next()
+      scroller.slick('slickNext')
       false
 
-    # Tab click event to update the height
-    $("section.new-message > ul.tabs").on "onClick", ->
-      scroller = $(this).parents("section:first").find(".scrollable")
-      scroller.trigger "update_height"
+    $("#add-library-item > a.prev").click ->
+      scroller.slick('slickPrev')
+
+    $('a[href="#from-library"]').click ->
+      scroller.slick('setPosition')

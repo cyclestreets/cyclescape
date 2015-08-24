@@ -95,5 +95,10 @@
   }
 }
 
-// Patches up jQuery-UI for now
-#overlay { width: inherit !important; }
+.ui-dialog .wrapper {
+  width: 760px;
+}
+
+.no-close .ui-dialog-titlebar-close {
+  display: none;
+}

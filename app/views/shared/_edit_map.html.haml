@@ -25,30 +25,30 @@
   .map-tools-overlay
     %ul.tabs
       %li.area
-        %a
+        %a(href='#area')
           %span.area
           = t ".area"
       %li.route
-        %a
+        %a(href='#route')
           %span.route
           = t ".route"
       %li.point
-        %a
+        %a(href='#point')
           %span.point
           = t ".point"
 
     .panes
-      .pane.area
+      #area.pane.area
         %h3= t ".draw_area"
         %p= t ".draw_area_1"
         %p= t ".draw_area_2"
         %p= t ".draw_area_3"
-      .pane.route
+      #route.pane.route
         %h3= t ".draw_route"
         %p= t ".draw_route_1"
         %p= t ".draw_route_2"
         %p= t ".draw_route_3"
-      .pane.point
+      #point.pane.point
         %h3= t ".draw_point"
         %p= t ".draw_point_1"
         %p= t ".draw_point_2"

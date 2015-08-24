@@ -52,8 +52,8 @@
         = render "message/deadlines/new"
         = render "message/documents/new"
     #from-library.pane
-      .scrollable.autoheight
-        .panels
+      .scrollable
+        %div
           .listing
             = form_tag search_library_path(format: :json), {method: :get, class: "library-search filters", target: "#library-results"} do
               .search-box
@@ -72,6 +72,7 @@
                   = t ".search_results"
                 %ul.content-icon-list(data-bind="template: {name: 'library-item-template', foreach: search_results() }")
 
+        %div
           #add-library-item
             %h2
               = t ".add_item_to_thread"
