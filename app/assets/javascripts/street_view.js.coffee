@@ -1,4 +1,4 @@
-$(document).ready ->
+$(window).load ->
   issue = new (google.maps.LatLng)(svLongNew, svLatNew)
   svs = new google.maps.StreetViewService()
   panorama = null

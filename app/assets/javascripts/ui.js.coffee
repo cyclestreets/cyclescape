@@ -17,7 +17,8 @@ jQuery ->
 
   # Apply date selector to all date inputs
   $(":input.date").datepicker(dateFormat: "DD, dd MM yy").each( ->
-    $(this).datepicker('setDate', new Date($(this).attr('value').split(' ')[0]))
+    if $(this).attr('value')
+      $(this).datepicker('setDate', new Date($(this).attr('value').split(' ')[0]))
   )
 
   # Automatic setting of values and visibility from select drop-downs
