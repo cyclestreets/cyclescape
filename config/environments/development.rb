@@ -1,4 +1,4 @@
-Cyclescape::Application.configure do
+Rails.application.configure do
   config.eager_load = false
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -35,6 +35,8 @@ Cyclescape::Application.configure do
     g.stylesheets false
   end
 
+  config.action_view.raise_on_missing_translations = true
+  config.assets.raise_runtime_errors = true
   # Disable analytics
   config.analytics = {}
 end

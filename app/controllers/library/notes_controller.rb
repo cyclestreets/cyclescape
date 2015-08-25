@@ -23,7 +23,7 @@ class Library::NotesController < ApplicationController
 
   def show
     @tag_panel = TagPanelDecorator.new(@note.item, form_url: library_tag_path(@note.item), auth_context: :library_tags)
-    @threads = @note.item.threads.public.order_by_latest_message.limit 10
+    @threads = @note.item.threads.is_public.order_by_latest_message.limit 10
     @item = Library::ItemDecorator.decorate @note.item
   end
 

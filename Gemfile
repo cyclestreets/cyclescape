@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -15,16 +15,16 @@ gem 'map_layers'
 gem 'rails3-jquery-autocomplete'
 gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
-gem 'rails_autolink', '= 1.1.0' # pin due to ruby 1.9.3 requirement in 1.1.5 and later. Last known good version
+gem 'rails_autolink'
 gem 'tweet-button'
 gem 'jquery-turbolinks'
 
 # Back-end gems
-gem 'devise', '~> 3.1.0'
+gem 'devise', '~> 3.4.0'
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
-gem 'state_machine'
+gem 'aasm'
 gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly', '~> 0.9.15' # pin to delay the upgrade to 1.x
 gem 'redis-rails'
@@ -34,16 +34,16 @@ gem 'thumbs_up', '~> 0.4.6'
 gem 'exceptional'
 gem 'foreman'
 gem 'whenever'
-gem 'draper', '~> 1.0'
+gem 'draper'
 gem 'email_reply_parser'
 gem 'memoist'
 gem 'excon'
 gem 'paranoia', '~> 2.0'
 
-gem 'sass-rails'
+gem 'sass-rails', '~> 4.0.3'
 gem 'sass'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'compass-rails', '~> 2.0.2'
+gem 'compass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'turbolinks'
@@ -56,9 +56,6 @@ group :development do
   gem 'quiet_assets'
   gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
-  gem 'rubocop'
-  gem 'haml-lint'
-
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded
   gem 'ruby_parser'

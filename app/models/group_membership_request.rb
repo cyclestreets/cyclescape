@@ -18,6 +18,7 @@
 #
 
 class GroupMembershipRequest < ActiveRecord::Base
+  include AASM
 
   belongs_to :group
   belongs_to :user
@@ -26,27 +27,23 @@ class GroupMembershipRequest < ActiveRecord::Base
   validates :user, presence: true
   validates :group, presence: true
 
-  state_machine :status, initial: :pending do
-    before_transition any => :confirmed do |request|
-      request.create_membership
-    end
+  aasm column: 'status' do
 
-    state :pending, :cancelled
-
-    state :confirmed, :rejected do
-      validates :actioned_by, presence: true
-    end
+    state :pending, initial: true
+    state :confirmed, before_enter: :create_membership
+    state :rejected
+    state :cancelled
 
     event :confirm do
-      transition pending: :confirmed
+      transitions from: :pending, to: :confirmed, guard: :actioned_by
     end
 
     event :reject do
-      transition pending: :rejected
+      transitions from: :pending, to: :rejected, guard: :actioned_by
     end
 
     event :cancel do
-      transition pending: :cancelled
+      transitions from: :pending, to: :cancelled
     end
   end
 

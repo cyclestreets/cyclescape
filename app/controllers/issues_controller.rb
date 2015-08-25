@@ -68,15 +68,13 @@ class IssuesController < ApplicationController
   end
 
   def all_geometries
-    if params[:bbox]
-      bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
-      issues = Issue.intersects_not_covered(bbox.to_geometry).order('created_at DESC').limit(50)
-    else
-      bbox = nil
-      issues = Issue.order('created_at DESC').limit(50)
-    end
-    factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(issues.sort_by! { |o| o.size }.reverse.map { | issue | issue_feature(IssueDecorator.decorate(issue), bbox) })
+    bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
+    issues = Issue.order('created_at DESC').limit(50)
+    issues = issues.intersects_not_covered(bbox.to_geometry) if bbox
+
+    # TODO refactor this into decorater
+    decorated_issues = issues.order('ST_Area(location) DESC').map { | issue | issue_feature(IssueDecorator.decorate(issue), bbox) }
+    collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(decorated_issues)
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection) }
     end

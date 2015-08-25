@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Cyclescape::Application.load_tasks
+Rails.application.load_tasks
