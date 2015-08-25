@@ -4,7 +4,7 @@ describe UserLocationObserver do
   subject { UserLocationObserver.instance }
 
   context 'basic checks' do
-    let(:ul) { FactoryGirl.build(:user_location) }
+    let(:ul) { build(:user_location) }
 
     it 'should notice when UserLocations are saved' do
       expect(subject).to receive(:after_save)
@@ -16,11 +16,11 @@ describe UserLocationObserver do
   end
 
   context 'adding a location' do
-    let(:issue) { FactoryGirl.create(:issue) }
-    let!(:thread) { FactoryGirl.create(:issue_message_thread, issue: issue) }
-    let(:user_location) { FactoryGirl.build(:user_location, location: issue.location) }
+    let(:issue) { create(:issue) }
+    let!(:thread) { create(:issue_message_thread, issue: issue) }
+    let(:user_location) { build(:user_location, location: issue.location) }
     let(:user) { user_location.user }
-    let(:group) { FactoryGirl.create(:group) }
+    let(:group) { create(:group) }
 
     context 'with pref' do
       before do
@@ -66,9 +66,9 @@ describe UserLocationObserver do
   end
 
   context 'destroying a location' do
-    let(:issue) { FactoryGirl.create(:issue) }
-    let!(:thread) { FactoryGirl.create(:issue_message_thread, issue: issue) }
-    let(:user_location) { FactoryGirl.create(:user_location, location: issue.location) }
+    let(:issue) { create(:issue) }
+    let!(:thread) { create(:issue_message_thread, issue: issue) }
+    let(:user_location) { create(:user_location, location: issue.location) }
     let(:user) { user_location.user }
 
     before do
@@ -86,7 +86,7 @@ describe UserLocationObserver do
     end
 
     context 'with another overlapping location' do
-      let!(:user_location2) { FactoryGirl.create(:user_location, user: user, location: issue.location) }
+      let!(:user_location2) { create(:user_location, user: user, location: issue.location) }
 
       it 'should not remove subscription' do
         expect(thread.subscribers).to include(user)
@@ -99,7 +99,7 @@ describe UserLocationObserver do
     end
 
     context 'with a group thread and involve_my_groups set to subscribe' do
-      let!(:group_membership) { FactoryGirl.create(:group_membership, user: user) }
+      let!(:group_membership) { create(:group_membership, user: user) }
 
       before do
         thread.group = group_membership.group

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe UserThreadPriority do
-  let(:subect) { FactoryGirl.create(:user_thread_priority) }
+  let(:subect) { create(:user_thread_priority) }
 
   describe 'associations' do
     it { is_expected.to belong_to(:user) }

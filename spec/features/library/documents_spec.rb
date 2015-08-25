@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Library documents' do
-  let(:document) { FactoryGirl.create(:library_document) }
+  let(:document) { create(:library_document) }
 
   context 'as a public user' do
     before do

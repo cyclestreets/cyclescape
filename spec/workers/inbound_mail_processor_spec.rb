@@ -13,7 +13,7 @@ describe InboundMailProcessor do
   end
 
   context 'thread reply mail' do
-    let(:thread) { FactoryGirl.create(:message_thread) }
+    let(:thread) { create(:message_thread) }
     let(:email_recipient) { "thread-#{thread.public_token}@cyclescape.org" }
     before do
       subject.perform(inbound_mail.id)
@@ -21,7 +21,7 @@ describe InboundMailProcessor do
     end
 
     context 'plain text email' do
-      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, to: email_recipient) }
+      let(:inbound_mail) { create(:inbound_mail, to: email_recipient) }
 
       it 'should create a new message on the thread' do
         expect(thread.messages.size).to eq(1)
@@ -52,7 +52,7 @@ describe InboundMailProcessor do
     end
 
     context 'multipart text-only email' do
-      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :multipart_text_only, to: email_recipient) }
+      let(:inbound_mail) { create(:inbound_mail, :multipart_text_only, to: email_recipient) }
 
       it 'should create a new message on the thread' do
         expect(thread.messages.size).to eq(1)
@@ -65,7 +65,7 @@ describe InboundMailProcessor do
     end
 
     context 'multipart email containing iso-8859-1 quoted-printable text' do
-      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :multipart_iso_8859_1, to: email_recipient) }
+      let(:inbound_mail) { create(:inbound_mail, :multipart_iso_8859_1, to: email_recipient) }
 
       it 'should create a new message on the thread' do
         expect(thread.messages.size).to eq(1)
@@ -78,7 +78,7 @@ describe InboundMailProcessor do
     end
 
     context 'multipart email with image attachment' do
-      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :with_attached_image, to: email_recipient) }
+      let(:inbound_mail) { create(:inbound_mail, :with_attached_image, to: email_recipient) }
 
       it 'should create two new messages on the thread' do
         expect(thread.messages.size).to eq(2)
@@ -106,7 +106,7 @@ describe InboundMailProcessor do
     end
 
     context 'multipart email with file attachment' do
-      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :with_attached_file, to: email_recipient) }
+      let(:inbound_mail) { create(:inbound_mail, :with_attached_file, to: email_recipient) }
 
       it 'should create two new messages on the thread' do
         expect(thread.messages.size).to eq(2)
@@ -127,7 +127,7 @@ describe InboundMailProcessor do
     end
 
     context 'with an encoded subject' do
-      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :encoded_subject, to: email_recipient) }
+      let(:inbound_mail) { create(:inbound_mail, :encoded_subject, to: email_recipient) }
 
       it 'should work without throwing an encoding error' do
         expect(thread.messages.size).to eq(1)
@@ -135,7 +135,7 @@ describe InboundMailProcessor do
     end
 
     context 'with a reply below a quote' do
-      let(:inbound_mail) { FactoryGirl.create(:inbound_mail, :reply_below_quote, to: email_recipient) }
+      let(:inbound_mail) { create(:inbound_mail, :reply_below_quote, to: email_recipient) }
 
       it "should preserve the blank line between quote and reply" do
         message_body = thread.messages[0].body

@@ -4,7 +4,7 @@ describe UserPrefObserver do
   subject { UserPrefObserver.instance }
 
   context 'basic checks' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
 
     it 'should notice when UserPrefs are saved' do
       user # triggers initial creation events which we want to ignore
@@ -17,10 +17,10 @@ describe UserPrefObserver do
   end
 
   context 'administrative discussions' do
-    let(:group_membership) { FactoryGirl.create(:group_membership) }
-    let(:group_thread) { FactoryGirl.create(:message_thread, group: group_membership.group) }
-    let(:group_issue_thread) { FactoryGirl.create(:issue_message_thread, group: group_membership.group) }
-    let(:group_private_thread) { FactoryGirl.create(:message_thread, group: group_membership.group, privacy: 'committee') }
+    let(:group_membership) { create(:group_membership) }
+    let(:group_thread) { create(:message_thread, group: group_membership.group) }
+    let(:group_issue_thread) { create(:issue_message_thread, group: group_membership.group) }
+    let(:group_private_thread) { create(:message_thread, group: group_membership.group, privacy: 'committee') }
     let(:user) { group_membership.user }
 
     context 'when enabling pref' do
@@ -101,10 +101,10 @@ describe UserPrefObserver do
   end
 
   context 'involve my group issue discussions' do
-    let(:group_membership) { FactoryGirl.create(:group_membership) }
-    let(:group_thread) { FactoryGirl.create(:message_thread, group: group_membership.group) }
-    let(:group_issue_thread) { FactoryGirl.create(:issue_message_thread, group: group_membership.group) }
-    let(:group_private_thread) { FactoryGirl.create(:issue_message_thread, group: group_membership.group, privacy: 'committee') }
+    let(:group_membership) { create(:group_membership) }
+    let(:group_thread) { create(:message_thread, group: group_membership.group) }
+    let(:group_issue_thread) { create(:issue_message_thread, group: group_membership.group) }
+    let(:group_private_thread) { create(:issue_message_thread, group: group_membership.group, privacy: 'committee') }
     let(:user) { group_membership.user }
 
     context 'when preference becomes subscribe' do
@@ -183,7 +183,7 @@ describe UserPrefObserver do
       end
 
       context 'when involve my locations is subscribe' do
-        let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: group_issue_thread.issue.location) }
+        let!(:user_location) { create(:user_location, user: user, location: group_issue_thread.issue.location) }
 
         before do
           user.prefs.update_column(:involve_my_locations, 'subscribe')
@@ -204,8 +204,8 @@ describe UserPrefObserver do
   end
 
   context 'involve my locations discussions' do
-    let(:issue_thread) { FactoryGirl.create(:issue_message_thread) }
-    let(:user_location) { FactoryGirl.create(:user_location, location: issue_thread.issue.location) }
+    let(:issue_thread) { create(:issue_message_thread) }
+    let(:user_location) { create(:user_location, location: issue_thread.issue.location) }
     let(:user) { user_location.user }
 
     context 'when pref becomes subscribe' do
@@ -252,7 +252,7 @@ describe UserPrefObserver do
       end
 
       context 'when involve by groups is subscribe' do
-        let(:group_membership) { FactoryGirl.create(:group_membership, user: user) }
+        let(:group_membership) { create(:group_membership, user: user) }
 
         before do
           user.prefs.update_column(:involve_my_groups, 'subscribe')

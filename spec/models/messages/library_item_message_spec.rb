@@ -13,7 +13,7 @@ require 'spec_helper'
 
 describe LibraryItemMessage do
   it 'should be valid' do
-    message = FactoryGirl.create(:library_item_message_with_document)
+    message = create(:library_item_message_with_document)
     expect(message).to be_valid
   end
 end

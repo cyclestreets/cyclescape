@@ -9,11 +9,10 @@ fallback_token = 'a1bcbfb276fb310924d6c5f8c7ca23d880200b'
 # check for the existence of a config/secret_token file, which we generate for produtions systems.
 
 # TODO remove secret_file (this is now secret key base)
-secret_file = Rails.root.join('config', 'secret_token')
-secret_key_base = Rails.root.join('config', 'secret_key_base')
+secret_key_base = Rails.root.join('config', 'secret_token')
 
 if Rails.env.production?
-  Rails.application.config.secret_token = File.read(secret_file).strip
+  Rails.application.config.secret_token = File.read(secret_key_base).strip
   Rails.application.config.secret_key_base = File.read(secret_key_base).strip
 else
   Rails.application.config.secret_token = fallback_token

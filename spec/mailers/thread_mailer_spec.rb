@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe ThreadMailer do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:document) { FactoryGirl.create(:document_message, created_by: user) }
+  let(:user) { create(:user) }
+  let(:document) { create(:document_message, created_by: user) }
 
   describe 'new document messages' do
     it 'has a link to the new document' do

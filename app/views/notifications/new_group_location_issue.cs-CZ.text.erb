@@ -1,0 +1,16 @@
+<%= raw @issue.created_by.name %> nahlásil nový podnět
+v oblasti vaší místní skupiny <%= @group.name %>.
+
+"<%= raw @issue.title %>"
+
+<%= raw @issue.description %>
+
+Tento podnět si můžete zobrazit a začít o něm diskutovat na:
+<%= issue_url(@issue) %>
+
+--------
+Tuto zprávu jste dostali, protože máte ve vašem profilu nastaveno,
+že chcete dostávat zprávy o záležitostech týkajících se vaší místní skupiny.
+
+Pro odhlášení těchto zpráv použijte následující odkaz:
+<%= edit_user_prefs_url(@user) %>

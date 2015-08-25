@@ -8,7 +8,7 @@ gem 'activerecord-postgis-adapter'
 # gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
-gem 'jquery-rails', '2.0.3' # pin due to incompatible jquery-tools vs jquery 1.8. See https://github.com/cyclestreets/cyclescape/issues/75
+gem 'jquery-rails', '~> 3.0.0' # pin due to incompatible jquery-tools vs jquery 1.8. See https://github.com/cyclestreets/cyclescape/issues/75
 gem 'haml-rails'
 gem 'formtastic', '~> 2.0'
 gem 'map_layers'
@@ -17,9 +17,10 @@ gem 'rgeo-geojson'
 gem 'will_paginate', '~> 3.0'
 gem 'rails_autolink'
 gem 'tweet-button'
+gem 'jquery-turbolinks'
 
 # Back-end gems
-gem 'devise', '~> 3.1.0'
+gem 'devise', '~> 3.4.0'
 gem 'devise_invitable'
 gem 'declarative_authorization'
 gem 'thin'
@@ -43,9 +44,11 @@ gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'compass-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-ui-rails', '~> 4.2.0' # pin pending upgrade
+gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'turbolinks'
 gem 'rails-observers'
+gem 'rails-i18n', '~> 4.0.0'
+gem 'will-paginate-i18n'
 
 group :development do
   gem 'letter_opener'

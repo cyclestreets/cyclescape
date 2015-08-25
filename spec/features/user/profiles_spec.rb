@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'User profiles' do
-  let(:user) { FactoryGirl.create(:stewie_with_profile) }
+  let(:user) { create(:stewie_with_profile) }
 
   it "should display Stewie's profile" do
     visit user_profile_path(user)
@@ -67,7 +67,7 @@ describe 'User profiles' do
 
   context 'adding to group' do
     include_context 'signed in as a committee member'
-    let(:user) { FactoryGirl.create(:meg) }
+    let(:user) { create(:meg) }
 
     before do
       visit user_profile_path(user)
@@ -83,9 +83,9 @@ describe 'User profiles' do
   end
 
   describe 'thread list', as: :site_user do
-    let(:threads) { FactoryGirl.create_list(:message_thread, 3) }
-    let(:first_messages) { FactoryGirl.create_list(:message, 3, thread: threads.first, created_by: current_user) }
-    let(:second_messages) { FactoryGirl.create(:message, thread: threads.second, created_by: current_user) }
+    let(:threads) { create_list(:message_thread, 3) }
+    let(:first_messages) { create_list(:message, 3, thread: threads.first, created_by: current_user) }
+    let(:second_messages) { create(:message, thread: threads.second, created_by: current_user) }
 
     it 'should show recent threads the user has posted to' do
       first_messages && second_messages

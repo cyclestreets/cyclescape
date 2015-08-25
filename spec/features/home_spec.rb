@@ -12,7 +12,7 @@ describe 'Home page' do
   end
 
   context 'discussions' do
-    let!(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 7) }
+    let!(:threads) { create_list(:message_thread_with_messages, 7) }
 
     it 'should list 6 discussions' do
       visit home_path
@@ -33,7 +33,7 @@ describe 'Home page' do
     end
 
     it 'should not contain private discussions' do
-      private_thread = FactoryGirl.create(:group_private_message_thread)
+      private_thread = create(:group_private_message_thread)
       visit home_path
       expect(page).not_to have_content(private_thread.title)
     end

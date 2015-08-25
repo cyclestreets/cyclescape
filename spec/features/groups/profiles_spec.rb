@@ -4,7 +4,7 @@ describe 'Group profiles' do
   context 'as a public user' do
 
     describe 'viewing the group profile' do
-      let(:group) { FactoryGirl.create(:group) }
+      let(:group) { create(:group) }
 
       before do
         # fixme Work around - hard to get group + group_profile via factories
@@ -54,7 +54,7 @@ describe 'Group profiles' do
     include_context 'signed in as admin'
 
     describe 'editing any group profile she wants to' do
-      let(:group) { FactoryGirl.create(:quahogcc) }
+      let(:group) { create(:quahogcc) }
       it 'should be permitted' do
         visit edit_group_profile_path(group)
         expect(page).to have_content('Edit Profile')

@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'Groups admin' do
   include_context 'signed in as admin'
 
-  let(:user) { FactoryGirl.create(:user) }
-  let!(:location) { FactoryGirl.create(:user_location, user: user) }
+  let(:user) { create(:user) }
+  let!(:location) { create(:user_location, user: user) }
 
-  let!(:location_category) { FactoryGirl.create(:location_category) }
-  let(:location_attributes) { FactoryGirl.attributes_for(:user_location_with_json_loc) }
+  let!(:location_category) { create(:location_category) }
+  let(:location_attributes) { attributes_for(:user_location_with_json_loc) }
 
   it 'should let you view the list of user locations' do
     visit admin_user_locations_path(user)

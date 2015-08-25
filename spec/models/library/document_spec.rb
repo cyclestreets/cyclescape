@@ -4,7 +4,7 @@ describe Library::Document do
   it_behaves_like 'a library component'
 
   it 'should be valid' do
-    doc = FactoryGirl.create(:library_document)
+    doc = create(:library_document)
     expect(doc).to be_valid
   end
 
@@ -18,14 +18,14 @@ describe Library::Document do
   end
 
   describe 'searchable text' do
-    let(:doc) { FactoryGirl.create(:library_document) }
+    let(:doc) { create(:library_document) }
     it 'should have a searchable title' do
       expect(doc.searchable_text).to include doc.title
     end
   end
 
   context 'link with library item' do
-    let(:attrs) { FactoryGirl.attributes_for(:library_document) }
+    let(:attrs) { attributes_for(:library_document) }
 
     it 'should create a library item automatically' do
       doc = Library::Document.new(attrs)

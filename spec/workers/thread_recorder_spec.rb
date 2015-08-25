@@ -24,8 +24,8 @@ describe ThreadRecorder do
   end
 
   describe '.record_thread_viewed' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:thread) { FactoryGirl.create(:message_thread) }
+    let(:user) { create(:user) }
+    let(:thread) { create(:message_thread) }
     let(:time) { Time.now - 2.days }
     let(:time2) { Time.now - 1.day }
 

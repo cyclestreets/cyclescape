@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Issue notifications' do
   include_context 'signed in as a site user'
 
-  let(:issue_values) { FactoryGirl.attributes_for(:issue_with_json_loc) }
+  let(:issue_values) { attributes_for(:issue_with_json_loc) }
 
   context 'on a new issue' do
 
@@ -15,8 +15,8 @@ describe 'Issue notifications' do
     end
 
     describe 'for users with overlapping user locations' do
-      let(:user) { FactoryGirl.create(:user) }
-      let!(:user_location) { FactoryGirl.create(:user_location, user: user, loc_json: issue_values[:loc_json]) }
+      let(:user) { create(:user) }
+      let!(:user_location) { create(:user_location, user: user, loc_json: issue_values[:loc_json]) }
 
       before do
         user.prefs.update_column(:involve_my_locations, 'notify')
@@ -64,9 +64,9 @@ describe 'Issue notifications' do
     end
 
     describe 'for users in groups with overlapping locations' do
-      let!(:group_profile) { FactoryGirl.create(:quahogcc_group_profile) }
-      let!(:notifiee) { FactoryGirl.create(:user) }
-      let!(:group_membership) { FactoryGirl.create(:group_membership, user: notifiee, group: group_profile.group) }
+      let!(:group_profile) { create(:quahogcc_group_profile) }
+      let!(:notifiee) { create(:user) }
+      let!(:group_membership) { create(:group_membership, user: notifiee, group: group_profile.group) }
 
       before do
         notifiee.prefs.update_column(:involve_my_groups, 'notify')
@@ -94,11 +94,11 @@ describe 'Issue notifications' do
   end
 
   context 'multiple overlapping locations' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:user2) { FactoryGirl.create(:user) }
-    let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
-    let!(:user_location_big) { FactoryGirl.create(:user_location, user: user, location: user_location.location.buffer(1)) }
-    let!(:user_location_small) { FactoryGirl.create(:user_location, user: user, location: user_location.location.buffer(-0.01)) }
+    let(:user) { create(:user) }
+    let(:user2) { create(:user) }
+    let!(:user_location) { create(:user_location, user: user, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
+    let!(:user_location_big) { create(:user_location, user: user, location: user_location.location.buffer(1)) }
+    let!(:user_location_small) { create(:user_location, user: user, location: user_location.location.buffer(-0.01)) }
 
     before do
       user.prefs.update_column(:involve_my_locations, 'notify')
@@ -122,9 +122,9 @@ describe 'Issue notifications' do
     end
 
     context 'multiple users' do
-      let!(:user2_location) { FactoryGirl.create(:user_location, user: user2, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
-      let!(:user2_location_big) { FactoryGirl.create(:user_location, user: user2, location: user_location.location.buffer(1)) }
-      let!(:user2_location_small) { FactoryGirl.create(:user_location, user: user2, location: user_location.location.buffer(-0.01)) }
+      let!(:user2_location) { create(:user_location, user: user2, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
+      let!(:user2_location_big) { create(:user_location, user: user2, location: user_location.location.buffer(1)) }
+      let!(:user2_location_small) { create(:user_location, user: user2, location: user_location.location.buffer(-0.01)) }
 
       it 'should send one email to multiple users' do
         email_count = all_emails.count
@@ -140,10 +140,10 @@ describe 'Issue notifications' do
 
   context 'overlapping group and user locations' do
     let(:location) { 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))' }
-    let(:user) { FactoryGirl.create(:user) }
-    let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: location) }
-    let!(:group_profile) { FactoryGirl.create(:group_profile, location: location) }
-    let!(:group_membership) { FactoryGirl.create(:group_membership, user: user, group: group_profile.group) }
+    let(:user) { create(:user) }
+    let!(:user_location) { create(:user_location, user: user, location: location) }
+    let!(:group_profile) { create(:group_profile, location: location) }
+    let!(:group_membership) { create(:group_membership, user: user, group: group_profile.group) }
 
     before do
       user.prefs.update_column(:involve_my_locations, 'notify')

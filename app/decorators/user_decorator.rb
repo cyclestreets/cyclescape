@@ -44,7 +44,7 @@ class UserDecorator < ApplicationDecorator
   def group_memberships
     return h.t('user.profiles.show.no_groups') if user.memberships.empty?
     items = user.memberships.map do |membership|
-      h.link_to_profile(membership.group) + " (#{I18n.t(".group_membership_roles." + membership.role)})"
+      h.link_to_profile(membership.group) + " (#{I18n.t("group_membership_roles." + membership.role)})"
     end
     h.content_tag(:ul) do
       items.map { |i| h.content_tag(:li, i) }.join.html_safe

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'Library' do
   context 'as a public user' do
-    let!(:documents) { FactoryGirl.create_list(:library_document, 5) }
-    let!(:notes) { FactoryGirl.create_list(:library_note, 5) }
+    let!(:documents) { create_list(:library_document, 5) }
+    let!(:notes) { create_list(:library_note, 5) }
 
     before do
       visit library_path

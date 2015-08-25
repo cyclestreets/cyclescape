@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'Group threads', use: :subdomain do
-  let(:thread) { FactoryGirl.create(:message_thread, group: current_group) }
-  let(:threads) { FactoryGirl.create_list(:message_thread_with_messages, 5, group: current_group) }
+  let(:thread) { create(:message_thread, group: current_group) }
+  let(:threads) { create_list(:message_thread_with_messages, 5, group: current_group) }
   let(:edit_thread) { 'Edit this thread' }
   let(:delete_thread) { 'Delete this thread' }
 
@@ -26,7 +26,7 @@ describe 'Group threads', use: :subdomain do
     end
 
     context 'new thread' do
-      let(:thread_attrs) { FactoryGirl.attributes_for(:message_thread) }
+      let(:thread_attrs) { attributes_for(:message_thread) }
 
       def fill_in_thread
         fill_in 'Title', with: thread_attrs[:title]
@@ -77,7 +77,7 @@ describe 'Group threads', use: :subdomain do
         end
 
         it 'should send a notification to group members' do
-          membership = FactoryGirl.create(:group_membership, group: current_group)
+          membership = create(:group_membership, group: current_group)
           notifiee = membership.user
           enable_group_thread_prefs_for(notifiee)
           fill_in_thread
@@ -86,7 +86,7 @@ describe 'Group threads', use: :subdomain do
         end
 
         it 'should not send html entities in the notification' do
-          membership = FactoryGirl.create(:group_membership, group: current_group)
+          membership = create(:group_membership, group: current_group)
           notifiee = membership.user
           enable_group_thread_prefs_for(notifiee)
           fill_in 'Title', with: 'Something like A & B'
@@ -99,7 +99,7 @@ describe 'Group threads', use: :subdomain do
         end
 
         it 'should not send emails if the notifiee dislikes emails' do
-          membership = FactoryGirl.create(:group_membership, group: current_group)
+          membership = create(:group_membership, group: current_group)
           notifiee = membership.user
           enable_group_thread_prefs_for(notifiee)
           notifiee.prefs.update_column(:enable_email, false)
@@ -108,7 +108,7 @@ describe 'Group threads', use: :subdomain do
         end
 
         it 'should not send emails if the notifiee dislikes administrative fluff' do
-          membership = FactoryGirl.create(:group_membership, group: current_group)
+          membership = create(:group_membership, group: current_group)
           notifiee = membership.user
           enable_group_thread_prefs_for(notifiee)
           notifiee.prefs.update_column(:involve_my_groups_admin, false)
@@ -117,8 +117,8 @@ describe 'Group threads', use: :subdomain do
         end
 
         it 'should not be sent if the group member has not confirmed' do
-          user = FactoryGirl.create(:user, :unconfirmed)
-          membership = FactoryGirl.create(:group_membership, group: current_group, user: user)
+          user = create(:user, :unconfirmed)
+          membership = create(:group_membership, group: current_group, user: user)
           reset_mailer  # Clear out confirmation email
           notifiee = membership.user
           enable_group_thread_prefs_for(notifiee)
@@ -128,7 +128,7 @@ describe 'Group threads', use: :subdomain do
 
         it 'should not send double notifications to auto-subscribers' do
           # if you auto-subscribe, you shouldn't also get the new thread notification.
-          membership = FactoryGirl.create(:group_membership, group: current_group)
+          membership = create(:group_membership, group: current_group)
           notifiee = membership.user
           enable_group_thread_prefs_for(notifiee)
           notifiee.prefs.update_column(:involve_my_groups, 'subscribe')
@@ -140,7 +140,7 @@ describe 'Group threads', use: :subdomain do
 
         context 'on committee-only threads' do
           it 'should not send a notification to a normal member' do
-            membership = FactoryGirl.create(:group_membership, group: current_group)
+            membership = create(:group_membership, group: current_group)
             notifiee = membership.user
             enable_group_thread_prefs_for(notifiee)
             fill_in 'Title', with: thread_attrs[:title]
@@ -151,7 +151,7 @@ describe 'Group threads', use: :subdomain do
           end
 
           it 'should send a notification to a committee member' do
-            membership = FactoryGirl.create(:group_membership, group: current_group, role: 'committee')
+            membership = create(:group_membership, group: current_group, role: 'committee')
             notifiee = membership.user
             enable_group_thread_prefs_for(notifiee)
             fill_in 'Title', with: thread_attrs[:title]
@@ -165,10 +165,10 @@ describe 'Group threads', use: :subdomain do
 
         context 'group threads on an issue' do
           let(:location) { 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))' }
-          let(:user) { FactoryGirl.create(:user) }
-          let!(:user_location) { FactoryGirl.create(:user_location, user: user, location: location) }
-          let!(:group_membership) { FactoryGirl.create(:group_membership, user: user, group: current_group) }
-          let!(:issue) { FactoryGirl.create(:issue, location: user_location.location) }
+          let(:user) { create(:user) }
+          let!(:user_location) { create(:user_location, user: user, location: location) }
+          let!(:group_membership) { create(:group_membership, user: user, group: current_group) }
+          let!(:issue) { create(:issue, location: user_location.location) }
 
           before do
             enable_group_thread_prefs_for(user)
@@ -191,7 +191,7 @@ describe 'Group threads', use: :subdomain do
       end
 
       context 'automatic subscriptions' do
-        let!(:group_membership) { FactoryGirl.create(:group_membership, group: current_group) }
+        let!(:group_membership) { create(:group_membership, group: current_group) }
         let!(:subscriber) { group_membership.user }
 
         it 'should not subscribe people automatically' do
@@ -226,11 +226,11 @@ describe 'Group threads', use: :subdomain do
         end
 
         context 'to private group threads' do
-          let(:issue) { FactoryGirl.create(:issue) }
-          let(:stranger) { FactoryGirl.create(:user) }
-          let!(:stranger_location) { FactoryGirl.create(:user_location, user: stranger, location: issue.location.buffer(1)) }
-          let(:stewie) { FactoryGirl.create(:stewie) }
-          let!(:stewie_location) { FactoryGirl.create(:user_location, user: stewie, location: issue.location.buffer(1)) }
+          let(:issue) { create(:issue) }
+          let(:stranger) { create(:user) }
+          let!(:stranger_location) { create(:user_location, user: stranger, location: issue.location.buffer(1)) }
+          let(:stewie) { create(:stewie) }
+          let!(:stewie_location) { create(:user_location, user: stewie, location: issue.location.buffer(1)) }
 
           def create_private_group_thread
             visit issue_path(issue)
@@ -327,8 +327,8 @@ describe 'Group threads', use: :subdomain do
     context 'as an admin user' do
       include_context 'signed in as admin'
 
-      let(:group) { FactoryGirl.create(:group) }
-      let(:thread) { FactoryGirl.create(:message_thread, group: group) }
+      let(:group) { create(:group) }
+      let(:thread) { create(:message_thread, group: group) }
 
       before do
         visit group_thread_path(group, thread)
@@ -343,7 +343,7 @@ describe 'Group threads', use: :subdomain do
   end
 
   context 'privacy' do
-    let(:private_thread) { FactoryGirl.create(:group_private_message_thread, :with_messages) }
+    let(:private_thread) { create(:group_private_message_thread, :with_messages) }
 
     context 'as a guest' do
       it 'should not show the private thread' do
@@ -364,7 +364,7 @@ describe 'Group threads', use: :subdomain do
     context 'as a member of the correct group' do
       include_context 'signed in as a group member'
 
-      let(:group_private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
+      let(:group_private_thread) { create(:group_private_message_thread, group: current_group) }
 
       it 'should show the private thread' do
         visit group_thread_path(group_private_thread.group, group_private_thread)

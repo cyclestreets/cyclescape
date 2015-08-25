@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe 'Library item messages' do
-  let(:thread) { FactoryGirl.create(:message_thread) }
-  let(:document) { FactoryGirl.create(:library_document) }
-  let(:note) { FactoryGirl.create(:library_note) }
-  let(:documents) { FactoryGirl.create_list(:library_document, 3) }
-  let!(:notes) { FactoryGirl.create_list(:library_note, 3) }
+  let(:thread) { create(:message_thread) }
+  let(:document) { create(:library_document) }
+  let(:note) { create(:library_note) }
+  let(:documents) { create_list(:library_document, 3) }
+  let!(:notes) { create_list(:library_note, 3) }
 
   context 'new', as: :site_user do
     before do
@@ -33,7 +33,7 @@ describe 'Library item messages' do
 
     context 'with document' do
       include_context 'signed in as a site user'
-      let!(:note) { FactoryGirl.create(:library_note_with_document) }
+      let!(:note) { create(:library_note_with_document) }
 
       before do
         visit thread_path(thread)

@@ -18,9 +18,9 @@ describe NewIssueNotifier do
 
   context 'processing' do
     describe '.process_for_user_locations' do
-      let(:user) { FactoryGirl.create(:user) }
-      let(:issue) { FactoryGirl.create(:issue) }
-      let(:location) { FactoryGirl.create(:user_location, loc_json: issue.loc_json, user: user) }
+      let(:user) { create(:user) }
+      let(:issue) { create(:issue) }
+      let(:location) { create(:user_location, loc_json: issue.loc_json, user: user) }
 
       before do
         user.prefs.update_column(:involve_my_locations, 'notify')

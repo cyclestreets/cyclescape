@@ -7,8 +7,8 @@ require 'spec_helper'
 describe 'thread views' do
   context 'for a signed in user' do
     include_context 'signed in as a site user'
-    let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
-    let!(:thread_view) { FactoryGirl.create(:thread_view, thread: thread, user: current_user) }
+    let(:thread) { create(:message_thread_with_messages) }
+    let!(:thread_view) { create(:thread_view, thread: thread, user: current_user) }
 
     it 'should output a page with the correct class' do
       visit thread_path(thread)
