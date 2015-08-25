@@ -18,7 +18,7 @@ describe 'Group members' do
 
     context 'index' do
       before do
-        @memberships = FactoryGirl.create_list(:group_membership, 4, group: current_group)
+        @memberships = create_list(:group_membership, 4, group: current_group)
         visit group_members_path(current_group)
       end
 
@@ -48,7 +48,7 @@ describe 'Group members' do
     end
 
     context 'pending membership requests' do
-      let!(:gmr) { FactoryGirl.create(:pending_gmr, group: current_group) }
+      let!(:gmr) { create(:pending_gmr, group: current_group) }
 
       it 'should encourage you to review pending membership requests' do
         visit group_members_path(current_group)

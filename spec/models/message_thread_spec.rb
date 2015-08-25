@@ -25,7 +25,7 @@ describe MessageThread do
 
     it 'should become private to group' do
       expect(subject).not_to be_private_to_group
-      subject.group = FactoryGirl.create(:group)
+      subject.group = create(:group)
       subject.privacy = 'group'
       expect(subject).to be_private_to_group
       expect(subject).not_to be_private_to_committee
@@ -34,7 +34,7 @@ describe MessageThread do
 
     it 'should become private to committee' do
       expect(subject).not_to be_private_to_committee
-      subject.group = FactoryGirl.create(:group)
+      subject.group = create(:group)
       subject.privacy = 'committee'
       expect(subject).to be_private_to_committee
       expect(subject).not_to be_private_to_group
@@ -50,20 +50,20 @@ describe MessageThread do
 
   describe 'participants' do
     it 'should have zero participants' do
-      thread = FactoryGirl.create(:message_thread)
+      thread = create(:message_thread)
       expect(thread.participants.count).to eq(0)
     end
 
     it 'should have one participant' do
-      thread = FactoryGirl.create(:message_thread_with_messages)
+      thread = create(:message_thread_with_messages)
       expect(thread.participants.count).to eq(1)
     end
   end
 
   describe 'priorities' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:thread) { FactoryGirl.create(:message_thread) }
-    let!(:priority) { FactoryGirl.create(:user_thread_priority, user: user, thread: thread) }
+    let(:user) { create(:user) }
+    let(:thread) { create(:message_thread) }
+    let!(:priority) { create(:user_thread_priority, user: user, thread: thread) }
 
     it 'should confirm that user has prioritised' do
       expect(thread.priority_for(user)).to eq(priority)
@@ -71,9 +71,9 @@ describe MessageThread do
   end
 
   describe 'with messages from' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:thread) { FactoryGirl.create(:message_thread) }
-    let(:message) { FactoryGirl.create(:message, thread: thread, created_by: user) }
+    let(:user) { create(:user) }
+    let(:thread) { create(:message_thread) }
+    let(:message) { create(:message, thread: thread, created_by: user) }
 
     it 'should be empty' do
       expect(MessageThread.with_messages_from(user)).to be_empty
@@ -86,16 +86,16 @@ describe MessageThread do
 
     it 'should only find one thread with multiple messages from the same user' do
       message
-      FactoryGirl.create(:message, thread: thread, created_by: user) # second message in same thread
+      create(:message, thread: thread, created_by: user) # second message in same thread
       expect(MessageThread.with_messages_from(user).count).to eq(1)
     end
   end
 
   describe 'upcoming deadlines' do
-    let(:thread) { FactoryGirl.create(:message_thread) }
-    let(:deadline_message_old) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now - 10.days) }
-    let(:deadline_message_soon) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now + 2.days) }
-    let(:deadline_message_later) { FactoryGirl.create(:deadline_message, message: FactoryGirl.create(:message, thread: thread), deadline: Time.now + 100.days) }
+    let(:thread) { create(:message_thread) }
+    let(:deadline_message_old) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now - 10.days) }
+    let(:deadline_message_soon) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now + 2.days) }
+    let(:deadline_message_later) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now + 100.days) }
 
     it 'should return one thread with upcoming deadlines' do
       deadline_message_soon
@@ -120,7 +120,7 @@ describe MessageThread do
 
   describe '.order_by_latest_message' do
     it 'should return threads with most recent messages first' do
-      threads = FactoryGirl.create_list(:message_thread, 3, :with_messages)
+      threads = create_list(:message_thread, 3, :with_messages)
       found = MessageThread.order_by_latest_message
       expect(found).to eq(threads.reverse)
       expect(found.first.latest_message.created_at).to be > found.last.latest_message.created_at
@@ -129,17 +129,17 @@ describe MessageThread do
 
   context 'public token' do
     it 'should be set after being created' do
-      thread = FactoryGirl.create(:message_thread)
+      thread = create(:message_thread)
       expect(thread.public_token).to be_truthy
     end
 
     it 'should be a 10 digit alphanumeric string' do
-      thread = FactoryGirl.create(:message_thread)
+      thread = create(:message_thread)
       expect(thread.public_token).to match(/\A[0-9a-f]{20}\Z/)
     end
 
     it 'should be set by set_public_token' do
-      thread = FactoryGirl.create(:message_thread)
+      thread = create(:message_thread)
       thread.public_token = ''
       expect(thread.public_token).to be_blank
       thread.set_public_token
@@ -150,7 +150,7 @@ describe MessageThread do
   describe 'default_centre' do
 
     context 'with deleted issue' do
-      subject { FactoryGirl.create(:message_thread, :belongs_to_issue) }
+      subject { create(:message_thread, :belongs_to_issue) }
       let!(:issue_centre) { subject.issue.centre }
 
       before { subject.issue.destroy }
@@ -161,8 +161,8 @@ describe MessageThread do
     end
 
     context 'with a group with a profile but no issue' do
-      subject { FactoryGirl.create(:message_thread, group: group) }
-      let(:group) { FactoryGirl.create :group, :with_profile }
+      subject { create(:message_thread, group: group) }
+      let(:group) { create :group, :with_profile }
 
       it "still has the groups' centre" do
         expect(subject.default_centre).to eq(subject.group.profile.centre)
@@ -170,8 +170,8 @@ describe MessageThread do
     end
 
     context 'with a group with no profile, no issue, but created by a user with a profile' do
-      let(:user) { FactoryGirl.create :user, :with_location }
-      subject { FactoryGirl.create(:message_thread, created_by: user) }
+      let(:user) { create :user, :with_location }
+      subject { create(:message_thread, created_by: user) }
 
       it "still has users' centre" do
         expect(subject.default_centre).to eq(user.locations.first.centre)
@@ -179,7 +179,7 @@ describe MessageThread do
     end
 
     context 'with a group with no profile, no issue, and created by a user without a profile' do
-      subject { FactoryGirl.create(:message_thread) }
+      subject { create(:message_thread) }
 
       it "has a random centre" do
         expect(subject.default_centre).to_not be_nil
@@ -188,8 +188,8 @@ describe MessageThread do
   end
 
   describe '#add_message_from_email!' do
-    let(:mail) { FactoryGirl.create(:inbound_mail) }
-    let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+    let(:mail) { create(:inbound_mail) }
+    let(:thread) { create(:message_thread_with_messages) }
 
     it 'should create a new message' do
       messages = thread.add_messages_from_email!(mail)
@@ -213,7 +213,7 @@ describe MessageThread do
     end
 
     context 'with attachments' do
-      let(:mail) { FactoryGirl.create(:inbound_mail, :with_attached_image) }
+      let(:mail) { create(:inbound_mail, :with_attached_image) }
 
       it 'should create two messages' do
         messages = thread.add_messages_from_email!(mail)
@@ -225,7 +225,7 @@ describe MessageThread do
   end
 
   describe '#first_message' do
-    let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+    let(:thread) { create(:message_thread_with_messages) }
 
     it 'should return the oldest message on the thread' do
       expect(thread.first_message).to eq(thread.messages.order('created_at').first)
@@ -233,7 +233,7 @@ describe MessageThread do
   end
 
   describe 'messages text' do
-    let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+    let(:thread) { create(:message_thread_with_messages) }
 
     it 'should return the text from all the messages' do
       thread.messages.each do |m|

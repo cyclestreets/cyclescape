@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Library notes' do
-  let(:note) { FactoryGirl.create(:library_note) }
+  let(:note) { create(:library_note) }
 
   context 'as a public user' do
     before do
@@ -56,7 +56,7 @@ describe 'Library notes' do
   end
 
   context 'with document' do
-    let(:note) { FactoryGirl.create(:library_note_with_document) }
+    let(:note) { create(:library_note_with_document) }
 
     before do
       visit library_note_path(note)
@@ -108,7 +108,7 @@ describe 'Library notes' do
       include_context 'signed in as a site user'
 
       context 'recent' do
-        let(:note) { FactoryGirl.create(:library_note, created_by: current_user) }
+        let(:note) { create(:library_note, created_by: current_user) }
         it 'should show you a link' do
           visit library_note_path(note)
           expect(page).to have_link(edit_text)
@@ -116,7 +116,7 @@ describe 'Library notes' do
       end
 
       context 'long ago' do
-        let(:note) { FactoryGirl.create(:library_note, created_by: current_user) }
+        let(:note) { create(:library_note, created_by: current_user) }
         it 'should not show you a link' do
           note.item.update_column(:created_at, 2.days.ago)
 

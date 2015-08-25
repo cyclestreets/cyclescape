@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe 'Link messages' do
-  let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:thread) { create(:message_thread) }
 
   def link_form
     within('#new-link-message') { yield }
   end
 
   context 'new', as: :site_user do
-    let(:link_message_attrs) { FactoryGirl.attributes_for(:link_message) }
+    let(:link_message_attrs) { attributes_for(:link_message) }
 
     before do
       visit thread_path(thread)
@@ -34,8 +34,8 @@ describe 'Link messages' do
   end
 
   context 'show' do
-    let(:message) { FactoryGirl.create(:message, thread: thread) }
-    let!(:link_message) { FactoryGirl.create(:link_message, message: message, created_by: FactoryGirl.create(:user)) }
+    let(:message) { create(:message, thread: thread) }
+    let!(:link_message) { create(:link_message, message: message, created_by: create(:user)) }
 
     before do
       visit thread_path(thread)

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'User locations' do
 
-  let!(:location_category) { FactoryGirl.create(:location_category) }
-  let(:location_attributes) { FactoryGirl.attributes_for(:user_location_with_json_loc) }
+  let!(:location_category) { create(:location_category) }
+  let(:location_attributes) { attributes_for(:user_location_with_json_loc) }
 
   context 'view' do
     include_context 'signed in as a site user'
@@ -26,7 +26,7 @@ describe 'User locations' do
     end
 
     context 'with a location' do
-      let!(:location) { FactoryGirl.create(:user_location, user: current_user) }
+      let!(:location) { create(:user_location, user: current_user) }
 
       def guidance_text(key)
         I18n.t(".user.locations.index#{key}", edit_prefs_link: I18n.t('.user.locations.index.edit_your_prefs'))
@@ -48,7 +48,7 @@ describe 'User locations' do
     end
 
     context 'edit' do
-      let!(:location) { FactoryGirl.create(:user_location, user: current_user, category: location_category) }
+      let!(:location) { create(:user_location, user: current_user, category: location_category) }
 
       it 'should let you edit an existing location' do
         visit current_user_locations_path

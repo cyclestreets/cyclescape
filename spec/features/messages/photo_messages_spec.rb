@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Photo messages' do
-  let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:thread) { create(:message_thread) }
 
   def photo_form
     within('#new-photo-message') { yield }
@@ -28,8 +28,8 @@ describe 'Photo messages' do
   end
 
   context 'show' do
-    let(:message) { FactoryGirl.create(:message, thread: thread) }
-    let!(:photo_message) { FactoryGirl.create(:photo_message, message: message, created_by: FactoryGirl.create(:user)) }
+    let(:message) { create(:message, thread: thread) }
+    let!(:photo_message) { create(:photo_message, message: message, created_by: create(:user)) }
 
     before do
       visit thread_path(thread)

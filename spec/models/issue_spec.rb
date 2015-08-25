@@ -4,7 +4,7 @@ describe Issue do
   it_should_behave_like 'a taggable model'
 
   describe 'newly created' do
-    subject { FactoryGirl.create(:issue) }
+    subject { create(:issue) }
 
     it 'must have a created_by user' do
       expect(subject.created_by).to be_valid
@@ -47,7 +47,7 @@ describe Issue do
   end
 
   describe 'to be valid' do
-    subject { FactoryGirl.create(:issue) }
+    subject { create(:issue) }
 
     it 'must have a title' do
       subject.title = ''
@@ -98,7 +98,7 @@ describe Issue do
     let(:factory) { RGeo::Geos.factory(srid: 4326) }
 
     describe 'for a point' do
-      subject { FactoryGirl.create(:issue, location: 'POINT(1 1)') }
+      subject { create(:issue, location: 'POINT(1 1)') }
       it 'should return a zero size for points' do
         expect(subject.size).to eql(0.0)
       end
@@ -110,7 +110,7 @@ describe Issue do
     end
 
     describe 'for a polygon' do
-      subject { FactoryGirl.create(:issue, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
+      subject { create(:issue, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
 
       it 'should return the area for polygons' do
         expect(subject.size).to be_within(0.0001).of(0.01)
@@ -134,7 +134,7 @@ describe Issue do
     end
 
     describe 'too large' do
-      subject { FactoryGirl.create(:issue) }
+      subject { create(:issue) }
 
       it 'should be invalid' do
         large_wkt = 'POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))'
@@ -149,7 +149,7 @@ describe Issue do
 
   describe 'threads' do
     context 'new thread' do
-      subject { FactoryGirl.create(:issue) }
+      subject { create(:issue) }
 
       it 'should set the title to be the same as the issue' do
         thread = subject.threads.build
@@ -165,7 +165,7 @@ describe Issue do
 
   describe 'intersects' do
     context 'should accept a variety of geometry types' do
-      subject { FactoryGirl.create(:issue) }
+      subject { create(:issue) }
       let(:factory) { RGeo::Geos.factory(srid: 4326) }
 
       it 'should accept a point' do
@@ -182,10 +182,10 @@ describe Issue do
     context 'different issue locations' do
       let(:factory) { RGeo::Geos.factory(srid: 4326) }
       let(:polygon) { 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))' }
-      let!(:issue_entirely_surrounding) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0, 0 0.3, 0.3 0.3, 0.3 0, 0 0))') }
-      let!(:issue_entirely_contained) { FactoryGirl.create(:issue, location: 'POLYGON ((0.12 0.12, 0.12 0.18, 0.18 0.18, 0.18 0.12, 0.12 0.12))') }
-      let!(:issue_not_intersecting) { FactoryGirl.create(:issue, location: 'POLYGON ((1.1 1.1, 1.1 1.2, 1.2 1.2, 1.2 1.1, 1.1 1.1))') }
-      let!(:issue_half_in_half_out) { FactoryGirl.create(:issue, location: 'POLYGON ((0 0.12, 0 0.18, 0.3 0.18, 0.3 0.12, 0 0.12))') }
+      let!(:issue_entirely_surrounding) { create(:issue, location: 'POLYGON ((0 0, 0 0.3, 0.3 0.3, 0.3 0, 0 0))') }
+      let!(:issue_entirely_contained) { create(:issue, location: 'POLYGON ((0.12 0.12, 0.12 0.18, 0.18 0.18, 0.18 0.12, 0.12 0.12))') }
+      let!(:issue_not_intersecting) { create(:issue, location: 'POLYGON ((1.1 1.1, 1.1 1.2, 1.2 1.2, 1.2 1.1, 1.1 1.1))') }
+      let!(:issue_half_in_half_out) { create(:issue, location: 'POLYGON ((0 0.12, 0 0.18, 0.3 0.18, 0.3 0.12, 0 0.12))') }
 
       it 'should return intersecting issues' do
         bbox = factory.parse_wkt(polygon)
@@ -210,7 +210,7 @@ describe Issue do
   end
 
   describe 'find with index (search)' do
-    subject { FactoryGirl.create(:issue) }
+    subject { create(:issue) }
 
     it 'should return the issue on title search' do
       subject
@@ -240,7 +240,7 @@ describe Issue do
   end
 
   describe 'destroyed' do
-    subject { FactoryGirl.create(:issue) }
+    subject { create(:issue) }
 
     before do
       subject.destroy
@@ -261,9 +261,9 @@ describe Issue do
   end
 
   describe 'votes' do
-    subject { FactoryGirl.create(:issue) }
-    let(:brian) { FactoryGirl.create(:brian) }
-    let(:meg) { FactoryGirl.create(:meg) }
+    subject { create(:issue) }
+    let(:brian) { create(:brian) }
+    let(:meg) { create(:meg) }
 
     it 'should allow upvoting' do
       brian.vote_for(subject)
@@ -309,7 +309,7 @@ describe Issue do
   end
 
   describe 'with a photo' do
-    subject { FactoryGirl.create(:issue, :with_photo) }
+    subject { create(:issue, :with_photo) }
 
     it 'should have a photo' do
       expect(subject.photo).to be_truthy  # Hard to find a proper test
@@ -322,8 +322,8 @@ describe Issue do
   end
 
   context 'finding from tags' do
-    let(:tag) { FactoryGirl.create(:tag) }
-    subject { FactoryGirl.create(:issue, tags: [tag]) }
+    let(:tag) { create(:tag) }
+    subject { create(:issue, tags: [tag]) }
 
     it 'should find the issue given a tag' do
       expect(Issue.find_by_tag(tag)).to include(subject)
@@ -335,10 +335,10 @@ describe Issue do
   end
 
   context 'tags with icons' do
-    subject { FactoryGirl.create(:issue) }
-    let(:tag) { FactoryGirl.create(:tag) }
-    let(:tag_with_icon) { FactoryGirl.create(:tag_with_icon) }
-    let(:tag_with_icon2) { FactoryGirl.create(:tag_with_icon) }
+    subject { create(:issue) }
+    let(:tag) { create(:tag) }
+    let(:tag_with_icon) { create(:tag_with_icon) }
+    let(:tag_with_icon2) { create(:tag_with_icon) }
 
     it 'should return an icon identifier' do
       subject.tags = [tag, tag_with_icon]
@@ -367,9 +367,9 @@ describe Issue do
 
     describe 'created_by' do
       it 'should find issues created by the given user' do
-        user = FactoryGirl.create(:user)
-        owned_issues = FactoryGirl.create_list(:issue, 2, created_by: user)
-        FactoryGirl.create(:issue)
+        user = create(:user)
+        owned_issues = create_list(:issue, 2, created_by: user)
+        create(:issue)
         expect(Issue.count).to eq(3)
         expect(Issue.created_by(user)).to match_array(owned_issues)
       end

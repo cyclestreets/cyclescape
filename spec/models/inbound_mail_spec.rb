@@ -19,7 +19,7 @@ describe InboundMail do
   end
 
   context 'message' do
-    let(:mail) { FactoryGirl.create(:inbound_mail) }
+    let(:mail) { create(:inbound_mail) }
 
     it 'should return a Mail::Message object' do
       expect(mail.message).to be_a(Mail::Message)
@@ -28,13 +28,13 @@ describe InboundMail do
 
   context 'factory' do
     it 'should have a known recipient' do
-      mail = FactoryGirl.build(:inbound_mail)
+      mail = build(:inbound_mail)
       expect(mail.recipient).to eq('cyclescape@example.com')
       expect(mail.message.to.first).to eq('cyclescape@example.com')
     end
 
     it 'should adjust the recipients' do
-      mail = FactoryGirl.build(:inbound_mail, to: 'quagmire@giggity.com')
+      mail = build(:inbound_mail, to: 'quagmire@giggity.com')
       expect(mail.recipient).to eq('quagmire@giggity.com')
       expect(mail.message.to.first).to eq('quagmire@giggity.com')
     end

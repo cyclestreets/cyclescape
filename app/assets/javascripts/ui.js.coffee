@@ -1,23 +1,9 @@
 jQuery ->
   # Tabs
-  $("ul.tabs").tabs("> div.panes > div")
-  $("ul.tabs.with-history").tabs("> div.panes > div", { history: true })
-
-  # Scrollables
-  $("div.scrollable.autoheight")
-    .bind "update_height", (e, index) ->
-        # Update the height of the container to match the contents
-        scroller = $(this).data("scrollable")
-        index = scroller.getIndex() unless index
-        current_panel = $(scroller.getItems()[index])
-        wrapper = scroller.getRoot()
-        wrapper.animate({height: current_panel.outerHeight()}, 200)
-    .scrollable
-      onBeforeSeek: (e, index) ->
-        this.getRoot().trigger "update_height", [index]
+  $(".tabs").parent().tabs()
 
   # Crude way to make large blocks .clickable by definiting a.primary-link in them
-  $(".clickable").live "click", (e) ->
+  $(".clickable").click ->
     window.location.href = $(this).find("a.primary-link").attr("href")
 
   # When .collapsible item is hovered in/out the .collapse elements inside
@@ -30,8 +16,10 @@ jQuery ->
     .find(".collapse").hide()
 
   # Apply date selector to all date inputs
-  $(":input.date").dateinput
-    format: "dddd, dd mmmm yyyy"
+  $(":input.date").datepicker(dateFormat: "DD, dd MM yy").each( ->
+    if $(this).attr('value')
+      $(this).datepicker('setDate', new Date($(this).attr('value').split(' ')[0]))
+  )
 
   # Automatic setting of values and visibility from select drop-downs
   AutoSet = {
@@ -76,43 +64,42 @@ jQuery ->
   $(document).on "change", AutoSet.selector, ->
     AutoSet.trigger_all($(this))
 
-  $(document).on "ajaxSuccess", (e) ->
+  $(document).ajaxSuccess (e) ->
     $(AutoSet.selector).each ->
       AutoSet.trigger_all($(this))
 
+
   # Modal overlay links
-  $("a[rel='#overlay']")
-    .overlay
-      onBeforeLoad: ->
-        # Load the page given in the link HREF
-        wrapper = this.getOverlay().find(".inner")
-        $.ajax this.getTrigger().attr("href"),
-          success: (data, status, xhr) =>
-            wrapper.html(data)
-            # Hide loading spinner
-            wrapper.siblings(".loading").hide()
-            # Have to bind close link manually as it doesn't
-            # seem to work with AJAX loading
-            wrapper.on "click", ".cancel a, .close", =>
-              this.close()
-              false
-          error: (xhr, status, error) =>
-            # Basic error display
-            wrapper.html(xhr.responseText)
-      mask:
-        color: "black"
-        opacity: 0.6
+  $("a[rel='#overlay']").click (e) ->
+    e.preventDefault()
+    dialog = $('#overlay').dialog(
+      autoOpen: false
+      resizable: false
+      draggable: false
+      modal: true
+      width: 802
+      height: 700
+      dialogClass: 'no-close'
+      beforeClose: ->
+        $("body").css({ overflow: 'inherit' })
+    ).dialog('option', 'title', 'Loading...').dialog 'open'
+    dialog.parent().css('z-index', '9999')
+    $("body").css({ overflow: 'hidden' })
+    dialog.load("#{@href} #page>.wrapper", ->
+      dialog.dialog('option', 'title', dialog.find('h1').text())
+      dialog.find('h1').remove()
+      dialog.on "click", ".cancel a, .close", (e) ->
+        e.preventDefault()
+        dialog.dialog('close')
+      return
+    ) unless dialog.find('#page').length
+    return
 
   $("#overlay form[data-remote]")
-    .live "ajax:success", (e, data, status, xhr) ->
+    .ajaxSuccess (e, data, status, xhr) ->
       $(this).parents(".inner:first").html(data)
-    .live "ajax:error", (e, xhr, status, error) ->
+    .ajaxError (e, xhr, status, error) ->
       $(this).parents(".inner:first").html(xhr.responseText)
-
-  $("a.dialog").overlay
-    mask:
-      color: "#000000"
-      opacity: 0.6
 
   # Tools menu
   $(document)

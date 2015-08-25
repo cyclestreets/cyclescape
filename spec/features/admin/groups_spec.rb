@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Groups admin' do
   include_context 'signed in as admin'
 
-  let!(:groups) { FactoryGirl.create_list(:group, 5) }
+  let!(:groups) { create_list(:group, 5) }
 
   before do
     visit admin_groups_path
@@ -20,7 +20,7 @@ describe 'Groups admin' do
 
   context 'new' do
     before do
-      click_link I18n.t('.admin.groups.index.new_group')
+      click_link I18n.t('admin.groups.index.new_group')
     end
 
     it 'should let you create a new group' do

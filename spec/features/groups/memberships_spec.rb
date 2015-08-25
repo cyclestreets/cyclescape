@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Group memberships admin' do
-  let(:group) { FactoryGirl.create(:group) }
+  let(:group) { create(:group) }
 
   context 'as an admin' do
     include_context 'signed in as admin'
@@ -39,7 +39,7 @@ describe 'Group memberships admin' do
       end
 
       context 'with existing user' do
-        let(:new_member) { FactoryGirl.create(:user) }
+        let(:new_member) { create(:user) }
 
         it 'should use an existing user if present' do
           choose 'Member'
@@ -80,7 +80,7 @@ describe 'Group memberships admin' do
         end
 
       context 'for existing users' do
-        let(:new_member) { FactoryGirl.create(:user) }
+        let(:new_member) { create(:user) }
 
         it 'should send a confirmation email' do
           choose 'Member'
@@ -95,10 +95,10 @@ describe 'Group memberships admin' do
     end
 
     context 'edit' do
-      let(:meg) { FactoryGirl.create(:meg) }
+      let(:meg) { create(:meg) }
 
       it 'should let you promote a member into the committee' do
-        FactoryGirl.create(:group_membership, group: current_group, user: meg)
+        create(:group_membership, group: current_group, user: meg)
         expect(current_group.committee_members).not_to include(meg)
 
         visit group_members_path(current_group)

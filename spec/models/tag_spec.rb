@@ -14,7 +14,7 @@ describe Tag do
   end
 
   context 'names' do
-    let(:tags) { 4.times.map { Tag.create(name: FactoryGirl.generate(:tag)) } }
+    let(:tags) { 4.times.map { Tag.create(name: generate(:tag)) } }
 
     it 'should return the tag names as an array' do
       tags

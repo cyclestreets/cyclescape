@@ -27,7 +27,7 @@ describe DocumentMessage do
   end
 
   context 'factory' do
-    subject { FactoryGirl.create(:document_message) }
+    subject { create(:document_message) }
 
     it { is_expected.to be_valid }
 

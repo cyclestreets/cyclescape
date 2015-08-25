@@ -1,0 +1,23 @@
+<% if @thread.has_issue? %>
+   K podnětu "<%= raw @thread.issue.title %>" bylo přidáno nové diskuzní
+   vlákno "<%= raw @thread.title %>" místní skupiny <%= raw @group.name %>.
+<% else %>
+   Nová administrativní diskuze "<%= raw @thread.title %>" byla přidána
+   k místní skupině <%= raw @group.name %>.
+<% end %>
+
+<%= raw @thread.first_message.created_by.name %> napsal:
+<%= raw @thread.first_message.body %>
+
+Nejste zapsáni k tomuto diskznímu vláknu, takže o něm už nebudete dostávat
+žádné další aktualizace.
+Diskuzní vlákno si můžete zapsat a přečíst si celou diskuzi na:
+<%= thread_url(@thread) %>
+
+--------
+
+Tuto zprávu jste dostali, protože máte ve vašem profilu nastaveno odesílání
+záležitostí týkajících se vaší místní skupiny.
+
+Pro odhlášení těchto zpráv můžete změnit nastavení na:
+<%= edit_user_prefs_url(@member) %>

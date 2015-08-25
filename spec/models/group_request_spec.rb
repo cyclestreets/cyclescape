@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe GroupRequest do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:group) { FactoryGirl.create(:group) }
-  let(:boss) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
+  let(:group) { create(:group) }
+  let(:boss) { create(:user) }
 
   describe 'newly created' do
     it 'must have a user' do
@@ -26,7 +26,7 @@ describe GroupRequest do
   end
 
   describe 'must not conflict with existing groups' do
-    subject { FactoryGirl.create(:group_request) }
+    subject { create(:group_request) }
 
     it 'with its name' do
       subject.name = group.name
@@ -51,7 +51,7 @@ describe GroupRequest do
   end
 
   context 'pending request' do
-    subject { FactoryGirl.create(:group_request) }
+    subject { create(:group_request) }
 
     it 'can be cancelled' do
       subject.cancel
@@ -75,8 +75,8 @@ describe GroupRequest do
   end
 
   context 'check group creation' do
-    subject { FactoryGirl.create :group_request, user: user, actioned_by: boss}
-    let(:boss) { FactoryGirl.create(:brian) }
+    subject { create :group_request, user: user, actioned_by: boss}
+    let(:boss) { create(:brian) }
 
     it 'should create group when confirmed' do
       expect(user.reload.groups.size).to eq(0)

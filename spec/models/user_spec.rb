@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   describe 'newly created' do
-    subject { FactoryGirl.create(:user) }
+    subject { create(:user) }
 
     it 'must have a member role' do
       expect(subject.role).to eq('member')
@@ -32,7 +32,7 @@ describe User do
   end
 
   describe 'to be valid' do
-    subject { FactoryGirl.build(:user) }
+    subject { build(:user) }
 
     it 'must have a role' do
       subject.role = ''
@@ -74,14 +74,14 @@ describe User do
 
   describe 'with admin role' do
     it 'should have the admin role' do
-      admin = FactoryGirl.build(:stewie)
+      admin = build(:stewie)
       expect(admin.role).to eq('admin')
     end
   end
 
   describe 'name' do
-    subject { FactoryGirl.build(:stewie) }
-    let(:brian) { FactoryGirl.create(:brian) }
+    subject { build(:stewie) }
+    let(:brian) { create(:brian) }
 
     it 'should use the full name if no display name is set' do
       subject.display_name = ''
@@ -106,7 +106,7 @@ describe User do
   end
 
   context 'declarative authorization interface' do
-    subject { FactoryGirl.build(:stewie) }
+    subject { build(:stewie) }
 
     it 'should respond to role_symbols' do
       expect(subject.role_symbols).to eq([:admin])
@@ -114,7 +114,7 @@ describe User do
   end
 
   describe 'profile association' do
-    subject { FactoryGirl.build(:user) }
+    subject { build(:user) }
 
     it "should give a new blank profile if one doesn't already exist" do
       expect(subject.profile).to be_a(UserProfile)
@@ -122,13 +122,13 @@ describe User do
     end
 
     it 'should give the actual user profile if one exists' do
-      profile = FactoryGirl.create(:user_profile, user: subject)
+      profile = create(:user_profile, user: subject)
       expect(subject.profile).to eq(profile)
     end
   end
 
   describe 'preferences' do
-    subject { FactoryGirl.create(:user) }
+    subject { create(:user) }
 
     it 'should be created with the user' do
       expect(subject.prefs).to be_a(UserPref)
@@ -136,7 +136,7 @@ describe User do
   end
 
   context 'name with email' do
-    subject { FactoryGirl.build(:user) }
+    subject { build(:user) }
 
     it 'should give email in valid format using chosen name' do
       expect(subject.name_with_email).to eq("#{subject.name} <#{subject.email}>")
@@ -149,7 +149,7 @@ describe User do
   end
 
   context 'find_or_invite' do
-    let(:attrs) { FactoryGirl.attributes_for(:user) }
+    let(:attrs) { attributes_for(:user) }
 
     it 'should find an existing user from their email' do
       existing = User.create!(attrs)
@@ -173,8 +173,8 @@ describe User do
   end
 
   context 'thread subscriptions' do
-    subject { FactoryGirl.create(:user) }
-    let(:thread) { FactoryGirl.create(:message_thread) }
+    subject { create(:user) }
+    let(:thread) { create(:message_thread) }
 
     before do
       thread.subscribers << subject
@@ -190,7 +190,7 @@ describe User do
       end
 
       it 'should return false if user is not subscribed' do
-        new_thread = FactoryGirl.create(:message_thread)
+        new_thread = create(:message_thread)
         expect(subject.subscribed_to_thread?(new_thread)).to be_falsey
       end
     end
@@ -212,9 +212,9 @@ describe User do
   end
 
   context 'involved threads' do
-    subject { FactoryGirl.create(:user) }
-    let(:thread) { FactoryGirl.create(:message_thread) }
-    let(:message) { FactoryGirl.create(:message, created_by: subject, thread: thread) }
+    subject { create(:user) }
+    let(:thread) { create(:message_thread) }
+    let(:message) { create(:message, created_by: subject, thread: thread) }
 
     it 'should be empty' do
       expect(subject.involved_threads).to be_empty
@@ -228,9 +228,9 @@ describe User do
   end
 
   context 'prioritised threads' do
-    subject { FactoryGirl.create(:user) }
-    let(:thread) { FactoryGirl.create(:message_thread) }
-    let!(:priority) { FactoryGirl.create(:user_thread_priority, user: subject, thread: thread) }
+    subject { create(:user) }
+    let(:thread) { create(:message_thread) }
+    let!(:priority) { create(:user_thread_priority, user: subject, thread: thread) }
 
     it 'should contain the thread' do
       expect(subject.prioritised_threads).to include(thread)
@@ -238,8 +238,8 @@ describe User do
   end
 
   context 'thread views' do
-    subject { FactoryGirl.create(:user) }
-    let!(:thread_view) { FactoryGirl.create(:thread_view, user: subject) }
+    subject { create(:user) }
+    let!(:thread_view) { create(:thread_view, user: subject) }
 
     it 'should indicate the user has viewed the thread' do
       expect(subject.viewed_thread?(thread_view.thread)).to be_truthy
@@ -251,10 +251,10 @@ describe User do
   end
 
   it 'should have is_public scope' do
-    private_user = FactoryGirl.create(:user)
+    private_user = create(:user)
     private_user.profile.update visibility: 'group'
 
-    public_user = FactoryGirl.create(:user)
+    public_user = create(:user)
     public_user.profile.update visibility: 'public'
 
     public_users = described_class.is_public
@@ -263,24 +263,24 @@ describe User do
   end
 
   context 'in a group' do
-    subject { FactoryGirl.create(:user, full_name: 'Me') }
-    let(:group) { FactoryGirl.create(:group) }
-    let(:other_group) { FactoryGirl.create(:group) }
+    subject { create(:user, full_name: 'Me') }
+    let(:group) { create(:group) }
+    let(:other_group) { create(:group) }
 
     before do
-      FactoryGirl.create(:group_membership, user: subject, group: group)
+      create(:group_membership, user: subject, group: group)
     end
 
     it 'should be check if other users are viewable' do
-      private_user_in_same_group = FactoryGirl.create(:user, full_name: 'private_user_in_same_group')
-      FactoryGirl.create(:group_membership, user: private_user_in_same_group, group: group)
+      private_user_in_same_group = create(:user, full_name: 'private_user_in_same_group')
+      create(:group_membership, user: private_user_in_same_group, group: group)
       private_user_in_same_group.profile.update visibility: 'group'
 
-      private_user_in_different_group = FactoryGirl.create(:user, full_name: 'private_user_in_different_group')
-      FactoryGirl.create(:group_membership, user: private_user_in_different_group, group: other_group)
+      private_user_in_different_group = create(:user, full_name: 'private_user_in_different_group')
+      create(:group_membership, user: private_user_in_different_group, group: other_group)
       private_user_in_different_group.profile.update visibility: 'group'
 
-      public_user = FactoryGirl.create(:user, full_name: 'public user')
+      public_user = create(:user, full_name: 'public user')
       public_user.profile.update visibility: 'public'
 
       expect(subject.can_view(User.all)).to match_array([subject, private_user_in_same_group, public_user])
@@ -288,7 +288,7 @@ describe User do
   end
 
   context 'account disabling' do
-    subject { FactoryGirl.create(:user) }
+    subject { create(:user) }
 
     it 'should be disabled' do
       subject.disabled = '1'
@@ -311,7 +311,7 @@ describe User do
   end
 
   context 'account deleting' do
-    subject { FactoryGirl.create(:user) }
+    subject { create(:user) }
 
     it 'should appear to be deleted' do
       subject
@@ -339,7 +339,7 @@ describe User do
     end
 
     context 'with locations' do
-      subject { FactoryGirl.create(:user, :with_location) }
+      subject { create(:user, :with_location) }
 
       it 'should remove the user location' do
         subject.destroy
@@ -350,7 +350,7 @@ describe User do
     end
 
     context 'subscribed to thread' do
-      let!(:thread_subscription) { FactoryGirl.create(:thread_subscription, user: subject) }
+      let!(:thread_subscription) { create(:thread_subscription, user: subject) }
 
       it 'should unsubscribe user from threads' do
         expect(subject.subscribed_threads.size).to eql(1)
@@ -362,7 +362,7 @@ describe User do
     end
 
     context 'in a group' do
-      let!(:group_membership) { FactoryGirl.create(:group_membership, user: subject) }
+      let!(:group_membership) { create(:group_membership, user: subject) }
 
       it 'should remove member from the group' do
         expect(subject.groups.size).to eql(1)
@@ -375,7 +375,7 @@ describe User do
   end
 
   context 'buffered locations' do
-    subject { FactoryGirl.create(:user_with_location) }
+    subject { create(:user_with_location) }
     let(:point) { 'POINT(-1 1)' }
     let(:line) { 'LINESTRING (0 0, 0 1)' }
     let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
@@ -407,14 +407,14 @@ describe User do
   end
 
   context 'issues near locations' do
-    subject { FactoryGirl.create(:user_with_location) }
+    subject { create(:user_with_location) }
     let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
 
     it 'should return correct issues' do
       a = 1 + Geo::USER_LOCATIONS_BUFFER / 2
-      issue_in = FactoryGirl.create(:issue, location: 'POINT(0.5 0.5)')
-      issue_close = FactoryGirl.create(:issue, location: "POINT(#{a} #{a})")
-      issue_out = FactoryGirl.create(:issue, location: 'POINT(1.5 1.5)')
+      issue_in = create(:issue, location: 'POINT(0.5 0.5)')
+      issue_close = create(:issue, location: "POINT(#{a} #{a})")
+      issue_out = create(:issue, location: 'POINT(1.5 1.5)')
       subject.locations[0].location = polygon
       issues = subject.issues_near_locations
       expect(issues.count).to eql(2)
@@ -424,11 +424,11 @@ describe User do
   end
 
   context 'start location' do
-    subject { FactoryGirl.create(:user) }
-    let(:group) { FactoryGirl.create(:group) }
-    let(:group2) { FactoryGirl.create(:group) }
+    subject { create(:user) }
+    let(:group) { create(:group) }
+    let(:group2) { create(:group) }
     let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
-    let(:user_location) { FactoryGirl.build(:user_location) }
+    let(:user_location) { build(:user_location) }
 
     it 'should return a relevant location' do
       # start with nowhere
@@ -457,12 +457,12 @@ describe User do
   end
 
   context 'pending group membership requests' do
-    subject { FactoryGirl.create(:user) }
-    let(:group) { FactoryGirl.create(:group) }
+    subject { create(:user) }
+    let(:group) { create(:group) }
 
     it 'should know if a group membership request is pending' do
       expect(subject.membership_request_pending_for?(group)).to be_falsey
-      g = FactoryGirl.create(:group_membership_request, user: subject, group: group)
+      g = create(:group_membership_request, user: subject, group: group)
       subject.reload
       expect(subject.membership_request_pending_for?(group)).to be_truthy
 
@@ -476,14 +476,14 @@ describe User do
 
   context 'confirmation' do
     it 'should not be confirmed' do
-      user = FactoryGirl.create(:user, :unconfirmed)
+      user = create(:user, :unconfirmed)
       expect(user).not_to be_confirmed
     end
   end
 
   describe '#update_remembered_group' do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:group) { FactoryGirl.create(:group) }
+    let(:user) { create(:user) }
+    let(:group) { create(:group) }
 
     it 'should update remembered_group_id given a group' do
       expect(user.remembered_group_id).to be_nil

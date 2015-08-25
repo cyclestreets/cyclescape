@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Document messages' do
-  let(:thread) { FactoryGirl.create(:message_thread) }
+  let(:thread) { create(:message_thread) }
 
   def document_form
     within('#new-document-message') { yield }
@@ -28,8 +28,8 @@ describe 'Document messages' do
   end
 
   context 'show' do
-    let(:message) { FactoryGirl.create(:message, thread: thread) }
-    let!(:document_message) { FactoryGirl.create(:document_message, message: message, created_by: FactoryGirl.create(:user)) }
+    let(:message) { create(:message, thread: thread) }
+    let!(:document_message) { create(:document_message, message: message, created_by: create(:user)) }
 
     before do
       visit thread_path(thread)

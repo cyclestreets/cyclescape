@@ -47,7 +47,7 @@ describe 'Group prefs' do
       end
 
       it 'should let you pick a committee member as membership secretary' do
-        membership = FactoryGirl.create(:group_membership, group: current_group, role: 'committee')
+        membership = create(:group_membership, group: current_group, role: 'committee')
         visit edit_group_prefs_path(current_group)
 
         select membership.user.name, from: 'Membership secretary'
@@ -57,7 +57,7 @@ describe 'Group prefs' do
       end
 
       it 'should let you deselect the membership secretary' do
-        membership = FactoryGirl.create(:group_membership, group: current_group, role: 'committee')
+        membership = create(:group_membership, group: current_group, role: 'committee')
         current_group.prefs.membership_secretary = membership.user
         current_group.prefs.save!
 
@@ -86,7 +86,7 @@ describe 'Group prefs' do
     include_context 'signed in as admin'
 
     describe 'editing any group preferences she wants to' do
-      let(:group) { FactoryGirl.create(:quahogcc) }
+      let(:group) { create(:quahogcc) }
       it 'should be permitted' do
         visit edit_group_prefs_path(group)
         expect(page).to have_content('Edit Preferences')

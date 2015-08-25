@@ -6,8 +6,8 @@ describe 'Issues in a group subdomain' do
 
   let(:location_inside_group) { 'POINT (10 10)' }
   let(:location_outside_group) { 'POINT (200 200)' }
-  let!(:issues) { FactoryGirl.create_list(:issue, 2, location: location_inside_group) }
-  let!(:outside_issue) { FactoryGirl.create(:issue, location: location_outside_group) }
+  let!(:issues) { create_list(:issue, 2, location: location_inside_group) }
+  let!(:outside_issue) { create(:issue, location: location_outside_group) }
 
   before do
     # Groups create empty profiles automatically, so just update the existing one
@@ -83,7 +83,7 @@ describe 'Issues in a group subdomain' do
   end
 
   context 'editing' do
-    let(:issue) { FactoryGirl.create(:issue, created_by: current_user) }
+    let(:issue) { create(:issue, created_by: current_user) }
     let(:edit_text) { 'Edit this issue' }
 
     # Check decl_auth context is set correctly for nested controller

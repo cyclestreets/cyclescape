@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe 'Groups' do
-  let(:group) { FactoryGirl.create(:group, :with_profile) }
+  let(:group) { create(:group, :with_profile) }
   let(:profile) { group.profile }
 
   describe 'show' do
@@ -47,8 +47,8 @@ describe 'Groups' do
   end
 
   describe 'index' do
-    let!(:profile_2) { FactoryGirl.create(:group_profile) }
-    let!(:profile_3) { FactoryGirl.create(:group_profile) }
+    let!(:profile_2) { create(:group_profile) }
+    let!(:profile_3) { create(:group_profile) }
 
     before do
       visit groups_path

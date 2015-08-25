@@ -18,7 +18,7 @@ describe Message do
   end
 
   describe 'newly created' do
-    subject { FactoryGirl.create(:message) }
+    subject { create(:message) }
 
     it 'should not be censored' do
       expect(subject.censored_at).to be_nil
@@ -26,10 +26,10 @@ describe Message do
   end
 
   describe 'component association' do
-    subject { FactoryGirl.create(:message) }
+    subject { create(:message) }
 
     it 'should accept a PhotoMessage' do
-      subject.component = FactoryGirl.create(:photo_message, message: subject)
+      subject.component = create(:photo_message, message: subject)
       expect(subject.component_type).to eq('PhotoMessage')
       expect(subject).to be_valid
     end
@@ -54,12 +54,12 @@ describe Message do
 
   describe '#component_name' do
     it 'should return the name of Message if there is no component' do
-      message = FactoryGirl.build(:message)
+      message = build(:message)
       expect(message.component_name).to eq('message')
     end
 
     it 'should return the name of the component' do
-      photo_message = FactoryGirl.build(:photo_message)
+      photo_message = build(:photo_message)
       message = photo_message.message
       expect(message.component_name).to eq('photo_message')
     end
@@ -67,12 +67,12 @@ describe Message do
 
   describe 'searchable text' do
     it "should return the body if there's no component" do
-      message = FactoryGirl.create(:message)
+      message = create(:message)
       expect(message.searchable_text).to eq(message.body)
     end
 
     it "should return both the body and the component's text if there's a component" do
-      message = FactoryGirl.create(:photo_message).message
+      message = create(:photo_message).message
       expect(message.searchable_text).to include(message.body)
       expect(message.searchable_text).to include(message.component.searchable_text)
     end

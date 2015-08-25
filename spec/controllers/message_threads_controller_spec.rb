@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe MessageThreadsController do
   context 'thread views' do
-    let(:thread) { FactoryGirl.create(:message_thread) }
-    let!(:message_a) { FactoryGirl.create(:message, thread: thread, created_at: Time.now - 4.days) }
-    let!(:message_b) { FactoryGirl.create(:message, thread: thread, created_at: Time.now - 3.days) }
-    let!(:message_c) { FactoryGirl.create(:message, thread: thread, created_at: Time.now - 2.days) }
+    let(:thread) { create(:message_thread) }
+    let!(:message_a) { create(:message, thread: thread, created_at: Time.now - 4.days) }
+    let!(:message_b) { create(:message, thread: thread, created_at: Time.now - 3.days) }
+    let!(:message_c) { create(:message, thread: thread, created_at: Time.now - 2.days) }
 
     context 'as a guest' do
       it 'should not assign a message to view from' do
@@ -15,10 +15,10 @@ describe MessageThreadsController do
     end
 
     context 'as a site user' do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
 
       before do
-        sign_in user
+        warden.set_user user
       end
 
       context "who hasn't viewed the thread before" do
@@ -30,7 +30,7 @@ describe MessageThreadsController do
 
       context 'who viewed the thread and no messages have been posted since' do
         it 'should assign the final message' do
-          FactoryGirl.create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 1.day)
+          create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 1.day)
           thread.reload
           get :show, id: thread
           expect(assigns(:view_from)).to eql(thread.messages.last)
@@ -39,7 +39,7 @@ describe MessageThreadsController do
 
       context 'who viewed the thread and two messages have been posted since' do
         it 'should assign the first of the new messages' do
-          FactoryGirl.create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 3.5.days)
+          create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 3.5.days)
           get :show, id: thread
           expect(assigns(:view_from)).to eql(message_b)
         end

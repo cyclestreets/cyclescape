@@ -1,6 +1,6 @@
 .pull-right
   = check_box_tag('collisions')
-  = label_tag 'collisions', 'Show Collisions'
+  = label_tag 'collisions', t('.show_collisions')
 
 - m = display_map(issue, geometry_issue_path(issue, :json)) do |map, page|
   - add_collision_layer(map, page)

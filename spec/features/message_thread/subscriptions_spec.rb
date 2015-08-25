@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Thread subscriptions' do
-  let(:thread) { FactoryGirl.create(:message_thread_with_messages) }
+  let(:thread) { create(:message_thread_with_messages) }
   let(:subscribe_button) { find_button(I18n.t('formtastic.actions.thread_subscription.create')) }
 
   context 'site user subscribe' do
@@ -144,9 +144,9 @@ describe 'Thread subscriptions' do
     context 'as a site user' do
       include_context 'signed in as a site user'
 
-      let(:public_thread) { FactoryGirl.create(:thread) }
-      let(:private_thread) { FactoryGirl.create(:group_private_message_thread) }
-      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread) }
+      let(:public_thread) { create(:thread) }
+      let(:private_thread) { create(:group_private_message_thread) }
+      let(:committee_thread) { create(:group_committee_message_thread) }
 
       # First, prove the positive case. Use this as a template.
       it 'should let you subscribe to a public thread' do
@@ -169,8 +169,8 @@ describe 'Thread subscriptions' do
     context 'as a group member' do
       include_context 'signed in as a group member'
 
-      let(:private_thread) { FactoryGirl.create(:group_private_message_thread, group: current_group) }
-      let(:committee_thread) { FactoryGirl.create(:group_committee_message_thread, group: current_group) }
+      let(:private_thread) { create(:group_private_message_thread, group: current_group) }
+      let(:committee_thread) { create(:group_committee_message_thread, group: current_group) }
 
       it 'should let a group member subscribe to a private thread' do
         attempt_subscription(private_thread)

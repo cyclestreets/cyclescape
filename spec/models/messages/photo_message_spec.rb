@@ -26,7 +26,7 @@ describe PhotoMessage do
   end
 
   context 'factory' do
-    subject { FactoryGirl.create(:photo_message) }
+    subject { create(:photo_message) }
 
     it { is_expected.to be_valid }
 
@@ -40,7 +40,7 @@ describe PhotoMessage do
   end
 
   context 'photo thumbnail' do
-    subject { FactoryGirl.create(:photo_message) }
+    subject { create(:photo_message) }
 
     it 'should provide a thumbnail of the photo' do
       expect(subject.photo_thumbnail).to be_truthy
@@ -50,7 +50,7 @@ describe PhotoMessage do
   end
 
   context 'photo preview' do
-    subject { FactoryGirl.create(:photo_message) }
+    subject { create(:photo_message) }
 
     it 'should provide a preview size of the photo' do
       expect(subject.photo_preview).to be_truthy
@@ -60,7 +60,7 @@ describe PhotoMessage do
   end
 
   context 'searchable text' do
-    subject { FactoryGirl.create(:photo_message_with_description) }
+    subject { create(:photo_message_with_description) }
 
     it 'should contain the caption' do
       expect(subject.searchable_text).to include(subject.caption)

@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Group do
   describe 'to be valid' do
-    subject { FactoryGirl.build(:group) }
+    subject { build(:group) }
 
     it 'must have a name' do
       subject.name = ''
@@ -22,7 +22,7 @@ describe Group do
   end
 
   describe 'newly created' do
-    subject { FactoryGirl.create(:group) }
+    subject { create(:group) }
 
     it 'must have a profile' do
       expect(subject.profile).to be_valid
@@ -66,7 +66,7 @@ describe Group do
   end
 
   describe 'validations' do
-    subject { FactoryGirl.create(:group) }
+    subject { create(:group) }
 
     it { is_expected.to allow_value('public').for(:default_thread_privacy) }
     it { is_expected.to allow_value('group').for(:default_thread_privacy) }
@@ -75,7 +75,7 @@ describe Group do
   end
 
   context 'members' do
-    let(:membership) { FactoryGirl.create(:brian_at_quahogcc) }
+    let(:membership) { create(:brian_at_quahogcc) }
     let(:brian) { membership.user }
 
     subject { membership.group }
@@ -90,7 +90,7 @@ describe Group do
       end
 
       it 'should be false for another user' do
-        new_user = FactoryGirl.create(:user)
+        new_user = create(:user)
         expect(subject.has_member?(new_user)).to be_falsey
       end
     end
@@ -101,7 +101,7 @@ describe Group do
       end
 
       it 'should not include committee for another user' do
-        new_user = FactoryGirl.create(:user)
+        new_user = create(:user)
         expect(subject.thread_privacy_options_for(new_user)).not_to include('committee')
       end
     end

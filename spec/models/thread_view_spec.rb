@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe ThreadView do
   context 'newly created' do
-    subject { FactoryGirl.create(:thread_view) }
+    subject { create(:thread_view) }
 
     it 'should be valid' do
       expect(subject).to be_valid
