@@ -1,4 +1,5 @@
-$(window).load ->
+window.mapInit = ->
+  return if !google? || !google.maps.LatLng
   issue = new (google.maps.LatLng)(svLongNew, svLatNew)
   svs = new google.maps.StreetViewService()
   panorama = null
@@ -72,5 +73,6 @@ $(window).load ->
     addStreetView(streetView) for streetView in streetViews
 
     return
+  initialize()
 
-  google.maps.event.addDomListener window, 'load', initialize
+$(document).ready(window.mapInit)
