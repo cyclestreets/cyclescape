@@ -269,3 +269,7 @@
 .ui-datepicker table.ui-datepicker-calendar td span, .ui-datepicker table.ui-datepicker-calendar td a{
   text-align: center;
 }
+
+.ui-menu {
+  background-color: white
+}

@@ -32,6 +32,7 @@ class User::ProfilesController < ApplicationController
       set_flash_message :success
       redirect_to action: :show
     else
+      @user = UserDecorator.decorate(@user)
       render :edit
     end
   end
