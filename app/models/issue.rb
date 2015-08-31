@@ -40,13 +40,11 @@ class Issue < ActiveRecord::Base
   validates :location, presence: true
   validates :size, numericality: { less_than: Geo::ISSUE_MAX_AREA }
   validates :created_by, presence: true
-  validates :external_url, url: {allow_blank: true, no_local: true}
+  validates :external_url, url: true
 
   default_scope {where(deleted_at: nil)}
   scope :by_most_recent, -> { order('created_at DESC') }
   scope :created_by, ->(user) { where(created_by_id: user) }
-
-  before_validation :add_external_url_schema
 
   def to_param
     "#{id}-#{title.parameterize}"
@@ -56,6 +54,10 @@ class Issue < ActiveRecord::Base
   # iterates over every time in the range - integer ranges are optimized.
   def created_at_as_i
     created_at.to_i
+  end
+
+  def external_url=(val)
+    write_attribute(:external_url, AttributeNormaliser::URL.new(val).normalise)
   end
 
   protected
@@ -69,10 +71,5 @@ class Issue < ActiveRecord::Base
   def generate_photo_path
     hash = Digest::SHA1.file(photo.path).hexdigest
     "issue_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"
-  end
-
-  def add_external_url_schema
-    return unless external_url.present?
-    self.external_url = "http://#{external_url}" unless external_url.match /^https?:\/\//
   end
 end

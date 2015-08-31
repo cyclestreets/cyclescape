@@ -35,6 +35,10 @@ class SiteComment < ActiveRecord::Base
     save!
   end
 
+  def context_url=(val)
+    write_attribute(:context_url, AttributeNormaliser::URL.new(val).normalise)
+  end
+
   protected
 
   def set_user_details

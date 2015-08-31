@@ -11,11 +11,9 @@ describe Issue do
       end
     end
 
-    %w(www bad).each do |url|
-      it "should not accept invalid urls such as #{url}" do
-        subject.external_url = url
-        expect(subject).to have(1).error_on(:external_url)
-      end
+    it "should not accept invalid urls" do
+      subject.external_url = 'w[iki]pedia.org/wiki/Family_Guy'
+      expect(subject).to have(1).error_on(:external_url)
     end
   end
 
