@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824101733) do
+ActiveRecord::Schema.define(version: 20150831090642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 20150824101733) do
     t.spatial  "location",      limit: {:srid=>4326, :type=>"geometry"}
     t.string   "photo_uid"
     t.datetime "deadline"
+    t.string   "external_url"
   end
 
   add_index "issues", ["created_by_id"], :name => "index_issues_on_created_by_id"

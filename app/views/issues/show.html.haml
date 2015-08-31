@@ -40,6 +40,9 @@
         - deadline = @issue.deadline.to_date
         = deadline
         = render partial: "shared/deadline", locals: {deadline: deadline}
+    - if @issue.external_url
+      %section.external_url
+        = link_to @issue.external_url
 
   %section.map
     %h2= t ".location"

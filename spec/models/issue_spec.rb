@@ -3,6 +3,22 @@ require 'spec_helper'
 describe Issue do
   it_should_behave_like 'a taggable model'
 
+  describe 'validates' do
+    %w(www.example.com http://www.example.com).each do |url|
+      it "should accept valid urls such as #{url}"  do
+        subject.external_url = url
+        expect(subject).to have(:no).error_on(:external_url)
+      end
+    end
+
+    %w(www bad).each do |url|
+      it "should not accept invalid urls such as #{url}" do
+        subject.external_url = url
+        expect(subject).to have(1).error_on(:external_url)
+      end
+    end
+  end
+
   describe 'newly created' do
     subject { create(:issue) }
 

@@ -51,6 +51,7 @@ gem 'turbolinks'
 gem 'rails-observers'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'will-paginate-i18n'
+gem 'validate_url'
 
 group :development do
   gem 'letter_opener'

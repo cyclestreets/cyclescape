@@ -135,6 +135,6 @@ class IssuesController < ApplicationController
 
   def permitted_params
     params.require(:issue).permit :title, :photo, :retained_photo, :loc_json, :tags_string,
-      :description, :deadline
+      :description, :deadline, :external_url
   end
 end
