@@ -12,11 +12,11 @@ module IssueApi
                          issue.created_by.display_name_or_anon
                        end
 
-        issue.loc_feature(id: issue.id,
-                          created_at: issue.created_at,
+        RGeo::GeoJSON::Feature.new(issue.location, nil, id: issue.id,
+                          created_at: issue.created_at.to_i,
                           created_by: creator_name,
                           description: issue.description,
-                          deadline: issue.deadline,
+                          deadline: issue.deadline.to_i,
                           external_url: issue.external_url,
                           tags: issue.tags.pluck(:name),
                           cyclescape_url: "http://www.cyclescape.org/issues/#{issue.to_param}"
@@ -52,6 +52,5 @@ module IssueApi
       collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)
       RGeo::GeoJSON.encode(collection)
     end
-
   end
 end
