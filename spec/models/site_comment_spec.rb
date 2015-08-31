@@ -12,7 +12,7 @@ describe SiteComment do
       comment = SiteComment.new
       comment.context_url = 'http://www.example.com'
       expect(comment).to have(0).errors_on(:context_url)
-      comment.context_url = 'blah'
+      comment.context_url = '/a[]d/'
       expect(comment).to have(1).error_on(:context_url)
     end
 
