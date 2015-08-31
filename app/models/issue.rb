@@ -46,6 +46,16 @@ class Issue < ActiveRecord::Base
   scope :by_most_recent, -> { order('created_at DESC') }
   scope :created_by, ->(user) { where(created_by_id: user) }
 
+  class << self
+    def after_date(date)
+      where('coalesce(deadline, created_at) >= ?', date)
+    end
+
+    def before_date(date)
+      where('coalesce(deadline, created_at) <= ?', date)
+    end
+  end
+
   def to_param
     "#{id}-#{title.parameterize}"
   end

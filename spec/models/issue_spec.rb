@@ -389,6 +389,22 @@ describe Issue do
       end
     end
 
+    describe 'dates scope' do
+      let!(:one_day_old) { create :issue, created_at: 1.day.ago }
+      let!(:two_day_old) { create :issue, deadline: 2.days.ago }
+      let!(:four_day_old) { create :issue, deadline: 4.days.ago, created_at: 1.days.ago }
+
+      it 'has before date scope' do
+        expect(described_class.before_date(3.days.ago.to_date)).
+          to match_array([four_day_old])
+      end
+
+      it 'has after date scope' do
+        expect(described_class.after_date(3.days.ago.to_date)).
+          to match_array([one_day_old, two_day_old])
+      end
+    end
+
     describe 'where_tag_names_in' do
       it 'should return the issues which have all of the tags' do
         tag1 = create :tag, name: 'tag1'
