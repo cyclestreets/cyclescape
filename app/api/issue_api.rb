@@ -31,7 +31,7 @@ module IssueApi
       end
     end
 
-    desc 'Returns issues as a GoeJSON collection'
+    desc 'Returns issues as a GeoJSON collection'
     params do
       optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
       optional :tags, type: Array, desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]'
