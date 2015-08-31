@@ -18,7 +18,9 @@ RSpec.describe Api::V1::IssuesController, type: :controller do
       end
 
       it 'has the correct fields' do
-        expect(JSON.load(response.body)[0].keys).to match_array(%w(id created_at created_by description tags location cyclescape_url))
+        expect(JSON.load(response.body)[0].keys).
+          to match_array(%w(id created_at created_by deadline external_url
+                            description tags location cyclescape_url))
       end
     end
   end
