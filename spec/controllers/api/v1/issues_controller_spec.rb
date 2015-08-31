@@ -6,7 +6,7 @@ RSpec.describe Api::V1::IssuesController, type: :controller do
   end
 
   describe 'GET index.json' do
-    context 'with full request' do
+    context 'with bounding box' do
       before do
         tag = create :tag, name: 'taga'
         create :issue_within_quahog, tags: [tag] # location 0.11906 52.20792
@@ -21,6 +21,39 @@ RSpec.describe Api::V1::IssuesController, type: :controller do
         expect(JSON.load(response.body)[0].keys).
           to match_array(%w(id created_at created_by deadline external_url
                             description tags location cyclescape_url))
+      end
+    end
+
+    context 'with dates' do
+      before do
+        create :issue, deadline: 1.day.ago, id: 42
+        create :issue, created_at: 3.days.ago, deadline: 3.day.ago
+      end
+
+      it 'respects the start date parameter' do
+        get :index, start_date: 2.days.ago, format: :json
+
+        expect(JSON.load(response.body).size).to eq(1)
+        expect(JSON.load(response.body)[0]['id']).to eq(42)
+      end
+
+      it 'respects the end date parameter' do
+        get :index, end_date: 2.days.ago, format: :json
+
+        expect(JSON.load(response.body).size).to eq(1)
+        expect(JSON.load(response.body)[0]['id']).to_not eq(42)
+      end
+    end
+
+    context 'with per page' do
+      before do
+        3.times { create :issue }
+
+        get :index, per_page: 2, format: :json
+      end
+
+      it 'respects the per_page parameters' do
+        expect(JSON.load(response.body).size).to eq(2)
       end
     end
   end
