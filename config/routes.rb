@@ -1,4 +1,4 @@
-Cyclescape::Application.routes.draw do
+Rails.application.routes.draw do
   namespace :api do
     defaults format: 'json' do
       namespace :v1 do

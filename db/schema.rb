@@ -228,7 +228,7 @@ ActiveRecord::Schema.define(version: 20150824101733) do
     t.integer  "group_id"
     t.string   "title",         null: false
     t.string   "privacy",       null: false
-    t.string   "state"
+    t.string   "zzz_state"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.datetime "deleted_at"

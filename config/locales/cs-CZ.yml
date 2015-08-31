@@ -225,6 +225,9 @@
       new:
         title: "Přihlásit"
         sign_in_button: "Přihlásit"
+    mailer:
+      invitation_instructions:
+        hello: "Ahoj %{email}"
   group:
     group_prefs_tab: "Nastavení skupiny"
     group_profile_tab: "Profil místní skupiny"

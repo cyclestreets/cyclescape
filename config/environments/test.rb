@@ -1,4 +1,4 @@
-Cyclescape::Application.configure do
+Rails.application.configure do
   config.eager_load = false
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -38,6 +38,7 @@ Cyclescape::Application.configure do
 
   # Allow pass debug_assets=true as a query parameter to load pages with unpackaged assets
   config.assets.allow_debugging = true
+  config.action_view.raise_on_missing_translations = true
 
   # Disable analytics
   config.analytics = {}

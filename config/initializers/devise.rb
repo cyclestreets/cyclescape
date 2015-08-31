@@ -230,8 +230,4 @@ Devise.setup do |config|
 
   # Added during Devise upgrade
   config.password_length = 6..128
-
-  # remove code below (its meant to be temp here during upgrade)
-  config.allow_insecure_token_lookup = true
-  config.secret_key = Rails.env.production? ? File.read(secret_file).strip : fallback_token
 end

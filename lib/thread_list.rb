@@ -4,7 +4,7 @@ class ThreadList
   end
 
   def self.recent_public_from_groups(groups, limit)
-    MessageThread.public.where(group_id: groups).order_by_latest_message.limit(limit)
+    MessageThread.is_public.where(group_id: groups).order_by_latest_message.limit(limit)
   end
 
   def self.issue_threads_from_group(group)
@@ -20,11 +20,11 @@ class ThreadList
   end
 
   def self.public_recent_involved_with(user, limit)
-    recent_involved_with(user, limit).public
+    recent_involved_with(user, limit).is_public
   end
 
   def self.recent_public
-    MessageThread.public.order_by_latest_message
+    MessageThread.is_public.order_by_latest_message
   end
 
   def self.with_upcoming_deadlines(user, limit)
