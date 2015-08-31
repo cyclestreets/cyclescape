@@ -2,13 +2,11 @@
 
 "en-GB":
   cancel: "Cancel"
-
   activerecord:
     errors:
       models:
         issue:
           attributes:
-            external_url: External site
             size:
               less_than: "of the issue is too large."
         user:
@@ -16,6 +14,9 @@
             full_name:
               blank: "Please enter a name"
               email: "Please enter an email address"
+    attributes:
+      issue:
+        external_url: External site
 
   formtastic:
     labels:
@@ -107,6 +108,9 @@
       message_thread:
         privacy: "This specifies who can see and edit this discussion thread."
         issue: "This specifies which issue this discussion thread is attached to. If none, this will be an administrative thread."
+    placeholders:
+      issue:
+        external_url: www.example.com
     actions:
       update: "Save"
       saving: "Saving\u2026"

@@ -546,6 +546,7 @@
         one: "hlas"
         other: "hlasy"
       location: "Umístění"
+      deadline: Uzávěrka
     map:
       show_collisions: "Ukázat nehody (funguje jen ve Velké Británii)"
     update:

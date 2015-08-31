@@ -532,6 +532,7 @@
         one: "vote"
         other: "votes"
       location: "Location"
+      deadline: Deadline
     map:
       show_collisions: Show Collisions
     update:
