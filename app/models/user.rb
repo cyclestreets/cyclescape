@@ -223,6 +223,7 @@ class User < ActiveRecord::Base
   def obfuscate_name
     self.full_name = "User #{id} (deleted)"
     self.display_name = nil
+    true
   end
 
   def display_name_or_anon
@@ -231,24 +232,22 @@ class User < ActiveRecord::Base
 
   def clear_profile
     profile.clear
+    true
   end
 
   def remove_locations
-    locations.each do |location|
-      location.destroy
-    end
+    locations.each(&:destroy)
+    true
   end
 
   def remove_group_memberships
-    memberships.each do |membership|
-      membership.destroy
-    end
+    memberships.each(&:destroy)
+    true
   end
 
   def remove_thread_subscriptions
-    thread_subscriptions.each do |subscription|
-      subscription.destroy
-    end
+    thread_subscriptions.each(&:destroy)
+    true
   end
 
   def can_view(other_users)
