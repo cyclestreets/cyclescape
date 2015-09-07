@@ -14,10 +14,11 @@ describe IssueApi::API do
 
   describe 'GET index.json' do
     context 'with bounding box' do
+      let(:host) { "" }
       before do
         tag = create :tag, name: 'taga'
         create :issue_within_quahog, tags: [tag] # location 0.11906 52.20792
-        get "/api/issues", bbox: '0.11905,52.20791,0.11907,52.20793', tags: ["taga"]
+        get "#{host}/api/issues", bbox: '0.11905,52.20791,0.11907,52.20793', tags: ["taga"]
       end
 
       it 'returns issue' do
@@ -28,6 +29,13 @@ describe IssueApi::API do
         expect(geojson_response[0].keys).
           to match_array(%w(id created_at created_by deadline external_url
                             description tags cyclescape_url))
+      end
+      context 'with a subdomain' do
+        let(:host) { 'http://cam.example.com' }
+
+        it 'returns cyclescape url with subdomain' do
+          expect(geojson_response[0]['cyclescape_url']).to match(/cam\.example\.com\/issues/)
+        end
       end
     end
 
