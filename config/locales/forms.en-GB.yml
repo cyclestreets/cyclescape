@@ -2,7 +2,6 @@
 
 "en-GB":
   cancel: "Cancel"
-
   activerecord:
     errors:
       models:
@@ -15,6 +14,9 @@
             full_name:
               blank: "Please enter a name"
               email: "Please enter an email address"
+    attributes:
+      issue:
+        external_url: External site
 
   formtastic:
     labels:
@@ -95,6 +97,8 @@
       issue:
         new: &hints_issue_new
           description: "Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue."
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
           photo: "(optional)"
           tags_string: "e.g. cycleparking obstruction roadworks path"
           title: "Please be brief and specific."
@@ -104,6 +108,9 @@
       message_thread:
         privacy: "This specifies who can see and edit this discussion thread."
         issue: "This specifies which issue this discussion thread is attached to. If none, this will be an administrative thread."
+    placeholders:
+      issue:
+        external_url: http://www.example.com
     actions:
       update: "Save"
       saving: "Saving\u2026"

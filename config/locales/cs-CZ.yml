@@ -6,6 +6,11 @@
   anon: "Anonymní"
   sign_in: "přihlásit"  # Used for links
   confirm: "Opravdu?"
+  deadline_date: "Termín/datum"
+  days_away:
+    zero: "Dnes!"
+    one: "Zítra!"
+    other: "Za %{count} dní"
   admin:
     groups:
       index:
@@ -139,10 +144,6 @@
       add_some_locations: "přidat oblasti"
       areas_you_are_watching: "oblasti, které sledujete"
       converted_to_issue: "Převedeno na podnět:"
-      days_away:
-        zero: "Dnes!"
-        one: "Zítra!"
-        other: "Za %{count} dní"
       deadlines: "Termíny a data"
       deadline_thread_updated: "vlákno upraveno %{at}"
       issues_lower: "podněty"
@@ -545,6 +546,7 @@
         one: "hlas"
         other: "hlasy"
       location: "Umístění"
+      deadline: Uzávěrka
     map:
       show_collisions: "Ukázat nehody (funguje jen ve Velké Británii)"
     update:
@@ -767,16 +769,10 @@
   message:
     deadlines:
       new:
-        deadline_date: "Termín/datum"
         submit: "Přidat termín/datum"
       create:
         failure: "Termín/datum nemůže být vytvořeno"
         success: "Termín/datum vložení"
-      show:
-        days_away:
-          zero: "Dnes!"
-          one: "Zítra!"
-          other: "Za %{count} dní!"
     documents:
       create:
         failure: "Nemohu přidat přílohu"
