@@ -110,7 +110,7 @@
         issue: "This specifies which issue this discussion thread is attached to. If none, this will be an administrative thread."
     placeholders:
       issue:
-        external_url: www.example.com
+        external_url: http://www.example.com
     actions:
       update: "Save"
       saving: "Saving\u2026"
