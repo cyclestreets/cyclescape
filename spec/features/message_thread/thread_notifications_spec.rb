@@ -80,18 +80,13 @@ describe 'thread notifications' do
     end
 
     it 'should send and email for a document message' do
-      within('#new-document-message') do
-        attach_file 'File', pdf_document_path
-        fill_in 'Title', with: 'Some more words'
-        click_on 'Add Attachment'
-      end
-
+      message = create :document_message, message: thread.messages.first
+      ThreadNotifier.notify_subscribers(thread, :new_document_message, message)
       open_email(current_user.email)
-      expect(current_email).to have_body_text('Some more words')
+      expect(current_email).to have_body_text(message.title)
       expect(current_email).to have_body_text('added an attachment to the thread')
       expect(current_email).to have_body_text(I18n.t('.thread_mailer.new_document_message.view_the_document'))
-      # See above
-      skip 'Figure out testing the url'
+      expect(current_email).to have_body_text(message.file.url)
     end
 
     context 'html encoding' do
