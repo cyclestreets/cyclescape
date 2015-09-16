@@ -893,10 +893,8 @@
         who: "Who"
       new:
         title: "Feedback"
-      success:
-        thank_you_title: "Thank you for your feedback!"
-        thank_you_longform: "One of our developers will read your feedback and use it to help plan upcoming work and new features. Unfortunately we can't respond individually to every feedback comment that we receive."
-        close: "< Back to site"
+      create:
+        success: "Thank you for your feedback!"
   tags:
     show:
       issues: "Issues"

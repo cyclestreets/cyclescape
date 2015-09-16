@@ -13,7 +13,8 @@ class Site::CommentsController < ApplicationController
     @site_comment.user = current_user if current_user
 
     if @site_comment.save
-      render 'success'
+      set_flash_message(:success)
+      redirect_to root_path
     else
       render 'new', status: :conflict
     end
