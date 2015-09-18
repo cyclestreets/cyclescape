@@ -907,10 +907,8 @@
         who: "Kdo"
       new:
         title: "Zpětná vazba"
-      success:
-        thank_you_title: "Děkujeme za vaší zpětnou vazbu!"
-        thank_you_longform: "Vaše zpětná vazba nám pomůže rozhodnout se, na jakých vylepšeních budeme pracovat. Váš komentář si přečte některý z našich vývojářů, bohužel však nejsme schopní na každý z nich individuálně odpovídat."
-        close: "< Návrat na stránku"
+      create:
+        success: "Děkujeme za vaší zpětnou vazbu!"
   tags:
     show:
       issues: "Podněty"

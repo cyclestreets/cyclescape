@@ -645,10 +645,8 @@
         when_ago: "%{time_ago} zurück"
       new:
         title: "Kommentare"
-      success:
-        thank_you_title: "Danke für deinen Kommentar!"
-        thank_you_longform: "Einer unserer Entwickler wird Deinen Kommentar lesen und diese für spätere Entwicklungen berücksichtigen. Leider können wir nicht auf jede Rückmeldung persönlich antworten, die wir erhalten."
-        close: "< Zurück zur Seite"
+      create:
+        success: "Danke für deinen Kommentar!"
   tags:
     show:
       issues: "Issues"
