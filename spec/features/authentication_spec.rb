@@ -26,7 +26,7 @@ describe 'Authentication and authorization' do
       fill_in 'Password', with: password
       click_button 'Sign in'
 
-      expect(page).to have_content('signed in')
+      expect(page).to have_content(I18n.t('.devise.sessions.signed_in'))
       expect(page.current_path).to eql(new_issue_path)
     end
   end
@@ -154,7 +154,7 @@ describe 'Authentication and authorization' do
       sign_in
       cancel_account
       sign_in
-      expect(page).to have_content(I18n.t('.devise.failure.invalid'))
+      expect(page).to have_content(I18n.t('.devise.failure.not_found_in_database'))
     end
 
     it 'should not let me recover my password' do

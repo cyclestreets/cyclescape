@@ -5,7 +5,7 @@ shared_context 'signs in' do
     fill_in 'Email', with: current_user.email
     fill_in 'Password', with: password
     click_button 'Sign in'
-    expect(page).to have_content('signed in')
+    expect(page).to have_content(I18n.t('.devise.sessions.signed_in'))
   end
 end
 
