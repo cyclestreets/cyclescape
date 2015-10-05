@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount IssueApi::API => '/'
 
   # Pretty evil but beats copy pasting
   def issues_route(opts = {})
@@ -119,7 +120,7 @@ Rails.application.routes.draw do
 
   resources :planning_applications do
     get :search, on: :collection
-    get 'uid/*uid', to: :show_uid, on: :collection
+    get 'uid/*uid', to: :show_uid, on: :collection, as: :show_uid
     get :geometry, on: :member
     put :hide, on: :member
     put :unhide, on: :member

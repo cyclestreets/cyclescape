@@ -1,0 +1,3 @@
+- diff = deadline.to_date - Date.today
+- if diff >= 0 && diff < 30
+  %p.warning= t "days_away", count: diff.to_i

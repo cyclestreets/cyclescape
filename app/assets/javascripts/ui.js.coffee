@@ -102,13 +102,13 @@ jQuery ->
       $(this).parents(".inner:first").html(xhr.responseText)
 
   # Tools menu
-  $(document)
-    .on "click", "menu.tools", ->
-      $(this).toggleClass("reveal")
-    .on "touchend", "menu.tools", ->
-      $(this).addClass("reveal")
-    .on "mouseleave", "menu.tools", ->
-      $(this).removeClass("reveal")
+  tools = $(".tools")
+  tools.on "click", ->
+    $(this).toggleClass("reveal")
+  tools.on "touchend", ->
+    $(this).addClass("reveal")
+  tools.on "mouseleave", ->
+    $(this).removeClass("reveal")
 
   $("div.group-selector").on "click", (e) ->
     $(this).toggleClass "open closed"

@@ -120,12 +120,17 @@ class IssuesController < ApplicationController
 
   def issue_feature(issue, bbox = nil)
     geom = bbox.to_geometry if bbox
+    creator_name = if permitted_to? :view_profile, issue.created_by
+                     issue.created_by.name
+                   else
+                     issue.created_by.display_name_or_anon
+                   end
     issue.loc_feature(thumbnail: issue.medium_icon_path,
                       image_url: issue.tip_icon_path(false),
                       title: issue.title,
                       size_ratio: issue.size_ratio(geom),
                       url: view_context.url_for(issue),
-                      created_by: issue.created_by.name,
+                      created_by: creator_name,
                       created_by_url: view_context.url_for(issue.created_by))
   end
 
@@ -135,6 +140,6 @@ class IssuesController < ApplicationController
 
   def permitted_params
     params.require(:issue).permit :title, :photo, :retained_photo, :loc_json, :tags_string,
-      :description
+      :description, :deadline, :external_url
   end
 end

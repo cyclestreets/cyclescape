@@ -13,6 +13,14 @@ module Taggable
       tags = Arel::Table.new(:tags)
       includes(:tags).where(tags[:name].eq(tag.name)).references(:tags)
     end
+
+    def where_tag_names_in(tag_names)
+      if tag_names.present?
+        joins(:tags).where(tags: {name: tag_names}).group('issues.id').having('COUNT(tags.id)=?', tag_names.size)
+      else
+        none
+      end
+    end
   end
 
   def tags_string

@@ -3,6 +3,20 @@ require 'spec_helper'
 describe Issue do
   it_should_behave_like 'a taggable model'
 
+  describe 'validates' do
+    %w(www.example.com http://www.example.com).each do |url|
+      it "should accept valid urls such as #{url}"  do
+        subject.external_url = url
+        expect(subject).to have(:no).error_on(:external_url)
+      end
+    end
+
+    it "should not accept invalid urls" do
+      subject.external_url = 'w[iki]pedia.org/wiki/Family_Guy'
+      expect(subject).to have(1).error_on(:external_url)
+    end
+  end
+
   describe 'newly created' do
     subject { create(:issue) }
 
@@ -372,6 +386,37 @@ describe Issue do
         create(:issue)
         expect(Issue.count).to eq(3)
         expect(Issue.created_by(user)).to match_array(owned_issues)
+      end
+    end
+
+    describe 'dates scope' do
+      let!(:one_day_old) { create :issue, created_at: 1.day.ago }
+      let!(:two_day_old) { create :issue, deadline: 2.days.ago }
+      let!(:four_day_old) { create :issue, deadline: 4.days.ago, created_at: 1.days.ago }
+
+      it 'has before date scope' do
+        expect(described_class.before_date(3.days.ago.to_date)).
+          to match_array([four_day_old])
+      end
+
+      it 'has after date scope' do
+        expect(described_class.after_date(3.days.ago.to_date)).
+          to match_array([one_day_old, two_day_old])
+      end
+    end
+
+    describe 'where_tag_names_in' do
+      it 'should return the issues which have all of the tags' do
+        tag1 = create :tag, name: 'tag1'
+        tag2 = create :tag, name: 'tag2'
+        tag3 = create :tag, name: 'tag3'
+        with_tags = create :issue, tags: [tag1, tag2]
+        with_other_tags = create :issue, tags: [tag1, tag3]
+        create :issue
+
+        expect(described_class.where_tag_names_in(['tag1'])).to match_array([with_tags, with_other_tags])
+        expect(described_class.where_tag_names_in(['tag1', 'tag2'])).to match_array([with_tags])
+        expect(described_class.where_tag_names_in([])).to match_array([])
       end
     end
   end

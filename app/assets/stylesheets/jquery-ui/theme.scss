@@ -255,7 +255,7 @@
 }
 
 .ui-widget-header .ui-icon {
-    background-image: url(/assets/jquery-ui//ui-icons_222222_256x240.png);
+    background-image: image-url("jquery-ui/ui-icons_222222_256x240.png");
 }
 .ui-datepicker-next span {
     display: block;
@@ -268,4 +268,8 @@
 
 .ui-datepicker table.ui-datepicker-calendar td span, .ui-datepicker table.ui-datepicker-calendar td a{
   text-align: center;
+}
+
+.ui-menu {
+  background-color: white
 }

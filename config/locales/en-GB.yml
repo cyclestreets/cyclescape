@@ -6,6 +6,11 @@
   anon: "Anon"
   sign_in: "sign in"  # Used for links
   confirm: "Are you sure?"
+  days_away:
+    zero: "Today!"
+    one: "Tomorrow!"
+    other: "%{count} days away"
+  deadline_date: "Deadline/date"
   admin:
     groups:
       index:
@@ -136,10 +141,6 @@
       add_some_locations: "add some locations"
       areas_you_are_watching: "areas you are watching"
       converted_to_issue: "Converted to Issue:"
-      days_away:
-        zero: "Today!"
-        one: "Tomorrow!"
-        other: "%{count} days away"
       deadlines: "Deadlines and dates"
       deadline_thread_updated: "thread updated %{time_ago} ago"
       issues_lower: "issues"
@@ -218,6 +219,13 @@
       new:
         title: "Sign in"
         sign_in_button: "Sign in"
+    mailer:
+      invitation_instructions:
+        subject: "Invitation instructions"
+        hello: "Hello %{email}"
+        someone_invited_you: "Someone has invited you to %{url}, you can accept it through the link below."
+        accept: "Accept invitation"
+        ignore: "If you don't want to accept the invitation, please ignore this email.<br />Your account won't be created until you access the link above and set your password."
   group:
     group_prefs_tab: "Group preferences"
     group_profile_tab: "Group profile"
@@ -524,6 +532,7 @@
         one: "vote"
         other: "votes"
       location: "Location"
+      deadline: Deadline
     map:
       show_collisions: Show Collisions
     update:
@@ -746,16 +755,10 @@
   message:
     deadlines:
       new:
-        deadline_date: "Deadline/date"
         submit: "Add deadline/date"
       create:
         failure: "Deadline/date could not be created"
         success: "Deadline/date created"
-      show:
-        days_away:
-          zero: "Today!"
-          one: "Tomorrow!"
-          other: "%{count} days away!"
     documents:
       create:
         failure: "Could not add attachment"
@@ -890,10 +893,8 @@
         who: "Who"
       new:
         title: "Feedback"
-      success:
-        thank_you_title: "Thank you for your feedback!"
-        thank_you_longform: "One of our developers will read your feedback and use it to help plan upcoming work and new features. Unfortunately we can't respond individually to every feedback comment that we receive."
-        close: "< Back to site"
+      create:
+        success: "Thank you for your feedback!"
   tags:
     show:
       issues: "Issues"

@@ -39,12 +39,22 @@ class Issue < ActiveRecord::Base
   validates :description, presence: true
   validates :location, presence: true
   validates :size, numericality: { less_than: Geo::ISSUE_MAX_AREA }
-
   validates :created_by, presence: true
+  validates :external_url, url: true
 
   default_scope {where(deleted_at: nil)}
   scope :by_most_recent, -> { order('created_at DESC') }
   scope :created_by, ->(user) { where(created_by_id: user) }
+
+  class << self
+    def after_date(date)
+      where('coalesce(deadline, created_at) >= ?', date)
+    end
+
+    def before_date(date)
+      where('coalesce(deadline, created_at) <= ?', date)
+    end
+  end
 
   def to_param
     "#{id}-#{title.parameterize}"
@@ -54,6 +64,10 @@ class Issue < ActiveRecord::Base
   # iterates over every time in the range - integer ranges are optimized.
   def created_at_as_i
     created_at.to_i
+  end
+
+  def external_url=(val)
+    write_attribute(:external_url, AttributeNormaliser::URL.new(val).normalise)
   end
 
   protected

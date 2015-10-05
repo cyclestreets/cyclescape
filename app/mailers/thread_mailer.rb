@@ -2,7 +2,7 @@ class ThreadMailer < ActionMailer::Base
   include MailerHelper
   default from: Rails.application.config.default_email_from
 
-  [:new_message, :new_photo_message, :new_deadline_message, 
+  [:new_message, :new_photo_message, :new_deadline_message,
    :new_document_message, :new_link_message, :new_library_item_message,
    :new_street_view_message,
   ].each do |message_type|
