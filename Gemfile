@@ -22,6 +22,7 @@ gem 'jquery-turbolinks'
 # Back-end gems
 gem 'devise', '~> 3.4.0'
 gem 'devise_invitable'
+gem 'devise-i18n'
 gem 'declarative_authorization'
 gem 'thin'
 gem 'aasm'

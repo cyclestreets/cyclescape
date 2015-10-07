@@ -5,14 +5,10 @@ Rails.application.routes.draw do
   def issues_route(opts = {})
     resources :issues, opts do
       member do
-        get 'geometry'
-        put 'vote_up'
-        put 'vote_down'
-        put 'vote_clear'
+        get :geometry
+        put :vote_up, :vote_down, :vote_clear
       end
-      collection do
-        get 'all_geometries'
-      end
+      get :all_geometries, on: :collection
       scope module: 'issue' do
         resource :photo, only: [:show]
         resources :threads, controller: 'message_threads'
@@ -23,13 +19,13 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { confirmations: 'confirmations' }, skip: :registrations
 
-  scope 'settings' do
-    get '/profile', to: "user/profiles#edit", as: :current_user_profile_edit
-    get '/preferences', to: "user/prefs#edit", as: :current_user_prefs_edit
-    get '/locations', to: "user/locations#index", as: :current_user_locations
+  scope :settings do
+    get :profile, to: "user/profiles#edit", as: :current_user_profile_edit
+    get :preferences, to: "user/prefs#edit", as: :current_user_prefs_edit
+    get :locations, to: "user/locations#index", as: :current_user_locations
     get '/', to: "user/profiles#show", as: :current_user_profile
   end
-  devise_for :users, controllers: { confirmations: 'confirmations' }, only: :registrations, path: 'settings'
+  devise_for :users, controllers: { registrations: 'users/registrations' }, only: :registrations, path: 'settings'
 
   constraints(SubdomainConstraint) do
     root to: 'groups#show', as: :subroot
@@ -38,7 +34,7 @@ Rails.application.routes.draw do
   end
 
   resource :overview, as: :dashboard, controller: 'dashboards' do
-    get 'search'
+    get :search
   end
 
   issues_route
@@ -48,8 +44,8 @@ Rails.application.routes.draw do
     resources :users do
       scope module: 'user' do
         resources :locations do
-          get 'geometry', on: :member
-          get 'combined_geometry', on: :collection
+          get :geometry, on: :member
+          get :combined_geometry, on: :collection
         end
       end
     end
@@ -57,41 +53,36 @@ Rails.application.routes.draw do
   end
 
   resources :groups do
-    scope module: 'group' do
+    scope module: :group do
       resources :members
       resources :memberships
       resources :membership_requests do
         member do
-          get 'review'
-          post 'confirm'
-          post 'reject'
-          post 'cancel'
+          get :review
+          post :confirm, :reject, :cancel
         end
       end
       resources :threads, controller: 'message_threads'
       resource :profile do
-        get 'geometry', on: :member
+        get :geometry, on: :member
       end
       resource :prefs, only: [:edit, :update]
     end
-    collection do
-      get 'all_geometries'
-    end
+    get :all_geometries, on: :collection
   end
 
   resources :group_requests do
     member do
-      get 'review'
-      put 'confirm'
-      put 'reject'
+      get :review
+      put :confirm, :reject
     end
   end
 
   resources :threads, controller: 'message_threads' do
     resources :messages do
-      put 'censor', on: :member
       resources :documents, controller: 'message_library/documents'
       resources :notes, controller: 'message_library/notes'
+      put :censor, on: :member
     end
     scope module: :message do
       resources :photos, only: [:create, :show]
@@ -109,8 +100,7 @@ Rails.application.routes.draw do
   end
 
   resource :library do
-    get 'search'
-    get 'recent'
+    get :search, :recent
     scope module: 'library' do
       resources :documents
       resources :notes
@@ -121,15 +111,16 @@ Rails.application.routes.draw do
   resources :planning_applications do
     get :search, on: :collection
     get 'uid/*uid', to: :show_uid, on: :collection, as: :show_uid
-    get :geometry, on: :member
-    put :hide, on: :member
-    put :unhide, on: :member
+    member do
+      get :geometry
+      put :hide, :unhide
+    end
     scope module: "planning_application" do
       resource :issue
     end
   end
 
-  resources :users do
+  resources :users, only: [] do
     scope module: :user do
       resource :profile
       resource :prefs, only: [:edit, :update]
@@ -138,9 +129,11 @@ Rails.application.routes.draw do
 
   namespace :user do
     resources :locations do
-      get 'geometry', on: :member
-      get 'combined_geometry', on: :collection
-      post 'subscribe_to_threads', on: :collection
+      get :geometry, on: :member
+      collection do
+        get :combined_geometry
+        post :subscribe_to_threads
+      end
     end
   end
 
@@ -149,7 +142,7 @@ Rails.application.routes.draw do
   end
 
   resources :tags do
-    get 'autocomplete_tag_name', as: :autocomplete, on: :collection
+    get :autocomplete_tag_name, as: :autocomplete, on: :collection
   end
   resource :home, only: [:show], controller: 'home'
 

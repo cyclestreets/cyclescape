@@ -79,16 +79,6 @@ describe 'thread notifications' do
       skip 'Figure out testing the url'
     end
 
-    it 'should send and email for a document message' do
-      message = create :document_message, message: thread.messages.first
-      ThreadNotifier.notify_subscribers(thread, :new_document_message, thread.messages.first)
-      open_email(current_user.email)
-      expect(current_email).to have_body_text(message.title)
-      expect(current_email).to have_body_text('added an attachment to the thread')
-      expect(current_email).to have_body_text(I18n.t('.thread_mailer.new_document_message.view_the_document'))
-      expect(current_email).to have_body_text(message.file.url)
-    end
-
     context 'html encoding' do
       it 'should not escape text messages' do
         within('#new-text-message') do
