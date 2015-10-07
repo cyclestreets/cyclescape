@@ -81,7 +81,7 @@ describe 'thread notifications' do
 
     it 'should send and email for a document message' do
       message = create :document_message, message: thread.messages.first
-      ThreadNotifier.notify_subscribers(thread, :new_document_message, message)
+      ThreadNotifier.notify_subscribers(thread, :new_document_message, thread.messages.first)
       open_email(current_user.email)
       expect(current_email).to have_body_text(message.title)
       expect(current_email).to have_body_text('added an attachment to the thread')

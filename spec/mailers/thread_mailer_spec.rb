@@ -7,7 +7,7 @@ describe ThreadMailer do
   describe 'new document messages' do
     it 'has a link to the new document' do
       subject = described_class.send(:new_document_message, document.message, user)
-      expect(subject.body).to include("/threads/#{document.message.thread.id}/messages/#{document.message.id}/documents/#{document.id}")
+      expect(subject.body).to include("http://www.example.com#{document.message.component.file.url}")
     end
   end
 end
