@@ -125,13 +125,19 @@ class IssuesController < ApplicationController
                    else
                      issue.created_by.display_name_or_anon
                    end
+    creator_url = if permitted_to? :view_profile, issue.created_by
+                    view_context.url_for user_profile_path(issue.created_by)
+                   else
+                     '#'
+                   end
+
     issue.loc_feature(thumbnail: issue.medium_icon_path,
                       image_url: issue.tip_icon_path(false),
                       title: issue.title,
                       size_ratio: issue.size_ratio(geom),
                       url: view_context.url_for(issue),
                       created_by: creator_name,
-                      created_by_url: view_context.url_for(issue.created_by))
+                      created_by_url: creator_url)
   end
 
   def issue
