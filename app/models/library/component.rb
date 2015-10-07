@@ -12,7 +12,7 @@ class Library::Component < ActiveRecord::Base
   before_create :create_library_item, unless: :item
   after_create :update_library_item
 
-  validate :created_by, presence: true
+  validates :created_by, presence: true
 
   def created_by
     @created_by || item && item.created_by
