@@ -8,7 +8,7 @@
       = f.input :title
       = f.input :group
       = f.input :privacy, as: :select, collection: f.object.class.privacies_map
-      = f.input :issue, as: :select, collection: Issue.by_most_recent, member_label: Proc.new {|i| "#{i.id} - #{i.title}" }
+      = f.input :issue, as: :select, collection: Issue.by_most_recent.map { |iss| ["#{iss.id} - #{iss.title}", iss.id] }
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green submit"}
       = cancel_link thread_path(@thread)

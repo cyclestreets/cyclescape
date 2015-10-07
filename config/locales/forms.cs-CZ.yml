@@ -17,6 +17,7 @@
               email: "Prosím zadejte emailovou adresu"
     models:
       user: "Uživatel"
+      message_thread: "Vlákno"
 
     attributes:
       user_location:
@@ -195,8 +196,6 @@
         create: "Přidat odkaz"
       message:
         create: "Odeslat zprávu"
-      message_thread:
-        create: "Vytvořit diskuzní vlákno"
       photo_message:
         create: "Přidat fotografii"
       site_comment:

@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2.0'
 gem 'pg'
 gem 'activerecord-postgis-adapter'
 
@@ -10,7 +10,7 @@ gem 'activerecord-postgis-adapter'
 # Front-end gems
 gem 'jquery-rails', '~> 3.0.0' # pin due to incompatible jquery-tools vs jquery 1.8. See https://github.com/cyclestreets/cyclescape/issues/75
 gem 'haml-rails'
-gem 'formtastic', '~> 2.0'
+gem 'formtastic'
 gem 'map_layers'
 gem 'rails3-jquery-autocomplete'
 gem 'rgeo-geojson'
@@ -42,9 +42,8 @@ gem 'excon'
 gem 'paranoia', '~> 2.0'
 gem 'grape', github: 'ruby-grape/grape'
 
-gem 'sass-rails', '~> 4.0.3'
-gem 'sass'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'compass-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-ui-rails', '~> 5.0.0'

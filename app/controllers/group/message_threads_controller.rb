@@ -39,7 +39,7 @@ class Group::MessageThreadsController < MessageThreadsController
   protected
 
   def load_group
-    @group = Group.find(params[:group_id] || current_group)
+    @group = Group.find_by(id: params[:group_id]) || current_group
   end
 
   def permitted_message_params

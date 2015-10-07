@@ -4,5 +4,5 @@
 <%= raw @message.component.description %>
 <%= raw @message.body %>
 <%= t ".view_the_photo" %>
-<%= thread_path(@message.thread, only_path: false) + "#message-#{@message.id}" %>
+<%= thread_url(@message.thread, only_path: false) + "#message-#{@message.id}" %>
 <%= render partial: "footer" %>

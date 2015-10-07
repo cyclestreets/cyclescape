@@ -26,7 +26,7 @@ class Group::MembershipRequestsController < ApplicationController
 
       if @request.save
         redirect_to @group, notice: t('group.membership_requests.create.requested')
-        Notifications.new_group_membership_request(@request).deliver
+        Notifications.new_group_membership_request(@request).deliver_now
       else
         render :new
       end
@@ -43,7 +43,7 @@ class Group::MembershipRequestsController < ApplicationController
     @request = @group.membership_requests.find params[:id]
     @request.actioned_by = current_user
     if @request.confirm
-      Notifications.group_membership_request_confirmed(@request).deliver
+      Notifications.group_membership_request_confirmed(@request).deliver_now
       set_flash_message :success
     else
       set_flash_message :failure
