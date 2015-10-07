@@ -26,6 +26,6 @@ class ThreadNotifier
   def self.send_notification(type, message_id, subscriber_id)
     message = Message.find(message_id)
     subscriber = message.thread.subscribers.find(subscriber_id)
-    ThreadMailer.send(type, message, subscriber).deliver_now
+    ThreadMailer.send(type, message, subscriber).deliver_later
   end
 end

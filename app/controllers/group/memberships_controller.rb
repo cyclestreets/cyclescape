@@ -12,7 +12,7 @@ class Group::MembershipsController < ApplicationController
 
     if @membership.save
       if @membership.user.accepted_or_not_invited?
-        Notifications.added_to_group(@membership).deliver_now
+        Notifications.added_to_group(@membership).deliver_later
       end
       redirect_to group_members_path
     else

@@ -46,7 +46,7 @@ describe ThreadNotifier do
       expect(Message).to receive(:find).with(message.id).and_return(message)
       expect(subscribers).to receive(:find).with(subscriber.id).and_return(subscriber)
       expect(ThreadMailer).to receive(:new_message).with(message, subscriber).and_return(mail)
-      expect(mail).to receive(:deliver_now)
+      expect(mail).to receive(:deliver_later)
 
       subject.send_notification('new_message', message.id, subscriber.id)
     end

@@ -9,9 +9,9 @@ class Notifications < ActionMailer::Base
          subject: t('mailers.notifications.gmr_confirmed.subject', group_name: @group.name))
   end
 
-  def new_group_request(request, admins)
+  def new_group_request(request, admins_ids)
     @request = request
-    mail(to: admins.map(&:email),
+    mail(to: User.where(id: admins_ids).map(&:email),
          subject: t('mailers.notifications.new_group_request.subject',
                     group_name: @request.name, user_name: @request.user.full_name))
   end
