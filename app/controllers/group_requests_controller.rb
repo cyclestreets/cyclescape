@@ -14,7 +14,7 @@ class GroupRequestsController < ApplicationController
     @request.user = current_user
 
     if @request.save
-      Notifications.new_group_request(@request, User.admin).deliver
+      Notifications.new_group_request(@request, User.admin).deliver_now
       redirect_to '/', notice: t('group_requests.create.requested')
     else
       render :new
@@ -29,7 +29,7 @@ class GroupRequestsController < ApplicationController
     @request.actioned_by = current_user
     if res = @request.confirm
       @group = Group.find_by_name! @request.name
-      Notifications.group_request_confirmed(@group, @request).deliver
+      Notifications.group_request_confirmed(@group, @request).deliver_now
       set_flash_message :success
     else
       set_flash_message :failure
@@ -41,7 +41,7 @@ class GroupRequestsController < ApplicationController
     @request.actioned_by = current_user
     @request.update_column :rejection_message, params[:group_request][:rejection_message]
     if @request.reject
-      Notifications.group_request_rejected(@request).deliver
+      Notifications.group_request_rejected(@request).deliver_now
       set_flash_message :success
     else
       set_flash_message :failure

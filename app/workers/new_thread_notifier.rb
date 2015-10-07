@@ -50,7 +50,7 @@ class NewThreadNotifier
   def self.send_new_group_thread_notification(opts)
     thread = MessageThread.find(opts['thread_id'])
     user = User.find(opts['member_id'])
-    Notifications.new_group_thread(thread, user).deliver if user.prefs.enable_email
+    Notifications.new_group_thread(thread, user).deliver_now if user.prefs.enable_email
   end
 
   def self.list_for_new_user_location_issue_thread(thread)
@@ -88,6 +88,6 @@ class NewThreadNotifier
   def self.send_new_user_location_thread_notification(opts)
     thread = MessageThread.find(opts['thread_id'])
     user_location = UserLocation.find(opts['user_location_id'])
-    Notifications.new_user_location_issue_thread(thread, user_location).deliver if user_location.user.prefs.enable_email
+    Notifications.new_user_location_issue_thread(thread, user_location).deliver_now if user_location.user.prefs.enable_email
   end
 end
