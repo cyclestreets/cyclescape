@@ -17,8 +17,8 @@
 class UserProfile < ActiveRecord::Base
   VISIBILITY_OPTIONS = %w(public group).freeze
 
-  image_accessor :picture do
-    storage_path :generate_picture_path
+  dragonfly_accessor :picture do
+    storage_options :generate_picture_path
   end
 
   belongs_to :user
@@ -44,6 +44,6 @@ class UserProfile < ActiveRecord::Base
 
   def generate_picture_path
     hash = Digest::SHA1.file(picture.path).hexdigest
-    "profile_pictures/#{hash[0..2]}/#{hash[3..5]}/#{hash}"
+    {path: "profile_pictures/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
   end
 end

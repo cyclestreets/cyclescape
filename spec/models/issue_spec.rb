@@ -327,7 +327,7 @@ describe Issue do
 
     it 'should have a photo' do
       expect(subject.photo).to be_truthy  # Hard to find a proper test
-      expect(subject.photo.mime_type).to eq('image/jpeg')
+      expect(subject.photo.format).to eq('jpeg')
     end
 
     it 'should be stored in its own directory' do

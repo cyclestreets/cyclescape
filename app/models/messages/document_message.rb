@@ -13,8 +13,8 @@
 #
 
 class DocumentMessage < MessageComponent
-  file_accessor :file do
-    storage_path :generate_file_path
+  dragonfly_accessor :file do
+    storage_options :generate_file_path
   end
 
   validates :file, :title, presence: true
@@ -23,6 +23,6 @@ class DocumentMessage < MessageComponent
 
   def generate_file_path
     hash = Digest::SHA1.file(file.path).hexdigest
-    "message_documents/#{hash[0..2]}/#{hash[3..5]}/#{hash}"
+    {path: "message_documents/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
   end
 end

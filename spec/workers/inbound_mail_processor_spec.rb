@@ -93,7 +93,7 @@ describe InboundMailProcessor do
         message = thread.messages[1]
         expect(message.component).to be_a(PhotoMessage)
         expect(message.component.caption).to eq('abstract-100-100.jpg')
-        expect(message.component.photo.format).to eq(:jpeg)
+        expect(message.component.photo.format).to eq('jpeg')
         expect(message.component.photo.width).to eql(100)
       end
 
@@ -121,7 +121,7 @@ describe InboundMailProcessor do
         message = thread.messages[1]
         expect(message.component).to be_a(DocumentMessage)
         expect(message.component.title).to eq('use_cases.pdf')
-        expect(message.component.file.format).to eq(:pdf)
+        expect(message.component.file.format).to eq('pdf')
         expect(message.component.file.size).to eql(77_825)
       end
     end

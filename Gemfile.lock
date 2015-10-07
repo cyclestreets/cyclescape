@@ -133,9 +133,10 @@ GEM
       actionmailer (>= 3.2.6, < 5)
       devise (>= 3.2.0)
     diff-lcs (1.2.5)
-    dragonfly (0.9.15)
+    dragonfly (1.0.12)
+      addressable (~> 2.3)
       multi_json (~> 1.0)
-      rack
+      rack (>= 1.3.0)
     draper (2.1.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -418,7 +419,7 @@ DEPENDENCIES
   devise (~> 3.4.0)
   devise-i18n
   devise_invitable
-  dragonfly (~> 0.9.15)
+  dragonfly (~> 1.0.3)
   draper
   email_reply_parser
   email_spec

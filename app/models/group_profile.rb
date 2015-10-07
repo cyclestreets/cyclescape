@@ -18,7 +18,7 @@
 
 class GroupProfile < ActiveRecord::Base
   include Locatable
-  image_accessor :picture
+  dragonfly_accessor :picture
 
   def picture_thumbnail
     picture.thumb('330x192#')
