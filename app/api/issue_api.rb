@@ -47,7 +47,7 @@ module IssueApi
       scope = scope.before_date(params[:end_date]) if params[:end_date]
       scope = scope.after_date(params[:start_date]) if params[:start_date]
       per_page = [params[:per_page], 500].min
-      scope = scope.paginate(page: params[:page], per_page: per_page)
+      scope = scope.page(params[:page]).per(per_page)
       issues = scope.map { | issue | issue_feature(issue) }
       collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)
       RGeo::GeoJSON.encode(collection)
