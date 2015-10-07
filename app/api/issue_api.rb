@@ -34,7 +34,7 @@ module IssueApi
     desc 'Returns issues as a GeoJSON collection'
     params do
       optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
-      optional :tags, type: Array, desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]'
+      optional :tags, type: Array, desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]', coerce_with: JSON
       optional :end_date, type: Date, desc: 'No issues after the end date are returned'
       optional :start_date, type: Date, desc: 'No issues before the start date are returned'
       optional :per_page, type: Integer, default: 200, desc: 'The number of issues per page, maximum of 500'
@@ -42,13 +42,13 @@ module IssueApi
     end
     get '/issues' do
       scope = Issue.all.includes(:created_by, :tags)
-      scope.intersects_not_covered(bbox_from_string(params[:bbox], Issue.rgeo_factory).to_geometry) if params[:bbox].present?
-      scope.where_tag_names_in(params[:tags]) if params[:tags]
+      scope = scope.intersects_not_covered(bbox_from_string(params[:bbox], Issue.rgeo_factory).to_geometry) if params[:bbox].present?
+      scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
       scope = scope.before_date(params[:end_date]) if params[:end_date]
       scope = scope.after_date(params[:start_date]) if params[:start_date]
       per_page = [params[:per_page], 500].min
-      issues = scope.paginate(page: params[:page], per_page: per_page)
-      issues = issues.map { | issue | issue_feature(issue) }
+      scope = scope.paginate(page: params[:page], per_page: per_page)
+      issues = scope.map { | issue | issue_feature(issue) }
       collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)
       RGeo::GeoJSON.encode(collection)
     end

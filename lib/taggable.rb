@@ -15,8 +15,9 @@ module Taggable
     end
 
     def where_tag_names_in(tag_names)
-      if tag_names.present?
-        joins(:tags).where(tags: {name: tag_names}).group('issues.id').having('COUNT(tags.id)=?', tag_names.size)
+      if tag_names.present? &&
+        ids = joins(:tags).where(tags: {name: tag_names}).group('issues.id').having('COUNT(tags.id)=?', tag_names.size)
+        where(id: ids)
       else
         none
       end

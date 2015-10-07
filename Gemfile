@@ -40,7 +40,7 @@ gem 'email_reply_parser'
 gem 'memoist'
 gem 'excon'
 gem 'paranoia', '~> 2.0'
-gem 'grape'
+gem 'grape', github: 'ruby-grape/grape'
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'sass'
