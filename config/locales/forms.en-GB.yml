@@ -17,6 +17,10 @@
     attributes:
       issue:
         external_url: External site
+      message_thread:
+        group: "Owned by"
+    models:
+      message_thread: Thread
 
   formtastic:
     labels:
@@ -53,8 +57,6 @@
         url: "URL"
       message:
         body: "Message"
-      message_thread:
-        group: "Owned by"
       site_comment:
         body: "Message"
       thread_subscription:
@@ -141,8 +143,6 @@
         create: "Add Link"
       message:
         create: "Post Message"
-      message_thread:
-        create: "Create Thread"
       photo_message:
         create: "Add Photo"
       site_comment:
