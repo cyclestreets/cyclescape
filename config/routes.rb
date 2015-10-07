@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     get '/locations', to: "user/locations#index", as: :current_user_locations
     get '/', to: "user/profiles#show", as: :current_user_profile
   end
-  devise_for :users, controllers: { confirmations: 'confirmations' }, only: :registrations, path: 'settings'
+  devise_for :users, controllers: { registrations: 'users/registrations' }, only: :registrations, path: 'settings'
 
   constraints(SubdomainConstraint) do
     root to: 'groups#show', as: :subroot

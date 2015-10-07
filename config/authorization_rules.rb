@@ -134,7 +134,7 @@ authorization do
     end
     has_permission_on :dashboards, to: [:search]
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
-                      :devise_invitations, :devise_passwords, :devise_invitable_registrations, to: :manage
+                      :devise_invitations, :devise_passwords, :devise_invitable_registrations, :users_registrations, to: :manage
     has_permission_on :home, to: :show
     has_permission_on :groups, to: [:view, :all_geometries]
     has_permission_on :group_profiles, to: [:view, :geometry]
