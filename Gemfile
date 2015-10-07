@@ -8,7 +8,7 @@ gem 'activerecord-postgis-adapter'
 # gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
-gem 'jquery-rails', '~> 3.0.0' # pin due to incompatible jquery-tools vs jquery 1.8. See https://github.com/cyclestreets/cyclescape/issues/75
+gem 'jquery-rails', '~> 3.0.0'
 gem 'haml-rails'
 gem 'formtastic'
 gem 'map_layers'
