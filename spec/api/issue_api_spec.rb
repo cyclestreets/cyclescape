@@ -18,7 +18,9 @@ describe IssueApi::API do
       before do
         tag = create :tag, name: 'taga'
         create :issue_within_quahog, tags: [tag] # location 0.11906 52.20792
-        get "#{host}/api/issues", bbox: '0.11905,52.20791,0.11907,52.20793', tags: ["taga"]
+        create :issue, tags: [tag]
+        create :issue
+        get "#{host}/api/issues", bbox: '0.11905,52.20791,0.11907,52.20793', tags: ["taga"].to_json
       end
 
       it 'returns issue' do
