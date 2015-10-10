@@ -13,9 +13,9 @@
           = item.created_at
 
 %aside#sidebar
-  = link_to t(".new_library_item"), "#", rel: "#new-library-item-selector", class: "dialog btn-green"
+  = link_to t(".new_library_item"), "#", rel: "#new-library-item-selector", class: "open-dialog btn-green"
 
-#new-library-item-selector.dialog.hide
+#new-library-item-selector.dialog.dialog-content.hide
   %h1= t(".new_item_title")
   %p= t(".new_item_description_html")
   %ul.library-selector
@@ -33,3 +33,4 @@
         .name= t(".new_document")
       .description
         = t(".new_document_description_html")
+    = cancel_link '#'

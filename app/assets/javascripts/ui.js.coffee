@@ -68,21 +68,22 @@ jQuery ->
     $(AutoSet.selector).each ->
       AutoSet.trigger_all($(this))
 
+  dialogOpts = {
+    autoOpen: false
+    resizable: false
+    draggable: false
+    modal: true
+    width: 802
+    height: 700
+    dialogClass: 'no-close'
+    beforeClose: ->
+      $("body").css({ overflow: 'inherit' })
+  }
 
   # Modal overlay links
   $("a[rel='#overlay']").click (e) ->
     e.preventDefault()
-    dialog = $('#overlay').dialog(
-      autoOpen: false
-      resizable: false
-      draggable: false
-      modal: true
-      width: 802
-      height: 700
-      dialogClass: 'no-close'
-      beforeClose: ->
-        $("body").css({ overflow: 'inherit' })
-    ).dialog('option', 'title', 'Loading...').dialog 'open'
+    dialog = $('#overlay').dialog(dialogOpts).dialog('option', 'title', 'Loading...').dialog 'open'
     dialog.parent().css('z-index', '9999')
     $("body").css({ overflow: 'hidden' })
     dialog.load("#{@href} #page>.wrapper", ->
@@ -94,6 +95,13 @@ jQuery ->
       return
     ) unless dialog.find('#page').length
     return
+
+  $(".dialog-content").dialog(dialogOpts).on "click", ".cancel a, .close", (e) ->
+    e.preventDefault()
+    $(".dialog-content").dialog('close')
+
+  $('a.open-dialog').click ->
+    $(".dialog-content").dialog( "open" )
 
   $("#overlay form[data-remote]")
     .ajaxSuccess (e, data, status, xhr) ->
