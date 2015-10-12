@@ -1,7 +1,7 @@
 - content_for :subnav do
   %menu
     %ul.horizontal
-      %li= link_to t(".edit"), current_user_profile_edit_path, class: "btn-grey"
-      %li= link_to t(".update_account"), edit_user_registration_path, class: "btn-grey"
-      %li= link_to t(".my_locations"), current_user_locations_path, class: "btn-grey"
-      %li= link_to t(".edit_preferences"), current_user_prefs_edit_path, class: "btn-grey"
+      %li= link_to t(".edit"), current_user_profile_edit_url, class: "btn-grey"
+      %li= link_to t(".update_account"), edit_user_registration_url, class: "btn-grey"
+      %li= link_to t(".my_locations"), current_user_locations_url, class: "btn-grey"
+      %li= link_to t(".edit_preferences"), current_user_prefs_edit_url, class: "btn-grey"

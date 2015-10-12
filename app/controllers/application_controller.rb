@@ -15,15 +15,16 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :full_name
-    devise_parameter_sanitizer.for(:accept_invitation).push *[:full_name, :display_name, :email]
+    devise_parameter_sanitizer.for(:account_update).push(:full_name, :display_name)
+    devise_parameter_sanitizer.for(:sign_up).push(:full_name, :display_name)
+    devise_parameter_sanitizer.for(:accept_invitation).push(:full_name, :display_name, :email)
   end
 
   def ssl_allowed_action?
     (params[:controller] == 'devise/sessions' && %w(new create).include?(params[:action])) ||
       (params[:controller] == 'devise/registrations' && %w(new create edit update).include?(params[:action])) ||
       (params[:controller] == 'devise_invitable/registrations' && %w(new create edit update).include?(params[:action])) ||
-      (params[:controller] == 'devise/omniauth_callbacks')
+      (params[:controller] == 'devise/omniauth_callbacks') || (params[:controller] == 'users/registrations')
   end
 
   def ensure_proper_protocol
