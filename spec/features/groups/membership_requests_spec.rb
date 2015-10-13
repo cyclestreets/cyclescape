@@ -85,7 +85,7 @@ describe 'Group Membership Requests' do
 
       it 'should let you complete the invitation and change name and email' do
         mail = ActionMailer::Base.deliveries.last
-        invitation_token = mail.body.raw_source.match(/invitation_token=(\w+)/)[1]
+        invitation_token = mail.body.raw_source.match(/invitation_token=(.*?)"/)[1]
         visit accept_user_invitation_path(invitation_token: invitation_token)
         fill_in 'Full name', with: 'Shaun McDonald'
         fill_in 'Display name', with: 'smsm1'

@@ -26,8 +26,9 @@ class Issue < ActiveRecord::Base
 
   acts_as_indexed fields: [:title, :description, :tags_string]
   acts_as_voteable
-  image_accessor :photo do
-    storage_path :generate_photo_path
+
+  dragonfly_accessor :photo do
+    storage_options :generate_photo_path
   end
 
   belongs_to :created_by, class_name: "User"
@@ -80,6 +81,6 @@ class Issue < ActiveRecord::Base
 
   def generate_photo_path
     hash = Digest::SHA1.file(photo.path).hexdigest
-    "issue_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"
+    {path: "issue_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
   end
 end

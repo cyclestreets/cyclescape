@@ -14,6 +14,6 @@
             = t(".no_results_found")
           = render partial: "compact", collection: @groups, as: :group
         - if @groups.respond_to?(:total_pages)
-          = will_paginate @groups
+          = paginate @groups
       .pane
         = render "all_map"

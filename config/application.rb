@@ -1,7 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
-secret_file = File.expand_path('../secret_key_base', __FILE__)
 
 Bundler.require(*Rails.groups)
 
@@ -67,5 +66,8 @@ module Cyclescape
 
     # Planning applications
     config.planning_applications_url = "http://www.planit.org.uk/find/applics/json"
+
+    # Active Job
+    config.active_job.queue_adapter = :resque
   end
 end

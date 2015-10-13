@@ -5,10 +5,10 @@ class Group::MessageThreadsController < MessageThreadsController
   def index
     set_page_title t('group.message_threads.index.title', group: @group.name)
 
-    issue_threads = ThreadList.issue_threads_from_group(@group).paginate(page: params[:issue_threads_page])
+    issue_threads = ThreadList.issue_threads_from_group(@group).page params[:issue_threads_page]
     @issue_threads = ThreadListDecorator.decorate_collection issue_threads
 
-    general_threads = ThreadList.general_threads_from_group(@group).paginate(page: params[:general_threads_page])
+    general_threads = ThreadList.general_threads_from_group(@group).page params[:general_threads_page]
     @general_threads = ThreadListDecorator.decorate_collection general_threads
   end
 

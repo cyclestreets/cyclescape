@@ -22,7 +22,7 @@
             = t(".no_results_found")
           = render partial: "compact", collection: @issues, as: :issue
         - if @issues.respond_to?(:total_pages)
-          = will_paginate @issues
+          = paginate @issues
       #map-pane.pane
         %p= t ".map_introduction"
         = render "all_map"
@@ -33,4 +33,4 @@
             = t(".no_popular_issues")
           = render partial: "compact", collection: @popular_issues, as: :issue, locals: {prefix: "popular"}
         - if @popular_issues.respond_to?(:total_pages)
-          = will_paginate @popular_issues, param_name: :pop_issues_page, params: {anchor: 'popular-pane'}
+          = paginate @popular_issues, param_name: :pop_issues_page, params: {anchor: 'popular-pane'}

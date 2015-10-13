@@ -13,8 +13,8 @@
 #
 
 class PhotoMessage < MessageComponent
-  image_accessor :photo do
-    storage_path :generate_photo_path
+  dragonfly_accessor :photo do
+    storage_options :generate_photo_path
   end
 
   validates :photo, presence: true
@@ -39,6 +39,6 @@ class PhotoMessage < MessageComponent
 
   def generate_photo_path
     hash = Digest::SHA1.file(photo.path).hexdigest
-    "message_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"
+    {path: "message_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
   end
 end
