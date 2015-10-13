@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :ensure_proper_protocol
   before_filter :no_disabled_users
   before_filter :set_locale
   before_filter :set_auth_user
@@ -22,23 +21,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:accept_invitation).push(:full_name, :display_name, :email)
   end
 
-  def ssl_allowed_action?
-    return false unless Rails.env.production?
-    (params[:controller] == 'devise/sessions' && %w(new create).include?(params[:action])) ||
-      (params[:controller] == 'devise/registrations' && %w(new create edit update).include?(params[:action])) ||
-      (params[:controller] == 'devise_invitable/registrations' && %w(new create edit update).include?(params[:action])) ||
-      (params[:controller] == 'devise/omniauth_callbacks') || (params[:controller] == 'users/registrations') ||
-      (current_user.try(:id) == 1212) ||
-      (current_user.try(:id) == 5)
-  end
-
-  def ensure_proper_protocol
-    if request.ssl? && !ssl_allowed_action?
-      flash.keep
-      redirect_to 'http://' + request.host + request.fullpath # FIXME not safe for domains with ports
-    end
-  end
-
   # We want to tightly control where users end up after signing in.
   # If they hit a protected resource, devise has stored the location they were attempting
   # If they volunteer to sign in, we've previously stored the location using after_filters in the devise cookie
@@ -52,15 +34,15 @@ class ApplicationController < ActionController::Base
       s.slice!(0) # remove the leading slash
       if current_user.remembered_group?
         # is there a cleaner way than using root_url?
-        root_url(protocol: 'http', subdomain: current_user.remembered_group.short_name) + s
+        root_url(subdomain: current_user.remembered_group.short_name) + s
       else
-        root_url(protocol: 'http') + s
+        root_url + s
       end
     else
       if current_user.remembered_group?
-        dashboard_url(protocol: 'http', subdomain: current_user.remembered_group.short_name)
+        dashboard_url(subdomain: current_user.remembered_group.short_name)
       else
-        dashboard_url(protocol: 'http')
+        dashboard_url
       end
     end
   end
