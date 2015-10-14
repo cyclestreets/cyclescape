@@ -68,7 +68,7 @@ class Message < ActiveRecord::Base
   end
 
   def set_in_reply_to
-    self.in_reply_to_id ||= thread.messages.last.try(:id)
+    self.in_reply_to ||= thread.messages.last
   end
 
   def set_public_token

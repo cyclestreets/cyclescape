@@ -93,7 +93,7 @@ class MessageThread < ActiveRecord::Base
     end
   end
 
-  def add_messages_from_email!(mail)
+  def add_messages_from_email!(mail, in_reply_to)
     from_address = mail.message.header[:from].addresses.first
     from_name = mail.message.header[:from].display_names.first
 
@@ -112,7 +112,7 @@ class MessageThread < ActiveRecord::Base
 
     m = []
 
-    m << messages.create!( body: stripped, created_by: user )
+    m << messages.create!(body: stripped, created_by: user, in_reply_to: in_reply_to)
 
     # Attachments
     mail.message.attachments.each do |attachment|
@@ -121,11 +121,11 @@ class MessageThread < ActiveRecord::Base
       else
         component = DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
       end
-      message = messages.build( created_by: user )
-      component.thread = self
-      component.message = message
+      message              = messages.build(created_by: user, in_reply_to: in_reply_to)
+      component.thread     = self
+      component.message    = message
       component.created_by = user
-      message.component = component
+      message.component    = component
       message.save!
       m << message
     end
