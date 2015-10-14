@@ -252,7 +252,7 @@ ActiveRecord::Schema.define(version: 20151012194550) do
     t.datetime "deleted_at"
     t.datetime "censored_at"
     t.integer  "in_reply_to_id"
-    t.string   "public_token"
+    t.string   "public_token",               null: false
   end
 
   add_index "messages", ["created_by_id"], name: "index_messages_on_created_by_id", using: :btree
