@@ -37,6 +37,7 @@ class Message < ActiveRecord::Base
 
   validates :created_by_id, presence: true
   validates :body, presence: true, unless: :component
+  validate  :in_reply_to_should_belong_to_same_thread
 
   def censor!
     self.censored_at = Time.now
@@ -67,10 +68,15 @@ class Message < ActiveRecord::Base
   end
 
   def set_in_reply_to
-    self.in_reply_to = thread.messages.last
+    self.in_reply_to_id ||= thread.messages.last.try(:id)
   end
 
   def set_public_token
     self.public_token = SecureRandom.hex(10)
+  end
+
+  def in_reply_to_should_belong_to_same_thread
+    return unless in_reply_to
+    errors.add :in_reply_to_id, :invalid unless in_reply_to.thread.id == thread.id
   end
 end

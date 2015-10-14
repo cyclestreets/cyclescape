@@ -91,6 +91,12 @@ describe Message do
       expect(subject.in_reply_to).to eq(previous_message)
     end
 
+    it 'errors when set to a message from a different thread' do
+      subject = create(:message)
+      subject.in_reply_to = previous_message
+      expect(subject.errors_on(:in_reply_to_id).size).to eq(1)
+    end
+
     it 'sets in reply to nil with no previous message' do
       subject = create(:message)
       expect(subject.in_reply_to).to be_nil
