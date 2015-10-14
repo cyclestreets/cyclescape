@@ -22,8 +22,8 @@ class ThreadMailer < ActionMailer::Base
     mail(to: subscriber.name_with_email,
          subject: t('mailers.thread_mailer.common.subject', title: @thread.title, count: @thread.message_count),
          from: email_from,
-         references: message_chain(@message.in_reply_to),
+         references: message_chain(@message.in_reply_to, @thread),
          message_id: message_address(@message),
-         reply_to: message_address(@message))
+         in_reply_to: thread_address(@thread))
   end
 end

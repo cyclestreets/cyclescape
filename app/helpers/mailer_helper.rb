@@ -4,15 +4,20 @@ module MailerHelper
     Rails.application.config.default_email_from_domain
   end
 
+  # Deprecated
+  def thread_address(thread)
+    "<thread-#{thread.public_token}@#{domain}>"
+  end
+
   # Message-specific email address
   # No name in the address to stop it being added to automatic client address books
   def message_address(message)
     "<message-#{message.public_token}@#{domain}>"
   end
 
-  def message_chain(message)
-    return "" unless message
-    "#{message_chain(message.in_reply_to)} #{message_address(message)}".strip
+  def message_chain(message, thread)
+    return thread_address(thread) unless message
+    "#{message_chain(message.in_reply_to, thread)} #{message_address(message)}".strip
   end
 
   # Notifications are sent from a fixed email but with different names

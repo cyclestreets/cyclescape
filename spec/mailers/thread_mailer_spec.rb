@@ -16,7 +16,7 @@ describe ThreadMailer do
       expect(subject.to).to include(user.email)
       expect(subject.header['Message-ID'].value).to eq("<message-#{message_three.public_token}@cyclescape.org>")
       expect(subject.header['References'].value).to eq(
-        "<message-#{message_one.public_token}@cyclescape.org> <message-#{message_two.public_token}@cyclescape.org>")
+        "<thread-#{thread.public_token}@cyclescape.org> <message-#{message_one.public_token}@cyclescape.org> <message-#{message_two.public_token}@cyclescape.org>")
     end
   end
 end
