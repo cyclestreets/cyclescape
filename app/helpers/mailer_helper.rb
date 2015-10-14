@@ -10,6 +10,11 @@ module MailerHelper
     "<message-#{message.public_token}@#{domain}>"
   end
 
+  def message_chain(message)
+    return "" unless message
+    "#{message_chain(message.in_reply_to)} #{message_address(message)}".strip
+  end
+
   # Notifications are sent from a fixed email but with different names
   def user_notification_address(user)
     ['"', user.name, '" <notifications@', domain, '>'].join
