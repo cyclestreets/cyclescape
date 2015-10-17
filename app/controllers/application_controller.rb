@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   before_filter :no_disabled_users
   before_filter :set_auth_user
   before_filter :load_group_from_subdomain
+  before_filter :set_page_description
+  before_filter :set_page_image
   before_filter :set_page_title
   after_filter :remember_current_group
   after_filter :store_location
@@ -95,6 +97,24 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def set_page_description(description = nil)
+    @page_description = description
+  end
+
+  def page_description
+    @page_description
+  end
+  helper_method :page_description
+
+  def set_page_image(description = nil)
+    @page_image = description
+  end
+
+  def page_image
+    @page_image
+  end
+  helper_method :page_image
 
   def set_page_title(title = nil)
     if title
