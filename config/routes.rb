@@ -150,4 +150,12 @@ Rails.application.routes.draw do
   get 'pages/:page', controller: 'pages', action: 'show', as: :page
 
   root to: 'home#show'
+
+  resque_constraint = lambda do |request|
+    request.env['warden'].authenticate? and request.env['warden'].user.role == 'admin'
+  end
+
+  constraints resque_constraint do
+    mount Resque::Server, at: "/admin/resque"
+  end
 end
