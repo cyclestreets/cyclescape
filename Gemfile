@@ -42,6 +42,7 @@ gem 'memoist'
 gem 'excon'
 gem 'paranoia', '~> 2.0'
 gem 'grape', github: 'ruby-grape/grape'
+gem 'rollbar'
 
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.1.0'
