@@ -18,12 +18,13 @@ describe 'thread notifications' do
         fill_in 'Message', with: 'Notification test'
         click_on 'Post Message'
       end
+      message = Message.find_by(body: 'Notification test')
       open_email(current_user.email, with_subject: /^Re/)
       expect(current_email).to have_subject("Re: [Cyclescape] #{thread.title}")
       expect(current_email).to have_body_text(/Notification test/)
       expect(current_email).to have_body_text(current_user.name)
       expect(current_email).to be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
-      expect(current_email).to have_reply_to("Cyclescape <thread-#{thread.public_token}@cyclescape.org>")
+      expect(current_email).to have_reply_to("Cyclescape <message-#{message.public_token}@cyclescape.org>")
     end
 
     it 'should send an email for a link message' do

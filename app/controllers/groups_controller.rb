@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    groups = Group.paginate(page: params[:page])
+    groups = Group.page params[:page]
 
     @groups = GroupDecorator.decorate_collection groups
     @start_location = index_start_location

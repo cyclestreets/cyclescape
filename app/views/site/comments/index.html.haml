@@ -1,6 +1,6 @@
 %h1= t ".title"
 - if @site_comments
-  = will_paginate @site_comments
+  = paginate @site_comments
   %table
     %thead
       %th= t(".id")
@@ -24,6 +24,6 @@
         %td= link_to comment.context_url, comment.context_url
         %td= comment.context_data
         %td= link_to t(".delete_comment"), site_comment_path(comment), data: { confirm: t(".confirm_delete") }, method: :delete
-  = will_paginate @site_comments
+  = paginate @site_comments
 - else
   = t ".no_comments"

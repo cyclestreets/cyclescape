@@ -13,7 +13,7 @@ class PlanningApplicationsController < ApplicationController
 
   def search
     @query = params[:q]
-    planning_applications = PlanningApplication.where("uid LIKE ?", "%#{@query}%").paginate(page: params[:page])
+    planning_applications = PlanningApplication.where("uid LIKE ?", "%#{@query}%").page params[:page]
     @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications
   end
 

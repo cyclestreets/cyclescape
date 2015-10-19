@@ -124,7 +124,7 @@
             %p= t ".planning_applications_introduction_html", location_link: link_to(t(".location", count: current_user.locations.count), current_user_locations_path)
 
             - if @planning_applications.respond_to?(:total_pages)
-              = will_paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
+              = paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
             %br
             %br
 
@@ -133,4 +133,4 @@
                 = render partial: 'planning_applications/planning_application', collection: @planning_applications, as: :planning_application
 
         - if @planning_applications.respond_to?(:total_pages)
-          = will_paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
+          = paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}

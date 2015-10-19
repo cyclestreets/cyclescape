@@ -25,15 +25,19 @@ class Message < ActiveRecord::Base
   belongs_to :thread, class_name: 'MessageThread'
   belongs_to :created_by, class_name: 'User'
   belongs_to :component, polymorphic: true, autosave: true
+  belongs_to :in_reply_to, class_name: 'Message'
 
   before_validation :init_blank_body, on: :create, if: :component
+  before_validation :set_public_token, on: :create
 
-  after_save :update_thread_search
+  before_save :set_in_reply_to
+  after_save  :update_thread_search
 
   scope :recent, -> { order('created_at DESC').limit(3) }
 
   validates :created_by_id, presence: true
   validates :body, presence: true, unless: :component
+  validate  :in_reply_to_should_belong_to_same_thread
 
   def censor!
     self.censored_at = Time.now
@@ -61,5 +65,18 @@ class Message < ActiveRecord::Base
 
   def init_blank_body
     self.body ||= ''
+  end
+
+  def set_in_reply_to
+    self.in_reply_to ||= thread.messages.last
+  end
+
+  def set_public_token
+    self.public_token = SecureRandom.hex(10)
+  end
+
+  def in_reply_to_should_belong_to_same_thread
+    return unless in_reply_to
+    errors.add :in_reply_to_id, :invalid unless in_reply_to.thread.id == thread.id
   end
 end

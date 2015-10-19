@@ -51,7 +51,7 @@ a .thumb {
     background: $pane1;
     margin: 0 2px;
     padding-top: 1px;
-    width: 22px;
+    min-width: 22px;
     height: 21px;
     font-size: 14px;
     text: {
@@ -63,22 +63,8 @@ a .thumb {
       color: $pane1;
       background: $lightergrey;
     }
-    &.previous_page {
-      text-indent: -999999px;
-      background: $pane1 image-url("sprite.png") 4px -42px no-repeat;
-      &:hover {
-        background: $lightergrey image-url("sprite.png") 4px -62px no-repeat;
-      }
-    }
-    &.next_page {
-      text-indent: -999999px;
-      background: $pane1 image-url("sprite.png") 5px -82px no-repeat;
-      &:hover {
-        background: $lightergrey image-url("sprite.png") 5px -102px no-repeat;
-      }
-    }
   }
-  em {
+  .current {
     font-weight: bold;
   }
 }

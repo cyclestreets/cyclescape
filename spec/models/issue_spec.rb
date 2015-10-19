@@ -293,7 +293,7 @@ describe Issue do
 
     it 'should not allow duplicate votes' do
       brian.vote_for(subject)
-      expect { brian.vote_for(subject) }.to raise_error
+      expect { brian.vote_for(subject) }.to raise_error ActiveRecord::RecordInvalid
     end
 
     it 'should allow a change of vote' do
@@ -327,7 +327,7 @@ describe Issue do
 
     it 'should have a photo' do
       expect(subject.photo).to be_truthy  # Hard to find a proper test
-      expect(subject.photo.mime_type).to eq('image/jpeg')
+      expect(subject.photo.format).to eq('jpeg')
     end
 
     it 'should be stored in its own directory' do

@@ -5,4 +5,4 @@
   %p= t ".introduction_group_pointer"
   %ul.thread-list
     = render partial: "message_threads/list", collection: @threads, as: :thread
-  = will_paginate @threads
+  = paginate @threads

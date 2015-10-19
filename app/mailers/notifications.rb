@@ -9,9 +9,9 @@ class Notifications < ActionMailer::Base
          subject: t('mailers.notifications.gmr_confirmed.subject', group_name: @group.name))
   end
 
-  def new_group_request(request, admins)
+  def new_group_request(request, admins_ids)
     @request = request
-    mail(to: admins.map(&:email),
+    mail(to: User.where(id: admins_ids).map(&:email),
          subject: t('mailers.notifications.new_group_request.subject',
                     group_name: @request.name, user_name: @request.user.full_name))
   end
@@ -57,12 +57,13 @@ class Notifications < ActionMailer::Base
   def new_group_thread(thread, member)
     @thread = thread
     @group = thread.group
-    @message_author = thread.first_message.created_by
+    message = thread.first_message
+    @message_author = message.created_by
     @member = member
     fail 'Thread does not belong to group' if @group.nil?
     mail to: @member.name_with_email,
          from: user_notification_address(@message_author),
-         reply_to: thread_address(@thread),
+         reply_to: message_address(message),
          subject: t('mailers.notifications.new_group_thread.subject',
                     group_name: @group.name, thread_title: @thread.title)
   end
@@ -85,7 +86,7 @@ class Notifications < ActionMailer::Base
     fail 'Thread does not have an issue' unless @thread.issue
     mail to: @user.name_with_email,
          from: user_notification_address(@message.created_by),
-         reply_to: thread_address(@thread),
+         reply_to: message_address(@message),
          subject: t('mailers.notifications.new_user_location_issue_thread.subject',
                     issue_title: @thread.issue.title)
   end
