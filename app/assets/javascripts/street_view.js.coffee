@@ -56,7 +56,13 @@ window.mapInit = ->
     return
 
   initialize = ->
-    panorama = new google.maps.StreetViewPanorama(document.getElementById("newStreetViewPano"))
+    addStreetView(streetView) for streetView in streetViews
+
+    newStreetViewPano = document.getElementById("newStreetViewPano")
+
+    return unless newStreetViewPano
+
+    panorama = new google.maps.StreetViewPanorama(newStreetViewPano) if newStreetViewPano
 
     svs.getPanoramaByLocation(issue, 200, processSVData)
 
@@ -69,8 +75,6 @@ window.mapInit = ->
     $("a[href$='#new-street-view-message']").click (e)->
       google.maps.event.trigger(panorama, 'resize')
       google.maps.event.trigger(map, 'resize')
-
-    addStreetView(streetView) for streetView in streetViews
 
     return
   initialize()
