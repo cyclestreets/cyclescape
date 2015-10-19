@@ -6,8 +6,12 @@ class PlanningApplicationsController < ApplicationController
   end
 
   def geometry
-    respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(planning_application_feature(@planning_application)) }
+    if @planning_application.location
+      respond_to do |format|
+        format.json { render json: RGeo::GeoJSON.encode(planning_application_feature(@planning_application)) }
+      end
+    else
+      head :no_content
     end
   end
 

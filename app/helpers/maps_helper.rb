@@ -89,6 +89,7 @@ module MapsHelper
   end
 
   def centre_map(location, map, page)
+    return page unless location
     if location.geometry_type == RGeo::Feature::Point
       z = location.z || Geo::POINT_ZOOM
       page << map.setCenter(OpenLayers::LonLat.new(location.x, location.y).transform(projection, map.getProjectionObject), z)
