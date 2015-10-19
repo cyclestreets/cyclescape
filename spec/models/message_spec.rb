@@ -5,6 +5,7 @@ describe Message do
     it { is_expected.to belong_to(:created_by) }
     it { is_expected.to belong_to(:thread) }
     it { is_expected.to belong_to(:component) }
+    it { is_expected.to belong_to(:in_reply_to) }
   end
 
   describe 'validations' do
@@ -22,6 +23,10 @@ describe Message do
 
     it 'should not be censored' do
       expect(subject.censored_at).to be_nil
+    end
+
+    it 'should have a public token' do
+      expect(subject.public_token).to match(/\A[0-9a-f]{20}\Z/)
     end
   end
 
@@ -75,6 +80,26 @@ describe Message do
       message = create(:photo_message).message
       expect(message.searchable_text).to include(message.body)
       expect(message.searchable_text).to include(message.component.searchable_text)
+    end
+  end
+
+  describe 'in reply to' do
+    let(:previous_message) { create(:message) }
+
+    it 'sets in reply to with previous message' do
+      subject = create(:message, thread: previous_message.thread.reload)
+      expect(subject.in_reply_to).to eq(previous_message)
+    end
+
+    it 'errors when set to a message from a different thread' do
+      subject = create(:message)
+      subject.in_reply_to = previous_message
+      expect(subject.errors_on(:in_reply_to_id).size).to eq(1)
+    end
+
+    it 'sets in reply to nil with no previous message' do
+      subject = create(:message)
+      expect(subject.in_reply_to).to be_nil
     end
   end
 end

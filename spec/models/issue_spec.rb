@@ -293,7 +293,7 @@ describe Issue do
 
     it 'should not allow duplicate votes' do
       brian.vote_for(subject)
-      expect { brian.vote_for(subject) }.to raise_error
+      expect { brian.vote_for(subject) }.to raise_error ActiveRecord::RecordInvalid
     end
 
     it 'should allow a change of vote' do

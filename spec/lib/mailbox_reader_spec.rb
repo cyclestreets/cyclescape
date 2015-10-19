@@ -3,6 +3,8 @@ require 'spec_helper'
 MailProcessor = nil
 
 describe MailboxReader do
+  subject { MailboxReader.new(config) }
+
   let(:config) do
     { host: 'mail.example.com', user_name: 'user@example.com', password: 'secret',
       authentication: 'PLAIN', mailbox: 'INBOX', mail_processor: 'MailProcessor' }
@@ -12,7 +14,6 @@ describe MailboxReader do
   let(:message) { File.read(raw_email_path) }
 
   describe '#run' do
-    subject { MailboxReader.new(config) }
     before do
       allow(subject).to receive(:fetch_message_ids).and_return([12345])
       allow(subject).to receive(:fetch_raw_message).with(12345).and_return(message)
@@ -22,20 +23,18 @@ describe MailboxReader do
     it 'ensures mail with errors is marked as read' do
       expect(subject).to receive(:mark_as_seen).with(12345).once
 
-      expect{ subject.run }.to raise_error
+      expect{ subject.run }.to raise_error RuntimeError
     end
 
     it 'ensures connections are disconnected' do
       expect(subject).to receive(:disconnect).once
 
-      expect{ subject.run }.to raise_error
+      expect{ subject.run }.to raise_error SocketError
     end
 
   end
 
   describe 'saving messages' do
-    subject { MailboxReader.new(config) }
-
     describe '#save_message' do
       it 'should create a saved record from the raw message' do
         record = double

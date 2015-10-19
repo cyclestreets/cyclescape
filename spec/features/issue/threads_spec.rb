@@ -122,19 +122,22 @@ describe 'Issue threads' do
         end
 
         def create_thread
+          message = SecureRandom.hex
           visit issue_path(issue)
           click_on 'Discuss'
           select current_group.name, from: 'Owned by'
-          fill_in 'Message', with: 'Awesome!'
+          fill_in 'Message', with: message
           click_on 'Create Thread'
+          message
         end
 
         it 'should be sent to other group members' do
-          create_thread
+          message_body = create_thread
           open_last_email_for(notifiee.email)
+          message = Message.find_by(body: message_body)
           expect(current_email).to have_subject("[Cyclescape] \"#{issue.title}\" (#{current_group.name})")
           expect(current_email).to be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
-          expect(current_email.header[:reply_to].addrs.first.to_s).to match(/thread-.*@cyclescape.org/)
+          expect(current_email.header[:reply_to].addrs.first.to_s).to include("message-#{message.public_token}@cyclescape.org")
         end
 
         context 'with an unconfirmed user' do
@@ -167,23 +170,27 @@ describe 'Issue threads' do
       end
 
       def create_thread
+        message = SecureRandom.hex
         visit issue_path(issue)
         click_on 'Discuss'
         fill_in 'Title', with: 'Lorem & Ipsum'
-        fill_in 'Message', with: 'Something or other'
+        fill_in 'Message', with: message
         click_on 'Create Thread'
+        message
       end
 
       it 'should send a notification' do
-        create_thread
+        message_body = create_thread
         email = open_last_email_for(notifiee.email)
+        message = Message.find_by(body: message_body)
+
         expect(email).to have_subject("[Cyclescape] New thread started on issue \"#{issue.title}\"")
         expect(email).to have_body_text(issue.title)
         expect(email).to have_body_text('Lorem & Ipsum')
-        expect(email).to have_body_text('Something or other')
+        expect(email).to have_body_text(message_body)
         expect(email).to have_body_text(current_user.name)
         expect(email).to be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
-        expect(email.header[:reply_to].addrs.first.to_s).to match(/thread-.*@cyclescape.org/)
+        expect(current_email.header[:reply_to].addrs.first.to_s).to include("message-#{message.public_token}@cyclescape.org")
       end
 
       it 'should not send multiple notifications to the same person' do

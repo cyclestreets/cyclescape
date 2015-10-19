@@ -45,7 +45,7 @@ describe GroupMembershipRequest do
     end
 
     it 'can be confirmed' do
-      expect { subject.confirm! }.to raise_error
+      expect { subject.confirm! }.to raise_error AASM::InvalidTransition
       subject.actioned_by = boss
       expect { subject.confirm! }.not_to raise_error
       expect(subject).to be_valid
@@ -53,7 +53,7 @@ describe GroupMembershipRequest do
     end
 
     it 'can be rejected' do
-      expect { subject.reject! }.to raise_error
+      expect { subject.reject! }.to raise_error AASM::InvalidTransition
       subject.actioned_by = boss
       expect { subject.reject! }.not_to raise_error
       expect(subject).to be_valid
@@ -71,7 +71,7 @@ describe GroupMembershipRequest do
       expect(user.groups.size).to eq(0)
       subject.user = user
       subject.group = group
-      expect { subject.confirm! }.to raise_error
+      expect { subject.confirm! }.to raise_error AASM::InvalidTransition
       expect(user.groups.size).to eq(0)
 
       subject.actioned_by = boss
