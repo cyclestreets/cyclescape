@@ -14,6 +14,7 @@ describe ThreadMailer do
       expect(subject.body).to include("http://www.example.com#{document.file.url}")
       expect(subject.body).to include(I18n.t('.thread_mailer.new_document_message.view_the_document'))
       expect(subject.to).to include(user.email)
+      expect(subject.header['Reply-To'].value).to eq("<message-#{message_three.public_token}@cyclescape.org>")
       expect(subject.header['Message-ID'].value).to eq("<message-#{message_three.public_token}@cyclescape.org>")
       expect(subject.header['References'].value).to eq(
         "<thread-#{thread.public_token}@cyclescape.org> <message-#{message_one.public_token}@cyclescape.org> <message-#{message_two.public_token}@cyclescape.org>")

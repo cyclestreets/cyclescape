@@ -24,6 +24,7 @@ class ThreadMailer < ActionMailer::Base
          from: email_from,
          references: message_chain(@message.in_reply_to, @thread),
          message_id: message_address(@message),
+         reply_to: message_address(@message),
          in_reply_to: thread_address(@thread))
   end
 end
