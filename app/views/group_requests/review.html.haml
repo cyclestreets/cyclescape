@@ -20,7 +20,7 @@
       = time_tag_with_title(@request.created_at) do
         - t ".created_at", time_ago: time_ago_in_words(@request.created_at)
     %td= t ".membership_status.#{@request.status}"
-    %td= link_to t(".by", name: @request.actioned_by.name), user_path(@request.actioned_by) if @request.rejected? || @request.confirmed?
+    %td= link_to t(".by", name: @request.actioned_by.name), user_profile_path(@request.actioned_by) if @request.rejected? || @request.confirmed?
     %td= link_to t(".confirm"), confirm_group_request_path(@request), method: :put, data: { confirm: t(".are_you_sure") } if @request.pending?
     %td= link_to t(".destroy"), group_request_path(@request), method: :delete, data: { confirm: t(".are_you_sure") } if @request.confirmed? || @request.rejected?
 
