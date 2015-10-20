@@ -221,6 +221,16 @@ describe MessageThread do
       end
     end
 
+    context 'with pgp sig' do
+      let(:mail) { create(:inbound_mail, :with_pgp_sig) }
+
+      it 'should create one message' do
+        messages = thread.add_messages_from_email!(mail, nil)
+        expect(messages.size).to eq(1)
+        expect(messages[0]).to be_a(Message)
+      end
+    end
+
     context 'with attachments' do
       let(:mail) { create(:inbound_mail, :with_attached_image) }
       let(:in_reply_to) { thread.messages.last }

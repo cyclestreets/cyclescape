@@ -1,0 +1,99 @@
+Return-Path: <andrew@example.com>
+Delivered-To: cyclescape@example.com
+Received: from spool.mail.gandi.net (mspool2-d.mgt.gandi.net [10.0.21.133])
+  by nmboxes13-d.mgt.gandi.net (Postfix) with ESMTP id EB8C5185424
+  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:13 +0100 (CET)
+Received: from mfilter7-d.gandi.net (mfilter7-d.gandi.net [217.70.178.136])
+  by spool.mail.gandi.net (Postfix) with ESMTP id E89681780CC
+  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:13 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mfilter7-d.gandi.net
+Received: from spool.mail.gandi.net ([10.0.21.133])
+  by mfilter7-d.gandi.net (mfilter7-d.gandi.net [10.0.15.180]) (amavisd-new, port 10024)
+  with ESMTP id 4FVtCywNmIW0 for <cyclescape@example.com>;
+  Thu, 17 Nov 2011 17:38:12 +0100 (CET)
+X-Policy: 217.70.183.196 is whitelisted
+X-Policy: 217.70.183.196 is whitelisted
+Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
+  by spool.mail.gandi.net (Postfix) with ESMTP id B767C17803B
+  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:12 +0100 (CET)
+X-Originating-IP: 217.70.178.144
+Received: from mfilter16-d.gandi.net (mfilter16-d.gandi.net [217.70.178.144])
+  by relay4-d.mail.gandi.net (Postfix) with ESMTP id B1C2E172089
+  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:12 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mfilter16-d.gandi.net
+Received: from relay4-d.mail.gandi.net ([217.70.183.196])
+  by mfilter16-d.gandi.net (mfilter16-d.gandi.net [10.0.15.180]) (amavisd-new, port 10024)
+  with ESMTP id zt1EU2T+tl5G for <cyclescape@example.com>;
+  Thu, 17 Nov 2011 17:38:11 +0100 (CET)
+X-Originating-IP: 86.4.50.79
+Received: from Athena.local (cpc11-cmbg14-2-0-cust78.5-4.cable.virginmedia.com [86.4.50.79])
+  (Authenticated sender: andrew@strangeperil.co.uk)
+  by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 2BBF917208B
+  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:09 +0100 (CET)
+Message-ID: <4EC53870.4060300@avito.co.uk>
+Date: Thu, 17 Nov 2011 16:38:08 +0000
+From: Andrew France <andrew@example.com>
+Organization: Avito
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.7; rv:8.0) Gecko/20111105 Thunderbird/8.0
+MIME-Version: 1.0
+To: cyclescape@example.com
+Subject: Cupcakes
+Content-Type: multipart/signed; micalg=pgp-sha1;
+ protocol="application/pgp-signature";
+ boundary="397LEsUhowjXv5aCXiBg9ml5Qk50qLN4E"
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--397LEsUhowjXv5aCXiBg9ml5Qk50qLN4E
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+Cupcake ipsum dolor sit amet tart gummies. Sweet roll jelly pudding=20
+macaroon ice cream. Halvah apple pie sweet. Halvah bear claw pudding.=20
+Bonbon cake powder pastry. Jelly-o candy canes icing jelly macaroon.=20
+Candy topping chupa chups. Dessert biscuit biscuit gingerbread macaroon=20
+chupa chups wafer. Oat cake apple pie icing. Candy canes icing dessert.
+
+Chocolate cake toffee dessert biscuit tootsie roll powder chocolate=20
+jelly beans marzipan. Pastry tiramisu ice cream jujubes gummi bears.=20
+Caramels muffin cupcake candy. Caramels pie sweet roll. Jelly beans=20
+cupcake brownie. Chupa chups tootsie roll bonbon sesame snaps chocolate=20
+cake bear claw chocolate cake applicake cake. Jelly powder biscuit.=20
+Chupa chups ice cream candy canes icing muffin jelly beans marshmallow.=20
+Ice cream bonbon lemon drops lollipop. Croissant drage applicake=20
+topping liquorice.
+
+Andrew
+
+--=20
+Cupcaker
+Cambridge, UK (UTC)
+-------------------
+
+--397LEsUhowjXv5aCXiBg9ml5Qk50qLN4E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iQIcBAEBAgAGBQJUiGhAAAoJEBho/C6GOdyBDqQP+wSIavLu4fFEJ52abRkQ+zdj
+gdSk8bXKy3xTohqVsmqOapDZo5T6wisjr1HRKb7uui8CNxdQL3Se3wRieZwPw0Zi
+HY8Cb+gR8tyZoIotbs58R3662K0hPi0ym/vcQPhX1+seSL7zpPK0NXqPIEiX3Bf/
+8odInWLY0ITPPx3c8JJ2BycWGjH8ifsP7quw+mgwjl6wYj8hY7P2d8GiR6kAZtRp
+gBQdtEFt/GOX5xLCk3hLhDP8OPxV6DH1HDICthbF2HKyHMfgaDe8qCfUc8bvx5e5
+p8udPj+FYox1ZNlzYF6OTbeX/L+cGAkRFJCJl9pL6McxCBWHTOhQ7He7Aiaj7JHa
+jPXYf5/RC8CC4+6OPHw6CR34wT0u0WUXjsPZSqBpj1GwkaVaj3wjZp+K2Ob1g8X/
+pZ5M/rq8JS26gY6gd5aiOy4+m5n6Ak1ICL25szgWVmA9Z8tao4LE3GEnS7bas/b2
+AN3pDMi7YV39YSgvtWrJxLhgAo/HOgFcKLTTw9ayA20BBlLlYlSDr7j1BF2YobnC
+6iGI16DjXxYAunMXVtvOczubUpuOI47uQLtBv5bBBpBfo8xcdvkA4vgg6oia8bIV
+izmedBQhrpivV460/9oyV0po0b+gvZc32Q3OtSncdqyV99MICXEsDyl1lc2fyF7+
+X+fsd47OhQ3K1ZzXab62
+=J+W8
+-----END PGP SIGNATURE-----
+
+--397LEsUhowjXv5aCXiBg9ml5Qk50qLN4E--
+
+

@@ -39,5 +39,9 @@ FactoryGirl.define do
     trait :reply_below_quote do
       raw_message { File.read(raw_email_path('reply_below_quote')) }
     end
+
+    trait :with_pgp_sig do
+      raw_message { File.read(raw_email_path('pgp_sig')) }
+    end
   end
 end
