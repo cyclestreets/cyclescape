@@ -23,6 +23,7 @@ describe 'Group Membership Requests' do
       it 'should send a notification' do
         visit group_membership_requests_path(gmr.group)
         click_on 'Confirm'
+        expect(page).to have_content(I18n.t('.group.membership_requests.index.membership_status.confirmed'))
         open_email(gmr.user.email)
         expect(current_email).to have_subject("You are now a member of the Cyclescape group for #{gmr.group.name}")
       end

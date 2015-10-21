@@ -47,10 +47,6 @@ class GroupMembershipRequest < ActiveRecord::Base
     end
   end
 
-  def initalize
-    super
-  end
-
   def create_membership
     membership = group.memberships.new
     membership.user = user

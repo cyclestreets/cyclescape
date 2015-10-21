@@ -42,7 +42,7 @@ class Group::MembershipRequestsController < ApplicationController
   def confirm
     @request = @group.membership_requests.find params[:id]
     @request.actioned_by = current_user
-    if @request.confirm
+    if @request.confirm!
       Notifications.group_membership_request_confirmed(@request).deliver_later
       set_flash_message :success
     else
@@ -54,7 +54,7 @@ class Group::MembershipRequestsController < ApplicationController
   def reject
     @request = @group.membership_requests.find params[:id]
     @request.actioned_by = current_user
-    if @request.reject
+    if @request.reject!
       set_flash_message :success
     else
       set_flash_message :failure
@@ -64,7 +64,7 @@ class Group::MembershipRequestsController < ApplicationController
 
   def cancel
     @request = @group.membership_requests.find params[:id]
-    if @request.user == current_user && @request.cancel
+    if @request.user == current_user && @request.cancel!
       set_flash_message :success
     else
       set_flash_message :failure

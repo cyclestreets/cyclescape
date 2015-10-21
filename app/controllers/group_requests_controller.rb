@@ -27,7 +27,7 @@ class GroupRequestsController < ApplicationController
 
   def confirm
     @request.actioned_by = current_user
-    if res = @request.confirm
+    if res = @request.confirm!
       @group = Group.find_by_name! @request.name
       Notifications.group_request_confirmed(@group, @request).deliver_later
       set_flash_message :success
@@ -40,7 +40,7 @@ class GroupRequestsController < ApplicationController
   def reject
     @request.actioned_by = current_user
     @request.update_column :rejection_message, params[:group_request][:rejection_message]
-    if @request.reject
+    if @request.reject!
       Notifications.group_request_rejected(@request).deliver_later
       set_flash_message :success
     else
@@ -59,7 +59,7 @@ class GroupRequestsController < ApplicationController
   end
 
   def cancel
-    if @request.user == current_user && @request.cancel
+    if @request.user == current_user && @request.cancel!
       set_flash_message :success
     else
       set_flash_message :failure
