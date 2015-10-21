@@ -49,7 +49,7 @@ class UserPrefObserver < ActiveRecord::Observer
     if pref.involve_my_locations_changed?
       user = pref.user
       if pref.involve_my_locations == 'subscribe'
-        user.issues_near_locations.each do |issue|
+        user.issues_near_locations.includes(:threads).each do |issue|
           issue.threads.each do |thread|
             if permissions_check(user, thread) && !user.ever_subscribed_to_thread?(thread)
               thread.add_subscriber(user)
@@ -59,13 +59,10 @@ class UserPrefObserver < ActiveRecord::Observer
       end
 
       if pref.involve_my_locations_was == 'subscribe'
-        user.issues_near_locations.each do |issue|
-          issue.threads.each do |thread|
-            unless thread.group &&
-                   thread.group.members.include?(user) &&
-                   user.prefs.involve_my_groups == 'subscribe'
-              user.thread_subscriptions.to(thread).destroy
-            end
+        user.thread_subscriptions.includes(thread: :group).each do |thread_sub|
+          thread = thread_sub.thread
+          unless thread.group && thread.group.members.include?(user) && user.prefs.involve_my_groups == 'subscribe'
+            thread_sub.destroy
           end
         end
       end

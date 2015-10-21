@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe UserPrefObserver do
+
   subject { UserPrefObserver.instance }
 
   context 'basic checks' do
@@ -258,6 +259,7 @@ describe UserPrefObserver do
           user.prefs.update_column(:involve_my_groups, 'subscribe')
           issue_thread.group = group_membership.group
           issue_thread.save
+          create(:issue_message_thread)
         end
 
         it 'should not unsubscribe from group threads' do
