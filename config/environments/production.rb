@@ -31,7 +31,8 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  config.log_level = :debug
+  config.log_level = :info
+  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 'weekly')
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
