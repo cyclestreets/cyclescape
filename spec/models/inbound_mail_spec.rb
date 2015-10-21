@@ -16,6 +16,18 @@ describe InboundMail do
       expect(test.recipient).to eq(mail.to.first)
       expect(test.raw_message).to eq(mail.to_s)
     end
+
+    context 'with email in cc' do
+      let(:raw_email) { File.read(raw_email_path('cc')) }
+      let(:mail) { Mail.new(raw_email) }
+
+      it 'should create a new object from a Mail message' do
+        test = InboundMail.new_from_message(mail)
+        expect(test).to be_a(InboundMail)
+        expect(test.recipient).to eq(mail.cc.first)
+        expect(test.raw_message).to eq(mail.to_s)
+      end
+    end
   end
 
   context 'message' do

@@ -16,7 +16,8 @@ class InboundMail < ActiveRecord::Base
   validates :recipient, :raw_message, presence: true
 
   def self.new_from_message(mail)
-    new recipient: mail.to.first, raw_message: mail.to_s
+    recipient = mail.to.try(:first) || mail.cc.try(:first) || mail.bcc.try(:first)
+    new recipient: recipient, raw_message: mail.to_s
   end
 
   def message
