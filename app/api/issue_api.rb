@@ -50,6 +50,19 @@ module IssueApi
     end
     get '/issues' do
       scope = Issue.all.includes(:created_by, :tags)
+      if params[:group]
+        group = Group.where(short_name: params[:group]).first
+        scope = scope.intersects(group.profile.location)
+      end
+      if params[:order]
+         if params[:order] == 'vote_count'
+           scope = scope.plusminus_tally()
+         end
+         if [ 'created_at', 'start_at' ].include? params[:order]
+           scope = scope.order(params[:order] + ' DESC')
+         end
+      end
+      scope = scope.limit(params[:count]) if params[:count]
       scope = scope.intersects_not_covered(bbox_from_string(params[:bbox], Issue.rgeo_factory).to_geometry) if params[:bbox].present?
       scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
       scope = scope.before_date(params[:end_date]) if params[:end_date]
