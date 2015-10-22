@@ -25,7 +25,8 @@ class ApplicationController < ActionController::Base
       (params[:controller] == 'devise/registrations' && %w(new create edit update).include?(params[:action])) ||
       (params[:controller] == 'devise_invitable/registrations' && %w(new create edit update).include?(params[:action])) ||
       (params[:controller] == 'devise/omniauth_callbacks') || (params[:controller] == 'users/registrations') ||
-      (current_user.try(:id) == 1212)
+      (current_user.try(:id) == 1212) ||
+      (current_user.try(:id) == 5)
   end
 
   def ensure_proper_protocol
