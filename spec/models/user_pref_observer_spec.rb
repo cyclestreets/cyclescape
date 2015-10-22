@@ -239,7 +239,11 @@ describe UserPrefObserver do
     context 'when pref is no longer subscribe' do
       before do
         user.prefs.update_column(:involve_my_locations, 'subscribe')
+        create(:issue_message_thread) # A thread the user is not subscribed to
       end
+
+      let(:non_local_issue)  { create(:issue, location: 'POINT(-100 40)') }
+      let(:non_local_thread) { create(:message_thread, issue: non_local_issue) }
 
       it 'should unsubscribe from threads' do
         issue_thread.add_subscriber(user)
@@ -252,6 +256,16 @@ describe UserPrefObserver do
         expect(issue_thread.subscribers).not_to include(user)
       end
 
+      it 'should not unsubscribe from non local threads' do
+        non_local_thread.add_subscriber(user)
+        expect(non_local_thread.subscribers).to include(user)
+        UserPref.observers.enable :user_pref_observer do
+          user.prefs.involve_my_locations = 'none'
+          user.prefs.save
+        end
+        expect(non_local_thread.reload.subscribers).to include(user)
+      end
+
       context 'when involve by groups is subscribe' do
         let(:group_membership) { create(:group_membership, user: user) }
 
@@ -259,11 +273,11 @@ describe UserPrefObserver do
           user.prefs.update_column(:involve_my_groups, 'subscribe')
           issue_thread.group = group_membership.group
           issue_thread.save
-          create(:issue_message_thread)
         end
 
         it 'should not unsubscribe from group threads' do
           issue_thread.add_subscriber(user)
+          non_local_thread.add_subscriber(user)
           expect(user.groups).to include(issue_thread.group)
           expect(issue_thread.subscribers).to include(user)
           UserPref.observers.enable :user_pref_observer do

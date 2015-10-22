@@ -59,11 +59,13 @@ class UserPrefObserver < ActiveRecord::Observer
       end
 
       if pref.involve_my_locations_was == 'subscribe'
-        user.thread_subscriptions.includes(thread: :group).each do |thread_sub|
+        local_thread_ids = user.issues_near_locations.includes(:threads).map { |iss| iss.threads.ids }.flatten.compact
+        user.thread_subscriptions.includes(thread: :group).where(message_threads: {id: local_thread_ids}).references(:message_threads).each do |thread_sub|
           thread = thread_sub.thread
-          unless thread.group && thread.group.members.include?(user) && user.prefs.involve_my_groups == 'subscribe'
-            thread_sub.destroy
-          end
+
+          next if (thread.group && thread.group.members.include?(user) &&
+            user.prefs.involve_my_groups == 'subscribe')
+          thread_sub.destroy
         end
       end
     end
