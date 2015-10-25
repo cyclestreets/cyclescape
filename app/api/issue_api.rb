@@ -1,3 +1,5 @@
+require 'grape-swagger'
+
 module IssueApi
   class API < Grape::API
     version 'v1', using: :accept_version_header
@@ -52,5 +54,7 @@ module IssueApi
       collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)
       RGeo::GeoJSON.encode(collection)
     end
+
+    add_swagger_documentation
   end
 end

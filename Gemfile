@@ -42,6 +42,8 @@ gem 'memoist'
 gem 'excon'
 gem 'paranoia', '~> 2.0'
 gem 'grape', github: 'ruby-grape/grape'
+gem 'grape-swagger'
+gem 'rack-cors', require: 'rack/cors'
 gem 'rollbar'
 
 gem 'sass-rails', '~> 5.0'
