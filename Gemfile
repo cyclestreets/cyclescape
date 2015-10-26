@@ -41,8 +41,11 @@ gem 'email_reply_parser'
 gem 'memoist'
 gem 'excon'
 gem 'paranoia', '~> 2.0'
+
 gem 'grape', github: 'ruby-grape/grape'
 gem 'grape-swagger'
+gem 'grape-kaminari'
+
 gem 'rack-cors', require: 'rack/cors'
 gem 'rollbar'
 
