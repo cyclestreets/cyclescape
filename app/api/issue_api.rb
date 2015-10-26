@@ -40,9 +40,8 @@ module IssueApi
     params do
       optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
       optional :tags, type: Array, desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]', coerce_with: JSON
-      optional :group, type: String, desc: 'Return only issues from area of group given by it\'s short name'
+      optional :group, type: String, desc: "Return only issues from area of group given by it's short name"
       optional :order, type: String, desc: 'Order of returned issues. Current working parameters are: "vote_count", "created_at"'
-      optional :count, type: Integer, desc: 'Limit number of returned issues'
       optional :end_date, type: Date, desc: 'No issues after the end date are returned'
       optional :start_date, type: Date, desc: 'No issues before the start date are returned'
       optional :per_page, type: Integer, default: 200, desc: 'The number of issues per page, maximum of 500'
@@ -52,17 +51,17 @@ module IssueApi
       scope = Issue.all.includes(:created_by, :tags)
       if params[:group]
         group = Group.where(short_name: params[:group]).first
+        if !group
+          error! 'Given group not found', 404
+        end
         scope = scope.intersects(group.profile.location)
       end
-      if params[:order]
-         if params[:order] == 'vote_count'
-           scope = scope.plusminus_tally()
-         end
-         if [ 'created_at', 'start_at' ].include? params[:order]
-           scope = scope.order(params[:order] + ' DESC')
-         end
+      case params[:order]
+      when 'vote_count'
+        scope = scope.plusminus_tally
+      when 'created_at', 'start_at'
+        scope = scope.order(params[:order] => :desc)
       end
-      scope = scope.limit(params[:count]) if params[:count]
       scope = scope.intersects_not_covered(bbox_from_string(params[:bbox], Issue.rgeo_factory).to_geometry) if params[:bbox].present?
       scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
       scope = scope.before_date(params[:end_date]) if params[:end_date]
