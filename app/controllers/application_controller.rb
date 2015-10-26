@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   before_filter :no_disabled_users
   before_filter :set_auth_user
   before_filter :load_group_from_subdomain
-  before_filter :set_page_description
-  before_filter :set_page_image
   before_filter :set_page_title
   after_filter :remember_current_group
   after_filter :store_location
@@ -107,8 +105,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :page_description
 
-  def set_page_image(description = nil)
-    @page_image = description
+  def set_page_image(image = nil)
+    @page_image = image
   end
 
   def page_image
