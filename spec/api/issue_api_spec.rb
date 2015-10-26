@@ -29,8 +29,8 @@ describe IssueApi::API do
 
       it 'has the correct fields' do
         expect(geojson_response[0].keys).
-          to match_array(%w(id created_at created_by deadline external_url
-                            description tags cyclescape_url))
+          to match_array(%w(id created_at created_by deadline external_url description
+                         tags cyclescape_url photo_thumb_url thumbnail title vote_count))
       end
       context 'with a subdomain' do
         let(:host) { 'http://cam.example.com' }
@@ -62,15 +62,32 @@ describe IssueApi::API do
       end
     end
 
-    context 'with per page' do
-      before do
-        3.times { create :issue }
+    context 'with group' do
+      let!(:inside_group)  { create :issue_within_quahog, id: 123 }
+      let!(:outside_group) { create :issue, id: 312 }
 
-        get "api/issues", per_page: 2
+      before do
+        create(:quahogcc_group_profile)
+        get "api/issues", group: 'quahogcc'
       end
 
-      it 'respects the per_page parameters' do
-        expect(geojson_response.size).to eq(2)
+      it 'should only return issues inside the groups area' do
+        expect(geojson_response.size).to eq(1)
+        expect(geojson_response[0]['id']).to eq(123)
+      end
+    end
+
+    context 'should hide issues creators if hidden' do
+      let(:user)   { create :user }
+      let!(:issue) { create :issue, created_by: user }
+
+      before do
+        create :user_profile, user: user, visibility: 'group'
+        get "api/issues"
+      end
+
+      it 'should hide the users name' do
+        expect(geojson_response[0]['created_by']).to eq('Anon')
       end
     end
   end

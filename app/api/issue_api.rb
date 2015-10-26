@@ -40,13 +40,13 @@ module IssueApi
       end
     end
 
-    paginate per_page: 200, max_per_page: 500
+    paginate per_page: 200, max_per_page: 500, offset: false
 
     desc 'Returns issues as a GeoJSON collection'
     params do
       optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
       optional :tags, type: Array, desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]', coerce_with: JSON
-      optional :group, type: String, desc: "Return only issues from area of group given by it's short name"
+      optional :group, type: String, desc: 'Return only issues from area of group given by its short name, e.g. "london"'
       optional :order, type: String, desc: 'Order of returned issues. Current working parameters are: "vote_count", "created_at"'
       optional :end_date, type: Date, desc: 'No issues after the end date are returned'
       optional :start_date, type: Date, desc: 'No issues before the start date are returned'
@@ -55,10 +55,8 @@ module IssueApi
     get '/issues' do
       scope = Issue.all.includes(:created_by, :tags)
       if params[:group]
-        group = Group.where(short_name: params[:group]).first
-        if !group
-          error! 'Given group not found', 404
-        end
+        group = Group.find_by(short_name: params[:group])
+        error! 'Given group not found', 404 if !group
         scope = scope.intersects(group.profile.location)
       end
       case params[:order]
