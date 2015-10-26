@@ -11,6 +11,10 @@
     %script(src="/openlayers/OpenLayers.js" type="text/javascript")
     = javascript_include_tag "application", "data-turbolinks-track" => true
     = csrf_meta_tags
+    - if page_image
+      %meta{property: "og:image", content: page_image}
+    - if page_description
+      %meta{name: "description", content: page_description}
   %body{class: [Rails.env, controller_path.tr("/_", "-")].join(" ")}
     %header#site-header(role="banner")
       .wrapper

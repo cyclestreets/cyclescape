@@ -97,6 +97,24 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def set_page_description(description = nil)
+    @page_description = description
+  end
+
+  def page_description
+    @page_description
+  end
+  helper_method :page_description
+
+  def set_page_image(image = nil)
+    @page_image = image
+  end
+
+  def page_image
+    @page_image
+  end
+  helper_method :page_image
+
   def set_page_title(title = nil)
     if title
       page_title = title
