@@ -64,9 +64,9 @@ class IssueDecorator < ApplicationDecorator
     issue.plusminus
   end
 
-  protected
-
   def standard_photo_url
-    photo.thumb('358x200>').url
+    if photo
+      photo.thumb('358x200>').url
+    end
   end
 end
