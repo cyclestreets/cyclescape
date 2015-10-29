@@ -158,7 +158,7 @@ class User < ActiveRecord::Base
 
   def disabled=(d)
     if d == '1' && !disabled_at?
-      self.disabled_at = Time.now
+      self.disabled_at = Time.zone.now
     end
     if d == '0' && disabled_at?
       self.disabled_at = nil

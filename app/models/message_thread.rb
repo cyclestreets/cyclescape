@@ -48,8 +48,9 @@ class MessageThread < ActiveRecord::Base
 
   before_validation :set_public_token, on: :create
 
-  validates :title, :created_by_id, presence: true
+  validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
+  validate :must_be_created_by_enabled_user, on: :create
 
   def self.non_committee_privacies_map
     (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
@@ -215,5 +216,10 @@ class MessageThread < ActiveRecord::Base
 
   def generate_public_token
     SecureRandom.hex(10)
+  end
+
+  def must_be_created_by_enabled_user
+    return unless created_by
+    errors.add :base, :user_disabled if created_by.disabled
   end
 end

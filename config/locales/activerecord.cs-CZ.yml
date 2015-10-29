@@ -1,0 +1,36 @@
+"cs-CZ":
+  cancel: "Zrušit"
+
+  activerecord:
+    errors:
+      models:
+        issue:
+          attributes:
+            size:
+              less_than: "podnět je příliš velký."
+        user:
+          attributes:
+            full_name:
+              blank: "Prosím zadejte jméno"
+              email: "Prosím zadejte emailovou adresu"
+        message_thread:
+          attributes:
+            base:
+              user_disabled: "Nemůže být vytvořen zdravotně postižené uživatele"
+    models:
+      user: "Uživatel"
+      message_thread: "Vlákno"
+
+    attributes:
+      user_location:
+        location: "Oblast"
+      user:
+        password: "Heslo"
+        current_password: "Současné heslo"
+        full_name: "Plné jméno"
+        email: "Email"
+        password_confirmation: "Ověření hesla"
+        display_name: "Zobrazené jméno"
+      group_pref:
+        membership_secretary: "Správce členství ve skupině"
+        notify_membership_requests: "Upozornit na nové žádosti o členství"

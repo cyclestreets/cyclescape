@@ -1,0 +1,24 @@
+"en-GB":
+  activerecord:
+    errors:
+      models:
+        issue:
+          attributes:
+            size:
+              less_than: "of the issue is too large."
+        user:
+          attributes:
+            full_name:
+              blank: "Please enter a name"
+              email: "Please enter an email address"
+        message_thread:
+          attributes:
+            base:
+              user_disabled: Cannot be created by a disabled user
+    attributes:
+      issue:
+        external_url: External site
+      message_thread:
+        group: "Owned by"
+    models:
+      message_thread: Thread

@@ -13,11 +13,19 @@ describe MessageThread do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:title) }
-    it { is_expected.to validate_presence_of(:created_by_id) }
+    it { is_expected.to validate_presence_of(:created_by) }
     it { is_expected.to allow_value('public').for(:privacy) }
     it { is_expected.to allow_value('group').for(:privacy) }
     it { is_expected.to allow_value('committee').for(:privacy) }
     it { is_expected.not_to allow_value('other').for(:privacy) }
+  end
+
+  it 'should validate the creator is not disabled' do
+    user = create :user
+    subject.created_by = user
+    expect(subject.errors_on(:base)).to be_empty
+    user.update disabled_at: Time.zone.now
+    expect(subject.errors_on(:base)).to eq([I18n.t('activerecord.errors.models.message_thread.attributes.base.user_disabled')])
   end
 
   describe 'privacy' do
@@ -247,7 +255,6 @@ describe MessageThread do
         expect(messages[0].in_reply_to).to eq(in_reply_to)
         expect(messages[1].in_reply_to).to eq(in_reply_to)
       end
-
     end
   end
 
