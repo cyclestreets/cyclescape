@@ -51,6 +51,7 @@ class MessageThread < ActiveRecord::Base
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
   validate :must_be_created_by_enabled_user, on: :create
+  validate :public_must_be_created_by_approved_user, on: :create
 
   def self.non_committee_privacies_map
     (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
@@ -218,8 +219,13 @@ class MessageThread < ActiveRecord::Base
     SecureRandom.hex(10)
   end
 
+  def public_must_be_created_by_approved_user
+    return unless privacy == 'public' && created_by
+    errors.add :base, :not_approved unless created_by.approved
+  end
+
   def must_be_created_by_enabled_user
     return unless created_by
-    errors.add :base, :user_disabled if created_by.disabled
+    errors.add :base, :disabled if created_by.disabled
   end
 end

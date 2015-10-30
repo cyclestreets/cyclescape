@@ -16,7 +16,8 @@
         message_thread:
           attributes:
             base:
-              user_disabled: "Nemůže být vytvořen zdravotně postižené uživatele"
+              disabled: "Nemůže být vytvořen zdravotně postižené uživatele"
+              not_approved: Public threads can only be created by approved users
     models:
       user: "Uživatel"
       message_thread: "Vlákno"

@@ -58,7 +58,7 @@
         new: &hints_user_new
           display_name: "If you set a display name, it will be shown to people who cannot see your profile (otherwise it will appear as 'anonymous')."
           full_name: "Please enter your full name. It will be shown to all the people who can see your profile."
-          bicycle_wheels: "To help us spot spam please enter the number of wheels on a bicyle, e.g. 14"
+          bicycle_wheels: "To help us spot spam please enter the number of wheels on a bicycle, e.g. 14"
         edit:
           password: "Leave this blank to keep your current password."
           current_password: "Please confirm your current password to make changes on this page."

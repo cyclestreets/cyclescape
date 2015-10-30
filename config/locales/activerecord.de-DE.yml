@@ -10,4 +10,4 @@
         message_thread:
           attributes:
             base:
-              user_disabled: Kann nicht durch einen behinderten Benutzer erstellt werden
+              disabled: Kann nicht durch einen behinderten Benutzer erstellt werden

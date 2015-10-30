@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012194550) do
+ActiveRecord::Schema.define(version: 20151030202333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -391,10 +391,10 @@ ActiveRecord::Schema.define(version: 20151012194550) do
   add_index "user_thread_priorities", ["user_id"], name: "index_user_thread_priorities_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "full_name",              limit: 255,              null: false
+    t.string   "email",                  limit: 255, default: "",    null: false
+    t.string   "full_name",              limit: 255,                 null: false
     t.string   "display_name",           limit: 255
-    t.string   "role",                   limit: 255,              null: false
+    t.string   "role",                   limit: 255,                 null: false
     t.string   "encrypted_password",     limit: 128, default: ""
     t.string   "confirmation_token",     limit: 255
     t.datetime "confirmed_at"
@@ -403,8 +403,8 @@ ActiveRecord::Schema.define(version: 20151012194550) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "disabled_at"
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.string   "invitation_token",       limit: 255
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
@@ -414,6 +414,7 @@ ActiveRecord::Schema.define(version: 20151012194550) do
     t.string   "invited_by_type",        limit: 255
     t.datetime "deleted_at"
     t.datetime "invitation_created_at"
+    t.boolean  "approved",                           default: false, null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

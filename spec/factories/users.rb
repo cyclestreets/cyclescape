@@ -5,6 +5,7 @@ FactoryGirl.define do
     sequence(:password) { |n| "password#{n}" }
     sequence(:password_confirmation) { |n| "password#{n}" }
     after(:build) { |u| u.skip_confirmation! }
+    approved true
 
     trait :admin do
       role 'admin'
