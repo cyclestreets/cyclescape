@@ -1,5 +1,6 @@
 %h1= t ".title"
 %p= t ".introduction"
+
 %table
   %thead
     %th= t ".id"
@@ -12,6 +13,8 @@
     %th= t ".edit"
     %th= t ".preferences"
     %th= t ".locations"
+    %th(style="max-width: 400px")= t ".website"
+    %th= t ".about"
   %tbody
     - @users.each do |user|
       %tr
@@ -30,3 +33,5 @@
         %td= link_to t(".edit"), edit_admin_user_path(user)
         %td= link_to t(".preferences"), edit_user_prefs_path(user)
         %td= link_to t(".locations"), admin_user_locations_path(user)
+        %td= user.profile.try(:website).try(:truncate, 60)
+        %td= user.profile.try(:about).try(:truncate, 50)

@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   def index
-    @users = User.order('created_at DESC')
+    @users = User.order('created_at DESC').includes(:profile)
   end
 
   def edit

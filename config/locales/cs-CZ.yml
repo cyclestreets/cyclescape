@@ -92,6 +92,8 @@
         title: "Uživatelé"
         preferences: "Nastavení"
         locations: "Oblasti působnosti"
+        website: "Webová stránka:"
+        about: "O stránkách"
       update:
         success: "Uživatel upraven"
       edit:

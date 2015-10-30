@@ -89,6 +89,8 @@
         title: "Users"
         preferences: "Preferences"
         locations: "Locations"
+        website: Website
+        about: About
       update:
         success: "User updated"
       edit:
