@@ -75,7 +75,7 @@
         update:
           success: "Oblast upravena"
     users:
-      index:
+      index: &admin_users_index
         created: "Vytvořeno"
         created_at: "před %{time_ago}"
         last_seen: "Naposledy přihlášen"
@@ -94,6 +94,10 @@
         locations: "Oblasti působnosti"
         website: "Webová stránka:"
         about: "O stránkách"
+        approved: Approved
+        approve: Approve
+      user:
+        <<: *admin_users_index
       update:
         success: "Uživatel upraven"
       edit:

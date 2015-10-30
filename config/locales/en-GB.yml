@@ -74,7 +74,7 @@
         update:
           success: "Location Updated"
     users:
-      index:
+      index: &admin_users_index
         created: "Created"
         created_at: "%{time_ago} ago"
         introduction: "This page lists all users on the system (irrespective of any group membership they may have)."
@@ -91,6 +91,10 @@
         locations: "Locations"
         website: Website
         about: About
+        approved: Approved
+        approve: Approve
+      user:
+        <<: *admin_users_index
       update:
         success: "User updated"
       edit:

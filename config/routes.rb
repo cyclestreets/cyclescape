@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :groups
     resources :users do
+      put :approve, on: :member
       scope module: 'user' do
         resources :locations do
           get :geometry, on: :member

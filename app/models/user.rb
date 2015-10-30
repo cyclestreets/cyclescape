@@ -101,6 +101,10 @@ class User < ActiveRecord::Base
       each { |u| u.create_user_prefs }
   end
 
+  def approve!
+    update approved: true
+  end
+
   def name
     return display_name unless display_name.blank?
     full_name

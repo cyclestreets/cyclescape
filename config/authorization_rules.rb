@@ -9,7 +9,7 @@ authorization do
     has_permission_on :group_requests do
       to [:index, :review, :confirm, :reject, :destroy]
     end
-    has_permission_on :admin_users, to: :manage
+    has_permission_on :admin_users, to: [:manage, :approve]
     has_permission_on :admin_user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :admin_home, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
