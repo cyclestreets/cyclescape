@@ -7,6 +7,7 @@
     %th= t ".display_name"
     %th= t ".full_name"
     %th= t ".email"
+    %th= t(".approved") + "?"
     %th= t ".role"
     %th= t ".created"
     %th= t ".disabled"
@@ -15,6 +16,5 @@
     %th= t ".locations"
     %th(style="max-width: 400px")= t ".website"
     %th= t ".about"
-    %th= t(".approved") + "?"
   %tbody
     = render collection: @users, partial: "user"

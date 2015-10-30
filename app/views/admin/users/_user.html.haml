@@ -3,6 +3,12 @@
   %td= user.display_name
   %td= link_to user.full_name, user_profile_path(user)
   %td= user.email
+  %td
+    - if user.approved
+      = t('.approved')
+    - else
+      = link_to t(".approve"), approve_admin_user_path(user),
+        method: :put, class: "btn-grey", remote: true
   %td= t "user_roles.#{user.role}"
   %td
     = time_tag_with_title(user.created_at) do
@@ -16,9 +22,3 @@
   %td= link_to t(".locations"), admin_user_locations_path(user)
   %td= user.profile.try(:website).try(:truncate, 60)
   %td= user.profile.try(:about).try(:truncate, 50)
-  %td
-    - if user.approved
-      = t('.approved')
-    - else
-      = link_to t(".approve"), approve_admin_user_path(user),
-        method: :put, class: "btn-grey", remote: true
