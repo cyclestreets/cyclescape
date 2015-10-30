@@ -221,6 +221,7 @@
         title: 'Upravit účet'
       new:
         title: "Registrovat"
+        failure: Nezadali jste správný počet kol na kole
     sessions:
       new:
         title: "Přihlásit"

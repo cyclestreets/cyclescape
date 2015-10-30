@@ -8,6 +8,14 @@
       = f.input :email
       = f.input :password
       = f.input :password_confirmation, required: true
+      %li.input.required.stringish
+        = label_tag 'bicycle_wheels', class: 'label' do
+          = t('formtastic.labels.user.new.bicycle_wheels')
+          %abbr(title="required") *
+        = text_field_tag :bicycle_wheels
+        %p.inline-hints
+          = t('formtastic.hints.user.new.bicycle_wheels')
+
     = f.actions do
       = f.action :submit
   = render :partial => "devise/shared/links"
