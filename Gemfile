@@ -48,6 +48,7 @@ gem 'grape-kaminari'
 
 gem 'rack-cors', require: 'rack/cors'
 gem 'rollbar'
+gem 'rakismet'
 
 gem 'sass-rails', '~> 5.0'
 gem 'coffee-rails', '~> 4.1.0'

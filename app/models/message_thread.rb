@@ -25,6 +25,7 @@
 class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
+  include Rakismet::Model
 
   acts_as_indexed fields: [:title, :messages_text, :tags_string]
 
@@ -52,6 +53,11 @@ class MessageThread < ActiveRecord::Base
   validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
   validate :must_be_created_by_enabled_user, on: :create
   validate :public_must_be_created_by_approved_user, on: :create
+
+  rakismet_attrs  author: proc { created_by.full_name },
+    author_email: proc { author.email_address },
+    content: proc { messages.first.body },
+    permalink: ''
 
   def self.non_committee_privacies_map
     (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }

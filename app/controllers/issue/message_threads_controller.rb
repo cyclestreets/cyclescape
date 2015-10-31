@@ -25,7 +25,7 @@ class Issue::MessageThreadsController < MessageThreadsController
     @message = @thread.messages.build permitted_message_params
     @message.created_by = current_user
 
-    if @thread.save
+    if !@thread.spam? && @thread.save
       @thread.subscriptions.create( user: current_user ) unless current_user.subscribed_to_thread?(@thread)
       ThreadSubscriber.subscribe_users @thread
       ThreadNotifier.notify_subscribers @thread, :new_message, @message
