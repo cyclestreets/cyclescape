@@ -34,7 +34,9 @@ RSpec.configure do |config|
   config.render_views
 
   config.include Devise::TestHelpers, type: :controller
+  config.include Devise::TestHelpers, type: :view
   config.include Authorization::TestHelper, type: :controller
+  config.include Authorization::TestHelper, type: :view
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers
 

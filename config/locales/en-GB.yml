@@ -74,7 +74,7 @@
         update:
           success: "Location Updated"
     users:
-      index:
+      index: &admin_users_index
         created: "Created"
         created_at: "%{time_ago} ago"
         introduction: "This page lists all users on the system (irrespective of any group membership they may have)."
@@ -89,6 +89,12 @@
         title: "Users"
         preferences: "Preferences"
         locations: "Locations"
+        website: Website
+        about: About
+        approved: Approved
+        approve: Approve
+      user:
+        <<: *admin_users_index
       update:
         success: "User updated"
       edit:
@@ -215,6 +221,7 @@
         title: 'Update My Account Details'
       new:
         title: "Sign up"
+        failure: You didn't enter the correct number of wheels on a bicycle
     sessions:
       new:
         title: "Sign in"

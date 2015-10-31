@@ -76,11 +76,9 @@ class Group < ActiveRecord::Base
   end
 
   def thread_privacy_options_for(user)
-    if committee_members.include?(user)
-      MessageThread::ALLOWED_PRIVACY
-    else
-      MessageThread::ALLOWED_PRIVACY - ['committee']
-    end
+    allowed = MessageThread::ALLOWED_PRIVACY.dup
+    allowed -= ['committee'] unless committee_members.include?(user)
+    allowed
   end
 
   def thread_privacy_options_map_for(user)

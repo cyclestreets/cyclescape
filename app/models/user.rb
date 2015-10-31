@@ -101,6 +101,10 @@ class User < ActiveRecord::Base
       each { |u| u.create_user_prefs }
   end
 
+  def approve!
+    update approved: true
+  end
+
   def name
     return display_name unless display_name.blank?
     full_name
@@ -158,7 +162,7 @@ class User < ActiveRecord::Base
 
   def disabled=(d)
     if d == '1' && !disabled_at?
-      self.disabled_at = Time.now
+      self.disabled_at = Time.zone.now
     end
     if d == '0' && disabled_at?
       self.disabled_at = nil

@@ -1,7 +1,16 @@
-﻿# Form fields, labels, hints and placeholders
+﻿# Form fields, labels, hints, placeholders, and error messages
 
 "de-DE":
   cancel: "Abbrechen"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            full_name:
+              blank: "Bitte gebe einen Namen ein"
+              email: "Bitte gebe eine Email-Adresse ein"
 
   formtastic:
     labels:

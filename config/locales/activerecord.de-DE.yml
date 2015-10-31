@@ -1,0 +1,13 @@
+﻿"de-DE":
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            full_name:
+              blank: "Bitte gebe einen Namen ein"
+              email: "Bitte gebe eine Email-Adresse ein"
+        message_thread:
+          attributes:
+            base:
+              disabled: Kann nicht durch einen behinderten Benutzer erstellt werden

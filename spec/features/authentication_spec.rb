@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe 'Authentication and authorization' do
+  let(:credentials) { attributes_for(:user) }
+
   context 'when not logged in' do
     it 'should allow access to the home page' do
       visit root_path
@@ -88,23 +90,35 @@ describe 'Authentication and authorization' do
     end
   end
 
+  it 'should validate bicycle captch' do
+    visit root_path
+    click_link 'Sign up'
+    fill_in 'Full name', with: credentials[:full_name]
+    fill_in 'Email', with: credentials[:email]
+    fill_in 'Password', with: credentials[:password], match: :first
+    fill_in 'Password confirmation', with: credentials[:password]
+    fill_in 'Bicycle Wheels', with: "3"
+    click_button 'Sign up'
+    expect(page).to have_content(I18n.t('.devise.registrations.new.failure'))
+  end
+
   context 'when signing up' do
     before do
-      @credentials = attributes_for(:user)
       visit root_path
       click_link 'Sign up'
-      fill_in 'Full name', with: @credentials[:full_name]
-      fill_in 'Email', with: @credentials[:email]
-      fill_in 'Password', with: @credentials[:password], match: :first
-      fill_in 'Password confirmation', with: @credentials[:password]
+      fill_in 'Full name', with: credentials[:full_name]
+      fill_in 'Email', with: credentials[:email]
+      fill_in 'Password', with: credentials[:password], match: :first
+      fill_in 'Password confirmation', with: credentials[:password]
+      fill_in 'Bicycle Wheels', with: "2"
       click_button 'Sign up'
-      open_email(@credentials[:email])
+      open_email(credentials[:email])
     end
 
     it 'should direct you to your locations page' do
       visit_in_email('Confirm my account')
-      fill_in 'Password', with: @credentials[:password], match: :first
-      fill_in 'Email', with: @credentials[:email]
+      fill_in 'Password', with: credentials[:password], match: :first
+      fill_in 'Email', with: credentials[:email]
       click_button 'Sign in'
       expect(page.current_path).to eq(current_user_locations_path)
     end
@@ -113,7 +127,7 @@ describe 'Authentication and authorization' do
       expect(all_emails.count).to eql(1)
       visit new_user_session_path
       click_link "Didn't receive confirmation instructions?"
-      fill_in 'Email', with: @credentials[:email]
+      fill_in 'Email', with: credentials[:email]
       click_button 'Resend confirmation instructions'
       expect(all_emails.count).to eql(2)
     end

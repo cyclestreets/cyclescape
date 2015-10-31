@@ -1,32 +1,20 @@
 %h1= t ".title"
 %p= t ".introduction"
+
 %table
   %thead
     %th= t ".id"
     %th= t ".display_name"
     %th= t ".full_name"
     %th= t ".email"
+    %th= t(".approved") + "?"
     %th= t ".role"
     %th= t ".created"
     %th= t ".disabled"
     %th= t ".edit"
     %th= t ".preferences"
     %th= t ".locations"
+    %th(style="max-width: 400px")= t ".website"
+    %th= t ".about"
   %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.id
-        %td= user.display_name
-        %td= link_to user.full_name, user_profile_path(user)
-        %td= user.email
-        %td= t "user_roles.#{user.role}"
-        %td
-          = time_tag_with_title(user.created_at) do
-            - t ".created_at", time_ago: time_ago_in_words(user.created_at)
-        %td
-          - if user.disabled_at?
-            = time_tag_with_title(user.disabled_at) do
-              - t ".disabled_at", time_ago: time_ago_in_words(user.disabled_at)
-        %td= link_to t(".edit"), edit_admin_user_path(user)
-        %td= link_to t(".preferences"), edit_user_prefs_path(user)
-        %td= link_to t(".locations"), admin_user_locations_path(user)
+    = render collection: @users, partial: "user"

@@ -1,0 +1,24 @@
+%tr{id: user.id}
+  %td= user.id
+  %td= user.display_name
+  %td= link_to user.full_name, user_profile_path(user)
+  %td= user.email
+  %td
+    - if user.approved
+      = t('.approved')
+    - else
+      = link_to t(".approve"), approve_admin_user_path(user),
+        method: :put, class: "btn-grey", remote: true
+  %td= t "user_roles.#{user.role}"
+  %td
+    = time_tag_with_title(user.created_at) do
+      - t ".created_at", time_ago: time_ago_in_words(user.created_at)
+  %td
+    - if user.disabled_at?
+      = time_tag_with_title(user.disabled_at) do
+        - t ".disabled_at", time_ago: time_ago_in_words(user.disabled_at)
+  %td= link_to t(".edit"), edit_admin_user_path(user)
+  %td= link_to t(".preferences"), edit_user_prefs_path(user)
+  %td= link_to t(".locations"), admin_user_locations_path(user)
+  %td= user.profile.try(:website).try(:truncate, 60)
+  %td= user.profile.try(:about).try(:truncate, 50)
