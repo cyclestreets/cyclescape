@@ -56,6 +56,7 @@ class GroupRequest < ActiveRecord::Base
   end
 
   def create_group
+    user.approve!
     group = Group.create attributes.slice('name', 'short_name', 'website', 'email', 'default_thread_privacy')
     if group.valid?
       membership = group.memberships.new

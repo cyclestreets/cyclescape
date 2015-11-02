@@ -253,6 +253,6 @@ class MessageThread < ActiveRecord::Base
   end
 
   def approve_creator
-    created_by.update approved: true
+    created_by.approve!
   end
 end

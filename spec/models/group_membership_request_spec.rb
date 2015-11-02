@@ -23,7 +23,7 @@ describe GroupMembershipRequest do
 
   describe 'to be valid' do
     subject { GroupMembershipRequest.new }
-    let(:user) { create(:user) }
+    let(:user)  { create(:user) }
     let(:group) { create(:group) }
 
     it 'needs a user and a group' do
@@ -62,15 +62,13 @@ describe GroupMembershipRequest do
   end
 
   context 'check group creation' do
-    subject { GroupMembershipRequest.new }
-    let(:user) { create(:stewie) }
+    subject { GroupMembershipRequest.new(user: user, group: group)}
+    let(:user) { create(:stewie, approved: false) }
     let(:group) { create(:quahogcc) }
     let(:boss) { create(:brian) }
 
     it 'should create group when confirmed' do
       expect(user.groups.size).to eq(0)
-      subject.user = user
-      subject.group = group
       expect { subject.confirm! }.to raise_error AASM::InvalidTransition
       expect(user.groups.size).to eq(0)
 
@@ -78,6 +76,11 @@ describe GroupMembershipRequest do
       expect(subject.confirm).to be_truthy
       expect(user.reload.groups.size).to eq(1)
       expect(user.groups[0]).to eql(group)
+    end
+
+    it 'should approve user' do
+      subject.actioned_by = boss
+      expect{subject.confirm!}.to change{user.reload.approved}.from(false).to(true)
     end
   end
 

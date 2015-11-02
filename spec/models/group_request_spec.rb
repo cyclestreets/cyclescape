@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe GroupRequest do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, approved: false) }
   let(:group) { create(:group) }
   let(:boss) { create(:user) }
 
@@ -78,10 +78,14 @@ describe GroupRequest do
     subject { create :group_request, user: user, actioned_by: boss}
     let(:boss) { create(:brian) }
 
+    it 'should approve user' do
+      expect{subject.confirm!}.to change{user.reload.approved}.from(false).to(true)
+    end
+
     it 'should create group when confirmed' do
       expect(user.reload.groups.size).to eq(0)
 
-      expect{subject.confirm}.to change{Group.count}.by(1)
+      expect{subject.confirm!}.to change{Group.count}.by(1)
       expect(Group.last.committee_members).to include(user)
     end
   end
