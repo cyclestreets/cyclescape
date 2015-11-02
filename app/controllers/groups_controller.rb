@@ -36,7 +36,7 @@ class GroupsController < ApplicationController
       group_profiles = GroupProfile.order('created_at DESC').limit(50)
     end
     factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(group_profiles.sort_by! { |o| o.size }.reverse.map { | group_profile | group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
+    collection = factory.feature_collection(group_profiles.sort_by { |o| o.size }.reverse.map { | group_profile | group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection) }
     end

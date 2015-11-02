@@ -5,15 +5,15 @@
       = link_to t(".group_request"), new_group_request_path, class: "btn-green", style: 'float: right'
   #group-list-tabs
     %ul.tabs.styled-tabs
-      %li= link_to t(".list_tab"), "#", class: "list"
-      %li= link_to t(".map_tab"), "#", class: "map-pin"
+      %li= link_to t(".list_tab"), "#list", class: "list"
+      %li= link_to t(".map_tab"), "#map", class: "map-pin"
     .panes
-      .pane
+      #list.pane
         %ul.group-list
           - if @groups.empty?
             = t(".no_results_found")
           = render partial: "compact", collection: @groups, as: :group
         - if @groups.respond_to?(:total_pages)
           = paginate @groups
-      .pane
+      #map.pane
         = render "all_map"
