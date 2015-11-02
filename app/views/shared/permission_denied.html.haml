@@ -1,0 +1,3 @@
+%p= t('application.permission_denied')
+-if @group
+  %p= t(".apply_to_group_html", group_name: @group.name, join_link: new_group_membership_request_path(@group))

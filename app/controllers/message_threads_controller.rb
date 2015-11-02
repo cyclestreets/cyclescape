@@ -59,6 +59,11 @@ class MessageThreadsController < ApplicationController
     thread.reject!
   end
 
+  def permission_denied
+    @group = thread.group
+    super
+  end
+
   protected
 
   def subscribe_and_notify
