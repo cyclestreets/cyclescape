@@ -498,4 +498,11 @@ describe User do
       expect(user.remembered_group_id).to be_nil
     end
   end
+
+  it 'should have in group committee scope' do
+    subject = create(:user)
+    create :group_membership, user: subject, role: 'member'
+    committee = create :group_membership, user: subject, role: 'committee'
+    expect(subject.reload.in_group_committee).to eq([committee.group])
+  end
 end

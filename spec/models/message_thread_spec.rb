@@ -275,4 +275,15 @@ describe MessageThread do
       end
     end
   end
+
+  describe 'approve' do
+    let(:user) { create :user, approved: false }
+    let!(:req) { stub_request(:post, /rest\.akismet\.com\/1\.1\/submit-ham/) }
+    subject    { create :message_thread, :possible_spam, :with_messages, created_by: user }
+
+    it 'should submit ham and apporve user' do
+      expect{ subject.approve! }.to change{ user.reload.approved }.from(false).to(true)
+      expect(req).to have_been_made
+    end
+  end
 end

@@ -357,6 +357,9 @@
         title: "New Group Thread"
       update:
         success: "Thread updated"
+    message_thread_moderations:
+      index:
+        explanation: "These threads are held for moderation.  This can be because they look like potential spam or that the user has not been approved.  If you approve a thread the message will be sent out and the users approved."
     prefs:
       edit:
         no_email_warning: "Warning! Your settings indicate that you want notifications sent to your group, but there is no email address recorded for this group. Either choose a membership secretary, or ask for your group email to be set by a site administrator."
@@ -408,6 +411,7 @@
         zero: "Review membership requests"
         one: "View pending membership request"
         other: "View pending membership requests (%{count})"
+      view_message_thread_moderations: View moderated group messages
   group_requests:
     create:
       requested: You have requested a new campaigning group, you will be notifed when it is created
@@ -435,7 +439,6 @@
     reject:
       success: Group request rejected
       failure: Failed to reject group request
-
   home:
     show:
       introduction_html:
@@ -731,6 +734,11 @@
       library: "Library"
       no_library_items: "Couldn't find any relevant library items based on the thread tags."
       tag_thread_guidance: "Add tags to this thread to find relevant library items."
+    moderate:
+      approve: Approve
+      reject: Reject
+      possible_spam: Possible spam
+      not_approved: User not approved
     new:
       title: "New Thread"
     priority_panel:

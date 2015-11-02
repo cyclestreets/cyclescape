@@ -84,21 +84,28 @@ class User < ActiveRecord::Base
   validates :display_name, uniqueness: true, allow_blank: true
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
 
-  def self.user_roles_map
-    ALLOWED_ROLES.map { |n| [I18n.t("user_roles.#{n.to_s}"), n] }
+  class << self
+    def user_roles_map
+      ALLOWED_ROLES.map { |n| [I18n.t("user_roles.#{n.to_s}"), n] }
+    end
+
+    def find_or_invite(email_address, name = nil)
+      existing = find_by_email(email_address)
+      return existing if existing
+      name = email_address.split('@').first if name.nil?
+      User.invite!(full_name: name, email: email_address)
+    end
+
+    def init_user_prefs
+      joins('LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id').
+        where('user_prefs.id IS NULL').
+        each { |u| u.create_user_prefs }
+    end
+
   end
 
-  def self.find_or_invite(email_address, name = nil)
-    existing = find_by_email(email_address)
-    return existing if existing
-    name = email_address.split('@').first if name.nil?
-    User.invite!(full_name: name, email: email_address)
-  end
-
-  def self.init_user_prefs
-    joins('LEFT OUTER JOIN user_prefs ON user_prefs.user_id = users.id').
-      where('user_prefs.id IS NULL').
-      each { |u| u.create_user_prefs }
+  def in_group_committee
+    memberships.includes(:group).where(role: 'committee').map(&:group)
   end
 
   def approve!

@@ -1,33 +1,45 @@
 class ThreadList
-  def self.recent_from_groups(groups, limit)
-    MessageThread.where(group_id: groups).order_by_latest_message.limit(limit)
-  end
+  class << self
+    def recent_from_groups(groups, limit)
+      MessageThread.where(group_id: groups).approved.order_by_latest_message.limit(limit)
+    end
 
-  def self.recent_public_from_groups(groups, limit)
-    MessageThread.is_public.where(group_id: groups).order_by_latest_message.limit(limit)
-  end
+    def recent_public_from_groups(groups, limit)
+      MessageThread.approved.is_public.where(group_id: groups).order_by_latest_message.limit(limit)
+    end
 
-  def self.issue_threads_from_group(group)
-    group.threads.order_by_latest_message.with_issue
-  end
+    def issue_threads_from_group(group)
+      from_group(group).approved.with_issue
+    end
 
-  def self.general_threads_from_group(group)
-    group.threads.order_by_latest_message.without_issue
-  end
+    def general_threads_from_group(group)
+      from_group(group).approved.without_issue
+    end
 
-  def self.recent_involved_with(user, limit)
-    user.involved_threads.order_by_latest_message.limit(limit)
-  end
+    def mod_queued_from_group(group)
+      from_group(group).mod_queued
+    end
 
-  def self.public_recent_involved_with(user, limit)
-    recent_involved_with(user, limit).is_public
-  end
+    def recent_involved_with(user, limit)
+      user.involved_threads.order_by_latest_message.limit(limit)
+    end
 
-  def self.recent_public
-    MessageThread.is_public.order_by_latest_message
-  end
+    def public_recent_involved_with(user, limit)
+      recent_involved_with(user, limit).is_public
+    end
 
-  def self.with_upcoming_deadlines(user, limit)
-    user.subscribed_threads.with_upcoming_deadlines.limit(limit)
+    def recent_public
+      MessageThread.approved.is_public.order_by_latest_message
+    end
+
+    def with_upcoming_deadlines(user, limit)
+      user.subscribed_threads.with_upcoming_deadlines.limit(limit)
+    end
+
+    protected
+
+    def from_group(group)
+      group.threads.order_by_latest_message
+    end
   end
 end

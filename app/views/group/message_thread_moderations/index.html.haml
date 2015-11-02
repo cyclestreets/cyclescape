@@ -1,0 +1,12 @@
+%p= t ".explanation"
+%table
+  %thead
+    %th= MessageThread.human_attribute_name(:title)
+    %th= MessageThread.human_attribute_name(:check_reason)
+    %th= Message.human_attribute_name(:body)
+    %th= User.human_attribute_name(:full_name)
+    %th
+  %tbody
+    = render collection: @threads, partial: "message_threads/moderate", as: :thread
+
+= paginate @threads

@@ -20,6 +20,11 @@ FactoryGirl.define do
       issue
     end
 
+    trait :possible_spam do
+      check_reason 'possible_spam'
+      status 'mod_queued'
+    end
+
     trait :with_messages do
       after(:create) do |mt|
         user = FactoryGirl.create(:user)  # To prevent creating 1 user per message

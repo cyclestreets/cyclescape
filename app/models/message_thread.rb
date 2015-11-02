@@ -43,10 +43,12 @@ class MessageThread < ActiveRecord::Base
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
   has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
-  scope :is_public, -> { where(privacy: 'public') }
-  scope :with_issue, -> { where.not(issue_id: nil) }
+  scope :is_public,     -> { where(privacy: 'public') }
+  scope :with_issue,    -> { where.not(issue_id: nil) }
   scope :without_issue, -> { where(issue_id: nil) }
-  default_scope { where(deleted_at: nil).where(status: 'approved') }
+  scope :approved,      -> { where(status: [nil, 'approved']) }
+  scope :mod_queued,    -> { where(status: 'mod_queued') }
+  default_scope { where(deleted_at: nil) }
 
   before_validation :set_public_token, on: :create
 
@@ -61,42 +63,43 @@ class MessageThread < ActiveRecord::Base
   aasm column: 'status' do
 
     state :approved, initial: true
-    state :checking
+    state :mod_queued
     state :rejected
 
-    event :check do
-      transitions to: :checking, guard: :check_reason
+    event :mod_queue do
+      transitions to: :mod_queued, guard: :check_reason
     end
 
     event :reject do
-      transitions from: :checking, to: :rejected
+      transitions from: :mod_queued, to: :rejected
     end
 
     event :approve do
-      transitions from: :checking, to: :approved
+      transitions to: :approved, after: [:ham!, :approve_creator]
     end
   end
 
-  def self.non_committee_privacies_map
-    (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
-  end
+  class << self
+    def non_committee_privacies_map
+      (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
+    end
 
-  def self.privacies_map
-    ALLOWED_PRIVACY.map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
-  end
+    def privacies_map
+      ALLOWED_PRIVACY.map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
+    end
 
-  def self.with_messages_from(user)
-    where 'EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)', user
-  end
+    def with_messages_from(user)
+      where 'EXISTS (SELECT id FROM messages m WHERE thread_id = message_threads.id AND m.created_by_id = ?)', user
+    end
 
-  def self.order_by_latest_message
-    rel = joins("JOIN (SELECT thread_id, MAX(created_at) AS created_at FROM messages m GROUP BY thread_id)" \
-                "AS latest ON latest.thread_id = message_threads.id")
-    rel.order('latest.created_at DESC')
-  end
+    def order_by_latest_message
+      rel = joins("JOIN (SELECT thread_id, MAX(created_at) AS created_at FROM messages m GROUP BY thread_id)" \
+                  "AS latest ON latest.thread_id = message_threads.id")
+      rel.order('latest.created_at DESC')
+    end
 
-  def self.with_upcoming_deadlines
-    rel = joins("JOIN (SELECT m.thread_id, MIN(deadline) AS deadline
+    def with_upcoming_deadlines
+      rel = joins("JOIN (SELECT m.thread_id, MIN(deadline) AS deadline
                   FROM messages m
                   JOIN deadline_messages dm ON m.component_id = dm.id
                   WHERE m.component_type = 'DeadlineMessage'
@@ -105,7 +108,8 @@ class MessageThread < ActiveRecord::Base
                   GROUP BY m.thread_id)
                 AS m2
                 ON m2.thread_id = message_threads.id")
-    rel.order('m2.deadline ASC')
+      rel.order('m2.deadline ASC')
+    end
   end
 
   def add_subscriber(user)
@@ -246,5 +250,9 @@ class MessageThread < ActiveRecord::Base
   def must_be_created_by_enabled_user
     return unless created_by
     errors.add :base, :disabled if created_by.disabled
+  end
+
+  def approve_creator
+    created_by.update approved: true
   end
 end

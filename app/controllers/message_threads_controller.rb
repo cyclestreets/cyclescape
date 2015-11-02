@@ -1,5 +1,5 @@
 class MessageThreadsController < ApplicationController
-  filter_access_to :show, :edit, :update, attribute_check: true
+  filter_access_to :show, :edit, :update, :approve, :reject, attribute_check: true
 
   def index
     threads = ThreadList.recent_public.page(params[:page]).includes(:issue, :group)
@@ -50,7 +50,24 @@ class MessageThreadsController < ApplicationController
     end
   end
 
+  def approve
+    thread.approve!
+    subscribe_and_notify
+  end
+
+  def reject
+    thread.reject!
+  end
+
   protected
+
+  def subscribe_and_notify
+    ThreadSubscriber.subscribe_users thread
+    ThreadNotifier.notify_subscribers thread, :new_message, thread.first_message
+
+    NewThreadNotifier.notify_new_thread thread
+  end
+
 
   def thread
     @thread ||= MessageThread.find params[:id]

@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     scope module: :group do
       resources :members
       resources :memberships
+      resources :message_thread_moderations, only: [:index]
       resources :membership_requests do
         member do
           get :review
@@ -80,6 +81,7 @@ Rails.application.routes.draw do
   end
 
   resources :threads, controller: 'message_threads' do
+    put :approve, :reject, on: :member
     resources :messages do
       resources :documents, controller: 'message_library/documents'
       resources :notes, controller: 'message_library/notes'

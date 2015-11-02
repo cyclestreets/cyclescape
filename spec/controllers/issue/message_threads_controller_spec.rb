@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'issue/message_threads_controller'
 
 describe Issue::MessageThreadsController, type: :controller do
   let(:approved)   { false }
@@ -27,7 +28,7 @@ describe Issue::MessageThreadsController, type: :controller do
                      comment_type: "comment",
                      is_test: "1"}).to_return(status: 200, body: is_spam)
     end
-    subject { post :create, issue_id: issue.to_param, thread: attributes_for(:message_thread), message: message }
+    subject { post :create, issue_id: issue.id, thread: attributes_for(:message_thread), message: message }
 
     context 'with an unapproved user' do
       let(:is_spam) { 'false' }
