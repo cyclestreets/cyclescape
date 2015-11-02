@@ -97,6 +97,8 @@
     placeholders:
       issue:
         external_url: http://www.example.com
+      group_membership_request:
+        message: Please add me to the Cyclescape group.
     actions:
       update: "Save"
       saving: "Saving\u2026"

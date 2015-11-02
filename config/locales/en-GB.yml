@@ -330,7 +330,7 @@
           rejected: Rejected
       new:
         title: "Request membership of %{group_name}"
-        your_membership_request_will: "Your membership request will be passed on to the committee members of the group to consider."
+        your_membership_request_will: "Please click the button below to apply to join this group's Cyclescape area.."
       reject:
         failure: "There was a problem rejecting this membership request"
         success: "Membership rejected"
