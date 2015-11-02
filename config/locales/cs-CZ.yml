@@ -94,8 +94,8 @@
         locations: "Oblasti působnosti"
         website: "Webová stránka:"
         about: "O stránkách"
-        approved: Approved
-        approve: Approve
+        approved: Schváleno
+        approve: Schvalovat
       user:
         <<: *admin_users_index
       update:
@@ -483,6 +483,9 @@
         new_hint: "To je místo, kde se spustí diskusi o tomto problému. \ n Tam by mohlo být mnoho různých diskusních vláken, že jedna otázka vytváří \ n např Nové plány aplikace může mít vliv na provoz na silnici a ovlivňují přístup cyklu do lesa."
         title: "Nové vlákno na téma %{issue}"
         everyone: "Každý"
+    create:
+      possible_spam: "Myslíme si, že tato zpráva může být spam . Pokud ne, prosím, přijměte naši omluvu . To je ve frontě , které mají být kontrolovány moderátor."
+      not_approved: "Nová témata mohou být automaticky vytvořeny pouze schválené uživatelé . To je ve frontě , které mají být kontrolovány moderátor."
     photos:
       show:
         photo_alt: "Fotka pro %{caption}."
@@ -742,6 +745,11 @@
       library: "Knihovna"
       no_library_items: "Na základě přiřazených štítků nemohu najít žádné příslušné položky v knihovně."
       tag_thread_guidance: "Přidejte štítky k tomuto diskuznímu vláknu, abyste mohli najít příslušné položky v knihovně."
+    moderate:
+      approve: Schvalovat
+      reject: Odmítnout
+      possible_spam: Možná spam
+      not_approved: Uživatel není schválen
     new:
       title: "Nové diskuzní vlákno"
     priority_panel:
@@ -895,6 +903,8 @@
     tags:
       panel:
         edit_tags: "Upravit štítky"
+    message_thread_moderations:
+      explanation: "Tato témata jsou pozdrženy kvůli moderování To může být , protože oni vypadají jako potenciální spam, nebo že uživatel nebyl schválen Pokud schválit vlákno zpráva bude odeslána ven a uživatelé schválen."
   site:
     comments:
       destroy:
