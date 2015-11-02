@@ -41,6 +41,7 @@
         manage_group_requests: "Manage group requests"
         manage_issue_categories: "Manage Issue Categories"
         manage_users: "Manage users"
+        manage_message_thread_moderations: Manage message thread moderations
     issue_categories:
       create:
         success: "Category created"
@@ -357,9 +358,6 @@
         title: "New Group Thread"
       update:
         success: "Thread updated"
-    message_thread_moderations:
-      index:
-        explanation: "These threads are held for moderation.  This can be because they look like potential spam or that the user has not been approved.  If you approve a thread the message will be sent out and the users approved."
     prefs:
       edit:
         no_email_warning: "Warning! Your settings indicate that you want notifications sent to your group, but there is no email address recorded for this group. Either choose a membership secretary, or ask for your group email to be set by a site administrator."
@@ -892,6 +890,8 @@
     tags:
       panel:
         edit_tags: "Edit tags"
+    message_thread_moderations:
+      explanation: "These threads are held for moderation.  This can be because they look like potential spam or that the user has not been approved.  If you approve a thread the message will be sent out and the users approved."
   site:
     comments:
       destroy:

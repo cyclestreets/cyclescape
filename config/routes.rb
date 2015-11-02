@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :groups
+    resources :message_thread_moderations, only: :index
     resources :users do
       put :approve, on: :member
       scope module: 'user' do
