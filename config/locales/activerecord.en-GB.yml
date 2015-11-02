@@ -15,7 +15,6 @@
           attributes:
             base:
               disabled: Cannot be created by a disabled user
-              not_approved: Public threads can only be created by approved users
     attributes:
       issue:
         external_url: External site

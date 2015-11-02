@@ -28,15 +28,6 @@ describe MessageThread do
     expect(subject.errors_on(:base)).to eq([I18n.t('activerecord.errors.models.message_thread.attributes.base.disabled')])
   end
 
-  it 'should validate the creator is approved for public threads' do
-    user = create :user, approved: false
-    subject.privacy = 'public'
-    subject.created_by = user
-    expect(subject.errors_on(:base)).to eq([I18n.t('activerecord.errors.models.message_thread.attributes.base.not_approved')])
-    subject.privacy = 'group'
-    expect(subject.errors_on(:base)).to be_empty
-  end
-
   describe 'privacy' do
     subject { MessageThread.new }
 

@@ -8,6 +8,7 @@ tmp/
 config/database.yml
 config/mailboxes.yml
 config/secret_token
+config/akismet
 public/assets
 bin/
 routes.txt

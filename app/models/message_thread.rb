@@ -23,6 +23,7 @@
 #
 
 class MessageThread < ActiveRecord::Base
+  include AASM
   include FakeDestroy
   include Taggable
   include Rakismet::Model
@@ -45,19 +46,36 @@ class MessageThread < ActiveRecord::Base
   scope :is_public, -> { where(privacy: 'public') }
   scope :with_issue, -> { where.not(issue_id: nil) }
   scope :without_issue, -> { where(issue_id: nil) }
-  default_scope { where(deleted_at: nil) }
+  default_scope { where(deleted_at: nil).where(status: 'approved') }
 
   before_validation :set_public_token, on: :create
 
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
   validate :must_be_created_by_enabled_user, on: :create
-  validate :public_must_be_created_by_approved_user, on: :create
 
   rakismet_attrs  author: proc { created_by.full_name },
-    author_email: proc { author.email_address },
-    content: proc { messages.first.body },
-    permalink: ''
+    author_email: proc { created_by.email },
+    content: proc { messages.first.body }
+
+  aasm column: 'status' do
+
+    state :approved, initial: true
+    state :checking
+    state :rejected
+
+    event :check do
+      transitions to: :checking, guard: :check_reason
+    end
+
+    event :reject do
+      transitions from: :checking, to: :rejected
+    end
+
+    event :approve do
+      transitions from: :checking, to: :approved
+    end
+  end
 
   def self.non_committee_privacies_map
     (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
@@ -223,11 +241,6 @@ class MessageThread < ActiveRecord::Base
 
   def generate_public_token
     SecureRandom.hex(10)
-  end
-
-  def public_must_be_created_by_approved_user
-    return unless privacy == 'public' && created_by
-    errors.add :base, :not_approved unless created_by.approved
   end
 
   def must_be_created_by_enabled_user
