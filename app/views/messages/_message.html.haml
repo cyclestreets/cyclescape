@@ -13,6 +13,8 @@
       = link_to thread_path(anchor: dom_id(message)), class: "permalink" do
         - time_tag_with_title(message.created_at) do
           - t ".posted_date", time_ago: time_ago_in_words(message.created_at)
+      .pull-right
+        = email_message message
   .body
     - if message.censored?
       .censored
