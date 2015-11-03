@@ -901,7 +901,7 @@
       my_locations: "Oblasti působnosti"
       update_account: "Základní nastavení účtu"
     permission_denied:
-      apply_to_group_html: "Tato diskuse je vlastněna %{group_name}. Chtěli byste požádat o připojení %{group_name}'s <a href='%{join_link}'>Cyclescape skupina</a>?"
+      apply_to_group_html: "Tato diskuse je vlastněna %{group_name}. Chtěli byste <a href='%{join_link}'><strong>požádat o připojení %{group_name}'s Cyclescape skupina</strong></a>?"
     tags:
       panel:
         edit_tags: "Upravit štítky"

@@ -888,7 +888,7 @@
       my_locations: "My Locations"
       update_account: "Update My Account Details"
     permission_denied:
-      apply_to_group_html: "This discussion is owned by %{group_name}. Would you like to apply to join %{group_name}'s <a href='%{join_link}'>Cyclescape group</a>?"
+      apply_to_group_html: "This discussion is owned by %{group_name}. Would you like to <a href='%{join_link}'><strong>apply to join %{group_name}'s Cyclescape group</strong></a>?"
     tags:
       panel:
         edit_tags: "Edit tags"
