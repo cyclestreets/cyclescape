@@ -36,7 +36,7 @@
       index:
         admin_interface: "Administrative area"
         admin_interface_introduction: "This section contains administrative functions, available to system administrators only."
-        manage_comments: "Manage comments"
+        manage_comments: "Manage feedback"
         manage_groups: "Manage groups"
         manage_group_requests: "Manage group requests"
         manage_issue_categories: "Manage Issue Categories"
