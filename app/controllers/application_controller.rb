@@ -155,7 +155,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       authenticate_user!
     else
-      render 'shared/permission_denied'
+      render 'shared/permission_denied', status: :unauthorized
     end
   end
 

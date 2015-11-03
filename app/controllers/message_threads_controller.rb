@@ -60,7 +60,7 @@ class MessageThreadsController < ApplicationController
   end
 
   def permission_denied
-    @group = thread.group
+    @group ||= thread.try(:group)
     super
   end
 
