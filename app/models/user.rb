@@ -101,11 +101,6 @@ class User < ActiveRecord::Base
         where('user_prefs.id IS NULL').
         each { |u| u.create_user_prefs }
     end
-
-  end
-
-  def in_group_committee
-    memberships.includes(:group).where(role: 'committee').map(&:group)
   end
 
   def approve!

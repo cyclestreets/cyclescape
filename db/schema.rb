@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102104246) do
+ActiveRecord::Schema.define(version: 20151103154232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -235,7 +235,6 @@ ActiveRecord::Schema.define(version: 20151102104246) do
     t.datetime "deleted_at"
     t.string   "public_token",  limit: 255
     t.string   "status"
-    t.string   "check_reason"
   end
 
   add_index "message_threads", ["created_by_id"], name: "index_message_threads_on_created_by_id", using: :btree
@@ -255,6 +254,8 @@ ActiveRecord::Schema.define(version: 20151102104246) do
     t.datetime "censored_at"
     t.integer  "in_reply_to_id"
     t.string   "public_token",               null: false
+    t.string   "status"
+    t.string   "check_reason"
   end
 
   add_index "messages", ["created_by_id"], name: "index_messages_on_created_by_id", using: :btree

@@ -6,6 +6,8 @@
   anon: "Anon"
   sign_in: "sign in"  # Used for links
   confirm: "Are you sure?"
+  possible_spam: We think this message might be spam. If not, please accept our apologies.  It is queued to be checked by a moderator.
+  not_approved: New threads can only be automatically created by approved users.  It is queued to be checked by a moderator.
   days_away:
     zero: "Today!"
     one: "Tomorrow!"
@@ -41,7 +43,7 @@
         manage_group_requests: "Manage group requests"
         manage_issue_categories: "Manage Issue Categories"
         manage_users: "Manage users"
-        manage_message_thread_moderations: Manage message thread moderations
+        manage_message_moderations: Manage message moderations
     issue_categories:
       create:
         success: "Category created"
@@ -409,7 +411,7 @@
         zero: "Review membership requests"
         one: "View pending membership request"
         other: "View pending membership requests (%{count})"
-      view_message_thread_moderations: View moderated group messages
+      view_message_moderations: View moderated group messages
   group_requests:
     create:
       requested: You have requested a new campaigning group, you will be notifed when it is created
@@ -470,9 +472,6 @@
         new_hint: "This is where a discussion about the issue is started. \n There could be many different discussion threads that one issue creates \n e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
         title: "New Thread on %{issue}"
         everyone: "Everyone"
-      create:
-        possible_spam: We think this message might be spam. If not, please accept our apologies.  It is queued to be checked by a moderator.
-        not_approved: New threads can only be automatically created by approved users.  It is queued to be checked by a moderator.
     photos:
       show:
         photo_alt: "The photo for %{caption}."
@@ -732,11 +731,6 @@
       library: "Library"
       no_library_items: "Couldn't find any relevant library items based on the thread tags."
       tag_thread_guidance: "Add tags to this thread to find relevant library items."
-    moderate:
-      approve: Approve
-      reject: Reject
-      possible_spam: Possible spam
-      not_approved: User not approved
     new:
       title: "New Thread"
     priority_panel:
@@ -892,8 +886,12 @@
     tags:
       panel:
         edit_tags: "Edit tags"
-    message_thread_moderations:
-      explanation: "These threads are held for moderation.  This can be because they look like potential spam or that the user has not been approved.  If you approve a thread the message will be sent out and the users approved."
+    message_moderations:
+      approve: Approve
+      reject: Reject
+      possible_spam: Possible spam
+      not_approved: User not approved
+      explanation: "These messages are held for moderation.  This can be because they look like potential spam or that the user has not been approved.  If you approve then the message will be sent out and the creator approved."
   site:
     comments:
       destroy:

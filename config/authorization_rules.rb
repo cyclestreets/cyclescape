@@ -12,11 +12,11 @@ authorization do
     has_permission_on :admin_users, to: [:manage, :approve]
     has_permission_on :admin_user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :admin_home, to: :view
-    has_permission_on :admin_message_thread_moderations, to: :view
+    has_permission_on :admin_message_moderations, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
     has_permission_on :library_documents, :library_notes, to: [:edit, :update]
-    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: [:manage, :approve, :reject]
-    has_permission_on :messages, to: :censor
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :manage
+    has_permission_on :messages, to: [:censor, :approve, :reject]
     has_permission_on :site_comments, to: :manage
     has_permission_on :user_prefs, :user_profiles, to: :manage
     has_permission_on :users, to: [:view_profile, :view_full_name]
@@ -61,7 +61,7 @@ authorization do
       to :manage
       if_attribute committee_members: contains { user }
     end
-    has_permission_on :group_message_thread_moderations do
+    has_permission_on :group_message_moderations do
       to :index
       if_attribute committee_members: contains { user }
     end
@@ -92,9 +92,9 @@ authorization do
       to :show
       if_attribute private_to_group?: is { true }, group: is_in { user.groups }
     end
-    has_permission_on :message_threads do
+    has_permission_on :messages do
       to [:approve, :reject]
-      if_attribute group: is_in { user.in_group_committee }
+      if_attribute thread: {group_committee_members: contains { user }}
     end
 
     has_permission_on :message_thread_subscriptions, to: :destroy

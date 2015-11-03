@@ -40,6 +40,7 @@ gem 'draper'
 gem 'email_reply_parser'
 gem 'memoist'
 gem 'excon'
+gem 'pry-rails'
 gem 'paranoia', '~> 2.0'
 
 gem 'grape', github: 'ruby-grape/grape'

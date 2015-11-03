@@ -26,7 +26,6 @@ class MessageThread < ActiveRecord::Base
   include AASM
   include FakeDestroy
   include Taggable
-  include Rakismet::Model
 
   acts_as_indexed fields: [:title, :messages_text, :tags_string]
 
@@ -46,8 +45,9 @@ class MessageThread < ActiveRecord::Base
   scope :is_public,     -> { where(privacy: 'public') }
   scope :with_issue,    -> { where.not(issue_id: nil) }
   scope :without_issue, -> { where(issue_id: nil) }
-  scope :approved,      -> { where(status: [nil, 'approved']) }
+  scope :approved,      -> { where(status: 'approved') }
   scope :mod_queued,    -> { where(status: 'mod_queued') }
+
   default_scope { where(deleted_at: nil) }
 
   before_validation :set_public_token, on: :create
@@ -56,26 +56,12 @@ class MessageThread < ActiveRecord::Base
   validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
   validate :must_be_created_by_enabled_user, on: :create
 
-  rakismet_attrs  author: proc { created_by.full_name },
-    author_email: proc { created_by.email },
-    content: proc { messages.first.body }
-
   aasm column: 'status' do
-
-    state :approved, initial: true
-    state :mod_queued
-    state :rejected
-
-    event :mod_queue do
-      transitions to: :mod_queued, guard: :check_reason
-    end
-
-    event :reject do
-      transitions from: :mod_queued, to: :rejected
-    end
+    state :mod_queued, initial: true
+    state :approved, before_enter: :approve_related
 
     event :approve do
-      transitions to: :approved, after: [:ham!, :approve_creator]
+      transitions to: :approved
     end
   end
 
@@ -252,7 +238,14 @@ class MessageThread < ActiveRecord::Base
     errors.add :base, :disabled if created_by.disabled
   end
 
-  def approve_creator
-    created_by.approve!
+  def approve_related
+    unless approved?
+      ThreadSubscriber.subscribe_users self
+      ThreadNotifier.notify_subscribers self, :new_message, first_message
+
+      NewThreadNotifier.notify_new_thread self
+    end
+    true
   end
+
 end

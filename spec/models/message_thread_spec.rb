@@ -277,13 +277,13 @@ describe MessageThread do
   end
 
   describe 'approve' do
-    let(:user) { create :user, approved: false }
-    let!(:req) { stub_request(:post, /rest\.akismet\.com\/1\.1\/submit-ham/) }
-    subject    { create :message_thread, :possible_spam, :with_messages, created_by: user }
+    subject    { create :message_thread, status: 'mod_queued' }
 
-    it 'should submit ham and apporve user' do
-      expect{ subject.approve! }.to change{ user.reload.approved }.from(false).to(true)
-      expect(req).to have_been_made
+    it 'should only trigger subscription on first approval' do
+      expect(ThreadSubscriber).to receive(:subscribe_users).once
+      expect(ThreadNotifier).to receive(:notify_subscribers).once
+      expect{ subject.approve! }.to change{subject.reload.approved?}.from(false).to(true)
+      subject.approve!
     end
   end
 end

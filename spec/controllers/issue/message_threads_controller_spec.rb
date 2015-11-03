@@ -33,20 +33,20 @@ describe Issue::MessageThreadsController, type: :controller do
     context 'with an unapproved user' do
       let(:is_spam) { 'false' }
 
-      it 'should redirect home with flash' do
-        expect(subject).to redirect_to('/home')
+      it 'should redirect thread with flash' do
+        expect(subject).to redirect_to("/threads/#{MessageThread.last.id}")
         expect(req).to have_been_made
-        expect(flash[:alert]).to eq(t('issue.message_threads.create.not_approved'))
+        expect(flash[:alert]).to eq(t('not_approved'))
       end
     end
 
     context 'with an spam message' do
       let(:is_spam) { 'true' }
 
-      it 'should redirect home with flash' do
-        expect(subject).to redirect_to('/home')
+      it 'should redirect thread with flash' do
+        expect(subject).to redirect_to("/threads/#{MessageThread.last.id}")
         expect(req).to have_been_made
-        expect(flash[:alert]).to eq(t('issue.message_threads.create.possible_spam'))
+        expect(flash[:alert]).to eq(t('possible_spam'))
       end
     end
 
