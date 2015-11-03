@@ -30,6 +30,30 @@ describe PlanningApplicationWorker do
            }.to_json)
   end
 
+  let!(:show_req) do
+    stub_request(:get, "http://www.planit.org.uk/planapplic/07/0811/FUL").
+      to_return(:status => 200, body: show_response.to_json)
+  end
+
+  let(:show_response) do
+    planning_record.merge("other_fields" => {
+      "status"=> "Decision Issued",
+      "agent_name"=> "See source",
+      "date_validated"=> "2015-03-26",
+      "reference"=> "150512",
+      "application_type"=> "Full (8 Week Determination)",
+      "decision"=> "Approve Conditional",
+      "uprn"=> "100090452888",
+      "parish"=> "Colchester",
+      "ward_name"=> "New Town",
+      "date_received"=> "2015-03-16",
+      "consultation_end_date"=> "2015-04-20",
+      "target_decision_date"=> "2015-05-21",
+      "decision_date"=> "2015-05-12",
+      "case_officer"=> "See source",
+      "applicant_name"=> "See source"
+    })
+  end
   let(:planning_record) do
     {
       'doc_type' => 'PlanApplic',
@@ -51,12 +75,18 @@ describe PlanningApplicationWorker do
   end
 
   it 'should pull in planning applications, rejecting invalid ones' do
+    now = Time.now
+    allow(Time).to receive(:now).and_return now
     expect{ subject.process! }.to change{ PlanningApplication.count }.by(3)
     expect(cam_req).to have_been_made
     expect(london_req).to have_been_made
     planning_ap = PlanningApplication.find_by_uid('07/0811/FUL')
     expect(planning_ap.address).to eq('163 - 167 Mill Road Cambridge Cambridgeshire CB1 3AN')
     expect(planning_ap.start_date).to eq('2015-03-19'.to_date)
+    expect(planning_ap.link).to eq('http://www.planit.org.uk/planapplic/07/0811/FUL')
+    expect(planning_ap.when_updated).to eq('2015-03-21T03:37:00.690000+00:00'.to_time)
+    expect(planning_ap.end_date).to eq("2015-04-20".to_date)
+    expect(planning_ap.api_get.to_s).to eq(now.to_s)
   end
 
   context 'with an authority with more than 500 planning applications' do

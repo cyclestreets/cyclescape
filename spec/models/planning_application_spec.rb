@@ -26,12 +26,14 @@ describe PlanningApplication do
     end
 
     it 'should populate an issue' do
+      subject.end_date = Date.yesterday
       subject.save!
       issue = subject.populate_issue
       expect(issue.title).to include(subject.title)
       expect(issue.description).to include(subject.description)
       expect(issue.location).to eq(subject.location)
       expect(issue.external_url).to eq(subject.url)
+      expect(issue.deadline).to eq(subject.end_date)
     end
   end
 

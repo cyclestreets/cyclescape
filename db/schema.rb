@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103154232) do
+ActiveRecord::Schema.define(version: 20151103200752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -287,6 +287,10 @@ ActiveRecord::Schema.define(version: 20151103154232) do
     t.string   "authority_name",          limit: 255
     t.date     "start_date"
     t.integer  "hide_votes_count",                                                 default: 0
+    t.string   "link"
+    t.datetime "end_date"
+    t.datetime "when_updated"
+    t.datetime "api_get"
   end
 
   add_index "planning_applications", ["issue_id"], name: "index_planning_applications_on_issue_id", using: :btree

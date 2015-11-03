@@ -68,6 +68,7 @@ class PlanningApplication < ActiveRecord::Base
       issue.title = "#{I18n.t("planning_application.issues.new.title_prefix")} : #{title}"
       issue.location = location
       issue.external_url = url
+      issue.deadline = end_date
       issue.description = <<-EOS
         #{description}\n\n
         #{address}\n\n

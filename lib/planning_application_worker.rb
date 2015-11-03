@@ -30,12 +30,16 @@ class PlanningApplicationWorker
       get_authorty(la)
     end.flatten
     add_applications new_planning_applications
+    add_end_dates
+  ensure
+    conn.reset
   end
 
   private
 
   def conn
-    @conn ||= Excon.new(Rails.application.config.planning_applications_url, headers: { 'Accept' => Mime::JSON.to_s, 'Content-Type' => Mime::JSON.to_s })
+    @conn ||= Excon.new(Rails.application.config.planning_applications_url, 
+                        persistant: true, headers: { 'Accept' => Mime::JSON.to_s, 'Content-Type' => Mime::JSON.to_s })
   end
 
   def get_authorty(authority)
@@ -56,12 +60,22 @@ class PlanningApplicationWorker
         next unless remote_pa['uid'] && remote_pa['url']
 
         db_app = PlanningApplication.find_or_initialize_by uid: remote_pa['uid']
-        [:address, :postcode, :description, :authority_name, :url, :start_date].each do |attr|
+        [:address, :postcode, :description, :authority_name, :url, :start_date, :link, :when_updated].each do |attr|
           db_app[attr] = remote_pa[attr.to_s]
         end
         db_app.location = "POINT(#{remote_pa['lng']} #{remote_pa['lat']})"
+        db_app.api_get = Time.at 0
         db_app.save!
       end
+    end
+  end
+
+  def add_end_dates
+    PlanningApplication.where(issue_id: nil).where("api_get <= when_updated").find_each do |pa|
+      pa_show_conn = Excon.new(pa.link, idempotent: true, headers: { 'Accept' => Mime::JSON.to_s, 'Content-Type' => Mime::JSON.to_s })
+      remote = JSON.load(pa_show_conn.get.body)
+      end_date = remote['other_fields']['consultation_end_date'] || remote['other_fields']['neighbour_consultation_end_date']
+      pa.update end_date: end_date, api_get: Time.now
     end
   end
 
