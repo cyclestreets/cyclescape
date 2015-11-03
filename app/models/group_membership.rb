@@ -33,6 +33,7 @@ class GroupMembership < ActiveRecord::Base
 
   validates :group_id, presence: true
   validates :role, inclusion: { in: ALLOWED_ROLES }
+  validates :user, uniqueness: { scope: :group_id }
   validates_associated :user
 
   accepts_nested_attributes_for :user
