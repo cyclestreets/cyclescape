@@ -60,8 +60,8 @@
           = link_to group_membership_requests_path(@group) do
             %p= t(".view_membership_requests", count: @group.pending_membership_requests.count)
         %li
-          = link_to group_message_thread_moderations_path(@group) do
-            %p= t(".view_message_thread_moderations")
+          = link_to group_message_moderations_path(@group) do
+            %p= t(".view_message_moderations")
   %section.box
     %h2= t ".group_organisers"
     %ul.thread-metadata-listings

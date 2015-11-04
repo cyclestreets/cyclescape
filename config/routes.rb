@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :groups
-    resources :message_thread_moderations, only: :index
+    resources :message_moderations, only: :index
     resources :users do
       put :approve, on: :member
       scope module: 'user' do
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     scope module: :group do
       resources :members
       resources :memberships
-      resources :message_thread_moderations, only: [:index]
+      resources :message_moderations, only: [:index]
       resources :membership_requests do
         member do
           get :review
@@ -82,11 +82,10 @@ Rails.application.routes.draw do
   end
 
   resources :threads, controller: 'message_threads' do
-    put :approve, :reject, on: :member
     resources :messages do
       resources :documents, controller: 'message_library/documents'
       resources :notes, controller: 'message_library/notes'
-      put :censor, on: :member
+      put :approve, :reject, :censor, on: :member
     end
     scope module: :message do
       resources :photos, only: [:create, :show]

@@ -31,6 +31,7 @@ describe PlanningApplication do
       expect(issue.title).to include(subject.title)
       expect(issue.description).to include(subject.description)
       expect(issue.location).to eq(subject.location)
+      expect(issue.external_url).to eq(subject.url)
     end
   end
 

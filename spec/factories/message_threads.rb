@@ -3,6 +3,7 @@ FactoryGirl.define do
     association :created_by, factory: :user
     sequence(:title) { |n| "Message Thread #{n}" }
     privacy 'public'
+    status 'approved'
 
     trait :belongs_to_group do
       group
@@ -20,10 +21,6 @@ FactoryGirl.define do
       issue
     end
 
-    trait :possible_spam do
-      check_reason 'possible_spam'
-      status 'mod_queued'
-    end
 
     trait :with_messages do
       after(:create) do |mt|

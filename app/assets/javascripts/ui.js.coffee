@@ -80,6 +80,9 @@ jQuery ->
       $("body").css({ overflow: 'inherit' })
   }
 
+  $("body").on "click", "div.ui-widget-overlay:visible", ->
+      $(".ui-dialog.no-close:visible").find(".ui-dialog-content").dialog("close")
+
   # Modal overlay links
   $("a[rel='#overlay']").click (e) ->
     e.preventDefault()

@@ -16,6 +16,10 @@
         %p.inline-hints
           = t('formtastic.hints.user.new.bicycle_wheels')
 
+      %li.input.required.stringish{style: "display: none"}
+        = label_tag 'real_name', class: 'label' do
+          %abbr(title="required") *
+        = text_field_tag :real_name
     = f.actions do
       = f.action :submit
   = render :partial => "devise/shared/links"

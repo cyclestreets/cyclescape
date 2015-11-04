@@ -21,6 +21,8 @@
 
 class Message < ActiveRecord::Base
   include FakeDestroy
+  include AASM
+  include Rakismet::Model
 
   belongs_to :thread, class_name: 'MessageThread'
   belongs_to :created_by, class_name: 'User'
@@ -33,11 +35,39 @@ class Message < ActiveRecord::Base
   before_save :set_in_reply_to
   after_save  :update_thread_search
 
-  scope :recent, -> { order('created_at DESC').limit(3) }
-
-  validates :created_by_id, presence: true
+  scope :recent,     -> { order('created_at DESC').limit(3) }
+  scope :approved,   -> { where(status: [nil, 'approved']) }
+  scope :mod_queued, -> { where(status: 'mod_queued') }
+  scope :in_group,   ->(group_id) { includes(:thread).where(message_threads: {group_id: group_id}).references(:thread)}
+  validates :created_by, presence: true
   validates :body, presence: true, unless: :component
   validate  :in_reply_to_should_belong_to_same_thread
+
+  rakismet_attrs  author: proc { created_by.full_name },
+    author_email: proc { created_by.email },
+    content: proc { body }
+
+  aasm column: 'status' do
+    state :mod_queued, initial: true
+    state :approved
+    state :rejected
+
+    event :mod_queue do
+      transitions to: :mod_queued, guard: :check_reason
+    end
+
+    event :reject do
+      transitions from: :mod_queued, to: :rejected
+    end
+
+    event :skip_mod_queue do
+      transitions from: :mod_queued, to: :approved, after: [:approve_related]
+    end
+
+    event :approve do
+      transitions to: :approved, after: [:ham!, :approve_related]
+    end
+  end
 
   def censor!
     self.censored_at = Time.now
@@ -78,5 +108,15 @@ class Message < ActiveRecord::Base
   def in_reply_to_should_belong_to_same_thread
     return unless in_reply_to
     errors.add :in_reply_to_id, :invalid unless in_reply_to.thread.id == thread.id
+  end
+
+  def approve_related
+    created_by.approve! unless created_by.approved?
+    if thread.approved?
+      notification_name = component.try(:notification_name) || :new_message
+      ThreadNotifier.notify_subscribers thread, notification_name, self
+    else
+      thread.approve!
+    end
   end
 end

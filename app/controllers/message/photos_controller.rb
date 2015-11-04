@@ -9,10 +9,6 @@ class Message::PhotosController < Message::BaseController
     @photo ||= PhotoMessage.new permitted_params
   end
 
-  def notification_name
-    :new_photo_message
-  end
-
   def permitted_params
     params.require(:photo_message).permit :photo, :retained_photo, :caption
   end

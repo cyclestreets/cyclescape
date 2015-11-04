@@ -35,8 +35,9 @@ describe Issue::MessageThreadsController, type: :controller do
 
       it 'should redirect home with flash' do
         expect(subject).to redirect_to('/home')
+
         expect(req).to have_been_made
-        expect(flash[:alert]).to eq(t('issue.message_threads.create.not_approved'))
+        expect(flash[:alert]).to eq(t('not_approved'))
       end
     end
 
@@ -46,7 +47,15 @@ describe Issue::MessageThreadsController, type: :controller do
       it 'should redirect home with flash' do
         expect(subject).to redirect_to('/home')
         expect(req).to have_been_made
-        expect(flash[:alert]).to eq(t('issue.message_threads.create.possible_spam'))
+        expect(flash[:alert]).to eq(t('possible_spam'))
+      end
+
+      it 'adds the message to the mod queue' do
+        expect{subject}.to change{Message.mod_queued.count}.by(1)
+      end
+
+      it 'adds the thread to the mod queue' do
+        expect{subject}.to change{MessageThread.mod_queued.count}.by(1)
       end
     end
 

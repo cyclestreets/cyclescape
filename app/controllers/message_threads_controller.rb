@@ -9,7 +9,7 @@ class MessageThreadsController < ApplicationController
   def show
     set_page_title thread.title
     @issue = IssueDecorator.decorate thread.issue if thread.issue
-    @messages = thread.messages.includes({ created_by: :profile }, :component).to_a
+    @messages = thread.messages.approved.includes({ created_by: :profile }, :component).to_a
     @new_message = thread.messages.build
     @library_items = Library::Item.find_by_tags_from(thread).limit(5)
     @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
@@ -50,29 +50,37 @@ class MessageThreadsController < ApplicationController
     end
   end
 
-  def approve
-    thread.approve!
-    subscribe_and_notify
-  end
-
-  def reject
-    thread.reject!
-  end
-
   def permission_denied
-    @group = thread.group
+    @group ||= thread.try(:group)
     super
   end
 
   protected
 
-  def subscribe_and_notify
-    ThreadSubscriber.subscribe_users thread
-    ThreadNotifier.notify_subscribers thread, :new_message, thread.first_message
+  def create
+    # Thread is created in issue or group message thread controller
+    @message = thread.messages.build permitted_message_params.merge(created_by: current_user)
 
-    NewThreadNotifier.notify_new_thread thread
+    # spam? check needs to be done in the controller
+    @message.check_reason = if @message.spam?
+                            'possible_spam'
+                          elsif !current_user.approved?
+                            'not_approved'
+                          end
+    if thread.save
+      thread.subscriptions.create( user: current_user ) unless current_user.subscribed_to_thread?(thread)
+      if @message.check_reason
+        flash[:alert] = t(@message.check_reason)
+        redirect_to home_path
+      else
+        @message.skip_mod_queue!
+        redirect_to thread_path thread
+      end
+    else
+      @available_groups = current_user.groups
+      render :new
+    end
   end
-
 
   def thread
     @thread ||= MessageThread.find params[:id]
@@ -80,5 +88,9 @@ class MessageThreadsController < ApplicationController
 
   def permitted_params
     params.require(:thread).permit :title, :privacy, :group_id, :issue_id, :tags_string
+  end
+
+  def permitted_message_params
+    params.require(:message).permit :body, :component
   end
 end

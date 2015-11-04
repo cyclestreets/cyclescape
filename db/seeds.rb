@@ -9,11 +9,9 @@
 # Create root user
 unless User.where('id = 1').exists?
   root = User.new(email: 'root@cyclestreets.net', full_name: 'Root',
-                  password: 'changeme', password_confirmation: 'changeme')
-  root.role = 'admin'
+                  password: 'changeme', password_confirmation: 'changeme', role: 'admin', id: 1)
   root.skip_confirmation!
   root.save!
-  User.update_all('id = 1', "id = #{root.id}")
 end
 
 # Create some location categories

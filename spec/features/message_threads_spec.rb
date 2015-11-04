@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Message threads' do
+describe 'Message threads', type: :feature do
   let(:thread) { create(:message_thread_with_messages, :with_tags) }
   let(:threads) { create_list(:message_thread_with_messages, 5) }
   let(:censor_message) { 'Censor this message' }

@@ -1,11 +1,10 @@
 # Note inheritance
-class Group::MessageThreadModerationsController < MessageThreadsController
+class Group::MessageModerationsController < MessageThreadsController
   before_filter :group
   filter_access_to :index, attribute_check: true, model: Group
 
   def index
-    issue_threads = ThreadList.mod_queued_from_group(group).page params[:page]
-    @threads = ThreadListDecorator.decorate_collection issue_threads
+    @messages = Message.mod_queued.in_group(group.id).page params[:page]
   end
 
   protected

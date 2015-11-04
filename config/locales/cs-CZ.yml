@@ -5,6 +5,8 @@
   tags: "Štítky"
   anon: "Anonymní"
   sign_in: "přihlásit"  # Used for links
+  possible_spam: "Myslíme si, že tato zpráva může být spam . Pokud ne, prosím, přijměte naši omluvu . To je ve frontě , které mají být kontrolovány moderátor."
+  not_approved: "Nová témata mohou být automaticky vytvořeny pouze schválené uživatelé . To je ve frontě , které mají být kontrolovány moderátor."
   confirm: "Opravdu?"
   deadline_date: "Termín/datum"
   days_away:
@@ -41,6 +43,7 @@
         manage_group_requests: "Spravovat žádosti o zřízení skupiny"
         manage_issue_categories: "Spravovat kategorie podnětů"
         manage_users: "Spravovat uživatele"
+        manage_message_moderations: "Spravovat moderované zprávy"
     issue_categories:
       create:
         success: "Kategorie vytvořena"
@@ -227,7 +230,7 @@
         title: 'Upravit účet'
       new:
         title: "Registrovat"
-        failure: Nezadali jste správný počet kol na kole
+        failure: Nezadali jste správný počet kol
     sessions:
       new:
         title: "Přihlásit"
@@ -423,6 +426,7 @@
         zero: "Přehled žádostí o členství"
         one: "Zobrazit neschválenou žádost o členství"
         other: "Zobrazit neschválené žádosti o členství (%{count})"
+      view_message_moderations: Zobrazení moderované zprávy skupiny
   group_requests:
     create:
       requested: Právě jste požádali o vytvoření místní skupiny. Jakmile bude vytvořena, budete o tom informování.
@@ -483,9 +487,6 @@
         new_hint: "To je místo, kde se spustí diskusi o tomto problému. \ n Tam by mohlo být mnoho různých diskusních vláken, že jedna otázka vytváří \ n např Nové plány aplikace může mít vliv na provoz na silnici a ovlivňují přístup cyklu do lesa."
         title: "Nové vlákno na téma %{issue}"
         everyone: "Každý"
-    create:
-      possible_spam: "Myslíme si, že tato zpráva může být spam . Pokud ne, prosím, přijměte naši omluvu . To je ve frontě , které mají být kontrolovány moderátor."
-      not_approved: "Nová témata mohou být automaticky vytvořeny pouze schválené uživatelé . To je ve frontě , které mají být kontrolovány moderátor."
     photos:
       show:
         photo_alt: "Fotka pro %{caption}."
@@ -901,12 +902,17 @@
       my_locations: "Oblasti působnosti"
       update_account: "Základní nastavení účtu"
     permission_denied:
-      apply_to_group_html: "Tato diskuse je vlastněna %{group_name}. Chtěli byste požádat o připojení %{group_name}'s <a href='%{join_link}'>Cyclescape skupina</a>?"
+      apply_to_group_html: "Tato diskuse je vlastněna %{group_name}. Chtěli byste <a href='%{join_link}'><strong>požádat o připojení %{group_name}'s Cyclescape skupina</strong></a>?"
     tags:
       panel:
         edit_tags: "Upravit štítky"
-    message_thread_moderations:
-      explanation: "Tato témata jsou pozdrženy kvůli moderování To může být , protože oni vypadají jako potenciální spam, nebo že uživatel nebyl schválen Pokud schválit vlákno zpráva bude odeslána ven a uživatelé schválen."
+    message_moderations:
+      approve: Schválit
+      approved: schváleno
+      reject: Odmítnout
+      possible_spam: Možné spam
+      not_approved: Uživatel není schváleno
+      explanation: "Tyto zprávy jsou pozdrženy kvůli moderování . To může být proto, že vypadají jako potenciální spam, nebo že uživatel nebyl schválen . Pokud schválit , pak zpráva bude odeslána ven a tvůrce schválen."
   site:
     comments:
       destroy:

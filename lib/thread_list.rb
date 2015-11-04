@@ -16,10 +16,6 @@ class ThreadList
       from_group(group).approved.without_issue
     end
 
-    def mod_queued_from_group(group)
-      from_group(group).mod_queued
-    end
-
     def recent_involved_with(user, limit)
       user.involved_threads.order_by_latest_message.limit(limit)
     end

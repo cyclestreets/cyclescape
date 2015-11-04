@@ -77,6 +77,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'ruby-prof'
   gem 'parallel_tests'
+  gem 'pry-rails'
   gem 'pry-byebug'
 end
 

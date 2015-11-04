@@ -9,7 +9,7 @@ describe Message do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:created_by_id) }
+    it { is_expected.to validate_presence_of(:created_by) }
     it { is_expected.to validate_presence_of(:body) }
 
     it 'should not require a body if a component is attached' do
@@ -102,4 +102,54 @@ describe Message do
       expect(subject.in_reply_to).to be_nil
     end
   end
+
+  it 'should have in group scope' do
+    thread = create :message_thread, :belongs_to_group
+    in_group = create :message, thread: thread
+    create :message
+
+    expect(described_class.in_group(thread.group.id)).to eq([in_group])
+  end
+
+  describe 'states' do
+    let(:user) { create :user, approved: false }
+    let(:thread) { create :message_thread, status: thread_status }
+    let!(:req) { stub_request(:post, /rest\.akismet\.com\/1\.1\/submit-ham/) }
+
+
+    describe 'skip_mod_queue!' do
+      let(:thread_status) { 'mod_queued' }
+
+      subject { create :message, status: 'mod_queued', thread: thread }
+      it 'should submit apporve thread' do
+        expect{ subject.skip_mod_queue! }.to change{ thread.reload.approved? }.from(false).to(true)
+        expect(subject.reload.approved?).to eq true
+      end
+    end
+
+    describe 'approved' do
+      subject { create :message, :possible_spam, created_by: user, thread: thread }
+
+      context 'with an mod_queued thread' do
+        let(:thread_status) { 'mod_queued' }
+
+        it 'should submit ham and apporve user and thread' do
+          expect(thread).to receive(:approve!).once
+          expect{ subject.approve! }.to change{ user.reload.approved }.from(false).to(true)
+          expect(req).to have_been_made
+        end
+      end
+
+      context 'with an approved thread' do
+        let(:thread_status) { 'approved' }
+
+        it 'should submit ham, apporve user and notify subscribers' do
+          expect(ThreadNotifier).to receive(:notify_subscribers).once
+          expect{ subject.approve! }.to change{ user.reload.approved }.from(false).to(true)
+          expect(req).to have_been_made
+        end
+      end
+    end
+  end
+
 end

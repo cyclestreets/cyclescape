@@ -1,0 +1,25 @@
+%p= t ".explanation"
+%table
+  %thead
+    %th= "#{MessageThread.model_name.human} #{MessageThread.human_attribute_name(:title)}"
+    %th= Message.human_attribute_name(:check_reason)
+    %th= "#{MessageThread.model_name.human} #{t('.approved')}?"
+    %th= "#{Message.model_name.human} #{Message.human_attribute_name(:body)}"
+    %th= User.human_attribute_name(:full_name)
+    %th
+  %tbody
+    - @messages.each do |message|
+      %tr{id: message.id}
+        %td= link_to message.thread.title.truncate(100), thread_path(message.thread)
+        %td= t(".#{message.check_reason}")
+        %td= message.thread.approved?
+        %td{title: message.body}= message.body.truncate(300)
+        %td= link_to(message.created_by.full_name, user_profile_path(message.created_by))
+        %td
+          = link_to t(".approve"), approve_thread_message_path(message.thread, message),
+            method: :put, class: "btn-green", remote: true
+          &nbsp;
+          = link_to t(".reject"), reject_thread_message_path(message.thread, message),
+            method: :put, class: "btn-grey", remote: true
+
+= paginate @messages

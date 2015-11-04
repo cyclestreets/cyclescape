@@ -13,6 +13,6 @@ class CreateStreetViewMessages < ActiveRecord::Migration
     end
     add_index :street_view_messages, :message_id
     add_index :street_view_messages, :thread_id
-    add_index :street_view_messages, :location, spatial: true
+    add_index :street_view_messages, :location, using: :gist
   end
 end

@@ -1,7 +1,8 @@
 require 'spec_helper'
 
-describe Group::MessageThreadModerationsController, type: :controller do
-  let(:message_thread)   { create(:message_thread, :belongs_to_group, :with_messages, :possible_spam) }
+describe Group::MessageModerationsController, type: :controller do
+  let(:message)          { create(:message, :possible_spam, thread: message_thread) }
+  let(:message_thread)   { create(:message_thread, :belongs_to_group) }
   let(:group)            { message_thread.group }
   let(:committee_member) { create(:user).tap{ |usr| create(:group_membership, :committee, user: usr, group: group) } }
   let(:other_user)       { create(:group_membership, :committee).user }
