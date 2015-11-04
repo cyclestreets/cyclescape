@@ -29,10 +29,11 @@ class Issue::MessageThreadsController < MessageThreadsController
       thread.subscriptions.create( user: current_user ) unless current_user.subscribed_to_thread?(thread)
       if @message.check_reason
         flash[:alert] = t(@message.check_reason)
+        redirect_to home_path
       else
         @message.skip_mod_queue!
+        redirect_to thread_path thread
       end
-      redirect_to thread_path thread
     else
       @available_groups = current_user.groups
       render :new
