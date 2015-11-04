@@ -888,6 +888,7 @@
         edit_tags: "Edit tags"
     message_moderations:
       approve: Approve
+      approved: approved
       reject: Reject
       possible_spam: Possible spam
       not_approved: User not approved
