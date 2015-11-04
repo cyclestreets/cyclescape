@@ -5,6 +5,6 @@ class RelaxApprovedOnUsers < ActiveRecord::Migration
             SET approved = #{quoted_true}
             WHERE id IN (#{users_in_groups.join(', ')})
             AND disabled_at IS NULL
-            AND deleted_at IS NULL"
+            AND deleted_at IS NULL" if users_in_groups.present?
   end
 end
