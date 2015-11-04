@@ -3,10 +3,17 @@ class Message::BaseController < ApplicationController
   before_filter :build_message, only: :create
 
   def create
+    # Can't really check for spam with non-text messages
+    message.check_reason = 'not_approved' unless current_user.approved?
+
     if message.save
       thread.add_subscriber(current_user) unless current_user.ever_subscribed_to_thread?(thread)
-      ThreadNotifier.notify_subscribers(thread, notification_name, message)
-      set_flash_message(:success)
+      if message.check_reason
+        flash[:alert] = t(message.check_reason)
+      else
+        message.skip_mod_queue!
+        set_flash_message :success
+      end
     else
       set_flash_message(:failure)
     end

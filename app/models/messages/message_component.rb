@@ -10,4 +10,8 @@ class MessageComponent < ActiveRecord::Base
   def searchable_text
     ''
   end
+
+  def notification_name
+    "new_#{self.class.name.underscore}".to_sym
+  end
 end

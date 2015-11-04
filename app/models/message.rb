@@ -113,7 +113,8 @@ class Message < ActiveRecord::Base
   def approve_related
     created_by.approve! unless created_by.approved?
     if thread.approved?
-      ThreadNotifier.notify_subscribers thread, :new_message, self
+      notification_name = component.try(:notification_name) || :new_message
+      ThreadNotifier.notify_subscribers thread, notification_name, self
     else
       thread.approve!
     end

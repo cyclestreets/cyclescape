@@ -7,10 +7,6 @@ class Message::StreetViewsController < Message::BaseController
     end
   end
 
-  def notification_name
-    :new_street_view_message
-  end
-
   def permitted_params
     params.require(:street_view_message).permit :caption, :heading, :pitch
   end

@@ -17,27 +17,7 @@ class Issue::MessageThreadsController < MessageThreadsController
 
   def create
     @thread = issue.threads.build permitted_params.merge(created_by: current_user, tags: issue.tags)
-    @message = thread.messages.build permitted_message_params.merge(created_by: current_user)
-
-    # spam? check needs to be done in the controller
-    @message.check_reason = if @message.spam?
-                            'possible_spam'
-                          elsif !current_user.approved?
-                            'not_approved'
-                          end
-    if thread.save
-      thread.subscriptions.create( user: current_user ) unless current_user.subscribed_to_thread?(thread)
-      if @message.check_reason
-        flash[:alert] = t(@message.check_reason)
-        redirect_to home_path
-      else
-        @message.skip_mod_queue!
-        redirect_to thread_path thread
-      end
-    else
-      @available_groups = current_user.groups
-      render :new
-    end
+    super
   end
 
   protected
@@ -46,11 +26,4 @@ class Issue::MessageThreadsController < MessageThreadsController
     @issue ||= Issue.find params[:issue_id]
   end
 
-  def permitted_issue_params
-    params.require(:issue).permit :title, :description, :loc_json, :photo, :retained_photo, :tags_string
-  end
-
-  def permitted_message_params
-    params.require(:message).permit :body, :component
-  end
 end

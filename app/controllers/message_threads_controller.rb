@@ -57,11 +57,40 @@ class MessageThreadsController < ApplicationController
 
   protected
 
+  def create
+    # Thread is created in issue or group message thread controller
+    @message = thread.messages.build permitted_message_params.merge(created_by: current_user)
+
+    # spam? check needs to be done in the controller
+    @message.check_reason = if @message.spam?
+                            'possible_spam'
+                          elsif !current_user.approved?
+                            'not_approved'
+                          end
+    if thread.save
+      thread.subscriptions.create( user: current_user ) unless current_user.subscribed_to_thread?(thread)
+      if @message.check_reason
+        flash[:alert] = t(@message.check_reason)
+        redirect_to home_path
+      else
+        @message.skip_mod_queue!
+        redirect_to thread_path thread
+      end
+    else
+      @available_groups = current_user.groups
+      render :new
+    end
+  end
+
   def thread
     @thread ||= MessageThread.find params[:id]
   end
 
   def permitted_params
     params.require(:thread).permit :title, :privacy, :group_id, :issue_id, :tags_string
+  end
+
+  def permitted_message_params
+    params.require(:message).permit :body, :component
   end
 end
