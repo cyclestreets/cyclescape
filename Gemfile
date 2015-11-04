@@ -40,7 +40,6 @@ gem 'draper'
 gem 'email_reply_parser'
 gem 'memoist'
 gem 'excon'
-gem 'pry-rails'
 gem 'paranoia', '~> 2.0'
 
 gem 'grape', github: 'ruby-grape/grape'
@@ -78,6 +77,7 @@ group :development, :test do
   gem 'spring-commands-rspec'
   gem 'ruby-prof'
   gem 'parallel_tests'
+  gem 'pry-rails'
   gem 'pry-byebug'
 end
 
