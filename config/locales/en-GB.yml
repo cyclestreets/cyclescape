@@ -224,7 +224,7 @@
         title: 'Update My Account Details'
       new:
         title: "Sign up"
-        failure: You didn't enter the correct number of wheels on a bicycle
+        failure: You didn't enter the correct number of wheels
     sessions:
       new:
         title: "Sign in"
