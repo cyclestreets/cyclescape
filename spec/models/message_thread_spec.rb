@@ -205,6 +205,7 @@ describe MessageThread do
       expect(messages.size).to eq(1)
       expect(messages.first).to be_a(Message)
       expect(messages.first.body).not_to be_blank
+      expect(messages.first.approved?).to be true
     end
 
     it 'should add the in reply to' do
@@ -248,6 +249,7 @@ describe MessageThread do
         expect(messages.size).to eq(2)
         expect(messages[0]).to be_a(Message)
         expect(messages[1].component).to be_a(PhotoMessage)
+        expect(messages[1].approved?).to be true
       end
 
       it 'should add the in reply to' do

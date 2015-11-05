@@ -128,7 +128,7 @@ class MessageThread < ActiveRecord::Base
 
     m = []
 
-    m << messages.create!(body: stripped, created_by: user, in_reply_to: in_reply_to)
+    m << messages.create!(body: stripped, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
 
     # Attachments
     mail.message.attachments.each do |attachment|
@@ -145,6 +145,7 @@ class MessageThread < ActiveRecord::Base
       component.created_by = user
       message.component    = component
       message.save!
+      message.skip_mod_queue!
       m << message
     end
 
