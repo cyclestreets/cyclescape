@@ -192,6 +192,7 @@
       my_priorities: "My priorities"
       my_threads: "My subscribed threads"
       issues_nearby: "Latest issues nearby"
+      map: Map
       posted:
         message_html: "%{creator_link} posted a message"
         deadline_message_html: "%{creator_link} posted a deadline/date"

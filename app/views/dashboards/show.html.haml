@@ -129,6 +129,13 @@
             %br
 
             %table.dashboard-planning-applications.listing
+              %thead
+                %tr
+                  %th= t('.map')
+                  %th
+                  %th= PlanningApplication.human_attribute_name(:authority_name)
+                  %th= PlanningApplication.human_attribute_name(:description)
+                  %th= "#{PlanningApplication.human_attribute_name(:uid)} & #{PlanningApplication.human_attribute_name(:url)}"
               %tbody
                 = render partial: 'planning_applications/planning_application', collection: @planning_applications, as: :planning_application
 
