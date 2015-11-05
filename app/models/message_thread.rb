@@ -132,7 +132,7 @@ class MessageThread < ActiveRecord::Base
 
     # Attachments
     mail.message.attachments.each do |attachment|
-      next if attachment.content_type.include?('pgp-signature')
+      next if attachment.content_type.include?('pgp-signature') || attachment.content_type.include('pkcs7')
 
       if attachment.content_type.start_with?('image/')
         component = PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
