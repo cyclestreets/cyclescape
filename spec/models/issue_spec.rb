@@ -223,36 +223,6 @@ describe Issue do
     end
   end
 
-  describe 'find with index (search)' do
-    subject { create(:issue) }
-
-    it 'should return the issue on title search' do
-      subject
-      results = Issue.find_with_index(subject.title)
-      expect(results).to include(subject)
-    end
-
-    it 'should return the issue on a description search' do
-      subject
-      results = Issue.find_with_index(subject.description)
-      expect(results).to include(subject)
-    end
-
-    it 'should match partial searches' do
-      subject
-      results = Issue.find_with_index(subject.description.split[0])
-      expect(results).to include(subject)
-      results = Issue.find_with_index(subject.description.split[-1])
-      expect(results).to include(subject)
-    end
-
-    it 'should not find gobbledy-gook' do
-      subject
-      results = Issue.find_with_index('asdfasdf12354')
-      expect(results).to be_empty
-    end
-  end
-
   describe 'destroyed' do
     subject { create(:issue) }
 

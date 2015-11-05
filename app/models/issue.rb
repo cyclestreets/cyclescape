@@ -24,7 +24,10 @@ class Issue < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
-  acts_as_indexed fields: [:title, :description, :tags_string]
+  searchable do
+    text :title, :description, :tags_string
+  end
+
   acts_as_voteable
 
   dragonfly_accessor :photo do

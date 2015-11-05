@@ -21,7 +21,9 @@ class Library::Item < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
-  acts_as_indexed fields: [:search]
+  searchable do
+    text :search_text
+  end
 
   belongs_to :component, polymorphic: true
   belongs_to :created_by, class_name: 'User'
@@ -38,7 +40,7 @@ class Library::Item < ActiveRecord::Base
 
   protected
 
-  def search
+  def search_text
     searchable_text if component
   end
 end

@@ -14,6 +14,6 @@ class SearchUpdater
 
   def self.process_thread(thread_id)
     thread = MessageThread.find(thread_id)
-    thread.update_index
+    Sunspot.index thread
   end
 end

@@ -234,7 +234,7 @@ describe 'Issues' do
     end
   end
 
-  context 'search' do
+  context 'search', solr: true do
     include_context 'signed in as a site user'
     let(:issue) { create(:issue, :with_tags) }
     # main search box doesn't have any I18n'd content, just a js-based placeholder.

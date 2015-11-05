@@ -115,8 +115,10 @@ class Message < ActiveRecord::Base
     if thread.approved?
       notification_name = component.try(:notification_name) || :new_message
       ThreadNotifier.notify_subscribers thread, notification_name, self
+      SearchUpdater.update_thread(thread) if thread
     else
       thread.approve!
     end
+    true
   end
 end

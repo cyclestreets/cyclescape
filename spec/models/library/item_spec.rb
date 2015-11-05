@@ -12,15 +12,6 @@ describe Library::Item do
     it { is_expected.to validate_presence_of(:created_by) }
   end
 
-  context 'find with index' do
-    let!(:note) { create(:library_note) }
-
-    it 'should be returned in a search query' do
-      results = Library::Item.find_with_index(note.title)
-      expect(results).to include(note.item)
-    end
-  end
-
   context 'find by tags' do
     let!(:item) { create(:library_item, tags_string: 'foo bar baz') }
     let!(:item2) { create(:library_item, tags_string: 'bananas') }

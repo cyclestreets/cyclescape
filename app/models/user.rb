@@ -103,6 +103,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def in_group_committee
+    groups.includes(:memberships).where(group_memberships: {role: 'committee'}).references(:memberships)
+  end
+
   def approve!
     update approved: true
   end
