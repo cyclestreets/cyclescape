@@ -13,6 +13,20 @@ GIT
       rack-mount
       virtus (>= 1.0.0)
 
+GIT
+  remote: git://github.com/sunspot/sunspot.git
+  revision: 327c7e4e2d3a9ad8351e8941d646e37088224341
+  branch: master
+  specs:
+    sunspot (2.2.0)
+      pr_geohash (~> 1.0)
+      rsolr (~> 1.0.7)
+    sunspot_rails (2.2.0)
+      nokogiri
+      rails (>= 3)
+      sunspot (= 2.2.0)
+    sunspot_solr (2.2.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -379,14 +393,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sunspot (2.2.0)
-      pr_geohash (~> 1.0)
-      rsolr (~> 1.0.7)
-    sunspot_rails (2.2.0)
-      nokogiri
-      rails (>= 3)
-      sunspot (= 2.2.0)
-    sunspot_solr (2.2.0)
     sunspot_test (0.4.0)
       sunspot_rails (>= 1.2.1)
     thin (1.6.4)
@@ -489,8 +495,8 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-commands-rspec
-  sunspot_rails
-  sunspot_solr
+  sunspot_rails!
+  sunspot_solr!
   sunspot_test
   thin
   thumbs_up (~> 0.4.6)
