@@ -22,12 +22,6 @@ authorization do
     has_permission_on :users, to: [:view_profile, :view_full_name]
   end
 
-  role :moderator do
-    has_permission_on :message_threads, to: [:approve, :reject]
-    has_permission_on :messages, to: :censor
-    has_permission_on :admin_users, to: [:approve]
-  end
-
   role :member do
     includes :guest
     has_permission_on :dashboards, to: [:show]
