@@ -166,7 +166,7 @@ describe 'User dashboards' do
       end
     end
 
-    context 'search' do
+    context 'search', solr: true do
       include_context 'signed in as a site user'
 
       let!(:thread) { create(:message_thread, title: 'bananas') }

@@ -2,8 +2,9 @@
 .rvmrc
 .rbenv-version
 db/*.sqlite3
-log/*.log
+log/*.log*
 tmp/
+*.pid
 .sass-cache/
 config/database.yml
 config/mailboxes.yml
@@ -11,6 +12,7 @@ config/secret_token
 config/akismet
 public/assets
 bin/
+solr/
 routes.txt
 public/system
 .DS_Store

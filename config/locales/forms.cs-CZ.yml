@@ -97,7 +97,7 @@
         new: &hints_user_new
           display_name: "Volitelné - může být přezdívka nebo pseudonym, který bude zobrazen ostatním uživatelům místo plného jména."
           full_name: "Prosím poskytněte své plné jméno. Pokud požádáte o členství v místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny."
-          bicycle_wheels: "Chcete-li nám pomoci bodového spamu zadejte prosím počet kol na jednadvacet jízdní kola, např. 11"
+          bicycle_wheels: "Chcete-li pomoci zastavit automatizované znamení-up zadejte částku (v číslech) kol na šesti kolech"
         edit:
           password: "Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo."
           current_password: "Prosím potvrďte vaše stávající heslo, abyste mohli udělat změny na této stránce."

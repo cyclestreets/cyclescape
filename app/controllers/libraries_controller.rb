@@ -4,7 +4,7 @@ class LibrariesController < ApplicationController
   end
 
   def search
-    items = Library::Item.find_with_index params[:query]
+    items = Library::Item.search { fulltext params[:query] }
     @items = Library::ItemDecorator.decorate_collection items
     respond_to do |format|
       format.json { render json: @items }

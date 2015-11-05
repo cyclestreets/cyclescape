@@ -1,10 +1,4 @@
 GIT
-  remote: git://github.com/nikolai-b/acts_as_indexed.git
-  revision: 90eb9c220451e7d8eca47f6b70ab5eb5d19b9442
-  specs:
-    acts_as_indexed (0.8.3)
-
-GIT
   remote: git://github.com/ruby-grape/grape.git
   revision: a7e4b2c5155cd9c1249036e87384c345f327a53b
   specs:
@@ -18,6 +12,20 @@ GIT
       rack-accept
       rack-mount
       virtus (>= 1.0.0)
+
+GIT
+  remote: git://github.com/sunspot/sunspot.git
+  revision: 327c7e4e2d3a9ad8351e8941d646e37088224341
+  branch: master
+  specs:
+    sunspot (2.2.0)
+      pr_geohash (~> 1.0)
+      rsolr (~> 1.0.7)
+    sunspot_rails (2.2.0)
+      nokogiri
+      rails (>= 3)
+      sunspot (= 2.2.0)
+    sunspot_solr (2.2.0)
 
 GEM
   remote: http://rubygems.org/
@@ -229,6 +237,7 @@ GEM
     paranoia (2.1.3)
       activerecord (~> 4.0)
     pg (0.18.3)
+    pr_geohash (1.0.0)
     pry (0.10.2)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -326,6 +335,8 @@ GEM
       rgeo (~> 0.3)
     rollbar (2.4.0)
       multi_json
+    rsolr (1.0.13)
+      builder (>= 2.1.2)
     rspec-collection_matchers (1.1.2)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.3.2)
@@ -382,6 +393,8 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sunspot_test (0.4.0)
+      sunspot_rails (>= 1.2.1)
     thin (1.6.4)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -423,7 +436,6 @@ PLATFORMS
 DEPENDENCIES
   aasm
   activerecord-postgis-adapter
-  acts_as_indexed!
   annotate (>= 2.5.0)
   bullet
   capybara
@@ -483,6 +495,9 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-commands-rspec
+  sunspot_rails!
+  sunspot_solr!
+  sunspot_test
   thin
   thumbs_up (~> 0.4.6)
   tweet-button

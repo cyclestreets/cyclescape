@@ -26,6 +26,7 @@ class GroupMembershipRequest < ActiveRecord::Base
 
   validates :user, presence: true
   validates :group, presence: true
+  validates :user, uniqueness: { scope: :group_id }
 
   aasm column: 'status' do
 

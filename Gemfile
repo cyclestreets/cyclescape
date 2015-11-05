@@ -31,7 +31,6 @@ gem 'rack-cache', require: 'rack/cache'
 gem 'dragonfly', '~> 1.0.3'
 gem 'redis-rails'
 gem 'resque'
-gem 'acts_as_indexed', github: 'nikolai-b/acts_as_indexed'
 gem 'thumbs_up', '~> 0.4.6'
 gem 'exceptional'
 gem 'foreman'
@@ -59,6 +58,8 @@ gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'rails-observers'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'will-paginate-i18n'
+gem 'sunspot_solr', github: 'sunspot/sunspot', branch: 'master'
+gem 'sunspot_rails', github: 'sunspot/sunspot', branch: 'master'
 
 group :development do
   gem 'letter_opener'
@@ -82,6 +83,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'sunspot_test'
   gem 'rspec-collection_matchers'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'

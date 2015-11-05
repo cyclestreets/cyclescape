@@ -27,7 +27,12 @@ class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
-  acts_as_indexed fields: [:title, :messages_text, :tags_string]
+  searchable do
+    text :title, :messages_text, :tags_string
+    integer :group_id
+    string :privacy
+    string :status
+  end
 
   ALLOWED_PRIVACY = %w(public group committee)
 
@@ -216,7 +221,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def messages_text
-    messages.map(&:searchable_text).join(' ')
+    messages.approved.map(&:searchable_text).join(' ')
   end
 
   # for auth checks
@@ -245,6 +250,7 @@ class MessageThread < ActiveRecord::Base
       ThreadNotifier.notify_subscribers self, :new_message, first_message
 
       NewThreadNotifier.notify_new_thread self
+      SearchUpdater.update_thread(self)
     end
     true
   end

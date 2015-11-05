@@ -35,7 +35,6 @@ describe 'Authentication and authorization' do
 
   context 'when choosing to log in' do
     def choose_to_log_in_from(path)
-      credentials = attributes_for(:user)
       create(:user, credentials)
       visit path
       click_link 'Sign in'
@@ -110,7 +109,7 @@ describe 'Authentication and authorization' do
       fill_in 'Email', with: credentials[:email]
       fill_in 'Password', with: credentials[:password], match: :first
       fill_in 'Password confirmation', with: credentials[:password]
-      fill_in 'Bicycle Wheels', with: "2"
+      fill_in 'Bicycle Wheels', with: "12"
       click_button 'Sign up'
       open_email(credentials[:email])
     end

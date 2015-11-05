@@ -1,7 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
-    if params[:bicycle_wheels].strip == '42' && params[:real_name].blank?
+    if params[:bicycle_wheels].strip == '12' && params[:real_name].blank?
       super
     else
       build_resource(sign_up_params)

@@ -14,7 +14,7 @@ require 'webmock/rspec'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 WebMock.enable!
-
+WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   # == Mock Framework
   #
@@ -53,8 +53,7 @@ RSpec.configure do |config|
     # Create the root user
     unless User.where(id: 1).exists?
       root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
-                      password: 'changeme', password_confirmation: 'changeme')
-      root.role = 'admin'
+                      password: 'changeme', password_confirmation: 'changeme', role: 'admin')
       root.skip_confirmation!
       root.save!
       User.where(id: 1).update_all(id: "#{root.id}")
@@ -68,12 +67,20 @@ RSpec.configure do |config|
     I18n.reload!
   end
 
-  config.before(:each) do
+  config.before(:each) do |ex|
     DatabaseCleaner.start
 
     # Clear ActionMailer deliveries
     ActionMailer::Base.deliveries.clear
+
+    SunspotTest.stub unless ex.metadata[:solr]
   end
+
+  # requires a running test solr env
+  # $ RAILS_ENV=test rake sunspot:solr:start
+  # then to run the solr specs
+  # $ SOLR=1 be rspec --tag solr
+  config.filter_run_excluding solr: true unless ENV['SOLR']
 
   config.after(:each) do
     DatabaseCleaner.clean

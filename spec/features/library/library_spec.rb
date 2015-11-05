@@ -21,7 +21,7 @@ describe 'Library' do
       end
     end
 
-    context 'search' do
+    context 'search', solr: true do
       let(:search_field) { 'query' }
       let(:search_button) { I18n.t('layouts.search.search_button') }
 

@@ -30,17 +30,46 @@ class DashboardsController < ApplicationController
     @query = params[:query]
 
     # Threads, with permission check
-    unfiltered_results = MessageThread.find_with_index @query
-    results = unfiltered_results.select { |t| permitted_to?(:show, t) }
-    @threads = ThreadListDecorator.decorate_collection results
+    # duplicated logic from authorization rules
+    # as we can't paginate AND use permitted_to
+    threads = MessageThread.search do
+      fulltext params[:query] do
+        boost_fields title: 2.0
+      end
+      with(:status, 'approved')
+      any do
+        with(:privacy, 'public')
+        if current_user
+          all do
+            with(:group_id, current_user.groups.try(:ids))
+            with(:privacy, 'group')
+          end
+          all do
+            with(:group_id, current_user.in_group_committee.try(:ids))
+            with(:privacy, 'committee')
+          end
+        end
+      end
+      paginate page: params[:thread_page], per_page: 50
+    end
+    @threads = ThreadListDecorator.decorate_collection threads.results
 
     # Issues
-    issues = Issue.find_with_index @query
-    @issues = IssueDecorator.decorate_collection issues
+    issues = Issue.search do
+      fulltext params[:query] do
+        boost_fields title: 2.0
+      end
+      paginate page: params[:issue_page], per_page: 50
+    end
+
+    @issues = IssueDecorator.decorate_collection issues.results
 
     # Library Items
-    library_items = Library::Item.find_with_index @query
-    @library_items = Library::ItemDecorator.decorate_collection library_items
+    library_items = Library::Item.search do
+      fulltext params[:query]
+      paginate page: params[:library_page], per_page: 50
+    end
+    @library_items = Library::ItemDecorator.decorate_collection library_items.results
 
     # Users? Groups?
   end
