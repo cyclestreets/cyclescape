@@ -26,7 +26,7 @@
   %td
     %p= planning_application.authority_name
   %td{title: planning_application.description}
-    %p= planning_application.description.truncate(300)
+    %p= planning_application.description.try(:truncate, 300)
   %td
     %p= link_to planning_application.uid, planning_application.url
 
