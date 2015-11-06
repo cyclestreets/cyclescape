@@ -201,7 +201,7 @@
         link_message_html: "%{creator_link} posted a link"
         street_view_message_html: "%{creator_link} posted a street view"
         library_item_message_html: "%{creator_link} added a library item"
-    search:
+    search: &dashboards_seach
       no_results_found: "No results found for '%{query}'"
       thread_results: "Threads (%{count})"
       issue_results: "Issues (%{count})"
@@ -380,6 +380,8 @@
       update:
         success: "Profile Updated"
   groups:
+    search:
+      <<: *dashboards_seach
     index:
       list_tab: "List"
       map_tab: "Map"

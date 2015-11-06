@@ -147,7 +147,7 @@ authorization do
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
                       :devise_invitations, :devise_passwords, :devise_invitable_registrations, :users_registrations, to: :manage
     has_permission_on :home, to: :show
-    has_permission_on :groups, to: [:view, :all_geometries]
+    has_permission_on :groups, to: [:view, :all_geometries, :search]
     has_permission_on :group_profiles, to: [:view, :geometry]
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries, :search]
     has_permission_on :issue_photos, to: [:show]

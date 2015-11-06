@@ -181,10 +181,6 @@ describe 'User dashboards' do
           click_on search_button
         end
 
-        expect(page).to have_content('One thread')
-        expect(page).to have_content('One issue')
-        expect(page).to have_content('One library item')
-
         expect(page).to have_content(thread.title)
         expect(page).to have_content(issue.title)
         expect(page).to have_content(library_note.title)

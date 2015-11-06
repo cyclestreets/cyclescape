@@ -32,6 +32,12 @@ class MessageThread < ActiveRecord::Base
     integer :group_id
     string :privacy
     string :status
+    latlon(:location) do
+      if issue
+        centre = issue.centre
+        Sunspot::Util::Coordinates.new(centre.y, centre.x)
+      end
+    end
   end
 
   ALLOWED_PRIVACY = %w(public group committee)

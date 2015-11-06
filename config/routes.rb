@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     root to: 'groups#show', as: :subroot
     resources :threads, controller: 'group/message_threads'
     issues_route controller: 'group/issues'
+    get 'overview/search', to: 'groups#search'
   end
 
   resource :overview, as: :dashboard, controller: 'dashboards' do

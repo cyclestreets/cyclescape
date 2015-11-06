@@ -7,21 +7,15 @@ class GroupsController < ApplicationController
   end
 
   def show
-    if params[:id]
-      @group = Group.find params[:id]
-    elsif current_group
-      @group = current_group
-    end
-
-    if @group
-      @group = GroupDecorator.decorate @group
+    if group
       if @group.has_member?(current_user)
-        recent_threads = ThreadList.recent_from_groups(@group, 10).includes(:issue, :group)
+        recent_threads = ThreadList.recent_from_groups(group, 10).includes(:issue, :group)
       else
-        recent_threads = ThreadList.recent_public_from_groups(@group, 10).includes(:issue, :group)
+        recent_threads = ThreadList.recent_public_from_groups(group, 10).includes(:issue, :group)
       end
       @recent_threads = ThreadListDecorator.decorate_collection recent_threads
-      @recent_issues = IssueDecorator.decorate_collection @group.recent_issues.limit(10).includes(:created_by)
+      @recent_issues = IssueDecorator.decorate_collection group.recent_issues.limit(10).includes(:created_by)
+      @group = GroupDecorator.decorate group
     else
       redirect_to root_url(subdomain: 'www')
     end
@@ -42,7 +36,52 @@ class GroupsController < ApplicationController
     end
   end
 
+  def search
+    @query = params[:query]
+
+    threads = MessageThread.search do
+      fulltext params[:query] do
+        boost_fields title: 2.0
+      end
+      with(:status, 'approved')
+      with(:location).in_bounding_box(*group_bb)
+      any_of do
+        with(:privacy, 'public')
+        if current_user
+          all_of do
+            with(:group_id, current_user.groups.try(:ids))
+            with(:privacy, 'group')
+          end
+          all_of do
+            with(:group_id, current_user.in_group_committee.try(:ids))
+            with(:privacy, 'committee')
+          end
+        end
+      end
+      paginate page: params[:thread_page], per_page: 50
+    end
+    @threads = ThreadListDecorator.decorate_collection threads.results
+
+    # Issues
+    issues = Issue.search do
+      fulltext params[:query] do
+        boost_fields title: 2.0
+      end
+      with(:location).in_bounding_box(*group_bb)
+      paginate page: params[:issue_page], per_page: 50
+    end
+    @issues = IssueDecorator.decorate_collection issues.results
+  end
+
   private
+
+  def group
+    @group ||= if params[:id]
+                 Group.find params[:id]
+               elsif current_group
+                 current_group
+               end
+  end
 
   def index_start_location
     return current_user.start_location if current_user && current_user.start_location != Geo::NOWHERE_IN_PARTICULAR
@@ -57,7 +96,13 @@ class GroupsController < ApplicationController
                       size_ratio: group.profile.size_ratio(geom),
                       url: root_url(subdomain: group.short_name),
                       description: view_context.auto_link(group.trunctated_description))
+  end
 
+  def group_bb
+    @group_bb ||= begin
+                    bb = RGeo::Cartesian::BoundingBox.create_from_geometry group.profile.location
+                    [[bb.min_y, bb.min_x], [bb.max_y, bb.max_x]]
+                  end
   end
 
 end

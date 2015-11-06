@@ -236,7 +236,7 @@ describe 'Issues' do
 
   context 'search', solr: true do
     include_context 'signed in as a site user'
-    let(:issue) { create(:issue, :with_tags) }
+    let!(:issue) { create(:issue, :with_tags) }
     # main search box doesn't have any I18n'd content, just a js-based placeholder.
     # use the id of the field instead.
     let(:search_field) { 'query' }
@@ -257,7 +257,7 @@ describe 'Issues' do
 
     it 'should return results for a description search' do
       within('.main-search-box') do
-        fill_in search_field, with: issue.description
+        fill_in search_field, with: 'Whose leg do you have to hump'
         click_on search_button
       end
 

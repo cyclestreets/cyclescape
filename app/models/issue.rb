@@ -26,6 +26,7 @@ class Issue < ActiveRecord::Base
 
   searchable do
     text :title, :description, :tags_string
+    latlon(:location) { Sunspot::Util::Coordinates.new(centre.y, centre.x) }
   end
 
   acts_as_voteable
