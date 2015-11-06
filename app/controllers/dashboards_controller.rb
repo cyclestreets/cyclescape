@@ -37,14 +37,14 @@ class DashboardsController < ApplicationController
         boost_fields title: 2.0
       end
       with(:status, 'approved')
-      any do
+      any_of do
         with(:privacy, 'public')
         if current_user
-          all do
+          all_of do
             with(:group_id, current_user.groups.try(:ids))
             with(:privacy, 'group')
           end
-          all do
+          all_of do
             with(:group_id, current_user.in_group_committee.try(:ids))
             with(:privacy, 'committee')
           end
