@@ -874,6 +874,24 @@ body.home {
   }
   background: $lightergrey;
 }
+div.tagsinput{
+  input {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  span.tag {
+    @extend .tag-item;
+    margin-right: 5px;
+    a {
+      color: $lightblack;
+      &:hover {
+        text-decoration: none;
+        color: $black;
+      }
+    }
+  }
+}
+
 
 .tag-item-m {
   @extend .tag-item;

@@ -17,4 +17,8 @@ $ ->
     return
 
   $("div.tag-form").hide()
+  $('#issue_tags_string').tagsInput({
+    width: 'auto', autocomplete_url: '/tags/autocomplete_tag_name'
+  });
+
   return
