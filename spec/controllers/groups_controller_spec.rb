@@ -29,6 +29,7 @@ describe GroupsController, type: :controller do
       subject { get :search, query: 'quahog', id: group.id }
 
       it 'should have issues inside the group' do
+        expect(subject.body).to include('Search Results for Quahog')
         expect(subject.body).to include(in_group.title)
         expect(subject.body).to_not include(out_group.title)
       end

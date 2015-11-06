@@ -1,4 +1,4 @@
-%h1= t(".title")
+%h1= t(".title", group: @group.name)
 - if @threads.count == 0 and @issues.count == 0
   %p= t(".no_results_found", query: @query)
 - else
