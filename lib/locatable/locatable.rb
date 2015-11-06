@@ -27,11 +27,15 @@ module Locatable
   # Define an approximate centre of the issue, for convenience.
   # Note that the line or polygon might be nowhere near this centre
   def centre
-    case location.geometry_type
-    when RGeo::Feature::Point
-      return location
+    if location.geometry_type == RGeo::Feature::Point
+      location
     else
-      return location.envelope.centroid
+      envelope = location.envelope
+      if envelope.geometry_type == RGeo::Feature::Point
+        envelope
+      else
+        envelope.centroid
+      end
     end
   end
 
