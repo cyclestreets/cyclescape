@@ -14,7 +14,7 @@ describe InboundMailProcessor do
 
   # This context block can be deleted when we stop accepting old thread reply ids
   context 'thread reply mail' do
-    let(:thread) { create(:message_thread) }
+    let!(:thread) { create(:message_thread) }
     let(:email_recipient) { "thread-#{thread.public_token}@cyclescape.org" }
     before do
       subject.perform(inbound_mail.id)

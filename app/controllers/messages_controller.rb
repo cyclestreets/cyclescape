@@ -12,7 +12,6 @@ class MessagesController < ApplicationController
                           end
 
     if message.save
-      thread.add_subscriber(current_user) unless current_user.ever_subscribed_to_thread?(thread)
       if message.check_reason
         flash[:alert] = t(message.check_reason)
       else

@@ -21,10 +21,6 @@ class InboundMailProcessor
     fail "Message #{message_token.inspect} and thread #{thread_token.inspect} not found" unless thread || message
 
     # This raises an exception if it fails
-    messages = thread.add_messages_from_email!(mail, message)
-    thread.add_subscriber(messages.first.created_by) unless messages.first.created_by.ever_subscribed_to_thread?(thread)
-    messages.each do |mess|
-      ThreadNotifier.notify_subscribers(thread, ['new', mess.component_name].join('_').to_sym, mess)
-    end
+    thread.add_messages_from_email!(mail, message)
   end
 end

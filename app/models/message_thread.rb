@@ -137,19 +137,17 @@ class MessageThread < ActiveRecord::Base
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")
 
-    m = []
-
-    m << messages.create!(body: stripped, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
+    messages.create!(body: stripped, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
 
     # Attachments
     mail.message.attachments.each do |attachment|
-      next if attachment.content_type.include?('pgp-signature') || attachment.content_type.include('pkcs7')
+      next if attachment.content_type.include?('pgp-signature') || attachment.content_type.include?('pkcs7')
 
-      if attachment.content_type.start_with?('image/')
-        component = PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
-      else
-        component = DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
-      end
+      component = if attachment.content_type.start_with?('image/')
+                    PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
+                  else
+                    DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
+                  end
       message              = messages.build(created_by: user, in_reply_to: in_reply_to)
       component.thread     = self
       component.message    = message
@@ -157,10 +155,7 @@ class MessageThread < ActiveRecord::Base
       message.component    = component
       message.save!
       message.skip_mod_queue!
-      m << message
     end
-
-    return m
   end
 
   def email_subscribers

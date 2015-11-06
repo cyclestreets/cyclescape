@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe MessageThread do
   it_should_behave_like 'a taggable model'
+  let(:messages) { thread.reload.messages }
 
   describe 'associations' do
     it { is_expected.to belong_to(:created_by) }
@@ -198,35 +199,33 @@ describe MessageThread do
   describe '#add_message_from_email!' do
     let(:mail) { create(:inbound_mail) }
     let(:thread) { create(:message_thread_with_messages) }
-    let(:in_reply_to) { thread.messages.last }
+    let!(:in_reply_to) { thread.messages.last }
 
     it 'should create a new message' do
-      messages = thread.add_messages_from_email!(mail, nil)
-      expect(messages.size).to eq(1)
-      expect(messages.first).to be_a(Message)
-      expect(messages.first.body).not_to be_blank
-      expect(messages.first.approved?).to be true
+      expect{ thread.add_messages_from_email!(mail, nil) }.to change{thread.reload.messages.count}.by(1)
+      expect(messages[-1]).to be_a(Message)
+      expect(messages[-1].body).not_to be_blank
+      expect(messages[-1].approved?).to be true
     end
 
     it 'should add the in reply to' do
-      messages = thread.add_messages_from_email!(mail, in_reply_to)
-      expect(messages.size).to eq(1)
-      expect(messages.first).to be_a(Message)
-      expect(messages.first.body).not_to be_blank
-      expect(messages.first.in_reply_to).to eq(in_reply_to)
+      expect{ thread.add_messages_from_email!(mail, nil) }.to change{thread.reload.messages.count}.by(1)
+      expect(messages[-1]).to be_a(Message)
+      expect(messages[-1].body).not_to be_blank
+      expect(messages[-1].in_reply_to).to eq(in_reply_to)
     end
 
     it 'should create a message with the user info' do
-      message = thread.add_messages_from_email!(mail, nil).first
-      expect(message.created_by.name).to eq(mail.message.header[:from].display_names.first)
-      expect(message.created_by.email).to eq(mail.message.header[:from].addresses.first)
+      expect{ thread.add_messages_from_email!(mail, nil) }.to change{thread.reload.messages.count}.by(1)
+      expect(messages[-1].created_by.name).to eq(mail.message.header[:from].display_names.first)
+      expect(messages[-1].created_by.email).to eq(mail.message.header[:from].addresses.first)
     end
 
     context 'signature removal' do
       it 'should remove double-dash signatures' do
         allow(mail.message).to receive(:decoded).and_return("Normal text here\n\n--\nSignature")
-        message = thread.add_messages_from_email!(mail, nil).first
-        expect(message.body).to eq("Normal text here\n")
+        thread.add_messages_from_email!(mail, nil)
+        expect(messages[-1].body).to eq("Normal text here\n")
       end
     end
 
@@ -234,9 +233,8 @@ describe MessageThread do
       let(:mail) { create(:inbound_mail, :with_pgp_sig) }
 
       it 'should create one message' do
-        messages = thread.add_messages_from_email!(mail, nil)
-        expect(messages.size).to eq(1)
-        expect(messages[0]).to be_a(Message)
+        expect{ thread.add_messages_from_email!(mail, nil) }.to change{thread.reload.messages.count}.by(1)
+        expect(messages[-1]).to be_a(Message)
       end
     end
 
@@ -245,17 +243,16 @@ describe MessageThread do
       let(:in_reply_to) { thread.messages.last }
 
       it 'should create two messages' do
-        messages = thread.add_messages_from_email!(mail, nil)
-        expect(messages.size).to eq(2)
-        expect(messages[0]).to be_a(Message)
-        expect(messages[1].component).to be_a(PhotoMessage)
-        expect(messages[1].approved?).to be true
+        expect{ thread.add_messages_from_email!(mail, nil) }.to change{thread.reload.messages.count}.by(2)
+        expect(messages[-2]).to be_a(Message)
+        expect(messages[-1].component).to be_a(PhotoMessage)
+        expect(messages[-1].approved?).to be true
       end
 
       it 'should add the in reply to' do
-        messages = thread.add_messages_from_email!(mail, in_reply_to)
-        expect(messages[0].in_reply_to).to eq(in_reply_to)
-        expect(messages[1].in_reply_to).to eq(in_reply_to)
+        thread.add_messages_from_email!(mail, in_reply_to)
+        expect(messages[-2].in_reply_to).to eq(in_reply_to)
+        expect(messages[-1].in_reply_to).to eq(in_reply_to)
       end
     end
   end
