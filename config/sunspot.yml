@@ -9,6 +9,17 @@ production:
     # read_timeout: 2
     # open_timeout: 0.5
 
+staging:
+  solr:
+    hostname: localhost
+    port: 8984
+    log_level: WARNING
+    path: /solr/default
+  auto_index_callback: after_commit
+  auto_remove_callback: after_commit
+    # read_timeout: 2
+    # open_timeout: 0.5
+
 development:
   solr:
     hostname: localhost
