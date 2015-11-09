@@ -939,10 +939,6 @@
         success: "Děkujeme za vaší zpětnou vazbu!"
   tags:
     show:
-      issues: "Podněty"
-      library_items: "Položky knihovny"
-      no_results_found: "Nenalezeny žádné výsledky"
-      threads: "Vlákna"
       heading: "Položky označené jako '%{name}'"
       unrecognised: "Nemohu najít žádnou položku označenou štítkem '%{name}'"
   thread_mailer:

@@ -920,10 +920,6 @@
         success: "Thank you for your feedback!"
   tags:
     show:
-      issues: "Issues"
-      library_items: "Library Items"
-      no_results_found: "No results found"
-      threads: "Threads"
       heading: "Things tagged '%{name}'"
       unrecognised: "Couldn't find the tag '%{name}'"
   thread_mailer:
