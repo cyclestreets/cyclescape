@@ -60,6 +60,7 @@ gem 'rails-i18n', '~> 4.0.0'
 gem 'will-paginate-i18n'
 gem 'sunspot_solr', github: 'sunspot/sunspot', branch: 'master'
 gem 'sunspot_rails', github: 'sunspot/sunspot', branch: 'master'
+gem 'tagsinput-rails'
 
 group :development do
   gem 'letter_opener'

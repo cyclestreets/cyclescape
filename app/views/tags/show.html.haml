@@ -1,29 +1,6 @@
 - if @tag
   %h1= t ".heading", name: @tag.name
-
-  %h2= t ".issues"
-  .results
-    - if @issues.count == 0
-      %p= t ".no_results_found"
-    - else
-      %ol
-        - @issues.each do |i|
-          %li= link_to i.title, issue_path(i)
-  %h2= t ".threads"
-  .results
-    - if @threads.count == 0
-      %p= t ".no_results_found"
-    - else
-      %ul.thread-list
-        = render partial: "message_threads/compact", collection: @threads, as: :thread
-  %h2= t ".library_items"
-  .results
-    - if @library_items.count == 0
-      %p= t ".no_results_found"
-    - else
-      %ol
-        - @library_items.each do |item|
-          %li= link_to item.title, item.component
+  = render partial: 'shared/search'
 - else
   %h1= t ".heading", name: @unrecognised_tag_name
   %p= t ".unrecognised", name: @unrecognised_tag_name

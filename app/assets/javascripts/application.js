@@ -29,3 +29,4 @@
 //= require library_message
 //= require thread_scroller
 //= require slick.min
+//= require jquery.tagsinput

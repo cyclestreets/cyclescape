@@ -3,7 +3,7 @@
   = semantic_form_for @document, url: thread_message_documents_path do |f|
     = f.inputs do
       = f.input :title
-      = f.input :tags_string, as: :tags
+      = f.input :tags_string
     = f.actions do
       = f.action :submit, label: :document_from_message
       = cancel_link library_path

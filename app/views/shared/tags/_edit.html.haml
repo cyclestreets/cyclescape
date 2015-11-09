@@ -2,7 +2,7 @@
   - if permitted_to?(:update, auth_context)
     = semantic_form_for context, url: form_url, remote: true, html: {class: "edit-tags", data: {type: "json"} } do |f|
       = f.inputs do
-        = f.input :tags_string, as: :tags
+        = f.input :tags_string
       = f.actions do
         = f.action :submit, label: :update_tags, button_html: {class: "submit btn-green"}
         = cancel_link cancel_url

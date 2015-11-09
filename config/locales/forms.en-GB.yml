@@ -86,7 +86,7 @@
           deadline: "(optional)"
           external_url: If another web page is relevant you can add it here.
           photo: "(optional)"
-          tags_string: "e.g. cycleparking obstruction roadworks path"
+          tags_string: "e.g. cycle parking, obstruction, roadworks"
           title: "Please be brief and specific."
         create: *hints_issue_new
         edit: *hints_issue_new
