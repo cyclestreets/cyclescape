@@ -5,20 +5,7 @@ class PlanningApplication::IssuesController < IssuesController
   def new
     @issue = @planning_application.populate_issue
     @start_location = @planning_application.location
-  end
-
-  def create
-    @issue = current_user.issues.new permitted_params
-
-    if @issue.save
-      @planning_application.issue = @issue
-      @planning_application.save!
-      NewIssueNotifier.new_issue @issue
-      redirect_to @issue
-    else
-      @start_location = current_user.start_location
-      render :new
-    end
+    render 'issues/new'
   end
 
   protected

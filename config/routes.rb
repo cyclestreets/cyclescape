@@ -119,8 +119,8 @@ Rails.application.routes.draw do
       get :geometry
       put :hide, :unhide
     end
-    scope module: "planning_application" do
-      resource :issue
+    scope module: :planning_application do
+      resource :issue, only: :new
     end
   end
 
