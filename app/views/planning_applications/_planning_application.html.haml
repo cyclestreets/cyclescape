@@ -3,7 +3,7 @@
     %div.map
       = planning_application.tinymap
   %td.title
-    - title_length= planning_application.part_hidden? ? 80 : 200
+    - title_length= planning_application.part_hidden? ? 80 : 150
     %h3{title: planning_application.title}= link_to (truncate planning_application.title, length: title_length, separator: ' '),
       show_uid_planning_applications_path(planning_application.uid)
     - if planning_application.part_hidden?
@@ -15,7 +15,7 @@
       %p= planning_application.issue_link
     -else
       = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(planning_application), class: "btn-green"
-      &nbsp;
+      &nbsp; &nbsp;
       - if planning_application.users.include? current_user
         = link_to t(".unhide"), unhide_planning_application_path(planning_application),
           method: :put, class: "btn-grey", remote: :true
