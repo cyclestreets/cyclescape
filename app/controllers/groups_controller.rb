@@ -38,6 +38,7 @@ class GroupsController < ApplicationController
 
   def search
     @query = params[:query]
+    set_page_title t('.title', group: group.name)
 
     threads = MessageThread.search do
       fulltext params[:query] do
