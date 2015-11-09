@@ -6,6 +6,7 @@
  *= require "jquery-ui/core"
  *= require "jquery-ui/autocomplete"
  *= require "jquery-ui/datepicker"
+ *= require "jquery.tagsinput"
  *= require "formtastic"
  *= require "formtastic_changes"
  *= require "screen"

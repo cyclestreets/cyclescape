@@ -25,7 +25,7 @@ module Taggable
   end
 
   def tags_string
-    tags.map(&:name).join(' ')
+    tags.map(&:name).join(', ')
   end
 
   def tags_string=(val)
