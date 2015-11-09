@@ -9,7 +9,7 @@
       = f.semantic_errors :location
       = f.semantic_errors :size
       = render partial: "shared/edit_map", locals: {thing: @issue}
-    = f.input :tags_string, as: :tags
+    = f.input :tags_string
     = f.input :description
     = f.input :external_url
     = f.input :deadline, as: :date_picker, label: t("deadline_date")

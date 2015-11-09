@@ -866,15 +866,18 @@ body.home {
   border-radius: 2px;
   border: 1px solid #8C8C8C;
   display: inline-block;
-  color: $grey;
+  color: $black;
   line-height: 1;
   font: {
     size: 11px;
     weight: normal;
   }
-  background: $lightergrey;
+  background: $grey;
 }
+
 div.tagsinput{
+  border: none !important;
+  max-height: none !important;
   input {
     border: none !important;
     box-shadow: none !important;

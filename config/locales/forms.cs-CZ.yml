@@ -123,7 +123,7 @@
         new: &hints_issue_new
           description: "Prosím popište podrobnosti vašeho problému a jaký to má dopad na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně přístupné."
           photo: "(nepovinné)"
-          tags_string: "např. stojan překážka cyklostezka údržba"
+          tags_string: "např. stojan překážka, cyklostezka, údržba"
           title: "Prosím buďte struční a konkrétní."
         create: *hints_issue_new
         edit: *hints_issue_new
