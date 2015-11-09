@@ -207,22 +207,6 @@
         street_view_message_html: "%{creator_link} vyslán Street View"
         library_item_message_html: "%{creator_link} zaslali položku knihovny"
     search:
-      no_results_found: "Žádné výsledky pro '%{query}'"
-      thread_results: "Vlákna (%{count})"
-      issue_results: "Podněty (%{count})"
-      library_results: "Položky knihovny (%{count})"
-      threads_found:
-        zero: "Žádná diskuzní vlákna nenalezena pro '%{query}'."
-        one: "Nalezeno diskuzní vlákno pro '%{query}':"
-        other: "%{count} diskuzních vláken nalezeno pro '%{query}':"
-      issues_found:
-        zero: "Žádný podnět nenalezen pro '%{query}'."
-        one: "Nalezen jeden podnět pro '%{query}':"
-        other: "%{count} podnětů nalezeno pro '%{query}':"
-      library_items_found:
-        zero: "Žádná položka knihovny nenalezena pro '%{query}'."
-        one: "Nalezena položka knihovny pro '%{query}':"
-        other: "%{count} položek knihovny nalezeno pro '%{query}':"
       title: "Výsledky vyhledávání"
   devise:
     registrations:
@@ -390,6 +374,8 @@
       update:
         success: "Profil upraven"
   groups:
+    search:
+      title: "Výsledky vyhledávání pro %{group}"
     index:
       list_tab: "Seznam"
       map_tab: "Mapa"
@@ -871,6 +857,23 @@
         title: "New issue from Planning Application"
         title_prefix: "Planning application"
   shared:
+    search:
+      no_results_found: "Žádné výsledky pro '%{query}'"
+      thread_results: "Vlákna (%{count})"
+      issue_results: "Podněty (%{count})"
+      library_results: "Položky knihovny (%{count})"
+      threads_found:
+        zero: "Žádná diskuzní vlákna nenalezena pro '%{query}'."
+        one: "Nalezeno diskuzní vlákno pro '%{query}':"
+        other: "%{count} diskuzních vláken nalezeno pro '%{query}':"
+      issues_found:
+        zero: "Žádný podnět nenalezen pro '%{query}'."
+        one: "Nalezen jeden podnět pro '%{query}':"
+        other: "%{count} podnětů nalezeno pro '%{query}':"
+      library_items_found:
+        zero: "Žádná položka knihovny nenalezena pro '%{query}'."
+        one: "Nalezena položka knihovny pro '%{query}':"
+        other: "%{count} položek knihovny nalezeno pro '%{query}':"
     edit_map:
       area: "oblast"
       clear: "vymazat"

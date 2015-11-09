@@ -201,24 +201,8 @@
         link_message_html: "%{creator_link} posted a link"
         street_view_message_html: "%{creator_link} posted a street view"
         library_item_message_html: "%{creator_link} added a library item"
-    search: &dashboards_search
-      no_results_found: "No results found for '%{query}'"
-      thread_results: "Threads (%{count})"
-      issue_results: "Issues (%{count})"
-      library_results: "Library (%{count})"
-      threads_found:
-        zero: "No threads found for '%{query}'."
-        one: "One thread found for '%{query}':"
-        other: "%{count} threads found for '%{query}':"
-      issues_found:
-        zero: "No issues found for '%{query}'."
-        one: "One issue found for '%{query}':"
-        other: "%{count} issues found for '%{query}':"
-      library_items_found:
-        zero: "No library items found for '%{query}'."
-        one: "One library item found for '%{query}':"
-        other: "%{count} library items found for '%{query}':"
-      title: "Search Results"
+    search:
+      title: Search Results
   devise:
     registrations:
       edit:
@@ -381,7 +365,6 @@
         success: "Profile Updated"
   groups:
     search:
-      <<: *dashboards_search
       title: "Search Results for %{group}"
     index:
       list_tab: "List"
@@ -855,6 +838,23 @@
         title: "New issue from Planning Application"
         title_prefix: "Planning application"
   shared:
+    search:
+      no_results_found: "No results found for '%{query}'"
+      thread_results: "Threads (%{count})"
+      issue_results: "Issues (%{count})"
+      library_results: "Library (%{count})"
+      threads_found:
+        zero: "No threads found for '%{query}'."
+        one: "One thread found for '%{query}':"
+        other: "%{count} threads found for '%{query}':"
+      issues_found:
+        zero: "No issues found for '%{query}'."
+        one: "One issue found for '%{query}':"
+        other: "%{count} issues found for '%{query}':"
+      library_items_found:
+        zero: "No library items found for '%{query}'."
+        one: "One library item found for '%{query}':"
+        other: "%{count} library items found for '%{query}':"
     edit_map:
       area: "area"
       clear: "clear"

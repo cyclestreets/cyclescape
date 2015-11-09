@@ -71,6 +71,13 @@ class GroupsController < ApplicationController
       paginate page: params[:issue_page], per_page: 50
     end
     @issues = IssueDecorator.decorate_collection issues.results
+
+    # Library Items
+    library_items = Library::Item.search do
+      fulltext params[:query]
+      paginate page: params[:library_page], per_page: 50
+    end
+    @library_items = Library::ItemDecorator.decorate_collection library_items.results
   end
 
   private
