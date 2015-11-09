@@ -157,8 +157,6 @@ GEM
     equalizer (0.0.11)
     erubis (2.7.0)
     eventmachine (1.0.8)
-    exceptional (2.0.33)
-      rack
     excon (0.45.4)
     execjs (2.6.0)
     factory_girl (4.5.0)
@@ -452,7 +450,6 @@ DEPENDENCIES
   draper
   email_reply_parser
   email_spec
-  exceptional
   excon
   factory_girl_rails
   foreman
