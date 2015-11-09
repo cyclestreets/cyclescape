@@ -366,6 +366,7 @@
   groups:
     search:
       title: "Search Results for %{group}"
+      main_site_link: "If you want to see issue beyond %{group}'s area you can search from the <a href='%{url}'>main site</a>."
     index:
       list_tab: "List"
       map_tab: "Map"

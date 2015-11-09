@@ -376,6 +376,7 @@
   groups:
     search:
       title: "Výsledky vyhledávání pro %{group}"
+      main_site_link: "Pokud chcete vidět za emisní %{group} čtvrti můžete hledat z <a href='%{url}'>hlavní stránky</a>."
     index:
       list_tab: "Seznam"
       map_tab: "Mapa"

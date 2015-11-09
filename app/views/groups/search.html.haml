@@ -1,2 +1,3 @@
 %h1= t(".title", group: @group.name)
+%h3= t(".main_site_link_html", group: @group.name, url: root_url(subdomain: 'www'))
 = render partial: 'shared/search'
