@@ -270,6 +270,12 @@ class User < ActiveRecord::Base
     self.class.where id: (in_my_groups + viewable_by_public_ids + [id]).compact
   end
 
+  # devise confirm! method overriden
+  def confirm!
+    welcome_message
+    super
+  end
+
   protected
 
   def set_default_role
@@ -279,5 +285,9 @@ class User < ActiveRecord::Base
   # Devise hook for password validation
   def password_required?
     !invitation_token.present? && super
+  end
+
+  def welcome_message
+    Notifications.new_user_confirmed(self).deliver_later
   end
 end

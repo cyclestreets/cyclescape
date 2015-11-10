@@ -662,6 +662,8 @@
         subject: "[Cyclescape] New Group \"%{group_request_name}\" has been not been created"
       new_group_request:
         subject: "[Cyclescape] New Group \"%{group_name}\" has been requested by \"%{user_name}\""
+      new_user_confirmed:
+        subject: "[Cyclescape] Welcome to the site!"
 
     thread_mailer:
       common:

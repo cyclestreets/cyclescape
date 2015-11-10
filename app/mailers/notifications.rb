@@ -99,4 +99,11 @@ class Notifications < ActionMailer::Base
          subject: t('mailers.notifications.new_group_location_issue.subject',
                     group_name: @group.name, issue_title: @issue.title)
   end
+
+  def new_user_confirmed(user)
+    @user = user
+    mail to: @user.name_with_email,
+         subject: t('mailers.notifications.new_user_confirmed.subject')
+  end
+
 end
