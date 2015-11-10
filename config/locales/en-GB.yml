@@ -336,7 +336,7 @@
         issues: "issues"
         new_group_thread: "New Group Administrative thread"
         issue_threads: "Issue discussions"
-        issue_threads_description: "These are public and private issue-based discussions belonging to %{group_name} on reported issues, shown most recent first."
+        issue_threads_description: "These are public and private issue-based discussions belonging to %{group_name} on listed issues, shown most recent first."
         issue_threads_addition_description: "To start a new issue-based discussion thread, go to the relevant issue."
         general_threads: "Administrative discussions"
         general_threads_description: "These are public and private general discussions for administrative purposes, e.g. arranging a general meeting."
@@ -433,11 +433,11 @@
         Cyclescape is an online campaigning toolkit for
         cycle campaign groups around the UK
       center_box_title:
-        Report your cycling issues here
+        Add your cycling issues here
       center_box_html:
         Non-existent cycle paths? Obstructions for cyclists? Lack of cycle parking?
         Or an example of something done right?
-      report_an_issue: "Report an issue"
+      report_an_issue: "Create an issue"
       latest_discussions: "Latest Discussions"
       groups_title: "Cyclescape Groups"
       groups_intro_html:
@@ -448,7 +448,7 @@
       twitter_title: "Cyclescape on Twitter"
     guide:
       title: "How Cyclescape Works"
-      box_1_title: "Report cycling issues"
+      box_1_title: "Create cycling issues"
       box_1_body: "Quickly raise issues on this site."
       box_2_title: "Get advice from others"
       box_2_body: "Discuss issues with members of cycling groups."
@@ -480,11 +480,11 @@
     edit:
       title: "Edit Issue"
     index:
-      new_issue: "Report new issue"
+      new_issue: "Create new issue"
       title: "Issues"
       list_tab: "List"
-      list_introduction: "Reported issues, most recent first:"
-      list_introduction_groupwise_html: "Reported issues, most recent first, limited to the %{area_of_group_link}:"
+      list_introduction: "Listed issues, most recent first:"
+      list_introduction_groupwise_html: "Listed issues, most recent first, limited to the %{area_of_group_link}:"
       area_of_group: "area of %{group_name}"
       map_tab: "Map"
       map_introduction: "This map shows all issues, whether points, routes, or areas:"
@@ -494,19 +494,19 @@
       clear: "Clear"
       no_popular_issues: "No issues have been voted on recently."
       no_results_found: "No issues found."
-      title_introduction: "This section lists reported issues - problems on the street network and related matters."
+      title_introduction: "This section lists issues - problems on the street network and related matters."
       introduction_geographical_basis: "Issues always relate to some geographical location, whether very local or perhaps city-wide."
       title_introduction_report_html: "You can %{report_new_issue_link} using the button on the right."
-      report_new_issue: "report a new issue"
+      report_new_issue: "create a new issue"
     new:
-      title: "Report an issue"
-      new_issue_introduction: "Know of something stopping more people cycling, or that causes problems for existing cyclists? Or something that could do? Report it below."
-      new_issue_privacy_warning: "Please note that all issues are publicly viewable. If you wish, you can create a private discussion on this issue, after it has been reported."
+      title: "Create an issue"
+      new_issue_introduction: "Know of something stopping more people cycling, or that causes problems for existing cyclists? Or something that could do? Add it below."
+      new_issue_privacy_warning: "Please note that all issues are publicly viewable. If you wish, you can create a private discussion on this issue, after it has been created."
       admin_thread_pointer_html: "You can %{administrative_matters_link} with no geographical context (e.g. organising a general meeting) in the group admin threads section."
       administrative_matters: "add a purely administrative matter"
     show:
       issue_created_at: "%{time_ago} ago"
-      added_by_html: "Reported by %{name} on %{time}"
+      added_by_html: "Added by %{name} on %{time}"
       cancel_vote: "Cancel"
       confirm_delete: "Are you sure?"
       delete_issue: "Delete this issue"
@@ -558,7 +558,7 @@
       feedback: "Feedback"
       home: "Home"
       issues: "Issues"
-      issues_tooltip: "Reported problems, browsable on the map or as a list"
+      issues_tooltip: "Listed problems, browsable on the map or as a list"
       library: "Library"
       library_tooltip: "Reusable resources for campaigning"
       loading: "Please wait\u2026"
@@ -1042,7 +1042,7 @@
         no_website: "None"
         profile_picture_title: "%{name}'s picture"
         recent_threads: "Recent Threads"
-        reported_issues: "Reported Issues"
+        reported_issues: "Listed Issues"
         user_profile: "User Profile"
         website_label: "Web site:"
         full_name: Full Name
