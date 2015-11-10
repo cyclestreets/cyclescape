@@ -877,7 +877,7 @@ body.home {
 
 div.tagsinput{
   border: none !important;
-  max-height: none !important;
+  min-height: 65px !important;
   input {
     border: none !important;
     box-shadow: none !important;
