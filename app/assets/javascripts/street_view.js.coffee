@@ -1,6 +1,5 @@
 window.mapInit = ->
   return if !google? || !google.maps.LatLng
-  issue = new (google.maps.LatLng)(svLongNew, svLatNew)
   svs = new google.maps.StreetViewService()
   panorama = null
   map = null
@@ -60,9 +59,10 @@ window.mapInit = ->
 
     newStreetViewPano = document.getElementById("newStreetViewPano")
 
-    return unless newStreetViewPano
+    return if !newStreetViewPano || !svLongNew
+    issue = new (google.maps.LatLng)(svLongNew, svLatNew)
 
-    panorama = new google.maps.StreetViewPanorama(newStreetViewPano) if newStreetViewPano
+    panorama = new google.maps.StreetViewPanorama(newStreetViewPano)
 
     svs.getPanoramaByLocation(issue, 200, processSVData)
 
