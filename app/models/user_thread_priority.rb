@@ -20,12 +20,13 @@ class UserThreadPriority < ActiveRecord::Base
                  high: 8,
                  medium: 6,
                  low: 3,
-                 very_low: 1 }
+                 very_low: 1,
+                 nil: ''}
 
   belongs_to :user
   belongs_to :thread, class_name: 'MessageThread'
 
-  validates :priority, inclusion: 1..10
+  validates :priority, inclusion: 1..10, allow_nil: true
   validates :user, presence: true
   validates :thread, presence: true
 

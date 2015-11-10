@@ -951,6 +951,7 @@
     medium: "Moderately Important"
     low: "Marginal Interest"
     very_low: "Not of Interest"
+    nil: None set
   thread_privacy_options:
     public: Public (everyone)
     group: Group (members only)

@@ -1,25 +1,15 @@
 class MessageThread::UserPrioritiesController < MessageThread::BaseController
-  def create
-    utp = @thread.user_priorities.build
-    utp.user = current_user
-
-    if utp.update permitted_params
-      set_flash_message :success
-    else
-      set_flash_message :failure
-    end
-    redirect_to thread_path @thread
-  end
+  respond_to :json
 
   def update
-    utp = @thread.priority_for current_user
+    utp = @thread.priority_for(current_user) || @thread.user_priorities.build
+    utp.user = current_user
 
-    if utp.update permitted_params
-      set_flash_message :success
-    else
-      set_flash_message :failure
-    end
-    redirect_to thread_path @thread
+    @flash = if utp.update permitted_params
+               {notice: t('.success')}
+             else
+               {alert: t('.failure')}
+             end
   end
 
   private
