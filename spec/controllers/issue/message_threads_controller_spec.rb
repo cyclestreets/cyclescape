@@ -62,11 +62,20 @@ describe Issue::MessageThreadsController, type: :controller do
     context 'with a valid message' do
       let(:is_spam)  { 'false' }
       let(:approved) { true }
+      let(:last_thread) { MessageThread.last }
 
       it 'should redirect to thread with no flash' do
-        expect(subject).to redirect_to("/threads/#{MessageThread.last.id}")
+        expect(subject).to redirect_to("/threads/#{last_thread.id}")
         expect(req).to have_been_made
         expect(flash[:alert]).to be_blank
+      end
+
+      it 'creates a approved thread and message' do
+        subject
+        message = last_thread.messages.last
+        expect(last_thread.approved?).to eq true
+        expect(message.approved?).to eq true
+        expect(message.in_reply_to_id).to eq nil
       end
     end
   end

@@ -98,8 +98,22 @@ describe Message do
     end
 
     it 'sets in reply to nil with no previous message' do
-      subject = create(:message)
-      expect(subject.in_reply_to).to be_nil
+      thread = build :message_thread
+      message = thread.messages.build
+      message.created_by = create :user
+      message.body = 'blah'
+      thread.save
+      expect(message.reload.in_reply_to_id).to eq nil
+    end
+
+    it 'sets in reply to nil with no previous message' do
+      thread = create :message_thread_with_messages
+      last_message_id = thread.messages.last.id
+      message = thread.messages.build
+      message.created_by = create :user
+      message.body = 'blah'
+      message.save
+      expect(message.reload.in_reply_to_id).to eq last_message_id
     end
   end
 
