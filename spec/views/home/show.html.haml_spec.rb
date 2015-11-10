@@ -17,7 +17,7 @@ describe 'home/show.html.haml', type: :view do
   it 'should have a report issue button' do
     render
 
-    expect(rendered).to have_link('Report an issue')
+    expect(rendered).to have_link('Create an issue')
   end
 
   context 'discussions' do

@@ -4,7 +4,7 @@ shared_examples 'a taggable model' do
   context 'tags string' do
     it 'should set and return' do
       subject.tags_string = 'wheels pedals bell'
-      expect(subject.tags_string).to eq('wheels pedals bell')
+      expect(subject.tags_string).to eq('wheels, pedals, bell')
     end
 
     context 'tokenization' do
