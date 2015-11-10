@@ -24,9 +24,9 @@ class Message < ActiveRecord::Base
   include AASM
   include Rakismet::Model
 
-  belongs_to :thread, class_name: 'MessageThread'
+  belongs_to :thread, class_name: 'MessageThread', inverse_of: :messages
   belongs_to :created_by, class_name: 'User'
-  belongs_to :component, polymorphic: true, autosave: true
+  belongs_to :component, polymorphic: true, autosave: true, inverse_of: :message
   belongs_to :in_reply_to, class_name: 'Message'
 
   before_validation :init_blank_body, on: :create, if: :component

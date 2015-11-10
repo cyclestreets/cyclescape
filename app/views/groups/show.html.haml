@@ -65,7 +65,7 @@
   %section.box
     %h2= t ".group_organisers"
     %ul.thread-metadata-listings
-      - @group.committee_members.each do |member|
+      - @group.committee_members.includes(:profile).each do |member|
         %li
           = link_to user_profile_path(member) do
             %span.thumb

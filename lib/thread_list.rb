@@ -5,7 +5,7 @@ class ThreadList
     end
 
     def recent_public_from_groups(groups, limit)
-      MessageThread.approved.is_public.where(group_id: groups).order_by_latest_message.limit(limit)
+      recent_public.where(group_id: groups).limit(limit)
     end
 
     def issue_threads_from_group(group)
@@ -25,7 +25,7 @@ class ThreadList
     end
 
     def recent_public
-      MessageThread.approved.is_public.order_by_latest_message
+      MessageThread.approved.is_public.order_by_latest_message.includes(:issue, :group)
     end
 
     def with_upcoming_deadlines(user, limit)

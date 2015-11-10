@@ -43,13 +43,13 @@ class MessageThread < ActiveRecord::Base
   ALLOWED_PRIVACY = %w(public group committee)
 
   belongs_to :created_by, class_name: 'User'
-  belongs_to :group
+  belongs_to :group, inverse_of: :threads
   belongs_to :issue
-  has_many :messages, -> { order('created_at ASC') }, foreign_key: 'thread_id', autosave: true
-  has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: 'ThreadSubscription', foreign_key: 'thread_id'
+  has_many :messages, -> { order('created_at ASC') }, foreign_key: 'thread_id', autosave: true, inverse_of: :thread
+  has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: 'ThreadSubscription', foreign_key: 'thread_id', inverse_of: :thread
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, -> { (uniq(true)) }, through: :messages, source: :created_by
-  has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id'
+  has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id', inverse_of: :thread
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
   has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
@@ -210,7 +210,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def upcoming_deadline_messages
-    messages.except(:order).joins('JOIN deadline_messages dm ON messages.component_id = dm.id').
+    messages.includes(:component).except(:order).joins('JOIN deadline_messages dm ON messages.component_id = dm.id').
       where("messages.component_type = 'DeadlineMessage'").
       where('dm.deadline >= current_date').
       where('messages.censored_at IS NULL').

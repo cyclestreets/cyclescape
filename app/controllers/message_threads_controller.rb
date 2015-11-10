@@ -2,14 +2,14 @@ class MessageThreadsController < ApplicationController
   filter_access_to :show, :edit, :update, :approve, :reject, attribute_check: true
 
   def index
-    threads = ThreadList.recent_public.page(params[:page]).includes(:issue, :group)
+    threads = ThreadList.recent_public.page(params[:page])
     @threads = ThreadListDecorator.decorate_collection threads
   end
 
   def show
     set_page_title thread.title
     @issue = IssueDecorator.decorate thread.issue if thread.issue
-    @messages = thread.messages.approved.includes({ created_by: :profile }, :component).to_a
+    @messages = thread.messages.approved.includes({ created_by: :profile }, :component)
     @new_message = thread.messages.build
     @library_items = Library::Item.find_by_tags_from(thread).limit(5)
     @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))

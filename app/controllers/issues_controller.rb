@@ -2,11 +2,11 @@ class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
 
   def index
-    issues = Issue.by_most_recent.page(params[:page]).includes(:created_by)
+    issues = Issue.preloaded.by_most_recent.page(params[:page])
 
     # work around till https://github.com/bouchard/thumbs_up/issues/64 is fixed
-    popular_issue_ids = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).map &:id
-    popular_issues = Issue.where(id: popular_issue_ids).page(params[:pop_issues_page]).includes(:created_by)
+    popular_issue_ids = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).ids
+    popular_issues = Issue.preloaded.where(id: popular_issue_ids).page(params[:pop_issues_page])
 
     @issues = IssueDecorator.decorate_collection issues
     @popular_issues = IssueDecorator.decorate_collection popular_issues
@@ -71,7 +71,7 @@ class IssuesController < ApplicationController
 
   def all_geometries
     bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
-    issues = Issue.order('created_at DESC').limit(50)
+    issues = Issue.order('created_at DESC').limit(50).includes(:created_by)
     issues = issues.intersects_not_covered(bbox.to_geometry) if bbox
 
     # TODO refactor this into decorater

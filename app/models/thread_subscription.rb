@@ -18,5 +18,5 @@ class ThreadSubscription < ActiveRecord::Base
   include FakeDestroy
 
   belongs_to :user
-  belongs_to :thread, class_name: 'MessageThread'
+  belongs_to :thread, class_name: 'MessageThread', inverse_of: :subscriptions
 end

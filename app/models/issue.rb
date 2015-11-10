@@ -49,6 +49,7 @@ class Issue < ActiveRecord::Base
 
   default_scope {where(deleted_at: nil)}
   scope :by_most_recent, -> { order('created_at DESC') }
+  scope :preloaded,  ->      { includes(:created_by, :tags) }
   scope :created_by, ->(user) { where(created_by_id: user) }
 
   class << self

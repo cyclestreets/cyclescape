@@ -80,7 +80,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.10)
     builder (3.2.2)
-    bullet (4.14.7)
+    bullet (4.14.10)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
     byebug (5.0.0)

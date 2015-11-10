@@ -12,7 +12,7 @@ class LibrariesController < ApplicationController
   end
 
   def recent
-    items = Library::Item.by_most_recent.limit(params[:limit] || 5)
+    items = Library::Item.by_most_recent.limit(params[:limit] || 5).includes(:component)
     items = Library::ItemDecorator.decorate_collection items
     render json: items
   end

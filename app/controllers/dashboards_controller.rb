@@ -3,16 +3,16 @@ class DashboardsController < ApplicationController
     @user = current_user
     @groups = @user.groups
 
-    @relevant_issues = IssueDecorator.decorate_collection(current_user.issues_near_locations.order('updated_at DESC').limit(12).includes(:created_by, :tags))
+    @relevant_issues = IssueDecorator.decorate_collection(current_user.issues_near_locations.order('updated_at DESC').limit(12).preloaded)
 
     subscribed_threads = current_user.subscribed_threads.order_by_latest_message.
       limit(12).includes(:issue, latest_message: [:component, :created_by])
     @subscribed_threads = ThreadListDecorator.decorate_collection subscribed_threads
 
-    group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes(:group, issue: :tags).references(:group)
+    group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes(:group)
     @group_threads = ThreadListDecorator.decorate_collection group_threads
 
-    deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 12).includes(:issue)
+    deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 12).includes(:issue, :latest_message)
     @deadline_threads = ThreadListDecorator.decorate_collection deadline_threads
 
     prioritised_threads = current_user.prioritised_threads.order('priority desc').
@@ -21,7 +21,7 @@ class DashboardsController < ApplicationController
 
     planning_applications = current_user.planning_applications_near_locations.ordered
       .not_hidden.page params[:planning_page]
-    @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications
+    @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications.includes(:users)
   end
 
   def search
