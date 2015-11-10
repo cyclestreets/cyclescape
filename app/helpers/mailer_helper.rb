@@ -16,7 +16,7 @@ module MailerHelper
   end
 
   def message_chain(message, thread)
-    return thread_address(thread) unless message
+    return thread_address(thread) if !message || message.id == message.in_reply_to.try(:id)
     "#{message_chain(message.in_reply_to, thread)} #{message_address(message)}".strip
   end
 

@@ -98,7 +98,7 @@ class Message < ActiveRecord::Base
   end
 
   def set_in_reply_to
-    self.in_reply_to ||= thread.messages.last
+    self.in_reply_to ||= thread.messages.last unless thread.messages.last == self
   end
 
   def set_public_token
