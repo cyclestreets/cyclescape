@@ -1,8 +1,6 @@
 - if signed_in?
   %section.priority-panel.box
     %h2= t ".thread_priority"
-    = semantic_form_for (@thread.priority_for(current_user) || UserThreadPriority.new), url: thread_user_priorities_path(@thread) do |f|
+    = semantic_form_for UserThreadPriority.new, url: thread_user_priorities_path(@thread), remote: true, html: {method: :put}  do |f|
       = f.inputs do
-        = f.input :priority, :as => :select, :collection => f.object.class.priorities_map
-      = f.actions do
-        = f.action :submit
+        = f.input :priority, as: :radio, collection: f.object.class.priorities_map, input_html: {onchange: "$('.priority-panel form').submit();"}

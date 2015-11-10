@@ -114,6 +114,14 @@ describe 'Authentication and authorization' do
       open_email(credentials[:email])
     end
 
+    it 'should send a confirmation email' do
+      expect { visit_in_email('Confirm my account') }.to change{ all_emails.count }.by(1)
+      email = all_emails.last
+      expect(email.to).to include(credentials[:email])
+      expect(email.subject).to include("Welcome")
+      expect(email.body).to include("join your local group")
+    end
+
     it 'should direct you to your locations page' do
       visit_in_email('Confirm my account')
       fill_in 'Password', with: credentials[:password], match: :first
@@ -123,12 +131,10 @@ describe 'Authentication and authorization' do
     end
 
     it 'should resend your confirmation email, if you ask for it' do
-      expect(all_emails.count).to eql(1)
       visit new_user_session_path
       click_link "Didn't receive confirmation instructions?"
       fill_in 'Email', with: credentials[:email]
-      click_button 'Resend confirmation instructions'
-      expect(all_emails.count).to eql(2)
+      expect { click_button 'Resend confirmation instructions' }.to change{ all_emails.count }.by(1)
     end
   end
 
