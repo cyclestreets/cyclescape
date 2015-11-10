@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110152822) do
+ActiveRecord::Schema.define(version: 20151110180604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 20151110152822) do
     t.text     "joining_instructions"
     t.string   "picture_uid",          limit: 255
     t.string   "picture_name",         limit: 255
+    t.text     "new_user_email"
   end
 
   add_index "group_profiles", ["group_id"], name: "index_group_profiles_on_group_id", using: :btree

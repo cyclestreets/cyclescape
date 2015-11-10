@@ -79,6 +79,7 @@
         membership_secretary: "Choose an optional membership secretary who will receive membership notification emails. Leave blank for notifications to be sent to the group email address."
       group_profile:
         joining_instructions: "The joining instructions are shown to people who want to join this Cyclescape group. You might want to direct people to pay for membership elsewhere first, for example, or you might be happy for everyone and anyone to join your Cyclescape group. You can leave this blank."
+        new_user_email: "This will be emailed to every new member, {{full_name}} will be converted to the person's full name in the email"
         picture: "To be displayed on the group page, ideally 333x192 pixels"
       issue:
         new: &hints_issue_new

@@ -49,8 +49,12 @@ class Notifications < ActionMailer::Base
   def added_to_group(membership)
     @member = membership.user
     @group = membership.group
-    mail(to: @member.name_with_email,
-         subject: t('mailers.notifications.added_to_group.subject', group_name: @group.name))
+    body = Mustache.render(@group.profile.new_user_email, full_name: @member.full_name) if @group.profile.new_user_email
+    mail(
+      to: @member.name_with_email,
+      subject: t('mailers.notifications.added_to_group.subject', group_name: @group.name),
+      body: body,
+    )
   end
 
   # Send notification to member that thread has been created
