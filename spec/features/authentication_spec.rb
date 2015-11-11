@@ -119,7 +119,7 @@ describe 'Authentication and authorization' do
       email = all_emails.last
       expect(email.to).to include(credentials[:email])
       expect(email.subject).to include("Welcome")
-      expect(email.body).to include("join your local group")
+      expect(email.body).to include("Join your local group")
     end
 
     it 'should direct you to your locations page' do
