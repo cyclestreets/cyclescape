@@ -32,8 +32,8 @@ class Message < ActiveRecord::Base
   before_validation :init_blank_body, on: :create, if: :component
   before_validation :set_public_token, on: :create
 
-  before_save :set_in_reply_to
-  after_save  :update_thread_search
+  before_create :set_in_reply_to
+  after_save    :update_thread_search
 
   scope :recent,     -> { order('created_at DESC').limit(3) }
   scope :approved,   -> { where(status: [nil, 'approved']) }
@@ -98,7 +98,7 @@ class Message < ActiveRecord::Base
   end
 
   def set_in_reply_to
-    self.in_reply_to ||= thread.messages.last unless thread.messages.last == self
+    self.in_reply_to ||= thread.messages.where.not(id: nil).last
   end
 
   def set_public_token
