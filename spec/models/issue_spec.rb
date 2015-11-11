@@ -390,4 +390,13 @@ describe Issue do
       end
     end
   end
+
+  it 'should have latest_activity_at' do
+    subject = create :issue
+    expect(subject.latest_activity_at).to eq nil
+    thread = create :message_thread_with_messages, issue: subject
+    expect(subject.latest_activity_at).to eq thread.messages.last.updated_at
+    message = create :message, thread: thread, updated_at: Date.tomorrow
+    expect(subject.latest_activity_at).to eq message.updated_at
+  end
 end

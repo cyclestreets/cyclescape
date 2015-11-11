@@ -40,9 +40,10 @@ class GroupsController < ApplicationController
     @query = params[:query]
     set_page_title t('.title', group: group.name)
 
-    threads = MessageThread.search do
+    threads = MessageThread.search(include: [:group, :issue, messages: :created_by]) do
       fulltext params[:query] do
         boost_fields title: 2.0
+        boost_fields tags_string: 1.0
       end
       with(:status, 'approved')
       with(:location).in_bounding_box(*group_bb)
@@ -54,29 +55,36 @@ class GroupsController < ApplicationController
             with(:privacy, 'group')
           end
           all_of do
-            with(:group_id, current_user.in_group_committee.try(:ids))
+            with(:group_id, current_user.in_group_committee.map(&:id))
             with(:privacy, 'committee')
           end
         end
       end
-      paginate page: params[:thread_page], per_page: 50
+      adjust_solr_params do |sunspot_params|
+        sunspot_params[:boost] = 'recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)'
+      end
+      paginate page: params[:thread_page], per_page: 40
     end
     @threads = ThreadListDecorator.decorate_collection threads.results
 
     # Issues
-    issues = Issue.search do
+    issues = Issue.search(include: [:created_by, :tags]) do
       fulltext params[:query] do
         boost_fields title: 2.0
+        boost_fields tags_string: 1.0
       end
       with(:location).in_bounding_box(*group_bb)
-      paginate page: params[:issue_page], per_page: 50
+      adjust_solr_params do |sunspot_params|
+        sunspot_params[:boost] = 'recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)'
+      end
+      paginate page: params[:issue_page], per_page: 40
     end
     @issues = IssueDecorator.decorate_collection issues.results
 
     # Library Items
     library_items = Library::Item.search do
       fulltext params[:query]
-      paginate page: params[:library_page], per_page: 50
+      paginate page: params[:library_page], per_page: 40
     end
     @library_items = Library::ItemDecorator.decorate_collection library_items.results
   end

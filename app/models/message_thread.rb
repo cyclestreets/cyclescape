@@ -32,6 +32,7 @@ class MessageThread < ActiveRecord::Base
     integer :group_id
     string :privacy
     string :status
+    time :latest_activity_at, stored: true, trie: true
     latlon(:location) do
       if issue
         centre = issue.centre
