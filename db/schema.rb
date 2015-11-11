@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111145550) do
+ActiveRecord::Schema.define(version: 20151111150447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,10 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.integer  "invalidated_by_id"
   end
 
+  add_index "deadline_messages", ["created_by_id"], name: "index_deadline_messages_on_created_by_id", using: :btree
+  add_index "deadline_messages", ["message_id"], name: "index_deadline_messages_on_message_id", using: :btree
+  add_index "deadline_messages", ["thread_id"], name: "index_deadline_messages_on_thread_id", using: :btree
+
   create_table "document_messages", force: :cascade do |t|
     t.integer "thread_id",                 null: false
     t.integer "message_id",                null: false
@@ -37,6 +41,10 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.string  "file_name",     limit: 255
     t.integer "file_size"
   end
+
+  add_index "document_messages", ["created_by_id"], name: "index_document_messages_on_created_by_id", using: :btree
+  add_index "document_messages", ["message_id"], name: "index_document_messages_on_message_id", using: :btree
+  add_index "document_messages", ["thread_id"], name: "index_document_messages_on_thread_id", using: :btree
 
   create_table "group_membership_requests", force: :cascade do |t|
     t.integer  "user_id",                    null: false
@@ -48,6 +56,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.text     "message"
   end
 
+  add_index "group_membership_requests", ["actioned_by_id"], name: "index_group_membership_requests_on_actioned_by_id", using: :btree
   add_index "group_membership_requests", ["group_id"], name: "index_group_membership_requests_on_group_id", using: :btree
   add_index "group_membership_requests", ["user_id", "group_id"], name: "index_group_membership_requests_on_user_id_and_group_id", unique: true, using: :btree
   add_index "group_membership_requests", ["user_id"], name: "index_group_membership_requests_on_user_id", using: :btree
@@ -74,6 +83,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
   end
 
   add_index "group_prefs", ["group_id"], name: "index_group_prefs_on_group_id", unique: true, using: :btree
+  add_index "group_prefs", ["membership_secretary_id"], name: "index_group_prefs_on_membership_secretary_id", using: :btree
 
   create_table "group_profiles", force: :cascade do |t|
     t.integer  "group_id",                                                      null: false
@@ -105,6 +115,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.text     "rejection_message"
   end
 
+  add_index "group_requests", ["actioned_by_id"], name: "index_group_requests_on_actioned_by_id", using: :btree
   add_index "group_requests", ["name"], name: "index_group_requests_on_name", unique: true, using: :btree
   add_index "group_requests", ["short_name"], name: "index_group_requests_on_short_name", unique: true, using: :btree
   add_index "group_requests", ["user_id"], name: "index_group_requests_on_user_id", using: :btree
@@ -170,12 +181,20 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.integer "file_size"
   end
 
+  add_index "library_documents", ["library_item_id"], name: "index_library_documents_on_library_item_id", using: :btree
+
   create_table "library_item_messages", force: :cascade do |t|
     t.integer "thread_id",       null: false
     t.integer "message_id",      null: false
     t.integer "library_item_id", null: false
     t.integer "created_by_id"
   end
+
+  add_index "library_item_messages", ["created_by_id"], name: "index_library_item_messages_on_created_by_id", using: :btree
+  add_index "library_item_messages", ["library_item_id", "thread_id"], name: "index_library_item_messages_on_library_item_id_and_thread_id", using: :btree
+  add_index "library_item_messages", ["library_item_id"], name: "index_library_item_messages_on_library_item_id", using: :btree
+  add_index "library_item_messages", ["message_id"], name: "index_library_item_messages_on_message_id", using: :btree
+  add_index "library_item_messages", ["thread_id"], name: "index_library_item_messages_on_thread_id", using: :btree
 
   create_table "library_item_tags", id: false, force: :cascade do |t|
     t.integer "library_item_id", null: false
@@ -194,6 +213,8 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.geometry "location",       limit: {:srid=>4326, :type=>"geometry"}
   end
 
+  add_index "library_items", ["component_id", "component_type"], name: "index_library_items_on_component_id_and_component_type", using: :btree
+  add_index "library_items", ["created_by_id"], name: "index_library_items_on_created_by_id", using: :btree
   add_index "library_items", ["location"], name: "index_library_items_on_location", using: :gist
 
   create_table "library_notes", force: :cascade do |t|
@@ -202,6 +223,9 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.text    "body",                            null: false
     t.integer "library_document_id"
   end
+
+  add_index "library_notes", ["library_document_id"], name: "index_library_notes_on_library_document_id", using: :btree
+  add_index "library_notes", ["library_item_id"], name: "index_library_notes_on_library_item_id", using: :btree
 
   create_table "link_messages", force: :cascade do |t|
     t.integer  "thread_id",                 null: false
@@ -212,6 +236,10 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.text     "description"
     t.datetime "created_at"
   end
+
+  add_index "link_messages", ["created_by_id"], name: "index_link_messages_on_created_by_id", using: :btree
+  add_index "link_messages", ["message_id"], name: "index_link_messages_on_message_id", using: :btree
+  add_index "link_messages", ["thread_id"], name: "index_link_messages_on_thread_id", using: :btree
 
   create_table "location_categories", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -261,6 +289,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.string   "check_reason"
   end
 
+  add_index "messages", ["component_id", "component_type"], name: "index_messages_on_component_id_and_component_type", using: :btree
   add_index "messages", ["created_by_id"], name: "index_messages_on_created_by_id", using: :btree
   add_index "messages", ["in_reply_to_id"], name: "index_messages_on_in_reply_to_id", using: :btree
   add_index "messages", ["public_token"], name: "index_messages_on_public_token", unique: true, using: :btree
@@ -275,6 +304,10 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.text     "description"
     t.datetime "created_at",                null: false
   end
+
+  add_index "photo_messages", ["created_by_id"], name: "index_photo_messages_on_created_by_id", using: :btree
+  add_index "photo_messages", ["message_id"], name: "index_photo_messages_on_message_id", using: :btree
+  add_index "photo_messages", ["thread_id"], name: "index_photo_messages_on_thread_id", using: :btree
 
   create_table "planning_applications", force: :cascade do |t|
     t.text     "address"
@@ -298,6 +331,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
   end
 
   add_index "planning_applications", ["issue_id"], name: "index_planning_applications_on_issue_id", using: :btree
+  add_index "planning_applications", ["location"], name: "index_planning_applications_on_location", using: :gist
   add_index "planning_applications", ["uid"], name: "index_planning_applications_on_uid", unique: true, using: :btree
 
   create_table "site_comments", force: :cascade do |t|
@@ -312,6 +346,8 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.datetime "deleted_at"
   end
 
+  add_index "site_comments", ["user_id"], name: "index_site_comments_on_user_id", using: :btree
+
   create_table "street_view_messages", force: :cascade do |t|
     t.integer  "message_id"
     t.integer  "thread_id"
@@ -324,6 +360,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.text     "caption"
   end
 
+  add_index "street_view_messages", ["created_by_id"], name: "index_street_view_messages_on_created_by_id", using: :btree
   add_index "street_view_messages", ["location"], name: "index_street_view_messages_on_location", using: :gist
   add_index "street_view_messages", ["message_id"], name: "index_street_view_messages_on_message_id", using: :btree
   add_index "street_view_messages", ["thread_id"], name: "index_street_view_messages_on_thread_id", using: :btree
@@ -342,6 +379,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.datetime "deleted_at"
   end
 
+  add_index "thread_subscriptions", ["thread_id", "user_id"], name: "index_thread_subscriptions_on_thread_id_and_user_id", using: :btree
   add_index "thread_subscriptions", ["thread_id"], name: "index_thread_subscriptions_on_thread_id", using: :btree
   add_index "thread_subscriptions", ["user_id"], name: "index_thread_subscriptions_on_user_id", using: :btree
 
@@ -362,6 +400,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.geometry "location",    limit: {:srid=>4326, :type=>"geometry"}
   end
 
+  add_index "user_locations", ["category_id"], name: "index_user_locations_on_category_id", using: :btree
   add_index "user_locations", ["location"], name: "index_user_locations_on_location", using: :gist
   add_index "user_locations", ["user_id"], name: "index_user_locations_on_user_id", using: :btree
 
@@ -398,8 +437,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "user_thread_priorities", ["thread_id"], name: "index_user_thread_priorities_on_thread_id", using: :btree
-  add_index "user_thread_priorities", ["user_id"], name: "index_user_thread_priorities_on_user_id", using: :btree
+  add_index "user_thread_priorities", ["thread_id", "user_id"], name: "index_user_thread_priorities_on_thread_id_and_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
@@ -430,6 +468,7 @@ ActiveRecord::Schema.define(version: 20151111145550) do
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
   add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", using: :btree
+  add_index "users", ["remembered_group_id"], name: "index_users_on_remembered_group_id", using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.boolean  "vote",                      default: false
