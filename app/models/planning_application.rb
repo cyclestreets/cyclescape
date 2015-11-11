@@ -77,4 +77,14 @@ class PlanningApplication < ActiveRecord::Base
       issue.tags_string = "planning"
     end
   end
+
+  def relevant?
+    return true unless authority_name == 'Cambridge'
+    case uid
+    when /\/(TTCA|COND.*|CLUED|ADV)$/
+      false
+    else
+      true
+    end
+  end
 end

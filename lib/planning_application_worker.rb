@@ -60,7 +60,7 @@ class PlanningApplicationWorker
           db_app[attr] = remote_pa[attr.to_s]
         end
         db_app.location = "POINT(#{remote_pa['lng']} #{remote_pa['lat']})"
-        db_app.save!
+        db_app.save! if db_app.relevant?
       end
     end
   end
