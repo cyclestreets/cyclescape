@@ -33,9 +33,11 @@ class PlanningApplication < ActiveRecord::Base
   has_many :users, through: :hide_votes
   scope :not_hidden, -> { where('hide_votes_count < ?', NOS_HIDE_VOTES) }
   scope :ordered, -> { order('start_date DESC') }
+  scope :relevant, -> { where(relevant: true) }
 
   validates :uid, :url, presence: true
   validates :uid, uniqueness: true
+  before_save :set_relevant
 
   class << self
     def remove_old
@@ -76,6 +78,12 @@ class PlanningApplication < ActiveRecord::Base
       EOS
       issue.tags_string = "planning"
     end
+  end
+
+  protected
+
+  def set_relevant
+    self.relevant = relevant?
   end
 
   def relevant?

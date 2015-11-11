@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151110180604) do
+ActiveRecord::Schema.define(version: 20151111145550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -282,10 +282,10 @@ ActiveRecord::Schema.define(version: 20151110180604) do
     t.text     "description"
     t.string   "openlylocal_council_url", limit: 255
     t.text     "url"
-    t.string   "uid",                     limit: 255,                                          null: false
+    t.string   "uid",                     limit: 255,                                             null: false
     t.integer  "issue_id"
-    t.datetime "created_at",                                                                   null: false
-    t.datetime "updated_at",                                                                   null: false
+    t.datetime "created_at",                                                                      null: false
+    t.datetime "updated_at",                                                                      null: false
     t.geometry "location",                limit: {:srid=>4326, :type=>"geometry"}
     t.string   "authority_name",          limit: 255
     t.date     "start_date"
@@ -294,6 +294,7 @@ ActiveRecord::Schema.define(version: 20151110180604) do
     t.datetime "end_date"
     t.datetime "when_updated"
     t.datetime "api_get"
+    t.boolean  "relevant",                                                         default: true, null: false
   end
 
   add_index "planning_applications", ["issue_id"], name: "index_planning_applications_on_issue_id", using: :btree

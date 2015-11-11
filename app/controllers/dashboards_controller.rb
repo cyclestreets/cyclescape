@@ -21,7 +21,7 @@ class DashboardsController < ApplicationController
 
     planning_applications = current_user.planning_applications_near_locations.ordered
       .not_hidden.page params[:planning_page]
-    @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications.includes(:users)
+    @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications.relevant.includes(:users)
   end
 
   def search
