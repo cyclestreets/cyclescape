@@ -46,7 +46,10 @@ class GroupsController < ApplicationController
         boost_fields tags_string: 1.0
       end
       with(:status, 'approved')
-      with(:location).in_bounding_box(*group_bb)
+      any_of do
+        with(:location).in_bounding_box(*group_bb)
+        with(:group_id, group.id)
+      end
       any_of do
         with(:privacy, 'public')
         if current_user
