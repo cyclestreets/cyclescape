@@ -53,6 +53,7 @@ class MessageThread < ActiveRecord::Base
   has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id', inverse_of: :thread
   has_many :message_thread_closes
   has_many :closed_by, through: :message_thread_closes, source: :user
+  has_many :deadline_messages, foreign_key: :thread_id, inverse_of: :thread
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
   has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
