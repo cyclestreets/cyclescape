@@ -52,7 +52,7 @@ class MessageThread < ActiveRecord::Base
   has_many :participants, -> { (uniq(true)) }, through: :messages, source: :created_by
   has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id', inverse_of: :thread
   has_many :message_thread_closes
-  has_many :closed_by, through: :message_thread_closes, class_name: 'User'
+  has_many :closed_by, through: :message_thread_closes, source: :user
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
   has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
@@ -109,6 +109,14 @@ class MessageThread < ActiveRecord::Base
                 AS m2
                 ON m2.thread_id = message_threads.id")
       rel.order('m2.deadline ASC')
+    end
+  end
+
+  def display_title
+    if closed
+      "(Closed) #{title}"
+    else
+      title
     end
   end
 
@@ -211,6 +219,10 @@ class MessageThread < ActiveRecord::Base
 
   def latest_activity_at
     messages.empty? ? updated_at : messages.last.updated_at
+  end
+
+  def latest_activity_at_to_i
+    latest_activity_at.to_i
   end
 
   def latest_activity_by
