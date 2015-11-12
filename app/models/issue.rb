@@ -26,6 +26,7 @@ class Issue < ActiveRecord::Base
 
   searchable do
     text :title, :description, :tags_string
+    time :latest_activity_at, stored: true, trie: true
     latlon(:location) { Sunspot::Util::Coordinates.new(centre.y, centre.x) }
   end
 
@@ -60,6 +61,10 @@ class Issue < ActiveRecord::Base
     def before_date(date)
       where('coalesce(deadline, created_at) <= ?', date)
     end
+  end
+
+  def latest_activity_at
+    threads.includes(:messages).maximum('messages.updated_at')
   end
 
   def to_param
