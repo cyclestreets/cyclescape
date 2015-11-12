@@ -84,6 +84,7 @@ class PlanningApplication < ActiveRecord::Base
 
   def set_relevant
     self.relevant = relevant?
+    true
   end
 
   def relevant?
