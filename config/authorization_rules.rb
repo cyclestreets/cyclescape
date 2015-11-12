@@ -86,6 +86,15 @@ authorization do
       to :show
       if_attribute private_to_group?: is { true }, group: is_in { user.groups }
     end
+    has_permission_on :message_threads do
+      to :open
+      if_attribute subscribers: contains { user }
+    end
+    has_permission_on :message_threads do
+      to :close
+      if_permitted_to :open
+      if_attribute latest_activity_at: lt { 48.hours.ago }
+    end
     has_permission_on :messages do
       to [:approve, :reject]
       if_attribute thread: {group_committee_members: contains { user }}

@@ -1,5 +1,5 @@
 class MessageThreadsController < ApplicationController
-  filter_access_to :show, :edit, :update, :approve, :reject, attribute_check: true
+  filter_access_to :show, :edit, :update, :approve, :reject, :close, :open, attribute_check: true
 
   def index
     threads = ThreadList.recent_public.page(params[:page])
@@ -48,6 +48,16 @@ class MessageThreadsController < ApplicationController
       set_flash_message :failure
       redirect_to thread
     end
+  end
+
+  def close
+    thread.close_by! current_user
+    redirect_to thread_path thread
+  end
+
+  def open
+    thread.open_by! current_user
+    redirect_to thread_path thread
   end
 
   def permission_denied

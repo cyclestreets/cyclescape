@@ -208,6 +208,13 @@ describe MessageThread do
       expect(messages[-1].approved?).to be true
     end
 
+    it 'should re-open a closed thread' do
+      thread.update_column(:closed, true)
+      expect(thread).to receive(:open!)
+      expect(thread).to receive(:actioned_by=)
+      thread.add_messages_from_email!(mail, nil)
+    end
+
     it 'should add the in reply to' do
       expect{ thread.add_messages_from_email!(mail, nil) }.to change{thread.reload.messages.count}.by(1)
       expect(messages[-1]).to be_a(Message)
@@ -276,13 +283,26 @@ describe MessageThread do
   end
 
   describe 'approve' do
-    subject    { create :message_thread, status: 'mod_queued' }
+    subject  { create :message_thread, status: 'mod_queued' }
 
     it 'should only trigger subscription on first approval' do
       expect(ThreadSubscriber).to receive(:subscribe_users).once
       expect(ThreadNotifier).to receive(:notify_subscribers).once
       expect{ subject.approve! }.to change{subject.reload.approved?}.from(false).to(true)
       subject.approve!
+    end
+  end
+
+  describe 'closing' do
+    subject { create :message_thread }
+    let(:user) { create :user }
+
+    it 'should save the event' do
+      subject.close_by!(user)
+      close_event = subject.message_thread_closes.last
+
+      expect(close_event.event).to eq 'closed'
+      expect(close_event.user).to eq user
     end
   end
 end
