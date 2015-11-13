@@ -83,6 +83,7 @@ Rails.application.routes.draw do
   end
 
   resources :threads, controller: 'message_threads' do
+    put :open, :close, on: :member
     resources :messages do
       resources :documents, controller: 'message_library/documents'
       resources :notes, controller: 'message_library/notes'

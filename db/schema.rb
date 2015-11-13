@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111150447) do
+ActiveRecord::Schema.define(version: 20151112103253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -247,6 +247,17 @@ ActiveRecord::Schema.define(version: 20151111150447) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "message_thread_closes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "message_thread_id"
+    t.string   "event"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "message_thread_closes", ["message_thread_id"], name: "index_message_thread_closes_on_message_thread_id", using: :btree
+  add_index "message_thread_closes", ["user_id"], name: "index_message_thread_closes_on_user_id", using: :btree
+
   create_table "message_thread_tags", id: false, force: :cascade do |t|
     t.integer "thread_id", null: false
     t.integer "tag_id",    null: false
@@ -256,16 +267,17 @@ ActiveRecord::Schema.define(version: 20151111150447) do
 
   create_table "message_threads", force: :cascade do |t|
     t.integer  "issue_id"
-    t.integer  "created_by_id",             null: false
+    t.integer  "created_by_id",                             null: false
     t.integer  "group_id"
-    t.string   "title",         limit: 255, null: false
-    t.string   "privacy",       limit: 255, null: false
+    t.string   "title",         limit: 255,                 null: false
+    t.string   "privacy",       limit: 255,                 null: false
     t.string   "zzz_state",     limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.datetime "deleted_at"
     t.string   "public_token",  limit: 255
     t.string   "status"
+    t.boolean  "closed",                    default: false, null: false
   end
 
   add_index "message_threads", ["created_by_id"], name: "index_message_threads_on_created_by_id", using: :btree
@@ -484,4 +496,6 @@ ActiveRecord::Schema.define(version: 20151111150447) do
   add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true, using: :btree
   add_index "votes", ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
 
+  add_foreign_key "message_thread_closes", "message_threads"
+  add_foreign_key "message_thread_closes", "users"
 end

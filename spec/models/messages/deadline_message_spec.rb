@@ -26,4 +26,18 @@ describe DeadlineMessage do
     it { is_expected.to validate_presence_of(:deadline) }
     it { is_expected.to validate_presence_of(:title) }
   end
+
+  it 'should email about deadlines' do
+    dm = create :deadline_message, deadline: 5.hours.from_now
+    thread = dm.thread
+    subscription = create :thread_subscription, thread: thread
+    user = subscription.user
+    user.prefs.update!(enable_email: true)
+
+    expect{described_class.email_upcomming_deadlines!}.to change{ all_emails.count }.by(1)
+    email = all_emails.last
+    expect(email.to).to include(user.email)
+    expect(email.body).to include("upcoming deadline")
+    expect(email.subject).to include("Upcoming deadline")
+  end
 end

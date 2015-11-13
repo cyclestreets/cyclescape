@@ -7,7 +7,7 @@
   %header
     - if @issue
       %p.pre-title= link_to @issue.title, issue_path(@issue)
-    %h1= @thread.title
+    %h1= @thread.display_title
     .meta
       .privacy
         - if @thread.private_to_committee?
@@ -30,7 +30,14 @@
             %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t(".are_you_sure") }
 
   = render collection: @messages, partial: "messages/message", locals: { view_from: @view_from }
-  = render "messages/new"
+  - if @thread.closed
+    - closed_by = permitted_to?(:view_profile, @thread.closed_by.last) ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon
+    = t '.closed_html', by: closed_by, at: time_ago_in_words(@thread.message_thread_closes.last.created_at)
+    %p
+    - if permitted_to? :open, @thread
+      = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green'
+  -else
+    = render "messages/new"
 
 %aside#sidebar
   = render "subscribe_panel", thread: @thread

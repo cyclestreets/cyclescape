@@ -51,6 +51,9 @@ class MessageThread < ActiveRecord::Base
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, -> { (uniq(true)) }, through: :messages, source: :created_by
   has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id', inverse_of: :thread
+  has_many :message_thread_closes
+  has_many :closed_by, through: :message_thread_closes, source: :user
+  has_many :deadline_messages, foreign_key: :thread_id, inverse_of: :thread
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
   has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
@@ -110,6 +113,26 @@ class MessageThread < ActiveRecord::Base
     end
   end
 
+  def display_title
+    if closed
+      "(Closed) #{title}"
+    else
+      title
+    end
+  end
+
+  def close_by! user
+    if update(closed: true)
+      message_thread_closes.create(user: user, event: 'closed')
+    end
+  end
+
+  def open_by! user
+    if update(closed: false)
+      message_thread_closes.create(user: user, event: 'opened')
+    end
+  end
+
   def add_subscriber(user)
     found = user.thread_subscriptions.to(self)
     if found
@@ -138,6 +161,10 @@ class MessageThread < ActiveRecord::Base
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")
 
+    if closed
+      self.actioned_by = user
+      open!
+    end
     messages.create!(body: stripped, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
 
     # Attachments
@@ -193,6 +220,10 @@ class MessageThread < ActiveRecord::Base
 
   def latest_activity_at
     messages.empty? ? updated_at : messages.last.updated_at
+  end
+
+  def latest_activity_at_to_i
+    latest_activity_at.to_i
   end
 
   def latest_activity_by

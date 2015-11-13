@@ -664,6 +664,10 @@
         subject: "[Cyclescape] New Group \"%{group_name}\" has been requested by \"%{user_name}\""
       new_user_confirmed:
         subject: "[Cyclescape] Welcome to the site!"
+      upcoming_issue_deadline:
+        subject: "[Cyclescape] Upcoming deadline for \"%{issue_title}\""
+      upcoming_thread_deadline:
+        subject: "[Cyclescape] Upcoming deadline for \"%{thread_title}\""
 
     thread_mailer:
       common:
@@ -737,6 +741,8 @@
     show:
       are_you_sure: "Are you sure?"
       back: "Back"
+      closed_html: Thread has been closed by %{by} at %{at}
+      open: Re-open this thread
       edit: "Edit this thread"
       destroy: "Delete this thread"
       private_to_committee_message: "Private: Only committee members of %{group} can view and post messages to this thread."
@@ -812,6 +818,7 @@
       search_results: "Search Results"
       go: "Go"
       back: "Back"
+      close: Close this thread
       select_header: "Select"
       add_item_to_thread: "Add item to thread"
       explain_library_item: "Explain how this library item relates to the discussion thread"

@@ -61,6 +61,16 @@ class Issue < ActiveRecord::Base
     def before_date(date)
       where('coalesce(deadline, created_at) <= ?', date)
     end
+
+    def email_upcomming_deadlines!
+      where(deadline: Time.zone.now..1.day.from_now).includes(:threads).find_each do |issue|
+        issue.threads.each do |thread|
+          thread.email_subscribers.each do |subscriber|
+            Notifications.upcoming_issue_deadline(subscriber, issue, thread).deliver_later
+          end
+        end
+      end
+    end
   end
 
   def latest_activity_at

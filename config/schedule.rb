@@ -43,3 +43,13 @@ every 1.day, at: '2:02 am' do
   runner "PlanningApplication.remove_old"
   env :MAILTO, 'cyclescape-errors@cyclestreets.net'
 end
+
+every 1.day, at: '6:55 am' do
+  runner "Issue.email_upcomming_deadlines!"
+  env :MAILTO, 'cyclescape-errors@cyclestreets.net'
+end
+
+every 1.day, at: '7:05 am' do
+  runner "DeadlineMessage.email_upcomming_deadlines!"
+  env :MAILTO, 'cyclescape-errors@cyclestreets.net'
+end

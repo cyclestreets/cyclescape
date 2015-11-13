@@ -754,6 +754,8 @@
     show:
       are_you_sure: "Skutečně?"
       back: "Zpět"
+      closed_html: Vlákno vlákno bylo uzavřeno %{by} v %{at}
+      open: Znovu otevřít vlákno
       edit: "Upravit toto vlákno"
       destroy: "Odstranit toto vlákno"
       private_to_committee_message: "Soukromé: Pouze členové vedení místní skupiny %{group} mohou vidět a přispívat do tohoto vlákna."
@@ -829,6 +831,7 @@
       search_results: "Výsledky vyhledávání"
       go: "Vyhledat"
       back: "Zpět"
+      close: Zavřít toto vlákno
       select_header: "Vyberte"
       add_item_to_thread: "Přidat položku do diskuzního vlákna"
       explain_library_item: "Vysvětlete jak se tato položka knihovny vztahuje k diskuznímu vláknu"

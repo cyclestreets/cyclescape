@@ -1,0 +1,9 @@
+<%= raw @issue.title %> has an upcoming deadline <%= raw @issue.deadline.to_formatted_s(:long_ordinal)  %>
+and you are subscribed to a related thread <%= thread_url(@thread) %>
+
+You can view the issue at:
+<%= issue_url(@issue) %>
+
+--------
+
+You can stop following this thread by visiting the thread link above and clicking 'unfollow this thread'.

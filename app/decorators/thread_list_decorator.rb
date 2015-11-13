@@ -30,7 +30,7 @@ class ThreadListDecorator < ApplicationDecorator
 
   def title
     if h.permitted_to? :show, thread
-      thread.title
+      thread.display_title
     else
       I18n.t('decorators.thread_list.private_thread_title')
     end

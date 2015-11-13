@@ -399,4 +399,18 @@ describe Issue do
     message = create :message, thread: thread, updated_at: Date.tomorrow
     expect(subject.latest_activity_at).to eq message.updated_at
   end
+
+  it 'should email about deadlines' do
+    issue = create :issue, deadline: 6.hours.from_now
+    thread = create :message_thread, issue: issue
+    subscription = create :thread_subscription, thread: thread
+    user = subscription.user
+    user.prefs.update!(enable_email: true)
+
+    expect{described_class.email_upcomming_deadlines!}.to change{ all_emails.count }.by(1)
+    email = all_emails.last
+    expect(email.to).to include(user.email)
+    expect(email.body).to include("upcoming deadline")
+    expect(email.subject).to include("Upcoming deadline")
+  end
 end
