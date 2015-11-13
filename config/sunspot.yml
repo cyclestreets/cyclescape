@@ -13,7 +13,7 @@ staging:
   solr:
     hostname: localhost
     port: 8984
-    log_level: WARNING
+    log_level: INFO
     path: /solr/default
   auto_index_callback: after_commit
   auto_remove_callback: after_commit
