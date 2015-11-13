@@ -1,4 +1,18 @@
 GIT
+  remote: git://github.com/nikolai-b/sunspot.git
+  revision: 69dfb8ac240e56acc6c29a58d310181366f6b343
+  branch: bb_conjunctions
+  specs:
+    sunspot (2.2.0)
+      pr_geohash (~> 1.0)
+      rsolr (~> 1.0.7)
+    sunspot_rails (2.2.0)
+      nokogiri
+      rails (>= 3)
+      sunspot (= 2.2.0)
+    sunspot_solr (2.2.0)
+
+GIT
   remote: git://github.com/ruby-grape/grape.git
   revision: a7e4b2c5155cd9c1249036e87384c345f327a53b
   specs:
@@ -12,20 +26,6 @@ GIT
       rack-accept
       rack-mount
       virtus (>= 1.0.0)
-
-GIT
-  remote: git://github.com/sunspot/sunspot.git
-  revision: 327c7e4e2d3a9ad8351e8941d646e37088224341
-  branch: master
-  specs:
-    sunspot (2.2.0)
-      pr_geohash (~> 1.0)
-      rsolr (~> 1.0.7)
-    sunspot_rails (2.2.0)
-      nokogiri
-      rails (>= 3)
-      sunspot (= 2.2.0)
-    sunspot_solr (2.2.0)
 
 GEM
   remote: http://rubygems.org/
