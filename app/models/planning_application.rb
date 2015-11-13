@@ -90,7 +90,7 @@ class PlanningApplication < ActiveRecord::Base
   def relevant?
     return true unless authority_name == 'Cambridge'
     case uid
-    when /\/(TTCA|COND.*|CLUED|ADV)$/
+    when /\/(TTCA|TTPO|COND.*|CLUED|ADV)$/
       false
     else
       true

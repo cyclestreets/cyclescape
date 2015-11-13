@@ -105,7 +105,7 @@ describe PlanningApplication do
       expect(subject.relevant).to be true
     end
 
-    %w(LBC FUL CL2PD TTPO PRP11 GPE NMA S73 0173 DEMDET REM B1C3 OUT TELDET EXP).each do |ending|
+    %w(LBC FUL CL2PD PRP11 GPE NMA S73 0173 DEMDET REM B1C3 OUT TELDET EXP).each do |ending|
       it "should be true with #{ending} uids inside Cambridge" do
         subject.authority_name = 'Cambridge'
         subject.uid = "00/0000/#{ending}"
@@ -114,7 +114,7 @@ describe PlanningApplication do
       end
     end
 
-    %w(TTCA COND3 COND53C CLUED ADV).each do |ending|
+    %w(TTCA TTPO COND3 COND53C CLUED ADV).each do |ending|
       it "should be flase with #{ending} uids inside Cambridge" do
         subject.authority_name = 'Cambridge'
         subject.uid = "00/0000/#{ending}"
