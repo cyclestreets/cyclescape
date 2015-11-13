@@ -1,27 +1,26 @@
 class ThreadMailer < ActionMailer::Base
   include MailerHelper
+  helper :mailer
   default from: Rails.application.config.default_email_from
 
-  [:new_message, :new_photo_message, :new_deadline_message,
-   :new_document_message, :new_link_message, :new_library_item_message,
-   :new_street_view_message,
-  ].each do |message_type|
-    define_method message_type do |message, subscriber|
-      common(message, subscriber)
-    end
-  end
+  def digest(user, threads_messages)
+    @threads_messages = threads_messages
+    @subscriber = user
 
-  protected
+    mail(to: @subscriber.name_with_email,
+         subject: t('mailers.thread_mailer.digest.subject', date: Date.today),
+         reply_to: no_reply_address,
+        )
+  end
 
   def common(message, subscriber)
     @message = message
     @thread = message.thread
     @subscriber = subscriber
-    email_from = user_notification_address(message.created_by)
 
     mail(to: subscriber.name_with_email,
          subject: t('mailers.thread_mailer.common.subject', title: @thread.title, count: @thread.message_count),
-         from: email_from,
+         from: user_notification_address(message.created_by),
          references: message_chain(@message.in_reply_to, @thread),
          message_id: message_address(@message),
          reply_to: message_address(@message),

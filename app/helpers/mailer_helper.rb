@@ -24,4 +24,8 @@ module MailerHelper
   def user_notification_address(user)
     ['"', user.name, '" <notifications@', domain, '>'].join
   end
+
+  def no_reply_address
+    "No reply <no-reply@#{domain}>"
+  end
 end

@@ -678,6 +678,8 @@
         subject:
           one: "[Cyclescape] %{title}"
           other: "Re: [Cyclescape] %{title}"
+      digest:
+        subject: "[Cyclescape] Digest for %{date}"
   message_thread:
     subscriptions:
       create:

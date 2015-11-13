@@ -10,7 +10,7 @@ describe ThreadMailer do
 
   describe 'new document messages' do
     it 'has correct text in email' do
-      subject = described_class.send(:new_document_message, message_three, user)
+      subject = described_class.send(:common, message_three, user)
       expect(subject.body).to include("http://www.example.com#{document.file.url}")
       expect(subject.body).to include(I18n.t('.thread_mailer.new_document_message.view_the_document'))
       expect(subject.to).to include(user.email)
@@ -18,6 +18,16 @@ describe ThreadMailer do
       expect(subject.header['Message-ID'].value).to eq("<message-#{message_three.public_token}@cyclescape.org>")
       expect(subject.header['References'].value).to eq(
         "<thread-#{thread.public_token}@cyclescape.org> <message-#{message_one.public_token}@cyclescape.org> <message-#{message_two.public_token}@cyclescape.org>")
+    end
+  end
+
+  describe 'digest' do
+    it do
+      subject = described_class.send(:digest, user, {thread => [message_one, message_three]})
+      expect(subject.body).to include("http://www.example.com#{document.file.url}")
+      expect(subject.body).to include('To reply to the message above email')
+      expect(subject.subject).to include('Digest for')
+      expect(subject.reply_to.first).to include('no-reply')
     end
   end
 end

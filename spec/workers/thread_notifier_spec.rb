@@ -24,8 +24,8 @@ describe ThreadNotifier do
 
       mail = double('mail')
 
-      expect(ThreadMailer).to receive(:new_message).with(message, user_one).and_return(mail)
-      expect(ThreadMailer).to receive(:new_message).with(message, user_two).and_return(mail)
+      expect(ThreadMailer).to receive(:common).with(message, user_one).and_return(mail)
+      expect(ThreadMailer).to receive(:common).with(message, user_two).and_return(mail)
       expect(mail).to receive(:deliver_later).twice
 
       subject.notify_subscribers(thread, 'new_message', message)

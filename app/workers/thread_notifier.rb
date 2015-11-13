@@ -12,7 +12,7 @@ class ThreadNotifier
   # optional +message+ object
   def self.notify_subscribers(thread, type, message = nil)
     thread.email_subscribers.each do |subscriber|
-      ThreadMailer.send(type, message, subscriber).deliver_later
+      ThreadMailer.send(:common, message, subscriber).deliver_later
     end
   end
 end

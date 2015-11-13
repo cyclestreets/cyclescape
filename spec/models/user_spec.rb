@@ -507,4 +507,17 @@ describe User do
     create :group_membership, group: group, role: 'committee'
     expect(subject.reload.in_group_committee).to eq([group])
   end
+
+  it 'should send digests' do
+    user = create(:user)
+    user.prefs.update(email_status_id: 2)
+    thread_subscription = create :thread_subscription, user: user
+    thread = thread_subscription.thread
+    new_message = create :message, updated_at: 1.hour.ago, thread: thread
+    old_message = create :message, updated_at: 1.week.ago, thread: thread
+
+    expect{described_class.email_digests!}.to change{all_emails.count}.by(1)
+    expect(all_emails.last.body).to include(new_message.public_token)
+    expect(all_emails.last.body).to_not include(old_message.public_token)
+  end
 end

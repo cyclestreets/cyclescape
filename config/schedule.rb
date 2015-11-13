@@ -53,3 +53,8 @@ every 1.day, at: '7:05 am' do
   runner "DeadlineMessage.email_upcomming_deadlines!"
   env :MAILTO, 'cyclescape-errors@cyclestreets.net'
 end
+
+every 1.day, at: '6:50 am' do
+  runner "User.email_digests!"
+  env :MAILTO, 'cyclescape-errors@cyclestreets.net'
+end
