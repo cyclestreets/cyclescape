@@ -39,6 +39,7 @@ class GroupsController < ApplicationController
   def search
     @query = params[:query]
     set_page_title t('.title', group: group.name)
+    _group = group
 
     threads = MessageThread.search(include: [:group, :issue, messages: :created_by]) do
       fulltext params[:query] do
@@ -46,9 +47,9 @@ class GroupsController < ApplicationController
         boost_fields tags_string: 1.0
       end
       with(:status, 'approved')
-      any_of do
+      any do
         with(:location).in_bounding_box(*group_bb)
-        with(:group_id, group.id)
+        with(:group_id, _group.id)
       end
       any_of do
         with(:privacy, 'public')
