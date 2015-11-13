@@ -20,7 +20,7 @@ describe 'Issue notifications' do
 
       before do
         user.prefs.update_column(:involve_my_locations, 'notify')
-        user.prefs.update_column(:enable_email, true)
+        user.prefs.update_column(:email_status_id, 1)
       end
 
       it 'should send a notification' do
@@ -55,7 +55,7 @@ describe 'Issue notifications' do
       end
 
       it "should not send an email when the emails aren't enabled" do
-        user.prefs.update_column(:enable_email, false)
+        user.prefs.update_column(:email_status_id, 0)
         fill_in_issue
         click_on 'Send Report'
         email = open_last_email_for(user.email)
@@ -70,7 +70,7 @@ describe 'Issue notifications' do
 
       before do
         notifiee.prefs.update_column(:involve_my_groups, 'notify')
-        notifiee.prefs.update_column(:enable_email, true)
+        notifiee.prefs.update_column(:email_status_id, 1)
       end
 
       it 'should send a notification' do
@@ -102,9 +102,9 @@ describe 'Issue notifications' do
 
     before do
       user.prefs.update_column(:involve_my_locations, 'notify')
-      user.prefs.update_column(:enable_email, true)
+      user.prefs.update_column(:email_status_id, 1)
       user2.prefs.update_column(:involve_my_locations, 'notify')
-      user2.prefs.update_column(:enable_email, true)
+      user2.prefs.update_column(:email_status_id, 1)
       visit new_issue_path
       fill_in 'Title', with: 'Test'
       fill_in 'Write a description', with: 'Something & something else'
@@ -148,7 +148,7 @@ describe 'Issue notifications' do
     before do
       user.prefs.update_column(:involve_my_locations, 'notify')
       user.prefs.update_column(:involve_my_groups, 'notify')
-      user.prefs.update_column(:enable_email, true)
+      user.prefs.update_column(:email_status_id, 1)
       visit new_issue_path
       fill_in 'Title', with: 'Test'
       fill_in 'Write a description', with: 'Interesting, but you only need to tell me once'

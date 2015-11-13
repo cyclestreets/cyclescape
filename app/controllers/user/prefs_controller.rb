@@ -25,6 +25,6 @@ class User::PrefsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:user_pref).permit :involve_my_locations, :involve_my_groups, :involve_my_groups_admin, :enable_email
+    params.require(:user_pref).permit :involve_my_locations, :involve_my_groups, :involve_my_groups_admin, :email_status_id
   end
 end

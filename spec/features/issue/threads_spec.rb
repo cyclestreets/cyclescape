@@ -117,7 +117,7 @@ describe 'Issue threads' do
 
         before do
           notifiee.prefs.update_column(:involve_my_groups, 'notify')
-          notifiee.prefs.update_column(:enable_email, true)
+          notifiee.prefs.update_column(:email_status_id, 1)
           reset_mailer
         end
 
@@ -165,7 +165,7 @@ describe 'Issue threads' do
       before do
         current_user.prefs.update_column(:involve_my_groups, 'none')
         notifiee.prefs.update_column(:involve_my_locations, 'notify')
-        notifiee.prefs.update_column(:enable_email, true)
+        notifiee.prefs.update_column(:email_status_id, 1)
         reset_mailer
       end
 
@@ -217,7 +217,7 @@ describe 'Issue threads' do
 
       it 'should send a new message notification to the person who started the thread' do
         current_user.prefs.update_column(:involve_my_locations, 'notify')
-        current_user.prefs.update_column(:enable_email, true)
+        current_user.prefs.update_column(:email_status_id, 1)
         create_thread
 
         mailbox = mailbox_for(current_user.email)

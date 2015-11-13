@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112103253) do
+ActiveRecord::Schema.define(version: 20151113140326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -421,15 +421,17 @@ ActiveRecord::Schema.define(version: 20151112103253) do
     t.string  "involve_my_locations",    limit: 255, default: "subscribe", null: false
     t.string  "involve_my_groups",       limit: 255, default: "notify",    null: false
     t.boolean "involve_my_groups_admin",             default: false,       null: false
-    t.boolean "enable_email",                        default: false,       null: false
+    t.boolean "zz_enable_email",                     default: false,       null: false
     t.string  "zz_profile_visibility",   limit: 255, default: "public",    null: false
+    t.integer "email_status_id",                     default: 0,           null: false
   end
 
-  add_index "user_prefs", ["enable_email"], name: "index_user_prefs_on_enable_email", using: :btree
+  add_index "user_prefs", ["email_status_id"], name: "index_user_prefs_on_email_status_id", using: :btree
   add_index "user_prefs", ["involve_my_groups"], name: "index_user_prefs_on_involve_my_groups", using: :btree
   add_index "user_prefs", ["involve_my_groups_admin"], name: "index_user_prefs_on_involve_my_groups_admin", using: :btree
   add_index "user_prefs", ["involve_my_locations"], name: "index_user_prefs_on_involve_my_locations", using: :btree
   add_index "user_prefs", ["user_id"], name: "index_user_prefs_on_user_id", unique: true, using: :btree
+  add_index "user_prefs", ["zz_enable_email"], name: "index_user_prefs_on_zz_enable_email", using: :btree
 
   create_table "user_profiles", force: :cascade do |t|
     t.integer "user_id",                                    null: false

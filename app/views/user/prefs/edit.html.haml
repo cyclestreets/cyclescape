@@ -14,5 +14,7 @@
       = f.input :involve_my_groups_admin
       %h2= t ".notification_types"
       %p= t ".notification_types_guidance"
-      = f.input :enable_email
+      = f.input :email_status_id,
+          as: :radio,
+          collection: UserPref.email_statuses.values.map {|es| [es.label, es.id]}
     = f.actions

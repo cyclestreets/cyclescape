@@ -43,7 +43,7 @@
       thread_subscription:
         send_email: "Maile eine neue Nachricht"
       user_pref:
-        enable_email: "Email-Benachrichtigung aktivieren"
+        email_status_id: "Email-Benachrichtigung aktivieren"
         involve_my_locations: "Vorfälle in der Nähe Deines Standortes"
         involve_my_groups: "Angelegenheiten meiner Gruppe"
         involve_my_groups_admin: "Beziehe mich ebenso an administrativen Diskussionen meiner Gruppe ein"

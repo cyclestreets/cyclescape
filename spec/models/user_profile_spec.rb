@@ -4,10 +4,7 @@ describe UserProfile do
   context 'associations' do
     it { is_expected.to belong_to(:user) }
   end
-  it do
-    is_expected.to validate_inclusion_of(:visibility).
-      in_array(%w(public group))
-  end
+  it { is_expected.to validate_inclusion_of(:visibility).in_array(%w(public group)) }
 
   context 'picture' do
     subject { create(:user_profile) }

@@ -12,6 +12,10 @@
     zero: "Today!"
     one: "Tomorrow!"
     other: "%{count} days away"
+  email_status:
+    no_email: No email
+    email: Email every message
+    digest: Email digest
   deadline_date: "Deadline/date"
   admin:
     groups:

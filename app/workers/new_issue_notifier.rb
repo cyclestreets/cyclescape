@@ -56,7 +56,7 @@ class NewIssueNotifier
     user = User.find(opts['user_id'])
     issue = Issue.find(opts['issue_id'])
     category = LocationCategory.find(opts['category_id'])
-    Notifications.new_user_location_issue(user, issue, category).deliver_later if user.prefs.enable_email
+    Notifications.new_user_location_issue(user, issue, category).deliver_later if user.prefs.enable_email?
   end
 
   def self.list_for_group_locations(issue)
@@ -81,6 +81,6 @@ class NewIssueNotifier
     user = User.find(opts['user_id'])
     group = Group.find(opts['group_id'])
     issue = Issue.find(opts['issue_id'])
-    Notifications.new_group_location_issue(user, group, issue).deliver_later if user.prefs.enable_email
+    Notifications.new_group_location_issue(user, group, issue).deliver_later if user.prefs.enable_email?
   end
 end
