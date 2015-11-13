@@ -14,14 +14,15 @@
       %p= t ".converted_to_issue"
       %p= planning_application.issue_link
     -else
-      = link_to t(".convert_to_issue_html"), new_planning_application_issue_path(planning_application), class: "btn-green"
-      &nbsp; &nbsp;
-      - if planning_application.users.include? current_user
-        = link_to t(".unhide"), unhide_planning_application_path(planning_application),
-          method: :put, class: "btn-grey", remote: :true
-      -else
-        = link_to t(".hide"), hide_planning_application_path(planning_application),
-          method: :put, title: t('.hide_tooltip'), class: "btn-grey", remote: :true
+      .actions
+        %ul
+          %li= link_to t(".convert_to_issue_html"), new_planning_application_issue_path(planning_application), class: "btn-green"
+          - if planning_application.users.include? current_user
+            %li= link_to t(".unhide"), unhide_planning_application_path(planning_application),
+              method: :put, class: "btn-grey", remote: :true
+          -else
+            %li= link_to t(".hide"), hide_planning_application_path(planning_application),
+              method: :put, title: t('.hide_tooltip'), class: "btn-grey", remote: :true
 
   %td
     %p= planning_application.authority_name
