@@ -80,6 +80,8 @@
       index: &admin_users_index
         created: "Created"
         created_at: "%{time_ago} ago"
+        last_seen: "Last login"
+        last_seen_at: "%{time_ago} ago"
         introduction: "This page lists all users on the system (irrespective of any group membership they may have)."
         disabled: "Disabled"
         disabled_at: "%{time_ago} ago"
