@@ -51,13 +51,12 @@ describe MessageThreadsController do
   describe 'closing / opening' do
     before do
       warden.set_user user_type
-      allow(thread).to receive(:latest_activity_at).and_return(47.hours.ago)
+      create :message, thread: thread, updated_at: 49.hours.ago
     end
 
     let(:subscription)   { create :thread_subscription, thread: thread }
     let(:subscriber)     { subscription.user }
     let(:non_subscriber) { create :user }
-
 
     describe 'closing' do
       subject { put :close, id: thread.id }
@@ -70,10 +69,9 @@ describe MessageThreadsController do
         end
 
         context 'less than 48 hours ago' do
-          before { allow(thread).to receive(:latest_activity_at).and_return(49.hours.ago) }
+          before { create :message, thread: thread, updated_at: 47.hours.ago }
 
-          it { expect(subject.status).to eq 302 }
-          it { expect(subject).to redirect_to "/threads/#{thread.id}" }
+          it { expect(subject.status).to eq 401 }
         end
       end
 
