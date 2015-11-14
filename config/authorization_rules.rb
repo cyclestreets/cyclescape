@@ -24,7 +24,7 @@ authorization do
 
   role :member do
     includes :guest
-    has_permission_on :dashboards, to: [:show]
+    has_permission_on :dashboards, to: [:show, :deadlines]
     has_permission_on :group_requests do
       to [:new, :create]
     end

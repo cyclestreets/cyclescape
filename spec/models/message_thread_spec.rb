@@ -305,4 +305,14 @@ describe MessageThread do
       expect(close_event.user).to eq user
     end
   end
+
+  describe 'ical output' do
+    subject { create :message_thread, title: 'Important dates' }
+    let(:message)  { create :message, thread: subject }
+    let!(:deadline) { create :deadline_message, message: message, title: 'The AGM!', deadline: 1.day.from_now }
+
+    it { expect(subject.to_icals[0].summary).to include('The AGM!') }
+    it { expect(subject.to_icals[0].description).to include('Important dates') }
+    it { expect(subject.to_icals[0].dtstart.to_s).to eq(Icalendar::Values::Date.new(deadline.deadline).to_s) }
+  end
 end

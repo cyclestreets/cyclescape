@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   end
 
   resource :overview, as: :dashboard, controller: 'dashboards' do
-    get :search
+    get :search, :deadlines
   end
 
   issues_route

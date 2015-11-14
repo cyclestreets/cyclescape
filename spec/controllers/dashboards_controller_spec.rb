@@ -60,4 +60,22 @@ describe DashboardsController, type: :controller do
       end
     end
   end
+
+  describe 'deadlines' do
+    subject            { get :deadlines, format: :ics }
+
+    let(:subscription) { create :thread_subscription }
+    let(:user)         { subscription.user }
+    let(:thread)       { subscription.thread }
+    let(:message)      { create :message, thread: thread }
+    let!(:deadline)    { create :deadline_message, message: message, title: 'The AGM!', deadline: 1.day.from_now }
+
+    before do
+      warden.set_user user
+    end
+
+    it 'output the ical feed' do
+      expect(subject.body).to include('The AGM!')
+    end
+  end
 end

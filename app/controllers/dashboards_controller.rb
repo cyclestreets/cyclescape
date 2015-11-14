@@ -24,6 +24,14 @@ class DashboardsController < ApplicationController
     @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications.relevant.includes(:users)
   end
 
+  def deadlines
+    cal = Icalendar::Calendar.new
+    ThreadList.with_upcoming_deadlines(current_user, 20).each do |thread|
+      thread.to_icals.each { |evt| cal.add_event(evt) }
+    end
+    render text: cal.to_ical
+  end
+
   def search
     # Ideally, this would be delegated to the different controllers.
 

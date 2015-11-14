@@ -196,6 +196,7 @@ GEM
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
     i18n (0.7.0)
+    icalendar (2.3.0)
     ice_nine (0.11.1)
     jquery-rails (3.0.4)
       railties (>= 3.0, < 5.0)
@@ -459,6 +460,7 @@ DEPENDENCIES
   grape-kaminari
   grape-swagger
   haml-rails
+  icalendar
   jquery-rails (~> 3.0.0)
   jquery-ui-rails (~> 5.0.0)
   kaminari
