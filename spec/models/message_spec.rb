@@ -166,4 +166,16 @@ describe Message do
     end
   end
 
+  describe 'notification_name' do
+    context 'with no component' do
+      it { expect(subject.notification_name).to eq :new_message }
+    end
+
+    context 'with a component' do
+      let(:component) { create :link_message }
+      subject { component.message }
+
+      it { expect(subject.notification_name).to eq :new_link_message }
+    end
+  end
 end

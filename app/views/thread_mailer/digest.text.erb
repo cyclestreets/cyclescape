@@ -1,0 +1,16 @@
+There have been updates on <%= @threads_messages.count %> threads you are subscribed to.
+
+<%- @threads_messages.each do |thread, messages| %>
+<%- @thread = thread %>
+----
+Updates on <%= raw @thread.title %>:
+
+<%- messages.each do |message| %>
+--
+
+<%- @message = message %>
+<%= render partial: @message.notification_name.to_s %>
+
+To reply to the message above email <%= message_address(@message) %>
+<%- end  %>
+<%- end  %>

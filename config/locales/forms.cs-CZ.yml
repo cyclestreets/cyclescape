@@ -72,7 +72,7 @@
       thread_subscription:
         send_email: "Poslat nové zprávy emailem"
       user_pref:
-        enable_email: "Zapnout upozornění pomocí emailu"
+        email_status_id: "Zapnout upozornění pomocí emailu"
         involve_my_locations: "Záležitosti v mém okolí"
         involve_my_groups: "Záležitosti mých místních skupin"
         involve_my_groups_admin: "Taktéž mě zahrňte do všeobecných diskuzí mých místních skupin"

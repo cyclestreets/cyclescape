@@ -43,7 +43,7 @@
       thread_subscription:
         send_email: "Email new messages"
       user_pref:
-        enable_email: "Enable email notifications"
+        email_status_id: "Enable email notifications"
         involve_my_locations: "Matters near my locations"
         involve_my_groups: "My group's matters"
         involve_my_groups_admin: "Also involve me in my group's administrative discussions"

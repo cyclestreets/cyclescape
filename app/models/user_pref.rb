@@ -20,6 +20,18 @@
 #
 
 class UserPref < ActiveRecord::Base
+  # ---> CONSTANTS
+  EmailStatus = Struct.new(:id, :status) do
+    def label
+      I18n.t("email_status.#{status}")
+    end
+  end
+  class_attribute :email_statuses
+  self.email_statuses = [
+    EmailStatus.new(0, :no_email),
+    EmailStatus.new(1, :email),
+    EmailStatus.new(2, :digest),
+  ].index_by(&:id).freeze
 
   belongs_to :user
 
@@ -27,4 +39,10 @@ class UserPref < ActiveRecord::Base
 
   validates :involve_my_locations, inclusion: { in: INVOLVEMENT_OPTIONS }
   validates :involve_my_groups, inclusion: { in: INVOLVEMENT_OPTIONS }
+  validates :email_status_id, inclusion: email_statuses.keys
+
+  def enable_email?
+    email_status_id == 1
+  end
+
 end

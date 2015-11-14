@@ -70,17 +70,16 @@ describe 'User preferences' do
   end
 
   describe 'enable email' do
-    let(:field) { get_field('enable_email') }
+    let(:field) { get_field('email_status_id') }
 
     it 'should default to off' do
-      expect(field).not_to be_checked
+      expect(page).to have_checked_field(I18n.t('email_status.no_email'))
     end
 
     it 'should switch on' do
-      field.set true
+      page.choose(I18n.t('email_status.digest'))
       click_on 'Save'
-      current_user.reload
-      expect(current_user.prefs.enable_email).to be_truthy
+      expect(page).to have_checked_field(I18n.t('email_status.digest'))
     end
   end
 

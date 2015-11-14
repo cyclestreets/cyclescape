@@ -82,6 +82,10 @@ class Message < ActiveRecord::Base
     (component ? component : self).class.name.underscore
   end
 
+  def notification_name
+    component ? component.notification_name : :new_message
+  end
+
   def searchable_text
     component ? "#{body} #{component.searchable_text}" : body
   end
@@ -114,7 +118,6 @@ class Message < ActiveRecord::Base
     thread.add_subscriber(created_by) unless created_by.ever_subscribed_to_thread?(thread)
     created_by.approve! unless created_by.approved?
     if thread.approved?
-      notification_name = component.try(:notification_name) || :new_message
       ThreadNotifier.notify_subscribers thread, notification_name, self
       SearchUpdater.update_thread(thread) if thread
     else

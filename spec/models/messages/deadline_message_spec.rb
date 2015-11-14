@@ -32,7 +32,7 @@ describe DeadlineMessage do
     thread = dm.thread
     subscription = create :thread_subscription, thread: thread
     user = subscription.user
-    user.prefs.update!(enable_email: true)
+    user.prefs.update_column(:email_status_id, 1)
 
     expect{described_class.email_upcomming_deadlines!}.to change{ all_emails.count }.by(1)
     email = all_emails.last

@@ -24,7 +24,7 @@ describe NewIssueNotifier do
 
       before do
         user.prefs.update_column(:involve_my_locations, 'notify')
-        user.prefs.update_column(:enable_email, true)
+        user.prefs.update_column(:email_status_id, 1)
       end
 
       it 'should add a buffer to the issue location'

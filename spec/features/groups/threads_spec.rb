@@ -73,7 +73,7 @@ describe 'Group threads', use: :subdomain do
         def enable_group_thread_prefs_for(u)
           u.prefs.update_column(:involve_my_groups, 'notify')
           u.prefs.update_column(:involve_my_groups_admin, true)
-          u.prefs.update_column(:enable_email, true)
+          u.prefs.update_column(:email_status_id, 1)
         end
 
         it 'should send a notification to group members' do
@@ -102,7 +102,7 @@ describe 'Group threads', use: :subdomain do
           membership = create(:group_membership, group: current_group)
           notifiee = membership.user
           enable_group_thread_prefs_for(notifiee)
-          notifiee.prefs.update_column(:enable_email, false)
+          notifiee.prefs.update_column(:email_status_id, 0)
           fill_in_thread
           expect(open_last_email_for(notifiee.email)).to be_nil
         end

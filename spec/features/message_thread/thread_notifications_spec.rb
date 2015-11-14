@@ -8,7 +8,7 @@ describe 'thread notifications' do
     include_context 'signed in as a site user'
 
     before do
-      current_user.prefs.update_column(:enable_email, true)
+      current_user.prefs.update_column(:email_status_id, 1)
       visit thread_path(thread)
       subscribe_button.click
     end
@@ -132,7 +132,7 @@ describe 'thread notifications' do
       include_context 'signed in as a site user'
 
       before do
-        current_user.prefs.update_column(:enable_email, true)
+        current_user.prefs.update_column(:email_status_id, 1)
         visit thread_path(thread)
         subscribe_button.click
       end
@@ -154,7 +154,7 @@ describe 'thread notifications' do
       let(:thread) { create(:message_thread_with_messages, :private, group: current_group) }
 
       before do
-        current_user.prefs.update_column(:enable_email, true)
+        current_user.prefs.update_column(:email_status_id, 1)
         visit thread_path(thread)
         subscribe_button.click
       end
@@ -176,7 +176,7 @@ describe 'thread notifications' do
       let(:thread) { create(:message_thread_with_messages, :committee, group: current_group) }
 
       before do
-        current_user.prefs.update_column(:enable_email, true)
+        current_user.prefs.update_column(:email_status_id, 1)
         visit thread_path(thread)
         subscribe_button.click
       end
