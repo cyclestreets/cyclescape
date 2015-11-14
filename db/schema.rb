@@ -478,6 +478,7 @@ ActiveRecord::Schema.define(version: 20151113140326) do
     t.datetime "deleted_at"
     t.datetime "invitation_created_at"
     t.boolean  "approved",                           default: false, null: false
+    t.datetime "last_seen_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
