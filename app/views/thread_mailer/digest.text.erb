@@ -11,6 +11,8 @@ Updates on <%= raw @thread.title %>:
 <%- @message = message %>
 <%= render partial: @message.notification_name.to_s %>
 
-To reply to the message above email <%= message_address(@message) %>
+To reply to the message above, email <%= message_address(@message) %>
+Please ensure you strip out non-relevant text in your message.
+
 <%- end  %>
 <%- end  %>
