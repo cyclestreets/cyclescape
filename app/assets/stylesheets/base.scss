@@ -171,6 +171,11 @@ input.submit,
 .readmore {
   overflow: hidden;
 }
+
+.part-hidden {
+  opacity: 0.5;
+}
+
 a.read-more-box {
   display: block;
   padding: 54px 0 0 0;

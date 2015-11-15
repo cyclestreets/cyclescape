@@ -35,7 +35,7 @@
     = t '.closed_html', by: closed_by, at: time_ago_in_words(@thread.message_thread_closes.last.created_at)
     %p
     - if permitted_to? :open, @thread
-      = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green'
+      = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green', data: { confirm: t("confirm") }
   -else
     = render "messages/new"
 
