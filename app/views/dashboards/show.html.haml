@@ -80,6 +80,7 @@
                       = t "thread_priorities.#{thread.priority_for(current_user).label}"
       #deadlines
         %section.threads
+          %p(style="float: right;")= link_to image_tag("ical.gif"), deadlines_dashboard_path(format: :ics)
           - if @deadline_threads.empty?
             %p= t ".no_upcoming_deadline_threads"
           - else
@@ -103,7 +104,6 @@
                     %td.meta
                       = time_tag_with_title(thread.latest_activity_date) do
                         - t ".deadline_thread_updated", time_ago: time_ago_in_words(thread.latest_activity_date)
-          %p= link_to 'Ical', deadlines_dashboard_path(format: :ics)
       #planning-applications
         %section.planning_applications
           %h2= t ".planning_applications_in_your_area", location: t('.location', count: current_user.locations.count)
