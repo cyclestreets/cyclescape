@@ -25,7 +25,7 @@ describe ThreadMailer do
     it do
       subject = described_class.send(:digest, user, {thread => [message_one, message_three]})
       expect(subject.body).to include("http://www.example.com#{document.file.url}")
-      expect(subject.body).to include('To reply to the message above email')
+      expect(subject.body).to include('To reply to the message above')
       expect(subject.subject).to include('Digest for')
       expect(subject.reply_to.first).to include('no-reply')
     end
