@@ -11,7 +11,8 @@ describe Notifications do
       let(:new_user_email) { nil }
       it 'uses the default' do
         subject = described_class.send(:added_to_group, gm.reload)
-        expect(subject.body).to include('have added you to their Cyclescape group')
+        expect(subject.body).to include('has added you to their Cyclescape group')
+        expect(subject.body).to include("#{group.short_name}.example.com")
       end
     end
     context 'with an email set' do

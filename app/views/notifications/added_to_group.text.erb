@@ -1,3 +1,3 @@
-"<%= raw @group.name %>" have added you to their Cyclescape group.
+<%= raw @group.name %> has added you to their Cyclescape group.
 
-<%= group_url(@group) %>
+<%= root_url(subdomain: @group.short_name) %>
