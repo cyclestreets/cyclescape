@@ -15,7 +15,7 @@
   email_status:
     no_email: No email
     email: Email every message
-    digest: Email digest
+    digest: Daily email digest
   deadline_date: "Deadline/date"
   admin:
     groups:
