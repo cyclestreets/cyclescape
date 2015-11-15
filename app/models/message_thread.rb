@@ -207,9 +207,6 @@ class MessageThread < ActiveRecord::Base
     issue_id
   end
 
-  def set_public_token
-    self.public_token = generate_public_token
-  end
 
   def message_count
     messages.count
@@ -281,10 +278,11 @@ class MessageThread < ActiveRecord::Base
       end
     end
   end
+
   protected
 
-  def generate_public_token
-    SecureRandom.hex(10)
+  def set_public_token
+    self.public_token = SecureRandom.hex(10)
   end
 
   def must_be_created_by_enabled_user

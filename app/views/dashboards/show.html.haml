@@ -80,7 +80,7 @@
                       = t "thread_priorities.#{thread.priority_for(current_user).label}"
       #deadlines
         %section.threads
-          %p(style="float: right;")= link_to image_tag("ical.gif"), deadlines_dashboard_path(format: :ics)
+          %p(style="float: right;")= link_to image_tag("ical.gif"), "#{dashboard_path}/#{current_user.public_token}/deadlines.ics"
           - if @deadline_threads.empty?
             %p= t ".no_upcoming_deadline_threads"
           - else

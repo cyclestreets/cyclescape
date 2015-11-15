@@ -11,6 +11,7 @@ describe User do
     it 'should be active' do
       expect(subject.disabled).to be_falsey
     end
+    it { expect(subject.public_token).to_not be_empty }
   end
 
   describe 'associations' do

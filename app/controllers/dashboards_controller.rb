@@ -26,7 +26,7 @@ class DashboardsController < ApplicationController
 
   def deadlines
     cal = Icalendar::Calendar.new
-    ThreadList.with_upcoming_deadlines(current_user, 20).each do |thread|
+    ThreadList.with_upcoming_deadlines(User.find_by(public_token: params[:public_token]), 20).each do |thread|
       thread.to_icals.each { |evt| cal.add_event(evt) }
     end
     render text: cal.to_ical

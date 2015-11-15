@@ -69,6 +69,7 @@ class User < ActiveRecord::Base
 
   before_validation :set_default_role, unless: :role
   after_create :create_user_prefs
+  before_create :set_public_token
 
   before_destroy :obfuscate_name
   before_destroy :clear_profile
@@ -299,5 +300,9 @@ class User < ActiveRecord::Base
 
   def welcome_message
     Notifications.new_user_confirmed(self).deliver_later
+  end
+
+  def set_public_token
+    self.public_token = SecureRandom.hex(10)
   end
 end
