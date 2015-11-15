@@ -114,7 +114,7 @@ describe PlanningApplication do
       end
     end
 
-    %w(TTCA TTPO COND3 COND53C CLUED ADV).each do |ending|
+    %w(TTCA TTPO COND3 COND53C CLUED ADV CON6 CON18).each do |ending|
       it "should be flase with #{ending} uids inside Cambridge" do
         subject.authority_name = 'Cambridge'
         subject.uid = "00/0000/#{ending}"
