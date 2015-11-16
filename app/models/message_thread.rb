@@ -26,7 +26,6 @@ class MessageThread < ActiveRecord::Base
   include AASM
   include FakeDestroy
   include Taggable
-  delegate :url_helpers, to: "Rails.application.routes"
 
   searchable do
     text :title, :messages_text, :tags_string
@@ -265,18 +264,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def to_icals
-    upcoming_deadline_messages.map do |dm|
-      Icalendar::Event.new.tap do |e|
-        e.dtstart     = Icalendar::Values::Date.new(dm.component.deadline)
-        e.summary     = dm.component.title
-        e.description = title
-        e.url         = url_helpers.
-          thread_url(self,
-                     anchor: ActionView::RecordIdentifier.dom_id(dm),
-                     host: Rails.application.config.action_mailer.default_url_options[:host]
-                    )
-      end
-    end
+    upcoming_deadline_messages.map{ |message| message.component.to_ical }
   end
 
   protected

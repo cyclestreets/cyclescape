@@ -17,7 +17,10 @@ class ThreadMailer < ActionMailer::Base
     @message = message
     @thread = message.thread
     @subscriber = subscriber
-
+    if @message.notification_name == :new_deadline_message
+      attachments['deadline.ics'] = {mime_type: 'text/calendar',
+                                     content: @message.component.to_ical.to_ical }
+    end
     mail(to: subscriber.name_with_email,
          subject: t('mailers.thread_mailer.common.subject', title: @thread.title, count: @thread.message_count),
          from: user_notification_address(message.created_by),

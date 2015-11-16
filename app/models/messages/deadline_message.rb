@@ -18,6 +18,8 @@ class DeadlineMessage < MessageComponent
   validates :title, presence: true
   belongs_to :thread, class_name: 'MessageThread', inverse_of: :deadline_messages
 
+  delegate :url_helpers, to: "Rails.application.routes"
+
   class << self
     def email_upcomming_deadlines!
       where(deadline: Time.zone.now..1.day.from_now).includes(:thread).find_each do |dm|
@@ -26,6 +28,19 @@ class DeadlineMessage < MessageComponent
           Notifications.upcoming_thread_deadline(subscriber, thread).deliver_later
         end
       end
+    end
+  end
+
+  def to_ical
+    Icalendar::Event.new.tap do |e|
+      e.dtstart     = Icalendar::Values::Date.new(deadline)
+      e.summary     = title
+      e.description = thread.title
+      e.url         = url_helpers.
+        thread_url(self,
+                   anchor: ActionView::RecordIdentifier.dom_id(message),
+                   host: Rails.application.config.action_mailer.default_url_options[:host]
+                  )
     end
   end
 end
