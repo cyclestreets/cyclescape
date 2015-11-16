@@ -119,7 +119,6 @@ class Message < ActiveRecord::Base
     created_by.approve! unless created_by.approved?
     if thread.approved?
       ThreadNotifier.notify_subscribers thread, notification_name, self
-      SearchUpdater.update_thread(thread) if thread
     else
       thread.approve!
     end
