@@ -509,16 +509,32 @@ describe User do
     expect(subject.reload.in_group_committee).to eq([group])
   end
 
-  it 'should send digests' do
-    user = create(:user)
-    user.prefs.update(email_status_id: 2)
-    thread_subscription = create :thread_subscription, user: user
-    thread = thread_subscription.thread
-    new_message = create :message, updated_at: 1.hour.ago, thread: thread
-    old_message = create :message, updated_at: 1.week.ago, thread: thread
+  describe '#digests' do
+    let!(:user)                { create(:user).tap { |us| us.prefs.update(email_status_id: 2) } }
 
-    expect{described_class.email_digests!}.to change{all_emails.count}.by(1)
-    expect(all_emails.last.body).to include(new_message.public_token)
-    expect(all_emails.last.body).to_not include(old_message.public_token)
+    context 'with new messages' do
+      let!(:thread_subscription) { create :thread_subscription, user: user }
+      let!(:thread)              { thread_subscription.thread }
+      let!(:new_message)         { create :message, updated_at: 1.hour.ago, thread: thread }
+      let!(:old_message)         { create :message, updated_at: 1.week.ago, thread: thread }
+
+      it 'should send digests' do
+        expect{described_class.email_digests!}.to change{all_emails.count}.by(1)
+        expect(all_emails.last.body).to include(new_message.public_token)
+        expect(all_emails.last.body).to_not include(old_message.public_token)
+      end
+    end
+
+    context 'with no new threads' do
+      let!(:thread_subscription) { create :thread_subscription, user: user, thread: thread }
+      let!(:thread)              { create :message_thread, title: 'Nothing much happening' }
+      let!(:old_message)         { create :message, updated_at: 1.week.ago, thread: thread }
+
+      it 'should not include empty threads' do
+        expect{described_class.email_digests!}.to change{all_emails.count}.by(1)
+        expect(all_emails.last.body).to_not include(thread.title)
+        expect(all_emails.last.body).to include('on 0 threads')
+      end
+    end
   end
 end
