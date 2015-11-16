@@ -151,7 +151,7 @@ describe MessageThread do
       thread = create(:message_thread)
       thread.public_token = ''
       expect(thread.public_token).to be_blank
-      thread.set_public_token
+      thread.send(:set_public_token)
       expect(thread.public_token).not_to be_blank
     end
   end
