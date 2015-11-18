@@ -39,5 +39,6 @@ describe DeadlineMessage do
     expect(email.to).to include(user.email)
     expect(email.body).to include("upcoming deadline")
     expect(email.subject).to include("Upcoming deadline")
+    expect(email.body).to include(dm.deadline.to_formatted_s(:long_ordinal))
   end
 end

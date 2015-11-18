@@ -1,4 +1,5 @@
-<%= raw @thread.title %> has an upcoming deadline.
+The thread "<%= raw @thread.title %>" has an upcoming deadline:
+<%= raw @deadline.to_formatted_s(:long_ordinal) %>
 
 You can view the thread at:
 <%= thread_url(@thread) %>

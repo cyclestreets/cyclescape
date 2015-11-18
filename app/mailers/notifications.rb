@@ -118,9 +118,10 @@ class Notifications < ActionMailer::Base
          subject: t('mailers.notifications.upcoming_issue_deadline.subject', issue_title: @issue.title)
   end
 
-  def upcoming_thread_deadline(user, thread)
+  def upcoming_thread_deadline(user, thread, deadline)
     @user = user
     @thread = thread
+    @deadline = deadline
     mail to: @user.name_with_email,
       subject: t('mailers.notifications.upcoming_thread_deadline.subject', thread_title: @thread.title)
   end
