@@ -16,9 +16,11 @@ jQuery ->
     .find(".collapse").hide()
 
   # Apply date selector to all date inputs
-  $(":input.date").datepicker(dateFormat: "DD, dd MM yy").each( ->
-    if $(this).attr('value')
-      $(this).datepicker('setDate', new Date($(this).attr('value').split(' ')[0]))
+  $(":input.date").datetimepicker(
+    dateFormat: "dd-mm-yy"
+    stepMinute: 15,
+    showButtonPanel: false
+    minDateTime: new Date((new(Date)).setMinutes(0))
   )
 
   # Automatic setting of values and visibility from select drop-downs

@@ -4,11 +4,14 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require "reset"
  *= require "jquery-ui/core"
+ *= require "jquery-ui/theme"
  *= require "jquery-ui/autocomplete"
  *= require "jquery-ui/datepicker"
+ *= require "jquery-ui/slider"
  *= require "jquery.tagsinput"
  *= require "formtastic"
  *= require "formtastic_changes"
  *= require "screen"
  *= require "slick"
+ *= require "jquery-ui-timepicker-addon.min"
 */

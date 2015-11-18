@@ -97,7 +97,7 @@
                       %ul.content-icon-list
                         - thread.upcoming_deadline_messages.each do |message|
                           %li.cal
-                            - deadline = message.component.deadline.to_date
+                            - deadline = format_deadline message.component.deadline
                             %h4= l deadline, format: :long
                             %p= message.component.title
                             = render partial: "shared/deadline", locals: {deadline: deadline}

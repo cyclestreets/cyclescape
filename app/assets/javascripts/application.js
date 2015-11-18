@@ -13,6 +13,7 @@
 //= require jquery-ui/tabs
 //= require jquery-ui/datepicker
 //= require jquery-ui/dialog
+//= require jquery-ui/slider
 //= require autocomplete-rails
 //= require knockout
 //= require superbly-tagfield.min
@@ -30,3 +31,5 @@
 //= require thread_scroller
 //= require slick.min
 //= require jquery.tagsinput
+//= require jquery-ui-sliderAccess
+//= require jquery-ui-timepicker-addon.min

@@ -38,7 +38,7 @@
     - if @issue.deadline
       %section.deadline
         %h3= t ".deadline"
-        - deadline = @issue.deadline.to_date
+        - deadline = format_deadline @issue.deadline
         = deadline.to_formatted_s(:long_ordinal)
         = render partial: "shared/deadline", locals: {deadline: deadline}
     - if @issue.external_url
