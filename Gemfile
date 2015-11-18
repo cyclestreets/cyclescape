@@ -18,7 +18,6 @@ gem 'kaminari'
 gem 'kaminari-i18n'
 gem 'rails_autolink'
 gem 'tweet-button'
-gem 'browser'
 # gem 'jquery-turbolinks'
 
 # Back-end gems
