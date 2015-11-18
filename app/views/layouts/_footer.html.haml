@@ -1,3 +1,6 @@
+- if browser.mobile? || browser.tablet?
+  %div(style="text-align: center;")
+    %a(href="#")=t(".top_html")
 %footer#site-footer(role="contentinfo")
   .wrapper
     #footer-top
@@ -21,7 +24,7 @@
             %small= link_to t(".user_guide"), 'http://blog.cyclescape.org/guide/'
           %li
             %small= link_to t(".privacy"), page_path('privacypolicy')
-    %div{:id => 'supportlogos'}
+    %div{id: 'supportlogos'}
 
       %p= t(".osm_credit_html")
       %p= t(".supportlogos_introduction")

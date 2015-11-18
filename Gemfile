@@ -18,7 +18,7 @@ gem 'kaminari'
 gem 'kaminari-i18n'
 gem 'rails_autolink'
 gem 'tweet-button'
-gem 'icalendar'
+gem 'browser'
 # gem 'jquery-turbolinks'
 
 # Back-end gems
@@ -41,6 +41,7 @@ gem 'memoist'
 gem 'excon'
 gem 'paranoia', '~> 2.0'
 gem 'mustache'
+gem 'icalendar'
 
 gem 'grape', github: 'ruby-grape/grape'
 gem 'grape-swagger'

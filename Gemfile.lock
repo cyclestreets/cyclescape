@@ -79,6 +79,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.10)
+    browser (1.0.1)
     builder (3.2.2)
     bullet (4.14.10)
       activesupport (>= 3.0.0)
@@ -439,6 +440,7 @@ DEPENDENCIES
   aasm
   activerecord-postgis-adapter
   annotate (>= 2.5.0)
+  browser
   bullet
   capybara
   coffee-rails (~> 4.1.0)

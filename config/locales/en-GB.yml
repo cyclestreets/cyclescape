@@ -579,6 +579,7 @@
       funding_from: "Funding from %{name}"
       funding_from_and_created_by: "Funding from and created by %{name}"
       planning_application_data: "Planning application data from PlanIt"
+      top_html: Back to top &uarr;
       cyclescape_blog: "Cyclescape blog"
       privacy: Privacy Policy
       user_guide: "User guide"
