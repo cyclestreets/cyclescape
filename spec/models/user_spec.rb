@@ -165,6 +165,7 @@ describe User do
     it 'should set the full name of an existing user if their email is not found' do
       user = User.find_or_invite(attrs[:email], attrs[:full_name])
       expect(user.full_name).to eq(attrs[:full_name])
+      expect(user).to be_approved
     end
 
     it 'should set the local-part as the full name if one is not provided' do

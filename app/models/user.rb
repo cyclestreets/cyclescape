@@ -94,7 +94,7 @@ class User < ActiveRecord::Base
       existing = find_by_email(email_address)
       return existing if existing
       name = email_address.split('@').first if name.nil?
-      User.invite!(full_name: name, email: email_address)
+      User.invite!(full_name: name, email: email_address, approved: true)
     end
 
     def init_user_prefs
