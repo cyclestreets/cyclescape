@@ -672,9 +672,9 @@
       new_user_confirmed:
         subject: "[Cyclescape] Welcome to the site!"
       upcoming_issue_deadline:
-        subject: "[Cyclescape] Upcoming deadline for \"%{issue_title}\""
+        subject: "[Cyclescape] Upcoming deadline/date for \"%{issue_title}\""
       upcoming_thread_deadline:
-        subject: "[Cyclescape] Upcoming deadline for \"%{thread_title}\""
+        subject: "[Cyclescape] Upcoming deadline/date for \"%{thread_title}\""
 
     thread_mailer:
       common:
