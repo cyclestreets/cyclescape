@@ -11,21 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115213919) do
+ActiveRecord::Schema.define(version: 20151129203742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
 
   create_table "deadline_messages", force: :cascade do |t|
-    t.integer  "thread_id",                     null: false
-    t.integer  "message_id",                    null: false
-    t.integer  "created_by_id",                 null: false
-    t.datetime "deadline",                      null: false
-    t.string   "title",             limit: 255, null: false
+    t.integer  "thread_id",                                     null: false
+    t.integer  "message_id",                                    null: false
+    t.integer  "created_by_id",                                 null: false
+    t.datetime "deadline",                                      null: false
+    t.string   "title",             limit: 255,                 null: false
     t.datetime "created_at"
     t.datetime "invalidated_at"
     t.integer  "invalidated_by_id"
+    t.boolean  "all_day",                       default: false, null: false
   end
 
   add_index "deadline_messages", ["created_by_id"], name: "index_deadline_messages_on_created_by_id", using: :btree
@@ -158,16 +159,17 @@ ActiveRecord::Schema.define(version: 20151115213919) do
   add_index "issue_tags", ["issue_id", "tag_id"], name: "index_issue_tags_on_issue_id_and_tag_id", unique: true, using: :btree
 
   create_table "issues", force: :cascade do |t|
-    t.integer  "created_by_id",                                          null: false
-    t.string   "title",         limit: 255,                              null: false
-    t.text     "description",                                            null: false
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.integer  "created_by_id",                                                          null: false
+    t.string   "title",         limit: 255,                                              null: false
+    t.text     "description",                                                            null: false
+    t.datetime "created_at",                                                             null: false
+    t.datetime "updated_at",                                                             null: false
     t.datetime "deleted_at"
     t.geometry "location",      limit: {:srid=>4326, :type=>"geometry"}
     t.string   "photo_uid",     limit: 255
     t.datetime "deadline"
     t.string   "external_url",  limit: 255
+    t.boolean  "all_day",                                                default: false, null: false
   end
 
   add_index "issues", ["created_by_id"], name: "index_issues_on_created_by_id", using: :btree

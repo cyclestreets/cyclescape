@@ -15,9 +15,10 @@ describe Notifications do
         expect(subject.body).to include("#{group.short_name}.example.com")
       end
     end
+
     context 'with an email set' do
       let(:new_user_email) { "big hello to {{full_name}} nothing to {{see}} here" }
-      it 'uses the default' do
+      it 'uses the overridden value' do
         subject = described_class.send(:added_to_group, gm.reload)
         expect(subject.body).to include("big hello to #{user.full_name} nothing to  here")
       end

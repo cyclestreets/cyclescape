@@ -15,13 +15,22 @@ jQuery ->
       $(this).find(".collapse").slideUp()
     .find(".collapse").hide()
 
-  # Apply date selector to all date inputs
-  $(":input.date").datetimepicker(
+  dateTimeOpts = {
     dateFormat: "dd-mm-yy"
-    stepMinute: 15,
+    stepMinute: 15
     showButtonPanel: false
     minDateTime: new Date((new(Date)).setMinutes(0))
-  )
+  }
+
+  # Apply date selector to all date inputs
+  $(":input.date").datetimepicker( dateTimeOpts )
+
+  $(".all-day:input").change ->
+
+    dateTimeOpts.showTimepicker =  !$(@).is(':checked')
+    dateTimeOpts.timeFormat = if($(@).is(':checked')) then "" else "HH:mm"
+
+    $(":input.date").datetimepicker('destroy').datetimepicker(dateTimeOpts)
 
   # Automatic setting of values and visibility from select drop-downs
   AutoSet = {

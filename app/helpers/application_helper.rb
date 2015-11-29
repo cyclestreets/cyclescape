@@ -56,12 +56,4 @@ module ApplicationHelper
   def time_tag_with_title(date_or_time, &block)
     time_tag(date_or_time, title: l(date_or_time, format: :long), &block)
   end
-
-  def format_deadline deadline
-    if deadline.strftime("%H:%M") == "00:00"
-      deadline.to_date
-    else
-      deadline
-    end
-  end
 end

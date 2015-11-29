@@ -6,7 +6,7 @@ class Message::DeadlinesController < Message::BaseController
   end
 
   def permitted_params
-    params.require(:deadline_message).permit :deadline, :title
+    params.require(:deadline_message).permit :deadline, :title, :all_day
   end
 
 end

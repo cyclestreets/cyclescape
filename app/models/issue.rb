@@ -91,6 +91,10 @@ class Issue < ActiveRecord::Base
     write_attribute(:external_url, AttributeNormaliser::URL.new(val).normalise)
   end
 
+  def formatted_deadline
+    all_day ? deadline.to_date : deadline
+  end
+
   protected
 
   # Association callback

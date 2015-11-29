@@ -1,5 +1,5 @@
 <%= raw t ".added" , name: @message.created_by.name %>
 
-<%= l @message.component.deadline, format: :long %>
+<%= l @message.component.formatted_deadline, format: :long %>
 
 <%= raw @message.component.title %>
