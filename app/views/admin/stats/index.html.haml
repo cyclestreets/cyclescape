@@ -1,10 +1,16 @@
 %div= javascript_include_tag "//www.google.com/jsapi", "chartkick"
 
+- if @current_group
+  %p= "Scoped to #{@current_group.name}"
+- else
+  %p For the whole site:
 %div= line_chart(@users.map{ |usr| [ usr.month, usr.count]}, ytitle: 'New Users')
 
 %div= line_chart([{ name: 'New Messages', data: @messages.map{ |mes| [ mes.month, mes.count]}},
   {name: 'Nos. unique contributers', data: @messages.map{ |mes| [mes.month, mes.cids]}} ])
 
+- if @current_group
+  %p For the whole site:
 %div= line_chart([ {name: 'All new Issues', data: @issues.map{ |iss| [iss.month, iss.count]}},
   {name: 'From planning applications', data: @issues.map{ |iss| [iss.month, iss.pa]}}])
 

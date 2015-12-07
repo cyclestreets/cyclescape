@@ -1,8 +1,19 @@
 class Admin::StatsController < ApplicationController
   def index
-    @users = User.select("COUNT(*) AS count, date_trunc('month', created_at) AS month").group('month')
+    users_scope = User.all
+    messages_scope = Message.all
 
-    @messages = Message.select("COUNT(*) AS count,
+    if @current_group
+      users_ids = User.includes(:groups).where(groups: {id: 2}).ids
+      users_scope = users_scope.where(id: users_ids)
+
+      messages_ids = messages_scope.includes(:thread).where(message_threads: {group_id: 2}).ids
+      messages_scope = messages_scope.where(id: messages_ids)
+    end
+
+    @users = users_scope.select("COUNT(*) AS count, date_trunc('month', users.created_at) AS month").group('month')
+
+    @messages = messages_scope.select("COUNT(*) AS count,
                                 date_trunc('month', created_at) AS month,
                                 COUNT(DISTINCT created_by_id) AS cids").group('month')
 
