@@ -110,7 +110,7 @@ class User < ActiveRecord::Base
           new_messages = thread.messages.where("updated_at > ?", 24.hours.ago)
           threads_messages[thread] = new_messages if new_messages.present?
         end
-        ThreadMailer.digest(user, threads_messages).deliver_now
+        ThreadMailer.digest(user, threads_messages).deliver_now if threads_messages.present?
       end
     end
   end

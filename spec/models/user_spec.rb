@@ -531,10 +531,8 @@ describe User do
       let!(:thread)              { create :message_thread, title: 'Nothing much happening' }
       let!(:old_message)         { create :message, updated_at: 1.week.ago, thread: thread }
 
-      it 'should not include empty threads' do
-        expect{described_class.email_digests!}.to change{all_emails.count}.by(1)
-        expect(all_emails.last.body).to_not include(thread.title)
-        expect(all_emails.last.body).to include('on 0 threads')
+      it 'should not send an email' do
+        expect{described_class.email_digests!}.to change{all_emails.count}.by(0)
       end
     end
   end
