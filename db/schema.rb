@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129203742) do
+ActiveRecord::Schema.define(version: 20151207213000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20151129203742) do
     t.datetime "invalidated_at"
     t.integer  "invalidated_by_id"
     t.boolean  "all_day",                       default: false, null: false
+    t.datetime "updated_at"
   end
 
   add_index "deadline_messages", ["created_by_id"], name: "index_deadline_messages_on_created_by_id", using: :btree
@@ -34,13 +35,15 @@ ActiveRecord::Schema.define(version: 20151129203742) do
   add_index "deadline_messages", ["thread_id"], name: "index_deadline_messages_on_thread_id", using: :btree
 
   create_table "document_messages", force: :cascade do |t|
-    t.integer "thread_id",                 null: false
-    t.integer "message_id",                null: false
-    t.integer "created_by_id",             null: false
-    t.string  "title",         limit: 255, null: false
-    t.string  "file_uid",      limit: 255
-    t.string  "file_name",     limit: 255
-    t.integer "file_size"
+    t.integer  "thread_id",                 null: false
+    t.integer  "message_id",                null: false
+    t.integer  "created_by_id",             null: false
+    t.string   "title",         limit: 255, null: false
+    t.string   "file_uid",      limit: 255
+    t.string   "file_name",     limit: 255
+    t.integer  "file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "document_messages", ["created_by_id"], name: "index_document_messages_on_created_by_id", using: :btree
@@ -176,20 +179,24 @@ ActiveRecord::Schema.define(version: 20151129203742) do
   add_index "issues", ["location"], name: "index_issues_on_location", using: :gist
 
   create_table "library_documents", force: :cascade do |t|
-    t.integer "library_item_id",             null: false
-    t.string  "title",           limit: 255, null: false
-    t.string  "file_uid",        limit: 255
-    t.string  "file_name",       limit: 255
-    t.integer "file_size"
+    t.integer  "library_item_id",             null: false
+    t.string   "title",           limit: 255, null: false
+    t.string   "file_uid",        limit: 255
+    t.string   "file_name",       limit: 255
+    t.integer  "file_size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "library_documents", ["library_item_id"], name: "index_library_documents_on_library_item_id", using: :btree
 
   create_table "library_item_messages", force: :cascade do |t|
-    t.integer "thread_id",       null: false
-    t.integer "message_id",      null: false
-    t.integer "library_item_id", null: false
-    t.integer "created_by_id"
+    t.integer  "thread_id",       null: false
+    t.integer  "message_id",      null: false
+    t.integer  "library_item_id", null: false
+    t.integer  "created_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "library_item_messages", ["created_by_id"], name: "index_library_item_messages_on_created_by_id", using: :btree
@@ -220,10 +227,12 @@ ActiveRecord::Schema.define(version: 20151129203742) do
   add_index "library_items", ["location"], name: "index_library_items_on_location", using: :gist
 
   create_table "library_notes", force: :cascade do |t|
-    t.integer "library_item_id",                 null: false
-    t.string  "title",               limit: 255
-    t.text    "body",                            null: false
-    t.integer "library_document_id"
+    t.integer  "library_item_id",                 null: false
+    t.string   "title",               limit: 255
+    t.text     "body",                            null: false
+    t.integer  "library_document_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "library_notes", ["library_document_id"], name: "index_library_notes_on_library_document_id", using: :btree
@@ -237,6 +246,7 @@ ActiveRecord::Schema.define(version: 20151129203742) do
     t.string   "title",         limit: 255
     t.text     "description"
     t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "link_messages", ["created_by_id"], name: "index_link_messages_on_created_by_id", using: :btree
@@ -317,6 +327,7 @@ ActiveRecord::Schema.define(version: 20151129203742) do
     t.string   "caption",       limit: 255
     t.text     "description"
     t.datetime "created_at",                null: false
+    t.datetime "updated_at"
   end
 
   add_index "photo_messages", ["created_by_id"], name: "index_photo_messages_on_created_by_id", using: :btree
@@ -436,11 +447,13 @@ ActiveRecord::Schema.define(version: 20151129203742) do
   add_index "user_prefs", ["zz_enable_email"], name: "index_user_prefs_on_zz_enable_email", using: :btree
 
   create_table "user_profiles", force: :cascade do |t|
-    t.integer "user_id",                                    null: false
-    t.string  "picture_uid", limit: 255
-    t.string  "website",     limit: 255
-    t.text    "about"
-    t.string  "visibility",  limit: 255, default: "public", null: false
+    t.integer  "user_id",                                    null: false
+    t.string   "picture_uid", limit: 255
+    t.string   "website",     limit: 255
+    t.text     "about"
+    t.string   "visibility",  limit: 255, default: "public", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", using: :btree
