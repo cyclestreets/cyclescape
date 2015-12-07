@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :groups
+    resources :stats, only: :index
     resources :message_moderations, only: :index
     resources :users do
       put :approve, on: :member

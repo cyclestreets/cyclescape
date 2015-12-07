@@ -1,0 +1,10 @@
+%div= javascript_include_tag "//www.google.com/jsapi", "chartkick"
+
+%div= line_chart(@users.map{ |usr| [ usr.month, usr.count]}, ytitle: 'New Users')
+
+%div= line_chart([{ name: 'New Messages', data: @messages.map{ |mes| [ mes.month, mes.count]}},
+  {name: 'Nos. unique contributers', data: @messages.map{ |mes| [mes.month, mes.cids]}} ])
+
+%div= line_chart(@issues.map{ |iss| [iss.month, iss.count]}, ytitle: 'New Issues')
+
+%div= line_chart(@message_types.map { |name, val| {name: name, data: val.map{ |val| [val.month, val.count] } } })

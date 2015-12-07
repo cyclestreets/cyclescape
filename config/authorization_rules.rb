@@ -13,6 +13,7 @@ authorization do
     has_permission_on :admin_user_locations, to: [:manage, :geometry, :combined_geometry]
     has_permission_on :admin_home, to: :view
     has_permission_on :admin_message_moderations, to: :view
+    has_permission_on :admin_stats, to: :view
     has_permission_on :issues, to: [:edit, :update, :destroy]
     has_permission_on :library_documents, :library_notes, to: [:edit, :update]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :manage
