@@ -5,6 +5,7 @@
 %div= line_chart([{ name: 'New Messages', data: @messages.map{ |mes| [ mes.month, mes.count]}},
   {name: 'Nos. unique contributers', data: @messages.map{ |mes| [mes.month, mes.cids]}} ])
 
-%div= line_chart(@issues.map{ |iss| [iss.month, iss.count]}, ytitle: 'New Issues')
+%div= line_chart([ {name: 'All new Issues', data: @issues.map{ |iss| [iss.month, iss.count]}},
+  {name: 'From planning applications', data: @issues.map{ |iss| [iss.month, iss.pa]}}])
 
 %div= line_chart(@message_types.map { |name, val| {name: name, data: val.map{ |val| [val.month, val.count] } } })
