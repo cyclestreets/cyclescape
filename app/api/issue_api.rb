@@ -47,7 +47,7 @@ module IssueApi
       optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
       optional :tags, type: Array, desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]', coerce_with: JSON
       optional :group, type: String, desc: 'Return only issues from area of group given by its short name, e.g. "london"'
-      optional :order, type: String, desc: 'Order of returned issues. Current working parameters are: "vote_count", "created_at"'
+      optional :order, type: String, desc: 'Order of returned issues. Current working parameters are: "vote_count", "created_at", "start_at", "size"'
       optional :end_date, type: Date, desc: 'No issues after the end date are returned'
       optional :start_date, type: Date, desc: 'No issues before the start date are returned'
     end
@@ -64,6 +64,8 @@ module IssueApi
         scope = scope.plusminus_tally
       when 'created_at', 'start_at'
         scope = scope.order(params[:order] => :desc)
+      when 'size'
+        scope = scope.order_by_size
       end
       scope = scope.intersects_not_covered(bbox_from_string(params[:bbox], Issue.rgeo_factory).to_geometry) if params[:bbox].present?
       scope = scope.where_tag_names_in(params[:tags]) if params[:tags]

@@ -22,6 +22,10 @@ module Locatable
     def rgeo_factory
       return RGeo::Geos.factory(srid: 4326)
     end
+
+    def order_by_size
+      order('ST_Area(location) DESC')
+    end
   end
 
   # Define an approximate centre of the issue, for convenience.
