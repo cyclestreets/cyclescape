@@ -25,6 +25,11 @@ form.guided {
         position: absolute;
         left: 20px;
       }
+      fieldset.inputs {
+        :before{
+          content: initial;
+        }
+      }
       &.full-width {
         width: 860px;
         padding-right: 40px;
