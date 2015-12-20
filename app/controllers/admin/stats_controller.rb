@@ -21,11 +21,10 @@ class Admin::StatsController < ApplicationController
       "COUNT(issues.*) AS count, date_trunc('month', issues.created_at) AS month,
       COUNT(planning_applications.*) AS pa").group(:month)
 
-    @message_types = [DeadlineMessage, LinkMessage, PhotoMessage, StreetViewMessage].
+    @message_types = MessageComponent.descendants.
       each_with_object({}) do |klass, hsh|
-      hsh[klass.model_name.human] = klass.select("COUNT(*) AS count,
-                           date_trunc('month', created_at) AS month").group(:month)
+      hsh[klass.model_name.human] = klass.joins(:message).select("COUNT(*) AS count,
+                         date_trunc('month', messages.created_at) AS month").group(:month)
     end
-
   end
 end
