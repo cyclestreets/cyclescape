@@ -11,15 +11,15 @@ class Admin::StatsController < ApplicationController
       messages_scope = messages_scope.where(id: messages_ids)
     end
 
-    @users = users_scope.select("COUNT(*) AS count, date_trunc('month', users.created_at) AS month").group('month')
+    @users = users_scope.select("COUNT(*) AS count, date_trunc('month', users.created_at) AS month").group('month').order('month')
 
     @messages = messages_scope.select("COUNT(*) AS count,
                                 date_trunc('month', created_at) AS month,
                                 COUNT(DISTINCT created_by_id) AS cids").group('month')
 
-    @issues = Issue.joins("LEFT OUTER JOIN planning_applications ON planning_applications.issue_id = issues.id").
-      select("COUNT(issues.*) AS count, date_trunc('month', issues.created_at) AS month,
-    COUNT(planning_applications.*) AS pa").group(:month)
+    @issues = Issue.joins("LEFT OUTER JOIN planning_applications ON planning_applications.issue_id = issues.id").select(
+      "COUNT(issues.*) AS count, date_trunc('month', issues.created_at) AS month,
+      COUNT(planning_applications.*) AS pa").group(:month)
 
     @message_types = [DeadlineMessage, LinkMessage, PhotoMessage, StreetViewMessage].
       each_with_object({}) do |klass, hsh|
