@@ -206,7 +206,6 @@ class MessageThread < ActiveRecord::Base
     issue_id
   end
 
-
   def message_count
     messages.count
   end
@@ -216,7 +215,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def latest_activity_at
-    messages.empty? ? updated_at : messages.last.updated_at
+    messages.empty? ? updated_at : messages.maximum('messages.updated_at')
   end
 
   def latest_activity_at_to_i
