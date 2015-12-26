@@ -750,7 +750,7 @@
     show:
       are_you_sure: "Are you sure?"
       back: "Back"
-      closed_html: Thread has been closed by %{by} at %{at}
+      closed_html: Thread has been closed by %{by} %{at} ago
       open: Re-open this thread
       edit: "Edit this thread"
       destroy: "Delete this thread"
