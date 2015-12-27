@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery
   before_filter :ensure_proper_protocol
   before_filter :no_disabled_users
   before_filter :set_auth_user
