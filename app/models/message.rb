@@ -33,7 +33,7 @@ class Message < ActiveRecord::Base
   before_validation :set_public_token, on: :create
 
   before_create :set_in_reply_to
-  after_save    :update_thread_search
+  after_commit  :update_search
 
   scope :recent,     -> { order('created_at DESC').limit(3) }
   scope :approved,   -> { where(status: [nil, 'approved']) }
@@ -90,12 +90,13 @@ class Message < ActiveRecord::Base
     component ? "#{body} #{component.searchable_text}" : body
   end
 
-  def update_thread_search
-    SearchUpdater.update_thread(thread) if thread
-    true
-  end
 
   protected
+
+  def update_search
+    SearchUpdater.update_type(thread, :process_thread) if thread
+    true
+  end
 
   def init_blank_body
     self.body ||= ''

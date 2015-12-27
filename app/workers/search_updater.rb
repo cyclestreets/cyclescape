@@ -8,13 +8,17 @@ class SearchUpdater
     send(method, *args)
   end
 
-  def self.update_thread(thread)
-    Resque.enqueue(SearchUpdater, :process_thread, thread.id)
+  def self.update_type(item, type)
+    Resque.enqueue(SearchUpdater, type, item.id)
   end
 
   def self.process_thread(thread_id)
     thread = MessageThread.find(thread_id)
     Sunspot.index thread
     Sunspot.index thread.issue if thread.issue
+  end
+
+  def self.process_issue(issue_id)
+    Sunspot.index Issue.find(issue_id)
   end
 end

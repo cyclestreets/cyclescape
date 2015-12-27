@@ -24,7 +24,7 @@ class Issue < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
-  searchable do
+  searchable auto_index: false do
     text :title, :description, :tags_string
     time :latest_activity_at, stored: true, trie: true
     latlon(:location) { Sunspot::Util::Coordinates.new(centre.y, centre.x) }
@@ -52,6 +52,8 @@ class Issue < ActiveRecord::Base
   scope :by_most_recent, -> { order('created_at DESC') }
   scope :preloaded,  ->      { includes(:created_by, :tags) }
   scope :created_by, ->(user) { where(created_by_id: user) }
+
+  after_commit :update_search
 
   class << self
     def after_date(date)
@@ -106,5 +108,10 @@ class Issue < ActiveRecord::Base
   def generate_photo_path
     hash = Digest::SHA1.file(photo.path).hexdigest
     {path: "issue_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
+  end
+
+  def update_search
+    SearchUpdater.update_type(self, :process_issue)
+    true
   end
 end

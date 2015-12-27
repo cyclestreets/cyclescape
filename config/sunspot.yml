@@ -7,7 +7,8 @@ production: &solr_prod
     memory: 512M
     read_timeout: 20
     open_timeout: 1
-  auto_index_callback: after_commit
+  auto_commit_after_request: false
+  auto_commit_after_delete_request: true
   auto_remove_callback: after_commit
 
 staging:
@@ -22,7 +23,8 @@ development:
     log_level: INFO
     memory: 512M
     path: /solr/development
-  auto_index_callback: after_commit
+  auto_commit_after_request: false
+  auto_commit_after_delete_request: true
   auto_remove_callback: after_commit
 
 test:
