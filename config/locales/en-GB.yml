@@ -670,7 +670,7 @@
       new_group_request:
         subject: "[Cyclescape] New Group \"%{group_name}\" has been requested by \"%{user_name}\""
       new_user_confirmed:
-        subject: "[Cyclescape] Welcome to the site!"
+        subject: "[Cyclescape] Welcome to Cyclescape"
       upcoming_issue_deadline:
         subject: "[Cyclescape] Upcoming deadline/date for \"%{issue_title}\""
       upcoming_thread_deadline:
