@@ -20,6 +20,9 @@ class GroupProfile < ActiveRecord::Base
   include Locatable
   dragonfly_accessor :picture
 
+  scope :with_location, -> { where.not(location: nil) }
+  scope :ordered,       -> { order(created_at: :desc) }
+
   def picture_thumbnail
     picture.thumb('330x192#')
   end

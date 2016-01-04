@@ -27,7 +27,7 @@ class MessageThread < ActiveRecord::Base
   include FakeDestroy
   include Taggable
 
-  searchable do
+  searchable auto_index: false do
     text :title, :messages_text, :tags_string
     integer :group_id
     string :privacy
@@ -283,7 +283,7 @@ class MessageThread < ActiveRecord::Base
       ThreadNotifier.notify_subscribers self, :new_message, first_message
 
       NewThreadNotifier.notify_new_thread self
-      SearchUpdater.update_thread(self)
+      SearchUpdater.update_type(self, :process_thread)
     end
     true
   end

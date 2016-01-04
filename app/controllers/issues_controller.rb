@@ -71,7 +71,7 @@ class IssuesController < ApplicationController
 
   def all_geometries
     bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
-    issues = Issue.order('created_at DESC').limit(50).includes(:created_by)
+    issues = Issue.by_most_recent.limit(50).includes(:created_by)
     issues = issues.intersects_not_covered(bbox.to_geometry) if bbox
 
     # TODO refactor this into decorater

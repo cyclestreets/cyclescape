@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe GroupProfile do
   describe 'to be valid' do
-    subject { create(:group_profile) }
+    subject { build(:group_profile) }
+
     context 'picture' do
       subject { create(:group_profile, :with_picture) }
 
@@ -45,6 +46,21 @@ describe GroupProfile do
       subject.loc_json = 'Garbage'
       expect(subject).to be_valid
       expect(subject.location).to be_nil
+    end
+  end
+
+  describe 'scopes' do
+    let!(:with_location) { create :group_profile, created_at: 2.hours.ago }
+    let!(:without_location) { create :group_profile, location: nil }
+
+    it 'with_location' do
+      expect(described_class.with_location).to eq([with_location])
+    end
+
+    it 'ordered' do
+      scope = described_class.ordered
+      expect(scope.first).to eq(without_location)
+      expect(scope.last).to eq(with_location)
     end
   end
 end

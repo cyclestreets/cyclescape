@@ -20,10 +20,11 @@ class Group::IssuesController < IssuesController
   def all_geometries
     if params[:bbox]
       bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
-      issues = Issue.intersects(current_group.profile.location).intersects_not_covered(bbox.to_geometry).order('created_at DESC').limit(50)
+      issues = Issue.intersects(current_group.profile.location).intersects_not_covered(bbox.to_geometry)
     else
-      issues = Issue.intersects(current_group.profile.location).order('created_at DESC').limit(50)
+      issues = Issue.intersects(current_group.profile.location)
     end
+    issues = issues.by_most_recent.limit(50)
     factory = RGeo::GeoJSON::EntityFactory.new
     collection = factory.feature_collection(issues.includes(:created_by).map { | issue | issue_feature(IssueDecorator.decorate(issue)) })
     respond_to do |format|
