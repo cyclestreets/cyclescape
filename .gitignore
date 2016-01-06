@@ -17,3 +17,4 @@ routes.txt
 public/system
 .DS_Store
 resque_web.url
+.idea/
