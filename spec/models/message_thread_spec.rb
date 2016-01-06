@@ -315,4 +315,19 @@ describe MessageThread do
     it { expect(subject.to_icals[0].description).to include('Important dates') }
     it { expect(subject.to_icals[0].dtstart.to_s).to eq(Icalendar::Values::Date.new(deadline.deadline).to_s) }
   end
+
+  describe 'subscriptions' do
+    let(:user) { create :user }
+
+    it 'subscribes creator' do
+      thread = create :message_thread, created_by: user
+      expect(thread.reload.subscribers).to eq [user]
+    end
+
+    it 'subscribes creator' do
+      message_to = create :user
+      thread = create :message_thread, created_by: user, user: message_to
+      expect(thread.reload.subscribers).to match_array [user, message_to]
+    end
+  end
 end

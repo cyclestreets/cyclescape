@@ -2,6 +2,7 @@
   .user-dashboard#dashboard-tabs
     %ul.tabs.styled-tabs.with-history
       %li= link_to t(".my_threads"), "#my-threads"
+      %li= link_to t(".private_messages"), "#private-messages" if current_user.private_threads.present?
       %li= link_to t(".issues_nearby"), "#issues-nearby"
       %li= link_to t(".my_priorities"), "#my-priorities"
       %li= link_to t(".deadlines"), "#deadlines"
@@ -43,6 +44,21 @@
                     = link_to_profile thread.group, class: "group-link"
                     %div
                       %h4= link_to thread.title, thread_path(thread)
+      - if current_user.private_threads.present?
+        #private-messages
+          %section.threads
+            %h2= t '.private_messages'
+            %table.dashboard-threads
+              %tbody
+                - current_user.private_threads.each do |thread|
+                  %tr
+                    %td.title
+                      %h4= link_to thread.title, thread_path(thread)
+                    %td.activity
+                      = t '.between_html', creator: link_to_profile(thread.created_by), message_to: link_to_profile(thread.user)
+                    %td.activity
+                      = time_ago_in_words thread.latest_message.created_at
+
       #issues-nearby
         %section.issues
           %h2= t ".issues_in_your_area"

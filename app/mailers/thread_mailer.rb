@@ -22,7 +22,7 @@ class ThreadMailer < ActionMailer::Base
                                      content: @message.component.to_ical.to_ical }
     end
     mail(to: subscriber.name_with_email,
-         subject: t('mailers.thread_mailer.common.subject', title: @thread.title, count: @thread.message_count),
+         subject: t('mailers.thread_mailer.common.subject', title: @thread.title, count: @thread.messages.count),
          from: user_notification_address(message.created_by),
          references: message_chain(@message.in_reply_to, @thread),
          message_id: message_address(@message),

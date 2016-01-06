@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207213000) do
+ActiveRecord::Schema.define(version: 20160105212617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -290,12 +290,14 @@ ActiveRecord::Schema.define(version: 20151207213000) do
     t.string   "public_token",  limit: 255
     t.string   "status"
     t.boolean  "closed",                    default: false, null: false
+    t.integer  "user_id"
   end
 
   add_index "message_threads", ["created_by_id"], name: "index_message_threads_on_created_by_id", using: :btree
   add_index "message_threads", ["group_id"], name: "index_message_threads_on_group_id", using: :btree
   add_index "message_threads", ["issue_id"], name: "index_message_threads_on_issue_id", using: :btree
   add_index "message_threads", ["public_token"], name: "index_message_threads_on_public_token", unique: true, using: :btree
+  add_index "message_threads", ["user_id"], name: "index_message_threads_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.integer  "created_by_id",              null: false
@@ -348,10 +350,6 @@ ActiveRecord::Schema.define(version: 20151207213000) do
     t.string   "authority_name",          limit: 255
     t.date     "start_date"
     t.integer  "hide_votes_count",                                                 default: 0
-    t.string   "link"
-    t.datetime "end_date"
-    t.datetime "when_updated"
-    t.datetime "api_get"
     t.boolean  "relevant",                                                         default: true, null: false
   end
 
@@ -518,4 +516,5 @@ ActiveRecord::Schema.define(version: 20151207213000) do
 
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
+  add_foreign_key "message_threads", "users"
 end

@@ -14,6 +14,8 @@
           %p= t ".private_to_committee_message", group: @thread.group.name
         - elsif @thread.private_to_group?
           %p= t ".private_to_group_message", group: @thread.group.name
+        - elsif @thread.user
+          %p= t ".private_html", creator: link_to_profile(@thread.created_by), message_to: link_to_profile(@thread.user.name)
         - else
           %p= t ".public_message"
       %section.tags

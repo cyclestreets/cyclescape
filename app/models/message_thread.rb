@@ -41,11 +41,12 @@ class MessageThread < ActiveRecord::Base
     end
   end
 
-  ALLOWED_PRIVACY = %w(public group committee)
+  ALLOWED_PRIVACY = %w(public group committee private)
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :group, inverse_of: :threads
   belongs_to :issue
+  belongs_to :user, inverse_of: :private_threads
   has_many :messages, -> { order('created_at ASC') }, foreign_key: 'thread_id', autosave: true, inverse_of: :thread
   has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: 'ThreadSubscription', foreign_key: 'thread_id', inverse_of: :thread
   has_many :subscribers, through: :subscriptions, source: :user
@@ -66,6 +67,7 @@ class MessageThread < ActiveRecord::Base
   default_scope { where(deleted_at: nil) }
 
   before_validation :set_public_token, on: :create
+  after_create      :add_subscribers
 
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
@@ -82,11 +84,15 @@ class MessageThread < ActiveRecord::Base
 
   class << self
     def non_committee_privacies_map
-      (ALLOWED_PRIVACY - ['committee']).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
+      (ALLOWED_PRIVACY - %w(committee private)).map do |n|
+        [I18n.t("thread_privacy_options.#{n.to_s}"), n]
+      end
     end
 
     def privacies_map
-      ALLOWED_PRIVACY.map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
+      (ALLOWED_PRIVACY - ['private']).map do |n|
+        [I18n.t("thread_privacy_options.#{n.to_s}"), n]
+      end
     end
 
     def with_messages_from(user)
@@ -206,10 +212,6 @@ class MessageThread < ActiveRecord::Base
     issue_id
   end
 
-  def message_count
-    messages.count
-  end
-
   def first_message
     messages.order('id').first
   end
@@ -286,6 +288,11 @@ class MessageThread < ActiveRecord::Base
       SearchUpdater.update_type(self, :process_thread)
     end
     true
+  end
+
+  def add_subscribers
+    subscriptions.create( user: created_by )
+    subscriptions.create( user: user ) if user
   end
 
 end

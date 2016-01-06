@@ -57,10 +57,11 @@ class User < ActiveRecord::Base
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
   has_many :subscribed_threads, -> { where('thread_subscriptions.deleted_at is NULL') },
     through: :thread_subscriptions, source: :thread
-  has_many :thread_priorities, class_name: 'UserThreadPriority', inverse_of: :thread
+  has_many :thread_priorities, class_name: 'UserThreadPriority', inverse_of: :user
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
-  has_many :thread_views, inverse_of: :thread
+  has_many :thread_views, inverse_of: :user
   has_many :site_comments
+  has_many :private_threads, class_name: 'MessageThread', inverse_of: :user
   has_one :profile, class_name: 'UserProfile'
   has_one :prefs, class_name: 'UserPref'
   belongs_to :remembered_group, class_name: 'Group'

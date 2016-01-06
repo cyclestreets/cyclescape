@@ -161,6 +161,8 @@
       issues_lower: "issues"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
+      private_messages: "Private Messages"
+      between_html: "between %{creator} and %{message_to}."
       new_group_thread: "Start a new group thread"
       my_issues_nearby_introduction_html: "Issues in the %{areas_you_are_watching_link} are shown below, most recent first."
       my_issues_nearby_issues_pointer_html: "(You can also %{browse_all_other_issues_link} from outside your area(s).)"
@@ -756,6 +758,7 @@
       destroy: "Delete this thread"
       private_to_committee_message: "Private: Only committee members of %{group} can view and post messages to this thread."
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
+      private_html: "Private Message between %{creator} and %{message_to}."
       public_message: "Public: Everyone can view this thread and post messages."
     subscribe_panel:
       subscribed: "You are following this thread."
@@ -1065,6 +1068,7 @@
         user_profile: "User Profile"
         website_label: "Web site:"
         full_name: Full Name
+        send_private_message: Send private message
       update:
         success: "Profile Updated"
   helpers:
