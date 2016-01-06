@@ -6,6 +6,7 @@ class Issue::MessageThreadsController < MessageThreadsController
 
   def new
     @thread = issue.threads.build
+    set_page_title nil, issue: issue.title
     if current_group
       @thread.group = current_group
       @thread.privacy = current_group.default_thread_privacy
