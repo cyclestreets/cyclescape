@@ -380,6 +380,7 @@
       send_some_feedback: "send some feedback"
       title: "Groups directory"
       group_request: Request New Group
+      no_results_found: "No results found"
     compact:
       already_member: "You are already a member of this group"
       no_location: "This group doesn't have a location yet."
