@@ -17,7 +17,7 @@
         email: Emailová adresa
         message: Zpráva
         default_thread_privacy: Výchozí viditelnost
-        submit: "Požádat o vytvoření místnní skupiny"
+        submit: "Požádat o vytvoření místní skupiny"
       group_profile:
         description: "Popis"
         joining_instructions: "Instrukce pro nové členy"
@@ -37,6 +37,7 @@
         edit: *labels_issue_new
         update: *labels_issue_new
         tags_string: "Štítky"
+        all_day: Celý den
       library_document:
         file: "Dokument"
         tags_string: "Štítky"
@@ -55,8 +56,11 @@
         title: "Titulek"
       deadline_message:
         title: "Titulek"
+        all_day: Celý den
       photo_message:
         photo: "Fotografie"
+        caption: "Nadpis"
+      street_view_message:
         caption: "Nadpis"
       message:
         body: "Zpráva"
@@ -80,6 +84,7 @@
         category: "Typ oblasti"
       user:
         new: &labels_user_new
+          bicycle_wheels: Kola na jízdním kole
           remember_me: "Zapamatovat si mě"
         create: *labels_user_new
         edit: &labels_user_edit
@@ -92,12 +97,15 @@
         remove_picture: "Odstranit obrázek"
         website: "Webová stránka"
         about: "O uživateli"
+        visibility: Viditelnost
+      group_membership_request:
+        message: Zpráva
     hints:
       user:
         new: &hints_user_new
           display_name: "Volitelné - může být přezdívka nebo pseudonym, který bude zobrazen ostatním uživatelům místo plného jména."
           full_name: "Prosím poskytněte své plné jméno. Pokud požádáte o členství v místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny."
-          bicycle_wheels: "Chcete-li pomoci zastavit automatizované znamení-up zadejte částku (v číslech) kol na šesti kolech"
+          bicycle_wheels: "Jako ochranu proti automatickému přihlášení prosím zadejte počet kol na šesti jízdních kolech (číslem)"
         edit:
           password: "Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo."
           current_password: "Prosím potvrďte vaše stávající heslo, abyste mohli udělat změny na této stránce."
@@ -118,6 +126,7 @@
         membership_secretary: "Volitelně vyberte správce členství ve skupině, který bude emailem dostávat upozornění na nové žádosti o členství. Pokud zanecháte pole prázdné, tak budou upozornění přicházet na email místní skupiny."
       group_profile:
         joining_instructions: "Instrukce, které jsou ukázány lidem, kteří se chtějí zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné."
+        new_user_email: "Tento text bude odeslán každému novému členovy skupiny, řetězec {{full_name}} bude nahrazen plným jménem uživatele."
         picture: "Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů"
       issue:
         new: &hints_issue_new
@@ -131,6 +140,13 @@
       message_thread:
         privacy: "Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno."
         issue: "Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud k žádným, toto vlákno bude vytvořeno jako všeobecná diskuze."
+    placeholders:
+      issue:
+        external_url: http://www.napriklad.cz
+      group_membership_request:
+        message: Prosím přidejte mě do místní skupiny Cyklisté sobě.
+      group_profile:
+        new_user_email: "Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny Cyklisté sobě na portálu http://www.cyklistesobe.cz"
     actions:
       create: "Vytvořit %{model}"
       update: "Uložit"
@@ -171,6 +187,8 @@
         create: "Přidat fotografii"
       site_comment:
         create: "Zaslat zpětnou vazbu"
+      street_view_message:
+        create: "Přidat Street view"
       user:
         create: "Registrovat se"
         update: "Upravit účet"

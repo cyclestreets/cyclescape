@@ -1,0 +1,9 @@
+Diskuzní vlákno "<%= raw @thread.title %>" má nastávající termín:
+<%= raw @deadline.to_formatted_s(:long_ordinal) %>
+
+Diskuzi můžete vidět na:
+<%= thread_url(@thread) %>
+
+--------
+
+Pokud chcete přestat sledovat toto diskuzní vlákno, navštivte odkaz výše a klikněte na 'přestat sledovat toto vlákno'.
