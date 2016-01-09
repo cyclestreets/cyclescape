@@ -286,6 +286,7 @@ describe User do
       public_user.profile.update visibility: 'public'
 
       expect(subject.can_view(User.all)).to match_array([subject, private_user_in_same_group, public_user])
+      expect(subject.can_view(User.none)).to match_array([])
     end
   end
 
