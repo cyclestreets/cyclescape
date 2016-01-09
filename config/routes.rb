@@ -132,7 +132,8 @@ Rails.application.routes.draw do
       resource :profile
       resource :prefs, only: [:edit, :update]
     end
-    resource :private_messages, only: [:new, :create], controller: 'users/private_message_threads'
+    resources :private_messages, only: [:new, :create, :index],
+      controller: 'users/private_message_threads'
   end
 
   namespace :user do

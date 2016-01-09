@@ -161,8 +161,6 @@
       issues_lower: "issues"
       involved_threads: "Involved Threads"
       issues_in_your_area: "Issues in your area"
-      private_messages: "Private Messages"
-      between_html: "between %{creator} and %{message_to}."
       new_group_thread: "Start a new group thread"
       my_issues_nearby_introduction_html: "Issues in the %{areas_you_are_watching_link} are shown below, most recent first."
       my_issues_nearby_issues_pointer_html: "(You can also %{browse_all_other_issues_link} from outside your area(s).)"
@@ -563,6 +561,7 @@
       sign_out: "Sign out"
       sign_in: "Sign in"
       sign_up: "Sign up"
+      private_messages: "Private Messages"
       feedback: "Feedback"
       home: "Home"
       issues: "Issues"
@@ -1071,6 +1070,11 @@
         send_private_message: Send private message
       update:
         success: "Profile Updated"
+  users:
+    private_message_threads:
+      index:
+        between_html: "between %{creator} and %{message_to}."
+        private_messages: 'Private Messages'
   helpers:
     page_entries_info:
       more_pages:

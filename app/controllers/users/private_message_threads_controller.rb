@@ -1,6 +1,6 @@
 # Note inheritance
 class Users::PrivateMessageThreadsController < MessageThreadsController
-  before_filter :load_user
+  before_filter :load_user, only: [:create, :new]
   filter_access_to :create, :new, attribute_check: true, model: User
 
   def new
@@ -13,6 +13,10 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
       permitted_params.merge(created_by: current_user, privacy: 'private')
     )
     super
+  end
+
+  def index
+    @private_threads = current_user.private_threads
   end
 
   private

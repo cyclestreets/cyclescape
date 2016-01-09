@@ -152,6 +152,7 @@ authorization do
     has_permission_on :users_private_message_threads, to: [:new, :create] do
       if_permitted_to :send_private_message
     end
+    has_permission_on :users_private_message_threads, to: [:index]
   end
 
   role :guest do
