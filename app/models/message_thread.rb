@@ -58,11 +58,13 @@ class MessageThread < ActiveRecord::Base
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
   has_one :latest_message, -> { order('created_at DESC') }, foreign_key: 'thread_id',  class_name: 'Message'
 
-  scope :is_public,     -> { where(privacy: 'public') }
-  scope :with_issue,    -> { where.not(issue_id: nil) }
-  scope :without_issue, -> { where(issue_id: nil) }
-  scope :approved,      -> { where(status: 'approved') }
-  scope :mod_queued,    -> { where(status: 'mod_queued') }
+  scope :is_public,        -> { where(privacy: 'public') }
+  scope :with_issue,       -> { where.not(issue_id: nil) }
+  scope :without_issue,    -> { where(issue_id: nil) }
+  scope :approved,         -> { where(status: 'approved') }
+  scope :mod_queued,       -> { where(status: 'mod_queued') }
+  scope :private_for, ->(usr) { where(privacy: 'private').
+                                where("created_by_id = ? OR user_id = ?", usr.id, usr.id) }
 
   default_scope { where(deleted_at: nil) }
 

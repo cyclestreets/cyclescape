@@ -16,7 +16,7 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
   end
 
   def index
-    @private_threads = current_user.private_threads
+    @private_threads = MessageThread.private_for(current_user)
   end
 
   private

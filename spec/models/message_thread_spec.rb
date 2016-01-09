@@ -29,6 +29,16 @@ describe MessageThread do
     expect(subject.errors_on(:base)).to eq([I18n.t('activerecord.errors.models.message_thread.attributes.base.disabled')])
   end
 
+  describe 'scopes' do
+    let(:user) { create(:user) }
+    let!(:thread_from) { create(:message_thread, privacy: 'private', created_by: user) }
+    let!(:thread_to)   { create(:message_thread, privacy: 'private', user: user) }
+
+    it 'has private_for' do
+      expect(described_class.private_for(user)).to match_array [thread_from, thread_to]
+    end
+  end
+
   describe 'privacy' do
     subject { MessageThread.new }
 

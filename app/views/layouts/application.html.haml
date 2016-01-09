@@ -30,7 +30,7 @@
           %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
           - if current_user
             %li.name= link_to current_user.name, current_user_profile_path
-            - if current_user.private_threads.present?
+            - if MessageThread.private_for(current_user).present?
               %li= link_to '', user_private_messages_path(current_user), class: 'private-messages', title: t('.private_messages')
             %li.sign-out= link_to t(".sign_out"), destroy_user_session_path, method: "delete"
           - else
