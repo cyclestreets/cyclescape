@@ -71,6 +71,13 @@ describe User do
       subject.invite!
       expect(subject).to have(0).errors_on(:password)
     end
+
+    it 'must not have <...> style email' do
+      subject.email = '<someone@example.com>'
+      expect(subject).to have(1).errors_on(:email)
+      subject.email = 'someone@example.com'
+      expect(subject).to have(0).errors_on(:email)
+    end
   end
 
   describe 'with admin role' do
