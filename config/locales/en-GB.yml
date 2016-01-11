@@ -29,6 +29,7 @@
         group_email: "Group Email"
         members: "Members"
         name: "Group Name"
+        subdomain: Subdomain
       create:
         success: "Group created"
       new:
