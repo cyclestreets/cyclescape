@@ -4,6 +4,7 @@ class TagsController < ApplicationController
   def show
     @tag = Tag.find_by_name params[:id]
     if @tag
+      @query = @tag.name
       issues = Issue.find_by_tag(@tag).order('updated_at desc').page(params[:issue_page])
       @issues = IssueDecorator.decorate_collection issues
       # Threads - argh, privacy!

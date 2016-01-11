@@ -6,12 +6,14 @@
   %table
     %thead
       %th= t ".name"
+      %th= t ".subdomain"
       %th= t ".group_email"
       %th{colspan: 3}= t ".actions"
     %tbody
       - @groups.each do |group|
         %tr
           %td= link_to group.name, group
+          %td= group.subdomain
           %td= mail_to group.email
           %td= link_to t(".edit"), [:edit, :admin, group]
           %td= link_to t(".edit_profile"), [:edit, group, :profile]
