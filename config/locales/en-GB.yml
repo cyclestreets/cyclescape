@@ -537,6 +537,7 @@
         other: "votes"
       location: "Location"
       deadline: Deadline
+      issues-nearby: "Issues nearby"
     map:
       show_collisions: Show Collisions
     update:
@@ -754,6 +755,7 @@
       open: Re-open this thread
       edit: "Edit this thread"
       destroy: "Delete this thread"
+      issues-nearby: "Issues nearby"
       private_to_committee_message: "Private: Only committee members of %{group} can view and post messages to this thread."
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
       public_message: "Public: Everyone can view this thread and post messages."
