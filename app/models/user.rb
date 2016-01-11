@@ -275,13 +275,14 @@ class User < ActiveRecord::Base
   end
 
   def can_view(other_users)
-    viewable_by_public_ids = other_users.is_public.pluck :id
-
-    my_group_ids = groups.pluck :id
-
-    in_my_groups = other_users.joins(:memberships).where(group_memberships: {group_id: my_group_ids}).pluck :id
-
-    self.class.where id: (in_my_groups + viewable_by_public_ids + [id]).compact
+    users = User.arel_table
+    profiles = UserProfile.arel_table
+    memberships = GroupMembership.arel_table
+    my_group_ids = groups.ids
+    other_users.includes(:profile, :memberships).
+      where(profiles[:visibility].eq('public').
+            or(memberships[:group_id].in(my_group_ids)).
+            or(users[:id].eq(id))).references(:user_profiles, :group_memberships)
   end
 
   # devise confirm! method overriden
