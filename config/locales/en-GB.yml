@@ -169,11 +169,11 @@
       my_threads_introduction: "Latest updates on the discussion threads you are subscribed to:"
       my_upcoming_deadline_introduction: "Upcoming deadlines and dates within the discussion threads you are subscribed to:"
       no_upcoming_deadline_threads: "You aren't involved in any discussion threads with upcoming deadlines or dates."
-      no_subscribed_threads_html:
+      no_subscribed_threads_html: >
         You aren't following any threads yet. You could have a look
         through the %{threads_link} and see if there's anything that you want to
         help with, or maybe you could %{add_issue_link} instead?
-      no_prioritised_threads_html:
+      no_prioritised_threads_html: >
         You haven't prioritised any threads yet. You could have a look
         through the %{threads_link} and see if there's anything that you think is
         important, or maybe you could %{add_issue_link} instead?
@@ -446,7 +446,7 @@
       report_an_issue: "Create an issue"
       latest_discussions: "Latest Discussions"
       groups_title: "Cyclescape Groups"
-      groups_intro_html:
+      groups_intro_html: >
         Cyclescape is used by <strong>cycle campaign groups</strong> across
         the country. <strong>%{groups_link}</strong> and see what
         they're working to fix.
