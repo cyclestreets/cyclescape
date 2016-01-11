@@ -78,7 +78,6 @@ class MessageThreadsController < ApplicationController
                             'not_approved'
                           end
     if thread.save
-      thread.subscriptions.create( user: current_user ) unless current_user.subscribed_to_thread?(thread)
       if @message.check_reason
         flash[:alert] = t(@message.check_reason)
         redirect_to home_path

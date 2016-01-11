@@ -29,6 +29,16 @@ describe MessageThread do
     expect(subject.errors_on(:base)).to eq([I18n.t('activerecord.errors.models.message_thread.attributes.base.disabled')])
   end
 
+  describe 'scopes' do
+    let(:user) { create(:user) }
+    let!(:thread_from) { create(:message_thread, privacy: 'private', created_by: user) }
+    let!(:thread_to)   { create(:message_thread, privacy: 'private', user: user) }
+
+    it 'has private_for' do
+      expect(described_class.private_for(user)).to match_array [thread_from, thread_to]
+    end
+  end
+
   describe 'privacy' do
     subject { MessageThread.new }
 
@@ -314,5 +324,20 @@ describe MessageThread do
     it { expect(subject.to_icals[0].summary).to include('The AGM!') }
     it { expect(subject.to_icals[0].description).to include('Important dates') }
     it { expect(subject.to_icals[0].dtstart.to_s).to eq(Icalendar::Values::Date.new(deadline.deadline).to_s) }
+  end
+
+  describe 'subscriptions' do
+    let(:user) { create :user }
+
+    it 'subscribes creator' do
+      thread = create :message_thread, created_by: user
+      expect(thread.reload.subscribers).to eq [user]
+    end
+
+    it 'subscribes creator' do
+      message_to = create :user
+      thread = create :message_thread, created_by: user, user: message_to
+      expect(thread.reload.subscribers).to match_array [user, message_to]
+    end
   end
 end

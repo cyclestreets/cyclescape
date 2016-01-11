@@ -45,6 +45,14 @@
           text-indent: -999999px;
           background: image-url("small-cyclescape-logo.png") center no-repeat;
         }
+        &.private-messages {
+          text-indent: -999999px;
+          background: image-url("envelope.png") center no-repeat;
+          margin: 4px;
+          width: 20px;
+          height: 20px;
+          background-size: 20px;
+        }
       }
       &.my-account {
         a {

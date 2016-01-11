@@ -561,6 +561,7 @@
       sign_out: "Sign out"
       sign_in: "Sign in"
       sign_up: "Sign up"
+      private_messages: "Private Messages"
       feedback: "Feedback"
       home: "Home"
       issues: "Issues"
@@ -756,6 +757,7 @@
       destroy: "Delete this thread"
       private_to_committee_message: "Private: Only committee members of %{group} can view and post messages to this thread."
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
+      private_html: "Private Message between %{creator} and %{message_to}."
       public_message: "Public: Everyone can view this thread and post messages."
     subscribe_panel:
       subscribed: "You are following this thread."
@@ -1065,8 +1067,14 @@
         user_profile: "User Profile"
         website_label: "Web site:"
         full_name: Full Name
+        send_private_message: Send private message
       update:
         success: "Profile Updated"
+  users:
+    private_message_threads:
+      index:
+        between_html: "between %{creator} and %{message_to}."
+        private_messages: 'Private Messages'
   helpers:
     page_entries_info:
       more_pages:
