@@ -36,6 +36,10 @@
               %li= link_to t(".sign_up"), new_user_registration_path
             - if permitted_to? :create, :devise_sessions
               %li= link_to t(".sign_in"), new_user_session_path
+        .survey
+          %p{ style: "position: absolute; right: 0; top: 45px;"}
+            %a{ href: "http://blog.cyclescape.org/survey/", style: "padding: 5px 10px; background-color: yellow; font-weight: bold;"}
+              Survey
     #main-nav
       %nav.wrapper
         %ul#navigation(role="navigation")
