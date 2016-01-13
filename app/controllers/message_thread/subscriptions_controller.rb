@@ -5,13 +5,11 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
     respond_to do |format|
       if  @thread.add_subscriber current_user
         set_flash_message :success
-        format.html { redirect_to thread_path @thread }
-        format.js   { }
       else
         set_flash_message :failure
-        format.html { redirect_to thread_path @thread }
-        format.js   { }
       end
+      format.html { redirect_to thread_path @thread }
+      format.js   { }
     end
   end
 
