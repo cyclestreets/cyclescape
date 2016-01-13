@@ -1,4 +1,5 @@
 %h2= t '.private_messages'
+=t '.private_introduction'
 %table.dashboard-threads
   %tbody
     - @private_threads.each do |thread|
@@ -6,6 +7,6 @@
         %td.title
           %h4= link_to thread.title, thread_path(thread)
         %td.activity
-          = t '.between_html', creator: link_to_profile(thread.created_by), message_to: link_to_profile(thread.user)
+          = t '.with_html', other: link_to_profile(thread.other(current_user))
         %td.activity
-          = time_ago_in_words thread.latest_message.created_at
+          = thread.created_at

@@ -1075,9 +1075,14 @@
         success: "Profile Updated"
   users:
     private_message_threads:
+      new:
+        message_for_html: "Message for %{other}"
+        send: Send Private message
       index:
-        between_html: "between %{creator} and %{message_to}."
+        with_html: "with %{other}."
         private_messages: 'Private Messages'
+        private_introduction: "These are private messages that only you and one other person can
+          see.  You can send a private message to another user by clicking a link in their profile."
   helpers:
     page_entries_info:
       more_pages:

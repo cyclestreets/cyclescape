@@ -16,7 +16,8 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
   end
 
   def index
-    @private_threads = MessageThread.private_for(current_user)
+    @private_threads = PrivateMessageDecorator.decorate_collection(
+      MessageThread.private_for(current_user))
   end
 
   private
