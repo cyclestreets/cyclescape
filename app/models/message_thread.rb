@@ -121,6 +121,10 @@ class MessageThread < ActiveRecord::Base
     end
   end
 
+  def display_id
+    "##{id}"
+  end
+
   def close_by! user
     if update(closed: true)
       message_thread_closes.create(user: user, event: 'closed')
