@@ -17,6 +17,9 @@
     email: Email every message
     digest: Daily email digest
   deadline_date: "Deadline/date"
+  time:
+    formats:
+      long_deadline: '%A, %d %B %Y %l:%M %p'
   admin:
     groups:
       index:

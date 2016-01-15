@@ -1,5 +1,5 @@
 .deadline{id: dom_id(message.component)}
   - deadline = message.component.formatted_deadline
-  %h3= l deadline, format: :long
+  %h3= l deadline, format: :long_deadline
   = render partial: "shared/deadline", locals: {deadline: deadline}
   %p= message.component.title
