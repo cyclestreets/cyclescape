@@ -187,15 +187,30 @@ ul.thread-list {
       }
     }
     .status {
+      width: 25%;
       float: left;
       color: $grey2;
       .following {
+        width: 50%;
+        display: inline-block;
+        vertical-align: top;
         font-size: 11px;
         font-weight: bold;
         color: $darkgreen;
         text-transform: uppercase;
         img {
           vertical-align: middle;
+        }
+      }
+      .thread_subscription {
+        width: 40%;
+        display: inline-block;
+        vertical-align: top;
+      }
+      form {
+        li.input_action {
+          padding-top: 5px;
+          border-bottom: none;
         }
       }
     }

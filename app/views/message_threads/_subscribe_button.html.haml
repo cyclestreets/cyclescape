@@ -1,0 +1,13 @@
+%div{ id: "subscribe_#{thread.id}"}
+  - if signed_in? && current_user.subscribed_to_thread?(thread)
+    .following
+      = image_tag('check-checked.png')
+      = I18n.t('decorators.thread_list.following')
+    - subscription = current_user.thread_subscriptions.to(thread)
+    = semantic_form_for subscription, url: thread_subscription_path(thread, subscription, action: :destroy), remote: true, method: :delete do |f|
+      = f.actions do
+        = f.action :submit, label: :delete_from_listing, button_html: {class: "btn-grey btn-unsubscribe"}
+  - else
+    = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: thread, action: :create), remote: true do |f|
+      = f.actions do
+        = f.action :submit, button_html: {class: "btn-green"}

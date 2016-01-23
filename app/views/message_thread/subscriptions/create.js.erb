@@ -1,1 +1,1 @@
-$('.subscribe').html('<%= escape_javascript render "message_threads/subscribe_panel", thread: @thread %>');
+$('#subscribe_<%= @thread.id  %>').html('<%= escape_javascript render "message_threads/subscribe_button", thread: @thread %>');
