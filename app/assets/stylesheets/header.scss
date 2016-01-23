@@ -123,3 +123,28 @@
     }
   }
 }
+
+@media (max-width: 980px) {
+  #site-header {
+    width: 97%;
+
+    .wrapper {
+      padding: 0;
+      width: 97%;
+    }
+    #site-title {
+      position: static;
+      padding-left: 20px;
+      width: 95%;
+    }
+
+    #navigation {
+      margin: 20px 0 0 0;
+    }
+  }
+
+  #main-nav {
+    width: 97%;
+    height: 75px;
+  }
+}

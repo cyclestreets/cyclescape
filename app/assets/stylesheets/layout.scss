@@ -57,10 +57,12 @@ div.flash-container .flash {
   &.alert {
     background: $red;
     color: white;
+    width: 95%;
   }
   &.notice {
     background: $lightgreen;
     color: white;
+    width: 95%;
   }
 }
 
@@ -239,3 +241,28 @@ body.library-notes {
     }
   }
 }
+@media (max-width: 980px) {
+
+  #page {
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    position: relative;
+
+    .wrapper {
+      margin-left: auto;
+      margin-right: auto;
+      width: 95%;
+      position: relative;
+      padding: 20px 0 30px;
+    }
+  }
+
+  #crumb-search {
+    .wrapper {
+      width: 95%;
+    }
+  }
+
+}
+
