@@ -1083,7 +1083,7 @@
         with_html: "with %{other}."
         private_messages: 'Private Messages'
         private_introduction: "These are private messages that only you and one other person can
-          see.  You can send a private message to another user by clicking a link in their profile."
+          see.  You can send a private message to another user by clicking a button in their profile."
   helpers:
     page_entries_info:
       more_pages:
