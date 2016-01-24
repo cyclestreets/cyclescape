@@ -7,7 +7,6 @@ describe MessageThreadsController do
     let!(:message_a) { create(:message, thread: thread, created_at: Time.now - 4.days) }
     let!(:message_b) { create(:message, thread: thread, created_at: Time.now - 3.days) }
     let!(:message_c) { create(:message, thread: thread, created_at: Time.now - 2.days) }
-    let!(:message_d) { create(:message, thread: thread, created_at: Time.now) }
 
     context 'as a guest' do
       it 'should not assign a message to view from' do
@@ -46,16 +45,6 @@ describe MessageThreadsController do
           expect(assigns(:view_from)).to eql(message_b)
         end
       end
-
-      # NOTE: This is probably where a spec should go for the thread linking.
-      # Left out with this note per Martin.
-      # context 'who viewed the thread' do
-      #   it 'should contains a link to a threaded message' do
-      #     create(:thread_view, thread: thread, user: user, viewed_at: Time.now)
-      #     get :show, id: thread.id
-      #     expect(assigns(:view_from)).to have_content('/threads/2')
-      #   end
-      # end
     end
   end
 

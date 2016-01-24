@@ -90,7 +90,7 @@ module ApplicationHelper
         issue_id = i.match(/\d+/)[0]
         # not a fan of making a database call here. Not sure how else to address parameterizing the issue url.
         issue = Issue.find_by(id: issue_id.to_i) if issue_id
-        message.gsub!(i, "<a href=\"#{issue_path(issue)}\">#{i}</a>") if issue_id
+        message.gsub!(i, "<a href=\"#{issue_path(issue)}\">#{i}</a>") if issue_id && issue
       end
     end
 
