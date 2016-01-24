@@ -117,12 +117,16 @@ class ApplicationController < ActionController::Base
   end
   helper_method :page_image
 
-  def set_page_title(title = nil)
+  def set_page_title(title = nil, value = nil)
     if title
       page_title = title
     else
       key = "#{controller_path.tr("/", ".")}.#{params[:action]}.title"
-      page_title = I18n.translate(key, default: '')
+      if value
+        page_title = I18n.translate(key, value)
+      else
+        page_title = I18n.translate(key, default: '')
+      end
     end
     app_title = I18n.translate('application_name')
     @page_title = if page_title == '' then app_title else "#{page_title} - #{app_title}" end
