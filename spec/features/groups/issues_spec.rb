@@ -93,6 +93,7 @@ describe 'Issues in a group subdomain' do
       expect(page).to have_content('Edit Issue')
       fill_in 'Title', with: 'Something New'
       click_on 'Save'
+      issue.reload
       expect(current_path).to eq(issue_path(issue))
       expect(page).to have_content('Something New')
     end
