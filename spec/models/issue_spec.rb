@@ -421,4 +421,13 @@ describe Issue do
     expect(email.body).to include("upcoming deadline")
     expect(email.subject).to include("Upcoming deadline")
   end
+
+  it 'should have closed?' do
+    subject = create :issue
+    expect(subject.closed?).to eq true
+    thread = create :message_thread, issue: subject, closed: false
+    expect(subject.reload.closed?).to eq false
+    thread.update(closed: true)
+    expect(subject.reload.closed?).to eq true
+  end
 end

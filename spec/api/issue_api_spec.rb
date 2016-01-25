@@ -30,8 +30,10 @@ describe IssueApi::API do
       it 'has the correct fields' do
         expect(geojson_response[0].keys).
           to match_array(%w(id created_at created_by deadline external_url description
-                         tags cyclescape_url photo_thumb_url thumbnail title vote_count))
+                         tags cyclescape_url photo_thumb_url thumbnail title vote_count
+                         latest_activity_at closed))
       end
+
       context 'with a subdomain' do
         let(:host) { 'http://cam.example.com' }
 

@@ -79,6 +79,10 @@ class Issue < ActiveRecord::Base
     threads.includes(:messages).maximum('messages.updated_at')
   end
 
+  def closed?
+    !threads.where(closed: false).exists?
+  end
+
   def to_param
     "#{id}-#{title.parameterize}"
   end

@@ -1,5 +1,6 @@
 class IssueDecorator < ApplicationDecorator
   decorates :issue
+  delegate :closed?, to: :issue
 
   def map
     h.render partial: 'map', locals: { issue: issue }

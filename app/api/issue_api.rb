@@ -28,7 +28,9 @@ module IssueApi
                           deadline: issue.deadline.to_i,
                           external_url: issue.external_url,
                           tags: issue.tags.pluck(:name),
-                          cyclescape_url: "#{request.base_url}/issues/#{issue.to_param}"
+                          cyclescape_url: "#{request.base_url}/issues/#{issue.to_param}",
+                          latest_activity_at: issue.latest_activity_at.to_i,
+                          closed: issue.closed?,
                          )
       end
 
