@@ -14,6 +14,10 @@ class IssuesController < ApplicationController
   end
 
   def show
+    unless request.original_url.end_with?(issue_path(issue))
+      redirect_to issue_url(issue)
+    end
+
     @issue = IssueDecorator.decorate issue
     set_page_title @issue.title
     set_page_description @issue.description
