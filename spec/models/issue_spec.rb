@@ -424,7 +424,7 @@ describe Issue do
 
   it 'should have closed?' do
     subject = create :issue
-    expect(subject.closed?).to eq true
+    expect(subject.closed?).to eq false
     thread = create :message_thread, issue: subject, closed: false
     expect(subject.reload.closed?).to eq false
     thread.update(closed: true)
