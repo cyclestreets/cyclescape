@@ -73,6 +73,35 @@ describe User::ProfilesController, type: :controller do
         end
       end
 
+      context 'with a membership request' do
+        context 'as a committee member' do
+          include_context 'signed in as a committee member'
+
+          before do
+            create(:group_membership_request, user: user, group: current_group)
+            sign_in current_user
+          end
+
+          it 'should be visible' do
+            get :show, user_id: user.id
+            expect(response).to be_success
+          end
+        end
+
+        context 'as a normal member' do
+          include_context 'signed in as a group member'
+
+          before do
+            create(:group_membership_request, user: user, group: current_group)
+            sign_in current_user
+          end
+
+          it 'should be hidden' do
+            expect {get :show, user_id: user.id}.to raise_error(ActionController::RoutingError)
+          end
+        end
+      end
+
       context 'as an admin' do
         include_context 'signed in as admin'
 

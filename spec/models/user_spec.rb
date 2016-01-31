@@ -18,6 +18,7 @@ describe User do
     it { is_expected.to have_many(:memberships) }
     it { is_expected.to have_many(:groups) }
     it { is_expected.to have_many(:membership_requests) }
+    it { is_expected.to have_many(:requested_groups) }
     it { is_expected.to have_many(:actioned_membership_requests) }
     it { is_expected.to have_many(:issues) }
     it { is_expected.to have_many(:created_threads) }
