@@ -1,0 +1,12 @@
+%h2= t '.private_messages'
+%p=t '.private_introduction'
+%table.dashboard-threads
+  %tbody
+    - @private_threads.each do |thread|
+      %tr
+        %td.title
+          %h4= link_to thread.title, thread_path(thread)
+        %td.activity
+          = t '.with_html', other: link_to_profile(thread.other(current_user))
+        %td.activity
+          = thread.created_at

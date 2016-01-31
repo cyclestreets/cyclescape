@@ -9,6 +9,9 @@ and post messages to this discussion thread.
 <% elsif @thread.private_to_group? %>
 Only members of <%= raw @thread.group.name %> can view
 and post messages to this discussion thread.
+<% elsif @thread.user %>
+This is a Private Message between <%= raw @thread.created_by.name %>
+and <%= raw @thread.user.name %>.
 <% else %>
 Everyone can view this discussion thread and post messages.
 <% end %>

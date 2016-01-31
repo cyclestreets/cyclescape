@@ -6,10 +6,12 @@ describe ThreadMailer do
   let(:message_two)   { create(:message, created_by: user, in_reply_to: message_one, thread: thread) }
   let(:message_three) { create(:message, created_by: user, in_reply_to: message_two, thread: thread) }
   let(:thread)        { message_one.thread }
-  let!(:document)     { create(:document_message, created_by: user, message: message_three, thread: thread) }
+  let(:document)     { create(:document_message, created_by: user, message: message_three, thread: thread) }
+  let(:deadline_message) { create(:deadline_message, created_by: user, message: message_three, thread: thread) }
 
   describe 'new document messages' do
     it 'has correct text in email' do
+      document
       subject = described_class.send(:common, message_three, user)
       expect(subject.body).to include("http://www.example.com#{document.file.url}")
       expect(subject.body).to include(I18n.t('.thread_mailer.new_document_message.view_the_document'))
@@ -21,8 +23,17 @@ describe ThreadMailer do
     end
   end
 
+  describe 'new deadline message' do
+    it 'has attachment' do
+      deadline_message
+      subject = described_class.send(:common, message_three, user)
+      expect(subject.attachments.first.body.to_s.start_with? "BEGIN:VCALENDAR").to eq(true)
+    end
+  end
+
   describe 'digest' do
     it do
+      document
       subject = described_class.send(:digest, user, {thread => [message_one, message_three]})
       expect(subject.body).to include("http://www.example.com#{document.file.url}")
       expect(subject.body).to include('To reply to the message above')

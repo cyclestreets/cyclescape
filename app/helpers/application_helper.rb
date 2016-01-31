@@ -56,4 +56,62 @@ module ApplicationHelper
   def time_tag_with_title(date_or_time, &block)
     time_tag(date_or_time, title: l(date_or_time, format: :long), &block)
   end
+
+  # used to turn references to threads into hyperlinks
+  #
+  # examples for threads:
+  #  thread 1051
+  #  thread no 1051
+  #  thread no. 1051
+  #  thread number 1051
+  #  thread #1051
+  #  #t1051
+  # examples for issues:
+  #  issue 1051
+  #  issue no 1051
+  #  issue no. 1051
+  #  issue number 1051
+  #  issue #1051
+  #  #i1051
+  def message_linkify(message)
+    THREAD_FORMAT_MAP.each do |key, value|
+      threads_found = message.scan(value)
+
+      threads_found.each do |t|
+        thread_id = t.match(/\d+/)[0]
+        message.gsub!(t, "<a href=\"#{thread_path(thread_id.to_i)}\">#{t}</a>") if thread_id
+      end
+    end
+
+    ISSUE_FORMAT_MAP.each do |key, value|
+      issues_found = message.scan(value)
+
+      issues_found.each do |i|
+        issue_id = i.match(/\d+/)[0]
+        # not a fan of making a database call here. Not sure how else to address parameterizing the issue url.
+        issue = Issue.find_by(id: issue_id.to_i) if issue_id
+        message.gsub!(i, "<a href=\"#{issue_path(issue)}\">#{i}</a>") if issue_id && issue
+      end
+    end
+
+    message
+  end
+
+  THREAD_FORMAT_MAP = {
+    'thread :number' => /thread \d+/,
+    'thread no :number' => /thread no \d+/,
+    'thread no. :number' => /thread no. \d+/,
+    'thread number :number' => /thread number \d+/,
+    'thread #:number' => /thread #\d+/,
+    '#t:number' => /#t\d+/
+  }
+
+  ISSUE_FORMAT_MAP = {
+    'issue :number' => /issue \d+/,
+    'issue no :number' => /issue no \d+/,
+    'issue no. :number' => /issue no. \d+/,
+    'issue number :number' => /issue number \d+/,
+    'issue #:number' => /issue #\d+/,
+    '#i:number' => /#i\d+/
+  }
 end

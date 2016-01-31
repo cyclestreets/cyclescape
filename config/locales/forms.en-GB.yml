@@ -148,3 +148,4 @@
       thread_subscription:
         create: "Follow this thread"
         delete: "Unfollow this thread"
+        delete_from_listing: "Unfollow"

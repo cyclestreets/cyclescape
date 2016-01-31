@@ -82,6 +82,7 @@ authorization do
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show
       if_attribute private_to_committee?: is { true }, group_committee_members: contains { user }
+      if_attribute user: is { user }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show
@@ -140,11 +141,19 @@ authorization do
       to :view_full_name
       if_attribute id: is { user.id }
       if_attribute groups: intersects_with { user.groups }
+      if_attribute requested_groups: intersects_with { user.in_group_committee }
+    end
+    has_permission_on :users, to: :send_private_message do
+      if_permitted_to :view_full_name
     end
     has_permission_on :users, to: :view_profile do
       if_permitted_to :view_full_name
       if_attribute profile: { visibility: 'public' }
     end
+    has_permission_on :users_private_message_threads, to: [:new, :create] do
+      if_permitted_to :send_private_message
+    end
+    has_permission_on :users_private_message_threads, to: [:index]
   end
 
   role :guest do

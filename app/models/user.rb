@@ -1,38 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
-#  full_name              :string(255)      not null
-#  display_name           :string(255)
-#  role                   :string(255)      not null
-#  encrypted_password     :string(128)      default("")
-#  confirmation_token     :string(255)
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  disabled_at            :datetime
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  invitation_token       :string(255)
-#  invitation_sent_at     :datetime
-#  invitation_accepted_at :datetime
-#  remembered_group_id    :integer
-#  invitation_limit       :integer
-#  invited_by_id          :integer
-#  invited_by_type        :string(255)
-#  deleted_at             :datetime
-#  invitation_created_at  :datetime
-#
-# Indexes
-#
-#  index_users_on_email             (email)
-#  index_users_on_invitation_token  (invitation_token)
-#
-
 class User < ActiveRecord::Base
 
   acts_as_voter
@@ -44,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :memberships, class_name: 'GroupMembership'
   has_many :groups, through: :memberships
   has_many :membership_requests, class_name: 'GroupMembershipRequest'
+  has_many :requested_groups, through: :membership_requests, source: :group
   has_many :actioned_membership_requests, foreign_key: 'actioned_by_id', class_name: 'GroupMembershipRequest'
   has_many :issues, foreign_key: 'created_by_id'
   has_many :created_threads, class_name: 'MessageThread', foreign_key: 'created_by_id'
@@ -57,10 +23,11 @@ class User < ActiveRecord::Base
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
   has_many :subscribed_threads, -> { where('thread_subscriptions.deleted_at is NULL') },
     through: :thread_subscriptions, source: :thread
-  has_many :thread_priorities, class_name: 'UserThreadPriority', inverse_of: :thread
+  has_many :thread_priorities, class_name: 'UserThreadPriority', inverse_of: :user
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
-  has_many :thread_views, inverse_of: :thread
+  has_many :thread_views, inverse_of: :user
   has_many :site_comments
+  has_many :private_threads, class_name: 'MessageThread', inverse_of: :user
   has_one :profile, class_name: 'UserProfile'
   has_one :prefs, class_name: 'UserPref'
   belongs_to :remembered_group, class_name: 'Group'
@@ -84,6 +51,7 @@ class User < ActiveRecord::Base
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
+  validates_format_of :email, with: /\A[^<].*[^>]\z/
 
   class << self
     def user_roles_map
@@ -273,13 +241,14 @@ class User < ActiveRecord::Base
   end
 
   def can_view(other_users)
-    viewable_by_public_ids = other_users.is_public.pluck :id
-
-    my_group_ids = groups.pluck :id
-
-    in_my_groups = other_users.joins(:memberships).where(group_memberships: {group_id: my_group_ids}).pluck :id
-
-    self.class.where id: (in_my_groups + viewable_by_public_ids + [id]).compact
+    users = User.arel_table
+    profiles = UserProfile.arel_table
+    memberships = GroupMembership.arel_table
+    my_group_ids = groups.ids
+    other_users.includes(:profile, :memberships).
+      where(profiles[:visibility].eq('public').
+            or(memberships[:group_id].in(my_group_ids)).
+            or(users[:id].eq(id))).references(:user_profiles, :group_memberships)
   end
 
   # devise confirm! method overriden

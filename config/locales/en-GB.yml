@@ -17,6 +17,12 @@
     email: Email every message
     digest: Daily email digest
   deadline_date: "Deadline/date"
+  time:
+    formats:
+      long_deadline: '%A, %d %B %Y %l:%M %p'
+  date:
+    formats:
+      long_deadline: '%A, %d %B %Y %l:%M %p'
   admin:
     groups:
       index:
@@ -564,6 +570,7 @@
       sign_out: "Sign out"
       sign_in: "Sign in"
       sign_up: "Sign up"
+      private_messages: "Private Messages"
       feedback: "Feedback"
       home: "Home"
       issues: "Issues"
@@ -760,6 +767,7 @@
       issues-nearby: "Issues nearby"
       private_to_committee_message: "Private: Only committee members of %{group} can view and post messages to this thread."
       private_to_group_message: "Private: Only members of %{group} can view and post messages to this thread."
+      private_html: "Private Message between %{creator} and %{message_to}."
       public_message: "Public: Everyone can view this thread and post messages."
     subscribe_panel:
       subscribed: "You are following this thread."
@@ -1069,8 +1077,19 @@
         user_profile: "User Profile"
         website_label: "Web site:"
         full_name: Full Name
+        send_private_message: Send private message
       update:
         success: "Profile Updated"
+  users:
+    private_message_threads:
+      new:
+        message_for_html: "Message for %{other}"
+        send: Send Private message
+      index:
+        with_html: "with %{other}."
+        private_messages: 'Private Messages'
+        private_introduction: "These are private messages that only you and one other person can
+          see.  You can send a private message to another user by clicking a button in their profile."
   helpers:
     page_entries_info:
       more_pages:

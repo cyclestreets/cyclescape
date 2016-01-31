@@ -7,6 +7,10 @@
   %header
     - if @issue
       %p.pre-title= link_to @issue.title, issue_path(@issue)
+    %p.thread-number
+      Thread
+      %br/
+      = @thread.display_id
     %h1= @thread.display_title
     .meta
       .privacy
@@ -14,6 +18,8 @@
           %p= t ".private_to_committee_message", group: @thread.group.name
         - elsif @thread.private_to_group?
           %p= t ".private_to_group_message", group: @thread.group.name
+        - elsif @thread.user
+          %p= t ".private_html", creator: link_to_profile(@thread.created_by), message_to: link_to_profile(@thread.user)
         - else
           %p= t ".public_message"
       %section.tags

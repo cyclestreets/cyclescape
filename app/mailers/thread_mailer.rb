@@ -18,11 +18,13 @@ class ThreadMailer < ActionMailer::Base
     @thread = message.thread
     @subscriber = subscriber
     if @message.notification_name == :new_deadline_message
+      cal = Icalendar::Calendar.new
+      cal.add_event(@message.component.to_ical)
       attachments['deadline.ics'] = {mime_type: 'text/calendar',
-                                     content: @message.component.to_ical.to_ical }
+                                     content: cal.to_ical }
     end
     mail(to: subscriber.name_with_email,
-         subject: t('mailers.thread_mailer.common.subject', title: @thread.title, count: @thread.message_count),
+         subject: t('mailers.thread_mailer.common.subject', title: @thread.title, count: @thread.messages.count),
          from: user_notification_address(message.created_by),
          references: message_chain(@message.in_reply_to, @thread),
          message_id: message_address(@message),

@@ -18,6 +18,7 @@ describe User do
     it { is_expected.to have_many(:memberships) }
     it { is_expected.to have_many(:groups) }
     it { is_expected.to have_many(:membership_requests) }
+    it { is_expected.to have_many(:requested_groups) }
     it { is_expected.to have_many(:actioned_membership_requests) }
     it { is_expected.to have_many(:issues) }
     it { is_expected.to have_many(:created_threads) }
@@ -70,6 +71,13 @@ describe User do
       subject.valid? # trigger before_validation to set default role
       subject.invite!
       expect(subject).to have(0).errors_on(:password)
+    end
+
+    it 'must not have <...> style email' do
+      subject.email = '<someone@example.com>'
+      expect(subject).to have(1).errors_on(:email)
+      subject.email = 'someone@example.com'
+      expect(subject).to have(0).errors_on(:email)
     end
   end
 
@@ -286,6 +294,7 @@ describe User do
       public_user.profile.update visibility: 'public'
 
       expect(subject.can_view(User.all)).to match_array([subject, private_user_in_same_group, public_user])
+      expect(subject.can_view(User.none)).to match_array([])
     end
   end
 

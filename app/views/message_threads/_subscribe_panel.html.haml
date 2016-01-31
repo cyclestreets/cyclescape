@@ -4,10 +4,10 @@
     %p
       = image_tag("check-checked.png")
       = t(".subscribed")
-    = semantic_form_for subscription, url: thread_subscription_path(thread, subscription, action: :destroy), remote: true, method: :delete do |f|
+    = semantic_form_for subscription, url: thread_subscription_path(thread, subscription, action: :destroy), method: :delete do |f|
       = f.actions do
         = f.action :submit, label: :delete, button_html: {class: "btn-grey btn-unsubscribe"}
   - else
-    = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: thread, action: :create), remote: true do |f|
+    = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: thread, action: :create) do |f|
       = f.actions do
         = f.action :submit, button_html: {class: "btn-green"}

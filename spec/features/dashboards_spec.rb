@@ -155,7 +155,7 @@ describe 'User dashboards' do
           deadline.thread.add_subscriber(current_user)
           visit dashboard_path
           expect(page).to have_content(deadline.title)
-          expect(page).to have_content(I18n.l(deadline.deadline.to_date, format: :long))
+          expect(page).to have_content(I18n.l(deadline.deadline, format: :long_deadline))
         end
 
         it 'should not show censored deadlines' do
