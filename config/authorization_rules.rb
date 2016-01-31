@@ -144,7 +144,7 @@ authorization do
       if_attribute requested_groups: intersects_with { user.in_group_committee }
     end
     has_permission_on :users, to: :send_private_message do
-      if_permitted_to :view_profile
+      if_permitted_to :view_full_name
     end
     has_permission_on :users, to: :view_profile do
       if_permitted_to :view_full_name
