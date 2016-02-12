@@ -10,7 +10,9 @@
   %tbody
     - @messages.each do |message|
       %tr{id: message.id}
-        %td= link_to message.thread.title.truncate(100), thread_path(message.thread)
+        %td
+          - if message.thread
+            = link_to message.thread.title.truncate(100), thread_path(message.thread)
         %td= t(".#{message.check_reason}")
         %td= message.thread.approved?
         %td{title: message.body}= message.body.truncate(300)
