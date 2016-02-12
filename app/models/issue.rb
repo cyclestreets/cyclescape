@@ -80,7 +80,8 @@ class Issue < ActiveRecord::Base
   end
 
   def closed?
-    !threads.where(closed: false).exists?
+    closed = threads.pluck :closed
+    closed.size > 0 && closed.all?
   end
 
   def to_param
