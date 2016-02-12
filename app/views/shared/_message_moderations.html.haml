@@ -9,19 +9,18 @@
     %th
   %tbody
     - @messages.each do |message|
+      - thread = MessageThread.unscoped.find(message.thread_id)
       %tr{id: message.id}
-        %td
-          - if message.thread
-            = link_to message.thread.title.truncate(100), thread_path(message.thread)
+        %td= link_to "#{"(Thread Deleted) " if thread.deleted_at?}#{thread.title.truncate(100)}", thread_path(thread)
         %td= t(".#{message.check_reason}")
-        %td= message.thread.approved?
+        %td= thread.approved?
         %td{title: message.body}= message.body.truncate(300)
         %td= link_to(message.created_by.full_name, user_profile_path(message.created_by))
         %td
-          = link_to t(".approve"), approve_thread_message_path(message.thread, message),
+          = link_to t(".approve"), approve_thread_message_path(thread, message),
             method: :put, class: "btn-green", remote: true
           &nbsp;
-          = link_to t(".reject"), reject_thread_message_path(message.thread, message),
+          = link_to t(".reject"), reject_thread_message_path(thread, message),
             method: :put, class: "btn-grey", remote: true
 
 = paginate @messages

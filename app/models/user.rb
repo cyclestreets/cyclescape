@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   validates :full_name, presence: true
   validates :display_name, uniqueness: true, allow_blank: true
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
-  validates_format_of :email, with: /\A[^<].*[^>]\z/
+  validates :email, format: { with: /\A[^<].*[^>]\z/ }, uniqueness: true
 
   class << self
     def user_roles_map
