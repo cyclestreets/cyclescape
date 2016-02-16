@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
   scope :is_public, -> { joins(:profile).where(user_profiles: {visibility: 'public'}) }
 
   validates :full_name, presence: true
-  validates :display_name, uniqueness: true, allow_blank: true
+  validates :display_name, uniqueness: true, allow_nil: true
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
   validates :email, format: { with: /\A[^<].*[^>]\z/ }, uniqueness: true
 
