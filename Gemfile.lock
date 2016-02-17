@@ -74,6 +74,7 @@ GEM
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
     arel (6.0.3)
+    attribute_normalizer (1.2.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -440,6 +441,7 @@ DEPENDENCIES
   aasm
   activerecord-postgis-adapter
   annotate (>= 2.5.0)
+  attribute_normalizer
   bullet
   capybara
   chartkick
