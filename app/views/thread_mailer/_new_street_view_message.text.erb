@@ -1,5 +1,6 @@
 <%= raw t ".added", name: @message.created_by.name %>
 
 <%= raw @message.component.caption %>
+
 <%= t ".view_the_street_view" %>
 <%= thread_path(@message.thread, only_path: false) + "#message-#{@message.id}" %>

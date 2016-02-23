@@ -3,5 +3,6 @@
 <%= raw @message.component.caption %>
 <%= raw @message.component.description %>
 <%= raw @message.body %>
+
 <%= t ".view_the_photo" %>
 <%= thread_url(@message.thread, only_path: false) + "#message-#{@message.id}" %>
