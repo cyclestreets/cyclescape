@@ -19,12 +19,12 @@
 
 class Group < ActiveRecord::Base
 
-  has_many :memberships, class_name: 'GroupMembership'
+  has_many :memberships, class_name: 'GroupMembership', dependent: :destroy
   has_many :members, through: :memberships, source: :user
-  has_many :membership_requests, class_name: 'GroupMembershipRequest'
+  has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy
   has_many :threads, class_name: 'MessageThread', inverse_of: :group
-  has_one :profile, class_name: 'GroupProfile'
-  has_one :prefs, class_name: 'GroupPref'
+  has_one :profile, class_name: 'GroupProfile', dependent: :destroy
+  has_one :prefs, class_name: 'GroupPref', dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :short_name, presence: true, uniqueness: true, subdomain: true
@@ -32,6 +32,7 @@ class Group < ActiveRecord::Base
 
   after_create :create_default_profile, unless: :profile
   after_create :create_default_prefs, unless: :prefs
+  before_destroy :unlink_threads
 
   def committee_members
     members.includes(:memberships).where(group_memberships: {role: 'committee'}).
@@ -93,5 +94,9 @@ class Group < ActiveRecord::Base
 
   def create_default_prefs
     build_prefs.save!
+  end
+
+  def unlink_threads
+    threads.update_all(group_id: nil)
   end
 end
