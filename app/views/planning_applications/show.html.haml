@@ -22,7 +22,10 @@
 
   %section.map
     %h2= t ".location"
-    = @planning_application.map
+    - if @planning_application.location
+      = @planning_application.map
+    - else
+      = t '.no_location'
 
 
 %aside#sidebar.wide

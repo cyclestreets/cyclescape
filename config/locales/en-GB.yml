@@ -153,6 +153,7 @@
       view_official_application: "View official application"
       start_date: 'Date application was made:'
       hidden: Hidden (will not appear in anyones dashboard)
+      no_location: Exact location not received from council site
       <<: *planning_applications_search
     search:
       <<: *planning_applications_search
