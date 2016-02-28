@@ -4,7 +4,7 @@ class PlanningApplication::IssuesController < IssuesController
 
   def new
     @issue = @planning_application.populate_issue
-    @start_location = @planning_application.location
+    @start_location = @planning_application.location || index_start_location
     render 'issues/new'
   end
 
