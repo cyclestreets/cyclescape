@@ -53,6 +53,11 @@ class GroupRequest < ActiveRecord::Base
     event :cancel do
       transitions from: :pending, to: :cancelled
     end
+
+    # to only be done manually
+    event :unconfirm do
+      transitions from: :confirmed, to: :pending, guard: :actioned_by, after: [:destroy_group]
+    end
   end
 
   def create_group
@@ -66,6 +71,10 @@ class GroupRequest < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def destroy_group
+    Group.find_by(short_name: short_name).destroy
   end
 
   private
