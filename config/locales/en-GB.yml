@@ -832,6 +832,7 @@
       censored: "This message has been removed"
       create_note: "Create Library Note"
       create_document: "Create Library Document"
+      committee: '[Committee]'
     new:
       compose_new: "Compose New"
       from_library: "From Library"
@@ -955,22 +956,25 @@
       heading: "Things tagged '%{name}'"
       unrecognised: "Couldn't find the tag '%{name}'"
   thread_mailer:
+    header:
+      added: "%{name} added %{type} to the thread"
+      committee: ' [Committee]'
     new_deadline_message:
-      added: "%{name} added a deadline/date to the thread"
+      type: 'a deadline/date'
     new_document_message:
-      added: "%{name} added an attachment to the thread"
+      type: an attachment
       view_the_document: "You can view the attachment at:"
     new_library_item_message:
-      added: "%{name} added an item from the library to the thread."
+      type: an item
     new_link_message:
-      added: "%{name} added a link to the thread."
+      type: a link
     new_message:
-      added: "%{name} added a message to the thread."
+      type: a message
     new_photo_message:
-      added: "%{name} added a photo to the thread."
+      type: a photo
       view_the_photo: "You can view the photo at:"
     new_street_view_message:
-      added: "%{name} added a street view to the thread."
+      type: a street view
       view_the_street_view: "You can see the Street View at:"
 
     footer:

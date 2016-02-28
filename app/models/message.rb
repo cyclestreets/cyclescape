@@ -90,6 +90,9 @@ class Message < ActiveRecord::Base
     component ? "#{body} #{component.searchable_text}" : body
   end
 
+  def committee_created?
+    created_by.id.in?(thread.try(:group).try(:committee_members).try(:ids) || [])
+  end
 
   protected
 

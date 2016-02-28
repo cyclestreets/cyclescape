@@ -6,4 +6,4 @@
       %span.count= pluralize(thread.messages.count, "message") + ", "
       %span.participants= pluralize(thread.participants.count, "participant")
     %section.messages
-      = render collection: thread.messages.recent, partial: "messages/message"
+      = render collection: thread.messages.recent, partial: "messages/message", locals: {thread: thread}

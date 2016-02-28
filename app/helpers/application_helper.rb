@@ -104,7 +104,7 @@ module ApplicationHelper
     'thread number :number' => /thread number \d+/,
     'thread #:number' => /thread #\d+/,
     '#t:number' => /#t\d+/
-  }
+  }.freeze
 
   ISSUE_FORMAT_MAP = {
     'issue :number' => /issue \d+/,
@@ -113,5 +113,5 @@ module ApplicationHelper
     'issue number :number' => /issue number \d+/,
     'issue #:number' => /issue #\d+/,
     '#i:number' => /#i\d+/
-  }
+  }.freeze
 end

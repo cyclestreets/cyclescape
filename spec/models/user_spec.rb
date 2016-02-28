@@ -61,6 +61,14 @@ describe User do
       expect(subject).to have(1).error_on(:full_name)
     end
 
+    it 'must have no [ or ] in full name' do
+      subject.full_name = 'abc['
+      expect(subject).to have(1).error_on(:full_name)
+      subject.full_name = 'de[fg'
+      expect(subject).to have(1).error_on(:full_name)
+      subject.full_name = 'defg'
+    end
+
     it 'must have a password' do
       subject.password = ''
       expect(subject).to have_at_least(1).error_on(:password)

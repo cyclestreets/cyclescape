@@ -1,4 +1,4 @@
-<%= raw t ".added" , name: @message.created_by.name %>
+<%= render partial: 'header', locals: {message: @message, type: t('.type')} %>
 
 <%= raw @message.component.url %>
 <%= raw @message.component.title %>

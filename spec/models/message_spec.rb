@@ -178,4 +178,18 @@ describe Message do
       it { expect(subject.notification_name).to eq :new_link_message }
     end
   end
+
+  describe '#committee_created?' do
+    let(:committee_membership) { create :brian_at_quahogcc }
+    let(:group)                { committee_membership.group }
+    let(:committee_member)     { committee_membership.user }
+    let(:thread)               { build :message_thread, group: group }
+
+    it 'should identify committee members' do
+      subject.created_by = committee_member
+      expect(subject.committee_created?).to eq false
+      subject.thread = thread
+      expect(subject.committee_created?).to eq true
+    end
+  end
 end
