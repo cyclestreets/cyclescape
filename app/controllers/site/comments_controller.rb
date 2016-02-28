@@ -28,7 +28,6 @@ class Site::CommentsController < ApplicationController
     else
       set_flash_message(:failure)
     end
-    redirect_to site_comments_path
   end
 
   protected
