@@ -2,7 +2,7 @@ module MapsHelper
   def basic_map(&block)
     core_map('map') do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
-      page << map.add_layer(MapLayers::OSM_MAPNIK)
+      page << map.add_layer(MapLayers::MAPNIK)
       page << map.add_layer(MapLayers::OS_STREETVIEW)
 
       page << map.add_controls([OpenLayers::Control::PZ.new,
