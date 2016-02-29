@@ -36,7 +36,7 @@ module ApplicationHelper
   end
 
   def email_message(message)
-    mail_to "message-#{message.public_token}@#{domain}", "email reply", encode: "hex"
+    mail_to "message-#{message.public_token}@#{domain}", "email", encode: "hex"
   end
 
   def ajax_spinner_image
