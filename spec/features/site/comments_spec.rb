@@ -44,13 +44,5 @@ describe 'Site feedback' do
       visit site_comments_path
       expect(page).to have_content(comment.body[0..51]) # chokes on newline
     end
-
-    it 'should allow deleting' do
-      expect(SiteComment.count).to eql(1)
-      visit site_comments_path
-      click_on I18n.t('site.comments.index.delete_comment')
-      expect(page).to have_content(I18n.t('site.comments.destroy.success'))
-      expect(SiteComment.count).to eql(0)
-    end
   end
 end
