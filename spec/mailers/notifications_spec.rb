@@ -21,7 +21,8 @@ describe Notifications do
       let(:new_user_email) { "big hello to {{full_name}} nothing to {{see}} here" }
 
       it 'uses the overridden value' do
-        subject = described_class.send(:added_to_group, gm.reload)
+        expect(gm.reload.group.profile.new_user_email).to eq new_user_email
+        subject = described_class.send(:added_to_group, gm)
         expect(subject.body).to include("big hello to #{user.full_name} nothing to  here")
       end
     end
