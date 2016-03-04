@@ -857,6 +857,7 @@
       sign_in_to_post_html: "Please %{sign_in_link} to post a message."
       text_message: "Text"
       street_view_message: Street View
+      reply_by: Or reply by
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
