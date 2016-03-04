@@ -64,7 +64,7 @@ authorization do
     has_permission_on :issues, to: [:new, :create, :vote_up, :vote_down, :vote_clear]
     has_permission_on :issues do
       to [:edit, :update]
-      if_attribute created_by: is { user }, created_at_as_i: is_in { 24.hours.ago.to_i..Time.now.to_i }
+      if_attribute created_by: is { user }
     end
     has_permission_on :issue_tags, to: [:update]
     has_permission_on :messages, to: [:new, :create]

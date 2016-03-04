@@ -88,12 +88,6 @@ class Issue < ActiveRecord::Base
     "#{id}-#{title.parameterize}"
   end
 
-  # For authorization rules - doing range detection on TimeWithZones
-  # iterates over every time in the range - integer ranges are optimized.
-  def created_at_as_i
-    created_at.to_i
-  end
-
   def external_url=(val)
     write_attribute(:external_url, AttributeNormaliser::URL.new(val).normalise)
   end
