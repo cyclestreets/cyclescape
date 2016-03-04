@@ -21,7 +21,7 @@
         notify_membership_requests: "Enable membership request notifications"
       issue:
         new: &labels_issue_new
-          description: "Write a description"
+          description: "Write a description of the issue"
           location: "Provide a location"
           photo: "Add a photo"
           tags_string: "Tag your issue"
@@ -83,9 +83,9 @@
         picture: "To be displayed on the group page, ideally 333x192 pixels"
       issue:
         new: &hints_issue_new
-          description: "Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue."
-          deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          description: "Please give details about the issue and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue."
+          deadline: (optional)
+          external_url: (optional) you can add another relavent web page
           photo: "(optional)"
           tags_string: "e.g. cycle parking, obstruction, roadworks"
           title: "Please be brief and specific."
@@ -98,6 +98,7 @@
     placeholders:
       issue:
         external_url: http://www.example.com
+        description: "E.g. This street is narrowed considerably by the car parking on both sides and at school dropping-off and collection time there is choas."
       group_membership_request:
         message: Please add me to the Cyclescape group.
       group_profile:
@@ -118,8 +119,8 @@
       group_membership_request:
         create: "Request Group Membership"
       issue:
-        create: "Send Report"
-        update: "Save Report"
+        create: Create Issue
+        update: Update Issue
       library_item_message:
         create: "Add Library Item"
       library/document:

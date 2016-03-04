@@ -12,7 +12,6 @@ class Issue::MessageThreadsController < MessageThreadsController
       @thread.privacy = current_group.default_thread_privacy
     end
     @message = @thread.messages.build
-    @message.body = issue.description if issue.threads.count == 0
     @available_groups = current_user.groups
   end
 

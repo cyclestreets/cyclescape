@@ -472,8 +472,11 @@
   issue:
     message_threads:
       new:
-        new_hint: "This is where a discussion about the issue is started. \n There could be many different discussion threads that one issue creates \n e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
-        title: "New Thread on %{issue}"
+        title: "Discussion around %{issue}"
+        new_hint: "This is to start a dicussion about dealing with the issue. \n
+          You might want to list actions you have taken or would like to take. \n
+          There could be different discussion threads that one issue creates"
+        body_placeholder: "E.g. The consulation is open for comments or I would like to organise a meeting"
         everyone: "Everyone"
     photos:
       show:
