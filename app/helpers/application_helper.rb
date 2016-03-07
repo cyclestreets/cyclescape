@@ -35,6 +35,10 @@ module ApplicationHelper
     link_to commit, url
   end
 
+  def email_message(message)
+    mail_to "message-#{message.public_token}@#{domain}", "email", encode: "hex"
+  end
+
   def ajax_spinner_image
     image_tag 'spinner.gif'
   end
