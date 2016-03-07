@@ -118,6 +118,9 @@ class IssuesController < ApplicationController
   protected
 
   def index_start_location
+    if centered_issue = Issue.find_by(id: params[:issue_id])
+      return centered_issue.location
+    end
     return current_user.start_location if current_user && current_user.start_location != Geo::NOWHERE_IN_PARTICULAR
     return current_group.start_location if current_group && current_group.start_location
     return @issues.first.location unless @issues.empty?

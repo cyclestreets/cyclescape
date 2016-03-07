@@ -47,7 +47,7 @@
   %section.map
     %h2= t ".location"
     = @issue.map
-    = link_to t(".issues-nearby"), '/issues#map-pane', class: "btn-green"
+    = link_to t(".issues-nearby"), issues_path(anchor: 'map-pane', issue_id: @issue.id), class: "btn-green"
 
 %aside#sidebar.wide
   - if permitted_to? :create, :issue_message_threads
