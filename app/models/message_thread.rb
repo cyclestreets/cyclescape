@@ -41,7 +41,9 @@ class MessageThread < ActiveRecord::Base
     end
   end
 
-  ALLOWED_PRIVACY = %w(public group committee private)
+  ALL_ALLOWED_PRIVACY = %w(public group committee private).freeze
+  ALLOWED_PRIVACY = ALL_ALLOWED_PRIVACY - %w(private)
+  NON_COMMITTEE_ALLOWED_PRIVACY = ALL_ALLOWED_PRIVACY - %w(private committee)
 
   belongs_to :created_by, class_name: 'User'
   belongs_to :group, inverse_of: :threads
@@ -72,7 +74,7 @@ class MessageThread < ActiveRecord::Base
   after_create      :add_subscribers
 
   validates :title, :created_by, presence: true
-  validates :privacy, inclusion: { in: ALLOWED_PRIVACY }
+  validates :privacy, inclusion: { in: ALL_ALLOWED_PRIVACY }
   validate :must_be_created_by_enabled_user, on: :create
 
   aasm column: 'status' do
@@ -86,13 +88,13 @@ class MessageThread < ActiveRecord::Base
 
   class << self
     def non_committee_privacies_map
-      (ALLOWED_PRIVACY - %w(committee private)).map do |n|
+      NON_COMMITTEE_ALLOWED_PRIVACY.map do |n|
         [I18n.t("thread_privacy_options.#{n.to_s}"), n]
       end
     end
 
     def privacies_map
-      (ALLOWED_PRIVACY - ['private']).map do |n|
+      ALLOWED_PRIVACY.map do |n|
         [I18n.t("thread_privacy_options.#{n.to_s}"), n]
       end
     end
