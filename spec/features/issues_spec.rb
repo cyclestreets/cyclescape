@@ -366,15 +366,6 @@ describe 'Issues' do
           expect(page).to have_content(edit_text)
         end
       end
-
-      context 'long ago' do
-        let(:issue) { create(:issue, created_by: current_user, created_at: 2.days.ago) }
-
-        it 'should not show you an edit link' do
-          visit issue_path(issue)
-          expect(page).not_to have_content(edit_text)
-        end
-      end
     end
 
     context 'as another user' do

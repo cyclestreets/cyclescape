@@ -45,7 +45,7 @@ describe IssueApi::API do
 
     context 'with dates' do
       before do
-        create :issue, deadline: 1.day.ago, id: 42
+        create :issue, deadline: 1.day.ago, id: 4242
         create :issue, created_at: 3.days.ago, deadline: 3.day.ago
       end
 
@@ -53,23 +53,23 @@ describe IssueApi::API do
         get "api/issues", start_date: 2.days.ago.strftime("%Y/%m/%d")
 
         expect(geojson_response.size).to eq(1)
-        expect(geojson_response[0]['id']).to eq(42)
+        expect(geojson_response[0]['id']).to eq(4242)
       end
 
       it 'respects the end date parameter' do
         get "api/issues", end_date: 2.days.ago.strftime("%Y/%m/%d")
 
         expect(geojson_response.size).to eq(1)
-        expect(geojson_response[0]['id']).to_not eq(42)
+        expect(geojson_response[0]['id']).to_not eq(4242)
       end
     end
 
     context 'with group' do
+      let!(:group)         { create(:quahogcc_group_profile) }
       let!(:inside_group)  { create :issue_within_quahog, id: 123 }
       let!(:outside_group) { create :issue, id: 312 }
 
       before do
-        create(:quahogcc_group_profile)
         get "api/issues", group: 'quahogcc'
       end
 
