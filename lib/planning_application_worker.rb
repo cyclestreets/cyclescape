@@ -94,8 +94,9 @@ class PlanningApplicationWorker
       planning_applications.each do |remote_pa|
         next unless remote_pa['uid'] && remote_pa['url']
 
-        db_app = PlanningApplication.find_or_initialize_by uid: remote_pa['uid']
-        [:address, :postcode, :description, :authority_name, :url, :start_date].each do |attr|
+        db_app = PlanningApplication
+          .find_or_initialize_by uid: remote_pa['uid'], authority_name: remote_pa['authority_name']
+        [:address, :postcode, :description, :url, :start_date].each do |attr|
           db_app[attr] = remote_pa[attr.to_s]
         end
         db_app.location = "POINT(#{remote_pa['lng']} #{remote_pa['lat']})"

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160216080420) do
+ActiveRecord::Schema.define(version: 20160308000500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -355,7 +355,7 @@ ActiveRecord::Schema.define(version: 20160216080420) do
 
   add_index "planning_applications", ["issue_id"], name: "index_planning_applications_on_issue_id", using: :btree
   add_index "planning_applications", ["location"], name: "index_planning_applications_on_location", using: :gist
-  add_index "planning_applications", ["uid"], name: "index_planning_applications_on_uid", unique: true, using: :btree
+  add_index "planning_applications", ["uid"], name: "index_planning_applications_on_uid", using: :btree
 
   create_table "site_comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -417,7 +417,7 @@ ActiveRecord::Schema.define(version: 20160216080420) do
 
   create_table "user_locations", force: :cascade do |t|
     t.integer  "user_id",                                              null: false
-    t.integer  "category_id",                                          null: false
+    t.integer  "category_id"
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
     t.geometry "location",    limit: {:srid=>4326, :type=>"geometry"}
