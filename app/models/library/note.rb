@@ -30,7 +30,7 @@ class Library::Note < Library::Component
   def title
     field = read_attribute(:title)
     if field.blank?
-      body.truncate(30)
+      body.truncate(120)
     else
       field
     end
