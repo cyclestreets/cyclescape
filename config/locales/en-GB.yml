@@ -1089,7 +1089,8 @@
   users:
     private_message_threads:
       new:
-        message_for_html: "Message for %{other}"
+        message_for_html: "Send a private message to %{other}"
+        introduction_html: This is a private message that only you and %{other} can see.
         send: Send Private message
       index:
         with_html: "with %{other}."

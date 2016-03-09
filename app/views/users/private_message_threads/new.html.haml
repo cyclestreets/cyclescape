@@ -1,5 +1,7 @@
 %section.new-thread
-  = t '.message_for_html', other: link_to_profile(@user)
+  %header
+    %h1= t '.message_for_html', other: link_to_profile(@user)
+    %p= t '.introduction_html', other: link_to_profile(@user)
   = semantic_form_for @thread, as: :thread, url: {action: :create}, html: {class: 'guided'} do |f|
     = f.semantic_errors
     = f.inputs do
