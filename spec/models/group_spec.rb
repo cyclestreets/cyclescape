@@ -23,8 +23,8 @@ describe Group do
 
   describe 'scopes' do
     it 'has ordered scope' do
-      create :group
-      expect(described_class.ordered.count).to eq 1
+      group = create :group
+      expect(described_class.ordered).to eq [group]
     end
   end
 
