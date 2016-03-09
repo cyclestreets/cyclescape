@@ -1,25 +1,14 @@
-# PostgreSQL. Versions 7.4 and 8.x are supported.
-#
-# Install the pg driver:
-#   gem install pg
-# On Mac OS X with macports:
-#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
-# On Windows:
-#   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
-#
-# Configure Using Gemfile
-# gem 'pg'
-#
+# This app uses PostgreSQL and the PostGIS spatial extensions.
+# The postgis database adapter takes care of adding the extensions to
+# the database automatically.
+
 development:
   adapter: postgis
   encoding: unicode
   database: cyclescape_development
   pool: 5
-  username: cyclescape
+  username:
   password:
-  script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -44,15 +33,13 @@ test:
   encoding: unicode
   database: cyclescape_test
   pool: 5
-  username: cyclescape
+  username:
   password:
-  script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5
 
 production:
   adapter: postgis
   encoding: unicode
   database: cyclescape_production
   pool: 5
-  username: cyclescape
+  username:
   password:
-  script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5
