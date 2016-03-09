@@ -56,7 +56,7 @@ RSpec.configure do |config|
                       password: 'changeme', password_confirmation: 'changeme', role: 'admin')
       root.skip_confirmation!
       root.save!
-      User.where(id: 1).update_all(id: "#{root.id}")
+      User.where(id: 1).update_all(id: root.id.to_s)
     end
 
     # Disable the observers so that their behaviour can be tested independently
