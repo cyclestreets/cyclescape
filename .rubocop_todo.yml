@@ -391,14 +391,6 @@ Style/Documentation:
 Style/DotPosition:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/ElseAlignment:
-  Exclude:
-    - 'app/controllers/issues_controller.rb'
-    - 'app/controllers/message_threads_controller.rb'
-    - 'app/controllers/messages_controller.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: AllowAdjacentOneLineDefs.
