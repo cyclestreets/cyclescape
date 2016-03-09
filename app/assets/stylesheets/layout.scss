@@ -135,7 +135,7 @@ article.message {
   min-height: 60px;
   .details {
     padding: 4px;
-    .author a {
+    .author .name {
       margin-left: 4px;
     }
     .thumbnail {
@@ -275,4 +275,3 @@ body.library-notes {
   }
 
 }
-
