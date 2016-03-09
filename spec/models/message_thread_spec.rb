@@ -146,6 +146,16 @@ describe MessageThread do
     end
   end
 
+  it '#latest_activity_at' do
+    thread = create(:message_thread, :with_messages)
+    newest_message = thread.messages.last
+    tomorrow = 1.day.from_now
+    newest_message.update(updated_at: tomorrow)
+    expect(thread.latest_activity_at).to be_within(1).of tomorrow
+    newest_message.update_column(:status, 'mod_queued')
+    expect(thread.latest_activity_at).to_not eq tomorrow
+  end
+
   context 'public token' do
     it 'should be set after being created' do
       thread = create(:message_thread)
