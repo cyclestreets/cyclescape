@@ -396,6 +396,7 @@ Style/ConditionalAssignment:
   Exclude:
     - 'app/controllers/application_controller.rb'
     - 'app/controllers/groups_controller.rb'
+    - 'app/workers/new_thread_notifier.rb'
 
 # Offense count: 1
 Style/ConstantName:
@@ -476,13 +477,7 @@ Style/ExtraSpacing:
 # Offense count: 6
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
-  Exclude:
-    - 'app/controllers/issue/photos_controller.rb'
-    - 'app/decorators/issue_decorator.rb'
-    - 'app/models/site_comment.rb'
-    - 'app/models/tag.rb'
-    - 'app/models/user.rb'
-    - 'lib/locatable/locatable.rb'
+  Enabled: false
 
 # Offense count: 7
 # Cop supports --auto-correct.
