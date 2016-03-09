@@ -48,7 +48,7 @@ RSpec.configure do |config|
 
     # Clear out DragonFly assets
     dragonfly_path = "#{Rails.root}/public/system/dragonfly/test"
-    FileUtils.rm_r(dragonfly_path) if File.exists?(dragonfly_path)
+    FileUtils.rm_r(dragonfly_path) if File.exist?(dragonfly_path)
 
     # Create the root user
     unless User.where(id: 1).exists?

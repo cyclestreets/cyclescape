@@ -19,12 +19,6 @@ Lint/AssignmentInCondition:
     - 'app/controllers/issues_controller.rb'
     - 'bin/spring'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/DeprecatedClassMethods:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: AlignWith, SupportedStyles, AutoCorrect.
