@@ -725,16 +725,6 @@ Style/SpaceAroundKeyword:
   Exclude:
     - 'lib/tasks/auto_annotate_models.rake'
 
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment.
-Style/SpaceAroundOperators:
-  Exclude:
-    - 'app/models/message_thread.rb'
-    - 'config/environments/test.rb'
-    - 'lib/planning_application_worker.rb'
-    - 'spec/lib/planning_application_worker_spec.rb'
-
 # Offense count: 54
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
