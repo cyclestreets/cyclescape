@@ -89,13 +89,13 @@ class MessageThread < ActiveRecord::Base
   class << self
     def non_committee_privacies_map
       NON_COMMITTEE_ALLOWED_PRIVACY.map do |n|
-        [I18n.t("thread_privacy_options.#{n.to_s}"), n]
+        [I18n.t("thread_privacy_options.#{n}"), n]
       end
     end
 
     def privacies_map
       ALLOWED_PRIVACY.map do |n|
-        [I18n.t("thread_privacy_options.#{n.to_s}"), n]
+        [I18n.t("thread_privacy_options.#{n}"), n]
       end
     end
 

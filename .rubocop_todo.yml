@@ -41,16 +41,6 @@ Lint/ParenthesesAsGroupedExpression:
   Exclude:
     - 'spec/features/groups/membership_requests_spec.rb'
 
-# Offense count: 6
-# Cop supports --auto-correct.
-Lint/StringConversionInInterpolation:
-  Exclude:
-    - 'app/models/group.rb'
-    - 'app/models/group_membership.rb'
-    - 'app/models/message_thread.rb'
-    - 'app/models/user.rb'
-    - 'app/models/user_thread_priority.rb'
-
 # Offense count: 1
 Lint/UnderscorePrefixedVariableName:
   Exclude:
