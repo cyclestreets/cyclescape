@@ -34,6 +34,8 @@ class Group < ActiveRecord::Base
   after_create :create_default_prefs, unless: :prefs
   before_destroy :unlink_threads
 
+  scope :ordered, -> { order(threads_count: :desc) }
+
   def committee_members
     members.includes(:memberships).where(group_memberships: {role: 'committee'}).
       order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
