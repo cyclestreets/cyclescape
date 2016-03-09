@@ -873,12 +873,6 @@ Style/TrailingCommaInLiteral:
     - 'app/models/user_pref.rb'
     - 'lib/planning_application_worker.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Exclude:
-    - 'app/controllers/group/prefs_controller.rb'
-
 # Offense count: 4
 # Cop supports --auto-correct.
 # Configuration parameters: ExactNameMatch, AllowPredicates, AllowDSLWriters, IgnoreClassMethods, Whitelist.

@@ -25,6 +25,6 @@ class Group::PrefsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:group_pref).permit :membership_secretary_id, :notify_membership_requests 
+    params.require(:group_pref).permit :membership_secretary_id, :notify_membership_requests
   end
 end
