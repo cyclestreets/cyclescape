@@ -6,10 +6,10 @@ class MessagesController < ApplicationController
 
     # spam? check needs to be done in the controller
     message.check_reason = if message.spam?
-                            'possible_spam'
-                          elsif !current_user.approved?
-                            'not_approved'
-                          end
+                             'possible_spam'
+                           elsif !current_user.approved?
+                             'not_approved'
+                           end
 
     if message.save
       if message.check_reason

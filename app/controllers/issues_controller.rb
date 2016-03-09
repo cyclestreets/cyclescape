@@ -136,9 +136,9 @@ class IssuesController < ApplicationController
                    end
     creator_url = if permitted_to? :view_profile, issue.created_by
                     view_context.url_for user_profile_path(issue.created_by)
-                   else
-                     '#'
-                   end
+                  else
+                    '#'
+                  end
 
     issue.loc_feature(thumbnail: issue.medium_icon_path,
                       image_url: issue.tip_icon_path(false),
