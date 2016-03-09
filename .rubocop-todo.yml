@@ -50,11 +50,6 @@ ConstantName:
 CyclomaticComplexity:
   Max: 7
 
-# Offence count: 2
-# Configuration parameters: IncludePaths.
-DefaultScope:
-  Enabled: false
-
 # Offence count: 174
 Documentation:
   Enabled: false
@@ -126,10 +121,6 @@ RedundantBegin:
 # Configuration parameters: AllowMultipleReturnValues.
 RedundantReturn:
   Enabled: false
-
-# Offence count: 1
-RegexpLiteral:
-  MaxSlashes: 2
 
 # Offence count: 3
 ShadowingOuterLocalVariable:
