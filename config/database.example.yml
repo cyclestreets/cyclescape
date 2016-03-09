@@ -19,7 +19,6 @@ development:
   pool: 5
   username: cyclescape
   password:
-  script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -46,7 +45,6 @@ test:
   pool: 5
   username: cyclescape
   password:
-  script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5
 
 production:
   adapter: postgis
@@ -55,4 +53,3 @@ production:
   pool: 5
   username: cyclescape
   password:
-  script_dir: /usr/share/postgresql/9.0/contrib/postgis-1.5
