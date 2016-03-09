@@ -143,8 +143,9 @@ authorization do
       if_attribute groups: intersects_with { user.groups }
       if_attribute requested_groups: intersects_with { user.in_group_committee }
     end
-    has_permission_on :users, to: :send_private_message do
+    has_permission_on :users, to: :send_private_message, join_by: :and do
       if_permitted_to :view_full_name
+      if_attribute id: is_not { user.id }
     end
     has_permission_on :users, to: :view_profile do
       if_permitted_to :view_full_name
