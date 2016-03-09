@@ -67,6 +67,7 @@ gem 'sunspot_rails', github: 'nikolai-b/sunspot', branch: 'bb_conjunctions'
 gem 'tagsinput-rails'
 
 group :development do
+  gem 'rubocop'
   gem 'letter_opener'
   gem 'quiet_assets'
   gem 'annotate', '>= 2.5.0', require: false

@@ -89,13 +89,13 @@ class MessageThread < ActiveRecord::Base
   class << self
     def non_committee_privacies_map
       NON_COMMITTEE_ALLOWED_PRIVACY.map do |n|
-        [I18n.t("thread_privacy_options.#{n.to_s}"), n]
+        [I18n.t("thread_privacy_options.#{n}"), n]
       end
     end
 
     def privacies_map
       ALLOWED_PRIVACY.map do |n|
-        [I18n.t("thread_privacy_options.#{n.to_s}"), n]
+        [I18n.t("thread_privacy_options.#{n}"), n]
       end
     end
 
@@ -166,11 +166,11 @@ class MessageThread < ActiveRecord::Base
     fail "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
 
     # For multipart messages we pull out the text/plain content
-    text =  if mail.message.multipart?
-              mail.message.text_part.decoded
-            else
-              mail.message.decoded
-            end
+    text = if mail.message.multipart?
+             mail.message.text_part.decoded
+           else
+             mail.message.decoded
+           end
 
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")

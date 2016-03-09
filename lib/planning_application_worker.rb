@@ -109,8 +109,8 @@ class PlanningApplicationWorker
     dates = { start_date: (@end_date - 14.days), end_date: @end_date }
 
     if days_offset
-      dates = { start_date: (@end_date - 14.days + (5*days_offset).days),
-                end_date:   (@end_date - 10.days + (5*days_offset).days) }
+      dates = { start_date: (@end_date - 14.days + (5 * days_offset).days),
+                end_date:   (@end_date - 10.days + (5 * days_offset).days) }
     end
 
     {method: :get, idempotent: true, query:
