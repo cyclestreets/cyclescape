@@ -21,6 +21,13 @@ describe Group do
     end
   end
 
+  describe 'scopes' do
+    it 'has ordered scope' do
+      group = create :group
+      expect(described_class.ordered).to eq [group]
+    end
+  end
+
   describe 'newly created' do
     subject { create(:group) }
 

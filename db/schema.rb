@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308000500) do
+ActiveRecord::Schema.define(version: 20160309205413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 20160308000500) do
     t.datetime "updated_at",                                            null: false
     t.datetime "disabled_at"
     t.string   "default_thread_privacy", limit: 255, default: "public", null: false
+    t.integer  "message_threads_count"
   end
 
   add_index "groups", ["short_name"], name: "index_groups_on_short_name", using: :btree
