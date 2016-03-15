@@ -1,435 +1,586 @@
-# Czech translations for Ruby on Rails
-
 "cs-CZ":
-  application_name: "Cyklisté sobě"
-  tags: "Štítky"
-  anon: "Anonymní"
-  sign_in: "přihlásit"  # Used for links
-  possible_spam: "Myslíme si, že tato zpráva může být spam . Pokud ne, prosím, přijměte naši omluvu . To je ve frontě , které mají být kontrolovány moderátor."
-  not_approved: "Nová témata mohou být automaticky vytvořeny pouze schválené uživatelé . To je ve frontě , které mají být kontrolovány moderátor."
-  confirm: "Opravdu?"
-  deadline_date: "Termín/datum"
+  application_name: Cyklisté sobě
+  tags:
+    show:
+      heading: Položky označené jako '%{name}'
+      unrecognised: Nemohu najít žádnou položku označenou štítkem '%{name}'
+  anon: Anonymní
+  sign_in: přihlásit
+  confirm: Opravdu?
+  possible_spam: Myslíme si, že tato zpráva může být spam . Pokud ne, prosím, přijměte
+    naši omluvu . To je ve frontě , které mají být kontrolovány moderátor.
+  not_approved: Nová témata mohou být automaticky vytvořeny pouze schválené uživatelé
+    . To je ve frontě , které mají být kontrolovány moderátor.
   days_away:
-    zero: "Dnes!"
-    one: "Zítra!"
-    other: "Za %{count} dní"
+    zero: Dnes!
+    one: Zítra!
+    other: Za %{count} dní
+  email_status:
+    no_email: No email
+    email: Email every message
+    digest: Daily email digest
+  deadline_date: Termín/datum
+  time:
+    formats:
+      long_deadline: '%A, %d %B %Y %l:%M %p'
+  date:
+    formats:
+      long_deadline: '%A, %d %B %Y %l:%M %p'
   admin:
     groups:
       index:
-        title: "Skupiny"
-        actions: "Akce"
-        new_group: "Vytvořit novou skupinu"
-        edit: "Upravit"
-        edit_prefs: "Upravit nastavení"
-        edit_profile: "Upravit profil"
-        group_email: "Email skupiny"
-        members: "Členové"
-        name: "Název skupiny"
+        title: Skupiny
+        actions: Akce
+        new_group: Vytvořit novou skupinu
+        edit: Upravit
+        edit_prefs: Upravit nastavení
+        edit_profile: Upravit profil
+        group_email: Email skupiny
+        members: Členové
+        name: Název skupiny
+        subdomain: Subdomain
       create:
-        success: "Vytvořená skupina"
+        success: Vytvořená skupina
       new:
-        title: "Přidat skupinu"
-        introduction: "Jelikož jste systémový administrátor, můžete použít tento formulář pro vytvoření nové skupiny."
+        title: Přidat skupinu
+        introduction: Jelikož jste systémový administrátor, můžete použít tento formulář
+          pro vytvoření nové skupiny.
       update:
-        success: "Skupina upravena"
+        success: Skupina upravena
       edit:
-         edit_group: "Upravit skupinu"
+        edit_group: Upravit skupinu
     home:
       index:
-        admin_interface: "Správa"
-        admin_interface_introduction: "Tento oddíl obsahuje funkce správy dostupné pouze správcům."
-        manage_comments: "Spravovat zpětné vazby"
-        manage_groups: "Spravovat skupiny"
-        manage_group_requests: "Spravovat žádosti o zřízení skupiny"
-        manage_issue_categories: "Spravovat kategorie podnětů"
-        manage_users: "Spravovat uživatele"
-        manage_message_moderations: "Spravovat moderované zprávy"
+        admin_interface: Správa
+        admin_interface_introduction: Tento oddíl obsahuje funkce správy dostupné
+          pouze správcům.
+        manage_comments: Spravovat zpětné vazby
+        manage_groups: Spravovat skupiny
+        manage_group_requests: Spravovat žádosti o zřízení skupiny
+        manage_issue_categories: Spravovat kategorie podnětů
+        manage_users: Spravovat uživatele
+        manage_message_moderations: Spravovat moderované zprávy
     issue_categories:
       create:
-        success: "Kategorie vytvořena"
+        success: Kategorie vytvořena
       index:
-        title: "Kategorie podnětů"
+        title: Kategorie podnětů
       update:
-        success: "Kategorie vytvořena"
+        success: Kategorie vytvořena
     user:
       locations:
         create:
-          success: "Oblast působnosti vytvořena"
+          success: Oblast působnosti vytvořena
         edit:
-          title: "Upravit oblast působnosti uživatele %{user_name}"
+          title: Upravit oblast působnosti uživatele %{user_name}
         index:
-          all_user_locations: "Všechny oblasti působnosti pro %{user_name}"
-          category: "Kategorie"
-          combined_locations: "Kombinovaná umístění"
-          combined_locations_guidance: "Toto jsou zkombinované oblasti působnosti pro tohoto uživatele."
-          combined_locations_guidance: "Tato mapa ukazuje všechna umístění vybraného uživatele zkombinovaná dohromady."
-          confirm: "Skutečně?"
-          delete: "Smazat"
-          edit: "Upravit"
-          map: "Mapa"
-          new: "Nová oblast"
-          no_locations_yet: "Tento uživatel nemá zatím žádné oblasti působnosti."
-          no_locations_guidance: "Jako administrátor můžete přidat jeho první oblast."
-          no_overlapping_groups: "Žádné spádové místní skupiny"
-          title: "Oblasti uživatele %{user_name}"
-          overlapping_groups: "Spádové místní skupiny"
+          all_user_locations: Všechny oblasti působnosti pro %{user_name}
+          category: Kategorie
+          combined_locations: Kombinovaná umístění
+          combined_locations_guidance: Tato mapa ukazuje všechna umístění vybraného
+            uživatele zkombinovaná dohromady.
+          confirm: Skutečně?
+          delete: Smazat
+          edit: Upravit
+          map: Mapa
+          new: Nová oblast
+          no_locations_yet: Tento uživatel nemá zatím žádné oblasti působnosti.
+          no_locations_guidance: Jako administrátor můžete přidat jeho první oblast.
+          no_overlapping_groups: Žádné spádové místní skupiny
+          title: Oblasti uživatele %{user_name}
+          overlapping_groups: Spádové místní skupiny
         new:
-          title: "Nová oblast pro %{user_name}"
+          title: Nová oblast pro %{user_name}
         update:
-          success: "Oblast upravena"
+          success: Oblast upravena
     users:
-      index: &admin_users_index
-        created: "Vytvořeno"
-        created_at: "před %{time_ago}"
-        last_seen: "Naposledy přihlášen"
-        last_seen_at: "před %{time_ago}"
-        introduction: "Tato stránka zobrazuje všechny uživatele v systému (nezávisle na tom v jaká mají oprávnění)."
-        disabled: "Neaktivní"
-        disabled_at: "před %{time_ago}"
-        display_name: "Zobrazené jméno"
-        edit: "Podrobnosti uživatele"
-        email: "Email"
-        full_name: "Plné jméno"
-        id: "id"
-        role: "Role"
-        title: "Uživatelé"
-        preferences: "Nastavení"
-        locations: "Oblasti působnosti"
-        website: "Webová stránka:"
-        about: "O stránkách"
+      index:
+        created: Vytvořeno
+        created_at: před %{time_ago}
+        last_seen: Naposledy přihlášen
+        last_seen_at: před %{time_ago}
+        introduction: Tato stránka zobrazuje všechny uživatele v systému (nezávisle
+          na tom v jaká mají oprávnění).
+        disabled: Neaktivní
+        disabled_at: před %{time_ago}
+        display_name: Zobrazené jméno
+        edit: Podrobnosti uživatele
+        email: Email
+        full_name: Plné jméno
+        id: id
+        role: Role
+        title: Uživatelé
+        preferences: Nastavení
+        locations: Oblasti působnosti
+        website: 'Webová stránka:'
+        about: O stránkách
         approved: Schváleno
         approve: Schvalovat
       user:
-        <<: *admin_users_index
+        created: Vytvořeno
+        created_at: před %{time_ago}
+        last_seen: Naposledy přihlášen
+        last_seen_at: před %{time_ago}
+        introduction: Tato stránka zobrazuje všechny uživatele v systému (nezávisle
+          na tom v jaká mají oprávnění).
+        disabled: Neaktivní
+        disabled_at: před %{time_ago}
+        display_name: Zobrazené jméno
+        edit: Podrobnosti uživatele
+        email: Email
+        full_name: Plné jméno
+        id: id
+        role: Role
+        title: Uživatelé
+        preferences: Nastavení
+        locations: Oblasti působnosti
+        website: 'Webová stránka:'
+        about: O stránkách
+        approved: Schváleno
+        approve: Schvalovat
       update:
-        success: "Uživatel upraven"
+        success: Uživatel upraven
       edit:
-        edit_user: "Upravit uživatele"
+        edit_user: Upravit uživatele
   application:
-    account_disabled: "Váš účet byl deaktivován správcem"
-    permission_denied: "Nemáte oprávnění přistupovat k této stránce."
+    account_disabled: Váš účet byl deaktivován správcem
+    permission_denied: Nemáte oprávnění přistupovat k této stránce.
   planning_applications:
     hide:
       success: Planning application hidden from overview
       failure: Could not hide that application
     index:
-      planning_applications: "Planning applications"
-      pointer_to_dashboard_html: "You can browse planning applications in your area on your %{dashboard_planning_link} page."
-      explanation: "You can promote any planning application to an issue so that it is like any other submitted issue."
-    planning_application: &planning_applications_search
-      page_title: "Search Results for '%{q}'"
-      convert_to_issue_html: "Convert to an Issue &hellip;"
-      planning_applications: "Planning applications"
+      planning_applications: Planning applications
+      pointer_to_dashboard_html: You can browse planning applications in your area
+        on your %{dashboard_planning_link} page.
+      explanation: You can promote any planning application to an issue so that it
+        is like any other submitted issue.
+    planning_application:
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
       planning_applications_search: e.g. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
-      no_results_found: "No results found"
-      your_planning_applications: "Your local planning applications"
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
       hide: Vote to hide
       unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden for everyone
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
       part_hidden: Part Hidden
     show:
-      address_label: "Address:"
-      council_label: "Council:"
-      data_source: "Data source"
-      data_from_html: "Planning application data is sourced from %{link}"
-      location: "Location"
-      official_application: "View on council website"
-      official_application_label: "Official application:"
-      planit: "PlanIt"
-      related_issue: "Related issue"
-      related_issue_guidance: "This planning application has been converted to an issue:"
-      uid_label: "Application reference:"
-      view_official_application: "View official application"
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
+      part_hidden: Part Hidden
+      address_label: 'Address:'
+      council_label: 'Council:'
+      data_source: Data source
+      data_from_html: Planning application data is sourced from %{link}
+      location: Location
+      official_application: View on council website
+      official_application_label: 'Official application:'
+      planit: PlanIt
+      related_issue: Related issue
+      related_issue_guidance: 'This planning application has been converted to an
+        issue:'
+      uid_label: 'Application reference:'
+      view_official_application: View official application
       start_date: 'Date application was made:'
       hidden: Hidden (will not appear in anyones dashboard)
-      <<: *planning_applications_search
+      no_location: Exact location not received from council site
     search:
-      <<: *planning_applications_search
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
+      part_hidden: Part Hidden
   dashboards:
     show:
-      add_a_new_issue: "přidat nový podnět"
-      add_another_location: "přidat další oblast"
-      add_some_locations: "přidat oblasti"
-      areas_you_are_watching: "oblasti, které sledujete"
-      converted_to_issue: "Převedeno na podnět:"
-      deadlines: "Termíny a data"
-      deadline_thread_updated: "vlákno upraveno %{at}"
-      issues_lower: "podněty"
-      involved_threads: "Zahrnutá vlákna"
-      issues_in_your_area: "Podněty ve vaší oblasti"
-      new_group_thread: "Založit nové diskuzní vlákno místní skupiny"
-      my_issues_nearby_introduction_html: "Podněty v oblastech %{areas_you_are_watching_link} jsou zobrazeny níže, nejnovější jako první."
-      my_issues_nearby_issues_pointer_html: "(Můžete si také %{browse_all_other_issues_link} mimo vaše oblasti zájmu.)"
-      browse_all_other_issues: "prohlédnout všechny podněty"
-      my_priorities_introduction: "Toto je seznam všech nastavených důležitostí, nejdůležitější jako první:"
-      my_threads_introduction: "Nejnovější aktualizace diskuzních vláken, do kterých jste zapsáni:"
-      my_upcoming_deadline_introduction: "Nastávající termíny a data v diskuzních vláknech do kterých jste zapsáni:"
-      no_upcoming_deadline_threads: "Nejste zapsáni do žádného vlákna s nastávajícími termíny nebo daty."
-      no_subscribed_threads_html:
-        Zatím neodebíráte žádná vlákna. Můžete se podívat na %{threads_link},
-        jestli tam není něco, s čím byste mohli pomoci, nebo můžete %{add_issue_link}?
-      no_prioritised_threads_html:
-        Zatím jste nezadali důležitost žádnému vláknu. Můžete se podívat na %{threads_link}
-        jestli tam nenajdete něco důležitého, nebo můžete %{add_issue_link}.
-      no_issues_nearby_html: "Žádné podněty nejsou hlášeny ve vaší oblasti zájmu. Můžete %{add_issue_link}, nebo %{add_location_link}."
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
+      part_hidden: Part Hidden
+      add_a_new_issue: přidat nový podnět
+      add_another_location: přidat další oblast
+      add_some_locations: přidat oblasti
+      areas_you_are_watching: oblasti, které sledujete
+      converted_to_issue: 'Převedeno na podnět:'
+      deadlines: Termíny a data
+      deadline_thread_updated: vlákno upraveno %{at}
+      issues_lower: podněty
+      involved_threads: Zahrnutá vlákna
+      issues_in_your_area: Podněty ve vaší oblasti
+      new_group_thread: Založit nové diskuzní vlákno místní skupiny
+      my_issues_nearby_introduction_html: Podněty v oblastech %{areas_you_are_watching_link}
+        jsou zobrazeny níže, nejnovější jako první.
+      my_issues_nearby_issues_pointer_html: (Můžete si také %{browse_all_other_issues_link}
+        mimo vaše oblasti zájmu.)
+      browse_all_other_issues: prohlédnout všechny podněty
+      my_priorities_introduction: 'Toto je seznam všech nastavených důležitostí, nejdůležitější
+        jako první:'
+      my_threads_introduction: 'Nejnovější aktualizace diskuzních vláken, do kterých
+        jste zapsáni:'
+      my_upcoming_deadline_introduction: 'Nastávající termíny a data v diskuzních
+        vláknech do kterých jste zapsáni:'
+      no_upcoming_deadline_threads: Nejste zapsáni do žádného vlákna s nastávajícími
+        termíny nebo daty.
+      no_subscribed_threads_html: Zatím neodebíráte žádná vlákna. Můžete se podívat
+        na %{threads_link}, jestli tam není něco, s čím byste mohli pomoci, nebo můžete
+        %{add_issue_link}?
+      no_prioritised_threads_html: Zatím jste nezadali důležitost žádnému vláknu.
+        Můžete se podívat na %{threads_link} jestli tam nenajdete něco důležitého,
+        nebo můžete %{add_issue_link}.
+      no_issues_nearby_html: Žádné podněty nejsou hlášeny ve vaší oblasti zájmu. Můžete
+        %{add_issue_link}, nebo %{add_location_link}.
       location:
-        one: umístění
-        other: umístění
-      no_group_threads: "Žádná z vašich místních skupin nemá žádné diskuzní vlákno. Můžete započít novou konverzaci!"
-      no_locations_guidance_html: "Nenastavili jste žádné oblasti zájmu! Pokud %{add_some_locations_link}, zobrazí se vám zde nejbližší podněty."
-      no_user_groups: "Zatím nejste členem žádné místní skupiny! Jestliže se k nějaké připojíte, zde se vám zobrazí nejnověji diskutovaná vlákna."
-      recent_threads: "nedávná diskuzní vlákna"
-      subscribed_threads: "Odebíraná diskuzní vlákna"
-      group_threads: "Témata místních skupin"
-      no_planning_applications_nearby_html: "There are no planning applications in your area. You could %{add_location_link}."
-      no_user_groups: "Zatím nejste členem žádné místní skupiny! Jakmile se k nějaké skupině připojíte, budou se zde zobrazovat její diskuze."
-      <<: *planning_applications_search
-      planning_applications_in_your_area: "Planning applications in your %{location}"
-      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
-      planning_applications_lower: "planning applications"
-      planning_applications_introduction_html: "These are the most recent planning applications (courtesy of the PlanIt website) in your %{location_link}:"
-      recent_threads: "nedávná vlákna"
-      subscribed_threads: "Zapsaná vlákna"
-      thread_latest_activity: "před %{time_ago}"
-      group_threads: "Diskuzní vlákna místních skupin"
-      group_threads_desc_html:
-        Nejnovější diskuzní vlákna na kterých pracovala některá z vašich místních skupin.
-      my_priorities: "Důležitost"
-      my_threads: "Odebíraná vlákna"
-      issues_nearby: "Podněty v blízkosti"
+        one: location
+        other: locations
+        few: locations
+      no_group_threads: Žádná z vašich místních skupin nemá žádné diskuzní vlákno.
+        Můžete započít novou konverzaci!
+      no_locations_guidance_html: Nenastavili jste žádné oblasti zájmu! Pokud %{add_some_locations_link},
+        zobrazí se vám zde nejbližší podněty.
+      no_planning_applications_nearby_html: There are no planning applications in
+        your area. You could %{add_location_link}.
+      no_user_groups: Zatím nejste členem žádné místní skupiny! Jakmile se k nějaké
+        skupině připojíte, budou se zde zobrazovat její diskuze.
+      planning_applications_in_your_area: Planning applications in your %{location}
+      planning_applications_introduction_html: 'These are the most recent planning
+        applications (courtesy of the PlanIt website) in your %{location_link}:'
+      planning_applications_lower: planning applications
+      recent_threads: nedávná vlákna
+      subscribed_threads: Zapsaná vlákna
+      thread_latest_activity: před %{time_ago}
+      group_threads: Diskuzní vlákna místních skupin
+      group_threads_desc_html: Nejnovější diskuzní vlákna na kterých pracovala některá
+        z vašich místních skupin.
+      my_priorities: Důležitost
+      my_threads: Odebíraná vlákna
+      issues_nearby: Podněty v blízkosti
+      map: Map
       posted:
-        message_html: "%{creator_link} zaslali zprávu"
-        deadline_message_html: "%{creator_link} zaslali termín/datum"
-        document_message_html: "%{creator_link} zaslali přílohu"
-        photo_message_html: "%{creator_link} zaslali fotografii"
-        link_message_html: "%{creator_link} zaslali odkaz"
-        street_view_message_html: "%{creator_link} vyslán Street View"
-        library_item_message_html: "%{creator_link} zaslali položku knihovny"
+        message_html: '%{creator_link} zaslali zprávu'
+        deadline_message_html: '%{creator_link} zaslali termín/datum'
+        document_message_html: '%{creator_link} zaslali přílohu'
+        photo_message_html: '%{creator_link} zaslali fotografii'
+        link_message_html: '%{creator_link} zaslali odkaz'
+        street_view_message_html: '%{creator_link} vyslán Street View'
+        library_item_message_html: '%{creator_link} zaslali položku knihovny'
     search:
-      title: "Výsledky vyhledávání"
+      title: Výsledky vyhledávání
   devise:
     registrations:
       edit:
-        title: 'Upravit účet'
+        title: Upravit účet
       new:
-        title: "Registrovat"
+        title: Registrovat
         failure: Nezadali jste správný počet kol
     sessions:
       new:
-        title: "Přihlásit"
-        sign_in_button: "Přihlásit"
+        title: Přihlásit
+        sign_in_button: Přihlásit
     mailer:
       invitation_instructions:
-        hello: "Ahoj %{email}"
+        subject: Invitation instructions
+        hello: Ahoj %{email}
+        someone_invited_you: Someone has invited you to %{url}, you can accept it
+          through the link below.
+        accept: Accept invitation
+        ignore: If you don't want to accept the invitation, please ignore this email.<br
+          />Your account won't be created until you access the link above and set
+          your password.
   group:
-    group_prefs_tab: "Nastavení skupiny"
-    group_profile_tab: "Profil místní skupiny"
-    group_management: "Správa místní skupiny"
-    membership_list_tab: "Seznam členů"
-    membership_requests_tab: "Žádosti o členství"
-    home_page_tab: "Domovská stránka"
+    group_prefs_tab: Nastavení skupiny
+    group_profile_tab: Profil místní skupiny
+    group_management: Správa místní skupiny
+    membership_list_tab: Seznam členů
+    membership_requests_tab: Žádosti o členství
+    home_page_tab: Domovská stránka
     issues:
       destroy:
-        failure: "Podnět není možné smazat"
-        success: "Podnět smazán"
+        failure: Podnět není možné smazat
+        success: Podnět smazán
       index:
-        title: "Podněty v oblasti skupiny %{group_name}"
+        title: Podněty v oblasti působnosti místní skupiny %{group_name}
       update:
-        success: "Podnět upraven"
+        success: Podnět upraven
       vote_clear:
-        failure: "Váš hlas nemůže být zrušen"
-        success: "Váš hlas byl zrušen"
+        failure: Váš hlas nemůže být zrušen
+        success: Váš hlas byl zrušen
       vote_down:
-         already: "Už jste jednou tento podnět nepodpořili"
-         success: "Podnět byl nepodpořen"
+        already: Už jste jednou tento podnět nepodpořili
+        success: Podnět byl nepodpořen
       vote_up:
-         already: "Už jste jednou tento podnět podpořili"
-         success: "Podnět byl podpořen"
-      index:
-        title: "Podněty v oblasti působnosti místní skupiny %{group_name}"
+        already: Už jste jednou tento podnět podpořili
+        success: Podnět byl podpořen
     members:
       index:
-        actions: "Akce"
-        add_directly: "můžete je přidat přímo"
-        committee: "Správci místních skupin"
-        committee_guidance: "Správci místních skupin mohou spravovat seznam členů, měnit profil skupiny a upravovat informace o diskuzních vláknech."
-        email: "E-mailová adresa"
-        group_joining_date: "Datum připojení ke skupině"
-        group_members_guidance: "Na této stránce můžete vidět členy vaší místní skupiny, pozvat nové lidí a odebrat členy ze skupiny."
-        invite_directly: "pozvat členy do místní skupiny přímo"
-        member_name: "Jméno člena"
-        ordinary_members: "Obyčejní členové"
-        new_members_guidance_introduction: "Pokud chcete přidat členy:"
-        new_members_guidance_method1_html: "Pokud znáte jejich emailové adresy můžete %{add_directly_link}."
-        new_members_guidance_method2_html: "Pokud již používají Cyklisté sobě, klikněte na jejich jméno v diskuzním vlákně a můžete je přidat z jejich profilové stránky."
-        ordinary_members_guidance: "Obyčejní členové mají přístup do soukromých vláken skupiny a mohou vytvářet nová skupinová vlákna."
-        pending_requests: "Nevyřízené žádosti"
-        review_membership_requests_html: "Uživatelé těchto stránek mohou také požádat o členství v místní skupině. Můžete %{review_membership_requests_link}."
-        review_pending: "nevyřízené žádosti o členství"
-        review_requests: "prohlédnout historii žádostí"
-        title: "Členové %{group}"
-        you_have_pending_members_html: "Máte %{review_pending_requests_link}! Prosím projděte je a zvolte příslušnou akci."
+        actions: Akce
+        add_directly: můžete je přidat přímo
+        committee: Správci místních skupin
+        committee_guidance: Správci místních skupin mohou spravovat seznam členů,
+          měnit profil skupiny a upravovat informace o diskuzních vláknech.
+        email: E-mailová adresa
+        group_joining_date: Datum připojení ke skupině
+        group_members_guidance: Na této stránce můžete vidět členy vaší místní skupiny,
+          pozvat nové lidí a odebrat členy ze skupiny.
+        member_name: Jméno člena
+        ordinary_members: Obyčejní členové
+        new_members_guidance_introduction: 'Pokud chcete přidat členy:'
+        new_members_guidance_method1_html: Pokud znáte jejich emailové adresy můžete
+          %{add_directly_link}.
+        new_members_guidance_method2_html: Pokud již používají Cyklisté sobě, klikněte
+          na jejich jméno v diskuzním vlákně a můžete je přidat z jejich profilové
+          stránky.
+        ordinary_members_guidance: Obyčejní členové mají přístup do soukromých vláken
+          skupiny a mohou vytvářet nová skupinová vlákna.
+        pending_requests: Nevyřízené žádosti
+        review_membership_requests_html: Uživatelé těchto stránek mohou také požádat
+          o členství v místní skupině. Můžete %{review_membership_requests_link}.
+        review_pending: nevyřízené žádosti o členství
+        review_requests: prohlédnout historii žádostí
+        title: Členové %{group}
+        you_have_pending_members_html: Máte %{review_pending_requests_link}! Prosím
+          projděte je a zvolte příslušnou akci.
       member:
-        confirm: "Skutečně?"
-        delete: "Odstranit z místní skupiny"
-        edit: "Upravit členství"
-        joining_date: "před %{time_ago}"
-        invite_pending: "Pozvánka čeká na vyřízení"
+        confirm: Skutečně?
+        delete: Odstranit z místní skupiny
+        edit: Upravit členství
+        joining_date: před %{time_ago}
+        invite_pending: Pozvánka čeká na vyřízení
     memberships:
       new:
-        title: "Pozvat nového člena"
+        title: Pozvat nového člena
       destroy:
-        failure: "Nemohu odstranit člena místní skupiny"
-        success: "Člen místní skupiny odstraněn"
+        failure: Nemohu odstranit člena místní skupiny
+        success: Člen místní skupiny odstraněn
       edit:
-        title: "Upravit členství v místní skupině pro uživatele %{user_name}"
+        title: Upravit členství v místní skupině pro uživatele %{user_name}
       update:
-        failure: "Nemohu upravit členství v místní skupině"
-        success: "Členství v místní skupině upraveno"
+        failure: Nemohu upravit členství v místní skupině
+        success: Členství v místní skupině upraveno
     membership_requests:
       cancel:
-        success: "Žádost o členství zrušena"
+        success: Žádost o členství zrušena
       confirm:
-        failure: "Vyskytl se problém s ověřením členství v místní skupině"
-        success: "Členství v místní skupině ověřeno"
+        failure: Vyskytl se problém s ověřením členství v místní skupině
+        success: Členství v místní skupině ověřeno
       create:
-        requested: "Žádost o členství byla vytvořena"
-        already_asked: "Již jste žádal o členství v místní skupině"
-        already_member: "Už jste členem této místní skupiny"
-      index: &group_membership_requests_index
-        actioned_by: "Uskutečnil"
-        are_you_sure: "Skutečně?"
-        by: "%{name}"
-        confirm: "Potvrdit"
-        created_at: "před %{time_ago}"
-        email: "E-mailová adresa"
-        view_message: "Zobrazit..."
-        message: "Zpráva"
-        no_requests_yet: "Zatím nebyly podány žádné žádosti o členství v této skupině."
-        full_name: "Plné jméno"
-        reject: "Zamítnout"
-        requested_at: "Odesláno"
-        no_requests_yet: "Pro tuto místní skupinu zatím neexistují žádné žádosti o členství."
-        full_name: "Plné jméno"
-        reject: "Zamítnout"
-        review: "Projděte"
-        requested_at: "Žádáno"
-        status: "Stav"
-        title: "Žádost o členství v místní skupině %{group}"
-        status: "Status"
-        title: "Žádosti o členství ve skupině %{group}"
-        user: "Uživatel (zobrazené jméno)"
-        membership_status:
-          confirmed: "Potvrzeno"
-          pending: "Čeká"
-          unconfirmed: "Nepotvrzeno"
+        requested: Žádost o členství byla vytvořena
+        already_asked: Již jste žádal o členství v místní skupině
+        already_member: Už jste členem této místní skupiny
+      index:
+        actioned_by: Uskutečnil
+        are_you_sure: Skutečně?
+        by: '%{name}'
+        confirm: Potvrdit
+        created_at: před %{time_ago}
+        email: E-mailová adresa
+        view_message: Zobrazit...
+        message: Zpráva
+        no_requests_yet: Pro tuto místní skupinu zatím neexistují žádné žádosti o
+          členství.
+        full_name: Plné jméno
+        reject: Zamítnout
+        review: Projděte
+        requested_at: Žádáno
+        status: Status
+        title: Žádosti o členství ve skupině %{group}
+        user: Uživatel (zobrazené jméno)
+        membership_status: &id001
+          confirmed: Potvrzeno
+          pending: Čeká
+          unconfirmed: Nepotvrzeno
           rejected: Zamítnuto
       new:
-        title: "Žádost o členství uživatele %{group_name}"
-        your_membership_request_will: "Vaše žádost o členství bude předána správcům skupiny, kteří vaše členství posoudí."
+        title: Žádost o členství uživatele %{group_name}
+        your_membership_request_will: Vaše žádost o členství bude předána správcům
+          skupiny, kteří vaše členství posoudí.
       reject:
-        failure: "Při zamítání žádosti o členství v místni skupině se vyskytl problém"
-        success: "Členství v místní skupině zamítnuto"
+        failure: Při zamítání žádosti o členství v místni skupině se vyskytl problém
+        success: Členství v místní skupině zamítnuto
       review:
-        <<: *group_membership_requests_index
-        title: "Posoudit žádost o členství ve skupině %{group}"
-        message: "Uživatel připojil k žádosti tenté popis:"
-        no_message: "Uživatel nepřipojil k žádosti žádný popis"
+        actioned_by: Uskutečnil
+        are_you_sure: Skutečně?
+        by: '%{name}'
+        confirm: Potvrdit
+        created_at: před %{time_ago}
+        email: E-mailová adresa
+        view_message: Zobrazit...
+        message: 'Uživatel připojil k žádosti tenté popis:'
+        no_requests_yet: Pro tuto místní skupinu zatím neexistují žádné žádosti o
+          členství.
+        full_name: Plné jméno
+        reject: Zamítnout
+        review: Projděte
+        requested_at: Žádáno
+        status: Status
+        title: Posoudit žádost o členství ve skupině %{group}
+        user: Uživatel (zobrazené jméno)
+        membership_status: *id001
+        no_message: Uživatel nepřipojil k žádosti žádný popis
     message_threads:
       destroy:
-        failure: "Nemohu smazat vlákno"
-        success: "Vlákno smazáno"
+        failure: Nemohu smazat vlákno
+        success: Vlákno smazáno
       index:
-        title: "Diskuzní vlákna místní skupiny %{group}"
-        threads_explanation_html: "Každý z %{issues_link} může mít jedno nebo více diskuzních vláken."
-        issues: "podnětů"
-        new_group_thread: "Diskuze místní skupiny o obecných tématech"
-        issue_threads: "Diskuze o podnětech"
-        issue_threads_description: "Toto jsou soukromé i veřejné diskuze místní skupiny %{group_name} o jejích podnětech, nejnovější jsou řazené dopředu."
-        issue_threads_addition_description: "Pro založení diskuzního vlákna o podnětu přejděte na příslušný podnět."
-        general_threads: "Diskuze o obecných tématech"
-        general_threads_description: "Toto jsou soukromé i veřejné diskuze místní skupiny o obecných tématech, např. uspořádání schůzky."
+        title: Diskuzní vlákna místní skupiny %{group}
+        threads_explanation_html: Každý z %{issues_link} může mít jedno nebo více
+          diskuzních vláken.
+        issues: podnětů
+        new_group_thread: Diskuze místní skupiny o obecných tématech
+        issue_threads: Diskuze o podnětech
+        issue_threads_description: Toto jsou soukromé i veřejné diskuze místní skupiny
+          %{group_name} o jejích podnětech, nejnovější jsou řazené dopředu.
+        issue_threads_addition_description: Pro založení diskuzního vlákna o podnětu
+          přejděte na příslušný podnět.
+        general_threads: Diskuze o obecných tématech
+        general_threads_description: Toto jsou soukromé i veřejné diskuze místní skupiny
+          o obecných tématech, např. uspořádání schůzky.
       new:
-        for_group: "pro %{name}"
-        title: "Nové vlákno místní skupiny"
+        for_group: pro %{name}
+        title: Nové vlákno místní skupiny
       update:
-        success: "Vlákno upraveno"
+        success: Vlákno upraveno
     prefs:
       edit:
-        no_email_warning: "Varování! Nastavili jste, že chcete odesílat oznámení do vaší skupiny, ale není nastaven žádný skupinový email. Buďto si zvolte správce členství ve skupině, nebo požádejte aby byl váš skupinový email nastaven administrátorem stránky."
-        title: "Upravit nastavení"
+        no_email_warning: Varování! Nastavili jste, že chcete odesílat oznámení do
+          vaší skupiny, ale není nastaven žádný skupinový email. Buďto si zvolte správce
+          členství ve skupině, nebo požádejte aby byl váš skupinový email nastaven
+          administrátorem stránky.
+        title: Upravit nastavení
       update:
-        failure: "Nemohu upravit nastavení"
-        success: "Nastavení upravena"
+        failure: Nemohu upravit nastavení
+        success: Nastavení upravena
     profiles:
       edit:
-        title: "Upravit profil"
+        title: Upravit profil
       show:
-        description: "Popis"
-        location: "Oblasti působnosti"
-        no_location: "Tato místní skupina ještě nemá žádné pdorobnosti o oblasti působnosti."
-        no_picture: "Přidejte uvítací obrázek vaší skupiny"
-        picture: "Obrázek"
+        description: Popis
+        location: Oblasti působnosti
+        no_location: Tato místní skupina ještě nemá žádné pdorobnosti o oblasti působnosti.
+        no_picture: Přidejte uvítací obrázek vaší skupiny
+        picture: Obrázek
       update:
-        success: "Profil upraven"
+        success: Profil upraven
   groups:
     search:
-      title: "Výsledky vyhledávání pro %{group}"
-      main_site_link_html: "Pokud chcete vidět za emisní %{group} čtvrti můžete hledat z <a href='%{url}'>národní stránky</a>."
+      title: Výsledky vyhledávání pro %{group}
+      main_site_link_html: Pokud chcete vidět za emisní %{group} čtvrti můžete hledat
+        z <a href='%{url}'>národní stránky</a>.
     index:
-      list_tab: "Seznam"
-      map_tab: "Mapa"
-      new_group: "Vytvořit novou skupinu"
-      send_some_feedback: "pošlete zpětnou vazbu"
-      title: "Adresář skupiny"
+      list_tab: Seznam
+      map_tab: Mapa
+      new_group: Vytvořit novou skupinu
+      send_some_feedback: pošlete zpětnou vazbu
+      title: Adresář skupiny
       group_request: Žádost o novou skupinu
+      no_results_found: No results found
     compact:
-      already_member: "Již jste členem této skupiny"
-      no_location: "Tato skupina ještě nemá určenou oblast působnosti."
+      already_member: Již jste členem této skupiny
+      no_location: Tato skupina ještě nemá určenou oblast působnosti.
     join:
-      join_body:
-        Pokud se chcete zapojit do aktivit %{group}, můžete požádat o členství v této místní skupině Cyklisté sobě.
-      join_this_group: "Připojit se k této skupině"
-      group_request_pending: "Vaše žádost o připojení k této místní skupině se zpracovává."
+      join_body: Pokud se chcete zapojit do aktivit %{group}, můžete požádat o členství
+        v této místní skupině Cyklisté sobě.
+      join_this_group: Připojit se k této skupině
+      group_request_pending: Vaše žádost o připojení k této místní skupině se zpracovává.
     show:
-      edit_group_profile: "Upravit profil místní skupiny"
-      edit_group_prefs: "Upravit nastavení místní skupiny"
-      edit_group_members: "Upravit seznam členů místní skupiny"
-      group_management: "Správa místní skupiny"
-      group_organisers: "Správci místní skupiny"
-      group_request_pending: "Vaše žádost o připojení k této místní skupině se zpracovává."
-      join_body:
-        Můžete požádat o členství v místní skupině Cyklisté sobě, pokud se chcete podílet na aktivitách skupiny %{group}.
-      join_title: "Přidejte se k naší místní skupině Cyklisté sobě"
-      join_this_group: "Přidat se k této místní skupině"
+      edit_group_profile: Upravit profil místní skupiny
+      edit_group_prefs: Upravit nastavení místní skupiny
+      edit_group_members: Upravit seznam členů místní skupiny
+      group_management: Správa místní skupiny
+      group_organisers: Správci místní skupiny
+      join_title: Přidejte se k naší místní skupině Cyklisté sobě
       no_issues: Zatím nejsou žádné podněty v oblasti působnosti této místní skupiny
       no_location: Tato místní skupina ještě nemá definované žádné oblasti působnosti
       no_threads: Tato místní skupina nemá žádná veřejná vlákna
-      our_areas: "Vaše oblasti"
-      recent_issues: "Nedávné události v oblasti místní skupiny"
-      recent_threads: "Poslední diskuze"
+      our_areas: Vaše oblasti
+      recent_issues: Nedávné události v oblasti místní skupiny
+      recent_threads: Poslední diskuze
       view_membership_requests:
-        zero: "Přehled žádostí o členství"
-        one: "Zobrazit neschválenou žádost o členství"
-        other: "Zobrazit neschválené žádosti o členství (%{count})"
+        zero: Přehled žádostí o členství
+        one: Zobrazit neschválenou žádost o členství
+        other: Zobrazit neschválené žádosti o členství (%{count})
       view_message_moderations: Zobrazení moderované zprávy skupiny
   group_requests:
     create:
-      requested: Právě jste požádali o vytvoření místní skupiny. Jakmile bude vytvořena, budete o tom informování.
+      requested: Právě jste požádali o vytvoření místní skupiny. Jakmile bude vytvořena,
+        budete o tom informování.
     new:
-      new_group_request_introduction: Žádosti o založení místní skupiny jsou moderované. Po založení budete členem vedení skupiny, což vám umožní její administraci.
-    index: &group_requests_index
-      <<: *group_membership_requests_index
-      name: Požadovaný název
+      new_group_request_introduction: Žádosti o založení místní skupiny jsou moderované.
+        Po založení budete členem vedení skupiny, což vám umožní její administraci.
+    index:
+      actioned_by: Uskutečnil
+      are_you_sure: Skutečně?
+      by: '%{name}'
+      confirm: Potvrdit
+      created_at: před %{time_ago}
+      email: E-mailová adresa
+      view_message: Zobrazit...
+      message: Zpráva
+      no_requests_yet: Pro tuto místní skupinu zatím neexistují žádné žádosti o členství.
+      full_name: Plné jméno
+      reject: Zamítnout
       review: Revize
+      requested_at: Žádáno
+      status: Status
+      title: Žádosti o členství ve skupině %{group}
+      user: Uživatel (zobrazené jméno)
+      membership_status: *id001
+      name: Požadovaný název
       actions: Akce
       new_group: Založit novou místní skupinu
       group_email: Email
       destroy: Odstranit požadavek
       no_message: Žádná zpráva nebyla k žádosti o založení místní skupiny připojena
     review:
-      <<: *group_requests_index
+      actioned_by: Uskutečnil
+      are_you_sure: Skutečně?
+      by: '%{name}'
+      confirm: Potvrdit
+      created_at: před %{time_ago}
+      email: E-mailová adresa
+      view_message: Zobrazit...
+      message: Zpráva
+      no_requests_yet: Pro tuto místní skupinu zatím neexistují žádné žádosti o členství.
+      full_name: Plné jméno
+      reject: Zamítnout
+      review: Revize
+      requested_at: Žádáno
+      status: Status
+      title: Žádosti o členství ve skupině %{group}
+      user: Uživatel (zobrazené jméno)
+      membership_status: *id001
+      name: Požadovaný název
+      actions: Akce
+      new_group: Založit novou místní skupinu
+      group_email: Email
+      destroy: Odstranit požadavek
+      no_message: Žádná zpráva nebyla k žádosti o založení místní skupiny připojena
       short_name: Subdoména
       website: Webová stránka
     confirm:
@@ -441,635 +592,733 @@
     reject:
       success: Požadavek na založení místní skupiny odmítnut
       failure: Odmítnutí požadavku na založení místní skupiny se nezdařilo
-
   home:
     show:
-      introduction_html:
-        Cyklisté sobě je nástroj na podporu místních skupin
-        snažících se o zlepšení podmínek pro jízdu na kole ve svém okolí.
-      center_box_title:
-        Zde můžete navrhnout, jak zlepšit podmínky pro jízdu na kole
-      center_box_html:
-        Neexistující cyklostezka? Překážka bránící v provozu? Chybějící cyklostojan?
-        Nebo příklad, kde bylo něco uděláno správně?
-      report_an_issue: "Přidat podnět"
-      latest_discussions: "Poslední diskuze"
-      groups_title: "Místní skupiny Cyklisté sobě"
-      groups_intro_html:
-        Portál Cyklisté sobě používají <strong>místní skupiny</strong> v celém Česku. <strong>%{groups_link}</strong> ve vašem okolí
-        a zjistěte jaké problémy se snaží řešit.
-      find_local_groups: "Najděte si místní skupiny"
-      twitter_title: "Cyclescape na Twitteru"
+      introduction_html: Cyklisté sobě je nástroj na podporu místních skupin snažících
+        se o zlepšení podmínek pro jízdu na kole ve svém okolí.
+      center_box_title: Zde můžete navrhnout, jak zlepšit podmínky pro jízdu na kole
+      center_box_html: Neexistující cyklostezka? Překážka bránící v provozu? Chybějící
+        cyklostojan? Nebo příklad, kde bylo něco uděláno správně?
+      report_an_issue: Přidat podnět
+      latest_discussions: Poslední diskuze
+      groups_title: Místní skupiny Cyklisté sobě
+      groups_intro_html: Portál Cyklisté sobě používají <strong>místní skupiny</strong>
+        v celém Česku. <strong>%{groups_link}</strong> ve vašem okolí a zjistěte jaké
+        problémy se snaží řešit.
+      find_local_groups: Najděte si místní skupiny
+      twitter_title: Cyclescape na Twitteru
     guide:
-      title: "Jak funguje tento web"
-      box_1_title: "Přidejte  podnět"
-      box_1_body: "Rychle upozorněte na problém, který vás trápí."
-      box_2_title: "Získejte rady od ostatních"
-      box_2_body: "Prodiskutujte podnět s lidmi, které zajímá stejná čtvrť nebo oblast."
-      box_3_title: "Prosaďte změnu"
-      box_3_body: "Vytvořte akční skupinu a prosaďte změnu."
+      title: Jak funguje tento web
+      box_1_title: Přidejte  podnět
+      box_1_body: Rychle upozorněte na problém, který vás trápí.
+      box_2_title: Získejte rady od ostatních
+      box_2_body: Prodiskutujte podnět s lidmi, které zajímá stejná čtvrť nebo oblast.
+      box_3_title: Prosaďte změnu
+      box_3_body: Vytvořte akční skupinu a prosaďte změnu.
   issue:
     message_threads:
       new:
-        new_hint: "To je místo, kde se spustí diskusi o tomto problému. \ n Tam by mohlo být mnoho různých diskusních vláken, že jedna otázka vytváří \ n např Nové plány aplikace může mít vliv na provoz na silnici a ovlivňují přístup cyklu do lesa."
-        title: "Nové vlákno na téma %{issue}"
-        everyone: "Každý"
+        new_hint: To je místo, kde se spustí diskusi o tomto problému.  n Tam by mohlo
+          být mnoho různých diskusních vláken, že jedna otázka vytváří  n např Nové
+          plány aplikace může mít vliv na provoz na silnici a ovlivňují přístup cyklu
+          do lesa.
+        title: Nové vlákno na téma %{issue}
+        everyone: Každý
     photos:
       show:
-        photo_alt: "Fotka pro %{caption}."
-        view_original: "Zobrazit původní fotku."
+        photo_alt: Fotka pro %{caption}.
+        view_original: Zobrazit původní fotku.
     tags:
       panel:
-        edit_tags: "upravit štítky"
+        edit_tags: upravit štítky
   issues:
     compact:
-      created_by_html: "Vytvořil %{creator_link}"
-      votes: "hlasy"
+      created_by_html: Vytvořil %{creator_link}
+      votes: hlasy
       thread_count:
-        one: "1 vlákno"
-        other: "%{count} vláken"
+        one: 1 vlákno
+        other: '%{count} vláken'
+        few: '%{count} vláken'
     destroy:
-      failure: "Tento podnět nemůže být odstraněn"
-      success: "Podnět odstraněn"
+      failure: Tento podnět nemůže být odstraněn
+      success: Podnět odstraněn
     edit:
-      title: "Upravit podnět"
+      title: Upravit podnět
     index:
-      new_issue: "Nahlásit podnět"
-      title: "Podněty"
-      list_tab: "Seznam"
-      list_introduction: "Nahlášené podněty, nejnovější jsou první:"
-      list_introduction_groupwise_html: "Nahlášené podněty, nejnovější jsou první, omezené na %{area_of_group_link}:"
-      area_of_group: "oblast %{group_name}"
-      map_tab: "Mapa"
-      map_introduction: "Tato mapa zobrazuje všechny podněty - body, cesty i oblasti:"
-      popular_tab: "Oblíbené"
-      popular_introduction: "Nejoblíbenější podněty podle počtu hlasů:"
-      search_button: "Vyhledat"
-      clear: "Vymazat"
-      no_popular_issues: "Pro žádné podněty nebylo nedávno hlasováno."
-      no_results_found: "Žádné podněty nenalezeny."
-      title_introduction: "Tento oddíl obsahuje nahlášené podněty - problémy na cyklistické infrastruktuře a podobné záležitosti."
-      introduction_geographical_basis: "Každý podnět se vztahuje k nějaké oblasti, ať už je lokální nebo celoměstská."
-      title_introduction_report_html: "Pomocí tlačítka napravo můžete %{report_new_issue_link}."
-      report_new_issue: "nahlásit nový podnět"
+      new_issue: Nahlásit podnět
+      title: Podněty
+      list_tab: Seznam
+      list_introduction: 'Nahlášené podněty, nejnovější jsou první:'
+      list_introduction_groupwise_html: 'Nahlášené podněty, nejnovější jsou první,
+        omezené na %{area_of_group_link}:'
+      area_of_group: oblast %{group_name}
+      map_tab: Mapa
+      map_introduction: 'Tato mapa zobrazuje všechny podněty - body, cesty i oblasti:'
+      popular_tab: Oblíbené
+      popular_introduction: 'Nejoblíbenější podněty podle počtu hlasů:'
+      search_button: Vyhledat
+      clear: Vymazat
+      no_popular_issues: Pro žádné podněty nebylo nedávno hlasováno.
+      no_results_found: Žádné podněty nenalezeny.
+      title_introduction: Tento oddíl obsahuje nahlášené podněty - problémy na cyklistické
+        infrastruktuře a podobné záležitosti.
+      introduction_geographical_basis: Každý podnět se vztahuje k nějaké oblasti,
+        ať už je lokální nebo celoměstská.
+      title_introduction_report_html: Pomocí tlačítka napravo můžete %{report_new_issue_link}.
+      report_new_issue: nahlásit nový podnět
     new:
-      title: "Přidat podnět"
-      new_issue_introduction: "Víte o něčem, co brání více lidem používat jízdní kolo, nebo něco co způsobuje problémy existujícím cyklistům? Nebo o něčem, co by se mohlo udělat? Nahlaste problém níže."
-      new_issue_privacy_warning: "Mějte na paměti, že všechny podněty jsou zobrazené veřejně. K podnětu je ale možné udělat soukromé vlákno, jakmile bude odeslán."
-      admin_thread_pointer_html: "%{administrative_matters_link} bez vazby na nějaké území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny."
-      administrative_matters: "Čistě administrativní záležitosti"
+      title: Přidat podnět
+      new_issue_introduction: Víte o něčem, co brání více lidem používat jízdní kolo,
+        nebo něco co způsobuje problémy existujícím cyklistům? Nebo o něčem, co by
+        se mohlo udělat? Nahlaste problém níže.
+      new_issue_privacy_warning: Mějte na paměti, že všechny podněty jsou zobrazené
+        veřejně. K podnětu je ale možné udělat soukromé vlákno, jakmile bude odeslán.
+      admin_thread_pointer_html: '%{administrative_matters_link} bez vazby na nějaké
+        území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny.'
+      administrative_matters: Čistě administrativní záležitosti
     show:
-      issue_created_at: "před %{time_ago}"
-      added_by_html: "Nahlásil %{name} dne %{time}"
-      cancel_vote: "Zrušit"
-      confirm_delete: "Skutečně?"
-      delete_issue: "Odstranit tento podnět"
-      edit_issue: "Upravit tento podnět"
+      issue_created_at: před %{time_ago}
+      added_by_html: Nahlásil %{name} dne %{time}
+      cancel_vote: Zrušit
+      confirm_delete: Skutečně?
+      delete_issue: Odstranit tento podnět
+      edit_issue: Upravit tento podnět
       new_thread:
-        zero: "Diskutujte"
-        one: "Nové diskuzní vlákno"
-        other: "Nová diskuzní vlákna"
-      no_threads_yet: "O tomto podnětu zatím neexistují žádná diskuzní vlákna."
-      group_private: "Soukromé pro %{group}"
-      group_public: "Veřejné od %{group}"
-      public: "Veřejné"
-      sign_in: "přihlásit"
-      sign_in_to_discuss_html: "Můžete se %{sign_in_link} a začít diskutovat."
-      sign_in_to_vote_html: "Musíte se %{sign_in_link}, abyste mohli začít hlasovat."
-      threads: "Vlákna"
-      vote_clear: "Zrušit hlas"
-      vote_down: "Nepodpořit"
-      vote_up: "Podpořit"
+        zero: Diskutujte
+        one: Nové diskuzní vlákno
+        other: Nová diskuzní vlákna
+      no_threads_yet: O tomto podnětu zatím neexistují žádná diskuzní vlákna.
+      group_private: Soukromé pro %{group}
+      group_public: Veřejné od %{group}
+      public: Veřejné
+      sign_in: přihlásit
+      sign_in_to_discuss_html: Můžete se %{sign_in_link} a začít diskutovat.
+      sign_in_to_vote_html: Musíte se %{sign_in_link}, abyste mohli začít hlasovat.
+      threads: Vlákna
+      vote_clear: Zrušit hlas
+      vote_down: Nepodpořit
+      vote_up: Podpořit
       votes:
-        one: "hlas"
-        other: "hlasy"
-      location: "Umístění"
+        one: hlas
+        other: hlasů
+        few: hlasů
+      location: Umístění
       deadline: Uzávěrka
+      issues-nearby: Issues nearby
     map:
-      show_collisions: "Ukázat nehody (funguje jen ve Velké Británii)"
+      show_collisions: Ukázat nehody (funguje jen ve Velké Británii)
     update:
-      success: "Podnět upraven"
+      success: Podnět upraven
     vote_clear:
-      failure: "Váš hlas nemůže být zrušen"
-      success: "Váš hlas byl zrušen"
+      failure: Váš hlas nemůže být zrušen
+      success: Váš hlas byl zrušen
     vote_down:
-      already: "Už jste jednou tento podnět nepodpořili"
-      success: "Podnět byl nepodpořen"
+      already: Už jste jednou tento podnět nepodpořili
+      success: Podnět byl nepodpořen
     vote_up:
-      already: "Už jste jednou tento podnět podpořili"
-      success: "Podnět byl podpořen"
+      already: Už jste jednou tento podnět podpořili
+      success: Podnět byl podpořen
   layouts:
     application:
-      admin: "Administrace"
-      admin_tooltip: "Administrace, určeno pro systémové administrátory"
-      dashboard: "Moje stránka"
-      dashboard_tooltip: "Vaše přístrojová deska, ukazuje aktualizace diskuzních vláken do kterých jste zapsáni."
-      about: "O stránkách"
-      user_guide: "Uživatelský manuál"
-      sign_out: "Odhlásit"
-      sign_in: "Přihlásit"
-      sign_up: "Registrovat"
-      feedback: "Napište nám"
-      home: "Domů"
-      issues: "Podněty"
-      issues_tooltip: "Podané podněty zobrazené na mapě nebo jako seznam"
-      library: "Knihovna"
-      library_tooltip: "Znovupoužitelné zdroje"
-      loading: "Prosím čekejte\u2026"
-      threads: "Diskuzní vlákna"
-      threads_tooltip: "Všechna diskuzní témata"
-      title: "Cyklisté sobě"
+      admin: Administrace
+      admin_tooltip: Administrace, určeno pro systémové administrátory
+      dashboard: Moje stránka
+      dashboard_tooltip: Vaše přístrojová deska, ukazuje aktualizace diskuzních vláken
+        do kterých jste zapsáni.
+      about: O stránkách
+      user_guide: Uživatelský manuál
+      sign_out: Odhlásit
+      sign_in: Přihlásit
+      sign_up: Registrovat
+      private_messages: Private Messages
+      feedback: Napište nám
+      home: Domů
+      issues: Podněty
+      issues_tooltip: Podané podněty zobrazené na mapě nebo jako seznam
+      library: Knihovna
+      library_tooltip: Znovupoužitelné zdroje
+      loading: Prosím čekejte…
+      threads: Diskuzní vlákna
+      threads_tooltip: Všechna diskuzní témata
+      title: Cyklisté sobě
     footer:
-      application_version_html: "Verze aplikace: %{version}"
-      github_page_link_html: "Zdrojové kódy jsou dostupné na <a href='https://github.com/cyclestreets/cyclescape/'>GitHubu</a>"
-      whats_new: "Co je nového?"
-      supportlogos_introduction: "Vznik Cyclescape byl umožněn podporou:"
-      funding_from: "Za podpory %{name}"
-      funding_from_and_created_by: "Web Cyklisté sobě byl podpořen %{name}"
-      planning_application_data: "Planning application data from Openly Local"
+      application_version_html: 'Verze aplikace: %{version}'
+      github_page_link_html: Zdrojové kódy jsou dostupné na <a href='https://github.com/cyclestreets/cyclescape/'>GitHubu</a>
+      whats_new: Co je nového?
+      supportlogos_introduction: 'Vznik Cyclescape byl umožněn podporou:'
+      funding_from: Za podpory %{name}
+      funding_from_and_created_by: Web Cyklisté sobě byl podpořen %{name}
+      planning_application_data: Planning application data from Openly Local
       top_html: Zpět na začátek &uarr;
-      cyclescape_blog: "Blog Cyclescape"
-      privacy: 'Zásady ochrany osobních údajů'
-      user_guide: "Uživatelská příručka"
-      facebook_page: "Stránka na Facebooku"
-      twitter_page: "Stránka na Twitteru"
-      osm_credit_html: "Mapová data &copy; přispěvatelé <a href='http://www.openstreetmap.org'>
-        OpenStreetMap</a>, dostupné pod <a href='http://www.opendatacommons.org/licenses/odbl'>Open Database Licence</a>."
+      cyclescape_blog: Blog Cyclescape
+      privacy: Zásady ochrany osobních údajů
+      user_guide: Uživatelská příručka
+      facebook_page: Stránka na Facebooku
+      twitter_page: Stránka na Twitteru
+      osm_credit_html: Mapová data &copy; přispěvatelé <a href='http://www.openstreetmap.org'>
+        OpenStreetMap</a>, dostupné pod <a href='http://www.opendatacommons.org/licenses/odbl'>Open
+        Database Licence</a>.
     group_selector:
-      group_selector: "Skupina"
-      no_group: "Bez skupiny"
+      group_selector: Skupina
+      no_group: Bez skupiny
     search:
-      search: "Hledání"
-      search_button: "Odeslat"
+      search: Hledání
+      search_button: Odeslat
   libraries:
     search:
-      no_results_found: "Žádné výsledky pro '%{query}'."
+      no_results_found: Žádné výsledky pro '%{query}'.
       results_found:
-        one: "Jeden výsledek pro '%{query}'."
-        other: "%{count} výsledků pro '%{query}'"
-      title: "Výsledky prohledávání knihovny"
+        one: Jeden výsledek nalezeno pro '%{query}'.
+        other: '%{count} výsledků nalezeno pro ''%{query}'''
+        few: '%{count} výsledků nalezeno pro ''%{query}'''
+      title: Výsledky prohledávání knihovny
     show:
-      title: "Knihovna"
-      overview_description_html: "Knihovna obsahuje <strong>znovupoužitelné zdroje</strong>. Prosím přidejte položky, které by mohly být v budoucnu využitelné."
-      overview_usage: "Na položky v knihovně můžete následně odkázat z jiných diskuzních vláken."
-      latest: "Poslední položky"
-      item_created: "Odesláno před %{time_ago}"
-      search: "Prohledat knihovnu:"
-      search_submit: "Hledat"
-      clear_submit: "Vymazat"
-      results: "Výsledky"
-      new_library_item: "Přidat položku do knihovny"
-      new_note: "Poznámka"
-      new_document: "Dokument"
-      new_item_title: "Vyberte typ"
-      new_item_description_html: "Vyberte typ položky, který chcete přidat do knihovny:"
-      new_note_description_html: "<strong>Poznámky</strong> jsou určeny pro krátký text."
-      new_document_description_html: "<strong>Dokumenty</strong> vám umožňují nahrávat soubory."
+      title: Knihovna
+      overview_description_html: Knihovna obsahuje <strong>znovupoužitelné zdroje</strong>.
+        Prosím přidejte položky, které by mohly být v budoucnu využitelné.
+      overview_usage: Na položky v knihovně můžete následně odkázat z jiných diskuzních
+        vláken.
+      latest: Poslední položky
+      item_created: Odesláno před %{time_ago}
+      search: 'Prohledat knihovnu:'
+      search_submit: Hledat
+      clear_submit: Vymazat
+      results: Výsledky
+      new_library_item: Přidat položku do knihovny
+      new_note: Poznámka
+      new_document: Dokument
+      new_item_title: Vyberte typ
+      new_item_description_html: 'Vyberte typ položky, který chcete přidat do knihovny:'
+      new_note_description_html: <strong>Poznámky</strong> jsou určeny pro krátký
+        text.
+      new_document_description_html: <strong>Dokumenty</strong> vám umožňují nahrávat
+        soubory.
   library:
     documents:
       new:
-        title: "Nový dokument do kihovny"
+        title: Nový dokument do kihovny
       show:
-        added_by_html: "Added by %{name} on %{time}"
-        attach_note: "Poznámka k vložení"
-        attach_note_instructions_html: "Můžete vytvořit poznámky vztahující se k tomuto dokumentu. Pokud budou odkázány v diskuzním vlákně odkážou také na tento dokument."
-        download: "Stáhnout dokument"
-        comments: "Komentáře"
-        notes: "Poznámky"
-        no_threads: "Tento dokument nebyl zahrnut v žádném veřejném diskuzním vlákně. Pokud přidáte tento dokument do nějakého veřejného diskuzního vlákna, tato vlákna budou zobrazena zde."
-        public_threads: "Veřejná diskuzní vlákna"
-        threads_explanation: "Tento dokument byl zmíněn v následujících veřejných diskuzních vláknech:"
+        added_by_html: Added by %{name} on %{time}
+        attach_note: Poznámka k vložení
+        attach_note_instructions_html: Můžete vytvořit poznámky vztahující se k tomuto
+          dokumentu. Pokud budou odkázány v diskuzním vlákně odkážou také na tento
+          dokument.
+        download: Stáhnout dokument
+        comments: Komentáře
+        notes: Poznámky
+        no_threads: Tento dokument nebyl zahrnut v žádném veřejném diskuzním vlákně.
+          Pokud přidáte tento dokument do nějakého veřejného diskuzního vlákna, tato
+          vlákna budou zobrazena zde.
+        public_threads: Veřejná diskuzní vlákna
+        threads_explanation: 'Tento dokument byl zmíněn v následujících veřejných
+          diskuzních vláknech:'
     notes:
       edit:
-        title: "Upravit poznámku  v knihovně"
+        title: Upravit poznámku  v knihovně
       new:
-        title: "Nová poznámka v knihovně"
+        title: Nová poznámka v knihovně
       show:
-        added_by_html: "Přidal %{name} dne %{time}"
-        edit: "Upravit poznámku"
-        note_on_document_html: "Tato poznámka byla vložena k následujícímu dokumentu: %{document}"
-        no_threads: "Tato poznámka nebyla zmíněna v žádných veřejných diskuzních vláknech. Pokud tuto poznámku odkážete z nějakého veřejného diskuzního vlákna, tak se toto vlákno objeví zde."
-        public_threads: "Veřejná vlákna"
-        threads_explanation: "Na tuto poznámku byla odkázáno z následujících diskuzních vláken:"
+        added_by_html: Přidal %{name} dne %{time}
+        edit: Upravit poznámku
+        note_on_document_html: 'Tato poznámka byla vložena k následujícímu dokumentu:
+          %{document}'
+        no_threads: Tato poznámka nebyla zmíněna v žádných veřejných diskuzních vláknech.
+          Pokud tuto poznámku odkážete z nějakého veřejného diskuzního vlákna, tak
+          se toto vlákno objeví zde.
+        public_threads: Veřejná vlákna
+        threads_explanation: 'Na tuto poznámku byla odkázáno z následujících diskuzních
+          vláken:'
       update:
-        success: "Poznámka knihovny upravena"
+        success: Poznámka knihovny upravena
   mailers:
     notifications:
       added_to_group:
-        subject: "Nyní jste členem místní skupiny Cyklisté sobě %{group_name}"
+        subject: Nyní jste členem místní skupiny Cyklisté sobě %{group_name}
       gmr_confirmed:
-        subject: "Nyní jste členem místní skupiny Cyklisté sobě %{group_name}"
+        subject: Nyní jste členem místní skupiny Cyklisté sobě %{group_name}
       new_group_request:
-        subject: "[Cyclescape] %{user_name} chce založit %{group_name}"
+        subject: '[Cyclescape] Uživatel "%{user_name}" požaduje založení nové skupiny
+          "%{group_name}"'
       new_gmr:
-        subject: "[Cyklisté sobě] %{user_name} chce vstoupit do skupiny %{group_name}"
+        subject: '[Cyklisté sobě] %{user_name} chce vstoupit do skupiny %{group_name}'
       new_group_thread:
-        subject: "[Cyklisté sobě] \"%{thread_title}\" (%{group_name})"
+        subject: '[Cyklisté sobě] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
-        subject: "[Cyklisté sobě] Nový podnět - \"%{issue_title}\" (%{group_name})"
+        subject: '[Cyklisté sobě] Nový podnět - "%{issue_title}" (%{group_name})'
       new_user_location_issue:
-        subject: "[Cyklisté sobě] Nový podnět - \"%{issue_title}\""
+        subject: '[Cyklisté sobě] Nový podnět - "%{issue_title}"'
       new_user_location_issue_thread:
-        subject: "[Cyklisté sobě] Nové diskuzní vlákno založeno pro \"%{issue_title}\""
+        subject: '[Cyklisté sobě] Nové diskuzní vlákno založeno pro "%{issue_title}"'
       group_request_confirmed:
-        subject: "[Cyclescape] Nová skupina \"%{group_name}\" byla založena"
+        subject: '[Cyclescape] Nová skupina "%{group_name}" byla založena'
       group_request_rejected:
-        subject: "[Cyclescape] Nová skupina \"%{group_request_name}\" nebyla založena"
-      new_group_request:
-        subject: "[Cyclescape] Uživatel \"%{user_name}\" požaduje založení nové skupiny \"%{group_name}\""
-
+        subject: '[Cyclescape] Nová skupina "%{group_request_name}" nebyla založena'
+      new_user_confirmed:
+        subject: '[Cyclescape] Welcome to Cyclescape'
+      upcoming_issue_deadline:
+        subject: '[Cyclescape] Upcoming deadline/date for "%{issue_title}"'
+      upcoming_thread_deadline:
+        subject: '[Cyclescape] Upcoming deadline/date for "%{thread_title}"'
     thread_mailer:
       common:
         subject:
-          one: "[Cyklisté sobě] %{title}"
-          other: "Re: [Cyklisté sobě] %{title}"
+          one: '[Cyklisté sobě] %{title}'
+          other: 'Re: [Cyklisté sobě] %{title}'
+          few: 'Re: [Cyklisté sobě] %{title}'
+      digest:
+        subject: '[Cyclescape] Digest for %{date}'
   message_thread:
     subscriptions:
       create:
-        success: "Nyní odebíráte toto vlákno"
+        success: Nyní odebíráte toto vlákno
       destroy:
-        success: "Odběr tohoto vlákna byl zrušen"
+        success: Odběr tohoto vlákna byl zrušen
     tags:
       panel:
-        edit_tags: "upravit"
-        tags: "štítky"
+        edit_tags: upravit
+        tags: štítky
     user_priorities:
       create:
-        success: "Důležitost uložena"
-        failure: "Nemohu uložit důležitost"
+        success: Důležitost uložena
+        failure: Nemohu uložit důležitost
       update:
-        success: "Důležitost upravena"
-        failure: "Nemohu upravit důležitost"
+        success: Důležitost upravena
+        failure: Nemohu upravit důležitost
   message_threads:
     compact:
-      group_committee: "Pro správce skupiny"
-      group_public: "Veřejné skupinové"
-      group_private: "Soukromé skupinové"
-      public: "Veřejné"
-      posted_at: "zasláno před %{time_ago}"
+      group_committee: Pro správce skupiny
+      group_public: Veřejné skupinové
+      group_private: Soukromé skupinové
+      public: Veřejné
+      posted_at: zasláno před %{time_ago}
     list:
-      discussion_on_issue: "Diskuze o podnětu"
-      group_committee: "Pro správce skupiny"
-      group_public: "Veřejné skupinové"
-      group_private: "Soukromé skupinové"
-      public: "Veřejné"
-      posted_at: "zasláno před %{time_ago}"
+      discussion_on_issue: Diskuze o podnětu
+      group_committee: Pro správce skupiny
+      group_public: Veřejné skupinové
+      group_private: Soukromé skupinové
+      public: Veřejné
+      posted_at: zasláno před %{time_ago}
     edit:
-      title: "Upravit vlastnosti diskuzních vláken"
-      description: "Jako správce místní skupiny můžete opravit vlastnosti diskuzních vláken zde."
-      thread_fix_warning_html: "<strong>Varování:</strong> vaše místní skupina má omezené možnosti nastavení přístupu k diskuzním vláknům."
+      title: Upravit vlastnosti diskuzních vláken
+      description: Jako správce místní skupiny můžete opravit vlastnosti diskuzních
+        vláken zde.
+      thread_fix_warning_html: <strong>Varování:</strong> vaše místní skupina má omezené
+        možnosti nastavení přístupu k diskuzním vláknům.
     destroy:
-      failure: "Nemohu smazat diskuzní vlákno"
-      success: "Diskuzní vlákno smazáno"
+      failure: Nemohu smazat diskuzní vlákno
+      success: Diskuzní vlákno smazáno
     index:
-      latest_activity: "Nedávná aktivita před %{ago}"
-      search: "Prohledat všechna diskuzní vlákna:"
-      search_submit: "Hledat"
-      title: "Diskuzní vlákna (veřejná)"
-      threads_explanation_html: "Každý z %{issues_link} může mít přiřazeno jedno nebo víc z diskuzních vláken, která jsou zobrazena dole (nejnověji komentovaná jako první)."
-      issues: "podnětů"
-      introduction: "Níže jsou nejnovější aktualizace diskuzních vláken (napříč celou aplikací Cyklisté sobě) která jsou veřejná (včetně těch, která náleží k místním skupinám nebo patří správcům)."
-      introduction_group_pointer: "Pro zobrazení diskuzí pouze z místních skupin jichž jste členy, použijte přepínač skupiny vpravo nahoře."
+      latest_activity: Nedávná aktivita před %{ago}
+      search: 'Prohledat všechna diskuzní vlákna:'
+      search_submit: Hledat
+      title: Diskuzní vlákna (veřejná)
+      threads_explanation_html: Každý z %{issues_link} může mít přiřazeno jedno nebo
+        víc z diskuzních vláken, která jsou zobrazena dole (nejnověji komentovaná
+        jako první).
+      issues: podnětů
+      introduction: Níže jsou nejnovější aktualizace diskuzních vláken (napříč celou
+        aplikací Cyklisté sobě) která jsou veřejná (včetně těch, která náleží k místním
+        skupinám nebo patří správcům).
+      introduction_group_pointer: Pro zobrazení diskuzí pouze z místních skupin jichž
+        jste členy, použijte přepínač skupiny vpravo nahoře.
     library_panel:
-      library: "Knihovna"
-      no_library_items: "Na základě přiřazených štítků nemohu najít žádné příslušné položky v knihovně."
-      tag_thread_guidance: "Přidejte štítky k tomuto diskuznímu vláknu, abyste mohli najít příslušné položky v knihovně."
-    moderate:
-      approve: Schvalovat
-      reject: Odmítnout
-      possible_spam: Možná spam
-      not_approved: Uživatel není schválen
+      library: Knihovna
+      no_library_items: Na základě přiřazených štítků nemohu najít žádné příslušné
+        položky v knihovně.
+      tag_thread_guidance: Přidejte štítky k tomuto diskuznímu vláknu, abyste mohli
+        najít příslušné položky v knihovně.
     new:
-      title: "Nové diskuzní vlákno"
+      title: Nové diskuzní vlákno
     priority_panel:
-      thread_priority: "Důležitost mého diskuzního vlákna"
+      thread_priority: Důležitost mého diskuzního vlákna
     search:
-      clear_submit: "Vymazat"
-      no_results_found: "Žádné výsledky nenalezeny pro '%{query}'."
+      clear_submit: Vymazat
+      no_results_found: Žádné výsledky nenalezeny pro '%{query}'.
       results_found:
-        one: "Jeden výsledek nalezen pro '%{query}'."
-        other: "%{count} výsledků nalezeno pro '%{query}'"
-      search: "Prohledat všechna diskuzní vlákna:"
-      search_submit: "Hledat"
-      title: "Výsledky prohledávání diskuzních vláken"
+        one: Jeden výsledek nalezen pro '%{query}'
+        other: '%{count} výsledků nalezeno pro ''%{query}'''
+        few: '%{count} výsledků nalezeno pro ''%{query}'''
+      search: 'Prohledat všechna diskuzní vlákna:'
+      search_submit: Hledat
+      title: Výsledky prohledávání diskuzních vláken
     show:
-      are_you_sure: "Skutečně?"
-      back: "Zpět"
+      are_you_sure: Skutečně?
+      back: Zpět
       closed_html: Vlákno vlákno bylo uzavřeno %{by} %{at}
       open: Znovu otevřít vlákno
-      edit: "Upravit toto vlákno"
-      destroy: "Odstranit toto vlákno"
-      private_to_committee_message: "Soukromé: Pouze členové vedení místní skupiny %{group} mohou vidět a přispívat do tohoto vlákna."
-      private_to_group_message: "Soukromé: Pouze členové místní skupiny %{group} mohou vidět a přispívat do tohoto vlákna."
-      public_message: "Veřejné: Každý může vidět toto vlákno a vkládat do něj příspěvky."
+      edit: Upravit toto vlákno
+      destroy: Odstranit toto vlákno
+      issues-nearby: Issues nearby
+      private_to_committee_message: 'Soukromé: Pouze členové vedení místní skupiny
+        %{group} mohou vidět a přispívat do tohoto vlákna.'
+      private_to_group_message: 'Soukromé: Pouze členové místní skupiny %{group} mohou
+        vidět a přispívat do tohoto vlákna.'
+      private_html: Private Message between %{creator} and %{message_to}.
+      public_message: 'Veřejné: Každý může vidět toto vlákno a vkládat do něj příspěvky.'
     subscribe_panel:
-      subscribed: "Sledujete toto vlákno."
+      subscribed: Sledujete toto vlákno.
     subscribers_panel:
-      owner: "Vlastník"
-      subscribers: "Uživatelé, kteří sledují toto vlákno"
+      owner: Vlastník
+      subscribers: Uživatelé, kteří sledují toto vlákno
     update:
-      success: "Vlákno upraveno"
+      success: Vlákno upraveno
     widget:
-      group_private: "Přístupné pouze místní skupině"
-      public: "Veřejné"
+      group_private: Přístupné pouze místní skupině
+      public: Veřejné
   message:
     deadlines:
       new:
-        submit: "Přidat termín/datum"
+        submit: Přidat termín/datum
       create:
-        failure: "Termín/datum nemůže být vytvořeno"
-        success: "Termín/datum vložení"
+        failure: Termín/datum nemůže být vytvořeno
+        success: Termín/datum vložení
     documents:
       create:
-        failure: "Nemohu přidat přílohu"
-        success: "Příloha přidána"
+        failure: Nemohu přidat přílohu
+        success: Příloha přidána
       show:
-        download: "Stáhnout přílohu"
+        download: Stáhnout přílohu
     library_items:
       create:
-        failure: "Položka z knihovny nemůže být přidána"
-        success: "Položka z knihovny přidána"
+        failure: Položka z knihovny nemůže být přidána
+        success: Položka z knihovny přidána
       show:
-        attached_to_html: "Přiložit k dokumentu: %{document}"
+        attached_to_html: 'Přiložit k dokumentu: %{document}'
     links:
       create:
-        failure: "Odkaz nemohl být vložen"
-        success: "Odkaz vložen"
+        failure: Odkaz nemohl být vložen
+        success: Odkaz vložen
     photos:
       create:
-        failure: "Nemohu nahrát fotografii"
-        success: "Fotografie nahrána"
+        failure: Nemohu nahrát fotografii
+        success: Fotografie nahrána
       show:
-        photo_alt: "Titulek fotografie: %{caption}."
-        view_original_image: "Zobrazit původní obrázek"
+        photo_alt: 'Titulek fotografie: %{caption}.'
+        view_original_image: Zobrazit původní obrázek
     street_views:
       create:
-        failure: "Street View nebyl vytvořen"
-        success: "Street View vytvořil"
-
+        failure: Street View nebyl vytvořen
+        success: Street View vytvořil
   message_library:
     documents:
       new:
-        title: "Nový dokument knihovny"
+        title: Nový dokument knihovny
   messages:
     censor:
-      failure: "Nemohu cenzurovat zprávu"
-      success: "Zpráva cenzurována"
+      failure: Nemohu cenzurovat zprávu
+      success: Zpráva cenzurována
     create:
-      failure: "Nemohu odeslat zprávu"
-      success: "Zpráva úspěšně odeslána"
+      failure: Nemohu odeslat zprávu
+      success: Zpráva úspěšně odeslána
     message:
-      posted_date: "zaslali před %{time_ago}"
-      censor: "Cenzurovat tuto zprávu"
-      censored: "Tato zpráva byla odebrána"
-      create_note: "Vytvořit poznámku v knihovně"
-      create_document: "Vytvořit dokument v knihovně"
+      posted_date: zaslali před %{time_ago}
+      censor: Cenzurovat tuto zprávu
+      censored: Tato zpráva byla odebrána
+      create_note: Vytvořit poznámku v knihovně
+      create_document: Vytvořit dokument v knihovně
+      committee: '[Committee]'
     new:
-      compose_new: "Vytvořit novou"
-      from_library: "Z knihovny"
-      recently_added: "Nedávno přidané"
-      select_button: "Vybrat\u2026"
-      search_results: "Výsledky vyhledávání"
-      go: "Vyhledat"
-      back: "Zpět"
+      compose_new: Vytvořit novou
+      from_library: Z knihovny
+      recently_added: Nedávno přidané
+      select_button: Vybrat…
+      search_results: Výsledky vyhledávání
+      go: Vyhledat
+      back: Zpět
       close: Zavřít toto vlákno
-      select_header: "Vyberte"
-      add_item_to_thread: "Přidat položku do diskuzního vlákna"
-      explain_library_item: "Vysvětlete jak se tato položka knihovny vztahuje k diskuznímu vláknu"
-      view_document: "Zobrazit dokument"
-      add_to_thread: "Přidat do diskuzního vlákna"
-      search_library: "Prohledat knihovnu"
-      deadline_message: "Termín/datum"
-      document_message: "Příloha"
-      library_item_message: "Knihovna"
-      link_message: "Odkaz"
-      new_message: "Nová zpráva"
-      photo_message: "Fotografie"
-      sign_in_to_post_html: "Abyste mohli odeslat zprávu, musíte se %{sign_in_link}."
-      text_message: "Text"
+      select_header: Vyberte
+      add_item_to_thread: Přidat položku do diskuzního vlákna
+      explain_library_item: Vysvětlete jak se tato položka knihovny vztahuje k diskuznímu
+        vláknu
+      view_document: Zobrazit dokument
+      add_to_thread: Přidat do diskuzního vlákna
+      search_library: Prohledat knihovnu
+      deadline_message: Termín/datum
+      document_message: Příloha
+      library_item_message: Knihovna
+      link_message: Odkaz
+      new_message: Nová zpráva
+      photo_message: Fotografie
+      sign_in_to_post_html: Abyste mohli odeslat zprávu, musíte se %{sign_in_link}.
+      text_message: Text
       street_view_message: Street View
+      reply_by: Or reply by
   pages:
     changelog:
-      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>u."
-      header: "Co je nového?"
-      introduction: "Toto je přehled nedávných změn na tété stránce.
-    Kompletní detailní historii vývoje můžete sledovat na"
+      github_history_link_html: <a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>u.
+      header: Co je nového?
+      introduction: Toto je přehled nedávných změn na tété stránce. Kompletní detailní
+        historii vývoje můžete sledovat na
   planning_application:
     issues:
       new:
-        already: "There's already an issue for that planning application"
-        application_reference: "Application reference"
-        title: "New issue from Planning Application"
-        title_prefix: "Planning application"
+        already: There's already an issue for that planning application
+        application_reference: Application reference
+        title: New issue from Planning Application
+        title_prefix: Planning application
   shared:
     search:
-      no_results_found: "Žádné výsledky pro '%{query}'"
-      thread_results: "Vlákna (%{count})"
-      issue_results: "Podněty (%{count})"
-      library_results: "Položky knihovny (%{count})"
+      no_results_found: Žádné výsledky pro '%{query}'
+      thread_results: Vlákna (%{count})
+      issue_results: Podněty (%{count})
+      library_results: Položky knihovny (%{count})
       threads_found:
-        zero: "Žádná diskuzní vlákna nenalezena pro '%{query}'."
-        one: "Nalezeno diskuzní vlákno pro '%{query}':"
-        other: "%{count} diskuzních vláken nalezeno pro '%{query}':"
+        zero: Žádná diskuzní vlákna nenalezena pro '%{query}'.
+        one: 'Nalezeno diskuzní vlákno pro ''%{query}'':'
+        other: '%{count} diskuzních vláken nalezeno pro ''%{query}'':'
       issues_found:
-        zero: "Žádný podnět nenalezen pro '%{query}'."
-        one: "Nalezen jeden podnět pro '%{query}':"
-        other: "%{count} podnětů nalezeno pro '%{query}':"
+        zero: Žádný podnět nenalezen pro '%{query}'.
+        one: 'Nalezen jeden podnět pro ''%{query}'':'
+        other: '%{count} podnětů nalezeno pro ''%{query}'':'
       library_items_found:
-        zero: "Žádná položka knihovny nenalezena pro '%{query}'."
-        one: "Nalezena položka knihovny pro '%{query}':"
-        other: "%{count} položek knihovny nalezeno pro '%{query}':"
+        zero: Žádná položka knihovny nenalezena pro '%{query}'.
+        one: 'Nalezena položka knihovny pro ''%{query}'':'
+        other: '%{count} položek knihovny nalezeno pro ''%{query}'':'
     edit_map:
-      area: "oblast"
-      clear: "vymazat"
-      draw_area: "Nakreslit oblast"
-      draw_area_1: "Kliknutím do mapy upřesníte zvolenou oblast."
-      draw_area_2: "Použijte dvouklik pro dokončení kreslení oblasti."
-      draw_area_3: "Přiblížením a tažením se můžete dostat na požadovanou oblast na mapě."
-      draw_point: "Nakreslit bod"
-      draw_point_1: "Kliknutím do mapy specifikujete bod."
-      draw_point_2: "Tažením bodu můžete změnit jeho pozici."
-      draw_point_3: "Přiblížením a tažením se můžete dostat na požadovanou oblast na mapě."
-      draw_route: "Nakreslit cestu"
-      draw_route_1: "Kliknutím do mapy zvolíte požadovanou cestu."
-      draw_route_2: "Použijte dvouklik pro dokončení kreslení cesty."
-      draw_route_3: "Přetažením šedých bodů můžete přidat bod doprostřed cesty."
-      point: "bod"
-      route: "cesta"
-      undo: "zpět"
+      area: oblast
+      clear: vymazat
+      draw_area: Nakreslit oblast
+      draw_area_1: Kliknutím do mapy upřesníte zvolenou oblast.
+      draw_area_2: Použijte dvouklik pro dokončení kreslení oblasti.
+      draw_area_3: Přiblížením a tažením se můžete dostat na požadovanou oblast na
+        mapě.
+      draw_point: Nakreslit bod
+      draw_point_1: Kliknutím do mapy specifikujete bod.
+      draw_point_2: Tažením bodu můžete změnit jeho pozici.
+      draw_point_3: Přiblížením a tažením se můžete dostat na požadovanou oblast na
+        mapě.
+      draw_route: Nakreslit cestu
+      draw_route_1: Kliknutím do mapy zvolíte požadovanou cestu.
+      draw_route_2: Použijte dvouklik pro dokončení kreslení cesty.
+      draw_route_3: Přetažením šedých bodů můžete přidat bod doprostřed cesty.
+      point: bod
+      route: cesta
+      undo: zpět
     map_search:
-      near: "poblíž"
-      searching: "Hledám\u2026"
-      search_failed: "Hledání bohužel selhalo."
-      showing: "Ukazuji"
-      sorry_we_couldnt_find: "Bohužel se nepodařilo nic najít."
-      submit: "Přejít"
+      near: poblíž
+      searching: Hledám…
+      search_failed: Hledání bohužel selhalo.
+      showing: Ukazuji
+      sorry_we_couldnt_find: Bohužel se nepodařilo nic najít.
+      submit: Přejít
     profile_menu:
-      edit: "Upravit profil"
-      edit_preferences: "Správa notifikací"
-      my_locations: "Oblasti působnosti"
-      update_account: "Základní nastavení účtu"
+      edit: Upravit profil
+      edit_preferences: Správa notifikací
+      my_locations: Oblasti působnosti
+      update_account: Základní nastavení účtu
     permission_denied:
-      apply_to_group_html: "Tato diskuse je vlastněna %{group_name}. Chtěli byste <a href='%{join_link}'><strong>požádat o připojení %{group_name}'s Cyclescape skupina</strong></a>?"
+      apply_to_group_html: Tato diskuse je vlastněna %{group_name}. Chtěli byste <a
+        href='%{join_link}'><strong>požádat o připojení %{group_name}'s Cyclescape
+        skupina</strong></a>?
     tags:
       panel:
-        edit_tags: "Upravit štítky"
+        edit_tags: Upravit štítky
     message_moderations:
       approve: Schválit
       approved: schváleno
       reject: Odmítnout
       possible_spam: Možné spam
       not_approved: Uživatel není schváleno
-      explanation: "Tyto zprávy jsou pozdrženy kvůli moderování . To může být proto, že vypadají jako potenciální spam, nebo že uživatel nebyl schválen . Pokud schválit , pak zpráva bude odeslána ven a tvůrce schválen."
+      explanation: Tyto zprávy jsou pozdrženy kvůli moderování . To může být proto,
+        že vypadají jako potenciální spam, nebo že uživatel nebyl schválen . Pokud
+        schválit , pak zpráva bude odeslána ven a tvůrce schválen.
   site:
     comments:
       destroy:
-        failure: "Nepodařilo se smazat zpětnou vazbu"
-        success: "Zpětná vazba úspěšně smazána"
+        failure: Nepodařilo se smazat zpětnou vazbu
+        success: Zpětná vazba úspěšně smazána
       index:
-        confirm_delete: "Skutečně?"
-        delete_comment: "Smazat"
-        how: "Jak"
-        id: "ID"
-        no_comments: "Zatím nebyla žádná zpětná vazba"
-        title: "Všechny zpětné vazby"
-        what: "Co"
-        when: "Kdy"
-        when_ago: "před %{time_ago}"
-        where: "Kde"
-        who: "Kdo"
+        confirm_delete: Skutečně?
+        delete_comment: Smazat
+        how: Jak
+        id: ID
+        no_comments: Zatím nebyla žádná zpětná vazba
+        title: Všechny zpětné vazby
+        what: Co
+        when: Kdy
+        when_ago: před %{time_ago}
+        where: Kde
+        who: Kdo
       new:
-        title: "Zpětná vazba"
+        title: Zpětná vazba
       create:
-        success: "Děkujeme za vaší zpětnou vazbu!"
-  tags:
-    show:
-      heading: "Položky označené jako '%{name}'"
-      unrecognised: "Nemohu najít žádnou položku označenou štítkem '%{name}'"
+        success: Děkujeme za vaší zpětnou vazbu!
   thread_mailer:
+    header:
+      added: '%{name} added %{type} to the thread'
+      committee: ' [Committee]'
     new_deadline_message:
-      added: "%{name} přidal termín/datum k tomuto diskuznímu vláknu"
+      type: a deadline/date
     new_document_message:
-      added: "%{name} přidal přílohu k tomuto diskuznímu vláknu"
-      view_the_document: "Přílohu můžete vidět na:"
+      type: an attachment
+      view_the_document: 'Přílohu můžete vidět na:'
     new_library_item_message:
-      added: "%{name} přidal položku z knihovny k tomuto diskuznímu vláknu."
+      type: an item
     new_link_message:
-      added: "%{name} přidal odkaz k tomuto diskuznímu vláknu."
+      type: a link
     new_message:
-      added: "%{name} přidal zprávu k tomuto diskuznímu vláknu."
+      type: a message
     new_photo_message:
-      added: "%{name} přidal fotografii k tomuto diskuznímu vláknu."
-      view_the_photo: "Fotku si můžete prohlédnout na:"
+      type: a photo
+      view_the_photo: 'Fotku si můžete prohlédnout na:'
     new_street_view_message:
-      added: "%{name} přidal Street View k závitu."
-      view_the_street_view: "Street View si můžete vidět na:"
-
+      type: a street view
+      view_the_street_view: 'Street View si můžete vidět na:'
     footer:
-      thread: "Vlákno Cyklisté sobě"
-      unsubscribe: "Pokud navštívíte odkaz nahoře, můžete přestat sledovat toto vlákno."
+      thread: Vlákno Cyklisté sobě
+      unsubscribe: Pokud navštívíte odkaz nahoře, můžete přestat sledovat toto vlákno.
   thread_priorities:
-    very_high: "Nejvyšší důležitost"
-    high: "Důležité"
-    medium: "Středně důležité"
-    low: "Málo důležité"
-    very_low: "Nedůležité"
+    very_high: Nejvyšší důležitost
+    high: Důležité
+    medium: Středně důležité
+    low: Málo důležité
+    very_low: Nedůležité
+    nil: None set
   thread_privacy_options:
-    public: "Veřejné"
-    group: "Pro skupinu"
-    committee: "Pro správce skupiny"
+    public: Veřejné
+    group: Pro skupinu
+    committee: Pro správce skupiny
   user_roles:
-    member: "Člen"
-    admin: "Administrátor"
+    member: Člen
+    admin: Administrátor
   group_membership_roles:
-    member: "Obyčejný člen"
-    committee: "Správce skupiny"
+    member: Obyčejný člen
+    committee: Správce skupiny
   user:
     locations:
       create:
-        success: "Umístění vytvořeno"
+        success: Umístění vytvořeno
       destroy:
-        failure: "Toto umístění nemůže být smazáno"
-        success: "Umístění smazáno"
+        failure: Toto umístění nemůže být smazáno
+        success: Umístění smazáno
       edit:
-        title: "Upravit umístění"
+        title: Upravit umístění
       index:
-        add_first_location: "přidat první umístění"
-        all_my_locations: "Všechna má umístění"
-        catch_up_guidance_html: "Pro zachycení existujících diskuzí, můžete %{subscribe_existing_link} v těchto oblastech."
-        category: "Kategorie"
-        combined_locations: "Kombinovaná umístění"
-        combined_locations_guidance: "Tato mapa ukazuje všechna vaše umístění zkombinovaná dohromady. Vaše umístění používáme abychom určili, které podněty jsou pro vás důležité a které místní skupiny by vás mohli zajímat."
-        combined_locations_guidance_none_html: "Pokud chcete dostávat upozornění na nově vytvořené podněty v těchto oblastech a volitelně sledovat diskuzní vlákna o těchto podnětech, můžete %{edit_prefs_link}."
-        combined_locations_guidance_notify_html: "V současné době dostáváte upozornění na nové podněty v těchto oblastech, ale nesledujete automaticky diskuzní vlákna o těchto podnětech. Pokud chcete změnit nastavení, můžete %{edit_prefs_link}."
-        combined_locations_guidance_subscribe_html: "V současné době dostáváte upozornění na nové podněty v těchto oblastech, a automaticky sledujete diskuzní vlákna o těchto podnětech. Pokud chcete změnit nastavení, můžete %{edit_prefs_link}."
-        confirm: "Skutečně?"
-        delete: "Smazat"
-        edit: "Upravit"
-        edit_your_prefs: "upravit nastavení"
-        map: "Mapa"
-        my_locations: "Mé oblasti"
-        new: "Přidejte novou oblast"
-        no_locations_yet: "Zatím jste nenastavili žádné oblasti!"
-        no_locations_guidance: "Můžete vytvořit oblasti pro místo kde žijete, vaši cestu do práce, kde rádi jezdíte atd. To pomůže zjistit, které záležitosti by se vás mohli týkat a které skupiny by vás mohli zajímat."
-        no_locations_guidance2_html: "Pro začátek můžete %{first_location_link}."
-        no_overlapping_groups: "Žádné spádové místní skupiny"
-        overlapping_groups: "Spádové místní skupiny"
-        subscribe_existing_threads: "následovat všechna existující vlákna"
+        add_first_location: přidat první umístění
+        all_my_locations: Všechna má umístění
+        category: Kategorie
+        combined_locations: Kombinovaná umístění
+        combined_locations_guidance: Tato mapa ukazuje všechna vaše umístění zkombinovaná
+          dohromady. Vaše umístění používáme abychom určili, které podněty jsou pro
+          vás důležité a které místní skupiny by vás mohli zajímat.
+        combined_locations_guidance_none_html: Pokud chcete dostávat upozornění na
+          nově vytvořené podněty v těchto oblastech a volitelně sledovat diskuzní
+          vlákna o těchto podnětech, můžete %{edit_prefs_link}.
+        combined_locations_guidance_notify_html: V současné době dostáváte upozornění
+          na nové podněty v těchto oblastech, ale nesledujete automaticky diskuzní
+          vlákna o těchto podnětech. Pokud chcete změnit nastavení, můžete %{edit_prefs_link}.
+        combined_locations_guidance_subscribe_html: V současné době dostáváte upozornění
+          na nové podněty v těchto oblastech, a automaticky sledujete diskuzní vlákna
+          o těchto podnětech. Pokud chcete změnit nastavení, můžete %{edit_prefs_link}.
+        confirm: Skutečně?
+        delete: Smazat
+        edit: Upravit
+        edit_your_prefs: upravit nastavení
+        map: Mapa
+        my_locations: Mé oblasti
+        new: Přidejte novou oblast
+        no_locations_yet: Zatím jste nenastavili žádné oblasti!
+        no_locations_guidance: Můžete vytvořit oblasti pro místo kde žijete, vaši
+          cestu do práce, kde rádi jezdíte atd. To pomůže zjistit, které záležitosti
+          by se vás mohli týkat a které skupiny by vás mohli zajímat.
+        no_locations_guidance2_html: Pro začátek můžete %{first_location_link}.
+        no_overlapping_groups: Žádné spádové místní skupiny
+        overlapping_groups: Spádové místní skupiny
       new:
-        new_location: "Přidejte novou oblast"
-        introduction: "Nastavení oblasti pomůže zjistit, které záležitosti by se vás mohli týkat."
-        drawing_help: "Můžete zvolit oblast, cestu nebo přesné umístění - vyberte typ v panelu napravo. Potom můžete kreslit do mapy a uložit oblast tlačítkem dole."
+        new_location: Přidejte novou oblast
+        introduction: Nastavení oblasti pomůže zjistit, které záležitosti by se vás
+          mohli týkat.
+        drawing_help: Můžete zvolit oblast, cestu nebo přesné umístění - vyberte typ
+          v panelu napravo. Potom můžete kreslit do mapy a uložit oblast tlačítkem
+          dole.
       subscribe_to_threads:
         subscribed_to_threads:
-          zero: "Nemůžeme najít žádná další vlákna, která byste mohli sledovat."
-          one: "Nyní sledujete jedno další vlákno."
-          other: "Nyní sledujete %{count} dalších vláken."
+          zero: Nemůžeme najít žádná další vlákna, která byste mohli sledovat.
+          one: Nyní sledujete jedno další vlákno.
+          other: Nyní sledujete %{count} dalších vláken.
       update:
-        success: "Oblast upravena"
+        success: Oblast upravena
     prefs:
       edit:
-        involvement: "Zahrnout mě do:"
-        notification_types: "Typ upozornění"
-        notification_types_guidance: "Můžete vybrat jak budete informováni o jednotlivých záležitostech nahoře. V současné době jsou dostupná pouze emailová oznámení."
-        title: "Správa notifikací"
-        back: "Návrat na váš profil"
-        none: "Žádná upozornění"
-        notify: "Zasílat upozornění o nových podnětech a nově založených diskuzních vláknech"
-        subscribe: "Zasílat upozornění na nové podněty a nová diskuzní vlákna automaticky"
-        your_profile: "váš profil"
+        involvement: 'Zahrnout mě do:'
+        notification_types: Typ upozornění
+        notification_types_guidance: Můžete vybrat jak budete informováni o jednotlivých
+          záležitostech nahoře. V současné době jsou dostupná pouze emailová oznámení.
+        title: Správa notifikací
+        back: Návrat na váš profil
+        none: Žádná upozornění
+        notify: Zasílat upozornění o nových podnětech a nově založených diskuzních
+          vláknech
+        subscribe: Zasílat upozornění na nové podněty a nová diskuzní vlákna automaticky
+        your_profile: váš profil
       update:
-        success: "Nastavení uložena"
-        failure: "Vaše nastavení nemohou být uložena"
+        success: Nastavení uložena
+        failure: Vaše nastavení nemohou být uložena
     profiles:
       create:
-        success: "Profil vytvořen"
+        success: Profil vytvořen
       edit:
-        title: "Upravit profil"
-        my_current_thumbnail_title: "Současný profilový obrázek"
+        title: Upravit profil
+        my_current_thumbnail_title: Současný profilový obrázek
         profile_public: Everyone
         profile_group: Only members of my groups
-        visibility_guidance_html: You can choose to restrict who gets to view your profile.
+        visibility_guidance_html: You can choose to restrict who gets to view your
+          profile.
       show:
-        about_label: "O profilu:"
+        about_label: 'O profilu:'
         add_to_groups:
-          one: "Přidat %{name} do vaší místní skupiny"
-          other: "Přidat %{name} do vašich místních skupin"
+          one: Přidat %{name} do vaší místní skupiny
+          other: Přidat %{name} do vašich místních skupin
+          few: Přidat %{name} do vašich místních skupin
         add_to_groups_explanation:
-          one: "Můžete přidat tohoto uživatele do vaší místní skupiny."
-          other: "Můžete přidat tohoto uživatele do jakékoliv ze zobrazených místních skupin."
-        group_membership_label: "Místní skupiny:"
+          one: Můžete přidat tohoto uživatele do vaší místní skupiny.
+          other: Můžete přidat tohoto uživatele do jakékoliv ze zobrazených místních
+            skupin.
+          few: Můžete přidat tohoto uživatele do jakékoliv ze zobrazených místních
+            skupin.
+        group_membership_label: 'Místní skupiny:'
         is_a_member_of_groups:
-          zero: "%{name} zatím není členem žádné místní skupiny"
-          one: "%{name} je členem jedné místní skupiny"
-          other: "%{name} je členem %{count} místních skupin"
-        no_groups: "Žádné"
-        no_website: "Žádná"
-        profile_picture_title: "obrázek uživatele %{name}"
-        recent_threads: "Nedávná vlákna"
-        reported_issues: "Podané podněty"
-        user_profile: "Uživatelský profil"
-        website_label: "Webová stránka:"
-        full_name: "Plné jméno"
+          zero: '%{name} zatím není členem žádné místní skupiny'
+          one: '%{name} je členem jedné místní skupiny'
+          other: '%{name} je členem %{count} místních skupin'
+        no_groups: Žádné
+        no_website: Žádná
+        profile_picture_title: obrázek uživatele %{name}
+        recent_threads: Nedávná vlákna
+        reported_issues: Podané podněty
+        user_profile: Uživatelský profil
+        website_label: 'Webová stránka:'
+        full_name: Plné jméno
+        send_private_message: Send private message
       update:
-        success: "Profil upraven"
+        success: Profil upraven
+  users:
+    private_message_threads:
+      new:
+        message_for_html: Send a private message to %{other}
+        introduction_html: This is a private message that only you and %{other} can
+          see.
+        send: Send Private message
+      index:
+        with_html: with %{other}.
+        private_messages: Private Messages
+        private_introduction: These are private messages that only you and one other
+          person can see.  You can send a private message to another user by clicking
+          a button in their profile.
+  helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b>
+          of <b>%{total}</b> in total
+      one_page:
+        display_entries:
+          one: Displaying <b>%{count}</b> %{entry_name}
+          other: Displaying <b>all %{count}</b> %{entry_name}
+          zero: No %{entry_name} found
+  views:
+    pagination:
+      first: '&laquo; First'
+      last: Last &raquo;
+      next: Next &rsaquo;
+      previous: '&lsaquo; Prev'
+      truncate: '&hellip;'

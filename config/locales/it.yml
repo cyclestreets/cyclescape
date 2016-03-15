@@ -1,11 +1,11 @@
-"en-GB":
+it:
   application_name: Cyclescape
   tags:
     show:
       heading: Things tagged '%{name}'
       unrecognised: Couldn't find the tag '%{name}'
   anon: Anon
-  sign_in: sign in
+  sign_in: entra
   confirm: Are you sure?
   possible_spam: We think this message might be spam. If not, please accept our apologies.  It
     is queued to be checked by a moderator.
@@ -29,44 +29,44 @@
   admin:
     groups:
       index:
-        title: Groups
-        actions: Actions
-        new_group: Create a new group
-        edit: Edit
-        edit_prefs: Edit Prefs
-        edit_profile: Edit Profile
-        group_email: Group Email
-        members: Members
-        name: Group Name
+        title: Gruppi
+        actions: Azioni
+        new_group: Crea un nuovo gruppo
+        edit: Modifica
+        edit_prefs: Modifica preferenze
+        edit_profile: Modifica profilo
+        group_email: Email di gruppo
+        members: Membri
+        name: Nome gruppo
         subdomain: Subdomain
       create:
-        success: Group created
+        success: Gruppo creato
       new:
-        title: Add a new group
-        introduction: As a system administrator, you can use this form to create a
-          new group.
+        title: Agg. un nuovo gruppo
+        introduction: Come amministratore di sistema, puoi usare questo form per creare
+          un nuovo gruppo.
       update:
-        success: Group updated
+        success: Gruppo aggiornato
       edit:
-        edit_group: Edit group
+        edit_group: Modifica gruppo
     home:
       index:
-        admin_interface: Administrative area
-        admin_interface_introduction: This section contains administrative functions,
-          available to system administrators only.
+        admin_interface: Area Amministrativa
+        admin_interface_introduction: Questa sezione contiene funzioni amministrative,
+          sono disponibili solo agli amministratori.
         manage_comments: Manage feedback
-        manage_groups: Manage groups
+        manage_groups: Gestisci gruppi
         manage_group_requests: Manage group requests
         manage_issue_categories: Manage Issue Categories
-        manage_users: Manage users
+        manage_users: Gestisci utenti
         manage_message_moderations: Manage message moderations
     issue_categories:
       create:
-        success: Category created
+        success: Categoria creata
       index:
         title: Issue Categories
       update:
-        success: Category updated
+        success: Categoria aggiornata
     user:
       locations:
         create:
@@ -75,13 +75,13 @@
           title: Edit location for %{user_name}
         index:
           all_user_locations: All locations for %{user_name}
-          category: Category
+          category: Categoria
           combined_locations: Combined Locations
           combined_locations_guidance: This is the combined location for this user.
-          confirm: Are you sure?
-          delete: Delete
-          edit: Edit
-          map: Map
+          confirm: Sei sicuro?
+          delete: Elimina
+          edit: Modifica
+          map: Mappa
           new: New location
           no_locations_yet: This user has no locations yet.
           no_locations_guidance: As an administrator, you can add their first location.
@@ -94,22 +94,22 @@
           success: Location Updated
     users:
       index:
-        created: Created
-        created_at: '%{time_ago} ago'
+        created: Creato
+        created_at: '%{time_ago} fa'
         last_seen: Last login
         last_seen_at: '%{time_ago} ago'
         introduction: This page lists all users on the system (irrespective of any
           group membership they may have).
-        disabled: Disabled
-        disabled_at: '%{time_ago} ago'
-        display_name: Display Name
-        edit: User details
+        disabled: Disabilitato
+        disabled_at: '%{time_ago} fa'
+        display_name: Nome visualizzato
+        edit: Dettagli utente
         email: Email
-        full_name: Full Name
+        full_name: Nome completo
         id: id
-        role: Role
-        title: Users
-        preferences: Preferences
+        role: Ruolo
+        title: Utenti
+        preferences: Preferenze
         locations: Locations
         website: Website
         about: About
@@ -138,12 +138,12 @@
         approved: Approved
         approve: Approve
       update:
-        success: User updated
+        success: Utente aggiornato
       edit:
-        edit_user: Edit user
+        edit_user: Modifica utente
   application:
-    account_disabled: Your account has been disabled by an administrator
-    permission_denied: You are not authorised to access that page.
+    account_disabled: Il tuo account è stato disabilitato da un amministratore
+    permission_denied: Non sei autorizzato ad accedere a questa pagina.
   planning_applications:
     hide:
       success: Planning application hidden from overview
@@ -233,7 +233,7 @@
       issues_lower: issues
       involved_threads: Involved Threads
       issues_in_your_area: Issues in your area
-      new_group_thread: Start a new group thread
+      new_group_thread: Inizia una nuova discussione di gruppo
       my_issues_nearby_introduction_html: Issues in the %{areas_you_are_watching_link}
         are shown below, most recent first.
       my_issues_nearby_issues_pointer_html: (You can also %{browse_all_other_issues_link}
@@ -274,36 +274,36 @@
       planning_applications_introduction_html: 'These are the most recent planning
         applications (courtesy of the PlanIt website) in your %{location_link}:'
       planning_applications_lower: planning applications
-      recent_threads: recent threads
-      subscribed_threads: Subscribed Threads
+      recent_threads: discussioni decenti
+      subscribed_threads: Discussioni sottoscritte
       thread_latest_activity: '%{time_ago} ago'
-      group_threads: Group Threads
+      group_threads: Discussioni di gruppo
       group_threads_desc_html: Recent threads with activity from your groups.
-      my_priorities: My priorities
+      my_priorities: Mie priorità
       my_threads: My subscribed threads
       issues_nearby: Latest issues nearby
       map: Map
       posted:
-        message_html: '%{creator_link} posted a message'
+        message_html: '%{creator_link} a postato un messaggio'
         deadline_message_html: '%{creator_link} posted a deadline/date'
-        document_message_html: '%{creator_link} posted an attachment'
-        photo_message_html: '%{creator_link} posted a photo'
-        link_message_html: '%{creator_link} posted a link'
+        document_message_html: '%{creator_link} ha postato un allegato'
+        photo_message_html: '%{creator_link} ha postato una foto'
+        link_message_html: '%{creator_link} a postato un link'
         street_view_message_html: '%{creator_link} posted a street view'
         library_item_message_html: '%{creator_link} added a library item'
     search:
-      title: Search Results
+      title: Risultati di ricerca
   devise:
     registrations:
       edit:
-        title: Update My Account Details
+        title: Aggiorna dettagli account
       new:
-        title: Sign up
+        title: Registrati
         failure: You didn't enter the correct number of wheels
     sessions:
       new:
-        title: Sign in
-        sign_in_button: Sign in
+        title: Entra
+        sign_in_button: Entra
     mailer:
       invitation_instructions:
         subject: Invitation instructions
@@ -315,9 +315,9 @@
           />Your account won't be created until you access the link above and set
           your password.
   group:
-    group_prefs_tab: Group preferences
-    group_profile_tab: Group profile
-    group_management: Group management
+    group_prefs_tab: Preferenze gruppo
+    group_profile_tab: Profilo gruppo
+    group_management: Gestione gruppo
     membership_list_tab: Membership list
     membership_requests_tab: Membership requests
     home_page_tab: Home page
@@ -340,18 +340,18 @@
         success: You have voted up this issue
     members:
       index:
-        actions: Actions
+        actions: Azioni
         add_directly: you can add them directly
-        committee: Committee members
+        committee: Membri comitato
         committee_guidance: Committee members can manage the group membership list,
           change the group's profile and update group thread information.
-        email: E-mail address
+        email: Indirizzo email
         group_joining_date: Group joining date
         group_members_guidance: On this page you can view the existing members of
           your group, add new people and remove members from the group.
-        member_name: Member name
-        ordinary_members: Ordinary members
-        new_members_guidance_introduction: 'To add a member:'
+        member_name: Nome membro
+        ordinary_members: Membri ordinari
+        new_members_guidance_introduction: 'Per aggiungere un membro:'
         new_members_guidance_method1_html: If you know their email address, %{add_directly_link}.
         new_members_guidance_method2_html: If they are already using Cyclescape, click
           on their name from within a discussion thread, and you can add them from
@@ -362,13 +362,13 @@
         review_membership_requests_html: Users of the site can also apply to join
           this group. You can %{review_membership_requests_link}.
         review_pending: pending membership requests
-        review_requests: review the requests history
-        title: Members of %{group}
+        review_requests: Rivedi lo storico delle richieste
+        title: Membri di %{group}
         you_have_pending_members_html: You have %{review_pending_requests_link}! Please
           review them and take appropriate actions.
       member:
-        confirm: Are you sure?
-        delete: Remove from group
+        confirm: Sei sicuro?
+        delete: Rimuovi da gruppo
         edit: Edit membership
         joining_date: '%{time_ago} ago'
         invite_pending: Invite pending
@@ -377,7 +377,7 @@
         title: Add new member
       destroy:
         failure: Couldn't remove member from group
-        success: Member removed from group
+        success: Membro rimosso dal gruppo
       edit:
         title: Edit group membership for %{user_name}
       update:
@@ -391,25 +391,25 @@
         success: Membership confirmed
       create:
         requested: Membership has been requested
-        already_asked: You have already asked to join this group
-        already_member: You are already a member of this group
+        already_asked: Hai già chiesto di far parte di questo gruppo
+        already_member: Sei già membro di questo gruppo
       index:
         actioned_by: Actioned By
-        are_you_sure: Are you sure?
-        by: by %{name}
-        confirm: Confirm
-        created_at: '%{time_ago} ago'
-        email: E-mail address
-        view_message: View...
-        message: Message
-        no_requests_yet: There have been no membership requests for this group yet.
-        full_name: Full name
-        reject: Reject
+        are_you_sure: Sei sicuro?
+        by: per %{name}
+        confirm: Conferma
+        created_at: '%{time_ago} fa'
+        email: Indirizzo email
+        view_message: Mostra...
+        message: Messaggio
+        no_requests_yet: Non ci sono ancora richiesta di membri per questo gruppo.
+        full_name: Nome completo
+        reject: Rifiuta
         review: Review
-        requested_at: Requested At
-        status: Status
-        title: Membership requests for %{group}
-        user: User (display name)
+        requested_at: Richiesta di
+        status: Stato
+        title: Richieste di membri per %{group}
+        user: Utente (nome visualizzato)
         membership_status: &id001
           confirmed: 0a1e37665e4db7e4bfa138704a6eb381_tr
           pending: 2071f2f2e16b9c7443b2015cb3ae4f4b_tr
@@ -424,27 +424,27 @@
         success: Membership rejected
       review:
         actioned_by: Actioned By
-        are_you_sure: Are you sure?
-        by: by %{name}
-        confirm: Confirm
-        created_at: '%{time_ago} ago'
-        email: E-mail address
-        view_message: View...
+        are_you_sure: Sei sicuro?
+        by: per %{name}
+        confirm: Conferma
+        created_at: '%{time_ago} fa'
+        email: Indirizzo email
+        view_message: Mostra...
         message: 'The user included this message with their request:'
         no_requests_yet: There have been no membership requests for this group yet.
-        full_name: Full name
+        full_name: Nome completo
         reject: Reject
         review: Review
         requested_at: Requested At
-        status: Status
+        status: Stato
         title: Review a membership request for %{group}
-        user: User (display name)
+        user: Utente (nome visualizzato)
         membership_status: *id001
         no_message: There was no message included with this membership request.
     message_threads:
       destroy:
-        failure: Couldn't delete thread
-        success: Thread deleted
+        failure: Impossibile eliminare la discussione
+        success: Discussione eliminata
       index:
         title: Discussion threads for %{group}
         threads_explanation_html: Each of the %{issues_link} may have one or more
@@ -456,11 +456,11 @@
           belonging to %{group_name} on listed issues, shown most recent first.
         issue_threads_addition_description: To start a new issue-based discussion
           thread, go to the relevant issue.
-        general_threads: Administrative discussions
+        general_threads: Discussioni amministrative
         general_threads_description: These are public and private general discussions
           for administrative purposes, e.g. arranging a general meeting.
       new:
-        for_group: for %{name}
+        for_group: per %{name}
         title: New Group Thread
       update:
         success: Thread updated
@@ -470,55 +470,55 @@
           sent to your group, but there is no email address recorded for this group.
           Either choose a membership secretary, or ask for your group email to be
           set by a site administrator.
-        title: Edit Preferences
+        title: Modifica preferenze
       update:
-        failure: Couldn't update preferences
-        success: Preferences Updated
+        failure: Impossibile aggiornare preferenze
+        success: Preferenze aggiornate
     profiles:
       edit:
-        title: Edit Profile
+        title: Modifica profilo
       show:
-        description: Description
+        description: Descrizione
         location: Location
         no_location: This group doesn't have any location details yet.
         no_picture: Add a picture to make your group welcoming.
         picture: Picture
       update:
-        success: Profile Updated
+        success: Profilo aggiornato
   groups:
     search:
       title: Search Results for %{group}
       main_site_link_html: If you want to see issue beyond %{group}'s area you can
         search from the <a href='%{url}'>national site</a>.
     index:
-      list_tab: List
-      map_tab: Map
-      new_group: Create new group
+      list_tab: Elenco
+      map_tab: Mappa
+      new_group: Crea nuovo gruppo
       send_some_feedback: send some feedback
       title: Groups directory
       group_request: Request New Group
       no_results_found: No results found
     compact:
-      already_member: You are already a member of this group
+      already_member: Sei già membro di questo gruppo
       no_location: This group doesn't have a location yet.
     join:
       join_body: You can request membership of this Cyclescape group, if you want
         to be involved in the %{group} activities.
-      join_this_group: Join this group
+      join_this_group: Entra nel gruppo
       group_request_pending: Your request to join this group is pending.
     show:
-      edit_group_profile: Edit the group profile
-      edit_group_prefs: Edit the group preferences
+      edit_group_profile: Modifica profilo del gruppo
+      edit_group_prefs: Modifica preferenze del gruppo
       edit_group_members: Edit the membership list
-      group_management: Group management
-      group_organisers: Group organisers
+      group_management: Gestione gruppo
+      group_organisers: Organizzatori del gruppo
       join_title: Join our Cyclescape group
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public threads
       our_areas: Our Areas
       recent_issues: Recent Issues in this group's area
-      recent_threads: Latest Discussions
+      recent_threads: Ultime discussioni
       view_membership_requests:
         zero: Review membership requests
         one: View pending membership request
@@ -599,17 +599,17 @@
       center_box_html: Non-existent cycle paths? Obstructions for cyclists? Lack of
         cycle parking? Or an example of something done right?
       report_an_issue: Create an issue
-      latest_discussions: Latest Discussions
-      groups_title: Cyclescape Groups
+      latest_discussions: Ultime discussioni
+      groups_title: Gruppi Cyclescape
       groups_intro_html: 'Cyclescape is used by <strong>cycle campaign groups</strong>
         across the country. <strong>%{groups_link}</strong> and see what they''re
         working to fix.
 
 '
       find_local_groups: Find groups local to you
-      twitter_title: Cyclescape on Twitter
+      twitter_title: Cyclescape su Twitter
     guide:
-      title: How Cyclescape Works
+      title: Come funziona Cyclescape
       box_1_title: Create cycling issues
       box_1_body: Quickly raise issues on this site.
       box_2_title: Get advice from others
@@ -624,18 +624,18 @@
           a new planning application may affect traffic on a road and affect cycle
           access to woods."
         title: New Thread on %{issue}
-        everyone: Everyone
+        everyone: Tutti
     photos:
       show:
         photo_alt: The photo for %{caption}.
-        view_original: View original photo.
+        view_original: Mostra foto originale
     tags:
       panel:
-        edit_tags: edit tags
+        edit_tags: modifica tag
   issues:
     compact:
       created_by_html: Created by %{creator_link}
-      votes: votes
+      votes: voti
       thread_count:
         one: 1 thread
         other: '%{count} threads'
@@ -647,17 +647,17 @@
     index:
       new_issue: Create new issue
       title: Issues
-      list_tab: List
+      list_tab: Elenco
       list_introduction: 'Listed issues, most recent first:'
       list_introduction_groupwise_html: 'Listed issues, most recent first, limited
         to the %{area_of_group_link}:'
       area_of_group: area of %{group_name}
-      map_tab: Map
+      map_tab: Mappa
       map_introduction: 'This map shows all issues, whether points, routes, or areas:'
-      popular_tab: Popular
+      popular_tab: Popolare
       popular_introduction: 'The most popular issues, based on the number of votes:'
-      search_button: Go
-      clear: Clear
+      search_button: Vai
+      clear: Pulisci
       no_popular_issues: No issues have been voted on recently.
       no_results_found: No issues found.
       title_introduction: This section lists issues - problems on the street network
@@ -679,30 +679,30 @@
         context (e.g. organising a general meeting) in the group admin threads section.
       administrative_matters: add a purely administrative matter
     show:
-      issue_created_at: '%{time_ago} ago'
+      issue_created_at: '%{time_ago} fa'
       added_by_html: Added by %{name} on %{time}
-      cancel_vote: Cancel
-      confirm_delete: Are you sure?
+      cancel_vote: Annulla
+      confirm_delete: Sei sicuro?
       delete_issue: Delete this issue
       edit_issue: Edit this issue
       new_thread:
         zero: Discuss
-        one: New Thread
-        other: New Thread
+        one: Nuovo argomento
+        other: Nuovo argomento
       no_threads_yet: There are no discussion threads for this issue yet.
       group_private: Private to %{group}
       group_public: Public, by %{group}
-      public: Public
-      sign_in: sign in
+      public: Pubblico
+      sign_in: entra
       sign_in_to_discuss_html: You can %{sign_in_link} to start the discussion.
       sign_in_to_vote_html: Please %{sign_in_link} to vote.
-      threads: Threads
-      vote_clear: Clear Vote
-      vote_down: Vote Down
-      vote_up: Vote Up
+      threads: Argomenti
+      vote_clear: Pulisci voto
+      vote_down: Voto giu
+      vote_up: Voto su
       votes:
-        one: vote
-        other: votes
+        one: voto
+        other: voti
       location: Location
       deadline: Deadline
       issues-nearby: Issues nearby
@@ -721,72 +721,72 @@
       success: You have voted up this issue
   layouts:
     application:
-      admin: Admin
+      admin: Amministratore
       admin_tooltip: Admin area, for system administrators
-      dashboard: My Cyclescape
+      dashboard: Miei Cyclescape
       dashboard_tooltip: Your personal dashboard, showing updates on discussion threads
         you are subscribed to
-      about: About
-      user_guide: User guide
-      sign_out: Sign out
-      sign_in: Sign in
-      sign_up: Sign up
+      about: Info su
+      user_guide: Guida utente
+      sign_out: Esci
+      sign_in: Entra
+      sign_up: Iscriviti
       private_messages: Private Messages
       feedback: Feedback
       home: Home
       issues: Issues
       issues_tooltip: Listed problems, browsable on the map or as a list
-      library: Library
+      library: Libreria
       library_tooltip: Reusable resources for campaigning
-      loading: Please wait…
+      loading: Attendere prego...
       threads: Discussion threads
       threads_tooltip: Discussions on each issue
       title: Cyclescape
     footer:
-      application_version_html: 'Version ref: %{version}'
+      application_version_html: 'Versione: %{version}'
       github_page_link_html: View the source at <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>
-      whats_new: What's new?
+      whats_new: Che c'è di nuovo?
       supportlogos_introduction: 'Cyclescape has been made possible thanks to generous
         support from:'
       funding_from: Funding from %{name}
       funding_from_and_created_by: Funding from and created by %{name}
       planning_application_data: Planning application data from PlanIt
       top_html: Back to top &uarr;
-      cyclescape_blog: Cyclescape blog
+      cyclescape_blog: 'Blog Cyclescape '
       privacy: Privacy Policy
-      user_guide: User guide
+      user_guide: Guida utente
       facebook_page: CycleStreets Facebook page
       twitter_page: CycleStreets Twitter account
       osm_credit_html: Map data &copy; <a href='http://www.openstreetmap.org'> OpenStreetMap</a>
         contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
     group_selector:
-      group_selector: Group
-      no_group: No Group
+      group_selector: Gruppo
+      no_group: Nessun gruppo
     search:
-      search: Search
-      search_button: Go
+      search: Cerca
+      search_button: Vai
   libraries:
     search:
-      no_results_found: No results found for '%{query}'.
+      no_results_found: Nessun risultato trovato per '%{query}'
       results_found:
         one: One result found for '%{query}'.
         other: '%{count} results found for ''%{query}'''
       title: Library Search Results
     show:
-      title: Library
+      title: Libreria
       overview_description_html: The Library contains <strong>reusable resources</strong>
         for campaigning. Please add items you think might be useful in future.
       overview_usage: You can link to library items from discussion threads.
       latest: Latest items
       item_created: Posted %{time_ago} ago
       search: 'Search the library:'
-      search_submit: Search
-      clear_submit: Clear
-      results: Results
+      search_submit: Cerca
+      clear_submit: Pulisci
+      results: Risultati
       new_library_item: Add Library Item
       new_note: Note
-      new_document: Document
+      new_document: Documento
       new_item_title: Select type
       new_item_description_html: 'Select the type of item you would like to add to
         the library:'
@@ -800,15 +800,15 @@
         title: New Library Document
       show:
         added_by_html: Added by %{name} on %{time}
-        attach_note: Attach Note
+        attach_note: Allega note
         attach_note_instructions_html: You can create new notes linked to this document.
           When referenced in a thread they will link to this document as well.
-        download: Download document
-        comments: Comments
-        notes: Notes
+        download: Scarica documento
+        comments: Commenti
+        notes: Note
         no_threads: This document hasn't been included in any public threads. If you
           add this document to a public thread, the thread will be listed here.
-        public_threads: Public Threads
+        public_threads: Discussioni pubbliche
         threads_explanation: 'This document has been mentioned in these public threads:'
     notes:
       edit:
@@ -817,11 +817,11 @@
         title: New Library Note
       show:
         added_by_html: Added by %{name} on %{time}
-        edit: Edit Note
+        edit: Modifica nota
         note_on_document_html: 'This note is attached to a document: %{document}'
         no_threads: This note hasn't been included in any public threads. If you add
           this note to a public thread, the thread will be listed here.
-        public_threads: Public Threads
+        public_threads: Discussioni pubbliche
         threads_explanation: 'This note has been mentioned in these public threads:'
       update:
         success: Library Note Updated
@@ -869,28 +869,28 @@
         success: You have unsubscribed from this thread
     tags:
       panel:
-        edit_tags: edit
-        tags: tags
+        edit_tags: modifica
+        tags: tag
     user_priorities:
       create:
-        success: Priority saved
+        success: Priorità salvata
         failure: Couldn't save your priority
       update:
-        success: Priority updated
+        success: Priorità aggiornata
         failure: Couldn't update your priority
   message_threads:
     compact:
       group_committee: Group Committee
-      group_public: Group Public
-      group_private: Group Private
-      public: Public
+      group_public: Gruppo pubblico
+      group_private: Gruppo privato
+      public: Pubblico
       posted_at: posted %{time_ago} ago
     list:
       discussion_on_issue: A discussion on issue
       group_committee: Group Committee
-      group_public: Group Public
-      group_private: Group Private
-      public: Public
+      group_public: Gruppo pubblico
+      group_private: Gruppo privato
+      public: Pubblico
       posted_at: posted %{time_ago} ago
     edit:
       title: Edit thread properties
@@ -898,12 +898,12 @@
       thread_fix_warning_html: <strong>Warning:</strong> your group may have a policy
         about changing thread privacy.
     destroy:
-      failure: Couldn't delete the thread
-      success: Thread deleted
+      failure: Impossibile eliminare la discussione
+      success: Discussione eliminata
     index:
       latest_activity: Latest activity %{ago} ago
       search: 'Search all threads:'
-      search_submit: Search
+      search_submit: Cerca
       title: Discussion threads (public)
       threads_explanation_html: Each of the %{issues_link} may have one or more discussion
         threads, shown below (most recently-updated first).
@@ -913,30 +913,30 @@
       introduction_group_pointer: To show only discussions from a group you are a
         member of, use the group switcher on the top right.
     library_panel:
-      library: Library
+      library: Libreria
       no_library_items: Couldn't find any relevant library items based on the thread
         tags.
       tag_thread_guidance: Add tags to this thread to find relevant library items.
     new:
-      title: New Thread
+      title: Nuovo argomento
     priority_panel:
       thread_priority: My Thread Priority
     search:
-      clear_submit: Clear
-      no_results_found: No results found for '%{query}'.
+      clear_submit: Pulisci
+      no_results_found: Nessun risultato trovato per '%{query}'
       results_found:
         one: One result found for '%{query}'.
         other: '%{count} results found for ''%{query}'''
       search: 'Search all threads:'
-      search_submit: Search
+      search_submit: Cerca
       title: Thread Search Results
     show:
-      are_you_sure: Are you sure?
-      back: Back
+      are_you_sure: Sei sicuro?
+      back: Indietro
       closed_html: Thread has been closed by %{by} %{at} ago
       open: Re-open this thread
-      edit: Edit this thread
-      destroy: Delete this thread
+      edit: Modifica questo argomento
+      destroy: Elimina questo argomento
       issues-nearby: Issues nearby
       private_to_committee_message: 'Private: Only committee members of %{group} can
         view and post messages to this thread.'
@@ -947,13 +947,13 @@
     subscribe_panel:
       subscribed: You are following this thread.
     subscribers_panel:
-      owner: Owner
+      owner: Proprietario
       subscribers: Following this thread
     update:
       success: Thread updated
     widget:
       group_private: Group Private
-      public: Public
+      public: Pubblico
   message:
     deadlines:
       new:
@@ -1010,12 +1010,12 @@
       compose_new: Compose New
       from_library: From Library
       recently_added: Recently added
-      select_button: Select…
+      select_button: Seleziona...
       search_results: Search Results
-      go: Go
-      back: Back
+      go: Vai
+      back: Indietro
       close: Close this thread
-      select_header: Select
+      select_header: Seleziona
       add_item_to_thread: Add item to thread
       explain_library_item: Explain how this library item relates to the discussion
         thread
@@ -1027,9 +1027,9 @@
       library_item_message: Library
       link_message: Link
       new_message: New message
-      photo_message: Photo
+      photo_message: Foto
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
-      text_message: Text
+      text_message: Testo
       street_view_message: Street View
       reply_by: Or reply by
   pages:
@@ -1065,7 +1065,7 @@
         other: '%{count} library items found for ''%{query}'':'
     edit_map:
       area: area
-      clear: clear
+      clear: pulisci
       draw_area: Draw an Area
       draw_area_1: Click the points to mark an area on the map.
       draw_area_2: Double-click to complete the shape.
@@ -1078,16 +1078,16 @@
       draw_route_1: Click the points to mark a route on the map.
       draw_route_2: Double-click to complete the route.
       draw_route_3: Drag the grey points to create new corners.
-      point: point
+      point: punto
       route: route
       undo: undo
     map_search:
-      near: near
+      near: vicino
       searching: Searching…
       search_failed: Sorry, the search failed this time.
       showing: Showing
       sorry_we_couldnt_find: Sorry, we couldn't find
-      submit: Go
+      submit: Vai
     profile_menu:
       edit: Edit My Profile
       edit_preferences: Subscription Preferences
@@ -1099,7 +1099,7 @@
         group</strong></a>?
     tags:
       panel:
-        edit_tags: Edit tags
+        edit_tags: Modifica tag
     message_moderations:
       approve: Approve
       approved: approved
@@ -1115,15 +1115,15 @@
         failure: Couldn't remove comment
         success: Comment deleted
       index:
-        confirm_delete: Are you sure?
-        delete_comment: Delete
+        confirm_delete: Sei sicuro?
+        delete_comment: Elimina
         how: How
         id: ID
         no_comments: No Feedback Yet
         title: All Feedback
         what: What
         when: When
-        when_ago: '%{time_ago} ago'
+        when_ago: '%{time_ago} fa'
         where: Where
         who: Who
       new:
@@ -1157,21 +1157,21 @@
         clicking 'unfollow this thread'.
   thread_priorities:
     very_high: Top-priority
-    high: Important
-    medium: Moderately Important
+    high: Importante
+    medium: Moderatamente importante
     low: Marginal Interest
     very_low: Not of Interest
     nil: None set
   thread_privacy_options:
     public: Public (everyone)
     group: Group (members only)
-    committee: Committee
+    committee: Comitato
   user_roles:
-    member: Member
-    admin: Admin
+    member: Membro
+    admin: Amministratore
   group_membership_roles:
-    member: Member
-    committee: Committee
+    member: Membro
+    committee: Comitato
   user:
     locations:
       create:
@@ -1184,7 +1184,7 @@
       index:
         add_first_location: add your first location
         all_my_locations: All my locations
-        category: Category
+        category: Categoria
         combined_locations: Combined locations
         combined_locations_guidance: This map shows all of your locations combined
           together. We use this to help figure out which issues are relevant to you,
@@ -1198,11 +1198,11 @@
         combined_locations_guidance_subscribe_html: You currently receive notifications
           when issues are created in these areas, and are following all discussion
           threads on those issues. To change these settings, you can %{edit_prefs_link}.
-        confirm: Are you sure?
-        delete: Delete
-        edit: Edit
+        confirm: Sei sicuro?
+        delete: Elimina
+        edit: Modifica
         edit_your_prefs: edit your preferences
-        map: Map
+        map: Mappa
         my_locations: My Locations
         new: Add a new Location
         no_locations_yet: You haven't set any locations yet!
@@ -1235,48 +1235,48 @@
           for the different events above. At the moment, only email notifications
           are available.
         title: Subscription Preferences
-        back: Return to your profile
-        none: No notifications
+        back: Ritorna al tuo profilo
+        none: Nessuna notifica
         notify: Notify me of new issues and when new threads are started
         subscribe: Notify me of new issues and automatically follow all new threads
         your_profile: your profile
       update:
-        success: Preferences saved
+        success: Preferenze salvate
         failure: Your preferences could not be saved
     profiles:
       create:
-        success: Profile Created
+        success: Profilo creato
       edit:
-        title: Edit My Profile
+        title: Modifica mio profilo
         my_current_thumbnail_title: My current profile picture
         profile_public: Everyone
         profile_group: Only members of my groups
         visibility_guidance_html: You can choose to restrict who gets to view your
           profile.
       show:
-        about_label: 'About:'
+        about_label: 'Info su:'
         add_to_groups:
           one: Add %{name} to your group
           other: Add %{name} to your groups
         add_to_groups_explanation:
           one: You can add this user into your group.
           other: You can add this user to any of the groups shown.
-        group_membership_label: 'Groups:'
+        group_membership_label: 'Gruppi:'
         is_a_member_of_groups:
           zero: '%{name} isn''t a member of any groups yet'
           one: '%{name} is a member of one group'
           other: '%{name} is a member of %{count} groups'
-        no_groups: None
-        no_website: None
+        no_groups: Nessuno
+        no_website: Nessuno
         profile_picture_title: '%{name}''s picture'
         recent_threads: Recent Threads
         reported_issues: Listed Issues
-        user_profile: User Profile
-        website_label: 'Web site:'
+        user_profile: Profilo utente
+        website_label: 'Sito web:'
         full_name: Full Name
         send_private_message: Send private message
       update:
-        success: Profile Updated
+        success: Profilo aggiornato
   users:
     private_message_threads:
       new:
