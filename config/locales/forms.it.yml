@@ -1,11 +1,11 @@
-"en-GB":
-  cancel: Cancel
+it:
+  cancel: Annulla
   formtastic:
     labels:
       tags_string: Tags
       group:
-        name: Name of the group
-        short_name: Subdomain
+        name: Nome del gruppo
+        short_name: Sottodominio
       group_request:
         name: Name of the group
         short_name: Web address
@@ -13,7 +13,7 @@
         email: Your organisation's main e-mail address
         default_thread_privacy: Default privacy for discussion threads
       group_membership:
-        role: Membership type
+        role: Tipo di membership
       group_pref:
         notify_membership_requests: Enable membership request notifications
       issue:
@@ -34,20 +34,20 @@
       link_message:
         url: URL
       message:
-        body: Message
+        body: Messaggio
       site_comment:
-        body: Message
+        body: Messaggio
       thread_subscription:
-        send_email: Email new messages
+        send_email: Email nuovi messaggi
       user_pref:
         email_status_id: Enable email notifications
-        involve_my_locations: Matters near my locations
+        involve_my_locations: Materie vicine alla mia posizione
         involve_my_groups: My group's matters
         involve_my_groups_admin: Also involve me in my group's administrative discussions
       user:
         edit:
-          password: New Password
-          password_confirmation: New Password Confirmation
+          password: Nuova password
+          password_confirmation: Conferma nuova password
         new:
           bicycle_wheels: Bicycle Wheels
     hints:
@@ -66,7 +66,7 @@
             who can see your profile.
           bicycle_wheels: To help stop automated sign-ups please enter the amount
             (in numbers) of wheels on six bicycles
-          password: Leave this blank to keep your current password.
+          password: Lascialo in bianco per mantenere la password corrente.
           current_password: Please confirm your current password to make changes on
             this page.
       group:
@@ -84,8 +84,8 @@
         message: You can optionally send the group administrators any additional information
           you feel is appropriate, such as a group membership number.
       group_pref:
-        notify_membership_requests: Notifications will be sent when a Cyclescape user
-          asks to join this group
+        notify_membership_requests: Le notifiche verranno inviate quando un utente
+          Cyclescape chiede di entrare in questo gruppo
         membership_secretary: Choose an optional membership secretary who will receive
           membership notification emails. Leave blank for notifications to be sent
           to the group email address.
@@ -121,14 +121,14 @@
         new_user_email: Hello {{full_name}}, you have been added to a Cyclescape group
           http://www.cyclescape.org
     actions:
-      update: Save
-      saving: Saving…
-      cancel: Cancel
+      update: Salva
+      saving: Salvataggio...
+      cancel: Annulla
       update_tags: Update Tags
       deadline_message:
-        create: Add Deadline
+        create: Aggiungi scadenza
       document_message:
-        create: Add Attachment
+        create: Aggiungi allegato
       group_membership:
         create: Add member
       group_request:
@@ -136,34 +136,34 @@
       group_membership_request:
         create: Request Group Membership
       issue:
-        create: Send Report
-        update: Save Report
+        create: Invia rapporto
+        update: Salva rapporto
       library_item_message:
-        create: Add Library Item
+        create: Aggiungi elemento libreria
       library/document:
-        create: Upload
-        document_from_message: Add to Library
+        create: Carica
+        document_from_message: Aggiungi alla libreria
       library/note:
-        create: Create Note
-        attach_to_document: Attach note
+        create: Crea nota
+        attach_to_document: Allega nota
       link_message:
-        create: Add Link
+        create: Agg. link
       message:
         create: Post Message
       photo_message:
-        create: Add Photo
+        create: Agg. photo
       site_comment:
-        create: Send Feedback
+        create: Invia Feedback
       user:
-        create: Sign up
-        update: Update Account
+        create: Iscriviti
+        update: Aggiorna account
       user_location:
-        create: Save this location
+        create: Salva questa posizione
       user_profile:
-        create: Save
+        create: Salva
       user_thread_priority:
-        create: Save
+        create: Salva
       thread_subscription:
-        create: Follow this thread
-        delete: Unfollow this thread
+        create: Segui questo argomento
+        delete: Smetti di seguire questo argomento
         delete_from_listing: Unfollow
