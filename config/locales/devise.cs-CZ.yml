@@ -1,47 +1,39 @@
-#
-# Czech translation for Devise - config/locales/devise.cz.yml
-# 'cs' locale by https://github.com/bver
-# Feel free to correct my translation.
-#
-# Note: devise.failure.invalid was intentionally changed from "email" to "identity" -
-# - not all configurations use config.authentication_keys = [ :email ]
-#
-# Additional translations at http://github.com/plataformatec/devise/wiki/I18n
-
 cs-CZ:
   devise:
     confirmations:
+      confirmed: Váš účet byl úspěšně potvrzen. Nyní jste přihlášen(a).
       new:
-         resend_confirmation: "Znovu odeslat email s potvrzením registrace"
-         resend_confirmation_submit: "Odeslat potvrzení"
-      confirmed: 'Váš účet byl úspěšně potvrzen. Nyní jste přihlášen(a).'
+        resend_confirmation: Znovu odeslat email s potvrzením registrace
+        resend_confirmation_submit: Odeslat potvrzení
     failure:
-      unconfirmed: 'Musíte potvrdit svůj účet, pak můžete pokračovat.'
-      invalid: 'Neplatná identita nebo heslo.'
+      unconfirmed: Musíte potvrdit svůj účet, pak můžete pokračovat.
     passwords:
       new:
-         forgot_password: "Zapomenuté heslo?"
-         send_reset_instuctions: "Odeslat instrukce k obnovení hesla"
+        forgot_password: Zapomenuté heslo?
+        send_reset_instuctions: Odeslat instrukce k obnovení hesla
     registrations:
       edit:
-        confirm: 'Skutečně?'
-        cancel_account: 'zrušit účet'
-        cancel_header: 'Zrušit účet'
-        unhappy_with_account_html: 'Pokud se svým účtem nejste spokojeni, můžete %{confirm_link}.'
-        back: "Zpět"
+        confirm: Skutečně?
+        cancel_account: zrušit účet
+        cancel_header: Zrušit účet
+        unhappy_with_account_html: Pokud se svým účtem nejste spokojeni, můžete %{confirm_link}.
+        back: Zpět
     shared:
       links:
-         sign_up: "Registrovat"
-         sign_in: "Přihlásit"
-         forgot_password: "Zapomenuté heslo?"
-         no_confirmation_instructions: "Nepřišel vám email s potvrzením registrace?"
-         no_unlock_instructions: "Nepřišel vám email s instrukcemi pro odblokování účtu?"
+        sign_in: Přihlásit
+        sign_up: Registrovat
+        forgot_password: Zapomenuté heslo?
+        no_confirmation_instructions: Nepřišel vám email s potvrzením registrace?
+        no_unlock_instructions: Nepřišel vám email s instrukcemi pro odblokování účtu?
     invitations:
       edit:
-        title: 'Potvrďte váš účet'
-        info: 'Byl jste pozván, aby jste se připojil k portálu Cyklisté sobě. Aby jste byly schopni se přihlásit, prosím doplňte údaje k vašemu účtu o heslo. Můžete také změnit vaši emailovou adresu na takovou, kterou chcete s touto službou používat.'
-        commit_button: 'Potvrdit účet'
-        confirm: 'Skutečně?'
-        cancel_account: 'zrušit účet'
-        cancel_header: 'Zrušit účet'
-        unhappy_with_account_html: 'Pokud se svým účtem nejste spokojeni, můžete %{confirm_link}.'
+        title: Potvrďte váš účet
+        info: Byl jste pozván, aby jste se připojil k portálu Cyklisté sobě. Aby jste
+          byly schopni se přihlásit, prosím doplňte údaje k vašemu účtu o heslo. Můžete
+          také změnit vaši emailovou adresu na takovou, kterou chcete s touto službou
+          používat.
+        commit_button: Potvrdit účet
+        confirm: Skutečně?
+        cancel_account: zrušit účet
+        cancel_header: Zrušit účet
+        unhappy_with_account_html: Pokud se svým účtem nejste spokojeni, můžete %{confirm_link}.
