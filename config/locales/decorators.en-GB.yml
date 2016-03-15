@@ -1,7 +1,5 @@
-# GB English translations for keys used in Decorators
-
 "en-GB":
   decorators:
     thread_list:
-      private_thread_title: "[Private thread]"
-      following: "Following"
+      private_thread_title: '[Private thread]'
+      following: Following

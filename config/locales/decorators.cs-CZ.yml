@@ -1,7 +1,5 @@
-# Czech translations for keys used in Decorators
-
 "cs-CZ":
   decorators:
     thread_list:
-      private_thread_title: "[Soukromé vlákno]"
-      following: "Sledováno"
+      private_thread_title: '[Soukromé vlákno]'
+      following: Sledováno
