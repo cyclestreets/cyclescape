@@ -44,6 +44,7 @@ gem 'paranoia', '~> 2.0'
 gem 'mustache'
 gem 'icalendar'
 gem 'attribute_normalizer'
+gem 'http_accept_language'
 
 gem 'grape', github: 'ruby-grape/grape'
 gem 'grape-swagger'
