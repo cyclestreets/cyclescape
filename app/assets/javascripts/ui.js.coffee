@@ -85,7 +85,7 @@ jQuery ->
     draggable: false
     modal: true
     width: 802
-    height: 700
+    position: { my: "centre top", at: "centre top" }
     dialogClass: 'no-close'
     beforeClose: ->
       $("body").css({ overflow: 'inherit' })
