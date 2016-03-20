@@ -25,7 +25,7 @@ class Issue < ActiveRecord::Base
   include Taggable
 
   searchable auto_index: false do
-    text :title, :description, :tags_string
+    text :title, :description, :tags_string, :id
     time :latest_activity_at, stored: true, trie: true
     latlon(:location) { Sunspot::Util::Coordinates.new(centre.y, centre.x) }
   end

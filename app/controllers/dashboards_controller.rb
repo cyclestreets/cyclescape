@@ -42,8 +42,7 @@ class DashboardsController < ApplicationController
     # as we can't paginate AND use permitted_to
     threads = MessageThread.search(include: [:group, :issue, messages: :created_by]) do
       fulltext params[:query] do
-        boost_fields title: 2.0
-        boost_fields tags_string: 1.0
+        boost_fields id: 4, title: 2, tags_string: 1
       end
       with(:status, 'approved')
       any_of do
@@ -69,8 +68,7 @@ class DashboardsController < ApplicationController
     # Issues
     issues = Issue.search(include: [:created_by, :tags]) do
       fulltext params[:query] do
-        boost_fields title: 2.0
-        boost_fields tags_string: 1.0
+        boost_fields id: 4, title: 2, tags_string: 1
       end
       adjust_solr_params do |sunspot_params|
         sunspot_params[:boost] = 'recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)'
@@ -82,7 +80,9 @@ class DashboardsController < ApplicationController
 
     # Library Items
     library_items = Library::Item.search do
-      fulltext params[:query]
+      fulltext params[:query] do
+        boost_fields id: 4
+      end
       paginate page: params[:library_page], per_page: 40
     end
     @library_items = Library::ItemDecorator.decorate_collection library_items.results
