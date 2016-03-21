@@ -18,11 +18,11 @@
             base:
               disabled: "Nemůže být vytvořen zdravotně postižené uživatele"
               not_approved: Public threads can only be created by approved users
-    models:
-      user: "Uživatel"
-      message_thread: "Vlákno"
-
     attributes:
+      issue:
+        external_url: Externí stránka
+      message_thread:
+        group: "Vlastněno"
       user_location:
         location: "Oblast"
       user:
@@ -35,3 +35,6 @@
       group_pref:
         membership_secretary: "Správce členství ve skupině"
         notify_membership_requests: "Upozornit na nové žádosti o členství"
+    models:
+      user: "Uživatel"
+      message_thread: "Vlákno"
