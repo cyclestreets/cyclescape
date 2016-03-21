@@ -7,8 +7,10 @@ class TagsController < ApplicationController
       @query = @tag.name
       issues = Issue.find_by_tag(@tag).order('updated_at desc').page(params[:issue_page])
       @issues = IssueDecorator.decorate_collection issues
-      # Threads - argh, privacy!
-      threads = MessageThread.is_public.find_by_tag(@tag).order('updated_at desc').page(params[:thread_page])
+      unfiltered_results = MessageThread.find_by_tag(@tag).order('updated_at desc')
+      threads = Kaminari.paginate_array(
+        unfiltered_results.select{ |t| permitted_to?(:show, t) }).page(params[:thread_page])
+
       @threads = ThreadListDecorator.decorate_collection threads
       @library_items = Library::Item.find_by_tag(@tag).order('updated_at desc').page(params[:library_page])
     else

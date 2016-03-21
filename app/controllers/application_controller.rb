@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :ensure_proper_protocol
   before_filter :no_disabled_users
+  before_filter :set_locale
   before_filter :set_auth_user
   before_filter :load_group_from_subdomain
   before_filter :set_page_title
@@ -80,6 +81,10 @@ class ApplicationController < ActionController::Base
       sign_out current_user
       redirect_to root_path, alert: t('application.account_disabled')
     end
+  end
+
+  def set_locale
+    I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
   end
 
   def set_auth_user

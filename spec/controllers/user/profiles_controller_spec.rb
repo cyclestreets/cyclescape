@@ -40,9 +40,10 @@ describe User::ProfilesController, type: :controller do
           warden.set_user current_user.reload
         end
 
-        it 'should be visible' do
+        it 'should be visible and not show PM option' do
           get :show, user_id: current_user.id # NB current_user
           expect(response).to be_success
+          expect(response.body).to_not include(I18n.t('user.profiles.show.send_private_message'))
         end
       end
 
@@ -67,9 +68,10 @@ describe User::ProfilesController, type: :controller do
           sign_in current_user
         end
 
-        it 'should be visible' do
+        it 'should be visible and show PM option' do
           get :show, user_id: user.id
           expect(response).to be_success
+          expect(response.body).to include(I18n.t('user.profiles.show.send_private_message'))
         end
       end
 

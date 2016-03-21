@@ -15,9 +15,11 @@ form.guided {
       padding: 20px 20px 10px 60px;
       background: $pane1;
       color: $lightergrey;
-      font: {
-        weight: bold;
-        size: 28px;
+      :not(select options) {
+        font: {
+          weight: bold;
+          size: 28px;
+        }
       }
       &:before {
         content: counter(li);

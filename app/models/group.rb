@@ -34,6 +34,8 @@ class Group < ActiveRecord::Base
   after_create :create_default_prefs, unless: :prefs
   before_destroy :unlink_threads
 
+  scope :ordered, -> { order(message_threads_count: :desc) }
+
   def committee_members
     members.includes(:memberships).where(group_memberships: {role: 'committee'}).
       order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
@@ -85,7 +87,7 @@ class Group < ActiveRecord::Base
   end
 
   def thread_privacy_options_map_for(user)
-    thread_privacy_options_for(user).map { |n| [I18n.t("thread_privacy_options.#{n.to_s}"), n] }
+    thread_privacy_options_for(user).map { |n| [I18n.t("thread_privacy_options.#{n}"), n] }
   end
 
   protected

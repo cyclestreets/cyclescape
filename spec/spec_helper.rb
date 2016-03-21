@@ -48,7 +48,7 @@ RSpec.configure do |config|
 
     # Clear out DragonFly assets
     dragonfly_path = "#{Rails.root}/public/system/dragonfly/test"
-    FileUtils.rm_r(dragonfly_path) if File.exists?(dragonfly_path)
+    FileUtils.rm_r(dragonfly_path) if File.exist?(dragonfly_path)
 
     # Create the root user
     unless User.where(id: 1).exists?
@@ -56,7 +56,7 @@ RSpec.configure do |config|
                       password: 'changeme', password_confirmation: 'changeme', role: 'admin')
       root.skip_confirmation!
       root.save!
-      User.where(id: 1).update_all(id: "#{root.id}")
+      User.where(id: 1).update_all(id: root.id.to_s)
     end
 
     # Disable the observers so that their behaviour can be tested independently

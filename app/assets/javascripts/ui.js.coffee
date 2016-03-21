@@ -85,7 +85,7 @@ jQuery ->
     draggable: false
     modal: true
     width: 802
-    height: 700
+    position: { my: "centre top", at: "centre top" }
     dialogClass: 'no-close'
     beforeClose: ->
       $("body").css({ overflow: 'inherit' })
@@ -103,6 +103,8 @@ jQuery ->
     dialog.load("#{@href} #page>.wrapper", ->
       dialog.dialog('option', 'title', dialog.find('h1').text())
       dialog.find('h1').remove()
+      if ($(window).height() < 650)
+        $('#message_body').attr('rows', 3).attr('style', 'height: 30px')
       dialog.on "click", ".cancel a, .close", (e) ->
         e.preventDefault()
         dialog.dialog('close')

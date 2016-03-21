@@ -44,6 +44,7 @@ gem 'paranoia', '~> 2.0'
 gem 'mustache'
 gem 'icalendar'
 gem 'attribute_normalizer'
+gem 'http_accept_language'
 
 gem 'grape', github: 'ruby-grape/grape'
 gem 'grape-swagger'
@@ -67,6 +68,7 @@ gem 'sunspot_rails', github: 'nikolai-b/sunspot', branch: 'bb_conjunctions'
 gem 'tagsinput-rails'
 
 group :development do
+  gem 'rubocop'
   gem 'letter_opener'
   gem 'quiet_assets'
   gem 'annotate', '>= 2.5.0', require: false

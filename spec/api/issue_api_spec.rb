@@ -66,8 +66,8 @@ describe IssueApi::API do
 
     context 'with group' do
       let!(:group)         { create(:quahogcc_group_profile) }
-      let!(:inside_group)  { create :issue_within_quahog, id: 123 }
-      let!(:outside_group) { create :issue, id: 312 }
+      let!(:inside_group)  { create :issue_within_quahog }
+      let!(:outside_group) { create :issue }
 
       before do
         get "api/issues", group: 'quahogcc'
@@ -75,7 +75,7 @@ describe IssueApi::API do
 
       it 'should only return issues inside the groups area' do
         expect(geojson_response.size).to eq(1)
-        expect(geojson_response[0]['id']).to eq(123)
+        expect(geojson_response[0]['id']).to eq(inside_group.id)
       end
     end
 

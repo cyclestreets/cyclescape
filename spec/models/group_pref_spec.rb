@@ -6,7 +6,7 @@ describe GroupPref do
   describe 'attributes' do
     booleans = %w(
       notify_membership_requests
-      )
+    )
 
     booleans.each do |attr|
       it "should respond to #{attr} with true or false" do

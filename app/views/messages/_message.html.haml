@@ -6,9 +6,12 @@
         %span.thumbnail
           - if message.created_by.profile.picture
             = image_tag message.created_by.profile.picture_thumbnail.url, alt: ""
-        = link_to_profile message.created_by
+        %span.name
+          = link_to_profile message.created_by
       - else
-        = message.created_by.display_name_or_anon
+        %span.thumbnail
+        %span.name
+          = message.created_by.display_name_or_anon
       = t '.committee' if message.committee_created?
       = link_to thread_path(anchor: dom_id(message)), class: "permalink" do
         - time_tag_with_title(message.created_at) do

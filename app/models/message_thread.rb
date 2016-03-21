@@ -28,7 +28,7 @@ class MessageThread < ActiveRecord::Base
   include Taggable
 
   searchable auto_index: false do
-    text :title, :messages_text, :tags_string
+    text :title, :messages_text, :tags_string, :id
     integer :group_id
     string :privacy
     string :status
@@ -46,7 +46,7 @@ class MessageThread < ActiveRecord::Base
   NON_COMMITTEE_ALLOWED_PRIVACY = ALL_ALLOWED_PRIVACY - %w(private committee)
 
   belongs_to :created_by, class_name: 'User'
-  belongs_to :group, inverse_of: :threads
+  belongs_to :group, inverse_of: :threads, counter_cache: true
   belongs_to :issue
   belongs_to :user, inverse_of: :private_threads
   has_many :messages, -> { order('created_at ASC') }, foreign_key: 'thread_id', autosave: true, inverse_of: :thread
@@ -89,13 +89,13 @@ class MessageThread < ActiveRecord::Base
   class << self
     def non_committee_privacies_map
       NON_COMMITTEE_ALLOWED_PRIVACY.map do |n|
-        [I18n.t("thread_privacy_options.#{n.to_s}"), n]
+        [I18n.t("thread_privacy_options.#{n}"), n]
       end
     end
 
     def privacies_map
       ALLOWED_PRIVACY.map do |n|
-        [I18n.t("thread_privacy_options.#{n.to_s}"), n]
+        [I18n.t("thread_privacy_options.#{n}"), n]
       end
     end
 
@@ -166,11 +166,11 @@ class MessageThread < ActiveRecord::Base
     fail "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
 
     # For multipart messages we pull out the text/plain content
-    text =  if mail.message.multipart?
-              mail.message.text_part.decoded
-            else
-              mail.message.decoded
-            end
+    text = if mail.message.multipart?
+             mail.message.text_part.decoded
+           else
+             mail.message.decoded
+           end
 
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")
@@ -225,7 +225,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def latest_activity_at
-    messages.empty? ? updated_at : messages.maximum('messages.updated_at')
+    messages.approved.empty? ? updated_at : messages.maximum('messages.updated_at')
   end
 
   def latest_activity_at_to_i
@@ -233,7 +233,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def latest_activity_by
-    messages.empty? ? created_by : messages.last.created_by
+    messages.approved.empty? ? created_by : messages.last.created_by
   end
 
   def default_centre
