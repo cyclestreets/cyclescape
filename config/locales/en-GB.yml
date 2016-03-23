@@ -93,7 +93,7 @@
         update:
           success: Location Updated
     users:
-      index:
+      index: &admin_users_index
         created: Created
         created_at: '%{time_ago} ago'
         last_seen: Last login
@@ -116,27 +116,7 @@
         approved: Approved
         approve: Approve
       user:
-        created: Created
-        created_at: '%{time_ago} ago'
-        last_seen: Last login
-        last_seen_at: '%{time_ago} ago'
-        introduction: This page lists all users on the system (irrespective of any
-          group membership they may have).
-        disabled: Disabled
-        disabled_at: '%{time_ago} ago'
-        display_name: Display Name
-        edit: User details
-        email: Email
-        full_name: Full Name
-        id: id
-        role: Role
-        title: Users
-        preferences: Preferences
-        locations: Locations
-        website: Website
-        about: About
-        approved: Approved
-        approve: Approve
+        <<: *admin_users_index
       update:
         success: User updated
       edit:
@@ -154,7 +134,7 @@
         on your %{dashboard_planning_link} page.
       explanation: You can promote any planning application to an issue so that it
         is like any other submitted issue.
-    planning_application:
+    planning_application: &planning_applications_search
       page_title: Search Results for '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
       planning_applications: Planning applications
@@ -168,18 +148,6 @@
         for everyone
       part_hidden: Part Hidden
     show:
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
       address_label: 'Address:'
       council_label: 'Council:'
       data_source: Data source
@@ -196,19 +164,9 @@
       start_date: 'Date application was made:'
       hidden: Hidden (will not appear in anyones dashboard)
       no_location: Exact location not received from council site
+      <<: *planning_applications_search
     search:
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
+      <<: *planning_applications_search
   dashboards:
     show:
       page_title: Search Results for '%{q}'
@@ -393,7 +351,7 @@
         requested: Membership has been requested
         already_asked: You have already asked to join this group
         already_member: You are already a member of this group
-      index:
+      index: &group_membership_requests_index
         actioned_by: Actioned By
         are_you_sure: Are you sure?
         by: by %{name}
@@ -410,7 +368,7 @@
         status: Status
         title: Membership requests for %{group}
         user: User (display name)
-        membership_status: &id001
+        membership_status:
           confirmed: Confirmed
           pending: Pending
           unconfirmed: Unconfirmed
@@ -423,23 +381,9 @@
         failure: There was a problem rejecting this membership request
         success: Membership rejected
       review:
-        actioned_by: Actioned By
-        are_you_sure: Are you sure?
-        by: by %{name}
-        confirm: Confirm
-        created_at: '%{time_ago} ago'
-        email: E-mail address
-        view_message: View...
-        message: 'The user included this message with their request:'
-        no_requests_yet: There have been no membership requests for this group yet.
-        full_name: Full name
-        reject: Reject
-        review: Review
-        requested_at: Requested At
-        status: Status
+        <<: *group_membership_requests_index
         title: Review a membership request for %{group}
-        user: User (display name)
-        membership_status: *id001
+        message: 'The user included this message with their request:'
         no_message: There was no message included with this membership request.
     message_threads:
       destroy:
@@ -532,54 +476,17 @@
       new_group_request_introduction: We moderate requests for new groups. You will
         be set as the first Committee member of the group, enabling you to administer
         it.
-    index:
-      actioned_by: Actioned By
-      are_you_sure: Are you sure?
-      by: by %{name}
-      confirm: Confirm
-      created_at: '%{time_ago} ago'
-      email: E-mail address
-      view_message: View...
-      message: Message
-      no_requests_yet: There have been no membership requests for this group yet.
-      full_name: Full name
-      reject: Reject
-      review: Review
-      requested_at: Requested At
-      status: Status
-      title: Membership requests for %{group}
-      user: User (display name)
-      membership_status: *id001
+    index: &group_requests_index
+      <<: *group_membership_requests_index
       name: Requested Name
+      review: Review
       actions: Actions
       new_group: Create a New Group
       group_email: Email
       destroy: Remove request
       no_message: There was no message included with this group request.
     review:
-      actioned_by: Actioned By
-      are_you_sure: Are you sure?
-      by: by %{name}
-      confirm: Confirm
-      created_at: '%{time_ago} ago'
-      email: E-mail address
-      view_message: View...
-      message: Message
-      no_requests_yet: There have been no membership requests for this group yet.
-      full_name: Full name
-      reject: Reject
-      review: Review
-      requested_at: Requested At
-      status: Status
-      title: Membership requests for %{group}
-      user: User (display name)
-      membership_status: *id001
-      name: Requested Name
-      actions: Actions
-      new_group: Create a New Group
-      group_email: Email
-      destroy: Remove request
-      no_message: There was no message included with this group request.
+      <<: *group_requests_index
       short_name: Short name
       website: Website
     confirm:
