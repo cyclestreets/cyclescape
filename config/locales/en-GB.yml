@@ -411,10 +411,10 @@
         title: Membership requests for %{group}
         user: User (display name)
         membership_status: &id001
-          confirmed: 0a1e37665e4db7e4bfa138704a6eb381_tr
-          pending: 2071f2f2e16b9c7443b2015cb3ae4f4b_tr
-          unconfirmed: a8aab37b96c86da6da0367d0bfb0d2db_tr
-          rejected: 009d7bca2fefc9c79d77f8c3863649c7_tr
+          confirmed: Confirmed
+          pending: Pending
+          unconfirmed: Unconfirmed
+          rejected: Rejected
       new:
         title: Request membership of %{group_name}
         your_membership_request_will: Please click the button below to apply to join
