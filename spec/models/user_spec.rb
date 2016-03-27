@@ -214,9 +214,10 @@ describe User do
     end
 
     context 'subscribed threads' do
-      it 'should have one thread' do
-        expect(subject.subscribed_threads.size).to eq(1)
-        expect(subject.subscribed_threads.first).to eq(thread)
+      it 'should have one thread if approved' do
+        expect(subject.subscribed_threads).to eq([thread])
+        thread.update_column(:status, 'mod_queued')
+        expect(subject.reload.subscribed_threads).to eq([])
       end
 
       it 'should not include thread when unsubscribed' do
