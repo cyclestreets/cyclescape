@@ -1,4 +1,9 @@
 module Geocoder
-  API_KEY = 'b7af2f6899b5d784'
-  URL = 'http://www.cyclestreets.net/api/geocoder.json'
+  cs_api_file = Rails.root.join('config', 'cyclestreets')
+  if cs_api_file.exist?
+    API_KEY = cs_api_file.read.strip
+  else
+    API_KEY = ''
+  end
+  URL = 'https://api.cyclestreets.net/v2/geocoder'
 end

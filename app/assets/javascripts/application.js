@@ -33,3 +33,4 @@
 //= require jquery.tagsinput
 //= require jquery-ui-sliderAccess
 //= require jquery-ui-timepicker-addon.min
+//= require geojson-bbox.js
