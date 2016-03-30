@@ -104,9 +104,5 @@ describe 'Library Messages' do
         expect(page).not_to have_content 'Create'
       end
     end
-
-    context 'security' do
-      it "should not let you create a library note from a message you don't have access to"
-    end
   end
 end

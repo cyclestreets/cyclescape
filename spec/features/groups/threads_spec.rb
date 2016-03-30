@@ -286,9 +286,6 @@ describe 'Group threads', use: :subdomain do
       it 'should have fields to create a new message' do
         expect(page).to have_field('Message')
       end
-
-      it 'should display all the messages in chronological order'
-      it 'should show who started the thread'
     end
 
     context 'edit a thread' do

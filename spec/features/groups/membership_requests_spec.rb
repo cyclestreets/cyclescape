@@ -113,10 +113,6 @@ describe 'Group Membership Requests' do
       click_button I18n.t('.formtastic.actions.group_membership_request.create')
     end
 
-    describe 'cancelling the request' do
-      it 'should cancel the request'
-    end
-
     describe 'signing up again' do
       it 'should not show a link on the page' do
         visit group_path(group)
@@ -129,12 +125,6 @@ describe 'Group Membership Requests' do
         click_button I18n.t('.formtastic.actions.group_membership_request.create')
         expect(page).to have_content(I18n.t('.group.membership_requests.create.already_asked'))
       end
-    end
-  end
-
-  context 'as a different user' do
-    describe 'cancelling the request' do
-      it 'should not cancel the request'
     end
   end
 

@@ -55,8 +55,6 @@ describe 'Library documents' do
       click_on 'Upload'
       expect(page).to have_content('three')
     end
-
-    it 'should update the document'
   end
 
   context 'adding notes', as: :site_user do

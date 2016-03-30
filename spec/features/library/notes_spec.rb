@@ -8,19 +8,10 @@ describe 'Library notes' do
       visit library_note_path(note)
     end
 
-    it 'should show the note body' do
+    it 'should show the note body correctly' do
       expect(page).to have_content(note.body)
-    end
-
-    it "should link to the creator's profile" do
       expect(page).to have_link(note.created_by.name)
-    end
-
-    it 'should show the date when it was created' do
       expect(page).to have_content(I18n.localize(note.created_at.to_date))
-    end
-
-    it 'should not show a link to edit tags' do
       expect(page).not_to have_content(I18n.t('.shared.tags.panel.edit_tags'))
     end
   end

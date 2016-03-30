@@ -79,8 +79,6 @@ describe 'Issues' do
         expect(page).to have_title(issue.title)
       end
 
-      it 'should show the location'
-
       context 'with photo' do
         let!(:issue) { create(:issue, :with_photo) }
 
