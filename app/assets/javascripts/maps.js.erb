@@ -42,7 +42,6 @@ var MapSearch = {
   },
 
   handle_result: function(response, call_seq) {
-    $("#map-search-status, #map-searching").hide();
     // if not, then another search has been made since this one, so ignore
     if (call_seq != this.seqid) return false;
     if ($.isEmptyObject(response.features)) { // nothing found
