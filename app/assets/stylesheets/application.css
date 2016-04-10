@@ -12,6 +12,9 @@
  *= require "formtastic"
  *= require "formtastic_changes"
  *= require "screen"
+ *= require "leaflet"
  *= require "slick"
  *= require "jquery-ui-timepicker-addon.min"
+ *= require "leaflet-search.scss"
+ *= require "leaflet.draw.scss"
 */
