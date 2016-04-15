@@ -12,7 +12,7 @@
 :coffeescript
   shortName = $('#group_request_short_name')
   shortName.after $('<input id="group_request_webname" readonly disabled style="width:200px">')
-  $('#group_request_webname').val(".#{request.host}")
+  $('#group_request_webname').val(".#{request.domain}")
 
-  shortName.change () ->
-    $('#group_request_webname').val(@.value + ".#{request.host}")
+  shortName.bind 'keypress keyup input', ->
+    $('#group_request_webname').val(@.value + ".#{request.domain}")
