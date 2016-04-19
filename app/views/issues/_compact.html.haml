@@ -3,7 +3,7 @@
     .map
       - prefix = "list" unless local_assigns.has_key? :prefix
       - map_id = "leaflet-#{dom_id(issue, prefix)}"
-      .minimap{id: map_id}
+      .tinymap{id: map_id}
       .hidden
         .map-data{"data-center" => location_to_geojson(issue.location),
           "data-opts" => { domid: map_id, hidelayers: true, feature: issue_geojson(issue), hidezoom: true }.to_json}
