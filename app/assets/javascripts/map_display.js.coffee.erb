@@ -17,6 +17,7 @@ jQuery ->
       @addSearch() if opts.search?
       @addDraw() if opts.draw?
       @addFeature(opts.feature) if opts.feature?
+      @map.removeControl(@map.zoomControl) if opts.hidezoom?
 
     addFeature: (collection) ->
       L.geoJson(collection, {style: {color: 'black'}, pointToLayer: (feature, latlng) =>
