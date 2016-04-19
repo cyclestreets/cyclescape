@@ -4,7 +4,7 @@
     = f.input :loc_json, as: :hidden
     %li.input
       = f.semantic_errors :location
-      = render partial: "shared/edit_map", locals: {thing: @profile, area_only: true}
+      = render partial: "shared/edit_map", locals: {resource: @profile, location: @start_location}
     = f.input :picture, as: :file
     = f.input :retained_picture, as: :hidden
     = f.input :joining_instructions
