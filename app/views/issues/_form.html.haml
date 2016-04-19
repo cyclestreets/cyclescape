@@ -1,14 +1,15 @@
 = semantic_form_for @issue, html: {class: "guided"} do |f|
   = f.inputs do
     = f.input :title
-    = f.input :photo, as: :file
+    - hint = (f.object.retained_photo ? "#{t('.currently')} #{f.object.photo.name}" : t('formtastic.hints.issue.new.photo'))
+    = f.input :photo, as: :file, hint: hint
     = f.input :retained_photo, as: :hidden
     = f.input :loc_json, as: :hidden
     %li.input.full-width
       %label.label= t "formtastic.labels.issue.new.location"
       = f.semantic_errors :location
       = f.semantic_errors :size
-      = render partial: "shared/edit_map", locals: {thing: @issue}
+      = render partial: "shared/edit_map", locals: {location: @start_location, resource: @issue}
     = f.input :tags_string
     = f.input :description
     = f.input :external_url

@@ -6,4 +6,5 @@ module Geocoder
     API_KEY = ''
   end
   URL = 'https://api.cyclestreets.net/v2/geocoder'
+  COLLISIONS_URL = 'https://api.cyclestreets.net/v2/collisions.locations'
 end

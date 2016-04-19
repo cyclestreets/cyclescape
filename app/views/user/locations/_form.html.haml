@@ -4,6 +4,6 @@
     = f.input :loc_json, as: :hidden
     %li.input
       = f.semantic_errors :location
-      = render partial: "shared/edit_map", locals: {thing: @location}
+      = render partial: "shared/edit_map", locals: {resource: @location, location: @start_location}
   = f.actions do
     = f.action :submit, :button_html => {:class => "btn-big-green"}

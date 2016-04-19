@@ -560,6 +560,8 @@
     vote_up:
       already: "You've already voted up this issue"
       success: "You have voted up this issue"
+    form:
+      currently: Currently is
   layouts:
     application:
       admin: "Admin"

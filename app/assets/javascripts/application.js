@@ -29,8 +29,11 @@
 //= require tags
 //= require library_message
 //= require thread_scroller
+//= require leaflet
 //= require slick.min
 //= require jquery.tagsinput
 //= require jquery-ui-sliderAccess
 //= require jquery-ui-timepicker-addon.min
 //= require geojson-bbox.js
+//= require leaflet-search.src.js
+//= require leaflet.draw-src.js

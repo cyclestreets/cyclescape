@@ -1,0 +1,155 @@
+jQuery ->
+  class LeafletMap
+    @OpenCycle: 'https://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png'
+    @OSStreet: 'https://tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
+    @Mapnik: 'https://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
+    @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
+    @CyclestreetsGeoUrl: "<%= Geocoder::URL %>"
+    @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
+
+    constructor: (center, opts) ->
+      @domId = opts.domid || 'map'
+      @map = L.map(@domId)
+      @setCenter(center)
+      @geoInput = $("##{opts.geoInput}")
+      @buildCollistionLayer() if opts.collisions?
+      @addLayers(opts.hidelayers)
+      @addSearch() if opts.search?
+      @addDraw() if opts.draw?
+      @addFeature(opts.feature) if opts.feature?
+      @map.removeControl(@map.zoomControl) if opts.hidezoom?
+
+    addFeature: (collection) ->
+      L.geoJson(collection, {style: {color: 'black'}, pointToLayer: (feature, latlng) =>
+        icon = new L.Icon.Default(iconUrl: feature.properties.thumbnail)
+        L.marker(latlng, {icon: icon}).addTo @map
+      }).addTo @map
+      return
+
+    setCenter: (center) ->
+      @map.fitBounds(center.fitBounds) if center.fitBounds?
+      @map.setView(center.latLon, center.zoom) if center.latLon
+      return
+
+    addLayers: (hidelayers) ->
+      openCycle = L.tileLayer(@constructor.OpenCycle, opacity: 0.8)
+      openCycle.addTo(@map)
+      baseLayers = {
+        "OpenCycleMap":  openCycle,
+        "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: 0.8),
+        "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: 0.8),
+      }
+      collisions = {Collisions: @collisionLayer} if @collisionLayer?
+
+      L.control.layers(baseLayers, collisions).addTo(@map) unless hidelayers
+
+    search: (text, callback) =>
+      bbox = @map.getBounds().toBBoxString()
+      params = [
+        {name: 'q', value: text}
+        {name: 'key', value: @constructor.CyclestreetsKey}
+        {name: 'bbox', value: bbox},
+        {name: 'geometries', value: 1}
+      ]
+      $.ajax(
+        url: @constructor.CyclestreetsGeoUrl
+        data: params
+        dataType: 'jsonp'
+        timeout: 10000
+        success: callback
+      )
+
+    buildCollistionLayer: =>
+      @collisionLayer = new L.FeatureGroup()
+      lookup = {
+        fatal: { color: '#aa0000', fillColor: '#ff0000', radius: 10 },
+        serious: { color: '#e44500', fillColor: '#ff8814', radius: 8 },
+        slight: { color: '#a7932f', fillColor: '#fcff00', radius: 6 }
+      }
+      callback = (data) =>
+        L.geoJson(data, {onEachFeature: (feature, layer) ->
+          layer.bindPopup(
+            "<h3><a href=\"#{feature.properties.url}\">Collision #{feature.properties.id}</a></h3>
+            <p>Date and time: #{feature.properties.datetime} </p><br>
+            <p>Severity: #{feature.properties.severity} </p><br>
+            <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
+          )
+        , pointToLayer: (feature, latlng) =>
+          props = lookup[feature.properties.severity]
+          new L.CircleMarker(latlng, props).addTo @collisionLayer
+        }).addTo @collisionLayer
+
+      params = [
+        {name: 'key', value: @constructor.CyclestreetsKey}
+        {name: 'fields', value: 'id,latitude,longitude,datetime,severity,url'},
+        {name: 'datetime', value: 'friendly'},
+        {name: 'bbox', value: @map.getBounds().toBBoxString()}
+      ]
+      $.ajax(
+        url: @constructor.CyclestreetsCollisionUrl
+        data: params
+        dataType: 'jsonp'
+        timeout: 10000
+        success: callback
+      )
+
+    formatJSON: (rawjson) ->
+      json = {}
+      featureName = (props) ->
+        "#{props.name} (#{props.near})"
+
+      # Hacked Leaflet.search for it to work with features but potential solution is here:
+      # https://github.com/stefanocudini/leaflet-search/pull/111#issuecomment-210533909
+      for feature in rawjson.features
+        json[featureName(feature.properties)] = L.geoJson(type: "FeatureCollection", features: [feature])
+      json
+
+    addSearch: =>
+      @map.addControl(
+        new (L.Control.Search)(
+          autoCollapse: true
+          sourceData: @search
+          formatData: @formatJSON
+          markerLocation: false
+          autoType: false
+          minLength: 2)
+      )
+
+    addDraw: =>
+      drawnItems = new L.FeatureGroup()
+      @map.addLayer drawnItems
+      drawControlFull = new L.Control.Draw {
+        position: 'topright'
+        edit: {
+          featureGroup: drawnItems
+        }
+        draw: {
+          circle: false
+          rectangle: false
+        }
+      }
+      drawControlEditOnly = new L.Control.Draw {
+        position: 'topright'
+        edit: {
+          featureGroup: drawnItems
+        }
+        draw: false
+      }
+      @map.addControl drawControlFull
+      @map.on 'draw:created', (e) =>
+        layer = e.layer
+        drawnItems.addLayer layer
+        @geoInput.val JSON.stringify(layer.toGeoJSON())
+        drawControlFull.removeFrom @map
+        drawControlEditOnly.addTo @map
+        return
+
+      @map.on 'draw:deleted', (e) =>
+        if(drawnItems.getLayers().length == 0)
+          @geoInput.val(null)
+          drawControlEditOnly.removeFrom @map
+          drawControlFull.addTo @map
+        return
+
+  for domMap in $('.map-data')
+    new LeafletMap($(domMap).data('center'), $(domMap).data('opts'))
