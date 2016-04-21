@@ -62,3 +62,10 @@ Rails.application.configure do
     config.to_prepare { Devise::RegistrationsController.force_ssl only: [:new, :create, :edit, :update] }
   end
 end
+
+Rails.application.config.middleware.use ExceptionNotification::Rack,
+  :email => {
+    :email_prefix => "[CS-Error] ",
+    :sender_address => %{"notifier" <notifier@cyklistesobe.cz>},
+    :exception_recipients => %w{petr.dlouhy@auto-mat.cz}
+  }
