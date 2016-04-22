@@ -26,6 +26,10 @@ ul.thread-metadata-listings {
   }
 }
 
+li.ui-tabs-active.ui-state-active {
+    font-weight: bold;
+}
+
 .ui-dialog .ui-dialog-titlebar-close span {
   margin-top: -8px;
   margin-left: -8px;
