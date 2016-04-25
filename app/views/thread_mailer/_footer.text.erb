@@ -2,6 +2,7 @@
 --------
 <%= t ".thread" %>:
 <%= thread_url(@thread, anchor: dom_id(@message)) %>
+You can reply to the email and the message will be added to the thread.
 
 <% if @thread.private_to_committee? %>
 Only committee members of <%= raw @thread.group.name %> can view

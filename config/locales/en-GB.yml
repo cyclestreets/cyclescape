@@ -403,13 +403,14 @@
       edit_group_members: "Edit the membership list"
       group_management: "Group management"
       group_organisers: "Group organisers"
+      leave_group: Leave the group
       join_title: "Join our Cyclescape group"
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public threads
-      our_areas: "Our Areas"
-      recent_issues: "Recent Issues in this group's area"
-      recent_threads: "Latest Discussions"
+      our_areas: "Our Area"
+      recent_issues: "Recent Issues In Our Area"
+      recent_threads: "Our Latest Discussions"
       view_membership_requests:
         zero: "Review membership requests"
         one: "View pending membership request"

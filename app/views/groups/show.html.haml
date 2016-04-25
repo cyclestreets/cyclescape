@@ -39,10 +39,13 @@
   - if @group.profile.picture
     %section.group-homepage-image
       = image_tag @group.profile.picture_thumbnail.url
-  - unless current_user && @group.members.include?(current_user)
+  - if current_user
     %section.group-homepage-join
-      %h2= t ".join_title"
-      = render partial: "join", locals: {group: @group}
+      - if membership = @group.memberships.find_by(user: current_user)
+        = button_to t(".leave_group"), group_membership_path(@group, membership), method: :delete, data: {confirm: t('confirm')}, class: "btn-red"
+      - else
+        %h2= t ".join_title"
+        = render partial: "join", locals: {group: @group}
   - if current_user && @group.committee_members.include?(current_user)
     %section.box
       %h2= t ".group_management"
