@@ -36,6 +36,8 @@ class Group < ActiveRecord::Base
 
   scope :ordered, -> { order(message_threads_count: :desc) }
 
+  normalize_attributes :short_name, with: [:strip, :blank, :downcase]
+
   def committee_members
     members.includes(:memberships).where(group_memberships: {role: 'committee'}).
       order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)

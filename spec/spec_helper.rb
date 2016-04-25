@@ -89,6 +89,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include FactoryGirl::Syntax::Methods
   config.include AbstractController::Translation
+  config.include AttributeNormalizer::RSpecMatcher, type: :model
 end
 
 Shoulda::Matchers.configure do |config|
