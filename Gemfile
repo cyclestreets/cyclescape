@@ -47,7 +47,7 @@ gem 'attribute_normalizer'
 gem 'http_accept_language'
 
 gem 'grape', github: 'ruby-grape/grape'
-gem 'grape-swagger'
+gem 'grape-swagger-rails'
 gem 'grape-kaminari'
 
 gem 'rack-cors', require: 'rack/cors'
