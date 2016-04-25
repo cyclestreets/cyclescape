@@ -212,6 +212,10 @@ class MessageThread < ActiveRecord::Base
     group_id && privacy == 'group'
   end
 
+  def private_message?
+    privacy == 'private'
+  end
+
   def public?
     privacy == 'public'
   end
