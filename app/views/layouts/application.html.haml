@@ -67,6 +67,11 @@
         - if flash[type]
           .flash{class: type}
             = flash[type]
+  - if @full_page
+    #page-full
+      .wrapper-full
+        = yield
+  - else
     #page
       .wrapper
         = yield
