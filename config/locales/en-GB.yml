@@ -403,6 +403,7 @@
       edit_group_members: "Edit the membership list"
       group_management: "Group management"
       group_organisers: "Group organisers"
+      leave_group: Leave the group
       join_title: "Join our Cyclescape group"
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet

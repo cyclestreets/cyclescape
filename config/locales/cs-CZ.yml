@@ -414,6 +414,7 @@
       group_request_pending: "Vaše žádost o připojení k této místní skupině se zpracovává."
       join_body:
         Můžete požádat o členství v místní skupině Cyklisté sobě, pokud se chcete podílet na aktivitách skupiny %{group}.
+      leave_group: Opustit skupinu
       join_title: "Přidejte se k naší místní skupině Cyklisté sobě"
       join_this_group: "Přidat se k této místní skupině"
       no_issues: Zatím nejsou žádné podněty v oblasti působnosti této místní skupiny
