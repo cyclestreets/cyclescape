@@ -41,11 +41,8 @@ describe 'Link messages' do
       visit thread_path(thread)
     end
 
-    it 'should display the link title and have correct URL' do
+    it 'should display the link title and have correct URL and body' do
       expect(page).to have_link(link_message.title, href: link_message.url)
-    end
-
-    it 'should display the message' do
       expect(page).to have_content(message.body)
     end
   end
