@@ -36,7 +36,7 @@ class PlanningApplication < ActiveRecord::Base
   scope :relevant, -> { where(relevant: true) }
 
   validates :uid, :url, presence: true
-  validates :uid, uniqueness: true
+  validates :uid, uniqueness: { scope: :authority_name }
   before_save :set_relevant
 
   class << self
