@@ -18,6 +18,7 @@ jQuery ->
   dateTimeOpts = {
     dateFormat: "dd-mm-yy"
     stepMinute: 15
+    firstDay: 1
     showButtonPanel: false
     minDateTime: new Date((new(Date)).setMinutes(0))
   }

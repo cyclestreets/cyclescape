@@ -44,4 +44,5 @@ Rails.application.configure do
 
   # Disable analytics
   config.analytics = {}
+  config.i18n.enforce_available_locales = false
 end

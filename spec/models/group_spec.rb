@@ -41,7 +41,7 @@ describe Group do
 
     describe 'short name' do
       it 'should be unique' do
-        expect(subject).to validate_uniqueness_of(:short_name)
+        expect(subject).to validate_uniqueness_of(:short_name).ignoring_case_sensitivity
       end
 
       it 'should not allow bad characters' do
