@@ -46,7 +46,7 @@ gem 'icalendar'
 gem 'attribute_normalizer'
 gem 'http_accept_language'
 
-gem 'grape', github: 'ruby-grape/grape'
+gem 'grape', '~> 0.16.0'
 gem 'grape-swagger-rails'
 gem 'grape-kaminari'
 
