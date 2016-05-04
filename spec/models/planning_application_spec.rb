@@ -97,30 +97,4 @@ describe PlanningApplication do
       expect{ described_class.remove_old }.to change{ described_class.count }.from(3).to(2)
     end
   end
-
-  describe '#relevant?' do
-    it 'should be true outside Cambridge' do
-      subject.authority_name = 'Leeds'
-      subject.save
-      expect(subject.relevant).to be true
-    end
-
-    %w(LBC FUL CL2PD PRP11 GPE NMA S73 0173 DEMDET REM B1C3 OUT TELDET EXP).each do |ending|
-      it "should be true with #{ending} uids inside Cambridge" do
-        subject.authority_name = 'Cambridge'
-        subject.uid = "00/0000/#{ending}"
-        subject.save
-        expect(subject.relevant).to be true
-      end
-    end
-
-    %w(TTCA TTPO COND3 COND53C CLUED ADV CON6 CON18).each do |ending|
-      it "should be flase with #{ending} uids inside Cambridge" do
-        subject.authority_name = 'Cambridge'
-        subject.uid = "00/0000/#{ending}"
-        subject.save
-        expect(subject.relevant).to be false
-      end
-    end
-  end
 end

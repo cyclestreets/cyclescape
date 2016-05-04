@@ -84,20 +84,16 @@ class PlanningApplication < ActiveRecord::Base
     end
   end
 
-  protected
+  def calculate_relavant(loaded_planning_filters = nil)
+    planning_filters = loaded_planning_filters || PlanningFilter.all
+    planning_filters.none? { |filter| filter.matches?(self) }
+  end
+
+  private
 
   def set_relevant
-    self.relevant = relevant?
+    self.relevant = calculate_relavant
     true
   end
 
-  def relevant?
-    return true unless authority_name == 'Cambridge'
-    case uid
-    when /\/(TTCA|TTPO|COND.*|CON\d*|CLUED|ADV)$/
-      false
-    else
-      true
-    end
-  end
 end
