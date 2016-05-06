@@ -1,5 +1,5 @@
-Diskuzní vlákno "<%= raw @thread.title %>" má nastávající termín:
-<%= raw @deadline.to_formatted_s(:long_ordinal) %>
+Diskuzní vlákno "<%= raw @thread.title %>" má nastávající (<% raw @deadline_message.title %>) termín:
+<%= raw @deadline_message.deadline.to_formatted_s(:long_ordinal) %>
 
 Diskuzi můžete vidět na:
 <%= thread_url(@thread) %>
