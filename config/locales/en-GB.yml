@@ -377,6 +377,8 @@
         picture: "Picture"
       update:
         success: "Profile Updated"
+  group_profiles:
+    default_new_user_email: "Hi {{full_name}},\n %{group_name} has added you to their Cyclescape group %{group_url}"
   groups:
     search:
       title: "Search Results for %{group}"

@@ -22,6 +22,7 @@ class GroupProfile < ActiveRecord::Base
 
   scope :with_location, -> { where.not(location: nil) }
   scope :ordered,       -> { order(created_at: :desc) }
+  validates :new_user_email, presence: true
 
   def picture_thumbnail
     picture.thumb('330x192#')
