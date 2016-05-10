@@ -60,38 +60,29 @@ jQuery ->
       )
 
     buildCollistionLayer: =>
-      @collisionLayer = new L.FeatureGroup()
       lookup = {
         fatal: { color: '#aa0000', fillColor: '#ff0000', radius: 10 },
         serious: { color: '#e44500', fillColor: '#ff8814', radius: 8 },
         slight: { color: '#a7932f', fillColor: '#fcff00', radius: 6 }
       }
-      callback = (data) =>
-        L.geoJson(data, {onEachFeature: (feature, layer) ->
-          layer.bindPopup(
-            "<h3><a href=\"#{feature.properties.url}\">Collision #{feature.properties.id}</a></h3>
-            <p>Date and time: #{feature.properties.datetime} </p><br>
-            <p>Severity: #{feature.properties.severity} </p><br>
-            <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
-          )
-        , pointToLayer: (feature, latlng) =>
-          props = lookup[feature.properties.severity]
-          new L.CircleMarker(latlng, props).addTo @collisionLayer
-        }).addTo @collisionLayer
-
       params = [
         {name: 'key', value: @constructor.CyclestreetsKey}
         {name: 'fields', value: 'id,latitude,longitude,datetime,severity,url'},
         {name: 'datetime', value: 'friendly'},
-        {name: 'bbox', value: @map.getBounds().toBBoxString()}
       ]
-      $.ajax(
-        url: @constructor.CyclestreetsCollisionUrl
-        data: params
-        dataType: 'jsonp'
-        timeout: 10000
-        success: callback
-      )
+      @collisionLayer = new L.LayerJSON({
+        url: "#{@constructor.CyclestreetsCollisionUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
+        propertyItems: 'features'
+        propertyLoc: ['properties.latitude','properties.longitude'],
+        dataToMarker: (feature, latlng) =>
+          props = lookup[feature.properties.severity]
+          new L.CircleMarker(latlng, props).addTo @collisionLayer
+        buildPopup: (feature, layer) ->
+          "<h3><a href=\"#{feature.properties.url}\">Collision #{feature.properties.id}</a></h3>
+          <p>Date and time: #{feature.properties.datetime} </p><br>
+          <p>Severity: #{feature.properties.severity} </p><br>
+          <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
+      })
 
     formatJSON: (rawjson) ->
       json = {}

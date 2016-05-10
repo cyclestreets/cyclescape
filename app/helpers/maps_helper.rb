@@ -13,7 +13,7 @@ module MapsHelper
 
   def issue_geojson(decorated_issue)
     collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(
-      [RGeo::GeoJSON::Feature.new(decorated_issue.location, nil, thumbnail: decorated_issue.medium_icon_path)]
+      [RGeo::GeoJSON::Feature.new(decorated_issue.location, nil, thumbnail: decorated_issue.try(:medium_icon_path))]
     )
     RGeo::GeoJSON.encode(collection)
   end
