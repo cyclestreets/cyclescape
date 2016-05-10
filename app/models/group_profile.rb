@@ -28,5 +28,5 @@ class GroupProfile < ActiveRecord::Base
     picture.thumb('330x192#')
   end
 
-  belongs_to :group
+  belongs_to :group, inverse_of: :profile
 end

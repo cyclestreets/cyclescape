@@ -65,12 +65,12 @@ describe IssueApi::API do
     end
 
     context 'with group' do
-      let!(:group)         { create(:quahogcc_group_profile) }
+      let!(:group_profile) { create(:quahogcc_group_profile) }
       let!(:inside_group)  { create :issue_within_quahog }
       let!(:outside_group) { create :issue }
 
       before do
-        get "api/issues", group: 'quahogcc'
+        get "api/issues", group: group_profile.group.short_name
       end
 
       it 'should only return issues inside the groups area' do

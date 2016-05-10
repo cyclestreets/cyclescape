@@ -23,7 +23,7 @@ class Group < ActiveRecord::Base
   has_many :members, through: :memberships, source: :user
   has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy
   has_many :threads, class_name: 'MessageThread', inverse_of: :group
-  has_one :profile, class_name: 'GroupProfile', dependent: :destroy
+  has_one :profile, class_name: 'GroupProfile', dependent: :destroy, inverse_of: :group
   has_one :prefs, class_name: 'GroupPref', dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
