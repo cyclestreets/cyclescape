@@ -76,12 +76,13 @@ jQuery ->
         propertyLoc: ['properties.latitude','properties.longitude'],
         dataToMarker: (feature, latlng) =>
           props = lookup[feature.properties.severity]
-          new L.CircleMarker(latlng, props).addTo @collisionLayer
-        buildPopup: (feature, layer) ->
-          "<h3><a href=\"#{feature.properties.url}\">Collision #{feature.properties.id}</a></h3>
-          <p>Date and time: #{feature.properties.datetime} </p><br>
-          <p>Severity: #{feature.properties.severity} </p><br>
-          <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
+          marker = new L.CircleMarker(latlng, props).addTo @collisionLayer
+          marker.bindPopup(
+            "<h3><a href=\"#{feature.properties.url}\">Collision #{feature.properties.id}</a></h3>
+            <p>Date and time: #{feature.properties.datetime} </p>
+            <p>Severity: #{feature.properties.severity} </p>
+            <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
+          )
       })
 
     formatJSON: (rawjson) ->
