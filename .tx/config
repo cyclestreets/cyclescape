@@ -1,6 +1,12 @@
 [main]
 host = https://www.transifex.com
 
+[cyclescape.activerecord]
+file_filter = config/locales/activerecord.<lang>.yml
+source_file = config/locales/activerecord.en-GB.yml.normal
+source_lang = en-GB
+type = YAML
+
 [cyclescape.decorators]
 file_filter = config/locales/decorators.<lang>.yml
 source_file = config/locales/decorators.en-GB.yml.normal
