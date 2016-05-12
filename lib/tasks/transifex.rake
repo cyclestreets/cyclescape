@@ -27,6 +27,28 @@ namespace 'transifex' do
 
   desc 'Pull the translations from transifex'
   task :pull do
-    system 'tx pull'
+    # We need to pull 'all' translations, otherwise transifex skips cs-CZ and
+    # also ignores cs_CZ
+    system 'tx pull --all --force'
+
+    locale_dir = File.join(Rails.root, 'config', 'locales')
+
+    Dir.chdir(locale_dir) do
+      # Remove the en_GB versions which are just copies of the sources.
+      Dir.glob('*en_GB*') do |filename|
+        File.delete(File.join(locale_dir, filename))
+      end
+
+      # Move the underscore variants to be dashes, e.g. cs_CZ to cs-CZ
+      Dir.glob('*_??.yml') do |filename|
+        source_path = File.join(locale_dir, filename)
+        target_path = File.join(locale_dir, filename.reverse.sub('_', '-').reverse)
+        File.rename(source_path, target_path)
+
+        # The language key inside each file is wrong too...
+        content = YAML.load_file(target_path).transform_keys{ |k| k.sub('_', '-') }.to_yaml
+        File.write(target_path, content)
+      end
+    end
   end
 end
