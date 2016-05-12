@@ -35,6 +35,9 @@ class GroupRequest < ActiveRecord::Base
   validates :short_name, subdomain: true
   validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }
 
+  normalize_attributes :short_name, with: [:strip, :blank, :downcase]
+  normalize_attributes :email
+
   aasm column: 'status' do
     state :pending, initial: true
     state :cancelled

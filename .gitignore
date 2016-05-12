@@ -10,6 +10,7 @@ config/database.yml
 config/mailboxes.yml
 config/secret_token
 config/akismet
+config/cyclestreets
 public/assets
 bin/
 solr/
@@ -17,5 +18,3 @@ routes.txt
 public/system
 .DS_Store
 resque_web.url
-.idea/
-.powrc

@@ -28,7 +28,7 @@ class MessageThread < ActiveRecord::Base
   include Taggable
 
   searchable auto_index: false do
-    text :title, :messages_text, :tags_string
+    text :title, :messages_text, :tags_string, :id
     integer :group_id
     string :privacy
     string :status
@@ -210,6 +210,10 @@ class MessageThread < ActiveRecord::Base
 
   def private_to_group?
     group_id && privacy == 'group'
+  end
+
+  def private_message?
+    privacy == 'private'
   end
 
   def public?

@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe GroupProfile do
+  it { is_expected.to validate_presence_of(:new_user_email) }
+
   describe 'to be valid' do
     subject { build(:group_profile) }
 

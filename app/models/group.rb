@@ -23,7 +23,7 @@ class Group < ActiveRecord::Base
   has_many :members, through: :memberships, source: :user
   has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy
   has_many :threads, class_name: 'MessageThread', inverse_of: :group
-  has_one :profile, class_name: 'GroupProfile', dependent: :destroy
+  has_one :profile, class_name: 'GroupProfile', dependent: :destroy, inverse_of: :group
   has_one :prefs, class_name: 'GroupPref', dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
@@ -35,6 +35,8 @@ class Group < ActiveRecord::Base
   before_destroy :unlink_threads
 
   scope :ordered, -> { order(message_threads_count: :desc) }
+
+  normalize_attributes :short_name, with: [:strip, :blank, :downcase]
 
   def committee_members
     members.includes(:memberships).where(group_memberships: {role: 'committee'}).
@@ -93,7 +95,14 @@ class Group < ActiveRecord::Base
   protected
 
   def create_default_profile
-    build_profile.save!
+    profile = build_profile
+    profile.new_user_email = I18n.t(
+      "group_profiles.default_new_user_email",
+      group_name: name,
+      group_url: Rails.application.routes.url_helpers.root_url(
+        subdomain: short_name, host: Rails.application.config.action_mailer.default_url_options[:host]),
+    )
+    profile.save!
   end
 
   def create_default_prefs

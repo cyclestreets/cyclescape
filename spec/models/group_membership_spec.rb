@@ -8,8 +8,6 @@ describe GroupMembership do
       expect(subject).to have(1).error_on(:group_id)
     end
 
-    it "must belong to a user (except association build on new won't set it!)"
-
     it 'must have a role' do
       subject.role = ''
       expect(subject).to have(1).error_on(:role)

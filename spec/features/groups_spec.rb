@@ -18,10 +18,6 @@ describe 'Groups' do
       expect(page).to have_content(profile.description)
     end
 
-    it 'should show the joining instructions' do
-      expect(page).to have_content(profile.joining_instructions)
-    end
-
     it 'should autolink the group description' do
       profile.update_column(:description, 'contains a link: http://www.example.com')
       visit group_path(group)

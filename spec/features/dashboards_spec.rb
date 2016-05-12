@@ -45,8 +45,6 @@ describe 'User dashboards' do
     context 'threads' do
       include_context 'signed in as a site user'
 
-      it "should list threads I'm subscribed to"
-
       context 'with no threads' do
         it 'should give guidance' do
           visit dashboard_path

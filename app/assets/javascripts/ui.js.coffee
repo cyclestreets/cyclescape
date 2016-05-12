@@ -18,6 +18,7 @@ jQuery ->
   dateTimeOpts = {
     dateFormat: "dd-mm-yy"
     stepMinute: 15
+    firstDay: 1
     showButtonPanel: false
     minDateTime: new Date((new(Date)).setMinutes(0))
   }
@@ -85,7 +86,7 @@ jQuery ->
     draggable: false
     modal: true
     width: 802
-    height: 700
+    position: { my: "centre top", at: "centre top" }
     dialogClass: 'no-close'
     beforeClose: ->
       $("body").css({ overflow: 'inherit' })
@@ -103,6 +104,8 @@ jQuery ->
     dialog.load("#{@href} #page>.wrapper", ->
       dialog.dialog('option', 'title', dialog.find('h1').text())
       dialog.find('h1').remove()
+      if ($(window).height() < 650)
+        $('#message_body').attr('rows', 5).attr('style', 'height: 75px; font-size: smaller')
       dialog.on "click", ".cancel a, .close", (e) ->
         e.preventDefault()
         dialog.dialog('close')

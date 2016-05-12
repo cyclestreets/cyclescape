@@ -82,7 +82,11 @@ authorization do
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show
       if_attribute private_to_committee?: is { true }, group_committee_members: contains { user }
-      if_attribute user: is { user }
+    end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
+      to :view
+      if_attribute private_message?: is { true }, user: is { user }
+      if_attribute private_message?: is { true }, created_by: is { user }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show

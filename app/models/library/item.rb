@@ -22,7 +22,7 @@ class Library::Item < ActiveRecord::Base
   include Taggable
 
   searchable do
-    text :search_text
+    text :search_text, :id
   end
 
   belongs_to :component, polymorphic: true

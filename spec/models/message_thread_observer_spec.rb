@@ -211,20 +211,5 @@ describe MessageThreadObserver do
         end
       end
     end
-
-    context 'changed' do
-      it 'should not remove and then add the same person again'
-    end
-  end
-
-  context 'group' do
-    context 'added' do
-      it 'should subscribe people with group preference set'
-    end
-
-    context 'removed' do
-      it 'should leave people subscribed if they have participated'
-      it 'should remove people'
-    end
   end
 end

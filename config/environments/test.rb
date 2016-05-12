@@ -33,6 +33,8 @@ Rails.application.configure do
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
 
+  config.active_record.raise_in_transactional_callbacks = true
+
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
@@ -42,4 +44,5 @@ Rails.application.configure do
 
   # Disable analytics
   config.analytics = {}
+  config.i18n.enforce_available_locales = false
 end

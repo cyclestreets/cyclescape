@@ -379,21 +379,23 @@ describe Issue do
       let(:tag1) { create :tag, name: 'tag1' }
       let(:tag2) { create :tag, name: 'tag2' }
       let(:tag3) { create :tag, name: 'tag3' }
-      let!(:with_tags) { create :issue, tags: [tag1, tag2] }
-      let!(:with_other_tags) { create :issue, tags: [tag1, tag3] }
+      let!(:with_1_2) { create :issue, tags: [tag1, tag2] }
+      let!(:with_1_3) { create :issue, tags: [tag1, tag3] }
+      let!(:with_3) { create :issue, tags: [tag3] }
 
-      it 'not in should return the issues which do not have the tags' do
+      it 'not in should return the issues which do not have any of the tags' do
         no_tag = create :issue
-        expect(described_class.all.where_tag_names_not_in([])).to match_array([no_tag, with_tags, with_other_tags])
-        expect(described_class.all.where_tag_names_not_in(['tag2'])).to match_array([no_tag, with_other_tags])
-        expect(described_class.all.where_tag_names_not_in(['tag1'])).to match_array([no_tag])
+
+        expect(described_class.all.where_tag_names_not_in([])).to match_array([no_tag, with_1_2, with_1_3, with_3])
+        expect(described_class.all.where_tag_names_not_in(['tag2'])).to match_array([no_tag, with_1_3, with_3])
+        expect(described_class.all.where_tag_names_not_in(['tag1', 'tag2'])).to match_array([no_tag, with_3])
       end
 
       it 'in should return the issues which have all of the tags' do
         create :issue
 
-        expect(described_class.where_tag_names_in(['tag1'])).to match_array([with_tags, with_other_tags])
-        expect(described_class.where_tag_names_in(['tag1', 'tag2'])).to match_array([with_tags])
+        expect(described_class.where_tag_names_in(['tag1'])).to match_array([with_1_2, with_1_3])
+        expect(described_class.where_tag_names_in(['tag1', 'tag2'])).to match_array([with_1_2])
         expect(described_class.where_tag_names_in([])).to match_array([])
       end
     end

@@ -4,6 +4,7 @@ FactoryGirl.define do
     joining_instructions 'Jump up get down stand up turn around. Twice. While cycling backwards'
     location 'POINT(-122 47)'
     association :group, factory: :group
+    new_user_email 'Hi'
 
     trait :with_picture do
       picture { Pathname.new(File.join(%w(spec support images abstract-100-100.jpg))) }

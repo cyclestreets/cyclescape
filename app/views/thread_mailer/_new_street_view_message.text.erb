@@ -1,5 +1,6 @@
 <%= render partial: 'header', locals: {message: @message, type: t('.type')} %>
 
 <%= raw @message.component.caption %>
+
 <%= t ".view_the_street_view" %>
 <%= thread_path(@message.thread, only_path: false) + "#message-#{@message.id}" %>

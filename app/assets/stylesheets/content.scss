@@ -895,6 +895,11 @@ div.tagsinput{
   }
 }
 
+#page-full {
+  @extend #page;
+  margin-left: 10px;
+  overflow: auto;
+}
 
 .tag-item-m {
   @extend .tag-item;

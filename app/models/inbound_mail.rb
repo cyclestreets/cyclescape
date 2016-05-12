@@ -11,8 +11,6 @@
 #
 
 class InboundMail < ActiveRecord::Base
-  extend Memoist
-
   validates :recipient, :raw_message, presence: true
 
   def self.new_from_message(mail)
@@ -21,7 +19,6 @@ class InboundMail < ActiveRecord::Base
   end
 
   def message
-    Mail.new(raw_message)
+    @message ||= Mail.new(raw_message)
   end
-  memoize :message
 end

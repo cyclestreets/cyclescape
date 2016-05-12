@@ -106,27 +106,19 @@ describe 'Thread subscriptions' do
         subscribe_button.click
       end
 
-      it 'should unsubscribe me' do
+      it 'should unsubscribe me and not send me any more messages' do
         expect(current_user).to be_subscribed_to_thread(thread)
+        email_count = all_emails.count
         unsubscribe_button.click
         expect(current_user).not_to be_subscribed_to_thread(thread)
         expect(page).to have_content('You have unsubscribed from this thread')
-      end
 
-      it 'should not send me any more messages' do
-        email_count = all_emails.count
-        unsubscribe_button.click
         within('.new-message') do
           fill_in 'Message', with: 'Notification test', match: :first
           click_on 'Post Message'
         end
         expect(all_emails.count).to eq(email_count)
-      end
 
-      it 'should resubscribe me' do
-        expect(current_user).to be_subscribed_to_thread(thread)
-        unsubscribe_button.click
-        expect(current_user).not_to be_subscribed_to_thread(thread)
         subscribe_button.click
         expect(current_user).to be_subscribed_to_thread(thread)
       end

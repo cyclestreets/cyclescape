@@ -1,4 +1,23 @@
 module MapsHelper
+  def location_to_geojson(central_location)
+    feature = if central_location.geometry_type == RGeo::Feature::Point
+                z = central_location.z || Geo::POINT_ZOOM
+                { latLon: [central_location.y, central_location.x], zoom: z }
+              else
+                bbox = RGeo::Cartesian::BoundingBox.new(central_location.factory)
+                bbox.add central_location
+                { fitBounds: [[bbox.min_y, bbox.min_x], [bbox.max_y, bbox.max_x]] }
+              end
+    feature.to_json
+  end
+
+  def issue_geojson(decorated_issue)
+    collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(
+      [RGeo::GeoJSON::Feature.new(decorated_issue.location, nil, thumbnail: decorated_issue.try(:medium_icon_path))]
+    )
+    RGeo::GeoJSON.encode(collection)
+  end
+
   def basic_map(&block)
     core_map('map') do |map, page|
       page << map.add_layer(MapLayers::OPENCYCLEMAP)
@@ -67,6 +86,7 @@ module MapsHelper
   def googleproj
     OpenLayers::Projection.new('EPSG:900913')
   end
+
 
   protected
 

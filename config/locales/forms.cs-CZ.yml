@@ -52,7 +52,7 @@ cs-CZ:
           title: Zvolte nadpis vašeho podnětu
       library/document:
         file: Document
-      library/item: 
+      library/item:
       library/note:
         body: Note
       link_message:
@@ -118,8 +118,8 @@ cs-CZ:
       group_profile:
         joining_instructions: Instrukce, které jsou ukázány lidem, kteří se chtějí
           zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné.
-        new_user_email: This will be emailed to every new member, {{full_name}} will
-          be converted to the person's full name in the email
+        new_user_email: Tento text bude odeslán každému novému členovy skupiny,
+          řetězec {{full_name}} bude nahrazen plným jménem uživatele.
         picture: Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů
       issue:
         new:
@@ -166,10 +166,9 @@ cs-CZ:
       issue:
         external_url: http://www.example.com
       group_membership_request:
-        message: Please add me to the Cyclescape group.
+        message: Prosím přidejte mě do místní skupiny Cyklisté sobě.
       group_profile:
-        new_user_email: Hello {{full_name}}, you have been added to a Cyclescape group
-          http://www.cyclescape.org
+        new_user_email: Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny Cyklisté sobě na portálu http://www.cyklistesobe.cz
     actions:
       update: Uložit
       saving: Ukládám…

@@ -33,6 +33,7 @@ describe Group do
 
     it 'must have a profile' do
       expect(subject.profile).to be_valid
+      expect(subject.profile.new_user_email).to include "Hi {{full_name}},\n #{subject.name} has added you to their Cyclescape group http://"
     end
 
     it 'should have a default thread privacy of public' do
@@ -41,7 +42,7 @@ describe Group do
 
     describe 'short name' do
       it 'should be unique' do
-        expect(subject).to validate_uniqueness_of(:short_name)
+        expect(subject).to validate_uniqueness_of(:short_name).ignoring_case_sensitivity
       end
 
       it 'should not allow bad characters' do

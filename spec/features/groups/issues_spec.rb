@@ -33,34 +33,6 @@ describe 'Issues in a group subdomain' do
       visit issues_path
       expect(page).to have_title(I18n.t('group.issues.index.title', group_name: current_group.name))
     end
-
-    context 'with search' do
-      let(:search_field) { 'query' }
-      let(:search_button) { I18n.t('layouts.search.search_button') }
-
-      it "should return issues in the group's area" do
-        # FIXME: group restrictions aren't yet implemented for global search
-        return skip
-        visit issues_path
-        within('.main-search-box') do
-          fill_in search_field, with: issues.first.title
-          click_on search_button
-        end
-        expect(page).to have_link(issues.first.title, href: issue_path(issues.first))
-        expect(page).to have_no_content(outside_issue.title)
-      end
-
-      it "should not return issues outside the group's area" do
-        # FIXME: this test needs fixing, still shows results when none were expected
-        return skip
-        visit issues_path
-        within('.main-search-box') do
-          fill_in search_field, with: outside_issue.title
-          click_on search_button
-        end
-        expect(page).to have_content('No issues found')
-      end
-    end
   end
 
   context 'geojson' do

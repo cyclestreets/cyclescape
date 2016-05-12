@@ -15,9 +15,11 @@ form.guided {
       padding: 20px 20px 10px 60px;
       background: $pane1;
       color: $lightergrey;
-      font: {
-        weight: bold;
-        size: 28px;
+      :not(select options) {
+        font: {
+          weight: bold;
+          size: 28px;
+        }
       }
       &:before {
         content: counter(li);
@@ -172,7 +174,7 @@ form.guided {
     }
   }
   .submit {
-    position: absolute;
+    position: relative;
     right: 0;
     bottom: 10px;
     padding: 10px 20px;

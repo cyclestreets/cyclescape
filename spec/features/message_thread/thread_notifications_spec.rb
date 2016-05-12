@@ -40,21 +40,6 @@ describe 'thread notifications' do
       expect(current_email).to have_body_text('Some words')
     end
 
-    it 'should send an email for a library item message'
-#     library_note = create(:library_note)
-#     visit thread_path(thread) # to update the select field
-
-#     within("#new-library-item-message") do
-#       select library_note.title, from: "Item"
-#       fill_in "Message", with: "Some words"
-#       click_on "Add Library Item"
-#     end
-#     open_email(current_user.email)
-#     current_email.should have_body_text(library_note.title)
-#     current_email.should have_body_text("#{polymorphic_url library_note}")
-#     current_email.should have_body_text("Some words")
-#   end
-
     it 'should send an email for a deadline message' do
       within('#new-deadline-message') do
         fill_in 'Deadline', with: 'Wednesday, 07 December 2011' # format the date picker returns
@@ -68,20 +53,6 @@ describe 'thread notifications' do
       attachment = current_email.attachments[0]
       expect(attachment).to be_a_kind_of(Mail::Part)
       expect(attachment.content_type).to be_start_with('text/calendar')
-    end
-
-    it 'should send an email for a photo message' do
-      within('#new-photo-message') do
-        attach_file 'Photo', abstract_image_path
-        fill_in 'Caption', with: 'Some words'
-        click_on 'Add Photo'
-      end
-
-      open_email(current_user.email)
-      expect(current_email).to have_body_text('Some words')
-      # The URL will actually link to a particular message_id anchor, but we don't know
-      # what that will be to test it.
-      skip 'Figure out testing the url'
     end
 
     context 'html encoding' do

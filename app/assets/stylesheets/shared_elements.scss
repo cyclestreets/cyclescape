@@ -26,6 +26,10 @@ ul.thread-metadata-listings {
   }
 }
 
+li.ui-tabs-active.ui-state-active {
+    font-weight: bold;
+}
+
 .ui-dialog .ui-dialog-titlebar-close span {
   margin-top: -8px;
   margin-left: -8px;
@@ -559,6 +563,7 @@ ul.group-list {
       display:table-cell;
       height:180px;
       vertical-align:top;
+      padding-left: 10px;
       p {
         width:180px; // otherwise links won't break
         a {

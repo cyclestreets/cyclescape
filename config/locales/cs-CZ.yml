@@ -284,13 +284,13 @@ cs-CZ:
       issues_nearby: Podněty v blízkosti
       map: Map
       posted:
-        message_html: "%{creator_link} zaslali zprávu"
-        deadline_message_html: "%{creator_link} zaslali termín/datum"
-        document_message_html: "%{creator_link} zaslali přílohu"
-        photo_message_html: "%{creator_link} zaslali fotografii"
-        link_message_html: "%{creator_link} zaslali odkaz"
-        street_view_message_html: "%{creator_link} vyslán Street View"
-        library_item_message_html: "%{creator_link} zaslali položku knihovny"
+        message_html: "%{creator_link} zaslal/a zprávu"
+        deadline_message_html: "%{creator_link} zaslal/a termín/datum"
+        document_message_html: "%{creator_link} zaslal/a přílohu"
+        photo_message_html: "%{creator_link} zaslal/a fotografii"
+        link_message_html: "%{creator_link} zaslal/a odkaz"
+        street_view_message_html: "%{creator_link} zaslal/a Street View"
+        library_item_message_html: "%{creator_link} zaslal/a položku knihovny"
     search:
       title: Výsledky vyhledávání
   devise:
@@ -1273,10 +1273,9 @@ cs-CZ:
       edit:
         title: Upravit profil
         my_current_thumbnail_title: Současný profilový obrázek
-        profile_public: Everyone
-        profile_group: Only members of my groups
-        visibility_guidance_html: You can choose to restrict who gets to view your
-          profile.
+        profile_public: Každý
+        profile_group: Pouze členové mých místních skupin
+        visibility_guidance_html: Vyberte, kdo bude moci vidět údaje o vašem profilu.
       show:
         about_label: 'O profilu:'
         add_to_groups:

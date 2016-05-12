@@ -9,9 +9,11 @@
     %section.combined
       %h2= t ".combined_locations"
       %p= t ".combined_locations_guidance"
-      - m = display_bbox_map(current_user.buffered_locations, combined_geometry_user_locations_path(:json))
-      %div{id: 'map'}
-      != m.to_html
+      - map_id = "map"
+      %div{id: map_id}
+      .hidden
+        .map-data{"data-center" => location_to_geojson(current_user.buffered_locations),
+          "data-opts" => { domid: map_id, feature: RGeo::GeoJSON.encode(current_user.buffered_locations) }.to_json}
       %p
         - case current_user.prefs.involve_my_locations
         - when "none"

@@ -19,9 +19,6 @@ describe 'Message threads', type: :feature do
           expect(page).to have_content(thread.title)
         end
       end
-
-      it 'should not show private message threads'
-      it 'should list threads by latest first'
     end
 
     context 'show' do
@@ -225,15 +222,6 @@ describe 'Message threads', type: :feature do
   context 'as an admin user' do
     include_context 'signed in as admin'
 
-    context 'index' do
-      before do
-        threads
-        visit threads_path
-      end
-
-      it 'should list all message threads'
-    end
-
     context 'message censoring' do
 
       before do
@@ -249,8 +237,6 @@ describe 'Message threads', type: :feature do
         expect(page).to have_content('Message censored')
         expect(page).to have_content('This message has been removed')
       end
-
-      it 'should still show messages in order of creation and not updated'
     end
 
     context 'thread deletion' do

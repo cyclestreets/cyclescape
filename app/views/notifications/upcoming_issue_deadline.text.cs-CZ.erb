@@ -1,0 +1,10 @@
+Podnět <%= raw @issue.title %> má nastávající termín:
+<%= raw @issue.deadline.to_formatted_s(:long_ordinal)  %>
+a vy jste zapsán k odběru následujícího vlákna <%= thread_url(@thread) %>
+
+Podnět můžete vidět na:
+<%= issue_url(@issue) %>
+
+--------
+
+Pokud chcete přestat sledovat toto diskuzní vlákno, navštivte odkaz výše a klikněte na 'přestat sledovat toto vlákno'.

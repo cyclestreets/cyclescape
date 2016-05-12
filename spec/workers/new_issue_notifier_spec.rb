@@ -27,18 +27,11 @@ describe NewIssueNotifier do
         user.prefs.update_column(:email_status_id, 1)
       end
 
-      it 'should add a buffer to the issue location'
-      it 'should find all user locations that intersect with the issue location'
       it 'should queue a notification for each user that has preference set' do
         opts = { 'user_id' => user.id, 'category_id' => location.category_id, 'issue_id' => issue.id }
         expect(Resque).to receive(:enqueue).with(NewIssueNotifier, :notify_new_user_location_issue, opts)
         subject.process_new_issue(issue.id)
       end
-    end
-
-    describe '.notify_new_user_location_issue' do
-      # Hard to isolate and test
-      it 'should send a notification with the given user, issue, and category'
     end
   end
 end

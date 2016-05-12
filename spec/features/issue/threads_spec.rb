@@ -81,16 +81,6 @@ describe 'Issue threads' do
         expect(page).to have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
       end
 
-      it 'should not create a new committee thread' do
-        visit issue_path(issue)
-        click_on 'Discuss'
-        select current_group.name, from: 'Owned by'
-        fill_in 'Message', with: "This won't work"
-        skip 'need to use a javascript driver'
-        page.should have_select('Privacy', options: ['Group'])
-        page.should_not have_select('Privacy', options: ['Committee'])
-      end
-
       context 'in a subdomain', use: :current_subdomain do
         it 'should default to be owned by the current group' do
           visit issue_path(issue)
