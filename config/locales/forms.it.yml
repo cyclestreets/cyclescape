@@ -8,7 +8,7 @@ it:
         short_name: Sottodominio
       group_request:
         name: Name of the group
-        short_name: Web address
+        short_name: The proposed Cyclescape web address
         website: Your organisation's main website
         email: Your organisation's main e-mail address
         default_thread_privacy: Default privacy for discussion threads

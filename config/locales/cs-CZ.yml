@@ -284,13 +284,13 @@ cs-CZ:
       issues_nearby: Podněty v blízkosti
       map: Map
       posted:
-        message_html: "%{creator_link} zaslal/a zprávu"
-        deadline_message_html: "%{creator_link} zaslal/a termín/datum"
-        document_message_html: "%{creator_link} zaslal/a přílohu"
-        photo_message_html: "%{creator_link} zaslal/a fotografii"
-        link_message_html: "%{creator_link} zaslal/a odkaz"
-        street_view_message_html: "%{creator_link} zaslal/a Street View"
-        library_item_message_html: "%{creator_link} zaslal/a položku knihovny"
+        message_html: "%{creator_link} zaslali zprávu"
+        deadline_message_html: "%{creator_link} zaslali termín/datum"
+        document_message_html: "%{creator_link} zaslali přílohu"
+        photo_message_html: "%{creator_link} zaslali fotografii"
+        link_message_html: "%{creator_link} zaslali odkaz"
+        street_view_message_html: "%{creator_link} vyslán Street View"
+        library_item_message_html: "%{creator_link} zaslali položku knihovny"
     search:
       title: Výsledky vyhledávání
   devise:
@@ -492,6 +492,10 @@ cs-CZ:
         picture: Obrázek
       update:
         success: Profil upraven
+  group_profiles:
+    default_new_user_email: |-
+      Hi {{full_name}},
+       %{group_name} has added you to their Cyclescape group %{group_url}
   groups:
     search:
       title: Výsledky vyhledávání pro %{group}
@@ -519,13 +523,14 @@ cs-CZ:
       edit_group_members: Upravit seznam členů místní skupiny
       group_management: Správa místní skupiny
       group_organisers: Správci místní skupiny
+      leave_group: Leave the group
       join_title: Přidejte se k naší místní skupině Cyklisté sobě
       no_issues: Zatím nejsou žádné podněty v oblasti působnosti této místní skupiny
       no_location: Tato místní skupina ještě nemá definované žádné oblasti působnosti
       no_threads: Tato místní skupina nemá žádná veřejná vlákna
-      our_areas: Vaše oblasti
-      recent_issues: Nedávné události v oblasti místní skupiny
-      recent_threads: Poslední diskuze
+      our_areas: Our Area
+      recent_issues: Recent Issues In Our Area
+      recent_threads: Our Latest Discussions
       view_membership_requests:
         zero: Přehled žádostí o členství
         one: Zobrazit neschválenou žádost o členství
@@ -731,6 +736,8 @@ cs-CZ:
     vote_up:
       already: Už jste jednou tento podnět podpořili
       success: Podnět byl podpořen
+    form:
+      currently: Currently is
   layouts:
     application:
       admin: Administrace
@@ -1186,7 +1193,7 @@ cs-CZ:
     medium: Středně důležité
     low: Málo důležité
     very_low: Nedůležité
-    nil: None set
+    nil: Nenastaveno
   thread_privacy_options:
     public: Veřejné
     group: Pro skupinu

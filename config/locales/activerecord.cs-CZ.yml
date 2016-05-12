@@ -20,8 +20,8 @@ cs-CZ:
               non_subscriber: can only be changed by a subscriber
     attributes:
       issue:
-        external_url: External site
+        external_url: Externí stránka
       message_thread:
-        group: Owned by
+        group: Vlastněno
     models:
       message_thread: Vlákno

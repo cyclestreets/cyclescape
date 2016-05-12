@@ -9,7 +9,7 @@ cs-CZ:
         short_name: Subdoména
       group_request:
         name: Jméno
-        short_name: Webová adresa
+        short_name: The proposed Cyclescape web address
         website: Webové stránky
         email: Emailová adresa
         default_thread_privacy: Výchozí viditelnost
@@ -52,7 +52,7 @@ cs-CZ:
           title: Zvolte nadpis vašeho podnětu
       library/document:
         file: Document
-      library/item:
+      library/item: 
       library/note:
         body: Note
       link_message:
@@ -118,8 +118,8 @@ cs-CZ:
       group_profile:
         joining_instructions: Instrukce, které jsou ukázány lidem, kteří se chtějí
           zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné.
-        new_user_email: Tento text bude odeslán každému novému členovy skupiny,
-          řetězec {{full_name}} bude nahrazen plným jménem uživatele.
+        new_user_email: Tento text bude odeslán každému novému členovy skupiny, řetězec
+          {{full_name}} bude nahrazen plným jménem uživatele.
         picture: Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů
       issue:
         new:
@@ -168,7 +168,8 @@ cs-CZ:
       group_membership_request:
         message: Prosím přidejte mě do místní skupiny Cyklisté sobě.
       group_profile:
-        new_user_email: Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny Cyklisté sobě na portálu http://www.cyklistesobe.cz
+        new_user_email: Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny
+          Cyklisté sobě na portálu http://www.cyklistesobe.cz
     actions:
       update: Uložit
       saving: Ukládám…

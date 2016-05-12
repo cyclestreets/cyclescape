@@ -485,6 +485,10 @@ de-DE:
         picture: Picture
       update:
         success: Profil aktualisiert
+  group_profiles:
+    default_new_user_email: |-
+      Hi {{full_name}},
+       %{group_name} has added you to their Cyclescape group %{group_url}
   groups:
     search:
       title: Search Results for %{group}
@@ -512,13 +516,14 @@ de-DE:
       edit_group_members: Mitgliederliste bearbeiten
       group_management: Gruppenverwaltung
       group_organisers: Gruppenorganisatoren
+      leave_group: Leave the group
       join_title: Trete unserer Cyclescape-Gruppe bei
       no_issues: In diesem Gruppenbereich gibt es keine Themen
       no_location: Diese Gruppe hat noch keinen Standort
       no_threads: Diese Gruppe hat noch keine öffentlichen Diskussionen
-      our_areas: Unsere Gebiete
-      recent_issues: Letzte Themen in diesem Gruppenbereich
-      recent_threads: Neueste Diskussionen
+      our_areas: Our Area
+      recent_issues: Recent Issues In Our Area
+      recent_threads: Our Latest Discussions
       view_membership_requests:
         zero: Mitgliedsanträge begutachten
         one: Ausstehende Mitgliedsanträge anschauen
@@ -728,6 +733,8 @@ de-DE:
     vote_up:
       already: Du hast über dieses Thema bereits positiv abgestimmt
       success: Du hast für dieses Thema positiv gestimmt
+    form:
+      currently: Currently is
   layouts:
     application:
       admin: Admin
