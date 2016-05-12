@@ -1,37 +1,27 @@
-"cs-CZ":
-  cancel: "Zrušit"
-
+---
+cs-CZ:
   activerecord:
     errors:
       models:
         issue:
           attributes:
             size:
-              less_than: "podnět je příliš velký."
+              less_than: podnět je příliš velký.
         user:
           attributes:
             full_name:
-              blank: "Prosím zadejte jméno"
-              email: "Prosím zadejte emailovou adresu"
+              blank: Prosím zadejte jméno
+              email: Prosím zadejte emailovou adresu
         message_thread:
           attributes:
             base:
-              disabled: "Nemůže být vytvořen zdravotně postižené uživatele"
-              not_approved: Public threads can only be created by approved users
-    models:
-      user: "Uživatel"
-      message_thread: "Vlákno"
-
+              disabled: Nemůže být vytvořen zdravotně postižené uživatele
+            closed:
+              non_subscriber: can only be changed by a subscriber
     attributes:
-      user_location:
-        location: "Oblast"
-      user:
-        password: "Heslo"
-        current_password: "Současné heslo"
-        full_name: "Plné jméno"
-        email: "Email"
-        password_confirmation: "Ověření hesla"
-        display_name: "Zobrazené jméno"
-      group_pref:
-        membership_secretary: "Správce členství ve skupině"
-        notify_membership_requests: "Upozornit na nové žádosti o členství"
+      issue:
+        external_url: External site
+      message_thread:
+        group: Owned by
+    models:
+      message_thread: Vlákno

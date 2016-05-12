@@ -1,5 +1,6 @@
-"de-DE":
+---
+de-DE:
   decorators:
     thread_list:
-      private_thread_title: '[Private Diskussion]'
+      private_thread_title: "[Private Diskussion]"
       following: Folgend

@@ -1,13 +1,27 @@
-﻿"de-DE":
+---
+de-DE:
   activerecord:
     errors:
       models:
+        issue:
+          attributes:
+            size:
+              less_than: of the issue is too large.
         user:
           attributes:
             full_name:
-              blank: "Bitte gebe einen Namen ein"
-              email: "Bitte gebe eine Email-Adresse ein"
+              blank: Bitte gebe einen Namen ein
+              email: Bitte gebe eine Email-Adresse ein
         message_thread:
           attributes:
             base:
               disabled: Kann nicht durch einen behinderten Benutzer erstellt werden
+            closed:
+              non_subscriber: can only be changed by a subscriber
+    attributes:
+      issue:
+        external_url: External site
+      message_thread:
+        group: Owned by
+    models:
+      message_thread: Thread

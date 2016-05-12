@@ -1,4 +1,5 @@
-"de-DE":
+---
+de-DE:
   application_name: Cyclescape
   tags:
     show:
@@ -14,7 +15,7 @@
   days_away:
     zero: Heute!
     one: Übermorgen!
-    other: '%{count} Tage her'
+    other: "%{count} Tage her"
   email_status:
     no_email: No email
     email: Email every message
@@ -22,10 +23,10 @@
   deadline_date: Deadline/date
   time:
     formats:
-      long_deadline: '%A, %d %B %Y %l:%M %p'
+      long_deadline: "%A, %d %B %Y %l:%M %p"
   date:
     formats:
-      long_deadline: '%A, %d %B %Y %l:%M %p'
+      long_deadline: "%A, %d %B %Y %l:%M %p"
   admin:
     groups:
       index:
@@ -101,7 +102,7 @@
         introduction: Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaft
           die sie haben könnten).
         disabled: Deaktiviert
-        disabled_at: ' vor %{time_ago}'
+        disabled_at: " vor %{time_ago}"
         display_name: Anzeigename
         edit: Editieren
         email: Email
@@ -168,18 +169,6 @@
         for everyone
       part_hidden: Part Hidden
     show:
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
       address_label: 'Address:'
       council_label: 'Council:'
       data_source: Data source
@@ -196,6 +185,18 @@
       start_date: 'Date application was made:'
       hidden: Hidden (will not appear in anyones dashboard)
       no_location: Exact location not received from council site
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
+      part_hidden: Part Hidden
     search:
       page_title: Search Results for '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
@@ -236,8 +237,8 @@
       new_group_thread: Neue Diskussion in der Gruppe starten
       my_issues_nearby_introduction_html: Themen im %{areas_you_are_watching_link}
         werden unten angezeigt, jeweils das Jüngste zuerst.
-      my_issues_nearby_issues_pointer_html: (Du kannst auch %{browse_all_other_issues_link}
-        außerhalb deiner Gebiete.)
+      my_issues_nearby_issues_pointer_html: "(Du kannst auch %{browse_all_other_issues_link}
+        außerhalb deiner Gebiete.)"
       browse_all_other_issues: Browse alle anderen Themen
       my_priorities_introduction: 'Dies ist eine Auflistung aller von dir gesetzter
         Prioritäten. Die wichtigsten zuerst:'
@@ -279,13 +280,13 @@
       issues_nearby: Letzte Themen in der Nähe
       map: Map
       posted:
-        message_html: '%{creator_link} hat eine Nachricht veröffentlicht'
-        deadline_message_html: '%{creator_link} hat einen Termin veröffentlicht'
-        document_message_html: '%{creator_link} schickte einen Anhang'
-        photo_message_html: '%{creator_link} schickte ein Foto'
-        link_message_html: '%{creator_link} schickte einen Link'
-        street_view_message_html: '%{creator_link} schickte einen Street View'
-        library_item_message_html: '%{creator_link} fügte einen Datebankeintrag hinzu'
+        message_html: "%{creator_link} hat eine Nachricht veröffentlicht"
+        deadline_message_html: "%{creator_link} hat einen Termin veröffentlicht"
+        document_message_html: "%{creator_link} schickte einen Anhang"
+        photo_message_html: "%{creator_link} schickte ein Foto"
+        link_message_html: "%{creator_link} schickte einen Link"
+        street_view_message_html: "%{creator_link} schickte einen Street View"
+        library_item_message_html: "%{creator_link} fügte einen Datebankeintrag hinzu"
     search:
       title: Suchergebnisse
   devise:
@@ -315,7 +316,7 @@
     group_management: Gruppenmanagement
     membership_list_tab: Mitgliederliste
     membership_requests_tab: Mitglieder Anfrage
-    home_page_tab: Homepage
+    home_page_tab: Home page
     issues:
       destroy:
         failure: Can't delete that issue
@@ -405,11 +406,11 @@
         status: Status
         title: Mitgliedschaft für %{group} bestätigt
         user: Benutzer
-        membership_status: &id001
-          confirmed: 0a1e37665e4db7e4bfa138704a6eb381_tr
-          pending: 2071f2f2e16b9c7443b2015cb3ae4f4b_tr
-          unconfirmed: a8aab37b96c86da6da0367d0bfb0d2db_tr
-          rejected: 009d7bca2fefc9c79d77f8c3863649c7_tr
+        membership_status:
+          confirmed: Confirmed
+          pending: Pending
+          unconfirmed: Unconfirmed
+          rejected: Rejected
       new:
         title: Mitgliedsantrag aus %{group_name}
         your_membership_request_will: Dein Mitgliedsantrag wird zur Begutachtung an
@@ -434,7 +435,11 @@
         status: Status
         title: Review a membership request for %{group}
         user: User (display name)
-        membership_status: *id001
+        membership_status:
+          confirmed: Confirmed
+          pending: Pending
+          unconfirmed: Unconfirmed
+          rejected: Rejected
         no_message: There was no message included with this membership request.
     message_threads:
       destroy:
@@ -544,7 +549,11 @@
       status: Status
       title: Membership requests for %{group}
       user: User (display name)
-      membership_status: *id001
+      membership_status:
+        confirmed: Confirmed
+        pending: Pending
+        unconfirmed: Unconfirmed
+        rejected: Rejected
       name: Requested Name
       actions: Actions
       new_group: Create a New Group
@@ -568,7 +577,11 @@
       status: Status
       title: Membership requests for %{group}
       user: User (display name)
-      membership_status: *id001
+      membership_status:
+        confirmed: Confirmed
+        pending: Pending
+        unconfirmed: Unconfirmed
+        rejected: Rejected
       name: Requested Name
       actions: Actions
       new_group: Create a New Group
@@ -631,7 +644,7 @@
       votes: Stimmen
       thread_count:
         one: 1 diskussion
-        other: '%{count} Diskussionen'
+        other: "%{count} Diskussionen"
     destroy:
       failure: Dieses Thema kann nicht gelöscht werden
       success: Thema gelöscht
@@ -767,7 +780,7 @@
       no_results_found: Keine Ergebnisse für '%{query}' gefunden.
       results_found:
         one: Ein Ergebniss für '%{query}' gefunden.
-        other: '%{count} Ergebnisse für ''%{query}'' gefunden'
+        other: "%{count} Ergebnisse für '%{query}' gefunden"
       title: Sucheregbnisse aus der Sammlung
     show:
       title: Sammlung
@@ -786,10 +799,10 @@
       new_item_title: Typ auswählen
       new_item_description_html: 'Wähle den Inhaltstyp, den Du zur Sammlung hinzufügen
         möchtest:'
-      new_note_description_html: <strong>Hinweise</strong> sind für kurze Textstücke
-        als Referenz.
-      new_document_description_html: <strong>Dokumente</strong> erlaubt Dir Dateien
-        hochzuladen.
+      new_note_description_html: "<strong>Hinweise</strong> sind für kurze Textstücke
+        als Referenz."
+      new_document_description_html: "<strong>Dokumente</strong> erlaubt Dir Dateien
+        hochzuladen."
   library:
     documents:
       new:
@@ -835,7 +848,7 @@
       new_group_request:
         subject: '[Cyclescape] New Group "%{group_name}" has been requested by "%{user_name}"'
       new_gmr:
-        subject: '[Cyclescape] %{user_name} wants to join %{group_name}'
+        subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
       new_group_thread:
         subject: '[Cyclescape] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
@@ -850,7 +863,7 @@
         subject: '[Cyclescape] New Group "%{group_request_name}" has been not been
           created'
       new_user_confirmed:
-        subject: '[Cyclescape] Welcome to Cyclescape'
+        subject: "[Cyclescape] Welcome to Cyclescape"
       upcoming_issue_deadline:
         subject: '[Cyclescape] Upcoming deadline/date for "%{issue_title}"'
       upcoming_thread_deadline:
@@ -858,10 +871,10 @@
     thread_mailer:
       common:
         subject:
-          one: '[Cyclescape] %{title}'
+          one: "[Cyclescape] %{title}"
           other: 'Re: [Cyclescape] %{title}'
       digest:
-        subject: '[Cyclescape] Digest for %{date}'
+        subject: "[Cyclescape] Digest for %{date}"
   message_thread:
     subscriptions:
       create:
@@ -896,8 +909,8 @@
     edit:
       title: Diskussion bearbeiten
       description: As a group administrator, you can fix up thread properties here.
-      thread_fix_warning_html: <strong>Warning:</strong> your group may have a policy
-        about changing thread privacy.
+      thread_fix_warning_html: "<strong>Warning:</strong> your group may have a policy
+        about changing thread privacy."
     destroy:
       failure: Konnte diese Diskussion nicht löschen
       success: Diskussion gelöscht
@@ -1008,7 +1021,7 @@
       censored: Diese Nachricht wurde entfernt
       create_note: Sammlungsbeitrag erstellen
       create_document: Sammlungs-Dokument erstellen
-      committee: '[Committee]'
+      committee: "[Committee]"
     new:
       compose_new: Compose New
       from_library: From Library
@@ -1037,7 +1050,7 @@
       reply_by: Or reply by
   pages:
     changelog:
-      github_history_link_html: <a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>
+      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>"
       header: What's new?
       introduction: This is a summary of new features added to the site. You can see
         the full development history on
@@ -1057,15 +1070,15 @@
       threads_found:
         zero: No threads found for '%{query}'.
         one: 'One thread found for ''%{query}'':'
-        other: '%{count} threads found for ''%{query}'':'
+        other: "%{count} threads found for '%{query}':"
       issues_found:
         zero: No issues found for '%{query}'.
         one: 'One issue found for ''%{query}'':'
-        other: '%{count} issues found for ''%{query}'':'
+        other: "%{count} issues found for '%{query}':"
       library_items_found:
         zero: No library items found for '%{query}'.
         one: 'One library item found for ''%{query}'':'
-        other: '%{count} library items found for ''%{query}'':'
+        other: "%{count} library items found for '%{query}':"
     edit_map:
       area: Bereich
       clear: Löschen
@@ -1126,7 +1139,7 @@
         title: Alle Kommentare
         what: What
         when: When
-        when_ago: '%{time_ago} zurück'
+        when_ago: "%{time_ago} zurück"
         where: Where
         who: Who
       new:
@@ -1135,8 +1148,8 @@
         success: Danke für deinen Kommentar!
   thread_mailer:
     header:
-      added: '%{name} added %{type} to the thread'
-      committee: ' [Committee]'
+      added: "%{name} added %{type} to the thread"
+      committee: " [Committee]"
     new_deadline_message:
       type: a deadline/date
     new_document_message:
@@ -1155,7 +1168,7 @@
       type: a street view
       view_the_street_view: 'Sie können das Street View zu sehen:'
     footer:
-      thread: Cyclescape Diskussion
+      thread: Cyclescape discussion thread
       unsubscribe: Durch den Link oben, kannst Du das Abo dieser Diskussion beenden.
   thread_priorities:
     very_high: Oberste Priorität
@@ -1268,12 +1281,12 @@
           other: Du kannst diesen Benutzer zu allen angezeigten Gruppen hinzufügen.
         group_membership_label: 'Gruppen:'
         is_a_member_of_groups:
-          zero: '%{name} ist noch kein Mitglied irgendeiner Gruppe'
-          one: '%{name} ist ein Mitglied einer Gruppe'
-          other: '%{name} ist ein Mitglied von %{count} Gruppen'
+          zero: "%{name} ist noch kein Mitglied irgendeiner Gruppe"
+          one: "%{name} ist ein Mitglied einer Gruppe"
+          other: "%{name} ist ein Mitglied von %{count} Gruppen"
         no_groups: Keine
         no_website: Keine
-        profile_picture_title: '%{name}''s Foto'
+        profile_picture_title: "%{name}'s Foto"
         recent_threads: Aktuelle Diskussionen
         reported_issues: Gemeldete  Themen
         user_profile: Benutzerprofil
@@ -1307,8 +1320,8 @@
           zero: No %{entry_name} found
   views:
     pagination:
-      first: '&laquo; First'
+      first: "&laquo; First"
       last: Last &raquo;
       next: Next &rsaquo;
-      previous: '&lsaquo; Prev'
-      truncate: '&hellip;'
+      previous: "&lsaquo; Prev"
+      truncate: "&hellip;"

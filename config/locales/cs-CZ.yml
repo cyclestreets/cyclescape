@@ -1,4 +1,5 @@
-"cs-CZ":
+---
+cs-CZ:
   application_name: Cyklisté sobě
   tags:
     show:
@@ -22,10 +23,10 @@
   deadline_date: Termín/datum
   time:
     formats:
-      long_deadline: '%A, %d %B %Y %l:%M %p'
+      long_deadline: "%A, %d %B %Y %l:%M %p"
   date:
     formats:
-      long_deadline: '%A, %d %B %Y %l:%M %p'
+      long_deadline: "%A, %d %B %Y %l:%M %p"
   admin:
     groups:
       index:
@@ -169,18 +170,6 @@
         for everyone
       part_hidden: Part Hidden
     show:
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
       address_label: 'Address:'
       council_label: 'Council:'
       data_source: Data source
@@ -197,6 +186,18 @@
       start_date: 'Date application was made:'
       hidden: Hidden (will not appear in anyones dashboard)
       no_location: Exact location not received from council site
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
+      part_hidden: Part Hidden
     search:
       page_title: Search Results for '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
@@ -237,8 +238,8 @@
       new_group_thread: Založit nové diskuzní vlákno místní skupiny
       my_issues_nearby_introduction_html: Podněty v oblastech %{areas_you_are_watching_link}
         jsou zobrazeny níže, nejnovější jako první.
-      my_issues_nearby_issues_pointer_html: (Můžete si také %{browse_all_other_issues_link}
-        mimo vaše oblasti zájmu.)
+      my_issues_nearby_issues_pointer_html: "(Můžete si také %{browse_all_other_issues_link}
+        mimo vaše oblasti zájmu.)"
       browse_all_other_issues: prohlédnout všechny podněty
       my_priorities_introduction: 'Toto je seznam všech nastavených důležitostí, nejdůležitější
         jako první:'
@@ -283,13 +284,13 @@
       issues_nearby: Podněty v blízkosti
       map: Map
       posted:
-        message_html: '%{creator_link} zaslali zprávu'
-        deadline_message_html: '%{creator_link} zaslali termín/datum'
-        document_message_html: '%{creator_link} zaslali přílohu'
-        photo_message_html: '%{creator_link} zaslali fotografii'
-        link_message_html: '%{creator_link} zaslali odkaz'
-        street_view_message_html: '%{creator_link} vyslán Street View'
-        library_item_message_html: '%{creator_link} zaslali položku knihovny'
+        message_html: "%{creator_link} zaslali zprávu"
+        deadline_message_html: "%{creator_link} zaslali termín/datum"
+        document_message_html: "%{creator_link} zaslali přílohu"
+        photo_message_html: "%{creator_link} zaslali fotografii"
+        link_message_html: "%{creator_link} zaslali odkaz"
+        street_view_message_html: "%{creator_link} vyslán Street View"
+        library_item_message_html: "%{creator_link} zaslali položku knihovny"
     search:
       title: Výsledky vyhledávání
   devise:
@@ -396,7 +397,7 @@
       index:
         actioned_by: Uskutečnil
         are_you_sure: Skutečně?
-        by: '%{name}'
+        by: "%{name}"
         confirm: Potvrdit
         created_at: před %{time_ago}
         email: E-mailová adresa
@@ -411,7 +412,7 @@
         status: Status
         title: Žádosti o členství ve skupině %{group}
         user: Uživatel (zobrazené jméno)
-        membership_status: &id001
+        membership_status:
           confirmed: Potvrzeno
           pending: Čeká
           unconfirmed: Nepotvrzeno
@@ -426,7 +427,7 @@
       review:
         actioned_by: Uskutečnil
         are_you_sure: Skutečně?
-        by: '%{name}'
+        by: "%{name}"
         confirm: Potvrdit
         created_at: před %{time_ago}
         email: E-mailová adresa
@@ -441,7 +442,11 @@
         status: Status
         title: Posoudit žádost o členství ve skupině %{group}
         user: Uživatel (zobrazené jméno)
-        membership_status: *id001
+        membership_status:
+          confirmed: Potvrzeno
+          pending: Čeká
+          unconfirmed: Nepotvrzeno
+          rejected: Zamítnuto
         no_message: Uživatel nepřipojil k žádosti žádný popis
     message_threads:
       destroy:
@@ -536,7 +541,7 @@
     index:
       actioned_by: Uskutečnil
       are_you_sure: Skutečně?
-      by: '%{name}'
+      by: "%{name}"
       confirm: Potvrdit
       created_at: před %{time_ago}
       email: E-mailová adresa
@@ -550,7 +555,11 @@
       status: Status
       title: Žádosti o členství ve skupině %{group}
       user: Uživatel (zobrazené jméno)
-      membership_status: *id001
+      membership_status:
+        confirmed: Potvrzeno
+        pending: Čeká
+        unconfirmed: Nepotvrzeno
+        rejected: Zamítnuto
       name: Požadovaný název
       actions: Akce
       new_group: Založit novou místní skupinu
@@ -560,7 +569,7 @@
     review:
       actioned_by: Uskutečnil
       are_you_sure: Skutečně?
-      by: '%{name}'
+      by: "%{name}"
       confirm: Potvrdit
       created_at: před %{time_ago}
       email: E-mailová adresa
@@ -574,7 +583,11 @@
       status: Status
       title: Žádosti o členství ve skupině %{group}
       user: Uživatel (zobrazené jméno)
-      membership_status: *id001
+      membership_status:
+        confirmed: Potvrzeno
+        pending: Čeká
+        unconfirmed: Nepotvrzeno
+        rejected: Zamítnuto
       name: Požadovaný název
       actions: Akce
       new_group: Založit novou místní skupinu
@@ -637,8 +650,8 @@
       votes: hlasy
       thread_count:
         one: 1 vlákno
-        other: '%{count} vláken'
-        few: '%{count} vláken'
+        other: "%{count} vláken"
+        few: "%{count} vláken"
     destroy:
       failure: Tento podnět nemůže být odstraněn
       success: Podnět odstraněn
@@ -673,8 +686,8 @@
         se mohlo udělat? Nahlaste problém níže.
       new_issue_privacy_warning: Mějte na paměti, že všechny podněty jsou zobrazené
         veřejně. K podnětu je ale možné udělat soukromé vlákno, jakmile bude odeslán.
-      admin_thread_pointer_html: '%{administrative_matters_link} bez vazby na nějaké
-        území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny.'
+      admin_thread_pointer_html: "%{administrative_matters_link} bez vazby na nějaké
+        území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny."
       administrative_matters: Čistě administrativní záležitosti
     show:
       issue_created_at: před %{time_ago}
@@ -748,7 +761,7 @@
       supportlogos_introduction: 'Vznik Cyclescape byl umožněn podporou:'
       funding_from: Za podpory %{name}
       funding_from_and_created_by: Web Cyklisté sobě byl podpořen %{name}
-      planning_application_data: Planning application data from Openly Local
+      planning_application_data: Planning application data from PlanIt
       top_html: Zpět na začátek &uarr;
       cyclescape_blog: Blog Cyclescape
       privacy: Zásady ochrany osobních údajů
@@ -769,8 +782,8 @@
       no_results_found: Žádné výsledky pro '%{query}'.
       results_found:
         one: Jeden výsledek nalezeno pro '%{query}'.
-        other: '%{count} výsledků nalezeno pro ''%{query}'''
-        few: '%{count} výsledků nalezeno pro ''%{query}'''
+        other: "%{count} výsledků nalezeno pro '%{query}'"
+        few: "%{count} výsledků nalezeno pro '%{query}'"
       title: Výsledky prohledávání knihovny
     show:
       title: Knihovna
@@ -789,10 +802,10 @@
       new_document: Dokument
       new_item_title: Vyberte typ
       new_item_description_html: 'Vyberte typ položky, který chcete přidat do knihovny:'
-      new_note_description_html: <strong>Poznámky</strong> jsou určeny pro krátký
-        text.
-      new_document_description_html: <strong>Dokumenty</strong> vám umožňují nahrávat
-        soubory.
+      new_note_description_html: "<strong>Poznámky</strong> jsou určeny pro krátký
+        text."
+      new_document_description_html: "<strong>Dokumenty</strong> vám umožňují nahrávat
+        soubory."
   library:
     documents:
       new:
@@ -840,7 +853,7 @@
         subject: '[Cyclescape] Uživatel "%{user_name}" požaduje založení nové skupiny
           "%{group_name}"'
       new_gmr:
-        subject: '[Cyklisté sobě] %{user_name} chce vstoupit do skupiny %{group_name}'
+        subject: "[Cyklisté sobě] %{user_name} chce vstoupit do skupiny %{group_name}"
       new_group_thread:
         subject: '[Cyklisté sobě] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
@@ -854,7 +867,7 @@
       group_request_rejected:
         subject: '[Cyclescape] Nová skupina "%{group_request_name}" nebyla založena'
       new_user_confirmed:
-        subject: '[Cyclescape] Welcome to Cyclescape'
+        subject: "[Cyclescape] Welcome to Cyclescape"
       upcoming_issue_deadline:
         subject: '[Cyclescape] Upcoming deadline/date for "%{issue_title}"'
       upcoming_thread_deadline:
@@ -862,11 +875,11 @@
     thread_mailer:
       common:
         subject:
-          one: '[Cyklisté sobě] %{title}'
+          one: "[Cyklisté sobě] %{title}"
           other: 'Re: [Cyklisté sobě] %{title}'
           few: 'Re: [Cyklisté sobě] %{title}'
       digest:
-        subject: '[Cyclescape] Digest for %{date}'
+        subject: "[Cyclescape] Digest for %{date}"
   message_thread:
     subscriptions:
       create:
@@ -902,8 +915,8 @@
       title: Upravit vlastnosti diskuzních vláken
       description: Jako správce místní skupiny můžete opravit vlastnosti diskuzních
         vláken zde.
-      thread_fix_warning_html: <strong>Varování:</strong> vaše místní skupina má omezené
-        možnosti nastavení přístupu k diskuzním vláknům.
+      thread_fix_warning_html: "<strong>Varování:</strong> vaše místní skupina má
+        omezené možnosti nastavení přístupu k diskuzním vláknům."
     destroy:
       failure: Nemohu smazat diskuzní vlákno
       success: Diskuzní vlákno smazáno
@@ -936,8 +949,8 @@
       no_results_found: Žádné výsledky nenalezeny pro '%{query}'.
       results_found:
         one: Jeden výsledek nalezen pro '%{query}'
-        other: '%{count} výsledků nalezeno pro ''%{query}'''
-        few: '%{count} výsledků nalezeno pro ''%{query}'''
+        other: "%{count} výsledků nalezeno pro '%{query}'"
+        few: "%{count} výsledků nalezeno pro '%{query}'"
       search: 'Prohledat všechna diskuzní vlákna:'
       search_submit: Hledat
       title: Výsledky prohledávání diskuzních vláken
@@ -1016,7 +1029,7 @@
       censored: Tato zpráva byla odebrána
       create_note: Vytvořit poznámku v knihovně
       create_document: Vytvořit dokument v knihovně
-      committee: '[Committee]'
+      committee: "[Committee]"
     new:
       compose_new: Vytvořit novou
       from_library: Z knihovny
@@ -1045,7 +1058,7 @@
       reply_by: Or reply by
   pages:
     changelog:
-      github_history_link_html: <a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>u.
+      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>u."
       header: Co je nového?
       introduction: Toto je přehled nedávných změn na tété stránce. Kompletní detailní
         historii vývoje můžete sledovat na
@@ -1065,15 +1078,15 @@
       threads_found:
         zero: Žádná diskuzní vlákna nenalezena pro '%{query}'.
         one: 'Nalezeno diskuzní vlákno pro ''%{query}'':'
-        other: '%{count} diskuzních vláken nalezeno pro ''%{query}'':'
+        other: "%{count} diskuzních vláken nalezeno pro '%{query}':"
       issues_found:
         zero: Žádný podnět nenalezen pro '%{query}'.
         one: 'Nalezen jeden podnět pro ''%{query}'':'
-        other: '%{count} podnětů nalezeno pro ''%{query}'':'
+        other: "%{count} podnětů nalezeno pro '%{query}':"
       library_items_found:
         zero: Žádná položka knihovny nenalezena pro '%{query}'.
         one: 'Nalezena položka knihovny pro ''%{query}'':'
-        other: '%{count} položek knihovny nalezeno pro ''%{query}'':'
+        other: "%{count} položek knihovny nalezeno pro '%{query}':"
     edit_map:
       area: oblast
       clear: vymazat
@@ -1145,8 +1158,8 @@
         success: Děkujeme za vaší zpětnou vazbu!
   thread_mailer:
     header:
-      added: '%{name} added %{type} to the thread'
-      committee: ' [Committee]'
+      added: "%{name} added %{type} to the thread"
+      committee: " [Committee]"
     new_deadline_message:
       type: a deadline/date
     new_document_message:
@@ -1278,9 +1291,9 @@
             skupin.
         group_membership_label: 'Místní skupiny:'
         is_a_member_of_groups:
-          zero: '%{name} zatím není členem žádné místní skupiny'
-          one: '%{name} je členem jedné místní skupiny'
-          other: '%{name} je členem %{count} místních skupin'
+          zero: "%{name} zatím není členem žádné místní skupiny"
+          one: "%{name} je členem jedné místní skupiny"
+          other: "%{name} je členem %{count} místních skupin"
         no_groups: Žádné
         no_website: Žádná
         profile_picture_title: obrázek uživatele %{name}
@@ -1317,8 +1330,8 @@
           zero: No %{entry_name} found
   views:
     pagination:
-      first: '&laquo; First'
+      first: "&laquo; First"
       last: Last &raquo;
       next: Next &rsaquo;
-      previous: '&lsaquo; Prev'
-      truncate: '&hellip;'
+      previous: "&lsaquo; Prev"
+      truncate: "&hellip;"

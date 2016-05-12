@@ -1,4 +1,5 @@
-"cs-CZ":
+---
+cs-CZ:
   cancel: Zrušit
   formtastic:
     labels:
@@ -17,7 +18,7 @@
       group_pref:
         notify_membership_requests: Zapnout upozornění na žádosti o členství
       issue:
-        new: &id001
+        new:
           description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
             Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
             stránce budete začít diskusní vlákno o tomto problému.
@@ -25,12 +26,33 @@
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
-        create: *id001
-        edit: *id001
-        update: *id001
+        create:
+          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
+            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
+            stránce budete začít diskusní vlákno o tomto problému.
+          location: Zvolte oblast
+          photo: Přidejte fotografii
+          tags_string: Přidejte štítek k vašemu podnětu
+          title: Zvolte nadpis vašeho podnětu
+        edit:
+          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
+            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
+            stránce budete začít diskusní vlákno o tomto problému.
+          location: Zvolte oblast
+          photo: Přidejte fotografii
+          tags_string: Přidejte štítek k vašemu podnětu
+          title: Zvolte nadpis vašeho podnětu
+        update:
+          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
+            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
+            stránce budete začít diskusní vlákno o tomto problému.
+          location: Zvolte oblast
+          photo: Přidejte fotografii
+          tags_string: Přidejte štítek k vašemu podnětu
+          title: Zvolte nadpis vašeho podnětu
       library/document:
         file: Document
-      library/item: null
+      library/item: 
       library/note:
         body: Note
       link_message:
@@ -63,15 +85,15 @@
           bicycle_wheels: Chcete-li pomoci zastavit automatizované znamení-up zadejte
             částku (v číslech) kol na šesti kolech
         edit:
+          password: Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo.
+          current_password: Prosím potvrďte vaše stávající heslo, abyste mohli udělat
+            změny na této stránce.
           display_name: Volitelné - může být přezdívka nebo pseudonym, který bude
             zobrazen ostatním uživatelům místo plného jména.
           full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
             místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
           bicycle_wheels: Chcete-li pomoci zastavit automatizované znamení-up zadejte
             částku (v číslech) kol na šesti kolech
-          password: Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo.
-          current_password: Prosím potvrďte vaše stávající heslo, abyste mohli udělat
-            změny na této stránce.
       group:
         short_name: Musí být malé alfanumerické znaky; a-z, 0-9
       group_request:
@@ -100,18 +122,42 @@
           be converted to the person's full name in the email
         picture: Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů
       issue:
-        new: &id002
+        new:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: 5dba0b18dfdbb088f4d9365a0fff9f91_tr
-          external_url: c3fc421ff125639d61ba069e8d65bfe1_tr
-          photo: (nepovinné)
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: "(nepovinné)"
           tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
-        create: *id002
-        edit: *id002
-        update: *id002
+        create:
+          description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
+            na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
+            přístupné.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: "(nepovinné)"
+          tags_string: např. stojan překážka, cyklostezka, údržba
+          title: Prosím buďte struční a konkrétní.
+        edit:
+          description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
+            na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
+            přístupné.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: "(nepovinné)"
+          tags_string: např. stojan překážka, cyklostezka, údržba
+          title: Prosím buďte struční a konkrétní.
+        update:
+          description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
+            na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
+            přístupné.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: "(nepovinné)"
+          tags_string: např. stojan překážka, cyklostezka, údržba
+          title: Prosím buďte struční a konkrétní.
       message_thread:
         privacy: Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno.
         issue: Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud

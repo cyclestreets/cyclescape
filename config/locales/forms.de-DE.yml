@@ -1,4 +1,5 @@
-"de-DE":
+---
+de-DE:
   cancel: Abbrechen
   formtastic:
     labels:
@@ -7,7 +8,7 @@
         name: Name der Gruppe
         short_name: Subdomain
       group_request:
-        name: Name of the group
+        name: Name der Gruppe
         short_name: Web address
         website: Your organisation's main website
         email: Your organisation's main e-mail address
@@ -18,18 +19,33 @@
         notify_membership_requests: Benachrichtigung bei Antrag auf Mitgliedschaft
           aktivieren
       issue:
-        new: &id001
+        new:
           description: Erstelle eine Beschreibung
           location: Teile Deinen Standort mit
           photo: Füge ein Foto hinzu
           tags_string: Kennzeichne Dein Thema
           title: Betitel Deinen Bericht
-        create: *id001
-        edit: *id001
-        update: *id001
+        create:
+          description: Erstelle eine Beschreibung
+          location: Teile Deinen Standort mit
+          photo: Füge ein Foto hinzu
+          tags_string: Kennzeichne Dein Thema
+          title: Betitel Deinen Bericht
+        edit:
+          description: Erstelle eine Beschreibung
+          location: Teile Deinen Standort mit
+          photo: Füge ein Foto hinzu
+          tags_string: Kennzeichne Dein Thema
+          title: Betitel Deinen Bericht
+        update:
+          description: Erstelle eine Beschreibung
+          location: Teile Deinen Standort mit
+          photo: Füge ein Foto hinzu
+          tags_string: Kennzeichne Dein Thema
+          title: Betitel Deinen Bericht
       library/document:
         file: Dokument
-      library/item: null
+      library/item: 
       library/note:
         body: Note
       link_message:
@@ -62,15 +78,15 @@
           bicycle_wheels: To help stop automated sign-ups please enter the amount
             (in numbers) of wheels on six bicycles
         edit:
+          password: Lasse dies frei, um Dein aktuelles Passwort zu behalten.
+          current_password: Bitte bestätige Dein aktuelles Passwort, um Änderungen
+            auf dieser Seite durchzuführen.
           display_name: If you set a display name, it will be shown to people who
             cannot see your profile (otherwise it will appear as 'anonymous').
           full_name: Please enter your full name. It will be shown to all the people
             who can see your profile.
           bicycle_wheels: To help stop automated sign-ups please enter the amount
             (in numbers) of wheels on six bicycles
-          password: Lasse dies frei, um Dein aktuelles Passwort zu behalten.
-          current_password: Bitte bestätige Dein aktuelles Passwort, um Änderungen
-            auf dieser Seite durchzuführen.
       group:
         short_name: Dürfen nur alphanumerische Kleinbuchstaben sein ; a-z, 0-9
       group_request:
@@ -102,19 +118,46 @@
           be converted to the person's full name in the email
         picture: To be displayed on the group page, ideally 333x192 pixels
       issue:
-        new: &id002
+        new:
           description: Bitte erkläre Details über das Problem und welchen Effekt es
             auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
             sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema
             zu starten.
-          deadline: 5dba0b18dfdbb088f4d9365a0fff9f91_tr
-          external_url: c3fc421ff125639d61ba069e8d65bfe1_tr
-          photo: (optional)
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
           tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
-        create: *id002
-        edit: *id002
-        update: *id002
+        create:
+          description: Bitte erkläre Details über das Problem und welchen Effekt es
+            auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
+            sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema
+            zu starten.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
+          title: Bitte fasse Dich kurz und sei sachlich.
+        edit:
+          description: Bitte erkläre Details über das Problem und welchen Effekt es
+            auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
+            sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema
+            zu starten.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
+          title: Bitte fasse Dich kurz und sei sachlich.
+        update:
+          description: Bitte erkläre Details über das Problem und welchen Effekt es
+            auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
+            sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema
+            zu starten.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
+          title: Bitte fasse Dich kurz und sei sachlich.
       message_thread:
         privacy: Dies gibt an, wer diese Diskussion sehen und bearbeiten kann.
         issue: Die gibt an, welches Thema dieser Diskussion angfügt. Wenn nicht, wird
