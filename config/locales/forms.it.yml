@@ -17,15 +17,30 @@ it:
       group_pref:
         notify_membership_requests: Enable membership request notifications
       issue:
-        new: &id001
-          description: 59cc276c0ce886b3f7d1ca0eed363fb9_tr
-          location: 2cb1aa7c7a86a772f5e0cb21fcbc9971_tr
-          photo: 6b0d7090c503a0dafaf3a39d837ef4d8_tr
-          tags_string: 53f67be3879483cbcefa7f0e21fc5027_tr
-          title: f5f791770fc3a0079f829fd27ff3dba5_tr
-        create: *id001
-        edit: *id001
-        update: *id001
+        new:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        create:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        edit:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        update:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
       library/document:
         file: Document
       library/item: null
@@ -60,15 +75,15 @@ it:
           bicycle_wheels: To help stop automated sign-ups please enter the amount
             (in numbers) of wheels on six bicycles
         edit:
+          password: Lascialo in bianco per mantenere la password corrente.
+          current_password: Please confirm your current password to make changes on
+            this page.
           display_name: If you set a display name, it will be shown to people who
             cannot see your profile (otherwise it will appear as 'anonymous').
           full_name: Please enter your full name. It will be shown to all the people
             who can see your profile.
           bicycle_wheels: To help stop automated sign-ups please enter the amount
             (in numbers) of wheels on six bicycles
-          password: Lascialo in bianco per mantenere la password corrente.
-          current_password: Please confirm your current password to make changes on
-            this page.
       group:
         short_name: Must be lower-case alphanumeric; a-z, 0-9
       group_request:
@@ -98,16 +113,42 @@ it:
           be converted to the person's full name in the email
         picture: To be displayed on the group page, ideally 333x192 pixels
       issue:
-        new: &id002
-          description: 59b6363c3185d455982706485f211086_tr
-          deadline: 5dba0b18dfdbb088f4d9365a0fff9f91_tr
-          external_url: c3fc421ff125639d61ba069e8d65bfe1_tr
-          photo: 1fe5512a8c594ad278fbf982ab4b013d_tr
-          tags_string: 2cc98431f029226d3b8d02b61f1ce25c_tr
-          title: 798312487f335b537aa1bae5263bec6c_tr
-        create: *id002
-        edit: *id002
-        update: *id002
+        new:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: (optional)
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        create:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: (optional)
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        edit:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: (optional)
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        update:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: (optional)
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
       message_thread:
         privacy: This specifies who can see and edit this discussion thread.
         issue: This specifies which issue this discussion thread is attached to. If

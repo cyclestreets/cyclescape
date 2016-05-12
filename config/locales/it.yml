@@ -97,7 +97,7 @@ it:
         created: Creato
         created_at: '%{time_ago} fa'
         last_seen: Last login
-        last_seen_at: '%{time_ago} ago'
+        last_seen_at: '%{time_ago} fa'
         introduction: This page lists all users on the system (irrespective of any
           group membership they may have).
         disabled: Disabilitato
@@ -117,13 +117,13 @@ it:
         approve: Approve
       user:
         created: Created
-        created_at: '%{time_ago} ago'
+        created_at: '%{time_ago} fa'
         last_seen: Last login
-        last_seen_at: '%{time_ago} ago'
+        last_seen_at: '%{time_ago} fa'
         introduction: This page lists all users on the system (irrespective of any
           group membership they may have).
         disabled: Disabled
-        disabled_at: '%{time_ago} ago'
+        disabled_at: '%{time_ago} fa'
         display_name: Display Name
         edit: User details
         email: Email
@@ -168,18 +168,6 @@ it:
         for everyone
       part_hidden: Part Hidden
     show:
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
       address_label: 'Address:'
       council_label: 'Council:'
       data_source: Data source
@@ -196,6 +184,18 @@ it:
       start_date: 'Date application was made:'
       hidden: Hidden (will not appear in anyones dashboard)
       no_location: Exact location not received from council site
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
+      part_hidden: Part Hidden
     search:
       page_title: Search Results for '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
@@ -276,7 +276,7 @@ it:
       planning_applications_lower: planning applications
       recent_threads: discussioni decenti
       subscribed_threads: Discussioni sottoscritte
-      thread_latest_activity: '%{time_ago} ago'
+      thread_latest_activity: '%{time_ago} fa'
       group_threads: Discussioni di gruppo
       group_threads_desc_html: Recent threads with activity from your groups.
       my_priorities: Mie priorità
@@ -370,7 +370,7 @@ it:
         confirm: Sei sicuro?
         delete: Rimuovi da gruppo
         edit: Edit membership
-        joining_date: '%{time_ago} ago'
+        joining_date: '%{time_ago} fa'
         invite_pending: Invite pending
     memberships:
       new:
@@ -410,11 +410,11 @@ it:
         status: Stato
         title: Richieste di membri per %{group}
         user: Utente (nome visualizzato)
-        membership_status: &id001
-          confirmed: 0a1e37665e4db7e4bfa138704a6eb381_tr
-          pending: 2071f2f2e16b9c7443b2015cb3ae4f4b_tr
-          unconfirmed: a8aab37b96c86da6da0367d0bfb0d2db_tr
-          rejected: 009d7bca2fefc9c79d77f8c3863649c7_tr
+        membership_status:
+          confirmed: Confirmed
+          pending: Pending
+          unconfirmed: Unconfirmed
+          rejected: Rejected
       new:
         title: Request membership of %{group_name}
         your_membership_request_will: Please click the button below to apply to join
@@ -439,7 +439,11 @@ it:
         status: Stato
         title: Review a membership request for %{group}
         user: Utente (nome visualizzato)
-        membership_status: *id001
+        membership_status:
+          confirmed: Confirmed
+          pending: Pending
+          unconfirmed: Unconfirmed
+          rejected: Rejected
         no_message: There was no message included with this membership request.
     message_threads:
       destroy:
@@ -537,7 +541,7 @@ it:
       are_you_sure: Are you sure?
       by: by %{name}
       confirm: Confirm
-      created_at: '%{time_ago} ago'
+      created_at: '%{time_ago} fa'
       email: E-mail address
       view_message: View...
       message: Message
@@ -549,7 +553,11 @@ it:
       status: Status
       title: Membership requests for %{group}
       user: User (display name)
-      membership_status: *id001
+      membership_status:
+        confirmed: Confirmed
+        pending: Pending
+        unconfirmed: Unconfirmed
+        rejected: Rejected
       name: Requested Name
       actions: Actions
       new_group: Create a New Group
@@ -561,7 +569,7 @@ it:
       are_you_sure: Are you sure?
       by: by %{name}
       confirm: Confirm
-      created_at: '%{time_ago} ago'
+      created_at: '%{time_ago} fa'
       email: E-mail address
       view_message: View...
       message: Message
@@ -573,7 +581,11 @@ it:
       status: Status
       title: Membership requests for %{group}
       user: User (display name)
-      membership_status: *id001
+      membership_status:
+        confirmed: Confirmed
+        pending: Pending
+        unconfirmed: Unconfirmed
+        rejected: Rejected
       name: Requested Name
       actions: Actions
       new_group: Create a New Group
@@ -752,7 +764,7 @@ it:
       funding_from_and_created_by: Funding from and created by %{name}
       planning_application_data: Planning application data from PlanIt
       top_html: Back to top &uarr;
-      cyclescape_blog: 'Blog Cyclescape '
+      cyclescape_blog: Cyclescape blog
       privacy: Privacy Policy
       user_guide: Guida utente
       facebook_page: CycleStreets Facebook page
