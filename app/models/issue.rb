@@ -36,7 +36,7 @@ class Issue < ActiveRecord::Base
     storage_options :generate_photo_path
   end
 
-  belongs_to :created_by, class_name: "User"
+  belongs_to :created_by, -> { with_deleted }, class_name: "User"
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults
   has_and_belongs_to_many :tags, join_table: "issue_tags"
   has_one :planning_application
@@ -48,7 +48,7 @@ class Issue < ActiveRecord::Base
   validates :created_by, presence: true
   validates :external_url, url: true
 
-  default_scope {where(deleted_at: nil)}
+  default_scope { where(deleted_at: nil) }
   scope :by_most_recent, -> { order('created_at DESC') }
   scope :preloaded,  ->      { includes(:created_by, :tags) }
   scope :created_by, ->(user) { where(created_by_id: user) }
