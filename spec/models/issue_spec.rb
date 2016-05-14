@@ -58,6 +58,11 @@ describe Issue do
     it 'should have no votes' do
       expect(subject.votes_count).to be(0)
     end
+
+    it 'works when creator is deleted' do
+      issue.created_by.destroy
+      expect(issue.reload.created_by).to_not be_nil
+    end
   end
 
   describe 'to be valid' do
