@@ -60,8 +60,8 @@ describe Issue do
     end
 
     it 'works when creator is deleted' do
-      issue.created_by.destroy
-      expect(issue.reload.created_by).to_not be_nil
+      subject.created_by.destroy
+      expect(subject.reload.created_by).to_not be_nil
     end
   end
 
