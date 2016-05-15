@@ -14,7 +14,7 @@ class Site::CommentsController < ApplicationController
 
     if @site_comment.save
       set_flash_message(:success)
-      redirect_to request.referer
+      redirect_to request.referer || root_path
     else
       render 'new', status: :conflict
     end
