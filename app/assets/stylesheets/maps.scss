@@ -124,6 +124,9 @@
           span.icon-clear {
             background-position:4px -825px;
           }
+          span.icon-undo{
+            opacity: 0.3;
+          }
           &:hover {
             text-decoration:none;
             span.icon-undo,
@@ -167,6 +170,10 @@
   width:  24px;
   height: 22px;
   background-image: url("/openlayers/theme/default/img/delete.png");
+}
+
+.leaflet-draw-actions, .leaflet-draw-toolbar{
+  display: none !important;
 }
 
 .map-search {
