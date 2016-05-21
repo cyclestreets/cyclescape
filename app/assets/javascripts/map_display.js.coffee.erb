@@ -13,18 +13,44 @@ jQuery ->
       @setCenter(center)
       @geoInput = $("##{opts.geoInput}")
       @buildCollistionLayer() if opts.collisions?
+      @buildIssueLayer(opts.issueurl) if opts.issueurl?
       @addLayers(opts.hidelayers)
       @addSearch() if opts.search?
       @addDraw() if opts.draw?
-      @addFeature(opts.feature) if opts.feature?
+      @addStaticFeature(opts.feature) if opts.feature?
       @map.removeControl(@map.zoomControl) if opts.hidezoom?
 
-    addFeature: (collection) ->
-      L.geoJson(collection, {style: {color: 'black'}, pointToLayer: (feature, latlng) =>
-        icon = new L.Icon.Default(iconUrl: feature.properties.thumbnail)
-        L.marker(latlng, {icon: icon}).addTo @map
+    featurePointToLayer: (feature, latlng) =>
+      icon = new L.Icon.Default(iconUrl: feature.properties.thumbnail)
+      L.marker(latlng, {icon: icon}).addTo @map
+
+    addStaticFeature: (collection) ->
+      L.geoJson(collection, {
+        style: {color: 'black'}, pointToLayer: @featurePointToLayer
       }).addTo @map
       return
+
+    buildIssueLayer: (url) ->
+      @issueLayer = L.geoJson(null, {
+        pointToLayer: @featurePointToLayer.bind(@)
+        fillOpacity: 0.1
+        stroke: 'black'
+        onEachFeature: (feature, layer) ->
+          img = "<img src='#{feature.properties.image_url}' width='37' height='37'>" if feature.properties.image_url
+          layer.bindPopup( "#{if img then img else ''}
+           <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3>
+           <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
+          )
+      }).addTo(@map)
+      @issueJSONLayer = new L.LayerJSON({
+        url: "#{url}?bbox={lon1},{lat1},{lon2},{lat2}"
+        propertyItems: 'features'
+        propertyLoc: 'geometry.coordinates'
+        updateOutBounds: false
+        hashGenerator: (data) ->
+          data.id
+        dataToMarker: @issueLayer.addData.bind(@issueLayer)
+      }).addTo(@map)
 
     setCenter: (center) ->
       @map.fitBounds(center.fitBounds) if center.fitBounds?
@@ -39,9 +65,12 @@ jQuery ->
         "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: 0.8),
         "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: 0.8),
       }
-      collisions = {Collisions: @collisionLayer} if @collisionLayer?
+      additionalLayer = if @collisionLayer
+        {Collisions: @collisionLayer}
+      else if @issueJSONLayer?
+        {Issues: @issueJSONLayer}
 
-      L.control.layers(baseLayers, collisions).addTo(@map) unless hidelayers
+      L.control.layers(baseLayers, additionalLayer).addTo(@map) unless hidelayers
 
     search: (text, callback) =>
       bbox = @map.getBounds().toBBoxString()
