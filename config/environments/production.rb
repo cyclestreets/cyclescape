@@ -55,6 +55,7 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  config.active_record.raise_in_transactional_callbacks = true
 
   # Make sure appropriate pages are served over SSL
   if Rails.env.production?
