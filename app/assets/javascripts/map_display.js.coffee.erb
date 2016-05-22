@@ -16,8 +16,10 @@ jQuery ->
       @buildIssueLayer(opts.issueurl) if opts.issueurl?
       @addLayers(opts.hidelayers)
       @addSearch() if opts.search?
-      @addDraw() if opts.draw?
-      @addStaticFeature(opts.feature) if opts.feature?
+      if opts.draw?
+        @addDraw(opts.feature)
+      else if opts.feature?
+        @addStaticFeature(opts.feature)
       @map.removeControl(@map.zoomControl) if opts.hidezoom?
 
     featurePointToLayer: (feature, latlng) =>
@@ -136,7 +138,12 @@ jQuery ->
           minLength: 2)
       )
 
-    addDraw: =>
+    addDraw: (feature) =>
+      hideNewToolbars = ->
+        $('.tabs').children('li.area, li.route, li.point').css({opacity: 0.3}).prop('disabled', true)
+      showNewToolbars = ->
+        $('.tabs').children('li.area, li.route, li.point').css({opacity: 1}).prop('disabled', false)
+
       drawnItems = new L.FeatureGroup()
       @map.addLayer drawnItems
       drawControl = new L.Control.Draw {
@@ -155,8 +162,12 @@ jQuery ->
         layer = e.layer
         drawnItems.addLayer layer
         @geoInput.val JSON.stringify(layer.toGeoJSON())
-        $('.tabs').children('li.area, li.route, li.point').css({opacity: 0.3}).prop('disabled', true)
+        hideNewToolbars()
         return
+
+      if feature
+        drawnItems.addLayer L.geoJson(feature)
+        hideNewToolbars()
 
       @map.on 'draw:drawstart', (e) =>
         $('.icon-undo').css({opacity: 1})
