@@ -12,6 +12,7 @@ module MapsHelper
   end
 
   def issue_geojson(decorated_issue)
+    return nil unless decorated_issue.location
     collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(
       [RGeo::GeoJSON::Feature.new(decorated_issue.location, nil, thumbnail: decorated_issue.try(:medium_icon_path))]
     )

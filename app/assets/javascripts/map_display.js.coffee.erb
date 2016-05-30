@@ -11,7 +11,7 @@ jQuery ->
       @domId = opts.domid || 'map'
       @map = L.map(@domId)
       @setCenter(center)
-      @geoInput = $("##{opts.geoInput}")
+      @geoInput = $("##{opts.geoinput}_loc_json")
       @buildCollistionLayer() if opts.collisions?
       @buildIssueLayer(opts.issueurl) if opts.issueurl?
       @addLayers(opts.hidelayers)
