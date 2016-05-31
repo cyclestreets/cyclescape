@@ -1,4 +1,4 @@
 %div#map.map.edit
   .hidden
     .map-data{"data-center" => location_to_geojson(@start_location),
-      "data-opts" => {search: true, issueurl: all_geometries_issues_path(:json)}.to_json}
+      "data-opts" => {search: true, remote: {'Issues' => all_geometries_issues_path(:json)}}.to_json}

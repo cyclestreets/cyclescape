@@ -13,7 +13,8 @@ jQuery ->
       @setCenter(center)
       @geoInput = $("##{opts.geoinput}_loc_json")
       @buildCollistionLayer() if opts.collisions?
-      @buildIssueLayer(opts.issueurl) if opts.issueurl?
+      @remoteJSONLayer = {}
+      @buildRemoteLayer(url, name) for own name, url of opts.remote
       @addLayers(opts.hidelayers)
       @addSearch() if opts.search?
       if opts.draw?
@@ -32,8 +33,8 @@ jQuery ->
       }).addTo @map
       return
 
-    buildIssueLayer: (url) ->
-      @issueLayer = L.geoJson(null, {
+    buildRemoteLayer: (url, name) ->
+      remoteLayer = L.geoJson(null, {
         pointToLayer: @featurePointToLayer.bind(@)
         fillOpacity: 0.1
         stroke: 'black'
@@ -44,14 +45,14 @@ jQuery ->
            <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
           )
       }).addTo(@map)
-      @issueJSONLayer = new L.LayerJSON({
+      @remoteJSONLayer[name] = new L.LayerJSON({
         url: "#{url}?bbox={lon1},{lat1},{lon2},{lat2}"
         propertyItems: 'features'
         propertyLoc: 'geometry.coordinates'
         updateOutBounds: false
         hashGenerator: (data) ->
           data.id
-        dataToMarker: @issueLayer.addData.bind(@issueLayer)
+        dataToMarker: remoteLayer.addData.bind(remoteLayer)
       }).addTo(@map)
 
     setCenter: (center) ->
@@ -67,12 +68,10 @@ jQuery ->
         "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: 0.8),
         "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: 0.8),
       }
-      additionalLayer = if @collisionLayer
-        {Collisions: @collisionLayer}
-      else if @issueJSONLayer?
-        {Issues: @issueJSONLayer}
+      additionalLayers = @remoteJSONLayer
+      additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
 
-      L.control.layers(baseLayers, additionalLayer).addTo(@map) unless hidelayers
+      L.control.layers(baseLayers, additionalLayers).addTo(@map) unless hidelayers
 
     search: (text, callback) =>
       bbox = @map.getBounds().toBBoxString()

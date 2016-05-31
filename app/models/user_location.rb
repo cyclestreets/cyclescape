@@ -28,4 +28,8 @@ class UserLocation < ActiveRecord::Base
   def overlapping_groups
     GroupProfile.where('st_intersects(location, ?)', location).order('st_area(location) asc').map { |p| p.group }
   end
+
+  def buffered
+    location.buffer(Geo::USER_LOCATIONS_BUFFER).union(location)
+  end
 end
