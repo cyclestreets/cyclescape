@@ -10,7 +10,7 @@
       .tag-item
         = t ".part_hidden"
       &nbsp;
-    - if planning_application.has_issue?
+    - if planning_application.issue
       %p= t ".converted_to_issue"
       %p= planning_application.issue_link
     -else

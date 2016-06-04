@@ -138,6 +138,7 @@
       unhide: Remove my vote
       hide_tooltip: If enough users vote to hide this application it will be hidden for everyone
       part_hidden: Part Hidden
+      converted_to_issue: 'Converted to Issue:'
     show:
       address_label: "Address:"
       council_label: "Council:"
