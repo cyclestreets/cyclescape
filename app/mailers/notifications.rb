@@ -72,11 +72,10 @@ class Notifications < ActionMailer::Base
                     group_name: @group.name, thread_title: @thread.title)
   end
 
-  def new_user_location_issue(user, issue, category)
-    @user = user
+  def new_user_location_issue(user_location, issue)
     @issue = issue
-    @category = category
-    mail to: @user.name_with_email,
+    @user_location = user_location
+    mail to: @user_location.user.name_with_email,
          subject: t('mailers.notifications.new_user_location_issue.subject',
                     issue_title: @issue.title)
   end

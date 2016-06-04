@@ -45,7 +45,7 @@ class NewIssueNotifier
     list = {}
     filtered.each do |loc|
       # Symbol keys are converted to strings by Resque
-      opts = { 'user_id' => loc.user_id, 'category_id' => loc.category_id, 'issue_id' => issue.id }
+      opts = { 'location_id' => loc.id, 'issue_id' => issue.id }
       list[loc.user_id] = { type: :notify_new_user_location_issue, opts: opts }
     end
 
@@ -53,10 +53,10 @@ class NewIssueNotifier
   end
 
   def self.notify_new_user_location_issue(opts)
-    user = User.find(opts['user_id'])
+    user_location = UserLocation.find(opts['location_id'])
+    return unless user_location.user.prefs.enable_email?
     issue = Issue.find(opts['issue_id'])
-    category = LocationCategory.find(opts['category_id'])
-    Notifications.new_user_location_issue(user, issue, category).deliver_later if user.prefs.enable_email?
+    Notifications.new_user_location_issue(user_location, issue).deliver_later
   end
 
   def self.list_for_group_locations(issue)
@@ -79,8 +79,9 @@ class NewIssueNotifier
 
   def self.notify_new_group_location_issue(opts)
     user = User.find(opts['user_id'])
+    return unless user.prefs.enable_email?
     group = Group.find(opts['group_id'])
     issue = Issue.find(opts['issue_id'])
-    Notifications.new_group_location_issue(user, group, issue).deliver_later if user.prefs.enable_email?
+    Notifications.new_group_location_issue(user, group, issue).deliver_later
   end
 end

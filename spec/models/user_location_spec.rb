@@ -8,11 +8,6 @@ describe UserLocation do
       expect(subject.user).to be_valid
     end
 
-    it 'must have a category' do
-      expect(subject.category).to be_valid
-      expect(subject.category.name).to be_a(String)
-    end
-
     it 'should have a geojson string' do
       expect(subject.loc_json).to be_a(String)
       expect(subject.loc_json).to eql(RGeo::GeoJSON.encode(RGeo::GeoJSON::Feature.new(subject.location)).to_json)
@@ -24,11 +19,6 @@ describe UserLocation do
 
     it 'must have a user' do
       subject.user = nil
-      expect(subject).not_to be_valid
-    end
-
-    it 'must have a category' do
-      subject.category = nil
       expect(subject).not_to be_valid
     end
 

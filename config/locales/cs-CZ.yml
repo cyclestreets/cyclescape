@@ -1016,6 +1016,9 @@
   group_membership_roles:
     member: "Obyčejný člen"
     committee: "Správce skupiny"
+  user_locations:
+    category_name: "vaší %{category_name} oblasti"
+    generic_category_name: "místo, kde jste projevili zájema"
   user:
     locations:
       create:

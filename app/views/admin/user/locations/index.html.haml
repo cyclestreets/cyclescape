@@ -22,7 +22,7 @@
           %th= t ".overlapping_groups"
         - @user.locations.each do |l|
           %tr
-            %td= l.category.name
+            %td= l.category_name
             %td
               - map_id = "leaflet-#{dom_id(l)}"
               .tinymap{id: map_id}

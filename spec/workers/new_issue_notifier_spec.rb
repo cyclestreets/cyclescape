@@ -28,7 +28,7 @@ describe NewIssueNotifier do
       end
 
       it 'should queue a notification for each user that has preference set' do
-        opts = { 'user_id' => user.id, 'category_id' => location.category_id, 'issue_id' => issue.id }
+        opts = { 'location_id' => location.id, 'issue_id' => issue.id }
         expect(Resque).to receive(:enqueue).with(NewIssueNotifier, :notify_new_user_location_issue, opts)
         subject.process_new_issue(issue.id)
       end

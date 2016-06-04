@@ -1092,6 +1092,9 @@
         send_private_message: Send private message
       update:
         success: "Profile Updated"
+  user_locations:
+    category_name: "your %{category_name} location"
+    generic_category_name: "a location where you've expressed interest"
   users:
     private_message_threads:
       new:

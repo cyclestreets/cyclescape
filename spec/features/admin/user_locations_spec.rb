@@ -11,7 +11,7 @@ describe 'Groups admin' do
 
   it 'should let you view the list of user locations' do
     visit admin_user_locations_path(user)
-    expect(page).to have_content(location.category.name)
+    expect(page).to have_content(location.category_name)
   end
 
   it 'should let you add a new user location' do

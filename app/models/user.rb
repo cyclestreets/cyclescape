@@ -173,8 +173,8 @@ class User < ActiveRecord::Base
   def start_location
     # Figure out a suitable starting location for the user, e.g. for adding new issues.
 
-    # First, the latest find a "primary" or "home" location.
-    l = locations.where(category_id: LocationCategory.first).last
+    # First, the first location.
+    l = locations.order(id: :asc).first
     return l.location unless l.blank?
 
     # If not, take the latest location they have.
