@@ -4,6 +4,7 @@
     = f.input :photo, as: :file
     = f.input :retained_photo, as: :hidden
     = f.input :loc_json, as: :hidden
+    = f.input :planning_application_id, as: :hidden
     %li.input.full-width
       %label.label= t "formtastic.labels.issue.new.location"
       = f.semantic_errors :location

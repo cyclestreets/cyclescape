@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309205413) do
+ActiveRecord::Schema.define(version: 20160604075325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,21 +163,23 @@ ActiveRecord::Schema.define(version: 20160309205413) do
   add_index "issue_tags", ["issue_id", "tag_id"], name: "index_issue_tags_on_issue_id_and_tag_id", unique: true, using: :btree
 
   create_table "issues", force: :cascade do |t|
-    t.integer  "created_by_id",                                                          null: false
-    t.string   "title",         limit: 255,                                              null: false
-    t.text     "description",                                                            null: false
-    t.datetime "created_at",                                                             null: false
-    t.datetime "updated_at",                                                             null: false
+    t.integer  "created_by_id",                                                                    null: false
+    t.string   "title",                   limit: 255,                                              null: false
+    t.text     "description",                                                                      null: false
+    t.datetime "created_at",                                                                       null: false
+    t.datetime "updated_at",                                                                       null: false
     t.datetime "deleted_at"
-    t.geometry "location",      limit: {:srid=>4326, :type=>"geometry"}
-    t.string   "photo_uid",     limit: 255
+    t.geometry "location",                limit: {:srid=>4326, :type=>"geometry"}
+    t.string   "photo_uid",               limit: 255
     t.datetime "deadline"
-    t.string   "external_url",  limit: 255
-    t.boolean  "all_day",                                                default: false, null: false
+    t.string   "external_url",            limit: 255
+    t.boolean  "all_day",                                                          default: false, null: false
+    t.integer  "planning_application_id"
   end
 
   add_index "issues", ["created_by_id"], name: "index_issues_on_created_by_id", using: :btree
   add_index "issues", ["location"], name: "index_issues_on_location", using: :gist
+  add_index "issues", ["planning_application_id"], name: "index_issues_on_planning_application_id", using: :btree
 
   create_table "library_documents", force: :cascade do |t|
     t.integer  "library_item_id",             null: false
@@ -344,7 +346,7 @@ ActiveRecord::Schema.define(version: 20160309205413) do
     t.string   "openlylocal_council_url", limit: 255
     t.text     "url"
     t.string   "uid",                     limit: 255,                                             null: false
-    t.integer  "issue_id"
+    t.integer  "zzz_issue_id"
     t.datetime "created_at",                                                                      null: false
     t.datetime "updated_at",                                                                      null: false
     t.geometry "location",                limit: {:srid=>4326, :type=>"geometry"}
@@ -354,9 +356,9 @@ ActiveRecord::Schema.define(version: 20160309205413) do
     t.boolean  "relevant",                                                         default: true, null: false
   end
 
-  add_index "planning_applications", ["issue_id"], name: "index_planning_applications_on_issue_id", using: :btree
   add_index "planning_applications", ["location"], name: "index_planning_applications_on_location", using: :gist
   add_index "planning_applications", ["uid"], name: "index_planning_applications_on_uid", using: :btree
+  add_index "planning_applications", ["zzz_issue_id"], name: "index_planning_applications_on_zzz_issue_id", using: :btree
 
   create_table "site_comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -418,7 +420,7 @@ ActiveRecord::Schema.define(version: 20160309205413) do
 
   create_table "user_locations", force: :cascade do |t|
     t.integer  "user_id",                                              null: false
-    t.integer  "category_id"
+    t.integer  "category_id",                                          null: false
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
     t.geometry "location",    limit: {:srid=>4326, :type=>"geometry"}
@@ -516,6 +518,7 @@ ActiveRecord::Schema.define(version: 20160309205413) do
   add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true, using: :btree
   add_index "votes", ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
 
+  add_foreign_key "issues", "planning_applications"
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
   add_foreign_key "message_threads", "users"

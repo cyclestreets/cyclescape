@@ -29,7 +29,7 @@
 
 
 %aside#sidebar.wide
-  - if @planning_application.has_issue?
+  - if @planning_application.issue
     %section.issue.box
       %h2= t ".related_issue"
       %p= t ".related_issue_guidance"
