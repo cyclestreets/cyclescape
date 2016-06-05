@@ -74,6 +74,7 @@ describe IssueApi::API do
       end
 
       it 'should only return issues inside the groups area' do
+        expect(last_response.inspect).to include(inside_group.to_param)
         expect(geojson_response.size).to eq(1)
         expect(geojson_response[0]['id']).to eq(inside_group.id)
       end
