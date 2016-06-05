@@ -6,9 +6,10 @@ class InboundMailProcessor
   def self.perform(mail_id)
     mail = InboundMail.find(mail_id)
     to_address = mail.message.to.first
-    thread_match = to_address.match(/^thread-([^@]+)/)
-    message_match = to_address.match(/^message-([^@]+)/)
-    deliver_thread_reply(mail, thread_match.try(:[], 1), message_match.try(:[], 1))
+    thread_token = to_address.match(/^thread-([^@]+)/).to_a[1]
+    message_token = to_address.match(/^message-([^@]+)/).to_a[1]
+    return unless thread_token || message_token
+    deliver_thread_reply(mail, thread_token, message_token)
   end
 
   def self.deliver_thread_reply(mail, thread_token, message_token)
