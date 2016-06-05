@@ -39,8 +39,11 @@ jQuery ->
         fillOpacity: 0.1
         stroke: 'black'
         onEachFeature: (feature, layer) ->
-          img = "<img src='#{feature.properties.image_url}' width='37' height='37'>" if feature.properties.image_url
-          layer.bindPopup( "#{if img then img else ''}
+          img = if feature.properties.image_url
+            "<img src='#{feature.properties.image_url}' width='37' height='37'>"
+          else
+            ''
+          layer.bindPopup( "#{img}
            <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3>
            <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
           )
@@ -162,17 +165,13 @@ jQuery ->
         drawnItems.addLayer layer
         @geoInput.val JSON.stringify(layer.toGeoJSON())
         hideNewToolbars()
-        return
 
       if feature
         drawnItems.addLayer L.geoJson(feature)
         hideNewToolbars()
 
-      @map.on 'draw:drawstart', (e) =>
-        $('.icon-undo').css({opacity: 1})
-
-      @map.on 'draw:drawstop', (e) =>
-        $('.icon-undo').css({opacity: 0.3})
+      # enable area / polygon draw as standard
+      $(".leaflet-draw-draw-polygon")[0].click()
 
       # Bind our icons to the Leaflet draw icons
       lDrawMapping = {
@@ -189,13 +188,25 @@ jQuery ->
           else
             $(".leaflet-draw-#{lDrawMapping[target.className]}")[0].click()
 
+      # When drawing clear cancels the drawing
+      # Otherwise clear wipes any shapes on the map
       $('.edit-clear').click ->
         drawnItems.clearLayers()
+        $('ul.leaflet-draw-actions a[title^="Cancel"]')[0]?.click()
         $('.tabs').children('li.area, li.route, li.point').css({opacity: 1}).prop('disabled', false)
         @geoInput?.val(null)
 
+      # When drawing undo deletes the last point
+      # Otherwise undo edits the layer
+      undoSelector = '.leaflet-draw-edit-edit'
+      @map.on 'draw:drawstart', (e) ->
+        undoSelector = 'ul.leaflet-draw-actions a[title^="Delete"]'
+
+      @map.on 'draw:drawstop', (e) ->
+        undoSelector = '.leaflet-draw-edit-edit'
+
       $('.edit-undo').click ->
-        $('ul.leaflet-draw-actions a[title^="Delete"]')[0]?.click()
+        $(undoSelector)[0].click()
 
   for domMap in $('.map-data')
     new LeafletMap($(domMap).data('center'), $(domMap).data('opts'))
