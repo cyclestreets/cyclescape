@@ -35,5 +35,6 @@ class Library::Component < ActiveRecord::Base
   def update_library_item
     item.update(component: self)
     Sunspot.index item
+    Sunspot.commit
   end
 end
