@@ -1,0 +1,72 @@
+%p#notice= notice
+
+%p
+  %b Logo uuid:
+  = @site_config.logo_uuid
+%p
+  %b Title tag:
+  = @site_config.title_tag
+%p
+  %b Domain:
+  = @site_config.domain
+%p
+  %b Footer1 uuid:
+  = @site_config.footer1_uuid
+%p
+  %b Footer2 uuid:
+  = @site_config.footer2_uuid
+%p
+  %b Footer3 uuid:
+  = @site_config.footer3_uuid
+%p
+  %b Nowhere location:
+  = @site_config.nowhere_location
+%p
+  %b Tile server1 name:
+  = @site_config.tile_server1_name
+%p
+  %b Tile server2 name:
+  = @site_config.tile_server2_name
+%p
+  %b Tile server3 name:
+  = @site_config.tile_server3_name
+%p
+  %b Tile server1 url:
+  = @site_config.tile_server1_url
+%p
+  %b Tile server2 url:
+  = @site_config.tile_server2_url
+%p
+  %b Tile server3 url:
+  = @site_config.tile_server3_url
+%p
+  %b Footer html:
+  = @site_config.footer_html
+%p
+  %b Header html:
+  = @site_config.header_html
+%p
+  %b Default locale:
+  = @site_config.default_locale
+%p
+  %b Timezone:
+  = @site_config.timezone
+%p
+  %b Ga account:
+  = @site_config.ga_account_id
+%p
+  %b Ga base domain:
+  = @site_config.ga_base_domain
+%p
+  %b Default email:
+  = @site_config.default_email
+%p
+  %b Devise email:
+  = @site_config.devise_email
+%p
+  %b Geocoder url:
+  = @site_config.geocoder_url
+
+= link_to 'Edit', edit_site_config_path(@site_config)
+\|
+= link_to 'Back', site_configs_path

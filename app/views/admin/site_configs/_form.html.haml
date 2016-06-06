@@ -1,0 +1,76 @@
+= form_for @site_config do |f|
+  - if @site_config.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@site_config.errors.count, "error")} prohibited this site_config from being saved:"
+      %ul
+        - @site_config.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :logo_uuid
+    = f.text_field :logo_uuid
+  .field
+    = f.label :title_tag
+    = f.text_field :title_tag
+  .field
+    = f.label :domain
+    = f.text_field :domain
+  .field
+    = f.label :footer1_uuid
+    = f.text_field :footer1_uuid
+  .field
+    = f.label :footer2_uuid
+    = f.text_field :footer2_uuid
+  .field
+    = f.label :footer3_uuid
+    = f.text_field :footer3_uuid
+  .field
+    = f.label :nowhere_location
+    = f.text_field :nowhere_location
+  .field
+    = f.label :tile_server1_name
+    = f.text_field :tile_server1_name
+  .field
+    = f.label :tile_server2_name
+    = f.text_field :tile_server2_name
+  .field
+    = f.label :tile_server3_name
+    = f.text_field :tile_server3_name
+  .field
+    = f.label :tile_server1_url
+    = f.text_field :tile_server1_url
+  .field
+    = f.label :tile_server2_url
+    = f.text_field :tile_server2_url
+  .field
+    = f.label :tile_server3_url
+    = f.text_field :tile_server3_url
+  .field
+    = f.label :footer_html
+    = f.text_area :footer_html
+  .field
+    = f.label :header_html
+    = f.text_area :header_html
+  .field
+    = f.label :default_locale
+    = f.number_field :default_locale
+  .field
+    = f.label :timezone
+    = f.number_field :timezone
+  .field
+    = f.label :ga_account_id
+    = f.text_field :ga_account_id
+  .field
+    = f.label :ga_base_domain
+    = f.text_field :ga_base_domain
+  .field
+    = f.label :default_email
+    = f.text_field :default_email
+  .field
+    = f.label :devise_email
+    = f.text_field :devise_email
+  .field
+    = f.label :geocoder_url
+    = f.text_field :geocoder_url
+  .actions
+    = f.submit 'Save'

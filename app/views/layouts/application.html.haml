@@ -23,6 +23,7 @@
     #fb-root
     %header#site-header(role="banner")
       .wrapper
+        - site = SiteConfig.find_by(domain: request.host)
         - if current_group
           = link_to root_path, id: "site-title" do
             %h1= current_group.name
@@ -90,11 +91,11 @@
               = image_tag "spinner.gif"
               = t(".loading")
             .inner
-    - if Rails.application.config.analytics[:google]
+    - if sc = SiteConfig.find_by(domain: request.host) && sc.ga_account_id
       :javascript
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{Rails.application.config.analytics[:google][:account_id]}']);
-        _gaq.push(['_setDomainName', '#{Rails.application.config.analytics[:google][:base_domain]}']);
+        _gaq.push(['_setAccount', '#{sc.ga_account_id}']);
+        _gaq.push(['_setDomainName', '#{sc.ga_base_domain}']);
         _gaq.push(['_trackPageview']);
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
