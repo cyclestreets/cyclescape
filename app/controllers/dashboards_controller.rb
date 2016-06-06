@@ -12,7 +12,7 @@ class DashboardsController < ApplicationController
     group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes(:group)
     @group_threads = ThreadListDecorator.decorate_collection group_threads
 
-    deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 12).includes(:issue, :latest_message)
+    deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 30).includes(:issue, :latest_message)
     @deadline_threads = ThreadListDecorator.decorate_collection deadline_threads
 
     prioritised_threads = current_user.prioritised_threads.order('priority desc').
@@ -26,7 +26,7 @@ class DashboardsController < ApplicationController
 
   def deadlines
     cal = Icalendar::Calendar.new
-    ThreadList.with_upcoming_deadlines(User.find_by(public_token: params[:public_token]), 20).each do |thread|
+    ThreadList.with_upcoming_deadlines(User.find_by(public_token: params[:public_token]), 50).each do |thread|
       thread.to_icals.each { |evt| cal.add_event(evt) }
     end
     render text: cal.to_ical
