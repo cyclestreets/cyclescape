@@ -8,7 +8,7 @@ class ThreadMailer < ActionMailer::Base
     @subscriber = user
 
     mail(to: @subscriber.name_with_email,
-         subject: t('mailers.thread_mailer.digest.subject', date: Date.today.to_s(:long)),
+         subject: t('mailers.thread_mailer.digest.subject', date: Date.current.to_s(:long)),
          reply_to: no_reply_address,
         )
   end

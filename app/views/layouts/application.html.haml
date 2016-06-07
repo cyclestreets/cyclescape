@@ -23,12 +23,11 @@
     #fb-root
     %header#site-header(role="banner")
       .wrapper
-        - site = SiteConfig.find_by(domain: request.host)
         - if current_group
           = link_to root_path, id: "site-title" do
             %h1= current_group.name
-        - else
-          = link_to image_tag("header_logo.png", alt: t(".title")), root_path, id: "site-title"
+        - elsif @site_config.logo
+          = link_to image_tag(@site_config.logo.url, alt: t(".title")), root_path, id: "site-title"
         %ul#top-menu
           %li.about= link_to t(".title"), root_url(subdomain: "www"), class: "cyclescape-logo"
           %li=link_to t(".about"), "http://blog.cyclescape.org/about/"
@@ -91,11 +90,11 @@
               = image_tag "spinner.gif"
               = t(".loading")
             .inner
-    - if sc = SiteConfig.find_by(domain: request.host) && sc.ga_account_id
+    - if @site_config.ga_account_id
       :javascript
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{sc.ga_account_id}']);
-        _gaq.push(['_setDomainName', '#{sc.ga_base_domain}']);
+        _gaq.push(['_setAccount', '#{@site_config.ga_account_id}']);
+        _gaq.push(['_setDomainName', '#{@site_config.ga_base_domain}']);
         _gaq.push(['_trackPageview']);
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

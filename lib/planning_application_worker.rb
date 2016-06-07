@@ -2,7 +2,7 @@ class PlanningApplicationWorker
   # Update to use
   # http://planit.org.uk/find/areas/json
 
-  def initialize(end_date = (Date.today))
+  def initialize(end_date = (Date.current))
     @end_date = end_date
   end
 

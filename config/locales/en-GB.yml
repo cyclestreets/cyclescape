@@ -67,6 +67,7 @@
         manage_issue_categories: Manage Issue Categories
         manage_users: Manage users
         manage_message_moderations: Manage message moderations
+        manage_site_configs: Manage site configs
     issue_categories:
       create:
         success: Category created

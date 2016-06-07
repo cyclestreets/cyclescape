@@ -417,6 +417,51 @@ ActiveRecord::Schema.define(version: 20170425223812) do
 
   add_index "site_comments", ["user_id"], name: "index_site_comments_on_user_id", using: :btree
 
+  create_table "site_configs", force: :cascade do |t|
+    t.string   "logo_uuid"
+    t.string   "domain",                                                             null: false
+    t.string   "funder_image_footer1_uuid"
+    t.string   "funder_image_footer2_uuid"
+    t.string   "funder_image_footer3_uuid"
+    t.string   "funder_image_footer4_uuid"
+    t.string   "funder_image_footer5_uuid"
+    t.string   "funder_image_footer6_uuid"
+    t.string   "funder_name_footer1"
+    t.string   "funder_name_footer2"
+    t.string   "funder_name_footer3"
+    t.string   "funder_name_footer4"
+    t.string   "funder_name_footer5"
+    t.string   "funder_name_footer6"
+    t.string   "funder_url_footer1"
+    t.string   "funder_url_footer2"
+    t.string   "funder_url_footer3"
+    t.string   "funder_url_footer4"
+    t.string   "funder_url_footer5"
+    t.string   "funder_url_footer6"
+    t.geometry "nowhere_location",          limit: {:srid=>4326, :type=>"geometry"}, null: false
+    t.string   "tile_server1_name",                                                  null: false
+    t.string   "tile_server2_name"
+    t.string   "tile_server3_name"
+    t.string   "tile_server4_url"
+    t.string   "tile_server1_url",                                                   null: false
+    t.string   "tile_server2_url"
+    t.string   "tile_server3_url"
+    t.string   "facebook_link"
+    t.string   "twitter_link"
+    t.text     "footer_links_html",                                                  null: false
+    t.text     "header_html",                                                        null: false
+    t.string   "default_locale",                                                     null: false
+    t.string   "timezone",                                                           null: false
+    t.string   "ga_account_id"
+    t.string   "ga_base_domain"
+    t.string   "default_email"
+    t.string   "devise_email"
+    t.string   "geocoder_url",                                                       null: false
+    t.string   "geocoder_key"
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
+  end
+
   create_table "street_view_messages", force: :cascade do |t|
     t.integer  "message_id"
     t.integer  "thread_id"
