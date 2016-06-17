@@ -143,6 +143,12 @@ describe MessageThread do
       found = MessageThread.order_by_latest_message
       expect(found).to eq(threads.reverse)
       expect(found.first.latest_message.created_at).to be > found.last.latest_message.created_at
+
+      changed_message = threads[1].messages.first
+      changed_message.update(created_at: 1.hour.from_now)
+      expect(MessageThread.order_by_latest_message).to_not eq(threads.reverse)
+      changed_message.update_column(:status, 'mod_queued')
+      expect(MessageThread.order_by_latest_message).to eq(threads.reverse)
     end
   end
 
