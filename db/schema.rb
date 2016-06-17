@@ -427,7 +427,7 @@ ActiveRecord::Schema.define(version: 20160604124124) do
 
   create_table "user_locations", force: :cascade do |t|
     t.integer  "user_id",                                              null: false
-    t.integer  "category_id",                                          null: false
+    t.integer  "category_id"
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
     t.geometry "location",    limit: {:srid=>4326, :type=>"geometry"}

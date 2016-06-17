@@ -58,14 +58,19 @@ class PlanningFilter < ActiveRecord::Base
     'Wychavon', 'Wycombe', 'Wyre', 'Wyre Forest', 'York', 'Yorkshire Dales', 'Yorkshire and Humber',
   ].freeze
 
-  validates :authority, inclusion: { in: LOCAL_AUTHORITIES }
+  STAR = '* (LAs without own rules)'.freeze
+
+  validates :authority, inclusion: { in: LOCAL_AUTHORITIES + [STAR] }
   validate :ensure_rule_is_valid_regex
 
   after_save :update_relevancies
 
   def matches?(planning_application)
-    return false unless planning_application.authority_name == authority
-    Regexp.new(rule).match(planning_application.uid)
+    if (authority == STAR && self.class.where(authority: planning_application.authority_name).blank?) ||
+        planning_application.authority_name == authority
+      return Regexp.new(rule).match(planning_application.uid)
+    end
+    false
   end
 
   private
