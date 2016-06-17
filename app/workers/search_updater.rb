@@ -16,9 +16,11 @@ class SearchUpdater
     thread = MessageThread.find(thread_id)
     Sunspot.index thread
     Sunspot.index thread.issue if thread.issue
+    Sunspot.commit
   end
 
   def self.process_issue(issue_id)
     Sunspot.index Issue.find(issue_id)
+    Sunspot.commit
   end
 end

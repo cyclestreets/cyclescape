@@ -17,6 +17,8 @@ describe Issue do
     end
   end
 
+  it { is_expected.to validate_length_of(:title).is_at_most(254) }
+
   describe 'newly created' do
     subject { create(:issue) }
 
@@ -57,6 +59,11 @@ describe Issue do
 
     it 'should have no votes' do
       expect(subject.votes_count).to be(0)
+    end
+
+    it 'works when creator is deleted' do
+      subject.created_by.destroy
+      expect(subject.reload.created_by).to_not be_nil
     end
   end
 

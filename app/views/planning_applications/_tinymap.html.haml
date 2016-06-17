@@ -1,3 +1,5 @@
-- m = tiny_display_map(planning_application, geometry_planning_application_path(planning_application, :json), "tinymap") do |map, page, dom_id|
-  %div{id: dom_id, class: "tinymap", style: "#{planning_application.part_hidden? ? 'height: 100px' : ''}"}
-!= m.to_html
+- map_id = "leaflet-#{dom_id(planning_application)}"
+.tinymap{id: map_id, style: "#{planning_application.part_hidden? ? 'height: 100px' : ''}"}}
+.hidden
+  .map-data{"data-center" => location_to_geojson(planning_application.location),
+    "data-opts" => { domid: map_id, hidelayers: true, feature: issue_geojson(planning_application) }.to_json}

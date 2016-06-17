@@ -147,6 +147,7 @@
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
+      converted_to_issue: 'Converted to Issue:'
     show:
       address_label: 'Address:'
       council_label: 'Council:'
@@ -1042,6 +1043,12 @@
         title: Feedback
       create:
         success: Thank you for your feedback!
+  tags:
+    show:
+      heading: "Things tagged '%{name}'"
+      unrecognised: "Couldn't find the tag '%{name}'"
+      introduction_groupwise_html: "limited to the %{area_of_group_link}:"
+      area_of_group: "area of %{group_name}"
   thread_mailer:
     header:
       added: '%{name} added %{type} to the thread'
@@ -1189,6 +1196,9 @@
         send_private_message: Send private message
       update:
         success: Profile Updated
+  user_locations:
+    category_name: "your %{category_name} location"
+    generic_category_name: "a location where you've expressed interest"
   users:
     private_message_threads:
       new:

@@ -9,7 +9,6 @@
 #  openlylocal_council_url :string(255)
 #  url                     :text
 #  uid                     :string(255)      not null
-#  issue_id                :integer
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  location                :spatial          geometry, 4326
@@ -28,7 +27,7 @@ class PlanningApplication < ActiveRecord::Base
 
   include Locatable
 
-  belongs_to :issue
+  has_one :issue
   has_many :hide_votes
   has_many :users, through: :hide_votes
   scope :not_hidden, -> { where('hide_votes_count < ?', NOS_HIDE_VOTES) }
@@ -41,12 +40,17 @@ class PlanningApplication < ActiveRecord::Base
 
   class << self
     def remove_old
-      where('created_at < ?', 8.months.ago).where(issue_id: nil).delete_all
+      transaction do
+        includes(:issue)
+          .where(issues: { planning_application_id: nil })
+          .where("#{quoted_table_name}.created_at < ?", 8.months.ago)
+          .find_each(&:destroy)
+      end
     end
   end
 
   def has_issue?
-    issue_id
+    issue
   end
 
   def title
@@ -71,10 +75,10 @@ class PlanningApplication < ActiveRecord::Base
       issue.location = location
       issue.external_url = url
       issue.description = <<-EOS
-        #{description}\n\n
-        #{address}\n\n
-        #{url}\n\n#{authority_name}\n
-        #{I18n.t("planning_application.issues.new.application_reference")} : #{uid}
+#{description}\n\n
+#{address}\n\n
+#{url}\n\n#{authority_name}\n
+#{I18n.t("planning_application.issues.new.application_reference")} : #{uid}
       EOS
       issue.tags_string = "planning"
     end

@@ -1,19 +1,4 @@
-/* 
- * Leaflet Dynamic JSON Layer v0.1.8 - 2016-05-02 
- * 
- * Copyright 2016 Stefano Cudini 
- * stefano.cudini@gmail.com 
- * http://labs.easyblog.it/ 
- * 
- * Licensed under the MIT license. 
- * 
- * Demo: 
- * http://labs.easyblog.it/maps/leaflet-layerjson/ 
- * 
- * Source: 
- * git@github.com:stefanocudini/leaflet-layerjson.git 
- * 
- */
+// https://github.com/stefanocudini/leaflet-layerJSON/pull/13
 
 (function() {
 
@@ -43,6 +28,7 @@ L.LayerJSON = L.FeatureGroup.extend({
 		buildPopup: null,			//function popup builder
 		optsPopup: null,			//popup options
 		buildIcon: null,			//function icon builder
+		hashGenerator: null,		//function to generate a unique element per feature
 		//
 		minZoom: 10,				//min zoom for call data
 		caching: true,				//enable requests caching
@@ -59,6 +45,7 @@ L.LayerJSON = L.FeatureGroup.extend({
 		L.FeatureGroup.prototype.initialize.call(this, []);
 		L.Util.setOptions(this, options);
 		this._dataToMarker = this.options.dataToMarker || this._defaultDataToMarker;
+		this._hashGenerator = this.options.hashGenerator || this._defaultHashGenerator;
 		this._buildIcon = this.options.buildIcon || this._defaultBuildIcon;
 		this._filterData = this.options.filterData || null;
 		this._hashUrl = this.options.url;
@@ -186,10 +173,8 @@ L.LayerJSON = L.FeatureGroup.extend({
 		return marker;
 	},
 
-	addMarker: function(data) {
-
-		var latlng, hash, propLoc = this.options.propertyLoc;
-
+	_defaultHashGenerator: function(data, propLoc) {
+		var latlng;
 		if( L.Util.isArray(propLoc) ) {
 			latlng = L.latLng( parseFloat( this._getPath(data, propLoc[0]) ),
 							   parseFloat( this._getPath(data, propLoc[1]) )  );
@@ -202,8 +187,13 @@ L.LayerJSON = L.FeatureGroup.extend({
 				latlng = L.latLng( this._getPath(data, propLoc) );
 			}
 		}
+		return [latlng.lat,latlng.lng].join() + this._getPath(data, this.options.propertyTitle);
+  },
 
-		hash = [latlng.lat,latlng.lng].join() + this._getPath(data, this.options.propertyTitle);
+	addMarker: function(data) {
+		var latlng, hash, propLoc = this.options.propertyLoc;
+
+		hash = this._hashGenerator(data, propLoc);
 
 		if(typeof this._markersCache[hash] === 'undefined')
 			this._markersCache[hash] = this._dataToMarker(data, latlng);

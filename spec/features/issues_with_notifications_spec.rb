@@ -27,7 +27,7 @@ describe 'Issue notifications' do
         fill_in_issue
         click_on 'Send Report'
         expect(page).to have_content(issue_values[:title])
-        category_name = user_location.category.name
+        category_name = user_location.category_name
         email = open_last_email_for(user_location.user.email)
         expect(email).to have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\"")
         expect(email).to have_body_text(issue_values[:title])
@@ -94,11 +94,12 @@ describe 'Issue notifications' do
   end
 
   context 'multiple overlapping locations' do
+    let(:location_category) { create :location_category }
     let(:user) { create(:user) }
     let(:user2) { create(:user) }
     let!(:user_location) { create(:user_location, user: user, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
     let!(:user_location_big) { create(:user_location, user: user, location: user_location.location.buffer(1)) }
-    let!(:user_location_small) { create(:user_location, user: user, location: user_location.location.buffer(-0.01)) }
+    let!(:user_location_small) { create(:user_location, user: user, location: user_location.location.buffer(-0.01), category: location_category) }
 
     before do
       user.prefs.update_column(:involve_my_locations, 'notify')
@@ -116,13 +117,15 @@ describe 'Issue notifications' do
       click_on 'Send Report'
       expect(all_emails.count).to eql(email_count + 1)
       open_email(user_location.user.email)
-      expect(current_email).to have_body_text(user_location_small.category.name)
-      expect(current_email).not_to have_body_text(user_location_big.category.name)
-      expect(current_email).not_to have_body_text(user_location.category.name)
+      expect(current_email).to have_body_text(user_location_small.category_name)
+      expect(current_email).not_to have_body_text(user_location_big.category_name)
+      expect(current_email).not_to have_body_text(user_location.category_name)
     end
 
     context 'multiple users' do
-      let!(:user2_location) { create(:user_location, user: user2, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
+      let!(:user2_location) do
+        create(:user_location, user: user2, location: 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))', category: location_category)
+      end
       let!(:user2_location_big) { create(:user_location, user: user2, location: user_location.location.buffer(1)) }
       let!(:user2_location_small) { create(:user_location, user: user2, location: user_location.location.buffer(-0.01)) }
 
@@ -131,9 +134,9 @@ describe 'Issue notifications' do
         click_on 'Send Report'
         expect(all_emails.count).to eql(email_count + 2)
         open_email(user.email)
-        expect(current_email).to have_body_text(user_location_small.category.name)
+        expect(current_email).to have_body_text(user_location_small.category_name)
         open_email(user2.email)
-        expect(current_email).to have_body_text(user2_location_small.category.name)
+        expect(current_email).to have_body_text(user2_location_small.category_name)
       end
     end
   end

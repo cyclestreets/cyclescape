@@ -33,11 +33,13 @@
           %th= t ".overlapping_groups"
         - current_user.locations.each do |l|
           %tr
-            %td= l.category.name
+            %td= l.category_name
             %td
-              - m = tiny_display_map(l, geometry_user_location_path(l, :json), "tinymap") do |map, page, dom_id|
-                %div{id: dom_id, class: "tinymap"}
-              != m.to_html
+              - l_id = "leaflet-#{dom_id(l)}"
+              .tinymap{id: l_id }
+              .hidden
+                .map-data{"data-center" => location_to_geojson(l.location),
+                  "data-opts" => { domid: l_id, hidelayers: true, feature: RGeo::GeoJSON.encode(l.buffered), hidezoom: true }.to_json}
             %td= link_to t(".edit"), edit_user_location_path(l)
             %td= link_to t(".delete"), user_location_path(l), data: { confirm: t(".confirm") }, method: "delete"
             %td

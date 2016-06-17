@@ -11,20 +11,52 @@ jQuery ->
       @domId = opts.domid || 'map'
       @map = L.map(@domId)
       @setCenter(center)
-      @geoInput = $("##{opts.geoInput}")
+      @geoInput = $("##{opts.geoinput}_loc_json")
       @buildCollistionLayer() if opts.collisions?
+      @remoteJSONLayer = {}
+      @buildRemoteLayer(url, name) for own name, url of opts.remote
       @addLayers(opts.hidelayers)
       @addSearch() if opts.search?
-      @addDraw() if opts.draw?
-      @addFeature(opts.feature) if opts.feature?
+      if opts.draw?
+        @addDraw(opts.feature)
+      else if opts.feature?
+        @addStaticFeature(opts.feature)
       @map.removeControl(@map.zoomControl) if opts.hidezoom?
 
-    addFeature: (collection) ->
-      L.geoJson(collection, {style: {color: 'black'}, pointToLayer: (feature, latlng) =>
-        icon = new L.Icon.Default(iconUrl: feature.properties.thumbnail)
-        L.marker(latlng, {icon: icon}).addTo @map
+    featurePointToLayer: (feature, latlng) =>
+      icon = new L.Icon.Default(iconUrl: feature.properties.thumbnail)
+      L.marker(latlng, {icon: icon}).addTo @map
+
+    addStaticFeature: (collection) ->
+      L.geoJson(collection, {
+        style: {color: 'black'}, pointToLayer: @featurePointToLayer
       }).addTo @map
       return
+
+    buildRemoteLayer: (url, name) ->
+      remoteLayer = L.geoJson(null, {
+        pointToLayer: @featurePointToLayer.bind(@)
+        fillOpacity: 0.1
+        stroke: 'black'
+        onEachFeature: (feature, layer) ->
+          img = if feature.properties.image_url
+            "<img src='#{feature.properties.image_url}' width='37' height='37'>"
+          else
+            ''
+          layer.bindPopup( "#{img}
+           <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3>
+           <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
+          )
+      }).addTo(@map)
+      @remoteJSONLayer[name] = new L.LayerJSON({
+        url: "#{url}?bbox={lon1},{lat1},{lon2},{lat2}"
+        propertyItems: 'features'
+        propertyLoc: 'geometry.coordinates'
+        updateOutBounds: false
+        hashGenerator: (data) ->
+          data.id
+        dataToMarker: remoteLayer.addData.bind(remoteLayer)
+      }).addTo(@map)
 
     setCenter: (center) ->
       @map.fitBounds(center.fitBounds) if center.fitBounds?
@@ -39,9 +71,10 @@ jQuery ->
         "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: 0.8),
         "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: 0.8),
       }
-      collisions = {Collisions: @collisionLayer} if @collisionLayer?
+      additionalLayers = @remoteJSONLayer
+      additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
 
-      L.control.layers(baseLayers, collisions).addTo(@map) unless hidelayers
+      L.control.layers(baseLayers, additionalLayers).addTo(@map) unless hidelayers
 
     search: (text, callback) =>
       bbox = @map.getBounds().toBBoxString()
@@ -107,10 +140,15 @@ jQuery ->
           minLength: 2)
       )
 
-    addDraw: =>
+    addDraw: (feature) =>
+      hideNewToolbars = ->
+        $('.tabs').children('li.area, li.route, li.point').css({opacity: 0.3}).prop('disabled', true)
+      showNewToolbars = ->
+        $('.tabs').children('li.area, li.route, li.point').css({opacity: 1}).prop('disabled', false)
+
       drawnItems = new L.FeatureGroup()
       @map.addLayer drawnItems
-      drawControlFull = new L.Control.Draw {
+      drawControl = new L.Control.Draw {
         position: 'topright'
         edit: {
           featureGroup: drawnItems
@@ -120,28 +158,55 @@ jQuery ->
           rectangle: false
         }
       }
-      drawControlEditOnly = new L.Control.Draw {
-        position: 'topright'
-        edit: {
-          featureGroup: drawnItems
-        }
-        draw: false
-      }
-      @map.addControl drawControlFull
+
+      @map.addControl drawControl
       @map.on 'draw:created', (e) =>
         layer = e.layer
         drawnItems.addLayer layer
         @geoInput.val JSON.stringify(layer.toGeoJSON())
-        drawControlFull.removeFrom @map
-        drawControlEditOnly.addTo @map
-        return
+        hideNewToolbars()
 
-      @map.on 'draw:deleted', (e) =>
-        if(drawnItems.getLayers().length == 0)
-          @geoInput.val(null)
-          drawControlEditOnly.removeFrom @map
-          drawControlFull.addTo @map
-        return
+      if feature
+        drawnItems.addLayer L.geoJson(feature)
+        hideNewToolbars()
+
+      # enable area / polygon draw as standard
+      $(".leaflet-draw-draw-polygon")[0].click()
+
+      # Bind our icons to the Leaflet draw icons
+      lDrawMapping = {
+        area: "draw-polygon"
+        route: "draw-polyline"
+        point: "draw-marker"
+      }
+
+      for own localN,lDrawName of lDrawMapping
+        $("li.#{localN} a").click (evt) ->
+          target = evt.target
+          if $(target).parent().parent().prop('disabled')
+            false
+          else
+            $(".leaflet-draw-#{lDrawMapping[target.className]}")[0].click()
+
+      # When drawing clear cancels the drawing
+      # Otherwise clear wipes any shapes on the map
+      $('.edit-clear').click ->
+        drawnItems.clearLayers()
+        $('ul.leaflet-draw-actions a[title^="Cancel"]')[0]?.click()
+        $('.tabs').children('li.area, li.route, li.point').css({opacity: 1}).prop('disabled', false)
+        @geoInput?.val(null)
+
+      # When drawing undo deletes the last point
+      # Otherwise undo edits the layer
+      undoSelector = '.leaflet-draw-edit-edit'
+      @map.on 'draw:drawstart', (e) ->
+        undoSelector = 'ul.leaflet-draw-actions a[title^="Delete"]'
+
+      @map.on 'draw:drawstop', (e) ->
+        undoSelector = '.leaflet-draw-edit-edit'
+
+      $('.edit-undo').click ->
+        $(undoSelector)[0].click()
 
   for domMap in $('.map-data')
     new LeafletMap($(domMap).data('center'), $(domMap).data('opts'))
