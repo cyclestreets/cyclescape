@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe PlanningApplicationWorker do
   before do
-    stub_const("#{described_class}::LOCAL_AUTHORITIES", ['London', 'Cambridge'] )
+    stub_const("PlanningFilter::LOCAL_AUTHORITIES", ['London', 'Cambridge'] )
   end
 
   let(:planning_record_alt) { planning_record.merge('uid' => '345') }
@@ -61,7 +61,7 @@ describe PlanningApplicationWorker do
 
   context 'with an authority with more than 500 planning applications' do
     before do
-      stub_const("#{described_class}::LOCAL_AUTHORITIES", ['Multi Page LA'] )
+      stub_const("PlanningFilter::LOCAL_AUTHORITIES", ['Multi Page LA'] )
     end
 
     let!(:multi_page_tot_req) do

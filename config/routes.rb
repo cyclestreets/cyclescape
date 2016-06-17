@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :groups
     resources :stats, only: :index
     resources :message_moderations, only: :index
+    resources :planning_filters
     resources :users do
       put :approve, on: :member
       scope module: 'user' do

@@ -360,6 +360,13 @@ ActiveRecord::Schema.define(version: 20160604124124) do
   add_index "planning_applications", ["uid"], name: "index_planning_applications_on_uid", using: :btree
   add_index "planning_applications", ["zzz_issue_id"], name: "index_planning_applications_on_zzz_issue_id", using: :btree
 
+  create_table "planning_filters", force: :cascade do |t|
+    t.string   "authority"
+    t.string   "rule"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "site_comments", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name",         limit: 255
