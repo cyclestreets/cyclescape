@@ -47,4 +47,17 @@ describe Tag do
       expect(found).to eq(existing)
     end
   end
+
+  describe 'top tags' do
+    let(:tag1) { create :tag, name: 'tag1' }
+    let(:tag2) { create :tag, name: 'tag2' }
+    let(:tag3) { create :tag, name: 'tag3' }
+    let!(:library_item) { create :library_item, tags: [tag1, tag3] }
+    let!(:issue) { create :issue, tags: [tag1, tag2] }
+    let!(:thread) { create :message_thread, tags: [tag1, tag2] }
+
+    it 'shoud have a top_tags' do
+      expect(described_class.top_tags).to eq([tag1, tag2, tag3])
+    end
+  end
 end
