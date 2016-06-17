@@ -958,6 +958,8 @@
     show:
       heading: "Things tagged '%{name}'"
       unrecognised: "Couldn't find the tag '%{name}'"
+      introduction_groupwise_html: "limited to the %{area_of_group_link}:"
+      area_of_group: "area of %{group_name}"
   thread_mailer:
     header:
       added: "%{name} added %{type} to the thread"

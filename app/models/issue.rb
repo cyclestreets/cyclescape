@@ -38,7 +38,7 @@ class Issue < ActiveRecord::Base
 
   belongs_to :created_by, -> { with_deleted }, class_name: "User"
   belongs_to :planning_application
-  has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults
+  has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults, inverse_of: :issue
   has_and_belongs_to_many :tags, join_table: "issue_tags"
 
   validates :title, presence: true, length: { maximum: 254 }
