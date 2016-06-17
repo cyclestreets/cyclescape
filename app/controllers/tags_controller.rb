@@ -18,4 +18,8 @@ class TagsController < ApplicationController
       @unrecognised_tag_name = params[:id]
     end
   end
+
+  def index
+    @tags = Tag.top_tags(200)
+  end
 end

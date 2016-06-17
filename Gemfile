@@ -20,6 +20,7 @@ gem 'rails_autolink'
 gem 'tweet-button'
 gem 'chartkick'
 gem 'leaflet-rails'
+gem 'jqcloud-rails', github: 'GovSciences/jqcloud-rails'
 # gem 'jquery-turbolinks'
 
 # Back-end gems

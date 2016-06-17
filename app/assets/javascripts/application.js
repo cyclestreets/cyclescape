@@ -38,3 +38,4 @@
 //= require leaflet-search.src.js
 //= require leaflet.draw-src.js
 //= require leaflet-layerjson.src.js
+//= require jqcloud
