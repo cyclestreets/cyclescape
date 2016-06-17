@@ -1,4 +1,5 @@
-"en-GB":
+---
+fr-CA:
   cancel: Cancel
   formtastic:
     labels:
@@ -17,18 +18,33 @@
       group_pref:
         notify_membership_requests: Enable membership request notifications
       issue:
-        new: &labels_issue_new
+        new:
           description: Write a description
           location: Provide a location
           photo: Add a photo
           tags_string: Tag your issue
           title: Title your report
-        create: *labels_issue_new
-        edit: *labels_issue_new
-        update: *labels_issue_new
+        create:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        edit:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        update:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
       library/document:
         file: Document
-      library/item: null
+      library/item: 
       library/note:
         body: Note
       link_message:
@@ -52,7 +68,7 @@
           bicycle_wheels: Bicycle Wheels
     hints:
       user:
-        new: &hints_user_new
+        new:
           display_name: If you set a display name, it will be shown to people who
             cannot see your profile (otherwise it will appear as 'anonymous').
           full_name: Please enter your full name. It will be shown to all the people
@@ -63,7 +79,12 @@
           password: Leave this blank to keep your current password.
           current_password: Please confirm your current password to make changes on
             this page.
-          <<: *hints_user_new
+          display_name: If you set a display name, it will be shown to people who
+            cannot see your profile (otherwise it will appear as 'anonymous').
+          full_name: Please enter your full name. It will be shown to all the people
+            who can see your profile.
+          bicycle_wheels: To help stop automated sign-ups please enter the amount
+            (in numbers) of wheels on six bicycles
       group:
         short_name: Must be lower-case alphanumeric; a-z, 0-9
       group_request:
@@ -93,16 +114,42 @@
           be converted to the person's full name in the email
         picture: To be displayed on the group page, ideally 333x192 pixels
       issue:
-        new: &hints_issue_new
-          description: Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue.
-          deadline: (optional)
+        new:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: "(optional)"
           external_url: If another web page is relevant you can add it here.
           photo: optional
           tags_string: e.g. cycle parking, obstruction, roadworks
           title: Please be brief and specific
-        create: *hints_issue_new
-        edit: *hints_issue_new
-        update: *hints_issue_new
+        create:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        edit:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        update:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
       message_thread:
         privacy: This specifies who can see and edit this discussion thread.
         issue: This specifies which issue this discussion thread is attached to. If

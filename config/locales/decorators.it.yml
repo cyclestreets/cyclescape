@@ -1,0 +1,5 @@
+it:
+  decorators:
+    thread_list:
+      private_thread_title: '[Discussione privata]'
+      following: Seguendo

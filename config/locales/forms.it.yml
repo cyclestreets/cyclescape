@@ -1,11 +1,11 @@
-"en-GB":
-  cancel: Cancel
+it:
+  cancel: Annulla
   formtastic:
     labels:
       tags_string: Tags
       group:
-        name: Name of the group
-        short_name: Subdomain
+        name: Nome del gruppo
+        short_name: Sottodominio
       group_request:
         name: Name of the group
         short_name: The proposed Cyclescape web address
@@ -13,19 +13,34 @@
         email: Your organisation's main e-mail address
         default_thread_privacy: Default privacy for discussion threads
       group_membership:
-        role: Membership type
+        role: Tipo di membership
       group_pref:
         notify_membership_requests: Enable membership request notifications
       issue:
-        new: &labels_issue_new
+        new:
           description: Write a description
           location: Provide a location
           photo: Add a photo
           tags_string: Tag your issue
           title: Title your report
-        create: *labels_issue_new
-        edit: *labels_issue_new
-        update: *labels_issue_new
+        create:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        edit:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        update:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
       library/document:
         file: Document
       library/item: null
@@ -34,25 +49,25 @@
       link_message:
         url: URL
       message:
-        body: Message
+        body: Messaggio
       site_comment:
-        body: Message
+        body: Messaggio
       thread_subscription:
-        send_email: Email new messages
+        send_email: Email nuovi messaggi
       user_pref:
         email_status_id: Enable email notifications
-        involve_my_locations: Matters near my locations
+        involve_my_locations: Materie vicine alla mia posizione
         involve_my_groups: My group's matters
         involve_my_groups_admin: Also involve me in my group's administrative discussions
       user:
         edit:
-          password: New Password
-          password_confirmation: New Password Confirmation
+          password: Nuova password
+          password_confirmation: Conferma nuova password
         new:
           bicycle_wheels: Bicycle Wheels
     hints:
       user:
-        new: &hints_user_new
+        new:
           display_name: If you set a display name, it will be shown to people who
             cannot see your profile (otherwise it will appear as 'anonymous').
           full_name: Please enter your full name. It will be shown to all the people
@@ -60,10 +75,15 @@
           bicycle_wheels: To help stop automated sign-ups please enter the amount
             (in numbers) of wheels on six bicycles
         edit:
-          password: Leave this blank to keep your current password.
+          password: Lascialo in bianco per mantenere la password corrente.
           current_password: Please confirm your current password to make changes on
             this page.
-          <<: *hints_user_new
+          display_name: If you set a display name, it will be shown to people who
+            cannot see your profile (otherwise it will appear as 'anonymous').
+          full_name: Please enter your full name. It will be shown to all the people
+            who can see your profile.
+          bicycle_wheels: To help stop automated sign-ups please enter the amount
+            (in numbers) of wheels on six bicycles
       group:
         short_name: Must be lower-case alphanumeric; a-z, 0-9
       group_request:
@@ -79,8 +99,8 @@
         message: You can optionally send the group administrators any additional information
           you feel is appropriate, such as a group membership number.
       group_pref:
-        notify_membership_requests: Notifications will be sent when a Cyclescape user
-          asks to join this group
+        notify_membership_requests: Le notifiche verranno inviate quando un utente
+          Cyclescape chiede di entrare in questo gruppo
         membership_secretary: Choose an optional membership secretary who will receive
           membership notification emails. Leave blank for notifications to be sent
           to the group email address.
@@ -93,16 +113,42 @@
           be converted to the person's full name in the email
         picture: To be displayed on the group page, ideally 333x192 pixels
       issue:
-        new: &hints_issue_new
-          description: Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue.
+        new:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
           deadline: (optional)
           external_url: If another web page is relevant you can add it here.
           photo: optional
           tags_string: e.g. cycle parking, obstruction, roadworks
           title: Please be brief and specific
-        create: *hints_issue_new
-        edit: *hints_issue_new
-        update: *hints_issue_new
+        create:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: (optional)
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        edit:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: (optional)
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        update:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: (optional)
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
       message_thread:
         privacy: This specifies who can see and edit this discussion thread.
         issue: This specifies which issue this discussion thread is attached to. If
@@ -116,14 +162,14 @@
         new_user_email: Hello {{full_name}}, you have been added to a Cyclescape group
           http://www.cyclescape.org
     actions:
-      update: Save
-      saving: Saving…
-      cancel: Cancel
+      update: Salva
+      saving: Salvataggio...
+      cancel: Annulla
       update_tags: Update Tags
       deadline_message:
-        create: Add Deadline
+        create: Aggiungi scadenza
       document_message:
-        create: Add Attachment
+        create: Aggiungi allegato
       group_membership:
         create: Add member
       group_request:
@@ -131,34 +177,34 @@
       group_membership_request:
         create: Request Group Membership
       issue:
-        create: Send Report
-        update: Save Report
+        create: Invia rapporto
+        update: Salva rapporto
       library_item_message:
-        create: Add Library Item
+        create: Aggiungi elemento libreria
       library/document:
-        create: Upload
-        document_from_message: Add to Library
+        create: Carica
+        document_from_message: Aggiungi alla libreria
       library/note:
-        create: Create Note
-        attach_to_document: Attach note
+        create: Crea nota
+        attach_to_document: Allega nota
       link_message:
-        create: Add Link
+        create: Agg. link
       message:
         create: Post Message
       photo_message:
-        create: Add Photo
+        create: Agg. photo
       site_comment:
-        create: Send Feedback
+        create: Invia Feedback
       user:
-        create: Sign up
-        update: Update Account
+        create: Iscriviti
+        update: Aggiorna account
       user_location:
-        create: Save this location
+        create: Salva questa posizione
       user_profile:
-        create: Save
+        create: Salva
       user_thread_priority:
-        create: Save
+        create: Salva
       thread_subscription:
-        create: Follow this thread
-        delete: Unfollow this thread
+        create: Segui questo argomento
+        delete: Smetti di seguire questo argomento
         delete_from_listing: Unfollow

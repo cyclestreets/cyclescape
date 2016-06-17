@@ -1,0 +1,11 @@
+---
+de-DE:
+  devise:
+    invitations:
+      send_instructions: Eine Einladungsmail wurde an %{email} verschickt.
+      invitation_token_invalid: Das beigebrachte Einladungstoken ist nicht gültig!
+      updated: Dein Passwort wurde erfolgreich gesetzt. Du bist jetzt registriert.
+      no_invitations_remaining: Keine verbliebenen Einladungen
+    mailer:
+      invitation_instructions:
+        subject: Erläuterungen zur Einladung

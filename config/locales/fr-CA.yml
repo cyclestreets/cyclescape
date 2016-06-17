@@ -1,4 +1,5 @@
-"en-GB":
+---
+fr-CA:
   application_name: Cyclescape
   tags:
     show:
@@ -14,7 +15,7 @@
   days_away:
     zero: Today!
     one: Tomorrow!
-    other: '%{count} days away'
+    other: "%{count} days away"
   email_status:
     no_email: No email
     email: Email every message
@@ -22,10 +23,10 @@
   deadline_date: Deadline/date
   time:
     formats:
-      long_deadline: '%A, %d %B %Y %l:%M %p'
+      long_deadline: "%A, %d %B %Y %l:%M %p"
   date:
     formats:
-      long_deadline: '%A, %d %B %Y %l:%M %p'
+      long_deadline: "%A, %d %B %Y %l:%M %p"
   admin:
     groups:
       index:
@@ -93,15 +94,15 @@
         update:
           success: Location Updated
     users:
-      index: &admin_users_index
+      index:
         created: Created
-        created_at: '%{time_ago} ago'
+        created_at: "%{time_ago} ago"
         last_seen: Last login
-        last_seen_at: '%{time_ago} ago'
+        last_seen_at: "%{time_ago} ago"
         introduction: This page lists all users on the system (irrespective of any
           group membership they may have).
         disabled: Disabled
-        disabled_at: '%{time_ago} ago'
+        disabled_at: "%{time_ago} ago"
         display_name: Display Name
         edit: User details
         email: Email
@@ -116,7 +117,27 @@
         approved: Approved
         approve: Approve
       user:
-        <<: *admin_users_index
+        created: Created
+        created_at: "%{time_ago} ago"
+        last_seen: Last login
+        last_seen_at: "%{time_ago} ago"
+        introduction: This page lists all users on the system (irrespective of any
+          group membership they may have).
+        disabled: Disabled
+        disabled_at: "%{time_ago} ago"
+        display_name: Display Name
+        edit: User details
+        email: Email
+        full_name: Full Name
+        id: id
+        role: Role
+        title: Users
+        preferences: Preferences
+        locations: Locations
+        website: Website
+        about: About
+        approved: Approved
+        approve: Approve
       update:
         success: User updated
       edit:
@@ -134,7 +155,7 @@
         on your %{dashboard_planning_link} page.
       explanation: You can promote any planning application to an issue so that it
         is like any other submitted issue.
-    planning_application: &planning_applications_search
+    planning_application:
       page_title: Search Results for '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
       planning_applications: Planning applications
@@ -147,7 +168,6 @@
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
-      converted_to_issue: 'Converted to Issue:'
     show:
       address_label: 'Address:'
       council_label: 'Council:'
@@ -165,9 +185,31 @@
       start_date: 'Date application was made:'
       hidden: Hidden (will not appear in anyones dashboard)
       no_location: Exact location not received from council site
-      <<: *planning_applications_search
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
+      part_hidden: Part Hidden
     search:
-      <<: *planning_applications_search
+      page_title: Search Results for '%{q}'
+      convert_to_issue_html: Convert to an Issue &hellip;
+      planning_applications: Planning applications
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      no_results_found: No results found
+      your_planning_applications: Your local planning applications
+      hide: Vote to hide
+      unhide: Remove my vote
+      hide_tooltip: If enough users vote to hide this application it will be hidden
+        for everyone
+      part_hidden: Part Hidden
   dashboards:
     show:
       page_title: Search Results for '%{q}'
@@ -195,8 +237,8 @@
       new_group_thread: Start a new group thread
       my_issues_nearby_introduction_html: Issues in the %{areas_you_are_watching_link}
         are shown below, most recent first.
-      my_issues_nearby_issues_pointer_html: (You can also %{browse_all_other_issues_link}
-        from outside your area(s).)
+      my_issues_nearby_issues_pointer_html: "(You can also %{browse_all_other_issues_link}
+        from outside your area(s).)"
       browse_all_other_issues: browse all other issues
       my_priorities_introduction: 'This is a listing of the priorities you have set,
         most important first:'
@@ -206,16 +248,10 @@
         discussion threads you are subscribed to:'
       no_upcoming_deadline_threads: You aren't involved in any discussion threads
         with upcoming deadlines or dates.
-      no_subscribed_threads_html: 'You aren''t following any threads yet. You could
-        have a look through the %{threads_link} and see if there''s anything that
-        you want to help with, or maybe you could %{add_issue_link} instead?
-
-'
-      no_prioritised_threads_html: 'You haven''t prioritised any threads yet. You
-        could have a look through the %{threads_link} and see if there''s anything
-        that you think is important, or maybe you could %{add_issue_link} instead?
-
-'
+      no_subscribed_threads_html: |
+        You aren't following any threads yet. You could have a look through the %{threads_link} and see if there's anything that you want to help with, or maybe you could %{add_issue_link} instead?
+      no_prioritised_threads_html: |
+        You haven't prioritised any threads yet. You could have a look through the %{threads_link} and see if there's anything that you think is important, or maybe you could %{add_issue_link} instead?
       no_issues_nearby_html: There's no issues in your area. You could %{add_issue_link},
         or %{add_location_link}.
       location:
@@ -235,7 +271,7 @@
       planning_applications_lower: planning applications
       recent_threads: recent threads
       subscribed_threads: Subscribed Threads
-      thread_latest_activity: '%{time_ago} ago'
+      thread_latest_activity: "%{time_ago} ago"
       group_threads: Group Threads
       group_threads_desc_html: Recent threads with activity from your groups.
       my_priorities: My priorities
@@ -243,13 +279,13 @@
       issues_nearby: Latest issues nearby
       map: Map
       posted:
-        message_html: '%{creator_link} posted a message'
-        deadline_message_html: '%{creator_link} posted a deadline/date'
-        document_message_html: '%{creator_link} posted an attachment'
-        photo_message_html: '%{creator_link} posted a photo'
-        link_message_html: '%{creator_link} posted a link'
-        street_view_message_html: '%{creator_link} posted a street view'
-        library_item_message_html: '%{creator_link} added a library item'
+        message_html: "%{creator_link} posted a message"
+        deadline_message_html: "%{creator_link} posted a deadline/date"
+        document_message_html: "%{creator_link} posted an attachment"
+        photo_message_html: "%{creator_link} posted a photo"
+        link_message_html: "%{creator_link} posted a link"
+        street_view_message_html: "%{creator_link} posted a street view"
+        library_item_message_html: "%{creator_link} added a library item"
     search:
       title: Search Results
   devise:
@@ -329,7 +365,7 @@
         confirm: Are you sure?
         delete: Remove from group
         edit: Edit membership
-        joining_date: '%{time_ago} ago'
+        joining_date: "%{time_ago} ago"
         invite_pending: Invite pending
     memberships:
       new:
@@ -352,12 +388,12 @@
         requested: Membership has been requested
         already_asked: You have already asked to join this group
         already_member: You are already a member of this group
-      index: &group_membership_requests_index
+      index:
         actioned_by: Actioned By
         are_you_sure: Are you sure?
         by: by %{name}
         confirm: Confirm
-        created_at: '%{time_ago} ago'
+        created_at: "%{time_ago} ago"
         email: E-mail address
         view_message: View...
         message: Message
@@ -382,9 +418,27 @@
         failure: There was a problem rejecting this membership request
         success: Membership rejected
       review:
-        <<: *group_membership_requests_index
-        title: Review a membership request for %{group}
+        actioned_by: Actioned By
+        are_you_sure: Are you sure?
+        by: by %{name}
+        confirm: Confirm
+        created_at: "%{time_ago} ago"
+        email: E-mail address
+        view_message: View...
         message: 'The user included this message with their request:'
+        no_requests_yet: There have been no membership requests for this group yet.
+        full_name: Full name
+        reject: Reject
+        review: Review
+        requested_at: Requested At
+        status: Status
+        title: Review a membership request for %{group}
+        user: User (display name)
+        membership_status:
+          confirmed: Confirmed
+          pending: Pending
+          unconfirmed: Unconfirmed
+          rejected: Rejected
         no_message: There was no message included with this membership request.
     message_threads:
       destroy:
@@ -431,7 +485,9 @@
       update:
         success: Profile Updated
   group_profiles:
-    default_new_user_email: "Hi {{full_name}},\n %{group_name} has added you to their Cyclescape group %{group_url}"
+    default_new_user_email: |-
+      Hi {{full_name}},
+       %{group_name} has added you to their Cyclescape group %{group_url}
   groups:
     search:
       title: Search Results for %{group}
@@ -480,17 +536,62 @@
       new_group_request_introduction: We moderate requests for new groups. You will
         be set as the first Committee member of the group, enabling you to administer
         it.
-    index: &group_requests_index
-      <<: *group_membership_requests_index
-      name: Requested Name
+    index:
+      actioned_by: Actioned By
+      are_you_sure: Are you sure?
+      by: by %{name}
+      confirm: Confirm
+      created_at: "%{time_ago} ago"
+      email: E-mail address
+      view_message: View...
+      message: Message
+      no_requests_yet: There have been no membership requests for this group yet.
+      full_name: Full name
+      reject: Reject
       review: Review
+      requested_at: Requested At
+      status: Status
+      title: Membership requests for %{group}
+      user: User (display name)
+      membership_status:
+        confirmed: Confirmed
+        pending: Pending
+        unconfirmed: Unconfirmed
+        rejected: Rejected
+      name: Requested Name
       actions: Actions
       new_group: Create a New Group
       group_email: Email
       destroy: Remove request
       no_message: There was no message included with this group request.
     review:
-      <<: *group_requests_index
+      actioned_by: Actioned By
+      are_you_sure: Are you sure?
+      by: by %{name}
+      confirm: Confirm
+      created_at: "%{time_ago} ago"
+      email: E-mail address
+      view_message: View...
+      message: Message
+      no_requests_yet: There have been no membership requests for this group yet.
+      full_name: Full name
+      reject: Reject
+      review: Review
+      requested_at: Requested At
+      status: Status
+      title: Membership requests for %{group}
+      user: User (display name)
+      membership_status:
+        confirmed: Confirmed
+        pending: Pending
+        unconfirmed: Unconfirmed
+        rejected: Rejected
+      name: Requested Name
+      actions: Actions
+      new_group: Create a New Group
+      group_email: Email
+      destroy: Remove request
+      no_message: There was no message included with this group request.
       short_name: Short name
       website: Website
     confirm:
@@ -512,11 +613,8 @@
       report_an_issue: Create an issue
       latest_discussions: Latest Discussions
       groups_title: Cyclescape Groups
-      groups_intro_html: 'Cyclescape is used by <strong>cycle campaign groups</strong>
-        across the country. <strong>%{groups_link}</strong> and see what they''re
-        working to fix.
-
-'
+      groups_intro_html: |
+        Cyclescape is used by <strong>cycle campaign groups</strong> across the country. <strong>%{groups_link}</strong> and see what they're working to fix.
       find_local_groups: Find groups local to you
       twitter_title: Cyclescape on Twitter
     guide:
@@ -549,7 +647,7 @@
       votes: votes
       thread_count:
         one: 1 thread
-        other: '%{count} threads'
+        other: "%{count} threads"
     destroy:
       failure: Can't delete that issue
       success: Issue deleted
@@ -590,7 +688,7 @@
         context (e.g. organising a general meeting) in the group admin threads section.
       administrative_matters: add a purely administrative matter
     show:
-      issue_created_at: '%{time_ago} ago'
+      issue_created_at: "%{time_ago} ago"
       added_by_html: Added by %{name} on %{time}
       cancel_vote: Cancel
       confirm_delete: Are you sure?
@@ -684,7 +782,7 @@
       no_results_found: No results found for '%{query}'.
       results_found:
         one: One result found for '%{query}'.
-        other: '%{count} results found for ''%{query}'''
+        other: "%{count} results found for '%{query}'"
       title: Library Search Results
     show:
       title: Library
@@ -703,10 +801,10 @@
       new_item_title: Select type
       new_item_description_html: 'Select the type of item you would like to add to
         the library:'
-      new_note_description_html: <strong>Notes</strong> are for short pieces of text
-        for reference.
-      new_document_description_html: <strong>Documents</strong> allow you to upload
-        files.
+      new_note_description_html: "<strong>Notes</strong> are for short pieces of text
+        for reference."
+      new_document_description_html: "<strong>Documents</strong> allow you to upload
+        files."
   library:
     documents:
       new:
@@ -747,7 +845,7 @@
       new_group_request:
         subject: '[Cyclescape] New Group "%{group_name}" has been requested by "%{user_name}"'
       new_gmr:
-        subject: '[Cyclescape] %{user_name} wants to join %{group_name}'
+        subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
       new_group_thread:
         subject: '[Cyclescape] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
@@ -762,7 +860,7 @@
         subject: '[Cyclescape] New Group "%{group_request_name}" has been not been
           created'
       new_user_confirmed:
-        subject: '[Cyclescape] Welcome to Cyclescape'
+        subject: "[Cyclescape] Welcome to Cyclescape"
       upcoming_issue_deadline:
         subject: '[Cyclescape] Upcoming deadline/date for "%{issue_title}"'
       upcoming_thread_deadline:
@@ -770,10 +868,10 @@
     thread_mailer:
       common:
         subject:
-          one: '[Cyclescape] %{title}'
+          one: "[Cyclescape] %{title}"
           other: 'Re: [Cyclescape] %{title}'
       digest:
-        subject: '[Cyclescape] Digest for %{date}'
+        subject: "[Cyclescape] Digest for %{date}"
   message_thread:
     subscriptions:
       create:
@@ -808,8 +906,8 @@
     edit:
       title: Edit thread properties
       description: As a group administrator, you can fix up thread properties here.
-      thread_fix_warning_html: <strong>Warning:</strong> your group may have a policy
-        about changing thread privacy.
+      thread_fix_warning_html: "<strong>Warning:</strong> your group may have a policy
+        about changing thread privacy."
     destroy:
       failure: Couldn't delete the thread
       success: Thread deleted
@@ -839,7 +937,7 @@
       no_results_found: No results found for '%{query}'.
       results_found:
         one: One result found for '%{query}'.
-        other: '%{count} results found for ''%{query}'''
+        other: "%{count} results found for '%{query}'"
       search: 'Search all threads:'
       search_submit: Search
       title: Thread Search Results
@@ -918,7 +1016,7 @@
       censored: This message has been removed
       create_note: Create Library Note
       create_document: Create Library Document
-      committee: '[Committee]'
+      committee: "[Committee]"
     new:
       compose_new: Compose New
       from_library: From Library
@@ -947,7 +1045,7 @@
       reply_by: Or reply by
   pages:
     changelog:
-      github_history_link_html: <a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>.
+      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
       header: What's new?
       introduction: This is a summary of new features added to the site. You can see
         the full development history on
@@ -967,15 +1065,15 @@
       threads_found:
         zero: No threads found for '%{query}'.
         one: 'One thread found for ''%{query}'':'
-        other: '%{count} threads found for ''%{query}'':'
+        other: "%{count} threads found for '%{query}':"
       issues_found:
         zero: No issues found for '%{query}'.
         one: 'One issue found for ''%{query}'':'
-        other: '%{count} issues found for ''%{query}'':'
+        other: "%{count} issues found for '%{query}':"
       library_items_found:
         zero: No library items found for '%{query}'.
         one: 'One library item found for ''%{query}'':'
-        other: '%{count} library items found for ''%{query}'':'
+        other: "%{count} library items found for '%{query}':"
     edit_map:
       area: area
       clear: clear
@@ -1036,23 +1134,17 @@
         title: All Feedback
         what: What
         when: When
-        when_ago: '%{time_ago} ago'
+        when_ago: "%{time_ago} ago"
         where: Where
         who: Who
       new:
         title: Feedback
       create:
         success: Thank you for your feedback!
-  tags:
-    show:
-      heading: "Things tagged '%{name}'"
-      unrecognised: "Couldn't find the tag '%{name}'"
-      introduction_groupwise_html: "limited to the %{area_of_group_link}:"
-      area_of_group: "area of %{group_name}"
   thread_mailer:
     header:
-      added: '%{name} added %{type} to the thread'
-      committee: ' [Committee]'
+      added: "%{name} added %{type} to the thread"
+      committee: " [Committee]"
     new_deadline_message:
       type: a deadline/date
     new_document_message:
@@ -1182,12 +1274,12 @@
           other: You can add this user to any of the groups shown.
         group_membership_label: 'Groups:'
         is_a_member_of_groups:
-          zero: '%{name} isn''t a member of any groups yet'
-          one: '%{name} is a member of one group'
-          other: '%{name} is a member of %{count} groups'
+          zero: "%{name} isn't a member of any groups yet"
+          one: "%{name} is a member of one group"
+          other: "%{name} is a member of %{count} groups"
         no_groups: None
         no_website: None
-        profile_picture_title: '%{name}''s picture'
+        profile_picture_title: "%{name}'s picture"
         recent_threads: Recent Threads
         reported_issues: Listed Issues
         user_profile: User Profile
@@ -1196,9 +1288,6 @@
         send_private_message: Send private message
       update:
         success: Profile Updated
-  user_locations:
-    category_name: "your %{category_name} location"
-    generic_category_name: "a location where you've expressed interest"
   users:
     private_message_threads:
       new:
@@ -1224,8 +1313,8 @@
           zero: No %{entry_name} found
   views:
     pagination:
-      first: '&laquo; First'
+      first: "&laquo; First"
       last: Last &raquo;
       next: Next &rsaquo;
-      previous: '&lsaquo; Prev'
-      truncate: '&hellip;'
+      previous: "&lsaquo; Prev"
+      truncate: "&hellip;"

@@ -1,5 +1,6 @@
-"en-GB":
+---
+fr-CA:
   decorators:
     thread_list:
-      private_thread_title: '[Private thread]'
+      private_thread_title: "[Private thread]"
       following: Following

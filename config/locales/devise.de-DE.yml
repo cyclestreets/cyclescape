@@ -1,0 +1,43 @@
+---
+de-DE:
+  devise:
+    confirmations:
+      confirmed: Dein Konto wurde erfolgreich bestätigt. Bitte melde Dich an.
+      new:
+        resend_confirmation: Bestätigungsmail erneut schicken
+        resend_confirmation_submit: Bestätigungsmail erneut schicken
+    failure:
+      unconfirmed: Dein Konto wurde noch nicht bestätigt. Bitte prüfe Deine Mails
+        und folge dem Link der dir zugeschickt wurde.
+    passwords:
+      new:
+        forgot_password: Passwort vergessen?
+        send_reset_instuctions: Schicke mir die Anleitung zum Passwortreset zu.
+    registrations:
+      edit:
+        confirm: Bist Du sicher?
+        cancel_account: dein Konto schließen
+        cancel_header: Mein Konto schließen
+        unhappy_with_account_html: Wenn Du mit deinem Konto unglücklich bist, dann
+          kannst Du %{confirm_link}.
+        back: Zurück
+    shared:
+      links:
+        sign_in: Anmelden
+        sign_up: Registrieren
+        forgot_password: Passwort vergessen?
+        no_confirmation_instructions: Bestätigungsmail nicht bekommen?
+        no_unlock_instructions: Entsperrmail nicht bekommen?
+    invitations:
+      edit:
+        title: Bestätige dein Konto
+        info: Du wurdest zu Cyclescape eingeladen, bitte vervollständige die Registrierung
+          deines Kontos inklusive Wahl eines Passwortes um dich Anmelden zu können.
+          Du kannst deinen Namen und Mailadresse so ändern, wie Du sie auf dieser
+          Seite benutzen möchtest.
+        commit_button: Konto bestätigen
+        confirm: Bist Du sicher?
+        cancel_account: dein Konto schließen
+        cancel_header: Mein Konto schließen
+        unhappy_with_account_html: Wenn Du mit deinem Konto unglücklich bist, dann
+          kannst Du %{confirm_link}.

@@ -1,203 +1,223 @@
-# Form fields, labels, hints and placeholders
-
-"cs-CZ":
-  cancel: "Zrušit"
-
+---
+cs-CZ:
+  cancel: Zrušit
   formtastic:
     labels:
+      tags_string: Tags
       group:
-        name: "Název skupiny"
-        short_name: "Subdoména"
-        website: "Webová stránka"
-        default_thread_privacy: "Výchozí viditelnost diskuzí"
+        name: Název skupiny
+        short_name: Subdoména
       group_request:
         name: Jméno
-        short_name: Webová adresa
+        short_name: Navržená webová adresy Cyklisté sobě
         website: Webové stránky
         email: Emailová adresa
-        message: Zpráva
         default_thread_privacy: Výchozí viditelnost
-        submit: "Požádat o vytvoření místní skupiny"
-      group_profile:
-        description: "Popis"
-        joining_instructions: "Instrukce pro nové členy"
-        default_thread_privacy: Počáteční oprávnění pro diskuzní vlákna
       group_membership:
-        role: "Typ členství"
+        role: Typ členství
       group_pref:
-        notify_membership_requests: "Zapnout upozornění na žádosti o členství"
+        notify_membership_requests: Zapnout upozornění na žádosti o členství
       issue:
-        new: &labels_issue_new
-          description: "Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku. Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další stránce budete začít diskusní vlákno o tomto problému."
-          location: "Zvolte oblast"
-          photo: "Přidejte fotografii"
-          tags_string: "Přidejte štítek k vašemu podnětu"
-          title: "Zvolte nadpis vašeho podnětu"
-        create: *labels_issue_new
-        edit: *labels_issue_new
-        update: *labels_issue_new
-        tags_string: "Štítky"
-        all_day: Celý den
-      library_document:
-        file: "Dokument"
-        tags_string: "Štítky"
-        title: "Titulek"
-      library_item:
-        tags_string: "Štítky"
-      library_note:
-        body: "Poznámka"
-        tags_string: "Štítky"
+        new:
+          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
+            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
+            stránce budete začít diskusní vlákno o tomto problému.
+          location: Zvolte oblast
+          photo: Přidejte fotografii
+          tags_string: Přidejte štítek k vašemu podnětu
+          title: Zvolte nadpis vašeho podnětu
+        create:
+          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
+            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
+            stránce budete začít diskusní vlákno o tomto problému.
+          location: Zvolte oblast
+          photo: Přidejte fotografii
+          tags_string: Přidejte štítek k vašemu podnětu
+          title: Zvolte nadpis vašeho podnětu
+        edit:
+          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
+            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
+            stránce budete začít diskusní vlákno o tomto problému.
+          location: Zvolte oblast
+          photo: Přidejte fotografii
+          tags_string: Přidejte štítek k vašemu podnětu
+          title: Zvolte nadpis vašeho podnětu
+        update:
+          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
+            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
+            stránce budete začít diskusní vlákno o tomto problému.
+          location: Zvolte oblast
+          photo: Přidejte fotografii
+          tags_string: Přidejte štítek k vašemu podnětu
+          title: Zvolte nadpis vašeho podnětu
+      library/document:
+        file: Dokument
+      library/item: 
+      library/note:
+        body: Poznámka
       link_message:
-        url: "URL"
-        title: "Titulek"
-        description: "Popis"
-      document_message:
-        file: "Soubor"
-        title: "Titulek"
-      deadline_message:
-        title: "Titulek"
-        all_day: Celý den
-      photo_message:
-        photo: "Fotografie"
-        caption: "Nadpis"
-      street_view_message:
-        caption: "Nadpis"
+        url: URL
       message:
-        body: "Zpráva"
-      message_thread:
-        group: "Skupina"
-        tags_string: "Štítky"
-        title: "Titulek"
-        privacy: "Viditelnost"
-        issue: "Podnět"
+        body: Zpráva
       site_comment:
-        body: "Zpráva"
-        name: "Jméno"
+        body: Zpráva
       thread_subscription:
-        send_email: "Poslat nové zprávy emailem"
+        send_email: Poslat nové zprávy emailem
       user_pref:
-        email_status_id: "Zapnout upozornění pomocí emailu"
-        involve_my_locations: "Záležitosti v mém okolí"
-        involve_my_groups: "Záležitosti mých místních skupin"
-        involve_my_groups_admin: "Taktéž mě zahrňte do všeobecných diskuzí mých místních skupin"
-      user_location:
-        category: "Typ oblasti"
+        email_status_id: Zapnout upozornění pomocí emailu
+        involve_my_locations: Záležitosti v mém okolí
+        involve_my_groups: Záležitosti mých místních skupin
+        involve_my_groups_admin: Taktéž mě zahrňte do všeobecných diskuzí mých místních
+          skupin
       user:
-        new: &labels_user_new
-          bicycle_wheels: Kola na jízdním kole
-          remember_me: "Zapamatovat si mě"
-        create: *labels_user_new
-        edit: &labels_user_edit
-          disabled: "Neaktivní"
-          password: "Nové heslo"
-          password_confirmation: "Potvrzení nového hesla"
-        update: *labels_user_edit
-      user_profile:
-        picture: "Obrázek"
-        remove_picture: "Odstranit obrázek"
-        website: "Webová stránka"
-        about: "O uživateli"
-        visibility: Viditelnost
-      group_membership_request:
-        message: Zpráva
+        edit:
+          password: Nové heslo
+          password_confirmation: Potvrzení nového hesla
+        new:
+          bicycle_wheels: Kola u jízdních kol
     hints:
       user:
-        new: &hints_user_new
-          display_name: "Volitelné - může být přezdívka nebo pseudonym, který bude zobrazen ostatním uživatelům místo plného jména."
-          full_name: "Prosím poskytněte své plné jméno. Pokud požádáte o členství v místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny."
-          bicycle_wheels: "Jako ochranu proti automatickému přihlášení prosím zadejte počet kol na šesti jízdních kolech (číslem)"
+        new:
+          display_name: Volitelné - může být přezdívka nebo pseudonym, který bude
+            zobrazen ostatním uživatelům místo plného jména.
+          full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
+            místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
+          bicycle_wheels: Chcete-li pomoci zastavit automatizované znamení-up zadejte
+            částku (v číslech) kol na šesti kolech
         edit:
-          password: "Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo."
-          current_password: "Prosím potvrďte vaše stávající heslo, abyste mohli udělat změny na této stránce."
-          <<: *hints_user_new
+          password: Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo.
+          current_password: Prosím potvrďte vaše stávající heslo, abyste mohli udělat
+            změny na této stránce.
+          display_name: Volitelné - může být přezdívka nebo pseudonym, který bude
+            zobrazen ostatním uživatelům místo plného jména.
+          full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
+            místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
+          bicycle_wheels: Chcete-li pomoci zastavit automatizované znamení-up zadejte
+            částku (v číslech) kol na šesti kolech
       group:
-        short_name: "Musí být malé alfanumerické znaky; a-z, 0-9"
+        short_name: Musí být malé alfanumerické znaky; a-z, 0-9
       group_request:
         short_name: Malá písmena nebo číslice
         message: Krátký popis účelu skupiny (slouží jako ochrana proti spamu)
       group_membership:
-        email: "Prosím zadejte jejich email. Pokud se shoduje s emailem existujícího uživatele Cyklisté sobě, bude přímo přidán do skupiny. Jinak mu bude odeslána pozvánka."
-        full_name: "Prosím zadejte jejich jméno, až přijmou pozvánku, tak si ho budou si ho moci změnit."
-        role: "Vyberte, jestli jsou normální členové, nebo správci skupiny."
+        email: Prosím zadejte jejich email. Pokud se shoduje s emailem existujícího
+          uživatele Cyklisté sobě, bude přímo přidán do skupiny. Jinak mu bude odeslána
+          pozvánka.
+        full_name: Prosím zadejte jejich jméno, až přijmou pozvánku, tak si ho budou
+          si ho moci změnit.
+        role: Vyberte, jestli jsou normální členové, nebo správci skupiny.
       group_membership_request:
-        message: "Volitelně můžete poslat správcům skupiny jakékoliv další informace, které uznáte za vhodné, například počet jejích členů."
+        message: Volitelně můžete poslat správcům skupiny jakékoliv další informace,
+          které uznáte za vhodné, například počet jejích členů.
       group_pref:
-        notify_membership_requests: "Upozornění bude zasláno pokaždé, když se nějaký uživatel připojí k této místní skupině"
-        membership_secretary: "Volitelně vyberte správce členství ve skupině, který bude emailem dostávat upozornění na nové žádosti o členství. Pokud zanecháte pole prázdné, tak budou upozornění přicházet na email místní skupiny."
+        notify_membership_requests: Upozornění bude zasláno pokaždé, když se nějaký
+          uživatel připojí k této místní skupině
+        membership_secretary: Volitelně vyberte správce členství ve skupině, který
+          bude emailem dostávat upozornění na nové žádosti o členství. Pokud zanecháte
+          pole prázdné, tak budou upozornění přicházet na email místní skupiny.
       group_profile:
-        joining_instructions: "Instrukce, které jsou ukázány lidem, kteří se chtějí zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné."
-        new_user_email: "Tento text bude odeslán každému novému členovy skupiny, řetězec {{full_name}} bude nahrazen plným jménem uživatele."
-        picture: "Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů"
+        joining_instructions: Instrukce, které jsou ukázány lidem, kteří se chtějí
+          zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné.
+        new_user_email: Tento text bude odeslán každému novému členovy skupiny, řetězec
+          {{full_name}} bude nahrazen plným jménem uživatele.
+        picture: Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů
       issue:
-        new: &hints_issue_new
-          description: "Prosím popište podrobnosti vašeho problému a jaký to má dopad na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně přístupné."
+        new:
+          description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
+            na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
+            přístupné.
+          deadline: "(nepovinné)"
+          external_url: Pokud považujete nějakou další webovou stránku za relevantní,
+            můžete jí přidat zde.
           photo: "(nepovinné)"
-          tags_string: "např. stojan překážka, cyklostezka, údržba"
-          title: "Prosím buďte struční a konkrétní."
-        create: *hints_issue_new
-        edit: *hints_issue_new
-        update: *hints_issue_new
+          tags_string: např. stojan překážka, cyklostezka, údržba
+          title: Prosím buďte struční a konkrétní.
+        create:
+          description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
+            na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
+            přístupné.
+          deadline: "(nepovinné)"
+          external_url: Pokud považujete nějakou další webovou stránku za relevantní,
+            můžete jí přidat zde.
+          photo: "(nepovinné)"
+          tags_string: např. stojan překážka, cyklostezka, údržba
+          title: Prosím buďte struční a konkrétní.
+        edit:
+          description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
+            na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
+            přístupné.
+          deadline: "(nepovinné)"
+          external_url: Pokud považujete nějakou další webovou stránku za relevantní,
+            můžete jí přidat zde.
+          photo: "(nepovinné)"
+          tags_string: např. stojan překážka, cyklostezka, údržba
+          title: Prosím buďte struční a konkrétní.
+        update:
+          description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
+            na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
+            přístupné.
+          deadline: "(nepovinné)"
+          external_url: Pokud považujete nějakou další webovou stránku za relevantní,
+            můžete jí přidat zde.
+          photo: "(nepovinné)"
+          tags_string: např. stojan překážka, cyklostezka, údržba
+          title: Prosím buďte struční a konkrétní.
       message_thread:
-        privacy: "Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno."
-        issue: "Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud k žádným, toto vlákno bude vytvořeno jako všeobecná diskuze."
+        privacy: Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno.
+        issue: Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud
+          k žádným, toto vlákno bude vytvořeno jako všeobecná diskuze.
     placeholders:
       issue:
-        external_url: http://www.napriklad.cz
+        external_url: http://www.example.com
       group_membership_request:
         message: Prosím přidejte mě do místní skupiny Cyklisté sobě.
       group_profile:
-        new_user_email: "Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny Cyklisté sobě na portálu http://www.cyklistesobe.cz"
+        new_user_email: Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny
+          Cyklisté sobě na portálu http://www.cyklistesobe.cz
     actions:
-      create: "Vytvořit %{model}"
-      update: "Uložit"
-      saving: "Ukládám\u2026"
-      update_tags: "Upravit štítky"
-      cancel: "Zrušit"
+      update: Uložit
+      saving: Ukládám…
+      cancel: Zrušit
+      update_tags: Upravit štítky
       deadline_message:
-        create: "Vložit termín"
+        create: Vložit termín
       document_message:
-        create: "Vložit přílohu"
-      group:
-        create: "Vytvořit skupinu"
-      group_membership_request:
-          create: "Požádat o členství ve skupině"
+        create: Vložit přílohu
       group_membership:
-        create: "Pozvat člena"
+        create: Pozvat člena
       group_request:
         update: Odmítnout požadavek na zřízení skupiny
       group_membership_request:
-        create: "Požadavek na zřízení skupiny"
+        create: Požadavek na zřízení skupiny
       issue:
-        create: "Odeslat podnět"
-        update: "Uložit podnět"
-      library_item:
+        create: Odeslat podnět
+        update: Uložit podnět
       library_item_message:
-        create: "Přidat položku knihovny"
+        create: Přidat položku knihovny
       library/document:
-        create: "Nahrát"
-        document_from_message: "Přidat do knihovny"
+        create: Nahrát
+        document_from_message: Přidat do knihovny
       library/note:
-        create: "Vytvořit poznámku"
-        attach_to_document: "Přiložit poznámku"
+        create: Vytvořit poznámku
+        attach_to_document: Přiložit poznámku
       link_message:
-        create: "Přidat odkaz"
+        create: Přidat odkaz
       message:
-        create: "Odeslat zprávu"
+        create: Odeslat zprávu
       photo_message:
-        create: "Přidat fotografii"
+        create: Přidat fotografii
       site_comment:
-        create: "Zaslat zpětnou vazbu"
-      street_view_message:
-        create: "Přidat Street view"
+        create: Zaslat zpětnou vazbu
       user:
-        create: "Registrovat se"
-        update: "Upravit účet"
+        create: Registrovat se
+        update: Upravit účet
       user_location:
-        create: "Uložit tuto oblast"
+        create: Uložit tuto oblast
       user_profile:
-        create: "Uložit"
+        create: Uložit
       user_thread_priority:
-        create: "Uložit"
+        create: Uložit
       thread_subscription:
-        create: "Sledovat toto vlákno"
-        delete: "Přestat sledovat toto vlákno"
+        create: Sledovat toto vlákno
+        delete: Přestat sledovat toto vlákno
+        delete_from_listing: Přestat sledovat

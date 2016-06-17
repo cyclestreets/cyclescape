@@ -1,33 +1,38 @@
 [main]
 host = https://www.transifex.com
 
+[cyclescape.activerecord]
+file_filter = config/locales/activerecord.<lang>.yml
+source_file = config/locales/activerecord.en-GB.yml.normal
+source_lang = en-GB
+type = YAML
+
 [cyclescape.decorators]
 file_filter = config/locales/decorators.<lang>.yml
-source_file = config/locales/decorators.en-GB.yml
+source_file = config/locales/decorators.en-GB.yml.normal
 source_lang = en-GB
 type = YAML
 
 [cyclescape.forms]
 file_filter = config/locales/forms.<lang>.yml
-source_file = config/locales/forms.en-GB.yml
+source_file = config/locales/forms.en-GB.yml.normal
 source_lang = en-GB
 type = YAML
 
 [cyclescape.devise]
 file_filter = config/locales/devise.<lang>.yml
-source_file = config/locales/devise.en-GB.yml
+source_file = config/locales/devise.en-GB.yml.normal
 source_lang = en-GB
 type = YAML
 
 [cyclescape.devise_invitable]
 file_filter = config/locales/devise_invitable.<lang>.yml
-source_file = config/locales/devise_invitable.en-GB.yml
+source_file = config/locales/devise_invitable.en-GB.yml.normal
 source_lang = en-GB
 type = YAML
 
 [cyclescape.main]
-source_file = config/locales/en-GB.yml
+file_filter = config/locales/<lang>.yml
+source_file = config/locales/en-GB.yml.normal
 source_lang = en-GB
-trans.cs-CZ = config/locales/cs-CZ.yml
-trans.de-DE = config/locales/de-DE.yml
 type = YAML
