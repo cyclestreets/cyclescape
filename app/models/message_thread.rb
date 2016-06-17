@@ -45,9 +45,9 @@ class MessageThread < ActiveRecord::Base
   ALLOWED_PRIVACY = ALL_ALLOWED_PRIVACY - %w(private)
   NON_COMMITTEE_ALLOWED_PRIVACY = ALL_ALLOWED_PRIVACY - %w(private committee)
 
-  belongs_to :created_by, class_name: 'User'
+  belongs_to :created_by, -> { with_deleted }, class_name: 'User'
   belongs_to :group, inverse_of: :threads, counter_cache: true
-  belongs_to :issue
+  belongs_to :issue, inverse_of: :threads
   belongs_to :user, inverse_of: :private_threads
   has_many :messages, -> { order('created_at ASC') }, foreign_key: 'thread_id', autosave: true, inverse_of: :thread
   has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: 'ThreadSubscription', foreign_key: 'thread_id', inverse_of: :thread
