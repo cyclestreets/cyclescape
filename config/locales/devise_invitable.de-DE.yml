@@ -2,10 +2,10 @@
 de-DE:
   devise:
     invitations:
-      send_instructions: An invitation email has been sent to %{email}.
-      invitation_token_invalid: The invitation token provided is not valid!
-      updated: Your password was set successfully. You are now signed in.
-      no_invitations_remaining: No invitations remaining
+      send_instructions: Eine Einladungsmail wurde an %{email} verschickt.
+      invitation_token_invalid: Das beigebrachte Einladungstoken ist nicht gültig!
+      updated: Dein Passwort wurde erfolgreich gesetzt. Du bist jetzt registriert.
+      no_invitations_remaining: Keine verbliebenen Einladungen
     mailer:
       invitation_instructions:
-        subject: Invitation instructions
+        subject: Erläuterungen zur Einladung

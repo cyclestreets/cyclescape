@@ -9,10 +9,10 @@ de-DE:
         short_name: Subdomain
       group_request:
         name: Name der Gruppe
-        short_name: The proposed Cyclescape web address
-        website: Your organisation's main website
-        email: Your organisation's main e-mail address
-        default_thread_privacy: Default privacy for discussion threads
+        short_name: Die vorgeschlagene Cyclescape Web-Adresse
+        website: Hauptwebseite Deiner Organisation
+        email: Hauptmailadresse Deiner Organisation
+        default_thread_privacy: Voreingestellte Privatsphäre für Diskussionen
       group_membership:
         role: Art der Mitgliedschaft
       group_pref:
@@ -67,41 +67,42 @@ de-DE:
           password: Neues Passwort
           password_confirmation: Neue Passwort Bestätigung
         new:
-          bicycle_wheels: Bicycle Wheels
+          bicycle_wheels: Laufräder
     hints:
       user:
         new:
-          display_name: If you set a display name, it will be shown to people who
-            cannot see your profile (otherwise it will appear as 'anonymous').
-          full_name: Please enter your full name. It will be shown to all the people
-            who can see your profile.
-          bicycle_wheels: To help stop automated sign-ups please enter the amount
-            (in numbers) of wheels on six bicycles
+          display_name: Wenn Du ein Pseudonym wählst wird es allen Personen angezeigt,
+            die dein Profile nicht sehen können (andernfalls wird 'anonym' angezeigt)
+          full_name: Bitte gib deinen vollen Namen an. Er wird allen Personen angezeigt,
+            die dein Profil sehen können.
+          bicycle_wheels: Gib die Anzahl (in Ziffern) der Laufräder an sechs Fahrrädern
+            an, um die Verhinderung automatisierter Anmeldungen zu unterstützen.
         edit:
           password: Lasse dies frei, um Dein aktuelles Passwort zu behalten.
           current_password: Bitte bestätige Dein aktuelles Passwort, um Änderungen
             auf dieser Seite durchzuführen.
-          display_name: If you set a display name, it will be shown to people who
-            cannot see your profile (otherwise it will appear as 'anonymous').
-          full_name: Please enter your full name. It will be shown to all the people
-            who can see your profile.
-          bicycle_wheels: To help stop automated sign-ups please enter the amount
-            (in numbers) of wheels on six bicycles
+          display_name: Wenn Du ein Pseudonym wählst wird es allen Personen angezeigt,
+            die dein Profile nicht sehen können (andernfalls wird 'anonym' angezeigt)
+          full_name: Bitte gib deinen vollen Namen an. Er wird allen Personen angezeigt,
+            die dein Profil sehen können.
+          bicycle_wheels: Gib die Anzahl (in Ziffern) der Laufräder an sechs Fahrrädern
+            an, um die Verhinderung automatisierter Anmeldungen zu unterstützen.
       group:
         short_name: Dürfen nur alphanumerische Kleinbuchstaben sein ; a-z, 0-9
       group_request:
-        short_name: Must be lower-case or numbers
-        message: A short message to explain the group (helps us stop spam requests)
+        short_name: Nur Kleinbuchstaben oder Ziffern
+        message: Eine kurze Nachricht zur Erläuterung der Gruppe (hilft uns SPAM Anfragen
+          auszusortieren)
       group_membership:
-        email: Please enter their email. If this matches an existing Cyclescape account
-          they will be added to the group immediately. Otherwise an invitation to
-          join Cyclescape will be sent to this address.
+        email: Bitte gib die Mailadresse ein. Fall sie einem bestehenden Cyclescape
+          Konto entspricht wird dieses sofort zur Gruppe hinzugefügt. Andernfalls
+          wird eine Einladung an Cyclescape teilzunehmen an die Adresse verschickt.
         full_name: Bitte gib ihren Namen ein; sie können es ändern, wenn sie die Einladung
           akzeptiert haben.
-        role: Wähle, ob sie normale oder Komitee-Mitglieder der Gruppe sind.
+        role: Wähle, ob sie normales oder Ausschussmitglied der Gruppe sind.
       group_membership_request:
-        message: You can optionally send the group administrators any additional information
-          you feel is appropriate, such as a group membership number.
+        message: Optional kannst Du den Gruppenadministratoren zusätzliche Informationen,
+          die Du für passend hälst, zukommen lassen. Beispielsweise deine Mitgliedsnummer.
       group_pref:
         notify_membership_requests: Eine Benarichtigung wird versandt, wenn ein Cyclescape-Mitglied
           dieser Gruppe beitreten möchte.
@@ -114,17 +115,17 @@ de-DE:
           Beispiel Leute zuerst anweisen, für die Mitgliedschaft an anderer Stelle
           zu zahlen, oder Du bist glücklich über alle und jeden, der deiner Gruppe
           beitreten möchte. Du kannst das unausgefüllt lassen.
-        new_user_email: This will be emailed to every new member, {{full_name}} will
-          be converted to the person's full name in the email
-        picture: To be displayed on the group page, ideally 333x192 pixels
+        new_user_email: Folgendes wird an alle Mitglieder verschickt, {{full_name}}
+          wird in der Mail durch den vollständigen Namen der Person ersetzt
+        picture: Wird auf der Gruppenseite angezeigt, idealerweise 333x192 Pixel
       issue:
         new:
           description: Bitte erkläre Details über das Problem und welchen Effekt es
             auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
-            sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema
-            zu starten.
+            sind. Auf der nächsten Seite wirst Du eine Diskussion zu diesem Thema
+            beginnen.
           deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
           photo: optional
           tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
@@ -134,27 +135,27 @@ de-DE:
             sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema
             zu starten.
           deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
           photo: optional
           tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
         edit:
           description: Bitte erkläre Details über das Problem und welchen Effekt es
             auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
-            sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema
-            zu starten.
+            sind. Auf der nächsten Seite wirst Du eine Diskussion zu diesem Thema
+            beginnen.
           deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
           photo: optional
           tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
         update:
           description: Bitte erkläre Details über das Problem und welchen Effekt es
             auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
-            sind. Auf der nächsten Seite finden Sie eine Diskussion zu diesem Thema
-            zu starten.
+            sind. Auf der nächsten Seite wirst Du eine Diskussion zu diesem Thema
+            beginnen.
           deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
           photo: optional
           tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
@@ -166,10 +167,10 @@ de-DE:
       issue:
         external_url: http://www.example.com
       group_membership_request:
-        message: Please add me to the Cyclescape group.
+        message: Bitte nimm mich in die Cyclescape-Gruppe auf.
       group_profile:
-        new_user_email: Hello {{full_name}}, you have been added to a Cyclescape group
-          http://www.cyclescape.org
+        new_user_email: Hallo {{full_name}}, Du wurdest in eine Cyclescape-Gruppe
+          aufgenommen http://www.cyclescape.org
     actions:
       update: Speichern
       saving: Speichere…
@@ -182,16 +183,16 @@ de-DE:
       group_membership:
         create: Mitglied einladen
       group_request:
-        update: Reject Group Request
+        update: Gruppenantrag ablehnen
       group_membership_request:
-        create: Request Group Membership
+        create: Gruppenmitgliedschaft beantragen
       issue:
         create: Bericht senden
         update: Bericht speichern
       library_item_message:
         create: Sammlungseintrag hinzufügen
       library/document:
-        create: Upload
+        create: hochladen
         document_from_message: Zur Sammlung hinzufügen
       library/note:
         create: Notiz erstellen
@@ -215,5 +216,5 @@ de-DE:
         create: Speichern
       thread_subscription:
         create: Dieser Diskussion folgen
-        delete: Dieser Diskussion nicht mher folgen
-        delete_from_listing: Unfollow
+        delete: Dieser Diskussion nicht mehr folgen
+        delete_from_listing: Folgen beenden

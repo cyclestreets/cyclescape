@@ -9,7 +9,7 @@ cs-CZ:
         short_name: Subdoména
       group_request:
         name: Jméno
-        short_name: The proposed Cyclescape web address
+        short_name: Navržená webová adresy Cyklisté sobě
         website: Webové stránky
         email: Emailová adresa
         default_thread_privacy: Výchozí viditelnost
@@ -51,10 +51,10 @@ cs-CZ:
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
       library/document:
-        file: Document
+        file: Dokument
       library/item: 
       library/note:
-        body: Note
+        body: Poznámka
       link_message:
         url: URL
       message:
@@ -74,7 +74,7 @@ cs-CZ:
           password: Nové heslo
           password_confirmation: Potvrzení nového hesla
         new:
-          bicycle_wheels: Bicycle Wheels
+          bicycle_wheels: Kola u jízdních kol
     hints:
       user:
         new:
@@ -126,8 +126,9 @@ cs-CZ:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          deadline: "(nepovinné)"
+          external_url: Pokud považujete nějakou další webovou stránku za relevantní,
+            můžete jí přidat zde.
           photo: "(nepovinné)"
           tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
@@ -135,8 +136,9 @@ cs-CZ:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          deadline: "(nepovinné)"
+          external_url: Pokud považujete nějakou další webovou stránku za relevantní,
+            můžete jí přidat zde.
           photo: "(nepovinné)"
           tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
@@ -144,8 +146,9 @@ cs-CZ:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          deadline: "(nepovinné)"
+          external_url: Pokud považujete nějakou další webovou stránku za relevantní,
+            můžete jí přidat zde.
           photo: "(nepovinné)"
           tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
@@ -153,8 +156,9 @@ cs-CZ:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: "(optional)"
-          external_url: If another web page is relevant you can add it here.
+          deadline: "(nepovinné)"
+          external_url: Pokud považujete nějakou další webovou stránku za relevantní,
+            můžete jí přidat zde.
           photo: "(nepovinné)"
           tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
@@ -216,4 +220,4 @@ cs-CZ:
       thread_subscription:
         create: Sledovat toto vlákno
         delete: Přestat sledovat toto vlákno
-        delete_from_listing: Unfollow
+        delete_from_listing: Přestat sledovat

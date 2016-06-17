@@ -5,7 +5,7 @@ cs-CZ:
       send_instructions: Uvítací email byl odeslán na adresu %{email}.
       invitation_token_invalid: Poskytnutý zvací token není platný!
       updated: Heslo bylo úspěšně nastaveno. Nyní jste přihlášeni.
-      no_invitations_remaining: Žádné další pozvánky
+      no_invitations_remaining: "Žádné další pozvánky"
     mailer:
       invitation_instructions:
         subject: Zvací instrukce

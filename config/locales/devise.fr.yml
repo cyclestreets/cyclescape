@@ -1,0 +1,40 @@
+fr:
+  devise:
+    confirmations:
+      confirmed: Your account was successfully confirmed. Please sign in.
+      new:
+        resend_confirmation: Resend confirmation instructions
+        resend_confirmation_submit: Resend confirmation instructions
+    failure:
+      unconfirmed: Your account has not yet been confirmed. Please check your e-mail
+        and follow the link you will have been sent.
+    passwords:
+      new:
+        forgot_password: Forgot your password?
+        send_reset_instuctions: Send me reset password instructions
+    registrations:
+      edit:
+        confirm: Are you sure?
+        cancel_account: cancel your account
+        cancel_header: Cancel my account
+        unhappy_with_account_html: If you are unhappy with your account, you can %{confirm_link}.
+        back: Back
+    shared:
+      links:
+        sign_in: Sign in
+        sign_up: Sign up
+        forgot_password: Forgot your password?
+        no_confirmation_instructions: Didn't receive confirmation instructions?
+        no_unlock_instructions: Didn't receive unlock instructions?
+    invitations:
+      edit:
+        title: Confirm your account
+        info: You have been invited to join Cyclescape, please complete your account
+          registration including creating a password so that you can login. You can
+          change your name and email address to the one that you prefer to use for
+          this site.
+        commit_button: Confirm account
+        confirm: Are you sure?
+        cancel_account: cancel your account
+        cancel_header: Cancel my account
+        unhappy_with_account_html: If you are unhappy with your account, you can %{confirm_link}.

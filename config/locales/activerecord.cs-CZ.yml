@@ -17,7 +17,7 @@ cs-CZ:
             base:
               disabled: Nemůže být vytvořen zdravotně postižené uživatele
             closed:
-              non_subscriber: can only be changed by a subscriber
+              non_subscriber: může být změněno jiným uživatelem
     attributes:
       issue:
         external_url: Externí stránka

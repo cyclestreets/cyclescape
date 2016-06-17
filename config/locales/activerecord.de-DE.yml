@@ -6,7 +6,7 @@ de-DE:
         issue:
           attributes:
             size:
-              less_than: of the issue is too large.
+              less_than: des Thema ist zu groß.
         user:
           attributes:
             full_name:
@@ -15,13 +15,13 @@ de-DE:
         message_thread:
           attributes:
             base:
-              disabled: Kann nicht durch einen behinderten Benutzer erstellt werden
+              disabled: Kann nicht durch einen gesperrten Benutzer erstellt werden
             closed:
-              non_subscriber: can only be changed by a subscriber
+              non_subscriber: kann nur durch einen Teilnehmer geschlossen werden
     attributes:
       issue:
-        external_url: External site
+        external_url: externe Webseite
       message_thread:
-        group: Owned by
+        group: gehört zu
     models:
-      message_thread: Thread
+      message_thread: Diskussion

@@ -2,7 +2,7 @@
 cs-CZ:
   devise:
     confirmations:
-      confirmed: Váš účet byl úspěšně potvrzen. Nyní jste přihlášen(a).
+      confirmed: Váš účet byl úspěšně potvrzen. Prosím, přihlaste se.
       new:
         resend_confirmation: Znovu odeslat email s potvrzením registrace
         resend_confirmation_submit: Odeslat potvrzení
