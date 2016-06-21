@@ -482,6 +482,7 @@
         it.
     index: &group_requests_index
       <<: *group_membership_requests_index
+      title: Group requests
       name: Requested Name
       review: Review
       actions: Actions
@@ -491,6 +492,7 @@
       no_message: There was no message included with this group request.
     review:
       <<: *group_requests_index
+      title: Review group request
       short_name: Short name
       website: Website
     confirm:
