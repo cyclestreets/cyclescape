@@ -1,0 +1,211 @@
+---
+es-MX:
+  cancel: Cancel
+  formtastic:
+    labels:
+      tags_string: Tags
+      group:
+        name: Name of the group
+        short_name: Subdomain
+      group_request:
+        name: Name of the group
+        short_name: The proposed Cyclescape web address
+        website: Your organisation's main website
+        email: Your organisation's main e-mail address
+        default_thread_privacy: Default privacy for discussion threads
+      group_membership:
+        role: Membership type
+      group_pref:
+        notify_membership_requests: Enable membership request notifications
+      issue:
+        new:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        create:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        edit:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+        update:
+          description: Write a description
+          location: Provide a location
+          photo: Add a photo
+          tags_string: Tag your issue
+          title: Title your report
+      library/document:
+        file: Document
+      library/item: 
+      library/note:
+        body: Note
+      link_message:
+        url: URL
+      message:
+        body: Message
+      site_comment:
+        body: Message
+      thread_subscription:
+        send_email: Email new messages
+      user_pref:
+        email_status_id: Enable email notifications
+        involve_my_locations: Matters near my locations
+        involve_my_groups: My group's matters
+        involve_my_groups_admin: Also involve me in my group's administrative discussions
+      user:
+        edit:
+          password: New Password
+          password_confirmation: New Password Confirmation
+        new:
+          bicycle_wheels: Bicycle Wheels
+    hints:
+      user:
+        new:
+          display_name: If you set a display name, it will be shown to people who
+            cannot see your profile (otherwise it will appear as 'anonymous').
+          full_name: Please enter your full name. It will be shown to all the people
+            who can see your profile.
+          bicycle_wheels: To help stop automated sign-ups please enter the amount
+            (in numbers) of wheels on six bicycles
+        edit:
+          password: Leave this blank to keep your current password.
+          current_password: Please confirm your current password to make changes on
+            this page.
+          display_name: If you set a display name, it will be shown to people who
+            cannot see your profile (otherwise it will appear as 'anonymous').
+          full_name: Please enter your full name. It will be shown to all the people
+            who can see your profile.
+          bicycle_wheels: To help stop automated sign-ups please enter the amount
+            (in numbers) of wheels on six bicycles
+      group:
+        short_name: Must be lower-case alphanumeric; a-z, 0-9
+      group_request:
+        short_name: Must be lower-case or numbers
+        message: A short message to explain the group (helps us stop spam requests)
+      group_membership:
+        email: Please enter their email. If this matches an existing Cyclescape account
+          they will be added to the group immediately. Otherwise an invitation to
+          join Cyclescape will be sent to this address.
+        full_name: Please enter their name; they can change this later.
+        role: Select if they are a normal or committee member of the group.
+      group_membership_request:
+        message: You can optionally send the group administrators any additional information
+          you feel is appropriate, such as a group membership number.
+      group_pref:
+        notify_membership_requests: Notifications will be sent when a Cyclescape user
+          asks to join this group
+        membership_secretary: Choose an optional membership secretary who will receive
+          membership notification emails. Leave blank for notifications to be sent
+          to the group email address.
+      group_profile:
+        joining_instructions: The joining instructions are shown to people who want
+          to join this Cyclescape group. You might want to direct people to pay for
+          membership elsewhere first, for example, or you might be happy for everyone
+          and anyone to join your Cyclescape group. You can leave this blank.
+        new_user_email: This will be emailed to every new member, {{full_name}} will
+          be converted to the person's full name in the email
+        picture: To be displayed on the group page, ideally 333x192 pixels
+      issue:
+        new:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        create:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        edit:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+        update:
+          description: Please give details about the problem and what effect it is
+            having on cycling.  Remember that all issues are publicly viewable. On
+            the next page you will start a discussion thread about this issue.
+          deadline: "(optional)"
+          external_url: If another web page is relevant you can add it here.
+          photo: optional
+          tags_string: e.g. cycle parking, obstruction, roadworks
+          title: Please be brief and specific
+      message_thread:
+        privacy: This specifies who can see and edit this discussion thread.
+        issue: This specifies which issue this discussion thread is attached to. If
+          none, this will be an administrative thread.
+    placeholders:
+      issue:
+        external_url: http://www.example.com
+      group_membership_request:
+        message: Please add me to the Cyclescape group.
+      group_profile:
+        new_user_email: Hello {{full_name}}, you have been added to a Cyclescape group
+          http://www.cyclescape.org
+    actions:
+      update: Save
+      saving: Saving…
+      cancel: Cancel
+      update_tags: Update Tags
+      deadline_message:
+        create: Add Deadline
+      document_message:
+        create: Add Attachment
+      group_membership:
+        create: Add member
+      group_request:
+        update: Reject Group Request
+      group_membership_request:
+        create: Request Group Membership
+      issue:
+        create: Send Report
+        update: Save Report
+      library_item_message:
+        create: Add Library Item
+      library/document:
+        create: Upload
+        document_from_message: Add to Library
+      library/note:
+        create: Create Note
+        attach_to_document: Attach note
+      link_message:
+        create: Add Link
+      message:
+        create: Post Message
+      photo_message:
+        create: Add Photo
+      site_comment:
+        create: Send Feedback
+      user:
+        create: Sign up
+        update: Update Account
+      user_location:
+        create: Save this location
+      user_profile:
+        create: Save
+      user_thread_priority:
+        create: Save
+      thread_subscription:
+        create: Follow this thread
+        delete: Unfollow this thread
+        delete_from_listing: Unfollow

@@ -1,5 +1,5 @@
 ---
-fr-CA:
+es-MX:
   application_name: Cyclescape
   tags:
     show:
@@ -7,9 +7,9 @@ fr-CA:
       unrecognised: Couldn't find the tag '%{name}'
       introduction_groupwise_html: 'limited to the %{area_of_group_link}:'
       area_of_group: area of %{group_name}
-  anon: Anon
-  sign_in: sign in
-  confirm: Are you sure?
+  anon: Anónimo
+  sign_in: ingresar
+  confirm: "¿Estas seguro?"
   possible_spam: We think this message might be spam. If not, please accept our apologies.  It
     is queued to be checked by a moderator.
   not_approved: New threads can only be automatically created by approved users.  It
@@ -32,88 +32,88 @@ fr-CA:
   admin:
     groups:
       index:
-        title: Groups
-        actions: Actions
-        new_group: Create a new group
-        edit: Edit
-        edit_prefs: Edit Prefs
-        edit_profile: Edit Profile
-        group_email: Group Email
-        members: Members
-        name: Group Name
+        title: Grupos
+        actions: Acciones
+        new_group: Crear nuevo grupo
+        edit: Editar
+        edit_prefs: Editar Preferencias
+        edit_profile: Editar Perfil
+        group_email: Correo del Grupo
+        members: Miembros
+        name: Nombre del Grupo
         subdomain: Subdomain
       create:
-        success: Group created
+        success: Groupo creado
       new:
-        title: Add a new group
-        introduction: As a system administrator, you can use this form to create a
-          new group.
+        title: Añadir nuevo grupo
+        introduction: Como administrador de sistemas, puedes usar este formulario
+          para crear nuevos grupos.
       update:
-        success: Group updated
+        success: Groupo actualizado
       edit:
-        edit_group: Edit group
+        edit_group: Editar groupo
     home:
       index:
-        admin_interface: Administrative area
-        admin_interface_introduction: This section contains administrative functions,
-          available to system administrators only.
+        admin_interface: Area Administrativa
+        admin_interface_introduction: Esta sección contiene funciones administrativas,
+          solo disponibles para administradores.
         manage_comments: Manage feedback
-        manage_groups: Manage groups
-        manage_group_requests: Manage group requests
-        manage_issue_categories: Manage Issue Categories
-        manage_users: Manage users
+        manage_groups: Gestionar groupos
+        manage_group_requests: Gestionar peticiones de groupos
+        manage_issue_categories: Gestionar categorias de problemas
+        manage_users: Gestionar usuarios
         manage_message_moderations: Manage message moderations
     issue_categories:
       create:
-        success: Category created
+        success: Categoría creada
       index:
-        title: Issue Categories
+        title: Categorias de Problemas
       update:
-        success: Category updated
+        success: Categoría actualizada
     user:
       locations:
         create:
-          success: Location Created
+          success: Ubicación creada
         edit:
-          title: Edit location for %{user_name}
+          title: Editar ubicación de %{user_name}
         index:
-          all_user_locations: All locations for %{user_name}
-          category: Category
-          combined_locations: Combined Locations
-          combined_locations_guidance: This is the combined location for this user.
-          confirm: Are you sure?
-          delete: Delete
-          edit: Edit
-          map: Map
-          new: New location
-          no_locations_yet: This user has no locations yet.
-          no_locations_guidance: As an administrator, you can add their first location.
-          no_overlapping_groups: No overlapping groups
-          title: User locations for %{user_name}
-          overlapping_groups: Overlapping Groups
+          all_user_locations: Todas las ubicaciones de %{user_name}
+          category: Categoría
+          combined_locations: Ubicaciones Combinadas
+          combined_locations_guidance: Esta es la ubicación combinda de este usuario.
+          confirm: "¿Estas seguro?"
+          delete: Borrar
+          edit: Editar
+          map: Mapa
+          new: Nueva ubicación
+          no_locations_yet: Este usuario todavía no tiene ubicaciones.
+          no_locations_guidance: Como administrador, puedes añadir su primera ubicación.
+          no_overlapping_groups: No hay grupos sobrelapados
+          title: Ubicaciones del usuario %{user_name}
+          overlapping_groups: Groupos sobrelapados
         new:
-          title: New location for %{user_name}
+          title: Nueva ubicación para %{user_name}
         update:
-          success: Location Updated
+          success: Ubicación Actualizada
     users:
       index:
-        created: Created
-        created_at: "%{time_ago} ago"
+        created: Creado
+        created_at: hace %{time_ago}
         last_seen: Last login
-        last_seen_at: "%{time_ago} ago"
-        introduction: This page lists all users on the system (irrespective of any
-          group membership they may have).
-        disabled: Disabled
-        disabled_at: "%{time_ago} ago"
-        display_name: Display Name
-        edit: User details
-        email: Email
-        full_name: Full Name
+        last_seen_at: hace %{time_ago}
+        introduction: Esta pagina muestra todos los usuarios en el sistema (independientemente
+          de las membresias de grupos que tengan).
+        disabled: Desactivado
+        disabled_at: hace %{time_ago}
+        display_name: Nombre Público
+        edit: Detalles del usuario
+        email: Correo electrónico
+        full_name: Nombre completo
         id: id
-        role: Role
-        title: Users
-        preferences: Preferences
-        locations: Locations
+        role: Cargo
+        title: Usuarios
+        preferences: Preferencias
+        locations: Ubicaciones
         website: Website
         about: About
         approved: Approved
@@ -145,154 +145,157 @@ fr-CA:
       edit:
         edit_user: Edit user
   application:
-    account_disabled: Your account has been disabled by an administrator
-    permission_denied: You are not authorised to access that page.
+    account_disabled: Tu cuenta ha sido desactivada por un administrador
+    permission_denied: No estas autorizado para esta pagina.
   planning_applications:
     hide:
-      success: Planning application hidden from overview
-      failure: Could not hide that application
+      success: Aplicacion de planeacion ocultada del resumen
+      failure: No se pudo ocultar esa aplicacion
     index:
-      planning_applications: Planning applications
-      pointer_to_dashboard_html: You can browse planning applications in your area
-        on your %{dashboard_planning_link} page.
-      explanation: You can promote any planning application to an issue so that it
-        is like any other submitted issue.
+      planning_applications: Aplicaciones de planeación
+      pointer_to_dashboard_html: Puedes navegar las aplicaciones de planeación en
+        tu area en la pagina %{dashboard_planning_link}.
+      explanation: Puedes promover cualquier aplicacion de planeación de un problema
+        de tal forma que sea como cualquier otro problema enviado.
     planning_application:
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
+      page_title: Resultados de busqueda para '%{q}'
+      convert_to_issue_html: Convertir a un Problema &hellip;
+      planning_applications: Aplicaciones de planeación
       planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
+      planning_application_search_button: Buscar aplicaciones por Referencia
+      no_results_found: No se encontro ningun resultado
+      your_planning_applications: Tus aplicaciones de planeación
+      hide: Votar para ocultar
+      unhide: Quitar mi voto
+      hide_tooltip: Si suficientes personas votan para ocultar esta aplicación sera
+        ocultada para todos.
+      part_hidden: Parte Oculta
       converted_to_issue: 'Converted to Issue:'
     show:
-      address_label: 'Address:'
-      council_label: 'Council:'
-      data_source: Data source
-      data_from_html: Planning application data is sourced from %{link}
-      location: Location
-      official_application: View on council website
-      official_application_label: 'Official application:'
+      address_label: 'Dirección:'
+      council_label: 'Canciller:'
+      data_source: Fuente de datos
+      data_from_html: Los datos de la aplicación de planeación proviene de %{link}
+      location: Ubicación
+      official_application: Ver en pagina
+      official_application_label: 'Aplicación oficial:'
       planit: PlanIt
-      related_issue: Related issue
-      related_issue_guidance: 'This planning application has been converted to an
-        issue:'
-      uid_label: 'Application reference:'
-      view_official_application: View official application
-      start_date: 'Date application was made:'
-      hidden: Hidden (will not appear in anyones dashboard)
+      related_issue: Problemas relacionados
+      related_issue_guidance: 'Esta aplicación de planeación ha sido convertido a
+        un Problema:'
+      uid_label: 'Referencia de Aplicación:'
+      view_official_application: Ver aplicación oficial
+      start_date: 'Fecha que la aplicación fue realizada:'
+      hidden: Oculto (no aparecerá en la pagina principal de nadie)
       no_location: Exact location not received from council site
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
+      page_title: Resultados de busqueda para '%{q}'
+      convert_to_issue_html: Convertir a un Problema &hellip;
+      planning_applications: Aplicaciones de planeación
       planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
+      planning_application_search_button: Buscar aplicaciones por Referencia
+      no_results_found: No se encontro ningun resultado
+      your_planning_applications: Tus aplicaciones de planeación
+      hide: Votar para ocultar
+      unhide: Quitar mi voto
+      hide_tooltip: Si suficientes personas votan para ocultar esta aplicación sera
+        ocultada para todos.
+      part_hidden: Parte Oculta
       converted_to_issue: 'Converted to Issue:'
     search:
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
+      page_title: Resultados de busqueda para '%{q}'
+      convert_to_issue_html: Convertir a un Problema &hellip;
+      planning_applications: Aplicaciones de planeación
       planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
+      planning_application_search_button: Buscar aplicaciones por Referencia
+      no_results_found: No se encontro ningun resultado
+      your_planning_applications: Tus aplicaciones de planeación
+      hide: Votar para ocultar
+      unhide: Quitar mi voto
+      hide_tooltip: Si suficientes personas votan para ocultar esta aplicación sera
+        ocultada para todos.
+      part_hidden: Parte Oculta
       converted_to_issue: 'Converted to Issue:'
   dashboards:
     show:
-      page_title: Search Results for '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
-      planning_applications: Planning applications
+      page_title: Resultados de busqueda para '%{q}'
+      convert_to_issue_html: Convertir a un Problema &hellip;
+      planning_applications: Aplicaciones de planeación
       planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
-      your_planning_applications: Your local planning applications
-      hide: Vote to hide
-      unhide: Remove my vote
-      hide_tooltip: If enough users vote to hide this application it will be hidden
-        for everyone
-      part_hidden: Part Hidden
-      add_a_new_issue: add a new issue
-      add_another_location: add another location
-      add_some_locations: add some locations
-      areas_you_are_watching: areas you are watching
-      converted_to_issue: 'Converted to Issue:'
-      deadlines: Deadlines and dates
-      deadline_thread_updated: thread updated %{time_ago} ago
-      issues_lower: issues
-      involved_threads: Involved Threads
-      issues_in_your_area: Issues in your area
-      new_group_thread: Start a new group thread
-      my_issues_nearby_introduction_html: Issues in the %{areas_you_are_watching_link}
-        are shown below, most recent first.
+      planning_application_search_button: Buscar aplicaciones por Referencia
+      no_results_found: No se encontro ningun resultado
+      your_planning_applications: Tus aplicaciones de planeación
+      hide: Votar para ocultar
+      unhide: Quitar mi voto
+      hide_tooltip: Si suficientes personas votan para ocultar esta aplicación sera
+        ocultada para todos.
+      part_hidden: Parte Oculta
+      add_a_new_issue: añadir nuevo problema
+      add_another_location: añadir otra ubicación
+      add_some_locations: añadir algunas ubicaciones
+      areas_you_are_watching: areas que estas vigilando
+      converted_to_issue: 'Convertido en un problema:'
+      deadlines: Fin de plazo y fechas
+      deadline_thread_updated: hilo actualizado hace %{time_ago}
+      issues_lower: problemas
+      involved_threads: Hilos Involucrados
+      issues_in_your_area: Problemas en tu area
+      new_group_thread: Iniciar nuevo hilo grupal
+      my_issues_nearby_introduction_html: Problemas en %{areas_you_are_watching_link}
+        se muestran abajo, lo más reciente primero.
       my_issues_nearby_issues_pointer_html: "(You can also %{browse_all_other_issues_link}
         from outside your area(s).)"
-      browse_all_other_issues: browse all other issues
-      my_priorities_introduction: 'This is a listing of the priorities you have set,
-        most important first:'
-      my_threads_introduction: 'Latest updates on the discussion threads you are subscribed
-        to:'
-      my_upcoming_deadline_introduction: 'Upcoming deadlines and dates within the
-        discussion threads you are subscribed to:'
-      no_upcoming_deadline_threads: You aren't involved in any discussion threads
-        with upcoming deadlines or dates.
+      browse_all_other_issues: navegar todos los otros problemas
+      my_priorities_introduction: 'Esta es una lista de todas las prioridades que
+        has establecido, lo más importante primero:'
+      my_threads_introduction: 'Ultimas actualizaciones de los hilos que estas suscrito:'
+      my_upcoming_deadline_introduction: 'Fines de plazo proximos y fechas dentro
+        de los hilos de discusion a los que estas suscrito:'
+      no_upcoming_deadline_threads: No estas suscrito en ningún hilo de discusion
+        con fines de plazo o fechas proximas.
       no_subscribed_threads_html: |
-        You aren't following any threads yet. You could have a look through the %{threads_link} and see if there's anything that you want to help with, or maybe you could %{add_issue_link} instead?
+        Todavía no estas siguiendo ningun hilo. Puedes echar un vistazo
+        a traves de %{threads_link} y ver si hay algo en lo que te gustaría
+        ayudar o puedes añadir %{add_issue_link} ?
       no_prioritised_threads_html: |
-        You haven't prioritised any threads yet. You could have a look through the %{threads_link} and see if there's anything that you think is important, or maybe you could %{add_issue_link} instead?
-      no_issues_nearby_html: There's no issues in your area. You could %{add_issue_link},
-        or %{add_location_link}.
+        Todavía no has priorizado ningun hilo. Puedes echar un vistazo
+        a traves de  %{threads_link} y ver si hay algo que pienses sea
+        importante, o quizas puedes %{add_issue_link} ?
+      no_issues_nearby_html: No hay problemas en tu area. Puedes %{add_issue_link}
+        o %{add_location_link}.
       location:
-        one: location
-        other: locations
-      no_group_threads: None of your groups have any threads yet. You could start
-        a new conversation!
-      no_locations_guidance_html: You haven't set any locations yet! If you %{add_some_locations_link},
-        we will show you the nearby %{things} here.
-      no_planning_applications_nearby_html: There are no planning applications in
-        your area. You could %{add_location_link}.
-      no_user_groups: You aren't a member of any groups yet! When you join some groups,
-        the latest threads will show up here.
-      planning_applications_in_your_area: Planning applications in your %{location}
-      planning_applications_introduction_html: 'These are the most recent planning
-        applications (courtesy of the PlanIt website) in your %{location_link}:'
-      planning_applications_lower: planning applications
-      recent_threads: recent threads
-      subscribed_threads: Subscribed Threads
-      thread_latest_activity: "%{time_ago} ago"
-      group_threads: Group Threads
-      group_threads_desc_html: Recent threads with activity from your groups.
-      my_priorities: My priorities
-      my_threads: My subscribed threads
-      issues_nearby: Latest issues nearby
+        one: ubicación
+        other: ubicaciones
+      no_group_threads: Ninguno de tus grupos tiene hilos; Puedes iniciar una nueva
+        conversación.
+      no_locations_guidance_html: Tadavía no has establecido ninguna ubicación. Si
+        %{add_some_locations_link}, te mostraremos las %{things} ahí.
+      no_planning_applications_nearby_html: No hay aplicaciones de planeacion en tu
+        area. Puedes %{add_location_link}.
+      no_user_groups: Todavía no eres miembro de ningun grupo. Cuando te unas a alguno,
+        los hilos recientes apareceran aquí.
+      planning_applications_in_your_area: aplicaciones de planeación en tu %{location}
+      planning_applications_introduction_html: 'Estas son las aplicaciones de planeación
+        más reciente (cortesía del sitio web PlanIt) en tu %{location_link}:'
+      planning_applications_lower: aplicaciones de planeación
+      recent_threads: hilos recientes
+      subscribed_threads: Hilos Suscritos
+      thread_latest_activity: hace %{time_ago}
+      group_threads: Hilos de Grupo
+      group_threads_desc_html: Hilos recientes con actividad de tus grupos.
+      my_priorities: Mis prioridades
+      my_threads: Mis suscripciones de hilos
+      issues_nearby: Ultimos problemas cercanos
       map: Map
       posted:
-        message_html: "%{creator_link} posted a message"
-        deadline_message_html: "%{creator_link} posted a deadline/date"
-        document_message_html: "%{creator_link} posted an attachment"
-        photo_message_html: "%{creator_link} posted a photo"
-        link_message_html: "%{creator_link} posted a link"
-        street_view_message_html: "%{creator_link} posted a street view"
-        library_item_message_html: "%{creator_link} added a library item"
+        message_html: "%{creator_link} publico un mensaje"
+        deadline_message_html: "%{creator_link} publico un fin de plazo/fecha"
+        document_message_html: "%{creator_link} publico un adjunto"
+        photo_message_html: "%{creator_link} publico una foto"
+        link_message_html: "%{creator_link} publico un enlace"
+        street_view_message_html: "%{creator_link} publico un StreetView"
+        library_item_message_html: "%{creator_link} añadio un articulo de biblioteca"
     search:
-      title: Search Results
+      title: Resultados de Busqueda
   devise:
     registrations:
       edit:

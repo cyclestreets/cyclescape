@@ -5,6 +5,8 @@ cs-CZ:
     show:
       heading: Položky označené jako '%{name}'
       unrecognised: Nemohu najít žádnou položku označenou štítkem '%{name}'
+      introduction_groupwise_html: omezeno na %{area_of_group_link}
+      area_of_group: oblast %{group_name}
   anon: Anonymní
   sign_in: přihlásit
   confirm: Opravdu?
@@ -152,10 +154,10 @@ cs-CZ:
       failure: Nemohu skrýt tuto přihlášku
     index:
       planning_applications: Přihlášky k plánování
-      pointer_to_dashboard_html: You can browse planning applications in your area
-        on your %{dashboard_planning_link} page.
-      explanation: You can promote any planning application to an issue so that it
-        is like any other submitted issue.
+      pointer_to_dashboard_html: Můžete prohlížet přihlášky k plánování ve vaší oblasti
+        na vaší %{dashboard_planning_link}  stránce.
+      explanation: Z libovoné přihlášky k plánování můžete udělat podnět, který bude
+        stejný jako jakýkoliv jiný podaný podnět.
     planning_application:
       page_title: Výsledky vyhledávání pro '%{q}'
       convert_to_issue_html: Převést na podnět &hellip;
@@ -168,7 +170,8 @@ cs-CZ:
       unhide: Odstranit můj hlas
       hide_tooltip: Pokud dostatek uživatelů hlasuje pro skrytí této přihlášky, bude
         skrytá pro všechny
-      part_hidden: Part Hidden
+      part_hidden: "Část skryta"
+      converted_to_issue: 'Převedeno na podnět:'
     show:
       address_label: 'Adresa:'
       council_label: Radnice
@@ -196,7 +199,8 @@ cs-CZ:
       unhide: Odstranit můj hlas
       hide_tooltip: Pokud dostatek uživatelů hlasuje pro skrytí této přihlášky, bude
         skrytá pro všechny
-      part_hidden: Part Hidden
+      part_hidden: "Část skryta"
+      converted_to_issue: 'Převedeno na podnět:'
     search:
       page_title: Výsledky vyhledávání pro '%{q}'
       convert_to_issue_html: Převést na podnět &hellip;
@@ -209,7 +213,8 @@ cs-CZ:
       unhide: Odstranit můj hlas
       hide_tooltip: Pokud dostatek uživatelů hlasuje pro skrytí této přihlášky, bude
         skrytá pro všechny
-      part_hidden: Part Hidden
+      part_hidden: "Část skryta"
+      converted_to_issue: 'Převedeno na podnět:'
   dashboards:
     show:
       page_title: Výsledky vyhledávání pro '%{q}'
@@ -223,14 +228,14 @@ cs-CZ:
       unhide: Odstranit můj hlas
       hide_tooltip: Pokud dostatek uživatelů hlasuje pro skrytí této přihlášky, bude
         skrytá pro všechny
-      part_hidden: Part Hidden
+      part_hidden: "Část skryta"
       add_a_new_issue: přidat nový podnět
       add_another_location: přidat další oblast
       add_some_locations: přidat oblasti
       areas_you_are_watching: oblasti, které sledujete
       converted_to_issue: 'Převedeno na podnět:'
       deadlines: Termíny a data
-      deadline_thread_updated: vlákno upraveno %{at}
+      deadline_thread_updated: vlákno upraveno %{time_ago}
       issues_lower: podněty
       involved_threads: Zahrnutá vlákna
       issues_in_your_area: Podněty ve vaší oblasti
@@ -1310,6 +1315,9 @@ cs-CZ:
         send_private_message: Odeslat soukromou zprávu
       update:
         success: Profil upraven
+  user_locations:
+    category_name: your %{category_name} location
+    generic_category_name: a location where you've expressed interest
   users:
     private_message_threads:
       new:

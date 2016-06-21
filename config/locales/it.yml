@@ -4,6 +4,8 @@ it:
     show:
       heading: Things tagged '%{name}'
       unrecognised: Couldn't find the tag '%{name}'
+      introduction_groupwise_html: 'limited to the %{area_of_group_link}:'
+      area_of_group: area of %{group_name}
   anon: Anon
   sign_in: entra
   confirm: Are you sure?
@@ -167,6 +169,7 @@ it:
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
+      converted_to_issue: 'Converted to Issue:'
     show:
       address_label: 'Address:'
       council_label: 'Council:'
@@ -196,6 +199,7 @@ it:
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
+      converted_to_issue: 'Converted to Issue:'
     search:
       page_title: Search Results for '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
@@ -209,6 +213,7 @@ it:
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
+      converted_to_issue: 'Converted to Issue:'
   dashboards:
     show:
       page_title: Search Results for '%{q}'
@@ -1295,6 +1300,9 @@ it:
         send_private_message: Send private message
       update:
         success: Profilo aggiornato
+  user_locations:
+    category_name: your %{category_name} location
+    generic_category_name: a location where you've expressed interest
   users:
     private_message_threads:
       new:

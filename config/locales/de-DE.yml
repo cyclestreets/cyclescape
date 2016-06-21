@@ -3,23 +3,27 @@ de-DE:
   application_name: Cyclescape
   tags:
     show:
-      heading: Dinge mit %{name}' getaggt
+      heading: Dinge mit '%{name}' getaggt
       unrecognised: Kann den Tag '%{name}' nicht finden
+      introduction_groupwise_html: 'limited to the %{area_of_group_link}:'
+      area_of_group: area of %{group_name}
   anon: Anonym
   sign_in: Anmelden
   confirm: Bist Du sicher?
-  possible_spam: We think this message might be spam. If not, please accept our apologies.  It
-    is queued to be checked by a moderator.
-  not_approved: New threads can only be automatically created by approved users.  It
-    is queued to be checked by a moderator.
+  possible_spam: Wir glauben diese Nachricht könne SPAM sein. Falls nicht, nimm bitte
+    unsere Entschuldigung an. Sie ist in der Warteschlange um von einem Moderator
+    gesichtet zu werden.
+  not_approved: Neue Diskussionen können nur durch bestätigte Benutzer automatisch
+    angelegt werden. Sie wurde zur Sichtung durch einen Moderator auf die Warteschlange
+    gesetzt.
   days_away:
     zero: Heute!
     one: "Übermorgen!"
-    other: "%{count} Tage her"
+    other: noch %{count} Tage
   email_status:
     no_email: Keine Mailadresse
-    email: Email every message
-    digest: Daily email digest
+    email: Maile jede Nachricht
+    digest: tägliche Zusammenfassung per Mail
   deadline_date: Stichtag/Termin
   time:
     formats:
@@ -135,7 +139,7 @@ de-DE:
         preferences: Einstellungen
         locations: Orte
         website: Webseite
-        about: About
+        about: "Über"
         approved: angenommen
         approve: annehmen
       update:
@@ -168,6 +172,7 @@ de-DE:
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
+      converted_to_issue: 'Converted to Issue:'
     show:
       address_label: 'Address:'
       council_label: 'Council:'
@@ -197,6 +202,7 @@ de-DE:
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
+      converted_to_issue: 'Converted to Issue:'
     search:
       page_title: Search Results for '%{q}'
       convert_to_issue_html: In ein Thema umwandeln&hellip;
@@ -210,6 +216,7 @@ de-DE:
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
+      converted_to_issue: 'Converted to Issue:'
   dashboards:
     show:
       page_title: Search Results for '%{q}'
@@ -230,7 +237,7 @@ de-DE:
       areas_you_are_watching: Beobachtete Gebiete
       converted_to_issue: 'Converted to Issue:'
       deadlines: Fälligkeiten und Termine
-      deadline_thread_updated: Diskussion aktualisiert %{at}
+      deadline_thread_updated: Diskussion vor %{time_ago} aktualisiert
       issues_lower: Themen
       involved_threads: Beteiligte Diskussionen
       issues_in_your_area: Themen in deinem Gebiet
@@ -261,7 +268,7 @@ de-DE:
       no_group_threads: Bisher enthält keine deiner Gruppen Diskussionen. Du könntest
         eine neue Konversation beginnen!
       no_locations_guidance_html: Bisher hast Du keine Orte markiert! Wenn Du %{add_some_locations_link}
-        werden wir Dir hier Themen in Deiner Nähe zeigen.
+        werden wir Dir hier %{things} in Deiner Nähe zeigen.
       no_planning_applications_nearby_html: There are no planning applications in
         your area. You could %{add_location_link}.
       no_user_groups: Du bist noch keine Mitglied einer Gruppe! Die neusten Diskussionen
@@ -302,7 +309,7 @@ de-DE:
         sign_in_button: Anmelden
     mailer:
       invitation_instructions:
-        subject: Invitation instructions
+        subject: Einladung zu Cyclescape
         hello: Hallo %{email}
         someone_invited_you: Jemand hat dich zu %{url} eingeladen, du kannst mit untenstehendem
           Link annehmen.
@@ -341,14 +348,14 @@ de-DE:
         committee: Ausschussmitglieder
         committee_guidance: Ausschussmitglieder können die Mitgliederliste verwalten,
           Gruppenprofile ändern und Diskussionen in Gruppen aktualisieren
-        email: E-mail address
-        group_joining_date: Group joining date
+        email: Mailadresse
+        group_joining_date: Beitrittsdatum
         group_members_guidance: Auf dieser Seite siehst Du die Mitglieder deiner Gruppe,
           lade Leute ein und entferne Mitgielder dieser Gruppe.
         member_name: Mietgliedname
         ordinary_members: Ordentliche Mitglieder
         new_members_guidance_introduction: 'Um ein Mitglied hinzuzufügen:'
-        new_members_guidance_method1_html: 'Wenn du seine Email-Adresse kennst, %{invite_directly_link} '
+        new_members_guidance_method1_html: 'Wenn du seine Email-Adresse kennst, %{add_directly_link} '
         new_members_guidance_method2_html: Wenn sie Cyclescape bereits benutzen, klicke
           auf ihren Benutzernamen in einer Disskusion, und füge sie aus ihrem Mitgliederprofil
           heraus hinzu
@@ -367,7 +374,7 @@ de-DE:
         delete: Aus der Gruppe entfernen
         edit: Mitgliedschaft bearbeiten
         joining_date: vor %{time_ago}
-        invite_pending: Invite pending
+        invite_pending: ausstehende Einladung
     memberships:
       new:
         title: Neues Mitglied einladen
@@ -407,10 +414,10 @@ de-DE:
         title: Mitgliedschaft für %{group} bestätigt
         user: Benutzer
         membership_status:
-          confirmed: Confirmed
-          pending: Pending
-          unconfirmed: Unconfirmed
-          rejected: Rejected
+          confirmed: bestätigt
+          pending: offen
+          unconfirmed: unbestätigt
+          rejected: abgelehnt
       new:
         title: Mitgliedsantrag aus %{group_name}
         your_membership_request_will: Dein Mitgliedsantrag wird zur Begutachtung an
@@ -422,25 +429,25 @@ de-DE:
         actioned_by: Actioned By
         are_you_sure: Bist Du sicher?
         by: durch %{name}
-        confirm: Confirm
+        confirm: Bestätigen
         created_at: vor %{time_ago}
         email: Mailadresse
         view_message: View...
-        message: 'The user included this message with their request:'
+        message: 'Der Benutzer hat seinem Beitrittsgesuch folgende Nachricht beigefügt:'
         no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
         full_name: Vollständiger Name
-        reject: Reject
+        reject: Ablehnen
         review: Review
         requested_at: Requested At
         status: Status
         title: Einen Mitgliedsantrag zu %{group} überprüfen
         user: User (display name)
         membership_status:
-          confirmed: Confirmed
-          pending: Pending
-          unconfirmed: Unconfirmed
-          rejected: Rejected
-        no_message: There was no message included with this membership request.
+          confirmed: bestätigt
+          pending: offen
+          unconfirmed: unbestätigt
+          rejected: abgelehnt
+        no_message: Dem Beitrittsgesuch war keine Nachricht beigefügt.
     message_threads:
       destroy:
         failure: Der Diskussionsfaden konnte nicht gelöscht werden
@@ -482,8 +489,8 @@ de-DE:
         description: Beschreibung
         location: Standort
         no_location: Diese Gruppe hat noch keine Details zu Standorten
-        no_picture: Add a picture to make your group welcoming.
-        picture: Picture
+        no_picture: Füge ein Bild hinzu um deine Gruppe einladend zu gestalten.
+        picture: Bild
       update:
         success: Profil aktualisiert
   group_profiles:
@@ -497,10 +504,10 @@ de-DE:
         search from the <a href='%{url}'>national site</a>.
     index:
       list_tab: List
-      map_tab: Map
+      map_tab: Karte
       new_group: Create new group
       send_some_feedback: send some feedback
-      title: Groups directory
+      title: Gruppenübersicht
       group_request: Neue Gruppe beantragen
       no_results_found: No results found
     compact:
@@ -523,7 +530,7 @@ de-DE:
       no_location: Diese Gruppe hat noch keinen Standort
       no_threads: Diese Gruppe hat noch keine öffentlichen Diskussionen
       our_areas: Our Area
-      recent_issues: Recent Issues In Our Area
+      recent_issues: Aktuelle Themen in deinem Gebiet
       recent_threads: Unsere neuesten Diskussionen
       view_membership_requests:
         zero: Mitgliedsanträge begutachten
@@ -1302,6 +1309,9 @@ de-DE:
         send_private_message: Send private message
       update:
         success: Profil aktualisiert
+  user_locations:
+    category_name: your %{category_name} location
+    generic_category_name: a location where you've expressed interest
   users:
     private_message_threads:
       new:
