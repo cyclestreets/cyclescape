@@ -152,7 +152,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :tags, only: [:show] do
+  resources :tags, only: [:show, :index] do
     get :autocomplete_tag_name, as: :autocomplete, on: :collection
   end
   resource :home, only: [:show], controller: 'home'

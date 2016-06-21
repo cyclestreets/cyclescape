@@ -185,7 +185,7 @@ authorization do
     has_permission_on :pages, to: :show
     has_permission_on :api_v1_issues, to: :index
     has_permission_on :site_comments, to: [:new, :create]
-    has_permission_on :tags, to: [:show, :autocomplete_tag_name]
+    has_permission_on :tags, to: [:show, :autocomplete_tag_name, :index]
     has_permission_on :user_profiles, to: :view
   end
 end

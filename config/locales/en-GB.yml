@@ -654,6 +654,8 @@
       loading: Please wait…
       threads: Discussion threads
       threads_tooltip: Discussions on each issue
+      tags: Tags
+      tags_tooltip: Cloud of the top 100 most used tags
       title: Cyclescape
     footer:
       application_version_html: 'Version ref: %{version}'

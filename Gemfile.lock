@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/GovSciences/jqcloud-rails.git
+  revision: 661a1a793a8162c5a45e5c23330cf199573eb150
+  specs:
+    jqcloud-rails (2.0.1)
+      jquery-rails
+
+GIT
   remote: git://github.com/nikolai-b/sunspot.git
   revision: 0f3791d5655d52396e1c2cfad77f96ddc93196b3
   branch: bb_conjunctions
@@ -484,6 +491,7 @@ DEPENDENCIES
   haml-rails
   http_accept_language
   icalendar
+  jqcloud-rails!
   jquery-rails (~> 3.1.0)
   jquery-ui-rails (~> 5.0.0)
   kaminari
