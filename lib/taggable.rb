@@ -61,8 +61,8 @@ module Taggable
   def tags_from_string(val)
     val.
       delete('#!()[]{}').
-      split(/[,; ]+/).
-      map { |str| str.parameterize }.
+      split(/[,]+/).
+      map { |str| str.parameterize.gsub(' ', '-') }.
       uniq.
       delete_if { |str| str == '' }.
       map { |str| Tag.grab(str) }
