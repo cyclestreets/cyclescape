@@ -9,7 +9,7 @@ jQuery ->
 
     constructor: (center, opts) ->
       @domId = opts.domid || 'map'
-      @map = L.map(@domId)
+      @map = L.map(@domId, maxZoom: 18)
       @setCenter(center)
       @geoInput = $("##{opts.geoinput}_loc_json")
       @buildCollistionLayer() if opts.collisions?
