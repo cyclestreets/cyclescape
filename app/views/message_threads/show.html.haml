@@ -53,7 +53,7 @@
       .minimap{id: map_id}
       .hidden
         .map-data{"data-center" => location_to_geojson(@issue.location),
-          "data-opts" => { domid: map_id, hidelayers: true, feature: issue_geojson(@issue), hidezoom: true }.to_json}
+          "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(@issue), hidezoom: true }.to_json}
       = link_to t(".issues-nearby"), '/issues#map-pane', class: "btn-green"
   = render "priority_panel"
   = render "subscribers_panel", group: @thread.group, subscribers: @subscribers

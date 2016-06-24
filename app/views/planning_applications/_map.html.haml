@@ -1,4 +1,4 @@
 %div#map
 .hidden
   .map-data{"data-center" => location_to_geojson(planning_application.location),
-    "data-opts" => { feature: issue_geojson(planning_application) }.to_json}
+    "data-opts" => { feature: item_to_geojson(planning_application) }.to_json}

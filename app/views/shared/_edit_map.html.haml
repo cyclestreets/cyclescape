@@ -43,7 +43,7 @@
             = t ".clear"
   .hidden
     .map-data{"data-center" => location_to_geojson(location),
-      "data-opts" => {search: true, draw: true, collisions: true, feature: issue_geojson(resource),
+      "data-opts" => {search: true, draw: true, collisions: true, feature: item_to_geojson(resource),
       geoinput: resource.class.name.underscore}.to_json}
 
 :javascript

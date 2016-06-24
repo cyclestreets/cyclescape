@@ -2,4 +2,4 @@
 .tinymap{id: map_id, style: "#{planning_application.part_hidden? ? 'height: 100px' : ''}"}}
 .hidden
   .map-data{"data-center" => location_to_geojson(planning_application.location),
-    "data-opts" => { domid: map_id, hidelayers: true, feature: issue_geojson(planning_application), hidezoom: true }.to_json}
+    "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(planning_application), hidezoom: true }.to_json}

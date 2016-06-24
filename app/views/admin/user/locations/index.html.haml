@@ -28,7 +28,7 @@
               .tinymap{id: map_id}
               .hidden
                 .map-data{"data-center" => location_to_geojson(l.location),
-                  "data-opts" => { domid: map_id, feature: issue_geojson(l) }.to_json}
+                  "data-opts" => { domid: map_id, feature: item_to_geojson(l) }.to_json}
             %td= link_to t(".edit"), edit_admin_user_location_path(@user, l)
             %td= link_to t(".delete"), admin_user_location_path(@user, l), data: { confirm: t(".confirm") }, method: "delete"
             %td

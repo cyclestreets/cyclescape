@@ -11,10 +11,10 @@ module MapsHelper
     feature.to_json
   end
 
-  def issue_geojson(decorated_issue)
-    return nil unless decorated_issue.location
+  def item_to_geojson(decorated_item)
+    return nil unless decorated_item.location
     collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(
-      [RGeo::GeoJSON::Feature.new(decorated_issue.location, nil, thumbnail: decorated_issue.try(:medium_icon_path))]
+      [RGeo::GeoJSON::Feature.new(decorated_item.location, nil, thumbnail: decorated_item.try(:medium_icon_path))]
     )
     RGeo::GeoJSON.encode(collection)
   end

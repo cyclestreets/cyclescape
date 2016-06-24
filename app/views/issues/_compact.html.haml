@@ -6,7 +6,7 @@
       .tinymap{id: map_id}
       .hidden
         .map-data{"data-center" => location_to_geojson(issue.location),
-          "data-opts" => { domid: map_id, hidelayers: true, feature: issue_geojson(issue), hidezoom: true }.to_json}
+          "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(issue), hidezoom: true }.to_json}
     .issue-content
       %h3= link_to issue.title, issue
       .meta
