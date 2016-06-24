@@ -76,6 +76,7 @@ class MessageThread < ActiveRecord::Base
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALL_ALLOWED_PRIVACY }
   validate :must_be_created_by_enabled_user, on: :create
+  validate :must_be_public_with_no_group
 
   aasm column: 'status' do
     state :mod_queued, initial: true
@@ -89,12 +90,6 @@ class MessageThread < ActiveRecord::Base
   class << self
     def non_committee_privacies_map
       NON_COMMITTEE_ALLOWED_PRIVACY.map do |n|
-        [I18n.t("thread_privacy_options.#{n}"), n]
-      end
-    end
-
-    def privacies_map
-      ALLOWED_PRIVACY.map do |n|
         [I18n.t("thread_privacy_options.#{n}"), n]
       end
     end
@@ -120,6 +115,16 @@ class MessageThread < ActiveRecord::Base
                 AS m2
                 ON m2.thread_id = message_threads.id")
       rel.order('m2.deadline ASC')
+    end
+  end
+
+  def privacies_map
+    if new_record? || group
+      ALLOWED_PRIVACY.map do |n|
+        [I18n.t("thread_privacy_options.#{n}"), n]
+      end
+    else
+      [I18n.t("thread_privacy_options.public"), 'public']
     end
   end
 
@@ -291,6 +296,11 @@ class MessageThread < ActiveRecord::Base
     errors.add :base, :disabled if created_by.disabled
   end
 
+  def must_be_public_with_no_group
+    return if group
+    errors.add :privacy, :must_be_public unless privacy.in? %w(public private)
+  end
+
   def approve_related
     unless approved?
       ThreadSubscriber.subscribe_users self
@@ -306,5 +316,4 @@ class MessageThread < ActiveRecord::Base
     subscriptions.create( user: created_by )
     subscriptions.create( user: user ) if user
   end
-
 end

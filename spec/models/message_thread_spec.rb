@@ -3,6 +3,7 @@ require 'spec_helper'
 describe MessageThread do
   it_should_behave_like 'a taggable model'
   let(:messages) { thread.reload.messages }
+  let(:group)    { build :group }
 
   describe 'associations' do
     it { is_expected.to belong_to(:created_by) }
@@ -13,6 +14,8 @@ describe MessageThread do
   end
 
   describe 'validations' do
+    subject { described_class.new(group: group) }
+
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:created_by) }
     it { is_expected.to allow_value('public').for(:privacy) }
@@ -64,6 +67,11 @@ describe MessageThread do
       expect(subject).not_to be_public
       subject.privacy = 'public'
       expect(subject).to be_public
+    end
+
+    it 'should be public' do
+      subject.privacy = 'committee'
+      expect(subject.errors_on(:privacy)).to eq(['This must be public unless the thread is owned by a group'])
     end
   end
 

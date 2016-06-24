@@ -14,7 +14,7 @@
             include_blank: false
         = f.input :privacy,
             as: :select,
-            collection: f.object.class.privacies_map,
+            collection: f.object.privacies_map,
             input_html: {"data-autoset" => "#thread_group_id", "data-autoset-param" => "privacy", "data-auto-options" => "#thread_group_id", "data-auto-options-param" => "privacy-options"},
             wrapper_html: {class: "hide", "data-dependent" => "#thread_group_id"}
       = semantic_fields_for @message do |f2|

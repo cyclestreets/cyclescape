@@ -17,6 +17,8 @@
               disabled: Cannot be created by a disabled user
             closed:
               non_subscriber: can only be changed by a subscriber
+            privacy:
+              must_be_public: This must be public unless the thread is owned by a group
     attributes:
       issue:
         external_url: External site
