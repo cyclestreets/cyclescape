@@ -342,9 +342,9 @@ describe Issue do
     end
 
     it 'should be consistent with respect to tag order' do
-      subject.tags_string = "#{tag_with_icon.name} #{tag_with_icon2.name}"
+      subject.tags_string = "#{tag_with_icon.name},#{tag_with_icon2.name}"
       expect(subject.icon_from_tags).to eq(tag_with_icon.icon)
-      subject.tags_string = "#{tag_with_icon2.name} #{tag_with_icon.name}"
+      subject.tags_string = "#{tag_with_icon2.name},#{tag_with_icon.name}"
       expect(subject.icon_from_tags).to eq(tag_with_icon.icon)
     end
   end

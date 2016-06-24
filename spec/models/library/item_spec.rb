@@ -13,7 +13,7 @@ describe Library::Item do
   end
 
   context 'find by tags' do
-    let!(:item) { create(:library_item, tags_string: 'foo bar baz') }
+    let!(:item) { create(:library_item, tags_string: 'foo,bar,baz') }
     let!(:item2) { create(:library_item, tags_string: 'bananas') }
 
     it 'should return both notes' do
