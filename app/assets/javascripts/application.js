@@ -17,14 +17,7 @@
 //= require autocomplete-rails
 //= require knockout
 //= require superbly-tagfield.min
-//= require maps
-//= require map_collisions
 //= require map_display
-//= require map_edit
-//= require map_popup
-//= require map_group_popup
-//= require map_style
-//= require openlayers_pz
 //= require ui
 //= require tags
 //= require library_message
