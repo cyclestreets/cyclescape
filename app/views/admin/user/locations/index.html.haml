@@ -8,9 +8,10 @@
     %section.combined
       %h2= t ".combined_locations"
       %p= t ".combined_locations_guidance"
-      - m = display_bbox_map(@user.buffered_locations, combined_geometry_admin_user_locations_path(@user, :json))
-      %div{id: 'map'}
-      != m.to_html
+      %div#map
+      .hidden
+        .map-data{"data-center" => location_to_geojson(@user.buffered_locations),
+          "data-opts" => { feature: RGeo::GeoJSON.encode(@user.buffered_locations) }.to_json}
     %section.list
       %h2= t ".all_user_locations", user_name: @user.name
       %table

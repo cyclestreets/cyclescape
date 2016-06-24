@@ -1,3 +1,4 @@
-- @map = display_group_bbox_map(@start_location, all_geometries_groups_path(:json)) do |map, page|
-  %div#map
-!= @map.to_html
+%div#map.map.edit
+  .hidden
+    .map-data{"data-center" => location_to_geojson(@start_location),
+      "data-opts" => {search: true, remote: {'Groups' => all_geometries_groups_path(:json)}}.to_json}

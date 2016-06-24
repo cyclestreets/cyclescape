@@ -1,15 +1,4 @@
-.pull-right
-  = check_box_tag('collisions')
-  = label_tag 'collisions', t('.show_collisions')
-
-- m = display_map(issue, geometry_issue_path(issue, :json)) do |map, page|
-  - add_collision_layer(map, page)
-  %div#map
-
-
-!= m.to_html
-
-:javascript
-  $('#collisions').change(function() {
-    map.getLayersByName('Collisions')[0].setVisibility(this.checked);
-  });
+%div#map
+.hidden
+  .map-data{"data-center" => location_to_geojson(issue.location),
+    "data-opts" => { feature: item_to_geojson(issue) }.to_json}

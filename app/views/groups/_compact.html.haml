@@ -1,10 +1,12 @@
 %li
   %article.group
     .map
-      - if (group.profile.location)
-        - m = tiny_display_map(group.profile, geometry_group_profile_path(group, :json), "tinymap") do |map, page, dom_id|
-          %div{id: dom_id, class: "tinymap"}
-        != m.to_html
+      - if (profile = group.profile) && profile.location
+        - map_id = "leaflet-#{dom_id(group)}"
+        .tinymap{id: map_id}
+        .hidden
+          .map-data{"data-center" => location_to_geojson(profile.location),
+            "data-opts" => { domid: map_id, feature: item_to_geojson(profile), hidezoom: true, hidelayers: true }.to_json}
       - else
         %p= t ".no_location"
     .group-content

@@ -1,3 +1,4 @@
-- m = display_map(@group.profile, geometry_group_profile_path(@group, :json)) do |map, page|
-  %div#map
-!= m.to_html
+%div#map
+.hidden
+  .map-data{"data-center" => location_to_geojson(@group.profile.location),
+    "data-opts" => { feature: item_to_geojson(@group.profile) }.to_json}
