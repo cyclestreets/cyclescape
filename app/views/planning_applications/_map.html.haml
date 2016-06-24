@@ -1,3 +1,4 @@
-- m = display_map(planning_application, geometry_planning_application_path(planning_application, :json)) do |map, page|
-  %div#map
-!= m.to_html
+%div#map
+.hidden
+  .map-data{"data-center" => location_to_geojson(planning_application.location),
+    "data-opts" => { feature: issue_geojson(planning_application) }.to_json}

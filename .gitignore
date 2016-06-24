@@ -2,7 +2,7 @@
 .rvmrc
 .rbenv-version
 db/*.sqlite3
-log/*.log*
+log/*
 tmp/
 *.pid
 .sass-cache/
