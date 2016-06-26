@@ -28,7 +28,7 @@ describe DeadlineMessage do
   end
 
   it 'should email about deadlines' do
-    dm = create :deadline_message, deadline: 5.hours.from_now
+    dm = create :deadline_message, deadline: 5.hours.from_now, title: 'Do not miss me!'
     thread = dm.thread
     subscription = create :thread_subscription, thread: thread
     user = subscription.user
@@ -37,8 +37,9 @@ describe DeadlineMessage do
     expect{described_class.email_upcomming_deadlines!}.to change{ all_emails.count }.by(1)
     email = all_emails.last
     expect(email.to).to include(user.email)
-    expect(email.body).to include("upcoming deadline")
-    expect(email.subject).to include("Upcoming deadline")
+    expect(email.body).to include('upcoming deadline')
+    expect(email.body).to include('Do not miss me!')
+    expect(email.subject).to include('Upcoming deadline')
     expect(email.body).to include(dm.deadline.to_formatted_s(:long_ordinal))
   end
 end
