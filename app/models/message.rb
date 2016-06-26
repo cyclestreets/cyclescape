@@ -115,7 +115,7 @@ class Message < ActiveRecord::Base
 
   def in_reply_to_should_belong_to_same_thread
     return unless in_reply_to
-    errors.add :in_reply_to_id, :invalid unless in_reply_to.thread.id == thread.id
+    errors.add :in_reply_to_id, :invalid unless in_reply_to.thread_id == thread_id
   end
 
   def approve_related

@@ -929,7 +929,7 @@
     message_moderations:
       approve: Approve
       approved: approved
-      reject: Reject
+      reject: Discard
       possible_spam: Possible spam
       not_approved: User not approved
       explanation: "These messages are held for moderation.  This can be because they look like potential spam or that the user has not been approved.  If you approve then the message will be sent out and the creator approved."
