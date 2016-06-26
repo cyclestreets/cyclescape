@@ -24,7 +24,9 @@ describe Group do
   describe 'scopes' do
     it 'has ordered scope' do
       group = create :group
-      expect(described_class.ordered).to eq [group]
+      group_with_messages = create :group
+      create :message_thread, group: group_with_messages
+      expect(described_class.ordered).to eq [group_with_messages, group]
     end
   end
 

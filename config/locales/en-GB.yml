@@ -1020,7 +1020,7 @@
     message_moderations:
       approve: Approve
       approved: approved
-      reject: Reject
+      reject: Discard
       possible_spam: Possible spam
       not_approved: User not approved
       explanation: These messages are held for moderation.  This can be because they

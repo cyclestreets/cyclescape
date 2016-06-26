@@ -34,7 +34,7 @@ class Group < ActiveRecord::Base
   after_create :create_default_prefs, unless: :prefs
   before_destroy :unlink_threads
 
-  scope :ordered, -> { order(message_threads_count: :desc) }
+  scope :ordered, -> { order('message_threads_count DESC NULLS LAST') }
 
   normalize_attributes :short_name, with: [:strip, :blank, :downcase]
 
