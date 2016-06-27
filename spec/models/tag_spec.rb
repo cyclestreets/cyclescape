@@ -52,12 +52,18 @@ describe Tag do
     let(:tag1) { create :tag, name: 'tag1' }
     let(:tag2) { create :tag, name: 'tag2' }
     let(:tag3) { create :tag, name: 'tag3' }
-    let!(:library_item) { create :library_item, tags: [tag1, tag3] }
-    let!(:issue) { create :issue, tags: [tag1, tag2] }
-    let!(:thread) { create :message_thread, tags: [tag1, tag2] }
+
+    before do
+      create :library_item, tags: [tag1, tag3]
+      create :issue, tags: [tag1, tag2]
+      create :issue, tags: [tag1]
+      create :message_thread, tags: [tag1, tag2]
+    end
 
     it 'shoud have a top_tags' do
-      expect(described_class.top_tags).to eq([tag1, tag2, tag3])
+      top_tags = described_class.top_tags
+      expect(top_tags).to eq([tag1, tag2, tag3])
+      expect(top_tags.map(&:tag_count)).to eq [4, 2, 1]
     end
   end
 end

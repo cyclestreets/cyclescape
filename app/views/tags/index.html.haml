@@ -1,7 +1,7 @@
 #tagcloud
 
 :javascript
-  $("#tagcloud").jQCloud([ #{@tags.map { |tag| "{text: '#{tag.name}', weight: #{tag.tags_count}, link: '#{tag_path(tag)}' }" }.join(', ')} ], {
+  $("#tagcloud").jQCloud([ #{@tags.map { |tag| "{text: '#{tag.name}', weight: #{tag.tag_count}, link: '#{tag_path(tag)}' }" }.join(', ')} ], {
     width: 960,
     height: 700,
   }

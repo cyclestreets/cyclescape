@@ -32,9 +32,11 @@ class Tag < ActiveRecord::Base
           LEFT OUTER JOIN "library_items" ON "library_items"."id" = "library_item_tags"."library_item_id"
           LEFT OUTER JOIN "issue_tags" ON "issue_tags"."tag_id" = "tags"."id"
           LEFT OUTER JOIN "issues" ON "issues"."id" = "issue_tags"."issue_id" AND "issues"."deleted_at" IS NULL').
-      select(:id, :name, :icon, 'count(message_thread_tags.tag_id) + count(issue_tags.tag_id) + count(library_item_tags.tag_id) AS tags_count').
+      select(:id, :name, :icon,
+             'count(DISTINCT message_threads.id) + count(DISTINCT issues.id) + count(DISTINCT library_items.id)
+               AS tag_count').
       group(:id, :name, :icon).
-      order('tags_count DESC').
+      order('tag_count DESC').
       limit(limit)
   end
 
