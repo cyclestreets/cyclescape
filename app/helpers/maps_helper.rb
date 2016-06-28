@@ -14,7 +14,11 @@ module MapsHelper
   def item_to_geojson(decorated_item)
     return nil unless decorated_item.location
     collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(
-      [RGeo::GeoJSON::Feature.new(decorated_item.location, nil, thumbnail: decorated_item.try(:medium_icon_path))]
+      [RGeo::GeoJSON::Feature.new(decorated_item.location,
+                                  nil,
+                                  thumbnail: decorated_item.try(:medium_icon_path),
+                                  anchor: decorated_item.try(:medium_icon_anchor)
+                                 )]
     )
     RGeo::GeoJSON.encode(collection)
   end
