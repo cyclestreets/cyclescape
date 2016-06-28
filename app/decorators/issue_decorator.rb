@@ -43,6 +43,21 @@ class IssueDecorator < ApplicationDecorator
     h.image_path "map-icons/#{size}-#{icon}.png"
   end
 
+  # The position of the 'tip' of the icon, relative to the top-left corner [w, h].
+  # We could detect this from the images but this is quicker since they are all
+  # the same geometry.
+  def large_icon_anchor
+    [34 / 2, 54]
+  end
+
+  def medium_icon_anchor
+    [30 / 2, 42]
+  end
+
+  def small_icon_anchor
+    [19.to_f / 2, 26]
+  end
+
   def creator_link
     h.t 'issues.compact.created_by_html', creator_link: h.link_to_profile(issue.created_by)
   end

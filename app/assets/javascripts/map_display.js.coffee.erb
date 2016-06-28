@@ -25,7 +25,7 @@ jQuery ->
       @map.removeControl(@map.zoomControl) if opts.hidezoom?
 
     featurePointToLayer: (feature, latlng) =>
-      icon = new L.Icon.Default(iconUrl: feature.properties.thumbnail)
+      icon = new L.Icon(iconUrl: feature.properties.thumbnail, iconAnchor: feature.properties.anchor)
       L.marker(latlng, {icon: icon}).addTo @map
 
     addStaticFeature: (collection) ->
