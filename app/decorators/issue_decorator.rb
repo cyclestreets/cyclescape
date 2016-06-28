@@ -82,7 +82,7 @@ class IssueDecorator < ApplicationDecorator
 
   def standard_photo_url
     if photo
-      photo.thumb('358x200>').url
+      photo.thumb('360x540>').url
     end
   end
 end

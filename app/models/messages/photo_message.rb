@@ -20,11 +20,11 @@ class PhotoMessage < MessageComponent
   validates :photo, presence: true
 
   def photo_medium
-    photo.thumb('600x600>')
+    photo.thumb('740x555>')
   end
 
   def photo_preview
-    photo.thumb('200x200>')
+    photo.thumb('500x375>')
   end
 
   def photo_thumbnail

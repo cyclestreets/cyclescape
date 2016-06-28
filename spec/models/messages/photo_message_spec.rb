@@ -54,8 +54,8 @@ describe PhotoMessage do
 
     it 'should provide a preview size of the photo' do
       expect(subject.photo_preview).to be_truthy
-      expect(subject.photo_preview.width).to eq(182)
-      expect(subject.photo_preview.height).to eq(200)
+      expect(subject.photo_preview.width).to eq(342)
+      expect(subject.photo_preview.height).to eq(375)
     end
   end
 
