@@ -2,9 +2,9 @@ jQuery ->
   # Tabs
   $(".tabs").parent().tabs()
 
-  $(".tabs").parent().on "tabsactivate", (event, ui) ->
-    window.location.hash = ui.newPanel.attr('id')
-    $("html, body").animate({ scrollTop: ($("##{ui.newPanel.attr('id')}").offset().top - 80) }, 0)
+  if history.pushState
+    $(".tabs").parent().on "tabsactivate", (event, ui) ->
+      history.pushState(null, null, "##{ui.newPanel.attr('id')}")
 
   # Crude way to make large blocks .clickable by definiting a.primary-link in them
   $(".clickable").click ->
