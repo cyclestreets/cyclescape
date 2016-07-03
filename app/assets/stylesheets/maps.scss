@@ -112,7 +112,8 @@
             }
           }
           span.icon-undo,
-          span.icon-clear {
+          span.icon-clear,
+          span.icon-save {
             float:left;
             width:30px;
             height:30px;
@@ -124,15 +125,8 @@
           span.icon-clear {
             background-position:4px -825px;
           }
-          span.icon-undo{
-            opacity: 0.3;
-          }
-          &:hover {
-            text-decoration:none;
-            span.icon-undo,
-            span.icon-clear {
-              border:1px solid $grey;
-            }
+          span.icon-save {
+            background-position:42px -825px;
           }
         }
       }
@@ -214,5 +208,13 @@
     color: #ffffff;
     font-style: normal;
     font-weight: bold;
+  }
+}
+
+ul.undo-clear {
+  li {
+    a:hover {
+      border: none !important;
+    }
   }
 }
