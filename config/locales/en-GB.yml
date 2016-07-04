@@ -998,7 +998,6 @@
       point: point
       route: route
       undo: undo
-      save: save
     map_search:
       near: near
       searching: Searching…

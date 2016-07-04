@@ -148,9 +148,11 @@ jQuery ->
       showNewToolbars = ->
         $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
 
-      toggleUndoSave = ->
-        $('.icon-undo').toggle()
-        $('.icon-save').toggle()
+      layerCreated = (layer) =>
+        drawnItems.addLayer layer
+        @geoInput.val JSON.stringify(layer.toGeoJSON())
+        hideNewToolbars()
+        $('.leaflet-draw-edit-edit')[0].click()
 
       $('.icon-save').toggle()
 
@@ -168,19 +170,16 @@ jQuery ->
       }
 
       @map.addControl drawControl
-      @map.on 'draw:created', (e) =>
-        layer = e.layer
-        drawnItems.addLayer layer
-        @geoInput.val JSON.stringify(layer.toGeoJSON())
-        hideNewToolbars()
 
-      @map.on 'draw:edited', (e) =>
-        @geoInput.val JSON.stringify(drawnItems.getLayers()[0].toGeoJSON())
+      @map.on 'draw:created', (e) ->
+        layerCreated(e.layer)
+
+      for evt in ['draw:edited', 'draw:editvertex', 'draw:drawvertex', 'draw:editmove']
+        @map.on evt, (e) ->
+          layerCreated(drawnItems.getLayers()[0])
 
       if feature
-        layer = L.geoJson(feature).getLayers()[0]
-        drawnItems.addLayer layer
-        hideNewToolbars()
+        layerCreated(L.geoJson(feature).getLayers()[0])
       else
         # enable area / polygon draw as standard
         $(".leaflet-draw-draw-polygon")[0].click()
@@ -210,21 +209,11 @@ jQuery ->
 
       # When drawing undo deletes the last point
       # Otherwise undo edits the layer
-      undoSelector = '.leaflet-draw-edit-edit'
       @map.on 'draw:drawstart', (e) ->
         $('.icon-undo').css(opacity: 1)
-        undoSelector = 'ul.leaflet-draw-actions a[title^="Delete"]'
-
-      @map.on 'draw:drawstop', (e) ->
-        undoSelector = '.leaflet-draw-edit-edit'
 
       $('.edit-undo').click ->
-        $(undoSelector)[0].click()
-        toggleUndoSave()
-
-      $('.edit-save').click ->
-        $('.leaflet-draw-actions a[title^="Save"]')[0].click()
-        toggleUndoSave()
+        $('ul.leaflet-draw-actions a[title^="Delete"]')[0].click()
 
   for domMap in $('.map-data')
     new LeafletMap($(domMap).data('center'), $(domMap).data('opts'))
