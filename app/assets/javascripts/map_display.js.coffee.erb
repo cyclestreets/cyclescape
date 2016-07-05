@@ -174,9 +174,8 @@ jQuery ->
       @map.on 'draw:created', (e) ->
         layerCreated(e.layer)
 
-      for evt in ['draw:edited', 'draw:editvertex', 'draw:drawvertex', 'draw:editmove']
-        @map.on evt, (e) ->
-          layerCreated(drawnItems.getLayers()[0])
+      @map.on 'draw:edited draw:editvertex draw:drawvertex draw:editmove', (e) ->
+        layerCreated(drawnItems.getLayers()[0])
 
       if feature
         layerCreated(L.geoJson(feature).getLayers()[0])
