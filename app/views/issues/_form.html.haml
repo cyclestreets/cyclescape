@@ -1,6 +1,6 @@
 = semantic_form_for @issue, html: {class: "guided"} do |f|
   = f.inputs do
-    = f.input :title
+    = f.input :title, maxlenght: 254
     - hint = (f.object.retained_photo ? "#{t('.currently')} #{f.object.photo.name}" : t('formtastic.hints.issue.new.photo'))
     = f.input :photo, as: :file, hint: hint
     = f.input :retained_photo, as: :hidden
