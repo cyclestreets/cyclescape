@@ -6,6 +6,8 @@ jQuery ->
     @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
     @CyclestreetsGeoUrl: "<%= Geocoder::URL %>"
     @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
+    @default_marker_path: "<%= image_path('map-icons/m-misc.png') %>"
+    @default_marker_anchor: [30 / 2, 42]
 
     constructor: (center, opts) ->
       @domId = opts.domid || 'map'
@@ -166,6 +168,12 @@ jQuery ->
         draw: {
           circle: false
           rectangle: false
+          marker: {
+            icon: new L.Icon {
+              iconUrl: @constructor.default_marker_path,
+              iconAnchor: @constructor.default_marker_anchor
+            }
+          }
         }
       }
 
