@@ -17,7 +17,7 @@ describe Issue do
     end
   end
 
-  it { is_expected.to validate_length_of(:title).is_at_most(254) }
+  it { is_expected.to validate_length_of(:title).is_at_most(255) }
 
   describe 'newly created' do
     subject { create(:issue) }
