@@ -1,6 +1,6 @@
 = semantic_form_for @issue, html: {class: "guided"} do |f|
   = f.inputs do
-    = f.input :title, maxlenght: 254
+    = f.input :title
     = f.input :photo, as: :file
     = f.input :retained_photo, as: :hidden
     = f.input :loc_json, as: :hidden

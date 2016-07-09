@@ -56,6 +56,11 @@ describe 'Issues' do
           expect(page).to have_content(issue_values[:title])
         end
       end
+
+      it 'should limit the length of the title input field' do
+        maxlength = find_field('Title')['maxlength']
+        expect(maxlength).to eq("255")
+      end
     end
   end
 
