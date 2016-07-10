@@ -41,7 +41,7 @@ class Issue < ActiveRecord::Base
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults, inverse_of: :issue
   has_and_belongs_to_many :tags, join_table: "issue_tags"
 
-  validates :title, presence: true, length: { maximum: 255 }
+  validates :title, presence: true, length: { maximum: 80 }
   validates :description, presence: true
   validates :location, presence: true
   validates :size, numericality: { less_than: Geo::ISSUE_MAX_AREA }

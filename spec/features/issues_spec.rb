@@ -19,6 +19,8 @@ describe 'Issues' do
         fill_in 'Write a description', with: issue_values[:description]
         # Note hidden map field
         find('#issue_loc_json').set(issue_values[:loc_json])
+        maxlength = find_field('Title')['maxlength']
+        expect(maxlength).to eq("255")
         click_on 'Send Report'
         expect(page).to have_content("New Thread on #{issue_values[:title]}")
         click_on 'Create Thread'
@@ -55,11 +57,6 @@ describe 'Issues' do
         within('#content header') do
           expect(page).to have_content(issue_values[:title])
         end
-      end
-
-      it 'should limit the length of the title input field' do
-        maxlength = find_field('Title')['maxlength']
-        expect(maxlength).to eq("255")
       end
     end
   end
