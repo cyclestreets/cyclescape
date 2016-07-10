@@ -20,7 +20,7 @@ describe 'Issues' do
         # Note hidden map field
         find('#issue_loc_json').set(issue_values[:loc_json])
         maxlength = find_field('Title')['maxlength']
-        expect(maxlength).to eq("255")
+        expect(maxlength).to eq("80")
         click_on 'Send Report'
         expect(page).to have_content("New Thread on #{issue_values[:title]}")
         click_on 'Create Thread'
