@@ -198,7 +198,11 @@
   }
 }
 
-.olFramedCloudPopupContent {
+.leaflet-popup {
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-tip {
+    background: rgba(0, 0, 0, 0.80);
+  }
   img {
     float: left;
     margin: 10px;
@@ -208,7 +212,7 @@
     font-style: italic;
   }
   a {
-    color: #ffffff;
+    color: #ffffff !important;
     font-style: normal;
     font-weight: bold;
   }

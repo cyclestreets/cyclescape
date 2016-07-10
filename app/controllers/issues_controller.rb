@@ -141,6 +141,7 @@ class IssuesController < ApplicationController
                   end
 
     issue.loc_feature(thumbnail: issue.medium_icon_path,
+                      anchor: issue.medium_icon_anchor,
                       image_url: issue.tip_icon_path,
                       title: issue.title,
                       size_ratio: issue.size_ratio(geom),
