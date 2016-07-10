@@ -26,9 +26,11 @@ describe PlanningApplication do
     end
 
     it 'should populate an issue' do
+      subject.description = 'very very long '*10
       subject.save!
       issue = subject.populate_issue
-      expect(issue.title).to include(subject.title)
+      expect(issue.title).to include('very very long')
+      expect(issue.title.length).to eq 80
       expect(issue.description).to include(subject.description)
       expect(issue.location).to eq(subject.location)
       expect(issue.external_url).to eq(subject.url)
