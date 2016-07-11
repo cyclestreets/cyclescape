@@ -6,7 +6,6 @@ module Geo
   NOWHERE_IN_PARTICULAR = RGeo::Geos.factory(has_z_coordinate: true).point(0.1275, 51.5032, 6)
   ISSUE_MAX_AREA = 0.1 # square degrees
 
-  COLLISIONS_API_KEY = 'b7af2f6899b5d784'
   COLLISIONS_URL = 'https://api.cyclestreets.net/v2/collisions.locations'
 end
 

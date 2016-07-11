@@ -28,7 +28,7 @@ L.LayerJSON = L.FeatureGroup.extend({
 		buildPopup: null,			//function popup builder
 		optsPopup: null,			//popup options
 		buildIcon: null,			//function icon builder
-		hashGenerator: null,		//function to generate a unique element per feature
+		hashGenerator: null,		//function to generate a unique element per feature. Takes a data point and a latlng, must return a unique string
 		//
 		minZoom: 10,				//min zoom for call data
 		caching: true,				//enable requests caching
@@ -128,7 +128,7 @@ L.LayerJSON = L.FeatureGroup.extend({
 			L.FeatureGroup.prototype.clearLayers.call(this);
 		return this;
 	},
-	
+
 	_debouncer: function(func, timeout) {
 		var timeoutID;
 		timeout = timeout || 300;
@@ -173,8 +173,13 @@ L.LayerJSON = L.FeatureGroup.extend({
 		return marker;
 	},
 
-	_defaultHashGenerator: function(data, propLoc) {
-		var latlng;
+	_defaultHashGenerator: function(data, latlng) {
+		return [latlng.lat,latlng.lng].join() + this._getPath(data, this.options.propertyTitle);
+  },
+
+	addMarker: function(data) {
+		var latlng, hash, propLoc = this.options.propertyLoc;
+
 		if( L.Util.isArray(propLoc) ) {
 			latlng = L.latLng( parseFloat( this._getPath(data, propLoc[0]) ),
 							   parseFloat( this._getPath(data, propLoc[1]) )  );
@@ -187,13 +192,8 @@ L.LayerJSON = L.FeatureGroup.extend({
 				latlng = L.latLng( this._getPath(data, propLoc) );
 			}
 		}
-		return [latlng.lat,latlng.lng].join() + this._getPath(data, this.options.propertyTitle);
-  },
 
-	addMarker: function(data) {
-		var latlng, hash, propLoc = this.options.propertyLoc;
-
-		hash = this._hashGenerator(data, propLoc);
+		hash = this._hashGenerator(data, latlng);
 
 		if(typeof this._markersCache[hash] === 'undefined')
 			this._markersCache[hash] = this._dataToMarker(data, latlng);
@@ -318,7 +318,7 @@ L.LayerJSON = L.FeatureGroup.extend({
 					else
 						response = eval("("+ request.responseText + ")");
 		    	} catch(err) {
-		    		response = {};		    		
+		    		response = {};
 		    		throw new Error('Ajax response is not JSON');
 		    	}
 		        cb(response);
