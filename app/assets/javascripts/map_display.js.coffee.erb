@@ -213,6 +213,8 @@ jQuery ->
         $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
         @geoInput.val(null)
         $('.icon-undo').css(opacity: 0.3)
+        activeTab = $('.tabs').parent().tabs('option', 'active')
+        $('.tabs a span')[activeTab].click() # Re-activate drawing the current shape
 
       # When drawing undo deletes the last point
       # Otherwise undo edits the layer
