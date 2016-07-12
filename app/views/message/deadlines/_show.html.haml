@@ -1,5 +1,8 @@
-.deadline{id: dom_id(message.component)}
-  - deadline = message.component.formatted_deadline
+- component = message.component
+.deadline{id: dom_id(component)}
+  - deadline = component.formatted_deadline
   %h3= l deadline, format: :long_deadline
   = render partial: "shared/deadline", locals: {deadline: deadline}
-  %p= message.component.title
+  %p= component.title
+  - ical = Base64.encode64(Icalendar::Calendar.new.tap { |ca| ca.add_event(component.to_ical) }.to_ical)
+  %p(style="float: right;")= link_to image_tag("ical.gif"), "data:text/calendar;base64, #{ical}", download: "#{component.title.gsub(' ', '_')}.ics"
