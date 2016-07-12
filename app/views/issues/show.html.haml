@@ -46,6 +46,9 @@
 
   %section.map
     %h2= t ".location"
+    .pull-right
+      = check_box_tag('collisions')
+      = label_tag 'collisions', t('.show_collisions')
     %div{id: 'map'}
     .hidden
       .map-data{"data-center" => location_to_geojson(@issue.location),
@@ -72,3 +75,15 @@
         = @issue.standard_photo_image
   %section.social
     = tweet_button( text: @issue.title )
+
+:javascript
+  $( document ).ready(function() {
+    var mapCollision = $("span:contains('Collisions')").prev();
+    var checkboxCollision = $('#collisions');
+    mapCollision.change(function() {
+      checkboxCollision.prop('checked', this.checked);
+    })
+    checkboxCollision.change(function() {
+      mapCollision.click();
+    })
+  })

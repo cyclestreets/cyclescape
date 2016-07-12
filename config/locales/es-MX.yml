@@ -723,7 +723,6 @@ es-MX:
       location: Location
       deadline: Deadline
       issues-nearby: Issues nearby
-    map:
       show_collisions: Show Collisions
     update:
       success: Issue updated
