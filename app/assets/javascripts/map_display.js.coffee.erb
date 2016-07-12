@@ -40,7 +40,7 @@ jQuery ->
       remoteLayer = L.geoJson(null, {
         pointToLayer: @featurePointToLayer.bind(@)
         fillOpacity: 0.1
-        stroke: 'black'
+        fillColor: 'white'
         onEachFeature: (feature, layer) ->
           img = if feature.properties.image_url
             "<img src='#{feature.properties.image_url}' width='37' height='37'>"
