@@ -217,3 +217,10 @@
     font-weight: bold;
   }
 }
+
+.leaflet-control-search input.search-input {
+    width: 240px;
+    padding: 7px;
+    border: 1px solid #ddd;
+    box-shadow: 3px 3px 5px 0px #aaa;
+}
