@@ -87,10 +87,14 @@ jQuery ->
         {name: 'bbox', value: bbox},
         {name: 'geometries', value: 1}
       ]
+      jsonpTransportRequired = ->
+        navigator.appVersion.indexOf('MSIE') != -1 &&
+          parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
+
       $.ajax(
         url: @constructor.CyclestreetsGeoUrl
         data: params
-        dataType: 'jsonp'
+        dataType: 'jsonp' if jsonpTransportRequired()
         timeout: 10000
         success: callback
       )
