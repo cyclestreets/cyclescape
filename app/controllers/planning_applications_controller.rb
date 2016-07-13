@@ -17,7 +17,7 @@ class PlanningApplicationsController < ApplicationController
 
   def search
     @query = params[:q].strip
-    planning_applications = PlanningApplication.where("uid LIKE ?", "%#{@query}%").page params[:page]
+    planning_applications = PlanningApplication.where("uid ILIKE ?", "%#{@query}%").page params[:page]
     @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications
   end
 
