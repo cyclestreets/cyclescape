@@ -13,7 +13,9 @@ class UserPrefObserver < ActiveRecord::Observer
       else
         user.groups.each do |group|
           group.threads.without_issue.each do |thread|
-            user.thread_subscriptions.to(thread).destroy if user.subscribed_to_thread?(thread)
+            if subscription = user.subscribed_to_thread?(thread)
+              subscription.destroy
+            end
           end
         end
       end
@@ -34,11 +36,11 @@ class UserPrefObserver < ActiveRecord::Observer
       if pref.involve_my_groups_was == 'subscribe'
         user.groups.each do |group|
           group.threads.with_issue.each do |thread|
-            if user.subscribed_to_thread?(thread)
+            if subscription = user.subscribed_to_thread?(thread)
               unless user.prefs.involve_my_locations == 'subscribe' &&
                      user.buffered_locations &&
                      thread.issue.location.intersects?(user.buffered_locations)
-                user.thread_subscriptions.to(thread).destroy
+                subscription.destroy
               end
             end
           end

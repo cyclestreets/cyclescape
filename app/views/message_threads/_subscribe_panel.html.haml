@@ -1,6 +1,5 @@
 .subscribe
-  - if signed_in? && current_user.subscribed_to_thread?(thread)
-    - subscription = current_user.thread_subscriptions.to(thread)
+  - if signed_in? && subscription = current_user.subscribed_to_thread?(thread)
     %p
       = image_tag("check-checked.png")
       = t(".subscribed")

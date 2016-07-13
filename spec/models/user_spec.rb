@@ -203,8 +203,13 @@ describe User do
     end
 
     context 'subscribed_to_thread?' do
-      it 'should return true if user is subscribed to the thread' do
-        expect(subject.subscribed_to_thread?(thread)).to be_truthy
+      it 'should return true if user is subscribed to the thread (and .to returns the undeleted thread in preference to the deleted one)' do
+        expect(subject.subscribed_to_thread?(thread)).to eq(subject.thread_subscriptions.first)
+
+        subject.thread_subscriptions.each(&:destroy)
+        thread.subscribers << subject
+
+        expect(subject.thread_subscriptions.to(thread).deleted_at).to eq nil
       end
 
       it 'should return false if user is not subscribed' do

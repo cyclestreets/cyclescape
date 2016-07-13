@@ -9,7 +9,7 @@ class MessageThreadsController < ApplicationController
   def show
     set_page_title thread.title
     @issue = IssueDecorator.decorate thread.issue if thread.issue
-    @messages = thread.messages.approved.includes({ created_by: :profile }, :component)
+    @messages = thread.messages.approved.includes(:component, created_by: [:profile, :groups, :requested_groups] )
     @new_message = thread.messages.build
     @library_items = Library::Item.find_by_tags_from(thread).limit(5)
     @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
@@ -25,6 +25,7 @@ class MessageThreadsController < ApplicationController
     else
       @subscribers = thread.subscribers.is_public
     end
+    @subscribers = @subscribers.includes(:groups)
   end
 
   def edit

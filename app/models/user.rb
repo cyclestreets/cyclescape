@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   has_many :locations, class_name: 'UserLocation'
   has_many :thread_subscriptions do
     def to(thread)
-      where('thread_id = ?', thread).first
+      where('thread_id = ?', thread).order(deleted_at: :desc).first
     end
   end
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
