@@ -1,7 +1,8 @@
 %tr{id: planning_application.id}
   %td
-    %div.map
-      = planning_application.tinymap
+    - if planning_application.location
+      %div.map
+        = planning_application.tinymap
   %td.title
     - title_length= planning_application.part_hidden? ? 80 : 150
     %h3{title: planning_application.title}= link_to (truncate planning_application.title, length: title_length, separator: ' '),
