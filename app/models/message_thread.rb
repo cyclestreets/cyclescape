@@ -125,7 +125,9 @@ class MessageThread < ActiveRecord::Base
 
   def display_title
     if closed
-      "(Closed) #{title}"
+      "(#{self.class.human_attribute_name(:closed)}) #{title}"
+    elsif mod_queued?
+      "(#{self.class.human_attribute_name(:moderated)}) #{title}"
     else
       title
     end

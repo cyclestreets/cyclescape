@@ -93,7 +93,11 @@ class MessageThreadsController < ApplicationController
   end
 
   def thread
-    @thread ||= MessageThread.find params[:id]
+    @thread ||= begin
+                  scope = MessageThread.all
+                  scope = scope.approved unless current_user.admin?
+                  scope.find params[:id]
+                end
   end
 
   def permitted_params
