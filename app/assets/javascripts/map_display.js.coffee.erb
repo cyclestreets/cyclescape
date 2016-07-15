@@ -1,8 +1,8 @@
 jQuery ->
   class LeafletMap
-    @OpenCycle: 'https://tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png'
-    @OSStreet: 'https://tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
-    @Mapnik: 'https://tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
+    @OpenCycle: 'https://{s}.tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png'
+    @OSStreet: 'https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
+    @Mapnik: 'https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
     @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
     @CyclestreetsGeoUrl: "<%= Geocoder::URL %>"
     @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
