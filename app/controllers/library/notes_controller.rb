@@ -4,6 +4,7 @@ class Library::NotesController < ApplicationController
 
   def new
     @note = Library::Note.new
+    @start_location = current_user.start_location
   end
 
   def create
@@ -28,6 +29,7 @@ class Library::NotesController < ApplicationController
   end
 
   def edit
+    @start_location = @note.location || current_user.start_location
   end
 
   def update
@@ -51,6 +53,6 @@ class Library::NotesController < ApplicationController
   end
 
   def permitted_params
-    params.require(:library_note).permit :tags_string, :body, :library_document_id
+    params.require(:library_note).permit :tags_string, :body, :library_document_id, :title, :loc_json
   end
 end

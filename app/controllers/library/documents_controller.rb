@@ -3,6 +3,7 @@ class Library::DocumentsController < ApplicationController
 
   def new
     @document = Library::Document.new
+    @start_location = current_user.start_location
   end
 
   def create
@@ -25,6 +26,7 @@ class Library::DocumentsController < ApplicationController
   end
 
   def edit
+    @start_location = @document.location || current_user.start_location
   end
 
   def update
@@ -48,6 +50,6 @@ class Library::DocumentsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:library_document).permit :title, :file, :retained_file, :tags_string
+    params.require(:library_document).permit :title, :file, :retained_file, :tags_string, :loc_json
   end
 end

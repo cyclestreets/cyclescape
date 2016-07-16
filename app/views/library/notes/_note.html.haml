@@ -1,2 +1,7 @@
 %article.note
   = auto_link simple_format note.body
+  - if note.location
+    %div{id: 'map'}
+    .hidden
+      .map-data{"data-center" => location_to_geojson(note.location),
+        "data-opts" => { feature: item_to_geojson(note) }.to_json}

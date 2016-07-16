@@ -17,7 +17,7 @@ $ ->
     return
 
   $("div.tag-form").hide()
-  $('form.edit-tags>fieldset.inputs input,#issue_tags_string').tagsInput({
+  $('form.edit-tags>fieldset.inputs input,[id$="tags_string"]').tagsInput({
     width: 'auto',
     autocomplete_url: '/tags/autocomplete_tag_name',
     removeWithBackspace: false,

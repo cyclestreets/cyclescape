@@ -20,6 +20,7 @@ class Library::Item < ActiveRecord::Base
 
   include FakeDestroy
   include Taggable
+  include Locatable
 
   searchable do
     text :search_text, :id

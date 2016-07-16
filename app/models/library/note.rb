@@ -30,7 +30,7 @@ class Library::Note < Library::Component
   def title
     field = read_attribute(:title)
     if field.blank?
-      body.truncate(120)
+      body.try(:truncate, 120)
     else
       field
     end
@@ -42,11 +42,5 @@ class Library::Note < Library::Component
 
   def searchable_text
     [body, read_attribute(:title)].join(' ')
-  end
-
-  # For authorization rules - doing range detection on TimeWithZones
-  # iterates over every time in the range - integer ranges are optimized.
-  def created_at_as_i
-    created_at.to_i
   end
 end

@@ -126,7 +126,7 @@ authorization do
     has_permission_on :libraries, :library_documents, :library_notes, to: [:index, :new, :create, :show]
     has_permission_on :library_documents, :library_notes do
       to [:edit, :update]
-      if_attribute created_by: is { user }, created_at_as_i: is_in { 60.minutes.ago.to_i..Time.now.to_i }
+      if_attribute created_by: is { user }
     end
 
     has_permission_on :library_tags, to: :update

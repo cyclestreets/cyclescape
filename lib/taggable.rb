@@ -47,6 +47,7 @@ module Taggable
   end
 
   def tags_string=(val)
+    return unless val
     self.tags = tags_from_string(val)
   end
 

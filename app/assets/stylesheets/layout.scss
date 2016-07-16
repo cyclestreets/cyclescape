@@ -227,6 +227,7 @@ body.libraries {
     .description {
       @include column(4, "last");
     }
+    float: none;
   }
 }
 
