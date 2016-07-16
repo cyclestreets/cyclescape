@@ -107,11 +107,15 @@
         privacy: This specifies who can see and edit this discussion thread.
         issue: This specifies which issue this discussion thread is attached to. If
           none, this will be an administrative thread.
+      library/note:
+        url: If another web page is relevant you can add it here.
     placeholders:
       issue:
         external_url: http://www.example.com
       group_membership_request:
         message: Please add me to the Cyclescape group.
+      library/note:
+        url: http://www.example.com
       group_profile:
         new_user_email: Hello {{full_name}}, you have been added to a Cyclescape group
           http://www.cyclescape.org

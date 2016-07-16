@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160604124124) do
+ActiveRecord::Schema.define(version: 20160716160955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,6 +236,7 @@ ActiveRecord::Schema.define(version: 20160604124124) do
     t.integer  "library_document_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "url"
   end
 
   add_index "library_notes", ["library_document_id"], name: "index_library_notes_on_library_document_id", using: :btree

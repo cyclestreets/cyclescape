@@ -15,6 +15,7 @@ class Library::Note < Library::Component
   belongs_to :document, class_name: 'Library::Document', foreign_key: 'library_document_id'
 
   validates :body, presence: true
+  validates :url, url: true
 
   # Set the decl_auth_context explicitly, since decl_auth has problems with
   # attribute checks on namespaced models. See
