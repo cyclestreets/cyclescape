@@ -1,10 +1,9 @@
 %h2
   = t ".forgot_password"
-= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+= semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'devise-form' }) do |f|
   = devise_error_messages!
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email
-  %div= f.submit t(".send_reset_instuctions")
-= render :partial => "devise/shared/links"
+  = f.inputs do
+    = f.input :email
+  = f.actions do
+    = f.action :submit, label: t(".send_reset_instuctions")
+= render partial: "devise/shared/links"

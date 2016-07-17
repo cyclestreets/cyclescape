@@ -203,7 +203,6 @@ form.guided {
   }
 }
 
-
 form#user_new {
   min-height: 225px;
   padding-bottom: 3em;
@@ -215,19 +214,19 @@ form .inputs .map {
   margin-bottom: 25px;
 }
 
-body.devise-sessions {
-  form#new_user {
-    padding: 10px;
-    margin-bottom: 25px;
-    input#user_email,
-    input#user_password {
-      font-size: 20px;
-      color: #603;
-      padding: 8px;
-      width: 350px;
+body.devise-sessions, body.devise-unlocks, body.devise-registrations, body.devise-passwords {
+  form.formtastic {
+    padding: 10px !important;
+    margin-bottom: 25px !important;
+    fieldset > ol > li.stringish input {
+      font-size: 20px !important;
+      color: #603 !important;
+      padding: 8px !important;
+      width: 350px !important;
     }
-    #user_submit_action input {
-      font-size: 24px;
+    .action input {
+      font-size: 18px;
+      padding: 5px;
     }
   }
 }
