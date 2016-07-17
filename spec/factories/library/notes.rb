@@ -20,5 +20,7 @@ FactoryGirl.define do
     end
 
     factory :library_note_with_document, traits: [:with_document]
+
+    after(:create) { |note| note.run_callbacks(:commit)}
   end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Library documents' do
+describe 'Library documents', after_commit: true do
   let(:document) { create(:library_document) }
 
   context 'as a public user' do

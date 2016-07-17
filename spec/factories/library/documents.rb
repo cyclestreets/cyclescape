@@ -23,5 +23,7 @@ FactoryGirl.define do
     factory :word_library_document do
       file { Pathname.new(word_document_path) }
     end
+
+    after(:create) { |doc| doc.run_callbacks(:commit)}
   end
 end

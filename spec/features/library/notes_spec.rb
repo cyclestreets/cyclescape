@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Library notes' do
+describe 'Library notes', after_commit: true do
   let(:note) { create(:library_note) }
 
   context 'as a public user' do
@@ -103,16 +103,6 @@ describe 'Library notes' do
         it 'should show you a link' do
           visit library_note_path(note)
           expect(page).to have_link(edit_text)
-        end
-      end
-
-      context 'long ago' do
-        let(:note) { create(:library_note, created_by: current_user) }
-        it 'should not show you a link' do
-          note.item.update_column(:created_at, 2.days.ago)
-
-          visit library_note_path(note)
-          expect(page).not_to have_link(edit_text)
         end
       end
     end

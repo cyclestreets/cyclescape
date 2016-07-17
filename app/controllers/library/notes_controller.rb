@@ -18,6 +18,7 @@ class Library::NotesController < ApplicationController
         redirect_to library_note_path @note
       end
     else
+      set_location
       render :new
     end
   end
@@ -29,7 +30,7 @@ class Library::NotesController < ApplicationController
   end
 
   def edit
-    @start_location = @note.location || current_user.start_location
+    set_location
   end
 
   def update
@@ -37,6 +38,7 @@ class Library::NotesController < ApplicationController
       set_flash_message :success
       redirect_to library_note_path @note
     else
+      set_location
       render :edit
     end
   end
@@ -47,6 +49,10 @@ class Library::NotesController < ApplicationController
   end
 
   protected
+
+  def set_location
+    @start_location = @note.location || current_user.start_location
+  end
 
   def load_note
     @note = Library::Note.find params[:id]

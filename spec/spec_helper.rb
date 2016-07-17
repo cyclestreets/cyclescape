@@ -90,6 +90,13 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include AbstractController::Translation
   config.include AttributeNormalizer::RSpecMatcher, type: :model
+  config.around(:example) do |example|
+    TestAfterCommit.with_commits(example.metadata[:after_commit]) do
+      example.run
+    end
+  end
+
+  config.order = :random
 end
 
 Shoulda::Matchers.configure do |config|

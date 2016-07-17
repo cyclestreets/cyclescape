@@ -422,6 +422,8 @@ GEM
       sunspot_rails (>= 1.2.1)
     tagsinput-rails (1.3.3.3)
       railties (>= 3.1)
+    test_after_commit (1.1.0)
+      activerecord (>= 3.2)
     thin (1.6.4)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -534,6 +536,7 @@ DEPENDENCIES
   sunspot_solr!
   sunspot_test
   tagsinput-rails
+  test_after_commit
   thin
   thumbs_up (~> 0.4.6)
   tweet-button

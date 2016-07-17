@@ -13,6 +13,7 @@ class Library::DocumentsController < ApplicationController
     if @document.save
       redirect_to library_document_path @document
     else
+      set_location
       render :new
     end
   end
@@ -26,13 +27,14 @@ class Library::DocumentsController < ApplicationController
   end
 
   def edit
-    @start_location = @document.location || current_user.start_location
+    set_location
   end
 
   def update
     if @document.update permitted_params
       redirect_to library_document_path @document
     else
+      set_location
       render :edit
     end
   end
@@ -47,6 +49,10 @@ class Library::DocumentsController < ApplicationController
 
   def load_document
     @document = Library::Document.find params[:id]
+  end
+
+  def set_location
+    @start_location = @document.location || current_user.start_location
   end
 
   def permitted_params
