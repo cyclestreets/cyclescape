@@ -75,11 +75,11 @@ class IssuesController < ApplicationController
 
   def all_geometries
     bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
-    issues = Issue.by_most_recent.limit(50).includes(:created_by)
+    issues = geom_issue_scope.by_most_recent.limit(50).includes(:created_by)
     issues = issues.intersects_not_covered(bbox.to_geometry) if bbox
 
     # TODO refactor this into decorater
-    decorated_issues = issues.order('ST_Area(location) DESC').map { | issue | issue_feature(IssueDecorator.decorate(issue), bbox) }
+    decorated_issues = issues.order_by_size.map { | issue | issue_feature(IssueDecorator.decorate(issue), bbox) }
     collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(decorated_issues)
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection) }
@@ -116,6 +116,10 @@ class IssuesController < ApplicationController
   end
 
   protected
+
+  def geom_issue_scope
+    Issue
+  end
 
   def index_start_location
     if centered_issue = Issue.find_by(id: params[:issue_id])

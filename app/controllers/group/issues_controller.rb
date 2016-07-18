@@ -17,18 +17,9 @@ class Group::IssuesController < IssuesController
     @start_location = index_start_location
   end
 
-  def all_geometries
-    if params[:bbox]
-      bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
-      issues = Issue.intersects(current_group.profile.location).intersects_not_covered(bbox.to_geometry)
-    else
-      issues = Issue.intersects(current_group.profile.location)
-    end
-    issues = issues.by_most_recent.limit(50)
-    factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(issues.includes(:created_by).map { | issue | issue_feature(IssueDecorator.decorate(issue)) })
-    respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(collection) }
-    end
+  private
+
+  def geom_issue_scope
+    Issue.intersects(current_group.profile.location)
   end
 end
