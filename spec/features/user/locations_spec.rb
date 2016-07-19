@@ -18,7 +18,7 @@ describe 'User locations' do
       expect(page).to have_content(I18n.t('.user.locations.new.new_location'))
       select location_category.name, from: 'Category'
       # Note hidden map field
-      find('#user_location_loc_json').set(location_attributes[:loc_json])
+      find('#user_location_loc_json', visible: false).set(location_attributes[:loc_json])
       click_on I18n.t('.formtastic.actions.user_location.create')
 
       expect(page).to have_content('Location Created')
@@ -55,7 +55,7 @@ describe 'User locations' do
         click_on 'Edit' # hmm, edit the right one?
 
         expect(page).to have_content('Edit Location')
-        find('#user_location_loc_json').set(location_attributes[:loc_json])
+        find('#user_location_loc_json', visible: false).set(location_attributes[:loc_json])
         click_on 'Save'
 
         expect(page).to have_content('Location Updated')

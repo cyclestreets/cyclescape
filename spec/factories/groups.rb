@@ -15,7 +15,7 @@ FactoryGirl.define do
 
     factory :quahogcc do
       name 'Quahog Cycling Campaign'
-      short_name 'quahogcc'
+      sequence(:short_name) { |n| "quahogcc#{n}" }
       website 'http://www.quahogcc.com'
       email 'louis@quahogcc.com'
     end

@@ -11,7 +11,7 @@ describe 'Issue notifications' do
       visit new_issue_path
       fill_in 'Title', with: issue_values[:title]
       fill_in 'Write a description', with: issue_values[:description]
-      find('#issue_loc_json').set(issue_values[:loc_json])
+      find('#issue_loc_json', visible: false).set(issue_values[:loc_json])
     end
 
     describe 'for users with overlapping user locations' do
@@ -109,7 +109,7 @@ describe 'Issue notifications' do
       visit new_issue_path
       fill_in 'Title', with: 'Test'
       fill_in 'Write a description', with: 'Something & something else'
-      find('#issue_loc_json').set(user_location.loc_json)
+      find('#issue_loc_json', visible: false).set(user_location.loc_json)
     end
 
     it 'should not send multiple emails to the same user' do
@@ -155,7 +155,7 @@ describe 'Issue notifications' do
       visit new_issue_path
       fill_in 'Title', with: 'Test'
       fill_in 'Write a description', with: 'Interesting, but you only need to tell me once'
-      find('#issue_loc_json').set(user_location.loc_json)
+      find('#issue_loc_json', visible: false).set(user_location.loc_json)
     end
 
     # The user would normally receive two emails - one for the issue being within the group's area,
