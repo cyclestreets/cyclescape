@@ -26,6 +26,10 @@ module Locatable
     def order_by_size
       order('ST_Area(location) DESC')
     end
+
+    def select_area
+      select('*, -ST_Area(location) as area')
+    end
   end
 
   # Define an approximate centre of the issue, for convenience.
