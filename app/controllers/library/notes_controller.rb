@@ -59,6 +59,6 @@ class Library::NotesController < ApplicationController
   end
 
   def permitted_params
-    params.require(:library_note).permit :tags_string, :body, :library_document_id, :title, :loc_json
+    params.require(:library_note).permit :tags_string, :body, :library_document_id, :title, :loc_json, :url
   end
 end

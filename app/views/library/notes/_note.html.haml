@@ -1,4 +1,7 @@
 %article.note
+  - if note.url
+    %section.external_url
+      = link_to note.url, note.url
   = auto_link simple_format note.body
   - if note.location
     %div{id: 'map'}
