@@ -121,6 +121,17 @@
         success: User updated
       edit:
         edit_user: Edit user
+    planning_filters:
+      create:
+        success: Filter created and running a in background job
+      update:
+        success: Filter updated and running a in background job
+      form:
+        planning_filter_intro: You can add a filter which is a rule (a regex string) and a selected planning authority.
+          If a planning authority has no specific filters then the filters for the authority "* (LAs without own rules)" will be applied.
+          The filter rule will be applied to all new and existing planning applications in a background job after saving.
+          Each planning application in the authority of the filter where the uid matches the rule will be filtered out of users
+          planning index on their dashboard but will still be searchable.
   application:
     account_disabled: Your account has been disabled by an administrator
     permission_denied: You are not authorised to access that page.

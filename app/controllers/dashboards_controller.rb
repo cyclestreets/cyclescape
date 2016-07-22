@@ -20,8 +20,8 @@ class DashboardsController < ApplicationController
     @prioritised_threads = ThreadListDecorator.decorate_collection(prioritised_threads)
 
     planning_applications = current_user.planning_applications_near_locations.ordered
-      .not_hidden.includes(:issue).page params[:planning_page]
-    @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications.relevant.includes(:users)
+      .not_hidden.relevant.includes(:issue).page params[:planning_page]
+    @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications.includes(:users)
   end
 
   def deadlines

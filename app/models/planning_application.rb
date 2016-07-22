@@ -84,7 +84,7 @@ class PlanningApplication < ActiveRecord::Base
     end
   end
 
-  def calculate_relavant(loaded_planning_filters = nil)
+  def calculate_relevant(loaded_planning_filters = nil)
     planning_filters = loaded_planning_filters || PlanningFilter.all
     planning_filters.none? { |filter| filter.matches?(self) }
   end
@@ -92,7 +92,7 @@ class PlanningApplication < ActiveRecord::Base
   private
 
   def set_relevant
-    self.relevant = calculate_relavant
+    self.relevant = calculate_relevant
     true
   end
 
