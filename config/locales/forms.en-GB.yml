@@ -51,6 +51,8 @@
         new:
           bicycle_wheels: Bicycle Wheels
     hints:
+      tags_string_hints: &tags_string_hints
+        tags_string: comma seperated list of tags e.g. cycle parking, obstruction
       user:
         new: &hints_user_new
           display_name: If you set a display name, it will be shown to people who
@@ -98,8 +100,8 @@
           deadline: (optional)
           external_url: If another web page is relevant you can add it here.
           photo: optional
-          tags_string: e.g. cycle parking, obstruction, roadworks
           title: Please be brief and specific
+          <<: *tags_string_hints
         create: *hints_issue_new
         edit: *hints_issue_new
         update: *hints_issue_new
@@ -109,6 +111,8 @@
           none, this will be an administrative thread.
       library/note:
         url: If another web page is relevant you can add it here.
+        <<: *tags_string_hints
+      library/document: *tags_string_hints
     placeholders:
       issue:
         external_url: http://www.example.com
