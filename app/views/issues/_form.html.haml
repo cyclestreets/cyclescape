@@ -19,3 +19,19 @@
       = f.input :deadline, as: :date_picker, label: t("deadline_date"), input_html: {value: @issue.deadline.try(:strftime, "%d-%m-%Y %H:%M")}
   = f.actions do
     = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
+
+:javascript
+  $( document ).ready(function() {
+    var title = $('#issue_title');
+    var errors;
+    title.bind("propertychange change click keyup input paste", function() {
+      errors = title.next()
+      if (errors.hasClass('inline-errors')) {
+        if (errors.html().indexOf('[') === -1) {
+          errors.append('. [', title.val().length, ']');
+        } else {
+          errors.html(errors.html().replace(/\[.*?\]/g, '[' + title.val().length + ']') );
+        }
+      }
+    });
+  });
