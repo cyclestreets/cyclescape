@@ -20,10 +20,12 @@ describe 'User profiles' do
       expect(current_user.profile.picture).to be_truthy
     end
 
-    it 'should set the website address' do
+    it 'should set the website and locale' do
       fill_in 'Website', with: 'www.example.net'
+      select 'Česká - Česká republika', from: 'Locale'
       click_on 'Save'
       expect(current_user.profile.website).to eq('http://www.example.net')
+      expect(page).to have_content 'Webová stránka'
     end
 
     it 'should set the biography' do
