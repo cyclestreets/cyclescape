@@ -23,5 +23,7 @@ de-DE:
         external_url: externe Webseite
       message_thread:
         group: gehört zu
+        closed: Geschlossen
+        moderated: In Moderation
     models:
       message_thread: Diskussion

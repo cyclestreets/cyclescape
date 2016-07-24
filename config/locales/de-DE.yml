@@ -3,10 +3,10 @@ de-DE:
   application_name: Cyclescape
   tags:
     show:
-      heading: Dinge mit '%{name}' getaggt
+      heading: Mit '%{name}' getaggte Dinge
       unrecognised: Kann den Tag '%{name}' nicht finden
-      introduction_groupwise_html: 'limited to the %{area_of_group_link}:'
-      area_of_group: area of %{group_name}
+      introduction_groupwise_html: 'begrenzt auf das %{area_of_group_link}:'
+      area_of_group: Gebiet von %{group_name}
   anon: Anonym
   sign_in: Anmelden
   confirm: Bist Du sicher?
@@ -160,29 +160,29 @@ de-DE:
       explanation: You can promote any planning application to an issue so that it
         is like any other submitted issue.
     planning_application:
-      page_title: Search Results for '%{q}'
+      page_title: Ergebnis der Suche nach '%{q}'
       convert_to_issue_html: In ein Thema umwandeln&hellip;
       planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
+      planning_applications_search: z.B. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
+      no_results_found: Es wurden keine Ergebnisse gefunden
       your_planning_applications: Your local planning applications
       hide: Vote to hide
       unhide: Remove my vote
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
-      converted_to_issue: 'Converted to Issue:'
+      converted_to_issue: 'In ein Thema umgewandelt:'
     show:
-      address_label: 'Address:'
-      council_label: 'Council:'
+      address_label: 'Adresse:'
+      council_label: 'Verwaltung:'
       data_source: Datenquelle
       data_from_html: Planning application data is sourced from %{link}
-      location: Location
-      official_application: View on council website
+      location: Ort
+      official_application: Auf der Webseite der Verwaltung ansehen
       official_application_label: 'Official application:'
       planit: PlanIt
-      related_issue: Related issue
+      related_issue: Verwandtes Thema
       related_issue_guidance: 'This planning application has been converted to an
         issue:'
       uid_label: 'Application reference:'
@@ -190,10 +190,10 @@ de-DE:
       start_date: 'Date application was made:'
       hidden: Hidden (will not appear in anyones dashboard)
       no_location: Exact location not received from council site
-      page_title: Search Results for '%{q}'
+      page_title: Ergebnis der Suche nach '%{q}'
       convert_to_issue_html: In ein Thema umwandeln&hellip;
       planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
+      planning_applications_search: z.B. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
       no_results_found: No results found
       your_planning_applications: Your local planning applications
@@ -202,12 +202,12 @@ de-DE:
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
-      converted_to_issue: 'Converted to Issue:'
+      converted_to_issue: 'In ein Thema umgewandelt:'
     search:
       page_title: Search Results for '%{q}'
       convert_to_issue_html: In ein Thema umwandeln&hellip;
       planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
+      planning_applications_search: z.B. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
       no_results_found: No results found
       your_planning_applications: Your local planning applications
@@ -216,15 +216,15 @@ de-DE:
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
-      converted_to_issue: 'Converted to Issue:'
+      converted_to_issue: 'In ein Thema umgewandelt:'
   dashboards:
     show:
-      page_title: Search Results for '%{q}'
+      page_title: Ergebnis der Suche nach '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
       planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
+      planning_applications_search: z.B. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
+      no_results_found: Es wurden keine Ergebnisse gefunden
       your_planning_applications: Your local planning applications
       hide: Vote to hide
       unhide: Remove my vote
@@ -323,7 +323,7 @@ de-DE:
     group_management: Gruppenmanagement
     membership_list_tab: Mitgliederliste
     membership_requests_tab: Mitglieder Anfrage
-    home_page_tab: Home page
+    home_page_tab: Webseite
     issues:
       destroy:
         failure: Dieses Thema konnte nicht gelöscht werden
@@ -478,10 +478,10 @@ de-DE:
           sent to your group, but there is no email address recorded for this group.
           Either choose a membership secretary, or ask for your group email to be
           set by a site administrator.
-        title: Edit Preferences
+        title: Einstellungen bearbeiten
       update:
-        failure: Couldn't update preferences
-        success: Preferences Updated
+        failure: Einstellungen konnten nicht aktualisiert werden
+        success: Einstellungen aktualisiert
     profiles:
       edit:
         title: Profil bearbeiten
@@ -495,11 +495,11 @@ de-DE:
         success: Profil aktualisiert
   group_profiles:
     default_new_user_email: |-
-      Hi {{full_name}},
-       %{group_name} has added you to their Cyclescape group %{group_url}
+      Hallo {{full_name}},
+      %{group_name} hat dich in ihre Cyclescape-Gruppe %{group_url} aufgenommen
   groups:
     search:
-      title: Search Results for %{group}
+      title: Suchergebnis für %{group}
       main_site_link_html: If you want to see issue beyond %{group}'s area you can
         search from the <a href='%{url}'>national site</a>.
     index:
@@ -516,7 +516,7 @@ de-DE:
     join:
       join_body: Du kannst die Mitgliedschaft in dieser Cyclescape-Gruppe beantragen,
         wenn du dich mit Aktivitäten von %{group} beschäftigen möchtest.
-      join_this_group: Join this group
+      join_this_group: Dieser Gruppe beitreten
       group_request_pending: Dein Mitgliedsantrag dieser Gruppe ist unerledigt.
     show:
       edit_group_profile: Gruppenprofil bearbeiten
@@ -524,12 +524,12 @@ de-DE:
       edit_group_members: Mitgliederliste bearbeiten
       group_management: Gruppenverwaltung
       group_organisers: Gruppenorganisatoren
-      leave_group: Leave the group
+      leave_group: Gruppe verlassen
       join_title: Trete unserer Cyclescape-Gruppe bei
       no_issues: In diesem Gruppenbereich gibt es keine Themen
       no_location: Diese Gruppe hat noch keinen Standort
       no_threads: Diese Gruppe hat noch keine öffentlichen Diskussionen
-      our_areas: Our Area
+      our_areas: Unser Gebiet
       recent_issues: Aktuelle Themen in deinem Gebiet
       recent_threads: Unsere neuesten Diskussionen
       view_membership_requests:
@@ -547,48 +547,48 @@ de-DE:
         administrieren.
     index:
       actioned_by: Actioned By
-      are_you_sure: Are you sure?
+      are_you_sure: Bist Du sicher?
       by: by %{name}
       confirm: Confirm
       created_at: vor %{time_ago}
-      email: E-mail address
+      email: Mailadresse
       view_message: View...
-      message: Message
+      message: Nachricht
       no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
       full_name: Full name
-      reject: Reject
+      reject: Ablehnen
       review: Review
       requested_at: Requested At
       status: Status
-      title: Mitgliedsanträge für %{group}
+      title: Group requests
       user: User (display name)
       membership_status:
-        confirmed: Confirmed
-        pending: Pending
-        unconfirmed: Unconfirmed
-        rejected: Rejected
-      name: Requested Name
+        confirmed: bestätigt
+        pending: offen
+        unconfirmed: unbestätigt
+        rejected: abgelehnt
+      name: Gewünschter Name
       actions: Actions
-      new_group: Create a New Group
-      group_email: Email
+      new_group: Neue Gruppe
+      group_email: Mailadresse
       destroy: Remove request
       no_message: Diesem Gruppenantrag war keine Nachricht beigefügt.
     review:
       actioned_by: Actioned By
-      are_you_sure: Are you sure?
+      are_you_sure: Bist Du sicher?
       by: by %{name}
-      confirm: Confirm
+      confirm: Bestätigen
       created_at: vor %{time_ago}
-      email: E-mail address
+      email: Mailadresse
       view_message: View...
-      message: Message
+      message: Nachricht
       no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
-      full_name: Full name
-      reject: Reject
+      full_name: Vollständiger Name
+      reject: Ablehnen
       review: Review
       requested_at: Requested At
       status: Status
-      title: Mitgliedsanträge für %{group}
+      title: Review group request
       user: User (display name)
       membership_status:
         confirmed: Confirmed
@@ -620,20 +620,20 @@ de-DE:
         Fahrradparkplätze vorhanden? Oder auch ein Beispiel für gut gemachte Dinge?
       report_an_issue: "Über ein Thema Berichten"
       latest_discussions: Neueste Diskussionen
-      groups_title: Cyclscape Gruppen
+      groups_title: Cyclescape Gruppen
       groups_intro_html: |
         Cyclescape wird von <strong>Fahrrad-Kampagnen-Gruppen</strong> quer durchs Land benutzt. <strong>%{groups_link}</strong> und schau Dir an woran sie gerade arbeiten.
-      find_local_groups: Find groups local to you
+      find_local_groups: Finde Gruppen in deiner Nähe
       twitter_title: Cyclescape on Twitter
     guide:
       title: Wie Cyclescape funktioniert
       box_1_title: Berichte über ein Thema
-      box_1_body: Themen schnell nach oben schieben
+      box_1_body: Bringe Themen auf dieser Seite schnell zur Sprache.
       box_2_title: Bekomme Hilfe von anderen
       box_2_body: Diskutiere über Themen mit Mitgliedern aus Fahrradgruppen
       box_3_title: Mache einen Unterschied
-      box_3_body: Organisiere eine Aktion, welche die Gruppe angehen sollte, um ein
-        Problem zu lösen
+      box_3_body: Stimme Aktionen ab, mit denen sich die Gruppe des Themas annehmen
+        kann.
   issue:
     message_threads:
       new:
@@ -682,8 +682,8 @@ de-DE:
       no_results_found: Kein Thema gefunden.
       title_introduction: In diesem Abschnitt werden Probleme gemeldet - Probleme
         im Straßennetz und damit zusammenhängenden Fragen.
-      introduction_geographical_basis: Issues always relate to some geographical location,
-        whether very local or perhaps city-wide.
+      introduction_geographical_basis: Themen haben immer einen räumlichen Bezug,
+        dieser kann sehr begrenzt oder auch stadtweit sein.
       title_introduction_report_html: Du kannst %{report_new_issue_link} indem Du
         den Knopf rechts benutzt.
       report_new_issue: von einem neuen Thema berichten
@@ -727,8 +727,7 @@ de-DE:
       location: Location
       deadline: Deadline
       issues-nearby: Themen in der Umgebung
-    map:
-      show_collisions: Show Collisions
+      show_collisions: Zeige Zusammenstöße
     update:
       success: Thema aktualisiert
     vote_clear:
@@ -750,7 +749,7 @@ de-DE:
       dashboard_tooltip: Dein persönliches Dashboard zeigt Dir Updates in Diskussionen,
         die Du abonniert hast
       about: About
-      user_guide: User guide
+      user_guide: Benutzeranleitung
       sign_out: Abmelden
       sign_in: Anmelden
       sign_up: Registrieren
@@ -764,6 +763,8 @@ de-DE:
       loading: Bitte warten...
       threads: Diskussionen
       threads_tooltip: Diskussionen zu jedem Thema
+      tags: Tags
+      tags_tooltip: Wolke der 100 meist genutzen Tags
       title: Cyclescape
     footer:
       application_version_html: 'Versionshash: %{version}'
@@ -773,11 +774,11 @@ de-DE:
         von:'
       funding_from: Finanziert von from %{name}
       funding_from_and_created_by: Mittel aus und erstellt von %{name}
-      planning_application_data: Planungsanwendungsdaten von Openly Local
+      planning_application_data: Planning application data from PlanIt
       top_html: Back to top &uarr;
       cyclescape_blog: Cyclescape blog
       privacy: Datenschutzerklärung
-      user_guide: User guide
+      user_guide: Benutzeranleitung
       facebook_page: CycleStreets Facebook-Seite
       twitter_page: CycleStreets Twitterkonto
       osm_credit_html: Map data &copy; <a href='http://www.openstreetmap.org'> OpenStreetMap</a>
@@ -801,7 +802,7 @@ de-DE:
       overview_description_html: Die Sammlung enthält <strong>wiederverwendbare Ressourcen</strong>
         für Kampagnen. Bitte füge Elemente ein, die dir für die Zukunft nützlich erscheinen
       overview_usage: Du kannst Inhalte von Sammlungen in einer Diskussion verlinken.
-      latest: Letzte Artikel
+      latest: Latest items
       item_created: Vor %{time_ago} gepostet
       search: 'Sammlung durchsuchen:'
       search_submit: Suchen
@@ -912,14 +913,14 @@ de-DE:
       group_public: Gruppe Öffentlich
       group_private: Gruppe Privat
       public: "Öffentlich"
-      posted_at: postete vor %{time_ago}
+      posted_at: schrieb vor %{time_ago}
     list:
       discussion_on_issue: Eine Diskussion zum Thema
       group_committee: Gruppe Ausschuss
       group_public: Gruppe Öffentlich
       group_private: Gruppe Privat
       public: "Öffentlich"
-      posted_at: postete vor %{time_ago}
+      posted_at: schrieb vor %{time_ago}
     edit:
       title: Diskussion bearbeiten
       description: As a group administrator, you can fix up thread properties here.
@@ -935,7 +936,7 @@ de-DE:
       title: "Öffentliche Diskussionen"
       threads_explanation_html: Zu jedem der unten aufgeführten %{issues_link} kann
         es ein oder mehrere Diskussionen geben (beginnend mit den zuletzt Aktualisieren).
-      issues: issues
+      issues: Themen
       introduction: Below are latest updates on discussion threads (across all of
         Cyclescape) that are public (including those owned by groups and/or administrative.)
       introduction_group_pointer: Benutze den Gruppenwechsler oben rechts, um ausschließlich
@@ -966,7 +967,7 @@ de-DE:
       open: Re-open this thread
       edit: Diese Diskussion bearbeiten
       destroy: Diese Diskussion löschen
-      issues-nearby: Issues nearby
+      issues-nearby: Themen in der Umgebung
       private_to_committee_message: 'Privat: Nur Ausschussmitglieder von %{group}
         können Beiträge in dieser Diskussion lesen und posten.'
       private_to_group_message: 'Privat: Nur Mitglieder von %{group} können Beiträge
@@ -1016,8 +1017,8 @@ de-DE:
         view_original_image: Zeige das Originalbild
     street_views:
       create:
-        failure: Street View hinzugefügt
-        success: Street View nicht hinzufügen
+        failure: Street View konnte nicht hinzugefügt werden
+        success: Street View hinzugefügt
   message_library:
     documents:
       new:
@@ -1039,7 +1040,7 @@ de-DE:
     new:
       compose_new: Compose New
       from_library: From Library
-      recently_added: Recently added
+      recently_added: Zuletzt hinzugefügt
       select_button: Select…
       search_results: Suchergebnisse
       go: Go
@@ -1133,7 +1134,7 @@ de-DE:
     message_moderations:
       approve: Approve
       approved: approved
-      reject: Reject
+      reject: Discard
       possible_spam: Possible spam
       not_approved: User not approved
       explanation: These messages are held for moderation.  This can be because they
@@ -1147,36 +1148,36 @@ de-DE:
       index:
         confirm_delete: Are you sure?
         delete_comment: Delete
-        how: How
+        how: Wie
         id: ID
         no_comments: Noch kein Kommentar
         title: Alle Kommentare
-        what: What
-        when: When
+        what: Was
+        when: Wann
         when_ago: vor %{time_ago}
-        where: Where
-        who: Who
+        where: Wo
+        who: Wer
       new:
         title: Kommentare
       create:
         success: Danke für deinen Kommentar!
   thread_mailer:
     header:
-      added: "%{name} added %{type} to the thread"
+      added: "%{name} hat %{type} zur Diskussion beigetragen"
       committee: "[Ausschuss]"
     new_deadline_message:
       type: a deadline/date
     new_document_message:
-      type: an attachment
+      type: ein Anhang
       view_the_document: 'Sie können das Anhang zu sehen:'
     new_library_item_message:
       type: an item
     new_link_message:
-      type: a link
+      type: ein Link
     new_message:
-      type: a message
+      type: eine Nachricht
     new_photo_message:
-      type: a photo
+      type: ein Foto
       view_the_photo: 'Sie können das Foto zu sehen:'
     new_street_view_message:
       type: a street view
@@ -1192,14 +1193,14 @@ de-DE:
     very_low: Nicht von Interesse
     nil: None set
   thread_privacy_options:
-    public: Public (everyone)
-    group: Group (members only)
+    public: "öffentlich (Jeder)"
+    group: Gruppe (nur Mitglieder)
     committee: Ausschuss
   user_roles:
-    member: Member
+    member: Mitglied
     admin: Admin
   group_membership_roles:
-    member: Member
+    member: Mitglied
     committee: Ausschuss
   user:
     locations:
@@ -1271,7 +1272,7 @@ de-DE:
           werden.
         subscribe: Benachrichtige mich über neue Ereignisse und folge automatisch
           allen neuen Diskussionen
-        your_profile: your profile
+        your_profile: dein Profil
       update:
         success: Einstellungen gespeichert
         failure: Deine Einstellungen konnten nicht gespeichert werden
@@ -1281,10 +1282,10 @@ de-DE:
       edit:
         title: Mein Profil bearbeiten
         my_current_thumbnail_title: Mein aktuelles Profilbild
-        profile_public: Everyone
-        profile_group: Only members of my groups
-        visibility_guidance_html: You can choose to restrict who gets to view your
-          profile.
+        profile_public: Jeder
+        profile_group: Nur Mitglieder meiner Gruppen
+        visibility_guidance_html: Du kannst einschränken, wer dein Profil ansehen
+          kann.
       show:
         about_label: "Über:"
         add_to_groups:
@@ -1306,34 +1307,34 @@ de-DE:
         user_profile: Benutzerprofil
         website_label: 'Webseite:'
         full_name: Vollständiger Name
-        send_private_message: Send private message
+        send_private_message: Persönliche Nachricht senden
       update:
         success: Profil aktualisiert
   user_locations:
-    category_name: your %{category_name} location
-    generic_category_name: a location where you've expressed interest
+    category_name: dein %{category_name}-Ort
+    generic_category_name: ein Ort für den Du Interesse geäußert hast
   users:
     private_message_threads:
       new:
-        message_for_html: Send a private message to %{other}
-        introduction_html: This is a private message that only you and %{other} can
-          see.
-        send: Send Private message
+        message_for_html: Sende eine persönliche Nachricht an %{other}
+        introduction_html: Dies ist eine persönliche Nachricht die nur %{other} und
+          Du sehen können.
+        send: Persönliche Nachricht senden
       index:
         with_html: with %{other}.
-        private_messages: Private Messages
-        private_introduction: These are private messages that only you and one other
-          person can see.  You can send a private message to another user by clicking
-          a button in their profile.
+        private_messages: Persönliche Nachrichten
+        private_introduction: Dies sind persönliche Nachrichten die nur die andere
+          Person und Du sehen können. Du kannst einem anderen Benutzer eine persönliche
+          Nachricht schicken, in dem Du die Schaltfläche im Benutzerprofil anklickst.
   helpers:
     page_entries_info:
       more_pages:
-        display_entries: Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b>
-          of <b>%{total}</b> in total
+        display_entries: Zeige %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> von
+          <b>%{total}</b> insgesamt
       one_page:
         display_entries:
-          one: Displaying <b>%{count}</b> %{entry_name}
-          other: Displaying <b>all %{count}</b> %{entry_name}
+          one: Zeige <b>%{count}</b> %{entry_name}
+          other: Zeige <b>alle %{count}</b> %{entry_name}
           zero: No %{entry_name} found
   views:
     pagination:

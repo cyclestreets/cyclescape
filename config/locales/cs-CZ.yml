@@ -562,7 +562,7 @@ cs-CZ:
       review: Revize
       requested_at: "Žádáno"
       status: Status
-      title: "Žádosti o členství ve skupině %{group}"
+      title: Group requests
       user: Uživatel (zobrazené jméno)
       membership_status:
         confirmed: Potvrzeno
@@ -590,7 +590,7 @@ cs-CZ:
       review: Revize
       requested_at: "Žádáno"
       status: Status
-      title: "Žádosti o členství ve skupině %{group}"
+      title: Review group request
       user: Uživatel (zobrazené jméno)
       membership_status:
         confirmed: Potvrzeno
@@ -727,8 +727,7 @@ cs-CZ:
       location: Umístění
       deadline: Uzávěrka
       issues-nearby: Podněty poblíž
-    map:
-      show_collisions: Ukázat nehody (funguje jen ve Velké Británii)
+      show_collisions: Show Collisions
     update:
       success: Podnět upraven
     vote_clear:
@@ -764,6 +763,8 @@ cs-CZ:
       loading: Prosím čekejte…
       threads: Diskuzní vlákna
       threads_tooltip: Všechna diskuzní témata
+      tags: Tags
+      tags_tooltip: Cloud of the top 100 most used tags
       title: Cyklisté sobě
     footer:
       application_version_html: 'Verze aplikace: %{version}'
@@ -1140,7 +1141,7 @@ cs-CZ:
     message_moderations:
       approve: Schválit
       approved: schváleno
-      reject: Odmítnout
+      reject: Discard
       possible_spam: Možné spam
       not_approved: Uživatel není schváleno
       explanation: Tyto zprávy jsou pozdrženy kvůli moderování . To může být proto,

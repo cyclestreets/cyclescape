@@ -37,7 +37,7 @@ de-DE:
           Seite benutzen möchtest.
         commit_button: Konto bestätigen
         confirm: Bist Du sicher?
-        cancel_account: dein Konto schließen
+        cancel_account: Konto schließen
         cancel_header: Mein Konto schließen
         unhappy_with_account_html: Wenn Du mit deinem Konto unglücklich bist, dann
-          kannst Du %{confirm_link}.
+          kannst Du dein %{confirm_link}.
