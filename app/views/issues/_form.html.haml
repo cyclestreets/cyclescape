@@ -21,17 +21,37 @@
     = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
 
 :javascript
-  $( document ).ready(function() {
-    var title = $('#issue_title');
-    var errors;
-    title.bind("propertychange change click keyup input paste", function() {
-      errors = title.next()
-      if (errors.hasClass('inline-errors')) {
-        if (errors.html().indexOf('[') === -1) {
-          errors.append('. [', title.val().length, ']');
-        } else {
-          errors.html(errors.html().replace(/\[.*?\]/g, '[' + title.val().length + ']') );
-        }
+  $(document).ready( function() {
+    var title = $("#issue_title");
+    var errors, titleLength;
+
+    var createOrUpdateErrorCount = function(errorEl, count) {
+      if (errorEl.html().indexOf("[") === -1) {
+        errorEl.append(". [", count, "]");
+      } else {
+        errorEl.html(errorEl.html().replace(/\[.*?\]/g, "[" + count + "]") );
       }
-    });
+    };
+
+    var updateTitleErrorElement = function() {
+      titleLength = title.val().length;
+      errors = title.next();
+
+      // If the lenght is less than maxlength remove any length count and return early
+      if (titleLength <= title.attr("maxlength")){
+        if (errors.hasClass("inline-errors")) {
+          errors.html(errors.html().replace(/\[\d*?\]/g, ""));
+        }
+        return;
+      }
+
+      // If there is an existing inline-error element use it, if not create a new a one
+      if (!errors.hasClass("inline-errors")) {
+        errors = title.after("<p class=inline-errors></p>").next();
+      }
+      createOrUpdateErrorCount(errors, titleLength);
+    };
+    updateTitleErrorElement();
+
+    title.bind("propertychange change click keyup input paste", updateTitleErrorElement);
   });
