@@ -158,6 +158,11 @@
   margin: 1em;
 }
 
+.tinyermap {
+  @extend .tinymap;
+  width: 300px;
+}
+
 .streetViewPano {
   width: auto;
   height: 300px;

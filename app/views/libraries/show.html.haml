@@ -11,7 +11,7 @@
           = item.link
           - if item.location
             - map_id = "leaflet-#{dom_id(item)}"
-            .tinymap{id: map_id}
+            .tinyermap{id: map_id}
             .hidden
               .map-data{"data-center" => location_to_geojson(item.location),
                 "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(item), hidezoom: true }.to_json}
