@@ -30,9 +30,11 @@
         file: Document
       library/item: null
       library/note:
+        location: Area of relevance
         body: Note
+        url: Web address
       link_message:
-        url: URL
+        url: Web address
       message:
         body: Message
       site_comment:
@@ -110,7 +112,6 @@
         issue: This specifies which issue this discussion thread is attached to. If
           none, this will be an administrative thread.
       library/note:
-        url: If another web page is relevant you can add it here.
         <<: *tags_string_hints
       library/document: *tags_string_hints
     placeholders:
