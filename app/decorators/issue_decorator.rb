@@ -70,12 +70,6 @@ class IssueDecorator < ApplicationDecorator
     issue.threads.count
   end
 
-  def creation_time
-    h.time_tag_with_title(issue.created_at) do
-      h.t('issues.show.issue_created_at', time_ago: h.time_ago_in_words(issue.created_at))
-    end
-  end
-
   def vote_count
     issue.plusminus
   end

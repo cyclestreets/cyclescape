@@ -11,7 +11,7 @@
         - profile_link = link_to_profile @note.created_by
       - else
         - profile_link = @note.created_by.display_name_or_anon
-      = t ".added_by_html", name: profile_link, time: l(@note.created_at.to_date)
+      = t ".added_by_html", name: profile_link, time: formatted_created_at(@note)
     - if @note.document
       %p= t ".note_on_document_html", document: link_to(@note.document.title, @note.document)
   %section.tags

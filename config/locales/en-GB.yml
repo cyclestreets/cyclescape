@@ -15,6 +15,7 @@
     zero: Today!
     one: Tomorrow!
     other: '%{count} days away'
+  item_created_at: '%{time_ago} ago'
   email_status:
     no_email: No email
     email: Email every message
@@ -95,7 +96,6 @@
     users:
       index: &admin_users_index
         created: Created
-        created_at: '%{time_ago} ago'
         last_seen: Last login
         last_seen_at: '%{time_ago} ago'
         introduction: This page lists all users on the system (irrespective of any
@@ -368,7 +368,6 @@
         are_you_sure: Are you sure?
         by: by %{name}
         confirm: Confirm
-        created_at: '%{time_ago} ago'
         email: E-mail address
         view_message: View...
         message: Message
@@ -603,8 +602,7 @@
         context (e.g. organising a general meeting) in the group admin threads section.
       administrative_matters: add a purely administrative matter
     show:
-      issue_created_at: '%{time_ago} ago'
-      added_by_html: Added by %{name} on %{time}
+      added_by_html: Added by %{name} %{time}
       cancel_vote: Cancel
       confirm_delete: Are you sure?
       delete_issue: Delete this issue
@@ -726,7 +724,7 @@
       new:
         title: New Library Document
       show:
-        added_by_html: Added by %{name} on %{time}
+        added_by_html: Added by %{name} %{time}
         attach_note: Attach Note
         attach_note_instructions_html: You can create new notes linked to this document.
           When referenced in a thread they will link to this document as well.
@@ -743,7 +741,7 @@
       new:
         title: New Library Note
       show:
-        added_by_html: Added by %{name} on %{time}
+        added_by_html: Added by %{name} %{time}
         edit: Edit Note
         note_on_document_html: 'This note is attached to a document: %{document}'
         no_threads: This note hasn't been included in any public threads. If you add

@@ -9,4 +9,4 @@
         %td.activity
           = t '.with_html', other: link_to_profile(thread.other(current_user))
         %td.activity
-          = thread.created_at
+          = formatted_created_at thread

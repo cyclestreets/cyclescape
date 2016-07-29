@@ -15,7 +15,7 @@
             = issue.creator_link
           - else
             = issue.created_by.display_name_or_anon
-          = issue.creation_time
+          = formatted_created_at(issue)
           \//
           = t(".thread_count", count: issue.thread_count)
         .tags

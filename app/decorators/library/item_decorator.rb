@@ -9,12 +9,6 @@ class Library::ItemDecorator < ApplicationDecorator
     h.content_tag(:span, nil, class: "icon #{h.dom_class(item.component)}")
   end
 
-  def created_at
-    h.time_tag_with_title(item.created_at) do
-      h.t('libraries.show.item_created', time_ago: h.time_ago_in_words(item.created_at))
-    end
-  end
-
   def description
     if item.component.respond_to?(:body)
       h.truncate item.component.body

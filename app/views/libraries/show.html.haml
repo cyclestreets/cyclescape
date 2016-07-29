@@ -16,7 +16,7 @@
               .map-data{"data-center" => location_to_geojson(item.location),
                 "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(item), hidezoom: true }.to_json}
         .meta
-          = item.created_at
+          = formatted_created_at item
 
 %aside#sidebar
   = link_to t(".new_library_item"), "#", rel: "#new-library-item-selector", class: "open-dialog btn-green"

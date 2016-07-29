@@ -61,6 +61,12 @@ module ApplicationHelper
     time_tag(date_or_time, title: l(date_or_time, format: :long), &block)
   end
 
+  def formatted_created_at(item)
+    time_tag_with_title(item.created_at) do
+      t('item_created_at', time_ago: time_ago_in_words(item.created_at))
+    end
+  end
+
   # used to turn references to threads into hyperlinks
   #
   # examples for threads:
