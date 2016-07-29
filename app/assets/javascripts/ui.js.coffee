@@ -2,6 +2,10 @@ jQuery ->
   # Tabs
   $(".tabs").parent().tabs()
 
+  $(document).on("keypress", "input.search-input", (event) ->
+    event.preventDefault() if (event.keyCode == 13) # do not submit from when searching
+  )
+
   if history.pushState
     $(".tabs").parent().on "tabsactivate", (event, ui) ->
       history.pushState(null, null, "##{ui.newPanel.attr('id')}")
