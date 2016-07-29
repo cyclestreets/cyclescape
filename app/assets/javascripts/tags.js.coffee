@@ -23,4 +23,9 @@ $ ->
     removeWithBackspace: false,
   })
 
+  $('input,[id$="string_tag"]').focusout( ->
+    $(@).trigger(type: 'keypress', which: 44, keyCode: 44) if ($(@).val() != '')
+    # add a comma (i.e. finish the tag) if the tag input is not empty. comma keyCode is 44
+  )
+
   return
