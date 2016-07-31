@@ -11,8 +11,7 @@
         method: :put, class: "btn-grey", remote: true
   %td= t "user_roles.#{user.role}"
   %td
-    = time_tag_with_title(user.created_at) do
-      - t ".created_at", time_ago: time_ago_in_words(user.created_at)
+    = formatted_created_at(user)
   %td
     - if user.last_seen_at?
       = time_tag_with_title(user.last_seen_at) do
