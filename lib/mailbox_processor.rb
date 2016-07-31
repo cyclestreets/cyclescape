@@ -1,3 +1,5 @@
+require 'net/imap'
+
 class MailboxProcessor
   attr_accessor :config
 

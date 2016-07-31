@@ -11,7 +11,6 @@ describe 'Library notes', after_commit: true do
     it 'should show the note body correctly' do
       expect(page).to have_content(note.body)
       expect(page).to have_link(note.created_by.name)
-      expect(page).to have_content(I18n.localize(note.created_at.to_date))
       expect(page).not_to have_content(I18n.t('.shared.tags.panel.edit_tags'))
     end
   end
