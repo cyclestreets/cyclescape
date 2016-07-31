@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'planning_filter'
 
 describe PlanningApplicationWorker do
   before do

@@ -20,7 +20,7 @@ describe 'Groups admin' do
     expect(page).to have_content(I18n.t('.admin.user.locations.new.title', user_name: user.name))
     select location_category.name, from: 'Category'
     # Note hidden map field
-    find('#user_location_loc_json').set(location_attributes[:loc_json])
+    find('#user_location_loc_json', visible: false).set(location_attributes[:loc_json])
     click_on I18n.t('.formtastic.actions.user_location.create')
 
     expect(page).to have_content('Location Created')

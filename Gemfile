@@ -25,7 +25,7 @@ gem 'jqcloud-rails', github: 'GovSciences/jqcloud-rails'
 
 # Back-end gems
 gem 'devise', '~> 3.4.0'
-gem 'devise_invitable'
+gem 'devise_invitable', '= 1.5.3' # Need to add accept_until_format
 gem 'devise-i18n'
 gem 'declarative_authorization'
 gem 'thin'
@@ -49,6 +49,7 @@ gem 'http_accept_language'
 
 gem 'grape', '~> 0.16.0'
 gem 'grape-swagger-rails'
+gem 'grape-swagger'
 gem 'grape-kaminari'
 
 gem 'rack-cors', require: 'rack/cors'

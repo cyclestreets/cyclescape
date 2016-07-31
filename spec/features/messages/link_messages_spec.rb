@@ -16,7 +16,7 @@ describe 'Link messages' do
 
     it 'should post a link message' do
       link_form do
-        fill_in 'URL', with: link_message_attrs[:url]
+        fill_in 'Web address', with: link_message_attrs[:url]
         fill_in 'Title', with: link_message_attrs[:title]
         click_on 'Add Link'
       end
@@ -25,7 +25,7 @@ describe 'Link messages' do
 
     it 'should accept a url with whitespace' do
       link_form do
-        fill_in 'URL', with: "  #{link_message_attrs[:url]}  "
+        fill_in 'Web address', with: "  #{link_message_attrs[:url]}  "
         fill_in 'Title', with: link_message_attrs[:title]
         click_on 'Add Link'
       end

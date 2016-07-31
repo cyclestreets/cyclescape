@@ -10,15 +10,16 @@ describe 'Issues' do
 
       before do
         visit new_issue_path
+
+        fill_in 'Title', with: issue_values[:title]
+        fill_in 'Write a description', with: issue_values[:description]
+        find('#issue_loc_json', visible: false).set(issue_values[:loc_json])
       end
 
       it 'should create a new issue' do
-        fill_in 'Title', with: issue_values[:title]
         attach_file 'Add a photo', test_photo_path
         fill_in 'Tag your issue', with: 'parking'
-        fill_in 'Write a description', with: issue_values[:description]
         # Note hidden map field
-        find('#issue_loc_json').set(issue_values[:loc_json])
         maxlength = find_field('Title')['maxlength']
         expect(maxlength).to eq("80")
         click_on 'Send Report'
@@ -32,10 +33,6 @@ describe 'Issues' do
       end
 
       it 'must not barf on duplicate tags' do
-        fill_in 'Title', with: issue_values[:title]
-        fill_in 'Write a description', with: issue_values[:description]
-        find('#issue_loc_json').set(issue_values[:loc_json])
-
         fill_in 'Tag your issue', with: 'parking parking'
 
         click_on 'Send Report'
@@ -46,10 +43,6 @@ describe 'Issues' do
       end
 
       it 'must not barf on nasty tags' do
-        fill_in 'Title', with: issue_values[:title]
-        fill_in 'Write a description', with: issue_values[:description]
-        find('#issue_loc_json').set(issue_values[:loc_json])
-
         fill_in 'Tag your issue', with: 'equals = êquals'
 
         click_on 'Send Report'

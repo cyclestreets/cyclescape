@@ -29,7 +29,7 @@ describe 'thread notifications' do
 
     it 'should send an email for a link message' do
       within('#new-link-message') do
-        fill_in 'URL', with: 'example.com'
+        fill_in 'Web address', with: 'example.com'
         fill_in 'Title', with: 'An example URL'
         fill_in 'Description', with: 'Some words'
         click_on 'Add Link'
@@ -68,7 +68,7 @@ describe 'thread notifications' do
 
       it 'should not escape link messages' do
         within('#new-link-message') do
-          fill_in 'URL', with: 'example.com?foo&bar'
+          fill_in 'Web address', with: 'example.com?foo&bar'
           fill_in 'Title', with: 'An example URL with & symbols'
           fill_in 'Description', with: 'Some words & some more words'
           click_on 'Add Link'

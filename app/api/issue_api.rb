@@ -1,4 +1,4 @@
-require 'grape-swagger'
+require 'grape-swagger-rails'
 
 module IssueApi
   class API < Grape::API

@@ -17,8 +17,7 @@
     %td= @request.user.full_name
     %td= auto_link @request.user.email
     %td
-      = time_tag_with_title(@request.created_at) do
-        - t ".created_at", time_ago: time_ago_in_words(@request.created_at)
+      = formatted_created_at(@request)
     %td= t ".membership_status.#{@request.status}"
     %td= link_to t(".by", name: @request.actioned_by.name), user_profile_path(@request.actioned_by) if @request.rejected? || @request.confirmed?
     %td= link_to t(".confirm"), confirm_group_membership_request_path(@group, @request), method: :post, data: { confirm: t(".are_you_sure") } if @request.pending?
