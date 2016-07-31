@@ -500,6 +500,7 @@ DEPENDENCIES
   letter_opener
   map_layers
   mustache
+  nokogiri
   parallel_tests
   paranoia (~> 2.0)
   pg

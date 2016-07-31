@@ -68,6 +68,7 @@ gem 'will-paginate-i18n'
 gem 'sunspot_solr', github: 'nikolai-b/sunspot', branch: 'bb_conjunctions'
 gem 'sunspot_rails', github: 'nikolai-b/sunspot', branch: 'bb_conjunctions'
 gem 'tagsinput-rails'
+gem 'nokogiri'
 
 group :development do
   gem 'rubocop'
