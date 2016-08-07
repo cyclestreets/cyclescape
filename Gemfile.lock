@@ -75,6 +75,9 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
+    browserify-rails (3.1.0)
+      railties (>= 4.0.0, < 5.1)
+      sprockets (>= 3.5.2)
     builder (3.2.2)
     bullet (5.2.0)
       activesupport (>= 3.0.0)
@@ -221,7 +224,6 @@ GEM
       rails
     launchy (2.4.3)
       addressable (~> 2.3)
-    leaflet-rails (0.7.7)
     letter_opener (1.4.1)
       launchy (~> 2.2)
     loofah (2.0.3)
@@ -465,6 +467,7 @@ DEPENDENCIES
   activerecord-postgis-adapter
   annotate (>= 2.5.0)
   attribute_normalizer
+  browserify-rails
   bullet
   capybara
   chartkick
@@ -496,7 +499,6 @@ DEPENDENCIES
   kaminari
   kaminari-i18n
   launchy
-  leaflet-rails
   letter_opener
   map_layers
   mustache

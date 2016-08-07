@@ -1,3 +1,5 @@
+require('autosize/build/jquery.autosize.js')
+
 jQuery ->
   # Tabs
   $(".tabs").parent().tabs()

@@ -1,0 +1,19 @@
+{
+  "name": "cyclescape",
+  "dependencies": {
+    "autosize": "^1.18.13",
+    "browserify": "~10.2.4",
+    "browserify-incremental": "^3.0.1",
+    "coffeeify": "~0.6",
+    "jquery-ui-timepicker-addon": "^1.5.5",
+    "knockout": "^3.4.0",
+    "leaflet": "^0.7.7",
+    "leaflet-draw": "0.2.4",
+    "leaflet-search": "^1.9.8",
+    "slick-carousel-browserify": "^1.6.12"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10"
+  }
+}

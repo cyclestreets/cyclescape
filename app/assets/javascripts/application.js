@@ -6,7 +6,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.autosize
 //= require jquery.cookie
 //= require jquery.selectboxes
 //= require jquery-ui/autocomplete
@@ -15,20 +14,14 @@
 //= require jquery-ui/dialog
 //= require jquery-ui/slider
 //= require autocomplete-rails
-//= require knockout
 //= require superbly-tagfield.min
 //= require map_display
 //= require ui
 //= require tags
 //= require library_message
 //= require thread_scroller
-//= require leaflet
-//= require slick.min
 //= require jquery.tagsinput
 //= require jquery-ui-sliderAccess
 //= require jquery-ui-timepicker-addon.min
-//= require geojson-bbox.js
-//= require leaflet-search.src.js
-//= require leaflet.draw-src.js
 //= require leaflet-layerjson.src.js
 //= require jqcloud
