@@ -22,5 +22,7 @@ it:
         external_url: External site
       message_thread:
         group: Owned by
+        closed: Closed
+        moderated: In Moderation
     models:
       message_thread: Thread

@@ -559,7 +559,7 @@ es-MX:
       review: Review
       requested_at: Requested At
       status: Status
-      title: Membership requests for %{group}
+      title: Group requests
       user: User (display name)
       membership_status:
         confirmed: Confirmed
@@ -587,7 +587,7 @@ es-MX:
       review: Review
       requested_at: Requested At
       status: Status
-      title: Membership requests for %{group}
+      title: Review group request
       user: User (display name)
       membership_status:
         confirmed: Confirmed
@@ -759,6 +759,8 @@ es-MX:
       loading: Please wait…
       threads: Discussion threads
       threads_tooltip: Discussions on each issue
+      tags: Tags
+      tags_tooltip: Cloud of the top 100 most used tags
       title: Cyclescape
     footer:
       application_version_html: 'Version ref: %{version}'
@@ -1121,7 +1123,7 @@ es-MX:
     message_moderations:
       approve: Approve
       approved: approved
-      reject: Reject
+      reject: Discard
       possible_spam: Possible spam
       not_approved: User not approved
       explanation: These messages are held for moderation.  This can be because they

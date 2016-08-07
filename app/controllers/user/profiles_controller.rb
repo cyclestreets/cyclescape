@@ -45,6 +45,6 @@ class User::ProfilesController < ApplicationController
   end
 
   def permitted_params
-    params.require(:user_profile).permit :picture, :retained_picture, :remove_picture, :website, :visibility, :about
+    params.require(:user_profile).permit :picture, :retained_picture, :remove_picture, :website, :visibility, :about, :locale
   end
 end

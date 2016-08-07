@@ -16,5 +16,8 @@
         = f.input :visibility,
             as: :radio,
             collection: UserProfile::VISIBILITY_OPTIONS.map {|n| [t(".profile_#{n}"), n] }
-
+        = f.input :locale,
+            as: :select,
+            collection: UserProfile.all_locales.values.map {|loc| [loc.label, loc.locale]},
+            include_blank: true
       = f.actions

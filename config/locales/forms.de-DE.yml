@@ -163,11 +163,15 @@ de-DE:
         privacy: Dies gibt an, wer diese Diskussion sehen und bearbeiten kann.
         issue: Die gibt an, welches Thema dieser Diskussion angfügt. Wenn nicht, wird
           dies eine administrative Diskussion sein.
+      library/note:
+        url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
     placeholders:
       issue:
-        external_url: http://www.example.com
+        external_url: http://www.beispiel.de
       group_membership_request:
         message: Bitte nimm mich in die Cyclescape-Gruppe auf.
+      library/note:
+        url: http://www.beispiel.de
       group_profile:
         new_user_email: Hallo {{full_name}}, Du wurdest in eine Cyclescape-Gruppe
           aufgenommen http://www.cyclescape.org
@@ -215,6 +219,6 @@ de-DE:
       user_thread_priority:
         create: Speichern
       thread_subscription:
-        create: Dieser Diskussion folgen
-        delete: Dieser Diskussion nicht mehr folgen
+        create: Diskussion folgen
+        delete: nicht mehr folgen
         delete_from_listing: Folgen beenden

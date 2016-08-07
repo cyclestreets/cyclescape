@@ -84,7 +84,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
+    I18n.locale = current_user.try(:profile).try(:locale) ||
+      http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
   end
 
   def set_auth_user

@@ -556,7 +556,7 @@ fr-CA:
       review: Review
       requested_at: Requested At
       status: Status
-      title: Membership requests for %{group}
+      title: Group requests
       user: User (display name)
       membership_status:
         confirmed: Confirmed
@@ -584,7 +584,7 @@ fr-CA:
       review: Review
       requested_at: Requested At
       status: Status
-      title: Membership requests for %{group}
+      title: Review group request
       user: User (display name)
       membership_status:
         confirmed: Confirmed
@@ -720,7 +720,6 @@ fr-CA:
       location: Location
       deadline: Deadline
       issues-nearby: Issues nearby
-    map:
       show_collisions: Show Collisions
     update:
       success: Issue updated
@@ -757,6 +756,8 @@ fr-CA:
       loading: Please wait…
       threads: Discussion threads
       threads_tooltip: Discussions on each issue
+      tags: Tags
+      tags_tooltip: Cloud of the top 100 most used tags
       title: Cyclescape
     footer:
       application_version_html: 'Version ref: %{version}'
@@ -1119,7 +1120,7 @@ fr-CA:
     message_moderations:
       approve: Approve
       approved: approved
-      reject: Reject
+      reject: Discard
       possible_spam: Possible spam
       not_approved: User not approved
       explanation: These messages are held for moderation.  This can be because they

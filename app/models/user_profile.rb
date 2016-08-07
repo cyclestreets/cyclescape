@@ -21,6 +21,17 @@ class UserProfile < ActiveRecord::Base
     storage_options :generate_picture_path
   end
 
+  Locale = Struct.new(:id, :label, :locale)
+  class_attribute :all_locales
+  self.all_locales = [
+    Locale.new(0, 'English - UK', 'en-GB'),
+    Locale.new(1, 'Deutsch (Deutschland)', 'de-DE'),
+    Locale.new(2, 'Česká - Česká republika', 'cs-CZ'),
+    Locale.new(3, 'Italiano', 'it'),
+  ].index_by(&:id).freeze
+
+  enum locale: all_locales.values.each_with_object({}).each { |loc, memo| memo[loc.locale] = loc.id }
+
   belongs_to :user
 
   validates :website, url: true
@@ -37,7 +48,7 @@ class UserProfile < ActiveRecord::Base
   end
 
   def clear
-    update(picture: nil, website: nil, about: nil)
+    update(picture: nil, website: nil, about: nil, locale: nil)
   end
 
   protected

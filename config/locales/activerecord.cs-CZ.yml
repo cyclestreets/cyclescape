@@ -23,5 +23,7 @@ cs-CZ:
         external_url: Externí stránka
       message_thread:
         group: Vlastněno
+        closed: Closed
+        moderated: In Moderation
     models:
       message_thread: Vlákno

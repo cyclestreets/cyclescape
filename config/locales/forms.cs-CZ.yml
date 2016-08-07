@@ -166,11 +166,15 @@ cs-CZ:
         privacy: Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno.
         issue: Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud
           k žádným, toto vlákno bude vytvořeno jako všeobecná diskuze.
+      library/note:
+        url: If another web page is relevant you can add it here.
     placeholders:
       issue:
         external_url: http://www.example.com
       group_membership_request:
         message: Prosím přidejte mě do místní skupiny Cyklisté sobě.
+      library/note:
+        url: http://www.example.com
       group_profile:
         new_user_email: Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny
           Cyklisté sobě na portálu http://www.cyklistesobe.cz
