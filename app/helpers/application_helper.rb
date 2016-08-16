@@ -5,7 +5,7 @@ module ApplicationHelper
       data: { text: text, link: link, size: size, via: via}
   end
 
-  def facebook_like(link, layout: 'button_count')
+  def facebook_like(link, layout: 'button')
     tag(:div, class: "fb-share-button",
                 data: { href: link, layout: layout} )
   end
