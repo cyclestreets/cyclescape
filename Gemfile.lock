@@ -431,7 +431,6 @@ GEM
     thumbs_up (0.4.6)
       activerecord
     tilt (2.0.5)
-    tweet-button (0.1.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.1)
@@ -539,7 +538,6 @@ DEPENDENCIES
   test_after_commit
   thin
   thumbs_up (~> 0.4.6)
-  tweet-button
   uglifier (>= 1.3.0)
   webmock
   whenever

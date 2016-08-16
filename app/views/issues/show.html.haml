@@ -59,6 +59,10 @@
 %aside#sidebar.wide
   - if permitted_to? :create, :issue_message_threads
     = link_to t(".new_thread", count: @issue.threads.count), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
+  %section.social
+    = tweet_button text: @issue.title, link: issue_url(@issue)
+    = facebook_like issue_url(@issue)
+
   %section.threads
     %header
       %h2= t ".threads"
@@ -73,8 +77,6 @@
     %section.photos
       = link_to issue_photo_path(@issue), rel: "#overlay" do
         = @issue.standard_photo_image
-  %section.social
-    = tweet_button( text: @issue.title )
 
 :javascript
   $( document ).ready(function() {

@@ -25,3 +25,4 @@
 //= require jquery-ui-timepicker-addon.min
 //= require leaflet-layerjson.src.js
 //= require jqcloud
+//= require social
