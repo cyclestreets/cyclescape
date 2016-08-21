@@ -17,10 +17,9 @@ gem 'rgeo-geojson'
 gem 'kaminari'
 gem 'kaminari-i18n'
 gem 'rails_autolink'
-gem 'tweet-button'
 gem 'chartkick'
-gem 'leaflet-rails'
 gem 'jqcloud-rails', github: 'GovSciences/jqcloud-rails'
+gem 'browserify-rails'
 # gem 'jquery-turbolinks'
 
 # Back-end gems

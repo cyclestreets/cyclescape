@@ -1,3 +1,6 @@
+ko = require('knockout')
+slick = require('slick-carousel-browserify')
+
 class LibraryMessageView
   constructor: (@panel) ->
     # Items loaded at the start
@@ -30,7 +33,7 @@ class LibraryMessageView
     @results(data)
     $("#library-recent").hide()
     $("#library-results").show()
-    $('.scrollable').slick('setPosition')
+    slick($('.scrollable'), 'setPosition')
 
   show_error: (xhr, status, error) =>
     console.log xhr, status, error
@@ -47,23 +50,23 @@ class LibraryMessageView
 
 jQuery ->
   scroller = $('.scrollable')
-  scroller.slick(
+  slick(scroller, {
     dots: false
     arrows: false
     adaptiveHeight: true
     draggable: false
-  )
+  })
 
   if $("#from-library").length > 0
     library_message_view = new LibraryMessageView($("#from-library"))
 
     # Select button
     $("#from-library").on "click", "a.select", (e) ->
-      scroller.slick('slickNext')
+      slick(scroller, 'slickNext')
       false
 
     $("#add-library-item > a.prev").click ->
-      scroller.slick('slickPrev')
+      slick(scroller, 'slickPrev')
 
     $('a[href="#from-library"]').click ->
-      scroller.slick('setPosition')
+      slick(scroller, 'setPosition')

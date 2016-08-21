@@ -47,6 +47,7 @@ module Cyclescape
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.assets.paths << "node_modules"
 
     # Set cache storage
     config.cache_store = :redis_store
@@ -70,5 +71,40 @@ module Cyclescape
 
     # Active Job
     config.active_job.queue_adapter = :resque
+
+    # Specify the file paths that should be browserified. We browserify everything that
+    # matches (===) one of the paths. So you will most likely put lambdas
+    # regexes in here.
+    #
+    # By default only files in /app and /node_modules are browserified,
+    # vendor stuff is normally not made for browserification and may stop
+    # working.
+    config.browserify_rails.paths << /vendor\/assets\/javascripts\/module\.js/
+
+    # Environments in which to generate source maps
+    #
+    # The default is none
+    config.browserify_rails.source_map_environments << "development"
+
+    # Should the node_modules directory be evaluated for changes on page load
+    #
+    # The default is `false`
+    # config.browserify_rails.evaluate_node_modules = true
+
+    # Force browserify on every found JavaScript asset if true.
+    # Can be a proc.
+    #
+    # The default is `false`
+    # config.browserify_rails.force = ->(file) { File.extname(file) == ".ts" }
+
+    # Command line options used when running browserify
+    #
+    # can be provided as a string:
+    config.browserify_rails.commandline_options = "-t coffeeify --extension=\".js.coffee\""
+
+    # Define NODE_ENV to be used with envify
+    #
+    # defaults to Rails.env
+    # config.browserify_rails.node_env = "production"
   end
 end

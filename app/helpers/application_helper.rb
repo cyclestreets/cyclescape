@@ -1,7 +1,14 @@
 module ApplicationHelper
-  include TweetButton
+  def tweet_button(text:, link:, size: nil, via: 'cyclescape')
+    link_to "Tweet", "https://twitter.com/intent/tweet",
+      class: "twitter-share-button",
+      data: { text: text, link: link, size: size, via: via}
+  end
 
-  TweetButton.default_tweet_button_options = { via: 'cyclescape', count: 'horizontal' }
+  def facebook_like(link, layout: 'button')
+    tag(:div, class: "fb-share-button",
+                data: { href: link, layout: layout} )
+  end
 
   def cancel_link(url = { action: :index })
     content_tag('li', class: 'action link_action cancel') do

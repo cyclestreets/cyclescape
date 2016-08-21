@@ -75,6 +75,9 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
+    browserify-rails (3.1.0)
+      railties (>= 4.0.0, < 5.1)
+      sprockets (>= 3.5.2)
     builder (3.2.2)
     bullet (5.2.0)
       activesupport (>= 3.0.0)
@@ -221,7 +224,6 @@ GEM
       rails
     launchy (2.4.3)
       addressable (~> 2.3)
-    leaflet-rails (0.7.7)
     letter_opener (1.4.1)
       launchy (~> 2.2)
     loofah (2.0.3)
@@ -429,7 +431,6 @@ GEM
     thumbs_up (0.4.6)
       activerecord
     tilt (2.0.5)
-    tweet-button (0.1.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (3.0.1)
@@ -465,6 +466,7 @@ DEPENDENCIES
   activerecord-postgis-adapter
   annotate (>= 2.5.0)
   attribute_normalizer
+  browserify-rails
   bullet
   capybara
   chartkick
@@ -496,7 +498,6 @@ DEPENDENCIES
   kaminari
   kaminari-i18n
   launchy
-  leaflet-rails
   letter_opener
   map_layers
   mustache
@@ -537,7 +538,6 @@ DEPENDENCIES
   test_after_commit
   thin
   thumbs_up (~> 0.4.6)
-  tweet-button
   uglifier (>= 1.3.0)
   webmock
   whenever
