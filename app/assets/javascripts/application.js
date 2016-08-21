@@ -13,6 +13,7 @@
 //= require jquery-ui/datepicker
 //= require jquery-ui/dialog
 //= require jquery-ui/slider
+//= require leaflet
 //= require autocomplete-rails
 //= require superbly-tagfield.min
 //= require map_display

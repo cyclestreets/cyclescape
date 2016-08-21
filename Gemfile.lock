@@ -224,6 +224,7 @@ GEM
       rails
     launchy (2.4.3)
       addressable (~> 2.3)
+    leaflet-rails (0.7.7)
     letter_opener (1.4.1)
       launchy (~> 2.2)
     loofah (2.0.3)
@@ -498,6 +499,7 @@ DEPENDENCIES
   kaminari
   kaminari-i18n
   launchy
+  leaflet-rails
   letter_opener
   map_layers
   mustache
