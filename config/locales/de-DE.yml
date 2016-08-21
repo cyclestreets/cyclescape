@@ -195,7 +195,7 @@ de-DE:
       planning_applications: Planning applications
       planning_applications_search: z.B. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
+      no_results_found: Es wurden keine Ergebnisse gefunden
       your_planning_applications: Your local planning applications
       hide: Vote to hide
       unhide: Remove my vote
@@ -209,7 +209,7 @@ de-DE:
       planning_applications: Planning applications
       planning_applications_search: z.B. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
-      no_results_found: No results found
+      no_results_found: Es wurden keine Ergebnisse gefunden
       your_planning_applications: Your local planning applications
       hide: Vote to hide
       unhide: Remove my vote
@@ -220,7 +220,7 @@ de-DE:
   dashboards:
     show:
       page_title: Ergebnis der Suche nach '%{q}'
-      convert_to_issue_html: Convert to an Issue &hellip;
+      convert_to_issue_html: In ein Thema umwandeln&hellip;
       planning_applications: Planning applications
       planning_applications_search: z.B. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
@@ -333,8 +333,8 @@ de-DE:
       update:
         success: Thema aktualisiert
       vote_clear:
-        failure: Your vote couldn't be cleared
-        success: Your vote has been cleared
+        failure: Deine Stimme konnte nicht gelöscht werden
+        success: Deine Stimme wurde gelöscht
       vote_down:
         already: Du hast über dieses Thema bereits negativ abgestimmt
         success: Du hast für dieses Thema negativ gestimmt
@@ -344,7 +344,7 @@ de-DE:
     members:
       index:
         actions: Aktionen
-        add_directly: you can add them directly
+        add_directly: Du kannst sie direkt Hinzufügen
         committee: Ausschussmitglieder
         committee_guidance: Ausschussmitglieder können die Mitgliederliste verwalten,
           Gruppenprofile ändern und Diskussionen in Gruppen aktualisieren
@@ -403,12 +403,12 @@ de-DE:
         confirm: Bestätigen
         created_at: vor %{time_ago}
         email: Mailadresse
-        view_message: View...
+        view_message: Ansehen...
         message: Nachricht
         no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
         full_name: Vollständiger Name
         reject: Ablehnen
-        review: Review
+        review: Sichten
         requested_at: Angefragt durch
         status: Status
         title: Mitgliedschaft für %{group} bestätigt
@@ -426,22 +426,22 @@ de-DE:
         failure: Bei der Ablehnung des Mitgliedschaftsantrags ist ein Problem aufgetretetn
         success: Mitgliedschaft abgelehnt
       review:
-        actioned_by: Actioned By
+        actioned_by: Durchgeführt durch
         are_you_sure: Bist Du sicher?
         by: durch %{name}
         confirm: Bestätigen
         created_at: vor %{time_ago}
         email: Mailadresse
-        view_message: View...
+        view_message: Ansehen...
         message: 'Der Benutzer hat seinem Beitrittsgesuch folgende Nachricht beigefügt:'
         no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
         full_name: Vollständiger Name
         reject: Ablehnen
-        review: Review
+        review: Sichten
         requested_at: Requested At
         status: Status
         title: Einen Mitgliedsantrag zu %{group} überprüfen
-        user: User (display name)
+        user: Benutzer (Pseudonym)
         membership_status:
           confirmed: bestätigt
           pending: offen
@@ -503,9 +503,9 @@ de-DE:
       main_site_link_html: If you want to see issue beyond %{group}'s area you can
         search from the <a href='%{url}'>national site</a>.
     index:
-      list_tab: List
+      list_tab: Liste
       map_tab: Karte
-      new_group: Create new group
+      new_group: Neue Gruppe
       send_some_feedback: send some feedback
       title: Gruppenübersicht
       group_request: Neue Gruppe beantragen
@@ -546,7 +546,7 @@ de-DE:
         wirst als erstes Ausschussmitglied der Gruppe gesetzt, damit kannst Du sie
         administrieren.
     index:
-      actioned_by: Actioned By
+      actioned_by: Durchgeführt von
       are_you_sure: Bist Du sicher?
       by: by %{name}
       confirm: Confirm
@@ -574,7 +574,7 @@ de-DE:
       destroy: Remove request
       no_message: Diesem Gruppenantrag war keine Nachricht beigefügt.
     review:
-      actioned_by: Actioned By
+      actioned_by: Durchgeführt von
       are_you_sure: Bist Du sicher?
       by: by %{name}
       confirm: Bestätigen
@@ -591,20 +591,20 @@ de-DE:
       title: Review group request
       user: User (display name)
       membership_status:
-        confirmed: Confirmed
-        pending: Pending
-        unconfirmed: Unconfirmed
-        rejected: Rejected
-      name: Requested Name
-      actions: Actions
+        confirmed: bestätigt
+        pending: offen
+        unconfirmed: unbestätigt
+        rejected: abgelehnt
+      name: Gewünschter Name
+      actions: Aktionen
       new_group: Create a New Group
-      group_email: Email
+      group_email: Mailadresse
       destroy: Remove request
       no_message: Diesem Gruppenantrag war keine Nachricht beigefügt.
-      short_name: Short name
-      website: Website
+      short_name: Kurzname
+      website: Webseite
     confirm:
-      success: Group created
+      success: Gruppe erstellt
       failure: Failed to create Group
     destroy:
       success: Gruppenantrag entfernt
@@ -624,7 +624,7 @@ de-DE:
       groups_intro_html: |
         Cyclescape wird von <strong>Fahrrad-Kampagnen-Gruppen</strong> quer durchs Land benutzt. <strong>%{groups_link}</strong> und schau Dir an woran sie gerade arbeiten.
       find_local_groups: Finde Gruppen in deiner Nähe
-      twitter_title: Cyclescape on Twitter
+      twitter_title: Cyclescape bei Twitter
     guide:
       title: Wie Cyclescape funktioniert
       box_1_title: Berichte über ein Thema
@@ -725,7 +725,7 @@ de-DE:
         one: Stimme
         other: Stimmen
       location: Location
-      deadline: Deadline
+      deadline: Stichtag
       issues-nearby: Themen in der Umgebung
       show_collisions: Zeige Zusammenstöße
     update:
@@ -748,7 +748,7 @@ de-DE:
       dashboard: Mein Cyclescape
       dashboard_tooltip: Dein persönliches Dashboard zeigt Dir Updates in Diskussionen,
         die Du abonniert hast
-      about: About
+      about: "Über"
       user_guide: Benutzeranleitung
       sign_out: Abmelden
       sign_in: Anmelden
@@ -1166,7 +1166,7 @@ de-DE:
       added: "%{name} hat %{type} zur Diskussion beigetragen"
       committee: "[Ausschuss]"
     new_deadline_message:
-      type: a deadline/date
+      type: ein Stichtag/Termin
     new_document_message:
       type: ein Anhang
       view_the_document: 'Sie können das Anhang zu sehen:'

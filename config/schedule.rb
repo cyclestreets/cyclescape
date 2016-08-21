@@ -1,3 +1,5 @@
+job_type :runner,  "cd :path && /usr/local/bin/bundle exec rails runner -e :environment ':task' :output"
+
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -34,6 +36,7 @@ end
 #
 # To get the past 6 months run this
 # (1..180).step(15).each {|n_day| PlanningApplicationWorker.new(n_day.days.ago.to_date).process! }
+
 every 1.day, at: '1:02 am' do
   runner "PlanningApplicationWorker.new.process!"
   env :MAILTO, 'cyclescape-errors@cyclestreets.net'
