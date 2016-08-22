@@ -7,8 +7,9 @@ jQuery ->
     @OSStreet: 'https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
     @Mapnik: 'https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
     @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
-    @CyclestreetsGeoUrl: "<%= Geocoder::URL %>"
+    @CyclestreetsGeoUrl: "<%= Geocoder::GEO_URL %>"
     @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
+    @CyclestreetsPhotoUrl: "<%= Geocoder::PHOTO_URL %>"
     @default_marker_path: "<%= image_path('map-icons/m-misc.png') %>"
     @default_marker_anchor: [30 / 2, 42]
 
@@ -19,6 +20,7 @@ jQuery ->
       @setCenter(center)
       @geoInput = $("##{opts.geoinput}_loc_json")
       @buildCollistionLayer() if opts.collisions?
+      @buildPhotoLayer() if opts.photos?
       @remoteJSONLayer = {}
       @buildRemoteLayer(url, name) for own name, url of opts.remote
       @addLayers(opts.hidelayers)
@@ -80,6 +82,7 @@ jQuery ->
       }
       additionalLayers = @remoteJSONLayer
       additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
+      additionalLayers['Photos'] = @photoLayer if @photoLayer
 
       L.control.layers(baseLayers, additionalLayers).addTo(@map) unless hidelayers
 
@@ -102,6 +105,42 @@ jQuery ->
         timeout: 10000
         success: callback
       )
+
+    buildPhotoLayer: =>
+      params = [
+        {name: 'key', value: @constructor.CyclestreetsKey},
+        {name: 'fields', value: 'id,name,hasPhoto,categoryId,categoryPlural,metacategoryName,iconProperties,thumbnailUrl'},
+        {name: 'thumbnailsize', value: 250},
+        {name: 'datetime', value: 'friendly'},
+      ]
+
+      @photoLayer = new L.LayerJSON({
+        url: "#{@constructor.CyclestreetsPhotoUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
+        propertyItems: 'features'
+        propertyLoc: 'geometry.coordinates',
+        locAsGeoJSON: true,
+        dataToMarker: (feature, latlng) =>
+          marker = new L.CircleMarker(latlng).addTo @photoLayer
+          # Declarations
+          id = feature.properties.id
+          hasPhoto = feature.properties.hasPhoto
+          thumbnailUrl = feature.properties.thumbnailUrl
+          latitude = feature.geometry.coordinates[1]
+          longitude = feature.geometry.coordinates[0]
+          peekImgEl = if thumbnailUrl then '<img src="' + thumbnailUrl + '" alt="Image loading &hellip;"/>' else ''
+          # Wrap image in a link
+          peekImgEl = "<a title=\"Click for a bigger image and copyright details\" href=\"https://www.cyclestreets.net/location/#{id}/\" target=\"_blank\">#{peekImgEl}</a>"
+          # Get caption
+          caption = "<p class=\"caption\">#{feature.properties.caption}</p>"
+          # Headline
+          headline = '<p></p>'
+          if feature.properties.hasOwnProperty('categoryPlural') and feature.properties.hasOwnProperty('metacategoryName')
+            headline += "<p class=\"categorisationnote small\">Categorisation: #{feature.properties.categoryPlural} (#{feature.properties.metacategoryName.toLowerCase()})</p>"
+          # The main bit of the content
+          mainContent = if hasPhoto then '<p class="peekimage">' + peekImgEl + '</p>' else '<p class="placeholdernote faded">Placeholder (no photo)</p>' + caption
+
+          marker.bindPopup('<div class="' + (if hasPhoto then 'photo' else 'placeholder') + 'bubble' + '">' + headline + mainContent + caption + '</div>')
+      })
 
     buildCollistionLayer: =>
       lookup = {

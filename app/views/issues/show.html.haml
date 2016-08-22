@@ -52,7 +52,7 @@
     %div{id: 'map'}
     .hidden
       .map-data{"data-center" => location_to_geojson(@issue.location),
-        "data-opts" => { collisions: true, feature: item_to_geojson(@issue) }.to_json}
+        "data-opts" => { collisions: true, feature: item_to_geojson(@issue), photos: true }.to_json}
 
     = link_to t(".issues-nearby"), issues_path(anchor: 'map-pane', issue_id: @issue.id), class: "btn-green"
 
