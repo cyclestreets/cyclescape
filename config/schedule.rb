@@ -1,5 +1,4 @@
 env :PATH, ENV['PATH']
-job_type :runner,  "cd :path && /usr/local/bin/bundle exec rails runner -e :environment ':task' :output"
 
 # Use this file to easily define all of your cron jobs.
 #
