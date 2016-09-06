@@ -423,6 +423,17 @@ ActiveRecord::Schema.define(version: 20160918193000) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
+  create_table "thread_leaders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "message_thread_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "thread_leaders", ["message_thread_id"], name: "index_thread_leaders_on_message_thread_id", using: :btree
+  add_index "thread_leaders", ["user_id", "message_thread_id"], name: "index_thread_leaders_on_user_id_and_message_thread_id", unique: true, using: :btree
+  add_index "thread_leaders", ["user_id"], name: "index_thread_leaders_on_user_id", using: :btree
+
   create_table "thread_subscriptions", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "thread_id",  null: false
@@ -551,4 +562,6 @@ ActiveRecord::Schema.define(version: 20160918193000) do
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
   add_foreign_key "message_threads", "users"
+  add_foreign_key "thread_leaders", "message_threads"
+  add_foreign_key "thread_leaders", "users"
 end

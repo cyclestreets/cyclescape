@@ -10,6 +10,8 @@ describe MessageThread do
     it { is_expected.to belong_to(:issue) }
     it { is_expected.to have_many(:messages) }
     it { is_expected.to have_many(:subscriptions) }
+    it { is_expected.to have_many(:thread_leaders) }
+    it { is_expected.to have_many(:leaders) }
   end
 
   describe 'validations' do
