@@ -55,9 +55,10 @@
         .map-data{"data-center" => location_to_geojson(@issue.location),
           "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(@issue), hidezoom: true }.to_json}
       = link_to t(".issues-nearby"), '/issues#map-pane', class: "btn-green"
-  %section.social
-    = tweet_button text: @thread.title, link: thread_url(@issue)
-    = facebook_like thread_url(@issue)
+  - if @issue
+    %section.social
+      = tweet_button text: @thread.title, link: thread_url(@issue)
+      = facebook_like thread_url(@issue)
   = render "priority_panel"
   = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
   = render "library_panel", items: @library_items, thread_tags: @thread.tags
