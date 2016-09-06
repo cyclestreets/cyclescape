@@ -15,16 +15,16 @@ describe User do
   end
 
   describe 'associations' do
-    it { is_expected.to have_many(:memberships) }
+    it { is_expected.to have_many(:memberships).dependent(:destroy) }
     it { is_expected.to have_many(:groups) }
-    it { is_expected.to have_many(:membership_requests) }
+    it { is_expected.to have_many(:membership_requests).dependent(:destroy) }
     it { is_expected.to have_many(:requested_groups) }
     it { is_expected.to have_many(:actioned_membership_requests) }
     it { is_expected.to have_many(:issues) }
     it { is_expected.to have_many(:created_threads) }
     it { is_expected.to have_many(:messages) }
-    it { is_expected.to have_many(:locations) }
-    it { is_expected.to have_many(:thread_subscriptions) }
+    it { is_expected.to have_many(:locations).dependent(:destroy) }
+    it { is_expected.to have_many(:thread_subscriptions).dependent(:destroy) }
     it { is_expected.to have_many(:subscribed_threads) }
     it { is_expected.to have_many(:thread_priorities) }
     it { is_expected.to have_many(:prioritised_threads) }
@@ -361,41 +361,6 @@ describe User do
       # Exact behaviour tested elsewhere
       expect(subject.profile).to receive(:clear).and_return(true)
       subject.destroy
-    end
-
-    context 'with locations' do
-      subject { create(:user, :with_location) }
-
-      it 'should remove the user location' do
-        subject.destroy
-        subject.reload
-        expect(subject.locations).to be_empty
-        expect(UserLocation.all.size).to eq(0)
-      end
-    end
-
-    context 'subscribed to thread' do
-      let!(:thread_subscription) { create(:thread_subscription, user: subject) }
-
-      it 'should unsubscribe user from threads' do
-        expect(subject.subscribed_threads.size).to eql(1)
-        subject.destroy
-        subject.reload
-        expect(subject.subscribed_threads.size).to eql(0)
-        expect(thread_subscription.thread.subscribers).not_to include(subject)
-      end
-    end
-
-    context 'in a group' do
-      let!(:group_membership) { create(:group_membership, user: subject) }
-
-      it 'should remove member from the group' do
-        expect(subject.groups.size).to eql(1)
-        subject.destroy
-        subject.reload
-        expect(subject.groups.size).to eql(0)
-        expect(group_membership.group.members).not_to include(subject)
-      end
     end
   end
 
