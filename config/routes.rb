@@ -106,6 +106,7 @@ Rails.application.routes.draw do
       resources :subscriptions, only: [:create, :destroy]
       resource :tags, only: [:update]
       resource :user_priorities, only: [:create, :update]
+      resource :leaders, only: [:create, :destroy]
     end
   end
 

@@ -1,0 +1,8 @@
+<% leader_link = if Authorization::Engine.instance.permit?(:view_full_name, object: @event_user, user: @subscriber)
+                   link_to(@event_user.name, user_profile_url(@event_user))
+                 else
+                   @event_user.display_name_or_anon
+                 end
+               %>
+
+<%= t ".thread_has_new_leader", thread_title: @thread.title, leader_link: leader_link, description: t("message_threads.leaders_panel.leaders_description") %>:

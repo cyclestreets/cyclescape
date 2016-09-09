@@ -1,7 +1,11 @@
 
 --------
 <%= t ".thread" %>:
-<%= thread_url(@thread, anchor: dom_id(@message)) %>
+<% if defined?(@message) %>
+  <%= thread_url(@thread, anchor: dom_id(@message)) %>
+<% else %>
+  <%= thread_url(@thread) %>
+<% end %>
 You can reply to the email and the message will be added to the thread.
 
 <% if @thread.private_to_committee? %>
