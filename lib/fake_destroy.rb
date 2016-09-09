@@ -12,7 +12,9 @@ module FakeDestroy
       destroy_without_fake
     else
       self.deleted_at = Time.now
-      save!
+      run_callbacks(:destroy) do
+        save!
+      end
     end
   end
 
