@@ -43,9 +43,8 @@ describe InboundMailProcessor do
       end
 
       it 'should be sent out' do
-        expect(ThreadNotifier).to receive(:notify_subscribers) do |thread, type, message|
+        expect(ThreadNotifier).to receive(:notify_subscribers) do |thread, message|
           expect(thread).to be_a(MessageThread)
-          expect(type).to eq(:new_message)
           expect(message).to be_a(Message)
         end
         subject.perform(inbound_mail.id)
@@ -84,9 +83,8 @@ describe InboundMailProcessor do
       end
 
       it 'should be sent out' do
-        expect(ThreadNotifier).to receive(:notify_subscribers) do |thread, type, message|
+        expect(ThreadNotifier).to receive(:notify_subscribers) do |thread, message|
           expect(thread).to be_a(MessageThread)
-          expect(type).to eq(:new_message)
           expect(message).to be_a(Message)
         end
         subject.perform(inbound_mail.id)
@@ -140,8 +138,7 @@ describe InboundMailProcessor do
       end
 
       it 'should send multiple notifications' do
-        expect(ThreadNotifier).to receive(:notify_subscribers).with(kind_of(MessageThread), :new_message, kind_of(Message))
-        expect(ThreadNotifier).to receive(:notify_subscribers).with(kind_of(MessageThread), :new_photo_message, kind_of(Message))
+        expect(ThreadNotifier).to receive(:notify_subscribers).with(be_a(MessageThread), be_a(Message)).twice
 
         subject.perform(inbound_mail.id)
       end

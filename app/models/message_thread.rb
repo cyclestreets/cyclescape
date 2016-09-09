@@ -298,7 +298,7 @@ class MessageThread < ActiveRecord::Base
   def approve_related
     unless approved?
       ThreadSubscriber.subscribe_users self
-      ThreadNotifier.notify_subscribers self, :new_message, first_message
+      ThreadNotifier.notify_subscribers self, first_message
 
       NewThreadNotifier.notify_new_thread self
       SearchUpdater.update_type(self, :process_thread)
