@@ -179,6 +179,15 @@ describe Message do
     end
   end
 
+  context "created_by a deleted user" do
+    let(:user) { create :user, deleted_at: Time.current }
+    subject { create :message, created_by: user }
+
+    it "should still have a created_by" do
+      expect(subject.reload.created_by).to eq user
+    end
+  end
+
   describe '#committee_created?' do
     let(:committee_membership) { create :brian_at_quahogcc }
     let(:group)                { committee_membership.group }
