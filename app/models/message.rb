@@ -20,9 +20,10 @@
 #
 
 class Message < ActiveRecord::Base
-  include FakeDestroy
   include AASM
   include Rakismet::Model
+
+  acts_as_paranoid
 
   belongs_to :thread, class_name: 'MessageThread', inverse_of: :messages
   belongs_to :created_by, class_name: 'User'

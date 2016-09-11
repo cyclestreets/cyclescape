@@ -15,7 +15,7 @@
 #
 
 class ThreadSubscription < ActiveRecord::Base
-  include FakeDestroy
+  acts_as_paranoid
 
   belongs_to :user
   belongs_to :thread, class_name: 'MessageThread', inverse_of: :subscriptions

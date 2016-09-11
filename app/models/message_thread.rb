@@ -24,7 +24,6 @@
 
 class MessageThread < ActiveRecord::Base
   include AASM
-  include FakeDestroy
   include Taggable
 
   searchable auto_index: false do
@@ -40,6 +39,8 @@ class MessageThread < ActiveRecord::Base
       end
     end
   end
+
+  acts_as_paranoid
 
   ALL_ALLOWED_PRIVACY = %w(public group committee private).freeze
   ALLOWED_PRIVACY = ALL_ALLOWED_PRIVACY - %w(private)
@@ -153,7 +154,7 @@ class MessageThread < ActiveRecord::Base
     found = user.thread_subscriptions.to(self)
     if found
       # Reset the subscription
-      found.undelete!
+      found.restore
       found
     else
       subscriptions.create( user: user )

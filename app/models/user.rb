@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     end
   end
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
-  has_many :subscribed_threads, -> { where('thread_subscriptions.deleted_at is NULL').merge(MessageThread.approved) },
+  has_many :subscribed_threads, -> { merge(MessageThread.approved) },
     through: :thread_subscriptions, source: :thread
   has_many :thread_priorities, class_name: 'UserThreadPriority', inverse_of: :user
   has_many :prioritised_threads, through: :thread_priorities, source: :thread
@@ -122,11 +122,11 @@ class User < ActiveRecord::Base
   end
 
   def subscribed_to_thread?(thread)
-    thread_subscriptions.active.to(thread)
+    thread_subscriptions.to(thread)
   end
 
   def ever_subscribed_to_thread?(thread)
-    thread_subscriptions.to(thread)
+    thread_subscriptions.with_deleted.to(thread)
   end
 
   def involved_threads

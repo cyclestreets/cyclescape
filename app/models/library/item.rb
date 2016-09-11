@@ -18,9 +18,10 @@
 
 class Library::Item < ActiveRecord::Base
 
-  include FakeDestroy
   include Taggable
   include Locatable
+
+  acts_as_paranoid
 
   searchable do
     text :search_text, :id

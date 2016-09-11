@@ -21,7 +21,6 @@
 class Issue < ActiveRecord::Base
 
   include Locatable
-  include FakeDestroy
   include Taggable
 
   searchable auto_index: false do
@@ -31,6 +30,7 @@ class Issue < ActiveRecord::Base
   end
 
   acts_as_voteable
+  acts_as_paranoid
 
   dragonfly_accessor :photo do
     storage_options :generate_photo_path
