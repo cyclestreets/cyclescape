@@ -25,7 +25,7 @@ class Message < ActiveRecord::Base
   include Rakismet::Model
 
   belongs_to :thread, class_name: 'MessageThread', inverse_of: :messages
-  belongs_to :created_by, class_name: 'User'
+  belongs_to :created_by, -> { with_deleted }, class_name: 'User'
   belongs_to :component, polymorphic: true, autosave: true, inverse_of: :message
   belongs_to :in_reply_to, class_name: 'Message'
 
