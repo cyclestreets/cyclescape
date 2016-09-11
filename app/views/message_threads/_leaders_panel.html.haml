@@ -4,10 +4,10 @@
   - if leaders.present?
     %ul.thread-metadata-listings
       - leaders.each do |leader|
-        = render "connected_to_thread", user: leader
+        = render "message_threads/connected_to_thread", user: leader
   - else
     %p= t ".no_leaders"
   - if permitted_to? :create, @thread.thread_leaders.build
-    = link_to t(".start_leading"), thread_leaders_path(@thread), class: "btn-green", method: :post
+    = link_to t(".start_leading"), thread_leaders_path(@thread), class: "btn-green", method: :post, remote: true
   - if permitted_to? :destroy, @thread.thread_leaders.build
-    = link_to t(".stop_leading"), thread_leaders_path(@thread), class: "btn-red", method: :delete
+    = link_to t(".stop_leading"), thread_leaders_path(@thread), class: "btn-red", method: :delete, remote: true

@@ -11,7 +11,7 @@ class MessageThread::LeadersController < MessageThread::BaseController
 
     respond_to do |format|
       format.html { redirect_to thread_path @thread }
-      format.js   { }
+      format.js   { @flash = flash }
     end
   end
 
@@ -25,7 +25,7 @@ class MessageThread::LeadersController < MessageThread::BaseController
 
     respond_to do |format|
       format.html { redirect_to thread_path @thread }
-      format.js { }
+      format.js   { @flash = flash }
     end
   end
 end
