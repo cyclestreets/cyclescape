@@ -1,1 +1,3 @@
-$('##{@planning_application.planning_application.id}').replaceWith('#{j render(@planning_application)}')
+$('##{@planning_application.planning_application.id}').replaceWith('#{j render(@planning_application)}');
+var domMap = $('##{@planning_application.planning_application.id} .map-data')[0];
+new LeafletMap($(domMap).data('center'), $(domMap).data('opts'));
