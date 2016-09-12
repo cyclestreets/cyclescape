@@ -82,25 +82,6 @@ class window.LeafletMap
 
     L.control.layers(baseLayers, additionalLayers).addTo(@map) unless hidelayers
 
-  search: (text, callback) =>
-    bbox = @map.getBounds().toBBoxString()
-    params = [
-      {name: 'q', value: text}
-      {name: 'key', value: @constructor.CyclestreetsKey}
-      {name: 'bbox', value: bbox},
-      {name: 'geometries', value: 1}
-    ]
-    jsonpTransportRequired = ->
-      navigator.appVersion.indexOf('MSIE') != -1 &&
-        parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
-
-    $.ajax(
-      url: @constructor.CyclestreetsGeoUrl
-      data: params
-      dataType: 'jsonp' if jsonpTransportRequired()
-      timeout: 10000
-      success: callback
-    )
 
   buildCollistionLayer: =>
     lookup = {
@@ -128,24 +109,49 @@ class window.LeafletMap
         )
     })
 
-  formatJSON: (rawjson) ->
-    json = {}
-    featureName = (props) ->
-      "#{props.name} (#{props.near})"
-
-    # Hacked Leaflet.search for it to work with features but potential solution is here:
-    # https://github.com/stefanocudini/leaflet-search/pull/111#issuecomment-210533909
-    for feature in rawjson.features
-      json[featureName(feature.properties)] = L.geoJson(type: "FeatureCollection", features: [feature])
-    json
 
   addSearch: =>
+    formatJSON = (rawjson) ->
+      json = {}
+      featureName = (props) ->
+        "#{props.name} (#{props.near})"
+
+      for feature in rawjson.features
+        geoJson = L.geoJson(type: "FeatureCollection", features: [feature])
+        latlng = geoJson.getBounds().getCenter()
+        latlng.layer = geoJson.getLayers()[0] # add the layer (for getting zoom later)
+        json[featureName(feature.properties)] = latlng
+      json
+
+    search = (text, callback) =>
+      bbox = @map.getBounds().toBBoxString()
+      params = [
+        {name: 'q', value: text}
+        {name: 'key', value: @constructor.CyclestreetsKey}
+        {name: 'bbox', value: bbox},
+        {name: 'geometries', value: 1}
+      ]
+      jsonpTransportRequired = ->
+        navigator.appVersion.indexOf('MSIE') != -1 &&
+          parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
+
+      $.ajax(
+        url: @constructor.CyclestreetsGeoUrl
+        data: params
+        dataType: 'jsonp' if jsonpTransportRequired()
+        timeout: 10000
+        success: callback
+      )
+
     @map.addControl(
       new (L.Control.Search)(
         autoCollapse: true
-        sourceData: @search
-        formatData: @formatJSON
-        markerLocation: false
+        sourceData: search
+        formatData: formatJSON
+        moveToLocation: (latlng, _title, map) ->
+          if latlng.layer.getBounds
+            zoom = map.getBoundsZoom(latlng.layer.getBounds())
+          map.setView(latlng, zoom)
         autoType: false
         minLength: 2)
     )
