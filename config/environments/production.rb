@@ -58,8 +58,5 @@ Rails.application.configure do
   config.active_record.raise_in_transactional_callbacks = true
 
   # Make sure appropriate pages are served over SSL
-  if Rails.env.production?
-    config.to_prepare { Devise::SessionsController.force_ssl only: [:new, :create] }
-    config.to_prepare { Devise::RegistrationsController.force_ssl only: [:new, :create, :edit, :update] }
-  end
+  config.force_ssl = true
 end
