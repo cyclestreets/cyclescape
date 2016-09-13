@@ -6,16 +6,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable
   ALLOWED_ROLES = %w(member admin)
 
-  has_many :memberships, class_name: 'GroupMembership'
+  has_many :memberships, class_name: 'GroupMembership', dependent: :destroy
   has_many :groups, through: :memberships
-  has_many :membership_requests, class_name: 'GroupMembershipRequest'
+  has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy
   has_many :requested_groups, through: :membership_requests, source: :group
   has_many :actioned_membership_requests, foreign_key: 'actioned_by_id', class_name: 'GroupMembershipRequest'
   has_many :issues, foreign_key: 'created_by_id'
   has_many :created_threads, class_name: 'MessageThread', foreign_key: 'created_by_id'
   has_many :messages, foreign_key: 'created_by_id'
-  has_many :locations, class_name: 'UserLocation'
-  has_many :thread_subscriptions do
+  has_many :locations, class_name: 'UserLocation', dependent: :destroy
+  has_many :thread_subscriptions, dependent: :destroy do
     def to(thread)
       where('thread_id = ?', thread).order(deleted_at: :desc).first
     end
@@ -40,9 +40,6 @@ class User < ActiveRecord::Base
 
   before_destroy :obfuscate_name
   before_destroy :clear_profile
-  before_destroy :remove_locations
-  before_destroy :remove_group_memberships
-  before_destroy :remove_thread_subscriptions
 
   scope :active, -> { where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL') }
   scope :admin,  -> { where(role: 'admin') }
@@ -228,21 +225,6 @@ class User < ActiveRecord::Base
 
   def clear_profile
     profile.clear
-    true
-  end
-
-  def remove_locations
-    locations.each(&:destroy)
-    true
-  end
-
-  def remove_group_memberships
-    memberships.each(&:destroy)
-    true
-  end
-
-  def remove_thread_subscriptions
-    thread_subscriptions.each(&:destroy)
     true
   end
 

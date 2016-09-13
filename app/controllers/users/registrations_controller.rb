@@ -1,7 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
-    if params[:bicycle_wheels].strip == '12' && params[:real_name].blank?
+    if params[:bicycle_wheels].try(:strip) == '12' && params[:real_name].blank?
       super
     else
       build_resource(sign_up_params)
@@ -14,14 +14,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_inactive_sign_up_path_for(resource)
-    root_url(protocol: 'http')
+    root_url
   end
 
   def after_sign_up_path_for(resource)
-    root_url(protocol: 'http')
+    root_url
   end
 
   def after_update_path_for(resource)
-    edit_user_registration_url(protocol: 'http')
+    edit_user_registration_url
   end
 end
