@@ -35,7 +35,7 @@ describe 'Groups admin' do
   end
 
   context 'edit' do
-    let(:group) { groups.first }
+    let(:group) { groups.first.reload }
 
     before do
       within('table tr:first') do

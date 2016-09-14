@@ -5,7 +5,12 @@ class TagPanelDecorator < ApplicationDecorator
     self.context = context
     self.form_url = options[:form_url] || h.url_for([context, :tags])
     self.auth_context = options[:auth_context] || ((context.respond_to?(:source) ? context.source : context).class.name.underscore + '_tags').to_sym
-    self.cancel_url = options[:cancel_url] || h.url_for
+    begin
+      self.cancel_url = options[:cancel_url] || h.url_for
+    rescue ActionController::UrlGenerationError => e
+      Rollbar.log e
+      self.cancel_url = "/"
+    end
   end
 
   def render

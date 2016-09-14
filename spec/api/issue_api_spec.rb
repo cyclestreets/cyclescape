@@ -70,7 +70,7 @@ describe IssueApi::API do
       let!(:outside_group) { create :issue }
 
       before do
-        get "api/issues", group: group_profile.group.short_name
+        get "api/issues", group: group_profile.reload.group.short_name
       end
 
       it 'should only return issues inside the groups area' do
