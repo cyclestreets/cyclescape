@@ -884,7 +884,7 @@
       subscribers: Following this thread
     leaders_panel:
       leaders: Leading this thread
-      leaders_description: They will take on responsibility for ensuring that discussions continually move forward and that actions are carried out and followed-up.
+      leaders_description: Leaders take on responsibility for ensuring that discussions continually move forward and that actions are carried out and followed-up.
       no_leaders: This thread has no one leading it.
       start_leading: Start leading
       stop_leading: Stop leading
@@ -1106,9 +1106,9 @@
         clicking 'unfollow this thread'.
   thread_event_mailer:
     new_leader:
-      thread_has_new_leader: "%{leader_link} set themself as a Leader of %{thread_title}. %{description}"
+      thread_has_new_leader: "%{leader_link} set themself as a leader of %{thread_title}. %{description}"
     removed_leader:
-      thread_has_removed_leader: "%{leader_link} has removed themself as a Leader of %{thread_title}. %{description}"
+      thread_has_removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
   thread_priorities:
     very_high: Top-priority
     high: Important
