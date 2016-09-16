@@ -7,7 +7,7 @@ describe ThreadEventMailer do
   describe 'new leader' do
     it 'has correct text in email' do
       subject = described_class.send(:common, thread, 'new_leader', user, user)
-      expect(subject.body).to include("set themself as a Leader of Message Thread")
+      expect(subject.body).to include("set themself as a leader of Message Thread")
     end
   end
 end
