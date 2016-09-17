@@ -1,10 +1,12 @@
 module Geocoder
   cs_api_file = Rails.root.join('config', 'cyclestreets')
   API_KEY = if cs_api_file.exist?
-              cs_api_file.read.strip
+              cs_api_file.read.strip.freeze
             else
-              ''
+              ''.freeze
             end
-  URL = 'https://api.cyclestreets.net/v2/geocoder'
-  COLLISIONS_URL = 'https://api.cyclestreets.net/v2/collisions.locations'
+  CS_BASE_URL    = 'https://api.cyclestreets.net/v2/'.freeze
+  GEO_URL        = "#{CS_BASE_URL}geocoder".freeze
+  COLLISIONS_URL = "#{CS_BASE_URL}collisions.locations".freeze
+  PHOTO_URL      = "#{CS_BASE_URL}photomap.locations".freeze
 end
