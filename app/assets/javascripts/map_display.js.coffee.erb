@@ -1,242 +1,242 @@
 require('leaflet-search/dist/leaflet-search.src.js')
 require('leaflet-draw')
 
-class window.LeafletMap
-  @OpenCycle: 'https://{s}.tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png'
-  @OSStreet: 'https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
-  @Mapnik: 'https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
-  @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
-  @CyclestreetsGeoUrl: "<%= Geocoder::URL %>"
-  @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
-  @default_marker_path: "<%= image_path('map-icons/m-misc.png') %>"
-  @default_marker_anchor: [30 / 2, 42]
+jQuery ->
+  class LeafletMap
+    @OpenCycle: 'https://{s}.tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png'
+    @OSStreet: 'https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
+    @Mapnik: 'https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
+    @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
+    @CyclestreetsGeoUrl: "<%= Geocoder::URL %>"
+    @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
+    @default_marker_path: "<%= image_path('map-icons/m-misc.png') %>"
+    @default_marker_anchor: [30 / 2, 42]
 
-  constructor: (center, opts) ->
-    @domId = opts.domid || 'map'
-    @map = L.map(@domId, maxZoom: 18)
-    @map.attributionControl.setPrefix('')
-    @setCenter(center)
-    @geoInput = $("##{opts.geoinput}_loc_json")
-    @buildCollistionLayer() if opts.collisions?
-    @remoteJSONLayer = {}
-    @buildRemoteLayer(url, name) for own name, url of opts.remote
-    @addLayers(opts.hidelayers)
-    @addSearch() if opts.search?
-    if opts.draw?
-      @addDraw(opts.feature)
-    else if opts.feature?
-      @addStaticFeature(opts.feature)
-    @map.removeControl(@map.zoomControl) if opts.hidezoom?
+    constructor: (center, opts) ->
+      @domId = opts.domid || 'map'
+      @map = L.map(@domId, maxZoom: 18)
+      @map.attributionControl.setPrefix('')
+      @setCenter(center)
+      @geoInput = $("##{opts.geoinput}_loc_json")
+      @buildCollistionLayer() if opts.collisions?
+      @remoteJSONLayer = {}
+      @buildRemoteLayer(url, name) for own name, url of opts.remote
+      @addLayers(opts.hidelayers)
+      @addSearch() if opts.search?
+      if opts.draw?
+        @addDraw(opts.feature)
+      else if opts.feature?
+        @addStaticFeature(opts.feature)
+      @map.removeControl(@map.zoomControl) if opts.hidezoom?
 
-  featurePointToLayer: (feature, latlng) =>
-    return L.marker(latlng).addTo @map unless feature.properties.thumbnail
-    icon = new L.Icon(iconUrl: feature.properties.thumbnail, iconAnchor: feature.properties.anchor)
-    L.marker(latlng, {icon: icon}).addTo @map
+    featurePointToLayer: (feature, latlng) =>
+      return L.marker(latlng).addTo @map unless feature.properties.thumbnail
+      icon = new L.Icon(iconUrl: feature.properties.thumbnail, iconAnchor: feature.properties.anchor)
+      L.marker(latlng, {icon: icon}).addTo @map
 
-  addStaticFeature: (collection) ->
-    L.geoJson(collection, {
-      style: {color: 'black'}, pointToLayer: @featurePointToLayer
-    }).addTo @map
-    return
+    addStaticFeature: (collection) ->
+      L.geoJson(collection, {
+        style: {color: 'black'}, pointToLayer: @featurePointToLayer
+      }).addTo @map
+      return
 
-  buildRemoteLayer: (url, name) ->
-    remoteLayer = L.geoJson(null, {
-      pointToLayer: @featurePointToLayer.bind(@)
-      fillOpacity: 0.1
-      fillColor: 'white'
-      onEachFeature: (feature, layer) ->
-        img = if feature.properties.image_url
-          "<img src='#{feature.properties.image_url}' width='37' height='37'>"
-        else
-          ''
-        layer.bindPopup( "#{img}
-         <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3>
-         <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
-        )
-    }).addTo(@map)
-    @remoteJSONLayer[name] = new L.LayerJSON({
-      url: "#{url}?bbox={lon1},{lat1},{lon2},{lat2}"
-      propertyItems: 'features'
-      propertyLoc: 'geometry.coordinates'
-      updateOutBounds: false
-      hashGenerator: (data) ->
-        data.id
-      dataToMarker: remoteLayer.addData.bind(remoteLayer)
-    }).addTo(@map)
+    buildRemoteLayer: (url, name) ->
+      remoteLayer = L.geoJson(null, {
+        pointToLayer: @featurePointToLayer.bind(@)
+        fillOpacity: 0.1
+        fillColor: 'white'
+        onEachFeature: (feature, layer) ->
+          img = if feature.properties.image_url
+            "<img src='#{feature.properties.image_url}' width='37' height='37'>"
+          else
+            ''
+          layer.bindPopup( "#{img}
+           <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3>
+           <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
+          )
+      }).addTo(@map)
+      @remoteJSONLayer[name] = new L.LayerJSON({
+        url: "#{url}?bbox={lon1},{lat1},{lon2},{lat2}"
+        propertyItems: 'features'
+        propertyLoc: 'geometry.coordinates'
+        updateOutBounds: false
+        hashGenerator: (data) ->
+          data.id
+        dataToMarker: remoteLayer.addData.bind(remoteLayer)
+      }).addTo(@map)
 
-  setCenter: (center) ->
-    @map.fitBounds(center.fitBounds) if center.fitBounds?
-    @map.setView(center.latLon, center.zoom) if center.latLon
-    return
+    setCenter: (center) ->
+      @map.fitBounds(center.fitBounds) if center.fitBounds?
+      @map.setView(center.latLon, center.zoom) if center.latLon
+      return
 
-  addLayers: (hidelayers) ->
-    openCycle = L.tileLayer(@constructor.OpenCycle, opacity: 0.8)
-    openCycle.addTo(@map)
-    baseLayers = {
-      "OpenCycleMap":  openCycle,
-      "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: 0.8),
-      "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: 0.8),
-    }
-    additionalLayers = @remoteJSONLayer
-    additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
+    addLayers: (hidelayers) ->
+      openCycle = L.tileLayer(@constructor.OpenCycle, opacity: 0.8)
+      openCycle.addTo(@map)
+      baseLayers = {
+        "OpenCycleMap":  openCycle,
+        "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: 0.8),
+        "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: 0.8),
+      }
+      additionalLayers = @remoteJSONLayer
+      additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
 
-    L.control.layers(baseLayers, additionalLayers).addTo(@map) unless hidelayers
-
-
-  buildCollistionLayer: =>
-    lookup = {
-      fatal: { color: '#aa0000', fillColor: '#ff0000', radius: 10 },
-      serious: { color: '#e44500', fillColor: '#ff8814', radius: 8 },
-      slight: { color: '#a7932f', fillColor: '#fcff00', radius: 6 }
-    }
-    params = [
-      {name: 'key', value: @constructor.CyclestreetsKey}
-      {name: 'fields', value: 'id,latitude,longitude,datetime,severity,url'},
-      {name: 'datetime', value: 'friendly'},
-    ]
-    @collisionLayer = new L.LayerJSON({
-      url: "#{@constructor.CyclestreetsCollisionUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
-      propertyItems: 'features'
-      propertyLoc: ['properties.latitude','properties.longitude'],
-      dataToMarker: (feature, latlng) =>
-        props = lookup[feature.properties.severity]
-        marker = new L.CircleMarker(latlng, props).addTo @collisionLayer
-        marker.bindPopup(
-          "<h3><a href=\"#{feature.properties.url}\">Collision #{feature.properties.id}</a></h3>
-          <p>Date and time: #{feature.properties.datetime} </p>
-          <p>Severity: #{feature.properties.severity} </p>
-          <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
-        )
-    })
+      L.control.layers(baseLayers, additionalLayers).addTo(@map) unless hidelayers
 
 
-  addSearch: =>
-    formatJSON = (rawjson) ->
-      json = {}
-      featureName = (props) ->
-        "#{props.name} (#{props.near})"
-
-      for feature in rawjson.features
-        geoJson = L.geoJson(type: "FeatureCollection", features: [feature])
-        latlng = geoJson.getBounds().getCenter()
-        latlng.layer = geoJson.getLayers()[0] # add the layer (for getting zoom later)
-        json[featureName(feature.properties)] = latlng
-      json
-
-    search = (text, callback) =>
-      bbox = @map.getBounds().toBBoxString()
+    buildCollistionLayer: =>
+      lookup = {
+        fatal: { color: '#aa0000', fillColor: '#ff0000', radius: 10 },
+        serious: { color: '#e44500', fillColor: '#ff8814', radius: 8 },
+        slight: { color: '#a7932f', fillColor: '#fcff00', radius: 6 }
+      }
       params = [
-        {name: 'q', value: text}
         {name: 'key', value: @constructor.CyclestreetsKey}
-        {name: 'bbox', value: bbox},
-        {name: 'geometries', value: 1}
+        {name: 'fields', value: 'id,latitude,longitude,datetime,severity,url'},
+        {name: 'datetime', value: 'friendly'},
       ]
-      jsonpTransportRequired = ->
-        navigator.appVersion.indexOf('MSIE') != -1 &&
-          parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
+      @collisionLayer = new L.LayerJSON({
+        url: "#{@constructor.CyclestreetsCollisionUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
+        propertyItems: 'features'
+        propertyLoc: ['properties.latitude','properties.longitude'],
+        dataToMarker: (feature, latlng) =>
+          props = lookup[feature.properties.severity]
+          marker = new L.CircleMarker(latlng, props).addTo @collisionLayer
+          marker.bindPopup(
+            "<h3><a href=\"#{feature.properties.url}\">Collision #{feature.properties.id}</a></h3>
+            <p>Date and time: #{feature.properties.datetime} </p>
+            <p>Severity: #{feature.properties.severity} </p>
+            <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
+          )
+      })
 
-      $.ajax(
-        url: @constructor.CyclestreetsGeoUrl
-        data: params
-        dataType: 'jsonp' if jsonpTransportRequired()
-        timeout: 10000
-        success: callback
+
+    addSearch: =>
+      formatJSON = (rawjson) ->
+        json = {}
+        featureName = (props) ->
+          "#{props.name} (#{props.near})"
+
+        for feature in rawjson.features
+          geoJson = L.geoJson(type: "FeatureCollection", features: [feature])
+          latlng = geoJson.getBounds().getCenter()
+          latlng.layer = geoJson.getLayers()[0] # add the layer (for getting zoom later)
+          json[featureName(feature.properties)] = latlng
+        json
+
+      search = (text, callback) =>
+        bbox = @map.getBounds().toBBoxString()
+        params = [
+          {name: 'q', value: text}
+          {name: 'key', value: @constructor.CyclestreetsKey}
+          {name: 'bbox', value: bbox},
+          {name: 'geometries', value: 1}
+        ]
+        jsonpTransportRequired = ->
+          navigator.appVersion.indexOf('MSIE') != -1 &&
+            parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
+
+        $.ajax(
+          url: @constructor.CyclestreetsGeoUrl
+          data: params
+          dataType: 'jsonp' if jsonpTransportRequired()
+          timeout: 10000
+          success: callback
+        )
+
+      @map.addControl(
+        new (L.Control.Search)(
+          autoCollapse: true
+          sourceData: search
+          formatData: formatJSON
+          moveToLocation: (latlng, _title, map) ->
+            if latlng.layer.getBounds
+              zoom = map.getBoundsZoom(latlng.layer.getBounds())
+            map.setView(latlng, zoom)
+          autoType: false
+          minLength: 2)
       )
 
-    @map.addControl(
-      new (L.Control.Search)(
-        autoCollapse: true
-        sourceData: search
-        formatData: formatJSON
-        moveToLocation: (latlng, _title, map) ->
-          if latlng.layer.getBounds
-            zoom = map.getBoundsZoom(latlng.layer.getBounds())
-          map.setView(latlng, zoom)
-        autoType: false
-        minLength: 2)
-    )
+    addDraw: (feature) =>
+      hideNewToolbars = ->
+        $('.tabs').children('li.area, li.route, li.point').css(opacity: 0.3).prop('disabled', true)
 
-  addDraw: (feature) =>
-    hideNewToolbars = ->
-      $('.tabs').children('li.area, li.route, li.point').css(opacity: 0.3).prop('disabled', true)
+      showNewToolbars = ->
+        $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
 
-    showNewToolbars = ->
-      $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
+      layerCreated = (layer) =>
+        drawnItems.addLayer layer
+        @geoInput.val JSON.stringify(layer.toGeoJSON())
+        hideNewToolbars()
+        $('.leaflet-draw-edit-edit')[0].click()
 
-    layerCreated = (layer) =>
-      drawnItems.addLayer layer
-      @geoInput.val JSON.stringify(layer.toGeoJSON())
-      hideNewToolbars()
-      $('.leaflet-draw-edit-edit')[0].click()
+      $('.icon-save').toggle()
 
-    $('.icon-save').toggle()
-
-    drawnItems = new L.FeatureGroup()
-    @map.addLayer drawnItems
-    drawControl = new L.Control.Draw {
-      position: 'topright'
-      edit: {
-        featureGroup: drawnItems
-      }
-      draw: {
-        circle: false
-        rectangle: false
-        marker: {
-          icon: new L.Icon {
-            iconUrl: @constructor.default_marker_path,
-            iconAnchor: @constructor.default_marker_anchor
+      drawnItems = new L.FeatureGroup()
+      @map.addLayer drawnItems
+      drawControl = new L.Control.Draw {
+        position: 'topright'
+        edit: {
+          featureGroup: drawnItems
+        }
+        draw: {
+          circle: false
+          rectangle: false
+          marker: {
+            icon: new L.Icon {
+              iconUrl: @constructor.default_marker_path,
+              iconAnchor: @constructor.default_marker_anchor
+            }
           }
         }
       }
-    }
 
-    @map.addControl drawControl
+      @map.addControl drawControl
 
-    @map.on 'draw:created', (e) ->
-      layerCreated(e.layer)
+      @map.on 'draw:created', (e) ->
+        layerCreated(e.layer)
 
-    @map.on 'draw:edited draw:editvertex draw:drawvertex draw:editmove', (e) ->
-      layerCreated(drawnItems.getLayers()[0])
+      @map.on 'draw:edited draw:editvertex draw:drawvertex draw:editmove', (e) ->
+        layerCreated(drawnItems.getLayers()[0])
 
-    if feature
-      layerCreated(L.geoJson(feature).getLayers()[0])
-    else
-      # enable area / polygon draw as standard
-      $(".leaflet-draw-draw-polygon")[0].click()
-      $('.icon-undo').css(opacity: 0.3)
+      if feature
+        layerCreated(L.geoJson(feature).getLayers()[0])
+      else
+        # enable area / polygon draw as standard
+        $(".leaflet-draw-draw-polygon")[0].click()
+        $('.icon-undo').css(opacity: 0.3)
 
-    # Bind our icons to the Leaflet draw icons
-    lDrawMapping = {
-      area: "draw-polygon"
-      route: "draw-polyline"
-      point: "draw-marker"
-    }
+      # Bind our icons to the Leaflet draw icons
+      lDrawMapping = {
+        area: "draw-polygon"
+        route: "draw-polyline"
+        point: "draw-marker"
+      }
 
-    for own localN,lDrawName of lDrawMapping
-      $("li.#{localN} a").click (evt) ->
-        target = evt.target
-        unless $(target).parent().parent().prop('disabled')
-          $(".leaflet-draw-#{lDrawMapping[target.className]}")[0].click()
+      for own localN,lDrawName of lDrawMapping
+        $("li.#{localN} a").click (evt) ->
+          target = evt.target
+          unless $(target).parent().parent().prop('disabled')
+            $(".leaflet-draw-#{lDrawMapping[target.className]}")[0].click()
 
-    # When drawing clear cancels the drawing
-    # Otherwise clear wipes any shapes on the map
-    $('.edit-clear').click =>
-      drawnItems.clearLayers()
-      $('ul.leaflet-draw-actions a[title^="Cancel"]')[0]?.click()
-      $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
-      @geoInput.val(null)
-      $('.icon-undo').css(opacity: 0.3)
-      activeTab = $('.tabs').parent().tabs('option', 'active')
-      $('.tabs a span')[activeTab].click() # Re-activate drawing the current shape
+      # When drawing clear cancels the drawing
+      # Otherwise clear wipes any shapes on the map
+      $('.edit-clear').click =>
+        drawnItems.clearLayers()
+        $('ul.leaflet-draw-actions a[title^="Cancel"]')[0]?.click()
+        $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
+        @geoInput.val(null)
+        $('.icon-undo').css(opacity: 0.3)
+        activeTab = $('.tabs').parent().tabs('option', 'active')
+        $('.tabs a span')[activeTab].click() # Re-activate drawing the current shape
 
-    # When drawing undo deletes the last point
-    # Otherwise undo edits the layer
-    @map.on 'draw:drawstart', (e) ->
-      $('.icon-undo').css(opacity: 1)
+      # When drawing undo deletes the last point
+      # Otherwise undo edits the layer
+      @map.on 'draw:drawstart', (e) ->
+        $('.icon-undo').css(opacity: 1)
 
-    $('.edit-undo').click ->
-      $('ul.leaflet-draw-actions a[title^="Delete"]')[0].click()
+      $('.edit-undo').click ->
+        $('ul.leaflet-draw-actions a[title^="Delete"]')[0].click()
 
-jQuery ->
   for domMap in $('.map-data')
     new LeafletMap($(domMap).data('center'), $(domMap).data('opts'))
