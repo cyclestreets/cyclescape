@@ -5,6 +5,7 @@ class window.LeafletMap
   @OpenCycle: 'https://{s}.tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png'
   @OSStreet: 'https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
   @Mapnik: 'https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
+  @CyclestreetsUrl: "https://www.cyclestreets.net/"
   @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
   @CyclestreetsGeoUrl: "<%= Geocoder::GEO_URL %>"
   @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
@@ -100,7 +101,11 @@ class window.LeafletMap
       propertyLoc: 'geometry.coordinates',
       locAsGeoJSON: true,
       dataToMarker: (feature, latlng) =>
-        marker = new L.CircleMarker(latlng).addTo @photoLayer
+        iconProperties = feature.properties.iconProperties
+        iconProperties.iconUrl = @constructor.CyclestreetsUrl + iconProperties.iconUrl
+        iconProperties.shadowUrl = @constructor.CyclestreetsUrl + iconProperties.shadowUrl
+        icon = new L.Icon(iconProperties)
+        marker = new L.marker(latlng, {icon: icon}).addTo @photoLayer
         # Declarations
         id = feature.properties.id
         hasPhoto = feature.properties.hasPhoto
@@ -109,7 +114,8 @@ class window.LeafletMap
         longitude = feature.geometry.coordinates[0]
         peekImgEl = if thumbnailUrl then '<img src="' + thumbnailUrl + '" alt="Image loading &hellip;"/>' else ''
         # Wrap image in a link
-        peekImgEl = "<a title=\"Click for a bigger image and copyright details\" href=\"https://www.cyclestreets.net/location/#{id}/\" target=\"_blank\">#{peekImgEl}</a>"
+        peekImgEl = "<a title=\"Click for a bigger image and copyright details\" href=\"" +
+          @constructor.CyclestreetsUrl + "location/#{id}/\" target=\"_blank\">#{peekImgEl}</a>"
         # Get caption
         caption = "<p class=\"caption\">#{feature.properties.caption}</p>"
         # Headline
@@ -147,7 +153,6 @@ class window.LeafletMap
           <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
         )
     })
-
 
   addSearch: =>
     formatJSON = (rawjson) ->
