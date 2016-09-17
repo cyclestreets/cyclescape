@@ -49,6 +49,8 @@
     .pull-right
       = check_box_tag('collisions')
       = label_tag 'collisions', t('.show_collisions')
+      = check_box_tag('photos')
+      = label_tag 'photos', t('.show_photos')
     %div{id: 'map'}
     .hidden
       .map-data{"data-center" => location_to_geojson(@issue.location),
@@ -80,12 +82,16 @@
 
 :javascript
   $( document ).ready(function() {
-    var mapCollision = $("span:contains('Collisions')").prev();
-    var checkboxCollision = $('#collisions');
-    mapCollision.change(function() {
-      checkboxCollision.prop('checked', this.checked);
-    })
-    checkboxCollision.change(function() {
-      mapCollision.click();
-    })
+    var layers = [{ map: $("span:contains('Collisions')").prev(), checkbox: $('#collisions') },
+                  { map: $("span:contains('Photos')").prev(), checkbox: $('#photos') }];
+    for ( var i = 0; i < layers.length; i++) {
+      var mapEl = layers[i].map;
+      var checkboxEl = layers[i].checkbox;
+      mapEl.change(function() {
+        checkboxEl.prop('checked', this.checked);
+      })
+      checkboxEl.change(function() {
+        mapEl.click();
+      })
+    }
   })

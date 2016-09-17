@@ -629,6 +629,7 @@
       deadline: Deadline
       issues-nearby: Issues nearby
       show_collisions: Show Collisions
+      show_photos: Show Photos
     update:
       success: Issue updated
     vote_clear:
