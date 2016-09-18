@@ -82,16 +82,18 @@
 
 :javascript
   $( document ).ready(function() {
-    var layers = [{ map: $("span:contains('Collisions')").prev(), checkbox: $('#collisions') },
-                  { map: $("span:contains('Photos')").prev(), checkbox: $('#photos') }];
-    for ( var i = 0; i < layers.length; i++) {
-      var mapEl = layers[i].map;
-      var checkboxEl = layers[i].checkbox;
+    var updateMap = function (mapEl, checkboxEl) {
       mapEl.change(function() {
         checkboxEl.prop('checked', this.checked);
-      })
+      });
       checkboxEl.change(function() {
         mapEl.click();
-      })
+      });
+    };
+    var layers = [{ map: $("span:contains('Collisions')").prev(), checkbox: $('#collisions') },
+                  { map: $("span:contains('Photos')").prev(), checkbox: $('#photos') }];
+
+    for ( var i = 0; i < layers.length; i++) {
+      updateMap(layers[i].map, layers[i].checkbox);
     }
   })
