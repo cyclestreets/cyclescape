@@ -1,0 +1,17 @@
+#new-cyclestreets-photo-message.pane
+  = semantic_form_for CyclestreetsPhotoMessage.new, url: thread_photos_path(@thread), html: {multipart: true} do |f|
+    = f.inputs do
+      = f.input :cyclestreet_category, as: :hidden
+      = f.input :cyclestreet_caption, as: :hidden
+      = f.input :cyclestreet_thumbnail_url, as: :hidden
+      = f.input :photo_url, as: :hidden
+      = f.input :location, as: :hidden
+      %div{id: 'map'}
+      .hidden
+        .map-data{"data-center" => location_to_geojson(@issue.location),
+          "data-opts" => { feature: item_to_geojson(@issue), photoselect: true, hidelayers: true }.to_json}
+      = f.input :cyclestreet_headline, html_options: { readonly: true, disabled: true }
+      = f.input :caption
+
+    = f.actions do
+      = f.action :submit, button_html: {class: "btn-green"}

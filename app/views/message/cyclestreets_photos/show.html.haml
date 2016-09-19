@@ -1,0 +1,6 @@
+.photo
+  = image_tag @photo.photo_medium.url,
+      alt: t(".photo_alt", caption: @photo.caption)
+  %figcaption
+    = @photo.caption
+  %p= link_to t(".view_original_image"), @photo.photo.url

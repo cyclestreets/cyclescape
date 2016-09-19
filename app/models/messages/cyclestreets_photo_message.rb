@@ -1,0 +1,2 @@
+class CyclestreetsPhotoMessage < MessageComponent
+end

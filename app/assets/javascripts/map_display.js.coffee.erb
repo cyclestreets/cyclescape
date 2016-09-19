@@ -20,10 +20,10 @@ class window.LeafletMap
     @setCenter(center)
     @geoInput = $("##{opts.geoinput}_loc_json")
     @buildCollistionLayer() if opts.collisions?
-    @buildPhotoLayer() if opts.photos?
+    @buildPhotoLayer(opts.photoselect) if opts.photos?
     @remoteJSONLayer = {}
     @buildRemoteLayer(url, name) for own name, url of opts.remote
-    @addLayers(opts.hidelayers)
+    @addLayers(opts.hidelayers, opts.photoselect)
     @addSearch() if opts.search?
     if opts.draw?
       @addDraw(opts.feature)
@@ -72,7 +72,7 @@ class window.LeafletMap
     @map.setView(center.latLon, center.zoom) if center.latLon
     return
 
-  addLayers: (hidelayers) ->
+  addLayers: (hidelayers, photoselect) ->
     openCycle = L.tileLayer(@constructor.OpenCycle, opacity: 0.8)
     openCycle.addTo(@map)
     baseLayers = {
@@ -85,9 +85,9 @@ class window.LeafletMap
     additionalLayers['Photos'] = @photoLayer if @photoLayer
 
     L.control.layers(baseLayers, additionalLayers).addTo(@map) unless hidelayers
+    @map.addLayer @photoLayer if photoselect
 
-
-  buildPhotoLayer: =>
+  buildPhotoLayer: (photoselect) =>
     params = [
       {name: 'key', value: @constructor.CyclestreetsKey},
       {name: 'fields', value: 'id,name,hasPhoto,categoryId,categoryPlural,metacategoryName,iconProperties,thumbnailUrl'},
@@ -124,8 +124,15 @@ class window.LeafletMap
           headline += "<p class=\"categorisationnote small\">Categorisation: #{feature.properties.categoryPlural} (#{feature.properties.metacategoryName.toLowerCase()})</p>"
         # The main bit of the content
         mainContent = if hasPhoto then '<p class="peekimage">' + peekImgEl + '</p>' else '<p class="placeholdernote faded">Placeholder (no photo)</p>' + caption
+        selectable = if photoselect
+          "<button class='formtastic btn-green' id='cs-image-#{feature.properties.id}'> <%= I18n.t('messages.new.select_image') %> </button>"
+        else
+          ""
 
-        marker.bindPopup('<div class="' + (if hasPhoto then 'photo' else 'placeholder') + 'bubble' + '">' + headline + mainContent + caption + '</div>')
+        marker.bindPopup('<div class="' + (if hasPhoto then 'photo' else 'placeholder') + 'bubble' + '">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
+          $("#cs-image-#{feature.properties.id}").click ->
+        )
+        return
     })
 
   buildCollistionLayer: =>

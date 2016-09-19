@@ -95,6 +95,7 @@ Rails.application.routes.draw do
     end
     scope module: :message do
       resources :photos, only: [:create, :show]
+      resources :cyclestreets_photos, only: [:create]
       resources :links, only: [:create]
       resources :street_views, only: [:create]
       resources :deadlines, only: [:create]

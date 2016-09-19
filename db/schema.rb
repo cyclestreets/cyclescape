@@ -11,11 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160724201231) do
+ActiveRecord::Schema.define(version: 20160918193000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "cyclestreets_photo_messages", force: :cascade do |t|
+    t.integer  "cyclestreets_id"
+    t.json     "icon_properties"
+    t.string   "photo_uid",                                                null: false
+    t.integer  "thread_id",                                                null: false
+    t.integer  "message_id",                                               null: false
+    t.integer  "created_by_id",                                            null: false
+    t.text     "caption"
+    t.geometry "location",        limit: {:srid=>4326, :type=>"geometry"}, null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+  end
+
+  add_index "cyclestreets_photo_messages", ["created_by_id"], name: "index_cyclestreets_photo_messages_on_created_by_id", using: :btree
+  add_index "cyclestreets_photo_messages", ["message_id"], name: "index_cyclestreets_photo_messages_on_message_id", using: :btree
+  add_index "cyclestreets_photo_messages", ["thread_id"], name: "index_cyclestreets_photo_messages_on_thread_id", using: :btree
 
   create_table "deadline_messages", force: :cascade do |t|
     t.integer  "thread_id",                                     null: false
@@ -527,6 +544,9 @@ ActiveRecord::Schema.define(version: 20160724201231) do
   add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true, using: :btree
   add_index "votes", ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
 
+  add_foreign_key "cyclestreets_photo_messages", "message_threads", column: "thread_id"
+  add_foreign_key "cyclestreets_photo_messages", "messages"
+  add_foreign_key "cyclestreets_photo_messages", "users", column: "created_by_id"
   add_foreign_key "issues", "planning_applications"
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
