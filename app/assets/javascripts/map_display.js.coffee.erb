@@ -62,6 +62,7 @@ class window.LeafletMap
       propertyItems: 'features'
       propertyLoc: 'geometry.coordinates'
       updateOutBounds: false
+      minShift: 500
       hashGenerator: (data) ->
         data.id
       dataToMarker: remoteLayer.addData.bind(remoteLayer)
@@ -156,7 +157,8 @@ class window.LeafletMap
     @collisionLayer = new L.LayerJSON({
       url: "#{@constructor.CyclestreetsCollisionUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
       propertyItems: 'features'
-      propertyLoc: ['properties.latitude','properties.longitude'],
+      propertyLoc: ['properties.latitude','properties.longitude']
+      minShift: 200
       dataToMarker: (feature, latlng) =>
         props = lookup[feature.properties.severity]
         marker = new L.CircleMarker(latlng, props).addTo @collisionLayer
