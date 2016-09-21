@@ -6,6 +6,14 @@
   border:1px solid black;
   margin-top: 3em;
 }
+
+#photo-map {
+  height: 550px;
+  width: 100%;
+  border: 1px solid black;
+  margin-bottom: 1em;
+}
+
 .map {
   position:relative;
   .map-tools-overlay {
@@ -211,14 +219,20 @@
     float: left;
     margin: 10px;
   }
+  img.no-float {
+    float: none;
+  }
+
   color: #ffffff;
   p {
     font-style: italic;
+    border-bottom: none;
   }
   a {
     color: #ffffff !important;
     font-style: normal;
     font-weight: bold;
+    border-bottom: none;
   }
 }
 

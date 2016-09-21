@@ -903,13 +903,15 @@
       create:
         failure: Link could not be created
         success: Link posted
-    photos:
+    photos: &photo_message
       create:
         failure: Could not create photo message
         success: Photo uploaded
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
+    cyclestreets_photos:
+      <<: *photo_message
     street_views:
       create:
         failure: Street View could not be added

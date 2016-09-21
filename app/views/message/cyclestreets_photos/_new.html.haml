@@ -1,17 +1,18 @@
 #new-cyclestreets-photo-message.pane
-  = semantic_form_for CyclestreetsPhotoMessage.new, url: thread_photos_path(@thread), html: {multipart: true} do |f|
+  = semantic_form_for CyclestreetsPhotoMessage.new, url: thread_cyclestreets_photos_path(@thread) do |f|
     = f.inputs do
-      = f.input :cyclestreet_category, as: :hidden
-      = f.input :cyclestreet_caption, as: :hidden
-      = f.input :cyclestreet_thumbnail_url, as: :hidden
       = f.input :photo_url, as: :hidden
-      = f.input :location, as: :hidden
-      %div{id: 'map'}
+      = f.input :loc_json, as: :hidden
+      = f.input :icon_properties, as: :hidden
+      = f.input :cyclestreets_id, as: :hidden
+      %div{id: 'photo-map'}
       .hidden
         .map-data{"data-center" => location_to_geojson(@issue.location),
-          "data-opts" => { feature: item_to_geojson(@issue), photoselect: true, hidelayers: true }.to_json}
-      = f.input :cyclestreet_headline, html_options: { readonly: true, disabled: true }
+          "data-opts" => { feature: item_to_geojson(@issue), photoselect: true, hidelayers: true, domid: "photo-map" }.to_json}
       = f.input :caption
+      %li.string.input.optional.stringish
+        = label_tag 'image', nil, class: 'label'
+        %span{id: 'image-preview'}
 
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green"}

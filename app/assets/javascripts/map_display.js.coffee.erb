@@ -5,7 +5,7 @@ class window.LeafletMap
   @OpenCycle: 'https://{s}.tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png'
   @OSStreet: 'https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
   @Mapnik: 'https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
-  @CyclestreetsUrl: "https://www.cyclestreets.net/"
+  @CyclestreetsUrl: "https://www.cyclestreets.net"
   @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
   @CyclestreetsGeoUrl: "<%= Geocoder::GEO_URL %>"
   @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
@@ -20,7 +20,7 @@ class window.LeafletMap
     @setCenter(center)
     @geoInput = $("##{opts.geoinput}_loc_json")
     @buildCollistionLayer() if opts.collisions?
-    @buildPhotoLayer(opts.photoselect) if opts.photos?
+    @buildPhotoLayer(opts.photoselect) if opts.photos or opts.photoselect
     @remoteJSONLayer = {}
     @buildRemoteLayer(url, name) for own name, url of opts.remote
     @addLayers(opts.hidelayers, opts.photoselect)
@@ -98,9 +98,11 @@ class window.LeafletMap
     @photoLayer = new L.LayerJSON({
       url: "#{@constructor.CyclestreetsPhotoUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
       propertyItems: 'features'
-      propertyLoc: 'geometry.coordinates',
-      locAsGeoJSON: true,
+      propertyLoc: 'geometry.coordinates'
+      locAsGeoJSON: true
+      minShift: 200
       dataToMarker: (feature, latlng) =>
+        return unless feature.properties.hasPhoto
         iconProperties = feature.properties.iconProperties
         iconProperties.iconUrl = @constructor.CyclestreetsUrl + iconProperties.iconUrl
         iconProperties.shadowUrl = @constructor.CyclestreetsUrl + iconProperties.shadowUrl
@@ -108,14 +110,13 @@ class window.LeafletMap
         marker = new L.marker(latlng, {icon: icon}).addTo @photoLayer
         # Declarations
         id = feature.properties.id
-        hasPhoto = feature.properties.hasPhoto
         thumbnailUrl = feature.properties.thumbnailUrl
         latitude = feature.geometry.coordinates[1]
         longitude = feature.geometry.coordinates[0]
-        peekImgEl = if thumbnailUrl then '<img src="' + thumbnailUrl + '" alt="Image loading &hellip;"/>' else ''
+        peekImgEl = if thumbnailUrl then '<img class="no-float" src="' + thumbnailUrl + '" alt="Image loading &hellip;"/>' else ''
         # Wrap image in a link
         peekImgEl = "<a title=\"Click for a bigger image and copyright details\" href=\"" +
-          @constructor.CyclestreetsUrl + "location/#{id}/\" target=\"_blank\">#{peekImgEl}</a>"
+          @constructor.CyclestreetsUrl + "/location/#{id}/\" target=\"_blank\">#{peekImgEl}</a>"
         # Get caption
         caption = "<p class=\"caption\">#{feature.properties.caption}</p>"
         # Headline
@@ -123,14 +124,20 @@ class window.LeafletMap
         if feature.properties.hasOwnProperty('categoryPlural') and feature.properties.hasOwnProperty('metacategoryName')
           headline += "<p class=\"categorisationnote small\">Categorisation: #{feature.properties.categoryPlural} (#{feature.properties.metacategoryName.toLowerCase()})</p>"
         # The main bit of the content
-        mainContent = if hasPhoto then '<p class="peekimage">' + peekImgEl + '</p>' else '<p class="placeholdernote faded">Placeholder (no photo)</p>' + caption
+        mainContent = '<p class="peekimage">' + peekImgEl + '</p>'
         selectable = if photoselect
-          "<button class='formtastic btn-green' id='cs-image-#{feature.properties.id}'> <%= I18n.t('messages.new.select_image') %> </button>"
+          "<div class='formtastic btn-green' id='cs-image-#{feature.properties.id}'> <%= I18n.t('messages.new.select_image') %> </button>"
         else
           ""
 
-        marker.bindPopup('<div class="' + (if hasPhoto then 'photo' else 'placeholder') + 'bubble' + '">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
+        marker.bindPopup('<div class="photo bubble">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
           $("#cs-image-#{feature.properties.id}").click ->
+            $("#image-preview").html(peekImgEl)
+            $("#cyclestreets_photo_message_caption").val(feature.properties.caption)
+            $("#cyclestreets_photo_message_cyclestreets_id").val(feature.properties.id)
+            $("#cyclestreets_photo_message_photo_url").val(thumbnailUrl)
+            $("#cyclestreets_photo_message_icon_properties").val(JSON.stringify(iconProperties))
+            $("#cyclestreets_photo_message_loc_json").val JSON.stringify(feature)
         )
         return
     })
