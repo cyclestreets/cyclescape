@@ -13,32 +13,17 @@
 #
 
 class PhotoMessage < MessageComponent
-  dragonfly_accessor :photo do
-    storage_options :generate_photo_path
-  end
+  include Photo
 
   validates :photo, presence: true
-
-  def photo_medium
-    photo.thumb('740x555>')
-  end
-
-  def photo_preview
-    photo.thumb('500x375>')
-  end
-
-  def photo_thumbnail
-    photo.thumb('50x50>')
-  end
 
   def searchable_text
     [caption, description].join(' ')
   end
 
-  protected
+  private
 
-  def generate_photo_path
-    hash = Digest::SHA1.file(photo.path).hexdigest
-    {path: "message_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
+  def storage_path
+    "message_photos"
   end
 end
