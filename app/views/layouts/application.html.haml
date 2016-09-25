@@ -55,6 +55,8 @@
           %li#menu-threads= link_to t(".threads"), threads_path, title: t(".threads_tooltip")
           %li#menu-library= link_to t(".library"), library_path, title: t(".library_tooltip")
           %li#menu-tags= link_to t(".tags"), tags_path, title: t(".tags_tooltip")
+          - if defined?(@group) && @group && permitted_to?(:index, @group, context: :group_membership_requests)
+            %li= link_to t(".membership"), group_membership_requests_path(@group)
           - if permitted_to? :view, :admin_home
             %li#menu-admin= link_to t(".admin"), admin_home_path, title: t(".admin_tooltip")
         - if current_user && !current_user.groups.empty?
