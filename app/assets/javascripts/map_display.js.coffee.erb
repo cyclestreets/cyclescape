@@ -217,16 +217,9 @@ class window.LeafletMap
     )
 
   addDraw: (feature) =>
-    hideNewToolbars = ->
-      $('.tabs').children('li.area, li.route, li.point').css(opacity: 0.3).prop('disabled', true)
-
-    showNewToolbars = ->
-      $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
-
     layerCreated = (layer) =>
       drawnItems.addLayer layer
-      @geoInput.val JSON.stringify(layer.toGeoJSON())
-      hideNewToolbars()
+      @geoInput.val JSON.stringify(drawnItems.toGeoJSON())
       $('.leaflet-draw-edit-edit')[0].click()
 
     $('.icon-save').toggle()
@@ -278,7 +271,6 @@ class window.LeafletMap
         unless $(target).parent().parent().prop('disabled')
           $(".leaflet-draw-#{lDrawMapping[target.className]}")[0].click()
 
-    # When drawing clear cancels the drawing
     # Otherwise clear wipes any shapes on the map
     $('.edit-clear').click =>
       drawnItems.clearLayers()
@@ -289,13 +281,17 @@ class window.LeafletMap
       activeTab = $('.tabs').parent().tabs('option', 'active')
       $('.tabs a span')[activeTab].click() # Re-activate drawing the current shape
 
-    # When drawing undo deletes the last point
-    # Otherwise undo edits the layer
     @map.on 'draw:drawstart', (e) ->
       $('.icon-undo').css(opacity: 1)
 
+    # Undo removes the last point if creating
+    # or the last feature if not creating
     $('.edit-undo').click ->
-      $('ul.leaflet-draw-actions a[title^="Delete"]')[0].click()
+      if drawnItems.getLayers().slice(-1)[0]?.editing?._enabled
+        drawnItems.removeLayer(drawnItems.getLayers()[-1..][0])
+      else
+        $('ul.leaflet-draw-actions a[title^="Delete"]')[0].click()
+
 
 jQuery ->
   for domMap in $('.map-data')
