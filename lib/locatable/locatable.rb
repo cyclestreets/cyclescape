@@ -49,7 +49,7 @@ module Locatable
 
   # Returns the size of the location. Returns 0 for anything other than polygons.
   def size
-    if location.nil?
+    if !location.try(:geometry_type)
       return 0.0
     else
       case location.geometry_type
@@ -76,7 +76,9 @@ module Locatable
     # but that doesn't work.
     factory = RGeo::Geos.factory(srid: 4326)
     feature = RGeo::GeoJSON.decode(json_str, geo_factory: factory, json_parser: :json)
-    self.location = feature.geometry if feature
+    return unless feature
+    geom = feature.try(:geometry)
+    self.location = geom || factory.collection(feature.map(&:geometry))
   end
 
   def loc_json
