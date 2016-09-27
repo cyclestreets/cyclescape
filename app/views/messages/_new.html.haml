@@ -21,10 +21,15 @@
           = link_to "#new-photo-message" do
             = t ".photo_message"
             %span.nub
+        %li.image
+          = link_to "#new-cyclestreets-photo-message" do
+            = t ".cyclestreets_photo_message"
+            %span.nub
         %li.map-point
           = link_to "#new-street-view-message" do
             = t ".street_view_message"
             %span.nub
+        %p.clear
         %li.link
           = link_to "#new-link-message" do
             = t ".link_message"
@@ -52,6 +57,7 @@
             = email_message @thread.latest_message
 
         = render "message/photos/new"
+        = render "message/cyclestreets_photos/new"
         = render "message/street_views/new"
         = render "message/links/new"
         = render "message/deadlines/new"

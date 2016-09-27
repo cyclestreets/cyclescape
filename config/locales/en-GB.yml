@@ -903,13 +903,15 @@
       create:
         failure: Link could not be created
         success: Link posted
-    photos:
+    photos: &photo_message
       create:
         failure: Could not create photo message
         success: Photo uploaded
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
+    cyclestreets_photos:
+      <<: *photo_message
     street_views:
       create:
         failure: Street View could not be added
@@ -954,10 +956,12 @@
       link_message: Link
       new_message: New message
       photo_message: Photo
+      cyclestreets_photo_message: CycleStreets Photo
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
       text_message: Text
       street_view_message: Street View
       reply_by: Or reply by
+      select_image: Select image
   pages:
     changelog:
       github_history_link_html: <a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>.

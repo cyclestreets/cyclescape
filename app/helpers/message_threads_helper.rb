@@ -1,6 +1,7 @@
 module MessageThreadsHelper
   MESSAGE_CONTROLLER_MAP = {
     'PhotoMessage' => 'photos',
+    'CyclestreetsPhotoMessage' => 'cyclestreets_photos',
     'LinkMessage' => 'links',
     'DeadlineMessage' => 'deadlines',
     'LibraryItemMessage' => 'library_items',
