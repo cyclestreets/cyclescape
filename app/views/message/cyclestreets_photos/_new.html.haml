@@ -7,7 +7,7 @@
       = f.input :cyclestreets_id, as: :hidden
       %div{id: 'photo-map'}
       .hidden
-        .map-data{"data-center" => location_to_geojson(@issue.location),
+        .map-data{"data-center" => location_to_geojson(@thread.default_centre),
           "data-opts" => { feature: item_to_geojson(@issue), photoselect: true, hidelayers: true, domid: "photo-map" }.to_json}
       = f.input :caption
       %li.string.input.optional.stringish
