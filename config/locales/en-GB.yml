@@ -663,6 +663,7 @@
       library: Library
       library_tooltip: Reusable resources for campaigning
       loading: Please wait…
+      membership: Membership
       threads: Discussion threads
       threads_tooltip: Discussions on each issue
       tags: Tags
