@@ -28,9 +28,6 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
-
   config.log_level = :info
   config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 'weekly')
 
@@ -57,9 +54,10 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
   config.active_record.raise_in_transactional_callbacks = true
 
+  # Do not use Strict-Transport-Security
+  config.ssl_options = { hsts: false }
+
   # Make sure appropriate pages are served over SSL
-  if Rails.env.production?
-    config.to_prepare { Devise::SessionsController.force_ssl only: [:new, :create] }
-    config.to_prepare { Devise::RegistrationsController.force_ssl only: [:new, :create, :edit, :update] }
-  end
+  # Force all access to the app over SSL and use secure cookies.
+  config.force_ssl = true
 end
