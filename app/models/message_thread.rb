@@ -54,9 +54,11 @@ class MessageThread < ActiveRecord::Base
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, -> { (uniq(true)) }, through: :messages, source: :created_by
   has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id', inverse_of: :thread
-  has_many :message_thread_closes
+  has_many :message_thread_closes, dependent: :destroy
   has_many :closed_by, through: :message_thread_closes, source: :user
   has_many :deadline_messages, foreign_key: :thread_id, inverse_of: :thread
+  has_many :thread_leaders, dependent: :destroy
+  has_many :leaders, through: :thread_leaders, source: :user, inverse_of: :leading_threads
   has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
   has_one :latest_message, -> { order('created_at DESC').approved }, foreign_key: 'thread_id',  class_name: 'Message'
 
@@ -296,7 +298,7 @@ class MessageThread < ActiveRecord::Base
   def approve_related
     unless approved?
       ThreadSubscriber.subscribe_users self
-      ThreadNotifier.notify_subscribers self, :new_message, first_message
+      ThreadNotifier.notify_subscribers self, first_message
 
       NewThreadNotifier.notify_new_thread self
       SearchUpdater.update_type(self, :process_thread)
