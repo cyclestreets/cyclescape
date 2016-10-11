@@ -1,8 +1,0 @@
-<% leader_link = if Authorization::Engine.instance.permit?(:view_profile, object: @event_user, user: @subscriber)
-                   "#{@event_user.name} (#{user_profile_url(@event_user)})"
-                 else
-                   @event_user.display_name_or_anon
-                 end
-               %>
-
-<%= t ".thread_has_removed_leader", thread_title: @thread.title, leader_link: leader_link%>

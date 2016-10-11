@@ -882,12 +882,8 @@
     subscribers_panel:
       owner: Owner
       subscribers: Following this thread
-    leaders_panel:
-      leaders: Leading this thread
-      leaders_description: Leaders take on responsibility for ensuring that discussions continually move forward and that actions are carried out and followed-up.
-      no_leaders: This thread has no one leading it.
-      start_leading: Start leading
-      stop_leading: Stop leading
+    connected_to_thread:
+      leading: " [leading]"
     update:
       success: Thread updated
     widget:
@@ -929,6 +925,17 @@
       create:
         failure: Street View could not be added
         success: Street View added
+    thread_leaders:
+      create:
+        success: Your leader status has been updated
+      new:
+        default_leader_message: "I will take on leading this thread."
+        default_unleading_message: "I can no longer lead this thread."
+        start_leading: Start leading
+        stop_leading: Stop leading
+      show:
+        new_leader_html: "%{leader_link} will take on responsibility for ensuring that discussions continually move forward and that actions are carried out and followed-up."
+        removed_leader_html: "%{leader_link} has removed themselves as a leader."
   message_library:
     documents:
       new:
@@ -970,6 +977,7 @@
       new_message: New message
       photo_message: Photo
       cyclestreets_photo_message: CycleStreets Photo
+      thread_leader_message: Thread Leader
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
       text_message: Text
       street_view_message: Street View
@@ -1100,15 +1108,14 @@
     new_street_view_message:
       type: a street view
       view_the_street_view: 'You can see the Street View at:'
+    new_thread_leader_message:
+      type: a leader
+      new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
+      removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
     footer:
       thread: Cyclescape discussion thread
       unsubscribe: You can stop following this thread by visiting the link above and
         clicking 'unfollow this thread'.
-  thread_event_mailer:
-    new_leader:
-      thread_has_new_leader: "%{leader_link} set themself as a leader of %{thread_title}. %{description}"
-    removed_leader:
-      thread_has_removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
   thread_priorities:
     very_high: Top-priority
     high: Important

@@ -1,0 +1,12 @@
+#new-thread-leader-message.pane
+  - already_leading = ThreadLeaderMessage.already_leading(current_user, @thread)
+  = semantic_form_for ThreadLeaderMessage.new, url: thread_thread_leaders_path(@thread) do |f|
+    = f.inputs do
+      - if already_leading
+        = f.input :description, input_html: { placeholder: t(".default_unleading_message", name: current_user.try(:name)) }
+        = f.input :unleading_id, input_html: { value: already_leading.id }, as: :hidden
+      - else
+        = f.input :description, input_html: { placeholder: t(".default_leader_message", name: current_user.try(:name)) }
+    = f.actions do
+      - submit_text = already_leading ? t('.stop_leading') : t('.start_leading')
+      = f.action :submit, label: submit_text, button_html: {class: "btn-green"}

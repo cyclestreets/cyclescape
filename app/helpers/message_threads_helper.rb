@@ -7,6 +7,7 @@ module MessageThreadsHelper
     'LibraryItemMessage' => 'library_items',
     'DocumentMessage' => 'documents',
     'StreetViewMessage' => 'street_views',
+    'ThreadLeaderMessage' => 'thread_leaders',
   }
 
   MESSAGE_LIBRARY_MAP = {

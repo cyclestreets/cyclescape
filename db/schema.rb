@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160918193000) do
+ActiveRecord::Schema.define(version: 20161010203821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -423,16 +423,20 @@ ActiveRecord::Schema.define(version: 20160918193000) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
-  create_table "thread_leaders", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "message_thread_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+  create_table "thread_leader_messages", force: :cascade do |t|
+    t.integer  "message_id"
+    t.integer  "thread_id"
+    t.integer  "unleading_id"
+    t.integer  "created_by_id"
+    t.boolean  "active",        default: true, null: false
+    t.text     "description"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  add_index "thread_leaders", ["message_thread_id"], name: "index_thread_leaders_on_message_thread_id", using: :btree
-  add_index "thread_leaders", ["user_id", "message_thread_id"], name: "index_thread_leaders_on_user_id_and_message_thread_id", unique: true, using: :btree
-  add_index "thread_leaders", ["user_id"], name: "index_thread_leaders_on_user_id", using: :btree
+  add_index "thread_leader_messages", ["message_id"], name: "index_thread_leader_messages_on_message_id", using: :btree
+  add_index "thread_leader_messages", ["thread_id"], name: "index_thread_leader_messages_on_thread_id", using: :btree
+  add_index "thread_leader_messages", ["unleading_id"], name: "index_thread_leader_messages_on_unleading_id", using: :btree
 
   create_table "thread_subscriptions", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -562,6 +566,7 @@ ActiveRecord::Schema.define(version: 20160918193000) do
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
   add_foreign_key "message_threads", "users"
-  add_foreign_key "thread_leaders", "message_threads"
-  add_foreign_key "thread_leaders", "users"
+  add_foreign_key "thread_leader_messages", "message_threads", column: "thread_id"
+  add_foreign_key "thread_leader_messages", "messages"
+  add_foreign_key "thread_leader_messages", "thread_leader_messages", column: "unleading_id"
 end

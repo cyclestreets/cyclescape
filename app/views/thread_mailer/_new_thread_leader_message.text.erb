@@ -1,0 +1,15 @@
+<% leader = @message.component.created_by %>
+<% leader_link = if Authorization::Engine.instance.permit?(:view_profile, object: leader, user: @subscriber)
+                   "#{leader.name} (#{user_profile_url(leader)})"
+                 else
+                   leader.display_name_or_anon
+                 end
+               %>
+
+<% if @message.component.unleading %>
+<%= t ".removed_leader", leader_link: leader_link, thread_title: @message.thread.title %>
+<% else %>
+<%= t ".new_leader", leader_link: leader_link, thread_title: @message.thread.title %>
+<% end %>
+
+<%= raw @message.component.description %>

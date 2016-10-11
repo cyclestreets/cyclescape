@@ -121,13 +121,9 @@ authorization do
     end
     has_permission_on :message_thread_tags, to: :update
     has_permission_on :message_thread_user_priorities, to: [:create, :update]
-    has_permission_on [:thread_leaders, :message_thread_leaders], join_by: :and do
+    has_permission_on [:message_thread_leaders], join_by: :and do
       to [:create]
-      if_attribute subscribers: contains { user }, closed: is { false }, leaders: does_not_contain { user }
-    end
-    has_permission_on [:thread_leaders, :message_thread_leaders] do
-      to [:destroy]
-      if_attribute leaders: contains { user }
+      if_attribute subscribers: contains { user }, closed: is { false }
     end
     has_permission_on :message_photos, :message_links, :message_deadlines,
                       :message_library_items, :message_documents, :message_street_views,

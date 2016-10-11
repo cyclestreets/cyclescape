@@ -1,0 +1,13 @@
+.link{id: dom_id(message.component)}
+  %p
+    - leader = message.component.created_by
+    - if permitted_to? :view_profile, leader
+      - leader_link = link_to_profile(leader)
+    - else
+      = leader_link = leader.display_name_or_anon
+    - if message.component.unleading
+      = t ".removed_leader_html", leader_link: leader_link
+    - else
+      = t ".new_leader_html", leader_link: leader_link
+    %br
+    = message.component.description

@@ -60,8 +60,6 @@
       = tweet_button text: @thread.title, link: thread_url(@issue)
       = facebook_like thread_url(@issue)
   = render "priority_panel"
-  #leaders_panel
-    = render "leaders_panel"
   = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
   = render "library_panel", items: @library_items, thread_tags: @thread.tags
 

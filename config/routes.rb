@@ -101,6 +101,7 @@ Rails.application.routes.draw do
       resources :deadlines, only: [:create]
       resources :library_items, only: [:create]
       resources :documents, only: [:create, :show]
+      resources :thread_leaders, only: [:create]
     end
     scope module: :message_thread do
       resources :subscriptions, only: [:create, :destroy]
