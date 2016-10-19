@@ -28,8 +28,8 @@ describe User, type: :model do
     it { is_expected.to have_many(:subscribed_threads) }
     it { is_expected.to have_many(:thread_priorities) }
     it { is_expected.to have_many(:prioritised_threads) }
+    it { is_expected.to have_many(:thread_leader_messages) }
     it { is_expected.to have_many(:thread_leaders) }
-    it { is_expected.to have_many(:leading_threads) }
     it { is_expected.to have_one(:profile) }
     it { is_expected.to have_one(:prefs) }
     it { is_expected.to belong_to(:remembered_group) }

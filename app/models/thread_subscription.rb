@@ -25,6 +25,6 @@ class ThreadSubscription < ActiveRecord::Base
   private
 
   def remove_leader
-    user.thread_leaders.where(message_thread: thread).destroy_all
+    user.thread_leader_messages.where(thread: thread).destroy_all
   end
 end

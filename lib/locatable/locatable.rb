@@ -8,7 +8,7 @@ module Locatable
     # Note - pass in the location as an array, otherwise .each is called on
     # multipolygons and it serializes to multiple geometries.
     def intersects(l)
-      where('st_intersects(ST_CollectionExtract(location, 3), ?)', [l])
+      where('st_intersects(location, ?)', [l])
     end
 
     # define a variant of intersects that doesn't include entirely surrouding polygons

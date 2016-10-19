@@ -7,7 +7,7 @@ describe ThreadLeaderMessage, type: :model do
 
   it "should validate user ownes unleading" do
     subject.unleading = leader_message
-    expect(subject.errors_on(:base)).to eq([])
+    expect(subject.errors_on(:base)).to eq(["Something went wrong"])
 
     subject.created_by = leader_message.created_by
     expect(subject.errors_on(:base)).to be_empty
