@@ -30,9 +30,13 @@ describe DeadlineMessage do
   it 'should email about deadlines' do
     dm = create :deadline_message, deadline: 5.hours.from_now, title: 'Do not miss me!'
     thread = dm.thread
-    subscription = create :thread_subscription, thread: thread
-    user = subscription.user
+    subscriptions = create_list :thread_subscription, 2, thread: thread
+    user = subscriptions.first.user
     user.prefs.update_column(:email_status_id, 1)
+
+    user_disabled = subscriptions.last.user
+    user_disabled.prefs.update_column(:email_status_id, 1)
+    user_disabled.update_column(:disabled_at, Time.current)
 
     expect{described_class.email_upcomming_deadlines!}.to change{ all_emails.count }.by(1)
     email = all_emails.last

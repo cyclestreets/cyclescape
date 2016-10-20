@@ -67,7 +67,7 @@ class Issue < ActiveRecord::Base
     def email_upcomming_deadlines!
       where(deadline: Time.zone.now..1.day.from_now).includes(:threads).find_each do |issue|
         issue.threads.each do |thread|
-          thread.email_subscribers.each do |subscriber|
+          thread.email_subscribers.active.each do |subscriber|
             Notifications.upcoming_issue_deadline(subscriber, issue, thread).deliver_later
           end
         end
