@@ -47,9 +47,11 @@ de-DE:
         file: Dokument
       library/item: 
       library/note:
+        location: betroffenes Gebiet
         body: Note
+        url: Web-Adresse
       link_message:
-        url: URL
+        url: Web-Adresse
       message:
         body: Nachricht
       site_comment:
@@ -69,6 +71,8 @@ de-DE:
         new:
           bicycle_wheels: Laufräder
     hints:
+      tags_string_hints:
+        tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
       user:
         new:
           display_name: Wenn Du ein Pseudonym wählst wird es allen Personen angezeigt,
@@ -127,8 +131,8 @@ de-DE:
           deadline: "(optional)"
           external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
           photo: optional
-          tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
+          tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
         create:
           description: Bitte erkläre Details über das Problem und welchen Effekt es
             auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
@@ -137,8 +141,8 @@ de-DE:
           deadline: "(optional)"
           external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
           photo: optional
-          tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
+          tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
         edit:
           description: Bitte erkläre Details über das Problem und welchen Effekt es
             auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
@@ -147,8 +151,8 @@ de-DE:
           deadline: "(optional)"
           external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
           photo: optional
-          tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
+          tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
         update:
           description: Bitte erkläre Details über das Problem und welchen Effekt es
             auf das Radfahren hat. Nimm zur Kenntnis, dass alle Themen öffentlich
@@ -157,14 +161,16 @@ de-DE:
           deadline: "(optional)"
           external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
           photo: optional
-          tags_string: z. B. Fahrradparken, Hindernis, Baustelle, Weg
           title: Bitte fasse Dich kurz und sei sachlich.
+          tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
       message_thread:
         privacy: Dies gibt an, wer diese Diskussion sehen und bearbeiten kann.
         issue: Die gibt an, welches Thema dieser Diskussion angfügt. Wenn nicht, wird
           dies eine administrative Diskussion sein.
       library/note:
-        url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
+        tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
+      library/document:
+        tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
     placeholders:
       issue:
         external_url: http://www.beispiel.de

@@ -18,6 +18,7 @@ fr-CA:
     zero: Today!
     one: Tomorrow!
     other: "%{count} days away"
+  item_created_at: "%{time_ago} ago"
   email_status:
     no_email: No email
     email: Email every message
@@ -98,7 +99,6 @@ fr-CA:
     users:
       index:
         created: Created
-        created_at: "%{time_ago} ago"
         last_seen: Last login
         last_seen_at: "%{time_ago} ago"
         introduction: This page lists all users on the system (irrespective of any
@@ -120,7 +120,6 @@ fr-CA:
         approve: Approve
       user:
         created: Created
-        created_at: "%{time_ago} ago"
         last_seen: Last login
         last_seen_at: "%{time_ago} ago"
         introduction: This page lists all users on the system (irrespective of any
@@ -144,6 +143,19 @@ fr-CA:
         success: User updated
       edit:
         edit_user: Edit user
+    planning_filters:
+      create:
+        success: Filter created and running a in background job
+      update:
+        success: Filter updated and running a in background job
+      form:
+        planning_filter_intro: You can add a filter which is a rule (a regex string)
+          and a selected planning authority. If a planning authority has no specific
+          filters then the filters for the authority "* (LAs without own rules)" will
+          be applied. The filter rule will be applied to all new and existing planning
+          applications in a background job after saving. Each planning application
+          in the authority of the filter where the uid matches the rule will be filtered
+          out of users planning index on their dashboard but will still be searchable.
   application:
     account_disabled: Your account has been disabled by an administrator
     permission_denied: You are not authorised to access that page.
@@ -398,7 +410,6 @@ fr-CA:
         are_you_sure: Are you sure?
         by: by %{name}
         confirm: Confirm
-        created_at: "%{time_ago} ago"
         email: E-mail address
         view_message: View...
         message: Message
@@ -427,7 +438,6 @@ fr-CA:
         are_you_sure: Are you sure?
         by: by %{name}
         confirm: Confirm
-        created_at: "%{time_ago} ago"
         email: E-mail address
         view_message: View...
         message: 'The user included this message with their request:'
@@ -546,7 +556,6 @@ fr-CA:
       are_you_sure: Are you sure?
       by: by %{name}
       confirm: Confirm
-      created_at: "%{time_ago} ago"
       email: E-mail address
       view_message: View...
       message: Message
@@ -574,7 +583,6 @@ fr-CA:
       are_you_sure: Are you sure?
       by: by %{name}
       confirm: Confirm
-      created_at: "%{time_ago} ago"
       email: E-mail address
       view_message: View...
       message: Message
@@ -693,8 +701,7 @@ fr-CA:
         context (e.g. organising a general meeting) in the group admin threads section.
       administrative_matters: add a purely administrative matter
     show:
-      issue_created_at: "%{time_ago} ago"
-      added_by_html: Added by %{name} on %{time}
+      added_by_html: Added by %{name} %{time}
       cancel_vote: Cancel
       confirm_delete: Are you sure?
       delete_issue: Delete this issue
@@ -721,6 +728,7 @@ fr-CA:
       deadline: Deadline
       issues-nearby: Issues nearby
       show_collisions: Show Collisions
+      show_photos: Show Photos
     update:
       success: Issue updated
     vote_clear:
@@ -816,7 +824,7 @@ fr-CA:
       new:
         title: New Library Document
       show:
-        added_by_html: Added by %{name} on %{time}
+        added_by_html: Added by %{name} %{time}
         attach_note: Attach Note
         attach_note_instructions_html: You can create new notes linked to this document.
           When referenced in a thread they will link to this document as well.
@@ -833,7 +841,7 @@ fr-CA:
       new:
         title: New Library Note
       show:
-        added_by_html: Added by %{name} on %{time}
+        added_by_html: Added by %{name} %{time}
         edit: Edit Note
         note_on_document_html: 'This note is attached to a document: %{document}'
         no_threads: This note hasn't been included in any public threads. If you add

@@ -18,6 +18,7 @@ cs-CZ:
     zero: Dnes!
     one: Zítra!
     other: Za %{count} dní
+  item_created_at: "%{time_ago} ago"
   email_status:
     no_email: "Žádný email"
     email: Poslat každou zprávu emailem
@@ -99,7 +100,6 @@ cs-CZ:
     users:
       index:
         created: Vytvořeno
-        created_at: před %{time_ago}
         last_seen: Naposledy přihlášen
         last_seen_at: před %{time_ago}
         introduction: Tato stránka zobrazuje všechny uživatele v systému (nezávisle
@@ -121,7 +121,6 @@ cs-CZ:
         approve: Schvalovat
       user:
         created: Vytvořeno
-        created_at: před %{time_ago}
         last_seen: Naposledy přihlášen
         last_seen_at: před %{time_ago}
         introduction: Tato stránka zobrazuje všechny uživatele v systému (nezávisle
@@ -145,6 +144,19 @@ cs-CZ:
         success: Uživatel upraven
       edit:
         edit_user: Upravit uživatele
+    planning_filters:
+      create:
+        success: Filter created and running a in background job
+      update:
+        success: Filter updated and running a in background job
+      form:
+        planning_filter_intro: You can add a filter which is a rule (a regex string)
+          and a selected planning authority. If a planning authority has no specific
+          filters then the filters for the authority "* (LAs without own rules)" will
+          be applied. The filter rule will be applied to all new and existing planning
+          applications in a background job after saving. Each planning application
+          in the authority of the filter where the uid matches the rule will be filtered
+          out of users planning index on their dashboard but will still be searchable.
   application:
     account_disabled: Váš účet byl deaktivován správcem
     permission_denied: Nemáte oprávnění přistupovat k této stránce.
@@ -403,7 +415,6 @@ cs-CZ:
         are_you_sure: Skutečně?
         by: "%{name}"
         confirm: Potvrdit
-        created_at: před %{time_ago}
         email: E-mailová adresa
         view_message: Zobrazit...
         message: Zpráva
@@ -433,7 +444,6 @@ cs-CZ:
         are_you_sure: Skutečně?
         by: "%{name}"
         confirm: Potvrdit
-        created_at: před %{time_ago}
         email: E-mailová adresa
         view_message: Zobrazit...
         message: 'Uživatel připojil k žádosti tenté popis:'
@@ -552,7 +562,6 @@ cs-CZ:
       are_you_sure: Skutečně?
       by: "%{name}"
       confirm: Potvrdit
-      created_at: před %{time_ago}
       email: E-mailová adresa
       view_message: Zobrazit...
       message: Zpráva
@@ -580,7 +589,6 @@ cs-CZ:
       are_you_sure: Skutečně?
       by: "%{name}"
       confirm: Potvrdit
-      created_at: před %{time_ago}
       email: E-mailová adresa
       view_message: Zobrazit...
       message: Zpráva
@@ -699,8 +707,7 @@ cs-CZ:
         území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny."
       administrative_matters: "Čistě administrativní záležitosti"
     show:
-      issue_created_at: před %{time_ago}
-      added_by_html: Nahlásil %{name} dne %{time}
+      added_by_html: Added by %{name} %{time}
       cancel_vote: Zrušit
       confirm_delete: Skutečně?
       delete_issue: Odstranit tento podnět
@@ -728,6 +735,7 @@ cs-CZ:
       deadline: Uzávěrka
       issues-nearby: Podněty poblíž
       show_collisions: Show Collisions
+      show_photos: Show Photos
     update:
       success: Podnět upraven
     vote_clear:
@@ -823,7 +831,7 @@ cs-CZ:
       new:
         title: Nový dokument do kihovny
       show:
-        added_by_html: Nahlásil %{name} dne %{time}
+        added_by_html: Added by %{name} %{time}
         attach_note: Poznámka k vložení
         attach_note_instructions_html: Můžete vytvořit poznámky vztahující se k tomuto
           dokumentu. Pokud budou odkázány v diskuzním vlákně odkážou také na tento
@@ -843,7 +851,7 @@ cs-CZ:
       new:
         title: Nová poznámka v knihovně
       show:
-        added_by_html: Přidal %{name} dne %{time}
+        added_by_html: Added by %{name} %{time}
         edit: Upravit poznámku
         note_on_document_html: 'Tato poznámka byla vložena k následujícímu dokumentu:
           %{document}'

@@ -54,9 +54,11 @@ cs-CZ:
         file: Dokument
       library/item: 
       library/note:
+        location: Area of relevance
         body: Poznámka
+        url: Web address
       link_message:
-        url: URL
+        url: Web address
       message:
         body: Zpráva
       site_comment:
@@ -76,6 +78,8 @@ cs-CZ:
         new:
           bicycle_wheels: Kola u jízdních kol
     hints:
+      tags_string_hints:
+        tags_string: comma separated list of tags e.g. cycle parking, obstruction
       user:
         new:
           display_name: Volitelné - může být přezdívka nebo pseudonym, který bude
@@ -130,8 +134,8 @@ cs-CZ:
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
           photo: "(nepovinné)"
-          tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
+          tags_string: comma separated list of tags e.g. cycle parking, obstruction
         create:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -140,8 +144,8 @@ cs-CZ:
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
           photo: "(nepovinné)"
-          tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
+          tags_string: comma separated list of tags e.g. cycle parking, obstruction
         edit:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -150,8 +154,8 @@ cs-CZ:
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
           photo: "(nepovinné)"
-          tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
+          tags_string: comma separated list of tags e.g. cycle parking, obstruction
         update:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -160,14 +164,16 @@ cs-CZ:
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
           photo: "(nepovinné)"
-          tags_string: např. stojan překážka, cyklostezka, údržba
           title: Prosím buďte struční a konkrétní.
+          tags_string: comma separated list of tags e.g. cycle parking, obstruction
       message_thread:
         privacy: Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno.
         issue: Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud
           k žádným, toto vlákno bude vytvořeno jako všeobecná diskuze.
       library/note:
-        url: If another web page is relevant you can add it here.
+        tags_string: comma separated list of tags e.g. cycle parking, obstruction
+      library/document:
+        tags_string: comma separated list of tags e.g. cycle parking, obstruction
     placeholders:
       issue:
         external_url: http://www.example.com

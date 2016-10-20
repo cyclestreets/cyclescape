@@ -20,6 +20,7 @@ de-DE:
     zero: Heute!
     one: "Übermorgen!"
     other: noch %{count} Tage
+  item_created_at: "%{time_ago} ago"
   email_status:
     no_email: Keine Mailadresse
     email: Maile jede Nachricht
@@ -100,7 +101,6 @@ de-DE:
     users:
       index:
         created: Erstellt
-        created_at: vor %{time_ago}
         last_seen: Letzte Anmendlung
         last_seen_at: vor %{time_ago}
         introduction: Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaft
@@ -122,7 +122,6 @@ de-DE:
         approve: annehmen
       user:
         created: Erstellt
-        created_at: vor %{time_ago}
         last_seen: Letzte Anmendlung
         last_seen_at: vor %{time_ago}
         introduction: Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaften
@@ -146,6 +145,19 @@ de-DE:
         success: Benutzer aktualisiert
       edit:
         edit_user: Benutzer bearbeiten
+    planning_filters:
+      create:
+        success: Filter created and running a in background job
+      update:
+        success: Filter updated and running a in background job
+      form:
+        planning_filter_intro: You can add a filter which is a rule (a regex string)
+          and a selected planning authority. If a planning authority has no specific
+          filters then the filters for the authority "* (LAs without own rules)" will
+          be applied. The filter rule will be applied to all new and existing planning
+          applications in a background job after saving. Each planning application
+          in the authority of the filter where the uid matches the rule will be filtered
+          out of users planning index on their dashboard but will still be searchable.
   application:
     account_disabled: Dein Zugang wurde durch einen Administrator gesperrt.
     permission_denied: Zum Aufruf dieser Seite bist Du nicht autorisiert.
@@ -204,7 +216,7 @@ de-DE:
       part_hidden: Part Hidden
       converted_to_issue: 'In ein Thema umgewandelt:'
     search:
-      page_title: Search Results for '%{q}'
+      page_title: Ergebnis der Suche nach '%{q}'
       convert_to_issue_html: In ein Thema umwandeln&hellip;
       planning_applications: Planning applications
       planning_applications_search: z.B. (07/0811/FUL)
@@ -401,7 +413,6 @@ de-DE:
         are_you_sure: Bist Du sicher?
         by: durch %{name}
         confirm: Bestätigen
-        created_at: vor %{time_ago}
         email: Mailadresse
         view_message: Ansehen...
         message: Nachricht
@@ -430,7 +441,6 @@ de-DE:
         are_you_sure: Bist Du sicher?
         by: durch %{name}
         confirm: Bestätigen
-        created_at: vor %{time_ago}
         email: Mailadresse
         view_message: Ansehen...
         message: 'Der Benutzer hat seinem Beitrittsgesuch folgende Nachricht beigefügt:'
@@ -548,14 +558,13 @@ de-DE:
     index:
       actioned_by: Durchgeführt von
       are_you_sure: Bist Du sicher?
-      by: by %{name}
-      confirm: Confirm
-      created_at: vor %{time_ago}
+      by: durch %{name}
+      confirm: Bestätigen
       email: Mailadresse
       view_message: View...
       message: Nachricht
       no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
-      full_name: Full name
+      full_name: Vollständiger Name
       reject: Ablehnen
       review: Review
       requested_at: Requested At
@@ -578,7 +587,6 @@ de-DE:
       are_you_sure: Bist Du sicher?
       by: by %{name}
       confirm: Bestätigen
-      created_at: vor %{time_ago}
       email: Mailadresse
       view_message: View...
       message: Nachricht
@@ -700,8 +708,7 @@ de-DE:
         Abschnitt
       administrative_matters: Füge eine rein administrative Angelegenheit hinzu
     show:
-      issue_created_at: vor %{time_ago}
-      added_by_html: Berichtet von %{name} am %{time}
+      added_by_html: Added by %{name} %{time}
       cancel_vote: Abbrechen
       confirm_delete: Bist Du sicher?
       delete_issue: Dieses Thema löschen
@@ -728,6 +735,7 @@ de-DE:
       deadline: Stichtag
       issues-nearby: Themen in der Umgebung
       show_collisions: Zeige Zusammenstöße
+      show_photos: Zeige Fotos
     update:
       success: Thema aktualisiert
     vote_clear:
@@ -823,7 +831,7 @@ de-DE:
       new:
         title: Neues Sammlungs-Dokument
       show:
-        added_by_html: Hinzugefügt von %{name} um %{time}
+        added_by_html: Added by %{name} %{time}
         attach_note: Notiz anfügen
         attach_note_instructions_html: Du kannst neue Notizen erstellen, die mit diesem
           Dokument verknüpft sind. Wird in einer Diskussion darauf verwiesen, wird
@@ -843,7 +851,7 @@ de-DE:
       new:
         title: Neue Sammlungs Notiz
       show:
-        added_by_html: Hinzugefügt von %{name} um %{time}
+        added_by_html: Added by %{name} %{time}
         edit: Notiz bearbeiten
         note_on_document_html: 'Diese Notiz wurde einem Dokument angehängt: %{document}'
         no_threads: Diese Notiz wurde in keiner öffentlichen Diskussion erwähnt. Wenn
@@ -857,14 +865,14 @@ de-DE:
   mailers:
     notifications:
       added_to_group:
-        subject: You are now a member of the Cyclescape group for %{group_name}
+        subject: Du bist nun ein Mitglied der Cyclescape Gruppe für %{group_name}
       gmr_confirmed:
-        subject: Du bist nun ein Mitglied von %{group_name}
+        subject: Du bist nun ein Mitglied der Cyclescape Gruppe für %{group_name}
       new_group_request:
         subject: '[Cyclescape] Neue Gruppe "%{group_name}" wurde von "%{user_name}"
           beantragt'
       new_gmr:
-        subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
+        subject: "[Cyclescape] %{user_name} möchte %{group_name} beitreten"
       new_group_thread:
         subject: '[Cyclescape] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
@@ -874,13 +882,13 @@ de-DE:
       new_user_location_issue_thread:
         subject: '[Cyclescape] Start einer neuen Diskussion um das Thema "%{issue_title}"'
       group_request_confirmed:
-        subject: '[Cyclescape] New Group "%{group_name}" has been created'
+        subject: '[Cyclescape] Neue Gruppe "%{group_name}" wurde angelegt'
       group_request_rejected:
         subject: '[Cyclescape] Neue Gruppe "%{group_request_name}" wurde nicht angelegt'
       new_user_confirmed:
-        subject: "[Cyclescape] Welcome to Cyclescape"
+        subject: "[Cyclescape] Willkommen bei Cyclescape"
       upcoming_issue_deadline:
-        subject: '[Cyclescape] Upcoming deadline/date for "%{issue_title}"'
+        subject: '[Cyclescape] Kommender Stichtag/Termin für "%{issue_title}"'
       upcoming_thread_deadline:
         subject: '[Cyclescape] Kommender Stichtag/Termin für "%{thread_title}"'
     thread_mailer:
@@ -1079,8 +1087,8 @@ de-DE:
   shared:
     search:
       no_results_found: No results found for '%{query}'
-      thread_results: Threads (%{count})
-      issue_results: Issues (%{count})
+      thread_results: Diskussionen (%{count})
+      issue_results: Themen (%{count})
       library_results: Library (%{count})
       threads_found:
         zero: No threads found for '%{query}'.
@@ -1132,10 +1140,10 @@ de-DE:
       panel:
         edit_tags: Tags bearbeiten
     message_moderations:
-      approve: Approve
-      approved: approved
-      reject: Discard
-      possible_spam: Possible spam
+      approve: annehmen
+      approved: angenommen
+      reject: verwerfen
+      possible_spam: möglicher Spam
       not_approved: User not approved
       explanation: These messages are held for moderation.  This can be because they
         look like potential spam or that the user has not been approved.  If you approve
@@ -1180,7 +1188,7 @@ de-DE:
       type: ein Foto
       view_the_photo: 'Sie können das Foto zu sehen:'
     new_street_view_message:
-      type: a street view
+      type: eine Straßenansicht
       view_the_street_view: 'Sie können das Street View zu sehen:'
     footer:
       thread: Cyclescape Diskussion
@@ -1191,7 +1199,7 @@ de-DE:
     medium: Mäßig wichtig
     low: Marginal interessant
     very_low: Nicht von Interesse
-    nil: None set
+    nil: Keine gesetzt
   thread_privacy_options:
     public: "öffentlich (Jeder)"
     group: Gruppe (nur Mitglieder)
@@ -1338,8 +1346,8 @@ de-DE:
           zero: No %{entry_name} found
   views:
     pagination:
-      first: "&laquo; First"
-      last: Last &raquo;
-      next: Next &rsaquo;
-      previous: "&lsaquo; Prev"
+      first: "&laquo; Erste"
+      last: Letzte &raquo;
+      next: Nächste &rsaquo;
+      previous: "&lsaquo; Vorherige"
       truncate: "&hellip;"
