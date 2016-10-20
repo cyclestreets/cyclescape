@@ -40,7 +40,7 @@
       // If the lenght is less than maxlength remove any length count and return early
       if (titleLength <= title.attr("maxlength")){
         if (errors.hasClass("inline-errors")) {
-          errors.html(errors.html().replace(/\[\d*?\]/g, ""));
+          errors.html("");
         }
         return;
       }
