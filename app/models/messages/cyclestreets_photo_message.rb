@@ -5,6 +5,6 @@ class CyclestreetsPhotoMessage < MessageComponent
   validates :location, :photo, presence: true
 
   def searchable_text
-    [caption, cyclestreet_caption, cyclestreet_category].join(' ')
+    caption
   end
 end
