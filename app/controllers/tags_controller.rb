@@ -20,6 +20,8 @@ class TagsController < ApplicationController
   end
 
   def index
-    @tags = Tag.top_tags(200)
+    @tags = Rails.cache.fetch("Tag.top_tags(200)", expires: 1.day) do
+      Tag.top_tags(200)
+    end
   end
 end
