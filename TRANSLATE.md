@@ -2,7 +2,7 @@
 
 Translating Cyclescape is carried out using Transifex, which provides a nice user-interface for translators.
 
-[https://www.transifex.com/cyclescape/cyclescape/dashboard/](https://www.transifex.com/cyclescape/cyclescape/dashboard/)
+[https://www.transifex.com/cyclestreets/cyclescape/dashboard/](https://www.transifex.com/cyclestreets/cyclescape/dashboard/)
 
 ## Translating Cyclescape into your language
 
