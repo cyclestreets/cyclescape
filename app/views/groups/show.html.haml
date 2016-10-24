@@ -42,13 +42,11 @@
   - if @group.profile.picture
     %section.group-homepage-image
       = image_tag @group.profile.picture_thumbnail.url
-  - if current_user
+  - membership = @group.memberships.find_by(user: current_user)
+  - if current_user && !membership
     %section.group-homepage-join
-      - if membership = @group.memberships.find_by(user: current_user)
-        = button_to t(".leave_group"), group_membership_path(@group, membership), method: :delete, data: {confirm: t('confirm')}, class: "btn-red"
-      - else
-        %h2= t ".join_title"
-        = render partial: "join", locals: {group: @group}
+      %h2= t ".join_title"
+      = render partial: "join", locals: {group: @group}
   - if current_user && @group.committee_members.include?(current_user)
     %section.box
       %h2= t ".group_management"
@@ -78,3 +76,8 @@
               - if member.profile.picture
                 = image_tag member.profile.picture_thumbnail.url
             %p= member.name
+  - if current_user && membership
+    %section.group-homepage-leave
+      = button_to safe_join([t(".leave_group"), "…"]),
+        group_membership_path(@group, membership),
+        method: :delete, data: {confirm: t('confirm')}, class: "btn-red"
