@@ -929,8 +929,8 @@
       create:
         success: Your leader status has been updated
       new:
-        default_leader_message: "I will take on leading this thread."
-        default_unleading_message: "I can no longer lead this thread."
+        default_leader_message_html: I will take on leading this thread because &hellip;
+        default_unleading_message_html: I can no longer lead this thread because &hellip;
         start_leading: Start leading
         stop_leading: Stop leading
       show:

@@ -42,10 +42,11 @@
           = link_to "#new-document-message" do
             = t ".document_message"
             %span.nub
-        %li.text
-          = link_to "#new-thread-leader-message" do
-            = t ".thread_leader_message"
-            %span.nub
+        - if signed_in? && current_user.subscribed_to_thread?(@thread)
+          %li.text
+            = link_to "#new-thread-leader-message" do
+              = t ".thread_leader_message"
+              %span.nub
       .panes
         #new-text-message.pane
           - if cannot_post?
@@ -66,7 +67,8 @@
         = render "message/links/new"
         = render "message/deadlines/new"
         = render "message/documents/new"
-        = render "message/thread_leaders/new"
+        - if signed_in? && current_user.subscribed_to_thread?(@thread)
+          = render "message/thread_leaders/new"
     #from-library.pane
       .scrollable
         %div
