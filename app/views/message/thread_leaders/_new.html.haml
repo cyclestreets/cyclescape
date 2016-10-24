@@ -9,4 +9,4 @@
         = f.input :description, input_html: { placeholder: t(".default_leader_message_html") }
     = f.actions do
       - submit_text = already_leading ? t('.stop_leading') : t('.start_leading')
-      = f.action :submit, label: submit_text, button_html: {class: "btn-green"}
+      = f.action :submit, label: submit_text, button_html: message_button_html

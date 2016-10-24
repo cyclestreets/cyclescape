@@ -5,4 +5,4 @@
       = semantic_fields_for Message.new do |f2|
         = f2.input :body
     = f.actions do
-      = f.action :submit
+      = f.action :submit, button_html: message_button_html
