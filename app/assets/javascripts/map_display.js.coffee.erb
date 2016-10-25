@@ -213,6 +213,7 @@ class window.LeafletMap
             zoom = map.getBoundsZoom(latlng.layer.getBounds())
           map.setView(latlng, zoom)
         autoType: false
+        filterData: (_, records) -> records
         minLength: 2)
     )
 
