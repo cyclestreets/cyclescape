@@ -29,6 +29,9 @@ class PlanningApplicationWorker
     else
       total['records']
     end
+  rescue JSON::ParserError => e
+    Rollbar.debug(e, "Parsing issue with authority #{authority}")
+    []
   end
 
   def add_applications(planning_applications)
