@@ -98,7 +98,7 @@
                         - thread.upcoming_deadline_messages.each do |message|
                           %li.cal
                             - deadline = message.component.formatted_deadline
-                            %h4= l deadline, format: :long_deadline
+                            %h4= link_to(l(deadline, format: :long_deadline), thread_path(thread, anchor: dom_id(message)))
                             %p= message.component.title
                             = render partial: "shared/deadline", locals: {deadline: deadline}
                     %td.meta
