@@ -17,7 +17,8 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
 
   def index
     @private_threads = PrivateMessageDecorator.decorate_collection(
-      MessageThread.private_for(current_user))
+      MessageThread.private_for(current_user)
+    ).order(created_at: :desc)
   end
 
   private
