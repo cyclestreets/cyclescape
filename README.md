@@ -32,7 +32,7 @@ Pull requests are *very* welcome! Additional developer notes are available on th
 
 # Translations
 
-Translations are managed using the [Transifex](https://www.transifex.com) platform. After signing up, you can go to the [Cyclescape project page](https://www.transifex.com/projects/p/cyclescape/), select a language and click Translate now to start translating.
+Translations are managed using the [Transifex](https://www.transifex.com) platform. After signing up, you can go to the [Cyclescape project page](https://www.transifex.com/cyclestreets/cyclescape/), select a language and click Translate now to start translating.
 
 The words in braces preceded by a percent, for example %{name}, should not be translated into a new language: it's replaced with the group name when rails presents the text. So a German translation of `Request membership of %{group_name}` would look like `Mitgliedsantrag aus %{group_name}`
 

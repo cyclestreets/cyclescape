@@ -3,6 +3,8 @@
   formtastic:
     labels:
       tags_string: Tags
+      thread_leader_message:
+        description: Reason
       group:
         name: Name of the group
         short_name: Subdomain

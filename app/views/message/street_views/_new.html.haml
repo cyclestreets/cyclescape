@@ -11,7 +11,7 @@
     .streetViewPano{id: 'newStreetViewMap'}
     %br/
     = f.actions do
-      = f.action :submit, button_html: {class: "btn-green"}
+      = f.action :submit, button_html: message_button_html
 
 :javascript
   var svLatNew = #{@thread.default_centre.x};

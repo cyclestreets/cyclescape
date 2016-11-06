@@ -7,6 +7,7 @@
   anon: Anon
   sign_in: sign in
   confirm: Are you sure?
+  failure: Sorry, something went wrong
   possible_spam: We think this message might be spam. If not, please accept our apologies.  It
     is queued to be checked by a moderator.
   not_approved: New threads can only be automatically created by approved users.  It
@@ -469,7 +470,7 @@
       edit_group_members: Edit the membership list
       group_management: Group management
       group_organisers: Group organisers
-      leave_group: Leave the group
+      leave_group: Leave the group 
       join_title: Join our Cyclescape group
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
@@ -629,6 +630,7 @@
       deadline: Deadline
       issues-nearby: Issues nearby
       show_collisions: Show Collisions
+      show_photos: Show Photos
     update:
       success: Issue updated
     vote_clear:
@@ -662,6 +664,7 @@
       library: Library
       library_tooltip: Reusable resources for campaigning
       loading: Please wait…
+      membership: Membership
       threads: Discussion threads
       threads_tooltip: Discussions on each issue
       tags: Tags
@@ -803,6 +806,11 @@
       update:
         success: Priority updated
         failure: Couldn't update your priority
+    leaders:
+      create:
+        success: You are now a leader of this thread
+      destroy:
+        success: You are no longer a leader
   message_threads:
     compact:
       group_committee: Group Committee
@@ -874,6 +882,8 @@
     subscribers_panel:
       owner: Owner
       subscribers: Following this thread
+    connected_to_thread:
+      leading: " [leading]"
     update:
       success: Thread updated
     widget:
@@ -902,17 +912,30 @@
       create:
         failure: Link could not be created
         success: Link posted
-    photos:
+    photos: &photo_message
       create:
         failure: Could not create photo message
         success: Photo uploaded
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
+    cyclestreets_photos:
+      <<: *photo_message
     street_views:
       create:
         failure: Street View could not be added
         success: Street View added
+    thread_leaders:
+      create:
+        success: Your leader status has been updated
+      new:
+        default_leader_message_html: I will take on leading this thread because &hellip;
+        default_unleading_message_html: I can no longer lead this thread because &hellip;
+        start_leading: Start leading
+        stop_leading: Stop leading
+      show:
+        new_leader_html: "%{leader_link} will take on responsibility for ensuring that discussions continually move forward and that actions are carried out and followed-up."
+        removed_leader_html: "%{leader_link} has removed themselves as a leader."
   message_library:
     documents:
       new:
@@ -953,10 +976,13 @@
       link_message: Link
       new_message: New message
       photo_message: Photo
+      cyclestreets_photo_message: CycleStreets Photo
+      thread_leader_message: Thread Leader
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
       text_message: Text
       street_view_message: Street View
       reply_by: Or reply by
+      select_image: Select image
   pages:
     changelog:
       github_history_link_html: <a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>.
@@ -1082,6 +1108,10 @@
     new_street_view_message:
       type: a street view
       view_the_street_view: 'You can see the Street View at:'
+    new_thread_leader_message:
+      type: a leader
+      new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
+      removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
     footer:
       thread: Cyclescape discussion thread
       unsubscribe: You can stop following this thread by visiting the link above and

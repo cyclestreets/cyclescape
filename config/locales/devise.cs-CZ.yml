@@ -11,7 +11,7 @@ cs-CZ:
     passwords:
       new:
         forgot_password: Zapomenuté heslo?
-        send_reset_instuctions: Odeslat instrukce k obnovení hesla
+        send_reset_instuctions: Send me reset instructions
     registrations:
       edit:
         confirm: Skutečně?

@@ -1,11 +1,13 @@
 module MessageThreadsHelper
   MESSAGE_CONTROLLER_MAP = {
     'PhotoMessage' => 'photos',
+    'CyclestreetsPhotoMessage' => 'cyclestreets_photos',
     'LinkMessage' => 'links',
     'DeadlineMessage' => 'deadlines',
     'LibraryItemMessage' => 'library_items',
     'DocumentMessage' => 'documents',
     'StreetViewMessage' => 'street_views',
+    'ThreadLeaderMessage' => 'thread_leaders',
   }
 
   MESSAGE_LIBRARY_MAP = {
@@ -56,6 +58,10 @@ module MessageThreadsHelper
   end
 
   def cannot_post?
-    not permitted_to? :create, :messages
+    !permitted_to? :create, :messages
+  end
+
+  def message_button_html
+    { class: "btn-green", disabled: cannot_post?, data: { disable_with: t("formtastic.actions.saving") } }
   end
 end

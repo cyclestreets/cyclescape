@@ -49,10 +49,12 @@
     .pull-right
       = check_box_tag('collisions')
       = label_tag 'collisions', t('.show_collisions')
+      = check_box_tag('photos')
+      = label_tag 'photos', t('.show_photos')
     %div{id: 'map'}
     .hidden
       .map-data{"data-center" => location_to_geojson(@issue.location),
-        "data-opts" => { collisions: true, feature: item_to_geojson(@issue) }.to_json}
+        "data-opts" => { collisions: true, feature: item_to_geojson(@issue), photos: true }.to_json}
 
     = link_to t(".issues-nearby"), issues_path(anchor: 'map-pane', issue_id: @issue.id), class: "btn-green"
 
@@ -80,12 +82,18 @@
 
 :javascript
   $( document ).ready(function() {
-    var mapCollision = $("span:contains('Collisions')").prev();
-    var checkboxCollision = $('#collisions');
-    mapCollision.change(function() {
-      checkboxCollision.prop('checked', this.checked);
-    })
-    checkboxCollision.change(function() {
-      mapCollision.click();
-    })
+    var updateMap = function (mapEl, checkboxEl) {
+      mapEl.change(function() {
+        checkboxEl.prop('checked', this.checked);
+      });
+      checkboxEl.change(function() {
+        mapEl.click();
+      });
+    };
+    var layers = [{ map: $("span:contains('Collisions')").prev(), checkbox: $('#collisions') },
+                  { map: $("span:contains('Photos')").prev(), checkbox: $('#photos') }];
+
+    for ( var i = 0; i < layers.length; i++) {
+      updateMap(layers[i].map, layers[i].checkbox);
+    }
   })

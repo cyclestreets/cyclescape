@@ -95,16 +95,19 @@ Rails.application.routes.draw do
     end
     scope module: :message do
       resources :photos, only: [:create, :show]
+      resources :cyclestreets_photos, only: [:create]
       resources :links, only: [:create]
       resources :street_views, only: [:create]
       resources :deadlines, only: [:create]
       resources :library_items, only: [:create]
       resources :documents, only: [:create, :show]
+      resources :thread_leaders, only: [:create]
     end
     scope module: :message_thread do
       resources :subscriptions, only: [:create, :destroy]
       resource :tags, only: [:update]
       resource :user_priorities, only: [:create, :update]
+      resource :leaders, only: [:create, :destroy]
     end
   end
 

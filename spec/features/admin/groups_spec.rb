@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Groups admin' do
   include_context 'signed in as admin'
 
-  let!(:groups) { create_list(:group, 5) }
+  let!(:groups) { create_list(:group, 3) }
 
   before do
     visit admin_groups_path
@@ -35,18 +35,10 @@ describe 'Groups admin' do
   end
 
   context 'edit' do
-    let(:group) { groups.first }
-
     before do
       within('table tr:first') do
         click_on 'Edit', match: :first
       end
-    end
-
-    it 'should show the current group details' do
-      expect(page).to have_field('Name', with: group.name)
-      expect(page).to have_field('Subdomain', with: group.short_name)
-      expect(page).to have_field('Website', with: group.website)
     end
 
     it 'should update the group' do

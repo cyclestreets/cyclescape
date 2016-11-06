@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   has_many :thread_views, inverse_of: :user
   has_many :site_comments
   has_many :private_threads, class_name: 'MessageThread', inverse_of: :user
+  has_many :thread_leader_messages, -> { active }, dependent: :destroy, inverse_of: :created_by, foreign_key: :created_by_id
+  has_many :leading_threads, through: :thread_leader_messages, source: :thread, inverse_of: :leaders
   has_one :profile, class_name: 'UserProfile'
   has_one :prefs, class_name: 'UserPref'
   belongs_to :remembered_group, class_name: 'Group'

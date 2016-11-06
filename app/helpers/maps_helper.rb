@@ -12,7 +12,7 @@ module MapsHelper
   end
 
   def item_to_geojson(decorated_item)
-    return nil unless decorated_item.location
+    return nil unless decorated_item.try(:location)
     collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(
       [RGeo::GeoJSON::Feature.new(decorated_item.location,
                                   nil,

@@ -12,7 +12,7 @@ fr-CA:
     passwords:
       new:
         forgot_password: Forgot your password?
-        send_reset_instuctions: Send me reset password instructions
+        send_reset_instuctions: Send me reset instructions
     registrations:
       edit:
         confirm: Are you sure?

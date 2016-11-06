@@ -12,7 +12,7 @@ de-DE:
     passwords:
       new:
         forgot_password: Passwort vergessen?
-        send_reset_instuctions: Schicke mir die Anleitung zum Passwortreset zu.
+        send_reset_instuctions: Sende mir die Anleitung zum Zurücksetzen
     registrations:
       edit:
         confirm: Bist Du sicher?

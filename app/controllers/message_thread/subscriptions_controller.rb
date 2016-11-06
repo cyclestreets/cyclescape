@@ -3,7 +3,7 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
 
   def create
     respond_to do |format|
-      if  @thread.add_subscriber current_user
+      if @thread.add_subscriber current_user
         set_flash_message :success
       else
         set_flash_message :failure

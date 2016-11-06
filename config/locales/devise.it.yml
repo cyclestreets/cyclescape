@@ -11,7 +11,7 @@ it:
     passwords:
       new:
         forgot_password: Password dimenticata?
-        send_reset_instuctions: Send me reset password instructions
+        send_reset_instuctions: Send me reset instructions
     registrations:
       edit:
         confirm: Sei sicuro?

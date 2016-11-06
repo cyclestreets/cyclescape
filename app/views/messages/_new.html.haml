@@ -21,10 +21,15 @@
           = link_to "#new-photo-message" do
             = t ".photo_message"
             %span.nub
+        %li.image
+          = link_to "#new-cyclestreets-photo-message" do
+            = t ".cyclestreets_photo_message"
+            %span.nub
         %li.map-point
           = link_to "#new-street-view-message" do
             = t ".street_view_message"
             %span.nub
+        %p.clear
         %li.link
           = link_to "#new-link-message" do
             = t ".link_message"
@@ -37,25 +42,33 @@
           = link_to "#new-document-message" do
             = t ".document_message"
             %span.nub
+        - if signed_in? && current_user.subscribed_to_thread?(@thread)
+          %li.text
+            = link_to "#new-thread-leader-message" do
+              = t ".thread_leader_message"
+              %span.nub
       .panes
+        - if cannot_post?
+          .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
         #new-text-message.pane
-          - if cannot_post?
-            .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
           = semantic_form_for @new_message, url: thread_messages_path(@thread) do |f|
             = f.inputs do
               = f.input :body, input_html: { class: 'autosize', disabled: cannot_post?}
             = f.actions do
-              = f.action :submit, button_html: { class: "btn-green", disabled: cannot_post?, data: { disable_with: t("formtastic.actions.saving") } }
-        - if permitted_to?(:create, :messages) && @thread.latest_message
-          %p
-            = t '.reply_by'
-            = email_message @thread.latest_message
-
+              = f.action :submit, button_html: message_button_html
         = render "message/photos/new"
+        = render "message/cyclestreets_photos/new"
         = render "message/street_views/new"
         = render "message/links/new"
         = render "message/deadlines/new"
         = render "message/documents/new"
+        - if signed_in? && current_user.subscribed_to_thread?(@thread)
+          = render "message/thread_leaders/new"
+
+        - if permitted_to?(:create, :messages) && @thread.latest_message
+          %p
+            = t '.reply_by'
+            = email_message @thread.latest_message
     #from-library.pane
       .scrollable
         %div

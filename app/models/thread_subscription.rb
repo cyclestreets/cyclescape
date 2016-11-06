@@ -19,4 +19,12 @@ class ThreadSubscription < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :thread, class_name: 'MessageThread', inverse_of: :subscriptions
+
+  before_destroy :remove_leader
+
+  private
+
+  def remove_leader
+    user.thread_leader_messages.where(thread: thread).destroy_all
+  end
 end

@@ -1,3 +1,5 @@
+<%- unless type == 'a leader' %>
 <%- name = message.created_by.name %>
 <%- name += t '.committee' if message.committee_created? %>
 <%= raw t ".added", type: type, name: name %>
+<%- end %>

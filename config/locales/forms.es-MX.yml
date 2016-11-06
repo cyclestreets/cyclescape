@@ -46,9 +46,11 @@ es-MX:
         file: Document
       library/item: 
       library/note:
+        location: Area of relevance
         body: Note
+        url: Web address
       link_message:
-        url: URL
+        url: Web address
       message:
         body: Message
       site_comment:
@@ -67,6 +69,8 @@ es-MX:
         new:
           bicycle_wheels: Bicycle Wheels
     hints:
+      tags_string_hints:
+        tags_string: comma separated list of tags e.g. cycle parking, obstruction
       user:
         new:
           display_name: If you set a display name, it will be shown to people who
@@ -121,8 +125,8 @@ es-MX:
           deadline: "(optional)"
           external_url: If another web page is relevant you can add it here.
           photo: optional
-          tags_string: e.g. cycle parking, obstruction, roadworks
           title: Please be brief and specific
+          tags_string: comma separated list of tags e.g. cycle parking, obstruction
         create:
           description: Please give details about the problem and what effect it is
             having on cycling.  Remember that all issues are publicly viewable. On
@@ -130,8 +134,8 @@ es-MX:
           deadline: "(optional)"
           external_url: If another web page is relevant you can add it here.
           photo: optional
-          tags_string: e.g. cycle parking, obstruction, roadworks
           title: Please be brief and specific
+          tags_string: comma separated list of tags e.g. cycle parking, obstruction
         edit:
           description: Please give details about the problem and what effect it is
             having on cycling.  Remember that all issues are publicly viewable. On
@@ -139,8 +143,8 @@ es-MX:
           deadline: "(optional)"
           external_url: If another web page is relevant you can add it here.
           photo: optional
-          tags_string: e.g. cycle parking, obstruction, roadworks
           title: Please be brief and specific
+          tags_string: comma separated list of tags e.g. cycle parking, obstruction
         update:
           description: Please give details about the problem and what effect it is
             having on cycling.  Remember that all issues are publicly viewable. On
@@ -148,14 +152,16 @@ es-MX:
           deadline: "(optional)"
           external_url: If another web page is relevant you can add it here.
           photo: optional
-          tags_string: e.g. cycle parking, obstruction, roadworks
           title: Please be brief and specific
+          tags_string: comma separated list of tags e.g. cycle parking, obstruction
       message_thread:
         privacy: This specifies who can see and edit this discussion thread.
         issue: This specifies which issue this discussion thread is attached to. If
           none, this will be an administrative thread.
       library/note:
-        url: If another web page is relevant you can add it here.
+        tags_string: comma separated list of tags e.g. cycle parking, obstruction
+      library/document:
+        tags_string: comma separated list of tags e.g. cycle parking, obstruction
     placeholders:
       issue:
         external_url: http://www.example.com

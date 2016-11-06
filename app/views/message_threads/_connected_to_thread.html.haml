@@ -1,0 +1,9 @@
+%li
+  - if permitted_to?(:view_profile, user)
+    = link_to user_profile_path(user) do
+      %span.thumb
+        - if user.profile.picture
+          = image_tag user.profile.picture_thumbnail.url
+      %p= "#{user.name} #{leading ? t('.leading') : ''}"
+  - else
+    "#{user.display_name_or_anon} #{leading ? t('.leading') : ''}"

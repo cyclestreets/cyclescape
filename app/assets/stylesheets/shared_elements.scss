@@ -771,12 +771,15 @@ section.new-message {
     }
   }
   #compose-new {
+    a:hover {
+      border-bottom:0;
+    }
     ul.tabs {
       @include list-reset-soft;
       float:none;
       width:auto;
       padding:15px;
-      height:20px;
+      height:50px;
       border-bottom:1px solid $paneborder;
       li {
         float:left;
