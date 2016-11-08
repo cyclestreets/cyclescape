@@ -9,17 +9,18 @@ class ThreadListDecorator < ApplicationDecorator
     'photo_message' => 'image',
     'link_message' => 'link',
     'deadline_message' => 'cal',
-    'library_item_message' => 'library_document',
-    'document_message' => 'library_document',
-    'message' => 'library_note'
   }
 
   def latest_activity
     latest = thread.latest_message
     h.content_tag(:ul, class: 'content-icon-list') do
-      h.content_tag(:li, class: MESSAGE_ICON_MAP[latest.component_name]) do
+      h.content_tag(:li, class: MESSAGE_ICON_MAP.fetch(latest.component_name, 'library_note')) do
         creator_link = h.link_to_profile(latest.created_by)
-        h.t("dashboards.show.posted.#{latest.component_name}_html", creator_link: creator_link)
+        if latest.component_name == "thread_leader_message" && latest.component.withdrawing?
+          h.t("dashboards.show.posted.thread_leader_withdrawing")
+        else
+          h.t("dashboards.show.posted.#{latest.component_name}_html", creator_link: creator_link)
+        end
       end
     end
   end

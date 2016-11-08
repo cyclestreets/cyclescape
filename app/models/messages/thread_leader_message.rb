@@ -13,6 +13,14 @@ class ThreadLeaderMessage < MessageComponent
     end
   end
 
+  def leading?
+    !withdrawing?
+  end
+
+  def withdrawing?
+    unleading_id?
+  end
+
   private
 
   def user_ownes_unleading
