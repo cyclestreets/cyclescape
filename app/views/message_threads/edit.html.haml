@@ -6,9 +6,10 @@
   = semantic_form_for @thread, as: :thread, url: thread_path(@thread) do |f|
     = f.inputs do
       = f.input :title
-      = f.input :group
-      = f.input :privacy, as: :select, collection: f.object.class.privacies_map
-      = f.input :issue, as: :select, collection: Issue.by_most_recent.map { |iss| ["#{iss.id} - #{iss.title}", iss.id] }
+      - unless f.object.private_message?
+        = f.input :group
+        = f.input :privacy, as: :select, collection: f.object.class.privacies_map
+        = f.input :issue, as: :select, collection: Issue.by_most_recent.map { |iss| ["#{iss.id} - #{iss.title}", iss.id] }
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green submit"}
       = cancel_link thread_path(@thread)
