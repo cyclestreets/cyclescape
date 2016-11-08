@@ -33,6 +33,7 @@ class PlanningApplication < ActiveRecord::Base
   scope :not_hidden, -> { where('hide_votes_count < ?', NOS_HIDE_VOTES) }
   scope :ordered, -> { order('start_date DESC') }
   scope :relevant, -> { where(relevant: true) }
+  scope :not_hidden_by, ->(user) { includes(:hide_votes).where.not("EXISTS (SELECT 1 FROM hide_votes WHERE hide_votes.user_id = ?)", user.id) }
 
   validates :uid, :url, presence: true
   validates :uid, uniqueness: { scope: :authority_name }

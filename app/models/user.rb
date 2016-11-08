@@ -170,7 +170,7 @@ class User < ActiveRecord::Base
   end
 
   def planning_applications_near_locations
-    PlanningApplication.intersects(buffered_locations)
+    PlanningApplication.intersects(buffered_locations).not_hidden_by(self)
   end
 
   def start_location

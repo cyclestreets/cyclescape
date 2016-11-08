@@ -26,7 +26,7 @@ describe PlanningApplication do
     end
 
     it 'should populate an issue' do
-      subject.description = 'very very long '*10
+      subject.description = 'very very long ' * 10
       subject.save!
       issue = subject.populate_issue
       expect(issue.title).to include('very very long')
@@ -85,6 +85,19 @@ describe PlanningApplication do
     not_hidden = described_class.not_hidden
     expect(not_hidden.size).to eq(2)
     expect(not_hidden).to_not include(twice_hidden)
+  end
+
+  describe ".not_hidden_by" do
+    let(:hidden_by_user) { create :planning_application }
+    let(:user) { create :user }
+
+    before { create :hide_vote, planning_application: hidden_by_user, user: user }
+
+    it 'should have an not hidden scope' do
+      expect(described_class.not_hidden_by(user)).to_not include(hidden_by_user)
+      create :hide_vote, planning_application: hidden_by_user
+      expect(described_class.not_hidden_by(user)).to_not include(hidden_by_user)
+    end
   end
 
   context 'with old planning applications' do
