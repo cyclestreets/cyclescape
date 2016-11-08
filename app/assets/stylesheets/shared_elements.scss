@@ -6,6 +6,9 @@ ul.thread-metadata-listings {
   border-top: 1px solid $paneborder;
   li {
     a {
+      &.leading {
+        background: $leaderpanel;
+      }
       background: $pane1;
       display: block;
       border-bottom: 1px solid $paneborder;
@@ -15,6 +18,9 @@ ul.thread-metadata-listings {
       &:hover{
         text-decoration: none;
         background: $pane2;
+        &.leading {
+          background: $leaderpanel2;
+        }
       }
       p {
         margin: 0 0 0 34px;

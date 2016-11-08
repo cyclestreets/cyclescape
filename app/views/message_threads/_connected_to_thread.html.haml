@@ -1,6 +1,6 @@
 %li
   - if permitted_to?(:view_profile, user)
-    = link_to user_profile_path(user) do
+    = link_to user_profile_path(user), class: ("leading" if leading) do
       %span.thumb
         - if user.profile.picture
           = image_tag user.profile.picture_thumbnail.url
