@@ -1,5 +1,11 @@
 #new-thread-leader-message.pane
   - already_leading = ThreadLeaderMessage.already_leading(current_user, @thread)
+  %p
+    = t(".introduction")
+  - unless already_leading
+    %p
+      %strong
+        = t(".introduction_action")
   = semantic_form_for ThreadLeaderMessage.new, url: thread_thread_leaders_path(@thread) do |f|
     = f.inputs do
       - if already_leading

@@ -472,7 +472,7 @@
       edit_group_members: Edit the membership list
       group_management: Group management
       group_organisers: Group organisers
-      leave_group: Leave the group 
+      leave_group: Leave the group
       join_title: Join our Cyclescape group
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
@@ -931,8 +931,10 @@
       create:
         success: Your leader status has been updated
       new:
-        default_leader_message_html: I will take on leading this thread because &hellip;
-        default_unleading_message_html: I can no longer lead this thread because &hellip;
+        introduction: The leader of this discussion thread will ensure that the matter continues to move forward.
+        introduction_action: I will take responsibility for leading this discussion.
+        default_leader_message_html: You may wish to describe your motivation for leading this discussion
+        default_unleading_message_html: You may wish to describe your motivation for being unable to lead this discussion anymore
         start_leading: Start leading
         stop_leading: Stop leading
       show:
@@ -978,11 +980,11 @@
       link_message: Link
       new_message: New message
       photo_message: Photo
-      cyclestreets_photo_message: CycleStreets Photo
-      thread_leader_message: Thread Leader
+      cyclestreets_photo_message: CycleStreets photo
+      thread_leader_message: Thread leader
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
       text_message: Text
-      street_view_message: Street View
+      street_view_message: Street view
       reply_by: Or reply by
       select_image: Select image
   pages:

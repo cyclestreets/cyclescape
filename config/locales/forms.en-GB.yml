@@ -4,7 +4,7 @@
     labels:
       tags_string: Tags
       thread_leader_message:
-        description: Reason
+        description: Optional reason
       group:
         name: Name of the group
         short_name: Subdomain
