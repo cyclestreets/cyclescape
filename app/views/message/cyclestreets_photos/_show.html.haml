@@ -1,5 +1,5 @@
 %figure.photo{id: dom_id(message.component)}
-  = link_to thread_photo_path(message.thread, message.component), rel: "#overlay" do
+  = link_to thread_cyclestreets_photo_path(message.thread, message.component), rel: "#overlay" do
     = image_tag message.component.photo_preview.url,
         alt: t(".photo_alt", caption: message.component.caption)
   %figcaption
