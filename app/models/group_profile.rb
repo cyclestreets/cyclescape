@@ -17,11 +17,14 @@
 #
 
 class GroupProfile < ActiveRecord::Base
+  MAX_LOCAL_AREA = 10
+
   include Locatable
   dragonfly_accessor :picture
 
   scope :with_location, -> { where.not(location: nil) }
   scope :ordered,       -> { order(created_at: :desc) }
+  scope :local,         -> { where("ST_AREA(location) < ?", MAX_LOCAL_AREA) }
   validates :new_user_email, presence: true
 
   def picture_thumbnail

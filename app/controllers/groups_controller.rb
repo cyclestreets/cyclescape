@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
       bbox = nil
       group_profiles = GroupProfile.all
     end
-    group_profiles = group_profiles.with_location.ordered
+    group_profiles = group_profiles.local.with_location.ordered
     group_profiles = group_profiles.limit(50) unless params[:no_limit]
     factory = RGeo::GeoJSON::EntityFactory.new
     collection = factory.feature_collection(group_profiles.sort_by { |o| o.size }.reverse.map { | group_profile | group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
