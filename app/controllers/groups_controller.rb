@@ -29,7 +29,8 @@ class GroupsController < ApplicationController
       bbox = nil
       group_profiles = GroupProfile.all
     end
-    group_profiles = group_profiles.with_location.ordered.limit(50)
+    group_profiles = group_profiles.with_location.ordered
+    group_profiles = group_profiles.limit(50) unless params[:no_limit]
     factory = RGeo::GeoJSON::EntityFactory.new
     collection = factory.feature_collection(group_profiles.sort_by { |o| o.size }.reverse.map { | group_profile | group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
     respond_to do |format|
@@ -116,6 +117,8 @@ class GroupsController < ApplicationController
     group.loc_feature(title: group.name,
                       size_ratio: group.profile.size_ratio(geom),
                       url: root_url(subdomain: group.short_name),
+                      website: group.website,
+                      email: group.email,
                       description: view_context.auto_link(group.trunctated_description))
   end
 
