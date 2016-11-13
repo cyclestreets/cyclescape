@@ -58,7 +58,7 @@ module IssueApi
       desc 'Returns groups as a GeoJSON collection'
       params do
         optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
-        optional :national, type: String, desc: 'When set to 1 (or any value) only groups of large size are returned, when not set only groups of a small size are returned.'
+        optional :national, type: Integer, desc: 'When set to 1 groups of small and large size are returned, when set to 0 only groups of a small size are returned. Default 0', default: 0
       end
 
       get '/' do
@@ -68,11 +68,7 @@ module IssueApi
           bbox = bbox_from_string(params[:bbox], GroupProfile.rgeo_factory)
           scope = scope.intersects(bbox.to_geometry)
         end
-        scope = if params[:national]
-                  scope.national
-                else
-                  scope.local
-                end
+        scope = scope.local unless params[:national].to_i == 1
         groups = scope.map { |group_profile| group_feature(GroupDecorator.decorate(group_profile.group), bbox) }
         collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(groups)
         RGeo::GeoJSON.encode(collection)

@@ -25,7 +25,6 @@ class GroupProfile < ActiveRecord::Base
   scope :with_location, -> { where.not(location: nil) }
   scope :ordered,       -> { order(created_at: :desc) }
   scope :local,         -> { where("ST_AREA(location) < ?", MAX_LOCAL_AREA) }
-  scope :national,      -> { where("ST_AREA(location) >= ?", MAX_LOCAL_AREA) }
   scope :ordered_by_size, -> { order("ST_AREA(location) DESC")}
   validates :new_user_email, presence: true
 

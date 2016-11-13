@@ -5,14 +5,7 @@ describe IssueApi::API do
 
   let(:geojson_response) { RGeo::GeoJSON.decode(last_response.body, json_parser: :json) }
 
-  describe "GET /issue" do
-    it "returns 200" do
-      get "/api/issues"
-      expect(last_response.status).to eq(200)
-    end
-  end
-
-  describe 'GET index.json' do
+  describe 'GET /issues' do
     context 'with bounding box' do
       let(:host) { "" }
       before do
@@ -25,6 +18,7 @@ describe IssueApi::API do
 
       it 'returns issue' do
         expect(geojson_response.size).to eq(1)
+        expect(last_response.status).to eq(200)
       end
 
       it 'has the correct fields' do
@@ -91,6 +85,40 @@ describe IssueApi::API do
 
       it 'should hide the users name' do
         expect(geojson_response[0]['created_by']).to eq('Anon')
+      end
+    end
+  end
+
+  describe 'GET /issues' do
+    let(:response_keys) { %w(description email size_ratio title url website) }
+    let!(:small) { create :small_group_profile }
+
+    before do
+      create :big_group_profile
+    end
+
+    context 'for local and national groups' do
+      before do
+        get "/api/groups", national: 1
+      end
+
+      it 'returns issue' do
+        expect(geojson_response.size).to eq(2)
+        expect(last_response.status).to eq(200)
+        expect(geojson_response[0].keys).to match_array(response_keys)
+      end
+    end
+
+    context 'for local groups only' do
+      before do
+        get "/api/groups"
+      end
+
+      it 'returns issue' do
+        expect(geojson_response.size).to eq(1)
+        expect(last_response.status).to eq(200)
+        expect(geojson_response[0].keys).to match_array(response_keys)
+        expect(geojson_response[0]["url"]).to eq("http://#{small.group.short_name}.example.org")
       end
     end
   end
