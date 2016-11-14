@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   def index
     @full_page = true
-    @users = User.order('created_at DESC').includes(:profile)
+    @users = User.order('created_at DESC').page(params[:page]).includes(:profile)
   end
 
   def edit
