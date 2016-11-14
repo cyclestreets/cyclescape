@@ -17,6 +17,7 @@
                 "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(item), hidezoom: true }.to_json}
         .meta
           = formatted_created_at item
+  = paginate @items
 
 %aside#sidebar
   = link_to t(".new_library_item"), "#", rel: "#new-library-item-selector", class: "open-dialog btn-green"
