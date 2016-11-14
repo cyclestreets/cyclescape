@@ -3,9 +3,9 @@
     %section.external_url
       = link_to note.url, note.url
   = auto_link simple_format note.body
-  - if note.location
-    - map_id = "leaflet-#{dom_id(note)}"
-    .tinyermap{id: map_id}
+- if note.location
+  %article.map
+    #map
     .hidden
       .map-data{"data-center" => location_to_geojson(note.location),
-        "data-opts" => { domid: map_id, feature: item_to_geojson(note) }.to_json}
+        "data-opts" => { feature: item_to_geojson(note) }.to_json}
