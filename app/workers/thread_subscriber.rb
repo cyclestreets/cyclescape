@@ -27,7 +27,7 @@ class ThreadSubscriber
 
     locations = UserLocation.intersects(buffered_location).
         joins(user: :prefs).
-        where(user_prefs: { involve_my_locations: 'subscribe' })
+        where(user_prefs: { involve_my_locations: 'subscribe' }, users: { disabled_at: nil, deleted_at: nil })
 
     locations.each do |loc|
       if Authorization::Engine.instance.permit? :show,  object: thread, user: loc.user, user_roles: [:member, :guest]

@@ -233,9 +233,6 @@ describe 'Issue threads' do
     context 'automatic subscriptions' do
       include_context 'signed in as a site user'
 
-      let(:subscriber) { create(:user) }
-      let!(:subscriber_location) { create(:user_location, user: subscriber, location: issue.location.buffer(1)) }
-
       def create_thread
         visit issue_path(issue)
         click_on 'Discuss'
@@ -244,9 +241,28 @@ describe 'Issue threads' do
         click_on 'Create Thread'
       end
 
-      it 'should automatically subscribe people with overlapping locations' do
-        create_thread
-        expect(subscriber.subscribed_to_thread?(issue.threads.last)).to be_truthy
+      context "with a potential subscriber" do
+        let(:subscriber) { subscriber_location.user }
+        let!(:subscriber_location) { create(:user_location, location: issue.location.buffer(1)) }
+
+        it 'should not subscribe when the preference is not set' do
+          subscriber.prefs.update_column(:involve_my_locations, 'notify')
+          create_thread
+          expect(subscriber.subscribed_to_thread?(issue.threads.last)).to be_falsey
+        end
+
+        context "with a disabled user" do
+          let(:disabled_subscriber) { create(:user, disabled_at: Time.current) }
+          let!(:disabled_subscriber_location) do
+            create(:user_location, user: disabled_subscriber, location: issue.location.buffer(1))
+          end
+
+          it 'should automatically subscribe non-disabled users with overlapping locations' do
+            create_thread
+            expect(subscriber.subscribed_to_thread?(issue.threads.last)).to be_truthy
+            expect(disabled_subscriber.subscribed_to_thread?(issue.threads.last)).to be_falsey
+          end
+        end
       end
 
       it 'should only subscribe the thread creator once' do
@@ -255,12 +271,6 @@ describe 'Issue threads' do
           create_thread
         end
         expect(current_user.thread_subscriptions.count).to eq(1)
-      end
-
-      it 'should not subscribe when the preference is not set' do
-        subscriber.prefs.update_column(:involve_my_locations, 'notify')
-        create_thread
-        expect(subscriber.subscribed_to_thread?(issue.threads.last)).to be_falsey
       end
     end
   end
