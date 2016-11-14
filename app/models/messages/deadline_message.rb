@@ -37,7 +37,7 @@ class DeadlineMessage < MessageComponent
 
   def to_ical
     Icalendar::Event.new.tap do |e|
-      e.dtstart     = Icalendar::Values::Date.new(formatted_deadline)
+      e.dtstart     = Icalendar::Values::DateOrDateTime.new(formatted_deadline).call
       e.summary     = title
       e.description = thread.title
       e.url         = url_helpers.

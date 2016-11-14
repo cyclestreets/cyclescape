@@ -38,12 +38,17 @@ describe DeadlineMessage do
     user_disabled.prefs.update_column(:email_status_id, 1)
     user_disabled.update_column(:disabled_at, Time.current)
 
-    expect{described_class.email_upcomming_deadlines!}.to change{ all_emails.count }.by(1)
+    expect { described_class.email_upcomming_deadlines! }.to change{ all_emails.count }.by(1)
     email = all_emails.last
     expect(email.to).to include(user.email)
     expect(email.body).to include('upcoming deadline')
     expect(email.body).to include('Do not miss me!')
     expect(email.subject).to include('Upcoming deadline')
     expect(email.body).to include(dm.deadline.to_formatted_s(:long_ordinal))
+  end
+
+  it ".to_ical" do
+    subject = build :deadline_message
+    expect(subject.to_ical.dtstart).to eq subject.deadline
   end
 end
