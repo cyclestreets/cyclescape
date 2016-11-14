@@ -385,6 +385,16 @@ ActiveRecord::Schema.define(version: 20161010203821) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "potential_members", force: :cascade do |t|
+    t.integer  "group_id"
+    t.string   "email_hash"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "potential_members", ["email_hash"], name: "index_potential_members_on_email_hash", unique: true, using: :btree
+  add_index "potential_members", ["group_id"], name: "index_potential_members_on_group_id", using: :btree
+
   create_table "site_comments", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name",         limit: 255
@@ -566,6 +576,7 @@ ActiveRecord::Schema.define(version: 20161010203821) do
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
   add_foreign_key "message_threads", "users"
+  add_foreign_key "potential_members", "groups"
   add_foreign_key "thread_leader_messages", "message_threads", column: "thread_id"
   add_foreign_key "thread_leader_messages", "messages"
   add_foreign_key "thread_leader_messages", "thread_leader_messages", column: "unleading_id"

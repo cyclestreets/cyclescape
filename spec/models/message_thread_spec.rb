@@ -334,14 +334,17 @@ describe MessageThread do
     end
   end
 
-  describe 'ical output' do
+  describe '.to_icals' do
     subject { create :message_thread, title: 'Important dates' }
     let(:message)  { create :message, thread: subject }
     let!(:deadline) { create :deadline_message, message: message, title: 'The AGM!', deadline: 1.day.from_now }
 
-    it { expect(subject.to_icals[0].summary).to include('The AGM!') }
-    it { expect(subject.to_icals[0].description).to include('Important dates') }
-    it { expect(subject.to_icals[0].dtstart.to_s).to eq(Icalendar::Values::Date.new(deadline.deadline).to_s) }
+    it "has correct output" do
+      ical = subject.to_icals[0]
+      expect(ical.summary).to include('The AGM!')
+      expect(ical.description).to include('Important dates')
+      expect(ical.dtstart.to_i).to eq(deadline.deadline.to_i)
+    end
   end
 
   describe 'subscriptions' do
