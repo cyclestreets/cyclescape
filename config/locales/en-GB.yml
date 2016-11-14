@@ -121,6 +121,9 @@
         success: User updated
       edit:
         edit_user: Edit user
+        delete_user: Delete user
+      destroy:
+        success: User deleted
     planning_filters:
       create:
         success: Filter created and running a in background job

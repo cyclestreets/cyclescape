@@ -21,6 +21,15 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if user.destroy
+      set_flash_message :success
+    else
+      set_flash_message :failure
+    end
+    redirect_to action: :index
+  end
+
   protected
 
   def user

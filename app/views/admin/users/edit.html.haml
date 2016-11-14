@@ -2,3 +2,5 @@
   %h1= t ".edit_user"
 %section
   = render "form"
+%section
+  = button_to t(".delete_user"), admin_user_path(@user), method: :delete, data: { confirm: t("are_you_sure") }, class: 'btn-red'
