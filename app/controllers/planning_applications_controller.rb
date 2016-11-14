@@ -1,5 +1,5 @@
 class PlanningApplicationsController < ApplicationController
-  before_filter :set_planning_application, on: [:show, :show_uid, :geometry]
+  before_filter :set_planning_application, only: [:show, :show_uid, :geometry]
   respond_to :js, only: [:hide, :unhide]
 
   def show
@@ -56,7 +56,7 @@ class PlanningApplicationsController < ApplicationController
     planning_application = if params[:id]
                              PlanningApplication.find(params[:id])
                            else
-                             PlanningApplication.find_by_uid(params[:uid])
+                             PlanningApplication.find_by!(uid: params[:uid])
                            end
     @planning_application = PlanningApplicationDecorator.decorate planning_application
   end
