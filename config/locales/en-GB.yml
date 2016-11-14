@@ -265,6 +265,7 @@
         street_view_message_html: '%{creator_link} posted a street view'
         library_item_message_html: '%{creator_link} added a library item'
         thread_leader_message_html: '%{creator_link} became a leader'
+        cyclestreets_photo_message_html: '%{creator_link} posted a CycleStreets photo'
         thread_leader_withdrawing: Withdrawal of leader
     search:
       title: Search Results
