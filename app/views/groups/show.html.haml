@@ -80,4 +80,4 @@
     %section.group-homepage-leave
       = button_to safe_join([t(".leave_group"), "…"]),
         group_membership_path(@group, membership),
-        method: :delete, data: {confirm: t('confirm')}, class: "btn-red"
+        method: :delete, data: {confirm: t('are_you_sure')}, class: "btn-red"
