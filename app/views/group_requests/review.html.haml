@@ -20,8 +20,8 @@
       = formatted_created_at(@request)
     %td= t ".membership_status.#{@request.status}"
     %td= link_to t(".by", name: @request.actioned_by.name), user_profile_path(@request.actioned_by) if @request.rejected? || @request.confirmed?
-    %td= link_to t(".confirm"), confirm_group_request_path(@request), method: :put, data: { confirm: t(".are_you_sure") } if @request.pending?
-    %td= link_to t(".destroy"), group_request_path(@request), method: :delete, data: { confirm: t(".are_you_sure") } if @request.confirmed? || @request.rejected?
+    %td= link_to t(".confirm"), confirm_group_request_path(@request), method: :put, data: { confirm: t("are_you_sure") } if @request.pending?
+    %td= link_to t(".destroy"), group_request_path(@request), method: :delete, data: { confirm: t("are_you_sure") } if @request.confirmed? || @request.rejected?
 
 - if @request.message.blank?
   %p= t ".no_message"

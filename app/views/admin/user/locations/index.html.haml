@@ -31,7 +31,7 @@
                 .map-data{"data-center" => location_to_geojson(l.location),
                   "data-opts" => { domid: map_id, feature: item_to_geojson(l) }.to_json}
             %td= link_to t(".edit"), edit_admin_user_location_path(@user, l)
-            %td= link_to t(".delete"), admin_user_location_path(@user, l), data: { confirm: t(".confirm") }, method: "delete"
+            %td= link_to t(".delete"), admin_user_location_path(@user, l), data: { confirm: t("are_you_sure") }, method: "delete"
             %td
               - if l.overlapping_groups.count > 0
                 %ul

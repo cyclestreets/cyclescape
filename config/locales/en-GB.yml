@@ -6,7 +6,7 @@
       unrecognised: Couldn't find the tag '%{name}'
   anon: Anon
   sign_in: sign in
-  confirm: Are you sure?
+  are_you_sure: Are you sure?
   failure: Sorry, something went wrong
   possible_spam: We think this message might be spam. If not, please accept our apologies.  It
     is queued to be checked by a moderator.
@@ -80,7 +80,6 @@
           category: Category
           combined_locations: Combined Locations
           combined_locations_guidance: This is the combined location for this user.
-          confirm: Are you sure?
           delete: Delete
           edit: Edit
           map: Map
@@ -340,7 +339,6 @@
         you_have_pending_members_html: You have %{review_pending_requests_link}! Please
           review them and take appropriate actions.
       member:
-        confirm: Are you sure?
         delete: Remove from group
         edit: Edit membership
         joining_date: '%{time_ago} ago'
@@ -368,7 +366,6 @@
         already_member: You are already a member of this group
       index: &group_membership_requests_index
         actioned_by: Actioned By
-        are_you_sure: Are you sure?
         by: by %{name}
         confirm: Confirm
         email: E-mail address
@@ -607,7 +604,6 @@
     show:
       added_by_html: Added by %{name} %{time}
       cancel_vote: Cancel
-      confirm_delete: Are you sure?
       delete_issue: Delete this issue
       edit_issue: Edit this issue
       new_thread:
@@ -866,7 +862,6 @@
       search_submit: Search
       title: Thread Search Results
     show:
-      are_you_sure: Are you sure?
       back: Back
       closed_html: Thread has been closed by %{by} %{at} ago
       open: Re-open this thread
@@ -1070,7 +1065,6 @@
         failure: Couldn't remove comment
         success: Comment deleted
       index:
-        confirm_delete: Are you sure?
         delete_comment: Delete
         how: How
         id: ID
@@ -1163,7 +1157,6 @@
         combined_locations_guidance_subscribe_html: You currently receive notifications
           when issues are created in these areas, and are following all discussion
           threads on those issues. To change these settings, you can %{edit_prefs_link}.
-        confirm: Are you sure?
         delete: Delete
         edit: Edit
         edit_your_prefs: edit your preferences

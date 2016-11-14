@@ -16,4 +16,4 @@
       = t ".invite_pending"
   %td
     = link_to t(".edit"), edit_group_membership_path(@group, @group.membership_for(member))
-  %td= link_to t(".delete"), group_membership_path(@group, @group.membership_for(member)), data: { confirm: t(".confirm") }, method: :delete
+  %td= link_to t(".delete"), group_membership_path(@group, @group.membership_for(member)), data: { confirm: t("are_you_sure") }, method: :delete
