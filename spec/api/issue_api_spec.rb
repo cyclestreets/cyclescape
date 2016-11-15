@@ -111,7 +111,7 @@ describe IssueApi::API do
 
     context 'for local groups only' do
       before do
-        get "/api/groups"
+        get "http://cam.example.org/api/groups"
       end
 
       it 'returns issue' do

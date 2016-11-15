@@ -38,7 +38,7 @@ module IssueApi
 
         group.loc_feature(title: group.name,
                           size_ratio: group.profile.size_ratio(geom),
-                          url: ["#{request.scheme}://", "#{group.short_name}.", request.host_with_port].join(""),
+                          url: ["#{request.scheme}://", "#{group.short_name}.", request.host_with_port.sub(/.*?\./,"")].join(""),
                           website: group.website,
                           email: group.email,
                           description: group.trunctated_description)
