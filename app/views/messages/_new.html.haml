@@ -99,7 +99,7 @@
             .library-content(data-bind="template: {name: 'library-item-selected', foreach: selected()}")
 
   - if permitted_to? :close, @thread
-    .pull-right= button_to t(".close"), close_thread_path(@thread), method: :put, class: 'btn-green part-hidden', data: { confirm: t("confirm") }
+    .pull-right= button_to t(".close"), close_thread_path(@thread), method: :put, class: 'btn-green part-hidden', data: { confirm: t("are_you_sure") }
 
 // Template for library items
 %script(type="text/html" id="library-item-template")
