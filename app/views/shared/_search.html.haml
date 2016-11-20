@@ -9,6 +9,8 @@
     .panes
       #issue-results.pane
         %p= t(".issues_found", count: @issues.total_count, query: @query)
+        = paginate @issues, param_name: :issue_page, params: {anchor: 'issue-results'}
+        .clear
         - if @issues.count > 0
           %ul.issue-list
             = render partial: "issues/compact", collection: @issues, as: :issue
@@ -16,12 +18,16 @@
 
       #thread-results.pane
         %p= t(".threads_found", count: @threads.total_count, query: @query)
+        = paginate @threads, param_name: :thread_page, params: {anchor: 'thread-results'}
+        .clear
         - if @threads.count > 0
           %ul.thread-list
             = render partial: "message_threads/list", collection: @threads, as: :thread
             = paginate @threads, param_name: :thread_page, params: {anchor: 'thread-results'}
       #library-results.pane
         %p= t(".library_items_found", count: @library_items.total_count, query: @query)
+        = paginate @library_items, param_name: :library_page, params: {anchor: 'library-results'}
+        .clear
         - if @library_items.count > 0
           %ul
             - @library_items.each do |item|

@@ -2,7 +2,8 @@
   %h1= t ".title"
   %p= t ".overview_description_html"
   %p= t ".overview_usage"
-  %h2= t ".latest"
+  = paginate @items
+  %h2.clear= t ".latest"
   %ul.library-list
     - @items.each do |item|
       %li

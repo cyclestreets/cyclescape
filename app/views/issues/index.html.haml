@@ -17,6 +17,8 @@
           %p= t ".list_introduction_groupwise_html", area_of_group_link: link_to(t(".area_of_group", group_name: current_group.name), root_path)
         - else
           %p= t ".list_introduction"
+        = paginate @issues
+        .clear
         %ul.issue-list
           - if @issues.empty?
             = t(".no_results_found")
