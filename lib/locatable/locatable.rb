@@ -8,12 +8,14 @@ module Locatable
     # Note - pass in the location as an array, otherwise .each is called on
     # multipolygons and it serializes to multiple geometries.
     def intersects(l)
-      where('ST_Intersects(ST_CollectionExtract(location, 3), ?)', [l])
+      where('ST_Intersects(ST_CollectionExtract(location, 3), ?) OR
+             ST_Intersects(ST_CollectionExtract(location, 2), ?) OR
+             ST_Intersects(ST_CollectionExtract(location, 1), ?)', [l], [l], [l])
     end
 
     # define a variant of intersects that doesn't include entirely surrouding polygons
     def intersects_not_covered(l)
-      intersects(l).where('NOT ST_COVEREDBY(?, location)', [l])
+      intersects(l).where('NOT ST_CoveredBy(?, ST_Envelope(location))', [l])
     end
 
     # This could be improved by actually using the factory from the location column, rather
