@@ -22,7 +22,7 @@ module IssueApi
                                    created_by: creator_name,
                                    vote_count: issue.vote_count,
                                    thumbnail: issue.medium_icon_path,
-                                   photo_thumb_url: issue.photo_medium.url,
+                                   photo_thumb_url: issue.photo_medium.try(:url),
                                    title: issue.title,
                                    description: issue.description,
                                    deadline: issue.deadline.to_i,

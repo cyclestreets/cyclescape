@@ -12,22 +12,26 @@ module Photo
   end
 
   def photo_medium
-    photo.thumb('740x555>')
+    default_thumb('740x555>')
   end
 
   def photo_preview
-    photo.thumb('500x375>')
+    default_thumb('500x375>')
   end
 
   def photo_sidebar
-    photo.thumb('360x540>')
+    default_thumb('360x540>')
   end
 
   def photo_thumbnail
-    photo.thumb('50x50>')
+    default_thumb('50x50>')
   end
 
   private
+
+  def default_thumb(resize_options)
+    photo ? photo.thumb(resize_options) : nil
+  end
 
   def storage_path
     nil
