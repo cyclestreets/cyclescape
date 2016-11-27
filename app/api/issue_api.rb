@@ -22,7 +22,7 @@ module IssueApi
                                    created_by: creator_name,
                                    vote_count: issue.vote_count,
                                    thumbnail: issue.medium_icon_path,
-                                   photo_thumb_url: issue.standard_photo_url,
+                                   photo_thumb_url: issue.photo_medium.url,
                                    title: issue.title,
                                    description: issue.description,
                                    deadline: issue.deadline.to_i,
@@ -38,7 +38,7 @@ module IssueApi
 
         group.loc_feature(title: group.name,
                           size_ratio: group.profile.size_ratio(geom),
-                          url: ["#{request.scheme}://", "#{group.short_name}.", request.host_with_port.sub(/.*?\./,"")].join(""),
+                          url: ["#{request.scheme}://", "#{group.short_name}.", request.host_with_port.sub(/.*?\./, "")].join(""),
                           website: group.website,
                           email: group.email,
                           description: group.trunctated_description)
