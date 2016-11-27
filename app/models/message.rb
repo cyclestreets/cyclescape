@@ -119,7 +119,7 @@ class Message < ActiveRecord::Base
   end
 
   def approve_related
-    thread.add_subscriber(created_by) unless created_by.ever_subscribed_to_thread?(thread)
+    thread.add_subscriber(created_by) unless created_by.subscribed_to_thread?(thread)
     created_by.approve! unless created_by.approved?
     if thread.approved?
       ThreadNotifier.notify_subscribers thread, self
