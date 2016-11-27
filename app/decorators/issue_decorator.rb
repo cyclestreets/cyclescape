@@ -14,11 +14,6 @@ class IssueDecorator < ApplicationDecorator
     h.auto_link h.simple_format issue.description
   end
 
-  def standard_photo_image
-    return '' if photo.nil?
-    h.image_tag standard_photo_url, class: 'issue-photo'
-  end
-
   def small_icon_path(default = true)
     icon_path('s', default)
   end
@@ -72,11 +67,5 @@ class IssueDecorator < ApplicationDecorator
 
   def vote_count
     issue.plusminus
-  end
-
-  def standard_photo_url
-    if photo
-      photo.thumb('360x540>').url
-    end
   end
 end

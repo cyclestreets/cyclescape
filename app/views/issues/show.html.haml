@@ -76,9 +76,9 @@
         %ul.sidebar-threadlist
           = render partial: "message_threads/compact", collection: @threads, as: :thread
   - if @issue.photo
-    %section.photos
+    %section.photos.issue-photo
       = link_to issue_photo_path(@issue), rel: "#overlay" do
-        = @issue.standard_photo_image
+        = image_tag @issue.photo_sidebar.url
 
 :javascript
   $( document ).ready(function() {

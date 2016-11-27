@@ -15,6 +15,10 @@ module Photo
     photo.thumb('500x375>')
   end
 
+  def photo_sidebar
+    photo.thumb('360x540>')
+  end
+
   def photo_thumbnail
     photo.thumb('50x50>')
   end

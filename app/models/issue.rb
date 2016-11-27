@@ -19,10 +19,10 @@
 #
 
 class Issue < ActiveRecord::Base
-
   include Locatable
   include FakeDestroy
   include Taggable
+  include Photo
 
   searchable auto_index: false do
     text :title, :description, :tags_string, :id
@@ -31,10 +31,6 @@ class Issue < ActiveRecord::Base
   end
 
   acts_as_voteable
-
-  dragonfly_accessor :photo do
-    storage_options :generate_photo_path
-  end
 
   belongs_to :created_by, -> { with_deleted }, class_name: "User"
   belongs_to :planning_application
@@ -104,9 +100,8 @@ class Issue < ActiveRecord::Base
     thread.privacy ||= 'public'
   end
 
-  def generate_photo_path
-    hash = Digest::SHA1.file(photo.path).hexdigest
-    {path: "issue_photos/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
+  def storage_path
+    "issue_photos"
   end
 
   def update_search
