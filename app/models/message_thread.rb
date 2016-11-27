@@ -233,7 +233,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def latest_activity_at
-    messages.approved.empty? ? updated_at : messages.maximum('messages.updated_at')
+    messages.approved.empty? ? updated_at : messages.approved.maximum('messages.updated_at')
   end
 
   def latest_activity_at_to_i
@@ -241,7 +241,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def latest_activity_by
-    messages.approved.empty? ? created_by : messages.last.created_by
+    messages.approved.empty? ? created_by : messages.approved.last.created_by
   end
 
   def default_centre
