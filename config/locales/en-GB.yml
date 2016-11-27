@@ -999,6 +999,8 @@
         application_reference: Application reference
         title: New issue from Planning Application
         title_prefix: Planning application
+  photo:
+    wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
   shared:
     search:
       no_results_found: No results found for '%{query}'

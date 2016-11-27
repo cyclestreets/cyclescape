@@ -1,7 +1,7 @@
 #new-photo-message.pane
   = semantic_form_for PhotoMessage.new, url: thread_photos_path(@thread), html: {multipart: true} do |f|
     = f.inputs do
-      = f.input :photo, as: :file
+      = f.input :photo, as: :file, input_html: { accept: 'image/*' }
       = f.input :retained_photo, as: :hidden
       = f.input :caption
     = f.actions do

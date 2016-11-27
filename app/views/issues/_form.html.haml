@@ -2,7 +2,7 @@
   = f.inputs do
     = f.input :title
     - hint = (f.object.retained_photo ? "#{t('.currently')} #{f.object.photo.name}" : t('formtastic.hints.issue.new.photo'))
-    = f.input :photo, as: :file, hint: hint
+    = f.input :photo, as: :file, hint: hint, input_html: { accept: 'image/*' }
     = f.input :retained_photo, as: :hidden
     = f.input :loc_json, as: :hidden
     = f.input :planning_application_id, as: :hidden
