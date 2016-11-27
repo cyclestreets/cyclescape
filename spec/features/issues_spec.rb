@@ -77,10 +77,6 @@ describe 'Issues' do
       context 'with photo' do
         let!(:issue) { create(:issue, :with_photo) }
 
-        it 'should show the photo' do
-          expect(page).to have_selector('img.issue-photo')
-        end
-
         it 'should show the photo with a link to a larger version' do
           within('section.photos') do
             find('a').click
