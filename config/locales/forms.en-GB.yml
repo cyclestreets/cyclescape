@@ -103,7 +103,7 @@
           description: Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue.
           deadline: (optional)
           external_url: If another web page is relevant you can add it here.
-          photo: optional
+          photo: (optional), the image will be automatically resized to an appropriate size.
           title: Please be brief and specific
           <<: *tags_string_hints
         create: *hints_issue_new
@@ -115,6 +115,8 @@
           none, this will be an administrative thread.
       library/note:
         <<: *tags_string_hints
+      photo_message:
+        photo: The image will be automatically resized to an appropriate size.
       library/document: *tags_string_hints
     placeholders:
       issue:
