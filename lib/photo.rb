@@ -1,6 +1,8 @@
 module Photo
   def self.included(base)
     base.instance_eval do
+      validates_size_of(:photo, maximum: 3.megabytes,
+                                message: I18n.t("photo.too_large"), if: :photo_changed?)
       validates_property(:format, of: :photo, in: [:jpeg, :jpg, :png, :gif], case_sensitive: false,
                                   message: I18n.t("photo.wrong_format"), if: :photo_changed?)
       dragonfly_accessor :photo do

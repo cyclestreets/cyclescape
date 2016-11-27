@@ -915,7 +915,7 @@
         success: Link posted
     photos: &photo_message
       create:
-        failure: Could not create photo message
+        failure: Could not create photo message.  Was the file too large or not a jpg, jpeg, png or gif
         success: Photo uploaded
       show:
         photo_alt: A photo entitled %{caption}.
@@ -1000,6 +1000,7 @@
         title: New issue from Planning Application
         title_prefix: Planning application
   photo:
+    too_large: The image you uplodaed is too large, it must be less than 3MB
     wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
   shared:
     search:
