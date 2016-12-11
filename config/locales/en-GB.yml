@@ -314,6 +314,14 @@
       vote_up:
         already: You've already voted up this issue
         success: You have voted up this issue
+    potential_members:
+      new:
+        title: Update the potential membership list for %{group_name}
+        potential_members_intro:
+          Add the email of all your membership. If any user signs up with an email that matches one in this list they will automatically be made a member of your group.
+          We will not store the emails themselves.  If you update this list it will not remove any existing members but it will replace an emails you entered last time.
+      create:
+        success: You have replaced your list of potential members
     members:
       index:
         actions: Actions
@@ -486,6 +494,7 @@
         one: View pending membership request
         other: View pending membership requests (%{count})
       view_message_moderations: View moderated group messages
+      update_potential_members: Update the potential members email list
   group_requests:
     create:
       requested: You have requested a new campaigning group, you will be notifed when

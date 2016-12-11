@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   resources :groups do
     scope module: :group do
       resources :members
+      resources :potential_members, only: [:new, :create]
       resources :memberships
       resources :message_moderations, only: [:index]
       resources :membership_requests do

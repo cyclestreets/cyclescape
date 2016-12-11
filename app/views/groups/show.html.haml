@@ -66,6 +66,9 @@
         %li
           = link_to group_message_moderations_path(@group) do
             %p= t(".view_message_moderations")
+        %li
+          = link_to new_group_potential_member_path(@group) do
+            %p= t(".update_potential_members")
   %section.box
     %h2= t ".group_organisers"
     %ul.thread-metadata-listings
