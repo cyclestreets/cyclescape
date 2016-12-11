@@ -23,6 +23,8 @@ class Group < ActiveRecord::Base
   has_many :members, through: :memberships, source: :user
   has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy
   has_many :threads, class_name: 'MessageThread', inverse_of: :group
+  has_many :potential_members
+
   has_one :profile, class_name: 'GroupProfile', dependent: :destroy, inverse_of: :group
   has_one :prefs, class_name: 'GroupPref', dependent: :destroy
 
@@ -99,6 +101,14 @@ class Group < ActiveRecord::Base
 
   def enable!
     update!(disabled_at: nil) if disabled_at
+  end
+
+  def update_potetial_members(emails)
+    potential_members.destroy_all
+    emails.split(/\r?\n/).each do |email|
+      potential_members.build email: email
+    end
+    save
   end
 
   protected

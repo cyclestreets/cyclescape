@@ -1,0 +1,12 @@
+%h1= t ".title", group_name: @group.name
+
+.explain
+  %p= t ".potential_members_intro"
+
+= semantic_form_for "potential_members", url: group_potential_members_path(@group) do |f|
+  = f.inputs do
+    = f.input :emails, as: :text, input_html: { rows: 50 }
+  = f.actions do
+    = f.action :submit, button_html: {class: "btn-green submit"}
+    = cancel_link group_path(@group)
+
