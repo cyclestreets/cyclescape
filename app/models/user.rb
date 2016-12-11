@@ -38,6 +38,7 @@ class User < ActiveRecord::Base
 
   before_validation :set_default_role, unless: :role
   after_create :create_user_prefs
+  after_create :add_memberships
   before_create :set_public_token
 
   before_destroy :obfuscate_name
@@ -248,6 +249,16 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  def add_memberships
+    GroupMembership.transaction do
+      potential_memberships = PotentialMember.includes(:group).email_eq(email)
+      potential_memberships.find_each do |potential_member|
+        potential_member.group.memberships.create(user: self, role: "member")
+      end
+      approve! if potential_memberships.exists?
+    end
+  end
 
   def set_default_role
     self.role = 'member'

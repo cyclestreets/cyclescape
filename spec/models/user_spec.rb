@@ -526,4 +526,16 @@ describe User, type: :model do
       end
     end
   end
+
+  describe "potential membership" do
+    let!(:group) { create :group }
+    let!(:group_other) { create :group }
+    let!(:pm) { PotentialMember.create(email: "join_us@example.com", group: group) }
+    subject { create :user, email: "join_us@example.com", approved: false }
+
+    it "should automatically make the user a member of the group (and approve them)" do
+      expect(subject.reload.groups).to eq [group]
+      expect(subject.approved).to eq true
+    end
+  end
 end

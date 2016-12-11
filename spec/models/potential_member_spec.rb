@@ -11,6 +11,6 @@ describe PotentialMember, type: :model do
 
   it "has email_eq scope" do
     subject = create :potential_member, email: "me@example.com"
-    expect(described_class.email_eq("me@example.com")).to eq(subject)
+    expect(described_class.email_eq("me@example.com")).to eq [subject]
   end
 end
