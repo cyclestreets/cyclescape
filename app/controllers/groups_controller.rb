@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    groups = Group.ordered.page params[:page]
+    groups = Group.ordered.enabled.page params[:page]
 
     @groups = GroupDecorator.decorate_collection groups
     @start_location = index_start_location
@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
       bbox = nil
       group_profiles = GroupProfile.all
     end
-    group_profiles = group_profiles.with_location.ordered.limit(50)
+    group_profiles = enabled.group_profiles.with_location.ordered.limit(50)
     factory = RGeo::GeoJSON::EntityFactory.new
     collection = factory.feature_collection(group_profiles.sort_by { |o| o.size }.reverse.map { | group_profile | group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
     respond_to do |format|

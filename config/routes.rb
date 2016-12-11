@@ -43,7 +43,9 @@ Rails.application.routes.draw do
   issues_route
 
   namespace :admin do
-    resources :groups
+    resources :groups do
+      put :disable, :enable, on: :member
+    end
     resources :stats, only: :index
     resources :message_moderations, only: :index
     resources :planning_filters

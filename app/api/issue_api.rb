@@ -62,7 +62,7 @@ module IssueApi
       end
 
       get '/' do
-        scope = GroupProfile.all.with_location.ordered_by_size.includes(:group)
+        scope = GroupProfile.enabled.with_location.ordered_by_size.includes(:group)
         bbox = nil
         if params[:bbox].present?
           bbox = bbox_from_string(params[:bbox], GroupProfile.rgeo_factory)

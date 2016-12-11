@@ -41,6 +41,9 @@
         members: Members
         name: Group Name
         subdomain: Subdomain
+        enable: Enable
+        disable: Disable
+        disable_tooltip: Currently just hides
       create:
         success: Group created
       new:

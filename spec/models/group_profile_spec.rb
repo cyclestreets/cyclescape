@@ -52,17 +52,28 @@ describe GroupProfile do
   end
 
   describe 'scopes' do
-    let!(:with_location) { create :group_profile, created_at: 2.hours.ago }
-    let!(:without_location) { create :group_profile, location: nil }
+    context "with locations" do
+      let!(:with_location) { create :group_profile, created_at: 2.hours.ago }
+      let!(:without_location) { create :group_profile, location: nil }
 
-    it 'with_location' do
-      expect(described_class.with_location).to eq([with_location])
+      it 'with_location' do
+        expect(described_class.with_location).to eq([with_location])
+      end
+
+      it 'ordered' do
+        scope = described_class.ordered
+        expect(scope.first).to eq(without_location)
+        expect(scope.last).to eq(with_location)
+      end
     end
 
-    it 'ordered' do
-      scope = described_class.ordered
-      expect(scope.first).to eq(without_location)
-      expect(scope.last).to eq(with_location)
+    let(:group) { build :group }
+
+    it ".enabled" do
+      profile = create :group_profile, group: group
+      expect(described_class.enabled).to eq [profile]
+      group.disable!
+      expect(described_class.enabled).to be_blank
     end
   end
 end

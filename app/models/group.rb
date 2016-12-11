@@ -35,6 +35,7 @@ class Group < ActiveRecord::Base
   before_destroy :unlink_threads
 
   scope :ordered, -> { order('message_threads_count DESC NULLS LAST') }
+  scope :enabled, -> { where(disabled_at: nil) }
 
   normalize_attributes :short_name, with: [:strip, :blank, :downcase]
 
@@ -92,6 +93,14 @@ class Group < ActiveRecord::Base
     thread_privacy_options_for(user).map { |n| [I18n.t("thread_privacy_options.#{n}"), n] }
   end
 
+  def disable!
+    update!(disabled_at: Time.current) unless disabled_at
+  end
+
+  def enable!
+    update!(disabled_at: nil) if disabled_at
+  end
+
   protected
 
   def create_default_profile
@@ -100,7 +109,8 @@ class Group < ActiveRecord::Base
       "group_profiles.default_new_user_email",
       group_name: name,
       group_url: Rails.application.routes.url_helpers.root_url(
-        subdomain: short_name, host: Rails.application.config.action_mailer.default_url_options[:host]),
+        subdomain: short_name, host: Rails.application.config.action_mailer.default_url_options[:host]
+      )
     )
     profile.save!
   end

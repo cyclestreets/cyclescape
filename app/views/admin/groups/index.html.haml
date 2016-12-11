@@ -8,7 +8,7 @@
       %th= t ".name"
       %th= t ".subdomain"
       %th= t ".group_email"
-      %th{colspan: 3}= t ".actions"
+      %th{colspan: 4}= t ".actions"
     %tbody
       - @groups.each do |group|
         %tr
@@ -19,3 +19,8 @@
           %td= link_to t(".edit_profile"), [:edit, group, :profile]
           %td= link_to t(".edit_prefs"), [:edit, group, :prefs]
           %td= link_to t(".members"), [group, :members]
+          %td
+            - if group.disabled_at
+              = link_to t(".enable"), enable_admin_group_path(group), method: :put, class: "btn-red"
+            - else
+              = link_to t(".disable"), disable_admin_group_path(group), method: :put, class: "btn-grey", title: t(".disable_tooltip")

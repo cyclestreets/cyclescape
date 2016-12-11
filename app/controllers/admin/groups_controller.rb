@@ -1,8 +1,6 @@
 class Admin::GroupsController < ApplicationController
-  before_filter :load_group, only: [:edit, :update]
-
   def index
-    @groups = Group.all
+    @groups = Group.ordered
   end
 
   def new
@@ -21,15 +19,26 @@ class Admin::GroupsController < ApplicationController
   end
 
   def edit
+    group
   end
 
   def update
-    if @group.update permitted_params
+    if group.update permitted_params
       set_flash_message :success
       redirect_to action: :index
     else
       render :edit
     end
+  end
+
+  def disable
+    group.disable!
+    redirect_to action: :index
+  end
+
+  def enable
+    group.enable!
+    redirect_to action: :index
   end
 
   protected
@@ -38,8 +47,7 @@ class Admin::GroupsController < ApplicationController
     params.require(:group).permit :name, :short_name, :website, :email, :default_thread_privacy
   end
 
-  def load_group
+  def group
     @group ||= Group.find params[:id]
   end
-
 end

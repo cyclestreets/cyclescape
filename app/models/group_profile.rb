@@ -22,10 +22,11 @@ class GroupProfile < ActiveRecord::Base
   include Locatable
   dragonfly_accessor :picture
 
-  scope :with_location, -> { where.not(location: nil) }
-  scope :ordered,       -> { order(created_at: :desc) }
-  scope :local,         -> { where("ST_AREA(location) < ?", MAX_LOCAL_AREA) }
+  scope :with_location,   -> { where.not(location: nil) }
+  scope :ordered,         -> { order(created_at: :desc) }
+  scope :local,           -> { where("ST_AREA(location) < ?", MAX_LOCAL_AREA) }
   scope :ordered_by_size, -> { order("ST_AREA(location) DESC")}
+  scope :enabled,         -> { joins(:group).merge(Group.enabled) }
   validates :new_user_email, presence: true
 
   def picture_thumbnail

@@ -5,7 +5,8 @@ authorization do
 
   role :admin do
     includes :member
-    has_permission_on :admin_groups, :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
+    has_permission_on :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
+    has_permission_on :admin_groups, to: [:manage, :disable, :enable]
     has_permission_on :group_requests do
       to [:index, :review, :confirm, :reject, :destroy]
     end
