@@ -2,6 +2,9 @@ class Admin::UsersController < ApplicationController
   def index
     @full_page = true
     @users = User.order('created_at DESC').page(params[:page]).includes(:profile)
+    @users = @users.search_by_full_name(params[:full_name]) if params[:full_name]
+    @users = @users.search_by_display_name(params[:display_name]) if params[:display_name]
+    @users = @users.search_by_email(params[:email]) if params[:email]
   end
 
   def edit

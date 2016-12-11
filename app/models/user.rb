@@ -1,10 +1,13 @@
 class User < ActiveRecord::Base
+  ALLOWED_ROLES = %w(member admin).freeze
+  SEARCHABLE_COLUMNS = %w(full_name display_name email).freeze
+
+  include Searchable
 
   acts_as_voter
   acts_as_paranoid
 
   devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable
-  ALLOWED_ROLES = %w(member admin)
 
   has_many :memberships, class_name: 'GroupMembership', dependent: :destroy
   has_many :groups, through: :memberships

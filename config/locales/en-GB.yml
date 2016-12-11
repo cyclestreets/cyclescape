@@ -115,6 +115,7 @@
         about: About
         approved: Approved
         approve: Approve
+        search_button: Go
       user:
         <<: *admin_users_index
       update:

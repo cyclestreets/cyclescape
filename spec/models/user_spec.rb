@@ -500,6 +500,13 @@ describe User, type: :model do
     expect(subject.reload.in_group_committee).to eq([group])
   end
 
+  it "should have searchable scopes" do
+    create :user, email: "abcdefg@example.com"
+    numbers = create :user, email: "123456@example.com"
+    expect(described_class.search_by_email("123")).to eq [numbers]
+    expect(described_class.search_by_email("1a2")).to be_blank
+  end
+
   describe '#digests' do
     let!(:user)                { create(:user).tap { |us| us.prefs.update(email_status_id: 2) } }
 
