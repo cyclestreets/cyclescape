@@ -8,12 +8,14 @@ module Locatable
     # Note - pass in the location as an array, otherwise .each is called on
     # multipolygons and it serializes to multiple geometries.
     def intersects(l)
-      where('st_intersects(location, ?)', [l])
+      where('ST_Intersects(ST_CollectionExtract(location, 3), ?) OR
+             ST_Intersects(ST_CollectionExtract(location, 2), ?) OR
+             ST_Intersects(ST_CollectionExtract(location, 1), ?)', [l], [l], [l])
     end
 
     # define a variant of intersects that doesn't include entirely surrouding polygons
     def intersects_not_covered(l)
-      intersects(l).where('not st_coveredby(?, location)', [l])
+      intersects(l).where('NOT ST_CoveredBy(?, ST_Envelope(location))', [l])
     end
 
     # This could be improved by actually using the factory from the location column, rather
@@ -28,7 +30,7 @@ module Locatable
     end
 
     def select_area
-      select('*, -ST_Area(location) as area')
+      select('*, -ST_Area(location) AS area')
     end
   end
 
@@ -49,7 +51,7 @@ module Locatable
 
   # Returns the size of the location. Returns 0 for anything other than polygons.
   def size
-    if location.nil?
+    if !location.try(:geometry_type)
       return 0.0
     else
       case location.geometry_type
@@ -76,7 +78,9 @@ module Locatable
     # but that doesn't work.
     factory = RGeo::Geos.factory(srid: 4326)
     feature = RGeo::GeoJSON.decode(json_str, geo_factory: factory, json_parser: :json)
-    self.location = feature.geometry if feature
+    return unless feature
+    geom = feature.try(:geometry)
+    self.location = geom || factory.collection(feature.map(&:geometry))
   end
 
   def loc_json

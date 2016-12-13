@@ -7,7 +7,7 @@
     "coffeeify": "~0.6",
     "jquery-ui-timepicker-addon": "1.5.5",
     "knockout": "3.4.0",
-    "leaflet-draw": "0.2.4",
+    "leaflet-draw": "0.3.2",
     "leaflet-search": "1.9.8",
     "slick-carousel-browserify": "1.6.12"
   },
