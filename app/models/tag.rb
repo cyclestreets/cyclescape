@@ -17,6 +17,8 @@ class Tag < ActiveRecord::Base
   has_and_belongs_to_many :threads, class_name: 'MessageThread', join_table: 'message_thread_tags', association_foreign_key: 'thread_id'
   has_and_belongs_to_many :library_items, class_name: 'Library::Item', join_table: 'library_item_tags', association_foreign_key: 'library_item_id'
 
+  delegate :url_helpers, to: "Rails.application.routes"
+
   class << self
     def names
       all.map { |tag| tag.name }
@@ -50,6 +52,12 @@ class Tag < ActiveRecord::Base
 
   def to_param
     name.parameterize
+  end
+
+  def as_json(*_)
+    super.merge(
+      url: url_helpers.tag_url(self, host: Rails.application.config.action_mailer.default_url_options[:host])
+    )
   end
 
   protected

@@ -54,6 +54,14 @@ module IssueApi
 
     paginate per_page: 200, max_per_page: 500, offset: false
 
+    resource :tags do
+      desc 'Returns tags used on issues, library items and threads'
+
+      get '/' do
+        Tag.top_tags(params[:per_page]).offset(params[:per_page].to_i * params[:page].to_i)
+      end
+    end
+
     resource :groups do
       desc 'Returns groups as a GeoJSON collection'
       params do
@@ -76,8 +84,6 @@ module IssueApi
     end
 
     resource :issues do
-      paginate per_page: 200, max_per_page: 500, offset: false
-
       desc 'Returns issues as a GeoJSON collection'
       params do
         optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
