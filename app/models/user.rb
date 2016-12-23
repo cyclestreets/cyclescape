@@ -257,7 +257,8 @@ class User < ActiveRecord::Base
     GroupMembership.transaction do
       potential_memberships = PotentialMember.includes(:group).email_eq(email)
       potential_memberships.find_each do |potential_member|
-        potential_member.group.memberships.create(user: self, role: "member")
+        membership = potential_member.group.memberships.create(user: self, role: "member")
+        Notifications.group_membership_request_confirmed(membership).deliver_later
       end
       approve! if potential_memberships.exists?
     end

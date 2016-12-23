@@ -543,6 +543,8 @@ describe User, type: :model do
     it "should automatically make the user a member of the group (and approve them)" do
       expect(subject.reload.groups).to eq [group]
       expect(subject.approved).to eq true
+      email = open_last_email_for(subject.email)
+      expect(email.subject).to eq I18n.t("mailers.notifications.added_to_group.subject", group_name: group.name)
     end
   end
 end
