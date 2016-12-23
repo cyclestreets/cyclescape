@@ -232,10 +232,13 @@ class window.LeafletMap
       position: 'topright'
       edit: {
         featureGroup: drawnItems
+        edit: { selectedPathOptions: { fillColor: '#3388ff', maintainColor: true } }
       }
       draw: {
         circle: false
         rectangle: false
+        polygon: { shapeOptions: { color: '#3388ff' } }
+        polyline: { shapeOptions: { color: '#3388ff' } }
         marker: {
           icon: new L.Icon {
             iconUrl: @constructor.default_marker_path,
