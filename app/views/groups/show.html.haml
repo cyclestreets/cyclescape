@@ -61,14 +61,14 @@
           = link_to group_members_path(@group) do
             %p= t(".edit_group_members")
         %li
+          = link_to new_group_potential_member_path(@group) do
+            %p= t("group.update_potential_members")
+        %li
           = link_to group_membership_requests_path(@group) do
             %p= t(".view_membership_requests", count: @group.pending_membership_requests.count)
         %li
           = link_to group_message_moderations_path(@group) do
             %p= t(".view_message_moderations")
-        %li
-          = link_to new_group_potential_member_path(@group) do
-            %p= t(".update_potential_members")
   %section.box
     %h2= t ".group_organisers"
     %ul.thread-metadata-listings

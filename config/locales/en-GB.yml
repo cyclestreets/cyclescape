@@ -300,6 +300,7 @@
     group_management: Group management
     membership_list_tab: Membership list
     membership_requests_tab: Membership requests
+    update_potential_members: Update the potential members email list
     home_page_tab: Home page
     issues:
       destroy:
@@ -322,8 +323,8 @@
       new:
         title: Update the potential membership list for %{group_name}
         potential_members_intro:
-          Add the email of all your membership. If any user signs up with an email that matches one in this list they will automatically be made a member of your group.
-          We will not store the emails themselves.  If you update this list it will not remove any existing members but it will replace an emails you entered last time.
+          Add the email addresses of all your membership. If any user signs up with an email that matches one in this list they will automatically be made a member of your group.
+          We will not store the emails themselves.  If you update this list it will not remove any existing members, but it will replace any emails you entered last time.
       create:
         success: You have replaced your list of potential members
     members:
@@ -498,7 +499,6 @@
         one: View pending membership request
         other: View pending membership requests (%{count})
       view_message_moderations: View moderated group messages
-      update_potential_members: Update the potential members email list
   group_requests:
     create:
       requested: You have requested a new campaigning group, you will be notifed when
