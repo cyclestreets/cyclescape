@@ -35,9 +35,14 @@ describe GroupsController, type: :controller do
         expect(subject.body).to include(by_group.title)
         expect(subject.body).to_not include(out_group.title)
       end
+    end
 
+    describe 'all_geometries' do
+      subject { get :all_geometries, format: :json }
+
+      it 'should have issues inside the group' do
+        expect(JSON.load(subject.body)["features"][0]["properties"]["url"]).to include group.short_name
+      end
     end
   end
-
 end
-
