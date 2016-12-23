@@ -1,18 +1,19 @@
 %h1= t ".title"
 %p= t ".introduction"
 
-.main-search-box
-  = form_tag(admin_users_path, method: :get, class: "filters") do
-    = text_field_tag :email, params[:email], placeholder: t(".email")
-    = button_tag t(".search_button")
-  .clear
-  = form_tag(admin_users_path, method: :get, class: "filters") do
-    = text_field_tag :full_name, params[:full_name], placeholder: t(".full_name")
-    = button_tag t(".search_button")
-  .clear
-  = form_tag(admin_users_path, method: :get, class: "filters") do
-    = text_field_tag :display_name, params[:display_name], placeholder: t(".display_name")
-    = button_tag t(".search_button")
+.admin-wrapper
+  .main-search-box
+    = form_tag(admin_users_path, method: :get, class: "filters") do
+      = text_field_tag :email, params[:email], placeholder: t(".email")
+      = button_tag t(".search_button")
+    .clear
+    = form_tag(admin_users_path, method: :get, class: "filters") do
+      = text_field_tag :full_name, params[:full_name], placeholder: t(".full_name")
+      = button_tag t(".search_button")
+    .clear
+    = form_tag(admin_users_path, method: :get, class: "filters") do
+      = text_field_tag :display_name, params[:display_name], placeholder: t(".display_name")
+      = button_tag t(".search_button")
 
 .clear
 
