@@ -333,5 +333,6 @@ class window.LeafletMap
 
 
 jQuery ->
-  for domMap in $('.map-data')
-    new LeafletMap($(domMap).data('center'), $(domMap).data('opts'))
+  for mapData in $('.map-data')
+    domMap = $(mapData)
+    new LeafletMap(domMap.data('center'), domMap.data('opts')) unless domMap.data('skip')

@@ -43,8 +43,8 @@
             = t ".clear"
   .hidden
     .map-data{"data-center" => location_to_geojson(location),
-      "data-opts" => {search: true, draw: true, collisions: true, feature: item_to_geojson(resource),
-      geoinput: resource.class.name.gsub('::','').underscore}.to_json}
+      "data-opts" => { search: !defined?(no_search), draw: true, collisions: true, feature: item_to_geojson(resource),
+      geoinput: resource.class.name.gsub('::','').underscore}.to_json, "data-skip" => defined?(skip) }
 
 :javascript
   $( document ).ready(function() {
