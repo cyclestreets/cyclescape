@@ -113,3 +113,13 @@
     }
   }
 }
+
+a.disabled {
+  opacity: .65;
+  cursor: not-allowed;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  pointer-events: none;
+  color: gray;
+}

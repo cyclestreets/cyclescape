@@ -4,7 +4,7 @@
   height: 350px;
   width: 100%;
   border:1px solid black;
-  margin-top: 3em;
+  margin-top: 1em;
 }
 
 #photo-map {
@@ -236,9 +236,19 @@
   }
 }
 
-.leaflet-control-search input.search-input {
-    width: 240px;
+#user_location .leaflet-control-search {
+  box-shadow: none;
+}
+
+.leaflet-control-search {
+  input.search-input {
+    width: 240px !important;
     padding: 7px;
     border: 1px solid #ddd;
     box-shadow: 3px 3px 5px 0px #aaa;
+  }
+
+  ul.search-tooltip {
+    max-height: 70px;
+  }
 }
