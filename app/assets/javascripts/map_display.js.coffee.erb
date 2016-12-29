@@ -25,7 +25,7 @@ class window.LeafletMap
     @remoteJSONLayer = {}
     @buildRemoteLayer(url, name) for own name, url of opts.remote
     @addLayers(opts.hidelayers, opts.photoselect)
-    @addSearch() if opts.search?
+    @addSearchControl() if opts.search
     if opts.draw?
       @addDraw(opts.feature)
     else if opts.feature?
@@ -172,16 +172,16 @@ class window.LeafletMap
         )
     })
 
-  addSearch: =>
+  addSearchControl: (opts = {}) =>
     formatJSON = (rawjson) ->
       json = {}
       featureName = (props) ->
         "#{props.name} (#{props.near})"
 
       for feature in rawjson.features
-        geoJson = L.geoJson(type: "FeatureCollection", features: [feature])
-        latlng = geoJson.getBounds().getCenter()
-        latlng.layer = geoJson.getLayers()[0] # add the layer (for getting zoom later)
+        nesw = feature.properties.bbox.split(",").reverse()
+        latlng = L.latLng(feature.geometry.coordinates.reverse())
+        latlng.bounds = L.latLngBounds(nesw.slice(2), nesw.slice(0,2)) # add the bounds (for getting zoom later) in format S,W,N,E
         json[featureName(feature.properties)] = latlng
       json
 
@@ -190,8 +190,7 @@ class window.LeafletMap
       params = [
         {name: 'q', value: text}
         {name: 'key', value: @constructor.CyclestreetsKey}
-        {name: 'bbox', value: bbox},
-        {name: 'geometries', value: 1}
+        {name: 'bbox', value: bbox}
       ]
       jsonpTransportRequired = ->
         navigator.appVersion.indexOf('MSIE') != -1 &&
@@ -205,19 +204,19 @@ class window.LeafletMap
         success: callback
       )
 
-    @map.addControl(
-      new (L.Control.Search)(
-        autoCollapse: true
-        sourceData: search
-        formatData: formatJSON
-        moveToLocation: (latlng, _title, map) ->
-          if latlng.layer.getBounds
-            zoom = map.getBoundsZoom(latlng.layer.getBounds())
-          map.setView(latlng, zoom)
-        autoType: false
-        filterData: (_, records) -> records
-        minLength: 2)
-    )
+    defaultOpts = {
+      autoCollapse: true
+      sourceData: search
+      formatData: formatJSON
+      moveToLocation: (latlng, _title, map) ->
+        map.fitBounds(latlng.bounds)
+      autoType: false
+      filterData: (_, records) -> records
+      minLength: 2
+    }
+    searchControl = new (L.Control.Search)($.extend(defaultOpts, opts))
+    @map.addControl(searchControl)
+    searchControl
 
   drawCircle: (lat, lng) =>
     @drawRemoveFeature(@circle) if @circle
