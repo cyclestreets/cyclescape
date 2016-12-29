@@ -12,6 +12,7 @@ class window.LeafletMap
   @CyclestreetsPhotoUrl: "<%= Geocoder::PHOTO_URL %>"
   @default_marker_path: "<%= image_path('map-icons/m-misc.png') %>"
   @default_marker_anchor: [30 / 2, 42]
+  @drawnItems: new L.FeatureGroup()
 
   constructor: (center, opts) ->
     @domId = opts.domid || 'map'
@@ -218,16 +219,43 @@ class window.LeafletMap
         minLength: 2)
     )
 
+  drawCircle: (lat, lng) =>
+    @drawRemoveFeature(@circle) if @circle
+    nPoints = 10
+    earthRadius = 6378137
+    radius = 500 / earthRadius
+    center = L.Projection.SphericalMercator.project({lat: lat, lng: lng})
+
+    offset = (iTheta) ->
+      theta = 2.0 * Math.PI / nPoints * iTheta
+      x = radius * Math.cos(theta)
+      y = radius * Math.sin(theta)
+      L.Projection.SphericalMercator.unproject({x: center.x + x, y: center.y + y})
+
+    points = []
+    points.push(offset(theta)) for theta in [0...nPoints]
+    @circle = new L.Polygon(points)
+    @drawFeature(@circle)
+    @map.fitBounds(@circle.getBounds())
+
+  drawFeature: (layer) =>
+    @constructor.drawnItems.addLayer layer
+    @drawnLayerChanged()
+
+  drawRemoveFeature: (layer) =>
+    @constructor.drawnItems.removeLayer layer
+    @drawnLayerChanged()
+
+  drawnLayerChanged: =>
+    @geoInput.val JSON.stringify(@constructor.drawnItems.toGeoJSON())
+    $("a[title='Save changes.']")[0].click() if @_editing
+    $('.leaflet-draw-edit-edit')[0].click()
+
   addDraw: (feature) =>
-    layerCreated = (layer) =>
-      drawnItems.addLayer layer
-      @geoInput.val JSON.stringify(drawnItems.toGeoJSON())
-      $("a[title='Save changes.']")[0].click() if @_editing
-      $('.leaflet-draw-edit-edit')[0].click()
+    drawnItems = @constructor.drawnItems
 
     $('.icon-save').toggle()
 
-    drawnItems = new L.FeatureGroup()
     @map.addLayer drawnItems
     drawControl = new L.Control.Draw {
       position: 'topright'
@@ -252,7 +280,7 @@ class window.LeafletMap
     @map.addControl drawControl
 
     @map.on 'draw:created', (e) ->
-      layerCreated(e.layer)
+      @drawFeature(e.layer)
 
     @map.on 'draw:editstart', =>
       @_editing = true
@@ -262,10 +290,10 @@ class window.LeafletMap
 
     @map.on 'draw:edited draw:editvertex draw:drawvertex draw:editmove', (e) =>
       return unless @_editing
-      layerCreated(layer) for layer in drawnItems.getLayers()
+      @drawFeature(layer) for layer in drawnItems.getLayers()
 
     if feature
-      layerCreated(layer) for layer in L.geoJson(feature).getLayers()
+      @drawFeature(layer) for layer in L.geoJson(feature).getLayers()
     else
       # enable area / polygon draw as standard
       $(".leaflet-draw-draw-polygon")[0].click()
