@@ -28,7 +28,7 @@ class Tag < ActiveRecord::Base
       find_or_create_by(name: normalise(val))
     end
 
-    def top_tags(limit = 50)
+    def top_tags_fresh
       joins('LEFT OUTER JOIN "message_thread_tags" ON "message_thread_tags"."tag_id" = "tags"."id"
           LEFT OUTER JOIN "message_threads" ON "message_threads"."id" = "message_thread_tags"."thread_id" AND "message_threads"."deleted_at" IS NULL
           LEFT OUTER JOIN "library_item_tags" ON "library_item_tags"."tag_id" = "tags"."id"
@@ -41,6 +41,12 @@ class Tag < ActiveRecord::Base
                group(:id, :name, :icon).
                order('tag_count DESC').
                limit(limit)
+    end
+
+    def top_tags(limit = 50)
+      Rails.cache.fetch("Tag.top_tags", expires: 1.day) do
+        Tag.top_tags_fresh(500).to_a
+      end.first(limit)
     end
   end
 

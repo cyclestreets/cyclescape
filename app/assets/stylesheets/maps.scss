@@ -236,7 +236,7 @@
   }
 }
 
-#user_location .leaflet-control-search {
+.leaflet-search-outside .leaflet-control-search.search-exp {
   box-shadow: none;
 }
 
@@ -251,4 +251,11 @@
   ul.search-tooltip {
     max-height: 70px;
   }
+}
+
+.leaflet-search-outside {
+  height: 95px;
+  float: left;
+  position: relative;
+  margin-right: 35px;
 }

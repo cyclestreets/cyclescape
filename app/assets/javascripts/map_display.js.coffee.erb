@@ -218,8 +218,10 @@ class window.LeafletMap
     @map.addControl(searchControl)
     searchControl
 
-  drawCircle: (lat, lng) =>
-    @drawRemoveFeature(@circle) if @circle
+  drawCircle: (latLng) =>
+    lat = latLng.lat || latLng.latitude || latLng[0]
+    lng = latLng.lng || latLng.longitude || latLng[1]
+    @removeCircle()
     nPoints = 10
     earthRadius = 6378137
     radius = 500 / earthRadius
@@ -241,9 +243,10 @@ class window.LeafletMap
     @constructor.drawnItems.addLayer layer
     @drawnLayerChanged()
 
-  drawRemoveFeature: (layer) =>
-    @constructor.drawnItems.removeLayer layer
-    @drawnLayerChanged()
+  removeCircle: =>
+    if @circle
+      @constructor.drawnItems.removeLayer(@circle)
+      @drawnLayerChanged()
 
   drawnLayerChanged: =>
     @geoInput.val JSON.stringify(@constructor.drawnItems.toGeoJSON())

@@ -6,7 +6,13 @@
           %label.label{for: "user_location", style: "width: auto"}
             My location
           %a#auto_detect.btn-grey.hide{href: "#", title: "Create a location based on where you are now"} Use current location
-        #user_location{style: "height: 95px; float: left; position: relative; left: -50px"}
+        .leaflet-search-outside#user_location
+        .leaflet-search-outside#dest_location
+      %li
+        %label.location-presets.hide
+          = check_box_tag :area_around_me
+          Area around me
+
 = semantic_form_for @location do |f|
   = f.inputs do
     = f.input :loc_json, as: :hidden
@@ -19,17 +25,36 @@
 
 :javascript
   $(document).ready(function() {
-    var map = new LeafletMap($(".map-data").data('center'), $(".map-data").data('opts'));
-    var searchControl = map.addSearchControl({autoCollapse: false, collapsed: false, circleLocation: false});
-    var searchEl = searchControl.getContainer();
-    document.getElementById('user_location').appendChild(searchEl);
-    searchControl.on("search_locationfound", function(point) {
-      map.drawCircle(point.latlng.lat, point.latlng.lng);
+    var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation, destLocation;
+    map = new LeafletMap($(".map-data").data('center'), $(".map-data").data('opts'));
+    startSearchControl = map.addSearchControl(
+      {autoCollapse: false, collapsed: false, circleLocation: false, startLocation: true, textPlaceholder: "Start/home location"}
+    );
+    destSearchControl = map.addSearchControl(
+      {autoCollapse: false, collapsed: false, circleLocation: false, destLocation: true, textPlaceholder: "Regular destination (optional)"}
+    );
+    startSearchEl = startSearchControl.getContainer();
+    destSearchEl = destSearchControl.getContainer();
+    $("#user_location").append(startSearchEl);
+    $("#dest_location").append(destSearchEl);
+    startSearchControl.on("search_locationfound", function(e) {
+      $(".location-presets").show();
+      startLocation = [e.latlng.lat, e.latlng.lng];
     });
+    startSearchControl.on("search_locationfound", function(e) {
+      destLocation = [e.latlng.lat, e.latlng.lng];
+    });
+    $("#area_around_me").change(function(e) {
+      if(e.target.checked) {
+        map.drawCircle(startLocation);
+      } else {
+        map.removeCircle();
+      }
+    })
+
     if (navigator.geolocation) {
       var updateLocation = function(position){
-        var crd = position.coords;
-        map.drawCircle(crd.latitude, crd.longitude);
+        map.drawCircle(position.coords);
       }
       $("#auto_detect").css('display','inline-block').click(function() {
         navigator.geolocation.getCurrentPosition(updateLocation);
