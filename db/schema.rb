@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010203821) do
+ActiveRecord::Schema.define(version: 20161230085714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "constituencies", force: :cascade do |t|
+    t.string   "name"
+    t.geometry "location", limit: {:srid=>4326, :type=>"geometry"}, null: false
+  end
+
+  add_index "constituencies", ["location"], name: "index_constituencies_on_location", using: :gist
 
   create_table "cyclestreets_photo_messages", force: :cascade do |t|
     t.integer  "cyclestreets_id"
