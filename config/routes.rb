@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount IssueApi::API => '/'
+  mount Api => '/'
   mount GrapeSwaggerRails::Engine => '/api'
 
   # Pretty evil but beats copy pasting
