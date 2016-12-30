@@ -122,6 +122,22 @@ module IssueApi
       end
     end
 
+    resource :constituencies do
+      desc 'Returns Constituencies boundary and name as GeoJSON'
+      params do
+        requires :geo, type: String, desc: 'GeoJSON of the location, the surrouding constituency will be returned'
+      end
+
+      get '/' do
+        geom = RGeo::GeoJSON.decode(params[:geo], geo_factory: Constituency.rgeo_factory, json_parser: :json).geometry
+        const = Constituency.intersects(geom).first
+        return unless const
+
+        feature = RGeo::GeoJSON::Feature.new(const.location, nil, name: const.name)
+        RGeo::GeoJSON.encode(feature)
+      end
+    end
+
     add_swagger_documentation
   end
 end
