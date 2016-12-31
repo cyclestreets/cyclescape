@@ -6,6 +6,20 @@ describe Route::IssueApi do
   let(:geojson_response) { RGeo::GeoJSON.decode(last_response.body, json_parser: :json) }
 
   describe 'GET /' do
+    context 'pagination' do
+      before { create_list :issue, 201 }
+
+      it "has default pagination" do
+        get "api/issues"
+        expect(geojson_response.size).to eq(200)
+      end
+
+      it "respects pagination" do
+        get "api/issues", page: 3, per_page: 100
+        expect(geojson_response.size).to eq(1)
+      end
+    end
+
     context 'with bounding box' do
       let(:host) { "" }
       before do
@@ -24,15 +38,15 @@ describe Route::IssueApi do
       it 'has the correct fields' do
         expect(geojson_response[0].keys).
           to match_array(%w(id created_at created_by deadline external_url description
-                         tags cyclescape_url photo_thumb_url thumbnail title vote_count
-                         latest_activity_at closed))
+                            tags cyclescape_url photo_thumb_url thumbnail title vote_count
+                            latest_activity_at closed))
       end
 
       context 'with a subdomain' do
         let(:host) { 'http://cam.example.com' }
 
         it 'returns cyclescape url with subdomain' do
-          expect(geojson_response[0]['cyclescape_url']).to match(/cam\.example\.com\/issues/)
+          expect(geojson_response[0]['cyclescape_url']).to match(%r{cam\.example\.com/issues})
         end
       end
     end
@@ -40,7 +54,7 @@ describe Route::IssueApi do
     context 'with dates' do
       before do
         create :issue, deadline: 1.day.ago, id: 4242
-        create :issue, created_at: 3.days.ago, deadline: 3.day.ago
+        create :issue, created_at: 3.days.ago, deadline: 3.days.ago
       end
 
       it 'respects the start date parameter' do
@@ -88,5 +102,4 @@ describe Route::IssueApi do
       end
     end
   end
-
 end

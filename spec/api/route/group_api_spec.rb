@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Route::GroupApi do
   include Rack::Test::Methods
 

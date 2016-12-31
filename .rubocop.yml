@@ -7,3 +7,5 @@ Encoding:
   Enabled: false
 Rails:
   Enabled: true
+Rails/HttpPositionalArguments:
+  Enabled: false

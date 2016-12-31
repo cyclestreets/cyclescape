@@ -28,7 +28,7 @@ class Tag < ActiveRecord::Base
       find_or_create_by(name: normalise(val))
     end
 
-    def top_tags_fresh
+    def top_tags_fresh(limit)
       joins('LEFT OUTER JOIN "message_thread_tags" ON "message_thread_tags"."tag_id" = "tags"."id"
           LEFT OUTER JOIN "message_threads" ON "message_threads"."id" = "message_thread_tags"."thread_id" AND "message_threads"."deleted_at" IS NULL
           LEFT OUTER JOIN "library_item_tags" ON "library_item_tags"."tag_id" = "tags"."id"

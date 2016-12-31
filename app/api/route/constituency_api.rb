@@ -3,13 +3,14 @@ module Route
     desc 'Returns Constituencies boundary and name as GeoJSON'
 
     params do
-      requires :geo, type: String, desc: 'GeoJSON of the location, the surrouding constituency will be returned'
+      requires(:geo,
+               type: RGeo::Geos::CAPIPointImpl, desc: 'GeoJSON of the location, the surrouding constituency will be returned, e.g. {"type":"Point","coordinates":[0.11906,52.20792]}',
+               coerce_with: ->(geo) { RGeo::GeoJSON.decode(geo, geo_factory: Constituency.rgeo_factory, json_parser: :json) })
     end
 
     get :constituencies do
-      geom = RGeo::GeoJSON.decode(params[:geo], geo_factory: Constituency.rgeo_factory, json_parser: :json).geometry
-      const = Constituency.intersects(geom).first
-      return unless const
+      const = Constituency.intersects(params[:geo]).first
+      error! "No constituencies found for the given point" unless const
 
       feature = RGeo::GeoJSON::Feature.new(const.location, nil, name: const.name)
       RGeo::GeoJSON.encode(feature)
