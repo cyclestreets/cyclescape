@@ -16,6 +16,7 @@ module Locatable
     # Note - pass in the location as an array, otherwise .each is called on
     # multipolygons and it serializes to multiple geometries.
     def intersects(l)
+      l = l.envelope if l.geometry_type == RGeo::Feature::GeometryCollection
       where('ST_Intersects(ST_CollectionExtract(location, 3), ?) OR
              ST_Intersects(ST_CollectionExtract(location, 2), ?) OR
              ST_Intersects(ST_CollectionExtract(location, 1), ?)', [l], [l], [l])
@@ -26,11 +27,12 @@ module Locatable
       intersects(l).where('NOT ST_CoveredBy(?, ST_Envelope(location))', [l])
     end
 
-    # This could be improved by actually using the factory from the location column, rather
-    # than creating a new one and hardcoding the srid.
-    # However, there's a bug in Rgeo::ActiveRecord 0.4.0 that prevents rgeo_factory_for_column from working
     def rgeo_factory
-      return RGeo::Geos.factory(srid: 4326)
+      # Uses the store, a fancy way of doing
+      # `RGeo::Geos.factory(srid: 4326)`
+      store = RGeo::ActiveRecord::SpatialFactoryStore.instance
+      srid = store.registry.values[0].srid
+      store.default.call(srid: srid)
     end
 
     def order_by_size

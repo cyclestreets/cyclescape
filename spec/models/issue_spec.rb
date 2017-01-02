@@ -186,30 +186,37 @@ describe Issue do
 
   describe 'intersects' do
     context 'should accept a variety of geometry types' do
-      subject { create(:issue) }
+      before { create :issue, location: geom_collection_string }
       let(:factory) { RGeo::Geos.factory(srid: 4326) }
+      let(:point) { factory.parse_wkt('POINT(-1 1)') }
+      let(:multipolygon) { factory.parse_wkt('MULTIPOLYGON (((0.0 0.0, 0.0 1.0, 1.0 1.0, 0.0 0.0)), ((0.0 4.0, 0.0 5.0, 1.0 5.0, 0.0 4.0)))') }
+      let(:geom_collection_string) do
+        "GEOMETRYCOLLECTION (LINESTRING (-1.566663 53.818588, -1.512272 53.8218), POLYGON ((-1.5620874235794022 53.818580999999995, -1.5629452383442026 53.81702241438395, -1.5620874235794022 53.818580999999995)))"
+      end
+      let(:geom_collection) { factory.parse_wkt(geom_collection_string) }
 
       it 'should accept a point' do
-        geom = factory.parse_wkt('POINT(-1 1)')
-        expect { Issue.intersects(geom).to_a }.not_to raise_error
+        expect { Issue.intersects(point).to_a }.not_to raise_error
       end
 
       it 'should accept a multipolygon' do
-        geom2 = factory.parse_wkt('MULTIPOLYGON (((0.0 0.0, 0.0 1.0, 1.0 1.0, 0.0 0.0)), ((0.0 4.0, 0.0 5.0, 1.0 5.0, 0.0 4.0)))')
-        expect { Issue.intersects(geom2).to_a }.not_to raise_error
+        expect { Issue.intersects(multipolygon).to_a }.not_to raise_error
+      end
+
+      it 'should accept a geom_collection' do
+        expect { Issue.intersects(geom_collection).to_a }.not_to raise_error
       end
     end
 
     context 'different issue locations' do
       let(:factory) { RGeo::Geos.factory(srid: 4326) }
-      let(:polygon) { 'POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))' }
+      let(:bbox) { factory.parse_wkt('POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))') }
       let!(:issue_entirely_surrounding) { create(:issue, location: 'POLYGON ((0 0, 0 0.3, 0.3 0.3, 0.3 0, 0 0))') }
       let!(:issue_entirely_contained) { create(:issue, location: 'POLYGON ((0.12 0.12, 0.12 0.18, 0.18 0.18, 0.18 0.12, 0.12 0.12))') }
       let!(:issue_not_intersecting) { create(:issue, location: 'POLYGON ((1.1 1.1, 1.1 1.2, 1.2 1.2, 1.2 1.1, 1.1 1.1))') }
       let!(:issue_half_in_half_out) { create(:issue, location: 'POLYGON ((0 0.12, 0 0.18, 0.3 0.18, 0.3 0.12, 0 0.12))') }
 
       it 'should return intersecting issues' do
-        bbox = factory.parse_wkt(polygon)
         issues = Issue.intersects(bbox).to_a
         expect(issues.length).to eql(3)
         expect(issues).to include(issue_entirely_surrounding)
@@ -219,7 +226,6 @@ describe Issue do
       end
 
       it 'should return intersecting but not covering issues' do
-        bbox = factory.parse_wkt(polygon)
         issues = Issue.intersects_not_covered(bbox).to_a
         expect(issues.length).to eql(2)
         expect(issues).to include(issue_entirely_contained)
