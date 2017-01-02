@@ -3,6 +3,14 @@ module Locatable
     base.extend(ClassMethods)
   end
 
+  def locations_array
+    if location.geometry_type == RGeo::Feature::GeometryCollection
+      location
+    else
+      Array.wrap(location)
+    end
+  end
+
   module ClassMethods
     # define an intersects method for arel queries
     # Note - pass in the location as an array, otherwise .each is called on
