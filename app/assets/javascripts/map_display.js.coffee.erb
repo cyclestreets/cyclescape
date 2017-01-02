@@ -192,9 +192,6 @@ class window.LeafletMap
         {name: 'key', value: @constructor.CyclestreetsKey}
         {name: 'bbox', value: bbox}
       ]
-      jsonpTransportRequired = ->
-        navigator.appVersion.indexOf('MSIE') != -1 &&
-          parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
 
       $.ajax(
         url: @constructor.CyclestreetsGeoUrl
@@ -217,6 +214,15 @@ class window.LeafletMap
     searchControl = new (L.Control.Search)($.extend(defaultOpts, opts))
     @map.addControl(searchControl)
     searchControl
+
+  drawConstituency: (constituency) =>
+    if constituency
+      constituency = L.geoJson(constituency)
+      @drawFeature(layer) for layer in constituency.getLayers()
+      @map.fitBounds(constituency.getBounds())
+    else if @constituency
+      @constructor.drawnItems.removeLayer @constituency
+    @constituency = constituency
 
   drawCircle: (latLng) =>
     lat = latLng.lat || latLng.latitude || latLng[0]

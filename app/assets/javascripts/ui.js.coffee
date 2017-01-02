@@ -1,5 +1,9 @@
 require('autosize/build/jquery.autosize.js')
 
+window.jsonpTransportRequired = ->
+  navigator.appVersion.indexOf('MSIE') != -1 &&
+    parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
+
 jQuery ->
   # Tabs
   $(".tabs").parent().tabs()

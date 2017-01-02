@@ -12,6 +12,9 @@
         %label.location-presets.hide
           = check_box_tag :area_around_me
           Area around me
+        %label.location-presets.hide
+          = check_box_tag :constituency
+          My ward / constituency
 
 = semantic_form_for @location do |f|
   = f.inputs do
@@ -49,6 +52,22 @@
         map.drawCircle(startLocation);
       } else {
         map.removeCircle();
+      }
+    })
+
+    $("#constituency").change(function(e) {
+      if(e.target.checked) {
+        $.ajax({
+          url: "/api/constituencies",
+          data: { geo: L.marker(startLocation).toGeoJSON().geometry },
+          dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
+          timeout: 10000,
+          success: function(constituencyGeo) {
+            map.drawConstituency(constituencyGeo);
+          }
+        })
+      } else {
+        map.drawConstituency();
       }
     })
 
