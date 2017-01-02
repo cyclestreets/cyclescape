@@ -1,0 +1,105 @@
+$(document).ready(function() {
+  if ($(".user_location #user_location").length > 0) {
+    var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation,
+        destLocation, constituencyEl, areaAroundEl, routeEl;
+    map = new LeafletMap($(".map-data").data("center"), $(".map-data").data("opts"));
+    startSearchControl = map.addSearchControl(
+      {autoCollapse: false, collapsed: false, circleLocation: false, startLocation: true, textPlaceholder: "Start/home location"}
+    );
+    destSearchControl = map.addSearchControl(
+      {autoCollapse: false, collapsed: false, circleLocation: false, destLocation: true, textPlaceholder: "Regular destination (optional)"}
+    );
+    startSearchEl = startSearchControl.getContainer();
+    destSearchEl = destSearchControl.getContainer();
+    $("#user_location").append(startSearchEl);
+    $("#dest_location").append(destSearchEl);
+    constituencyEl = $(".location-presets #constituency");
+    areaAroundEl = $(".location-presets #area_around_me");
+    routeEl = $(".location-presets #route");
+
+    startSearchControl.on("search_locationfound", function(e) {
+      constituencyEl.prop("disabled", false);
+      areaAroundEl.prop("disabled", false);
+      if (destLocation) {
+        routeEl.prop("disabled", false);
+      }
+      startLocation = [e.latlng.lat, e.latlng.lng];
+    });
+
+    destSearchControl.on("search_locationfound", function(e) {
+      if (startLocation) {
+        routeEl.prop("disabled", false);
+      }
+      destLocation = [e.latlng.lat, e.latlng.lng];
+    });
+
+    areaAroundEl.change(function(e) {
+      if(e.target.checked) {
+        map.drawCircle(startLocation);
+      } else {
+        map.drawCircle();
+      }
+    });
+
+    constituencyEl.change(function(e) {
+      if(e.target.checked) {
+        $.ajax({
+          url: "/api/constituencies",
+          data: { geo: L.marker(startLocation).toGeoJSON().geometry },
+          dataType: jsonpTransportRequired() ? "jsonp" : void 0,
+          timeout: 10000,
+          success: function(constituencyGeo) {
+            map.drawFeatureId(constituencyGeo, "constituency");
+          }
+        });
+      } else {
+        map.drawFeatureId(null, "constituency");
+      }
+    });
+
+    routeEl.change(function(e) {
+      if(e.target.checked) {
+        var params = [
+          { name: "key", value: "<%= Geocoder::API_KEY %>" },
+          { name: "itinerarypoints", value: startLocation[1] + "," + startLocation[0] + "|" + destLocation[1] + "," + destLocation[0] },
+          { name: "plan", value: "balanced"}
+        ];
+        $.ajax({
+          url: "http://www.cyclestreets.net/api/journey.json?" + $.param(params),
+          dataType: jsonpTransportRequired() ? "jsonp" : void 0,
+          timeout: 10000,
+          success: function(json) {
+            var route = L.polyline([]), markers = json.marker, points, m, mLen, p, pLen, startPoint;
+
+            for (m = 0, mLen = json.marker.length; m < mLen; m++) {
+              points = markers[m]["@attributes"].points;
+              if (points) {
+                points = markers[m]["@attributes"].points.split(" ");
+                if(m == 1) {
+                  startPoint = 0;
+                } else {
+                  startPoint = 1;
+                }
+                for (p = startPoint, pLen = points.length; p < pLen; p++) {
+                  route.addLatLng(points[p].split(",").reverse());
+                }
+              }
+            }
+            map.drawFeatureId(route.toGeoJSON(), "route");
+          }
+        });
+      } else {
+        map.drawFeatureId(null, "route");
+      }
+    });
+
+    if (navigator.geolocation) {
+      var updateLocation = function(position){
+        map.drawCircle(position.coords);
+      };
+      $("#auto_detect").css("display","inline-block").click(function() {
+        navigator.geolocation.getCurrentPosition(updateLocation);
+      });
+    }
+  }
+});

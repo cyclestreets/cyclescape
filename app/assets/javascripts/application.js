@@ -27,3 +27,4 @@
 //= require leaflet-layerjson.src.js
 //= require jqcloud
 //= require social
+//= require location_preset
