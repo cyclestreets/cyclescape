@@ -367,10 +367,13 @@ describe User, type: :model do
   end
 
   context 'buffered locations' do
-    subject { create(:user_with_location) }
+    subject { build(:user_with_location) }
     let(:point) { 'POINT(-1 1)' }
-    let(:line) { 'LINESTRING (0 0, 0 1)' }
+    let(:line) { 'LINESTRING (0 0, 0 2)' }
     let(:polygon) { 'POLYGON ((0 0, 0 1, 1 1, 1 0, 0 0))' }
+    let(:geom_collection) do
+      "GEOMETRYCOLLECTION (#{line}, #{polygon})"
+    end
 
     it 'should return polygon for point' do
       subject.locations[0].location = point
@@ -390,11 +393,18 @@ describe User, type: :model do
       expect(subject.buffered_locations).to eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
+    it 'should return polygon for geom_collection' do
+      subject.locations[0].location = geom_collection
+      expect(subject.buffered_locations.geometry_type.type_name).to eq('Polygon')
+    end
+
     it 'should return multipolygon for point, line and polygon combined' do
       subject.locations[0].location = point
-      subject.locations.create( location: line )
-      subject.locations.create( location: polygon )
+      subject.locations.build( location: line )
+      subject.locations.build( location: polygon )
+      subject.locations.build( location: geom_collection )
       expect(subject.buffered_locations.geometry_type.type_name).to eq('MultiPolygon')
+      expect(subject.buffered_locations.area).to be_within(1e-9).of(1.0060034999999998)
     end
   end
 
