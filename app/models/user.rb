@@ -165,7 +165,7 @@ class User < ActiveRecord::Base
   end
 
   def buffered_locations
-    locations.map { |l| l.location.buffer(Geo::USER_LOCATIONS_BUFFER) }.inject { |geo, item| geo.union(item) }
+    locations.map(&:buffered).join(&:union)
   end
 
   # Returns issues that are within a small distance of their user_locations

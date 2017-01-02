@@ -60,4 +60,17 @@ describe UserLocation do
       expect(subject.overlapping_groups).not_to include(small_group_profile.group)
     end
   end
+
+  describe "buffered" do
+    let(:line) { 'LINESTRING (0 0, 0 2)' }
+    let(:polygon) { 'POLYGON ((0 0, 0 0.1, 0.1 0.1, 0.1 0, 0 0))' }
+    let(:geom_collection) do
+      "GEOMETRYCOLLECTION (#{line}, #{polygon})"
+    end
+    subject { build :user_location, location: geom_collection }
+
+    it "works on geom collections" do
+      expect(subject.buffered.area).to be_within(1e-8).of(0.014201500000000002)
+    end
+  end
 end
