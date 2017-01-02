@@ -259,6 +259,11 @@ class window.LeafletMap
 
     $('.icon-save').toggle()
 
+    touchIcon = new L.DivIcon({
+      iconSize: new L.Point(12, 12)
+      className: 'leaflet-div-icon leaflet-editing-icon leaflet-touch-icon'
+    })
+
     @map.addLayer drawnItems
     drawControl = new L.Control.Draw {
       position: 'topright'
@@ -269,8 +274,14 @@ class window.LeafletMap
       draw: {
         circle: false
         rectangle: false
-        polygon: { shapeOptions: { color: '#00008B' } }
-        polyline: { shapeOptions: { color: '#00008B' } }
+        polygon: {
+          shapeOptions: { color: '#00008B' }
+          touchIcon: touchIcon
+        }
+        polyline: {
+          shapeOptions: { color: '#00008B' }
+          touchIcon: touchIcon
+        }
         marker: {
           icon: new L.Icon {
             iconUrl: @constructor.default_marker_path,
@@ -282,7 +293,7 @@ class window.LeafletMap
 
     @map.addControl drawControl
 
-    @map.on 'draw:created', (e) ->
+    @map.on 'draw:created', (e) =>
       @drawFeature(e.layer)
 
     @map.on 'draw:editstart', =>
@@ -291,7 +302,7 @@ class window.LeafletMap
     @map.on 'draw:editstop', =>
       @_editing = false
 
-    @map.on 'draw:edited draw:editvertex draw:drawvertex draw:editmove', (e) =>
+    @map.on 'draw:edited draw:editvertex draw:drawvertex draw:editmove draw:deleted', (e) =>
       return unless @_editing
       @drawFeature(layer) for layer in drawnItems.getLayers()
 
@@ -311,10 +322,14 @@ class window.LeafletMap
 
     for own localN,lDrawName of lDrawMapping
       $("li.#{localN} a").click (evt) ->
+        evt.preventDefault()
+        evt.stopPropagation()
         $(".leaflet-draw-draw-#{lDrawMapping[evt.target.className]}")[0].click()
 
     # Otherwise clear wipes any shapes on the map
-    $('.edit-clear').click =>
+    $('.edit-clear').click (evt) =>
+      evt.preventDefault()
+      evt.stopPropagation()
       drawnItems.clearLayers()
       $('ul.leaflet-draw-actions a[title^="Cancel"]')[0]?.click()
       $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
@@ -328,7 +343,9 @@ class window.LeafletMap
 
     # Undo removes the last point if creating
     # or the last feature if not creating
-    $('.edit-undo').click ->
+    $('.edit-undo').click (e) ->
+      evt.preventDefault()
+      evt.stopPropagation()
       if drawnItems.getLayers().slice(-1)[0]?.editing?._enabled
         drawnItems.removeLayer(drawnItems.getLayers()[-1..][0])
       else
