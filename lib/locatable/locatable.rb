@@ -17,7 +17,7 @@ module Locatable
     # multipolygons and it serializes to multiple geometries.
     def intersects(l)
       return none unless l.present?
-      l = l.envelope if l == RGeo::Feature::GeometryCollection
+      l = l.envelope if l.geometry_type == RGeo::Feature::GeometryCollection
       where('ST_Intersects(ST_CollectionExtract(location, 3), ?) OR
              ST_Intersects(ST_CollectionExtract(location, 2), ?) OR
              ST_Intersects(ST_CollectionExtract(location, 1), ?)', [l], [l], [l])

@@ -14,11 +14,13 @@ $(document).ready(function() {
     $("#user_location").append(startSearchEl);
     $("#dest_location").append(destSearchEl);
     constituencyEl = $(".location-presets #constituency");
+    wardEl = $(".location-presets #ward");
     areaAroundEl = $(".location-presets #area_around_me");
     routeEl = $(".location-presets #route");
 
     startSearchControl.on("search_locationfound", function(e) {
       constituencyEl.prop("disabled", false);
+      wardEl.prop("disabled", false);
       areaAroundEl.prop("disabled", false);
       if (destLocation) {
         routeEl.prop("disabled", false);
@@ -54,6 +56,22 @@ $(document).ready(function() {
         });
       } else {
         map.drawFeatureId(null, "constituency");
+      }
+    });
+
+    wardEl.change(function(e) {
+      if(e.target.checked) {
+        $.ajax({
+          url: "/api/wards",
+          data: { geo: L.marker(startLocation).toGeoJSON().geometry },
+          dataType: jsonpTransportRequired() ? "jsonp" : void 0,
+          timeout: 10000,
+          success: function(constituencyGeo) {
+            map.drawFeatureId(constituencyGeo, "ward");
+          }
+        });
+      } else {
+        map.drawFeatureId(null, "ward");
       }
     });
 

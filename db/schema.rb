@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230085714) do
+ActiveRecord::Schema.define(version: 20170103223434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -575,6 +575,13 @@ ActiveRecord::Schema.define(version: 20161230085714) do
   add_index "votes", ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
   add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true, using: :btree
   add_index "votes", ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
+
+  create_table "wards", force: :cascade do |t|
+    t.string   "name"
+    t.geometry "location", limit: {:srid=>4326, :type=>"geometry"}, null: false
+  end
+
+  add_index "wards", ["location"], name: "index_wards_on_location", using: :gist
 
   add_foreign_key "cyclestreets_photo_messages", "message_threads", column: "thread_id"
   add_foreign_key "cyclestreets_photo_messages", "messages"

@@ -14,7 +14,11 @@
           Area around me
         %label.location-presets
           = check_box_tag :constituency, '', false, disabled: true
-          My ward / constituency
+          My constituency
+        %label.location-presets
+          = check_box_tag :ward, '', false, disabled: true
+          My ward
+
         %label.location-presets
           = check_box_tag :route, '', false, disabled: true
           Route (to destination)
