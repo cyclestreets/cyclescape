@@ -5,16 +5,16 @@ class TagsController < ApplicationController
     @tag = Tag.find_by name: params[:id]
     if @tag
       @query = @tag.name
-      issues = Issue.find_by(tag: @tag).order(updated_at: :desc).page(params[:issue_page])
+      issues = Issue.find_by_tag(@tag).order(updated_at: :desc).page(params[:issue_page])
       issues = issues.intersects(current_group.profile.location) if current_group
       @issues = IssueDecorator.decorate_collection issues
-      unfiltered_results = MessageThread.find_by(tag: @tag).includes(:issue, :group).order(updated_at: :desc)
+      unfiltered_results = MessageThread.find_by_tag(@tag).includes(:issue, :group).order(updated_at: :desc)
       threads = Kaminari.paginate_array(
         unfiltered_results.select{ |t| permitted_to?(:show, t) }
       ).page(params[:thread_page])
 
       @threads = ThreadListDecorator.decorate_collection threads
-      @library_items = Library::Item.find_by(tag: @tag).order('updated_at desc').page(params[:library_page])
+      @library_items = Library::Item.find_by_tag(@tag).order('updated_at desc').page(params[:library_page])
     else
       @unrecognised_tag_name = params[:id]
     end
