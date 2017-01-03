@@ -65,7 +65,7 @@ $(document).ready(function() {
           { name: "plan", value: "balanced"}
         ];
         $.ajax({
-          url: "http://www.cyclestreets.net/api/journey.json?" + $.param(params),
+          url: "https://www.cyclestreets.net/api/journey.json?" + $.param(params),
           dataType: jsonpTransportRequired() ? "jsonp" : void 0,
           timeout: 10000,
           success: function(json) {
