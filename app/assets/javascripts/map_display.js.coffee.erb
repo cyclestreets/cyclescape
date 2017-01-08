@@ -259,11 +259,6 @@ class window.LeafletMap
 
     $('.icon-save').toggle()
 
-    touchIcon = new L.DivIcon({
-      iconSize: new L.Point(12, 12)
-      className: 'leaflet-div-icon leaflet-editing-icon leaflet-touch-icon'
-    })
-
     @map.addLayer drawnItems
     drawControl = new L.Control.Draw {
       position: 'topright'
@@ -276,11 +271,9 @@ class window.LeafletMap
         rectangle: false
         polygon: {
           shapeOptions: { color: '#00008B' }
-          touchIcon: touchIcon
         }
         polyline: {
           shapeOptions: { color: '#00008B' }
-          touchIcon: touchIcon
         }
         marker: {
           icon: new L.Icon {

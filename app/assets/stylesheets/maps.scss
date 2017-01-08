@@ -259,3 +259,10 @@
   position: relative;
   margin-right: 35px;
 }
+
+// Probably a better method here:
+// https://github.com/Leaflet/Leaflet.draw/issues/48#issuecomment-143836307
+.leaflet-div-icon.leaflet-editing-icon.leaflet-touch-icon {
+  width: 14px !important;
+  height: 14px !important;
+}
