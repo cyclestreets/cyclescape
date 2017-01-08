@@ -29,6 +29,5 @@
     %li.input
       = f.semantic_errors :location
       = render partial: "shared/edit_map", locals: {resource: @location, location: @start_location, skip: true, no_search: true}
-    = f.input :category
   = f.actions do
     = f.action :submit, button_html: {class: "btn-big-green"}
