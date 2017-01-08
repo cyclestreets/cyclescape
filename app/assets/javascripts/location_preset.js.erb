@@ -1,7 +1,7 @@
 $(document).ready(function() {
   if ($(".user_location #user_location").length > 0) {
     var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation,
-        destLocation, constituencyEl, areaAroundEl, routeEl;
+        destLocation, constituencyEl, areaAroundEl, routeEl, wardEl, groupLablesEl;
     map = new LeafletMap($(".map-data").data("center"), $(".map-data").data("opts"));
     startSearchControl = map.addSearchControl(
       {autoCollapse: false, collapsed: false, circleLocation: false, startLocation: true, textPlaceholder: "Start/home location"}
@@ -16,7 +16,26 @@ $(document).ready(function() {
     constituencyEl = $(".location-presets #constituency");
     wardEl = $(".location-presets #ward");
     areaAroundEl = $(".location-presets #area_around_me");
-    routeEl = $(".location-presets #route");
+    routeEl = $(".locaton-presets #route");
+    groupLablesEl = $(".group-labels");
+
+    var groupChange = function(e) {
+      if(e.target.checked) {
+        map.drawFeatureId($(e.target).data("geo"), $(e.target).prop("id"));
+      } else {
+        map.drawFeatureId(null, $(e.target).prop("id"));
+      }
+    };
+    var newGroupJson = function(groupJson) {
+      groupLablesEl.text("");
+      for (var g = 0, gLen = groupJson.features.length; g < gLen; g++) {
+        var group = groupJson.features[g], groupName = group.properties.title, groupUrl = group.properties.url;
+        var newEl = $('<label class="location-presets"><input type="checkbox" name="' +
+          groupUrl + '" id="' + groupUrl +'">' + groupName + '</label>').appendTo(groupLablesEl);
+
+        newEl.find("input").data("geo", group.geometry).change(groupChange);
+      }
+    };
 
     startSearchControl.on("search_locationfound", function(e) {
       constituencyEl.prop("disabled", false);
@@ -26,6 +45,14 @@ $(document).ready(function() {
         routeEl.prop("disabled", false);
       }
       startLocation = [e.latlng.lat, e.latlng.lng];
+
+      $.ajax({
+        url: "/api/groups",
+        data: { bbox: map.map.getBounds().toBBoxString() },
+        dataType: jsonpTransportRequired() ? "jsonp" : void 0,
+        timeout: 10000,
+        success: newGroupJson
+      });
     });
 
     destSearchControl.on("search_locationfound", function(e) {
@@ -87,8 +114,8 @@ $(document).ready(function() {
           dataType: jsonpTransportRequired() ? "jsonp" : void 0,
           timeout: 10000,
           success: function(json) {
-            var route = L.polyline([]), points, p, pLen, startPoint;
-            var points = json.marker[0]["@attributes"].coordinates.split(" ");
+            var route = L.polyline([]), points, p, pLen;
+            points = json.marker[0]["@attributes"].coordinates.split(" ");
             for (p = 1, pLen = points.length; p < pLen; p++) {
               route.addLatLng(points[p].split(",").reverse());
             }
