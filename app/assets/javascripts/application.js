@@ -28,3 +28,4 @@
 //= require jqcloud
 //= require social
 //= require location_preset
+//= require navigate_away_warning

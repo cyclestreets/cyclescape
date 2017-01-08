@@ -23,7 +23,7 @@
           = check_box_tag :route, '', false, disabled: true
           Route (to destination)
 
-= semantic_form_for @location do |f|
+= semantic_form_for @location, html: { class: "navigate-away-warning" } do |f|
   = f.inputs do
     = f.input :loc_json, as: :hidden
     %li.input

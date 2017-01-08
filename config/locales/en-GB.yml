@@ -8,6 +8,7 @@
   sign_in: sign in
   are_you_sure: Are you sure?
   failure: Sorry, something went wrong
+  navigate_away_warning: Are you sure you want to navigate away
   possible_spam: We think this message might be spam. If not, please accept our apologies.  It
     is queued to be checked by a moderator.
   not_approved: New threads can only be automatically created by approved users.  It
