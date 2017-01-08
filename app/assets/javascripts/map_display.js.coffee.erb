@@ -24,7 +24,7 @@ class window.LeafletMap
     @buildPhotoLayer(opts.photoselect) if opts.photos or opts.photoselect
     @remoteJSONLayer = {}
     @buildRemoteLayer(url, name) for own name, url of opts.remote
-    @addLayers(opts.hidelayers, opts.photoselect)
+    @addLayers(opts)
     @addSearchControl() if opts.search
     if opts.draw?
       @addDraw(opts.feature)
@@ -76,20 +76,21 @@ class window.LeafletMap
     @map.setView(center.latLon, center.zoom) if center.latLon
     return
 
-  addLayers: (hidelayers, photoselect) ->
-    openCycle = L.tileLayer(@constructor.OpenCycle, opacity: 0.8)
+  addLayers: (opts = {}) ->
+    opacity = opts.opacity || 0.8
+    openCycle = L.tileLayer(@constructor.OpenCycle, opacity: opacity)
     openCycle.addTo(@map)
     baseLayers = {
-      "OpenCycleMap":  openCycle,
-      "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: 0.8),
-      "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: 0.8),
+      "OpenCycleMap":  openCycle
+      "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: opacity)
+      "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: opacity)
     }
     additionalLayers = @remoteJSONLayer
     additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
     additionalLayers['Photos'] = @photoLayer if @photoLayer
 
-    L.control.layers(baseLayers, additionalLayers).addTo(@map) unless hidelayers
-    @map.addLayer @photoLayer if photoselect
+    L.control.layers(baseLayers, additionalLayers).addTo(@map) unless opts.hidelayers
+    @map.addLayer @photoLayer if opts.photoselect
 
   buildPhotoLayer: (photoselect) =>
     params = [

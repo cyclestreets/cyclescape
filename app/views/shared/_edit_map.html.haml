@@ -42,9 +42,9 @@
           %span.txt
             = t ".clear"
   .hidden
-    .map-data{"data-center" => location_to_geojson(location),
-      "data-opts" => { search: !defined?(no_search), draw: true, collisions: true, feature: item_to_geojson(resource),
-      geoinput: resource.class.name.gsub('::','').underscore}.to_json, "data-skip" => defined?(skip) }
+    - opts = { draw: true, collisions: true, feature: item_to_geojson(resource), geoinput: resource.class.name.gsub('::','').underscore }
+    - opts.merge!(extra_opts) if defined?(extra_opts)
+    .map-data{"data-center" => location_to_geojson(location), "data-opts" => opts.to_json, "data-skip" => defined?(skip) }
 
 :javascript
   $( document ).ready(function() {
