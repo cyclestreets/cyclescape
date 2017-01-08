@@ -266,3 +266,14 @@
   width: 14px !important;
   height: 14px !important;
 }
+
+.formtastic .leaflet-control-search .search-tip {
+  background-color: #fff;
+  &:hover {
+    background-color: #eee;
+  }
+}
+
+.leaflet-control-search ul.search-tooltip {
+  width: 100%;
+}
