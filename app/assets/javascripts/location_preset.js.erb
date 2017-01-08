@@ -87,21 +87,10 @@ $(document).ready(function() {
           dataType: jsonpTransportRequired() ? "jsonp" : void 0,
           timeout: 10000,
           success: function(json) {
-            var route = L.polyline([]), markers = json.marker, points, m, mLen, p, pLen, startPoint;
-
-            for (m = 0, mLen = json.marker.length; m < mLen; m++) {
-              points = markers[m]["@attributes"].points;
-              if (points) {
-                points = markers[m]["@attributes"].points.split(" ");
-                if(m == 1) {
-                  startPoint = 0;
-                } else {
-                  startPoint = 1;
-                }
-                for (p = startPoint, pLen = points.length; p < pLen; p++) {
-                  route.addLatLng(points[p].split(",").reverse());
-                }
-              }
+            var route = L.polyline([]), points, p, pLen, startPoint;
+            var points = json.marker[0]["@attributes"].coordinates.split(" ");
+            for (p = 1, pLen = points.length; p < pLen; p++) {
+              route.addLatLng(points[p].split(",").reverse());
             }
             map.drawFeatureId(route.toGeoJSON(), "route");
           }
