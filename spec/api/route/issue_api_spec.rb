@@ -20,6 +20,25 @@ describe Route::IssueApi do
       end
     end
 
+    context 'with a geo_collection' do
+      let!(:issue) { create :issue_within_quahog }
+      let(:quahog_loc) { build(:quahogcc_group_profile).location }
+      let(:host) { "" }
+
+      before do
+        create :issue
+        geo_feature = RGeo::GeoJSON::Feature.new(quahog_loc)
+        geo_collection = RGeo::GeoJSON.encode(RGeo::GeoJSON::FeatureCollection.new([geo_feature]))
+        get "#{host}/api/issues", geo_collection: geo_collection.to_json
+      end
+
+      it 'returns issue' do
+        expect(geojson_response.size).to eq(1)
+        expect(geojson_response[0]['id']).to eq(issue.id)
+        expect(last_response.status).to eq(200)
+      end
+    end
+
     context 'with bounding box' do
       let(:host) { "" }
       before do

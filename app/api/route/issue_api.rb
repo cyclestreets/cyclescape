@@ -11,6 +11,11 @@ module Route
       optional :order, type: String, desc: 'Order of returned issues. Current working parameters are: "vote_count", "created_at", "start_at", "size"'
       optional :end_date, type: Date, desc: 'No issues after the end date are returned'
       optional :start_date, type: Date, desc: 'No issues before the start date are returned'
+      optional(:geo_collection,
+               type: Array[RGeo::GeoJSON::Feature],
+               desc: 'Return only issues inside this GeoJSON feature collection, e.g. {"type":"FeatureCollection","features":[{"type":"Polygon","coordinates":[[[-1.5724,53.795],[-1.54289,53.8083],[-1.54426,53.79010],[-1.5724,53.7957]]]}]}',
+               coerce_with: GeoCoerce)
+      mutually_exclusive :geo_collection, :bbox
     end
 
     helpers do
@@ -56,6 +61,7 @@ module Route
         scope = scope.order_by_size
       end
       scope = scope.intersects_not_covered(bbox_from_string(params[:bbox], Issue.rgeo_factory).to_geometry) if params[:bbox].present?
+      scope = scope.intersects_not_covered(params[:geo_collection].map(&:geometry).inject(&:union)) if params[:geo_collection]
       scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
       scope = scope.where_tag_names_not_in(params[:excluding_tags]) if params[:excluding_tags]
       scope = scope.before_date(params[:end_date]) if params[:end_date]
