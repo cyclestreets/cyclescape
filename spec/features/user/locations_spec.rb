@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe 'User locations' do
 
-  let!(:location_category) { create(:location_category) }
   let(:location_attributes) { attributes_for(:user_location_with_json_loc) }
 
   context 'view' do
@@ -16,13 +15,11 @@ describe 'User locations' do
     it 'should let you add a new location' do
       visit new_user_location_path
       expect(page).to have_content(I18n.t('.user.locations.new.new_location'))
-      select location_category.name, from: 'Category'
       # Note hidden map field
       find('#user_location_loc_json', visible: false).set(location_attributes[:loc_json])
       click_on I18n.t('.formtastic.actions.user_location.create')
 
       expect(page).to have_content('Location Created')
-      expect(page).to have_content(location_category.name)
     end
 
     context 'with a location' do
@@ -48,7 +45,7 @@ describe 'User locations' do
     end
 
     context 'edit' do
-      let!(:location) { create(:user_location, user: current_user, category: location_category) }
+      let!(:location) { create(:user_location, user: current_user) }
 
       it 'should let you edit an existing location' do
         visit current_user_locations_path
