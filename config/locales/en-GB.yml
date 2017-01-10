@@ -1206,6 +1206,11 @@
           other: You're now following %{count} additional threads.
       update:
         success: Location Updated
+      form:
+        area_around_me: Area around me
+        my_ward: My ward
+        my_constituency: My constituency
+        my_route: "Route (to destination)"
     prefs:
       edit:
         involvement: 'Involve me in:'

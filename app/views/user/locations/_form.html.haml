@@ -11,17 +11,16 @@
       %li
         %label.location-presets
           = check_box_tag :area_around_me, '', false, disabled: true
-          Area around me
+          = t(".area_around_me")
         %label.location-presets
           = check_box_tag :constituency, '', false, disabled: true
-          My constituency
+          = t(".my_constituency")
         %label.location-presets
           = check_box_tag :ward, '', false, disabled: true
-          My ward
-
+          = t(".my_ward")
         %label.location-presets
           = check_box_tag :route, '', false, disabled: true
-          Route (to destination)
+          = t(".my_route")
 
         .group-labels
 
