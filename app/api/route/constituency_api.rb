@@ -5,11 +5,7 @@ module Route
     params do
       requires(:geo,
                type: RGeo::Geos::CAPIPointImpl, desc: 'GeoJSON of the location, the surrouding constituency will be returned, e.g. {"type":"Point","coordinates":[0.11906,52.20792]}',
-               coerce_with: lambda do |geo|
-                 parsed = RGeo::GeoJSON.decode(geo, geo_factory: Constituency.rgeo_factory, json_parser: :json)
-                 raise unless parsed
-                 parsed
-               end)
+               coerce_with: GeoCoerce)
     end
 
     get :constituencies do
