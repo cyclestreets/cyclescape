@@ -138,11 +138,11 @@ class window.LeafletMap
         marker.bindPopup('<div class="photo bubble">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
           $("#cs-image-#{feature.properties.id}").click ->
             $("#image-preview").html(peekImgEl)
-            $("#cyclestreets_photo_message_caption").val(feature.properties.caption)
-            $("#cyclestreets_photo_message_cyclestreets_id").val(feature.properties.id)
-            $("#cyclestreets_photo_message_photo_url").val(thumbnailUrl)
-            $("#cyclestreets_photo_message_icon_properties").val(JSON.stringify(iconProperties))
-            $("#cyclestreets_photo_message_loc_json").val JSON.stringify(feature)
+            $("#cyclestreets_photo_message_caption").changeVal(feature.properties.caption)
+            $("#cyclestreets_photo_message_cyclestreets_id").changeVal(feature.properties.id)
+            $("#cyclestreets_photo_message_photo_url").changeVal(thumbnailUrl)
+            $("#cyclestreets_photo_message_icon_properties").changeVal(JSON.stringify(iconProperties))
+            $("#cyclestreets_photo_message_loc_json").changeVal JSON.stringify(feature)
         )
         return
     })
@@ -251,7 +251,7 @@ class window.LeafletMap
     @drawnLayerChanged()
 
   drawnLayerChanged: =>
-    @geoInput.val JSON.stringify(@constructor.drawnItems.toGeoJSON())
+    @geoInput.changeVal JSON.stringify(@constructor.drawnItems.toGeoJSON())
     $("a[title='Save changes.']")[0].click() if @_editing
     $('.leaflet-draw-edit-edit')[0].click()
 
@@ -327,7 +327,7 @@ class window.LeafletMap
       drawnItems.clearLayers()
       $('ul.leaflet-draw-actions a[title^="Cancel"]')[0]?.click()
       $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
-      @geoInput.val(null)
+      @geoInput.changeVal(null)
       $('.icon-undo').css(opacity: 0.3)
       activeTab = $('.tabs').parent().tabs('option', 'active')
       $('.tabs a span')[activeTab].click() # Re-activate drawing the current shape

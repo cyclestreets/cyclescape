@@ -8,6 +8,7 @@
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.selectboxes
+//= require jquery.extentions
 //= require jquery-ui/autocomplete
 //= require jquery-ui/tabs
 //= require jquery-ui/datepicker
