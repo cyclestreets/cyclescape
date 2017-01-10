@@ -18,6 +18,23 @@ $(document).ready(function() {
     areaAroundEl = $(".location-presets #area_around_me");
     routeEl = $(".locaton-presets #route");
     groupLablesEl = $(".group-labels");
+    var nosIssues = $("#nos_issues");
+    var nosIssuesDiv = $(".nos-issues");
+    var updateNosIssues = function(issues){
+      nosIssuesDiv.show();
+      nosIssues.text(" " + issues.features.length + " ");
+    };
+    var date = new Date();
+    date.setMonth(date.getMonth() - 3)
+    $("[id$='_loc_json']").change(function(e){
+      $.ajax({
+        url: "/api/issues",
+        data: { geo_collection: $(e.target).val(), start_date: date.toJSON() },
+        dataType: jsonpTransportRequired() ? "jsonp" : void 0,
+        timeout: 10000,
+        success: updateNosIssues
+      });
+    });
 
     var groupChange = function(e) {
       if(e.target.checked) {
@@ -26,6 +43,7 @@ $(document).ready(function() {
         map.drawFeatureId(null, $(e.target).prop("id"));
       }
     };
+
     var newGroupJson = function(groupJson) {
       groupLablesEl.text("");
       for (var g = 0, gLen = groupJson.features.length; g < gLen; g++) {

@@ -1211,6 +1211,8 @@
         my_ward: My ward
         my_constituency: My constituency
         my_route: "Route (to destination)"
+        last_months: In the past 3 months there have been
+        in_this_area: "issues in this area (to give you an estiamte of email traffic)"
     prefs:
       edit:
         involvement: 'Involve me in:'

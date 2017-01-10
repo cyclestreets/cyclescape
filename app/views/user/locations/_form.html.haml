@@ -31,5 +31,10 @@
       = f.semantic_errors :location
       - locals = { resource: @location, location: @start_location, skip: true, extra_opts: { no_search: true, opacity: 0.4 } }
       = render partial: "shared/edit_map", locals: locals
+  .meta.nos-issues.hide
+    %span=t(".last_months")
+    %span#nos_issues
+    %span=t(".in_this_area")
+    %p
   = f.actions do
     = f.action :submit, button_html: {class: "btn-big-green"}
