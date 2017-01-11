@@ -153,7 +153,9 @@ $(document).ready(function() {
 
     if (navigator.geolocation) {
       var updateLocation = function(pos){
-        changeStartLocation({latlng: {lat: pos.coords.latitude, lng: pos.coords.longitude} });
+        var lat = pos.coords.latitude, lng = pos.coords.longitude;
+        map.map.setView([lat, lng], 13);
+        changeStartLocation({latlng: {lat: lat, lng: lng} });
         userLocationPlaceholder = userLocationEl.find("input").attr("placeholder");
         userLocationEl.find("input").attr("placeholder", userLocationEl.data("currentLocation"));
       };
