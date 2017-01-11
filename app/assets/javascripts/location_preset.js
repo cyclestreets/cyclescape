@@ -129,7 +129,7 @@ $(document).ready(function() {
     routeEl.change(function(e) {
       if(e.target.checked) {
         var params = [
-          { name: "key", value: "<%= Geocoder::API_KEY %>" },
+          { name: "key", value: CONSTANTS.geocoder.apiKey },
           { name: "itinerarypoints", value: startLocation[1] + "," + startLocation[0] + "|" + destLocation[1] + "," + destLocation[0] },
           { name: "plan", value: "balanced"}
         ];

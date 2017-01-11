@@ -6,11 +6,6 @@ class window.LeafletMap
   @OSStreet: 'https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
   @Mapnik: 'https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
   @CyclestreetsUrl: "https://www.cyclestreets.net"
-  @CyclestreetsKey: "<%= Geocoder::API_KEY %>"
-  @CyclestreetsGeoUrl: "<%= Geocoder::GEO_URL %>"
-  @CyclestreetsCollisionUrl: "<%= Geocoder::COLLISIONS_URL %>"
-  @CyclestreetsPhotoUrl: "<%= Geocoder::PHOTO_URL %>"
-  @default_marker_path: "<%= image_path('map-icons/m-misc.png') %>"
   @default_marker_anchor: [30 / 2, 42]
   @drawnItems: new L.FeatureGroup()
 
@@ -94,14 +89,15 @@ class window.LeafletMap
 
   buildPhotoLayer: (photoselect) =>
     params = [
-      {name: 'key', value: @constructor.CyclestreetsKey},
-      {name: 'fields', value: 'id,name,hasPhoto,categoryId,categoryPlural,metacategoryName,iconProperties,thumbnailUrl'},
+      {name: 'key', value: CONSTANTS.geocoder.apiKey},
+      {name: 'fields',
+      value: 'id,name,hasPhoto,categoryId,categoryPlural,metacategoryName,iconProperties,thumbnailUrl'},
       {name: 'thumbnailsize', value: 2000},
       {name: 'datetime', value: 'friendly'},
     ]
 
     @photoLayer = new L.LayerJSON({
-      url: "#{@constructor.CyclestreetsPhotoUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
+      url: "#{CONSTANTS.geocoder.photoUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
       propertyItems: 'features'
       propertyLoc: 'geometry.coordinates'
       locAsGeoJSON: true
@@ -118,7 +114,10 @@ class window.LeafletMap
         thumbnailUrl = feature.properties.thumbnailUrl
         latitude = feature.geometry.coordinates[1]
         longitude = feature.geometry.coordinates[0]
-        peekImgEl = if thumbnailUrl then '<img class="no-float" src="' + thumbnailUrl + '" alt="Image loading &hellip;"/>' else ''
+        peekImgEl = if thumbnailUrl
+          '<img class="no-float" src="' + thumbnailUrl + '" alt="Image loading &hellip;"/>'
+        else
+          ''
         # Wrap image in a link
         peekImgEl = "<a title=\"Click for a bigger image and copyright details\" href=\"" +
           @constructor.CyclestreetsUrl + "/location/#{id}/\" target=\"_blank\">#{peekImgEl}</a>"
@@ -131,7 +130,7 @@ class window.LeafletMap
         # The main bit of the content
         mainContent = '<p class="peekimage">' + peekImgEl + '</p>'
         selectable = if photoselect
-          "<div class='formtastic btn-green' id='cs-image-#{feature.properties.id}'> <%= I18n.t('messages.new.select_image') %> </button>"
+          "<div class='formtastic btn-green' id='cs-image-#{feature.properties.id}'> #{CONSTANTS.i18n.selectImage} </button>"
         else
           ""
 
@@ -154,12 +153,12 @@ class window.LeafletMap
       slight: { color: '#a7932f', fillColor: '#fcff00', radius: 6 }
     }
     params = [
-      {name: 'key', value: @constructor.CyclestreetsKey}
+      {name: 'key', value: CONSTANTS.geocoder.apiKey}
       {name: 'fields', value: 'id,latitude,longitude,datetime,severity,url'},
       {name: 'datetime', value: 'friendly'},
     ]
     @collisionLayer = new L.LayerJSON({
-      url: "#{@constructor.CyclestreetsCollisionUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
+      url: "#{CONSTANTS.geocoder.collisionsUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
       propertyItems: 'features'
       propertyLoc: ['properties.latitude','properties.longitude']
       minShift: 200
@@ -191,12 +190,12 @@ class window.LeafletMap
       bbox = @map.getBounds().toBBoxString()
       params = [
         {name: 'q', value: text}
-        {name: 'key', value: @constructor.CyclestreetsKey}
+        {name: 'key', value: CONSTANTS.geocoder.apiKey}
         {name: 'bbox', value: bbox}
       ]
 
       $.ajax(
-        url: @constructor.CyclestreetsGeoUrl
+        url: CONSTANTS.geocoder.geoUrl
         data: params
         dataType: 'jsonp' if jsonpTransportRequired()
         timeout: 10000
@@ -278,7 +277,7 @@ class window.LeafletMap
         }
         marker: {
           icon: new L.Icon {
-            iconUrl: @constructor.default_marker_path,
+            iconUrl: CONSTANTS.images.defaultMarker,
             iconAnchor: @constructor.default_marker_anchor
           }
         }

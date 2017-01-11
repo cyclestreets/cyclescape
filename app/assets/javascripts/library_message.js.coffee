@@ -35,7 +35,7 @@ class LibraryMessageView
     $("#library-results").show()
     slick($('.scrollable'), 'setPosition')
 
-  show_error: (xhr, status, error) =>
+  show_error: (xhr, status, error) ->
     console.log xhr, status, error
 
   select: (item) =>

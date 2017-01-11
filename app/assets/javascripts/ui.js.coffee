@@ -9,7 +9,8 @@ jQuery ->
   $(".tabs").parent().tabs()
 
   $(document).on("keypress", "input.search-input", (event) ->
-    event.preventDefault() if (event.keyCode == 13) # do not submit from when searching
+    # do not submit from when searching
+    event.preventDefault() if (event.keyCode == 13)
   )
 
   if history.pushState
@@ -107,7 +108,7 @@ jQuery ->
   }
 
   $("body").on "click", "div.ui-widget-overlay:visible", ->
-      $(".ui-dialog.no-close:visible").find(".ui-dialog-content").dialog("close")
+    $(".ui-dialog.no-close:visible").find(".ui-dialog-content").dialog("close")
 
   # Modal overlay links
   $("a[rel='#overlay']").click (e) ->
@@ -153,4 +154,4 @@ jQuery ->
     $(this).toggleClass "open closed"
 
   # Autosize text areas, but only with the right CSS class
-  $("textarea.autosize").autosize();
+  $("textarea.autosize").autosize()

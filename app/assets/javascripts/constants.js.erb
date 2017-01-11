@@ -1,0 +1,16 @@
+window.CONSTANTS = {
+  geocoder: {
+    apiKey: "<%= Geocoder::API_KEY %>",
+    csBaseUrl: "<%= Geocoder::CS_BASE_URL %>",
+    geoUrl: "<%= Geocoder::GEO_URL %>",
+    collisionsUrl: "<%= Geocoder::COLLISIONS_URL %>",
+    photoUrl: "<%= Geocoder::PHOTO_URL %>",
+  },
+  i18n: {
+    navigateAwayWarning: "<%= I18n.t("navigate_away_warning") %>",
+    selectImage:"<%= I18n.t('messages.new.select_image') %>",
+  },
+  images: {
+    defaultMarker: "<%= image_path('map-icons/m-misc.png') %>",
+  }
+};
