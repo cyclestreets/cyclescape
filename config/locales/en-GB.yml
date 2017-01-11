@@ -1208,6 +1208,9 @@
         success: Location Updated
       form:
         area_around_me: Area around me
+        my_location: My location
+        current_location: Use current location
+        current_location_placeholder: Using auto-detected location
         my_ward: My ward
         my_constituency: My constituency
         my_route: "Route (to destination)"

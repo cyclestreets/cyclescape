@@ -4,9 +4,10 @@
       %li.string.input.optional.stringish
         .left{style: "float: left"}
           %label.label{for: "user_location", style: "width: auto"}
-            My location
-          %a#auto_detect.btn-grey.hide{href: "#", title: "Create a location based on where you are now"} Use current location
-        .leaflet-search-outside#user_location
+            = t(".my_location")
+          %a#current_location.btn-grey.hide{href: "#", title: "Create a location based on where you are now"}
+            = t(".current_location")
+        .leaflet-search-outside#user_location{data: {current_location: I18n.t("user.locations.form.current_location_placeholder")}}
         .leaflet-search-outside#dest_location
       %li
         %label.location-presets

@@ -1,7 +1,7 @@
 $(document).ready(function() {
   if ($(".user_location #user_location").length > 0) {
-    var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation,
-        destLocation, constituencyEl, areaAroundEl, routeEl, wardEl, groupLablesEl;
+    var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation, userLocationPlaceholder,
+        destLocation, constituencyEl, areaAroundEl, routeEl, wardEl, groupLablesEl, userLocationEl;
     map = new LeafletMap($(".map-data").data("center"), $(".map-data").data("opts"));
     startSearchControl = map.addSearchControl(
       {autoCollapse: false, collapsed: false, circleLocation: false, startLocation: true, textPlaceholder: "Start/home location"}
@@ -11,7 +11,8 @@ $(document).ready(function() {
     );
     startSearchEl = startSearchControl.getContainer();
     destSearchEl = destSearchControl.getContainer();
-    $("#user_location").append(startSearchEl);
+    userLocationEl = $("#user_location");
+    userLocationEl.append(startSearchEl);
     $("#dest_location").append(destSearchEl);
     constituencyEl = $(".location-presets #constituency");
     wardEl = $(".location-presets #ward");
@@ -25,7 +26,7 @@ $(document).ready(function() {
       nosIssues.text(" " + issues.features.length + " ");
     };
     var date = new Date();
-    date.setMonth(date.getMonth() - 3)
+    date.setMonth(date.getMonth() - 3);
     $("[id$='_loc_json']").change(function(e){
       $.ajax({
         url: "/api/issues",
@@ -55,7 +56,10 @@ $(document).ready(function() {
       }
     };
 
-    startSearchControl.on("search_locationfound", function(e) {
+    var changeStartLocation = function(e){
+      if (userLocationPlaceholder){
+        userLocationEl.find("input").attr("placeholder", userLocationPlaceholder);
+      }
       constituencyEl.prop("disabled", false);
       wardEl.prop("disabled", false);
       areaAroundEl.prop("disabled", false);
@@ -71,7 +75,9 @@ $(document).ready(function() {
         timeout: 10000,
         success: newGroupJson
       });
-    });
+    };
+
+    startSearchControl.on("search_locationfound", changeStartLocation);
 
     destSearchControl.on("search_locationfound", function(e) {
       if (startLocation) {
@@ -146,10 +152,12 @@ $(document).ready(function() {
     });
 
     if (navigator.geolocation) {
-      var updateLocation = function(position){
-        map.drawCircle(position.coords);
+      var updateLocation = function(pos){
+        changeStartLocation({latlng: {lat: pos.coords.latitude, lng: pos.coords.longitude} });
+        userLocationPlaceholder = userLocationEl.find("input").attr("placeholder");
+        userLocationEl.find("input").attr("placeholder", userLocationEl.data("currentLocation"));
       };
-      $("#auto_detect").css("display","inline-block").click(function() {
+      $("#current_location").css("display","inline-block").click(function() {
         navigator.geolocation.getCurrentPosition(updateLocation);
       });
     }
