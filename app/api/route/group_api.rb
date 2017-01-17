@@ -4,7 +4,8 @@ module Route
     paginate paginate_settings
 
     params do
-      optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
+      optional(:bbox, type: RGeo::Cartesian::BoundingBox, coerce_with: BboxCoerce,
+                      desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"')
       optional :national, type: Integer, desc: 'When set to 1 groups of small and large size are returned, when set to 0 only groups of a small size are returned. Default 0', default: 0
     end
 
@@ -23,14 +24,10 @@ module Route
 
     get :groups do
       scope = GroupProfile.enabled.with_location.ordered_by_size.includes(:group)
-      bbox = nil
-      if params[:bbox].present?
-        bbox = bbox_from_string(params[:bbox], GroupProfile.rgeo_factory)
-        scope = scope.intersects(bbox.to_geometry)
-      end
+      scope = scope.intersects(params[:bbox].to_geometry) if params[:bbox].present?
       scope = scope.local unless params[:national].to_i == 1
       scope = paginate scope
-      groups = scope.map { |group_profile| group_feature(GroupDecorator.decorate(group_profile.group), bbox) }
+      groups = scope.map { |group_profile| group_feature(GroupDecorator.decorate(group_profile.group), params[:bbox]) }
       collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(groups)
       RGeo::GeoJSON.encode(collection)
     end

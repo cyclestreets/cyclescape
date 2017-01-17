@@ -4,7 +4,8 @@ module Route
     paginate paginate_settings
 
     params do
-      optional :bbox, type: String, desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"'
+      optional(:bbox, type: RGeo::Cartesian::BoundingBox, coerce_with: BboxCoerce,
+                      desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"')
       optional :tags, type: Array[String], desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :excluding_tags, type: Array[String], desc: 'An array of tags that the issues must not have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :group, type: String, desc: 'Return only issues from area of group given by its short name, e.g. "london"'
@@ -60,7 +61,7 @@ module Route
       when 'size'
         scope = scope.order_by_size
       end
-      scope = scope.intersects_not_covered(bbox_from_string(params[:bbox], Issue.rgeo_factory).to_geometry) if params[:bbox].present?
+      scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
       scope = scope.intersects_not_covered(params[:geo_collection].map(&:geometry).inject(&:union)) if params[:geo_collection]
       scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
       scope = scope.where_tag_names_not_in(params[:excluding_tags]) if params[:excluding_tags]
