@@ -1,19 +1,24 @@
 module Route
   class WardApi < Base
-    desc 'Returns ward boundary and name as GeoJSON'
+    desc 'Returns ward boundaries and names as GeoJSON'
+    paginate paginate_settings
 
     params do
-      requires(:geo,
-               type: RGeo::Geos::CAPIPointImpl, desc: 'GeoJSON of the location, the surrouding ward will be returned, e.g. {"type":"Point","coordinates":[0.11906,52.20792]}',
-               coerce_with: GeoCoerce)
+      optional(:geo, type: RGeo::Geos::CAPIPointImpl, coerce_with: GeoCoerce,
+                     desc: 'GeoJSON of the location of interest, e.g. {"type":"Point","coordinates":[0.11906,52.20792]}')
+      optional(:bbox, type: RGeo::Cartesian::BoundingBox, coerce_with: BboxCoerce,
+                      desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"')
+      exactly_one_of :geo, :bbox
     end
 
     get :wards do
-      const = Ward.intersects(params[:geo]).first
-      error! "No wards found for the given point" unless const
-
-      feature = RGeo::GeoJSON::Feature.new(const.location, nil, name: const.name)
-      RGeo::GeoJSON.encode(feature)
+      scope = Ward.order_by_size
+      scope = scope.intersects(params[:geo]) if params[:geo]
+      scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
+      scope = paginate scope
+      features = scope.map { |const| RGeo::GeoJSON::Feature.new(const.location, nil, name: const.name) }
+      collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(features)
+      RGeo::GeoJSON.encode(collection)
     end
   end
 end

@@ -14,7 +14,7 @@ describe Route::ConstituencyApi do
 
     it "returns a constituency" do
       expect(last_response.status).to eq(200)
-      expect(geojson_response.keys).to match_array(response_keys)
+      expect(geojson_response[0].keys).to match_array(response_keys)
     end
   end
 end
