@@ -1,7 +1,7 @@
 $(document).ready(function() {
   if ($('.user_location #user_location').length > 0) {
     var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation, userLocationPlaceholder,
-        destLocation, constituencyEl, areaAroundEl, routeEl, wardEl, groupLablesEl, userLocationEl;
+        destLocation, constituencyLabelsEl, areaAroundEl, routeEl, wardLabelsEl, groupLabelsEl, userLocationEl;
     map = new LeafletMap($('.map-data').data('center'), $('.map-data').data('opts'));
     startSearchControl = map.addSearchControl(
       {autoCollapse: false, collapsed: false, circleLocation: false,
@@ -16,11 +16,11 @@ $(document).ready(function() {
     userLocationEl = $('#user_location');
     userLocationEl.append(startSearchEl);
     $('#dest_location').append(destSearchEl);
-    constituencyEl = $('.location-presets #constituency');
-    wardEl = $('.location-presets #ward');
     areaAroundEl = $('.location-presets #area_around_me');
-    routeEl = $('.locaton-presets #route');
-    groupLablesEl = $('.group-labels');
+    routeEl = $('.location-presets #route');
+    groupLabelsEl = $('.group-labels');
+    wardLabelsEl = $('.ward-labels');
+    constituencyLabelsEl = $('.constituency-labels');
     var nosIssues = $('#nos_issues');
     var nosIssuesDiv = $('.nos-issues');
     var updateNosIssues = function(issues){
@@ -40,7 +40,7 @@ $(document).ready(function() {
       });
     });
 
-    var groupChange = function(e) {
+    var drawFeature = function(e) {
       if(e.target.checked) {
         map.drawFeatureId($(e.target).data('geo'), $(e.target).prop('id'));
       } else {
@@ -48,39 +48,95 @@ $(document).ready(function() {
       }
     };
 
-    var newGroupJson = function(groupJson) {
-      groupLablesEl.text('');
-      for (var g = 0, gLen = groupJson.features.length; g < gLen; g++) {
-        var group = groupJson.features[g], groupName = group.properties.title, groupUrl = group.properties.url;
-        var newEl = $('<label class="location-presets"><input type="checkbox" name="' +
-          groupUrl + '" id="' + groupUrl +'">' + groupName + '</label>').appendTo(groupLablesEl);
+    var jsonToCheckboxes = function(json, labelsEl, nameFn, idFn) {
+      if (!nameFn) {
+        nameFn = function(feature) { return feature.properties.name; };
+      }
+      if (!idFn) {
+        idFn = function(feature){
+          var hash = 0, name = nameFn(feature);
+          if (name.length === 0) return hash;
+          for (var i = 0; i < name.length; i++) {
+            var char = name.charCodeAt(i);
+            hash = ((hash<<5)-hash)+char;
+            hash = hash & hash; // Convert to 32bit integer
+          }
+          return hash;
+        };
+      }
 
-        newEl.find('input').data('geo', group.geometry).change(groupChange);
+      labelsEl.find('label').hide();
+      labelsEl.find('input:checked').parent().show();
+
+      for (var f = 0, featuresLen = json.features.length; f < featuresLen; f++) {
+        var feature = json.features[f], id = idFn(feature), name = nameFn(feature),
+          checkbox = labelsEl.find('#' + id);
+        if (checkbox[0]) {
+          checkbox.parent().show();
+        } else {
+          var newEl = $('<label class="location-presets"><input type="checkbox" name="' +
+            id + '" id="' + id +'">' + name + '</label>').appendTo(labelsEl);
+          newEl.find('input').data('geo', feature.geometry).change(drawFeature);
+        }
       }
     };
 
-    var changeStartLocation = function(e){
+    var parser = document.createElement('a');
+
+    var newGroupJson = function(groupJson) {
+      var idFn = function(group) {
+        parser.href = group.properties.url;
+        return parser.hostname;
+      };
+      jsonToCheckboxes(groupJson, groupLabelsEl, function(fe) { return fe.properties.title; }, idFn);
+    };
+
+    var newConstituencyJson = function(json) {
+      jsonToCheckboxes(json, constituencyLabelsEl);
+    };
+
+    var newWardJson = function(json) {
+      jsonToCheckboxes(json, wardLabelsEl);
+    };
+
+    var moveAjax = [];
+    var mapMove = function(){
+      for(var ma = 0, maLength = moveAjax.length; ma < maLength; ma++){
+        moveAjax[ma].abort();
+      }
+      moveAjax = [];
+
+      var params = {
+        // jshint camelcase: false
+        data: { bbox: map.map.getBounds().toBBoxString(), per_page: 5 },
+        dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
+        timeout: 10000
+      };
+
+      params.url = '/api/groups';
+      params.success = newGroupJson;
+      moveAjax.push($.ajax(params));
+
+      params.url = '/api/constituencies';
+      params.success = newConstituencyJson;
+      moveAjax.push($.ajax(params));
+
+      params.url = '/api/wards';
+      params.success = newWardJson;
+      moveAjax.push($.ajax(params));
+    };
+
+    mapMove();
+
+    map.map.on('move', mapMove);
+
+    startSearchControl.on('search_locationfound', function(e) {
+      areaAroundEl.prop('disabled', false);
+      startLocation = [e.latlng.lat, e.latlng.lng];
       if (userLocationPlaceholder){
         userLocationEl.find('input').attr('placeholder', userLocationPlaceholder);
       }
-      constituencyEl.prop('disabled', false);
-      wardEl.prop('disabled', false);
-      areaAroundEl.prop('disabled', false);
-      if (destLocation) {
-        routeEl.prop('disabled', false);
-      }
-      startLocation = [e.latlng.lat, e.latlng.lng];
-
-      $.ajax({
-        url: '/api/groups',
-        data: { bbox: map.map.getBounds().toBBoxString() },
-        dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
-        timeout: 10000,
-        success: newGroupJson
-      });
-    };
-
-    startSearchControl.on('search_locationfound', changeStartLocation);
+    });
 
     destSearchControl.on('search_locationfound', function(e) {
       if (startLocation) {
@@ -94,38 +150,6 @@ $(document).ready(function() {
         map.drawCircle(startLocation);
       } else {
         map.drawCircle();
-      }
-    });
-
-    constituencyEl.change(function(e) {
-      if(e.target.checked) {
-        $.ajax({
-          url: '/api/constituencies',
-          data: { geo: L.marker(startLocation).toGeoJSON().geometry },
-          dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
-          timeout: 10000,
-          success: function(constituencyGeo) {
-            map.drawFeatureId(constituencyGeo, 'constituency');
-          }
-        });
-      } else {
-        map.drawFeatureId(null, 'constituency');
-      }
-    });
-
-    wardEl.change(function(e) {
-      if(e.target.checked) {
-        $.ajax({
-          url: '/api/wards',
-          data: { geo: L.marker(startLocation).toGeoJSON().geometry },
-          dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
-          timeout: 10000,
-          success: function(constituencyGeo) {
-            map.drawFeatureId(constituencyGeo, 'ward');
-          }
-        });
-      } else {
-        map.drawFeatureId(null, 'ward');
       }
     });
 
@@ -158,8 +182,9 @@ $(document).ready(function() {
     if (navigator.geolocation) {
       var updateLocation = function(pos){
         var lat = pos.coords.latitude, lng = pos.coords.longitude;
+        areaAroundEl.prop('disabled', false);
+        startLocation = [lat, lng];
         map.map.setView([lat, lng], 13);
-        changeStartLocation({latlng: {lat: lat, lng: lng} });
         userLocationPlaceholder = userLocationEl.find('input').attr('placeholder');
         userLocationEl.find('input').attr('placeholder', userLocationEl.data('currentLocation'));
       };

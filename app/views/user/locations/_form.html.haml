@@ -10,20 +10,22 @@
         .leaflet-search-outside#user_location{data: {current_location: I18n.t("user.locations.form.current_location_placeholder")}}
         .leaflet-search-outside#dest_location
       %li
-        %label.location-presets
-          = check_box_tag :area_around_me, '', false, disabled: true
-          = t(".area_around_me")
-        %label.location-presets
-          = check_box_tag :constituency, '', false, disabled: true
-          = t(".my_constituency")
-        %label.location-presets
-          = check_box_tag :ward, '', false, disabled: true
-          = t(".my_ward")
+        = t(".my_constituency")
+        %span.constituency-labels
+      %li
+        = t(".my_ward")
+        %span.ward-labels
+      %li
+        = t(".my_group")
+        %span.group-labels
+      %li
         %label.location-presets
           = check_box_tag :route, '', false, disabled: true
           = t(".my_route")
-
-        .group-labels
+      %li
+        %label.location-presets
+          = check_box_tag :area_around_me, '', false, disabled: true
+          = t(".area_around_me")
 
 = semantic_form_for @location, html: { class: "navigate-away-warning" } do |f|
   = f.inputs do
