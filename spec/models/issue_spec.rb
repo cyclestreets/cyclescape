@@ -191,7 +191,7 @@ describe Issue do
       let(:point) { factory.parse_wkt('POINT(-1 1)') }
       let(:multipolygon) { factory.parse_wkt('MULTIPOLYGON (((0.0 0.0, 0.0 1.0, 1.0 1.0, 0.0 0.0)), ((0.0 4.0, 0.0 5.0, 1.0 5.0, 0.0 4.0)))') }
       let(:geom_collection_string) do
-        "GEOMETRYCOLLECTION (LINESTRING (-1.566663 53.818588, -1.512272 53.8218), POLYGON ((-1.5620874235794022 53.818580999999995, -1.5629452383442026 53.81702241438395, -1.5620874235794022 53.818580999999995)))"
+        "GEOMETRYCOLLECTION (LINESTRING (-1.5 53.8, -1.51 53.82), POLYGON ((-1.56 53.81, -1.562 53.81, -1.5620 53.8185, -1.56 53.81)))"
       end
       let(:geom_collection) { factory.parse_wkt(geom_collection_string) }
 
