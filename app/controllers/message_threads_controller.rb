@@ -25,7 +25,7 @@ class MessageThreadsController < ApplicationController
     else
       @subscribers = thread.subscribers.is_public
     end
-    @subscribers = @subscribers.ordered.includes(:groups)
+    @subscribers = @subscribers.ordered(thread.group_id).includes(:groups, :memberships)
   end
 
   def edit

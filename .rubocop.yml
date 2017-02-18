@@ -7,3 +7,12 @@ Encoding:
   Enabled: false
 Rails:
   Enabled: true
+
+Rails/HttpPositionalArguments:
+  Enabled: false
+
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_tag
+
+Style/Lambda: literal
