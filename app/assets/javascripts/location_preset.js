@@ -31,6 +31,7 @@ $(document).ready(function() {
     date.setMonth(date.getMonth() - 3);
     $('[id$="_loc_json"]').change(function(e){
       $.ajax({
+        type: 'POST',
         url: '/api/issues',
         // jshint camelcase: false
         data: { geo_collection: $(e.target).val(), start_date: date.toJSON() },

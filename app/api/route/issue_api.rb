@@ -44,33 +44,43 @@ module Route
                                    latest_activity_at: issue.latest_activity_at.to_i,
                                    closed: issue.closed?)
       end
+
+      def post_or_get_issue
+        scope = Issue.all.includes(:created_by, :tags)
+        if params[:group]
+          group = Group.find_by(short_name: params[:group])
+          error! 'Given group not found', 404 unless group
+          scope = scope.intersects(group.profile.location)
+        end
+        case params[:order]
+        when 'vote_count'
+          scope = scope.plusminus_tally
+        when 'created_at', 'start_at'
+          scope = scope.order(params[:order] => :desc)
+        when 'size'
+          scope = scope.order_by_size
+        end
+        scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
+        scope = scope.intersects_not_covered(params[:geo_collection].map(&:geometry).inject(&:union)) if params[:geo_collection]
+        scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
+        scope = scope.where_tag_names_not_in(params[:excluding_tags]) if params[:excluding_tags]
+        scope = scope.before_date(params[:end_date]) if params[:end_date]
+        scope = scope.after_date(params[:start_date]) if params[:start_date]
+        scope = paginate scope
+        issues = scope.map { |issue| issue_feature(issue) }
+        collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)
+        RGeo::GeoJSON.encode(collection)
+      end
     end
 
-    get :issues do
-      scope = Issue.all.includes(:created_by, :tags)
-      if params[:group]
-        group = Group.find_by(short_name: params[:group])
-        error! 'Given group not found', 404 unless group
-        scope = scope.intersects(group.profile.location)
+    resource do
+      get :issues do
+        post_or_get_issue
       end
-      case params[:order]
-      when 'vote_count'
-        scope = scope.plusminus_tally
-      when 'created_at', 'start_at'
-        scope = scope.order(params[:order] => :desc)
-      when 'size'
-        scope = scope.order_by_size
+
+      post :issues do
+        post_or_get_issue
       end
-      scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
-      scope = scope.intersects_not_covered(params[:geo_collection].map(&:geometry).inject(&:union)) if params[:geo_collection]
-      scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
-      scope = scope.where_tag_names_not_in(params[:excluding_tags]) if params[:excluding_tags]
-      scope = scope.before_date(params[:end_date]) if params[:end_date]
-      scope = scope.after_date(params[:start_date]) if params[:start_date]
-      scope = paginate scope
-      issues = scope.map { |issue| issue_feature(issue) }
-      collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)
-      RGeo::GeoJSON.encode(collection)
     end
   end
 end
