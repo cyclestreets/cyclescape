@@ -288,6 +288,15 @@ describe User, type: :model do
     expect(public_users).to_not include(private_user)
   end
 
+  it 'should order by last name' do
+    woo = create(:user, full_name: "Woo")
+    bar = create(:user, full_name: "Foo Bar")
+    zog = create(:user, full_name: "Foo Bar Zog")
+    smith = create(:user, full_name: "A Smith")
+
+    expect(described_class.where.not(full_name: "Root").ordered).to eq([bar, smith, woo, zog])
+  end
+
   context 'in a group' do
     subject { create(:user, full_name: 'Me') }
     let(:group) { create(:group) }

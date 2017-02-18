@@ -50,6 +50,7 @@ class User < ActiveRecord::Base
   scope :active, -> { where('"users".disabled_at IS NULL AND "users".confirmed_at IS NOT NULL AND "users".deleted_at IS NULL') }
   scope :admin,  -> { where(role: 'admin') }
   scope :is_public, -> { joins(:profile).where(user_profiles: {visibility: 'public'}) }
+  scope :ordered, -> { order("SUBSTRING(full_name, '([^[:space:]]+)$')") }
 
   validates :full_name, presence: true, format: { without: /[\[\]]/ }
   validates :display_name, uniqueness: true, allow_nil: true
@@ -64,7 +65,7 @@ class User < ActiveRecord::Base
     end
 
     def find_or_invite(email_address, name = nil)
-      existing = find_by_email(email_address)
+      existing = find_by(email: email_address)
       return existing if existing
       name = email_address.split('@').first if name.nil?
       User.invite!(full_name: name, email: email_address, approved: true)
