@@ -87,7 +87,7 @@ $(document).ready(function() {
     var newGroupJson = function(groupJson) {
       var idFn = function(group) {
         parser.href = group.properties.url;
-        return parser.hostname;
+        return parser.hostname.split('.')[0];
       };
       jsonToCheckboxes(groupJson, groupLabelsEl, function(fe) { return fe.properties.title; }, idFn);
     };
