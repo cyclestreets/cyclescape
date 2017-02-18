@@ -288,13 +288,16 @@ describe User, type: :model do
     expect(public_users).to_not include(private_user)
   end
 
-  it 'should order by last name' do
-    woo = create(:user, full_name: "Woo")
-    bar = create(:user, full_name: "Foo Bar")
-    zog = create(:user, full_name: "Foo Bar Zog")
-    smith = create(:user, full_name: "A Smith")
+  it 'ordered should order by group committee then last name' do
+    group = create(:group)
 
-    expect(described_class.where.not(full_name: "Root").ordered).to eq([bar, smith, woo, zog])
+    woo =   create(:group_membership, full_name: "Woo").user
+    bar =   create(:group_membership, :committee, full_name: "Foo Bar").user
+    zog =   create(:group_membership, :committee, full_name: "Foo Bar Zog", group: group).user
+    smith = create(:group_membership, :committee, full_name: "A Smith", group: group).user
+
+    expect(described_class.where.not(full_name: "Root").ordered(group.id)).to eq([smith, zog, bar, woo])
+    expect(described_class.where.not(full_name: "Root").ordered(nil)).to eq([bar, smith, woo, zog])
   end
 
   context 'in a group' do

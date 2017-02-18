@@ -1,7 +1,14 @@
 FactoryGirl.define do
   factory :group_membership do
+    transient do
+      full_name nil
+    end
     group
-    user
+    after(:build) do |gm, eval|
+      user = build :user
+      gm.user = user
+      user.full_name = eval.full_name if eval.full_name
+    end
     role 'member'
 
     trait :committee do

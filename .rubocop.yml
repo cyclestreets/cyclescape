@@ -16,3 +16,5 @@ Rails/HttpPositionalArguments:
 Rails/DynamicFindBy:
   Whitelist:
     - find_by_tag
+
+Style/Lambda: literal
