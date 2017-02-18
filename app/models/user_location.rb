@@ -37,6 +37,10 @@ class UserLocation < ActiveRecord::Base
   end
 
   def buffered
-    location.buffer(Geo::USER_LOCATIONS_BUFFER).union(location)
+    if (buffered_loc = location.buffer(Geo::USER_LOCATIONS_BUFFER).union(location))
+      buffered_loc
+    else
+      location.buffer(Geo::USER_LOCATIONS_BUFFER)
+    end
   end
 end

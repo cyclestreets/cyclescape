@@ -15,6 +15,7 @@ Updates on <%= raw @thread.title %>:
 <%= render partial: @message.notification_name.to_s %>
 
 To reply to the message above, email <%= message_address(@message) %>
+or visit <%= thread_url(@thread, anchor: dom_id(@message)) %>.
 Please ensure you strip out non-relevant text in your message.
 
 <%- end  %>
