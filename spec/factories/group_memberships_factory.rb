@@ -4,11 +4,13 @@ FactoryGirl.define do
       full_name nil
     end
     group
-    after(:build) do |gm, eval|
-      user = build :user
-      gm.user = user
-      user.full_name = eval.full_name if eval.full_name
+    user do
+      FactoryGirl.build(:user).tap do |usr|
+        usr.full_name = full_name if full_name
+        usr.save!
+      end
     end
+
     role 'member'
 
     trait :committee do
