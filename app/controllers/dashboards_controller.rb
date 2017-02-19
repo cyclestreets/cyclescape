@@ -3,20 +3,21 @@ class DashboardsController < ApplicationController
     @user = current_user
     @groups = @user.groups
 
-    @relevant_issues = IssueDecorator.decorate_collection(current_user.issues_near_locations.order('updated_at DESC').limit(12).preloaded)
+    @relevant_issues = IssueDecorator.decorate_collection(
+      current_user.issues_near_locations.order(updated_at: :desc).
+      preloaded.page(params[:relevant_issues_page]).per(12)
+    )
 
     subscribed_threads = current_user.subscribed_threads.order_by_latest_message.
-      limit(12).includes(:issue, latest_message: [:component, :created_by])
+      includes(:issue, latest_message: [:component, :created_by]).page(params[:subscribed_threads_page]).per(12)
     @subscribed_threads = ThreadListDecorator.decorate_collection subscribed_threads
-
-    group_threads = ThreadList.recent_from_groups(current_user.groups, 8).includes(:group)
-    @group_threads = ThreadListDecorator.decorate_collection group_threads
 
     deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 30).includes(:issue, :latest_message)
     @deadline_threads = ThreadListDecorator.decorate_collection deadline_threads
 
     prioritised_threads = current_user.prioritised_threads.order('priority desc').
-      order_by_latest_message.limit(20).includes(:issue, latest_message: [:component, :created_by])
+      order_by_latest_message.includes(:issue, latest_message: [:component, :created_by]).
+      page(params[:prioritised_threads_page]).per(20)
     @prioritised_threads = ThreadListDecorator.decorate_collection(prioritised_threads)
 
     planning_applications = current_user.planning_applications_near_locations.ordered
