@@ -239,14 +239,10 @@
       location:
         one: location
         other: locations
-      no_group_threads: None of your groups have any threads yet. You could start
-        a new conversation!
       no_locations_guidance_html: You haven't set any locations yet! If you %{add_some_locations_link},
         we will show you the nearby %{things} here.
       no_planning_applications_nearby_html: There are no planning applications in
         your area. You could %{add_location_link}.
-      no_user_groups: You aren't a member of any groups yet! When you join some groups,
-        the latest threads will show up here.
       planning_applications_in_your_area: Planning applications in your %{location}
       planning_applications_introduction_html: 'These are the most recent planning
         applications (courtesy of the PlanIt website) in your %{location_link}:'
@@ -254,8 +250,6 @@
       recent_threads: recent threads
       subscribed_threads: Subscribed Threads
       thread_latest_activity: '%{time_ago} ago'
-      group_threads: Group Threads
-      group_threads_desc_html: Recent threads with activity from your groups.
       my_priorities: My priorities
       my_threads: My subscribed threads
       issues_nearby: Latest issues nearby

@@ -2,46 +2,6 @@ require 'spec_helper'
 
 describe 'User dashboards' do
   context 'show' do
-    context 'groups' do
-      context 'not in a group' do
-        include_context 'signed in as a site user'
-
-        it 'should have guidance about the lack of groups' do
-          visit dashboard_path
-          expect(page).to have_content(I18n.t('.dashboards.show.no_user_groups'))
-        end
-      end
-
-      context 'in a group' do
-        include_context 'signed in as a group member'
-
-        context 'that has no threads' do
-          it 'should have guidance about the lack of threads' do
-            visit dashboard_path
-            expect(page).to have_content(I18n.t('.dashboards.show.no_group_threads'))
-          end
-        end
-
-        context 'that has some threads' do
-          it 'should list the latest threads from the groups I belong to' do
-            current_user.groups.each do |group|
-              3.times do
-                # Use factory_with_trait syntax here as for some bug causes multiple
-                # creates with separate trait to fail
-                create(:message_thread_with_messages, group: group)
-              end
-            end
-            visit dashboard_path
-            current_user.groups.each do |group|
-              group.threads.each do |thread|
-                expect(page).to have_content(thread.title)
-              end
-            end
-          end
-        end
-      end
-    end
-
     context 'threads' do
       include_context 'signed in as a site user'
 

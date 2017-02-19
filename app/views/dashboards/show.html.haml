@@ -28,21 +28,8 @@
                     %td.meta
                       = time_tag_with_title(thread.latest_activity_date) do
                         - t ".thread_latest_activity", time_ago: time_ago_in_words(thread.latest_activity_date)
-        #dashboard-threads-issues
-          %section#group-threads
-            %h2= t(".group_threads")
-            - if current_user.groups.empty?
-              %p= t ".no_user_groups"
-            - elsif @group_threads.empty?
-              %p= t ".no_group_threads"
-            - else
-              %ul.group-threads-list
-                - @group_threads.each do |thread|
-                  %li
-                    %span
-                    = link_to_profile thread.group, class: "group-link"
-                    %div
-                      %h4= link_to thread.title, thread_path(thread)
+        - if @subscribed_threads.respond_to?(:total_pages)
+          = paginate @subscribed_threads, param_name: :subscribed_threads_page, params: {anchor: 'my-threads'}
       #issues-nearby
         %section.issues
           %h2= t ".issues_in_your_area"
@@ -59,6 +46,8 @@
             %p.comment= t ".my_issues_nearby_issues_pointer_html", browse_all_other_issues_link: link_to(t(".browse_all_other_issues"), issues_path)
             %ul.issue-list
               = issues_list @relevant_issues, collapsed: true
+        - if @relevant_issues.respond_to?(:total_pages)
+          = paginate @relevant_issues, param_name: :relevant_issues_page, params: {anchor: 'issues-nearby'}
       #my-priorities
         %section.threads
           - if @prioritised_threads.empty?
@@ -78,6 +67,8 @@
                       = thread.latest_activity
                     %td.meta
                       = t "thread_priorities.#{thread.priority_for(current_user).label}"
+        - if @prioritised_threads.respond_to?(:total_pages)
+          = paginate @prioritised_threads, param_name: :prioritised_threads_page, params: {anchor: 'my-priorities'}
       #deadlines
         %section.threads
           %p(style="float: right;")= link_to image_tag("ical.gif"), "#{dashboard_path}/#{current_user.public_token}/deadlines.ics"
