@@ -148,3 +148,22 @@
     height: 75px;
   }
 }
+
+.top-fix {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+}
+
+.top-fix#main-nav {
+  top: 0px;
+}
+
+.top-fix#crumb-search {
+  top: 40px;
+}
+
+.top-nudge {
+  margin-bottom: 88px
+}
+

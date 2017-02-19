@@ -149,4 +149,13 @@ jQuery ->
     $(this).toggleClass "open closed"
 
   # Autosize text areas, but only with the right CSS class
-  $("textarea.autosize").autosize();
+  $("textarea.autosize").autosize()
+
+  $(document).scroll ()->
+    pixelsScrolled = $(@).scrollTop()
+    if (pixelsScrolled > 75)
+      $('#main-nav, #crumb-search').addClass("top-fix")
+      $('#site-header').addClass('top-nudge')
+    else
+      $('#main-nav, #crumb-search').removeClass("top-fix")
+      $('#site-header').removeClass('top-nudge')
