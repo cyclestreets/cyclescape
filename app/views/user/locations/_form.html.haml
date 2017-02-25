@@ -1,14 +1,13 @@
 = semantic_form_for @location, html: { class: "navigate-away-warning" } do |f|
+  .meta.nos-issues
+    %span=t(".last_months")
+    %span#nos_issues &nbsp;0&nbsp;
+    %span=t(".in_this_area")
+    = f.actions do
+      = f.action :submit, button_html: {class: "btn-big-green"}
   = f.inputs do
     = f.input :loc_json, as: :hidden
     %li.input
       = f.semantic_errors :location
       - locals = { resource: @location, location: @start_location, skip: true, extra_opts: { no_search: true, opacity: 0.4 } }
       = render partial: "large_map", locals: locals
-  .meta.nos-issues.hide
-    %span=t(".last_months")
-    %span#nos_issues
-    %span=t(".in_this_area")
-    %p
-  = f.actions do
-    = f.action :submit, button_html: {class: "btn-big-green"}

@@ -1202,7 +1202,7 @@
         success: Location Updated
       form:
         last_months: In the past 3 months there have been
-        in_this_area: "issues in this area (to give you an estiamte of email traffic)"
+        in_this_area: "issues in this area"
       large_map:
         <<: *edit_map
         area_around_me: Area around me

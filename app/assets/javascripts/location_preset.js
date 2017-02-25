@@ -25,8 +25,7 @@ $(document).ready(function() {
     var nosIssues = $('#nos_issues');
     var nosIssuesDiv = $('.nos-issues');
     var updateNosIssues = function(issues){
-      nosIssuesDiv.show();
-      nosIssues.text(' ' + issues.features.length + ' ');
+      nosIssues.html('&nbsp;' + issues.features.length + '&nbsp;');
     };
     var date = new Date();
     date.setMonth(date.getMonth() - 3);
