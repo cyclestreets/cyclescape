@@ -30,6 +30,11 @@ $(document).ready(function() {
     var date = new Date();
     date.setMonth(date.getMonth() - 3);
     $('[id$="_loc_json"]').change(function(e){
+      var geoCollection = $(e.target).val();
+      if(geoCollection === '') {
+        updateNosIssues({features: []});
+        return;
+      }
       $.ajax({
         type: 'POST',
         url: '/api/issues',
