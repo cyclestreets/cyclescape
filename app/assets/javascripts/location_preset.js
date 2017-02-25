@@ -11,6 +11,7 @@ $(document).ready(function() {
       {autoCollapse: false, collapsed: false, circleLocation: false,
         destLocation: true, textPlaceholder: 'Regular destination (optional)'}
     );
+    $('.search-input').attr('size', 25);
     startSearchEl = startSearchControl.getContainer();
     destSearchEl = destSearchControl.getContainer();
     userLocationEl = $('#user_location');
@@ -114,7 +115,7 @@ $(document).ready(function() {
 
       var params = {
         // jshint camelcase: false
-        data: { bbox: map.map.getBounds().toBBoxString(), per_page: 5 },
+        data: { bbox: map.map.getBounds().toBBoxString(), per_page: 4 },
         dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
         timeout: 10000
       };
