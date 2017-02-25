@@ -81,7 +81,7 @@ $(document).ready(function() {
           checkbox.parent().show();
         } else {
           var newEl = $('<label class="location-presets"><input type="checkbox" name="' +
-            id + '" id="' + id +'">' + name + '</label>').appendTo(labelsEl);
+            id + '" id="' + id +'">' + name + '<br></label>').appendTo(labelsEl);
           newEl.find('input').data('geo', feature.geometry).change(drawFeature);
         }
       }
