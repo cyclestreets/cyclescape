@@ -1028,7 +1028,7 @@
         zero: No library items found for '%{query}'.
         one: 'One library item found for ''%{query}'':'
         other: '%{count} library items found for ''%{query}'':'
-    edit_map:
+    edit_map: &edit_map
       area: area
       clear: clear
       draw_area: Draw an Area
@@ -1201,6 +1201,10 @@
       update:
         success: Location Updated
       form:
+        last_months: In the past 3 months there have been
+        in_this_area: "issues in this area (to give you an estiamte of email traffic)"
+      large_map:
+        <<: *edit_map
         area_around_me: Area around me
         my_location: My location
         current_location: Use current location
@@ -1208,9 +1212,7 @@
         my_ward: "Wards: "
         my_constituency: "Constituencies: "
         my_group: "Groups: "
-        my_route: "Route (to destination)"
-        last_months: In the past 3 months there have been
-        in_this_area: "issues in this area (to give you an estiamte of email traffic)"
+        my_route: "Route to destination"
     prefs:
       edit:
         involvement: 'Involve me in:'

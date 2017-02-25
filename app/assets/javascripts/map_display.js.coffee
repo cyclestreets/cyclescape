@@ -26,6 +26,7 @@ class window.LeafletMap
     else if opts.feature?
       @addStaticFeature(opts.feature)
     @map.removeControl(@map.zoomControl) if opts.hidezoom?
+    @map.zoomControl.setPosition(opts.zoomposition) if opts.zoomposition
     @drawnFeatures = {}
     @
 

@@ -1,39 +1,10 @@
-%form.formtastic.user_location
-  %fieldset.inputs
-    %ol
-      %li.string.input.optional.stringish
-        .left{style: "float: left"}
-          %label.label{for: "user_location", style: "width: auto"}
-            = t(".my_location")
-          %a#current_location.btn-grey.hide{href: "#", title: "Create a location based on where you are now"}
-            = t(".current_location")
-        .leaflet-search-outside#user_location{data: {current_location: I18n.t("user.locations.form.current_location_placeholder")}}
-        .leaflet-search-outside#dest_location
-      %li
-        = t(".my_constituency")
-        %span.constituency-labels
-      %li
-        = t(".my_ward")
-        %span.ward-labels
-      %li
-        = t(".my_group")
-        %span.group-labels
-      %li
-        %label.location-presets
-          = check_box_tag :route, '', false, disabled: true
-          = t(".my_route")
-      %li
-        %label.location-presets
-          = check_box_tag :area_around_me, '', false, disabled: true
-          = t(".area_around_me")
-
 = semantic_form_for @location, html: { class: "navigate-away-warning" } do |f|
   = f.inputs do
     = f.input :loc_json, as: :hidden
     %li.input
       = f.semantic_errors :location
       - locals = { resource: @location, location: @start_location, skip: true, extra_opts: { no_search: true, opacity: 0.4 } }
-      = render partial: "shared/edit_map", locals: locals
+      = render partial: "large_map", locals: locals
   .meta.nos-issues.hide
     %span=t(".last_months")
     %span#nos_issues

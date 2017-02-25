@@ -1,0 +1,65 @@
+%div#large-map.map.edit
+  .map-tools-overlay-right
+    %form.user_location
+      %fieldset.inputs
+        %ol
+          %li.string.input.optional.boardered
+            .left
+              %label.label{for: "user_location", style: "width: auto"}
+                = t(".my_location")
+              %a#current_location.btn-grey.hide{href: "#", title: "Create a location based on where you are now"}
+                = t(".current_location")
+            .leaflet-search-outside#user_location{data: {current_location: I18n.t("user.locations.large_map.current_location_placeholder")}}
+          %li.boardered
+            = t(".my_constituency")
+            %span.constituency-labels
+          %li.boardered
+            = t(".my_ward")
+            %span.ward-labels
+          %li.boardered
+            = t(".my_group")
+            %span.group-labels
+          %li.boardered
+            .leaflet-search-outside#dest_location
+            %label.location-presets
+              = check_box_tag :route, '', false, disabled: true
+              = t(".my_route")
+          %li.boardered
+            %label.location-presets
+              = check_box_tag :area_around_me, '', false, disabled: true
+              = t(".area_around_me")
+
+          %li
+            %ul.draw-options
+              %li.area
+                %a(href='#area')
+                  %span.area
+                  = t ".area"
+              %li.route
+                %a(href='#route')
+                  %span.route
+                  = t ".route"
+              %li.point
+                %a(href='#point')
+                  %span.point
+                  = t ".point"
+            %ul.undo-clear
+              %li.icon-undo
+                %a.edit-undo
+                  %span.icon-undo
+                  %span.txt
+                    = t ".undo"
+              %li.icon-clear
+                %a.edit-clear
+                  %span.icon-clear
+                  %span.txt
+                    = t ".clear"
+  .hidden
+    - opts = { draw: true, collisions: true, domid: "large-map", zoomposition: "topright",
+      feature: item_to_geojson(resource), geoinput: resource.class.name.gsub('::','').underscore }
+    - opts.merge!(extra_opts) if defined?(extra_opts)
+    .map-data{"data-center" => location_to_geojson(location), "data-opts" => opts.to_json, "data-skip" => defined?(skip) }
+
+:javascript
+  $("#large-map").parents().css("height", "100%");
+  $("#large-map").parent().css("height", "120%");
