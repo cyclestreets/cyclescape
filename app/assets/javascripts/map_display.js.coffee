@@ -220,6 +220,7 @@ class window.LeafletMap
   drawFeatureId: (feature, id) =>
     if @drawnFeatures[id]
       @constructor.drawnItems.removeLayer @drawnFeatures[id]
+      @drawnLayerChanged()
     if feature
       feature = L.geoJson(feature).getLayers()[0]
       @drawFeature(feature)
