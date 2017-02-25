@@ -7,6 +7,13 @@
   margin-top: 1em;
 }
 
+#large-map {
+  height: 72%;
+  width: 100%;
+  border:1px solid black;
+  margin-top: 1em;
+}
+
 #photo-map {
   height: 550px;
   width: 100%;
@@ -17,24 +24,32 @@
 .map {
   position:relative;
   .map-tools-overlay {
-    position:absolute;
-    top:0;
-    right:0;
-    height:100%;
-    width:190px;
-    opacity: 0.85;
     background-color: black; // IE8 and lower
     filter: alpha(opacity=85);  // IE8 and lower
     background:rgba(0, 0, 0, 0.85);
-    z-index:1010;
+    right:0;
     ul.tabs {
+      li {
+        a {
+          color:$grey;
+          height:80px;
+          width:50px;
+        }
+      }
+    }
+  }
+  .map-tools-overlay, .map-tools-overlay-right {
+    position:absolute;
+    top:0;
+    height:100%;
+    width:190px;
+    opacity: 0.85;
+    z-index:1010;
+    ul.draw-options {
       @include list-reset;
       li {
         a {
           display:block;
-          color:$grey;
-          height:80px;
-          width:50px;
           cursor:pointer;
           font: {
             weight:bold;
@@ -142,6 +157,13 @@
       }
     }
   }
+  .map-tools-overlay-right {
+    background-color: white; // IE8 and lower
+    filter: alpha(opacity=85);  // IE8 and lower
+    background:rgba(255, 255, 255, 0.85);
+    left: 0;
+    width: 220px;
+  }
   &.edit {
     .olControlLayerSwitcher {
       right: 190px;
@@ -238,26 +260,28 @@
 
 .leaflet-search-outside .leaflet-control-search.search-exp {
   box-shadow: none;
+  margin-left: 0;
+  overflow: visible;
+  float: none;
+  display: inline-flex;
+  .search-input {
+    float: none;
+  }
+  .search-tooltip {
+    background-color: rgba(100, 100, 100, 255);
+    .search-tip {
+      white-space: initial;
+    }
+  }
 }
 
 .leaflet-control-search {
   input.search-input {
-    width: 240px !important;
     padding: 7px;
     border: 1px solid #ddd;
     box-shadow: 3px 3px 5px 0px #aaa;
+    max-width: 164px;
   }
-
-  ul.search-tooltip {
-    max-height: 70px;
-  }
-}
-
-.leaflet-search-outside {
-  height: 95px;
-  float: left;
-  position: relative;
-  margin-right: 35px;
 }
 
 // Probably a better method here:
@@ -276,4 +300,14 @@
 
 .leaflet-control-search ul.search-tooltip {
   width: 100%;
+}
+
+.map-tools-overlay-right .inputs ol .boardered {
+  border-style: solid;
+  border-width: thin;
+  overflow: initial;
+}
+
+#new_user_location {
+  height: 82% !important;
 }
