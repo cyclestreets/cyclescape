@@ -10,8 +10,8 @@
       %p= t ".combined_locations_guidance"
       %div#map
       .hidden
-        .map-data{"data-center" => location_to_geojson(@user.buffered_locations),
-          "data-opts" => { feature: RGeo::GeoJSON.encode(@user.buffered_locations) }.to_json}
+        .map-data{"data-center" => location_to_geojson(@user.buffered_location),
+          "data-opts" => { feature: RGeo::GeoJSON.encode(@user.buffered_location) }.to_json}
     %section.list
       %h2= t ".all_user_locations", user_name: @user.name
       %table

@@ -19,8 +19,8 @@ class UserLocationObserver < ActiveRecord::Observer
         issue.threads.each do |thread|
           if user.subscribed_to_thread?(thread)
             unless ( user.prefs.involve_my_locations == 'subscribe' &&
-                     user.buffered_locations &&
-                     thread.issue.location.intersects?(user.buffered_locations)
+                     user.buffered_location &&
+                     thread.issue.location.intersects?(user.buffered_location)
                    ) || (
                      thread.group &&
                      thread.group.members.include?(user) &&

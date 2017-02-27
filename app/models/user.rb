@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   has_many :issues, foreign_key: 'created_by_id'
   has_many :created_threads, class_name: 'MessageThread', foreign_key: 'created_by_id'
   has_many :messages, foreign_key: 'created_by_id'
-  has_many :locations, class_name: 'UserLocation', dependent: :destroy
   has_many :thread_subscriptions, dependent: :destroy do
     def to(thread)
       where('thread_id = ?', thread).order(deleted_at: :desc).first
@@ -35,6 +34,7 @@ class User < ActiveRecord::Base
   has_many :leading_threads, through: :thread_leader_messages, source: :thread, inverse_of: :leaders
   has_one :profile, class_name: 'UserProfile'
   has_one :prefs, class_name: 'UserPref'
+  has_one :location, class_name: 'UserLocation', dependent: :destroy
   belongs_to :remembered_group, class_name: 'Group'
 
   accepts_nested_attributes_for :profile, update_only: true
@@ -168,29 +168,24 @@ class User < ActiveRecord::Base
     end
   end
 
-  def buffered_locations
-    locations.map(&:buffered).inject(&:union)
+  def buffered_location
+    location.buffered
   end
 
   # Returns issues that are within a small distance of their user_locations
   def issues_near_locations
-    Issue.intersects(buffered_locations)
+    Issue.intersects(buffered_location)
   end
 
   def planning_applications_near_locations
-    PlanningApplication.intersects(buffered_locations)
+    PlanningApplication.intersects(buffered_location)
   end
 
   def start_location
     # Figure out a suitable starting location for the user, e.g. for adding new issues.
 
-    # First, the first location.
-    l = locations.order(id: :asc).first
-    return l.location unless l.blank?
-
-    # If not, take the latest location they have.
-    l = locations.last
-    return l.location unless l.blank?
+    # First, there location.
+    return location.location unless location.blank?
 
     # Figure out the group from the subdomain, and use that if possible
     # group = <enter some code here>

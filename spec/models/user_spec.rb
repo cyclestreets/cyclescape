@@ -388,35 +388,35 @@ describe User, type: :model do
     end
 
     it 'should return polygon for point' do
-      subject.locations[0].location = point
-      expect(subject.buffered_locations.geometry_type.type_name).to eq('Polygon')
-      expect(subject.buffered_locations).to eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
+      subject.location.location = point
+      expect(subject.buffered_location.geometry_type.type_name).to eq('Polygon')
+      expect(subject.buffered_location).to eql(subject.location.location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it 'should return polygon for line' do
-      subject.locations[0].location = line
-      expect(subject.buffered_locations.geometry_type.type_name).to eq('Polygon')
-      expect(subject.buffered_locations).to eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
+      subject.location.location = line
+      expect(subject.buffered_location.geometry_type.type_name).to eq('Polygon')
+      expect(subject.buffered_location).to eql(subject.location.location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it 'should return polygon for polygon' do
-      subject.locations[0].location = polygon
-      expect(subject.buffered_locations.geometry_type.type_name).to eq('Polygon')
-      expect(subject.buffered_locations).to eql(subject.locations[0].location.buffer(Geo::USER_LOCATIONS_BUFFER))
+      subject.location.location = polygon
+      expect(subject.buffered_location.geometry_type.type_name).to eq('Polygon')
+      expect(subject.buffered_location).to eql(subject.location.location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it 'should return polygon for geom_collection' do
-      subject.locations[0].location = geom_collection
-      expect(subject.buffered_locations.geometry_type.type_name).to eq('Polygon')
+      subject.location.location = geom_collection
+      expect(subject.buffered_location.geometry_type.type_name).to eq('Polygon')
     end
 
     it 'should return multipolygon for point, line and polygon combined' do
-      subject.locations[0].location = point
+      subject.location.location = point
       subject.locations.build( location: line )
       subject.locations.build( location: polygon )
       subject.locations.build( location: geom_collection )
-      expect(subject.buffered_locations.geometry_type.type_name).to eq('MultiPolygon')
-      expect(subject.buffered_locations.area).to be_within(1e-9).of(1.0060034999999998)
+      expect(subject.buffered_location.geometry_type.type_name).to eq('MultiPolygon')
+      expect(subject.buffered_location.area).to be_within(1e-9).of(1.0060034999999998)
     end
   end
 
@@ -429,7 +429,7 @@ describe User, type: :model do
       issue_in = create(:issue, location: 'POINT(0.5 0.5)')
       issue_close = create(:issue, location: "POINT(#{a} #{a})")
       issue_out = create(:issue, location: 'POINT(1.5 1.5)')
-      subject.locations[0].location = polygon
+      subject.location.location = polygon
       issues = subject.issues_near_locations
       expect(issues.count).to eql(2)
       expect(issues).to include(issue_in, issue_close)

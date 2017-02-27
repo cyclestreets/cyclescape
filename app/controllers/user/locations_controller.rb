@@ -5,11 +5,11 @@ class User::LocationsController < ApplicationController
   def new
     # Get the start location before creating a new blank one
     @start_location = current_user.start_location
-    @location = current_user.locations.new
+    @location = current_user.build_location
   end
 
   def create
-    @location = current_user.locations.new permitted_params
+    @location = current_user.build_location permitted_params
 
     if @location.save
       set_flash_message :success
@@ -21,12 +21,12 @@ class User::LocationsController < ApplicationController
   end
 
   def edit
-    @location = current_user.locations.find params[:id]
+    @location = current_user.location
     @start_location = @location.location
   end
 
   def update
-    @location = current_user.locations.find params[:id]
+    @location = current_user.location
 
     if @location.update permitted_params
       set_flash_message :success
@@ -37,7 +37,7 @@ class User::LocationsController < ApplicationController
   end
 
   def destroy
-    if current_user.locations.find(params[:id]).destroy
+    if current_user.location.destroy
       set_flash_message :success
     else
       set_flash_message :failure
@@ -46,14 +46,14 @@ class User::LocationsController < ApplicationController
   end
 
   def geometry
-    @location = current_user.locations.find params[:id]
+    @location = current_user.location
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(@location.loc_feature(thumbnail: view_context.image_path('map-icons/m-misc.png'))) }
     end
   end
 
   def combined_geometry
-    multi = current_user.buffered_locations
+    multi = current_user.buffered_location
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(multi) }
     end

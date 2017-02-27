@@ -11,8 +11,8 @@
       %p= t ".combined_locations_guidance"
       %div#map
       .hidden
-        .map-data{"data-center" => location_to_geojson(current_user.buffered_locations),
-          "data-opts" => { feature: RGeo::GeoJSON.encode(current_user.buffered_locations) }.to_json}
+        .map-data{"data-center" => location_to_geojson(current_user.buffered_location),
+          "data-opts" => { feature: RGeo::GeoJSON.encode(current_user.buffered_location) }.to_json}
       %p
         - case current_user.prefs.involve_my_locations
         - when "none"

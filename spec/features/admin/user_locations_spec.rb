@@ -27,6 +27,6 @@ describe 'Groups admin' do
     expect(page).to have_content(location_category.name)
 
     # Check we haven't created the location against the admin account!
-    expect(current_user.locations.length).to eq(0)
+    expect(current_user.location).to be_nil
   end
 end

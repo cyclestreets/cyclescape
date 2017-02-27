@@ -211,7 +211,7 @@ describe MessageThread do
       subject { create(:message_thread, created_by: user) }
 
       it "still has users' centre" do
-        expect(subject.default_centre).to eq(user.locations.first.centre)
+        expect(subject.default_centre).to eq(user.location.centre)
       end
     end
 

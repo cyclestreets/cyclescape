@@ -38,8 +38,8 @@ class UserPrefObserver < ActiveRecord::Observer
           group.threads.with_issue.each do |thread|
             if subscription = user.subscribed_to_thread?(thread)
               unless user.prefs.involve_my_locations == 'subscribe' &&
-                     user.buffered_locations &&
-                     thread.issue.location.intersects?(user.buffered_locations)
+                     user.buffered_location &&
+                     thread.issue.location.intersects?(user.buffered_location)
                 subscription.destroy
               end
             end

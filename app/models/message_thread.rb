@@ -251,7 +251,7 @@ class MessageThread < ActiveRecord::Base
     # 3. the creators location (if they have one)
     # 4. nowhere in particular
     locatable = Issue.unscoped.find issue_id if issue_id
-    locatable = locatable || (group.try :profile if group.try(:profile).try(:location)) || created_by.locations.first
+    locatable = locatable || (group.try :profile if group.try(:profile).try(:location)) || created_by.location
     locatable ? locatable.centre : Geo::NOWHERE_IN_PARTICULAR
   end
 
