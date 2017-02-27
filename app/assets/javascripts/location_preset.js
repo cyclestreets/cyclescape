@@ -1,7 +1,8 @@
 $(document).ready(function() {
   if ($('.user_location #user_location').length > 0) {
     var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation, userLocationPlaceholder,
-        destLocation, constituencyLabelsEl, areaAroundEl, routeEl, wardLabelsEl, groupLabelsEl, userLocationEl;
+      destLocation, constituencyLabelsEl, areaAroundEl, routeEl, wardLabelsEl, groupLabelsEl, userLocationEl,
+      locationEl, locationChange;
     map = new LeafletMap($('.map-data').data('center'), $('.map-data').data('opts'));
     startSearchControl = map.addSearchControl(
       {autoCollapse: false, collapsed: false, circleLocation: false,
@@ -23,14 +24,14 @@ $(document).ready(function() {
     wardLabelsEl = $('.ward-labels');
     constituencyLabelsEl = $('.constituency-labels');
     var nosIssues = $('#nos_issues');
-    var nosIssuesDiv = $('.nos-issues');
     var updateNosIssues = function(issues){
       nosIssues.html('&nbsp;' + issues.features.length + '&nbsp;');
     };
     var date = new Date();
     date.setMonth(date.getMonth() - 3);
-    $('[id$="_loc_json"]').change(function(e){
-      var geoCollection = $(e.target).val();
+    locationEl = $('[id$="_loc_json"]');
+    locationChange = function(){
+      var geoCollection = $(locationEl).val();
       if(geoCollection === '') {
         updateNosIssues({features: []});
         return;
@@ -39,13 +40,15 @@ $(document).ready(function() {
         type: 'POST',
         url: '/api/issues',
         // jshint camelcase: false
-        data: { geo_collection: $(e.target).val(), start_date: date.toJSON() },
+        data: { geo_collection: geoCollection, start_date: date.toJSON() },
         dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
         timeout: 10000,
         success: updateNosIssues
       });
-    });
+    };
 
+    locationEl.change(locationChange);
+    locationChange();
     var drawFeature = function(e) {
       if(e.target.checked) {
         map.drawFeatureId($(e.target).data('geo'), $(e.target).prop('id'));
