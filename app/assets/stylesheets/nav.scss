@@ -3,7 +3,6 @@
 #main-nav {
   @include gradient($colour2, $colour1);
   height: 40px;
-  z-index: 1;
   nav {
     ul#navigation {
       @include list-reset;
