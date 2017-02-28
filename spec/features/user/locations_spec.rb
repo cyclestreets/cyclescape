@@ -14,7 +14,6 @@ describe 'User locations' do
 
     it 'should let you add a new location' do
       visit new_user_location_path
-      expect(page).to have_content(I18n.t('.user.locations.new.new_location'))
       # Note hidden map field
       find('#user_location_loc_json', visible: false).set(location_attributes[:loc_json])
       click_on I18n.t('.formtastic.actions.user_location.create')
@@ -41,27 +40,6 @@ describe 'User locations' do
         current_user.prefs.update_column(:involve_my_locations, 'subscribe')
         visit current_user_locations_path
         expect(page).to have_content(guidance_text('.combined_locations_guidance_subscribe_html'))
-      end
-    end
-
-    context 'edit' do
-      let!(:location) { create(:user_location, user: current_user) }
-
-      it 'should let you edit an existing location' do
-        visit current_user_locations_path
-        click_on 'Edit' # hmm, edit the right one?
-
-        expect(page).to have_content('Edit Location')
-        find('#user_location_loc_json', visible: false).set(location_attributes[:loc_json])
-        click_on 'Save'
-
-        expect(page).to have_content('Location Updated')
-      end
-
-      it 'should let you delete a location' do
-        visit current_user_locations_path
-        click_on 'Delete'
-        expect(page).to have_content('Location deleted')
       end
     end
   end

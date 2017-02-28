@@ -169,7 +169,7 @@ class User < ActiveRecord::Base
   end
 
   def buffered_location
-    location.buffered
+    location.try(:buffered)
   end
 
   # Returns issues that are within a small distance of their user_locations
@@ -185,7 +185,7 @@ class User < ActiveRecord::Base
     # Figure out a suitable starting location for the user, e.g. for adding new issues.
 
     # First, there location.
-    return location.location unless location.blank?
+    return location.location if location
 
     # Figure out the group from the subdomain, and use that if possible
     # group = <enter some code here>

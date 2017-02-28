@@ -149,7 +149,6 @@ describe 'Issue threads' do
 
       let(:notifiee) { create(:user) }
       let!(:notifiee_location_big) { create(:user_location, user: notifiee, location: issue.location.buffer(1)) }
-      let!(:notifiee_location_small) { create(:user_location, user: notifiee, location: issue.location.buffer(0.1)) }
       let!(:user_location) { create(:user_location, user: current_user, location: issue.location.buffer(1)) }
 
       before do

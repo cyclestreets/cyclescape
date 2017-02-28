@@ -40,25 +40,15 @@ describe 'User dashboards' do
       context 'unhelpful location' do
         before do
           # Give the current user a location that doesn't match the issue
-          ul = current_user.build_location
-          ul.category = create(:location_category)
-          ul.location = 'POINT(-90 -90)'
-          ul.save
+          current_user.create_location(location: 'POINT(-90 -90)')
           visit dashboard_path
-        end
-
-        it 'should give some more guidance' do
-          expect(page).to have_content(I18n.t('.dashboards.show.add_another_location'))
         end
       end
 
       context 'matching location' do
         before do
           # Give the current user a location that matches the issue
-          ul = current_user.build_location
-          ul.category = create(:location_category)
-          ul.location = issue.location
-          ul.save
+          current_user.create_location(location: issue.location)
           visit dashboard_path
         end
 

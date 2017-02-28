@@ -24,18 +24,6 @@ class UserLocation < ActiveRecord::Base
   validates :location, presence: true
   validates :user, presence: true
 
-  def overlapping_groups
-    GroupProfile.intersects(location).order('st_area(location) asc').map { |p| p.group }
-  end
-
-  def category_name
-    if category
-      I18n.t('user_locations.category_name', category_name: category.name)
-    else
-      I18n.t('user_locations.generic_category_name')
-    end
-  end
-
   def buffered
     if (buffered_loc = location.buffer(Geo::USER_LOCATIONS_BUFFER).union(location))
       buffered_loc

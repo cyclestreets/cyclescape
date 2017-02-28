@@ -4,7 +4,7 @@
       = link_to t(".new"), new_admin_user_location_path(@user), class: "btn-big-green"
     %h1= t ".title", user_name: @user.name
 
-  - if @user.locations.count > 0
+  - if @user.location
     %section.combined
       %h2= t ".combined_locations"
       %p= t ".combined_locations_guidance"
@@ -12,33 +12,6 @@
       .hidden
         .map-data{"data-center" => location_to_geojson(@user.buffered_location),
           "data-opts" => { feature: RGeo::GeoJSON.encode(@user.buffered_location) }.to_json}
-    %section.list
-      %h2= t ".all_user_locations", user_name: @user.name
-      %table
-        %thead
-          %th= t ".category"
-          %th= t ".map"
-          %th= t ".edit"
-          %th= t ".delete"
-          %th= t ".overlapping_groups"
-        - @user.locations.each do |l|
-          %tr
-            %td= l.category_name
-            %td
-              - map_id = "leaflet-#{dom_id(l)}"
-              .tinymap{id: map_id}
-              .hidden
-                .map-data{"data-center" => location_to_geojson(l.location),
-                  "data-opts" => { domid: map_id, feature: item_to_geojson(l) }.to_json}
-            %td= link_to t(".edit"), edit_admin_user_location_path(@user, l)
-            %td= link_to t(".delete"), admin_user_location_path(@user, l), data: { confirm: t("are_you_sure") }, method: "delete"
-            %td
-              - if l.overlapping_groups.count > 0
-                %ul
-                  - l.overlapping_groups.each do |g|
-                    %li= link_to g.name, group_path(g)
-              - else
-                %span= t ".no_overlapping_groups"
   - else
     %h2= t ".no_locations_yet"
     %p.warning

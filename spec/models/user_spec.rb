@@ -23,7 +23,6 @@ describe User, type: :model do
     it { is_expected.to have_many(:issues) }
     it { is_expected.to have_many(:created_threads) }
     it { is_expected.to have_many(:messages) }
-    it { is_expected.to have_many(:locations).dependent(:destroy) }
     it { is_expected.to have_many(:thread_subscriptions).dependent(:destroy) }
     it { is_expected.to have_many(:subscribed_threads) }
     it { is_expected.to have_many(:thread_priorities) }
@@ -32,6 +31,7 @@ describe User, type: :model do
     it { is_expected.to have_many(:leading_threads) }
     it { is_expected.to have_one(:profile) }
     it { is_expected.to have_one(:prefs) }
+    it { is_expected.to have_one(:location).dependent(:destroy) }
     it { is_expected.to belong_to(:remembered_group) }
   end
 
@@ -409,15 +409,6 @@ describe User, type: :model do
       subject.location.location = geom_collection
       expect(subject.buffered_location.geometry_type.type_name).to eq('Polygon')
     end
-
-    it 'should return multipolygon for point, line and polygon combined' do
-      subject.location.location = point
-      subject.locations.build( location: line )
-      subject.locations.build( location: polygon )
-      subject.locations.build( location: geom_collection )
-      expect(subject.buffered_location.geometry_type.type_name).to eq('MultiPolygon')
-      expect(subject.buffered_location.area).to be_within(1e-9).of(1.0060034999999998)
-    end
   end
 
   context 'issues near locations' do
@@ -461,8 +452,7 @@ describe User, type: :model do
       expect(subject.start_location).to eql(group2.profile.location)
 
       # Then add a user location
-      user_location.user = subject
-      user_location.save!
+      subject.update!(location: user_location)
       expect(subject.start_location).to eql(user_location.location)
 
       # Then test that the primary location category overrides it

@@ -5,10 +5,9 @@ module RSpec
 
       included do
         before do
-          stub_request(:post, /rest\.akismet\.com\/1\.1\/comment-check/).to_return(status: 200, body: 'false')
+          stub_request(:post, %r{rest\.akismet\.com/1\.1/comment-check}).to_return(status: 200, body: 'false')
         end
       end
-
     end
   end
 end

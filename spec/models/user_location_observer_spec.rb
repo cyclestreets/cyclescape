@@ -85,19 +85,6 @@ describe UserLocationObserver do
       expect(thread.subscribers).not_to include(user)
     end
 
-    context 'with another overlapping location' do
-      let!(:user_location2) { create(:user_location, user: user, location: issue.location) }
-
-      it 'should not remove subscription' do
-        expect(thread.subscribers).to include(user)
-        UserLocation.observers.enable :user_location_observer do
-          user_location.destroy
-        end
-        thread.reload
-        expect(thread.subscribers).to include(user)
-      end
-    end
-
     context 'with a group thread and involve_my_groups set to subscribe' do
       let!(:group_membership) { create(:group_membership, user: user) }
 

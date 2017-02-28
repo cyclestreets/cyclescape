@@ -20,7 +20,7 @@ describe Issue::MessageThreadsController, type: :controller do
     end
 
     let!(:req) do
-      stub_request(:post, /rest\.akismet\.com\/1\.1\/comment-check/).
+      stub_request(:post, %r{rest\.akismet\.com/1\.1/comment-check}).
         with(body: { blog: "http://www.cyclescape.org/",
                      comment_author: user.full_name,
                      comment_author_email: user.email,

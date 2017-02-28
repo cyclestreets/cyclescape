@@ -2,12 +2,6 @@ class User::LocationsController < ApplicationController
   def index
   end
 
-  def new
-    # Get the start location before creating a new blank one
-    @start_location = current_user.start_location
-    @location = current_user.build_location
-  end
-
   def create
     @location = current_user.build_location permitted_params
 
@@ -20,9 +14,10 @@ class User::LocationsController < ApplicationController
     end
   end
 
-  def edit
-    @location = current_user.location
-    @start_location = @location.location
+  def new
+    # Get the start location before creating a new blank one
+    @start_location = current_user.start_location
+    @location = current_user.location || current_user.build_location
   end
 
   def update
@@ -34,15 +29,6 @@ class User::LocationsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def destroy
-    if current_user.location.destroy
-      set_flash_message :success
-    else
-      set_flash_message :failure
-    end
-    redirect_to action: :index
   end
 
   def geometry

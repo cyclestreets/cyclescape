@@ -48,19 +48,6 @@ describe UserLocation do
     end
   end
 
-  context 'overlapping groups' do
-    subject { create(:user_location) }
-    let(:small_group_profile) { create(:small_group_profile) }
-    let(:big_group_profile) { create(:big_group_profile) }
-
-    it 'should identify the correct overlapping groups' do
-      big_group_profile
-      small_group_profile
-      expect(subject.overlapping_groups).to include(big_group_profile.group)
-      expect(subject.overlapping_groups).not_to include(small_group_profile.group)
-    end
-  end
-
   describe "buffered" do
     let(:line) { 'LINESTRING (0 0, 0 2)' }
     let(:polygon) { 'POLYGON ((0 0, 0 0.1, 0.1 0.1, 0.1 0, 0 0))' }

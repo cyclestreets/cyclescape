@@ -80,8 +80,6 @@
         edit:
           title: Edit location for %{user_name}
         index:
-          all_user_locations: All locations for %{user_name}
-          category: Category
           combined_locations: Combined Locations
           combined_locations_guidance: This is the combined location for this user.
           delete: Delete
@@ -90,9 +88,7 @@
           new: New location
           no_locations_yet: This user has no locations yet.
           no_locations_guidance: As an administrator, you can add their first location.
-          no_overlapping_groups: No overlapping groups
           title: User locations for %{user_name}
-          overlapping_groups: Overlapping Groups
         new:
           title: New location for %{user_name}
         update:
@@ -203,7 +199,7 @@
       part_hidden: Part Hidden
       add_a_new_issue: add a new issue
       add_another_location: add another location
-      add_some_locations: add some locations
+      add_some_locations: add a location
       areas_you_are_watching: areas you are watching
       converted_to_issue: 'Converted to Issue:'
       deadlines: Deadlines and dates
@@ -240,11 +236,11 @@
       location:
         one: location
         other: locations
-      no_locations_guidance_html: You haven't set any locations yet! If you %{add_some_locations_link},
+      no_locations_guidance_html: You haven't set a location yet! If you %{add_some_locations_link},
         we will show you the nearby %{things} here.
       no_planning_applications_nearby_html: There are no planning applications in
         your area. You could %{add_location_link}.
-      planning_applications_in_your_area: Planning applications in your %{location}
+      planning_applications_in_your_area: Planning applications in your location
       planning_applications_introduction_html: 'These are the most recent planning
         applications (courtesy of the PlanIt website) in your %{location_link}:'
       planning_applications_lower: planning applications
@@ -1151,14 +1147,13 @@
       create:
         success: Location Created
       destroy:
-        failure: That location can't be deleted
+        failure: "That location can't be deleted"
         success: Location deleted
-      edit:
+      new:
         title: Edit Location
+        introduction: By setting a location, this helps us figure out which issues are relevant to you.
       index:
         add_first_location: add your first location
-        all_my_locations: All my locations
-        category: Category
         combined_locations: Combined locations
         combined_locations_guidance: This map shows all of your locations combined
           together. We use this to help figure out which issues are relevant to you,
@@ -1172,10 +1167,8 @@
         combined_locations_guidance_subscribe_html: You currently receive notifications
           when issues are created in these areas, and are following all discussion
           threads on those issues. To change these settings, you can %{edit_prefs_link}.
-        delete: Delete
         edit: Edit
         edit_your_prefs: edit your preferences
-        map: Map
         my_locations: My Locations
         new: Add a new Location
         no_locations_yet: You haven't set any locations yet!
@@ -1184,15 +1177,6 @@
           which issues are relevant to you, and which groups you might be interested
           in.
         no_locations_guidance2_html: To get started, you can %{first_location_link}.
-        no_overlapping_groups: No Overlapping Groups
-        overlapping_groups: Overlapping Groups
-      new:
-        new_location: Add a new location
-        introduction: By setting a location, this helps us figure out which issues
-          are relevant to you.
-        drawing_help: You can draw an area, a route or a location - select this from
-          the panel on the right. Then draw on the map, and click the save button
-          below.
       subscribe_to_threads:
         subscribed_to_threads:
           zero: We couldn't find any additional threads for you to follow.
