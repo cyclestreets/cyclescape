@@ -5,6 +5,7 @@
       heading: Things tagged '%{name}'
       unrecognised: Couldn't find the tag '%{name}'
   anon: Anon
+  delete: Delete
   sign_in: sign in
   are_you_sure: Are you sure?
   failure: Sorry, something went wrong

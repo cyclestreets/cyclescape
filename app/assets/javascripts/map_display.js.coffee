@@ -21,6 +21,7 @@ class window.LeafletMap
     @buildRemoteLayer(url, name) for own name, url of opts.remote
     @addLayers(opts)
     @addSearchControl() if opts.search
+    @deletePopup = opts.deletepopup
     if opts.draw?
       @addDraw(opts.feature)
     else if opts.feature?
@@ -249,6 +250,12 @@ class window.LeafletMap
 
   drawFeature: (layer) =>
     @constructor.drawnItems.addLayer layer
+    if @deletePopup
+      domelem = document.createElement('a')
+      domelem.innerHTML = "#{CONSTANTS.i18n.delete}?</a>"
+      domelem.onclick = =>
+        @constructor.drawnItems.removeLayer layer
+      @constructor.drawnItems.bindPopup(domelem)
     @drawnLayerChanged()
 
   drawnLayerChanged: =>
