@@ -2,7 +2,7 @@ $(document).ready(function() {
   if ($('.user_location #user_location').length > 0) {
     var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation, userLocationPlaceholder,
       destLocation, constituencyLabelsEl, areaAroundEl, routeEl, wardLabelsEl, groupLabelsEl, userLocationEl,
-      locationEl, locationChange;
+      locationEl, locationChange, enableEl;
     map = new LeafletMap($('.map-data').data('center'), $('.map-data').data('opts'));
     startSearchControl = map.addSearchControl(
       {autoCollapse: false, collapsed: false, circleLocation: false,
@@ -139,12 +139,15 @@ $(document).ready(function() {
 
     map.map.on('move', mapMove);
 
+    enableEl = function(el) {
+      el.prop('disabled', false);
+      el.parent().removeClass('disabled');
+    };
+
     startSearchControl.on('search_locationfound', function(e) {
-      areaAroundEl.prop('disabled', false);
-      areaAroundEl.parent().removeClass("disabled");
+      enableEl(areaAroundEl);
       if (destLocation) {
-        routeEl.prop('disabled', false);
-        routeEl.parent().removeClass("disabled");
+        enableEl(routeEl);
       }
       startLocation = [e.latlng.lat, e.latlng.lng];
       if (userLocationPlaceholder){
@@ -154,8 +157,7 @@ $(document).ready(function() {
 
     destSearchControl.on('search_locationfound', function(e) {
       if (startLocation) {
-        routeEl.prop('disabled', false);
-        routeEl.parent().removeClass("disabled");
+        enableEl(routeEl);
       }
       destLocation = [e.latlng.lat, e.latlng.lng];
     });
@@ -197,13 +199,14 @@ $(document).ready(function() {
     if (navigator.geolocation) {
       var updateLocation = function(pos){
         var lat = pos.coords.latitude, lng = pos.coords.longitude;
-        areaAroundEl.prop('disabled', false);
+        enableEl(areaAroundEl);
         startLocation = [lat, lng];
         map.map.setView([lat, lng], 13);
         userLocationPlaceholder = userLocationEl.find('input').attr('placeholder');
         userLocationEl.find('input').attr('placeholder', userLocationEl.data('currentLocation'));
       };
-      $('#current_location').css('display','inline-block').click(function() {
+      $('#current_location').css('display','inline-block').click(function(e) {
+        e.preventDefault();
         navigator.geolocation.getCurrentPosition(updateLocation);
       });
     }
