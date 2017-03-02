@@ -33,7 +33,15 @@ ul.thread-metadata-listings {
 }
 
 li.ui-tabs-active.ui-state-active {
-    font-weight: bold;
+  font-weight: bold;
+}
+
+#page {
+  ul.tabs, ul.undo-clear {
+    a:hover {
+      border-bottom: none;
+    }
+  }
 }
 
 .ui-dialog .ui-dialog-titlebar-close span {
