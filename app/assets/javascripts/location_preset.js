@@ -141,6 +141,11 @@ $(document).ready(function() {
 
     startSearchControl.on('search_locationfound', function(e) {
       areaAroundEl.prop('disabled', false);
+      areaAroundEl.parent().removeClass("disabled");
+      if (destLocation) {
+        routeEl.prop('disabled', false);
+        routeEl.parent().removeClass("disabled");
+      }
       startLocation = [e.latlng.lat, e.latlng.lng];
       if (userLocationPlaceholder){
         userLocationEl.find('input').attr('placeholder', userLocationPlaceholder);
