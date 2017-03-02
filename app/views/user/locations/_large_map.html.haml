@@ -12,6 +12,10 @@
                 = t(".current_location")
             .leaflet-search-outside#user_location{data: {current_location: I18n.t("user.locations.large_map.current_location_placeholder")}}
           %li.boardered
+            %label.location-presets.disabled
+              = check_box_tag :area_around_me, '', false, disabled: true
+              = t(".area_around_me")
+          %li.boardered
             = t(".my_constituency")
             .constituency-labels
           %li.boardered
@@ -22,13 +26,9 @@
             .group-labels
           %li.boardered
             .leaflet-search-outside#dest_location
-            %label.location-presets
+            %label.location-presets.disabled
               = check_box_tag :route, '', false, disabled: true
               = t(".my_route")
-          %li.boardered
-            %label.location-presets
-              = check_box_tag :area_around_me, '', false, disabled: true
-              = t(".area_around_me")
 
           %li
             %ul.tabs.draw-options

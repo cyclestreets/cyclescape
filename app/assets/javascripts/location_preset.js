@@ -155,6 +155,7 @@ $(document).ready(function() {
     destSearchControl.on('search_locationfound', function(e) {
       if (startLocation) {
         routeEl.prop('disabled', false);
+        routeEl.parent().removeClass("disabled");
       }
       destLocation = [e.latlng.lat, e.latlng.lng];
     });
