@@ -264,7 +264,9 @@
   overflow: visible;
   float: none;
   display: inline-flex;
+  max-width: 220px;
   .search-input {
+    width: 154px;
     float: none;
   }
   .search-tooltip {
