@@ -307,7 +307,8 @@
 .map-tools-overlay-right .inputs ol .boardered {
   border-style: solid;
   border-width: thin;
-  border-color: $grey;
+  border-color: $grey3;
+  background: rgba(0, 0, 0, 0.08);
   overflow: initial;
 }
 
