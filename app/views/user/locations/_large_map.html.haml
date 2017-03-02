@@ -13,13 +13,13 @@
             .leaflet-search-outside#user_location{data: {current_location: I18n.t("user.locations.large_map.current_location_placeholder")}}
           %li.boardered
             = t(".my_constituency")
-            %span.constituency-labels
+            .constituency-labels
           %li.boardered
             = t(".my_ward")
-            %span.ward-labels
+            .ward-labels
           %li.boardered
             = t(".my_group")
-            %span.group-labels
+            .group-labels
           %li.boardered
             .leaflet-search-outside#dest_location
             %label.location-presets
@@ -31,7 +31,7 @@
               = t(".area_around_me")
 
           %li
-            %ul.draw-options
+            %ul.tabs.draw-options
               %li.area
                 %a(href='#area')
                   %span.area
@@ -55,6 +55,11 @@
                   %span.icon-clear
                   %span.txt
                     = t ".clear"
+            .panes
+              #area
+              #route
+              #point
+
   .hidden
     - opts = { draw: true, collisions: true, domid: "large-map", zoomposition: "topright", deletepopup: true,
       feature: item_to_geojson(resource), geoinput: resource.class.name.gsub('::','').underscore }
