@@ -30,7 +30,7 @@
               = check_box_tag :route, '', false, disabled: true
               = t(".my_route")
 
-          %li.boardered{style: "height: 120px;"}
+          %li.boardered{style: "height: 80px;"}
             %ul.tabs.draw-options
               %li.area
                 %a(href='#area')
@@ -44,17 +44,6 @@
                 %a(href='#point')
                   %span.point
                   = t ".point"
-            %ul.undo-clear
-              %li.icon-undo
-                %a.edit-undo
-                  %span.icon-undo
-                  %span.txt
-                    = t ".undo"
-              %li.icon-clear
-                %a.edit-clear
-                  %span.icon-clear
-                  %span.txt
-                    = t ".clear"
             .panes
               #area
               #route
