@@ -59,8 +59,7 @@ $(document).ready(function() {
 
     var jsonToCheckboxes = function(json, labelsEl, nameFn, idFn) {
       if (!nameFn) {
-        nameFn = function(feature) { return feature.properties.name; };
-      }
+        nameFn = function(feature) { return feature.properties.name; }; }
       if (!idFn) {
         idFn = function(feature){
           var hash = 0, name = nameFn(feature);
@@ -76,17 +75,21 @@ $(document).ready(function() {
 
       labelsEl.find('label').hide();
       labelsEl.find('input:checked').parent().show();
+      var features = json.features.sort(function(a, b){
+        if(nameFn(a) < nameFn(b)) return -1;
+        if(nameFn(a) > nameFn(b)) return 1;
+        return 0;
+      });
 
-      for (var f = 0, featuresLen = json.features.length; f < featuresLen; f++) {
-        var feature = json.features[f], id = idFn(feature), name = nameFn(feature),
-          checkbox = labelsEl.find('#' + id);
-        if (checkbox[0]) {
-          checkbox.parent().show();
-        } else {
-          var newEl = $('<label class="location-presets"><input type="checkbox" name="' +
+      for (var f = 0, featuresLen = features.length; f < featuresLen; f++) {
+        var feature = features[f], id = idFn(feature), name = nameFn(feature),
+          checkbox = labelsEl.find('#' + id),
+          newEl = $('<label class="location-presets"><input type="checkbox" name="' +
             id + '" id="' + id +'">' + name + '<br></label>').appendTo(labelsEl);
-          newEl.find('input').data('geo', feature.geometry).change(drawFeature);
+        if (checkbox[0]) {
+          checkbox.parent().remove();
         }
+        newEl.find('input').data('geo', feature.geometry).change(drawFeature);
       }
     };
 
