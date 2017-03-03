@@ -1185,9 +1185,6 @@
           other: You're now following %{count} additional threads.
       update:
         success: Location Updated
-      form:
-        last_months: In the past 3 months there have been
-        in_this_area: "issues in this area"
       large_map:
         <<: *edit_map
         area_around_me: Area around me
@@ -1198,6 +1195,8 @@
         my_constituency: "Constituencies: "
         my_group: "Groups: "
         my_route: "Route to destination"
+        last_months: In the past 3 months there have been
+        in_this_area: "issues in this area"
     prefs:
       edit:
         involvement: 'Involve me in:'

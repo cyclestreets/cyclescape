@@ -912,5 +912,11 @@ section.social {
 }
 
 .nos-issues {
-  display: flex;
+  position: absolute;
+  bottom: 0;
+  background: white;
+  left: 400px;
+  z-index: 2;
+  margin: 5px;
+  padding: 1px 4px;
 }

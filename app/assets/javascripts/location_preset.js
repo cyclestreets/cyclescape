@@ -25,7 +25,7 @@ $(document).ready(function() {
     constituencyLabelsEl = $('.constituency-labels');
     var nosIssues = $('#nos_issues');
     var updateNosIssues = function(issues){
-      nosIssues.html('&nbsp;' + issues.features.length + '&nbsp;');
+      nosIssues.text(issues.features.length);
     };
     var date = new Date();
     date.setMonth(date.getMonth() - 3);
