@@ -310,6 +310,13 @@
   border-color: $grey3;
   background: rgba(0, 0, 0, 0.08);
   overflow: initial;
+  padding: 0 5px;
+  &:first-child {
+    margin-top: 15px;
+  }
+  &:last-child {
+    margin-bottom: 15px;
+  }
 }
 
 #new_user_location {
