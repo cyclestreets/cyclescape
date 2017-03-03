@@ -12,9 +12,14 @@ $(document).ready(function() {
       {autoCollapse: false, collapsed: false, circleLocation: false,
         destLocation: true, textPlaceholder: 'Regular destination (optional)'}
     );
+    var moveMap = map.addSearchControl(
+      {autoCollapse: false, collapsed: false, circleLocation: false,
+        destLocation: true, textPlaceholder: 'Move the map'}
+    );
     $('.search-input').attr('size', 25);
     startSearchEl = startSearchControl.getContainer();
     destSearchEl = destSearchControl.getContainer();
+    $(moveMap.getContainer()).addClass('map-search-center');
     userLocationEl = $('#user_location');
     userLocationEl.append(startSearchEl);
     $('#dest_location').append(destSearchEl);
