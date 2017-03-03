@@ -255,6 +255,7 @@ class window.LeafletMap
       domelem.innerHTML = "#{CONSTANTS.i18n.delete}?</a>"
       domelem.onclick = =>
         @constructor.drawnItems.removeLayer layer
+        @drawnLayerChanged()
       @constructor.drawnItems.bindPopup(domelem)
     @drawnLayerChanged()
 
