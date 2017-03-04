@@ -207,31 +207,6 @@
   display: none !important;
 }
 
-.map-search {
-  position: absolute;
-  z-index: 1000;  // On top of map tiles
-  top: 8px;
-  left: 60px;
-  input[type="text"] {
-    width: 160px;
-    padding: 4px;
-  }
-  button {
-    padding: 4px;
-    font-size: 12px;
-  }
-  #map-search-status {
-    width: 225px;
-    padding: 4px;
-    background: white;
-    font-size: 10px;
-    color: #999;
-    ol > li {
-      font-weight: normal;
-    }
-  }
-}
-
 .leaflet-popup {
   .leaflet-popup-content-wrapper,
   .leaflet-popup-tip {
