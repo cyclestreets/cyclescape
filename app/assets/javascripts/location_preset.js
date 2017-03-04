@@ -11,8 +11,7 @@ $(document).ready(function() {
       {autoCollapse: false, collapsed: false, circleLocation: false, textPlaceholder: 'Regular destination (optional)'}
     );
     var moveMap = map.addSearchControl(
-      {autoCollapse: false, collapsed: false, circleLocation: false,
-        destLocation: true, textPlaceholder: 'Move the map'}
+      {circleLocation: false, textPlaceholder: 'Move the map'}
     );
     $('.search-input').attr('size', 25);
     startSearchEl = startSearchControl.getContainer();
