@@ -20,7 +20,7 @@ class window.LeafletMap
     @remoteJSONLayer = {}
     @buildRemoteLayer(url, name) for own name, url of opts.remote
     @addLayers(opts)
-    @addSearchControl() if opts.search
+    @addSearchControl() unless opts.nosearch
     @deletePopup = opts.deletepopup
     if opts.draw?
       @addDraw(opts.feature)

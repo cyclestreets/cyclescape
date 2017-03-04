@@ -55,7 +55,7 @@
 
   .hidden
     - opts = { draw: true, collisions: true, domid: "large-map", zoomposition: "topright", deletepopup: true,
-      feature: item_to_geojson(resource), geoinput: resource.class.name.gsub('::','').underscore }
+      feature: item_to_geojson(resource), geoinput: resource.class.name.gsub('::','').underscore, nosearch: true }
     - opts.merge!(extra_opts) if defined?(extra_opts)
     .map-data{"data-center" => location_to_geojson(location), "data-opts" => opts.to_json, "data-skip" => defined?(skip) }
 
