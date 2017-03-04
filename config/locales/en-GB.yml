@@ -234,9 +234,7 @@
 '
       no_issues_nearby_html: There's no issues in your area. You could %{add_issue_link},
         or %{add_location_link}.
-      location:
-        one: location
-        other: locations
+      location: location
       no_locations_guidance_html: You haven't set a location yet! If you %{add_some_locations_link},
         we will show you the nearby %{things} here.
       no_planning_applications_nearby_html: There are no planning applications in

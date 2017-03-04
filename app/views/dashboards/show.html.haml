@@ -113,7 +113,7 @@
           - elsif @planning_applications.empty?
             %p= t ".no_planning_applications_nearby_html", add_location_link: link_to(t(".add_another_location"), current_user_locations_path)
           - else
-            %p= t ".planning_applications_introduction_html", location_link: link_to(t(".location", count: current_user.locations.count), current_user_locations_path)
+            %p= t ".planning_applications_introduction_html", location_link: link_to(t(".location"), current_user_locations_path)
 
             - if @planning_applications.respond_to?(:total_pages)
               = paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
