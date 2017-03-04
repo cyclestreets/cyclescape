@@ -5,12 +5,10 @@ $(document).ready(function() {
       locationEl, locationChange, enableEl;
     map = new LeafletMap($('.map-data').data('center'), $('.map-data').data('opts'));
     startSearchControl = map.addSearchControl(
-      {autoCollapse: false, collapsed: false, circleLocation: false,
-        startLocation: true, textPlaceholder: 'Start/home location'}
+      {autoCollapse: false, collapsed: false, circleLocation: false, textPlaceholder: 'Start/home location'}
     );
     destSearchControl = map.addSearchControl(
-      {autoCollapse: false, collapsed: false, circleLocation: false,
-        destLocation: true, textPlaceholder: 'Regular destination (optional)'}
+      {autoCollapse: false, collapsed: false, circleLocation: false, textPlaceholder: 'Regular destination (optional)'}
     );
     var moveMap = map.addSearchControl(
       {autoCollapse: false, collapsed: false, circleLocation: false,
