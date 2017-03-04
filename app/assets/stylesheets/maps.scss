@@ -243,6 +243,7 @@
   .search-input {
     width: 154px;
     float: none;
+    max-width: 164px;
   }
   .search-tooltip {
     background-color: rgba(100, 100, 100, 255);
@@ -252,12 +253,13 @@
   }
 }
 
+
 .leaflet-control-search {
   input.search-input {
     padding: 7px;
     border: 1px solid #ddd;
     box-shadow: 3px 3px 5px 0px #aaa;
-    max-width: 164px;
+    width: 240px;
   }
 }
 
