@@ -24,12 +24,14 @@ describe GroupMembershipObserver do
       user.prefs.update_column(:involve_my_groups, 'subscribe')
       expect(thread.subscribers).not_to include(user)
       expect(thread.group.members).not_to include(user)
+      expect(user.prefs.involve_my_groups_admin).to eq(false)
       GroupMembership.observers.enable :group_membership_observer do
         group_membership.role = 'committee'
         group_membership.save
       end
       thread.reload
       expect(thread.subscribers).to include(user)
+      expect(user.prefs.reload.involve_my_groups_admin).to eq(true)
     end
 
     it "should not subscribe them if they don't want subscribing" do

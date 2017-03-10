@@ -7,7 +7,7 @@ class GroupMembershipObserver < ActiveRecord::Observer
 
       # Subscribe new committee members to committee threads, if appropriate
       if group_membership.role == 'committee'
-
+        user.prefs.update(involve_my_groups_admin: true)
         if user.prefs.involve_my_groups == 'subscribe'
           group.threads.where(privacy: 'committee').each do |thread|
             thread.add_subscriber(user)
