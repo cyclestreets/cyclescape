@@ -35,11 +35,13 @@ class Notifications < ActionMailer::Base
     @group = request.group
     @request = request
     if @group.prefs.notify_membership_requests?
-      if @group.prefs.membership_secretary
-        mail to: @group.prefs.membership_secretary.name_with_email,
-             subject: t('mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
-      elsif !@group.email.blank?
-        mail to: @group.name_with_email,
+      email_address = if @group.prefs.membership_secretary
+                        @group.prefs.membership_secretary.name_with_email
+                      elsif @group.email.present?
+                        @group.name_with_email
+                      end
+      if email_address
+        mail to: email_address,
              subject: t('mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name)
       end
     end

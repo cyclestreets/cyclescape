@@ -17,6 +17,11 @@ class ThreadMailer < ActionMailer::Base
     @message = message
     @thread = message.thread
     @subscriber = subscriber
+    subject = if @thread.try(:private_to_committee?)
+                "mailers.thread_mailer.common.committee_subject"
+              else
+                "mailers.thread_mailer.common.subject"
+              end
     if @message.notification_name == :new_deadline_message
       cal = Icalendar::Calendar.new
       cal.add_event(@message.component.to_ical)
@@ -24,7 +29,7 @@ class ThreadMailer < ActionMailer::Base
                                      content: cal.to_ical }
     end
     mail(to: subscriber.name_with_email,
-         subject: t('mailers.thread_mailer.common.subject', title: @thread.title, count: @thread.messages.count),
+         subject: t(subject, title: @thread.title, count: @thread.messages.count),
          from: user_notification_address(message.created_by),
          references: message_chain(@message.in_reply_to, @thread),
          message_id: message_address(@message),
