@@ -68,8 +68,9 @@ class MessageThread < ActiveRecord::Base
   scope :without_issue,    -> { where(issue_id: nil) }
   scope :approved,         -> { where(status: 'approved') }
   scope :mod_queued,       -> { where(status: 'mod_queued') }
-  scope :private_for, ->(usr) { where(privacy: 'private').
-                                where("created_by_id = ? OR user_id = ?", usr.id, usr.id) }
+  scope :private_for, ->(usr) do
+    where(privacy: 'private').where(arel_table[:created_by_id].eq(usr.id).or(arel_table[:user_id].eq(usr.id)))
+  end
 
   default_scope { where(deleted_at: nil) }
 
