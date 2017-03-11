@@ -496,7 +496,10 @@ section#user-locations {
         }
         h4 {
           a {
-            color:$black;
+            color: $black;
+            &.new {
+              color: $lightblue;
+            }
           }
         }
         p {
