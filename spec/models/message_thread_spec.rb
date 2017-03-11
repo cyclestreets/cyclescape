@@ -36,8 +36,27 @@ describe MessageThread do
     let!(:thread_from) { create(:message_thread, privacy: 'private', created_by: user) }
     let!(:thread_to)   { create(:message_thread, privacy: 'private', user: user) }
 
+
     it 'has private_for' do
       expect(described_class.private_for(user)).to match_array [thread_from, thread_to]
+    end
+
+    it ".unviewed_for" do
+      # with no thread views
+      create(:message, thread: thread_from)
+      create(:message, thread: thread_to)
+      expect(described_class.unviewed_for(user)).to match_array [thread_to, thread_from]
+
+      # with one recent thread view
+      create :thread_view, thread: thread_to, viewed_at: 1.hour.ago, user: thread_to.created_by
+      user_view = create :thread_view, thread: thread_to, viewed_at: 1.hour.ago, user: user
+      create :thread_view, thread: thread_from, viewed_at: 1.hour.from_now, user: thread_to.created_by
+      create :thread_view, thread: thread_from, viewed_at: 1.hour.from_now, user: user
+      expect(described_class.unviewed_for(user)).to eq [thread_to]
+
+      # where both threads have been viewed recently
+      user_view.update_column(:viewed_at, 1.hour.from_now)
+      expect(described_class.unviewed_for(user)).to eq []
     end
   end
 

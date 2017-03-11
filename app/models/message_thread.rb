@@ -71,6 +71,15 @@ class MessageThread < ActiveRecord::Base
   scope :private_for, ->(usr) do
     where(privacy: 'private').where(arel_table[:created_by_id].eq(usr.id).or(arel_table[:user_id].eq(usr.id)))
   end
+  scope :unviewed_for, ->(usr) do
+      messages = Message.arel_table
+      thread_views = ThreadView.arel_table
+      approved.joins(:latest_message,
+        arel_table.join(thread_views, Arel::Nodes::OuterJoin)
+        .on(thread_views[:thread_id].eq(arel_table[:id]), thread_views[:user_id].eq(usr.id)).join_sources)
+        .merge(Message.approved)
+        .where(messages[:created_at].gt(thread_views[:viewed_at]).or(thread_views[:viewed_at].eq(nil)))
+  end
 
   default_scope { where(deleted_at: nil) }
 
@@ -124,6 +133,10 @@ class MessageThread < ActiveRecord::Base
                 AS m2
                 ON m2.thread_id = message_threads.id")
       rel.order('m2.deadline ASC')
+    end
+
+    def unviewed_private_count(user)
+      private_for(user).unviewed_for(user).count
     end
   end
 
