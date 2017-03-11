@@ -176,3 +176,17 @@ body.tags #menu-tags {
   border: 1px solid #ddd;
   display: inline-block;
 }
+
+.text-image-overlay {
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  text-align: center;
+  background: red;
+  border-radius: 50%;
+  top: 16px;
+  right: 81px;
+  font-size: 60%;
+  line-height: 13px;
+  text-indent: 0;
+}

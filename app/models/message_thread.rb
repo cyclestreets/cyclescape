@@ -59,16 +59,27 @@ class MessageThread < ActiveRecord::Base
   has_many :deadline_messages, foreign_key: :thread_id, inverse_of: :thread
   has_many :thread_leader_messages, -> { active }, dependent: :destroy, foreign_key: :thread_id
   has_many :leaders, through: :thread_leader_messages, source: :created_by, inverse_of: :leading_threads
-  has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: 'thread_id'
-  has_one :latest_message, -> { order('created_at DESC').approved }, foreign_key: 'thread_id',  class_name: 'Message'
+  has_many :thread_views, inverse_of: :thread, foreign_key: :thread_id, dependent: :destroy
+  has_and_belongs_to_many :tags, join_table: 'message_thread_tags', foreign_key: :thread_id
+  has_one :latest_message, -> { order('created_at DESC').approved }, foreign_key: :thread_id,  class_name: 'Message'
 
   scope :is_public,        -> { where(privacy: 'public') }
   scope :with_issue,       -> { where.not(issue_id: nil) }
   scope :without_issue,    -> { where(issue_id: nil) }
   scope :approved,         -> { where(status: 'approved') }
   scope :mod_queued,       -> { where(status: 'mod_queued') }
-  scope :private_for, ->(usr) { where(privacy: 'private').
-                                where("created_by_id = ? OR user_id = ?", usr.id, usr.id) }
+  scope :private_for, ->(usr) do
+    where(privacy: 'private').where(arel_table[:created_by_id].eq(usr.id).or(arel_table[:user_id].eq(usr.id)))
+  end
+  scope :unviewed_for, ->(usr) do
+      messages = Message.arel_table
+      thread_views = ThreadView.arel_table
+      approved.joins(:latest_message,
+        arel_table.join(thread_views, Arel::Nodes::OuterJoin)
+        .on(thread_views[:thread_id].eq(arel_table[:id]), thread_views[:user_id].eq(usr.id)).join_sources)
+        .merge(Message.approved)
+        .where(messages[:created_at].gt(thread_views[:viewed_at]).or(thread_views[:viewed_at].eq(nil)))
+  end
 
   default_scope { where(deleted_at: nil) }
 
@@ -122,6 +133,10 @@ class MessageThread < ActiveRecord::Base
                 AS m2
                 ON m2.thread_id = message_threads.id")
       rel.order('m2.deadline ASC')
+    end
+
+    def unviewed_private_count(user)
+      private_for(user).unviewed_for(user).count
     end
   end
 
