@@ -14,6 +14,7 @@ class GroupsController < ApplicationController
         recent_threads = ThreadList.recent_public_from_groups(group, 10)
       end
       @recent_threads = ThreadListDecorator.decorate_collection recent_threads.includes(:issue, :group, :latest_message)
+      @unviewed_thread_ids = recent_threads.unviewed_for(current_user).ids.uniq
       @recent_issues = IssueDecorator.decorate_collection group.recent_issues.limit(10).includes(:created_by)
       @group = GroupDecorator.decorate group
     else
@@ -70,6 +71,7 @@ class GroupsController < ApplicationController
       end
       paginate page: params[:thread_page], per_page: 40
     end
+    @unviewed_thread_ids = MessageThread.where(id: threads.results.map(&:id)).unviewed_for(current_user).ids.uniq
     @threads = ThreadListDecorator.decorate_collection threads.results
 
     # Issues
