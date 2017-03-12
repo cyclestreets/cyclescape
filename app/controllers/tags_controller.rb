@@ -13,6 +13,8 @@ class TagsController < ApplicationController
         unfiltered_results.select{ |t| permitted_to?(:show, t) }).page(params[:thread_page])
 
       @threads = ThreadListDecorator.decorate_collection threads
+      @unviewed_thread_ids = MessageThread.where(id: threads.map(&:id)).unviewed_for(current_user).ids.uniq
+
       @library_items = Library::Item.find_by_tag(@tag).order('updated_at desc').page(params[:library_page])
     else
       @unrecognised_tag_name = params[:id]

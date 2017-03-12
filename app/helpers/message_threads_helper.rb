@@ -53,7 +53,7 @@ module MessageThreadsHelper
   end
 
   def render_threads_list(threads, options = {})
-    defaults = { partial: 'message_threads/list', collection: threads, as: :thread }
+    defaults = { partial: 'shared/message_threads_list', collection: threads, as: :thread }
     render defaults.merge(options)
   end
 

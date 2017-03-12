@@ -5,6 +5,7 @@ describe 'home/show.html.haml', type: :view do
     user = create :user
     assign :current_user, user
     assign :latest_threads, []
+    assign :unviewed_thread_ids, []
     warden.set_user user
   end
 

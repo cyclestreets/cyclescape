@@ -6,5 +6,5 @@
   = paginate @threads
   .clear
   %ul.thread-list
-    = render partial: "message_threads/list", collection: @threads, as: :thread
+    = render partial: "shared/message_threads_list", collection: @threads, as: :thread
   = paginate @threads

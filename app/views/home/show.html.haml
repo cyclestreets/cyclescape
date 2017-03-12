@@ -10,7 +10,7 @@
     %h2= t ".latest_discussions"
     %ul.thread-list.latest-discussions
       - @latest_threads.each do |thread|
-        = render partial: "message_threads/list", locals: {thread: thread}
+        = render partial: "shared/message_threads_list", locals: {thread: thread}
 
 %aside#sidebar
   %section.homepage-groups
