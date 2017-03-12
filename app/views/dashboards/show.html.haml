@@ -20,7 +20,7 @@
                 - @subscribed_threads.each do |thread|
                   %tr
                     %td.title
-                      %h4= link_to thread.title, thread_path(thread), class: (@unviewed_threads.include?(thread) ? "new" : "")
+                      %h4= link_to thread.title, thread_path(thread), class: (@unviewed_thread_ids.include?(thread.id) ? "new" : "")
                       - if thread.has_issue?
                         %p= thread.issue_link
                     %td.activity
