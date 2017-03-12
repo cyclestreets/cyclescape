@@ -1,6 +1,7 @@
 %li{class: thread.icon_class, data: {'thread-id' => thread.id}}
   .item-content
-    %h4= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread), class: "primary-link"
+    - link_class = (@unviewed_thread_ids.include?(thread.id) ? "new primary-link" : "primary-link")
+    %h4= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread), class: link_class
     .meta
       %p
         - if thread.group
@@ -9,7 +10,7 @@
         - if permitted_to? :show, thread
           - if thread.issue
             = t ".discussion_on_issue"
-            = link_to(thread.issue.title, issue_path(thread.issue))
+            = link_to thread.issue.title, issue_path(thread.issue)
             %br
           - if permitted_to? :view_profile, thread.latest_activity_by
             = link_to_profile(thread.latest_activity_by)

@@ -3,6 +3,7 @@ class MessageThreadsController < ApplicationController
 
   def index
     threads = ThreadList.recent_public.page(params[:page])
+    @unviewed_thread_ids = threads.unviewed_for(current_user).ids.uniq
     @threads = ThreadListDecorator.decorate_collection threads
   end
 
