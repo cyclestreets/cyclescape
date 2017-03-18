@@ -8,6 +8,29 @@ jQuery ->
   # Tabs
   $(".tabs").parent().tabs()
 
+  unviewed_private_count = $("#unviewed-pm-count")
+
+  updatePmCount = (count)->
+    if count > 0
+      unviewed_private_count.text(count).addClass("text-image-overlay")
+    else
+      unviewed_private_count.removeClass("text-image-overlay")
+
+
+  if unviewed_private_count[0]
+    updatePmCount($.cookie('unviewed_private_count'))
+    getPmCount = ()->
+      $.ajax
+        type: "GET"
+        url: "/private_messages"
+        dataType: "json"
+        success: (data) ->
+          $.cookie('unviewed_private_count', data.count)
+          updatePmCount(data.count)
+
+    setTimeout(getPmCount, 5000)
+    setTimeout(getPmCount, 20000)
+
   $(document).on("keypress", "input.search-input", (event) ->
     # do not submit from when searching
     event.preventDefault() if (event.keyCode == 13)

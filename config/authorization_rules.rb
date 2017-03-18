@@ -170,6 +170,7 @@ authorization do
       if_permitted_to :send_private_message
     end
     has_permission_on :users_private_message_threads, to: [:index]
+    has_permission_on :private_messages, to: [:index]
   end
 
   role :guest do

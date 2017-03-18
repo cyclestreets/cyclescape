@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     get 'overview/search', to: 'groups#search'
   end
 
+  get "private_messages", to: "private_messages#index"
+
   resource :overview, as: :dashboard, controller: 'dashboards' do
     get :search
   end

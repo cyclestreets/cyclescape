@@ -72,7 +72,6 @@ class MessageThread < ActiveRecord::Base
   scope :private_for, ->(usr) do
     is_private.where(arel_table[:created_by_id].eq(usr.id).or(arel_table[:user_id].eq(usr.id)))
   end
-  scope :private_from_others, ->(usr) { is_private.where(user: usr) }
   scope :unviewed_for, ->(usr) do
     return none unless usr
     messages = Message.arel_table
@@ -139,7 +138,7 @@ class MessageThread < ActiveRecord::Base
     end
 
     def unviewed_private_count(user)
-      private_from_others(user).unviewed_for(user).count
+      private_for(user).unviewed_for(user).count
     end
   end
 

@@ -36,11 +36,9 @@
           - if current_user
             %li.name= link_to current_user.name, current_user_profile_path
             - if MessageThread.private_for(current_user).exists?
-              - unviewed_pms = MessageThread.private_for(current_user).unviewed_for(current_user).count
               %li
                 %a{href: user_private_messages_path(current_user), class: 'private-messages', title: t('.private_messages')}
-                  - if unviewed_pms > 0
-                    .text-image-overlay= MessageThread.private_for(current_user).unviewed_for(current_user).count
+                  #unviewed-pm-count
             %li.sign-out= link_to t(".sign_out"), destroy_user_session_path, method: "delete"
           - else
             - if permitted_to? :create, :devise_registrations
