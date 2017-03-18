@@ -5,7 +5,7 @@
     - @private_threads.each do |thread|
       %tr
         %td.title
-          %h4= link_to thread.title, thread_path(thread)
+          %h4= link_to thread.title, thread_path(thread), class: (@unviewed_thread_ids.include?(thread.id) ? "new" : "")
         %td.activity
           = t '.with_html', other: link_to_profile(thread.other(current_user))
         %td.activity
