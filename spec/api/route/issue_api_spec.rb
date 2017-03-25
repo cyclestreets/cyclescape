@@ -22,13 +22,13 @@ describe Route::IssueApi do
 
     context 'with a geo_collection' do
       let!(:issue) { create :issue_within_quahog }
-      let(:quahog_loc) { build(:quahogcc_group_profile).location }
+      let(:locables) { [ build_stubbed(:quahogcc_group_profile), build_stubbed(:small_group_profile)] }
       let(:host) { "" }
 
       before do
         create :issue
-        geo_feature = RGeo::GeoJSON::Feature.new(quahog_loc)
-        geo_collection = RGeo::GeoJSON.encode(RGeo::GeoJSON::FeatureCollection.new([geo_feature]))
+        geo_features = locables.map { |loc| RGeo::GeoJSON::Feature.new(loc.location) }
+        geo_collection = RGeo::GeoJSON.encode(RGeo::GeoJSON::FeatureCollection.new(geo_features))
         get "#{host}/api/issues", geo_collection: geo_collection.to_json
       end
 

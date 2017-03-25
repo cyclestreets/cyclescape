@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :library_item_message do
     association :created_by, factory: :user
-    association :message, factory: :message
+    message
 
     after(:build) do |o|
       o.thread = o.message.thread

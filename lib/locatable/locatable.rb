@@ -15,17 +15,19 @@ module Locatable
     # define an intersects method for arel queries
     # Note - pass in the location as an array, otherwise .each is called on
     # multipolygons and it serializes to multiple geometries.
-    def intersects(l)
-      return none unless l.present?
-      l = l.envelope if l.geometry_type == RGeo::Feature::GeometryCollection
-      where('ST_Intersects(ST_CollectionExtract(location, 3), ?) OR
-             ST_Intersects(ST_CollectionExtract(location, 2), ?) OR
-             ST_Intersects(ST_CollectionExtract(location, 1), ?)', [l], [l], [l])
+    def intersects(loc)
+      sanatize_multi_geoms(loc) do |l|
+        where('ST_Intersects(ST_CollectionExtract(location, 3), ?) OR
+               ST_Intersects(ST_CollectionExtract(location, 2), ?) OR
+               ST_Intersects(ST_CollectionExtract(location, 1), ?)', [l], [l], [l])
+      end
     end
 
     # define a variant of intersects that doesn't include entirely surrouding polygons
-    def intersects_not_covered(l)
-      intersects(l).where('NOT ST_CoveredBy(?, ST_Envelope(location))', [l])
+    def intersects_not_covered(loc)
+      sanatize_multi_geoms(loc) do |l|
+        intersects(l).where('NOT ST_CoveredBy(?, ST_Envelope(location))', [l])
+      end
     end
 
     def rgeo_factory
@@ -42,6 +44,14 @@ module Locatable
 
     def select_area
       select('*, -ST_Area(location) AS area')
+    end
+
+    private
+
+    def sanatize_multi_geoms(l)
+      return none unless l.present?
+      l = l.envelope if l.geometry_type == RGeo::Feature::GeometryCollection
+      yield l
     end
   end
 
@@ -109,4 +119,5 @@ module Locatable
       RGeo::GeoJSON::Feature.new(location)
     end
   end
+
 end
