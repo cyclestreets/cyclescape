@@ -19,6 +19,10 @@ FactoryGirl.define do
       association :document, factory: :library_document
     end
 
+    trait :with_location do
+      loc_json '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
+    end
+
     factory :library_note_with_document, traits: [:with_document]
 
     after(:create) { |note| note.run_callbacks(:commit)}

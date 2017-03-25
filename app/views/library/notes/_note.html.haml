@@ -7,5 +7,5 @@
   %article.map
     #map
     .hidden
-      .map-data{"data-center" => location_to_geojson(note.location),
-        "data-opts" => { feature: item_to_geojson(note) }.to_json}
+      .map-data{"data-center" => location_to_geojson(note.item.location),
+        "data-opts" => { feature: item_to_geojson(note.item) }.to_json}
