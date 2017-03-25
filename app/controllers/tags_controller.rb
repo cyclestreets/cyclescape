@@ -23,6 +23,6 @@ class TagsController < ApplicationController
   end
 
   def index
-    Tag.top_tags(200)
+    @tags = Tag.top_tags(200)
   end
 end
