@@ -39,6 +39,11 @@ authorization do
       to :manage
       if_attribute committee_members: contains { user }
     end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
+      to :manage
+      if_attribute committee_members: contains { user }
+    end
+
     has_permission_on :group_potential_members do
       to [:new, :create]
       if_attribute committee_members: contains { user }
