@@ -782,7 +782,7 @@ cs-CZ:
       funding_from: Za podpory %{name}
       funding_from_and_created_by: Web Cyklisté sobě byl podpořen %{name}
       planning_application_data: Planning application data from PlanIt
-      top_html: Zpět na začátek &uarr;
+      top: Zpět na začátek
       cyclescape_blog: Blog Cyclescape
       privacy: Zásady ochrany osobních údajů
       user_guide: Uživatelská příručka
