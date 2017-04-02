@@ -1,5 +1,5 @@
 class MessageThreadsController < ApplicationController
-  filter_access_to :show, :edit, :update, :approve, :reject, :close, :open, attribute_check: true
+  filter_access_to :show, :edit, :update, :approve, :reject, :close, :open, :destroy, attribute_check: true
 
   def index
     threads = ThreadList.recent_public.page(params[:page])
