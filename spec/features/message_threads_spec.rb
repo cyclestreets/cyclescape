@@ -189,17 +189,35 @@ describe 'Message threads', type: :feature do
     end
 
     context 'delete' do
-      before do
-        visit thread_path(thread)
+      context "as a normal user" do
+        before do
+          visit thread_path(thread)
+        end
+
+        it 'should not show a delete link' do
+          expect(page).not_to have_content(delete_thread)
+        end
+
+        it 'should not let you delete a thread' do
+          page.driver.delete thread_path(thread)
+          expect(page).to have_content('You are not authorised to access that page.')
+        end
       end
 
-      it 'should not show a delete link' do
-        expect(page).not_to have_content(delete_thread)
-      end
+      context "as a committee member" do
+        before do
+          thread.update(group: create(:group))
+          current_user.memberships.create(group: thread.group, role: "committee")
+          visit thread_path(thread)
+        end
 
-      it 'should not let you delete a thread' do
-        page.driver.delete thread_path(thread)
-        expect(page).to have_content('You are not authorised to access that page.')
+        it 'should show a delete link and thread is delete-able' do
+          expect(page).to have_content(delete_thread)
+
+          page.driver.delete thread_path(thread)
+          expect(page).to_not have_content('You are not authorised to access that page.')
+          expect(page.driver.response.location).to eq(threads_url)
+        end
       end
     end
 
