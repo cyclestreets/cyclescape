@@ -1,6 +1,5 @@
 module Route
   class IssueApi < Base
-    desc 'Returns issues as a GeoJSON collection'
     paginate paginate_settings
 
     params do
@@ -74,10 +73,12 @@ module Route
     end
 
     resource do
+      desc 'Returns issues as a GeoJSON collection'
       get :issues do
         post_or_get_issue
       end
 
+      desc 'Returns issues as a GeoJSON collection'
       post :issues do
         post_or_get_issue
       end

@@ -7,7 +7,7 @@ describe Route::IssueApi do
 
   describe 'GET /' do
     context 'pagination' do
-      before { create_list :issue, 201 }
+      before { create_list :issue, 201, created_by: create(:user) }
 
       it "has default pagination" do
         get "api/issues"
