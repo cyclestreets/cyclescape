@@ -14,7 +14,7 @@ class TagsController < ApplicationController
       ).page(params[:thread_page])
 
       @threads = ThreadListDecorator.decorate_collection threads
-      @unviewed_thread_ids = MessageThread.where(id: threads.map(&:id)).unviewed_for(current_user).ids.uniq
+      @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
 
       @library_items = Library::Item.find_by_tag(@tag).order('updated_at desc').page(params[:library_page])
     else

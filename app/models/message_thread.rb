@@ -140,6 +140,18 @@ class MessageThread < ActiveRecord::Base
     def unviewed_private_count(user)
       private_for(user).unviewed_for(user).count
     end
+
+    # @param user [User]
+    # @param threads [Array<MessageThread>] or [ActiveRecord::Relation<MessageThread>] of threads ask if the user has viewed
+    # @return [Array<Integer>] ids of unviewed threads
+    def unviewed_thread_ids(user: user, threads: threads)
+      ids = if threads.is_a?(ActiveRecord::Relation) && !threads.loaded?
+              threads.ids
+            else
+              threads.map(&:id)
+            end
+      where(id: ids).unviewed_for(user).distinct.ids
+    end
   end
 
   def display_title
