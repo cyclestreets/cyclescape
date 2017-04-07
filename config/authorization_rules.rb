@@ -109,7 +109,7 @@ authorization do
     end
     has_permission_on :message_threads do
       to :close
-      if_attribute subscribers: contains { user }, latest_activity_at_to_i: lt { 48.hours.ago.to_i }, closed: is { false }
+      if_attribute subscribers: contains { user }, closed: is { false }
     end
     has_permission_on :messages do
       to [:approve, :reject]

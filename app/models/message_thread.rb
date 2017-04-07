@@ -269,10 +269,6 @@ class MessageThread < ActiveRecord::Base
     messages.approved.empty? ? updated_at : messages.approved.maximum('messages.updated_at')
   end
 
-  def latest_activity_at_to_i
-    latest_activity_at.to_i
-  end
-
   def latest_activity_by
     messages.approved.empty? ? created_by : messages.approved.last.created_by
   end
