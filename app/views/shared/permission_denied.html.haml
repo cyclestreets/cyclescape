@@ -1,3 +1,6 @@
 %p= t('application.permission_denied')
--if @group
-  %p= t(".apply_to_group_html", group_name: @group.name, join_link: new_group_membership_request_path(@group))
+- if @group
+  - if current_user.non_committee_member_of? @group
+    %p= t(".committee_only_html", group_link: link_to_group_home(@group))
+  - else
+    %p= t(".apply_to_group_html", group_name: @group.name, join_link: new_group_membership_request_path(@group))

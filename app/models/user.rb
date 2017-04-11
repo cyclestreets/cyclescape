@@ -208,6 +208,10 @@ class User < ActiveRecord::Base
     return membership_requests.where(group_id: group.id, status: :pending).count > 0
   end
 
+  def non_committee_member_of?(group)
+    memberships.where(group: group, role: "member").exists?
+  end
+
   def update_remembered_group(group)
     # Not using association to avoid validation checks
     new_id = group.try(:id)
