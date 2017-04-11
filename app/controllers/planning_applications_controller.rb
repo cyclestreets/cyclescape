@@ -56,7 +56,7 @@ class PlanningApplicationsController < ApplicationController
     planning_application = if params[:id]
                              PlanningApplication.find(params[:id])
                            else
-                             PlanningApplication.find_by!(uid: params[:uid])
+                             PlanningApplication.for_local_authority(params[:authority_param]).find_by!(uid: params[:uid])
                            end
     @planning_application = PlanningApplicationDecorator.decorate planning_application
   end

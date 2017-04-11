@@ -127,7 +127,7 @@ Rails.application.routes.draw do
 
   resources :planning_applications do
     get :search, on: :collection
-    get 'uid/*uid', action: :show_uid, on: :collection, as: :show_uid
+    get 'uid/:authority_param/*uid', action: :show_uid, on: :collection, as: :show_uid
     member do
       get :geometry
       put :hide, :unhide

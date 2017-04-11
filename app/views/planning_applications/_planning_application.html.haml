@@ -6,7 +6,7 @@
   %td.title
     - title_length= planning_application.part_hidden? ? 80 : 150
     %h3{title: planning_application.title}= link_to (truncate planning_application.title, length: title_length, separator: ' '),
-      show_uid_planning_applications_path(planning_application.uid)
+      show_uid_planning_applications_path(authority_param: planning_application.authority_param, uid: planning_application.uid)
     - if planning_application.part_hidden?
       .tag-item
         = t ".part_hidden"

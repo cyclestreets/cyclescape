@@ -23,20 +23,22 @@
 #
 
 class PlanningApplication < ActiveRecord::Base
-  NOS_HIDE_VOTES = 2
+  NOS_HIDE_VOTES = 2.freeze
 
   include Locatable
 
   has_one :issue
   has_many :hide_votes
   has_many :users, through: :hide_votes
-  scope :not_hidden, -> { where('hide_votes_count < ?', NOS_HIDE_VOTES) }
-  scope :ordered, -> { order('start_date DESC') }
+  scope :not_hidden, -> { where(arel_table[:hide_votes_count].lt(NOS_HIDE_VOTES)) }
+  scope :ordered, -> { order(start_date: :desc) }
   scope :relevant, -> { where(relevant: true) }
+  scope :for_local_authority, ->(la) { where(arel_table[:authority_param].matches(la.parameterize)) }
 
-  validates :uid, :url, presence: true
-  validates :uid, uniqueness: { scope: :authority_name }
+  validates :uid, :url, :authority_name, :authority_param, presence: true
+  validates :uid, uniqueness: { scope: :authority_param }
   before_save :set_relevant
+  before_validation :set_authority_param, on: :create
 
   class << self
     def remove_old
@@ -96,4 +98,7 @@ class PlanningApplication < ActiveRecord::Base
     true
   end
 
+  def set_authority_param
+    self.authority_param = authority_name.try(:parameterize)
+  end
 end
