@@ -11,7 +11,7 @@ cs-CZ:
         short_name: Subdoména
       group_request:
         name: Jméno
-        short_name: Navržená webová adresy Cyklisté sobě
+        short_name: Navržená webová adresy Cyclescape
         website: Webové stránky
         email: Emailová adresa
         default_thread_privacy: Výchozí viditelnost pro diskuzní vlákna
@@ -95,7 +95,7 @@ cs-CZ:
         message: Krátký popis účelu skupiny (slouží jako ochrana proti spamu)
       group_membership:
         email: Prosím zadejte jejich email. Pokud se shoduje s emailem existujícího
-          uživatele Cyklisté sobě, bude přímo přidán do skupiny. Jinak mu bude odeslána
+          uživatele Cyclescape, bude přímo přidán do skupiny. Jinak mu bude odeslána
           pozvánka.
         full_name: Prosím zadejte jejich jméno, až přijmou pozvánku, tak si ho budou
           si ho moci změnit.
@@ -111,7 +111,7 @@ cs-CZ:
           pole prázdné, tak budou upozornění přicházet na email místní skupiny.
       group_profile:
         joining_instructions: Instrukce, které jsou ukázány lidem, kteří se chtějí
-          zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné.
+          zapojit do této místní skupiny Cyclescape. Můžete nechat toto pole prázdné.
         new_user_email: Tento text bude odeslán každému novému členovy skupiny, řetězec
           {{full_name}} bude nahrazen plným jménem uživatele.
         picture: Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů
@@ -142,12 +142,12 @@ cs-CZ:
       issue:
         external_url: http://www.example.com
       group_membership_request:
-        message: Prosím přidejte mě do místní skupiny Cyklisté sobě.
+        message: Prosím přidejte mě do místní skupiny Cyclescape.
       library/note:
         url: http://www.example.com
       group_profile:
         new_user_email: Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny
-          Cyklisté sobě na portálu http://www.cyklistesobe.cz
+          Cyclescape na portálu https://www.cyclescape.org/
     actions:
       update: Uložit
       saving: Ukládám…
@@ -181,7 +181,7 @@ cs-CZ:
       photo_message:
         create: Přidat fotografii
       cyclestreets_photo_message:
-        create: Přidat fotografii Cyklisté sobě
+        create: Přidat fotografii Cyclescape
       street_view_message:
         create: Přidat pohled ze Street view
       site_comment:
