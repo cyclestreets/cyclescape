@@ -5,12 +5,13 @@
         %ul
           - if @site_config.facebook_link
             %li
-              %a(href=@site_config.facebook_link class="facebook")
-                = t(".facebook_page")
+              %a(href="#{@site_config.facebook_link}" class="facebook")
+                = t(".facebook_page", application_name: @site_config.application_name)
           - if @site_config.twitter_link
             %li
-              %a(href=@site_config.twitter_link class="twitter")
+              %a(href="#{@site_config.twitter_link}" class="twitter")
                 = t(".twitter_page")
+                = t(".twitter_page", application_name: @site_config.application_name)
           %li
             %small= t(".github_page_link_html")
           %li
@@ -18,7 +19,7 @@
           %li
             %small= link_to t(".whats_new"), page_path("changelog")
           %li
-            %small= link_to t(".cyclescape_blog"), 'http://blog.cyclescape.org/'
+            %small= link_to t(".cyclescape_blog", application_name: @site_config.application_name), 'http://blog.cyclescape.org/'
           %li
             %small= link_to t(".user_guide"), 'http://blog.cyclescape.org/guide/'
           %li
@@ -39,3 +40,4 @@
           - if logo = @site_config.public_send("funder_image_footer#{nlogo}")
             %li
               = link_to image_tag(logo.url, {title: t(".funding_from", name: @site_config.public_send("funder_name_footer#{nlogo}")), :alt => 'Logo'}), @site_config.public_send("funder_url_footer#{nlogo}"), :target => "_blank"
+%a.back-to-top(href="#")= t(".top")
