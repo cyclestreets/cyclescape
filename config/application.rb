@@ -58,6 +58,7 @@ module Cyclescape
     # Default notification e-mail from address
     config.default_email_from_domain = 'cyclescape.org'
     config.default_email_from = 'Cyclescape <info@cyclescape.org>'
+    config.application_name = 'Cyclescape'
 
     # Git info
     config.git_hash = `git rev-parse --short HEAD`.chomp

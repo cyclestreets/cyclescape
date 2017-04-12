@@ -5,10 +5,10 @@
         %ul
           %li
             %a(href="https://www.facebook.com/CycleStreets" class="facebook")
-              = t(".facebook_page")
+              = t(".facebook_page", application_name: Rails.application.config.application_name)
           %li
             %a(href="https://twitter.com/cyclescape" class="twitter")
-              = t(".twitter_page")
+              = t(".twitter_page", application_name: Rails.application.config.application_name)
           %li
             %small= t(".github_page_link_html")
           %li
@@ -16,7 +16,7 @@
           %li
             %small= link_to t(".whats_new"), page_path("changelog")
           %li
-            %small= link_to t(".cyclescape_blog"), 'http://blog.cyclescape.org/'
+            %small= link_to t(".cyclescape_blog", application_name: Rails.application.config.application_name), 'http://blog.cyclescape.org/'
           %li
             %small= link_to t(".user_guide"), 'http://blog.cyclescape.org/guide/'
           %li

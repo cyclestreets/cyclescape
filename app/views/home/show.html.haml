@@ -1,6 +1,6 @@
 %article#content
   %section.top-box
-    %h1= t ".introduction_html"
+    %h1= t(".introduction_html", application_name: Rails.application.config.application_name)
   %section.center-box
     %h2= t ".center_box_title"
     .inner
@@ -14,8 +14,8 @@
 
 %aside#sidebar
   %section.homepage-groups
-    %h2= t ".groups_title"
-    %p= t ".groups_intro_html", groups_link: link_to(t(".find_local_groups"), groups_path)
+    %h2= t(".groups_title", application_name: Rails.application.config.application_name)
+    %p= t ".groups_intro_html", application_name: Rails.application.config.application_name, groups_link: link_to(t(".find_local_groups"), groups_path)
   %section.twitter
     = render partial: "twitter"
 

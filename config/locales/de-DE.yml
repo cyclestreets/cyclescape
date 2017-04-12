@@ -622,17 +622,17 @@ de-DE:
       failure: Ablehnen des Gruppenantrag fehlgeschlagen
   home:
     show:
-      introduction_html: Cyclescape ist ein Online-Kampagnen-Werkzeug für Fahrrad-Kampagnen-Gruppen
+      introduction_html: "%{application_name} ist ein Online-Kampagnen-Werkzeug für Fahrrad-Kampagnen-Gruppen"
       center_box_title: Berichte hier über Dein Fahrradthema
       center_box_html: Kein vorhandener Radweg? Hindernisse für Radfahrer? Zu wenig
         Fahrradparkplätze vorhanden? Oder auch ein Beispiel für gut gemachte Dinge?
       report_an_issue: "Über ein Thema Berichten"
       latest_discussions: Neueste Diskussionen
-      groups_title: Cyclescape Gruppen
+      groups_title: "%{application_name} Gruppen"
       groups_intro_html: |
-        Cyclescape wird von <strong>Fahrrad-Kampagnen-Gruppen</strong> quer durchs Land benutzt. <strong>%{groups_link}</strong> und schau Dir an woran sie gerade arbeiten.
+        %{application_name} wird von <strong>Fahrrad-Kampagnen-Gruppen</strong> quer durchs Land benutzt. <strong>%{groups_link}</strong> und schau Dir an woran sie gerade arbeiten.
       find_local_groups: Finde Gruppen in deiner Nähe
-      twitter_title: Cyclescape bei Twitter
+      twitter_title: "%{application_name} bei Twitter"
     guide:
       title: Wie Cyclescape funktioniert
       box_1_title: Berichte über ein Thema
@@ -784,11 +784,11 @@ de-DE:
       funding_from_and_created_by: Mittel aus und erstellt von %{name}
       planning_application_data: Planning application data from PlanIt
       top_html: Back to top &uarr;
-      cyclescape_blog: Cyclescape blog
+      cyclescape_blog: "%{application_name} blog"
       privacy: Datenschutzerklärung
       user_guide: Benutzeranleitung
-      facebook_page: CycleStreets Facebook-Seite
-      twitter_page: CycleStreets Twitterkonto
+      facebook_page: "%{application_name} Facebook-Seite"
+      twitter_page: "%{application_name} Twitterkonto"
       osm_credit_html: Map data &copy; <a href='http://www.openstreetmap.org'> OpenStreetMap</a>
         contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
