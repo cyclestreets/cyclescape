@@ -209,7 +209,7 @@ class User < ActiveRecord::Base
   end
 
   def non_committee_member_of?(group)
-    memberships.where(group: group, role: "member").exists?
+    memberships.normal.where(group: group).exists?
   end
 
   def update_remembered_group(group)
