@@ -783,7 +783,7 @@ de-DE:
       funding_from: Finanziert von from %{name}
       funding_from_and_created_by: Mittel aus und erstellt von %{name}
       planning_application_data: Planning application data from PlanIt
-      top_html: Back to top &uarr;
+      top: Back to top
       cyclescape_blog: Cyclescape blog
       privacy: Datenschutzerklärung
       user_guide: Benutzeranleitung

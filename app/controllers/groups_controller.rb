@@ -8,13 +8,13 @@ class GroupsController < ApplicationController
 
   def show
     if group
-      if @group.has_member?(current_user)
-        recent_threads = ThreadList.recent_from_groups(group, 10)
-      else
-        recent_threads = ThreadList.recent_public_from_groups(group, 10)
-      end
+      recent_threads = if @group.has_member?(current_user)
+                         ThreadList.recent_from_groups(group, 10)
+                       else
+                         ThreadList.recent_public_from_groups(group, 10)
+                       end
       @recent_threads = ThreadListDecorator.decorate_collection recent_threads.includes(:issue, :group, :latest_message)
-      @unviewed_thread_ids = recent_threads.unviewed_for(current_user).ids.uniq
+      @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: recent_threads)
       @recent_issues = IssueDecorator.decorate_collection group.recent_issues.limit(10).includes(:created_by)
       @group = GroupDecorator.decorate group
     else

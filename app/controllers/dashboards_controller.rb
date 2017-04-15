@@ -9,9 +9,9 @@ class DashboardsController < ApplicationController
     )
 
     subscribed_threads = current_user.subscribed_threads.order_by_latest_message.page(params[:subscribed_threads_page]).per(12)
-    @subscribed_threads = ThreadListDecorator.decorate_collection subscribed_threads.
-      includes(:issue, latest_message: [:component, :created_by])
-    @unviewed_thread_ids = subscribed_threads.unviewed_for(current_user).ids.uniq
+    @subscribed_threads = ThreadListDecorator.decorate_collection subscribed_threads
+      .includes(:issue, latest_message: [:component, :created_by])
+    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: subscribed_threads)
 
     deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 30).includes(:issue, :latest_message)
     @deadline_threads = ThreadListDecorator.decorate_collection deadline_threads
@@ -65,7 +65,7 @@ class DashboardsController < ApplicationController
       end
       paginate page: params[:thread_page], per_page: 40
     end
-    @unviewed_thread_ids = MessageThread.where(id: threads.results.map(&:id)).unviewed_for(current_user).ids.uniq
+    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads.results)
     @threads = ThreadListDecorator.decorate_collection threads.results
 
     # Issues

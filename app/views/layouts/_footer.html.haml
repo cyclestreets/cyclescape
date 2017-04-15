@@ -21,9 +21,6 @@
             %small= link_to t(".user_guide"), 'http://blog.cyclescape.org/guide/'
           %li
             %small= link_to t(".privacy"), page_path('privacypolicy')
-          %li
-            %small
-              %a(href="#")=t(".top_html")
     %div{id: 'supportlogos'}
 
       %p= t(".osm_credit_html")
@@ -42,3 +39,4 @@
           = link_to image_tag("supportlogos/ctc.png", {title: t(".funding_from", :name => 'CTC'), :alt => 'Logo'}), 'http://www.ctc.org.uk/', :target => "_blank"
         %li
           = link_to image_tag("supportlogos/pccf.png", {title: t(".funding_from", :name => 'Polden-Puckham Charitable Foundation'), :alt => 'Logo'}), 'http://www.polden-puckham.org.uk/', :target => "_blank"
+%a.back-to-top(href="#")= t(".top")

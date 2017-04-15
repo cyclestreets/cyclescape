@@ -69,3 +69,12 @@
 		}
 	}
 }
+
+a.back-to-top {
+  position: fixed;
+  background: image-url("arrow-up-grey.png") right 0 no-repeat;
+  bottom: 10px;
+  right: 10px;
+  padding-right:  18px;
+  z-index: 9999;
+}

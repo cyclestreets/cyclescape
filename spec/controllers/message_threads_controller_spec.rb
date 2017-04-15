@@ -51,7 +51,6 @@ describe MessageThreadsController do
   describe 'closing / opening' do
     before do
       warden.set_user user_type
-      create :message, thread: thread, updated_at: 49.hours.ago
     end
 
     let(:subscription)   { create :thread_subscription, thread: thread }
@@ -63,15 +62,10 @@ describe MessageThreadsController do
 
       context 'as a subscriber' do
         let(:user_type) { subscriber }
-        context 'more than 48 hours ago' do
-          it { expect(subject.status).to eq 302 }
-          it { expect(subject).to redirect_to "/threads/#{thread.id}" }
-        end
 
-        context 'less than 48 hours ago' do
-          before { create :message, thread: thread, updated_at: 47.hours.ago }
-
-          it { expect(subject.status).to eq 401 }
+        it "can close the thread" do
+          expect(subject.status).to eq 302
+          expect(subject).to redirect_to "/threads/#{thread.id}"
         end
       end
 
@@ -90,8 +84,10 @@ describe MessageThreadsController do
       context 'as a subscriber' do
         let(:user_type) { subscriber }
 
-        it { expect(subject.status).to eq 302 }
-        it { expect(subject).to redirect_to "/threads/#{thread.id}" }
+        it "can open the thread" do
+          expect(subject.status).to eq 302
+          expect(subject).to redirect_to "/threads/#{thread.id}"
+        end
       end
 
       context 'as a non subscriber' do

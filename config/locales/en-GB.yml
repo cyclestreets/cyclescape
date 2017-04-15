@@ -684,7 +684,7 @@
       funding_from: Funding from %{name}
       funding_from_and_created_by: Funding from and created by %{name}
       planning_application_data: Planning application data from PlanIt
-      top_html: Back to top &uarr;
+      top: Back to top
       cyclescape_blog: Cyclescape blog
       privacy: Privacy Policy
       user_guide: User guide
@@ -1049,6 +1049,7 @@
       my_locations: My Locations
       update_account: Update My Account Details
     permission_denied:
+      committee_only_html: This discussion is for committee only members of %{group_link}
       apply_to_group_html: This discussion is owned by %{group_name}. Would you like
         to <a href='%{join_link}'><strong>apply to join %{group_name}'s Cyclescape
         group</strong></a>?

@@ -1,12 +1,11 @@
 require 'spec_helper'
 
 describe PlanningApplication do
-  subject        { build(:planning_application) }
+  subject { build(:planning_application) }
 
   describe "newly created" do
     it { is_expected.to validate_presence_of(:uid) }
     it { is_expected.to validate_presence_of(:url) }
-    it { is_expected.to validate_uniqueness_of(:uid).scoped_to(:authority_name) }
     it { is_expected.to have_many(:hide_votes) }
     it { is_expected.to have_many(:users).through(:hide_votes) }
 

@@ -39,6 +39,11 @@ authorization do
       to :manage
       if_attribute committee_members: contains { user }
     end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
+      to :manage
+      if_attribute committee_members: contains { user }
+    end
+
     has_permission_on :group_potential_members do
       to [:new, :create]
       if_attribute committee_members: contains { user }
@@ -104,7 +109,7 @@ authorization do
     end
     has_permission_on :message_threads do
       to :close
-      if_attribute subscribers: contains { user }, latest_activity_at_to_i: lt { 48.hours.ago.to_i }, closed: is { false }
+      if_attribute subscribers: contains { user }, closed: is { false }
     end
     has_permission_on :messages do
       to [:approve, :reject]

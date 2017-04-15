@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227100323) do
+ActiveRecord::Schema.define(version: 20170411214518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -379,10 +379,11 @@ ActiveRecord::Schema.define(version: 20170227100323) do
     t.date     "start_date"
     t.integer  "hide_votes_count",                                                 default: 0
     t.boolean  "relevant",                                                         default: true, null: false
+    t.string   "authority_param"
   end
 
   add_index "planning_applications", ["location"], name: "index_planning_applications_on_location", using: :gist
-  add_index "planning_applications", ["uid"], name: "index_planning_applications_on_uid", using: :btree
+  add_index "planning_applications", ["uid", "authority_param"], name: "index_planning_applications_on_uid_and_authority_param", unique: true, using: :btree
   add_index "planning_applications", ["zzz_issue_id"], name: "index_planning_applications_on_zzz_issue_id", using: :btree
 
   create_table "planning_filters", force: :cascade do |t|
