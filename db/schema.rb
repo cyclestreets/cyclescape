@@ -419,6 +419,7 @@ ActiveRecord::Schema.define(version: 20170425223812) do
 
   create_table "site_configs", force: :cascade do |t|
     t.string   "logo_uuid"
+    t.string   "application_name",                                                   null: false
     t.string   "domain",                                                             null: false
     t.string   "funder_image_footer1_uuid"
     t.string   "funder_image_footer2_uuid"

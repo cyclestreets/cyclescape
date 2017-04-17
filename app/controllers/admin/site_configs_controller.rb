@@ -61,6 +61,7 @@ class Admin::SiteConfigsController < ApplicationController
         :footer_html, :header_html,
         :default_locale, :timezone,
         :ga_account_id, :ga_base_domain,
-        :default_email, :devise_email, :geocoder_url)
+        :default_email, :devise_email, :geocoder_url,
+        :application_name)
     end
 end

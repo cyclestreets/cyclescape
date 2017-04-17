@@ -2,6 +2,7 @@ class CreateSiteConfigs < ActiveRecord::Migration
   def change
     create_table :site_configs do |t|
       t.string :logo_uuid
+      t.string :application_name, null: false
       t.string :domain, null: false
       t.string :funder_image_footer1_uuid
       t.string :funder_image_footer2_uuid
@@ -46,14 +47,14 @@ class CreateSiteConfigs < ActiveRecord::Migration
       t.timestamps null: false
     end
 
-    execute "INSERT INTO site_configs (domain, nowhere_location,
+    execute "INSERT INTO site_configs (application_name, domain, nowhere_location,
                                       tile_server1_name, tile_server1_url,
                                       facebook_link, twitter_link,
                                       footer_links_html, header_html, default_locale,
                                       timezone, geocoder_url,
                                       ga_account_id, ga_base_domain,
                                       updated_at, created_at)
-    VALUES ('default', ST_GeomFromText('POINT(0.1275 51.5032)', 4326),
+    VALUES ('Cyclescape', 'default', ST_GeomFromText('POINT(0.1275 51.5032)', 4326),
     'OpenCycleMap', 'http://[a|b|c].tile.cyclestreets.net/opencyclemap/${z}/${x}/${y}@2x.png',
     'https://www.facebook.com/CycleStreets', 'https://twitter.com/cyclescape',
     '<li><small><a href=\"http://blog.cyclescape.org/\">Cyclescape blog</a></small>
