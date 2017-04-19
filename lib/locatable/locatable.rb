@@ -17,9 +17,7 @@ module Locatable
     # multipolygons and it serializes to multiple geometries.
     def intersects(loc)
       sanatize_multi_geoms(loc) do |l|
-        where('ST_Intersects(ST_CollectionExtract(location, 3), ?) OR
-               ST_Intersects(ST_CollectionExtract(location, 2), ?) OR
-               ST_Intersects(ST_CollectionExtract(location, 1), ?)', [l], [l], [l])
+        where('ST_Intersects(ST_Envelope(location), ?)', [l])
       end
     end
 
