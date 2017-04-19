@@ -87,6 +87,7 @@ class MessageThread < ActiveRecord::Base
 
   before_validation :set_public_token, on: :create
   after_create      :add_subscribers
+  after_commit      :add_auto_subscribers
 
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALL_ALLOWED_PRIVACY }
@@ -340,4 +341,7 @@ class MessageThread < ActiveRecord::Base
     subscriptions.create( user: user ) if user
   end
 
+  def add_auto_subscribers
+    Resque.enqueue(ThreadAutoSubscriber, id, previous_changes)
+  end
 end

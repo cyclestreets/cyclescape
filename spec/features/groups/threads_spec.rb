@@ -206,12 +206,10 @@ describe 'Group threads', use: :subdomain do
           expect(subscriber.subscribed_to_thread?(current_group.threads.last)).to be_truthy
         end
 
-        it 'should only subscribe the thread creator once' do
+        it 'should only subscribe the thread creator once', after_commit: true do
           current_user.prefs.update_column(:involve_my_groups, 'subscribe')
           current_user.prefs.update_column(:involve_my_groups_admin, true)
-          MessageThread.observers.enable :message_thread_observer do
-            fill_in_thread
-          end
+          fill_in_thread
           expect(current_user.thread_subscriptions.count).to eq(1)
         end
 

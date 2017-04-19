@@ -264,11 +264,9 @@ describe 'Issue threads' do
         end
       end
 
-      it 'should only subscribe the thread creator once' do
+      it 'should only subscribe the thread creator once', after_commit: true do
         create(:user_location, user: current_user, location: issue.location.buffer(1))
-        MessageThread.observers.enable :message_thread_observer do
-          create_thread
-        end
+        create_thread
         expect(current_user.thread_subscriptions.count).to eq(1)
       end
     end
