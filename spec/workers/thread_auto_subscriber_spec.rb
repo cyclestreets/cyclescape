@@ -8,6 +8,13 @@ describe ThreadAutoSubscriber, after_commit: true  do
     let(:committee_membership) { create(:group_membership, group: thread.group, role: 'committee') }
     let(:committee_member) { committee_membership.user }
 
+    context "being deleted" do
+      subject! { create(:message_thread) }
+      it "should do nothing" do
+        expect{ subject.destroy }.to_not raise_error
+      end
+    end
+
     context 'from public' do
       let!(:thread) { create(:message_thread, :belongs_to_group) }
 

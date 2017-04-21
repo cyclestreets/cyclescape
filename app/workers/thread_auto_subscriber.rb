@@ -5,6 +5,7 @@ class ThreadAutoSubscriber
     end
 
     def perform(thread_id, changes)
+      return if changes.keys.include?("deleted_at")
       thread = MessageThread.find(thread_id)
       thread.with_lock do
         if changes.keys.include?("privacy")
