@@ -12,7 +12,7 @@ Please sign up for an account at Transifex and join our group there. If you want
 
 Please only make changes to the `*.en-GB.yml` files. The other files are generated automatically from Transifex.
 
-When you have the transifex command line client installed, the en-GB source files can be uploaded to Transifex with:
+When you have the [transifex command line client](https://docs.transifex.com/client/installing-the-client) installed, the en-GB source files can be uploaded to Transifex with:
 
 `bundle exec rake transifex:push`
 
