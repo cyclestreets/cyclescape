@@ -1,15 +1,15 @@
 class CreateSiteConfigs < ActiveRecord::Migration
   def change
     create_table :site_configs do |t|
-      t.string :logo_uuid
+      t.string :logo_uid
       t.string :application_name, null: false
       t.string :domain, null: false
-      t.string :funder_image_footer1_uuid
-      t.string :funder_image_footer2_uuid
-      t.string :funder_image_footer3_uuid
-      t.string :funder_image_footer4_uuid
-      t.string :funder_image_footer5_uuid
-      t.string :funder_image_footer6_uuid
+      t.string :funder_image_footer1_uid
+      t.string :funder_image_footer2_uid
+      t.string :funder_image_footer3_uid
+      t.string :funder_image_footer4_uid
+      t.string :funder_image_footer5_uid
+      t.string :funder_image_footer6_uid
       t.string :funder_name_footer1
       t.string :funder_name_footer2
       t.string :funder_name_footer3
@@ -67,7 +67,7 @@ class CreateSiteConfigs < ActiveRecord::Migration
 </li>
 <li>',
     '<li><a href=\"http://blog.cyclescape.org/about/\">About</a></li><li><a href=\"http://blog.cyclescape.org/guide/\">User guide</a></li>',
-    'en-GB', 'London', 'https://api.cyclestreets.net/v2/geocoder',
+    'en-GB', 'Europe/London', 'https://api.cyclestreets.net/v2/geocoder',
     'UA-28721275-1', 'cyclescape.org', now(), now());"
   end
 end
