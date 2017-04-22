@@ -1,76 +1,51 @@
-= form_for @site_config do |f|
-  - if @site_config.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@site_config.errors.count, "error")} prohibited this site_config from being saved:"
-      %ul
-        - @site_config.errors.full_messages.each do |msg|
-          %li= msg
+%p= t ".site_config_intro"
 
-  .field
-    = f.label :logo_uuid
-    = f.text_field :logo_uuid
-  .field
-    = f.label :title_tag
-    = f.text_field :title_tag
-  .field
-    = f.label :domain
-    = f.text_field :domain
-  .field
-    = f.label :footer1_uuid
-    = f.text_field :footer1_uuid
-  .field
-    = f.label :footer2_uuid
-    = f.text_field :footer2_uuid
-  .field
-    = f.label :footer3_uuid
-    = f.text_field :footer3_uuid
-  .field
-    = f.label :nowhere_location
-    = f.text_field :nowhere_location
-  .field
-    = f.label :tile_server1_name
-    = f.text_field :tile_server1_name
-  .field
-    = f.label :tile_server2_name
-    = f.text_field :tile_server2_name
-  .field
-    = f.label :tile_server3_name
-    = f.text_field :tile_server3_name
-  .field
-    = f.label :tile_server1_url
-    = f.text_field :tile_server1_url
-  .field
-    = f.label :tile_server2_url
-    = f.text_field :tile_server2_url
-  .field
-    = f.label :tile_server3_url
-    = f.text_field :tile_server3_url
-  .field
-    = f.label :footer_html
-    = f.text_area :footer_html
-  .field
-    = f.label :header_html
-    = f.text_area :header_html
-  .field
-    = f.label :default_locale
-    = f.number_field :default_locale
-  .field
-    = f.label :timezone
-    = f.number_field :timezone
-  .field
-    = f.label :ga_account_id
-    = f.text_field :ga_account_id
-  .field
-    = f.label :ga_base_domain
-    = f.text_field :ga_base_domain
-  .field
-    = f.label :default_email
-    = f.text_field :default_email
-  .field
-    = f.label :devise_email
-    = f.text_field :devise_email
-  .field
-    = f.label :geocoder_url
-    = f.text_field :geocoder_url
-  .actions
-    = f.submit 'Save'
+= semantic_form_for @site_config, url: [:admin, @site_config] do |f|
+  = f.inputs do
+    = f.input :logo, as: :file
+    = f.input :retained_logo, as: :hidden
+    = f.input :application_name
+    = f.input :domain
+    = f.input :funder_name_footer1
+    = f.input :funder_url_footer1
+    = f.input :funder_image_footer1, as: :file
+    = f.input :retained_funder_image_footer1, as: :hidden
+    = f.input :funder_name_footer2
+    = f.input :funder_url_footer2
+    = f.input :funder_image_footer2, as: :file
+    = f.input :retained_funder_image_footer2, as: :hidden
+    = f.input :funder_name_footer3
+    = f.input :funder_url_footer3
+    = f.input :funder_image_footer3, as: :file
+    = f.input :retained_funder_image_footer3, as: :hidden
+    = f.input :funder_name_footer4
+    = f.input :funder_url_footer4
+    = f.input :funder_image_footer4, as: :file
+    = f.input :retained_funder_image_footer4, as: :hidden
+    = f.input :funder_name_footer5
+    = f.input :funder_url_footer5
+    = f.input :funder_image_footer5, as: :file
+    = f.input :retained_funder_image_footer5, as: :hidden
+    = f.input :funder_name_footer6
+    = f.input :funder_url_footer6
+    = f.input :funder_image_footer6, as: :file
+    = f.input :retained_funder_image_footer6, as: :hidden
+    = f.input :nowhere_location, as: :string
+    = f.input :tile_server1_name
+    = f.input :tile_server1_url
+    = f.input :tile_server2_name
+    = f.input :tile_server2_url
+    = f.input :tile_server3_name
+    = f.input :tile_server3_url
+    = f.input :facebook_link
+    = f.input :twitter_link
+    = f.input :header_html
+    = f.input :footer_links_html
+    = f.input :default_locale, as: :select, collection: UserProfile.all_locales.values.map {|loc| [loc.label, loc.locale]}, include_blank: false
+    = f.input :timezone, as: :select, collection: ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name }.uniq, include_blank: false
+    = f.input :ga_account_id
+    = f.input :ga_base_domain
+    = f.input :default_email
+    = f.input :geocoder_url
+    = f.input :geocoder_key
+  = f.actions

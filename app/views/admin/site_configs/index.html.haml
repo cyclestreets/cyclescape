@@ -3,28 +3,8 @@
 %table
   %thead
     %tr
-      %th Logo uuid
-      %th Title tag
+      %th Application Name
       %th Domain
-      %th Footer1 uuid
-      %th Footer2 uuid
-      %th Footer3 uuid
-      %th Nowhere location
-      %th Tile server1 name
-      %th Tile server2 name
-      %th Tile server3 name
-      %th Tile server1 url
-      %th Tile server2 url
-      %th Tile server3 url
-      %th Footer html
-      %th Header html
-      %th Default locale
-      %th Timezone
-      %th Ga account
-      %th Ga base domain
-      %th Default email
-      %th Devise email
-      %th Geocoder url
       %th
       %th
       %th
@@ -32,32 +12,12 @@
   %tbody
     - @site_configs.each do |site_config|
       %tr
-        %td= site_config.logo_uuid
-        %td= site_config.title_tag
+        %td= site_config.application_name
         %td= site_config.domain
-        %td= site_config.footer1_uuid
-        %td= site_config.footer2_uuid
-        %td= site_config.footer3_uuid
-        %td= site_config.nowhere_location
-        %td= site_config.tile_server1_name
-        %td= site_config.tile_server2_name
-        %td= site_config.tile_server3_name
-        %td= site_config.tile_server1_url
-        %td= site_config.tile_server2_url
-        %td= site_config.tile_server3_url
-        %td= site_config.footer_html
-        %td= site_config.header_html
-        %td= site_config.default_locale
-        %td= site_config.timezone
-        %td= site_config.ga_account_id
-        %td= site_config.ga_base_domain
-        %td= site_config.default_email
-        %td= site_config.devise_email
-        %td= site_config.geocoder_url
-        %td= link_to 'Show', site_config
-        %td= link_to 'Edit', edit_site_config_path(site_config)
-        %td= link_to 'Destroy', site_config, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Show', admin_site_configs_path(site_config)
+        %td= link_to 'Edit', edit_admin_site_config_path(site_config)
+        %td= link_to 'Destroy', admin_site_configs_path(site_config), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Site config', new_site_config_path
+= link_to 'New Site config', new_admin_site_config_path

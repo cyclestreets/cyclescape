@@ -2,46 +2,58 @@
 
 %p
   %b Logo uuid:
-  = @site_config.logo_uuid
-%p
-  %b Title tag:
-  = @site_config.title_tag
+  = image_tag(@site_config.logo.url)
 %p
   %b Domain:
   = @site_config.domain
 %p
-  %b Footer1 uuid:
-  = @site_config.footer1_uuid
+  %b Funder 1
+  = link_to @site_config.funder_name_footer1, @site_config.funder_url_footer1
+  = image_tag @site_config.funder_image_footer1.try(:url)
 %p
-  %b Footer2 uuid:
-  = @site_config.footer2_uuid
+  %b Funder 2
+  = link_to @site_config.funder_name_footer2, @site_config.funder_url_footer2
+  = image_tag @site_config.funder_image_footer2.try(:url)
 %p
-  %b Footer3 uuid:
-  = @site_config.footer3_uuid
+  %b Funder 3
+  = link_to @site_config.funder_name_footer3, @site_config.funder_url_footer3
+  = image_tag @site_config.funder_image_footer3.try(:url)
+%p
+  %b Funder 4
+  = link_to @site_config.funder_name_footer4, @site_config.funder_url_footer4
+  = image_tag @site_config.funder_image_footer4.try(:url)
+%p
+  %b Funder 5
+  = link_to @site_config.funder_name_footer5, @site_config.funder_url_footer5
+  = image_tag @site_config.funder_image_footer5.try(:url)
+%p
+  %b Funder 6
+  = link_to @site_config.funder_name_footer6, @site_config.funder_url_footer6
+  = image_tag @site_config.funder_image_footer6.try(:url)
 %p
   %b Nowhere location:
   = @site_config.nowhere_location
 %p
-  %b Tile server1 name:
-  = @site_config.tile_server1_name
-%p
-  %b Tile server2 name:
-  = @site_config.tile_server2_name
-%p
-  %b Tile server3 name:
-  = @site_config.tile_server3_name
-%p
   %b Tile server1 url:
   = @site_config.tile_server1_url
+%p
+  %b Tile server1 name:
+  = @site_config.tile_server1_name
 %p
   %b Tile server2 url:
   = @site_config.tile_server2_url
 %p
+  %b Tile server2 name:
+  = @site_config.tile_server2_name
+%p
   %b Tile server3 url:
   = @site_config.tile_server3_url
 %p
-  %b Footer html:
-  = @site_config.footer_html
+  %b Tile server3 name:
+  = @site_config.tile_server3_name
+%p
+  %b Footer Links html:
+  = @site_config.footer_links_html
 %p
   %b Header html:
   = @site_config.header_html
@@ -61,12 +73,9 @@
   %b Default email:
   = @site_config.default_email
 %p
-  %b Devise email:
-  = @site_config.devise_email
-%p
   %b Geocoder url:
   = @site_config.geocoder_url
 
-= link_to 'Edit', edit_site_config_path(@site_config)
+= link_to 'Edit', edit_admin_site_config_path(@site_config)
 \|
-= link_to 'Back', site_configs_path
+= link_to 'Back', admin_site_configs_path

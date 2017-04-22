@@ -138,6 +138,10 @@
           The filter rule will be applied to all new and existing planning applications in a background job after saving.
           Each planning application in the authority of the filter where the uid matches the rule will be filtered out of users
           planning index on their dashboard but will still be searchable.
+    site_configs:
+      form:
+        site_config_intro: "The config will be applied to any request where the request domain matches the site config domain.  If none is found the
+        'default' config will be used."
   application:
     account_disabled: Your account has been disabled by an administrator
     permission_denied: You are not authorised to access that page.

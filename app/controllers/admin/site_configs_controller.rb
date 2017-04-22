@@ -24,7 +24,7 @@ class Admin::SiteConfigsController < ApplicationController
     @site_config = SiteConfig.new(site_config_params)
 
     if @site_config.save
-      redirect_to @site_config, notice: 'Site config was successfully created.'
+      redirect_to [:admin, @site_config], notice: 'Site config was successfully created.'
     else
       render :new
     end
@@ -33,7 +33,7 @@ class Admin::SiteConfigsController < ApplicationController
   # PATCH/PUT /site_configs/1
   def update
     if @site_config.update(site_config_params)
-      redirect_to @site_config, notice: 'Site config was successfully updated.'
+      redirect_to [:admin, @site_config], notice: 'Site config was successfully updated.'
     else
       render :edit
     end
@@ -42,26 +42,32 @@ class Admin::SiteConfigsController < ApplicationController
   # DELETE /site_configs/1
   def destroy
     @site_config.destroy
-    redirect_to site_configs_url, notice: 'Site config was successfully destroyed.'
+    redirect_to admin_site_configs_url, notice: 'Site config was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_site_config
-      @site_config = SiteConfig.find(params[:id])
-    end
+  def set_site_config
+    @site_config = SiteConfig.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def site_config_params
-      params.require(:site_config).permit(
-        :logo_uuid, :title_tag, :domain, :footer1_uuid, :footer2_uuid,
-        :footer3_uuid, :nowhere_location,
-        :tile_server1_name, :tile_server2_name, :tile_server3_name,
-        :tile_server1_url, :tile_server2_url, :tile_server3_url,
-        :footer_html, :header_html,
-        :default_locale, :timezone,
-        :ga_account_id, :ga_base_domain,
-        :default_email, :devise_email, :geocoder_url,
-        :application_name)
-    end
+  def site_config_params
+    params.require(:site_config).permit(
+      :logo, :application_name, :domain,
+      :funder_name_footer1, :funder_url_footer1, :funder_image_footer1,
+      :funder_name_footer2, :funder_url_footer2, :funder_image_footer2,
+      :funder_name_footer3, :funder_url_footer3, :funder_image_footer3,
+      :funder_name_footer4, :funder_url_footer4, :funder_image_footer4,
+      :funder_name_footer5, :funder_url_footer5, :funder_image_footer5,
+      :funder_name_footer6, :funder_url_footer6, :funder_image_footer6,
+      :nowhere_location,
+      :tile_server1_name, :tile_server1_url, :tile_server2_name,
+      :tile_server2_name, :tile_server2_url, :tile_server2_name,
+      :tile_server3_name, :tile_server3_url, :tile_server2_name,
+      :facebook_link, :twitter_link,
+      :header_html, :footer_links_html,
+      :default_locale, :timezone,
+      :ga_account_id, :ga_base_domain,
+      :default_email, :geocoder_url,
+      :geocoder_key)
+  end
 end
