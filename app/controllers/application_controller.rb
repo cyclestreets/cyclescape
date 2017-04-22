@@ -170,7 +170,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_config
-    @site_config = SiteConfig.find_by(domain: request.host)
+    @site_config = Rails.cache.fetch(request.host, expires: 5.minutes) do
+      SiteConfig.find_by(domain: request.host) || SiteConfig.default
+    end
   end
 
   def set_time_zone(&block)

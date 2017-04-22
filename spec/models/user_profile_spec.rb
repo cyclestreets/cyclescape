@@ -16,8 +16,8 @@ describe UserProfile do
 
     it 'should provide a thumbnail of the picture' do
       expect(subject.picture_thumbnail).to be_truthy
-      expect(subject.picture_thumbnail.width).to eq(50)
-      expect(subject.picture_thumbnail.height).to eq(50)
+      expect(subject.picture_thumbnail.width).to eq(1)
+      expect(subject.picture_thumbnail.height).to eq(1)
     end
 
     it 'should not accept a text document for a picture' do

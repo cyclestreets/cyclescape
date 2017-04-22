@@ -1,8 +1,17 @@
 class SiteConfig < ActiveRecord::Base
-  enum timezone: []
-  enum default_locale: %w(en-GB cs-CZ)
+  validates :default_locale, inclusion: { in: UserProfile.all_locales.values.map(&:locale) }
+  validates :timezone, inclusion: { in: ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name } }
+  validates :domain, uniqueness: true
+
   dragonfly_accessor :logo
-  dragonfly_accessor :footer1
-  dragonfly_accessor :footer2
-  dragonfly_accessor :footer3
+
+  1.upto(6).each do |n|
+    dragonfly_accessor :"funder_image_footer#{n}"
+  end
+
+  class << self
+    def default
+      find_by(domain: "default")
+    end
+  end
 end
