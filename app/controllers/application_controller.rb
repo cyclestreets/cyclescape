@@ -170,8 +170,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_config
-    @site_config = Rails.cache.fetch(request.host, expires: 5.minutes) do
-      SiteConfig.find_by(domain: request.host) || SiteConfig.default
+    @site_config = Rails.cache.fetch([SiteConfig::KEY, request.host].join, expires: 1.week) do
+      SiteConfig.find_by(domain: request.host) ||
+        Rails.cache.fetch([SiteConfig::KEY, "default"].join, expires: 1.week) { SiteConfig.default }
     end
   end
 
