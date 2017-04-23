@@ -10,7 +10,7 @@ class Admin::SiteConfigsController < ApplicationController
 
   def update
     if @site_config.update(site_config_params)
-      redirect_to [:admin, @site_config], notice: 'Site config was successfully updated.'
+      redirect_to admin_site_config_path, notice: 'Site config was successfully updated.'
     else
       render :edit
     end

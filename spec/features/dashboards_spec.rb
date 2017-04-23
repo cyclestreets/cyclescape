@@ -103,7 +103,7 @@ describe 'User dashboards' do
           deadline.thread.add_subscriber(current_user)
           visit dashboard_path
           expect(page).to have_content(deadline.title)
-          deadline_localized = deadline.deadline.in_time_zone(SiteConfig.default.timezone)
+          deadline_localized = deadline.deadline.in_time_zone(SiteConfig.first.timezone)
           expect(page).to have_content(I18n.l(deadline_localized, format: :long_deadline))
         end
 

@@ -1,7 +1,7 @@
 class ThreadMailer < ActionMailer::Base
   include MailerHelper
   helper :mailer
-  default from: Rails.application.config.default_email_from
+  default from: ->(_) { SiteConfig.first.default_email }
 
   def digest(user, threads_messages)
     @threads_messages = threads_messages

@@ -67,7 +67,7 @@
         manage_issue_categories: Manage Issue Categories
         manage_users: Manage users
         manage_message_moderations: Manage message moderations
-        manage_site_configs: Manage site configs
+        manage_site_config: Manage site config
     issue_categories:
       create:
         success: Category created
@@ -140,8 +140,7 @@
           planning index on their dashboard but will still be searchable.
     site_configs:
       form:
-        site_config_intro: "The config will be applied to any request where the request domain matches the site config domain.  If none is found the
-        'default' config will be used."
+        site_config_intro: "The config will alter the site for all users."
   application:
     account_disabled: Your account has been disabled by an administrator
     permission_denied: You are not authorised to access that page.

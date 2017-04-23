@@ -5,7 +5,6 @@
     = f.input :logo, as: :file
     = f.input :retained_logo, as: :hidden
     = f.input :application_name
-    = f.input :domain
     = f.input :funder_name_footer1
     = f.input :funder_url_footer1
     = f.input :funder_image_footer1, as: :file
@@ -31,12 +30,6 @@
     = f.input :funder_image_footer6, as: :file
     = f.input :retained_funder_image_footer6, as: :hidden
     = f.input :nowhere_location, as: :string
-    = f.input :tile_server1_name
-    = f.input :tile_server1_url
-    = f.input :tile_server2_name
-    = f.input :tile_server2_url
-    = f.input :tile_server3_name
-    = f.input :tile_server3_url
     = f.input :facebook_link
     = f.input :twitter_link
     = f.input :header_html
@@ -46,6 +39,7 @@
     = f.input :ga_account_id
     = f.input :ga_base_domain
     = f.input :default_email
+    = f.input :email_domain
     = f.input :geocoder_url
     = f.input :geocoder_key
   = f.actions

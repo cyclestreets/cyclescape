@@ -170,9 +170,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_config
-    @site_config = Rails.cache.fetch(SiteConfig::KEY, expires: 1.week) do
-      SiteConfig.first
-    end
+    @site_config ||= SiteConfig.first
   end
 
   def set_time_zone(&block)
