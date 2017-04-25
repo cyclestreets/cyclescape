@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170411214518) do
+ActiveRecord::Schema.define(version: 20170425223812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -463,7 +463,7 @@ ActiveRecord::Schema.define(version: 20170411214518) do
     t.datetime "deleted_at"
   end
 
-  add_index "thread_subscriptions", ["thread_id", "user_id"], name: "index_thread_subscriptions_on_thread_id_and_user_id", using: :btree
+  add_index "thread_subscriptions", ["thread_id", "user_id"], name: "index_thread_subscriptions_on_thread_id_and_user_id", unique: true, where: "(deleted_at IS NULL)", using: :btree
   add_index "thread_subscriptions", ["thread_id"], name: "index_thread_subscriptions_on_thread_id", using: :btree
   add_index "thread_subscriptions", ["user_id"], name: "index_thread_subscriptions_on_user_id", using: :btree
 
