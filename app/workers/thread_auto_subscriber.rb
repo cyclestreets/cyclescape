@@ -7,7 +7,9 @@ class ThreadAutoSubscriber
     def perform(thread_id, changes)
       return if changes.keys.include?("deleted_at")
       thread = MessageThread.find(thread_id)
-      thread.with_lock do
+
+
+      only_one(thread_id, changes) do
         if changes.keys.include?("privacy")
           case thread.privacy
           when 'committee'
@@ -48,6 +50,22 @@ class ThreadAutoSubscriber
             end
           end
         end
+      end
+    end
+
+    def only_one(id, changes)
+      r = Redis.current
+      redis_key = ["tas", "threadid", id].join(":")
+
+      unless r.set(redis_key, 1, ex: 5, nx: true)
+        sleep 3
+        return Resque.enqueue(ThreadAutoSubscriber, id, changes)
+      end
+
+      begin
+        yield
+      ensure
+        r.del(redis_key)
       end
     end
   end
