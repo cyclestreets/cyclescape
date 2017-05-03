@@ -59,6 +59,7 @@ class ThreadAutoSubscriber
 
       unless r.set(redis_key, 1, ex: 5, nx: true)
         sleep 3
+        Rollbar.info("Thread subscriber called twice", id: id, changes: changes)
         return Resque.enqueue(ThreadAutoSubscriber, id, changes)
       end
 
