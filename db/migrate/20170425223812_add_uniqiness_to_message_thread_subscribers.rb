@@ -6,7 +6,7 @@ class AddUniqinessToMessageThreadSubscribers < ActiveRecord::Migration
     WHERE id NOT IN (
       SELECT MIN (id) AS min_id
       FROM thread_subscriptions
-      WHERE deleted_at IS NOT NULL
+      WHERE deleted_at IS NULL
       GROUP BY user_id, thread_id
     )
     SQL
