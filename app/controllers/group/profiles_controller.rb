@@ -1,14 +1,12 @@
 class Group::ProfilesController < ApplicationController
-  before_filter :load_group
+  before_filter :load_group_profile
   filter_access_to :edit, :update, attribute_check: true, model: Group
   filter_access_to :all
 
   def show
-    @profile = @group.profile
   end
 
   def edit
-    @profile = @group.profile
     # This needs more thought!
     @start_location = Geo::NOWHERE_IN_PARTICULAR
   end
@@ -23,7 +21,6 @@ class Group::ProfilesController < ApplicationController
   end
 
   def geometry
-    @profile = @group.profile
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(@profile.loc_feature(thumbnail: view_context.image_path('map-icons/m-misc.png'))) }
     end
@@ -31,8 +28,9 @@ class Group::ProfilesController < ApplicationController
 
   protected
 
-  def load_group
-    @group = Group.find params[:group_id]
+  def load_group_profile
+    @group = Group.includes(:profile).find params[:group_id]
+    @profile = @group.profile
   end
 
   def permitted_params

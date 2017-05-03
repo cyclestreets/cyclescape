@@ -1116,6 +1116,9 @@
     new_photo_message:
       type: a photo
       view_the_photo: 'You can view the photo at:'
+    new_cyclestreets_photo_message:
+      type: a photo
+      view_the_photo: 'You can view the Cyclestreets photo at:'
     new_street_view_message:
       type: a street view
       view_the_street_view: 'You can see the Street View at:'

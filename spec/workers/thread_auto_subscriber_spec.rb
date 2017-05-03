@@ -8,6 +8,13 @@ describe ThreadAutoSubscriber, after_commit: true  do
     let(:committee_membership) { create(:group_membership, group: thread.group, role: 'committee') }
     let(:committee_member) { committee_membership.user }
 
+    context "being deleted" do
+      subject! { create(:message_thread) }
+      it "should do nothing" do
+        expect{ subject.destroy }.to_not raise_error
+      end
+    end
+
     context 'from public' do
       let!(:thread) { create(:message_thread, :belongs_to_group) }
 
@@ -122,6 +129,23 @@ describe ThreadAutoSubscriber, after_commit: true  do
           thread.reload
           expect(thread.subscribers).to include(member)
         end
+      end
+    end
+
+    context 'called thrice', db_truncate: true do
+      it 'only runs once and queues up twice' do
+        thread = create(:message_thread)
+        allow(ThreadSubscriber).to receive(:subscribe_users).once { sleep 1 }
+        expect(Resque).to receive(:enqueue).twice
+        threads = []
+        ActiveRecord::Base.connection.disconnect!
+        3.times do |i|
+          threads[i] = Thread.new do
+            ActiveRecord::Base.establish_connection
+            described_class.perform(thread.id, { "privacy" => "public" })
+          end
+        end
+        threads.each(&:join)
       end
     end
   end

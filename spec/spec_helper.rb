@@ -68,6 +68,11 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do |ex|
+    DatabaseCleaner.strategy = :transaction
+    if ex.metadata[:db_truncate]
+      DatabaseCleaner.strategy = :truncation, { pre_count: true, cache_tables: true }
+    end
+
     DatabaseCleaner.start
 
     # Clear ActionMailer deliveries
