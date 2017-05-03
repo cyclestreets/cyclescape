@@ -3,9 +3,9 @@ class User::LocationsController < ApplicationController
   end
 
   def create
-    @location = current_user.build_location permitted_params
+    @location = current_user.location || current_user.build_location
 
-    if @location.save
+    if @location.update permitted_params
       set_flash_message :success
       redirect_to action: :index
     else
