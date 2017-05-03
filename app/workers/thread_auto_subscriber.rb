@@ -8,7 +8,6 @@ class ThreadAutoSubscriber
       return if changes.keys.include?("deleted_at")
       thread = MessageThread.find(thread_id)
 
-
       only_one(thread_id, changes) do
         if changes.keys.include?("privacy")
           case thread.privacy
@@ -58,7 +57,7 @@ class ThreadAutoSubscriber
       redis_key = ["tas", "threadid", id].join(":")
 
       unless r.set(redis_key, 1, ex: 5, nx: true)
-        sleep 3
+        sleep 1
         Rollbar.info("Thread subscriber called twice", id: id, changes: changes)
         return Resque.enqueue(ThreadAutoSubscriber, id, changes)
       end

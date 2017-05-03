@@ -131,5 +131,22 @@ describe ThreadAutoSubscriber, after_commit: true  do
         end
       end
     end
+
+    context 'called thrice', db_truncate: true do
+      it 'only runs once and queues up twice' do
+        thread = create(:message_thread)
+        allow(ThreadSubscriber).to receive(:subscribe_users).once { sleep 1 }
+        expect(Resque).to receive(:enqueue).twice
+        threads = []
+        ActiveRecord::Base.connection.disconnect!
+        3.times do |i|
+          threads[i] = Thread.new do
+            ActiveRecord::Base.establish_connection
+            described_class.perform(thread.id, { "privacy" => "public" })
+          end
+        end
+        threads.each(&:join)
+      end
+    end
   end
 end
