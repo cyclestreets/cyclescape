@@ -3,6 +3,8 @@ module FakeDestroy
     base.instance_eval do
       scope :active, -> { where('deleted_at IS NULL') }
       scope :deleted, -> { where('deleted_at IS NOT NULL') }
+      scope :with_deleted, -> { unscope(:where) }
+
       alias_method_chain :destroy, :fake
     end
   end
