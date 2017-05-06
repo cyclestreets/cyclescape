@@ -17,7 +17,11 @@ class ThreadSubscriber
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
       if Authorization::Engine.instance.permit? :show,  object: thread, user: member, user_roles: [:member, :guest]
-        thread.subscriptions.create( user: member ) unless member.subscribed_to_thread?(thread)
+        begin
+          thread.subscriptions.find_or_create_by(user: member)
+        rescue ActiveRecord::RecordNotUnique
+          retry
+        end
       end
     end
   end

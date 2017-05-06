@@ -146,6 +146,7 @@ describe ThreadAutoSubscriber, after_commit: true  do
           end
         end
         threads.each(&:join)
+        ActiveRecord::Base.establish_connection
       end
     end
   end
