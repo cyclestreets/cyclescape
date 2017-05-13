@@ -19,3 +19,4 @@ public/system
 .DS_Store
 resque_web.url
 node_modules/
+*.sql

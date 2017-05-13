@@ -67,7 +67,7 @@ RSpec.configure do |config|
     I18n.reload!
   end
 
-  config.before(:each) do |ex|
+  config.around(:each) do |ex|
     DatabaseCleaner.strategy = :transaction
     if ex.metadata[:db_truncate]
       DatabaseCleaner.strategy = :truncation, { pre_count: true, cache_tables: true }
@@ -79,6 +79,18 @@ RSpec.configure do |config|
     ActionMailer::Base.deliveries.clear
 
     SunspotTest.stub unless ex.metadata[:solr]
+
+    ex.run
+
+    DatabaseCleaner.clean
+
+    if ex.metadata[:db_truncate] && User.where(id: 1).blank?
+      root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
+                      password: 'changeme', password_confirmation: 'changeme', role: 'admin')
+      root.skip_confirmation!
+      root.save!
+      User.where(id: 1).update_all(id: root.id.to_s)
+    end
   end
 
   # requires a running test solr env
@@ -86,10 +98,6 @@ RSpec.configure do |config|
   # then to run the solr specs
   # $ SOLR=1 be rspec --tag solr
   config.filter_run_excluding solr: true unless ENV['SOLR']
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
 
   config.infer_spec_type_from_file_location!
   config.include FactoryGirl::Syntax::Methods
