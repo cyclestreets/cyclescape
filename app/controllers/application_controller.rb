@@ -167,17 +167,6 @@ class ApplicationController < ActionController::Base
     bbox.add(factory.point(minlon, minlat)).add(factory.point(maxlon, maxlat))
   end
 
-  # Formatting grabbed from ruby stdlib
-  def timestamp_with_usec
-    time = Time.now
-    time.strftime('%Y-%m-%dT%H:%M:%S.') + format('%06d ', time.usec)
-  end
-
-  # Oh, rails, how I hate your shielding of Logger formatters from me
-  def debug_msg(msg)
-    "[#{timestamp_with_usec}] #{msg}"
-  end
-
   private
 
   def set_last_seen_at
