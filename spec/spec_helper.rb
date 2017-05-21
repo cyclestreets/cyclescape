@@ -46,7 +46,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation, except: %w(geometry_columns spatial_ref_sys))
+    DatabaseCleaner.clean_with(:truncation, except: %w[geometry_columns spatial_ref_sys site_configs])
 
     # Clear out DragonFly assets
     dragonfly_path = "#{Rails.root}/public/system/dragonfly/test"
@@ -60,9 +60,7 @@ RSpec.configure do |config|
       root.save!
     end
 
-    unless SiteConfig.exists?
-      FactoryGirl.create :site_config
-    end
+    FactoryGirl.create :site_config
 
     # Disable the observers so that their behaviour can be tested independently
     ActiveRecord::Base.observers.disable :all
@@ -89,6 +87,8 @@ RSpec.configure do |config|
     ex.run
 
     DatabaseCleaner.clean
+
+    FactoryGirl.create(:site_config) unless SiteConfig.exists?
 
     if truncate_clean && User.where(id: 1).blank?
       root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
