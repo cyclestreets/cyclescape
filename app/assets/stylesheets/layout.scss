@@ -156,9 +156,6 @@ article.message {
 body.issues,
 body.group-issues {
   article.issue {
-    section.voting {
-      float: right;
-    }
     .map {
       clear: both;
     }
@@ -167,6 +164,9 @@ body.group-issues {
       margin-top: 15px;
     }
   }
+}
+section.voting {
+  float: right;
 }
 
 p.thread-number {
