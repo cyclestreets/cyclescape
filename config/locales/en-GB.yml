@@ -303,9 +303,6 @@
       vote_clear:
         failure: Your vote couldn't be cleared
         success: Your vote has been cleared
-      vote_down:
-        already: You've already voted down this issue
-        success: You have voted down this issue
       vote_up:
         already: You've already voted up this issue
         success: You have voted up this issue
@@ -562,13 +559,6 @@
     tags:
       panel:
         edit_tags: edit tags
-  votable: &voteable
-    vote_clear: Clear Vote
-    vote_up: Vote Up
-    votes:
-      one: vote
-      other: votes
-    cancel_vote: Cancel
   issues:
     compact:
       created_by_html: Created by %{creator_link}
@@ -617,7 +607,6 @@
       administrative_matters: add a purely administrative matter
     show:
       added_by_html: Added by %{name} %{time}
-      cancel_vote: Cancel
       delete_issue: Delete this issue
       edit_issue: Edit this issue
       new_thread:
@@ -630,14 +619,7 @@
       public: Public
       sign_in: sign in
       sign_in_to_discuss_html: You can %{sign_in_link} to start the discussion.
-      sign_in_to_vote_html: Please %{sign_in_link} to vote.
       threads: Threads
-      vote_clear: Clear Vote
-      vote_down: Vote Down
-      vote_up: Vote Up
-      votes:
-        one: vote
-        other: votes
       location: Location
       deadline: Deadline
       issues-nearby: Issues nearby
@@ -648,9 +630,6 @@
     vote_clear:
       failure: Your vote couldn't be cleared
       success: Your vote has been cleared
-    vote_down:
-      already: You've already voted down this issue
-      success: You have voted down this issue
     vote_up:
       already: You've already voted up this issue
       success: You have voted up this issue

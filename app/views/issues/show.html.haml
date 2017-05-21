@@ -10,20 +10,8 @@
             %li= link_to t(".delete_issue"), issue_path(@issue), data: { confirm: t("are_you_sure") }, method: :delete
   .main
     %section.voting
-      .votes
-        - if current_user && current_user.voted_for?(@issue.model)
-          = link_to t(".cancel_vote"), vote_clear_issue_path(@issue), method: :put, class: "up selected"
-        - else
-          = link_to t(".vote_up"), vote_up_issue_path(@issue), method: :put, class: "up"
-        .vote-count
-          %span= @issue.plusminus
-          = t(".votes", count: @issue.plusminus)
-        - if current_user && current_user.voted_against?(@issue.model)
-          = link_to t(".cancel_vote"), vote_clear_issue_path(@issue), method: :put, class: "down selected"
-        - else
-          = link_to t(".vote_down"), vote_down_issue_path(@issue), method: :put, class: "down"
-        - if not permitted_to? :vote_up, :issues
-          .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)
+      =render partial: "shared/votable",
+        locals: { resource: @issue.object,  resource_vote_up: vote_up_issue_path(@issue), resource_vote_clear: vote_clear_issue_path(@issue) }
     %section.meta
       %p
       - if permitted_to? :view_profile, @issue.created_by

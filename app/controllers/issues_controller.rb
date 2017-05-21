@@ -87,32 +87,17 @@ class IssuesController < ApplicationController
   end
 
   def vote_up
-    if current_user.voted_for? issue
-      set_flash_message :already
-    else
+    unless current_user.voted_for? issue
       current_user.vote_exclusively_for issue
-      set_flash_message :success
     end
-    redirect_to issue
+    @resource = @issue
+    render partial: "shared/vote_up", locals: { resource: @issue }
   end
 
-  def vote_down
-    if current_user.voted_against? issue
-      set_flash_message :already
-    else
-      current_user.vote_exclusively_against issue
-      set_flash_message :success
-    end
-    redirect_to issue
-  end
 
   def vote_clear
-    if current_user.clear_votes issue
-      set_flash_message :success
-    else
-      set_flash_message :failure
-    end
-    redirect_to issue
+    current_user.clear_votes issue
+    render partial: "shared/vote_clear", locals: { resource: @issue }
   end
 
   protected

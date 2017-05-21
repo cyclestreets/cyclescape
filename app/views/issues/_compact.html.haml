@@ -23,7 +23,5 @@
       %p
         = issue.brief_description
     .votes-cell
-      .votes
-        .vote-count
-          %span= issue.vote_count
-          = t(".votes")
+      =render partial: "shared/votable",
+        locals: { resource: issue.object,  resource_vote_up: vote_up_issue_path(issue), resource_vote_clear: vote_clear_issue_path(issue) }

@@ -72,7 +72,7 @@ authorization do
       if_attribute committee_members: contains { user }
     end
 
-    has_permission_on :issues, to: [:new, :create, :vote_up, :vote_down, :vote_clear]
+    has_permission_on :issues, to: [:new, :create, :vote_up, :vote_clear]
     has_permission_on :issues do
       to [:edit, :update]
       if_attribute created_by: is { user }
