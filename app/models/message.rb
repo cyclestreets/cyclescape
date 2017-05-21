@@ -34,6 +34,7 @@ class Message < ActiveRecord::Base
 
   before_create :set_in_reply_to
   after_commit  :update_search
+  acts_as_voteable
 
   scope :recent,     -> { order('created_at DESC').limit(3) }
   scope :approved,   -> { where(status: [nil, 'approved']) }

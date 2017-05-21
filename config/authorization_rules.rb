@@ -78,7 +78,7 @@ authorization do
       if_attribute created_by: is { user }
     end
     has_permission_on :issue_tags, to: [:update]
-    has_permission_on :messages, to: [:new, :create]
+    has_permission_on :messages, to: [:new, :create, :vote_up, :vote_clear]
     has_permission_on :message_library_notes, to: [:new, :create]
     has_permission_on :message_library_documents, to: [:new, :create]
     has_permission_on :issue_message_threads, to: [:new, :create]

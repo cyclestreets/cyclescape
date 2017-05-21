@@ -96,7 +96,9 @@ Rails.application.routes.draw do
     resources :messages do
       resources :documents, controller: 'message_library/documents'
       resources :notes, controller: 'message_library/notes'
-      put :approve, :reject, :censor, on: :member
+      member do
+        put :approve, :reject, :censor, :vote_up, :vote_clear
+      end
     end
     scope module: :message do
       resources :photos, only: [:create, :show]

@@ -1,0 +1,8 @@
+.votes
+  - clear_up = (current_user && current_user.voted_for?(resource)) ? { clear: "", up: "hide" } : { clear: "hide", up: "" }
+  = link_to "", resource_vote_clear, method: :put, class: "vote-count #{clear_up[:clear]}", remote: true, id: "vote-clear-#{resource.id}"
+  = link_to "", resource_vote_up, method: :put, class: "vote-count unvoted #{clear_up[:up]}", remote: true, id: "vote-up-#{resource.id}"
+  %span.tally{id: resource.id}= resource.plusminus
+  - if not permitted_to? :vote_up, resource.class.name.downcase.pluralize.to_sym
+    .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)
+
