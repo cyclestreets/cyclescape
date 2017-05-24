@@ -102,6 +102,7 @@ group :test do
   gem 'launchy'
   gem 'rspec-collection_matchers'
   gem 'selenium-webdriver'
+  gem 'poltergeist'
   gem 'shoulda-matchers'
   gem 'sunspot_test'
   gem 'test_after_commit'

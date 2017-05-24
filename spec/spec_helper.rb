@@ -9,7 +9,9 @@ require 'email_spec'
 require 'database_cleaner'
 require 'declarative_authorization/maintenance'
 require 'webmock/rspec'
+require 'capybara/poltergeist'
 
+Capybara.javascript_driver = :poltergeist
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
@@ -69,7 +71,8 @@ RSpec.configure do |config|
 
   config.around(:each) do |ex|
     DatabaseCleaner.strategy = :transaction
-    if ex.metadata[:db_truncate]
+    truncate_clean = ex.metadata[:db_truncate] || ex.metadata[:js]
+    if truncate_clean
       DatabaseCleaner.strategy = :truncation, { pre_count: true, cache_tables: true }
     end
 
@@ -84,7 +87,7 @@ RSpec.configure do |config|
 
     DatabaseCleaner.clean
 
-    if ex.metadata[:db_truncate] && User.where(id: 1).blank?
+    if truncate_clean && User.where(id: 1).blank?
       root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
                       password: 'changeme', password_confirmation: 'changeme', role: 'admin')
       root.skip_confirmation!

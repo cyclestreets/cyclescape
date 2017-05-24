@@ -300,12 +300,6 @@
         title: Issues in the area of %{group_name}
       update:
         success: Issue updated
-      vote_clear:
-        failure: Your vote couldn't be cleared
-        success: Your vote has been cleared
-      vote_up:
-        already: You've already voted up this issue
-        success: You have voted up this issue
     potential_members:
       new:
         title: Update the potential membership list for %{group_name}
@@ -627,12 +621,6 @@
       show_photos: Show Photos
     update:
       success: Issue updated
-    vote_clear:
-      failure: Your vote couldn't be cleared
-      success: Your vote has been cleared
-    vote_up:
-      already: You've already voted up this issue
-      success: You have voted up this issue
     form:
       currently: Currently is
   layouts:
@@ -1058,6 +1046,8 @@
       group_private: Group Private
       public: Public
       posted_at: posted %{time_ago} ago
+    votable:
+      sign_in_to_vote_html: Please %{sign_in_link} to vote.
   site:
     comments:
       destroy:

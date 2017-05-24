@@ -370,11 +370,6 @@ describe 'Issues' do
 
   context 'voting' do
     let(:issue) { create(:issue) }
-    let(:meg) { create(:meg) }
-
-    before do
-      meg.vote_for(issue)
-    end
 
     def within_voting_panel(&block)
       within('.voting', &block)
@@ -382,6 +377,7 @@ describe 'Issues' do
 
     context 'as a visitor' do
       before do
+        create(:user).vote_for(issue)
         visit issue_path(issue)
       end
 
@@ -392,64 +388,39 @@ describe 'Issues' do
       end
 
       it 'should not allow you to vote' do
-        click_on 'Vote Up'
+        expect(page).to have_content('Please sign in to vote')
+        find(:css, '.vote-count:not(.hide)').click
         expect(page).to have_content('You need to sign in or sign up before continuing.')
         expect(issue.votes_count).to eql(1)
-      end
-
-      it 'should have a message saying they need to sign in' do
-        expect(page).to have_content('Please sign in to vote')
       end
     end
 
     context 'as a site user' do
       include_context 'signed in as a site user'
+
       before do
         visit issue_path(issue)
       end
 
-      it 'should allow you to vote up' do
-        click_on 'Vote Up'
-        expect(page).to have_content('You have voted up this issue')
-        within_voting_panel do
-          expect(page).to have_content('2')
-        end
-      end
-
-      it 'should allow you to vote down' do
-        click_on 'Vote Down'
-        expect(page).to have_content('You have voted down this issue')
-        within_voting_panel do
+      it 'should allow you to cancel your vote', js: true do
+        within '.tally' do
           expect(page).to have_content('0')
         end
-      end
 
-      it "shouldn't count repeated votes" do
-        click_on 'Vote Up'
-        expect(page).not_to have_content('Vote Up')
-      end
-
-      it 'should allow you to change your vote' do
-        click_on 'Vote Up'
-        click_on 'Vote Down'
         within_voting_panel do
+          find(:css, '.vote-count').click
+        end
+
+        within '.tally' do
+          expect(page).to have_content('1')
+        end
+
+        within_voting_panel do
+          find(:css, '.vote-count').click
+        end
+
+        within '.tally' do
           expect(page).to have_content('0')
-        end
-      end
-
-      it 'should allow you to cancel your vote' do
-        within_voting_panel do
-          expect(page).to have_content('1')
-          click_on 'Vote Up'
-        end
-        # Keep these blocks seperate otherwise first page reference
-        # is retained
-        within_voting_panel do
-          click_on 'Cancel'
-        end
-        expect(page).to have_content('Your vote has been cleared')
-        within_voting_panel do
-          expect(page).to have_content('1')
         end
       end
     end
