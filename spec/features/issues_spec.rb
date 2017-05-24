@@ -372,7 +372,7 @@ describe 'Issues' do
     let(:issue) { create(:issue) }
 
     def within_voting_panel(&block)
-      within('.voting', &block)
+      within('.votes', &block)
     end
 
     context 'as a visitor' do
@@ -395,20 +395,14 @@ describe 'Issues' do
       end
     end
 
-    context 'as a site user' do
-      include_context 'signed in as a site user'
-
-      before do
-        visit issue_path(issue)
-      end
-
-      it 'should allow you to cancel your vote', js: true do
+    shared_examples 'vote and cancel your vote' do
+      it "vote and cancel", js: true do
         within '.tally' do
           expect(page).to have_content('0')
         end
 
         within_voting_panel do
-          find(:css, '.vote-count').click
+          find(:css, '.vote-count:not(.hide)').click
         end
 
         within '.tally' do
@@ -422,6 +416,34 @@ describe 'Issues' do
         within '.tally' do
           expect(page).to have_content('0')
         end
+      end
+    end
+
+    context 'as a site user' do
+      include_context 'signed in as a site user'
+
+      context "for a specific issue" do
+        let!(:resource) { issue }
+        before { visit issue_path(issue) }
+
+        include_examples 'vote and cancel your vote'
+      end
+
+      context "for the issues index" do
+        let!(:resource) { issue }
+        before { visit issues_path }
+
+        include_examples 'vote and cancel your vote'
+      end
+
+      context "for the issues index" do
+        let(:thread) { message.thread }
+        let(:message) { create :message }
+        let!(:resource) { message }
+
+        before { visit thread_path(thread) }
+
+        include_examples 'vote and cancel your vote'
       end
     end
   end
