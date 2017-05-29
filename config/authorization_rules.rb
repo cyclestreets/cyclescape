@@ -116,18 +116,20 @@ authorization do
       if_attribute thread: {group_committee_members: contains { user }}
     end
 
-    has_permission_on :message_thread_subscriptions, to: :destroy
-    has_permission_on :message_thread_subscriptions do
-      to [:create]
-      if_attribute public?: is { true }
+    has_permission_on :message_thread_subscriptions, to: [:destroy, :edit] do
+      if_attribute user: is { user }
     end
     has_permission_on :message_thread_subscriptions do
       to [:create]
-      if_attribute private_to_group?: is { true }, group: is_in { user.groups }
+      if_attribute thread: { public?: true }
     end
     has_permission_on :message_thread_subscriptions do
       to [:create]
-      if_attribute private_to_committee?: is { true }, group_committee_members: contains { user }
+      if_attribute thread: { private_to_group?: true, group: is_in { user.groups } }
+    end
+    has_permission_on :message_thread_subscriptions do
+      to [:create]
+      if_attribute thread: { private_to_committee?: true, group_committee_members: contains { user } }
     end
     has_permission_on :message_thread_tags, to: :update
     has_permission_on :message_thread_user_priorities, to: [:create, :update]

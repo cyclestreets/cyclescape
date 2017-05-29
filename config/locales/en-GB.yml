@@ -776,6 +776,8 @@
         success: You are now subscribed to this thread
       destroy:
         success: You have unsubscribed from this thread
+      edit:
+        unsubscribe: are sure you want to stop following
     tags:
       panel:
         edit_tags: edit

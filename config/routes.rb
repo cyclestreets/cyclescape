@@ -111,7 +111,7 @@ Rails.application.routes.draw do
       resources :thread_leaders, only: [:create]
     end
     scope module: :message_thread do
-      resources :subscriptions, only: [:create, :destroy]
+      resources :subscriptions, only: [:edit, :create, :destroy]
       resource :tags, only: [:update]
       resource :user_priorities, only: [:create, :update]
       resource :leaders, only: [:create, :destroy]

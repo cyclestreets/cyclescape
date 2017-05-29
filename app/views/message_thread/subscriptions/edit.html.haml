@@ -1,0 +1,10 @@
+%p
+  = @subscription.user.full_name
+  = t(".unsubscribe")
+  = link_to(@thread.title, thread_path(@thread))
+  ?
+  = semantic_form_for @subscription, url: thread_subscription_path(@thread, @subscription, action: :destroy), method: :delete do |f|
+    = f.actions do
+      = hidden_field_tag 't', params[:t]
+      = f.action :submit, label: :delete, button_html: { class: "btn-red btn-unsubscribe" }
+

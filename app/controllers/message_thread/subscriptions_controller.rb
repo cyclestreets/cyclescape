@@ -1,5 +1,8 @@
 class MessageThread::SubscriptionsController < MessageThread::BaseController
-  filter_access_to :all, attribute_check: true, load_method: :load_thread
+  filter_access_to :all, attribute_check: true, load_method: :load_subscription
+
+  def edit
+  end
 
   def create
     respond_to do |format|
@@ -14,12 +17,26 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
   end
 
   def destroy
-    @subscription = @thread.subscriptions.find params[:id]
     @subscription.destroy
     respond_to do |format|
       set_flash_message :success
       format.html { redirect_to thread_path @thread }
       format.js { }
     end
+  end
+
+  def current_user
+    @user_by_token ||= User.find_by(public_token: params[:t]) || super
+  end
+
+  private
+
+  def load_subscription
+    subscriptions = load_thread.subscriptions
+    @subscription = if params[:id]
+                      subscriptions.find params[:id]
+                    else
+                      subscriptions.build
+                    end
   end
 end
