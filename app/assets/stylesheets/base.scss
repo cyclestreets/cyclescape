@@ -145,7 +145,7 @@ dl {
 // buttons
 button,
 input.submit,
-.btn-grey {
+input.btn-grey, .btn-grey {
   @include button-text-grey;
 }
 .btn-green, .formtastic input.btn-green {
@@ -161,7 +161,7 @@ input.submit,
     weight: bold;
   }
 }
-.btn-red {
+input.btn-red, .btn-red {
   @include button-text-red;
 }
 .btn-user-colour {
