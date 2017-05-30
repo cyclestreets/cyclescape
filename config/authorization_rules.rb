@@ -113,7 +113,7 @@ authorization do
     end
     has_permission_on :messages do
       to [:approve, :reject]
-      if_attribute thread: {group_committee_members: contains { user }}
+      if_attribute thread: { group_committee_members: contains { user } }
     end
 
     has_permission_on :message_thread_subscriptions, to: [:destroy, :edit] do
@@ -135,7 +135,7 @@ authorization do
     has_permission_on :message_thread_user_priorities, to: [:create, :update]
     has_permission_on [:message_thread_leaders], join_by: :and do
       to [:create]
-      if_attribute subscribers: contains { user }, closed: is { false }
+      if_attribute subscribers: contains { user }, closed: false
     end
     has_permission_on :message_photos, :message_links, :message_deadlines,
                       :message_library_items, :message_documents, :message_street_views,

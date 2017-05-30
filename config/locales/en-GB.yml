@@ -1106,8 +1106,7 @@
       removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
     footer:
       thread: Cyclescape discussion thread
-      unsubscribe: You can stop following this thread by visiting the link above and
-        clicking 'unfollow this thread'.
+      unsubscribe: You can stop following this thread by visiting
   thread_priorities:
     very_high: Top-priority
     high: Important

@@ -17,7 +17,8 @@ class ThreadMailer < ActionMailer::Base
     @message = message
     @thread = message.thread
     @subscriber = subscriber
-    subject = if @thread.try(:private_to_committee?)
+    @subscription = @thread.subscriptions.find_by(user: @subscriber)
+    subject = if @thread.private_to_committee?
                 "mailers.thread_mailer.common.committee_subject"
               else
                 "mailers.thread_mailer.common.subject"

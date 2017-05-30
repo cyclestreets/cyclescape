@@ -11,6 +11,10 @@ describe ThreadMailer do
   let(:document)      { create(:document_message, created_by: user, message: message_three, thread: thread) }
   let(:deadline_message) { create(:deadline_message, created_by: user, message: message_three, thread: thread) }
 
+  before do
+    thread.add_subscriber user
+  end
+
   describe 'new document messages' do
     it 'has correct text in email' do
       document
@@ -19,7 +23,6 @@ describe ThreadMailer do
       expect(subject.body).to include("Brian#{I18n.t('.thread_mailer.header.committee')}")
       expect(subject.body).to include(I18n.t('.thread_mailer.new_document_message.view_the_document'))
       expect(subject.body).to include("http://www.example.com#{document.file.url}")
-      expect(subject.body).to include(I18n.t('.thread_mailer.new_document_message.view_the_document'))
       expect(subject.to).to include(user.email)
       expect(subject.header['Reply-To'].value).to eq("<message-#{message_three.public_token}@cyclescape.org>")
       expect(subject.header['Message-ID'].value).to eq("<message-#{message_three.public_token}@cyclescape.org>")

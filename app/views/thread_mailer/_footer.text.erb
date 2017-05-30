@@ -22,3 +22,4 @@ Everyone can view this discussion thread and post messages.
 <% end %>
 
 <%= t ".unsubscribe" %>
+<%= edit_thread_subscription_url(@thread, @subscription, t: @subscriber.public_token) %>
