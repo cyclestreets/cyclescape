@@ -1,0 +1,5 @@
+$(".flash-container").html(
+  '<div class="alert flash" id="unauthenticated"> <%= I18n.t("devise.failure.unauthenticated") %> <%= link_to I18n.t("shared.permission_denied.login"), new_user_session_path %></div>'
+);
+$(window).scrollTop(0);
+$("#unauthenticated").fadeOut(9000);
