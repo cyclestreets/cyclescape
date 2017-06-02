@@ -7,10 +7,11 @@ class ThreadMailer < ActionMailer::Base
     @threads_messages = threads_messages
     @subscriber = user
 
-    mail(to: @subscriber.name_with_email,
-         subject: t('mailers.thread_mailer.digest.subject', date: Date.current.to_s(:long)),
-         reply_to: no_reply_address,
-        )
+    mail(
+      to: @subscriber.name_with_email,
+      subject: t('mailers.thread_mailer.digest.subject', date: Date.current.to_s(:long)),
+      reply_to: no_reply_address,
+    )
   end
 
   def common(message, subscriber)
