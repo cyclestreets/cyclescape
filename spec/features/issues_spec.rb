@@ -371,10 +371,6 @@ describe 'Issues' do
   context 'voting' do
     let(:issue) { create(:issue) }
 
-    def within_voting_panel(&block)
-      within('.votes', &block)
-    end
-
     context 'as a visitor' do
       before do
         create(:user).vote_for(issue)
@@ -382,7 +378,7 @@ describe 'Issues' do
       end
 
       it 'should show the vote count' do
-        within_voting_panel do
+        within('.votes') do
           expect(page).to have_content('1')
         end
       end
@@ -399,22 +395,21 @@ describe 'Issues' do
       it "vote and cancel", js: true do
         within '.tally' do
           expect(page).to have_content('0')
+          expect(page).to_not have_content('1')
         end
 
-        within_voting_panel do
-          find(:css, '.vote-count:not(.hide)').click
-        end
+        find(:css, '.vote-count').click
 
         within '.tally' do
           expect(page).to have_content('1')
+          expect(page).to_not have_content('0')
         end
 
-        within_voting_panel do
-          find(:css, '.vote-count').click
-        end
+        find(:css, '.vote-count').click
 
         within '.tally' do
           expect(page).to have_content('0')
+          expect(page).to_not have_content('1')
         end
       end
     end
