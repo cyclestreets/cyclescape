@@ -1,4 +1,5 @@
 inherit_from: .rubocop_todo.yml
+
 AllCops:
   Exclude:
    - db/schema.rb
@@ -16,5 +17,4 @@ Rails/HttpPositionalArguments:
 Rails/DynamicFindBy:
   Whitelist:
     - find_by_tag
-
-Style/Lambda: literal
+    - find_by_tags_from
