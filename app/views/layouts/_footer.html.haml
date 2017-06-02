@@ -19,9 +19,9 @@
           %li
             %small= link_to t(".whats_new"), page_path("changelog")
           %li
-            %small= link_to t(".cyclescape_blog", application_name: @site_config.application_name), 'http://blog.cyclescape.org/'
+            %small= link_to t(".cyclescape_blog", application_name: @site_config.application_name), @site_config.blog_url
           %li
-            %small= link_to t(".user_guide"), 'http://blog.cyclescape.org/guide/'
+            %small= link_to t(".user_guide"), @site_config.blog_user_guide_url
           %li
             %small= link_to t(".privacy"), page_path('privacypolicy')
     %div{id: 'supportlogos'}

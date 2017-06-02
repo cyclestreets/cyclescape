@@ -5,8 +5,7 @@ class Admin::SiteConfigsController < ApplicationController
   end
 
   # GET /site_configs/1/edit
-  def edit
-  end
+  def edit; end
 
   def update
     if @site_config.update(site_config_params)
@@ -40,6 +39,7 @@ class Admin::SiteConfigsController < ApplicationController
       :default_locale, :timezone,
       :ga_account_id, :ga_base_domain,
       :default_email, :geocoder_url,
-      :geocoder_key)
+      :geocoder_key, :blog_url, :blog_user_guide_url, :admin_email
+    )
   end
 end

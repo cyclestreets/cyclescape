@@ -10,7 +10,7 @@ FactoryGirl.define do
     end
 
     trait :disabled do
-      disabled_at { DateTime.now }
+      disabled_at { Time.current }
     end
 
     factory :quahogcc do

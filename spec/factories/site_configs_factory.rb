@@ -23,5 +23,8 @@ FactoryGirl.define do
     geocoder_url 'https://api.cyclestreets.net/v2/geocoder'
     email_domain "cyclescape.org"
     default_email "info@example.com"
+    blog_url "http://blog.cyclescape.org/"
+    blog_user_guide_url "http://blog.cyclescape.org/guide/"
+    admin_email "cyclescape-comment@cy.net"
   end
 end

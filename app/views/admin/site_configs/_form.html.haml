@@ -32,6 +32,8 @@
     = f.input :nowhere_location, as: :string
     = f.input :facebook_link
     = f.input :twitter_link
+    = f.input :blog_url
+    = f.input :blog_user_guide_url
     = f.input :header_html
     = f.input :footer_links_html
     = f.input :default_locale, as: :select, collection: UserProfile.all_locales.values.map {|loc| [loc.label, loc.locale]}, include_blank: false
@@ -40,6 +42,7 @@
     = f.input :ga_base_domain
     = f.input :default_email
     = f.input :email_domain
+    = f.input :admin_email, input_html: { placeholder: "only used for comments at the moment" }
     = f.input :geocoder_url
     = f.input :geocoder_key
   = f.actions
