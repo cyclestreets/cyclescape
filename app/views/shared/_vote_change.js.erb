@@ -1,4 +1,1 @@
-$(".tally#<%= resource.id %>").text(
-  <%= resource.plusminus %>
-);
-
+$('#voteable_<%= resource.id  %>').html('<%= escape_javascript render "shared/votable", resource: resource %>');

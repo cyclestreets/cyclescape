@@ -36,4 +36,4 @@
           %li= link_to t(".create_document"), new_thread_message_document_path(thread, message)
   %section.voting
     =render partial: "shared/votable",
-      locals: { resource: message,  resource_vote_up: vote_up_thread_message_path(thread, message), resource_vote_clear: vote_clear_thread_message_path(thread, message) }
+      locals: { resource: message }

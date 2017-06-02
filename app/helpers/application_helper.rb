@@ -68,6 +68,21 @@ module ApplicationHelper
     time_tag(date_or_time, title: l(date_or_time, format: :long), &block)
   end
 
+  def vote_up_clear_link(resource)
+    case resource
+    when Message
+      {
+        clear: vote_clear_thread_message_path(resource.thread, resource),
+        up: vote_up_thread_message_path(resource.thread, resource)
+      }
+    when Issue
+      {
+        clear: vote_clear_issue_path(resource),
+        up: vote_up_issue_path(resource)
+      }
+    end
+  end
+
   def formatted_created_at(item)
     time_tag_with_title(item.created_at) do
       t('item_created_at', time_ago: time_ago_in_words(item.created_at))

@@ -45,12 +45,12 @@ class MessagesController < ApplicationController
     unless current_user.voted_for? message
       current_user.vote_exclusively_for message
     end
-    render partial: "shared/vote_up", locals: { resource: message }
+    render partial: "shared/vote_change", locals: { resource: message }
   end
 
   def vote_clear
     current_user.clear_votes message
-    render partial: "shared/vote_clear", locals: { resource: message }
+    render partial: "shared/vote_change", locals: { resource: message }
   end
 
   protected

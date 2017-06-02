@@ -11,7 +11,7 @@
   .main
     %section.voting
       =render partial: "shared/votable",
-        locals: { resource: @issue.object,  resource_vote_up: vote_up_issue_path(@issue), resource_vote_clear: vote_clear_issue_path(@issue) }
+        locals: { resource: @issue.object }
     %section.meta
       %p
       - if permitted_to? :view_profile, @issue.created_by
