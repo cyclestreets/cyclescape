@@ -1,9 +1,18 @@
 class GroupsController < ApplicationController
   def index
-    groups = Group.ordered.enabled.page params[:page]
+    groups = Group.ordered.enabled
 
-    @groups = GroupDecorator.decorate_collection groups
-    @start_location = index_start_location
+    respond_to do |format|
+      format.html do
+        groups = groups.page params[:page]
+        @groups = GroupDecorator.decorate_collection groups
+        @start_location = index_start_location
+      end
+
+      format.js do
+        @groups = groups.from_geo_or_name params["homepage-find"]
+      end
+    end
   end
 
   def show

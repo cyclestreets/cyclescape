@@ -18,7 +18,6 @@
 #
 
 class Group < ActiveRecord::Base
-
   has_many :memberships, class_name: 'GroupMembership', dependent: :destroy
   has_many :members, through: :memberships, source: :user
   has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy
@@ -40,6 +39,23 @@ class Group < ActiveRecord::Base
   scope :enabled, -> { where(disabled_at: nil) }
 
   normalize_attributes :short_name, with: [:strip, :blank, :downcase]
+
+  def self.from_geo_or_name(geo_name)
+    geo_ids = from_geo(geo_name).ids
+    name_ids = where(arel_table[:name].matches("%#{geo_name}%")).ids
+    where(id: name_ids + geo_ids)
+  end
+
+  def self.from_geo(geo_name)
+    connection = Excon.new(Geocoder::GEO_URL, headers: { 'Accept' => Mime::JSON.to_s })
+    rsp = connection.get(query: { q: geo_name, key: Geocoder::API_KEY})
+    json = JSON.parse(rsp.body)
+    bboxes = json["features"].map { |fe| BboxCoerce.call(fe["properties"]["bbox"]) }
+    joins(:profile).
+      merge(GroupProfile.local.intersects(bboxes.map(&:to_geometry).inject(&:union)))
+  rescue JSON::ParserError
+    none
+  end
 
   def committee_members
     members.includes(:memberships).where(group_memberships: {role: 'committee'}).

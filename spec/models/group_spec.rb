@@ -30,6 +30,39 @@ describe Group do
     end
   end
 
+  it ".from_geo_name" do
+    stub_request(:get, %r{https://api\.cyclestreets\.net/v2/geocoder\?key=.*&q=leeds}).
+      with(:headers => {'Accept' => 'application/json'}).
+      to_return(
+        status: 200, body: <<-JSON
+          {
+              "type": "FeatureCollection",
+              "features": [
+                  {
+                      "type": "Feature",
+                      "properties": {
+                          "name": "Leeds",
+                          "near": "Yorkshire and the Humber, England",
+                          "bbox": "-0.04,52.289,-0.01,52.29"
+                      },
+                      "geometry": {
+                          "type": "Point",
+                          "coordinates": [
+                              -1.5437941,
+                              53.7974185
+                          ]
+                      }
+                  }
+              ]
+          }
+      JSON
+      )
+    quahogc_profile = create(:quahogcc_group_profile)
+    leeds = create(:group, name: "LEEDS")
+
+    expect(described_class.from_geo_or_name("leeds")).to match_array [quahogc_profile.group, leeds]
+  end
+
   describe 'newly created' do
     subject { create(:group) }
 

@@ -16,6 +16,16 @@
   %section.homepage-groups
     %h2= t ".groups_title"
     %p= t ".groups_intro_html", groups_link: link_to(t(".find_local_groups"), groups_path)
+  %section.homepage-find
+    %h2= t ".find_group"
+
+    = form_tag(groups_path, method: :get, remote: true) do
+      %label= t ".your_postcode"
+      = text_field_tag "homepage-find", nil, placeholder: t(".your_postcode")
+      %button{ type: "submit" }= t ".go"
+
+    .search-results
+
   %section.twitter
     = render partial: "twitter"
 

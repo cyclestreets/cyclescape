@@ -1,0 +1,7 @@
+%ul.group-threads-list
+  %li.green
+    %span
+    %h4
+      = link_to_group_home group
+    %p.meta
+      ="#{group.members.count} #{t '.members'}"
