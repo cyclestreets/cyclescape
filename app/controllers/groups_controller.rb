@@ -116,9 +116,9 @@ class GroupsController < ApplicationController
   end
 
   def index_start_location
-    return current_user.start_location if current_user && current_user.start_location != Geo::NOWHERE_IN_PARTICULAR
+    return current_user.start_location if current_user && current_user.start_location != SiteConfig.first.nowhere_location
     return current_group.start_location if current_group && current_group.start_location
-    return Geo::NOWHERE_IN_PARTICULAR
+    return SiteConfig.first.nowhere_location
   end
 
   def group_feature(group, bbox = nil)

@@ -197,7 +197,7 @@ class User < ActiveRecord::Base
     end
 
     # Give up
-    return Geo::NOWHERE_IN_PARTICULAR
+    return SiteConfig.first.nowhere_location
   end
 
   def create_user_prefs

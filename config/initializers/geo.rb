@@ -3,10 +3,7 @@ module Geo
   POINT_ZOOM = 16
   MAP_SEARCH_ZOOM = 14
   # If you see this place, then there's a better choice of places to use.
-  NOWHERE_IN_PARTICULAR = RGeo::Geos.factory(has_z_coordinate: true).point(0.1275, 51.5032, 6)
   ISSUE_MAX_AREA = 0.1 # square degrees
-
-  COLLISIONS_URL = 'https://api.cyclestreets.net/v2/collisions.locations'
 end
 
 RGeo::ActiveRecord::SpatialFactoryStore.instance.tap do |config|

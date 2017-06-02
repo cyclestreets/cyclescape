@@ -14,4 +14,9 @@ window.CONSTANTS = {
   images: {
     defaultMarker: "<%= image_path('map-icons/m-misc.png') %>",
   }
+  tileServers: [
+    { name: "<%= SiteConfig.first.tile_server1_name %>", url: "<%= SiteConfig.first.tile_server1_url %>" },
+    { name: "<%= SiteConfig.first.tile_server2_name %>", url: "<%= SiteConfig.first.tile_server2_url %>" },
+    { name: "<%= SiteConfig.first.tile_server3_name %>", url: "<%= SiteConfig.first.tile_server3_url %>" },
+  ]
 };

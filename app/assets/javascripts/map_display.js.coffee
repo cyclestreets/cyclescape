@@ -2,9 +2,6 @@ require('leaflet-search/dist/leaflet-search.src.js')
 require('leaflet-draw')
 
 class window.LeafletMap
-  @OpenCycle: 'https://{s}.tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png'
-  @OSStreet: 'https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png'
-  @Mapnik: 'https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png'
   @CyclestreetsUrl: "https://www.cyclestreets.net"
   @default_marker_anchor: [30 / 2, 42]
   @drawnItems: new L.FeatureGroup()
@@ -75,13 +72,12 @@ class window.LeafletMap
 
   addLayers: (opts = {}) ->
     opacity = opts.opacity || 0.8
-    openCycle = L.tileLayer(@constructor.OpenCycle, opacity: opacity)
-    openCycle.addTo(@map)
-    baseLayers = {
-      "OpenCycleMap":  openCycle
-      "OS StreetView": L.tileLayer(@constructor.OSStreet, opacity: opacity)
-      "OpenStreetMap": L.tileLayer(@constructor.Mapnik, opacity: opacity)
-    }
+    baseLayers = {}
+    for tileServer, idx in CONSTANTS.tileServers
+      continue if (tileServer.url == "" or tileServer.name == "")
+      tileLayer = L.tileLayer(tileServer.url)
+      baseLayers[tileServer.name] = tileLayer
+      tileLayer.addTo(@map) if idx == 0
     additionalLayers = @remoteJSONLayer
     additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
     additionalLayers['Photos'] = @photoLayer if @photoLayer
