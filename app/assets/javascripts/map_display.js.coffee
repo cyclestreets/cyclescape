@@ -73,7 +73,7 @@ class window.LeafletMap
   addLayers: (opts = {}) ->
     opacity = opts.opacity || 0.8
     baseLayers = {}
-    for tileServer, idx in CONSTANTS.tileServers
+    for tileServer, idx in $("#map-tiles").data("tileservers")
       continue if (tileServer.url == "" or tileServer.name == "")
       tileLayer = L.tileLayer(tileServer.url)
       baseLayers[tileServer.name] = tileLayer
