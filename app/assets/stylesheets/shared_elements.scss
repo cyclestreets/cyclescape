@@ -1097,8 +1097,6 @@ ul.latest-discussions {
   opacity: 0.7;
 }
 
-.top-right {
-  position: absolute;
-  right: 0;
-  top: 0;
+.float-right {
+  float: right !important;
 }

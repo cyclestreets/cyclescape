@@ -252,8 +252,15 @@ body.library-notes {
     }
   }
 }
-@media (max-width: 980px) {
 
+.wrapper-full {
+  overflow-y: hidden;
+  margin-left: auto;
+  width: 98%;
+  margin-right: auto;
+}
+
+@media (max-width: 980px) {
   #page {
     margin-left: auto;
     margin-right: auto;

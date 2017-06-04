@@ -16,6 +16,7 @@ class User::LocationsController < ApplicationController
 
   def new
     # Get the start location before creating a new blank one
+    @full_page = true
     @start_location = current_user.start_location
     @location = current_user.location || current_user.build_location
   end
