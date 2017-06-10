@@ -34,6 +34,11 @@ class PlanningApplication < ActiveRecord::Base
   scope :ordered, -> { order(start_date: :desc) }
   scope :relevant, -> { where(relevant: true) }
   scope :for_local_authority, ->(la) { where(arel_table[:authority_param].matches(la.parameterize)) }
+  scope :search, ->(term) do
+    return none unless term
+    term = "%#{term.strip}%"
+    where(arel_table[:uid].matches(term).or(arel_table[:description].matches(term)))
+  end
 
   validates :uid, :url, :authority_name, :authority_param, presence: true
   validates :uid, uniqueness: { scope: :authority_param }

@@ -103,6 +103,13 @@ class GroupsController < ApplicationController
       paginate page: params[:library_page], per_page: 40
     end
     @library_items = Library::ItemDecorator.decorate_collection library_items.results
+
+    planning_applications = PlanningApplication.
+      where("uid ILIKE ? OR description ILIKE ?", "%#{params[:query].strip}%", "%#{params[:query].strip}%").
+      intersects(group.profile.location).
+      includes(:users, :issue).
+      page params[:planning_page]
+    @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications
   end
 
   private
