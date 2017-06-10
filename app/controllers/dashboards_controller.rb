@@ -91,8 +91,7 @@ class DashboardsController < ApplicationController
     @library_items = Library::ItemDecorator.decorate_collection library_items.results
 
     # PlanningApplications
-    planning_applications = PlanningApplication.
-      where("uid ILIKE ? OR description ILIKE ?", "%#{params[:query].strip}%", "%#{params[:query].strip}%").
+    planning_applications = PlanningApplication.search(params[:query]).
       includes(:users, :issue).
       page params[:planning_page]
     @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications

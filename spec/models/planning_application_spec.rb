@@ -86,6 +86,12 @@ describe PlanningApplication do
     expect(not_hidden).to_not include(twice_hidden)
   end
 
+  it "#search" do
+    create(:planning_application, description: "has no b1ke in it")
+    pa = create(:planning_application, description: "has the term motorbike in it")
+    expect(described_class.search(" bike ")).to eq [pa]
+  end
+
   context 'with old planning applications' do
     before do
       create(:planning_application, created_at: 9.months.ago)
