@@ -7,7 +7,17 @@ cs-CZ:
         resend_confirmation: Znovu odeslat email s potvrzením registrace
         resend_confirmation_submit: Odeslat potvrzení
     failure:
+      unauthenticated: 'Musíte se zaregistrovat nebo přihlásit, pak můžete pokračovat.'
       unconfirmed: Musíte potvrdit svůj účet, pak můžete pokračovat.
+      locked: 'Váš účet je uzamčen.'
+      invalid: 'Neplatná identita nebo heslo.'
+      invalid_token: 'Neplatný ověřovací symbol.'
+      timeout: 'Vaše relace vypršela, přihlašte se prosím znovu, pak můžete pokračovat.'
+      inactive: 'Váš účet ještě nebyl aktivován.'
+      already_authenticated: 'Přihlášení již proběhlo.'
+    sessions:
+      signed_in: 'Přihlášení úspěšné.'
+      signed_out: 'Odhlášení úspěšné.'
     passwords:
       new:
         forgot_password: Zapomenuté heslo?
@@ -29,7 +39,7 @@ cs-CZ:
     invitations:
       edit:
         title: Potvrďte váš účet
-        info: Byl jste pozván, aby jste se připojil k portálu Cyklisté sobě. Aby jste
+        info: Byl jste pozván, aby jste se připojil k portálu Cyclescape. Aby jste
           byly schopni se přihlásit, prosím doplňte údaje k vašemu účtu o heslo. Můžete
           také změnit vaši emailovou adresu na takovou, kterou chcete s touto službou
           používat.
