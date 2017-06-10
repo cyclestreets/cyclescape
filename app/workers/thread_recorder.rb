@@ -10,7 +10,7 @@ class ThreadRecorder
 
   # Main entry point - queue that the thread is viewed right now.
   def self.thread_viewed(thread, user)
-    Resque.enqueue(ThreadRecorder, :record_thread_viewed, thread.id, user.id, Time.now)
+    Resque.enqueue(ThreadRecorder, :record_thread_viewed, thread.id, user.id, Time.current)
   end
 
   # Update the database with when the thread was last viewed

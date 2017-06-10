@@ -71,7 +71,7 @@ class Message < ActiveRecord::Base
   end
 
   def censor!
-    self.censored_at = Time.now
+    self.censored_at = Time.current
     save!
   end
 

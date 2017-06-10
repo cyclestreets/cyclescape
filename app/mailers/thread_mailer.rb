@@ -1,16 +1,17 @@
 class ThreadMailer < ActionMailer::Base
   include MailerHelper
   helper :mailer
-  default from: Rails.application.config.default_email_from
+  default from: ->(_) { SiteConfig.first.default_email }
 
   def digest(user, threads_messages)
     @threads_messages = threads_messages
     @subscriber = user
 
-    mail(to: @subscriber.name_with_email,
-         subject: t('mailers.thread_mailer.digest.subject', date: Date.today.to_s(:long)),
-         reply_to: no_reply_address,
-        )
+    mail(
+      to: @subscriber.name_with_email,
+      subject: t('mailers.thread_mailer.digest.subject', date: Date.current.to_s(:long)),
+      reply_to: no_reply_address,
+    )
   end
 
   def common(message, subscriber)

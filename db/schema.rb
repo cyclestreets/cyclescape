@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425223812) do
+ActiveRecord::Schema.define(version: 20170602212532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -416,6 +416,53 @@ ActiveRecord::Schema.define(version: 20170425223812) do
   end
 
   add_index "site_comments", ["user_id"], name: "index_site_comments_on_user_id", using: :btree
+
+  create_table "site_configs", force: :cascade do |t|
+    t.string   "logo_uid"
+    t.string   "application_name",                                                                                                                                null: false
+    t.string   "funder_image_footer1_uid"
+    t.string   "funder_image_footer2_uid"
+    t.string   "funder_image_footer3_uid"
+    t.string   "funder_image_footer4_uid"
+    t.string   "funder_image_footer5_uid"
+    t.string   "funder_image_footer6_uid"
+    t.string   "funder_name_footer1"
+    t.string   "funder_name_footer2"
+    t.string   "funder_name_footer3"
+    t.string   "funder_name_footer4"
+    t.string   "funder_name_footer5"
+    t.string   "funder_name_footer6"
+    t.string   "funder_url_footer1"
+    t.string   "funder_url_footer2"
+    t.string   "funder_url_footer3"
+    t.string   "funder_url_footer4"
+    t.string   "funder_url_footer5"
+    t.string   "funder_url_footer6"
+    t.geometry "nowhere_location",         limit: {:srid=>4326, :type=>"geometry"},                                                                               null: false
+    t.string   "facebook_link"
+    t.string   "twitter_link"
+    t.text     "footer_links_html",                                                                                                                               null: false
+    t.text     "header_html",                                                                                                                                     null: false
+    t.string   "default_locale",                                                                                                                                  null: false
+    t.string   "timezone",                                                                                                                                        null: false
+    t.string   "ga_account_id"
+    t.string   "ga_base_domain"
+    t.string   "default_email",                                                                                                                                   null: false
+    t.string   "email_domain",                                                                                                                                    null: false
+    t.string   "geocoder_url",                                                                                                                                    null: false
+    t.string   "geocoder_key"
+    t.datetime "created_at",                                                                                                                                      null: false
+    t.datetime "updated_at",                                                                                                                                      null: false
+    t.string   "admin_email",                                                       default: "cyclescape-comments@cyclestreets.net",                              null: false
+    t.string   "blog_url",                                                          default: "http://blog.cyclescape.org/",                                       null: false
+    t.string   "blog_user_guide_url",                                               default: "http://blog.cyclescape.org/guide/",                                 null: false
+    t.string   "tile_server1_name",                                                 default: "OpenCycleMap",                                                      null: false
+    t.string   "tile_server1_url",                                                  default: "https://{s}.tile.cyclestreets.net/opencyclemap/{z}/{x}/{y}@2x.png", null: false
+    t.string   "tile_server2_name",                                                 default: "OS StreetView"
+    t.string   "tile_server2_url",                                                  default: "https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png"
+    t.string   "tile_server3_name",                                                 default: "OpenStreetMap"
+    t.string   "tile_server3_url",                                                  default: "https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png"
+  end
 
   create_table "street_view_messages", force: :cascade do |t|
     t.integer  "message_id"

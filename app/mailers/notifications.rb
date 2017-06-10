@@ -1,6 +1,6 @@
 class Notifications < ActionMailer::Base
   include MailerHelper
-  default from: Cyclescape::Application.config.default_email_from
+  default from: ->(_) { SiteConfig.first.default_email }
 
   def group_membership_request_confirmed(request)
     @member = request.user

@@ -20,7 +20,7 @@ class Admin::User::LocationsController < ApplicationController
       set_flash_message(:success)
       redirect_to action: :index
     else
-      @start_location = Geo::NOWHERE_IN_PARTICULAR
+      @start_location = SiteConfig.first.nowhere_location
       render :new
     end
   end

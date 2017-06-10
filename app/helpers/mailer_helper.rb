@@ -1,7 +1,7 @@
 module MailerHelper
   # Our domain name
   def domain
-    Rails.application.config.default_email_from_domain
+    @domain ||= SiteConfig.first.email_domain
   end
 
   # Deprecated

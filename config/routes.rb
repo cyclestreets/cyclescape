@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :groups do
       put :disable, :enable, on: :member
     end
+    resource :site_config
     resources :stats, only: :index
     resources :message_moderations, only: :index
     resources :planning_filters

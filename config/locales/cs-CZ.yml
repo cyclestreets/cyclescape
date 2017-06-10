@@ -624,19 +624,19 @@ cs-CZ:
       failure: Odmítnutí požadavku na založení místní skupiny se nezdařilo
   home:
     show:
-      introduction_html: Cyklisté sobě je nástroj na podporu místních skupin snažících
-        se o zlepšení podmínek pro jízdu na kole ve svém okolí.
+      introduction_html: "%{application_name} je nástroj na podporu místních skupin snažících
+        se o zlepšení podmínek pro jízdu na kole ve svém okolí."
       center_box_title: Zde můžete navrhnout, jak zlepšit podmínky pro jízdu na kole
       center_box_html: Neexistující cyklostezka? Překážka bránící v provozu? Chybějící
         cyklostojan? Nebo příklad, kde bylo něco uděláno správně?
       report_an_issue: Přidat podnět
       latest_discussions: Poslední diskuze
-      groups_title: Místní skupiny Cyklisté sobě
-      groups_intro_html: Portál Cyklisté sobě používají <strong>místní skupiny</strong>
+      groups_title: Místní skupiny %{application_name}
+      groups_intro_html: Portál %{application_name} používají <strong>místní skupiny</strong>
         v celém Česku. <strong>%{groups_link}</strong> ve vašem okolí a zjistěte jaké
         problémy se snaží řešit.
       find_local_groups: Najděte si místní skupiny
-      twitter_title: Cyclescape na Twitteru
+      twitter_title: "%{application_name} na Twitteru"
     guide:
       title: Jak funguje tento web
       box_1_title: Přidejte  podnět
@@ -783,11 +783,11 @@ cs-CZ:
       funding_from_and_created_by: Web Cyklisté sobě byl podpořen %{name}
       planning_application_data: Planning application data from PlanIt
       top: Zpět na začátek
-      cyclescape_blog: Blog Cyclescape
+      cyclescape_blog: Blog %{application_name}
       privacy: Zásady ochrany osobních údajů
       user_guide: Uživatelská příručka
-      facebook_page: Stránka na Facebooku
-      twitter_page: Stránka na Twitteru
+      facebook_page: "%{application_name} na Facebooku"
+      twitter_page: "%{application_name} na Twitteru"
       osm_credit_html: Mapová data &copy; přispěvatelé <a href='http://www.openstreetmap.org'>
         OpenStreetMap</a>, dostupné pod <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.

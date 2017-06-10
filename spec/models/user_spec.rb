@@ -437,12 +437,12 @@ describe User, type: :model do
 
     it 'should return a relevant location' do
       # start with nowhere
-      expect(subject.start_location).to eql(Geo::NOWHERE_IN_PARTICULAR)
+      expect(subject.start_location).to eql(SiteConfig.first.nowhere_location)
 
       # add a group with no location
       GroupMembership.create( user: subject, group: group, role: 'member' )
       subject.reload
-      expect(subject.start_location).to eql(Geo::NOWHERE_IN_PARTICULAR)
+      expect(subject.start_location).to eql(SiteConfig.first.nowhere_location)
 
       # add a group with a location
       group2.profile.location = polygon

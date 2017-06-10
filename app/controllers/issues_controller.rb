@@ -106,10 +106,10 @@ class IssuesController < ApplicationController
     if centered_issue = Issue.find_by(id: params[:issue_id])
       return centered_issue.location
     end
-    return current_user.start_location if current_user && current_user.start_location != Geo::NOWHERE_IN_PARTICULAR
+    return current_user.start_location if current_user && current_user.start_location != SiteConfig.first.nowhere_location
     return current_group.start_location if current_group && current_group.start_location
     return @issues.first.location unless @issues.empty?
-    return Geo::NOWHERE_IN_PARTICULAR
+    return SiteConfig.first.nowhere_location
   end
 
   def issue_feature(issue, bbox = nil)

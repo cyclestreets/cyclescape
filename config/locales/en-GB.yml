@@ -67,6 +67,7 @@
         manage_issue_categories: Manage Issue Categories
         manage_users: Manage users
         manage_message_moderations: Manage message moderations
+        manage_site_config: Manage site config
     issue_categories:
       create:
         success: Category created
@@ -137,6 +138,9 @@
           The filter rule will be applied to all new and existing planning applications in a background job after saving.
           Each planning application in the authority of the filter where the uid matches the rule will be filtered out of users
           planning index on their dashboard but will still be searchable.
+    site_configs:
+      form:
+        site_config_intro: "The config will alter the site for all users."
   application:
     account_disabled: Your account has been disabled by an administrator
     permission_denied: You are not authorised to access that page.
@@ -516,15 +520,15 @@
       failure: Failed to reject group request
   home:
     show:
-      introduction_html: Cyclescape is an online campaigning toolkit for cycle campaign
-        groups around the UK
+      introduction_html: "%{application_name} is an online campaigning toolkit for cycle campaign
+        groups around the UK"
       center_box_title: Add your cycling issues here
       center_box_html: Non-existent cycle paths? Obstructions for cyclists? Lack of
         cycle parking? Or an example of something done right?
       report_an_issue: Create an issue
       latest_discussions: Latest Discussions
-      groups_title: Cyclescape Groups
-      groups_intro_html: 'Cyclescape is used by <strong>cycle campaign groups</strong>
+      groups_title: "%{application_name} Groups"
+      groups_intro_html: '%{application_name} is used by <strong>cycle campaign groups</strong>
         across the country. <strong>%{groups_link}</strong> and see what they''re
         working to fix.
 
@@ -534,6 +538,7 @@
       find_group: Find group by name or postcode
       your_postcode: Your postcode or area
       go: Go
+      twitter_title: "%{application_name} on Twitter"
     guide:
       title: How Cyclescape Works
       box_1_title: Create cycling issues
@@ -664,11 +669,11 @@
       funding_from_and_created_by: Funding from and created by %{name}
       planning_application_data: Planning application data from PlanIt
       top: Back to top
-      cyclescape_blog: Cyclescape blog
+      cyclescape_blog: "%{application_name} blog"
       privacy: Privacy Policy
       user_guide: User guide
-      facebook_page: CycleStreets Facebook page
-      twitter_page: CycleStreets Twitter account
+      facebook_page: "%{application_name} Facebook page"
+      twitter_page: "%{application_name} Twitter account"
       osm_credit_html: Map data &copy; <a href='http://www.openstreetmap.org'> OpenStreetMap</a>
         contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
@@ -738,6 +743,16 @@
       update:
         success: Library Note Updated
   mailers:
+    admin_mailer:
+      new_site_comment:
+        subject: New site comment
+        body: "
+        Comment with:
+        Name %{name}
+        Email: %{email}
+        URL: %{url}
+        Body: %{body}
+        "
     notifications:
       added_to_group:
         subject: You are now a member of the Cyclescape group for %{group_name}

@@ -17,6 +17,10 @@ describe 'Site feedback' do
       fill_in 'Email', with: 'bobby@example.com'
       click_on 'Send Feedback'
       expect(page).to have_content('Thank you')
+
+      email = ActionMailer::Base.deliveries.last
+      expect(email.body).to include("bobby@example.com")
+      expect(email.body).to include("Your site is awesome!")
     end
 
     it 'should store the request URL with the comment' do

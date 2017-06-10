@@ -1,18 +1,21 @@
 require 'spec_helper'
 
 describe 'home/show.html.haml', type: :view do
+  let(:site_config) { SiteConfig.first }
+
   before do
     user = create :user
     assign :current_user, user
     assign :latest_threads, []
     assign :unviewed_thread_ids, []
+    assign :site_config, site_config
     warden.set_user user
   end
 
   it 'should have the intro text' do
     render
 
-    expect(rendered).to have_content(I18n.t('home.show.introduction_html'))
+    expect(rendered).to have_content(I18n.t('home.show.introduction_html', application_name: site_config.application_name))
   end
 
   it 'should have a report issue button' do

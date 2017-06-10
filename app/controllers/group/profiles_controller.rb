@@ -8,7 +8,7 @@ class Group::ProfilesController < ApplicationController
 
   def edit
     # This needs more thought!
-    @start_location = Geo::NOWHERE_IN_PARTICULAR
+    @start_location = SiteConfig.first.nowhere_location
   end
 
   def update

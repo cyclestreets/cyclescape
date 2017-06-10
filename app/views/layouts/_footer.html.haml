@@ -3,12 +3,15 @@
     #footer-top
       %nav
         %ul
-          %li
-            %a(href="https://www.facebook.com/CycleStreets" class="facebook")
-              = t(".facebook_page")
-          %li
-            %a(href="https://twitter.com/cyclescape" class="twitter")
-              = t(".twitter_page")
+          - if @site_config.facebook_link
+            %li
+              %a(href="#{@site_config.facebook_link}" class="facebook")
+                = t(".facebook_page", application_name: @site_config.application_name)
+          - if @site_config.twitter_link
+            %li
+              %a(href="#{@site_config.twitter_link}" class="twitter")
+                = t(".twitter_page")
+                = t(".twitter_page", application_name: @site_config.application_name)
           %li
             %small= t(".github_page_link_html")
           %li
@@ -16,9 +19,9 @@
           %li
             %small= link_to t(".whats_new"), page_path("changelog")
           %li
-            %small= link_to t(".cyclescape_blog"), 'http://blog.cyclescape.org/'
+            %small= link_to t(".cyclescape_blog", application_name: @site_config.application_name), @site_config.blog_url
           %li
-            %small= link_to t(".user_guide"), 'http://blog.cyclescape.org/guide/'
+            %small= link_to t(".user_guide"), @site_config.blog_user_guide_url
           %li
             %small= link_to t(".privacy"), page_path('privacypolicy')
     %div{id: 'supportlogos'}
@@ -26,17 +29,15 @@
       %p= t(".osm_credit_html")
       %p= t(".supportlogos_introduction")
       %ul
-        %li
-          = link_to image_tag("supportlogos/cyclestreets.png", {title: t(".funding_from_and_created_by", :name => 'CycleStreets'), :alt => 'Logo'}), 'http://www.cyclestreets.net/', :target => "_blank"
-        %li
-          = link_to image_tag("supportlogos/geovation.png", {title: t(".funding_from", :name => 'GeoVation'), :alt => 'Logo'}), 'http://www.geovation.org.uk/', :target => "_blank"
-        %li
-          = link_to image_tag("supportlogos/lushcharitypot.png", {title: t(".funding_from", :name => 'Lush Charity Pot'), :alt => 'Logo'}), 'https://www.lush.co.uk/our-values/charity-support', :target => "_blank"
-        - if group_subdomain?('camcycle')
-          %li
-            = link_to image_tag("supportlogos/cambridgesustainablecity.png", {title: t(".funding_from", :name => 'Cambridge Sustainable City'), :alt => 'Logo'}), 'http://www.cambridge.gov.uk/ccm/navigation/environment-and-recycling/sustainable-city/', :target => "_blank"
-        %li
-          = link_to image_tag("supportlogos/ctc.png", {title: t(".funding_from", :name => 'CTC'), :alt => 'Logo'}), 'http://www.ctc.org.uk/', :target => "_blank"
-        %li
-          = link_to image_tag("supportlogos/pccf.png", {title: t(".funding_from", :name => 'Polden-Puckham Charitable Foundation'), :alt => 'Logo'}), 'http://www.polden-puckham.org.uk/', :target => "_blank"
+        - 1.upto(3).each do |nlogo|
+          - if logo = @site_config.public_send("funder_image_footer#{nlogo}")
+            %li
+              = link_to image_tag(logo.url, {title: t(".funding_from", name: @site_config.public_send("funder_name_footer#{nlogo}")), :alt => 'Logo'}), @site_config.public_send("funder_url_footer#{nlogo}"), :target => "_blank"
+          - if group_subdomain?('camcycle')
+            %li
+              = link_to image_tag("supportlogos/cambridgesustainablecity.png", {title: t(".funding_from", :name => 'Cambridge Sustainable City'), :alt => 'Logo'}), 'http://www.cambridge.gov.uk/ccm/navigation/environment-and-recycling/sustainable-city/', :target => "_blank"
+        - 4.upto(6).each do |nlogo|
+          - if logo = @site_config.public_send("funder_image_footer#{nlogo}")
+            %li
+              = link_to image_tag(logo.url, {title: t(".funding_from", name: @site_config.public_send("funder_name_footer#{nlogo}")), :alt => 'Logo'}), @site_config.public_send("funder_url_footer#{nlogo}"), :target => "_blank"
 %a.back-to-top(href="#")= t(".top")

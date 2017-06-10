@@ -26,8 +26,8 @@
         - if current_group
           = link_to root_path, id: "site-title" do
             %h1= current_group.name
-        - else
-          = link_to image_tag("header_logo.png", alt: t(".title")), root_path, id: "site-title"
+        - elsif @site_config.logo
+          = link_to image_tag(@site_config.logo.url, alt: t(".title")), root_path, id: "site-title"
         %ul#top-menu
           %li.about= link_to t(".title"), root_url(subdomain: "www"), class: "cyclescape-logo"
           %li=link_to t(".about"), "http://blog.cyclescape.org/about/"
@@ -90,11 +90,15 @@
               = image_tag "spinner.gif"
               = t(".loading")
             .inner
-    - if Rails.application.config.analytics[:google]
+              - tile_servers = [ { name: SiteConfig.first.tile_server1_name, url: SiteConfig.first.tile_server1_url },
+                { name: SiteConfig.first.tile_server2_name, url: SiteConfig.first.tile_server2_url },
+                { name: SiteConfig.first.tile_server3_name, url: SiteConfig.first.tile_server3_url } ]
+              #map-tiles{ "data-tileservers" => tile_servers.to_json }
+    - if @site_config.ga_account_id
       :javascript
         var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{Rails.application.config.analytics[:google][:account_id]}']);
-        _gaq.push(['_setDomainName', '#{Rails.application.config.analytics[:google][:base_domain]}']);
+        _gaq.push(['_setAccount', '#{@site_config.ga_account_id}']);
+        _gaq.push(['_setDomainName', '#{@site_config.ga_base_domain}']);
         _gaq.push(['_trackPageview']);
         (function() {
           var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

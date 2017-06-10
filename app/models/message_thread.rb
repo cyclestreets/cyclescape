@@ -282,7 +282,7 @@ class MessageThread < ActiveRecord::Base
     # 4. nowhere in particular
     locatable = Issue.unscoped.find issue_id if issue_id
     locatable = locatable || (group.try :profile if group.try(:profile).try(:location)) || created_by.location
-    locatable ? locatable.centre : Geo::NOWHERE_IN_PARTICULAR
+    locatable ? locatable.centre : SiteConfig.first.nowhere_location
   end
 
   def upcoming_deadline_messages
