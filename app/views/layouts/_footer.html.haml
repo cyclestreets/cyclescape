@@ -27,7 +27,7 @@
     %div{id: 'supportlogos'}
 
       %p= t(".osm_credit_html")
-      %p= t(".supportlogos_introduction")
+      %p= t(".supportlogos_introduction", application_name: @site_config.application_name)
       %ul
         - 1.upto(3).each do |nlogo|
           - if logo = @site_config.public_send("funder_image_footer#{nlogo}")

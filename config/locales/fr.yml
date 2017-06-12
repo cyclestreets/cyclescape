@@ -434,7 +434,7 @@ fr:
       new:
         title: Request membership of %{group_name}
         your_membership_request_will: Please click the button below to apply to join
-          this group's Cyclescape area..
+          this group's %{application_name} area..
       reject:
         failure: There was a problem rejecting this membership request
         success: Membership rejected
@@ -535,7 +535,7 @@ fr:
       group_management: Group management
       group_organisers: Group organisers
       leave_group: Leave the group
-      join_title: Join our Cyclescape group
+      join_title: Join our %{application_name} group
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public threads
@@ -638,7 +638,7 @@ fr:
       find_local_groups: Find groups local to you
       twitter_title: "%{application_name} on Twitter"
     guide:
-      title: How Cyclescape Works
+      title: How %{application_name} Works
       box_1_title: Create cycling issues
       box_1_body: Quickly raise issues on this site.
       box_2_title: Get advice from others
@@ -753,7 +753,7 @@ fr:
     application:
       admin: Admin
       admin_tooltip: Admin area, for system administrators
-      dashboard: My Cyclescape
+      dashboard: My %{application_name}
       dashboard_tooltip: Your personal dashboard, showing updates on discussion threads
         you are subscribed to
       about: About
@@ -773,12 +773,12 @@ fr:
       threads_tooltip: Discussions on each issue
       tags: Tags
       tags_tooltip: Cloud of the top 100 most used tags
-      title: Cyclescape
+      title: "%{application_name}"
     footer:
       application_version_html: 'Version ref: %{version}'
       github_page_link_html: View the source at <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>
       whats_new: What's new?
-      supportlogos_introduction: 'Cyclescape has been made possible thanks to generous
+      supportlogos_introduction: '%{application_name} has been made possible thanks to generous
         support from:'
       funding_from: Funding from %{name}
       funding_from_and_created_by: Funding from and created by %{name}
@@ -941,7 +941,7 @@ fr:
         threads, shown below (most recently-updated first).
       issues: issues
       introduction: Below are latest updates on discussion threads (across all of
-        Cyclescape) that are public (including those owned by groups and/or administrative.)
+        %{application_name}) that are public (including those owned by groups and/or administrative.)
       introduction_group_pointer: To show only discussions from a group you are a
         member of, use the group switcher on the top right.
     library_panel:
@@ -1127,7 +1127,7 @@ fr:
       update_account: Update My Account Details
     permission_denied:
       apply_to_group_html: This discussion is owned by %{group_name}. Would you like
-        to <a href='%{join_link}'><strong>apply to join %{group_name}'s Cyclescape
+        to <a href='%{join_link}'><strong>apply to join %{group_name}'s %{application_name}
         group</strong></a>?
     tags:
       panel:

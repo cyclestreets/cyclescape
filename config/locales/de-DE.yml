@@ -535,7 +535,7 @@ de-DE:
       group_management: Gruppenverwaltung
       group_organisers: Gruppenorganisatoren
       leave_group: Gruppe verlassen
-      join_title: Trete unserer Cyclescape-Gruppe bei
+      join_title: Trete unserer %{application_name}-Gruppe bei
       no_issues: In diesem Gruppenbereich gibt es keine Themen
       no_location: Diese Gruppe hat noch keinen Standort
       no_threads: Diese Gruppe hat noch keine öffentlichen Diskussionen
@@ -634,7 +634,7 @@ de-DE:
       find_local_groups: Finde Gruppen in deiner Nähe
       twitter_title: "%{application_name} bei Twitter"
     guide:
-      title: Wie Cyclescape funktioniert
+      title: Wie %{application_name} funktioniert
       box_1_title: Berichte über ein Thema
       box_1_body: Bringe Themen auf dieser Seite schnell zur Sprache.
       box_2_title: Bekomme Hilfe von anderen
@@ -753,7 +753,7 @@ de-DE:
     application:
       admin: Admin
       admin_tooltip: Admin-Bereich, für System-Administratoren
-      dashboard: Mein Cyclescape
+      dashboard: Mein %{application_name}
       dashboard_tooltip: Dein persönliches Dashboard zeigt Dir Updates in Diskussionen,
         die Du abonniert hast
       about: "Über"
@@ -773,12 +773,12 @@ de-DE:
       threads_tooltip: Diskussionen zu jedem Thema
       tags: Tags
       tags_tooltip: Wolke der 100 meist genutzen Tags
-      title: Cyclescape
+      title: "%{application_name}"
     footer:
       application_version_html: 'Versionshash: %{version}'
       github_page_link_html: Einblick in den Quellcode auf <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>
       whats_new: Was ist neu
-      supportlogos_introduction: 'Cyclescape wurde möglich dank der großzügigen Unterstützung
+      supportlogos_introduction: '%{application_name} wurde möglich dank der großzügigen Unterstützung
         von:'
       funding_from: Finanziert von from %{name}
       funding_from_and_created_by: Mittel aus und erstellt von %{name}
@@ -946,7 +946,7 @@ de-DE:
         es ein oder mehrere Diskussionen geben (beginnend mit den zuletzt Aktualisieren).
       issues: Themen
       introduction: Below are latest updates on discussion threads (across all of
-        Cyclescape) that are public (including those owned by groups and/or administrative.)
+        %{application_name}) that are public (including those owned by groups and/or administrative.)
       introduction_group_pointer: Benutze den Gruppenwechsler oben rechts, um ausschließlich
         Diskussionen einer Gruppe in der Du Mitglied bist anzuzeigen.
     library_panel:
@@ -1134,7 +1134,7 @@ de-DE:
       update_account: Meine Konteneinstellungen aktualisieren
     permission_denied:
       apply_to_group_html: This discussion is owned by %{group_name}. Would you like
-        to <a href='%{join_link}'><strong>apply to join %{group_name}'s Cyclescape
+        to <a href='%{join_link}'><strong>apply to join %{group_name}'s %{application_name}
         group</strong></a>?
     tags:
       panel:

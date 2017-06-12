@@ -45,7 +45,7 @@
   - membership = @group.memberships.find_by(user: current_user)
   - if current_user && !membership
     %section.group-homepage-join
-      %h2= t ".join_title"
+      %h2= t(".join_title", application_name: @site_config.application_name)
       = render partial: "join", locals: {group: @group}
   - if current_user && @group.committee_members.include?(current_user)
     %section.box
