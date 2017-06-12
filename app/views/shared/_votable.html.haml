@@ -1,8 +1,9 @@
 .votes{id: "voteable_#{resource.id}"}
+  - vote_title = voter_names(resource)
   - if (current_user && current_user.voted_for?(resource))
-    = link_to "", vote_up_clear_link(resource)[:clear], method: :put, class: "vote-count", remote: true
+    = link_to "", vote_up_clear_link(resource)[:clear], method: :put, class: "vote-count", remote: true, title: vote_title
   - else
-    = link_to "", vote_up_clear_link(resource)[:up], method: :put, class: "vote-count unvoted", remote: true
+    = link_to "", vote_up_clear_link(resource)[:up], method: :put, class: "vote-count unvoted", remote: true, title: vote_title
   %span.tally= resource.plusminus
   - if not permitted_to? :vote_up, resource.class.name.downcase.pluralize.to_sym
     .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)

@@ -19,7 +19,7 @@
 #
 
 class Vote < ActiveRecord::Base
-  scope :descending, -> { order('created_at DESC') }
+  scope :descending, -> { order(created_at: :desc) }
 
   belongs_to :voteable, polymorphic: true
   belongs_to :voter, polymorphic: true
