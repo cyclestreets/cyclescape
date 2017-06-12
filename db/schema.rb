@@ -162,6 +162,26 @@ ActiveRecord::Schema.define(version: 20170711170030) do
 
   add_index "groups", ["short_name"], name: "index_groups_on_short_name", using: :btree
 
+  create_table "hashtaggings", force: :cascade do |t|
+    t.integer "hashtag_id"
+    t.integer "message_id"
+  end
+
+  add_index "hashtaggings", ["hashtag_id", "message_id"], name: "index_hashtaggings_on_hashtag_id_and_message_id", using: :btree
+  add_index "hashtaggings", ["hashtag_id"], name: "index_hashtaggings_on_hashtag_id", using: :btree
+  add_index "hashtaggings", ["message_id"], name: "index_hashtaggings_on_message_id", using: :btree
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hashtags", ["group_id"], name: "index_hashtags_on_group_id", using: :btree
+  add_index "hashtags", ["name", "group_id"], name: "index_hashtags_on_name_and_group_id", unique: true, using: :btree
+  add_index "hashtags", ["name"], name: "index_hashtags_on_name", using: :btree
+
   create_table "hide_votes", force: :cascade do |t|
     t.integer  "planning_application_id"
     t.integer  "user_id"
@@ -634,6 +654,9 @@ ActiveRecord::Schema.define(version: 20170711170030) do
   add_foreign_key "cyclestreets_photo_messages", "message_threads", column: "thread_id"
   add_foreign_key "cyclestreets_photo_messages", "messages"
   add_foreign_key "cyclestreets_photo_messages", "users", column: "created_by_id"
+  add_foreign_key "hashtaggings", "hashtags"
+  add_foreign_key "hashtaggings", "messages"
+  add_foreign_key "hashtags", "groups"
   add_foreign_key "issues", "planning_applications"
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
