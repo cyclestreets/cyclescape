@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       resources :members
       resources :potential_members, only: [:new, :create]
       resources :memberships
+      resources :hashtags, only: [:index, :show], param: :name
       resources :message_moderations, only: [:index]
       resources :membership_requests do
         member do

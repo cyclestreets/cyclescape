@@ -1,0 +1,17 @@
+%h1= t(".intro", name: params[:name])
+- if @messages
+  = paginate @messages
+  .clear
+  %ul.thread-list
+    - @messages.each do |message|
+      - thread = message.thread
+      - if permitted_to? :show, thread
+        %li
+          .item-content{ style: "width: 85%" }
+            - link_class = (@unviewed_thread_ids.include?(thread.id) ? "new primary-link" : "primary-link")
+            %h4= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread), class: link_class
+            .meta
+          = render partial: "messages/message", locals: { view_from: nil, thread: message.thread, message: message }
+  = paginate @messages
+- else
+  %p= t(".none_found", name: params[:name])

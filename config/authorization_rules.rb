@@ -206,6 +206,9 @@ authorization do
     has_permission_on :site_comments, to: [:new, :create]
     has_permission_on :tags, to: [:show, :autocomplete_tag_name, :index]
     has_permission_on :user_profiles, to: :view
+    has_permission_on :group_hashtags do
+      to [:index, :show]
+    end
   end
 end
 

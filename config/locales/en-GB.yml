@@ -442,6 +442,10 @@
         picture: Picture
       update:
         success: Profile Updated
+    hashtags:
+      show:
+        intro: "Messages tagged '%{name}'"
+        none_found: There is no match for '%{name}'
   group_profiles:
     default_new_user_email: "Hi {{full_name}},\n %{group_name} has added you to their Cyclescape group %{group_url}"
   groups:

@@ -123,6 +123,10 @@ describe Message do
     create :message
 
     expect(described_class.in_group(thread.group.id)).to eq([in_group])
+
+    expect(in_group.hashtags).to eq []
+    in_group.update(body: "This #hashtag is #Great")
+    expect(in_group.hashtags.pluck(:name)).to contain_exactly("hashtag", "great")
   end
 
   describe 'states' do

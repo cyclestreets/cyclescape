@@ -3,31 +3,28 @@ require 'spec_helper'
 describe ApplicationHelper, type: :helper do
   let(:thread)  { create :message_thread }
   let(:issue)   { create :issue, title: 'Important issue' }
-  let(:message) { build(:message, body: body) }
-  let(:body) { "This #{format} is useful" }
+  let(:group)    { build_stubbed :group }
+  let(:message_thread) { build_stubbed(:message_thread, group: group) }
+  let(:message) { build(:message, body: body, thread: message_thread) }
+  let(:body) { "This #{format} is #useful" }
 
   include ApplicationHelper
 
   shared_examples 'links the thread' do
     it 'links the thread' do
-      expect(message_linkify(message.body)).
-        to eq "This <a href=\"/threads/#{thread.id}\">#{format}</a> is useful"
+      expect(message_linkify(message)).
+        to eq "This <a href=\"/threads/#{thread.id}\">#{format}</a> is <a class=\"hashtag\" href=\"/groups/#{group.to_param}/hashtags/useful\">#useful</a>"
     end
   end
 
   shared_examples 'links the issue' do
     it 'links the thread' do
-      expect(message_linkify(message.body)).
-        to eq "This <a href=\"/issues/#{issue.id}-important-issue\">#{format}</a> is useful"
+      expect(message_linkify(message)).
+        to eq "This <a href=\"/issues/#{issue.id}-important-issue\">#{format}</a> is<a class=\"hashtag\" href=\"/groups/#{group.to_param}/hashtags/useful\">#useful</a>"
     end
   end
 
   describe 'message linkification' do
-    context 'with #t format' do
-      let(:format) { "#t#{thread.id}" }
-      include_examples 'links the thread'
-    end
-
     context 'with thread :number format' do
       let(:format) { "thread #{thread.id}" }
       include_examples 'links the thread'
@@ -53,25 +50,12 @@ describe ApplicationHelper, type: :helper do
       include_examples 'links the thread'
     end
 
-    context 'with #i format' do
-      let(:format) { "#i#{issue.id}" }
-      include_examples 'links the issue'
-    end
-
-    context 'with #i with a mistake' do
-      let(:format) { "#i0" }
-
-      it 'does not link the issue' do
-        expect(message_linkify(message.body)).to eq "This #i0 is useful"
-      end
-    end
-
     context 'with multiple formats' do
-      let(:format) { "#i#{issue.id}, issue #{issue.id}, thread #{thread.id}, #i0" }
+      let(:format) { "issue no #{issue.id}, issue #{issue.id}, thread #{thread.id}" }
 
       it 'does not link the issue' do
-        expect(message_linkify(message.body)).to eq(
-          "This <a href=\"/issues/#{issue.id}-important-issue\">#i#{issue.id}</a>, <a href=\"/issues/#{issue.id}-important-issue\">issue #{issue.id}</a>, <a href=\"/threads/#{thread.id}\">thread #{thread.id}</a>, #i0 is useful"
+        expect(message_linkify(message)).to eq(
+          "This <a href=\"/issues/#{issue.id}-important-issue\">issue no #{issue.id}</a>, <a href=\"/issues/#{issue.id}-important-issue\">issue #{issue.id}</a>, <a href=\"/threads/#{thread.id}\">thread #{thread.id}</a> is <a class=\"hashtag\" href=\"/groups/#{group.to_param}/hashtags/useful\">#useful</a>"
         )
       end
     end

@@ -17,4 +17,5 @@ Rails/HttpPositionalArguments:
 Rails/DynamicFindBy:
   Whitelist:
     - find_by_tag
+    - find_by_name
     - find_by_tags_from

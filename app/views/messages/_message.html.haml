@@ -13,7 +13,7 @@
         %span.name
           = message.created_by.display_name_or_anon
       = t '.committee' if message.committee_created?
-      = link_to thread_path(anchor: dom_id(message)), class: "permalink" do
+      = link_to thread_path(message.thread_id, anchor: dom_id(message)), class: "permalink" do
         - time_tag_with_title(message.created_at) do
           - t ".posted_date", time_ago: time_ago_in_words(message.created_at)
   .body
@@ -23,7 +23,7 @@
     - else
       - if message.component
         = render "message/#{message_controller_map(message.component)}/show", message: message
-      = auto_link simple_format message_linkify(message.body)
+      = auto_link simple_format message_linkify(message)
   - if permitted_to?([:censor], message) || library_type_for(message)
     %menu.tools
       %ul

@@ -97,36 +97,42 @@ module ApplicationHelper
   #  thread no. 1051
   #  thread number 1051
   #  thread #1051
-  #  #t1051
   # examples for issues:
   #  issue 1051
   #  issue no 1051
   #  issue no. 1051
   #  issue number 1051
   #  issue #1051
-  #  #i1051
   def message_linkify(message)
+    body = message.body.dup
+
     THREAD_FORMAT_MAP.each do |key, value|
-      threads_found = message.scan(value)
+      threads_found = body.scan(value)
 
       threads_found.each do |t|
         thread_id = t.match(/\d+/)[0]
-        message.gsub!(t, "<a href=\"#{thread_path(thread_id.to_i)}\">#{t}</a>") if thread_id
+        body.gsub!(t, "<a href=\"#{thread_path(thread_id.to_i)}\">#{t}</a>") if thread_id
       end
     end
 
     ISSUE_FORMAT_MAP.each do |key, value|
-      issues_found = message.scan(value)
+      issues_found = body.scan(value)
 
       issues_found.each do |i|
         issue_id = i.match(/\d+/)[0]
         # not a fan of making a database call here. Not sure how else to address parameterizing the issue url.
         issue = Issue.find_by(id: issue_id.to_i) if issue_id
-        message.gsub!(i, "<a href=\"#{issue_path(issue)}\">#{i}</a>") if issue_id && issue
+        body.gsub!(i, "<a href=\"#{issue_path(issue)}\">#{i}</a>") if issue_id && issue
       end
     end
 
-    message
+    if message.thread.group
+      body = body.to_s.gsub(Hashtag::HASHTAG_REGEX) do
+        "#{$~[:space]}#{link_to($~[:hash_with_tag], group_hashtag_path(message.thread.group, $~[:tag_name]), class: :hashtag)}"
+      end
+    end
+
+    body
   end
 
   def voter_names(voteable)
@@ -144,8 +150,7 @@ module ApplicationHelper
     'thread no :number' => /thread no \d+/,
     'thread no. :number' => /thread no. \d+/,
     'thread number :number' => /thread number \d+/,
-    'thread #:number' => /thread #\d+/,
-    '#t:number' => /#t\d+/
+    'thread #:number' => /thread #\d+/
   }.freeze
 
   ISSUE_FORMAT_MAP = {
@@ -153,7 +158,6 @@ module ApplicationHelper
     'issue no :number' => /issue no \d+/,
     'issue no. :number' => /issue no. \d+/,
     'issue number :number' => /issue number \d+/,
-    'issue #:number' => /issue #\d+/,
-    '#i:number' => /#i\d+/
+    'issue #:number' => /issue #\d+/
   }.freeze
 end

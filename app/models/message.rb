@@ -35,7 +35,8 @@ class Message < ActiveRecord::Base
   before_validation :set_public_token, on: :create
 
   before_create :set_in_reply_to
-  after_commit  :update_search
+  before_save :attach_tags
+  after_commit :update_search
   acts_as_voteable
 
   scope :recent,     -> { order('created_at DESC').limit(3) }
@@ -110,6 +111,11 @@ class Message < ActiveRecord::Base
 
   def set_in_reply_to
     self.in_reply_to ||= thread.messages.where.not(id: nil).last
+  end
+
+  def attach_tags
+    return unless thread.group
+    self.hashtags = Hashtag.find_or_create_for_body(body, thread.group)
   end
 
   def set_public_token
