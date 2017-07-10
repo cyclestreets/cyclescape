@@ -1,6 +1,6 @@
 = semantic_form_for @issue, html: {class: "guided"} do |f|
   = f.inputs do
-    = f.input :title
+    = f.input :title, input_html: { data: { error: t(".max_length_error_html") } }
     - hint = (f.object.retained_photo ? "#{t('.currently')} #{f.object.photo.name}" : t('formtastic.hints.issue.new.photo'))
     = f.input :photo, as: :file, hint: hint, input_html: { accept: 'image/*' }
     = f.input :retained_photo, as: :hidden
@@ -27,7 +27,7 @@
 
     var createOrUpdateErrorCount = function(errorEl, count) {
       if (errorEl.html().indexOf("[") === -1) {
-        errorEl.append(". [", count, "]");
+        errorEl.append(". ", title.data().error, title.attr("maxlength"), " [", count, "]");
       } else {
         errorEl.html(errorEl.html().replace(/\[.*?\]/g, "[" + count + "]") );
       }
