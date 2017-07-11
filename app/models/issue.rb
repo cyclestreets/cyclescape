@@ -38,7 +38,7 @@ class Issue < ActiveRecord::Base
   has_and_belongs_to_many :tags, join_table: "issue_tags"
 
   validates :title, presence: true, length: { maximum: 80 }
-  validates :description, presence: true, length: { maximum: 224 }
+  validates :description, presence: true
   validates :location, presence: true
   validates :size, numericality: { less_than: Geo::ISSUE_MAX_AREA }
   validates :created_by, presence: true
