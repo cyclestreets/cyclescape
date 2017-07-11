@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170602212532) do
+ActiveRecord::Schema.define(version: 20170711170030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(version: 20170602212532) do
     t.geometry "location",                limit: {:srid=>4326, :type=>"geometry"}
     t.string   "photo_uid",               limit: 255
     t.datetime "deadline"
-    t.string   "external_url",            limit: 255
+    t.text     "external_url"
     t.boolean  "all_day",                                                          default: false, null: false
     t.integer  "planning_application_id"
   end

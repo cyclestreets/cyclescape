@@ -633,6 +633,7 @@
       success: Issue updated
     form:
       currently: Currently is
+      max_length_error_html: is over the maximum length of&nbsp;
   layouts:
     application:
       admin: Admin
