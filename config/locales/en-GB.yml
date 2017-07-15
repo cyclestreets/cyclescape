@@ -996,7 +996,7 @@
       new:
         already: There's already an issue for that planning application
         application_reference: Application reference
-        title: New issue from Planning Application
+        title: New issue from Planning application
         title_prefix: Planning application
   photo:
     too_large: The image you uploaded is too large - it must be less than 3MB
@@ -1007,7 +1007,7 @@
       thread_results: Threads (%{count})
       issue_results: Issues (%{count})
       library_results: Library (%{count})
-      planning_results: Planning Applications (%{count})
+      planning_results: Planning applications (%{count})
       threads_found:
         zero: No threads found for '%{query}'.
         one: 'One thread found for ''%{query}'':'
@@ -1081,6 +1081,7 @@
       posted_at: posted %{time_ago} ago
     votable:
       sign_in_to_vote_html: Please %{sign_in_link} to vote.
+      and_others: and others
   site:
     comments:
       destroy:
