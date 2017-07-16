@@ -136,13 +136,9 @@ module ApplicationHelper
   end
 
   def voter_names(voteable)
-    nos_voters = 3
-    voter_names = voteable.votes.descending.limit(nos_voters).includes(:voter).map do |v|
+    voteable.votes.descending.includes(:voter).map do |v|
       v.voter.display_name_or_anon
-    end.join(", ")
-    voter_number = voteable.votes.count - nos_voters
-    voter_names = "#{voter_names} #{t(".and_others", number: voter_number, count: voter_number)}" if voter_number > 0
-    voter_names
+    end.join("\r")
   end
 
   THREAD_FORMAT_MAP = {

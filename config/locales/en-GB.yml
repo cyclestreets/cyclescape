@@ -1081,7 +1081,6 @@
       posted_at: posted %{time_ago} ago
     votable:
       sign_in_to_vote_html: Please %{sign_in_link} to vote.
-      and_others: and others
   site:
     comments:
       destroy:
