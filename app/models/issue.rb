@@ -32,6 +32,11 @@ class Issue < ActiveRecord::Base
 
   acts_as_voteable
 
+  scope :by_score, -> do
+    joins(:votes).group(:id).
+      order('SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) DESC')
+  end
+
   belongs_to :created_by, -> { with_deleted }, class_name: "User"
   belongs_to :planning_application
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults, inverse_of: :issue

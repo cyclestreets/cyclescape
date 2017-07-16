@@ -8,9 +8,7 @@ class Group::IssuesController < IssuesController
 
     issues = Issue.preloaded.intersects(current_group.profile.location).by_most_recent.page(params[:page])
 
-    # work around till https://github.com/bouchard/thumbs_up/issues/64 is fixed
-    popular_issue_ids = Issue.intersects(current_group.profile.location).plusminus_tally(start_at: 8.weeks.ago, at_least: 1).ids
-    popular_issues = Issue.preloaded.where(id: popular_issue_ids).page(params[:pop_issues_page])
+    popular_issues = Issue.intersects(current_group.profile.location).by_score.preloaded.page(params[:pop_issues_page])
 
     @issues = IssueDecorator.decorate_collection issues
     @popular_issues = IssueDecorator.decorate_collection popular_issues
