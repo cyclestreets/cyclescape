@@ -126,13 +126,19 @@ module ApplicationHelper
       end
     end
 
-    if message.thread.group
+    if (group = message.thread.group)
       body = body.to_s.gsub(Hashtag::HASHTAG_REGEX) do
-        "#{$~[:space]}#{link_to($~[:hash_with_tag], group_hashtag_path(message.thread.group, $~[:tag_name]), class: :hashtag)}"
+        link = link_to($LAST_MATCH_INFO[:hash_with_tag],
+                       hashtag_link(group, $LAST_MATCH_INFO[:tag_name]), class: :hashtag)
+        "#{$LAST_MATCH_INFO[:space]}#{link}"
       end
     end
 
     body
+  end
+
+  def hashtag_link(group, hashtag_name)
+    "#{root_url(subdomain: group.short_name)}#{hashtag_path(hashtag_name)[1..-1]}"
   end
 
   def voter_names(voteable)

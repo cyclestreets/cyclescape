@@ -18,6 +18,6 @@ class Group::HashtagsController < ApplicationController
   protected
 
   def load_group
-    @group = Group.includes(:profile).find params[:group_id]
+    @group = current_group
   end
 end

@@ -1,4 +1,4 @@
 %h1 Hashtags
 %ul
   - @hashtags.each do |hashtag|
-    %li= link_to hashtag.name, group_hashtag_path(@group, hashtag.name)
+    %li= link_to hashtag.name, hashtag_link(hashtag.group, hashtag.name)

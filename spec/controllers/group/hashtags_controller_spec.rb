@@ -10,10 +10,13 @@ describe Group::HashtagsController, type: :controller do
     before do
       message.hashtags << hashtag
       warden.set_user message.created_by
+      allow_any_instance_of(Group::HashtagsController).to receive(:current_group).and_return(group)
     end
 
     describe 'show' do
-      subject { get :show, group_id: group.id, name: hashtag.name }
+      subject do
+        get :show, name: hashtag.name
+      end
 
       it { expect(subject.status).to eq(200) }
     end

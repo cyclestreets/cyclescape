@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resources :threads, controller: 'group/message_threads'
     issues_route controller: 'group/issues'
     get 'overview/search', to: 'groups#search'
+    resources :hashtags, only: [:index, :show], param: :name, controller: "group/hashtags"
   end
 
   get "private_messages", to: "private_messages#index"
@@ -69,7 +70,6 @@ Rails.application.routes.draw do
       resources :members
       resources :potential_members, only: [:new, :create]
       resources :memberships
-      resources :hashtags, only: [:index, :show], param: :name
       resources :message_moderations, only: [:index]
       resources :membership_requests do
         member do

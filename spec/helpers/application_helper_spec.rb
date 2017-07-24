@@ -7,20 +7,22 @@ describe ApplicationHelper, type: :helper do
   let(:message_thread) { build_stubbed(:message_thread, group: group) }
   let(:message) { build(:message, body: body, thread: message_thread) }
   let(:body) { "This #{format} is #useful" }
+  let(:group_url) { "http://#{group.short_name}.test.host" }
 
   include ApplicationHelper
 
   shared_examples 'links the thread' do
     it 'links the thread' do
+
       expect(message_linkify(message)).
-        to eq "This <a href=\"/threads/#{thread.id}\">#{format}</a> is <a class=\"hashtag\" href=\"/groups/#{group.to_param}/hashtags/useful\">#useful</a>"
+        to eq "This <a href=\"/threads/#{thread.id}\">#{format}</a> is <a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
     end
   end
 
   shared_examples 'links the issue' do
     it 'links the thread' do
       expect(message_linkify(message)).
-        to eq "This <a href=\"/issues/#{issue.id}-important-issue\">#{format}</a> is<a class=\"hashtag\" href=\"/groups/#{group.to_param}/hashtags/useful\">#useful</a>"
+        to eq "This <a href=\"/issues/#{issue.id}-important-issue\">#{format}</a> is<a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
     end
   end
 
@@ -55,7 +57,7 @@ describe ApplicationHelper, type: :helper do
 
       it 'does not link the issue' do
         expect(message_linkify(message)).to eq(
-          "This <a href=\"/issues/#{issue.id}-important-issue\">issue no #{issue.id}</a>, <a href=\"/issues/#{issue.id}-important-issue\">issue #{issue.id}</a>, <a href=\"/threads/#{thread.id}\">thread #{thread.id}</a> is <a class=\"hashtag\" href=\"/groups/#{group.to_param}/hashtags/useful\">#useful</a>"
+          "This <a href=\"/issues/#{issue.id}-important-issue\">issue no #{issue.id}</a>, <a href=\"/issues/#{issue.id}-important-issue\">issue #{issue.id}</a>, <a href=\"/threads/#{thread.id}\">thread #{thread.id}</a> is <a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
         )
       end
     end
