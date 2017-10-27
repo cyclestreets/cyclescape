@@ -12,6 +12,11 @@ en-GB:
       new:
         forgot_password: Forgot your password?
         send_reset_instuctions: Send me reset instructions
+      edit:
+        change_password_caption: Change password
+        new_password: New password
+        confirm_new_password: Confirm new password
+        change_password: Change password
     registrations:
       edit:
         confirm: Are you sure?
