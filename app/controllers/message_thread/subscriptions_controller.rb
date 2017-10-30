@@ -20,7 +20,13 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
     @subscription.destroy
     respond_to do |format|
       set_flash_message :success
-      format.html { redirect_to thread_path @thread }
+      format.html do
+        if params[:t]
+          redirect_to root_path
+        else
+          redirect_to thread_path @thread
+        end
+      end
       format.js { }
     end
   end
