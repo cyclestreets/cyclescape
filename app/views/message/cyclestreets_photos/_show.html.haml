@@ -3,4 +3,4 @@
     = image_tag message.component.photo_preview.url,
         alt: t(".photo_alt", caption: message.component.caption)
   %figcaption
-    = message.component.caption
+    = simple_format(message.component.caption)
