@@ -34,6 +34,7 @@ class Issue < ActiveRecord::Base
 
   scope :by_score, -> do
     joins(:votes).group(:id).
+      having("SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) > 0").
       order('SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) DESC')
   end
 

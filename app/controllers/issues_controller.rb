@@ -4,8 +4,6 @@ class IssuesController < ApplicationController
   def index
     issues = Issue.preloaded.by_most_recent.page(params[:page])
 
-    # work around till https://github.com/bouchard/thumbs_up/issues/64 is fixed
-    popular_issue_ids = Issue.plusminus_tally(start_at: 8.weeks.ago, at_least: 1).ids
     popular_issues = Issue.preloaded.by_score.page(params[:pop_issues_page])
 
     @issues = IssueDecorator.decorate_collection issues
