@@ -23,6 +23,13 @@ describe MessageThread do
     it { is_expected.not_to allow_value('other').for(:privacy) }
   end
 
+  it 'should validate the owner group if the privacy is group' do
+    subject.privacy = "group"
+    expect(subject.errors_on(:group)).to eq ["can't be blank"]
+    subject.privacy = "public"
+    expect(subject.errors_on(:group)).to be_blank
+  end
+
   it 'should validate the creator is not disabled' do
     user = create :user
     subject.created_by = user
