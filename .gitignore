@@ -20,3 +20,4 @@ public/system
 resque_web.url
 node_modules/
 *.sql
+.byebug_history
