@@ -16,6 +16,7 @@ class Group::ProfilesController < ApplicationController
       set_flash_message :success
       redirect_to action: :show
     else
+      @start_location = @group.profile.location || SiteConfig.first.nowhere_location
       render :edit
     end
   end

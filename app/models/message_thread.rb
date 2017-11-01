@@ -91,6 +91,7 @@ class MessageThread < ActiveRecord::Base
 
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALL_ALLOWED_PRIVACY }
+  validates :group, presence: true, if: ->(thread) { thread.privacy == "group" }
   validate :must_be_created_by_enabled_user, on: :create
 
   aasm column: 'status' do

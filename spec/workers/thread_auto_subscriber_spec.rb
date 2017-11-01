@@ -141,8 +141,9 @@ describe ThreadAutoSubscriber, after_commit: true  do
         ActiveRecord::Base.connection.disconnect!
         3.times do |i|
           threads[i] = Thread.new do
-            ActiveRecord::Base.establish_connection
-            described_class.perform(thread.id, { "privacy" => "public" })
+            ActiveRecord::Base.connection_pool.with_connection do
+              described_class.perform(thread.id, { "privacy" => "public" })
+            end
           end
         end
         threads.each(&:join)

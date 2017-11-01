@@ -2,5 +2,5 @@
   = image_tag @cyclestreets_photo.photo_medium.url,
       alt: t(".photo_alt", caption: @cyclestreets_photo.caption)
   %figcaption
-    = @cyclestreets_photo.caption
+    = simple_format @cyclestreets_photo.caption
   %p= link_to t(".view_original_image"), @cyclestreets_photo.photo.url
