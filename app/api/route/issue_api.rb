@@ -60,7 +60,13 @@ module Route
           scope = scope.order_by_size
         end
         scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
-        scope = scope.intersects_not_covered(params[:geo_collection].map(&:geometry).inject(&:union)) if params[:geo_collection]
+        if params[:geo_collection]
+          geo_collection = params[:geo_collection].map do |itm|
+            itm_geo = itm.geometry
+            itm_geo.valid? ? itm_geo : itm_geo.simplify(0.5)
+          end.inject(&:union)
+          scope = scope.intersects_not_covered(geo_collection)
+        end
         scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
         scope = scope.where_tag_names_not_in(params[:excluding_tags]) if params[:excluding_tags]
         scope = scope.before_date(params[:end_date]) if params[:end_date]
