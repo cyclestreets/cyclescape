@@ -146,7 +146,7 @@ class MessageThread < ActiveRecord::Base
     # @param user [User]
     # @param threads [Array<MessageThread>] or [ActiveRecord::Relation<MessageThread>] of threads ask if the user has viewed
     # @return [Array<Integer>] ids of unviewed threads
-    def unviewed_thread_ids(user: user, threads: threads)
+    def unviewed_thread_ids(user:, threads:)
       ids = if threads.is_a?(ActiveRecord::Relation) && !threads.loaded?
               threads.ids
             else
