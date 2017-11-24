@@ -5,6 +5,8 @@ db/*.sqlite3
 log/*
 tmp/
 *.pid
+*~
+*.swp
 .sass-cache/
 config/database.yml
 config/mailboxes.yml
