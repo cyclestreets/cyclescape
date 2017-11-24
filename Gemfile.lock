@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/sunspot/sunspot.git
-  revision: 59e8505e85ec4d529e96a0fe9814526cfdceb169
+  revision: 1326fb6dfee30ad3a26375f39a62735d39c52762
   specs:
     sunspot (2.2.7)
       pr_geohash (~> 1.0)
