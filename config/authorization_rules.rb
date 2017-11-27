@@ -7,6 +7,7 @@ authorization do
     includes :member
     has_permission_on :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
     has_permission_on :admin_groups, to: [:manage, :disable, :enable]
+    has_permission_on :admin_external_services, to: :manage
     has_permission_on :group_requests do
       to [:index, :review, :confirm, :reject, :destroy]
     end
@@ -86,7 +87,7 @@ authorization do
     has_permission_on :messages, to: [:new, :create, :vote_up, :vote_clear]
     has_permission_on :message_library_notes, to: [:new, :create]
     has_permission_on :message_library_documents, to: [:new, :create]
-    has_permission_on :issue_message_threads, to: [:new, :create]
+    has_permission_on :issue_message_threads, to: [:new, :new_external, :create]
     has_permission_on :group_message_threads do
       to [:new, :create]
       if_attribute group: is_in { user.groups }

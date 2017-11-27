@@ -69,10 +69,27 @@ cs-CZ:
         manage_issue_categories: Spravovat kategorie podnětů
         manage_users: Spravovat uživatele
         manage_message_moderations: Spravovat moderované zprávy
+        manage_external_services: Manage external services
         manage_site_config: Upravit nastavení portálu
         stats: Statistiky
         resque: Resque
         manage_planning_filters: Spravovat filtry plánování
+    external_services:
+      create:
+        success: Externí služba vytvořena
+      new:
+        title: Nová externí služba
+        introduction: Vytvořit novou externí službu
+      edit:
+        edit_external_service: Upravit externí službu
+      update:
+        success: Externí služba upravena
+      index:
+        name: Jméno
+        short_name: Identifikátor
+        title: Externí služby
+        new_external_service: Nová externí služba
+        edit: Upravit nastavení
     issue_categories:
       create:
         success: Kategorie vytvořena
@@ -678,6 +695,8 @@ cs-CZ:
           Např. nový stavební záměr se může dotýkat dopravy na silnici a zároveň ovlivňovat přístup na lesní cyklostezku.
         title: Nové vlákno na téma %{issue}
         everyone: Každý
+      new_external:
+        title: Odeslat podnět "%{issue}" na úřad
     photos:
       show:
         photo_alt: Fotka pro %{caption}.
@@ -739,6 +758,7 @@ cs-CZ:
         zero: Diskutujte
         one: Nové diskuzní vlákno
         other: Nové diskuzní vlákno
+      new_send_thread: Odeslat na úřad
       no_threads_yet: O tomto podnětu zatím neexistují žádná diskuzní vlákna.
       group_private: Soukromé pro %{group}
       group_public: Veřejné od %{group}

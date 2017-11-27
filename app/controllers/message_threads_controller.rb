@@ -103,7 +103,7 @@ class MessageThreadsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:thread).permit :title, :privacy, :group_id, :issue_id, :tags_string
+    params.require(:thread).permit :title, :privacy, :group_id, :issue_id, :tags_string, :external_service_id
   end
 
   def permitted_message_params

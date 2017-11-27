@@ -1,0 +1,7 @@
+= semantic_form_for @external_service, url: [:admin, @external_service] do |f|
+  = f.inputs do
+    = f.input :name, input_html: { size: 30 }
+    = f.input :short_name, input_html: { size: 30 }
+  = f.actions do
+    = f.action :submit, button_html: {class: "btn-green submit"}
+    = cancel_link

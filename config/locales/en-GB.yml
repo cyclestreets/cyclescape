@@ -65,10 +65,27 @@
         manage_issue_categories: Manage Issue Categories
         manage_users: Manage users
         manage_message_moderations: Manage message moderations
+        manage_external_services: Manage external services
         manage_site_config: Manage site config
         stats: Stats
         resque: Resque
         manage_planning_filters: Manage planning filters
+    external_services:
+      create:
+        success: External service created
+      new:
+        title: New external service
+        introduction: Create new external service
+      edit:
+        edit_external_service: Edit external service
+      update:
+        success: External service updated
+      index:
+        name: Name
+        short_name: Identifier
+        title: External services
+        new_external_service: New external service
+        edit: Edit preferences
     issue_categories:
       create:
         success: Category created
@@ -575,6 +592,8 @@
           access to woods."
         title: New Thread on %{issue}
         everyone: Everyone
+      new_external:
+        title: Send issue "%{issue}" to municipality
     photos:
       show:
         photo_alt: The photo for %{caption}.
@@ -636,6 +655,7 @@
         zero: Discuss
         one: New Thread
         other: New Thread
+      new_send_thread: Send to municipality
       no_threads_yet: There are no discussion threads for this issue yet.
       group_private: Private to %{group}
       group_public: Public, by %{group}
