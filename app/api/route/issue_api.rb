@@ -9,6 +9,7 @@ module Route
       optional :excluding_tags, type: Array[String], desc: 'An array of tags that the issues must not have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :group, type: String, desc: 'Return only issues from area of group given by its short name, e.g. "london"'
       optional :order, type: String, desc: 'Order of returned issues. Current working parameters are: "vote_count", "created_at", "start_at", "size"'
+      optional :id, type: Integer, desc: 'Issue ID'
       optional :end_date, type: Date, desc: 'No issues after the end date are returned'
       optional :start_date, type: Date, desc: 'No issues before the start date are returned'
       optional(:geo_collection,
@@ -67,6 +68,7 @@ module Route
           end.inject(&:union)
           scope = scope.intersects_not_covered(geo_collection)
         end
+        scope = scope.where(id: params[:id]) if params[:id]
         scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
         scope = scope.where_tag_names_not_in(params[:excluding_tags]) if params[:excluding_tags]
         scope = scope.before_date(params[:end_date]) if params[:end_date]

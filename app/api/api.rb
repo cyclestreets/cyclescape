@@ -7,6 +7,8 @@ class Api < Grape::API
   default_format :json
   prefix :api
 
+  mount Route::ThreadApi
+  mount Route::MessageApi
   mount Route::IssueApi
   mount Route::GroupApi
   mount Route::TagApi
