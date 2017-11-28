@@ -27,9 +27,9 @@
           = link_to root_path, id: "site-title" do
             %h1= current_group.name
         - elsif @site_config.logo
-          = link_to image_tag(@site_config.logo.url, alt: t(".title")), root_path, id: "site-title"
+          = link_to image_tag(@site_config.logo, alt: @site_config.application_name), root_path, id: "site-title"
         %ul#top-menu
-          %li.about= link_to t(".title"), root_url(subdomain: "www"), class: "cyclescape-logo"
+          %li.about= link_to @site_config.application_name, root_url(subdomain: "www"), class: "cyclescape-logo"
           %li=link_to t(".about"), "http://blog.cyclescape.org/about/"
           %li=link_to t(".user_guide"), "http://blog.cyclescape.org/guide/"
           %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
@@ -73,9 +73,9 @@
         - if flash[type]
           .flash{class: type}
             = flash[type]
-    - tile_servers = [ { name: SiteConfig.first.tile_server1_name, url: SiteConfig.first.tile_server1_url },
-      { name: SiteConfig.first.tile_server2_name, url: SiteConfig.first.tile_server2_url },
-      { name: SiteConfig.first.tile_server3_name, url: SiteConfig.first.tile_server3_url } ]
+    - tile_servers = [ { name: @site_config.tile_server1_name, url: @site_config.tile_server1_url },
+      { name: @site_config.tile_server2_name, url: @site_config.tile_server2_url },
+      { name: @site_config.tile_server3_name, url: @site_config.tile_server3_url } ]
     #map-tiles{ "data-tileservers" => tile_servers.to_json }
     - if @full_page
       #page-full
