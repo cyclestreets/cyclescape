@@ -2,60 +2,60 @@
 
 %p
   %b Logo:
-  = image_tag(@site_config.logo.try(:url))
+  = image_tag(@live_site_config.logo.try(:url))
 %p
   %b Funder 1
-  = link_to @site_config.funder_name_footer1, @site_config.funder_url_footer1
-  = image_tag @site_config.funder_image_footer1.try(:url)
+  = link_to @live_site_config.funder_name_footer1, @live_site_config.funder_url_footer1
+  = image_tag @live_site_config.funder_image_footer1.try(:url)
 %p
   %b Funder 2
-  = link_to @site_config.funder_name_footer2, @site_config.funder_url_footer2
-  = image_tag @site_config.funder_image_footer2.try(:url)
+  = link_to @live_site_config.funder_name_footer2, @live_site_config.funder_url_footer2
+  = image_tag @live_site_config.funder_image_footer2.try(:url)
 %p
   %b Funder 3
-  = link_to @site_config.funder_name_footer3, @site_config.funder_url_footer3
-  = image_tag @site_config.funder_image_footer3.try(:url)
+  = link_to @live_site_config.funder_name_footer3, @live_site_config.funder_url_footer3
+  = image_tag @live_site_config.funder_image_footer3.try(:url)
 %p
   %b Funder 4
-  = link_to @site_config.funder_name_footer4, @site_config.funder_url_footer4
-  = image_tag @site_config.funder_image_footer4.try(:url)
+  = link_to @live_site_config.funder_name_footer4, @live_site_config.funder_url_footer4
+  = image_tag @live_site_config.funder_image_footer4.try(:url)
 %p
   %b Funder 5
-  = link_to @site_config.funder_name_footer5, @site_config.funder_url_footer5
-  = image_tag @site_config.funder_image_footer5.try(:url)
+  = link_to @live_site_config.funder_name_footer5, @live_site_config.funder_url_footer5
+  = image_tag @live_site_config.funder_image_footer5.try(:url)
 %p
   %b Funder 6
-  = link_to @site_config.funder_name_footer6, @site_config.funder_url_footer6
-  = image_tag @site_config.funder_image_footer6.try(:url)
+  = link_to @live_site_config.funder_name_footer6, @live_site_config.funder_url_footer6
+  = image_tag @live_site_config.funder_image_footer6.try(:url)
 %p
   %b Nowhere location:
-  = @site_config.nowhere_location
+  = @live_site_config.nowhere_location
 %p
   %b Footer Links html:
-  = @site_config.footer_links_html
+  = @live_site_config.footer_links_html
 %p
   %b Header html:
-  = @site_config.header_html
+  = @live_site_config.header_html
 %p
   %b Default locale:
-  = @site_config.default_locale
+  = @live_site_config.default_locale
 %p
   %b Timezone:
-  = @site_config.timezone
+  = @live_site_config.timezone
 %p
   %b Ga account:
-  = @site_config.ga_account_id
+  = @live_site_config.ga_account_id
 %p
   %b Ga base domain:
-  = @site_config.ga_base_domain
+  = @live_site_config.ga_base_domain
 %p
   %b Default email:
-  = @site_config.default_email
+  = @live_site_config.default_email
 %p
   %b Email domain:
-  = @site_config.email_domain
+  = @live_site_config.email_domain
 %p
   %b Geocoder url:
-  = @site_config.geocoder_url
+  = @live_site_config.geocoder_url
 
 = link_to 'Edit', edit_admin_site_config_path

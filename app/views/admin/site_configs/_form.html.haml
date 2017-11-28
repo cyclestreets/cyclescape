@@ -1,6 +1,6 @@
 %p= t ".site_config_intro"
 
-= semantic_form_for @site_config, url: [:admin, @site_config] do |f|
+= semantic_form_for @live_site_config, url: [:admin, @live_site_config] do |f|
   = f.inputs do
     = f.input :logo, as: :file
     = f.input :retained_logo, as: :hidden

@@ -8,7 +8,7 @@ class Admin::SiteConfigsController < ApplicationController
   def edit; end
 
   def update
-    if @site_config.update(site_config_params)
+    if @live_site_config.update(site_config_params)
       redirect_to admin_site_config_path, notice: 'Site config was successfully updated.'
     else
       render :edit
@@ -18,7 +18,7 @@ class Admin::SiteConfigsController < ApplicationController
   private
 
   def set_site_config
-    @site_config = SiteConfig.first
+    @live_site_config = SiteConfig.first
   end
 
   def site_config_params
