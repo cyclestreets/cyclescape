@@ -32,12 +32,12 @@
         - 1.upto(3).each do |nlogo|
           - if logo = @site_config.public_send("funder_image_footer#{nlogo}")
             %li
-              = link_to image_tag(logo.url, {title: t(".funding_from", name: @site_config.public_send("funder_name_footer#{nlogo}")), :alt => 'Logo'}), @site_config.public_send("funder_url_footer#{nlogo}"), :target => "_blank"
+              = link_to image_tag(logo, {title: t(".funding_from", name: @site_config.public_send("funder_name_footer#{nlogo}")), :alt => 'Logo'}), @site_config.public_send("funder_url_footer#{nlogo}"), :target => "_blank"
         - if group_subdomain?('camcycle')
           %li
             = link_to image_tag("supportlogos/cambridgesustainablecity.png", {title: t(".funding_from", :name => 'Cambridge Sustainable City'), :alt => 'Logo'}), 'http://www.cambridge.gov.uk/ccm/navigation/environment-and-recycling/sustainable-city/', :target => "_blank"
         - 4.upto(6).each do |nlogo|
           - if logo = @site_config.public_send("funder_image_footer#{nlogo}")
             %li
-              = link_to image_tag(logo.url, {title: t(".funding_from", name: @site_config.public_send("funder_name_footer#{nlogo}")), :alt => 'Logo'}), @site_config.public_send("funder_url_footer#{nlogo}"), :target => "_blank"
+              = link_to image_tag(logo, {title: t(".funding_from", name: @site_config.public_send("funder_name_footer#{nlogo}")), :alt => 'Logo'}), @site_config.public_send("funder_url_footer#{nlogo}"), :target => "_blank"
 %a.back-to-top(href="#")= t(".top")
