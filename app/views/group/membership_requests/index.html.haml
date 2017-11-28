@@ -19,8 +19,8 @@
     - @requests.each do |r|
       %tr
         %td= link_to_profile(r.user)
-        %td= r.user.full_name
-        %td= auto_link r.user.email
+        %td= r.user.full_name if r.user
+        %td= auto_link r.user.email if r.user
         %td= link_to t(".view_message"), review_group_membership_request_path(@group, r) unless r.message.blank?
         %td
           = formatted_created_at(r)
