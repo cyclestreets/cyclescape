@@ -315,19 +315,19 @@ class MessageThread < ActiveRecord::Base
     upcoming_deadline_messages.map{ |message| message.component.to_ical }
   end
 
-  def as_json(options = nil)
+  def as_json(_options = nil)
     {
-      id: self.id,
-      issue_id: self.issue ? self.issue.id : nil,
-      created_by_id: self.created_by.id,
-      created_by_name: self.created_by.profile.visibility == 'public' ? self.created_by.name : nil,
-      group_id: self.group ? self.group.id : nil,
-      created_at: self.created_at,
-      updated_at: self.updated_at,
-      deleted_at: self.deleted_at,
-      status: self.status,
-      privacy: self.privacy,
-      closed: self.closed,
+      id: id,
+      issue_id: issue_id,
+      created_by_id: created_by_id,
+      created_by_name: created_by.profile.visibility == 'public' ? created_by.name : nil,
+      group_id: group_id,
+      created_at: created_at,
+      updated_at: updated_at,
+      deleted_at: deleted_at,
+      status: status,
+      privacy: privacy,
+      closed: closed,
     }
   end
 

@@ -98,17 +98,17 @@ class Message < ActiveRecord::Base
     created_by.id.in?(thread.try(:group).try(:committee_members).try(:ids) || [])
   end
 
-  def as_json(options = nil)
+  def as_json(_options = nil)
     {
-      id: self.id,
-      thread_id: self.thread.id,
-      body: self.body,
-      created_at: self.created_at,
-      updated_at: self.updated_at,
-      censored_at: self.censored_at,
-      deleted_at: self.deleted_at,
-      status: self.status,
-      in_reply_to_id: self.in_reply_to_id,
+      id: id,
+      thread_id: thread_id,
+      body: body,
+      created_at: created_at,
+      updated_at: updated_at,
+      censored_at: censored_at,
+      deleted_at: deleted_at,
+      status: status,
+      in_reply_to_id: in_reply_to_id,
     }
   end
 
