@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Route::TagApi do
   include Rack::Test::Methods
-  let(:json_response) { JSON.parse(last_response.body) }
 
   describe 'GET /' do
     let(:response_keys) { %w(icon id name tag_count url) }
