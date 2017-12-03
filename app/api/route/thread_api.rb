@@ -7,6 +7,8 @@ module Route
       optional :issue_id, type: Integer, desc: 'ID of issue'
       optional :order_by, type: Symbol, values:%i( created_at id  ), desc: 'Order of returned issues.'
       optional :order, type: Symbol, values:%i(asc desc), default: :asc
+      optional :end_date, types: [DateTime, Date], desc: 'Only threads after or at the end date or time are returned'
+      optional :start_date, types: [DateTime, Date], desc: 'Only threads before or at the start date or time are returned'
     end
 
     helpers do
@@ -19,6 +21,8 @@ module Route
         end
         scope = scope.order(params[:order_by] => params[:order]) if params[:order_by]
         scope = scope.where(issue_id: params[:issue_id]) if params[:issue_id]
+        scope = scope.before_date(params[:end_date]) if params[:end_date]
+        scope = scope.after_date(params[:start_date]) if params[:start_date]
         scope = paginate scope
       end
     end

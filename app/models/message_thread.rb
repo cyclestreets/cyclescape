@@ -82,6 +82,8 @@ class MessageThread < ActiveRecord::Base
       .merge(Message.approved)
       .where(messages[:created_at].gt(thread_views[:viewed_at]).or(thread_views[:viewed_at].eq(nil)))
   end
+  scope :after_date, ->(date) { where(arel_table[:created_at].gteq(date)) }
+  scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
 
   default_scope { where(deleted_at: nil) }
 
