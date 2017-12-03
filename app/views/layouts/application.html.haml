@@ -48,7 +48,7 @@
     #main-nav
       %nav.wrapper
         %ul#navigation(role="navigation")
-          %li#menu-dashboard= link_to t(".dashboard"), dashboard_path, title: t(".dashboard_tooltip")
+          %li#menu-dashboard= link_to t(".dashboard", application_name: @site_config.application_name), dashboard_path, title: t(".dashboard_tooltip")
           %li#menu-issues= link_to t(".issues"), issues_path, title: t(".issues_tooltip")
           %li#menu-threads= link_to t(".threads"), threads_path, title: t(".threads_tooltip")
           %li#menu-library= link_to t(".library"), library_path, title: t(".library_tooltip")

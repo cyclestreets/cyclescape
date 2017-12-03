@@ -1,7 +1,7 @@
 %section.threads
   %h1= t ".title"
   %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
-  %p= t ".introduction"
+  %p= t(".introduction", application_name: @site_config.application_name)
   %p= t ".introduction_group_pointer"
   = paginate @threads
   .clear

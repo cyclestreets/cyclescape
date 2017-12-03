@@ -2,7 +2,7 @@
 
 %p= auto_link simple_format @group.profile.joining_instructions
 .explain
-  %p= t ".your_membership_request_will"
+  %p= t(".your_membership_request_will", application_name: @site_config.application_name)
 
 = semantic_form_for @request do |f|
   = f.semantic_errors

@@ -433,8 +433,8 @@ cs-CZ:
           rejected: Zamítnuto
       new:
         title: Žádost o členství uživatele %{group_name}
-        your_membership_request_will: Vaše žádost o členství bude předána správcům
-          skupiny, kteří vaše členství posoudí.
+        your_membership_request_will: Vaše žádost o členství v místní skupině %{application_name}
+          bude předána správcům skupiny, kteří vaše členství posoudí.
       reject:
         failure: Při zamítání žádosti o členství v místni skupině se vyskytl problém
         success: Členství v místní skupině zamítnuto
@@ -540,7 +540,7 @@ cs-CZ:
       group_management: Správa místní skupiny
       group_organisers: Správci místní skupiny
       leave_group: Opustit skupinu
-      join_title: Přidejte se k naší místní skupině Cyklisté sobě
+      join_title: Přidejte se k naší místní skupině %{application_name}
       no_issues: Zatím nejsou žádné podněty v oblasti působnosti této místní skupiny
       no_location: Tato místní skupina ještě nemá definované žádné oblasti působnosti
       no_threads: Tato místní skupina nemá žádná veřejná vlákna
@@ -765,7 +765,7 @@ cs-CZ:
       application_version_html: 'Verze aplikace: %{version}'
       github_page_link_html: Zdrojové kódy jsou dostupné na <a href='https://github.com/cyclestreets/cyclescape/'>GitHubu</a>
       whats_new: Co je nového?
-      supportlogos_introduction: 'Vznik Cyclescape byl umožněn podporou:'
+      supportlogos_introduction: 'Vznik %{application_name} byl umožněn podporou:'
       funding_from: Za podpory %{name}
       funding_from_and_created_by: Web Cyklisté sobě byl podpořen %{name}
       planning_application_data: Planning application data from Openly Local
@@ -946,7 +946,7 @@ cs-CZ:
         jako první).
       issues: podnětů
       introduction: Níže jsou nejnovější aktualizace diskuzních vláken (napříč celou
-        aplikací Cyklisté sobě) která jsou veřejná (včetně těch, která náleží k místním
+        aplikací %{application_name}) která jsou veřejná (včetně těch, která náleží k místním
         skupinám nebo patří správcům).
       introduction_group_pointer: Pro zobrazení diskuzí pouze z místních skupin jichž
         jste členy, použijte přepínač skupiny vpravo nahoře.
@@ -1176,8 +1176,8 @@ cs-CZ:
       login: Login?
       committee_only_html: Diskuze je určená pouze pro správce skupiny %{group_link}
       apply_to_group_html: Tato diskuse je vlastněna %{group_name}. Chtěli byste <a
-        href='%{join_link}'><strong>požádat o připojení %{group_name}'s Cyclescape
-        skupina</strong></a>?
+        href='%{join_link}'><strong>požádat o připojení k místní skupině
+        %{application_name} %{group_name}</strong></a>?
     tags:
       panel:
         edit_tags: Upravit štítky
