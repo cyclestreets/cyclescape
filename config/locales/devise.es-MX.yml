@@ -13,9 +13,14 @@ es-MX:
       new:
         forgot_password: Forgot your password?
         send_reset_instuctions: Send me reset instructions
+      edit:
+        change_password_caption: Change password
+        new_password: New password
+        confirm_new_password: Confirm new password
+        change_password: Change password
     registrations:
       edit:
-        confirm: Are you sure?
+        confirm: "¿Estas seguro?"
         cancel_account: cancel your account
         cancel_header: Cancel my account
         unhappy_with_account_html: If you are unhappy with your account, you can %{confirm_link}.
@@ -35,7 +40,7 @@ es-MX:
           change your name and email address to the one that you prefer to use for
           this site.
         commit_button: Confirm account
-        confirm: Are you sure?
+        confirm: "¿Estas seguro?"
         cancel_account: cancel your account
         cancel_header: Cancel my account
         unhappy_with_account_html: If you are unhappy with your account, you can %{confirm_link}.

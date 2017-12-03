@@ -18,6 +18,10 @@ de-DE:
               disabled: Kann nicht durch einen gesperrten Benutzer erstellt werden
             closed:
               non_subscriber: kann nur durch einen Teilnehmer geschlossen werden
+        thread_leader_message:
+          attributes:
+            base:
+              not_owing_leader_message: Etwas ist schief gegangen
     attributes:
       issue:
         external_url: externe Webseite

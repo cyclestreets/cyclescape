@@ -3,6 +3,8 @@ fr:
   formtastic:
     labels:
       tags_string: Tags
+      thread_leader_message:
+        description: Optional reason
       group:
         name: Name of the group
         short_name: Subdomain
@@ -123,7 +125,8 @@ fr:
             the next page you will start a discussion thread about this issue.
           deadline: (optional)
           external_url: If another web page is relevant you can add it here.
-          photo: optional
+          photo: (optional), 6MB max, the image will be automatically resized to an
+            appropriate size.
           title: Please be brief and specific
           tags_string: comma separated list of tags e.g. cycle parking, obstruction
         create:
@@ -132,7 +135,8 @@ fr:
             the next page you will start a discussion thread about this issue.
           deadline: (optional)
           external_url: If another web page is relevant you can add it here.
-          photo: optional
+          photo: (optional), 6MB max, the image will be automatically resized to an
+            appropriate size.
           title: Please be brief and specific
           tags_string: comma separated list of tags e.g. cycle parking, obstruction
         edit:
@@ -141,7 +145,8 @@ fr:
             the next page you will start a discussion thread about this issue.
           deadline: (optional)
           external_url: If another web page is relevant you can add it here.
-          photo: optional
+          photo: (optional), 6MB max, the image will be automatically resized to an
+            appropriate size.
           title: Please be brief and specific
           tags_string: comma separated list of tags e.g. cycle parking, obstruction
         update:
@@ -150,7 +155,8 @@ fr:
             the next page you will start a discussion thread about this issue.
           deadline: (optional)
           external_url: If another web page is relevant you can add it here.
-          photo: optional
+          photo: (optional), 6MB max, the image will be automatically resized to an
+            appropriate size.
           title: Please be brief and specific
           tags_string: comma separated list of tags e.g. cycle parking, obstruction
       message_thread:
@@ -159,9 +165,21 @@ fr:
           none, this will be an administrative thread.
       library/note:
         tags_string: comma separated list of tags e.g. cycle parking, obstruction
+      photo_message:
+        photo: 6MB max, the image will be automatically resized to an appropriate
+          size.
       library/document:
         tags_string: comma separated list of tags e.g. cycle parking, obstruction
+      site_config:
+        email_domain: The domain the emails will come from and users will reply to.
+        nowhere_location: The PostGis interpretation of where to put users that have
+          no locations or groups.
     placeholders:
+      site_config:
+        application_name: Cyclescape
+        email_domain: example.com
+        funder_name_footer1: Funding from Lovely Cycle Group
+        funder_url_footer1: http://www.lovely-cycle-group.com
       issue:
         external_url: http://www.example.com
       group_membership_request:

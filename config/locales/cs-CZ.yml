@@ -8,8 +8,11 @@ cs-CZ:
       introduction_groupwise_html: omezeno na %{area_of_group_link}
       area_of_group: oblast %{group_name}
   anon: Anonymní
+  delete: Smazat
   sign_in: přihlásit
-  confirm: Opravdu?
+  are_you_sure: Skutečně?
+  failure: Omlouváme se, nastal problém
+  navigate_away_warning: Jste si jisti, že chcete přejít na jinou stránku?
   possible_spam: Myslíme si, že tato zpráva může být spam . Pokud ne, prosím, přijměte
     naši omluvu . To je ve frontě , které mají být kontrolovány moderátor.
   not_approved: Nová témata mohou být automaticky vytvořeny pouze schválené uživatelé
@@ -18,9 +21,9 @@ cs-CZ:
     zero: Dnes!
     one: Zítra!
     other: Za %{count} dní
-  item_created_at: "%{time_ago} ago"
+  item_created_at: před %{time_ago}
   email_status:
-    no_email: "Žádný email"
+    no_email: Žádný email
     email: Poslat každou zprávu emailem
     digest: Denní souhrn emailem
   deadline_date: Termín/datum
@@ -40,9 +43,12 @@ cs-CZ:
         edit_prefs: Upravit nastavení
         edit_profile: Upravit profil
         group_email: Email skupiny
-        members: "Členové"
+        members: Členové
         name: Název skupiny
         subdomain: Subdoména
+        enable: Aktivovat
+        disable: Deaktivovat
+        disable_tooltip: Nyní pouze skrývá
       create:
         success: Vytvořená skupina
       new:
@@ -64,6 +70,7 @@ cs-CZ:
         manage_issue_categories: Spravovat kategorie podnětů
         manage_users: Spravovat uživatele
         manage_message_moderations: Spravovat moderované zprávy
+        manage_site_config: Manage site config
     issue_categories:
       create:
         success: Kategorie vytvořena
@@ -78,21 +85,16 @@ cs-CZ:
         edit:
           title: Upravit oblast působnosti uživatele %{user_name}
         index:
-          all_user_locations: Všechny oblasti působnosti pro %{user_name}
-          category: Kategorie
           combined_locations: Kombinovaná umístění
           combined_locations_guidance: Tato mapa ukazuje všechna umístění vybraného
             uživatele zkombinovaná dohromady.
-          confirm: Skutečně?
           delete: Smazat
           edit: Upravit
           map: Mapa
           new: Nová oblast
           no_locations_yet: Tento uživatel nemá zatím žádné oblasti působnosti.
           no_locations_guidance: Jako administrátor můžete přidat jeho první oblast.
-          no_overlapping_groups: "Žádné spádové místní skupiny"
           title: Oblasti uživatele %{user_name}
-          overlapping_groups: Spádové místní skupiny
         new:
           title: Nová oblast pro %{user_name}
         update:
@@ -119,6 +121,7 @@ cs-CZ:
         about: O stránkách
         approved: Schváleno
         approve: Schvalovat
+        search_button: Přejít
       user:
         created: Vytvořeno
         last_seen: Naposledy přihlášen
@@ -140,23 +143,26 @@ cs-CZ:
         about: O stránkách
         approved: Schváleno
         approve: Schvalovat
+        search_button: Přejít
       update:
         success: Uživatel upraven
       edit:
         edit_user: Upravit uživatele
+        delete_user: Odstranit uživatele
+      destroy:
+        success: Uživatel odstraněn
     planning_filters:
       create:
-        success: Filter created and running a in background job
+        success: Filtr vytvořen a běží jako proces na pozadí
       update:
-        success: Filter updated and running a in background job
+        success: Filtr upraven a běží jako proces na pozadí
       form:
-        planning_filter_intro: You can add a filter which is a rule (a regex string)
-          and a selected planning authority. If a planning authority has no specific
-          filters then the filters for the authority "* (LAs without own rules)" will
-          be applied. The filter rule will be applied to all new and existing planning
-          applications in a background job after saving. Each planning application
-          in the authority of the filter where the uid matches the rule will be filtered
-          out of users planning index on their dashboard but will still be searchable.
+        planning_filter_intro: |-
+          Můžete přidat filtr, což je pravidlo (regulární výraz)
+           a vybrat projekční skupinu. Pokud nemá projekční skupina žádný konkrétní filtr, potom bude použit filtr pro projekční skupinu "* (LA bez vlastních pravidel)". Pravidlo filtru bude aplikováno na všechny nové projekční skupiny v procesu na pozadí. Každá projekční skupina spravující filtr, jehož uid se shoduje s pravidlem bude vyfiltrovaná z indexu plánování na jejich základnu stránce ale zůstane v hledání.
+    site_configs:
+      form:
+        site_config_intro: The config will alter the site for all users.
   application:
     account_disabled: Váš účet byl deaktivován správcem
     permission_denied: Nemáte oprávnění přistupovat k této stránce.
@@ -176,13 +182,13 @@ cs-CZ:
       planning_applications: Přihlášky k plánování
       planning_applications_search: e.g. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
-      no_results_found: "Žádné výsledky nenalezeny"
+      no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
       hide: Hlasovat pro skrytí
       unhide: Odstranit můj hlas
       hide_tooltip: Pokud dostatek uživatelů hlasuje pro skrytí této přihlášky, bude
         skrytá pro všechny
-      part_hidden: "Část skryta"
+      part_hidden: Část skryta
       converted_to_issue: 'Převedeno na podnět:'
     show:
       address_label: 'Adresa:'
@@ -205,13 +211,13 @@ cs-CZ:
       planning_applications: Přihlášky k plánování
       planning_applications_search: e.g. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
-      no_results_found: "Žádné výsledky nenalezeny"
+      no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
       hide: Hlasovat pro skrytí
       unhide: Odstranit můj hlas
       hide_tooltip: Pokud dostatek uživatelů hlasuje pro skrytí této přihlášky, bude
         skrytá pro všechny
-      part_hidden: "Část skryta"
+      part_hidden: Část skryta
       converted_to_issue: 'Převedeno na podnět:'
     search:
       page_title: Výsledky vyhledávání pro '%{q}'
@@ -219,13 +225,13 @@ cs-CZ:
       planning_applications: Přihlášky k plánování
       planning_applications_search: např. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
-      no_results_found: "Žádné výsledky nenalezeny"
+      no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
       hide: Hlasovat pro skrytí
       unhide: Odstranit můj hlas
       hide_tooltip: Pokud dostatek uživatelů hlasuje pro skrytí této přihlášky, bude
         skrytá pro všechny
-      part_hidden: "Část skryta"
+      part_hidden: Část skryta
       converted_to_issue: 'Převedeno na podnět:'
   dashboards:
     show:
@@ -234,16 +240,16 @@ cs-CZ:
       planning_applications: Přihlášky k plánování
       planning_applications_search: e.g. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
-      no_results_found: "Žádné výsledky nenalezeny"
+      no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
       hide: Hlasovat pro skrytí
       unhide: Odstranit můj hlas
       hide_tooltip: Pokud dostatek uživatelů hlasuje pro skrytí této přihlášky, bude
         skrytá pro všechny
-      part_hidden: "Část skryta"
+      part_hidden: Část skryta
       add_a_new_issue: přidat nový podnět
       add_another_location: přidat další oblast
-      add_some_locations: přidat oblasti
+      add_some_locations: přidat umístění
       areas_you_are_watching: oblasti, které sledujete
       converted_to_issue: 'Převedeno na podnět:'
       deadlines: Termíny a data
@@ -271,30 +277,20 @@ cs-CZ:
       no_prioritised_threads_html: Zatím jste nezadali důležitost žádnému vláknu.
         Můžete se podívat na %{threads_link} jestli tam nenajdete něco důležitého,
         nebo můžete %{add_issue_link}.
-      no_issues_nearby_html: "Žádné podněty nejsou hlášeny ve vaší oblasti zájmu.
-        Můžete %{add_issue_link}, nebo %{add_location_link}."
-      location:
-        one: oblast
-        other: oblasti
-        few: oblasti
-      no_group_threads: "Žádná z vašich místních skupin nemá žádné diskuzní vlákno.
-        Můžete započít novou konverzaci!"
+      no_issues_nearby_html: Žádné podněty nejsou hlášeny ve vaší oblasti zájmu. Můžete
+        %{add_issue_link}, nebo %{add_location_link}.
+      location: umístění
       no_locations_guidance_html: Nenastavili jste žádné oblasti zájmu! Pokud %{add_some_locations_link},
-        zobrazí se vám zde nejbližší podněty.
+        zobrazí se vám zde nejbližší %{things}.
       no_planning_applications_nearby_html: There are no planning applications in
         your area. You could %{add_location_link}.
-      no_user_groups: Zatím nejste členem žádné místní skupiny! Jakmile se k nějaké
-        skupině připojíte, budou se zde zobrazovat její diskuze.
-      planning_applications_in_your_area: Přihlášky k plánování ve vaší %{location}
+      planning_applications_in_your_area: Přihlášky k plánování ve vaší oblasti
       planning_applications_introduction_html: 'These are the most recent planning
         applications (courtesy of the PlanIt website) in your %{location_link}:'
       planning_applications_lower: přihlášky k plánování
       recent_threads: nedávná vlákna
       subscribed_threads: Zapsaná vlákna
       thread_latest_activity: před %{time_ago}
-      group_threads: Diskuzní vlákna místních skupin
-      group_threads_desc_html: Nejnovější diskuzní vlákna na kterých pracovala některá
-        z vašich místních skupin.
       my_priorities: Důležitost
       my_threads: Odebíraná vlákna
       issues_nearby: Podněty v blízkosti
@@ -307,6 +303,9 @@ cs-CZ:
         link_message_html: "%{creator_link} zaslali odkaz"
         street_view_message_html: "%{creator_link} vyslán Street View"
         library_item_message_html: "%{creator_link} zaslali položku knihovny"
+        thread_leader_message_html: "%{creator_link} stát se vedoucím"
+        cyclestreets_photo_message_html: "%{creator_link} poslal fotku CycleStreets"
+        thread_leader_withdrawing: Stáhnutí vedoucího diskuze
     search:
       title: Výsledky vyhledávání
   devise:
@@ -335,7 +334,8 @@ cs-CZ:
     group_profile_tab: Profil místní skupiny
     group_management: Správa místní skupiny
     membership_list_tab: Seznam členů
-    membership_requests_tab: "Žádosti o členství"
+    membership_requests_tab: Žádosti o členství
+    update_potential_members: Upravit seznam e-mailů potenciálních členů
     home_page_tab: Domovská stránka
     issues:
       destroy:
@@ -345,15 +345,16 @@ cs-CZ:
         title: Podněty v oblasti působnosti místní skupiny %{group_name}
       update:
         success: Podnět upraven
-      vote_clear:
-        failure: Váš hlas nemůže být zrušen
-        success: Váš hlas byl zrušen
-      vote_down:
-        already: Už jste jednou tento podnět nepodpořili
-        success: Podnět byl nepodpořen
-      vote_up:
-        already: Už jste jednou tento podnět podpořili
-        success: Podnět byl podpořen
+    potential_members:
+      new:
+        title: Upravit seznam potenciálních členů skupiny %{group_name}
+        potential_members_intro: Přidejte seznam e-mailových adres všech vašich členů.
+          Pokud se email shoduje s některým z kandidátů na členství ve skupině, bude
+          automaticky schválen jako člen skupiny. Samotné e-maily nebudou uchovávány.
+          Pokud upravíte tento seznam, žádný ze stávajících členů nebude odebrán,
+          ale bude nahrazen seznam e-mailů, který jste nahráli minule.
+      create:
+        success: Seznam potenciálních členů skupiny byl upraven
     members:
       index:
         actions: Akce
@@ -380,11 +381,10 @@ cs-CZ:
           o členství v místní skupině. Můžete %{review_membership_requests_link}.
         review_pending: nevyřízené žádosti o členství
         review_requests: prohlédnout historii žádostí
-        title: "Členové %{group}"
+        title: Členové %{group}
         you_have_pending_members_html: Máte %{review_pending_requests_link}! Prosím
           projděte je a zvolte příslušnou akci.
       member:
-        confirm: Skutečně?
         delete: Odstranit z místní skupiny
         edit: Upravit členství
         joining_date: před %{time_ago}
@@ -394,25 +394,24 @@ cs-CZ:
         title: Pozvat nového člena
       destroy:
         failure: Nemohu odstranit člena místní skupiny
-        success: "Člen místní skupiny odstraněn"
+        success: Člen místní skupiny odstraněn
       edit:
         title: Upravit členství v místní skupině pro uživatele %{user_name}
       update:
         failure: Nemohu upravit členství v místní skupině
-        success: "Členství v místní skupině upraveno"
+        success: Členství v místní skupině upraveno
     membership_requests:
       cancel:
-        success: "Žádost o členství zrušena"
+        success: Žádost o členství zrušena
       confirm:
         failure: Vyskytl se problém s ověřením členství v místní skupině
-        success: "Členství v místní skupině ověřeno"
+        success: Členství v místní skupině ověřeno
       create:
-        requested: "Žádost o členství byla vytvořena"
+        requested: Žádost o členství byla vytvořena
         already_asked: Již jste žádal o členství v místní skupině
         already_member: Už jste členem této místní skupiny
       index:
         actioned_by: Uskutečnil
-        are_you_sure: Skutečně?
         by: "%{name}"
         confirm: Potvrdit
         email: E-mailová adresa
@@ -423,25 +422,24 @@ cs-CZ:
         full_name: Plné jméno
         reject: Zamítnout
         review: Projděte
-        requested_at: "Žádáno"
+        requested_at: Žádáno
         status: Status
-        title: "Žádosti o členství ve skupině %{group}"
+        title: Žádosti o členství ve skupině %{group}
         user: Uživatel (zobrazené jméno)
         membership_status:
           confirmed: Potvrzeno
-          pending: "Čeká"
+          pending: Čeká
           unconfirmed: Nepotvrzeno
           rejected: Zamítnuto
       new:
-        title: "Žádost o členství uživatele %{group_name}"
+        title: Žádost o členství uživatele %{group_name}
         your_membership_request_will: Vaše žádost o členství bude předána správcům
           skupiny, kteří vaše členství posoudí.
       reject:
         failure: Při zamítání žádosti o členství v místni skupině se vyskytl problém
-        success: "Členství v místní skupině zamítnuto"
+        success: Členství v místní skupině zamítnuto
       review:
         actioned_by: Uskutečnil
-        are_you_sure: Skutečně?
         by: "%{name}"
         confirm: Potvrdit
         email: E-mailová adresa
@@ -452,13 +450,13 @@ cs-CZ:
         full_name: Plné jméno
         reject: Zamítnout
         review: Projděte
-        requested_at: "Žádáno"
+        requested_at: Žádáno
         status: Status
         title: Posoudit žádost o členství ve skupině %{group}
         user: Uživatel (zobrazené jméno)
         membership_status:
           confirmed: Potvrzeno
-          pending: "Čeká"
+          pending: Čeká
           unconfirmed: Nepotvrzeno
           rejected: Zamítnuto
         no_message: Uživatel nepřipojil k žádosti žádný popis
@@ -506,6 +504,10 @@ cs-CZ:
         picture: Obrázek
       update:
         success: Profil upraven
+    hashtags:
+      show:
+        intro: Messages tagged '%{name}'
+        none_found: There is no match for '%{name}'
   group_profiles:
     default_new_user_email: |-
       Dobrý den {{full_name}},
@@ -521,8 +523,8 @@ cs-CZ:
       new_group: Vytvořit novou skupinu
       send_some_feedback: pošlete zpětnou vazbu
       title: Adresář skupiny
-      group_request: "Žádost o novou skupinu"
-      no_results_found: "Žádné výsledky nenalezeny"
+      group_request: Žádost o novou skupinu
+      no_results_found: Žádné výsledky nenalezeny
     compact:
       already_member: Již jste členem této skupiny
       no_location: Tato skupina ještě nemá určenou oblast působnosti.
@@ -550,16 +552,17 @@ cs-CZ:
         one: Zobrazit neschválenou žádost o členství
         other: Zobrazit neschválené žádosti o členství (%{count})
       view_message_moderations: Zobrazení moderované zprávy skupiny
+    group:
+      members: members
   group_requests:
     create:
       requested: Právě jste požádali o vytvoření místní skupiny. Jakmile bude vytvořena,
         budete o tom informování.
     new:
-      new_group_request_introduction: "Žádosti o založení místní skupiny jsou moderované.
-        Po založení budete členem vedení skupiny, což vám umožní její administraci."
+      new_group_request_introduction: Žádosti o založení místní skupiny jsou moderované.
+        Po založení budete členem vedení skupiny, což vám umožní její administraci.
     index:
       actioned_by: Uskutečnil
-      are_you_sure: Skutečně?
       by: "%{name}"
       confirm: Potvrdit
       email: E-mailová adresa
@@ -569,13 +572,13 @@ cs-CZ:
       full_name: Plné jméno
       reject: Zamítnout
       review: Revize
-      requested_at: "Žádáno"
+      requested_at: Žádáno
       status: Status
-      title: Group requests
+      title: Požadavky skupiny
       user: Uživatel (zobrazené jméno)
       membership_status:
         confirmed: Potvrzeno
-        pending: "Čeká"
+        pending: Čeká
         unconfirmed: Nepotvrzeno
         rejected: Zamítnuto
       name: Požadovaný název
@@ -583,10 +586,9 @@ cs-CZ:
       new_group: Založit novou místní skupinu
       group_email: Email
       destroy: Odstranit požadavek
-      no_message: "Žádná zpráva nebyla k žádosti o založení místní skupiny připojena"
+      no_message: Žádná zpráva nebyla k žádosti o založení místní skupiny připojena
     review:
       actioned_by: Uskutečnil
-      are_you_sure: Skutečně?
       by: "%{name}"
       confirm: Potvrdit
       email: E-mailová adresa
@@ -596,13 +598,13 @@ cs-CZ:
       full_name: Plné jméno
       reject: Zamítnout
       review: Revize
-      requested_at: "Žádáno"
+      requested_at: Žádáno
       status: Status
-      title: Review group request
+      title: Přehled žádostí o členství ve skupině
       user: Uživatel (zobrazené jméno)
       membership_status:
         confirmed: Potvrzeno
-        pending: "Čeká"
+        pending: Čeká
         unconfirmed: Nepotvrzeno
         rejected: Zamítnuto
       name: Požadovaný název
@@ -610,7 +612,7 @@ cs-CZ:
       new_group: Založit novou místní skupinu
       group_email: Email
       destroy: Odstranit požadavek
-      no_message: "Žádná zpráva nebyla k žádosti o založení místní skupiny připojena"
+      no_message: Žádná zpráva nebyla k žádosti o založení místní skupiny připojena
       short_name: Subdoména
       website: Webová stránka
     confirm:
@@ -624,19 +626,22 @@ cs-CZ:
       failure: Odmítnutí požadavku na založení místní skupiny se nezdařilo
   home:
     show:
-      introduction_html: "%{application_name} je nástroj na podporu místních skupin snažících
-        se o zlepšení podmínek pro jízdu na kole ve svém okolí."
+      introduction_html: "%{application_name} is an online campaigning toolkit for
+        cycle campaign groups around the UK"
       center_box_title: Zde můžete navrhnout, jak zlepšit podmínky pro jízdu na kole
       center_box_html: Neexistující cyklostezka? Překážka bránící v provozu? Chybějící
         cyklostojan? Nebo příklad, kde bylo něco uděláno správně?
       report_an_issue: Přidat podnět
       latest_discussions: Poslední diskuze
-      groups_title: Místní skupiny %{application_name}
-      groups_intro_html: Portál %{application_name} používají <strong>místní skupiny</strong>
-        v celém Česku. <strong>%{groups_link}</strong> ve vašem okolí a zjistěte jaké
-        problémy se snaží řešit.
+      groups_title: "%{application_name} Groups"
+      groups_intro_html: "%{application_name} is used by <strong>cycle campaign groups</strong>
+        across the country. <strong>%{groups_link}</strong> and see what they're working
+        to fix.\n"
       find_local_groups: Najděte si místní skupiny
-      twitter_title: "%{application_name} na Twitteru"
+      twitter_title: "%{application_name} on Twitter"
+      find_group: Find group by name or postcode
+      your_postcode: Your postcode or area
+      go: Přejít
     guide:
       title: Jak funguje tento web
       box_1_title: Přidejte  podnět
@@ -689,7 +694,7 @@ cs-CZ:
       search_button: Vyhledat
       clear: Vymazat
       no_popular_issues: Pro žádné podněty nebylo nedávno hlasováno.
-      no_results_found: "Žádné podněty nenalezeny."
+      no_results_found: Žádné podněty nenalezeny.
       title_introduction: Tento oddíl obsahuje nahlášené podněty - problémy na cyklistické
         infrastruktuře a podobné záležitosti.
       introduction_geographical_basis: Každý podnět se vztahuje k nějaké oblasti,
@@ -705,50 +710,32 @@ cs-CZ:
         veřejně. K podnětu je ale možné udělat soukromé vlákno, jakmile bude odeslán.
       admin_thread_pointer_html: "%{administrative_matters_link} bez vazby na nějaké
         území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny."
-      administrative_matters: "Čistě administrativní záležitosti"
+      administrative_matters: Čistě administrativní záležitosti
     show:
-      added_by_html: Added by %{name} %{time}
-      cancel_vote: Zrušit
-      confirm_delete: Skutečně?
+      added_by_html: Přidal %{name} %{time}
       delete_issue: Odstranit tento podnět
       edit_issue: Upravit tento podnět
       new_thread:
         zero: Diskutujte
         one: Nové diskuzní vlákno
-        other: Nová diskuzní vlákna
+        other: Nové diskuzní vlákno
       no_threads_yet: O tomto podnětu zatím neexistují žádná diskuzní vlákna.
       group_private: Soukromé pro %{group}
       group_public: Veřejné od %{group}
       public: Veřejné
       sign_in: přihlásit
       sign_in_to_discuss_html: Můžete se %{sign_in_link} a začít diskutovat.
-      sign_in_to_vote_html: Musíte se %{sign_in_link}, abyste mohli začít hlasovat.
       threads: Vlákna
-      vote_clear: Zrušit hlas
-      vote_down: Nepodpořit
-      vote_up: Podpořit
-      votes:
-        one: hlas
-        other: hlasů
-        few: hlasů
       location: Umístění
       deadline: Uzávěrka
       issues-nearby: Podněty poblíž
-      show_collisions: Show Collisions
-      show_photos: Show Photos
+      show_collisions: Ukázat nehody (funguje jen ve Velké Británii)
+      show_photos: Uložit fotografie
     update:
       success: Podnět upraven
-    vote_clear:
-      failure: Váš hlas nemůže být zrušen
-      success: Váš hlas byl zrušen
-    vote_down:
-      already: Už jste jednou tento podnět nepodpořili
-      success: Podnět byl nepodpořen
-    vote_up:
-      already: Už jste jednou tento podnět podpořili
-      success: Podnět byl podpořen
     form:
       currently: Právě je
+      max_length_error_html: is over the maximum length of&nbsp;
   layouts:
     application:
       admin: Administrace
@@ -769,11 +756,11 @@ cs-CZ:
       library: Knihovna
       library_tooltip: Znovupoužitelné zdroje
       loading: Prosím čekejte…
+      membership: Členství
       threads: Diskuzní vlákna
       threads_tooltip: Všechna diskuzní témata
       tags: Tags
-      tags_tooltip: Cloud of the top 100 most used tags
-      title: Cyklisté sobě
+      tags_tooltip: Obláček ze 100 nejpoužívanějších štítků
     footer:
       application_version_html: 'Verze aplikace: %{version}'
       github_page_link_html: Zdrojové kódy jsou dostupné na <a href='https://github.com/cyclestreets/cyclescape/'>GitHubu</a>
@@ -781,13 +768,13 @@ cs-CZ:
       supportlogos_introduction: 'Vznik Cyclescape byl umožněn podporou:'
       funding_from: Za podpory %{name}
       funding_from_and_created_by: Web Cyklisté sobě byl podpořen %{name}
-      planning_application_data: Planning application data from PlanIt
+      planning_application_data: Planning application data from Openly Local
       top: Zpět na začátek
-      cyclescape_blog: Blog %{application_name}
+      cyclescape_blog: "%{application_name} blog"
       privacy: Zásady ochrany osobních údajů
       user_guide: Uživatelská příručka
-      facebook_page: "%{application_name} na Facebooku"
-      twitter_page: "%{application_name} na Twitteru"
+      facebook_page: "%{application_name} Facebook page"
+      twitter_page: "%{application_name} Twitter account"
       osm_credit_html: Mapová data &copy; přispěvatelé <a href='http://www.openstreetmap.org'>
         OpenStreetMap</a>, dostupné pod <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
@@ -799,7 +786,7 @@ cs-CZ:
       search_button: Odeslat
   libraries:
     search:
-      no_results_found: "Žádné výsledky pro '%{query}'."
+      no_results_found: Žádné výsledky pro '%{query}'.
       results_found:
         one: Jeden výsledek nalezeno pro '%{query}'.
         other: "%{count} výsledků nalezeno pro '%{query}'"
@@ -831,7 +818,7 @@ cs-CZ:
       new:
         title: Nový dokument do kihovny
       show:
-        added_by_html: Added by %{name} %{time}
+        added_by_html: Přidal %{name} %{time}
         attach_note: Poznámka k vložení
         attach_note_instructions_html: Můžete vytvořit poznámky vztahující se k tomuto
           dokumentu. Pokud budou odkázány v diskuzním vlákně odkážou také na tento
@@ -851,7 +838,7 @@ cs-CZ:
       new:
         title: Nová poznámka v knihovně
       show:
-        added_by_html: Added by %{name} %{time}
+        added_by_html: Přidal %{name} %{time}
         edit: Upravit poznámku
         note_on_document_html: 'Tato poznámka byla vložena k následujícímu dokumentu:
           %{document}'
@@ -864,16 +851,21 @@ cs-CZ:
       update:
         success: Poznámka knihovny upravena
   mailers:
+    admin_mailer:
+      new_site_comment:
+        subject: New site comment
+        body: " Comment with: Name %{name} Email: %{email} URL: %{url} Body: %{body} "
     notifications:
       added_to_group:
         subject: Nyní jste členem místní skupiny Cyklisté sobě %{group_name}
       gmr_confirmed:
         subject: Nyní jste členem místní skupiny Cyklisté sobě %{group_name}
       new_group_request:
-        subject: '[Cyclescape] Uživatel "%{user_name}" požaduje založení nové skupiny
-          "%{group_name}"'
+        subject: '[Cyclescape] [Admin] Uživatel "%{user_name}" požaduje zřízení nové
+          skupiny "%{group_name}".'
       new_gmr:
-        subject: "[Cyklisté sobě] %{user_name} chce vstoupit do skupiny %{group_name}"
+        subject: "[Cyclescape] [Committee] Uživatel %{user_name} se chce připojit
+          do skupiny %{group_name}"
       new_group_thread:
         subject: '[Cyklisté sobě] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
@@ -883,9 +875,9 @@ cs-CZ:
       new_user_location_issue_thread:
         subject: '[Cyklisté sobě] Nové diskuzní vlákno založeno pro "%{issue_title}"'
       group_request_confirmed:
-        subject: '[Cyclescape] Nová skupina "%{group_name}" byla založena'
+        subject: '[Cyclescape] [Admin] Nová skupina "%{group_name}" byla zřízena'
       group_request_rejected:
-        subject: '[Cyclescape] Nová skupina "%{group_request_name}" nebyla založena'
+        subject: '[Cyclescape] [Admin] Nová skupina "%{group_name}" nebyla zřízena'
       new_user_confirmed:
         subject: "[Cyclescape] Vítejte na Cyklisté sobě"
       upcoming_issue_deadline:
@@ -898,6 +890,10 @@ cs-CZ:
           one: "[Cyklisté sobě] %{title}"
           other: 'Re: [Cyklisté sobě] %{title}'
           few: 'Re: [Cyklisté sobě] %{title}'
+        committee_subject:
+          one: "[Cyclescape] [Committee] %{title}"
+          other: 'Re: [Cyclescape] [Committee] %{title}'
+          few: 'Re: [Cyclescape] [Committee] %{title}'
       digest:
         subject: "[Cyclescape] Digest for %{date}"
   message_thread:
@@ -906,10 +902,12 @@ cs-CZ:
         success: Nyní odebíráte toto vlákno
       destroy:
         success: Odběr tohoto vlákna byl zrušen
+      edit:
+        unsubscribe: are sure you want to stop following
     tags:
       panel:
         edit_tags: upravit
-        tags: "štítky"
+        tags: štítky
     user_priorities:
       create:
         success: Důležitost uložena
@@ -917,15 +915,13 @@ cs-CZ:
       update:
         success: Důležitost upravena
         failure: Nemohu upravit důležitost
+    leaders:
+      create:
+        success: Jste vedoucím tohoto vlákna
+      destroy:
+        success: Už nejste vedoucím tohoto vlákna
   message_threads:
     compact:
-      group_committee: Pro správce skupiny
-      group_public: Veřejné skupinové
-      group_private: Soukromé skupinové
-      public: Veřejné
-      posted_at: zasláno před %{time_ago}
-    list:
-      discussion_on_issue: Diskuze o podnětu
       group_committee: Pro správce skupiny
       group_public: Veřejné skupinové
       group_private: Soukromé skupinové
@@ -966,7 +962,7 @@ cs-CZ:
       thread_priority: Důležitost mého diskuzního vlákna
     search:
       clear_submit: Vymazat
-      no_results_found: "Žádné výsledky nenalezeny pro '%{query}'."
+      no_results_found: Žádné výsledky nenalezeny pro '%{query}'.
       results_found:
         one: Jeden výsledek nalezen pro '%{query}'
         other: "%{count} výsledků nalezeno pro '%{query}'"
@@ -975,7 +971,6 @@ cs-CZ:
       search_submit: Hledat
       title: Výsledky prohledávání diskuzních vláken
     show:
-      are_you_sure: Skutečně?
       back: Zpět
       closed_html: Vlákno vlákno bylo uzavřeno %{by} %{at}
       open: Znovu otevřít vlákno
@@ -993,6 +988,8 @@ cs-CZ:
     subscribers_panel:
       owner: Vlastník
       subscribers: Uživatelé, kteří sledují toto vlákno
+    connected_to_thread:
+      leading: "[vedoucí]"
     update:
       success: Vlákno upraveno
     widget:
@@ -1023,7 +1020,16 @@ cs-CZ:
         success: Odkaz vložen
     photos:
       create:
-        failure: Nemohu nahrát fotografii
+        failure: Není možné zřídit fotografickou zprávu. Zkontrolujte prosím, zda
+          soubor nebyl příliš velký a byl ve formátu jpg, jpeg, png nebo gif.
+        success: Fotografie nahrána
+      show:
+        photo_alt: 'Titulek fotografie: %{caption}.'
+        view_original_image: Zobrazit původní obrázek
+    cyclestreets_photos:
+      create:
+        failure: Není možné zřídit fotografickou zprávu. Zkontrolujte prosím, zda
+          soubor nebyl příliš velký a byl ve formátu jpg, jpeg, png nebo gif.
         success: Fotografie nahrána
       show:
         photo_alt: 'Titulek fotografie: %{caption}.'
@@ -1032,6 +1038,22 @@ cs-CZ:
       create:
         failure: Street View nebyl vytvořen
         success: Street View vytvořil
+    thread_leaders:
+      create:
+        success: Váš vedoucí vlákna byl upraven
+      new:
+        introduction: Vedoucí diskuzního vlákna dbá na to, aby se diskutovaná záležitost
+          posouvala kupředu.
+        introduction_action: Převezmu zodpovědnost za vedení této diskuze.
+        default_leader_message_html: Popište vaši motivaci pro vedení této diskuze
+        default_unleading_message_html: " Popište, proč už nejste schopen nadále vést
+          diskuzi"
+        start_leading: Začít vést vlákno
+        stop_leading: Přestat vést vlákno
+      show:
+        new_leader_html: "%{leader_link} bere zodpovědnost, za to, že se diskuze posouvá
+          kupředu a jsou podniknuty příslušné kroky k tomu, aby byl problém vyřešen."
+        removed_leader_html: "%{leader_link} přestal být vedoucím diskuze."
   message_library:
     documents:
       new:
@@ -1072,10 +1094,13 @@ cs-CZ:
       link_message: Odkaz
       new_message: Nová zpráva
       photo_message: Fotografie
+      cyclestreets_photo_message: Fotografie CycleStreets
+      thread_leader_message: Vedoucí vlákna
       sign_in_to_post_html: Abyste mohli odeslat zprávu, musíte se %{sign_in_link}.
       text_message: Text
-      street_view_message: Street View
+      street_view_message: Street view
       reply_by: Nebo odpovědět
+      select_image: Vybrat obrázek
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>u."
@@ -1087,26 +1112,34 @@ cs-CZ:
       new:
         already: Pro tuto přihlášku k plánování už podnět vytvořen je
         application_reference: Reference přihlášky
-        title: Nový podnět vytvořený z přihlášky k plánování
+        title: New issue from Planning application
         title_prefix: Planning application
+  photo:
+    too_large: Nahraný obrázek je příliš velký - musí být menší, než 3MB
+    wrong_format: Nahraný soubor musí být obrázek (jpg, jpeg, png, nebo gif)
   shared:
     search:
-      no_results_found: "Žádné výsledky pro '%{query}'"
+      no_results_found: Žádné výsledky pro '%{query}'
       thread_results: Vlákna (%{count})
       issue_results: Podněty (%{count})
       library_results: Položky knihovny (%{count})
+      planning_results: Planning applications (%{count})
       threads_found:
-        zero: "Žádná diskuzní vlákna nenalezena pro '%{query}'."
+        zero: Žádná diskuzní vlákna nenalezena pro '%{query}'.
         one: 'Nalezeno diskuzní vlákno pro ''%{query}'':'
         other: "%{count} diskuzních vláken nalezeno pro '%{query}':"
       issues_found:
-        zero: "Žádný podnět nenalezen pro '%{query}'."
+        zero: Žádný podnět nenalezen pro '%{query}'.
         one: 'Nalezen jeden podnět pro ''%{query}'':'
         other: "%{count} podnětů nalezeno pro '%{query}':"
       library_items_found:
-        zero: "Žádná položka knihovny nenalezena pro '%{query}'."
+        zero: Žádná položka knihovny nenalezena pro '%{query}'.
         one: 'Nalezena položka knihovny pro ''%{query}'':'
         other: "%{count} položek knihovny nalezeno pro '%{query}':"
+      planning_found:
+        zero: No planning applications found for '%{query}'.
+        one: 'One planning application found for ''%{query}'':'
+        other: "%{count} planning applications found for '%{query}':"
     edit_map:
       area: oblast
       clear: vymazat
@@ -1140,6 +1173,8 @@ cs-CZ:
       my_locations: Oblasti působnosti
       update_account: Základní nastavení účtu
     permission_denied:
+      login: Login?
+      committee_only_html: Diskuze je určená pouze pro správce skupiny %{group_link}
       apply_to_group_html: Tato diskuse je vlastněna %{group_name}. Chtěli byste <a
         href='%{join_link}'><strong>požádat o připojení %{group_name}'s Cyclescape
         skupina</strong></a>?
@@ -1149,19 +1184,27 @@ cs-CZ:
     message_moderations:
       approve: Schválit
       approved: schváleno
-      reject: Discard
+      reject: Zrušit
       possible_spam: Možné spam
       not_approved: Uživatel není schváleno
       explanation: Tyto zprávy jsou pozdrženy kvůli moderování . To může být proto,
         že vypadají jako potenciální spam, nebo že uživatel nebyl schválen . Pokud
         schválit , pak zpráva bude odeslána ven a tvůrce schválen.
+    message_threads_list:
+      discussion_on_issue: Diskuze o podnětu
+      group_committee: Pro správce skupiny
+      group_public: Veřejné skupinové
+      group_private: Přístupné pouze místní skupině
+      public: Veřejné
+      posted_at: zaslali před %{time_ago}
+    votable:
+      sign_in_to_vote_html: Musíte se %{sign_in_link}, abyste mohli začít hlasovat.
   site:
     comments:
       destroy:
         failure: Nepodařilo se smazat zpětnou vazbu
         success: Zpětná vazba úspěšně smazána
       index:
-        confirm_delete: Skutečně?
         delete_comment: Smazat
         how: Jak
         id: ID
@@ -1194,12 +1237,19 @@ cs-CZ:
     new_photo_message:
       type: fotografie
       view_the_photo: 'Fotku si můžete prohlédnout na:'
+    new_cyclestreets_photo_message:
+      type: fotografie
+      view_the_photo: 'You can view the Cyclestreets photo at:'
     new_street_view_message:
       type: street view
       view_the_street_view: 'Street View si můžete vidět na:'
+    new_thread_leader_message:
+      type: vedoucí
+      new_leader: "%{leader_link} se stal vedoucím vlákna %{thread_title}."
+      removed_leader: "%{leader_link} přestal být vedoucím vlákna %{thread_title}."
     footer:
       thread: Vlákno Cyklisté sobě
-      unsubscribe: Pokud navštívíte odkaz nahoře, můžete přestat sledovat toto vlákno.
+      unsubscribe: You can stop following this thread by visiting
   thread_priorities:
     very_high: Nejvyšší důležitost
     high: Důležité
@@ -1212,7 +1262,7 @@ cs-CZ:
     group: Pro skupinu
     committee: Pro správce skupiny
   user_roles:
-    member: "Člen"
+    member: Člen
     admin: Administrátor
   group_membership_roles:
     member: Obyčejný člen
@@ -1224,12 +1274,12 @@ cs-CZ:
       destroy:
         failure: Toto umístění nemůže být smazáno
         success: Umístění smazáno
-      edit:
+      new:
         title: Upravit umístění
+        introduction: Nastavení oblasti pomůže zjistit, které záležitosti by se vás
+          mohli týkat.
       index:
         add_first_location: přidat první umístění
-        all_my_locations: Všechna má umístění
-        category: Kategorie
         combined_locations: Kombinovaná umístění
         combined_locations_guidance: Tato mapa ukazuje všechna vaše umístění zkombinovaná
           dohromady. Vaše umístění používáme abychom určili, které podněty jsou pro
@@ -1243,11 +1293,8 @@ cs-CZ:
         combined_locations_guidance_subscribe_html: V současné době dostáváte upozornění
           na nové podněty v těchto oblastech, a automaticky sledujete diskuzní vlákna
           o těchto podnětech. Pokud chcete změnit nastavení, můžete %{edit_prefs_link}.
-        confirm: Skutečně?
-        delete: Smazat
         edit: Upravit
         edit_your_prefs: upravit nastavení
-        map: Mapa
         my_locations: Mé oblasti
         new: Přidejte novou oblast
         no_locations_yet: Zatím jste nenastavili žádné oblasti!
@@ -1255,15 +1302,6 @@ cs-CZ:
           cestu do práce, kde rádi jezdíte atd. To pomůže zjistit, které záležitosti
           by se vás mohli týkat a které skupiny by vás mohli zajímat.
         no_locations_guidance2_html: Pro začátek můžete %{first_location_link}.
-        no_overlapping_groups: "Žádné spádové místní skupiny"
-        overlapping_groups: Spádové místní skupiny
-      new:
-        new_location: Přidejte novou oblast
-        introduction: Nastavení oblasti pomůže zjistit, které záležitosti by se vás
-          mohli týkat.
-        drawing_help: Můžete zvolit oblast, cestu nebo přesné umístění - vyberte typ
-          v panelu napravo. Potom můžete kreslit do mapy a uložit oblast tlačítkem
-          dole.
       subscribe_to_threads:
         subscribed_to_threads:
           zero: Nemůžeme najít žádná další vlákna, která byste mohli sledovat.
@@ -1271,6 +1309,36 @@ cs-CZ:
           other: Nyní sledujete %{count} dalších vláken.
       update:
         success: Oblast upravena
+      large_map:
+        area: oblast
+        clear: vymazat
+        draw_area: Nakreslit oblast
+        draw_area_1: Kliknutím do mapy upřesníte zvolenou oblast.
+        draw_area_2: Použijte dvouklik pro dokončení kreslení oblasti.
+        draw_area_3: Přiblížením a tažením se můžete dostat na požadovanou oblast
+          na mapě.
+        draw_point: Nakreslit bod
+        draw_point_1: Kliknutím do mapy specifikujete bod.
+        draw_point_2: Tažením bodu můžete změnit jeho pozici.
+        draw_point_3: Přiblížením a tažením se můžete dostat na požadovanou oblast
+          na mapě.
+        draw_route: Nakreslit cestu
+        draw_route_1: Kliknutím do mapy zvolíte požadovanou cestu.
+        draw_route_2: Použijte dvouklik pro dokončení kreslení cesty.
+        draw_route_3: Přetažením šedých bodů můžete přidat bod doprostřed cesty.
+        point: bod
+        route: cesta
+        undo: zpět
+        area_around_me: Plocha okolo mě
+        my_location: Moje umístění
+        current_location: Použít stávající oblast
+        current_location_placeholder: Používám automaticky nalezenou oblast
+        my_ward: 'Opatrovaná území: '
+        my_constituency: 'Obvody: '
+        my_group: 'Místní skupiny:'
+        my_route: Cesta do cíle
+        last_months: V minulých 3 měsících byli
+        in_this_area: podněty v této oblasti
     prefs:
       edit:
         involvement: 'Zahrnout mě do:'
@@ -1279,7 +1347,7 @@ cs-CZ:
           záležitostech nahoře. V současné době jsou dostupná pouze emailová oznámení.
         title: Správa notifikací
         back: Návrat na váš profil
-        none: "Žádná upozornění"
+        none: Žádná upozornění
         notify: Zasílat upozornění o nových podnětech a nově založených diskuzních
           vláknech
         subscribe: Zasílat upozornění na nové podněty a nová diskuzní vlákna automaticky
@@ -1313,8 +1381,8 @@ cs-CZ:
           zero: "%{name} zatím není členem žádné místní skupiny"
           one: "%{name} je členem jedné místní skupiny"
           other: "%{name} je členem %{count} místních skupin"
-        no_groups: "Žádné"
-        no_website: "Žádná"
+        no_groups: Žádné
+        no_website: Žádná
         profile_picture_title: obrázek uživatele %{name}
         recent_threads: Nedávná vlákna
         reported_issues: Podané podněty
@@ -1325,8 +1393,8 @@ cs-CZ:
       update:
         success: Profil upraven
   user_locations:
-    category_name: your %{category_name} location
-    generic_category_name: a location where you've expressed interest
+    category_name: vaše %{category_name} oblast
+    generic_category_name: oblast, ve které jste projevili zájem
   users:
     private_message_threads:
       new:
@@ -1349,7 +1417,7 @@ cs-CZ:
         display_entries:
           one: Zobrazeno <b>%{count}</b> %{entry_name}
           other: Zobrazeno <b>všech %{count}</b> %{entry_name}
-          zero: "Žádný %{entry_name} nenalezen"
+          zero: Žádný %{entry_name} nenalezen
   views:
     pagination:
       first: "&laquo; První"

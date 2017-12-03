@@ -4,6 +4,8 @@ cs-CZ:
   formtastic:
     labels:
       tags_string: Tags
+      thread_leader_message:
+        description: Nepovinný důvod
       group:
         name: Název skupiny
         short_name: Subdoména
@@ -54,11 +56,11 @@ cs-CZ:
         file: Dokument
       library/item: 
       library/note:
-        location: Area of relevance
+        location: Oblast významu
         body: Poznámka
-        url: Web address
+        url: Webová adresa
       link_message:
-        url: Web address
+        url: Webová adresa
       message:
         body: Zpráva
       site_comment:
@@ -79,15 +81,15 @@ cs-CZ:
           bicycle_wheels: Kola u jízdních kol
     hints:
       tags_string_hints:
-        tags_string: comma separated list of tags e.g. cycle parking, obstruction
+        tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
       user:
         new:
           display_name: Volitelné - může být přezdívka nebo pseudonym, který bude
             zobrazen ostatním uživatelům místo plného jména.
           full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
             místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
-          bicycle_wheels: Chcete-li pomoci zastavit automatizované znamení-up zadejte
-            částku (v číslech) kol na šesti kolech
+          bicycle_wheels: Jako kontrolu, že nejste robot, zadejte prosím množství
+            (počet) kol na šesti jízdních kolech.
         edit:
           password: Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo.
           current_password: Prosím potvrďte vaše stávající heslo, abyste mohli udělat
@@ -96,8 +98,8 @@ cs-CZ:
             zobrazen ostatním uživatelům místo plného jména.
           full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
             místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
-          bicycle_wheels: Chcete-li pomoci zastavit automatizované znamení-up zadejte
-            částku (v číslech) kol na šesti kolech
+          bicycle_wheels: Jako kontrolu, že nejste robot, zadejte prosím množství
+            (počet) kol na šesti jízdních kolech.
       group:
         short_name: Musí být malé alfanumerické znaky; a-z, 0-9
       group_request:
@@ -133,9 +135,9 @@ cs-CZ:
           deadline: "(nepovinné)"
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné)"
+          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
           title: Prosím buďte struční a konkrétní.
-          tags_string: comma separated list of tags e.g. cycle parking, obstruction
+          tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         create:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -143,9 +145,9 @@ cs-CZ:
           deadline: "(nepovinné)"
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné)"
+          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
           title: Prosím buďte struční a konkrétní.
-          tags_string: comma separated list of tags e.g. cycle parking, obstruction
+          tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         edit:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -153,9 +155,9 @@ cs-CZ:
           deadline: "(nepovinné)"
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné)"
+          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
           title: Prosím buďte struční a konkrétní.
-          tags_string: comma separated list of tags e.g. cycle parking, obstruction
+          tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         update:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -163,18 +165,29 @@ cs-CZ:
           deadline: "(nepovinné)"
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné)"
+          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
           title: Prosím buďte struční a konkrétní.
-          tags_string: comma separated list of tags e.g. cycle parking, obstruction
+          tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
       message_thread:
         privacy: Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno.
         issue: Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud
           k žádným, toto vlákno bude vytvořeno jako všeobecná diskuze.
       library/note:
-        tags_string: comma separated list of tags e.g. cycle parking, obstruction
+        tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
+      photo_message:
+        photo: Maximálně 6MB, obrázek se automaticky zmenší.
       library/document:
-        tags_string: comma separated list of tags e.g. cycle parking, obstruction
+        tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
+      site_config:
+        email_domain: The domain the emails will come from and users will reply to.
+        nowhere_location: The PostGis interpretation of where to put users that have
+          no locations or groups.
     placeholders:
+      site_config:
+        application_name: Cyklisté sobě
+        email_domain: example.com
+        funder_name_footer1: Funding from Lovely Cycle Group
+        funder_url_footer1: http://www.lovely-cycle-group.com
       issue:
         external_url: http://www.example.com
       group_membership_request:
