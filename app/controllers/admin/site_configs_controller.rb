@@ -36,7 +36,6 @@ class Admin::SiteConfigsController < ApplicationController
       :tile_server3_name, :tile_server3_url, :tile_server2_name,
       :email_domain,
       :facebook_link, :twitter_link,
-      :header_html, :footer_links_html,
       :default_locale, :timezone,
       :ga_account_id, :ga_base_domain,
       :default_email, :geocoder_url,
