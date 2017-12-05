@@ -650,6 +650,8 @@ cs-CZ:
       box_2_body: Prodiskutujte podnět s lidmi, které zajímá stejná čtvrť nebo oblast.
       box_3_title: Prosaďte změnu
       box_3_body: Vytvořte akční skupinu a prosaďte změnu.
+    twitter:
+      title: "Tweety o aplikaci %{application_name}"
   issue:
     message_threads:
       new:
