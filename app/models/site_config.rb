@@ -5,6 +5,7 @@ class SiteConfig < ActiveRecord::Base
   before_save :wipe_cache
 
   dragonfly_accessor :logo
+  dragonfly_accessor :small_logo
 
   1.upto(6).each do |n|
     dragonfly_accessor :"funder_image_footer#{n}"

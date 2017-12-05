@@ -4,6 +4,8 @@
   = f.inputs do
     = f.input :logo, as: :file
     = f.input :retained_logo, as: :hidden
+    = f.input :small_logo, as: :file
+    = f.input :retained_small_logo, as: :hidden
     = f.input :application_name
     = f.input :funder_name_footer1
     = f.input :funder_url_footer1
@@ -32,6 +34,7 @@
     = f.input :nowhere_location, as: :string
     = f.input :facebook_link
     = f.input :twitter_link
+    = f.input :blog_about_url
     = f.input :blog_url
     = f.input :blog_user_guide_url
     = f.input :header_html
