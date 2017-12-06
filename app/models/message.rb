@@ -110,6 +110,7 @@ class Message < ActiveRecord::Base
       updated_at: updated_at,
       censored_at: censored_at,
       deleted_at: deleted_at,
+      public_token: public_token,
       status: status,
       in_reply_to_id: in_reply_to_id,
     }

@@ -325,6 +325,7 @@ class MessageThread < ActiveRecord::Base
       created_by_name: created_by.profile.visibility == 'public' ? created_by.name : nil,
       group_id: group_id,
       title: title,
+      public_token: public_token,
       created_at: created_at,
       updated_at: updated_at,
       deleted_at: deleted_at,
