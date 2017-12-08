@@ -10,7 +10,6 @@
           - if @site_config.twitter_link
             %li
               %a(href="#{@site_config.twitter_link}" class="twitter")
-                = t(".twitter_page")
                 = t(".twitter_page", application_name: @site_config.application_name)
           %li
             %small= t(".github_page_link_html")
