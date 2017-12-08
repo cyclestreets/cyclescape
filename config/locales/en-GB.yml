@@ -538,7 +538,6 @@
 
 '
       find_local_groups: Find groups local to you
-      twitter_title: Cyclescape on Twitter
       find_group: Find group by name or postcode
       your_postcode: Your postcode or area
       go: Go
