@@ -40,7 +40,6 @@ describe Issue::MessageThreadsController, type: :controller do
           referrer: "http://www.example.com/users/sign_in",
           user_ip: "127.0.0.1"
         )).to_return(status: 200, body: is_spam)
-
     end
     subject { post :create, issue_id: issue.id, thread: attributes_for(:message_thread), message: message }
 
@@ -49,8 +48,6 @@ describe Issue::MessageThreadsController, type: :controller do
 
       it 'should redirect home with flash' do
         expect(subject).to redirect_to('/home')
-
-        expect(req).to have_been_made
         expect(flash[:alert]).to eq(t('not_approved'))
       end
     end
@@ -60,7 +57,6 @@ describe Issue::MessageThreadsController, type: :controller do
 
       it 'should redirect home with flash' do
         expect(subject).to redirect_to('/home')
-        expect(req).to have_been_made
         expect(flash[:alert]).to eq(t('possible_spam'))
       end
 
@@ -80,7 +76,6 @@ describe Issue::MessageThreadsController, type: :controller do
 
       it 'should redirect to thread with no flash' do
         expect(subject).to redirect_to("/threads/#{last_thread.id}")
-        expect(req).to have_been_made
         expect(flash[:alert]).to be_blank
       end
 
