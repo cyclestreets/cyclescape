@@ -4,6 +4,8 @@
   = f.inputs do
     = f.input :logo, as: :file
     = f.input :retained_logo, as: :hidden
+    = f.input :small_logo, as: :file
+    = f.input :retained_small_logo, as: :hidden
     = f.input :application_name
     = f.input :funder_name_footer1
     = f.input :funder_url_footer1
@@ -32,10 +34,9 @@
     = f.input :nowhere_location, as: :string
     = f.input :facebook_link
     = f.input :twitter_link
+    = f.input :blog_about_url
     = f.input :blog_url
     = f.input :blog_user_guide_url
-    = f.input :header_html
-    = f.input :footer_links_html
     = f.input :default_locale, as: :select, collection: UserProfile.all_locales.values.map {|loc| [loc.label, loc.locale]}, include_blank: false
     = f.input :timezone, as: :select, collection: ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name }.uniq, include_blank: false
     = f.input :ga_account_id, hint: "Google Analyitics ID"

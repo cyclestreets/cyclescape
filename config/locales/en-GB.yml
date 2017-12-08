@@ -543,6 +543,8 @@
       your_postcode: Your postcode or area
       go: Go
       twitter_title: "%{application_name} on Twitter"
+    twitter:
+      title: "Tweets by %{application_name}"
     guide:
       title: How %{application_name} Works
       box_1_title: Create cycling issues
