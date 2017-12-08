@@ -8,16 +8,6 @@ FactoryGirl.define do
     nowhere_location "POINT(0.1275 51.5032)"
     facebook_link "https//www.facebook.com/CycleStreets"
     twitter_link 'https://twitter.com/cyclescape'
-    footer_links_html '<li><small><a href=\"http://blog.cyclescape.org/\">Cyclescape blog</a></small>
-</li>
-<li>
-<small><a href=\"http://blog.cyclescape.org/guide/\">User guide</a></small>
-</li>
-<li>
-<small><a href=\"/pages/privacypolicy\">Privacy Policy</a></small>
-</li>
-<li>'
-    header_html '<li><a href=\"http://blog.cyclescape.org/about/\">About</a></li><li><a href=\"http://blog.cyclescape.org/guide/\">User guide</a></li>'
     default_locale "en-GB"
     timezone "Europe/London"
     geocoder_url 'https://api.cyclestreets.net/v2/geocoder'
