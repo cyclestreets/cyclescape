@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711170030) do
+ActiveRecord::Schema.define(version: 20171205182021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -461,8 +461,6 @@ ActiveRecord::Schema.define(version: 20170711170030) do
     t.geometry "nowhere_location",         limit: {:srid=>4326, :type=>"geometry"},                                                                               null: false
     t.string   "facebook_link"
     t.string   "twitter_link"
-    t.text     "footer_links_html",                                                                                                                               null: false
-    t.text     "header_html",                                                                                                                                     null: false
     t.string   "default_locale",                                                                                                                                  null: false
     t.string   "timezone",                                                                                                                                        null: false
     t.string   "ga_account_id"
@@ -482,6 +480,8 @@ ActiveRecord::Schema.define(version: 20170711170030) do
     t.string   "tile_server2_url",                                                  default: "https://{s}.tile.cyclestreets.net/osopendata/{z}/{x}/{y}.png"
     t.string   "tile_server3_name",                                                 default: "OpenStreetMap"
     t.string   "tile_server3_url",                                                  default: "https://{s}.tile.cyclestreets.net/mapnik/{z}/{x}/{y}.png"
+    t.string   "blog_about_url",                                                    default: "http://blog.cyclescape.org/about/",                                 null: false
+    t.string   "small_logo_uid"
   end
 
   create_table "street_view_messages", force: :cascade do |t|
