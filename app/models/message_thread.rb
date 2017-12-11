@@ -84,6 +84,7 @@ class MessageThread < ActiveRecord::Base
   end
   scope :after_date, ->(date) { where(arel_table[:created_at].gteq(date)) }
   scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
+  scope :after_id, ->(id) { where(arel_table[:id].gt(id)) }
 
   default_scope { where(deleted_at: nil) }
 
