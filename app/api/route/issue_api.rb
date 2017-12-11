@@ -11,8 +11,8 @@ module Route
       optional :order, type: Symbol, values:%i( vote_count created_at start_at size id ), desc: 'Order of returned issues.'
       optional :order_direction, type: Symbol, values:%i(asc desc), default: :desc, desc: 'Ordering direction. Not working with "vote_count".'
       optional :id, type: Integer, desc: 'Issue ID'
-      optional :end_date, type: Date, desc: 'No issues after the end date are returned'
-      optional :start_date, type: Date, desc: 'No issues before the start date are returned'
+      optional :end_date, types: [DateTime, Date], desc: 'No issues after the end date are returned'
+      optional :start_date, types: [DateTime, Date], desc: 'No issues before the start date are returned'
       optional(:geo_collection,
                type: Array[RGeo::GeoJSON::Feature],
                desc: 'Return only issues inside this GeoJSON feature collection, e.g. {"type":"FeatureCollection","features":[{"type":"Polygon","coordinates":[[[-1.5724,53.795],[-1.54289,53.8083],[-1.54426,53.79010],[-1.5724,53.7957]]]}]}',
