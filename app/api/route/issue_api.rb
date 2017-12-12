@@ -31,6 +31,7 @@ module Route
         RGeo::GeoJSON::Feature.new(issue.location, nil,
                                    id: issue.id,
                                    created_at: issue.created_at.to_i,
+                                   created_at_iso: issue.created_at,
                                    created_by: creator_name,
                                    vote_count: issue.vote_count,
                                    thumbnail: issue.medium_icon_path,
@@ -38,10 +39,12 @@ module Route
                                    title: issue.title,
                                    description: issue.description,
                                    deadline: issue.deadline.to_i,
+                                   deadline_iso: issue.deadline,
                                    external_url: issue.external_url,
                                    tags: issue.tags.pluck(:name),
                                    cyclescape_url: "#{request.base_url}/issues/#{issue.to_param}",
                                    latest_activity_at: issue.latest_activity_at.to_i,
+                                   latest_activity_at_iso: issue.latest_activity_at,
                                    closed: issue.closed?)
       end
 
