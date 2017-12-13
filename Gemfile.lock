@@ -369,6 +369,7 @@ GEM
     resque-rollbar (0.4.0)
       resque
       rollbar (>= 1.4)
+    retryable (2.0.4)
     rgeo (0.5.3)
     rgeo-activerecord (4.0.5)
       activerecord (~> 4.2)
@@ -553,6 +554,7 @@ DEPENDENCIES
   redis-rails
   resque
   resque-rollbar
+  retryable
   rgeo-geojson
   rollbar
   rspec-collection_matchers
