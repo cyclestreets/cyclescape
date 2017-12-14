@@ -1,7 +1,7 @@
 = semantic_form_for @request, html: {class: 'guided'} do |f|
   = f.inputs do
     = f.input :name
-    = f.input :short_name, input_html: { style: "width:110px;" }
+    = f.input :short_name, input_html: { style: "width:110px;" }, label: t("formtastic.labels.group_request.short_name", application_name: @site_config.application_name)
     = f.input :website, placeholder: 'http:// ...'
     = f.input :email
     = f.input :message, input_html: { rows: "2", style: 'height:auto;' }

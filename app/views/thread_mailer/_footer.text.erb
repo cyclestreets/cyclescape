@@ -1,6 +1,6 @@
 
 --------
-<%= t ".thread" %>:
+<%= t(".thread", application_name: @site_config.application_name) %>:
 <% if defined?(@message) %>
   <%= thread_url(@thread, anchor: dom_id(@message)) %>
 <% else %>

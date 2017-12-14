@@ -110,7 +110,7 @@ class ApplicationController < ActionController::Base
   def set_page_title(title = nil, value = nil)
     key = "#{controller_path.tr("/", ".")}.#{params[:action]}.title"
     page_title = title || I18n.translate(key, (value || { default: '' }))
-    app_title = I18n.translate('application_name')
+    app_title = @site_config.application_name
     @page_title = page_title == '' ? app_title : "#{page_title} - #{app_title}"
   end
 

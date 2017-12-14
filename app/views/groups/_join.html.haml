@@ -1,7 +1,7 @@
 - if group.profile.joining_instructions
   %p= auto_link simple_format group.profile.joining_instructions.truncate(100)
 - else
-  %p= t ".join_body", group: group.name
+  %p= t(".join_body", group: group.name, application_name: @site_config.application_name)
 
 - if current_user && current_user.membership_request_pending_for?(group)
   %p= t ".group_request_pending"

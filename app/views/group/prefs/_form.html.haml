@@ -1,5 +1,5 @@
 = semantic_form_for @prefs, url: [@prefs.group, :prefs] do |f|
   = f.inputs do
-    = f.input :notify_membership_requests
+    = f.input :notify_membership_requests, hint: t("formtastic.hints.group_pref.notify_membership_requests", application_name: @site_config.application_name)
     = f.input :membership_secretary, collection: @membership_secretary_candidates.map{ |msc| [msc.name, msc.id] }
   = f.actions

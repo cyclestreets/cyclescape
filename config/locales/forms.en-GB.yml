@@ -10,7 +10,7 @@
         short_name: Subdomain
       group_request:
         name: Name of the group
-        short_name: The proposed Cyclescape web address
+        short_name: The proposed %{application_name} web address
         website: Your organisation's main website
         email: Your organisation's main e-mail address
         default_thread_privacy: Default privacy for discussion threads
@@ -76,25 +76,25 @@
         short_name: Must be lower-case or numbers
         message: A short message to explain the group (helps us stop spam requests)
       group_membership:
-        email: Please enter their email. If this matches an existing Cyclescape account
+        email: Please enter their email. If this matches an existing %{application_name} account
           they will be added to the group immediately. Otherwise an invitation to
-          join Cyclescape will be sent to this address.
+          join %{application_name} will be sent to this address.
         full_name: Please enter their name; they can change this later.
         role: Select if they are a normal or committee member of the group.
       group_membership_request:
         message: You can optionally send the group administrators any additional information
           you feel is appropriate, such as a group membership number.
       group_pref:
-        notify_membership_requests: Notifications will be sent when a Cyclescape user
+        notify_membership_requests: Notifications will be sent when a %{application_name} user
           asks to join this group
         membership_secretary: Choose an optional membership secretary who will receive
           membership notification emails. Leave blank for notifications to be sent
           to the group email address.
       group_profile:
         joining_instructions: The joining instructions are shown to people who want
-          to join this Cyclescape group. You might want to direct people to pay for
+          to join this %{application_name} group. You might want to direct people to pay for
           membership elsewhere first, for example, or you might be happy for everyone
-          and anyone to join your Cyclescape group. You can leave this blank.
+          and anyone to join your %{application_name} group. You can leave this blank.
         new_user_email: This will be emailed to every new member, {{full_name}} will
           be converted to the person's full name in the email
         picture: To be displayed on the group page, ideally 333x192 pixels
@@ -130,12 +130,12 @@
       issue:
         external_url: http://www.example.com
       group_membership_request:
-        message: Please add me to the Cyclescape group.
+        message: Please add me to the %{application_name} group.
       library/note:
         url: http://www.example.com
       group_profile:
-        new_user_email: Hello {{full_name}}, you have been added to a Cyclescape group
-          http://www.cyclescape.org
+        new_user_email: Hello {{full_name}}, you have been added to a %{application_name} group
+          http://www.%{application_domain}
     actions:
       update: Save
       saving: Saving…
