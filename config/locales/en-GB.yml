@@ -877,6 +877,7 @@
         messages to this thread.'
       private_html: Private Message between %{creator} and %{message_to}.
       public_message: 'Public: Everyone can view this thread and post messages.'
+      thread: Thread
     subscribe_panel:
       subscribed: You are following this thread.
     subscribers_panel:
@@ -919,6 +920,8 @@
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
+      new:
+        image: Image
     cyclestreets_photos:
       <<: *photo_message
     street_views:
