@@ -28,6 +28,7 @@ cs-CZ:
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
+          all_day: Celý den
         create:
           description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
             Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
@@ -36,6 +37,7 @@ cs-CZ:
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
+          all_day: Celý den
         edit:
           description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
             Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
@@ -44,6 +46,7 @@ cs-CZ:
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
+          all_day: Celý den
         update:
           description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
             Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
@@ -52,6 +55,7 @@ cs-CZ:
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
+          all_day: Celý den
       library/document:
         file: Dokument
       library/item: 
@@ -59,8 +63,24 @@ cs-CZ:
         location: Oblast významu
         body: Poznámka
         url: Webová adresa
+        title: Nadpis
+        description: Popis
+      deadline_message:
+        all_day: Celý den
+        title: Nadpis
+      photo_message:
+        caption: Nadpis
+        photo: Fotografie
+      street_view_message:
+        caption: Nadpis
+      cyclestreets_photo_message:
+        caption: Nadpis
+      document_message:
+        title: Nadpis
+        file: Soubor
       link_message:
         url: Webová adresa
+        description: Popis
       message:
         body: Zpráva
       site_comment:
@@ -74,11 +94,23 @@ cs-CZ:
         involve_my_groups_admin: Taktéž mě zahrňte do všeobecných diskuzí mých místních
           skupin
       user:
+        new: &labels_user_new
+          display_name: Zobrazené jméno
+          full_name: Plné jméno
+          email: E-mail
+          password: Heslo
+          password_confirmation: Potvrzení hesla
+          about: O profilu
+          bicycle_wheels: Kola u jízdních kol
+        create: *labels_user_new
         edit:
+          full_name: Plné jméno
+          display_name: Zobrazené jméno
+          email: E-mail
           password: Nové heslo
           password_confirmation: Potvrzení nového hesla
-        new:
-          bicycle_wheels: Kola u jízdních kol
+          current_password: Stávající heslo
+        update: *labels_user_new
     hints:
       tags_string_hints:
         tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
@@ -229,6 +261,10 @@ cs-CZ:
         create: Odeslat zprávu
       photo_message:
         create: Přidat fotografii
+      cyclestreets_photo_message:
+        create: Přidat fotografii z CycleStreets
+      street_view_message:
+        create: Přidat pohled ze Street view
       site_comment:
         create: Zaslat zpětnou vazbu
       user:

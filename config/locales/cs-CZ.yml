@@ -985,6 +985,7 @@ cs-CZ:
         vidět a přispívat do tohoto vlákna.'
       private_html: Soukromá zprava mezi %{creator} a %{message_to}.
       public_message: 'Veřejné: Každý může vidět toto vlákno a vkládat do něj příspěvky.'
+      thread: Vlákno
     subscribe_panel:
       subscribed: Sledujete toto vlákno.
     subscribers_panel:
@@ -1036,6 +1037,8 @@ cs-CZ:
       show:
         photo_alt: 'Titulek fotografie: %{caption}.'
         view_original_image: Zobrazit původní obrázek
+      new:
+        image: Obrázek
     street_views:
       create:
         failure: Street View nebyl vytvořen
