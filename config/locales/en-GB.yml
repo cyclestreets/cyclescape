@@ -68,6 +68,9 @@
         manage_users: Manage users
         manage_message_moderations: Manage message moderations
         manage_site_config: Manage site config
+        stats: Stats
+        resque: Resque
+        manage_planning_filters: Manage planning filters
     issue_categories:
       create:
         success: Category created
@@ -128,6 +131,11 @@
       destroy:
         success: User deleted
     planning_filters:
+      index:
+        new_planning_filter: New planning filter
+        id: Id
+        authority: Authority
+        rule: Rule
       create:
         success: Filter created and running a in background job
       update:

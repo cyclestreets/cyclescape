@@ -37,6 +37,7 @@
         update: *labels_issue_new
       library/document:
         file: Document
+        title: Title
       library/item: null
       library/note:
         location: Area of relevance
@@ -97,6 +98,7 @@
           display_name: Display name
           full_name: Full name
           email: E-mail
+          disabled: Disabled
           password: Password
           password_confirmation: Password Confirmation
           about: About
@@ -106,6 +108,7 @@
           display_name: Display name
           full_name: Full name
           email: E-mail
+          disabled: Disabled
           password: New Password
           password_confirmation: New Password Confirmation
           current_password: Current password

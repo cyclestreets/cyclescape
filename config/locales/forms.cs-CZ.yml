@@ -64,6 +64,7 @@ cs-CZ:
           all_day: Celý den
       library/document:
         file: Dokument
+        title: Nadpis
       library/item: 
       library/note:
         location: Oblast významu
@@ -124,6 +125,7 @@ cs-CZ:
           display_name: Zobrazené jméno
           full_name: Plné jméno
           email: E-mail
+          disabled: Deaktivován
           password: Heslo
           password_confirmation: Potvrzení hesla
           about: O profilu
@@ -133,6 +135,7 @@ cs-CZ:
           full_name: Plné jméno
           display_name: Zobrazené jméno
           email: E-mail
+          disabled: Deaktivován
           password: Nové heslo
           password_confirmation: Potvrzení nového hesla
           current_password: Stávající heslo

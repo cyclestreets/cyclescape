@@ -71,6 +71,9 @@ cs-CZ:
         manage_users: Spravovat uživatele
         manage_message_moderations: Spravovat moderované zprávy
         manage_site_config: Manage site config
+        stats: Statistiky
+        resque: Resque
+        manage_planning_filters: Spravovat filtry plánovacích aplikací
     issue_categories:
       create:
         success: Kategorie vytvořena
@@ -152,6 +155,11 @@ cs-CZ:
       destroy:
         success: Uživatel odstraněn
     planning_filters:
+      index:
+        new_planning_filter: Nový filtr plánovací aplikace
+        id: Id
+        authority: Autorita
+        rule: Pravidlo
       create:
         success: Filtr vytvořen a běží jako proces na pozadí
       update:
