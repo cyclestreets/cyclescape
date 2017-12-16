@@ -389,7 +389,7 @@
       new:
         title: Request membership of %{group_name}
         your_membership_request_will: Please click the button below to apply to join
-          this group's %{application_name} area..
+          this group's %{application_name} area.
       reject:
         failure: There was a problem rejecting this membership request
         success: Membership rejected
@@ -987,6 +987,7 @@
       text_message: Text
       street_view_message: Street view
       reply_by: Or reply by
+      email: email
       select_image: Select image
   pages:
     changelog:

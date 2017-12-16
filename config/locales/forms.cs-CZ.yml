@@ -3,6 +3,7 @@ cs-CZ:
   cancel: Zrušit
   formtastic:
     labels:
+      remember_me: Zapamatovat přihlášení
       tags_string: Tags
       thread_leader_message:
         description: Nepovinný důvod
@@ -17,7 +18,12 @@ cs-CZ:
         default_thread_privacy: Výchozí viditelnost
       group_membership:
         role: Typ členství
+      potential_member:
+        emails: E-maily
+      group_membership_request:
+        message: Zpráva
       group_pref:
+        membership_secretary: Správce členství ve skupině
         notify_membership_requests: Zapnout upozornění na žádosti o členství
       issue:
         new:
@@ -80,6 +86,7 @@ cs-CZ:
         file: Soubor
       link_message:
         url: Webová adresa
+        title: Nadpis
         description: Popis
       message:
         body: Zpráva
@@ -93,6 +100,25 @@ cs-CZ:
         involve_my_groups: Záležitosti mých místních skupin
         involve_my_groups_admin: Taktéž mě zahrňte do všeobecných diskuzí mých místních
           skupin
+      group_profile:
+        joining_instructions: Instrukce pro připojení ke skupině
+        picture: Obrázek
+        description: Popis
+        new_user_email: E-mail pro nového uživatele
+      user_profile:
+        website: Webová stránka
+        picture: Obrázek
+        visibility: Viditelnost
+        about: O profilu
+        locale: Jazyk
+        remove_picture: Odstranit obrázek
+      thread:
+        title: Nadpis
+        privacy: Viditelnost
+        issue: Podnět
+      site_comment:
+        name: Jméno
+        email: E-mail
       user:
         new: &labels_user_new
           display_name: Zobrazené jméno

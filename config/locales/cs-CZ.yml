@@ -1105,6 +1105,7 @@ cs-CZ:
       text_message: Text
       street_view_message: Street view
       reply_by: Nebo odpovědět
+      email: e-mailem
       select_image: Vybrat obrázek
   pages:
     changelog:
