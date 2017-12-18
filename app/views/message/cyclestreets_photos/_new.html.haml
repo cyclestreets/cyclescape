@@ -11,7 +11,7 @@
           "data-opts" => { feature: item_to_geojson(@issue), photoselect: true, hidelayers: true, domid: "photo-map" }.to_json}
       = f.input :caption
       %li.string.input.optional.stringish
-        = label_tag 'image', nil, class: 'label'
+        = label_tag t('.image'), nil, class: 'label'
         %span{id: 'image-preview'}
 
     = f.actions do

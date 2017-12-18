@@ -25,6 +25,7 @@
           photo: Add a photo
           tags_string: Tag your issue
           title: Title your report
+          all_day: All day
         create: *labels_issue_new
         edit: *labels_issue_new
         update: *labels_issue_new
@@ -35,8 +36,25 @@
         location: Area of relevance
         body: Note
         url: Web address
+        title: Title
+        description: Description
+      deadline_message:
+        all_day: All day
+        title: Title
+      photo_message:
+        caption: Caption
+        photo: Photo
+      street_view_message:
+        caption: Caption
+      cyclestreets_photo_message:
+        caption: Caption
+        image: Obrázek
+      document_message:
+        title: Title
+        file: File
       link_message:
         url: Web address
+        description: Description
       message:
         body: Message
       site_comment:
@@ -49,11 +67,23 @@
         involve_my_groups: My group's matters
         involve_my_groups_admin: Also involve me in my group's administrative discussions
       user:
+        new: &labels_user_new
+          display_name: Display name
+          full_name: Full name
+          email: E-mail
+          password: Password
+          password_confirmation: Password Confirmation
+          about: About
+          bicycle_wheels: Bicycle wheels
+        create: *labels_user_new
         edit:
+          display_name: Display name
+          full_name: Full name
+          email: E-mail
           password: New Password
           password_confirmation: New Password Confirmation
-        new:
-          bicycle_wheels: Bicycle Wheels
+          current_password: Current password
+        update: *labels_user_new
     hints:
       tags_string_hints: &tags_string_hints
         tags_string: comma separated list of tags e.g. cycle parking, obstruction
@@ -168,6 +198,10 @@
         create: Post Message
       photo_message:
         create: Add Photo
+      cyclestreets_photo_message:
+        create: Add CycleStreets Photo
+      street_view_message:
+        create: Add StreetView Message
       site_comment:
         create: Send Feedback
       user:
