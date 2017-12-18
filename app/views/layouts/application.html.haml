@@ -74,9 +74,9 @@
         - if flash[type]
           .flash{class: type}
             = flash[type]
-    - tile_servers = [ { name: @site_config.tile_server1_name, url: @site_config.tile_server1_url },
-      { name: @site_config.tile_server2_name, url: @site_config.tile_server2_url },
-      { name: @site_config.tile_server3_name, url: @site_config.tile_server3_url } ]
+    - tile_servers = [ { name: @site_config.tile_server1_name, url: @site_config.tile_server1_url, type: @site_config.tile_server1_type, options: @site_config.tile_server1_options },
+      { name: @site_config.tile_server2_name, url: @site_config.tile_server2_url, type: @site_config.tile_server2_type, options: @site_config.tile_server2_options },
+      { name: @site_config.tile_server3_name, url: @site_config.tile_server3_url, type: @site_config.tile_server3_type, options: @site_config.tile_server3_options } ]
     #map-tiles{ "data-tileservers" => tile_servers.to_json }
     - if @full_page
       #page-full

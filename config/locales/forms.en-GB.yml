@@ -151,6 +151,9 @@
       site_config:
         email_domain: "The domain the emails will come from and users will reply to."
         nowhere_location: "The PostGis interpretation of where to put users that have no locations or groups."
+        tile_server1_options: 'JavaScript dict with layer options. i.e. {"opacity": 0.5}'
+        tile_server2_options: 'JavaScript dict with layer options. i.e. {"opacity": 0.5}'
+        tile_server3_options: 'JavaScript dict with layer options. i.e. {"opacity": 0.5}'
     placeholders:
       site_config:
         application_name: Cyclescape

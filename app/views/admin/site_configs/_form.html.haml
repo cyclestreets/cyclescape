@@ -45,10 +45,16 @@
     = f.input :email_domain, hint: "used as the reply address in issue and thread notifications"
     = f.input :tile_server1_name, hint: "tile servers used on the leaflet map, name will be the name of the layer. 1 is the default layer"
     = f.input :tile_server1_url
+    = f.input :tile_server1_type, as: :select, collection: SiteConfig::TILE_SERVER_TYPES
+    = f.input :tile_server1_options
     = f.input :tile_server2_name
     = f.input :tile_server2_url
+    = f.input :tile_server2_type, as: :select, collection: SiteConfig::TILE_SERVER_TYPES
+    = f.input :tile_server2_options
     = f.input :tile_server3_name
     = f.input :tile_server3_url
+    = f.input :tile_server3_type, as: :select, collection: SiteConfig::TILE_SERVER_TYPES
+    = f.input :tile_server3_options
     = f.input :admin_email, hint: "only used for comments at the moment"
     = f.input :geocoder_url
     = f.input :geocoder_key
