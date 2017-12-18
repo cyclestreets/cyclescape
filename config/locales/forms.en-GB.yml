@@ -70,16 +70,16 @@
         new: &labels_user_new
           display_name: Display name
           full_name: Full name
-          email: E-mail
+          email: Email
           password: Password
-          password_confirmation: Password Confirmation
+          password_confirmation: Password confirmation
           about: About
-          bicycle_wheels: Bicycle wheels
+          bicycle_wheels: Bicycle Wheels
         create: *labels_user_new
         edit:
           display_name: Display name
           full_name: Full name
-          email: E-mail
+          email: Email
           password: New Password
           password_confirmation: New Password Confirmation
           current_password: Current password
