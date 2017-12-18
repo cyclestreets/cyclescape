@@ -319,7 +319,7 @@
         committee: Committee members
         committee_guidance: Committee members can manage the group membership list,
           change the group's profile and update group thread information.
-        email: E-mail address
+        email: Email address
         group_joining_date: Group joining date
         group_members_guidance: On this page you can view the existing members of
           your group, add new people and remove members from the group.
@@ -370,7 +370,7 @@
         actioned_by: Actioned By
         by: by %{name}
         confirm: Confirm
-        email: E-mail address
+        email: Email address
         view_message: View...
         message: Message
         no_requests_yet: There have been no membership requests for this group yet.
