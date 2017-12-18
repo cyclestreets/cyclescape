@@ -8,10 +8,11 @@ module Route
       optional :tags, type: Array[String], desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :excluding_tags, type: Array[String], desc: 'An array of tags that the issues must not have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :group, type: String, desc: 'Return only issues from area of group given by its short name, e.g. "london"'
-      optional :order, type: String, desc: 'Order of returned issues. Current working parameters are: "vote_count", "created_at", "start_at", "size"'
+      optional :order, type: Symbol, values: %i[vote_count created_at start_at size id], desc: 'Order of returned issues.'
+      optional :order_direction, type: Symbol, values: %i[asc desc], default: :desc, desc: 'Ordering direction. Not working with "vote_count".'
       optional :id, type: Integer, desc: 'Issue ID'
-      optional :end_date, type: Date, desc: 'No issues after the end date are returned'
-      optional :start_date, type: Date, desc: 'No issues before the start date are returned'
+      optional :end_date, types: [DateTime, Date], desc: 'No issues after the end date are returned'
+      optional :start_date, types: [DateTime, Date], desc: 'No issues before the start date are returned'
       optional(:geo_collection,
                type: Array[RGeo::GeoJSON::Feature],
                desc: 'Return only issues inside this GeoJSON feature collection, e.g. {"type":"FeatureCollection","features":[{"type":"Polygon","coordinates":[[[-1.5724,53.795],[-1.54289,53.8083],[-1.54426,53.79010],[-1.5724,53.7957]]]}]}',
@@ -56,12 +57,12 @@ module Route
           scope = scope.intersects(group.profile.location)
         end
         case params[:order]
-        when 'vote_count'
+        when :vote_count
           scope = scope.plusminus_tally
-        when 'created_at', 'start_at'
-          scope = scope.order(params[:order] => :desc)
-        when 'size'
-          scope = scope.order_by_size
+        when :created_at, :start_at, :id
+          scope = scope.order(params[:order] => params[:order_direction])
+        when :size
+          scope = scope.order_by_size(params[:order_direction])
         end
         scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
         if params[:geo_collection]
