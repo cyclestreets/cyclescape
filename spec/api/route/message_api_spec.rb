@@ -7,7 +7,7 @@ describe Route::MessageApi do
     let(:response_keys) do
       [
         "id", "body", "censored_at", "created_at", "deleted_at",
-        "in_reply_to_id", "status", "thread_id", "updated_at"
+        "in_reply_to_id", "status", "thread_id", "updated_at", "public_token"
       ]
     end
     let!(:resource) { create :message }

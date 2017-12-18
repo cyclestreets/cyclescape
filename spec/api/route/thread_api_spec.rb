@@ -7,7 +7,7 @@ describe Route::ThreadApi do
     let(:response_keys) do
       [
         "closed", "created_at", "created_by_id", "created_by_name",
-        "deleted_at", "group_id", "id", "issue_id", "privacy", "status", "updated_at"
+        "deleted_at", "group_id", "id", "issue_id", "privacy", "status", "updated_at", "public_token", "title"
       ]
     end
     let!(:resource) { create :message_thread }
