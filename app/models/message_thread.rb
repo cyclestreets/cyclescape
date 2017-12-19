@@ -323,7 +323,7 @@ class MessageThread < ActiveRecord::Base
       id: id,
       issue_id: issue_id,
       created_by_id: created_by_id,
-      created_by_name: created_by.profile.visibility == 'public' ? created_by.name : created_by.display_name_or_anon,
+      created_by_name: created_by.profile.visibility == 'public' ? created_by.name : created_by.display_name,
       group_id: group_id,
       title: title,
       public_token: public_token,
