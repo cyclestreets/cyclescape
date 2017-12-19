@@ -1,6 +1,5 @@
 ---
 cs-CZ:
-  application_name: Cyklisté sobě
   tags:
     show:
       heading: Položky označené jako '%{name}'

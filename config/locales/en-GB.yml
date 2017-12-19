@@ -1,5 +1,4 @@
 "en-GB":
-  application_name: Cyclescape
   tags:
     show:
       heading: Things tagged '%{name}'
@@ -335,7 +334,7 @@
         ordinary_members: Ordinary members
         new_members_guidance_introduction: 'To add a member:'
         new_members_guidance_method1_html: If you know their email address, %{add_directly_link}.
-        new_members_guidance_method2_html: If they are already using Cyclescape, click
+        new_members_guidance_method2_html: If they are already using %{application_name}, click
           on their name from within a discussion thread, and you can add them from
           their user profile page.
         ordinary_members_guidance: Ordinary members get access to your private group
@@ -473,7 +472,7 @@
       already_member: You are already a member of this group
       no_location: This group doesn't have a location yet.
     join:
-      join_body: You can request membership of this Cyclescape group, if you want
+      join_body: You can request membership of this %{application_name} group, if you want
         to be involved in the %{group} activities.
       join_this_group: Join this group
       group_request_pending: Your request to join this group is pending.
@@ -768,41 +767,41 @@
         "
     notifications:
       added_to_group:
-        subject: You are now a member of the Cyclescape group for %{group_name}
+        subject: You are now a member of the %{application_name} group for %{group_name}
       gmr_confirmed:
-        subject: You are now a member of the Cyclescape group for %{group_name}
+        subject: You are now a member of the %{application_name} group for %{group_name}
       new_group_request:
-        subject: '[Cyclescape] [Admin] New Group "%{group_name}" has been requested by "%{user_name}"'
+        subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been requested by "%{user_name}"'
       new_gmr:
-        subject: '[Cyclescape] [Committee] %{user_name} wants to join %{group_name}'
+        subject: '[%{application_name}] [Committee] %{user_name} wants to join %{group_name}'
       new_group_thread:
-        subject: '[Cyclescape] "%{thread_title}" (%{group_name})'
+        subject: '[%{application_name}] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
-        subject: '[Cyclescape] New issue - "%{issue_title}" (%{group_name})'
+        subject: '[%{application_name}] New issue - "%{issue_title}" (%{group_name})'
       new_user_location_issue:
-        subject: '[Cyclescape] New issue - "%{issue_title}"'
+        subject: '[%{application_name}] New issue - "%{issue_title}"'
       new_user_location_issue_thread:
-        subject: '[Cyclescape] New thread started on issue "%{issue_title}"'
+        subject: '[%{application_name}] New thread started on issue "%{issue_title}"'
       group_request_confirmed:
-        subject: '[Cyclescape] [Admin] New Group "%{group_name}" has been created'
+        subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been created'
       group_request_rejected:
-        subject: '[Cyclescape] [Admin] New Group "%{group_request_name}" has been not been created'
+        subject: '[%{application_name}] [Admin] New Group "%{group_request_name}" has been not been created'
       new_user_confirmed:
-        subject: '[Cyclescape] Welcome to Cyclescape'
+        subject: '[%{application_name}] Welcome to %{application_name}'
       upcoming_issue_deadline:
-        subject: '[Cyclescape] Upcoming deadline/date for "%{issue_title}"'
+        subject: '[%{application_name}] Upcoming deadline/date for "%{issue_title}"'
       upcoming_thread_deadline:
-        subject: '[Cyclescape] Upcoming deadline/date for "%{thread_title}"'
+        subject: '[%{application_name}] Upcoming deadline/date for "%{thread_title}"'
     thread_mailer:
       common:
         subject:
-          one: '[Cyclescape] %{title}'
-          other: 'Re: [Cyclescape] %{title}'
+          one: '[%{application_name}] %{title}'
+          other: 'Re: [%{application_name}] %{title}'
         committee_subject:
-          one: '[Cyclescape] [Committee] %{title}'
-          other: 'Re: [Cyclescape] [Committee] %{title}'
+          one: '[%{application_name}] [Committee] %{title}'
+          other: 'Re: [%{application_name}] [Committee] %{title}'
       digest:
-        subject: '[Cyclescape] Digest for %{date}'
+        subject: '[%{application_name}] Digest for %{date}'
   message_thread:
     subscriptions:
       create:
@@ -1148,7 +1147,7 @@
       new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
       removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
     footer:
-      thread: Cyclescape discussion thread
+      thread: "%{application_name} discussion thread"
       unsubscribe: You can stop following this thread by visiting
   thread_priorities:
     very_high: Top-priority
