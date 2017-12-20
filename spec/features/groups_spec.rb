@@ -37,7 +37,7 @@ describe 'Groups' do
         profile.save!
         visit group_path(group)
 
-        expect(page).to have_content(I18n.t('groups.join.join_body' , group: profile.group.name))
+        expect(page).to have_content(I18n.t('groups.join.join_body' , group: profile.group.name, application_name: SiteConfig.first.application_name))
       end
     end
   end

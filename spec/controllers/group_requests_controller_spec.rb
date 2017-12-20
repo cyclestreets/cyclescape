@@ -34,7 +34,8 @@ RSpec.describe GroupRequestsController, type: :controller do
 
           expect(mail.subject).to eq(I18n.t('mailers.notifications.new_group_request.subject',
                                             group_name: valid_attributes[:name],
-                                            user_name: user.name))
+                                            user_name: user.name,
+                                            application_name: SiteConfig.first.application_name))
           expect(mail.to).to include('root@cyclescape.org')
         end
       end
@@ -83,7 +84,8 @@ RSpec.describe GroupRequestsController, type: :controller do
         mail = ActionMailer::Base.deliveries.last
 
         expect(mail.subject).to eq(I18n.t('mailers.notifications.group_request_rejected.subject',
-                                          group_request_name: group_request.name))
+                                          group_request_name: group_request.name,
+                                          application_name: SiteConfig.first.application_name))
 
         expect(mail.to.first).to eq(group_request.user.email)
         expect(mail.body).to include('Sorry!')
@@ -104,7 +106,8 @@ RSpec.describe GroupRequestsController, type: :controller do
         mail = ActionMailer::Base.deliveries.last
 
         expect(mail.subject).to eq(I18n.t('mailers.notifications.group_request_confirmed.subject',
-                                          group_name: group_request.name))
+                                          group_name: group_request.name,
+                                          application_name: SiteConfig.first.application_name))
 
         expect(mail.to.first).to eq(group_request.user.email)
       end

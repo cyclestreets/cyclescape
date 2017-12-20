@@ -19,7 +19,7 @@ describe ThreadMailer do
     it 'has correct text in email' do
       document
       subject = described_class.send(:common, message_three, user)
-      expect(subject.subject).to eq(I18n.t('mailers.thread_mailer.common.subject', title: thread.title, count: 2))
+      expect(subject.subject).to eq(I18n.t('mailers.thread_mailer.common.subject', title: thread.title, count: 2, application_name: SiteConfig.first.application_name))
       expect(subject.body).to include("Brian#{I18n.t('.thread_mailer.header.committee')}")
       expect(subject.body).to include(I18n.t('.thread_mailer.new_document_message.view_the_document'))
       expect(subject.body).to include("http://www.example.com#{document.file.url}")
@@ -36,7 +36,7 @@ describe ThreadMailer do
     it 'has attachment' do
       deadline_message
       subject = described_class.send(:common, message_three, user)
-      expect(subject.subject).to eq(I18n.t('mailers.thread_mailer.common.committee_subject', title: thread.title, count: 2))
+      expect(subject.subject).to eq(I18n.t('mailers.thread_mailer.common.committee_subject', title: thread.title, count: 2, application_name: SiteConfig.first.application_name))
       expect(subject.attachments.first.body.to_s.start_with? "BEGIN:VCALENDAR").to eq(true)
     end
   end
