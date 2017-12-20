@@ -65,8 +65,6 @@
         description: Description
       message:
         body: Message
-      site_comment:
-        body: Message
       thread_subscription:
         send_email: Email new messages
       user_pref:
@@ -93,6 +91,7 @@
       site_comment:
         name: Name
         email: Email
+        body: Message
       user:
         new: &labels_user_new
           display_name: Display name
