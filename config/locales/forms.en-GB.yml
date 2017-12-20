@@ -22,7 +22,7 @@
       group_membership_request:
         message: Message
       group_pref:
-        membership_secretary: Membership secreatary
+        membership_secretary: Membership secretary
         notify_membership_requests: Enable membership request notifications
       issue:
         new: &labels_issue_new
