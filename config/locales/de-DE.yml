@@ -1,6 +1,5 @@
 ---
 de-DE:
-  application_name: Cyclescape
   tags:
     show:
       heading: Mit '%{name}' getaggte Dinge
@@ -73,6 +72,9 @@ de-DE:
         manage_users: Anwender verwalten
         manage_message_moderations: Nachrichtenmoderation verwalten
         manage_site_config: Manage site config
+        stats: Stats
+        resque: Resque
+        manage_planning_filters: Manage planning filters
     issue_categories:
       create:
         success: Kategorie erstellt
@@ -153,6 +155,11 @@ de-DE:
       destroy:
         success: User deleted
     planning_filters:
+      index:
+        new_planning_filter: New planning filter
+        id: Id
+        authority: Authority
+        rule: Rule
       create:
         success: Filter created and running a in background job
       update:
@@ -367,7 +374,7 @@ de-DE:
         committee: Ausschussmitglieder
         committee_guidance: Ausschussmitglieder können die Mitgliederliste verwalten,
           Gruppenprofile ändern und Diskussionen in Gruppen aktualisieren
-        email: Mailadresse
+        email: Email address
         group_joining_date: Beitrittsdatum
         group_members_guidance: Auf dieser Seite siehst Du die Mitglieder deiner Gruppe,
           lade Leute ein und entferne Mitgielder dieser Gruppe.
@@ -375,9 +382,9 @@ de-DE:
         ordinary_members: Ordentliche Mitglieder
         new_members_guidance_introduction: 'Um ein Mitglied hinzuzufügen:'
         new_members_guidance_method1_html: 'Wenn du seine Email-Adresse kennst, %{add_directly_link} '
-        new_members_guidance_method2_html: Wenn sie Cyclescape bereits benutzen, klicke
-          auf ihren Benutzernamen in einer Disskusion, und füge sie aus ihrem Mitgliederprofil
-          heraus hinzu
+        new_members_guidance_method2_html: If they are already using %{application_name},
+          click on their name from within a discussion thread, and you can add them
+          from their user profile page.
         ordinary_members_guidance: Ordentliche Mitglieder bekommen Zugang zu den Diskussionen
           deiner privaten Gruppe und können neue Diskussionen erstellen.
         pending_requests: Ausstehende Anfragen
@@ -418,7 +425,7 @@ de-DE:
         actioned_by: Durchgeführt durch
         by: durch %{name}
         confirm: Bestätigen
-        email: Mailadresse
+        email: Email address
         view_message: Ansehen...
         message: Nachricht
         no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
@@ -436,8 +443,8 @@ de-DE:
           rejected: abgelehnt
       new:
         title: Mitgliedsantrag aus %{group_name}
-        your_membership_request_will: Dein Mitgliedsantrag wird zur Begutachtung an
-          die Ausschussmitglieder geleitet.
+        your_membership_request_will: Please click the button below to apply to join
+          this group's %{application_name} area.
       reject:
         failure: Bei der Ablehnung des Mitgliedschaftsantrags ist ein Problem aufgetretetn
         success: Mitgliedschaft abgelehnt
@@ -445,7 +452,7 @@ de-DE:
         actioned_by: Durchgeführt durch
         by: durch %{name}
         confirm: Bestätigen
-        email: Mailadresse
+        email: Email address
         view_message: Ansehen...
         message: 'Der Benutzer hat seinem Beitrittsgesuch folgende Nachricht beigefügt:'
         no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
@@ -532,8 +539,8 @@ de-DE:
       already_member: You are already a member of this group
       no_location: This group doesn't have a location yet.
     join:
-      join_body: Du kannst die Mitgliedschaft in dieser Cyclescape-Gruppe beantragen,
-        wenn du dich mit Aktivitäten von %{group} beschäftigen möchtest.
+      join_body: You can request membership of this %{application_name} group, if
+        you want to be involved in the %{group} activities.
       join_this_group: Dieser Gruppe beitreten
       group_request_pending: Dein Mitgliedsantrag dieser Gruppe ist unerledigt.
     show:
@@ -543,7 +550,7 @@ de-DE:
       group_management: Gruppenverwaltung
       group_organisers: Gruppenorganisatoren
       leave_group: Gruppe verlassen
-      join_title: Trete unserer %{application_name}-Gruppe bei
+      join_title: Join our %{application_name} group
       no_issues: In diesem Gruppenbereich gibt es keine Themen
       no_location: Diese Gruppe hat noch keinen Standort
       no_threads: Diese Gruppe hat noch keine öffentlichen Diskussionen
@@ -569,7 +576,7 @@ de-DE:
       actioned_by: Durchgeführt von
       by: durch %{name}
       confirm: Bestätigen
-      email: Mailadresse
+      email: Email address
       view_message: Ansehen...
       message: Nachricht
       no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
@@ -595,7 +602,7 @@ de-DE:
       actioned_by: Durchgeführt von
       by: durch %{name}
       confirm: Bestätigen
-      email: Mailadresse
+      email: Email address
       view_message: Ansehen...
       message: Nachricht
       no_requests_yet: Für diese Gruppe gab es noch keine Mitgliedsanträge.
@@ -642,12 +649,14 @@ de-DE:
         across the country. <strong>%{groups_link}</strong> and see what they're working
         to fix.\n"
       find_local_groups: Finde Gruppen in deiner Nähe
-      twitter_title: "%{application_name} on Twitter"
       find_group: Find group by name or postcode
       your_postcode: Your postcode or area
       go: Los
+      twitter_title: "%{application_name} on Twitter"
+    twitter:
+      title: Tweets by %{application_name}
     guide:
-      title: Wie %{application_name} funktioniert
+      title: How %{application_name} Works
       box_1_title: Berichte über ein Thema
       box_1_body: Bringe Themen auf dieser Seite schnell zur Sprache.
       box_2_title: Bekomme Hilfe von anderen
@@ -749,7 +758,7 @@ de-DE:
     application:
       admin: Admin
       admin_tooltip: Admin-Bereich, für System-Administratoren
-      dashboard: Mein %{application_name}
+      dashboard: My %{application_name}
       dashboard_tooltip: Dein persönliches Dashboard zeigt Dir Updates in Diskussionen,
         die Du abonniert hast
       about: Über
@@ -774,8 +783,8 @@ de-DE:
       application_version_html: 'Versionshash: %{version}'
       github_page_link_html: Einblick in den Quellcode auf <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>
       whats_new: Was ist neu
-      supportlogos_introduction: '%{application_name} wurde möglich dank der großzügigen Unterstützung
-        von:'
+      supportlogos_introduction: "%{application_name} has been made possible thanks
+        to generous support from:"
       funding_from: Finanziert von from %{name}
       funding_from_and_created_by: Mittel aus und erstellt von %{name}
       planning_application_data: Planungsanwendungsdaten von Openly Local
@@ -865,43 +874,44 @@ de-DE:
         body: " Comment with: Name %{name} Email: %{email} URL: %{url} Body: %{body} "
     notifications:
       added_to_group:
-        subject: Du bist nun ein Mitglied der Cyclescape Gruppe für %{group_name}
+        subject: You are now a member of the %{application_name} group for %{group_name}
       gmr_confirmed:
-        subject: Du bist nun ein Mitglied der Cyclescape Gruppe für %{group_name}
+        subject: You are now a member of the %{application_name} group for %{group_name}
       new_group_request:
-        subject: '[Cyclescape] [Admin] New Group "%{group_name}" has been requested
-          by "%{user_name}"'
+        subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been
+          requested by "%{user_name}"'
       new_gmr:
-        subject: "[Cyclescape] [Committee] %{user_name} wants to join %{group_name}"
+        subject: "[%{application_name}] [Committee] %{user_name} wants to join %{group_name}"
       new_group_thread:
-        subject: '[Cyclescape] "%{thread_title}" (%{group_name})'
+        subject: '[%{application_name}] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
-        subject: '[Cyclescape] Neues Thema - "%{issue_title}" (%{group_name})'
+        subject: '[%{application_name}] New issue - "%{issue_title}" (%{group_name})'
       new_user_location_issue:
-        subject: '[Cyclescape] Neues Thema - "%{issue_title}"'
+        subject: '[%{application_name}] New issue - "%{issue_title}"'
       new_user_location_issue_thread:
-        subject: '[Cyclescape] Start einer neuen Diskussion um das Thema "%{issue_title}"'
+        subject: '[%{application_name}] New thread started on issue "%{issue_title}"'
       group_request_confirmed:
-        subject: '[Cyclescape] [Admin] New Group "%{group_name}" has been created'
+        subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been
+          created'
       group_request_rejected:
-        subject: '[Cyclescape] [Admin] New Group "%{group_request_name}" has been
-          not been created'
+        subject: '[%{application_name}] [Admin] New Group "%{group_request_name}"
+          has been not been created'
       new_user_confirmed:
-        subject: "[Cyclescape] Willkommen bei Cyclescape"
+        subject: "[%{application_name}] Welcome to %{application_name}"
       upcoming_issue_deadline:
-        subject: '[Cyclescape] Kommender Stichtag/Termin für "%{issue_title}"'
+        subject: '[%{application_name}] Upcoming deadline/date for "%{issue_title}"'
       upcoming_thread_deadline:
-        subject: '[Cyclescape] Kommender Stichtag/Termin für "%{thread_title}"'
+        subject: '[%{application_name}] Upcoming deadline/date for "%{thread_title}"'
     thread_mailer:
       common:
         subject:
-          one: "[Cyclescape] %{title}"
-          other: 'Re: [Cyclescape] %{title}'
+          one: "[%{application_name}] %{title}"
+          other: 'Re: [%{application_name}] %{title}'
         committee_subject:
-          one: "[Cyclescape] [Committee] %{title}"
-          other: 'Re: [Cyclescape] [Committee] %{title}'
+          one: "[%{application_name}] [Committee] %{title}"
+          other: 'Re: [%{application_name}] [Committee] %{title}'
       digest:
-        subject: "[Cyclescape] Digest for %{date}"
+        subject: "[%{application_name}] Digest for %{date}"
   message_thread:
     subscriptions:
       create:
@@ -950,7 +960,8 @@ de-DE:
         es ein oder mehrere Diskussionen geben (beginnend mit den zuletzt Aktualisieren).
       issues: Themen
       introduction: Below are latest updates on discussion threads (across all of
-        %{application_name}) that are public (including those owned by groups and/or administrative.)
+        %{application_name}) that are public (including those owned by groups and/or
+        administrative.)
       introduction_group_pointer: Benutze den Gruppenwechsler oben rechts, um ausschließlich
         Diskussionen einer Gruppe in der Du Mitglied bist anzuzeigen.
     library_panel:
@@ -986,6 +997,7 @@ de-DE:
       private_html: Private Message between %{creator} and %{message_to}.
       public_message: 'Öffentlich: Jeder in dieser Diskussion kann Beiträge lesen
         und posten.'
+      thread: Diskussion
     subscribe_panel:
       subscribed: Du folgst dieser Diskussion.
     subscribers_panel:
@@ -1029,6 +1041,8 @@ de-DE:
       show:
         photo_alt: Ein Foto Titel %{caption}.
         view_original_image: Zeige das Originalbild
+      new:
+        image: Image
     cyclestreets_photos:
       create:
         failure: Could not create photo message.  Was the file too large or not a
@@ -1037,6 +1051,8 @@ de-DE:
       show:
         photo_alt: Ein Foto Titel %{caption}.
         view_original_image: Zeige das Originalbild
+      new:
+        image: Image
     street_views:
       create:
         failure: Street View konnte nicht hinzugefügt werden
@@ -1105,6 +1121,7 @@ de-DE:
       text_message: Text
       street_view_message: Street view
       reply_by: Or reply by
+      email: email
       select_image: Bild auswählen
   pages:
     changelog:
@@ -1251,7 +1268,7 @@ de-DE:
       new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
       removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
     footer:
-      thread: Cyclescape Diskussion
+      thread: "%{application_name} discussion thread"
       unsubscribe: You can stop following this thread by visiting
   thread_priorities:
     very_high: Oberste Priorität

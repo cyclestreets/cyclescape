@@ -4,7 +4,7 @@ cs-CZ:
     confirmations:
       confirmed: Váš účet byl úspěšně potvrzen. Prosím, přihlaste se.
       new:
-        resend_confirmation: Znovu odeslat email s potvrzením registrace
+        resend_confirmation: Znovu odeslat e-mail s potvrzením registrace
         resend_confirmation_submit: Odeslat potvrzení
     failure:
       unconfirmed: Musíte potvrdit svůj účet, pak můžete pokračovat.
@@ -13,10 +13,10 @@ cs-CZ:
         forgot_password: Zapomenuté heslo?
         send_reset_instuctions: Poslat instrukce pro obnovení
       edit:
-        change_password_caption: Change password
-        new_password: New password
-        confirm_new_password: Confirm new password
-        change_password: Change password
+        change_password_caption: Změnit heslo
+        new_password: Nové heslo
+        confirm_new_password: Potvrďte nové heslo
+        change_password: Změnit heslo
     registrations:
       edit:
         confirm: Skutečně?
@@ -29,15 +29,16 @@ cs-CZ:
         sign_in: Přihlásit
         sign_up: Registrovat
         forgot_password: Zapomenuté heslo?
-        no_confirmation_instructions: Nepřišel vám email s potvrzením registrace?
-        no_unlock_instructions: Nepřišel vám email s instrukcemi pro odblokování účtu?
+        no_confirmation_instructions: Nepřišel vám e-mail s potvrzením registrace?
+        no_unlock_instructions: Nepřišel vám e-mail s instrukcemi pro odblokování
+          účtu?
     invitations:
       edit:
         title: Potvrďte váš účet
-        info: Byl jste pozván, aby jste se připojil k portálu Cyklisté sobě. Aby jste
-          byly schopni se přihlásit, prosím doplňte údaje k vašemu účtu o heslo. Můžete
-          také změnit vaši emailovou adresu na takovou, kterou chcete s touto službou
-          používat.
+        info: Byl jste pozván, aby jste se připojil k portálu %{application_name}.
+          Aby jste byly schopni se přihlásit, prosím doplňte údaje k vašemu účtu o
+          heslo. Můžete také změnit vaši e-mailovou adresu na takovou, kterou chcete
+          s touto službou používat.
         commit_button: Potvrdit účet
         confirm: Skutečně?
         cancel_account: zrušit účet

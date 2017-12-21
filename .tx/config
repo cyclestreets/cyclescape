@@ -36,3 +36,4 @@ file_filter = config/locales/<lang>.yml
 source_file = config/locales/en-GB.yml.normal
 source_lang = en-GB
 type = YAML
+

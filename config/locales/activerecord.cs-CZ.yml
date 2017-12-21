@@ -11,7 +11,7 @@ cs-CZ:
           attributes:
             full_name:
               blank: Prosím zadejte jméno
-              email: Prosím zadejte emailovou adresu
+              email: Prosím zadejte e-mailovou adresu
         message_thread:
           attributes:
             base:

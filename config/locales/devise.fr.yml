@@ -34,10 +34,10 @@ fr:
     invitations:
       edit:
         title: Confirm your account
-        info: You have been invited to join Cyclescape, please complete your account
-          registration including creating a password so that you can login. You can
-          change your name and email address to the one that you prefer to use for
-          this site.
+        info: You have been invited to join %{application_name}, please complete your
+          account registration including creating a password so that you can login.
+          You can change your name and email address to the one that you prefer to
+          use for this site.
         commit_button: Confirm account
         confirm: Are you sure?
         cancel_account: cancel your account

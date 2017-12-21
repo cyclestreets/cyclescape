@@ -1,6 +1,5 @@
 ---
 es-MX:
-  application_name: Cyclescape
   tags:
     show:
       heading: Things tagged '%{name}'
@@ -71,6 +70,9 @@ es-MX:
         manage_users: Gestionar usuarios
         manage_message_moderations: Manage message moderations
         manage_site_config: Manage site config
+        stats: Stats
+        resque: Resque
+        manage_planning_filters: Manage planning filters
     issue_categories:
       create:
         success: Categoría creada
@@ -151,6 +153,11 @@ es-MX:
       destroy:
         success: User deleted
     planning_filters:
+      index:
+        new_planning_filter: New planning filter
+        id: Id
+        authority: Authority
+        rule: Rule
       create:
         success: Filter created and running a in background job
       update:
@@ -367,7 +374,7 @@ es-MX:
         committee: Committee members
         committee_guidance: Committee members can manage the group membership list,
           change the group's profile and update group thread information.
-        email: E-mail address
+        email: Email address
         group_joining_date: Group joining date
         group_members_guidance: On this page you can view the existing members of
           your group, add new people and remove members from the group.
@@ -375,9 +382,9 @@ es-MX:
         ordinary_members: Ordinary members
         new_members_guidance_introduction: 'To add a member:'
         new_members_guidance_method1_html: If you know their email address, %{add_directly_link}.
-        new_members_guidance_method2_html: If they are already using Cyclescape, click
-          on their name from within a discussion thread, and you can add them from
-          their user profile page.
+        new_members_guidance_method2_html: If they are already using %{application_name},
+          click on their name from within a discussion thread, and you can add them
+          from their user profile page.
         ordinary_members_guidance: Ordinary members get access to your private group
           threads, and can create new group threads.
         pending_requests: Pending membership requests
@@ -418,7 +425,7 @@ es-MX:
         actioned_by: Actioned By
         by: by %{name}
         confirm: Confirm
-        email: E-mail address
+        email: Email address
         view_message: View...
         message: Message
         no_requests_yet: There have been no membership requests for this group yet.
@@ -437,7 +444,7 @@ es-MX:
       new:
         title: Request membership of %{group_name}
         your_membership_request_will: Please click the button below to apply to join
-          this group's %{application_name} area..
+          this group's %{application_name} area.
       reject:
         failure: There was a problem rejecting this membership request
         success: Membership rejected
@@ -445,7 +452,7 @@ es-MX:
         actioned_by: Actioned By
         by: by %{name}
         confirm: Confirm
-        email: E-mail address
+        email: Email address
         view_message: View...
         message: 'The user included this message with their request:'
         no_requests_yet: There have been no membership requests for this group yet.
@@ -531,8 +538,8 @@ es-MX:
       already_member: You are already a member of this group
       no_location: This group doesn't have a location yet.
     join:
-      join_body: You can request membership of this Cyclescape group, if you want
-        to be involved in the %{group} activities.
+      join_body: You can request membership of this %{application_name} group, if
+        you want to be involved in the %{group} activities.
       join_this_group: Join this group
       group_request_pending: Your request to join this group is pending.
     show:
@@ -568,7 +575,7 @@ es-MX:
       actioned_by: Actioned By
       by: by %{name}
       confirm: Confirm
-      email: E-mail address
+      email: Email address
       view_message: View...
       message: Message
       no_requests_yet: There have been no membership requests for this group yet.
@@ -594,7 +601,7 @@ es-MX:
       actioned_by: Actioned By
       by: by %{name}
       confirm: Confirm
-      email: E-mail address
+      email: Email address
       view_message: View...
       message: Message
       no_requests_yet: There have been no membership requests for this group yet.
@@ -641,10 +648,12 @@ es-MX:
         across the country. <strong>%{groups_link}</strong> and see what they're working
         to fix.\n"
       find_local_groups: Find groups local to you
-      twitter_title: "%{application_name} on Twitter"
       find_group: Find group by name or postcode
       your_postcode: Your postcode or area
       go: Go
+      twitter_title: "%{application_name} on Twitter"
+    twitter:
+      title: Tweets by %{application_name}
     guide:
       title: How %{application_name} Works
       box_1_title: Create cycling issues
@@ -769,8 +778,8 @@ es-MX:
       application_version_html: 'Version ref: %{version}'
       github_page_link_html: View the source at <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>
       whats_new: What's new?
-      supportlogos_introduction: '%{application_name} has been made possible thanks to generous
-        support from:'
+      supportlogos_introduction: "%{application_name} has been made possible thanks
+        to generous support from:"
       funding_from: Funding from %{name}
       funding_from_and_created_by: Funding from and created by %{name}
       planning_application_data: Planning application data from PlanIt
@@ -855,43 +864,44 @@ es-MX:
         body: " Comment with: Name %{name} Email: %{email} URL: %{url} Body: %{body} "
     notifications:
       added_to_group:
-        subject: You are now a member of the Cyclescape group for %{group_name}
+        subject: You are now a member of the %{application_name} group for %{group_name}
       gmr_confirmed:
-        subject: You are now a member of the Cyclescape group for %{group_name}
+        subject: You are now a member of the %{application_name} group for %{group_name}
       new_group_request:
-        subject: '[Cyclescape] [Admin] New Group "%{group_name}" has been requested
-          by "%{user_name}"'
+        subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been
+          requested by "%{user_name}"'
       new_gmr:
-        subject: "[Cyclescape] [Committee] %{user_name} wants to join %{group_name}"
+        subject: "[%{application_name}] [Committee] %{user_name} wants to join %{group_name}"
       new_group_thread:
-        subject: '[Cyclescape] "%{thread_title}" (%{group_name})'
+        subject: '[%{application_name}] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
-        subject: '[Cyclescape] New issue - "%{issue_title}" (%{group_name})'
+        subject: '[%{application_name}] New issue - "%{issue_title}" (%{group_name})'
       new_user_location_issue:
-        subject: '[Cyclescape] New issue - "%{issue_title}"'
+        subject: '[%{application_name}] New issue - "%{issue_title}"'
       new_user_location_issue_thread:
-        subject: '[Cyclescape] New thread started on issue "%{issue_title}"'
+        subject: '[%{application_name}] New thread started on issue "%{issue_title}"'
       group_request_confirmed:
-        subject: '[Cyclescape] [Admin] New Group "%{group_name}" has been created'
+        subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been
+          created'
       group_request_rejected:
-        subject: '[Cyclescape] [Admin] New Group "%{group_request_name}" has been
-          not been created'
+        subject: '[%{application_name}] [Admin] New Group "%{group_request_name}"
+          has been not been created'
       new_user_confirmed:
-        subject: "[Cyclescape] Welcome to Cyclescape"
+        subject: "[%{application_name}] Welcome to %{application_name}"
       upcoming_issue_deadline:
-        subject: '[Cyclescape] Upcoming deadline/date for "%{issue_title}"'
+        subject: '[%{application_name}] Upcoming deadline/date for "%{issue_title}"'
       upcoming_thread_deadline:
-        subject: '[Cyclescape] Upcoming deadline/date for "%{thread_title}"'
+        subject: '[%{application_name}] Upcoming deadline/date for "%{thread_title}"'
     thread_mailer:
       common:
         subject:
-          one: "[Cyclescape] %{title}"
-          other: 'Re: [Cyclescape] %{title}'
+          one: "[%{application_name}] %{title}"
+          other: 'Re: [%{application_name}] %{title}'
         committee_subject:
-          one: "[Cyclescape] [Committee] %{title}"
-          other: 'Re: [Cyclescape] [Committee] %{title}'
+          one: "[%{application_name}] [Committee] %{title}"
+          other: 'Re: [%{application_name}] [Committee] %{title}'
       digest:
-        subject: "[Cyclescape] Digest for %{date}"
+        subject: "[%{application_name}] Digest for %{date}"
   message_thread:
     subscriptions:
       create:
@@ -940,7 +950,8 @@ es-MX:
         threads, shown below (most recently-updated first).
       issues: problemas
       introduction: Below are latest updates on discussion threads (across all of
-        %{application_name}) that are public (including those owned by groups and/or administrative.)
+        %{application_name}) that are public (including those owned by groups and/or
+        administrative.)
       introduction_group_pointer: To show only discussions from a group you are a
         member of, use the group switcher on the top right.
     library_panel:
@@ -974,6 +985,7 @@ es-MX:
         messages to this thread.'
       private_html: Private Message between %{creator} and %{message_to}.
       public_message: 'Public: Everyone can view this thread and post messages.'
+      thread: Thread
     subscribe_panel:
       subscribed: You are following this thread.
     subscribers_panel:
@@ -1017,6 +1029,8 @@ es-MX:
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
+      new:
+        image: Image
     cyclestreets_photos:
       create:
         failure: Could not create photo message.  Was the file too large or not a
@@ -1025,6 +1039,8 @@ es-MX:
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
+      new:
+        image: Image
     street_views:
       create:
         failure: Street View could not be added
@@ -1093,6 +1109,7 @@ es-MX:
       text_message: Text
       street_view_message: Street view
       reply_by: Or reply by
+      email: email
       select_image: Select image
   pages:
     changelog:
@@ -1239,7 +1256,7 @@ es-MX:
       new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
       removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
     footer:
-      thread: Cyclescape discussion thread
+      thread: "%{application_name} discussion thread"
       unsubscribe: You can stop following this thread by visiting
   thread_priorities:
     very_high: Top-priority
