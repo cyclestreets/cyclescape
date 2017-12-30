@@ -38,8 +38,8 @@ module Locatable
       store.default.call(srid: srid)
     end
 
-    def order_by_size
-      order('ST_Area(location) DESC')
+    def order_by_size(order = "DESC")
+      order("ST_Area(location) #{order}")
     end
 
     def select_area

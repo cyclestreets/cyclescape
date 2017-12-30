@@ -13,6 +13,11 @@ de-DE:
       new:
         forgot_password: Passwort vergessen?
         send_reset_instuctions: Sende mir die Anleitung zum Zurücksetzen
+      edit:
+        change_password_caption: Change password
+        new_password: New password
+        confirm_new_password: Confirm new password
+        change_password: Change password
     registrations:
       edit:
         confirm: Bist Du sicher?
@@ -31,10 +36,10 @@ de-DE:
     invitations:
       edit:
         title: Bestätige dein Konto
-        info: Du wurdest zu Cyclescape eingeladen, bitte vervollständige die Registrierung
-          deines Kontos inklusive Wahl eines Passwortes um dich Anmelden zu können.
-          Du kannst deinen Namen und Mailadresse so ändern, wie Du sie auf dieser
-          Seite benutzen möchtest.
+        info: You have been invited to join %{application_name}, please complete your
+          account registration including creating a password so that you can login.
+          You can change your name and email address to the one that you prefer to
+          use for this site.
         commit_button: Konto bestätigen
         confirm: Bist Du sicher?
         cancel_account: Konto schließen

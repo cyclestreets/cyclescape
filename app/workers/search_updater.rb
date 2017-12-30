@@ -28,13 +28,17 @@ class SearchUpdater
 
   def self.process_thread(thread_id)
     thread = MessageThread.find(thread_id)
-    Sunspot.index thread
-    Sunspot.index thread.issue if thread.issue
-    Sunspot.commit
+    Retryable.retryable(on: [IO::EAGAINWaitReadable, Net::ReadTimeout]) do
+      Sunspot.index thread
+      Sunspot.index thread.issue if thread.issue
+      Sunspot.commit true
+    end
   end
 
   def self.process_issue(issue_id)
-    Sunspot.index Issue.find(issue_id)
-    Sunspot.commit
+    Retryable.retryable(on: [IO::EAGAINWaitReadable, Net::ReadTimeout]) do
+      Sunspot.index Issue.find(issue_id)
+      Sunspot.commit true
+    end
   end
 end

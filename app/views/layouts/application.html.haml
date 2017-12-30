@@ -16,8 +16,8 @@
       %meta{name: "description", content: page_description}
       %meta{property: "og:description", content: page_description}
     - if page_title
-      %meta{property: "og:title", content: page_title.gsub(" - #{t('application_name')}", "")}
-    %meta{property: "og:site_name", content: t('application_name')}
+      %meta{property: "og:title", content: page_title.gsub(" - #{@site_config.application_name}", "")}
+    %meta{property: "og:site_name", content: @site_config.application_name}
 
   %body{class: [Rails.env, controller_path.tr("/_", "-")].join(" ")}
     #fb-root
@@ -27,11 +27,12 @@
           = link_to root_path, id: "site-title" do
             %h1= current_group.name
         - elsif @site_config.logo
-          = link_to image_tag(@site_config.logo.url, alt: t(".title")), root_path, id: "site-title"
+          = link_to image_tag(@site_config.logo, alt: @site_config.application_name), root_path, id: "site-title"
         %ul#top-menu
-          %li.about= link_to t(".title"), root_url(subdomain: "www"), class: "cyclescape-logo"
-          %li=link_to t(".about"), "http://blog.cyclescape.org/about/"
-          %li=link_to t(".user_guide"), "http://blog.cyclescape.org/guide/"
+          -if @site_config.small_logo
+            %li.about= link_to image_tag(@site_config.small_logo, alt: @site_config.application_name), root_url(subdomain: "www"), class: "cyclescape-logo"
+          %li=link_to t(".about"), @site_config.blog_about_url
+          %li=link_to t(".user_guide"), @site_config.blog_user_guide_url
           %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
           - if current_user
             %li.name= link_to current_user.name, current_user_profile_path
@@ -48,7 +49,7 @@
     #main-nav
       %nav.wrapper
         %ul#navigation(role="navigation")
-          %li#menu-dashboard= link_to t(".dashboard"), dashboard_path, title: t(".dashboard_tooltip")
+          %li#menu-dashboard= link_to t(".dashboard", application_name: @site_config.application_name), dashboard_path, title: t(".dashboard_tooltip")
           %li#menu-issues= link_to t(".issues"), issues_path, title: t(".issues_tooltip")
           %li#menu-threads= link_to t(".threads"), threads_path, title: t(".threads_tooltip")
           %li#menu-library= link_to t(".library"), library_path, title: t(".library_tooltip")
@@ -73,9 +74,9 @@
         - if flash[type]
           .flash{class: type}
             = flash[type]
-    - tile_servers = [ { name: SiteConfig.first.tile_server1_name, url: SiteConfig.first.tile_server1_url },
-      { name: SiteConfig.first.tile_server2_name, url: SiteConfig.first.tile_server2_url },
-      { name: SiteConfig.first.tile_server3_name, url: SiteConfig.first.tile_server3_url } ]
+    - tile_servers = [ { name: @site_config.tile_server1_name, url: @site_config.tile_server1_url, type: @site_config.tile_server1_type, options: @site_config.tile_server1_options },
+      { name: @site_config.tile_server2_name, url: @site_config.tile_server2_url, type: @site_config.tile_server2_type, options: @site_config.tile_server2_options },
+      { name: @site_config.tile_server3_name, url: @site_config.tile_server3_url, type: @site_config.tile_server3_type, options: @site_config.tile_server3_options } ]
     #map-tiles{ "data-tileservers" => tile_servers.to_json }
     - if @full_page
       #page-full

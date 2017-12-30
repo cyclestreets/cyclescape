@@ -8,7 +8,7 @@
     - if @issue
       %p.pre-title= link_to @issue.title, issue_path(@issue)
     %p.thread-number
-      Thread
+      = t ".thread"
       %br/
       = @thread.display_id
     %h1= @thread.display_title

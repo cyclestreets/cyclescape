@@ -3,91 +3,162 @@ cs-CZ:
   cancel: Zrušit
   formtastic:
     labels:
-      tags_string: Tags
+      remember_me: Zapamatovat přihlášení
+      tags_string: Štítky
+      thread_leader_message:
+        description: Důvod (nepovinné)
       group:
         name: Název skupiny
         short_name: Subdoména
       group_request:
         name: Jméno
-        short_name: Navržená webová adresy Cyklisté sobě
+        short_name: Navržená webová adresa %{application_name}
         website: Webové stránky
-        email: Emailová adresa
+        email: E-mailová adresa
         default_thread_privacy: Výchozí viditelnost
       group_membership:
         role: Typ členství
+      potential_member:
+        emails: E-maily
+      group_membership_request:
+        message: Zpráva
       group_pref:
+        membership_secretary: Správce členství ve skupině
         notify_membership_requests: Zapnout upozornění na žádosti o členství
       issue:
         new:
-          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
-            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
-            stránce budete začít diskusní vlákno o tomto problému.
+          description: Zadejte podrobnosti o problému
           location: Zvolte oblast
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
+          all_day: Celý den
         create:
-          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
-            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
-            stránce budete začít diskusní vlákno o tomto problému.
+          description: Zadejte podrobnosti o problému
           location: Zvolte oblast
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
+          all_day: Celý den
         edit:
-          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
-            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
-            stránce budete začít diskusní vlákno o tomto problému.
+          description: Zadejte podrobnosti o problému
           location: Zvolte oblast
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
+          all_day: Celý den
         update:
-          description: Prosím, podrobnosti o problému a jaký vliv to má na cyklistiku.
-            Pamatujte si, že všechny problémy jsou veřejně zobrazitelné. Na další
-            stránce budete začít diskusní vlákno o tomto problému.
+          description: Zadejte podrobnosti o problému
           location: Zvolte oblast
           photo: Přidejte fotografii
           tags_string: Přidejte štítek k vašemu podnětu
           title: Zvolte nadpis vašeho podnětu
+          all_day: Celý den
       library/document:
         file: Dokument
+        title: Nadpis
       library/item: 
       library/note:
-        location: Area of relevance
+        location: Oblast významu
         body: Poznámka
-        url: Web address
+        url: Webová adresa
+        title: Nadpis
+        description: Popis
+      deadline_message:
+        all_day: Celý den
+        title: Nadpis
+      photo_message:
+        caption: Nadpis
+        photo: Fotografie
+      street_view_message:
+        caption: Nadpis
+      cyclestreets_photo_message:
+        caption: Nadpis
+        image: Obrázek
+      document_message:
+        title: Nadpis
+        file: Soubor
       link_message:
-        url: Web address
+        url: Webová adresa
+        title: Nadpis
+        description: Popis
       message:
         body: Zpráva
-      site_comment:
-        body: Zpráva
       thread_subscription:
-        send_email: Poslat nové zprávy emailem
+        send_email: Poslat nové zprávy e-mailem
       user_pref:
-        email_status_id: Zapnout upozornění pomocí emailu
+        email_status_id: Zapnout upozornění pomocí e-mailu
         involve_my_locations: Záležitosti v mém okolí
         involve_my_groups: Záležitosti mých místních skupin
         involve_my_groups_admin: Taktéž mě zahrňte do všeobecných diskuzí mých místních
           skupin
+      group_profile:
+        joining_instructions: Instrukce pro připojení ke skupině
+        picture: Obrázek
+        description: Popis
+        new_user_email: E-mail pro nového uživatele
+      user_profile:
+        website: Webová stránka
+        picture: Obrázek
+        visibility: Viditelnost
+        about: O stránkách
+        locale: Jazyk
+        remove_picture: Odstranit obrázek
+      thread:
+        title: Nadpis
+        privacy: Viditelnost
+        issue: Podnět
+      site_comment:
+        name: Jméno
+        email: E-mail
+        body: Zpráva
       user:
+        new:
+          display_name: Zobrazené jméno
+          full_name: Plné jméno
+          email: E-mail
+          disabled: Neaktivní
+          password: Heslo
+          password_confirmation: Potvrzení hesla
+          about: O stránkách
+          bicycle_wheels: Kola u jízdních kol
+        create:
+          display_name: Zobrazené jméno
+          full_name: Plné jméno
+          email: E-mail
+          disabled: Neaktivní
+          password: Heslo
+          password_confirmation: Potvrzení hesla
+          about: O stránkách
+          bicycle_wheels: Kola u jízdních kol
         edit:
+          display_name: Zobrazené jméno
+          full_name: Plné jméno
+          email: E-mail
+          disabled: Neaktivní
           password: Nové heslo
           password_confirmation: Potvrzení nového hesla
-        new:
+          current_password: Současné heslo
+        update:
+          display_name: Zobrazené jméno
+          full_name: Plné jméno
+          email: E-mail
+          disabled: Neaktivní
+          password: Heslo
+          password_confirmation: Potvrzení hesla
+          about: O stránkách
           bicycle_wheels: Kola u jízdních kol
     hints:
       tags_string_hints:
-        tags_string: comma separated list of tags e.g. cycle parking, obstruction
+        tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
       user:
         new:
           display_name: Volitelné - může být přezdívka nebo pseudonym, který bude
             zobrazen ostatním uživatelům místo plného jména.
           full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
             místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
-          bicycle_wheels: Chcete-li pomoci zastavit automatizované znamení-up zadejte
-            částku (v číslech) kol na šesti kolech
+          bicycle_wheels: Jako kontrolu, že nejste robot, zadejte prosím množství
+            (počet) kol na šesti jízdních kolech.
         edit:
           password: Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo.
           current_password: Prosím potvrďte vaše stávající heslo, abyste mohli udělat
@@ -96,17 +167,17 @@ cs-CZ:
             zobrazen ostatním uživatelům místo plného jména.
           full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
             místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
-          bicycle_wheels: Chcete-li pomoci zastavit automatizované znamení-up zadejte
-            částku (v číslech) kol na šesti kolech
+          bicycle_wheels: Jako kontrolu, že nejste robot, zadejte prosím množství
+            (počet) kol na šesti jízdních kolech.
       group:
         short_name: Musí být malé alfanumerické znaky; a-z, 0-9
       group_request:
         short_name: Malá písmena nebo číslice
         message: Krátký popis účelu skupiny (slouží jako ochrana proti spamu)
       group_membership:
-        email: Prosím zadejte jejich email. Pokud se shoduje s emailem existujícího
-          uživatele Cyklisté sobě, bude přímo přidán do skupiny. Jinak mu bude odeslána
-          pozvánka.
+        email: Prosím zadejte jejich e-mail. Pokud se shoduje s e-mailem existujícího
+          uživatele %{application_name}, bude přímo přidán do skupiny. Jinak mu bude
+          odeslána pozvánka na portál %{application_name}.
         full_name: Prosím zadejte jejich jméno, až přijmou pozvánku, tak si ho budou
           si ho moci změnit.
         role: Vyberte, jestli jsou normální členové, nebo správci skupiny.
@@ -114,14 +185,17 @@ cs-CZ:
         message: Volitelně můžete poslat správcům skupiny jakékoliv další informace,
           které uznáte za vhodné, například počet jejích členů.
       group_pref:
-        notify_membership_requests: Upozornění bude zasláno pokaždé, když se nějaký
-          uživatel připojí k této místní skupině
+        notify_membership_requests: 'Upozornění bude zasláno pokaždé, když se nějaký
+          uživatel %{application_name} připojí k této místní skupině '
         membership_secretary: Volitelně vyberte správce členství ve skupině, který
-          bude emailem dostávat upozornění na nové žádosti o členství. Pokud zanecháte
-          pole prázdné, tak budou upozornění přicházet na email místní skupiny.
+          bude e-mailem dostávat upozornění na nové žádosti o členství. Pokud zanecháte
+          pole prázdné, tak budou upozornění přicházet na e-mail místní skupiny.
       group_profile:
-        joining_instructions: Instrukce, které jsou ukázány lidem, kteří se chtějí
-          zapojit do této místní skupiny Cyklisté sobě. Můžete nechat toto pole prázdné.
+        joining_instructions: Instrukce, které jsou ukázány uživatelům, kteří se chtějí
+          zapojit do této místní skupiny %{application_name}. Například můžete uživatele
+          nasměrovat, aby za členství zaplatili prostřednictvím externí stránky, nebo
+          můžete být rád za každého nového člena, který se připojí k vaší místní skupině
+          %{application_name}. Můžete nechat toto pole prázdné.
         new_user_email: Tento text bude odeslán každému novému členovy skupiny, řetězec
           {{full_name}} bude nahrazen plným jménem uživatele.
         picture: Bude zobrazeno na stránce skupiny, ideálně 333x192 pixelů
@@ -133,9 +207,9 @@ cs-CZ:
           deadline: "(nepovinné)"
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné)"
+          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
           title: Prosím buďte struční a konkrétní.
-          tags_string: comma separated list of tags e.g. cycle parking, obstruction
+          tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         create:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -143,9 +217,9 @@ cs-CZ:
           deadline: "(nepovinné)"
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné)"
+          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
           title: Prosím buďte struční a konkrétní.
-          tags_string: comma separated list of tags e.g. cycle parking, obstruction
+          tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         edit:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -153,9 +227,9 @@ cs-CZ:
           deadline: "(nepovinné)"
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné)"
+          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
           title: Prosím buďte struční a konkrétní.
-          tags_string: comma separated list of tags e.g. cycle parking, obstruction
+          tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         update:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
@@ -163,27 +237,45 @@ cs-CZ:
           deadline: "(nepovinné)"
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné)"
+          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
           title: Prosím buďte struční a konkrétní.
-          tags_string: comma separated list of tags e.g. cycle parking, obstruction
+          tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
       message_thread:
         privacy: Upřesněte, kdo může vidět a upravovat toto diskuzní vlákno.
         issue: Toto upřesňuje ke kterým podnětům se diskuzní vlákna vztahují. Pokud
           k žádným, toto vlákno bude vytvořeno jako všeobecná diskuze.
       library/note:
-        tags_string: comma separated list of tags e.g. cycle parking, obstruction
+        tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
+      photo_message:
+        photo: Maximálně 6MB, obrázek se automaticky zmenší.
       library/document:
-        tags_string: comma separated list of tags e.g. cycle parking, obstruction
+        tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
+      site_config:
+        email_domain: Doména, ze které budou přicházet uživatelům e-maily a na kterou
+          budou psát své odpovědi.
+        nowhere_location: Poloha, která se má zobrazit uživatelům nebo skupinám bez
+          zadané pozice. Zadávejte v PostGisové reprezentaci.
+        tile_server1_options: 'Object JavaScript dict s nastavením vrstvy. Např.:
+          {"opacity": 0.5}'
+        tile_server2_options: 'Object JavaScript dict s nastavením vrstvy. Např.:
+          {"opacity": 0.5}'
+        tile_server3_options: 'Object JavaScript dict s nastavením vrstvy. Např.:
+          {"opacity": 0.5}'
     placeholders:
+      site_config:
+        application_name: Cyklisté sobě
+        email_domain: example.com
+        funder_name_footer1: Sponzorováno Svělou cyklistickou skupinou
+        funder_url_footer1: http://www.skvela-cyklisticka-skupina.cz
       issue:
         external_url: http://www.example.com
       group_membership_request:
-        message: Prosím přidejte mě do místní skupiny Cyklisté sobě.
+        message: Prosím přidejte mě do místní skupiny %{application_name}.
       library/note:
         url: http://www.example.com
       group_profile:
         new_user_email: Dobrý den {{full_name}}, právě jste byl přidán do nové skupiny
-          Cyklisté sobě na portálu http://www.cyklistesobe.cz
+          %{application_name} na portálu http://www.%{application_domain}
     actions:
       update: Uložit
       saving: Ukládám…
@@ -216,6 +308,10 @@ cs-CZ:
         create: Odeslat zprávu
       photo_message:
         create: Přidat fotografii
+      cyclestreets_photo_message:
+        create: Přidat fotografii z CycleStreets
+      street_view_message:
+        create: Přidat pohled ze Street View
       site_comment:
         create: Zaslat zpětnou vazbu
       user:

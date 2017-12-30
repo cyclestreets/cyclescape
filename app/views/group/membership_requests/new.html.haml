@@ -2,12 +2,12 @@
 
 %p= auto_link simple_format @group.profile.joining_instructions
 .explain
-  %p= t ".your_membership_request_will"
+  %p= t(".your_membership_request_will", application_name: @site_config.application_name)
 
 = semantic_form_for @request do |f|
   = f.semantic_errors
   = f.inputs do
-    = f.input :message
+    = f.input :message, placeholder: t("formtastic.placeholders.group_membership_request.message", application_name: @site_config.application_name)
   = f.actions do
     = f.action :submit, button_html: {class: "btn-green submit"}
     = cancel_link group_path(@group)

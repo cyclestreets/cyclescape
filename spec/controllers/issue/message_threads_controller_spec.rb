@@ -19,14 +19,27 @@ describe Issue::MessageThreadsController, type: :controller do
       warden.set_user user
     end
 
+    let(:basic_body) do
+      {
+        blog: "http://www.cyclescape.org/",
+        comment_author: user.full_name,
+        comment_author_email: user.email,
+        comment_content: message[:body],
+        comment_type: "comment",
+        is_test: "1"
+      }
+    end
+
     let!(:req) do
       stub_request(:post, %r{rest\.akismet\.com/1\.1/comment-check}).
-        with(body: { blog: "http://www.cyclescape.org/",
-                     comment_author: user.full_name,
-                     comment_author_email: user.email,
-                     comment_content: message[:body],
-                     comment_type: "comment",
-                     is_test: "1"}).to_return(status: 200, body: is_spam)
+        with(body: basic_body).to_return(status: 200, body: is_spam)
+      stub_request(:post, %r{rest\.akismet\.com/1\.1/comment-check}).
+        with(body: basic_body.merge(
+          "HTTP_HOST" => "www.example.com",
+          "HTTP_REFERER" => "http://www.example.com/users/sign_in",
+          referrer: "http://www.example.com/users/sign_in",
+          user_ip: "127.0.0.1"
+        )).to_return(status: 200, body: is_spam)
     end
     subject { post :create, issue_id: issue.id, thread: attributes_for(:message_thread), message: message }
 
@@ -35,8 +48,6 @@ describe Issue::MessageThreadsController, type: :controller do
 
       it 'should redirect home with flash' do
         expect(subject).to redirect_to('/home')
-
-        expect(req).to have_been_made
         expect(flash[:alert]).to eq(t('not_approved'))
       end
     end
@@ -46,7 +57,6 @@ describe Issue::MessageThreadsController, type: :controller do
 
       it 'should redirect home with flash' do
         expect(subject).to redirect_to('/home')
-        expect(req).to have_been_made
         expect(flash[:alert]).to eq(t('possible_spam'))
       end
 
@@ -66,7 +76,6 @@ describe Issue::MessageThreadsController, type: :controller do
 
       it 'should redirect to thread with no flash' do
         expect(subject).to redirect_to("/threads/#{last_thread.id}")
-        expect(req).to have_been_made
         expect(flash[:alert]).to be_blank
       end
 

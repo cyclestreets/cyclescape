@@ -8,9 +8,11 @@ module Route
       optional :tags, type: Array[String], desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :excluding_tags, type: Array[String], desc: 'An array of tags that the issues must not have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :group, type: String, desc: 'Return only issues from area of group given by its short name, e.g. "london"'
-      optional :order, type: String, desc: 'Order of returned issues. Current working parameters are: "vote_count", "created_at", "start_at", "size"'
-      optional :end_date, type: Date, desc: 'No issues after the end date are returned'
-      optional :start_date, type: Date, desc: 'No issues before the start date are returned'
+      optional :order, type: Symbol, values: %i[vote_count created_at start_at size id], desc: 'Order of returned issues.'
+      optional :order_direction, type: Symbol, values: %i[asc desc], default: :desc, desc: 'Ordering direction. Not working with "vote_count".'
+      optional :id, type: Integer, desc: 'Issue ID'
+      optional :end_date, types: [DateTime, Date], desc: 'No issues after the end date are returned'
+      optional :start_date, types: [DateTime, Date], desc: 'No issues before the start date are returned'
       optional(:geo_collection,
                type: Array[RGeo::GeoJSON::Feature],
                desc: 'Return only issues inside this GeoJSON feature collection, e.g. {"type":"FeatureCollection","features":[{"type":"Polygon","coordinates":[[[-1.5724,53.795],[-1.54289,53.8083],[-1.54426,53.79010],[-1.5724,53.7957]]]}]}',
@@ -30,6 +32,7 @@ module Route
         RGeo::GeoJSON::Feature.new(issue.location, nil,
                                    id: issue.id,
                                    created_at: issue.created_at.to_i,
+                                   created_at_iso: issue.created_at,
                                    created_by: creator_name,
                                    vote_count: issue.vote_count,
                                    thumbnail: issue.medium_icon_path,
@@ -37,10 +40,12 @@ module Route
                                    title: issue.title,
                                    description: issue.description,
                                    deadline: issue.deadline.to_i,
+                                   deadline_iso: issue.deadline,
                                    external_url: issue.external_url,
                                    tags: issue.tags.pluck(:name),
                                    cyclescape_url: "#{request.base_url}/issues/#{issue.to_param}",
                                    latest_activity_at: issue.latest_activity_at.to_i,
+                                   latest_activity_at_iso: issue.latest_activity_at,
                                    closed: issue.closed?)
       end
 
@@ -52,12 +57,12 @@ module Route
           scope = scope.intersects(group.profile.location)
         end
         case params[:order]
-        when 'vote_count'
+        when :vote_count
           scope = scope.plusminus_tally
-        when 'created_at', 'start_at'
-          scope = scope.order(params[:order] => :desc)
-        when 'size'
-          scope = scope.order_by_size
+        when :created_at, :start_at, :id
+          scope = scope.order(params[:order] => params[:order_direction])
+        when :size
+          scope = scope.order_by_size(params[:order_direction])
         end
         scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
         if params[:geo_collection]
@@ -67,6 +72,7 @@ module Route
           end.inject(&:union)
           scope = scope.intersects_not_covered(geo_collection)
         end
+        scope = scope.where(id: params[:id]) if params[:id]
         scope = scope.where_tag_names_in(params[:tags]) if params[:tags]
         scope = scope.where_tag_names_not_in(params[:excluding_tags]) if params[:excluding_tags]
         scope = scope.before_date(params[:end_date]) if params[:end_date]

@@ -7,6 +7,6 @@
       = render partial: "shared/edit_map", locals: {resource: @profile, location: @start_location}
     = f.input :picture, as: :file
     = f.input :retained_picture, as: :hidden
-    = f.input :joining_instructions
-    = f.input :new_user_email
+    = f.input :joining_instructions, hint: t("formtastic.hints.group_profile.joining_instructions", application_name: @site_config.application_name)
+    = f.input :new_user_email, placeholder: t("formtastic.placeholders.group_profile.new_user_email", application_name: @site_config.application_name, application_domain: @site_config.email_domain)
   = f.actions

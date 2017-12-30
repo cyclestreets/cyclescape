@@ -71,11 +71,14 @@ class window.LeafletMap
     return
 
   addLayers: (opts = {}) ->
-    opacity = opts.opacity || 0.8
     baseLayers = {}
     for tileServer, idx in $("#map-tiles").data("tileservers")
       continue if (tileServer.url == "" or tileServer.name == "")
-      tileLayer = L.tileLayer(tileServer.url)
+      options = jQuery.parseJSON(tileServer.options)
+      tileLayer = if tileServer.type == "wms"
+         tileLayer = L.tileLayer.wms(tileServer.url, options)
+      else
+         L.tileLayer(tileServer.url, options)
       baseLayers[tileServer.name] = tileLayer
       tileLayer.addTo(@map) if idx == 0
     additionalLayers = @remoteJSONLayer

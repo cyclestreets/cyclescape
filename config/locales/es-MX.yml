@@ -1,6 +1,5 @@
 ---
 es-MX:
-  application_name: Cyclescape
   tags:
     show:
       heading: Things tagged '%{name}'
@@ -8,8 +7,11 @@ es-MX:
       introduction_groupwise_html: 'limited to the %{area_of_group_link}:'
       area_of_group: area of %{group_name}
   anon: Anónimo
+  delete: Borrar
   sign_in: ingresar
-  confirm: "¿Estas seguro?"
+  are_you_sure: "¿Estas seguro?"
+  failure: Sorry, something went wrong
+  navigate_away_warning: Are you sure you want to navigate away
   possible_spam: We think this message might be spam. If not, please accept our apologies.  It
     is queued to be checked by a moderator.
   not_approved: New threads can only be automatically created by approved users.  It
@@ -18,7 +20,7 @@ es-MX:
     zero: Today!
     one: Tomorrow!
     other: "%{count} days away"
-  item_created_at: "%{time_ago} ago"
+  item_created_at: hace %{time_ago}
   email_status:
     no_email: No email
     email: Email every message
@@ -43,6 +45,9 @@ es-MX:
         members: Miembros
         name: Nombre del Grupo
         subdomain: Subdomain
+        enable: Enable
+        disable: Disable
+        disable_tooltip: Currently just hides
       create:
         success: Groupo creado
       new:
@@ -64,6 +69,10 @@ es-MX:
         manage_issue_categories: Gestionar categorias de problemas
         manage_users: Gestionar usuarios
         manage_message_moderations: Manage message moderations
+        manage_site_config: Manage site config
+        stats: Stats
+        resque: Resque
+        manage_planning_filters: Manage planning filters
     issue_categories:
       create:
         success: Categoría creada
@@ -78,20 +87,15 @@ es-MX:
         edit:
           title: Editar ubicación de %{user_name}
         index:
-          all_user_locations: Todas las ubicaciones de %{user_name}
-          category: Categoría
           combined_locations: Ubicaciones Combinadas
           combined_locations_guidance: Esta es la ubicación combinda de este usuario.
-          confirm: "¿Estas seguro?"
           delete: Borrar
           edit: Editar
           map: Mapa
           new: Nueva ubicación
           no_locations_yet: Este usuario todavía no tiene ubicaciones.
           no_locations_guidance: Como administrador, puedes añadir su primera ubicación.
-          no_overlapping_groups: No hay grupos sobrelapados
           title: Ubicaciones del usuario %{user_name}
-          overlapping_groups: Groupos sobrelapados
         new:
           title: Nueva ubicación para %{user_name}
         update:
@@ -118,32 +122,42 @@ es-MX:
         about: About
         approved: Approved
         approve: Approve
+        search_button: Go
       user:
-        created: Created
+        created: Creado
         last_seen: Last login
-        last_seen_at: "%{time_ago} ago"
-        introduction: This page lists all users on the system (irrespective of any
-          group membership they may have).
-        disabled: Disabled
-        disabled_at: "%{time_ago} ago"
-        display_name: Display Name
-        edit: User details
-        email: Email
-        full_name: Full Name
+        last_seen_at: hace %{time_ago}
+        introduction: Esta pagina muestra todos los usuarios en el sistema (independientemente
+          de las membresias de grupos que tengan).
+        disabled: Desactivado
+        disabled_at: hace %{time_ago}
+        display_name: Nombre Público
+        edit: Detalles del usuario
+        email: Correo electrónico
+        full_name: Nombre completo
         id: id
-        role: Role
-        title: Users
-        preferences: Preferences
-        locations: Locations
+        role: Cargo
+        title: Usuarios
+        preferences: Preferencias
+        locations: Ubicaciones
         website: Website
         about: About
         approved: Approved
         approve: Approve
+        search_button: Go
       update:
         success: User updated
       edit:
         edit_user: Edit user
+        delete_user: Delete user
+      destroy:
+        success: User deleted
     planning_filters:
+      index:
+        new_planning_filter: New planning filter
+        id: Id
+        authority: Authority
+        rule: Rule
       create:
         success: Filter created and running a in background job
       update:
@@ -156,6 +170,9 @@ es-MX:
           applications in a background job after saving. Each planning application
           in the authority of the filter where the uid matches the rule will be filtered
           out of users planning index on their dashboard but will still be searchable.
+    site_configs:
+      form:
+        site_config_intro: The config will alter the site for all users.
   application:
     account_disabled: Tu cuenta ha sido desactivada por un administrador
     permission_denied: No estas autorizado para esta pagina.
@@ -182,7 +199,7 @@ es-MX:
       hide_tooltip: Si suficientes personas votan para ocultar esta aplicación sera
         ocultada para todos.
       part_hidden: Parte Oculta
-      converted_to_issue: 'Converted to Issue:'
+      converted_to_issue: 'Convertido en un problema:'
     show:
       address_label: 'Dirección:'
       council_label: 'Canciller:'
@@ -212,7 +229,7 @@ es-MX:
       hide_tooltip: Si suficientes personas votan para ocultar esta aplicación sera
         ocultada para todos.
       part_hidden: Parte Oculta
-      converted_to_issue: 'Converted to Issue:'
+      converted_to_issue: 'Convertido en un problema:'
     search:
       page_title: Resultados de busqueda para '%{q}'
       convert_to_issue_html: Convertir a un Problema &hellip;
@@ -226,7 +243,7 @@ es-MX:
       hide_tooltip: Si suficientes personas votan para ocultar esta aplicación sera
         ocultada para todos.
       part_hidden: Parte Oculta
-      converted_to_issue: 'Converted to Issue:'
+      converted_to_issue: 'Convertido en un problema:'
   dashboards:
     show:
       page_title: Resultados de busqueda para '%{q}'
@@ -243,7 +260,7 @@ es-MX:
       part_hidden: Parte Oculta
       add_a_new_issue: añadir nuevo problema
       add_another_location: añadir otra ubicación
-      add_some_locations: añadir algunas ubicaciones
+      add_some_locations: add a location
       areas_you_are_watching: areas que estas vigilando
       converted_to_issue: 'Convertido en un problema:'
       deadlines: Fin de plazo y fechas
@@ -274,30 +291,22 @@ es-MX:
         importante, o quizas puedes %{add_issue_link} ?
       no_issues_nearby_html: No hay problemas en tu area. Puedes %{add_issue_link}
         o %{add_location_link}.
-      location:
-        one: ubicación
-        other: ubicaciones
-      no_group_threads: Ninguno de tus grupos tiene hilos; Puedes iniciar una nueva
-        conversación.
-      no_locations_guidance_html: Tadavía no has establecido ninguna ubicación. Si
-        %{add_some_locations_link}, te mostraremos las %{things} ahí.
+      location: location
+      no_locations_guidance_html: You haven't set a location yet! If you %{add_some_locations_link},
+        we will show you the nearby %{things} here.
       no_planning_applications_nearby_html: No hay aplicaciones de planeacion en tu
         area. Puedes %{add_location_link}.
-      no_user_groups: Todavía no eres miembro de ningun grupo. Cuando te unas a alguno,
-        los hilos recientes apareceran aquí.
-      planning_applications_in_your_area: aplicaciones de planeación en tu %{location}
+      planning_applications_in_your_area: Planning applications in your location
       planning_applications_introduction_html: 'Estas son las aplicaciones de planeación
         más reciente (cortesía del sitio web PlanIt) en tu %{location_link}:'
       planning_applications_lower: aplicaciones de planeación
       recent_threads: hilos recientes
       subscribed_threads: Hilos Suscritos
       thread_latest_activity: hace %{time_ago}
-      group_threads: Hilos de Grupo
-      group_threads_desc_html: Hilos recientes con actividad de tus grupos.
       my_priorities: Mis prioridades
       my_threads: Mis suscripciones de hilos
       issues_nearby: Ultimos problemas cercanos
-      map: Map
+      map: Mapa
       posted:
         message_html: "%{creator_link} publico un mensaje"
         deadline_message_html: "%{creator_link} publico un fin de plazo/fecha"
@@ -306,6 +315,9 @@ es-MX:
         link_message_html: "%{creator_link} publico un enlace"
         street_view_message_html: "%{creator_link} publico un StreetView"
         library_item_message_html: "%{creator_link} añadio un articulo de biblioteca"
+        thread_leader_message_html: "%{creator_link} became a leader"
+        cyclestreets_photo_message_html: "%{creator_link} posted a CycleStreets photo"
+        thread_leader_withdrawing: Withdrawal of leader
     search:
       title: Resultados de Busqueda
   devise:
@@ -335,6 +347,7 @@ es-MX:
     group_management: Group management
     membership_list_tab: Membership list
     membership_requests_tab: Membership requests
+    update_potential_members: Update the potential members email list
     home_page_tab: Home page
     issues:
       destroy:
@@ -344,23 +357,24 @@ es-MX:
         title: Issues in the area of %{group_name}
       update:
         success: Issue updated
-      vote_clear:
-        failure: Your vote couldn't be cleared
-        success: Your vote has been cleared
-      vote_down:
-        already: You've already voted down this issue
-        success: You have voted down this issue
-      vote_up:
-        already: You've already voted up this issue
-        success: You have voted up this issue
+    potential_members:
+      new:
+        title: Update the potential membership list for %{group_name}
+        potential_members_intro: Add the email addresses of all your membership. If
+          any user signs up with an email that matches one in this list they will
+          automatically be made a member of your group. We will not store the emails
+          themselves.  If you update this list it will not remove any existing members,
+          but it will replace any emails you entered last time.
+      create:
+        success: You have replaced your list of potential members
     members:
       index:
-        actions: Actions
+        actions: Acciones
         add_directly: you can add them directly
         committee: Committee members
         committee_guidance: Committee members can manage the group membership list,
           change the group's profile and update group thread information.
-        email: E-mail address
+        email: Email address
         group_joining_date: Group joining date
         group_members_guidance: On this page you can view the existing members of
           your group, add new people and remove members from the group.
@@ -368,9 +382,9 @@ es-MX:
         ordinary_members: Ordinary members
         new_members_guidance_introduction: 'To add a member:'
         new_members_guidance_method1_html: If you know their email address, %{add_directly_link}.
-        new_members_guidance_method2_html: If they are already using Cyclescape, click
-          on their name from within a discussion thread, and you can add them from
-          their user profile page.
+        new_members_guidance_method2_html: If they are already using %{application_name},
+          click on their name from within a discussion thread, and you can add them
+          from their user profile page.
         ordinary_members_guidance: Ordinary members get access to your private group
           threads, and can create new group threads.
         pending_requests: Pending membership requests
@@ -382,10 +396,9 @@ es-MX:
         you_have_pending_members_html: You have %{review_pending_requests_link}! Please
           review them and take appropriate actions.
       member:
-        confirm: Are you sure?
         delete: Remove from group
         edit: Edit membership
-        joining_date: "%{time_ago} ago"
+        joining_date: hace %{time_ago}
         invite_pending: Invite pending
     memberships:
       new:
@@ -410,10 +423,9 @@ es-MX:
         already_member: You are already a member of this group
       index:
         actioned_by: Actioned By
-        are_you_sure: Are you sure?
         by: by %{name}
         confirm: Confirm
-        email: E-mail address
+        email: Email address
         view_message: View...
         message: Message
         no_requests_yet: There have been no membership requests for this group yet.
@@ -432,16 +444,15 @@ es-MX:
       new:
         title: Request membership of %{group_name}
         your_membership_request_will: Please click the button below to apply to join
-          this group's Cyclescape area..
+          this group's %{application_name} area.
       reject:
         failure: There was a problem rejecting this membership request
         success: Membership rejected
       review:
         actioned_by: Actioned By
-        are_you_sure: Are you sure?
         by: by %{name}
         confirm: Confirm
-        email: E-mail address
+        email: Email address
         view_message: View...
         message: 'The user included this message with their request:'
         no_requests_yet: There have been no membership requests for this group yet.
@@ -466,7 +477,7 @@ es-MX:
         title: Discussion threads for %{group}
         threads_explanation_html: Each of the %{issues_link} may have one or more
           discussion threads.
-        issues: issues
+        issues: problemas
         new_group_thread: New Group Administrative thread
         issue_threads: Issue discussions
         issue_threads_description: These are public and private issue-based discussions
@@ -493,15 +504,19 @@ es-MX:
         success: Preferences Updated
     profiles:
       edit:
-        title: Edit Profile
+        title: Editar Perfil
       show:
         description: Description
-        location: Location
+        location: Ubicación
         no_location: This group doesn't have any location details yet.
         no_picture: Add a picture to make your group welcoming.
         picture: Picture
       update:
         success: Profile Updated
+    hashtags:
+      show:
+        intro: Messages tagged '%{name}'
+        none_found: There is no match for '%{name}'
   group_profiles:
     default_new_user_email: |-
       Hi {{full_name}},
@@ -513,18 +528,18 @@ es-MX:
         search from the <a href='%{url}'>national site</a>.
     index:
       list_tab: List
-      map_tab: Map
+      map_tab: Mapa
       new_group: Create new group
       send_some_feedback: send some feedback
       title: Groups directory
       group_request: Request New Group
-      no_results_found: No results found
+      no_results_found: No se encontro ningun resultado
     compact:
       already_member: You are already a member of this group
       no_location: This group doesn't have a location yet.
     join:
-      join_body: You can request membership of this Cyclescape group, if you want
-        to be involved in the %{group} activities.
+      join_body: You can request membership of this %{application_name} group, if
+        you want to be involved in the %{group} activities.
       join_this_group: Join this group
       group_request_pending: Your request to join this group is pending.
     show:
@@ -534,7 +549,7 @@ es-MX:
       group_management: Group management
       group_organisers: Group organisers
       leave_group: Leave the group
-      join_title: Join our Cyclescape group
+      join_title: Join our %{application_name} group
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public threads
@@ -546,6 +561,8 @@ es-MX:
         one: View pending membership request
         other: View pending membership requests (%{count})
       view_message_moderations: View moderated group messages
+    group:
+      members: members
   group_requests:
     create:
       requested: You have requested a new campaigning group, you will be notifed when
@@ -556,10 +573,9 @@ es-MX:
         it.
     index:
       actioned_by: Actioned By
-      are_you_sure: Are you sure?
       by: by %{name}
       confirm: Confirm
-      email: E-mail address
+      email: Email address
       view_message: View...
       message: Message
       no_requests_yet: There have been no membership requests for this group yet.
@@ -576,17 +592,16 @@ es-MX:
         unconfirmed: Unconfirmed
         rejected: Rejected
       name: Requested Name
-      actions: Actions
+      actions: Acciones
       new_group: Create a New Group
-      group_email: Email
+      group_email: Correo electrónico
       destroy: Remove request
       no_message: There was no message included with this group request.
     review:
       actioned_by: Actioned By
-      are_you_sure: Are you sure?
       by: by %{name}
       confirm: Confirm
-      email: E-mail address
+      email: Email address
       view_message: View...
       message: Message
       no_requests_yet: There have been no membership requests for this group yet.
@@ -603,15 +618,15 @@ es-MX:
         unconfirmed: Unconfirmed
         rejected: Rejected
       name: Requested Name
-      actions: Actions
+      actions: Acciones
       new_group: Create a New Group
-      group_email: Email
+      group_email: Correo electrónico
       destroy: Remove request
       no_message: There was no message included with this group request.
       short_name: Short name
       website: Website
     confirm:
-      success: Group created
+      success: Groupo creado
       failure: Failed to create Group
     destroy:
       success: Group Request removed
@@ -621,20 +636,26 @@ es-MX:
       failure: Failed to reject group request
   home:
     show:
-      introduction_html: "%{application_name} is an online campaigning toolkit for cycle campaign
-        groups around the UK"
+      introduction_html: "%{application_name} is an online campaigning toolkit for
+        cycle campaign groups around the UK"
       center_box_title: Add your cycling issues here
       center_box_html: Non-existent cycle paths? Obstructions for cyclists? Lack of
         cycle parking? Or an example of something done right?
       report_an_issue: Create an issue
       latest_discussions: Latest Discussions
       groups_title: "%{application_name} Groups"
-      groups_intro_html: |
-        %{application_name} is used by <strong>cycle campaign groups</strong> across the country. <strong>%{groups_link}</strong> and see what they're working to fix.
+      groups_intro_html: "%{application_name} is used by <strong>cycle campaign groups</strong>
+        across the country. <strong>%{groups_link}</strong> and see what they're working
+        to fix.\n"
       find_local_groups: Find groups local to you
+      find_group: Find group by name or postcode
+      your_postcode: Your postcode or area
+      go: Go
       twitter_title: "%{application_name} on Twitter"
+    twitter:
+      title: Tweets by %{application_name}
     guide:
-      title: How Cyclescape Works
+      title: How %{application_name} Works
       box_1_title: Create cycling issues
       box_1_body: Quickly raise issues on this site.
       box_2_title: Get advice from others
@@ -677,7 +698,7 @@ es-MX:
       list_introduction_groupwise_html: 'Listed issues, most recent first, limited
         to the %{area_of_group_link}:'
       area_of_group: area of %{group_name}
-      map_tab: Map
+      map_tab: Mapa
       map_introduction: 'This map shows all issues, whether points, routes, or areas:'
       popular_tab: Popular
       popular_introduction: 'The most popular issues, based on the number of votes:'
@@ -705,8 +726,6 @@ es-MX:
       administrative_matters: add a purely administrative matter
     show:
       added_by_html: Added by %{name} %{time}
-      cancel_vote: Cancel
-      confirm_delete: Are you sure?
       delete_issue: Delete this issue
       edit_issue: Edit this issue
       new_thread:
@@ -717,39 +736,24 @@ es-MX:
       group_private: Private to %{group}
       group_public: Public, by %{group}
       public: Public
-      sign_in: sign in
+      sign_in: ingresar
       sign_in_to_discuss_html: You can %{sign_in_link} to start the discussion.
-      sign_in_to_vote_html: Please %{sign_in_link} to vote.
       threads: Threads
-      vote_clear: Clear Vote
-      vote_down: Vote Down
-      vote_up: Vote Up
-      votes:
-        one: vote
-        other: votes
-      location: Location
+      location: Ubicación
       deadline: Deadline
       issues-nearby: Issues nearby
       show_collisions: Show Collisions
       show_photos: Show Photos
     update:
       success: Issue updated
-    vote_clear:
-      failure: Your vote couldn't be cleared
-      success: Your vote has been cleared
-    vote_down:
-      already: You've already voted down this issue
-      success: You have voted down this issue
-    vote_up:
-      already: You've already voted up this issue
-      success: You have voted up this issue
     form:
       currently: Currently is
+      max_length_error_html: is over the maximum length of&nbsp;
   layouts:
     application:
       admin: Admin
       admin_tooltip: Admin area, for system administrators
-      dashboard: My Cyclescape
+      dashboard: My %{application_name}
       dashboard_tooltip: Your personal dashboard, showing updates on discussion threads
         you are subscribed to
       about: About
@@ -765,17 +769,17 @@ es-MX:
       library: Library
       library_tooltip: Reusable resources for campaigning
       loading: Please wait…
+      membership: Membership
       threads: Discussion threads
       threads_tooltip: Discussions on each issue
       tags: Tags
       tags_tooltip: Cloud of the top 100 most used tags
-      title: Cyclescape
     footer:
       application_version_html: 'Version ref: %{version}'
       github_page_link_html: View the source at <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>
       whats_new: What's new?
-      supportlogos_introduction: 'Cyclescape has been made possible thanks to generous
-        support from:'
+      supportlogos_introduction: "%{application_name} has been made possible thanks
+        to generous support from:"
       funding_from: Funding from %{name}
       funding_from_and_created_by: Funding from and created by %{name}
       planning_application_data: Planning application data from PlanIt
@@ -854,47 +858,58 @@ es-MX:
       update:
         success: Library Note Updated
   mailers:
+    admin_mailer:
+      new_site_comment:
+        subject: New site comment
+        body: " Comment with: Name %{name} Email: %{email} URL: %{url} Body: %{body} "
     notifications:
       added_to_group:
-        subject: You are now a member of the Cyclescape group for %{group_name}
+        subject: You are now a member of the %{application_name} group for %{group_name}
       gmr_confirmed:
-        subject: You are now a member of the Cyclescape group for %{group_name}
+        subject: You are now a member of the %{application_name} group for %{group_name}
       new_group_request:
-        subject: '[Cyclescape] New Group "%{group_name}" has been requested by "%{user_name}"'
+        subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been
+          requested by "%{user_name}"'
       new_gmr:
-        subject: "[Cyclescape] %{user_name} wants to join %{group_name}"
+        subject: "[%{application_name}] [Committee] %{user_name} wants to join %{group_name}"
       new_group_thread:
-        subject: '[Cyclescape] "%{thread_title}" (%{group_name})'
+        subject: '[%{application_name}] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
-        subject: '[Cyclescape] New issue - "%{issue_title}" (%{group_name})'
+        subject: '[%{application_name}] New issue - "%{issue_title}" (%{group_name})'
       new_user_location_issue:
-        subject: '[Cyclescape] New issue - "%{issue_title}"'
+        subject: '[%{application_name}] New issue - "%{issue_title}"'
       new_user_location_issue_thread:
-        subject: '[Cyclescape] New thread started on issue "%{issue_title}"'
+        subject: '[%{application_name}] New thread started on issue "%{issue_title}"'
       group_request_confirmed:
-        subject: '[Cyclescape] New Group "%{group_name}" has been created'
-      group_request_rejected:
-        subject: '[Cyclescape] New Group "%{group_request_name}" has been not been
+        subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been
           created'
+      group_request_rejected:
+        subject: '[%{application_name}] [Admin] New Group "%{group_request_name}"
+          has been not been created'
       new_user_confirmed:
-        subject: "[Cyclescape] Welcome to Cyclescape"
+        subject: "[%{application_name}] Welcome to %{application_name}"
       upcoming_issue_deadline:
-        subject: '[Cyclescape] Upcoming deadline/date for "%{issue_title}"'
+        subject: '[%{application_name}] Upcoming deadline/date for "%{issue_title}"'
       upcoming_thread_deadline:
-        subject: '[Cyclescape] Upcoming deadline/date for "%{thread_title}"'
+        subject: '[%{application_name}] Upcoming deadline/date for "%{thread_title}"'
     thread_mailer:
       common:
         subject:
-          one: "[Cyclescape] %{title}"
-          other: 'Re: [Cyclescape] %{title}'
+          one: "[%{application_name}] %{title}"
+          other: 'Re: [%{application_name}] %{title}'
+        committee_subject:
+          one: "[%{application_name}] [Committee] %{title}"
+          other: 'Re: [%{application_name}] [Committee] %{title}'
       digest:
-        subject: "[Cyclescape] Digest for %{date}"
+        subject: "[%{application_name}] Digest for %{date}"
   message_thread:
     subscriptions:
       create:
         success: You are now subscribed to this thread
       destroy:
         success: You have unsubscribed from this thread
+      edit:
+        unsubscribe: are sure you want to stop following
     tags:
       panel:
         edit_tags: edit
@@ -906,15 +921,13 @@ es-MX:
       update:
         success: Priority updated
         failure: Couldn't update your priority
+    leaders:
+      create:
+        success: You are now a leader of this thread
+      destroy:
+        success: You are no longer a leader
   message_threads:
     compact:
-      group_committee: Group Committee
-      group_public: Group Public
-      group_private: Group Private
-      public: Public
-      posted_at: posted %{time_ago} ago
-    list:
-      discussion_on_issue: A discussion on issue
       group_committee: Group Committee
       group_public: Group Public
       group_private: Group Private
@@ -935,9 +948,10 @@ es-MX:
       title: Discussion threads (public)
       threads_explanation_html: Each of the %{issues_link} may have one or more discussion
         threads, shown below (most recently-updated first).
-      issues: issues
+      issues: problemas
       introduction: Below are latest updates on discussion threads (across all of
-        Cyclescape) that are public (including those owned by groups and/or administrative.)
+        %{application_name}) that are public (including those owned by groups and/or
+        administrative.)
       introduction_group_pointer: To show only discussions from a group you are a
         member of, use the group switcher on the top right.
     library_panel:
@@ -959,7 +973,6 @@ es-MX:
       search_submit: Search
       title: Thread Search Results
     show:
-      are_you_sure: Are you sure?
       back: Back
       closed_html: Thread has been closed by %{by} %{at} ago
       open: Re-open this thread
@@ -972,11 +985,14 @@ es-MX:
         messages to this thread.'
       private_html: Private Message between %{creator} and %{message_to}.
       public_message: 'Public: Everyone can view this thread and post messages.'
+      thread: Thread
     subscribe_panel:
       subscribed: You are following this thread.
     subscribers_panel:
       owner: Owner
       subscribers: Following this thread
+    connected_to_thread:
+      leading: " [leading]"
     update:
       success: Thread updated
     widget:
@@ -1007,15 +1023,46 @@ es-MX:
         success: Link posted
     photos:
       create:
-        failure: Could not create photo message
+        failure: Could not create photo message.  Was the file too large or not a
+          jpg, jpeg, png or gif?
         success: Photo uploaded
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
+      new:
+        image: Image
+    cyclestreets_photos:
+      create:
+        failure: Could not create photo message.  Was the file too large or not a
+          jpg, jpeg, png or gif?
+        success: Photo uploaded
+      show:
+        photo_alt: A photo entitled %{caption}.
+        view_original_image: View the original image
+      new:
+        image: Image
     street_views:
       create:
         failure: Street View could not be added
         success: Street View added
+    thread_leaders:
+      create:
+        success: Your leader status has been updated
+      new:
+        introduction: The leader of this discussion thread will ensure that the matter
+          continues to move forward.
+        introduction_action: I will take responsibility for leading this discussion.
+        default_leader_message_html: You may wish to describe your motivation for
+          leading this discussion
+        default_unleading_message_html: You may wish to describe your motivation for
+          being unable to lead this discussion anymore
+        start_leading: Start leading
+        stop_leading: Stop leading
+      show:
+        new_leader_html: "%{leader_link} will take on responsibility for ensuring
+          that discussions continually move forward and that actions are carried out
+          and followed-up."
+        removed_leader_html: "%{leader_link} has removed themselves as a leader."
   message_library:
     documents:
       new:
@@ -1039,7 +1086,7 @@ es-MX:
       from_library: From Library
       recently_added: Recently added
       select_button: Select…
-      search_results: Search Results
+      search_results: Resultados de Busqueda
       go: Go
       back: Back
       close: Close this thread
@@ -1056,10 +1103,14 @@ es-MX:
       link_message: Link
       new_message: New message
       photo_message: Photo
+      cyclestreets_photo_message: CycleStreets photo
+      thread_leader_message: Thread leader
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
       text_message: Text
-      street_view_message: Street View
+      street_view_message: Street view
       reply_by: Or reply by
+      email: email
+      select_image: Select image
   pages:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>."
@@ -1071,14 +1122,18 @@ es-MX:
       new:
         already: There's already an issue for that planning application
         application_reference: Application reference
-        title: New issue from Planning Application
+        title: New issue from Planning application
         title_prefix: Planning application
+  photo:
+    too_large: The image you uploaded is too large - it must be less than 3MB
+    wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
   shared:
     search:
       no_results_found: No results found for '%{query}'
       thread_results: Threads (%{count})
       issue_results: Issues (%{count})
       library_results: Library (%{count})
+      planning_results: Planning applications (%{count})
       threads_found:
         zero: No threads found for '%{query}'.
         one: 'One thread found for ''%{query}'':'
@@ -1091,6 +1146,10 @@ es-MX:
         zero: No library items found for '%{query}'.
         one: 'One library item found for ''%{query}'':'
         other: "%{count} library items found for '%{query}':"
+      planning_found:
+        zero: No planning applications found for '%{query}'.
+        one: 'One planning application found for ''%{query}'':'
+        other: "%{count} planning applications found for '%{query}':"
     edit_map:
       area: area
       clear: clear
@@ -1122,8 +1181,10 @@ es-MX:
       my_locations: My Locations
       update_account: Update My Account Details
     permission_denied:
+      login: Login?
+      committee_only_html: This discussion is for committee only members of %{group_link}
       apply_to_group_html: This discussion is owned by %{group_name}. Would you like
-        to <a href='%{join_link}'><strong>apply to join %{group_name}'s Cyclescape
+        to <a href='%{join_link}'><strong>apply to join %{group_name}'s %{application_name}
         group</strong></a>?
     tags:
       panel:
@@ -1137,21 +1198,29 @@ es-MX:
       explanation: These messages are held for moderation.  This can be because they
         look like potential spam or that the user has not been approved.  If you approve
         then the message will be sent out and the creator approved.
+    message_threads_list:
+      discussion_on_issue: A discussion on issue
+      group_committee: Group Committee
+      group_public: Group Public
+      group_private: Group Private
+      public: Public
+      posted_at: posted %{time_ago} ago
+    votable:
+      sign_in_to_vote_html: Please %{sign_in_link} to vote.
   site:
     comments:
       destroy:
         failure: Couldn't remove comment
         success: Comment deleted
       index:
-        confirm_delete: Are you sure?
-        delete_comment: Delete
+        delete_comment: Borrar
         how: How
         id: ID
         no_comments: No Feedback Yet
         title: All Feedback
         what: What
         when: When
-        when_ago: "%{time_ago} ago"
+        when_ago: hace %{time_ago}
         where: Where
         who: Who
       new:
@@ -1176,13 +1245,19 @@ es-MX:
     new_photo_message:
       type: a photo
       view_the_photo: 'You can view the photo at:'
+    new_cyclestreets_photo_message:
+      type: a photo
+      view_the_photo: 'You can view the Cyclestreets photo at:'
     new_street_view_message:
       type: a street view
       view_the_street_view: 'You can see the Street View at:'
+    new_thread_leader_message:
+      type: a leader
+      new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
+      removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
     footer:
-      thread: Cyclescape discussion thread
-      unsubscribe: You can stop following this thread by visiting the link above and
-        clicking 'unfollow this thread'.
+      thread: "%{application_name} discussion thread"
+      unsubscribe: You can stop following this thread by visiting
   thread_priorities:
     very_high: Top-priority
     high: Important
@@ -1203,16 +1278,16 @@ es-MX:
   user:
     locations:
       create:
-        success: Location Created
+        success: Ubicación creada
       destroy:
         failure: That location can't be deleted
         success: Location deleted
-      edit:
+      new:
         title: Edit Location
+        introduction: By setting a location, this helps us figure out which issues
+          are relevant to you.
       index:
         add_first_location: add your first location
-        all_my_locations: All my locations
-        category: Category
         combined_locations: Combined locations
         combined_locations_guidance: This map shows all of your locations combined
           together. We use this to help figure out which issues are relevant to you,
@@ -1226,11 +1301,8 @@ es-MX:
         combined_locations_guidance_subscribe_html: You currently receive notifications
           when issues are created in these areas, and are following all discussion
           threads on those issues. To change these settings, you can %{edit_prefs_link}.
-        confirm: Are you sure?
-        delete: Delete
-        edit: Edit
+        edit: Editar
         edit_your_prefs: edit your preferences
-        map: Map
         my_locations: My Locations
         new: Add a new Location
         no_locations_yet: You haven't set any locations yet!
@@ -1239,22 +1311,41 @@ es-MX:
           which issues are relevant to you, and which groups you might be interested
           in.
         no_locations_guidance2_html: To get started, you can %{first_location_link}.
-        no_overlapping_groups: No Overlapping Groups
-        overlapping_groups: Overlapping Groups
-      new:
-        new_location: Add a new location
-        introduction: By setting a location, this helps us figure out which issues
-          are relevant to you.
-        drawing_help: You can draw an area, a route or a location - select this from
-          the panel on the right. Then draw on the map, and click the save button
-          below.
       subscribe_to_threads:
         subscribed_to_threads:
           zero: We couldn't find any additional threads for you to follow.
           one: You're now following one additional thread.
           other: You're now following %{count} additional threads.
       update:
-        success: Location Updated
+        success: Ubicación Actualizada
+      large_map:
+        area: area
+        clear: clear
+        draw_area: Draw an Area
+        draw_area_1: Click the points to mark an area on the map.
+        draw_area_2: Double-click to complete the shape.
+        draw_area_3: Zoom in and pan to select the correct area.
+        draw_point: Draw a Point
+        draw_point_1: Click the map to mark the point.
+        draw_point_2: Drag the point to reposition.
+        draw_point_3: Zoom in and pan to select the correct place.
+        draw_route: Draw a Route
+        draw_route_1: Click the points to mark a route on the map.
+        draw_route_2: Double-click to complete the route.
+        draw_route_3: Drag the grey points to create new corners.
+        point: point
+        route: route
+        undo: undo
+        area_around_me: Area around me
+        my_location: My location
+        current_location: Use current location
+        current_location_placeholder: Using auto-detected location
+        my_ward: 'Wards: '
+        my_constituency: 'Constituencies: '
+        my_group: 'Groups: '
+        my_route: Route to destination
+        last_months: In the past 3 months there have been
+        in_this_area: issues in this area
     prefs:
       edit:
         involvement: 'Involve me in:'
@@ -1301,7 +1392,7 @@ es-MX:
         reported_issues: Listed Issues
         user_profile: User Profile
         website_label: 'Web site:'
-        full_name: Full Name
+        full_name: Nombre completo
         send_private_message: Send private message
       update:
         success: Profile Updated

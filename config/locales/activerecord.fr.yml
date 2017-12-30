@@ -17,6 +17,10 @@ fr:
               disabled: Cannot be created by a disabled user
             closed:
               non_subscriber: can only be changed by a subscriber
+        thread_leader_message:
+          attributes:
+            base:
+              not_owing_leader_message: Something went wrong
     attributes:
       issue:
         external_url: External site

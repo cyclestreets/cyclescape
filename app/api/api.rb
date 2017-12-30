@@ -4,9 +4,11 @@ class Api < Grape::API
   include Grape::Kaminari
 
   version 'v1', using: :accept_version_header
-  default_format :json
+  format :json # We have used `.as_json` to control the exposed response so add formats carefully.
   prefix :api
 
+  mount Route::ThreadApi
+  mount Route::MessageApi
   mount Route::IssueApi
   mount Route::GroupApi
   mount Route::TagApi

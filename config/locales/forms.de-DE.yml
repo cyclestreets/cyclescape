@@ -3,19 +3,27 @@ de-DE:
   cancel: Abbrechen
   formtastic:
     labels:
+      remember_me: Remember me
       tags_string: Tags
+      thread_leader_message:
+        description: Optional reason
       group:
         name: Name der Gruppe
         short_name: Subdomain
       group_request:
         name: Name der Gruppe
-        short_name: Die vorgeschlagene Cyclescape Web-Adresse
+        short_name: The proposed %{application_name} web address
         website: Hauptwebseite Deiner Organisation
         email: Hauptmailadresse Deiner Organisation
         default_thread_privacy: Voreingestellte Privatsphäre für Diskussionen
       group_membership:
         role: Art der Mitgliedschaft
+      potential_member:
+        emails: Emails
+      group_membership_request:
+        message: Nachricht
       group_pref:
+        membership_secretary: Membership secretary
         notify_membership_requests: Benachrichtigung bei Antrag auf Mitgliedschaft
           aktivieren
       issue:
@@ -25,36 +33,57 @@ de-DE:
           photo: Füge ein Foto hinzu
           tags_string: Kennzeichne Dein Thema
           title: Betitel Deinen Bericht
+          all_day: All day
         create:
           description: Erstelle eine Beschreibung
           location: Teile Deinen Standort mit
           photo: Füge ein Foto hinzu
           tags_string: Kennzeichne Dein Thema
           title: Betitel Deinen Bericht
+          all_day: All day
         edit:
           description: Erstelle eine Beschreibung
           location: Teile Deinen Standort mit
           photo: Füge ein Foto hinzu
           tags_string: Kennzeichne Dein Thema
           title: Betitel Deinen Bericht
+          all_day: All day
         update:
           description: Erstelle eine Beschreibung
           location: Teile Deinen Standort mit
           photo: Füge ein Foto hinzu
           tags_string: Kennzeichne Dein Thema
           title: Betitel Deinen Bericht
+          all_day: All day
       library/document:
         file: Dokument
+        title: Title
       library/item: 
       library/note:
         location: betroffenes Gebiet
         body: Note
         url: Web-Adresse
+        title: Title
+        description: Beschreibung
+      deadline_message:
+        all_day: All day
+        title: Title
+      photo_message:
+        caption: Caption
+        photo: Foto
+      street_view_message:
+        caption: Caption
+      cyclestreets_photo_message:
+        caption: Caption
+        image: Image
+      document_message:
+        title: Title
+        file: File
       link_message:
         url: Web-Adresse
+        title: Title
+        description: Beschreibung
       message:
-        body: Nachricht
-      site_comment:
         body: Nachricht
       thread_subscription:
         send_email: Maile eine neue Nachricht
@@ -64,11 +93,61 @@ de-DE:
         involve_my_groups: Angelegenheiten meiner Gruppe
         involve_my_groups_admin: Beziehe mich ebenso an administrativen Diskussionen
           meiner Gruppe ein
+      group_profile:
+        joining_instructions: Joining instructions
+        picture: Bild
+        description: Beschreibung
+        new_user_email: New user email
+      user_profile:
+        website: Webseite
+        picture: Bild
+        visibility: Visibility
+        about: Über
+        locale: Locale
+        remove_picture: Remove picture
+      thread:
+        title: Title
+        privacy: Privacy
+        issue: Issue
+      site_comment:
+        name: Name
+        email: Mailadresse
+        body: Nachricht
       user:
+        new:
+          display_name: Display name
+          full_name: Vollständiger Name
+          email: Mailadresse
+          disabled: Deaktiviert
+          password: Password
+          password_confirmation: Password confirmation
+          about: Über
+          bicycle_wheels: Laufräder
+        create:
+          display_name: Display name
+          full_name: Vollständiger Name
+          email: Mailadresse
+          disabled: Deaktiviert
+          password: Password
+          password_confirmation: Password confirmation
+          about: Über
+          bicycle_wheels: Laufräder
         edit:
+          display_name: Display name
+          full_name: Vollständiger Name
+          email: Mailadresse
+          disabled: Deaktiviert
           password: Neues Passwort
           password_confirmation: Neue Passwort Bestätigung
-        new:
+          current_password: Current password
+        update:
+          display_name: Display name
+          full_name: Vollständiger Name
+          email: Mailadresse
+          disabled: Deaktiviert
+          password: Password
+          password_confirmation: Password confirmation
+          about: Über
           bicycle_wheels: Laufräder
     hints:
       tags_string_hints:
@@ -98,9 +177,9 @@ de-DE:
         message: Eine kurze Nachricht zur Erläuterung der Gruppe (hilft uns SPAM Anfragen
           auszusortieren)
       group_membership:
-        email: Bitte gib die Mailadresse ein. Fall sie einem bestehenden Cyclescape
-          Konto entspricht wird dieses sofort zur Gruppe hinzugefügt. Andernfalls
-          wird eine Einladung an Cyclescape teilzunehmen an die Adresse verschickt.
+        email: Please enter their email. If this matches an existing %{application_name}
+          account they will be added to the group immediately. Otherwise an invitation
+          to join %{application_name} will be sent to this address.
         full_name: Bitte gib ihren Namen ein; sie können es ändern, wenn sie die Einladung
           akzeptiert haben.
         role: Wähle, ob sie normales oder Ausschussmitglied der Gruppe sind.
@@ -108,17 +187,17 @@ de-DE:
         message: Optional kannst Du den Gruppenadministratoren zusätzliche Informationen,
           die Du für passend hälst, zukommen lassen. Beispielsweise deine Mitgliedsnummer.
       group_pref:
-        notify_membership_requests: Eine Benarichtigung wird versandt, wenn ein Cyclescape-Mitglied
-          dieser Gruppe beitreten möchte.
+        notify_membership_requests: Notifications will be sent when a %{application_name}
+          user asks to join this group
         membership_secretary: Wähle optional einen Verwalter für Mitgliedschaften,
           der Mitglieder-Benachrichtigungen erhält. Trage nichts ein, wenn Benachrichtigungen
           zur Gruppen-Emailadresse gesendet werden sollen.
       group_profile:
-        joining_instructions: Die Mitgliedschafts-Beschreibung wird Leuten gezeigt,
-          die dieser Cyclescape-Gruppe beitreten wollen. Vielleicht möchtest Du zum
-          Beispiel Leute zuerst anweisen, für die Mitgliedschaft an anderer Stelle
-          zu zahlen, oder Du bist glücklich über alle und jeden, der deiner Gruppe
-          beitreten möchte. Du kannst das unausgefüllt lassen.
+        joining_instructions: The joining instructions are shown to people who want
+          to join this %{application_name} group. You might want to direct people
+          to pay for membership elsewhere first, for example, or you might be happy
+          for everyone and anyone to join your %{application_name} group. You can
+          leave this blank.
         new_user_email: Folgendes wird an alle Mitglieder verschickt, {{full_name}}
           wird in der Mail durch den vollständigen Namen der Person ersetzt
         picture: Wird auf der Gruppenseite angezeigt, idealerweise 333x192 Pixel
@@ -130,7 +209,8 @@ de-DE:
             beginnen.
           deadline: "(optional)"
           external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
-          photo: optional
+          photo: "(optional), 6MB max, the image will be automatically resized to
+            an appropriate size."
           title: Bitte fasse Dich kurz und sei sachlich.
           tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
         create:
@@ -140,7 +220,8 @@ de-DE:
             zu starten.
           deadline: "(optional)"
           external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
-          photo: optional
+          photo: "(optional), 6MB max, the image will be automatically resized to
+            an appropriate size."
           title: Bitte fasse Dich kurz und sei sachlich.
           tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
         edit:
@@ -150,7 +231,8 @@ de-DE:
             beginnen.
           deadline: "(optional)"
           external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
-          photo: optional
+          photo: "(optional), 6MB max, the image will be automatically resized to
+            an appropriate size."
           title: Bitte fasse Dich kurz und sei sachlich.
           tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
         update:
@@ -160,7 +242,8 @@ de-DE:
             beginnen.
           deadline: "(optional)"
           external_url: Hier kannst Du eine weitere relevante Webseite hinzufügen.
-          photo: optional
+          photo: "(optional), 6MB max, the image will be automatically resized to
+            an appropriate size."
           title: Bitte fasse Dich kurz und sei sachlich.
           tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
       message_thread:
@@ -169,18 +252,36 @@ de-DE:
           dies eine administrative Diskussion sein.
       library/note:
         tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
+      photo_message:
+        photo: 6MB max, the image will be automatically resized to an appropriate
+          size.
       library/document:
         tags_string: Tags getrennt durch Komma, z. B. Fahrradparken, Hindernis
+      site_config:
+        email_domain: The domain the emails will come from and users will reply to.
+        nowhere_location: The PostGis interpretation of where to put users that have
+          no locations or groups.
+        tile_server1_options: 'JavaScript dict with layer options. i.e. {"opacity":
+          0.5}'
+        tile_server2_options: 'JavaScript dict with layer options. i.e. {"opacity":
+          0.5}'
+        tile_server3_options: 'JavaScript dict with layer options. i.e. {"opacity":
+          0.5}'
     placeholders:
+      site_config:
+        application_name: Cyclescape
+        email_domain: example.com
+        funder_name_footer1: Funding from Lovely Cycle Group
+        funder_url_footer1: http://www.lovely-cycle-group.com
       issue:
         external_url: http://www.beispiel.de
       group_membership_request:
-        message: Bitte nimm mich in die Cyclescape-Gruppe auf.
+        message: Please add me to the %{application_name} group.
       library/note:
         url: http://www.beispiel.de
       group_profile:
-        new_user_email: Hallo {{full_name}}, Du wurdest in eine Cyclescape-Gruppe
-          aufgenommen http://www.cyclescape.org
+        new_user_email: Hello {{full_name}}, you have been added to a %{application_name}
+          group http://www.%{application_domain}
     actions:
       update: Speichern
       saving: Speichere…
@@ -213,6 +314,10 @@ de-DE:
         create: Nachricht posten
       photo_message:
         create: Foto hinzufügen
+      cyclestreets_photo_message:
+        create: Add CycleStreets Photo
+      street_view_message:
+        create: Add StreetView Message
       site_comment:
         create: Feedback senden
       user:

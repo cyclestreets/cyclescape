@@ -82,6 +82,9 @@ class MessageThread < ActiveRecord::Base
       .merge(Message.approved)
       .where(messages[:created_at].gt(thread_views[:viewed_at]).or(thread_views[:viewed_at].eq(nil)))
   end
+  scope :after_date, ->(date) { where(arel_table[:created_at].gteq(date)) }
+  scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
+  scope :after_id, ->(id) { where(arel_table[:id].gt(id)) }
 
   default_scope { where(deleted_at: nil) }
 
@@ -146,7 +149,7 @@ class MessageThread < ActiveRecord::Base
     # @param user [User]
     # @param threads [Array<MessageThread>] or [ActiveRecord::Relation<MessageThread>] of threads ask if the user has viewed
     # @return [Array<Integer>] ids of unviewed threads
-    def unviewed_thread_ids(user: user, threads: threads)
+    def unviewed_thread_ids(user:, threads:)
       ids = if threads.is_a?(ActiveRecord::Relation) && !threads.loaded?
               threads.ids
             else
@@ -313,6 +316,21 @@ class MessageThread < ActiveRecord::Base
 
   def to_icals
     upcoming_deadline_messages.map{ |message| message.component.to_ical }
+  end
+
+  def as_json(_options = nil)
+    {
+      id: id,
+      issue_id: issue_id,
+      created_by_id: created_by_id,
+      created_by_name: created_by.profile.visibility == 'public' ? created_by.name : created_by.display_name,
+      group_id: group_id,
+      title: title,
+      public_token: public_token,
+      created_at: created_at,
+      updated_at: updated_at,
+      closed: closed,
+    }
   end
 
   protected

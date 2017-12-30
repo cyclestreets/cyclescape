@@ -1,11 +1,11 @@
 %h1 Planning Filters
 %section
   .tasks
-    %p= link_to "New Planning Filter", new_admin_planning_filter_path
+    %p= link_to t(".new_planning_filter"), new_admin_planning_filter_path
   %table
     %thead
-      %th Id
-      %th Authority
-      %th Rule
+      %th= t(".id")
+      %th= t(".authority")
+      %th= t(".rule")
     %tbody
       = render collection: @planning_filters, partial: "filter"

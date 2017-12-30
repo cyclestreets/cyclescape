@@ -11,19 +11,23 @@ cs-CZ:
           attributes:
             full_name:
               blank: Prosím zadejte jméno
-              email: Prosím zadejte emailovou adresu
+              email: Prosím zadejte e-mailovou adresu
         message_thread:
           attributes:
             base:
               disabled: Nemůže být vytvořen zdravotně postižené uživatele
             closed:
               non_subscriber: může být změněno jiným uživatelem
+        thread_leader_message:
+          attributes:
+            base:
+              not_owing_leader_message: Nastal problém
     attributes:
       issue:
         external_url: Externí stránka
       message_thread:
         group: Vlastněno
-        closed: Closed
-        moderated: In Moderation
+        closed: Uzavřeno
+        moderated: Moderováno
     models:
       message_thread: Vlákno

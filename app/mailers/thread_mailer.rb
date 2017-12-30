@@ -9,7 +9,7 @@ class ThreadMailer < ActionMailer::Base
 
     mail(
       to: @subscriber.name_with_email,
-      subject: t('mailers.thread_mailer.digest.subject', date: Date.current.to_s(:long)),
+      subject: t('mailers.thread_mailer.digest.subject', date: Date.current.to_s(:long), application_name: site_config.application_name),
       reply_to: no_reply_address,
     )
   end
@@ -31,11 +31,17 @@ class ThreadMailer < ActionMailer::Base
                                      content: cal.to_ical }
     end
     mail(to: subscriber.name_with_email,
-         subject: t(subject, title: @thread.title, count: @thread.messages.count),
+         subject: t(subject, title: @thread.title, count: @thread.messages.count, application_name: site_config.application_name),
          from: user_notification_address(message.created_by),
          references: message_chain(@message.in_reply_to, @thread),
          message_id: message_address(@message),
          reply_to: message_address(@message),
          in_reply_to: thread_address(@thread))
+  end
+
+  private
+
+  def site_config
+    @site_config ||= SiteConfig.first
   end
 end

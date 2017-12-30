@@ -1,9 +1,13 @@
 source 'http://rubygems.org'
 
 gem 'activerecord-postgis-adapter'
-gem 'pg'
+gem "pg", "~> 0.20.0" # https://github.com/rgeo/activerecord-postgis-adapter/pull/257#issuecomment-309553871
 gem 'rails', '~> 4.2.0'
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
 # Only uncomment the debugger if you are using it as it slows things down
 # gem 'ruby-debug19', require: 'ruby-debug'
 
@@ -20,6 +24,7 @@ gem 'leaflet-rails', "= 0.7.7"
 gem 'map_layers'
 gem 'rails-jquery-autocomplete'
 gem 'rails_autolink'
+gem 'retryable'
 gem 'rgeo-geojson'
 # gem 'jquery-turbolinks'
 
@@ -65,8 +70,8 @@ gem 'sass-rails', '~> 5.0'
 gem 'nokogiri'
 gem 'rails-i18n', '~> 4.0.0'
 gem 'rails-observers'
-gem 'sunspot_rails', github: 'nikolai-b/sunspot', branch: 'bb_conjunctions'
-gem 'sunspot_solr', github: 'nikolai-b/sunspot', branch: 'bb_conjunctions'
+gem 'sunspot_rails', github: 'sunspot/sunspot'
+gem 'sunspot_solr', github: 'sunspot/sunspot'
 gem 'progress_bar'
 gem 'tagsinput-rails'
 gem 'uglifier', '>= 1.3.0'

@@ -6,7 +6,7 @@
 %p= t ".new_members_guidance_introduction"
 %ul.bullets
   %li= t ".new_members_guidance_method1_html", add_directly_link: link_to(t(".add_directly"), new_group_membership_path)
-  %li= t ".new_members_guidance_method2_html"
+  %li= t(".new_members_guidance_method2_html", application_name: @site_config.application_name)
 
 
 - if @pending_requests

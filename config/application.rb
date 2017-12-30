@@ -30,7 +30,7 @@ module Cyclescape
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
-    config.i18n.available_locales = %w(en-GB de-DE cs-CZ it)
+    config.i18n.available_locales = %w(en-GB de-DE cs-CZ cs it)
     config.i18n.enforce_available_locales = true
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
@@ -59,9 +59,6 @@ module Cyclescape
     # Git info
     config.git_hash = `git rev-parse --short HEAD`.chomp
     config.github_project_url = 'https://github.com/cyclestreets/cyclescape'
-
-    # Google analytics
-    config.analytics = {google: {account_id: "UA-28721275-1", base_domain: "cyclescape.org"}}
 
     # Planning applications
     config.planning_applications_url = "http://www.planit.org.uk/find/applics/json"

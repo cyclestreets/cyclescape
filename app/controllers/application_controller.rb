@@ -110,7 +110,7 @@ class ApplicationController < ActionController::Base
   def set_page_title(title = nil, value = nil)
     key = "#{controller_path.tr("/", ".")}.#{params[:action]}.title"
     page_title = title || I18n.translate(key, (value || { default: '' }))
-    app_title = I18n.translate('application_name')
+    app_title = @site_config.application_name
     @page_title = page_title == '' ? app_title : "#{page_title} - #{app_title}"
   end
 
@@ -170,7 +170,9 @@ class ApplicationController < ActionController::Base
   end
 
   def set_config
-    @site_config ||= SiteConfig.first
+    @site_config = Rails.cache.fetch(SiteConfig::KEY, expires: 1.week) do
+      SiteConfig.first.to_struct
+    end
   end
 
   def set_time_zone(&block)
