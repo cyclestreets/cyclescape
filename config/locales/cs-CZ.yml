@@ -187,7 +187,7 @@ cs-CZ:
       page_title: Výsledky vyhledávání pro '%{q}'
       convert_to_issue_html: Převést na podnět &hellip;
       planning_applications: Přihlášky k plánování
-      planning_applications_search: e.g. (07/0811/FUL)
+      planning_applications_search: např. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
       no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
@@ -216,7 +216,7 @@ cs-CZ:
       page_title: Výsledky vyhledávání pro '%{q}'
       convert_to_issue_html: Převést na podnět &hellip;
       planning_applications: Přihlášky k plánování
-      planning_applications_search: e.g. (07/0811/FUL)
+      planning_applications_search: např. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
       no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
@@ -289,8 +289,8 @@ cs-CZ:
       location: umístění
       no_locations_guidance_html: Nenastavili jste žádné oblasti zájmu! Pokud %{add_some_locations_link},
         zobrazí se vám zde nejbližší %{things}.
-      no_planning_applications_nearby_html: There are no planning applications in
-        your area. You could %{add_location_link}.
+      no_planning_applications_nearby_html: Ve vaší oblasti nejsou žádné přihlášky
+        k plánování. Můžete %{add_location_link}.
       planning_applications_in_your_area: Přihlášky k plánování ve vaší oblasti
       planning_applications_introduction_html: 'These are the most recent planning
         applications (courtesy of the PlanIt website) in your %{location_link}:'
@@ -664,10 +664,9 @@ cs-CZ:
   issue:
     message_threads:
       new:
-        new_hint: To je místo, kde se spustí diskusi o tomto problému.  n Tam by mohlo
-          být mnoho různých diskusních vláken, že jedna otázka vytváří  n např Nové
-          plány aplikace může mít vliv na provoz na silnici a ovlivňují přístup cyklu
-          do lesa.
+        new_hint: "Na tomto místě můžete začít diskutovat o podnětu.\n
+          K jednomu podnětu může být několik různých diskuzních vláken.\n
+          Např. nový stavební záměr se může dotýkat dopravy na silnici a zároveň ovlivňovat přístup na lesní cyklostezku."
         title: Nové vlákno na téma %{issue}
         everyone: Každý
     photos:
@@ -1125,7 +1124,7 @@ cs-CZ:
     changelog:
       github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>u."
       header: Co je nového?
-      introduction: Toto je přehled nedávných změn na tété stránce. Kompletní detailní
+      introduction: Toto je přehled nedávných změn na tomto webu. Kompletní detailní
         historii vývoje můžete sledovat na
   planning_application:
     issues:
