@@ -230,6 +230,10 @@
         create: Post Message
       photo_message:
         create: Add Photo
+      thread:
+        create: Create thread
+      potential_member:
+        submit: Submit potential members list
       cyclestreets_photo_message:
         create: Add CycleStreets Photo
       street_view_message:
