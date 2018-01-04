@@ -306,6 +306,10 @@ cs-CZ:
         create: Přidat odkaz
       message:
         create: Odeslat zprávu
+      thread:
+        create: Vytvořit vlákno
+      potential_member:
+        submit: Odeslat seznam potenciálních členů
       photo_message:
         create: Přidat fotografii
       cyclestreets_photo_message:
