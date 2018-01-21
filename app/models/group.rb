@@ -48,6 +48,7 @@ class Group < ActiveRecord::Base
   end
 
   def self.from_geo(geo_name)
+    return none if geo_name.blank?
     connection = Excon.new(Geocoder::GEO_URL, headers: { 'Accept' => Mime::JSON.to_s })
     rsp = connection.get(query: { q: geo_name, key: Geocoder::API_KEY})
     json = JSON.parse(rsp.body)

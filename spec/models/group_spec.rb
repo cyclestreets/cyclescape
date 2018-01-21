@@ -30,6 +30,10 @@ describe Group do
     end
   end
 
+  it ".from_geo_or_name" do
+    expect(described_class.from_geo_or_name("")).to be_blank
+  end
+
   it ".from_geo_name" do
     stub_request(:get, %r{https://api\.cyclestreets\.net/v2/geocoder\?key=.*&q=leeds}).
       with(:headers => {'Accept' => 'application/json'}).
