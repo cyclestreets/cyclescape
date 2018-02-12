@@ -39,6 +39,9 @@
               = render partial: "issues/compact", collection: @recent_issues, as: :issue
 
 %aside#sidebar
+  - if @group.profile.logo
+    %section.group-homepage-logo
+      = image_tag @group.profile.logo_thumbnail.url
   - if @group.profile.picture
     %section.group-homepage-image
       = image_tag @group.profile.picture_thumbnail.url

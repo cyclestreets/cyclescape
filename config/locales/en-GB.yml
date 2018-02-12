@@ -447,6 +447,8 @@
         no_location: This group doesn't have any location details yet.
         no_picture: Add a picture to make your group welcoming.
         picture: Picture
+        no_logo: Your group doesn't have a logo yet.
+        logo: Logo
       update:
         success: Profile Updated
     hashtags:

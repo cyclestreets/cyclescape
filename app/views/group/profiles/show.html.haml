@@ -1,6 +1,12 @@
 %h2= t ".description"
 %p= auto_link simple_format @profile.description or t ".no_description"
 
+%h2= t ".logo"
+- if @profile.logo
+  = image_tag @profile.logo_thumbnail.url
+- else
+  %p= t ".no_logo"
+
 %h2= t ".picture"
 - if @profile.picture
   = image_tag @profile.picture_thumbnail.url
