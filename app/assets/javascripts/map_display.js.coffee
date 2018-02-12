@@ -90,7 +90,7 @@ class window.LeafletMap
 
   buildPhotoLayer: (photoselect) =>
     params = [
-      {name: 'key', value: CONSTANTS.geocoder.apiKey},
+      {name: 'key', value: $("#map-geocode").data("key") || CONSTANTS.geocoder.apiKey},
       {name: 'fields',
       value: 'id,name,hasPhoto,categoryId,categoryPlural,metacategoryName,iconProperties,thumbnailUrl'},
       {name: 'thumbnailsize', value: 2000},
@@ -154,7 +154,7 @@ class window.LeafletMap
       slight: { color: '#a7932f', fillColor: '#fcff00', radius: 6 }
     }
     params = [
-      {name: 'key', value: CONSTANTS.geocoder.apiKey}
+      {name: 'key', value: $("#map-geocode").data("key") || CONSTANTS.geocoder.apiKey}
       {name: 'fields', value: 'id,latitude,longitude,datetime,severity,url'},
       {name: 'datetime', value: 'friendly'},
     ]
@@ -191,12 +191,12 @@ class window.LeafletMap
       bbox = @map.getBounds().toBBoxString()
       params = [
         {name: 'q', value: text}
-        {name: 'key', value: CONSTANTS.geocoder.apiKey}
+        {name: 'key', value: $("#map-geocode").data("key") || CONSTANTS.geocoder.apiKey}
         {name: 'bbox', value: bbox}
       ]
 
       $.ajax(
-        url: CONSTANTS.geocoder.geoUrl
+        url: $("#map-geocode").data("url") || CONSTANTS.geocoder.geoUrl
         data: params
         dataType: 'jsonp' if jsonpTransportRequired()
         timeout: 10000
