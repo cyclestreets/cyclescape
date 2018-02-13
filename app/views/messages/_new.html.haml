@@ -42,6 +42,10 @@
           = link_to "#new-document-message" do
             = t ".document_message"
             %span.nub
+        %li.doc
+          = link_to "#new-map-message" do
+            = t ".map_message"
+            %span.nub
         - if signed_in? && current_user.subscribed_to_thread?(@thread)
           %li.text
             = link_to "#new-thread-leader-message" do
@@ -62,6 +66,7 @@
         = render "message/links/new"
         = render "message/deadlines/new"
         = render "message/documents/new"
+        = render "message/maps/new"
         - if signed_in? && current_user.subscribed_to_thread?(@thread)
           = render "message/thread_leaders/new"
 

@@ -906,6 +906,12 @@
       create:
         failure: Deadline/date could not be created
         success: Deadline/date created
+    maps:
+      new:
+        submit: Add map
+      create:
+        failure: Map could not be created
+        success: Map created
     documents:
       create:
         failure: Could not add attachment
@@ -985,6 +991,7 @@
       add_to_thread: Add to thread
       search_library: Search library
       deadline_message: Deadline/date
+      map_message: Map
       document_message: Attachment
       library_item_message: Library
       link_message: Link
@@ -1124,6 +1131,9 @@
     header:
       added: '%{name} added %{type} to the thread'
       committee: ' [Committee]'
+    new_map_message:
+      type: a map
+      view_the_map: 'You can view the map at:'
     new_deadline_message:
       type: a deadline/date
     new_document_message:

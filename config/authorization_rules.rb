@@ -140,7 +140,7 @@ authorization do
     end
     has_permission_on :message_photos, :message_links, :message_deadlines,
                       :message_library_items, :message_documents, :message_street_views,
-                      :message_cyclestreets_photos, to: [:create, :view]
+                      :message_cyclestreets_photos, :message_maps, to: [:create, :view]
     has_permission_on :libraries, :library_documents, :library_notes, to: [:index, :new, :create, :show]
     has_permission_on :library_documents, :library_notes do
       to [:edit, :update]

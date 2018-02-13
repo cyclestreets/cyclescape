@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180212195948) do
+ActiveRecord::Schema.define(version: 20180213184735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,6 +308,20 @@ ActiveRecord::Schema.define(version: 20180212195948) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "map_messages", force: :cascade do |t|
+    t.geometry "location",      limit: {:srid=>4326, :type=>"geometry"}, null: false
+    t.integer  "thread_id",                                              null: false
+    t.integer  "message_id",                                             null: false
+    t.integer  "created_by_id",                                          null: false
+    t.text     "caption"
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
+  end
+
+  add_index "map_messages", ["created_by_id"], name: "index_map_messages_on_created_by_id", using: :btree
+  add_index "map_messages", ["message_id"], name: "index_map_messages_on_message_id", using: :btree
+  add_index "map_messages", ["thread_id"], name: "index_map_messages_on_thread_id", using: :btree
+
   create_table "message_thread_closes", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "message_thread_id"
@@ -526,6 +540,7 @@ ActiveRecord::Schema.define(version: 20180212195948) do
     t.datetime "updated_at",                   null: false
   end
 
+  add_index "thread_leader_messages", ["created_by_id"], name: "index_thread_leader_messages_on_created_by_id", using: :btree
   add_index "thread_leader_messages", ["message_id"], name: "index_thread_leader_messages_on_message_id", using: :btree
   add_index "thread_leader_messages", ["thread_id"], name: "index_thread_leader_messages_on_thread_id", using: :btree
   add_index "thread_leader_messages", ["unleading_id"], name: "index_thread_leader_messages_on_unleading_id", using: :btree
@@ -665,6 +680,9 @@ ActiveRecord::Schema.define(version: 20180212195948) do
   add_foreign_key "hashtaggings", "messages"
   add_foreign_key "hashtags", "groups"
   add_foreign_key "issues", "planning_applications"
+  add_foreign_key "map_messages", "message_threads", column: "thread_id"
+  add_foreign_key "map_messages", "messages"
+  add_foreign_key "map_messages", "users", column: "created_by_id"
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
   add_foreign_key "message_threads", "users"
@@ -672,4 +690,5 @@ ActiveRecord::Schema.define(version: 20180212195948) do
   add_foreign_key "thread_leader_messages", "message_threads", column: "thread_id"
   add_foreign_key "thread_leader_messages", "messages"
   add_foreign_key "thread_leader_messages", "thread_leader_messages", column: "unleading_id"
+  add_foreign_key "thread_leader_messages", "users", column: "created_by_id"
 end

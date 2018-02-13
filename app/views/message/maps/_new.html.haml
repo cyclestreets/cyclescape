@@ -1,0 +1,11 @@
+#new-map-message.pane
+  = semantic_form_for MapMessage.new, url: thread_maps_path(@thread) do |f|
+    = f.inputs do
+      = f.input :loc_json, as: :hidden
+      = f.input :caption
+      %li.input.full-width
+        %label.label= t "formtastic.labels.issue.new.location"
+        = f.semantic_errors :location
+        = render partial: "shared/edit_map", locals: { location: @thread.issue&.location || current_user.start_location, resource: f.object }
+    = f.actions do
+      = f.action :submit, label: t(".submit"), button_html: message_button_html

@@ -111,7 +111,9 @@ Rails.application.routes.draw do
       resources :library_items, only: [:create]
       resources :documents, only: [:create, :show]
       resources :thread_leaders, only: [:create]
+      resources :maps, only: [:create]
     end
+
     scope module: :message_thread do
       resources :subscriptions, only: [:edit, :create, :destroy]
       resource :tags, only: [:update]

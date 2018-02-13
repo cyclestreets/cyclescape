@@ -1,0 +1,4 @@
+<%= raw @message.component.caption %>
+
+<%= t ".view_the_map" %>
+<%= thread_url(@message.thread, only_path: false) + "#message_#{@message.id}" %>

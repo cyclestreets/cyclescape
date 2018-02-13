@@ -8,6 +8,7 @@ module MessageThreadsHelper
     'DocumentMessage' => 'documents',
     'StreetViewMessage' => 'street_views',
     'ThreadLeaderMessage' => 'thread_leaders',
+    'MapMessage' => 'maps',
   }
 
   MESSAGE_LIBRARY_MAP = {
