@@ -345,7 +345,7 @@ class window.LeafletMap
 
     # Undo removes the last point if creating
     # or the last feature if not creating
-    $('.edit-undo').click (e) ->
+    $('.edit-undo').click (evt) ->
       evt.preventDefault()
       evt.stopPropagation()
       if drawnItems.getLayers().slice(-1)[0]?.editing?._enabled
