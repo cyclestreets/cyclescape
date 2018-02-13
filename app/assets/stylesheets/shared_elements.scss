@@ -750,13 +750,13 @@ section.new-message {
       }
     }
   }
-  >.panes {
+  >.panes:not(.map-panes) {
     clear:both;
     border-left:1px solid $paneborder;
     border-right:1px solid $paneborder;
     border-bottom:1px solid $paneborder;
     overflow:hidden;
-    .pane .pane {
+    .pane .pane:not(.map-panes) {
       background: $pane1;
       padding:30px;
       float:none;
@@ -767,7 +767,7 @@ section.new-message {
     a:hover {
       border-bottom:0;
     }
-    ul.tabs {
+    ul.tabs:not(.draw-options) {
       @include list-reset-soft;
       float:none;
       width:auto;
