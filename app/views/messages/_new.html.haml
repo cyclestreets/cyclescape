@@ -31,6 +31,10 @@
           = link_to "#new-street-view-message" do
             = t ".street_view_message"
             %span.nub
+        %li.map-point
+          = link_to "#new-map-message" do
+            = t ".map_message"
+            %span.nub
         %p.clear
         %li.link
           = link_to "#new-link-message" do
@@ -43,10 +47,6 @@
         %li.doc
           = link_to "#new-document-message" do
             = t ".document_message"
-            %span.nub
-        %li.doc
-          = link_to "#new-map-message" do
-            = t ".map_message"
             %span.nub
         - if signed_in? && current_user.subscribed_to_thread?(@thread)
           %li.text
