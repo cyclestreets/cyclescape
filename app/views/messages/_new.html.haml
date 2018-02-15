@@ -60,15 +60,16 @@
               = f.input :body, input_html: { class: 'autosize', disabled: cannot_post?}
             = f.actions do
               = f.action :submit, button_html: message_button_html
-        = render "message/photos/new"
-        = render "message/cyclestreets_photos/new"
-        = render "message/street_views/new"
-        = render "message/links/new"
-        = render "message/deadlines/new"
-        = render "message/documents/new"
-        = render "message/maps/new"
-        - if signed_in? && current_user.subscribed_to_thread?(@thread)
-          = render "message/thread_leaders/new"
+        - if signed_in?
+          = render "message/photos/new"
+          = render "message/cyclestreets_photos/new"
+          = render "message/street_views/new"
+          = render "message/links/new"
+          = render "message/deadlines/new"
+          = render "message/documents/new"
+          = render "message/maps/new"
+          - if current_user.subscribed_to_thread?(@thread)
+            = render "message/thread_leaders/new"
 
         - if permitted_to?(:create, :messages) && @thread.latest_message
           %p
