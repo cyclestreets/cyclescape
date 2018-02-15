@@ -6,7 +6,7 @@ class Message::DocumentsController < Message::BaseController
   protected
 
   def component
-    @document ||= DocumentMessage.new permitted_params
+    @component ||= DocumentMessage.new permitted_params
   end
 
   def permitted_params

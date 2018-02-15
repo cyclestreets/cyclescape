@@ -6,7 +6,7 @@ class Message::CyclestreetsPhotosController < Message::BaseController
   protected
 
   def component
-    @cyclestreets_photo ||= CyclestreetsPhotoMessage.new permitted_params
+    @component ||= CyclestreetsPhotoMessage.new permitted_params
   end
 
   def permitted_params

@@ -2,7 +2,7 @@ class Message::StreetViewsController < Message::BaseController
   protected
 
   def component
-    @street_view ||= StreetViewMessage.new(permitted_params).tap do |svm|
+    @component ||= StreetViewMessage.new(permitted_params).tap do |svm|
       svm.set_location params[:street_view_message_location_string]
     end
   end

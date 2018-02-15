@@ -2,7 +2,7 @@ class Message::DeadlinesController < Message::BaseController
   protected
 
   def component
-    @deadline ||= DeadlineMessage.new permitted_params
+    @component ||= DeadlineMessage.new permitted_params
   end
 
   def permitted_params

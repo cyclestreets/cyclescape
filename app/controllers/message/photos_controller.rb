@@ -6,7 +6,7 @@ class Message::PhotosController < Message::BaseController
   protected
 
   def component
-    @photo ||= PhotoMessage.new permitted_params
+    @component ||= PhotoMessage.new permitted_params
   end
 
   def permitted_params

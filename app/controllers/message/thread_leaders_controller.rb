@@ -4,7 +4,7 @@ class Message::ThreadLeadersController < Message::BaseController
   protected
 
   def component
-    @leader ||= ThreadLeaderMessage.new permitted_params
+    @component ||= ThreadLeaderMessage.new permitted_params
   end
 
   def permitted_params

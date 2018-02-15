@@ -3,7 +3,7 @@ class Message::LibraryItemsController < Message::BaseController
   protected
 
   def component
-    @library_item ||= LibraryItemMessage.new permitted_params
+    @component ||= LibraryItemMessage.new permitted_params
   end
 
   def permitted_params
