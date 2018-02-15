@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThreadSubscriber
   # This would normally be a resque worker, but it can't be due to race conditions
   # For example, you need to process all the automatic subscriptions before sending

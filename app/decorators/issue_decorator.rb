@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IssueDecorator < ApplicationDecorator
   decorates :issue
   delegate :closed?, to: :issue

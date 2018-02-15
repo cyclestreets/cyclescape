@@ -1,3 +1,5 @@
+-# frozen_string_literal: true
+
 %section.new-thread
   %h2= t ".title", issue: @issue.title.truncate(50)
   - if @issue.threads.count == 0

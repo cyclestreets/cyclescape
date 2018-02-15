@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < ApplicationController
   filter_access_to :approve, :reject, attribute_check: true
 

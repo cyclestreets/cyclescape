@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Message::LinksController < Message::BaseController
   protected
 

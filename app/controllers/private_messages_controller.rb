@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PrivateMessagesController < ApplicationController
   def index
     count = if current_user

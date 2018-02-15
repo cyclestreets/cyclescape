@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Note inheritance
 class Group::MessageThreadsController < MessageThreadsController
   before_filter :group

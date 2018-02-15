@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Issue::MessageThreadsController < MessageThreadsController
   def index
     threads = issue.threads.order_by_latest_message.page(params[:page])

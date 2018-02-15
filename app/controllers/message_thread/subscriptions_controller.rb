@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessageThread::SubscriptionsController < MessageThread::BaseController
   filter_access_to :all, attribute_check: true, load_method: :load_subscription
 

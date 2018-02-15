@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlanningApplication::IssuesController < IssuesController
   before_filter :load_planning_application
   before_filter :check_for_issue

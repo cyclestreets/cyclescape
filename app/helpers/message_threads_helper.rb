@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MessageThreadsHelper
   MESSAGE_CONTROLLER_MAP = {
     'PhotoMessage' => 'photos',

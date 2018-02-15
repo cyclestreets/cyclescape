@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 env :PATH, ENV['PATH']
 env :HOME, "/var/www/cyclescape/shared/bundle"
 job_type :runner,  "cd :path && /usr/local/bin/bundle exec rails runner -e :environment ':task' :output"

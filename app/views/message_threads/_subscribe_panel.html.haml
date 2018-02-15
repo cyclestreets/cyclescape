@@ -1,3 +1,5 @@
+-# frozen_string_literal: true
+
 .subscribe
   - if signed_in? && subscription = current_user.subscribed_to_thread?(thread)
     %p

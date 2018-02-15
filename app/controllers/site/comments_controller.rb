@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Site::CommentsController < ApplicationController
   def index
     @site_comments = SiteComment.order('created_at desc').page params[:page]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessageLibrary::NotesController < Library::NotesController
   def new
     @message = Message.find(params[:message_id])

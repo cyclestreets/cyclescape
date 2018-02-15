@@ -1,3 +1,5 @@
+<%# frozen_string_literal: true
+ %>
 <% if @thread.has_issue? %>
 A new discussion titled "<%= raw @thread.title %>" has been created on
 issue "<%= raw @thread.issue.title %>" for the <%= raw @group.name %> group.

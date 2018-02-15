@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SiteConfig < ActiveRecord::Base
   TILE_SERVER_TYPES = %w(layers wms).freeze
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DatePickerInput
   include Formtastic::Inputs::Base
   include Formtastic::Inputs::Base::Stringish

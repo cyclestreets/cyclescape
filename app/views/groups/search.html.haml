@@ -1,3 +1,5 @@
+-# frozen_string_literal: true
+
 %h1= t(".title", group: @group.name)
 %p= t(".main_site_link_html", group: @group.name, url: search_dashboard_url(subdomain: 'www', params: request.params.except(:action, :controller)))
 = render partial: 'shared/search'

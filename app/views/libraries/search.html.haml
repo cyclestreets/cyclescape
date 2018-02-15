@@ -1,3 +1,5 @@
+-# frozen_string_literal: true
+
 %h1= t(".title")
 - if @results.count > 0
   %p= t(".results_found", count: @results.count, query: @query)

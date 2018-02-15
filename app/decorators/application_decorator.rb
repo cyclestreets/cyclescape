@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationDecorator < Draper::Decorator
   # Set the correct authorizaton context from the model class name when
   # automatically called from permitted_to? in views.

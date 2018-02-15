@@ -1,3 +1,5 @@
+<%# frozen_string_literal: true
+ %>
 Podnět <%= raw @issue.title %> má nastávající termín:
 <%= raw @issue.deadline.to_formatted_s(:long_ordinal)  %>
 a vy jste zapsán k odběru následujícího vlákna <%= thread_url(@thread) %>

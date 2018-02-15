@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Route
   class ThreadApi < Base
     paginate paginate_settings

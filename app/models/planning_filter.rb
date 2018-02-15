@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlanningFilter < ActiveRecord::Base
   LOCAL_AUTHORITIES = [
     'Aberdeen', 'Aberdeenshire', 'Adur', 'Adur and Worthing', 'Alderney', 'Allerdale', 'Amber Valley', 'Anglesey', 'Angus', 'Antrim',

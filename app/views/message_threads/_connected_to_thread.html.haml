@@ -1,3 +1,5 @@
+-# frozen_string_literal: true
+
 %li
   - if permitted_to?(:view_profile, user)
     = link_to user_profile_path(user), class: ("leading" if leading) do

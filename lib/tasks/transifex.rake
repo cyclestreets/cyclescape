@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace 'transifex' do
   desc 'Normalise and upload the source files'
   task :push => :environment do

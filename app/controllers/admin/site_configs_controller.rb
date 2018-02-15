@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::SiteConfigsController < ApplicationController
   before_action :set_site_config, only: [:show, :edit, :update, :destroy]
   # GET /site_configs/1

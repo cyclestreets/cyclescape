@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Searchable
   def self.included(base)
     base::SEARCHABLE_COLUMNS.each do |col|

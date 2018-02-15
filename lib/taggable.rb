@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Taggable
   def self.included(base)
     base.extend(ClassMethods)

@@ -1,3 +1,5 @@
+-# frozen_string_literal: true
+
 .photo
   = image_tag @issue.photo.thumb("600x600>").url,
       alt: t(".photo_alt", caption: @issue.title)

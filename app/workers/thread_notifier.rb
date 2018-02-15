@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThreadNotifier
   class << self
     def queue

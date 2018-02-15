@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Group::MembershipsController < ApplicationController
   before_filter :load_group
   filter_access_to :all, attribute_check: true, model: Group

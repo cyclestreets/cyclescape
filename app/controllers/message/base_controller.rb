@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Message::BaseController < ApplicationController
   before_filter :thread
   before_filter :build_message, only: :create
