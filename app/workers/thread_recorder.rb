@@ -2,7 +2,7 @@
 
 class ThreadRecorder
   def self.queue
-    :thread_views
+    :medium
   end
 
   # Call +method+ with *args on ourself

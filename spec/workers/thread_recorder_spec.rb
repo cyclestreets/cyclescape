@@ -4,7 +4,7 @@ describe ThreadRecorder do
   subject { ThreadRecorder }
 
   # Queuing interface
-  it { expect(subject.queue).to eq(:thread_views) }
+  it { expect(subject.queue).to eq(:medium) }
   it { expect(subject).to respond_to(:perform) }
 
   describe '.perform' do

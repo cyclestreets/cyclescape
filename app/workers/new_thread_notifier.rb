@@ -2,7 +2,7 @@
 
 class NewThreadNotifier
   def self.queue
-    :outbound_mail
+    :mailers
   end
 
   def self.perform(method, *args)

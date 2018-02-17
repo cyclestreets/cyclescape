@@ -2,7 +2,7 @@
 
 class SearchUpdater
   def self.queue
-    :search_updates
+    :medium
   end
 
   # Call +method+ with *args on ourself

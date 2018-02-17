@@ -3,7 +3,7 @@
 class ThreadNotifier
   class << self
     def queue
-      :outbound_mail
+      :mailers
     end
 
     # Call +method+ with *args on ourself

@@ -7,7 +7,7 @@ describe NewIssueNotifier do
 
   # Queueing interface
   it { is_expected.to respond_to(:perform) }
-  it { expect(subject.queue).to eq(:outbound_mail) }
+  it { expect(subject.queue).to eq(:mailers) }
 
   describe '.new_issue' do
     it 'should queue process_new_issue with the issue ID' do

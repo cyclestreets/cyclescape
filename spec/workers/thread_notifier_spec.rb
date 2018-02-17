@@ -4,7 +4,7 @@ describe ThreadNotifier do
   subject { ThreadNotifier }
 
   # Queuing interface
-  it { expect(subject.queue).to eq(:outbound_mail) }
+  it { expect(subject.queue).to eq(:mailers) }
   it { expect(subject).to respond_to(:perform) }
 
   describe '.perform' do

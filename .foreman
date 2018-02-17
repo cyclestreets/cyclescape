@@ -1,1 +1,1 @@
-concurrency: inbound_mail=1, outbound_mail=1, resque_web=1, search_updates=1, rails_mailer=1, thread_views=1, sunspot=1
+concurrency: medium=1, mailers=1, resque_web=1, sunspot=1

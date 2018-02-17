@@ -3,7 +3,7 @@
 class ThreadAutoSubscriber
   class << self
     def queue
-      :thread_views
+      :medium
     end
 
     def perform(thread_id, changes)

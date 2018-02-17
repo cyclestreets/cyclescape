@@ -4,7 +4,7 @@ describe NewThreadNotifier do
   subject { NewThreadNotifier }
 
   # Queueing interface
-  it { expect(subject.queue).to eq(:outbound_mail) }
+  it { expect(subject.queue).to eq(:mailers) }
   it { is_expected.to respond_to(:perform) }
 
   describe '.notify_new_thread' do

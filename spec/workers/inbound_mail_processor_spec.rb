@@ -5,7 +5,7 @@ describe InboundMailProcessor do
   subject { InboundMailProcessor }
 
   it 'should be on the inbound mail queue' do
-    expect(subject.queue).to eq(:inbound_mail)
+    expect(subject.queue).to eq(:mailers)
   end
 
   it 'should respond to perform' do
