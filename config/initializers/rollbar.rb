@@ -36,6 +36,13 @@ Rollbar.configure do |config|
     'ActionController::UnknownFormat' => 'ignore',
     'ActionController::RoutingError' => 'ignore',
     'ActiveRecord::RecordNotFound' => 'ignore',
+    'AbstractController::ActionNotFound' => lambda do |error|
+      if error.to_s.start_with? == "The action 'index' could not be found for"
+        "ignore"
+      else
+        "warning"
+      end
+    end
   )
 
   # Enable asynchronous reporting (uses girl_friday or Threading if girl_friday
