@@ -37,7 +37,7 @@ class GroupProfile < ActiveRecord::Base
   end
 
   def logo_thumbnail
-    logo.thumb('330x#')
+    logo.thumb('330x>')
   end
 
   belongs_to :group, inverse_of: :profile
