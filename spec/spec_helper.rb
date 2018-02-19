@@ -11,16 +11,9 @@ require 'declarative_authorization/maintenance'
 require 'webmock/rspec'
 require 'capybara/poltergeist'
 
-Capybara.register_driver :poltergeist_local do |app|
-  Capybara::Poltergeist::Driver.new(app, { url_whitelist: "http://127.0.0.1" })
-end
-Capybara.javascript_driver = :poltergeist_local
-
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
-WebMock.enable!
-WebMock.disable_net_connect!(allow_localhost: true)
 RSpec.configure do |config|
   # == Mock Framework
   #
@@ -120,11 +113,4 @@ RSpec.configure do |config|
   end
 
   config.order = :random
-end
-
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
 end
