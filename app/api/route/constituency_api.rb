@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Route
   class ConstituencyApi < Base
     desc 'Returns consistency boundaries and names as GeoJSON'

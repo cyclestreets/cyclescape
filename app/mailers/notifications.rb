@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Notifications < ActionMailer::Base
   include MailerHelper
   default from: ->(_) { SiteConfig.first.default_email }

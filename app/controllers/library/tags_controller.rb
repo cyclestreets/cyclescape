@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Library::TagsController < ApplicationController
   def update
     @item = Library::Item.find params[:id]

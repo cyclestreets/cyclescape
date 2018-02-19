@@ -1,5 +1,3 @@
--# frozen_string_literal: true
-
 %li{class: thread.icon_class, data: {'thread-id' => thread.id}}
   .item-content
     - link_class = (@unviewed_thread_ids.include?(thread.id) ? "new primary-link" : "primary-link")

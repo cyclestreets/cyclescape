@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class DashboardsController < ApplicationController
   def show
     @user = current_user

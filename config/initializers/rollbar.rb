@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rollbar.configure do |config|
   access_token_file = Rails.root.join('config', 'rollbar')
 

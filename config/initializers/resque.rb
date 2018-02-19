@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'resque/server'
 require 'resque/failure/multiple'
 require 'resque/failure/redis'

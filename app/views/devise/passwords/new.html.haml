@@ -1,5 +1,3 @@
--# frozen_string_literal: true
-
 %h2
   = t ".forgot_password"
 = semantic_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'devise-form' }) do |f|

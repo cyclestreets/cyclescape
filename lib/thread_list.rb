@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class ThreadList
   class << self
     def recent_from_groups(groups, limit)

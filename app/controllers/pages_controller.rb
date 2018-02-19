@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PagesController < ApplicationController
   def show
     template_name = 'pages/' + File.basename(params[:page].to_s)

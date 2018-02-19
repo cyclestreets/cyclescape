@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SubdomainValidator < ActiveModel::EachValidator
   def validate_each(object, attribute, value)
     return unless value.present?

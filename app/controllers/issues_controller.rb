@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
 

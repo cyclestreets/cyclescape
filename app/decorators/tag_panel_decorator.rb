@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class TagPanelDecorator < ApplicationDecorator
   attr_accessor :context, :form_url, :cancel_url, :auth_context
 

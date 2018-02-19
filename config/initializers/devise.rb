@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 fallback_token = '6b5699eece58391acf4c14096463bbc5deb13fe03'

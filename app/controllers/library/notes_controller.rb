@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Library::NotesController < ApplicationController
   before_filter :load_note, except: [:new, :create]
   filter_access_to [:edit, :update], attribute_check: true, load_method: :load_note

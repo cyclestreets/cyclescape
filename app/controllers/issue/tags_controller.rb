@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Issue::TagsController < ApplicationController
   def update
     @issue = Issue.find params[:issue_id]

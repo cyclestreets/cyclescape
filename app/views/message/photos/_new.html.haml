@@ -1,5 +1,3 @@
--# frozen_string_literal: true
-
 #new-photo-message.pane
   = semantic_form_for PhotoMessage.new, url: thread_photos_path(@thread), html: {multipart: true} do |f|
     = f.inputs do

@@ -1,5 +1,3 @@
-<%# frozen_string_literal: true
- %>
 <%= raw @issue.title %> has an upcoming deadline <%= raw @issue.deadline.to_formatted_s(:long_ordinal)  %>
 and you are subscribed to a related thread <%= thread_url(@thread) %>
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User < ActiveRecord::Base
   ALLOWED_ROLES = %w(member admin).freeze
   SEARCHABLE_COLUMNS = %w(full_name display_name email).freeze

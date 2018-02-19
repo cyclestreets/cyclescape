@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Route
   class IssueApi < Base
     paginate paginate_settings

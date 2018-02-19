@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class InboundMailProcessor
   def self.queue
     :inbound_mail

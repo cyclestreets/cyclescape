@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MessageThread::UserPrioritiesController < MessageThread::BaseController
   respond_to :json
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module ApplicationHelper
   def tweet_button(text:, link:, size: nil, via: 'cyclescape')
     link_to "Tweet", "https://twitter.com/intent/tweet",

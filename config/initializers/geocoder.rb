@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Geocoder
   cs_api_file = Rails.root.join('config', 'cyclestreets')
   API_KEY = if cs_api_file.exist?

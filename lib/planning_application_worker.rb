@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PlanningApplicationWorker
   # Update to use
   # http://planit.org.uk/find/areas/json

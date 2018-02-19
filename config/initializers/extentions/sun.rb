@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # config/initializers/extensions/sunspot_strip_control_chars.rb
 module Sunspot
   #

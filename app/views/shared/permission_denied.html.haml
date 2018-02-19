@@ -1,5 +1,3 @@
--# frozen_string_literal: true
-
 %p= t('application.permission_denied')
 - if @group
   - if current_user.non_committee_member_of? @group

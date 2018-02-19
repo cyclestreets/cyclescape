@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Note inheritance
 class Users::PrivateMessageThreadsController < MessageThreadsController
   before_filter :load_user, only: [:create, :new]

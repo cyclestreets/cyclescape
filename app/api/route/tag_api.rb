@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Route
   class TagApi < Base
     desc 'Returns tags used on issues, library items and threads'

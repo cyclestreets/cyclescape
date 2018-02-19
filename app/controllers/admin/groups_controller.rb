@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Admin::GroupsController < ApplicationController
   def index
     @groups = Group.ordered

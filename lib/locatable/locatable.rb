@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Locatable
   def self.included(base)
     base.extend(ClassMethods)

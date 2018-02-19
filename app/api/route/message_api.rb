@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Route
   class MessageApi < Base
     paginate paginate_settings

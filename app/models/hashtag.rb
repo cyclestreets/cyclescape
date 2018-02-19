@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Hashtag < ActiveRecord::Base
   HASHTAG_REGEX = /(?<space>\s|^)(?<hash_with_tag>#(?!(?:\w+?_|_\w+?)(?:\s|$))(?<tag_name>([[:alpha:]])[a-z1-9\-_]+))/i
 

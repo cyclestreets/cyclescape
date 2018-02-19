@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PotentialMember < ActiveRecord::Base
   belongs_to :group
 

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Admin::User::LocationsController < ApplicationController
   before_filter :load_user
 

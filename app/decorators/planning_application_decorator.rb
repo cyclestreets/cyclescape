@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class PlanningApplicationDecorator < ApplicationDecorator
   alias_method :planning_application, :source
 

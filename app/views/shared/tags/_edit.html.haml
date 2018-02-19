@@ -1,5 +1,3 @@
--# frozen_string_literal: true
-
 .tag-form
   - if permitted_to?(:update, auth_context)
     = semantic_form_for context, url: form_url, remote: true, html: {class: "edit-tags", data: {type: "json"} } do |f|

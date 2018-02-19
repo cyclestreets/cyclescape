@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MessageLibrary::DocumentsController < Library::DocumentsController
   def new
     @document = Library::Document.new

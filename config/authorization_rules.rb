@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 authorization do
   role :root do
     has_omnipotence

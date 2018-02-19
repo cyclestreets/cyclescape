@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module AttributeNormaliser
   class URL
     def initialize(val)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class UserPrefObserver < ActiveRecord::Observer
   def after_save(pref)
     if pref.involve_my_groups_admin_changed?

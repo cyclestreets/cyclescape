@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MessageThreadsController < ApplicationController
   filter_access_to :show, :edit, :update, :approve, :reject, :close, :open, :destroy, attribute_check: true
 

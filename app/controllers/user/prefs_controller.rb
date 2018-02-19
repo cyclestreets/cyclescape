@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class User::PrefsController < ApplicationController
   before_filter :load_user
   filter_access_to :edit, :update, attribute_check: true, model: User

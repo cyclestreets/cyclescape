@@ -1,5 +1,3 @@
-<%# frozen_string_literal: true
- %>
 <% leader = @message.component.created_by %>
 <% leader_link = if Authorization::Engine.instance.permit?(:view_profile, object: leader, user: @subscriber)
                    "#{leader.name} (#{user_profile_url(leader)})"

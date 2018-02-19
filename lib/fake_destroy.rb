@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module FakeDestroy
   def self.included(base)
     base.instance_eval do

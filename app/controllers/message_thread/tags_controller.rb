@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MessageThread::TagsController < MessageThread::BaseController
   def update
     if @thread.update(tags_string: params[:message_thread][:tags_string])

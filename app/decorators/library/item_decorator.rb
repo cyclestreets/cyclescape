@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Library::ItemDecorator < ApplicationDecorator
   alias_method :item, :source
 

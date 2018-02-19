@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class UserLocationObserver < ActiveRecord::Observer
   def after_save(user_location)
     user = user_location.user

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class GroupMembershipObserver < ActiveRecord::Observer
   def after_save(group_membership)
     if group_membership.role_changed?

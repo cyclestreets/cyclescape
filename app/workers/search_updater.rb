@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class SearchUpdater
   def self.queue
     :search_updates

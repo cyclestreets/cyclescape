@@ -1,5 +1,3 @@
--# frozen_string_literal: true
-
 %div{ id: "subscribe_#{thread.id}"}
   - if signed_in? && current_user.subscribed_to_thread?(thread)
     .following

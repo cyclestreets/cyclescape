@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class MessageComponent < ActiveRecord::Base
   self.abstract_class = true
 

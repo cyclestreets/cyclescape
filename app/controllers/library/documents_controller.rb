@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Library::DocumentsController < ApplicationController
   before_filter :load_document, only: [:show, :download, :edit, :update, :destroy]
 

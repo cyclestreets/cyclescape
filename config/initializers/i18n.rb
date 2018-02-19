@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # config/initializers/i18n.rb
 # https://github.com/svenfuchs/i18n/issues/123
 

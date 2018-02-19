@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Note inheritance
 class Group::IssuesController < IssuesController
   filter_access_to [:edit, :update, :destroy], attribute_check: true, context: :issues
