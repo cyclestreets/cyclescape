@@ -272,6 +272,7 @@
         thread_leader_message_html: '%{creator_link} became a leader'
         cyclestreets_photo_message_html: '%{creator_link} posted a CycleStreets photo'
         thread_leader_withdrawing: Withdrawal of leader
+        map_message_html: '%{creator_link} posted a map'
     search:
       title: Search Results
   devise:
