@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Group::PrefsController < ApplicationController
   before_filter :load_group
   filter_access_to :edit, :update, attribute_check: true, model: Group

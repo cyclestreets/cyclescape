@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AdminMailer < ActionMailer::Base
   default from: ->(_) { SiteConfig.first.default_email }
 

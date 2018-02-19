@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Route
   class WardApi < Base
     desc 'Returns ward boundaries and names as GeoJSON'

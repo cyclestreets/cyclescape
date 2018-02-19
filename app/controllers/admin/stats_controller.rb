@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::StatsController < ApplicationController
   def index
     users_scope = User.all

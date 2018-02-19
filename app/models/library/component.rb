@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Base class for implementing components of Library Items.
 class Library::Component < ActiveRecord::Base
 

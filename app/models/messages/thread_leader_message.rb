@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThreadLeaderMessage < MessageComponent
   belongs_to :unleading, class_name: ThreadLeaderMessage
 

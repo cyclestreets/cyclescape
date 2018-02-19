@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NewIssueNotifier
   def self.queue
     :outbound_mail

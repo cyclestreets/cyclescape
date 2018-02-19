@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlanningApplicationsController < ApplicationController
   before_filter :set_planning_application, only: [:show, :show_uid, :geometry]
   respond_to :js, only: [:hide, :unhide]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MapsHelper
   def location_to_geojson(central_location)
     feature = if central_location.geometry_type == RGeo::Feature::Point

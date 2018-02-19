@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Route
   class GroupApi < Base
     desc 'Returns groups as a GeoJSON collection'

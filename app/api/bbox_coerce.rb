@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BboxCoerce
   def self.call(bbox_string)
     return unless bbox_string

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::PlanningFiltersController < ApplicationController
   def index
     @planning_filters = PlanningFilter.all

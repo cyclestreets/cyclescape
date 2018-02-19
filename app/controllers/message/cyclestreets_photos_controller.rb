@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Message::CyclestreetsPhotosController < Message::BaseController
   def show
     @cyclestreets_photo = CyclestreetsPhotoMessage.find params[:id]

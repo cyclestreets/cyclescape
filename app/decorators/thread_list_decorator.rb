@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThreadListDecorator < ApplicationDecorator
   alias_method :thread, :source
 
