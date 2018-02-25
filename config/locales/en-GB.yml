@@ -1048,9 +1048,6 @@
     edit_map: &edit_map
       area: area
       clear: clear
-      draw_help_1: Click Area, Route or Point
-      draw_help_2: above to start drawing
-      draw_help_3: that type of shape
       draw_area: Draw an Area
       draw_area_1: Click the points to mark an area on the map.
       draw_area_2: Double-click to complete the shape.

@@ -1,8 +1,6 @@
 %div#map.map.edit
   .map-tools-overlay
     %ul.tabs.draw-options
-      %li{style: "display: none"}
-        %a(href='#unselected')
       %li.area
         %a(href='#area')
           %span.area
@@ -17,10 +15,6 @@
           = t ".point"
 
     .panes.map-panes
-      #unselected.pane
-        %p= t ".draw_help_1"
-        %p= t ".draw_help_2"
-        %p= t ".draw_help_3"
       #area.pane.area.map-panes
         %h3= t ".draw_area"
         %p= t ".draw_area_1"
