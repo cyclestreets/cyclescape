@@ -2,7 +2,7 @@
 
 class InboundMailProcessor
   def self.queue
-    :mail
+    :mailers
   end
 
   def self.perform(mail_id)
