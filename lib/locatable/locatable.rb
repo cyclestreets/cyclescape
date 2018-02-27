@@ -95,6 +95,10 @@ module Locatable
   end
 
   def loc_json=(json_str)
+    if json_str.blank?
+      self.location = nil
+      return
+    end
     # Not clear why the factory is needed, should be taken care of by setting the srid on the factory_generator
     # but that doesn't work.
     factory = RGeo::Geos.factory(srid: 4326)
@@ -119,5 +123,4 @@ module Locatable
       RGeo::GeoJSON::Feature.new(location)
     end
   end
-
 end

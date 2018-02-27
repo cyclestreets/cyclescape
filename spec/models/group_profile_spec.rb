@@ -49,6 +49,13 @@ describe GroupProfile do
       expect(subject).to be_valid
       expect(subject.location).to be_nil
     end
+
+    it 'can have the location unset' do
+      subject.loc_json = '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
+      expect(subject.location).to_not be_nil
+      subject.loc_json = ''
+      expect(subject.location).to be_nil
+    end
   end
 
   describe 'scopes' do
