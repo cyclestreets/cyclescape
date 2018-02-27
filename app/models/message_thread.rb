@@ -301,7 +301,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def priority_for(user)
-    user_priorities.find_by(user_id: user.id)
+    user_priorities.find_by(user_id: user.id) || user_priorities.build(user: user)
   end
 
   def messages_text
