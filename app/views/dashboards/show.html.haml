@@ -66,7 +66,7 @@
                     %td.activity
                       = thread.latest_activity
                     %td.meta{id: "priority-thread-#{thread.id}"}
-                      = semantic_form_for @thread.priority_for(current_user), url: thread_user_priorities_path(thread), remote: true, html: {method: :put}  do |f|
+                      = semantic_form_for thread.priority_for(current_user), url: thread_user_priorities_path(thread), remote: true, html: {method: :put}  do |f|
                         = f.inputs do
                           = f.input :priority, as: :radio, collection: f.object.class.priorities_map, input_html: {onchange: "$('#priority-thread-#{thread.id} form').submit();"}
         - if @prioritised_threads.respond_to?(:total_pages)

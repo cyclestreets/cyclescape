@@ -67,5 +67,4 @@ class ThreadListDecorator < ApplicationDecorator
       end
     end
   end
-
 end
