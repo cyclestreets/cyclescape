@@ -1,8 +1,23 @@
 $(window).ready(function(){
   formEl = $('form.navigate-away-warning');
 
+  formEl.find(':input').each(function() {
+      $(this).data('initialValue', $(this).val());
+  });
+
   if(formEl[0]){
     var confirmOnPageExit = function (e) {
+      var isClean = true;
+
+      formEl.find(':input').each(function () {
+        if($(this).data('initialValue') !== $(this).val()){
+          isClean = false;
+        }
+      });
+      if (isClean) {
+        return
+      }
+
       // If we haven't been passed the event get the window.event
       e = e || window.event;
 
