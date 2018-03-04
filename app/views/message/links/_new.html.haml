@@ -1,5 +1,5 @@
 #new-link-message.pane
-  = semantic_form_for LinkMessage.new, url: thread_links_path(@thread) do |f|
+  = semantic_form_for LinkMessage.new, url: thread_links_path(@thread), html: { class: "navigate-away-warning" } do |f|
     = f.inputs do
       = f.input :url, as: :string
       = f.input :title

@@ -1,4 +1,4 @@
-= semantic_form_for @issue, html: {class: "guided"} do |f|
+= semantic_form_for @issue, html: {class: "guided navigate-away-warning"} do |f|
   = f.inputs do
     = f.input :title, input_html: { data: { error: t(".max_length_error_html") } }
     - hint = (f.object.retained_photo ? "#{t('.currently')} #{f.object.photo.name}" : t('formtastic.hints.issue.new.photo'))

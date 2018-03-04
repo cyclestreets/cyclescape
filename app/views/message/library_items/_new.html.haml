@@ -1,5 +1,5 @@
 #new-library-item-message.pane
-  = semantic_form_for LibraryItemMessage.new, url: thread_library_items_path(@thread) do |f|
+  = semantic_form_for LibraryItemMessage.new, url: thread_library_items_path(@thread), html: { class: "navigate-away-warning" } do |f|
     = f.inputs do
       = f.input :item
       = semantic_fields_for Message.new do |f2|
