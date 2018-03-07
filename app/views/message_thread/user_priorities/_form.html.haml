@@ -1,0 +1,3 @@
+= semantic_form_for thread.priority_for(current_user), url: thread_user_priorities_path(thread), remote: true, html: {method: :put, id: "thread-priority-#{thread.id}"}  do |f|
+  = f.inputs do
+    = f.input :priority, as: :radio, collection: f.object.class.priorities_map, input_html: {onchange: "$('form#thread-priority-#{thread.id}').submit();"}
