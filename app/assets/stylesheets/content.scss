@@ -468,7 +468,8 @@ section#user-locations {
     tr {
       border-bottom:1px solid $paneborder;
       td {
-        padding:10px 0;
+        padding:10px 5px;
+        max-width: 385px;
         &.meta {
           font: {
             style:italic;
