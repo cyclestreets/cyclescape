@@ -38,8 +38,13 @@ class SearchUpdater
   end
 
   def self.process_issue(issue_id)
+    issue = Issue.with_deleted.find(issue_id)
     Retryable.retryable(on: [IO::EAGAINWaitReadable, Net::ReadTimeout]) do
-      Sunspot.index Issue.find(issue_id)
+      if issue.deleted_at
+        Sunspot.remove issue
+      else
+        Sunspot.index issue
+      end
       Sunspot.commit true
     end
   end

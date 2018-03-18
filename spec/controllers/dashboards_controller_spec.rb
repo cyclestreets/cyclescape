@@ -3,9 +3,9 @@ require 'spec_helper'
 describe DashboardsController, type: :controller do
 
   describe 'search', solr: true do
-    let!(:public_thread)    { create(:message_thread, title: 'Public Bananas Thread') }
-    let!(:group_thread)     { create(:message_thread, :private, group: group, title: 'Group Bananas Thread') }
-    let!(:committee_thread) { create(:message_thread, :committee, group: group, title: 'Committee Bananas Thread') }
+    let!(:public_thread)    { create(:message_thread, :approved, title: 'Public Bananas Thread') }
+    let!(:group_thread)     { create(:message_thread, :approved, :private, group: group, title: 'Group Bananas Thread') }
+    let!(:committee_thread) { create(:message_thread, :approved, :committee, group: group, title: 'Committee Bananas Thread') }
     let(:group)             { create :group }
     let(:user)              { create :user }
 

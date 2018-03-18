@@ -339,7 +339,8 @@ describe MessageThread do
   describe 'approve' do
     subject  { create :message_thread, status: 'mod_queued' }
 
-    it 'should only trigger subscription on first approval' do
+    it 'should only trigger subscription on first approval', after_commit: true do
+      subject
       expect(ThreadSubscriber).to receive(:subscribe_users).once
       expect(ThreadNotifier).to receive(:notify_subscribers).once
       expect{ subject.approve! }.to change{subject.reload.approved?}.from(false).to(true)

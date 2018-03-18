@@ -94,15 +94,16 @@ class MessageThread < ActiveRecord::Base
   before_validation :set_public_token, on: :create
   after_create      :add_subscribers
   after_commit      :add_auto_subscribers
+  after_commit      :approve_related
 
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALL_ALLOWED_PRIVACY }
   validates :group, presence: true, if: ->(thread) { thread.privacy == "group" }
   validate :must_be_created_by_enabled_user, on: :create
 
-  aasm column: 'status' do
+  aasm column: 'status', requires_lock: true do
     state :mod_queued, initial: true
-    state :approved, after_enter: :approve_related
+    state :approved
 
     event :approve do
       transitions to: :approved
@@ -348,7 +349,8 @@ class MessageThread < ActiveRecord::Base
   end
 
   def approve_related
-    if aasm.from_state != :approved
+    status_change = previous_changes.fetch(:status, [])
+    if status_change.first != "approved" && status_change.last == "approved"
       ThreadSubscriber.subscribe_users self
       ThreadNotifier.notify_subscribers self, first_message
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Issue threads' do
+describe 'Issue threads', after_commit: true do
   let!(:issue) { create(:issue) }
   let(:issue_with_tags) { create(:issue, :with_tags) }
   let(:edit_thread) { 'Edit this thread' }
