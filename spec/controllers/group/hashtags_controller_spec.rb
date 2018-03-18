@@ -18,7 +18,7 @@ describe Group::HashtagsController, type: :controller do
         get :show, name: hashtag.name
       end
 
-      it { expect(subject.status).to eq(200) }
+      it { expect(subject.body).to include(thread.title) }
     end
   end
 end

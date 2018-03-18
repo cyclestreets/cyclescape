@@ -10,7 +10,7 @@ class Group::HashtagsController < ApplicationController
 
   def show
     if (hashtag = @group.hashtags.includes(messages: :thread).find_by_name(params[:name]))
-      @messages = hashtag.messages.page(params[:page])
+      @messages = hashtag.messages.ordered.page(params[:page])
 
       threads = @messages.map(&:thread).compact
       @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)

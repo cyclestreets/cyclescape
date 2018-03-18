@@ -41,7 +41,8 @@ class Message < ActiveRecord::Base
   after_commit :update_search
   acts_as_voteable
 
-  scope :recent,     -> { order('created_at DESC').limit(3) }
+  scope :recent,     -> { ordered.limit(3) }
+  scope :ordered,     -> { order(created_at: :desc) }
   scope :approved,   -> { where(status: [nil, 'approved']) }
   scope :mod_queued, -> { where(status: 'mod_queued') }
   scope :in_group,   ->(group_id) { includes(:thread).where(message_threads: {group_id: group_id}).references(:thread)}
