@@ -7,6 +7,8 @@
       %li= link_to t(".thread_results", count: @threads.total_count), "#thread-results"
       %li= link_to t(".library_results", count: @library_items.total_count), "#library-results"
       %li= link_to t(".planning_results", count: @planning_applications.total_count), "#planning-results"
+      - if defined?(@hashtags)
+        %li= link_to t(".hashtag_results", count: @hashtags.count), "#hashtag-results"
     .panes
       #issue-results.pane
         %p= t(".issues_found", count: @issues.total_count, query: @query)
@@ -41,3 +43,11 @@
           %tbody
             = render partial: 'planning_applications/planning_application', collection: @planning_applications, as: :planning_application
         = paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-results'}
+      - if defined?(@hashtags)
+        #hashtag-results.pane
+          %p= t(".hashtag_found", count: @hashtags.count, query: @query)
+          %table.dashboard-hashtags.listing
+            %tbody
+              %ul
+                - @hashtags.each do |hashtag|
+                  %li= link_to hashtag.name, hashtag_link(hashtag.group, hashtag.name)

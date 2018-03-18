@@ -9,6 +9,12 @@ class Hashtag < ActiveRecord::Base
 
   validates :name, uniqueness: { scope: :group_id }
 
+  scope :search, ->(term) do
+    return none unless term
+    term = "%#{term.strip}%"
+    where(arel_table[:name].matches(term))
+  end
+
   def self.find_by_name(name)
     return nil unless name
     find_by(name: name.downcase)

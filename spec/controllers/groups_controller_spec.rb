@@ -24,8 +24,9 @@ describe GroupsController, type: :controller do
 
     describe 'search', solr: true do
       let!(:in_group)  { create :issue_within_quahog, title: 'Inside the quahog'}
-      let!(:by_group)  { create :message_thread, title: 'By quahog', group: group}
+      let!(:by_group)  { create(:message_thread, :approved, title: 'By quahog', group: group) }
       let!(:out_group) { create :issue, title: 'Outside the quahog'}
+      let!(:hashtag) { create :hashtag, group: group, name: "quahog_and_other_text" }
 
       subject { get :search, query: 'quahog', id: group.id }
 
@@ -33,6 +34,7 @@ describe GroupsController, type: :controller do
         expect(subject.body).to include('Search Results for Quahog')
         expect(subject.body).to include(in_group.title)
         expect(subject.body).to include(by_group.title)
+        expect(subject.body).to include(hashtag.name)
         expect(subject.body).to_not include(out_group.title)
       end
     end

@@ -1029,6 +1029,7 @@
       issue_results: Issues (%{count})
       library_results: Library (%{count})
       planning_results: Planning applications (%{count})
+      hashtag_results: Hashtags (%{count})
       threads_found:
         zero: No threads found for '%{query}'.
         one: 'One thread found for ''%{query}'':'
@@ -1045,6 +1046,10 @@
         zero: No planning applications found for '%{query}'.
         one: 'One planning application found for ''%{query}'':'
         other: '%{count} planning applications found for ''%{query}'':'
+      hashtag_found:
+        zero: No hashtagss found for '%{query}'.
+        one: 'One hashtag found for ''%{query}'':'
+        other: '%{count} hashtags found for ''%{query}'':'
     edit_map: &edit_map
       area: area
       clear: clear

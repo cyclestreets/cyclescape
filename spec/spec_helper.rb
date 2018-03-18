@@ -79,10 +79,19 @@ RSpec.configure do |config|
     # Clear ActionMailer deliveries
     ActionMailer::Base.deliveries.clear
 
-    SunspotTest.stub unless ex.metadata[:solr]
+    resque_inline = Resque.inline
+    if ex.metadata[:solr]
+      Resque.inline = true
+      SunspotTest.unstub
+    else
+      SunspotTest.stub
+    end
 
-    ex.run
+    TestAfterCommit.with_commits(ex.metadata[:after_commit] || ex.metadata[:solr]) do
+      ex.run
+    end
 
+    Resque.inline = resque_inline
     DatabaseCleaner.clean
 
     FactoryGirl.create(:site_config) unless SiteConfig.exists?
@@ -106,11 +115,5 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include AbstractController::Translation
   config.include AttributeNormalizer::RSpecMatcher, type: :model
-  config.around(:example) do |example|
-    TestAfterCommit.with_commits(example.metadata[:after_commit]) do
-      example.run
-    end
-  end
-
   config.order = :random
 end

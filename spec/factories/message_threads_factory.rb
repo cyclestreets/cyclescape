@@ -33,6 +33,11 @@ FactoryGirl.define do
       tags { FactoryGirl.build_list(:tag, 2) }
     end
 
+    trait :approved do
+      status :mod_queued
+      after(:create) { |mt| mt.approve! }
+    end
+
     factory :group_message_thread, traits: [:belongs_to_group]
     factory :issue_message_thread, traits: [:belongs_to_issue]
     factory :group_private_message_thread, traits: [:belongs_to_group, :private]

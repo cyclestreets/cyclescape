@@ -102,7 +102,7 @@ class MessageThread < ActiveRecord::Base
 
   aasm column: 'status' do
     state :mod_queued, initial: true
-    state :approved, before_enter: :approve_related
+    state :approved, after_enter: :approve_related
 
     event :approve do
       transitions to: :approved
@@ -348,7 +348,7 @@ class MessageThread < ActiveRecord::Base
   end
 
   def approve_related
-    unless approved?
+    if aasm.from_state != :approved
       ThreadSubscriber.subscribe_users self
       ThreadNotifier.notify_subscribers self, first_message
 
