@@ -1,4 +1,4 @@
 - if signed_in?
   %section.priority-panel.box
     %h2= t ".thread_priority"
-    = render partial: "message_thread/user_priorities/form", locals: { thread: @thread }
+    = render "message_thread/user_priorities/form", thread: @thread, collection_type: :radio
