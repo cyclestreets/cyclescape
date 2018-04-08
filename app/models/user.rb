@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   has_many :messages, foreign_key: 'created_by_id'
   has_many :thread_subscriptions, dependent: :destroy do
     def to(thread)
-      where('thread_id = ?', thread).order(deleted_at: :desc).first
+      where(thread: thread).order(deleted_at: :desc).first
     end
   end
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?

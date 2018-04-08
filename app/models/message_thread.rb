@@ -194,13 +194,11 @@ class MessageThread < ActiveRecord::Base
   end
 
   def add_subscriber(user)
-    found = user.thread_subscriptions.to(self)
-    if found
-      # Reset the subscription
-      found.undelete!
-      found
-    else
-      subscriptions.create( user: user )
+    return true if user.thread_subscriptions.to(self).try(:undelete!)
+    begin
+      subscriptions.find_or_create_by!(user: user, deleted_at: nil)
+    rescue ActiveRecord::RecordNotUnique
+      retry
     end
   end
 
@@ -358,8 +356,8 @@ class MessageThread < ActiveRecord::Base
   end
 
   def add_subscribers
-    subscriptions.create( user: created_by )
-    subscriptions.create( user: user ) if user
+    add_subscriber(created_by)
+    add_subscriber(user) if user
   end
 
   def add_auto_subscribers

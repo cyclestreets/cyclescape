@@ -19,11 +19,7 @@ class ThreadSubscriber
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
       if Authorization::Engine.instance.permit? :show,  object: thread, user: member, user_roles: [:member, :guest]
-        begin
-          thread.subscriptions.find_or_create_by(user: member)
-        rescue ActiveRecord::RecordNotUnique
-          retry
-        end
+        thread.add_subscriber(member)
       end
     end
   end
@@ -32,12 +28,14 @@ class ThreadSubscriber
     buffered_location = thread.issue.location.buffer(Geo::USER_LOCATIONS_BUFFER)
 
     locations = UserLocation.intersects(buffered_location).
+        includes(user: :prefs).
         joins(user: :prefs).
         where(user_prefs: { involve_my_locations: 'subscribe' }, users: { disabled_at: nil, deleted_at: nil })
 
     locations.each do |loc|
-      if Authorization::Engine.instance.permit? :show,  object: thread, user: loc.user, user_roles: [:member, :guest]
-        thread.subscriptions.create( user: loc.user ) unless loc.user.subscribed_to_thread?(thread)
+      user = loc.user
+      if Authorization::Engine.instance.permit? :show, object: thread, user: user, user_roles: [:member, :guest]
+        thread.add_subscriber(user)
       end
     end
   end

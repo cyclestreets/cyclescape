@@ -7,6 +7,10 @@ class ThreadListDecorator < ApplicationDecorator
     :message_threads
   end
 
+  def self.base_class
+    MessageThread.base_class
+  end
+
   MESSAGE_ICON_MAP = {
     'photo_message' => 'image',
     'link_message' => 'link',

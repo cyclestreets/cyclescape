@@ -18,14 +18,10 @@ describe 'Thread subscriptions' do
 
       it 'should subscribe the user to the thread' do
         subscribe_button.click
+        expect(page).to have_content(I18n.t('.message_threads.subscribe_panel.subscribed'))
         expect(page).to have_content('You are now subscribed to this thread')
         expect(current_user.thread_subscriptions.count).to eq(1)
         expect(current_user.thread_subscriptions.first.thread).to eq(thread)
-      end
-
-      it 'should state I am subscribed' do
-        subscribe_button.click
-        expect(page).to have_content(I18n.t('.message_threads.subscribe_panel.subscribed'))
       end
 
       it 'should not send me an email when I post' do
