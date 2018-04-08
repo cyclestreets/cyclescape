@@ -24,7 +24,7 @@ class UserLocation < ActiveRecord::Base
   belongs_to :category, class_name: 'LocationCategory'
 
   validates :location, presence: true
-  validates :user, presence: true
+  validates :user, presence: true, uniqueness: true
 
   def buffered
     if (buffered_loc = location.buffer(Geo::USER_LOCATIONS_BUFFER).union(location))
