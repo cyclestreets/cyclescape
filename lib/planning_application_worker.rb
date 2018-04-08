@@ -16,21 +16,39 @@ class PlanningApplicationWorker
   private
 
   def conn
-    @conn ||= Excon.new(Rails.application.config.planning_applications_url, headers: { 'Accept' => Mime::JSON.to_s, 'Content-Type' => Mime::JSON.to_s })
+    @conn ||=
+      Excon.new(
+        Rails.application.config.planning_applications_url,
+        headers: { 'Accept' => Mime::JSON.to_s, 'Content-Type' => Mime::JSON.to_s },
+        expects: 200
+      )
+  end
+
+  def ratelimit
+    @ratelimit ||= Ratelimit.new("planning_applications")
+  end
+
+  def conn_request(req)
+    Retryable.retryable(tries: 3, on: [JSON::ParserError, Excon::Error]) do
+      ratelimit.exec_within_threshold "req", threshold: 10, interval: 60 do
+        ratelimit.add("req")
+        JSON.load(conn.request(req).body)
+      end
+    end
   end
 
   def get_authorty(authority)
-    total = JSON.load(conn.request(generate_authority_requests(authority)).body)
+    total = conn_request(generate_authority_requests(authority))
     if total['count'] == 500
       multi_total = (0..2).map do |days_offset|
-        JSON.load(conn.request(generate_authority_requests(authority, days_offset)).body)
+        conn_request(generate_authority_requests(authority, days_offset))
       end
       multi_total.map{ |resp| resp['records']}
     else
       total['records']
     end
-  rescue JSON::ParserError => e
-    Rollbar.debug(e, "Parsing issue with authority #{authority}")
+  rescue => e
+    Rollbar.debug(e, "Issue with authority #{authority}")
     []
   end
 

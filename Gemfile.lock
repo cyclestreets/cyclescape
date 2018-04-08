@@ -334,6 +334,9 @@ GEM
     rainbow (3.0.0)
     rake (11.3.0)
     rakismet (1.5.4)
+    ratelimit (1.0.3)
+      redis (>= 2.0.0)
+      redis-namespace (>= 1.0.0)
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
@@ -552,6 +555,7 @@ DEPENDENCIES
   rails-observers
   rails_autolink
   rakismet
+  ratelimit
   redis-rails
   resque
   resque-rollbar

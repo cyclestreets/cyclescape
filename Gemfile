@@ -24,6 +24,7 @@ gem 'leaflet-rails', "= 0.7.7"
 gem 'map_layers'
 gem 'rails-jquery-autocomplete'
 gem 'rails_autolink'
+gem 'ratelimit'
 gem 'retryable'
 gem 'rgeo-geojson'
 # gem 'jquery-turbolinks'
