@@ -264,9 +264,8 @@ describe MessageThread do
 
     it 'should re-open a closed thread' do
       thread.update_column(:closed, true)
-      expect(thread).to receive(:open!)
-      expect(thread).to receive(:actioned_by=)
       thread.add_messages_from_email!(mail, nil)
+      expect(thread.reload.closed).to eq(false)
     end
 
     it 'should add the in reply to' do

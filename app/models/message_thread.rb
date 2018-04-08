@@ -221,10 +221,7 @@ class MessageThread < ActiveRecord::Base
     parsed = EmailReplyParser.read(text)
     stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")
 
-    if closed
-      self.actioned_by = user
-      open!
-    end
+    open_by!(user) if closed
     messages.create!(body: stripped, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
 
     # Attachments
