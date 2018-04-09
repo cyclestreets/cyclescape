@@ -92,7 +92,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_page_description(description = nil)
-    @page_description = description
+    @page_description = ActionView::Base.full_sanitizer.sanitize(description, tags: [])
   end
 
   def page_description
