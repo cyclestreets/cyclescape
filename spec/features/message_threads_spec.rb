@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Message threads', type: :feature do
   let(:thread) { create(:message_thread_with_messages, :with_tags) }
-  let(:threads) { create_list(:message_thread_with_messages, 5) }
+  let!(:threads) { create_list(:message_thread_with_messages, 3) }
   let(:censor_message) { 'Censor this message' }
   let(:delete_thread) { 'Delete this thread' }
   let(:edit_thread) { 'Edit this thread' }
@@ -22,31 +22,25 @@ describe 'Message threads', type: :feature do
     end
 
     context 'show' do
+      let(:thread) { threads.first }
+      let(:messages) { thread.messages }
+
       before do
         threads
-        @thread = threads.first
-        @messages = @thread.messages
         visit threads_path
-        click_link @thread.title
+        click_link thread.title
       end
 
       it 'should show the thread title' do
         within('.thread h1') do
-          expect(page).to have_content(@thread.title)
+          expect(page).to have_content(thread.title)
         end
       end
 
       it 'should show messages on a public thread' do
-        @messages.each do |message|
+        messages.each do |message|
           expect(page).to have_content(message.body)
-        end
-      end
-
-      it 'should show the authors of messages' do
-        @messages.each do |message|
-          within(dom_id_selector(message)) do
-            expect(page).to have_content(message.created_by.name)
-          end
+          expect(page).to have_content(message.created_by.name)
         end
       end
 
@@ -55,7 +49,7 @@ describe 'Message threads', type: :feature do
       end
 
       it 'should set the page title' do
-        expect(page).to have_title(@thread.title)
+        expect(page).to have_title(thread.title)
       end
 
       it 'should disable the message input' do

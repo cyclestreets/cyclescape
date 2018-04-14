@@ -1,5 +1,6 @@
 - component = message.component
-.deadline{id: dom_id(component)}
+.header-fix{id: dom_id(component)}
+.deadline
   - deadline = component.formatted_deadline
   %h3= l deadline, format: :long_deadline
   = render partial: "shared/deadline", locals: {deadline: deadline}

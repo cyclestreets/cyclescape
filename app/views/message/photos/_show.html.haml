@@ -1,4 +1,5 @@
-%figure.photo{id: dom_id(message.component)}
+.header-fix{id: dom_id(message.component)}
+%figure.photo
   = link_to thread_photo_path(message.thread, message.component), rel: "#overlay" do
     = image_tag message.component.photo_preview.url,
         alt: t(".photo_alt", caption: message.component.caption)
