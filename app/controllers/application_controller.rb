@@ -172,7 +172,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_config
-    @site_config = Rails.cache.fetch(SiteConfig::KEY, expires: 1.week) do
+    @site_config = Rails.cache.fetch(SiteConfig::KEY, expires_in: 1.week) do
       SiteConfig.first.to_struct
     end
   end

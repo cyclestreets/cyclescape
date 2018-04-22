@@ -46,7 +46,7 @@ class Tag < ActiveRecord::Base
     end
 
     def top_tags(limit = 50)
-      Rails.cache.fetch("Tag.top_tags", expires: 1.day) do
+      Rails.cache.fetch("Tag.top_tags", expires_in: 1.day) do
         Tag.top_tags_fresh(500).to_a
       end.first(limit)
     end

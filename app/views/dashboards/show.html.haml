@@ -115,7 +115,7 @@
           - else
             %p= t ".planning_applications_introduction_html", location_link: link_to(t(".location"), current_user_locations_path)
 
-            - if @planning_applications.respond_to?(:total_pages)
+            - if @planning_applications.object.respond_to?(:total_pages)
               = paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}
             %br
             %br
