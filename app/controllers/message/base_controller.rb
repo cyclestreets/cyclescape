@@ -54,6 +54,7 @@ class Message::BaseController < ApplicationController
     component.thread = thread
     component.message = message
     component.created_by = current_user
+    component.action_message_ids = params[required_param][:action_message_ids]
     component
   end
 end

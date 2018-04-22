@@ -11,6 +11,7 @@ module MessageThreadsHelper
     'StreetViewMessage' => 'street_views',
     'ThreadLeaderMessage' => 'thread_leaders',
     'MapMessage' => 'maps',
+    'ActionMessage' => 'actions',
   }
 
   MESSAGE_LIBRARY_MAP = {

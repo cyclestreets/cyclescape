@@ -10,6 +10,7 @@
     %br/
     .streetViewPano{id: 'newStreetViewMap'}
     %br/
+    = render "shared/actions", f: f, thread: @thread
     = f.actions do
       = f.action :submit, button_html: message_button_html
 

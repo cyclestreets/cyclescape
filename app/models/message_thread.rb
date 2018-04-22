@@ -59,6 +59,7 @@ class MessageThread < ActiveRecord::Base
   has_many :message_thread_closes, dependent: :destroy
   has_many :closed_by, through: :message_thread_closes, source: :user
   has_many :map_messages, foreign_key: :thread_id, inverse_of: :thread
+  has_many :action_messages, foreign_key: :thread_id, inverse_of: :thread
   has_many :deadline_messages, foreign_key: :thread_id, inverse_of: :thread
   has_many :thread_leader_messages, -> { active }, dependent: :destroy, foreign_key: :thread_id
   has_many :leaders, through: :thread_leader_messages, source: :created_by, inverse_of: :leading_threads

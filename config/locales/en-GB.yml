@@ -273,6 +273,7 @@
         cyclestreets_photo_message_html: '%{creator_link} posted a CycleStreets photo'
         thread_leader_withdrawing: Withdrawal of leader
         map_message_html: '%{creator_link} posted a map'
+        action_message_html: '%{creator_link} created a call to action'
     search:
       title: Search Results
   devise:
@@ -913,6 +914,14 @@
       create:
         failure: Map could not be created
         success: Map created
+    actions:
+      new:
+        submit: Add call to action
+      create:
+        failure: Call to action could not be created
+        success: Call to action created
+      show:
+        call_to_action: "Call to action added:"
     documents:
       create:
         failure: Could not add attachment
@@ -1000,6 +1009,7 @@
       photo_message: Photo
       cyclestreets_photo_message: CycleStreets photo
       thread_leader_message: Thread leader
+      action_message: Call to action
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
       text_message: Text
       street_view_message: Street view
@@ -1023,6 +1033,10 @@
     too_large: The image you uploaded is too large - it must be less than 3MB
     wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
   shared:
+    actions:
+      resolve_action: "Resolve outstanding actions:"
+    resolves_actions:
+      resolves_actions: "Resolves actions:"
     search:
       no_results_found: No results found for '%{query}'
       thread_results: Threads (%{count})
@@ -1164,6 +1178,8 @@
       type: a leader
       new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
       removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
+    new_action_message:
+      type: a call to action
     footer:
       thread: "%{application_name} discussion thread"
       unsubscribe: You can stop following this thread by visiting

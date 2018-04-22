@@ -114,6 +114,7 @@ Rails.application.routes.draw do
       resources :documents, only: [:create, :show]
       resources :thread_leaders, only: [:create]
       resources :maps, only: [:create]
+      resources :actions, only: [:create]
     end
 
     scope module: :message_thread do

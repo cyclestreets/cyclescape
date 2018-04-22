@@ -1,0 +1,7 @@
+#new-action-message.pane
+  = semantic_form_for ActionMessage.new, url: thread_actions_path(@thread), html: { class: "navigate-away-warning" } do |f|
+    = f.inputs do
+      = f.input :description
+    = f.actions do
+      = f.action :submit, label: t(".submit"), button_html: message_button_html
+

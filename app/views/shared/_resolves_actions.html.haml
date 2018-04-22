@@ -1,0 +1,4 @@
+= t(".resolves_actions")
+%ul{style: "padding-left: 12px"}
+  - actions.each do |action|
+    %li{style: "list-style-type: disc"}= link_to action.description, anchor: dom_id(action)

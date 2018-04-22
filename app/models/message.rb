@@ -32,6 +32,7 @@ class Message < ActiveRecord::Base
   belongs_to :in_reply_to, class_name: 'Message'
   has_many :hashtaggings
   has_many :hashtags, through: :hashtaggings
+  has_many :action_messages
 
   before_validation :init_blank_body, on: :create, if: :component
   before_validation :set_public_token, on: :create
