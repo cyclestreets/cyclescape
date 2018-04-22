@@ -5,11 +5,11 @@ class Message::ThreadLeadersController < Message::BaseController
 
   protected
 
-  def component
-    @component ||= ThreadLeaderMessage.new permitted_params
+  def resource_class
+    ThreadLeaderMessage
   end
 
-  def permitted_params
-    params.require(:thread_leader_message).permit :description, :unleading_id
+  def permit_params
+    [:description, :unleading_id]
   end
 end

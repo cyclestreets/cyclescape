@@ -4,12 +4,12 @@ class Message::LibraryItemsController < Message::BaseController
   # NB I can't see if this is cntrl is actually used...
   protected
 
-  def component
-    @component ||= LibraryItemMessage.new permitted_params
+  def resource_class
+    LibraryItemMessage
   end
 
-  def permitted_params
-    params.require(:library_item_message).permit :library_item_id
+  def permit_params
+    [:library_item_id]
   end
 
   def message

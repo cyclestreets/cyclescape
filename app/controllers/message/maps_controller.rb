@@ -3,11 +3,11 @@
 class Message::MapsController < Message::BaseController
   protected
 
-  def component
-    @component ||= MapMessage.new(permitted_params)
+  def resource_class
+    MapMessage
   end
 
-  def permitted_params
-    params.require(:map_message).permit :caption, :loc_json
+  def permit_params
+    [:caption, :loc_json]
   end
 end

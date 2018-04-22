@@ -3,11 +3,11 @@
 class Message::LinksController < Message::BaseController
   protected
 
-  def component
-    @component ||= LinkMessage.new permitted_params
+  def resource_class
+    LinkMessage
   end
 
-  def permitted_params
-    params.require(:link_message).permit :url, :title, :description
+  def permit_params
+    [:url, :title, :description]
   end
 end

@@ -2,16 +2,16 @@
 
 class Message::PhotosController < Message::BaseController
   def show
-    @photo = PhotoMessage.find params[:id]
+    @photo = resource_class.find params[:id]
   end
 
   protected
 
-  def component
-    @component ||= PhotoMessage.new permitted_params
+  def resource_class
+    PhotoMessage
   end
 
-  def permitted_params
-    params.require(:photo_message).permit :photo, :retained_photo, :caption
+  def permit_params
+    [:photo, :retained_photo, :caption]
   end
 end
