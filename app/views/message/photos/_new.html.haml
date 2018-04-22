@@ -4,5 +4,6 @@
       = f.input :photo, as: :file, input_html: { accept: 'image/*' }
       = f.input :retained_photo, as: :hidden
       = f.input :caption
+      = render "shared/actions", f: f, thread: @thread
     = f.actions do
       = f.action :submit, button_html: message_button_html

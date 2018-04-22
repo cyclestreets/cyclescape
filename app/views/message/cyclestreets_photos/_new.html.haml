@@ -14,5 +14,6 @@
         = label_tag t('.image'), nil, class: 'label'
         %span{id: 'image-preview'}
 
+      = render "shared/actions", f: f, thread: @thread
     = f.actions do
       = f.action :submit, message_button_html
