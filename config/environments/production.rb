@@ -30,6 +30,13 @@ Rails.application.configure do
 
   config.log_level = :info
   config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 'weekly')
+  config.lograge.enabled = true
+  config.lograge.custom_options = lambda do |event|
+    exceptions = %w(controller action format id)
+    {
+      params: event.payload[:params].except(*exceptions)
+    }
+  end
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new

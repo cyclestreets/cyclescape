@@ -77,6 +77,7 @@ gem 'progress_bar'
 gem 'tagsinput-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'will-paginate-i18n'
+gem 'lograge'
 
 group :development do
   gem 'annotate', '>= 2.5.0', require: false
