@@ -22,14 +22,8 @@ class DashboardsController < ApplicationController
       order_by_latest_message.includes(:issue, latest_message: [:component, :created_by]).
       page(params[:prioritised_threads_page]).per(20)
     @prioritised_threads = ThreadListDecorator.decorate_collection(prioritised_threads)
-    time = Time.current
-    # Expire the planning_applications ids at 4am tomorrow
-    planning_ids =
-      Rails.cache.fetch("pa:#{current_user.id}", expires_in: (time.tomorrow.change(hour: 4) - time)) do
-        current_user.planning_applications_near_locations.ordered.not_hidden.relevant.ids.to_a
-      end
     @planning_applications = PlanningApplicationDecorator.decorate_collection(
-      PlanningApplication.where(id: planning_ids).page(params[:planning_page]).per(10).includes(:issue, :users)
+      current_user.planning_applications_near_locations.ordered.page(params[:planning_page]).per(10).includes(:issue, :users)
     )
   end
 

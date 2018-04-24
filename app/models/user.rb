@@ -176,11 +176,19 @@ class User < ActiveRecord::Base
 
   # Returns issues that are within a small distance of their user_locations
   def issues_near_locations
-    Issue.intersects(buffered_location)
+    issue_ids = Rails.cache.fetch("issues_near:#{id}", expires_in: 10.minutes) do
+      Issue.intersects(buffered_location).ids
+    end
+    Issue.where(id: issue_ids)
   end
 
   def planning_applications_near_locations
-    PlanningApplication.intersects(buffered_location)
+    time = Time.current
+    # Expire the planning_applications ids at 4am tomorrow
+    planning_ids = Rails.cache.fetch("planning_near:#{id}", expires_in: (time.tomorrow.change(hour: 4) - time)) do
+      PlanningApplication.intersects(buffered_location).not_hidden.relevant.ids
+    end
+    PlanningApplication.where(id: planning_ids)
   end
 
   def start_location
