@@ -55,6 +55,10 @@ class MessagesController < ApplicationController
     render partial: "shared/vote_change", locals: { resource: message }
   end
 
+  def vote_detail
+    render partial: "shared/vote_detail", locals: { resource: message }
+  end
+
   protected
 
   def permitted_params
@@ -68,5 +72,4 @@ class MessagesController < ApplicationController
   def thread
     @thread ||= MessageThread.find(params[:thread_id])
   end
-
 end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :issues, opts do
       member do
         get :geometry
+        get :vote_detail
         put :vote_up, :vote_clear
       end
       get :all_geometries, on: :collection
@@ -99,6 +100,7 @@ Rails.application.routes.draw do
       resources :documents, controller: 'message_library/documents'
       resources :notes, controller: 'message_library/notes'
       member do
+        get :vote_detail
         put :approve, :reject, :censor, :vote_up, :vote_clear
       end
     end

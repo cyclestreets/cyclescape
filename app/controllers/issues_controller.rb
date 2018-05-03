@@ -96,6 +96,10 @@ class IssuesController < ApplicationController
     render partial: "shared/vote_change", locals: { resource: @issue }
   end
 
+  def vote_detail
+    render partial: "shared/vote_detail", locals: { resource: issue }
+  end
+
   protected
 
   def geom_issue_scope

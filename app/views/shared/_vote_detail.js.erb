@@ -1,0 +1,7 @@
+<% if (current_user && current_user.voted_for?(resource)) %>
+  $('#voteable_<%= resource.id  %> .voted').show();
+<% else %>
+  $('#voteable_<%= resource.id  %> .not-voted').show();
+<% end %>
+$('#voteable_<%= resource.id  %> .vote-count').prop('title', '<%= voter_names(resource) %>');
+$('#voteable_<%= resource.id  %> .tally').text('<%= resource.plusminus %>');

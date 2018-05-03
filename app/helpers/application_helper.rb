@@ -70,17 +70,19 @@ module ApplicationHelper
     time_tag(date_or_time, title: l(date_or_time, format: :long), &block)
   end
 
-  def vote_up_clear_link(resource)
+  def vote_link(resource)
     case resource
     when Message
       {
         clear: vote_clear_thread_message_path(resource.thread, resource),
-        up: vote_up_thread_message_path(resource.thread, resource)
+        up: vote_up_thread_message_path(resource.thread, resource),
+        details: vote_detail_thread_message_path(resource.thread, resource)
       }
     when Issue
       {
         clear: vote_clear_issue_path(resource),
-        up: vote_up_issue_path(resource)
+        up: vote_up_issue_path(resource),
+        details: vote_detail_issue_path(resource)
       }
     end
   end

@@ -1,4 +1,12 @@
 $(document).ready(function() {
+  $(".votes").each(function() {
+    var voteDetailUrl = $(this).data().url;
+    $.ajax({
+      type: 'GET',
+      url: voteDetailUrl,
+    });
+  })
+
   if ($('.user_location #user_location').length > 0) {
     var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation, userLocationPlaceholder,
       destLocation, constituencyLabelsEl, areaAroundEl, routeEl, wardLabelsEl, groupLabelsEl, userLocationEl,
