@@ -52,7 +52,7 @@ module Cyclescape
     config.assets.paths << "node_modules"
 
     # Set cache storage
-    config.cache_store = :redis_store
+    config.cache_store = :redis_store, "redis://localhost:6379/1",  { expires_in: 1.week }
 
     # ActionMailer default URL options
     config.action_mailer.default_url_options = { host: 'www.cyclescape.org' }
