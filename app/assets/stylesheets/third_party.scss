@@ -102,3 +102,7 @@
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
+
+.formtastic input, .formtastic button, .formtastic textarea {
+  font-family: inherit;
+}
