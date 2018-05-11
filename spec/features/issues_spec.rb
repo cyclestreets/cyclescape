@@ -377,7 +377,7 @@ describe 'Issues' do
         visit issue_path(issue)
       end
 
-      it 'should show the vote count' do
+      it 'should show the vote count', js: true do
         within('.votes') do
           expect(page).to have_content('1')
         end
@@ -385,7 +385,7 @@ describe 'Issues' do
 
       it 'should not allow you to vote' do
         expect(page).to have_content('Please sign in to vote')
-        find(:css, '.vote-count:not(.hide)').click
+        find(:css, '.vote-count.unvoted').click
         expect(page).to have_content('You need to sign in or sign up before continuing.')
         expect(issue.votes_count).to eql(1)
       end

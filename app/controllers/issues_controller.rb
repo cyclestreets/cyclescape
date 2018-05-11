@@ -88,12 +88,12 @@ class IssuesController < ApplicationController
 
   def vote_up
     current_user.vote_exclusively_for(issue) unless current_user.voted_for?(issue)
-    render partial: "shared/vote_change", locals: { resource: @issue }
+    render partial: "shared/vote_detail", locals: { resource: @issue }
   end
 
   def vote_clear
     current_user.clear_votes issue
-    render partial: "shared/vote_change", locals: { resource: @issue }
+    render partial: "shared/vote_detail", locals: { resource: @issue }
   end
 
   def vote_detail
