@@ -2,6 +2,7 @@
 
 class MessagesController < ApplicationController
   filter_access_to :approve, :reject, attribute_check: true
+  protect_from_forgery except: :vote_detail
 
   def create
     @message = thread.messages.build permitted_params.merge(created_by: current_user)

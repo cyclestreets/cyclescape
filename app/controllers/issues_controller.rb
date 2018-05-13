@@ -2,6 +2,7 @@
 
 class IssuesController < ApplicationController
   filter_access_to [:edit, :update, :destroy], attribute_check: true
+  protect_from_forgery except: :vote_detail
 
   def index
     issues = Issue.preloaded.by_most_recent.page(params[:page])
