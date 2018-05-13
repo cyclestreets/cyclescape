@@ -12,10 +12,11 @@ body {
 
 // type
 body {
-  font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:  'Helvetica', 'Arial', sans-serif;
   color: $lightblack;
   font-size: 100%;
 }
+
 p, h1, h2, h3 {
   margin-bottom: 15px;
   line-height: 20px;
@@ -152,13 +153,6 @@ input.btn-grey, .btn-grey {
 .btn-green, .formtastic input.btn-green {
   @include button-text-green;
 }
-
-@-moz-document url-prefix() {
-  .btn-green, .formtastic input.btn-green {
-    font-size: 10px;
-  }
-}
-
 .btn-big-green, .formtastic input.btn-big-green {
   @include button-text-green;
   @include inline-block;
