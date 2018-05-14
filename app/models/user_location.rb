@@ -27,10 +27,13 @@ class UserLocation < ActiveRecord::Base
   validates :user, presence: true, uniqueness: true
 
   def buffered
-    if (buffered_loc = location.buffer(Geo::USER_LOCATIONS_BUFFER).union(location))
-      buffered_loc
+    buffered_loc = location.buffer(Geo::USER_LOCATIONS_BUFFER)
+    union_self = buffered_loc.union(location)
+    debugger
+    if union_self && !union_self.try(:is_empty?)
+      union_self
     else
-      location.buffer(Geo::USER_LOCATIONS_BUFFER)
+      buffered_loc
     end
   end
 end
