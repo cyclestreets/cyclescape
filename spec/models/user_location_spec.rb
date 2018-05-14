@@ -69,6 +69,13 @@ describe UserLocation do
       expect(subject.buffered.area).to be > subject.location.area
     end
 
+    it "makes location's valid" do
+      subject = build :user_location, location: odd_polygon
+      expect(subject.location).to_not be_valid
+      subject.save
+      expect(subject.reload.location).to be_valid
+    end
+
     it "works on strange geom collections" do
       subject = build :user_location, location: strange_geom_collection
       expect(subject.buffered.buffer(0.000001).area).to be > subject.location.buffer(0.000001).area

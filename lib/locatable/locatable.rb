@@ -1,4 +1,14 @@
 module Locatable
+  extend ActiveSupport::Concern
+
+  included do
+    after_create :make_location_valid
+  end
+
+  def make_location_valid
+    self.class.where(id: id).update_all("location = ST_MakeValid(location)")
+  end
+
   def self.included(base)
     base.extend(ClassMethods)
   end

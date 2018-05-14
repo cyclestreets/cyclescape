@@ -29,7 +29,6 @@ class UserLocation < ActiveRecord::Base
   def buffered
     buffered_loc = location.buffer(Geo::USER_LOCATIONS_BUFFER)
     union_self = buffered_loc.union(location)
-    debugger
     if union_self && !union_self.try(:is_empty?)
       union_self
     else
