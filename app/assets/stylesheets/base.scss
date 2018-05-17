@@ -12,11 +12,10 @@ body {
 
 // type
 body {
-  font-family:  'Helvetica', 'Arial', sans-serif;
+  font-family: "Liberation Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: $lightblack;
   font-size: 100%;
 }
-
 p, h1, h2, h3 {
   margin-bottom: 15px;
   line-height: 20px;
@@ -153,6 +152,7 @@ input.btn-grey, .btn-grey {
 .btn-green, .formtastic input.btn-green {
   @include button-text-green;
 }
+
 .btn-big-green, .formtastic input.btn-big-green {
   @include button-text-green;
   @include inline-block;
