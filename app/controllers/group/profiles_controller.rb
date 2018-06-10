@@ -14,11 +14,13 @@ class Group::ProfilesController < ApplicationController
   end
 
   def update
-    if @group.profile.update permitted_params
+    @profile.base64 = params[:group_profile][:base64]
+    @profile.picture = @profile.to_png
+    if @profile.update permitted_params
       set_flash_message :success
       redirect_to action: :show
     else
-      @start_location = @group.profile.location || SiteConfig.first.nowhere_location
+      @start_location = @profile.location || SiteConfig.first.nowhere_location
       render :edit
     end
   end

@@ -25,6 +25,19 @@ class GroupProfile < ActiveRecord::Base
   dragonfly_accessor :picture
   dragonfly_accessor :logo
 
+  attr_accessor :base64
+
+  def to_png
+    return nil if base64.blank?
+    encoded_image = base64.split(",")[1]
+    decoded_image = Base64.decode64(encoded_image)
+    my_image = Tempfile.new "myimage"
+    my_image.binmode
+    my_image.write(decoded_image)
+    my_image.close
+    my_image
+  end
+
   scope :with_location,   -> { where.not(location: nil) }
   scope :ordered,         -> { order(created_at: :desc) }
   scope :local,           -> { where("ST_AREA(location) < ?", MAX_LOCAL_AREA) }
