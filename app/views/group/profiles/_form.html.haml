@@ -1,3 +1,5 @@
+.image-edit-upload{"data-image-edit" => { base64El: "base64" }.to_json }
+
 = semantic_form_for @profile, url: [@profile.group, :profile] do |f|
   = f.inputs do
     = f.input :description
@@ -5,10 +7,17 @@
     %li.input
       = f.semantic_errors :location
       = render partial: "shared/edit_map", locals: { resource: @profile, location: @profile.location || @start_location }
-    = f.input :picture, as: :file
+    %li.file.input.optional
+      %label.label{for: "picture-file"} Picture
+      %input#picture-file{type: "file"}
+      %p.inline-hints To be displayed on the group page, ideally 330x192 pixels
+    %li
+      #picture-preview
+    %li
     = f.input :retained_picture, as: :hidden
     = f.input :logo, as: :file
     = f.input :retained_logo, as: :hidden
+    = f.input :base64, as: :hidden
     = f.input :joining_instructions, hint: t("formtastic.hints.group_profile.joining_instructions", application_name: @site_config.application_name)
     = f.input :new_user_email, placeholder: t("formtastic.placeholders.group_profile.new_user_email", application_name: @site_config.application_name, application_domain: @site_config.email_domain)
   = f.actions
