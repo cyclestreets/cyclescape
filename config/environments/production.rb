@@ -1,4 +1,5 @@
 Rails.application.configure do
+  config.action_dispatch.rack_cache = true
   config.eager_load = true
   # Settings specified here will take precedence over those in config/application.rb
 
