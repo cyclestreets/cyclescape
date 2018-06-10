@@ -1,0 +1,12 @@
+{
+  "extends": "standard",
+  "globals": {
+    "LeafletMap": true,
+    "jsonpTransportRequired": true,
+    "L": true
+  },
+  "env": {
+    "browser": true,
+    "jquery": true
+  }
+}
