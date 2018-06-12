@@ -14,8 +14,6 @@ class Group::ProfilesController < ApplicationController
   end
 
   def update
-    @profile.base64 = params[:group_profile][:base64]
-    @profile.picture = @profile.to_png
     if @profile.update permitted_params
       set_flash_message :success
       redirect_to action: :show
@@ -40,8 +38,8 @@ class Group::ProfilesController < ApplicationController
 
   def permitted_params
     params.require(:group_profile).permit(
-      :description, :joining_instructions, :loc_json, :picture, :retained_picture, :new_user_email,
-      :logo, :retained_logo
+      :description, :joining_instructions, :loc_json, :retained_picture, :new_user_email,
+      :retained_logo, :base64_picture, :base64_logo
     )
   end
 end

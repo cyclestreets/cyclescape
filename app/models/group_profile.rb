@@ -21,28 +21,18 @@
 class GroupProfile < ActiveRecord::Base
   MAX_LOCAL_AREA = 10
 
-  include Locatable
   dragonfly_accessor :picture
   dragonfly_accessor :logo
 
-  attr_accessor :base64
-
-  def to_png
-    return nil if base64.blank?
-    encoded_image = base64.split(",")[1]
-    decoded_image = Base64.decode64(encoded_image)
-    my_image = Tempfile.new "myimage"
-    my_image.binmode
-    my_image.write(decoded_image)
-    my_image.close
-    my_image
-  end
+  include Locatable
+  include Base64ToDragonfly
 
   scope :with_location,   -> { where.not(location: nil) }
   scope :ordered,         -> { order(created_at: :desc) }
   scope :local,           -> { where("ST_AREA(location) < ?", MAX_LOCAL_AREA) }
   scope :ordered_by_size, -> { order("ST_AREA(location) DESC")}
   scope :enabled,         -> { joins(:group).merge(Group.enabled) }
+
   validates :new_user_email, presence: true
 
   def picture_thumbnail
