@@ -1,10 +1,11 @@
 class ImageEdit {
   constructor (opts) {
-    opts = opts || {}
+    var attribute = opts.attribute || 'picture'
 
-    this.fileEl = $(opts.fileEl || '#picture-file')
-    this.previewEl = $(opts.previewEl || '#picture-preview')
-    this.base64El = $(opts.base64El || '#picture-base64')
+    this.fileEl = $('#file_' + attribute)
+    this.previewEl = $('#preview_' + attribute)
+    this.rotateEl = $('#rotate_' + attribute)
+    this.base64El = $('#' + opts.resource + '_base64_' + attribute)
     this.croppieInstance = this.previewEl.croppie({
       boundary: {
         width: (opts.width || 330) + 100,
@@ -14,20 +15,26 @@ class ImageEdit {
         width: opts.width || 330,
         height: opts.height || 192
       },
-      enableExif: true
+      enableExif: true,
+      enableOrientation: true,
+      url: opts.url
     })
+    this.readFile = this.readFile.bind(this)
+    this.initFileOnChange = this.initFileOnChange.bind(this)
+    this.initCroppieOnChange = this.initCroppieOnChange.bind(this)
+    this.updateResult = this.updateResult.bind(this)
   }
 
-  readFile (input, imageEdit) {
+  readFile (input) {
     if (input.files && input.files[0]) {
       var reader = new FileReader()
 
       reader.onload = function (e) {
-        imageEdit.previewEl.addClass('ready')
-        imageEdit.croppieInstance.croppie('bind', {
+        this.previewEl.addClass('ready')
+        this.croppieInstance.croppie('bind', {
           url: e.target.result
         })
-      }
+      }.bind(this)
 
       reader.readAsDataURL(input.files[0])
     }
@@ -35,18 +42,23 @@ class ImageEdit {
 
   initFileOnChange () {
     var imageEdit = this
-    this.readFile(this.fileEl, imageEdit)
-    this.fileEl.on('change', function () { imageEdit.readFile(this, imageEdit) })
+    this.readFile(this.fileEl[0])
+    this.fileEl.on('change', function () { imageEdit.readFile(this) })
+    this.rotateEl.on('click', function () {
+      imageEdit.croppieInstance.croppie('rotate', -90)
+      this.updateResult()
+    }.bind(this))
   }
 
   initCroppieOnChange () {
-    var base64El = this.base64El
-    this.croppieInstance.on('update.croppie', function () {
-      $(this).croppie('result', 'base64').then(
-        function (base64) {
-          base64El.val(base64)
-        }
-      )
-    })
+    this.croppieInstance.on('update.croppie', this.updateResult)
+  }
+
+  updateResult () {
+    this.croppieInstance.croppie('result', 'base64').then(
+      function (base64) {
+        this.base64El.val(base64)
+      }.bind(this)
+    )
   }
 }
