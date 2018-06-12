@@ -34,3 +34,4 @@
 //= require leaflet_draw_override
 //= require croppie/croppie
 //= require image_edit
+//= require image_edit_init
