@@ -47,6 +47,6 @@ class User::ProfilesController < ApplicationController
   end
 
   def permitted_params
-    params.require(:user_profile).permit :picture, :retained_picture, :remove_picture, :website, :visibility, :about, :locale
+    params.require(:user_profile).permit :base64_picture, :retained_picture, :remove_picture, :website, :visibility, :about, :locale
   end
 end

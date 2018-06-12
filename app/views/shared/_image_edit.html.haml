@@ -1,4 +1,4 @@
-%li.file.input.optional.image-edit-upload{"data-imageedit" => { resource: resource.class.name.gsub('::','').underscore, url: resource.public_send(attribute).url, attribute: attribute }.merge(opts).to_json }
+%li.file.input.optional.image-edit-upload{"data-imageedit" => { resource: resource.class.name.gsub('::','').underscore, url: resource.public_send(attribute)&.url, attribute: attribute }.merge(opts).to_json }
   %label.label{for: "file_#{attribute}"}
     = attribute.titlecase
   %input{id: "file_#{attribute}", type: "file"}

@@ -23,6 +23,8 @@ class UserProfile < ActiveRecord::Base
     storage_options :generate_picture_path
   end
 
+  include Base64ToDragonfly
+
   Locale = Struct.new(:id, :label, :locale)
   class_attribute :all_locales
   self.all_locales = [
