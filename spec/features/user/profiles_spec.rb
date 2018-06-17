@@ -14,10 +14,12 @@ describe 'User profiles' do
       visit current_user_profile_edit_path
     end
 
-    it 'should upload a picture' do
-      attach_file 'Picture', profile_photo_path
+    it 'should upload a picture', js: true do
+      attach_file 'Picture', abstract_image_path
+      fill_in 'About', with: lorem_ipsum
       click_on 'Save'
       expect(current_user.profile.picture).to be_truthy
+      expect(current_user.profile.about).to eq(lorem_ipsum.gsub(/\n/, "\r\n"))
     end
 
     it 'should set the website and locale' do
@@ -26,12 +28,6 @@ describe 'User profiles' do
       click_on 'Save'
       expect(current_user.profile.website).to eq('http://www.example.net')
       expect(page).to have_content 'Webová stránka'
-    end
-
-    it 'should set the biography' do
-      fill_in 'About', with: lorem_ipsum
-      click_on 'Save'
-      expect(current_user.profile.about).to eq(lorem_ipsum.gsub(/\n/, "\r\n"))
     end
 
     describe 'profile visibility' do

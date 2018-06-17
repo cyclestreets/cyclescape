@@ -90,11 +90,10 @@ describe 'thread notifications' do
       end
 
       it 'should not escape photo messages', js: true do
-        within('#new-photo-message') do
-          attach_file 'Photo', abstract_image_path
-          fill_in 'Caption', with: 'Some words & some more words'
-          click_on 'Add Photo'
-        end
+        click_on "Photo"
+        attach_file 'Photo', abstract_image_path
+        fill_in 'Caption', with: 'Some words & some more words'
+        click_on 'Add Photo'
 
         open_email(current_user.email)
         expect(current_email).to have_body_text('Some words & some more words')

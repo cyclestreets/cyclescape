@@ -35,6 +35,7 @@ ImageEdit.prototype.readFile = function (input) {
       this.croppieInstance.croppie('bind', {
         url: e.target.result
       })
+      this.updateResult()
     }.bind(this)
 
     reader.readAsDataURL(input.files[0])

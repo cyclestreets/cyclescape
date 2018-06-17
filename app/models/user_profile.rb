@@ -41,8 +41,6 @@ class UserProfile < ActiveRecord::Base
   validates :website, url: true
   validates :visibility, inclusion: { in: VISIBILITY_OPTIONS }
 
-  validates_property :mime_type, of: :picture, in: %w(image/jpeg image/png image/gif)
-
   def website=(val)
     write_attribute(:website, AttributeNormaliser::URL.new(val).normalise)
   end

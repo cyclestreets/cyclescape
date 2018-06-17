@@ -35,6 +35,7 @@ class User::ProfilesController < ApplicationController
       redirect_to action: :show
     else
       @user = UserDecorator.decorate(@user)
+      @profile = @user.profile
       render :edit
     end
   end
