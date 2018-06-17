@@ -17,7 +17,9 @@ class ImageEdit {
       },
       enableExif: true,
       enableOrientation: true,
-      url: opts.url
+      url: opts.url,
+      showZoomer: !!opts.showzoomer,
+      enableResize: !!opts.enableresize
     })
     this.readFile = this.readFile.bind(this)
     this.initFileOnChange = this.initFileOnChange.bind(this)

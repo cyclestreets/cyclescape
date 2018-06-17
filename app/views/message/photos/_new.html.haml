@@ -1,8 +1,8 @@
 #new-photo-message.pane
-  = semantic_form_for PhotoMessage.new, url: thread_photos_path(@thread), html: { class: "navigate-away-warning", multipart: true} do |f|
+  - photo = PhotoMessage.new
+  = semantic_form_for photo, url: thread_photos_path(@thread), html: { class: "navigate-away-warning", multipart: true} do |f|
     = f.inputs do
-      = f.input :photo, as: :file, input_html: { accept: 'image/*' }
-      = f.input :retained_photo, as: :hidden
+      = render "shared/image_edit", { resource: photo, attribute: "photo", opts: { width: 360, height: 540, enableresize: true }, f: f }
       = f.input :caption
       = render "shared/actions", f: f, thread: @thread
     = f.actions do

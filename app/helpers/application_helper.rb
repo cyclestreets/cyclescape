@@ -151,6 +151,16 @@ module ApplicationHelper
     end.join("\r")
   end
 
+  def image_edit_json(resource, attribute, opts)
+    {
+      resource: resource.class.name.gsub('::','').underscore,
+      url: resource.public_send(attribute)&.url,
+      attribute: attribute,
+      showzoomer: true,
+      enableresize: false
+    }.merge(opts).to_json
+  end
+
   THREAD_FORMAT_MAP = {
     'thread :number' => /thread \d+/,
     'thread no :number' => /thread no \d+/,
