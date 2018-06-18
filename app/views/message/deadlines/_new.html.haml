@@ -2,7 +2,7 @@
   = semantic_form_for DeadlineMessage.new, url: thread_deadlines_path(@thread), html: { class: "navigate-away-warning" } do |f|
     = f.inputs do
       = f.input :all_day, input_html: {class: "all-day"}
-      = f.input :deadline, as: :date_picker, label: t("deadline_date")
+      = f.input :deadline, as: :date_picker, label: t("deadline_date"), input_html: { autocomplete: :off }
       = f.input :title
     = f.actions do
       = f.action :submit, label: t(".submit"), button_html: message_button_html
