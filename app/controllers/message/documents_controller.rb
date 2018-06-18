@@ -2,16 +2,16 @@
 
 class Message::DocumentsController < Message::BaseController
   def show
-    @document = DocumentMessage.find params[:id]
+    @document = resource_class.find params[:id]
   end
 
   protected
 
-  def component
-    @component ||= DocumentMessage.new permitted_params
+  def resource_class
+    DocumentMessage
   end
 
-  def permitted_params
-    params.require(:document_message).permit :title, :file, :retained_file
+  def permit_params
+    [:title, :file, :retained_file]
   end
 end

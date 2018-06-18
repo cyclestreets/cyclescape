@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
-class Message::MapsController < Message::BaseController
+class Message::ActionsController < Message::BaseController
   protected
 
   def resource_class
-    MapMessage
+    ActionMessage
   end
 
   def permit_params
-    [:caption, :loc_json]
+    [:description]
   end
 end
+

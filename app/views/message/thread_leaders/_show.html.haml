@@ -1,4 +1,5 @@
-.link{id: dom_id(message.component)}
+.header-fix{id: dom_id(message.component)}
+.link
   %p
     - leader = message.component.created_by
     - if permitted_to? :view_profile, leader

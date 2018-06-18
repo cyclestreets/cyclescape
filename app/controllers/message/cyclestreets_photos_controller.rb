@@ -2,18 +2,16 @@
 
 class Message::CyclestreetsPhotosController < Message::BaseController
   def show
-    @cyclestreets_photo = CyclestreetsPhotoMessage.find params[:id]
+    @cyclestreets_photo = resource_class.find params[:id]
   end
 
   protected
 
-  def component
-    @component ||= CyclestreetsPhotoMessage.new permitted_params
+  def resource_class
+    CyclestreetsPhotoMessage
   end
 
-  def permitted_params
-    params.require(:cyclestreets_photo_message).permit(
-      :photo_url, :caption, :cyclestreets_id, :icon_properties, :loc_json
-    )
+  def permit_params
+    [:photo_url, :caption, :cyclestreets_id, :icon_properties, :loc_json]
   end
 end

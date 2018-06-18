@@ -33,6 +33,18 @@ class Message::BaseController < ApplicationController
     @message ||= thread.messages.build
   end
 
+  def component
+    @component ||= resource_class.new permitted_params
+  end
+
+  def permitted_params
+    params.require(required_param).permit(permit_params)
+  end
+
+  def required_param
+    resource_class.model_name.singular.to_sym
+  end
+
   def build_message
     message.created_by = current_user
     message.component = populate_component
@@ -42,6 +54,7 @@ class Message::BaseController < ApplicationController
     component.thread = thread
     component.message = message
     component.created_by = current_user
+    component.action_message_ids = params[required_param][:action_message_ids]
     component
   end
 end

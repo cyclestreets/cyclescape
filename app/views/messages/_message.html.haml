@@ -1,5 +1,5 @@
 - scroll_class = (message == view_from) ? 'thread-view-from-here' : nil
-%article.message{ id: dom_id(message), class: scroll_class }
+%article.message{ class: scroll_class }
   .details
     .author
       - if permitted_to? :view_profile, message.created_by
@@ -23,7 +23,13 @@
     - else
       - if message.component
         = render "message/#{message_controller_map(message.component)}/show", message: message
-      = auto_link simple_format message_linkify(message)
+      .header-fix{id: dom_id(message)}
+      .message-text
+        = auto_link simple_format message_linkify(message)
+
+      - message_or_component = message.component || message
+      - if message_or_component.action_messages.to_a.present?
+        = render "shared/resolves_actions", actions: message_or_component.action_messages
   - if permitted_to?([:censor], message) || library_type_for(message)
     %menu.tools
       %ul

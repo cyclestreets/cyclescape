@@ -63,7 +63,7 @@ class MessagesController < ApplicationController
   protected
 
   def permitted_params
-    params.require(:message).permit :body, :component
+    params.require(:message).permit :body, :component, action_message_ids: []
   end
 
   def message

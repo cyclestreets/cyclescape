@@ -17,6 +17,22 @@ ActiveRecord::Schema.define(version: 20180514190347) do
   enable_extension "plpgsql"
   enable_extension "postgis"
 
+  create_table "action_messages", force: :cascade do |t|
+    t.integer  "completing_message_id"
+    t.string   "completing_message_type"
+    t.integer  "thread_id",               null: false
+    t.integer  "message_id",              null: false
+    t.integer  "created_by_id",           null: false
+    t.string   "description",             null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "action_messages", ["completing_message_id"], name: "index_action_messages_on_completing_message_id", using: :btree
+  add_index "action_messages", ["created_by_id"], name: "index_action_messages_on_created_by_id", using: :btree
+  add_index "action_messages", ["message_id"], name: "index_action_messages_on_message_id", using: :btree
+  add_index "action_messages", ["thread_id"], name: "index_action_messages_on_thread_id", using: :btree
+
   create_table "constituencies", force: :cascade do |t|
     t.string   "name"
     t.geometry "location", limit: {:srid=>4326, :type=>"geometry"}, null: false
@@ -673,6 +689,9 @@ ActiveRecord::Schema.define(version: 20180514190347) do
 
   add_index "wards", ["location"], name: "index_wards_on_location", using: :gist
 
+  add_foreign_key "action_messages", "message_threads", column: "thread_id"
+  add_foreign_key "action_messages", "messages"
+  add_foreign_key "action_messages", "users", column: "created_by_id"
   add_foreign_key "cyclestreets_photo_messages", "message_threads", column: "thread_id"
   add_foreign_key "cyclestreets_photo_messages", "messages"
   add_foreign_key "cyclestreets_photo_messages", "users", column: "created_by_id"

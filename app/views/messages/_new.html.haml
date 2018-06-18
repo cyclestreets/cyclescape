@@ -46,6 +46,10 @@
           = link_to "#new-document-message" do
             = t ".document_message"
             %span.nub
+        %li.text
+          = link_to "#new-action-message" do
+            = t ".action_message"
+            %span.nub
         - if signed_in? && current_user.subscribed_to_thread?(@thread)
           %li.text
             = link_to "#new-thread-leader-message" do
@@ -58,6 +62,7 @@
           = semantic_form_for @new_message, url: thread_messages_path(@thread), html: { class: "navigate-away-warning" } do |f|
             = f.inputs do
               = f.input :body, input_html: { class: 'autosize', disabled: cannot_post?}
+              = render "shared/actions", f: f, thread: @thread
             = f.actions do
               = f.action :submit, button_html: message_button_html
         - if signed_in?
@@ -68,6 +73,7 @@
           = render "message/deadlines/new"
           = render "message/documents/new"
           = render "message/maps/new"
+          = render "message/actions/new"
           - if current_user.subscribed_to_thread?(@thread)
             = render "message/thread_leaders/new"
 
