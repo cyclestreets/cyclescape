@@ -104,7 +104,7 @@ describe 'User dashboards' do
           visit dashboard_path
           expect(page).to have_content(deadline.title)
           deadline_localized = deadline.deadline.in_time_zone(SiteConfig.first.timezone)
-          expect(page).to have_content(I18n.l(deadline_localized, format: :long_deadline))
+          expect(page).to have_content(I18n.l(deadline_localized, format: :long_deadline).squish)
         end
 
         it 'should not show censored deadlines' do
