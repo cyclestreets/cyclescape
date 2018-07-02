@@ -51,8 +51,10 @@ jobs:
         - v1-dep-
     # The following line was run implicitly in your 1.0 builds based on what CircleCI inferred about the structure of your project. In 2.0 you need to be explicit about which commands should be run. In some cases you can discard inferred commands if they are not relevant to your project.
     - run: |
-        sudo apt-get update && sudo apt-get install -y redis-tools
-        echo "CONFIG SET save ''" | redis-cli -x
+        sudo wget -O /etc/init.d/redis-server https://gist.githubusercontent.com/lsbardel/257298/raw/8c4e6596c8b1f296ba9ae0b800294590892952c5/redis-server-for-init.d-startup
+        sudo chmod 755 /etc/init.d/redis-server
+        sudo update-rc.d redis-server defaults
+        sudo service redis-server start
     - run: if [ -z "${NODE_ENV:-}" ]; then export NODE_ENV=test; fi
     - run: export PATH="~/cyclestreets/cyclescape/node_modules/.bin:$PATH"
     - run: npm install
