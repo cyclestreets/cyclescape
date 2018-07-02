@@ -8,6 +8,7 @@
       %li= link_to t(".our_areas"), "#area-map"
       %li= link_to t(".recent_threads"), "#recent-threads"
       %li= link_to t(".recent_issues"), "#recent-issues"
+      %li= link_to t(".active_users"), "#active-users"
     .panes
       #area-map.pane.area-map
         - if (profile = @group.profile) && profile.location
@@ -37,6 +38,25 @@
           - else
             %ul.issue-list
               = render partial: "issues/compact", collection: @recent_issues, as: :issue
+      #active-users.pane.active-users
+        %table
+          %thead
+            %th= t ".display_name"
+            %th= t ".messages_last_year"
+          %tbody
+            - @group.active_user_counts.each do |user_count|
+              - user = user_count[:user]
+              %tr
+                %td
+                  - if permitted_to? :view_profile, user
+                    = link_to user_profile_path(user) do
+                      %span.thumb
+                        - if user.profile.picture
+                          = image_tag user.profile.picture_thumbnail.url
+                      %p= user.name
+                  - else
+                    = user.display_name_or_anon
+                %td= user_count[:count]
 
 %aside#sidebar
   - if @group.profile.logo

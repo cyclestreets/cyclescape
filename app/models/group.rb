@@ -23,6 +23,7 @@ class Group < ActiveRecord::Base
   has_many :memberships, class_name: 'GroupMembership', dependent: :destroy
   has_many :members, through: :memberships, source: :user
   has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy
+  has_many :messages, -> { unscope(:order) }, through: :threads
   has_many :threads, class_name: 'MessageThread', inverse_of: :group
   has_many :potential_members
   has_many :hashtags
@@ -59,6 +60,20 @@ class Group < ActiveRecord::Base
       merge(GroupProfile.local.intersects(bboxes.map(&:to_geometry).inject(&:union)))
   rescue JSON::ParserError
     none
+  end
+
+  def active_user_counts(since = 1.year.ago, limit = 15)
+    subquery = members.select(:id).to_sql
+    user_count = messages.approved.group(:created_by_id)
+      .where("messages.created_at > ?", since)
+      .where("messages.created_by_id IN (#{subquery})")
+      .order("m_cnt DESC")
+      .limit(limit)
+      .pluck("messages.created_by_id, COUNT(*) AS m_cnt")
+    users = User.where(id: user_count.map(&:first)).index_by(&:id)
+    user_count.map do |(user_id, count)|
+      {user: users[user_id], count: count }
+    end
   end
 
   def committee_members

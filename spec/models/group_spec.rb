@@ -153,4 +153,32 @@ describe Group do
       end
     end
   end
+
+  describe "#active_user_counts" do
+    subject { create(:group) }
+    let(:thread_1) { create(:message_thread, group: subject) }
+    let(:thread_2) { create(:message_thread, group: subject) }
+    let(:active_poster) { create(:group_membership, group: subject).user  }
+    let(:quiet_poster) { create(:group_membership, group: subject).user  }
+    let(:not_in_group) { create :user }
+
+    before do
+      create_list(:message, 2, thread: thread_1, created_by: active_poster)
+      create_list(:message, 2, thread: thread_1, created_by: not_in_group)
+      create_list(:message, 3, thread: thread_2, created_by: active_poster)
+      create_list(:message, 1, thread: thread_2, created_by: quiet_poster)
+      create_list(:message, 1, thread: thread_2, created_by: quiet_poster, created_at: 2.years.ago)
+    end
+
+    it "returns the top N with counts" do
+      expect(subject.active_user_counts).to eq([
+        { user: active_poster, count: 5 },
+        { user: quiet_poster, count: 1 }
+      ])
+
+      expect(subject.active_user_counts(1.hour.ago, 1)).to eq([
+        { user: active_poster, count: 5 }
+      ])
+    end
+  end
 end
