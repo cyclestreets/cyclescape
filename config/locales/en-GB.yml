@@ -493,7 +493,10 @@
       no_threads: This group doesn't have any public threads
       our_areas: Our Area
       recent_issues: Recent Issues In Our Area
-      recent_threads: Our Latest Discussions
+      recent_threads: Latest Discussions
+      active_users: Most active users
+      display_name: Name
+      messages_last_year: Number of messages last year
       view_membership_requests:
         zero: Review membership requests
         one: View pending membership request
