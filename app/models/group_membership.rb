@@ -25,6 +25,8 @@ class GroupMembership < ActiveRecord::Base
   belongs_to :group
   belongs_to :user, autosave: true
 
+  has_one :group_membership_request
+
   scope :committee, -> { where(role: 'committee') }
   scope :normal, -> { where(role: 'member') }
 
@@ -72,7 +74,7 @@ class GroupMembership < ActiveRecord::Base
   end
 
   def delete_pending_gmrs
-    GroupMembershipRequest.pending.where(user: user).delete_all
+    GroupMembershipRequest.pending.where(user: user).where.not(id: group_membership_request&.id).delete_all
     true
   end
 end
