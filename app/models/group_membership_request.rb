@@ -52,6 +52,7 @@ class GroupMembershipRequest < ActiveRecord::Base
 
   def create_membership
     user.approve!
+    return true if user.groups.include?(group)
     membership = group.memberships.new
     membership.user = user
     membership.role = 'member'

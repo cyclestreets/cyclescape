@@ -82,6 +82,11 @@ describe GroupMembershipRequest do
       subject.actioned_by = boss
       expect{subject.confirm!}.to change{user.reload.approved}.from(false).to(true)
     end
-  end
 
+    it "shouldn't fail if user is in group already" do
+      user.memberships.create!(group: group, role: "member")
+      subject.actioned_by = boss
+      expect{ subject.confirm! }.to_not raise_error
+    end
+  end
 end

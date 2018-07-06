@@ -32,6 +32,7 @@ class GroupMembership < ActiveRecord::Base
 
   before_validation :replace_with_existing_user
   before_validation :invite_user_if_new
+  after_create :delete_pending_gmrs
 
   validates :group_id, presence: true
   validates :role, inclusion: { in: ALLOWED_ROLES }
@@ -68,5 +69,10 @@ class GroupMembership < ActiveRecord::Base
 
   def set_default_role
     self.role ||= 'member'
+  end
+
+  def delete_pending_gmrs
+    GroupMembershipRequest.pending.where(user: user).delete_all
+    true
   end
 end
