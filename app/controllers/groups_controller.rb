@@ -61,7 +61,7 @@ class GroupsController < ApplicationController
       end
       with(:status, 'approved')
       any_of do
-        with(:location).in_bounding_box(*group_bb)
+        with(:location).in_bounding_box(*group_bb) if _group.profile.location
         with(:group_id, _group.id)
       end
       any_of do
@@ -91,7 +91,7 @@ class GroupsController < ApplicationController
         boost_fields title: 2.0
         boost_fields tags_string: 1.0
       end
-      with(:location).in_bounding_box(*group_bb)
+      with(:location).in_bounding_box(*group_bb) if _group.profile.location
       adjust_solr_params do |sunspot_params|
         sunspot_params[:boost] = 'recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)'
       end
@@ -147,5 +147,4 @@ class GroupsController < ApplicationController
                     [[bb.min_y, bb.min_x], [bb.max_y, bb.max_x]]
                   end
   end
-
 end

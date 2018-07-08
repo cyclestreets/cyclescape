@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe GroupMembership do
+  it "deletes pending gmrs" do
+    gmr = create :pending_gmr
+    gmr.user.memberships.create!(group: gmr.group, role: "member")
+    expect { gmr.reload }.to raise_error ActiveRecord::RecordNotFound
+  end
+
   describe 'to be valid' do
     subject { GroupMembership.new }
 

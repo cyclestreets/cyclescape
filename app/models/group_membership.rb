@@ -25,6 +25,8 @@ class GroupMembership < ActiveRecord::Base
   belongs_to :group
   belongs_to :user, autosave: true
 
+  has_one :group_membership_request
+
   scope :committee, -> { where(role: 'committee') }
   scope :normal, -> { where(role: 'member') }
 
@@ -32,6 +34,7 @@ class GroupMembership < ActiveRecord::Base
 
   before_validation :replace_with_existing_user
   before_validation :invite_user_if_new
+  after_create :delete_pending_gmrs
 
   validates :group_id, presence: true
   validates :role, inclusion: { in: ALLOWED_ROLES }
@@ -68,5 +71,10 @@ class GroupMembership < ActiveRecord::Base
 
   def set_default_role
     self.role ||= 'member'
+  end
+
+  def delete_pending_gmrs
+    GroupMembershipRequest.pending.where(user: user).where.not(id: group_membership_request&.id).delete_all
+    true
   end
 end

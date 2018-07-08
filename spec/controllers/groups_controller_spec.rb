@@ -37,6 +37,18 @@ describe GroupsController, type: :controller do
         expect(subject.body).to include(hashtag.name)
         expect(subject.body).to_not include(out_group.title)
       end
+
+      context "when the group has no location" do
+        let(:group_profile) { create :group_profile, location: nil }
+
+        it 'should all issues group' do
+          expect(subject.body).to include("Search Results for #{group.name}")
+          expect(subject.body).to include(in_group.title)
+          expect(subject.body).to include(by_group.title)
+          expect(subject.body).to include(hashtag.name)
+          expect(subject.body).to include(out_group.title)
+        end
+      end
     end
 
     describe 'all_geometries' do

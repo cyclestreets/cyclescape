@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180514190347) do
+ActiveRecord::Schema.define(version: 20180706211731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,17 +91,19 @@ ActiveRecord::Schema.define(version: 20180514190347) do
   add_index "document_messages", ["thread_id"], name: "index_document_messages_on_thread_id", using: :btree
 
   create_table "group_membership_requests", force: :cascade do |t|
-    t.integer  "user_id",                    null: false
-    t.integer  "group_id",                   null: false
-    t.string   "status",         limit: 255, null: false
+    t.integer  "user_id",                         null: false
+    t.integer  "group_id",                        null: false
+    t.string   "status",              limit: 255, null: false
     t.integer  "actioned_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "message"
+    t.integer  "group_membership_id"
   end
 
   add_index "group_membership_requests", ["actioned_by_id"], name: "index_group_membership_requests_on_actioned_by_id", using: :btree
   add_index "group_membership_requests", ["group_id"], name: "index_group_membership_requests_on_group_id", using: :btree
+  add_index "group_membership_requests", ["group_membership_id"], name: "index_group_membership_requests_on_group_membership_id", using: :btree
   add_index "group_membership_requests", ["user_id", "group_id"], name: "index_group_membership_requests_on_user_id_and_group_id", unique: true, using: :btree
   add_index "group_membership_requests", ["user_id"], name: "index_group_membership_requests_on_user_id", using: :btree
 
@@ -695,6 +697,7 @@ ActiveRecord::Schema.define(version: 20180514190347) do
   add_foreign_key "cyclestreets_photo_messages", "message_threads", column: "thread_id"
   add_foreign_key "cyclestreets_photo_messages", "messages"
   add_foreign_key "cyclestreets_photo_messages", "users", column: "created_by_id"
+  add_foreign_key "group_membership_requests", "group_memberships"
   add_foreign_key "hashtaggings", "hashtags"
   add_foreign_key "hashtaggings", "messages"
   add_foreign_key "hashtags", "groups"
