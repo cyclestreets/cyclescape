@@ -62,7 +62,7 @@
           - opts = { html: { class: "navigate-away-warning" }, remote: true }
           = semantic_form_for @thread.messages.build, opts.merge(url: thread_messages_path(@thread)) do |f|
             = f.inputs do
-              = f.input :body, input_html: { class: 'autosize', disabled: cannot_post?}
+              = f.input :body, input_html: { class: 'autosize tinymce', disabled: cannot_post?}
               = render "shared/actions", f: f, thread: @thread
             = f.actions do
               = f.action :submit, button_html: message_button_html

@@ -28,6 +28,7 @@ gem 'ratelimit'
 gem 'retryable'
 gem 'rgeo-geojson', "< 1.0"
 # gem 'jquery-turbolinks'
+gem 'tinymce-rails'
 
 # Back-end gems
 gem 'aasm'
