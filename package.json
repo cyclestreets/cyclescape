@@ -2,7 +2,7 @@
   "name": "cyclescape",
   "dependencies": {
     "autosize": "^1.18.13",
-    "browserify": "~10.2.4",
+    "browserify": "^16.2.2",
     "browserify-incremental": "^3.0.1",
     "coffeeify": "~0.6",
     "jquery-ui-timepicker-addon": "1.5.5",
@@ -16,7 +16,7 @@
     "node": ">= 0.10"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/cyclestreets/cyclescape"
+    "type": "git",
+    "url": "https://github.com/cyclestreets/cyclescape"
   }
 }
