@@ -91,9 +91,11 @@ describe 'thread notifications' do
 
       it 'should not escape photo messages', js: true do
         click_on "Photo"
+        sleep(0.4)
         attach_file 'Photo', abstract_image_path
         fill_in 'Caption', with: 'Some words & some more words'
         click_on 'Add Photo'
+        sleep(0.4)
 
         open_email(current_user.email)
         expect(current_email).to have_body_text('Some words & some more words')
