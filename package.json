@@ -2,7 +2,7 @@
   "name": "cyclescape",
   "dependencies": {
     "autosize": "^1.18.13",
-    "browserify": "^16.2.2",
+    "browserify": "13.1.0",
     "browserify-incremental": "^3.0.1",
     "coffeeify": "~0.6",
     "jquery-ui-timepicker-addon": "1.5.5",
