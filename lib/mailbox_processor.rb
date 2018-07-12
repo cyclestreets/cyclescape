@@ -3,13 +3,6 @@ require 'net/imap'
 class MailboxProcessor
   attr_accessor :config
 
-  def self.process_all_mailboxes
-    mailboxes_config.each do |name, config|
-      reader = new(config)
-      reader.run
-    end
-  end
-
   def self.mailboxes_config
     return @config if @config
     config_path = Rails.root + 'config' + 'mailboxes.yml'
