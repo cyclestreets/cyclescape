@@ -1,5 +1,5 @@
 #new-action-message.pane
-  = semantic_form_for ActionMessage.new, url: thread_actions_path(@thread), html: { class: "navigate-away-warning" } do |f|
+  = semantic_form_for ActionMessage.new, opts.deep_merge(url: thread_actions_path(@thread)) do |f|
     = f.inputs do
       = f.input :description
     = f.actions do

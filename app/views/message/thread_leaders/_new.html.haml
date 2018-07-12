@@ -6,7 +6,7 @@
     %p
       %strong
         = t(".introduction_action")
-  = semantic_form_for ThreadLeaderMessage.new, url: thread_thread_leaders_path(@thread), html: { class: "navigate-away-warning" } do |f|
+  = semantic_form_for ThreadLeaderMessage.new, opts.deep_merge(url: thread_thread_leaders_path(@thread)) do |f|
     = f.inputs do
       - if already_leading
         = f.input :description, input_html: { placeholder: t(".default_unleading_message_html") }

@@ -1,5 +1,5 @@
 #new-street-view-message.pane
-  = semantic_form_for StreetViewMessage.new, url: thread_street_views_path(@thread) do |f|
+  = semantic_form_for StreetViewMessage.new, opts.merge(url: thread_street_views_path(@thread)) do |f|
     = f.inputs do
       = f.input :caption
       = f.input :heading, as: :hidden
