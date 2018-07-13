@@ -25,6 +25,9 @@ describe 'Photo messages' do
       within('figcaption') do
         expect(page).to have_content('An abstract image')
       end
+
+      open_email(current_user.email)
+      expect(current_email).to have_body_text('An abstract image')
     end
   end
 
