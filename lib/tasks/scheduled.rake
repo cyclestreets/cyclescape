@@ -1,7 +1,7 @@
 namespace :scheduled do
   task process_all_mailboxes: :environment do
     MailboxProcessor.mailboxes_config.each do |name, config|
-      reader = new(config)
+      reader = MailboxProcessor.new(config)
       reader.run
     end
   end

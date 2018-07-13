@@ -1,3 +1,4 @@
+env :PATH, "#{ENV['PATH']}:/usr/local/bin/bundle"
 env :HOME, "/var/www/cyclescape/shared/bundle"
 
 # Use this file to easily define all of your cron jobs.
