@@ -95,6 +95,7 @@ jobs:
         environment:
           RAILS_ENV: test
           RACK_ENV: test
+          SOLR: true
     # Teardown
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # Save test results
