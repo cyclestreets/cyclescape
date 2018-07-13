@@ -19,12 +19,6 @@ describe UserProfile do
       expect(subject.picture_thumbnail.width).to eq(1)
       expect(subject.picture_thumbnail.height).to eq(1)
     end
-
-    it 'should not accept a text document for a picture' do
-      expect(subject).to have(0).errors_on(:picture)
-      subject.picture = File.open(lorem_ipsum_path)
-      expect(subject).to have(1).error_on(:picture)
-    end
   end
 
   context 'url' do

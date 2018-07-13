@@ -8,6 +8,8 @@ module Photo
       dragonfly_accessor :photo do
         storage_options :generate_photo_path
       end
+
+      include Base64ToDragonfly
     end
   end
 

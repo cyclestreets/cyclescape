@@ -14,7 +14,8 @@ describe 'Photo messages' do
       visit thread_path(thread)
     end
 
-    it 'should post a photo message' do
+    it 'should post a photo message', js: true do
+      click_on "Photo"
       photo_form do
         attach_file('Photo', abstract_image_path)
         fill_in 'Caption', with: 'An abstract image'

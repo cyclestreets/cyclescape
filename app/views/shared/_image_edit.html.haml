@@ -1,0 +1,13 @@
+%li.file.input.optional.image-edit-upload{ "data-imageedit" => image_edit_json(resource, attribute, opts) }
+  %label.label{for: "file_#{attribute}"}
+    = attribute.titlecase
+  %input{id: "file_#{attribute}", type: "file"}
+  - if defined? hint
+    %p.inline-hints
+      = hint
+%li
+  %div{id: "preview_#{attribute}"}
+  .image-edit-rotate{id: "rotate_#{attribute}"}
+    = image_tag "rotate.png"
+= f.input "base64_#{attribute}", as: :hidden
+= f.input "retained_#{attribute}", as: :hidden

@@ -32,3 +32,6 @@
 //= require location_preset
 //= require navigate_away_warning
 //= require leaflet_draw_override
+//= require croppie/croppie
+//= require image_edit
+//= require image_edit_init

@@ -6,8 +6,7 @@
   .form
     = semantic_form_for @profile, as: :user_profile, url: user_profile_path(@user) do |f|
       = f.inputs do
-        = f.input :picture, as: :file
-        = f.input :retained_picture, as: :hidden
+        = render "shared/image_edit", { resource: @profile, attribute: "picture", opts: { width: 400, height: 400, enableresize: true }, f: f }
         - if @profile.picture
           = f.input :remove_picture, as: :boolean
         = f.input :website
