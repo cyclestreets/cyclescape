@@ -80,7 +80,7 @@ jobs:
           solr:
             hostname: localhost
             port: 8981
-            path: /solr
+            path: /solr/test
         ' > config/sunspot.yml
     - run:
         command: bundle exec rake db:create db:schema:load --trace
