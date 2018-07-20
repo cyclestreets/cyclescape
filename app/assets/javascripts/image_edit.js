@@ -20,10 +20,9 @@ function ImageEdit (opts) {
     showZoomer: !!opts.showzoomer,
     enableResize: !!opts.enableresize
   })
-  this.rotateEl.appendTo(this.previewEl)
   this.readFile = this.readFile.bind(this)
   this.initFileOnChange = this.initFileOnChange.bind(this)
-  this.initCroppieOnChange = this.initCroppieOnChange.bind(this)
+  this.initCroppie = this.initCroppie.bind(this)
   this.updateResult = this.updateResult.bind(this)
 }
 
@@ -35,7 +34,9 @@ ImageEdit.prototype.readFile = function (input) {
       this.previewEl.addClass('ready')
       this.croppieInstance.croppie('bind', {
         url: e.target.result
-      })
+      }).then(function () {
+        this.croppieInstance.croppie('setZoom', 0)
+      }.bind(this))
       this.updateResult()
     }.bind(this)
 
@@ -53,8 +54,9 @@ ImageEdit.prototype.initFileOnChange = function () {
   }.bind(this))
 }
 
-ImageEdit.prototype.initCroppieOnChange = function () {
+ImageEdit.prototype.initCroppie = function () {
   this.croppieInstance.on('update.croppie', this.updateResult)
+  this.rotateEl.appendTo(this.previewEl)
 }
 
 ImageEdit.prototype.updateResult = function () {
@@ -69,6 +71,6 @@ $(document).ready(function () {
   $('.image-edit-upload').each(function (_, upload) {
     var imageEdit = new ImageEdit($(upload).data('imageedit'))
     imageEdit.initFileOnChange()
-    imageEdit.initCroppieOnChange()
+    imageEdit.initCroppie()
   })
 })
