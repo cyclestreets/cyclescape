@@ -20,6 +20,7 @@ function ImageEdit (opts) {
     showZoomer: !!opts.showzoomer,
     enableResize: !!opts.enableresize
   })
+  this.rotateEl.appendTo(this.previewEl)
   this.readFile = this.readFile.bind(this)
   this.initFileOnChange = this.initFileOnChange.bind(this)
   this.initCroppieOnChange = this.initCroppieOnChange.bind(this)
