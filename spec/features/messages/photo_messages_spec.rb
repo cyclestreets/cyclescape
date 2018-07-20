@@ -15,6 +15,7 @@ describe 'Photo messages' do
     end
 
     it 'should post a photo message', js: true do
+      thread.created_by.prefs.update_column(:email_status_id, 1)
       click_on "Photo"
       photo_form do
         attach_file('Photo', abstract_image_path)
@@ -26,7 +27,7 @@ describe 'Photo messages' do
         expect(page).to have_content('An abstract image')
       end
 
-      open_email(current_user.email)
+      open_email(thread.created_by.email)
       expect(current_email).to have_body_text('An abstract image')
     end
   end
