@@ -5,8 +5,8 @@
     %li.input
       = f.semantic_errors :location
       = render partial: "shared/edit_map", locals: { resource: @profile, location: @profile.location || @start_location }
-    = render "shared/image_edit", { resource: @profile, attribute: "picture", opts: {}, f: f }
-    = render "shared/image_edit", { resource: @profile, attribute: "logo", opts: {}, f: f }
+    = render "shared/image_edit", { resource: @profile, attribute: "picture", opts: {}, f: f, hint: t("formtastic.hints.group_profile.picture") }
+    = render "shared/image_edit", { resource: @profile, attribute: "logo", opts: {}, f: f, hint: t("formtastic.hints.group_profile.logo") }
     = f.input :joining_instructions, hint: t("formtastic.hints.group_profile.joining_instructions", application_name: @site_config.application_name)
     = f.input :new_user_email, placeholder: t("formtastic.placeholders.group_profile.new_user_email", application_name: @site_config.application_name, application_domain: @site_config.email_domain)
   = f.actions
