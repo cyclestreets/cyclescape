@@ -93,7 +93,7 @@ jobs:
       command: bundler exec rake sunspot:solr:start
       environment:
         RAILS_ENV: test
-    -run:
+    - run:
       command: bundle exec rspec --colour --order rand --format progress spec
       environment:
         RAILS_ENV: test
