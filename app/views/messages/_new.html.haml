@@ -1,4 +1,4 @@
-%section.new-message
+%section.new-message#new-message
   %p.label
     = t ".select_header"
   %ul.tabs.styled-tabs
@@ -59,23 +59,24 @@
         - if cannot_post?
           .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
         #new-text-message.pane
-          = semantic_form_for @new_message, url: thread_messages_path(@thread), html: { class: "navigate-away-warning" } do |f|
+          - opts = { html: { class: "navigate-away-warning" }, remote: true }
+          = semantic_form_for @thread.messages.build, opts.merge(url: thread_messages_path(@thread)) do |f|
             = f.inputs do
               = f.input :body, input_html: { class: 'autosize', disabled: cannot_post?}
               = render "shared/actions", f: f, thread: @thread
             = f.actions do
               = f.action :submit, button_html: message_button_html
         - if signed_in?
-          = render "message/photos/new"
-          = render "message/cyclestreets_photos/new"
-          = render "message/street_views/new"
-          = render "message/links/new"
-          = render "message/deadlines/new"
-          = render "message/documents/new"
-          = render "message/maps/new"
-          = render "message/actions/new"
+          = render "message/photos/new", opts: opts
+          = render "message/cyclestreets_photos/new", opts: opts
+          = render "message/street_views/new", opts: opts
+          = render "message/links/new", opts: opts
+          = render "message/deadlines/new", opts: opts
+          = render "message/documents/new", opts: opts
+          = render "message/maps/new", opts: opts
+          = render "message/actions/new", opts: opts
           - if current_user.subscribed_to_thread?(@thread)
-            = render "message/thread_leaders/new"
+            = render "message/thread_leaders/new", opts: opts
 
         - if permitted_to?(:create, :messages) && @thread.latest_message
           %p

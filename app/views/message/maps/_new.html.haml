@@ -1,5 +1,5 @@
 #new-map-message.pane
-  = semantic_form_for MapMessage.new, url: thread_maps_path(@thread), html: { class: "navigate-away-warning" } do |f|
+  = semantic_form_for MapMessage.new, opts.deep_merge(url: thread_maps_path(@thread)) do |f|
     = f.inputs do
       = f.input :loc_json, as: :hidden
       = f.input :caption

@@ -24,7 +24,10 @@ class MessagesController < ApplicationController
     else
       set_flash_message :failure
     end
-    redirect_to thread_path thread
+    respond_to do |format|
+      format.html { redirect_to thread_path(thread) }
+      format.js { render 'messages/created' }
+    end
   end
 
   def censor

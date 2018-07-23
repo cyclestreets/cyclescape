@@ -1,0 +1,10 @@
+<% if @message.persisted? %>
+  $("#new-message").before("<%= escape_javascript(render partial: 'messages/message', locals: { message: @message, thread: @thread, view_from: nil } ) %>")
+  $("#new-message").find("input[type=text], textarea").not(":button, :submit, :reset").val('')
+<% end %>
+<%  [:alert, :notice].each do |type| %>
+  <% next unless flash[type] %>
+  $(".flash-container").html("<div class='flash <%= type %>'><%= flash[type] %></div>")
+  <% next if type == :notice %>
+  $('html, body').animate({ scrollTop: 0 }, 0)
+<% end %>

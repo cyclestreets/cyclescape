@@ -1,6 +1,6 @@
 #new-photo-message.pane
   - photo = PhotoMessage.new
-  = semantic_form_for photo, url: thread_photos_path(@thread), html: { class: "navigate-away-warning", multipart: true} do |f|
+  = semantic_form_for photo, opts.deep_merge(url: thread_photos_path(@thread), remote: false, html: { multipart: true}) do |f|
     = f.inputs do
       = render "shared/image_edit", { resource: photo, attribute: "photo", opts: { width: 360, height: 540, enableresize: true }, f: f }
       = f.input :caption

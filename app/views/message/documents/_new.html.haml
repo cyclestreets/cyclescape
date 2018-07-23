@@ -1,5 +1,5 @@
 #new-document-message.pane
-  = semantic_form_for DocumentMessage.new, url: thread_documents_path(@thread), html: {multipart: true , class: "navigate-away-warning"} do |f|
+  = semantic_form_for DocumentMessage.new, opts.deep_merge(url: thread_documents_path(@thread), remote: false, html: { multipart: true }) do |f|
     = f.inputs do
       = f.input :file, as: :file
       = f.input :retained_file, as: :hidden
