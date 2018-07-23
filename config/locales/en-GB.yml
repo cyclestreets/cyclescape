@@ -494,6 +494,7 @@
       recent_issues: Recent Issues In Our Area
       recent_threads: Latest Discussions
       active_users: Most active users
+      committee_only: Please note, this tab is is only visible to committee members.
       display_name: Name
       messages_last_year: Number of messages last year
       view_membership_requests:
