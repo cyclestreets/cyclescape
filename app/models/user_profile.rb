@@ -23,6 +23,8 @@ class UserProfile < ActiveRecord::Base
     storage_options :generate_picture_path
   end
 
+  include Base64ToDragonfly
+
   Locale = Struct.new(:id, :label, :locale)
   class_attribute :all_locales
   self.all_locales = [
@@ -38,8 +40,6 @@ class UserProfile < ActiveRecord::Base
 
   validates :website, url: true
   validates :visibility, inclusion: { in: VISIBILITY_OPTIONS }
-
-  validates_property :mime_type, of: :picture, in: %w(image/jpeg image/png image/gif)
 
   def website=(val)
     write_attribute(:website, AttributeNormaliser::URL.new(val).normalise)

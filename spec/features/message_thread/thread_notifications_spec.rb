@@ -88,17 +88,6 @@ describe 'thread notifications' do
         open_email(current_user.email)
         expect(current_email).to have_body_text('Planning application deadline & so on')
       end
-
-      it 'should not escape photo messages' do
-        within('#new-photo-message') do
-          attach_file 'Photo', abstract_image_path
-          fill_in 'Caption', with: 'Some words & some more words'
-          click_on 'Add Photo'
-        end
-
-        open_email(current_user.email)
-        expect(current_email).to have_body_text('Some words & some more words')
-      end
     end
   end
 

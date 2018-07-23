@@ -35,6 +35,7 @@ class User::ProfilesController < ApplicationController
       redirect_to action: :show
     else
       @user = UserDecorator.decorate(@user)
+      @profile = @user.profile
       render :edit
     end
   end
@@ -47,6 +48,6 @@ class User::ProfilesController < ApplicationController
   end
 
   def permitted_params
-    params.require(:user_profile).permit :picture, :retained_picture, :remove_picture, :website, :visibility, :about, :locale
+    params.require(:user_profile).permit :base64_picture, :retained_picture, :remove_picture, :website, :visibility, :about, :locale
   end
 end
