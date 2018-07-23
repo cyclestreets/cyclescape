@@ -36,6 +36,10 @@ authorization do
       to :cancel
       if_attribute user: is { user }
     end
+    has_permission_on :groups do
+      to :view_active_users
+      if_attribute committee_members: contains { user }
+    end
     has_permission_on :group_members, :group_memberships do
       to :manage
       if_attribute committee_members: contains { user }

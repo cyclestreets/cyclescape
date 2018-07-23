@@ -51,7 +51,7 @@ class PlanningFilter < ActiveRecord::Base
     'Stirling', 'Stockport', 'Stockton-on-Tees', 'Stoke on Trent', 'Strabane', 'Stratford on Avon', 'Stroud', 'Suffolk', 'Suffolk Coastal',
     'Sunderland', 'Surrey', 'Surrey Heath', 'Sutton', 'Swale', 'Swansea', 'Swindon', 'Tameside', 'Tamworth', 'Tandridge', 'Taunton Deane',
     'Teignbridge', 'Telford', 'Tendring', 'Test Valley', 'Tewkesbury', 'Thames Gateway', 'Thanet', 'Three Rivers', 'Thurrock', 'Tonbridge', 'Torbay',
-    'Torfaen', 'Torridge', 'Tower Hamlets', 'Trafford', 'Tunbridge Wells', 'Tyne and Wear', 'United Kingdom', 'Uttlesford',
+    'Torfaen', 'Torridge', 'Tower Hamlets', 'Trafford', 'Tunbridge Wells', 'Tyne and Wear', 'Uttlesford',
     'Vale of White Horse', 'Wakefield', 'Wales', 'Walsall', 'Waltham Forest', 'Wandsworth', 'Warrington', 'Warwick', 'Warwickshire', 'Watford', 'Waveney', 'Waverley',
     'Wealden', 'Wellingborough', 'Welwyn Hatfield', 'West Berkshire', 'West Devon', 'West Dorset', 'West Dunbarton',
     'West Lancashire', 'West Lindsey', 'West Lothian', 'West Midlands', 'West Midlands County', 'West Oxfordshire', 'West Somerset',
