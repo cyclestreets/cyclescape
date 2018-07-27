@@ -48,7 +48,7 @@
               %th= t ".display_name"
               %th= t ".messages_last_year"
             %tbody
-              - @group.active_user_counts.each do |user_count|
+              - @group.active_user_counts(limit: 25).each do |user_count|
                 - user = user_count[:user]
                 %tr
                   %td

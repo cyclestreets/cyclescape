@@ -62,7 +62,7 @@ class Group < ActiveRecord::Base
     none
   end
 
-  def active_user_counts(since = 1.year.ago, limit = 15)
+  def active_user_counts(since: 1.year.ago, limit: 15)
     subquery = members.select(:id).to_sql
     user_count = messages.approved.group(:created_by_id)
       .where("messages.created_at > ?", since)

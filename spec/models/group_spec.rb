@@ -176,7 +176,7 @@ describe Group do
         { user: quiet_poster, count: 1 }
       ])
 
-      expect(subject.active_user_counts(1.hour.ago, 1)).to eq([
+      expect(subject.active_user_counts(since: 1.hour.ago, limit: 1)).to eq([
         { user: active_poster, count: 5 }
       ])
     end
