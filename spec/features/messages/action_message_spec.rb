@@ -34,7 +34,7 @@ describe 'Action messages' do
       expect(current_email).to have_subject("[Cyclescape] #{thread.title}")
       expect(current_email).to have_body_text(/Something must be done!/)
 
-      within('#new_message') do
+      within(first('#new_message')) do
         fill_in "message_body", with: "I've done it"
         check "Something must be done!"
         click_on "Post Message"
