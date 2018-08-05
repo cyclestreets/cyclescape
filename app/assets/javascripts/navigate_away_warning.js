@@ -10,7 +10,8 @@ $(window).ready(function(){
       var isClean = true;
 
       formEl.find(':input').each(function () {
-        if($(this).data('initialValue') !== $(this).val()){
+        var initialValue = $(this).data('initialValue')
+        if (initialValue && initialValue !== $(this).val()) {
           isClean = false;
         }
       });
