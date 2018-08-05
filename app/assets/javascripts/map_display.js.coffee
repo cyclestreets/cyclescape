@@ -9,7 +9,23 @@ class window.LeafletMap
   constructor: (center, opts) ->
     @domId = opts.domid || 'map'
     @map = L.map(@domId, maxZoom: 18)
-    @map.attributionControl.setPrefix('')
+    @map.attributionControl.setPrefix('').addAttribution(
+      """
+        <a
+          href="#{CONSTANTS.images.mapKey}"
+          onclick="
+            window.open(
+              this.href,
+              'mapKey',
+              'toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=441,height=507'
+            );
+            return false;
+          "
+        >
+          Map key
+        </a>
+      """
+    ).setPosition('bottomleft')
     @setCenter(center)
     @geoInput = $("##{opts.geoinput}_loc_json")
     @buildCollistionLayer() if opts.collisions?
