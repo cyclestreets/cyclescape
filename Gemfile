@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'activerecord-postgis-adapter'
+gem 'activerecord-postgis-adapter', '~> 3.0'
 gem "pg", "~> 0.20.0" # https://github.com/rgeo/activerecord-postgis-adapter/pull/257#issuecomment-309553871
 gem 'rails', '~> 4.2.0'
 
@@ -26,7 +26,7 @@ gem 'rails-jquery-autocomplete'
 gem 'rails_autolink'
 gem 'ratelimit'
 gem 'retryable'
-gem 'rgeo-geojson'
+gem 'rgeo-geojson', "< 1.0"
 # gem 'jquery-turbolinks'
 
 # Back-end gems
@@ -56,6 +56,7 @@ gem 'whenever'
 
 gem 'grape'
 gem 'grape-kaminari'
+gem 'kaminari-grape'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 
