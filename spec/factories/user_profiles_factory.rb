@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user_profile do
     user
     picture { Pathname.new(File.join(%w(spec support images abstract-100-100.jpg))) }

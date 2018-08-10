@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :site_comment do
     body "Meg: Mom, I can't clean, I've got stuff to do. Lois:\nMeg, we all know you don't have stuff to do"
     context_url 'http://www.example.com/'

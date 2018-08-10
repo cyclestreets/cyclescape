@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :message_thread do
     association :created_by, factory: :user
     sequence(:title) { |n| "Message Thread #{n}" }
@@ -23,14 +23,14 @@ FactoryGirl.define do
 
     trait :with_messages do
       after(:create) do |mt|
-        user = FactoryGirl.create(:user)  # To prevent creating 1 user per message
-        FactoryGirl.create_list(:message, 2, thread: mt, created_by: user)
+        user = FactoryBot.create(:user)  # To prevent creating 1 user per message
+        FactoryBot.create_list(:message, 2, thread: mt, created_by: user)
         mt.reload
       end
     end
 
     trait :with_tags do
-      tags { FactoryGirl.build_list(:tag, 2) }
+      tags { FactoryBot.build_list(:tag, 2) }
     end
 
     trait :approved do

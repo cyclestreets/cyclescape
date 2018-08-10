@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :group_request do
     sequence(:name) { |n| "Req Campaign Group #{n}" }
     sequence(:short_name) { |n| "reqcc#{n}" }

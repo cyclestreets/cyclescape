@@ -74,7 +74,7 @@ describe 'Group Membership Requests' do
     end
 
     describe 'when being invited as a new member' do
-      let(:credentials) { FactoryGirl.attributes_for(:user) }
+      let(:credentials) { FactoryBot.attributes_for(:user) }
 
       before do
         visit new_group_membership_path(group_id: current_group)

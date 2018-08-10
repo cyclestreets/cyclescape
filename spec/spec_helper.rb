@@ -57,12 +57,12 @@ RSpec.configure do |config|
       root.save!
     end
 
-    FactoryGirl.create :site_config
+    FactoryBot.create :site_config
 
     # Disable the observers so that their behaviour can be tested independently
     ActiveRecord::Base.observers.disable :all
 
-    FactoryGirl.reload
+    FactoryBot.reload
     # Reload translations
     I18n.reload!
   end
@@ -94,7 +94,7 @@ RSpec.configure do |config|
     Resque.inline = resque_inline
     DatabaseCleaner.clean
 
-    FactoryGirl.create(:site_config) unless SiteConfig.exists?
+    FactoryBot.create(:site_config) unless SiteConfig.exists?
 
     if truncate_clean && User.where(id: 1).blank?
       root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
@@ -112,7 +112,7 @@ RSpec.configure do |config|
   config.filter_run_excluding solr: true unless ENV['SOLR']
 
   config.infer_spec_type_from_file_location!
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.include AbstractController::Translation
   config.include AttributeNormalizer::RSpecMatcher, type: :model
   config.order = :random

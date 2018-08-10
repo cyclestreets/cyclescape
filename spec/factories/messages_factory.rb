@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :message do
     association :created_by, factory: :user
     association :thread, factory: :message_thread

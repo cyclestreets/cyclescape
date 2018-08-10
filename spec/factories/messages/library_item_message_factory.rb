@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :library_item_message do
     association :created_by, factory: :user
     message
@@ -10,7 +10,7 @@ FactoryGirl.define do
 
     trait :with_document do
       after(:build) do |o|
-        doc = FactoryGirl.create(:library_document)
+        doc = FactoryBot.create(:library_document)
         o.item = doc.item
       end
     end
