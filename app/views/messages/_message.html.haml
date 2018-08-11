@@ -25,7 +25,10 @@
         = render "message/#{message_controller_map(message.component)}/show", message: message
       .header-fix{id: dom_id(message)}
       .message-text
-        = auto_link simple_format message_linkify(message)
+        - display_message = sanitize(message_linkify(message))
+        - if message.id < 51635
+          - display_message = auto_link(simple_format(display_message, sanitize: false))
+        = display_message
 
       - message_or_component = message.component || message
       - if message_or_component.action_messages.to_a.present?
