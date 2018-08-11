@@ -19,7 +19,7 @@
             wrapper_html: {class: "hide", "data-dependent" => "#thread_group_id"}
       = semantic_fields_for @message do |f2|
         = f2.semantic_errors
-        = f2.input :body, input_html: { rows: 10 }
+        = f2.input :body, input_html: { class: "tinymce", rows: 10 }
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
       = cancel_link issue_path(@issue)

@@ -20,8 +20,9 @@
           = t(".thread_count", count: issue.thread_count)
         .tags
           = issue.tags_list
-      %p
-        = issue.brief_description
+      .issue-truncate
+        %p
+          = issue.brief_description
     .votes-cell
       =render partial: "shared/votable",
         locals: { resource: issue.object }

@@ -99,3 +99,7 @@ body.issues, body.group-issues {
 .formtastic input, .formtastic button, .formtastic textarea {
   font-family: inherit;
 }
+
+#issue_description_input label {
+  float: none;
+}
