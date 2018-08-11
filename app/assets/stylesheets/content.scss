@@ -926,3 +926,32 @@ section.social {
   margin: 5px;
   padding: 1px 4px;
 }
+
+article.message .message-text {
+  table td {
+    border: solid black 1px;
+  }
+  ul li, ol li {
+    list-style: inherit;
+  }
+  ul, ol {
+    display: block;
+    list-style: disc outside none;
+    margin: 1em 0;
+    padding: 0 0 0 40px;
+  }
+  ol {
+    list-style-type: decimal;
+  }
+  a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  // keep updated with tinymce_init.js blockquote content_style
+  blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: 0.25em solid #dfe2e5;
+  }
+}
