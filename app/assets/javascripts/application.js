@@ -16,6 +16,7 @@
 //= require jquery-ui/dialog
 //= require jquery-ui/slider
 //= require tinymce-jquery
+//= require tinymce_init
 //= require leaflet
 //= require autocomplete-rails
 //= require superbly-tagfield.min
