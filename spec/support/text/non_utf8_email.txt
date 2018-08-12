@@ -1,0 +1,24 @@
+Return-path: <osnupjb@spammer.biz.ua>
+Envelope-to: hash@example.org
+Delivery-date: Fri, 10 Aug 2018 16:40:29 +0100
+Message-ID: <292801d430d9$9a9d3ee0$30741a8f@osnupjb>
+From: "=?windows-1251?B?4e/u?=" <osnupjb@spammer.biz.ua>
+To: <hash@example.org>
+Subject: =?windows-1251?B?8+f1/g==?=
+Date: Fri, 10 Aug 2018 18:40:26 +0300
+MIME-Version: 1.0
+Content-Type: text/plain;
+	charset="windows-1251"
+Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Windows Live Mail 14.0.8117.416
+X-MimeOLE: Produced By Microsoft MimeOLE V14.0.8117.416
+X-BlackCat-Spam-Score: 37
+X-Spam-Status: No, score=3.7
+Delivered-To: hash@example.org
+X-BlackCat-To: hash@example.org
+
+פץק מנדף פוכח
+
+

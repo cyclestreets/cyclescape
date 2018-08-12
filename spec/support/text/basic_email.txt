@@ -1,35 +1,5 @@
 Return-Path: <andrew@example.com>
 Delivered-To: cyclescape@example.com
-Received: from spool.mail.gandi.net (mspool2-d.mgt.gandi.net [10.0.21.133])
-  by nmboxes13-d.mgt.gandi.net (Postfix) with ESMTP id EB8C5185424
-  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:13 +0100 (CET)
-Received: from mfilter7-d.gandi.net (mfilter7-d.gandi.net [217.70.178.136])
-  by spool.mail.gandi.net (Postfix) with ESMTP id E89681780CC
-  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:13 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mfilter7-d.gandi.net
-Received: from spool.mail.gandi.net ([10.0.21.133])
-  by mfilter7-d.gandi.net (mfilter7-d.gandi.net [10.0.15.180]) (amavisd-new, port 10024)
-  with ESMTP id 4FVtCywNmIW0 for <cyclescape@example.com>;
-  Thu, 17 Nov 2011 17:38:12 +0100 (CET)
-X-Policy: 217.70.183.196 is whitelisted
-X-Policy: 217.70.183.196 is whitelisted
-Received: from relay4-d.mail.gandi.net (relay4-d.mail.gandi.net [217.70.183.196])
-  by spool.mail.gandi.net (Postfix) with ESMTP id B767C17803B
-  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:12 +0100 (CET)
-X-Originating-IP: 217.70.178.144
-Received: from mfilter16-d.gandi.net (mfilter16-d.gandi.net [217.70.178.144])
-  by relay4-d.mail.gandi.net (Postfix) with ESMTP id B1C2E172089
-  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:12 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at mfilter16-d.gandi.net
-Received: from relay4-d.mail.gandi.net ([217.70.183.196])
-  by mfilter16-d.gandi.net (mfilter16-d.gandi.net [10.0.15.180]) (amavisd-new, port 10024)
-  with ESMTP id zt1EU2T+tl5G for <cyclescape@example.com>;
-  Thu, 17 Nov 2011 17:38:11 +0100 (CET)
-X-Originating-IP: 86.4.50.79
-Received: from Athena.local (cpc11-cmbg14-2-0-cust78.5-4.cable.virginmedia.com [86.4.50.79])
-  (Authenticated sender: andrew@strangeperil.co.uk)
-  by relay4-d.mail.gandi.net (Postfix) with ESMTPSA id 2BBF917208B
-  for <cyclescape@example.com>; Thu, 17 Nov 2011 17:38:09 +0100 (CET)
 Message-ID: <4EC53870.4060300@avito.co.uk>
 Date: Thu, 17 Nov 2011 16:38:08 +0000
 From: Andrew France <andrew@example.com>

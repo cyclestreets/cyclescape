@@ -17,9 +17,19 @@ describe InboundMail do
       expect(test.raw_message).to eq(mail.to_s)
     end
 
+    context 'with non UTF8 chars' do
+      let(:raw_email) { File.read(raw_email_path('non_utf8')) }
+
+      it 'should deal with encodings' do
+        test = InboundMail.new_from_message(double(to: ["a@b.com"], to_s: raw_email.force_encoding("ASCII-8BIT")))
+        expect(test).to be_a(InboundMail)
+        expect(test.recipient).to eq("a@b.com")
+        expect(test.save).to eq true
+      end
+    end
+
     context 'with email in cc' do
       let(:raw_email) { File.read(raw_email_path('cc')) }
-      let(:mail) { Mail.new(raw_email) }
 
       it 'should create a new object from a Mail message' do
         test = InboundMail.new_from_message(mail)
