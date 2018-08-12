@@ -35,13 +35,16 @@ describe 'Thread subscriptions' do
       end
 
       context 'automatically' do
-        it 'should subscribe me when I post a message' do
+        it 'should subscribe me when I post a message', js: true do
           expect(current_user.subscribed_to_thread?(thread)).to be_falsey
+
+          expect(ThreadRecorder).to receive(:thread_viewed).once
           within('.new-message') do
             fill_in 'Message', with: "Given I'm interested enough to post, I should be subscribed", match: :first
             click_on 'Post Message'
           end
-          expect(current_user.subscribed_to_thread?(thread)).to be_truthy
+          sleep(0.5)
+          expect(current_user.reload.subscribed_to_thread?(thread)).to be_truthy
         end
 
         # check some of the other message types too.

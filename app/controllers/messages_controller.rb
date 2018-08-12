@@ -5,14 +5,14 @@ class MessagesController < ApplicationController
   protect_from_forgery except: :vote_detail
 
   def create
-    @message = thread.messages.build permitted_params.merge(created_by: current_user)
+    @message ||= thread.messages.build permitted_params.merge(created_by: current_user)
 
     # spam? check needs to be done in the controller
-    message.check_reason = if message.spam?
-                             'possible_spam'
-                           elsif !current_user.approved?
-                             'not_approved'
-                           end
+    message.check_reason ||= if message.spam?
+                               'possible_spam'
+                             elsif !current_user.approved?
+                               'not_approved'
+                             end
 
     if message.save
       if message.check_reason
@@ -24,6 +24,9 @@ class MessagesController < ApplicationController
     else
       set_flash_message :failure
     end
+
+    ThreadRecorder.thread_viewed thread, current_user
+
     respond_to do |format|
       format.html { redirect_to thread_path(thread) }
       format.js { render 'messages/created' }

@@ -14,12 +14,17 @@ describe 'Link messages' do
       visit thread_path(thread)
     end
 
-    it 'should post a link message' do
+    it 'should post a link message', js: true do
+      expect(ThreadRecorder).to receive(:thread_viewed).once
+
+      click_on "Link"
       link_form do
         fill_in 'Web address', with: link_message_attrs[:url]
         fill_in 'Title', with: link_message_attrs[:title]
         click_on 'Add Link'
       end
+      sleep(0.4)
+
       expect(page).to have_link(link_message_attrs[:title], href: link_message_attrs[:url])
     end
 
