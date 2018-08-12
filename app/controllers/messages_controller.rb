@@ -7,12 +7,7 @@ class MessagesController < ApplicationController
   def create
     @message ||= thread.messages.build permitted_params.merge(created_by: current_user)
 
-    # spam? check needs to be done in the controller
-    message.check_reason ||= if message.spam?
-                               'possible_spam'
-                             elsif !current_user.approved?
-                               'not_approved'
-                             end
+    message.check_reason = check_reason
 
     if message.save
       if message.check_reason
@@ -67,6 +62,15 @@ class MessagesController < ApplicationController
   end
 
   protected
+
+  def check_reason
+    # spam? check needs to be done in the controller
+    if message.spam?
+      'possible_spam'
+    elsif !current_user.approved?
+      'not_approved'
+    end
+  end
 
   def permitted_params
     params.require(:message).permit :body, :component, action_message_ids: []

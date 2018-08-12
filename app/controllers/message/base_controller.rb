@@ -4,14 +4,12 @@ class Message::BaseController < MessagesController
   before_filter :thread
   before_filter :build_message, only: :create
 
-  def create
-    # Can't really check for spam with non-text messages
-    message.check_reason = 'not_approved' unless current_user.approved?
-
-    super
-  end
-
   protected
+
+  def check_reason
+    # Can't really check for spam with non-text messages
+    'not_approved' unless current_user.approved?
+  end
 
   def message
     @message ||= thread.messages.build
