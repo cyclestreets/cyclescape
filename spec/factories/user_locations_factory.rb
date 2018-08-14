@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user_location do
     location 'POINT(2 2)'
     association :user

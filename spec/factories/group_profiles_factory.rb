@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :group_profile do
     description 'This is a group of people who want to do some stuff. It probably involves cycling, but you can never be certain about that'
     joining_instructions 'Jump up get down stand up turn around. Twice. While cycling backwards'

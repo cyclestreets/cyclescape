@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'activerecord-postgis-adapter'
+gem 'activerecord-postgis-adapter', '~> 3.0'
 gem "pg", "~> 0.20.0" # https://github.com/rgeo/activerecord-postgis-adapter/pull/257#issuecomment-309553871
 gem 'rails', '~> 4.2.0'
 
@@ -26,7 +26,7 @@ gem 'rails-jquery-autocomplete'
 gem 'rails_autolink'
 gem 'ratelimit'
 gem 'retryable'
-gem 'rgeo-geojson'
+gem 'rgeo-geojson', "< 1.0"
 # gem 'jquery-turbolinks'
 
 # Back-end gems
@@ -35,7 +35,7 @@ gem 'actionview-encoded_mail_to'
 gem 'attribute_normalizer'
 gem 'declarative_authorization'
 gem 'devise', '~> 3.4.0'
-gem 'devise-i18n'
+gem 'devise-i18n', '< 1.5' # Bug in devise-i18n 1.5, fixed if we bump devise > 4.4 https://github.com/tigrish/devise-i18n/blob/v1.5.0/rails/locales/en-GB.yml#L43
 gem 'devise_invitable', '= 1.5.3' # Need to add accept_until_format
 gem 'dragonfly', '~> 1.0.3'
 gem 'draper'
@@ -56,6 +56,7 @@ gem 'whenever'
 
 gem 'grape'
 gem 'grape-kaminari'
+gem 'kaminari-grape'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
 
@@ -105,7 +106,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'email_spec'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'launchy'
   gem 'rspec-collection_matchers'
   gem 'selenium-webdriver'

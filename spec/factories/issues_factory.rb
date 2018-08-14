@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :issue do
     sequence(:title) { |n| "Issue #{n}" }
     description 'Whose leg do you have to hump to get a dry martini around here?'
@@ -10,7 +10,7 @@ FactoryGirl.define do
     end
 
     trait :with_tags do
-      tags { FactoryGirl.build_list(:tag, 2) }
+      tags { FactoryBot.build_list(:tag, 2) }
     end
 
     trait :with_photo do

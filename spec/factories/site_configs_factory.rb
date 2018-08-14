@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :site_config do
     logo { Pathname.new(File.join(%w(spec support images abstract-100-100.jpg))) }
     application_name "Cyclescape"

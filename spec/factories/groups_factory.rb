@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :group do
     sequence(:name) { |n| "Campaign Group #{n}" }
     sequence(:short_name) { |n| "cc#{n}" }

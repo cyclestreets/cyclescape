@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :planning_application do
     sequence(:uid) { |n| "a/b/c/#{n}" }
     address "15 Foo Street, Placeville"

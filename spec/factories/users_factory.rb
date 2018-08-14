@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     sequence(:email) { |n| "user#{n}@example.com" }
     sequence(:full_name) { |n| "User #{n}" }
@@ -12,11 +12,11 @@ FactoryGirl.define do
     end
 
     trait :with_profile do
-      after(:build) { |u| FactoryGirl.build(:user_profile, user: u) }
+      after(:build) { |u| FactoryBot.build(:user_profile, user: u) }
     end
 
     trait :with_location do
-      after(:build) { |u| FactoryGirl.create(:user_location, user: u) }
+      after(:build) { |u| FactoryBot.create(:user_location, user: u) }
     end
 
     trait :unconfirmed do
@@ -33,7 +33,7 @@ FactoryGirl.define do
 
       factory :stewie_with_profile do
         # This is repeated here due to with_profile trait not being found
-        after(:build) { |u| FactoryGirl.build(:user_profile, user: u) }
+        after(:build) { |u| FactoryBot.build(:user_profile, user: u) }
       end
     end
 

@@ -12,7 +12,7 @@
 #  location       :spatial({:srid=
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :library_item, class: 'Library::Item' do
     association :created_by, factory: :user
   end

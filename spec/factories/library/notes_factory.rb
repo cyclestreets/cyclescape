@@ -9,11 +9,11 @@
 #  library_document_id :integer
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :library_note, class: 'Library::Note' do
     sequence(:title) { |n| "Library note #{n}" }
     body "Peter: I just bought a giant room full of gold coins that I'm going to dive into like Scrooge McDuck."
-    created_by { FactoryGirl.create(:user) }
+    created_by { FactoryBot.create(:user) }
 
     trait :with_document do
       association :document, factory: :library_document
