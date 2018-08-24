@@ -1142,6 +1142,8 @@
         who: Who
       new:
         title: Feedback
+        introduction: This form is for giving feedback on the website, e.g. to report problems or suggest new features.
+          To respond to an issue under discussion, please click on that issue and follow the discussion thread links.
       create:
         success: Thank you for your feedback!
   tags:

@@ -1,5 +1,6 @@
 .new-site-comment-form
   %h2= t ".title"
+  %p= t ".introduction"
   = semantic_form_for @site_comment do |f|
     = f.inputs do
       = f.input :body
