@@ -15,7 +15,7 @@ de-DE:
         send_reset_instuctions: Sende mir die Anleitung zum Zurücksetzen
       edit:
         change_password_caption: Change password
-        new_password: New password
+        new_password: Neues Passwort
         confirm_new_password: Confirm new password
         change_password: Change password
     registrations:

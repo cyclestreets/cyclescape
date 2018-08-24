@@ -1,0 +1,5 @@
+cs:
+  decorators:
+    thread_list:
+      private_thread_title: '[Soukromé vlákno]'
+      following: Sledováno

@@ -1,5 +1,4 @@
----
-cs-CZ:
+cs:
   tags:
     show:
       heading: Položky označené jako '%{name}'
@@ -28,10 +27,10 @@ cs-CZ:
   deadline_date: Termín/datum
   time:
     formats:
-      long_deadline: "%A, %d %B %Y %l:%M %p"
+      long_deadline: '%A, %d %B %Y %l:%M %p'
   date:
     formats:
-      long_deadline: "%A, %d %B %Y %l:%M %p"
+      long_deadline: '%A, %d %B %Y %l:%M %p'
   admin:
     groups:
       index:
@@ -164,9 +163,13 @@ cs-CZ:
       update:
         success: Filtr upraven a běží jako proces na pozadí
       form:
-        planning_filter_intro: |-
-          Můžete přidat filtr, což je pravidlo (regulární výraz)
-           a vybrat projekční skupinu. Pokud nemá projekční skupina žádný konkrétní filtr, potom bude použit filtr pro projekční skupinu "* (LA bez vlastních pravidel)". Pravidlo filtru bude aplikováno na všechny nové projekční skupiny v procesu na pozadí. Každá projekční skupina spravující filtr, jehož uid se shoduje s pravidlem bude vyfiltrovaná z indexu plánování na jejich základnu stránce ale zůstane v hledání.
+        planning_filter_intro: "Můžete přidat filtr, což je pravidlo (regulární výraz)\n
+          a vybrat projekční skupinu. Pokud nemá projekční skupina žádný konkrétní
+          filtr, potom bude použit filtr pro projekční skupinu \"* (LA bez vlastních
+          pravidel)\". Pravidlo filtru bude aplikováno na všechny nové projekční skupiny
+          v procesu na pozadí. Každá projekční skupina spravující filtr, jehož uid
+          se shoduje s pravidlem bude vyfiltrovaná z indexu plánování na jejich základnu
+          stránce ale zůstane v hledání."
     site_configs:
       form:
         site_config_intro: Konfigurace změní stránku pro všechny uživatele.
@@ -187,7 +190,7 @@ cs-CZ:
       page_title: Výsledky vyhledávání pro '%{q}'
       convert_to_issue_html: Převést na podnět &hellip;
       planning_applications: Přihlášky k plánování
-      planning_applications_search: např. (07/0811/FUL)
+      planning_applications_search: e.g. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
       no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
@@ -216,7 +219,7 @@ cs-CZ:
       page_title: Výsledky vyhledávání pro '%{q}'
       convert_to_issue_html: Převést na podnět &hellip;
       planning_applications: Přihlášky k plánování
-      planning_applications_search: např. (07/0811/FUL)
+      planning_applications_search: e.g. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
       no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
@@ -245,7 +248,7 @@ cs-CZ:
       page_title: Výsledky vyhledávání pro '%{q}'
       convert_to_issue_html: Převést na podnět &hellip;
       planning_applications: Přihlášky k plánování
-      planning_applications_search: např. (07/0811/FUL)
+      planning_applications_search: e.g. (07/0811/FUL)
       planning_application_search_button: Vyhledat přihlášky podle reference
       no_results_found: Žádné výsledky nenalezeny
       your_planning_applications: Vaše místní přihlášky k plánování
@@ -267,8 +270,8 @@ cs-CZ:
       new_group_thread: Založit nové diskuzní vlákno místní skupiny
       my_issues_nearby_introduction_html: Podněty v oblastech %{areas_you_are_watching_link}
         jsou zobrazeny níže, nejnovější jako první.
-      my_issues_nearby_issues_pointer_html: "(Můžete si také %{browse_all_other_issues_link}
-        mimo vaše oblasti zájmu.)"
+      my_issues_nearby_issues_pointer_html: (Můžete si také %{browse_all_other_issues_link}
+        mimo vaše oblasti zájmu.)
       browse_all_other_issues: prohlédnout všechny podněty
       my_priorities_introduction: 'Toto je seznam všech nastavených důležitostí, nejdůležitější
         jako první:'
@@ -289,8 +292,8 @@ cs-CZ:
       location: umístění
       no_locations_guidance_html: Nenastavili jste žádné oblasti zájmu! Pokud %{add_some_locations_link},
         zobrazí se vám zde nejbližší %{things}.
-      no_planning_applications_nearby_html: Ve vaší oblasti nejsou žádné přihlášky
-        k plánování. Můžete %{add_location_link}.
+      no_planning_applications_nearby_html: There are no planning applications in
+        your area. You could %{add_location_link}.
       planning_applications_in_your_area: Přihlášky k plánování ve vaší oblasti
       planning_applications_introduction_html: 'These are the most recent planning
         applications (courtesy of the PlanIt website) in your %{location_link}:'
@@ -303,18 +306,18 @@ cs-CZ:
       issues_nearby: Podněty v blízkosti
       map: Mapa
       posted:
-        message_html: "%{creator_link} zaslali zprávu"
-        deadline_message_html: "%{creator_link} zaslali termín/datum"
-        document_message_html: "%{creator_link} zaslali přílohu"
-        photo_message_html: "%{creator_link} zaslali fotografii"
-        link_message_html: "%{creator_link} zaslali odkaz"
-        street_view_message_html: "%{creator_link} vyslán Street View"
-        library_item_message_html: "%{creator_link} zaslali položku knihovny"
-        thread_leader_message_html: "%{creator_link} stát se vedoucím"
-        cyclestreets_photo_message_html: "%{creator_link} poslal fotku CycleStreets"
+        message_html: '%{creator_link} zaslali zprávu'
+        deadline_message_html: '%{creator_link} zaslali termín/datum'
+        document_message_html: '%{creator_link} zaslali přílohu'
+        photo_message_html: '%{creator_link} zaslali fotografii'
+        link_message_html: '%{creator_link} zaslali odkaz'
+        street_view_message_html: '%{creator_link} vyslán Street View'
+        library_item_message_html: '%{creator_link} zaslali položku knihovny'
+        thread_leader_message_html: '%{creator_link} stát se vedoucím'
+        cyclestreets_photo_message_html: '%{creator_link} poslal fotku CycleStreets'
         thread_leader_withdrawing: Stáhnutí vedoucího diskuze
-        map_message_html: "%{creator_link} posted a map"
-        action_message_html: "%{creator_link} created a call to action"
+        map_message_html: '%{creator_link} posted a map'
+        action_message_html: '%{creator_link} created a call to action'
     search:
       title: Výsledky vyhledávání
   devise:
@@ -421,7 +424,7 @@ cs-CZ:
         already_member: Už jste členem této místní skupiny
       index:
         actioned_by: Uskutečnil
-        by: "%{name}"
+        by: '%{name}'
         confirm: Potvrdit
         email: E-mailová adresa
         view_message: Zobrazit...
@@ -449,7 +452,7 @@ cs-CZ:
         success: Členství v místní skupině zamítnuto
       review:
         actioned_by: Uskutečnil
-        by: "%{name}"
+        by: '%{name}'
         confirm: Potvrdit
         email: E-mailová adresa
         view_message: Zobrazit...
@@ -520,9 +523,8 @@ cs-CZ:
         intro: Zprávy označené jako '%{name}'
         none_found: Není žádná shoda pro '%{name}'
   group_profiles:
-    default_new_user_email: |-
-      Dobrý den {{full_name}},
-       %{group_name} vás přidal do své skupiny Cyklisté sobě %{group_url}
+    default_new_user_email: "Dobrý den {{full_name}},\n %{group_name} vás přidal do
+      své skupiny Cyklisté sobě %{group_url}"
   groups:
     search:
       title: Výsledky vyhledávání pro %{group}
@@ -578,7 +580,7 @@ cs-CZ:
         Po založení budete členem vedení skupiny, což vám umožní její administraci.
     index:
       actioned_by: Uskutečnil
-      by: "%{name}"
+      by: '%{name}'
       confirm: Potvrdit
       email: E-mailová adresa
       view_message: Zobrazit...
@@ -604,7 +606,7 @@ cs-CZ:
       no_message: Žádná zpráva nebyla k žádosti o založení místní skupiny připojena
     review:
       actioned_by: Uskutečnil
-      by: "%{name}"
+      by: '%{name}'
       confirm: Potvrdit
       email: E-mailová adresa
       view_message: Zobrazit...
@@ -641,8 +643,8 @@ cs-CZ:
       failure: Odmítnutí požadavku na založení místní skupiny se nezdařilo
   home:
     show:
-      introduction_html: "%{application_name} je nástroj na podporu místních skupin
-        snažících se o zlepšení podmínek pro jízdu na kole ve svém okolí."
+      introduction_html: '%{application_name} je nástroj na podporu místních skupin
+        snažících se o zlepšení podmínek pro jízdu na kole ve svém okolí.'
       center_box_title: Zde můžete navrhnout, jak zlepšit podmínky pro jízdu na kole
       center_box_html: Neexistující cyklostezka? Překážka bránící v provozu? Chybějící
         cyklostojan? Nebo příklad, kde bylo něco uděláno správně?
@@ -658,7 +660,7 @@ cs-CZ:
       find_group: Najít místní skupinu pomocí jména nebo PSČ
       your_postcode: PSČ nebo název oblasti
       go: Najít
-      twitter_title: "%{application_name} na Twitteru"
+      twitter_title: '%{application_name} na Twitteru'
     twitter:
       title: Tweety o aplikaci %{application_name}
     guide:
@@ -672,10 +674,10 @@ cs-CZ:
   issue:
     message_threads:
       new:
-        new_hint: |-
-          Na tomto místě můžete začít diskutovat o podnětu.
-          K jednomu podnětu může být několik různých diskuzních vláken.
-          Např. nový stavební záměr se může dotýkat dopravy na silnici a zároveň ovlivňovat přístup na lesní cyklostezku.
+        new_hint: To je místo, kde se spustí diskusi o tomto problému.  n Tam by mohlo
+          být mnoho různých diskusních vláken, že jedna otázka vytváří  n např Nové
+          plány aplikace může mít vliv na provoz na silnici a ovlivňují přístup cyklu
+          do lesa.
         title: Nové vlákno na téma %{issue}
         everyone: Každý
     photos:
@@ -691,9 +693,9 @@ cs-CZ:
       votes: hlasy
       thread_count:
         one: 1 vlákno
-        other: "%{count} vláken"
-        few: "%{count} vláken"
-        many: "%{count} vláken"
+        other: '%{count} vláken'
+        few: '%{count} vláken'
+        many: '%{count} vláken'
     destroy:
       failure: Tento podnět nemůže být odstraněn
       success: Podnět odstraněn
@@ -728,8 +730,8 @@ cs-CZ:
         se mohlo udělat? Nahlaste problém níže.
       new_issue_privacy_warning: Mějte na paměti, že všechny podněty jsou zobrazené
         veřejně. K podnětu je ale možné udělat soukromé vlákno, jakmile bude odeslán.
-      admin_thread_pointer_html: "%{administrative_matters_link} bez vazby na nějaké
-        území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny."
+      admin_thread_pointer_html: '%{administrative_matters_link} bez vazby na nějaké
+        území (např. nějaké setkání) můžete oznámit v oddílu administrace místní skupiny.'
       administrative_matters: Čistě administrativní záležitosti
     show:
       added_by_html: Přidal %{name} %{time}
@@ -760,7 +762,7 @@ cs-CZ:
     application:
       admin: Administrace
       admin_tooltip: Administrace, určeno pro systémové administrátory
-      dashboard: Moje %{application_name}
+      dashboard: Moje stránka
       dashboard_tooltip: Vaše přístrojová deska, ukazuje aktualizace diskuzních vláken
         do kterých jste zapsáni.
       about: O stránkách
@@ -809,9 +811,9 @@ cs-CZ:
       no_results_found: Žádné výsledky pro '%{query}'.
       results_found:
         one: Jeden výsledek nalezeno pro '%{query}'.
-        other: "%{count} výsledků nalezeno pro '%{query}'"
-        few: "%{count} výsledků nalezeno pro '%{query}'"
-        many: "%{count} výsledků nalezeno pro '%{query}'"
+        other: '%{count} výsledků nalezeno pro ''%{query}'''
+        few: '%{count} výsledků nalezeno pro ''%{query}'''
+        many: '%{count} výsledků nalezeno pro ''%{query}'''
       title: Výsledky prohledávání knihovny
     show:
       title: Knihovna
@@ -830,10 +832,10 @@ cs-CZ:
       new_document: Dokument
       new_item_title: Vyberte typ
       new_item_description_html: 'Vyberte typ položky, který chcete přidat do knihovny:'
-      new_note_description_html: "<strong>Poznámky</strong> jsou určeny pro krátký
-        text."
-      new_document_description_html: "<strong>Dokumenty</strong> vám umožňují nahrávat
-        soubory."
+      new_note_description_html: <strong>Poznámky</strong> jsou určeny pro krátký
+        text.
+      new_document_description_html: <strong>Dokumenty</strong> vám umožňují nahrávat
+        soubory.
   library:
     documents:
       new:
@@ -886,8 +888,8 @@ cs-CZ:
         subject: '[%{application_name}] [Admin] Uživatel "%{user_name}" požaduje zřízení
           nové skupiny "%{group_name}"'
       new_gmr:
-        subject: "[%{application_name}] [Správce skupiny] Uživatel %{user_name} se
-          chce připojit do skupiny %{group_name}"
+        subject: '[%{application_name}] [Správce skupiny] Uživatel %{user_name} se
+          chce připojit do skupiny %{group_name}'
       new_group_thread:
         subject: '[%{application_name}] "%{thread_title}" (%{group_name})'
       new_group_location_issue:
@@ -900,10 +902,10 @@ cs-CZ:
         subject: '[%{application_name}] [Admin] Nová skupina "%{group_name}" byla
           zřízena'
       group_request_rejected:
-        subject: '[%{application_name}] [Admin] Nová skupina "%{group_request_name}"
-          nebyla zřízena'
+        subject: '[%{application_name}] [Admin] Nová skupina "%{group_name}" nebyla
+          zřízena'
       new_user_confirmed:
-        subject: "[%{application_name}] Vítejte na %{application_name}"
+        subject: '[%{application_name}] Vítejte na %{application_name}'
       upcoming_issue_deadline:
         subject: '[%{application_name}] Nadcházející termín/datum pro "%{issue_title}"'
       upcoming_thread_deadline:
@@ -911,17 +913,17 @@ cs-CZ:
     thread_mailer:
       common:
         subject:
-          one: "[%{application_name}] %{title}"
+          one: '[%{application_name}] %{title}'
           other: 'Re: [%{application_name}] %{title}'
           few: 'Re: [%{application_name}] %{title}'
           many: 'Re: [%{application_name}] %{title}'
         committee_subject:
-          one: "[%{application_name}] [Správce skupiny] %{title}"
+          one: '[%{application_name}] [Správce skupiny] %{title}'
           other: 'Re: [%{application_name}] [Správce skupiny] %{title}'
           few: 'Re: [%{application_name}] [Správce skupiny] %{title}'
           many: 'Re: [%{application_name}] [Správce skupiny] %{title}'
       digest:
-        subject: "[%{application_name}] Souhrn pro %{date}"
+        subject: '[%{application_name}] Souhrn pro %{date}'
   message_thread:
     subscriptions:
       create:
@@ -957,8 +959,8 @@ cs-CZ:
       title: Upravit vlastnosti diskuzních vláken
       description: Jako správce místní skupiny můžete opravit vlastnosti diskuzních
         vláken zde.
-      thread_fix_warning_html: "<strong>Varování:</strong> vaše místní skupina má
-        omezené možnosti nastavení přístupu k diskuzním vláknům."
+      thread_fix_warning_html: <strong>Varování:</strong> vaše místní skupina má omezené
+        možnosti nastavení přístupu k diskuzním vláknům.
     destroy:
       failure: Nemohu smazat diskuzní vlákno
       success: Diskuzní vlákno smazáno
@@ -991,9 +993,9 @@ cs-CZ:
       no_results_found: Žádné výsledky nenalezeny pro '%{query}'.
       results_found:
         one: Jeden výsledek nalezen pro '%{query}'
-        other: "%{count} výsledků nalezeno pro '%{query}'"
-        few: "%{count} výsledků nalezeno pro '%{query}'"
-        many: "%{count} výsledků nalezeno pro '%{query}'"
+        other: '%{count} výsledků nalezeno pro ''%{query}'''
+        few: '%{count} výsledků nalezeno pro ''%{query}'''
+        many: '%{count} výsledků nalezeno pro ''%{query}'''
       search: 'Prohledat všechna diskuzní vlákna:'
       search_submit: Hledat
       title: Výsledky prohledávání diskuzních vláken
@@ -1017,7 +1019,7 @@ cs-CZ:
       owner: Vlastník
       subscribers: Uživatelé, kteří sledují toto vlákno
     connected_to_thread:
-      leading: "[vedoucí]"
+      leading: '[vedoucí]'
     update:
       success: Vlákno upraveno
     widget:
@@ -1092,14 +1094,14 @@ cs-CZ:
           posouvala kupředu.
         introduction_action: Převezmu zodpovědnost za vedení této diskuze.
         default_leader_message_html: Popište vaši motivaci pro vedení této diskuze
-        default_unleading_message_html: " Popište, proč už nejste schopen nadále vést
-          diskuzi"
+        default_unleading_message_html: ' Popište, proč už nejste schopen nadále vést
+          diskuzi'
         start_leading: Začít vést vlákno
         stop_leading: Přestat vést vlákno
       show:
-        new_leader_html: "%{leader_link} bere zodpovědnost, za to, že se diskuze posouvá
-          kupředu a jsou podniknuty příslušné kroky k tomu, aby byl problém vyřešen."
-        removed_leader_html: "%{leader_link} přestal být vedoucím diskuze."
+        new_leader_html: '%{leader_link} bere zodpovědnost, za to, že se diskuze posouvá
+          kupředu a jsou podniknuty příslušné kroky k tomu, aby byl problém vyřešen.'
+        removed_leader_html: '%{leader_link} přestal být vedoucím diskuze.'
   message_library:
     documents:
       new:
@@ -1117,7 +1119,7 @@ cs-CZ:
       censored: Tato zpráva byla odebrána
       create_note: Vytvořit poznámku v knihovně
       create_document: Vytvořit dokument v knihovně
-      committee: "[Správce skupiny]"
+      committee: '[Správce skupiny]'
     new:
       compose_new: Vytvořit novou
       from_library: Z knihovny
@@ -1152,9 +1154,9 @@ cs-CZ:
       select_image: Vybrat obrázek
   pages:
     changelog:
-      github_history_link_html: "<a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>u."
+      github_history_link_html: <a href='https://github.com/cyclestreets/cyclescape/commits/master/'>GitHub</a>u.
       header: Co je nového?
-      introduction: Toto je přehled nedávných změn na tomto webu. Kompletní detailní
+      introduction: Toto je přehled nedávných změn na tété stránce. Kompletní detailní
         historii vývoje můžete sledovat na
   planning_application:
     issues:
@@ -1181,23 +1183,23 @@ cs-CZ:
       threads_found:
         zero: Žádná diskuzní vlákna nenalezena pro '%{query}'.
         one: 'Nalezeno diskuzní vlákno pro ''%{query}'':'
-        other: "%{count} diskuzních vláken nalezeno pro '%{query}':"
+        other: '%{count} diskuzních vláken nalezeno pro ''%{query}'':'
       issues_found:
         zero: Žádný podnět nenalezen pro '%{query}'.
         one: 'Nalezen jeden podnět pro ''%{query}'':'
-        other: "%{count} podnětů nalezeno pro '%{query}':"
+        other: '%{count} podnětů nalezeno pro ''%{query}'':'
       library_items_found:
         zero: Žádná položka knihovny nenalezena pro '%{query}'.
         one: 'Nalezena položka knihovny pro ''%{query}'':'
-        other: "%{count} položek knihovny nalezeno pro '%{query}':"
+        other: '%{count} položek knihovny nalezeno pro ''%{query}'':'
       planning_found:
         zero: Žádné plánování nenalezeno pro '%{query}'.
         one: 'Jedno plánování nalezeno pro ''%{query}'':'
-        other: "%{count} plánování nalezeno pro '%{query}':"
+        other: '%{count} plánování nalezeno pro ''%{query}'':'
       hashtag_found:
         zero: No hashtagss found for '%{query}'.
         one: 'One hashtag found for ''%{query}'':'
-        other: "%{count} hashtags found for '%{query}':"
+        other: '%{count} hashtags found for ''%{query}'':'
     edit_map:
       area: oblast
       clear: vymazat
@@ -1282,8 +1284,8 @@ cs-CZ:
         success: Děkujeme za vaší zpětnou vazbu!
   thread_mailer:
     header:
-      added: "%{name} přidal %{type} do vlákna"
-      committee: "[Správce skupiny]"
+      added: '%{name} přidal %{type} do vlákna'
+      committee: '[Správce skupiny]'
     new_map_message:
       type: a map
       view_the_map: 'You can view the map at:'
@@ -1309,8 +1311,8 @@ cs-CZ:
       view_the_street_view: 'Street View si můžete vidět na:'
     new_thread_leader_message:
       type: vedoucí
-      new_leader: "%{leader_link} se stal vedoucím vlákna %{thread_title}."
-      removed_leader: "%{leader_link} přestal být vedoucím vlákna %{thread_title}."
+      new_leader: '%{leader_link} se stal vedoucím vlákna %{thread_title}.'
+      removed_leader: '%{leader_link} přestal být vedoucím vlákna %{thread_title}.'
     new_action_message:
       type: a call to action
     footer:
@@ -1447,9 +1449,9 @@ cs-CZ:
             skupin.
         group_membership_label: 'Místní skupiny:'
         is_a_member_of_groups:
-          zero: "%{name} zatím není členem žádné místní skupiny"
-          one: "%{name} je členem jedné místní skupiny"
-          other: "%{name} je členem %{count} místních skupin"
+          zero: '%{name} zatím není členem žádné místní skupiny'
+          one: '%{name} je členem jedné místní skupiny'
+          other: '%{name} je členem %{count} místních skupin'
         no_groups: Žádné
         no_website: Žádná
         profile_picture_title: obrázek uživatele %{name}
@@ -1489,8 +1491,8 @@ cs-CZ:
           zero: Žádný %{entry_name} nenalezen
   views:
     pagination:
-      first: "&laquo; První"
+      first: '&laquo; První'
       last: Poslední &raquo;
       next: Další &rsaquo;
-      previous: "&lsaquo; Předchozí"
-      truncate: "&hellip;"
+      previous: '&lsaquo; Předchozí'
+      truncate: '&hellip;'

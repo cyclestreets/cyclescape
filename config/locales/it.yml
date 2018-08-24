@@ -13,8 +13,8 @@ it:
   navigate_away_warning: Are you sure you want to navigate away
   possible_spam: We think this message might be spam. If not, please accept our apologies.  It
     is queued to be checked by a moderator.
-  not_approved: New threads can only be automatically created by approved users.  It
-    is queued to be checked by a moderator.
+  not_approved: This message has been temporarily held in a queue to be checked by
+    a moderator, as you are a new user.
   days_away:
     zero: Oggi!
     one: Domani!
@@ -320,6 +320,8 @@ it:
         thread_leader_message_html: '%{creator_link} became a leader'
         cyclestreets_photo_message_html: '%{creator_link} posted a CycleStreets photo'
         thread_leader_withdrawing: Withdrawal of leader
+        map_message_html: '%{creator_link} posted a map'
+        action_message_html: '%{creator_link} created a call to action'
     search:
       title: Risultati di ricerca
   devise:
@@ -513,6 +515,8 @@ it:
         no_location: This group doesn't have any location details yet.
         no_picture: Add a picture to make your group welcoming.
         picture: Picture
+        no_logo: Your group doesn't have a logo yet.
+        logo: Logo
       update:
         success: Profilo aggiornato
     hashtags:
@@ -556,7 +560,11 @@ it:
       no_threads: This group doesn't have any public threads
       our_areas: Our Area
       recent_issues: Recent Issues In Our Area
-      recent_threads: Our Latest Discussions
+      recent_threads: Ultime discussioni
+      active_users: Most active users
+      committee_only: Please note, this tab is is only visible to committee members.
+      display_name: Name
+      messages_last_year: Number of messages last year
       view_membership_requests:
         zero: Review membership requests
         one: View pending membership request
@@ -1008,6 +1016,20 @@ it:
       create:
         failure: Deadline/date could not be created
         success: Deadline/date created
+    maps:
+      new:
+        submit: Add map
+      create:
+        failure: Map could not be created
+        success: Map created
+    actions:
+      new:
+        submit: Add call to action
+      create:
+        failure: Call to action could not be created
+        success: Call to action created
+      show:
+        call_to_action: 'Call to action added:'
     documents:
       create:
         failure: Could not add attachment
@@ -1101,6 +1123,7 @@ it:
       add_to_thread: Add to thread
       search_library: Search library
       deadline_message: Deadline/date
+      map_message: Mappa
       document_message: Attachment
       library_item_message: Libreria
       link_message: Link
@@ -1108,6 +1131,7 @@ it:
       photo_message: Foto
       cyclestreets_photo_message: CycleStreets photo
       thread_leader_message: Thread leader
+      action_message: Call to action
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
       text_message: Testo
       street_view_message: Street view
@@ -1131,12 +1155,17 @@ it:
     too_large: The image you uploaded is too large - it must be less than 3MB
     wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
   shared:
+    actions:
+      resolve_action: 'Resolve outstanding actions:'
+    resolves_actions:
+      resolves_actions: 'Resolves actions:'
     search:
       no_results_found: No results found for '%{query}'
       thread_results: Threads (%{count})
       issue_results: Issues (%{count})
       library_results: Library (%{count})
       planning_results: Planning applications (%{count})
+      hashtag_results: Hashtags (%{count})
       threads_found:
         zero: No threads found for '%{query}'.
         one: 'One thread found for ''%{query}'':'
@@ -1153,6 +1182,10 @@ it:
         zero: No planning applications found for '%{query}'.
         one: 'One planning application found for ''%{query}'':'
         other: '%{count} planning applications found for ''%{query}'':'
+      hashtag_found:
+        zero: No hashtagss found for '%{query}'.
+        one: 'One hashtag found for ''%{query}'':'
+        other: '%{count} hashtags found for ''%{query}'':'
     edit_map:
       area: area
       clear: pulisci
@@ -1228,12 +1261,18 @@ it:
         who: Who
       new:
         title: Feedback
+        introduction: This form is for giving feedback on the website, e.g. to report
+          problems or suggest new features. To respond to an issue under discussion,
+          please click on that issue and follow the discussion thread links.
       create:
         success: Thank you for your feedback!
   thread_mailer:
     header:
       added: '%{name} added %{type} to the thread'
       committee: ' [Committee]'
+    new_map_message:
+      type: a map
+      view_the_map: 'You can view the map at:'
     new_deadline_message:
       type: a deadline/date
     new_document_message:
@@ -1258,6 +1297,8 @@ it:
       type: a leader
       new_leader: '%{leader_link} set themself as a leader of %{thread_title}.'
       removed_leader: '%{leader_link} has removed themself as a leader of %{thread_title}.'
+    new_action_message:
+      type: a call to action
     footer:
       thread: '%{application_name} discussion thread'
       unsubscribe: You can stop following this thread by visiting

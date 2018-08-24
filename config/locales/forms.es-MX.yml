@@ -196,7 +196,8 @@ es-MX:
           leave this blank.
         new_user_email: This will be emailed to every new member, {{full_name}} will
           be converted to the person's full name in the email
-        picture: To be displayed on the group page, ideally 333x192 pixels
+        picture: To be displayed on the group page, ideally 330x192 pixels
+        logo: To be displayed on the group page, ideally 330x192 pixels
       issue:
         new:
           description: Please give details about the problem and what effect it is

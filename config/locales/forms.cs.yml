@@ -1,5 +1,4 @@
----
-cs-CZ:
+cs:
   cancel: Zrušit
   formtastic:
     labels:
@@ -57,7 +56,7 @@ cs-CZ:
       library/document:
         file: Dokument
         title: Nadpis
-      library/item: 
+      library/item: null
       library/note:
         location: Oblast významu
         body: Poznámka
@@ -158,7 +157,7 @@ cs-CZ:
           full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
             místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
           bicycle_wheels: Jako kontrolu, že nejste robot, zadejte prosím množství
-            (počet) kol na šesti bicyklech.
+            (počet) kol na šesti jízdních kolech.
         edit:
           password: Nechte toto políčko prázdné, pokud chcete zachovat stávající heslo.
           current_password: Prosím potvrďte vaše stávající heslo, abyste mohli udělat
@@ -168,7 +167,7 @@ cs-CZ:
           full_name: Prosím poskytněte své plné jméno. Pokud požádáte o členství v
             místní skupině, bude toto jméno vždy zobrazeno administrátorovi skupiny.
           bicycle_wheels: Jako kontrolu, že nejste robot, zadejte prosím množství
-            (počet) kol na šesti bicyklech.
+            (počet) kol na šesti jízdních kolech.
       group:
         short_name: Musí být malé alfanumerické znaky; a-z, 0-9
       group_request:
@@ -205,40 +204,40 @@ cs-CZ:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: "(nepovinné)"
+          deadline: (nepovinné)
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
+          photo: (nepovinné), maximálně 6MB, obrázek se automaticky zmenší
           title: Prosím buďte struční a konkrétní.
           tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         create:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: "(nepovinné)"
+          deadline: (nepovinné)
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
+          photo: (nepovinné), maximálně 6MB, obrázek se automaticky zmenší
           title: Prosím buďte struční a konkrétní.
           tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         edit:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: "(nepovinné)"
+          deadline: (nepovinné)
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
+          photo: (nepovinné), maximálně 6MB, obrázek se automaticky zmenší
           title: Prosím buďte struční a konkrétní.
           tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
         update:
           description: Prosím popište podrobnosti vašeho problému a jaký to má dopad
             na cyklistickou dopravu. Mějte na paměti, že všechny podněty jsou veřejně
             přístupné.
-          deadline: "(nepovinné)"
+          deadline: (nepovinné)
           external_url: Pokud považujete nějakou další webovou stránku za relevantní,
             můžete jí přidat zde.
-          photo: "(nepovinné), maximálně 6MB, obrázek se automaticky zmenší"
+          photo: (nepovinné), maximálně 6MB, obrázek se automaticky zmenší
           title: Prosím buďte struční a konkrétní.
           tags_string: 'čárkou oddělený seznam štítků např.: cyklistický stojan, překážka'
       message_thread:

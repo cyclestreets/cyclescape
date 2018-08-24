@@ -200,7 +200,8 @@ de-DE:
           leave this blank.
         new_user_email: Folgendes wird an alle Mitglieder verschickt, {{full_name}}
           wird in der Mail durch den vollständigen Namen der Person ersetzt
-        picture: Wird auf der Gruppenseite angezeigt, idealerweise 333x192 Pixel
+        picture: To be displayed on the group page, ideally 330x192 pixels
+        logo: To be displayed on the group page, ideally 330x192 pixels
       issue:
         new:
           description: Bitte erkläre Details über das Problem und welchen Effekt es
