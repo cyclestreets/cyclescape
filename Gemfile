@@ -53,6 +53,7 @@ gem 'resque-rollbar'
 gem 'thin'
 gem 'thumbs_up', '~> 0.4.6'
 gem 'whenever'
+gem 'font-awesome-rails'
 
 gem 'grape'
 gem 'grape-kaminari'
