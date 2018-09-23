@@ -1085,6 +1085,10 @@
       point: point
       route: route
       undo: undo
+    image_edit:
+      zoom_in: Zoom in
+      zoom_out: Zoom out
+      rotate: Rotate
     map_search:
       near: near
       searching: Searching…

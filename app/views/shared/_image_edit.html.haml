@@ -6,8 +6,16 @@
     %p.inline-hints
       = hint
 %li
-  %div{id: "preview_#{attribute}"}
-  .image-edit-rotate{id: "rotate_#{attribute}"}
-    = image_tag "rotate.png"
+  - width = opts[:width] ? "width: #{opts[:width]}px" : ""
+  - height = opts[:height] && !opts[:enableresize] ? "; height: #{opts[:height]}px" : ""
+  .croppy-container{style: "#{width}#{height}"}
+    %img.croppy{id: "preview_#{attribute}"}
+  .bs.btn-group
+    .bs.btn.btn-grey{title: t(".zoom_in")}
+      %i.fa.fa-search-plus{id: "zoom_in_#{attribute}"}
+    .bs.btn.btn-grey{title: t(".zoom_out")}
+      %i.fa.fa-search-minus{id: "zoom_out_#{attribute}"}
+    .bs.btn.btn-grey{title: t(".rotate")}
+      %i.fa.fa-rotate-left{id: "rotate_#{attribute}"}
 = f.input "base64_#{attribute}", as: :hidden
 = f.input "retained_#{attribute}", as: :hidden

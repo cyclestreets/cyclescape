@@ -32,5 +32,5 @@
 //= require location_preset
 //= require navigate_away_warning
 //= require leaflet_draw_override
-//= require croppie/croppie
+//= require cropperjs/dist/cropper
 //= require image_edit

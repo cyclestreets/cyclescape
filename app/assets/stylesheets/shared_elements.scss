@@ -1100,3 +1100,31 @@ ul.latest-discussions {
 .float-right {
   float: right !important;
 }
+
+.bs.btn-group {
+  position: relative;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-bottom: .5rem;
+  margin-right: .25rem;
+}
+
+.bs.btn {
+  padding-left: .75rem;
+  padding-right: .75rem;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+}

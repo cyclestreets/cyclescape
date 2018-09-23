@@ -3,7 +3,8 @@
   "globals": {
     "LeafletMap": true,
     "jsonpTransportRequired": true,
-    "L": true
+    "L": true,
+    "Cropper": true
   },
   "env": {
     "browser": true,

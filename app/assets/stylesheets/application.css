@@ -18,6 +18,7 @@
  *= require "leaflet-search.scss"
  *= require "leaflet.draw.scss"
  *= require "jqcloud"
- *= require "croppie"
+ *= require "image-edit"
+ *= require "cropperjs/dist/cropper"
  *= require font-awesome
 */
