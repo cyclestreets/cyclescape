@@ -426,7 +426,7 @@ GEM
     ruby-progressbar (1.9.0)
     ruby_parser (3.11.0)
       sexp_processor (~> 4.9)
-    rubyzip (1.2.1)
+    rubyzip (1.2.2)
     safe_yaml (1.0.4)
     sass (3.4.25)
     sass-rails (5.0.7)
@@ -579,6 +579,7 @@ DEPENDENCIES
   rubocop
   ruby-prof
   ruby_parser
+  rubyzip (~> 1.2.2)
   sass-rails (~> 5.0)
   selenium-webdriver
   shoulda-matchers
