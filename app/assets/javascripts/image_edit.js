@@ -54,10 +54,10 @@ ImageEdit.prototype.initCroppie = function () {
           y: canvas.height / 2
         }
       ).crop()
+      this.updateResult()
     }.bind(this)
   })
   this.previewEl[0].addEventListener('cropend', this.updateResult)
-  this.updateResult()
   this.rotateEl.parent().on('click', function () {
     this.cropper.rotate(-90)
     this.updateResult()
