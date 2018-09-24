@@ -13,7 +13,7 @@ class IssueDecorator < ApplicationDecorator
   end
 
   def description
-    if issue.id < 3213
+    if issue.html?
       h.auto_link h.simple_format issue.description
     else
       h.sanitize issue.description

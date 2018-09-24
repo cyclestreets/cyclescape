@@ -449,4 +449,26 @@ describe Issue do
     thread.update(closed: true)
     expect(subject.reload.closed?).to eq true
   end
+
+  context "with a TinyMCE time" do
+    before do
+      Rails.cache.clear
+      ActiveRecord::Base.connection.delete(
+        "DELETE FROM html_issues"
+      )
+      ActiveRecord::Base.connection.insert(
+        "INSERT INTO html_issues (created_at) VALUES (CURRENT_TIMESTAMP)"
+      )
+    end
+
+    it "is html if created after" do
+      issue = build_stubbed :issue, created_at: 1.hour.from_now
+      expect(issue).to be_html
+    end
+
+    it "is not html if created after" do
+      issue = build_stubbed :issue, created_at: 1.hour.ago
+      expect(issue).to_not be_html
+    end
+  end
 end

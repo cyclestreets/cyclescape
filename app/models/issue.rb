@@ -100,6 +100,13 @@ class Issue < ActiveRecord::Base
     all_day ? deadline.to_date : deadline
   end
 
+  def html?
+    tinymce_time = Rails.cache.fetch("tinymce_time", expires_in: 1.year) do
+      Time.zone.parse(ActiveRecord::Base.connection.select_value("SELECT created_at FROM html_issues"))
+    end
+    created_at > tinymce_time
+  end
+
   protected
 
   # Association callback
