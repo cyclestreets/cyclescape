@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
 module MailerHelper
+  def self.included(base)
+    base.class_eval do
+      include ActionMailer::Html2Text
+    end
+  end
+
   # Our domain name
   def domain
     @domain ||= SiteConfig.first.email_domain

@@ -28,6 +28,9 @@ GEM
       activejob (= 4.2.10)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
+    actionmailer-html2text (0.2.0)
+      actionmailer
+      html2text (~> 0.2.0)
     actionpack (4.2.10)
       actionview (= 4.2.10)
       activesupport (= 4.2.10)
@@ -209,6 +212,8 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
+    html2text (0.2.1)
+      nokogiri (~> 1.6)
     htmlentities (4.3.4)
     http_accept_language (2.1.1)
     i18n (0.9.5)
@@ -508,6 +513,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  actionmailer-html2text
   actionview-encoded_mail_to
   activerecord-postgis-adapter (~> 3.0)
   annotate (>= 2.5.0)
