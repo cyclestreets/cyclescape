@@ -530,8 +530,8 @@ describe User, type: :model do
 
       it 'should send digests' do
         expect{described_class.email_digests!}.to change{all_emails.count}.by(1)
-        expect(all_emails.last.body).to include(new_message.public_token)
-        expect(all_emails.last.body).to_not include(old_message.public_token)
+        expect(all_emails.last.text_part.decoded).to include(new_message.public_token)
+        expect(all_emails.last.text_part.decoded).to_not include(old_message.public_token)
       end
     end
 

@@ -32,4 +32,4 @@
         closed: Closed
         moderated: In Moderation
     models:
-      message_thread: Thread
+      message_thread: Discussion thread

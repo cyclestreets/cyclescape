@@ -1159,6 +1159,7 @@
   thread_mailer:
     header:
       added: '%{name} added %{type} to the thread'
+      added_html: '%{name} added %{message_link} to the thread'
       committee: ' [Committee]'
     new_map_message:
       type: a map
@@ -1177,9 +1178,11 @@
     new_photo_message:
       type: a photo
       view_the_photo: 'You can view the photo at:'
+      photo_alt: The photo for %{caption}.
     new_cyclestreets_photo_message:
       type: a photo
       view_the_photo: 'You can view the Cyclestreets photo at:'
+      photo_alt: The photo for %{caption}.
     new_street_view_message:
       type: a street view
       view_the_street_view: 'You can see the Street View at:'
@@ -1192,6 +1195,9 @@
     footer:
       thread: "%{application_name} discussion thread"
       unsubscribe: You can stop following this thread by visiting
+      thread_html: "From %{application_name} %{link}."
+      unsubscribe_html: "You can %{link}."
+      stop_following: stop following this thread
   thread_priorities:
     very_high: Top-priority
     high: Important
