@@ -1,11 +1,5 @@
 
 --------
-<%= t(".thread", application_name: @site_config.application_name) %>:
-<% if defined?(@message) %>
-  <%= thread_url(@thread, anchor: dom_id(@message)) %>
-<% else %>
-  <%= thread_url(@thread) %>
-<% end %>
 You can reply to the email and the message will be added to the thread.
 
 <% if @thread.private_to_committee? %>
@@ -23,3 +17,10 @@ Everyone can view this discussion thread and post messages.
 
 <%= t ".unsubscribe" %>
 <%= edit_thread_subscription_url(@thread, @subscription, t: @subscriber.public_token) %>
+
+<%= t(".thread", application_name: @site_config.application_name) %>:
+<% if defined?(@message) %>
+  <%= thread_url(@thread, anchor: dom_id(@message)) %>
+<% else %>
+  <%= thread_url(@thread) %>
+<% end %>
