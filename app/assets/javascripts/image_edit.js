@@ -49,7 +49,7 @@ ImageEdit.prototype.initCroppie = function () {
     ready: function () {
       var canvas = this.cropper.initialCanvasData
       this.cropper.zoomTo(
-        canvas.width / (canvas.naturalWidth + 1), {
+        canvas.width / (canvas.naturalWidth), {
           x: canvas.width / 2,
           y: canvas.height / 2
         }

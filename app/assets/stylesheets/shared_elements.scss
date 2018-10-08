@@ -1102,12 +1102,14 @@ ul.latest-discussions {
 }
 
 .bs.btn-group {
-  position: relative;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+  width: 50%;
+  margin: 0 auto;
   vertical-align: middle;
   margin-bottom: .5rem;
-  margin-right: .25rem;
+  margin-top: .25rem;
+  .btn {
+    margin-right: .25rem;
+  }
 }
 
 .bs.btn {
