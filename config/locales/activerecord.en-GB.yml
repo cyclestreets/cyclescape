@@ -11,6 +11,9 @@
             full_name:
               blank: "Please enter a name"
               email: "Please enter an email address"
+        potential_member:
+          email_format_invalid: "'%{value}' is an invalid format for an email address"
+          email_exists_in_group: "'%{value}' is being added twice"
         message_thread:
           attributes:
             base:

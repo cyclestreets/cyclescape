@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180706211731) do
+ActiveRecord::Schema.define(version: 20181007190340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -453,7 +453,7 @@ ActiveRecord::Schema.define(version: 20180706211731) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "potential_members", ["email_hash"], name: "index_potential_members_on_email_hash", unique: true, using: :btree
+  add_index "potential_members", ["email_hash", "group_id"], name: "index_potential_members_on_email_hash_and_group_id", unique: true, using: :btree
   add_index "potential_members", ["group_id"], name: "index_potential_members_on_group_id", using: :btree
 
   create_table "site_comments", force: :cascade do |t|

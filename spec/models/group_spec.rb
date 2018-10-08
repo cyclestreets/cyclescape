@@ -34,6 +34,30 @@ describe Group do
     expect(described_class.from_geo_or_name("")).to be_blank
   end
 
+  describe "#update_potetial_members" do
+    let(:group) { create(:group) }
+
+    it "errors if there is a problem" do
+      group.update_potetial_members("a@b.com\naab.com")
+      expect(group.errors[:potential_members]).to include("Email 'aab.com' is an invalid format for an email address")
+    end
+
+
+    context "with existing potential_members" do
+      before do
+        group.update_potetial_members("a@b.com\na1@b.com")
+      end
+
+      it "wipes existing potential_members if it sucesseds" do
+        group.update_potetial_members("a@b.com\nc@d.com")
+        expect(group.potential_members.map(&:email_hash)).to contain_exactly(
+          PotentialMember.new(email: "a@b.com").email_hash,
+          PotentialMember.new(email: "c@d.com").email_hash,
+        )
+      end
+    end
+  end
+
   it ".from_geo_name" do
     stub_request(:get, %r{https://api\.cyclestreets\.net/v2/geocoder\?key=.*&q=leeds}).
       with(:headers => {'Accept' => 'application/json'}).

@@ -35,6 +35,10 @@ class Group < ActiveRecord::Base
   validates :short_name, presence: true, uniqueness: true, subdomain: true
   validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }
 
+  validates_associated :potential_members, message: ->(_, obj) do
+    obj[:value].flat_map(&:errors).map(&:to_a).flatten.to_sentence
+  end
+
   after_create :create_default_profile, unless: :profile
   after_create :create_default_prefs, unless: :prefs
   before_destroy :unlink_threads
@@ -139,9 +143,11 @@ class Group < ActiveRecord::Base
   end
 
   def update_potetial_members(emails)
-    potential_members.destroy_all
-    emails.split(/\r?\n/).each do |email|
-      potential_members.build email: email
+    with_lock do
+      potential_members.destroy_all
+      emails.split(/\r?\n/).each do |email|
+        potential_members.build email: email
+      end
     end
     save
   end
