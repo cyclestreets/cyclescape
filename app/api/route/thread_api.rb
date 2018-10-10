@@ -12,6 +12,7 @@ module Route
       optional :end_date, types: [DateTime, Date], desc: 'Only threads after or at the end date or time are returned'
       optional :start_date, types: [DateTime, Date], desc: 'Only threads before or at the start date or time are returned'
       optional :after_id, types: Integer, desc: 'Only threads with ID greather than this are returned'
+      optional :external_service, type: String, desc: 'Filter by external service short name'
     end
 
     helpers do
@@ -27,6 +28,7 @@ module Route
         scope = scope.before_date(params[:end_date]) if params[:end_date]
         scope = scope.after_date(params[:start_date]) if params[:start_date]
         scope = scope.after_id(params[:after_id]) if params[:after_id]
+        scope = scope.joins(:external_service).where('external_services.short_name' => params[:external_service]) if params[:external_service]
         scope = paginate scope
       end
     end

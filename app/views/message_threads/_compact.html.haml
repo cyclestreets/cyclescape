@@ -13,4 +13,7 @@
             = thread.latest_activity_by.display_name_or_anon
           = time_tag_with_title(thread.latest_activity_at) do
             - t ".posted_at", time_ago: time_ago_in_words(thread.latest_activity_at)
-  .permissions= thread_type(thread)
+  .thread-parameters
+    - if thread.external_service
+      .external-service= thread.external_service.name
+    .permissions= thread_type(thread)

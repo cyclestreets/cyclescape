@@ -51,6 +51,7 @@ class MessageThread < ActiveRecord::Base
   belongs_to :group, inverse_of: :threads, counter_cache: true
   belongs_to :issue, inverse_of: :threads
   belongs_to :user, inverse_of: :private_threads
+  belongs_to :external_service, inverse_of: :threads
   has_many :messages, -> { order(created_at: :asc) }, foreign_key: 'thread_id', autosave: true, inverse_of: :thread
   has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: 'ThreadSubscription', foreign_key: 'thread_id', inverse_of: :thread
   has_many :subscribers, through: :subscriptions, source: :user
@@ -327,6 +328,7 @@ class MessageThread < ActiveRecord::Base
       group_id: group_id,
       title: title,
       public_token: public_token,
+      external_service: external_service ? external_service.short_name : nil,
       created_at: created_at,
       updated_at: updated_at,
       closed: closed,

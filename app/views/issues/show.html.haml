@@ -49,6 +49,10 @@
 %aside#sidebar.wide
   - if permitted_to? :create, :issue_message_threads
     = link_to t(".new_thread", count: @issue.threads.count), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
+  - if current_user and current_user.groups.present?
+    - if ExternalService.all.present?
+      - if permitted_to? :create, :issue_message_threads
+        = link_to t(".new_send_thread", count: @issue.threads.count), issue_threads_new_external_path(@issue), class: "btn-green", rel: "#overlay"
   %section.social
     = tweet_button text: @issue.title, link: issue_url(@issue)
     = facebook_like issue_url(@issue)

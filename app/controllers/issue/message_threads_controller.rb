@@ -17,6 +17,24 @@ class Issue::MessageThreadsController < MessageThreadsController
     @message = @thread.messages.build
     @message.body = issue.description if issue.threads.count == 0
     @available_groups = current_user.groups
+    @external_services = ExternalService.all
+  end
+
+  helper_method :new_external
+
+  def new_external
+    @thread = issue.threads.build
+    set_page_title nil, issue: issue.title
+    if current_group
+      @thread.group = current_group
+      @thread.privacy = current_group.default_thread_privacy
+    end
+    @message = @thread.messages.build
+    @message.body = issue.description
+    @thread.title = issue.title
+    @thread.privacy = "public"
+    @available_groups = current_user.groups
+    @external_services = ExternalService.all
   end
 
   def create

@@ -260,7 +260,7 @@ ul.thread-list {
       padding-left:42px;
       background: image-url("map-icons/m-roadworks.png") 0 20px no-repeat;
     }
-    .permissions {
+    .thread-parameters {
       float:right;
     }
   }
@@ -278,7 +278,7 @@ ul.thread-list {
   }
 }
 
-.permissions {
+.thread-parameters {
   width: 80px;
   color: $lightgrey;
   text: {

@@ -1,0 +1,15 @@
+%header
+  %h1= t ".title"
+%section
+  .tasks
+    %p= link_to t(".new_external_service"), new_admin_external_service_path
+  %table
+    %thead
+      %th= t ".name"
+      %th= t ".short_name"
+    %tbody
+      - @external_services.each do |external_service|
+        %tr
+          %td= external_service.name
+          %td= external_service.short_name
+          %td= link_to t(".edit"), [:edit, :admin, external_service]

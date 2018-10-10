@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get :all_geometries, on: :collection
       scope module: 'issue' do
         resource :photo, only: [:show]
+        get "/threads/new_external", to: "message_threads#new_external"
         resources :threads, controller: 'message_threads'
         resource :tags, only: [:update]
       end
@@ -50,6 +51,7 @@ Rails.application.routes.draw do
     resources :groups do
       put :disable, :enable, on: :member
     end
+    resources :external_services
     resource :site_config
     resources :stats, only: :index
     resources :message_moderations, only: :index
