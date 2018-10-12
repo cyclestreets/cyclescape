@@ -7,9 +7,9 @@
                %>
 
 <% if @message.component.unleading %>
-<%= t ".removed_leader", leader_link: leader_link, thread_title: @message.thread.title %>
+<%= t ".removed_leader_html", leader_link: leader_link, thread_title: @message.thread.title %>
 <% else %>
-<%= t ".new_leader", leader_link: leader_link, thread_title: @message.thread.title %>
+<%= t ".new_leader_html", leader_link: leader_link, thread_title: @message.thread.title %>
 <% end %>
 <br>
 <%= raw @message.component.description %>

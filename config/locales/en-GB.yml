@@ -1188,8 +1188,8 @@
       view_the_street_view: 'You can see the Street View at:'
     new_thread_leader_message:
       type: a leader
-      new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
-      removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
+      new_leader_html: "%{leader_link} set themself as a leader of %{thread_title}."
+      removed_leader_html: "%{leader_link} has removed themself as a leader of %{thread_title}."
     new_action_message:
       type: a call to action
     footer:
