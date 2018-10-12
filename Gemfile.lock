@@ -28,9 +28,6 @@ GEM
       activejob (= 4.2.10)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 1.0, >= 1.0.5)
-    actionmailer-html2text (0.2.0)
-      actionmailer
-      html2text (~> 0.2.0)
     actionpack (4.2.10)
       actionview (= 4.2.10)
       activesupport (= 4.2.10)
@@ -513,7 +510,6 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  actionmailer-html2text
   actionview-encoded_mail_to
   activerecord-postgis-adapter (~> 3.0)
   annotate (>= 2.5.0)
@@ -543,6 +539,7 @@ DEPENDENCIES
   grape-swagger
   grape-swagger-rails
   haml-rails
+  html2text
   http_accept_language
   icalendar
   jqcloud-rails!
@@ -606,4 +603,4 @@ DEPENDENCIES
   will-paginate-i18n
 
 BUNDLED WITH
-   1.16.0
+   1.16.5

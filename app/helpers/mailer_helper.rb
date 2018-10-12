@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 module MailerHelper
-  def self.included(base)
-    base.class_eval do
-      include ActionMailer::Html2Text
-    end
-  end
+  require "html2text"
 
   # Our domain name
   def domain

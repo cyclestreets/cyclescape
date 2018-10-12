@@ -7,7 +7,7 @@ been created for the <%= raw @group.name %> group.
 <% end %>
 
 <%= raw @thread.first_message.created_by.name %> wrote:
-<%= raw @thread.first_message.body %>
+<%= Html2Text.convert(@thread.first_message.body) %>
 
 You aren't subscribed to this discussion thread, so you won't receive any
 more updates. You can read the whole thread, and subscribe to it at:

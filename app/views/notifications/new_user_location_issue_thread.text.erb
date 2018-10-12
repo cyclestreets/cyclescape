@@ -1,11 +1,12 @@
 A new discussion thread has been started on the issue
 "<%= raw @thread.issue.title %>"
-within your location.
+
+within your locations.
 
 <%= raw @thread.title %>
 Discussion thread started by <%= raw @message.created_by.name %>
 
-<%= raw @message.body %>
+<%= Html2Text.convert(@message.body) %>
 
 You aren't subscribed to this discussion thread, so you won't receive any
 more updates. You can read the whole thread, and subscribe to it at:

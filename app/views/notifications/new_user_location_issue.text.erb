@@ -3,7 +3,7 @@ within your location.
 
 "<%= raw @issue.title %>"
 
-<%= raw @issue.description %>
+<%= Html2Text.convert(@issue.description) %>
 
 You can view the issue, and start a new discussion, at:
 <%= issue_url(@issue) %>
