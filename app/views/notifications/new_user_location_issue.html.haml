@@ -1,0 +1,19 @@
+<%= raw @issue.created_by.name %> has reported a new issue
+within your location.
+
+"<%= raw @issue.title %>"
+
+<%= Html2Text.convert(@issue.description) %>
+
+You can view the issue, and start a new discussion, at:
+<%= issue_url(@issue) %>
+
+--------
+You have received this message because your preferences indicate that you
+would like us to notify you on matters in your area.
+
+To stop these notifications, edit your user preferences at:
+<%= edit_user_prefs_url(@user_location.user) %>
+
+You can add or remove your locations at:
+<%= user_locations_url %>

@@ -1,20 +1,21 @@
 <br>
 <hr style="border:1px solid #E6E6E6;" />
-<br>
-<% url = defined?(@message) ? thread_url(@thread, anchor: dom_id(@message)) : thread_url(@thread) %>
-<%= t(".thread_html", application_name: @site_config.application_name, link: link_to(MessageThread.model_name.human.downcase, url)) %>
-<br>
-You can reply to the email and the message will be added to the thread.
-<br>
-<% if @thread.private_to_committee? %>
-Only committee members of <%= link_to(raw(@thread.group.name), group_url(@thread.group)) %> can view and post messages to this discussion thread.
-<% elsif @thread.private_to_group? %>
-Only members of <%= link_to(raw(@thread.group.name), group_url(@thread.group)) %> can view and post messages to this discussion thread.
-<% elsif @thread.user %>
-This is a Private Message between <%= raw @thread.created_by.name %> and <%= raw @thread.user.name %>.
-<% else %>
-Everyone can view this discussion thread and post messages.
-<% end %>
-<br>
-<% unsubscribe_link = link_to t(".stop_following"), edit_thread_subscription_url(@thread, @subscription, t: @subscriber.public_token) %>
-<%= t ".unsubscribe_html", link: unsubscribe_link %>
+<div style="font-size:12px;color:rgb(153, 153, 153)">
+  <% url = defined?(@message) ? thread_url(@thread, anchor: dom_id(@message)) : thread_url(@thread) %>
+  <%= t(".thread_html", application_name: @site_config.application_name, link: link_to(MessageThread.model_name.human.downcase, url)) %>
+  <br>
+  You can reply to the email and the message will be added to the thread.
+  <br>
+  <% if @thread.private_to_committee? %>
+  Only committee members of <%= link_to(raw(@thread.group.name), group_url(@thread.group)) %> can view and post messages to this discussion thread.
+  <% elsif @thread.private_to_group? %>
+  Only members of <%= link_to(raw(@thread.group.name), group_url(@thread.group)) %> can view and post messages to this discussion thread.
+  <% elsif @thread.user %>
+  This is a Private Message between <%= raw @thread.created_by.name %> and <%= raw @thread.user.name %>.
+  <% else %>
+  Everyone can view this discussion thread and post messages.
+  <% end %>
+  <br>
+  <% unsubscribe_link = link_to t(".stop_following"), edit_thread_subscription_url(@thread, @subscription, t: @subscriber.public_token) %>
+  <%= t ".unsubscribe_html", link: unsubscribe_link %>
+</div>

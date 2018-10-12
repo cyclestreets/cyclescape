@@ -1,0 +1,28 @@
+- if @thread.has_issue?
+  %p
+    A new discussion titled
+    = link_to @thread.title, thread_url(@thread)
+    has been created on issue
+    = link_to @thread.issue.title, issue_url(@thread.issue)
+    for the
+    = link_to @group.name, group_url(@group)
+    group.
+- else
+  %p
+    A new administrative discussion titled
+    = link_to @thread.title, thread_url(@thread)
+    has been created for the
+    = link_to @group.name, group_url(@group)
+    group.
+= render "new_thread", thread: @thread, recipient: @member
+%hr{style: "border:1px solid #E6E6E6;"}
+%p{style: "font-size:12px;color:rgb(153, 153, 153)"}
+  You aren't subscribed to this discussion thread, so you won't receive any
+  more updates but you can change that on the
+  = safe_join([link_to("discussion thread page", thread_url(@thread)), "."])
+%p{style: "font-size:12px;color:rgb(153, 153, 153)"}
+  You have received this message because your preferences indicate that you
+  would like us to notify you on matters in your group.
+%p{style: "font-size:12px;color:rgb(153, 153, 153)"}
+  To stop these notifications, edit
+  = safe_join([link_to("your user preferences", edit_user_prefs_url(@member)), "."])
