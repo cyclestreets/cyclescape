@@ -1,19 +1,17 @@
-<%= raw @issue.created_by.name %> has reported a new issue
-within your location.
+%p
+  = render "user_link", user: @issue.created_by, recipient: @user_location.user
+  has reported a new issue
+  within your location.
 
-"<%= raw @issue.title %>"
+=render "new_issue", issue: @issue
 
-<%= Html2Text.convert(@issue.description) %>
-
-You can view the issue, and start a new discussion, at:
-<%= issue_url(@issue) %>
-
---------
-You have received this message because your preferences indicate that you
-would like us to notify you on matters in your area.
-
-To stop these notifications, edit your user preferences at:
-<%= edit_user_prefs_url(@user_location.user) %>
-
-You can add or remove your locations at:
-<%= user_locations_url %>
+%hr{style: "border:1px solid #E6E6E6;"}
+%div{style: "font-size:12px;color:rgb(153, 153, 153)"}
+  You have received this message because your preferences indicate that you
+  would like us to notify you on matters in your area.
+  %br
+  To stop these notifications, edit your
+  user preferences
+  = link_to("your user preferences", edit_user_prefs_url(@user_location.user))
+  or you can
+  = safe_join([link_to("add or remove your locations", user_locations_url), "."])

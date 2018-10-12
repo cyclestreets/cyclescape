@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AdminMailer < ActionMailer::Base
+  layout "basic_email"
   default from: ->(_) { SiteConfig.first.default_email }
 
   def new_site_comment(comment)

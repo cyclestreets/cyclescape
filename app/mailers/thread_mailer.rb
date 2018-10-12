@@ -2,6 +2,7 @@
 
 class ThreadMailer < ActionMailer::Base
   include MailerHelper
+  layout "basic_email"
   helper :mailer
   default from: ->(_) { SiteConfig.first.default_email }
 

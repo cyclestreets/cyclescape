@@ -2,6 +2,7 @@
 
 class Notifications < ActionMailer::Base
   include MailerHelper
+  layout "basic_email"
   default from: ->(_) { SiteConfig.first.default_email }
 
   def group_membership_request_confirmed(request)

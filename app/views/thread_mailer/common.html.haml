@@ -1,10 +1,5 @@
-!!!
-%html
-  %head
-    %meta{content: 'text/html; charset=UTF-8', :"http-equiv" => 'Content-Type'}
-  %body
-    = render partial: 'header', locals: {message: @message, type: t("thread_mailer.#{@message.notification_name}.type")}
-    %div
-    = render partial: @message.notification_name.to_s
-    = render partial: "actions"
-    = render partial: "footer"
+= render partial: 'header', locals: {message: @message, type: t("thread_mailer.#{@message.notification_name}.type")}
+%div
+= render partial: @message.notification_name.to_s
+= render partial: "actions"
+= render partial: "footer"
