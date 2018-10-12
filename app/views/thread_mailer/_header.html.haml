@@ -1,14 +1,13 @@
 - unless @message.notification_name == :new_thread_leader_message
   - if Authorization::Engine.instance.permit?(:view_profile, object: @message.created_by, user: @subscriber)
     - if @message.created_by.profile.picture
-      = image_tag "#{root_url[0..-2]}#{@message.created_by.profile.picture_thumbnail.url}"
+      = image_tag path_to_url(@message.created_by.profile.picture_thumbnail.url)
     %span.name
       = link_to @message.created_by.name, user_profile_url(@message.created_by)
   - else
     %span.name
       = @message.created_by.display_name_or_anon
   = t '.committee' if message.committee_created?
-  - link = @message.notification_name == :new_document_message ? "#{root_url[0..-2]}#{@message.component.file.url}" : thread_url(@message.thread) + "#message_#{@message.id}"
+  - link = @message.notification_name == :new_document_message ? path_to_url(@message.component.file.url) : thread_url(@message.thread) + "#message_#{@message.id}"
   - message_link = link_to(type, link)
   = raw t ".added_html", message_link: message_link, name: ""
-

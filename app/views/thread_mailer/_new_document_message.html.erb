@@ -1,5 +1,5 @@
 <p>
-  <%= link_to(@message.component.title, "#{root_url[0..-2]}#{@message.component.file.url}") %>
+  <%= link_to(@message.component.title, path_to_url(@message.component.file.url)) %>
 </p>
 <p>
   <%= raw @message.body %>

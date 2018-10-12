@@ -32,4 +32,8 @@ module MailerHelper
   def no_reply_address
     "No reply <no-reply@#{domain}>"
   end
+
+  def path_to_url(path)
+    "#{root_url[0..-2]}#{path}"
+  end
 end
