@@ -52,8 +52,7 @@ module Taggable
   end
 
   def icon_from_tags
-    tag = tags.order('name').detect { |t| t.icon }
-    tag.icon if tag
+    tags.where.not(icon: nil).order(:name).pluck(:icon).first
   end
 
   protected

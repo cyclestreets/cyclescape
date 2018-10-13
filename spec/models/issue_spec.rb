@@ -334,8 +334,8 @@ describe Issue do
   context 'tags with icons' do
     subject { create(:issue) }
     let(:tag) { create(:tag) }
-    let(:tag_with_icon) { create(:tag_with_icon) }
-    let(:tag_with_icon2) { create(:tag_with_icon) }
+    let(:tag_with_icon) { create(:tag_with_icon, name: "abc") }
+    let(:tag_with_icon2) { create(:tag_with_icon, name: "xyz") }
 
     it 'should return an icon identifier' do
       subject.tags = [tag, tag_with_icon]
@@ -347,7 +347,7 @@ describe Issue do
       expect(subject.icon_from_tags).to be_nil
     end
 
-    it 'should be consistent with respect to tag order' do
+    it 'should be consistent with respect to tag name order' do
       subject.tags_string = "#{tag_with_icon.name},#{tag_with_icon2.name}"
       expect(subject.icon_from_tags).to eq(tag_with_icon.icon)
       subject.tags_string = "#{tag_with_icon2.name},#{tag_with_icon.name}"
