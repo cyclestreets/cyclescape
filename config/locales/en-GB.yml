@@ -69,6 +69,7 @@
         stats: Stats
         resque: Resque
         manage_planning_filters: Manage planning filters
+        mail_previews: Email previews
     issue_categories:
       create:
         success: Category created

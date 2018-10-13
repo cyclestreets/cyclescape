@@ -24,6 +24,7 @@ authorization do
     has_permission_on :site_comments, to: :manage
     has_permission_on :user_prefs, :user_profiles, to: :manage
     has_permission_on :users, to: [:view_profile, :view_full_name]
+    has_permission_on :rails_mailers, to: [:view, :index, :preview]
   end
 
   role :member do
