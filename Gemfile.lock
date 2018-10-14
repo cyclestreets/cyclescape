@@ -525,7 +525,7 @@ DEPENDENCIES
   devise (~> 3.4.0)
   devise-i18n (< 1.5)
   devise_invitable (= 1.5.3)
-  dragonfly (~> 1.1.5)
+  dragonfly
   draper
   email_reply_parser
   email_spec

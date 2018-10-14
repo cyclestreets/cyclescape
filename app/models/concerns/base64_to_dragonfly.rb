@@ -11,6 +11,11 @@ module Base64ToDragonfly
           temp_image = Tempfile.new "temp_image"
           temp_image.binmode
           temp_image.write(decoded_image)
+          ext = %x[identify -ping -format '%m' #{temp_image.path}]
+          if ext.present?
+            FileUtils.mv(temp_image.path, "#{temp_image.path}.#{ext.downcase}")
+            temp_image = File.open("#{temp_image.path}.#{ext.downcase}")
+          end
         ensure
           temp_image.close
         end
