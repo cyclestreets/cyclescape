@@ -39,7 +39,7 @@ gem 'declarative_authorization'
 gem 'devise', '~> 3.4.0'
 gem 'devise-i18n', '< 1.5' # Bug in devise-i18n 1.5, fixed if we bump devise > 4.4 https://github.com/tigrish/devise-i18n/blob/v1.5.0/rails/locales/en-GB.yml#L43
 gem 'devise_invitable', '= 1.5.3' # Need to add accept_until_format
-gem 'dragonfly', '~> 1.0.3'
+gem 'dragonfly'
 gem 'draper'
 gem 'email_reply_parser'
 gem 'excon'

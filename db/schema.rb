@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180924192444) do
+ActiveRecord::Schema.define(version: 20181014184337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20180924192444) do
     t.geometry "location",        limit: {:srid=>4326, :type=>"geometry"}, null: false
     t.datetime "created_at",                                               null: false
     t.datetime "updated_at",                                               null: false
+    t.string   "photo_name"
   end
 
   add_index "cyclestreets_photo_messages", ["created_by_id"], name: "index_cyclestreets_photo_messages_on_created_by_id", using: :btree
@@ -242,6 +243,7 @@ ActiveRecord::Schema.define(version: 20180924192444) do
     t.text     "external_url"
     t.boolean  "all_day",                                                          default: false, null: false
     t.integer  "planning_application_id"
+    t.string   "photo_name"
   end
 
   add_index "issues", ["created_by_id"], name: "index_issues_on_created_by_id", using: :btree
@@ -415,6 +417,7 @@ ActiveRecord::Schema.define(version: 20180924192444) do
     t.text     "description"
     t.datetime "created_at",                null: false
     t.datetime "updated_at"
+    t.string   "photo_name"
   end
 
   add_index "photo_messages", ["created_by_id"], name: "index_photo_messages_on_created_by_id", using: :btree
