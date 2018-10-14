@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181007190340) do
+ActiveRecord::Schema.define(version: 20180924192444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,10 @@ ActiveRecord::Schema.define(version: 20181007190340) do
   end
 
   add_index "hide_votes", ["planning_application_id", "user_id"], name: "index_hide_votes_on_planning_application_id_and_user_id", unique: true, using: :btree
+
+  create_table "html_issues", force: :cascade do |t|
+    t.datetime "created_at", null: false
+  end
 
   create_table "inbound_mails", force: :cascade do |t|
     t.string   "recipient",     limit: 255,                 null: false

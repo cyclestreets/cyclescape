@@ -1,0 +1,17 @@
+%p
+  = render "user_link", user: @issue.created_by, recipient: @user
+  has reported a new issue in the
+  = safe_join([link_to(@group.name, group_url(@group)), "'s"])
+  area.
+
+=render "new_issue", issue: @issue
+
+%hr{style: "border:1px solid #E6E6E6;"}
+%div{style: "font-size:12px;color:rgb(153, 153, 153)"}
+  You have received this message because your preferences indicate that you
+  would like us to notify you on matters in your group.
+  %br
+  To stop these notifications, edit your
+  user preferences
+  = safe_join([link_to("your user preferences", edit_user_prefs_url(@user)), "."])
+

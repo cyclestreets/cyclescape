@@ -48,7 +48,7 @@ describe 'thread notifications' do
       end
       open_email(current_user.email)
       expect(current_email).to have_body_text('Planning application deadline')
-      expect(current_email).to have_body_text('07 December, 2011') # format used in display
+      expect(current_email).to have_body_text('Wednesday, 07 December 2011 12:00 AM') # format used in display
       expect(current_email.attachments.size).to eq(1)
       attachment = current_email.attachments[0]
       expect(attachment).to be_a_kind_of(Mail::Part)

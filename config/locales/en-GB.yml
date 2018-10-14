@@ -69,6 +69,7 @@
         stats: Stats
         resque: Resque
         manage_planning_filters: Manage planning filters
+        mail_previews: Email previews
     issue_categories:
       create:
         success: Category created
@@ -1159,6 +1160,7 @@
   thread_mailer:
     header:
       added: '%{name} added %{type} to the thread'
+      added_html: '%{name} added %{message_link} to the thread'
       committee: ' [Committee]'
     new_map_message:
       type: a map
@@ -1177,21 +1179,26 @@
     new_photo_message:
       type: a photo
       view_the_photo: 'You can view the photo at:'
+      photo_alt: The photo for %{caption}.
     new_cyclestreets_photo_message:
       type: a photo
       view_the_photo: 'You can view the Cyclestreets photo at:'
+      photo_alt: The photo for %{caption}.
     new_street_view_message:
       type: a street view
       view_the_street_view: 'You can see the Street View at:'
     new_thread_leader_message:
       type: a leader
-      new_leader: "%{leader_link} set themself as a leader of %{thread_title}."
-      removed_leader: "%{leader_link} has removed themself as a leader of %{thread_title}."
+      new_leader_html: "%{leader_link} set themself as a leader of %{thread_title}."
+      removed_leader_html: "%{leader_link} has removed themself as a leader of %{thread_title}."
     new_action_message:
       type: a call to action
     footer:
       thread: "%{application_name} discussion thread"
       unsubscribe: You can stop following this thread by visiting
+      thread_html: "From %{application_name} %{link}."
+      unsubscribe_html: "You can %{link}."
+      stop_following: stop following this thread
   thread_priorities:
     very_high: Top-priority
     high: Important

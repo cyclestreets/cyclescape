@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module MailerHelper
+  require "html2text"
+
   # Our domain name
   def domain
     @domain ||= SiteConfig.first.email_domain
@@ -29,5 +31,9 @@ module MailerHelper
 
   def no_reply_address
     "No reply <no-reply@#{domain}>"
+  end
+
+  def path_to_url(path)
+    "#{root_url[0..-2]}#{path}"
   end
 end

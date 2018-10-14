@@ -3,7 +3,7 @@
 Resolves actions:
 <% message_or_component.action_messages.each do |action| %>
 
-<%= action.description  %>
+<%= Html2Text.convert(action.description)  %>
 
 <% end %>
 <% end %>

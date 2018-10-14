@@ -28,10 +28,12 @@ gem 'ratelimit'
 gem 'retryable'
 gem 'rgeo-geojson', "< 1.0"
 # gem 'jquery-turbolinks'
+gem 'tinymce-rails'
 
 # Back-end gems
 gem 'aasm'
 gem 'actionview-encoded_mail_to'
+gem 'html2text'
 gem 'attribute_normalizer'
 gem 'declarative_authorization'
 gem 'devise', '~> 3.4.0'

@@ -1,0 +1,6 @@
+%figure.photo
+  = link_to thread_cyclestreets_photo_url(@message.thread, @message.component), rel: "#overlay" do
+    = image_tag(path_to_url(@message.component.photo_preview.url),
+        alt: t(".photo_alt", caption: @message.component.caption))
+  %figcaption
+    = simple_format(@message.component.caption)

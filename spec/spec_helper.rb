@@ -43,7 +43,6 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation, except: %w[geometry_columns spatial_ref_sys site_configs])
 
     # Clear out DragonFly assets
     dragonfly_path = "#{Rails.root}/public/system/dragonfly/test"
@@ -56,6 +55,10 @@ RSpec.configure do |config|
       root.skip_confirmation!
       root.save!
     end
+
+    ActiveRecord::Base.connection.insert(
+      "INSERT INTO html_issues (created_at) VALUES (CURRENT_TIMESTAMP)"
+    )
 
     FactoryBot.create :site_config
 
@@ -71,7 +74,10 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     truncate_clean = ex.metadata[:db_truncate] || ex.metadata[:js]
     if truncate_clean
-      DatabaseCleaner.strategy = :truncation, { pre_count: true, cache_tables: true }
+      DatabaseCleaner.strategy = :truncation, {
+        pre_count: true, cache_tables: true,
+        except: %w[geometry_columns spatial_ref_sys site_configs html_issues]
+      }
     end
 
     DatabaseCleaner.start

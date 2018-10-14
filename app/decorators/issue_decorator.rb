@@ -9,11 +9,15 @@ class IssueDecorator < ApplicationDecorator
   end
 
   def brief_description
-    h.truncate issue.description, length: 90, separator: '.', omission: "\u2026"
+    h.sanitize issue.description
   end
 
   def description
-    h.auto_link h.simple_format issue.description
+    if issue.html?
+      h.auto_link h.simple_format issue.description
+    else
+      h.sanitize issue.description
+    end
   end
 
   def small_icon_path(default = true)

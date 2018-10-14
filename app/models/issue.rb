@@ -25,6 +25,7 @@ class Issue < ActiveRecord::Base
   include FakeDestroy
   include Taggable
   include Photo
+  include BodyFormat
 
   searchable auto_index: false do
     text :title, :description, :tags_string, :id

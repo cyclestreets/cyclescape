@@ -10,8 +10,8 @@ module Cyclescape
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-
-    config.action_view.sanitized_allowed_tags = %w[p br]
+    config.action_view.sanitized_allowed_tags = %w[p br ul ol li em strong table tbody thead tr td a blockquote]
+    config.action_view.sanitized_allowed_attributes = ['style', 'href', 'title']
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/app/models/messages)
@@ -101,5 +101,6 @@ module Cyclescape
     #
     # defaults to Rails.env
     # config.browserify_rails.node_env = "production"
+    config.action_mailer.preview_path = Rails.root.join("app", "controllers", "admin", "mailers")
   end
 end

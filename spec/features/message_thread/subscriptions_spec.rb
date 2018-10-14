@@ -40,7 +40,7 @@ describe 'Thread subscriptions' do
 
           expect(ThreadRecorder).to receive(:thread_viewed).once
           within('.new-message') do
-            fill_in 'Message', with: "Given I'm interested enough to post, I should be subscribed", match: :first
+            tinymce_fill_in with: "Given I'm interested enough to post, I should be subscribed"
             click_on 'Post Message'
           end
           sleep(0.5)

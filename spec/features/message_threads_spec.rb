@@ -129,9 +129,11 @@ describe 'Message threads', type: :feature do
           expect(page).to have_content('Testing a new message!')
         end
 
-        it 'should auto link messages' do
-          fill_in 'Message', with: 'Testing autolink http://example.com', match: :first
-          click_on 'Post Message'
+        it 'should allow messages with links', js: true do
+          within('.new-message') do
+            tinymce_fill_in with: 'Testing autolink <a href="http://example.com">http://example.com</a>'
+            click_on 'Post Message'
+          end
           expect(page).to have_link('http://example.com')
         end
 

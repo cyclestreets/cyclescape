@@ -1,0 +1,6 @@
+<p>
+  <%= link_to @message.component.item.title, polymorphic_url(@message.component.item.component) %>
+</p>
+<p>
+  <%= raw @message.body %>
+</p>

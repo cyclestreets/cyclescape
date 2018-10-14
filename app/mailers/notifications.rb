@@ -2,6 +2,7 @@
 
 class Notifications < ActionMailer::Base
   include MailerHelper
+  layout "basic_email"
   default from: ->(_) { SiteConfig.first.default_email }
 
   def group_membership_request_confirmed(request)
@@ -89,7 +90,7 @@ class Notifications < ActionMailer::Base
     @thread = thread
     @user_location = user_location
     @user = user_location.user
-    @message = thread.messages.first
+    @message = thread.first_message
     fail 'Thread does not have an issue' unless @thread.issue
     mail to: @user.name_with_email,
          from: user_notification_address(@message.created_by),

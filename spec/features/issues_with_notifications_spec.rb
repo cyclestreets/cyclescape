@@ -76,9 +76,10 @@ describe 'Issue notifications' do
         click_on 'Send Report'
         email = open_last_email_for(notifiee.email)
         expect(email).to have_subject("[Cyclescape] New issue - \"#{issue_values[:title]}\" (#{group_profile.group.name})")
-        expect(email).to have_body_text("in the #{group_profile.group.name}'s area")
-        expect(email).to have_body_text(issue_values[:description])
-        expect(email).to have_body_text(issue_values[:title])
+        email_body = email.text_part.decoded
+        expect(email_body).to include("in the #{group_profile.group.name}'s area")
+        expect(email_body).to include(issue_values[:description])
+        expect(email_body).to include(issue_values[:title])
       end
 
       it "shouldn't send a notification if the user doesn't want it" do
