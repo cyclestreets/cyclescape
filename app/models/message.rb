@@ -25,6 +25,7 @@ class Message < ActiveRecord::Base
   include FakeDestroy
   include AASM
   include Rakismet::Model
+  include BodyFormat
 
   belongs_to :thread, -> { with_deleted}, class_name: 'MessageThread', inverse_of: :messages
   belongs_to :created_by, -> { with_deleted }, class_name: 'User'

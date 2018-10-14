@@ -25,6 +25,7 @@ class Issue < ActiveRecord::Base
   include FakeDestroy
   include Taggable
   include Photo
+  include BodyFormat
 
   searchable auto_index: false do
     text :title, :description, :tags_string, :id
@@ -98,13 +99,6 @@ class Issue < ActiveRecord::Base
 
   def formatted_deadline
     all_day ? deadline.to_date : deadline
-  end
-
-  def html?
-    tinymce_time = Rails.cache.fetch("tinymce_time", expires_in: 1.year) do
-      Time.zone.parse(ActiveRecord::Base.connection.select_value("SELECT created_at FROM html_issues"))
-    end
-    created_at > tinymce_time
   end
 
   protected
