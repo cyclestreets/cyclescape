@@ -26,7 +26,7 @@
       .header-fix{id: dom_id(message)}
       .message-text
         - display_message = sanitize(message_linkify(message))
-        - if message.plain_text?
+        - if message.component || message.plain_text?
           - display_message = auto_link(simple_format(display_message, sanitize: false))
         = display_message
 
