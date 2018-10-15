@@ -1,5 +1,12 @@
-env :PATH, "#{ENV['PATH']}:/usr/local/bin/bundle"
-env :HOME, "/var/www/cyclescape/shared/bundle"
+require 'yaml'
+
+path = File.expand_path("schedule.yml", File.dirname(__FILE__))
+config = {}
+config = YAML.safe_load(File.open(path)) if File.exist?(path)
+
+env(:PATH, "#{ENV['PATH']}:#{config["path"]}") if config["path"]
+env(:HOME, config["home"]) if config["home"]
+env(:MAILTO, config["error_email"]) if config["error_email"]
 
 # Use this file to easily define all of your cron jobs.
 #
@@ -7,7 +14,6 @@ env :HOME, "/var/www/cyclescape/shared/bundle"
 # http://en.wikipedia.org/wiki/Cron
 
 # Learn more: http://github.com/javan/whenever
-env 'MAILTO', 'cyclescape-errors@cyclestreets.net'
 
 every 5.minutes do
   rake "scheduled:process_all_mailboxes"

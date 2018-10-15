@@ -13,6 +13,7 @@ config/mailboxes.yml
 config/secret_token
 config/akismet
 config/cyclestreets
+config/schedule.yml
 public/assets
 bin/
 solr/

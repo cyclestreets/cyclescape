@@ -1,0 +1,5 @@
+# Customise and move to schedule.yml
+# Acts as config for the whenever gem schedule.rb
+error_email: cyclescape-errors@cyclestreets.net
+home: /var/www/cyclescape/shared/bundle
+path: /usr/local/bin/bundle
