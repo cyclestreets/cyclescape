@@ -83,7 +83,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_group_from_subdomain
-    if SubdomainConstraint.new.matches?(request)
+    if SubdomainConstraint.matches?(request)
       @current_group = Group.find_by_short_name(request.subdomain.split(".")[0])
       unless @current_group
         redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www"))
