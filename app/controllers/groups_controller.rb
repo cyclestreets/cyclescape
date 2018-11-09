@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
       @recent_issues = IssueDecorator.decorate_collection group.recent_issues.limit(10).includes(:created_by)
       @group = GroupDecorator.decorate group
     else
-      redirect_to root_url(subdomain: 'www')
+      redirect_to root_url(subdomain: SubdomainConstraint.subdomain('www'))
     end
   end
 
@@ -137,7 +137,7 @@ class GroupsController < ApplicationController
 
     group.loc_feature(title: group.name,
                       size_ratio: group.profile.size_ratio(geom),
-                      url: root_url(subdomain: group.short_name),
+                      url: root_url(subdomain: SubdomainConstraint.subdomain(group.short_name)),
                       description: view_context.auto_link(group.trunctated_description))
   end
 

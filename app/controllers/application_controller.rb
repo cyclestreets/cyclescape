@@ -38,13 +38,13 @@ class ApplicationController < ActionController::Base
       s.slice!(0) # remove the leading slash
       if current_user.remembered_group?
         # is there a cleaner way than using root_url?
-        root_url(subdomain: current_user.remembered_group.short_name) + s
+        root_url(subdomain: SubdomainConstraint.subdomain(current_user.remembered_group.short_name)) + s
       else
         root_url + s
       end
     else
       if current_user.remembered_group?
-        dashboard_url(subdomain: current_user.remembered_group.short_name)
+        dashboard_url(subdomain: SubdomainConstraint.subdomain(current_user.remembered_group.short_name))
       else
         dashboard_url
       end
@@ -83,10 +83,10 @@ class ApplicationController < ActionController::Base
   end
 
   def load_group_from_subdomain
-    if is_group_subdomain?
-      @current_group = Group.find_by_short_name(request.subdomain)
+    if SubdomainConstraint.new.matches?(request)
+      @current_group = Group.find_by_short_name(request.subdomain.split(".")[0])
       unless @current_group
-        redirect_to(subdomain: 'www')
+        redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www"))
       end
     end
   end
@@ -121,12 +121,8 @@ class ApplicationController < ActionController::Base
   end
   helper_method :page_title
 
-  def is_group_subdomain?
-    !request.subdomain.blank? && request.subdomain != 'www'
-  end
-
   def group_subdomain?(group = nil)
-    !request.subdomain.blank? && request.subdomain == group
+    !request.subdomain.blank? && request.subdomain.split(".")[0] == group
   end
 
   def current_group

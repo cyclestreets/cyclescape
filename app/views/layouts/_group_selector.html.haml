@@ -8,6 +8,6 @@
     %span.arrow
   %ul#groups-list
     - if current_group
-      %li= link_to t(".no_group"), root_url(subdomain: "www")
+      %li= link_to t(".no_group"), root_url(subdomain: SubdomainConstraint.domain("www"))
     - current_user.groups.except {|g| g == current_group }.each do |group|
       %li= link_to_group_home group

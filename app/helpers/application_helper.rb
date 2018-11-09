@@ -35,7 +35,7 @@ module ApplicationHelper
   end
 
   def link_to_group_home(group)
-    link_to group.name, root_url(subdomain: group.short_name)
+    link_to group.name, root_url(subdomain: SubdomainConstraint.subdomain(group.short_name))
   end
 
   def link_to_github_commit
@@ -142,7 +142,7 @@ module ApplicationHelper
   end
 
   def hashtag_link(group, hashtag_name)
-    "#{root_url(subdomain: group.short_name)}#{hashtag_path(hashtag_name)[1..-1]}"
+    "#{root_url(subdomain: SubdomainConstraint.subdomain(group.short_name))}#{hashtag_path(hashtag_name)[1..-1]}"
   end
 
   def voter_names(voteable)

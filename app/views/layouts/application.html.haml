@@ -30,7 +30,7 @@
           = link_to image_tag(@site_config.logo, alt: @site_config.application_name), root_path, id: "site-title"
         %ul#top-menu
           -if @site_config.small_logo
-            %li.about= link_to image_tag(@site_config.small_logo, alt: @site_config.application_name), root_url(subdomain: "www"), class: "cyclescape-logo"
+            %li.about= link_to image_tag(@site_config.small_logo, alt: @site_config.application_name), root_url(subdomain: SubdomainConstraint.domain("www")), class: "cyclescape-logo"
           %li=link_to t(".about"), @site_config.blog_about_url
           %li=link_to t(".user_guide"), @site_config.blog_user_guide_url
           %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
