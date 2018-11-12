@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     if template_exists? template_name
       render template: template_name
     else
-      render status: :not_found, text: 'Page not found'
+      raise ActiveRecord::RecordNotFound
     end
   end
 end
