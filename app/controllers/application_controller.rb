@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
   private
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:account_update).push(:full_name, :display_name)
-    devise_parameter_sanitizer.for(:sign_up).push(:full_name, :display_name)
-    devise_parameter_sanitizer.for(:accept_invitation).push(:full_name, :display_name, :email)
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name display_name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[full_name display_name])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: %i[full_name display_name email])
   end
 
   # We want to tightly control where users end up after signing in.
