@@ -110,6 +110,7 @@ group :test do
   gem 'email_spec'
   gem 'factory_bot_rails'
   gem 'launchy'
+  gem 'rails-controller-testing'
   gem 'rspec-collection_matchers'
   gem 'selenium-webdriver'
   gem 'poltergeist'
