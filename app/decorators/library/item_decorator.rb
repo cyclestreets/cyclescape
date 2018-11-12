@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Library::ItemDecorator < ApplicationDecorator
-  alias_method :item, :source
+  alias_method :item, :object
 
   def link
     h.link_to item.title, h.url_for(item.component)
