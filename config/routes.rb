@@ -98,7 +98,7 @@ Rails.application.routes.draw do
     put :open, :close, on: :member
     resources :messages do
       resources :documents, controller: 'message_library/documents'
-      resources :notes, controller: 'message_library/notes'
+      resources :notes, controller: 'message_library/notes', only: %i[new create show edit update destroy]
       member do
         get :vote_detail
         put :approve, :reject, :censor, :vote_up, :vote_clear
@@ -129,7 +129,7 @@ Rails.application.routes.draw do
     get :search, :recent
     scope module: 'library' do
       resources :documents
-      resources :notes
+      resources :notes, only: %i[new create show edit update destroy]
       resources :tags, only: [:update]
     end
   end
