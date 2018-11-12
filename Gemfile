@@ -35,7 +35,7 @@ gem 'aasm'
 gem 'actionview-encoded_mail_to'
 gem 'html2text'
 gem 'attribute_normalizer'
-gem 'declarative_authorization'
+gem 'declarative_authorization', github: "xymist/declarative_authorization", branch: "allow_rails_5"
 gem 'devise'
 gem 'devise-i18n', '< 1.5' # Bug in devise-i18n 1.5, fixed if we bump devise > 4.4 https://github.com/tigrish/devise-i18n/blob/v1.5.0/rails/locales/en-GB.yml#L43
 gem 'devise_invitable'
@@ -115,6 +115,5 @@ group :test do
   gem 'poltergeist'
   gem 'shoulda-matchers'
   gem 'sunspot_test'
-  gem 'test_after_commit'
   gem 'webmock'
 end

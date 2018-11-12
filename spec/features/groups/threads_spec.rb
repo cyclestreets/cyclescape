@@ -57,7 +57,7 @@ describe 'Group threads', use: :subdomain do
         expect(page).to have_select('Privacy', selected: I18n.t('thread_privacy_options.public'))
       end
 
-      context 'notifications', after_commit: true do
+      context 'notifications' do
         def enable_group_thread_prefs_for(u)
           u.prefs.update!(involve_my_groups: 'notify', involve_my_groups_admin: true, email_status_id: 1)
         end
@@ -160,7 +160,7 @@ describe 'Group threads', use: :subdomain do
         end
       end
 
-      context 'automatic subscriptions', after_commit: true do
+      context 'automatic subscriptions' do
         let!(:group_membership) { create(:group_membership, group: current_group) }
         let!(:subscriber) { group_membership.user }
 
@@ -176,7 +176,7 @@ describe 'Group threads', use: :subdomain do
           expect(subscriber.subscribed_to_thread?(current_group.threads.last)).to be_truthy
         end
 
-        it 'should only subscribe the thread creator once', after_commit: true do
+        it 'should only subscribe the thread creator once' do
           current_user.prefs.update_column(:involve_my_groups, 'subscribe')
           current_user.prefs.update_column(:involve_my_groups_admin, true)
           fill_in_thread
