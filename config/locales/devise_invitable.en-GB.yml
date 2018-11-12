@@ -8,7 +8,6 @@ en-GB:
     mailer:
       invitation_instructions:
         subject: Invitation instructions
-
   time:
     formats:
       devise:

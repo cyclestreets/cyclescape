@@ -267,8 +267,8 @@ class User < ActiveRecord::Base
             or(users[:id].eq(id))).references(:user_profiles, :group_memberships)
   end
 
-  # devise confirm! method overriden
-  def confirm!
+  # devise confirm method overriden
+  def confirm
     welcome_message
     super
   end
