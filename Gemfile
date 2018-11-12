@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'activerecord-postgis-adapter', '~> 3.0'
-gem "pg", "~> 0.20.0" # https://github.com/rgeo/activerecord-postgis-adapter/pull/257#issuecomment-309553871
-gem 'rails', '~> 4.2.0'
+gem 'activerecord-postgis-adapter'
+gem "pg"
+gem 'rails', "= 5.0.7"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -17,7 +17,7 @@ gem 'chartkick'
 gem 'formtastic'
 gem 'haml-rails'
 gem 'jqcloud-rails', github: 'GovSciences/jqcloud-rails'
-gem 'jquery-rails', '~> 3.1.0'
+gem 'jquery-rails', '~> 4.1.1'
 gem 'kaminari'
 gem 'kaminari-i18n'
 gem 'leaflet-rails', "= 0.7.7"
@@ -26,7 +26,7 @@ gem 'rails-jquery-autocomplete'
 gem 'rails_autolink'
 gem 'ratelimit'
 gem 'retryable'
-gem 'rgeo-geojson', "< 1.0"
+gem 'rgeo-geojson'
 # gem 'jquery-turbolinks'
 gem 'tinymce-rails'
 
@@ -36,9 +36,9 @@ gem 'actionview-encoded_mail_to'
 gem 'html2text'
 gem 'attribute_normalizer'
 gem 'declarative_authorization'
-gem 'devise', '~> 3.4.0'
+gem 'devise'
 gem 'devise-i18n', '< 1.5' # Bug in devise-i18n 1.5, fixed if we bump devise > 4.4 https://github.com/tigrish/devise-i18n/blob/v1.5.0/rails/locales/en-GB.yml#L43
-gem 'devise_invitable', '= 1.5.3' # Need to add accept_until_format
+gem 'devise_invitable'
 gem 'dragonfly'
 gem 'draper'
 gem 'email_reply_parser'
@@ -87,7 +87,6 @@ group :development do
   gem 'annotate', '>= 2.5.0', require: false
   gem 'bullet'
   gem 'letter_opener'
-  gem 'quiet_assets'
   gem 'rubocop'
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded
