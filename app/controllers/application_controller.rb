@@ -2,20 +2,20 @@
 
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :no_disabled_users
-  before_filter :set_auth_user
-  before_filter :set_locale
+  before_action :no_disabled_users
+  before_action :set_auth_user
+  before_action :set_locale
   before_action :set_config
   around_action :set_time_zone
-  before_filter :load_group_from_subdomain
-  before_filter :set_page_title
-  before_filter :set_last_seen_at, if: proc { |p| user_signed_in? && (session[:last_seen_at] == nil || session[:last_seen_at] < 15.minutes.ago) }
-  after_filter :remember_current_group
-  after_filter :store_location
+  before_action :load_group_from_subdomain
+  before_action :set_page_title
+  before_action :set_last_seen_at, if: proc { |p| user_signed_in? && (session[:last_seen_at] == nil || session[:last_seen_at] < 15.minutes.ago) }
+  after_action :remember_current_group
+  after_action :store_location
   layout :set_xhr_layout
   filter_access_to :all
   helper_method :group_subdomain?
-  before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   private
 
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
   # We want to tightly control where users end up after signing in.
   # If they hit a protected resource, devise has stored the location they were attempting
-  # If they volunteer to sign in, we've previously stored the location using after_filters in the devise cookie
+  # If they volunteer to sign in, we've previously stored the location using after_actions in the devise cookie
   # If they were on the front page, we want to redirect them to the dashboard instead
   # If they have a remembered_group, then we want to inject the subdomain into any of the above
   # We need to do all of that without messing up domains or ports

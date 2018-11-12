@@ -131,7 +131,8 @@ class User < ActiveRecord::Base
   def profile_with_auto_build
     profile_without_auto_build || build_profile
   end
-  alias_method_chain :profile, :auto_build
+  alias_method :profile_without_auto_build, :profile
+  alias_method :profile, :profile_with_auto_build
 
   def to_param
     "#{id}-#{name.parameterize}"

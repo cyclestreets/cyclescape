@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GroupRequestsController < ApplicationController
-  before_filter :load_group_request, only: [:show, :edit, :update, :destroy, :review, :confirm, :reject]
+  before_action :load_group_request, only: [:show, :edit, :update, :destroy, :review, :confirm, :reject]
 
   def index
     @requests = GroupRequest.order('created_at desc').includes(:user)

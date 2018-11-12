@@ -2,7 +2,7 @@
 
 # Note inheritance
 class Group::MessageThreadsController < MessageThreadsController
-  before_filter :group
+  before_action :group
 
   def index
     set_page_title t('group.message_threads.index.title', group: group.name)

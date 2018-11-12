@@ -54,7 +54,7 @@ class MessageThread < ActiveRecord::Base
   has_many :messages, -> { order(created_at: :asc) }, foreign_key: 'thread_id', autosave: true, inverse_of: :thread
   has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: 'ThreadSubscription', foreign_key: 'thread_id', inverse_of: :thread
   has_many :subscribers, through: :subscriptions, source: :user
-  has_many :participants, -> { (uniq(true)) }, through: :messages, source: :created_by
+  has_many :participants, -> { distinct }, through: :messages, source: :created_by
   has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id', inverse_of: :thread
   has_many :message_thread_closes, -> { order(:created_at) }, dependent: :destroy
   has_many :closed_by, through: :message_thread_closes, source: :user

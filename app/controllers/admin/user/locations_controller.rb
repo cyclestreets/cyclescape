@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::User::LocationsController < ApplicationController
-  before_filter :load_user
+  before_action :load_user
 
   def index
     set_page_title t('admin.user.locations.index.title', user_name: @user.name)

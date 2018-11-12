@@ -5,7 +5,8 @@ module FakeDestroy
       scope :deleted, -> { where('deleted_at IS NOT NULL') }
       scope :with_deleted, -> { unscope where: :deleted_at }
 
-      alias_method_chain :destroy, :fake
+      alias_method :destroy_without_fake, :destroy
+      alias_method :destroy, :destroy_with_fake
     end
   end
 

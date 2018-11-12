@@ -2,7 +2,7 @@
 
 # Note inheritance
 class Group::MessageModerationsController < MessageThreadsController
-  before_filter :group
+  before_action :group
   filter_access_to :index, attribute_check: true, model: Group
 
   def index

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class PlanningApplication::IssuesController < IssuesController
-  before_filter :load_planning_application
-  before_filter :check_for_issue
+  before_action :load_planning_application
+  before_action :check_for_issue
 
   def new
     @issue = @planning_application.populate_issue

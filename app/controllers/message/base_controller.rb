@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Message::BaseController < MessagesController
-  before_filter :thread
-  before_filter :build_message, only: :create
+  before_action :thread
+  before_action :build_message, only: :create
 
   protected
 
