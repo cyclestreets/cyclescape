@@ -8,3 +8,10 @@ en-GB:
     mailer:
       invitation_instructions:
         subject: Invitation instructions
+
+  time:
+    formats:
+      devise:
+        mailer:
+          invitation_instructions:
+            accept_until_format: "%B %d, %Y %I:%M %p"
