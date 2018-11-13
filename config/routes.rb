@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   issues_route
 
   namespace :admin do
+    get 'templates/:template', to: 'templates#show', as: :template
     resources :groups do
       put :disable, :enable, on: :member
     end
@@ -176,8 +177,7 @@ Rails.application.routes.draw do
   end
   resource :home, only: [:show], controller: 'home'
 
-  get 'template/:action', controller: 'home'
-  get 'pages/:page', controller: 'pages', action: 'show', as: :page
+  get 'pages/:page', to: 'pages#show', as: :page
 
   root to: 'home#show'
 
