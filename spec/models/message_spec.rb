@@ -151,7 +151,6 @@ describe Message do
     let(:thread) { create :message_thread, status: thread_status }
     let!(:req) { stub_request(:post, /rest\.akismet\.com\/1\.1\/submit-ham/) }
 
-
     describe 'skip_mod_queue!' do
       let(:thread_status) { 'mod_queued' }
 
@@ -163,7 +162,7 @@ describe Message do
     end
 
     describe 'approved' do
-      subject { create :message, :possible_spam, created_by: user, thread: thread }
+      subject! { create :message, :possible_spam, created_by: user, thread: thread }
 
       context 'with an mod_queued thread' do
         let(:thread_status) { 'mod_queued' }
