@@ -6,7 +6,7 @@ class PagesController < ApplicationController
     if template_exists? template_name
       render template: template_name
     else
-      raise ActiveRecord::RecordNotFound
+      raise ActionController::RoutingError, 'Not Found'
     end
   end
 end

@@ -7,7 +7,6 @@ describe PagesController do
   end
 
   it 'should return 404 if the page is not found' do
-    get :show, params: { page: 'some-other' }
-    expect(response.status).to eq(404)
+    expect { get :show, params: { page: 'some-other' } }.to raise_error(ActionController::RoutingError)
   end
 end
