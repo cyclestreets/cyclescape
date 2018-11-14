@@ -15,7 +15,7 @@ describe Route::IssueApi do
       end
 
       it "respects pagination" do
-        get "api/issues", params: { page: 3, per_page: 100 }
+        get "api/issues", page: 3, per_page: 100
         expect(geojson_response.size).to eq(1)
       end
     end
@@ -27,7 +27,7 @@ describe Route::IssueApi do
 
       before do
         create :issue
-        get "#{host}/api/issues", params: { geo_collection: geo_collection }
+        get "#{host}/api/issues", geo_collection: geo_collection
       end
 
       context "with geometries" do
@@ -65,7 +65,7 @@ describe Route::IssueApi do
         create :issue_within_quahog, tags: [tag] # location 0.11906 52.20792
         create :issue, tags: [tag]
         create :issue
-        get "#{host}/api/issues", params: { bbox: '0.11905,52.20791,0.11907,52.20793', tags: ["taga"].to_json }
+        get "#{host}/api/issues", bbox: '0.11905,52.20791,0.11907,52.20793', tags: ["taga"].to_json
       end
 
       it 'returns issue' do
@@ -96,14 +96,14 @@ describe Route::IssueApi do
       end
 
       it 'respects the start date parameter' do
-        get "api/issues", params: { start_date: 2.days.ago.strftime("%Y/%m/%d") }
+        get "api/issues", start_date: 2.days.ago.strftime("%Y/%m/%d")
 
         expect(geojson_response.size).to eq(1)
         expect(geojson_response[0]['id']).to eq(4242)
       end
 
       it 'respects the end date parameter' do
-        get "api/issues", params: { end_date: 2.days.ago.strftime("%Y/%m/%d") }
+        get "api/issues", end_date: 2.days.ago.strftime("%Y/%m/%d")
 
         expect(geojson_response.size).to eq(1)
         expect(geojson_response[0]['id']).to_not eq(4242)
@@ -116,7 +116,7 @@ describe Route::IssueApi do
       let!(:outside_group) { create :issue }
 
       before do
-        get "api/issues", params: { group: group_profile.reload.group.short_name }
+        get "api/issues", group: group_profile.reload.group.short_name
       end
 
       it 'should only return issues inside the groups area' do

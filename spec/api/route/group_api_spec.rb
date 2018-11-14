@@ -15,7 +15,7 @@ describe Route::GroupApi do
 
     context 'for local and national groups' do
       before do
-        get "/api/groups", params: { national: 1 }
+        get "/api/groups", national: 1
       end
 
       it 'returns issue' do
