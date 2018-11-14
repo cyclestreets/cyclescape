@@ -9,7 +9,7 @@ describe MessageThread::UserPrioritiesController, type: :controller do
   end
 
   describe 'PUT update.json' do
-    subject { put :update, thread_id: thread.id, user_thread_priority: {priority: priority}, format: :js }
+    subject { put :update, params: { thread_id: thread.id, user_thread_priority: {priority: priority}, format: :js } }
 
      it 'should respond' do
        expect(subject.body).to include('Priority updated')

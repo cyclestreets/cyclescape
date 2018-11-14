@@ -18,7 +18,7 @@ describe Group::MembershipRequestsController, type: :controller do
     end
 
     it 'has index' do
-      get :index, group_id: group.id
+      get :index, params: { group_id: group.id }
       expect(response.status).to eq(200)
     end
   end

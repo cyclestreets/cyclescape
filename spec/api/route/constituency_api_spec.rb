@@ -9,7 +9,7 @@ describe Route::ConstituencyApi do
     let!(:resource) { create :constituency }
 
     before do
-      get "/api/constituencies", geo: RGeo::GeoJSON.encode((build :issue_within_quahog).location).to_json
+      get "/api/constituencies", params: { geo: RGeo::GeoJSON.encode((build :issue_within_quahog).location).to_json }
     end
 
     it "returns a constituency" do

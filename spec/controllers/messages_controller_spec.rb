@@ -8,7 +8,7 @@ describe MessagesController, type: :controller do
     let(:thread_to_user) { nil }
     let(:thread) { create :message_thread, privacy: privacy, user: thread_to_user }
     let(:privacy) { "public" }
-    subject { post :create, message: message.attributes, thread_id: thread.id }
+    subject { post :create, params: { message: message.attributes, thread_id: thread.id } }
     before do
       warden.set_user user
     end
@@ -69,7 +69,7 @@ describe MessagesController, type: :controller do
       warden.set_user user_type
     end
 
-    subject { put :approve, id: message.id, thread_id: message_thread.id, format: :js }
+    subject { put :approve, params: { id: message.id, thread_id: message_thread.id, format: :js } }
 
     context 'for a committee member' do
       let!(:req)      { stub_request(:post, /rest\.akismet\.com\/1\.1\/submit-ham/).to_return(status: 200) }

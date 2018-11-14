@@ -12,9 +12,7 @@ describe Message::LibraryItemsController do
     end
 
     it 'should create a library item message' do
-      post :create, library_item_message: { library_item_id: library_item.id },
-                    message: { body: 'this is a useful item' },
-                    thread_id: thread.id
+      post :create, params: { library_item_message: { library_item_id: library_item.id }, message: { body: 'this is a useful item' }, thread_id: thread.id }
       expect(response.status).to be(302)
       expect(last_added.library_item_id).to eq(library_item.id)
       expect(last_added.message.body).to eq('this is a useful item')
