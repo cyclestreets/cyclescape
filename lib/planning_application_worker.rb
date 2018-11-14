@@ -19,7 +19,7 @@ class PlanningApplicationWorker
     @conn ||=
       Excon.new(
         Rails.application.config.planning_applications_url,
-        headers: { 'Accept' => Mime::JSON.to_s, 'Content-Type' => Mime::JSON.to_s },
+        headers: { 'Accept' => Mime[:json].to_s, 'Content-Type' => Mime[:json].to_s },
         expects: 200
       )
   end
