@@ -242,6 +242,10 @@ class User < ActiveRecord::Base
     display_name || I18n.t('anon')
   end
 
+  def api_key
+    self["api_key"] || generate_new_api_key
+  end
+
   def clear_profile
     profile.clear
     true
@@ -264,7 +268,23 @@ class User < ActiveRecord::Base
     super
   end
 
-  protected
+  private
+
+  def generate_new_api_key
+    tries = 5
+    begin
+      new_api_key = SecureRandom.urlsafe_base64
+      update!(api_key: new_api_key)
+      new_api_key
+    rescue ActiveRecord::RecordNotUnique => e
+      if e.message.match(/index_users_on_api_key/) && tries.positive?
+        tries -= 1
+        retry
+      else
+        raise e
+      end
+    end
+  end
 
   def add_memberships
     GroupMembership.transaction do

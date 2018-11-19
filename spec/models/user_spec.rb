@@ -14,6 +14,36 @@ describe User, type: :model do
     it { expect(subject.public_token).to_not be_empty }
   end
 
+  describe "#api_key" do
+    subject { build :user }
+
+    context "if one is set" do
+      before { subject.api_key = "abc" }
+
+      it "returns the api_key" do
+        expect(subject.api_key).to eq "abc"
+      end
+    end
+
+    context "if one is not set" do
+      it "generates one the api_key" do
+        expect(subject.api_key).to be_present
+      end
+    end
+
+    context "if SecureRandom picks an existing key" do
+      before do
+        create(:user, api_key: "existingkey")
+        create(:user, api_key: "existingkey2")
+        allow(SecureRandom).to receive(:urlsafe_base64).and_return("existingkey", "existingkey2", "newkey")
+      end
+
+      it "retries till a new key is generated (up to 5 times)" do
+        expect(subject.api_key).to eq "newkey"
+      end
+    end
+  end
+
   describe 'associations' do
     it { is_expected.to have_many(:memberships).dependent(:destroy) }
     it { is_expected.to have_many(:groups) }
