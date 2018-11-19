@@ -16,6 +16,7 @@ class Api < Grape::API
   mount Route::TagApi
   mount Route::ConstituencyApi
   mount Route::WardApi
+  mount Route::MembershipApi
 
   add_swagger_documentation \
     info: {
