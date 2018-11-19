@@ -32,7 +32,7 @@ module Route
     end
 
     resource do
-      desc 'Returns threads collection'
+      desc 'Returns threads collection', security: [{}]
       get :threads do
         post_or_get_thread
       end

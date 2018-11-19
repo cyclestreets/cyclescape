@@ -17,5 +17,16 @@ class Api < Grape::API
   mount Route::ConstituencyApi
   mount Route::WardApi
 
-  add_swagger_documentation
+  add_swagger_documentation \
+    info: {
+    title: "Cyclescape's JSON API",
+    description: "This is a public API and this page provides a test requests and it provides responses.",
+  },
+  security_definitions: {
+    api_key: {
+      type: "apiKey",
+      name: "api_key",
+      in: "params"
+    }
+  }
 end

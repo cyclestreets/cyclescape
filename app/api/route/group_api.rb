@@ -2,7 +2,7 @@
 
 module Route
   class GroupApi < Base
-    desc 'Returns groups as a GeoJSON collection'
+    desc 'Returns groups as a GeoJSON collection', security: [{}]
     paginate paginate_settings
 
     params do

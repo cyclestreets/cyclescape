@@ -87,12 +87,12 @@ module Route
     end
 
     resource do
-      desc 'Returns issues as a GeoJSON collection'
+      desc 'Returns issues as a GeoJSON collection', security: [{}]
       get :issues do
         post_or_get_issue
       end
 
-      desc 'Returns issues as a GeoJSON collection'
+      desc 'Returns issues as a GeoJSON collection', security: [{}]
       post :issues do
         post_or_get_issue
       end

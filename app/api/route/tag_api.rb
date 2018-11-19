@@ -2,7 +2,7 @@
 
 module Route
   class TagApi < Base
-    desc 'Returns tags used on issues, library items and threads'
+    desc 'Returns tags used on issues, library items and threads', security: [{}]
     paginate paginate_settings
 
     get :tags do

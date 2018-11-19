@@ -26,7 +26,7 @@ module Route
     end
 
     resource do
-      desc 'Returns messages collection'
+      desc 'Returns messages collection', security: [{}]
       get :messages do
         post_or_get_messages
       end
