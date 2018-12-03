@@ -16,7 +16,9 @@ function ImageEdit (opts) {
 
 ImageEdit.prototype.readFile = function (input) {
   if (input.files && input.files[0]) {
+    var file = input.files[0]
     var reader = new FileReader()
+    this.fileType = file.type
 
     if (this.cropper) {
       this.cropper.destroy()
@@ -27,7 +29,7 @@ ImageEdit.prototype.readFile = function (input) {
       this.initCroppie()
     }.bind(this)
 
-    reader.readAsDataURL(input.files[0])
+    reader.readAsDataURL(file)
   }
 }
 
@@ -75,7 +77,7 @@ ImageEdit.prototype.initCroppie = function () {
 ImageEdit.prototype.updateResult = function () {
   var canvas = this.cropper.getCroppedCanvas()
   if (canvas) {
-    this.base64El.val(canvas.toDataURL())
+    this.base64El.val(canvas.toDataURL(this.fileType))
   }
 }
 
