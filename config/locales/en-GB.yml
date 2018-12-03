@@ -1034,7 +1034,7 @@
         title: New issue from Planning application
         title_prefix: Planning application
   photo:
-    too_large: The image you uploaded is too large - it must be less than 3MB
+    too_large: The image you uploaded is too large - it must be less than 6MB
     wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
   shared:
     actions:

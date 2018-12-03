@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
         set_flash_message :success
       end
     else
-      set_flash_message :failure
+      flash[:alert] = message.errors.to_a.to_sentence
     end
 
     ThreadRecorder.thread_viewed thread, current_user

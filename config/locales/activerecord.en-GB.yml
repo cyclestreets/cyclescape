@@ -14,6 +14,10 @@
         potential_member:
           email_format_invalid: "'%{value}' is an invalid format for an email address"
           email_exists_in_group: "'%{value}' is being added twice"
+        photo_message:
+          attributes:
+            photo:
+              blank: can't be blank and must be an image (jpg, jpeg, png, or gif)
         message_thread:
           attributes:
             base:
@@ -31,5 +35,7 @@
         group: "Owned by"
         closed: Closed
         moderated: In Moderation
+      component:
+        photo: "Photo"
     models:
       message_thread: Discussion thread
