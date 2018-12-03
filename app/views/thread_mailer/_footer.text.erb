@@ -15,12 +15,12 @@ and <%= raw @thread.user.name %>.
 Everyone can view this discussion thread and post messages.
 <% end %>
 
-<%= t ".unsubscribe" %>
-<%= edit_thread_subscription_url(@thread, @subscription, t: @subscriber.public_token) %>
-
 <%= t(".thread", application_name: @site_config.application_name) %>:
 <% if defined?(@message) %>
   <%= thread_url(@thread, anchor: dom_id(@message)) %>
 <% else %>
   <%= thread_url(@thread) %>
 <% end %>
+
+<%= t ".unsubscribe" %>
+<%= edit_thread_subscription_url(@thread, @subscription, t: @subscriber.public_token) %>
