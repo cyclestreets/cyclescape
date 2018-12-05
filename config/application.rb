@@ -2,6 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require "English"
+require File.expand_path(File.join('..', '..', 'lib', 'subdomain_constraint'), __FILE__)
 
 Bundler.require(*Rails.groups)
 
@@ -55,7 +56,8 @@ module Cyclescape
     config.cache_store = :redis_store, "redis://localhost:6379/1",  { expires_in: 1.week }
 
     # ActionMailer default URL options
-    config.action_mailer.default_url_options = { host: 'www.cyclescape.org' }
+    # To set the URL set the ENV["SERVER_NAME"].  The SubdomainConstraint adds the staging subdomain.
+    config.action_mailer.default_url_options = { host: "#{::SubdomainConstraint.subdomain('www')}.#{ENV.fetch('SERVER_NAME', 'cyclescape.org')}" }
 
     # Git info
     config.git_hash = `git rev-parse --short HEAD`.chomp
