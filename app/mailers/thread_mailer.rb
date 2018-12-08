@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class ThreadMailer < ActionMailer::Base
-  include MailerHelper
   layout "basic_email"
-  helper :mailer
+  helper MailerHelper
   default from: ->(_) { SiteConfig.first.default_email }
 
   def digest(user, threads_messages)
