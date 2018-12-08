@@ -947,13 +947,12 @@ article.message .message-text {
     text-decoration: underline;
     cursor: pointer;
   }
+}
 
-  // keep updated with tinymce_init.js blockquote content_style
-  blockquote {
-    padding: 0 1em;
-    color: #6a737d;
-    border-left: 0.25em solid #dfe2e5;
-  }
+blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
 }
 
 /* styles for '...' */
