@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Notifications < ActionMailer::Base
+  # `include` to use it in the methods in this mailer and `helper` to use it in the views
+  include MailerHelper
   helper MailerHelper
   layout "basic_email"
   default from: ->(_) { SiteConfig.first.default_email }

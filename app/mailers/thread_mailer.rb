@@ -2,6 +2,8 @@
 
 class ThreadMailer < ActionMailer::Base
   layout "basic_email"
+  # `include` to use it in the methods in this mailer and `helper` to use it in the views
+  include MailerHelper
   helper MailerHelper
   default from: ->(_) { SiteConfig.first.default_email }
 
