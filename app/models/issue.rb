@@ -59,6 +59,7 @@ class Issue < ActiveRecord::Base
   scope :created_by, ->(user) { where(created_by_id: user) }
 
   after_commit :update_search
+  normalize_attribute :external_url, with: :url
 
   class << self
     def after_date(date)
@@ -91,10 +92,6 @@ class Issue < ActiveRecord::Base
 
   def to_param
     "#{id}-#{title.parameterize}"
-  end
-
-  def external_url=(val)
-    write_attribute(:external_url, AttributeNormaliser::URL.new(val).normalise)
   end
 
   def formatted_deadline

@@ -26,6 +26,7 @@ class SiteComment < ActiveRecord::Base
   validates :body, presence: true
   validate :body_does_not_contain_spam
   validates :context_url, url: true
+  normalize_attribute :context_url, with: :url
 
   def viewed?
     viewed_at
@@ -34,10 +35,6 @@ class SiteComment < ActiveRecord::Base
   def viewed!
     self.viewed_at = Time.current
     save!
-  end
-
-  def context_url=(val)
-    write_attribute(:context_url, AttributeNormaliser::URL.new(val).normalise)
   end
 
   protected

@@ -41,9 +41,7 @@ class UserProfile < ActiveRecord::Base
   validates :website, url: true
   validates :visibility, inclusion: { in: VISIBILITY_OPTIONS }
 
-  def website=(val)
-    write_attribute(:website, AttributeNormaliser::URL.new(val).normalise)
-  end
+  normalize_attribute :website, with: :url
 
   def picture_thumbnail
     picture.thumb('50x50>')
