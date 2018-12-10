@@ -285,7 +285,7 @@ describe MessageThread do
       it 'should remove double-dash signatures' do
         allow(mail.message).to receive(:decoded).and_return("Normal text here\n\n--\nSignature")
         thread.add_messages_from_email!(mail, nil)
-        expect(messages[-1].body).to eq("Normal text here\n")
+        expect(messages[-1].body).to eq("Normal text here")
       end
     end
 

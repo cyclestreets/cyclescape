@@ -94,8 +94,8 @@ describe 'Group threads', use: :subdomain do
           click_on 'Create Thread'
           email = open_last_email_for(notifiee.email)
           expect(email).to have_subject(/like A & B/)
-          expect(email).to have_body_text('A & B is')
-          expect(email).not_to have_body_text('&amp;')
+          expect(email.text_part).to have_body_text('A & B is')
+          expect(email.text_part).not_to have_body_text('&amp;')
         end
 
         it 'should not send emails if the notifiee dislikes emails' do
