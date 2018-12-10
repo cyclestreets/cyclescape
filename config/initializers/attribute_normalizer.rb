@@ -16,4 +16,17 @@ AttributeNormalizer.configure do |config|
       text
     end
   end
+
+  config.normalizers[:strip_html_paragraphs] = lambda do |value, _options|
+    return value unless value.is_a? String
+    html = Nokogiri::HTML::DocumentFragment.parse value
+    html.css("p").reverse.each do |node|
+      if node.inner_text.blank?
+        node.remove
+      else
+        break
+      end
+    end
+    html.to_html.strip
+  end
 end

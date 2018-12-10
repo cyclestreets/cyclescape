@@ -12,6 +12,14 @@ describe Message do
     it { is_expected.to validate_presence_of(:created_by) }
     it { is_expected.to validate_presence_of(:body) }
 
+    it do
+      is_expected.to normalize_attribute(:body).from(
+        "<p>\r\nGot stuff in\r\n</p><p>&nbsp;\r\n</p><p>And me</p><p>&nbsp;</p>\r\n<p>&nbsp; </p>\r\n<p>&nbsp;</p>\r\n <p> &nbsp;</p>"
+      ).to(
+        "<p>\r\nGot stuff in\r\n</p><p> \r\n</p><p>And me</p>"
+      )
+    end
+
     it 'should not require a body if a component is attached' do
       allow(subject).to receive(:component).and_return(true)
       expect(subject).to have(0).errors_on(:body)

@@ -59,6 +59,8 @@ class Message < ActiveRecord::Base
     author_email: proc { created_by.email },
     content: proc { body }
 
+  normalize_attribute :body, with: :strip_html_paragraphs
+
   aasm column: 'status' do
     state :mod_queued, initial: true
     state :approved
