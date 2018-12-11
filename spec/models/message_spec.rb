@@ -20,6 +20,14 @@ describe Message do
       )
     end
 
+    it do
+      is_expected.to normalize_attribute(:body).from(
+        "http://www.example.com?fbclid=123&this=that&other=other more words www.fb.com?p=q&fbclid=go\nhttp:fbclid"
+      ).to(
+        "http://www.example.com?other=other&this=that more words www.fb.com?p=q\nhttp:fbclid"
+      )
+    end
+
     it 'should not require a body if a component is attached' do
       allow(subject).to receive(:component).and_return(true)
       expect(subject).to have(0).errors_on(:body)
