@@ -27,8 +27,8 @@
       .message-text
         - display_message = sanitize(message_linkify(message))
         - if message.component || message.plain_text?
-          - display_message = auto_link(simple_format(display_message, sanitize: false))
-        = display_message
+          - display_message = simple_format(display_message, sanitize: false)
+        = auto_link(display_message)
 
       - message_or_component = message.component || message
       - if message_or_component.action_messages.to_a.present?

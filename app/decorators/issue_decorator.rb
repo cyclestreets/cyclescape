@@ -10,7 +10,7 @@ class IssueDecorator < ApplicationDecorator
 
   def description
     if issue.html?
-      h.sanitize issue.description
+      h.auto_link issue.description
     else
       h.auto_link h.simple_format issue.description
     end
