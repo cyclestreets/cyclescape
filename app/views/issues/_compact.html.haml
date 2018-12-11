@@ -22,7 +22,7 @@
           = issue.tags_list
       .issue-truncate
         %p
-          = issue.brief_description
+          = issue.description
     .votes-cell
       =render partial: "shared/votable",
         locals: { resource: issue.object }

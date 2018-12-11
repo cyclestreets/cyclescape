@@ -8,15 +8,11 @@ class IssueDecorator < ApplicationDecorator
     h.render partial: 'map', locals: { issue: issue }
   end
 
-  def brief_description
-    h.sanitize issue.description
-  end
-
   def description
     if issue.html?
-      h.auto_link h.simple_format issue.description
-    else
       h.sanitize issue.description
+    else
+      h.auto_link h.simple_format issue.description
     end
   end
 
