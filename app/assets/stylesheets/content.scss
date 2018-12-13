@@ -1,5 +1,11 @@
 /* 10. PAGE CONTENT
 -------------------------------------------------------------- */
+#tinymce.mce-content-body {
+  padding: 0;
+  overflow-y: auto;
+  min-height: inherit;
+}
+
 #page, .mce-content-body {
   background: $white;
   padding: 20px 0 30px;
