@@ -1,0 +1,52 @@
+Return-path: <andy@gravitystorm.co.uk>
+Envelope-to: test@gravitystorm.co.uk
+Delivery-date: Thu, 18 Oct 2012 18:05:49 +0100
+Received: from host86-178-142-72.range86-178.btcentralplus.com ([86.178.142.72]:60845 helo=[192.168.1.67])
+	by hera.krystal.co.uk with esmtpsa (TLSv1:DHE-RSA-CAMELLIA256-SHA:256)
+	(Exim 4.80)
+	(envelope-from <andy@gravitystorm.co.uk>)
+	id 1TOtXZ-002C4J-1a
+	for test@gravitystorm.co.uk; Thu, 18 Oct 2012 18:05:49 +0100
+essage-ID: <508036EF.9080409@gravitystorm.co.uk>
+Date: Thu, 18 Oct 2012 18:05:51 +0100
+From: Andy Allan <andy@gravitystorm.co.uk>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:15.0) Gecko/20120912 Thunderbird/15.0.1
+IME-Version: 1.0
+To: test@gravitystorm.co.uk
+Subject: Email with attached image
+Content-Type: multipart/mixed;
+ boundary="------------090907060808010805080606"
+
+This is a multi-part message in MIME format.
+--------------090907060808010805080606
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+This email has a plain message body.
+
+Nikolai
+
+
+--------------090907060808010805080606
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<p>
+  This email has an HTML message body.
+</p>
+<br>
+<p>
+Nikolai
+</p>
+<br>
+<div class=3D"gmail_quote">
+  <div dir=3D"ltr">
+    On Mon, 10 Dec 2018 at 09:10, Martin wrote:
+    <br>
+  </div>
+  <blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;border-left:1px solid rgb(204,204,204);padding-left:1ex">
+    <div dir=3D"ltr">Hi Nikolai,</div>
+    <br>
+    <div>Here is the a message I&#39;d like a reply too.</div>
+  </blockquote>
+</div>

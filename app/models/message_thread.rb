@@ -206,22 +206,25 @@ class MessageThread < ActiveRecord::Base
   def add_messages_from_email!(mail, in_reply_to)
     from_address = mail.message.header[:from].addresses.first
     from_name = mail.message.header[:from].display_names.first
+    h = ActionController::Base.helpers
 
     user = User.find_or_invite(from_address, from_name)
     fail "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
 
-    # For multipart messages we pull out the text/plain content
-    text = if mail.message.multipart?
-             mail.message.text_part.decoded
+    text = if mail.message.html_part
+             # For multipart messages we pull out the html part content and use python to remove the signature
+             body = %x(./lib/sig_strip.py #{Shellwords.escape(mail.message.html_part.decoded)})
+             body.gsub(%r{(</?html>|</?body>|</?head>)},"")
            else
-             mail.message.decoded
+             # When there is no HTML we get the text part or just the message and use EmailReplyParser to remove the signature
+             body = (mail.message.text_part || mail.message).decoded
+             parsed = EmailReplyParser.read(body)
+             stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")
+             h.auto_link h.simple_format(stripped)
            end
 
-    parsed = EmailReplyParser.read(text)
-    stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")
-
     open_by!(user) if closed
-    messages.create!(body: stripped, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
+    messages.create!(body: text, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
 
     # Attachments
     mail.message.attachments.each do |attachment|

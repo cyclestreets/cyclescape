@@ -43,5 +43,9 @@ FactoryBot.define do
     trait :with_pgp_sig do
       raw_message { File.read(raw_email_path('pgp_sig')) }
     end
+
+    trait :with_html do
+      raw_message { File.read(raw_email_path('html')) }
+    end
   end
 end
