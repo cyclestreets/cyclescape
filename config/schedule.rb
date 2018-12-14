@@ -4,7 +4,7 @@ path = File.expand_path("schedule.yml", File.dirname(__FILE__))
 config = {}
 config = YAML.safe_load(File.open(path)) if File.exist?(path)
 
-env(:PATH, "#{ENV['PATH']}:#{config["path"]}") if config["path"]
+env(:PATH, "#{ENV['PATH']}:/usr/local/bin:#{config["path"]}") if config["path"]
 env(:HOME, config["home"]) if config["home"]
 env(:MAILTO, config["error_email"]) if config["error_email"]
 
