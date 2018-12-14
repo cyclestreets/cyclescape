@@ -31,7 +31,7 @@ describe InboundMailProcessor do
       it 'should have the same text as the email' do
         # There are weird newline issues here, each \r is duplicated in the model's response
         expect(thread.messages.first.body).
-          to eq("Hi,\n\nCupcake ipsum dolor sit amet tart gummies. Sweet roll jelly pudding\nmacaroon ice cream. Halvah apple pie sweet. Halvah bear claw pudding.\nBonbon cake powder pastry. Jelly-o candy canes icing jelly macaroon.\nCandy topping chupa chups. Dessert biscuit biscuit gingerbread macaroon\nchupa chups wafer. Oat cake apple pie icing. Candy canes icing dessert.\n\nChocolate cake toffee dessert biscuit tootsie roll powder chocolate\njelly beans marzipan. Pastry tiramisu ice cream jujubes gummi bears.\nCaramels muffin cupcake candy. Caramels pie sweet roll. Jelly beans\ncupcake brownie. Chupa chups tootsie roll bonbon sesame snaps chocolate\ncake bear claw chocolate cake applicake cake. Jelly powder biscuit.\nChupa chups ice cream candy canes icing muffin jelly beans marshmallow.\nIce cream bonbon lemon drops lollipop. Croissant drage applicake\ntopping liquorice.\n\nAndrew\n")
+          to eq("<p>Hi,</p>\n\n<p>Cupcake ipsum dolor sit amet tart gummies. Sweet roll jelly pudding\n<br>macaroon ice cream. Halvah apple pie sweet. Halvah bear claw pudding.\n<br>Bonbon cake powder pastry. Jelly-o candy canes icing jelly macaroon.\n<br>Candy topping chupa chups. Dessert biscuit biscuit gingerbread macaroon\n<br>chupa chups wafer. Oat cake apple pie icing. Candy canes icing dessert.</p>\n\n<p>Chocolate cake toffee dessert biscuit tootsie roll powder chocolate\n<br>jelly beans marzipan. Pastry tiramisu ice cream jujubes gummi bears.\n<br>Caramels muffin cupcake candy. Caramels pie sweet roll. Jelly beans\n<br>cupcake brownie. Chupa chups tootsie roll bonbon sesame snaps chocolate\n<br>cake bear claw chocolate cake applicake cake. Jelly powder biscuit.\n<br>Chupa chups ice cream candy canes icing muffin jelly beans marshmallow.\n<br>Ice cream bonbon lemon drops lollipop. Croissant drage applicake\n<br>topping liquorice.</p>\n\n<p>Andrew\n</p>")
       end
 
       it 'should have be created by a new user with the email address' do
@@ -71,7 +71,7 @@ describe InboundMailProcessor do
       it 'should have the same text as the email' do
         # There are weird newline issues here, each \r is duplicated in the model's response
         expect(thread.messages.last.body).
-          to eq("Hi,\n\nCupcake ipsum dolor sit amet tart gummies. Sweet roll jelly pudding\nmacaroon ice cream. Halvah apple pie sweet. Halvah bear claw pudding.\nBonbon cake powder pastry. Jelly-o candy canes icing jelly macaroon.\nCandy topping chupa chups. Dessert biscuit biscuit gingerbread macaroon\nchupa chups wafer. Oat cake apple pie icing. Candy canes icing dessert.\n\nChocolate cake toffee dessert biscuit tootsie roll powder chocolate\njelly beans marzipan. Pastry tiramisu ice cream jujubes gummi bears.\nCaramels muffin cupcake candy. Caramels pie sweet roll. Jelly beans\ncupcake brownie. Chupa chups tootsie roll bonbon sesame snaps chocolate\ncake bear claw chocolate cake applicake cake. Jelly powder biscuit.\nChupa chups ice cream candy canes icing muffin jelly beans marshmallow.\nIce cream bonbon lemon drops lollipop. Croissant drage applicake\ntopping liquorice.\n\nAndrew\n")
+          to eq("<p>Hi,</p>\n\n<p>Cupcake ipsum dolor sit amet tart gummies. Sweet roll jelly pudding\n<br>macaroon ice cream. Halvah apple pie sweet. Halvah bear claw pudding.\n<br>Bonbon cake powder pastry. Jelly-o candy canes icing jelly macaroon.\n<br>Candy topping chupa chups. Dessert biscuit biscuit gingerbread macaroon\n<br>chupa chups wafer. Oat cake apple pie icing. Candy canes icing dessert.</p>\n\n<p>Chocolate cake toffee dessert biscuit tootsie roll powder chocolate\n<br>jelly beans marzipan. Pastry tiramisu ice cream jujubes gummi bears.\n<br>Caramels muffin cupcake candy. Caramels pie sweet roll. Jelly beans\n<br>cupcake brownie. Chupa chups tootsie roll bonbon sesame snaps chocolate\n<br>cake bear claw chocolate cake applicake cake. Jelly powder biscuit.\n<br>Chupa chups ice cream candy canes icing muffin jelly beans marshmallow.\n<br>Ice cream bonbon lemon drops lollipop. Croissant drage applicake\n<br>topping liquorice.</p>\n\n<p>Andrew\n</p>")
       end
 
       it 'should have be created by a new user with the email address' do
@@ -100,7 +100,7 @@ describe InboundMailProcessor do
 
       it 'should have the same text as the email text part' do
         message_body = thread.messages.last.body
-        expect(message_body).to eq("\nOn Tue, 20 Dec 2011, Cyclescape wrote:\n\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do and\n> how much that would cost. I therefore think that we do need to push for\n> cycle infrastructure along the A14 as a way of allowing them to justify\n> not widening the road quiet so much.\n\nI think the £20m is actually to implement things though, not a feasibility\nstudy. The current consultation seems to be about asking people what the\n£20m should be spent on:\n\nhttp://www.dft.gov.uk/consultations/dft-20111212\n\n\"schemes delivered over the next two years\"\n")
+        expect(message_body).to eq("<p>\nOn Tue, 20 Dec 2011, Cyclescape wrote:</p>\n\n<p>&gt; Robin Bird added a message to the thread.\n<br>&gt;\n<br>&gt; I believe the idea is that 20m will be used to work out what to do and\n<br>&gt; how much that would cost. I therefore think that we do need to push for\n<br>&gt; cycle infrastructure along the A14 as a way of allowing them to justify\n<br>&gt; not widening the road quiet so much.</p>\n\n<p>I think the £20m is actually to implement things though, not a feasibility\n<br>study. The current consultation seems to be about asking people what the\n<br>£20m should be spent on:</p>\n\n<p><a href=\"http://www.dft.gov.uk/consultations/dft-20111212\">http://www.dft.gov.uk/consultations/dft-20111212</a></p>\n\n<p>\"schemes delivered over the next two years\"\n</p>")
       end
     end
 
@@ -113,7 +113,7 @@ describe InboundMailProcessor do
 
       it 'should have the same text as the email text part' do
         message_body = thread.messages.last.body
-        expect(message_body).to eq("\nOn Tue, 20 Dec 2011, Cyclescape wrote:\n\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do and\n> how much that would cost. I therefore think that we do need to push for\n> cycle infrastructure along the A14 as a way of allowing them to justify\n> not widening the road quiet so much.\n\nI think the £20m is actually to implement things though, not a feasibility\nstudy. The current consultation seems to be about asking people what the\n£20m should be spent on:\n\nhttp://www.dft.gov.uk/consultations/dft-20111212\n\n\"schemes delivered over the next two years\"\n")
+        expect(message_body).to eq("<p>\nOn Tue, 20 Dec 2011, Cyclescape wrote:</p>\n\n<p>&gt; Robin Bird added a message to the thread.\n<br>&gt;\n<br>&gt; I believe the idea is that 20m will be used to work out what to do and\n<br>&gt; how much that would cost. I therefore think that we do need to push for\n<br>&gt; cycle infrastructure along the A14 as a way of allowing them to justify\n<br>&gt; not widening the road quiet so much.</p>\n\n<p>I think the £20m is actually to implement things though, not a feasibility\n<br>study. The current consultation seems to be about asking people what the\n<br>£20m should be spent on:</p>\n\n<p><a href=\"http://www.dft.gov.uk/consultations/dft-20111212\">http://www.dft.gov.uk/consultations/dft-20111212</a></p>\n\n<p>\"schemes delivered over the next two years\"\n</p>")
       end
     end
 
@@ -126,7 +126,7 @@ describe InboundMailProcessor do
 
       it 'should have the first message as the plain text part' do
         message_body = thread.messages[1].body
-        expect(message_body).to eq("This email has an attached image.\n\nAndy\n\n")
+        expect(message_body).to eq("<p>This email has an attached image.</p>\n\n<p>Andy</p>")
       end
 
       it 'should have the second image as a photo message' do
@@ -153,7 +153,7 @@ describe InboundMailProcessor do
 
       it 'should have the first message as the plain text part' do
         message_body = thread.messages[1].body
-        expect(message_body).to eq("This email has an attached file.\n\nAndy\n\n")
+        expect(message_body).to eq("<p>This email has an attached file.</p>\n\n<p>Andy</p>")
       end
 
       it 'should have the second message as an attachment message' do
@@ -177,9 +177,8 @@ describe InboundMailProcessor do
 
       it "should preserve the blank line between quote and reply" do
         message_body = thread.messages.last.body
-        expect(message_body).to eql("On Tue, 20 Dec 2011, Cyclescape wrote:\n> Robin Bird added a message to the thread.\n>\n> I believe the idea is that 20m will be used to work out what to do\n\nI believe this is the case too\n\nAndy\n")
+        expect(message_body).to eql("<p>On Tue, 20 Dec 2011, Cyclescape wrote:\n<br>&gt; Robin Bird added a message to the thread.\n<br>&gt;\n<br>&gt; I believe the idea is that 20m will be used to work out what to do</p>\n\n<p>I believe this is the case too</p>\n\n<p>Andy\n</p>")
       end
     end
   end
-
 end
