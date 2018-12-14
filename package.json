@@ -7,7 +7,7 @@
     "coffeeify": "~0.6",
     "cropperjs": "^1.4.1",
     "jquery-ui-timepicker-addon": "1.5.5",
-    "jsdom": "^13.0.0",
+    "jsdom": "^9.0.0",
     "knockout": "3.4.0",
     "leaflet-draw": "0.4.7",
     "leaflet-search": "1.9.8",
