@@ -2,7 +2,11 @@ require 'yaml'
 
 path = File.expand_path("schedule.yml", File.dirname(__FILE__))
 config = {}
-config = YAML.safe_load(File.open(path)) if File.exist?(path)
+if File.exist?(path)
+  config = YAML.safe_load(File.open(path))
+elsif Rails.env.production?
+  raise "The schedule.yml is missing, in production it must be present"
+end
 
 env(:PATH, "#{ENV['PATH']}:/usr/local/bin:#{config["path"]}") if config["path"]
 env(:HOME, config["home"]) if config["home"]
