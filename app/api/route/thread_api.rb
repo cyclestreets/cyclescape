@@ -5,7 +5,7 @@ module Route
     paginate paginate_settings
 
     params do
-      optional :group, type: String, desc: 'Return only issues from area of group given by its short name, e.g. "london"'
+      optional :group, type: String, desc: 'Return only threads owned by the group specified by its short name, e.g. "london"'
       optional :issue_id, type: Integer, desc: 'ID of issue'
       optional :order, type: Symbol, values: %i[created_at id], desc: 'Order of returned threads.'
       optional :order_direction, type: Symbol, values: %i[asc desc], default: :asc
@@ -20,7 +20,7 @@ module Route
         if params[:group]
           group = Group.find_by(short_name: params[:group])
           error! 'Given group not found', 404 unless group
-          scope = scope.intersects(group.profile.location)
+          scope = scope.where(group: group)
         end
         scope = scope.order(params[:order] => params[:order_direction]) if params[:order]
         scope = scope.where(issue_id: params[:issue_id]) if params[:issue_id]

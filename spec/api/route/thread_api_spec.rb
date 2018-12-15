@@ -21,5 +21,17 @@ describe Route::ThreadApi do
       expect(last_response.status).to eq(200)
       expect(json_response[0].keys).to match_array(response_keys)
     end
+
+    context "specifiying a group" do
+      let(:group) { create :group }
+      let!(:thread_in_group) { create :message_thread, group: group }
+
+      it "return only threads for that group" do
+        get "/api/threads", { group: group.short_name }
+
+        expect(json_response.size).to eq(1)
+        expect(json_response[0]["id"]).to eq(thread_in_group.id)
+      end
+    end
   end
 end
