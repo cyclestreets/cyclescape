@@ -1,9 +1,9 @@
 %li
   - if permitted_to?(:view_profile, user)
     = link_to user_profile_path(user), class: ("leading" if leading) do
-      %span.thumb
+      %span.thumb{style: "max-width: 100px; max-height: 100px"}
         - if user.profile.picture
-          = image_tag user.profile.picture_thumbnail.url
+          = image_tag(path_to_url(user.profile.picture_thumbnail.url), alt: I18n.t("user.profiles.show.profile_picture_title", name: user.name), style: "max-width:100%;max-height:100%"
       %p= "#{user.name} #{leading ? t('.leading') : ''}"
   - else
     "#{user.display_name_or_anon} #{leading ? t('.leading') : ''}"
