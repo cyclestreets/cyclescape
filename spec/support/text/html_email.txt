@@ -32,7 +32,7 @@ Content-Type: text/html; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
 <p>
-  This email has an HTML message body.
+  This email has an HTML message body and a plain link www.example.com <script></script>.
 </p>
 <br>
 <p>

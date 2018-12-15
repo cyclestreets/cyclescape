@@ -294,7 +294,7 @@ describe MessageThread do
 
       it 'should remove HTML signatures' do
         thread.add_messages_from_email!(mail, nil)
-        expect(messages[-1].body).to eq("<p>\n  This email has an HTML message body.\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>\n\n")
+        expect(messages[-1].body).to eq("<p>\n  This email has an HTML message body and a plain link <a href=\"http://www.example.com\">www.example.com</a> .\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>\n\n")
       end
     end
 

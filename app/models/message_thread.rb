@@ -220,8 +220,9 @@ class MessageThread < ActiveRecord::Base
              body = (mail.message.text_part || mail.message).decoded
              parsed = EmailReplyParser.read(body)
              stripped = parsed.fragments.select { |f| !f.hidden? }.join("\n")
-             h.auto_link h.simple_format(stripped)
+             h.simple_format(stripped)
            end
+    text = h.auto_link(text)
 
     open_by!(user) if closed
     messages.create!(body: text, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
