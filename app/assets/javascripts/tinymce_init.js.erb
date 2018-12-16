@@ -1,10 +1,16 @@
 $(window).ready(function () {
+  $("textarea.tinymce").closest("form").find("input:submit").prop('disabled', true)
   tinyMCE.init({
     selector: 'textarea.tinymce',
     branding: false,
     menubar: false,
     plugins: [ 'table', 'link', 'lists' ],
     toolbar: 'undo redo | bold italic | bullist numlist | table link unlink | blockquote image',
-    content_css: '<%= asset_path 'application.css' %>'
+    content_css: '<%= asset_path 'application.css' %>',
+    setup: function (editor) {
+      editor.on('init', function (e) {
+        $("textarea.tinymce").closest("form").find("input:submit").prop('disabled', false)
+      });
+    }
   })
 })
