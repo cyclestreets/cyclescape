@@ -100,6 +100,9 @@ body.issues, body.group-issues {
   font-family: inherit;
 }
 
-#issue_description_input label {
-  float: none;
+// Stop the form label pushing the tinymce menu right
+#issue_description_input,  #message_body_input {
+  label {
+    float: none;
+  }
 }
