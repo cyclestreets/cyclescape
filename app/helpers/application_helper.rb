@@ -132,9 +132,13 @@ module ApplicationHelper
 
     if (group = message.thread.group)
       body = body.to_s.gsub(Hashtag::HASHTAG_REGEX) do
-        link = link_to($LAST_MATCH_INFO[:hash_with_tag],
-                       hashtag_link(group, $LAST_MATCH_INFO[:tag_name]), class: :hashtag)
-        "#{$LAST_MATCH_INFO[:space]}#{link}"
+        if $LAST_MATCH_INFO[:hash_with_tag] && $LAST_MATCH_INFO[:tag_name]
+          link = link_to($LAST_MATCH_INFO[:hash_with_tag],
+                         hashtag_link(group, $LAST_MATCH_INFO[:tag_name]), class: :hashtag)
+          "#{$LAST_MATCH_INFO[:space]}#{link}"
+        else
+          $LAST_MATCH_INFO[0]
+        end
       end
     end
 

@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 class Hashtag < ActiveRecord::Base
-  HASHTAG_REGEX = /(?<space>\s|^)(?<hash_with_tag>#(?!(?:\w+?_|_\w+?)(?:\s|$))(?<tag_name>([[:alpha:]])[a-z1-9\-_]+))/i
+  # "[^"]+"|() the LHS matches all text inside quotes leaving the RHS to match the hashtag
+  # Hashtag Regexp from https://github.com/ralovely/simple_hashtag/blob/4e8832a845258f1d1d55db404975cc6b49eb12fe/lib/simple_hashtag/hashtag.rb#L12
+  # TODO: update Hashtag Regexp to use https://github.com/twitter/twitter-text/tree/master/rb
+  HASHTAG_REGEX = /"[^"]+"|(?<space>\s|^|>)(?<hash_with_tag>#(?!(?:\w+?_|_\w+?)(?:\s|$))(?<tag_name>([[:alpha:]])[a-z1-9\-_]+))/i
 
   belongs_to :group
   has_many :hashtaggings
@@ -31,6 +34,6 @@ class Hashtag < ActiveRecord::Base
   end
 
   def self.extract_tag_names(content)
-    content.to_enum(:scan, HASHTAG_REGEX).map { Regexp.last_match[:tag_name].downcase }.uniq
+    content.to_enum(:scan, HASHTAG_REGEX).map { Regexp.last_match[:tag_name]&.downcase }.compact.uniq
   end
 end

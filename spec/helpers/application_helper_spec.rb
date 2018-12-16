@@ -6,7 +6,7 @@ describe ApplicationHelper, type: :helper do
   let(:group)    { build_stubbed :group }
   let(:message_thread) { build_stubbed(:message_thread, group: group) }
   let(:message) { build(:message, body: body, thread: message_thread) }
-  let(:body) { "This #{format} is #useful" }
+  let(:body) { "<a title=\"Don't hashtag #me\"></a>This #{format} is #useful" }
   let(:group_url) { "http://#{group.short_name}.test.host" }
 
   include ApplicationHelper
@@ -15,14 +15,14 @@ describe ApplicationHelper, type: :helper do
     it 'links the thread' do
 
       expect(message_linkify(message)).
-        to eq "This <a href=\"/threads/#{thread.id}\">#{format}</a> is <a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
+        to eq "<a title=\"Don't hashtag #me\"></a>This <a href=\"/threads/#{thread.id}\">#{format}</a> is <a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
     end
   end
 
   shared_examples 'links the issue' do
     it 'links the thread' do
       expect(message_linkify(message)).
-        to eq "This <a href=\"/issues/#{issue.id}-important-issue\">#{format}</a> is<a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
+        to eq "<a title=\"Don't hashtag #me\"></a>This <a href=\"/issues/#{issue.id}-important-issue\">#{format}</a> is<a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
     end
   end
 
@@ -57,7 +57,7 @@ describe ApplicationHelper, type: :helper do
 
       it 'does not link the issue' do
         expect(message_linkify(message)).to eq(
-          "This <a href=\"/issues/#{issue.id}-important-issue\">issue no #{issue.id}</a>, <a href=\"/issues/#{issue.id}-important-issue\">issue #{issue.id}</a>, <a href=\"/threads/#{thread.id}\">thread #{thread.id}</a> is <a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
+          "<a title=\"Don't hashtag #me\"></a>This <a href=\"/issues/#{issue.id}-important-issue\">issue no #{issue.id}</a>, <a href=\"/issues/#{issue.id}-important-issue\">issue #{issue.id}</a>, <a href=\"/threads/#{thread.id}\">thread #{thread.id}</a> is <a class=\"hashtag\" href=\"#{group_url}/hashtags/useful\">#useful</a>"
         )
       end
     end
