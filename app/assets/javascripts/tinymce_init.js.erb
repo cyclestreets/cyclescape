@@ -2,6 +2,7 @@ $(window).ready(function () {
   $("textarea.tinymce").closest("form").find("input:submit").prop('disabled', true)
   tinyMCE.init({
     selector: 'textarea.tinymce',
+    browser_spellcheck: true,
     branding: false,
     menubar: false,
     plugins: [ 'table', 'link', 'lists' ],
