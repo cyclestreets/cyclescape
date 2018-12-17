@@ -14,9 +14,9 @@ describe Message do
 
     it do
       is_expected.to normalize_attribute(:body).from(
-        "<p>\r\nGot stuff in\r\n</p><p>&nbsp;\r\n</p><p>And me</p><p>&nbsp;</p>\r\n<p>&nbsp; </p>\r\n<p>&nbsp;</p>\r\n <p> &nbsp;</p>"
+        "<p>\r\nGot stuff in\r\n</p><p>&nbsp;\r\n</p><p>And me</p><p> &nbsp; </p>\r\n<p>&nbsp; </p>\r\n<p>&nbsp;</p>\r\n <p> &nbsp;</p>"
       ).to(
-        "<p>\r\nGot stuff in\r\n</p><p>&nbsp;\r\n</p><p>And me</p>"
+        "<p>\r\nGot stuff in\r\n</p><p>And me</p>"
       )
     end
 
