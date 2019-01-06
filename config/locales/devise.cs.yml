@@ -34,7 +34,7 @@ cs:
     invitations:
       edit:
         title: Potvrďte váš účet
-        info: Byl jste pozván, aby jste se připojil k portálu %{application_name}.
+        info: Byl jste pozván, aby jste se připojil k portálu.
           Aby jste byly schopni se přihlásit, prosím doplňte údaje k vašemu účtu o
           heslo. Můžete také změnit vaši e-mailovou adresu na takovou, kterou chcete
           s touto službou používat.
