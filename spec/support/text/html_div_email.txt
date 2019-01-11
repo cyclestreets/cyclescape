@@ -1,0 +1,33 @@
+Return-Path: <george@example.net>
+Date: Fri, 11 Jan 2019 11:08:02 +0000
+From: George Coulouris <george@example.net>
+To: message-2@cyclescape.org
+Message-ID: <4B61E3D3-5D34-436E-BCD5-3A03DC7F550C@net>
+In-Reply-To: <message-2@cyclescape.org>
+Subject: Re: [Cyclescape] junction revisions
+Mime-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="Apple-Mail=_C821455D-1F0C-4FD1-A56E-B7CC812C2296"
+Content-Transfer-Encoding: 7bit
+Envelope-to: message-2@cyclescape.org
+
+--Apple-Mail=_C821455D-1F0C-4FD1-A56E-B7CC812C2296
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+  Text split by divs=0D
+and not by p tags=0D
+
+--Apple-Mail=_C821455D-1F0C-4FD1-A56E-B7CC812C2296
+Content-Type: text/html;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<html><head><meta http-equiv=3D"Content-Type" content=3D"text/html; chars=
+et=3Dutf-8"></head><body style=3D"word-wrap: break-word; -webkit-nbsp-mod=
+e: space; line-break: after-white-space;" class=3D""><div class=3D"">&nbs=
+p; Text split by divs</div><div class=3D"">And not by p tags</div></body>=
+</html>=
+
+--Apple-Mail=_C821455D-1F0C-4FD1-A56E-B7CC812C2296--

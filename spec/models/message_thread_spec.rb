@@ -296,6 +296,14 @@ describe MessageThread do
         thread.add_messages_from_email!(mail, nil)
         expect(messages[-1].body).to eq("<p>\n  This email has an HTML message body and a plain link <a href=\"http://www.example.com\">www.example.com</a> .\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>\n\n")
       end
+
+      context "split by divs" do
+        let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_div"))) }
+        it 'should remove HTML signatures' do
+          thread.add_messages_from_email!(mail, nil)
+          expect(messages[-1].body).to eq("<p>  Text split by divs</p><p>And not by p tags</p>\n")
+        end
+      end
     end
 
     context 'with pgp sig' do
