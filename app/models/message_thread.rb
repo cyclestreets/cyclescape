@@ -215,6 +215,7 @@ class MessageThread < ActiveRecord::Base
              # For multipart messages we pull out the html part content and use python to remove the signature
              body = %x(./lib/sig_strip.js #{Shellwords.escape(mail.message.html_part.decoded)})
              body.gsub(%r{(</?html>|</?body>|</?head>|\r)},"")
+               .gsub(%r{<(/)?div},"<\\1p")
            else
              # When there is no HTML we get the text part or just the message and use EmailReplyParser to remove the signature
              body = (mail.message.text_part || mail.message).decoded
