@@ -226,7 +226,7 @@ class MessageThread < ActiveRecord::Base
     text = h.auto_link(text)
 
     open_by!(user) if closed
-    messages.create!(body: text, created_by: user, in_reply_to: in_reply_to).tap { |mes| mes.skip_mod_queue! }
+    messages.create!(body: text, created_by: user, in_reply_to: in_reply_to, inbound_mail: mail).tap { |mes| mes.skip_mod_queue! }
 
     # Attachments
     mail.message.attachments.each do |attachment|

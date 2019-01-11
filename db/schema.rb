@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181119204425) do
+ActiveRecord::Schema.define(version: 20190111192926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -387,19 +387,20 @@ ActiveRecord::Schema.define(version: 20181119204425) do
   add_index "message_threads", ["user_id"], name: "index_message_threads_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "created_by_id",              null: false
-    t.integer  "thread_id",                  null: false
-    t.text     "body",                       null: false
+    t.integer  "created_by_id",               null: false
+    t.integer  "thread_id",                   null: false
+    t.text     "body",                        null: false
     t.integer  "component_id"
-    t.string   "component_type", limit: 255
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.string   "component_type",  limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.datetime "deleted_at"
     t.datetime "censored_at"
     t.integer  "in_reply_to_id"
-    t.string   "public_token",               null: false
+    t.string   "public_token",                null: false
     t.string   "status"
     t.string   "check_reason"
+    t.integer  "inbound_mail_id"
   end
 
   add_index "messages", ["component_id", "component_type"], name: "index_messages_on_component_id_and_component_type", using: :btree
@@ -718,6 +719,7 @@ ActiveRecord::Schema.define(version: 20181119204425) do
   add_foreign_key "message_thread_closes", "message_threads"
   add_foreign_key "message_thread_closes", "users"
   add_foreign_key "message_threads", "users"
+  add_foreign_key "messages", "inbound_mails"
   add_foreign_key "potential_members", "groups"
   add_foreign_key "thread_leader_messages", "message_threads", column: "thread_id"
   add_foreign_key "thread_leader_messages", "messages"

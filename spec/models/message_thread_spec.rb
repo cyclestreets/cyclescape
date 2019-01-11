@@ -257,9 +257,11 @@ describe MessageThread do
 
     it 'should create a new message' do
       expect{ thread.add_messages_from_email!(mail, nil) }.to change{thread.reload.messages.count}.by(1)
-      expect(messages[-1]).to be_a(Message)
-      expect(messages[-1].body).not_to be_blank
-      expect(messages[-1].approved?).to be true
+      message = messages.last
+      expect(message).to be_a(Message)
+      expect(message.body).not_to be_blank
+      expect(message.approved?).to be true
+      expect(message.inbound_mail).to eq(mail)
     end
 
     it 'should re-open a closed thread' do
