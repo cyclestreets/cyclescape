@@ -39,6 +39,8 @@ Rails.application.routes.draw do
 
   get "private_messages", to: "private_messages#index"
 
+  resource :user_blocks, only: [:create, :destroy]
+
   resource :overview, as: :dashboard, controller: 'dashboards' do
     get :search
   end

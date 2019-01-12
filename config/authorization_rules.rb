@@ -177,16 +177,20 @@ authorization do
     has_permission_on :users, to: :send_private_message, join_by: :and do
       if_permitted_to :view_full_name
       if_attribute id: is_not { user.id }
+      if_attribute blocked_user_ids: does_not_contain { user.id }
+      if_attribute blocked_by_user_ids: does_not_contain { user.id }
     end
     has_permission_on :users, to: :view_profile do
       if_permitted_to :view_full_name
       if_attribute profile: { visibility: 'public' }
     end
     has_permission_on :users_private_message_threads, to: [:new, :create] do
-      if_permitted_to :send_private_message
+      if_permitted_to :view_full_name
+      if_attribute id: is_not { user.id }
     end
     has_permission_on :users_private_message_threads, to: [:index]
     has_permission_on :private_messages, to: [:index]
+    has_permission_on :user_blocks, to: [:manage]
   end
 
   role :guest do

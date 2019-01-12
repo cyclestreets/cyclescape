@@ -16,12 +16,21 @@
     %h1= @thread.display_title
     .meta
       .privacy
+        - other_user = ([@thread.created_by, @thread.user] - [current_user]).first
         - if @thread.private_to_committee?
           %p= t ".private_to_committee_message", group: @thread.group.name
         - elsif @thread.private_to_group?
           %p= t ".private_to_group_message", group: @thread.group.name
-        - elsif @thread.user
+        - elsif @thread.private_message?
           %p= t ".private_html", creator: link_to_profile(@thread.created_by), message_to: link_to_profile(@thread.user)
+
+          - existing_block = current_user.user_blocks.find_by(blocked_id: other_user.id)
+          - method = existing_block ? :delete : :post
+          - label = existing_block ? t(".unblock_private_messages") : t(".block_private_messages")
+          = semantic_form_for current_user.user_blocks.build, method: method  do |f|
+            = f.input :blocked_id, as: :hidden, input_html: { value: other_user.id }
+            = f.actions do
+              = f.action :submit, label: label, button_html: {class: "btn-red submit", data: { disable_with: t("formtastic.actions.saving") }}
         - else
           %p= t ".public_message"
       %section.tags
@@ -44,7 +53,8 @@
     %p
     - if permitted_to? :open, @thread
       = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green', data: { confirm: t("are_you_sure") }
-  -else
+  - elsif @thread.private_message? && !(permitted_to? :send_private_message, other_user)
+  - else
     = render "messages/new"
 
 %aside#sidebar

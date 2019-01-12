@@ -34,6 +34,10 @@ class User < ActiveRecord::Base
   has_many :private_threads, class_name: 'MessageThread', inverse_of: :user
   has_many :thread_leader_messages, -> { active }, dependent: :destroy, inverse_of: :created_by, foreign_key: :created_by_id
   has_many :leading_threads, through: :thread_leader_messages, source: :thread, inverse_of: :leaders
+  has_many :user_blocks
+  has_many :blocked_users, through: :user_blocks, source: :blocked
+  has_many :user_blocked_by, class_name: "UserBlock", foreign_key: :blocked_id
+  has_many :blocked_by_users, through: :user_blocked_by, source: :user
   has_one :profile, class_name: 'UserProfile'
   has_one :prefs, class_name: 'UserPref'
   has_one :location, class_name: 'UserLocation', dependent: :destroy

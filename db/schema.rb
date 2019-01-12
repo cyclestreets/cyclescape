@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190111192926) do
+ActiveRecord::Schema.define(version: 20190112205550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -592,6 +592,16 @@ ActiveRecord::Schema.define(version: 20190111192926) do
   add_index "thread_views", ["user_id", "thread_id"], name: "index_thread_views_on_user_id_and_thread_id", unique: true, using: :btree
   add_index "thread_views", ["user_id"], name: "index_thread_views_on_user_id", using: :btree
 
+  create_table "user_blocks", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "blocked_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_blocks", ["blocked_id", "user_id"], name: "index_user_blocks_on_blocked_id_and_user_id", unique: true, using: :btree
+  add_index "user_blocks", ["user_id"], name: "index_user_blocks_on_user_id", using: :btree
+
   create_table "user_locations", force: :cascade do |t|
     t.integer  "user_id",                                              null: false
     t.integer  "category_id"
@@ -725,4 +735,6 @@ ActiveRecord::Schema.define(version: 20190111192926) do
   add_foreign_key "thread_leader_messages", "messages"
   add_foreign_key "thread_leader_messages", "thread_leader_messages", column: "unleading_id"
   add_foreign_key "thread_leader_messages", "users", column: "created_by_id"
+  add_foreign_key "user_blocks", "users"
+  add_foreign_key "user_blocks", "users", column: "blocked_id"
 end
