@@ -19,7 +19,7 @@ en-GB:
         change_password: Change password
     registrations:
       edit:
-        confirm: Are you sure?
+        confirm: Are you sure? This will set your name to "User id (deleted)", remove your groups, thread subscriptions, profile, and offers to lead threads permanently. It will leave your messages and issues.
         cancel_account: cancel your account
         cancel_header: Cancel my account
         unhappy_with_account_html: If you are unhappy with your account, you can %{confirm_link}.
@@ -39,7 +39,7 @@ en-GB:
           change your name and email address to the one that you prefer to use for
           this site.
         commit_button: Confirm account
-        confirm: Are you sure?
+        confirm: Are you sure? This will set your name to "User id (deleted)", remove your groups, thread subscriptions, profile, and offers to lead threads permanently. It will leave your messages and issues.
         cancel_account: cancel your account
         cancel_header: Cancel my account
         unhappy_with_account_html: If you are unhappy with your account, you can %{confirm_link}.

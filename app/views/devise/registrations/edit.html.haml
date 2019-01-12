@@ -15,5 +15,5 @@
 .cancel-form
   %h2= t ".cancel_header"
   %p
-    = t ".unhappy_with_account_html", confirm_link: link_to(t(".cancel_account"), registration_path(resource_name), data: { confirm: t("are_you_sure") }, method: :delete)
+    = t ".unhappy_with_account_html", confirm_link: link_to(t(".cancel_account"), registration_path(resource_name), data: { confirm: t(".confirm") }, method: :delete)
   = link_to t(".back"), :back
