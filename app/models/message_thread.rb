@@ -56,7 +56,7 @@ class MessageThread < ActiveRecord::Base
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, -> { (uniq(true)) }, through: :messages, source: :created_by
   has_many :user_priorities, class_name: 'UserThreadPriority', foreign_key: 'thread_id', inverse_of: :thread
-  has_many :message_thread_closes, dependent: :destroy
+  has_many :message_thread_closes, -> { order(:created_at) }, dependent: :destroy
   has_many :closed_by, through: :message_thread_closes, source: :user
   has_many :map_messages, foreign_key: :thread_id, inverse_of: :thread
   has_many :action_messages, foreign_key: :thread_id, inverse_of: :thread
