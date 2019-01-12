@@ -5,7 +5,8 @@ describe MessagesController, type: :controller do
   describe 'create' do
     let(:message) { build :message }
     let(:user) { create :user }
-    let(:thread)   { create :message_thread }
+    let(:thread)   { create :message_thread, privacy: privacy }
+    let(:privacy) { "public" }
     subject { post :create, message: message.attributes, thread_id: thread.id }
     before do
       warden.set_user user
@@ -22,6 +23,7 @@ describe MessagesController, type: :controller do
 
     context 'with a spam like message' do
       let(:is_spam) { 'true' }
+
       it 'redirect to thread and display flash' do
         expect(subject).to redirect_to("/threads/#{thread.id}")
         expect(akismet_req).to have_been_made
@@ -31,6 +33,15 @@ describe MessagesController, type: :controller do
       it 'adds the message (and not the thread) to the mod queue' do
         expect{subject}.to change{Message.mod_queued.count}.by(1)
         expect(thread.reload.approved?).to eq true
+      end
+
+      context "with a private message" do
+        let(:privacy) { "private" }
+
+        it 'does not check for spam' do
+          expect{subject}.to_not change{Message.mod_queued.count}
+          expect(flash[:alert]).to be_blank
+        end
       end
     end
 

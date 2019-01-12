@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
   def create
     @message ||= thread.messages.build permitted_params.merge(created_by: current_user)
 
-    message.check_reason = check_reason
+    message.check_reason = check_reason unless thread.private_message?
 
     if message.save
       if message.check_reason
