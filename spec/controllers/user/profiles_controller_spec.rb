@@ -27,8 +27,14 @@ describe User::ProfilesController, type: :controller do
       end
 
       context 'as a guest' do
-        it 'should be hidden' do
-          expect {get :show, user_id: user.id}.to raise_error(ActionController::RoutingError)
+        it "should ask user to sign in" do
+          expect(get :show, user_id: user.id).to redirect_to(new_user_session_url)
+        end
+
+        context 'where the user does not exist' do
+          it "should ask user to sign in" do
+            expect(get :show, user_id: -1).to redirect_to(new_user_session_url)
+          end
         end
       end
 
@@ -55,7 +61,15 @@ describe User::ProfilesController, type: :controller do
         end
 
         it 'should be hidden' do
-          expect {get :show, user_id: user.id}.to raise_error(ActionController::RoutingError)
+          get :show, user_id: user.id
+          expect(response.body).to include(I18n.t('application.permission_denied'))
+        end
+
+        context 'where the user does not exist' do
+          it 'should be hidden' do
+            get :show, user_id: -1
+            expect(response.body).to include(I18n.t('application.permission_denied'))
+          end
         end
       end
 
@@ -66,10 +80,10 @@ describe User::ProfilesController, type: :controller do
 
         before do
           sign_in current_user
+          get :show, user_id: user.id
         end
 
         it 'should be visible and show PM option' do
-          get :show, user_id: user.id
           expect(response).to be_success
           expect(response.body).to include(I18n.t('user.profiles.show.send_private_message'))
         end
@@ -96,10 +110,11 @@ describe User::ProfilesController, type: :controller do
           before do
             create(:group_membership_request, user: user, group: current_group)
             sign_in current_user
+            get :show, user_id: user.id
           end
 
           it 'should be hidden' do
-            expect {get :show, user_id: user.id}.to raise_error(ActionController::RoutingError)
+            expect(response.body).to include(I18n.t('application.permission_denied'))
           end
         end
       end

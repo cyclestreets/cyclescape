@@ -165,7 +165,9 @@ authorization do
       to :manage
       if_attribute id: is { user.id }
     end
-    has_permission_on :user_profiles, to: :view
+    has_permission_on :user_profiles, to: :view do
+      if_permitted_to :view_profile
+    end
     has_permission_on :users do
       to :view_full_name
       if_attribute id: is { user.id }
@@ -213,7 +215,9 @@ authorization do
     has_permission_on :api_v1_issues, to: :index
     has_permission_on :site_comments, to: [:new, :create]
     has_permission_on :tags, to: [:show, :autocomplete_tag_name, :index]
-    has_permission_on :user_profiles, to: :view
+    has_permission_on :user_profiles, to: :view do
+      if_permitted_to :view_profile
+    end
     has_permission_on :group_hashtags do
       to [:index, :show]
     end

@@ -2,12 +2,10 @@
 
 class User::ProfilesController < ApplicationController
   before_filter :load_user
-  filter_access_to :edit, :create, :update, attribute_check: true, model: User
+  filter_access_to :show, :edit, :create, :update, attribute_check: true, model: User
   filter_access_to :all
 
   def show
-    raise ActionController::RoutingError.new('Not Found') unless permitted_to? :view_profile, @user
-
     @user = UserDecorator.decorate(@user)
 
     involved_threads = ThreadList.public_recent_involved_with(@user, 10).includes(:group)
@@ -43,7 +41,7 @@ class User::ProfilesController < ApplicationController
   protected
 
   def load_user
-    @user = params[:user_id] ? User.find(params[:user_id]) : current_user
+    @user = params[:user_id] ? User.find_by(id: params[:user_id]) : current_user
     permission_denied unless @user
   end
 
