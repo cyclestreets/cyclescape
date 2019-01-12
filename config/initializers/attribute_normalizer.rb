@@ -19,7 +19,7 @@ AttributeNormalizer.configure do |config|
 
   config.normalizers[:strip_html_paragraphs] = lambda do |value, _options|
     return value unless value.is_a? String
-    value.gsub(%r{\s*<p>([[:space:]]|&nbsp;)*?</p>}, "")
+    value.gsub(%r{\s*<p>([[:space:]]|&nbsp;|<br>)*?</p>}, "")
   end
 
   config.normalizers[:strip_fb_links] = lambda do |value, _options|
