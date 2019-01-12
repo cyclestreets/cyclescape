@@ -16,7 +16,7 @@
     %h1= @thread.display_title
     .meta
       .privacy
-        - other_user = ([@thread.created_by, @thread.user] - [current_user]).first
+        - other_user = @thread.other_user(current_user)
         - if @thread.private_to_committee?
           %p= t ".private_to_committee_message", group: @thread.group.name
         - elsif @thread.private_to_group?
@@ -53,7 +53,7 @@
     %p
     - if permitted_to? :open, @thread
       = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green', data: { confirm: t("are_you_sure") }
-  - elsif @thread.private_message? && !(permitted_to? :send_private_message, other_user)
+  - elsif @thread.private_message? && !(permitted_to? :send_private_message, other_user) # Do not allow new messages if messages are not permitted
   - else
     = render "messages/new"
 

@@ -164,6 +164,10 @@ class MessageThread < ActiveRecord::Base
     end
   end
 
+  def other_user(current_user)
+    ([user, created_by] - [current_user]).first
+  end
+
   def display_title
     if closed
       "(#{self.class.human_attribute_name(:closed)}) #{title}"
