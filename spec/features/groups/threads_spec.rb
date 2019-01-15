@@ -9,6 +9,14 @@ describe 'Group threads', use: :subdomain do
   before { set_subdomain(current_group.subdomain) if defined?(current_group) }
   after  { unset_subdomain if defined?(current_group) }
 
+  let(:thread_title) { "Like A & B" }
+
+  def fill_in_thread
+    fill_in I18n.t("activerecord.attributes.message_thread.title"), with: thread_title
+    fill_in 'Message', with: 'This is between you & me, but...'
+    click_on 'Create Thread'
+  end
+
   context 'as a group committee member' do
     include_context 'signed in as a committee member'
 
@@ -26,41 +34,22 @@ describe 'Group threads', use: :subdomain do
     end
 
     context 'new thread' do
-      let(:thread_attrs) { attributes_for(:message_thread) }
-
-      def fill_in_thread
-        fill_in 'Title', with: thread_attrs[:title]
-        fill_in 'Message', with: 'This is between you an me, but...'
-        click_on 'Create Thread'
-      end
-
       before do
         visit group_threads_path(current_group)
         click_link I18n.t('group.message_threads.index.new_group_thread')
       end
 
       it 'should create a new public thread' do
-        fill_in 'Title', with: thread_attrs[:title]
-        fill_in 'Message', with: 'Damn you, woman, awake from your damnable reverie!'
-        select 'Public', from: 'Privacy'
-        click_on 'Create Thread'
-        expect(page).to have_content(thread_attrs[:title])
+        select 'Group', from: 'Privacy'
+        fill_in_thread
+        expect(page).to have_content("Private: Only members of #{current_group.name}")
+        expect(page).to have_content(thread_title)
         expect(current_user.subscribed_to_thread?(current_group.threads.last)).to be_truthy
       end
 
-      it 'should create a new private thread' do
-        fill_in 'Title', with: thread_attrs[:title]
-        fill_in 'Message', with: 'This is between you an me, but...'
-        select 'Group', from: 'Privacy'
-        click_on 'Create Thread'
-        expect(page).to have_content("Private: Only members of #{current_group.name}")
-      end
-
       it 'should create a new committee thread' do
-        fill_in 'Title', with: thread_attrs[:title]
-        fill_in 'Message', with: 'This is between you an me, but...'
         select 'Committee', from: 'Privacy'
-        click_on 'Create Thread'
+        fill_in_thread
         expect(page).to have_content("Private: Only committee members of #{current_group.name}")
       end
 
@@ -69,11 +58,8 @@ describe 'Group threads', use: :subdomain do
       end
 
       context 'notifications', after_commit: true do
-
         def enable_group_thread_prefs_for(u)
-          u.prefs.update_column(:involve_my_groups, 'notify')
-          u.prefs.update_column(:involve_my_groups_admin, true)
-          u.prefs.update_column(:email_status_id, 1)
+          u.prefs.update!(involve_my_groups: 'notify', involve_my_groups_admin: true, email_status_id: 1)
         end
 
         it 'should send a notification to group members' do
@@ -82,19 +68,8 @@ describe 'Group threads', use: :subdomain do
           enable_group_thread_prefs_for(notifiee)
           fill_in_thread
           email = open_last_email_for(notifiee.email)
-          expect(email).to have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
-        end
-
-        it 'should not send html entities in the notification' do
-          membership = create(:group_membership, group: current_group)
-          notifiee = membership.user
-          enable_group_thread_prefs_for(notifiee)
-          fill_in 'Title', with: 'Something like A & B'
-          fill_in 'Message', with: 'A & B is something important'
-          click_on 'Create Thread'
-          email = open_last_email_for(notifiee.email)
-          expect(email).to have_subject(/like A & B/)
-          expect(email).to have_body_text('A & B is')
+          expect(email).to have_subject("[Cyclescape] \"#{thread_title}\" (#{current_group.name})")
+          expect(email).to have_body_text('between you & me')
           expect(email).not_to have_body_text('&amp;')
         end
 
@@ -143,10 +118,8 @@ describe 'Group threads', use: :subdomain do
             membership = create(:group_membership, group: current_group)
             notifiee = membership.user
             enable_group_thread_prefs_for(notifiee)
-            fill_in 'Title', with: thread_attrs[:title]
-            fill_in 'Message', with: 'Something'
             select 'Committee', from: 'Privacy'
-            click_on 'Create Thread'
+            fill_in_thread
             expect(open_last_email_for(notifiee.email)).to be_nil
           end
 
@@ -154,12 +127,10 @@ describe 'Group threads', use: :subdomain do
             membership = create(:group_membership, group: current_group, role: 'committee')
             notifiee = membership.user
             enable_group_thread_prefs_for(notifiee)
-            fill_in 'Title', with: thread_attrs[:title]
-            fill_in 'Message', with: 'Something'
             select 'Committee', from: 'Privacy'
-            click_on 'Create Thread'
+            fill_in_thread
             email = open_last_email_for(notifiee.email)
-            expect(email).to have_subject("[Cyclescape] \"#{thread_attrs[:title]}\" (#{current_group.name})")
+            expect(email).to have_subject("[Cyclescape] \"#{thread_title}\" (#{current_group.name})")
           end
         end
 
@@ -169,23 +140,22 @@ describe 'Group threads', use: :subdomain do
           let!(:user_location) { create(:user_location, user: user, location: location) }
           let!(:group_membership) { create(:group_membership, user: user, group: current_group) }
           let!(:issue) { create(:issue, location: user_location.location) }
+          let(:email_count) { all_emails.count }
 
           before do
+            email_count
             enable_group_thread_prefs_for(user)
             user.prefs.update_column(:involve_my_locations, 'notify')
             visit issue_path(issue)
             click_on 'Discuss'
-            fill_in 'Title', with: thread_attrs[:title]
-            fill_in 'Message', with: 'Something'
             select current_group.name, from: 'Owned by'
+            fill_in_thread
           end
 
           # The user would normally receive an email since it's a new group thread,
           # but it's also a new thread on an issue within one of their locations.
           it 'should not send two emails to the same person' do
-            email_count = all_emails.count
-            click_on 'Create Thread'
-            expect(all_emails.count).to eql(email_count + 1)
+            expect(all_emails.count).to eq(email_count + 1)
           end
         end
       end
@@ -214,9 +184,9 @@ describe 'Group threads', use: :subdomain do
         end
 
         it 'should not subscribe normal members to committee threads' do
-          subscriber.prefs.update_column(:involve_my_groups, 'subscribe')
-          subscriber.prefs.update_column(:involve_my_groups_admin, true)
-          fill_in 'Title', with: 'Committee Thread'
+          subscriber.prefs.update!(involve_my_groups: 'subscribe', involve_my_groups_admin: true)
+
+          fill_in I18n.t("activerecord.attributes.message_thread.title"), with: "Committee Thread"
           fill_in 'Message', with: 'Something secret'
           select 'Committee', from: 'Privacy'
           click_on 'Create Thread'
@@ -233,12 +203,12 @@ describe 'Group threads', use: :subdomain do
           def create_private_group_thread
             visit issue_path(issue)
             click_on 'Discuss'
-            fill_in 'Title', with: 'Private thread'
+            fill_in I18n.t("activerecord.attributes.message_thread.title"), with: 'Private thread'
             fill_in 'Message', with: 'Something or other'
             select 'Group', from: 'Privacy'
             click_on 'Create Thread'
 
-            expect(current_group.threads.last.privacy).to eql('group')
+            expect(current_group.threads.last.privacy).to eq('group')
           end
 
           it 'should not autosubscribe non-members with overlapping areas' do
@@ -294,7 +264,7 @@ describe 'Group threads', use: :subdomain do
       it 'should let you edit the thread' do
         expect(page).to have_content(edit_thread)
         click_on edit_thread
-        fill_in 'Title', with: 'New, better, thread title'
+        fill_in 'Discussion title', with: 'New, better, thread title'
         click_on 'Save'
         expect(page).to have_content 'Thread updated'
         expect(page).to have_content 'New, better, thread title'

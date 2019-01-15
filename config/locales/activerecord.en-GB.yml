@@ -35,6 +35,7 @@
         group: "Owned by"
         closed: Closed
         moderated: In Moderation
+        title: Discussion title
       component:
         photo: "Photo"
     models:

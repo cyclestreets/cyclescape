@@ -4,55 +4,7 @@ require 'spec_helper'
 describe 'Issues' do
   let(:issue_values) { attributes_for(:issue_with_json_loc) }
 
-  context 'new' do
-    context 'as site member' do
-      include_context 'signed in as a site user'
-
-      before do
-        visit new_issue_path
-
-        fill_in 'Title', with: issue_values[:title]
-        fill_in 'Write a description', with: issue_values[:description]
-        find('#issue_loc_json', visible: false).set(issue_values[:loc_json])
-      end
-
-      it 'should create a new issue' do
-        attach_file 'Add a photo', test_photo_path
-        fill_in 'Tag your issue', with: 'parking'
-        # Note hidden map field
-        maxlength = find_field('Title')['maxlength']
-        expect(maxlength).to eq("80")
-        click_on 'Send Report'
-        expect(page).to have_content("New Thread on #{issue_values[:title]}")
-        click_on 'Create Thread'
-        within('#content header') do
-          expect(page).to have_content(issue_values[:title])
-        end
-        expect(page).to have_content('parking')
-        expect(page).to have_content(current_user.name)
-      end
-
-      it 'must not barf on duplicate tags' do
-        fill_in 'Tag your issue', with: 'parking parking'
-
-        click_on 'Send Report'
-        click_on 'Create Thread'
-        within('#content header') do
-          expect(page).to have_content(issue_values[:title])
-        end
-      end
-
-      it 'must not barf on nasty tags' do
-        fill_in 'Tag your issue', with: 'equals = êquals'
-
-        click_on 'Send Report'
-        click_on 'Create Thread'
-        within('#content header') do
-          expect(page).to have_content(issue_values[:title])
-        end
-      end
-    end
-  end
+  # NOTE: 'new' is covered in ./issues_with_notifications_spec.rb
 
   context 'show' do
     let!(:issue) { create(:issue) }

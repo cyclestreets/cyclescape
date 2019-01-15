@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 20190112205550) do
   add_index "action_messages", ["message_id"], name: "index_action_messages_on_message_id", using: :btree
   add_index "action_messages", ["thread_id"], name: "index_action_messages_on_thread_id", using: :btree
 
+  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
+    t.string   "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "constituencies", force: :cascade do |t|
     t.string   "name"
     t.geometry "location", limit: {:srid=>4326, :type=>"geometry"}, null: false

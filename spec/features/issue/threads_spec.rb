@@ -22,7 +22,7 @@ describe 'Issue threads', after_commit: true do
       it 'should pre-fill the title for the thread' do
         visit issue_path(issue)
         click_on 'Discuss'
-        expect(find_field('Title').value).to eq(issue.title)
+        expect(find_field('Discussion title').value).to eq(issue.title)
       end
 
       it 'should not pre-fill the title for the second thread' do
@@ -32,7 +32,7 @@ describe 'Issue threads', after_commit: true do
         click_on 'Create Thread'
         visit issue_path(issue)
         click_on 'New Thread'
-        expect(find_field('Title').value).to be_nil
+        expect(find_field('Discussion title').value).to be_nil
       end
 
       it 'should copy the tags from the issue' do
@@ -162,7 +162,7 @@ describe 'Issue threads', after_commit: true do
         message = SecureRandom.hex
         visit issue_path(issue)
         click_on 'Discuss'
-        fill_in 'Title', with: 'Lorem & Ipsum'
+        fill_in 'Discussion title', with: 'Lorem & Ipsum'
         fill_in 'Message', with: message
         click_on 'Create Thread'
         message
@@ -191,7 +191,7 @@ describe 'Issue threads', after_commit: true do
       it "should not send a notification if they don't have permission to view the thread" do
         visit issue_path(issue)
         click_on 'Discuss'
-        fill_in 'Title', with: 'Super secrets'
+        fill_in 'Discussion title', with: 'Super secrets'
         select current_group.name, from: 'Owned by'
         select 'Group', from: 'Privacy'
         fill_in 'Message', with: "Don't tell anyone, but..."
@@ -235,7 +235,7 @@ describe 'Issue threads', after_commit: true do
       def create_thread
         visit issue_path(issue)
         click_on 'Discuss'
-        fill_in 'Title', with: 'Lorem & Ipsum'
+        fill_in 'Discussion title', with: 'Lorem & Ipsum'
         fill_in 'Message', with: 'Something or other'
         click_on 'Create Thread'
       end
@@ -292,7 +292,7 @@ describe 'Issue threads', after_commit: true do
       it 'should let you edit the thread' do
         visit issue_thread_path(issue, thread)
         click_on edit_thread
-        fill_in 'Title', with: 'New title please'
+        fill_in I18n.t("activerecord.attributes.message_thread.title"), with: 'New title please'
         click_on 'Save'
         expect(page).to have_content('Thread updated')
         expect(page).to have_content('New title please')

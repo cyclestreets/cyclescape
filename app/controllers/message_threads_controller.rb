@@ -2,6 +2,7 @@
 
 class MessageThreadsController < ApplicationController
   filter_access_to :show, :edit, :update, :approve, :reject, :close, :open, :destroy, attribute_check: true
+  include MessageCreator
 
   def index
     threads = ThreadList.recent_public.page(params[:page])
@@ -72,22 +73,9 @@ class MessageThreadsController < ApplicationController
 
   def create
     # Thread is created in issue or group message thread controller
-    @message = thread.messages.build permitted_message_params.merge(created_by: current_user)
-
-    # spam? check needs to be done in the controller
-    @message.check_reason = if @message.spam?
-                              'possible_spam'
-                            elsif !current_user.approved?
-                              'not_approved'
-                            end
+    @message = create_message(thread)
     if thread.save
-      if @message.check_reason
-        flash[:alert] = t(@message.check_reason)
-        redirect_to home_path
-      else
-        @message.skip_mod_queue!
-        redirect_to thread_path thread
-      end
+      redirect_on_check_reason(@message, spam_path: home_path, clean_path: thread_path(thread))
     else
       @available_groups = current_user.groups
       render :new

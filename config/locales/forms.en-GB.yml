@@ -85,7 +85,6 @@
         locale: Locale
         remove_picture: Remove picture
       thread:
-        title: Title
         privacy: Privacy
         issue: Issue
       site_comment:
