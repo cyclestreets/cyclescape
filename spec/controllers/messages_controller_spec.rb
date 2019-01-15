@@ -1,11 +1,12 @@
 require 'spec_helper'
 
 describe MessagesController, type: :controller do
-
   describe 'create' do
     let(:message) { build :message }
-    let(:user) { create :user }
-    let(:thread)   { create :message_thread, privacy: privacy }
+    let(:groups) { [] }
+    let(:user) { create :user, groups: groups }
+    let(:thread_to_user) { nil }
+    let(:thread) { create :message_thread, privacy: privacy, user: thread_to_user }
     let(:privacy) { "public" }
     subject { post :create, message: message.attributes, thread_id: thread.id }
     before do
@@ -37,9 +38,11 @@ describe MessagesController, type: :controller do
 
       context "with a private message" do
         let(:privacy) { "private" }
+        let(:groups) { [create(:group)] }
+        let(:thread_to_user) { create :user, groups: groups }
 
         it 'does not check for spam' do
-          expect{subject}.to_not change{Message.mod_queued.count}
+          expect{subject}.to_not change { Message.mod_queued.count }
           expect(flash[:alert]).to be_blank
         end
       end
