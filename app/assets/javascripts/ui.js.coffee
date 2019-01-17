@@ -144,6 +144,8 @@ jQuery ->
       dialog.find('h1').remove()
       if ($(window).height() < 650)
         $('#message_body').attr('rows', 5).attr('style', 'height: 75px; font-size: smaller')
+      tinyMCE.remove()
+      tinyMCE.init(window.tinymceOpts)
       dialog.on "click", ".cancel a, .close", (e) ->
         e.preventDefault()
         dialog.dialog('close')
