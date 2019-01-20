@@ -178,6 +178,8 @@
       photo_message:
         photo: 6MB max, the image will be automatically resized to an appropriate size.
       library/document: *tags_string_hints
+      site_comment:
+        bicycle_wheels: To help us identify real comments please enter the amount (in numbers) of wheels on 4 bicycles
       site_config:
         email_domain: "The domain the emails will come from and users will reply to."
         nowhere_location: "The PostGis interpretation of where to put users that have no locations or groups."

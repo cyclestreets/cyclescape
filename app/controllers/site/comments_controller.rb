@@ -14,7 +14,7 @@ class Site::CommentsController < ApplicationController
 
     @site_comment.user = current_user if current_user
 
-    if @site_comment.save
+    if params[:bicycle_wheels].try(:strip) == '8' && params[:real_name].blank? && @site_comment.save
       set_flash_message(:success)
       AdminMailer.new_site_comment(@site_comment).deliver_later
       redirect_to request.referer || root_path

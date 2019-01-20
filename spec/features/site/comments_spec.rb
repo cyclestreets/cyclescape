@@ -15,6 +15,7 @@ describe 'Site feedback' do
       fill_in 'Message', with: 'Your site is awesome!'
       fill_in 'Name', with: 'Bobby Jones'
       fill_in 'Email', with: 'bobby@example.com'
+      fill_in I18n.t('formtastic.labels.user.new.bicycle_wheels'), with: "8 "
       click_on 'Send Feedback'
       expect(page).to have_content('Thank you')
 
@@ -26,6 +27,7 @@ describe 'Site feedback' do
     it 'should store the request URL with the comment' do
       click_on 'Feedback'
       fill_in 'Message', with: 'This page broke!'
+      fill_in I18n.t('formtastic.labels.user.new.bicycle_wheels'), with: "8 "
       click_on 'Send Feedback'
       expect(SiteComment.last.context_url).to eq(root_url)
     end
