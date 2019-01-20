@@ -274,7 +274,7 @@ describe 'Message threads', type: :feature do
       it 'should let you edit the thread' do
         click_on edit_thread
         expect(page).to have_content('Edit thread')
-        fill_in 'Title', with: 'New better title'
+        fill_in I18n.t("activerecord.attributes.message_thread.title"), with: 'New better title'
         click_on 'Save'
         expect(page).to have_content('Thread updated')
         expect(page).to have_content('New better title')

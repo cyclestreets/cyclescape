@@ -1,0 +1,15 @@
+= f.semantic_errors
+= f.inputs do
+  = f.input :title, label: f.object.class.human_attribute_name(:title)
+  - if @available_groups.present?
+    = f.input :group,
+        collection: [[t(".everyone"), nil, "data-privacy-options" => "{}"]] + @available_groups.map {|g| [g.name, g.id, "data-privacy" => g.default_thread_privacy, "data-privacy-options" => Hash[g.thread_privacy_options_map_for(current_user).map { |n,v| [v, n]}].to_json] },
+        include_blank: false
+    = f.input :privacy,
+        as: :select,
+        collection: f.object.class.privacies_map,
+        input_html: {"data-autoset" => "##{thread_dom_prefix}_group_id", "data-autoset-param" => "privacy", "data-auto-options" => "##{thread_dom_prefix}_group_id", "data-auto-options-param" => "privacy-options"},
+        wrapper_html: {class: "hide", "data-dependent" => "##{thread_dom_prefix}_group_id"}
+  = semantic_fields_for @message do |f2|
+    = f2.semantic_errors
+    = f2.input :body, input_html: { class: "tinymce", rows: 10 }
