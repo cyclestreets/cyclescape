@@ -109,7 +109,8 @@ describe 'Authentication and authorization' do
       fill_in 'Email', with: credentials[:email]
       fill_in 'Password', with: credentials[:password], match: :first
       fill_in 'Password confirmation', with: credentials[:password]
-      fill_in 'Bicycle Wheels', with: "12"
+      fill_in I18n.t('formtastic.labels.user.new.bicycle_wheels'), with: " 12 "
+
       click_button 'Sign up'
       open_email(credentials[:email])
     end
