@@ -5,6 +5,7 @@ describe AdminMailer do
 
   it 'sends a comment email' do
     subject = described_class.new_site_comment comment
+    expect(subject.subject).to eq "[ID #{comment.id}] New site comment"
     expect(subject.body).to include(comment.body)
   end
 end

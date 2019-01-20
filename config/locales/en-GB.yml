@@ -765,13 +765,12 @@
   mailers:
     admin_mailer:
       new_site_comment:
-        subject: New site comment
+        subject: "[ID %{id}] New site comment"
         body: "
-        Comment with:
-        Name %{name}
-        Email: %{email}
-        URL: %{url}
-        Body: %{body}
+        Name: %{name}\n
+        Email: %{email}\n
+        URL: %{url}\n
+        Body: %{body}\n
         "
     notifications:
       added_to_group:
