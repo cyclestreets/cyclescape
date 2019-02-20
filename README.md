@@ -38,5 +38,5 @@ The words in braces preceded by a percent, for example %{name}, should not be tr
 
 At the moment, the translations are not used by the application, but are useful for custom deployments.
 
- * http://www.cyclescape.org/
+ * https://www.cyclescape.org/
  * http://www.cyklistesobe.cz/
