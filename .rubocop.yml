@@ -10,7 +10,7 @@ Rails:
   Enabled: true
 
 Rails/HttpPositionalArguments:
-  Enabled: false
+  Enabled: true
 
 Rails/DynamicFindBy:
   Whitelist:

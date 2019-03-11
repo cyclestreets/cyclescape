@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -26,25 +25,17 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.string   "description",             null: false
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-  end
-
-  add_index "action_messages", ["completing_message_id"], name: "index_action_messages_on_completing_message_id", using: :btree
-  add_index "action_messages", ["created_by_id"], name: "index_action_messages_on_created_by_id", using: :btree
-  add_index "action_messages", ["message_id"], name: "index_action_messages_on_message_id", using: :btree
-  add_index "action_messages", ["thread_id"], name: "index_action_messages_on_thread_id", using: :btree
-
-  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["completing_message_id"], name: "index_action_messages_on_completing_message_id", using: :btree
+    t.index ["created_by_id"], name: "index_action_messages_on_created_by_id", using: :btree
+    t.index ["message_id"], name: "index_action_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_action_messages_on_thread_id", using: :btree
   end
 
   create_table "constituencies", force: :cascade do |t|
     t.string   "name"
     t.geometry "location", limit: {:srid=>4326, :type=>"geometry"}, null: false
+    t.index ["location"], name: "index_constituencies_on_location", using: :gist
   end
-
-  add_index "constituencies", ["location"], name: "index_constituencies_on_location", using: :gist
 
   create_table "cyclestreets_photo_messages", force: :cascade do |t|
     t.integer  "cyclestreets_id"
@@ -58,11 +49,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "created_at",                                               null: false
     t.datetime "updated_at",                                               null: false
     t.string   "photo_name"
+    t.index ["created_by_id"], name: "index_cyclestreets_photo_messages_on_created_by_id", using: :btree
+    t.index ["message_id"], name: "index_cyclestreets_photo_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_cyclestreets_photo_messages_on_thread_id", using: :btree
   end
-
-  add_index "cyclestreets_photo_messages", ["created_by_id"], name: "index_cyclestreets_photo_messages_on_created_by_id", using: :btree
-  add_index "cyclestreets_photo_messages", ["message_id"], name: "index_cyclestreets_photo_messages_on_message_id", using: :btree
-  add_index "cyclestreets_photo_messages", ["thread_id"], name: "index_cyclestreets_photo_messages_on_thread_id", using: :btree
 
   create_table "deadline_messages", force: :cascade do |t|
     t.integer  "thread_id",                                     null: false
@@ -75,11 +65,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.integer  "invalidated_by_id"
     t.boolean  "all_day",                       default: false, null: false
     t.datetime "updated_at"
+    t.index ["created_by_id"], name: "index_deadline_messages_on_created_by_id", using: :btree
+    t.index ["message_id"], name: "index_deadline_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_deadline_messages_on_thread_id", using: :btree
   end
-
-  add_index "deadline_messages", ["created_by_id"], name: "index_deadline_messages_on_created_by_id", using: :btree
-  add_index "deadline_messages", ["message_id"], name: "index_deadline_messages_on_message_id", using: :btree
-  add_index "deadline_messages", ["thread_id"], name: "index_deadline_messages_on_thread_id", using: :btree
 
   create_table "document_messages", force: :cascade do |t|
     t.integer  "thread_id",                 null: false
@@ -91,11 +80,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.integer  "file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["created_by_id"], name: "index_document_messages_on_created_by_id", using: :btree
+    t.index ["message_id"], name: "index_document_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_document_messages_on_thread_id", using: :btree
   end
-
-  add_index "document_messages", ["created_by_id"], name: "index_document_messages_on_created_by_id", using: :btree
-  add_index "document_messages", ["message_id"], name: "index_document_messages_on_message_id", using: :btree
-  add_index "document_messages", ["thread_id"], name: "index_document_messages_on_thread_id", using: :btree
 
   create_table "group_membership_requests", force: :cascade do |t|
     t.integer  "user_id",                         null: false
@@ -106,13 +94,12 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "updated_at"
     t.text     "message"
     t.integer  "group_membership_id"
+    t.index ["actioned_by_id"], name: "index_group_membership_requests_on_actioned_by_id", using: :btree
+    t.index ["group_id"], name: "index_group_membership_requests_on_group_id", using: :btree
+    t.index ["group_membership_id"], name: "index_group_membership_requests_on_group_membership_id", using: :btree
+    t.index ["user_id", "group_id"], name: "index_group_membership_requests_on_user_id_and_group_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_group_membership_requests_on_user_id", using: :btree
   end
-
-  add_index "group_membership_requests", ["actioned_by_id"], name: "index_group_membership_requests_on_actioned_by_id", using: :btree
-  add_index "group_membership_requests", ["group_id"], name: "index_group_membership_requests_on_group_id", using: :btree
-  add_index "group_membership_requests", ["group_membership_id"], name: "index_group_membership_requests_on_group_membership_id", using: :btree
-  add_index "group_membership_requests", ["user_id", "group_id"], name: "index_group_membership_requests_on_user_id_and_group_id", unique: true, using: :btree
-  add_index "group_membership_requests", ["user_id"], name: "index_group_membership_requests_on_user_id", using: :btree
 
   create_table "group_memberships", force: :cascade do |t|
     t.integer  "user_id",                null: false
@@ -121,11 +108,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.datetime "deleted_at"
+    t.index ["group_id"], name: "index_group_memberships_on_group_id", using: :btree
+    t.index ["user_id", "group_id"], name: "index_group_memberships_on_user_id_and_group_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_group_memberships_on_user_id", using: :btree
   end
-
-  add_index "group_memberships", ["group_id"], name: "index_group_memberships_on_group_id", using: :btree
-  add_index "group_memberships", ["user_id", "group_id"], name: "index_group_memberships_on_user_id_and_group_id", unique: true, using: :btree
-  add_index "group_memberships", ["user_id"], name: "index_group_memberships_on_user_id", using: :btree
 
   create_table "group_prefs", force: :cascade do |t|
     t.integer  "group_id",                                  null: false
@@ -133,10 +119,9 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.boolean  "notify_membership_requests", default: true, null: false
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.index ["group_id"], name: "index_group_prefs_on_group_id", unique: true, using: :btree
+    t.index ["membership_secretary_id"], name: "index_group_prefs_on_membership_secretary_id", using: :btree
   end
-
-  add_index "group_prefs", ["group_id"], name: "index_group_prefs_on_group_id", unique: true, using: :btree
-  add_index "group_prefs", ["membership_secretary_id"], name: "index_group_prefs_on_membership_secretary_id", using: :btree
 
   create_table "group_profiles", force: :cascade do |t|
     t.integer  "group_id",                                                      null: false
@@ -149,10 +134,9 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.string   "picture_name",         limit: 255
     t.text     "new_user_email",                                                null: false
     t.string   "logo_uid"
+    t.index ["group_id"], name: "index_group_profiles_on_group_id", using: :btree
+    t.index ["location"], name: "index_group_profiles_on_location", using: :gist
   end
-
-  add_index "group_profiles", ["group_id"], name: "index_group_profiles_on_group_id", using: :btree
-  add_index "group_profiles", ["location"], name: "index_group_profiles_on_location", using: :gist
 
   create_table "group_requests", force: :cascade do |t|
     t.string   "status",                 limit: 255
@@ -167,12 +151,11 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
     t.text     "rejection_message"
+    t.index ["actioned_by_id"], name: "index_group_requests_on_actioned_by_id", using: :btree
+    t.index ["name"], name: "index_group_requests_on_name", unique: true, using: :btree
+    t.index ["short_name"], name: "index_group_requests_on_short_name", unique: true, using: :btree
+    t.index ["user_id"], name: "index_group_requests_on_user_id", using: :btree
   end
-
-  add_index "group_requests", ["actioned_by_id"], name: "index_group_requests_on_actioned_by_id", using: :btree
-  add_index "group_requests", ["name"], name: "index_group_requests_on_name", unique: true, using: :btree
-  add_index "group_requests", ["short_name"], name: "index_group_requests_on_short_name", unique: true, using: :btree
-  add_index "group_requests", ["user_id"], name: "index_group_requests_on_user_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",                   limit: 255,                    null: false
@@ -184,38 +167,34 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "disabled_at"
     t.string   "default_thread_privacy", limit: 255, default: "public", null: false
     t.integer  "message_threads_count"
+    t.index ["short_name"], name: "index_groups_on_short_name", using: :btree
   end
-
-  add_index "groups", ["short_name"], name: "index_groups_on_short_name", using: :btree
 
   create_table "hashtaggings", force: :cascade do |t|
     t.integer "hashtag_id"
     t.integer "message_id"
+    t.index ["hashtag_id", "message_id"], name: "index_hashtaggings_on_hashtag_id_and_message_id", using: :btree
+    t.index ["hashtag_id"], name: "index_hashtaggings_on_hashtag_id", using: :btree
+    t.index ["message_id"], name: "index_hashtaggings_on_message_id", using: :btree
   end
-
-  add_index "hashtaggings", ["hashtag_id", "message_id"], name: "index_hashtaggings_on_hashtag_id_and_message_id", using: :btree
-  add_index "hashtaggings", ["hashtag_id"], name: "index_hashtaggings_on_hashtag_id", using: :btree
-  add_index "hashtaggings", ["message_id"], name: "index_hashtaggings_on_message_id", using: :btree
 
   create_table "hashtags", force: :cascade do |t|
     t.string   "name"
     t.integer  "group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["group_id"], name: "index_hashtags_on_group_id", using: :btree
+    t.index ["name", "group_id"], name: "index_hashtags_on_name_and_group_id", unique: true, using: :btree
+    t.index ["name"], name: "index_hashtags_on_name", using: :btree
   end
-
-  add_index "hashtags", ["group_id"], name: "index_hashtags_on_group_id", using: :btree
-  add_index "hashtags", ["name", "group_id"], name: "index_hashtags_on_name_and_group_id", unique: true, using: :btree
-  add_index "hashtags", ["name"], name: "index_hashtags_on_name", using: :btree
 
   create_table "hide_votes", force: :cascade do |t|
     t.integer  "planning_application_id"
     t.integer  "user_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.index ["planning_application_id", "user_id"], name: "index_hide_votes_on_planning_application_id_and_user_id", unique: true, using: :btree
   end
-
-  add_index "hide_votes", ["planning_application_id", "user_id"], name: "index_hide_votes_on_planning_application_id_and_user_id", unique: true, using: :btree
 
   create_table "html_issues", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -232,9 +211,8 @@ ActiveRecord::Schema.define(version: 20190112205550) do
   create_table "issue_tags", id: false, force: :cascade do |t|
     t.integer "issue_id", null: false
     t.integer "tag_id",   null: false
+    t.index ["issue_id", "tag_id"], name: "index_issue_tags_on_issue_id_and_tag_id", unique: true, using: :btree
   end
-
-  add_index "issue_tags", ["issue_id", "tag_id"], name: "index_issue_tags_on_issue_id_and_tag_id", unique: true, using: :btree
 
   create_table "issues", force: :cascade do |t|
     t.integer  "created_by_id",                                                                    null: false
@@ -250,11 +228,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.boolean  "all_day",                                                          default: false, null: false
     t.integer  "planning_application_id"
     t.string   "photo_name"
+    t.index ["created_by_id"], name: "index_issues_on_created_by_id", using: :btree
+    t.index ["location"], name: "index_issues_on_location", using: :gist
+    t.index ["planning_application_id"], name: "index_issues_on_planning_application_id", using: :btree
   end
-
-  add_index "issues", ["created_by_id"], name: "index_issues_on_created_by_id", using: :btree
-  add_index "issues", ["location"], name: "index_issues_on_location", using: :gist
-  add_index "issues", ["planning_application_id"], name: "index_issues_on_planning_application_id", using: :btree
 
   create_table "library_documents", force: :cascade do |t|
     t.integer  "library_item_id",             null: false
@@ -264,9 +241,8 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.integer  "file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["library_item_id"], name: "index_library_documents_on_library_item_id", using: :btree
   end
-
-  add_index "library_documents", ["library_item_id"], name: "index_library_documents_on_library_item_id", using: :btree
 
   create_table "library_item_messages", force: :cascade do |t|
     t.integer  "thread_id",       null: false
@@ -275,20 +251,18 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.integer  "created_by_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["created_by_id"], name: "index_library_item_messages_on_created_by_id", using: :btree
+    t.index ["library_item_id", "thread_id"], name: "index_library_item_messages_on_library_item_id_and_thread_id", using: :btree
+    t.index ["library_item_id"], name: "index_library_item_messages_on_library_item_id", using: :btree
+    t.index ["message_id"], name: "index_library_item_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_library_item_messages_on_thread_id", using: :btree
   end
-
-  add_index "library_item_messages", ["created_by_id"], name: "index_library_item_messages_on_created_by_id", using: :btree
-  add_index "library_item_messages", ["library_item_id", "thread_id"], name: "index_library_item_messages_on_library_item_id_and_thread_id", using: :btree
-  add_index "library_item_messages", ["library_item_id"], name: "index_library_item_messages_on_library_item_id", using: :btree
-  add_index "library_item_messages", ["message_id"], name: "index_library_item_messages_on_message_id", using: :btree
-  add_index "library_item_messages", ["thread_id"], name: "index_library_item_messages_on_thread_id", using: :btree
 
   create_table "library_item_tags", id: false, force: :cascade do |t|
     t.integer "library_item_id", null: false
     t.integer "tag_id",          null: false
+    t.index ["library_item_id", "tag_id"], name: "index_library_item_tags_on_library_item_id_and_tag_id", unique: true, using: :btree
   end
-
-  add_index "library_item_tags", ["library_item_id", "tag_id"], name: "index_library_item_tags_on_library_item_id_and_tag_id", unique: true, using: :btree
 
   create_table "library_items", force: :cascade do |t|
     t.integer  "component_id"
@@ -298,11 +272,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "updated_at"
     t.datetime "deleted_at"
     t.geometry "location",       limit: {:srid=>4326, :type=>"geometry"}
+    t.index ["component_id", "component_type"], name: "index_library_items_on_component_id_and_component_type", using: :btree
+    t.index ["created_by_id"], name: "index_library_items_on_created_by_id", using: :btree
+    t.index ["location"], name: "index_library_items_on_location", using: :gist
   end
-
-  add_index "library_items", ["component_id", "component_type"], name: "index_library_items_on_component_id_and_component_type", using: :btree
-  add_index "library_items", ["created_by_id"], name: "index_library_items_on_created_by_id", using: :btree
-  add_index "library_items", ["location"], name: "index_library_items_on_location", using: :gist
 
   create_table "library_notes", force: :cascade do |t|
     t.integer  "library_item_id",                 null: false
@@ -312,10 +285,9 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "url"
+    t.index ["library_document_id"], name: "index_library_notes_on_library_document_id", using: :btree
+    t.index ["library_item_id"], name: "index_library_notes_on_library_item_id", using: :btree
   end
-
-  add_index "library_notes", ["library_document_id"], name: "index_library_notes_on_library_document_id", using: :btree
-  add_index "library_notes", ["library_item_id"], name: "index_library_notes_on_library_item_id", using: :btree
 
   create_table "link_messages", force: :cascade do |t|
     t.integer  "thread_id",                 null: false
@@ -326,11 +298,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["created_by_id"], name: "index_link_messages_on_created_by_id", using: :btree
+    t.index ["message_id"], name: "index_link_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_link_messages_on_thread_id", using: :btree
   end
-
-  add_index "link_messages", ["created_by_id"], name: "index_link_messages_on_created_by_id", using: :btree
-  add_index "link_messages", ["message_id"], name: "index_link_messages_on_message_id", using: :btree
-  add_index "link_messages", ["thread_id"], name: "index_link_messages_on_thread_id", using: :btree
 
   create_table "location_categories", force: :cascade do |t|
     t.string   "name",       limit: 255, null: false
@@ -346,11 +317,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.text     "caption"
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
+    t.index ["created_by_id"], name: "index_map_messages_on_created_by_id", using: :btree
+    t.index ["message_id"], name: "index_map_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_map_messages_on_thread_id", using: :btree
   end
-
-  add_index "map_messages", ["created_by_id"], name: "index_map_messages_on_created_by_id", using: :btree
-  add_index "map_messages", ["message_id"], name: "index_map_messages_on_message_id", using: :btree
-  add_index "map_messages", ["thread_id"], name: "index_map_messages_on_thread_id", using: :btree
 
   create_table "message_thread_closes", force: :cascade do |t|
     t.integer  "user_id"
@@ -358,17 +328,15 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.string   "event"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["message_thread_id"], name: "index_message_thread_closes_on_message_thread_id", using: :btree
+    t.index ["user_id"], name: "index_message_thread_closes_on_user_id", using: :btree
   end
-
-  add_index "message_thread_closes", ["message_thread_id"], name: "index_message_thread_closes_on_message_thread_id", using: :btree
-  add_index "message_thread_closes", ["user_id"], name: "index_message_thread_closes_on_user_id", using: :btree
 
   create_table "message_thread_tags", id: false, force: :cascade do |t|
     t.integer "thread_id", null: false
     t.integer "tag_id",    null: false
+    t.index ["thread_id", "tag_id"], name: "index_message_thread_tags_on_thread_id_and_tag_id", unique: true, using: :btree
   end
-
-  add_index "message_thread_tags", ["thread_id", "tag_id"], name: "index_message_thread_tags_on_thread_id_and_tag_id", unique: true, using: :btree
 
   create_table "message_threads", force: :cascade do |t|
     t.integer  "issue_id"
@@ -384,13 +352,12 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.string   "status"
     t.boolean  "closed",                    default: false, null: false
     t.integer  "user_id"
+    t.index ["created_by_id"], name: "index_message_threads_on_created_by_id", using: :btree
+    t.index ["group_id"], name: "index_message_threads_on_group_id", using: :btree
+    t.index ["issue_id"], name: "index_message_threads_on_issue_id", using: :btree
+    t.index ["public_token"], name: "index_message_threads_on_public_token", unique: true, using: :btree
+    t.index ["user_id"], name: "index_message_threads_on_user_id", using: :btree
   end
-
-  add_index "message_threads", ["created_by_id"], name: "index_message_threads_on_created_by_id", using: :btree
-  add_index "message_threads", ["group_id"], name: "index_message_threads_on_group_id", using: :btree
-  add_index "message_threads", ["issue_id"], name: "index_message_threads_on_issue_id", using: :btree
-  add_index "message_threads", ["public_token"], name: "index_message_threads_on_public_token", unique: true, using: :btree
-  add_index "message_threads", ["user_id"], name: "index_message_threads_on_user_id", using: :btree
 
   create_table "messages", force: :cascade do |t|
     t.integer  "created_by_id",               null: false
@@ -407,13 +374,12 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.string   "status"
     t.string   "check_reason"
     t.integer  "inbound_mail_id"
+    t.index ["component_id", "component_type"], name: "index_messages_on_component_id_and_component_type", using: :btree
+    t.index ["created_by_id"], name: "index_messages_on_created_by_id", using: :btree
+    t.index ["in_reply_to_id"], name: "index_messages_on_in_reply_to_id", using: :btree
+    t.index ["public_token"], name: "index_messages_on_public_token", unique: true, using: :btree
+    t.index ["thread_id"], name: "index_messages_on_thread_id", using: :btree
   end
-
-  add_index "messages", ["component_id", "component_type"], name: "index_messages_on_component_id_and_component_type", using: :btree
-  add_index "messages", ["created_by_id"], name: "index_messages_on_created_by_id", using: :btree
-  add_index "messages", ["in_reply_to_id"], name: "index_messages_on_in_reply_to_id", using: :btree
-  add_index "messages", ["public_token"], name: "index_messages_on_public_token", unique: true, using: :btree
-  add_index "messages", ["thread_id"], name: "index_messages_on_thread_id", using: :btree
 
   create_table "photo_messages", force: :cascade do |t|
     t.integer  "thread_id",                 null: false
@@ -425,11 +391,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at"
     t.string   "photo_name"
+    t.index ["created_by_id"], name: "index_photo_messages_on_created_by_id", using: :btree
+    t.index ["message_id"], name: "index_photo_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_photo_messages_on_thread_id", using: :btree
   end
-
-  add_index "photo_messages", ["created_by_id"], name: "index_photo_messages_on_created_by_id", using: :btree
-  add_index "photo_messages", ["message_id"], name: "index_photo_messages_on_message_id", using: :btree
-  add_index "photo_messages", ["thread_id"], name: "index_photo_messages_on_thread_id", using: :btree
 
   create_table "planning_applications", force: :cascade do |t|
     t.text     "address"
@@ -447,11 +412,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.integer  "hide_votes_count",                                                 default: 0
     t.boolean  "relevant",                                                         default: true, null: false
     t.string   "authority_param"
+    t.index ["location"], name: "index_planning_applications_on_location", using: :gist
+    t.index ["uid", "authority_param"], name: "index_planning_applications_on_uid_and_authority_param", unique: true, using: :btree
+    t.index ["zzz_issue_id"], name: "index_planning_applications_on_zzz_issue_id", using: :btree
   end
-
-  add_index "planning_applications", ["location"], name: "index_planning_applications_on_location", using: :gist
-  add_index "planning_applications", ["uid", "authority_param"], name: "index_planning_applications_on_uid_and_authority_param", unique: true, using: :btree
-  add_index "planning_applications", ["zzz_issue_id"], name: "index_planning_applications_on_zzz_issue_id", using: :btree
 
   create_table "planning_filters", force: :cascade do |t|
     t.string   "authority"
@@ -465,10 +429,9 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.string   "email_hash"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email_hash", "group_id"], name: "index_potential_members_on_email_hash_and_group_id", unique: true, using: :btree
+    t.index ["group_id"], name: "index_potential_members_on_group_id", using: :btree
   end
-
-  add_index "potential_members", ["email_hash", "group_id"], name: "index_potential_members_on_email_hash_and_group_id", unique: true, using: :btree
-  add_index "potential_members", ["group_id"], name: "index_potential_members_on_group_id", using: :btree
 
   create_table "site_comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -480,9 +443,8 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "created_at",               null: false
     t.datetime "viewed_at"
     t.datetime "deleted_at"
+    t.index ["user_id"], name: "index_site_comments_on_user_id", using: :btree
   end
-
-  add_index "site_comments", ["user_id"], name: "index_site_comments_on_user_id", using: :btree
 
   create_table "site_configs", force: :cascade do |t|
     t.string   "logo_uid"
@@ -548,19 +510,17 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "updated_at",                                             null: false
     t.geometry "location",      limit: {:srid=>4326, :type=>"geometry"}
     t.text     "caption"
+    t.index ["created_by_id"], name: "index_street_view_messages_on_created_by_id", using: :btree
+    t.index ["location"], name: "index_street_view_messages_on_location", using: :gist
+    t.index ["message_id"], name: "index_street_view_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_street_view_messages_on_thread_id", using: :btree
   end
-
-  add_index "street_view_messages", ["created_by_id"], name: "index_street_view_messages_on_created_by_id", using: :btree
-  add_index "street_view_messages", ["location"], name: "index_street_view_messages_on_location", using: :gist
-  add_index "street_view_messages", ["message_id"], name: "index_street_view_messages_on_message_id", using: :btree
-  add_index "street_view_messages", ["thread_id"], name: "index_street_view_messages_on_thread_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string "name", limit: 255, null: false
     t.string "icon", limit: 255
+    t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
-
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "thread_leader_messages", force: :cascade do |t|
     t.integer  "message_id"
@@ -571,42 +531,38 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.text     "description"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["created_by_id"], name: "index_thread_leader_messages_on_created_by_id", using: :btree
+    t.index ["message_id"], name: "index_thread_leader_messages_on_message_id", using: :btree
+    t.index ["thread_id"], name: "index_thread_leader_messages_on_thread_id", using: :btree
+    t.index ["unleading_id"], name: "index_thread_leader_messages_on_unleading_id", using: :btree
   end
-
-  add_index "thread_leader_messages", ["created_by_id"], name: "index_thread_leader_messages_on_created_by_id", using: :btree
-  add_index "thread_leader_messages", ["message_id"], name: "index_thread_leader_messages_on_message_id", using: :btree
-  add_index "thread_leader_messages", ["thread_id"], name: "index_thread_leader_messages_on_thread_id", using: :btree
-  add_index "thread_leader_messages", ["unleading_id"], name: "index_thread_leader_messages_on_unleading_id", using: :btree
 
   create_table "thread_subscriptions", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "thread_id",  null: false
     t.datetime "created_at", null: false
     t.datetime "deleted_at"
+    t.index ["thread_id", "user_id"], name: "index_thread_subscriptions_on_thread_id_and_user_id", unique: true, where: "(deleted_at IS NULL)", using: :btree
+    t.index ["thread_id"], name: "index_thread_subscriptions_on_thread_id", using: :btree
+    t.index ["user_id"], name: "index_thread_subscriptions_on_user_id", using: :btree
   end
-
-  add_index "thread_subscriptions", ["thread_id", "user_id"], name: "index_thread_subscriptions_on_thread_id_and_user_id", unique: true, where: "(deleted_at IS NULL)", using: :btree
-  add_index "thread_subscriptions", ["thread_id"], name: "index_thread_subscriptions_on_thread_id", using: :btree
-  add_index "thread_subscriptions", ["user_id"], name: "index_thread_subscriptions_on_user_id", using: :btree
 
   create_table "thread_views", force: :cascade do |t|
     t.integer  "user_id",   null: false
     t.integer  "thread_id", null: false
     t.datetime "viewed_at", null: false
+    t.index ["user_id", "thread_id"], name: "index_thread_views_on_user_id_and_thread_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_thread_views_on_user_id", using: :btree
   end
-
-  add_index "thread_views", ["user_id", "thread_id"], name: "index_thread_views_on_user_id_and_thread_id", unique: true, using: :btree
-  add_index "thread_views", ["user_id"], name: "index_thread_views_on_user_id", using: :btree
 
   create_table "user_blocks", force: :cascade do |t|
     t.integer  "user_id",    null: false
     t.integer  "blocked_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["blocked_id", "user_id"], name: "index_user_blocks_on_blocked_id_and_user_id", unique: true, using: :btree
+    t.index ["user_id"], name: "index_user_blocks_on_user_id", using: :btree
   end
-
-  add_index "user_blocks", ["blocked_id", "user_id"], name: "index_user_blocks_on_blocked_id_and_user_id", unique: true, using: :btree
-  add_index "user_blocks", ["user_id"], name: "index_user_blocks_on_user_id", using: :btree
 
   create_table "user_locations", force: :cascade do |t|
     t.integer  "user_id",                                              null: false
@@ -614,11 +570,10 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "created_at",                                           null: false
     t.datetime "updated_at",                                           null: false
     t.geometry "location",    limit: {:srid=>4326, :type=>"geometry"}
+    t.index ["category_id"], name: "index_user_locations_on_category_id", using: :btree
+    t.index ["location"], name: "index_user_locations_on_location", using: :gist
+    t.index ["user_id"], name: "index_user_locations_on_user_id", unique: true, using: :btree
   end
-
-  add_index "user_locations", ["category_id"], name: "index_user_locations_on_category_id", using: :btree
-  add_index "user_locations", ["location"], name: "index_user_locations_on_location", using: :gist
-  add_index "user_locations", ["user_id"], name: "index_user_locations_on_user_id", unique: true, using: :btree
 
   create_table "user_prefs", force: :cascade do |t|
     t.integer "user_id",                                                   null: false
@@ -628,14 +583,13 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.boolean "zz_enable_email",                     default: false,       null: false
     t.string  "zz_profile_visibility",   limit: 255, default: "public",    null: false
     t.integer "email_status_id",                     default: 0,           null: false
+    t.index ["email_status_id"], name: "index_user_prefs_on_email_status_id", using: :btree
+    t.index ["involve_my_groups"], name: "index_user_prefs_on_involve_my_groups", using: :btree
+    t.index ["involve_my_groups_admin"], name: "index_user_prefs_on_involve_my_groups_admin", using: :btree
+    t.index ["involve_my_locations"], name: "index_user_prefs_on_involve_my_locations", using: :btree
+    t.index ["user_id"], name: "index_user_prefs_on_user_id", unique: true, using: :btree
+    t.index ["zz_enable_email"], name: "index_user_prefs_on_zz_enable_email", using: :btree
   end
-
-  add_index "user_prefs", ["email_status_id"], name: "index_user_prefs_on_email_status_id", using: :btree
-  add_index "user_prefs", ["involve_my_groups"], name: "index_user_prefs_on_involve_my_groups", using: :btree
-  add_index "user_prefs", ["involve_my_groups_admin"], name: "index_user_prefs_on_involve_my_groups_admin", using: :btree
-  add_index "user_prefs", ["involve_my_locations"], name: "index_user_prefs_on_involve_my_locations", using: :btree
-  add_index "user_prefs", ["user_id"], name: "index_user_prefs_on_user_id", unique: true, using: :btree
-  add_index "user_prefs", ["zz_enable_email"], name: "index_user_prefs_on_zz_enable_email", using: :btree
 
   create_table "user_profiles", force: :cascade do |t|
     t.integer  "user_id",                                    null: false
@@ -646,9 +600,8 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "locale"
+    t.index ["user_id"], name: "index_user_profiles_on_user_id", using: :btree
   end
-
-  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", using: :btree
 
   create_table "user_thread_priorities", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -656,9 +609,8 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.integer  "priority"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["thread_id", "user_id"], name: "index_user_thread_priorities_on_thread_id_and_user_id", using: :btree
   end
-
-  add_index "user_thread_priorities", ["thread_id", "user_id"], name: "index_user_thread_priorities_on_thread_id_and_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
@@ -688,14 +640,13 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.datetime "last_seen_at"
     t.string   "public_token",                                       null: false
     t.string   "api_key"
+    t.index ["api_key"], name: "index_users_on_api_key", unique: true, using: :btree
+    t.index ["display_name"], name: "index_users_on_display_name", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", using: :btree
+    t.index ["public_token"], name: "index_users_on_public_token", unique: true, using: :btree
+    t.index ["remembered_group_id"], name: "index_users_on_remembered_group_id", using: :btree
   end
-
-  add_index "users", ["api_key"], name: "index_users_on_api_key", unique: true, using: :btree
-  add_index "users", ["display_name"], name: "index_users_on_display_name", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", using: :btree
-  add_index "users", ["public_token"], name: "index_users_on_public_token", unique: true, using: :btree
-  add_index "users", ["remembered_group_id"], name: "index_users_on_remembered_group_id", using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.boolean  "vote",                      default: false
@@ -705,18 +656,16 @@ ActiveRecord::Schema.define(version: 20190112205550) do
     t.string   "voter_type",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
+    t.index ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true, using: :btree
+    t.index ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
   end
-
-  add_index "votes", ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "voteable_id", "voteable_type"], name: "fk_one_vote_per_user_per_entity", unique: true, using: :btree
-  add_index "votes", ["voter_id", "voter_type"], name: "index_votes_on_voter_id_and_voter_type", using: :btree
 
   create_table "wards", force: :cascade do |t|
     t.string   "name"
     t.geometry "location", limit: {:srid=>4326, :type=>"geometry"}, null: false
+    t.index ["location"], name: "index_wards_on_location", using: :gist
   end
-
-  add_index "wards", ["location"], name: "index_wards_on_location", using: :gist
 
   add_foreign_key "action_messages", "message_threads", column: "thread_id"
   add_foreign_key "action_messages", "messages"
