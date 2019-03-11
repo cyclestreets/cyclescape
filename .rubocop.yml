@@ -20,3 +20,9 @@ Rails/DynamicFindBy:
 
 Metrics/LineLength:
   Max: 120
+
+Style/StringLiterals:
+  EnforcedStyle: "double_quotes"
+
+Metrics/BlockLength:
+  Enabled: false
