@@ -1030,9 +1030,6 @@
         application_reference: Application reference
         title: New issue from Planning application
         title_prefix: Planning application
-  photo:
-    too_large: The image you uploaded is too large - it must be less than 6MB
-    wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
   shared:
     actions:
       resolve_action: "Resolve outstanding actions:"
@@ -1067,6 +1064,9 @@
         zero: No hashtagss found for '%{query}'.
         one: 'One hashtag found for ''%{query}'':'
         other: '%{count} hashtags found for ''%{query}'':'
+    photo:
+      too_large: The image you uploaded is too large - it must be less than 6MB
+      wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
     edit_map: &edit_map
       area: area
       clear: clear
