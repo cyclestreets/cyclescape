@@ -189,3 +189,17 @@ jQuery ->
     else
       $('#main-nav, #crumb-search').removeClass("top-fix")
       $('#site-header').removeClass('top-nudge')
+
+  copyFrom = (copyToEl)->
+    ->
+      return if copyToEl.data("touched")
+      copyToEl.val(this.value)
+
+  $("[data-copyfromid]").each( ->
+    copyToEl = $(this)
+    copyToEl.data("touched", true) if !!copyToEl.val()
+    copyToEl.on("propertychange change keyup input paste", ->
+      copyToEl.data("touched", true)
+    )
+    $(copyToEl.data("copyfromid")).on("propertychange change click keyup input paste", copyFrom(copyToEl))
+  )
