@@ -12,7 +12,7 @@
     = render partial: "shared/edit_map", locals: {location: @start_location, resource: @issue}
   = f.input :tags_string
   = f.input :description, input_html: { class: "tinymce" }
-  = f.input :external_url
+  = f.input :external_url, as: :url
   = f.inputs do
     = f.input :deadline, as: :date_picker, label: t("deadline_date"), input_html: {value: @issue.deadline.try(:strftime, "%d-%m-%Y %H:%M")}, wrapper_html: {style: "float: left; width: 60%"}
     = f.input :all_day, input_html: {class: "all-day"}, wrapper_html: {style: "float: right; width: 25%; padding: 20px 40px 20px 0"}
