@@ -6,7 +6,9 @@ class PlanningApplication::IssuesController < IssuesController
 
   def new
     @issue = @planning_application.populate_issue
-    @start_location = @planning_application.location || index_start_location
+    @start_location = @planning_application.location
+    new_issue_setup
+    @issue.threads.first.title = nil
     render 'issues/new'
   end
 

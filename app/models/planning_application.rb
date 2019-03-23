@@ -84,10 +84,10 @@ class PlanningApplication < ActiveRecord::Base
       issue.location = location
       issue.external_url = url
       issue.description = <<-EOS
-#{description}\n\n
-#{address}\n\n
-#{url}\n\n#{authority_name}\n
-#{I18n.t("planning_application.issues.new.application_reference")} : #{uid}
+<p>#{description}</p>
+<p>#{address}</p>
+<p>#{authority_name}</p>
+#{I18n.t("planning_application.issues.new.application_reference")} : <a href=#{url}>#{uid}</a>
       EOS
       issue.tags_string = "planning"
     end

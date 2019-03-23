@@ -117,7 +117,7 @@ class IssuesController < ApplicationController
   protected
 
   def new_issue_setup
-    @start_location = current_user.start_location
+    @start_location ||= current_user.start_location
     thread = @issue.threads.first || @issue.threads.build
     @message ||= thread.messages.build
     @available_groups = current_user.groups

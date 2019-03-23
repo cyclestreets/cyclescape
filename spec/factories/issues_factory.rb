@@ -24,6 +24,5 @@ FactoryBot.define do
     factory :issue_outside_quahog do
       location 'POINT(10 80)'
     end
-
   end
 end
