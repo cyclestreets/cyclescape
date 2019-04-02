@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class IssuesController < ApplicationController
+  include MessageCreator
+
   filter_access_to [:edit, :update, :destroy], attribute_check: true
   protect_from_forgery except: :vote_detail
 
@@ -29,17 +31,28 @@ class IssuesController < ApplicationController
 
   def new
     @issue = Issue.new
-    @start_location = current_user.start_location
+    new_issue_setup
   end
 
   def create
-    @issue = current_user.issues.new permitted_params
+    issue_params = permitted_params.merge(created_by: current_user)
+    # Something is buggy, Issue.new(photo: "", retained_photo: "") complains the photo isn't valid
+    issue_params.delete(:photo) unless issue_params[:photo].present?
+    issue_params.delete(:retained_photo) unless issue_params[:retained_photo].present?
+
+    @issue = current_user.issues.new issue_params
+    thread = @issue.threads.last
+    if thread
+      thread.tags = @issue.tags
+      thread.created_by = current_user
+      @message = create_message(thread)
+    end
 
     if @issue.save
       NewIssueNotifier.new_issue @issue
-      redirect_to new_issue_thread_path @issue
+      redirect_on_check_reason(@message, spam_path: issue_path(issue), clean_path: thread_path(thread))
     else
-      @start_location = current_user.start_location
+      new_issue_setup
       render :new
     end
   end
@@ -103,6 +116,13 @@ class IssuesController < ApplicationController
 
   protected
 
+  def new_issue_setup
+    @start_location ||= current_user.start_location
+    thread = @issue.threads.first || @issue.threads.build
+    @message ||= thread.messages.build
+    @available_groups = current_user.groups
+  end
+
   def geom_issue_scope
     Issue
   end
@@ -146,6 +166,6 @@ class IssuesController < ApplicationController
 
   def permitted_params
     params.require(:issue).permit :title, :photo, :retained_photo, :loc_json, :tags_string,
-      :description, :deadline, :all_day, :external_url, :planning_application_id
+      :description, :deadline, :all_day, :external_url, :planning_application_id, threads_attributes: [:title, :group_id, :privacy]
   end
 end

@@ -5,4 +5,13 @@
     %p= t ".new_issue_privacy_warning"
     - if current_group
       %p.comment= t ".admin_thread_pointer_html", administrative_matters_link: link_to(t(".administrative_matters"), new_thread_path)
-  = render "form"
+  = semantic_form_for @issue, html: {class: "guided navigate-away-warning", multipart: true} do |f|
+    = render "form", f: f
+
+    %div
+      %p
+        %i= simple_format t ".new_hint"
+    = f.semantic_fields_for :threads, html: {class: 'guided'} do |ft|
+      = render "shared/message_thread_form", f: ft, thread_dom_prefix: "issue_threads_attributes_0"
+    = f.actions do
+      = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}

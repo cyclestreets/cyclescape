@@ -569,13 +569,10 @@
       box_3_body: Organise the action the group should take to resolve an issue.
   issue:
     message_threads:
-      new:
-        new_hint: "This is where a discussion about the issue is started. \n There
-          could be many different discussion threads that one issue creates \n e.g.
-          a new planning application may affect traffic on a road and affect cycle
-          access to woods."
+      new: &issue_message_threads_new
+        new_hint: "Start a conversion (thread) on this, describing your thoughts on what should be done. There could be many different discussion threads \n
+                 that one issue creates e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
         title: New Thread on %{issue}
-        everyone: Everyone
     photos:
       show:
         photo_alt: The photo for %{caption}.
@@ -619,13 +616,12 @@
         on the right.
       report_new_issue: create a new issue
     new:
+      <<: *issue_message_threads_new
       title: Create an issue
       new_issue_introduction: Know of something stopping more people cycling, or that
         causes problems for existing cyclists? Or something that could do? Add it
         below.
       new_issue_privacy_warning: Please note that all issues are publicly viewable.
-        If you wish, you can create a private discussion on this issue, after it has
-        been created.
       admin_thread_pointer_html: You can %{administrative_matters_link} with no geographical
         context (e.g. organising a general meeting) in the group admin threads section.
       administrative_matters: add a purely administrative matter
@@ -1034,12 +1030,11 @@
         application_reference: Application reference
         title: New issue from Planning application
         title_prefix: Planning application
-  photo:
-    too_large: The image you uploaded is too large - it must be less than 6MB
-    wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
   shared:
     actions:
       resolve_action: "Resolve outstanding actions:"
+    message_thread_form:
+      everyone: Everyone
     resolves_actions:
       resolves_actions: "Resolves actions:"
     search:
@@ -1069,6 +1064,9 @@
         zero: No hashtagss found for '%{query}'.
         one: 'One hashtag found for ''%{query}'':'
         other: '%{count} hashtags found for ''%{query}'':'
+    photo:
+      too_large: The image you uploaded is too large - it must be less than 6MB
+      wrong_format: The file you uplodaed must be an image (jpg, jpeg, png, or gif)
     edit_map: &edit_map
       area: area
       clear: clear

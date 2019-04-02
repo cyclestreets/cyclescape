@@ -46,6 +46,8 @@ class Issue < ActiveRecord::Base
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults, inverse_of: :issue
   has_and_belongs_to_many :tags, join_table: "issue_tags"
 
+  accepts_nested_attributes_for :threads
+
   validates :title, presence: true, length: { maximum: 80 }
   validates :description, presence: true
   validates :location, presence: true
@@ -114,4 +116,5 @@ class Issue < ActiveRecord::Base
     SearchUpdater.update_type(self, :process_issue)
     true
   end
+
 end

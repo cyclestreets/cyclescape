@@ -18,7 +18,7 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
   end
 
   def index
-    threads = MessageThread.private_for(current_user).order(created_at: :desc).to_a
+    threads = MessageThread.private_for(current_user).order_by_latest_message.to_a
     @private_threads = PrivateMessageDecorator.decorate_collection(threads)
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
   end

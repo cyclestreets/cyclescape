@@ -30,11 +30,12 @@
               not_owing_leader_message: Something went wrong
     attributes:
       issue:
-        external_url: External site
+        external_url: Web link (if any)
       message_thread:
         group: "Owned by"
         closed: Closed
         moderated: In Moderation
+        title: Discussion title
       component:
         photo: "Photo"
     models:

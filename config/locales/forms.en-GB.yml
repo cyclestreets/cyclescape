@@ -26,7 +26,7 @@
         notify_membership_requests: Enable membership request notifications
       issue:
         new: &labels_issue_new
-          description: Write a description
+          description: Describe the problem
           location: Provide a location
           photo: Add a photo
           tags_string: Tag your issue
@@ -85,7 +85,6 @@
         locale: Locale
         remove_picture: Remove picture
       thread:
-        title: Title
         privacy: Privacy
         issue: Issue
       site_comment:
