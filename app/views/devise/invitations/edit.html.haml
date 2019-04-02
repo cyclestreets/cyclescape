@@ -3,7 +3,7 @@
   %p
     = t ".info"
   = semantic_form_for resource, as: resource_name, url: invitation_path(resource_name), html: {method: :put} do |f|
-    = devise_error_messages!
+    = render "devise/shared/error_messages", resource: resource
     = f.inputs do
       = f.input :invitation_token, as: :hidden
       = f.input :full_name

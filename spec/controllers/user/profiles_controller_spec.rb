@@ -33,7 +33,7 @@ describe User::ProfilesController, type: :controller do
 
         context 'where the user does not exist' do
           it "should ask user to sign in" do
-            expect(get :show, user_id: -1).to redirect_to(new_user_session_url)
+            expect(get(:show, params: { user_id: -1 })).to redirect_to(new_user_session_url)
           end
         end
       end
@@ -67,7 +67,7 @@ describe User::ProfilesController, type: :controller do
 
         context 'where the user does not exist' do
           it 'should be hidden' do
-            get :show, user_id: -1
+            get :show, params: { user_id: -1 }
             expect(response.body).to include(I18n.t('application.permission_denied'))
           end
         end
