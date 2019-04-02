@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Library notes', after_commit: true do
+describe 'Library notes' do
   let(:note) { create(:library_note, :with_location) }
 
   context 'as a public user' do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Issue threads', after_commit: true do
+describe 'Issue threads' do
   let!(:issue) { create(:issue) }
   let(:issue_with_tags) { create(:issue, :with_tags) }
   let(:edit_thread) { 'Edit this thread' }
@@ -264,7 +264,7 @@ describe 'Issue threads', after_commit: true do
         end
       end
 
-      it 'should only subscribe the thread creator once', after_commit: true do
+      it 'should only subscribe the thread creator once' do
         create(:user_location, user: current_user, location: issue.location.buffer(1))
         create_thread
         expect(current_user.thread_subscriptions.count).to eq(1)

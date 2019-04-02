@@ -6,6 +6,7 @@ Rails.application.configure do
   # every request.  This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
+  config.assets.quiet = true
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -42,5 +43,4 @@ Rails.application.configure do
 
   config.action_view.raise_on_missing_translations = true
   config.assets.raise_runtime_errors = true
-  config.active_record.raise_in_transactional_callbacks = true
 end

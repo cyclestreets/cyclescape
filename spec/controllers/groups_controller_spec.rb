@@ -17,7 +17,7 @@ describe GroupsController, type: :controller do
 
     describe 'show' do
 
-      subject { get :show, id: group.id }
+      subject { get :show, params: { id: group.id } }
 
       it { expect(subject.status).to eq(200) }
     end
@@ -28,7 +28,7 @@ describe GroupsController, type: :controller do
       let!(:out_group) { create :issue, title: 'Outside the quahog'}
       let!(:hashtag) { create :hashtag, group: group, name: "quahog_and_other_text" }
 
-      subject { get :search, query: 'quahog', id: group.id }
+      subject { get :search, params: { query: 'quahog', id: group.id } }
 
       it 'should have issues inside the group' do
         expect(subject.body).to include('Search Results for Quahog')

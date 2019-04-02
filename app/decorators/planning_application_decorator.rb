@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PlanningApplicationDecorator < ApplicationDecorator
-  alias_method :planning_application, :source
+  alias_method :planning_application, :object
 
   def issue_link
     h.link_to issue.title, planning_application.issue

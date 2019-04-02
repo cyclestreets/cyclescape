@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ThreadAutoSubscriber, after_commit: true  do
+describe ThreadAutoSubscriber do
   context 'privacy' do
     let(:user) { create(:user) }
     let(:membership) { create(:group_membership, group: thread.group) }

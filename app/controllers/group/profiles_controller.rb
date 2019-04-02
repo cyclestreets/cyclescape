@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Group::ProfilesController < ApplicationController
-  before_filter :load_group_profile
+  before_action :load_group_profile
   filter_access_to :edit, :update, attribute_check: true, model: Group
   filter_access_to :all
 

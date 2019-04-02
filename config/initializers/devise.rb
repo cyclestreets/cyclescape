@@ -230,4 +230,5 @@ Devise.setup do |config|
 
   # Added during Devise upgrade
   config.password_length = 6..128
+  config.reconfirmable = false
 end

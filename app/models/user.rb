@@ -131,7 +131,8 @@ class User < ActiveRecord::Base
   def profile_with_auto_build
     profile_without_auto_build || build_profile
   end
-  alias_method_chain :profile, :auto_build
+  alias_method :profile_without_auto_build, :profile
+  alias_method :profile, :profile_with_auto_build
 
   def to_param
     "#{id}-#{name.parameterize}"
@@ -266,8 +267,8 @@ class User < ActiveRecord::Base
             or(users[:id].eq(id))).references(:user_profiles, :group_memberships)
   end
 
-  # devise confirm! method overriden
-  def confirm!
+  # devise confirm method overriden
+  def confirm
     welcome_message
     super
   end

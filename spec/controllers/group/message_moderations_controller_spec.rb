@@ -12,7 +12,7 @@ describe Group::MessageModerationsController, type: :controller do
       warden.set_user user_type
     end
 
-    subject { get :index, group_id: group.to_param }
+    subject { get :index, params: { group_id: group.to_param } }
 
     context 'for a committee member' do
       let(:user_type) { committee_member }

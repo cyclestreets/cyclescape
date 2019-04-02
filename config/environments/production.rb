@@ -11,7 +11,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_files = false
+  config.public_file_server.enabled = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -60,7 +60,6 @@ Rails.application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-  config.active_record.raise_in_transactional_callbacks = true
 
   # Do not use Strict-Transport-Security
   config.ssl_options = { hsts: false }

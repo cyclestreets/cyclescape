@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MessageThread::BaseController < ApplicationController
-  before_filter :load_thread
+  before_action :load_thread
 
   protected
 

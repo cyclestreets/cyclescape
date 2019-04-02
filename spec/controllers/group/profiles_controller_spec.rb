@@ -11,7 +11,7 @@ describe Group::ProfilesController, type: :controller do
 
   describe '#update' do
     it 'has index' do
-      put :update, group_id: group.id, group_profile: { new_user_email: nil }
+      put :update, params: { group_id: group.id, group_profile: { new_user_email: nil } }
       expect(response.status).to eq(200)
     end
   end

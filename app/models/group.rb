@@ -56,7 +56,7 @@ class Group < ActiveRecord::Base
 
   def self.from_geo(geo_name)
     return none if geo_name.blank?
-    connection = Excon.new(SiteConfig.first.geocoder_url || Geocoder::GEO_URL, headers: { 'Accept' => Mime::JSON.to_s })
+    connection = Excon.new(SiteConfig.first.geocoder_url || Geocoder::GEO_URL, headers: { 'Accept' => Mime[:json].to_s })
     rsp = connection.get(query: { q: geo_name, key: SiteConfig.first.geocoder_key || Geocoder::API_KEY})
     json = JSON.parse(rsp.body)
     bboxes = json["features"].map { |fe| BboxCoerce.call(fe["properties"]["bbox"]) }

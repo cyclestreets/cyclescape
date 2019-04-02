@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ThreadListDecorator < ApplicationDecorator
-  alias_method :thread, :source
+  alias_method :thread, :object
 
   def self.decl_auth_context
     :message_threads

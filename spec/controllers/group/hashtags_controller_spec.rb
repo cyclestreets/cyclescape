@@ -15,7 +15,7 @@ describe Group::HashtagsController, type: :controller do
 
     describe 'show' do
       subject do
-        get :show, name: hashtag.name
+        get :show, params: { name: hashtag.name }
       end
 
       it { expect(subject.body).to include(thread.title) }

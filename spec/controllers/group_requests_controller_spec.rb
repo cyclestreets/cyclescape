@@ -15,13 +15,13 @@ RSpec.describe GroupRequestsController, type: :controller do
     describe "POST #create" do
       it "creates a new GroupRequest" do
         expect {
-          post :create, group_request: valid_attributes
+          post :create, params: { group_request: valid_attributes }
         }.to change(GroupRequest, :count).by(1)
       end
 
       context "with valid params" do
         before do
-          post :create, group_request: valid_attributes
+          post :create, params: { group_request: valid_attributes }
         end
 
         it "redirects to the root" do
@@ -29,7 +29,7 @@ RSpec.describe GroupRequestsController, type: :controller do
         end
 
         it 'sends an email to all admins' do
-          post :create, group_request: valid_attributes
+          post :create, params: { group_request: valid_attributes }
           mail = ActionMailer::Base.deliveries.last
 
           expect(mail.subject).to eq(I18n.t('mailers.notifications.new_group_request.subject',
@@ -66,14 +66,14 @@ RSpec.describe GroupRequestsController, type: :controller do
 
     describe "GET #review" do
       it "assigns the requested group_request as @request" do
-        get :review, id: group_request.to_param
+        get :review, params: { id: group_request.to_param }
         expect(assigns(:request)).to eq(group_request)
       end
     end
 
     describe "PUT #reject" do
       before do
-        post :reject, {id: group_request.to_param, group_request: {rejection_message: 'Sorry!'}}
+        post :reject, params: { id: group_request.to_param, group_request: {rejection_message: 'Sorry!'} }
       end
 
       it 'sets the flash' do
@@ -95,7 +95,7 @@ RSpec.describe GroupRequestsController, type: :controller do
 
     describe "PUT #confirm" do
       before do
-        post :confirm, {:id => group_request.to_param}
+        post :confirm, params: { :id => group_request.to_param }
       end
 
       it "sets the flash" do
@@ -117,12 +117,12 @@ RSpec.describe GroupRequestsController, type: :controller do
     describe "DELETE #destroy" do
       it "destroys the requested group_request" do
         expect {
-          delete :destroy, {:id => group_request.to_param}
+          delete :destroy, params: { :id => group_request.to_param }
         }.to change(GroupRequest, :count).by(-1)
       end
 
       it "redirects to the group_requests list" do
-        delete :destroy, {:id => group_request.to_param}
+        delete :destroy, params: { :id => group_request.to_param }
         expect(response).to redirect_to(group_requests_url)
       end
     end

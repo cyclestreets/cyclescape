@@ -2,7 +2,7 @@
 
 # Note inheritance
 class Users::PrivateMessageThreadsController < MessageThreadsController
-  before_filter :load_user, only: [:create, :new]
+  before_action :load_user, only: [:create, :new]
   filter_access_to :create, :new, attribute_check: true, model: User
 
   def new

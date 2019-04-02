@@ -11,7 +11,7 @@ describe DashboardsController, type: :controller do
 
     subject do
       Sunspot.commit
-      get :search, query: 'Bananas'
+      get :search, params: { query: 'Bananas' }
     end
 
     before do
@@ -62,7 +62,7 @@ describe DashboardsController, type: :controller do
   end
 
   describe 'deadlines' do
-    subject            { get :deadlines, public_token: user.public_token, format: :ics }
+    subject            { get :deadlines, params: { public_token: user.public_token, format: :ics } }
 
     let(:subscription) { create :thread_subscription }
     let(:user)         { subscription.user }

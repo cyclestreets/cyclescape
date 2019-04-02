@@ -9,7 +9,7 @@ describe Issue::MessageThreadsController, type: :controller do
   let!(:message_a) { create(:message, thread: thread, created_at: Time.now - 4.days) }
 
   it 'has index' do
-    get :index, issue_id: thread.issue.id
+    get :index, params: { issue_id: thread.issue.id }
     expect(response.status).to eq(200)
   end
 
@@ -41,7 +41,7 @@ describe Issue::MessageThreadsController, type: :controller do
           user_ip: "127.0.0.1"
         )).to_return(status: 200, body: is_spam)
     end
-    subject { post :create, issue_id: issue.id, thread: attributes_for(:message_thread), message: message }
+    subject { post :create, params: { issue_id: issue.id, thread: attributes_for(:message_thread), message: message } }
 
     context 'with an unapproved user' do
       let(:is_spam) { 'false' }

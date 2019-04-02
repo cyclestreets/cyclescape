@@ -6,7 +6,7 @@ class TagPanelDecorator < ApplicationDecorator
   def initialize(context, options = {})
     self.context = context
     self.form_url = options[:form_url] || h.url_for([context, :tags])
-    self.auth_context = options[:auth_context] || ((context.respond_to?(:source) ? context.source : context).class.name.underscore + '_tags').to_sym
+    self.auth_context = options[:auth_context] || ((context.respond_to?(:object) ? context.object : context).class.name.underscore + '_tags').to_sym
     begin
       self.cancel_url = options[:cancel_url] || h.url_for
     rescue ActionController::UrlGenerationError => e

@@ -32,8 +32,8 @@ RSpec.configure do |config|
   # Render views in controller tests
   config.render_views
 
-  config.include Devise::TestHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.include Authorization::TestHelper, type: :controller
   config.include Authorization::TestHelper, type: :view
   config.include RSpec::Helpers::StubAkismet, type: :feature
@@ -93,9 +93,7 @@ RSpec.configure do |config|
       SunspotTest.stub
     end
 
-    TestAfterCommit.with_commits(ex.metadata[:after_commit] || ex.metadata[:solr]) do
-      ex.run
-    end
+    ex.run
 
     Resque.inline = resque_inline
     DatabaseCleaner.clean

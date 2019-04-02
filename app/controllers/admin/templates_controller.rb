@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class PagesController < ApplicationController
+class Admin::TemplatesController < ApplicationController
   def show
-    template_name = 'pages/' + File.basename(params[:page].to_s)
+    template_name = 'admin/templates/' + File.basename(params[:template].to_s)
     if template_exists? template_name
       render template: template_name
     else
@@ -10,3 +10,4 @@ class PagesController < ApplicationController
     end
   end
 end
+

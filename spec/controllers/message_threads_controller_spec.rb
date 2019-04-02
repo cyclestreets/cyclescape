@@ -10,7 +10,7 @@ describe MessageThreadsController do
 
     context 'as a guest' do
       it 'should not assign a message to view from' do
-        get :show, id: thread.id
+        get :show, params: { id: thread.id }
         expect(assigns(:view_from)).to be_nil
       end
     end
@@ -24,7 +24,7 @@ describe MessageThreadsController do
 
       context "who hasn't viewed the thread before" do
         it 'should not assign a message to view from' do
-          get :show, id: thread.id
+          get :show, params: { id: thread.id }
           expect(assigns(:view_from)).to be_nil
         end
       end
@@ -33,7 +33,7 @@ describe MessageThreadsController do
         it 'should assign the final message' do
           create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 1.day)
           thread.reload
-          get :show, id: thread.id
+          get :show, params: { id: thread.id }
           expect(assigns(:view_from)).to eql(thread.messages.last)
         end
       end
@@ -41,7 +41,7 @@ describe MessageThreadsController do
       context 'who viewed the thread and two messages have been posted since' do
         it 'should assign the first of the new messages' do
           create(:thread_view, thread: thread, user: user, viewed_at: Time.now - 3.5.days)
-          get :show, id: thread.id
+          get :show, params: { id: thread.id }
           expect(assigns(:view_from)).to eql(message_b)
         end
       end
@@ -58,7 +58,7 @@ describe MessageThreadsController do
     let(:non_subscriber) { create :user }
 
     describe 'closing' do
-      subject { put :close, id: thread.id }
+      subject { put :close, params: { id: thread.id } }
 
       context 'as a subscriber' do
         let(:user_type) { subscriber }
@@ -79,7 +79,7 @@ describe MessageThreadsController do
     describe 'opening' do
       before { thread.update_column(:closed, true) }
 
-      subject { put :open, id: thread.id }
+      subject { put :open, params: { id: thread.id } }
 
       context 'as a subscriber' do
         let(:user_type) { subscriber }
