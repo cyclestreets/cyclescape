@@ -3,7 +3,7 @@ require "spec_helper"
 describe "Issue notifications" do
   include_context "signed in as a site user"
 
-  let(:issue_values) { attributes_for(:issue_with_json_loc, description: "hump & martini") }
+  let(:issue_values) { attributes_for(:issue_with_json_loc, description: "<p>hump & martini</p>") }
   let(:thread_values) { attributes_for(:message_thread) }
   let(:location) { issue_values[:loc_json] }
 
@@ -100,8 +100,8 @@ describe "Issue notifications" do
           expect(email).to have_subject(
             "[Cyclescape] New issue - \"#{issue_values[:title]}\" (#{group_profile.group.name})"
           )
-          email_body = email.text_part.decoded
-          expect(email_body).to include("in the #{group_profile.group.name}'s area")
+          email_body = email.html_part.decoded
+          expect(email_body).to match(%r{in the\n<a href=".*">#{group_profile.group.name}</a>})
           expect(email_body).to include(issue_values[:description])
           expect(email_body).to include(issue_values[:title])
         end

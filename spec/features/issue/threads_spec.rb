@@ -159,7 +159,7 @@ describe 'Issue threads' do
       end
 
       def create_thread
-        message = SecureRandom.hex
+        message = "<p>#{SecureRandom.hex}</p>"
         visit issue_path(issue)
         click_on 'Discuss'
         fill_in 'Discussion title', with: 'Lorem & Ipsum'
@@ -176,7 +176,7 @@ describe 'Issue threads' do
         expect(email).to have_subject("[Cyclescape] New thread started on issue \"#{issue.title}\"")
         expect(email).to have_body_text(issue.title)
         expect(email).to have_body_text('Lorem & Ipsum')
-        expect(email).to have_body_text(message_body)
+        expect(email.html_part.decoded).to include(message_body)
         expect(email).to have_body_text(current_user.name)
         expect(email).to be_delivered_from("#{current_user.name} <notifications@cyclescape.org>")
         expect(current_email.header[:reply_to].addrs.first.to_s).to include("message-#{message.public_token}@cyclescape.org")
