@@ -2,4 +2,4 @@
   = render "user_link", user: thread.first_message.created_by, recipient: recipient
   - created_by = thread.first_message.created_by
   wrote:
-%p{style: "margin-left:20px"}= thread.first_message.body
+%p{style: "margin-left:20px"}= raw thread.first_message.body
