@@ -27,6 +27,11 @@ describe UserLocation do
       expect(subject).not_to be_valid
     end
 
+    it 'must have a non empty location' do
+      subject.loc_json = "{\"type\":\"FeatureCollection\",\"features\":[]}"
+      expect(subject).not_to be_valid
+    end
+
     it 'must return an empty geojson string when no location' do
       subject.location = nil
       expect(subject.loc_json).to be_a(String)
