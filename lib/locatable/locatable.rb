@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 module Locatable
   extend ActiveSupport::Concern
+  EMPTY_JSON = '{"type":"FeatureCollection","features":[]}'.freeze
 
   included do
     after_create :make_location_valid
@@ -105,7 +108,7 @@ module Locatable
   end
 
   def loc_json=(json_str)
-    if json_str.blank?
+    if json_str.blank? || json_str == EMPTY_JSON
       self.location = nil
       return
     end
