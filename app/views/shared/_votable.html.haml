@@ -1,8 +1,8 @@
 .votes{id: "voteable_#{resource.id}", data: { url: "#{vote_link(resource)[:details]}"} }
   .hide.voted
-    = link_to "", vote_link(resource)[:clear], method: :put, class: "vote-count", remote: true, data: { disable_with: t("formtastic.actions.saving") }
+    = link_to "", vote_link(resource)[:clear], method: :put, class: "vote-count", remote: true
   .hide.not-voted
-    = link_to "", vote_link(resource)[:up], method: :put, class: "vote-count unvoted", remote: true, data: { disable_with: t("formtastic.actions.saving") }
+    = link_to "", vote_link(resource)[:up], method: :put, class: "vote-count unvoted", remote: true
   %span.tally
   - if !current_user
     .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)

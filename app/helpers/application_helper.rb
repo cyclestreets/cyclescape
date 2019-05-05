@@ -76,7 +76,6 @@ module ApplicationHelper
       {
         clear: vote_clear_thread_message_path(resource.thread, resource),
         up: vote_up_thread_message_path(resource.thread, resource),
-        details: vote_detail_thread_message_path(resource.thread, resource)
       }
     when Issue
       {

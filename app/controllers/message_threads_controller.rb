@@ -2,6 +2,7 @@
 
 class MessageThreadsController < ApplicationController
   filter_access_to :show, :edit, :update, :approve, :reject, :close, :open, :destroy, attribute_check: true
+  protect_from_forgery except: :vote_detail
   include MessageCreator
 
   def index
@@ -67,6 +68,11 @@ class MessageThreadsController < ApplicationController
   def permission_denied
     @group ||= thread.try(:group)
     super
+  end
+
+  def vote_detail
+    messages = thread.messages.approved
+    render partial: "shared/vote_detail", collection: messages, as: :resource
   end
 
   protected

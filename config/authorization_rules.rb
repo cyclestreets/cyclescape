@@ -118,6 +118,11 @@ authorization do
       to :close
       if_attribute subscribers: contains { user }, closed: is { false }
     end
+    has_permission_on :message_threads do
+      to :vote_detail
+      if_permitted_to :show
+    end
+
     has_permission_on :messages do
       to [:approve, :reject]
       if_attribute thread: { group_committee_members: contains { user } }
@@ -206,7 +211,6 @@ authorization do
     has_permission_on :groups, to: [:view, :all_geometries, :search]
     has_permission_on :group_profiles, to: [:view, :geometry]
     has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries, :search, :vote_detail]
-    has_permission_on :messages, to: [:vote_detail]
 
     has_permission_on :issue_photos, to: [:show]
     has_permission_on :libraries, :library_documents, :library_notes, to: [:view, :search, :recent]
