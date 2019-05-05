@@ -16,7 +16,7 @@
 #  index_user_profiles_on_user_id  (user_id)
 #
 
-class UserProfile < ActiveRecord::Base
+class UserProfile < ApplicationRecord
   VISIBILITY_OPTIONS = %w(public group).freeze
 
   dragonfly_accessor :picture do

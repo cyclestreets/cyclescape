@@ -24,7 +24,7 @@
 #  index_planning_applications_on_uid       (uid) UNIQUE
 #
 
-class PlanningApplication < ActiveRecord::Base
+class PlanningApplication < ApplicationRecord
   NOS_HIDE_VOTES = 2.freeze
 
   include Locatable

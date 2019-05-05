@@ -24,7 +24,7 @@
 #  index_message_threads_on_public_token   (public_token) UNIQUE
 #
 
-class MessageThread < ActiveRecord::Base
+class MessageThread < ApplicationRecord
   include AASM
   include FakeDestroy
   include Taggable

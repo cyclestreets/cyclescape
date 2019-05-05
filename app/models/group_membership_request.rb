@@ -19,7 +19,7 @@
 #  index_group_membership_requests_on_user_id   (user_id)
 #
 
-class GroupMembershipRequest < ActiveRecord::Base
+class GroupMembershipRequest < ApplicationRecord
   include AASM
 
   belongs_to :group

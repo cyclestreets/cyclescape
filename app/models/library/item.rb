@@ -18,7 +18,7 @@
 #  index_library_items_on_location  (location)
 #
 
-class Library::Item < ActiveRecord::Base
+class Library::Item < ApplicationRecord
 
   include FakeDestroy
   include Taggable

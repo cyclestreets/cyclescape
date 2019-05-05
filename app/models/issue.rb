@@ -20,7 +20,7 @@
 #  index_issues_on_location       (location)
 #
 
-class Issue < ActiveRecord::Base
+class Issue < ApplicationRecord
   include Locatable
   include FakeDestroy
   include Taggable

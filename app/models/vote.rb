@@ -20,7 +20,7 @@
 #  index_votes_on_voter_id_and_voter_type        (voter_id,voter_type)
 #
 
-class Vote < ActiveRecord::Base
+class Vote < ApplicationRecord
   scope :descending, -> { order(created_at: :desc) }
 
   belongs_to :voteable, polymorphic: true

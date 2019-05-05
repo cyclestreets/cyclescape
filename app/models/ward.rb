@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Ward < ActiveRecord::Base
+class Ward < ApplicationRecord
   include Locatable
 end

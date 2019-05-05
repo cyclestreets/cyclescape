@@ -19,7 +19,7 @@
 #  index_groups_on_short_name  (short_name)
 #
 
-class Group < ActiveRecord::Base
+class Group < ApplicationRecord
   has_many :memberships, class_name: 'GroupMembership', dependent: :destroy
   has_many :members, through: :memberships, source: :user
   has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy

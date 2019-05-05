@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PotentialMember < ActiveRecord::Base
+class PotentialMember < ApplicationRecord
   belongs_to :group
 
   validates :group, :email_hash, presence: true

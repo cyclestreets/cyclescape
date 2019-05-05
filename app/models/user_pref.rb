@@ -21,7 +21,7 @@
 #  index_user_prefs_on_user_id                  (user_id) UNIQUE
 #
 
-class UserPref < ActiveRecord::Base
+class UserPref < ApplicationRecord
   # ---> CONSTANTS
   EmailStatus = Struct.new(:id, :status) do
     def label

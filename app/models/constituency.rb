@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Constituency < ActiveRecord::Base
+class Constituency < ApplicationRecord
   include Locatable
 end

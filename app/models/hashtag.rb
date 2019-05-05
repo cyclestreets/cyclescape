@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Hashtag < ActiveRecord::Base
+class Hashtag < ApplicationRecord
   # "[^"]+"|() the LHS matches all text inside quotes leaving the RHS to match the hashtag
   # Hashtag Regexp from https://github.com/ralovely/simple_hashtag/blob/4e8832a845258f1d1d55db404975cc6b49eb12fe/lib/simple_hashtag/hashtag.rb#L12
   # TODO: update Hashtag Regexp to use https://github.com/twitter/twitter-text/tree/master/rb

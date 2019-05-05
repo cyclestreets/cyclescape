@@ -13,7 +13,7 @@
 #  index_tags_on_name  (name) UNIQUE
 #
 
-class Tag < ActiveRecord::Base
+class Tag < ApplicationRecord
   validates :name, presence: true
   has_and_belongs_to_many :issues, join_table: "issue_tags"
   has_and_belongs_to_many :threads, class_name: 'MessageThread', join_table: 'message_thread_tags', association_foreign_key: 'thread_id'

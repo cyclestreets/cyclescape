@@ -12,7 +12,7 @@
 #  process_error :boolean          default(FALSE), not null
 #
 
-class InboundMail < ActiveRecord::Base
+class InboundMail < ApplicationRecord
   validates :recipient, :raw_message, presence: true
   has_many :messages
 

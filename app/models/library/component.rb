@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Base class for implementing components of Library Items.
-class Library::Component < ActiveRecord::Base
+class Library::Component < ApplicationRecord
 
   self.abstract_class = true
 

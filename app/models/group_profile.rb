@@ -18,7 +18,7 @@
 #  index_group_profiles_on_location  (location)
 #
 
-class GroupProfile < ActiveRecord::Base
+class GroupProfile < ApplicationRecord
   MAX_LOCAL_AREA = 10
 
   dragonfly_accessor :picture

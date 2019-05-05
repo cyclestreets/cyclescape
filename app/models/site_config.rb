@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SiteConfig < ActiveRecord::Base
+class SiteConfig < ApplicationRecord
   TILE_SERVER_TYPES = %w(layers wms).freeze
 
   KEY = "SiteConfig".freeze

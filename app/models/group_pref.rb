@@ -16,7 +16,7 @@
 #  index_group_prefs_on_group_id  (group_id) UNIQUE
 #
 
-class GroupPref < ActiveRecord::Base
+class GroupPref < ApplicationRecord
 
   belongs_to :group
   belongs_to :membership_secretary, class_name: 'User'

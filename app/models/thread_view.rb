@@ -15,7 +15,7 @@
 #  index_thread_views_on_user_id_and_thread_id  (user_id,thread_id) UNIQUE
 #
 
-class ThreadView < ActiveRecord::Base
+class ThreadView < ApplicationRecord
   belongs_to :user, inverse_of: :thread_views
   belongs_to :thread, class_name: 'MessageThread'
 

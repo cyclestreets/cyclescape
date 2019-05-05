@@ -25,7 +25,7 @@
 #  index_group_requests_on_user_id     (user_id)
 #
 
-class GroupRequest < ActiveRecord::Base
+class GroupRequest < ApplicationRecord
   include AASM
 
   belongs_to :user

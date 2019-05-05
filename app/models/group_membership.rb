@@ -18,7 +18,7 @@
 #  index_group_memberships_on_user_id   (user_id)
 #
 
-class GroupMembership < ActiveRecord::Base
+class GroupMembership < ApplicationRecord
 
   ALLOWED_ROLES = %w(committee member)
 

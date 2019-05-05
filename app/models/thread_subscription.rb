@@ -16,7 +16,7 @@
 #  index_thread_subscriptions_on_user_id    (user_id)
 #
 
-class ThreadSubscription < ActiveRecord::Base
+class ThreadSubscription < ApplicationRecord
   include FakeDestroy
 
   belongs_to :user

@@ -17,7 +17,7 @@
 #  index_user_locations_on_user_id   (user_id)
 #
 
-class UserLocation < ActiveRecord::Base
+class UserLocation < ApplicationRecord
   include Locatable
 
   belongs_to :user

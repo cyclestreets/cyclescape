@@ -10,7 +10,7 @@
 #  updated_at :datetime         not null
 #
 
-class LocationCategory < ActiveRecord::Base
+class LocationCategory < ApplicationRecord
 
   has_many :user_locations, foreign_key: 'category_id'
 

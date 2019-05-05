@@ -17,7 +17,7 @@
 #  index_user_thread_priorities_on_user_id    (user_id)
 #
 
-class UserThreadPriority < ActiveRecord::Base
+class UserThreadPriority < ApplicationRecord
   PRIORITIES = { very_high: 10,
                  high: 8,
                  medium: 6,

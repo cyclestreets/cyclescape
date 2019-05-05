@@ -16,7 +16,7 @@
 #  deleted_at   :datetime
 #
 
-class SiteComment < ActiveRecord::Base
+class SiteComment < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :user

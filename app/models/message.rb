@@ -21,7 +21,7 @@
 #  index_messages_on_thread_id      (thread_id)
 #
 
-class Message < ActiveRecord::Base
+class Message < ApplicationRecord
   include FakeDestroy
   include AASM
   include Rakismet::Model

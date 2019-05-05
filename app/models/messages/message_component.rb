@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class MessageComponent < ActiveRecord::Base
+class MessageComponent < ApplicationRecord
   self.abstract_class = true
 
   belongs_to :message, inverse_of: :component

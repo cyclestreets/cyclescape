@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Base64ToDragonfly do
   let(:klass) do
-    class Profile < ActiveRecord::Base
+    class Profile < ApplicationRecord
       self.table_name = "group_profiles"
       dragonfly_accessor :picture
       dragonfly_accessor :logo
