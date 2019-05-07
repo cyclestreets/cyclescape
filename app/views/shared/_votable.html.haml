@@ -1,4 +1,4 @@
-.votes{id: "voteable_#{resource.id}", data: { url: "#{vote_link(resource)[:details]}"} }
+.votes{id: "voteable_#{resource.id}", data: { url: "#{vote_link(resource)[:details]}", id: resource.id } }
   .hide.voted
     = link_to "", vote_link(resource)[:clear], method: :put, class: "vote-count", remote: true
   .hide.not-voted

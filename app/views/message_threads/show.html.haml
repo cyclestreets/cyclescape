@@ -47,7 +47,6 @@
             %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t("are_you_sure") }
 
   = render collection: @messages, partial: "messages/message", locals: { view_from: @view_from, thread: @thread }, cached: true
-  %div{data: { url: "#{vote_detail_thread_path(@thread)}", onevoteurl: "true"} }
   - if @thread.closed
     - closed_by = permitted_to?(:view_profile, @thread.closed_by.last) ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon
     = t '.closed_html', by: closed_by, at: time_ago_in_words(@thread.message_thread_closes.last.created_at)

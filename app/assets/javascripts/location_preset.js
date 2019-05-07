@@ -1,21 +1,4 @@
 $(document).ready(function () {
-  var $vote = $('[data-onevoteurl="true"]')
-  if ($vote.length === 1) {
-    var voteDetailUrl = $vote.data('url')
-    $.ajax({
-      type: 'GET',
-      url: voteDetailUrl
-    })
-  } else {
-    $('.votes').each(function() {
-      var voteDetailUrl = $(this).data('url')
-      $.ajax({
-        type: 'GET',
-        url: voteDetailUrl
-      })
-    })
-  }
-
   if ($('.user_location #user_location').length > 0) {
     var map, startSearchControl, destSearchControl, startSearchEl, destSearchEl, startLocation, userLocationPlaceholder,
       destLocation, constituencyLabelsEl, areaAroundEl, routeEl, wardLabelsEl, groupLabelsEl, userLocationEl,

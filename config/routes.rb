@@ -7,8 +7,10 @@ Rails.application.routes.draw do
     resources :issues, opts do
       member do
         get :geometry
-        get :vote_detail
         put :vote_up, :vote_clear
+      end
+      collection do
+        get :vote_detail
       end
       get :all_geometries, on: :collection
       scope module: 'issue' do

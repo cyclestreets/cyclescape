@@ -71,7 +71,7 @@ class MessageThreadsController < ApplicationController
   end
 
   def vote_detail
-    messages = thread.messages.approved
+    messages = thread.messages.approved.where(id: params[:ids])
     render partial: "shared/vote_detail", collection: messages, as: :resource
   end
 

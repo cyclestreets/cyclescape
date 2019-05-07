@@ -5,5 +5,5 @@
   $('#voteable_<%= resource.id  %> .not-voted').show();
   $('#voteable_<%= resource.id  %> .voted').hide();
 <% end %>
-$('#voteable_<%= resource.id  %> .vote-count').prop('title', '<%= voter_names(resource) %>');
+$('#voteable_<%= resource.id  %> .vote-count').prop('title', "<%= j(voter_names(resource)) %>");
 $('#voteable_<%= resource.id  %> .tally').text('<%= resource.plusminus %>');
