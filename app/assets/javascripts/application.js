@@ -36,3 +36,4 @@
 //= require leaflet_draw_override
 //= require cropperjs/dist/cropper
 //= require image_edit
+//= require vote

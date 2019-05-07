@@ -111,7 +111,8 @@ class IssuesController < ApplicationController
   end
 
   def vote_detail
-    render partial: "shared/vote_detail", locals: { resource: issue }
+    issues = Issue.where(id: params[:ids])
+    render partial: "shared/vote_detail", collection: issues, as: :resource
   end
 
   protected

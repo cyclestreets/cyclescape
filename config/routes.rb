@@ -7,8 +7,10 @@ Rails.application.routes.draw do
     resources :issues, opts do
       member do
         get :geometry
-        get :vote_detail
         put :vote_up, :vote_clear
+      end
+      collection do
+        get :vote_detail
       end
       get :all_geometries, on: :collection
       scope module: 'issue' do
@@ -98,12 +100,14 @@ Rails.application.routes.draw do
   end
 
   resources :threads, controller: 'message_threads' do
-    put :open, :close, on: :member
+    member do
+      put :open, :close
+      get :vote_detail
+    end
     resources :messages do
       resources :documents, controller: 'message_library/documents'
       resources :notes, controller: 'message_library/notes', only: %i[new create show edit update destroy]
       member do
-        get :vote_detail
         put :approve, :reject, :censor, :vote_up, :vote_clear
       end
     end

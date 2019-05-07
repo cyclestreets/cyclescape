@@ -2,7 +2,6 @@
 
 class MessagesController < ApplicationController
   filter_access_to :approve, :reject, attribute_check: true
-  protect_from_forgery except: :vote_detail
 
   def create
     @message ||= thread.messages.build permitted_params.merge(created_by: current_user)
@@ -55,10 +54,6 @@ class MessagesController < ApplicationController
 
   def vote_clear
     current_user.clear_votes message
-    render partial: "shared/vote_detail", locals: { resource: message }
-  end
-
-  def vote_detail
     render partial: "shared/vote_detail", locals: { resource: message }
   end
 

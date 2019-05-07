@@ -76,13 +76,13 @@ module ApplicationHelper
       {
         clear: vote_clear_thread_message_path(resource.thread, resource),
         up: vote_up_thread_message_path(resource.thread, resource),
-        details: vote_detail_thread_message_path(resource.thread, resource)
+        details: vote_detail_thread_path(resource.thread)
       }
     when Issue
       {
         clear: vote_clear_issue_path(resource),
         up: vote_up_issue_path(resource),
-        details: vote_detail_issue_path(resource)
+        details: vote_detail_issues_path
       }
     end
   end
