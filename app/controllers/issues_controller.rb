@@ -119,7 +119,7 @@ class IssuesController < ApplicationController
 
   def new_issue_setup
     @start_location ||= current_user.start_location
-    thread = @issue.threads.first || @issue.threads.build
+    thread = @issue.threads.first || @issue.threads.build(group: current_group)
     @message ||= thread.messages.build
     @available_groups = current_user.groups
   end

@@ -6,6 +6,10 @@ describe "Issue notifications" do
   let(:issue_values) { attributes_for(:issue_with_json_loc, description: "<p>hump & martini</p>") }
   let(:thread_values) { attributes_for(:message_thread) }
   let(:location) { issue_values[:loc_json] }
+  let(:group_profile) { create(:quahogcc_group_profile) }
+  let(:group) { group_profile.group }
+  let(:user) { current_user }
+  let(:group_membership) { create(:group_membership, user: user, group: group) }
 
   def fill_in_issue
     visit new_issue_path if page.current_path != new_issue_path
@@ -18,6 +22,12 @@ describe "Issue notifications" do
   end
 
   context "on a new issue" do
+    it "should set the group if requested by subdomain" do
+      visit new_issue_url.gsub("www", group_membership.group.subdomain)
+      expect(page).to have_select(I18n.t("activerecord.attributes.message_thread.group"), selected: group.name)
+      expect(page).to have_select(I18n.t("formtastic.labels.thread.privacy"))
+    end
+
     it "should create a new issue" do
       visit new_issue_path
 
@@ -82,12 +92,12 @@ describe "Issue notifications" do
     end
 
     describe "for users in groups with overlapping locations" do
-      let!(:group_profile) { create(:quahogcc_group_profile) }
-      let!(:notifiee) { create(:user) }
-      let!(:group_membership) { create(:group_membership, user: notifiee, group: group_profile.group) }
+      let(:user) { create(:user) }
+      let(:notifiee) { user }
       let(:email) { open_last_email_for(notifiee.email) }
 
       before do
+        group_membership
         notifiee.prefs.update!(involve_my_groups: group_email_prefs, email_status_id: 1)
         fill_in_issue
         click_on I18n.t("formtastic.actions.issue.create")

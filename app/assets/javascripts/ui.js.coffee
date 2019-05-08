@@ -110,6 +110,8 @@ jQuery ->
         else
           target.hide()
   }
+  $(AutoSet.selector).each ->
+    AutoSet.trigger_all($(this))
 
   $(document).on "change", AutoSet.selector, ->
     AutoSet.trigger_all($(this))
