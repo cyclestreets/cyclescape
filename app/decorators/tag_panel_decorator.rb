@@ -6,7 +6,7 @@ class TagPanelDecorator < ApplicationDecorator
   def initialize(context, options = {})
     self.context = context
     self.form_url = options[:form_url] || h.url_for([context, :tags])
-    self.auth_context = options[:auth_context] || ((context.respond_to?(:object) ? context.object : context).class.name.underscore + '_tags').to_sym
+    self.auth_context = options[:auth_context] || ((context.respond_to?(:object) ? context.object : context).class.name.underscore + "_tags").to_sym
     begin
       self.cancel_url = options[:cancel_url] || h.url_for
     rescue ActionController::UrlGenerationError => e
@@ -17,9 +17,9 @@ class TagPanelDecorator < ApplicationDecorator
 
   def render
     locals = { context: context, form_url: form_url, cancel_url: cancel_url, auth_context: auth_context }
-    h.content_tag(:div, class: 'tags-panel') do
-      panel = h.render partial: 'shared/tags/panel', locals: locals
-      form = h.render partial: 'shared/tags/edit', locals: locals
+    h.content_tag(:div, class: "tags-panel") do
+      panel = h.render partial: "shared/tags/panel", locals: locals
+      form = h.render partial: "shared/tags/edit", locals: locals
       panel + form
     end
   end

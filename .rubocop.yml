@@ -2,6 +2,7 @@ AllCops:
   Exclude:
    - db/schema.rb
    - vendor/**/*
+   - db/**/*
 
 Encoding:
   Enabled: false
@@ -11,6 +12,8 @@ Rails:
 
 Rails/HttpPositionalArguments:
   Enabled: true
+  Exclude:
+   - spec/api/**/*
 
 Rails/DynamicFindBy:
   Whitelist:

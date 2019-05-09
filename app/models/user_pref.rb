@@ -32,12 +32,12 @@ class UserPref < ApplicationRecord
   self.email_statuses = [
     EmailStatus.new(0, :no_email),
     EmailStatus.new(1, :email),
-    EmailStatus.new(2, :digest),
+    EmailStatus.new(2, :digest)
   ].index_by(&:id).freeze
 
   belongs_to :user
 
-  INVOLVEMENT_OPTIONS = %w(none notify subscribe)
+  INVOLVEMENT_OPTIONS = %w[none notify subscribe].freeze
 
   validates :involve_my_locations, inclusion: { in: INVOLVEMENT_OPTIONS }
   validates :involve_my_groups, inclusion: { in: INVOLVEMENT_OPTIONS }
@@ -46,5 +46,4 @@ class UserPref < ApplicationRecord
   def enable_email?
     email_status_id == 1
   end
-
 end

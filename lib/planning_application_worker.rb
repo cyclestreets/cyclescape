@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlanningApplicationWorker
   # Update to use
   # http://planit.org.uk/find/areas/json
@@ -35,7 +37,7 @@ class PlanningApplicationWorker
         JSON.parse(conn.request(req).body)
       end
     end
-  rescue => e
+  rescue StandardError => e
     Rollbar.debug(e, "Issue with authority #{authority}, req: #{req}")
     { "records" => [] }
   end
@@ -58,11 +60,11 @@ class PlanningApplicationWorker
         next unless remote_pa["uid"] && remote_pa["url"]
 
         db_app = PlanningApplication
-          .find_or_initialize_by uid: remote_pa["uid"], authority_name: remote_pa["authority_name"]
-        [:address, :postcode, :description, :url, :start_date].each do |attr|
+                 .find_or_initialize_by uid: remote_pa["uid"], authority_name: remote_pa["authority_name"]
+        %i[address postcode description url start_date].each do |attr|
           db_app[attr] = remote_pa[attr.to_s]
         end
-        db_app.location = "POINT(#{remote_pa["lng"]} #{remote_pa["lat"]})"
+        db_app.location = "POINT(#{remote_pa['lng']} #{remote_pa['lat']})"
         db_app.save!
       end
     end
@@ -73,7 +75,7 @@ class PlanningApplicationWorker
 
     if days_offset
       dates = { start_date: (@end_date - 14.days + (5 * days_offset).days),
-                end_date:   (@end_date - 10.days + (5 * days_offset).days) }
+                end_date: (@end_date - 10.days + (5 * days_offset).days) }
     end
 
     {

@@ -7,9 +7,9 @@ class MessageThread::UserPrioritiesController < MessageThread::BaseController
     utp = @thread.priority_for(current_user)
 
     if utp.update permitted_params
-      flash[:notice] = t('.success')
+      flash[:notice] = t(".success")
     else
-      flash[:alert] = t('.failure')
+      flash[:alert] = t(".failure")
     end
   end
 

@@ -20,7 +20,7 @@ class ThreadSubscription < ApplicationRecord
   include FakeDestroy
 
   belongs_to :user
-  belongs_to :thread, class_name: 'MessageThread', inverse_of: :subscriptions
+  belongs_to :thread, class_name: "MessageThread", inverse_of: :subscriptions
 
   before_destroy :remove_leader
 

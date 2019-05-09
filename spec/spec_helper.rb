@@ -1,19 +1,21 @@
-require 'rubygems'
+# frozen_string_literal: true
 
-ENV['RAILS_ENV'] ||= 'test'
+require "rubygems"
 
-require File.expand_path('../../config/environment', __FILE__)
-require 'rspec/rails'
-require 'capybara/rspec'
-require 'email_spec'
-require 'database_cleaner'
-require 'declarative_authorization/maintenance'
-require 'webmock/rspec'
-require 'capybara/poltergeist'
+ENV["RAILS_ENV"] ||= "test"
+
+require File.expand_path("../config/environment", __dir__)
+require "rspec/rails"
+require "capybara/rspec"
+require "email_spec"
+require "database_cleaner"
+require "declarative_authorization/maintenance"
+require "webmock/rspec"
+require "capybara/poltergeist"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 RSpec.configure do |config|
   # == Mock Framework
   #
@@ -50,8 +52,8 @@ RSpec.configure do |config|
 
     # Create the root user
     unless User.where(id: 1).exists?
-      root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
-                      password: 'changeme', password_confirmation: 'changeme', role: 'admin')
+      root = User.new(email: "root@cyclescape.org", full_name: "Root",
+                      password: "changeme", password_confirmation: "changeme", role: "admin")
       root.skip_confirmation!
       root.save!
     end
@@ -101,8 +103,8 @@ RSpec.configure do |config|
     FactoryBot.create(:site_config) unless SiteConfig.exists?
 
     if truncate_clean && User.where(id: 1).blank?
-      root = User.new(email: 'root@cyclescape.org', full_name: 'Root',
-                      password: 'changeme', password_confirmation: 'changeme', role: 'admin')
+      root = User.new(email: "root@cyclescape.org", full_name: "Root",
+                      password: "changeme", password_confirmation: "changeme", role: "admin")
       root.skip_confirmation!
       root.save!
       User.where(id: 1).update_all(id: root.id.to_s)
@@ -113,7 +115,7 @@ RSpec.configure do |config|
   # $ RAILS_ENV=test rake sunspot:solr:start
   # then to run the solr specs
   # $ SOLR=1 be rspec --tag solr
-  config.filter_run_excluding solr: true unless ENV['SOLR']
+  config.filter_run_excluding solr: true unless ENV["SOLR"]
 
   config.infer_spec_type_from_file_location!
   config.include FactoryBot::Syntax::Methods

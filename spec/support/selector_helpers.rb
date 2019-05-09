@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 def dom_id_selector(model)
-  '#' + ActionView::RecordIdentifier.dom_id(model)
+  "#" + ActionView::RecordIdentifier.dom_id(model)
 end
 
 def dom_class_selector(model)
-  '.' + ActionView::RecordIdentifier.dom_class(model)
+  "." + ActionView::RecordIdentifier.dom_class(model)
 end
 
 def tinymce_fill_in(with:, id: "message_body")

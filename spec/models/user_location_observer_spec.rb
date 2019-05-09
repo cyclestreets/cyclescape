@@ -1,12 +1,14 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe UserLocationObserver do
   subject { UserLocationObserver.instance }
 
-  context 'basic checks' do
+  context "basic checks" do
     let(:ul) { build(:user_location) }
 
-    it 'should notice when UserLocations are saved' do
+    it "should notice when UserLocations are saved" do
       expect(subject).to receive(:after_save)
 
       UserLocation.observers.enable :user_location_observer do
@@ -15,19 +17,19 @@ describe UserLocationObserver do
     end
   end
 
-  context 'adding a location' do
+  context "adding a location" do
     let(:issue) { create(:issue) }
     let!(:thread) { create(:issue_message_thread, issue: issue) }
     let(:user_location) { build(:user_location, location: issue.location) }
     let(:user) { user_location.user }
     let(:group) { create(:group) }
 
-    context 'with pref' do
+    context "with pref" do
       before do
-        user.prefs.update_column(:involve_my_locations, 'subscribe')
+        user.prefs.update_column(:involve_my_locations, "subscribe")
       end
 
-      it 'should subscribe users to existing threads' do
+      it "should subscribe users to existing threads" do
         expect(thread.subscribers).not_to include(user)
         UserLocation.observers.enable :user_location_observer do
           user_location.save
@@ -36,10 +38,10 @@ describe UserLocationObserver do
         expect(thread.subscribers).to include(user)
       end
 
-      it 'should not subscribe users to private threads' do
+      it "should not subscribe users to private threads" do
         expect(group.members).not_to include(user)
         thread.group = group
-        thread.privacy = 'group'
+        thread.privacy = "group"
         thread.save
         UserLocation.observers.enable :user_location_observer do
           user_location.save
@@ -49,12 +51,12 @@ describe UserLocationObserver do
       end
     end
 
-    context 'without pref' do
+    context "without pref" do
       before do
-        user.prefs.update_column(:involve_my_locations, 'notify')
+        user.prefs.update_column(:involve_my_locations, "notify")
       end
 
-      it 'should not subscribe users to existing threads' do
+      it "should not subscribe users to existing threads" do
         expect(thread.subscribers).not_to include(user)
         UserLocation.observers.enable :user_location_observer do
           user_location.save
@@ -65,18 +67,18 @@ describe UserLocationObserver do
     end
   end
 
-  context 'destroying a location' do
+  context "destroying a location" do
     let(:issue) { create(:issue) }
     let!(:thread) { create(:issue_message_thread, issue: issue) }
     let(:user_location) { create(:user_location, location: issue.location) }
     let(:user) { user_location.user }
 
     before do
-      user.prefs.update_column(:involve_my_locations, 'subscribe')
+      user.prefs.update_column(:involve_my_locations, "subscribe")
       thread.add_subscriber(user)
     end
 
-    it 'should remove subscription' do
+    it "should remove subscription" do
       expect(thread.subscribers).to include(user)
       UserLocation.observers.enable :user_location_observer do
         user_location.destroy
@@ -85,16 +87,16 @@ describe UserLocationObserver do
       expect(thread.subscribers).not_to include(user)
     end
 
-    context 'with a group thread and involve_my_groups set to subscribe' do
+    context "with a group thread and involve_my_groups set to subscribe" do
       let!(:group_membership) { create(:group_membership, user: user) }
 
       before do
         thread.group = group_membership.group
         thread.save
-        user.prefs.update_column(:involve_my_groups, 'subscribe')
+        user.prefs.update_column(:involve_my_groups, "subscribe")
       end
 
-      it 'should not remove subscription' do
+      it "should not remove subscription" do
         expect(thread.subscribers).to include(user)
         UserLocation.observers.enable :user_location_observer do
           user_location.destroy

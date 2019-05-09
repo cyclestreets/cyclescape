@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ThreadMailerMailerPreview < ActionMailer::Preview
   def new_action_message
     ThreadMailer.common(*message(ActionMessage))

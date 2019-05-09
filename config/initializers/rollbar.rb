@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 Rollbar.configure do |config|
-  access_token_file = Rails.root.join('config', 'rollbar')
+  access_token_file = Rails.root.join("config", "rollbar")
 
   if access_token_file.exist?
     config.access_token = access_token_file.read.strip
@@ -31,10 +33,10 @@ Rollbar.configure do |config|
   # config.exception_level_filters.merge!('MyCriticalException' => lambda { |e| 'critical' })
   #
   config.exception_level_filters.merge!(
-    'ActionController::UnknownFormat' => 'ignore',
-    'ActionController::RoutingError' => 'ignore',
-    'ActiveRecord::RecordNotFound' => 'ignore',
-    'AbstractController::ActionNotFound' => lambda do |error|
+    "ActionController::UnknownFormat" => "ignore",
+    "ActionController::RoutingError" => "ignore",
+    "ActiveRecord::RecordNotFound" => "ignore",
+    "AbstractController::ActionNotFound" => lambda do |error|
       if error.to_s.start_with? == "The action 'index' could not be found for"
         "ignore"
       else

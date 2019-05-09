@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserBlocksController < ApplicationController
   def create
     current_user.blocked_user_ids |= [blocked_user_id]
@@ -15,4 +17,3 @@ class UserBlocksController < ApplicationController
     params[:user_block][:blocked_id].to_i
   end
 end
-

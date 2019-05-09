@@ -27,10 +27,10 @@ class Message < ApplicationRecord
   include Rakismet::Model
   include BodyFormat
 
-  belongs_to :thread, -> { with_deleted}, class_name: 'MessageThread', inverse_of: :messages
-  belongs_to :created_by, -> { with_deleted }, class_name: 'User'
+  belongs_to :thread, -> { with_deleted }, class_name: "MessageThread", inverse_of: :messages
+  belongs_to :created_by, -> { with_deleted }, class_name: "User"
   belongs_to :component, polymorphic: true, autosave: true, inverse_of: :message
-  belongs_to :in_reply_to, class_name: 'Message'
+  belongs_to :in_reply_to, class_name: "Message"
   belongs_to :inbound_mail
   has_many :hashtaggings
   has_many :hashtags, through: :hashtaggings
@@ -44,11 +44,11 @@ class Message < ApplicationRecord
   after_commit :update_search
   acts_as_voteable
 
-  scope :recent,     -> { ordered.limit(3) }
-  scope :ordered,     -> { order(created_at: :desc) }
-  scope :approved,   -> { where(status: [nil, 'approved']) }
-  scope :mod_queued, -> { where(status: 'mod_queued') }
-  scope :in_group,   ->(group_id) { includes(:thread).where(message_threads: {group_id: group_id}).references(:thread)}
+  scope :recent, -> { ordered.limit(3) }
+  scope :ordered, -> { order(created_at: :desc) }
+  scope :approved,   -> { where(status: [nil, "approved"]) }
+  scope :mod_queued, -> { where(status: "mod_queued") }
+  scope :in_group,   ->(group_id) { includes(:thread).where(message_threads: { group_id: group_id }).references(:thread) }
   scope :after_date, ->(date) { where(arel_table[:created_at].gteq(date)) }
   scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
 
@@ -57,12 +57,12 @@ class Message < ApplicationRecord
   validate  :in_reply_to_should_belong_to_same_thread
 
   rakismet_attrs  author: proc { created_by.full_name },
-    author_email: proc { created_by.email },
-    content: proc { body }
+                  author_email: proc { created_by.email },
+                  content: proc { body }
 
-  normalize_attribute :body, with: [:strip_fb_links, :strip_html_paragraphs]
+  normalize_attribute :body, with: %i[strip_fb_links strip_html_paragraphs]
 
-  aasm column: 'status' do
+  aasm column: "status" do
     state :mod_queued, initial: true
     state :approved
     state :rejected
@@ -80,7 +80,7 @@ class Message < ApplicationRecord
     end
 
     event :approve do
-      transitions to: :approved, after: [:ham!, :approve_related]
+      transitions to: :approved, after: %i[ham! approve_related]
     end
   end
 
@@ -94,7 +94,7 @@ class Message < ApplicationRecord
   end
 
   def component_name
-    (component ? component : self).class.name.underscore
+    (component || self).class.name.underscore
   end
 
   def notification_name
@@ -117,7 +117,7 @@ class Message < ApplicationRecord
       created_at: created_at,
       updated_at: updated_at,
       public_token: public_token,
-      in_reply_to_id: in_reply_to_id,
+      in_reply_to_id: in_reply_to_id
     }
   end
 
@@ -129,7 +129,7 @@ class Message < ApplicationRecord
   end
 
   def init_blank_body
-    self.body ||= ''
+    self.body ||= ""
   end
 
   def set_in_reply_to
@@ -138,6 +138,7 @@ class Message < ApplicationRecord
 
   def attach_tags
     return unless thread.group
+
     self.hashtags = Hashtag.find_or_create_for_body(body, thread.group)
   end
 
@@ -147,6 +148,7 @@ class Message < ApplicationRecord
 
   def in_reply_to_should_belong_to_same_thread
     return unless in_reply_to
+
     errors.add :in_reply_to_id, :invalid unless in_reply_to.thread_id == thread_id
   end
 

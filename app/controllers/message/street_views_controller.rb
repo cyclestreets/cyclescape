@@ -14,6 +14,6 @@ class Message::StreetViewsController < Message::BaseController
   end
 
   def permit_params
-    [:caption, :heading, :pitch]
+    %i[caption heading pitch]
   end
 end

@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :message_thread do
     association :created_by, factory: :user
     sequence(:title) { |n| "Message Thread #{n}" }
-    privacy 'public'
-    status 'approved'
+    privacy "public"
+    status "approved"
 
     trait :belongs_to_group do
       group
     end
 
     trait :private do
-      privacy 'group'
+      privacy "group"
     end
 
     trait :committee do
-      privacy 'committee'
+      privacy "committee"
     end
 
     trait :belongs_to_issue do
@@ -23,7 +25,7 @@ FactoryBot.define do
 
     trait :with_messages do
       after(:create) do |mt|
-        user = FactoryBot.create(:user)  # To prevent creating 1 user per message
+        user = FactoryBot.create(:user) # To prevent creating 1 user per message
         FactoryBot.create_list(:message, 2, thread: mt, created_by: user)
         mt.reload
       end
@@ -35,14 +37,14 @@ FactoryBot.define do
 
     trait :approved do
       status :mod_queued
-      after(:create) { |mt| mt.approve! }
+      after(:create, &:approve!)
     end
 
     factory :group_message_thread, traits: [:belongs_to_group]
     factory :issue_message_thread, traits: [:belongs_to_issue]
-    factory :group_private_message_thread, traits: [:belongs_to_group, :private]
-    factory :group_private_message_thread_with_messages, traits: [:belongs_to_group, :private, :with_messages]
-    factory :group_committee_message_thread, traits: [:belongs_to_group, :committee]
+    factory :group_private_message_thread, traits: %i[belongs_to_group private]
+    factory :group_private_message_thread_with_messages, traits: %i[belongs_to_group private with_messages]
+    factory :group_committee_message_thread, traits: %i[belongs_to_group committee]
     factory :message_thread_with_messages, traits: [:with_messages]
   end
 end

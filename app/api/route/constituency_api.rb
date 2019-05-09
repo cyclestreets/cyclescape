@@ -2,7 +2,7 @@
 
 module Route
   class ConstituencyApi < Base
-    desc 'Returns consistency boundaries and names as GeoJSON', security: [{}]
+    desc "Returns consistency boundaries and names as GeoJSON", security: [{}]
     paginate paginate_settings
 
     params do

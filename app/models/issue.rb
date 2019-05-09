@@ -35,11 +35,11 @@ class Issue < ApplicationRecord
 
   acts_as_voteable
 
-  scope :by_score, -> do
-    joins(:votes).group(:id).
-      having("SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) > 0").
-      order('SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) DESC')
-  end
+  scope :by_score, lambda {
+    joins(:votes).group(:id)
+                 .having("SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) > 0")
+                 .order("SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) DESC")
+  }
 
   belongs_to :created_by, -> { with_deleted }, class_name: "User"
   belongs_to :planning_application
@@ -56,8 +56,8 @@ class Issue < ApplicationRecord
   validates :external_url, url: true
 
   default_scope { where(deleted_at: nil) }
-  scope :by_most_recent, -> { order('created_at DESC') }
-  scope :preloaded,  ->      { includes(:created_by, :tags) }
+  scope :by_most_recent, -> { order("created_at DESC") }
+  scope :preloaded,  -> { includes(:created_by, :tags) }
   scope :created_by, ->(user) { where(created_by_id: user) }
 
   after_commit :update_search
@@ -65,11 +65,11 @@ class Issue < ApplicationRecord
 
   class << self
     def after_date(date)
-      where('coalesce(deadline, created_at) >= ?', date)
+      where("coalesce(deadline, created_at) >= ?", date)
     end
 
     def before_date(date)
-      where('coalesce(deadline, created_at) <= ?', date)
+      where("coalesce(deadline, created_at) <= ?", date)
     end
 
     def email_upcomming_deadlines!
@@ -84,12 +84,12 @@ class Issue < ApplicationRecord
   end
 
   def latest_activity_at
-    threads.includes(:messages).maximum('messages.updated_at')
+    threads.includes(:messages).maximum("messages.updated_at")
   end
 
   def closed?
     closed = threads.pluck :closed
-    closed.size > 0 && closed.all?
+    !closed.empty? && closed.all?
   end
 
   def to_param
@@ -105,7 +105,7 @@ class Issue < ApplicationRecord
   # Association callback
   def set_new_thread_defaults(thread)
     thread.title ||= title if threads.count == 0
-    thread.privacy ||= 'public'
+    thread.privacy ||= "public"
   end
 
   def storage_path
@@ -116,5 +116,4 @@ class Issue < ApplicationRecord
     SearchUpdater.update_type(self, :process_issue)
     true
   end
-
 end

@@ -12,9 +12,9 @@
 #
 
 class LibraryItemMessage < MessageComponent
-  belongs_to :item, class_name: 'Library::Item', foreign_key: 'library_item_id'
-  belongs_to :thread, class_name: 'MessageThread', foreign_key: 'thread_id'
+  belongs_to :item, class_name: "Library::Item", foreign_key: "library_item_id"
+  belongs_to :thread, class_name: "MessageThread", foreign_key: "thread_id"
   belongs_to :message
 
-  validates_presence_of :item
+  validates :item, presence: true
 end

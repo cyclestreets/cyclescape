@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class SiteConfig < ApplicationRecord
-  TILE_SERVER_TYPES = %w(layers wms).freeze
+  TILE_SERVER_TYPES = %w[layers wms].freeze
 
-  KEY = "SiteConfig".freeze
+  KEY = "SiteConfig"
   validates :default_locale, inclusion: { in: UserProfile.all_locales.values.map(&:locale) }
   validates :timezone, inclusion: { in: ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name } }
   before_save :wipe_cache

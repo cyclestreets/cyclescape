@@ -12,6 +12,6 @@ class Message::PhotosController < Message::BaseController
   end
 
   def permit_params
-    [:base64_photo, :retained_photo, :caption]
+    %i[base64_photo retained_photo caption]
   end
 end

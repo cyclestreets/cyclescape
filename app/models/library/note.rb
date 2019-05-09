@@ -12,9 +12,8 @@
 #
 
 class Library::Note < Library::Component
-
   # Optional reference to a library document
-  belongs_to :document, class_name: 'Library::Document', foreign_key: 'library_document_id'
+  belongs_to :document, class_name: "Library::Document", foreign_key: "library_document_id"
 
   validates :body, presence: true
   validates :url, url: true
@@ -31,12 +30,8 @@ class Library::Note < Library::Component
   end
 
   def title
-    field = read_attribute(:title)
-    if field.blank?
-      body.try(:truncate, 120)
-    else
-      field
-    end
+    field = self[:title]
+    field.presence || body.try(:truncate, 120)
   end
 
   def document?
@@ -44,6 +39,6 @@ class Library::Note < Library::Component
   end
 
   def searchable_text
-    [body, read_attribute(:title)].join(' ')
+    [body, self[:title]].join(" ")
   end
 end

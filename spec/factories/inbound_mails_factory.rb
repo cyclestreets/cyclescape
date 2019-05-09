@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :inbound_mail do
     transient do
       to false
     end
 
-    recipient { to || 'cyclescape@example.com' }
-    raw_message { File.read(raw_email_path('basic')) }
+    recipient { to || "cyclescape@example.com" }
+    raw_message { File.read(raw_email_path("basic")) }
 
     after(:build) do |mail, proxy|
       if proxy.to
@@ -17,35 +19,35 @@ FactoryBot.define do
     end
 
     trait :multipart_text_only do
-      raw_message { File.read(raw_email_path('qp_text_only_multipart'), encoding: 'UTF-8') }
+      raw_message { File.read(raw_email_path("qp_text_only_multipart"), encoding: "UTF-8") }
     end
 
     trait :multipart_iso_8859_1 do
-      raw_message { File.read(raw_email_path('qp_text_only_multipart_iso-8859-1')) }
+      raw_message { File.read(raw_email_path("qp_text_only_multipart_iso-8859-1")) }
     end
 
     trait :with_attached_image do
-      raw_message { File.read(raw_email_path('attached_image')) }
+      raw_message { File.read(raw_email_path("attached_image")) }
     end
 
     trait :with_attached_file do
-      raw_message { File.read(raw_email_path('attached_file')) }
+      raw_message { File.read(raw_email_path("attached_file")) }
     end
 
     trait :encoded_subject do
-      raw_message { File.read(raw_email_path('encoded_subject')) }
+      raw_message { File.read(raw_email_path("encoded_subject")) }
     end
 
     trait :reply_below_quote do
-      raw_message { File.read(raw_email_path('reply_below_quote')) }
+      raw_message { File.read(raw_email_path("reply_below_quote")) }
     end
 
     trait :with_pgp_sig do
-      raw_message { File.read(raw_email_path('pgp_sig')) }
+      raw_message { File.read(raw_email_path("pgp_sig")) }
     end
 
     trait :with_html do
-      raw_message { File.read(raw_email_path('html')) }
+      raw_message { File.read(raw_email_path("html")) }
     end
   end
 end

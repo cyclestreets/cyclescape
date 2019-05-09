@@ -17,7 +17,7 @@
 #
 
 class UserProfile < ApplicationRecord
-  VISIBILITY_OPTIONS = %w(public group).freeze
+  VISIBILITY_OPTIONS = %w[public group].freeze
 
   dragonfly_accessor :picture do
     storage_options :generate_picture_path
@@ -28,10 +28,10 @@ class UserProfile < ApplicationRecord
   Locale = Struct.new(:id, :label, :locale)
   class_attribute :all_locales
   self.all_locales = [
-    Locale.new(0, 'English - UK', 'en-GB'),
-    Locale.new(1, 'Deutsch (Deutschland)', 'de-DE'),
-    Locale.new(2, 'Česká - Česká republika', 'cs-CZ'),
-    Locale.new(3, 'Italiano', 'it'),
+    Locale.new(0, "English - UK", "en-GB"),
+    Locale.new(1, "Deutsch (Deutschland)", "de-DE"),
+    Locale.new(2, "Česká - Česká republika", "cs-CZ"),
+    Locale.new(3, "Italiano", "it")
   ].index_by(&:id).freeze
 
   enum locale: all_locales.values.each_with_object({}).each { |loc, memo| memo[loc.locale] = loc.id }
@@ -44,7 +44,7 @@ class UserProfile < ApplicationRecord
   normalize_attribute :website, with: :url
 
   def picture_thumbnail
-    picture.thumb('50x50>')
+    picture.thumb("50x50>")
   end
 
   def clear
@@ -55,6 +55,6 @@ class UserProfile < ApplicationRecord
 
   def generate_picture_path
     hash = Digest::SHA1.file(picture.path).hexdigest
-    {path: "profile_pictures/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
+    { path: "profile_pictures/#{hash[0..2]}/#{hash[3..5]}/#{hash}" }
   end
 end

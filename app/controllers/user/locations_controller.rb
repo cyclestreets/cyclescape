@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class User::LocationsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def create
     @location = current_user.location || current_user.build_location
@@ -38,7 +37,7 @@ class User::LocationsController < ApplicationController
   def geometry
     @location = current_user.location
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(@location.loc_feature(thumbnail: view_context.image_path('map-icons/m-misc.png'))) }
+      format.json { render json: RGeo::GeoJSON.encode(@location.loc_feature(thumbnail: view_context.image_path("map-icons/m-misc.png"))) }
     end
   end
 

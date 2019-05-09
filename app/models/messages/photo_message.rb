@@ -20,7 +20,7 @@ class PhotoMessage < MessageComponent
   validates :photo, presence: true
 
   def searchable_text
-    [caption, description].join(' ')
+    [caption, description].join(" ")
   end
 
   private

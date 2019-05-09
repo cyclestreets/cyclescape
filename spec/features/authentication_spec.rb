@@ -1,79 +1,81 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe 'Authentication and authorization' do
+require "spec_helper"
+
+describe "Authentication and authorization" do
   let(:credentials) { attributes_for(:user) }
 
-  context 'when not logged in' do
-    it 'should allow access to the home page' do
+  context "when not logged in" do
+    it "should allow access to the home page" do
       visit root_path
       expect(page.status_code).to eq(200)
       expect(page.current_path).to eq(root_path)
     end
 
-    it 'should not allow access to groups and redirect to sign-in' do
+    it "should not allow access to groups and redirect to sign-in" do
       visit admin_groups_path
       expect(page.current_path).to eq(new_user_session_path)
     end
   end
 
-  context 'when visiting a page that requires login' do
+  context "when visiting a page that requires login" do
     let!(:user_details) { attributes_for(:user) }
     let!(:current_user) { create(:user, user_details) }
     let!(:password) { user_details[:password] }
 
-    it 'should redirect you to the original page after login' do
+    it "should redirect you to the original page after login" do
       visit new_issue_path
       expect(page.current_path).to eql(new_user_session_path)
-      fill_in 'Email', with: current_user.email
-      fill_in 'Password', with: password
-      click_button 'Sign in'
+      fill_in "Email", with: current_user.email
+      fill_in "Password", with: password
+      click_button "Sign in"
 
-      expect(page).to have_content(I18n.t('.devise.sessions.signed_in'))
+      expect(page).to have_content(I18n.t(".devise.sessions.signed_in"))
       expect(page.current_path).to eql(new_issue_path)
     end
   end
 
-  context 'when choosing to log in' do
+  context "when choosing to log in" do
     def choose_to_log_in_from(path)
       create(:user, credentials)
       visit path
-      click_link 'Sign in'
-      fill_in 'Email', with: credentials[:email]
-      fill_in 'Password', with: credentials[:password]
-      click_button 'Sign in'
+      click_link "Sign in"
+      fill_in "Email", with: credentials[:email]
+      fill_in "Password", with: credentials[:password]
+      click_button "Sign in"
     end
 
-    it 'should direct you to your dashboard page instead of homepage' do
+    it "should direct you to your dashboard page instead of homepage" do
       choose_to_log_in_from(root_path)
       expect(page.current_path).to eq(dashboard_path)
     end
 
-    it 'should otherwise direct you page to where you started' do
+    it "should otherwise direct you page to where you started" do
       choose_to_log_in_from(issues_path)
       expect(page.current_path).to eq(issues_path)
     end
   end
 
-  describe 'remember subdomains when logging in' do
-    include_context 'signed in as a group member'
+  describe "remember subdomains when logging in" do
+    include_context "signed in as a group member"
     let(:group_url) { "http://#{current_group.short_name}.example.com/" }
 
     def switch_to_group_and_sign_out
-      within '.group-selector' do
+      within ".group-selector" do
         click_on current_group.name
       end
       expect(page.current_url).to eq(group_url)
-      click_on 'Sign out'
+      click_on "Sign out"
       expect(page).to have_no_content(current_user.name)
     end
 
-    it 'should return me to my last-used subdomain' do
+    it "should return me to my last-used subdomain" do
       switch_to_group_and_sign_out
       visit root_path
-      click_link 'Sign in'
-      fill_in 'Email', with: current_user.email
-      fill_in 'Password', with: password
-      click_button 'Sign in'
+      click_link "Sign in"
+      fill_in "Email", with: current_user.email
+      fill_in "Password", with: password
+      click_button "Sign in"
       expect(page.current_url).to eq(dashboard_url(subdomain: current_group.short_name))
     end
 
@@ -81,109 +83,109 @@ describe 'Authentication and authorization' do
       switch_to_group_and_sign_out
       current_group.destroy
       visit root_path
-      click_link 'Sign in'
-      fill_in 'Email', with: current_user.email
-      fill_in 'Password', with: password
-      click_button 'Sign in'
-      expect(page.current_url).to eq(dashboard_url(subdomain: 'www'))
+      click_link "Sign in"
+      fill_in "Email", with: current_user.email
+      fill_in "Password", with: password
+      click_button "Sign in"
+      expect(page.current_url).to eq(dashboard_url(subdomain: "www"))
     end
   end
 
-  it 'should validate bicycle captch' do
+  it "should validate bicycle captch" do
     visit root_path
-    click_link 'Sign up'
-    fill_in 'Full name', with: credentials[:full_name]
-    fill_in 'Email', with: credentials[:email]
-    fill_in 'Password', with: credentials[:password], match: :first
-    fill_in 'Password confirmation', with: credentials[:password]
-    fill_in 'Bicycle Wheels', with: "3"
-    click_button 'Sign up'
-    expect(page).to have_content(I18n.t('.devise.registrations.new.failure'))
+    click_link "Sign up"
+    fill_in "Full name", with: credentials[:full_name]
+    fill_in "Email", with: credentials[:email]
+    fill_in "Password", with: credentials[:password], match: :first
+    fill_in "Password confirmation", with: credentials[:password]
+    fill_in "Bicycle Wheels", with: "3"
+    click_button "Sign up"
+    expect(page).to have_content(I18n.t(".devise.registrations.new.failure"))
   end
 
-  context 'when signing up' do
+  context "when signing up" do
     before do
       visit root_path
-      click_link 'Sign up'
-      fill_in 'Full name', with: credentials[:full_name]
-      fill_in 'Email', with: credentials[:email]
-      fill_in 'Password', with: credentials[:password], match: :first
-      fill_in 'Password confirmation', with: credentials[:password]
-      fill_in I18n.t('formtastic.labels.user.new.bicycle_wheels'), with: " 12 "
+      click_link "Sign up"
+      fill_in "Full name", with: credentials[:full_name]
+      fill_in "Email", with: credentials[:email]
+      fill_in "Password", with: credentials[:password], match: :first
+      fill_in "Password confirmation", with: credentials[:password]
+      fill_in I18n.t("formtastic.labels.user.new.bicycle_wheels"), with: " 12 "
 
-      click_button 'Sign up'
+      click_button "Sign up"
       open_email(credentials[:email])
     end
 
-    it 'should send a confirmation email' do
-      expect { visit_in_email('Confirm my account') }.to change{ all_emails.count }.by(1)
+    it "should send a confirmation email" do
+      expect { visit_in_email("Confirm my account") }.to change { all_emails.count }.by(1)
       email = all_emails.last
       expect(email.to).to include(credentials[:email])
       expect(email.subject).to include("Welcome")
       expect(email.body).to include("Join your local group")
     end
 
-    it 'should direct you to your locations page' do
-      visit_in_email('Confirm my account')
-      fill_in 'Password', with: credentials[:password], match: :first
-      fill_in 'Email', with: credentials[:email]
-      click_button 'Sign in'
+    it "should direct you to your locations page" do
+      visit_in_email("Confirm my account")
+      fill_in "Password", with: credentials[:password], match: :first
+      fill_in "Email", with: credentials[:email]
+      click_button "Sign in"
       expect(page.current_path).to eq(current_user_locations_path)
     end
 
-    it 'should resend your confirmation email, if you ask for it' do
+    it "should resend your confirmation email, if you ask for it" do
       visit new_user_session_path
       click_link "Didn't receive confirmation instructions?"
-      fill_in 'Email', with: credentials[:email]
-      expect { click_button 'Resend confirmation instructions' }.to change{ all_emails.count }.by(1)
+      fill_in "Email", with: credentials[:email]
+      expect { click_button "Resend confirmation instructions" }.to change { all_emails.count }.by(1)
     end
   end
 
-  context 'when closing my account' do
+  context "when closing my account" do
     let!(:user_details) { attributes_for(:user) }
     let!(:current_user) { create(:user, user_details) }
     let!(:password) { user_details[:password] }
 
     def sign_in
       visit new_user_session_path
-      fill_in 'Email', with: current_user.email
-      fill_in 'Password', with: password
-      click_button 'Sign in'
+      fill_in "Email", with: current_user.email
+      fill_in "Password", with: password
+      click_button "Sign in"
     end
 
     def cancel_account
       visit edit_user_registration_path
-      click_on I18n.t('.devise.registrations.edit.cancel_account')
+      click_on I18n.t(".devise.registrations.edit.cancel_account")
     end
 
-    it 'should tell me the account has been cancelled' do
+    it "should tell me the account has been cancelled" do
       sign_in
       cancel_account
       expect(page.current_path).to eq(root_path)
-      expect(page).to have_content(I18n.t('.devise.registrations.destroyed'))
+      expect(page).to have_content(I18n.t(".devise.registrations.destroyed"))
     end
 
-    it 'should log me out' do
+    it "should log me out" do
       sign_in
       cancel_account
       visit dashboard_path
-      expect(page).to have_content('You need to sign in or sign up before continuing.')
+      expect(page).to have_content("You need to sign in or sign up before continuing.")
     end
 
-    it 'should not let me log back in' do
+    it "should not let me log back in" do
       sign_in
       cancel_account
       sign_in
-      expect(page).to have_content(I18n.t('.devise.failure.not_found_in_database'))
+      expect(page).to have_content(I18n.t(".devise.failure.not_found_in_database"))
     end
 
-    it 'should not let me recover my password' do
+    it "should not let me recover my password" do
       sign_in
       cancel_account
       visit new_user_password_path
-      fill_in 'Email', with: user_details[:email]
-      click_on I18n.t('.devise.passwords.new.send_reset_instuctions')
-      expect(page).to have_content 'Email not found'
+      fill_in "Email", with: user_details[:email]
+      click_on I18n.t(".devise.passwords.new.send_reset_instuctions")
+      expect(page).to have_content "Email not found"
     end
   end
 end

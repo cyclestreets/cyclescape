@@ -13,9 +13,7 @@ class Group::MembershipsController < ApplicationController
     @membership = @group.memberships.new permitted_params
 
     if @membership.save
-      if @membership.user.accepted_or_not_invited?
-        Notifications.added_to_group(@membership).deliver_later
-      end
+      Notifications.added_to_group(@membership).deliver_later if @membership.user.accepted_or_not_invited?
       redirect_to group_members_path
     else
       render :new
@@ -57,6 +55,6 @@ class Group::MembershipsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:group_membership).permit :user_id, :role, user_attributes: [:full_name, :email]
+    params.require(:group_membership).permit :user_id, :role, user_attributes: %i[full_name email]
   end
 end

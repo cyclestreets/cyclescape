@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ThreadListDecorator < ApplicationDecorator
-  alias_method :thread, :object
+  alias thread object
 
   def self.decl_auth_context
     :message_threads
@@ -12,15 +12,15 @@ class ThreadListDecorator < ApplicationDecorator
   end
 
   MESSAGE_ICON_MAP = {
-    'photo_message' => 'image',
-    'link_message' => 'link',
-    'deadline_message' => 'cal',
-  }
+    "photo_message" => "image",
+    "link_message" => "link",
+    "deadline_message" => "cal"
+  }.freeze
 
   def latest_activity
     latest = thread.latest_message
-    h.content_tag(:ul, class: 'content-icon-list') do
-      h.content_tag(:li, class: MESSAGE_ICON_MAP.fetch(latest.component_name, 'library_note')) do
+    h.content_tag(:ul, class: "content-icon-list") do
+      h.content_tag(:li, class: MESSAGE_ICON_MAP.fetch(latest.component_name, "library_note")) do
         creator_link = h.link_to_profile(latest.created_by)
         if latest.component_name == "thread_leader_message" && latest.component.withdrawing?
           h.t("dashboards.show.posted.thread_leader_withdrawing")
@@ -39,7 +39,7 @@ class ThreadListDecorator < ApplicationDecorator
     if h.permitted_to? :show, thread
       thread.display_title
     else
-      I18n.t('decorators.thread_list.private_thread_title')
+      I18n.t("decorators.thread_list.private_thread_title")
     end
   end
 
@@ -60,14 +60,14 @@ class ThreadListDecorator < ApplicationDecorator
       # Might be nil
       icon = thread.issue.icon_from_tags
     end
-    icon || 'misc'
+    icon || "misc"
   end
 
   def following_status
-    if h.current_user && h.current_user.subscribed_to_thread?(thread)
-      h.content_tag(:div, class: 'following') do
-        h.concat(h.image_tag('check-checked.png'))
-        h.concat(I18n.t('decorators.thread_list.following'))
+    if h.current_user&.subscribed_to_thread?(thread)
+      h.content_tag(:div, class: "following") do
+        h.concat(h.image_tag("check-checked.png"))
+        h.concat(I18n.t("decorators.thread_list.following"))
       end
     end
   end

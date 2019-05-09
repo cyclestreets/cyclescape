@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BodyFormat
   def html?
     html_format_time = Rails.cache.fetch("html_format_time", expires_in: 1.year) do

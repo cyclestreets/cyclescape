@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 MailProcessor = nil
 
@@ -6,37 +8,36 @@ describe MailboxReader do
   subject { MailboxReader.new(config) }
 
   let(:config) do
-    { host: 'mail.example.com', user_name: 'user@example.com', password: 'secret',
-      authentication: 'PLAIN', mailbox: 'INBOX', mail_processor: 'MailProcessor' }
+    { host: "mail.example.com", user_name: "user@example.com", password: "secret",
+      authentication: "PLAIN", mailbox: "INBOX", mail_processor: "MailProcessor" }
   end
 
-  let(:imap) { double('IMAP connection') }
+  let(:imap) { double("IMAP connection") }
   let(:message) { File.read(raw_email_path) }
 
-  describe '#run' do
+  describe "#run" do
     before do
-      allow(subject).to receive(:fetch_message_ids).and_return([12345])
-      allow(subject).to receive(:fetch_raw_message).with(12345).and_return(message)
-      allow(subject).to receive(:save_message).with(message).and_raise('cannot save')
+      allow(subject).to receive(:fetch_message_ids).and_return([12_345])
+      allow(subject).to receive(:fetch_raw_message).with(12_345).and_return(message)
+      allow(subject).to receive(:save_message).with(message).and_raise("cannot save")
     end
 
-    it 'ensures mail with errors is marked as read' do
-      expect(subject).to receive(:mark_as_seen).with(12345).once
+    it "ensures mail with errors is marked as read" do
+      expect(subject).to receive(:mark_as_seen).with(12_345).once
 
-      expect{ subject.run }.to raise_error RuntimeError
+      expect { subject.run }.to raise_error RuntimeError
     end
 
-    it 'ensures connections are disconnected' do
+    it "ensures connections are disconnected" do
       expect(subject).to receive(:disconnect).once
 
-      expect{ subject.run }.to raise_error SocketError
+      expect { subject.run }.to raise_error SocketError
     end
-
   end
 
-  describe 'saving messages' do
-    describe '#save_message' do
-      it 'should create a saved record from the raw message' do
+  describe "saving messages" do
+    describe "#save_message" do
+      it "should create a saved record from the raw message" do
         record = double
         expect(record).to receive(:save!)
         expect(InboundMail).to receive(:new_from_message) do |arg|
@@ -47,15 +48,15 @@ describe MailboxReader do
       end
     end
 
-    describe '#enqueue' do
+    describe "#enqueue" do
       let(:record) { double(id: 31) }
 
-      it 'should use the configured mail processor' do
+      it "should use the configured mail processor" do
         expect(Resque).to receive(:enqueue).with(MailProcessor, anything)
         subject.enqueue(record)
       end
 
-      it 'should send the message ID' do
+      it "should send the message ID" do
         expect(Resque).to receive(:enqueue).with(anything, 31)
         subject.enqueue(record)
       end

@@ -19,16 +19,15 @@
 #
 
 class GroupMembership < ApplicationRecord
-
-  ALLOWED_ROLES = %w(committee member)
+  ALLOWED_ROLES = %w[committee member].freeze
 
   belongs_to :group
   belongs_to :user, autosave: true
 
   has_one :group_membership_request
 
-  scope :committee, -> { where(role: 'committee') }
-  scope :normal, -> { where(role: 'member') }
+  scope :committee, -> { where(role: "committee") }
+  scope :normal, -> { where(role: "member") }
 
   after_initialize :set_default_role
 
@@ -48,14 +47,14 @@ class GroupMembership < ApplicationRecord
   end
 
   def role=(val)
-    write_attribute(:role, val.downcase)
+    self[:role] = val.downcase
   end
 
   protected
 
   def replace_with_existing_user
     if user
-      existing = User.find_by_email(user.email)
+      existing = User.find_by(email: user.email)
       self.user = existing if existing
     end
     true
@@ -63,14 +62,12 @@ class GroupMembership < ApplicationRecord
 
   def invite_user_if_new
     # includes hack to trigger before_validation on user model
-    if user && user.new_record? && (user.valid? || true) && user.email? && user.full_name?
-      user.invite!
-    end
+    user.invite! if user&.new_record? && (user&.valid? || true) && user&.email? && user&.full_name?
     true
   end
 
   def set_default_role
-    self.role ||= 'member'
+    self.role ||= "member"
   end
 
   def delete_pending_gmrs

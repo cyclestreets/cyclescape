@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :planning_application do
     sequence(:uid) { |n| "a/b/c/#{n}" }

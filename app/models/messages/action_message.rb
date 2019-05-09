@@ -9,4 +9,3 @@ class ActionMessage < MessageComponent
     completing_message.try(:message).try(:approved?)
   end
 end
-

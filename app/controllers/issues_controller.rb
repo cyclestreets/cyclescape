@@ -3,7 +3,7 @@
 class IssuesController < ApplicationController
   include MessageCreator
 
-  filter_access_to [:edit, :update, :destroy], attribute_check: true
+  filter_access_to %i[edit update destroy], attribute_check: true
   protect_from_forgery except: :vote_detail
 
   def index
@@ -17,9 +17,7 @@ class IssuesController < ApplicationController
   end
 
   def show
-    unless request.original_url.end_with?(issue_path(issue))
-      redirect_to issue_url(issue)
-    end
+    redirect_to issue_url(issue) unless request.original_url.end_with?(issue_path(issue))
 
     @issue = IssueDecorator.decorate issue
     set_page_title @issue.title
@@ -37,8 +35,8 @@ class IssuesController < ApplicationController
   def create
     issue_params = permitted_params.merge(created_by: current_user)
     # Something is buggy, Issue.new(photo: "", retained_photo: "") complains the photo isn't valid
-    issue_params.delete(:photo) unless issue_params[:photo].present?
-    issue_params.delete(:retained_photo) unless issue_params[:retained_photo].present?
+    issue_params.delete(:photo) if issue_params[:photo].blank?
+    issue_params.delete(:retained_photo) if issue_params[:retained_photo].blank?
 
     @issue = current_user.issues.new issue_params
     thread = @issue.threads.last
@@ -92,8 +90,8 @@ class IssuesController < ApplicationController
     issues = geom_issue_scope.by_most_recent.limit(50).includes(:created_by)
     issues = issues.intersects_not_covered(bbox.to_geometry) if bbox
 
-    # TODO refactor this into decorater
-    decorated_issues = issues.select_area.sort_by(&:area).map { | issue | issue_feature(IssueDecorator.decorate(issue), bbox) }
+    # TODO: refactor this into decorater
+    decorated_issues = issues.select_area.sort_by(&:area).map { |issue| issue_feature(IssueDecorator.decorate(issue), bbox) }
     collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(decorated_issues)
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection) }
@@ -133,9 +131,10 @@ class IssuesController < ApplicationController
       return centered_issue.location
     end
     return current_user.start_location if current_user && current_user.start_location != SiteConfig.first.nowhere_location
-    return current_group.start_location if current_group && current_group.start_location
+    return current_group.start_location if current_group&.start_location
     return @issues.first.location unless @issues.empty?
-    return SiteConfig.first.nowhere_location
+
+    SiteConfig.first.nowhere_location
   end
 
   def issue_feature(issue, bbox = nil)
@@ -148,7 +147,7 @@ class IssuesController < ApplicationController
     creator_url = if permitted_to? :view_profile, issue.created_by
                     view_context.url_for user_profile_path(issue.created_by)
                   else
-                    '#'
+                    "#"
                   end
 
     issue.loc_feature(thumbnail: issue.medium_icon_path,
@@ -167,6 +166,6 @@ class IssuesController < ApplicationController
 
   def permitted_params
     params.require(:issue).permit :title, :photo, :retained_photo, :loc_json, :tags_string,
-      :description, :deadline, :all_day, :external_url, :planning_application_id, threads_attributes: [:title, :group_id, :privacy]
+                                  :description, :deadline, :all_day, :external_url, :planning_application_id, threads_attributes: %i[title group_id privacy]
   end
 end

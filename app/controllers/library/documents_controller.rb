@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Library::DocumentsController < ApplicationController
-  before_action :load_document, only: [:show, :download, :edit, :update, :destroy]
+  before_action :load_document, only: %i[show download edit update destroy]
 
   def new
     @document = Library::Document.new
@@ -21,7 +21,7 @@ class Library::DocumentsController < ApplicationController
   end
 
   def show
-    @notes = Library::ItemDecorator.decorate_collection(@document.notes.map { |n| n.item })
+    @notes = Library::ItemDecorator.decorate_collection(@document.notes.map(&:item))
     @note = Library::Note.new_on_document @document
     @tag_panel = TagPanelDecorator.new(@document.item, form_url: library_tag_path(@document.item), auth_context: :library_tags)
     @threads = @document.item.threads.is_public.order_by_latest_message.limit 10

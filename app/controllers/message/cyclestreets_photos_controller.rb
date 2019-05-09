@@ -12,6 +12,6 @@ class Message::CyclestreetsPhotosController < Message::BaseController
   end
 
   def permit_params
-    [:photo_url, :caption, :cyclestreets_id, :icon_properties, :loc_json]
+    %i[photo_url caption cyclestreets_id icon_properties loc_json]
   end
 end

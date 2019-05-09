@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe PotentialMember, type: :model do
   let(:group) { build_stubbed :group }
@@ -7,13 +9,13 @@ describe PotentialMember, type: :model do
   it { is_expected.to validate_presence_of(:email_hash) }
 
   it "sets the email hash when email is set" do
-    expect{ subject.email = "me@example.com" }.to change { subject.email_hash }
+    expect { subject.email = "me@example.com" }.to change { subject.email_hash }
   end
 
   it "deals with emails in 'Name <email@example.com>' format" do
     subject.email = "me@example.com"
-    expect{ subject.email = "Me <me@example.com>" }.to_not change { subject.email_hash }
-    expect{ subject.email = "Me <me@another.example.com>" }.to change { subject.email_hash }
+    expect { subject.email = "Me <me@example.com>" }.to_not change { subject.email_hash }
+    expect { subject.email = "Me <me@another.example.com>" }.to change { subject.email_hash }
   end
 
   it "validates the address is valid" do

@@ -1,11 +1,13 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe Route::ConstituencyApi do
   include Rack::Test::Methods
   let(:geojson_response) { RGeo::GeoJSON.decode(last_response.body, json_parser: :json) }
 
-  describe 'GET /' do
-    let(:response_keys) { %w(name) }
+  describe "GET /" do
+    let(:response_keys) { %w[name] }
     let!(:resource) { create :constituency }
 
     before do

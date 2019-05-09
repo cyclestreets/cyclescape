@@ -2,7 +2,7 @@
 
 module Locatable
   extend ActiveSupport::Concern
-  EMPTY_JSON = '{"type":"FeatureCollection","features":[]}'.freeze
+  EMPTY_JSON = '{"type":"FeatureCollection","features":[]}'
 
   included do
     after_create :make_location_valid
@@ -39,7 +39,7 @@ module Locatable
     # define a variant of intersects that doesn't include entirely surrouding polygons
     def intersects_not_covered(loc)
       sanatize_multi_geoms(loc) do |l|
-        intersects(l).where('NOT ST_CoveredBy(?, ST_Envelope(location))', [l])
+        intersects(l).where("NOT ST_CoveredBy(?, ST_Envelope(location))", [l])
       end
     end
 
@@ -56,13 +56,14 @@ module Locatable
     end
 
     def select_area
-      select('*, -ST_Area(location) AS area')
+      select("*, -ST_Area(location) AS area")
     end
 
     private
 
     def sanatize_multi_geoms(l)
-      return none unless l.present?
+      return none if l.blank?
+
       l = l.envelope if l.geometry_type == RGeo::Feature::GeometryCollection
       yield l
     end
@@ -86,13 +87,13 @@ module Locatable
   # Returns the size of the location. Returns 0 for anything other than polygons.
   def size
     if !location.try(:geometry_type)
-      return 0.0
+      0.0
     else
       case location.geometry_type
       when RGeo::Feature::Polygon
-        return location.area.to_f
+        location.area.to_f
       else
-        return 0.0
+        0.0
       end
     end
   end
@@ -101,9 +102,9 @@ module Locatable
   # than a bounding box, for example.
   def size_ratio(geom)
     if geom && geom.geometry_type == RGeo::Feature::Polygon && geom.area > 0
-      return size.to_f / geom.area
+      size.to_f / geom.area
     else
-      return 0.0
+      0.0
     end
   end
 
@@ -117,6 +118,7 @@ module Locatable
     factory = RGeo::Geos.factory(srid: 4326)
     feature = RGeo::GeoJSON.decode(json_str, geo_factory: factory, json_parser: :json)
     return unless feature
+
     geom = feature.try(:geometry)
     self.location = geom || factory.collection(feature.map(&:geometry))
   end
@@ -125,7 +127,7 @@ module Locatable
     if location
       RGeo::GeoJSON.encode(loc_feature).to_json
     else
-      ''
+      ""
     end
   end
 

@@ -21,12 +21,13 @@ module MailerHelper
 
   def message_chain(message, thread)
     return thread_address(thread) if !message || message.id == message.in_reply_to.try(:id)
+
     "#{message_chain(message.in_reply_to, thread)} #{message_address(message)}".strip
   end
 
   # Notifications are sent from a fixed email but with different names
   def user_notification_address(user)
-    ['"', user.name, '" <notifications@', domain, '>'].join
+    ['"', user.name, '" <notifications@', domain, ">"].join
   end
 
   def no_reply_address

@@ -20,33 +20,33 @@
 #
 
 class Group < ApplicationRecord
-  has_many :memberships, class_name: 'GroupMembership', dependent: :destroy
+  has_many :memberships, class_name: "GroupMembership", dependent: :destroy
   has_many :members, through: :memberships, source: :user
-  has_many :membership_requests, class_name: 'GroupMembershipRequest', dependent: :destroy
+  has_many :membership_requests, class_name: "GroupMembershipRequest", dependent: :destroy
   has_many :messages, -> { unscope(:order) }, through: :threads
-  has_many :threads, class_name: 'MessageThread', inverse_of: :group
+  has_many :threads, class_name: "MessageThread", inverse_of: :group
   has_many :potential_members
   has_many :hashtags
 
-  has_one :profile, class_name: 'GroupProfile', dependent: :destroy, inverse_of: :group
-  has_one :prefs, class_name: 'GroupPref', dependent: :destroy
+  has_one :profile, class_name: "GroupProfile", dependent: :destroy, inverse_of: :group
+  has_one :prefs, class_name: "GroupPref", dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
   validates :short_name, presence: true, uniqueness: true, subdomain: true
   validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }
 
-  validates_associated :potential_members, message: ->(_, obj) do
+  validates_associated :potential_members, message: lambda { |_, obj|
     obj[:value].flat_map(&:errors).map(&:to_a).flatten.to_sentence
-  end
+  }
 
   after_create :create_default_profile, unless: :profile
   after_create :create_default_prefs, unless: :prefs
   before_destroy :unlink_threads
 
-  scope :ordered, -> { order('message_threads_count DESC NULLS LAST') }
+  scope :ordered, -> { order("message_threads_count DESC NULLS LAST") }
   scope :enabled, -> { where(disabled_at: nil) }
 
-  normalize_attributes :short_name, with: [:strip, :blank, :downcase]
+  normalize_attributes :short_name, with: %i[strip blank downcase]
 
   def self.from_geo_or_name(geo_name)
     geo_ids = from_geo(geo_name).ids
@@ -56,12 +56,13 @@ class Group < ApplicationRecord
 
   def self.from_geo(geo_name)
     return none if geo_name.blank?
-    connection = Excon.new(SiteConfig.first.geocoder_url || Geocoder::GEO_URL, headers: { 'Accept' => Mime[:json].to_s })
-    rsp = connection.get(query: { q: geo_name, key: SiteConfig.first.geocoder_key || Geocoder::API_KEY})
+
+    connection = Excon.new(SiteConfig.first.geocoder_url || Geocoder::GEO_URL, headers: { "Accept" => Mime[:json].to_s })
+    rsp = connection.get(query: { q: geo_name, key: SiteConfig.first.geocoder_key || Geocoder::API_KEY })
     json = JSON.parse(rsp.body)
     bboxes = json["features"].map { |fe| BboxCoerce.call(fe["properties"]["bbox"]) }
-    joins(:profile).
-      merge(GroupProfile.local.intersects(bboxes.map(&:to_geometry).inject(&:union)))
+    joins(:profile)
+      .merge(GroupProfile.local.intersects(bboxes.map(&:to_geometry).inject(&:union)))
   rescue JSON::ParserError
     none
   end
@@ -69,25 +70,25 @@ class Group < ApplicationRecord
   def active_user_counts(since: 1.year.ago, limit: 15)
     subquery = members.select(:id).to_sql
     user_count = messages.approved.group(:created_by_id)
-      .where("messages.created_at > ?", since)
-      .where("messages.created_by_id IN (#{subquery})")
-      .order("m_cnt DESC")
-      .limit(limit)
-      .pluck("messages.created_by_id, COUNT(*) AS m_cnt")
+                         .where("messages.created_at > ?", since)
+                         .where("messages.created_by_id IN (#{subquery})")
+                         .order("m_cnt DESC")
+                         .limit(limit)
+                         .pluck("messages.created_by_id, COUNT(*) AS m_cnt")
     users = User.where(id: user_count.map(&:first)).index_by(&:id)
     user_count.map do |(user_id, count)|
-      {user: users[user_id], count: count }
+      { user: users[user_id], count: count }
     end
   end
 
   def committee_members
-    members.includes(:memberships).where(group_memberships: {role: 'committee'}).
-      order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
+    members.includes(:memberships).where(group_memberships: { role: "committee" })
+           .order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
   end
 
   def normal_members
-    members.includes(:memberships).where(group_memberships: {role: 'member'})
-      .order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
+    members.includes(:memberships).where(group_memberships: { role: "member" })
+           .order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
   end
 
   def has_member?(user)
@@ -95,7 +96,7 @@ class Group < ApplicationRecord
   end
 
   def recent_issues
-    Issue.intersects(profile.location).order('created_at DESC')
+    Issue.intersects(profile.location).order("created_at DESC")
   end
 
   def to_param
@@ -119,7 +120,7 @@ class Group < ApplicationRecord
   end
 
   def start_location
-    profile && profile.location
+    profile&.location
   end
 
   def thread_privacy_options_for(user)

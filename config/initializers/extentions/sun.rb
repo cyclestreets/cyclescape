@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # config/initializers/extensions/sunspot_strip_control_chars.rb
 module Sunspot
   #
@@ -15,7 +17,7 @@ module Sunspot
       end
 
       def value_for(object)
-        Filter.new( object.send(@attribute_name) ).value
+        Filter.new(object.send(@attribute_name)).value
       end
     end
 
@@ -31,7 +33,7 @@ module Sunspot
       end
 
       def value_for(object)
-        Filter.new( Util.instance_eval_or_call(object, &@block) ).value
+        Filter.new(Util.instance_eval_or_call(object, &@block)).value
       end
     end
 
@@ -43,7 +45,7 @@ module Sunspot
         @value = value
       end
 
-      def value_for(object)
+      def value_for(_object)
         Filter.new(@value).value
       end
     end
@@ -55,14 +57,16 @@ module Sunspot
       def initialize(value)
         @value = value
       end
+
       def value
         strip_control_characters @value
       end
+
       def strip_control_characters(value)
         return value unless value.is_a? String
-        value.gsub(/[\0-\x1f\x7f\u2028\u2029]/,'')
+
+        value.gsub(/[\0-\x1f\x7f\u2028\u2029]/, "")
       end
     end
-
   end
 end

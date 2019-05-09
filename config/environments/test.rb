@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   config.eager_load = false
   # Settings specified here will take precedence over those in config/application.rb
@@ -10,7 +12,7 @@ Rails.application.configure do
 
   # Configure static asset server for tests with Cache-Control for performance
   config.public_file_server.enabled = true
-  config.public_file_server.headers = { 'Cache-Control' => 'public, max-age=3600' }
+  config.public_file_server.headers = { "Cache-Control" => "public, max-age=3600" }
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -27,7 +29,7 @@ Rails.application.configure do
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
-  config.action_mailer.default_url_options = { host: 'www.example.com' }
+  config.action_mailer.default_url_options = { host: "www.example.com" }
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,

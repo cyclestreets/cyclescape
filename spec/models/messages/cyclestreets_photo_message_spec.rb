@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe CyclestreetsPhotoMessage, type: :model do
   it { is_expected.to validate_presence_of(:photo) }

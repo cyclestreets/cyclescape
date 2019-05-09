@@ -17,7 +17,7 @@ class Group::PrefsController < ApplicationController
     else
       set_falsh_message :failure
     end
-    redirect_to action: 'edit'
+    redirect_to action: "edit"
   end
 
   protected

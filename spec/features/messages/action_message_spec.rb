@@ -1,18 +1,19 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe 'Action messages' do
+require "spec_helper"
+
+describe "Action messages" do
   let(:thread) { create(:message_thread, :belongs_to_issue) }
   let(:user) { create :user }
 
   def action_form
-    within('#new-action-message') { yield }
+    within("#new-action-message") { yield }
   end
 
-  def message_form
-  end
+  def message_form; end
 
-  context 'new' do
-    include_context 'signed in as a site user'
+  context "new" do
+    include_context "signed in as a site user"
 
     before do
       user.prefs.update_column(:email_status_id, 1)
@@ -20,13 +21,13 @@ describe 'Action messages' do
       visit thread_path(thread)
     end
 
-    it 'should post a map message and send an email' do
+    it "should post a map message and send an email" do
       action_form do
-        fill_in 'Description', with: 'Something must be done!'
-        click_on 'Add call to action'
+        fill_in "Description", with: "Something must be done!"
+        click_on "Add call to action"
       end
 
-      within('.action-message') do
+      within(".action-message") do
         expect(page).to have_content("Something must be done!")
       end
 
@@ -34,7 +35,7 @@ describe 'Action messages' do
       expect(current_email).to have_subject("[Cyclescape] #{thread.title}")
       expect(current_email).to have_body_text(/Something must be done!/)
 
-      within(first('#new_message')) do
+      within(first("#new_message")) do
         fill_in "message_body", with: "I've done it"
         check "Something must be done!"
         click_on "Post Message"

@@ -1,13 +1,17 @@
-require 'net/imap'
+# frozen_string_literal: true
+
+require "net/imap"
 
 class MailboxProcessor
   attr_accessor :config
 
   def self.mailboxes_config
     return @config if @config
-    config_path = Rails.root + 'config' + 'mailboxes.yml'
-    fail "Mailboxes config file not found at #{config_path}" unless config_path.exist?
-    @config ||= YAML.load(File.read(config_path)).with_indifferent_access
+
+    config_path = Rails.root + "config" + "mailboxes.yml"
+    raise "Mailboxes config file not found at #{config_path}" unless config_path.exist?
+
+    @config ||= YAML.safe_load(File.read(config_path)).with_indifferent_access
   end
 
   def initialize(config = {})
@@ -25,22 +29,22 @@ class MailboxProcessor
   end
 
   def disconnect
-    @imap.disconnect if @imap and not @imap.disconnected?
+    @imap.disconnect if @imap && !@imap.disconnected?
   end
 
-  def fetch_message_ids(mailbox, search_command = 'UNSEEN')
+  def fetch_message_ids(mailbox, search_command = "UNSEEN")
     imap.select(mailbox)
     imap.uid_search(Array(search_command))
   end
 
   def fetch_raw_message(uid)
-    message_text = imap.uid_fetch(uid, ['RFC822']).first.attr['RFC822']
+    message_text = imap.uid_fetch(uid, ["RFC822"]).first.attr["RFC822"]
     # Mark message as unseen in case something goes wrong
-    imap.uid_store(uid, '-FLAGS', [:Seen])
+    imap.uid_store(uid, "-FLAGS", [:Seen])
     message_text
   end
 
   def mark_as_seen(uid)
-    imap.uid_store(uid, '+FLAGS', [:Seen])
+    imap.uid_store(uid, "+FLAGS", [:Seen])
   end
 end

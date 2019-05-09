@@ -1,36 +1,37 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
-  def tweet_button(text:, link:, size: nil, via: 'cyclescape')
+  def tweet_button(text:, link:, size: nil, via: "cyclescape")
     link_to "Tweet", "https://twitter.com/intent/tweet",
-      class: "twitter-share-button",
-      data: { text: text, link: link, size: size, via: via}
+            class: "twitter-share-button",
+            data: { text: text, link: link, size: size, via: via }
   end
 
-  def facebook_like(link, layout: 'button')
+  def facebook_like(link, layout: "button")
     tag(:div, class: "fb-share-button",
-                data: { href: link, layout: layout} )
+              data: { href: link, layout: layout })
   end
 
   def cancel_link(url = { action: :index })
-    content_tag('li', class: 'action link_action cancel') do
-      link_to t('cancel'), url
+    content_tag("li", class: "action link_action cancel") do
+      link_to t("cancel"), url
     end
   end
 
   def user_groups(user = nil)
     user ||= current_user
     return [] if user.nil?
+
     user.groups
   end
 
   # Generate link to user or group profiles
   def link_to_profile(item, options = {})
     case item
-      when User
-        link_to item.name, user_profile_path(item), options
-      when Group
-        link_to item.name, group_path(item), options
+    when User
+      link_to item.name, user_profile_path(item), options
+    when Group
+      link_to item.name, group_path(item), options
     end
   end
 
@@ -40,7 +41,7 @@ module ApplicationHelper
 
   def link_to_github_commit
     commit = Rails.application.config.git_hash
-    url = Rails.application.config.github_project_url + '/commit/' + commit
+    url = Rails.application.config.github_project_url + "/commit/" + commit
     link_to commit, url
   end
 
@@ -49,21 +50,21 @@ module ApplicationHelper
   end
 
   def ajax_spinner_image
-    image_tag 'spinner.gif'
+    image_tag "spinner.gif"
   end
 
   def link_to_sign_in
-    link_to t('sign_in'), new_user_session_path
+    link_to t("sign_in"), new_user_session_path
   end
 
   # Taken from Rails 4, which allows passing a block for content.
   def time_tag(date_or_time, *args, &block)
     options  = args.extract_options!
     format   = options.delete(:format) || :long
-    content  = args.first || I18n.l(date_or_time, :format => format)
+    content  = args.first || I18n.l(date_or_time, format: format)
     datetime = date_or_time.acts_like?(:time) ? date_or_time.xmlschema : date_or_time.iso8601
 
-    content_tag(:time, content, options.reverse_merge(:datetime => datetime), &block)
+    content_tag(:time, content, options.reverse_merge(datetime: datetime), &block)
   end
 
   def time_tag_with_title(date_or_time, &block)
@@ -89,7 +90,7 @@ module ApplicationHelper
 
   def formatted_created_at(item)
     time_tag_with_title(item.created_at) do
-      t('item_created_at', time_ago: time_ago_in_words(item.created_at))
+      t("item_created_at", time_ago: time_ago_in_words(item.created_at))
     end
   end
 
@@ -110,7 +111,7 @@ module ApplicationHelper
   def message_linkify(message)
     body = message.body.dup
 
-    THREAD_FORMAT_MAP.each do |key, value|
+    THREAD_FORMAT_MAP.each do |_key, value|
       threads_found = body.scan(value)
 
       threads_found.each do |t|
@@ -119,7 +120,7 @@ module ApplicationHelper
       end
     end
 
-    ISSUE_FORMAT_MAP.each do |key, value|
+    ISSUE_FORMAT_MAP.each do |_key, value|
       issues_found = body.scan(value)
 
       issues_found.each do |i|
@@ -157,7 +158,7 @@ module ApplicationHelper
 
   def image_edit_json(resource, attribute, opts)
     {
-      resource: resource.class.name.gsub('::','').underscore,
+      resource: resource.class.name.gsub("::", "").underscore,
       url: resource.public_send(attribute)&.url,
       attribute: attribute,
       showzoomer: true,
@@ -166,18 +167,18 @@ module ApplicationHelper
   end
 
   THREAD_FORMAT_MAP = {
-    'thread :number' => /thread \d+/,
-    'thread no :number' => /thread no \d+/,
-    'thread no. :number' => /thread no. \d+/,
-    'thread number :number' => /thread number \d+/,
-    'thread #:number' => /thread #\d+/
+    "thread :number" => /thread \d+/,
+    "thread no :number" => /thread no \d+/,
+    "thread no. :number" => /thread no. \d+/,
+    "thread number :number" => /thread number \d+/,
+    "thread #:number" => /thread #\d+/
   }.freeze
 
   ISSUE_FORMAT_MAP = {
-    'issue :number' => /issue \d+/,
-    'issue no :number' => /issue no \d+/,
-    'issue no. :number' => /issue no. \d+/,
-    'issue number :number' => /issue number \d+/,
-    'issue #:number' => /issue #\d+/
+    "issue :number" => /issue \d+/,
+    "issue no :number" => /issue no \d+/,
+    "issue no. :number" => /issue no. \d+/,
+    "issue number :number" => /issue number \d+/,
+    "issue #:number" => /issue #\d+/
   }.freeze
 end

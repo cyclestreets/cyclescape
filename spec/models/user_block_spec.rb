@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 RSpec.describe UserBlock, type: :model do
   let(:current_user) { create :user }
@@ -10,8 +12,8 @@ RSpec.describe UserBlock, type: :model do
     end
 
     it "neither user can message the other" do
-      expect(Authorization::Engine.instance.permit? :send_private_message, { object: other_user, user: current_user }).to eq(false)
-      expect(Authorization::Engine.instance.permit? :send_private_message, { object: current_user, user: other_user }).to eq(false)
+      expect(Authorization::Engine.instance.permit?(:send_private_message, object: other_user, user: current_user)).to eq(false)
+      expect(Authorization::Engine.instance.permit?(:send_private_message, object: current_user, user: other_user)).to eq(false)
     end
   end
 end

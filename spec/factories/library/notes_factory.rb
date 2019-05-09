@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: library_notes
@@ -10,7 +12,7 @@
 #
 
 FactoryBot.define do
-  factory :library_note, class: 'Library::Note' do
+  factory :library_note, class: "Library::Note" do
     sequence(:title) { |n| "Library note #{n}" }
     body "Peter: I just bought a giant room full of gold coins that I'm going to dive into like Scrooge McDuck."
     created_by { FactoryBot.create(:user) }
@@ -25,6 +27,6 @@ FactoryBot.define do
 
     factory :library_note_with_document, traits: [:with_document]
 
-    after(:create) { |note| note.run_callbacks(:commit)}
+    after(:create) { |note| note.run_callbacks(:commit) }
   end
 end

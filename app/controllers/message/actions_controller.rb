@@ -11,4 +11,3 @@ class Message::ActionsController < Message::BaseController
     [:description]
   end
 end
-

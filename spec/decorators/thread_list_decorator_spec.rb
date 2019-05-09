@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 Dir[Rails.root.join("app", "models", "messages", "**", "*.rb")].each { |f| require f }
 

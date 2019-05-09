@@ -17,9 +17,7 @@ class SearchUpdater
     PlanningApplication.transaction do
       PlanningApplication.find_each do |pa|
         new_relavant = pa.calculate_relevant(planning_filters)
-        if pa.relevant != new_relavant
-          pa.update(relevant: new_relavant)
-        end
+        pa.update(relevant: new_relavant) if pa.relevant != new_relavant
       end
     end
   end

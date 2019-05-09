@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 class PlanningApplicationsController < ApplicationController
-  before_action :set_planning_application, only: [:show, :show_uid, :geometry]
-  respond_to :js, only: [:hide, :unhide]
+  before_action :set_planning_application, only: %i[show show_uid geometry]
+  respond_to :js, only: %i[hide unhide]
 
-  def show
-  end
+  def show; end
 
   def geometry
     if @planning_application.location
@@ -29,7 +28,7 @@ class PlanningApplicationsController < ApplicationController
 
   def hide
     planning_application = PlanningApplication.find params[:id]
-    hide_vote = planning_application.hide_votes.new.tap {|pl| pl.user = current_user}
+    hide_vote = planning_application.hide_votes.new.tap { |pl| pl.user = current_user }
     hide_vote.save
 
     @planning_application = PlanningApplicationDecorator.decorate planning_application.reload
@@ -42,7 +41,7 @@ class PlanningApplicationsController < ApplicationController
 
   def unhide
     planning_application = PlanningApplication.find params[:id]
-    planning_application.hide_votes.find_by_user_id(current_user.id).destroy
+    planning_application.hide_votes.find_by(user_id: current_user.id).destroy
 
     @planning_application = PlanningApplicationDecorator.decorate planning_application.reload
 
@@ -64,6 +63,6 @@ class PlanningApplicationsController < ApplicationController
   end
 
   def planning_application_feature(planning_application)
-    planning_application.loc_feature({ thumbnail: planning_application.medium_icon_path})
+    planning_application.loc_feature(thumbnail: planning_application.medium_icon_path)
   end
 end

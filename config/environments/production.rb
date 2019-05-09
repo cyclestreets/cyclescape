@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   config.action_dispatch.rack_cache = true
   config.eager_load = true
@@ -30,10 +32,10 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   config.log_level = :info
-  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", 'weekly')
+  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", "weekly")
   config.lograge.enabled = true
   config.lograge.custom_options = lambda do |event|
-    exceptions = %w(controller action format id)
+    exceptions = %w[controller action format id]
     {
       params: event.payload[:params].except(*exceptions)
     }

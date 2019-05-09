@@ -1,44 +1,46 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe UserLocation do
-  describe 'newly created' do
+  describe "newly created" do
     subject { create(:user_location) }
 
-    it 'must have a user' do
+    it "must have a user" do
       expect(subject.user).to be_valid
     end
 
-    it 'should have a geojson string' do
+    it "should have a geojson string" do
       expect(subject.loc_json).to be_a(String)
       expect(subject.loc_json).to eql(RGeo::GeoJSON.encode(RGeo::GeoJSON::Feature.new(subject.location)).to_json)
     end
   end
 
-  describe 'to be valid' do
+  describe "to be valid" do
     subject { build(:user_location) }
 
-    it 'must have a user' do
+    it "must have a user" do
       subject.user = nil
       expect(subject).not_to be_valid
     end
 
-    it 'must have a location' do
+    it "must have a location" do
       subject.location = nil
       expect(subject).not_to be_valid
     end
 
-    it 'must have a non empty location' do
+    it "must have a non empty location" do
       subject.loc_json = "{\"type\":\"FeatureCollection\",\"features\":[]}"
       expect(subject).not_to be_valid
     end
 
-    it 'must return an empty geojson string when no location' do
+    it "must return an empty geojson string when no location" do
       subject.location = nil
       expect(subject.loc_json).to be_a(String)
-      expect(subject.loc_json).to eq('')
+      expect(subject.loc_json).to eq("")
     end
 
-    it 'should accept a valid geojson string' do
+    it "should accept a valid geojson string" do
       subject.location = nil
       expect(subject).not_to be_valid
       subject.loc_json = '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}'
@@ -47,15 +49,15 @@ describe UserLocation do
       expect(subject.location.y).to eql(52.27)
     end
 
-    it 'should ignore a bogus geojson string' do
-      subject.loc_json = 'Garbage'
+    it "should ignore a bogus geojson string" do
+      subject.loc_json = "Garbage"
       expect(subject).to be_valid
     end
   end
 
   describe "buffered" do
-    let(:line) { 'LINESTRING (0 0, 0 2)' }
-    let(:polygon) { 'POLYGON ((0 0, 0 0.1, 0.1 0.1, 0.1 0, 0 0))' }
+    let(:line) { "LINESTRING (0 0, 0 2)" }
+    let(:polygon) { "POLYGON ((0 0, 0 0.1, 0.1 0.1, 0.1 0, 0 0))" }
     let(:odd_polygon) { "POLYGON ((0.12258630664064392 52.215823843772895, 0.29579263598633143 52.30439790611968, 0.1074801054687581 52.16267870598888, 0.10593515307618633 52.21603419328302, 0.1057634916992389 52.215718668644016, 0.12258630664064392 52.215823843772895)) " }
     let(:geom_collection) do
       "GEOMETRYCOLLECTION (#{line}, #{polygon})"

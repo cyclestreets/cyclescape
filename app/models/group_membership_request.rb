@@ -24,15 +24,14 @@ class GroupMembershipRequest < ApplicationRecord
 
   belongs_to :group
   belongs_to :user
-  belongs_to :actioned_by, class_name: 'User'
+  belongs_to :actioned_by, class_name: "User"
   belongs_to :group_membership
 
   validates :user, presence: true
   validates :group, presence: true
   validates :user, uniqueness: { scope: :group_id }
 
-  aasm column: 'status' do
-
+  aasm column: "status" do
     state :pending, initial: true
     state :confirmed, before_enter: :create_membership
     state :rejected
@@ -54,6 +53,7 @@ class GroupMembershipRequest < ApplicationRecord
   def create_membership
     user.approve!
     return true if user.groups.include?(group)
+
     create_group_membership!(group: group, user: user, role: "member")
   end
 end

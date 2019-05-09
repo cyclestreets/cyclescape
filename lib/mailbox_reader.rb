@@ -1,4 +1,6 @@
-require 'net/imap'
+# frozen_string_literal: true
+
+require "net/imap"
 
 class MailboxReader < MailboxProcessor
   def run

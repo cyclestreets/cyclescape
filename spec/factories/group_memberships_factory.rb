@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :group_membership do
     transient do
@@ -11,10 +13,10 @@ FactoryBot.define do
       end
     end
 
-    role 'member'
+    role "member"
 
     trait :committee do
-      role 'committee'
+      role "committee"
     end
 
     # Site admin but not committee member
@@ -26,7 +28,7 @@ FactoryBot.define do
     # Committee member
     factory :brian_at_quahogcc do
       association :group, factory: :quahogcc
-      user { FactoryBot.create(:brian) }  # Needs to already exist otherwise invitation will be sent
+      user { FactoryBot.create(:brian) } # Needs to already exist otherwise invitation will be sent
       committee
     end
 

@@ -1,13 +1,15 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe Route::MessageApi do
   include Rack::Test::Methods
 
-  describe 'GET /' do
+  describe "GET /" do
     let(:response_keys) do
-      [
-        "id", "body", "created_at",
-        "in_reply_to_id", "thread_id", "updated_at", "public_token"
+      %w[
+        id body created_at
+        in_reply_to_id thread_id updated_at public_token
       ]
     end
     let!(:resource) { create :message }

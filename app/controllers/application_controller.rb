@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   around_action :set_time_zone
   before_action :load_group_from_subdomain
   before_action :set_page_title
-  before_action :set_last_seen_at, if: proc { |p| user_signed_in? && (session[:last_seen_at] == nil || session[:last_seen_at] < 15.minutes.ago) }
+  before_action :set_last_seen_at, if: proc { |_p| user_signed_in? && (session[:last_seen_at].nil? || session[:last_seen_at] < 15.minutes.ago) }
   after_action :remember_current_group
   after_action :store_location
   layout :set_xhr_layout
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
   # ... and we need to make sure they go back to an http page, so that non-https maps can load.
   def after_sign_in_path_for(resource_or_scope)
     s = stored_location_for(resource_or_scope) # nb returns and deletes
-    if s && s[0] == '/' && s != '/'
+    if s && s[0] == "/" && s != "/"
       s.slice!(0) # remove the leading slash
       if current_user.remembered_group?
         # is there a cleaner way than using root_url?
@@ -54,24 +54,24 @@ class ApplicationController < ActionController::Base
   # continuously store the location, for redirecting after login
   def store_location
     if request.get? && request.format.html? && !request.xhr? && !devise_controller?
-      session[:"user_return_to"] = request.fullpath
+      session[:user_return_to] = request.fullpath
     end
   end
 
-  def after_sign_out_path_for(resource_or_scope)
-    root_url(protocol: 'http')
+  def after_sign_out_path_for(_resource_or_scope)
+    root_url(protocol: "http")
   end
 
   def no_disabled_users
     if current_user.present? && current_user.disabled_at?
       sign_out current_user
-      redirect_to root_path, alert: t('application.account_disabled')
+      redirect_to root_path, alert: t("application.account_disabled")
     end
   end
 
   def set_locale
     I18n.locale = current_user.try(:profile).try(:locale) ||
-      http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
+                  http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
   end
 
   def set_auth_user
@@ -79,15 +79,13 @@ class ApplicationController < ActionController::Base
   end
 
   def set_xhr_layout
-    if request.xhr? then nil else 'application' end
+    request.xhr? ? nil : "application"
   end
 
   def load_group_from_subdomain
     if SubdomainConstraint.matches?(request)
-      @current_group = Group.find_by_short_name(request.subdomain.split(".")[0])
-      unless @current_group
-        redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www"))
-      end
+      @current_group = Group.find_by(short_name: request.subdomain.split(".")[0])
+      redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www")) unless @current_group
     end
   end
 
@@ -95,45 +93,38 @@ class ApplicationController < ActionController::Base
     @page_description = ActionView::Base.full_sanitizer.sanitize(description, tags: [])
   end
 
-  def page_description
-    @page_description
-  end
+  attr_reader :page_description
   helper_method :page_description
 
   def set_page_image(image = nil)
     @page_image = image
   end
 
-  def page_image
-    @page_image
-  end
+  attr_reader :page_image
   helper_method :page_image
 
   def set_page_title(title = nil, value = nil)
-    key = "#{controller_path.tr("/", ".")}.#{params[:action]}.title"
-    page_title = title || I18n.translate(key, (value || { default: '' }))
+    key = "#{controller_path.tr('/', '.')}.#{params[:action]}.title"
+    page_title = title || I18n.translate(key, (value || { default: "" }))
     app_title = @site_config.application_name
-    @page_title = page_title == '' ? app_title : "#{page_title} - #{app_title}"
+    @page_title = page_title == "" ? app_title : "#{page_title} - #{app_title}"
   end
 
-  def page_title
-    @page_title
-  end
+  attr_reader :page_title
   helper_method :page_title
 
   def group_subdomain?(group = nil)
-    !request.subdomain.blank? && request.subdomain.split(".")[0] == group
+    request.subdomain.present? && request.subdomain.split(".")[0] == group
   end
 
-  def current_group
-    @current_group
-  end
+  attr_reader :current_group
   helper_method :current_group
 
   def remember_current_group
     return unless current_user
     # Poor man's skip_filter to avoid a new Devise-inherited controller
-    return if params[:controller] == 'devise/sessions'
+    return if params[:controller] == "devise/sessions"
+
     current_user.update_remembered_group(current_group)
   end
 
@@ -141,15 +132,15 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       respond_to do |format|
         format.html { authenticate_user! }
-        format.js { render 'shared/permission_denied', status: :unauthorized }
+        format.js { render "shared/permission_denied", status: :unauthorized }
       end
     else
-      render 'shared/permission_denied', status: :unauthorized
+      render "shared/permission_denied", status: :unauthorized
     end
   end
 
   def set_flash_message(type, options = {})
-    flash_key = if type == :success then :notice else :alert end
+    flash_key = type == :success ? :notice : :alert
     options.reverse_merge!(scope: "#{controller_path.gsub('/', '.')}.#{action_name}")
     flash[flash_key] = I18n.t(type, options)
   end
@@ -157,7 +148,8 @@ class ApplicationController < ActionController::Base
   # A method to convert an openlayers-format bbox string into an rgeo bbox object
   def bbox_from_string(string, factory)
     return unless string
-    minlon, minlat, maxlon, maxlat = string.split(',').collect(&:to_f)
+
+    minlon, minlat, maxlon, maxlat = string.split(",").collect(&:to_f)
     bbox = RGeo::Cartesian::BoundingBox.new(factory)
     bbox.add(factory.point(minlon, minlat)).add(factory.point(maxlon, maxlat))
   end
@@ -174,6 +166,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_time_zone(&block)
-    Time.use_zone(current_user.try(:time_zone) || @site_config.try(:time_zone) || 'London', &block)
+    Time.use_zone(current_user.try(:time_zone) || @site_config.try(:time_zone) || "London", &block)
   end
 end

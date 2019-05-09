@@ -1,4 +1,6 @@
-require 'yaml'
+# frozen_string_literal: true
+
+require "yaml"
 
 path = File.expand_path("schedule.yml", File.dirname(__FILE__))
 config = {}
@@ -8,7 +10,7 @@ elsif Rails.env.production?
   raise "The schedule.yml is missing, in production it must be present"
 end
 
-env(:PATH, "#{ENV['PATH']}:/usr/local/bin:#{config["path"]}") if config["path"]
+env(:PATH, "#{ENV['PATH']}:/usr/local/bin:#{config['path']}") if config["path"]
 env(:HOME, config["home"]) if config["home"]
 env(:MAILTO, config["error_email"]) if config["error_email"]
 
@@ -34,22 +36,22 @@ end
 # To get the past 6 months run this
 # (1..180).step(15).each {|n_day| PlanningApplicationWorker.new(n_day.days.ago.to_date).process! }
 
-every 1.day, at: '1:02 am' do
+every 1.day, at: "1:02 am" do
   rake "scheduled:new_planning_applications"
 end
 
-every 1.day, at: '2:02 am' do
+every 1.day, at: "2:02 am" do
   rake "scheduled:remove_old_planning_applications"
 end
 
-every 1.day, at: '6:55 am' do
+every 1.day, at: "6:55 am" do
   rake "scheduled:issue_upcoming_deadlines"
 end
 
-every 1.day, at: '7:05 am' do
+every 1.day, at: "7:05 am" do
   rake "scheduled:upcoming_deadlines"
 end
 
-every 1.day, at: '6:50 am' do
+every 1.day, at: "6:50 am" do
   rake "scheduled:email_user_digests"
 end

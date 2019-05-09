@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: library_documents
@@ -11,7 +13,7 @@
 #
 
 FactoryBot.define do
-  factory :library_document, class: 'Library::Document' do
+  factory :library_document, class: "Library::Document" do
     item { FactoryBot.build(:library_item) }
     sequence(:title) { |n| "Document #{n}" }
     file { Pathname.new(pdf_document_path) }
@@ -24,6 +26,6 @@ FactoryBot.define do
       file { Pathname.new(word_document_path) }
     end
 
-    after(:create) { |doc| doc.run_callbacks(:commit)}
+    after(:create) { |doc| doc.run_callbacks(:commit) }
   end
 end

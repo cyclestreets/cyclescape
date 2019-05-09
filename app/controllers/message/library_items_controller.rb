@@ -2,6 +2,7 @@
 
 class Message::LibraryItemsController < Message::BaseController
   # NB I can't see if this is cntrl is actually used...
+
   protected
 
   def resource_class

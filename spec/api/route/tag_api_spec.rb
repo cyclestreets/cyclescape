@@ -1,10 +1,12 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe Route::TagApi do
   include Rack::Test::Methods
 
-  describe 'GET /' do
-    let(:response_keys) { %w(icon id name tag_count url) }
+  describe "GET /" do
+    let(:response_keys) { %w[icon id name tag_count url] }
     let!(:resource) { create :tag }
 
     before do

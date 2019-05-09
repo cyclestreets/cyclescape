@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 authorization do
   role :root do
     has_omnipotence
@@ -6,33 +8,33 @@ authorization do
   role :admin do
     includes :member
     has_permission_on :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
-    has_permission_on :admin_groups, to: [:manage, :disable, :enable]
+    has_permission_on :admin_groups, to: %i[manage disable enable]
     has_permission_on :group_requests do
-      to [:index, :review, :confirm, :reject, :destroy]
+      to %i[index review confirm reject destroy]
     end
-    has_permission_on :admin_users, to: [:manage, :approve]
-    has_permission_on :admin_user_locations, to: [:manage, :geometry, :combined_geometry]
+    has_permission_on :admin_users, to: %i[manage approve]
+    has_permission_on :admin_user_locations, to: %i[manage geometry combined_geometry]
     has_permission_on :admin_home, to: :view
     has_permission_on :admin_message_moderations, to: :view
     has_permission_on :admin_stats, to: :view
     has_permission_on :admin_planning_filters, to: :manage
     has_permission_on :admin_site_configs, to: :manage
     has_permission_on :admin_templates, to: :show
-    has_permission_on :issues, to: [:edit, :update, :destroy]
-    has_permission_on :library_documents, :library_notes, to: [:edit, :update]
+    has_permission_on :issues, to: %i[edit update destroy]
+    has_permission_on :library_documents, :library_notes, to: %i[edit update]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :manage
-    has_permission_on :messages, to: [:censor, :approve, :reject]
+    has_permission_on :messages, to: %i[censor approve reject]
     has_permission_on :site_comments, to: :manage
     has_permission_on :user_prefs, :user_profiles, to: :manage
-    has_permission_on :users, to: [:view_profile, :view_full_name]
-    has_permission_on :rails_mailers, to: [:view, :index, :preview]
+    has_permission_on :users, to: %i[view_profile view_full_name]
+    has_permission_on :rails_mailers, to: %i[view index preview]
   end
 
   role :member do
     includes :guest
     has_permission_on :dashboards, to: [:show]
     has_permission_on :group_requests do
-      to [:new, :create]
+      to %i[new create]
     end
     has_permission_on :group_requests do
       to :cancel
@@ -52,18 +54,18 @@ authorization do
     end
 
     has_permission_on :group_potential_members do
-      to [:new, :create]
+      to %i[new create]
       if_attribute committee_members: contains { user }
     end
     has_permission_on :group_membership_requests do
-      to [:new, :create]
+      to %i[new create]
     end
     has_permission_on :group_membership_requests do
       to :cancel
       if_attribute user: is { user }
     end
     has_permission_on :group_membership_requests do
-      to [:index, :review, :confirm, :reject]
+      to %i[index review confirm reject]
       if_attribute committee_members: contains { user }
     end
     has_permission_on :group_prefs do
@@ -79,22 +81,22 @@ authorization do
       if_attribute committee_members: contains { user }
     end
 
-    has_permission_on :issues, to: [:new, :create, :vote_up, :vote_clear]
+    has_permission_on :issues, to: %i[new create vote_up vote_clear]
     has_permission_on :issues do
-      to [:edit, :update]
+      to %i[edit update]
       if_attribute created_by: is { user }
     end
     has_permission_on :issue_tags, to: [:update]
-    has_permission_on :messages, to: [:new, :create, :vote_up, :vote_clear]
-    has_permission_on :message_library_notes, to: [:new, :create]
-    has_permission_on :message_library_documents, to: [:new, :create]
-    has_permission_on :issue_message_threads, to: [:new, :create]
+    has_permission_on :messages, to: %i[new create vote_up vote_clear]
+    has_permission_on :message_library_notes, to: %i[new create]
+    has_permission_on :message_library_documents, to: %i[new create]
+    has_permission_on :issue_message_threads, to: %i[new create]
     has_permission_on :group_message_threads do
-      to [:new, :create]
+      to %i[new create]
       if_attribute group: is_in { user.groups }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
-      to [:edit, :update]
+      to %i[edit update]
       if_attribute group_committee_members: contains { user }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
@@ -124,11 +126,11 @@ authorization do
     end
 
     has_permission_on :messages do
-      to [:approve, :reject]
+      to %i[approve reject]
       if_attribute thread: { group_committee_members: contains { user } }
     end
 
-    has_permission_on :message_thread_subscriptions, to: [:destroy, :edit] do
+    has_permission_on :message_thread_subscriptions, to: %i[destroy edit] do
       if_attribute user: is { user }
     end
     has_permission_on :message_thread_subscriptions do
@@ -144,7 +146,7 @@ authorization do
       if_attribute thread: { private_to_committee?: true, group_committee_members: contains { user } }
     end
     has_permission_on :message_thread_tags, to: :update
-    has_permission_on :message_thread_user_priorities, to: [:create, :update]
+    has_permission_on :message_thread_user_priorities, to: %i[create update]
     has_permission_on [:message_thread_leaders], join_by: :and do
       to [:create]
       if_attribute subscribers: contains { user }, closed: false
@@ -152,17 +154,17 @@ authorization do
     has_permission_on :message_photos, :message_links, :message_deadlines,
                       :message_library_items, :message_documents, :message_street_views,
                       :message_cyclestreets_photos, :message_maps,
-                      :message_actions, to: [:create, :view]
-    has_permission_on :libraries, :library_documents, :library_notes, to: [:index, :new, :create, :show]
+                      :message_actions, to: %i[create view]
+    has_permission_on :libraries, :library_documents, :library_notes, to: %i[index new create show]
     has_permission_on :library_documents, :library_notes do
-      to [:edit, :update]
+      to %i[edit update]
       if_attribute created_by: is { user }
     end
 
     has_permission_on :library_tags, to: :update
-    has_permission_on :planning_applications, to: [:view, :geometry, :all_geometries, :search, :show_uid, :hide, :unhide]
-    has_permission_on :planning_application_issues, to: [:new, :create]
-    has_permission_on :user_locations, to: [:manage, :geometry, :combined_geometry, :subscribe_to_threads]
+    has_permission_on :planning_applications, to: %i[view geometry all_geometries search show_uid hide unhide]
+    has_permission_on :planning_application_issues, to: %i[new create]
+    has_permission_on :user_locations, to: %i[manage geometry combined_geometry subscribe_to_threads]
     has_permission_on :user_prefs do
       to :manage
       if_attribute id: is { user.id }
@@ -188,9 +190,9 @@ authorization do
     end
     has_permission_on :users, to: :view_profile do
       if_permitted_to :view_full_name
-      if_attribute profile: { visibility: 'public' }
+      if_attribute profile: { visibility: "public" }
     end
-    has_permission_on :users_private_message_threads, to: [:new, :create] do
+    has_permission_on :users_private_message_threads, to: %i[new create] do
       if_permitted_to :view_full_name
       if_attribute id: is_not { user.id }
     end
@@ -202,33 +204,33 @@ authorization do
   role :guest do
     has_permission_on :users do
       to :view_profile
-      if_attribute profile: { visibility: 'public' }
+      if_attribute profile: { visibility: "public" }
     end
-    has_permission_on :dashboards, to: [:search, :deadlines]
+    has_permission_on :dashboards, to: %i[search deadlines]
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
                       :devise_invitations, :devise_passwords, :devise_invitable_registrations, :users_registrations, to: :manage
     has_permission_on :home, to: :show
-    has_permission_on :groups, to: [:view, :all_geometries, :search]
-    has_permission_on :group_profiles, to: [:view, :geometry]
-    has_permission_on :issues, to: [:show, :index, :geometry, :all_geometries, :search, :vote_detail]
+    has_permission_on :groups, to: %i[view all_geometries search]
+    has_permission_on :group_profiles, to: %i[view geometry]
+    has_permission_on :issues, to: %i[show index geometry all_geometries search vote_detail]
 
     has_permission_on :issue_photos, to: [:show]
-    has_permission_on :libraries, :library_documents, :library_notes, to: [:view, :search, :recent]
+    has_permission_on :libraries, :library_documents, :library_notes, to: %i[view search recent]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show
       if_attribute public?: is { true }
     end
-    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: [:index, :search]
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: %i[index search]
     has_permission_on :message_photos, to: :show
     has_permission_on :pages, to: :show
     has_permission_on :api_v1_issues, to: :index
-    has_permission_on :site_comments, to: [:new, :create]
-    has_permission_on :tags, to: [:show, :autocomplete_tag_name, :index]
+    has_permission_on :site_comments, to: %i[new create]
+    has_permission_on :tags, to: %i[show autocomplete_tag_name index]
     has_permission_on :user_profiles, to: :view do
       if_permitted_to :view_profile
     end
     has_permission_on :group_hashtags do
-      to [:index, :show]
+      to %i[index show]
     end
   end
 end

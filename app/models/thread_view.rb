@@ -17,7 +17,7 @@
 
 class ThreadView < ApplicationRecord
   belongs_to :user, inverse_of: :thread_views
-  belongs_to :thread, class_name: 'MessageThread'
+  belongs_to :thread, class_name: "MessageThread"
 
   validates :user, presence: true
   validates :thread, presence: true

@@ -23,10 +23,10 @@ class UserThreadPriority < ApplicationRecord
                  medium: 6,
                  low: 3,
                  very_low: 1,
-                 nil: ''}
+                 nil: "" }.freeze
 
   belongs_to :user
-  belongs_to :thread, class_name: 'MessageThread', inverse_of: :user_priorities
+  belongs_to :thread, class_name: "MessageThread", inverse_of: :user_priorities
 
   validates :priority, inclusion: 1..10, allow_nil: true
   validates :user, presence: true

@@ -29,5 +29,4 @@ class Issue::MessageThreadsController < MessageThreadsController
   def issue
     @issue ||= Issue.find params[:issue_id]
   end
-
 end

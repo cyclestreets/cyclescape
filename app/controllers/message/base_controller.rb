@@ -8,7 +8,7 @@ class Message::BaseController < MessagesController
 
   def check_reason
     # Can't really check for spam with non-text messages
-    'not_approved' unless current_user.approved?
+    "not_approved" unless current_user.approved?
   end
 
   def message

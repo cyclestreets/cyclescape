@@ -1,11 +1,12 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 RSpec.describe GroupRequestsController, type: :controller do
-
   let(:valid_attributes) { attributes_for(:group_request) }
   let(:group_request)    { create(:group_request) }
 
-  context 'as a site user' do
+  context "as a site user" do
     let(:user) { create(:user) }
 
     before do
@@ -14,9 +15,9 @@ RSpec.describe GroupRequestsController, type: :controller do
 
     describe "POST #create" do
       it "creates a new GroupRequest" do
-        expect {
+        expect do
           post :create, params: { group_request: valid_attributes }
-        }.to change(GroupRequest, :count).by(1)
+        end.to change(GroupRequest, :count).by(1)
       end
 
       context "with valid params" do
@@ -25,18 +26,18 @@ RSpec.describe GroupRequestsController, type: :controller do
         end
 
         it "redirects to the root" do
-          expect(response).to redirect_to('/')
+          expect(response).to redirect_to("/")
         end
 
-        it 'sends an email to all admins' do
+        it "sends an email to all admins" do
           post :create, params: { group_request: valid_attributes }
           mail = ActionMailer::Base.deliveries.last
 
-          expect(mail.subject).to eq(I18n.t('mailers.notifications.new_group_request.subject',
+          expect(mail.subject).to eq(I18n.t("mailers.notifications.new_group_request.subject",
                                             group_name: valid_attributes[:name],
                                             user_name: user.name,
                                             application_name: SiteConfig.first.application_name))
-          expect(mail.to).to include('root@cyclescape.org')
+          expect(mail.to).to include("root@cyclescape.org")
         end
       end
     end
@@ -49,7 +50,7 @@ RSpec.describe GroupRequestsController, type: :controller do
     end
   end
 
-  context 'as a site admin with a group request' do
+  context "as a site admin with a group request" do
     let(:admin) { create(:user, :admin) }
 
     before do
@@ -73,56 +74,54 @@ RSpec.describe GroupRequestsController, type: :controller do
 
     describe "PUT #reject" do
       before do
-        post :reject, params: { id: group_request.to_param, group_request: {rejection_message: 'Sorry!'} }
-      end
-
-      it 'sets the flash' do
-        expect(flash[:notice]).to be_present
-      end
-
-      it 'emails the requester' do
-        mail = ActionMailer::Base.deliveries.last
-
-        expect(mail.subject).to eq(I18n.t('mailers.notifications.group_request_rejected.subject',
-                                          group_request_name: group_request.name,
-                                          application_name: SiteConfig.first.application_name))
-
-        expect(mail.to.first).to eq(group_request.user.email)
-        expect(mail.body).to include('Sorry!')
-      end
-
-    end
-
-    describe "PUT #confirm" do
-      before do
-        post :confirm, params: { :id => group_request.to_param }
+        post :reject, params: { id: group_request.to_param, group_request: { rejection_message: "Sorry!" } }
       end
 
       it "sets the flash" do
         expect(flash[:notice]).to be_present
       end
 
-      it 'emails the new groups owner' do
+      it "emails the requester" do
         mail = ActionMailer::Base.deliveries.last
 
-        expect(mail.subject).to eq(I18n.t('mailers.notifications.group_request_confirmed.subject',
+        expect(mail.subject).to eq(I18n.t("mailers.notifications.group_request_rejected.subject",
+                                          group_request_name: group_request.name,
+                                          application_name: SiteConfig.first.application_name))
+
+        expect(mail.to.first).to eq(group_request.user.email)
+        expect(mail.body).to include("Sorry!")
+      end
+    end
+
+    describe "PUT #confirm" do
+      before do
+        post :confirm, params: { id: group_request.to_param }
+      end
+
+      it "sets the flash" do
+        expect(flash[:notice]).to be_present
+      end
+
+      it "emails the new groups owner" do
+        mail = ActionMailer::Base.deliveries.last
+
+        expect(mail.subject).to eq(I18n.t("mailers.notifications.group_request_confirmed.subject",
                                           group_name: group_request.name,
                                           application_name: SiteConfig.first.application_name))
 
         expect(mail.to.first).to eq(group_request.user.email)
       end
-
     end
 
     describe "DELETE #destroy" do
       it "destroys the requested group_request" do
-        expect {
-          delete :destroy, params: { :id => group_request.to_param }
-        }.to change(GroupRequest, :count).by(-1)
+        expect do
+          delete :destroy, params: { id: group_request.to_param }
+        end.to change(GroupRequest, :count).by(-1)
       end
 
       it "redirects to the group_requests list" do
-        delete :destroy, params: { :id => group_request.to_param }
+        delete :destroy, params: { id: group_request.to_param }
         expect(response).to redirect_to(group_requests_url)
       end
     end

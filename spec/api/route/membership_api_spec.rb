@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe Route::MessageApi do
   include Rack::Test::Methods
@@ -7,9 +9,9 @@ describe Route::MessageApi do
     post "api/membership", email: "test@example.com", api_key: api_key, full_name: "Full Name", group: group.short_name, role: role
   end
 
-  describe 'POST' do
+  describe "POST" do
     let(:membership) { create(:group_membership, role: :committee) }
-    let(:user) { membership.user}
+    let(:user) { membership.user }
     let(:api_key) { user.api_key }
     let(:role) { "member" }
     let(:group) { membership.group }
@@ -18,7 +20,7 @@ describe Route::MessageApi do
       it "creates a new user" do
         create_post
         expect(last_response.status).to eq(201)
-        expect(json_response).to eq({ "status" => "success", "data" => nil })
+        expect(json_response).to eq("status" => "success", "data" => nil)
       end
     end
 
@@ -27,7 +29,7 @@ describe Route::MessageApi do
 
       it "creates a new user" do
         create_post
-        expect(json_response).to eq({"error" => "Not a committee member"})
+        expect(json_response).to eq("error" => "Not a committee member")
       end
     end
   end

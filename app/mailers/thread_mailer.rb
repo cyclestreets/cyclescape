@@ -13,8 +13,8 @@ class ThreadMailer < ActionMailer::Base
 
     mail(
       to: @subscriber.name_with_email,
-      subject: t('mailers.thread_mailer.digest.subject', date: Date.current.to_s(:long), application_name: site_config.application_name),
-      reply_to: no_reply_address,
+      subject: t("mailers.thread_mailer.digest.subject", date: Date.current.to_s(:long), application_name: site_config.application_name),
+      reply_to: no_reply_address
     )
   end
 
@@ -31,8 +31,8 @@ class ThreadMailer < ActionMailer::Base
     if @message.notification_name == :new_deadline_message
       cal = Icalendar::Calendar.new
       cal.add_event(@message.component.to_ical)
-      attachments['deadline.ics'] = {mime_type: 'text/calendar',
-                                     content: cal.to_ical }
+      attachments["deadline.ics"] = { mime_type: "text/calendar",
+                                      content: cal.to_ical }
     end
     mail(to: subscriber.name_with_email,
          subject: t(subject, title: @thread.title, count: @thread.messages.count, application_name: site_config.application_name),

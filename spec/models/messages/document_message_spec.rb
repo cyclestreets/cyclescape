@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: document_messages
@@ -12,30 +14,30 @@
 #  file_size     :integer
 #
 
-require 'spec_helper'
+require "spec_helper"
 
 describe DocumentMessage do
-  describe 'associations' do
+  describe "associations" do
     it { is_expected.to belong_to(:message) }
     it { is_expected.to belong_to(:thread) }
     it { is_expected.to belong_to(:created_by) }
   end
 
-  describe 'validations' do
+  describe "validations" do
     it { is_expected.to validate_presence_of(:file) }
     it { is_expected.to validate_presence_of(:title) }
   end
 
-  context 'factory' do
+  context "factory" do
     subject { create(:document_message) }
 
     it { is_expected.to be_valid }
 
-    it 'should have a thread' do
+    it "should have a thread" do
       expect(subject.thread).to be_a(MessageThread)
     end
 
-    it 'should have a message' do
+    it "should have a message" do
       expect(subject.message).to be_a(Message)
     end
   end

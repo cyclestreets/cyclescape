@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
-  sequence(:tag, 'a') { |n| "tag#{n}" }
+  sequence(:tag, "a") { |n| "tag#{n}" }
 
   factory :tag do
     name { FactoryBot.generate(:tag) }

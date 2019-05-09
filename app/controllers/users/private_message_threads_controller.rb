@@ -2,7 +2,7 @@
 
 # Note inheritance
 class Users::PrivateMessageThreadsController < MessageThreadsController
-  before_action :load_user, only: [:create, :new]
+  before_action :load_user, only: %i[create new]
   filter_access_to :create, :new, attribute_check: true, model: User
 
   def new
@@ -12,7 +12,7 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
 
   def create
     @thread = @user.private_threads.build(
-      permitted_params.merge(created_by: current_user, privacy: 'private')
+      permitted_params.merge(created_by: current_user, privacy: "private")
     )
     super
   end

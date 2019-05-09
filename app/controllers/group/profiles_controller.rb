@@ -5,8 +5,7 @@ class Group::ProfilesController < ApplicationController
   filter_access_to :edit, :update, attribute_check: true, model: Group
   filter_access_to :all
 
-  def show
-  end
+  def show; end
 
   def edit
     # This needs more thought!
@@ -25,7 +24,7 @@ class Group::ProfilesController < ApplicationController
 
   def geometry
     respond_to do |format|
-      format.json { render json: RGeo::GeoJSON.encode(@profile.loc_feature(thumbnail: view_context.image_path('map-icons/m-misc.png'))) }
+      format.json { render json: RGeo::GeoJSON.encode(@profile.loc_feature(thumbnail: view_context.image_path("map-icons/m-misc.png"))) }
     end
   end
 

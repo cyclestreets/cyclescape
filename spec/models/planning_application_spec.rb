@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe PlanningApplication do
   subject { build(:planning_application) }
@@ -24,11 +26,11 @@ describe PlanningApplication do
       expect(subject.title).to include(subject.authority_name)
     end
 
-    it 'should populate an issue' do
-      subject.description = 'very very long '*10
+    it "should populate an issue" do
+      subject.description = "very very long " * 10
       subject.save!
       issue = subject.populate_issue
-      expect(issue.title).to include('very very long')
+      expect(issue.title).to include("very very long")
       expect(issue.description).to include(subject.description)
       expect(issue.location).to eq(subject.location)
       expect(issue.external_url).to eq(subject.url)
@@ -43,35 +45,34 @@ describe PlanningApplication do
     end
   end
 
-  it 'should have an ordered scope' do
+  it "should have an ordered scope" do
     subject.save!
     expect(described_class.ordered.count).to eq(1)
   end
 
-  context 'with one vote to hide' do
+  context "with one vote to hide" do
     before do
       subject.save!
       create(:hide_vote, planning_application: subject)
     end
 
-    it 'should be part hidden' do
+    it "should be part hidden" do
       expect(subject.reload.part_hidden?).to be true
     end
   end
 
-  context 'with two votes to hide' do
+  context "with two votes to hide" do
     before do
       subject.save!
       2.times { create(:hide_vote, planning_application: subject) }
     end
 
-    it 'should have be fully hidden' do
+    it "should have be fully hidden" do
       expect(subject.reload.fully_hidden?).to be true
     end
   end
 
-
-  it 'should have an not hidden scope' do
+  it "should have an not hidden scope" do
     not_hidden = create(:planning_application)
 
     once_hidden = create(:planning_application)
@@ -92,15 +93,15 @@ describe PlanningApplication do
     expect(described_class.search(" bike ")).to eq [pa]
   end
 
-  context 'with old planning applications' do
+  context "with old planning applications" do
     before do
       create(:planning_application, created_at: 9.months.ago)
       create(:planning_application, :with_issue, created_at: 9.months.ago)
       create(:planning_application, created_at: 7.months.ago)
     end
 
-    it 'should remove old planning applications more than 8 months old' do
-      expect{ described_class.remove_old }.to change{ described_class.count }.from(3).to(2)
+    it "should remove old planning applications more than 8 months old" do
+      expect { described_class.remove_old }.to change { described_class.count }.from(3).to(2)
     end
   end
 end

@@ -1,6 +1,8 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe 'Subscriptions', type: :feature do
+require "spec_helper"
+
+describe "Subscriptions", type: :feature do
   let(:thread) { create(:message_thread) }
   let(:subscription) { create(:thread_subscription, thread: thread) }
   let(:other_sub) { create(:thread_subscription, thread: thread) }

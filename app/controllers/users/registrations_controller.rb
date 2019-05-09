@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-
   def create
-    if params[:bicycle_wheels].try(:strip) == '12' && params[:real_name].blank?
+    if params[:bicycle_wheels].try(:strip) == "12" && params[:real_name].blank?
       super
     else
       build_resource(sign_up_params)
@@ -15,15 +14,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def after_inactive_sign_up_path_for(resource)
+  def after_inactive_sign_up_path_for(_resource)
     root_url
   end
 
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
     root_url
   end
 
-  def after_update_path_for(resource)
+  def after_update_path_for(_resource)
     edit_user_registration_url
   end
 end

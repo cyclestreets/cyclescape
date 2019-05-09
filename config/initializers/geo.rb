@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Geo
   USER_LOCATIONS_BUFFER = 0.001
   POINT_ZOOM = 16

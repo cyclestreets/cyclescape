@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class GroupRequestsController < ApplicationController
-  before_action :load_group_request, only: [:show, :edit, :update, :destroy, :review, :confirm, :reject]
+  before_action :load_group_request, only: %i[show edit update destroy review confirm reject]
 
   def index
-    @requests = GroupRequest.order('created_at desc').includes(:user)
+    @requests = GroupRequest.order("created_at desc").includes(:user)
   end
 
   def new
@@ -17,20 +17,18 @@ class GroupRequestsController < ApplicationController
 
     if @request.save
       Notifications.new_group_request(@request, User.admin.ids).deliver_later
-      redirect_to '/', notice: t('group_requests.create.requested')
+      redirect_to "/", notice: t("group_requests.create.requested")
     else
       render :new
     end
   end
 
-  def review
-
-  end
+  def review; end
 
   def confirm
     @request.actioned_by = current_user
     if res = @request.confirm!
-      @group = Group.find_by_name! @request.name
+      @group = Group.find_by! name: @request.name
       Notifications.group_request_confirmed(@group, @request).deliver_later
       set_flash_message :success
     else

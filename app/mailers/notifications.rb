@@ -11,13 +11,13 @@ class Notifications < ActionMailer::Base
     @member = request.user
     @group = request.group
     mail(to: @member.name_with_email,
-         subject: t('mailers.notifications.gmr_confirmed.subject', group_name: @group.name, application_name: site_config.application_name))
+         subject: t("mailers.notifications.gmr_confirmed.subject", group_name: @group.name, application_name: site_config.application_name))
   end
 
   def new_group_request(request, admins_ids)
     @request = request
     mail(to: User.where(id: admins_ids).map(&:email),
-         subject: t('mailers.notifications.new_group_request.subject',
+         subject: t("mailers.notifications.new_group_request.subject",
                     group_name: @request.name, user_name: @request.user.full_name, application_name: site_config.application_name))
   end
 
@@ -25,14 +25,14 @@ class Notifications < ActionMailer::Base
     @user = request.user
     @group = group
     mail(to: @user.email,
-         subject: t('mailers.notifications.group_request_confirmed.subject', group_name: @group.name, application_name: site_config.application_name))
+         subject: t("mailers.notifications.group_request_confirmed.subject", group_name: @group.name, application_name: site_config.application_name))
   end
 
   def group_request_rejected(request)
     @request = request
     user = request.user
     mail(to: user.email,
-         subject: t('mailers.notifications.group_request_rejected.subject', group_request_name: @request.name, application_name: site_config.application_name))
+         subject: t("mailers.notifications.group_request_rejected.subject", group_request_name: @request.name, application_name: site_config.application_name))
   end
 
   def new_group_membership_request(request)
@@ -47,7 +47,7 @@ class Notifications < ActionMailer::Base
                       end
       if email_address
         mail to: email_address,
-             subject: t('mailers.notifications.new_gmr.subject', user_name: @user.name, group_name: @group.name, application_name: site_config.application_name)
+             subject: t("mailers.notifications.new_gmr.subject", user_name: @user.name, group_name: @group.name, application_name: site_config.application_name)
       end
     end
   end
@@ -59,8 +59,8 @@ class Notifications < ActionMailer::Base
     body = Mustache.render(@group.profile.new_user_email, full_name: @member.full_name) if @group.profile.new_user_email
     mail(
       to: @member.name_with_email,
-      subject: t('mailers.notifications.added_to_group.subject', group_name: @group.name, application_name: site_config.application_name),
-      body: body,
+      subject: t("mailers.notifications.added_to_group.subject", group_name: @group.name, application_name: site_config.application_name),
+      body: body
     )
   end
 
@@ -71,11 +71,12 @@ class Notifications < ActionMailer::Base
     message = thread.first_message
     @message_author = message.created_by
     @member = member
-    fail 'Thread does not belong to group' if @group.nil?
+    raise "Thread does not belong to group" if @group.nil?
+
     mail to: @member.name_with_email,
          from: user_notification_address(@message_author),
          reply_to: message_address(message),
-         subject: t('mailers.notifications.new_group_thread.subject',
+         subject: t("mailers.notifications.new_group_thread.subject",
                     group_name: @group.name, thread_title: @thread.title, application_name: site_config.application_name)
   end
 
@@ -83,7 +84,7 @@ class Notifications < ActionMailer::Base
     @issue = issue
     @user_location = user_location
     mail to: @user_location.user.name_with_email,
-         subject: t('mailers.notifications.new_user_location_issue.subject',
+         subject: t("mailers.notifications.new_user_location_issue.subject",
                     issue_title: @issue.title, application_name: site_config.application_name)
   end
 
@@ -93,11 +94,12 @@ class Notifications < ActionMailer::Base
     @user_location = user_location
     @user = user_location.user
     @message = thread.first_message
-    fail 'Thread does not have an issue' unless @thread.issue
+    raise "Thread does not have an issue" unless @thread.issue
+
     mail to: @user.name_with_email,
          from: user_notification_address(@message.created_by),
          reply_to: message_address(@message),
-         subject: t('mailers.notifications.new_user_location_issue_thread.subject',
+         subject: t("mailers.notifications.new_user_location_issue_thread.subject",
                     issue_title: @thread.issue.title, application_name: site_config.application_name)
   end
 
@@ -106,14 +108,14 @@ class Notifications < ActionMailer::Base
     @group = group
     @issue = issue
     mail to: @user.name_with_email,
-         subject: t('mailers.notifications.new_group_location_issue.subject',
+         subject: t("mailers.notifications.new_group_location_issue.subject",
                     group_name: @group.name, issue_title: @issue.title, application_name: site_config.application_name)
   end
 
   def new_user_confirmed(user)
     @user = user
     mail to: @user.name_with_email,
-         subject: t('mailers.notifications.new_user_confirmed.subject', application_name: site_config.application_name)
+         subject: t("mailers.notifications.new_user_confirmed.subject", application_name: site_config.application_name)
   end
 
   def upcoming_issue_deadline(user, issue, thread)
@@ -121,7 +123,7 @@ class Notifications < ActionMailer::Base
     @issue = issue
     @thread = thread
     mail to: @user.name_with_email,
-         subject: t('mailers.notifications.upcoming_issue_deadline.subject', issue_title: @issue.title, application_name: site_config.application_name)
+         subject: t("mailers.notifications.upcoming_issue_deadline.subject", issue_title: @issue.title, application_name: site_config.application_name)
   end
 
   def upcoming_thread_deadline(user, thread, deadline_message)
@@ -129,8 +131,8 @@ class Notifications < ActionMailer::Base
     @thread = thread
     @deadline_message = deadline_message
     mail to: @user.name_with_email,
-      reply_to: message_address(deadline_message.message),
-      subject: t('mailers.notifications.upcoming_thread_deadline.subject', thread_title: @thread.title, application_name: site_config.application_name)
+         reply_to: message_address(deadline_message.message),
+         subject: t("mailers.notifications.upcoming_thread_deadline.subject", thread_title: @thread.title, application_name: site_config.application_name)
   end
 
   private

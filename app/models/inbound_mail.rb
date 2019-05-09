@@ -18,7 +18,7 @@ class InboundMail < ApplicationRecord
 
   def self.new_from_message(mail)
     recipient = mail.to.try(:first) || mail.cc.try(:first) || mail.bcc.try(:first)
-    new recipient: recipient, raw_message: mail.to_s.encode('UTF-8', invalid: :replace, undef: :replace, replace: '?')
+    new recipient: recipient, raw_message: mail.to_s.encode("UTF-8", invalid: :replace, undef: :replace, replace: "?")
   end
 
   def message

@@ -1,17 +1,16 @@
 # frozen_string_literal: true
 
 class Admin::SiteConfigsController < ApplicationController
-  before_action :set_site_config, only: [:show, :edit, :update, :destroy]
+  before_action :set_site_config, only: %i[show edit update destroy]
   # GET /site_configs/1
-  def show
-  end
+  def show; end
 
   # GET /site_configs/1/edit
   def edit; end
 
   def update
     if @live_site_config.update(site_config_params)
-      redirect_to admin_site_config_path, notice: 'Site config was successfully updated.'
+      redirect_to admin_site_config_path, notice: "Site config was successfully updated."
     else
       render :edit
     end

@@ -29,7 +29,7 @@ class GroupRequest < ApplicationRecord
   include AASM
 
   belongs_to :user
-  belongs_to :actioned_by, class_name: 'User'
+  belongs_to :actioned_by, class_name: "User"
 
   validates :user, :name, :short_name, :email, presence: true
   validates :name, :short_name, :email, uniqueness: true
@@ -37,10 +37,10 @@ class GroupRequest < ApplicationRecord
   validates :short_name, subdomain: true
   validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }
 
-  normalize_attributes :short_name, with: [:strip, :blank, :downcase]
+  normalize_attributes :short_name, with: %i[strip blank downcase]
   normalize_attributes :email
 
-  aasm column: 'status' do
+  aasm column: "status" do
     state :pending, initial: true
     state :cancelled
 
@@ -67,11 +67,11 @@ class GroupRequest < ApplicationRecord
 
   def create_group
     user.approve!
-    group = Group.create attributes.slice('name', 'short_name', 'website', 'email', 'default_thread_privacy')
+    group = Group.create attributes.slice("name", "short_name", "website", "email", "default_thread_privacy")
     if group.valid?
       membership = group.memberships.new
       membership.user = user
-      membership.role = 'committee'
+      membership.role = "committee"
       membership.save
     else
       false

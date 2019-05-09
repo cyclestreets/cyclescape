@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Taggable
   def self.included(base)
     base.extend(ClassMethods)
@@ -5,7 +7,7 @@ module Taggable
 
   module ClassMethods
     def find_by_tags_from(taggable)
-      includes(:tags).where(Tag.arel_table[:name].in(taggable.tags.map { |t| t.name })).references(:tags)
+      includes(:tags).where(Tag.arel_table[:name].in(taggable.tags.map(&:name))).references(:tags)
     end
 
     def find_by_tag(tag)
@@ -31,9 +33,9 @@ module Taggable
     private
 
     def ids_with_all(tag_names, opts = {})
-      scope = joins(:tags).where(tags: {name: tag_names})
+      scope = joins(:tags).where(tags: { name: tag_names })
       if opts[:all]
-        scope.group('issues.id').having('COUNT(tags.id)=?', tag_names.size)
+        scope.group("issues.id").having("COUNT(tags.id)=?", tag_names.size)
       else
         scope.ids
       end
@@ -41,11 +43,12 @@ module Taggable
   end
 
   def tags_string
-    tags.map(&:name).join(', ')
+    tags.map(&:name).join(", ")
   end
 
   def tags_string=(val)
     return unless val
+
     self.tags = tags_from_string(val)
   end
 
@@ -56,12 +59,12 @@ module Taggable
   protected
 
   def tags_from_string(val)
-    val.
-      delete('#!()[]{}').
-      split(/[,]+/).
-      map { |str| str.parameterize.gsub(' ', '-') }.
-      uniq.
-      delete_if { |str| str == '' }.
-      map { |str| Tag.grab(str) }
+    val
+      .delete("#!()[]{}")
+      .split(/[,]+/)
+      .map { |str| str.parameterize.gsub(" ", "-") }
+      .uniq
+      .delete_if { |str| str == "" }
+      .map { |str| Tag.grab(str) }
   end
 end

@@ -17,7 +17,6 @@
 #
 
 class GroupPref < ApplicationRecord
-
   belongs_to :group
-  belongs_to :membership_secretary, class_name: 'User'
+  belongs_to :membership_secretary, class_name: "User"
 end

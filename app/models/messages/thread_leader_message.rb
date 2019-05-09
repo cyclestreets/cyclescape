@@ -27,10 +27,11 @@ class ThreadLeaderMessage < MessageComponent
 
   def user_ownes_unleading
     return if !unleading_id || unleading.created_by_id == created_by_id
+
     errors.add :base, :not_owing_leader_message
   end
 
   def deactivae_unleading
-    unleading.update(active: false) if unleading
+    unleading&.update(active: false)
   end
 end

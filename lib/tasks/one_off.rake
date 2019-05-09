@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 namespace :one_off do
   task fix_image_ext: :environment do
-    update = ->(has_dragonfly, method) do
+    update = lambda do |has_dragonfly, method|
       begin
         next if has_dragonfly.public_send(method).meta["name"].split(".").size > 1
+
         fmt = has_dragonfly.public_send(method).format
         next unless fmt&.present?
+
         new_path = "#{has_dragonfly.public_send(method).path}.#{fmt}"
         FileUtils.cp(has_dragonfly.public_send(method).path, new_path)
         has_dragonfly.public_send("#{method}=", File.open(new_path))

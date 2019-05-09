@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: library_item_messages
@@ -9,10 +11,10 @@
 #  created_by_id   :integer
 #
 
-require 'spec_helper'
+require "spec_helper"
 
 describe LibraryItemMessage do
-  it 'should be valid' do
+  it "should be valid" do
     message = create(:library_item_message_with_document)
     expect(message).to be_valid
   end

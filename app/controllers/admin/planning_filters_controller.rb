@@ -36,6 +36,7 @@ class Admin::PlanningFiltersController < ApplicationController
       render :new
     end
   end
+
   private
 
   def permitted_params

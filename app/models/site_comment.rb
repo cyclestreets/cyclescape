@@ -47,8 +47,6 @@ class SiteComment < ApplicationRecord
   end
 
   def body_does_not_contain_spam
-    unless body !~ /(<a ([^>]+)>|<\/a>|\[url\]|\[url=|\[\/url\])/i
-      errors.add(:body, 'The message cannot contain HTML.')
-    end
+    errors.add(:body, "The message cannot contain HTML.") unless body !~ %r{(<a ([^>]+)>|</a>|\[url\]|\[url=|\[/url\])}i
   end
 end

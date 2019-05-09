@@ -5,11 +5,11 @@ module Route
     paginate paginate_settings
 
     params do
-      optional :thread_id, type: Integer, desc: 'ID of thread'
-      optional :order, type: Symbol, values: %i[created_at id], desc: 'Order of returned messages.'
+      optional :thread_id, type: Integer, desc: "ID of thread"
+      optional :order, type: Symbol, values: %i[created_at id], desc: "Order of returned messages."
       optional :order_direction, type: Symbol, values: %i[asc desc], default: :asc
-      optional :end_date, types: [DateTime, Date], desc: 'Only messages after or at the end date or time are returned'
-      optional :start_date, types: [DateTime, Date], desc: 'Only messages before or at the start date or time are returned'
+      optional :end_date, types: [DateTime, Date], desc: "Only messages after or at the end date or time are returned"
+      optional :start_date, types: [DateTime, Date], desc: "Only messages before or at the start date or time are returned"
     end
 
     helpers do
@@ -26,7 +26,7 @@ module Route
     end
 
     resource do
-      desc 'Returns messages collection', security: [{}]
+      desc "Returns messages collection", security: [{}]
       get :messages do
         post_or_get_messages
       end

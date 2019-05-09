@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 namespace :scheduled do
   task process_all_mailboxes: :environment do
-    MailboxReader.mailboxes_config.each do |name, config|
+    MailboxReader.mailboxes_config.each do |_name, config|
       MailboxReader.new(config).run
     end
   end

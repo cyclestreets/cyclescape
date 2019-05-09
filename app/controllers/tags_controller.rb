@@ -12,16 +12,16 @@ class TagsController < ApplicationController
       @issues = IssueDecorator.decorate_collection issues
       unfiltered_results = MessageThread.find_by_tag(@tag).includes(:issue, :group).order(updated_at: :desc)
       threads = Kaminari.paginate_array(
-        unfiltered_results.select{ |t| permitted_to?(:show, t) }
+        unfiltered_results.select { |t| permitted_to?(:show, t) }
       ).page(params[:thread_page])
 
       @threads = ThreadListDecorator.decorate_collection threads
       @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
 
-      @library_items = Library::Item.find_by_tag(@tag).order('updated_at desc').page(params[:library_page])
-      planning_applications = PlanningApplication.search(params[:query]).
-        includes(:users, :issue).
-        page params[:planning_page]
+      @library_items = Library::Item.find_by_tag(@tag).order("updated_at desc").page(params[:library_page])
+      planning_applications = PlanningApplication.search(params[:query])
+                                                 .includes(:users, :issue)
+                                                 .page params[:planning_page]
       @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications
 
     else

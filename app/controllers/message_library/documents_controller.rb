@@ -27,5 +27,4 @@ class MessageLibrary::DocumentsController < Library::DocumentsController
   def permitted_params
     params.require(:library_document).permit :title, :file, :retained_file, :tags_string
   end
-
 end

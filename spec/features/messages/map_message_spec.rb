@@ -1,15 +1,17 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe 'Map messages' do
+require "spec_helper"
+
+describe "Map messages" do
   let(:thread) { create(:message_thread, :belongs_to_issue) }
   let(:user) { create :user }
 
   def map_form
-    within('#new-map-message') { yield }
+    within("#new-map-message") { yield }
   end
 
-  context 'new' do
-    include_context 'signed in as a site user'
+  context "new" do
+    include_context "signed in as a site user"
 
     before do
       user.prefs.update_column(:email_status_id, 1)
@@ -17,17 +19,17 @@ describe 'Map messages' do
       visit thread_path(thread)
     end
 
-    it 'should post a map message and send an email' do
+    it "should post a map message and send an email" do
       map_form do
-        fill_in 'Caption', with: 'A fine map'
-        find('#map_message_loc_json', visible: false).set('{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.1250070333480835,52.20619176430142]}}]}')
-        click_on 'Add map'
+        fill_in "Caption", with: "A fine map"
+        find("#map_message_loc_json", visible: false).set('{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.1250070333480835,52.20619176430142]}}]}')
+        click_on "Add map"
       end
 
-      expect(page).to have_css('.map-normal-show')
+      expect(page).to have_css(".map-normal-show")
 
-      within('figcaption') do
-        expect(page).to have_content('A fine map')
+      within("figcaption") do
+        expect(page).to have_content("A fine map")
       end
 
       open_email(user.email)

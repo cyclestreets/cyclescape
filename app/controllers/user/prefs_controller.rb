@@ -16,7 +16,7 @@ class User::PrefsController < ApplicationController
     else
       set_flash_message :failure
     end
-    redirect_to action: 'edit'
+    redirect_to action: "edit"
   end
 
   protected

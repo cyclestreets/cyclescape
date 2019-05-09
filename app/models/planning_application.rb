@@ -25,7 +25,7 @@
 #
 
 class PlanningApplication < ApplicationRecord
-  NOS_HIDE_VOTES = 2.freeze
+  NOS_HIDE_VOTES = 2
 
   include Locatable
 
@@ -36,11 +36,12 @@ class PlanningApplication < ApplicationRecord
   scope :ordered, -> { order(start_date: :desc) }
   scope :relevant, -> { where(relevant: true) }
   scope :for_local_authority, ->(la) { where(arel_table[:authority_param].matches(la.parameterize)) }
-  scope :search, ->(term) do
+  scope :search, lambda { |term|
     return none unless term
+
     term = "%#{term.strip}%"
     where(arel_table[:uid].matches(term).or(arel_table[:description].matches(term)))
-  end
+  }
 
   validates :uid, :url, :authority_name, :authority_param, presence: true
   validates :uid, uniqueness: { scope: :authority_param }
@@ -80,14 +81,14 @@ class PlanningApplication < ApplicationRecord
 
   def populate_issue
     build_issue.tap do |issue|
-      issue.title = "#{I18n.t("planning_application.issues.new.title_prefix")} : #{title}"
+      issue.title = "#{I18n.t('planning_application.issues.new.title_prefix')} : #{title}"
       issue.location = location
       issue.external_url = url
-      issue.description = <<-EOS
-<p>#{description}</p>
-<p>#{address}</p>
-<p>#{authority_name}</p>
-#{I18n.t("planning_application.issues.new.application_reference")} : <a href=#{url}>#{uid}</a>
+      issue.description = <<~EOS
+        <p>#{description}</p>
+        <p>#{address}</p>
+        <p>#{authority_name}</p>
+        #{I18n.t('planning_application.issues.new.application_reference')} : <a href=#{url}>#{uid}</a>
       EOS
       issue.tags_string = "planning"
     end

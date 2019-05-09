@@ -1,14 +1,16 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe UserThreadPriority do
   let(:subect) { create(:user_thread_priority) }
 
-  describe 'associations' do
+  describe "associations" do
     it { is_expected.to belong_to(:user) }
     it { is_expected.to belong_to(:thread) }
   end
 
-  describe 'validations' do
+  describe "validations" do
     it { is_expected.to validate_inclusion_of(:priority).in_range(1..10) }
   end
 end

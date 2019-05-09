@@ -9,7 +9,7 @@ class PlanningApplication::IssuesController < IssuesController
     @start_location = @planning_application.location
     new_issue_setup
     @issue.threads.first.title = nil
-    render 'issues/new'
+    render "issues/new"
   end
 
   protected

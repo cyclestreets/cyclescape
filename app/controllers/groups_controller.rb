@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
       @recent_issues = IssueDecorator.decorate_collection group.recent_issues.limit(10).includes(:created_by)
       @group = GroupDecorator.decorate group
     else
-      redirect_to root_url(subdomain: SubdomainConstraint.subdomain('www'))
+      redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www"))
     end
   end
 
@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
     end
     group_profiles = group_profiles.enabled.with_location.ordered.limit(50)
     factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(group_profiles.sort_by { |o| o.size }.reverse.map { | group_profile | group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
+    collection = factory.feature_collection(group_profiles.sort_by(&:size).reverse.map { |group_profile| group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection) }
     end
@@ -51,7 +51,7 @@ class GroupsController < ApplicationController
 
   def search
     @query = params[:query]
-    set_page_title t('.title', group: group.name)
+    set_page_title t(".title", group: group.name)
     _group = group
 
     threads = MessageThread.search(include: [:group, :issue, messages: :created_by]) do
@@ -59,26 +59,26 @@ class GroupsController < ApplicationController
         boost_fields title: 2.0
         boost_fields tags_string: 1.0
       end
-      with(:status, 'approved')
+      with(:status, "approved")
       any_of do
         with(:location).in_bounding_box(*group_bb) if _group.profile.location
         with(:group_id, _group.id)
       end
       any_of do
-        with(:privacy, 'public')
+        with(:privacy, "public")
         if current_user
           all_of do
             with(:group_id, current_user.groups.try(:ids))
-            with(:privacy, 'group')
+            with(:privacy, "group")
           end
           all_of do
             with(:group_id, current_user.in_group_committee.map(&:id))
-            with(:privacy, 'committee')
+            with(:privacy, "committee")
           end
         end
       end
       adjust_solr_params do |sunspot_params|
-        sunspot_params[:boost] = 'recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)'
+        sunspot_params[:boost] = "recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)"
       end
       paginate page: params[:thread_page], per_page: 40
     end
@@ -86,14 +86,14 @@ class GroupsController < ApplicationController
     @threads = ThreadListDecorator.decorate_collection threads.results
 
     # Issues
-    issues = Issue.search(include: [:created_by, :tags]) do
+    issues = Issue.search(include: %i[created_by tags]) do
       fulltext params[:query] do
         boost_fields title: 2.0
         boost_fields tags_string: 1.0
       end
       with(:location).in_bounding_box(*group_bb) if _group.profile.location
       adjust_solr_params do |sunspot_params|
-        sunspot_params[:boost] = 'recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)'
+        sunspot_params[:boost] = "recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)"
       end
       paginate page: params[:issue_page], per_page: 40
     end
@@ -106,11 +106,11 @@ class GroupsController < ApplicationController
     end
     @library_items = Library::ItemDecorator.decorate_collection library_items.results
 
-    planning_applications = PlanningApplication.
-      search(params[:query]).
-      intersects(group.profile.location).
-      includes(:users, :issue).
-      page params[:planning_page]
+    planning_applications = PlanningApplication
+                            .search(params[:query])
+                            .intersects(group.profile.location)
+                            .includes(:users, :issue)
+                            .page params[:planning_page]
     @planning_applications = PlanningApplicationDecorator.decorate_collection planning_applications
 
     @hashtags = group.hashtags.search(params[:query])
@@ -128,8 +128,9 @@ class GroupsController < ApplicationController
 
   def index_start_location
     return current_user.start_location if current_user && current_user.start_location != SiteConfig.first.nowhere_location
-    return current_group.start_location if current_group && current_group.start_location
-    return SiteConfig.first.nowhere_location
+    return current_group.start_location if current_group&.start_location
+
+    SiteConfig.first.nowhere_location
   end
 
   def group_feature(group, bbox = nil)

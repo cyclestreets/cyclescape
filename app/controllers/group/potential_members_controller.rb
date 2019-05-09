@@ -4,8 +4,7 @@ class Group::PotentialMembersController < ApplicationController
   before_action :load_group
   filter_access_to :all, attribute_check: true, model: Group
 
-  def new
-  end
+  def new; end
 
   def create
     if @group.update_potetial_members(permitted_params[:emails])

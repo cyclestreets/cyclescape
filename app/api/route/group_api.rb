@@ -2,13 +2,13 @@
 
 module Route
   class GroupApi < Base
-    desc 'Returns groups as a GeoJSON collection', security: [{}]
+    desc "Returns groups as a GeoJSON collection", security: [{}]
     paginate paginate_settings
 
     params do
       optional(:bbox, type: RGeo::Cartesian::BoundingBox, coerce_with: BboxCoerce,
                       desc: 'Four comma-separated coordinates making up the boundary of interest, e.g. "0.11905,52.20791,0.11907,52.20793"')
-      optional :national, type: Integer, desc: 'When set to 1 groups of small and large size are returned, when set to 0 only groups of a small size are returned. Default 0', default: 0
+      optional :national, type: Integer, desc: "When set to 1 groups of small and large size are returned, when set to 0 only groups of a small size are returned. Default 0", default: 0
     end
 
     helpers do

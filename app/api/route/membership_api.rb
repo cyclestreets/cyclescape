@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Route
   class MembershipApi < Base
     params do
@@ -11,7 +13,7 @@ module Route
       user = User.find_by(api_key: params[:api_key])
       error! "Invalid API KEY", 400 unless user
       group = Group.find_by(short_name: params[:group])
-      error! 'Given group not found', 404 unless group
+      error! "Given group not found", 404 unless group
       error! "Not a committee member", 400 unless user.memberships.committee.where(group: group).exists?
 
       user = User.find_or_initialize_by(
@@ -23,9 +25,7 @@ module Route
         user: user,
         role: params[:role]
       )
-      if membership.user.accepted_or_not_invited?
-        Notifications.added_to_group(membership).deliver_later
-      end
+      Notifications.added_to_group(membership).deliver_later if membership.user.accepted_or_not_invited?
       {
         status: "success",
         data: nil

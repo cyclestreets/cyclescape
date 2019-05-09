@@ -1,8 +1,10 @@
-require File.expand_path('../boot', __FILE__)
+# frozen_string_literal: true
 
-require 'rails/all'
+require File.expand_path("boot", __dir__)
+
+require "rails/all"
 require "English"
-require File.expand_path(File.join('..', '..', 'lib', 'subdomain_constraint'), __FILE__)
+require File.expand_path(File.join("..", "..", "lib", "subdomain_constraint"), __FILE__)
 
 Bundler.require(*Rails.groups)
 
@@ -12,15 +14,15 @@ module Cyclescape
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     config.action_view.sanitized_allowed_tags = %w[p br ul ol li em strong table tbody thead tr td a blockquote]
-    config.action_view.sanitized_allowed_attributes = ['href', 'title']
+    config.action_view.sanitized_allowed_attributes = %w[href title]
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
-    config.autoload_paths += %W(#{config.root}/app/models/messages)
-    config.autoload_paths += %W(#{config.root}/app/models/validators)
+    config.autoload_paths += %W[#{config.root}/app/models/messages]
+    config.autoload_paths += %W[#{config.root}/app/models/validators]
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
-    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
-    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
+    config.paths.add File.join("app", "api"), glob: File.join("**", "*.rb")
+    config.autoload_paths += Dir[Rails.root.join("app", "api", "*")]
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -32,28 +34,28 @@ module Cyclescape
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
-    config.i18n.available_locales = %w(en-GB de-DE cs-CZ cs it en)
+    config.i18n.available_locales = %w[en-GB de-DE cs-CZ cs it en]
     config.i18n.enforce_available_locales = true
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    config.i18n.default_locale = 'en-GB'
+    config.i18n.default_locale = "en-GB"
 
     # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = 'utf-8'
+    config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password, :password_confirmation]
+    config.filter_parameters += %i[password password_confirmation]
 
     # Enable the asset pipeline
     config.assets.enabled = true
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '1.0'
+    config.assets.version = "1.0"
     config.assets.paths << "node_modules"
 
     # Set cache storage
-    config.cache_store = :redis_store, "redis://localhost:6379/1",  { expires_in: 1.week }
+    config.cache_store = :redis_store, "redis://localhost:6379/1", { expires_in: 1.week }
 
     # ActionMailer default URL options
     # To set the URL set the ENV["SERVER_NAME"].  The SubdomainConstraint adds the staging subdomain.
@@ -61,7 +63,7 @@ module Cyclescape
 
     # Git info
     config.git_hash = `git rev-parse --short HEAD`.chomp
-    config.github_project_url = 'https://github.com/cyclestreets/cyclescape'
+    config.github_project_url = "https://github.com/cyclestreets/cyclescape"
 
     # Planning applications
     config.planning_applications_url = "http://www.planit.org.uk/find/applics/json"
@@ -76,7 +78,7 @@ module Cyclescape
     # By default only files in /app and /node_modules are browserified,
     # vendor stuff is normally not made for browserification and may stop
     # working.
-    config.browserify_rails.paths << /vendor\/assets\/javascripts\/module\.js/
+    config.browserify_rails.paths << %r{vendor/assets/javascripts/module\.js}
 
     # Environments in which to generate source maps
     #

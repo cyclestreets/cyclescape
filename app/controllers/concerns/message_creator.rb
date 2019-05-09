@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module MessageCreator
   private
 
@@ -16,9 +18,9 @@ module MessageCreator
 
     # spam? check needs to be done in the controller
     message.check_reason = if message.spam?
-                              'possible_spam'
-                            elsif !current_user.approved?
-                              'not_approved'
+                             "possible_spam"
+                           elsif !current_user.approved?
+                             "not_approved"
                             end
     message
   end

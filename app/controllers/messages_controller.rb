@@ -24,7 +24,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to thread_path(thread) }
-      format.js { render 'messages/created' }
+      format.js { render "messages/created" }
     end
   end
 
@@ -46,9 +46,7 @@ class MessagesController < ApplicationController
   end
 
   def vote_up
-    unless current_user.voted_for? message
-      current_user.vote_exclusively_for message
-    end
+    current_user.vote_exclusively_for message unless current_user.voted_for? message
     render partial: "shared/vote_detail", locals: { resource: message }
   end
 
@@ -62,9 +60,9 @@ class MessagesController < ApplicationController
   def check_reason
     # spam? check needs to be done in the controller
     if message.spam?
-      'possible_spam'
+      "possible_spam"
     elsif !current_user.approved?
-      'not_approved'
+      "not_approved"
     end
   end
 

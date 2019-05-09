@@ -8,6 +8,6 @@ class Message::LinksController < Message::BaseController
   end
 
   def permit_params
-    [:url, :title, :description]
+    %i[url title description]
   end
 end

@@ -2,7 +2,7 @@
 
 module Route
   class WardApi < Base
-    desc 'Returns ward boundaries and names as GeoJSON', security: [{}]
+    desc "Returns ward boundaries and names as GeoJSON", security: [{}]
     paginate paginate_settings
 
     params do

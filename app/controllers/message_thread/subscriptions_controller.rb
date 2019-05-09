@@ -3,8 +3,7 @@
 class MessageThread::SubscriptionsController < MessageThread::BaseController
   filter_access_to :all, attribute_check: true, load_method: :load_subscription
 
-  def edit
-  end
+  def edit; end
 
   def create
     respond_to do |format|
@@ -14,7 +13,7 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
         set_flash_message :failure
       end
       format.html { redirect_to thread_path @thread }
-      format.js   { }
+      format.js   {}
     end
   end
 
@@ -29,7 +28,7 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
           redirect_to thread_path @thread
         end
       end
-      format.js { }
+      format.js {}
     end
   end
 

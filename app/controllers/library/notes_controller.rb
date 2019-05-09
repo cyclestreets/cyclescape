@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Library::NotesController < ApplicationController
-  before_action :load_note, except: [:new, :create]
-  filter_access_to [:edit, :update], attribute_check: true, load_method: :load_note
+  before_action :load_note, except: %i[new create]
+  filter_access_to %i[edit update], attribute_check: true, load_method: :load_note
 
   def new
     @note = Library::Note.new

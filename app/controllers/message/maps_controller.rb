@@ -8,6 +8,6 @@ class Message::MapsController < Message::BaseController
   end
 
   def permit_params
-    [:caption, :loc_json]
+    %i[caption loc_json]
   end
 end

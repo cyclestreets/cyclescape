@@ -13,12 +13,11 @@
 #
 
 class Library::Document < Library::Component
-
   dragonfly_accessor :file do
     storage_options :generate_file_path
   end
 
-  has_many :notes, foreign_key: 'library_document_id'
+  has_many :notes, foreign_key: "library_document_id"
 
   validates :file, presence: true
   validates :title, presence: true
@@ -32,6 +31,6 @@ class Library::Document < Library::Component
 
   def generate_file_path
     hash = Digest::SHA1.file(file.path).hexdigest
-    {path: "library/documents/#{hash[0..2]}/#{hash[3..5]}/#{hash}"}
+    { path: "library/documents/#{hash[0..2]}/#{hash[3..5]}/#{hash}" }
   end
 end

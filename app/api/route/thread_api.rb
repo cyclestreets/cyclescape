@@ -6,12 +6,12 @@ module Route
 
     params do
       optional :group, type: String, desc: 'Return only threads owned by the group specified by its short name, e.g. "london"'
-      optional :issue_id, type: Integer, desc: 'ID of issue'
-      optional :order, type: Symbol, values: %i[created_at id], desc: 'Order of returned threads.'
+      optional :issue_id, type: Integer, desc: "ID of issue"
+      optional :order, type: Symbol, values: %i[created_at id], desc: "Order of returned threads."
       optional :order_direction, type: Symbol, values: %i[asc desc], default: :asc
-      optional :end_date, types: [DateTime, Date], desc: 'Only threads after or at the end date or time are returned'
-      optional :start_date, types: [DateTime, Date], desc: 'Only threads before or at the start date or time are returned'
-      optional :after_id, types: Integer, desc: 'Only threads with ID greather than this are returned'
+      optional :end_date, types: [DateTime, Date], desc: "Only threads after or at the end date or time are returned"
+      optional :start_date, types: [DateTime, Date], desc: "Only threads before or at the start date or time are returned"
+      optional :after_id, types: Integer, desc: "Only threads with ID greather than this are returned"
     end
 
     helpers do
@@ -19,7 +19,7 @@ module Route
         scope = MessageThread.is_public.approved.includes(:messages)
         if params[:group]
           group = Group.find_by(short_name: params[:group])
-          error! 'Given group not found', 404 unless group
+          error! "Given group not found", 404 unless group
           scope = scope.where(group: group)
         end
         scope = scope.order(params[:order] => params[:order_direction]) if params[:order]
@@ -32,7 +32,7 @@ module Route
     end
 
     resource do
-      desc 'Returns threads collection', security: [{}]
+      desc "Returns threads collection", security: [{}]
       get :threads do
         post_or_get_thread
       end

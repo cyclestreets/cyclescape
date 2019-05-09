@@ -5,7 +5,7 @@ class Group::MessageThreadsController < MessageThreadsController
   before_action :group
 
   def index
-    set_page_title t('group.message_threads.index.title', group: group.name)
+    set_page_title t("group.message_threads.index.title", group: group.name)
 
     issue_threads = ThreadList.issue_threads_from_group(group).page(params[:issue_threads_page])
     @issue_threads = ThreadListDecorator.decorate_collection issue_threads

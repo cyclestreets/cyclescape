@@ -10,11 +10,11 @@ module Route
       optional :tags, type: Array[String], desc: 'An array of tags all the issues must have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :excluding_tags, type: Array[String], desc: 'An array of tags that the issues must not have, e.g. ["taga","tagb"]', coerce_with: JSON, documentation: { is_array: true }
       optional :group, type: String, desc: 'Return only issues from area of group given by its short name, e.g. "london"'
-      optional :order, type: Symbol, values: %i[vote_count created_at start_at size id], desc: 'Order of returned issues.'
+      optional :order, type: Symbol, values: %i[vote_count created_at start_at size id], desc: "Order of returned issues."
       optional :order_direction, type: Symbol, values: %i[asc desc], default: :desc, desc: 'Ordering direction. Not working with "vote_count".'
-      optional :id, type: Integer, desc: 'Issue ID'
-      optional :end_date, types: [DateTime, Date], desc: 'No issues after the end date are returned'
-      optional :start_date, types: [DateTime, Date], desc: 'No issues before the start date are returned'
+      optional :id, type: Integer, desc: "Issue ID"
+      optional :end_date, types: [DateTime, Date], desc: "No issues after the end date are returned"
+      optional :start_date, types: [DateTime, Date], desc: "No issues before the start date are returned"
       optional(:geo_collection,
                type: Array[RGeo::GeoJSON::Feature],
                desc: 'Return only issues inside this GeoJSON feature collection, e.g. {"type":"FeatureCollection","features":[{"type":"Polygon","coordinates":[[[-1.5724,53.795],[-1.54289,53.8083],[-1.54426,53.79010],[-1.5724,53.7957]]]}]}',
@@ -24,7 +24,7 @@ module Route
 
     helpers do
       def issue_feature(issue)
-        creator_name = if issue.created_by.profile.visibility == 'public'
+        creator_name = if issue.created_by.profile.visibility == "public"
                          issue.created_by.name
                        else
                          issue.created_by.display_name_or_anon
@@ -55,7 +55,7 @@ module Route
         scope = Issue.all.includes(:created_by, :tags)
         if params[:group]
           group = Group.find_by(short_name: params[:group])
-          error! 'Given group not found', 404 unless group
+          error! "Given group not found", 404 unless group
           scope = scope.intersects(group.profile.location)
         end
         case params[:order]
@@ -87,12 +87,12 @@ module Route
     end
 
     resource do
-      desc 'Returns issues as a GeoJSON collection', security: [{}]
+      desc "Returns issues as a GeoJSON collection", security: [{}]
       get :issues do
         post_or_get_issue
       end
 
-      desc 'Returns issues as a GeoJSON collection', security: [{}]
+      desc "Returns issues as a GeoJSON collection", security: [{}]
       post :issues do
         post_or_get_issue
       end
