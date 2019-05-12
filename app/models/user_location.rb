@@ -25,6 +25,7 @@ class UserLocation < ApplicationRecord
 
   validates :location, presence: true
   validates :user, presence: true, uniqueness: true
+  after_create :approve_user
 
   def buffered
     buffered_loc = location.buffer(Geo::USER_LOCATIONS_BUFFER)
@@ -34,5 +35,11 @@ class UserLocation < ApplicationRecord
     else
       buffered_loc
     end
+  end
+
+  private
+
+  def approve_user
+    user.approve!
   end
 end

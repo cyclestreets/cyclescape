@@ -51,7 +51,6 @@ class GroupMembershipRequest < ApplicationRecord
   end
 
   def create_membership
-    user.approve!
     return true if user.groups.include?(group)
 
     create_group_membership!(group: group, user: user, role: "member")

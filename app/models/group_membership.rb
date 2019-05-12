@@ -33,7 +33,7 @@ class GroupMembership < ApplicationRecord
 
   before_validation :replace_with_existing_user
   before_validation :invite_user_if_new
-  after_create :delete_pending_gmrs
+  after_create :delete_pending_gmrs, :approve_user
 
   validates :group_id, presence: true
   validates :role, inclusion: { in: ALLOWED_ROLES }
@@ -68,6 +68,10 @@ class GroupMembership < ApplicationRecord
 
   def set_default_role
     self.role ||= "member"
+  end
+
+  def approve_user
+    user.approve!
   end
 
   def delete_pending_gmrs

@@ -6,10 +6,6 @@ describe UserLocation do
   describe "newly created" do
     subject { create(:user_location) }
 
-    it "must have a user" do
-      expect(subject.user).to be_valid
-    end
-
     it "should have a geojson string" do
       expect(subject.loc_json).to be_a(String)
       expect(subject.loc_json).to eql(RGeo::GeoJSON.encode(RGeo::GeoJSON::Feature.new(subject.location)).to_json)
@@ -52,6 +48,13 @@ describe UserLocation do
     it "should ignore a bogus geojson string" do
       subject.loc_json = "Garbage"
       expect(subject).to be_valid
+    end
+
+    it "apporves the user" do
+      user = create(:user, approved: false)
+      subject.user = user
+      subject.save!
+      expect(user.reload.approved).to eq true
     end
   end
 
