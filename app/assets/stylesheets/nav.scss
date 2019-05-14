@@ -80,7 +80,7 @@
           top: 40px;
           width: 300px;
           padding: 0px;
-          z-index: 2;
+          z-index: 1102;
           background: $pane1;
           border-left: 1px solid $paneborder;
           border-right: 1px solid $paneborder;
@@ -166,7 +166,7 @@ body.tags #menu-tags {
   }
   .main-search-box {
     position: absolute;
-    right: 0;
+    left: 0;
     top: -5px;
   }
 }

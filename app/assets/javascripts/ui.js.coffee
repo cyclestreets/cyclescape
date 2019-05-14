@@ -177,8 +177,13 @@ jQuery ->
   tools.on "mouseleave", ->
     $(this).removeClass("reveal")
 
-  $("div.group-selector").on "click", (e) ->
-    $(this).toggleClass "open closed"
+  groupSelector = $("div.group-selector")
+  groupSelector.on "click", (e) ->
+    groupSelector.toggleClass "open"
+  groupSelector.on "mouseleave", ->
+    setTimeout(->
+      groupSelector.removeClass "open"
+    , 500)
 
   # Autosize text areas, but only with the right CSS class
   $("textarea.autosize").autosize()
