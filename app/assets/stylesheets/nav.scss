@@ -3,16 +3,25 @@
 #main-nav {
   @include gradient($colour2, $colour1);
   height: 40px;
+  nav.wrapper {
+    @include flex-display;
+  }
   nav {
     ul#navigation {
       @include list-reset;
+      @include flex-grow(2);
+      @include flex-display;
       position: relative;
       overflow: visible;
       li {
+        @include flex-grow(1);
+        @include flex-display;
         a {
+          @include flex-grow(1);
           color: $white;
           font-size: 16px;
-          padding: 10px 20px;
+          padding: 10px 0;
+          text-align: center;
           &:hover {
             text-decoration: none;
             background: $colour3;
@@ -24,6 +33,7 @@
       }
     }
     div.group-selector{
+      @include flex-grow(1);
       color: $white;
       text-transform: uppercase;
       font-size: 11px;
@@ -31,7 +41,7 @@
       padding-top: 16px;
       cursor: pointer;
       .label {
-        float: left;
+        float: right;
         margin-right: 10px;
       }
       a {
@@ -75,6 +85,7 @@
         }
         ul#groups-list {
           @include list-reset;
+          @include flex-grow(1);
           position: absolute;
           right: 0px;
           top: 40px;
@@ -152,6 +163,7 @@ body.tags #menu-tags {
     ul {
       @include list-reset;
       li {
+        @include flex-grow(1);
         color: $grey2;
         font-size: 12px;
         a {
@@ -166,7 +178,7 @@ body.tags #menu-tags {
   }
   .main-search-box {
     position: absolute;
-    left: 0;
+    right: 0;
     top: -5px;
   }
 }

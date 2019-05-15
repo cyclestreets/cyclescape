@@ -69,6 +69,17 @@
   @include border-radius($rad);
 }
 
+@mixin flex-grow($grow-size) {
+  -webkit-box-flex: $grow-size;
+  -ms-flex-positive: $grow-size;
+  flex-grow: $grow-size;
+}
+
+@mixin flex-display {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
 
 // list resets
 @mixin list-reset-copy {
