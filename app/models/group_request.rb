@@ -32,7 +32,7 @@ class GroupRequest < ApplicationRecord
   belongs_to :actioned_by, class_name: "User"
 
   validates :user, :name, :short_name, :email, presence: true
-  validates :name, :short_name, :email, uniqueness: true
+  validates :name, :short_name, :email, uniqueness: true, length: { maximum: 56 }
   validate :name_is_not_taken, :short_name_is_not_taken, :email_is_not_taken, unless: :confirmed?
   validates :short_name, subdomain: true
   validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }

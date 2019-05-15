@@ -31,7 +31,7 @@ class Group < ApplicationRecord
   has_one :profile, class_name: "GroupProfile", dependent: :destroy, inverse_of: :group
   has_one :prefs, class_name: "GroupPref", dependent: :destroy
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true, length: { maximum: 56 }
   validates :short_name, presence: true, uniqueness: true, subdomain: true
   validates :default_thread_privacy, inclusion: { in: MessageThread::ALLOWED_PRIVACY }
 
