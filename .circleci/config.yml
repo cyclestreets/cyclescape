@@ -73,7 +73,6 @@ jobs:
         # You can probably delete some of these entries
         - vendor/bundle
         - ~/.bundle
-        - ~/.cache/bower
         - ./node_modules
     # The following line was run implicitly in your 1.0 builds based on what CircleCI inferred about the structure of your project. In 2.0 you need to be explicit about which commands should be run. In some cases you can discard inferred commands if they are not relevant to your project.
     - run: |-
@@ -97,6 +96,8 @@ jobs:
     # The following line was run implicitly in your 1.0 builds based on what CircleCI inferred about the structure of your project. In 2.0 you need to be explicit about which commands should be run. In some cases you can discard inferred commands if they are not relevant to your project.
     - run:
         command: bundle exec rake sunspot:solr:start
+    - run:
+        command: sudo service redis-server start
     - run:
         command: bundle exec rspec --colour --order rand --format progress spec
         environment:
