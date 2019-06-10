@@ -9,6 +9,9 @@ class MessageThreadsController < ApplicationController
     threads = ThreadList.recent_public.page(params[:page])
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
     @threads = ThreadListDecorator.decorate_collection threads
+    if current_user
+      @user_subscriptions = current_user.thread_subscriptions.active.where(thread: threads).to_a
+    end
   end
 
   def show
