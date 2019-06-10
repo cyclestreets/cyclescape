@@ -7,7 +7,7 @@ class DashboardsController < ApplicationController
 
     @relevant_issues = IssueDecorator.decorate_collection(
       current_user.issues_near_locations.order(updated_at: :desc)
-      .preloaded.includes(:threads).page(params[:relevant_issues_page]).per(10)
+      .page(params[:relevant_issues_page]).per(10)
     )
 
     subscribed_threads = current_user.subscribed_threads.order_by_latest_message.page(params[:subscribed_threads_page]).per(12)
