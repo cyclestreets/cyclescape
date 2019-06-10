@@ -27,7 +27,16 @@ jobs:
     # To see the list of pre-built images that CircleCI provides for most common languages see
     # https://circleci.com/docs/2.0/circleci-images/
     docker:
-    - image: circleci/ruby:2.3.8-node-browsers-legacy
+      - image: circleci/ruby:2.3.8-node
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+      - image: circleci/postgres:9.5.16-postgis
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle-test_test
     steps:
     # Machine Setup
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
@@ -38,7 +47,7 @@ jobs:
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-    - run: sudo apt-get install -y nodejs
+    - run: sudo apt-get install -y nodejs postgresql-client || true
     - run: sudo npm install -g npm@6.4.1
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
@@ -55,9 +64,7 @@ jobs:
     - run: if [ -z "${NODE_ENV:-}" ]; then export NODE_ENV=test; fi
     - run: export PATH="~/cyclestreets/cyclescape/node_modules/.bin:$PATH"
     - run: npm install
-    - run: echo -e "export RAILS_ENV=test\nexport RACK_ENV=test" >> $BASH_ENV
-    - run: 'bundle check --path=vendor/bundle || bundle install --path=vendor/bundle
-        --jobs=4 --retry=3 '
+    - run: 'bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3'
     # Save dependency cache
     - save_cache:
         key: v1-dep-{{ .Branch }}-{{ epoch }}
@@ -72,9 +79,9 @@ jobs:
     - run: |-
         mkdir -p config && echo 'test:
           adapter: postgis
-          database: circle_ruby_test
-          username: ubuntu
-          host: localhost
+          database: circle-test_test
+          username: root
+          host: 127.0.0.1
         ' > config/database.yml
     - run: |-
         mkdir -p config && echo 'test:
@@ -85,20 +92,14 @@ jobs:
         ' > config/sunspot.yml
     - run:
         command: bundle exec rake db:create db:schema:load --trace
-        environment:
-          RAILS_ENV: test
     # Test
     #   This would typically be a build job when using workflows, possibly combined with build
     # The following line was run implicitly in your 1.0 builds based on what CircleCI inferred about the structure of your project. In 2.0 you need to be explicit about which commands should be run. In some cases you can discard inferred commands if they are not relevant to your project.
     - run:
         command: bundler exec rake sunspot:solr:start
-        environment:
-          RAILS_ENV: test
     - run:
         command: bundle exec rspec --colour --order rand --format progress spec
         environment:
-          RAILS_ENV: test
-          RACK_ENV: test
           SOLR: true
     # Teardown
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
