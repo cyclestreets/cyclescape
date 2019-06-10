@@ -53,7 +53,11 @@ module Taggable
   end
 
   def icon_from_tags
-    tags.where.not(icon: nil).order(:name).pluck(:icon).first
+    if tags.loaded?
+      tags.select(&:icon).min_by(&:name)&.icon
+    else
+      tags.where.not(icon: nil).order(:name).pluck(:icon).first
+    end
   end
 
   protected
