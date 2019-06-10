@@ -570,7 +570,7 @@
   issue:
     message_threads:
       new: &issue_message_threads_new
-        new_hint: "Start a conversion (thread) on this, describing your thoughts on what should be done. There could be many different discussion threads \n
+        new_hint: "Start a conversation (thread) on this, describing your thoughts on what should be done. There could be many different discussion threads \n
                  that one issue creates e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
         title: New Thread on %{issue}
     photos:
