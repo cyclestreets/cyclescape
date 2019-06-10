@@ -47,19 +47,19 @@ jobs:
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-    - run: sudo apt-get install -y nodejs postgresql-client || true
+    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick || true
     - run: sudo npm install -g npm@6.4.1
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
     # Restore the dependency cache
-    - restore_cache:
-        keys:
-        # This branch if available
-        - v1-dep-{{ .Branch }}-
-        # Default branch if not
-        - v1-dep-staging-
-        # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
-        - v1-dep-
+    # - restore_cache:
+    #     keys:
+    #     # This branch if available
+    #     - v1-dep-{{ .Branch }}-
+    #     # Default branch if not
+    #     - v1-dep-staging-
+    #     # Any branch if there are none on the default branch - this should be unnecessary if you have your default branch configured correctly
+    #     - v1-dep-
     - run: gem install bundler
     - run: if [ -z "${NODE_ENV:-}" ]; then export NODE_ENV=test; fi
     - run: export PATH="~/cyclestreets/cyclescape/node_modules/.bin:$PATH"
