@@ -22,6 +22,7 @@
 //= require superbly-tagfield.min
 //= require map_display
 //= require ui
+//= require timeago_ui
 //= require tags
 //= require library_message
 //= require thread_scroller

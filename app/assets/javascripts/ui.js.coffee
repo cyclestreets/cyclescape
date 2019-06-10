@@ -1,6 +1,4 @@
 require('autosize/build/jquery.autosize.js')
-require('timeago/jquery.timeago')
-jtimeago = require('jquery')
 
 window.jsonpTransportRequired = ->
   navigator.appVersion.indexOf('MSIE') != -1 &&
@@ -9,8 +7,6 @@ window.jsonpTransportRequired = ->
 jQuery ->
   # Tabs
   $(".tabs").parent().tabs()
-
-  jtimeago("time.timeago").timeago()
 
   unviewed_private_count = $("#unviewed-pm-count")
 
