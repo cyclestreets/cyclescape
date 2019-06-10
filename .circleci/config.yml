@@ -33,7 +33,7 @@ jobs:
           RACK_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-      - image: circleci/postgres:9.5.16-postgis
+      - image: circleci/postgres:9.5.16-postgis-ram
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
@@ -47,7 +47,7 @@ jobs:
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick || true
+    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre || true
     - run: sudo npm install -g npm@6.4.1
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
