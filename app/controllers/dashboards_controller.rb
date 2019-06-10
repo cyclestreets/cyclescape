@@ -22,6 +22,7 @@ class DashboardsController < ApplicationController
                                       .order_by_latest_message.includes(:issue, latest_message: %i[component created_by])
                                       .page(params[:prioritised_threads_page]).per(20)
     @prioritised_threads = ThreadListDecorator.decorate_collection(prioritised_threads)
+    @user_priorities = current_user.thread_priorities.where(thread: prioritised_threads).to_a
     @planning_applications = PlanningApplicationDecorator.decorate_collection(
       current_user.planning_applications_near_locations.ordered.page(params[:planning_page]).per(10).includes(:issue, :users)
     )

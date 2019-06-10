@@ -66,7 +66,7 @@
                     %td.activity
                       = thread.latest_activity
                     %td.meta{id: "priority-thread-#{thread.id}", style: "min-width: 225px"}
-                      = render "message_thread/user_priorities/form", thread: thread, collection_type: :select
+                      = render "message_thread/user_priorities/form", thread: thread, user_priority: @user_priorities.find { |up| up.thread_id == thread.id}, collection_type: :select
         - if @prioritised_threads.respond_to?(:total_pages)
           = paginate @prioritised_threads, param_name: :prioritised_threads_page, params: {anchor: 'my-priorities'}
       #deadlines

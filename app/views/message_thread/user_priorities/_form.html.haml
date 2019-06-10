@@ -1,4 +1,4 @@
-= semantic_form_for(thread.priority_for(current_user),
+= semantic_form_for((user_priority || current_user.thread_priorities.build(thread: thread)),
   url: thread_user_priorities_path(thread),
   remote: true,
   html: { method: :put, id: "thread-priority-#{thread.id}" }) do |f|
