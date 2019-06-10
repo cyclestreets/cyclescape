@@ -65,7 +65,7 @@ class IssueDecorator < ApplicationDecorator
   end
 
   def thread_count
-    issue.threads.count
+    issue.threads.loaded? ? issue.threads.to_a.size : issue.threads.count
   end
 
   def vote_count
