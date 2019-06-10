@@ -104,11 +104,9 @@ es-MX:
       index:
         created: Creado
         last_seen: Last login
-        last_seen_at: hace %{time_ago}
         introduction: Esta pagina muestra todos los usuarios en el sistema (independientemente
           de las membresias de grupos que tengan).
         disabled: Desactivado
-        disabled_at: hace %{time_ago}
         display_name: Nombre Público
         edit: Detalles del usuario
         email: Correo electrónico
@@ -126,11 +124,9 @@ es-MX:
       user:
         created: Creado
         last_seen: Last login
-        last_seen_at: hace %{time_ago}
         introduction: Esta pagina muestra todos los usuarios en el sistema (independientemente
           de las membresias de grupos que tengan).
         disabled: Desactivado
-        disabled_at: hace %{time_ago}
         display_name: Nombre Público
         edit: Detalles del usuario
         email: Correo electrónico
@@ -264,7 +260,7 @@ es-MX:
       areas_you_are_watching: areas que estas vigilando
       converted_to_issue: 'Convertido en un problema:'
       deadlines: Fin de plazo y fechas
-      deadline_thread_updated: hilo actualizado hace %{time_ago}
+      deadline_thread_updated: hilo actualizado hace
       issues_lower: problemas
       involved_threads: Hilos Involucrados
       issues_in_your_area: Problemas en tu area
@@ -302,7 +298,6 @@ es-MX:
       planning_applications_lower: aplicaciones de planeación
       recent_threads: hilos recientes
       subscribed_threads: Hilos Suscritos
-      thread_latest_activity: hace %{time_ago}
       my_priorities: Mis prioridades
       my_threads: Mis suscripciones de hilos
       issues_nearby: Ultimos problemas cercanos
@@ -400,7 +395,6 @@ es-MX:
       member:
         delete: Remove from group
         edit: Edit membership
-        joining_date: hace %{time_ago}
         invite_pending: Invite pending
     memberships:
       new:
@@ -940,7 +934,7 @@ es-MX:
       group_public: Group Public
       group_private: Group Private
       public: Public
-      posted_at: posted %{time_ago} ago
+      posted_at: posted
     edit:
       title: Edit thread properties
       description: As a group administrator, you can fix up thread properties here.
@@ -1237,7 +1231,7 @@ es-MX:
       group_public: Group Public
       group_private: Group Private
       public: Public
-      posted_at: posted %{time_ago} ago
+      posted_at: posted
     votable:
       sign_in_to_vote_html: Please %{sign_in_link} to vote.
   site:
@@ -1253,7 +1247,6 @@ es-MX:
         title: All Feedback
         what: What
         when: When
-        when_ago: hace %{time_ago}
         where: Where
         who: Who
       new:

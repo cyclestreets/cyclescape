@@ -17,17 +17,7 @@
             %p= t(".my_threads_introduction")
             %table.dashboard-threads
               %tbody
-                - @subscribed_threads.each do |thread|
-                  %tr
-                    %td.title
-                      %h4= link_to thread.title, thread_path(thread), class: (@unviewed_thread_ids.include?(thread.id) ? "new" : "")
-                      - if thread.has_issue?
-                        %p= thread.issue_link
-                    %td.activity
-                      = thread.latest_activity
-                    %td.meta
-                      = time_tag_with_title(thread.latest_activity_date) do
-                        - t ".thread_latest_activity", time_ago: time_ago_in_words(thread.latest_activity_date)
+                = render partial: 'subscribed_thread', collection: @subscribed_threads, as: :thread
         - if @subscribed_threads.respond_to?(:total_pages)
           = paginate @subscribed_threads, param_name: :subscribed_threads_page, params: {anchor: 'my-threads'}
       #issues-nearby
@@ -93,8 +83,8 @@
                             %p= message.component.title
                             = render partial: "shared/deadline", locals: {deadline: deadline}
                     %td.meta
-                      = time_tag_with_title(thread.latest_activity_date) do
-                        - t ".deadline_thread_updated", time_ago: time_ago_in_words(thread.latest_activity_date)
+                      = t ".deadline_thread_updated"
+                      = time_tag_with_title(thread.latest_activity_date)
       #planning-applications
         %section.planning_applications
           %h2= t ".planning_applications_in_your_area"

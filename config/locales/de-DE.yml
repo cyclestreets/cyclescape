@@ -105,11 +105,9 @@ de-DE:
       index:
         created: Erstellt
         last_seen: Letzte Anmendlung
-        last_seen_at: vor %{time_ago}
         introduction: Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaft
           die sie haben könnten).
         disabled: Deaktiviert
-        disabled_at: " vor %{time_ago}"
         display_name: Pseudonym
         edit: Editieren
         email: Email
@@ -127,11 +125,9 @@ de-DE:
       user:
         created: Erstellt
         last_seen: Letzte Anmendlung
-        last_seen_at: vor %{time_ago}
         introduction: Diese Seite listet alle Nutzer des Systems (ungeachtet der Gruppenmitgliedschaften
           die sie haben könnten).
         disabled: Deaktiviert
-        disabled_at: vor %{time_ago}
         display_name: Pseudonym
         edit: Benutzerdetails
         email: Mailadresse
@@ -265,7 +261,7 @@ de-DE:
       areas_you_are_watching: Beobachtete Gebiete
       converted_to_issue: 'In ein Thema umgewandelt:'
       deadlines: Fälligkeiten und Termine
-      deadline_thread_updated: Diskussion vor %{time_ago} aktualisiert
+      deadline_thread_updated: Diskussion aktualisiert
       issues_lower: Themen
       involved_threads: Beteiligte Diskussionen
       issues_in_your_area: Themen in deinem Gebiet
@@ -301,7 +297,6 @@ de-DE:
       planning_applications_lower: planning applications
       recent_threads: neuste Diskussionen
       subscribed_threads: abonnierte Diskussionen
-      thread_latest_activity: vor %{time_ago}
       my_priorities: Meine Prioritäten
       my_threads: Meine abonnierten Diskussionen
       issues_nearby: Letzte Themen in der Nähe
@@ -399,7 +394,6 @@ de-DE:
       member:
         delete: Aus der Gruppe entfernen
         edit: Mitgliedschaft bearbeiten
-        joining_date: vor %{time_ago}
         invite_pending: ausstehende Einladung
     memberships:
       new:
@@ -949,7 +943,7 @@ de-DE:
       group_public: Gruppe Öffentlich
       group_private: Gruppe Privat
       public: Öffentlich
-      posted_at: schrieb vor %{time_ago}
+      posted_at: schrieb
     edit:
       title: Diskussion bearbeiten
       description: As a group administrator, you can fix up thread properties here.
@@ -1248,7 +1242,7 @@ de-DE:
       group_public: Gruppe Öffentlich
       group_private: Gruppe Privat
       public: Öffentlich
-      posted_at: schrieb vor %{time_ago}
+      posted_at: schrieb
     votable:
       sign_in_to_vote_html: Bitte %{sign_in_link}, um zu wählen.
   site:
@@ -1264,7 +1258,6 @@ de-DE:
         title: Alle Kommentare
         what: Was
         when: Wann
-        when_ago: vor %{time_ago}
         where: Wo
         who: Wer
       new:
