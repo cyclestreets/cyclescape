@@ -17,7 +17,7 @@
             %p= t(".my_threads_introduction")
             %table.dashboard-threads
               %tbody
-                = render partial: 'subscribed_thread', collection: @subscribed_threads, as: :thread
+                = render partial: 'subscribed_thread', collection: @subscribed_threads, as: :thread, cached: true
         - if @subscribed_threads.respond_to?(:total_pages)
           = paginate @subscribed_threads, param_name: :subscribed_threads_page, params: {anchor: 'my-threads'}
       #issues-nearby
@@ -56,7 +56,7 @@
                     %td.activity
                       = thread.latest_activity
                     %td.meta{id: "priority-thread-#{thread.id}", style: "min-width: 225px"}
-                      = render "message_thread/user_priorities/form", thread: thread, user_priority: @user_priorities.find { |up| up.thread_id == thread.id}, collection_type: :select
+                      = render "message_thread/user_priorities/form", thread: thread, user_priority: @user_priorities.find { |up| up.thread_id == thread.id}, collection_type: :select, cached: true
         - if @prioritised_threads.respond_to?(:total_pages)
           = paginate @prioritised_threads, param_name: :prioritised_threads_page, params: {anchor: 'my-priorities'}
       #deadlines
@@ -119,7 +119,7 @@
                   %th= PlanningApplication.human_attribute_name(:description)
                   %th= "#{PlanningApplication.human_attribute_name(:uid)} & #{PlanningApplication.human_attribute_name(:url)}"
               %tbody
-                = render partial: 'planning_applications/planning_application', collection: @planning_applications, as: :planning_application
+                = render partial: 'planning_applications/planning_application', collection: @planning_applications, as: :planning_application, cached: true
 
         - if @planning_applications.respond_to?(:total_pages)
           = paginate @planning_applications, param_name: :planning_page, params: {anchor: 'planning-applications'}

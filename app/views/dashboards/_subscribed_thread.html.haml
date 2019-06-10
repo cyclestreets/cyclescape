@@ -1,0 +1,9 @@
+%tr
+  %td.title
+    %h4= link_to thread.title, thread_path(thread), class: (@unviewed_thread_ids.include?(thread.id) ? "new" : "")
+    - if thread.has_issue?
+      %p= thread.issue_link
+  %td.activity
+    = thread.latest_activity
+  %td.meta
+    = time_tag_with_title(thread.latest_activity_date)
