@@ -97,7 +97,7 @@ describe "Thread subscriptions" do
         subscribe_button.click
       end
 
-      it "should unsubscribe me and not send me any more messages" do
+      it "posting subscribes a user (and it doesn't notify the user)" do
         expect(current_user).to be_subscribed_to_thread(thread)
         email_count = all_emails.count
         unsubscribe_button.click
@@ -109,8 +109,6 @@ describe "Thread subscriptions" do
           click_on "Post Message"
         end
         expect(all_emails.count).to eq(email_count)
-
-        subscribe_button.click
         expect(current_user).to be_subscribed_to_thread(thread)
       end
     end

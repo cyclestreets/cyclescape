@@ -93,6 +93,15 @@ group :development do
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded
   gem "ruby_parser"
+
+  # For memory profiling
+  gem "rack-mini-profiler", require: false
+
+  gem "memory_profiler"
+
+  # For call-stack profiling flamegraphs
+  gem "flamegraph"
+  gem "stackprof"
 end
 
 group :development, :test do
@@ -112,7 +121,6 @@ group :test do
   gem "email_spec"
   gem "factory_bot_rails"
   gem "launchy"
-  gem "poltergeist"
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
   gem "selenium-webdriver"

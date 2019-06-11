@@ -141,8 +141,12 @@ class User < ApplicationRecord
     "#{id}-#{name.parameterize}"
   end
 
-  def subscribed_to_thread?(thread)
-    thread_subscriptions.active.to(thread)
+  def subscribed_to_thread?(thread, all_subscriptions: nil)
+    if all_subscriptions
+      all_subscriptions.to_a.find { |sub| sub.thread == thread }
+    else
+      thread_subscriptions.active.to(thread)
+    end
   end
 
   def ever_subscribed_to_thread?(thread)

@@ -17,6 +17,15 @@ class ApplicationController < ActionController::Base
   helper_method :group_subdomain?
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  fragment_cache_key do
+    if current_user
+      current_user.memberships.where(group: current_group).limit(1).pluck(:role).first ||
+        ActiveSupport::Cache.expand_cache_key(current_user&.memberships)
+    else
+      "no-user"
+    end
+  end
+
   private
 
   def configure_permitted_parameters

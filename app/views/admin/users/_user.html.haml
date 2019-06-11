@@ -14,12 +14,10 @@
     = formatted_created_at(user)
   %td
     - if user.last_seen_at?
-      = time_tag_with_title(user.last_seen_at) do
-        - t ".last_seen_at", time_ago: time_ago_in_words(user.last_seen_at)
+      = time_tag_with_title(user.last_seen_at)
   %td
     - if user.disabled_at?
-      = time_tag_with_title(user.disabled_at) do
-        - t ".disabled_at", time_ago: time_ago_in_words(user.disabled_at)
+      = time_tag_with_title(user.disabled_at)
   %td= link_to t(".edit"), edit_admin_user_path(user)
   %td= link_to t(".preferences"), edit_user_prefs_path(user)
   %td= link_to t(".locations"), admin_user_locations_path(user)

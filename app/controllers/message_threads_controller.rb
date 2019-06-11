@@ -9,12 +9,17 @@ class MessageThreadsController < ApplicationController
     threads = ThreadList.recent_public.page(params[:page])
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
     @threads = ThreadListDecorator.decorate_collection threads
+    if current_user
+      @user_subscriptions = current_user.thread_subscriptions.active.where(thread: threads).to_a
+    end
   end
 
   def show
     set_page_title thread.title
     @issue = IssueDecorator.decorate thread.issue if thread.issue
-    @messages = thread.messages.approved.includes(:component, created_by: %i[profile groups requested_groups])
+    @messages = thread.messages.approved.includes(
+      :action_messages, component: :action_messages, created_by: %i[profile]
+    )
     @library_items = Library::Item.find_by_tags_from(thread).limit(5)
     @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
 

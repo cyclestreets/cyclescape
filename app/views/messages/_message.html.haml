@@ -14,8 +14,8 @@
           = message.created_by.display_name_or_anon
       = t '.committee' if message.committee_created?
       = link_to thread_path(message.thread_id, anchor: dom_id(message)), class: "permalink" do
-        - time_tag_with_title(message.created_at) do
-          - t ".posted_date", time_ago: time_ago_in_words(message.created_at)
+        = t ".posted_date"
+        = time_tag_with_title(message.created_at)
   .body
     - if message.censored?
       .censored

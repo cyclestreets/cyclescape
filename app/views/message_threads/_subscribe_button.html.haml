@@ -1,5 +1,5 @@
 %div{ id: "subscribe_#{thread.id}"}
-  - if signed_in? && current_user.subscribed_to_thread?(thread)
+  - if signed_in? && current_user.subscribed_to_thread?(thread, all_subscriptions: @user_subscriptions)
     .following
       = image_tag('check-checked.png')
       = I18n.t('decorators.thread_list.following')
