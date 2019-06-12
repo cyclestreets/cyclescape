@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MessagesController < ApplicationController
-  filter_access_to :approve, :reject, attribute_check: true
+  filter_access_to :approve, :reject, :censor, attribute_check: true
 
   def create
     @message ||= thread.messages.build permitted_params.merge(created_by: current_user)
