@@ -44,12 +44,12 @@ jobs:
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
     # Restore the dependency cache
-    - restore_cache:
-        keys:
-        # This branch if available
-        - v1-dep-{{ .Branch }}-
-        # Default branch if not
-        - v1-dep-staging-
+    # - restore_cache:
+    #     keys:
+    #     # This branch if available
+    #     - v1-dep-{{ .Branch }}-
+    #     # Default branch if not
+    #     - v1-dep-staging-
     - run: gem install bundler
     - run: if [ -z "${NODE_ENV:-}" ]; then export NODE_ENV=test; fi
     - run: export PATH="~/cyclestreets/cyclescape/node_modules/.bin:$PATH"
