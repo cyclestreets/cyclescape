@@ -5,7 +5,6 @@
       %dt.title= t ".owner"
       %dd.title= link_to_profile group
   %ul.thread-metadata-listings
-    - leaders = @thread.leaders.ordered(group.try(:id)).each do |leader|
-      = render "connected_to_thread", user: leader, leading: true
-    - (subscribers - leaders).each do |sub|
-      = render "connected_to_thread", user: sub, leading: false
+    - leaders = @thread.leaders.ordered(group.try(:id))
+    = render collection: leaders, as: :user, partial: "connected_to_thread", locals: { leading: true }, cached: true
+    = render collection: (subscribers - leaders), as: :user, partial: "connected_to_thread", locals: { leading: false }, cached: true
