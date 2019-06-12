@@ -225,10 +225,9 @@
       browse_all_other_issues: browse all other issues
       my_priorities_introduction: 'This is a listing of the priorities you have set,
         most important first:'
-      my_threads_introduction: 'Latest updates on the discussion threads you are subscribed
-        to:'
+      my_threads_introduction: 'Latest updates on the discussion threads you are following:'
       my_upcoming_deadline_introduction: 'Upcoming deadlines and dates within the
-        discussion threads you are subscribed to:'
+        discussion threads you are following:'
       no_upcoming_deadline_threads: You aren't involved in any discussion threads
         with upcoming deadlines or dates.
       no_subscribed_threads_html: 'You aren''t following any threads yet. You could
@@ -253,9 +252,8 @@
         applications (courtesy of the PlanIt website) in your %{location_link}:'
       planning_applications_lower: planning applications
       recent_threads: recent threads
-      subscribed_threads: Subscribed Threads
       my_priorities: My priorities
-      my_threads: My subscribed threads
+      my_threads: Followed threads
       issues_nearby: Latest issues nearby
       map: Map
       posted:
@@ -652,7 +650,7 @@
       admin_tooltip: Admin area, for system administrators
       dashboard: My %{application_name}
       dashboard_tooltip: Your personal dashboard, showing updates on discussion threads
-        you are subscribed to
+        you are following
       about: About
       user_guide: User guide
       sign_out: Sign out
@@ -804,9 +802,9 @@
   message_thread:
     subscriptions:
       create:
-        success: You are now subscribed to this thread
+        success: You are now following to this thread
       destroy:
-        success: You have unsubscribed from this thread
+        success: You are no longer following this thread
       edit:
         unsubscribe: are sure you want to stop following
     tags:
