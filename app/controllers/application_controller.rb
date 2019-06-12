@@ -19,8 +19,7 @@ class ApplicationController < ActionController::Base
 
   fragment_cache_key do
     if current_user
-      current_user.memberships.where(group: current_group).limit(1).pluck(:role).first ||
-        ActiveSupport::Cache.expand_cache_key(current_user&.memberships)
+      ActiveSupport::Cache.expand_cache_key(current_user.memberships)
     else
       "no-user"
     end
