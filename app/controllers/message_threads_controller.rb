@@ -18,7 +18,7 @@ class MessageThreadsController < ApplicationController
     set_page_title thread.title
     @issue = IssueDecorator.decorate thread.issue if thread.issue
     @messages = thread.messages.approved.includes(
-      :action_messages, component: :action_messages, created_by: %i[profile]
+      :action_messages, component: :action_messages, created_by: %i[profile memberships groups membership_requests]
     )
     @library_items = Library::Item.find_by_tags_from(thread).limit(5)
     @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
