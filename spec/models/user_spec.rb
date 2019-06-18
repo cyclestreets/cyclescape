@@ -401,6 +401,7 @@ describe User, type: :model do
       expect(subject.display_name).to be_nil
       expect(subject.name).to include("deleted")
       expect(subject.name).to include(subject.id.to_s)
+      expect(subject.email).to start_with("deleted-user-#{subject.id}")
     end
 
     it "should clear the profile" do

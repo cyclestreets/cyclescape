@@ -243,6 +243,7 @@ class User < ApplicationRecord
   def obfuscate_name
     self.full_name = "User #{id} (deleted)"
     self.display_name = nil
+    self.email = "deleted-user-#{id}-#{SecureRandom.uuid}@cyclescape.org"
     true
   end
 
