@@ -38,7 +38,7 @@ class PlanningApplicationWorker
       end
     end
   rescue StandardError => e
-    Rollbar.debug(e, "Issue with authority #{authority}, req: #{req}")
+    Rollbar.debug(e, "Issue with req: #{req}")
     { "records" => [] }
   end
 
