@@ -6,6 +6,7 @@ ENV["RAILS_ENV"] ||= "test"
 
 require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
+require "webdrivers"
 require "capybara/rspec"
 require "email_spec"
 require "database_cleaner"

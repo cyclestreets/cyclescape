@@ -38,7 +38,7 @@ jobs:
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromedriver
+    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre
     - run: sudo npm install -g npm@6.4.1
 
     # Dependencies
@@ -64,6 +64,7 @@ jobs:
         - vendor/bundle
         - ~/.bundle
         - ./node_modules
+        - ~/.webdrivers
     # The following line was run implicitly in your 1.0 builds based on what CircleCI inferred about the structure of your project. In 2.0 you need to be explicit about which commands should be run. In some cases you can discard inferred commands if they are not relevant to your project.
     - run: |-
         mkdir -p config && echo 'test:

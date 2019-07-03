@@ -127,4 +127,5 @@ group :test do
   gem "shoulda-matchers"
   gem "sunspot_test"
   gem "webmock"
+  gem "webdrivers"
 end
