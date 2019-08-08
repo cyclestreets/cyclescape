@@ -103,11 +103,9 @@ it:
       index:
         created: Creato
         last_seen: Last login
-        last_seen_at: '%{time_ago} fa'
         introduction: This page lists all users on the system (irrespective of any
           group membership they may have).
         disabled: Disabilitato
-        disabled_at: '%{time_ago} fa'
         display_name: Nome visualizzato
         edit: Dettagli utente
         email: Email
@@ -125,11 +123,9 @@ it:
       user:
         created: Creato
         last_seen: Last login
-        last_seen_at: '%{time_ago} fa'
         introduction: This page lists all users on the system (irrespective of any
           group membership they may have).
         disabled: Disabilitato
-        disabled_at: '%{time_ago} fa'
         display_name: Nome visualizzato
         edit: Dettagli utente
         email: Email
@@ -263,7 +259,7 @@ it:
       areas_you_are_watching: areas you are watching
       converted_to_issue: 'Converted to Issue:'
       deadlines: Deadlines and dates
-      deadline_thread_updated: thread updated %{time_ago} ago
+      deadline_thread_updated: thread updated
       issues_lower: issues
       involved_threads: Involved Threads
       issues_in_your_area: Issues in your area
@@ -304,7 +300,6 @@ it:
       planning_applications_lower: planning applications
       recent_threads: discussioni decenti
       subscribed_threads: Discussioni sottoscritte
-      thread_latest_activity: '%{time_ago} fa'
       my_priorities: Mie priorità
       my_threads: My subscribed threads
       issues_nearby: Latest issues nearby
@@ -402,7 +397,6 @@ it:
       member:
         delete: Rimuovi da gruppo
         edit: Edit membership
-        joining_date: '%{time_ago} fa'
         invite_pending: Invite pending
     memberships:
       new:
@@ -943,7 +937,7 @@ it:
       group_public: Gruppo pubblico
       group_private: Gruppo privato
       public: Pubblico
-      posted_at: posted %{time_ago} ago
+      posted_at: posted
     edit:
       title: Edit thread properties
       description: As a group administrator, you can fix up thread properties here.
@@ -1100,7 +1094,7 @@ it:
       failure: Could not add message
       success: Message successfully posted
     message:
-      posted_date: posted %{time_ago} ago
+      posted_date: posted
       censor: Censor this message
       censored: This message has been removed
       create_note: Create Library Note
@@ -1240,7 +1234,7 @@ it:
       group_public: Gruppo pubblico
       group_private: Gruppo privato
       public: Pubblico
-      posted_at: posted %{time_ago} ago
+      posted_at: posted
     votable:
       sign_in_to_vote_html: Please %{sign_in_link} to vote.
   site:
@@ -1256,7 +1250,6 @@ it:
         title: All Feedback
         what: What
         when: When
-        when_ago: '%{time_ago} fa'
         where: Where
         who: Who
       new:

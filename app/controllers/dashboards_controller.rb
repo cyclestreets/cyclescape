@@ -7,23 +7,32 @@ class DashboardsController < ApplicationController
 
     @relevant_issues = IssueDecorator.decorate_collection(
       current_user.issues_near_locations.order(updated_at: :desc)
-      .preloaded.page(params[:relevant_issues_page]).per(10)
+      .page(params[:relevant_issues_page]).per(10)
     )
 
-    subscribed_threads = current_user.subscribed_threads.order_by_latest_message.page(params[:subscribed_threads_page]).per(12)
-    @subscribed_threads = ThreadListDecorator.decorate_collection subscribed_threads
-                          .includes(:issue, latest_message: %i[component created_by])
+    subscribed_threads =
+      current_user
+      .subscribed_threads.order_by_latest_message.page(params[:subscribed_threads_page]).per(12)
+
+    @subscribed_threads = ThreadListDecorator.decorate_collection(
+      subscribed_threads.includes(:issue, latest_message: %i[component created_by])
+    )
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: subscribed_threads)
 
     deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 30).includes(:issue, :latest_message)
     @deadline_threads = ThreadListDecorator.decorate_collection deadline_threads
 
-    prioritised_threads = current_user.prioritised_threads.order("priority desc")
-                                      .order_by_latest_message.includes(:issue, latest_message: %i[component created_by])
-                                      .page(params[:prioritised_threads_page]).per(20)
+    prioritised_threads =
+      current_user
+      .prioritised_threads.order("priority desc").order_by_latest_message
+      .includes(:issue, latest_message: %i[component created_by])
+      .page(params[:prioritised_threads_page]).per(20)
+
     @prioritised_threads = ThreadListDecorator.decorate_collection(prioritised_threads)
+    @user_priorities = current_user.thread_priorities.where(thread: prioritised_threads).to_a
     @planning_applications = PlanningApplicationDecorator.decorate_collection(
-      current_user.planning_applications_near_locations.ordered.page(params[:planning_page]).per(10).includes(:issue, :users)
+      current_user
+      .planning_applications_near_locations.ordered.page(params[:planning_page]).per(10).includes(:issue, :users)
     )
   end
 

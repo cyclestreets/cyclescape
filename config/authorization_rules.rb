@@ -126,7 +126,7 @@ authorization do
     end
 
     has_permission_on :messages do
-      to %i[approve reject]
+      to %i[censor approve reject]
       if_attribute thread: { group_committee_members: contains { user } }
     end
 

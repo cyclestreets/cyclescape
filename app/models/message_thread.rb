@@ -278,11 +278,11 @@ class MessageThread < ApplicationRecord
   end
 
   def latest_activity_at
-    messages.approved.empty? ? updated_at : messages.approved.maximum("messages.updated_at")
+    latest_activity.updated_at
   end
 
   def latest_activity_by
-    messages.approved.empty? ? created_by : messages.approved.last.created_by
+    latest_activity.created_by
   end
 
   def default_centre
@@ -371,5 +371,9 @@ class MessageThread < ApplicationRecord
 
   def add_auto_subscribers
     Resque.enqueue(ThreadAutoSubscriber, id, previous_changes)
+  end
+
+  def latest_activity
+    @latest_activity ||= messages.approved.last || self
   end
 end

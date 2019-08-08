@@ -101,11 +101,9 @@
       index: &admin_users_index
         created: Created
         last_seen: Last login
-        last_seen_at: '%{time_ago} ago'
         introduction: This page lists all users on the system (irrespective of any
           group membership they may have).
         disabled: Disabled
-        disabled_at: '%{time_ago} ago'
         display_name: Display Name
         edit: User details
         email: Email
@@ -215,7 +213,7 @@
       areas_you_are_watching: areas you are watching
       converted_to_issue: 'Converted to Issue:'
       deadlines: Deadlines and dates
-      deadline_thread_updated: thread updated %{time_ago} ago
+      deadline_thread_updated: thread updated
       issues_lower: issues
       involved_threads: Involved Threads
       issues_in_your_area: Issues in your area
@@ -256,7 +254,6 @@
       planning_applications_lower: planning applications
       recent_threads: recent threads
       subscribed_threads: Subscribed Threads
-      thread_latest_activity: '%{time_ago} ago'
       my_priorities: My priorities
       my_threads: My subscribed threads
       issues_nearby: Latest issues nearby
@@ -352,7 +349,6 @@
       member:
         delete: Remove from group
         edit: Edit membership
-        joining_date: '%{time_ago} ago'
         invite_pending: Invite pending
     memberships:
       new:
@@ -835,7 +831,7 @@
       group_public: Group Public
       group_private: Group Private
       public: Public
-      posted_at: posted %{time_ago} ago
+      posted_at: posted
     edit:
       title: Edit thread properties
       description: As a group administrator, you can fix up thread properties here.
@@ -979,7 +975,7 @@
       failure: Could not add message
       success: Message successfully posted
     message:
-      posted_date: posted %{time_ago} ago
+      posted_date: posted
       censor: Censor this message
       censored: This message has been removed
       create_note: Create Library Note
@@ -1125,7 +1121,7 @@
       group_public: Group Public
       group_private: Group Private
       public: Public
-      posted_at: posted %{time_ago} ago
+      posted_at: posted
     votable:
       sign_in_to_vote_html: Please %{sign_in_link} to vote.
   site:
@@ -1141,7 +1137,6 @@
         title: All Feedback
         what: What
         when: When
-        when_ago: '%{time_ago} ago'
         where: Where
         who: Who
       new:

@@ -104,11 +104,9 @@ cs:
       index:
         created: Vytvořeno
         last_seen: Naposledy přihlášen
-        last_seen_at: před %{time_ago}
         introduction: Tato stránka zobrazuje všechny uživatele v systému (nezávisle
           na tom v jaká mají oprávnění).
         disabled: Neaktivní
-        disabled_at: před %{time_ago}
         display_name: Zobrazené jméno
         edit: Podrobnosti uživatele
         email: E-mail
@@ -126,11 +124,9 @@ cs:
       user:
         created: Vytvořeno
         last_seen: Naposledy přihlášen
-        last_seen_at: před %{time_ago}
         introduction: Tato stránka zobrazuje všechny uživatele v systému (nezávisle
           na tom v jaká mají oprávnění).
         disabled: Neaktivní
-        disabled_at: před %{time_ago}
         display_name: Zobrazené jméno
         edit: Podrobnosti uživatele
         email: E-mail
@@ -263,7 +259,7 @@ cs:
       areas_you_are_watching: oblasti, které sledujete
       converted_to_issue: 'Převedeno na podnět:'
       deadlines: Termíny a data
-      deadline_thread_updated: vlákno upraveno %{time_ago}
+      deadline_thread_updated: vlákno upraveno
       issues_lower: podněty
       involved_threads: Zahrnutá vlákna
       issues_in_your_area: Podněty ve vaší oblasti
@@ -300,7 +296,6 @@ cs:
       planning_applications_lower: přihlášky k plánování
       recent_threads: nedávná vlákna
       subscribed_threads: Zapsaná vlákna
-      thread_latest_activity: před %{time_ago}
       my_priorities: Důležitost
       my_threads: Odebíraná vlákna
       issues_nearby: Podněty v blízkosti
@@ -399,7 +394,6 @@ cs:
       member:
         delete: Odstranit z místní skupiny
         edit: Upravit členství
-        joining_date: před %{time_ago}
         invite_pending: Pozvánka čeká na vyřízení
     memberships:
       new:
@@ -954,7 +948,7 @@ cs:
       group_public: Veřejné skupinové
       group_private: Soukromé skupinové
       public: Veřejné
-      posted_at: zasláno před %{time_ago}
+      posted_at: zasláno
     edit:
       title: Upravit vlastnosti diskuzních vláken
       description: Jako správce místní skupiny můžete opravit vlastnosti diskuzních
@@ -1114,7 +1108,7 @@ cs:
       failure: Nemohu odeslat zprávu
       success: Zpráva úspěšně odeslána
     message:
-      posted_date: zaslali před %{time_ago}
+      posted_date: zaslali
       censor: Cenzurovat tuto zprávu
       censored: Tato zpráva byla odebrána
       create_note: Vytvořit poznámku v knihovně
@@ -1256,7 +1250,7 @@ cs:
       group_public: Veřejné skupinové
       group_private: Přístupné pouze místní skupině
       public: Veřejné
-      posted_at: zaslali před %{time_ago}
+      posted_at: zaslali
     votable:
       sign_in_to_vote_html: Musíte se %{sign_in_link}, abyste mohli začít hlasovat.
   site:
@@ -1272,7 +1266,6 @@ cs:
         title: Všechny zpětné vazby
         what: Co
         when: Kdy
-        when_ago: před %{time_ago}
         where: Kde
         who: Kdo
       new:

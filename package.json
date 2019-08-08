@@ -12,7 +12,8 @@
     "leaflet-draw": "0.4.7",
     "leaflet-search": "1.9.8",
     "planer": "^1.1.1",
-    "slick-carousel-browserify": "1.6.12"
+    "slick-carousel-browserify": "1.6.12",
+    "timeago": "^1.6.7"
   },
   "license": "MIT",
   "engines": {

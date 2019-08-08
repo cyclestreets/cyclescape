@@ -10,8 +10,7 @@
   %td= auto_link member.email
   %td
     - if member.accepted_or_not_invited?
-      = time_tag_with_title(@group.membership_for(member).created_at) do
-        - t ".joining_date", time_ago: time_ago_in_words(@group.membership_for(member).created_at)
+      = time_tag_with_title(@group.membership_for(member).created_at)
     - else
       = t ".invite_pending"
   %td

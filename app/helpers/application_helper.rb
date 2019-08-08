@@ -67,8 +67,9 @@ module ApplicationHelper
     content_tag(:time, content, options.reverse_merge(datetime: datetime), &block)
   end
 
-  def time_tag_with_title(date_or_time, &block)
-    time_tag(date_or_time, title: l(date_or_time, format: :long), &block)
+  def time_tag_with_title(date_or_time, opts = {})
+    opts[:class] ||= "timeago"
+    time_tag(date_or_time, opts.merge(title: l(date_or_time, format: :long)))
   end
 
   def vote_link(resource)

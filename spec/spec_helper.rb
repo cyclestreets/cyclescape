@@ -11,7 +11,6 @@ require "email_spec"
 require "database_cleaner"
 require "declarative_authorization/maintenance"
 require "webmock/rspec"
-require "capybara/poltergeist"
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
