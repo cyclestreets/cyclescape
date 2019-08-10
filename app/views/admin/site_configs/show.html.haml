@@ -2,34 +2,34 @@
 
 %p
   %b Logo:
-  = image_tag(@live_site_config.logo.try(:url))
+  = image_tag(@live_site_config.logo_url)
 %p
   %b Small logo:
-  = image_tag(@live_site_config.small_logo.try(:url))
+  = image_tag(@live_site_config.small_logo_url)
 %p
   %b Funder 1
   = link_to @live_site_config.funder_name_footer1, @live_site_config.funder_url_footer1
-  = image_tag @live_site_config.funder_image_footer1.try(:url)
+  = image_tag @live_site_config.funder_image_footer1_url
 %p
   %b Funder 2
   = link_to @live_site_config.funder_name_footer2, @live_site_config.funder_url_footer2
-  = image_tag @live_site_config.funder_image_footer2.try(:url)
+  = image_tag @live_site_config.funder_image_footer2_url
 %p
   %b Funder 3
   = link_to @live_site_config.funder_name_footer3, @live_site_config.funder_url_footer3
-  = image_tag @live_site_config.funder_image_footer3.try(:url)
+  = image_tag @live_site_config.funder_image_footer3_url
 %p
   %b Funder 4
   = link_to @live_site_config.funder_name_footer4, @live_site_config.funder_url_footer4
-  = image_tag @live_site_config.funder_image_footer4.try(:url)
+  = image_tag @live_site_config.funder_image_footer4_url
 %p
   %b Funder 5
   = link_to @live_site_config.funder_name_footer5, @live_site_config.funder_url_footer5
-  = image_tag @live_site_config.funder_image_footer5.try(:url)
+  = image_tag @live_site_config.funder_image_footer5_url
 %p
   %b Funder 6
   = link_to @live_site_config.funder_name_footer6, @live_site_config.funder_url_footer6
-  = image_tag @live_site_config.funder_image_footer6.try(:url)
+  = image_tag @live_site_config.funder_image_footer6_url
 %p
   %b Nowhere location:
   = @live_site_config.nowhere_location

@@ -11,8 +11,9 @@ class SiteConfig < ApplicationRecord
   dragonfly_accessor :logo
   dragonfly_accessor :small_logo
 
-  1.upto(6).each do |n|
-    dragonfly_accessor :"funder_image_footer#{n}"
+  FUNDER_IMAGES = 1.upto(6).map { |n| :"funder_image_footer#{n}" }.freeze
+  FUNDER_IMAGES.each do |funder_image|
+    dragonfly_accessor funder_image
   end
 
   def to_struct
@@ -23,6 +24,12 @@ class SiteConfig < ApplicationRecord
         end
       )
     )
+  end
+
+  (%i[logo small_logo] + FUNDER_IMAGES).each do |meth|
+    define_method "#{meth}_url" do
+      public_send(meth)&.url || ""
+    end
   end
 
   private
