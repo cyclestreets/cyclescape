@@ -32,7 +32,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   config.log_level = :info
-  config.logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log", "weekly")
+  config.logger = Logger.new(Rails.root.join("log", "#{Rails.env}.log"))
   config.lograge.enabled = true
   config.lograge.custom_options = lambda do |event|
     exceptions = %w[controller action format id]
