@@ -46,6 +46,7 @@ class Message < ApplicationRecord
 
   scope :recent, -> { ordered.limit(3) }
   scope :ordered, -> { order(created_at: :desc) }
+  scope :ordered_for_thread_view, -> { order(created_at: :asc) }
   scope :approved,   -> { where(status: [nil, "approved"]) }
   scope :mod_queued, -> { where(status: "mod_queued") }
   scope :in_group,   ->(group_id) { includes(:thread).where(message_threads: { group_id: group_id }).references(:thread) }

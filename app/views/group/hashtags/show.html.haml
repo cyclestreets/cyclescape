@@ -11,7 +11,7 @@
             - link_class = (@unviewed_thread_ids.include?(thread.id) ? "new primary-link" : "primary-link")
             %h4= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread), class: link_class
             .meta
-          = render partial: "messages/message", locals: { view_from: nil, thread: message.thread, message: message }
+          = render partial: "messages/message", locals: { thread: message.thread, message: message }
   = paginate @messages
 - else
   %p= t(".none_found", name: params[:name])

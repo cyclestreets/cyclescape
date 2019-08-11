@@ -5,7 +5,7 @@
 - query[:key] = @site_config.google_street_view_api_key if @site_config.google_street_view_api_key
 %script{src: "https://maps.googleapis.com/maps/api/js?#{query.to_query}"}
 
-%section#content.thread
+%section#content.thread{ data: {"view-message-id" => @view_from&.id} }
   %header
     - if @issue
       %p.pre-title= link_to @issue.title, issue_path(@issue)
@@ -45,8 +45,7 @@
             %li= link_to t(".edit"), edit_thread_path(@thread)
           - if permitted_to? :destroy, @thread
             %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t("are_you_sure") }
-
-  = render collection: @messages, partial: "messages/message", locals: { view_from: @view_from, thread: @thread }, cached: true
+  = render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
   - if @thread.closed
     - closed_by = permitted_to?(:view_profile, @thread.closed_by.last) ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon
     = t '.closed_html', by: closed_by, at: time_ago_in_words(@thread.message_thread_closes.last.created_at)

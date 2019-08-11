@@ -51,7 +51,7 @@ class MessageThread < ApplicationRecord
   belongs_to :group, inverse_of: :threads, counter_cache: true
   belongs_to :issue, inverse_of: :threads
   belongs_to :user, inverse_of: :private_threads
-  has_many :messages, -> { order(created_at: :asc) }, foreign_key: "thread_id", autosave: true, inverse_of: :thread
+  has_many :messages, -> { ordered_for_thread_view }, foreign_key: "thread_id", autosave: true, inverse_of: :thread
   has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: "ThreadSubscription", foreign_key: "thread_id", inverse_of: :thread
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, -> { distinct }, through: :messages, source: :created_by

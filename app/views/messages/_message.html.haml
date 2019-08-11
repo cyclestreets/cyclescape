@@ -1,5 +1,4 @@
-- scroll_class = (message == view_from) ? 'thread-view-from-here' : nil
-%article.message{ class: scroll_class }
+%article.message{id: "message-#{message.id}"}
   .details
     .author
       - if permitted_to? :view_profile, message.created_by
