@@ -15,6 +15,7 @@
 //= require jquery-ui/datepicker
 //= require jquery-ui/dialog
 //= require jquery-ui/slider
+//= require timeago
 //= require tinymce-jquery
 //= require tinymce_init
 //= require leaflet
