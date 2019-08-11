@@ -17,7 +17,7 @@
             %p= t(".my_threads_introduction")
             %table.dashboard-threads
               %tbody
-                = render partial: 'subscribed_thread', collection: @subscribed_threads, as: :thread, cached: true
+                = render partial: 'subscribed_thread', collection: @subscribed_threads, as: :thread
         - if @subscribed_threads.respond_to?(:total_pages)
           = paginate @subscribed_threads, param_name: :subscribed_threads_page, params: {anchor: 'my-threads'}
       #issues-nearby
