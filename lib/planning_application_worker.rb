@@ -10,7 +10,7 @@ class PlanningApplicationWorker
 
   def process!
     new_planning_applications = PlanningFilter::LOCAL_AUTHORITIES.map do |la|
-      get_authorty(la)
+      get_authority(la)
     end.flatten
     add_applications new_planning_applications
   end
@@ -42,7 +42,7 @@ class PlanningApplicationWorker
     { "records" => [] }
   end
 
-  def get_authorty(authority)
+  def get_authority(authority)
     total = conn_request(generate_authority_requests(authority))
     if total["count"] == 500
       multi_total = (0..2).map do |days_offset|
@@ -81,8 +81,8 @@ class PlanningApplicationWorker
     {
       method: :get, query:
       { auth: authority,
-        start_date: dates[:start_date].to_s,
-        end_date: dates[:end_date].to_s,
+        start_date: dates[:start_date].to_date.to_s,
+        end_date: dates[:end_date].to_date.to_s,
         pg_sz: 500, sort: "-start_date" }
     }
   end
