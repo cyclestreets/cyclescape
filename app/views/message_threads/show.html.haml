@@ -54,7 +54,8 @@
       = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green', data: { confirm: t("are_you_sure") }
   - elsif @thread.private_message? && !(permitted_to? :send_private_message, other_user) # Do not allow new messages if messages are not permitted
   - else
-    = render "messages/new"
+    #messages-new-partial
+      = render "messages/new"
 
 %aside#sidebar
   = render "subscribe_panel", thread: @thread

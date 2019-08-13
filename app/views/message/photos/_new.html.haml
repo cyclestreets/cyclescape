@@ -1,9 +1,9 @@
 #new-photo-message.pane
   - photo = PhotoMessage.new
-  = semantic_form_for photo, opts.deep_merge(url: thread_photos_path(@thread), remote: false, html: { multipart: true}) do |f|
+  = semantic_form_for photo, opts.deep_merge(url: thread_photos_path(@thread)) do |f|
     = f.inputs do
       = render "shared/image_edit", { resource: photo, attribute: "photo", opts: { width: 360, height: 540, enableresize: true }, f: f }
       = f.input :caption
       = render "shared/actions", f: f, thread: @thread
     = f.actions do
-      = f.action :submit, button_html: message_button_html
+      = f.action :submit, button_html: message_button_html.merge(onclick: "$('input[type=file]:not([disabled])').prop('disabled', true).attr('data-undisable', '1');") # Hack to make jquery-ujs fileInputSelector still see this form as remote

@@ -1,7 +1,8 @@
 <% if @message.persisted? %>
   $("#new-message").before("<%= escape_javascript(render partial: 'messages/message', locals: { message: @message, thread: @thread } ) %>")
   tinyMCE.activeEditor.setContent('')
-  $("#new-message").find("input[type=text], textarea").not(":button, :submit, :reset").val('')
+  $("#new-message").find("input[type=text], textarea, input[type=file]").not(":button, :submit, :reset").val('').trigger("change")
+  $("[data-undisable='1']").prop("disabled", false).attr("data-undisable", null)
 <% end %>
 <%= render 'shared/flash' %>
 <% if flash[:alert].present? %>

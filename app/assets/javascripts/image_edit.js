@@ -20,10 +20,6 @@ ImageEdit.prototype.readFile = function (input) {
     var reader = new FileReader()
     this.fileType = file.type
 
-    if (this.cropper) {
-      this.cropper.destroy()
-    }
-
     reader.onload = function (_) {
       this.previewEl[0].src = reader.result
       this.initCroppie()
@@ -36,7 +32,13 @@ ImageEdit.prototype.readFile = function (input) {
 ImageEdit.prototype.initFileOnChange = function () {
   var imageEdit = this
   this.readFile(this.fileEl[0])
-  this.fileEl.on('change', function () { imageEdit.readFile(this) })
+  this.fileEl.on('change', function () {
+    imageEdit.previewEl.attr('src', null)
+    imageEdit.readFile(this)
+    if (imageEdit.cropper) {
+      imageEdit.cropper.destroy()
+    }
+  })
 }
 
 ImageEdit.prototype.initCroppie = function () {
