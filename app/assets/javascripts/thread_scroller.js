@@ -1,6 +1,6 @@
 $(document).ready(function () {
   var offset
-  var viewMessageId = $('#content').data().viewMessageId
+  var viewMessageId = $('#content').data('view-message-id')
   if (viewMessageId) {
     offset = $('#message-' + viewMessageId).offset()
   }
