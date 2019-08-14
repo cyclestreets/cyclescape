@@ -1,9 +1,9 @@
 #new-document-message.pane
-  = semantic_form_for DocumentMessage.new, opts.deep_merge(url: thread_documents_path(@thread), remote: false, html: { multipart: true }) do |f|
+  = semantic_form_for DocumentMessage.new, opts.deep_merge(url: thread_documents_path(@thread), html: {id: :document_message_form}) do |f|
     = f.inputs do
       = f.input :file, as: :file
       = f.input :retained_file, as: :hidden
       = f.input :title
       = render "shared/actions", f: f, thread: @thread
     = f.actions do
-      = f.action :submit, button_html: message_button_html
+      = f.action :submit, button_html: message_button_html.merge(onclick: "$('input[type=file]:not([disabled])').prop('disabled', true).attr('data-undisable', '1');") # Hack to make jquery-ujs fileInputSelector still see this form as remote
