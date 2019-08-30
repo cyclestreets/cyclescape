@@ -75,7 +75,7 @@ gem "jquery-ui-rails", "~> 5.0.0"
 gem "sass-rails", "~> 5.0"
 # gem 'turbolinks'
 gem "lograge"
-gem "nokogiri", "~> 1.8.1"
+gem "nokogiri"
 gem "progress_bar"
 gem "rails-i18n", "~> 4.0.0"
 gem "rails-observers"
