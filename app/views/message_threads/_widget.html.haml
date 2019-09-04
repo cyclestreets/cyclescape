@@ -4,6 +4,6 @@
       %h3= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread)
       %span.privacy= thread_type(thread) + ", "
       %span.count= pluralize(thread.messages.count, "message") + ", "
-      %span.participants= pluralize(thread.participants.count, "participant")
+      %span.participants= pluralize(thread.participants.count(:id), "participant")
     %section.messages
       = render collection: thread.messages.recent, partial: "messages/message", locals: {thread: thread}
