@@ -20,8 +20,8 @@ describe UserLocationObserver do
   context "adding a location" do
     let(:issue) { create(:issue) }
     let!(:thread) { create(:issue_message_thread, issue: issue) }
-    let(:user_location) { build(:user_location, location: issue.location) }
-    let(:user) { user_location.user }
+    let(:user_location) { build(:user_location, location: issue.location, user: user) }
+    let(:user) { create(:user) }
     let(:group) { create(:group) }
 
     context "with pref" do
