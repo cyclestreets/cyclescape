@@ -41,7 +41,7 @@ Rails.application.configure do
   # If you want to avoid falling back to en-GB translations (i.e. you want
   # all missing translations in your language to throw errors) then set this
   # to `false`
-  config.i18n.fallbacks = true
+  config.i18n.fallbacks = [I18n.default_locale]
 
   config.action_view.raise_on_missing_translations = true
   config.assets.raise_runtime_errors = true
