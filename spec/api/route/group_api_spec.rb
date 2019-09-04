@@ -5,7 +5,7 @@ require "spec_helper"
 describe Route::GroupApi do
   include Rack::Test::Methods
 
-  let(:geojson_response) { RGeo::GeoJSON.decode(last_response.body, json_parser: :json) }
+  let(:geojson_response) { RGeo::GeoJSON.decode(last_response.body) }
 
   describe "GET /" do
     let(:response_keys) { %w[description email size_ratio title url website] }
