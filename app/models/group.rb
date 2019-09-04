@@ -23,8 +23,8 @@ class Group < ApplicationRecord
   has_many :memberships, class_name: "GroupMembership", dependent: :destroy
   has_many :members, through: :memberships, source: :user
   has_many :membership_requests, class_name: "GroupMembershipRequest", dependent: :destroy
-  has_many :messages, -> { unscope(:order) }, through: :threads
   has_many :threads, class_name: "MessageThread", inverse_of: :group
+  has_many :messages, -> { unscope(:order) }, through: :threads
   has_many :potential_members
   has_many :hashtags
 
