@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :inbound_mail do
     transient do
-      to false
+      to { false }
     end
 
     recipient { to || "cyclescape@example.com" }

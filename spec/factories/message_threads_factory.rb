@@ -4,19 +4,19 @@ FactoryBot.define do
   factory :message_thread do
     association :created_by, factory: :user
     sequence(:title) { |n| "Message Thread #{n}" }
-    privacy "public"
-    status "approved"
+    privacy { "public" }
+    status { "approved" }
 
     trait :belongs_to_group do
       group
     end
 
     trait :private do
-      privacy "group"
+      privacy { "group" }
     end
 
     trait :committee do
-      privacy "committee"
+      privacy { "committee" }
     end
 
     trait :belongs_to_issue do
@@ -36,7 +36,7 @@ FactoryBot.define do
     end
 
     trait :approved do
-      status :mod_queued
+      status { :mod_queued }
       after(:create, &:approve!)
     end
 

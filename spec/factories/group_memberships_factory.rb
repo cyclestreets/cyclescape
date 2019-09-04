@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :group_membership do
     transient do
-      full_name nil
+      full_name { nil }
     end
     group
     user do
@@ -13,10 +13,10 @@ FactoryBot.define do
       end
     end
 
-    role "member"
+    role { "member" }
 
     trait :committee do
-      role "committee"
+      role { "committee" }
     end
 
     # Site admin but not committee member

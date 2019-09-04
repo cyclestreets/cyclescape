@@ -5,6 +5,6 @@ FactoryBot.define do
     association :thread, factory: :message_thread
     user
 
-    priority 10
+    priority { 10 }
   end
 end
