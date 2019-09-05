@@ -41,7 +41,7 @@ class DashboardsController < ApplicationController
     ThreadList.with_upcoming_deadlines(User.find_by(public_token: params[:public_token]), 50).each do |thread|
       thread.to_icals.each { |evt| cal.add_event(evt) }
     end
-    render text: cal.to_ical
+    render plain: cal.to_ical
   end
 
   def search
