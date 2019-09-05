@@ -63,6 +63,10 @@ module MessageThreadsHelper
   end
 
   def message_button_html
-    { class: "btn-green", disabled: cannot_post?, data: { disable_with: t("formtastic.actions.saving") } }
+    {
+      class: "btn-green", disabled: cannot_post?, data: { disable_with: t("formtastic.actions.saving") },
+      # Hack to make jquery-ujs fileInputSelector still see this form as remote
+      onclick: "$('input[type=file]:not([disabled])').prop('disabled', true).attr('data-undisable', '1');"
+    }
   end
 end
