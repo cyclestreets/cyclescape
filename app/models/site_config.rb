@@ -6,7 +6,7 @@ class SiteConfig < ApplicationRecord
   KEY = "SiteConfig"
   validates :default_locale, inclusion: { in: UserProfile.all_locales.values.map(&:locale) }
   validates :timezone, inclusion: { in: ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.name } }
-  before_save :wipe_cache
+  after_save :wipe_cache
 
   dragonfly_accessor :logo
   dragonfly_accessor :small_logo
