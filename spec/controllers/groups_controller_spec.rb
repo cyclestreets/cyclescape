@@ -8,8 +8,16 @@ describe GroupsController, type: :controller do
   let(:committee_member) { create(:user).tap { |usr| create(:group_membership, :committee, user: usr, group: group) } }
 
   describe "routing" do
-    it { is_expected.to route(:get, "http://subdomain.example.com").to(action: :show) }
-    it { is_expected.to route(:get, "http://subdomain.example.com/overview/search").to(action: :search) }
+    it do
+      expect(get: root_url(subdomain: group.short_name)).to route_to(
+        controller: "groups", action: "show"
+      )
+    end
+    it do
+      expect(get: "#{root_url(subdomain: group.short_name)}overview/search").to route_to(
+        controller: "groups", action: "search"
+      )
+    end
   end
 
   context "when signed in as committee" do
