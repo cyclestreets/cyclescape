@@ -85,6 +85,10 @@ gem "tagsinput-rails"
 gem "uglifier", ">= 1.3.0"
 gem "will-paginate-i18n"
 
+group :staging do
+  gem "sanitize_email"
+end
+
 group :development do
   gem "annotate", ">= 2.5.0", require: false
   gem "bullet"

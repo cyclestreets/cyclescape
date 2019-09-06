@@ -226,8 +226,8 @@ GEM
       haml (>= 4.0, < 6)
       nokogiri (>= 1.6.0)
       ruby_parser (~> 3.5)
-    html2text (0.3.0)
-      nokogiri (~> 1.8.5)
+    html2text (0.3.1)
+      nokogiri (~> 1.10.3)
     htmlentities (4.3.4)
     http_accept_language (2.1.1)
     i18n (1.6.0)
@@ -454,6 +454,7 @@ GEM
       sexp_processor (~> 4.9)
     rubyzip (1.2.3)
     safe_yaml (1.0.5)
+    sanitize_email (2.0.3)
     sass (3.4.25)
     sass-rails (5.0.7)
       railties (>= 4.0.0, < 6)
@@ -612,6 +613,7 @@ DEPENDENCIES
   rubocop-rspec
   ruby-prof
   ruby_parser
+  sanitize_email
   sass-rails
   selenium-webdriver
   shoulda-matchers
