@@ -225,12 +225,12 @@
       browse_all_other_issues: browse all other issues
       my_priorities_introduction: 'This is a listing of the priorities you have set,
         most important first:'
-      my_threads_introduction: 'Latest updates on the discussion threads you are following:'
+      my_threads_introduction: 'Latest updates on the discussion threads you are subscribed to:'
       my_upcoming_deadline_introduction: 'Upcoming deadlines and dates within the
-        discussion threads you are following:'
+        discussion threads you are subscribed to:'
       no_upcoming_deadline_threads: You aren't involved in any discussion threads
         with upcoming deadlines or dates.
-      no_subscribed_threads_html: 'You aren''t following any threads yet. You could
+      no_subscribed_threads_html: 'You aren''t subscribed to any threads yet. You could
         have a look through the %{threads_link} and see if there''s anything that
         you want to help with, or maybe you could %{add_issue_link} instead?
 
@@ -253,7 +253,7 @@
       planning_applications_lower: planning applications
       recent_threads: recent threads
       my_priorities: My priorities
-      my_threads: Followed threads
+      my_threads: Subscribed threads
       issues_nearby: Latest issues nearby
       map: Map
       posted:
@@ -650,7 +650,7 @@
       admin_tooltip: Admin area, for system administrators
       dashboard: My %{application_name}
       dashboard_tooltip: Your personal dashboard, showing updates on discussion threads
-        you are following
+        you are subscribed to
       about: About
       user_guide: User guide
       sign_out: Sign out
@@ -802,11 +802,11 @@
   message_thread:
     subscriptions:
       create:
-        success: You are now following to this thread
+        success: You are now subscribed to this thread
       destroy:
-        success: You are no longer following this thread
+        success: You are now unsubscribed from this thread
       edit:
-        unsubscribe: are sure you want to stop following
+        unsubscribe: are sure you want to unsubscribe
     tags:
       panel:
         edit_tags: edit
@@ -885,10 +885,10 @@
       block_private_messages: Block user's private messages
       unblock_private_messages: Unblock user's private messages
     subscribe_panel:
-      subscribed: You are following this thread.
+      subscribed: You are subscribed to this thread.
     subscribers_panel:
       owner: Owner
-      subscribers: Following this thread
+      subscribers: Subscribed to this thread
     connected_to_thread:
       leading: " [leading]"
     update:
@@ -1140,7 +1140,7 @@
       new:
         title: Feedback
         introduction: This form is for giving feedback on the website, e.g. to report problems or suggest new features.
-          To respond to an issue under discussion, please click on that issue and follow the discussion thread links.
+          To respond to an issue under discussion, please click on that issue and subscribe to the discussion thread links.
       create:
         success: Thank you for your feedback!
   tags:
@@ -1187,10 +1187,10 @@
       type: a call to action
     footer:
       thread: "%{application_name} discussion thread"
-      unsubscribe: You can stop following this thread by visiting
+      unsubscribe: You can unsubscribe from this thread by visiting
       thread_html: "From %{application_name} %{link}."
       unsubscribe_html: "You can %{link}."
-      stop_following: stop following this thread
+      stop_following: unsubscribe from this thread
   thread_priorities:
     very_high: Top-priority
     high: Important
@@ -1225,13 +1225,13 @@
           together. We use this to help figure out which issues are relevant to you,
           and which groups you might be interested in.
         combined_locations_guidance_none_html: If you want to receive notifications
-          when issues are created in these areas, and optionally follow the discussion
+          when issues are created in these areas, and optionally subscribe to the discussion
           threads on those issues, you can %{edit_prefs_link}.
         combined_locations_guidance_notify_html: You currently receive notifications
-          when issues are created in these areas, but aren't automatically following
+          when issues are created in these areas, but aren't automatically subscribed to
           discussion threads on those issues. To change these settings, you can %{edit_prefs_link}.
         combined_locations_guidance_subscribe_html: You currently receive notifications
-          when issues are created in these areas, and are following all discussion
+          when issues are created in these areas, and are subscribed to all discussion
           threads on those issues. To change these settings, you can %{edit_prefs_link}.
         edit: Edit
         edit_your_prefs: edit your preferences
@@ -1245,9 +1245,9 @@
         no_locations_guidance2_html: To get started, you can %{first_location_link}.
       subscribe_to_threads:
         subscribed_to_threads:
-          zero: We couldn't find any additional threads for you to follow.
-          one: You're now following one additional thread.
-          other: You're now following %{count} additional threads.
+          zero: We couldn't find any additional threads for you subscribe to.
+          one: You're now subscribed to one additional thread.
+          other: You're now subscribed to %{count} additional threads.
       update:
         success: Location Updated
       large_map:
@@ -1273,7 +1273,7 @@
         back: Return to your profile
         none: No notifications
         notify: Notify me of new issues and when new threads are started
-        subscribe: Notify me of new issues and automatically follow all new threads
+        subscribe: Notify me of new issues and automatically subscribe me to all new threads
         your_profile: your profile
       update:
         success: Preferences saved
