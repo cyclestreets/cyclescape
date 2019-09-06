@@ -169,7 +169,6 @@ Rails.application.routes.draw do
       get :geometry, on: :member
       collection do
         get :combined_geometry
-        post :subscribe_to_threads
       end
     end
   end

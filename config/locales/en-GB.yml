@@ -1243,11 +1243,6 @@
           which issues are relevant to you, and which groups you might be interested
           in.
         no_locations_guidance2_html: To get started, you can %{first_location_link}.
-      subscribe_to_threads:
-        subscribed_to_threads:
-          zero: We couldn't find any additional threads for you subscribe to.
-          one: You're now subscribed to one additional thread.
-          other: You're now subscribed to %{count} additional threads.
       update:
         success: Location Updated
       large_map:
