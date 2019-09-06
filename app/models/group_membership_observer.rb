@@ -2,7 +2,7 @@
 
 class GroupMembershipObserver < ActiveRecord::Observer
   def after_save(group_membership)
-    if group_membership.role_changed?
+    if group_membership.saved_change_to_attribute?(:role)
 
       user = group_membership.user
       group = group_membership.group
@@ -18,7 +18,7 @@ class GroupMembershipObserver < ActiveRecord::Observer
       end
 
       # Remove ex-committee members from committee threads
-      if group_membership.role == "member" && group_membership.role_was == "committee"
+      if group_membership.saved_change_to_attribute?(:role, to: "member", from: "committee")
         group.threads.where(privacy: "committee").find_each do |thread|
           subscription = user.thread_subscriptions.to(thread)
           subscription&.destroy

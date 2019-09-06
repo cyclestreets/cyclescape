@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe Route::ConstituencyApi do
   include Rack::Test::Methods
-  let(:geojson_response) { RGeo::GeoJSON.decode(last_response.body, json_parser: :json) }
+  let(:geojson_response) { RGeo::GeoJSON.decode(last_response.body) }
 
   describe "GET /" do
     let(:response_keys) { %w[name] }

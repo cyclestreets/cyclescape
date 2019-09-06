@@ -12,7 +12,7 @@ describe GroupMembershipObserver do
       expect(subject).to receive(:after_save)
 
       GroupMembership.observers.enable :group_membership_observer do
-        gm.save
+        gm.save!
       end
     end
   end

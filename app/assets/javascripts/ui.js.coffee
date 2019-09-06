@@ -116,7 +116,7 @@ jQuery ->
   $(document).on "change", AutoSet.selector, ->
     AutoSet.trigger_all($(this))
 
-  $(document).ajaxSuccess (e) ->
+  $(document).on "ajax:success", ->
     $(AutoSet.selector).each ->
       AutoSet.trigger_all($(this))
 
@@ -162,6 +162,7 @@ jQuery ->
   $('a.open-dialog').click ->
     $(".dialog-content").dialog( "open" )
 
+  # Site comments and thead new (I'm not sure this code is ever used..)
   $("#overlay form[data-remote]")
     .ajaxSuccess (e, data, status, xhr) ->
       $(this).parents(".inner:first").html(data)

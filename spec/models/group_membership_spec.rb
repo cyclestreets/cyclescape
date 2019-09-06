@@ -13,7 +13,7 @@ describe GroupMembership do
     subject { GroupMembership.new }
 
     it "must belong to a group" do
-      expect(subject).to have(1).error_on(:group_id)
+      expect(subject).to have(1).error_on(:group)
     end
 
     it "must have a role" do

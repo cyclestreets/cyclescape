@@ -5,6 +5,6 @@ FactoryBot.define do
     association :thread, factory: :message_thread
     user
 
-    viewed_at Time.now.in_time_zone
+    viewed_at { Time.now.in_time_zone }
   end
 end

@@ -2,7 +2,12 @@
 
 class GeoCoerce
   def self.call(geo)
-    parsed = RGeo::GeoJSON.decode(geo, geo_factory: Constituency.rgeo_factory, json_parser: :json)
+    parsed =
+      begin
+        RGeo::GeoJSON.decode(geo, geo_factory: Constituency.rgeo_factory)
+      rescue JSON::ParserError
+        nil
+      end
     parsed || geo
   end
 end

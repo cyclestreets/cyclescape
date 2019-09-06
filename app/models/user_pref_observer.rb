@@ -2,7 +2,7 @@
 
 class UserPrefObserver < ActiveRecord::Observer
   def after_save(pref)
-    if pref.involve_my_groups_admin_changed?
+    if pref.saved_change_to_attribute?(:involve_my_groups_admin)
       user = pref.user
       if pref.involve_my_groups_admin
         user.groups.each do |group|
@@ -13,15 +13,13 @@ class UserPrefObserver < ActiveRecord::Observer
       else
         user.groups.each do |group|
           group.threads.without_issue.each do |thread|
-            if subscription = user.subscribed_to_thread?(thread)
-              subscription.destroy
-            end
+            user.subscribed_to_thread?(thread)&.destroy
           end
         end
       end
     end
 
-    if pref.involve_my_groups_changed?
+    if pref.saved_change_to_attribute?(:involve_my_groups)
       user = pref.user
       if pref.involve_my_groups == "subscribe"
         user.groups.each do |group|
@@ -31,10 +29,10 @@ class UserPrefObserver < ActiveRecord::Observer
         end
       end
 
-      if pref.involve_my_groups_was == "subscribe"
+      if pref.saved_change_to_attribute?(:involve_my_groups, from: "subscribe")
         user.groups.each do |group|
           group.threads.with_issue.each do |thread|
-            next unless subscription = user.subscribed_to_thread?(thread)
+            next unless (subscription = user.subscribed_to_thread?(thread))
 
             next if user.prefs.involve_my_locations == "subscribe" &&
                     user.buffered_location &&
@@ -46,7 +44,7 @@ class UserPrefObserver < ActiveRecord::Observer
       end
     end
 
-    if pref.involve_my_locations_changed?
+    if pref.saved_change_to_attribute?(:involve_my_locations)
       user = pref.user
       if pref.involve_my_locations == "subscribe"
         user.issues_near_locations.includes(:threads).find_each do |issue|
@@ -56,7 +54,7 @@ class UserPrefObserver < ActiveRecord::Observer
         end
       end
 
-      if pref.involve_my_locations_was == "subscribe"
+      if pref.saved_change_to_attribute?(:involve_my_locations, from: "subscribe")
         local_thread_ids = user.issues_near_locations.includes(:threads).map { |iss| iss.threads.ids }.flatten.compact
         user.thread_subscriptions.includes(thread: :group).where(message_threads: { id: local_thread_ids }).references(:message_threads).find_each do |thread_sub|
           thread = thread_sub.thread

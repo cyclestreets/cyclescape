@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ThreadLeaderMessage < MessageComponent
-  belongs_to :unleading, class_name: ThreadLeaderMessage
+  belongs_to :unleading, class_name: "ThreadLeaderMessage"
 
   scope :active, -> { where(active: true, unleading: nil) }
 

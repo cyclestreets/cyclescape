@@ -35,7 +35,7 @@ class GroupMembership < ApplicationRecord
   before_validation :invite_user_if_new
   after_create :delete_pending_gmrs, :approve_user
 
-  validates :group_id, presence: true
+  validates :group, presence: true
   validates :role, inclusion: { in: ALLOWED_ROLES }
   validates :user, uniqueness: { scope: :group_id }
   validates_associated :user

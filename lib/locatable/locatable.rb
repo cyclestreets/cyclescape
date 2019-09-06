@@ -116,7 +116,12 @@ module Locatable
     # Not clear why the factory is needed, should be taken care of by setting the srid on the factory_generator
     # but that doesn't work.
     factory = RGeo::Geos.factory(srid: 4326)
-    feature = RGeo::GeoJSON.decode(json_str, geo_factory: factory, json_parser: :json)
+    feature =
+      begin
+        RGeo::GeoJSON.decode(json_str, geo_factory: factory)
+      rescue JSON::ParserError
+        nil
+      end
     return unless feature
 
     geom = feature.try(:geometry)

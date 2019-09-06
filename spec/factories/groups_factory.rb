@@ -16,10 +16,10 @@ FactoryBot.define do
     end
 
     factory :quahogcc do
-      name "Quahog Cycling Campaign"
+      name { "Quahog Cycling Campaign" }
       sequence(:short_name) { |n| "quahogcc#{n}" }
-      website "http://www.quahogcc.com"
-      email "louis@quahogcc.com"
+      website { "http://www.quahogcc.com" }
+      email { "louis@quahogcc.com" }
     end
   end
 end

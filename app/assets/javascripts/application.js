@@ -6,7 +6,7 @@
 //
 //= require constants
 //= require jquery
-//= require jquery_ujs
+//= require rails-ujs
 //= require jquery.cookie
 //= require jquery.selectboxes
 //= require jquery.extentions

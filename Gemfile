@@ -4,7 +4,7 @@ source "http://rubygems.org"
 
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "= 5.0.7.2"
+gem "rails", "= 5.1.7"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -69,15 +69,15 @@ gem "rack-cors", require: "rack/cors"
 gem "rakismet"
 gem "rollbar"
 
-gem "coffee-rails", "~> 4.1.0"
-gem "compass-rails"
+gem "coffee-rails"
+gem "compass-rails", "> 3"
 gem "jquery-ui-rails", "~> 5.0.0"
-gem "sass-rails", "~> 5.0"
+gem "sass-rails"
 # gem 'turbolinks'
 gem "lograge"
 gem "nokogiri"
 gem "progress_bar"
-gem "rails-i18n", "~> 4.0.0"
+gem "rails-i18n"
 gem "rails-observers"
 gem "sunspot_rails", github: "sunspot/sunspot"
 gem "sunspot_solr", github: "sunspot/sunspot"
@@ -90,6 +90,8 @@ group :development do
   gem "bullet"
   gem "letter_opener"
   gem "rubocop"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
   # Following is required for Resque workers in development to load due to
   # declarative_authorization development dependency when Rails engines are eager loaded
   gem "ruby_parser"

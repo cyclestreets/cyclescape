@@ -99,12 +99,12 @@ describe MessageThread do
   describe "participants" do
     it "should have zero participants" do
       thread = create(:message_thread)
-      expect(thread.participants.count).to eq(0)
+      expect(thread.participants.count(:id)).to eq(0)
     end
 
     it "should have one participant" do
       thread = create(:message_thread_with_messages)
-      expect(thread.participants.count).to eq(1)
+      expect(thread.participants.count(:id)).to eq(1)
     end
   end
 
