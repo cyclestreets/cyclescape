@@ -1,22 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: group_memberships
-#
-#  id         :integer          not null, primary key
-#  user_id    :integer          not null
-#  group_id   :integer          not null
-#  role       :string(255)      not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  deleted_at :datetime
-#
-# Indexes
-#
-#  index_group_memberships_on_group_id  (group_id)
-#  index_group_memberships_on_user_id   (user_id)
-#
 
 class GroupMembership < ApplicationRecord
   ALLOWED_ROLES = %w[committee member].freeze
@@ -79,3 +62,22 @@ class GroupMembership < ApplicationRecord
     true
   end
 end
+
+# == Schema Information
+#
+# Table name: group_memberships
+#
+#  id         :integer          not null, primary key
+#  deleted_at :datetime
+#  role       :string(255)      not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  group_id   :integer          not null
+#  user_id    :integer          not null
+#
+# Indexes
+#
+#  index_group_memberships_on_group_id              (group_id)
+#  index_group_memberships_on_user_id               (user_id)
+#  index_group_memberships_on_user_id_and_group_id  (user_id,group_id) UNIQUE
+#

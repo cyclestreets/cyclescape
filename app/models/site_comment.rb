@@ -1,20 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: site_comments
-#
-#  id           :integer          not null, primary key
-#  user_id      :integer
-#  name         :string(255)
-#  email        :string(255)
-#  body         :text             not null
-#  context_url  :string(255)
-#  context_data :text
-#  created_at   :datetime         not null
-#  viewed_at    :datetime
-#  deleted_at   :datetime
-#
 
 class SiteComment < ApplicationRecord
   acts_as_paranoid
@@ -50,3 +35,23 @@ class SiteComment < ApplicationRecord
     errors.add(:body, "The message cannot contain HTML.") unless body !~ %r{(<a ([^>]+)>|</a>|\[url\]|\[url=|\[/url\])}i
   end
 end
+
+# == Schema Information
+#
+# Table name: site_comments
+#
+#  id           :integer          not null, primary key
+#  body         :text             not null
+#  context_data :text
+#  context_url  :string(255)
+#  deleted_at   :datetime
+#  email        :string(255)
+#  name         :string(255)
+#  viewed_at    :datetime
+#  created_at   :datetime         not null
+#  user_id      :integer
+#
+# Indexes
+#
+#  index_site_comments_on_user_id  (user_id)
+#

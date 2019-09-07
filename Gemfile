@@ -90,7 +90,7 @@ group :staging do
 end
 
 group :development do
-  gem "annotate", ">= 2.5.0", require: false
+  gem "annotate", "< 2.7.5", require: false # https://github.com/ctran/annotate_models/issues/621
   gem "bullet"
   gem "letter_opener"
   gem "rubocop"

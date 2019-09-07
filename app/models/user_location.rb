@@ -1,21 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: user_locations
-#
-#  id          :integer          not null, primary key
-#  user_id     :integer          not null
-#  category_id :integer          not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  location    :spatial          geometry, 4326
-#
-# Indexes
-#
-#  index_user_locations_on_location  (location)
-#  index_user_locations_on_user_id   (user_id)
-#
 
 class UserLocation < ApplicationRecord
   include Locatable
@@ -43,3 +27,21 @@ class UserLocation < ApplicationRecord
     user.approve!
   end
 end
+
+# == Schema Information
+#
+# Table name: user_locations
+#
+#  id          :integer          not null, primary key
+#  location    :geometry({:srid= geometry, 4326
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :integer
+#  user_id     :integer          not null
+#
+# Indexes
+#
+#  index_user_locations_on_category_id  (category_id)
+#  index_user_locations_on_location     (location) USING gist
+#  index_user_locations_on_user_id      (user_id) UNIQUE
+#

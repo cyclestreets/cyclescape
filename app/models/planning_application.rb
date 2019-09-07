@@ -1,28 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: planning_applications
-#
-#  id                      :integer          not null, primary key
-#  address                 :text
-#  postcode                :string(255)
-#  description             :text
-#  openlylocal_council_url :string(255)
-#  url                     :text
-#  uid                     :string(255)      not null
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  location                :spatial          geometry, 4326
-#  authority_name          :string(255)
-#  start_date              :date
-#  hide_votes_count        :integer          default(0)
-#
-# Indexes
-#
-#  index_planning_applications_on_issue_id  (issue_id)
-#  index_planning_applications_on_uid       (uid) UNIQUE
-#
 
 class PlanningApplication < ApplicationRecord
   NOS_HIDE_VOTES = 2
@@ -110,3 +87,31 @@ class PlanningApplication < ApplicationRecord
     self.authority_param = authority_name.try(:parameterize)
   end
 end
+
+# == Schema Information
+#
+# Table name: planning_applications
+#
+#  id                      :integer          not null, primary key
+#  address                 :text
+#  authority_name          :string(255)
+#  authority_param         :string
+#  description             :text
+#  hide_votes_count        :integer          default(0)
+#  location                :geometry({:srid= geometry, 4326
+#  openlylocal_council_url :string(255)
+#  postcode                :string(255)
+#  relevant                :boolean          default(TRUE), not null
+#  start_date              :date
+#  uid                     :string(255)      not null
+#  url                     :text
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  zzz_issue_id            :integer
+#
+# Indexes
+#
+#  index_planning_applications_on_location                 (location) USING gist
+#  index_planning_applications_on_uid_and_authority_param  (uid,authority_param) UNIQUE
+#  index_planning_applications_on_zzz_issue_id             (zzz_issue_id)
+#

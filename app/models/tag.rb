@@ -1,17 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: tags
-#
-#  id   :integer          not null, primary key
-#  name :string(255)      not null
-#  icon :string(255)
-#
-# Indexes
-#
-#  index_tags_on_name  (name) UNIQUE
-#
 
 class Tag < ApplicationRecord
   validates :name, presence: true
@@ -72,3 +60,16 @@ class Tag < ApplicationRecord
     tag.strip.downcase
   end
 end
+
+# == Schema Information
+#
+# Table name: tags
+#
+#  id   :integer          not null, primary key
+#  icon :string(255)
+#  name :string(255)      not null
+#
+# Indexes
+#
+#  index_tags_on_name  (name) UNIQUE
+#

@@ -1,25 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: messages
-#
-#  id             :integer          not null, primary key
-#  created_by_id  :integer          not null
-#  thread_id      :integer          not null
-#  body           :text             not null
-#  component_id   :integer
-#  component_type :string(255)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  deleted_at     :datetime
-#  censored_at    :datetime
-#
-# Indexes
-#
-#  index_messages_on_created_by_id  (created_by_id)
-#  index_messages_on_thread_id      (thread_id)
-#
 
 class Message < ApplicationRecord
   include FakeDestroy
@@ -164,3 +144,36 @@ class Message < ApplicationRecord
     true
   end
 end
+
+# == Schema Information
+#
+# Table name: messages
+#
+#  id              :integer          not null, primary key
+#  body            :text             not null
+#  censored_at     :datetime
+#  check_reason    :string
+#  component_type  :string(255)
+#  deleted_at      :datetime
+#  public_token    :string           not null
+#  status          :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  component_id    :integer
+#  created_by_id   :integer          not null
+#  in_reply_to_id  :integer
+#  inbound_mail_id :integer
+#  thread_id       :integer          not null
+#
+# Indexes
+#
+#  index_messages_on_component_id_and_component_type  (component_id,component_type)
+#  index_messages_on_created_by_id                    (created_by_id)
+#  index_messages_on_in_reply_to_id                   (in_reply_to_id)
+#  index_messages_on_public_token                     (public_token) UNIQUE
+#  index_messages_on_thread_id                        (thread_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (inbound_mail_id => inbound_mails.id)
+#

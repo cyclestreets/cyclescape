@@ -1,25 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: user_prefs
-#
-#  id                      :integer          not null, primary key
-#  user_id                 :integer          not null
-#  involve_my_locations    :string(255)      default("subscribe"), not null
-#  involve_my_groups       :string(255)      default("notify"), not null
-#  involve_my_groups_admin :boolean          default(FALSE), not null
-#  enable_email            :boolean          default(FALSE), not null
-#  zz_profile_visibility   :string(255)      default("public"), not null
-#
-# Indexes
-#
-#  index_user_prefs_on_enable_email             (enable_email)
-#  index_user_prefs_on_involve_my_groups        (involve_my_groups)
-#  index_user_prefs_on_involve_my_groups_admin  (involve_my_groups_admin)
-#  index_user_prefs_on_involve_my_locations     (involve_my_locations)
-#  index_user_prefs_on_user_id                  (user_id) UNIQUE
-#
 
 class UserPref < ApplicationRecord
   # ---> CONSTANTS
@@ -47,3 +27,26 @@ class UserPref < ApplicationRecord
     email_status_id == 1
   end
 end
+
+# == Schema Information
+#
+# Table name: user_prefs
+#
+#  id                      :integer          not null, primary key
+#  involve_my_groups       :string(255)      default("notify"), not null
+#  involve_my_groups_admin :boolean          default(FALSE), not null
+#  involve_my_locations    :string(255)      default("subscribe"), not null
+#  zz_enable_email         :boolean          default(FALSE), not null
+#  zz_profile_visibility   :string(255)      default("public"), not null
+#  email_status_id         :integer          default(0), not null
+#  user_id                 :integer          not null
+#
+# Indexes
+#
+#  index_user_prefs_on_email_status_id          (email_status_id)
+#  index_user_prefs_on_involve_my_groups        (involve_my_groups)
+#  index_user_prefs_on_involve_my_groups_admin  (involve_my_groups_admin)
+#  index_user_prefs_on_involve_my_locations     (involve_my_locations)
+#  index_user_prefs_on_user_id                  (user_id) UNIQUE
+#  index_user_prefs_on_zz_enable_email          (zz_enable_email)
+#

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+
 require "spec_helper"
 
 RSpec.describe UserBlock, type: :model do

@@ -1,15 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: library_notes
-#
-#  id                  :integer          not null, primary key
-#  library_item_id     :integer          not null
-#  title               :string(255)
-#  body                :text             not null
-#  library_document_id :integer
-#
 
 class Library::Note < Library::Component
   # Optional reference to a library document
@@ -42,3 +32,22 @@ class Library::Note < Library::Component
     [body, self[:title]].join(" ")
   end
 end
+
+# == Schema Information
+#
+# Table name: library_notes
+#
+#  id                  :integer          not null, primary key
+#  body                :text             not null
+#  title               :string(255)
+#  url                 :string
+#  created_at          :datetime
+#  updated_at          :datetime
+#  library_document_id :integer
+#  library_item_id     :integer          not null
+#
+# Indexes
+#
+#  index_library_notes_on_library_document_id  (library_document_id)
+#  index_library_notes_on_library_item_id      (library_item_id)
+#

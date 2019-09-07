@@ -1,22 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: group_profiles
-#
-#  id                   :integer          not null, primary key
-#  group_id             :integer          not null
-#  description          :text
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  location             :spatial          geometry, 4326
-#  joining_instructions :text
-#
-# Indexes
-#
-#  index_group_profiles_on_group_id  (group_id)
-#  index_group_profiles_on_location  (location)
-#
 
 class GroupProfile < ApplicationRecord
   MAX_LOCAL_AREA = 10
@@ -45,3 +28,25 @@ class GroupProfile < ApplicationRecord
 
   belongs_to :group, inverse_of: :profile
 end
+
+# == Schema Information
+#
+# Table name: group_profiles
+#
+#  id                   :integer          not null, primary key
+#  description          :text
+#  joining_instructions :text
+#  location             :geometry({:srid= geometry, 4326
+#  logo_uid             :string
+#  new_user_email       :text             not null
+#  picture_name         :string(255)
+#  picture_uid          :string(255)
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  group_id             :integer          not null
+#
+# Indexes
+#
+#  index_group_profiles_on_group_id  (group_id)
+#  index_group_profiles_on_location  (location) USING gist
+#

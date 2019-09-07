@@ -1,23 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: group_membership_requests
-#
-#  id             :integer          not null, primary key
-#  user_id        :integer          not null
-#  group_id       :integer          not null
-#  status         :string(255)      not null
-#  actioned_by_id :integer
-#  created_at     :datetime
-#  updated_at     :datetime
-#  message        :text
-#
-# Indexes
-#
-#  index_group_membership_requests_on_group_id  (group_id)
-#  index_group_membership_requests_on_user_id   (user_id)
-#
 
 class GroupMembershipRequest < ApplicationRecord
   include AASM
@@ -56,3 +38,30 @@ class GroupMembershipRequest < ApplicationRecord
     create_group_membership!(group: group, user: user, role: "member")
   end
 end
+
+# == Schema Information
+#
+# Table name: group_membership_requests
+#
+#  id                  :integer          not null, primary key
+#  message             :text
+#  status              :string(255)      not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  actioned_by_id      :integer
+#  group_id            :integer          not null
+#  group_membership_id :integer
+#  user_id             :integer          not null
+#
+# Indexes
+#
+#  index_group_membership_requests_on_actioned_by_id        (actioned_by_id)
+#  index_group_membership_requests_on_group_id              (group_id)
+#  index_group_membership_requests_on_group_membership_id   (group_membership_id)
+#  index_group_membership_requests_on_user_id               (user_id)
+#  index_group_membership_requests_on_user_id_and_group_id  (user_id,group_id) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (group_membership_id => group_memberships.id)
+#

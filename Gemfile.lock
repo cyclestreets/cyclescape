@@ -79,8 +79,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    annotate (2.7.5)
-      activerecord (>= 3.2, < 7.0)
+    annotate (2.7.4)
+      activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     arel (8.0.0)
     ast (2.4.0)
@@ -537,7 +537,7 @@ DEPENDENCIES
   aasm
   actionview-encoded_mail_to
   activerecord-postgis-adapter
-  annotate (>= 2.5.0)
+  annotate (< 2.7.5)
   attribute_normalizer
   browserify-rails
   bullet

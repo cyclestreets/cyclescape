@@ -1,16 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: inbound_mails
-#
-#  id            :integer          not null, primary key
-#  recipient     :string(255)      not null
-#  raw_message   :text             not null
-#  created_at    :datetime         not null
-#  processed_at  :datetime
-#  process_error :boolean          default(FALSE), not null
-#
 
 class InboundMail < ApplicationRecord
   validates :recipient, :raw_message, presence: true
@@ -25,3 +14,15 @@ class InboundMail < ApplicationRecord
     @message ||= Mail.new(raw_message)
   end
 end
+
+# == Schema Information
+#
+# Table name: inbound_mails
+#
+#  id            :integer          not null, primary key
+#  process_error :boolean          default(FALSE), not null
+#  processed_at  :datetime
+#  raw_message   :text             not null
+#  recipient     :string(255)      not null
+#  created_at    :datetime         not null
+#

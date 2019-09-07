@@ -1,20 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: user_profiles
-#
-#  id          :integer          not null, primary key
-#  user_id     :integer          not null
-#  picture_uid :string(255)
-#  website     :string(255)
-#  about       :text
-#  visibility  :string(255)      default("public"), not null
-#
-# Indexes
-#
-#  index_user_profiles_on_user_id  (user_id)
-#
 
 class UserProfile < ApplicationRecord
   VISIBILITY_OPTIONS = %w[public group].freeze
@@ -58,3 +43,22 @@ class UserProfile < ApplicationRecord
     { path: "profile_pictures/#{hash[0..2]}/#{hash[3..5]}/#{hash}" }
   end
 end
+
+# == Schema Information
+#
+# Table name: user_profiles
+#
+#  id          :integer          not null, primary key
+#  about       :text
+#  locale      :integer
+#  picture_uid :string(255)
+#  visibility  :string(255)      default("public"), not null
+#  website     :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  user_id     :integer          not null
+#
+# Indexes
+#
+#  index_user_profiles_on_user_id  (user_id)
+#

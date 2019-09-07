@@ -1,28 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: message_threads
-#
-#  id            :integer          not null, primary key
-#  issue_id      :integer
-#  created_by_id :integer          not null
-#  group_id      :integer
-#  title         :string(255)      not null
-#  privacy       :string(255)      not null
-#  state         :string(255)      not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  deleted_at    :datetime
-#  public_token  :string(255)
-#
-# Indexes
-#
-#  index_message_threads_on_created_by_id  (created_by_id)
-#  index_message_threads_on_group_id       (group_id)
-#  index_message_threads_on_issue_id       (issue_id)
-#  index_message_threads_on_public_token   (public_token) UNIQUE
-#
 
 class MessageThread < ApplicationRecord
   include AASM
@@ -377,3 +354,35 @@ class MessageThread < ApplicationRecord
     @latest_activity ||= messages.approved.last || self
   end
 end
+
+# == Schema Information
+#
+# Table name: message_threads
+#
+#  id            :integer          not null, primary key
+#  closed        :boolean          default(FALSE), not null
+#  deleted_at    :datetime
+#  privacy       :string(255)      not null
+#  public_token  :string(255)
+#  status        :string
+#  title         :string(255)      not null
+#  zzz_state     :string(255)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  created_by_id :integer          not null
+#  group_id      :integer
+#  issue_id      :integer
+#  user_id       :integer
+#
+# Indexes
+#
+#  index_message_threads_on_created_by_id  (created_by_id)
+#  index_message_threads_on_group_id       (group_id)
+#  index_message_threads_on_issue_id       (issue_id)
+#  index_message_threads_on_public_token   (public_token) UNIQUE
+#  index_message_threads_on_user_id        (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#

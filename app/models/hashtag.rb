@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+
+
 class Hashtag < ApplicationRecord
   # "[^"]+"|() the LHS matches all text inside quotes leaving the RHS to match the hashtag
   # Hashtag Regexp from https://github.com/ralovely/simple_hashtag/blob/4e8832a845258f1d1d55db404975cc6b49eb12fe/lib/simple_hashtag/hashtag.rb#L12
@@ -39,3 +41,24 @@ class Hashtag < ApplicationRecord
     content.to_enum(:scan, HASHTAG_REGEX).map { Regexp.last_match[:tag_name]&.downcase }.compact.uniq
   end
 end
+
+# == Schema Information
+#
+# Table name: hashtags
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  created_at :datetime
+#  updated_at :datetime
+#  group_id   :integer
+#
+# Indexes
+#
+#  index_hashtags_on_group_id           (group_id)
+#  index_hashtags_on_name               (name)
+#  index_hashtags_on_name_and_group_id  (name,group_id) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (group_id => groups.id)
+#

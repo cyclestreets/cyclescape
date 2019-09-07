@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+
+
 class PlanningFilter < ApplicationRecord
   LOCAL_AUTHORITIES = [
     "Aberdeen", "Aberdeenshire", "Adur", "Adur and Worthing", "Alderney", "Allerdale", "Amber Valley", "Anglesey", "Angus", "Antrim",
@@ -90,3 +92,14 @@ class PlanningFilter < ApplicationRecord
     errors.add(:rule, e.message)
   end
 end
+
+# == Schema Information
+#
+# Table name: planning_filters
+#
+#  id         :integer          not null, primary key
+#  authority  :string
+#  rule       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#

@@ -1,24 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: issues
-#
-#  id            :integer          not null, primary key
-#  created_by_id :integer          not null
-#  title         :string(255)      not null
-#  description   :text             not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  deleted_at    :datetime
-#  location      :spatial          geometry, 4326
-#  photo_uid     :string(255)
-#
-# Indexes
-#
-#  index_issues_on_created_by_id  (created_by_id)
-#  index_issues_on_location       (location)
-#
 
 class Issue < ApplicationRecord
   include Locatable
@@ -117,3 +98,33 @@ class Issue < ApplicationRecord
     true
   end
 end
+
+# == Schema Information
+#
+# Table name: issues
+#
+#  id                      :integer          not null, primary key
+#  all_day                 :boolean          default(FALSE), not null
+#  deadline                :datetime
+#  deleted_at              :datetime
+#  description             :text             not null
+#  external_url            :text
+#  location                :geometry({:srid= geometry, 4326
+#  photo_name              :string
+#  photo_uid               :string(255)
+#  title                   :string(255)      not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  created_by_id           :integer          not null
+#  planning_application_id :integer
+#
+# Indexes
+#
+#  index_issues_on_created_by_id            (created_by_id)
+#  index_issues_on_location                 (location) USING gist
+#  index_issues_on_planning_application_id  (planning_application_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (planning_application_id => planning_applications.id)
+#

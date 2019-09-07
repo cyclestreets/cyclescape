@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+
+
 class User < ApplicationRecord
   ALLOWED_ROLES = %w[member admin].freeze
   SEARCHABLE_COLUMNS = %w[full_name display_name email].freeze
@@ -323,3 +325,46 @@ class User < ApplicationRecord
     self.public_token = SecureRandom.hex(10)
   end
 end
+
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  api_key                :string
+#  approved               :boolean          default(FALSE), not null
+#  confirmation_sent_at   :datetime
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  deleted_at             :datetime
+#  disabled_at            :datetime
+#  display_name           :string(255)
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(128)      default("")
+#  full_name              :string(255)      not null
+#  invitation_accepted_at :datetime
+#  invitation_created_at  :datetime
+#  invitation_limit       :integer
+#  invitation_sent_at     :datetime
+#  invitation_token       :string(255)
+#  invited_by_type        :string(255)
+#  last_seen_at           :datetime
+#  public_token           :string           not null
+#  remember_created_at    :datetime
+#  reset_password_sent_at :datetime
+#  reset_password_token   :string(255)
+#  role                   :string(255)      not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  invited_by_id          :integer
+#  remembered_group_id    :integer
+#
+# Indexes
+#
+#  index_users_on_api_key              (api_key) UNIQUE
+#  index_users_on_display_name         (display_name) UNIQUE
+#  index_users_on_email                (email) UNIQUE
+#  index_users_on_invitation_token     (invitation_token)
+#  index_users_on_public_token         (public_token) UNIQUE
+#  index_users_on_remembered_group_id  (remembered_group_id)
+#

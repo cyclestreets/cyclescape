@@ -1,16 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: library_documents
-#
-#  id              :integer          not null, primary key
-#  library_item_id :integer          not null
-#  title           :string(255)      not null
-#  file_uid        :string(255)
-#  file_name       :string(255)
-#  file_size       :integer
-#
 
 class Library::Document < Library::Component
   dragonfly_accessor :file do
@@ -34,3 +23,21 @@ class Library::Document < Library::Component
     { path: "library/documents/#{hash[0..2]}/#{hash[3..5]}/#{hash}" }
   end
 end
+
+# == Schema Information
+#
+# Table name: library_documents
+#
+#  id              :integer          not null, primary key
+#  file_name       :string(255)
+#  file_size       :integer
+#  file_uid        :string(255)
+#  title           :string(255)      not null
+#  created_at      :datetime
+#  updated_at      :datetime
+#  library_item_id :integer          not null
+#
+# Indexes
+#
+#  index_library_documents_on_library_item_id  (library_item_id)
+#

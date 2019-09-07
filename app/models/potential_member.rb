@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+
+
 class PotentialMember < ApplicationRecord
   belongs_to :group
 
@@ -23,3 +25,23 @@ class PotentialMember < ApplicationRecord
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: potential_members
+#
+#  id         :integer          not null, primary key
+#  email_hash :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  group_id   :integer
+#
+# Indexes
+#
+#  index_potential_members_on_email_hash_and_group_id  (email_hash,group_id) UNIQUE
+#  index_potential_members_on_group_id                 (group_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (group_id => groups.id)
+#

@@ -1,19 +1,5 @@
 # frozen_string_literal: true
 
-# == Schema Information
-#
-# Table name: deadline_messages
-#
-#  id                :integer          not null, primary key
-#  thread_id         :integer          not null
-#  message_id        :integer          not null
-#  created_by_id     :integer          not null
-#  deadline          :datetime         not null
-#  title             :string(255)      not null
-#  created_at        :datetime
-#  invalidated_at    :datetime
-#  invalidated_by_id :integer
-#
 
 class DeadlineMessage < MessageComponent
   validates :deadline, presence: true
@@ -49,3 +35,26 @@ class DeadlineMessage < MessageComponent
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: deadline_messages
+#
+#  id                :integer          not null, primary key
+#  all_day           :boolean          default(FALSE), not null
+#  deadline          :datetime         not null
+#  invalidated_at    :datetime
+#  title             :string(255)      not null
+#  created_at        :datetime
+#  updated_at        :datetime
+#  created_by_id     :integer          not null
+#  invalidated_by_id :integer
+#  message_id        :integer          not null
+#  thread_id         :integer          not null
+#
+# Indexes
+#
+#  index_deadline_messages_on_created_by_id  (created_by_id)
+#  index_deadline_messages_on_message_id     (message_id)
+#  index_deadline_messages_on_thread_id      (thread_id)
+#
