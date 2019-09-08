@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class ThreadMailerMailerPreview < ActionMailer::Preview
+  def digest_message
+    messages = Message.order(updated_at: :desc).limit(30).includes(:thread).to_a
+    ThreadMailer.digest(User.last, messages.group_by(&:thread))
+  end
+
   def new_action_message
     ThreadMailer.common(*message(ActionMessage))
   end
