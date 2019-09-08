@@ -12,6 +12,7 @@ Updates on "<%= raw @thread.title %>":
 ---
 
 <%- @message = message %>
+<%= render partial: 'header', locals: {message: @message, type: t("thread_mailer.#{@message.notification_name}.type")} %>
 <%= render partial: @message.notification_name.to_s %>
 
 

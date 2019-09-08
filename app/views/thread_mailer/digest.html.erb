@@ -14,6 +14,9 @@ There have been updates on <%= @threads_messages.count %> threads you are subscr
         <hr style="border:1px solid #E6E6E6;" />
       <% end %>
       <%- @message = message %>
+      <div style="font-size: 12px;color: #999999;">
+        <%= render partial: 'header', locals: {message: @message, type: t("thread_mailer.#{@message.notification_name}.type")} %>
+      </div>
       <%= render partial: @message.notification_name.to_s %>
       <p style="font-size: 12px;color: #999999;">
         To reply to the above, <%= mail_to(message_address(@message), "email") %> or <%= link_to("visit the discussion", thread_url(@thread, anchor: dom_id(@message))) %>.
