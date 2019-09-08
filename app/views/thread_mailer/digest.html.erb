@@ -4,18 +4,21 @@ There have been updates on <%= @threads_messages.count %> threads you are subscr
   <%- @thread = thread %>
   <hr style="border:3px solid #E6E6E6;" />
 
-  <strong>Updates on <%= raw @thread.title %></strong>
+  <p>
+    <strong>Updates on "<%= raw @thread.title %>"</strong>
+  </p>
 
   <div style="margin-left:20px">
-    <%- messages.each do |message| %>
+    <%- messages.each.with_index do |message, index| %>
+      <% if index.positive? %>
+        <hr style="border:1px solid #E6E6E6;" />
+      <% end %>
       <%- @message = message %>
       <%= render partial: @message.notification_name.to_s %>
-
-      <p>
+      <p style="font-size: 12px;color: #999999;">
         To reply to the above, <%= mail_to(message_address(@message), "email") %> or <%= link_to("visit the discussion", thread_url(@thread, anchor: dom_id(@message))) %>.
         Please ensure you strip out non-relevant text in your message.
       </p>
-      <hr style="border:1px solid #E6E6E6;" />
     <%- end  %>
   </div>
 <%- end  %>
