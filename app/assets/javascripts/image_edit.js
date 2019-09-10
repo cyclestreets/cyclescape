@@ -62,17 +62,16 @@ ImageEdit.prototype.initCroppie = function () {
     }.bind(this)
   })
   this.previewEl[0].addEventListener('cropend', this.updateResult)
+  this.previewEl[0].addEventListener('zoom', this.updateResult)
   this.rotateEl.parent().on('click', function () {
     this.cropper.rotate(-90)
     this.updateResult()
   }.bind(this))
   this.zoomInEl.parent().on('click', function () {
     this.cropper.zoom(0.1)
-    this.updateResult()
   }.bind(this))
   this.zoomOutEl.parent().on('click', function () {
     this.cropper.zoom(-0.1)
-    this.updateResult()
   }.bind(this))
 }
 
