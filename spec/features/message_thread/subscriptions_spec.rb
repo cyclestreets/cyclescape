@@ -21,7 +21,7 @@ describe "Thread subscriptions" do
       it "should subscribe the user to the thread" do
         subscribe_button.click
         expect(page).to have_content(I18n.t(".message_threads.subscribe_panel.subscribed"))
-        expect(page).to have_content("You are now subscribed to this thread")
+        expect(page).to have_content(I18n.t("message_thread.subscriptions.create.success"))
         expect(current_user.thread_subscriptions.count).to eq(1)
         expect(current_user.thread_subscriptions.first.thread).to eq(thread)
       end
@@ -70,7 +70,7 @@ describe "Thread subscriptions" do
 
       it "should subscribe the user to the thread" do
         subscribe_button.click
-        expect(page).to have_content("You are now subscribed to this thread")
+        expect(page).to have_content(I18n.t("message_thread.subscriptions.create.success"))
         expect(current_user.thread_subscriptions.count).to eq(1)
         expect(current_user.thread_subscriptions.first.thread).to eq(thread)
       end
@@ -102,7 +102,7 @@ describe "Thread subscriptions" do
         email_count = all_emails.count
         unsubscribe_button.click
         expect(current_user).not_to be_subscribed_to_thread(thread)
-        expect(page).to have_content("You have unsubscribed from this thread")
+        expect(page).to have_content(I18n.t("message_thread.subscriptions.destroy.success"))
 
         within(".new-message") do
           fill_in "Message", with: "Notification test", match: :first
