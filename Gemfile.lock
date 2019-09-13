@@ -6,18 +6,6 @@ GIT
       jquery-rails
 
 GIT
-  remote: https://github.com/sunspot/sunspot.git
-  revision: bce171b6ca7b257e1ee3ac53f2efeeb3fea6d32c
-  specs:
-    sunspot (2.5.0)
-      pr_geohash (~> 1.0)
-      rsolr (>= 1.1.1, < 3)
-    sunspot_rails (2.5.0)
-      rails (>= 3)
-      sunspot (= 2.5.0)
-    sunspot_solr (2.5.0)
-
-GIT
   remote: https://github.com/xymist/declarative_authorization.git
   revision: 3ec49fa3eed2faabe291d582b9d55ab1c8421e78
   branch: allow_rails_5
@@ -485,6 +473,13 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stackprof (0.2.12)
+    sunspot (2.5.0)
+      pr_geohash (~> 1.0)
+      rsolr (>= 1.1.1, < 3)
+    sunspot_rails (2.5.0)
+      rails (>= 3)
+      sunspot (= 2.5.0)
+    sunspot_solr (2.5.0)
     sunspot_test (0.4.1)
       sunspot_rails (>= 2.1.1)
       sunspot_solr
@@ -620,8 +615,8 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   stackprof
-  sunspot_rails!
-  sunspot_solr!
+  sunspot_rails
+  sunspot_solr
   sunspot_test
   tagsinput-rails
   thin
