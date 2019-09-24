@@ -29,6 +29,7 @@ class Message < ApplicationRecord
 
   COMPONENT_TYPES.each do |component_type|
     has_many component_type, dependent: :destroy, inverse_of: :message
+    accepts_nested_attributes_for component_type
   end
 
   before_validation :set_public_token, on: :create
