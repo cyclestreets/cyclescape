@@ -16,7 +16,6 @@ class Message < ApplicationRecord
   has_many :hashtags, through: :hashtaggings
   has_many :action_messages
 
-  before_validation :init_blank_body, on: :create, if: :component
   before_validation :set_public_token, on: :create
 
   before_create :set_in_reply_to
@@ -107,10 +106,6 @@ class Message < ApplicationRecord
   def update_search
     SearchUpdater.update_type(thread, :process_thread) if thread
     true
-  end
-
-  def init_blank_body
-    self.body ||= ""
   end
 
   def set_in_reply_to
