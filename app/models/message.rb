@@ -18,19 +18,22 @@ class Message < ApplicationRecord
     action_messages
     cyclestreets_photo_messages
     deadline_messages
+    document_messages
     library_item_messages
     link_messages
     map_messages
     photo_messages
     street_view_messages
-    photo_messages
     thread_leader_messages
   ].freeze
 
   COMPONENT_TYPES.each do |component_type|
     has_many component_type, dependent: :destroy, inverse_of: :message
-    accepts_nested_attributes_for component_type
+    if component_type != :deadline_messages # rubocop:disable Style/IfUnlessModifier
+      accepts_nested_attributes_for component_type, reject_if: :all_blank
+    end
   end
+  accepts_nested_attributes_for :deadline_messages, reject_if: proc { |attr| attr["deadline"].blank? }
 
   before_validation :set_public_token, on: :create
 

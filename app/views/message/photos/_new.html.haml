@@ -1,6 +1,6 @@
 #new-photo-message.pane
   - photo = message.photo_messages.build
-  = form.semantic_fields_for :photo_messages_attributes do |f|
+  = message_form.semantic_fields_for :photo_messages, photo do |f|
     = f.inputs do
       = render "shared/image_edit", { resource: photo, attribute: "photo", opts: { width: 360, height: 540, enableresize: true }, f: f }
       = f.input :caption

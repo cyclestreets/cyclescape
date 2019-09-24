@@ -1,5 +1,6 @@
 #new-library-item-message.pane
-  = semantic_form_for LibraryItemMessage.new, opts.deep_merge(url: thread_library_items_path(@thread)) do |f|
+  - library = message.library_item_messages.build
+  = message_form.semantic_fields_for :library_item_messages, library do |f|
     = f.inputs do
       = f.input :item
       = semantic_fields_for Message.new do |f2|

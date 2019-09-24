@@ -1,5 +1,6 @@
 #new-cyclestreets-photo-message.pane
-  = semantic_form_for CyclestreetsPhotoMessage.new, opts.deep_merge(url: thread_cyclestreets_photos_path(@thread)) do |f|
+  - photo = message.cyclestreets_photo_messages.build
+  = message_form.semantic_fields_for :cyclestreets_photo_messages, photo do |f|
     = f.inputs do
       = f.input :photo_url, as: :hidden
       = f.input :loc_json, as: :hidden
@@ -13,7 +14,3 @@
       %li.string.input.optional.stringish
         = label_tag t('.image'), nil, class: 'label'
         %span{id: 'image-preview'}
-
-      = render "shared/actions", f: f, thread: @thread
-    = f.actions do
-      = f.action :submit, message_button_html

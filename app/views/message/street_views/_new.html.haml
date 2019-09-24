@@ -1,5 +1,6 @@
 #new-street-view-message.pane
-  = semantic_form_for StreetViewMessage.new, opts.merge(url: thread_street_views_path(@thread)) do |f|
+  - street_view = message.street_view_messages.build
+  = message_form.semantic_fields_for :street_view_messages, street_view do |f|
     = f.inputs do
       = f.input :caption
       = f.input :heading, as: :hidden
@@ -10,9 +11,6 @@
     %br/
     .streetViewPano{id: 'newStreetViewMap'}
     %br/
-    = render "shared/actions", f: f, thread: @thread
-    = f.actions do
-      = f.action :submit, button_html: message_button_html
 
 :javascript
   var svLatNew = #{@thread.default_centre.x};

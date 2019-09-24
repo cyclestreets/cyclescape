@@ -9,6 +9,10 @@ class MessagesController < ApplicationController
 
     message.check_reason = check_reason unless thread.private_message?
 
+    message.components.each do |component|
+      component.assign_attributes(created_by: current_user, thread: thread)
+    end
+
     if message.save
       if message.check_reason
         flash[:alert] = t(message.check_reason)
@@ -68,13 +72,14 @@ class MessagesController < ApplicationController
 
   def permitted_params
     params.require(:message).permit(
-      :body, :component,
-      action_message_ids: [],
-      actions_attributes: [:description],
+      :body,
+      completing_action_message_ids: [],
+      action_messages_attributes: [:description],
       cyclestreets_photo_messages_attributes: %i[photo_url caption cyclestreets_id icon_properties loc_json],
-      deadlines_attributes: %i[deadline title all_day],
-      documents_attributes: %i[title file retained_file],
+      deadline_messages_attributes: %i[deadline title all_day],
+      document_messages_attributes: %i[title file retained_file],
       library_item_messages_attributes: [:library_item_id],
+      link_messages_attributes: %i[url title description],
       map_messages_attributes: %i[caption loc_json],
       photo_messages_attributes: %i[base64_photo retained_photo caption],
       street_view_messages_attributes: %i[caption heading pitch],

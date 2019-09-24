@@ -1,9 +1,6 @@
 #new-link-message.pane
-  = semantic_form_for LinkMessage.new, opts.deep_merge(url: thread_links_path(@thread)) do |f|
+  = message_form.fields_for :link_messages, message.link_messages.build do |f|
     = f.inputs do
       = f.input :url, as: :string
       = f.input :title
       = f.input :description, input_html: { class: 'autosize' }
-      = render "shared/actions", f: f, thread: @thread
-    = f.actions do
-      = f.action :submit, button_html: message_button_html

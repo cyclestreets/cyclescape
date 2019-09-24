@@ -30,8 +30,8 @@
         = auto_link(display_message)
 
       - (message.components + [message]).each do |message_or_component|
-        - if message_or_component.action_messages.to_a.present?
-          = render "shared/resolves_actions", actions: message_or_component.action_messages
+        - if message_or_component.completing_action_messages.to_a.present?
+          = render "shared/resolves_actions", actions: message_or_component.completing_action_messages
   - if permitted_to?([:censor], message) # TODO re-add `|| library_type_for(message)`
     %menu.tools
       %ul
