@@ -8,6 +8,6 @@ class Message::DeadlinesController < Message::BaseController
   end
 
   def permit_params
-    %i[deadline title all_day]
+    
   end
 end

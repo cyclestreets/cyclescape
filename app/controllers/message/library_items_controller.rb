@@ -10,7 +10,7 @@ class Message::LibraryItemsController < Message::BaseController
   end
 
   def permit_params
-    [:library_item_id]
+    
   end
 
   def message

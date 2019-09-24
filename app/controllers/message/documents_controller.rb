@@ -12,6 +12,6 @@ class Message::DocumentsController < Message::BaseController
   end
 
   def permit_params
-    %i[title file retained_file]
+    
   end
 end

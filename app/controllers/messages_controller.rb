@@ -67,7 +67,19 @@ class MessagesController < ApplicationController
   end
 
   def permitted_params
-    params.require(:message).permit :body, :component, action_message_ids: []
+    params.require(:message).permit(
+      :body, :component,
+      action_message_ids: [],
+      actions_attributes: [:description],
+      cyclestreets_photo_messages_attributes: %i[photo_url caption cyclestreets_id icon_properties loc_json],
+      deadlines_attributes: %i[deadline title all_day],
+      documents_attributes: %i[title file retained_file],
+      library_item_messages_attributes: [:library_item_id],
+      map_messages_attributes: %i[caption loc_json],
+      photo_messages_attributes: %i[base64_photo retained_photo caption],
+      street_view_messages_attributes: %i[caption heading pitch],
+      thread_leader_messages_attributes: %i[description unleading_id]
+    )
   end
 
   def message
