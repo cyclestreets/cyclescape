@@ -6,10 +6,9 @@ class Message < ApplicationRecord
   include AASM
   include Rakismet::Model
   include BodyFormat
-
+  self.ignored_columns = %w[component_id component_type]
   belongs_to :thread, -> { with_deleted }, class_name: "MessageThread", inverse_of: :messages
   belongs_to :created_by, -> { with_deleted }, class_name: "User", inverse_of: :messages
-  belongs_to :component, polymorphic: true, autosave: true, inverse_of: :message
   belongs_to :in_reply_to, class_name: "Message"
   belongs_to :inbound_mail
   has_many :hashtaggings, dependent: :destroy
