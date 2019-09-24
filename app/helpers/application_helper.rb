@@ -157,13 +157,14 @@ module ApplicationHelper
     end.join("\r")
   end
 
-  def image_edit_json(resource, attribute, opts)
+  def image_edit_json(resource, attribute, opts, f)
     {
       resource: resource.class.name.gsub("::", "").underscore,
-      url: resource.public_send(attribute)&.url,
+      url: resource.respond_to?(attribute) ? resource.public_send(attribute)&.url : nil,
       attribute: attribute,
       showzoomer: true,
-      enableresize: false
+      enableresize: false,
+      base64el: f.object_name.gsub("\[", "_").delete("\]"),
     }.merge(opts).to_json
   end
 
