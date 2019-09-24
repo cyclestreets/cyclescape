@@ -14,7 +14,23 @@ class Message < ApplicationRecord
   belongs_to :inbound_mail
   has_many :hashtaggings, dependent: :destroy
   has_many :hashtags, through: :hashtaggings
-  has_many :action_messages
+
+  COMPONENT_TYPES = %i[
+    action_messages
+    cyclestreets_photo_messages
+    deadline_messages
+    library_item_messages
+    link_messages
+    map_messages
+    photo_messages
+    street_view_messages
+    photo_messages
+    thread_leader_messages
+  ].freeze
+
+  COMPONENT_TYPES.each do |component_type|
+    has_many component_type, dependent: :destroy, inverse_of: :message
+  end
 
   before_validation :set_public_token, on: :create
 
@@ -33,7 +49,7 @@ class Message < ApplicationRecord
   scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
 
   validates :created_by, presence: true
-  validates :body, presence: true, unless: :component
+  validates :body, presence: true, unless: :components?
   validate  :in_reply_to_should_belong_to_same_thread
 
   rakismet_attrs  author: proc { created_by.full_name },
@@ -69,6 +85,14 @@ class Message < ApplicationRecord
     save!
   end
 
+  def components
+    COMPONENT_TYPES.flat_map { |component| public_send(component) }
+  end
+
+  def components?
+    components.present?
+  end
+
   def censored?
     censored_at
   end
@@ -82,7 +106,7 @@ class Message < ApplicationRecord
   end
 
   def searchable_text
-    component ? "#{body} #{component.searchable_text}" : body
+    components? ? "#{body} #{components.map(&:searchable_text).join(' ')}" : body
   end
 
   def committee_created?
