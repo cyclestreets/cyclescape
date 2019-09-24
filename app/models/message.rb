@@ -13,6 +13,10 @@ class Message < ApplicationRecord
   belongs_to :inbound_mail
   has_many :hashtaggings, dependent: :destroy
   has_many :hashtags, through: :hashtaggings
+  has_many(
+    :completing_action_messages,
+    as: :completing_message, class_name: "ActionMessage", dependent: :destroy, inverse_of: :completing_message
+  )
 
   COMPONENT_TYPES = %i[
     action_messages
