@@ -91,7 +91,7 @@ end
 
 group :development do
   gem "annotate", "< 2.7.5", require: false # https://github.com/ctran/annotate_models/issues/621
-  gem "bullet"
+  gem "bullet", "= 5.9.0" # https://github.com/flyerhzm/bullet/issues/455
   gem "letter_opener"
   gem "rubocop"
   gem "rubocop-rails"
