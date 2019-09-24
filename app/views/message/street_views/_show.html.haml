@@ -1,12 +1,12 @@
-.header-fix{id: dom_id(message.component)}
+.header-fix{id: dom_id(component)}
 .link
-  %p= simple_format message.component.caption
-  .streetViewPano{id: "streetViewPano#{message.component.id}"}
+  %p= simple_format component.caption
+  .streetViewPano{id: "streetViewPano#{component.id}"}
 
 :javascript
-  streetViews.push({id: #{message.component.id},
-    lat: #{message.component.location.x},
-    long: #{message.component.location.y},
-    head: #{message.component.heading},
-    pitch: #{message.component.pitch}
+  streetViews.push({id: #{component.id},
+    lat:   #{component.location.x},
+    long:  #{component.location.y},
+    head:  #{component.heading},
+    pitch: #{component.pitch}
     });

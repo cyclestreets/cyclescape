@@ -1,10 +1,10 @@
-.header-fix{id: dom_id(message.component)}
+.header-fix{id: dom_id(component)}
 .map-message
-  - map_id = "leaflet-#{dom_id(message.component)}"
+  - map_id = "leaflet-#{dom_id(component)}"
   .map-normal-show{id: map_id}
   .hidden
-    .map-data{"data-center" => location_to_geojson(message.component.location),
-      "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(message.component), hidezoom: true }.to_json}
+    .map-data{"data-center" => location_to_geojson(component.location),
+      "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(component), hidezoom: true }.to_json}
   %figcaption
-    = message.component.caption
+    = component.caption
 

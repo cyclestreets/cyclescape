@@ -1,15 +1,15 @@
-.header-fix{id: dom_id(message.component)}
+.header-fix{id: dom_id(component)}
 .link
   %p
-    - leader = message.component.created_by
+    - leader = component.created_by
     - if permitted_to? :view_profile, leader
       - leader_link = link_to_profile(leader)
     - else
       = leader_link = leader.display_name_or_anon
-    - if message.component.unleading
+    - if component.unleading
       = t ".removed_leader_html", leader_link: leader_link
     - else
       = t ".new_leader_html", leader_link: leader_link
   %p
     %em
-      = "\"#{message.component.description}\""
+      = "\"#{component.description}\""

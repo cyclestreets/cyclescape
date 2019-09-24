@@ -1,8 +1,8 @@
-.link{id: dom_id(message.component)}
+.link{id: dom_id(component)}
   %p
-    - item = Library::ItemDecorator.decorate(message.component.item)
+    - item = Library::ItemDecorator.decorate(component.item)
     = item.icon
-    = message.body
+    = component.message.body
   %p
     = link_to item.title, item.component
     - if item.component.class == Library::Note && item.component.document?

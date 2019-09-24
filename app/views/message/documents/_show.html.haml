@@ -1,4 +1,4 @@
-%p= message.component.title
+%p= component.title
 %p
-  = link_to t(".download"), message.component.file.url
-  = "(#{number_to_human_size(message.component.file_size)})"
+  = link_to t(".download"), component.file.url
+  = "(#{number_to_human_size(component.file_size)})"
