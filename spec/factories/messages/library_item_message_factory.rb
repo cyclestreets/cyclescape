@@ -7,7 +7,6 @@ FactoryBot.define do
 
     after(:build) do |o|
       o.thread = o.message.thread
-      o.message.update(component: o)
     end
 
     trait :with_document do

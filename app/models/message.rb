@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
-
 class Message < ApplicationRecord
   include FakeDestroy
   include AASM
   include Rakismet::Model
   include BodyFormat
+
   self.ignored_columns = %w[component_id component_type]
+
   belongs_to :thread, -> { with_deleted }, class_name: "MessageThread", inverse_of: :messages
   belongs_to :created_by, -> { with_deleted }, class_name: "User", inverse_of: :messages
   belongs_to :in_reply_to, class_name: "Message"

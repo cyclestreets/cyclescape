@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-
 require "spec_helper"
 
 describe Message do
   describe "associations" do
     it { is_expected.to belong_to(:created_by) }
     it { is_expected.to belong_to(:thread) }
-    it { is_expected.to belong_to(:component) }
     it { is_expected.to belong_to(:in_reply_to) }
   end
 
@@ -33,7 +31,7 @@ describe Message do
     end
 
     it "should not require a body if a component is attached" do
-      allow(subject).to receive(:component).and_return(true)
+      allow(subject).to receive(:components?).and_return(true)
       expect(subject).to have(0).errors_on(:body)
     end
   end
