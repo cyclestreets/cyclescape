@@ -1,4 +1,4 @@
 <%= raw @message.component.caption %>
 
 <%= t ".view_the_street_view" %>
-<%= thread_path(@message.thread, only_path: false) + "#message_#{@message.id}" %>
+<%= thread_url(@message.thread, only_path: false) + "#message_#{@message.id}" %>

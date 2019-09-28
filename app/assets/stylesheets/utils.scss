@@ -124,3 +124,13 @@
     }
   }
 }
+
+.new-message-highlight {-webkit-animation: highlight 4s ease; animation: highlight 4s ease; padding-top: 2em;}
+@keyframes highlight {
+  from {background: $lightgreen;}
+  to {background: $white;}
+}
+@-webkit-keyframes highlight {
+  from {background: $lightgreen;}
+  to {background: $white;}
+}
