@@ -3,6 +3,10 @@
   tinyMCE.activeEditor.setContent('')
   $("#new-message").find("input[type=text], textarea, input[type=file]").not(":button, :submit, :reset").val('').trigger("change")
   window.mapInit()
+  var el = document.getElementById("message-<%= @message.id %>")
+  el.scrollIntoView()
+  window.scrollBy(0, -80) // Top fix header
+  $(el).addClass("new-message-highlight")
 <% end %>
 <%= render 'shared/flash' %>
 <% if flash[:alert].present? %>
