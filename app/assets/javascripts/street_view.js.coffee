@@ -39,6 +39,9 @@ window.mapInit = ->
     return
 
   addStreetView = (sv) ->
+    dataAtt = "data-street-view-initialized"
+    el = document.getElementById("streetViewPano#{sv.id}")
+    return if el.hasAttribute(dataAtt)
     issue = new (google.maps.LatLng)(sv.long, sv.lat)
 
     panoramaOptions = {
@@ -51,7 +54,8 @@ window.mapInit = ->
       },
       visible: true
     }
-    new google.maps.StreetViewPanorama(document.getElementById("streetViewPano#{sv.id}"), panoramaOptions)
+    new google.maps.StreetViewPanorama(el, panoramaOptions)
+    el.setAttribute(dataAtt, 1)
     return
 
   initialize = ->
