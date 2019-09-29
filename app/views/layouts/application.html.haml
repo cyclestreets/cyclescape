@@ -50,7 +50,7 @@
           %p{ style: "position: absolute; right: 0; top: 45px;"}
             %a{ href: "https://blog.cyclescape.org/survey/", style: "padding: 5px 10px; background-color: yellow; font-weight: bold;"}
               Survey
-#main-nav
+    #main-nav
       %nav.wrapper
         %ul#navigation(role="navigation")
           %li#menu-dashboard= link_to t(".dashboard", application_name: @site_config.application_name), dashboard_path, title: t(".dashboard_tooltip")
