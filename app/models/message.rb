@@ -5,6 +5,7 @@ class Message < ApplicationRecord
   include AASM
   include Rakismet::Model
   include BodyFormat
+  include MessageComponents
 
   self.ignored_columns = %w[component_id component_type]
 
@@ -93,6 +94,12 @@ class Message < ApplicationRecord
     save!
   end
 
+  def components_and_self
+    arr = components
+    arr.unshift(self) if body
+    arr
+  end
+
   def components
     COMPONENT_TYPES.flat_map { |component| public_send(component) }
   end
@@ -103,14 +110,6 @@ class Message < ApplicationRecord
 
   def censored?
     censored_at
-  end
-
-  def component_name
-    (component || self).class.name.underscore
-  end
-
-  def notification_name
-    component ? component.notification_name : :new_message
   end
 
   def searchable_text

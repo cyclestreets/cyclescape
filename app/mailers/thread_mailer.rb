@@ -28,19 +28,21 @@ class ThreadMailer < ActionMailer::Base
               else
                 "mailers.thread_mailer.common.subject"
               end
-    if @message.notification_name == :new_deadline_message
+    deadlines = @message.components.select { |component| component.notification_name == :new_deadline_message }
+    deadlines.each.with_index do |deadline, idx|
       cal = Icalendar::Calendar.new
-      cal.add_event(@message.component.to_ical)
-      attachments["deadline.ics"] = { mime_type: "text/calendar",
-                                      content: cal.to_ical }
+      cal.add_event(deadline.to_ical)
+      attachments["deadline_#{idx}.ics"] = { mime_type: "text/calendar", content: cal.to_ical }
     end
-    mail(to: subscriber.name_with_email,
-         subject: t(subject, title: @thread.title, count: @thread.messages.count, application_name: site_config.application_name),
-         from: user_notification_address(message.created_by),
-         references: message_chain(@message.in_reply_to, @thread),
-         message_id: message_address(@message),
-         reply_to: message_address(@message),
-         in_reply_to: thread_address(@thread))
+    mail(
+      to: subscriber.name_with_email,
+      subject: t(subject, title: @thread.title, count: @thread.messages.count, application_name: site_config.application_name),
+      from: user_notification_address(message.created_by),
+      references: message_chain(@message.in_reply_to, @thread),
+      message_id: message_address(@message),
+      reply_to: message_address(@message),
+      in_reply_to: thread_address(@thread)
+    )
   end
 
   private

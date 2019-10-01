@@ -1151,8 +1151,7 @@
       area_of_group: "area of %{group_name}"
   thread_mailer:
     header:
-      added: '%{name} added %{type} to the thread'
-      added_html: '%{name} added %{message_link} to the thread'
+      added: '%{name} added'
       committee: ' [Committee]'
     new_map_message:
       type: a map

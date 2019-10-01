@@ -1,5 +1,4 @@
-<%= raw @message.component.caption %>
-<%= raw @message.body %>
+<%= raw component.caption %>
 
 <%= t ".view_the_photo" %>
-<%= thread_url(@message.thread, only_path: false) + "#message_#{@message.id}" %>
+<%= thread_url(component.message.thread, only_path: false) + "#message_#{component.message.id}" %>
