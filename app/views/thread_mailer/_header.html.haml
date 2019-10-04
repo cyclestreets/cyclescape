@@ -1,11 +1,11 @@
-- if Authorization::Engine.instance.permit?(:view_profile, object: @message.created_by, user: @subscriber)
-  - if @message.created_by.profile.picture
+- if Authorization::Engine.instance.permit?(:view_profile, object: message.created_by, user: @subscriber)
+  - if message.created_by.profile.picture
     %div{style: "float: left; margin-right: 10px; max-width: 100px; max-height: 100px"}
-      = image_tag(path_to_url(@message.created_by.profile.picture_thumbnail.url), alt: I18n.t("user.profiles.show.profile_picture_title", name: @message.created_by.name), style: "max-width:100%;max-height:100%")
+      = image_tag(path_to_url(message.created_by.profile.picture_thumbnail.url), alt: I18n.t("user.profiles.show.profile_picture_title", name: message.created_by.name), style: "max-width:100%;max-height:100%")
   %span.name
-    = link_to @message.created_by.name, user_profile_url(@message.created_by)
+    = link_to message.created_by.name, user_profile_url(message.created_by)
 - else
   %span.name
-    = @message.created_by.display_name_or_anon
+    = message.created_by.display_name_or_anon
 = t '.committee' if message.committee_created?
 = raw t ".added", name: ""
