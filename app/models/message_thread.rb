@@ -272,11 +272,10 @@ class MessageThread < ApplicationRecord
   end
 
   def upcoming_deadline_messages
-    messages.includes(:component).except(:order).joins("JOIN deadline_messages dm ON messages.component_id = dm.id")
-            .where("messages.component_type = 'DeadlineMessage'")
-            .where("dm.deadline >= current_date")
-            .where("messages.censored_at IS NULL")
-            .order("dm.deadline ASC")
+    messages.joins(:deadline_messages)
+            .where("deadline_messages.deadline >= current_date")
+            .where(censored_at: nil)
+            .order("deadline_messages.deadline ASC")
   end
 
   def priority_for(user)
@@ -297,7 +296,9 @@ class MessageThread < ApplicationRecord
   end
 
   def to_icals
-    upcoming_deadline_messages.map { |message| message.component.to_ical }
+    upcoming_deadline_messages.includes(:deadline_messages).flat_map do |message|
+      message.deadline_messages.map(&:to_ical)
+    end
   end
 
   def as_json(_options = nil)

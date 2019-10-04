@@ -142,28 +142,13 @@ describe MessageThread do
 
   describe "upcoming deadlines" do
     let(:thread) { create(:message_thread) }
-    let(:deadline_message_old) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now.in_time_zone - 10.days) }
-    let(:deadline_message_soon) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now.in_time_zone + 2.days) }
-    let(:deadline_message_later) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now.in_time_zone + 100.days) }
-
-    it "should return one thread with upcoming deadlines" do
-      deadline_message_soon
-      deadline_message_later
-      expect(MessageThread.with_upcoming_deadlines.count).to eq(1)
-    end
-
-    it "should ingnore threads with old deadlines" do
-      deadline_message_old
-      expect(MessageThread.with_upcoming_deadlines.count).to eq(0)
-    end
+    let!(:deadline_message_old) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.current - 10.days) }
+    let!(:deadline_message_soon) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.current + 2.days) }
+    let!(:deadline_message_later) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.current + 100.days) }
 
     it "should return deadline messages in order" do
-      deadline_message_old
-      deadline_message_later
-      deadline_message_soon
       messages = thread.upcoming_deadline_messages
-      expect(messages.count).to eq(2)
-      expect(messages.first).to eq(deadline_message_soon.message)
+      expect(messages).to eq [deadline_message_soon.message, deadline_message_later.message]
     end
   end
 
