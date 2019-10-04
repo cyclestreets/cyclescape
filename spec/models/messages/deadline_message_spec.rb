@@ -50,7 +50,7 @@ describe DeadlineMessage do
   end
 
   it ".to_ical" do
-    subject = build :deadline_message
+    subject = create :deadline_message
     expect(subject.to_ical.dtstart).to eq subject.deadline
   end
 end
