@@ -191,7 +191,7 @@ class MessageThread < ApplicationRecord
     raise "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
 
     text = if mail.message.html_part
-             # For multipart messages we pull out the html part content and use python to remove the signature
+             # For multipart messages we pull out the html part content and use Javascript to remove the signature
              body = `./lib/sig_strip.js #{Shellwords.escape(mail.message.html_part.decoded)}`
              body.gsub(%r{(</?html>|</?body>|</?head>|\r)}, "")
                  .gsub(%r{<(/)?div}, "<\\1p")
@@ -205,25 +205,23 @@ class MessageThread < ApplicationRecord
     text = h.auto_link(text)
 
     open_by!(user) if closed
-    messages.create!(body: text, created_by: user, in_reply_to: in_reply_to, inbound_mail: mail).tap(&:skip_mod_queue!)
+    new_message = messages.build(
+      body: text, created_by: user, in_reply_to: in_reply_to, inbound_mail: mail
+    )
 
     # Attachments
     mail.message.attachments.each do |attachment|
       next if attachment.content_type.include?("pgp-signature") || attachment.content_type.include?("pkcs7")
 
       component = if attachment.content_type.start_with?("image/")
-                    PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
+                    new_message.photo_messages.build(photo: attachment.body.decoded, caption: attachment.filename)
                   else
-                    DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
+                    new_message.document_messages.build(file: attachment.body.decoded, title: attachment.filename)
                   end
-      message              = messages.build(created_by: user, in_reply_to: in_reply_to)
       component.thread     = self
-      component.message    = message
       component.created_by = user
-      message.component    = component
-      message.save!
-      message.skip_mod_queue!
     end
+    new_message.tap(&:save!).skip_mod_queue!
   end
 
   def email_subscribers

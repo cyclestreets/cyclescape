@@ -255,14 +255,14 @@ describe MessageThread do
     let(:mail) { create(:inbound_mail) }
     let(:thread) { create(:message_thread_with_messages) }
     let!(:in_reply_to) { thread.messages.last }
+    let(:new_message) { messages.last }
 
     it "should create a new message" do
       expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
-      message = messages.last
-      expect(message).to be_a(Message)
-      expect(message.body).not_to be_blank
-      expect(message.approved?).to be true
-      expect(message.inbound_mail).to eq(mail)
+      expect(new_message).to be_a(Message)
+      expect(new_message.body).not_to be_blank
+      expect(new_message.approved?).to be true
+      expect(new_message.inbound_mail).to eq(mail)
     end
 
     it "should re-open a closed thread" do
@@ -273,22 +273,22 @@ describe MessageThread do
 
     it "should add the in reply to" do
       expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
-      expect(messages[-1]).to be_a(Message)
-      expect(messages[-1].body).not_to be_blank
-      expect(messages[-1].in_reply_to).to eq(in_reply_to)
+      expect(new_message).to be_a(Message)
+      expect(new_message.body).not_to be_blank
+      expect(new_message.in_reply_to).to eq(in_reply_to)
     end
 
     it "should create a message with the user info" do
       expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
-      expect(messages[-1].created_by.name).to eq(mail.message.header[:from].display_names.first)
-      expect(messages[-1].created_by.email).to eq(mail.message.header[:from].addresses.first)
+      expect(new_message.created_by.name).to eq(mail.message.header[:from].display_names.first)
+      expect(new_message.created_by.email).to eq(mail.message.header[:from].addresses.first)
     end
 
     context "signature removal" do
       it "should remove double-dash signatures" do
         allow(mail.message).to receive(:decoded).and_return("Normal text here\n\n--\nSignature")
         thread.add_messages_from_email!(mail, nil)
-        expect(messages[-1].body).to eq("<p>Normal text here\n</p>")
+        expect(new_message.body).to eq("<p>Normal text here\n</p>")
       end
     end
 
@@ -297,14 +297,14 @@ describe MessageThread do
 
       it "should remove HTML signatures" do
         thread.add_messages_from_email!(mail, nil)
-        expect(messages[-1].body).to eq("<p>\n  This email has an HTML message body and a plain link <a href=\"http://www.example.com\">www.example.com</a> .\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>\n\n")
+        expect(new_message.body).to eq("<p>\n  This email has an HTML message body and a plain link <a href=\"http://www.example.com\">www.example.com</a> .\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>\n\n")
       end
 
       context "html with <div> and <br>s" do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_div_br"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(messages[-1].body).to eq("<p>I have lots of feedback from members now - thanks Anna.</p><p>Trying to figure out if I can put their names in the big presentation</p>\n")
+          expect(new_message.body).to eq("<p>I have lots of feedback from members now - thanks Anna.</p><p>Trying to figure out if I can put their names in the big presentation</p>\n")
         end
       end
 
@@ -312,7 +312,7 @@ describe MessageThread do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_div"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(messages[-1].body).to eq("<p>  Text split by divs</p><p>And not by p tags</p>\n")
+          expect(new_message.body).to eq("<p>  Text split by divs</p><p>And not by p tags</p>\n")
         end
       end
     end
@@ -322,7 +322,7 @@ describe MessageThread do
 
       it "should create one message" do
         expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
-        expect(messages[-1]).to be_a(Message)
+        expect(new_message).to be_a(Message)
       end
     end
 
@@ -330,17 +330,16 @@ describe MessageThread do
       let(:mail) { create(:inbound_mail, :with_attached_image) }
       let(:in_reply_to) { thread.messages.last }
 
-      it "should create two messages" do
-        expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(2)
-        expect(messages[-2]).to be_a(Message)
-        expect(messages[-1].component).to be_a(PhotoMessage)
-        expect(messages[-1].approved?).to be true
+      it "should create one messages" do
+        expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
+        expect(new_message).to be_a(Message)
+        expect(new_message.photo_messages.count).to eq 1
+        expect(new_message.approved?).to be true
       end
 
       it "should add the in reply to" do
         thread.add_messages_from_email!(mail, in_reply_to)
-        expect(messages[-2].in_reply_to).to eq(in_reply_to)
-        expect(messages[-1].in_reply_to).to eq(in_reply_to)
+        expect(new_message.in_reply_to).to eq(in_reply_to)
       end
     end
   end
