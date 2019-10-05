@@ -164,7 +164,7 @@ module ApplicationHelper
       attribute: attribute,
       showzoomer: true,
       enableresize: false,
-      base64el: f.object_name.gsub("\[", "_").delete("\]"),
+      base64el: f.object_name.to_s.gsub("\[", "_").delete("\]"),
     }.merge(opts).to_json
   end
 
