@@ -82,7 +82,7 @@ class MessagesController < ApplicationController
       link_messages_attributes: %i[url title description],
       map_messages_attributes: %i[caption loc_json],
       photo_messages_attributes: %i[base64_photo retained_photo caption],
-      street_view_messages_attributes: %i[caption heading pitch],
+      street_view_messages_attributes: %i[caption heading pitch location_string],
       thread_leader_messages_attributes: %i[description unleading_id]
     )
   end

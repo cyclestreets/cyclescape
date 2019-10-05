@@ -4,7 +4,7 @@
     = f.inputs do
       = f.input :caption
       = f.input :heading, as: :hidden
-      = text_field_tag :street_view_message_location_string, nil, class: :hidden
+      = f.input :location_string, as: :hidden
       = f.input :pitch, as: :hidden
 
     .streetViewPano{id: 'newStreetViewPano'}
