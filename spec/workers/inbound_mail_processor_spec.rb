@@ -5,6 +5,8 @@ require "spec_helper"
 
 describe InboundMailProcessor do
   subject { InboundMailProcessor }
+  let(:new_message) { thread.messages.last }
+
 
   it "should be on the inbound mail queue" do
     expect(subject.queue).to eq(:mailers)
@@ -122,25 +124,20 @@ describe InboundMailProcessor do
     context "multipart email with image attachment" do
       let(:inbound_mail) { create(:inbound_mail, :with_attached_image, to: email_recipient) }
 
-      it "should create two new messages on the thread" do
-        expect(thread.messages.size).to eq(3)
-      end
-
-      it "should have the first message as the plain text part" do
-        message_body = thread.messages[1].body
+      it "should create one new messages on the thread" do
+        expect(thread.messages.size).to eq(2)
+        message_body = new_message.body
         expect(message_body).to eq("<p>This email has an attached image.</p>\n\n<p>Andy</p>")
+        expect(new_message.components.map(&:class)).to eq [PhotoMessage]
+        photo_message = new_message.components.last
+        expect(photo_message.caption).to eq("abstract-100-100.jpg")
+        expect(photo_message.photo.format).to eq("jpeg")
+        expect(photo_message.photo.width).to eql(100)
+
       end
 
-      it "should have the second image as a photo message" do
-        new_message = thread.messages[2]
-        expect(new_message.component).to be_a(PhotoMessage)
-        expect(new_message.component.caption).to eq("abstract-100-100.jpg")
-        expect(new_message.component.photo.format).to eq("jpeg")
-        expect(new_message.component.photo.width).to eql(100)
-      end
-
-      it "should send multiple notifications" do
-        expect(ThreadNotifier).to receive(:notify_subscribers).with(be_a(MessageThread), be_a(Message)).twice
+      it "should send one notification" do
+        expect(ThreadNotifier).to receive(:notify_subscribers).with(be_a(MessageThread), be_a(Message)).once
 
         subject.perform(inbound_mail.id)
       end
@@ -149,20 +146,13 @@ describe InboundMailProcessor do
     context "multipart email with file attachment" do
       let(:inbound_mail) { create(:inbound_mail, :with_attached_file, to: email_recipient) }
 
-      it "should create two new messages on the thread" do
-        expect(thread.messages.size).to eq(3)
-      end
-
-      it "should have the first message as the plain text part" do
-        message_body = thread.messages[1].body
+      it "should create one new message on the thread" do
+        expect(thread.messages.size).to eq(2)
+        message_body = new_message.body
         expect(message_body).to eq("<p>This email has an attached file.</p>\n\n<p>Andy</p>")
-      end
-
-      it "should have the second message as an attachment message" do
-        message = thread.messages[2]
-        expect(message.component).to be_a(DocumentMessage)
-        expect(message.component.title).to eq("use_cases.pdf")
-        expect(message.component.file.size).to eql(77_825)
+        expect(new_message.components.map(&:class)).to eq [DocumentMessage]
+        expect(new_message.components.last.title).to eq("use_cases.pdf")
+        expect(new_message.components.last.file.size).to eql(77_825)
       end
     end
 
