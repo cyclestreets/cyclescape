@@ -67,6 +67,30 @@ describe MessageThread do
       user_view.update_column(:viewed_at, 1.hour.from_now)
       expect(described_class.unviewed_for(user)).to eq []
     end
+
+    context "with upcoming deadlines" do
+      let(:deadline_soon) { create(:message_thread) }
+      let(:deadline_further) { create(:message_thread) }
+      let(:deadline_past) { create(:message_thread) }
+      let(:deadline_censored) { create(:message_thread) }
+
+      before do
+        create(:deadline_message, message: create(:message, thread: deadline_soon), deadline: 2.hours.from_now)
+        create(:deadline_message, message: create(:message, thread: deadline_soon), deadline: 20.hours.from_now)
+        create(:deadline_message, message: create(:message, thread: deadline_soon), deadline: 1.hour.ago)
+
+        create(:deadline_message, message: create(:message, thread: deadline_further), deadline: 4.hours.from_now)
+        create(:deadline_message, message: create(:message, thread: deadline_further), deadline: 5.hours.from_now)
+
+        create(:deadline_message, message: create(:message, thread: deadline_past), deadline: 2.hours.ago)
+
+        create(:deadline_message, message: create(:message, thread: deadline_censored, censored_at: Time.current), deadline: 1.hour.from_now)
+      end
+
+      it ".with_upcoming_deadlines" do
+        expect(described_class.with_upcoming_deadlines).to eq([deadline_soon, deadline_further])
+      end
+    end
   end
 
   describe "privacy" do

@@ -113,16 +113,13 @@ class MessageThread < ApplicationRecord
     end
 
     def with_upcoming_deadlines
-      rel = joins("JOIN (SELECT m.thread_id, MIN(deadline) AS deadline
-                  FROM messages m
-                  JOIN deadline_messages dm ON m.component_id = dm.id
-                  WHERE m.component_type = 'DeadlineMessage'
-                    AND dm.deadline >= current_date
-                    AND m.censored_at IS NULL
-                  GROUP BY m.thread_id)
-                AS m2
-                ON m2.thread_id = message_threads.id")
-      rel.order("m2.deadline ASC")
+      cols = MessageThread.column_names.map { |cn| "message_threads.#{cn}" }
+      joins(messages: :deadline_messages)
+        .where("deadline_messages.deadline >= ?", 1.hour.ago) # To give a bit of time after the event might have started
+        .where(messages: {censored_at: nil})
+        .order("MIN(deadline_messages.deadline) ASC")
+        .group(cols.join(", "))
+        .select((cols + ["MIN(deadline_messages.deadline)"]).join(", "))
     end
 
     def unviewed_private_count(user)
@@ -272,10 +269,11 @@ class MessageThread < ApplicationRecord
   end
 
   def upcoming_deadline_messages
-    messages.joins(:deadline_messages)
-            .where("deadline_messages.deadline >= current_date")
-            .where(censored_at: nil)
-            .order("deadline_messages.deadline ASC")
+    messages
+      .joins(:deadline_messages)
+      .where("deadline_messages.deadline >= ?", 1.hour.ago) # To give a bit of time after the deadline has finished
+      .where(censored_at: nil)
+      .order("deadline_messages.deadline ASC")
   end
 
   def priority_for(user)
