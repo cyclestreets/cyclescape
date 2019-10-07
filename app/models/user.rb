@@ -225,7 +225,7 @@ class User < ApplicationRecord
   end
 
   def membership_request_pending_for?(group)
-    membership_requests.where(group_id: group.id, status: :pending).count > 0
+    membership_requests.where(group_id: group.id, status: :pending).exists?
   end
 
   def non_committee_member_of?(group)
