@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class UserThreadPriority < ApplicationRecord
   PRIORITIES = { very_high: 10,
                  high: 8,

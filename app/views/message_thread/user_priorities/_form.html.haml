@@ -6,4 +6,4 @@
     = f.input(:priority,
       as: collection_type,
       collection: f.object.class.priorities_map,
-      input_html: { onchange: "$('form#thread-priority-#{thread.id}').submit();" })
+      input_html: { onchange: "Rails.fire(document.getElementById('thread-priority-#{thread.id}'), 'submit')" })

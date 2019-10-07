@@ -83,6 +83,13 @@ describe "User dashboards" do
             expect(page).to have_content(I18n.t("thread_priorities.#{priority.label}"))
           end
         end
+
+        it "allows changing priority", js: true do
+          visit dashboard_path
+          click_on(I18n.t("dashboards.show.my_priorities"))
+          select I18n.t("thread_priorities.medium")
+          expect(page).to have_content(I18n.t("message_thread.user_priorities.update.success"))
+        end
       end
     end
 
