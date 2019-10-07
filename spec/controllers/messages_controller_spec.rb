@@ -14,6 +14,7 @@ describe MessagesController, type: :controller do
     before do
       warden.set_user user
     end
+
     let!(:akismet_req) do
       stub_request(:post, %r{rest\.akismet\.com/1\.1/comment-check})
         .with(body: { blog: "http://www.cyclescape.org/",

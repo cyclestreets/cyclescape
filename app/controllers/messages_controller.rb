@@ -78,7 +78,6 @@ class MessagesController < ApplicationController
       cyclestreets_photo_messages_attributes: %i[photo_url caption cyclestreets_id icon_properties loc_json],
       deadline_messages_attributes: %i[deadline title all_day],
       document_messages_attributes: %i[title file retained_file],
-      library_item_messages_attributes: [:library_item_id],
       link_messages_attributes: %i[url title description],
       map_messages_attributes: %i[caption loc_json],
       photo_messages_attributes: %i[base64_photo retained_photo caption],
