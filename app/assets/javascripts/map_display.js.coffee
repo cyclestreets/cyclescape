@@ -152,13 +152,16 @@ class window.LeafletMap
           ""
 
         marker.bindPopup('<div class="photo bubble">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
-          $("#cs-image-#{feature.properties.id}").click ->
-            $("#image-preview").html(peekImgEl)
-            $("#cyclestreets_photo_message_caption").changeVal(feature.properties.caption)
-            $("#cyclestreets_photo_message_cyclestreets_id").changeVal(feature.properties.id)
-            $("#cyclestreets_photo_message_photo_url").changeVal(thumbnailUrl)
-            $("#cyclestreets_photo_message_icon_properties").changeVal(JSON.stringify(iconProperties))
-            $("#cyclestreets_photo_message_loc_json").changeVal JSON.stringify(feature)
+          $("#cs-image-#{feature.properties.id}").click (e)->
+            form = $(e.target).closest("#new-cyclestreets-photo-message")
+
+            form.find("#image-preview").html(peekImgEl)
+
+            form.find("input[id$='caption']").changeVal(feature.properties.caption)
+            form.find("input[id$='cyclestreets_id']").changeVal(feature.properties.id)
+            form.find("input[id$='photo_url']").changeVal(thumbnailUrl)
+            form.find("input[id$='icon_properties']").changeVal(JSON.stringify(iconProperties))
+            form.find("input[id$='loc_json']").changeVal JSON.stringify(feature)
         )
         return
     })
