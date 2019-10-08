@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe "Photo messages" do
+describe "Photo messages", type: :feature do
   let(:thread) { create(:message_thread) }
 
   def photo_form
@@ -16,17 +16,15 @@ describe "Photo messages" do
       visit thread_path(thread)
     end
 
-    # Sadly phantomjs has a problem with data src's
-    # and they seem to trigger the onerror instead of the onload
-    # when added to the DOM.  This causes croppy to not load properly.
-    xit "should post a photo message", js: true do
+    it "should post a photo message", js: true do
+      stub_request(:post, "https://development.rest.akismet.com/1.1/comment-check").to_return(status: 200, body: "false")
       thread.created_by.prefs.update_column(:email_status_id, 1)
       click_on "Photo"
       photo_form do
         attach_file("Photo", abstract_image_path)
         fill_in "Caption", with: "An abstract image"
-        click_on "Add Photo"
       end
+      click_on "Post Message"
       expect(page).to have_css(".photo img")
       within("figcaption") do
         expect(page).to have_content("An abstract image")
