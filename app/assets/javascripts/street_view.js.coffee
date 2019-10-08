@@ -56,17 +56,18 @@ window.mapInit = ->
     subForm = document.getElementById("new-street-view-message")
 
     return if !newStreetViewPano || !svLongNew || !subForm
+    updateInputReady = false # Stops inputs being updated until user is on StreetView pane, otherwise the events are triggered during initial page load
     locationInput = subForm.querySelector("input[id$='location_string']")
     headingInput  = subForm.querySelector("input[id$='heading']")
     pitchInput    = subForm.querySelector("input[id$='pitch']")
+    captionInput  = subForm.querySelector("[id$='caption']")
     panorama = new google.maps.StreetViewPanorama(newStreetViewPano)
 
-    updateInputsRaw = (locationInput, headingInput, pitchInput, panorama) ->
-      ->
-        locationInput.value = panorama.getPosition().toString()
-        headingInput.value = panorama.getPov().heading
-        pitchInput.value = panorama.getPov().pitch
-    updateInputs = updateInputsRaw(locationInput, headingInput, pitchInput, panorama)
+    updateInputs = ->
+      return if !updateInputReady
+      locationInput.value = panorama.getPosition().toString()
+      headingInput.value = panorama.getPov().heading
+      pitchInput.value = panorama.getPov().pitch
 
     issue = new (google.maps.LatLng)(svLongNew, svLatNew)
 
@@ -74,13 +75,23 @@ window.mapInit = ->
 
     google.maps.event.addListener panorama, 'position_changed', ->
       updateInputs()
-    google.maps.event.addListener panorama, 'pov_changed', =>
+    google.maps.event.addListener panorama, 'pov_changed', ->
       updateInputs()
 
     # http://stackoverflow.com/questions/14861975/resize-google-maps-when-tabs-are-triggered
     $("a[href$='#new-street-view-message']").click (e)->
+      updateInputReady = true
+
       google.maps.event.trigger(panorama, 'resize')
       google.maps.event.trigger(map, 'resize')
+
+    captionInput.addEventListener("propertychange change keyup input paste", ->
+      # If we are on the #new-street-view-message fragment already we might see streetView without the click above
+      if !updateInputReady
+        updateInputReady = true
+        updateInputs()
+    )
+
 
     return
   initialize()
