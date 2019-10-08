@@ -2,6 +2,7 @@
 
 class ActionMessage < MessageComponent
   self.ignored_columns = %w[completing_message_type] # TODO: was polymorphic, need to remove
+
   belongs_to :completing_message, class_name: "Message"
 
   validates :description, presence: true
