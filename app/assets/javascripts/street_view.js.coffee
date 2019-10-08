@@ -3,7 +3,7 @@ window.mapInit = ->
   svs = new google.maps.StreetViewService()
   map = null
 
-  processSVData = (updateInputs, panorama) ->
+  processSVData = (panorama) ->
     (data, status) ->
       if (status == google.maps.StreetViewStatus.OK)
         mapOptions = {
@@ -18,7 +18,6 @@ window.mapInit = ->
           heading: 270,
           pitch: 0
         })
-        updateInputs()
         map.setStreetView(panorama)
         panorama.setVisible(true)
       else
@@ -71,7 +70,7 @@ window.mapInit = ->
 
     issue = new (google.maps.LatLng)(svLongNew, svLatNew)
 
-    svs.getPanoramaByLocation(issue, 200, processSVData(updateInputs, panorama))
+    svs.getPanoramaByLocation(issue, 200, processSVData(panorama))
 
     google.maps.event.addListener panorama, 'position_changed', ->
       updateInputs()
