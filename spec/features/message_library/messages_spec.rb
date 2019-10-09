@@ -10,7 +10,7 @@ describe "Library Messages" do
     context "plain messages" do
       let(:message) { create(:message) }
 
-      it "should create a library note from a message" do
+      xit "should create a library note from a message" do
         visit thread_path(message.thread)
 
         # Positive test for negative variants, below
@@ -29,7 +29,7 @@ describe "Library Messages" do
     context "document messages" do
       let(:message) { create(:document_message) }
 
-      it "should create a library document from a document message" do
+      xit "should create a library document from a document message" do
         visit thread_path(message.thread)
 
         # Positive test for negative variants, below
@@ -45,7 +45,7 @@ describe "Library Messages" do
         expect(page).to have_link("Download document")
       end
 
-      it "should fill show the right form" do
+      xit "should fill show the right form" do
         visit thread_path(message.thread)
         within ".message", match: :first do
           click_on I18n.t(".messages.message.create_document")
@@ -55,7 +55,7 @@ describe "Library Messages" do
         expect(page).not_to have_field("Document")
       end
 
-      it "should end up with the correct document" do
+      xit "should end up with the correct document" do
         visit thread_path(message.thread)
         within ".message", match: :first do
           click_on I18n.t(".messages.message.create_document")
