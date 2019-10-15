@@ -43,12 +43,6 @@ describe "Photo messages", type: :feature do
       visit thread_path(thread)
     end
 
-    it "should display the photo" do
-      expect(photo_message).to be_valid
-      # Ugh, inconsistent naming!
-      expect(page).to have_css("#photo_message_#{photo_message.id}")
-    end
-
     it "should have a caption" do
       within("figcaption") do
         expect(page).to have_content(photo_message.caption)
@@ -68,7 +62,10 @@ describe "Photo messages", type: :feature do
         # Reload the photo for the URL because the factory-created instance has
         # the filename as additional information that we actually discard but is
         # used in the URL generation if found.
-        photo_path = PhotoMessage.find(photo_message.id).photo_medium.url
+        photo_m = PhotoMessage.find(photo_message.id)
+        photo_preview_path = photo_m.photo_preview.url
+        photo_path = photo_m.photo_medium.url
+        expect(page).to have_xpath("//img[@src='#{photo_preview_path}']")
         find(:xpath, "//a[@href='#{thread_photo_path(thread, photo_message)}']").click
         expect(page).to have_xpath("//img[@src='#{photo_path}']")
       end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-
-
 class CyclestreetsPhotoMessage < MessageComponent
   include Photo
   include Locatable
