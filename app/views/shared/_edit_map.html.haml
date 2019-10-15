@@ -1,3 +1,4 @@
+- resource = f.object
 %div#map.map.edit
   .map-tools-overlay
     %ul.tabs.draw-options
@@ -42,7 +43,7 @@
           %span.txt
             = t ".clear"
   .hidden
-    - opts = { draw: true, collisions: true, feature: item_to_geojson(resource), geoinput: resource.class.name.gsub('::','').underscore }
+    - opts = { draw: true, collisions: true, feature: item_to_geojson(resource), geoinput: form_object_name(f) }
     - opts.merge!(extra_opts) if defined?(extra_opts)
     .map-data{"data-center" => location_to_geojson(location), "data-opts" => opts.to_json, "data-skip" => defined?(skip) }
 

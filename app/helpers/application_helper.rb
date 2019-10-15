@@ -157,15 +157,19 @@ module ApplicationHelper
     end.join("\r")
   end
 
-  def image_edit_json(resource, attribute, opts, f)
+  def image_edit_json(resource, attribute, opts, form)
     {
       resource: resource.class.name.gsub("::", "").underscore,
       url: resource.respond_to?(attribute) ? resource.public_send(attribute)&.url : nil,
       attribute: attribute,
       showzoomer: true,
       enableresize: false,
-      base64el: f.object_name.to_s.gsub("\[", "_").delete("\]"),
+      base64el: form_object_name(form)
     }.merge(opts).to_json
+  end
+
+  def form_object_name(form)
+    form.object_name.to_s.gsub("\[", "_").delete("\]")
   end
 
   THREAD_FORMAT_MAP = {

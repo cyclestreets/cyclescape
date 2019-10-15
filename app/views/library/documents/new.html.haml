@@ -9,7 +9,7 @@
         %label.label= t "formtastic.labels.issue.new.location"
         = f.semantic_errors :location
         = f.semantic_errors :size
-        = render partial: "shared/edit_map", locals: {location: @start_location, resource: @document}
+        = render partial: "shared/edit_map", locals: {location: @start_location, f: f}
       = f.input :tags_string
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
