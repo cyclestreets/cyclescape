@@ -42,7 +42,8 @@ describe "Action messages" do
       end
 
       expect(page).to have_content "I've done it"
-      expect(page).to have_content I18n.t("shared.actions.resolve_action")
+      expect(page).not_to have_content I18n.t("shared.actions.resolve_action") # All the actions have been resolved!
+      expect(page).to have_content I18n.t("shared.resolves_actions.resolves_actions")
       expect(page).to have_content "Something must be done!"
 
       expect(last_email_sent).to have_subject("Re: [Cyclescape] #{thread.title}")

@@ -16,7 +16,9 @@ class Message < ApplicationRecord
   has_many :hashtaggings, dependent: :destroy
   has_many :hashtags, through: :hashtaggings
   has_many(
-    :completing_action_messages, class_name: "ActionMessage", dependent: :destroy, inverse_of: :completing_message
+    :completing_action_messages,
+    class_name: "ActionMessage", dependent: :destroy,
+    inverse_of: :completing_message, foreign_key: :completing_message_id
   )
 
   COMPONENT_TYPES = %i[
