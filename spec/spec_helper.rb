@@ -38,6 +38,7 @@ RSpec.configure do |config|
   config.include Authorization::TestHelper, type: :controller
   config.include Authorization::TestHelper, type: :view
   config.include RSpec::Helpers::StubAkismet, type: :feature
+  config.include WaitForAjax, type: :feature
 
   config.include EmailSpec::Helpers
   config.include EmailSpec::Matchers

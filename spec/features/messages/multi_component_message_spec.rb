@@ -41,7 +41,7 @@ describe "Multi-component message", type: :feature do
 
       click_on "Post Message"
 
-      sleep(1.5) # It takes a while ....
+      wait_for_ajax
 
       expect(Message.last.components.count).to eq(5)
 
