@@ -1,4 +1,5 @@
-%article.message{id: "message-#{message.id}"}
+%article.message
+  .header-fix{id: dom_id(message)}
   .details
     .author
       - if permitted_to? :view_profile, message.created_by
