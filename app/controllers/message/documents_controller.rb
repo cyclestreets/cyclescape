@@ -1,17 +1,7 @@
 # frozen_string_literal: true
 
-class Message::DocumentsController < Message::BaseController
+class Message::DocumentsController < ApplicationController
   def show
-    @document = resource_class.find params[:id]
-  end
-
-  protected
-
-  def resource_class
-    DocumentMessage
-  end
-
-  def permit_params
-    %i[title file retained_file]
+    @document = DocumentMessage.find params[:id]
   end
 end

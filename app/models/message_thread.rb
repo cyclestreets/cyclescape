@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class MessageThread < ApplicationRecord
   include AASM
   include FakeDestroy
@@ -113,16 +112,13 @@ class MessageThread < ApplicationRecord
     end
 
     def with_upcoming_deadlines
-      rel = joins("JOIN (SELECT m.thread_id, MIN(deadline) AS deadline
-                  FROM messages m
-                  JOIN deadline_messages dm ON m.component_id = dm.id
-                  WHERE m.component_type = 'DeadlineMessage'
-                    AND dm.deadline >= current_date
-                    AND m.censored_at IS NULL
-                  GROUP BY m.thread_id)
-                AS m2
-                ON m2.thread_id = message_threads.id")
-      rel.order("m2.deadline ASC")
+      cols = MessageThread.column_names.map { |cn| "message_threads.#{cn}" }
+      joins(messages: :deadline_messages)
+        .where("deadline_messages.deadline >= ?", 1.hour.ago) # To give a bit of time after the event might have started
+        .where(messages: {censored_at: nil})
+        .order("MIN(deadline_messages.deadline) ASC")
+        .group(cols.join(", "))
+        .select((cols + ["MIN(deadline_messages.deadline)"]).join(", "))
     end
 
     def unviewed_private_count(user)
@@ -191,7 +187,7 @@ class MessageThread < ApplicationRecord
     raise "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
 
     text = if mail.message.html_part
-             # For multipart messages we pull out the html part content and use python to remove the signature
+             # For multipart messages we pull out the html part content and use Javascript to remove the signature
              body = `./lib/sig_strip.js #{Shellwords.escape(mail.message.html_part.decoded)}`
              body.gsub(%r{(</?html>|</?body>|</?head>|\r)}, "")
                  .gsub(%r{<(/)?div}, "<\\1p")
@@ -205,25 +201,23 @@ class MessageThread < ApplicationRecord
     text = h.auto_link(text)
 
     open_by!(user) if closed
-    messages.create!(body: text, created_by: user, in_reply_to: in_reply_to, inbound_mail: mail).tap(&:skip_mod_queue!)
+    new_message = messages.build(
+      body: text, created_by: user, in_reply_to: in_reply_to, inbound_mail: mail
+    )
 
     # Attachments
     mail.message.attachments.each do |attachment|
       next if attachment.content_type.include?("pgp-signature") || attachment.content_type.include?("pkcs7")
 
       component = if attachment.content_type.start_with?("image/")
-                    PhotoMessage.new(photo: attachment.body.decoded, caption: attachment.filename)
+                    new_message.photo_messages.build(photo: attachment.body.decoded, caption: attachment.filename)
                   else
-                    DocumentMessage.new(file: attachment.body.decoded, title: attachment.filename)
+                    new_message.document_messages.build(file: attachment.body.decoded, title: attachment.filename)
                   end
-      message              = messages.build(created_by: user, in_reply_to: in_reply_to)
       component.thread     = self
-      component.message    = message
       component.created_by = user
-      message.component    = component
-      message.save!
-      message.skip_mod_queue!
     end
+    new_message.tap(&:save!).skip_mod_queue!
   end
 
   def email_subscribers
@@ -274,11 +268,11 @@ class MessageThread < ApplicationRecord
   end
 
   def upcoming_deadline_messages
-    messages.includes(:component).except(:order).joins("JOIN deadline_messages dm ON messages.component_id = dm.id")
-            .where("messages.component_type = 'DeadlineMessage'")
-            .where("dm.deadline >= current_date")
-            .where("messages.censored_at IS NULL")
-            .order("dm.deadline ASC")
+    messages
+      .joins(:deadline_messages)
+      .where("deadline_messages.deadline >= ?", 1.hour.ago) # To give a bit of time after the deadline has finished
+      .where(censored_at: nil)
+      .order("deadline_messages.deadline ASC")
   end
 
   def priority_for(user)
@@ -299,7 +293,9 @@ class MessageThread < ApplicationRecord
   end
 
   def to_icals
-    upcoming_deadline_messages.map { |message| message.component.to_ical }
+    upcoming_deadline_messages.includes(:deadline_messages).flat_map do |message|
+      message.deadline_messages.map(&:to_ical)
+    end
   end
 
   def as_json(_options = nil)

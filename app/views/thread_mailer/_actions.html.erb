@@ -1,7 +1,6 @@
-<% message_or_component = @message.component || @message %>
-<% if message_or_component.action_messages.to_a.present? %>
+<% if @message.completing_action_messages.to_a.present? %>
 Resolves actions:
-<% message_or_component.action_messages.each do |action| %>
+<% @message.completing_action_messages.each do |action| %>
 <br>
 <%= action.description  %>
 <br>

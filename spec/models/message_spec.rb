@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
-
 require "spec_helper"
 
 describe Message do
   describe "associations" do
     it { is_expected.to belong_to(:created_by) }
     it { is_expected.to belong_to(:thread) }
-    it { is_expected.to belong_to(:component) }
     it { is_expected.to belong_to(:in_reply_to) }
   end
 
@@ -33,7 +31,7 @@ describe Message do
     end
 
     it "should not require a body if a component is attached" do
-      allow(subject).to receive(:component).and_return(true)
+      allow(subject).to receive(:components?).and_return(true)
       expect(subject).to have(0).errors_on(:body)
     end
   end
@@ -50,43 +48,10 @@ describe Message do
     end
   end
 
-  describe "component association" do
-    subject { create(:message) }
-
-    it "should accept a PhotoMessage" do
-      subject.component = create(:photo_message, message: subject)
-      expect(subject.component_type).to eq("PhotoMessage")
-      expect(subject).to be_valid
-    end
-  end
-
-  describe "body" do
-    it "should be blank if empty when component is attached" do
-      allow(subject).to receive(:component).and_return(true)
-      subject.created_by_id = 1
-      expect(subject).to be_valid
-      expect(subject.body).to eq("")
-    end
-
-    it "should be retained with an attached component" do
-      allow(subject).to receive(:component).and_return(true)
-      subject.created_by_id = 1
-      subject.body = "Testing"
-      expect(subject).to be_valid
-      expect(subject.body).to eq("Testing")
-    end
-  end
-
   describe "#component_name" do
-    it "should return the name of Message if there is no component" do
+    it "should return the name of Message" do
       message = build(:message)
       expect(message.component_name).to eq("message")
-    end
-
-    it "should return the name of the component" do
-      photo_message = build(:photo_message)
-      message = photo_message.message
-      expect(message.component_name).to eq("photo_message")
     end
   end
 
@@ -97,9 +62,11 @@ describe Message do
     end
 
     it "should return both the body and the component's text if there's a component" do
-      message = create(:photo_message).message
+      photo_message = create(:photo_message)
+      message = photo_message.message
+      message.body = "Something here"
       expect(message.searchable_text).to include(message.body)
-      expect(message.searchable_text).to include(message.component.searchable_text)
+      expect(message.searchable_text).to include(photo_message.searchable_text)
     end
   end
 
@@ -190,16 +157,7 @@ describe Message do
   end
 
   describe "notification_name" do
-    context "with no component" do
-      it { expect(subject.notification_name).to eq :new_message }
-    end
-
-    context "with a component" do
-      let(:component) { create :link_message }
-      subject { component.message }
-
-      it { expect(subject.notification_name).to eq :new_link_message }
-    end
+    it { expect(subject.notification_name).to eq :new_message }
   end
 
   context "created_by a deleted user" do

@@ -16,7 +16,7 @@ describe "thread views" do
     it "should output a page with the correct class" do
       visit thread_path(thread)
       expect(page).to have_css("#content[data-view-message-id=\"#{view_message_id}\"]")
-      expect(page).to have_css("#message-#{view_message_id}")
+      expect(page).to have_css("#message_#{view_message_id}")
     end
   end
 end

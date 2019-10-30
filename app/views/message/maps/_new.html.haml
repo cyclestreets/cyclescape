@@ -1,12 +1,10 @@
 #new-map-message.pane
-  = semantic_form_for MapMessage.new, opts.deep_merge(url: thread_maps_path(@thread)) do |f|
+  - map = message.map_messages.build
+  = message_form.semantic_fields_for :map_messages, map do |f|
     = f.inputs do
       = f.input :loc_json, as: :hidden
       = f.input :caption
       %li.input.full-width
         %label.label= t "formtastic.labels.issue.new.location"
         = f.semantic_errors :location
-        = render partial: "shared/edit_map", locals: { location: @thread.issue&.location || current_user.start_location, resource: f.object }
-      = render "shared/actions", f: f, thread: @thread
-    = f.actions do
-      = f.action :submit, label: t(".submit"), button_html: message_button_html
+        = render partial: "shared/edit_map", locals: { location: @thread.issue&.location || current_user.start_location, f: f }

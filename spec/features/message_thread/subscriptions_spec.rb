@@ -43,8 +43,8 @@ describe "Thread subscriptions" do
           expect(ThreadRecorder).to receive(:thread_viewed).once
           within(".new-message") do
             tinymce_fill_in with: "Given I'm interested enough to post, I should be subscribed"
-            click_on "Post Message"
           end
+          click_on "Post Message"
           sleep(0.5)
           expect(current_user.reload.subscribed_to_thread?(thread)).to be_truthy
         end
@@ -55,8 +55,8 @@ describe "Thread subscriptions" do
           within("#new-deadline-message") do
             fill_in "Deadline", with: Date.current.to_s
             fill_in "Title", with: "Submission deadline"
-            click_on I18n.t("message.deadlines.new.submit")
           end
+          click_on "Post Message"
           expect(current_user.subscribed_to_thread?(thread)).to be_truthy
         end
       end

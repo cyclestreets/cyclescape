@@ -67,6 +67,30 @@ describe MessageThread do
       user_view.update_column(:viewed_at, 1.hour.from_now)
       expect(described_class.unviewed_for(user)).to eq []
     end
+
+    context "with upcoming deadlines" do
+      let(:deadline_soon) { create(:message_thread) }
+      let(:deadline_further) { create(:message_thread) }
+      let(:deadline_past) { create(:message_thread) }
+      let(:deadline_censored) { create(:message_thread) }
+
+      before do
+        create(:deadline_message, message: create(:message, thread: deadline_soon), deadline: 2.hours.from_now)
+        create(:deadline_message, message: create(:message, thread: deadline_soon), deadline: 20.hours.from_now)
+        create(:deadline_message, message: create(:message, thread: deadline_soon), deadline: 1.hour.ago)
+
+        create(:deadline_message, message: create(:message, thread: deadline_further), deadline: 4.hours.from_now)
+        create(:deadline_message, message: create(:message, thread: deadline_further), deadline: 5.hours.from_now)
+
+        create(:deadline_message, message: create(:message, thread: deadline_past), deadline: 2.hours.ago)
+
+        create(:deadline_message, message: create(:message, thread: deadline_censored, censored_at: Time.current), deadline: 1.hour.from_now)
+      end
+
+      it ".with_upcoming_deadlines" do
+        expect(described_class.with_upcoming_deadlines).to eq([deadline_soon, deadline_further])
+      end
+    end
   end
 
   describe "privacy" do
@@ -142,28 +166,13 @@ describe MessageThread do
 
   describe "upcoming deadlines" do
     let(:thread) { create(:message_thread) }
-    let(:deadline_message_old) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now.in_time_zone - 10.days) }
-    let(:deadline_message_soon) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now.in_time_zone + 2.days) }
-    let(:deadline_message_later) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.now.in_time_zone + 100.days) }
-
-    it "should return one thread with upcoming deadlines" do
-      deadline_message_soon
-      deadline_message_later
-      expect(MessageThread.with_upcoming_deadlines.count).to eq(1)
-    end
-
-    it "should ingnore threads with old deadlines" do
-      deadline_message_old
-      expect(MessageThread.with_upcoming_deadlines.count).to eq(0)
-    end
+    let!(:deadline_message_old) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.current - 10.days) }
+    let!(:deadline_message_soon) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.current + 2.days) }
+    let!(:deadline_message_later) { create(:deadline_message, message: create(:message, thread: thread), deadline: Time.current + 100.days) }
 
     it "should return deadline messages in order" do
-      deadline_message_old
-      deadline_message_later
-      deadline_message_soon
       messages = thread.upcoming_deadline_messages
-      expect(messages.count).to eq(2)
-      expect(messages.first).to eq(deadline_message_soon.message)
+      expect(messages).to eq [deadline_message_soon.message, deadline_message_later.message]
     end
   end
 
@@ -255,14 +264,14 @@ describe MessageThread do
     let(:mail) { create(:inbound_mail) }
     let(:thread) { create(:message_thread_with_messages) }
     let!(:in_reply_to) { thread.messages.last }
+    let(:new_message) { messages.last }
 
     it "should create a new message" do
       expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
-      message = messages.last
-      expect(message).to be_a(Message)
-      expect(message.body).not_to be_blank
-      expect(message.approved?).to be true
-      expect(message.inbound_mail).to eq(mail)
+      expect(new_message).to be_a(Message)
+      expect(new_message.body).not_to be_blank
+      expect(new_message.approved?).to be true
+      expect(new_message.inbound_mail).to eq(mail)
     end
 
     it "should re-open a closed thread" do
@@ -273,22 +282,22 @@ describe MessageThread do
 
     it "should add the in reply to" do
       expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
-      expect(messages[-1]).to be_a(Message)
-      expect(messages[-1].body).not_to be_blank
-      expect(messages[-1].in_reply_to).to eq(in_reply_to)
+      expect(new_message).to be_a(Message)
+      expect(new_message.body).not_to be_blank
+      expect(new_message.in_reply_to).to eq(in_reply_to)
     end
 
     it "should create a message with the user info" do
       expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
-      expect(messages[-1].created_by.name).to eq(mail.message.header[:from].display_names.first)
-      expect(messages[-1].created_by.email).to eq(mail.message.header[:from].addresses.first)
+      expect(new_message.created_by.name).to eq(mail.message.header[:from].display_names.first)
+      expect(new_message.created_by.email).to eq(mail.message.header[:from].addresses.first)
     end
 
     context "signature removal" do
       it "should remove double-dash signatures" do
         allow(mail.message).to receive(:decoded).and_return("Normal text here\n\n--\nSignature")
         thread.add_messages_from_email!(mail, nil)
-        expect(messages[-1].body).to eq("<p>Normal text here\n</p>")
+        expect(new_message.body).to eq("<p>Normal text here\n</p>")
       end
     end
 
@@ -297,14 +306,14 @@ describe MessageThread do
 
       it "should remove HTML signatures" do
         thread.add_messages_from_email!(mail, nil)
-        expect(messages[-1].body).to eq("<p>\n  This email has an HTML message body and a plain link <a href=\"http://www.example.com\">www.example.com</a> .\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>\n\n")
+        expect(new_message.body).to eq("<p>\n  This email has an HTML message body and a plain link <a href=\"http://www.example.com\">www.example.com</a> .\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>\n\n")
       end
 
       context "html with <div> and <br>s" do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_div_br"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(messages[-1].body).to eq("<p>I have lots of feedback from members now - thanks Anna.</p><p>Trying to figure out if I can put their names in the big presentation</p>\n")
+          expect(new_message.body).to eq("<p>I have lots of feedback from members now - thanks Anna.</p><p>Trying to figure out if I can put their names in the big presentation</p>\n")
         end
       end
 
@@ -312,7 +321,7 @@ describe MessageThread do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_div"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(messages[-1].body).to eq("<p>  Text split by divs</p><p>And not by p tags</p>\n")
+          expect(new_message.body).to eq("<p>  Text split by divs</p><p>And not by p tags</p>\n")
         end
       end
     end
@@ -322,7 +331,7 @@ describe MessageThread do
 
       it "should create one message" do
         expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
-        expect(messages[-1]).to be_a(Message)
+        expect(new_message).to be_a(Message)
       end
     end
 
@@ -330,17 +339,16 @@ describe MessageThread do
       let(:mail) { create(:inbound_mail, :with_attached_image) }
       let(:in_reply_to) { thread.messages.last }
 
-      it "should create two messages" do
-        expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(2)
-        expect(messages[-2]).to be_a(Message)
-        expect(messages[-1].component).to be_a(PhotoMessage)
-        expect(messages[-1].approved?).to be true
+      it "should create one messages" do
+        expect { thread.add_messages_from_email!(mail, nil) }.to change { thread.reload.messages.count }.by(1)
+        expect(new_message).to be_a(Message)
+        expect(new_message.photo_messages.count).to eq 1
+        expect(new_message.approved?).to be true
       end
 
       it "should add the in reply to" do
         thread.add_messages_from_email!(mail, in_reply_to)
-        expect(messages[-2].in_reply_to).to eq(in_reply_to)
-        expect(messages[-1].in_reply_to).to eq(in_reply_to)
+        expect(new_message.in_reply_to).to eq(in_reply_to)
       end
     end
   end

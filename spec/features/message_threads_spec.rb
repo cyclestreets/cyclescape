@@ -54,12 +54,9 @@ describe "Message threads", type: :feature do
         expect(page).to have_title(thread.title)
       end
 
-      it "should disable the message input" do
-        expect(find("#message_body", match: :first)[:disabled]).to eq("disabled")
-      end
-
       it "should display a notice saying the user must sign in to post" do
         expect(page).to have_content("Please sign in to post a message")
+        expect(page).not_to have_selector("#message_body")
       end
     end
 

@@ -55,33 +55,37 @@
             = link_to "#new-thread-leader-message" do
               = t ".thread_leader_message"
               %span.nub
-      .panes
-        - if cannot_post?
-          .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
-        #new-text-message.pane
-          - opts = { html: { class: "navigate-away-warning" }, remote: true }
-          = semantic_form_for @thread.messages.build, opts.merge(url: thread_messages_path(@thread)) do |f|
-            = f.inputs do
-              = f.input :body, input_html: { class: 'autosize tinymce', disabled: cannot_post?}
-              = render "shared/actions", f: f, thread: @thread
+      - if cannot_post?
+        .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
+      - else
+        - message = @thread.messages.build
+        - opts = { html: { class: "navigate-away-warning" }, remote: true }
+        = semantic_form_for message, opts.merge(url: thread_messages_path(@thread)) do |f|
+          - form_options = { message_form: f, message: message }
+          = f.inputs do
+            .panes
+              #new-text-message.pane
+                = f.input :body, input_html: { class: 'autosize tinymce'}
+              - if signed_in?
+                = render "message/photos/new", form_options
+                = render "message/cyclestreets_photos/new", form_options
+                = render "message/street_views/new", form_options
+                = render "message/links/new", form_options
+                = render "message/deadlines/new", form_options
+                = render "message/documents/new", form_options
+                = render "message/maps/new", form_options
+                = render "message/actions/new", form_options
+                - if current_user.subscribed_to_thread?(@thread)
+                  = render "message/thread_leaders/new", form_options
+              #action-messages
+                = render "shared/actions", f: f, thread: @thread
             = f.actions do
               = f.action :submit, button_html: message_button_html
-        - if signed_in?
-          = render "message/photos/new", opts: opts
-          = render "message/cyclestreets_photos/new", opts: opts
-          = render "message/street_views/new", opts: opts
-          = render "message/links/new", opts: opts
-          = render "message/deadlines/new", opts: opts
-          = render "message/documents/new", opts: opts
-          = render "message/maps/new", opts: opts
-          = render "message/actions/new", opts: opts
-          - if current_user.subscribed_to_thread?(@thread)
-            = render "message/thread_leaders/new", opts: opts
 
-        - if permitted_to?(:create, :messages) && @thread.latest_message
-          %p
-            = t '.reply_by'
-            = email_message @thread.latest_message
+      - if permitted_to?(:create, :messages) && @thread.latest_message
+        %p
+          = t '.reply_by'
+          = email_message @thread.latest_message
     #from-library.pane
       .scrollable
         %div

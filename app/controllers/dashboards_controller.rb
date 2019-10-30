@@ -15,7 +15,7 @@ class DashboardsController < ApplicationController
       .subscribed_threads.order_by_latest_message.page(params[:subscribed_threads_page]).per(12)
 
     @subscribed_threads = ThreadListDecorator.decorate_collection(
-      subscribed_threads.includes(:issue, latest_message: %i[component created_by])
+      subscribed_threads.includes(:issue, latest_message: %i[created_by])
     )
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: subscribed_threads)
 
@@ -25,7 +25,7 @@ class DashboardsController < ApplicationController
     prioritised_threads =
       current_user
       .prioritised_threads.order("priority desc").order_by_latest_message
-      .includes(:issue, latest_message: %i[component created_by])
+      .includes(:issue, latest_message: %i[created_by])
       .page(params[:prioritised_threads_page]).per(20)
 
     @prioritised_threads = ThreadListDecorator.decorate_collection(prioritised_threads)

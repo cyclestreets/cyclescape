@@ -7,7 +7,7 @@ function ImageEdit (opts) {
   this.rotateEl = $('#rotate_' + attribute)
   this.zoomInEl = $('#zoom_in_' + attribute)
   this.zoomOutEl = $('#zoom_out_' + attribute)
-  this.base64El = $('#' + opts.resource + '_base64_' + attribute)
+  this.base64El = $('#' + opts.base64el + '_base64_' + attribute)
   this.readFile = this.readFile.bind(this)
   this.initFileOnChange = this.initFileOnChange.bind(this)
   this.initCroppie = this.initCroppie.bind(this)

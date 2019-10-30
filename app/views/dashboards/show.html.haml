@@ -78,9 +78,10 @@
                       %ul.content-icon-list
                         - thread.upcoming_deadline_messages.each do |message|
                           %li.cal
-                            - deadline = message.component.formatted_deadline
+                            - deadline_message = message.deadline_messages.first
+                            - deadline = deadline_message.formatted_deadline
                             %h4= link_to(l(deadline, format: :long_deadline), thread_path(thread, anchor: dom_id(message)))
-                            %p= message.component.title
+                            %p= deadline_message.title
                             = render partial: "shared/deadline", locals: {deadline: deadline}
                     %td.meta
                       = t ".deadline_thread_updated"

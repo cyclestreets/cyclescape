@@ -1,9 +1,7 @@
 #new-document-message.pane
-  = semantic_form_for DocumentMessage.new, opts.deep_merge(url: thread_documents_path(@thread), html: {id: :document_message_form}) do |f|
+  - document = message.document_messages.build
+  = message_form.semantic_fields_for :document_messages, document do |f|
     = f.inputs do
       = f.input :file, as: :file
       = f.input :retained_file, as: :hidden
       = f.input :title
-      = render "shared/actions", f: f, thread: @thread
-    = f.actions do
-      = f.action :submit, button_html: message_button_html

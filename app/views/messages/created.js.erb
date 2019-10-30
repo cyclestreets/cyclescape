@@ -1,7 +1,8 @@
 <% if @message.persisted? %>
-  $("#new-message").before("<%= escape_javascript(render partial: 'messages/message', locals: { message: @message, thread: @thread } ) %>")
-  tinyMCE.activeEditor.setContent('')
-  $("#new-message").find("input[type=text], textarea, input[type=file]").not(":button, :submit, :reset").val('').trigger("change")
+  $('#messages-new-partial')
+    .before("<%= j(render 'messages/message', message: @message, thread: @thread ) %>")
+    .html("<%= j(render 'messages/new') %>")
+    .find(".tabs").parent().tabs()
   window.mapInit()
   var el = document.getElementById("message-<%= @message.id %>")
   el.scrollIntoView()

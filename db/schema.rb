@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190618191808) do
+ActiveRecord::Schema.define(version: 20190703190312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -360,17 +360,17 @@ ActiveRecord::Schema.define(version: 20190618191808) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.integer  "created_by_id",               null: false
-    t.integer  "thread_id",                   null: false
-    t.text     "body",                        null: false
+    t.integer  "created_by_id",                            null: false
+    t.integer  "thread_id",                                null: false
+    t.text     "body",                        default: "", null: false
     t.integer  "component_id"
     t.string   "component_type",  limit: 255
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.datetime "deleted_at"
     t.datetime "censored_at"
     t.integer  "in_reply_to_id"
-    t.string   "public_token",                null: false
+    t.string   "public_token",                             null: false
     t.string   "status"
     t.string   "check_reason"
     t.integer  "inbound_mail_id"

@@ -83,7 +83,7 @@ GEM
       railties (>= 4.0.0)
       sprockets (>= 3.6.0)
     builder (3.2.3)
-    bullet (6.0.2)
+    bullet (5.9.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
     byebug (11.0.1)
@@ -259,7 +259,7 @@ GEM
       activesupport (>= 4)
       railties (>= 4)
       request_store (~> 1.0)
-    loofah (2.3.0)
+    loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -535,7 +535,7 @@ DEPENDENCIES
   annotate (< 2.7.5)
   attribute_normalizer
   browserify-rails
-  bullet
+  bullet (= 5.9.0)
   capybara
   chartkick
   coffee-rails

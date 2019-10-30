@@ -14,7 +14,7 @@ class ThreadNotifier
     # Notification of subscribers to +thread+ with +message+ object
     def notify_subscribers(thread, message)
       thread.email_subscribers.each do |subscriber|
-        ThreadMailer.send(:common, message, subscriber).deliver_later
+        ThreadMailer.common(message, subscriber).deliver_later
       end
     end
   end

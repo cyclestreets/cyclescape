@@ -23,8 +23,9 @@ describe "Link messages" do
       link_form do
         fill_in "Web address", with: link_message_attrs[:url]
         fill_in "Title", with: link_message_attrs[:title]
-        click_on "Add Link"
       end
+      click_on "Post Message"
+
       sleep(0.4)
 
       expect(page).to have_link(link_message_attrs[:title], href: link_message_attrs[:url])
@@ -34,8 +35,8 @@ describe "Link messages" do
       link_form do
         fill_in "Web address", with: "  #{link_message_attrs[:url]}  "
         fill_in "Title", with: link_message_attrs[:title]
-        click_on "Add Link"
       end
+      click_on "Post Message"
       expect(page).to have_link(link_message_attrs[:title], href: link_message_attrs[:url])
     end
   end

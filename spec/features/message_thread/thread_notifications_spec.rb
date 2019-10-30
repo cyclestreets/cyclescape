@@ -18,8 +18,8 @@ describe "thread notifications" do
     it "should send an email for a new text message" do
       within("#new-text-message") do
         fill_in "Message", with: "Notification test"
-        click_on "Post Message"
       end
+      click_on "Post Message"
       message = Message.find_by(body: "Notification test")
       open_email(current_user.email, with_subject: /^Re/)
       expect(current_email).to have_subject("Re: [Cyclescape] #{thread.title}")
@@ -34,8 +34,8 @@ describe "thread notifications" do
         fill_in "Web address", with: "example.com"
         fill_in "Title", with: "An example URL"
         fill_in "Description", with: "Some words"
-        click_on "Add Link"
       end
+      click_on "Post Message"
       open_email(current_user.email)
       expect(current_email).to have_body_text("http://example.com")
       expect(current_email).to have_body_text("An example URL")
@@ -46,8 +46,8 @@ describe "thread notifications" do
       within("#new-deadline-message") do
         fill_in "Deadline", with: "Wednesday, 07 December 2011" # format the date picker returns
         fill_in "Title", with: "Planning application deadline"
-        click_on I18n.t("message.deadlines.new.submit")
       end
+      click_on "Post Message"
       open_email(current_user.email)
       expect(current_email).to have_body_text("Planning application deadline")
       expect(current_email).to have_body_text("Wednesday, 07 December 2011 12:00 AM") # format used in display
@@ -61,8 +61,8 @@ describe "thread notifications" do
       it "should not escape text messages" do
         within("#new-text-message") do
           fill_in "Message", with: "A & B"
-          click_on "Post Message"
         end
+        click_on "Post Message"
 
         open_email(current_user.email)
         expect(current_email).to have_body_text("A & B")
@@ -73,8 +73,8 @@ describe "thread notifications" do
           fill_in "Web address", with: "example.com?foo&bar"
           fill_in "Title", with: "An example URL with & symbols"
           fill_in "Description", with: "Some words & some more words"
-          click_on "Add Link"
         end
+        click_on "Post Message"
         open_email(current_user.email)
         expect(current_email).to have_body_text("http://example.com?foo&bar")
         expect(current_email).to have_body_text("An example URL with & symbols")
@@ -85,8 +85,8 @@ describe "thread notifications" do
         within("#new-deadline-message") do
           fill_in "Deadline", with: "Wednesday, 07 December 2011" # format the date picker returns
           fill_in "Title", with: "Planning application deadline & so on"
-          click_on I18n.t("message.deadlines.new.submit")
         end
+        click_on "Post Message"
         open_email(current_user.email)
         expect(current_email).to have_body_text("Planning application deadline & so on")
       end
@@ -106,8 +106,8 @@ describe "thread notifications" do
       it "should state that the thread is public" do
         within("#new-text-message") do
           fill_in "Message", with: "Notification test"
-          click_on "Post Message"
         end
+        click_on "Post Message"
 
         open_email(current_user.email)
         expect(current_email).to have_body_text("Everyone can view")
@@ -128,8 +128,8 @@ describe "thread notifications" do
       it "should state that the thread is private" do
         within("#new-text-message") do
           fill_in "Message", with: "Notification test"
-          click_on "Post Message"
         end
+        click_on "Post Message"
 
         open_email(current_user.email)
         expect(current_email).to have_body_text("Only members of")
@@ -150,8 +150,8 @@ describe "thread notifications" do
       it "should state that the thread is private" do
         within("#new-text-message") do
           fill_in "Message", with: "Notification test"
-          click_on "Post Message"
         end
+        click_on "Post Message"
 
         open_email(current_user.email)
         expect(current_email).to have_body_text("Only committee members of")

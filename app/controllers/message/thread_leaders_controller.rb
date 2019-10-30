@@ -10,6 +10,6 @@ class Message::ThreadLeadersController < Message::BaseController
   end
 
   def permit_params
-    %i[description unleading_id]
+
   end
 end

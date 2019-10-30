@@ -7,7 +7,7 @@
       %label.label= t "formtastic.labels.library/note.location"
       = f.semantic_errors :location
       = f.semantic_errors :size
-      = render partial: "shared/edit_map", locals: {location: @start_location, resource: @note.item}
+      = render partial: "shared/edit_map", locals: {location: @start_location, f: f}
     = f.input :body, input_html: { rows: 15 }
     = f.input :tags_string
   = f.actions do

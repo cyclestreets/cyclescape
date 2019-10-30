@@ -1,23 +1,19 @@
 # frozen_string_literal: true
 
-class Message::LibraryItemsController < Message::BaseController
-  # NB I can't see if this is cntrl is actually used...
+class Message::LibraryItemsController < MessagesController
+  def create
+    @message = thread.messages.build permitted_message_params.merge(created_by: current_user)
+    @message.library_item_messages.build(permitted_params)
+    super
+  end
 
   protected
 
-  def resource_class
-    LibraryItemMessage
-  end
-
-  def permit_params
-    [:library_item_id]
-  end
-
-  def message
-    @message ||= thread.messages.build permitted_message_params
-  end
-
   def permitted_message_params
     params.require(:message).permit :body
+  end
+
+  def permitted_params
+    params.require(:library_item_message).permit :library_item_id
   end
 end

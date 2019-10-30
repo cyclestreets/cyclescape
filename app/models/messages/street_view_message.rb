@@ -4,10 +4,12 @@
 class StreetViewMessage < MessageComponent
   validates :caption, :heading, :pitch, :location, presence: true
 
-  def set_location(location_string)
+  def location_string=(location_string)
     y, x = location_string.gsub(/[()]/, "").split(",").map &:to_f
     self.location = RGeo::Geos.factory(srid: 4326).point(x, y)
   end
+
+  def location_string; end
 end
 
 # == Schema Information

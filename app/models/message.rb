@@ -1,22 +1,47 @@
 # frozen_string_literal: true
 
-
 class Message < ApplicationRecord
   include FakeDestroy
   include AASM
   include Rakismet::Model
   include BodyFormat
+  include MessageComponents
+
+  self.ignored_columns = %w[component_id component_type]
 
   belongs_to :thread, -> { with_deleted }, class_name: "MessageThread", inverse_of: :messages
-  belongs_to :created_by, -> { with_deleted }, class_name: "User"
-  belongs_to :component, polymorphic: true, autosave: true, inverse_of: :message
+  belongs_to :created_by, -> { with_deleted }, class_name: "User", inverse_of: :messages
   belongs_to :in_reply_to, class_name: "Message"
   belongs_to :inbound_mail
-  has_many :hashtaggings
+  has_many :hashtaggings, dependent: :destroy
   has_many :hashtags, through: :hashtaggings
-  has_many :action_messages
+  has_many(
+    :completing_action_messages,
+    class_name: "ActionMessage", dependent: :destroy,
+    inverse_of: :completing_message, foreign_key: :completing_message_id
+  )
 
-  before_validation :init_blank_body, on: :create, if: :component
+  COMPONENT_TYPES = %i[
+    action_messages
+    cyclestreets_photo_messages
+    deadline_messages
+    document_messages
+    library_item_messages
+    link_messages
+    map_messages
+    photo_messages
+    street_view_messages
+    thread_leader_messages
+  ].freeze
+
+  COMPONENT_TYPES.each do |component_type|
+    has_many component_type, dependent: :destroy, inverse_of: :message
+    if component_type != :deadline_messages # rubocop:disable Style/IfUnlessModifier
+      accepts_nested_attributes_for component_type, reject_if: :all_blank
+    end
+  end
+  accepts_nested_attributes_for :deadline_messages, reject_if: proc { |attr| attr["deadline"].blank? }
+
   before_validation :set_public_token, on: :create
 
   before_create :set_in_reply_to
@@ -34,7 +59,7 @@ class Message < ApplicationRecord
   scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
 
   validates :created_by, presence: true
-  validates :body, presence: true, unless: :component
+  validates :body, presence: true, unless: :components?
   validate  :in_reply_to_should_belong_to_same_thread
 
   rakismet_attrs  author: proc { created_by.full_name },
@@ -70,20 +95,26 @@ class Message < ApplicationRecord
     save!
   end
 
+  def components_and_self
+    arr = components
+    arr.unshift(self) if body
+    arr
+  end
+
+  def components
+    COMPONENT_TYPES.flat_map { |component| public_send(component) }
+  end
+
+  def components?
+    components.present?
+  end
+
   def censored?
     censored_at
   end
 
-  def component_name
-    (component || self).class.name.underscore
-  end
-
-  def notification_name
-    component ? component.notification_name : :new_message
-  end
-
   def searchable_text
-    component ? "#{body} #{component.searchable_text}" : body
+    components? ? "#{body} #{components.map(&:searchable_text).join(' ')}" : body
   end
 
   def committee_created?
@@ -107,10 +138,6 @@ class Message < ApplicationRecord
   def update_search
     SearchUpdater.update_type(thread, :process_thread) if thread
     true
-  end
-
-  def init_blank_body
-    self.body ||= ""
   end
 
   def set_in_reply_to

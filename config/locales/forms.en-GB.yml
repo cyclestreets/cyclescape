@@ -205,10 +205,6 @@
       saving: Saving…
       cancel: Cancel
       update_tags: Update Tags
-      deadline_message:
-        create: Add Deadline
-      document_message:
-        create: Add Attachment
       group_membership:
         create: Add member
       group_request:
@@ -226,20 +222,12 @@
       library/note:
         create: Create Note
         attach_to_document: Attach note
-      link_message:
-        create: Add Link
       message:
         create: Post Message
-      photo_message:
-        create: Add Photo
       thread:
         create: Create Thread
       potential_member:
         submit: Submit potential members list
-      cyclestreets_photo_message:
-        create: Add CycleStreets Photo
-      street_view_message:
-        create: Add StreetView Message
       site_comment:
         create: Send Feedback
       user:

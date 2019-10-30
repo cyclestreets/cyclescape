@@ -1,5 +1,5 @@
 - action_messages = thread.action_messages.reject(&:completed?)
 - if action_messages.to_a.present?
-  = f.input :action_messages,
+  = f.input :completing_action_messages,
     as: :check_boxes, collection: action_messages.map { |am| [am.description, am.id] },
     label: t(".resolve_action")

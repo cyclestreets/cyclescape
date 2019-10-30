@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-
-
 class ActionMessage < MessageComponent
-  belongs_to :completing_message, polymorphic: true
+  self.ignored_columns = %w[completing_message_type] # TODO: was polymorphic, need to remove
+
+  belongs_to :completing_message, class_name: "Message"
 
   validates :description, presence: true
 
   def completed?
-    completing_message.try(:message).try(:approved?)
+    completing_message.try(:message).try(:approved?) || completing_message
   end
 end
 

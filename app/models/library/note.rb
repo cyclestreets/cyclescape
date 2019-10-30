@@ -8,6 +8,8 @@ class Library::Note < Library::Component
   validates :body, presence: true
   validates :url, url: true
 
+  delegate :locations_array, to: :item
+
   # Set the decl_auth_context explicitly, since decl_auth has problems with
   # attribute checks on namespaced models. See
   # https://github.com/stffn/declarative_authorization/issues/120

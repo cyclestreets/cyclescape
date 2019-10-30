@@ -3,11 +3,11 @@
 FactoryBot.define do
   factory :library_item_message do
     association :created_by, factory: :user
-    message
+    association :message, factory: :message, strategy: :build
 
     after(:build) do |o|
       o.thread = o.message.thread
-      o.message.update(component: o)
+      o.message.library_item_messages = [o]
     end
 
     trait :with_document do

@@ -900,15 +900,6 @@
     deadlines:
       new:
         submit: Add deadline/date
-      create:
-        failure: Deadline/date could not be created
-        success: Deadline/date created
-    maps:
-      new:
-        submit: Add map
-      create:
-        failure: Map could not be created
-        success: Map created
     actions:
       new:
         submit: Add call to action
@@ -918,25 +909,12 @@
       show:
         call_to_action: "Call to action added:"
     documents:
-      create:
-        failure: Could not add attachment
-        success: Attachment added
       show:
         download: Download Attachment
     library_items:
-      create:
-        failure: Library item could not be added
-        success: Library item added
       show:
         attached_to_html: 'Attached to document: %{document}'
-    links:
-      create:
-        failure: Link could not be created
-        success: Link posted
     photos: &photo_message
-      create:
-        failure: Could not create photo message.  Was the file too large or not a jpg, jpeg, png or gif?
-        success: Photo uploaded
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
@@ -944,10 +922,6 @@
         image: Image
     cyclestreets_photos:
       <<: *photo_message
-    street_views:
-      create:
-        failure: Street View could not be added
-        success: Street View added
     thread_leaders:
       create:
         success: Your leader status has been updated
@@ -1151,8 +1125,7 @@
       area_of_group: "area of %{group_name}"
   thread_mailer:
     header:
-      added: '%{name} added %{type} to the thread'
-      added_html: '%{name} added %{message_link} to the thread'
+      added: '%{name} added'
       committee: ' [Committee]'
     new_map_message:
       type: a map

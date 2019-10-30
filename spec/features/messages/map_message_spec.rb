@@ -22,9 +22,9 @@ describe "Map messages" do
     it "should post a map message and send an email" do
       map_form do
         fill_in "Caption", with: "A fine map"
-        find("#map_message_loc_json", visible: false).set('{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.1250070333480835,52.20619176430142]}}]}')
-        click_on "Add map"
+        find("#message_map_messages_attributes_0_loc_json", visible: false).set('{"type":"FeatureCollection","features":[{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.1250070333480835,52.20619176430142]}}]}')
       end
+      click_on "Post Message"
 
       expect(page).to have_css(".map-normal-show")
 

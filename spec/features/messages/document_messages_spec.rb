@@ -20,10 +20,9 @@ describe "Document messages" do
       document_form do
         attach_file("File", pdf_document_path)
         fill_in "Title", with: "An important document"
-        click_on "Add Attachment"
       end
+      click_on "Post Message"
 
-      expect(page).to have_content("Attachment added")
       expect(page).to have_content("An important document")
       expect(page).to have_link("Download Attachment")
     end
