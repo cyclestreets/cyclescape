@@ -372,8 +372,11 @@ class window.LeafletMap
       else
         $('ul.leaflet-draw-actions a[title^="Delete"]')[0].click()
 
-
-jQuery ->
+window.leafletMapInit = ->
   for mapData in $('.map-data')
     domMap = $(mapData)
     new LeafletMap(domMap.data('center'), domMap.data('opts')) unless domMap.data('skip')
+    domMap.data("skip", true)
+
+jQuery ->
+  window.leafletMapInit()

@@ -4,6 +4,7 @@
     .html("<%= j(render 'messages/new') %>")
     .find(".tabs").parent().tabs()
   window.mapInit()
+  window.leafletMapInit()
   var el = document.getElementById("message-<%= @message.id %>")
   el.scrollIntoView()
   window.scrollBy(0, -80) // Top fix header
