@@ -7,11 +7,7 @@
       = f.input :location_string, as: :hidden
       = f.input :pitch, as: :hidden
 
-    .streetViewPano{id: 'newStreetViewPano'}
+    .streetViewPano{id: 'newStreetViewPano', data: {lat: @thread.default_centre.x, long: @thread.default_centre.y}}
     %br/
     .streetViewPano{id: 'newStreetViewMap'}
     %br/
-
-:javascript
-  var svLatNew = #{@thread.default_centre.x};
-  var svLongNew = #{@thread.default_centre.y};

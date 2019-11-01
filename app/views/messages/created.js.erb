@@ -3,7 +3,7 @@
     .before("<%= j(render 'messages/message', message: @message, thread: @thread ) %>")
     .html("<%= j(render 'messages/new') %>")
     .find(".tabs").parent().tabs()
-  window.mapInit()
+  window.streetViewInit()
   window.leafletMapInit()
   var el = document.getElementById("<%= dom_id(@message) %>")
   el.scrollIntoView()

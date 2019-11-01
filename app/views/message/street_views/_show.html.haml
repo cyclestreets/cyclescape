@@ -1,11 +1,3 @@
 .link
   %p= simple_format component.caption
-  .streetViewPano{id: "streetViewPano#{component.id}"}
-
-:javascript
-  streetViews.push({id: #{component.id},
-    lat:   #{component.location.x},
-    long:  #{component.location.y},
-    head:  #{component.heading},
-    pitch: #{component.pitch}
-    });
+  .streetViewPano.google-street-view{id: "streetViewPano#{component.id}", data: {lat: component.location.x, long: component.location.y, heading: component.heading, pitch: component.pitch}}
