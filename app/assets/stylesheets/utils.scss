@@ -125,7 +125,7 @@
   }
 }
 
-.new-message-highlight {-webkit-animation: highlight 4s ease; animation: highlight 4s ease; padding-top: 2em;}
+.new-message-highlight {-webkit-animation: highlight 6s ease; animation: highlight 6s ease;}
 @keyframes highlight {
   from {background: $lightgreen;}
   to {background: $white;}

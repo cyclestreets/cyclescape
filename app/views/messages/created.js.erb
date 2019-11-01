@@ -5,10 +5,10 @@
     .find(".tabs").parent().tabs()
   window.mapInit()
   window.leafletMapInit()
-  var el = document.getElementById("message-<%= @message.id %>")
+  var el = document.getElementById("<%= dom_id(@message) %>")
   el.scrollIntoView()
   window.scrollBy(0, -80) // Top fix header
-  $(el).addClass("new-message-highlight")
+  $(el).parent().addClass("new-message-highlight")
 <% end %>
 <%= render 'shared/flash' %>
 <% if flash[:alert].present? %>
