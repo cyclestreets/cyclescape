@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 if defined? SanitizeEmail
-  staging_email_address = %w[staging-email cyclescape.org].join("@")
+  staging_email_address = %w[cyclescape-staging cyclestreets.net].join("@")
 
   SanitizeEmail::Config.configure do |config|
     config[:sanitized_to] = staging_email_address
