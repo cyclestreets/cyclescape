@@ -53,7 +53,7 @@ describe Tag do
 
   describe "top tags" do
     let(:tag1) { create :tag, name: "tag1" }
-    let(:tag2) { create :tag, name: "tag2" }
+    let(:tag2) { create :tag, name: "tag32" }
     let(:tag3) { create :tag, name: "tag3" }
 
     before do
@@ -67,6 +67,11 @@ describe Tag do
       top_tags = described_class.top_tags
       expect(top_tags).to eq([tag1, tag2, tag3])
       expect(top_tags.map(&:tag_count)).to eq [4, 2, 1]
+    end
+
+    it "shoud be possible to filter by name" do
+      top_tags = described_class.top_tags_fresh(10, "3")
+      expect(top_tags).to eq([tag2, tag3])
     end
   end
 end

@@ -1,7 +1,18 @@
 # frozen_string_literal: true
 
 class TagsController < ApplicationController
-  autocomplete :tag, :name, full: true
+  def autocomplete_tag_name
+    term = params[:term]
+
+    items =
+      if term&.present?
+        Tag.top_tags_fresh(5, term)
+      else
+        {}
+      end
+
+    render json: json_for_autocomplete(items, :autocomplete_tag_name), root: false
+  end
 
   def show
     @tag = Tag.find_by name: params[:id]

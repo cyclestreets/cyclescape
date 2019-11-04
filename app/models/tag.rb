@@ -18,8 +18,9 @@ class Tag < ApplicationRecord
       find_or_create_by(name: normalise(val))
     end
 
-    def top_tags_fresh(limit)
-      joins('LEFT OUTER JOIN "message_thread_tags" ON "message_thread_tags"."tag_id" = "tags"."id"
+    def top_tags_fresh(limit, name = nil)
+      scope =
+        joins('LEFT OUTER JOIN "message_thread_tags" ON "message_thread_tags"."tag_id" = "tags"."id"
           LEFT OUTER JOIN "message_threads" ON "message_threads"."id" = "message_thread_tags"."thread_id" AND "message_threads"."deleted_at" IS NULL
           LEFT OUTER JOIN "library_item_tags" ON "library_item_tags"."tag_id" = "tags"."id"
           LEFT OUTER JOIN "library_items" ON "library_items"."id" = "library_item_tags"."library_item_id"
@@ -31,6 +32,8 @@ class Tag < ApplicationRecord
         .group(:id, :name, :icon)
         .order("tag_count DESC")
         .limit(limit)
+      scope = scope.where("tags.name ILIKE ?", "%#{name}%") if name
+      scope
     end
 
     def top_tags(limit = 50)
@@ -38,6 +41,10 @@ class Tag < ApplicationRecord
         Tag.top_tags_fresh(500).to_a
       end.first(limit)
     end
+  end
+
+  def autocomplete_tag_name
+    "#{name} (#{tag_count})"
   end
 
   def name=(val)
