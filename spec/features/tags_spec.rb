@@ -29,24 +29,26 @@ describe "autocomplete_tags" do
   context "autocomplete_tag_name" do
     let(:tag) { create(:tag) }
 
-    it "should return a tag from a full name tag search" do
+    it "should return a tag from a full name tag search including the number of times the tag is used" do
+      create_list(:issue, 2, tags: [tag])
+
       visit autocomplete_tags_path(term: tag.name)
-      expect(page).to have_content("\"label\":\"#{tag.name}\"")
+      expect(page).to have_content("\"label\":\"#{tag.name} (2)\"")
     end
 
     it "should return a tag from a partial search start" do
       visit autocomplete_tags_path(term: tag.name[0, 2])
-      expect(page).to have_content("\"label\":\"#{tag.name}\"")
+      expect(page).to have_content("\"label\":\"#{tag.name} (0)\"")
     end
 
     it "should return a tag from a partial search end" do
       visit autocomplete_tags_path(term: tag.name[-2, 2])
-      expect(page).to have_content("\"label\":\"#{tag.name}\"")
+      expect(page).to have_content("\"label\":\"#{tag.name} (0)\"")
     end
 
     it "should return a tag from a partial search middle" do
       visit autocomplete_tags_path(term: tag.name[-4, 2])
-      expect(page).to have_content("\"label\":\"#{tag.name}\"")
+      expect(page).to have_content("\"label\":\"#{tag.name} (0)\"")
     end
   end
 end
