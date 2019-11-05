@@ -32,7 +32,7 @@ class Tag < ApplicationRecord
         .group(:id, :name, :icon)
         .order("tag_count DESC")
         .limit(limit)
-      scope = scope.where("tags.name ILIKE ?", "%#{name}%") if name
+      scope = scope.where(arel_table[:name].matches("%#{name}%")) if name
       scope
     end
 

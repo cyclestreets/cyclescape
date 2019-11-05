@@ -6,12 +6,14 @@ class TagsController < ApplicationController
 
     items =
       if term&.present?
-        Tag.top_tags_fresh(5, term)
+        Tag.top_tags_fresh(5, term).map do |tag|
+          { id: tag.id, label: tag.autocomplete_tag_name, value: tag.name }
+        end
       else
-        {}
+        []
       end
 
-    render json: json_for_autocomplete(items, :autocomplete_tag_name), root: false
+    render json: items, root: false
   end
 
   def show

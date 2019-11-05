@@ -19,7 +19,6 @@
 //= require tinymce-jquery
 //= require tinymce_init
 //= require leaflet
-//= require autocomplete-rails
 //= require superbly-tagfield.min
 //= require map_display
 //= require ui
