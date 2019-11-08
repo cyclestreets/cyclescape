@@ -240,3 +240,11 @@ form.user_location li {
 input.all-day {
   margin: 0;
 }
+
+.cyclestreets-photo-message {
+  margin-bottom: 10px;
+  input:not([type="submit"]) {
+    padding: 2px;
+    line-height: 20px;
+  }
+}

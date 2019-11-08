@@ -10,6 +10,10 @@
       .hidden
         .map-data{"data-center" => location_to_geojson(@thread.default_centre),
           "data-opts" => { feature: item_to_geojson(@issue), photoselect: true, hidelayers: true, domid: "photo-map" }.to_json}
+      %p Or if you know the Cyclestreets photo ID
+      .cyclestreets-photo-message
+        = number_field :photo_id, '', placeholder: "109929"
+        = submit_tag "Search Cyclestreets", data: {behaviour: "search-cyclestreets"}
       = f.input :caption
       %li.string.input.optional.stringish
         = label_tag t('.image'), nil, class: 'label'

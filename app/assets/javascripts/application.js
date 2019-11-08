@@ -40,3 +40,4 @@
 //= require vote
 //= require ajax_file_upload
 //= require street_view
+//= require cyclestreets_photo_search
