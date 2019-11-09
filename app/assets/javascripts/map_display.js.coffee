@@ -2,8 +2,26 @@ require('leaflet-search/dist/leaflet-search.src.js')
 require('leaflet-draw')
 
 class window.LeafletMap
-  @CyclestreetsUrl: "https://www.cyclestreets.net"
   @default_marker_anchor: [30 / 2, 42]
+  @cyclestreetsPeekImg: (feature)->
+    thumbnailUrl = feature.properties.thumbnailUrl
+    peekImgEl = ''
+    if thumbnailUrl
+      peekImgEl = '<img class="no-float" src="' + thumbnailUrl + '" alt="Image loading &hellip;"/>'
+    # Wrap image in a link
+    '<a title="Click for a bigger image and copyright details" href="' +
+      CONSTANTS.geocoder.cyclestreetsUrl + '/location/' + feature.properties.id + '/" target="_blank">' + peekImgEl + '</a>'
+
+  # Used in cyclestreets photo search
+  @updateCyclestreetsPhotoForm: (form, feature)->
+    $form = $(form).closest('#new-cyclestreets-photo-message')
+
+    $form.find('#image-preview').html(@cyclestreetsPeekImg(feature))
+    $form.find("textarea[id$='caption']").changeVal(feature.properties.caption)
+    $form.find("input[id$='cyclestreets_id']").changeVal(feature.properties.id)
+    $form.find("input[id$='photo_url']").changeVal(feature.properties.thumbnailUrl)
+    $form.find("input[id$='icon_properties']").changeVal(JSON.stringify(feature.properties.iconProperties))
+    $form.find("input[id$='loc_json']").changeVal(JSON.stringify(feature))
 
   constructor: (center, opts) ->
     @domId = opts.domid || 'map'
@@ -121,22 +139,14 @@ class window.LeafletMap
       dataToMarker: (feature, latlng) =>
         return unless feature.properties.hasPhoto
         iconProperties = feature.properties.iconProperties
-        iconProperties.iconUrl = @constructor.CyclestreetsUrl + iconProperties.iconUrl
-        iconProperties.shadowUrl = @constructor.CyclestreetsUrl + iconProperties.shadowUrl
+        iconProperties.iconUrl = CONSTANTS.geocoder.cyclestreetsUrl + iconProperties.iconUrl
+        iconProperties.shadowUrl = CONSTANTS.geocoder.cyclestreetsUrl + iconProperties.shadowUrl
         icon = new L.Icon(iconProperties)
         marker = new L.marker(latlng, {icon: icon}).addTo @photoLayer
         # Declarations
         id = feature.properties.id
-        thumbnailUrl = feature.properties.thumbnailUrl
         latitude = feature.geometry.coordinates[1]
         longitude = feature.geometry.coordinates[0]
-        peekImgEl = if thumbnailUrl
-          '<img class="no-float" src="' + thumbnailUrl + '" alt="Image loading &hellip;"/>'
-        else
-          ''
-        # Wrap image in a link
-        peekImgEl = "<a title=\"Click for a bigger image and copyright details\" href=\"" +
-          @constructor.CyclestreetsUrl + "/location/#{id}/\" target=\"_blank\">#{peekImgEl}</a>"
         # Get caption
         caption = "<p class=\"caption\">#{feature.properties.caption}</p>"
         # Headline
@@ -144,7 +154,7 @@ class window.LeafletMap
         if feature.properties.hasOwnProperty('categoryPlural') and feature.properties.hasOwnProperty('metacategoryName')
           headline += "<p class=\"categorisationnote small\">Categorisation: #{feature.properties.categoryPlural} (#{feature.properties.metacategoryName.toLowerCase()})</p>"
         # The main bit of the content
-        mainContent = '<p class="peekimage">' + peekImgEl + '</p>'
+        mainContent = '<p class="peekimage">' + @constructor.cyclestreetsPeekImg(feature) + '</p>'
         selectable = if photoselect
           "<div class='formtastic btn-green' id='cs-image-#{feature.properties.id}'> #{CONSTANTS.i18n.selectImage} </button>"
         else
@@ -152,15 +162,7 @@ class window.LeafletMap
 
         marker.bindPopup('<div class="photo bubble">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
           $("#cs-image-#{feature.properties.id}").click (e)->
-            form = $(e.target).closest("#new-cyclestreets-photo-message")
-
-            form.find("#image-preview").html(peekImgEl)
-
-            form.find("textarea[id$='caption']").changeVal(feature.properties.caption)
-            form.find("input[id$='cyclestreets_id']").changeVal(feature.properties.id)
-            form.find("input[id$='photo_url']").changeVal(thumbnailUrl)
-            form.find("input[id$='icon_properties']").changeVal(JSON.stringify(iconProperties))
-            form.find("input[id$='loc_json']").changeVal JSON.stringify(feature)
+            @constructor.updateCyclestreetsPhotoForm(e.target, feature)
         )
         return
     })
