@@ -914,14 +914,19 @@
     library_items:
       show:
         attached_to_html: 'Attached to document: %{document}'
-    photos: &photo_message
+    photos:
       show:
         photo_alt: A photo entitled %{caption}.
         view_original_image: View the original image
       new:
         image: Image
     cyclestreets_photos:
-      <<: *photo_message
+      show:
+        photo_alt: A photo photo from CycleStreets entitled %{caption}.
+      new:
+        image: Image
+        search_cyclestreets: Search CycleStreets
+        or_lookup_by_id: Or if you know the Cyclestreets photo ID
     thread_leaders:
       create:
         success: Your leader status has been updated
