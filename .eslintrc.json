@@ -4,7 +4,8 @@
     "LeafletMap": true,
     "jsonpTransportRequired": true,
     "L": true,
-    "Cropper": true
+    "Cropper": true,
+    "CONSTANTS": true
   },
   "env": {
     "browser": true,
