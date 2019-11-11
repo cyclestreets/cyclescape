@@ -169,13 +169,24 @@ describe Group do
     end
 
     describe "thread privacy options" do
-      it "should include committee for brian" do
-        expect(subject.thread_privacy_options_for(brian)).to include("committee")
+      let(:new_user) { build_stubbed(:user) }
+
+      context "with a default_thread_privacy of group" do
+        before { subject.default_thread_privacy = "group" }
+
+        it "should include committee for brian" do
+          expect(subject.thread_privacy_options_for(brian)).to contain_exactly(MessageThread::PUBLIC, MessageThread::GROUP, MessageThread::COMMITTEE)
+        end
+
+        it "does not allow the privacy to be changed" do
+          expect(subject.thread_privacy_options_for(new_user)).to contain_exactly(MessageThread::GROUP)
+        end
       end
 
-      it "should not include committee for another user" do
-        new_user = create(:user)
-        expect(subject.thread_privacy_options_for(new_user)).not_to include("committee")
+      context "with a public default_thread_privacy" do
+        it "allows group or public" do
+          expect(subject.thread_privacy_options_for(new_user)).to contain_exactly(MessageThread::GROUP, MessageThread::PUBLIC)
+        end
       end
     end
   end
@@ -197,14 +208,13 @@ describe Group do
     end
 
     it "returns the top N with counts" do
-      expect(subject.active_user_counts).to eq([
-                                                 { user: active_poster, count: 5 },
-                                                 { user: quiet_poster, count: 1 }
-                                               ])
+      expect(subject.active_user_counts).to eq(
+        [{ user: active_poster, count: 5 }, { user: quiet_poster, count: 1 }]
+      )
 
-      expect(subject.active_user_counts(since: 1.hour.ago, limit: 1)).to eq([
-                                                                              { user: active_poster, count: 5 }
-                                                                            ])
+      expect(subject.active_user_counts(since: 1.hour.ago, limit: 1)).to eq(
+        [{ user: active_poster, count: 5 }]
+      )
     end
   end
 end
