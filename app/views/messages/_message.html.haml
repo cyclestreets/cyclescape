@@ -21,8 +21,6 @@
       .censored
         %p= t ".censored"
     - else
-      - message.components.each do |component|
-        = render "message/#{message_controller_map(component)}/show", component: component
       .header-fix{id: dom_id(message)}
       .message-text
         - unless message.library_item_messages.present?
@@ -30,6 +28,8 @@
           - if message.plain_text?
             - display_message = simple_format(display_message, sanitize: false)
           = auto_link(display_message)
+      - message.components.each do |component|
+        = render "message/#{message_controller_map(component)}/show", component: component
 
       - if message.completing_action_messages.to_a.present?
         = render "shared/resolves_actions", actions: message.completing_action_messages
