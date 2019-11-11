@@ -19,9 +19,14 @@ class MessageThread < ApplicationRecord
     end
   end
 
-  ALL_ALLOWED_PRIVACY = %w[public group committee private].freeze
-  ALLOWED_PRIVACY = ALL_ALLOWED_PRIVACY - %w[private]
-  NON_COMMITTEE_ALLOWED_PRIVACY = ALL_ALLOWED_PRIVACY - %w[private committee]
+  PUBLIC = "public" # Anyone can see
+  GROUP = "group" # Only visible to members of the group
+  COMMITTEE = "committee" # Only visible to committee members of the group
+  PRIVATE = "private" # Only visible between two users
+
+  ALL_ALLOWED_PRIVACY = [PUBLIC, GROUP, COMMITTEE, PRIVATE].freeze
+  ALLOWED_PRIVACY = [PUBLIC, GROUP, COMMITTEE].freeze
+  NON_COMMITTEE_ALLOWED_PRIVACY = [PUBLIC, GROUP].freeze
 
   belongs_to :created_by, -> { with_deleted }, class_name: "User"
   belongs_to :group, inverse_of: :threads, counter_cache: true
@@ -48,7 +53,7 @@ class MessageThread < ApplicationRecord
   scope :without_issue,    -> { where(issue_id: nil) }
   scope :approved,         -> { where(status: "approved") }
   scope :mod_queued,       -> { where(status: "mod_queued") }
-  scope :is_private,       -> { where(privacy: "private") }
+  scope :is_private,       -> { where(privacy: PRIVATE) }
   scope :private_for, lambda { |usr|
     is_private.where(arel_table[:created_by_id].eq(usr.id).or(arel_table[:user_id].eq(usr.id)))
   }
@@ -76,7 +81,7 @@ class MessageThread < ApplicationRecord
 
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALL_ALLOWED_PRIVACY }
-  validates :group, presence: true, if: ->(thread) { thread.privacy == "group" }
+  validates :group, presence: true, if: ->(thread) { thread.privacy == GROUP }
   validate :must_be_created_by_enabled_user, on: :create
 
   aasm column: "status", requires_lock: true do
@@ -225,19 +230,19 @@ class MessageThread < ApplicationRecord
   end
 
   def private_to_committee?
-    group_id && privacy == "committee"
+    group_id && privacy == COMMITTEE
   end
 
   def private_to_group?
-    group_id && privacy == "group"
+    group_id && privacy == GROUP
   end
 
   def private_message?
-    privacy == "private"
+    privacy == PRIVATE
   end
 
   def public?
-    privacy == "public"
+    privacy == PUBLIC
   end
 
   def has_issue?
