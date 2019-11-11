@@ -4,7 +4,6 @@ require('leaflet-draw')
 class window.LeafletMap
   @CyclestreetsUrl: "https://www.cyclestreets.net"
   @default_marker_anchor: [30 / 2, 42]
-  @drawnItems: new L.FeatureGroup()
 
   constructor: (center, opts) ->
     @domId = opts.domid || 'map'
@@ -238,7 +237,7 @@ class window.LeafletMap
 
   drawFeatureId: (feature, id) =>
     if @drawnFeatures[id]
-      @constructor.drawnItems.removeLayer @drawnFeatures[id]
+      @drawnItems.removeLayer @drawnFeatures[id]
       @drawnLayerChanged()
     if feature
       feature = L.geoJson(feature).getLayers()[0]
@@ -267,31 +266,30 @@ class window.LeafletMap
     @drawFeatureId(circle, "circle")
 
   drawFeature: (layer) =>
-    @constructor.drawnItems.addLayer layer
+    @drawnItems.addLayer layer
     if @deletePopup
       domelem = document.createElement('a')
       domelem.innerHTML = "#{CONSTANTS.i18n.delete}?</a>"
       domelem.onclick = =>
-        @constructor.drawnItems.removeLayer layer
+        @drawnItems.removeLayer layer
         @drawnLayerChanged()
-      @constructor.drawnItems.bindPopup(domelem)
+      @drawnItems.bindPopup(domelem)
     @drawnLayerChanged()
 
   drawnLayerChanged: =>
-    @geoInput.changeVal JSON.stringify(@constructor.drawnItems.toGeoJSON())
+    @geoInput.changeVal JSON.stringify(@drawnItems.toGeoJSON())
     $("a[title='Save changes.']")[0].click() if @_editing
     $('.leaflet-draw-edit-edit')[0].click()
 
   addDraw: (feature) =>
-    drawnItems = @constructor.drawnItems
-
+    @drawnItems = new L.FeatureGroup()
     $('.icon-save').toggle()
 
-    @map.addLayer drawnItems
+    @map.addLayer @drawnItems
     drawControl = new L.Control.Draw {
       position: 'topright'
       edit: {
-        featureGroup: drawnItems
+        featureGroup: @drawnItems
         edit: { selectedPathOptions: { fillColor: '#00008B', maintainColor: true } }
       }
       draw: {
@@ -325,7 +323,7 @@ class window.LeafletMap
 
     @map.on 'draw:edited draw:editvertex draw:drawvertex draw:editmove draw:deleted', (e) =>
       return unless @_editing
-      @drawFeature(layer) for layer in drawnItems.getLayers()
+      @drawFeature(layer) for layer in @drawnItems.getLayers()
 
     if feature
       @drawFeature(layer) for layer in L.geoJson(feature).getLayers()
@@ -351,7 +349,7 @@ class window.LeafletMap
     $('.edit-clear').click (evt) =>
       evt.preventDefault()
       evt.stopPropagation()
-      drawnItems.clearLayers()
+      @drawnItems.clearLayers()
       $('ul.leaflet-draw-actions a[title^="Cancel"]')[0]?.click()
       $('.tabs').children('li.area, li.route, li.point').css(opacity: 1).prop('disabled', false)
       @geoInput.changeVal(null)
@@ -367,8 +365,8 @@ class window.LeafletMap
     $('.edit-undo').click (evt) ->
       evt.preventDefault()
       evt.stopPropagation()
-      if drawnItems.getLayers().slice(-1)[0]?.editing?._enabled
-        drawnItems.removeLayer(drawnItems.getLayers()[-1..][0])
+      if @drawnItems.getLayers().slice(-1)[0]?.editing?._enabled
+        @drawnItems.removeLayer(@drawnItems.getLayers()[-1..][0])
       else
         $('ul.leaflet-draw-actions a[title^="Delete"]')[0].click()
 
