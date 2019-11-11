@@ -81,11 +81,16 @@ ImageEdit.prototype.updateResult = function () {
     this.base64El.val(canvas.toDataURL(this.fileType))
   }
 }
-
-$(document).ready(function () {
+window.initImageEdit = function () {
   $('.image-edit-upload').each(function (_, upload) {
+    if (upload.dataset.imageeditinit === '1') {
+      return
+    }
     var imageEdit = new ImageEdit($(upload).data('imageedit'))
     imageEdit.initFileOnChange()
     imageEdit.initCroppie()
+    upload.dataset.imageeditinit = '1'
   })
-})
+}
+
+$(document).ready(window.initImageEdit)
