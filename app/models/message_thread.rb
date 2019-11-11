@@ -83,6 +83,7 @@ class MessageThread < ApplicationRecord
   validates :privacy, inclusion: { in: ALL_ALLOWED_PRIVACY }
   validates :group, presence: true, if: ->(thread) { thread.privacy == GROUP }
   validate :must_be_created_by_enabled_user, on: :create
+  validate :ensure_group_privacy_allowed, on: :create
 
   aasm column: "status", requires_lock: true do
     state :mod_queued, initial: true
@@ -328,6 +329,14 @@ class MessageThread < ApplicationRecord
     return unless created_by
 
     errors.add :base, :disabled if created_by.disabled
+  end
+
+  def ensure_group_privacy_allowed
+    return unless created_by && group
+
+    return if group.thread_privacy_options_for(created_by).include?(privacy)
+
+    errors.add :privacy, :inclusion
   end
 
   def approve_related

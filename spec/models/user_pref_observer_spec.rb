@@ -18,12 +18,15 @@ describe UserPrefObserver do
     end
   end
 
+  let(:group_membership) { create(:group_membership) }
+  let(:group) { group_membership.group }
+  let(:user) { group_membership.user }
+  let(:committee_user) { create(:group_membership, :committee, group: group).user }
+
   context "administrative discussions" do
-    let(:group_membership) { create(:group_membership) }
-    let(:group_thread) { create(:message_thread, group: group_membership.group) }
-    let(:group_issue_thread) { create(:issue_message_thread, group: group_membership.group) }
-    let(:group_private_thread) { create(:message_thread, group: group_membership.group, privacy: "committee") }
-    let(:user) { group_membership.user }
+    let(:group_thread) { create(:message_thread, group: group) }
+    let(:group_issue_thread) { create(:issue_message_thread, group: group) }
+    let(:group_private_thread) { create(:message_thread, group: group, privacy: "committee", created_by: committee_user) }
 
     context "when enabling pref" do
       before do
@@ -103,11 +106,9 @@ describe UserPrefObserver do
   end
 
   context "involve my group issue discussions" do
-    let(:group_membership) { create(:group_membership) }
-    let(:group_thread) { create(:message_thread, group: group_membership.group) }
-    let(:group_issue_thread) { create(:issue_message_thread, group: group_membership.group) }
-    let(:group_private_thread) { create(:issue_message_thread, group: group_membership.group, privacy: "committee") }
-    let(:user) { group_membership.user }
+    let(:group_thread) { create(:message_thread, group: group) }
+    let(:group_issue_thread) { create(:issue_message_thread, group: group) }
+    let(:group_private_thread) { create(:issue_message_thread, group: group, privacy: "committee", created_by: committee_user) }
 
     context "when preference becomes subscribe" do
       before do
@@ -272,7 +273,7 @@ describe UserPrefObserver do
 
         before do
           user.prefs.update_column(:involve_my_groups, "subscribe")
-          issue_thread.group = group_membership.group
+          issue_thread.group = group
           issue_thread.save
         end
 

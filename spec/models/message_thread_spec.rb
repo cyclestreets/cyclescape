@@ -24,6 +24,15 @@ describe MessageThread do
     it { is_expected.to allow_value("group").for(:privacy) }
     it { is_expected.to allow_value("committee").for(:privacy) }
     it { is_expected.not_to allow_value("other").for(:privacy) }
+
+    context "when connected to a group" do
+      let(:group) { build_stubbed(:group, default_thread_privacy: "group") }
+
+      it "checks if the group privacy is valid" do
+        subject.assign_attributes(group: group, privacy: "public", created_by: build_stubbed(:user))
+        expect(subject.errors_on(:privacy)).to eq(["is not included in the list"])
+      end
+    end
   end
 
   it "should validate the owner group if the privacy is group" do

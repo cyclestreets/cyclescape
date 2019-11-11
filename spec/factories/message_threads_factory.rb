@@ -16,6 +16,9 @@ FactoryBot.define do
     end
 
     trait :committee do
+      created_by do
+        FactoryBot.create(:group_membership, :committee, group: group).user
+      end
       privacy { "committee" }
     end
 
