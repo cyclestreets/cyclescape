@@ -57,7 +57,7 @@ window.streetViewInit = function () {
     el.setAttribute(dataAtt, 1)
   }
 
-  var captionInput, headingInput, issue, locationInput, newStreetViewPano, panorama, pitchInput, subForm, updateInputReady, updateInputs, svLongNew, svLatNew
+  var captionInput, headingInput, issue, locationInput, newStreetViewPano, panorama, pitchInput, subForm, updateInputs, svLongNew, svLatNew
   $('.google-street-view').each(function (_, streetView) { addStreetView(streetView) })
   newStreetViewPano = document.getElementById('newStreetViewPano')
   subForm = document.getElementById('new-street-view-message')
@@ -66,6 +66,7 @@ window.streetViewInit = function () {
   }
   svLongNew = newStreetViewPano.dataset.long
   svLatNew = newStreetViewPano.dataset.lat
+  newStreetViewPano.dataset.inputready = ''
   if (!svLongNew) {
     return
   }
@@ -75,10 +76,10 @@ window.streetViewInit = function () {
   captionInput = subForm.querySelector("[id$='caption']")
   panorama = new window.google.maps.StreetViewPanorama(newStreetViewPano)
   $('#newStreetViewPano, #newStreetViewMap').click(function () {
-    updateInputReady = true
+    newStreetViewPano.dataset.inputready = '1'
   })
   updateInputs = function () {
-    if (!updateInputReady) {
+    if (newStreetViewPano.dataset.inputready !== '1') {
       return
     }
     locationInput.value = panorama.getPosition().toString()
@@ -98,7 +99,7 @@ window.streetViewInit = function () {
     window.google.maps.event.trigger(map, 'resize')
   })
   captionInput.addEventListener('change', function () {
-    updateInputReady = true
+    newStreetViewPano.dataset.inputready = '1'
     updateInputs()
   })
 }
