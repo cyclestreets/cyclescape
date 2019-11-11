@@ -157,7 +157,7 @@ class window.LeafletMap
 
             form.find("#image-preview").html(peekImgEl)
 
-            form.find("input[id$='caption']").changeVal(feature.properties.caption)
+            form.find("textarea[id$='caption']").changeVal(feature.properties.caption)
             form.find("input[id$='cyclestreets_id']").changeVal(feature.properties.id)
             form.find("input[id$='photo_url']").changeVal(thumbnailUrl)
             form.find("input[id$='icon_properties']").changeVal(JSON.stringify(iconProperties))
