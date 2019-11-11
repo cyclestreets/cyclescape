@@ -88,7 +88,7 @@ jQuery ->
         target_select = $ this
         param = target_select.data("auto-options-param")
         new_options = source_select.find("option:selected").data(param)
-        target_select.empty().addOption(new_options, false)
+        target_select.empty().addOption(new_options)
 
     # When a select box is changed search for other selects that
     # are linked via the autoset and autoset-param data attributes
