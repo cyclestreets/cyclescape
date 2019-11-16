@@ -7,9 +7,11 @@ describe ThreadMailer do
   let(:message_one)   { create(:message, created_by: user, thread: thread) }
   let(:message_two)   { create(:message, created_by: user, in_reply_to: message_one, thread: thread) }
   let(:message_three) { create(:message, created_by: user, in_reply_to: message_two, thread: thread) }
-  let(:thread)        { create :message_thread, group: membership.group, privacy: privacy }
+  let(:created_by_user) { create(:group_membership, :committee, group: group).user }
+  let(:thread)        { create :message_thread, group: group, privacy: privacy, created_by: created_by_user }
   let(:privacy)       { "group" }
   let(:membership)    { create :brian_at_quahogcc }
+  let(:group)         { membership.group }
   let(:document)      { create(:document_message, created_by: user, message: message_three, thread: thread) }
   let(:deadline_message) { create(:deadline_message, created_by: user, message: message_three, thread: thread) }
 

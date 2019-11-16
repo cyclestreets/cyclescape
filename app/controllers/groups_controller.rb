@@ -65,15 +65,15 @@ class GroupsController < ApplicationController
         with(:group_id, _group.id)
       end
       any_of do
-        with(:privacy, "public")
+        with(:privacy, MessageThread::PUBLIC)
         if current_user
           all_of do
             with(:group_id, current_user.groups.try(:ids))
-            with(:privacy, "group")
+            with(:privacy, MessageThread::GROUP)
           end
           all_of do
             with(:group_id, current_user.in_group_committee.map(&:id))
-            with(:privacy, "committee")
+            with(:privacy, MessageThread::COMMITTEE)
           end
         end
       end
