@@ -134,6 +134,7 @@ class window.LeafletMap
       $.get(CONSTANTS.geocoder.photoLocationUrl + '?' + $.param(params.concat({name: 'id', value: $('#photo_id_').val()})))
         .done((json) =>
           feature = json.features[0]
+          @popUpID = feature.properties.id
           @map.fitBounds(L.geoJson(feature).getBounds())
           window.LeafletMap.updateCyclestreetsPhotoForm(e.target, feature)
         )
@@ -169,10 +170,12 @@ class window.LeafletMap
         else
           ""
 
-        marker.bindPopup('<div class="photo bubble">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
+        popup = marker.bindPopup('<div class="photo bubble">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
           $("#cs-image-#{feature.properties.id}").click (e)->
             @constructor.updateCyclestreetsPhotoForm(e.target, feature)
         )
+        popup.openPopup() if @popUpID == id
+
         return
     })
 
