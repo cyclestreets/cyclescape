@@ -21,7 +21,6 @@
 //= require leaflet
 //= require superbly-tagfield.min
 //= require map_display
-//= require cyclestreets_photo_search
 //= require ui
 //= require timeago_ui
 //= require tags

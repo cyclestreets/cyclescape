@@ -129,6 +129,15 @@ class window.LeafletMap
       {name: 'thumbnailsize', value: 2000},
       {name: 'datetime', value: 'friendly'},
     ]
+    $('[data-behaviour="search-cyclestreets"]').click((e) =>
+      e.preventDefault()
+      $.get(CONSTANTS.geocoder.photoLocationUrl + '?' + $.param(params.concat({name: 'id', value: $('#photo_id_').val()})))
+        .done((json) =>
+          feature = json.features[0]
+          @map.fitBounds(L.geoJson(feature).getBounds())
+          window.LeafletMap.updateCyclestreetsPhotoForm(e.target, feature)
+        )
+    )
 
     @photoLayer = new L.LayerJSON({
       url: "#{CONSTANTS.geocoder.photoUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
