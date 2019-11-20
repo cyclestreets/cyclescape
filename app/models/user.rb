@@ -105,6 +105,14 @@ class User < ApplicationRecord
     role == "admin"
   end
 
+  def groups_can_assign
+    if admin?
+      Group.all
+    else
+      groups
+    end
+  end
+
   def in_group_committee
     groups.includes(:memberships).where(group_memberships: { role: "committee" }).references(:memberships)
   end
