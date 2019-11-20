@@ -16,7 +16,6 @@ class Issue::MessageThreadsController < MessageThreadsController
     end
     @message = @thread.messages.build
     @message.body = issue.description if issue.threads.count == 0
-    @available_groups = current_user.groups
   end
 
   def create

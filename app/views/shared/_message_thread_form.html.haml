@@ -1,9 +1,9 @@
 = f.semantic_errors
 = f.inputs do
   = f.input :title, label: f.object.class.human_attribute_name(:title), input_html: {"data-touched" => false, "data-copyfromid" => "#issue_title"}
-  - if @available_groups.present?
+  - if current_user.groups.present?
     = f.input :group,
-        collection: [[t(".everyone"), nil, "data-privacy-options" => "{}"]] + @available_groups.map {|g| [g.name, g.id, "data-privacy" => g.default_thread_privacy, "data-privacy-options" => Hash[g.thread_privacy_options_map_for(current_user).map { |n,v| [v, n]}].to_json] },
+        collection: [[t(".everyone"), nil, "data-privacy-options" => "{}"]] + current_user.groups.map {|g| [g.name, g.id, "data-privacy" => g.default_thread_privacy, "data-privacy-options" => Hash[g.thread_privacy_options_map_for(current_user).map { |n,v| [v, n]}].to_json] },
         include_blank: false
     = f.input :privacy,
         as: :select,

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class Group < ApplicationRecord
   has_many :memberships, class_name: "GroupMembership", dependent: :destroy
   has_many :members, through: :memberships, source: :user

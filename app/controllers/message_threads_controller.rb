@@ -88,7 +88,6 @@ class MessageThreadsController < ApplicationController
     if thread.save
       redirect_on_check_reason(@message, spam_path: home_path, clean_path: thread_path(thread))
     else
-      @available_groups = current_user.groups
       render :new
     end
   end
