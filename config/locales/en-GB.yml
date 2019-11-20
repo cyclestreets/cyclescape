@@ -835,6 +835,7 @@
       description: As a group administrator, you can fix up thread properties here.
       thread_fix_warning_html: <strong>Warning:</strong> your group may have a policy
         about changing thread privacy.
+      everyone: Everyone
     destroy:
       failure: Couldn't delete the thread
       success: Thread deleted
