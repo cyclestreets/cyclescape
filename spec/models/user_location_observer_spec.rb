@@ -22,7 +22,9 @@ describe UserLocationObserver do
     let!(:thread) { create(:issue_message_thread, issue: issue) }
     let(:user_location) { build(:user_location, location: issue.location, user: user) }
     let(:user) { create(:user) }
-    let(:group) { create(:group) }
+    let(:group_membership) { create(:group_membership) }
+    let(:group) { group_membership.group }
+    let(:group_member) { group_membership.user }
 
     context "with pref" do
       before do
@@ -40,9 +42,7 @@ describe UserLocationObserver do
 
       it "should not subscribe users to private threads" do
         expect(group.members).not_to include(user)
-        thread.group = group
-        thread.privacy = "group"
-        thread.save
+        thread.update!(group: group, privacy: "group", created_by: group_member)
         UserLocation.observers.enable :user_location_observer do
           user_location.save
         end
@@ -89,10 +89,11 @@ describe UserLocationObserver do
 
     context "with a group thread and involve_my_groups set to subscribe" do
       let!(:group_membership) { create(:group_membership, user: user) }
+      let(:group) { group_membership.group }
+      let(:group_member) { create(:group_membership, group: group).user }
 
       before do
-        thread.group = group_membership.group
-        thread.save
+        thread.update!(group: group, created_by: group_member)
         user.prefs.update_column(:involve_my_groups, "subscribe")
       end
 

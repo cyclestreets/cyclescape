@@ -105,8 +105,10 @@ class Group < ApplicationRecord
   end
 
   def thread_privacy_options_for(user)
-    if committee_members.include?(user)
+    if user.admin? || committee_members.include?(user)
       MessageThread::ALLOWED_PRIVACY.dup
+    elsif !has_member?(user)
+      []
     elsif default_thread_privacy == MessageThread::GROUP
       [MessageThread::GROUP]
     else

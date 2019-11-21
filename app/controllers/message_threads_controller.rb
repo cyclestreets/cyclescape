@@ -42,6 +42,7 @@ class MessageThreadsController < ApplicationController
   end
 
   def update
+    thread.updated_by = current_user
     if thread.update permitted_params
       set_flash_message :success
       redirect_to thread_path thread

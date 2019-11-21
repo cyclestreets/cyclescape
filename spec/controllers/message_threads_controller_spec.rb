@@ -99,4 +99,66 @@ describe MessageThreadsController do
       end
     end
   end
+
+  describe "#update changing the thread's group and privacy" do
+    let(:user) { create(:user) }
+    let(:not_in_group) { create :group, default_thread_privacy: "group" }
+    let(:committee_group) { create :group, default_thread_privacy: "group" }
+    let(:member_group) { create :group, default_thread_privacy: "group" }
+    let(:thread) { create(:message_thread_with_messages, group: committee_group, created_by: creator) }
+    let(:creator) { create(:group_membership, :committee, group: committee_group).user }
+
+    before do
+      warden.set_user user
+      create(:group_membership, group: member_group, user: user)
+      create(:group_membership, :committee, group: committee_group, user: user)
+    end
+
+    subject { put :update, params: { id: thread.id, thread: {group_id: group.id, privacy: privacy} } }
+
+    context "when the user is not in the group" do
+      let(:group) { not_in_group }
+      let(:privacy) { "group" }
+
+      it "does not allow the change" do
+        expect(subject.status).to eq 200
+        expect(flash[:notice]).to_not be_present
+      end
+    end
+
+    context "when the user is a normal member of the group" do
+      let(:group) { member_group }
+
+      context "when changing the privacy to public" do
+        let(:privacy) { "public" }
+
+        it "does not allow the change" do
+          expect(subject.status).to eq 200
+          expect(flash[:notice]).to_not be_present
+        end
+      end
+
+      context "when changing the privacy to group" do
+        let(:privacy) { "group" }
+
+        it "does allow the change" do
+          expect(subject.status).to eq 302
+          expect(flash[:notice]).to be_present
+        end
+      end
+    end
+
+    context "when the user is a committee member of the group" do
+      let(:group) { committee_group }
+
+      context "when changing the privacy to public" do
+        let(:privacy) { "public" }
+
+        it "does allow the change" do
+          expect(subject.status).to eq 302
+          expect(flash[:notice]).to be_present
+        end
+      end
+    end
+  end
 end

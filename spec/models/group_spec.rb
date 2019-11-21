@@ -27,8 +27,9 @@ describe Group do
   describe "scopes" do
     it "has ordered scope" do
       group = create :group
-      group_with_messages = create :group
-      create :message_thread, group: group_with_messages
+      membership = create :group_membership
+      group_with_messages = membership.group
+      create :message_thread, group: group_with_messages, created_by: membership.user
       expect(described_class.ordered).to eq [group_with_messages, group]
     end
   end
@@ -169,23 +170,36 @@ describe Group do
     end
 
     describe "thread privacy options" do
-      let(:new_user) { build_stubbed(:user) }
+      let(:non_member) { build(:user) }
+      let(:admin) { build(:user, :admin) }
+      let(:member) { create(:group_membership, group: group).user }
+      let(:committee) { create(:group_membership, :committee, group: group).user }
 
       context "with a default_thread_privacy of group" do
-        before { subject.default_thread_privacy = "group" }
+        let(:group) { create :group, default_thread_privacy: "group" }
 
-        it "should include committee for brian" do
-          expect(subject.thread_privacy_options_for(brian)).to contain_exactly(MessageThread::PUBLIC, MessageThread::GROUP, MessageThread::COMMITTEE)
+        it "should let admins set any privacy" do
+          expect(group.thread_privacy_options_for(admin)).to contain_exactly(MessageThread::PUBLIC, MessageThread::GROUP, MessageThread::COMMITTEE)
         end
 
-        it "does not allow the privacy to be changed" do
-          expect(subject.thread_privacy_options_for(new_user)).to contain_exactly(MessageThread::GROUP)
+        it "should include public and committee for committee members" do
+          expect(group.thread_privacy_options_for(committee)).to contain_exactly(MessageThread::PUBLIC, MessageThread::GROUP, MessageThread::COMMITTEE)
+        end
+
+        it "does not allow the privacy to be changed away from group" do
+          expect(group.thread_privacy_options_for(member)).to contain_exactly(MessageThread::GROUP)
         end
       end
 
       context "with a public default_thread_privacy" do
+        let(:group) { create :group, default_thread_privacy: "public" }
+
+        it "when not in the group allows no privacies" do
+          expect(group.thread_privacy_options_for(non_member)).to eq []
+        end
+
         it "allows group or public" do
-          expect(subject.thread_privacy_options_for(new_user)).to contain_exactly(MessageThread::GROUP, MessageThread::PUBLIC)
+          expect(group.thread_privacy_options_for(member)).to contain_exactly(MessageThread::GROUP, MessageThread::PUBLIC)
         end
       end
     end
@@ -193,8 +207,8 @@ describe Group do
 
   describe "#active_user_counts" do
     subject { create(:group) }
-    let(:thread_1) { create(:message_thread, group: subject) }
-    let(:thread_2) { create(:message_thread, group: subject) }
+    let(:thread_1) { create(:message_thread, group: subject, created_by: active_poster) }
+    let(:thread_2) { create(:message_thread, group: subject, created_by: active_poster) }
     let(:active_poster) { create(:group_membership, group: subject).user }
     let(:quiet_poster) { create(:group_membership, group: subject).user }
     let(:not_in_group) { create :user }

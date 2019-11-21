@@ -273,8 +273,7 @@ describe UserPrefObserver do
 
         before do
           user.prefs.update_column(:involve_my_groups, "subscribe")
-          issue_thread.group = group
-          issue_thread.save
+          issue_thread.update!(group: group, created_by: user)
         end
 
         it "should not unsubscribe from group threads" do

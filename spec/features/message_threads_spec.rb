@@ -201,8 +201,9 @@ describe "Message threads", type: :feature do
 
       context "as a committee member" do
         before do
-          thread.update(group: create(:group))
-          current_user.memberships.create(group: thread.group, role: "committee")
+          membership = create :group_membership
+          thread.update!(group: membership.group, created_by: membership.user)
+          current_user.memberships.create!(group: thread.group, role: "committee")
           visit thread_path(thread)
         end
 
