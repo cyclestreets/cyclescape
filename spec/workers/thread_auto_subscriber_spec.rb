@@ -43,7 +43,7 @@ describe ThreadAutoSubscriber do
           thread.add_subscriber(committee_member)
           expect(thread.subscribers).to include(committee_member)
 
-          thread.update(privacy: "committee")
+          thread.update!(privacy: "committee")
 
           thread.reload
           expect(thread.subscribers).not_to include(member)
@@ -63,7 +63,7 @@ describe ThreadAutoSubscriber do
           thread.add_subscriber(committee_member)
           expect(thread.subscribers).to include(committee_member)
 
-          thread.update(privacy: "committee")
+          thread.update!(privacy: "committee")
 
           thread.reload
 
@@ -82,13 +82,13 @@ describe ThreadAutoSubscriber do
       let(:issue) { create(:issue, location: user_location.location) }
 
       it "should subscribe people with overlapping locations" do
-        thread.update(issue: issue)
+        thread.update!(issue: issue)
         thread.reload
         expect(thread.subscribers).to include(user_location.user)
       end
 
       it "should not subscribe people who can't view it" do
-        private_thread.update(issue: issue)
+        private_thread.update!(issue: issue)
         thread.reload
         expect(thread.subscribers).not_to include(user_location.user)
       end
@@ -101,7 +101,7 @@ describe ThreadAutoSubscriber do
 
       it "should remove people" do
         expect(thread.subscribers).to include(user)
-        thread.update(issue: nil)
+        thread.update!(issue: nil)
 
         thread.reload
         expect(thread.subscribers).not_to include(user)
@@ -112,7 +112,7 @@ describe ThreadAutoSubscriber do
         expect(thread.subscribers).to include(user)
         expect(thread.participants).to include(user)
 
-        thread.update(issue: nil)
+        thread.update!(issue: nil)
         expect(thread.subscribers).to include(user)
       end
 
@@ -127,7 +127,7 @@ describe ThreadAutoSubscriber do
         end
 
         it "should leave people subscribed if they have their administrative pref set" do
-          thread.update(issue: nil)
+          thread.update!(issue: nil)
           thread.reload
           expect(thread.subscribers).to include(member)
         end

@@ -44,7 +44,7 @@ FactoryBot.define do
 
     created_by do
       if group
-        FactoryBot.create(:group_membership, group: group).user
+        FactoryBot.create(:group_membership, :committee, group: group).user
       else
         FactoryBot.create(:user)
       end
