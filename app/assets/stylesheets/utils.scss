@@ -48,11 +48,13 @@
 @mixin button-text-grey {
   @include button-reset-grad-text;
 }
+
 @mixin button-text-green {
-  @include button-reset-text($lightgreen, $lightgreen/0.95, $darkgreen);
+  @include button-reset-text($lightgreen, scale-color($lightgreen, $lightness: 5%), $darkgreen);
 }
+
 @mixin button-text-red {
-  @include button-reset-text($lightred, $lightred/0.9, $darkred);
+  @include button-reset-text($lightred, scale-color($lightred, $lightness: 10%), $darkred);
 }
 
 // Button reset - usually used with an image
