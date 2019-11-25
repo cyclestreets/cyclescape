@@ -14,9 +14,7 @@ fallback_token = "a1bcbfb276fb310924d6c5f8c7ca23d880200b"
 secret_key_base = Rails.root.join("config", "secret_token")
 
 if Rails.env.production?
-  Rails.application.config.secret_token = File.read(secret_key_base).strip
-  Rails.application.config.secret_key_base = File.read(secret_key_base).strip
+  Rails.application.secrets.secret_key_base = File.read(secret_key_base).strip
 else
-  Rails.application.config.secret_token = fallback_token
-  Rails.application.config.secret_key_base = fallback_token
+  Rails.application.secrets.secret_key_base = fallback_token
 end
