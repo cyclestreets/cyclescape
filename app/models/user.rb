@@ -60,7 +60,7 @@ class User < ApplicationRecord
   scope :is_public, -> { joins(:profile).where(user_profiles: { visibility: "public" }) }
   scope :ordered, lambda { |group_id|
     joins("LEFT OUTER JOIN group_memberships gms ON (users.id = gms.user_id AND gms.group_id = #{group_id || -1})")
-      .order("gms.role", "SUBSTRING(full_name, '([^[:space:]]+)$')")
+      .order("gms.role", Arel.sql("SUBSTRING(full_name, '([^[:space:]]+)$')"))
   }
 
   validates :full_name, presence: true, format: { without: /[\[\]]/ }

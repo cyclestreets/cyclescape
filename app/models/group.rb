@@ -50,12 +50,14 @@ class Group < ApplicationRecord
 
   def active_user_counts(since: 1.year.ago, limit: 15)
     subquery = members.select(:id).to_sql
-    user_count = messages.approved.group(:created_by_id)
-                         .where("messages.created_at > ?", since)
-                         .where("messages.created_by_id IN (#{subquery})")
-                         .order("m_cnt DESC")
-                         .limit(limit)
-                         .pluck("messages.created_by_id, COUNT(*) AS m_cnt")
+    user_count =
+      messages
+      .approved.group(:created_by_id)
+      .where("messages.created_at > ?", since)
+      .where("messages.created_by_id IN (#{subquery})")
+      .order(Arel.sql("m_cnt DESC"))
+      .limit(limit)
+      .pluck(Arel.sql("messages.created_by_id, COUNT(*) AS m_cnt"))
     users = User.where(id: user_count.map(&:first)).index_by(&:id)
     user_count.map do |(user_id, count)|
       { user: users[user_id], count: count }
@@ -63,13 +65,14 @@ class Group < ApplicationRecord
   end
 
   def committee_members
-    members.includes(:memberships).where(group_memberships: { role: "committee" })
-           .order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
+    members
+      .includes(:memberships).where(group_memberships: { role: "committee" })
+      .order(Arel.sql("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")).references(:group_memberships)
   end
 
   def normal_members
     members.includes(:memberships).where(group_memberships: { role: "member" })
-           .order("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))").references(:group_memberships)
+      .order(Arel.sql("LOWER(COALESCE(NULLIF(users.display_name, ''), NULLIF(users.full_name, '')))")).references(:group_memberships)
   end
 
   def has_member?(user)

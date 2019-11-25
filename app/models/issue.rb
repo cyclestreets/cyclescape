@@ -18,8 +18,8 @@ class Issue < ApplicationRecord
 
   scope :by_score, lambda {
     joins(:votes).group(:id)
-                 .having("SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) > 0")
-                 .order("SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) DESC")
+                 .having(Arel.sql("SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) > 0"))
+                 .order(Arel.sql("SUM(CASE votes.vote WHEN true THEN 1 WHEN false THEN -1 ELSE 0 END) DESC"))
   }
 
   belongs_to :created_by, -> { with_deleted }, class_name: "User"
@@ -37,7 +37,7 @@ class Issue < ApplicationRecord
   validates :external_url, url: true
 
   default_scope { where(deleted_at: nil) }
-  scope :by_most_recent, -> { order("created_at DESC") }
+  scope :by_most_recent, -> { order(created_at: :desc) }
   scope :preloaded,  -> { includes(:created_by, :tags) }
   scope :created_by, ->(user) { where(created_by_id: user) }
 

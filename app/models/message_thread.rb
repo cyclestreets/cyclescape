@@ -124,7 +124,7 @@ class MessageThread < ApplicationRecord
       joins(messages: :deadline_messages)
         .where("deadline_messages.deadline >= ?", 1.hour.ago) # To give a bit of time after the event might have started
         .where(messages: {censored_at: nil})
-        .order("MIN(deadline_messages.deadline) ASC")
+        .order(Arel.sql("MIN(deadline_messages.deadline) ASC"))
         .group(cols.join(", "))
         .select((cols + ["MIN(deadline_messages.deadline)"]).join(", "))
     end

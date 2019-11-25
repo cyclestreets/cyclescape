@@ -52,7 +52,7 @@ module Locatable
     end
 
     def order_by_size(order = "DESC")
-      order("ST_Area(location) #{order}")
+      order(Arel.sql("ST_Area(location) #{order}"))
     end
 
     def select_area
