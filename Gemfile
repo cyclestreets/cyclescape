@@ -69,7 +69,6 @@ gem "rakismet"
 gem "rollbar"
 
 gem "coffee-rails"
-gem "compass-rails", "> 3"
 gem "jquery-ui-rails", "~> 5.0.0"
 gem "sass-rails"
 # gem 'turbolinks'

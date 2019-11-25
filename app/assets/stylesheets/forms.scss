@@ -130,10 +130,10 @@ form.guided {
     color: $lightblack;
     float: left;
     border: 1px solid $lightergrey;
-    @include box-shadow(rgba(0, 0, 0, 0.4) 0 0 1px);
+    box-shadow: rgba(0, 0, 0, 0.4) 0 0 1px;
     &:focus {
       outline: none;
-      @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 0 1px);
+      box-shadow: inset rgba(0, 0, 0, 0.4) 0 0 1px;
     }
   }
   fieldset ol li.text {

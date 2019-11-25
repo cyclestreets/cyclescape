@@ -45,7 +45,7 @@
         margin-right: 10px;
       }
       a {
-        @include inline-block;
+        display: inline-block;
         position: relative;
         float: right;
         color: $white;
@@ -95,8 +95,8 @@
           background: $pane1;
           border-left: 1px solid $paneborder;
           border-right: 1px solid $paneborder;
-          @include border-radius(0 0 4px 4px);
-          @include box-shadow(rgba(0, 0, 0, 0.2) 0 2px 1px);
+          border-radius: 0 0 4px 4px;
+          box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px;
           li {
             a {
               font-size: 14px;
@@ -134,7 +134,7 @@
               }
             }
             &:last-child a:hover {
-              @include border-radius(0 0 6px 6px);
+              border-radius: 0 0 6px 6px;
             }
           }
         }

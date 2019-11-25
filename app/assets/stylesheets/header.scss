@@ -32,7 +32,7 @@
     top: 0;
     height: 32px;
     @include gradient($lightgrey2, $grey2);
-    @include border-radius(0 0 5px 5px);
+    border-radius: 0 0 5px 5px;
     li {
       margin-bottom: 5px;
       a {
@@ -96,8 +96,8 @@
           top: 33px;
           z-index: 2;
           width: 150px;
-          @include border-radius(0 0 4px 4px);
-          @include box-shadow(rgba(0, 0, 0, 0.2) 0 2px 1px);
+          border-radius: 0 0 4px 4px;
+          box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px;
           li {
             a {
               color: $lightblack;
@@ -113,7 +113,7 @@
               }
             }
             &:last-child a {
-              @include border-radius(0 0 4px 4px);
+              border-radius: 0 0 4px 4px;
             }
           }
         }

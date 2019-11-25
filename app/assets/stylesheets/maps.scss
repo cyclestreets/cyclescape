@@ -82,7 +82,7 @@
           display:block;
           border:1px solid $black;
           background: $grey image-url("sprite.png") 4px -534px no-repeat;
-          @include border-radius(8px);
+          border-radius: 8px;
           &.area {
             background-position:4px -534px;
           }
@@ -100,7 +100,7 @@
           }
         }
         &.current span {
-          @include box-shadow(inset rgba(0, 0, 0, 0.7) 0 0 8px);
+          box-shadow: inset rgba(0, 0, 0, 0.7) 0 0 8px;
         }
       }
     }
@@ -156,7 +156,7 @@
           display:block;
           border:1px solid $lightgrey;
           background:image-url("sprite.png") 3px -780px no-repeat;
-          @include border-radius(8px);
+          border-radius: 8px;
         }
         span.icon-clear {
           background-position:4px -825px;

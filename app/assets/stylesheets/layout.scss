@@ -54,7 +54,7 @@ div.flash-container .flash {
   margin-top: 10px;
   margin-bottom: 10px;
   font-weight: bold;
-  @include border-radius(5px);
+  border-radius: 5px;
   &.alert {
     background: $red;
     color: white;
@@ -86,35 +86,6 @@ div.panes > div {
   width: 100%;
 }
 
-// Sign in
-
-body.devise-sessions div.content {
-  @include column($half-span);
-  @include push(4);
-}
-
-// Sign up
-
-body.devise-registrations div.content {
-  @include column($half-span);
-  @include push(4);
-}
-
-// Home page
-
-body.home {
-  .issues-area {
-    @include column($half-span, "first");
-  }
-
-  .groups-area {
-    @include column($half-span, "last");
-  }
-}
-
-// User dashboard
-body.dashboards {
-}
 
 article.thread.compact {
   margin-bottom: 8px;

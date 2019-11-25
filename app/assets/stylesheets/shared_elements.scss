@@ -161,7 +161,7 @@ section.thread {
   width: 32px;
   height: 21px;
   border: 1px solid $lightergrey;
-  @include border-radius(2px);
+  border-radius: 2px;
   &:hover {
     cursor: pointer;
     background: $pane2 image-url("sprite.png") 0 -20px no-repeat;
@@ -173,7 +173,7 @@ section.thread {
     position: absolute;
     width: 180px;
     background: white;
-    @include border-radius(2px);
+    border-radius: 2px;
     border: 1px solid $lightergrey;
     padding: 6px;
     display: none;
@@ -371,7 +371,7 @@ form.guided .tip {
 }
 
 #overlay, div.dialog {
-  @include border-radius(5px);
+  border-radius: 5px;
   width: 640px;
   background: white;
   border: 1px solid black;
@@ -392,7 +392,7 @@ body.development span.translation_missing {
 .image-scroller {
   border: 1px solid $paneborder;
   overflow:hidden;
-  @include border-radius(0 0 10px 10px);
+  border-radius: 0 0 10px 10px;
   .image-scroller-wrap {
     height:200px;
     overflow:hidden;
@@ -401,7 +401,7 @@ body.development span.translation_missing {
     height:33px;
     overflow:hidden;
     background:$pane1;
-    @include border-radius(0 0 9px 9px);
+    border-radius: 0 0 9px 9px;
     p {
       margin:7px 10px 0 10px;
       float:left;
@@ -934,7 +934,7 @@ section.new-message {
           padding:10px;
           font-size:14px;
           border:1px solid $lightergrey;
-          @include box-shadow(rgba(0, 0, 0, 0.3) 0 0 4px);
+          box-shadow: rgba(0, 0, 0, 0.3) 0 0 4px;
           &::-webkit-input-placeholder {
             color:$lightgrey;
           }
@@ -1029,8 +1029,7 @@ section.new-message {
     color:$white;
     padding:10px;
     margin:0;
-    background:$black;
-    @include background(linear-gradient($black, $lightblack));
+    background: linear-gradient($black, $lightblack);
   }
   .inner {
     padding:20px;
@@ -1074,12 +1073,12 @@ ul.latest-discussions {
     background: $white image-url("search.png") center 4px no-repeat;
     width: 27px;
     height: 27px;
-    @include border-radius(0);
+    border-radius: 0;
     &:hover {
       background-position: center -19px;
     }
     &:active {
-      @include box-shadow(none);
+      box-shadow: none;
     }
   }
 }

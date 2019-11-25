@@ -1,7 +1,6 @@
 // Gradients
 @mixin gradient($c1, $c2) {
-  background: $c1;
-  @include background(linear-gradient($c1, $c2));
+  background: linear-gradient($c1, $c2);
 }
 
 // Button reset with text
@@ -19,14 +18,14 @@
   background: $c1;
   color: $c4;
   border: 1px solid $c3;
-  @include border-radius(2px);
+  border-radius: 2px;
   &:hover {
     background: $c2;
     color: $c4;
     text-decoration: none;
   }
   &:active {
-    @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 0 8px);
+    box-shadow: inset rgba(0, 0, 0, 0.4) 0 0 8px;
   }
   &:disabled {
     // not sure if hardcoding particular colours is best?
@@ -42,7 +41,7 @@
     @include gradient($c2, $c1);
   }
   &:active {
-    @include box-shadow(inset rgba(0, 0, 0, 0.4) 0 0 8px);
+    box-shadow: inset rgba(0, 0, 0, 0.4) 0 0 8px;
   }
 }
 // Coloured text buttons
@@ -66,7 +65,7 @@
   width: auto;
   height: auto;
   text-indent: -999999px;
-  @include border-radius($rad);
+  border-radius: $rad;
 }
 
 @mixin flex-grow($grow-size) {

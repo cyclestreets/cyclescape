@@ -155,7 +155,7 @@ input.btn-grey, .btn-grey {
 
 .btn-big-green, .formtastic input.btn-big-green {
   @include button-text-green;
-  @include inline-block;
+  display: inline-block;
   padding: 15px;
   text-align: center;
   font: {
@@ -219,9 +219,9 @@ a.read-more-simple {
   font-size: 11px;
   padding-right: 25px;
   background: image-url("arrow-down-grey.png") right 0 no-repeat;
-  @include opacity(0.8);
+  opacity: 0.8;
   &:hover {
-    @include opacity(1);
+    opacity: 1;
   }
 }
 
@@ -237,7 +237,7 @@ a.read-more-simple {
   width: 120px;
   padding: 10px;
   border: 1px solid $paneborder;
-  @include border-radius(2px);
+  border-radius: 2px;
   &:hover {
     color: $grey2;
     background: $pane1;

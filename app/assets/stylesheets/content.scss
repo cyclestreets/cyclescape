@@ -45,7 +45,7 @@
             margin-bottom: 2px;
             line-height: 1;
             padding: 4px 6px;
-            @include border-radius(5px);
+            border-radius: 5px;
             &:hover {
               text-decoration: none;
               background: $lightergrey;
@@ -125,7 +125,7 @@
       &.box {
         padding: 10px 0;
         border: 1px solid $paneborder;
-        @include border-radius(10px);
+        border-radius: 10px;
         h2, h4, >a, form, .map, >p {
           padding: 0 10px;
         }
@@ -218,7 +218,7 @@
           padding: 8px 10px;
           color: $white;
           @include gradient($lightblack, $black);
-          @include border-radius(10px 10px 0 0);
+          border-radius: 10px 10px 0 0;
         }
         ul.content-icon-list {
           margin-bottom: 10px;
@@ -310,7 +310,7 @@
     padding: 5px;
     text-align: center;
     .pagination {
-      @include inline-block;
+      display: inline-block;
     }
     button {
       float:right;
@@ -383,7 +383,7 @@ section#user-locations {
     border-top:1px solid $paneborder;
     border-left:1px solid $paneborder;
     border-bottom:1px solid $paneborder;
-    @include border-radius(10px 0 0 10px);
+    border-radius: 10px 0 0 10px;
     li {
       a {
         position:relative;
@@ -406,31 +406,13 @@ section#user-locations {
           text-decoration:none;
           background:$pane2;
         }
-        span.count {
-          display:block;
-          line-height:1;
-          font: {
-            size:11px;
-            weight:bold;
-          }
-          text-align:center;
-          letter-spacing:1px;
-          float:right;
-          color:$white;
-          padding:2px 4px;
-          margin-right:-30px;
-          background:$grey3;
-          border:2px solid $white;
-          @include border-radius(10px);
-          @include box-shadow(rgba(0, 0, 0, 0.3) 0 0 6px);
-        }
       }
       &:first-child a {
-        @include border-radius(10px 0 0 0);
+        border-radius: 10px 0 0 0;
       }
       &:last-child a {
-        border-bottom:none;
-        @include border-radius(0 0 0 10px);
+        border-bottom: none;
+        border-radius: 0 0 0 10px;
       }
     }
   }
@@ -441,10 +423,7 @@ section#user-locations {
     width:688px;
     padding:30px;
     border:1px solid $paneborder;
-    @include border-radius(10px);
-    .pane {
-
-    }
+    border-radius: 10px;
   }
 }
 
@@ -642,7 +621,7 @@ section#user-locations {
     margin:15px 0;
     text-align:center;
     ul {
-      @include inline-block;
+      display: inline-block;
     }
   }
 }
@@ -682,8 +661,7 @@ body.home {
   }
   .inner {
     overflow:hidden;
-    background:$grey2;
-    @include background(linear-gradient($grey2, $lightblack));
+    background: linear-gradient($grey2, $lightblack);
     h3 {
       color:$white;
       font: {
@@ -818,21 +796,10 @@ body.home {
     border-left:1px solid $paneborder;
     border-bottom:1px solid $paneborder;
     border-right:1px solid $paneborder;
-    @include border-radius(0 0 10px 10px);
+    border-radius: 0 0 10px 10px;
   }
   .area-map .tinymap {
     height: 300px;
-  }
-}
-
-#how-it-works-group {
-  @extend #how-it-works;
-  h1 {
-    color:$colour2;
-  }
-  .inner {
-    background:$colour2;
-    @include background(linear-gradient($colour2, $colour1));
   }
 }
 
