@@ -18,7 +18,7 @@ describe User::ProfilesController, type: :controller do
       context "as a guest" do
         it "should be visible" do
           get :show, params: { user_id: user.id }
-          expect(response).to be_success
+          expect(response).to be_successful
         end
       end
     end
@@ -50,7 +50,7 @@ describe User::ProfilesController, type: :controller do
 
         it "should be visible and not show PM option" do
           get :show, params: { user_id: current_user.id } # NB current_user
-          expect(response).to be_success
+          expect(response).to be_successful
           expect(response.body).to_not include(I18n.t("user.profiles.show.send_private_message"))
         end
       end
@@ -86,7 +86,7 @@ describe User::ProfilesController, type: :controller do
         end
 
         it "should be visible and show PM option" do
-          expect(response).to be_success
+          expect(response).to be_successful
           expect(response.body).to include(I18n.t("user.profiles.show.send_private_message"))
         end
       end
@@ -102,7 +102,7 @@ describe User::ProfilesController, type: :controller do
 
           it "should be visible" do
             get :show, params: { user_id: user.id }
-            expect(response).to be_success
+            expect(response).to be_successful
           end
         end
 
@@ -130,7 +130,7 @@ describe User::ProfilesController, type: :controller do
 
         it "should be visible regardless of groups" do
           get :show, params: { user_id: user.id }
-          expect(response).to be_success
+          expect(response).to be_successful
         end
       end
     end
