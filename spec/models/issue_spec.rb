@@ -360,8 +360,10 @@ describe Issue do
 
   context "scopes" do
     describe "by_most_recent" do
+      let!(:issue) { create :issue }
+
       it "should set the order to be by created_at descending" do
-        expect(Issue.by_most_recent.orders.first).to eq("created_at DESC")
+        expect(Issue.by_most_recent.first).to eq(issue)
       end
     end
 
