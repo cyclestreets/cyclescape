@@ -48,6 +48,7 @@
             border-radius: 5px;
             &:hover {
               text-decoration: none;
+              border: none;
               background: $lightergrey;
             }
           }
@@ -868,6 +869,7 @@ div.tagsinput{
       color: $lightblack;
       &:hover {
         text-decoration: none;
+        border: none;
         color: $black;
       }
     }
