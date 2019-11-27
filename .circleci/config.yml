@@ -18,13 +18,13 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: circleci/ruby:2.3.8-node
+      - image: circleci/ruby:2.6.5-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-      - image: circleci/postgres:9.5.16-postgis-ram
+      - image: circleci/postgres:10.10-postgis-ram
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
