@@ -38,7 +38,7 @@ jobs:
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromedriver
+    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromium-driver
     - run: sudo npm install -g npm@6.4.1
 
     # Dependencies
