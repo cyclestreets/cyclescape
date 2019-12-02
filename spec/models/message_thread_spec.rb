@@ -204,10 +204,10 @@ describe MessageThread do
     thread = create(:message_thread, :with_messages)
     newest_message = thread.messages.last
     tomorrow = 1.day.from_now
-    newest_message.update(updated_at: tomorrow)
+    newest_message.update!(updated_at: tomorrow)
     expect(thread.latest_activity_at).to be_within(1).of tomorrow
     newest_message.update_column(:status, "mod_queued")
-    expect(thread.latest_activity_at).to_not eq tomorrow
+    expect(thread.reload.latest_activity_at).not_to eq tomorrow
   end
 
   context "public token" do

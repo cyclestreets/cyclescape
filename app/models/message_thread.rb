@@ -364,7 +364,7 @@ class MessageThread < ApplicationRecord
   end
 
   def latest_activity
-    @latest_activity ||= messages.approved.last || self
+    @latest_activity ||= messages.approved.order(updated_at: :asc).last || self
   end
 end
 
