@@ -102,6 +102,7 @@ GEM
     childprocess (2.0.0)
       rake (< 13.0)
     chronic (0.10.2)
+    cocoon (1.2.14)
     coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -523,6 +524,7 @@ DEPENDENCIES
   bullet (= 5.9.0)
   capybara
   chartkick
+  cocoon
   coffee-rails
   database_cleaner
   declarative_authorization!
@@ -612,4 +614,4 @@ DEPENDENCIES
   will-paginate-i18n
 
 BUNDLED WITH
-   1.17.1
+   1.17.2

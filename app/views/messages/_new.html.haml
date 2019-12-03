@@ -55,6 +55,10 @@
             = link_to "#new-thread-leader-message" do
               = t ".thread_leader_message"
               %span.nub
+        %li.text
+          = link_to "#new-poll-message" do
+            = "Poll"
+            %span.nub
       - if cannot_post?
         .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
       - else
@@ -75,6 +79,7 @@
                 = render "message/documents/new", form_options
                 = render "message/maps/new", form_options
                 = render "message/actions/new", form_options
+                = render "message/polls/new", form_options
                 - if current_user.subscribed_to_thread?(@thread)
                   = render "message/thread_leaders/new", form_options
               #action-messages

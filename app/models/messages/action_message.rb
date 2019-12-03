@@ -16,15 +16,14 @@ end
 #
 # Table name: action_messages
 #
-#  id                      :integer          not null, primary key
-#  completing_message_type :string
-#  description             :string           not null
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  completing_message_id   :integer
-#  created_by_id           :integer          not null
-#  message_id              :integer          not null
-#  thread_id               :integer          not null
+#  id                    :integer          not null, primary key
+#  description           :string           not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  completing_message_id :integer
+#  created_by_id         :integer          not null
+#  message_id            :integer          not null
+#  thread_id             :integer          not null
 #
 # Indexes
 #

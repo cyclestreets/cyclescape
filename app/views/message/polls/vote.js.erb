@@ -1,0 +1,2 @@
+<% poll_message = @poll_option.poll_message %>
+$('#<%=dom_id(poll_message.message)%>').parent().find(".poll-message").replaceWith("<%= j(render 'message/polls/show', component: poll_message) %>")

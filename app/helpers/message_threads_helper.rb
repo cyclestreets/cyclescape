@@ -11,7 +11,8 @@ module MessageThreadsHelper
     "StreetViewMessage" => "street_views",
     "ThreadLeaderMessage" => "thread_leaders",
     "MapMessage" => "maps",
-    "ActionMessage" => "actions"
+    "ActionMessage" => "actions",
+    "PollMessage" => "polls"
   }.freeze
 
   MESSAGE_LIBRARY_MAP = {

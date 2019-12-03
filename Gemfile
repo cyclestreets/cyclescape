@@ -17,6 +17,7 @@ end
 gem "browserify-rails"
 gem "chartkick"
 gem "formtastic"
+gem "cocoon"
 gem "haml-rails"
 gem "jqcloud-rails", github: "GovSciences/jqcloud-rails"
 gem "jquery-rails", "~> 4.1.1"

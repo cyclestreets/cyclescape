@@ -32,16 +32,17 @@ class Message < ApplicationRecord
     action_messages
     thread_leader_messages
     library_item_messages
+    poll_messages
   ].freeze
 
   COMPONENT_TYPES.each do |component_type|
     has_many component_type, dependent: :destroy, inverse_of: :message
-    if component_type != :deadline_messages # rubocop:disable Style/IfUnlessModifier
+    unless %i[poll_messages deadline_messages].include? component_type
       accepts_nested_attributes_for component_type, reject_if: :all_blank
     end
   end
   accepts_nested_attributes_for :deadline_messages, reject_if: proc { |attr| attr["deadline"].blank? }
-
+  accepts_nested_attributes_for :poll_messages, reject_if: proc { |attr| attr["question"].blank? }
   before_validation :set_public_token, on: :create
 
   before_create :set_in_reply_to
@@ -177,16 +178,14 @@ end
 # Table name: messages
 #
 #  id              :integer          not null, primary key
-#  body            :text             not null
+#  body            :text             default(""), not null
 #  censored_at     :datetime
 #  check_reason    :string
-#  component_type  :string(255)
 #  deleted_at      :datetime
 #  public_token    :string           not null
 #  status          :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  component_id    :integer
 #  created_by_id   :integer          not null
 #  in_reply_to_id  :integer
 #  inbound_mail_id :integer
