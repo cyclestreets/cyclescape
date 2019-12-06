@@ -87,7 +87,10 @@ authorization do
       if_attribute created_by: is { user }
     end
     has_permission_on :issue_tags, to: [:update]
-    has_permission_on :messages, to: %i[new create vote_up vote_clear]
+    has_permission_on :messages, to: %i[new]
+    has_permission_on :messages, to: %i[create vote_up vote_clear] do
+      if_permitted_to :show, :thread
+    end
     has_permission_on :message_library_notes, to: %i[new create]
     has_permission_on :message_library_documents, to: %i[new create]
     has_permission_on :issue_message_threads, to: %i[new create]
@@ -151,10 +154,13 @@ authorization do
       to [:create]
       if_attribute subscribers: contains { user }, closed: false
     end
-    has_permission_on :message_photos, :message_links, :message_deadlines,
-                      :message_library_items, :message_documents, :message_street_views,
-                      :message_cyclestreets_photos, :message_maps,
-                      :message_actions, to: %i[create view]
+    has_permission_on(
+      :message_cyclestreets_photos, :message_documents,
+      :message_library_items, :message_photos
+    ) do
+      to %i[create view]
+      if_permitted_to :show, :thread
+    end
     has_permission_on :libraries, :library_documents, :library_notes, to: %i[index new create show]
     has_permission_on :library_documents, :library_notes do
       to %i[edit update]

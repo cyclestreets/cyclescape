@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class MessagesController < ApplicationController
-  filter_access_to :approve, :reject, :censor, attribute_check: true
+  before_action :build_message, only: :create
+  filter_access_to :all, attribute_check: true
 
   def create
-    @message ||= thread.messages.build permitted_params.merge(created_by: current_user)
     return redirect_to(:back) if thread.private_message? && !(permitted_to? :send_private_message, thread.other_user(current_user))
 
     message.check_reason = check_reason unless thread.private_message?
@@ -60,6 +60,10 @@ class MessagesController < ApplicationController
   end
 
   protected
+
+  def build_message
+    @message ||= thread.messages.build permitted_params.merge(created_by: current_user)
+  end
 
   def check_reason
     # spam? check needs to be done in the controller

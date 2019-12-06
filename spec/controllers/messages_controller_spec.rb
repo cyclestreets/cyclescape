@@ -11,6 +11,7 @@ describe MessagesController, type: :controller do
     let(:thread) { create :message_thread, privacy: privacy, user: thread_to_user }
     let(:privacy) { "public" }
     subject { post :create, params: { message: message.attributes, thread_id: thread.id } }
+
     before do
       warden.set_user user
     end
@@ -57,6 +58,29 @@ describe MessagesController, type: :controller do
         expect(subject).to redirect_to("/threads/#{thread.id}")
         expect(akismet_req).to have_been_made
         expect(flash[:alert]).to be_blank
+      end
+
+      context "with group only thread" do
+        let(:group) { create :group }
+        let(:thread) { create :message_thread, privacy: "group", group: group }
+        let(:user_in_group) { create(:group_membership, group: group).user }
+        let(:user_not_in_group) { create(:user) }
+
+        context "with a user not in the group" do
+          let(:user) { user_not_in_group }
+
+          it "is unauthorised" do
+            expect(subject.status).to eq 401
+          end
+        end
+
+        context "with a user in the group" do
+          let(:user) { user_in_group }
+
+          it "creates the message" do
+            expect { subject }.to change(Message, :count).by(1)
+          end
+        end
       end
     end
   end
