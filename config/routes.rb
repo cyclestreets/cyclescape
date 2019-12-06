@@ -114,16 +114,10 @@ Rails.application.routes.draw do
       end
     end
     scope module: :message do
-      resources :photos, only: %i[create show]
-      resources :cyclestreets_photos, only: %i[create show]
-      resources :links, only: [:create]
-      resources :street_views, only: [:create]
-      resources :deadlines, only: [:create]
+      resources :photos, only: %i[show]
+      resources :cyclestreets_photos, only: %i[show]
       resources :library_items, only: [:create]
-      resources :documents, only: %i[create show]
-      resources :thread_leaders, only: [:create]
-      resources :maps, only: [:create]
-      resources :actions, only: [:create]
+      resources :documents, only: %i[show]
     end
 
     scope module: :message_thread do
