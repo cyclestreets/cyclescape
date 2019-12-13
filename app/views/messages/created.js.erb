@@ -1,4 +1,5 @@
 <% if @message.persisted? %>
+  tinyMCE.remove()
   $('#messages-new-partial')
     .before("<%= j(render 'messages/message', message: @message, thread: @thread ) %>")
     .html("<%= j(render 'messages/new') %>")
@@ -10,6 +11,11 @@
   el.scrollIntoView()
   window.scrollBy(0, -80) // Top fix header
   $(el).parent().addClass("new-message-highlight")
+  // Without a setTimeout tinyMCE has a bug where in initializes
+  // but it has no container so the editor is not selectable in FireFox.
+  setTimeout(function() {
+    tinyMCE.init(window.tinymceOpts)
+  }, 1)
 <% end %>
 <%= render 'shared/flash' %>
 <% if flash[:alert].present? %>
