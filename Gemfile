@@ -34,7 +34,6 @@ gem "tinymce-rails", "= 4.7.13" # See #877
 # Back-end gems
 gem "aasm"
 gem "actionview-encoded_mail_to"
-gem "attribute_normalizer"
 gem "declarative_authorization", github: "xymist/declarative_authorization", branch: "allow_rails_5"
 gem "devise"
 gem "devise-i18n", "< 1.5" # Bug in devise-i18n 1.5, fixed if we bump devise > 4.4 https://github.com/tigrish/devise-i18n/blob/v1.5.0/rails/locales/en-GB.yml#L43
@@ -49,6 +48,7 @@ gem "html2text"
 gem "http_accept_language"
 gem "icalendar"
 gem "mustache"
+gem "normalizr"
 gem "paranoia", "~> 2.0"
 gem "rack-cache", require: "rack/cache"
 gem "redis-rails"

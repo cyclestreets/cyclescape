@@ -15,7 +15,7 @@ describe Message do
 
     it "removes empty paragraphs" do
       # \u00A0 is a non-breaking white space.
-      is_expected.to normalize_attribute(:body).from(
+      is_expected.to normalize(:body).from(
         "<p>\r\nGot stuff in\r\n</p><p>&nbsp;<br></p><p>&nbsp;\r\n</p><p>And me</p><p> &nbsp; </p>\r\n<p>&nbsp; </p>\r\n<p>&nbsp;\u00A0</p>\r\n <p> &nbsp;</p>"
       ).to(
         "<p>\r\nGot stuff in\r\n</p><p>And me</p>"
@@ -23,7 +23,7 @@ describe Message do
     end
 
     it do
-      is_expected.to normalize_attribute(:body).from(
+      is_expected.to normalize(:body).from(
         "http://www.example.com?fbclid=123&this=that&other=other more words www.fb.com?p=q&fbclid=go\nhttp:fbclid"
       ).to(
         "http://www.example.com?other=other&this=that more words www.fb.com?p=q\nhttp:fbclid"

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-AttributeNormalizer.configure do |config|
-  config.normalizers[:url] = lambda do |value, _options|
+Normalizr.configure do
+  add :url do |value|
     text = value.respond_to?(:strip) ? value.strip : value
 
     if text.blank? || text =~ %r{\A.*://}
@@ -11,7 +11,7 @@ AttributeNormalizer.configure do |config|
     end
   end
 
-  config.normalizers[:downcase] = lambda do |text, _options|
+  add :downcase do |text|
     if text.is_a?(String)
       text.downcase
     else
@@ -19,14 +19,14 @@ AttributeNormalizer.configure do |config|
     end
   end
 
-  config.normalizers[:strip_html_paragraphs] = lambda do |value, _options|
-    return value unless value.is_a? String
+  add :strip_html_paragraphs do |value|
+    next value unless value.is_a? String
 
     value.gsub(%r{\s*<p>([[:space:]]|&nbsp;|<br>)*?</p>}, "")
   end
 
-  config.normalizers[:strip_fb_links] = lambda do |value, _options|
-    return unless value.is_a? String
+  add :strip_fb_links do |value|
+    next unless value.is_a? String
 
     value.split.select { |word| word.include? "fbclid=" }.each do |url|
       begin
