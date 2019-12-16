@@ -21,7 +21,6 @@
       .censored
         %p= t ".censored"
     - else
-      .header-fix{id: dom_id(message)}
       .message-text
         - unless message.library_item_messages.present?
           - display_message = sanitize(message_linkify(message))
