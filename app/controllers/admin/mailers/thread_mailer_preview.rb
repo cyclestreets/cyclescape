@@ -46,6 +46,10 @@ class ThreadMailerMailerPreview < ActionMailer::Preview
     ThreadMailer.common(*message(ThreadLeaderMessage))
   end
 
+  def new_poll_message
+    ThreadMailer.common(*message(PollMessage))
+  end
+
   private
 
   def message(klass)
