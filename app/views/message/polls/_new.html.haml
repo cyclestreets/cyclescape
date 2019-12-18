@@ -1,0 +1,11 @@
+#new-poll-message.pane
+  = message_form.semantic_fields_for :poll_messages, message.poll_messages.build do |f|
+    = f.inputs do
+      = f.input :question
+      #poll-options
+        - 2.times { f.object.poll_options.build }
+        = f.semantic_fields_for :poll_options do |option|
+          = render "message/polls/poll_option_fields", f: option
+        .links
+          = link_to_add_association f, :poll_options, partial: "message/polls/poll_option_fields", class: "pull-right" do
+            = fa_icon("plus-circle")

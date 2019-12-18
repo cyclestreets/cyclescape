@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class StreetViewMessage < MessageComponent
   validates :caption, :heading, :pitch, :location, presence: true
 

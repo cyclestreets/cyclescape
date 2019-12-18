@@ -1,0 +1,4 @@
+%h4{style: "margin: 5px"}= component.question
+%ul
+  - component.poll_options.each do |option|
+    %li= option.option

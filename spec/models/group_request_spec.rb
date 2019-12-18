@@ -8,7 +8,7 @@ describe GroupRequest do
   let(:group) { create(:group) }
   let(:boss) { create(:user) }
 
-  it { is_expected.to normalize_attribute(:short_name).from("CamCycle ").to("camcycle") }
+  it { is_expected.to normalize(:short_name).from("CamCycle ").to("camcycle") }
 
   describe "newly created" do
     it "must have a user" do

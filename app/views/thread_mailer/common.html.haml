@@ -1,7 +1,8 @@
 = render 'header', message: @message
 - @message.components_and_self.each do |component|
-  = "#{t("thread_mailer.#{component.notification_name}.type").capitalize}:"
-  %div
-  = render component.notification_name.to_s, component: component
+  %p
+    = "#{t("thread_mailer.#{component.notification_name}.type").capitalize}:"
+    %div{style: "margin-left: 5px"}
+      = render component.notification_name.to_s, component: component
 = render partial: "actions"
 = render partial: "footer"

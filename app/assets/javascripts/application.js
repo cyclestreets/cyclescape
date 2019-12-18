@@ -15,6 +15,8 @@
 //= require jquery-ui/datepicker
 //= require jquery-ui/dialog
 //= require jquery-ui/slider
+//= require cocoon
+//= require cocoon_fields
 //= require timeago
 //= require tinymce-jquery
 //= require tinymce_init

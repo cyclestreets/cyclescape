@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-
-
 class User < ApplicationRecord
   ALLOWED_ROLES = %w[member admin].freeze
   SEARCHABLE_COLUMNS = %w[full_name display_name email].freeze
@@ -40,6 +38,8 @@ class User < ApplicationRecord
   has_many :blocked_users, through: :user_blocks, source: :blocked
   has_many :user_blocked_by, class_name: "UserBlock", foreign_key: :blocked_id
   has_many :blocked_by_users, through: :user_blocked_by, source: :user
+  has_many :poll_votes, dependent: :destroy
+  has_many :poll_options, through: :poll_votes
   has_one :profile, class_name: "UserProfile"
   has_one :prefs, class_name: "UserPref"
   has_one :location, class_name: "UserLocation", dependent: :destroy

@@ -23,4 +23,5 @@ public/system
 resque_web.url
 node_modules/
 *.sql
+*.sql.gz
 .byebug_history

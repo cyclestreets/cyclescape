@@ -161,6 +161,9 @@ authorization do
       to %i[create view]
       if_permitted_to :show, :thread
     end
+    has_permission_on :message_polls, to: :vote do
+      if_permitted_to :show, :thread
+    end
     has_permission_on :libraries, :library_documents, :library_notes, to: %i[index new create show]
     has_permission_on :library_documents, :library_notes do
       to %i[edit update]
@@ -227,7 +230,11 @@ authorization do
       if_attribute public?: is { true }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: %i[index search]
-    has_permission_on :message_photos, to: :show
+    has_permission_on :message_photos do
+      to :show
+      if_permitted_to :show, :thread
+    end
+
     has_permission_on :pages, to: :show
     has_permission_on :api_v1_issues, to: :index
     has_permission_on :site_comments, to: %i[new create]

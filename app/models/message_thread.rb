@@ -43,6 +43,7 @@ class MessageThread < ApplicationRecord
   has_many :action_messages, foreign_key: :thread_id, inverse_of: :thread
   has_many :deadline_messages, foreign_key: :thread_id, inverse_of: :thread
   has_many :thread_leader_messages, -> { active }, dependent: :destroy, foreign_key: :thread_id
+  has_many :poll_messages, foreign_key: :thread_id, dependent: :restrict_with_error, inverse_of: :thread
   has_many :leaders, through: :thread_leader_messages, source: :created_by, inverse_of: :leading_threads
   has_many :thread_views, inverse_of: :thread, foreign_key: :thread_id, dependent: :destroy
   has_and_belongs_to_many :tags, join_table: "message_thread_tags", foreign_key: :thread_id
@@ -203,6 +204,7 @@ class MessageThread < ApplicationRecord
              # When there is no HTML we get the text part or just the message and use EmailReplyParser to remove the signature
              body = (mail.message.text_part || mail.message).decoded
              parsed = EmailReplyParser.read(body)
+
              stripped = parsed.fragments.reject(&:hidden?).join("\n")
              h.simple_format(stripped)
            end

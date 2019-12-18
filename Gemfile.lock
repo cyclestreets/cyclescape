@@ -76,7 +76,6 @@ GEM
       rake (>= 10.4, < 13.0)
     arel (9.0.0)
     ast (2.4.0)
-    attribute_normalizer (1.2.0)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -103,6 +102,7 @@ GEM
     childprocess (2.0.0)
       rake (< 13.0)
     chronic (0.10.2)
+    cocoon (1.2.14)
     coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -269,6 +269,7 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.5)
       mini_portile2 (~> 2.4.0)
+    normalizr (0.3.1)
     options (2.3.2)
     orm_adapter (0.5.0)
     parallel (1.17.0)
@@ -519,11 +520,11 @@ DEPENDENCIES
   actionview-encoded_mail_to
   activerecord-postgis-adapter
   annotate (< 2.7.5)
-  attribute_normalizer
   browserify-rails
   bullet (= 5.9.0)
   capybara
   chartkick
+  cocoon
   coffee-rails
   database_cleaner
   declarative_authorization!
@@ -562,6 +563,7 @@ DEPENDENCIES
   memory_profiler
   mustache
   nokogiri
+  normalizr
   parallel_tests
   paranoia (~> 2.0)
   pg
@@ -612,4 +614,4 @@ DEPENDENCIES
   will-paginate-i18n
 
 BUNDLED WITH
-   1.17.1
+   1.17.2
