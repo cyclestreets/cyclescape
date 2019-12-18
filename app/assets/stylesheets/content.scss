@@ -902,6 +902,13 @@ section.social {
   padding: 1px 4px;
 }
 
+.poll-message ul{
+  padding: 10px 20px;
+  li {
+    list-style: disc outside none;
+  }
+}
+
 article.message .message-text, .mce-content-body {
   table td {
     border: solid black 1px;
