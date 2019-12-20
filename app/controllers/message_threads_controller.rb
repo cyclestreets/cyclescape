@@ -102,7 +102,13 @@ class MessageThreadsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:thread).permit :title, :privacy, :group_id, :issue_id, :tags_string
+    permitted =
+      if permitted_to?(:edit_all_fields, @thread)
+        %i[privacy group_id issue_id tags_string]
+      else
+        []
+      end
+    params.require(:thread).permit(*([:title] + permitted))
   end
 
   def permitted_message_params

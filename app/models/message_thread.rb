@@ -315,6 +315,10 @@ class MessageThread < ApplicationRecord
     }
   end
 
+  def created_at_as_i
+    created_at.to_i
+  end
+
   protected
 
   def set_public_token

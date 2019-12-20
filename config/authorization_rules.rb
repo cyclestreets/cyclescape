@@ -22,7 +22,7 @@ authorization do
     has_permission_on :admin_templates, to: :show
     has_permission_on :issues, to: %i[edit update destroy]
     has_permission_on :library_documents, :library_notes, to: %i[edit update]
-    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: :manage
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: %i[manage edit_all_fields]
     has_permission_on :messages, to: %i[censor approve reject]
     has_permission_on :site_comments, to: :manage
     has_permission_on :user_prefs, :user_profiles, to: :manage
@@ -94,8 +94,12 @@ authorization do
       if_attribute group: is_in { user.groups }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
-      to :manage
+      to %i[manage edit_all_fields]
       if_attribute group_committee_members: contains { user }
+    end
+    has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
+      to %i[edit update]
+      if_attribute created_by: is { user }, created_at_as_i: is_in { 24.hours.ago.to_i..Time.now.to_i }
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show

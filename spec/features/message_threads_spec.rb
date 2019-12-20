@@ -218,17 +218,40 @@ describe "Message threads", type: :feature do
     end
 
     context "edit" do
-      before do
-        visit thread_path(thread)
+      context "when logged in as thread creator member" do
+        before do
+          thread.update!(created_by: current_user)
+        end
+
+        it "should show an edit link (but no delete link)" do
+          visit thread_path(thread)
+          expect(page).to have_content(edit_thread)
+          expect(page).not_to have_content(delete_thread)
+        end
+
+        it "should let you edit a thread" do
+          visit edit_thread_path(thread)
+          expect(page).to have_content("Edit thread")
+          fill_in I18n.t("activerecord.attributes.message_thread.title"), with: "New better title"
+          expect(page).to have_no_select("Privacy")
+          expect(page).to have_no_select("Owned by")
+          click_on "Save"
+          expect(page).to have_content("Thread updated")
+          expect(page).to have_content("New better title")
+        end
       end
 
-      it "should not show an edit link" do
-        expect(page).not_to have_content(edit_thread)
-      end
+      context "when logged in as another member" do
+        it "should not show an edit link" do
+          visit thread_path(thread)
+          expect(page).not_to have_content(edit_thread)
+        end
 
-      it "should not let you edit a thread" do
-        visit edit_thread_path(thread)
-        expect(page).to have_content("You are not authorised to access that page.")
+        it "should not let you edit a thread" do
+          visit edit_thread_path(thread)
+          expect(page).to have_content("You are not authorised to access that page.")
+          expect(page).to have_no_content("Edit thread")
+        end
       end
     end
   end

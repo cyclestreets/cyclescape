@@ -161,4 +161,32 @@ describe MessageThreadsController do
       end
     end
   end
+
+  describe "updating the title" do
+    let(:user) { thread.created_by }
+
+    before do
+      warden.set_user user
+    end
+
+    context "within 24h of the thread being created" do
+      it "allows only the title to be updated" do
+        put :update, params: { id: thread.id, thread: { title: "A new title", privacy: MessageThread::GROUP } }
+        expect(response.status).to eq 302
+        expect(thread.reload.title).to eq("A new title")
+        expect(thread.privacy).to eq MessageThread::PUBLIC
+      end
+    end
+
+    context "outside of 24h of the thread being created" do
+      before do
+        thread.update!(created_at: 25.hours.ago)
+      end
+
+      it "changes are not permitted" do
+        put :update, params: { id: thread.id, thread: { title: "A new title", privacy: MessageThread::GROUP } }
+        expect(response.status).to eq 401
+      end
+    end
+  end
 end

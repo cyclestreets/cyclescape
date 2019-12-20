@@ -1,12 +1,13 @@
 %header
   %h1= t ".title"
-  %p= t ".description"
-  %p= t ".thread_fix_warning_html"
+  - if permitted_to?(:edit_all_fields, @thread)
+    %p= t ".description"
+    %p= t ".thread_fix_warning_html"
 %section
   = semantic_form_for @thread, as: :thread, url: thread_path(@thread) do |f|
     = f.inputs do
       = f.input :title
-      - unless f.object.private_message?
+      - if !f.object.private_message? && permitted_to?(:edit_all_fields, @thread)
         = f.input :group,
             collection: [[t(".everyone"), nil, "data-privacy-options" => "{}"]] + current_user.groups_can_assign.map {|g| [g.name, g.id, "data-privacy" => g.default_thread_privacy, "data-privacy-options" => Hash[g.thread_privacy_options_map_for(current_user).map { |n,v| [v, n]}].to_json] },
             include_blank: false
