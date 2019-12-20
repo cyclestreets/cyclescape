@@ -161,10 +161,6 @@ class MessageThread < ApplicationRecord
     end
   end
 
-  def committee_members
-    group.try(:committee_members) || User.none
-  end
-
   def display_id
     "##{id}"
   end
@@ -295,11 +291,7 @@ class MessageThread < ApplicationRecord
 
   # for auth checks
   def group_committee_members
-    if group_id
-      group.committee_members
-    else
-      []
-    end
+    group.try(:committee_members) || User.none
   end
 
   def to_icals
