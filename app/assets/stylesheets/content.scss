@@ -909,6 +909,15 @@ section.social {
   }
 }
 
+.poll-options-block {
+  display: inline-block;
+  width: 96%;
+}
+
+.poll-v-center{
+  line-height: 2;
+}
+
 article.message .message-text, .mce-content-body {
   table td {
     border: solid black 1px;

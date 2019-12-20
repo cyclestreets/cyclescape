@@ -7,5 +7,5 @@
         = f.semantic_fields_for :poll_options do |option|
           = render "message/polls/poll_option_fields", f: option
         .links
-          = link_to_add_association f, :poll_options, partial: "message/polls/poll_option_fields", class: "pull-right" do
+          = link_to_add_association f, :poll_options, partial: "message/polls/poll_option_fields", class: "pull-right poll-v-center" do
             = fa_icon("plus-circle")

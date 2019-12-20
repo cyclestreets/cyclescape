@@ -1,5 +1,5 @@
 .nested-fields
   = f.inputs do
-    = f.input :option, as: :string
-    = link_to_remove_association f, class: "pull-right" do
+    = f.input :option, as: :string, wrapper_html: { class: "poll-options-block" }
+    = link_to_remove_association f, class: "pull-right poll-v-center" do
       = fa_icon("minus-circle")
