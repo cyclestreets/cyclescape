@@ -26,13 +26,13 @@ class Message < ApplicationRecord
     cyclestreets_photo_messages
     street_view_messages
     map_messages
+    poll_messages
     link_messages
     deadline_messages
     document_messages
     action_messages
     thread_leader_messages
     library_item_messages
-    poll_messages
   ].freeze
 
   COMPONENT_TYPES.each do |component_type|
