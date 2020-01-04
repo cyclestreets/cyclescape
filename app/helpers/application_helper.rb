@@ -31,12 +31,12 @@ module ApplicationHelper
     when User
       link_to item.name, user_profile_path(item), options
     when Group
-      link_to item.name, group_path(item), options
+      link_to_group_home(item)
     end
   end
 
-  def link_to_group_home(group)
-    link_to group.name, root_url(subdomain: SubdomainConstraint.subdomain(group.short_name))
+  def link_to_group_home(group, options = {})
+    link_to group.name, root_url(subdomain: SubdomainConstraint.subdomain(group.short_name)), options
   end
 
   def link_to_github_commit
