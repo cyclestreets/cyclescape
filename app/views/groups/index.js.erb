@@ -1,1 +1,5 @@
-$('.search-results').html('<%= escape_javascript render partial: "group", collection: @groups %>');
+<% if @groups.present? %>
+  $('.search-results').html('<%= escape_javascript render partial: "group", collection: @groups %>');
+<% else %>
+  $('.search-results').html('<br><h2><%=t(".no_results_found")%></h2>');
+<% end %>
