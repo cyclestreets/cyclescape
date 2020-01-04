@@ -212,8 +212,8 @@
       group_membership_request:
         create: Request Group Membership
       issue:
-        create: Send Report
-        update: Save Report
+        create: Create issue and start discussion
+        update: Update issue
       library_item_message:
         create: Add Library Item
       library/document:
