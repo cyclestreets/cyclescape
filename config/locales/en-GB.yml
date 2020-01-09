@@ -381,6 +381,7 @@
         reject: Reject
         review: Review
         requested_at: Requested At
+        rejection_message: Rejection Message
         status: Status
         title: Membership requests for %{group}
         user: User (display name)
@@ -765,6 +766,8 @@
     notifications:
       added_to_group:
         subject: You are now a member of the %{application_name} group for %{group_name}
+      gmr_rejected:
+        subject: 'Your request to join "%{group_name}" on %{application_name} has not been approved'
       gmr_confirmed:
         subject: You are now a member of the %{application_name} group for %{group_name}
       new_group_request:

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class GroupMembershipRequest < ApplicationRecord
   include AASM
 
@@ -45,6 +44,7 @@ end
 #
 #  id                  :integer          not null, primary key
 #  message             :text
+#  rejection_message   :text
 #  status              :string(255)      not null
 #  created_at          :datetime
 #  updated_at          :datetime

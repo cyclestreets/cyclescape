@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_203847) do
+ActiveRecord::Schema.define(version: 2020_01_09_221122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_203847) do
     t.datetime "updated_at"
     t.text "message"
     t.integer "group_membership_id"
+    t.text "rejection_message"
     t.index ["actioned_by_id"], name: "index_group_membership_requests_on_actioned_by_id"
     t.index ["group_id"], name: "index_group_membership_requests_on_group_id"
     t.index ["group_membership_id"], name: "index_group_membership_requests_on_group_membership_id"

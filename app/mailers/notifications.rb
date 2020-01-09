@@ -14,6 +14,13 @@ class Notifications < ActionMailer::Base
          subject: t("mailers.notifications.gmr_confirmed.subject", group_name: @group.name, application_name: site_config.application_name))
   end
 
+  def group_membership_request_rejected(request)
+    @group = request.group
+    @request = request
+    mail(to: request.user.name_with_email,
+         subject: t("mailers.notifications.gmr_rejected.subject", group_name: @group.name, application_name: site_config.application_name))
+  end
+
   def new_group_request(request, admins_ids)
     @request = request
     mail(to: User.where(id: admins_ids).map(&:email),

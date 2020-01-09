@@ -2,6 +2,12 @@
 
 %h2= t ".title", group: @group.name
 
+- if @request.message.blank?
+  %p= t ".no_message"
+- else
+  %p= t ".message"
+  %p= auto_link simple_format @request.message
+
 %table
   %thead
     %th= t ".user"
@@ -10,7 +16,7 @@
     %th= t ".requested_at"
     %th= t ".status"
     %th= t ".actioned_by"
-    %th
+    %th= t ".rejection_message"
     %th
   %tr
     %td= link_to_profile(@request.user)
@@ -20,10 +26,12 @@
       = formatted_created_at(@request)
     %td= t ".membership_status.#{@request.status}"
     %td= link_to t(".by", name: @request.actioned_by.name), user_profile_path(@request.actioned_by) if @request.rejected? || @request.confirmed?
+    %td= @request.rejection_message
     %td= link_to t(".confirm"), confirm_group_membership_request_path(@group, @request), method: :post, data: { confirm: t("are_you_sure") } if @request.pending?
-    %td= link_to t(".reject"), reject_group_membership_request_path(@group, @request), method: :post, data: { confirm: t("are_you_sure") } if @request.pending?
-- if @request.message.blank?
-  %p= t ".no_message"
-- else
-  %p= t ".message"
-  %p= auto_link simple_format @request.message
+
+- if @request.pending?
+  = semantic_form_for @request, url: reject_group_membership_request_path(@group, @request), method: :post do |f|
+    = f.inputs do
+      = f.input :rejection_message
+    = f.actions do
+      = f.action :submit, label: "Reject", button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving"), confirm: t("are_you_sure") }}

@@ -57,6 +57,8 @@ class Group::MembershipRequestsController < ApplicationController
     @request = @group.membership_requests.find params[:id]
     @request.actioned_by = current_user
     if @request.reject!
+      @request.update rejection_message: params[:group_membership_request][:rejection_message]
+      Notifications.group_membership_request_rejected(@request).deliver_later if @request.rejection_message.present?
       set_flash_message :success
     else
       set_flash_message :failure

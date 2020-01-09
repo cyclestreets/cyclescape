@@ -15,7 +15,6 @@
       %th= t ".status"
       %th= t ".actioned_by"
       %th
-      %th
     - @requests.each do |r|
       %tr
         %td= link_to_profile(r.user)
@@ -28,4 +27,3 @@
         %td= link_to t(".by", name: r.actioned_by.name), user_profile_path(r.actioned_by) if r.rejected? || r.confirmed?
         %td= link_to t(".review"), review_group_membership_request_path(@group, r)
         %td= link_to t(".confirm"), confirm_group_membership_request_path(@group, r), method: :post, data: { confirm: t("are_you_sure") } if r.pending?
-        %td= link_to t(".reject"), reject_group_membership_request_path(@group, r), method: :post, data: { confirm: t("are_you_sure") } if r.pending?

@@ -142,6 +142,8 @@
       group_membership_request:
         message: You can optionally send the group administrators any additional information
           you feel is appropriate, such as a group membership number.
+        rejection_message: If filled in an email will be sent to the requester with the message.  No email
+          will be sent if left blank.
       group_pref:
         notify_membership_requests: Notifications will be sent when a %{application_name} user
           asks to join this group
