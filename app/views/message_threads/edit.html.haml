@@ -16,7 +16,7 @@
             collection: f.object.class.privacies_map,
             input_html: {"data-autoset" => "#thread_group_id", "data-autoset-param" => "privacy", "data-auto-options" => "#thread_group_id", "data-auto-options-param" => "privacy-options"},
             wrapper_html: {class: "hide", "data-dependent" => "#thread_group_id"}
-        = f.input :issue, as: :select, collection: Issue.by_most_recent.map { |iss| ["#{iss.id} - #{iss.title}", iss.id] }
+        = f.input :issue, as: :select, collection: Issue.by_most_recent.map { |iss| ["#{iss.id} - #{iss.title.truncate(70)}", iss.id] }
     = f.actions do
       = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
       = cancel_link thread_path(@thread)
