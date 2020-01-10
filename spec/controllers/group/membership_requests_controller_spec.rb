@@ -14,14 +14,42 @@ describe Group::MembershipRequestsController, type: :controller do
 
   describe "pages" do
     before do
-      membership_request.actioned_by = committee_member
-      membership_request.confirm!
       warden.set_user committee_member
     end
 
-    it "has index" do
-      get :index, params: { group_id: group.id }
-      expect(response.status).to eq(200)
+    describe "#reject" do
+      it "sends a notification with rejection_message" do
+        post :reject, params: {
+          group_id: group.id, id: membership_request.id, group_membership_request: { rejection_message: "No thanks" }
+        }
+        expect(membership_request.reload).to be_rejected
+        expect(all_emails.last.body.decoded).to match(/Your request to join.*has not been approved.*No thanks/m)
+      end
+
+      it "sends no notification without a rejection_message" do
+        post :reject, params: {
+          group_id: group.id, id: membership_request.id, group_membership_request: { rejection_message: "" }
+        }
+        expect(membership_request.reload).to be_rejected
+        expect(all_emails).to be_blank
+      end
+    end
+
+    context "with confirmed request" do
+      before do
+        membership_request.actioned_by = committee_member
+        membership_request.confirm!
+      end
+
+      it "#index" do
+        get :index, params: { group_id: group.id }
+        expect(response.status).to eq(200)
+      end
+
+      it "#review" do
+        get :review, params: { group_id: group.id, id: membership_request.id }
+        expect(response.status).to eq(200)
+      end
     end
   end
 end
