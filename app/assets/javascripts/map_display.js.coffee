@@ -103,8 +103,8 @@ class window.LeafletMap
     @map.setView(center.latLon, center.zoom) if center.latLon
     return
 
-  addLayers: (opts = {}) ->
-    baseLayers = {}
+  addLayers: (opts = {}) =>
+    @baseLayers = {}
     for tileServer, idx in $("#map-tiles").data("tileservers")
       continue if (tileServer.url == "" or tileServer.name == "")
       options = jQuery.parseJSON(tileServer.options)
@@ -112,13 +112,13 @@ class window.LeafletMap
          tileLayer = L.tileLayer.wms(tileServer.url, options)
       else
          L.tileLayer(tileServer.url, options)
-      baseLayers[tileServer.name] = tileLayer
+      @baseLayers[tileServer.name] = tileLayer
       tileLayer.addTo(@map) if idx == 0
     additionalLayers = @remoteJSONLayer
     additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
     additionalLayers['Photos'] = @photoLayer if @photoLayer
 
-    L.control.layers(baseLayers, additionalLayers).addTo(@map) unless opts.hidelayers
+    L.control.layers(@baseLayers, additionalLayers).addTo(@map) unless opts.hidelayers
     @map.addLayer @photoLayer if opts.photoselect
 
   buildPhotoLayer: (photoselect) =>
@@ -296,6 +296,8 @@ class window.LeafletMap
     $('.leaflet-draw-edit-edit')[0].click()
 
   addDraw: (feature) =>
+    layer.setOpacity(0.7) for _, layer of @baseLayers
+
     @drawnItems = new L.FeatureGroup()
     $('.icon-save').toggle()
 
