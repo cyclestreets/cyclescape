@@ -312,10 +312,10 @@ class window.LeafletMap
         circle: false
         rectangle: false
         polygon: {
-          shapeOptions: { color: '#00008B' }
+          shapeOptions: { color: '#00008B', opacity: 0.75 }
         }
         polyline: {
-          shapeOptions: { color: '#00008B' }
+          shapeOptions: { color: '#00008B', opacity: 0.75 }
         }
         marker: {
           icon: new L.Icon {
