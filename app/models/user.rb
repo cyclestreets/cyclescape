@@ -9,7 +9,8 @@ class User < ApplicationRecord
   acts_as_voter
   acts_as_paranoid
 
-  devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable
+  devise(:database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable,
+         :omniauthable, omniauth_providers: %i[facebook twitter])
 
   has_many :memberships, class_name: "GroupMembership", dependent: :destroy
   has_many :groups, through: :memberships
@@ -69,6 +70,29 @@ class User < ApplicationRecord
   validates :email, format: { with: /\A[^<].*[^>]\z/ }, uniqueness: true
 
   normalize_attributes :email, :display_name, :full_name
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.full_name = auth.info.name
+      user.display_name = auth.info.nickname
+      user.build_profile(picture_url: auth.info.image)
+      # If you are using confirmable and the provider(s) you use validate emails,
+      # uncomment the line below to skip the confirmation emails.
+      user.skip_confirmation!
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if (data = session["devise.omniauth_data"]) && session["devise.omniauth_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+        user.full_name = auth.info.name
+        user.display_name = auth.info.nickname
+      end
+    end
+  end
 
   class << self
     def user_roles_map
@@ -254,6 +278,7 @@ class User < ApplicationRecord
     self.full_name = "User #{id} (deleted)"
     self.display_name = nil
     self.email = "deleted-user-#{id}-#{SecureRandom.uuid}@cyclescape.org"
+    self.uid = "deleted-#{uid}"
     true
   end
 
@@ -357,11 +382,13 @@ end
 #  invitation_token       :string(255)
 #  invited_by_type        :string(255)
 #  last_seen_at           :datetime
+#  provider               :string
 #  public_token           :string           not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string(255)
 #  role                   :string(255)      not null
+#  uid                    :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  invited_by_id          :integer
@@ -373,6 +400,7 @@ end
 #  index_users_on_display_name         (display_name) UNIQUE
 #  index_users_on_email                (email) UNIQUE
 #  index_users_on_invitation_token     (invitation_token)
+#  index_users_on_provider_and_uid     (provider,uid) UNIQUE
 #  index_users_on_public_token         (public_token) UNIQUE
 #  index_users_on_remembered_group_id  (remembered_group_id)
 #

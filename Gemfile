@@ -50,6 +50,9 @@ gem "http_accept_language"
 gem "icalendar"
 gem "mustache"
 gem "normalizr"
+gem "omniauth"
+gem "omniauth-facebook"
+gem "omniauth-twitter"
 gem "paranoia", "~> 2.0"
 gem "rack-cache", require: "rack/cache"
 gem "redis-rails"
@@ -90,6 +93,8 @@ end
 
 group :development do
   gem "annotate", "< 2.7.5", require: false # https://github.com/ctran/annotate_models/issues/621
+  gem "better_errors"
+  gem "binding_of_caller"
   gem "bullet", "= 5.9.0" # https://github.com/flyerhzm/bullet/issues/455
   gem "letter_opener"
   gem "rubocop"

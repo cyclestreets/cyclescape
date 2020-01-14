@@ -989,3 +989,33 @@ article.message .message-text, .mce-content-body {
   /* bg color = bg color under block */
   background: white;
 }
+
+.btn-twitter {
+  color: #fff;
+  background-color: #55acee;
+  border-color: rgba(0,0,0,0.2);
+}
+.btn-facebook {
+    color: #fff;
+    background-color: #3b5998;
+    border-color: rgba(0,0,0,0.2);
+}
+
+#page .btn-social:hover {
+  color: #fff;
+  border: 1px solid transparent;
+}
+
+.btn-social {
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}

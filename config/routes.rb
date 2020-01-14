@@ -23,8 +23,10 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users, controllers: { confirmations: "confirmations" }, skip: :registrations
-
+  devise_for(
+    :users, skip: :registrations,
+    controllers: { confirmations: "confirmations", omniauth_callbacks: 'users/omniauth_callbacks' }
+  )
   scope :settings do
     get :profile, to: "user/profiles#edit", as: :current_user_profile_edit
     get :preferences, to: "user/prefs#edit", as: :current_user_prefs_edit

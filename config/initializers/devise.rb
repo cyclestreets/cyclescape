@@ -2,8 +2,15 @@
 
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
-fallback_token = "6b5699eece58391acf4c14096463bbc5deb13fe03"
-secret_file = Rails.root.join("config", "devise_secret_token")
+
+def secret(name)
+  file = Rails.root.join("config", name)
+  if Rails.env.test? || Rails.env.development?
+    File.exist?(file) ? File.read(file).strip : ""
+  else
+    File.read(file).strip
+  end
+end
 
 Devise.setup do |config|
   # ==> Mailer Configuration
@@ -78,13 +85,13 @@ Devise.setup do |config|
 
   # ==> Configuration for :invitable
   # The period the generated invitation token is valid, after
-  # this period, the invited resource won't be able to accept the invitation.
-  # When invite_for is 0 (the default), the invitation won't expire.
+  # this period, the invited resource won"t be able to accept the invitation.
+  # When invite_for is 0 (the default), the invitation won"t expire.
   # config.invite_for = 2.weeks
 
   # Number of invitations users can send.
   # If invitation_limit is nil, users can send unlimited invitations.
-  # If invitation_limit is 0, users can't send invitations.
+  # If invitation_limit is 0, users can"t send invitations.
   # If invitation_limit n > 0, users can send n invitations.
   # Default: nil
   # config.invitation_limit = 5
@@ -99,7 +106,7 @@ Devise.setup do |config|
   # ==> Configuration for :confirmable
   # The time you want to give your user to confirm his account. During this time
   # he will be able to access your application without confirming. Default is 0.days
-  # When confirm_within is zero, the user won't be able to sign in without confirming.
+  # When confirm_within is zero, the user won"t be able to sign in without confirming.
   # You can use this to let your user access some features of your application
   # without confirming the account, but blocking it after a certain period
   # (ie 2 days).
@@ -115,7 +122,7 @@ Devise.setup do |config|
   # If true, a valid remember token can be re-used between multiple browsers.
   # config.remember_across_browsers = true
 
-  # If true, extends the user's remember period when remembered via cookie.
+  # If true, extends the user"s remember period when remembered via cookie.
   # config.extend_remember_period = false
 
   # Options to be passed to the created cookie. For instance, you can set
@@ -165,7 +172,7 @@ Devise.setup do |config|
   # config.reset_password_keys = [ :email ]
 
   # Time interval you can reset your password with a reset password key.
-  # Don't put a too small interval or your users won't have the time to
+  # Don"t put a too small interval or your users won"t have the time to
   # change their passwords.
   config.reset_password_within = 3.days
 
@@ -187,11 +194,11 @@ Devise.setup do |config|
 
   # ==> Scopes configuration
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
-  # "users/sessions/new". It's turned off by default because it's slower if you
+  # "users/sessions/new". It"s turned off by default because it"s slower if you
   # are using only default views.
   # config.scoped_views = false
 
-  # Configure the default scope given to Warden. By default it's the first
+  # Configure the default scope given to Warden. By default it"s the first
   # devise role declared in your routes (usually :user).
   # config.default_scope = :user
 
@@ -218,7 +225,9 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
+  # config.omniauth :github, "APP_ID", "APP_SECRET", :scope => "user,public_repo"
+  config.omniauth :facebook, secret("facebook_app_id"), secret("facebook_app_secret")
+  config.omniauth :twitter, secret("twitter_app_id"), secret("twitter_app_secret")
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
