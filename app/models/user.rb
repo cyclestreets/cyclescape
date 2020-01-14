@@ -87,9 +87,9 @@ class User < ApplicationRecord
   def self.new_with_session(params, session)
     super.tap do |user|
       if (data = session["devise.omniauth_data"]) && session["devise.omniauth_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-        user.full_name = auth.info.name
-        user.display_name = auth.info.nickname
+        user.email = data.info.email if user.email.blank?
+        user.full_name = data.info.name
+        user.display_name = data.info.nickname
       end
     end
   end

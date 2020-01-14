@@ -38,6 +38,7 @@ end
 
 every 1.day, at: "1:02 am" do
   rake "scheduled:new_planning_applications"
+  rake "db:sessions:trim"
 end
 
 every 1.day, at: "2:02 am" do
