@@ -6,7 +6,6 @@
       = f.input :body
       = f.input :name
       = f.input :email
-      = f.input :context_url, as: :hidden, input_html: { value: request.referer }
       %li.input.required.stringish
         = label_tag 'bicycle_wheels', class: 'label' do
           = t('formtastic.labels.user.new.bicycle_wheels')

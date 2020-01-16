@@ -33,7 +33,7 @@
             %li.about= link_to image_tag(@site_config.small_logo, alt: @site_config.application_name), root_url(subdomain: SubdomainConstraint.subdomain("www")), class: "cyclescape-logo"
           %li=link_to t(".about"), @site_config.blog_about_url
           %li=link_to t(".user_guide"), @site_config.blog_user_guide_url
-          %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback"), rel: "#overlay"
+          %li#feedback= link_to t(".feedback"), new_site_comment_path, title: t(".feedback")
           - if current_user
             %li.name= link_to current_user.name, current_user_profile_path
             - if MessageThread.private_for(current_user).exists?
