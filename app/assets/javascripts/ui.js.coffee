@@ -120,55 +120,6 @@ jQuery ->
     $(AutoSet.selector).each ->
       AutoSet.trigger_all($(this))
 
-  dialogOpts = {
-    autoOpen: false
-    resizable: false
-    draggable: false
-    modal: true
-    width: 802
-    position: { my: "centre top", at: "centre top" }
-    dialogClass: 'no-close'
-    beforeClose: ->
-      $("body").css({ overflow: 'inherit' })
-  }
-
-  $("body").on "click", "div.ui-widget-overlay:visible", ->
-    $(".ui-dialog.no-close:visible").find(".ui-dialog-content").dialog("close")
-
-  # Modal overlay links
-  $("a[rel='#overlay']").click (e) ->
-    e.preventDefault()
-    dialog = $('#overlay').dialog(dialogOpts).dialog('option', 'title', 'Loading...').dialog 'open'
-    dialog.parent().css('z-index', '9999')
-    $("body").css({ overflow: 'hidden' })
-    dialog.load("#{@href} #page>.wrapper", ->
-      dialog.dialog('option', 'title', dialog.find('h1').text())
-      dialog.find('h1').remove()
-      if ($(window).height() < 650)
-        $('#message_body').attr('rows', 5).attr('style', 'height: 75px; font-size: smaller')
-      tinyMCE.remove()
-      tinyMCE.init(window.tinymceOpts)
-      dialog.on "click", ".cancel a, .close", (e) ->
-        e.preventDefault()
-        dialog.dialog('close')
-      return
-    ) unless dialog.find('#page').length
-    return
-
-  $(".dialog-content").dialog(dialogOpts).on "click", ".cancel a, .close", (e) ->
-    e.preventDefault()
-    $(".dialog-content").dialog('close')
-
-  $('a.open-dialog').click ->
-    $(".dialog-content").dialog( "open" )
-
-  # Site comments and thead new (I'm not sure this code is ever used..)
-  $("#overlay form[data-remote]")
-    .ajaxSuccess (e, data, status, xhr) ->
-      $(this).parents(".inner:first").html(data)
-    .ajaxError (e, xhr, status, error) ->
-      $(this).parents(".inner:first").html(xhr.responseText)
-
   # Tools menu
   tools = $(".tools")
   tools.on "click", ->

@@ -48,7 +48,7 @@
 
 %aside#sidebar.wide
   - if permitted_to? :create, :issue_message_threads
-    = link_to t(".new_thread", count: @issue.threads.count), new_issue_thread_path(@issue), class: "btn-green", rel: "#overlay"
+    = link_to t(".new_thread", count: @issue.threads.count), new_issue_thread_path(@issue), class: "btn-green"
   %section.social
     = tweet_button text: @issue.title, link: issue_url(@issue)
     = facebook_like issue_url(@issue)
@@ -65,7 +65,7 @@
           = render partial: "message_threads/compact", collection: @threads, as: :thread
   - if @issue.photo
     %section.photos.issue-photo
-      = link_to issue_photo_path(@issue), rel: "#overlay" do
+      = link_to issue_photo_path(@issue), target: "_blank" do
         = image_tag @issue.photo_sidebar.url
 
 :javascript

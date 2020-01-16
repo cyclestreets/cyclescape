@@ -55,7 +55,7 @@ describe "Photo messages", type: :feature do
 
     context "the photo" do
       it "should link to a larger version" do
-        expect(page).to have_xpath("//a[@rel='#overlay' and @href='#{thread_photo_path(thread, photo_message)}']/img")
+        expect(page).to have_xpath("//a[@href='#{thread_photo_path(thread, photo_message)}']/img")
       end
 
       it "should display a larger version when clicked" do

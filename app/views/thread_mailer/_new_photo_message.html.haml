@@ -1,5 +1,5 @@
 %figure.photo
-  = link_to thread_url(component.message.thread) + "#message_#{component.message.id}", rel: "#overlay" do
+  = link_to thread_url(component.message.thread) + "#message_#{component.message.id}" do
     = image_tag path_to_url(component.photo_preview.url),
         alt: t(".photo_alt", caption: component.caption)
   %figcaption

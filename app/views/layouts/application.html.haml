@@ -91,11 +91,6 @@
       #page
         .wrapper
           = yield
-          #overlay
-            .loading
-              = image_tag "spinner.gif"
-              = t(".loading")
-            .inner
     - if @site_config.ga_account_id
       :javascript
         var _gaq = _gaq || [];
