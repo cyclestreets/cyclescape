@@ -569,7 +569,7 @@
                  that one issue creates e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
         title: New Thread on %{issue}
     photos:
-      show:
+      show: &issue_photos_show
         photo_alt: The photo for %{caption}.
         view_original: View original photo.
     tags:
@@ -925,13 +925,12 @@
           other: '%{count} votes'
     photos:
       show:
-        photo_alt: A photo entitled %{caption}.
-        view_original_image: View the original image
+        <<: *issue_photos_show
       new:
         image: Image
     cyclestreets_photos:
       show:
-        photo_alt: A photo photo from CycleStreets entitled %{caption}.
+        <<: *issue_photos_show
       new:
         image: Image
         search_cyclestreets: Search CycleStreets
