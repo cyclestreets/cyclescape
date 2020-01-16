@@ -6,4 +6,4 @@
 - if current_user && current_user.membership_request_pending_for?(group)
   %p= t ".group_request_pending"
 - else
-  = link_to t(".join_this_group"), new_group_membership_request_path(group), class: "btn-green"
+  = link_to t(".join_this_group", application_name: @site_config.application_name), new_group_membership_request_path(group), class: "btn-green"

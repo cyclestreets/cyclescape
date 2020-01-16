@@ -111,14 +111,14 @@ describe "Group Membership Requests" do
 
     before do
       visit group_path(group)
-      click_link I18n.t(".groups.join.join_this_group")
+      click_link I18n.t(".groups.join.join_this_group", application_name: SiteConfig.first.application_name)
       click_button I18n.t(".formtastic.actions.group_membership_request.create")
     end
 
     describe "signing up again" do
       it "should not show a link on the page" do
         visit group_path(group)
-        expect(page).not_to have_content(I18n.t(".groups.join.join_this_group"))
+        expect(page).not_to have_content(I18n.t(".groups.join.join_this_group", application_name: SiteConfig.first.application_name))
         expect(page).to have_content(I18n.t(".groups.join.group_request_pending"))
       end
 
@@ -137,7 +137,7 @@ describe "Group Membership Requests" do
 
     before do
       visit group_path(group)
-      click_link I18n.t(".groups.join.join_this_group")
+      click_link I18n.t(".groups.join.join_this_group", application_name: SiteConfig.first.application_name)
     end
 
     context "with notifications turned off" do
