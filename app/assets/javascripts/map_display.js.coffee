@@ -172,7 +172,7 @@ class window.LeafletMap
 
         popup = marker.bindPopup('<div class="photo bubble">' + headline + mainContent + caption + selectable + '</div>').on("click", ->
           $("#cs-image-#{feature.properties.id}").click (e)->
-            @constructor.updateCyclestreetsPhotoForm(e.target, feature)
+            window.LeafletMap.updateCyclestreetsPhotoForm(e.target, feature)
         )
         popup.openPopup() if @popUpID == id
 
