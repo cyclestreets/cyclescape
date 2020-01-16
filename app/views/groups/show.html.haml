@@ -42,11 +42,11 @@
 
       - if permitted_to? :view_active_users, @group
         #active-users.pane.active-users
-          = t ".committee_only"
-          %table
+          %p= t ".committee_only"
+          %table.table-full-width
             %thead
               %th= t ".display_name"
-              %th= t ".messages_last_year"
+              %th.table-messages= t ".messages_last_year"
             %tbody
               - @group.active_user_counts(limit: 25).each do |user_count|
                 - user = user_count[:user]
@@ -57,7 +57,7 @@
                         %span.thumb
                           - if user.profile.picture
                             = image_tag user.profile.picture_thumbnail.url
-                        %p= user.name
+                        = user.name
                     - else
                       = user.display_name_or_anon
                   %td= user_count[:count]

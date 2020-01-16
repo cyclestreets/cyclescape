@@ -1019,3 +1019,11 @@ article.message .message-text, .mce-content-body {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
+th.table-messages {
+  word-wrap: break-word;
+  max-width: 180px;
+}
+table.table-full-width {
+  width: 100%;
+}
