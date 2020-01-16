@@ -1,8 +1,8 @@
-= link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-social btn-facebook" do
+= link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-social btn-facebook", method: :post do
   %i{class: "fa fa-facebook"}
   Sign in with Facebook
 %p
-= link_to user_twitter_omniauth_authorize_path, class: "btn btn-block btn-social btn-twitter" do
+= link_to user_twitter_omniauth_authorize_path, class: "btn btn-block btn-social btn-twitter", method: :post do
   %i{class: "fa fa-twitter"}
   Sign in with Twitter
 %p

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gem "activerecord-postgis-adapter"
 gem "pg"
@@ -52,6 +52,7 @@ gem "mustache"
 gem "normalizr"
 gem "omniauth"
 gem "omniauth-facebook"
+gem "omniauth-rails_csrf_protection"
 gem "omniauth-twitter"
 gem "paranoia", "~> 2.0"
 gem "rack-cache", require: "rack/cache"
