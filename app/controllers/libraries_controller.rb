@@ -18,4 +18,7 @@ class LibrariesController < ApplicationController
     items = Library::ItemDecorator.decorate_collection items
     render json: items
   end
+
+  def new
+  end
 end

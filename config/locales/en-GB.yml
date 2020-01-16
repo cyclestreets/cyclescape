@@ -713,6 +713,7 @@
       clear_submit: Clear
       results: Results
       new_library_item: Add Library Item
+    new:
       new_note: Note
       new_document: Document
       new_item_title: Select type

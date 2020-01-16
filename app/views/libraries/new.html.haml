@@ -1,0 +1,17 @@
+%h1= t(".new_item_title")
+%p= t(".new_item_description_html")
+%ul.library-selector
+  %li
+    = link_to new_library_note_path do
+      %span.icon.library_note
+    = link_to new_library_note_path do
+      .name= t(".new_note")
+    .description
+      = t(".new_note_description_html")
+  %li
+    = link_to new_library_document_path do
+      %span.icon.library_document
+    = link_to new_library_document_path do
+      .name= t(".new_document")
+    .description
+      = t(".new_document_description_html")
