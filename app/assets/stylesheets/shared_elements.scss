@@ -60,6 +60,10 @@ a .thumb {
   }
 }
 
+.active-users .user-name {
+  margin-left: 10px;
+}
+
 
 // Will Paginate compatible styling
 .pagination {
@@ -1015,6 +1019,7 @@ section.new-message {
     color:$lightgrey2;
   }
 }
+
 .group-top-box {
   @extend .top-box;
   margin-right:30px;
