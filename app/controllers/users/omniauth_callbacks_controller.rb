@@ -9,8 +9,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: "Twitter") if is_navigational_format?
     else
       session["devise.omniauth_data"] = request.env["omniauth.auth"]
-      flash[:error] = "There was a problem signing you in through Twitter. Please register or try signing in later."
-      redirect_to new_user_registration_url
+      flash[:alert] = t("devise.omniauth.failure", application_name: @site_config.application_name, provider: "Twitter")
+      redirect_to new_user_session_path
     end
   end
 
@@ -22,8 +22,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: "Facebook") if is_navigational_format?
     else
       session["devise.omniauth_data"] = request.env["omniauth.auth"]
-      flash[:error] = "There was a problem signing you in through Facebook. Please register or try signing in later."
-      redirect_to new_user_registration_url
+      flash[:alert] = t("devise.omniauth.failure", application_name: @site_config.application_name, provider: "Facebook")
+      redirect_to new_user_session_path
     end
   end
 

@@ -271,27 +271,6 @@
         action_message_html: '%{creator_link} created a call to action'
     search:
       title: Search Results
-  devise:
-    registrations:
-      edit:
-        title: Update My Account Details
-      new:
-        title: Sign up
-        failure: You didn't enter the correct number of wheels
-    sessions:
-      new:
-        title: Sign in
-        sign_in_button: Sign in
-    mailer:
-      invitation_instructions:
-        subject: Invitation instructions
-        hello: Hello %{email}
-        someone_invited_you: Someone has invited you to %{url}, you can accept it
-          through the link below.
-        accept: Accept invitation
-        ignore: If you don't want to accept the invitation, please ignore this email.<br
-          />Your account won't be created until you access the link above and set
-          your password.
   group:
     group_prefs_tab: Group preferences
     group_profile_tab: Group profile

@@ -8,6 +8,8 @@ en-GB:
     failure:
       unconfirmed: Your account has not yet been confirmed. Please check your e-mail
         and follow the link you will have been sent.
+    omniauth:
+      failure: "There was a problem signing you in with %{provider}. If you have a %{application_name} account and password please signin with that."
     passwords:
       new:
         forgot_password: Forgot your password?
@@ -18,12 +20,20 @@ en-GB:
         confirm_new_password: Confirm new password
         change_password: Change password
     registrations:
+      new:
+        title: Sign up
+        failure: You didn't enter the correct number of wheels
       edit:
+        title: Update My Account Details
         confirm: Are you sure? This will set your name to "User id (deleted)", remove your groups, thread subscriptions, profile, and offers to lead threads permanently. It will leave your messages and issues.
         cancel_account: cancel your account
         cancel_header: Cancel my account
         unhappy_with_account_html: If you are unhappy with your account, you can %{confirm_link}.
         back: Back
+    sessions:
+      new:
+        title: Sign in
+        sign_in_button: Sign in
     shared:
       links:
         sign_in: Sign in
@@ -31,6 +41,16 @@ en-GB:
         forgot_password: Forgot your password?
         no_confirmation_instructions: Didn't receive confirmation instructions?
         no_unlock_instructions: Didn't receive unlock instructions?
+    mailer:
+      invitation_instructions:
+        subject: Invitation instructions
+        hello: Hello %{email}
+        someone_invited_you: Someone has invited you to %{url}, you can accept it
+          through the link below.
+        accept: Accept invitation
+        ignore: If you don't want to accept the invitation, please ignore this email.<br
+          />Your account won't be created until you access the link above and set
+          your password.
     invitations:
       edit:
         title: Confirm your account
