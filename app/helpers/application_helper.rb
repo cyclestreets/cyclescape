@@ -172,6 +172,10 @@ module ApplicationHelper
     form.object_name.to_s.gsub("\[", "_").delete("\]")
   end
 
+  def github_issue(id, text: "GitHub issue")
+    link_to text, "https://github.com/cyclestreets/cyclescape/issues/#{id}"
+  end
+
   THREAD_FORMAT_MAP = {
     "thread :number" => /thread \d+/,
     "thread no :number" => /thread no \d+/,

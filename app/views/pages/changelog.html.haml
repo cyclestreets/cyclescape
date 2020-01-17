@@ -5,11 +5,28 @@
     = t(".introduction")
     = t(".github_history_link_html")
   %article
+    %h2 17/01/2020
+    %ul.bullets
+      %li
+        Add social logins,
+        = github_issue(200)
+      %li
+        Improve active users table formatting,
+        = github_issue(909)
+      %li
+        Remove modals,
+        = github_issue(901)
+      %li
+        Improve Join Cyclescape button text,
+        = github_issue(912)
+      %li
+        Make drawing lines clearer,
+        = github_issue(905)
     %h2 07/01/2020
     %ul.bullets
       %li Allow thread creator to edit thread after posting
       %li
-        = link_to "Fix group finder", "https://github.com/cyclestreets/cyclescape/issues/846"
+        = github_issue(846, text: "Fix group finder")
         when there are no results.
       %li Make all links to a group point to the subdomain.
       %li Make menu highlighting consistant for group and site admins.
