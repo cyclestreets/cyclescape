@@ -705,13 +705,16 @@
     documents:
       new:
         title: New Library Document
+      edit:
+        title: Edit Library Document
       show:
         added_by_html: Added by %{name} %{time}
         attach_note: Attach Note
         attach_note_instructions_html: You can create new notes linked to this document.
           When referenced in a thread they will link to this document as well.
-        download: Download document
         comments: Comments
+        download: Download document
+        edit: Edit Document
         notes: Notes
         no_threads: This document hasn't been included in any public threads. If you
           add this document to a public thread, the thread will be listed here.
