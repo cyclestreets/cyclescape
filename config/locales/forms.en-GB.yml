@@ -112,6 +112,7 @@
           current_password: Current password
         update: *labels_user_new
     hints:
+      currently: Currently is
       tags_string_hints: &tags_string_hints
         tags_string: comma separated list of tags e.g. cycle parking, obstruction
       user:
