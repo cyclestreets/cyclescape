@@ -1,5 +1,10 @@
 %article#content.library.document
-  %h1= @document.title
+  %header
+    %h1= @document.title
+    - if permitted_to?(:edit, @document)
+      %menu.tools
+        %ul
+          %li= link_to t(".edit"), edit_library_document_path(@document)
   %section.meta
     %p
       - if permitted_to?(:view_profile, @document.created_by)

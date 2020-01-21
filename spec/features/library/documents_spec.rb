@@ -93,4 +93,43 @@ describe "Library documents" do
       expect(JSON.parse(page.source)["tagspanel"]).to have_content("parking")
     end
   end
+
+  context "edit" do
+    let(:edit_text) { I18n.t(".library.documents.show.edit") }
+    context "as an admin" do
+      include_context "signed in as admin"
+
+      it "should show you a link" do
+        visit library_document_path(document)
+        expect(page).to have_link(edit_text)
+      end
+    end
+
+    context "as the creator" do
+      include_context "signed in as a site user"
+      before do
+        document.item.update!(created_by: current_user)
+      end
+
+      it "should let you edit the document" do
+        visit library_document_path(document)
+        click_on edit_text
+
+        expect(page).to have_content(I18n.t(".library.documents.edit.title"))
+        fill_in "Title", with: "Something New and Very Useful"
+        click_on "Save"
+        expect(current_path).to eq(library_document_path(document))
+        expect(page).to have_content("Something New and Very Useful")
+      end
+    end
+
+    context "as another user" do
+      include_context "signed in as a site user"
+
+      it "should not show you a link" do
+        visit library_document_path(document)
+        expect(page).not_to have_link(edit_text)
+      end
+    end
+  end
 end
