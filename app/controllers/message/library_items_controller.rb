@@ -2,6 +2,7 @@
 
 class Message::LibraryItemsController < MessagesController
   filter_access_to :create, attribute_check: true, model: LibraryItemMessage, load_method: :build_library_item_message
+
   def create
     super
   end

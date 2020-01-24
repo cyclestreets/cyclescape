@@ -900,6 +900,8 @@
     library_items:
       show:
         attached_to_html: 'Attached to document: %{document}'
+      create:
+        success: Library item added
     polls:
       show:
         votes:
