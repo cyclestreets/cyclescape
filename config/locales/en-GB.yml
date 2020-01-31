@@ -623,6 +623,7 @@
       success: Issue updated
     form:
       max_length_error_html: is over the maximum length of&nbsp;
+      use_groups_location: Use group's location
   layouts:
     application:
       admin: Admin

@@ -361,6 +361,17 @@ class window.LeafletMap
         evt.stopPropagation()
         $(".leaflet-draw-draw-#{lDrawMapping[evt.target.className]}")[0].click()
 
+    $useGroupLocation = $("#use-group-location")
+    $useGroupLocation.click (evt) =>
+      evt.preventDefault()
+      evt.stopPropagation()
+      @drawnItems.clearLayers()
+      groupLocation = $useGroupLocation.data("location")
+      @geoInput.changeVal(groupLocation)
+      geoJson = L.geoJson(groupLocation)
+      @drawFeature(layer) for layer in geoJson.getLayers()
+      @map.fitBounds(geoJson.getBounds())
+
     # Otherwise clear wipes any shapes on the map
     $('.edit-clear').click (evt) =>
       evt.preventDefault()

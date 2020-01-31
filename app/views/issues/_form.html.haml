@@ -6,6 +6,9 @@
   = f.input :loc_json, as: :hidden
   = f.input :planning_application_id, as: :hidden
   %li.input.full-width
+    - if current_group&.profile&.location
+      %a.btn-green#use-group-location{href: "#", style: "font-size: 11px", data: { location: current_group.profile.loc_json} }
+        = t(".use_groups_location")
     %label.label= t "formtastic.labels.issue.new.location"
     = f.semantic_errors :location
     = f.semantic_errors :size
