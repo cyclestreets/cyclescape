@@ -4,9 +4,29 @@
 require "spec_helper"
 
 describe "Issues" do
-  let(:issue_values) { attributes_for(:issue_with_json_loc) }
+  # NOTE: most of the 'new' context is covered in ./issues_with_notifications_spec.rb
+  context "new" do
+    let!(:membership) { create(:chris_at_quahogcc, group: group) }
+    let!(:password) { attributes_for(:chris)[:password] }
+    let(:user) { membership.user }
+    let(:group_profile) { create(:quahogcc_group_profile) }
+    let(:group) { group_profile.group }
+    let(:host) { "http://#{group.subdomain}.localhost" }
 
-  # NOTE: 'new' is covered in ./issues_with_notifications_spec.rb
+    it "use group location sets the location and updates the map", js: true do
+      visit "#{host}#{new_user_session_path}"
+      fill_in "Email", with: user.email
+      fill_in "Password", with: password
+      click_button "Sign in"
+      expect(page).to have_content("Sign out")
+
+      visit "#{host}#{new_issue_path}"
+
+      click_on I18n.t("issues.form.use_groups_location")
+      expect(find("#issue_loc_json", visible: false).value).to include group_profile.loc_json
+      expect(all(".leaflet-marker-icon").size).to eq 22
+    end
+  end
 
   context "show" do
     let!(:issue) { create(:issue) }
