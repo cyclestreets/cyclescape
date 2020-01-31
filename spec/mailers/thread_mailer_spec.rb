@@ -26,7 +26,7 @@ describe ThreadMailer do
       expect(subject.subject).to eq(I18n.t("mailers.thread_mailer.common.subject", title: thread.title, count: 2, application_name: SiteConfig.first.application_name))
       expect(subject.text_part.decoded).to include("Brian#{I18n.t('.thread_mailer.header.committee')}")
       expect(subject.text_part.decoded).to include(I18n.t(".thread_mailer.new_document_message.view_the_document"))
-      expect(subject.text_part.decoded).to include("http://www.example.com#{document.file.url}")
+      expect(subject.text_part.decoded).to include("#{root_url[0..-2]}#{document.file.url}")
       expect(subject.to).to include(user.email)
       expect(subject.header["Reply-To"].value).to eq("<message-#{message_three.public_token}@cyclescape.org>")
       expect(subject.header["Message-ID"].value).to eq("<message-#{message_three.public_token}@cyclescape.org>")
@@ -50,7 +50,7 @@ describe ThreadMailer do
     it do
       document
       subject = described_class.digest(user, thread.reload => [message_one, message_three.reload])
-      expect(subject.text_part.decoded).to include("http://www.example.com#{document.file.url}")
+      expect(subject.text_part.decoded).to include("#{root_url[0..-2]}#{document.file.url}")
       expect(subject.text_part.decoded).to include("To reply to the message above")
       expect(subject.subject).to include("Digest for")
       expect(subject.reply_to.first).to include("no-reply")

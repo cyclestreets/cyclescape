@@ -3,8 +3,8 @@
 require "spec_helper"
 
 describe "Issues in a group subdomain" do
-  include_context "signed in as a group member"
   include_context "with current group subdomain"
+  include_context "signed in as a group member"
 
   let(:location_inside_group) { "POINT (10 10)" }
   let(:location_outside_group) { "POINT (200 200)" }

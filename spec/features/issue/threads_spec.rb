@@ -46,6 +46,26 @@ describe "Issue threads" do
       end
     end
 
+    context "as a group member in a subdomain", use: :current_subdomain do
+      include_context "signed in as a group member"
+
+      it "should default to be owned by the current group" do
+        visit issue_path(issue)
+        click_on "Discuss"
+        # Done twice so it's clear what's failing, as the error is confusing
+        expect(page).to have_select("Owned by")
+        expect(page).to have_select("Owned by", selected: current_group.name)
+      end
+
+      it "should default to the group's privacy setting" do
+        current_group.update_column(:default_thread_privacy, "group")
+        visit issue_path(issue)
+        click_on "Discuss"
+        expect(page).to have_select("Privacy")
+        expect(find_field("Privacy").value).to eq("group")
+      end
+    end
+
     context "as a group member" do
       include_context "signed in as a group member"
 
@@ -81,24 +101,6 @@ describe "Issue threads" do
         expect(page).to have_content(issue.title)
         expect(page).to have_content("Awesome!")
         expect(page).to have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
-      end
-
-      context "in a subdomain", use: :current_subdomain do
-        it "should default to be owned by the current group" do
-          visit issue_path(issue)
-          click_on "Discuss"
-          # Done twice so it's clear what's failing, as the error is confusing
-          expect(page).to have_select("Owned by")
-          expect(page).to have_select("Owned by", selected: current_group.name)
-        end
-
-        it "should default to the group's privacy setting" do
-          current_group.update_column(:default_thread_privacy, "group")
-          visit issue_path(issue)
-          click_on "Discuss"
-          expect(page).to have_select("Privacy")
-          expect(find_field("Privacy").value).to eq("group")
-        end
       end
 
       context "group thread notification" do

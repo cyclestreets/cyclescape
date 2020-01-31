@@ -31,7 +31,7 @@ describe "Site feedback" do
       fill_in "Message", with: "This page broke!"
       fill_in I18n.t("formtastic.labels.user.new.bicycle_wheels"), with: "8 "
       click_on "Send Feedback"
-      expect(SiteComment.last.context_url).to eq(root_url)
+      expect(SiteComment.last.context_url).to include(Capybara.default_host)
     end
   end
 

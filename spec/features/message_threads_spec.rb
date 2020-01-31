@@ -212,7 +212,7 @@ describe "Message threads", type: :feature do
 
           page.driver.delete thread_path(thread)
           expect(page).to_not have_content("You are not authorised to access that page.")
-          expect(page.driver.response.location).to eq(threads_url)
+          expect(page.driver.response.location).to include(threads_path)
         end
       end
     end

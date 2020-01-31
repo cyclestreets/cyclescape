@@ -159,8 +159,8 @@ describe "Group Membership Requests" do
         expect(current_email.subject).to include(group.name)
         expect(current_email).to have_body_text("You can confirm or reject the membership request")
 
-        expect(current_email).to have_body_text review_group_membership_request_url(group, group.pending_membership_requests.last)
-        expect(current_email).to have_body_text group_membership_requests_url(group)
+        expect(current_email).to have_body_text review_group_membership_request_path(group, group.pending_membership_requests.last)
+        expect(current_email).to have_body_text group_membership_requests_path(group)
       end
     end
 

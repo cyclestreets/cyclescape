@@ -25,7 +25,7 @@ describe "Issue notifications" do
 
   context "on a new issue" do
     it "should set the group if requested by subdomain" do
-      visit new_issue_url.gsub("www", group_membership.group.subdomain)
+      visit new_issue_url(subdomain: group.subdomain)
       expect(page).to have_select(I18n.t("activerecord.attributes.message_thread.group"), selected: group.name)
       expect(page).to have_select(I18n.t("formtastic.labels.thread.privacy"))
     end
