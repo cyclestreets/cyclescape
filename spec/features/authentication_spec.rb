@@ -58,7 +58,7 @@ describe "Authentication and authorization" do
 
   describe "remember subdomains when logging in" do
     include_context "signed in as a group member"
-    let(:group_url) { "http://#{current_group.short_name}.example.com/" }
+    let(:group_url) { root_url(subdomain: current_group.subdomain) }
 
     def switch_to_group_and_sign_out
       within ".group-selector" do

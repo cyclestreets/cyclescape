@@ -95,7 +95,12 @@ RSpec.configure do |config|
       SunspotTest.stub
     end
 
+    default_host = Capybara.default_host
+    Capybara.default_host = "http://localhost" if ex.metadata[:js]
+
     ex.run
+
+    Capybara.default_host = default_host if ex.metadata[:js]
 
     Resque.inline = resque_inline
     DatabaseCleaner.clean
