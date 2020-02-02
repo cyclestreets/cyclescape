@@ -134,7 +134,7 @@ Rails.application.routes.draw do
   end
 
   resource :library do
-    get :search, :recent
+    get :search, :relevant
     scope module: "library" do
       resources :documents
       resources :notes, only: %i[new create show edit update destroy]

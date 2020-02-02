@@ -223,7 +223,7 @@ authorization do
     has_permission_on :issues, to: %i[show index geometry all_geometries search vote_detail]
 
     has_permission_on :issue_photos, to: [:show]
-    has_permission_on :libraries, :library_documents, :library_notes, to: %i[view search recent]
+    has_permission_on :libraries, :library_documents, :library_notes, to: %i[view search relevant]
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show
       if_attribute public?: is { true }

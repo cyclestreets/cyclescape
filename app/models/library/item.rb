@@ -8,6 +8,9 @@ class Library::Item < ApplicationRecord
 
   searchable do
     text :search_text, :id
+    text :tags do
+      item.tags.map(&:name)
+    end
   end
 
   belongs_to :component, polymorphic: true

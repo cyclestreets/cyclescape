@@ -954,7 +954,6 @@
     new:
       compose_new: Compose New
       from_library: From Library
-      recently_added: Recently added
       select_button: Select…
       search_results: Search Results
       go: Go

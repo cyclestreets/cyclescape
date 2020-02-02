@@ -31,7 +31,7 @@ class LibraryMessageView
 
   show_results: (event, data, status, xhr) =>
     @results(data)
-    $("#library-recent").hide()
+    $("#library-relevant").hide()
     $("#library-results").show()
     slick($('.scrollable'), 'setPosition')
 
@@ -42,7 +42,7 @@ class LibraryMessageView
     @selected_item([item])
 
   fetch_initial_items: =>
-    url = @panel.find("#library-recent").data("src")
+    url = @panel.find("#library-relevant").data("src")
     $.ajax
       url: url
       success: (data) =>

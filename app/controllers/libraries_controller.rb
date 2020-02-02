@@ -13,9 +13,20 @@ class LibrariesController < ApplicationController
     end
   end
 
-  def recent
-    items = Library::Item.by_most_recent.limit(params[:limit] || 5).includes(:component)
-    items = Library::ItemDecorator.decorate_collection items
+  def relevant
+    issue = Issue.find(params[:issue_id])
+    tag_names = issue.tags.pluck(:name)
+    items = Library::Item.search do
+      paginate page: 1, per_page: 15
+      any do
+        tag_names.each do |tag_name|
+          fulltext tag_name do
+            boost_fields tags: 1.5
+          end
+        end
+      end
+    end
+    items = Library::ItemDecorator.decorate_collection items.results
     render json: items
   end
 
