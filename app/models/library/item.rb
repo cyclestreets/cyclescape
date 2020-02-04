@@ -9,7 +9,7 @@ class Library::Item < ApplicationRecord
   searchable do
     text :search_text, :id
     text :tags do
-      item.tags.map(&:name)
+      tags.map(&:name)
     end
   end
 
