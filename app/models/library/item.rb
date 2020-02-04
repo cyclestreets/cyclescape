@@ -7,7 +7,7 @@ class Library::Item < ApplicationRecord
   include Locatable
 
   searchable do
-    text :search_text, :id
+    text :search_text, :id, :title
     text :tags do
       tags.map(&:name)
     end
@@ -23,7 +23,7 @@ class Library::Item < ApplicationRecord
 
   validates :created_by, presence: true
 
-  delegate :title, to: :component
+  delegate :title, to: :component, allow_nil: true
   delegate :searchable_text, to: :component
 
   protected

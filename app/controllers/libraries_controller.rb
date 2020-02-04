@@ -14,20 +14,24 @@ class LibrariesController < ApplicationController
   end
 
   def relevant
-    issue = Issue.find(params[:issue_id])
-    tag_names = issue.tags.pluck(:name)
+    thread = MessageThread.find(params[:thread_id])
+    tag_names = thread.tags.pluck(:name)
+    tag_names += thread.issue.tags.pluck(:name) if thread.issue
     items = Library::Item.search do
       paginate page: 1, per_page: 15
       any do
         tag_names.each do |tag_name|
           fulltext tag_name do
-            boost_fields tags: 1.5
+            boost_fields tags: 1.5, title: 1.5
           end
         end
       end
     end
     items = Library::ItemDecorator.decorate_collection items.results
-    render json: items
+
+    respond_to do |format|
+      format.json { render json: items }
+    end
   end
 
   def new

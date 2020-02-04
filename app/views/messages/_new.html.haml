@@ -103,7 +103,7 @@
                 = t ".go"
               %span.nub
             .library-content#library-search
-              .library-items#library-relevant{"data-src" => relevant_library_path(issue_id: @thread.issue_id)}
+              .library-items#library-relevant{"data-src" => relevant_library_path(thread_id: @thread.id)}
                 %ul.content-icon-list(data-bind="template: {name: 'library-item-template', foreach: initial_items() }")
               .library-results.hide#library-results
                 %h3
