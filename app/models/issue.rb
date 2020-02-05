@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class Issue < ApplicationRecord
   include Locatable
   include FakeDestroy
@@ -40,6 +39,12 @@ class Issue < ApplicationRecord
   scope :by_most_recent, -> { order(created_at: :desc) }
   scope :preloaded,  -> { includes(:created_by, :tags) }
   scope :created_by, ->(user) { where(created_by_id: user) }
+  scope :pg_fulltext_search, ->(term) do
+    left_joins(:tags).where(
+      "to_tsvector('english', issues.title || ' ' || issues.description) @@ plainto_tsquery('english', ?) OR to_tsvector('english', tags.name) @@ plainto_tsquery('english', ?)",
+      term, term
+    )
+  end
 
   after_commit :update_search
   normalize_attribute :external_url, with: :url
@@ -123,6 +128,7 @@ end
 #  index_issues_on_created_by_id            (created_by_id)
 #  index_issues_on_location                 (location) USING gist
 #  index_issues_on_planning_application_id  (planning_application_id)
+#  issues_fulltext_idx                      (to_tsvector('english'::regconfig, (((title)::text || ' '::text) || description))) USING gin
 #
 # Foreign Keys
 #

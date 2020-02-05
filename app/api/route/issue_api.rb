@@ -15,6 +15,7 @@ module Route
       optional :id, type: Integer, desc: "Issue ID"
       optional :end_date, types: [DateTime, Date], desc: "No issues after the end date are returned"
       optional :start_date, types: [DateTime, Date], desc: "No issues before the start date are returned"
+      optional :term, type: String, desc: "Searches the title, description and tags. All words MUST appear in issue, OR and NOT are not yet implemented"
       optional(:geo_collection,
                type: Array[RGeo::GeoJSON::Feature],
                desc: 'Return only issues inside this GeoJSON feature collection, e.g. {"type":"FeatureCollection","features":[{"type":"Polygon","coordinates":[[[-1.5724,53.795],[-1.54289,53.8083],[-1.54426,53.79010],[-1.5724,53.7957]]]}]}',
@@ -79,6 +80,7 @@ module Route
         scope = scope.where_tag_names_not_in(params[:excluding_tags]) if params[:excluding_tags]
         scope = scope.before_date(params[:end_date]) if params[:end_date]
         scope = scope.after_date(params[:start_date]) if params[:start_date]
+        scope = scope.pg_fulltext_search(params[:term]) if params[:term]
         scope = paginate scope
         issues = scope.map { |issue| issue_feature(issue) }
         collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)

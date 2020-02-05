@@ -359,6 +359,19 @@ describe Issue do
   end
 
   context "scopes" do
+    describe "pg_fulltext_search" do
+      let!(:title_bike) { create(:issue, title: "I love riding bicycles") }
+      let!(:description_bike) { create(:issue, description: "I love to ride my bicycles") }
+      let!(:tag_bike) { create(:issue, title: "ride a bicycle everyday") }
+      let!(:no_bike) { create(:issue) }
+
+      it "searches" do
+        expect(described_class.pg_fulltext_search("rides bicycles")).to contain_exactly(
+          title_bike, description_bike, tag_bike
+        )
+      end
+    end
+
     describe "by_most_recent" do
       let!(:issue) { create :issue }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_14_205123) do
+ActiveRecord::Schema.define(version: 2020_02_05_222318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,7 @@ ActiveRecord::Schema.define(version: 2020_01_14_205123) do
     t.boolean "all_day", default: false, null: false
     t.integer "planning_application_id"
     t.string "photo_name"
+    t.index "to_tsvector('english'::regconfig, (((title)::text || ' '::text) || description))", name: "issues_fulltext_idx", using: :gin
     t.index ["created_by_id"], name: "index_issues_on_created_by_id"
     t.index ["location"], name: "index_issues_on_location", using: :gist
     t.index ["planning_application_id"], name: "index_issues_on_planning_application_id"
@@ -559,6 +560,7 @@ ActiveRecord::Schema.define(version: 2020_01_14_205123) do
   create_table "tags", id: :serial, force: :cascade do |t|
     t.string "name", limit: 255, null: false
     t.string "icon", limit: 255
+    t.index "to_tsvector('english'::regconfig, (name)::text)", name: "tags_fulltext_idx", using: :gin
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
