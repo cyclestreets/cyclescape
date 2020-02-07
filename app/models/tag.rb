@@ -79,5 +79,4 @@ end
 # Indexes
 #
 #  index_tags_on_name  (name) UNIQUE
-#  tags_fulltext_idx   (to_tsvector('english'::regconfig, (name)::text)) USING gin
 #

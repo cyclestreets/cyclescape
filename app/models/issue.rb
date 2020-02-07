@@ -126,9 +126,9 @@ end
 # Indexes
 #
 #  index_issues_on_created_by_id            (created_by_id)
+#  index_issues_on_deleted_at               (deleted_at)
 #  index_issues_on_location                 (location) USING gist
 #  index_issues_on_planning_application_id  (planning_application_id)
-#  issues_fulltext_idx                      (to_tsvector('english'::regconfig, (((title)::text || ' '::text) || description))) USING gin
 #
 # Foreign Keys
 #
