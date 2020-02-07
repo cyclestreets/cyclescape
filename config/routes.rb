@@ -185,11 +185,8 @@ Rails.application.routes.draw do
 
   root to: "home#show"
 
-  resque_constraint = lambda do |request|
-    request.env["warden"].authenticate? && (request.env["warden"].user.role == "admin")
-  end
-
-  constraints resque_constraint do
-    mount Resque::Server, at: "/admin/resque"
+  authenticate :user, ->(user) { user.admin? } do
+    mount PgHero::Engine, at: "admin/pghero"
+    mount Resque::Server, at: "admin/resque"
   end
 end
