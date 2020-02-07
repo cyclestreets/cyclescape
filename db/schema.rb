@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_07_205454) do
+ActiveRecord::Schema.define(version: 2020_02_07_211025) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
   enable_extension "postgis"
 
@@ -381,6 +382,17 @@ ActiveRecord::Schema.define(version: 2020_02_07_205454) do
     t.index ["in_reply_to_id"], name: "index_messages_on_in_reply_to_id"
     t.index ["public_token"], name: "index_messages_on_public_token", unique: true
     t.index ["thread_id"], name: "index_messages_on_thread_id"
+  end
+
+  create_table "pghero_query_stats", force: :cascade do |t|
+    t.text "database"
+    t.text "user"
+    t.text "query"
+    t.bigint "query_hash"
+    t.float "total_time"
+    t.bigint "calls"
+    t.datetime "captured_at"
+    t.index ["database", "captured_at"], name: "index_pghero_query_stats_on_database_and_captured_at"
   end
 
   create_table "photo_messages", id: :serial, force: :cascade do |t|
