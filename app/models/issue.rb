@@ -43,7 +43,7 @@ class Issue < ApplicationRecord
     left_joins(:tags).where(
       "to_tsvector('english', issues.title || ' ' || issues.description) @@ plainto_tsquery('english', ?) OR to_tsvector('english', tags.name) @@ plainto_tsquery('english', ?)",
       term, term
-    )
+    ).distinct
   end
 
   after_commit :update_search
