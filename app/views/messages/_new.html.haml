@@ -95,11 +95,11 @@
       .scrollable
         %div
           .listing
-            = form_tag search_library_path(format: :json), {method: :get, class: "library-search filters", target: "#library-results"} do
+            = form_tag search_library_path, {method: :get, class: "library-search filters", target: "#library-results", remote: true} do
               .search-box
                 = label_tag :query, t(".search_library")
                 = text_field_tag :query, nil, placeholder: t(".search_library")
-              %button{:type => "submit"}
+              %button{type: "submit"}
                 = t ".go"
               %span.nub
             .library-content#library-search

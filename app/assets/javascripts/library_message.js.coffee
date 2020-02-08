@@ -13,8 +13,6 @@ class LibraryMessageView
     ko.applyBindings(this)
 
     @form = @panel.find("form.library-search")
-    # Rails will do the AJAX
-    @form.data "remote", true
     @form.on "ajax:success", this.show_results
     @form.on "ajax:error", this.show_error
 
@@ -30,13 +28,13 @@ class LibraryMessageView
   selected: => @selected_item
 
   show_results: (event, data, status, xhr) =>
-    @results(data)
+    @results(event.detail[0])
     $("#library-relevant").hide()
     $("#library-results").show()
     slick($('.scrollable'), 'setPosition')
 
-  show_error: (xhr, status, error) ->
-    console.log xhr, status, error
+  show_error: (event) ->
+    console.log event.detail
 
   select: (item) =>
     @selected_item([item])
