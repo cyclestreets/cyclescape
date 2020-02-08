@@ -1,6 +1,6 @@
 .sign-up-form
   %h1= t ".title"
-  = render "shared/social_login"
+  -# = render "devise/shared/social_login"
   = semantic_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
     = render "devise/shared/error_messages", resource: resource
     = f.inputs do
@@ -23,4 +23,4 @@
         = text_field_tag :real_name
     = f.actions do
       = f.action :submit
-  = render :partial => "devise/shared/links"
+  = render "devise/shared/links"
