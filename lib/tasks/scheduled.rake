@@ -26,4 +26,8 @@ namespace :scheduled do
   task email_user_digests: :environment do
     User.email_digests!
   end
+
+  task capture_query_stats: :environment do
+    PgHero.capture_query_stats(verbose: false)
+  end
 end

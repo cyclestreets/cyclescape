@@ -26,7 +26,7 @@ every 5.minutes do
 end
 
 every 5.minutes do
-  rake "pghero:capture_query_stats"
+  rake "scheduled:capture_query_stats"
 end
 # This pulls in application from 5 days ago to 12 days ago (i.e. a weeks worth)
 # They will be sorted with the oldest first.
@@ -41,6 +41,9 @@ end
 
 every 1.day, at: "1:02 am" do
   rake "scheduled:new_planning_applications"
+end
+
+every 1.day, at: "2:15 am" do
   rake "db:sessions:trim"
 end
 
