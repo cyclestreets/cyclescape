@@ -600,6 +600,8 @@
       admin_thread_pointer_html: You can %{administrative_matters_link} with no geographical
         context (e.g. organising a general meeting) in the group admin threads section.
       administrative_matters: add a purely administrative matter
+      start_discussion: Start a discussion
+      no_discussion_create: Create issue
     show:
       added_by_html: Added by %{name} %{time}
       delete_issue: Delete this issue

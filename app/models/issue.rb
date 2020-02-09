@@ -26,7 +26,7 @@ class Issue < ApplicationRecord
   has_many :threads, class_name: "MessageThread", after_add: :set_new_thread_defaults, inverse_of: :issue
   has_and_belongs_to_many :tags, join_table: "issue_tags"
 
-  accepts_nested_attributes_for :threads
+  accepts_nested_attributes_for :threads, reject_if: :do_not_start_discussion
 
   validates :title, presence: true, length: { maximum: 80 }
   validates :description, presence: true
@@ -48,6 +48,15 @@ class Issue < ApplicationRecord
 
   after_commit :update_search
   normalize_attribute :external_url, with: :url
+  attr_writer :start_discussion
+
+  def start_discussion
+    ActiveRecord::Type::Boolean.new.deserialize(@start_discussion)
+  end
+
+  def do_not_start_discussion
+    !start_discussion
+  end
 
   class << self
     def after_date(date)

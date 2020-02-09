@@ -5,6 +5,17 @@ window.jsonpTransportRequired = ->
     parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
 
 jQuery ->
+  $("#issue_start_discussion").change((evt)->
+    form = $("[data='start-discussion-form']")
+    btn = $(form).parent().find("input[type=submit]")
+    if (evt.target.checked)
+      form.show()
+      btn.prop('value', btn.data("startDiscussion"))
+    else
+      form.hide()
+      btn.prop('value', btn.data("noDiscussion"))
+  )
+
   # Tabs
   $(".tabs").parent().tabs()
 

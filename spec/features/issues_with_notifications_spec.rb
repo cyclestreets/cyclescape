@@ -50,6 +50,32 @@ describe "Issue notifications" do
       expect(page).to have_content(current_user.name)
     end
 
+    context "when not starting a discussion", js: true do
+      it "creates an issue without message threads" do
+        visit new_issue_path
+
+        fill_in I18n.t("formtastic.labels.issue.new.title"), with: issue_values[:title]
+        tinymce_fill_in id: "issue_description", with: issue_values[:description]
+        fill_in "issue_tags_string_tag", with: "parking parking"
+
+        page.evaluate_script("$('#issue_loc_json').val('#{location}')") # Would prefer to click on the map
+        fill_in I18n.t("activerecord.attributes.message_thread.title"), with: thread_values[:title]
+
+        uncheck I18n.t("issues.new.start_discussion")
+
+        # Message thread form is hidden
+        expect(page).not_to have_content(I18n.t("activerecord.attributes.message_thread.title"))
+
+        # Changes the submit button from "Create issue and start discussion" -> "Create issue"
+        expect(page).not_to have_content(I18n.t("formtastic.actions.issue.create"))
+
+        click_on I18n.t("issues.new.no_discussion_create")
+
+        expect(page).to have_current_path(%r{/issues/\d}) # Takes us to the Issue path
+        expect(page).to have_content(I18n.t("issues.show.no_threads_yet")) # Without any threads
+      end
+    end
+
     describe "for users with overlapping user locations" do
       let(:user) { create(:user) }
       let!(:user_location) { create(:user_location, user: user, loc_json: issue_values[:loc_json]) }

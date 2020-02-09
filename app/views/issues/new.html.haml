@@ -8,10 +8,17 @@
   = semantic_form_for @issue, html: {class: "guided navigate-away-warning", multipart: true} do |f|
     = render "form", f: f
 
-    %div
-      %p
-        %i= simple_format t ".new_hint"
-    = f.semantic_fields_for :threads, html: {class: 'guided'} do |ft|
-      = render "shared/message_thread_form", f: ft, thread_dom_prefix: "issue_threads_attributes_0"
+    %h2=t ".start_discussion"
+    %p
+      %label
+        = f.check_box("start_discussion", {checked: true})
+        = t(".start_discussion")
+      %br
+    %p
+      %br
+      %i= simple_format t ".new_hint"
+    %div{data: "start-discussion-form"}
+      = f.semantic_fields_for :threads do |ft|
+        = render "shared/message_thread_form", f: ft, thread_dom_prefix: "issue_threads_attributes_0"
     = f.actions do
-      = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
+      = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving"), start_discussion: t("formtastic.actions.issue.create"), no_discussion: t(".no_discussion_create") }}

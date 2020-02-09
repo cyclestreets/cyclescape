@@ -48,7 +48,11 @@ class IssuesController < ApplicationController
 
     if @issue.save
       NewIssueNotifier.new_issue @issue
-      redirect_on_check_reason(@message, spam_path: issue_path(issue), clean_path: thread_path(thread))
+      if issue.start_discussion
+        redirect_on_check_reason(@message, spam_path: issue_path(issue), clean_path: thread_path(thread))
+      else
+        redirect_to issue_path(issue)
+      end
     else
       new_issue_setup
       render :new
@@ -164,7 +168,7 @@ class IssuesController < ApplicationController
   end
 
   def permitted_params
-    params.require(:issue).permit :title, :photo, :retained_photo, :loc_json, :tags_string,
+    params.require(:issue).permit :title, :photo, :retained_photo, :loc_json, :tags_string, :start_discussion,
                                   :description, :deadline, :all_day, :external_url, :planning_application_id, threads_attributes: %i[title group_id privacy]
   end
 end
