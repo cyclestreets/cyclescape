@@ -14,10 +14,9 @@
         = f.check_box("start_discussion", {checked: true})
         = t(".start_discussion")
       %br
-    %p
+    %div{data: "start-discussion-form"}
       %br
       %i= simple_format t ".new_hint"
-    %div{data: "start-discussion-form"}
       = f.semantic_fields_for :threads do |ft|
         = render "shared/message_thread_form", f: ft, thread_dom_prefix: "issue_threads_attributes_0"
     = f.actions do
