@@ -19,7 +19,9 @@ class NewThreadNotifier
     l1 = thread.group ? list_for_new_group_thread(thread) : {}
     l2 = thread.issue ? list_for_new_user_location_issue_thread(thread) : {}
     # merge the two lists, which are keyed on user id. This ensure each user only receives one notification.
-    l1.merge(l2).each_value do |v|
+    l1.merge(l2).each do |user_id, v|
+      next if user_id == thread.created_by_id
+
       Resque.enqueue(NewThreadNotifier, v[:type], v[:opts])
     end
   end

@@ -20,7 +20,9 @@ class NewIssueNotifier
     l1 = list_for_group_locations(issue)
     l2 = list_for_user_locations(issue)
     # merge the two lists, which are keyed on user id. This ensure each user only receives one notification.
-    l1.merge(l2).each_value do |v|
+    l1.merge(l2).each do |user_id, v|
+      next if user_id == issue.created_by_id
+
       Resque.enqueue(NewIssueNotifier, v[:type], v[:opts])
     end
   end
