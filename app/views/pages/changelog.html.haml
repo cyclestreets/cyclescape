@@ -5,6 +5,13 @@
     = t(".introduction")
     = t(".github_history_link_html")
   %article
+    %h2 11/02/2020
+    %ul.bullets
+      %li
+        Allow a issue to be created without a discussion thread,
+        = github_issue(922)
+
+  %article
     %h2 09/02/2020
     %ul.bullets
       %li
@@ -28,6 +35,8 @@
       %li
         Fix library search,
         = github_issue(892)
+
+  %article
     %h2 17/01/2020
     %ul.bullets
       %li
@@ -45,6 +54,8 @@
       %li
         Make drawing lines clearer,
         = github_issue(905)
+
+  %article
     %h2 07/01/2020
     %ul.bullets
       %li Allow thread creator to edit thread after posting
@@ -53,15 +64,23 @@
         when there are no results.
       %li Make all links to a group point to the subdomain.
       %li Make menu highlighting consistant for group and site admins.
+
+  %article
     %h2 21/12/2019
     %ul.bullets
       %li Add poll message type.
+
+  %article
     %h2 17/12/2019
     %ul.bullets
       %li Update dependancies, add more message creation restrictions on the server.
+
+  %article
     %h2 25/11/2019
     %ul.bullets
       %li Limit the groups a committee member can assign to an issue.
+
+  %article
     %h2 18/11/2019
     %ul.bullets
       %li
@@ -70,15 +89,21 @@
       %li
         Allow searching by ID for
         = link_to "Cyclescape photos", "https://github.com/cyclestreets/cyclescape/issues/795"
+
+  %article
     %h2 16/11/2019
     %ul.bullets
       %li Allow multiple components per message, e.g. a text, image and deadline can be submitted as one message.
       %li Sort tags by usage so most used tags appear at the top.
+
+  %article
     %h2 28/09/2019
     %ul.bullets
       %li On remote message creation add highlight and scroll to the new message.
       %li Fix bug with image edit when using the mousewheel to zoom.
       %li Fix rich text editor bug intoroduced in the Rails update.
+
+  %article
     %h2 08/09/2019
     %ul.bullets
       %li Update Rails to 5.1
@@ -86,6 +111,8 @@
         Improve digest email:
         = link_to "identify message creator", "https://github.com/cyclestreets/cyclescape/issues/875"
         , distinguish message reply and issue title more clearly.
+
+  %article
     %h2 04/09/2019
     %ul.bullets
       %li
@@ -93,14 +120,17 @@
         = link_to "no longer coming through.", "https://github.com/cyclestreets/cyclescape/issues/871"
       %li Allow new documents and images to be posted without reloading the page.
 
+  %article
     %h2 11/08/2019
     %ul.bullets
       %li Fix bug with read threads no longer changing colour.
 
+  %article
     %h2 08/08/2019
     %ul.bullets
       %li Large performance improvements.  The time ago is now calculated in the browser and not on the server allowing us to cache lots of pages.
 
+  %article
     %h2 09/05/2019
     %ul.bullets
       %li
@@ -116,70 +146,102 @@
         = link_to "new issue on a subdomain", "https://github.com/cyclestreets/cyclescape/issues/850"
       %li
         Speed up pages by pulling all voting count information at the same time.
+
+  %article
     %h2 06/05/2019
     %ul.bullets
       %li
         Upgrade Rails to version 5.
+
+  %article
     %h2 07/04/2019
     %ul.bullets
       %li
         Stop users being able to create empty locations
         = link_to 'empty locations','https://github.com/cyclestreets/cyclescape/issues/845'
+
+  %article
     %h2 03/04/2019
     %ul.bullets
       %li
         Fix HTML
         = link_to 'email formatting','https://github.com/cyclestreets/cyclescape/issues/834'
+
+  %article
     %h2 02/04/2019
     %ul.bullets
       %li Combine issue and thread creation into one form
       %li Fix converting Planning Application to Issue to use Richtext
       %li Fix administrative threads and Private Messages to use Richtext editor
       %li Fix Private Message thread ordering
+
+  %article
     %h2 09/03/2019
     %ul.bullets
       %li Upgrade Operating System (was Ubuntu 14.04 now is Ubuntu 16.04)
+
+  %article
     %h2 20/01/2019
     %ul.bullets
       %li Improvements to help reduce spam from the site feedback.
+
+  %article
     %h2 17/01/2019
     %ul.bullets
       %li Allow users to block Private Messages from other users.
       %li Stop Private Messages being checked for Spam.
       %li Fix Richtext editor on new thread form.
+
+  %article
     %h2 12/01/2019
     %ul.bullets
       %li More HTML email fixes: make sure formatting is somewhat preserved, remove another way to get empty paragraphs.
       %li Clarify what happens when user accounts are deleted.
       %li Link Emails with the message they create
+
+  %article
     %h2 19/12/2018
     %ul.bullets
       %li Remove unwanted HTML when pasting into richtext box. This should fix some formatting issues we've been having.
+
+  %article
     %h2 17/12/2018
     %ul.bullets
       %li Block posting messages until richtext editor is initialised.
       %li Add spellcheck to richtext editor.
       %li Remove empty paragraphs from messages.
+
+  %article
     %h2 16/12/2018
     %ul.bullets
       %li Fix hashtags with richtext.
+
+  %article
     %h2 15/12/2018
     %ul.bullets
       %li If email has HTML part use that, if not covert email to HTML as we now store messages from the web interface as HTML.
       %li Thread API fix with group.
       %li Constrain profile picture size in HTML emails.
+
+  %article
     %h2 14/12/2018
     %ul.bullets
       %li Richtext box fixes (make scrollable, strip trailing blank paragraphs, auto link URLs, remove underline from links, fix search formatting).
       %li Strip Facebook tracking from links.
+
+  %article
     %h2 09/12/2018
     %ul.bullets
       %li Allow issues and message to be written in HTML.
       %li Update emails to be in HTML and plain text.
       %li Add membership API.
+
+  %article
     %h2 05/12/2018
     %ul.bullets
       %li Fix uploading large images, we were converting them to PNG instead of respecting their file type.
+
+  %article
     %h2 08/10/2018
     %ul.bullets
       %li Improve image edit.
@@ -187,14 +249,20 @@
       %li Add introduction to site comments.
       %li Try to force Gmail to always show unsubscribe footer.
       %li Fix photo email links.
+
+  %article
     %h2 10/08/2018
     %ul.bullets
       %li Speed up creating new messages (submit form using AJAX).
       %li Add map key.
       %li Increase active group members table.
+
+  %article
     %h2 23/07/2018
     %ul.bullets
       %li Add image edit
+
+  %article
     %h2 13/07/2018
     %ul.bullets
       %li Add action messages where specific actions can be added and later completed in a message thread.
@@ -202,12 +270,15 @@
       %li Add more Planning Application areas.
       %li Add most active users to the groups page.
       %li Improve warning when posting a message that is not approved.
+
+  %article
     %h2 08/07/2018
     %ul.bullets
       %li Prevent double clicking when voting.
       %li Fix group search when group has no location.
       %li Fix approving group membership requests when user has already become a member.
 
+  %article
     %h2 23/05/2018
     %ul.bullets
       %li Try to fix font bug again.
@@ -215,16 +286,19 @@
         Fix access denied and follow button spacing, thanks to
         = link_to '@DoccyB','https://github.com/DoccyB'
 
+  %article
     %h2 15/05/2018
     %ul.bullets
       %li Revert Firefox font bug (caused more issues).
       %li Fix missing user location bug.
 
+  %article
     %h2 11/05/2018
     %ul.bullets
       %li Speed up site: load vote details after page has loaded.
       %li Fix Firefox font bug.
 
+  %article
     %h2 08/04/2018
     %ul.bullets
       %li Add a warning when navigating away from part filled issues or messages.
@@ -234,12 +308,14 @@
       %li Fix location bug for new groups.
       %li Fix planning application pull
 
+  %article
     %h2 08/04/2018
     %ul.bullets
       %li Fix group profile edit.
       %li Change group logo resizeing.
       %li Add missing Map message text.
 
+  %article
     %h2 17/02/2018
     %ul.bullets
       %li Add Map as a message reply type.
@@ -247,6 +323,7 @@
       %li Make Geocoder more configurable.
       %li Minor / bug fixes: hide most message reply types unless user is signed in and fix searching for groups with no name.
 
+  %article
     %h2 30/12/2017
     %ul.bullets
       %li Update search (sometimes threads were not appearing for a while due to a bug)
@@ -254,6 +331,7 @@
       %li Imporve API options, add messages and message threads.
       %li Make more of the site work in Czech and English.
 
+  %article
     %h2 01/11/2017
     %ul.bullets
       %li Fix: validate threads with group privacy have a group.
@@ -262,12 +340,14 @@
       %li Fix: when unsubscribing from a thread via an email link redirect to the home page (instead of back to the thread).
       %li Fix: popular threads must have postive votes.
 
+  %article
     %h2 11/07/2017
     %ul.bullets
       %li Allow header, footer, map tiles, email (and others) to be altered in the site admin.
       %li Add Planning applications to the main search.
       %li Add tooltip of people who liked an issue or message.
 
+  %article
     %h2 10/06/2017
     %ul.bullets
       %li Change how voting works so it is one click.  Add ability to vote on messages.
@@ -276,6 +356,7 @@
       %li Add twitter feed to front page.
       %li Minor style fixes (on front page and location edit).
 
+  %article
     %h2 20/04/2017
     %ul.bullets
       %li Add link to top at the bottom of the screen.
@@ -299,6 +380,7 @@
       %li Display number of unseen private messages in top navigation.
       %li Add link to individual message in email digests.
 
+  %article
     %h2 24/12/2016
     %ul.bullets
       %li Allow issues (along with library items, groups) to be connected to multiple locations.
@@ -308,6 +390,7 @@
         matches one in the potential members list.
       %li Allow admin to disable groups (for when they are no longer active).
 
+  %article
     %h2 11/11/2016
     %ul.bullets
       %li
@@ -315,6 +398,7 @@
         = link_to 'API','../api'
       %li Improve CycleStreets photo reply image size and fix link.
 
+  %article
     %h2 06/11/2016
     %ul.bullets
       %li
@@ -334,10 +418,14 @@
           %li Fix collision checkbox.
           %li Speed up tag cloud.
           %li Disable "Submit button" on all reply types when not logged in.
+
+  %article
     %h2 04/09/2016
     %ul.bullets
       %li Add social sharing buttons.
       %li Update JavaScript installation method.
+
+  %article
     %h2 14/08/2016
     %ul.bullets
       %li Allow user to set locale.
@@ -345,6 +433,8 @@
       %li Update new user and lost password pages styling.
       %li Add location to library documents.
       %li When creating issue update the title word count so user knows when it is too long.
+
+  %article
     %h2 06/15/2016
     %ul.bullets
       %li
@@ -361,6 +451,7 @@
         fix thread moderation issue, deadline emails missing message title,
         fix thread unsubscribing issue, planning search is now case insensitive.
 
+  %article
     %h2 29/04/2016
     %ul.bullets
       %li Zoom to feature on map search (instead of a generic zoom)
@@ -370,6 +461,8 @@
         =link_to 'API documentation','../api'
       %li Allow users to leave groups
       %li Other bug fixes around private messages
+
+  %article
     %h2 29/04/2016
     %ul.bullets
       %li Zoom to feature on map search (instead of a generic zoom)
@@ -379,6 +472,8 @@
         =link_to 'API documentation','../api'
       %li Allow users to leave groups
       %li Other bug fixes around private messages
+
+  %article
     %h2 21/03/2016
     %ul.bullets
       %li Respect locale for users browsing in different countries
@@ -394,6 +489,7 @@
           %li Warning / Success message widths
           %li Fix missing thumbnail spacing
 
+  %article
     %h2 07/03/2016
     %ul.bullets
       %li Fix nearby issue button
@@ -401,6 +497,7 @@
       %li Allow issue creator to change issue in indefinitely
       %li Add [Committee] next to committee users
 
+  %article
     %h2 29/02/2016
     %ul.bullets
       %li Make searching more robust
@@ -411,6 +508,7 @@
       %li Force email addresses to be unique
       %li On issue show add issues nearby button
 
+  %article
     %h2 11/01/2016
     %ul.bullets
       %li Add all day option to deadlines and issues
@@ -429,21 +527,25 @@
           %li Speed up subscribing to threads
           %li Improve deadline date format
 
+  %article
     %h2 22/11/2015
     %ul.bullets
       %li Add times to deadlines
       %li Add 'Back to top' link
 
+  %article
     %h2 15/11/2015
     %ul.bullets
       %li Email digest option
       %li Ical link for deadlines in dashboard
 
+  %article
     %h2 12/11/2015
     %ul.bullets
       %li Added ability to close threads
       %li Send email about upcoming issue and thread deadlines
 
+  %article
     %h2 11/11/2015
     %ul.bullets
       %li Performance improvements
@@ -456,6 +558,7 @@
       %li Creating an issue from planning application now includes main link
       %li Added search to issues map
 
+  %article
     %h2 09/11/2015
     %ul.bullets
       %li Improve search results, boost results in title, added pagination
@@ -465,37 +568,45 @@
       %li Add bicycle wheels maths check to reduce spam signups
       %li Style permission denied pages
 
+  %article
     %h2 20/10/2015
     %ul.bullets
       %li Improved email threading and removed PGP signatures
       %li Fixed site feedback submission
       %li Upgraded many old libraries (esp. kaminari, dragonfly)
 
+  %article
     %h2 12/10/2015
     %ul.bullets
       %li Upgraded to Rails 4.2
       %li Various bug fixes
 
+  %article
     %h2 08/09/2015
     %ul.bullets
       %li Add external url and deadline options to issues
       %li
         Add API for LCC
         =link_to 'see documentation','http://petstore.swagger.io/?url=http://www.cyclescape.org/api/swagger_doc'
+
+  %article
     %h2 30/08/2015
     %ul.bullets
       %li Upgrade to Rails 4.1
 
+  %article
     %h2 25/08/2015
     %ul.bullets
       %li Update old JavaScript libraries
 
+  %article
     %h2 14/08/2015
     %ul.bullets
       %li Add group pictures
       %li Make user account URL more friendly, use '/settings/account' format
       %li Upgrade to Rails 4.0
 
+  %article
     %h2 01/06/2015
     %ul.bullets
       %li Privacy Updates
@@ -508,16 +619,19 @@
         %li users now can see the full name (in the profile) of anyone who is in the same group
         %li if you have profile visibility set to group (in the user preferences) then their profile will not be visible publicly (only to members in one of your groups)
 
+  %article
     %h2 01/06/2015
     %ul.bullets
       %li User friendly URLs for profile, location and preferences edit
 
+  %article
     %h2 25/05/2015
     %ul.bullets
       %li Add a checkbox for collision data on issue map
       %li Add new group request form
       %li Update Devise (how users log in)
 
+  %article
     %h2 03/05/2015
     %ul.bullets
       %li Add Street View message type
