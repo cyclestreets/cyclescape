@@ -32,7 +32,7 @@ module Route
                        end
 
         issue = IssueDecorator.decorate issue
-        RGeo::GeoJSON::Feature.new(issue.location, nil,
+        RGeo::GeoJSON::Feature.new(issue.location, issue.id,
                                    id: issue.id,
                                    created_at: issue.created_at.to_i,
                                    created_at_iso: issue.created_at,
@@ -49,7 +49,9 @@ module Route
                                    cyclescape_url: "#{request.base_url}/issues/#{issue.to_param}",
                                    latest_activity_at: issue.latest_activity_at.to_i,
                                    latest_activity_at_iso: issue.latest_activity_at,
-                                   closed: issue.closed?)
+                                   closed: issue.closed?,
+                                   centre: RGeo::GeoJSON::Feature.new(issue.centre)
+                                  )
       end
 
       def post_or_get_issue

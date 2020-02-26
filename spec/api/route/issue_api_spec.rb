@@ -80,7 +80,7 @@ describe Route::IssueApi do
         expect(geojson_response[0].keys)
           .to match_array(%w[id created_at created_at_iso created_by deadline deadline_iso external_url description
                              tags cyclescape_url photo_thumb_url thumbnail title vote_count
-                             latest_activity_at latest_activity_at_iso closed])
+                             latest_activity_at latest_activity_at_iso closed centre])
       end
 
       context "with a subdomain" do
