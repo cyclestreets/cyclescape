@@ -237,7 +237,7 @@ authorization do
     has_permission_on :pages, to: :show
     has_permission_on :api_v1_issues, to: :index
     has_permission_on :site_comments, to: %i[new create]
-    has_permission_on :tags, to: %i[show autocomplete_tag_name index]
+    has_permission_on :tags, to: %i[show autocomplete_tag_name index all_geometries]
     has_permission_on :user_profiles, to: :view do
       if_permitted_to :view_profile
     end
