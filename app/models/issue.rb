@@ -29,10 +29,9 @@ class Issue < ApplicationRecord
   accepts_nested_attributes_for :threads, reject_if: :do_not_start_discussion
 
   validates :title, presence: true, length: { maximum: 80 }
-  validates :description, presence: true
-  validates :location, presence: true
+  validates :description, :location, :created_by, presence: true
+  validates :tags_string, presence: true, on: :create
   validates :size, numericality: { less_than: Geo::ISSUE_MAX_AREA }
-  validates :created_by, presence: true
   validates :external_url, url: true
 
   default_scope { where(deleted_at: nil) }
@@ -48,6 +47,7 @@ class Issue < ApplicationRecord
 
   after_commit :update_search
   normalize_attribute :external_url, with: :url
+
   attr_writer :start_discussion
 
   def start_discussion

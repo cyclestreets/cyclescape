@@ -6,13 +6,10 @@ FactoryBot.define do
     description { "Whose leg do you have to hump to get a dry martini around here?" }
     location { "POINT(-122 47)" }
     association :created_by, factory: :user
+    tags { FactoryBot.build_list(:tag, 2) }
 
     factory :issue_with_json_loc do
       loc_json { '{"type":"Feature","properties":{},"geometry":{"type":"Point","coordinates":[0.14,52.27]}}' }
-    end
-
-    trait :with_tags do
-      tags { FactoryBot.build_list(:tag, 2) }
     end
 
     trait :with_photo do

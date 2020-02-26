@@ -31,11 +31,13 @@
     attributes:
       issue:
         external_url: Web link (if any)
+        tags_string: Tags
       message_thread:
         group: "Owned by"
         closed: Closed
         moderated: In Moderation
         title: Discussion title
+        tags_string: Tags
       component:
         photo: "Photo"
     models:

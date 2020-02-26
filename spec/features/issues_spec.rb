@@ -131,7 +131,7 @@ describe "Issues" do
     end
 
     context "tags", as: :site_user do
-      let!(:issue) { create(:issue, :with_tags) }
+      let!(:issue) { create(:issue) }
 
       before do
         visit issue_path(issue)
@@ -199,7 +199,7 @@ describe "Issues" do
 
   context "search", solr: true do
     include_context "signed in as a site user"
-    let!(:issue) { create(:issue, :with_tags) }
+    let!(:issue) { create(:issue) }
     # main search box doesn't have any I18n'd content, just a js-based placeholder.
     # use the id of the field instead.
     let(:search_field) { "query" }
