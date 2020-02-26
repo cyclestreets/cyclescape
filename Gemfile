@@ -14,7 +14,6 @@ end
 # gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
-gem "browserify-rails"
 gem "chartkick"
 gem "formtastic"
 gem "cocoon"
@@ -29,6 +28,7 @@ gem "rails_autolink"
 gem "ratelimit"
 gem "retryable"
 gem "rgeo-geojson"
+gem 'webpacker', '~> 4.x'
 # gem 'jquery-turbolinks'
 gem "tinymce-rails", "= 4.7.13" # See #877
 

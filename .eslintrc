@@ -1,5 +1,5 @@
 {
-  "extends": "standard",
+  "extends": "eslint:recommended",
   "globals": {
     "LeafletMap": true,
     "jsonpTransportRequired": true,
@@ -8,6 +8,7 @@
     "CONSTANTS": true
   },
   "env": {
+    "es6": true,
     "browser": true,
     "jquery": true
   }

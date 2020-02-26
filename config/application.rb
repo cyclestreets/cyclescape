@@ -78,12 +78,12 @@ module Cyclescape
     # By default only files in /app and /node_modules are browserified,
     # vendor stuff is normally not made for browserification and may stop
     # working.
-    config.browserify_rails.paths << %r{vendor/assets/javascripts/module\.js}
+    # config.browserify_rails.paths << %r{vendor/assets/javascripts/module\.js)
 
     # Environments in which to generate source maps
     #
     # The default is none
-    config.browserify_rails.source_map_environments << "development"
+    # config.browserify_rails.source_map_environments << "development"
 
     # Should the node_modules directory be evaluated for changes on page load
     #
@@ -99,7 +99,7 @@ module Cyclescape
     # Command line options used when running browserify
     #
     # can be provided as a string:
-    config.browserify_rails.commandline_options = "-t coffeeify --extension=\".js.coffee\""
+    # config.browserify_rails.commandline_options = "-t coffeeify --extension=\".js.coffee\""
 
     # Define NODE_ENV to be used with envify
     #

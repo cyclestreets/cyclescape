@@ -1,0 +1,26 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "rules": {
+    "camelcase": ["error", { "properties": "never"  }],
+    "comma-dangle": ["error", "only-multiline"],
+    "eqeqeq": ["error"],
+    "no-const-assign": ["error"],
+    "no-unused-vars": ["error"],
+    "no-var": ["error"],
+    "prefer-const": ["error"],
+    "semi": ["error", "never"]
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "globals": {
+    "CONSTANTS": true
+  }
+}
