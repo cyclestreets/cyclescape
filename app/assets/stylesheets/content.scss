@@ -990,17 +990,17 @@ article.message .message-text, .mce-content-body {
   background: white;
 }
 
-.btn-twitter {
+.btn-social.btn.btn-twitter {
   color: #fff;
   background-color: #55acee;
   border-color: rgba(0,0,0,0.2);
 }
-.btn-facebook {
-    color: #fff;
-    background-color: #3b5998;
-    border-color: rgba(0,0,0,0.2);
-}
 
+.btn-social.btn.btn-facebook {
+  color: #fff;
+  background-color: #3b5998;
+  border-color: rgba(0,0,0,0.2);
+}
 #page .btn-social:hover {
   color: #fff;
   border: 1px solid transparent;

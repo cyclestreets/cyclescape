@@ -1,26 +1,30 @@
 .sign-up-form
   %h1= t ".title"
-  = render "devise/shared/social_login"
-  = semantic_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
-    = render "devise/shared/error_messages", resource: resource
-    = f.inputs do
-      = f.input :full_name
-      = f.input :display_name
-      = f.input :email
-      = f.input :password
-      = f.input :password_confirmation, required: true
-      %li.input.required.stringish
-        = label_tag 'bicycle_wheels', class: 'label' do
-          = t('formtastic.labels.user.new.bicycle_wheels')
-          %abbr(title="required") *
-        = text_field_tag :bicycle_wheels
-        %p.inline-hints
-          = t('formtastic.hints.user.new.bicycle_wheels')
+  %section
+    %ul.tabs.styled-tabs
+      %li= link_to "Sign up via email", "#email"
+      = render "devise/shared/social_login", action: "Sign up"
 
-      %li.input.required.stringish{style: "display: none"}
-        = label_tag 'real_name', class: 'label' do
-          %abbr(title="required") *
-        = text_field_tag :real_name
-    = f.actions do
-      = f.action :submit
+    = semantic_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      = f.inputs do
+        = f.input :full_name
+        = f.input :display_name
+        = f.input :email
+        = f.input :password
+        = f.input :password_confirmation, required: true
+        %li.input.required.stringish
+          = label_tag 'bicycle_wheels', class: 'label' do
+            = t('formtastic.labels.user.new.bicycle_wheels')
+            %abbr(title="required") *
+          = text_field_tag :bicycle_wheels
+          %p.inline-hints
+            = t('formtastic.hints.user.new.bicycle_wheels')
+
+        %li.input.required.stringish{style: "display: none"}
+          = label_tag 'real_name', class: 'label' do
+            %abbr(title="required") *
+          = text_field_tag :real_name
+      = f.actions do
+        = f.action :submit
   = render "devise/shared/links"

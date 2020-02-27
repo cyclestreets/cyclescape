@@ -1,6 +1,9 @@
 .sign-in-form
   %h1= t ".title"
-  = render "devise/shared/social_login"
+  %section
+    %ul.tabs.styled-tabs
+      %li= link_to "Login via email", "#email"
+      = render "devise/shared/social_login", action: "Login"
   = semantic_form_for resource, as: resource_name, url: session_path(resource_name) do |f|
     = f.inputs do
       = f.input :email, input_html: {autofocus: true}
