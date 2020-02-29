@@ -55,6 +55,7 @@ class MessageThread < ApplicationRecord
   scope :approved,         -> { where(status: "approved") }
   scope :mod_queued,       -> { where(status: "mod_queued") }
   scope :is_private,       -> { where(privacy: PRIVATE) }
+  scope :is_open,          -> { where(closed: false) }
   scope :private_for, lambda { |usr|
     is_private.where(arel_table[:created_by_id].eq(usr.id).or(arel_table[:user_id].eq(usr.id)))
   }

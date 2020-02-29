@@ -61,6 +61,22 @@ describe Route::IssueApi do
       end
     end
 
+    context "with open threads" do
+      let(:open_threads) { (create :message_thread, :belongs_to_issue).issue }
+
+      before do
+        create :issue
+        create :message_thread, :belongs_to_issue, closed: true
+        create :message_thread, issue: open_threads
+        get "/api/issues", open_threads: true
+      end
+
+      it "only has the issue with open threads" do
+        expect(geojson_response.size).to eq(1)
+        expect(geojson_response[0]["id"]).to eq open_threads.id
+      end
+    end
+
     context "with bounding box" do
       let(:host) { "" }
       before do
