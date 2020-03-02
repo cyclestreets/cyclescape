@@ -195,8 +195,10 @@ class MessageThread < ApplicationRecord
     text = if mail.message.html_part
              # For multipart messages we pull out the html part content and use Javascript to remove the signature
              body = `./lib/sig_strip.js #{Shellwords.escape(mail.message.html_part.decoded)}`
-             body.gsub(%r{(</?html>|</?body>|</?head>|\r)}, "")
-                 .gsub(%r{<(/)?div}, "<\\1p")
+             # Remove <html> and <head> tags, convert <div> and <body> to <p> tags
+             # keeping all the attributes as most (but not all) are removed by rails sanatize.
+             body.gsub(%r{(</?html>|</?head>|\r)}, "")
+                 .gsub(%r{<(/)?div(.*?)>|<(/)?body(.*?)>}, "<\\1p\\2>")
            else
              # When there is no HTML we get the text part or just the message and use EmailReplyParser to remove the signature
              body = (mail.message.text_part || mail.message).decoded
@@ -205,7 +207,7 @@ class MessageThread < ApplicationRecord
              stripped = parsed.fragments.reject(&:hidden?).join("\n")
              h.simple_format(stripped)
            end
-    text = h.auto_link(text)
+    text = h.auto_link(text) # This also sanatizes the HTML
 
     open_by!(user) if closed
     new_message = messages.build(
