@@ -28,6 +28,7 @@ class ThreadMailer < ActionMailer::Base
               else
                 "mailers.thread_mailer.common.subject"
               end
+    group_name = "[#{@thread.group&.name}]" if @subscriber.memberships.count > 1
     deadlines = @message.components.select { |component| component.notification_name == :new_deadline_message }
     deadlines.each.with_index do |deadline, idx|
       cal = Icalendar::Calendar.new
@@ -36,7 +37,12 @@ class ThreadMailer < ActionMailer::Base
     end
     mail(
       to: subscriber.name_with_email,
-      subject: t(subject, title: @thread.title, count: @thread.messages.count, application_name: site_config.application_name),
+      subject: t(
+        subject,
+        title: @thread.title, count: @thread.messages.count,
+        application_name: site_config.application_name,
+        group_name: group_name
+      ),
       from: user_notification_address(message.created_by),
       references: message_chain(@message.in_reply_to, @thread),
       message_id: message_address(@message),

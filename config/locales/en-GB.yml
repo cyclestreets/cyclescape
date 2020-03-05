@@ -781,11 +781,11 @@
     thread_mailer:
       common:
         subject:
-          one: '[%{application_name}] %{title}'
-          other: 'Re: [%{application_name}] %{title}'
+          one: '[%{application_name}]%{group_name} %{title}'
+          other: 'Re: [%{application_name}]%{group_name} %{title}'
         committee_subject:
-          one: '[%{application_name}] [Committee] %{title}'
-          other: 'Re: [%{application_name}] [Committee] %{title}'
+          one: '[%{application_name}]%{group_name} [Committee] %{title}'
+          other: 'Re: [%{application_name}]%{group_name} [Committee] %{title}'
       digest:
         subject: '[%{application_name}] Digest for %{date}'
   message_thread:
