@@ -44,6 +44,9 @@ class window.LeafletMap
       """
     ).setPosition('bottomleft')
     @setCenter(center)
+    @map.on('baselayerchange', (e) ->
+      window.localStorage.setItem('map.baselayer.name', e.name)
+    )
     @geoInput = $("##{opts.geoinput}_loc_json")
     @buildCollistionLayer() if opts.collisions?
     @buildPhotoLayer(opts.photoselect) if opts.photos or opts.photoselect
@@ -105,15 +108,21 @@ class window.LeafletMap
 
   addLayers: (opts = {}) =>
     @baseLayers = {}
-    for tileServer, idx in $("#map-tiles").data("tileservers")
+    existingBaseName = window.localStorage.getItem('map.baselayer.name')
+    tileServers = $("#map-tiles").data("tileservers")
+    if existingBaseName not in (tileServer.name for tileServer in tileServers)
+      existingBaseName = null
+    for tileServer, idx in tileServers
       continue if (tileServer.url == "" or tileServer.name == "")
       options = jQuery.parseJSON(tileServer.options)
       tileLayer = if tileServer.type == "wms"
-         tileLayer = L.tileLayer.wms(tileServer.url, options)
+        L.tileLayer.wms(tileServer.url, options)
       else
-         L.tileLayer(tileServer.url, options)
+        L.tileLayer(tileServer.url, options)
       @baseLayers[tileServer.name] = tileLayer
-      tileLayer.addTo(@map) if idx == 0
+      if (existingBaseName == tileServer.name) || (!existingBaseName && idx == 0)
+        tileLayer.addTo(@map)
+
     additionalLayers = @remoteJSONLayer
     additionalLayers['Collisions'] = @collisionLayer if @collisionLayer
     additionalLayers['Photos'] = @photoLayer if @photoLayer
