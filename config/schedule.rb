@@ -43,10 +43,6 @@ every 1.day, at: "1:02 am" do
   rake "scheduled:new_planning_applications"
 end
 
-every 1.day, at: "2:15 am" do
-  rake "db:sessions:trim"
-end
-
 every 1.day, at: "2:02 am" do
   rake "scheduled:remove_old_planning_applications"
 end

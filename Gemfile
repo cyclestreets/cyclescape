@@ -75,7 +75,6 @@ gem "rack-cors", require: "rack/cors"
 gem "rakismet"
 gem "rollbar"
 
-gem "activerecord-session_store"
 gem "coffee-rails"
 gem "jquery-ui-rails", "~> 5.0.0"
 gem "sass-rails"
