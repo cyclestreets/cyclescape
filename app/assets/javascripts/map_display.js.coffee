@@ -353,8 +353,8 @@ class window.LeafletMap
     if feature
       @drawFeature(layer) for layer in L.geoJson(feature).getLayers()
     else
-      # enable area / polygon draw as standard
-      $(".leaflet-draw-draw-polygon")[0].click()
+      # enable point / marker draw as standard
+      $(".leaflet-draw-draw-marker")[0].click()
       $('.icon-undo').css(opacity: 0.3)
 
     # Bind our icons to the Leaflet draw icons
