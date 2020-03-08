@@ -23,6 +23,14 @@ authorization do
     has_permission_on :issues, to: %i[edit update destroy]
     has_permission_on :"library/documents", :library_documents, :library_notes, to: :manage
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: %i[manage edit_all_fields]
+    has_permission_on :message_threads do
+      to :open
+      if_attribute closed: is { true }
+    end
+    has_permission_on :message_threads do
+      to :close
+      if_attribute closed: is { false }
+    end
     has_permission_on :messages, to: %i[censor approve reject]
     has_permission_on :site_comments, to: :manage
     has_permission_on :user_prefs, :user_profiles, to: :manage
