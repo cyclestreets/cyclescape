@@ -60,6 +60,7 @@ class IssuesController < ApplicationController
   end
 
   def edit
+    @issue.description = helpers.simple_format(@issue.description) if @issue.plain_text?
     @start_location = issue.location
   end
 
