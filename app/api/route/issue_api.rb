@@ -51,7 +51,7 @@ module Route
                                    latest_activity_at: issue.latest_activity_at.to_i,
                                    latest_activity_at_iso: issue.latest_activity_at,
                                    closed: issue.closed?,
-                                   centre: RGeo::GeoJSON::Feature.new(issue.centre)
+                                   centre: { lon: issue.centre.x, lat: issue.centre.y }
                                   )
       end
 
