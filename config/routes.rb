@@ -178,6 +178,7 @@ Rails.application.routes.draw do
 
   resources :tags, only: %i[show index] do
     get :autocomplete_tag_name, as: :autocomplete, on: :collection
+    get :all_geometries, on: :member
   end
   resource :home, only: [:show], controller: "home"
 

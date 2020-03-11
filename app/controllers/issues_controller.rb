@@ -2,6 +2,7 @@
 
 class IssuesController < ApplicationController
   include MessageCreator
+  include IssueFeature
 
   filter_access_to %i[edit update destroy], attribute_check: true
   protect_from_forgery except: :vote_detail
@@ -139,29 +140,6 @@ class IssuesController < ApplicationController
     return @issues.first.location unless @issues.empty?
 
     SiteConfig.first.nowhere_location
-  end
-
-  def issue_feature(issue, bbox = nil)
-    geom = bbox.to_geometry if bbox
-    creator_name = if permitted_to? :view_profile, issue.created_by
-                     issue.created_by.name
-                   else
-                     issue.created_by.display_name_or_anon
-                   end
-    creator_url = if permitted_to? :view_profile, issue.created_by
-                    view_context.url_for user_profile_path(issue.created_by)
-                  else
-                    "#"
-                  end
-
-    issue.loc_feature(thumbnail: issue.medium_icon_path,
-                      anchor: issue.medium_icon_anchor,
-                      image_url: issue.tip_icon_path,
-                      title: issue.title,
-                      size_ratio: issue.size_ratio(geom),
-                      url: view_context.url_for(issue),
-                      created_by: creator_name,
-                      created_by_url: creator_url)
   end
 
   def issue

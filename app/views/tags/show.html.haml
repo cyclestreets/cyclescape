@@ -2,6 +2,11 @@
   %h1= t ".heading", name: @tag.name
   - if current_group
     %p= t ".introduction_groupwise_html", area_of_group_link: link_to(t(".area_of_group", group_name: current_group.name), root_path)
+  - map_id = "leaflet-all-tags"
+  .map-tag{id: map_id}
+  .hidden
+    .map-data{"data-center" => @start_location,
+      "data-opts" => {domid: map_id, search: true, remote: {'Issues' => all_geometries_tag_path(@tag, :json)}}.to_json}
 
   = render partial: 'shared/search'
 - else
