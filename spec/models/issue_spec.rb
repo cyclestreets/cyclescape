@@ -22,6 +22,29 @@ describe Issue do
 
   it { is_expected.to validate_length_of(:title).is_at_most(80) }
 
+  context "with a pre-existing long titled issue" do
+    let(:issue) do
+      build(:issue, title: "A long title" * 10).tap { |iss| iss.save!(validate: false) }
+    end
+
+    context "when not changing the issue title" do
+      it "is valid" do
+        expect(issue.title.length).to be > 80
+        expect(issue).to be_valid
+      end
+    end
+
+    context "when not changing the issue title" do
+      before do
+        issue.title = issue.title[0..-2]
+      end
+
+      it "is not valid" do
+        expect(issue).not_to be_valid
+      end
+    end
+  end
+
   describe "newly created" do
     subject { create(:issue) }
 

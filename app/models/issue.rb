@@ -28,7 +28,8 @@ class Issue < ApplicationRecord
 
   accepts_nested_attributes_for :threads, reject_if: :do_not_start_discussion
 
-  validates :title, presence: true, length: { maximum: 80 }
+  validates :title, presence: true
+  validates :title, length: { maximum: 80 }, if: :title_changed?
   validates :description, :location, :created_by, presence: true
   validates :tags_string, presence: true, on: :create
   validates :size, numericality: { less_than: Geo::ISSUE_MAX_AREA }
