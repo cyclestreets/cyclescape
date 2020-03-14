@@ -1,5 +1,6 @@
 require('leaflet-search/dist/leaflet-search.src.js')
 require('leaflet-draw')
+require('leaflet-layerjson')
 
 class window.LeafletMap
   @default_marker_anchor: [30 / 2, 42]
@@ -64,10 +65,10 @@ class window.LeafletMap
     @drawnFeatures = {}
     @
 
-  featurePointToLayer: (feature, latlng) =>
-    return L.marker(latlng).addTo @map unless feature.properties.thumbnail
+  featurePointToLayer: (feature, latlng) ->
+    return L.marker(latlng) unless feature.properties.thumbnail
     icon = new L.Icon(iconUrl: feature.properties.thumbnail, iconAnchor: feature.properties.anchor)
-    L.marker(latlng, {icon: icon}).addTo @map
+    L.marker(latlng, {icon: icon})
 
   addStaticFeature: (collection) ->
     L.geoJson(collection, {
@@ -76,29 +77,29 @@ class window.LeafletMap
     return
 
   buildRemoteLayer: (url, name) ->
-    remoteLayer = L.geoJson(null, {
-      pointToLayer: @featurePointToLayer.bind(@)
-      fillOpacity: 0.1
-      fillColor: 'white'
-      onEachFeature: (feature, layer) ->
-        img = if feature.properties.image_url
-          "<img src='#{feature.properties.image_url}' width='37' height='37'>"
-        else
-          ''
-        layer.bindPopup( "#{img}
-         <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3>
-         <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
-        )
-    }).addTo(@map)
+    featurePointToLayer = @featurePointToLayer
     @remoteJSONLayer[name] = new L.LayerJSON({
       url: "#{url}?bbox={lon1},{lat1},{lon2},{lat2}"
       propertyItems: 'features'
       propertyLoc: 'geometry.coordinates'
       updateOutBounds: false
-      minShift: 500
       hashGenerator: (data) ->
         data.id
-      dataToMarker: remoteLayer.addData.bind(remoteLayer)
+      dataToMarker: (data)->
+        L.geoJson(data,
+        pointToLayer: featurePointToLayer
+        fillOpacity: 0.1
+        fillColor: 'white'
+        onEachFeature: (feature, layer) ->
+          img = if feature.properties.image_url
+            "<img src='#{feature.properties.image_url}' width='37' height='37'>"
+          else
+            ''
+          layer.bindPopup( "#{img}
+           <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3>
+           <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
+          )
+        )
     }).addTo(@map)
 
   setCenter: (center) ->

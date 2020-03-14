@@ -31,7 +31,6 @@
 //= require jquery.tagsinput
 //= require jquery-ui-sliderAccess
 //= require jquery-ui-timepicker-addon.min
-//= require leaflet-layerjson.src.js
 //= require jqcloud
 //= require social
 //= require location_preset
