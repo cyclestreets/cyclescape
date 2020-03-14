@@ -6,7 +6,7 @@
   .map-tag{id: map_id}
   .hidden
     .map-data{"data-center" => @start_location,
-      "data-opts" => {domid: map_id, search: true, remote: {'Issues' => all_geometries_tag_path(@tag, :json)}}.to_json}
+      "data-opts" => {domid: map_id, search: true, remote: [{name: 'Issues', url: all_geometries_tag_path(@tag, :json), color: 'black'}]}.to_json}
 
   = render partial: 'shared/search'
 - else

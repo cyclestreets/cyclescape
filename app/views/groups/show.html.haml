@@ -32,7 +32,7 @@
             .map#map
             .hidden
               .map-data{"data-center" => location_to_geojson(l),
-                "data-opts" => {remote: {'Issues' => all_geometries_issues_path(:json)}}.to_json}
+                "data-opts" => {remote: [{name: 'Issues', url: all_geometries_issues_path(:json)}]}.to_json}
         .issue-list
           - if @recent_issues.empty?
             %p= t ".no_issues"

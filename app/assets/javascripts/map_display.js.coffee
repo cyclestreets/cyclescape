@@ -52,7 +52,8 @@ class window.LeafletMap
     @buildCollistionLayer() if opts.collisions?
     @buildPhotoLayer(opts.photoselect) if opts.photos or opts.photoselect
     @remoteJSONLayer = {}
-    @buildRemoteLayer(url, name) for own name, url of opts.remote
+    if opts.remote
+      @buildRemoteLayer(remoteLayer) for remoteLayer in opts.remote
     @addLayers(opts)
     @addSearchControl() unless opts.nosearch
     @deletePopup = opts.deletepopup
@@ -76,10 +77,10 @@ class window.LeafletMap
     }).addTo @map
     return
 
-  buildRemoteLayer: (url, name) ->
+  buildRemoteLayer: (opts) ->
     featurePointToLayer = @featurePointToLayer
-    @remoteJSONLayer[name] = new L.LayerJSON({
-      url: "#{url}?bbox={lon1},{lat1},{lon2},{lat2}"
+    @remoteJSONLayer[opts.name] = new L.LayerJSON({
+      url: "#{opts.url}?bbox={lon1},{lat1},{lon2},{lat2}"
       propertyItems: 'features'
       propertyLoc: 'geometry.coordinates'
       updateOutBounds: false
@@ -90,6 +91,7 @@ class window.LeafletMap
         pointToLayer: featurePointToLayer
         fillOpacity: 0.1
         fillColor: 'white'
+        color: opts.color || '#03f'
         onEachFeature: (feature, layer) ->
           img = if feature.properties.image_url
             "<img src='#{feature.properties.image_url}' width='37' height='37'>"
