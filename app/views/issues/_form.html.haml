@@ -1,5 +1,5 @@
 = f.inputs do
-  = f.input :title, input_html: { data: { error: t(".max_length_error_html") } }
+  = f.input :title, input_html: { data: { error: t(".max_length_error_html") }, maxlength: Issue::MAXLENGTH }
   - hint = (f.object.retained_photo ? "#{t('formtastic.hints.currently')} #{f.object.photo.name}" : t('formtastic.hints.issue.new.photo'))
   = f.input :photo, as: :file, hint: hint, input_html: { accept: 'image/*' }
   = f.input :retained_photo, as: :hidden

@@ -7,6 +7,8 @@ class Issue < ApplicationRecord
   include Photo
   include BodyFormat
 
+  MAXLENGTH = 80
+
   searchable auto_index: false do
     text :title, :description, :tags_string, :id
     time :latest_activity_at, stored: true, trie: true
@@ -29,7 +31,7 @@ class Issue < ApplicationRecord
   accepts_nested_attributes_for :threads, reject_if: :do_not_start_discussion
 
   validates :title, presence: true
-  validates :title, length: { maximum: 80 }, if: :title_changed?
+  validates :title, length: { maximum: MAXLENGTH }, if: :title_changed?
   validates :description, :location, :created_by, presence: true
   validates :tags_string, presence: true, on: :create
   validates :size, numericality: { less_than: Geo::ISSUE_MAX_AREA }
