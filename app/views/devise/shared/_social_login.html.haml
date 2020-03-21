@@ -1,8 +1,8 @@
 %li
-  =link_to user_facebook_omniauth_authorize_path, class: "btn btn-block btn-social btn-facebook", method: :post do
+  =link_to user_facebook_omniauth_authorize_url(subdomain: SubdomainConstraint.subdomain("www")), class: "btn btn-block btn-social btn-facebook", method: :post do
     %i{class: "fa fa-facebook"}
     = "#{action} with Facebook"
 %li
-  =link_to user_twitter_omniauth_authorize_path, class: "btn btn-block btn-social btn-twitter", method: :post do
+  =link_to user_twitter_omniauth_authorize_url(subdomain: SubdomainConstraint.subdomain("www")), class: "btn btn-block btn-social btn-twitter", method: :post do
     %i{class: "fa fa-twitter"}
     = "#{action} with Twitter"
