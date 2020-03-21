@@ -61,7 +61,7 @@ class PlanningApplicationWorker
 
         db_app = PlanningApplication
                  .find_or_initialize_by uid: remote_pa["uid"], authority_name: remote_pa["authority_name"]
-        %i[address postcode description url start_date].each do |attr|
+        %i[address postcode description url start_date app_size app_state app_type associated_id].each do |attr|
           db_app[attr] = remote_pa[attr.to_s]
         end
         db_app.location = "POINT(#{remote_pa['lng']} #{remote_pa['lat']})"

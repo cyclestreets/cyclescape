@@ -3,6 +3,29 @@
 
 class PlanningApplication < ApplicationRecord
   NOS_HIDE_VOTES = 2
+  APP_SIZES = %w[Large Medium Small].freeze
+  APP_STATES = {
+    "Undecided" => "The application is currently active, no decision has been made",
+    "Permitted" => "The application was approved",
+    "Conditions" => "The application was approved, but conditions were imposed",
+    "Rejected" => "The application was refused",
+    "Withdrawn" => "The application was withdrawn before a decision was taken",
+    "Referred" => "The application was referred to government or to another authority",
+    "Unresolved" => "The application is no longer active but no decision was made eg split decision",
+    "Other" => "Status not known"
+  }.freeze
+
+  APP_TYPES = {
+    "Full" => "=> Full and householder planning applications",
+    "Outline" => "Proposals prior to a full application, including assessments, scoping opinions, outline applications etc",
+    "Amendment" => "Amendments or alterations arising from existing or previous applications",
+    "Conditions" => "Discharge of conditions imposed on existing applications",
+    "Heritage" => "Conservation issues and listed buildings",
+    "Trees" => "Tree and hedge works",
+    "Advertising" => "Advertising and signs",
+    "Telecoms" => "Telecommunications including phone masts",
+    "Other" => "All other types eg agricultural, electrical",
+  }.freeze
 
   include Locatable
 
@@ -22,6 +45,10 @@ class PlanningApplication < ApplicationRecord
 
   validates :uid, :url, :authority_name, :authority_param, presence: true
   validates :uid, uniqueness: { scope: :authority_param }
+  validates :app_size, inclusion: { in: APP_SIZES, allow_nil: true }
+  validates :app_state, inclusion: { in: APP_STATES.keys, allow_nil: true }
+  validates :app_type, inclusion: { in: APP_TYPES.keys, allow_nil: true }
+
   before_save :set_relevant
   before_validation :set_authority_param, on: :create
 
@@ -92,26 +119,28 @@ end
 #
 # Table name: planning_applications
 #
-#  id                      :integer          not null, primary key
-#  address                 :text
-#  authority_name          :string(255)
-#  authority_param         :string
-#  description             :text
-#  hide_votes_count        :integer          default(0)
-#  location                :geometry({:srid= geometry, 4326
-#  openlylocal_council_url :string(255)
-#  postcode                :string(255)
-#  relevant                :boolean          default(TRUE), not null
-#  start_date              :date
-#  uid                     :string(255)      not null
-#  url                     :text
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  zzz_issue_id            :integer
+#  id               :integer          not null, primary key
+#  address          :text
+#  app_size         :string
+#  app_state        :string
+#  app_type         :string
+#  authority_name   :string(255)
+#  authority_param  :string
+#  description      :text
+#  hide_votes_count :integer          default(0)
+#  location         :geometry({:srid= geometry, 4326
+#  postcode         :string(255)
+#  relevant         :boolean          default(TRUE), not null
+#  start_date       :date
+#  uid              :string(255)      not null
+#  url              :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  associated_id    :string
 #
 # Indexes
 #
+#  index_planning_applications_on_associated_id            (associated_id)
 #  index_planning_applications_on_location                 (location) USING gist
 #  index_planning_applications_on_uid_and_authority_param  (uid,authority_param) UNIQUE
-#  index_planning_applications_on_zzz_issue_id             (zzz_issue_id)
 #
