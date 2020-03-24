@@ -67,7 +67,6 @@ describe Route::IssueApi do
       before do
         create :issue
         create :message_thread, :belongs_to_issue, closed: true
-        create :message_thread, :belongs_to_issue, :belongs_to_group, closed: false, privacy: "group"
         create :message_thread, issue: open_threads
         get "/api/issues", open_threads: true
       end

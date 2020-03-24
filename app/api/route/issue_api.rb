@@ -85,7 +85,7 @@ module Route
         scope = scope.before_date(params[:end_date]) if params[:end_date]
         scope = scope.after_date(params[:start_date]) if params[:start_date]
         scope = scope.pg_fulltext_search(params[:term]) if params[:term]
-        scope = scope.joins(:threads).merge(MessageThread.is_open.is_public).distinct if params[:open_threads]
+        scope = scope.joins(:threads).merge(MessageThread.is_open).distinct if params[:open_threads]
         scope = paginate scope
         issues = scope.map { |issue| issue_feature(issue) }
         collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)
