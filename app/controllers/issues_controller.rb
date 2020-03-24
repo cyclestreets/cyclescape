@@ -94,7 +94,7 @@ class IssuesController < ApplicationController
   def all_geometries
     bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
     issues = geom_issue_scope.by_most_recent.limit(50).includes(:created_by)
-    issues = issues.intersects_not_covered(bbox.to_geometry) if bbox
+    issues = issues.with_center_inside(bbox.to_geometry) if bbox
 
     # TODO: refactor this into decorater
     decorated_issues = issues.select_area.sort_by(&:area).map { |issue| issue_feature(IssueDecorator.decorate(issue), bbox) }

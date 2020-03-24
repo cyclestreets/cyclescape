@@ -237,27 +237,22 @@ describe Issue do
     context "different issue locations" do
       let(:factory) { RGeo::Geos.factory(srid: 4326) }
       let(:bbox) { factory.parse_wkt("POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))") }
+      let!(:issue_surrounding_center_far_away) { create(:issue, location: "POLYGON ((-0.1 -0.1, -0.1 0.201, 0.201 0.201, 0.201 -0.1, -0.1 -0.1))") }
       let!(:issue_entirely_surrounding) { create(:issue, location: "POLYGON ((0 0, 0 0.3, 0.3 0.3, 0.3 0, 0 0))") }
       let!(:issue_entirely_contained) { create(:issue, location: "POLYGON ((0.12 0.12, 0.12 0.18, 0.18 0.18, 0.18 0.12, 0.12 0.12))") }
       let!(:issue_not_intersecting) { create(:issue, location: "POLYGON ((1.1 1.1, 1.1 1.2, 1.2 1.2, 1.2 1.1, 1.1 1.1))") }
       let!(:issue_half_in_half_out) { create(:issue, location: "POLYGON ((0 0.12, 0 0.18, 0.3 0.18, 0.3 0.12, 0 0.12))") }
 
-      it "should return intersecting issues" do
-        issues = Issue.intersects(bbox).to_a
-        expect(issues.length).to eql(3)
-        expect(issues).to include(issue_entirely_surrounding)
-        expect(issues).to include(issue_entirely_contained)
-        expect(issues).to include(issue_half_in_half_out)
-        expect(issues).not_to include(issue_not_intersecting)
+      it "returns intersecting issues" do
+        expect(Issue.intersects(bbox).to_a).to contain_exactly(
+          issue_entirely_surrounding, issue_surrounding_center_far_away, issue_entirely_contained, issue_half_in_half_out
+        )
       end
 
-      it "should return intersecting but not covering issues" do
-        issues = Issue.intersects_not_covered(bbox).to_a
-        expect(issues.length).to eql(2)
-        expect(issues).to include(issue_entirely_contained)
-        expect(issues).to include(issue_half_in_half_out)
-        expect(issues).not_to include(issue_entirely_surrounding)
-        expect(issues).not_to include(issue_not_intersecting)
+      it "returns issues with centers in the box" do
+        expect(Issue.with_center_inside(bbox).to_a).to contain_exactly(
+          issue_entirely_contained, issue_half_in_half_out, issue_entirely_surrounding
+        )
       end
     end
   end

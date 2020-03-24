@@ -70,13 +70,14 @@ module Route
         when :size
           scope = scope.order_by_size(params[:order_direction])
         end
-        scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
-        if params[:geo_collection]
+        if params[:bbox].present?
+          scope = scope.with_center_inside(params[:bbox].to_geometry)
+        elsif params[:geo_collection]
           geo_collection = params[:geo_collection].map do |itm|
             itm_geo = itm.geometry
             itm_geo.valid? ? itm_geo : itm_geo.simplify(0.5)
           end.inject(&:union)
-          scope = scope.intersects_not_covered(geo_collection)
+          scope = scope.with_center_inside(geo_collection)
         end
         scope = scope.where(id: params[:id]) if params[:id]
         scope = scope.where_tag_names_in(params[:tags]) if params[:tags]

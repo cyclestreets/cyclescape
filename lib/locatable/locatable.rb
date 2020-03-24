@@ -36,10 +36,15 @@ module Locatable
       end
     end
 
-    # define a variant of intersects that doesn't include entirely surrouding polygons
-    def intersects_not_covered(loc)
+    def with_center_inside(loc)
       sanatize_multi_geoms(loc) do |l|
-        intersects(l).where("NOT ST_CoveredBy(?, ST_Envelope(location))", [l])
+        where(
+          "ST_DWithin(
+            ST_Centroid(location),
+            ?,
+            sqrt(ST_Area(?))/10
+          )", [l], [l]
+        )
       end
     end
 

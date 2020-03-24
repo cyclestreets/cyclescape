@@ -83,7 +83,9 @@ class window.LeafletMap
       url: "#{opts.url}?bbox={lon1},{lat1},{lon2},{lat2}"
       propertyItems: 'features'
       propertyLoc: 'geometry.coordinates'
-      updateOutBounds: false
+      caching: false
+      updateMarkers: false
+      minShift: 10
       hashGenerator: (data) ->
         data.id
       dataToMarker: (data)->

@@ -57,7 +57,7 @@ class TagsController < ApplicationController
     bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
     issues = Issue.find_by_tag(tag).by_most_recent
     issues = issues.intersects(current_group.profile.location) if current_group
-    issues = issues.intersects_not_covered(bbox.to_geometry) if bbox
+    issues = issues.with_center_inside(bbox.to_geometry) if bbox
 
     # TODO: refactor this into decorater
     decorated_issues = issues.select_area.order(:area).map { |issue| issue_feature(IssueDecorator.decorate(issue), bbox) }

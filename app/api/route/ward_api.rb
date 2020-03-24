@@ -16,7 +16,7 @@ module Route
     get :wards do
       scope = Ward.order_by_size
       scope = scope.intersects(params[:geo]) if params[:geo]
-      scope = scope.intersects_not_covered(params[:bbox].to_geometry) if params[:bbox].present?
+      scope = scope.with_center_inside(params[:bbox].to_geometry) if params[:bbox].present?
       scope = paginate scope
       features = scope.map { |const| RGeo::GeoJSON::Feature.new(const.location, nil, name: const.name) }
       collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(features)
