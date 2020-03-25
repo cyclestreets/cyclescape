@@ -63,17 +63,16 @@ describe Route::IssueApi do
 
     context "with open threads" do
       let(:open_threads) { (create :message_thread, :belongs_to_issue).issue }
+      let!(:no_thread) { create :issue }
 
       before do
-        create :issue
         create :message_thread, :belongs_to_issue, closed: true
         create :message_thread, issue: open_threads
         get "/api/issues", open_threads: true
       end
 
       it "only has the issue with open threads" do
-        expect(geojson_response.size).to eq(1)
-        expect(geojson_response[0]["id"]).to eq open_threads.id
+        expect(geojson_response.map { |iss| iss["id"] }).to contain_exactly(open_threads.id, no_thread.id)
       end
     end
 

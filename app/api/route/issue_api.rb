@@ -16,7 +16,7 @@ module Route
       optional :end_date, types: [DateTime, Date], desc: "No issues after the end date are returned"
       optional :start_date, types: [DateTime, Date], desc: "No issues before the start date are returned"
       optional :term, type: String, desc: "Searches the title, description and tags. All words MUST appear in issue, OR and NOT are not yet implemented"
-      optional :open_threads, type: Boolean, desc: "Show only issues where there is at least one open thread, default is false so that all issue are shown"
+      optional :open_threads, type: Boolean, desc: "Exclude issues where all threads are closed, default is false so that all issue are shown"
       optional(:geo_collection,
                type: Array[RGeo::GeoJSON::Feature],
                desc: 'Return only issues inside this GeoJSON feature collection, e.g. {"type":"FeatureCollection","features":[{"type":"Polygon","coordinates":[[[-1.5724,53.795],[-1.54289,53.8083],[-1.54426,53.79010],[-1.5724,53.7957]]]}]}',
@@ -85,7 +85,7 @@ module Route
         scope = scope.before_date(params[:end_date]) if params[:end_date]
         scope = scope.after_date(params[:start_date]) if params[:start_date]
         scope = scope.pg_fulltext_search(params[:term]) if params[:term]
-        scope = scope.joins(:threads).merge(MessageThread.is_open).distinct if params[:open_threads]
+        scope = scope.left_joins(:threads).merge(MessageThread.where(closed: [nil, false])).distinct if params[:open_threads]
         scope = paginate scope
         issues = scope.map { |issue| issue_feature(issue) }
         collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(issues)
