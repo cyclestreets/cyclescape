@@ -27,6 +27,17 @@ describe DashboardsController, type: :controller do
         expect(subject.body).to_not include(group_thread.title)
         expect(subject.body).to_not include(committee_thread.title)
       end
+
+      context "with negative pages" do
+        subject do
+          Sunspot.commit
+          get :search, params: { query: "Bananas", issue_page: "-1"}
+        end
+
+        it "doesn't error" do
+          expect(subject.body).to include(public_thread.title)
+        end
+      end
     end
 
     context "not in a group" do
