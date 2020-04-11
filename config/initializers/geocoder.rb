@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
 module Geocoder
-  cs_api_file = Rails.root.join("config", "cyclestreets")
-  API_KEY = if cs_api_file.exist?
-              cs_api_file.read.strip.freeze
-            else
-              ""
-            end
+  API_KEY = ENV["CYCLESTREETS"]
   CS_BASE_URL    = "https://api.cyclestreets.net/v2/"
   GEO_URL        = "#{CS_BASE_URL}geocoder"
   COLLISIONS_URL = "#{CS_BASE_URL}collisions.locations"

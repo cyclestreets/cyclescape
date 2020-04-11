@@ -3,15 +3,6 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 
-def secret(name)
-  file = Rails.root.join("config", name)
-  if Rails.env.test? || Rails.env.development?
-    File.exist?(file) ? File.read(file).strip : ""
-  else
-    File.read(file).strip
-  end
-end
-
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -226,8 +217,8 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, "APP_ID", "APP_SECRET", :scope => "user,public_repo"
-  config.omniauth :facebook, secret("facebook_app_id"), secret("facebook_app_secret")
-  config.omniauth :twitter, secret("twitter_app_id"), secret("twitter_app_secret")
+  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"]
+  config.omniauth :twitter, ENV["TWITTER_APP_ID"], ENV["TWITTER_APP_SECRET"]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

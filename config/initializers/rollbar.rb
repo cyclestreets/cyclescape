@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
 Rollbar.configure do |config|
-  access_token_file = Rails.root.join("config", "rollbar")
-
-  if access_token_file.exist?
-    config.access_token = access_token_file.read.strip
+  if ENV["ROLLBAR"]
+    config.access_token = ENV["ROLLBAR"]
   else
     config.enabled = false
   end
