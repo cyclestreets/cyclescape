@@ -13,6 +13,7 @@ FactoryBot.define do
     default_locale { "en-GB" }
     timezone { "Europe/London" }
     geocoder_url { "https://api.cyclestreets.net/v2/geocoder" }
+    geocoder_key { "cyclestreets_api_key" }
     email_domain { "cyclescape.org" }
     default_email { "info@example.com" }
     blog_url { "http://blog.cyclescape.org/" }
