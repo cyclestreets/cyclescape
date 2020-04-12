@@ -41,7 +41,7 @@ class Admin::SiteConfigsController < ApplicationController
       :ga_account_id, :ga_base_domain,
       :default_email, :geocoder_url,
       :geocoder_key, :blog_url, :blog_user_guide_url, :admin_email,
-      :blog_about_url, :google_street_view_api_key
+      :blog_about_url, :google_street_view_api_key, :planit_api_key
     )
   end
 end

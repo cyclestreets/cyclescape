@@ -19,5 +19,6 @@ FactoryBot.define do
     blog_url { "http://blog.cyclescape.org/" }
     blog_user_guide_url { "http://blog.cyclescape.org/guide/" }
     admin_email { "cyclescape-comment@cy.net" }
+    planit_api_key { "planit_api_key" }
   end
 end

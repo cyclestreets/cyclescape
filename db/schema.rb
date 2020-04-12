@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_08_215608) do
+ActiveRecord::Schema.define(version: 2020_04_12_221843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -542,6 +542,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_215608) do
     t.string "tile_server2_options", default: "{}", null: false
     t.string "tile_server3_options", default: "{}", null: false
     t.string "google_street_view_api_key"
+    t.string "planit_api_key"
   end
 
   create_table "street_view_messages", id: :serial, force: :cascade do |t|
