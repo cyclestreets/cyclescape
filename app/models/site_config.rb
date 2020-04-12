@@ -78,6 +78,7 @@ end
 #  google_street_view_api_key :string
 #  logo_uid                   :string
 #  nowhere_location           :geometry({:srid= not null, geometry, 4326
+#  planit_api_key             :string
 #  small_logo_uid             :string
 #  tile_server1_name          :string           default("OpenCycleMap"), not null
 #  tile_server1_options       :string           default("{}"), not null

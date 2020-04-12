@@ -77,13 +77,20 @@ class PlanningApplicationWorker
       dates = { start_date: (@end_date - 14.days + (5 * days_offset).days),
                 end_date: (@end_date - 10.days + (5 * days_offset).days) }
     end
-
+    api_query =
+      if SiteConfig.first.planit_api_key
+        { apikey: SiteConfig.first.planit_api_key }
+      else
+        {}
+      end
     {
       method: :get, query:
-      { auth: authority,
+      api_query.merge(
+        auth: authority,
         start_date: dates[:start_date].to_date.to_s,
         end_date: dates[:end_date].to_date.to_s,
-        pg_sz: 500, sort: "-start_date" }
+        pg_sz: 500, sort: "-start_date"
+      )
     }
   end
 end
