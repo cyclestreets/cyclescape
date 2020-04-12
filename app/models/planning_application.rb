@@ -134,6 +134,7 @@ end
 #  start_date       :date
 #  uid              :string(255)      not null
 #  url              :text
+#  when_updated     :datetime
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  associated_id    :string

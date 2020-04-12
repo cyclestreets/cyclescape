@@ -427,6 +427,7 @@ ActiveRecord::Schema.define(version: 2020_04_12_221843) do
     t.string "app_size"
     t.string "app_state"
     t.string "app_type"
+    t.datetime "when_updated"
     t.string "associated_id"
     t.index ["associated_id"], name: "index_planning_applications_on_associated_id"
     t.index ["location"], name: "index_planning_applications_on_location", using: :gist
