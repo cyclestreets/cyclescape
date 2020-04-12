@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-
-
 class SiteConfig < ApplicationRecord
   TILE_SERVER_TYPES = %w[layers wms].freeze
 
