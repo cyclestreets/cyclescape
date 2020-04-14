@@ -4,7 +4,7 @@ Cyclescape::Application.config.rakismet.key =
   if %w[development test].include? Rails.env
     "development"
   else
-    ENV["AKISMET"]
+    ENV.fetch("AKISMET")
   end
 
 Cyclescape::Application.config.rakismet.url = "http://www.cyclescape.org/"

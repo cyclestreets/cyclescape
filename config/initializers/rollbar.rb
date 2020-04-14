@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rollbar.configure do |config|
-  if ENV["ROLLBAR"]
-    config.access_token = ENV["ROLLBAR"]
+  if ENV["ROLLBAR"] || %w[development test].include?(Rails.env)
+    config.access_token = ENV.fetch("ROLLBAR")
   else
     config.enabled = false
   end
