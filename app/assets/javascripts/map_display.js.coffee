@@ -86,8 +86,8 @@ class window.LeafletMap
       caching: false
       updateMarkers: false
       minShift: 10
-      hashGenerator: (data) ->
-        data.id
+      cacheId: (data) ->
+        data.properties.id
       dataToMarker: (data)->
         L.geoJson(data,
         pointToLayer: featurePointToLayer
@@ -160,13 +160,17 @@ class window.LeafletMap
       propertyLoc: 'geometry.coordinates'
       locAsGeoJSON: true
       minShift: 200
+      caching: false
+      updateMarkers: false
+      layerTarget: @photoLayer
+      cacheId: (data) ->
+        data.properties.id
       dataToMarker: (feature, latlng) =>
-        return unless feature.properties.hasPhoto
         iconProperties = feature.properties.iconProperties
         iconProperties.iconUrl = CONSTANTS.geocoder.cyclestreetsUrl + iconProperties.iconUrl
         iconProperties.shadowUrl = CONSTANTS.geocoder.cyclestreetsUrl + iconProperties.shadowUrl
         icon = new L.Icon(iconProperties)
-        marker = new L.marker(latlng, {icon: icon}).addTo @photoLayer
+        marker = new L.marker(latlng, {icon: icon})
         # Declarations
         id = feature.properties.id
         latitude = feature.geometry.coordinates[1]
@@ -190,7 +194,7 @@ class window.LeafletMap
         )
         popup.openPopup() if @popUpID == id
 
-        return
+        return marker
     })
 
   buildCollistionLayer: =>
@@ -209,6 +213,10 @@ class window.LeafletMap
       propertyItems: 'features'
       propertyLoc: ['properties.latitude','properties.longitude']
       minShift: 200
+      caching: false
+      updateMarkers: false
+      cacheId: (data) ->
+        data.properties.id
       dataToMarker: (feature, latlng) =>
         props = lookup[feature.properties.severity]
         marker = new L.CircleMarker(latlng, props).addTo @collisionLayer
