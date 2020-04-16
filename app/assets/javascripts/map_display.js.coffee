@@ -84,10 +84,8 @@ class window.LeafletMap
       propertyItems: 'features'
       propertyLoc: 'geometry.coordinates'
       caching: false
-      updateMarkers: false
+      propertyId: 'properties.id'
       minShift: 10
-      hashGenerator: (data) ->
-        data.id
       dataToMarker: (data)->
         L.geoJson(data,
         pointToLayer: featurePointToLayer
@@ -159,14 +157,15 @@ class window.LeafletMap
       propertyItems: 'features'
       propertyLoc: 'geometry.coordinates'
       locAsGeoJSON: true
-      minShift: 200
+      propertyId: 'properties.id'
+      minShift: 10
+      caching: false
       dataToMarker: (feature, latlng) =>
-        return unless feature.properties.hasPhoto
         iconProperties = feature.properties.iconProperties
         iconProperties.iconUrl = CONSTANTS.geocoder.cyclestreetsUrl + iconProperties.iconUrl
         iconProperties.shadowUrl = CONSTANTS.geocoder.cyclestreetsUrl + iconProperties.shadowUrl
         icon = new L.Icon(iconProperties)
-        marker = new L.marker(latlng, {icon: icon}).addTo @photoLayer
+        marker = new L.marker(latlng, {icon: icon})
         # Declarations
         id = feature.properties.id
         latitude = feature.geometry.coordinates[1]
@@ -190,8 +189,14 @@ class window.LeafletMap
         )
         popup.openPopup() if @popUpID == id
 
-        return
+        return marker
     })
+
+    # https://github.com/stefanocudini/leaflet-layerJSON/issues/19
+    oldOnRemove = @photoLayer.onRemove.bind(@photoLayer)
+    @photoLayer.onRemove = (map)->
+      oldOnRemove(map)
+      @._markersCache = {}
 
   buildCollistionLayer: =>
     lookup = {
@@ -208,17 +213,26 @@ class window.LeafletMap
       url: "#{CONSTANTS.geocoder.collisionsUrl}?#{$.param(params)}&bbox={lon1},{lat1},{lon2},{lat2}"
       propertyItems: 'features'
       propertyLoc: ['properties.latitude','properties.longitude']
-      minShift: 200
+      minShift: 10
+      caching: false
+      propertyId: 'properties.id'
       dataToMarker: (feature, latlng) =>
         props = lookup[feature.properties.severity]
-        marker = new L.CircleMarker(latlng, props).addTo @collisionLayer
+        marker = new L.CircleMarker(latlng, props)
         marker.bindPopup(
           "<h3><a href=\"#{feature.properties.url}\">Collision #{feature.properties.id}</a></h3>
           <p>Date and time: #{feature.properties.datetime} </p>
           <p>Severity: #{feature.properties.severity} </p>
           <p><a href=\"#{feature.properties.url}\">View on CycleStreets</a></p>"
         )
+        return marker
     })
+
+    # https://github.com/stefanocudini/leaflet-layerJSON/issues/19
+    oldOnRemove = @collisionLayer.onRemove.bind(@collisionLayer)
+    @collisionLayer.onRemove = (map)->
+      oldOnRemove(map)
+      @._markersCache = {}
 
   addSearchControl: (opts = {}) =>
     formatJSON = (rawjson) ->
