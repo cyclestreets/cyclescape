@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         put :vote_up, :vote_clear
       end
       collection do
-        get :vote_detail
+        post :vote_detail
       end
       get :all_geometries, on: :collection
       scope module: "issue" do
@@ -106,7 +106,7 @@ Rails.application.routes.draw do
   resources :threads, controller: "message_threads" do
     member do
       put :open, :close
-      get :vote_detail
+      post :vote_detail
     end
     resources :messages do
       resources :documents, controller: "message_library/documents"

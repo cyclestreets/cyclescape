@@ -5,7 +5,7 @@ $(document).ready(function () {
     return $(this).data('id')
   })
   if ($votes[0]) {
-    $.get({
+    $.post({
       url: $($votes[0]).data('url'),
       data: {ids: $.makeArray(voteIds)}
     })
