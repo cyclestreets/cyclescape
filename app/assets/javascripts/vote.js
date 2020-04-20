@@ -4,9 +4,9 @@ $(document).ready(function () {
   var voteIds = $votes.map(function () {
     return $(this).data('id')
   })
-  if ($oneVote.data('url') && !$oneVote.find('.access-denied')[0]) {
+  if ($oneVote) {
     $.post({
-      url: $($votes[0]).data('url'),
+      url: $($oneVote).data('url'),
       data: {ids: $.makeArray(voteIds)}
     })
   }

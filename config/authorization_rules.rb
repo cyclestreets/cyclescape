@@ -130,10 +130,6 @@ authorization do
       to :close
       if_attribute subscribers: contains { user }, closed: is { false }
     end
-    has_permission_on :message_threads do
-      to :vote_detail
-      if_permitted_to :show
-    end
 
     has_permission_on :messages do
       to %i[censor approve reject]
@@ -235,6 +231,10 @@ authorization do
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads do
       to :show
       if_attribute public?: is { true }
+    end
+    has_permission_on :message_threads do
+      to :vote_detail
+      if_permitted_to :show
     end
     has_permission_on :message_threads, :group_message_threads, :issue_message_threads, to: %i[index search]
     has_permission_on :message_photos do

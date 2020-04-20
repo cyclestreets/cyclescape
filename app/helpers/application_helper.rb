@@ -73,8 +73,6 @@ module ApplicationHelper
   end
 
   def vote_link(resource)
-    return {} if !current_user
-
     case resource
     when Message
       {
