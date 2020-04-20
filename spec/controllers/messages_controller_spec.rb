@@ -18,7 +18,7 @@ describe MessagesController, type: :controller do
 
     let!(:akismet_req) do
       stub_request(:post, %r{rest\.akismet\.com/1\.1/comment-check})
-        .with(body: { blog: "http://www.cyclescape.org/",
+        .with(body: { blog: Cyclescape::Application.config.rakismet.url,
                       comment_author: user.full_name,
                       comment_author_email: user.email,
                       comment_content: message.body,

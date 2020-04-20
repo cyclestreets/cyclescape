@@ -23,7 +23,7 @@ describe Issue::MessageThreadsController, type: :controller do
 
     let(:basic_body) do
       {
-        blog: "http://www.cyclescape.org/",
+        blog: Cyclescape::Application.config.rakismet.url,
         comment_author: user.full_name,
         comment_author_email: user.email,
         comment_content: message[:body],
