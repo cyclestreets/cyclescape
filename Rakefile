@@ -7,3 +7,6 @@
 require File.expand_path("config/application", __dir__)
 
 Rails.application.load_tasks
+
+require "resque/tasks"
+require "resque/scheduler/tasks"

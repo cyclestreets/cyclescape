@@ -1,13 +1,32 @@
 # frozen_string_literal: true
 
-require "resque/server"
-require "resque/failure/multiple"
+require "resque-retry"
+require "resque-retry/server"
 require "resque/failure/redis"
-require "resque/rollbar"
 
-Resque::Failure::Multiple.classes = [Resque::Failure::Redis, Resque::Failure::Rollbar]
-Resque::Failure.backend = Resque::Failure::Multiple
+# Enable resque-retry failure backend.
+Resque::Failure::MultipleWithRetrySuppression.classes = [Resque::Failure::Redis]
+Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
 
 Resque.redis.namespace = "resque:Cyclescape"
 Resque.inline = true if Rails.env.test?
-Resque.before_fork = proc { ActiveRecord::Base.establish_connection }
+
+Resque.after_fork do
+  defined?(ActiveRecord::Base) && ActiveRecord::Base.establish_connection
+end
+
+Resque.before_fork do
+  defined?(ActiveRecord::Base) && ActiveRecord::Base.connection.disconnect!
+end
+
+module ActionMailer
+  class DeliveryJob
+    retry_on StandardError, wait: :exponentially_longer, attempts: 5
+  end
+end
+
+module ActiveJob
+  class Base
+    retry_on StandardError, wait: :exponentially_longer, attempts: 5
+  end
+end
