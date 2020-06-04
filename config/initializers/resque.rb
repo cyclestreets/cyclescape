@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require "resque/failure/multiple"
+require "resque/failure/redis"
+require "resque/rollbar"
 require "resque-retry"
 require "resque-retry/server"
-require "resque/failure/redis"
 
 # Enable resque-retry failure backend.
-Resque::Failure::MultipleWithRetrySuppression.classes = [Resque::Failure::Redis]
+Resque::Failure::MultipleWithRetrySuppression.classes = [Resque::Failure::Rollbar, Resque::Failure::Redis]
 Resque::Failure.backend = Resque::Failure::MultipleWithRetrySuppression
 
 Resque.redis.namespace = "resque:Cyclescape"
