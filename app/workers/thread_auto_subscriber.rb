@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ThreadAutoSubscriber
+  extend Resque::Plugins::ExponentialBackoff
+  @retry_limit = 3
+
   class << self
     def queue
       :medium

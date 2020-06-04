@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ThreadNotifier
+  extend Resque::Plugins::ExponentialBackoff
+  @retry_limit = 3
+
   class << self
     def queue
       :mailers

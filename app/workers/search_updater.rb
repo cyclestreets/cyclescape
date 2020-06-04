@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class SearchUpdater
+  extend Resque::Plugins::ExponentialBackoff
+  @retry_limit = 3
+
   def self.queue
     :medium
   end
