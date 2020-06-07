@@ -7,13 +7,20 @@ describe ThreadMailer do
   let(:message_one)   { create(:message, created_by: user, thread: thread) }
   let(:message_two)   { create(:message, created_by: user, in_reply_to: message_one, thread: thread) }
   let(:message_three) { create(:message, created_by: user, in_reply_to: message_two, thread: thread) }
+  let(:message_all_components) { message_three }
   let(:created_by_user) { create(:group_membership, :committee, group: group).user }
   let(:thread)        { create :message_thread, group: group, privacy: privacy, created_by: created_by_user }
   let(:privacy)       { "group" }
   let(:membership)    { create :brian_at_quahogcc }
   let(:group)         { membership.group }
-  let(:document)      { create(:document_message, created_by: user, message: message_three, thread: thread) }
-  let(:deadline_message) { create(:deadline_message, created_by: user, message: message_three, thread: thread) }
+  let(:cs_photo)      { create(:cyclestreets_photo_message, created_by: user, message: message_all_components) }
+  let(:deadline)      { create(:deadline_message, created_by: user, message: message_all_components, thread: thread) }
+  let(:document)      { create(:document_message, created_by: user, message: message_all_components, thread: thread) }
+  let(:library)       { create(:library_item_message, :with_document, created_by: user, message: message_all_components, thread: thread) }
+  let(:link)          { create(:link_message, created_by: user, message: message_all_components, thread: thread) }
+  let(:photo)         { create(:photo_message, created_by: user, message: message_all_components, thread: thread) }
+  let(:poll)          { create(:poll_message, :with_options, created_by: user, message: message_all_components) }
+  let(:leader)        { create(:thread_leader_message, created_by: user, message: message_all_components, thread: thread) }
 
   before do
     thread.add_subscriber user
@@ -39,7 +46,7 @@ describe ThreadMailer do
   describe "new document messages" do
     it "has correct text in email" do
       document
-      subject = described_class.common(message_three.reload, user)
+      subject = described_class.common(message_all_components.reload, user)
 
       expect(subject.subject).to eq(
         I18n.t(
@@ -63,8 +70,8 @@ describe ThreadMailer do
   describe "new deadline message" do
     let(:privacy) { "committee" }
     it "has attachment" do
-      deadline_message
-      subject = described_class.common(message_three.reload, user)
+      deadline
+      subject = described_class.common(message_all_components.reload, user)
       expect(subject.subject).to eq(
         I18n.t(
           "mailers.thread_mailer.common.committee_subject",
@@ -77,9 +84,18 @@ describe ThreadMailer do
   end
 
   describe "digest" do
-    it do
-      document
-      subject = described_class.digest(user, thread.reload => [message_one, message_three.reload])
+    before do
+      [cs_photo, deadline, document, library, link, photo, poll, leader]
+    end
+
+    it "works with all message components" do
+      (Message::COMPONENT_TYPES - %i[street_view_messages map_messages action_messages]).each do |component_type|
+        expect(message_all_components.public_send(component_type)).to(
+          be_present, "expected message to have #{component_type} but it did not"
+        )
+      end
+
+      subject = described_class.digest(user, thread.reload => [message_one, message_all_components.reload])
       expect(subject.text_part.decoded).to include("#{root_url[0..-2]}#{document.file.url}")
       expect(subject.text_part.decoded).to include("To reply to the message above")
       expect(subject.subject).to include("Digest for")

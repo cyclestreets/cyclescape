@@ -10,7 +10,7 @@ FactoryBot.define do
 
     after(:build) do |o|
       o.thread = o.message.thread
-      o.message.link_messages = [o]
+      o.message.link_messages << o
     end
   end
 end

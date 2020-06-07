@@ -8,7 +8,7 @@ FactoryBot.define do
 
     after(:build) do |o|
       o.thread = o.message.thread
-      o.message.thread_leader_messages = [o]
+      o.message.thread_leader_messages << o
     end
   end
 end

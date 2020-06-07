@@ -3,4 +3,4 @@
   - component.poll_options.each do |option|
     %li= option.option
 %p
-  = link_to "Vote", thread_url(@thread, anchor: dom_id(@message))
+  = link_to "Vote", thread_url(component.thread, anchor: dom_id(component.message))

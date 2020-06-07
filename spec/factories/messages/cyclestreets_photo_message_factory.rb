@@ -11,7 +11,7 @@ FactoryBot.define do
 
     after(:build) do |o|
       o.thread = o.message.thread
-      o.message.cyclestreets_photo_messages = [o]
+      o.message.cyclestreets_photo_messages << o
     end
   end
 end

@@ -7,7 +7,7 @@ FactoryBot.define do
 
     after(:build) do |o|
       o.thread = o.message.thread
-      o.message.library_item_messages = [o]
+      o.message.library_item_messages << o
     end
 
     trait :with_document do
