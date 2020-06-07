@@ -31,7 +31,9 @@ describe DeadlineMessage do
 
   it "should email about deadlines" do
     dm = create :deadline_message, deadline: 5.hours.from_now, title: "Do not miss me!"
+    deleted = create :deadline_message, deadline: 5.hours.from_now, title: "thread deleted"
     thread = dm.thread
+    deleted.thread.destroy! # it shouldn't crash with deleted threads
     subscriptions = create_list :thread_subscription, 2, thread: thread
     user = subscriptions.first.user
     user.prefs.update_column(:email_status_id, 1)

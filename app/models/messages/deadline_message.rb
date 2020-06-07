@@ -10,7 +10,7 @@ class DeadlineMessage < MessageComponent
 
   class << self
     def email_upcomming_deadlines!
-      where(deadline: Time.zone.now..1.day.from_now).includes(:thread).find_each do |dm|
+      where(deadline: Time.zone.now..1.day.from_now).joins(:thread).includes(:thread).find_each do |dm|
         thread = dm.thread
         thread.email_subscribers.active.each do |subscriber|
           Notifications.upcoming_thread_deadline(subscriber, thread, dm).deliver_now
