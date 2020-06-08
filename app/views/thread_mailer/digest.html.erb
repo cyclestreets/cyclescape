@@ -19,7 +19,8 @@ There have been updates on <%= @threads_messages.count %> threads you are subscr
       <%- message.components_and_self.each do |component| %>
         <%= "#{t("thread_mailer.#{component.notification_name}.type").capitalize}:" %>
         <div>
-        <%= render component.notification_name.to_s, component: component %>
+          <%= render component.notification_name.to_s, component: component %>
+        </div>
       <%- end  %>
       <p style="font-size: 12px;color: #999999;">
         To reply to the above, <%= mail_to(message_address(message), "email") %> or <%= link_to("visit the discussion", thread_url(@thread, anchor: dom_id(message))) %>.
