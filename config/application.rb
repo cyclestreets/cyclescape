@@ -106,5 +106,6 @@ module Cyclescape
     # defaults to Rails.env
     # config.browserify_rails.node_env = "production"
     config.action_mailer.preview_path = Rails.root.join("app", "controllers", "admin", "mailers")
+    config.action_mailer.show_previews = true
   end
 end
