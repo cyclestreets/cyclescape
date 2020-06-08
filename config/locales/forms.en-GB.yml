@@ -123,7 +123,7 @@
             who can see your profile.
           bicycle_wheels: To help stop automated sign-ups please enter the amount
             (in numbers) of wheels on six bicycles
-          disabled: This will set the name to "User id (deleted)", remove their groups, thread subscriptions, profile, and offers to lead threads permanently. It will leave their messages and issues.
+          disabled: This stops a user getting emails and stops them being able to log in.  It does not remove them from any groups or thread subscriptions.
         edit:
           password: Leave this blank to keep your current password.
           current_password: Please confirm your current password to make changes on
