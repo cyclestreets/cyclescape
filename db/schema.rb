@@ -414,10 +414,8 @@ ActiveRecord::Schema.define(version: 2020_04_12_221843) do
     t.text "address"
     t.string "postcode", limit: 255
     t.text "description"
-    t.string "openlylocal_council_url", limit: 255
     t.text "url"
     t.string "uid", limit: 255, null: false
-    t.integer "zzz_issue_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.geometry "location", limit: {:srid=>4326, :type=>"geometry"}
@@ -426,9 +424,14 @@ ActiveRecord::Schema.define(version: 2020_04_12_221843) do
     t.integer "hide_votes_count", default: 0
     t.boolean "relevant", default: true, null: false
     t.string "authority_param"
+    t.string "app_size"
+    t.string "app_state"
+    t.string "app_type"
+    t.datetime "when_updated"
+    t.string "associated_id"
+    t.index ["associated_id"], name: "index_planning_applications_on_associated_id"
     t.index ["location"], name: "index_planning_applications_on_location", using: :gist
     t.index ["uid", "authority_param"], name: "index_planning_applications_on_uid_and_authority_param", unique: true
-    t.index ["zzz_issue_id"], name: "index_planning_applications_on_zzz_issue_id"
   end
 
   create_table "planning_filters", id: :serial, force: :cascade do |t|
