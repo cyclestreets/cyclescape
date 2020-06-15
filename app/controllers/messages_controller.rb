@@ -50,7 +50,9 @@ class MessagesController < ApplicationController
   end
 
   def vote_up
-    current_user.vote_exclusively_for message unless current_user.voted_for? message
+    current_user.with_lock do
+      current_user.vote_exclusively_for message unless current_user.voted_for? message
+    end
     render partial: "shared/vote_detail", locals: { resource: message }
   end
 

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class Vote < ApplicationRecord
   scope :descending, -> { order(created_at: :desc) }
 
