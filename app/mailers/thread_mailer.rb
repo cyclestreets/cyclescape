@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-class ThreadMailer < ActionMailer::Base
-  layout "basic_email"
-  # `include` to use it in the methods in this mailer and `helper` to use it in the views
-  include MailerHelper
-  helper MailerHelper
-  default from: ->(_) { SiteConfig.first.default_email }
-
+class ThreadMailer < ApplicationMailer
   def digest(user, threads_messages)
     @threads_messages = threads_messages
     @subscriber = user
@@ -50,10 +44,5 @@ class ThreadMailer < ActionMailer::Base
       in_reply_to: thread_address(@thread)
     )
   end
-
-  private
-
-  def site_config
-    @site_config ||= SiteConfig.first
   end
 end

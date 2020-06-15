@@ -1,12 +1,6 @@
 # frozen_string_literal: true
 
-class Notifications < ActionMailer::Base
-  # `include` to use it in the methods in this mailer and `helper` to use it in the views
-  include MailerHelper
-  helper MailerHelper
-  layout "basic_email"
-  default from: ->(_) { SiteConfig.first.default_email }
-
+class Notifications < ApplicationMailer
   def group_membership_request_confirmed(request)
     @member = request.user
     @group = request.group
@@ -141,10 +135,5 @@ class Notifications < ActionMailer::Base
          reply_to: message_address(deadline_message.message),
          subject: t("mailers.notifications.upcoming_thread_deadline.subject", thread_title: @thread.title, application_name: site_config.application_name)
   end
-
-  private
-
-  def site_config
-    @site_config ||= SiteConfig.first
   end
 end
