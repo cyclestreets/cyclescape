@@ -25,9 +25,6 @@ every 5.minutes do
   rake "scheduled:process_all_mailboxes"
 end
 
-every 5.minutes do
-  rake "scheduled:capture_query_stats"
-end
 # This pulls in application from 5 days ago to 12 days ago (i.e. a weeks worth)
 # They will be sorted with the oldest first.
 # It looks like some Local Authorities (LAs) take a week or more to put the applications on-line.
