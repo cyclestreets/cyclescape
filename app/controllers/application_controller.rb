@@ -168,12 +168,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_config
-    @site_config = Rails.cache.fetch(SiteConfig::KEY, expires_in: 1.week) do
+    @site_config ||= Rails.cache.fetch(SiteConfig::KEY, expires_in: 1.week) do
       SiteConfig.first.to_struct
     end
   end
 
-  def set_time_zone(&block)
-    Time.use_zone(current_user.try(:time_zone) || @site_config.try(:time_zone) || "London", &block)
+  def set_time_zone
+    Time.use_zone(current_user.try(:time_zone) || @site_config.try(:time_zone) || "London") { yield }
   end
 end
