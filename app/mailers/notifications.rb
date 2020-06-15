@@ -123,17 +123,20 @@ class Notifications < ApplicationMailer
     @user = user
     @issue = issue
     @thread = thread
-    mail to: @user.name_with_email,
-         subject: t("mailers.notifications.upcoming_issue_deadline.subject", issue_title: @issue.title, application_name: site_config.application_name)
+    set_time_zone(user) do
+      mail to: @user.name_with_email,
+           subject: t("mailers.notifications.upcoming_issue_deadline.subject", issue_title: @issue.title, application_name: site_config.application_name)
+    end
   end
 
   def upcoming_thread_deadline(user, thread, deadline_message)
     @user = user
     @thread = thread
     @deadline_message = deadline_message
-    mail to: @user.name_with_email,
-         reply_to: message_address(deadline_message.message),
-         subject: t("mailers.notifications.upcoming_thread_deadline.subject", thread_title: @thread.title, application_name: site_config.application_name)
-  end
+    set_time_zone(user) do
+      mail to: @user.name_with_email,
+           reply_to: message_address(deadline_message.message),
+           subject: t("mailers.notifications.upcoming_thread_deadline.subject", thread_title: @thread.title, application_name: site_config.application_name)
+    end
   end
 end
