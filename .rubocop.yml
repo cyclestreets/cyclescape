@@ -26,7 +26,20 @@ Rails/DynamicFindBy:
     - find_by_tags_from
 
 Metrics/LineLength:
-  Max: 120
+  Max: 140
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Style/Documentation:
+  Description: Document classes and non-namespace modules.
+  Enabled: false
 
 Style/StringLiterals:
   EnforcedStyle: "double_quotes"

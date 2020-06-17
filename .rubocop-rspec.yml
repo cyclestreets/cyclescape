@@ -1,0 +1,173 @@
+RSpec/AnyInstance:
+  Description: Check that instances are not being stubbed globally.
+  Enabled: false
+
+RSpec/BeEql:
+  Description: Check for expectations where `be(...)` can replace `eql(...)`.
+  Enabled: true
+
+RSpec/HookArgument:
+  Description: Checks the arguments passed to `before`, `around`, and `after`.
+  Enabled: true
+  EnforcedStyle: implicit
+  SupportedStyles:
+  - implicit
+  - each
+  - example
+
+RSpec/DescribeClass:
+  Description: Check that the first argument to the top level describe is a constant.
+  Enabled: true
+  Exclude:
+      - 'spec/views/**/*'
+
+RSpec/DescribedClass:
+  Description: Checks that tests use `described_class`.
+  SkipBlocks: false
+  Enabled: false
+
+RSpec/DescribeMethod:
+  Description: Checks that the second argument to `describe` specifies a method.
+  Enabled: true
+
+RSpec/ExampleWording:
+  Description: Checks that example descriptions do not start with "should".
+  Enabled: false
+  CustomTransform:
+    be: is
+    have: has
+    not: does not
+  IgnoredWords: []
+
+RSpec/EmptyExampleGroup:
+  Description: Checks if an example group does not include any tests.
+  Enabled: true
+  CustomIncludeMethods: []
+
+RSpec/ExpectActual:
+  Description: Checks for `expect(...)` calls containing literal values.
+  Enabled: true
+  Exclude:
+    - spec/routing/*.rb
+
+RSpec/MessageChain:
+  Description: Check that chains of messages are not being stubbed.
+  Enabled: true
+
+RSpec/MultipleDescribes:
+  Description: Checks for multiple top level describes.
+  Enabled: true
+
+RSpec/MultipleExpectations:
+  Description: Checks if examples contain too many `expect` calls.
+  Enabled: false
+  Max: 1
+
+RSpec/NestedGroups:
+  Description: Checks for nested example groups.
+  Enabled: true
+  Max: 5
+
+RSpec/InstanceVariable:
+  Description: Checks for instance variable usage in specs.
+  AssignmentOnly: false
+  Enabled: true
+
+RSpec/LetSetup:
+  Description: Checks unreferenced `let!` calls being used for test setup.
+  Enabled: true
+
+RSpec/LeadingSubject:
+  Description: Checks for `subject` definitions that come after `let` definitions.
+  Enabled: false
+
+RSpec/FilePath:
+  Description: Checks that spec file paths are consistent with the test subject.
+  Enabled: true
+  CustomTransform:
+    RuboCop: rubocop
+    RSpec: rspec
+  Exclude:
+    - 'spec/lib/sync/*_spec.rb'
+
+RSpec/VerifiedDoubles:
+  Description: Prefer using verifying doubles over normal doubles.
+  Enabled: true
+  IgnoreSymbolicNames: false
+
+RSpec/NotToNot:
+  Description: Checks for consistent method usage for negating expectations.
+  EnforcedStyle: not_to
+  SupportedStyles:
+  - not_to
+  - to_not
+  Enabled: false
+
+RSpec/Focus:
+  Description: Checks if examples are focused.
+  Enabled: true
+
+RSpec/ExampleLength:
+  Description: Checks for long examples.
+  Enabled: false
+  Max: 5
+
+RSpec/MessageExpectation:
+  Description: Checks for consistent message expectation style.
+  Enabled: false
+  EnforcedStyle: allow
+  SupportedStyles:
+  - allow
+  - expect
+
+RSpec/NamedSubject:
+  Description: Checks for explicitly referenced test subjects.
+  Enabled: false
+  Exclude:
+    - spec/controllers/**/*.rb
+
+RSpec/SubjectStub:
+  Description: Checks for stubbed test subjects.
+  Enabled: true
+
+RSpec/ScatteredLet:
+  Enabled: false
+
+RSpec/EmptyLineAfterFinalLet:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/IteratedExpectation:
+  Enabled: false
+
+RSpec/EmptyLineAfterSubject:
+  Enabled: false
+
+RSpec/RepeatedDescription:
+  Enabled: false
+
+RSpec/RepeatedExample:
+  Enabled: false
+
+RSpec/SharedContext:
+  Enabled: false
+
+RSpec/BeforeAfterAll:
+  Enabled: false
+
+RSpec/ScatteredSetup:
+  Enabled: false
+
+Capybara/FeatureMethods:
+  Enabled: false
+
+RSpec/PredicateMatcher:
+  Enabled: false
+
+RSpec/ExpectInHook:
+  Enabled: false
+
+RSpec/ReturnFromStub:
+  Enabled: false
