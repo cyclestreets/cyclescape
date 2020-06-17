@@ -48,7 +48,7 @@ describe DeadlineMessage do
     expect(email.body).to include("upcoming deadline")
     expect(email.body).to include("Do not miss me!")
     expect(email.subject).to include("Upcoming deadline")
-    expect(email.body).to include(dm.deadline.to_formatted_s(:long_ordinal))
+    expect(email.body).to include(dm.deadline.in_time_zone("London").to_formatted_s(:long_ordinal))
   end
 
   it ".to_ical" do
