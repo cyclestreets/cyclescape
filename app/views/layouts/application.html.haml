@@ -82,7 +82,7 @@
       { name: @site_config.tile_server2_name, url: @site_config.tile_server2_url, type: @site_config.tile_server2_type, options: @site_config.tile_server2_options },
       { name: @site_config.tile_server3_name, url: @site_config.tile_server3_url, type: @site_config.tile_server3_type, options: @site_config.tile_server3_options } ]
     #map-tiles{ "data-tileservers" => tile_servers.to_json }
-    #map-geocode{ "data-url" => @site_config.geocoder_url, "data-key" => @site_config.geocoder_key }
+    #map-geocode{ "data-url" => @site_config.geocoder_url, "data-key" => @site_config.geocoder_key, "data-streetview" => @site_config.google_street_view_api_key }
     - if @full_page
       #page-full
         .wrapper-full

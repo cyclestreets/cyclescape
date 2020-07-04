@@ -6,6 +6,7 @@
     "browserify-incremental": "^3.1.0",
     "coffeeify": "~0.6",
     "cropperjs": "^1.4.1",
+    "intersection-observer": "^0.11.0",
     "jquery-ui-timepicker-addon": "1.5.5",
     "jsdom": "^9.0.0",
     "knockout": "^3.5.0",

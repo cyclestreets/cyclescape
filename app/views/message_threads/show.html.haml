@@ -1,8 +1,3 @@
-:javascript
-- query = { v: "3.exp", callback: "streetViewInit" }
-- query[:key] = @site_config.google_street_view_api_key if @site_config.google_street_view_api_key
-%script{src: "https://maps.googleapis.com/maps/api/js?#{query.to_query}"}
-
 %section#content.thread{ data: {"view-message-id" => @view_from&.id} }
   %header
     - if @issue

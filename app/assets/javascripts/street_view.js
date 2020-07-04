@@ -1,10 +1,10 @@
+require('intersection-observer')
 // This is called when:
-//   1. The page is ready
-//   2. The Google StreetView JS is loaded
-//   3. A message is created (via Ajax)
+//   1. The Google StreetView JS is loaded
+//   2. A message is created (via Ajax)
 // Because loading external JS from Google could be faster than the page load (if it is cached) or slower (network)
 // there are a few early returns.
-window.streetViewInit = function () {
+window.streetViewInitCallback = function () {
   if ((typeof window.google === 'undefined' || window.google === null) || !window.google.maps.LatLng) {
     return
   }
@@ -102,6 +102,35 @@ window.streetViewInit = function () {
     newStreetViewPano.dataset.inputready = '1'
     updateInputs()
   })
+}
+
+// From https://walterebert.com/playground/wpo/google-maps/
+window.streetViewInit = function () {
+  var domNeedStreetView = $('#newStreetViewPano,.google-street-view')
+
+  var observer = new IntersectionObserver(
+    function (entries, self) {
+      // Intersecting with Edge workaround https://calendar.perfplanet.com/2017/progressive-image-loading-using-intersection-observer-and-sqip/#comment-102838
+      var isIntersecting = typeof entries[0].isIntersecting === 'boolean' ? entries[0].isIntersecting : entries[0].intersectionRatio > 0
+      if (isIntersecting) {
+        var mapsJS = document.createElement('script')
+        mapsJS.src =
+          'https://maps.googleapis.com/maps/api/js?' +
+          $.param({ v: '3.exp', callback: 'streetViewInitCallback', key: $('#map-geocode').data('streetview') })
+        mapsJS.id = 'mapJsScript'
+        if (!document.getElementById(mapsJS.id)) {
+          document.getElementsByTagName('head')[0].appendChild(mapsJS)
+        }
+        domNeedStreetView.each(function (_, el) { self.unobserve(el) })
+      }
+    },
+    {
+      rootMargin: '100px',
+      threshold: 0
+    }
+  )
+
+  domNeedStreetView.each(function (_, el) { observer.observe(el) })
 }
 
 $(document).ready(window.streetViewInit)
