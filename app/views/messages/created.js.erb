@@ -4,6 +4,7 @@
     .before("<%= j(render 'messages/message', message: @message, thread: @thread ) %>")
     .html("<%= j(render 'messages/new') %>")
   window.streetViewInit()
+  window.streetViewInitCallback()
   window.leafletMapInit()
   window.initImageEdit()
   $('#messages-new-partial').find(".tabs").parent().tabs()
