@@ -297,14 +297,14 @@ describe User, type: :model do
 
   context "thread views" do
     subject { create(:user) }
-    let!(:thread_view) { create(:thread_view, user: subject) }
-
-    it "should indicate the user has viewed the thread" do
-      expect(subject.viewed_thread?(thread_view.thread)).to be_truthy
-    end
+    let(:thread_view) { create(:thread_view, user: subject) }
 
     it "should give the time the user last viewed the thread" do
       expect(subject.viewed_thread_at(thread_view.thread).to_i).to eql(thread_view.viewed_at.to_i)
+    end
+
+    it "be nil if the thread hasn't been viewed" do
+      expect(subject.viewed_thread_at(create(:message_thread))).to be_nil
     end
   end
 

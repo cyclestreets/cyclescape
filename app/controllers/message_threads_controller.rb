@@ -27,8 +27,8 @@ class MessageThreadsController < ApplicationController
     if current_user
       @subscribers = current_user.can_view thread.subscribers
 
-      if current_user.viewed_thread? thread
-        @view_from = @messages.detect { |m| m.created_at >= current_user.viewed_thread_at(thread) } || @messages.last
+      if (last_viewed = current_user.viewed_thread_at(thread))
+        @view_from = @messages.detect { |m| m.created_at >= last_viewed } || @messages.last
       end
       ThreadRecorder.thread_viewed thread, current_user
     else

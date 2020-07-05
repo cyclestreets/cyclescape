@@ -195,12 +195,8 @@ class User < ApplicationRecord
     thread_priorities.where(thread_id: thread.id).exists?
   end
 
-  def viewed_thread?(thread)
-    thread_views.where(thread_id: thread.id).exists?
-  end
-
   def viewed_thread_at(thread)
-    thread_views.where(thread_id: thread.id).first.viewed_at
+    thread_views.find_by(thread_id: thread.id)&.viewed_at
   end
 
   def disabled
