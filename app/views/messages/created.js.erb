@@ -3,11 +3,11 @@
   $('#messages-new-partial')
     .before("<%= j(render 'messages/message', message: @message, thread: @thread ) %>")
     .html("<%= j(render 'messages/new') %>")
-  window.streetViewInit()
-  window.streetViewInitCallback()
   window.leafletMapInit()
   window.initImageEdit()
   $('#messages-new-partial').find(".tabs").parent().tabs()
+  window.streetViewInit()
+  window.streetViewInitCallback()
   var el = document.getElementById("<%= dom_id(@message) %>")
   el.scrollIntoView()
   window.scrollBy(0, -80) // Top fix header
