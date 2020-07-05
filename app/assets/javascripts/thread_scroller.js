@@ -1,6 +1,12 @@
-$(document).ready(function () {
+$(window).on('load', function () {
+  var offset
   var viewMessageId = $('[data-view-message-id]').data('view-message-id')
   if (viewMessageId) {
-    document.getElementById('message_' + viewMessageId).scrollIntoView(true)
+    offset = $('#message_' + viewMessageId).offset()
+  }
+  if (!window.location.hash && offset) {
+    $('html, body').animate({
+      scrollTop: offset.top - 77
+    }, 350, 'swing')
   }
 })
