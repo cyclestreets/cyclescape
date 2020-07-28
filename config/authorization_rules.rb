@@ -174,7 +174,7 @@ authorization do
     end
 
     has_permission_on :library_tags, to: :update
-    has_permission_on :planning_applications, to: %i[view geometry all_geometries search show_uid hide unhide]
+    has_permission_on :planning_applications, to: %i[view search show_uid hide unhide]
     has_permission_on :planning_application_issues, to: %i[new create]
     has_permission_on :user_locations, to: %i[manage geometry combined_geometry]
     has_permission_on :user_prefs do

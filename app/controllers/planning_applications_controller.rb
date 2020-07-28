@@ -1,20 +1,10 @@
 # frozen_string_literal: true
 
 class PlanningApplicationsController < ApplicationController
-  before_action :set_planning_application, only: %i[show show_uid geometry]
+  before_action :set_planning_application, only: %i[show show_uid]
   respond_to :js, only: %i[hide unhide]
 
   def show; end
-
-  def geometry
-    if @planning_application.location
-      respond_to do |format|
-        format.json { render json: RGeo::GeoJSON.encode(planning_application_feature(@planning_application)) }
-      end
-    else
-      head :no_content
-    end
-  end
 
   def search
     @query = params[:q].strip

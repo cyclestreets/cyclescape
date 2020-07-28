@@ -146,7 +146,6 @@ Rails.application.routes.draw do
     get :search, on: :collection
     get "uid/:authority_param/*uid", action: :show_uid, on: :collection, as: :show_uid
     member do
-      get :geometry
       put :hide, :unhide
     end
     scope module: :planning_application do

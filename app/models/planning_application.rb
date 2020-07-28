@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class PlanningApplication < ApplicationRecord
   NOS_HIDE_VOTES = 2
   APP_SIZES = %w[Large Medium Small].freeze
