@@ -95,12 +95,9 @@ class window.LeafletMap
         onEachFeature: (feature, layer) ->
           img = if feature.properties.image_url
             "<img src='#{feature.properties.image_url}' width='37' height='37'>"
-          else
-            ''
-          layer.bindPopup( "#{img}
-           <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3>
-           <p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
-          )
+          created_by = if feature.properties.created_by
+           "<p>created by <a href='#{feature.properties.created_by_url}'> #{feature.properties.created_by} </p>"
+          layer.bindPopup("#{img || ''} <h3><a href='#{feature.properties.url}'> #{feature.properties.title} </a></h3> #{created_by || ''}")
         )
     }).addTo(@map)
 

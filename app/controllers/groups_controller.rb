@@ -41,9 +41,9 @@ class GroupsController < ApplicationController
       bbox = nil
       group_profiles = GroupProfile.all
     end
-    group_profiles = group_profiles.enabled.with_location.ordered.limit(50)
+    group_profiles = group_profiles.enabled.with_location.ordered_by_size.limit(50)
     factory = RGeo::GeoJSON::EntityFactory.new
-    collection = factory.feature_collection(group_profiles.sort_by(&:size).reverse.map { |group_profile| group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
+    collection = factory.feature_collection(group_profiles.map { |group_profile| group_feature(GroupDecorator.decorate(group_profile.group), bbox) })
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection) }
     end
