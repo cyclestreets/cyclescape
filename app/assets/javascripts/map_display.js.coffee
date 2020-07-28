@@ -84,7 +84,7 @@ class window.LeafletMap
       propertyItems: 'features'
       propertyLoc: 'geometry.coordinates'
       caching: false
-      propertyId: 'properties.id'
+      propertyId: 'id'
       minShift: 10
       dataToMarker: (data)->
         L.geoJson(data,
