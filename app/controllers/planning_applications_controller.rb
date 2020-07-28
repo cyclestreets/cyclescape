@@ -16,6 +16,21 @@ class PlanningApplicationsController < ApplicationController
     render action: :show
   end
 
+  def index
+    permission_denied unless current_group
+    @full_page = true
+  end
+
+  def all_geometries
+    permission_denied unless current_group
+    pas = PlanningApplication.intersects(current_group.profile.location).not_hidden.limit(50).map { |pa| planning_application_feature(pa) }
+    collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(pas)
+
+    respond_to do |format|
+      format.json { render json: RGeo::GeoJSON.encode(collection) }
+    end
+  end
+
   def hide
     planning_application = PlanningApplication.find params[:id]
     hide_vote = planning_application.hide_votes.new.tap { |pl| pl.user = current_user }
@@ -53,6 +68,11 @@ class PlanningApplicationsController < ApplicationController
   end
 
   def planning_application_feature(planning_application)
-    planning_application.loc_feature(thumbnail: planning_application.medium_icon_path)
+    planning_application.loc_feature(
+      title: view_context.truncate(planning_application.title, length: 80, separator: " "),
+      thumbnail: view_context.image_path("map-icons/m-misc.png"),
+      anchor: [30 / 2, 42],
+      url: view_context.new_planning_application_issue_path(planning_application)
+    )
   end
 end

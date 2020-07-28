@@ -252,6 +252,9 @@ authorization do
     has_permission_on :group_hashtags do
       to %i[index show]
     end
+    has_permission_on :planning_applications do
+      to %i[index all_geometries]
+    end
   end
 end
 

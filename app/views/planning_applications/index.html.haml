@@ -1,3 +1,4 @@
-%h1= t(".planning_applications")
-%p= t ".pointer_to_dashboard_html", dashboard_planning_link: link_to(t("layouts.application.dashboard"), dashboard_path + "#planning")
-%p= t(".explanation")
+%div#map
+.hidden
+  .map-data{"data-center" => location_to_geojson(current_group.profile.location),
+    "data-opts" => { remote: [{name: t("planning_applications.index.planning_applications"), url: all_geometries_planning_applications_path(:json)}] }.to_json}

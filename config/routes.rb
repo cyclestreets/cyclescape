@@ -148,6 +148,7 @@ Rails.application.routes.draw do
     member do
       put :hide, :unhide
     end
+    get :all_geometries, on: :collection
     scope module: :planning_application do
       resource :issue, only: :new
     end
