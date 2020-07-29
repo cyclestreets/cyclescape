@@ -89,27 +89,38 @@ module Locatable
     end
   end
 
-  # Returns the size of the location. Returns 0 for anything other than polygons.
+  # Returns the size of the location. Returns 0 for anything other than polygons and feature collections.
   def size
-    if !location.try(:geometry_type)
-      0.0
-    else
-      case location.geometry_type
-      when RGeo::Feature::Polygon
-        location.area.to_f
-      else
-        0.0
-      end
-    end
+    SizableLocation.new(location).size
   end
 
   # Returns the ratio of the location vs the supplied geometry. Useful for seeing if the feature is larger
   # than a bounding box, for example.
   def size_ratio(geom)
-    if geom && geom.geometry_type == RGeo::Feature::Polygon && geom.area > 0
-      size.to_f / geom.area
+    geom_size = SizableLocation.new(geom).size
+    if geom_size.positive?
+      size.to_f / geom_size
     else
       0.0
+    end
+  end
+
+  class SizableLocation
+    def initialize(loc_feature)
+      @loc_feature = loc_feature
+    end
+
+    def size
+      return 0.0 unless @loc_feature.try(:geometry_type)
+
+      case @loc_feature.geometry_type
+      when RGeo::Feature::Polygon
+        @loc_feature.area.to_f
+      when RGeo::Feature::GeometryCollection
+        @loc_feature.envelope.area.to_f
+      else
+        0.0
+      end
     end
   end
 

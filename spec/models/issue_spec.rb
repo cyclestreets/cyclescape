@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 require "spec_helper"
 
 describe Issue do
@@ -145,7 +144,7 @@ describe Issue do
     let(:factory) { RGeo::Geos.factory(srid: 4326) }
 
     describe "for a point" do
-      subject { create(:issue, location: "POINT(1 1)") }
+      subject { build_stubbed(:issue, location: "POINT(1 1)") }
       it "should return a zero size for points" do
         expect(subject.size).to eql(0.0)
       end
@@ -157,7 +156,7 @@ describe Issue do
     end
 
     describe "for a polygon" do
-      subject { create(:issue, location: "POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))") }
+      subject { build_stubbed(:issue, location: "POLYGON ((0.1 0.1, 0.1 0.2, 0.2 0.2, 0.2 0.1, 0.1 0.1))") }
 
       it "should return the area for polygons" do
         expect(subject.size).to be_within(0.0001).of(0.01)
@@ -180,8 +179,23 @@ describe Issue do
       end
     end
 
+    describe "for a collection" do
+      subject { build_stubbed(:issue, location: location) }
+
+      let(:location) { "GEOMETRYCOLLECTION (POLYGON ((-9.544922411441803 54.62297813269033, -0.667969286441803 56.70450561416937, -3.832031786441803 58.99531118795094, -9.544922411441803 54.62297813269033)))" }
+
+      it "has a size" do
+        expect(subject.size).to be_within(0.0001).of(38.8129956)
+      end
+
+      it "has correct size_ratio" do
+        geom = factory.parse_wkt(location)
+        expect(subject.size_ratio(geom)).to eq(1.0)
+      end
+    end
+
     describe "too large" do
-      subject { create(:issue) }
+      subject { build_stubbed(:issue) }
 
       it "should be invalid" do
         large_wkt = "POLYGON((1 1, 1 3, 3 3, 3 1, 1 1))"
