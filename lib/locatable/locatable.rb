@@ -117,7 +117,7 @@ module Locatable
       when RGeo::Feature::Polygon
         @loc_feature.area.to_f
       when RGeo::Feature::GeometryCollection
-        @loc_feature.envelope.area.to_f
+        SizableLocation.new(@loc_feature.envelope).size
       else
         0.0
       end

@@ -182,15 +182,24 @@ describe Issue do
     describe "for a collection" do
       subject { build_stubbed(:issue, location: location) }
 
-      let(:location) { "GEOMETRYCOLLECTION (POLYGON ((-9.544922411441803 54.62297813269033, -0.667969286441803 56.70450561416937, -3.832031786441803 58.99531118795094, -9.544922411441803 54.62297813269033)))" }
+      let(:location) { "GEOMETRYCOLLECTION (POLYGON ((-9.5 54.6, -0.6 56.7, -3.8 58.9, -9.5 54.6)), POINT (-1.2 54.5))" }
 
       it "has a size" do
-        expect(subject.size).to be_within(0.0001).of(38.8129956)
+        expect(subject.size).to be_within(0.0001).of(39.16)
       end
 
       it "has correct size_ratio" do
         geom = factory.parse_wkt(location)
         expect(subject.size_ratio(geom)).to eq(1.0)
+      end
+    end
+
+    describe "for a point collection" do
+      let(:location) { "GEOMETRYCOLLECTION (POINT (0.1 52.1))" }
+      subject { build_stubbed(:issue, location: location) }
+
+      it "has no size" do
+        expect(subject.size).to eq 0.0
       end
     end
 
