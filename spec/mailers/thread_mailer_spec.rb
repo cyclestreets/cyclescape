@@ -21,6 +21,7 @@ describe ThreadMailer do
   let(:photo)         { create(:photo_message, created_by: user, message: message_all_components, thread: thread) }
   let(:poll)          { create(:poll_message, :with_options, created_by: user, message: message_all_components) }
   let(:leader)        { create(:thread_leader_message, created_by: user, message: message_all_components, thread: thread) }
+  let(:street_view)   { create(:street_view_message, created_by: user, message: message_all_components, thread: thread) }
 
   before do
     thread.add_subscriber user
@@ -85,7 +86,7 @@ describe ThreadMailer do
 
   describe "digest" do
     before do
-      [cs_photo, deadline, document, library, link, photo, poll, leader]
+      [cs_photo, deadline, document, library, link, photo, poll, leader, street_view]
     end
 
     it "works with all message components" do
