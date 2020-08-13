@@ -18,6 +18,9 @@ describe "Site feedback" do
       fill_in "Name", with: "Bobby Jones"
       fill_in "Email", with: "bobby@example.com"
       fill_in I18n.t("formtastic.labels.user.new.bicycle_wheels"), with: "8 "
+
+      expect(SendCommentToCyclestreets).to receive(:perform).once
+
       click_on "Send Feedback"
       expect(page).to have_content("Thank you")
 

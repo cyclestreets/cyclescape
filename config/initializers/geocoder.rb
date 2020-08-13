@@ -12,4 +12,5 @@ module Geocoder
   COLLISIONS_URL = "#{CS_BASE_URL}collisions.locations"
   PHOTO_URL      = "#{CS_BASE_URL}photomap.locations"
   PHOTO_LOCATION_URL = "#{CS_BASE_URL}photomap.location"
+  FEEDBACK_URL = "#{CS_BASE_URL}feedback.add"
 end

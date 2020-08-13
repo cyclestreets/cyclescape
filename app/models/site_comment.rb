@@ -21,6 +21,16 @@ class SiteComment < ApplicationRecord
     save!
   end
 
+  def cyclestreets_json
+    {
+      type: "other",
+      comments: body,
+      url: context_url,
+      name: name,
+      email: email
+    }.to_json
+  end
+
   protected
 
   def set_user_details
@@ -39,16 +49,18 @@ end
 #
 # Table name: site_comments
 #
-#  id           :integer          not null, primary key
-#  body         :text             not null
-#  context_data :text
-#  context_url  :string(255)
-#  deleted_at   :datetime
-#  email        :string(255)
-#  name         :string(255)
-#  viewed_at    :datetime
-#  created_at   :datetime         not null
-#  user_id      :integer
+#  id                      :integer          not null, primary key
+#  body                    :text             not null
+#  context_data            :text
+#  context_url             :string(255)
+#  cyclestreets_response   :jsonb
+#  deleted_at              :datetime
+#  email                   :string(255)
+#  name                    :string(255)
+#  sent_to_cyclestreets_at :datetime
+#  viewed_at               :datetime
+#  created_at              :datetime         not null
+#  user_id                 :integer
 #
 # Indexes
 #
