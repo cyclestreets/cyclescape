@@ -176,6 +176,10 @@ module ApplicationHelper
     link_to text, "https://github.com/cyclestreets/cyclescape/issues/#{id}"
   end
 
+  def safe_search_page(page)
+    [page.to_i, 1].max
+  end
+
   THREAD_FORMAT_MAP = {
     "thread :number" => /thread \d+/,
     "thread no :number" => /thread no \d+/,

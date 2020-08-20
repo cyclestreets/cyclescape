@@ -80,7 +80,7 @@ class GroupsController < ApplicationController
       adjust_solr_params do |sunspot_params|
         sunspot_params[:boost] = "recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)"
       end
-      paginate page: params[:thread_page], per_page: 40
+      paginate page: helpers.safe_search_page(params[:thread_page]), per_page: 40
     end
     @unviewed_thread_ids = MessageThread.where(id: threads.results.map(&:id)).unviewed_for(current_user).ids.uniq
     @threads = ThreadListDecorator.decorate_collection threads.results
@@ -95,14 +95,14 @@ class GroupsController < ApplicationController
       adjust_solr_params do |sunspot_params|
         sunspot_params[:boost] = "recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)"
       end
-      paginate page: params[:issue_page], per_page: 40
+      paginate page: helpers.safe_search_page(params[:issue_page]), per_page: 40
     end
     @issues = IssueDecorator.decorate_collection issues.results
 
     # Library Items
     library_items = Library::Item.search do
       fulltext params[:query]
-      paginate page: params[:library_page], per_page: 40
+      paginate page: helpers.safe_search_page(params[:library_page]), per_page: 40
     end
     @library_items = Library::ItemDecorator.decorate_collection library_items.results
 

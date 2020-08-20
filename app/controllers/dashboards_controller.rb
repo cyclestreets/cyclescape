@@ -73,7 +73,7 @@ class DashboardsController < ApplicationController
       adjust_solr_params do |sunspot_params|
         sunspot_params[:boost] = "recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)"
       end
-      paginate page: [params[:thread_page].to_i, 1].max, per_page: 40
+      paginate page: helpers.safe_search_page(params[:thread_page]), per_page: 40
     end
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads.results)
     @threads = ThreadListDecorator.decorate_collection threads.results
@@ -86,7 +86,7 @@ class DashboardsController < ApplicationController
       adjust_solr_params do |sunspot_params|
         sunspot_params[:boost] = "recip(ms(NOW,latest_activity_at_dts),3.16e-11,1,1)"
       end
-      paginate page: [params[:issue_page].to_i, 1].max, per_page: 40
+      paginate page: helpers.safe_search_page(params[:issue_page]), per_page: 40
     end
 
     @issues = IssueDecorator.decorate_collection issues.results
@@ -96,7 +96,7 @@ class DashboardsController < ApplicationController
       fulltext params[:query] do
         boost_fields id: 4
       end
-      paginate page: [params[:library_page].to_i, 1].max, per_page: 40
+      paginate page: helpers.safe_search_page(params[:library_page]), per_page: 40
     end
     @library_items = Library::ItemDecorator.decorate_collection library_items.results
 
