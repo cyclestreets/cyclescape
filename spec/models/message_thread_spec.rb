@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 require "spec_helper"
 
 describe MessageThread do
@@ -315,14 +314,14 @@ describe MessageThread do
 
       it "should remove HTML signatures" do
         thread.add_messages_from_email!(mail, nil)
-        expect(new_message.body).to eq("<p>\n  This email has an HTML message body and a plain link <a href=\"http://www.example.com\">www.example.com</a> .\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>")
+        expect(new_message.body).to eq("<p>\n  This email has an HTML message body and a plain link <a href=\"http://www.example.com\">www.example.com</a> .\n</p>\n<br>\n<p>\nNikolai\n</p>\n<br>\n")
       end
 
       context "html with <div> and <br>s" do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_div_br"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(new_message.body).to eq("<p>I have lots of feedback from members now - thanks Anna.</p><p>Trying to figure out if I can put their names in the big presentation</p>\n")
+          expect(new_message.body).to eq("<p>I have lots of feedback from members now - thanks Anna.</p>\n<p>Trying to figure out if I can put their names in the big presentation</p>\n")
         end
       end
 
@@ -330,7 +329,15 @@ describe MessageThread do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_body_no_starting_div"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(new_message.body).to eq("<p>Text just after the body tag followed by a div</p><p>  Another div</p><p>Text’s now split by brs<br>Second and third<br>Finally the last<a href=\"%5C%22http://example.org%5C%22\">example.org</a><br>Follow us at <a href=\"%5C%22http://example.com/%5C%22\">example.com/</a></p><br><br>")
+          expect(new_message.body).to eq("<p>Text just after the body tag followed by a div</p><p>  Another div</p><p>Text’s now split by brs<br>Second and third<br>Finally the last<a href=\"%5C%22http://example.org%5C%22\">example.org</a><br>Follow us at <a href=\"%5C%22http://example.com/%5C%22\">example.com/</a>\n</p>\n\n<br>\n<br>\n\n\n")
+        end
+      end
+
+      context "html with style in the head" do
+        let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_style_in_head"))) }
+        it "should remove HTML signatures" do
+          thread.add_messages_from_email!(mail, nil)
+          expect(new_message.body).to eq("<p></p>\n<p>Thank you Martin!</p>\n<p></p>\n<p>Nikolai</p>\n\n")
         end
       end
 
@@ -338,7 +345,7 @@ describe MessageThread do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_div"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(new_message.body).to eq("<p>  Text split by divs</p><p>And not by p tags</p>")
+          expect(new_message.body).to eq("<p>  Text split by divs</p>\n<p>And not by p tags</p>\n")
         end
       end
     end

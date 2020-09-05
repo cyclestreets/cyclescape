@@ -194,11 +194,12 @@ class MessageThread < ApplicationRecord
 
     text = if mail.message.html_part
              # For multipart messages we pull out the html part content and use Javascript to remove the signature
-             body = `./lib/sig_strip.js #{Shellwords.escape(mail.message.html_part.decoded)}`
-             # Remove <html> and <head> tags, convert <div> and <body> to <p> tags
-             # keeping all the attributes as most (but not all) are removed by rails sanatize.
-             body.gsub(%r{(</?html>|</?head>|\r)}, "")
-                 .gsub(%r{<(/)?div(.*?)>|<(/)?body(.*?)>}, "<\\1p\\2>")
+             stripped = `./lib/sig_strip.js #{Shellwords.escape(mail.message.html_part.decoded)}`
+             body = Loofah.document(stripped).at_xpath("//body").to_s.tr("\r", "")
+             div_to_p = Loofah::Scrubber.new do |node|
+               node.name = "p" if %w[div body].include?(node.name)
+             end
+             Loofah.scrub_fragment(body, div_to_p).to_s
            else
              # When there is no HTML we get the text part or just the message and use EmailReplyParser to remove the signature
              body = (mail.message.text_part || mail.message).decoded
