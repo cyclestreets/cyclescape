@@ -66,10 +66,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def after_sign_out_path_for(_resource_or_scope)
-    root_url(protocol: "http")
-  end
-
   def no_disabled_users
     if current_user.present? && current_user.disabled_at?
       sign_out current_user
