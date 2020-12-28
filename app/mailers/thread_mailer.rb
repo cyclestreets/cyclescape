@@ -23,7 +23,7 @@ class ThreadMailer < ApplicationMailer
               else
                 "mailers.thread_mailer.common.subject"
               end
-    group_name = "[#{@thread.group&.name}]" if @subscriber.memberships.count > 1
+    group_name = "[#{@thread.group.name}]" if @thread.group && @subscriber.memberships.count > 1
 
     set_time_zone(subscriber) do
       deadlines = @message.components.select { |component| component.notification_name == :new_deadline_message }

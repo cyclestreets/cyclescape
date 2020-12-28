@@ -41,6 +41,18 @@ describe ThreadMailer do
           )
         )
       end
+
+      it "does not add the group for non-group threads" do
+        message_one.reload.thread.update!(group: nil, privacy: MessageThread::PRIVATE)
+        subject = described_class.common(message_one, user)
+        expect(subject.subject).to eq(
+          I18n.t(
+            "mailers.thread_mailer.common.subject",
+            title: thread.title, count: 1, application_name: SiteConfig.first.application_name,
+            group_name: nil
+          )
+        )
+      end
     end
   end
 
