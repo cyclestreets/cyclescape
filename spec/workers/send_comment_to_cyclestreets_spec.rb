@@ -11,11 +11,10 @@ describe SendCommentToCyclestreets do
 
   before do
     stub_request(:post, Geocoder::FEEDBACK_URL).with(
-      body: comment.cyclestreets_json,
+      body: comment.cyclestreets_body,
       headers: {
-        "Accept" => "application/json",
-        "Content-Type" => "application/json",
         "X-Api-Key" => api_key,
+        "Content-Type" => Mime[:url_encoded_form].to_s,
         "Host" => "api.cyclestreets.net:443"
       }
     ).to_return(body: { id: 1 }.to_json)

@@ -21,14 +21,14 @@ class SiteComment < ApplicationRecord
     save!
   end
 
-  def cyclestreets_json
-    {
+  def cyclestreets_body
+    URI.encode_www_form(
       type: "other",
       comments: body,
       url: context_url,
       name: name,
       email: email
-    }.to_json
+    )
   end
 
   protected

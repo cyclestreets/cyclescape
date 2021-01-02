@@ -18,10 +18,9 @@ class SendCommentToCyclestreets
 
         response = Excon.post(
           Geocoder::FEEDBACK_URL,
-          body: comment.cyclestreets_json,
+          body: comment.cyclestreets_body,
           headers: {
-            "Accept" => Mime[:json].to_s,
-            "Content-Type" => Mime[:json].to_s,
+            "Content-Type" => Mime[:url_encoded_form].to_s,
             "X-API-KEY" => Geocoder::API_KEY
           }
         )
