@@ -348,6 +348,14 @@ describe MessageThread do
           expect(new_message.body).to eq("<p>  Text split by divs</p>\n<p>And not by p tags</p>\n")
         end
       end
+
+      context "all in blockquote" do
+        let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("all_blockquoted"))) }
+        it "should not remove the entire message" do
+          thread.add_messages_from_email!(mail, nil)
+          expect(new_message.body).to eq("<p>On Sun, 24 Jan 2021 at 00:00</p>\n\n<p>&gt; Quoted text\n<br>&gt; More quoted\n<br>Yes! Great idea.</p>\n\n<p>&gt; More quoted\n<br>&gt;</p>\n\n<p>Good</p>")
+        end
+      end
     end
 
     context "with pgp sig" do

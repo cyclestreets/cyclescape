@@ -1,0 +1,61 @@
+Return-Path: <simon@example.net>
+Date: Fri, 11 Jan 2019 11:08:02 +0000
+From: Simon <simon@example.net>
+To: message-2@cyclescape.org
+Message-ID: <4B61E3D3-5D34-436E-BCD5-3A03DC7F550C@net>
+In-Reply-To: <message-2@cyclescape.org>
+Subject: Re: [Cyclescape] junction revisions
+Mime-Version: 1.0
+Content-Type: multipart/alternative; boundary="0000000000004cb33505b9a77278"
+Content-Transfer-Encoding: 7bit
+Envelope-to: message-2@cyclescape.org
+
+--0000000000004cb33505b9a77278
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, 24 Jan 2021 at 00:00
+
+> Quoted text
+> More quoted
+Yes! Great idea.
+
+> More quoted
+>
+
+Good
+>
+> ------------------------------
+> From Cyclescape discussion thread
+
+--0000000000004cb33505b9a77278
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+</=
+div><blockquote class=3D"gmail_quote" style=3D"margin:0px 0px 0px 0.8ex;bor=
+der-left-width:1px;border-left-style:solid;padding-left:1ex;border-left-col=
+or:rgb(204,204,204)"><u></u>
+
+
+
+
+<div>
+<span>
+Text inside
+</span>
+
+ a blockquote
+
+<div style=3D"margin-left:5px">
+<p>Thanks for the report!</p>
+
+</div>
+<p></p></div><div>
+
+
+</div>
+
+</blockquote></div></div>
+
+--0000000000004cb33505b9a77278--

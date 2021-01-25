@@ -184,7 +184,7 @@ class MessageThread < ApplicationRecord
     end
   end
 
-  def add_messages_from_email!(mail, in_reply_to)
+  def add_messages_from_email!(mail, in_reply_to, try_html: true)
     from_address = mail.message.header[:from].addresses.first
     from_name = mail.message.header[:from].display_names.first
     h = ActionController::Base.helpers
@@ -192,7 +192,7 @@ class MessageThread < ApplicationRecord
     user = User.find_or_invite(from_address, from_name)
     raise "Invalid user: #{from_address.inspect} #{from_name.inspect}" if user.nil?
 
-    text = if mail.message.html_part
+    text = if try_html && mail.message.html_part
              # For multipart messages we pull out the html part content and use Javascript to remove the signature
              stripped = `./lib/sig_strip.js #{Shellwords.escape(mail.message.html_part.decoded)}`
              body = Loofah.document(stripped).at_xpath("//body").to_s.tr("\r", "")
@@ -214,6 +214,10 @@ class MessageThread < ApplicationRecord
     new_message = messages.build(
       body: text, created_by: user, in_reply_to: in_reply_to, inbound_mail: mail
     )
+
+    if new_message.body.blank?
+      return add_messages_from_email!(mail, in_reply_to, try_html: false)
+    end
 
     # Attachments
     mail.message.attachments.each do |attachment|
