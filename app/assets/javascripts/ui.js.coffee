@@ -64,24 +64,25 @@ jQuery ->
       $(this).find(".collapse").slideUp()
     .find(".collapse").hide()
 
-  dateTimeOpts = {
-    dateFormat: "dd-mm-yy"
-    stepMinute: 15
-    firstDay: 1
-    showButtonPanel: false
-    minDateTime: new Date((new(Date)).setMinutes(0))
-  }
+  window.dateTimeInit = ->
+    dateTimeOpts = {
+      dateFormat: "dd-mm-yy"
+      stepMinute: 15
+      firstDay: 1
+      showButtonPanel: false
+      minDateTime: new Date((new(Date)).setMinutes(0))
+    }
 
-  # Apply date selector to all date inputs
-  $(":input.date").datetimepicker( dateTimeOpts )
+    # Apply date selector to all date inputs
+    $(":input.date").datetimepicker( dateTimeOpts )
 
-  $(".all-day:input").change ->
+    $(".all-day:input").change ->
 
-    dateTimeOpts.showTimepicker =  !$(@).is(':checked')
-    dateTimeOpts.timeFormat = if($(@).is(':checked')) then "" else "HH:mm"
+      dateTimeOpts.showTimepicker =  !$(@).is(':checked')
+      dateTimeOpts.timeFormat = if($(@).is(':checked')) then "" else "HH:mm"
 
-    $(":input.date").datetimepicker('destroy').datetimepicker(dateTimeOpts)
-
+      $(":input.date").datetimepicker('destroy').datetimepicker(dateTimeOpts)
+  window.dateTimeInit()
   # Automatic setting of values and visibility from select drop-downs
   AutoSet = {
     selector: "select"
