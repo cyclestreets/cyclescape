@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class InboundMailProcessor
+  class MessageNotFound < StandardError
+    def initialize(from, subject, message_token, thread_token)
+      "From: #{from}, subject: #{subject}, message_token: #{message_token.inspect}, thread_token: #{thread_token.inspect} not found"
+    end
+  end
   def self.queue
     :mailers
   end
@@ -22,7 +27,11 @@ class InboundMailProcessor
              else
                MessageThread.find_by(public_token: thread_token)
              end
-    raise "Message #{message_token.inspect} and thread #{thread_token.inspect} not found" unless thread || message
+    unless thread || message
+      from_address = mail.message.header[:from].addresses.first
+      subject = mail.message.header[:subject].value
+      raise MessageNotFound.new(from_address, subject, message_token, thread_token)
+    end
 
     # This raises an exception if it fails
     thread.add_messages_from_email!(mail, message)
