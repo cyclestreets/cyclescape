@@ -14,7 +14,7 @@ class Library::Item < ApplicationRecord
   end
 
   belongs_to :component, polymorphic: true
-  belongs_to :created_by, class_name: "User"
+  belongs_to :created_by, -> { with_deleted }, class_name: "User"
   has_and_belongs_to_many :tags, join_table: "library_item_tags", foreign_key: "library_item_id"
   has_many :library_item_messages, foreign_key: "library_item_id"
   has_many :threads, through: :library_item_messages

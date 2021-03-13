@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 require "spec_helper"
 
 describe Library::Item do
@@ -13,6 +12,15 @@ describe Library::Item do
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:created_by) }
+  end
+
+  context "created_by a deleted user" do
+    let(:user) { create :user, deleted_at: Time.current }
+    subject { create :library_note, created_by: user }
+
+    it "should still have a created_by" do
+      expect(subject.reload.created_by).to eq user
+    end
   end
 
   context "find by tags" do
