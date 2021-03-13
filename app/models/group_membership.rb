@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
-
 class GroupMembership < ApplicationRecord
   ALLOWED_ROLES = %w[committee member].freeze
 
   belongs_to :group
   belongs_to :user, autosave: true
 
-  has_one :group_membership_request
+  has_one :group_membership_request, dependent: :destroy
 
   scope :committee, -> { where(role: "committee") }
   scope :normal, -> { where(role: "member") }
