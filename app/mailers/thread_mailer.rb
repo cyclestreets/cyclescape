@@ -18,6 +18,8 @@ class ThreadMailer < ApplicationMailer
     @thread = message.thread
     @subscriber = subscriber
     @subscription = @thread.subscriptions.find_by(user: @subscriber)
+    return unless @subscription
+
     subject = if @thread.private_to_committee?
                 "mailers.thread_mailer.common.committee_subject"
               else

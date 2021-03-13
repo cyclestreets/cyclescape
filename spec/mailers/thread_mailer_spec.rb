@@ -96,6 +96,16 @@ describe ThreadMailer do
     end
   end
 
+  describe "when a user has unsubscribed" do
+    before do
+      user.thread_subscriptions.find_each(&:destroy!)
+    end
+
+    it "sends no mail" do
+      expect(described_class.common(message_one, user).message).to be_a ActionMailer::Base::NullMail
+    end
+  end
+
   describe "digest" do
     before do
       [cs_photo, deadline, document, library, link, photo, poll, leader, street_view]
