@@ -218,6 +218,7 @@ authorization do
       to :view_profile
       if_attribute profile: { visibility: "public" }
     end
+    has_permission_on :users_omniauth_callbacks, to: %i[passthru failure]
     has_permission_on :dashboards, to: %i[search deadlines]
     has_permission_on :devise_sessions, :devise_registrations, :devise_confirmations,
                       :devise_invitations, :devise_passwords, :devise_invitable_registrations, :users_registrations, to: :manage
