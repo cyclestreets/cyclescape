@@ -29,14 +29,14 @@ jQuery ->
 
 
   if unviewed_private_count[0]
-    updatePmCount($.cookie('unviewed_private_count'))
+    updatePmCount(Cookies.get('unviewed_private_count'))
     getPmCount = ()->
       $.ajax
         type: "GET"
         url: "/private_messages"
         dataType: "json"
         success: (data) ->
-          $.cookie('unviewed_private_count', data.count)
+          Cookies.set('unviewed_private_count', data.count)
           updatePmCount(data.count)
 
     setTimeout(getPmCount, 5000)
