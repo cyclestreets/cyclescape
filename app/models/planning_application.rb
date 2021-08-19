@@ -51,6 +51,7 @@ class PlanningApplication < ApplicationRecord
 
   before_save :set_relevant
   before_validation :set_authority_param, on: :create
+  alias_attribute :last_difference, :when_updated
 
   class << self
     def remove_old

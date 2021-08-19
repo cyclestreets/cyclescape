@@ -41,15 +41,15 @@ describe PlanningApplicationWorker do
       "app_state"      => "Undecided",
       "app_type"       => "Conditions",
       "associated_id"  => "P131535",
-      "authority_id"   => 22,
-      "authority_name" => "Cambridge",
+      "area_id"        => 22,
+      "area_name"      => "Cambridge",
       "consulted_date" => nil,
       "decided_date"   => nil,
       "description"    => "make shop bigger",
       "distance"       => nil,
-      "lat"            => 51.459,
+      "location_x"     => 51.459,
       "link"           => "http://www.planit.org.uk/planapplic/07/0811/FUL",
-      "lng"            => -2.4302,
+      "location_y"     => -2.4302,
       "name"           => "07/0811/FUL",
       "postcode"       => "CB1 3AN",
       "rec_type"       => "PlanApplic",
@@ -58,7 +58,7 @@ describe PlanningApplicationWorker do
       "start_date"     => "2015-03-19",
       "uid"            => "07/0811/FUL",
       "url"            => "http://www.example.com",
-      "when_updated"   => "2015-03-21T03:37:00.690000+00:00",
+      "last_difference"=> "2015-03-21T03:37:00.690000+00:00",
     }
   end
 

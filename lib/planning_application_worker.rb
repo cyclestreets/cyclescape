@@ -60,11 +60,11 @@ class PlanningApplicationWorker
         next unless remote_pa["uid"] && remote_pa["url"]
 
         db_app = PlanningApplication
-                 .find_or_initialize_by uid: remote_pa["uid"], authority_name: remote_pa["authority_name"]
-        %i[address postcode description url start_date app_size app_state app_type associated_id when_updated].each do |attr|
+                 .find_or_initialize_by uid: remote_pa["uid"], authority_name: remote_pa["area_name"]
+        %i[address postcode description url start_date app_size app_state app_type associated_id last_difference].each do |attr|
           db_app[attr] = remote_pa[attr.to_s]
         end
-        db_app.location = "POINT(#{remote_pa['lng']} #{remote_pa['lat']})"
+        db_app.location = "POINT(#{remote_pa['location_x']} #{remote_pa['location_y']})"
         db_app.save!
       end
     end
