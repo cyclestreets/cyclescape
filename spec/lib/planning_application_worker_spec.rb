@@ -4,10 +4,6 @@ require "spec_helper"
 require "planning_filter"
 
 describe PlanningApplicationWorker do
-  before do
-    stub_const("PlanningFilter::LOCAL_AUTHORITIES", %w[London Cambridge])
-  end
-
   let(:planning_record_alt) { planning_record.merge("uid" => "345") }
 
   let!(:london_req) do
@@ -62,18 +58,37 @@ describe PlanningApplicationWorker do
     }
   end
 
-  it "should pull in planning applications, rejecting invalid ones" do
-    expect { subject.process! }.to change { PlanningApplication.count }.by(3)
-    expect(cam_req).to have_been_made
-    expect(london_req).to have_been_made
-    planning_ap = PlanningApplication.find_by(uid: "07/0811/FUL")
-    expect(planning_ap.address).to eq("163 - 167 Mill Road Cambridge Cambridgeshire CB1 3AN")
-    expect(planning_ap.start_date).to eq("2015-03-19".to_date)
+  describe "local_authorities" do
+    before do
+      stub_request(:get, "#{Rails.application.config.planning_areas_url}?select=area_name").to_return(
+        status: 200,
+        body: { "records" => [{ area_name: "aa" }, { area_name: "zz" }] }.to_json
+      )
+    end
+
+    it "returns the local authorities" do
+      expect(subject.local_authorities).to eq(%w[aa zz])
+    end
+  end
+
+  context "with a stubbed local_authorities call" do
+    before do
+      allow(subject).to receive(:local_authorities).and_return(%w[London Cambridge])
+    end
+
+    it "should pull in planning applications, rejecting invalid ones" do
+      expect { subject.process! }.to change { PlanningApplication.count }.by(3)
+      expect(cam_req).to have_been_made
+      expect(london_req).to have_been_made
+      planning_ap = PlanningApplication.find_by(uid: "07/0811/FUL")
+      expect(planning_ap.address).to eq("163 - 167 Mill Road Cambridge Cambridgeshire CB1 3AN")
+      expect(planning_ap.start_date).to eq("2015-03-19".to_date)
+    end
   end
 
   context "with an authority with more than 500 planning applications" do
     before do
-      stub_const("PlanningFilter::LOCAL_AUTHORITIES", ["Multi Page LA"])
+      allow(subject).to receive(:local_authorities).and_return(["Multi Page LA"])
     end
 
     let!(:multi_page_tot_req) do

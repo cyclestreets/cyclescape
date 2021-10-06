@@ -2,6 +2,6 @@
 
 = semantic_form_for @filter,  url: [:admin, @filter] do |f|
   = f.inputs do
-    = f.input :authority, as: :select, collection: [PlanningFilter::STAR] + PlanningFilter::LOCAL_AUTHORITIES
+    = f.input :authority, as: :select, collection: [PlanningFilter::STAR] + PlanningApplicationWorker.new.local_authorities
     = f.input :rule
   = f.actions

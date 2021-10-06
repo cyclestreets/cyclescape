@@ -9,10 +9,26 @@ class PlanningApplicationWorker
   end
 
   def process!
-    new_planning_applications = PlanningFilter::LOCAL_AUTHORITIES.map do |la|
+    new_planning_applications = local_authorities.map do |la|
       get_authority(la)
     end.flatten
     add_applications new_planning_applications
+  end
+
+  def local_authorities
+    Rails.cache.fetch("PlanningApplicationWorker.local_authorities", expires_in: 1.day) do
+      JSON.parse(
+        Excon.new(
+          Rails.application.config.planning_areas_url,
+          headers: { "Accept" => Mime[:json].to_s, "Content-Type" => Mime[:json].to_s },
+          expects: 200, retry_limit: 5
+        ).request(
+          api_query.merge(
+            method: :get, query: { select: :area_name }
+          )
+        ).body
+      )["records"].map { |record| record["area_name"] }
+    end
   end
 
   private
@@ -77,12 +93,6 @@ class PlanningApplicationWorker
       dates = { start_date: (@end_date - 14.days + (5 * days_offset).days),
                 end_date: (@end_date - 10.days + (5 * days_offset).days) }
     end
-    api_query =
-      if SiteConfig.first.planit_api_key
-        { apikey: SiteConfig.first.planit_api_key }
-      else
-        {}
-      end
     {
       method: :get, query:
       api_query.merge(
@@ -92,5 +102,14 @@ class PlanningApplicationWorker
         pg_sz: 500, sort: "-start_date"
       )
     }
+  end
+
+  def api_query
+    @api_query ||=
+      if SiteConfig.first.planit_api_key
+        { apikey: SiteConfig.first.planit_api_key }
+      else
+        {}
+      end
   end
 end

@@ -66,7 +66,8 @@ module Cyclescape
     config.github_project_url = "https://github.com/cyclestreets/cyclescape"
 
     # Planning applications
-    config.planning_applications_url = "https://www.planit.org.uk/find/applics/json"
+    config.planning_applications_url = "https://www.planit.org.uk/api/applics/json"
+    config.planning_areas_url = "https://www.planit.org.uk/api/areas/json"
 
     # Active Job
     config.active_job.queue_adapter = :resque
