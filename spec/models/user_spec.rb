@@ -57,8 +57,8 @@ describe User, type: :model do
     it { is_expected.to have_many(:messages) }
     it { is_expected.to have_many(:thread_subscriptions).dependent(:destroy) }
     it { is_expected.to have_many(:subscribed_threads) }
-    it { is_expected.to have_many(:thread_priorities) }
-    it { is_expected.to have_many(:prioritised_threads) }
+    it { is_expected.to have_many(:thread_favourites) }
+    it { is_expected.to have_many(:favourite_threads) }
     it { is_expected.to have_many(:thread_leader_messages) }
     it { is_expected.to have_many(:leading_threads) }
     it { is_expected.to have_one(:profile) }
@@ -285,13 +285,13 @@ describe User, type: :model do
     end
   end
 
-  context "prioritised threads" do
+  context "favourite threads" do
     subject { create(:user) }
     let(:thread) { create(:message_thread) }
-    let!(:priority) { create(:user_thread_priority, user: subject, thread: thread) }
+    let!(:favourite) { create(:user_thread_favourite, user: subject, thread: thread) }
 
     it "should contain the thread" do
-      expect(subject.prioritised_threads).to include(thread)
+      expect(subject.favourite_threads).to include(thread)
     end
   end
 

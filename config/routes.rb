@@ -128,7 +128,7 @@ Rails.application.routes.draw do
     scope module: :message_thread do
       resources :subscriptions, only: %i[edit create destroy]
       resource :tags, only: [:update]
-      resource :user_priorities, only: %i[create update]
+      resource :user_favourites, only: %i[create destroy]
       resource :leaders, only: %i[create destroy]
     end
   end

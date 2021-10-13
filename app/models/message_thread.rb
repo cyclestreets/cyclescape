@@ -36,7 +36,7 @@ class MessageThread < ApplicationRecord
   has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: "ThreadSubscription", foreign_key: "thread_id", inverse_of: :thread
   has_many :subscribers, through: :subscriptions, source: :user
   has_many :participants, -> { distinct }, through: :messages, source: :created_by
-  has_many :user_priorities, class_name: "UserThreadPriority", foreign_key: "thread_id", inverse_of: :thread
+  has_many :user_favourites, class_name: "UserThreadFavourite", foreign_key: "thread_id", inverse_of: :thread
   has_many :message_thread_closes, -> { order(:created_at) }, dependent: :destroy
   has_many :closed_by, through: :message_thread_closes, source: :user
   has_many :map_messages, foreign_key: :thread_id, inverse_of: :thread
@@ -289,8 +289,8 @@ class MessageThread < ApplicationRecord
       .order("deadline_messages.deadline ASC")
   end
 
-  def priority_for(user)
-    user_priorities.find_by(user_id: user.id) || user_priorities.build(user: user)
+  def favourite_for(user)
+    user_favourites.find_or_initialize_by(user: user)
   end
 
   def messages_text

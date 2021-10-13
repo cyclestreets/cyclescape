@@ -141,13 +141,13 @@ describe MessageThread do
     end
   end
 
-  describe "priorities" do
+  describe "favourites" do
     let(:user) { create(:user) }
     let(:thread) { create(:message_thread) }
-    let!(:priority) { create(:user_thread_priority, user: user, thread: thread) }
+    let!(:favourite) { create(:user_thread_favourite, user: user, thread: thread) }
 
-    it "should confirm that user has prioritised" do
-      expect(thread.priority_for(user)).to eq(priority)
+    it "should confirm that user has favourites" do
+      expect(thread.favourite_for(user)).to eq(favourite)
     end
   end
 

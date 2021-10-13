@@ -1,0 +1,8 @@
+- if signed_in?
+  %div{ id: "favourite-#{thread.id}"}
+    - if user_favourite&.persisted?
+      =link_to thread_user_favourites_path(thread), method: :delete, remote: true do
+        %i.fa.fa-star{style: "color: gold", title: t(".remove_favourite")}
+    - else
+      = link_to thread_user_favourites_path(thread), method: :post, style: "color: grey", remote: true do
+        %i.fa.fa-star-o{title: t(".make_favourite")}

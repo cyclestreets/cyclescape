@@ -28,8 +28,8 @@ class User < ApplicationRecord
   # Would be better using the 'active' named scope on thread_subscriptions instead of the conditions block. But how?
   has_many :subscribed_threads, -> { where("thread_subscriptions.deleted_at is NULL").merge(MessageThread.approved) },
            through: :thread_subscriptions, source: :thread
-  has_many :thread_priorities, class_name: "UserThreadPriority", inverse_of: :user
-  has_many :prioritised_threads, through: :thread_priorities, source: :thread
+  has_many :thread_favourites, class_name: "UserThreadFavourite", inverse_of: :user
+  has_many :favourite_threads, through: :thread_favourites, source: :thread
   has_many :thread_views, inverse_of: :user
   has_many :site_comments
   has_many :private_threads, class_name: "MessageThread", inverse_of: :user
@@ -191,12 +191,8 @@ class User < ApplicationRecord
     MessageThread.with_messages_from(self)
   end
 
-  def prioritised_thread?(thread)
-    thread_priorities.where(thread_id: thread.id).exists?
-  end
-
   def viewed_thread_at(thread)
-    thread_views.find_by(thread_id: thread.id)&.viewed_at
+    thread_views.find_by(thread: thread)&.viewed_at
   end
 
   def disabled

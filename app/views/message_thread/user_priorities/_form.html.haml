@@ -1,9 +1,0 @@
-= semantic_form_for((user_priority || current_user.thread_priorities.build(thread: thread)),
-  url: thread_user_priorities_path(thread),
-  remote: true,
-  html: { method: :put, id: "thread-priority-#{thread.id}" }) do |f|
-  = f.inputs do
-    = f.input(:priority,
-      as: collection_type,
-      collection: f.object.class.priorities_map,
-      input_html: { onchange: "Rails.fire(document.getElementById('thread-priority-#{thread.id}'), 'submit')" })

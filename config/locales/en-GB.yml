@@ -224,8 +224,7 @@
       my_issues_nearby_issues_pointer_html: (You can also %{browse_all_other_issues_link}
         from outside your area(s).)
       browse_all_other_issues: browse all other issues
-      my_priorities_introduction: 'This is a listing of the priorities you have set,
-        most important first:'
+      my_favourites_introduction: 'This is a listing of the favourites you have set:'
       my_threads_introduction: 'Latest updates on the discussion threads you are subscribed to:'
       my_upcoming_deadline_introduction: 'Upcoming deadlines and dates within the
         discussion threads you are subscribed to:'
@@ -236,7 +235,7 @@
         you want to help with, or maybe you could %{add_issue_link} instead?
 
 '
-      no_prioritised_threads_html: 'You haven''t prioritised any threads yet. You
+      no_favourite_threads_html: 'You haven''t prioritised any threads yet. You
         could have a look through the %{threads_link} and see if there''s anything
         that you think is important, or maybe you could %{add_issue_link} instead?
 
@@ -253,7 +252,7 @@
         applications (courtesy of the PlanIt website) in your %{location_link}:'
       planning_applications_lower: planning applications
       recent_threads: recent threads
-      my_priorities: My priorities
+      my_favourites: My favourites
       my_threads: Subscribed threads
       issues_nearby: Latest issues nearby
       map: Map
@@ -800,13 +799,16 @@
       panel:
         edit_tags: edit
         tags: tags
-    user_priorities:
+    user_favourites:
       create:
-        success: Priority saved
-        failure: Couldn't save your priority
-      update:
-        success: Priority updated
-        failure: Couldn't update your priority
+        success: Favourite saved
+        failure: Couldn't save your favourite
+      destroy:
+        success: Favourite removed
+        failure: Couldn't remove your favourite
+      form:
+        make_favourite: Make Favourite
+        remove_favourite: Remove Favourite
     leaders:
       create:
         success: You are now a leader of this thread
@@ -847,8 +849,8 @@
       tag_thread_guidance: Add tags to this thread to find relevant library items.
     new:
       title: New Thread
-    priority_panel:
-      thread_priority: My Thread Priority
+    favourite_panel:
+      thread_favourite: My Thread Favourite
     search:
       clear_submit: Clear
       no_results_found: No results found for '%{query}'.
@@ -1166,13 +1168,6 @@
       thread_html: "From %{application_name} %{link}."
       unsubscribe_html: "You can %{link}."
       stop_following: unsubscribe from this thread
-  thread_priorities:
-    very_high: Top-priority
-    high: Important
-    medium: Moderately Important
-    low: Marginal Interest
-    very_low: Not of Interest
-    nil: None set
   thread_privacy_options:
     public: Public (everyone)
     group: Group (members only)

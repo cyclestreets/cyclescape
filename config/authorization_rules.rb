@@ -152,7 +152,7 @@ authorization do
       if_attribute thread: { private_to_committee?: true, group_committee_members: contains { user } }
     end
     has_permission_on :message_thread_tags, to: :update
-    has_permission_on :message_thread_user_priorities, to: %i[create update]
+    has_permission_on :message_thread_user_favourites, to: %i[create destroy]
     has_permission_on [:message_thread_leaders], join_by: :and do
       to [:create]
       if_attribute subscribers: contains { user }, closed: false

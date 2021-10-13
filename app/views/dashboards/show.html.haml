@@ -3,7 +3,7 @@
     %ul.tabs.styled-tabs.with-history
       %li= link_to t(".my_threads"), "#my-threads"
       %li= link_to t(".issues_nearby"), "#issues-nearby"
-      %li= link_to t(".my_priorities"), "#my-priorities"
+      %li= link_to t(".my_favourites"), "#my-favourites"
       %li= link_to t(".deadlines"), "#deadlines"
       %li= link_to t(".planning_applications"), "#planning-applications"
 
@@ -38,16 +38,16 @@
               = issues_list @relevant_issues, collapsed: true
         - if @relevant_issues.respond_to?(:total_pages)
           = paginate @relevant_issues, param_name: :relevant_issues_page, params: {anchor: 'issues-nearby'}
-      #my-priorities
+      #my-favourites
         %section.threads
-          - if @prioritised_threads.empty?
-            %p= t ".no_prioritised_threads_html", threads_link: link_to(t(".recent_threads"), threads_path),
+          - if @favourite_threads.empty?
+            %p= t ".no_favourite_threads_html", threads_link: link_to(t(".recent_threads"), threads_path),
                                           add_issue_link: link_to(t(".add_a_new_issue"), new_issue_path)
           - else
-            %p= t ".my_priorities_introduction"
+            %p= t ".my_favourites_introduction"
             %table.dashboard-threads
               %tbody
-                - @prioritised_threads.each do |thread|
+                - @favourite_threads.each do |thread|
                   %tr
                     %td.title
                       %h4= link_to thread.title, thread_path(thread)
@@ -55,10 +55,10 @@
                         %p= thread.issue_link
                     %td.activity
                       = thread.latest_activity
-                    %td.meta{id: "priority-thread-#{thread.id}", style: "min-width: 225px"}
-                      = render "message_thread/user_priorities/form", thread: thread, user_priority: @user_priorities.find { |up| up.thread_id == thread.id}, collection_type: :select, cached: true
-        - if @prioritised_threads.respond_to?(:total_pages)
-          = paginate @prioritised_threads, param_name: :prioritised_threads_page, params: {anchor: 'my-priorities'}
+                    %td.meta{id: "favourite-thread-#{thread.id}", style: "min-width: 225px"}
+                      = render "message_thread/user_favourites/form", thread: thread, user_favourite: @user_favourites.find { |up| up.thread_id == thread.id}, collection_type: :select, cached: true
+        - if @favourite_threads.respond_to?(:total_pages)
+          = paginate @favourite_threads, param_name: :favourited_threads_page, params: {anchor: 'my-favourites'}
       #deadlines
         %section.threads
           %p(style="float: right;")= link_to image_tag("ical.gif"), "#{dashboard_path}/#{current_user.public_token}/deadlines.ics"

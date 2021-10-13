@@ -60,13 +60,13 @@ describe "User dashboards" do
       end
     end
 
-    context "priorities" do
+    context "favourites" do
       include_context "signed in as a site user"
 
-      context "no priorities" do
+      context "no favourites" do
         it "should give a warning" do
           visit dashboard_path
-          within("#my-priorities") do
+          within("#my-favourites") do
             expect(page).to have_content(I18n.t(".dashboards.show.add_a_new_issue"))
           end
         end
@@ -74,21 +74,14 @@ describe "User dashboards" do
 
       context "with prioritised threads" do
         let(:thread) { create(:message_thread_with_messages) }
-        let!(:priority) { create(:user_thread_priority, thread: thread, user: current_user) }
+        let!(:favourite) { create(:user_thread_favourite, thread: thread, user: current_user) }
 
-        it "should show the thread" do
+        it "allows changing favourite", js: true do
           visit dashboard_path
-          within("#my-priorities") do
-            expect(page).to have_content(thread.title)
-            expect(page).to have_content(I18n.t("thread_priorities.#{priority.label}"))
-          end
-        end
-
-        it "allows changing priority", js: true do
-          visit dashboard_path
-          click_on(I18n.t("dashboards.show.my_priorities"))
-          select I18n.t("thread_priorities.medium")
-          expect(page).to have_content(I18n.t("message_thread.user_priorities.update.success"))
+          click_on(I18n.t("dashboards.show.my_favourites"))
+          expect(page).to have_content(thread.title)
+          find(".fa-star").click
+          expect(page).to have_content(I18n.t("message_thread.user_favourites.destroy.success"))
         end
       end
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_13_191632) do
+ActiveRecord::Schema.define(version: 2021_10_13_205614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -653,6 +653,14 @@ ActiveRecord::Schema.define(version: 2020_08_13_191632) do
     t.index ["user_id"], name: "index_user_profiles_on_user_id"
   end
 
+  create_table "user_thread_favourites", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "thread_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["thread_id", "user_id"], name: "index_user_thread_favourites_on_thread_id_and_user_id", unique: true
+    t.index ["user_id"], name: "index_user_thread_favourites_on_user_id"
+  end
+
   create_table "user_thread_priorities", id: :serial, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "thread_id", null: false
@@ -751,4 +759,6 @@ ActiveRecord::Schema.define(version: 2020_08_13_191632) do
   add_foreign_key "thread_leader_messages", "users", column: "created_by_id"
   add_foreign_key "user_blocks", "users"
   add_foreign_key "user_blocks", "users", column: "blocked_id"
+  add_foreign_key "user_thread_favourites", "message_threads", column: "thread_id"
+  add_foreign_key "user_thread_favourites", "users"
 end

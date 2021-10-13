@@ -1,4 +1,0 @@
-- if signed_in?
-  %section.priority-panel.box
-    %h2= t ".thread_priority"
-    = render "message_thread/user_priorities/form", thread: @thread, user_priority: @thread.priority_for(current_user), collection_type: :radio
