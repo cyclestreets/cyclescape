@@ -29,7 +29,7 @@ class DashboardsController < ApplicationController
       .page(params[:favourited_threads_page]).per(20)
 
     @favourite_threads = ThreadListDecorator.decorate_collection(favourite_threads)
-    @user_favourites = current_user.thread_favourites.where(thread: favourite_threads).to_a
+    @user_favourites = current_user.thread_favourites.where(thread: favourite_threads + subscribed_threads).to_a
     @planning_applications = PlanningApplicationDecorator.decorate_collection(
       current_user
       .planning_applications_near_locations.ordered.page(params[:planning_page]).per(10).includes(:issue, :users)
@@ -77,6 +77,7 @@ class DashboardsController < ApplicationController
     end
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads.results)
     @threads = ThreadListDecorator.decorate_collection threads.results
+    @user_favourites = current_user.thread_favourites.where(thread: threads.results)
 
     # Issues
     issues = Issue.search(include: %i[created_by tags]) do

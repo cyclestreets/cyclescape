@@ -56,7 +56,7 @@
                     %td.activity
                       = thread.latest_activity
                     %td.meta{id: "favourite-thread-#{thread.id}", style: "min-width: 225px"}
-                      = render "message_thread/user_favourites/form", thread: thread, user_favourite: @user_favourites.find { |up| up.thread_id == thread.id}, collection_type: :select, cached: true
+                      = render "message_thread/user_favourites/form", thread: thread, cached: true
         - if @favourite_threads.respond_to?(:total_pages)
           = paginate @favourite_threads, param_name: :favourited_threads_page, params: {anchor: 'my-favourites'}
       #deadlines

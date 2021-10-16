@@ -7,6 +7,7 @@ class MessageThreadsController < ApplicationController
 
   def index
     threads = ThreadList.recent_public.page(params[:page])
+    @user_favourites = current_user&.thread_favourites&.where(thread: threads)
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
     @threads = ThreadListDecorator.decorate_collection threads
     if current_user

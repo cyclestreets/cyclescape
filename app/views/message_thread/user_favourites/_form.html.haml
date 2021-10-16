@@ -1,4 +1,5 @@
 - if signed_in?
+  - user_favourite = @user_favourites&.present? ? @user_favourites.find { |up| up.thread_id == thread.id} : thread.favourite_for(current_user)
   %div{ id: "favourite-#{thread.id}"}
     - if user_favourite&.persisted?
       =link_to thread_user_favourites_path(thread), method: :delete, remote: true do

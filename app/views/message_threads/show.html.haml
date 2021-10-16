@@ -64,7 +64,7 @@
     %section.social
       = tweet_button text: @thread.title, link: thread_url(@issue)
       = facebook_like thread_url(@issue)
-  = render "message_thread/user_favourites/form", thread: @thread, user_favourite: @thread.favourite_for(current_user)
+  = render "message_thread/user_favourites/form", thread: @thread
   %p
   = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
   = render "library_panel", items: @library_items, thread_tags: @thread.tags

@@ -20,5 +20,5 @@
           = time_tag_with_title(thread.latest_activity_at)
   .status
     = render 'message_threads/subscribe_button', thread: thread
-  = render "message_thread/user_favourites/form", thread: thread, user_favourite: thread.favourite_for(current_user)
+  = render "message_thread/user_favourites/form", thread: thread, cached: true
   .permissions= thread_type(thread)
