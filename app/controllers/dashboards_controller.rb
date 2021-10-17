@@ -77,7 +77,7 @@ class DashboardsController < ApplicationController
     end
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads.results)
     @threads = ThreadListDecorator.decorate_collection threads.results
-    @user_favourites = current_user.thread_favourites.where(thread: threads.results)
+    @user_favourites = current_user&.thread_favourites&.where(thread: threads.results)
 
     # Issues
     issues = Issue.search(include: %i[created_by tags]) do
