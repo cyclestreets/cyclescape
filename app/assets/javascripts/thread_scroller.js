@@ -1,12 +1,16 @@
 $(window).on('load', function () {
-  var offset
-  var viewMessageId = $('[data-view-message-id]').data('view-message-id')
-  if (viewMessageId) {
-    offset = $('#message_' + viewMessageId).offset()
-  }
-  if (!window.location.hash && offset) {
-    $('html, body').animate({
-      scrollTop: offset.top - 77
-    }, 350, 'swing')
+  var lastViewed = document.querySelector('[data-last-viewed]')
+  if (lastViewed) {
+    lastViewed.scrollIntoView()
+    var options = {
+      rootMargin: '-65px 0px 0px 0px',
+      threshold: 1.0
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      if (document.querySelector('[data-last-viewed]') && entries[0] && entries[0].isIntersecting) {
+        $.ajax({url: window.location.pathname, data: {lastViewed: document.querySelector('[data-last-viewed]').dataset.lastViewed}, dataType: 'script'})
+      }
+    }, options)
+    obs.observe(lastViewed)
   }
 })

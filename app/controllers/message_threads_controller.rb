@@ -10,32 +10,44 @@ class MessageThreadsController < ApplicationController
     @user_favourites = current_user&.thread_favourites&.where(thread: threads)
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
     @threads = ThreadListDecorator.decorate_collection threads
-    if current_user
-      @user_subscriptions = current_user.thread_subscriptions.active.where(thread: threads).to_a
-    end
+    @user_subscriptions = current_user.thread_subscriptions.active.where(thread: threads).to_a if current_user
   end
 
   def show
-    set_page_title thread.title
-    @issue = IssueDecorator.decorate thread.issue if thread.issue
-    @messages = thread.messages.approved.includes(
-      *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]
-    )
-    @library_items = Library::Item.find_by_tags_from(thread).limit(5)
-    @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
+    respond_to do |format|
+      format.html do
+        set_page_title thread.title
+        @issue = IssueDecorator.decorate thread.issue if thread.issue
 
-    @view_from = nil
-    if current_user
-      @subscribers = current_user.can_view thread.subscribers
+        if current_user
+          @subscribers = current_user.can_view thread.subscribers
 
-      if (last_viewed = current_user.viewed_thread_at(thread))
-        @view_from = @messages.detect { |m| m.created_at >= last_viewed } || @messages.last
+          @last_viewed = current_user.viewed_thread_at(thread)
+          ThreadRecorder.thread_viewed thread, current_user
+        else
+          @subscribers = thread.subscribers.is_public
+        end
+        messages = thread.messages.approved
+        messages = messages.where(updated_at: @last_viewed...Float::INFINITY) if @last_viewed
+
+        @messages = messages.includes(
+          *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]
+        )
+        @library_items = Library::Item.find_by_tags_from(thread).limit(5)
+        @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
+
+        @subscribers = @subscribers.ordered(thread.group_id).includes(:groups)
       end
-      ThreadRecorder.thread_viewed thread, current_user
-    else
-      @subscribers = thread.subscribers.is_public
+      format.js do
+        messages = thread.messages.approved
+        last_viewed = Time.zone.parse(params["lastViewed"])
+        messages = messages.where.not(updated_at: last_viewed...Float::INFINITY)
+
+        @messages = messages.includes(
+          *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]
+        )
+      end
     end
-    @subscribers = @subscribers.ordered(thread.group_id).includes(:groups)
   end
 
   def edit
