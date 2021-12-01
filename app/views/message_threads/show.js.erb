@@ -1,4 +1,6 @@
-$('[data-last-viewed]').replaceWith('<%= escape_javascript render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true %>')
-var lastViewed = document.querySelector('#lastViewed')
-lastViewed.innerHTML = ''
-lastViewed.scrollIntoView()
+var lastViewedMessageIdDom = document.querySelector('[data-view-message-id]')
+var curScrollPos = lastViewedMessageIdDom.scrollTop;
+var oldScroll = lastViewedMessageIdDom.scrollHeight - lastViewedMessageIdDom.clientHeight;
+$('[data-initially-loaded-from]').replaceWith('<%= escape_javascript render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true %>')
+var newScroll = lastViewedMessageIdDom.scrollHeight - lastViewedMessageIdDom.clientHeight
+lastViewedMessageIdDom.scrollTop = curScrollPos + (newScroll - oldScroll)

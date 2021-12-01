@@ -22,17 +22,24 @@ class MessageThreadsController < ApplicationController
         if current_user
           @subscribers = current_user.can_view thread.subscribers
 
-          @last_viewed = current_user.viewed_thread_at(thread)
+          last_viewed = current_user.viewed_thread_at(thread)
           ThreadRecorder.thread_viewed thread, current_user
         else
           @subscribers = thread.subscribers.is_public
         end
         messages = thread.messages.approved
-        messages = messages.where(updated_at: @last_viewed...Float::INFINITY) if @last_viewed
+        messages = messages.after_date_with_n_before(after_date: last_viewed, n_before: 5) if last_viewed
 
         @messages = messages.includes(
           *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]
         )
+
+        if last_viewed
+          @view_from = @messages.detect { |m| m.created_at >= last_viewed } || @messages.last
+        end
+
+        @initially_loaded_from = @messages.first.updated_at
+
         @library_items = Library::Item.find_by_tags_from(thread).limit(5)
         @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
 
@@ -40,8 +47,8 @@ class MessageThreadsController < ApplicationController
       end
       format.js do
         messages = thread.messages.approved
-        last_viewed = Time.zone.parse(params["lastViewed"])
-        messages = messages.where.not(updated_at: last_viewed...Float::INFINITY)
+        initially_loaded_from = Time.zone.parse(params["initiallyLoadedFrom"])
+        messages = messages.before_date(initially_loaded_from)
 
         @messages = messages.includes(
           *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]

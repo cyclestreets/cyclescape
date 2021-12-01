@@ -9,6 +9,12 @@ class PhotoMessage < MessageComponent
     [caption, description].join(" ")
   end
 
+  def photo_preview_height
+    self["photo_preview_height"] || update(photo_preview_height: photo_preview.height) && photo_preview.height
+  rescue Dragonfly::Job::Fetch::NotFound
+    nil
+  end
+
   private
 
   def storage_path
@@ -20,16 +26,17 @@ end
 #
 # Table name: photo_messages
 #
-#  id            :integer          not null, primary key
-#  caption       :string(255)
-#  description   :text
-#  photo_name    :string
-#  photo_uid     :string(255)      not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime
-#  created_by_id :integer          not null
-#  message_id    :integer          not null
-#  thread_id     :integer          not null
+#  id                   :integer          not null, primary key
+#  caption              :string(255)
+#  description          :text
+#  photo_name           :string
+#  photo_preview_height :integer
+#  photo_uid            :string(255)      not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime
+#  created_by_id        :integer          not null
+#  message_id           :integer          not null
+#  thread_id            :integer          not null
 #
 # Indexes
 #

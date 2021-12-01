@@ -1,4 +1,4 @@
-%section#content.thread
+%section#content.thread{ data: {"view-message-id" => @view_from&.id} }
   %header
     - if @issue
       %p.pre-title= link_to @issue.title, issue_path(@issue)
@@ -38,11 +38,9 @@
             %li= link_to t(".edit"), edit_thread_path(@thread)
           - if permitted_to? :destroy, @thread
             %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t("are_you_sure") }
-  - if @last_viewed
-    %div{ data: {"last-viewed" => @last_viewed } }
+  - if @initially_loaded_from
+    %div{ data: {"initially-loaded-from" => @initially_loaded_from } }
       Scroll up for more
-    %article.message
-      .header-fix{id: 'lastViewed'}
   = render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
   - if @thread.closed
     - closed_by = permitted_to?(:view_profile, @thread.closed_by.last) ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon

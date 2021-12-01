@@ -1,6 +1,8 @@
 %figure.photo
   = link_to thread_photo_path(component.message.thread, component), target: "_blank" do
     = image_tag component.photo_preview.url,
-        alt: t(".photo_alt", caption: component.caption)
+        height: component.photo_preview_height,
+        alt: t(".photo_alt", caption: component.caption),
+        style: "display: block"
   %figcaption
     = component.caption

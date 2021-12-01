@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_13_205614) do
+ActiveRecord::Schema.define(version: 2021_12_01_133753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -405,6 +405,7 @@ ActiveRecord::Schema.define(version: 2021_10_13_205614) do
     t.datetime "created_at", null: false
     t.datetime "updated_at"
     t.string "photo_name"
+    t.integer "photo_preview_height"
     t.index ["created_by_id"], name: "index_photo_messages_on_created_by_id"
     t.index ["message_id"], name: "index_photo_messages_on_message_id"
     t.index ["thread_id"], name: "index_photo_messages_on_thread_id"
