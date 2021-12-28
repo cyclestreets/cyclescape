@@ -1,0 +1,369 @@
+/*jslint browser: true, white: true, single: true, for: true, long: true */
+/*global $, jQuery, layerviewer, routing, EXIF, findEXIFinHEIC, vex, osm2geo, alert, console, window */
+
+var cyclescapeui = (function ($) {
+
+	'use strict';
+
+	// Default settings
+	var _settings =
+	{
+		disactivateCloseSearch: false,
+	};
+
+	var _actions = [
+	];
+
+	// Class properties
+	var _currentWizardPage = 0; // Current page on progress div pages i.e. account creation
+
+
+	return {
+
+		// Main function
+		initialise: function (config) {
+			// Merge the configuration into the settings
+			$.each(_settings, function (setting, value) {
+				if (config.hasOwnProperty(setting)) {
+					_settings[setting] = config[setting];
+				}
+			});
+
+			// Initialise the UI
+			cyclescapeui.navBar();
+			cyclescapeui.searchBar();
+			cyclescapeui.sideContent();
+			cyclescapeui.mapControls();
+			cyclescapeui.popovers();
+			cyclescapeui.segmentedControl();
+			cyclescapeui.contentToggle();
+			cyclescapeui.enableWizard();
+
+
+			// Initialise each section
+			$.each(_actions, function (setting, action) {
+				cyclescapeui[action]();
+			});
+		},
+
+
+		/*
+		 * Nav bar functions
+		 */
+		navBar: function () {
+			// Open nav on click
+			$('#hamburger').on('click', function () {
+				cyclescapeui.openNav();
+			});
+
+			// Enable normal "click" close
+			$('body').on('click', function (event) {
+				if ($('nav').hasClass('open')) {
+					cyclescapeui.closeNav();
+				}
+			});
+
+			// Enable swipe-to-close
+			$('nav').on('swipeleft', function () {
+				if ($('nav').hasClass('open')) {
+					cyclescapeui.closeNav();
+				}
+			});
+
+			// Listen for resize, if hamburger is set to hidden but window expands to desktop
+			$(window).resize(function () {
+				if ($(window).width() > 1000) {
+					$('nav').show();
+				} else {
+					$('nav').hide();
+				}
+			});
+		},
+
+
+		// Open the nav bar
+		openNav: function () {
+			// Add shades
+			$('#shade').removeClass('white').fadeIn('fast');
+
+			// Slide the nav out from the left
+			$('nav').show('slide', { direction: 'left' }, 300, function () {
+				$('nav').addClass('open');
+			})
+		},
+
+
+		// Close the nav bar
+		closeNav: function () {
+			$('#shade').fadeOut();
+			$('nav').removeClass('open');
+			$('nav').hide("slide", { direction: "left" }, 300);
+		},
+
+
+		// Set up the search bar
+		searchBar: function () {
+
+			// Open the search bar if clicking the icon
+			$('#search').on('click', function () {
+				$('#search').addClass('expanded');
+				_settings.disactivateCloseSearch = true;
+				setTimeout(function () {
+					_settings.disactivateCloseSearch = false;
+				}, 1000);
+			});
+
+			// Close the search bar if clicking outside it
+			$('body').on('click', function () {
+				if ($('#search').hasClass('expanded') && _settings.disactivateCloseSearch === false) {
+					$('#search').removeClass('expanded')
+				}
+			});
+		},
+
+
+		// Enable Bootstrap popovers
+		popovers: function () {
+			var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+			var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+				return new bootstrap.Popover(popoverTriggerEl)
+			})
+		},
+
+
+		// Set up mobile side-content view
+		sideContent: function () {
+
+			// Handle filter button
+			$('.show-side-content').on('click', function () {
+				if ($('.side-content').hasClass('visible')) {
+					$('.show-side-content').html('Filter <i class="fa fa-filter"></i>');
+					$('#shade').fadeOut('fast');
+					$('.side-content').removeClass('visible').hide();
+				} else {
+					$('.show-side-content').html('Done <i class="fa fa-check"></i>');
+					$('#shade').addClass('white').fadeIn('fast');
+					$('.side-content').addClass('visible').show()
+				}
+			});
+
+			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
+			$(window).resize(function () {
+				if ($(window).width() > 750) {
+					$('.side-content').show();
+				} else {
+					$('.side-content').hide();
+				}
+			});
+		},
+
+
+		// Set up mobile side-content view
+		mapControls: function () {
+
+			// Handle filter button
+			$('.show-map-controls').on('click', function () {
+				if ($('.map-controls').hasClass('visible')) {
+					$('.show-map-controls').html('Map controls <i class="fa fa-filter"></i>').css('z-index', '97');
+					$('#shade').fadeOut('fast');
+					$('.map-controls').removeClass('visible').hide();
+				} else {
+					$('.show-map-controls').html('Done <i class="fa fa-check"></i>').css('z-index', '99');
+					$('#shade').addClass('white').fadeIn('fast');
+					$('.map-controls').addClass('visible').show()
+				}
+			});
+
+			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
+			$(window).resize(function () {
+				if ($(window).width() > 750) {
+					$('.side-content').show();
+				} else {
+					$('.side-content').hide();
+				}
+			});
+		},
+
+
+		// Segmented control
+		segmentedControl: function () {
+			// Constants
+			const SEGMENTED_CONTROL_BASE_SELECTOR = ".ios-segmented-control";
+			const SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR = ".ios-segmented-control .option input";
+			const SEGMENTED_CONTROL_BACKGROUND_PILL_SELECTOR = ".ios-segmented-control .selection";
+
+			forEachElement(SEGMENTED_CONTROL_BASE_SELECTOR, (elem) => {
+				elem.addEventListener('change', updatePillPosition);
+			});
+			window.addEventListener('resize',
+				updatePillPosition
+			); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
+
+			function updatePillPosition() {
+				forEachElement(SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR, (elem, index) => {
+					if (elem.checked) moveBackgroundPillToElement(elem, index);
+				});
+			}
+
+			function moveBackgroundPillToElement(elem, index) {
+				document.querySelector(SEGMENTED_CONTROL_BACKGROUND_PILL_SELECTOR).style.transform = 'translateX(' + (elem.offsetWidth * index) + 'px)';
+			}
+
+			// Helper functions
+			function forEachElement(className, fn) {
+				Array.from(document.querySelectorAll(className)).forEach(fn);
+			}
+		},
+
+
+		// Searches for a content-view toggle and displays on the checked toggle
+		changeToSelectedView: function () {
+			var desiredDivId = '#content-' + $('input[name=content-view]:checked', '#content-view').val()
+			$('.content-wrapper').hide();
+			$(desiredDivId).show();
+		},
+
+
+		// Enable content toggles between main-content divs on the same page
+		// If a toggle named content-view is found, corresponding divs (named content-#id) will be shown dynamically
+		contentToggle: function () {
+			// At page launch, hide all but default content div
+			if ($('#content-view').length) {
+				cyclescapeui.changeToSelectedView();
+			}
+
+			// Trigger when the segmented control changes
+			$('#content-view').change(function () {
+				cyclescapeui.changeToSelectedView();
+			});
+		},
+
+
+		// Enable progress toggles between pages in a progress div
+		// Ex. account creation wizard
+		enableWizard: function () {
+			// At page launch, hide all but default wizard div
+			if ($('.wizard-content').length) {
+				cyclescapeui.showWizardDiv(_currentWizardPage);
+			}
+
+			cyclescapeui.updateWizardBreadcrumbs();
+
+			// Enable clicking between divs
+			$('.wizard-content button.next').on('click', function () {
+				// Advance to next div
+				_currentWizardPage += 1;
+
+				// Get all divs
+				var divs = $('.wizard-content>div');
+
+				// Hide all
+				divs.hide();
+
+				// Show the next one 
+				if (_currentWizardPage < divs.length) {
+					$(divs[_currentWizardPage]).show();
+
+					// If last div, confetti!
+					if (_currentWizardPage == (divs.length - 1)) {
+						const jsConfetti = new JSConfetti();
+						jsConfetti.addConfetti();
+					}
+				}
+
+				cyclescapeui.updateWizardBreadcrumbs();
+			});
+		},
+
+
+		// Takes a number and shows the corresponding div index
+		showWizardDiv: function (divIndex) {
+			// Get all divs
+			var divs = $('.wizard-content>div');
+
+			// Hide all
+			divs.hide();
+
+			// Show the next one 
+			if (divIndex < divs.length) {
+				$(divs[divIndex]).show();
+			}
+
+			cyclescapeui.updateWizardBreadcrumbs();
+		},
+
+
+		// Update wizard progress chip coloors
+		updateWizardBreadcrumbs: function () {
+			var wizardCrumbs = $('ul.wizard>li>h2')
+
+			// Colour any complete crumbs
+			for (var i = 0; i < _currentWizardPage; i++) {
+				$(wizardCrumbs[i]).removeClass('active').addClass('complete');
+			}
+
+			// Colour the current crumb
+			$(wizardCrumbs[_currentWizardPage]).addClass('active');
+		},
+
+
+		// Display a notification popup with a message 
+		displayNotification: function (notificationText, imageSrc, callback) {
+
+			// Add this notification to the queue
+			_notificationQueue.push({
+				'notificationText': notificationText,
+				'imageSrc': imageSrc,
+				'callback': callback
+			});
+
+			// If the display daemon is already working through a queue, let it do its job
+			if ($('.popup.system-notification').queue('fx').length) {
+				return;
+			}
+
+			// Otherwise start to work through the notification queue
+			cyclescapeui.notificationDaemon();
+		},
+
+
+		// Function to work through a queue of notifications. Will exit after the last notification is shown
+		notificationDaemon: function () {
+			// If there are items in the queue that haven't been displayed
+			var notification = null;
+			if (_notificationQueue.length) {
+
+				// Pop the array
+				notification = _notificationQueue.shift();
+
+				// Set the image and text
+				$('.popup.system-notification img').attr('src', notification.imageSrc);
+				$('.popup.system-notification p.direction').text(notification.notificationText);
+
+				// If we received a callback, change the click event to this
+				if (notification.callback) {
+					$('.notification').one('click', function () {
+						notification.callback();
+					});
+				}
+
+				// Slide down the notification, and hide it after a delay
+				// Upon completetion, call this function again
+				$('.popup.system-notification').slideDown('slow');
+				$('.popup.system-notification').delay(2500).slideUp('slow', cyclescapeui.notificationDaemon);
+			}
+		},
+
+
+		// Function to provide the default notification click behaviour
+		setDefaultNotificationClickBehaviour: function () {
+			// Slide up the ride notification on click
+			$('.notification').on('click', function () {
+				// If there is a queue of 'fx', we dequeue the current notification immediately, rather than waiting for the delay
+				$('.notification').dequeue();
+				$('.notification').slideUp('slow');
+			});
+		},
+
+	};
+}(jQuery));
