@@ -110,6 +110,7 @@ var cyclescapeui = (function ($) {
 			// Open the search bar if clicking the icon
 			$('#search').on('click', function () {
 				$('#search').addClass('expanded');
+				$('#search input').focus();
 				_settings.disactivateCloseSearch = true;
 				setTimeout(function () {
 					_settings.disactivateCloseSearch = false;
@@ -262,13 +263,13 @@ var cyclescapeui = (function ($) {
 
 			// Watch window width to swap text for icons
 			$(window).on('resize', function () {
-				cyclescapeui.setSegmentedControlIcons ();
+				cyclescapeui.setSegmentedControlIcons();
 			});
 
 			// Adjust icons on startup, too
-			cyclescapeui.setSegmentedControlIcons ();			
+			cyclescapeui.setSegmentedControlIcons();
 
-			
+
 		},
 
 		// Function to set icons and text on segmented control
@@ -285,7 +286,7 @@ var cyclescapeui = (function ($) {
 					icon = $("<span />", {
 						html: 'Spanned <i class="fa fa-angle-double-left"></i>',
 						class: "myClass"
-					  });
+					});
 					$(span).empty().html("<i class='fa " + $(span).data('icon') + "></i>");
 				})
 			}
@@ -437,7 +438,6 @@ var cyclescapeui = (function ($) {
 				var desiredUl = $(this).find('input').prop('id');
 				$('.main-content>ul').hide();
 				$('.main-content>ul.' + desiredUl).show();
-				
 			})
 		},
 
