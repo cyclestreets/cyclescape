@@ -130,8 +130,12 @@
 		<div class="content-wrapper" id="content-map">
 			<button class="show-map-controls">Map controls <i class="fa fa-filter"></i></button>
 			<div class="main-content full-screen full-map" style="background-image: url('/images/placeholders/map.png');">
-				<form>
-					<div class="map-controls">
+				<div class="geocoder" id="geocoder">
+					<i class="fa fa-search"></i>
+					<input type="text" placeholder="Search for a place or postcode" />
+				</div>
+				<div class="map-controls">
+					<form>
 						<div class="widget">
 							<div class="title">
 								<h2><i class="fa fa-hashtag"></i> Filter to topic</h2>

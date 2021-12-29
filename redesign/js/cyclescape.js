@@ -32,6 +32,8 @@ var cyclescapeui = (function ($) {
 			// Initialise the UI
 			cyclescapeui.navBar();
 			cyclescapeui.searchBar();
+			cyclescapeui.autocomplete();
+			cyclescapeui.geocoder();
 			cyclescapeui.sideContent();
 			cyclescapeui.mapControls();
 			cyclescapeui.popovers();
@@ -118,6 +120,49 @@ var cyclescapeui = (function ($) {
 				if ($('#search').hasClass('expanded') && _settings.disactivateCloseSearch === false) {
 					$('#search').removeClass('expanded')
 				}
+			});
+		},
+
+
+		// Enable geocoder animations
+		geocoder: function () {
+			$('.geocoder i').on('click', function () {
+				$('.geocoder').toggleClass('expanded');
+				$('.geocoder input').focus()
+			});
+		},
+
+
+		// Enable autocomplete
+		// !TODO add real data
+		autocomplete: function () {
+			var availableTags = [
+				"ActionScript",
+				"AppleScript",
+				"Asp",
+				"BASIC",
+				"C",
+				"C++",
+				"Clojure",
+				"COBOL",
+				"ColdFusion",
+				"Erlang",
+				"Fortran",
+				"Groovy",
+				"Haskell",
+				"Java",
+				"JavaScript",
+				"Lisp",
+				"Perl",
+				"PHP",
+				"Python",
+				"Ruby",
+				"Scala",
+				"Scheme"
+			];
+			$(".geocoder input").autocomplete({
+				appendTo: "#geocoder",
+				source: availableTags
 			});
 		},
 

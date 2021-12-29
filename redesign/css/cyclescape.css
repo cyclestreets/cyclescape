@@ -79,6 +79,27 @@ div.search input {-webkit-appearance: none; border: none; outline: none; font-si
 div.search.expanded input {display: inline;}
 
 
+/* Geocoder */
+div.geocoder {float: left; margin: 10px; padding: 10px 12px; border-radius: 25px; background-color: #FFFFFF; color: #AC3E27; transition: 0.2s; overflow: hidden;}
+div.geocoder:hover {background-color: #ECECEC;}
+div.geocoder i {font-size: 20px; font-weight: 500;}
+div.geocoder input {display: none; width: 300px; border-radius: 25px; padding: 0 10px; border: none; outline: none; font-size: 16px;}
+div.geocoder.expanded:hover {background-color: #FFFFFF;}
+div.geocoder.expanded input {display: inline-block;}
+
+
+/* Geocoder autocomplete */
+.ui-autocomplete-loading + .loader {display: inline-block;}
+.ui-autocomplete {background-color: white; width: 200px; list-style: none; margin: 10px 0 0 0; padding-left: 0; padding-top: 5px; border-radius: 10px; z-index: 9999;}
+.ui-autocomplete li {list-style: none; margin: 2.5px 0; padding: 2.5px 10px; border-radius: 25px;}
+.ui-autocomplete li:hover {background-color: #ECECEC;}
+.ui-autocomplete li:first-child a {padding-top: 9px;}
+.ui-autocomplete li a {padding: 5px 15px 3px; display: block; color: #4d0026;}
+.ui-autocomplete li a span {color: gray; font-size: 0.81em;}
+.ui-autocomplete li a.ui-state-active {cursor: pointer; background-color: #fbf6f8; border-radius: 10px;}
+.ui-helper-hidden-accessible {display: none;}
+
+
 /* Generic elements */
 button.primary {align-self: flex-start; width: auto; border: none; background-color: #ECECEC; color: #AC3E27; border-radius: 25px; padding: 6px 15px; margin: 5px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 button.primary:hover {background-color: white;}
