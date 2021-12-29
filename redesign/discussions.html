@@ -105,27 +105,27 @@
 		<div class="content-wrapper">
 			<button class="show-side-content">Filter items <i class="fa fa-filter"></i></button>
 			<div class="main-content">
-				<div class="ios-segmented-control small">
+				<div class="ios-segmented-control adjustable-icons small">
 					<span class="selection"></span>
 					<div class="option">
 						<input type="radio" id="all" name="discussions-view" value="all" checked="checked" />
-						<label for="all"><span>All</span></label>
+						<label for="all"><span class="fa fa-globe-europe" data-text="All" data-icon="fa-globe-europe"> All</span></label>
 					</div>
 					<div class="option">
 						<input type="radio" id="favourites" name="discussions-view" value="favourites" />
-						<label for="favourites"><span>Favourites</span></label>
+						<label for="favourites"><span class="fa fa-star" data-text="Favourites" data-icon="fa-star"> Favourites</span></label>
 					</div>
 					<div class="option">
 						<input type="radio" id="mine" name="discussions-view" value="mine" />
-						<label for="mine"><span>My participations</span></label>
+						<label for="mine"><span class="fa fa-pencil" data-text="Mine" data-icon="fa-pencil"> Mine</span></label>
 					</div>
 					<div class="option">
 						<input type="radio" id="controversial" name="discussions-view" value="controversial" />
-						<label for="controversial"><span>Controversial</span></label>
+						<label for="controversial"><span class="fa fa-fire-alt" data-text="Popular" data-icon="fa-fire-alt"> Popular</span></label>
 					</div>
 					<div class="option">
 						<input type="radio" id="dates" name="discussions-view" value="dates" />
-						<label for="dates"><span>Dates & deadlines</span></label>
+						<label for="dates"><span class="fa fa-calendar-star" data-text="Deadlines" data-icon="fa-calendar-star"> Deadlines</span></label>
 					</div>
 				</div>
 
@@ -214,8 +214,8 @@
 						</div>
 						<div class="widget-content">
 							<ul class="tags">
-								<li class="tag large-tag">Station Parking</li>
-								<li class="tag large-tag">Community</li>
+								<li class="tag large-tag toggle">Station Parking</li>
+								<li class="tag large-tag toggle">Community</li>
 								<input type="text" placeholder="Type to add a tag..." />
 							</ul>
 						</div>

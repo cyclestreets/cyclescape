@@ -121,11 +121,12 @@ ul.avatars li {margin: 6px 0;}
 ul.links li {margin: 5px 0; text-decoration: underline; cursor: pointer;}
 
 ul.tags {margin: 5px 0; padding: 0;}
-ul.tags li.tag {list-style: none; display: inline; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.5; padding: 2px 5px; transition: 0.3s; cursor: pointer;}
+ul.tags li.tag {list-style: none; display: inline-block; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.5; padding: 2px 5px; margin: 0 0 10px 0; transition: 0.3s; cursor: pointer;}
 ul.tags li.tag:hover {opacity: 1; background: rgb(243, 243, 243);}
 ul.tags li.large-tag {font-size: 15px; opacity: 0.97}
 ul.tags li.large-tag::after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
-ul.tags li.large-tag::before {padding-right: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 600; content: "\f205";}
+ul.tags li.toggle::before {padding-right: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 600; content: "\f205";}
+ul.tags li.large-tag:last-of-type {margin-bottom: 0;}
 
 ul.wizard {margin: 5px; padding: 0; height: 35px; background-color: transparent; text-align: center;}
 ul.wizard li {display: inline-block; border-radius: 25px;}
@@ -205,6 +206,8 @@ ul.add-content li:hover {border-color: #185B3D;}
 .ios-segmented-control .option input {position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; padding: 0; margin: 0; -webkit-appearance: none; -moz-appearance: none; appearance: none; outline: none; border: none; opacity: 0;}  
 .ios-segmented-control .selection {background: #FFFFFF; border: .5px solid rgba(0,0,0,0.04); box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); border-radius: 30px; grid-column: 1; grid-row: 1; z-index: 2; will-change: transform; -webkit-transition: transform .2s ease; transition: transform .2s ease;}  
 .ios-segmented-control .option label span {display: block; position: relative; z-index: 2; -webkit-transition: all .2s ease; transition: all .2s ease; will-change: transform;}
+.ios-segmented-control .option label span {font-family: 'Font Awesome\ 5 Pro', sans-serif;}
+.ios-segmented-control.adjustable-icons .option label span {margin: 10px;}
 .ios-segmented-control .option input:checked+label::before, .ios-segmented-control .option input:checked+label::after {background: var(--background);z-index: 1;}
 .ios-segmented-control .option input:checked+label {cursor: default;}
 
@@ -366,7 +369,7 @@ ul.library li {display: inline-block; border-radius: 25px; width: 300px; height:
 ul.library li:hover {box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 ul.library li img {height: 250px; width: 300px;}
 ul.library li img.map {height: 100px;}
-ul.library li h2 {margin: 10px 5px; padding: 0; color: black; height: 55px;}
+ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 .library input.filter {border: 1px solid #ECECEC; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 10px 10px 20px; width: 100%;}
 
 
@@ -494,7 +497,7 @@ ul.application-types li label {color: white;}
 @media (max-width: 1000px) {
     nav {display: none;}
     button#hamburger {display: inline-block;}
-    #content {margin-left: 0; margin-top: 70px;}
+    #content {margin-left: 0; margin-top: 60px;}
     #top-menu {display: flex;}
 }
 
