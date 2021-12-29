@@ -193,7 +193,7 @@ var cyclescapeui = (function ($) {
 			});
 
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
-			$(window).resize(function () {
+			$(window).on('resize', function () {
 				if ($(window).width() > 750) {
 					$('.side-content').show();
 				} else {
@@ -220,7 +220,7 @@ var cyclescapeui = (function ($) {
 			});
 
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
-			$(window).resize(function () {
+			$(window).on('resize', function () {
 				if ($(window).width() > 750) {
 					$('.side-content').show();
 				} else {
@@ -257,6 +257,36 @@ var cyclescapeui = (function ($) {
 			// Helper functions
 			function forEachElement(className, fn) {
 				Array.from(document.querySelectorAll(className)).forEach(fn);
+			}
+
+			// Watch window width to swap text for icons
+			$(window).on('resize', function () {
+				cyclescapeui.setSegmentedControlIcons ();
+			});
+
+			// Adjust icons on startup, too
+			cyclescapeui.setSegmentedControlIcons ();			
+
+			
+		},
+
+		// Function to set icons and text on segmented control
+		setSegmentedControlIcons: function () {
+			if ($(window).width() > 1200) {
+				// Show text
+				$.each($('.ios-segmented-control.adjustable-icons .option label span'), function (index, span) {
+					$(span).text(' ' + $(span).data('text'));
+				})
+			} else {
+				// Show icons
+				var icon;
+				$.each($('.ios-segmented-control.adjustable-icons .option label span'), function (index, span) {
+					icon = $("<span />", {
+						html: 'Spanned <i class="fa fa-angle-double-left"></i>',
+						class: "myClass"
+					  });
+					$(span).empty().html("<i class='fa " + $(span).data('icon') + "></i>");
+				})
 			}
 		},
 
