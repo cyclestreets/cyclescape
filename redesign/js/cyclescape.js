@@ -12,6 +12,7 @@ var cyclescapeui = (function ($) {
 	};
 
 	var _actions = [
+		'discussions'
 	];
 
 	// Class properties
@@ -21,7 +22,7 @@ var cyclescapeui = (function ($) {
 	return {
 
 		// Main function
-		initialise: function (config) {
+		initialise: function (config, page = false) {
 			// Merge the configuration into the settings
 			$.each(_settings, function (setting, value) {
 				if (config.hasOwnProperty(setting)) {
@@ -43,9 +44,9 @@ var cyclescapeui = (function ($) {
 
 
 			// Initialise each section
-			$.each(_actions, function (setting, action) {
-				cyclescapeui[action]();
-			});
+			if (_actions.includes(page)) {
+				cyclescapeui[page]();
+			};
 		},
 
 
@@ -427,6 +428,17 @@ var cyclescapeui = (function ($) {
 				$('.popup.system-notification').slideDown('slow');
 				$('.popup.system-notification').delay(2500).slideUp('slow', cyclescapeui.notificationDaemon);
 			}
+		},
+
+
+		// Page-specific initialisation
+		discussions: function () {
+			$('.ios-segmented-control div.option').on('click', function () {
+				var desiredUl = $(this).find('input').prop('id');
+				$('.main-content>ul').hide();
+				$('.main-content>ul.' + desiredUl).show();
+				
+			})
 		},
 
 
