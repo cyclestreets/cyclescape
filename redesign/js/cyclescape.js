@@ -17,6 +17,7 @@ var cyclescapeui = (function ($) {
 
 	// Class properties
 	var _currentWizardPage = 0; // Current page on progress div pages i.e. account creation
+	var _pageScroll = 0; // Save page scroll when opening an overlay on mobile
 
 
 	return {
@@ -226,7 +227,10 @@ var cyclescapeui = (function ($) {
 					$('.show-side-content').html('Filter <i class="fas fa-fw fa-filter"></i>');
 					$('#shade').fadeOut('fast');
 					$('.side-content').removeClass('visible').hide();
+					window.scrollTo(0, _pageScroll);
 				} else {
+					_pageScroll = cyclescapeui.getPageScroll();
+					window.scrollTo(0, 0);
 					$('.show-side-content').html('Done <i class="fas fa-fw fa-check"></i>');
 					$('#shade').addClass('white').fadeIn('fast');
 					$('.side-content').addClass('visible').show()
@@ -244,6 +248,20 @@ var cyclescapeui = (function ($) {
 		},
 
 
+		// This function simply gets the window scroll position, works in all browsers.
+		getPageScroll: function () {
+			var yScroll;
+			if (self.pageYOffset) {
+				yScroll = self.pageYOffset;
+			} else if (document.documentElement && document.documentElement.scrollTop) {
+				yScroll = document.documentElement.scrollTop;
+			} else if (document.body) {
+				yScroll = document.body.scrollTop;
+			}
+			return yScroll;
+		},
+
+
 		// Set up mobile side-content view
 		mapControls: function () {
 
@@ -257,6 +275,7 @@ var cyclescapeui = (function ($) {
 					$('.show-map-controls').html('Done <i class="fas fa-fw fa-check"></i>').css('z-index', '99');
 					$('#shade').addClass('white').fadeIn('fast');
 					$('.map-controls').addClass('visible').show()
+					window.scrollTo(0, 0);
 				}
 			});
 

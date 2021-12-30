@@ -43,7 +43,9 @@
 	<link rel="stylesheet" href="/css/cyclescape.css?201224" />
 
 
-	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js"
+		integrity="sha512-MbhLUiUv8Qel+cWFyUG0fMC8/g9r+GULWRZ0axljv3hJhU6/0B3NoL6xvnJPTYZzNqCQU3+TzRVxhkE531CLKg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		tinymce.init({
 			selector: 'textarea',
@@ -55,6 +57,18 @@
 	</script>
 
 </head>
+
+<div class="modal fade addContentModal" id="addContentModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-xl">
+		<div class="modal-content">
+			<div class="modal-body">
+				<h3 class="icon text-centered"><i class="fas fa-fw fa-paperclip"></i></h3>
+				<h3>Generic add media modal</h3>
+				<input type="file" />
+			</div>
+		</div>
+	</div>
+</div>
 
 <body class="discussion">
 	<div id="shade"></div>
@@ -138,18 +152,22 @@
 						</div>
 						<div class="content">
 							<h3>Steve Lopes</h3>
-							<p class="timestamp">one day ago</p>
-							<p class="post">The new A14 is, bar a few trees, all fininished now. I thought I would see
-								where the new cycle super highway from Girton would get me.
-								The signs point to Huntingdon but does it go there?
-								Here's a summary ( and a bit of a rant, sorry) of what I found:
-								https://billboyheritagesurvey.wordpress.com/2021/01/15/old-new-cycle-routes-around-cambridge/
-								It's a shame we don't have a safe direct route to Huntingdon but I suppose the A1307 was
-								intended to be a quiet backwater to amble along.</p>
+							<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
+								<p>one day ago</p>
+							</a>
+							<div class="post">
+								<p>The new A14 is, bar a few trees, all fininished now. I thought I would see
+									where the new cycle super highway from Girton would get me.
+									The signs point to Huntingdon but does it go there?
+									Here's a summary ( and a bit of a rant, sorry) of what I found.
+									It's a shame we don't have a safe direct route to Huntingdon but I suppose the A1307
+									was
+									intended to be a quiet backwater to amble along.</p>
+							</div>
 						</div>
 						<div class="post-actions">
-							<button><i class="fas fa-fw fa-flag"></i></button>
-							<button><i class="fas fa-fw fa-reply"></i></button>
+							<button title="Flag this post"><i class="fas fa-fw fa-flag"></i></button>
+							<button title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
 							<button data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover"
 								data-bs-html="true" data-bs-placement="top" data-bs-content="
 									<ul class='popover-avatar'>
@@ -159,7 +177,7 @@
 									</ul>
 								">
 
-								<i class="fas fa-fw fa-thumbs-up"></i>
+								<i class="fas fa-fw fa-thumbs-up"></i> 3
 							</button>
 						</div>
 					</li>
@@ -169,18 +187,29 @@
 						</div>
 						<div class="content">
 							<h3>Steve Lopes</h3>
-							<p class="timestamp">one day ago</p>
-							<p class="post">The new A14 is, bar a few trees, all fininished now. I thought I would see
-								where the new cycle super highway from Girton would get me.
-								The signs point to Huntingdon but does it go there?
-								Here's a summary ( and a bit of a rant, sorry) of what I found:
-								https://billboyheritagesurvey.wordpress.com/2021/01/15/old-new-cycle-routes-around-cambridge/
-								It's a shame we don't have a safe direct route to Huntingdon but I suppose the A1307 was
-								intended to be a quiet backwater to amble along.</p>
+							<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
+								<p>one day ago</p>
+							</a>
+							<div class="post">
+								<p>The new A14 is, bar a few trees, all fininished now. I thought I would see
+									where the new cycle super highway from Girton would get me.
+									The signs point to Huntingdon but does it go there?
+									Here's a summary ( and a bit of a rant, sorry) of what I found.
+									It's a shame we don't have a safe direct route to Huntingdon but I suppose the A1307
+									was
+									intended to be a quiet backwater to amble along.</p>
+								<ul>
+									<li>Item 1</li>
+									<li>The signs point to Huntingdon but does it go there?</li>
+								</ul>
+								<p>It's a shame we don't have a safe direct route to Huntingdon but I suppose the A1307
+									was
+									intended to be a quiet backwater to amble along.</p>
+							</div>
 						</div>
 						<div class="post-actions">
-							<button><i class="fas fa-fw fa-reply"></i></button>
-							<button><i class="fas fa-fw fa-thumbs-up"></i></button>
+							<button title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
+							<button title="Like this post"><i class="fas fa-fw fa-thumbs-up"></i></button>
 						</div>
 					</li>
 					<li>
@@ -189,19 +218,28 @@
 						</div>
 						<div class="content">
 							<h3>Matthew Danish</h3>
-							<p class="timestamp">one hour ago</p>
-							<p class="post">Nice summary of some of the screw-ups. But I wouldn't say the first five
-								miles are 'well engineered'. Large gaps where they dump you onto informal crossings of
-								slip roads and a mysterious sharp zig-zag around a strange concrete grid 'thing' near
-								Bar Hill (before the diner). Oh, and the permanently shut pool shop gets priority over
-								the cycleway. Not to mention the deadly roundabouts with 'run & pray' crossings. Lovely
-								engineering…
-								The farm road they built north of the A14 is better than the shared-use pavement on the
-								local access road.</p>
+							<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
+								<p>one hour ago</p>
+							</a>
+							<div class="post">
+								<p>Nice summary of some of the screw-ups. But I wouldn't say the first five
+									miles are 'well engineered'. Large gaps where they dump you onto informal crossings
+									of
+									slip roads and a mysterious sharp zig-zag around a strange concrete grid 'thing'
+									near
+									Bar Hill (before the diner). Oh, and the permanently shut pool shop gets priority
+									over
+									the cycleway. Not to mention the deadly roundabouts with 'run & pray' crossings.
+									Lovely
+									engineering…
+									The farm road they built north of the A14 is better than the shared-use pavement on
+									the
+									local access road.</p>
+							</div>
 						</div>
 						<div class="post-actions">
-							<button><i class="fas fa-fw fa-reply"></i></button>
-							<button><i class="fas fa-fw fa-thumbs-up"></i></button>
+							<button title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
+							<button title="Like this post"><i class="fas fa-fw fa-thumbs-up"></i></button>
 						</div>
 					</li>
 					<li class="reply">
@@ -209,32 +247,34 @@
 							<img class="avatar" src="/images/placeholders/avatar1.png" />
 						</div>
 						<div class="content">
-							<textarea></textarea>
-							<div class="reply-footer">
-								<ul class="attachments">
-									<li><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
-									<li><i class="fas fa-fw fa-map"></i> Map</li>
-									<li><a class="add-content" href="#" title="Add more content"
-											data-bs-container="body" data-bs-toggle="popover" data-bs-html="true"
-											data-bs-placement="top" data-bs-content='
-											<ul class="add-content">
-												<li><i class="fas fa-fw fa-camera"></i> Photo</li>
-												<li><i class="fas fa-fw fa-biking"></i> CycleStreets photo</li>
-												<li><i class="fas fa-fw fa-road"></i> Streetview</li>
-												<li><i class="fas fa-fw fa-map"></i> Map</li>
-												<li><i class="fas fa-fw fa-chart-bar"></i> Poll</li>
-												<li><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
-												<li><i class="fas fa-fw fa-paperclip"></i> Attachment</li>
-												<li><i class="fas fa-fw fa-bell"></i> Call to action</li>
-												<li><i class="fas fa-fw fa-crown"></i> Thread leader</li>
-											</ul>
-										'><i class="fas fa-fw fa-camera"></i><i class="fas fa-fw fa-map"></i><i class="fas fa-fw fa-calendar"></i>
-											Add more content…</a></li>
-								</ul>
-								<div class="post-wrapper">
-									<a id="post" href="#">Post message <i class="fas fa-fw fa-plus-circle"></i></a>
+							<form method="POST" action="">
+								<textarea></textarea>
+								<div class="reply-footer">
+									<ul class="attachments">
+										<li><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
+										<li><i class="fas fa-fw fa-map"></i> Map</li>
+										<li><a class="add-content" href="javascript://" title="Add more content"
+												data-bs-container="body" data-bs-toggle="popover" data-bs-html="true"
+												data-bs-placement="top" data-bs-content='
+												<ul class="add-content">
+													<li><i class="fas fa-fw fa-camera"></i> Photo</li>
+													<li><i class="fas fa-fw fa-biking"></i> CycleStreets photo</li>
+													<li><i class="fas fa-fw fa-road"></i> Streetview</li>
+													<li><i class="fas fa-fw fa-map"></i> Map</li>
+													<li><i class="fas fa-fw fa-chart-bar"></i> Poll</li>
+													<li><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
+													<li><i class="fas fa-fw fa-paperclip"></i> Attachment</li>
+													<li><i class="fas fa-fw fa-bell"></i> Call to action</li>
+													<li><i class="fas fa-fw fa-crown"></i> Thread leader</li>
+												</ul>
+											'><i class="fas fa-fw fa-camera"></i><i class="fas fa-fw fa-map"></i><i class="fas fa-fw fa-calendar"></i>
+												Add more content…</a></li>
+									</ul>
+									<div class="post-wrapper">
+										<input type="submit" id="post" href="#" value="Send post" />
+									</div>
 								</div>
-							</div>
+							</form>
 						</div>
 					</li>
 				</ul>
@@ -254,14 +294,18 @@
 				</div>
 				<div class="widget">
 					<div class="title">
-						<i class="fas fa-fw fa-hashtag"></i> Subscribers
+						<i class="fas fa-fw fa-users"></i> Subscribers
 					</div>
 					<div class="widget-content">
 						<ul class="unstyled avatars">
-							<li><img class="avatar" src="/images/placeholders/avatar1.png" /> Steve Lopes</li>
-							<li><img class="avatar" src="/images/placeholders/avatar2.png" /> Paula Oakenfield</li>
-							<li><img class="avatar" src="/images/placeholders/avatar3.png" /> Jimmy Fixer</li>
-							<li><img class="avatar" src="/images/placeholders/avatar1.png" /> Steve Lopes</li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
+									Steve Lopes</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar2.png" />
+									Paula Oakenfield</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar3.png" />
+									Jimmy Fixer</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
+									Steve Lopes</a></li>
 						</ul>
 					</div>
 				</div>

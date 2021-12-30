@@ -31,7 +31,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .title-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
 .title-wrapper .section-title {flex-direction: column; flex: 3; padding: 10px; margin-right: 40px;}
 .title-wrapper .section-title h1, .title-wrapper .section-title p.badge {display: inline-block; width: fit-content;}
-.title-wrapper .section-title p.badge {background-color: #ECECEC; color: #AC3E27; padding: 5px; border-radius: 25px; margin: 0 20px; font-size: 18px; font-weight: 300; align-self: center;}
+.title-wrapper .section-title p.badge {background-color: #ECECEC; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 20px; font-size: 18px; font-weight: 300; align-self: center;}
 .title-wrapper .action-buttons {display: flex; padding: 10px; max-width: 400px;}
 
 .content-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
@@ -125,11 +125,14 @@ div.action .text h2 {font-weight: bold; margin: 0;}
 
 ul.unstyled {list-style: none;}
 
-ul.avatars li {margin: 6px 0;}
+ul.avatars {padding: 0;}
+ul.avatars li a {color: black; text-decoration: none;}
+ul.avatars li {margin: 6px 0; padding: 2.5px 10px 2.5px 15px; border: 1px solid transparent; border-radius: 25px; cursor: pointer;}
+ul.avatars li:hover {border-color: #ECECEC;}
 ul.links li {margin: 5px 0; text-decoration: underline; cursor: pointer;}
 
 ul.tags {margin: 5px 0; padding: 0;}
-ul.tags li.tag {list-style: none; display: inline-block; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.5; padding: 2px 5px; margin: 0 0 10px 0; transition: 0.3s; cursor: pointer;}
+ul.tags li.tag {list-style: none; display: inline-block; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.8; padding: 2px 5px; margin: 0 5px 10px 0; transition: 0.3s; cursor: pointer;}
 ul.tags li.tag:hover {opacity: 1; background: rgb(243, 243, 243);}
 ul.tags li.large-tag {font-size: 15px; opacity: 0.97}
 ul.tags li.large-tag::after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
@@ -305,31 +308,32 @@ ul.deadlines .actions i {padding: 0;}
 .discussion .content-wrapper {margin-bottom: 40px;}
 .discussion img.minimap {border-radius: 50%; width: 100%;}
 ul.thread {padding: 0;}
-ul.thread li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0; padding: 10px 0;}
-ul.thread li:hover {background: #F6F6F6;}
+ul.thread li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; margin: 5px 0; padding: 10px 0;}
 ul.thread li .poster-avatar {flex: 1;}
 ul.thread li .content {flex: 15;}
 ul.thread li .content, ul.thread li .poster-avatar {padding: 2px 10px;}
 ul.thread li .content h3 {margin: 0; padding: 0; font-size: 14px; width: fit-content; display: inline-block;}
-ul.thread li .content p.timestamp {font-style: italic; font-weight: 300; font-size: 12px; display: inline-block;}
-ul.thread li .content p.post {font-size: 13px; font-weight: 400;}
+ul.thread li .content a.timestamp {font-style: italic; text-decoration: none; font-weight: 300; font-size: 12px; display: inline-block; padding-left: 10px; color: black;}
+ul.thread li .content a.timestamp:hover {text-decoration: underline;}
+ul.thread li .content .post {font-size: 14px; font-weight: 400;}
+ul.thread li .content .post ul {list-style-type: circle; font-size: 14px;}
+ul.thread li .content .post ul li {margin: 2.5x 0; padding: 5px 0; display: list-item;}
 ul.thread li .post-actions {align-self: flex-end; margin: 0 10px; text-align: end;}
 ul.thread li .post-actions button {border: none; outline: none; background-color: #ECECEC; border: 1px solid transparent; color: #588734; border-radius: 25px; opacity: .85;}
 ul.thread li .post-actions button:hover {background-color: white; border-color: #ECECEC; opacity: 1;}
-ul.thread li:hover {background: #F6F6F6;}
 ul.thread li.reply .content {border: 0.5px solid #dbdada; border-radius: 25px; padding: 5px 0 0 0; overflow: hidden;}
 ul.thread li.reply:hover {background: none;}
 ul.thread li.reply .reply-footer {background-color: #f6f6f6; border-top-left-radius: 25px; border-top-right-radius: 25px; padding: 5px 10px 10px;}
 ul.thread li.reply ul.attachments {list-style: none; padding: 0;}
-ul.thread li.reply ul.attachments li {border: 0.5px solid #185B3D; border-radius: 25px; display: inline-block; background-color: white; color: #185B3D; padding: 2.5px 10px;}
-ul.thread li.reply ul.attachments li:after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
+ul.thread li.reply ul.attachments li {border: 0.5px solid #185B3D; border-radius: 25px; display: inline-block; background-color: white; color: #185B3D; padding: 2.5px 10px; margin-right: 5px;}
+ul.thread li.reply ul.attachments li:not(:last-child):after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
 ul.thread li.reply ul.attachments li:hover {background: #f0eeee;}
 ul.thread a.add-content {display: inline-block; background-color: white; color: #185B3D; text-decoration: none;}
 ul.thread a.add-content i {padding: 0 2.5px;}
 ul.thread a.add-content:hover {background: #f0eeee;}
 ul.thread .post-wrapper {text-align: right;}
-ul.thread a#post {display: inline-block; border: 0.5px solid #dbdada; background-color: white; color: #B2412B; outline: none; padding: 6.5px 10px; margin: 5px 0 0; border-radius: 25px; text-decoration: none;}
-ul.thread a#post:hover {background: #f0eeee;}
+ul.thread #post {display: inline-block; border: 0.5px solid #dbdada; background-color: white; color: #B2412B; outline: none; padding: 6.5px 10px; margin: 5px 0 0; border-radius: 25px; text-decoration: none;}
+ul.thread #post:hover {background: #f0eeee;}
 
 
 /* tinymce overrides */
@@ -468,6 +472,8 @@ ul.application-types li label {color: white;}
     ul.tags li.tag {background-color: #1d8b5a; color: white; opacity: 0.8;}
     ul.tags li.tag:hover {opacity: 1; background: #22b170;}
 
+    ul.avatars li a {color: white;}
+
     .ios-segmented-control {background: #3B3F50;}
     .ios-segmented-control .option label {color: white;}
     .ios-segmented-control .selection {background: #63646D;}
@@ -476,6 +482,10 @@ ul.application-types li label {color: white;}
     ul.discussions li div.content p {color: white;}
     ul.discussions li a:hover, ul.deadlines li a:hover {background-color: #5f6169;}
     ul.discussions li div.minimap .unread p {background-color: #ce5740; color: white;}
+
+    ul.thread li.reply .content {border: none;}
+    ul.thread li .content a.timestamp {color: white;}
+    ul.thread li.reply .reply-footer {background-color: #2D303E;}
 
     .widget .title {color: #ECECEC; background-color: #1d8b5a;}
 
