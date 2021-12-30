@@ -35,6 +35,7 @@ var cyclescapeui = (function ($) {
 			cyclescapeui.navBar();
 			cyclescapeui.searchBar();
 			cyclescapeui.autocomplete();
+			cyclescapeui.tagsAutocomplete();
 			cyclescapeui.geocoder();
 			cyclescapeui.sideContent();
 			cyclescapeui.mapControls();
@@ -204,6 +205,40 @@ var cyclescapeui = (function ($) {
 			];
 			$(".geocoder input").autocomplete({
 				appendTo: "#geocoder",
+				source: availableTags
+			});
+		},
+
+
+		// Enable autocomplete
+		// !TODO add real data
+		tagsAutocomplete: function () {
+			var availableTags = [
+				"ActionScript",
+				"AppleScript",
+				"Asp",
+				"BASIC",
+				"C",
+				"C++",
+				"Clojure",
+				"COBOL",
+				"ColdFusion",
+				"Erlang",
+				"Fortran",
+				"Groovy",
+				"Haskell",
+				"Java",
+				"JavaScript",
+				"Lisp",
+				"Perl",
+				"PHP",
+				"Python",
+				"Ruby",
+				"Scala",
+				"Scheme"
+			];
+			$("input.group-autocomplete").autocomplete({
+				appendTo: ".group-search",
 				source: availableTags
 			});
 		},
@@ -405,6 +440,9 @@ var cyclescapeui = (function ($) {
 				}
 
 				cyclescapeui.updateWizardBreadcrumbs();
+
+				// Autofocus on the first field
+				$('input').first().focus();
 			});
 		},
 
@@ -421,6 +459,9 @@ var cyclescapeui = (function ($) {
 			if (divIndex < divs.length) {
 				$(divs[divIndex]).show();
 			}
+
+			// Autofocus on the first field
+			$('input').first().focus();
 
 			cyclescapeui.updateWizardBreadcrumbs();
 		},
