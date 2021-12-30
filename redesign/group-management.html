@@ -44,7 +44,7 @@
 
 </head>
 
-<body class="groups">
+<body class="new-discussion">
 	<div id="shade"></div>
 	<div id="top-menu">
 		<h1>cyclescape</h1>
@@ -83,6 +83,7 @@
 			<ul>
 				<li><i class="fas fa-fw fa-users"></i>Change group</li>
 				<a href="group-management.html">
+					<a href="group-management.html">
 					<li><i class="fas fa-fw fa-users-cog"></i>Group management</li>
 				</a>
 				<a href="profile.html">
@@ -98,57 +99,48 @@
 	</div>
 
 	<div id="content">
-		<div class="header" style="background-image: url('/images/placeholders/group-header.jpeg');">
-			<div class="content">
-				<img class="logo inline" src="/images/placeholders/group-logo.png" />
-				<h1 class="inline">Cambridge Cycling Campaign</h1>
-				<div class="links">
-					<a href="#"><i class="fas fa-fw fa-twitter"></i></a>
-					<a href="#"><i class="fas fa-fw fa-facebook-square"></i></a>
-					<a href="#"><i class="fas fa-fw fa-globe-europe"></i></a>
-				</div>
+		<div class="title-wrapper">
+			<div class="section-title">
+				<h1><i class="fas fa-fw fa-user-crown"></i> Generic admin panel</h1>
+				<p class="light">Panel description</p>
 			</div>
-			<div class="minimap" style="background-image: url('/images/placeholders/minimap.png');"></div>
 		</div>
-		<hr>
 		<div class="content-wrapper">
 			<div class="main-content">
-				<p class="light drop-cap">Cambridge Cycling Campaign was formed in 1995 to provide a voice for cyclists
-					in Cambridge and the surrounding villages. We aren't a cycling club, but an organisation of
-					volunteers campaigning for the rights of cyclists and promoting cycling in and around Cambridge. We
-					lobby for better and more convenient conditions for cycling, safer roads, and more people on bikes.
-					It is now a charity, registered number 1138098. More information at https://www.camcycle.org.uk</p>
-				<button class="primary">Join our discussions<i class="fas fa-fw fa-caret-right"></i></button>
-				<br>
-				<div class="action">
-					<div class="icon"><i class="fas fa-fw fa-book-open"></i></div>
-					<div class="text">
-						<h2>View discussions</h2>
-						<p class="description">There are 23 new discussions in your area. See what’s going on!</p>
+				<hr />
+				<form>
+					<label for="title">Input</label>
+					<input type="text" id="title" name="title" autofocus="autofocus" placeholder="Click to add a title…" />
+					<label for="description">Textarea</label>
+					<textarea id="description" name="description" placeholder="Click to add a description…"
+						rows="4"></textarea>
+					<label for="category">Category</label>
+					<div class="radio">
+						<input type="radio" id="campaigning" name="category" value="campaigning">
+						<label for="campaigning">A</label><br>
+						<input type="radio" id="administration" name="category" value="adminstration">
+						<label for="administration">B</label><br>
+						<input type="radio" id="general" name="category" value="general">
+						<label for="general">C</label>
 					</div>
-				</div>
-				<div class="action">
-					<div class="icon"><i class="fas fa-fw fa-rocket"></i></div>
-					<div class="text">
-						<h2>Browse issues</h2>
-						<p class="description">Browse our map to see what's happening in this area.</p>
+					<label for="tags">Tags</label>
+					<div class="category tags">
+						<div class="widget">
+							<input type="text" placeholder="Type to add a tag…" />
+							<div class="widget-content">
+								<ul class="tags">
+									<li class="tag large-tag">Tag 1</li>
+									<li class="tag large-tag">Tag 2</li>
+									<br />
+								</ul>
+							</div>
+						</div>
 					</div>
-				</div>
+					<input type="submit" value="Button" />
+				</form>
 			</div>
 			<div class="side-content">
-				<div class="widget">
-					<div class="title">
-						<h2><i class="fas fa-fw fa-biking"></i> Committee members</h2>
-					</div>
-					<div class="widget-content">
-						<ul class="unstyled avatars">
-							<li><img class="avatar" src="/images/placeholders/avatar1.png" /> Steve Lopes</li>
-							<li><img class="avatar" src="/images/placeholders/avatar2.png" /> Paula Oakenfield</li>
-							<li><img class="avatar" src="/images/placeholders/avatar3.png" /> Jimmy Fixer</li>
-							<li><img class="avatar" src="/images/placeholders/avatar1.png" /> Steve Lopes</li>
-						</ul>
-					</div>
-				</div>
+
 			</div>
 		</div>
 	</div>
