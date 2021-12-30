@@ -170,7 +170,7 @@ div.controls ul.map-buttons {display: flex; border-radius: 25px; padding: 7.5px;
 div.controls ul.map-buttons li {flex: 1; padding: 10px 0 0 0; border-radius: 25px; margin: 0 2.5px; cursor: pointer;}
 div.controls ul.map-buttons li.active {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04)}
 div.controls ul.map-buttons li:hover {background-color: #ffffff;}
-div.controls ul.map-buttons li i {display: block; text-align: center; color: #B2412B; font-size: 20px;}
+div.controls ul.map-buttons li i {display: block; text-align: center; color: #B2412B; font-size: 20px; margin: 0 auto;}
 div.controls ul.map-buttons li p {text-align: center; font-size: 13px;}
 
 
@@ -178,7 +178,7 @@ div.controls ul.map-buttons li p {text-align: center; font-size: 13px;}
 form input, form textarea {padding: 10px; outline: none; border: 1px solid #ECECEC; border-radius: 25px; margin: 10px 0 5px;}
 form .radio, form .category {display: flex; background-color: #ECECEC; border-radius: 25px; padding: 5px;}
 form .radio input, form .radio label {align-self: center;}
-form .radio label {margin: 5px 10px;}
+form .radio label {margin: 5px 15px 5px 5px;}
 form .radio input {margin-left: 5px;}
 form input[type="submit"] {width: fit-content; border: none; background-color: #ECECEC; color: #AC3E27; border-radius: 25px; padding: 6px 15px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 form input[type="submit"]:hover {background-color: white;}
@@ -345,10 +345,13 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-discussion .main-content form>label {grid-column: 1 / 2; color: #185B3D; font-weight: bold;}
 .new-discussion .main-content input, .new-discussion .main-content textarea {margin: 0;}
 .new-discussion .main-content form>input>button {grid-column: 2 / 3;}
-.new-discussion .main-content .minimap {height: 150px; width: 150px; border-radius: 100%; text-align: end;}
+.new-discussion .main-content .minimap {height: 150px; width: 150px; border-radius: 100%; text-align: end; border: 1px solid transparent; cursor: pointer;}
+.new-discussion .main-content .minimap:hover {box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 .new-discussion div.radio {padding: 5px 20px;}
 .new-discussion div.category div.widget {margin: 0;}
 .new-discussion div.category.tags {background-color: #ECECEC; border-radius: 25px; padding: 10px;}
+.new-discussion div.category.tags p {font-size: 12px; margin-left: 15px;}
+.new-discussion div.category.tags input[type="search"] {margin-left: 10px;}
 .locationModal img.map {border-radius: 25px; width: 100%;}
 .locationModal div.controls {position: absolute; top: 0; right: 0; padding: 20px; width: 300px; border-radius: 25px; background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); margin: 5px;}
 
