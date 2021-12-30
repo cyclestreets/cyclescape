@@ -109,20 +109,51 @@ var cyclescapeui = (function ($) {
 
 			// Open the search bar if clicking the icon
 			$('#search').on('click', function () {
-				$('#search').addClass('expanded');
-				$('#search input').focus();
-				_settings.disactivateCloseSearch = true;
-				setTimeout(function () {
-					_settings.disactivateCloseSearch = false;
-				}, 1000);
+				if (!$('#search').hasClass('expanded')) {
+					$('#search i').toggleClass('fa-search').toggleClass('fa-times-circle');
+					$('#search').addClass('expanded');
+					
+
+					$('#search input').focus();
+					_settings.disactivateCloseSearch = true;
+					setTimeout(function () {
+						_settings.disactivateCloseSearch = false;
+					}, 100);
+				}	
+			});
+
+			// Close search box on escape key		
+			document.onkeydown = function(evt) {
+				evt = evt || window.event;
+				var isEscape = false;
+				if ("key" in evt) {
+					isEscape = (evt.key === "Escape" || evt.key === "Esc");
+				} else {
+					isEscape = (evt.keyCode === 27);
+				}
+				if (isEscape) {
+					cyclescapeui.closeSearchBar ();
+				}
+			};
+
+			// Close the search bar if clicking on the x
+			$('#search fa-times-circle').on('click', function () {
+				cyclescapeui.closeSearchBar ();
 			});
 
 			// Close the search bar if clicking outside it
 			$('body').on('click', function () {
-				if ($('#search').hasClass('expanded') && _settings.disactivateCloseSearch === false) {
-					$('#search').removeClass('expanded')
-				}
+				cyclescapeui.closeSearchBar ();
 			});
+		},
+
+
+		// Close search bar
+		closeSearchBar: function () {
+			if ($('#search').hasClass('expanded') && _settings.disactivateCloseSearch === false) {
+				$('#search').removeClass('expanded')
+				$('#search i').toggleClass('fa-search').toggleClass('fa-times-circle');
+			}
 		},
 
 
@@ -184,11 +215,11 @@ var cyclescapeui = (function ($) {
 			// Handle filter button
 			$('.show-side-content').on('click', function () {
 				if ($('.side-content').hasClass('visible')) {
-					$('.show-side-content').html('Filter <i class="fa fa-filter"></i>');
+					$('.show-side-content').html('Filter <i class="fas fa-fw fa-filter"></i>');
 					$('#shade').fadeOut('fast');
 					$('.side-content').removeClass('visible').hide();
 				} else {
-					$('.show-side-content').html('Done <i class="fa fa-check"></i>');
+					$('.show-side-content').html('Done <i class="fas fa-fw fa-check"></i>');
 					$('#shade').addClass('white').fadeIn('fast');
 					$('.side-content').addClass('visible').show()
 				}
@@ -211,11 +242,11 @@ var cyclescapeui = (function ($) {
 			// Handle filter button
 			$('.show-map-controls').on('click', function () {
 				if ($('.map-controls').hasClass('visible')) {
-					$('.show-map-controls').html('Map controls <i class="fa fa-filter"></i>').css('z-index', '97');
+					$('.show-map-controls').html('Map controls <i class="fas fa-fw fa-filter"></i>').css('z-index', '97');
 					$('#shade').fadeOut('fast');
 					$('.map-controls').removeClass('visible').hide();
 				} else {
-					$('.show-map-controls').html('Done <i class="fa fa-check"></i>').css('z-index', '99');
+					$('.show-map-controls').html('Done <i class="fas fa-fw fa-check"></i>').css('z-index', '99');
 					$('#shade').addClass('white').fadeIn('fast');
 					$('.map-controls').addClass('visible').show()
 				}
@@ -284,7 +315,7 @@ var cyclescapeui = (function ($) {
 				var icon;
 				$.each($('.ios-segmented-control.adjustable-icons .option label span'), function (index, span) {
 					icon = $("<span />", {
-						html: 'Spanned <i class="fa fa-angle-double-left"></i>',
+						html: 'Spanned <i class="fas fa-fw fa-angle-double-left"></i>',
 						class: "myClass"
 					});
 					$(span).empty().html("<i class='fa " + $(span).data('icon') + "></i>");

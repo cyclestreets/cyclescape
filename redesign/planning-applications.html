@@ -26,7 +26,7 @@
 		defer></script>
 
 	<!-- Icons -->
-	<script src="https://kit.fontawesome.com/a546f29d67.js" crossorigin="anonymous"></script>
+	<script src="/js/lib/fontawesomea546f29d67.js" crossorigin="anonymous"></script>
 
 	<!-- Animations -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -49,31 +49,31 @@
 	<div id="top-menu">
 		<h1>cyclescape</h1>
 	</div>
-	<button id="hamburger"><i class="fa fa-bars"></i></button>
+	<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 	<nav>
 		<div class="title padding">
-			<img src="/images/cyclescape-icon.png" alt="Image of a map pin with a stylised bicycle inside" />
-			<h1>cyclescape</h1>
+			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="Image of a map pin with a stylised bicycle inside" /></a>
+			<a class="unstyled" href="index.html"><h1>cyclescape</h1></a>
 			<p>York Cycle Campaign</p>
 		</div>
 		<div class="padding">
 			<ul>
 				<a href="discussions.html">
-					<li><i class="fa fa-microphone"></i>Discuss</li>
+					<li><i class="fas fa-fw fa-microphone"></i>Discuss</li>
 				</a>
 				<a href="browse-issues.html">
-					<li><i class="fa fa-rocket"></i>Browse</li>
+					<li><i class="fas fa-fw fa-rocket"></i>Browse</li>
 				</a>
 				<hr>
 				<a href="new-idea.html">
-					<li><i class="fa fa-lightbulb"></i>Ideas</li>
+					<li><i class="fas fa-fw fa-lightbulb"></i>Ideas</li>
 				</a>
 				<a href="planning-applications.html">
-					<li class="active"><i class="fa fa-sign"></i>Planning applications</li>
+					<li class="active"><i class="fas fa-fw fa-sign"></i>Planning applications</li>
 				</a>
 				<hr>
 				<a href="library.html">
-					<li><i class="fa fa-book-open"></i>Library</li>
+					<li><i class="fas fa-fw fa-book-open"></i>Library</li>
 				</a>
 				<hr>
 			</ul>
@@ -81,10 +81,12 @@
 
 		<div class="padding nav-bottom">
 			<ul>
-				<li><i class="fa fa-users"></i>Change group</li>
-				<li><i class="fa fa-users-cog"></i>Group management</li>
+				<li><i class="fas fa-fw fa-users"></i>Change group</li>
+				<a href="group-management.html">
+					<li><i class="fas fa-fw fa-users-cog"></i>Group management</li>
+				</a>
 				<a href="profile.html">
-					<li><i class="fa fa-id-card-alt"></i>My profile</li>
+					<li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
 				</a>
 			</ul>
 		</div>
@@ -92,13 +94,13 @@
 
 	<div id="search" class="search">
 		<i class="fal fa-search"></i>
-		<input type="search" name="search" placeholder="Search for anything..." />
+		<input type="search" name="search" placeholder="Search for anything…" />
 	</div>
 
 	<div id="content">
 		<div class="title-wrapper">
 			<div class="section-title">
-				<h1><i class="fa fa-sign"></i> Planning applications</h1>
+				<h1><i class="fas fa-fw fa-sign"></i> Planning applications</h1>
 				<div class="container">
 					<div class="row align-items-start">
 						<div class="col">
@@ -111,11 +113,11 @@
 									<span class="selection"></span>
 									<div class="option">
 										<input type="radio" id="map" name="content-view" value="map" checked />
-										<label for="map"><span><i class="fa fa-map"></i> Map</span></label>
+										<label for="map"><span><i class="fas fa-fw fa-map"></i> Map</span></label>
 									</div>
 									<div class="option">
 										<input type="radio" id="list" name="content-view" value="list" />
-										<label for="list"><span><i class="fa fa-list"></i> List</span></label>
+										<label for="list"><span><i class="fas fa-fw fa-list"></i> List</span></label>
 									</div>
 								</div>
 							</form>
@@ -128,7 +130,7 @@
 
 
 		<div class="content-wrapper" id="content-map">
-			<button class="show-map-controls">Filter items <i class="fa fa-filter"></i></button>
+			<button class="show-map-controls">Filter items <i class="fas fa-fw fa-filter"></i></button>
 			<div class="main-content full-screen full-map"
 				style="background-image: url('/images/placeholders/map.png');">
 				<form>
@@ -136,7 +138,7 @@
 						<h2>Refine search</h2>
 						<div class="widget">
 							<div class="title">
-								<h2><i class="fa fa-sort-size-up-alt"></i> Size of development</h2>
+								<h2><i class="fas fa-fw fa-sort-size-up-alt"></i> Size of development</h2>
 							</div>
 							<div class="widget-content">
 								<div class="category">
@@ -159,7 +161,7 @@
 						</div>
 						<div class="widget">
 							<div class="title">
-								<h2><i class="fa fa-filter"></i> Application type</h2>
+								<h2><i class="fas fa-fw fa-filter"></i> Application type</h2>
 							</div>
 							<div class="widget-content">
 								<div class="category">
@@ -202,7 +204,7 @@
 						</div>
 						<div class="widget">
 							<div class="title">
-								<h2><i class="fa fa-calendar-week"></i> Date range</h2>
+								<h2><i class="fas fa-fw fa-calendar-week"></i> Date range</h2>
 							</div>
 							<div class="widget-content">
 								<label for="from">From:</label>
@@ -223,7 +225,7 @@
 						</div>
 						<div class="widget">
 							<div class="title">
-								<h2><i class="fa fa-thumbs-up"></i> Application status</h2>
+								<h2><i class="fas fa-fw fa-thumbs-up"></i> Application status</h2>
 							</div>
 							<div class="widget-content">
 								<div class="category">
@@ -254,7 +256,7 @@
 								planning permission
 								HGY/2018/3655
 							</h2>
-							<a href="#" class="convert"><i class="fa fa-comment-alt-exclamation"></i> Convert to an
+							<a href="#" class="convert"><i class="fas fa-fw fa-comment-alt-exclamation"></i> Convert to an
 								issue</a>
 							<a href="#" class="hide">Vote to hide</a>
 
@@ -279,7 +281,7 @@
 								planning permission
 								HGY/2018/3655
 							</h2>
-							<a href="#" class="convert"><i class="fa fa-comment-alt-exclamation"></i> Convert to an
+							<a href="#" class="convert"><i class="fas fa-fw fa-comment-alt-exclamation"></i> Convert to an
 								issue</a>
 							<a href="#" class="hide">Vote to hide</a>
 
@@ -304,7 +306,7 @@
 								planning permission
 								HGY/2018/3655
 							</h2>
-							<a href="#" class="convert"><i class="fa fa-comment-alt-exclamation"></i> Convert to an
+							<a href="#" class="convert"><i class="fas fa-fw fa-comment-alt-exclamation"></i> Convert to an
 								issue</a>
 							<a href="#" class="hide">Vote to hide</a>
 
@@ -329,7 +331,7 @@
 								planning permission
 								HGY/2018/3655
 							</h2>
-							<a href="#" class="convert"><i class="fa fa-comment-alt-exclamation"></i> Convert to an
+							<a href="#" class="convert"><i class="fas fa-fw fa-comment-alt-exclamation"></i> Convert to an
 								issue</a>
 							<a href="#" class="hide">Vote to hide</a>
 
@@ -354,7 +356,7 @@
 								planning permission
 								HGY/2018/3655
 							</h2>
-							<a href="#" class="convert"><i class="fa fa-comment-alt-exclamation"></i> Convert to an
+							<a href="#" class="convert"><i class="fas fa-fw fa-comment-alt-exclamation"></i> Convert to an
 								issue</a>
 							<a href="#" class="hide">Vote to hide</a>
 

@@ -14,6 +14,12 @@ p.drop-cap:first-child:first-letter {font-size: 75px;}
 h3.drop-cap:first-child:first-letter {font-size: 62px; line-height: 42px;}
 a.text {color: #AC3E27;}
 
+html.fa-events-icons-loading .fa-fw {display: inline-block; width: 1.28571429em;;}
+html.fa-events-icons-loading .fa-fw::before {content: "\00a0";}
+html.fa-events-icons-loading body {
+    display: none;
+}
+
 
 /* Basic layout */
 html, body {height: 100%;}
@@ -35,6 +41,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .show-side-content, .show-map-controls {display: none; position: fixed; bottom: 0; right: 5%; padding: 10px; margin: 10px auto; border-radius: 25px; color: white; font-size: 100%; height: 50px; border: none; outline: none; background-color: #AC3E27; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: 0.2s; line-height: 1; z-index: 98}
 .show-side-content:hover, .show-map-controls:hover {background-color: #c76a58;}
 
+.unstyled {text-decoration: none;}
 .padding {padding: 10px;}
 .inline {display: inline;}
 .centered {align-self: center;}
@@ -57,7 +64,7 @@ nav hr {color: white; margin: 12.5px 0 12.5px -10px; height: 2px !important; opa
 nav .title img {width: 30px; margin-top: -16px;}
 nav .title h1 {display: inline; font-style: italic; font-size: 35px;}
 nav .title p {font-style: italic; font-size: 14px; color: #AC3E27; margin-left: 35px;}
-nav i {padding-left: 10px; padding-right: 20px; color: #939393; font-size: 20px; width: 40px;}
+nav i {padding-left: 10px; padding-right: 30px; color: #939393; font-size: 20px; width: 40px; height: 20px; line-height: 20px;}
 nav ul {list-style-type: none; padding: 0; margin: 0;}
 nav ul a {text-decoration: none;}
 nav li {padding: 10px 5px; margin: 2.5px 0; color: #185B3D; border-radius: 25px; font-size: 17px; cursor: pointer;}
@@ -252,13 +259,14 @@ ul.add-content li:hover {border-color: #185B3D;}
 
 /* Discussions */
 ul.discussions {padding: 0; margin: 15px 0;}
-ul.discussions li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0;}
-ul.discussions li:hover {background: #F6F6F6;}
+ul.discussions li {display: block; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0;}
+ul.discussions li a {text-decoration: none; display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0;}
+ul.discussions li a:hover {background: #F6F6F6;}
 ul.discussions li i.favourite {padding: 30px; align-self: center; font-size: 20px; color: #F6F6F6;}
 ul.discussions li i.favourite.favourited {color: #FEAE00;}
 ul.discussions li div.content {flex-direction: column; align-self: center; flex: 2; padding: 10px;}
 ul.discussions li div.content h3, p {margin: 5px 0;}
-ul.discussions li div.content p {display: inline-block; line-height: 15px; font-weight: 300; width: fit-content; font-size: 13px;}
+ul.discussions li div.content p {display: inline-block; line-height: 15px; font-weight: 300; width: fit-content; font-size: 13px; color: black;}
 ul.discussions li div.content img {display: inline; padding-left: 20px;}
 ul.discussions li div.minimap {flex: 1; padding: 10px;}
 ul.discussions li div.minimap .unread {position: absolute; padding-left: 90px;}
@@ -460,7 +468,8 @@ ul.application-types li label {color: white;}
     .ios-segmented-control .selection {background: #63646D;}
 
     ul.discussions li {background-color: #3B3F50;}
-    ul.discussions li:hover, ul.deadlines li:hover {background-color: #5f6169;}
+    ul.discussions li div.content p {color: white;}
+    ul.discussions li a:hover, ul.deadlines li a:hover {background-color: #5f6169;}
     ul.discussions li div.minimap .unread p {background-color: #ce5740; color: white;}
 
     .widget .title {color: #ECECEC; background-color: #1d8b5a;}
