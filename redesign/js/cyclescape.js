@@ -120,18 +120,18 @@ var cyclescapeui = (function ($) {
 				if (!$('#search').hasClass('expanded')) {
 					$('#search i').toggleClass('fa-search').toggleClass('fa-times-circle');
 					$('#search').addClass('expanded');
-					
+
 
 					$('#search input').focus();
 					_settings.disactivateCloseSearch = true;
 					setTimeout(function () {
 						_settings.disactivateCloseSearch = false;
 					}, 100);
-				}	
+				}
 			});
 
 			// Close search box on escape key		
-			document.onkeydown = function(evt) {
+			document.onkeydown = function (evt) {
 				evt = evt || window.event;
 				var isEscape = false;
 				if ("key" in evt) {
@@ -140,18 +140,18 @@ var cyclescapeui = (function ($) {
 					isEscape = (evt.keyCode === 27);
 				}
 				if (isEscape) {
-					cyclescapeui.closeSearchBar ();
+					cyclescapeui.closeSearchBar();
 				}
 			};
 
 			// Close the search bar if clicking on the x
 			$('#search fa-times-circle').on('click', function () {
-				cyclescapeui.closeSearchBar ();
+				cyclescapeui.closeSearchBar();
 			});
 
 			// Close the search bar if clicking outside it
 			$('body').on('click', function () {
-				cyclescapeui.closeSearchBar ();
+				cyclescapeui.closeSearchBar();
 			});
 		},
 
@@ -307,8 +307,6 @@ var cyclescapeui = (function ($) {
 
 			// Adjust icons on startup, too
 			cyclescapeui.setSegmentedControlIcons();
-
-
 		},
 
 		// Function to set icons and text on segmented control
@@ -349,7 +347,7 @@ var cyclescapeui = (function ($) {
 			}
 
 			// Trigger when the segmented control changes
-			$('#content-view').change(function () {
+			$('#content-view').on('change', function () {
 				cyclescapeui.changeToSelectedView();
 			});
 		},
@@ -475,9 +473,43 @@ var cyclescapeui = (function ($) {
 		discussions: function () {
 			$('.ios-segmented-control div.option').on('click', function () {
 				var desiredUl = $(this).find('input').prop('id');
-				$('.main-content>ul').hide();
-				$('.main-content>ul.' + desiredUl).show();
-			})
+				cyclescapeui.setDiscussionsView(desiredUl);
+			});
+
+			// At launch, set to first div
+			var firstDiv = $('.ios-segmented-control input').first().prop('id');
+			cyclescapeui.setDiscussionsView(firstDiv);
+
+			// Set the ordinal of the deadline date
+			cyclescapeui.setDeadlinesOrdinal();
+		},
+
+
+		// Set discussion internal toggle
+		setDiscussionsView: function (desiredUl) {
+			$('.main-content>ul').hide();
+			$('.main-content>ul.' + desiredUl).show();
+		},
+
+
+		getOrdinal: function (number) {
+			if (number == 1) {
+				return 'st'
+			} else if (number == 2) {
+				return 'nd'
+			} else if (number == 3) {
+				return 'rd'
+			} else {
+				return 'th'
+			}
+		},
+
+
+		setDeadlinesOrdinal: function () {
+			$.each($('ul.deadlines .date h3'), function (indexInArray, day) {
+				$(day).text($(day).text() + cyclescapeui.getOrdinal($(day).text()))
+			});
+
 		},
 
 

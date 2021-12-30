@@ -291,7 +291,7 @@ ul.deadlines li {display: flex; flex-direction: row; flex-wrap: wrap; border-rad
 ul.deadlines li:hover {background: #F6F6F6;}
 ul.deadlines .date {flex: 2; color: #AC3E27; text-align: center; align-self: center;}
 ul.deadlines .date h3, ul.deadlines .date p {display: inline; margin: 0; color: #AC3E27;}
-ul.deadlines .date h3 {font-size: 22px; margin-right: 5px;}
+ul.deadlines .date h3 {font-size: 22px;}
 ul.deadlines .date p.time {display: block;}
 ul.deadlines .content {flex: 5;}
 ul.deadlines .content h2 {color: black; font-size: 18px;}
