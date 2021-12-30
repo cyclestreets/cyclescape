@@ -67,7 +67,7 @@ nav .title p {font-style: italic; font-size: 14px; color: #AC3E27; margin-left: 
 nav i {padding-left: 10px; padding-right: 30px; color: #939393; font-size: 20px; width: 40px; height: 20px; line-height: 20px;}
 nav ul {list-style-type: none; padding: 0; margin: 0;}
 nav ul a {text-decoration: none;}
-nav li {padding: 10px 5px; margin: 2.5px 0; color: #185B3D; border-radius: 25px; font-size: 17px; cursor: pointer;}
+nav li {padding: 10px 2.5px; margin: 5px 0; color: #185B3D; border-radius: 25px; font-size: 17px; cursor: pointer;}
 nav li.active {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 nav li:hover {background-color: #ffffffa6;}
 nav select {appearance: none; -webkit-appearance: none; outline: 0; border: none; background-color: #ECECEC; color: #185B3D; font-size: 17px; cursor: pointer; width: 190px; padding: 10px 5px; margin: 2.5px 0; border-radius: 25px;}
