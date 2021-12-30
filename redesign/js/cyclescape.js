@@ -81,6 +81,14 @@ var cyclescapeui = (function ($) {
 					$('nav').hide();
 				}
 			});
+
+			$(document).on('keydown', function (event) {
+				if (event.key == "Escape") {
+					if ($('nav').hasClass('open')) {
+						cyclescapeui.closeNav();
+					}
+				}
+			});
 		},
 
 

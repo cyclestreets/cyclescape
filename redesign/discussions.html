@@ -52,8 +52,11 @@
 	<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 	<nav>
 		<div class="title padding">
-			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="Image of a map pin with a stylised bicycle inside" /></a>
-			<a class="unstyled" href="index.html"><h1>cyclescape</h1></a>
+			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png"
+					alt="Image of a map pin with a stylised bicycle inside" /></a>
+			<a class="unstyled" href="index.html">
+				<h1>cyclescape</h1>
+			</a>
 			<p>York Cycle Campaign</p>
 		</div>
 		<ul class="padding">
@@ -61,7 +64,7 @@
 				<li class="active"><i class="fas fa-fw fa-microphone"></i>Discuss</li>
 			</a>
 			<a href="browse-issues.html">
-				<li><i class="fas fa-fw fa-rocket"></i>Browse</li>
+				<li><i class="fas fa-fw fa-rocket"></i>Browse issues</li>
 			</a>
 			<hr>
 			<a href="new-idea.html">
@@ -78,9 +81,15 @@
 		</ul>
 		<div class="padding nav-bottom">
 			<ul>
-				<li><i class="fas fa-fw fa-users"></i>Change group</li>
+				<li data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
+					data-bs-content="
+						<ul class='popover-group'>
+							<li>York Cycle Campaign</li>
+							<li>Cambridge Cycle Campaign</li>
+						</ul>
+					"><i class="fas fa-fw fa-users"></i>Change group</li>
 				<a href="group-management.html">
-					<li><i class="fas fa-fw fa-users-cog"></i>Group management</li>
+					<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
 				</a>
 				<a href="profile.html">
 					<li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
@@ -100,7 +109,8 @@
 				<h1><i class="fas fa-fw fa-microphone"></i> 301 discussions</h1>
 			</div>
 			<div class="action-buttons">
-				<a href="new-discussion.html"><button class="primary">New discussion<i class="fas fa-fw fa-caret-right"></i></button></a>
+				<a href="new-discussion.html"><button class="primary">New discussion<i
+							class="fas fa-fw fa-caret-right"></i></button></a>
 			</div>
 		</div>
 		<hr>
@@ -111,23 +121,28 @@
 					<span class="selection"></span>
 					<div class="option">
 						<input type="radio" id="all" name="discussions-view" value="all" checked="checked" />
-						<label for="all"><span class="fa fa-globe-europe" data-text="All" data-icon="fa-globe-europe"> All</span></label>
+						<label for="all"><span class="fa fa-globe-europe" data-text="All" data-icon="fa-globe-europe">
+								All</span></label>
 					</div>
 					<div class="option">
 						<input type="radio" id="favourites" name="discussions-view" value="favourites" />
-						<label for="favourites"><span class="fa fa-star" data-text="Favourites" data-icon="fa-star"> Favourites</span></label>
+						<label for="favourites"><span class="fa fa-star" data-text="Favourites" data-icon="fa-star">
+								Favourites</span></label>
 					</div>
 					<div class="option">
 						<input type="radio" id="mine" name="discussions-view" value="mine" />
-						<label for="mine"><span class="fa fa-pencil" data-text="Mine" data-icon="fa-pencil"> Mine</span></label>
+						<label for="mine"><span class="fa fa-pencil" data-text="Mine" data-icon="fa-pencil">
+								Mine</span></label>
 					</div>
 					<div class="option">
 						<input type="radio" id="controversial" name="discussions-view" value="controversial" />
-						<label for="controversial"><span class="fa fa-fire-alt" data-text="Popular" data-icon="fa-fire-alt"> Popular</span></label>
+						<label for="controversial"><span class="fa fa-fire-alt" data-text="Popular"
+								data-icon="fa-fire-alt"> Popular</span></label>
 					</div>
 					<div class="option">
 						<input type="radio" id="deadlines" name="discussions-view" value="dates" />
-						<label for="deadlines"><span class="fa fa-calendar-star" data-text="Deadlines" data-icon="fa-calendar-star"> Deadlines</span></label>
+						<label for="deadlines"><span class="fa fa-calendar-star" data-text="Deadlines"
+								data-icon="fa-calendar-star"> Deadlines</span></label>
 					</div>
 				</div>
 

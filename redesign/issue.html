@@ -5,6 +5,8 @@
 	<meta charset="UTF-8" />
 	<title>Cyclescape</title>
 
+	<meta name="theme-color" content="#AC3E27" />
+
 	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1.0" />
 
 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -50,8 +52,11 @@
 	<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 	<nav>
 		<div class="title padding">
-			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="Image of a map pin with a stylised bicycle inside" /></a>
-			<a class="unstyled" href="index.html"><h1>cyclescape</h1></a>
+			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png"
+					alt="Image of a map pin with a stylised bicycle inside" /></a>
+			<a class="unstyled" href="index.html">
+				<h1>cyclescape</h1>
+			</a>
 			<p>York Cycle Campaign</p>
 		</div>
 		<div class="padding">
@@ -60,7 +65,7 @@
 					<li><i class="fas fa-fw fa-microphone"></i>Discuss</li>
 				</a>
 				<a href="browse-issues.html">
-					<li class="active"><i class="fas fa-fw fa-rocket"></i>Browse</li>
+					<li class="active"><i class="fas fa-fw fa-rocket"></i>Browse issues</li>
 				</a>
 				<hr>
 				<a href="new-idea.html">
@@ -79,9 +84,15 @@
 
 		<div class="padding nav-bottom">
 			<ul>
-				<li><i class="fas fa-fw fa-users"></i>Change group</li>
+				<li data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
+					data-bs-content="
+						<ul class='popover-group'>
+							<li>York Cycle Campaign</li>
+							<li>Cambridge Cycle Campaign</li>
+						</ul>
+					"><i class="fas fa-fw fa-users"></i>Change group</li>
 				<a href="group-management.html">
-					<li><i class="fas fa-fw fa-users-cog"></i>Group management</li>
+					<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
 				</a>
 				<a href="profile.html">
 					<li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
@@ -109,75 +120,122 @@
 
 
 		<div class="content-wrapper">
+			<button class="show-side-content">Filter items <i class="fas fa-fw fa-filter"></i></button>
 			<div class="main-content">
 				<ul class="discussions">
 					<li>
-						<div class="content">
-							<h3 class="drop-cap">York Way: road safety changes</h3>
-							<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
-							<p class="italic">Hyperweaver posted one day ago</p>
-							<ul class="tags">
-								<li class="tag">Activism</li>
-								<li class="tag">Chisholm trail</li>
-							</ul>
-						</div>
-						<div class="minimap">
-							<div class="unread">
-								<p>5</p>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
 							</div>
-							<img src="/images/placeholders/minimap2.png" />
-						</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
 					</li>
 					<li>
-						<div class="content">
-							<h3 class="drop-cap">York Way: road safety changes</h3>
-							<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
-							<p class="italic">Hyperweaver posted one day ago</p>
-							<ul class="tags">
-								<li class="tag">Activism</li>
-								<li class="tag">Chisholm trail</li>
-							</ul>
-						</div>
-						<div class="minimap">
-							<div class="unread">
-								<p>3</p>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
 							</div>
-							<img src="/images/placeholders/minimap2.png" />
-						</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
 					</li>
 					<li>
-						<div class="content">
-							<h3 class="drop-cap">York Way: road safety changes</h3>
-							<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
-							<p class="italic">Hyperweaver posted one day ago</p>
-							<ul class="tags">
-								<li class="tag">Activism</li>
-								<li class="tag">Chisholm trail</li>
-							</ul>
-						</div>
-						<div class="minimap">
-							<div class="unread">
-								<p>12</p>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
 							</div>
-							<img src="/images/placeholders/minimap2.png" />
-						</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
 					</li>
 					<li>
-						<div class="content">
-							<h3 class="drop-cap">York Way: road safety changes</h3>
-							<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
-							<p class="italic">Hyperweaver posted one day ago</p>
-							<ul class="tags">
-								<li class="tag">Activism</li>
-								<li class="tag">Chisholm trail</li>
-							</ul>
-						</div>
-						<div class="minimap">
-							<div class="unread">
-								<p>7</p>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
 							</div>
-							<img src="/images/placeholders/minimap2.png" />
-						</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
+							</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
+							</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
 					</li>
 				</ul>
 			</div>

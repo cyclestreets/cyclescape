@@ -52,8 +52,11 @@
 	<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 	<nav>
 		<div class="title padding">
-			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="Image of a map pin with a stylised bicycle inside" /></a>
-			<a class="unstyled" href="index.html"><h1>cyclescape</h1></a>
+			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png"
+					alt="Image of a map pin with a stylised bicycle inside" /></a>
+			<a class="unstyled" href="index.html">
+				<h1>cyclescape</h1>
+			</a>
 			<p>York Cycle Campaign</p>
 		</div>
 		<div class="padding">
@@ -62,7 +65,7 @@
 					<li><i class="fas fa-fw fa-microphone"></i>Discuss</li>
 				</a>
 				<a href="browse-issues.html">
-					<li><i class="fas fa-fw fa-rocket"></i>Browse</li>
+					<li><i class="fas fa-fw fa-rocket"></i>Browse issues</li>
 				</a>
 				<hr>
 				<a href="new-idea.html">
@@ -81,14 +84,20 @@
 
 		<div class="padding nav-bottom">
 			<ul>
-				<li><i class="fas fa-fw fa-users"></i>Change group</li>
+				<li data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
+					data-bs-content="
+						<ul class='popover-group'>
+							<li>York Cycle Campaign</li>
+							<li>Cambridge Cycle Campaign</li>
+						</ul>
+					"><i class="fas fa-fw fa-users"></i>Change group</li>
 				<a href="group-management.html">
 					<a href="group-management.html">
-					<li><i class="fas fa-fw fa-users-cog"></i>Group management</li>
-				</a>
-				<a href="profile.html">
-					<li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
-				</a>
+						<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
+					</a>
+					<a href="profile.html">
+						<li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
+					</a>
 			</ul>
 		</div>
 	</nav>
@@ -110,7 +119,8 @@
 				<hr />
 				<form>
 					<label for="title">Input</label>
-					<input type="text" id="title" name="title" autofocus="autofocus" placeholder="Click to add a title…" />
+					<input type="text" id="title" name="title" autofocus="autofocus"
+						placeholder="Click to add a title…" />
 					<label for="description">Textarea</label>
 					<textarea id="description" name="description" placeholder="Click to add a description…"
 						rows="4"></textarea>
