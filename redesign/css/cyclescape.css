@@ -111,7 +111,7 @@ div.geocoder.expanded input {display: inline-block;}
 /* Generic elements */
 button.primary {align-self: flex-start; width: auto; border: none; background-color: #ECECEC; color: #AC3E27; border-radius: 25px; padding: 6px 15px; margin: 5px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 button.primary:hover {background-color: white;}
-button.primary i {padding-left: 10px;}
+button.primary i {padding-left: 10px; padding-right: 20px;}
 button.disabled {opacity: .8; filter: grayscale(100%); -webkit-filter: grayscale(100%); cursor: not-allowed !important;}
 button.social {align-self: flex-start; display: inline-block; width: auto; border: none; background-color: #ECECEC; border-radius: 25px; padding: 5px 10px; margin: 5px; font-size: 11px; font-weight: bold;}
 button.social.twitter {background-color: #7ABCFF; color: white;}
@@ -193,8 +193,10 @@ form input[type="checkbox"] {margin: 5px}
 .popover {border-radius: 20px;}
 .popover-body {padding: .75rem;}
 .popover-header {margin-top: 0; border-top-left-radius: 20px; border-top-right-radius: 20px;}
-ul.popover-avatar {list-style: none; padding: 0; margin: 0;}
+ul.popover-avatar, ul.popover-group {list-style: none; padding: 0; margin: 0;}
 ul.popover-avatar li img {width: 50px; height: 50px;}
+ul.popover-group li {padding: 2.5px 10px; margin: 2.5px; border: 0.5px solid transparent; border-radius: 25px; cursor: pointer;}
+ul.popover-group li:hover {border-color: #ECECEC;}
 ul.add-content {list-style: none; padding: 0; margin: 0; width: 300px;}
 ul.add-content li {padding: 5px 10px; border: 1px solid transparent; border-radius: 25px; display: inline-block; cursor: pointer;}
 ul.add-content li:hover {border-color: #185B3D;}
@@ -348,20 +350,22 @@ ul.thread a#post:hover {background: #f0eeee;}
 
 /* Browse issues */
 .browse-issues .map-controls {width: 250px;}
-.browse-issues ul.issues li {display: flex; border-radius: 25px; cursor: pointer; margin: 5px 0; width: 50%; float: left; cursor: pointer; text-align: left;}
-.browse-issues ul.issues li:hover {background: #F6F6F6;}
-.browse-issues ul.issues li div.minimap {flex: 1; padding: 20px 10px;}
-.browse-issues ul.issues li div.issue-content {flex: 5; padding: 10px; align-self: center;}
-.browse-issues ul.issues li img {border-radius: 100%; width: 100px; height: 100px;}
-.browse-issues ul.issues li h2 {border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px;}
+.browse-issues ul.issues {list-style-type: none; margin: 0; padding: 0;}
+.browse-issues ul.issues li {display: inline-block; border-radius: 25px; cursor: pointer; margin: 5px 0; width: 45%; transition: .2s;}
+.browse-issues ul.issues li:hover {background: #F6F6F6; }
+.browse-issues ul.issues li a {display: flex; cursor: pointer; text-align: left; text-decoration: none;}
+.browse-issues ul.issues li a div.minimap {flex: 1; padding: 20px 10px;}
+.browse-issues ul.issues li a div.issue-content {flex: 5; padding: 10px; align-self: center;}
+.browse-issues ul.issues li a div.minimap img {border-radius: 100%; width: 100px; height: 100px;}
+.browse-issues ul.issues li a h2 {border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px;}
+.browse-issues ul.issues li a p {color: black;}
 
 
 /* Issue */
-.issue .title-wrapper input {border: none;}
-.issue .side-content img {border-radius: 25px;}
-.issue .main-content {flex: 1;}
-.issue .side-content {flex: 1; max-width: 50%;}
-.issue .side-content button {position: absolute; align-self: center; display: block; margin: auto; bottom: 50px;}
+.issue .title-wrapper input {border: none; border-radius: 25px; padding: 2.5px 10px;}
+.issue .side-content {width: 250px;}
+.issue .side-content img {border-radius: 25px; height: 100%;}
+.issue .side-content button {position: fixed; align-self: center; display: block; margin: auto; bottom: 50px;}
 
 
 /* New issue */
@@ -583,6 +587,7 @@ ul.application-types li label {color: white;}
     .browse-issues ul.issues {margin-top: 0;}
     .browse-issues ul.issues li {display: block;}
     .browse-issues .map-controls {width: unset;}
+    .browse-issues ul.issues li a p {color: white;}
 
     .new-idea .map-controls {width: 100vw; max-height: unset;}
     .new-idea .title-wrapper .section-title {flex: 1;}

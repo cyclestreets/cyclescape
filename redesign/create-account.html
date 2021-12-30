@@ -55,8 +55,11 @@
 	<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 	<nav>
 		<div class="title padding">
-			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="Image of a map pin with a stylised bicycle inside" /></a>
-			<a class="unstyled" href="index.html"><h1>cyclescape</h1></a>
+			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png"
+					alt="Image of a map pin with a stylised bicycle inside" /></a>
+			<a class="unstyled" href="index.html">
+				<h1>cyclescape</h1>
+			</a>
 			<p>York Cycle Campaign</p>
 		</div>
 		<div class="padding">
@@ -65,7 +68,7 @@
 					<li><i class="fas fa-fw fa-microphone"></i>Discuss</li>
 				</a>
 				<a href="browse-issues.html">
-					<li><i class="fas fa-fw fa-rocket"></i>Browse</li>
+					<li><i class="fas fa-fw fa-rocket"></i>Browse issues</li>
 				</a>
 				<hr>
 				<a href="new-idea.html">
@@ -81,12 +84,18 @@
 				<hr>
 			</ul>
 		</div>
-		
+
 		<div class="padding nav-bottom">
 			<ul>
-				<li><i class="fas fa-fw fa-users"></i>Change group</li>
+				<li data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
+					data-bs-content="
+						<ul class='popover-group'>
+							<li>York Cycle Campaign</li>
+							<li>Cambridge Cycle Campaign</li>
+						</ul>
+					"><i class="fas fa-fw fa-users"></i>Change group</li>
 				<a href="group-management.html">
-					<li><i class="fas fa-fw fa-users-cog"></i>Group management</li>
+					<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
 				</a>
 				<a href="profile.html">
 					<li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
@@ -99,7 +108,7 @@
 		<i class="fal fa-search"></i>
 		<input type="search" name="search" placeholder="Search for anything…" />
 	</div>
-	
+
 	<div id="content">
 		<div class="title-wrapper">
 			<div class="section-title">
@@ -110,39 +119,43 @@
 			<div class="main-content">
 				<ul class="wizard unstyled">
 					<li>
-						<h2 id="basic-details">1</h2><p>Basic details</p>
+						<h2 id="basic-details">1</h2>
+						<p>Basic details</p>
 					</li>
 					<hr />
 					<li>
-						<h2 id="group">2</h2><p>Find your local group</p>
+						<h2 id="group">2</h2>
+						<p>Find your local group</p>
 					</li>
 					<hr />
 					<li>
-						<h2 id="done">3</h2><p>Let's begin!</p>
+						<h2 id="done">3</h2>
+						<p>Let's begin!</p>
 					</li>
 				</ul>
 				<div class="wizard-content">
 					<div id="content-basic-details">
 						<h3>Welcome</h2>
-						<hr />
-						<p class="light drop-cap">To create an account, please first fill in some basic details, or login via another service.</p>
-						<div class="social-sign-in">
-							<img src="/images/placeholders/social-sign-in.png" />
-						</div>
-						<div class="stylised-or">
 							<hr />
-							<p>or</p>
-							<hr />
-						</div>
-						<form id="new-user-account">
+							<p class="light drop-cap">To create an account, please first fill in some basic details, or
+								login via another service.</p>
+							<div class="social-sign-in">
+								<img src="/images/placeholders/social-sign-in.png" />
+							</div>
+							<div class="stylised-or">
+								<hr />
+								<p>or</p>
+								<hr />
+							</div>
+							<form id="new-user-account">
 								<input type="email" class="form-control" id="email" placeholder="Your email">
 								<input type="text" class="form-control" id="name" placeholder="Your name">
-							  <br />
+								<br />
 								<input type="text" class="form-control" id="username" placeholder="New username">
 								<input type="password" class="form-control" id="password" placeholder="Password">
-						</form>
-						<button class="primary next">Next <i class="fas fa-fw fa-chevron-right"></i></button>
-						
+							</form>
+							<button class="primary next">Next <i class="fas fa-fw fa-chevron-right"></i></button>
+
 					</div>
 					<div id="content-group">
 						<h3>Let's join a group</h3>
@@ -164,19 +177,22 @@
 					<div id="content-done">
 						<h3>Let's get started</h3>
 						<hr />
-						<p class="light drop-cap">Your sign-up is now complete. Here are few things you can do on Cyclescape.</p>
+						<p class="light drop-cap">Your sign-up is now complete. Here are few things you can do on
+							Cyclescape.</p>
 						<div class="action">
 							<div class="icon"><i class="fas fa-fw fa-book-open"></i></div>
 							<div class="text">
 								<h2>Browse discussion</h2>
-								<p class="description">There are 23 new discussions in your area. See what’s going on!</p>
+								<p class="description">There are 23 new discussions in your area. See what’s going on!
+								</p>
 							</div>
 						</div>
 						<div class="action">
 							<div class="icon"><i class="fas fa-fw fa-rocket"></i></div>
 							<div class="text">
 								<h2>See issues near you</h2>
-								<p class="description">See on a map where current issues are. What’s being talked about?</p>
+								<p class="description">See on a map where current issues are. What’s being talked about?
+								</p>
 							</div>
 						</div>
 						<div class="action">
