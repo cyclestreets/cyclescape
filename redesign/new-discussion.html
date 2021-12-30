@@ -144,20 +144,19 @@
 				<h1><i class="fas fa-fw fa-plus-circle"></i> New discussion</h1>
 				<p class="light">Create a new, private, discussion for members of York Cycle Campaign. </p>
 			</div>
-
 		</div>
 		<div class="content-wrapper">
 			<div class="main-content">
 				<hr />
-				<form>
+				<form method="POST" action="">
 					<label for="title">Title</label>
 					<input type="text" id="title" name="title" autofocus="autofocus"
 						placeholder="Click to add a title…" />
 					<label for="description">Description</label>
 					<textarea id="description" name="description" placeholder="Click to add a description…"
-						rows="4"></textarea>
+						rows="6"></textarea>
 					<label for="category">Category</label>
-					<div class="radio">
+					<div class="radio" tabindex="0">
 						<input type="radio" id="campaigning" name="category" value="campaigning">
 						<label for="campaigning">Campaigning</label><br>
 						<input type="radio" id="administration" name="category" value="adminstration">
@@ -167,7 +166,8 @@
 					</div>
 					<label for="location">Location</label>
 					<div class="category">
-						<img class="minimap" src="images/placeholders/minimap2.png" />
+						<img data-bs-toggle="modal" data-bs-target="#locationModal" class="minimap"
+							src="images/placeholders/minimap2.png" />
 						<br />
 						<button type="button" class="primary" data-bs-toggle="modal"
 							data-bs-target="#locationModal">Draw on the map</button>
@@ -185,11 +185,15 @@
 							</div>
 						</div>
 					</div>
+					<label for="photo">Photo</label>
+					<div class="category tags">
+						<div class="widget">
+							<p>Help others visualise the situation</p>
+							<input type="file" />
+						</div>
+					</div>
 					<input type="submit" value="Create discussion" />
 				</form>
-			</div>
-			<div class="side-content">
-
 			</div>
 		</div>
 	</div>
