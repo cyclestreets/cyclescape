@@ -15,18 +15,19 @@ end
 #
 # Table name: cyclestreets_photo_messages
 #
-#  id              :integer          not null, primary key
-#  caption         :text
-#  icon_properties :json
-#  location        :geometry({:srid= not null, geometry, 4326
-#  photo_name      :string
-#  photo_uid       :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  created_by_id   :integer          not null
-#  cyclestreets_id :integer
-#  message_id      :integer          not null
-#  thread_id       :integer          not null
+#  id                   :integer          not null, primary key
+#  caption              :text
+#  icon_properties      :json
+#  location             :geometry({:srid= not null, geometry, 4326
+#  photo_name           :string
+#  photo_preview_height :integer
+#  photo_uid            :string           not null
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  created_by_id        :integer          not null
+#  cyclestreets_id      :integer
+#  message_id           :integer          not null
+#  thread_id            :integer          not null
 #
 # Indexes
 #
