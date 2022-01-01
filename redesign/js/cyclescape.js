@@ -453,7 +453,6 @@ var cyclescapeui = (function ($) {
 			// Enable back arrow
 			$('.wizard-back').on('click', function () {
 				_currentWizardPage -= 1
-				console.log(_currentWizardPage)
 				cyclescapeui.showWizardDiv(_currentWizardPage);
 			});
 		},
