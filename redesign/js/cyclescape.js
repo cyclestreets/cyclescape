@@ -171,6 +171,7 @@ var cyclescapeui = (function ($) {
 		geocoder: function () {
 			$('.geocoder i').on('click', function () {
 				$('.geocoder').toggleClass('expanded');
+				$('.geocoder i').toggleClass('fa-search').toggleClass('fa-times');
 				$('.geocoder input').focus()
 			});
 		},

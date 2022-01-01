@@ -29,7 +29,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 #shade.white {background-color:rgba(255, 255, 255, 0.897); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
 
 .title-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
-.title-wrapper .section-title {flex-direction: column; flex: 3; padding: 10px; margin-right: 40px;}
+.title-wrapper .section-title {flex-direction: column; flex: 3; padding: 10px; margin-right: 40px; align-items: center; justify-content: center;}
 .title-wrapper .section-title h1, .title-wrapper .section-title p.badge {display: inline-block; width: fit-content;}
 .title-wrapper .section-title p.badge {background-color: #ECECEC; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 20px; font-size: 18px; font-weight: 300; align-self: center;}
 .title-wrapper .action-buttons {display: flex; padding: 10px; max-width: 400px;}
@@ -160,7 +160,7 @@ ul.checkboxes {list-style: none; margin: 0; padding: 0;}
 .widget .title {box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 .widget h2 {padding: 0 15px 0 0; margin: 0; font-weight: normal; font-size: 18px;}
 .widget .widget-content {padding: 10px;}
-.widget .widget-content.padded {padding: 10px;}
+.widget .widget-content.padded {padding: 10px 12.5px;}
 
 .avatar {width: 40px;}
 
@@ -378,7 +378,7 @@ ul.thread #post:hover {background: #f0eeee;}
 
 
 /* Issue */
-.issue .title-wrapper input {border: none; border-radius: 25px; padding: 2.5px 10px;}
+.issue .title-wrapper textarea {border: none; border-radius: 10px; padding: 2.5px 10px; width: 100%;}
 .issue .side-content {width: 250px;}
 .issue .side-content img {border-radius: 25px; height: 100%;}
 .issue .side-content button {position: fixed; align-self: center; display: block; margin: auto; bottom: 50px;}
@@ -388,7 +388,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-idea .map-controls {width: 400px; max-height: calc(100vh - 210px); overflow: scroll;}
 .new-idea form input, .new-idea form textarea {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
 .new-idea form input {width: -webkit-fill-available;}
-.new-idea form textarea {width: calc(100% - 10px);}
+.new-idea form textarea {width: 100%;}
 .new-idea form .light {font-size: 12px;}
 .new-idea form {overflow: scroll;}
 .new-idea .main-content.full-screen.full-map {height: calc(100vh - 190px);}
