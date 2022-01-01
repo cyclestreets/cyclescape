@@ -28,7 +28,7 @@ class MessageThreadsController < ApplicationController
           @subscribers = thread.subscribers.is_public
         end
         messages = thread.messages.approved
-        messages = messages.after_date_with_n_before(after_date: last_viewed, n_before: 5) if last_viewed
+        messages = messages.after_date_with_n_before(after_date: last_viewed, n_before: 10) if last_viewed
 
         @messages = messages.includes(
           *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]

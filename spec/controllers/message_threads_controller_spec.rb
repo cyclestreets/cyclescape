@@ -50,6 +50,11 @@ describe MessageThreadsController do
       end
 
       context "when there are more than 6 previously read messages" do
+        let!(:message_14) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 14.days, created_by: message_2.created_by) }
+        let!(:message_13) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 13.days, created_by: message_2.created_by) }
+        let!(:message_12) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 12.days, created_by: message_2.created_by) }
+        let!(:message_11) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 11.days, created_by: message_2.created_by) }
+        let!(:message_10) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 10.days, created_by: message_2.created_by) }
         let!(:message_9) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 9.days, created_by: message_2.created_by) }
         let!(:message_8) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 8.days, created_by: message_2.created_by) }
         let!(:message_7) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 7.days, created_by: message_2.created_by) }
@@ -57,19 +62,19 @@ describe MessageThreadsController do
         let!(:message_5) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 5.days, created_by: message_2.created_by) }
 
         context "with HTML" do
-          it "only shows the last 6" do
+          it "only shows the last 11" do
             create(:thread_view, thread: thread, user: user, viewed_at: Time.now.in_time_zone)
             get :show, params: { id: thread.id }
             expect(assigns(:view_from)).to eq(message_2)
-            expect(assigns(:initially_loaded_from)).to eq(message_7.created_at.in_time_zone("London").iso8601)
-            expect(assigns(:messages)).to eq [message_7, message_6, message_5, message_4, message_3, message_2]
+            expect(assigns(:initially_loaded_from)).to eq(message_12.created_at.in_time_zone("London").iso8601)
+            expect(assigns(:messages)).to eq [message_12, message_11, message_10, message_9, message_8, message_7, message_6, message_5, message_4, message_3, message_2]
           end
         end
 
         context "with JS (and initially_loaded_from)" do
           it "shows messages before the initially_loaded_from" do
-            get :show, params: { id: thread.id, format: :js, initiallyLoadedFrom: message_7.created_at.in_time_zone("London").iso8601 }, xhr: true
-            expect(assigns(:messages)).to eq [message_9, message_8]
+            get :show, params: { id: thread.id, format: :js, initiallyLoadedFrom: message_12.created_at.in_time_zone("London").iso8601 }, xhr: true
+            expect(assigns(:messages)).to eq [message_14, message_13]
           end
         end
       end

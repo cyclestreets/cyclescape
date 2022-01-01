@@ -8,7 +8,7 @@ $(document).ready(function () {
   var initiallyLoadedFrom = document.querySelector('[data-initially-loaded-from]')
   if (initiallyLoadedFrom && lastViewedMessage) {
     var options = {
-      rootMargin: '-65px 0px 0px 0px',
+      rootMargin: '-300px 0px 0px 0px',
       threshold: 1.0
     }
     var obs = new IntersectionObserver(function (entries) {
