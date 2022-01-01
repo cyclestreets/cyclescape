@@ -255,7 +255,6 @@ var cyclescapeui = (function ($) {
 
 		// Set up mobile side-content view
 		sideContent: function () {
-
 			// Handle filter button
 			$('.show-side-content').on('click', function () {
 				if ($('.side-content').hasClass('visible')) {
@@ -299,7 +298,6 @@ var cyclescapeui = (function ($) {
 
 		// Set up mobile side-content view
 		mapControls: function () {
-
 			// Handle filter button
 			$('.show-map-controls').on('click', function () {
 				if ($('.map-controls').hasClass('visible')) {
@@ -443,6 +441,20 @@ var cyclescapeui = (function ($) {
 
 				// Autofocus on the first field
 				$('input').first().focus();
+			});
+
+			// Enable clicking on wizard breadcrumps
+			$('.wizard li').on('click', function () {
+				var clickedTabIndex = $('.wizard li').index(this);
+				_currentWizardPage = clickedTabIndex;
+				cyclescapeui.showWizardDiv(clickedTabIndex);
+			});
+
+			// Enable back arrow
+			$('.wizard-back').on('click', function () {
+				_currentWizardPage -= 1
+				console.log(_currentWizardPage)
+				cyclescapeui.showWizardDiv(_currentWizardPage);
 			});
 		},
 
