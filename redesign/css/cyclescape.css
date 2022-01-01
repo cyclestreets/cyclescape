@@ -117,11 +117,12 @@ button.social {align-self: flex-start; display: inline-block; width: auto; borde
 button.social.twitter {background-color: #7ABCFF; color: white;}
 button.social.facebook {background-color: #7C9EFF; color: white;}
 
-a.action {display: inline-flex; width: 270px; flex-direction: row; border: 1px solid #ECECEC; border-radius: 25px; color: #185B3D; padding: 10px 5px; margin: 10px 0; cursor: pointer; transition: .1s; text-decoration: none;}
-a.action:hover {background-color: #F6F6F6;}
-a.action .icon {display: flex; flex-direction: column; flex-basis: 100%; flex: 1; align-self: center; text-align: center; font-size: 25px;}
+a.action {display: inline-flex; width: 270px; flex-direction: row; border: 1px solid #ECECEC; border-radius: 25px; color: #185B3D; padding: 10px 5px; margin: 7.5px 7.5px 7.5px 0; cursor: pointer; transition: .1s; text-decoration: none; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); background-color: #ECECEC;}
+a.action:hover {background-color: #FFFFFF;}
+a.action .icon {display: flex; flex-direction: column; flex-basis: 100%; flex: 1; align-self: center; text-align: center; font-size: 25px; padding: 0 15px;}
 a.action .text {display: flex; flex-direction: column; flex-basis: 100%; flex: 4; text-decoration: none;}
-a.action .text h2 {font-weight: bold; margin: 0;}
+a.action .text h2 {font-weight: bold; margin: 0; font-size: 17px;}
+a.action .text p {font-size: 14px;}
 
 ul.unstyled {list-style: none;}
 
@@ -497,9 +498,9 @@ ul.application-types li label {color: white;}
 
     .widget .title {color: #ECECEC; background-color: #1d8b5a;}
 
-    div.action {background-color: #3B3F50;}
-    div.action:hover {background-color: #53586d;}
-    div.action p.description, div.action i {color: white;}
+    a.action {background-color: #3B3F50;}
+    a.action:hover {background-color: #53586d;}
+    a.action p.description, a.action i {color: white;}
 
     ul.deadlines .content h2 {color: white;}
     ul.deadlines .date h3 {color: #ce5740;}
@@ -557,7 +558,7 @@ ul.application-types li label {color: white;}
 
     .avatar {width: 35px;}
 
-    div.action {width: unset;}
+    a.action {width: unset;}
     
     .ios-segmented-control {margin: 10px 5px;}
     .ios-segmented-control .option label {font-size: 16px;}
