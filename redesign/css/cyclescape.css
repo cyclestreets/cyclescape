@@ -133,7 +133,7 @@ ul.avatars li:hover {border-color: #ECECEC;}
 ul.links li {margin: 5px 0; text-decoration: underline; cursor: pointer;}
 
 ul.tags {margin: 5px 0; padding: 0;}
-ul.tags li.tag {list-style: none; display: inline-block; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.8; padding: 2px 5px; margin: 0 5px 10px 0; transition: 0.3s; cursor: pointer;}
+ul.tags li.tag {list-style: none; display: inline-block; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.8; padding: 2px 5px; margin: 0 5px 10px 0; transition: 0.2s; cursor: pointer;}
 ul.tags li.tag:hover {opacity: 1; background: rgb(243, 243, 243);}
 ul.tags li.large-tag {font-size: 15px; opacity: 0.97}
 ul.tags li.large-tag::after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
@@ -266,7 +266,7 @@ ul.add-content li:hover {border-color: #185B3D;}
 .groups .header .content .links i:hover {border-color: white;}
 .groups .header .minimap {position: relative; float: right; bottom: 100px; right: 50px; height: 200px; width: 200px; border-radius: 100%; background-size: contain; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 .groups #content hr {margin-top: 40px; margin-bottom: 30px; margin-right: 300px;}
-.groups #content button.primary {margin: 30px 0;}
+.groups #content button.primary {margin: 30px 10px 30px 0;}
 .groups #content .side-content {padding-top: 70px;}
 
 
