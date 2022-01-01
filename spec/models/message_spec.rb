@@ -37,13 +37,13 @@ describe Message do
   end
 
   describe ".after_date_with_n_before" do
-    let!(:message_1) { create(:message, updated_at: 4.hours.ago) }
-    let!(:message_2) { create(:message, updated_at: 3.hours.ago, thread: message_1.thread, created_by: message_1.created_by) }
-    let!(:message_3) { create(:message, updated_at: 2.hours.ago, thread: message_1.thread, created_by: message_1.created_by) }
-    let!(:message_4) { create(:message, updated_at: 1.hour.ago, thread: message_1.thread, created_by: message_1.created_by) }
+    let!(:message_1) { create(:message, created_at: 4.hours.ago) }
+    let!(:message_2) { create(:message, created_at: 3.hours.ago, thread: message_1.thread, created_by: message_1.created_by) }
+    let!(:message_3) { create(:message, created_at: 2.hours.ago, thread: message_1.thread, created_by: message_1.created_by) }
+    let!(:message_4) { create(:message, created_at: 1.hour.ago, thread: message_1.thread, created_by: message_1.created_by) }
 
     it do
-      expect(message_1.thread.messages.approved.after_date_with_n_before(after_date: message_3.updated_at, n_before: 1)).to eq [
+      expect(message_1.thread.messages.approved.after_date_with_n_before(after_date: message_3.created_at, n_before: 1)).to eq [
         message_2, message_3, message_4
       ]
     end

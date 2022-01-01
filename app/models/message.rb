@@ -56,8 +56,8 @@ class Message < ApplicationRecord
   scope :approved,   -> { where(status: [nil, "approved"]) }
   scope :mod_queued, -> { where(status: "mod_queued") }
   scope :in_group,   ->(group_id) { includes(:thread).where(message_threads: { group_id: group_id }).references(:thread) }
-  scope :after_date, ->(date) { where(arel_table[:updated_at].gteq(date)) }
-  scope :before_date, ->(date) { where(arel_table[:updated_at].lteq(date)) }
+  scope :after_date, ->(date) { where(arel_table[:created_at].gteq(date)) }
+  scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
 
   validates :created_by, presence: true
   validates :body, presence: true, unless: :components?
@@ -92,7 +92,7 @@ class Message < ApplicationRecord
   end
 
   def self.after_date_with_n_before(after_date:, n_before:)
-    after_date(after_date).or(where(id: before_date(after_date).reorder(updated_at: :desc).limit(n_before + 1).ids))
+    after_date(after_date).or(where(id: before_date(after_date).reorder(created_at: :desc).limit(n_before + 1).ids))
   end
 
   def censor!

@@ -13,7 +13,7 @@ $(document).ready(function () {
     }
     var obs = new IntersectionObserver(function (entries) {
       if (lastViewedMessage && entries[0] && entries[0].isIntersecting) {
-        $.ajax({url: window.location.pathname, data: {initiallyLoadedFrom: document.querySelector('[data-initially-loaded-from]').dataset.initiallyLoadedFrom}, dataType: 'script'})
+        $.ajax({url: window.location.pathname, data: {initiallyLoadedFrom: initiallyLoadedFrom.dataset.initiallyLoadedFrom}, dataType: 'script'})
         obs.unobserve(lastViewedMessage)
       }
     }, options)

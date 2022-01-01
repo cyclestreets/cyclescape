@@ -38,7 +38,7 @@ class MessageThreadsController < ApplicationController
           @view_from = @messages.detect { |m| m.created_at >= last_viewed } || @messages.last
         end
 
-        @initially_loaded_from = @messages.first.updated_at
+        @initially_loaded_from = @messages.first&.created_at&.iso8601
 
         @library_items = Library::Item.find_by_tags_from(thread).limit(5)
         @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
@@ -47,7 +47,7 @@ class MessageThreadsController < ApplicationController
       end
       format.js do
         messages = thread.messages.approved
-        initially_loaded_from = Time.zone.parse(params["initiallyLoadedFrom"])
+        initially_loaded_from = Time.zone.iso8601(params["initiallyLoadedFrom"])
         messages = messages.before_date(initially_loaded_from)
 
         @messages = messages.includes(

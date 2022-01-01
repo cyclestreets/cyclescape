@@ -6,9 +6,9 @@ describe MessageThreadsController do
   let(:thread) { create(:message_thread) }
 
   describe "thread views" do
-    let!(:message_a) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 4.days) }
-    let!(:message_b) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 3.days) }
-    let!(:message_c) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 2.days) }
+    let!(:message_4) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 4.days, created_by: message_2.created_by) }
+    let!(:message_3) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 3.days, created_by: message_2.created_by) }
+    let!(:message_2) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 2.days) }
 
     context "as a guest" do
       it "should not assign a message to view from" do
@@ -44,7 +44,33 @@ describe MessageThreadsController do
         it "should assign the first of the new messages" do
           create(:thread_view, thread: thread, user: user, viewed_at: Time.now.in_time_zone - 3.5.days)
           get :show, params: { id: thread.id }
-          expect(assigns(:view_from)).to eql(message_b)
+          expect(assigns(:view_from)).to eq(message_3)
+          expect(assigns(:initially_loaded_from)).to eq(message_4.created_at.in_time_zone("London").iso8601)
+        end
+      end
+
+      context "when there are more than 6 previously read messages" do
+        let!(:message_9) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 9.days, created_by: message_2.created_by) }
+        let!(:message_8) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 8.days, created_by: message_2.created_by) }
+        let!(:message_7) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 7.days, created_by: message_2.created_by) }
+        let!(:message_6) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 6.days, created_by: message_2.created_by) }
+        let!(:message_5) { create(:message, thread: thread, created_at: Time.now.in_time_zone - 5.days, created_by: message_2.created_by) }
+
+        context "with HTML" do
+          it "only shows the last 6" do
+            create(:thread_view, thread: thread, user: user, viewed_at: Time.now.in_time_zone)
+            get :show, params: { id: thread.id }
+            expect(assigns(:view_from)).to eq(message_2)
+            expect(assigns(:initially_loaded_from)).to eq(message_7.created_at.in_time_zone("London").iso8601)
+            expect(assigns(:messages)).to eq [message_7, message_6, message_5, message_4, message_3, message_2]
+          end
+        end
+
+        context "with JS (and initially_loaded_from)" do
+          it "shows messages before the initially_loaded_from" do
+            get :show, params: { id: thread.id, format: :js, initiallyLoadedFrom: message_7.created_at.in_time_zone("London").iso8601 }, xhr: true
+            expect(assigns(:messages)).to eq [message_9, message_8]
+          end
         end
       end
     end
