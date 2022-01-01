@@ -141,12 +141,15 @@ ul.tags li.toggle::before {padding-right: 5px; font-family: "Font Awesome 5 Pro"
 ul.tags li.large-tag:last-of-type {margin-bottom: 0;}
 
 ul.wizard {margin: 5px; padding: 0; height: 35px; background-color: transparent; text-align: center;}
-ul.wizard li {display: inline-block; border-radius: 25px;}
+ul.wizard li {display: inline-block; border-radius: 25px; cursor: pointer;}
 ul.wizard li h2 {display: inline-block; border-radius: 100%; color: white; background-color: #b3b3b3; padding: 2.5px; width: 30px; height: 30px; text-align: center; margin-left: 10px;}
 ul.wizard li h2.complete {background-color: #185B3D;}
 ul.wizard li h2.active {background-color: #B2412B;}
 ul.wizard li p {display: inline-block; font-size: 16px; margin: 0 20px 0 10px;}
+ul.wizard li:hover p {text-decoration: underline;}
 ul.wizard hr {width: 100px; margin: 0 auto 5px; display: inline-block;}
+i.wizard-back {height: 40px; width: 40px; border: 1px solid #ECECEC; border-radius: 25px; line-height: 38px; font-size: 17px; cursor: pointer;}
+i.wizard-back:hover {background-color: #dfdfdf;}
 .wizard-content {padding: 0 50px;}
 
 ul.checkboxes {list-style: none; margin: 0; padding: 0;}
