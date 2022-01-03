@@ -44,8 +44,41 @@
 
 </head>
 
+<div class="modal fade locationModal" id="locationModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-xl">
+		<div class="modal-content">
+			<div class="modal-body">
+				<img class="map" src="/images/placeholders/map.png" />
+				<div class="controls">
+					<h3 class="icon text-centered"><i class="fas fa-fw fa-map-pin"></i></h3>
+					<h3>Mark the location on the map</h3>
+					<ul class="map-buttons">
+						<li class="active"><i class="fas fa-fw fa-thumbtack"></i>
+							<p>Point</p>
+						</li>
+						<li><i class="fas fa-fw fa-route"></i>
+							<p>Route</p>
+						</li>
+						<li><i class="fas fa-fw fa-draw-square"></i>
+							<p>Area</p>
+						</li>
+					</ul>
+					<p>Click the map to mark the point.</p>
+					<p>Drag the point to reposition.</p>
+					<p>Zoom in and pan to select the correct place.</p>
+					<button type="button" title="You have not set a location on the map" class="primary done disabled"
+						data-bs-dismiss="modal">Done</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
 <body class="discussions">
-	<div id="shade"></div>
+	<div id="shade">
+		<i class="far fa-times-circle close"></i>
+	</div>
 	<div id="top-menu">
 		<h1>cyclescape</h1>
 	</div>
@@ -84,10 +117,10 @@
 				data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
-							<li>Cambridge Cycle Campaign</li>
+							<li>Cambridge Cycling Campaign</li>
 						</ul>
 					"><i class="fas fa-fw fa-users"></i>Change group</li>
-			<a href="group-management.html">
+			<a href="generic-content.html">
 				<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
 			</a>
 			<a href="profile.html">
@@ -129,7 +162,7 @@
 					</div>
 					<div class="option" title="Discussions I've participated in">
 						<input type="radio" id="mine" name="discussions-view" value="mine" />
-						<label for="mine"><span class="fa fa-pencil" data-text="Mine" data-icon="fa-pencil">
+						<label for="mine"><span class="fa fa-seedling" data-text="Mine" data-icon="fa-pencil">
 								Mine</span></label>
 					</div>
 					<div class="option" title="Popular topics">
@@ -145,9 +178,9 @@
 				</div>
 
 				<ul class="discussions all">
+					<h2>All discussions</h2>
 					<li>
 						<a href="discussion.html">
-
 							<div class="content">
 								<h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
 									doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
@@ -169,7 +202,22 @@
 					</li>
 				</ul>
 
+				<ul class="discussions favourites">
+					<h2>Favourite discussions</h2>
+				</ul>
+
+				<ul class="discussions mine">
+					<h2>Discussions I've participated in</h2>
+				</ul>
+
+				<ul class="discussions popular">
+					<h2>Popular discussions</h2>
+				</ul>
+
 				<ul class="deadlines">
+					<h2>Deadlines</h2>
+					<button class="primary">Subscribe to main calendar feed <i title="Subscribe to main calendar feed"
+						class="fas fa-fw fa-calendar-plus"></i></button>
 					<li>
 						<div class="date">
 							<h3>18</h3>
@@ -267,11 +315,11 @@
 			</div>
 			<div class="side-content">
 				<h3>Filter discussions</h3>
-				<form>
-					<div class="widget">
-						<div class="title">
-							<i class="fas fa-fw fa-hashtag"></i> Tags
-						</div>
+				<div class="widget">
+					<div class="title">
+						<i class="fas fa-fw fa-hashtag"></i> Tags
+					</div>
+					<form>
 						<div class="widget-content">
 							<ul class="tags">
 								<li class="tag large-tag toggle">Station Parking</li>
@@ -279,32 +327,34 @@
 								<input type="search" placeholder="Type to add a tag…" />
 							</ul>
 						</div>
-					</div>
+					</form>
+				</div>
 
-					<div class="widget">
-						<div class="title">
-							<i class="fas fa-fw fa-map-pin"></i> Location
-						</div>
-						<div class="widget-content">
-							<div class="location">
-								<img src="/images/placeholders/minimap.png" />
-								<input type="checkbox" checked />
-								<i title="Delete" class="fa fa-trash-alt"></i>
-							</div>
-							<div class="location unchecked">
-								<img src="/images/placeholders/minimap.png" />
-								<input type="checkbox" />
-								<i title="Delete" class="fa fa-trash-alt"></i>
-							</div>
-							<a href="#"><button class="primary">Add location...</button></a>
-						</div>
+				<div class="widget">
+					<div class="title">
+						<i class="fas fa-fw fa-map-pin"></i> Locations
 					</div>
-
-					<div class="widget">
-						<div class="title">
-							<i class="fas fa-fw fa-ball-pile"></i> Categories
+					<div class="widget-content">
+						<div class="location">
+							<img src="/images/placeholders/minimap.png" />
+							<input type="checkbox" checked title="Temporarily show or hide this location" />
+							<i title="Delete" title="Remove this location from the filter" class="fa fa-trash-alt"></i>
 						</div>
-						<div class="widget-content">
+						<div class="location unchecked">
+							<img src="/images/placeholders/minimap.png" />
+							<input type="checkbox" title="Temporarily show or hide this location" />
+							<i title="Delete" title="Remove this location from the filter" class="fa fa-trash-alt"></i>
+						</div>
+						<button data-bs-toggle="modal" data-bs-target="#locationModal" class="primary">Add location...</button>
+					</div>
+				</div>
+
+				<div class="widget">
+					<div class="title">
+						<i class="fas fa-fw fa-ball-pile"></i> Categories
+					</div>
+					<div class="widget-content">
+						<form>
 							<div class="categories">
 								<input type="checkbox" id="campaigning" name="categories" value="campaigning">
 								<label for="campaigning"> Campaigning</label><br>
@@ -313,9 +363,9 @@
 								<input type="checkbox" id="general_chat" name="categories" value="general_chat">
 								<label for="general_chat"> General chat</label><br>
 							</div>
-						</div>
+						</form>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
