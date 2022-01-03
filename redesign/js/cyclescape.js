@@ -13,7 +13,8 @@ var cyclescapeui = (function ($) {
 
 	var _actions = [
 		'discussions',
-		'index'
+		'index',
+		'discussion'
 	];
 
 	// Class properties
@@ -604,6 +605,10 @@ var cyclescapeui = (function ($) {
 		index: function () {
 			var data = [
 				{ label: 'Cambridge Cycling Campaign', value: 'group.html' },
+				{ label: 'Oxford Cycling Campaign', value: 'group.html' },
+				{ label: 'Durham Cycling Campaign', value: 'group.html' },
+				{ label: 'Manchester Cycling Campaign', value: 'group.html' },
+				{ label: 'Cardiff Cycling Campaign', value: 'group.html' },
 			];
 			$('#groups').autocomplete({
 				source: data,
@@ -616,6 +621,17 @@ var cyclescapeui = (function ($) {
 					window.location = ui.item.value;
 					return false;
 				}
+			});
+		},
+
+
+		// Page-specific initialisation
+		discussion: function () {
+			var addContentModal = new bootstrap.Modal(document.getElementById('addContentModal'), {})
+			
+			// Enable rich-content-adding modal
+			$('body').on('click', 'ul.add-content li', function () {
+				addContentModal.toggle();
 			});
 		},
 

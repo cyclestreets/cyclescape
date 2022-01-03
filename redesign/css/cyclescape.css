@@ -198,7 +198,7 @@ form input[type="checkbox"] {margin: 5px}
 
 /* Modal */
 .modal-content {border-radius: 25px;}
-.modal-content .modal-body {padding: 0;}
+.modal-content .modal-body.unpadded {padding: 0;}
 .modal-content .modal-body button.x {position: absolute; top: 0; right: 0; margin: 10px;}
 .modal-content .modal-body button.done {position: absolute; bottom: 0; right: 0;}
 
