@@ -12,7 +12,8 @@ var cyclescapeui = (function ($) {
 	};
 
 	var _actions = [
-		'discussions'
+		'discussions',
+		'index'
 	];
 
 	// Class properties
@@ -242,28 +243,12 @@ var cyclescapeui = (function ($) {
 		// !TODO add real data
 		tagsAutocomplete: function () {
 			var availableTags = [
-				"ActionScript",
-				"AppleScript",
-				"Asp",
-				"BASIC",
-				"C",
-				"C++",
-				"Clojure",
-				"COBOL",
-				"ColdFusion",
-				"Erlang",
-				"Fortran",
-				"Groovy",
-				"Haskell",
-				"Java",
-				"JavaScript",
-				"Lisp",
-				"Perl",
-				"PHP",
-				"Python",
-				"Ruby",
-				"Scala",
-				"Scheme"
+				"Cambridge Cycling Campaign",
+				"Leeds Cycling Campaign",
+				"London Cycling Campaign",
+				"Oxford Cycling Campaign",
+				"Durham Cycling Campaign",
+				"Manchester Cycling Campaign",
 			];
 			$("input.group-autocomplete").autocomplete({
 				appendTo: ".group-search",
@@ -612,6 +597,26 @@ var cyclescapeui = (function ($) {
 
 			// Set the ordinal of the deadline date
 			cyclescapeui.setDeadlinesOrdinal();
+		},
+
+
+		// Page-specific initialisation
+		index: function () {
+			var data = [
+				{ label: 'Cambridge Cycling Campaign', value: 'group.html' },
+			];
+			$('#groups').autocomplete({
+				source: data,
+				focus: function (event, ui) {
+					$(event.target).val(ui.item.label);
+					return false;
+				},
+				select: function (event, ui) {
+					$(event.target).val(ui.item.label);
+					window.location = ui.item.value;
+					return false;
+				}
+			});
 		},
 
 
