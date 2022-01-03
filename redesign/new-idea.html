@@ -45,7 +45,9 @@
 </head>
 
 <body class="new-idea">
-	<div id="shade"></div>
+	<div id="shade">
+		<i class="far fa-times-circle close"></i>
+	</div>
 	<div id="top-menu">
 		<h1>cyclescape</h1>
 	</div>
@@ -84,10 +86,10 @@
 				data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
-							<li>Cambridge Cycle Campaign</li>
+							<li>Cambridge Cycling Campaign</li>
 						</ul>
 					"><i class="fas fa-fw fa-users"></i>Change group</li>
-			<a href="group-management.html">
+			<a href="generic-content.html">
 				<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
 			</a>
 			<a href="profile.html">
@@ -105,9 +107,7 @@
 		<div class="title-wrapper">
 			<div class="section-title">
 				<h1><i class="fas fa-fw fa-lightbulb"></i> Add a new idea</h1>
-				<br />
-				<p class="light drop-cap"
-					placeholder="Click on the map to add a new idea. You can also draw an area." />
+				<p class="light">Submit a new idea that campaigners can use.</p>
 				<hr />
 			</div>
 			<div class="action-buttons">
@@ -117,7 +117,7 @@
 
 
 		<div class="content-wrapper">
-			<button class="show-map-controls">New idea <i class="fas fa-fw fa-filter"></i></button>
+			<button class="show-map-controls" data-close-text="Hide" data-close-icon="fas fa-eye-slash" data-open-text="Continue" data-open-icon="fas fa-pencil">New idea <i class="fas fa-fw fa-plus-circle"></i></button>
 			<div class="main-content full-screen full-map"
 				style="background-image: url('/images/placeholders/map.png');">
 
@@ -128,9 +128,9 @@
 								<h2><i class="fas fa-fw fa-paragraph"></i> Your idea</h2>
 							</div>
 							<div class="widget-content padded">
-								<input autofocus="autofocus" type="text" placeholder="Click to add a title…" />
+								<input autofocus="autofocus" required="required" type="text" placeholder="Click to add a title…" />
 								<br />
-								<textarea rows="6" placeholder="Click to add a description…"></textarea>
+								<textarea rows="6" required="required" placeholder="Click to add a description…"></textarea>
 							</div>
 						</div>
 						<div class="widget">

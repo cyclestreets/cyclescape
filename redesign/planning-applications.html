@@ -45,7 +45,9 @@
 </head>
 
 <body class="planning-applications">
-	<div id="shade"></div>
+	<div id="shade">
+		<i class="far fa-times-circle close"></i>
+	</div>
 	<div id="top-menu">
 		<h1>cyclescape</h1>
 	</div>
@@ -84,10 +86,10 @@
 				data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
-							<li>Cambridge Cycle Campaign</li>
+							<li>Cambridge Cycling Campaign</li>
 						</ul>
 					"><i class="fas fa-fw fa-users"></i>Change group</li>
-			<a href="group-management.html">
+			<a href="generic-content.html">
 				<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
 			</a>
 			<a href="profile.html">
@@ -134,9 +136,13 @@
 
 
 		<div class="content-wrapper" id="content-map">
-			<button class="show-map-controls">Filter items <i class="fas fa-fw fa-filter"></i></button>
+			<button class="show-map-controls" data-close-text="Hide" data-close-icon="fas fa-eye-slash" data-open-text="Filter" data-open-icon="fas fa-filter">Filter items <i class="fas fa-fw fa-filter"></i></button>
 			<div class="main-content full-screen full-map"
 				style="background-image: url('/images/placeholders/map.png');">
+				<div class="geocoder" id="geocoder">
+					<i class="fas fa-fw fa-search"></i>
+					<input type="search" placeholder="Search for a place or postcode" />
+				</div>
 				<form>
 					<div class="map-controls">
 						<h2>Refine search</h2>
@@ -152,11 +158,11 @@
 											<label for="small"> Small</label><br>
 										</li>
 										<li>
-											<input type="checkbox" id="medium" name="size" value="medium">
+											<input type="checkbox" checked="checked" id="medium" name="size" value="medium">
 											<label for="medium"> Medium</label><br>
 										</li>
 										<li>
-											<input type="checkbox" id="large" name="size" value="large">
+											<input type="checkbox" checked="checked" id="large" name="size" value="large">
 											<label for="large"> Large</label><br>
 										</li>
 									</ul>
@@ -233,10 +239,10 @@
 							</div>
 							<div class="widget-content">
 								<div class="category">
+									<input type="checkbox" checked="checked" id="undecided" name="size" value="undecided">
+									<label for="undecided"> Undecided</label><br>
 									<input type="checkbox" id="decided" name="status" value="decided">
 									<label for="decided"> Decided</label><br>
-									<input type="checkbox" id="undecided" name="size" value="undecided">
-									<label for="undecided"> Undecided</label><br>
 								</div>
 							</div>
 						</div>

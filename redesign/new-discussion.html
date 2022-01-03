@@ -76,7 +76,9 @@
 </div>
 
 <body class="new-discussion">
-	<div id="shade"></div>
+	<div id="shade">
+		<i class="far fa-times-circle close"></i>
+	</div>
 	<div id="top-menu">
 		<h1>cyclescape</h1>
 	</div>
@@ -115,10 +117,10 @@
 				data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
-							<li>Cambridge Cycle Campaign</li>
+							<li>Cambridge Cycling Campaign</li>
 						</ul>
 					"><i class="fas fa-fw fa-users"></i>Change group</li>
-			<a href="group-management.html">
+			<a href="generic-content.html">
 				<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
 			</a>
 			<a href="profile.html">
@@ -149,6 +151,13 @@
 					<label for="description">Description</label>
 					<textarea id="description" name="description" placeholder="Click to add a description…"
 						rows="6"></textarea>
+					<label for="photo">Photo (optional)</label>
+					<div class="category tags">
+						<div class="widget">
+							<p>Help others visualise the situation</p>
+							<input type="file" />
+						</div>
+					</div>
 					<label for="category">Category</label>
 					<div class="radio" tabindex="0">
 						<input type="radio" id="campaigning" name="category" value="campaigning">
@@ -179,11 +188,16 @@
 							</div>
 						</div>
 					</div>
-					<label for="photo">Photo</label>
+					<label for="privacy">Privacy</label>
 					<div class="category tags">
 						<div class="widget">
-							<p>Help others visualise the situation</p>
-							<input type="file" />
+							<div class="widget-content">
+								<select name="provacy" id="privacy">
+									<option value="public">Public</option>
+									<option selected="selected" value="group">Group members only</option>
+									<option value="commitee">Committee members only</option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<input type="submit" value="Create discussion" />
