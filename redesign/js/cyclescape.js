@@ -63,8 +63,10 @@ var cyclescapeui = (function ($) {
 
 			// Enable normal "click" close
 			$('body').on('click', function (event) {
-				if ($('nav').hasClass('open')) {
-					cyclescapeui.closeNav();
+				if (event.target.tagName != 'LI') {
+					if ($('nav').hasClass('open')) {
+						cyclescapeui.closeNav();
+					}
 				}
 			});
 
@@ -117,6 +119,28 @@ var cyclescapeui = (function ($) {
 		// Set up the search bar
 		searchBar: function () {
 
+			// Initialise results
+			var data = [
+				{ label: 'Discussion', value: 'discussion.html' },
+				{ label: 'Discussions', value: 'discussions.html' },
+				{ label: 'Browse issues', value: 'browse-issues.html' },
+				{ label: 'Profile', value: 'profile.html' }
+			];
+
+			$('#search input').autocomplete({
+				appendTo: '#search',
+				source: data,
+				focus: function (event, ui) {
+					$(event.target).val(ui.item.label);
+					return false;
+				},
+				select: function (event, ui) {
+					$(event.target).val(ui.item.label);
+					window.location = ui.item.value;
+					return false;
+				}
+			});
+
 			// Open the search bar if clicking the icon
 			$('#search').on('click', function () {
 				if (!$('#search').hasClass('expanded')) {
@@ -152,8 +176,10 @@ var cyclescapeui = (function ($) {
 			});
 
 			// Close the search bar if clicking outside it
-			$('body').on('click', function () {
-				cyclescapeui.closeSearchBar();
+			$('body').on('click', function (event) {
+				if (event.target.localName != 'input') {
+					cyclescapeui.closeSearchBar();
+				}
 			});
 		},
 
