@@ -36,7 +36,7 @@
 	<script src="/js/cyclescape.js" type="text/javascript"></script>
 	<script>
 		$(function () {
-			cyclescapeui.initialise(config);
+			cyclescapeui.initialise(config, 'discussion');
 		});
 	</script>
 
@@ -59,7 +59,7 @@
 </head>
 
 <div class="modal fade addContentModal" id="addContentModal" tabindex="-1">
-	<div class="modal-dialog modal-dialog-centered modal-xl">
+	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-body">
 				<h3 class="icon text-centered"><i class="fas fa-fw fa-paperclip"></i></h3>
@@ -74,7 +74,7 @@
 <div class="modal fade userListModal" id="userListModal" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
-			<div class="modal-body padding">
+			<div class="modal-body">
 				<div class="widget">
 					<div class="title">
 						<i class="fas fa-fw fa-users"></i> Subscribers
@@ -295,19 +295,19 @@
 									<ul class="attachments">
 										<li><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
 										<li><i class="fas fa-fw fa-map"></i> Map</li>
-										<li><a class="add-content" href="javascript://" title="Add more content"
-												data-bs-container="body" data-bs-toggle="popover" data-bs-html="true"
+										<li><a tabindex="0" class="add-content" href="javascript://" title="Add more content"
+												data-bs-container="body" data-bs-trigger="focus" data-bs-toggle="popover" data-bs-html="true"
 												data-bs-placement="top" data-bs-content='
 												<ul class="add-content">
-													<li><i class="fas fa-fw fa-camera"></i> Photo</li>
-													<li><i class="fas fa-fw fa-biking"></i> CycleStreets photo</li>
-													<li><i class="fas fa-fw fa-road"></i> Streetview</li>
-													<li><i class="fas fa-fw fa-map"></i> Map</li>
-													<li><i class="fas fa-fw fa-chart-bar"></i> Poll</li>
-													<li><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
-													<li><i class="fas fa-fw fa-paperclip"></i> Attachment</li>
-													<li><i class="fas fa-fw fa-bell"></i> Call to action</li>
-													<li><i class="fas fa-fw fa-crown"></i> Thread leader</li>
+													<li id="photo"><i class="fas fa-fw fa-camera"></i> Photo</li>
+													<li id="cs-photo"><i class="fas fa-fw fa-biking"></i> CycleStreets photo</li>
+													<li id="streetview"><i class="fas fa-fw fa-road"></i> Streetview</li>
+													<li id="map"><i class="fas fa-fw fa-map"></i> Map</li>
+													<li id="poll"><i class="fas fa-fw fa-chart-bar"></i> Poll</li>
+													<li id="deadline"><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
+													<li id="attachment"><i class="fas fa-fw fa-paperclip"></i> Attachment</li>
+													<li id="cta"><i class="fas fa-fw fa-bell"></i> Call to action</li>
+													<li id="thread-leader"><i class="fas fa-fw fa-crown"></i> Thread leader</li>
 												</ul>
 											'><i class="fas fa-fw fa-camera"></i><i class="fas fa-fw fa-map"></i><i class="fas fa-fw fa-calendar"></i>
 												Add more content…</a></li>
