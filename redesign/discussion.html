@@ -70,6 +70,48 @@
 	</div>
 </div>
 
+
+<div class="modal fade userListModal" id="userListModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-body padding">
+				<div class="widget">
+					<div class="title">
+						<i class="fas fa-fw fa-users"></i> Subscribers
+					</div>
+					<div class="widget-content">
+						<ul class="unstyled avatars">
+							<li data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-placement="top"
+							data-bs-content="<i class='far fa-user-crown'></i> Discussion leader">
+							<a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
+									Steve Lopes <i class="far fa-user-crown"></i></a></li>
+							<li data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-placement="top"
+							data-bs-content="<i class='far fa-users'></i> Commitee member"><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar2.png" />
+									Paula Oakenfield <i class="far fa-users"></i></a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar3.png" />
+									Jimmy Fixer</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
+									Steve Lopes</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar3.png" />
+									Jimmy Fixer</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
+									Steve Lopes</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar3.png" />
+									Jimmy Fixer</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
+									Steve Lopes</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar3.png" />
+									Jimmy Fixer</a></li>
+							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
+									Steve Lopes</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <body class="discussion">
 	<div id="shade">
 		<i class="far fa-times-circle close"></i>
@@ -298,20 +340,29 @@
 					</div>
 					<div class="widget-content">
 						<ul class="unstyled avatars">
-							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
-									Steve Lopes</a></li>
-							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar2.png" />
-									Paula Oakenfield</a></li>
+							<li data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-placement="top"
+							data-bs-content="<i class='far fa-user-crown'></i> Discussion leader">
+							<a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
+									Steve Lopes <i class="far fa-user-crown"></i></a></li>
+							<li data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-placement="top"
+							data-bs-content="<i class='far fa-users'></i> Commitee member"><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar2.png" />
+									Paula Oakenfield <i class="far fa-users"></i></a></li>
 							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar3.png" />
 									Jimmy Fixer</a></li>
 							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
 									Steve Lopes</a></li>
 						</ul>
+						<p class="show-more" data-bs-toggle="modal" data-bs-target="#userListModal">Show more…</p>
 					</div>
 				</div>
-				<div class="centered">
-					<button class="social twitter"><i class="fas fa-fw fa-twitter"></i> Tweet</button>
-					<button class="social facebook"><i class="fas fa-fw fa-facebook"></i> Share</button>
+				<div class="widget">
+					<div class="title">
+						<i class="fas fa-fw fa-share-square"></i> Share
+					</div>
+					<div class="widget-content centered">
+						<button class="social twitter"><i class="fas fa-fw fa-twitter"></i> Tweet</button>
+						<button class="social facebook"><i class="fas fa-fw fa-facebook"></i> Share</button>
+					</div>
 				</div>
 
 			</div>
