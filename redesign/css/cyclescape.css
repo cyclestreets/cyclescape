@@ -407,12 +407,14 @@ ul.thread #post:hover {background: #f0eeee;}
 
 /* Library */
 ul.library {list-style-type: unstyled; padding-left: 0;}
-ul.library li {display: inline-block; border-radius: 25px; width: 300px; height: 425px; overflow: hidden; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: .1s; margin: 5px 10px; cursor: pointer;}
+ul.library a {text-decoration: none;}
+ul.library li {display: inline-block; border-radius: 25px; width: 280px; height: 405px; overflow: hidden; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: .1s; margin: 5px 10px; cursor: pointer;}
 ul.library li:hover {box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
-ul.library li img {height: 250px; width: 300px;}
+ul.library li img {height: 230px; width: 280px;}
 ul.library li img.map {height: 100px;}
 ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 .library input.filter {border: 1px solid #ECECEC; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 10px 10px 20px; width: 100%;}
+.library div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
 
 
 /* Profile */
