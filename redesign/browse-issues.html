@@ -45,7 +45,9 @@
 </head>
 
 <body class="browse-issues">
-	<div id="shade"></div>
+	<div id="shade">
+		<i class="far fa-times-circle close"></i>
+	</div>
 	<div id="top-menu">
 		<h1>cyclescape</h1>
 	</div>
@@ -84,10 +86,10 @@
 				data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
-							<li>Cambridge Cycle Campaign</li>
+							<li>Cambridge Cycling Campaign</li>
 						</ul>
 					"><i class="fas fa-fw fa-users"></i>Change group</li>
-			<a href="group-management.html">
+			<a href="generic-content.html">
 				<li><i class="fas fa-fw fa-users-cog"></i>Manage group</li>
 			</a>
 			<a href="profile.html">
@@ -108,8 +110,7 @@
 				<div class="container">
 					<div class="row align-items-start">
 						<div class="col">
-							<p class="light">Viewing issues for York Cycle Campaign.</p>
-							<a class="text" href="#">Embed this map</a>
+							<p class="light">This is a map of the issues being by the York Cycle Campaign. You might also want to <a href="new-idea.html">browse the ideas map</a>.</p>
 							<br />
 							<a class="text" href="#">Browse beyond…</a>
 						</div>
@@ -136,7 +137,7 @@
 
 
 		<div class="content-wrapper" id="content-map">
-			<button class="show-map-controls">Map controls <i class="fas fa-fw fa-filter"></i></button>
+			<button class="show-map-controls" data-close-text="Hide" data-close-icon="fas fa-eye-slash" data-open-text="Continue" data-open-icon="fas fa-pencil">Filter items <i class="fas fa-fw fa-filter"></i></button>
 			<div class="main-content full-screen full-map"
 				style="background-image: url('/images/placeholders/map.png');">
 				<div class="geocoder" id="geocoder">
@@ -159,10 +160,12 @@
 						</div>
 					</form>
 				</div>
+				<a class="text embed" href="#">Embed this map</a>
 			</div>
 		</div>
 
 		<div class="content-wrapper" id="content-list">
+			<button class="show-side-content">Filter items <i class="fas fa-fw fa-filter"></i></button>
 			<div class="main-content container">
 				<ul class="issues">
 					<li>
@@ -232,6 +235,23 @@
 						</a>
 					</li>
 				</ul>
+			</div>
+
+			<div class="side-content">
+				<div class="widget">
+					<div class="title">
+						<i class="fas fa-filter results"></i> Filter results
+					</div>
+					<div class="widget-content">
+						<div class="controls">
+							<ul class="map-buttons">
+								<li class="active"><i class="fas fa-sort-alpha-up"></i>A-Z</li>
+								<li><i class="fas fa-sort-alpha-down"></i>Z-A</li>
+								<li><i class="fas fa-fire-alt"></i>Popular</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
