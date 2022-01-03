@@ -194,6 +194,9 @@ form .radio input {margin-left: 5px;}
 form input[type="submit"] {width: fit-content; border: none; background-color: #eeeeee; color: #AC3E27; border-radius: 25px; padding: 6px 15px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 form input[type="submit"]:hover {background-color: white;}
 form input[type="checkbox"] {margin: 5px}
+form div.draganddrop {width: calc(300px + 4px + 4px); height: calc(200px + 4px + 4px); border: 2px dashed gray; border-radius: 25px;}
+form div.draganddrop p {width: 300px; height: 200px; text-align: center; padding: 15px; color: gray;}
+form div.draganddrop input {position: absolute; margin: 0; padding: 0; width: 300px; height: 200px; outline: none; opacity: 0;}
 
 
 /* Modal */
