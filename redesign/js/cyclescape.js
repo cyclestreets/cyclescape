@@ -18,6 +18,7 @@ var cyclescapeui = (function ($) {
 	// Class properties
 	var _currentWizardPage = 0; // Current page on progress div pages i.e. account creation
 	var _pageScroll = 0; // Save page scroll when opening an overlay on mobile
+	var _sideContentHtml = '';
 
 
 	return {
@@ -285,10 +286,7 @@ var cyclescapeui = (function ($) {
 			// Handle filter button
 			$('.show-side-content').on('click', function () {
 				if ($('.side-content').hasClass('visible')) {
-					$('.show-side-content').html('Filter <i class="fas fa-fw fa-filter"></i>');
-					$('#shade').fadeOut('fast');
-					$('.side-content').removeClass('visible').hide();
-					window.scrollTo(0, _pageScroll);
+					cyclescapeui.closeSideContent();
 				} else {
 					_pageScroll = cyclescapeui.getPageScroll();
 					window.scrollTo(0, 0);
@@ -309,6 +307,15 @@ var cyclescapeui = (function ($) {
 		},
 
 
+		// Close side content
+		closeSideContent: function () {
+			$('.show-side-content').html('Filter <i class="fas fa-fw fa-filter"></i>');
+			$('#shade').fadeOut('fast');
+			$('.side-content').removeClass('visible').hide();
+			window.scrollTo(0, _pageScroll);
+		},
+
+
 		// This function simply gets the window scroll position, works in all browsers.
 		getPageScroll: function () {
 			var yScroll;
@@ -325,28 +332,50 @@ var cyclescapeui = (function ($) {
 
 		// Set up mobile side-content view
 		mapControls: function () {
+			// Close button
+			$('#shade>i.close').on('click', function () {
+				cyclescapeui.closeMapControls();
+				cyclescapeui.closeSideContent();
+			});
+
+
+			// Handle clicking 
+			$('.map-buttons li').on('click', function () {
+				$('.map-buttons li').removeClass('active');
+				$(this).addClass('active');
+			})
+
 			// Handle filter button
 			$('.show-map-controls').on('click', function () {
 				if ($('.map-controls').hasClass('visible')) {
-					$('.show-map-controls').html('Map controls <i class="fas fa-fw fa-filter"></i>').css('z-index', '97');
-					$('#shade').fadeOut('fast');
-					$('.map-controls').removeClass('visible').hide();
+					var openText = $(this).data('open-text') + ' <i class="' + $(this).data('open-icon') + '"></i>'
+					cyclescapeui.closeMapControls(openText);
 				} else {
-					$('.show-map-controls').html('Done <i class="fas fa-fw fa-check"></i>').css('z-index', '99');
-					$('#shade').addClass('white').fadeIn('fast');
-					$('.map-controls').addClass('visible').show()
+					_pageScroll = cyclescapeui.getPageScroll();
 					window.scrollTo(0, 0);
+					$('.show-map-controls').html($(this).data('close-text') + ' <i class="' + $(this).data('close-icon') + '"></i>');
+					$('#shade').addClass('white').fadeIn('fast')
+					$('.map-controls').css('z-index', '101').show().addClass('visible');
 				}
 			});
 
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
 			$(window).on('resize', function () {
+				console.log('resizing');
 				if ($(window).width() > 750) {
 					$('.side-content').show();
 				} else {
 					$('.side-content').hide();
 				}
 			});
+		},
+
+
+		closeMapControls: function (buttonLabel = 'Filter <i class="fas fa-fw fa-filter"></i>') {
+			$('.show-map-controls').html(buttonLabel);
+			$('#shade').fadeOut('fast');
+			$('.map-controls').removeClass('visible').hide();
+			window.scrollTo(0, _pageScroll);
 		},
 
 
@@ -574,6 +603,9 @@ var cyclescapeui = (function ($) {
 				cyclescapeui.setDiscussionsView(desiredUl);
 			});
 
+			// Save the side content HTML for toggling on/off
+			_sideContentHtml = $('.side-content').html()
+
 			// At launch, set to first div
 			var firstDiv = $('.ios-segmented-control input').first().prop('id');
 			cyclescapeui.setDiscussionsView(firstDiv);
@@ -587,9 +619,19 @@ var cyclescapeui = (function ($) {
 		setDiscussionsView: function (desiredUl) {
 			$('.main-content>ul').hide();
 			$('.main-content>ul.' + desiredUl).show();
+
+			if (desiredUl == 'deadlines') {
+				$('.side-content').html('');
+			} else {
+				$('.side-content').html(_sideContentHtml);
+				if ($(window).width() > 750) {
+					$('.side-content').show();
+				}
+			}
 		},
 
 
+		// Returns the ordinal of an inputted number
 		getOrdinal: function (number) {
 			if (number == 1) {
 				return 'st'
@@ -603,6 +645,7 @@ var cyclescapeui = (function ($) {
 		},
 
 
+		// Iterate through ul.deadlines and add ordinal to the date numbers
 		setDeadlinesOrdinal: function () {
 			$.each($('ul.deadlines .date h3'), function (indexInArray, day) {
 				$(day).text($(day).text() + cyclescapeui.getOrdinal($(day).text()))

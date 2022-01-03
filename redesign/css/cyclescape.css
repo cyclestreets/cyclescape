@@ -25,8 +25,10 @@ html.fa-events-icons-loading body {
 html, body {height: 100%;}
 body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding: 10px; margin: 0;}
 #content {display: flex; flex-direction: column; flex-basis: 100%; flex: 1; margin-top: 50px; margin-left: 250px; padding: 10px; max-width: 1300px;}
-#shade {display: none; width: 100%; height: 100%; position: fixed; z-index: 98 /* i.e. one less than nav */; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); background-color:rgba(0, 0, 0, 0.158); margin-left: -10px; margin-top: -10px;}
+#shade {display: none; width: 100%; height: 100%; position: fixed; z-index: 100; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); background-color:rgba(0, 0, 0, 0.158); margin-left: -10px; margin-top: -10px;}
 #shade.white {background-color:rgba(255, 255, 255, 0.897); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
+#shade i.close {display: none; position: fixed; right: 0; padding: 5px; margin: 10px 5px; font-size: 25px; color: #c76a58;}
+#shade.white i.close {display: inline-block;}
 
 .title-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
 .title-wrapper .section-title {flex-direction: column; flex: 3; padding: 10px; margin-right: 40px; align-items: center; justify-content: center;}
@@ -37,9 +39,11 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .content-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
 .main-content {flex-direction: column; flex: 2; padding: 10px; margin-right: 40px;}
 .main-content.full-screen {margin: 0 10px; height: calc(100vh - 245px); border-radius: 25px; padding: 0;}
-.side-content {display: flex; flex-direction: column; flex: 1; padding: 10px; max-width: 300px;}
+.side-content {display: flex; flex-direction: column; flex: 1; padding: 10px; max-width: 300px; z-index: 101;}
+
 .show-side-content, .show-map-controls {display: none; position: fixed; bottom: 0; right: 5%; padding: 10px; margin: 10px auto; border-radius: 25px; color: white; font-size: 100%; height: 50px; border: none; outline: none; background-color: #AC3E27; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: 0.2s; line-height: 1; z-index: 98}
 .show-side-content:hover, .show-map-controls:hover {background-color: #c76a58;}
+.show-map-controls, .show-side-content {z-index: 102;}
 
 .unstyled {text-decoration: none;}
 .padding {padding: 10px;}
@@ -53,13 +57,13 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .map-controls.left {float: left;}
 .map-controls h2 {padding: 10px; text-align: center; margin: 0 auto;}
 
-#top-menu {display: none; position: fixed; z-index: 97; width: 100%; height: 75px; margin-left: -10px; margin-top: -10px; background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); flex-direction: column; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
+#top-menu {display: none; position: fixed; z-index: 98; width: 100%; height: 75px; margin-left: -10px; margin-top: -10px; background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); flex-direction: column; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 #top-menu h1 {display: block; margin: auto; font-style: italic; font-size: 35px;}
 #top-menu img {width: 30px;}
 
 
 /* Nav */
-nav {position: fixed; display: flex; flex-direction: column; flex-basis: 100%; flex: 1; background-color: #ECECEC; height: calc(100vh - 20px); max-width: 260px; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); z-index: 99; min-height: 600px; overflow-y: scroll;}
+nav {position: fixed; display: flex; flex-direction: column; flex-basis: 100%; flex: 1; background-color: #ECECEC; height: calc(100vh - 20px); max-width: 260px; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); z-index: 103; min-height: 600px; overflow-y: scroll;}
 nav hr {color: white; margin: 12.5px 0 12.5px -10px; height: 2px !important; opacity: .6; width: calc(100% + 20px);}
 nav .title img {width: 30px; margin-top: -16px;}
 nav .title h1 {display: inline; font-style: italic; font-size: 35px;}
@@ -72,13 +76,13 @@ nav li.active {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.1
 nav li:hover {background-color: #ffffffa6;}
 nav select {appearance: none; -webkit-appearance: none; outline: 0; border: none; background-color: #ECECEC; color: #185B3D; font-size: 17px; cursor: pointer; width: 190px; padding: 10px 5px; margin: 2.5px 0; border-radius: 25px;}
 nav select:hover {background-color: #ffffffa6;}
-nav .padding-fill {height: -webkit-fill-available;}
-button#hamburger {display: none; position: fixed; padding: 10px; margin: 0 5px; border-radius: 100%; color: #AC3E27; font-size: 150%; width: 50px; height: 50px; border: none; outline: none; background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: 0.2s; line-height: 1; z-index: 97}
+nav .padding-fill {height: 20%;}
+button#hamburger {display: none; position: fixed; padding: 10px; margin: 0 5px; border-radius: 100%; color: #AC3E27; font-size: 150%; width: 50px; height: 50px; border: none; outline: none; background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: 0.2s; line-height: 1; z-index: 98;}
 button#hamburger:hover {background-color: #ECECEC;}
 
 
 /* Search bar */
-div.search {position: fixed; z-index: 97; top: 5px; right: 0; margin-right: 15px; height: 49.25px; width: 56.28px; margin-top: 5px; padding: 5px 15px 5px 12.5px; color: #AC3E27; font-size: 25px; font-weight: 300; border-radius: 25px; border: .5px solid rgba(128, 128, 128, 0.199); transition: box-shadow 1s; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); cursor: pointer;}
+div.search {position: fixed; z-index: 98; top: 5px; right: 0; margin-right: 15px; margin-left: 15px; height: 49.25px; width: 56.28px; margin-top: 5px; padding: 5px 15px 5px 12.5px; color: #AC3E27; font-size: 25px; font-weight: 300; border-radius: 25px; border: .5px solid rgba(128, 128, 128, 0.199); transition: box-shadow 1s; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); cursor: pointer;}
 div.search:hover {background-color: #ECECEC;}
 div.search.expanded {box-shadow: 0 0 0 1000px rgba(0,0,0,.3); box-shadow: 0 0 0 100vmax rgba(0,0,0,.3); padding: 5px 15px; width: 75vw; max-width: 1000px; background-color: white;}
 div.search.expanded:hover {background-color: white;}
@@ -134,6 +138,7 @@ ul.links li {margin: 5px 0; text-decoration: underline; cursor: pointer;}
 
 ul.tags {margin: 5px 0; padding: 0;}
 ul.tags li.tag {list-style: none; display: inline-block; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.8; padding: 2px 5px; margin: 0 5px 10px 0; transition: 0.2s; cursor: pointer;}
+ul.tags li.tag a {display: inline-block; margin: 0; padding: 0; text-decoration: none; color: #185B3D;}
 ul.tags li.tag:hover {opacity: 1; background: rgb(243, 243, 243);}
 ul.tags li.large-tag {font-size: 15px; opacity: 0.97}
 ul.tags li.large-tag::after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
@@ -154,13 +159,15 @@ i.wizard-back:hover {background-color: #dfdfdf;}
 
 ul.checkboxes {list-style: none; margin: 0; padding: 0;}
 
-.widget {border-radius: 25px; margin: 10px 0;}
+.widget {border-radius: 25px; margin: 10px 0 5px;}
 .widget.standalone {width: 300px; margin: 20px 30px; display: inline-block;}
 .widget .title, .widget h2 {background-color: #ECECEC; color: #185B3D; font-size: 18px; border-radius: 25px; padding: 5px 5px 5px 20px;}
 .widget .title {box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 .widget h2 {padding: 0 15px 0 0; margin: 0; font-weight: normal; font-size: 18px;}
 .widget .widget-content {padding: 10px;}
 .widget .widget-content.padded {padding: 10px 12.5px;}
+.widget input {margin-bottom: 0};
+.widget button.primary {margin-bottom: 10px;}
 
 .avatar {width: 40px;}
 
@@ -272,9 +279,10 @@ ul.add-content li:hover {border-color: #185B3D;}
 
 /* Discussions */
 ul.discussions {padding: 0; margin: 15px 0;}
+ul.discussions>h2, ul.deadlines>h2 {display: none; padding: 5px; margin: 5px auto;}
 ul.discussions li {display: block; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0;}
-ul.discussions li a {text-decoration: none; display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0; padding: 0 20px;}
-ul.discussions li a:hover {background: #F6F6F6;}
+ul.discussions li>a {text-decoration: none; display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0; padding: 0 20px;}
+ul.discussions li>a:hover {background: #F6F6F6;}
 ul.discussions li div.content {flex-direction: column; align-self: center; flex: 2; padding: 10px;}
 ul.discussions li div.content h3 {font-size: 17px;}
 ul.discussions li div.content h3, p {margin: 5px 0;}
@@ -325,7 +333,7 @@ ul.thread li .content a.timestamp {font-style: italic; text-decoration: none; fo
 ul.thread li .content a.timestamp:hover {text-decoration: underline;}
 ul.thread li .content .post {font-size: 14px; font-weight: 400;}
 ul.thread li .content .post ul {list-style-type: circle; font-size: 14px;}
-ul.thread li .content .post ul li {margin: 2.5x 0; padding: 5px 0; display: list-item;}
+ul.thread li .content .post ul li {margin: 2.5x 0; padding: 0; display: list-item;}
 ul.thread li .post-actions {align-self: flex-end; margin: 0 10px; text-align: end;}
 ul.thread li .post-actions button {border: none; outline: none; background-color: #ECECEC; border: 1px solid transparent; color: #588734; border-radius: 25px; opacity: .85;}
 ul.thread li .post-actions button:hover {background-color: white; border-color: #ECECEC; opacity: 1;}
@@ -366,6 +374,7 @@ ul.thread #post:hover {background: #f0eeee;}
 
 /* Browse issues */
 .browse-issues .map-controls {width: 250px;}
+.browse-issues div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
 .browse-issues ul.issues {list-style-type: none; margin: 0; padding: 0;}
 .browse-issues ul.issues li {display: inline-block; border-radius: 25px; cursor: pointer; margin: 5px 0; width: 45%; transition: .2s;}
 .browse-issues ul.issues li:hover {background: #F6F6F6; }
@@ -375,6 +384,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .browse-issues ul.issues li a div.minimap img {border-radius: 100%; width: 100px; height: 100px;}
 .browse-issues ul.issues li a h2 {border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px;}
 .browse-issues ul.issues li a p {color: black;}
+.browse-issues a.embed {color: rgb(105, 105, 105); position: absolute; bottom: 0; right: 0; margin-right: 60px; padding: 5px; background-color: #ececece5; -webkit-backdrop-filter: (5px); backdrop-filter: (5px); border-radius: 25px;}
 
 
 /* Issue */
@@ -521,6 +531,7 @@ ul.application-types li label {color: white;}
     .browse-issues ul.issues li {text-align: center;}
     .browse-issues ul.issues li:hover {background-color: #5f6169;}
     .browse-issues ul.issues li h2 {background-color: #1d8b5a; color: white;}
+    .browse-issues ul.issues li a p {color: white;}
 
     .index div.tags {background-color: #2d303e54;}
     .index ul.tags li {background-color: #1d8b5a; color: white; opacity: 0.8;}
@@ -536,6 +547,10 @@ ul.application-types li label {color: white;}
 
 /* Responsive */
 @media (max-width: 1000px) {
+    ul.discussions>h2, ul.deadlines>h2 {display: block;}
+}
+
+@media (max-width: 1000px) {
     nav {display: none;}
     button#hamburger {display: inline-block;}
     #content {margin-left: 0; margin-top: 60px;}
@@ -549,7 +564,7 @@ ul.application-types li label {color: white;}
     body {padding: 5px;}
     #shade {width: calc(100vw + 5px); height: calc(100vh + 5px);}
     .content-wrapper {display: block;}
-    .side-content {display: none; position: absolute; top: 0; left: 10%; margin: auto; z-index: 98;}
+    .side-content {display: none; position: absolute; top: 0; left: 10%; margin: auto;}
     .show-side-content, .show-map-controls {display: block;}
     .title-wrapper .section-title {margin-right: 0; flex: unset;}
     
@@ -567,7 +582,7 @@ ul.application-types li label {color: white;}
     .ios-segmented-control .option label {font-size: 16px;}
 
     .full-map {width: auto;}
-    .map-controls {display: none; position: absolute; top: 0; left: 0; margin: auto; z-index: 98; width: calc(100vw - 50px); height: auto;}
+    .map-controls {display: none; position: absolute; top: 0; left: 0; margin: auto; margin-top: 40px; z-index: 98; width: calc(100vw - 50px); height: auto;}
     .planning-applications form .map-controls {max-width: unset;}
 
     #content {padding: 0;}
@@ -613,7 +628,6 @@ ul.application-types li label {color: white;}
     .browse-issues ul.issues {margin-top: 0;}
     .browse-issues ul.issues li {display: block;}
     .browse-issues .map-controls {width: unset;}
-    .browse-issues ul.issues li a p {color: white;}
 
     .new-idea .map-controls {width: 100vw; max-height: unset;}
     .new-idea .title-wrapper .section-title {flex: 1;}
@@ -621,7 +635,7 @@ ul.application-types li label {color: white;}
     ul.library {text-align: center;}
     .library input.filter {width: auto;}
 
-    ul.planning-applications li {display: inline-block; margin: 5px 10px;}
+    ul.planning-applications li {display: inline-block; margin: 5px 10px 20px;}
     ul.planning-applications li p {padding: 5px 10px;}
     ul.planning-applications div.minimap {height: auto;}
     ul.planning-applications li img {width: 100%;}
@@ -646,6 +660,17 @@ ul.application-types li label {color: white;}
     nav hr {margin: 5px 0 5px -10px;}
     nav li {font-size: 15px; padding: 7.5px 5px;}
     div.search input {font-size: 19px; line-height: 30px;}
+    button.primary i {padding-left: 8px; padding-right: 18px;}
+}
+
+@media (max-width: 375px) {
+    button.primary {font-size: 12px; font-size: 14px; padding: 5px 8px;}
+}
+
+@media (max-width: 414px) {
+    div.geocoder input {width: 270px;}
+    ul.discussions div.minimap {display: none;}
+    .side-content {width: 100vw;}
 }
 
 @media (max-height: 600px) {
