@@ -21,6 +21,7 @@ var cyclescapeui = (function ($) {
 	var _currentWizardPage = 0; // Current page on progress div pages i.e. account creation
 	var _pageScroll = 0; // Save page scroll when opening an overlay on mobile
 	var _sideContentHtml = '';
+	const isIOSSafari = !!window.navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
 
 
 	return {
@@ -82,6 +83,7 @@ var cyclescapeui = (function ($) {
 
 			// Listen for resize, if hamburger is set to hidden but window expands to desktop
 			$(window).resize(function () {
+				if (isIOSSafari) {return;}
 				if ($(window).width() > 1000) {
 					$('nav').show();
 				} else {
@@ -284,6 +286,7 @@ var cyclescapeui = (function ($) {
 
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
 			$(window).on('resize', function () {
+				if (isIOSSafari) {return;}
 				if ($(window).width() > 750) {
 					$('.side-content').show();
 				} else {
@@ -347,7 +350,7 @@ var cyclescapeui = (function ($) {
 
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
 			$(window).on('resize', function () {
-				console.log('resizing');
+				if (isIOSSafari) {return;}
 				if ($(window).width() > 750) {
 					$('.side-content').show();
 				} else {
