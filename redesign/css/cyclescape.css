@@ -527,8 +527,6 @@ ul.application-types li label {color: white;}
     ul.discussions li a:hover, ul.deadlines li a:hover {background-color: #5f6169;}
     ul.discussions li div.minimap .unread p {background-color: #ce5740; color: white;}
 
-    .new-discussion div.category.tags p {color: black;}
-
     ul.thread li.reply .content {border: none;}
     ul.thread li .content a.timestamp {color: white;}
     ul.thread li.reply .reply-footer {background-color: #2D303E;}
@@ -550,6 +548,8 @@ ul.application-types li label {color: white;}
 
     div.location i {background-color: #3b3f5046;}
     div.location i:hover {background-color: #787c8fa8;}
+
+    .new-idea form input, .new-idea form textarea {background-color: #3e4253; color: white;}
 
     ul.planning-applications li h2 {color: white;}
     ul.planning-applications li:hover {background-color: #3B3F50;}
@@ -602,6 +602,8 @@ ul.application-types li label {color: white;}
     button.primary i {padding-left: 3px; padding-right: 14px;}
 
     .widget .show-more {color: #FFFFFF;}
+
+    form input, form textarea {background-color: #3e4253; color: white;}
 
     /* Make sure Leaflet controls don't show through our popups */
     .leaflet-bottom.leaflet-right {z-index: 10 !important;}
@@ -663,11 +665,12 @@ ul.application-types li label {color: white;}
     .new-discussion .title-wrapper {width: calc(100vw - 20px);}
     .new-discussion .main-content {margin-bottom: 20px;}
     .new-discussion .main-content form {grid-template-columns: unset;}
-    .new-discussion .main-content input, .new-discussion .main-content textarea {width: calc(100vw - 20px);}
+    .new-discussion .main-content input, .new-discussion .main-content textarea {width: calc(100vw - 40px);}
     .new-discussion .content-wrapper {padding: 5px; width: calc(100vw - 10px);}
     form .radio, form .category {display: block;}
-    .new-discussion div.radio, .new-discussion div.category.tags {width: calc(100vw - 20px);}
-    .new-discussion div.category.tags input {width: calc(100vw - 40px);}
+    .new-discussion div.radio, .new-discussion div.category.tags {width: calc(100vw - 40px);}
+    .new-discussion div.category.tags {background-color: #3e4253; color: white;}
+    .new-discussion div.category.tags input {width: calc(100vw - 80px);}
     .new-discussion div.radio input {width: auto;}
 
     .browse-issues ul.issues {margin-top: 0;}
@@ -702,6 +705,8 @@ ul.application-types li label {color: white;}
     /* Override Bootstrap */
     .modal-content, .popover {background-color: #1D1E20; color: white;}
     .popover-header {background-color: #2D303E; color: white;}
+    .table {color: white;}
+    .modal-header .btn-close {color: white !important;}
 }
 
 @media (max-height: 666px) {
