@@ -55,6 +55,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .full-map {width: 100%; border-radius: 25px;}
 .map-controls {float: right; background-color: rgba(255, 255, 255, 0.871); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); border-radius: 25px; padding: 0 10px 10px; margin: 5px;}
 .map-controls.left {float: left;}
+.map-controls.absolute {position: absolute; top: 210px;}
 .map-controls h2 {padding: 10px; text-align: center; margin: 0 auto;}
 
 #top-menu {display: none; position: fixed; z-index: 98; width: 100%; height: 75px; margin-left: -10px; margin-top: -10px; background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); flex-direction: column; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
@@ -408,7 +409,8 @@ ul.thread #post:hover {background: #f0eeee;}
 
 
 /* New issue */
-.new-idea .map-controls {width: 400px; max-height: calc(100vh - 210px); overflow: scroll;}
+.new-idea #map {height: -webkit-fill-available; border-radius: 25px; z-index: 1;}
+.new-idea .map-controls {width: 400px; max-height: calc(100vh - 210px); overflow: scroll; z-index: 2;}
 .new-idea form input, .new-idea form textarea {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
 .new-idea form input {width: -webkit-fill-available;}
 .new-idea form textarea {width: 100%;}
@@ -416,7 +418,6 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-idea form {overflow: scroll;}
 .new-idea .main-content.full-screen.full-map {height: calc(100vh - 190px);}
 .modal-content .modal-body button.done {position: relative; display: block; margin: 30px 10px 0;}
-.new-idea #map {height: -webkit-fill-available;}
 
 
 /* Library */
@@ -588,7 +589,11 @@ ul.application-types li label {color: white;}
     .content-wrapper {display: block;}
     .side-content {display: none; position: absolute; top: 0; left: 10%; margin: auto;}
     .show-side-content, .show-map-controls {display: block;}
+    .map-controls.absolute {top: 0;}
     .title-wrapper .section-title {margin-right: 0; flex: unset;}
+
+    /* Make sure Leaflet controls don't show through our popups */
+    .leaflet-bottom.leaflet-right {z-index: 10 !important;}
     
     #top-menu {height: 65px; width: calc(100vw + 5px);}
     #top-menu h1 {font-size: 20px;}

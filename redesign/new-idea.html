@@ -28,6 +28,14 @@
 	<!-- Icons -->
 	<script src="/js/lib/fontawesomea546f29d67.js" crossorigin="anonymous"></script>
 
+	<!-- Leaflet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+	crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
 	<!-- Animations -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
@@ -36,7 +44,7 @@
 	<script src="/js/cyclescape.js" type="text/javascript"></script>
 	<script>
 		$(function () {
-			cyclescapeui.initialise(config);
+			cyclescapeui.initialise(config, 'newIdea');
 		});
 	</script>
 
@@ -117,10 +125,9 @@
 
 		<div class="content-wrapper">
 			<button class="show-map-controls" data-close-text="Hide" data-close-icon="fas fa-eye-slash" data-open-text="Continue" data-open-icon="fas fa-pencil">New idea <i class="fas fa-fw fa-plus-circle"></i></button>
-			<div class="main-content full-screen full-map"
-				style="background-image: url('/images/placeholders/map.png');">
-
-				<div class="map-controls left">
+			<div class="main-content full-screen full-map">
+				<div id="map"></div>
+				<div class="map-controls absolute">
 					<form>
 						<div class="widget">
 							<div class="title">
@@ -152,7 +159,7 @@
 									<p class="light">Click the map to mark the point. Drag the point to reposition. Zoom
 										in and pan to select the correct place.</p>
 								</div>
-								<p><i class="fas fa-fw fa-map-pin"></i> 21 Homerton Road</p>
+								<p class="location-name"></p>
 							</div>
 						</div>
 						<div class="widget">
@@ -161,7 +168,12 @@
 							</div>
 							<div class="widget-content">
 								<p class="light">Help others visualise the situation.</p>
-								<input type="file" placeholder="Add an optional photo…" />
+								<div class="draganddrop">
+									<input name="form[photograph][0]" id="form_photograph_0" type="file" size="30" />
+									<div id="form_photograph_0_thumbnailpreview" style="width: 300px; height: 300px;">
+										<p class="comment">Click here to pick photo, or drag and drop into this box.</p>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="widget">
