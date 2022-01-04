@@ -568,6 +568,14 @@ ul.application-types li label {color: white;}
     form .radio, form .category {background-color: rgba(54, 54, 54, 0.671);}
     .new-discussion .main-content form>label {color: #1d8b5a;}
 
+
+    /* Override Bootstrap */
+    .modal-content, .popover {background-color: #262834; color: white;}
+    .popover-header {background-color: #2D303E; color: white;}
+    .table {color: white;}
+    .modal-header .btn-close {color: white !important;}
+    ul.popover-group li {color: white;}
+
 }
 
 
@@ -701,12 +709,6 @@ ul.application-types li label {color: white;}
     .create-account div.social-sign-in img {width: 345px;}
 
     .profile .content-wrapper {padding: 10px; width: calc(100vw - 20px);}
-
-    /* Override Bootstrap */
-    .modal-content, .popover {background-color: #1D1E20; color: white;}
-    .popover-header {background-color: #2D303E; color: white;}
-    .table {color: white;}
-    .modal-header .btn-close {color: white !important;}
 }
 
 @media (max-height: 666px) {
