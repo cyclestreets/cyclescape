@@ -352,7 +352,7 @@ ul.thread li.reply .content {border: 0.5px solid #dbdada; border-radius: 25px; p
 ul.thread li.reply:hover {background: none;}
 ul.thread li.reply .reply-footer {background-color: #f6f6f6; border-top-left-radius: 25px; border-top-right-radius: 25px; padding: 5px 10px 10px;}
 ul.thread li.reply ul.attachments {list-style: none; padding: 0;}
-ul.thread li.reply ul.attachments li {border: 0.5px solid #185B3D; border-radius: 25px; display: inline-block; background-color: white; color: #185B3D; padding: 2.5px 10px; margin-right: 5px;}
+ul.thread li.reply ul.attachments li {border: 0.5px solid #185B3D; border-radius: 25px; display: inline-block; background-color: white; color: #185B3D; padding: 2.5px 10px; margin-right: 5px; cursor: pointer;}
 ul.thread li.reply ul.attachments li:not(:last-child):after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
 ul.thread li.reply ul.attachments li:hover {background: #f0eeee;}
 ul.thread li.load-more {display: block; margin: 10px auto; width: 150px; background-color: #EEEEEE; color: #226244; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); text-align: center; cursor: pointer;}
@@ -543,7 +543,6 @@ ul.application-types li label {color: white;}
     ul.deadlines .date h3 {color: #ce5740;}
 
     ul.thread li .content h3 {color: white;}
-    ul.thread li:hover {background-color: #c0c0c049;}
 
     ul.library li h2 {color: white;}
     ul.library li {background-color: #3B3F50;}
@@ -600,6 +599,7 @@ ul.application-types li label {color: white;}
     .show-side-content, .show-map-controls {display: block;}
     .map-controls.absolute {top: 0;}
     .title-wrapper .section-title {margin-right: 0; flex: unset;}
+    button.primary i {padding-left: 3px; padding-right: 14px;}
 
     .widget .show-more {color: #FFFFFF;}
 
@@ -643,6 +643,12 @@ ul.application-types li label {color: white;}
     ul.thread li .content, ul.thread li .poster-avatar {padding: 0 4px;}
     ul.thread li.reply {display: block;}
     ul.thread li.reply .content {max-width: calc(100vw - 5px);}
+    ul.add-content li {color: white;}
+    ul.add-content li:hover {border-color: white;}
+    ul.thread li.reply ul.attachments li {background-color: #527B36; color: white;}
+    ul.thread li.reply ul.attachments li:hover {background-color: #5e8a41;}
+    ul.thread a.add-content {background-color: #527B36; color: white;}
+    ul.thread a.add-content:hover {background-color: #5e8a41;}
 
     ul.discussions li div.content {flex: 1.5; padding: 8px 0 8px 8px;}
     ul.discussions li i.favourite {padding: 5px;}
@@ -664,10 +670,10 @@ ul.application-types li label {color: white;}
     .new-discussion div.category.tags input {width: calc(100vw - 40px);}
     .new-discussion div.radio input {width: auto;}
 
-    .browse-issues .main-content.container {margin: 0 10px;}
     .browse-issues ul.issues {margin-top: 0;}
     .browse-issues ul.issues li {display: block; max-width: unset;}
     .browse-issues .map-controls {width: unset;}
+    ul.planning-applications li a.convert, ul.planning-applications li a.hide {display: block; text-align: center;}
 
     .new-idea .map-controls {width: 100vw; max-height: unset;}
     .new-idea .title-wrapper .section-title {flex: 1;}
@@ -694,7 +700,8 @@ ul.application-types li label {color: white;}
     .profile .content-wrapper {padding: 10px; width: calc(100vw - 20px);}
 
     /* Override Bootstrap */
-    .modal-content {background-color: #1D1E20; color: white;}
+    .modal-content, .popover {background-color: #1D1E20; color: white;}
+    .popover-header {background-color: #2D303E; color: white;}
 }
 
 @media (max-height: 666px) {
