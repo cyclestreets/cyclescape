@@ -184,6 +184,11 @@ div.controls ul.map-buttons li:hover {background-color: #ffffff;}
 div.controls ul.map-buttons li i {display: block; text-align: center; color: #B2412B; font-size: 20px; margin: 0 auto;}
 div.controls ul.map-buttons li p {text-align: center; font-size: 13px;}
 
+.pagination {display: block; margin: 15px auto; background-color: #EEEEEE; border-radius: 25px; text-align: center; width: 300px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
+.pagination a {padding: 10px; color: #185B3D; border-radius: 25px;}
+.pagination a:hover {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
+.pagination p {display: inline-block; color: #185B3D; padding: 10px; margin: 0;}
+
 
 /* Forms */
 form input, form textarea {padding: 10px; outline: none; border: 1px solid #eeeeee; border-radius: 25px; margin: 10px 0 5px;}
