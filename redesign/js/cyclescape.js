@@ -408,6 +408,30 @@ var cyclescapeui = (function ($) {
 
 			// Adjust icons on startup, too
 			cyclescapeui.setSegmentedControlIcons();
+
+			// Remember each page's segmented control position
+			$('#content-view').on('change', function () {
+				var divId = '#content-' + $('input[name=content-view]:checked', '#content-view').val();
+				var pageId = 'cyclescape-' + $('body').attr('class');
+				Cookies.set(pageId, divId, { expires: 7 })
+			});
+
+			// On startup, if we have a stored cookie for page view, change to that view
+			var pageId = 'cyclescape-' + $('body').attr('class');
+			var savedCookie = Cookies.get(pageId);
+			if (savedCookie !== undefined) {
+				// Uncheck all #content inputs
+				$.each($('input[name=content-view]'), function (indexInArray, input) {
+					$(input).attr('checked', false);
+				});
+
+				// Check the div referred to in the cookie
+				// Cookie = #content-list
+				var desiredId = savedCookie.split('-').pop();
+				$('input#' + desiredId).attr('checked', true).trigger('change');
+				updatePillPosition();
+			}
+
 		},
 
 		// Function to set icons and text on segmented control
@@ -433,7 +457,7 @@ var cyclescapeui = (function ($) {
 
 		// Searches for a content-view toggle and displays on the checked toggle
 		changeToSelectedView: function () {
-			var desiredDivId = '#content-' + $('input[name=content-view]:checked', '#content-view').val()
+			var desiredDivId = '#content-' + $('input[name=content-view]:checked', '#content-view').val();
 			$('.content-wrapper').hide();
 			$(desiredDivId).show();
 		},

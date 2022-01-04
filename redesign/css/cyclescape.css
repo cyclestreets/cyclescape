@@ -549,6 +549,9 @@ ul.application-types li label {color: white;}
     div.location i {background-color: #3b3f5046;}
     div.location i:hover {background-color: #787c8fa8;}
 
+    ul.planning-applications li h2 {color: white;}
+    ul.planning-applications li:hover {background-color: #3B3F50;}
+
     .browse-issues ul.issues li {text-align: center;}
     .browse-issues ul.issues li:hover {background-color: #5f6169;}
     .browse-issues ul.issues li h2 {background-color: #1d8b5a; color: white;}
