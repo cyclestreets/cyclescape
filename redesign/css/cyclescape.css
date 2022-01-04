@@ -391,7 +391,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .browse-issues .map-controls {width: 250px;}
 .browse-issues div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
 .browse-issues ul.issues {list-style-type: none; margin: 0; padding: 0;}
-.browse-issues ul.issues li {display: inline-block; border-radius: 25px; cursor: pointer; margin: 5px 0; width: 45%; transition: .2s;}
+.browse-issues ul.issues li {display: inline-block; border-radius: 25px; cursor: pointer; margin: 5px 0; max-width: 45%; transition: .2s; min-width: 300px;}
 .browse-issues ul.issues li:hover {background: #F6F6F6; }
 .browse-issues ul.issues li a {display: flex; cursor: pointer; text-align: left; text-decoration: none;}
 .browse-issues ul.issues li a div.minimap {flex: 1; padding: 20px 10px;}
@@ -664,8 +664,9 @@ ul.application-types li label {color: white;}
     .new-discussion div.category.tags input {width: calc(100vw - 40px);}
     .new-discussion div.radio input {width: auto;}
 
+    .browse-issues .main-content.container {margin: 0 10px;}
     .browse-issues ul.issues {margin-top: 0;}
-    .browse-issues ul.issues li {display: block;}
+    .browse-issues ul.issues li {display: block; max-width: unset;}
     .browse-issues .map-controls {width: unset;}
 
     .new-idea .map-controls {width: 100vw; max-height: unset;}
