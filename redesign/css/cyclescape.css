@@ -380,7 +380,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-discussion div.category.tags {background-color: #eeeeee; border-radius: 25px; padding: 10px;}
 .new-discussion div.category.tags p {font-size: 12px; margin-left: 15px;}
 .new-discussion div.category.tags input[type="search"] {margin-left: 10px;}
-.locationModal img.map {border-radius: 25px; width: 100%;}
+.locationModal img.map {width: 100%;}
 .locationModal div.controls {position: absolute; top: 0; right: 0; padding: 20px; width: 300px; border-radius: 25px; background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); margin: 5px;}
 
 
@@ -571,6 +571,12 @@ ul.application-types li label {color: white;}
     ul.discussions>h2, ul.deadlines>h2 {display: block;}
     
     div.location {margin: 5px 2.5px;}
+}
+
+@media (max-width: 992px) {
+    .locationModal img.map {height: 100%; border-radius: 0;}
+    .locationModal div.controls {padding: 10px; bottom: 0; width: calc(100% - 10px); margin: 5px; top: unset;}
+    .locationModal h3.icon.text-centered {display: none;}
 }
 
 
