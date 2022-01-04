@@ -140,9 +140,10 @@ ul.tags {margin: 5px 0; padding: 0;}
 ul.tags li.tag {list-style: none; display: inline-block; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.8; padding: 2px 5px; margin: 0 5px 10px 0; transition: 0.2s; cursor: pointer;}
 ul.tags li.tag a {display: inline-block; margin: 0; padding: 0; text-decoration: none; color: #185B3D;}
 ul.tags li.tag:hover {opacity: 1; background: rgb(243, 243, 243);}
-ul.tags li.large-tag {font-size: 15px; opacity: 0.97}
+ul.tags li.large-tag {font-size: 15px; opacity: 0.97;}
+ul.tags li.large-tag input {font-size: 200%;}
+ul.tags li.large-tag label {color: #185B3D;}
 ul.tags li.large-tag::after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
-ul.tags li.toggle::before {padding-right: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 600; content: "\f205";}
 ul.tags li.large-tag:last-of-type {margin-bottom: 0;}
 
 ul.wizard {margin: 5px; padding: 0; height: 35px; background-color: transparent; text-align: center;}
