@@ -33,7 +33,8 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .title-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
 .title-wrapper .section-title {flex-direction: column; flex: 3; padding: 10px; margin-right: 40px; align-items: center; justify-content: center;}
 .title-wrapper .section-title h1, .title-wrapper .section-title p.badge {display: inline-block; width: fit-content;}
-.title-wrapper .section-title p.badge {background-color: #eeeeee; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 20px; font-size: 18px; font-weight: 300; align-self: center;}
+.title-wrapper .section-title h1 {margin-right: 20px;}
+.title-wrapper .section-title p.badge {background-color: #eeeeee; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 20px 0 0; font-size: 18px; font-weight: 300; align-self: center;}
 .title-wrapper .action-buttons {display: flex; padding: 10px; max-width: 400px;}
 
 .content-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
@@ -363,7 +364,7 @@ ul.thread a.add-content:hover {background: #f0eeee;}
 ul.thread .post-wrapper {text-align: right;}
 ul.thread #post {display: inline-block; border: 0.5px solid #dbdada; background-color: white; color: #B2412B; outline: none; padding: 6.5px 10px; margin: 5px 0 0; border-radius: 25px; text-decoration: none;}
 ul.thread #post:hover {background: #f0eeee;}
-.widget .show-more {color: #555555; text-align: center; font-size: 14px;}
+.widget .show-more {color: #555555; text-align: center; font-size: 14px; cursor: pointer;}
 
 
 /* tinymce overrides */
@@ -526,6 +527,8 @@ ul.application-types li label {color: white;}
     ul.discussions li a:hover, ul.deadlines li a:hover {background-color: #5f6169;}
     ul.discussions li div.minimap .unread p {background-color: #ce5740; color: white;}
 
+    .new-discussion div.category.tags p {color: black;}
+
     ul.thread li.reply .content {border: none;}
     ul.thread li .content a.timestamp {color: white;}
     ul.thread li.reply .reply-footer {background-color: #2D303E;}
@@ -598,6 +601,8 @@ ul.application-types li label {color: white;}
     .map-controls.absolute {top: 0;}
     .title-wrapper .section-title {margin-right: 0; flex: unset;}
 
+    .widget .show-more {color: #FFFFFF;}
+
     /* Make sure Leaflet controls don't show through our popups */
     .leaflet-bottom.leaflet-right {z-index: 10 !important;}
     
@@ -632,9 +637,9 @@ ul.application-types li label {color: white;}
     h3.drop-cap:first-child:first-letter {font-size: 37px; line-height: 31px;}
     .drop-cap:first-child:first-letter {padding-right: 3px;}
 
-    .main-content {margin-right: 0; padding: 0;}
+    .main-content {margin-right: 0; padding: 0 10px;}
 
-    ul.thread li {display: block; margin: 5px 0; padding: 10px;}
+    ul.thread li {display: block; margin: 5px 0; padding: 10px 0;}
     ul.thread li .content, ul.thread li .poster-avatar {padding: 0 4px;}
     ul.thread li.reply {display: block;}
     ul.thread li.reply .content {max-width: calc(100vw - 5px);}
@@ -667,7 +672,7 @@ ul.application-types li label {color: white;}
     .new-idea .title-wrapper .section-title {flex: 1;}
 
     ul.library {text-align: center;}
-    .library input.filter {width: auto;}
+    .library input.filter {width: calc(100% - 20px);}
 
     ul.planning-applications li {display: inline-block; margin: 5px 10px 20px;}
     ul.planning-applications li p {padding: 5px 10px;}
@@ -686,6 +691,9 @@ ul.application-types li label {color: white;}
     .create-account div.social-sign-in img {width: 345px;}
 
     .profile .content-wrapper {padding: 10px; width: calc(100vw - 20px);}
+
+    /* Override Bootstrap */
+    .modal-content {background-color: #1D1E20; color: white;}
 }
 
 @media (max-height: 666px) {
