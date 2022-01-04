@@ -14,7 +14,8 @@ var cyclescapeui = (function ($) {
 	var _actions = [
 		'discussions',
 		'index',
-		'discussion'
+		'discussion',
+		'newIdea'
 	];
 
 	// Class properties
@@ -22,6 +23,9 @@ var cyclescapeui = (function ($) {
 	var _pageScroll = 0; // Save page scroll when opening an overlay on mobile
 	var _sideContentHtml = '';
 	const isIOSSafari = !!window.navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
+	var _map = null; // Leaflet map
+	var _addIdeaMarker = null; // Save the Leaflet marker in newIdea
 
 
 	return {
@@ -83,7 +87,7 @@ var cyclescapeui = (function ($) {
 
 			// Listen for resize, if hamburger is set to hidden but window expands to desktop
 			$(window).resize(function () {
-				if (isIOSSafari) {return;}
+				if (isIOSSafari) { return; }
 				if ($(window).width() > 1000) {
 					$('nav').show();
 				} else {
@@ -286,7 +290,7 @@ var cyclescapeui = (function ($) {
 
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
 			$(window).on('resize', function () {
-				if (isIOSSafari) {return;}
+				if (isIOSSafari) { return; }
 				if ($(window).width() > 750) {
 					$('.side-content').show();
 				} else {
@@ -350,7 +354,7 @@ var cyclescapeui = (function ($) {
 
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
 			$(window).on('resize', function () {
-				if (isIOSSafari) {return;}
+				if (isIOSSafari) { return; }
 				if ($(window).width() > 750) {
 					$('.side-content').show();
 				} else {
@@ -601,6 +605,12 @@ var cyclescapeui = (function ($) {
 
 			// Set the ordinal of the deadline date
 			cyclescapeui.setDeadlinesOrdinal();
+
+			// Ensure redirect to group management
+			$('ul.discussions ul.tags li').on('click', function (event) {
+				event.preventDefault();
+				window.location.href = "generic-content.html";
+			})
 		},
 
 
@@ -631,11 +641,75 @@ var cyclescapeui = (function ($) {
 		// Page-specific initialisation
 		discussion: function () {
 			var addContentModal = new bootstrap.Modal(document.getElementById('addContentModal'), {})
-			
+
 			// Enable rich-content-adding modal
 			$('body').on('click', 'ul.add-content li', function () {
 				addContentModal.toggle();
 			});
+		},
+
+
+		// Page-specific initialisation
+		newIdea: function () {
+			// Initialise map
+			_map = L.map('map', {
+				zoomControl: false,
+				tap: false // c.f. https://stackoverflow.com/questions/65030691/click-event-fires-twice-for-item-inside-a-loop
+			}).setView([51.505, -0.09], 13);
+
+			// Add zoom control to bottom right
+			L.control.zoom({
+				position: 'bottomright'
+			}).addTo(_map);
+
+			// Load in a tile layer
+			L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${config.mapboxglAccessToken}`, {
+				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+				maxZoom: 18,
+				id: 'mapbox/streets-v11',
+				tileSize: 512,
+				zoomOffset: -1,
+				accessToken: config.mapboxglAccessToken
+			}).addTo(_map);
+
+			_map.on('click', function (e) {
+				// Set a quick marker first, which will be adjusted once the API call comes back
+				if (_addIdeaMarker) {
+					_addIdeaMarker.setLatLng(e.latlng).update();
+				} else {
+					_addIdeaMarker = L.marker(e.latlng).addTo(_map);
+				}
+
+				// Get CycleStreets nearest point to update marker and location name
+				cyclescapeui.getNearestPoint(e.latlng.lng, e.latlng.lat, function (response) {
+					cyclescapeui.setMarker([response.features[0].geometry.coordinates[1], response.features[0].geometry.coordinates[0]]);
+					cyclescapeui.setName(response.features[0].properties.name);
+				});
+			});
+
+		},
+
+
+		// Geocode
+		getNearestPoint: function (lon, lat, callback) {
+			var apiCallUrl = config.apiBaseUrl + '/v2/nearestpoint?key=' + config.apiKey + '&lonlat=' + lon + ',' + lat;
+			$.ajax({
+				type: "GET",
+				url: apiCallUrl,
+				success: function (response) {
+					callback(response);
+				}
+			});
+		},
+
+
+		setMarker: function (latLng) {
+			_addIdeaMarker.setLatLng(latLng).update();
+		},
+
+
+		setName: function (locationName) {
+			$('.location-name').html('<i class="fas fa-fw fa-map-pin"></i> ' + locationName);
 		},
 
 
