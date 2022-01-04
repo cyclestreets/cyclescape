@@ -498,7 +498,9 @@ ul.application-types li label {color: white;}
     nav li:hover {background-color: #c0c0c0a6; color: white;}
 
     div.search {background-color: #63646D; color: white;}
+    div.search.expanded i {color: #963E2C;}
     div.search:hover {background-color: rgb(167, 167, 167);}
+    div.search li {color: #963E2C;}
 
     button.primary {background-color: #ce5740; color: white;}
     button.primary:hover {background-color: #e66d54;}
@@ -511,6 +513,7 @@ ul.application-types li label {color: white;}
 
     ul.tags li.tag {background-color: #1d8b5a; color: white; opacity: 0.8;}
     ul.tags li.tag:hover {opacity: 1; background: #22b170;}
+    ul.tags li.large-tag label {color: white;}
 
     ul.avatars li a {color: white;}
 
