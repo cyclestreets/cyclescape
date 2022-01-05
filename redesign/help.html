@@ -47,7 +47,41 @@
 
 </head>
 
-<body class="library">
+<div class="modal fade feedbackModal" id="feedbackModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Send us feedback</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form method="POST" action="">
+					<label for="email">Email</label>
+					<input type="text" id="email" name="email" autofocus="autofocus"
+						placeholder="Your email" />
+					<br />
+						<label for="feedback">Your feedback</label>
+					<textarea id="feedback" name="feedback" placeholder="Click to add your feedback…"
+						rows="6"></textarea>
+					<label for="photo">Photo or screenshot (optional)</label>
+					<div class="category tags">
+						<div class="widget">
+							<div class="draganddrop">
+								<input name="form[photograph][0]" id="form_photograph_0" type="file" size="30" />
+								<div id="form_photograph_0_thumbnailpreview" style="width: 300px; height: 300px;">
+									<p class="comment">Click here to pick photo, or drag and drop into this box.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<input type="submit" value="Submit feedback" />
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<body class="help">
 	<div id="shade">
 		<i class="far fa-times-circle close"></i>
 	</div>
@@ -79,7 +113,7 @@
 			</a>
 			<hr>
 			<a href="library.html">
-				<li class="active"><i class="fas fa-fw fa-book-open"></i>Library</li>
+				<li><i class="fas fa-fw fa-book-open"></i>Library</li>
 			</a>
 			<hr>
 		</ul>
@@ -98,7 +132,7 @@
 				<li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
 			</a>
 			<a href="help.html">
-				<li><i class="fas fa-fw fa-hands-helping"></i>Help & feedback</li>
+				<li class="active"><i class="fas fa-fw fa-hands-helping"></i>Help & feedback</li>
 			</a>
 		</ul>
 	</nav>
@@ -111,70 +145,36 @@
 	<div id="content">
 		<div class="title-wrapper">
 			<div class="section-title">
-				<h1><i class="fas fa-fw fa-book-open"></i> Library</h1>
-				<p class="light">This section has reusable resources to help campaigning.</p>
+				<h1><i class="fas fa-fw fa-hands-helping"></i> Help & feedback</h1>
 			</div>
 			<div class="action-buttons">
-				<button class="primary"><i class="fas fa-fw fa-plus"></i> Add resource</button>
+				<button class="button primary" data-bs-toggle="modal" data-bs-target="#feedbackModal">Send us feedback <i class="far fa-fw fa-comment-dots"></i></button>
 			</div>
 		</div>
 		<hr>
 		<div class="content-wrapper">
-			<button class="show-side-content">Filter items <i class="fas fa-fw fa-filter"></i></button>
 			<div class="main-content">
-				<input class="filter" type="search" placeholder="Filter on title…" />
-				<ul class="library">
-					<li>
-						<a href="library-item.html">
-							<img src="/images/placeholders/library.png" />
-							<h2>Traffic signs manual</h2>
-							<img class="map" src="/images/placeholders/map.png" />
-						</a>
-					</li>
-					<li>
-						<a href="library-item.html">
-							<img src="/images/placeholders/library2.png" />
-							<h2>Government records request form form</h2>
-							<img class="map" src="/images/placeholders/map.png" />
-						</a>
-					</li>
-					<li>
-						<a href="library-item.html">
-							<img src="/images/placeholders/library.png" />
-							<h2>Traffic signs manual</h2>
-							<img class="map" src="/images/placeholders/map.png" />
-						</a>
-					</li>
-					<li>
-						<a href="library-item.html">
-							<img src="/images/placeholders/library.png" />
-							<h2>Traffic signs manual</h2>
-							<img class="map" src="/images/placeholders/map.png" />
-						</a>
-					</li>
-				</ul>
-				<div class="pagination">
-					<a title="Go to first page" href="#"><i class="fas fa-fw fa-chevron-double-left"></i></a>
-					<a title="Go to previous page" href="#"><i class="fas fa-fw fa-chevron-left"></i></a>
-					<p>Page 1</p>
-					<a title="Go to next page" href="#"><i class="fas fa-fw fa-chevron-right"></i></a>
-					<a title="Go to last page" href="#"><i class="fas fa-fw fa-chevron-double-right"></i></a>
-				</div>
-			</div>
-
-			<div class="side-content">
-				<div class="widget">
+				<h2>Something wrong?</h2>
+				<div class="widget standalone">
 					<div class="title">
-						<i class="fas fa-filter results"></i> Filter results
+						<i class="fas fa-fw fa-info"></i> Help topics
 					</div>
 					<div class="widget-content">
-						<div class="controls">
-							<ul class="map-buttons">
-								<li class="active"><i class="fas fa-fire-alt"></i>Popular</li>
-								<li><i class="fas fa-sort-alpha-up"></i>A-Z</li>
-								<li><i class="fas fa-sort-alpha-down"></i>Z-A</li>
-							</ul>
-						</div>
+						<ul class="unstyled links">
+							<li>How can I report something offensive?</li>
+							<li>How do I leave a group?</li>
+						</ul>
+					</div>
+				</div>
+						
+				<h2>Donate</h2>
+				<p>We work on the basis of donations, so we'd really appreciate your help.</p>
+				<div class="widget standalone">
+					<div class="title">
+						<i class="fas fa-fw fa-heart"></i> Donate
+					</div>
+					<div class="widget-content">
+						<p>Donate widget</p>
 					</div>
 				</div>
 			</div>
