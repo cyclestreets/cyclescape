@@ -454,7 +454,7 @@ ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 .create-account input {width: 300px; display: inline-block; margin: 10px;}
 .create-account button.next {text-align: center; margin: 15px auto; display: block;}
 .create-account .ui-autocomplete {width: 200px !important;}
-.signin a {color: #AC3E27; display: block; margin: 0 auto; text-align: center;}
+.signin .main-content a {color: #AC3E27; display: block; margin: 0 auto; text-align: center;}
 .signin h3 {font-size: 20px;}
 
 
