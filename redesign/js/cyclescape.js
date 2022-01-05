@@ -670,6 +670,21 @@ var cyclescapeui = (function ($) {
 			$('body').on('click', 'ul.add-content li', function () {
 				addContentModal.toggle();
 			});
+
+			// Initialise tinymce
+			tinymce.init({
+				selector: 'textarea',
+				statusbar: false,
+				menubar: false,
+				skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
+				content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')
+			});
+
+			// Clicking reply adds that text to the editor
+			$('.post-actions .reply').on('click', function () {
+				var quotedText = $(this).parent('.post-actions').siblings('.content').find('.post').first().text();
+				tinymce.activeEditor.setContent(tinymce.activeEditor.getContent() + '<i>' + quotedText + '</i>');
+			});
 		},
 
 
