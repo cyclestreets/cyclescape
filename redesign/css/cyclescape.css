@@ -510,6 +510,8 @@ ul.application-types li label {color: white;}
     form input[type="submit"]:hover {background-color: #e66d54;}
 
     .widget h2 {background-color: #1D8B5A; color: white;}
+    .widget .show-more {color: #FFFFFF;}
+
     .map-controls {color: white;}
     .map-controls {background-color: rgba(29, 3, 3, 0.671)}
     div.controls ul.map-buttons li.active {background-color: #ffffff4d;}
@@ -534,6 +536,15 @@ ul.application-types li label {color: white;}
     ul.thread li.reply .content {border: none;}
     ul.thread li .content a.timestamp {color: white;}
     ul.thread li.reply .reply-footer {background-color: #2D303E;}
+    ul.thread li.reply ul.attachments li {background-color: #527B36; color: white;}
+    ul.thread li.reply ul.attachments li:hover {background-color: #5e8a41;}
+    ul.thread a.add-content {background-color: #527B36; color: white;}
+    ul.thread a.add-content:hover {background-color: #5e8a41;}
+
+    ul.add-content li {color: white;}
+    ul.add-content li:hover {border-color: white;}
+
+    .new-discussion div.category.tags {background-color: #3e4253; color: white;}
 
     .issue .title-wrapper textarea {background-color: #3e4253; color: white; margin-top: 10px;}
 
@@ -551,6 +562,7 @@ ul.application-types li label {color: white;}
     ul.library li h2 {color: white;}
     ul.library li {background-color: #3B3F50;}
     ul.library li:hover {background-color: #6a6e80;}
+    .library input.filter {background-color: #3e4253; color: white;}
 
     div.location i {background-color: #3b3f5046;}
     div.location i:hover {background-color: #787c8fa8;}
@@ -572,6 +584,7 @@ ul.application-types li label {color: white;}
     .locationModal div.controls {background-color: rgba(54, 54, 54, 0.671);}
 
     form .radio, form .category {background-color: rgba(54, 54, 54, 0.671);}
+    form input, form textarea {background-color: #3e4253; color: white;}
     .new-discussion .main-content form>label {color: #1d8b5a;}
 
 
@@ -615,10 +628,6 @@ ul.application-types li label {color: white;}
     .title-wrapper .section-title {margin-right: 0; flex: unset; width: 100%;}
     button.primary i {padding-left: 3px; padding-right: 14px;}
 
-    .widget .show-more {color: #FFFFFF;}
-
-    form input, form textarea {background-color: #3e4253; color: white;}
-
     /* Make sure Leaflet controls don't show through our popups */
     .leaflet-bottom.leaflet-right {z-index: 10 !important;}
     
@@ -659,12 +668,6 @@ ul.application-types li label {color: white;}
     ul.thread li .content, ul.thread li .poster-avatar {padding: 0 4px;}
     ul.thread li.reply {display: block;}
     ul.thread li.reply .content {max-width: calc(100vw - 5px);}
-    ul.add-content li {color: white;}
-    ul.add-content li:hover {border-color: white;}
-    ul.thread li.reply ul.attachments li {background-color: #527B36; color: white;}
-    ul.thread li.reply ul.attachments li:hover {background-color: #5e8a41;}
-    ul.thread a.add-content {background-color: #527B36; color: white;}
-    ul.thread a.add-content:hover {background-color: #5e8a41;}
 
     ul.discussions li div.content {flex: 1.5; padding: 8px 0 8px 8px;}
     ul.discussions li i.favourite {padding: 5px;}
@@ -684,8 +687,7 @@ ul.application-types li label {color: white;}
     .new-discussion .main-content input, .new-discussion .main-content textarea {width: calc(100vw - 40px);}
     .new-discussion .content-wrapper {padding: 5px; width: calc(100vw - 10px);}
     form .radio, form .category {display: block;}
-    .new-discussion div.radio, .new-discussion div.category.tags {width: calc(100vw - 40px);}
-    .new-discussion div.category.tags {background-color: #3e4253; color: white;}
+    .new-discussion div.radio, .new-discussion div.category.tags {width: calc(100vw - 40px)};
     .new-discussion div.category.tags input {width: calc(100vw - 80px);}
     .new-discussion div.radio input {width: auto;}
 
