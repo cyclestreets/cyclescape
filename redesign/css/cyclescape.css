@@ -94,7 +94,7 @@ div.search:hover {background-color: #eeeeee;}
 div.search.expanded {box-shadow: 0 0 0 1000px rgba(0,0,0,.3); box-shadow: 0 0 0 100vmax rgba(0,0,0,.3); padding: 5px 15px; width: 75vw; max-width: 1000px; background-color: white;}
 div.search.expanded:hover {background-color: white;}
 div.search input {-webkit-appearance: none; border: none; outline: none; font-size: 25px; width: calc(100% - 60px); display: none; transition: 1s;}
-div.search.expanded input {display: inline;}
+div.search.expanded input {display: inline; background-color: #FFFFFF;}
 
 
 /* Geocoder */
@@ -485,7 +485,7 @@ ul.application-types {list-style-type: none; padding: 0; margin: 0;}
 ul.application-types li {display: inline-block; padding: 2.5px 15px 2.5px 5px; margin: 2.5px; color: white; border-radius: 25px;}
 ul.application-types li label {color: white;}
 .planning-applications input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 20px; width: 100%;}
-.planning-applications .main-content>input.filter {width: 80%;}
+.planning-applications .main-content>input.filter {width: 80%; margin-top: 0;}
 
 /* Help & feedback */
 .help .modal-body input, .help .modal-body textarea {display: block; width: 100%;}
@@ -646,7 +646,7 @@ ul.application-types li label {color: white;}
     #top-menu h1 {font-size: 20px;}
     
     div.search {margin-top: 0;}
-    div.search.expanded {width: unset;}
+    div.search.expanded input {margin-top: 0;}
 
     .avatar {width: 35px;}
 
