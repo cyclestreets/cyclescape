@@ -49,15 +49,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.2/tinymce.min.js"
 		integrity="sha512-MbhLUiUv8Qel+cWFyUG0fMC8/g9r+GULWRZ0axljv3hJhU6/0B3NoL6xvnJPTYZzNqCQU3+TzRVxhkE531CLKg=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script>
-		tinymce.init({
-			selector: 'textarea',
-			statusbar: false,
-			menubar: false,
-			skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
-			content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')
-		});
-	</script>
 
 </head>
 
@@ -191,6 +182,9 @@
 					drainage and infrastructure and the formation of a vehicular access onto London Road.</p>
 				<hr />
 				<ul class="thread">
+					<li class="load-more">
+						<p>Load 31 more posts…</p>
+					</li>
 					<li>
 						<div class="poster-avatar">
 							<img class="avatar" src="/images/placeholders/avatar1.png" />
@@ -212,7 +206,7 @@
 						</div>
 						<div class="post-actions">
 							<button title="Flag this post"><i class="fas fa-fw fa-flag"></i></button>
-							<button title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
+							<button class="reply" title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
 							<button data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover"
 								data-bs-html="true" data-bs-placement="top" data-bs-content="
 									<ul class='popover-avatar'>
@@ -253,7 +247,7 @@
 							</div>
 						</div>
 						<div class="post-actions">
-							<button title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
+							<button class="reply" title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
 							<button title="Like this post"><i class="fas fa-fw fa-thumbs-up"></i></button>
 						</div>
 					</li>
@@ -268,8 +262,7 @@
 							</a>
 							<div class="post">
 								<p>Nice summary of some of the screw-ups. But I wouldn't say the first five
-									miles are 'well engineered'.  <a href="#">Test link.</a> Large gaps where they dump you onto informal crossings
-									of
+									miles are 'well engineered'.  <a href="#">Test link.</a> Large gaps where they dump you onto informal crossings of
 									slip roads and a mysterious sharp zig-zag around a strange concrete grid 'thing'
 									near
 									Bar Hill (before the diner). Oh, and the permanently shut pool shop gets priority
@@ -285,12 +278,9 @@
 							</div>
 						</div>
 						<div class="post-actions">
-							<button title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
+							<button class="reply" title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
 							<button title="Like this post"><i class="fas fa-fw fa-thumbs-up"></i></button>
 						</div>
-					</li>
-					<li class="load-more">
-						<p>Load 31 more posts…</p>
 					</li>
 					<li class="reply">
 						<div class="poster-avatar">
@@ -298,7 +288,7 @@
 						</div>
 						<div class="content">
 							<form method="POST" action="">
-								<textarea></textarea>
+								<textarea id="reply"></textarea>
 								<div class="reply-footer">
 									<ul class="attachments">
 										<li><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
@@ -321,7 +311,7 @@
 												Add more content…</a></li>
 									</ul>
 									<div class="post-wrapper">
-										<input type="submit" id="post" href="#" value="Send post" />
+										<input type="submit" id="post" href="#" value="Submit post" />
 									</div>
 								</div>
 							</form>
