@@ -34,7 +34,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .title-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
 .title-wrapper .section-title {flex-direction: column; flex: 3; padding: 10px; margin-right: 40px; align-items: center; justify-content: center;}
 .title-wrapper .section-title h1, .title-wrapper .section-title p.badge {display: inline-block; width: fit-content;}
-.title-wrapper .section-title h1 {margin-right: 20px;}
+.title-wrapper .section-title h1 {margin-right: 20px; margin-bottom: 15px;}
 .title-wrapper .section-title p.badge {background-color: #eeeeee; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 20px 0 0; font-size: 18px; font-weight: 300; align-self: center;}
 .title-wrapper .action-buttons {display: flex; padding: 10px; max-width: 400px;}
 
@@ -434,6 +434,7 @@ ul.library li img.map {height: 100px;}
 ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 .library input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 10px 10px 20px; width: 100%;}
 .library div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
+.library-item img.minimap {border-radius: 50%; width: 100%;}
 
 
 /* Profile */
@@ -453,6 +454,8 @@ ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 .create-account input {width: 300px; display: inline-block; margin: 10px;}
 .create-account button.next {text-align: center; margin: 15px auto; display: block;}
 .create-account .ui-autocomplete {width: 200px !important;}
+.signin a {color: #AC3E27; display: block; margin: 0 auto; text-align: center;}
+.signin h3 {font-size: 20px;}
 
 
 /* Planning applications */
@@ -724,6 +727,7 @@ ul.application-types li label {color: white;}
     .create-account ul.wizard {margin: 10px 0 15px;}
     .create-account .main-content {width: calc(100vw - 10px); margin: 20px auto;}
     .create-account div.social-sign-in img {width: 345px;}
+    .signin .main-content {margin: 0 auto;}
 
     .profile .content-wrapper {padding: 10px; width: calc(100vw - 20px);}
 }
