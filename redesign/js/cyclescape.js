@@ -87,7 +87,7 @@ var cyclescapeui = (function ($) {
 			});
 
 			// Listen for resize, if hamburger is set to hidden but window expands to desktop
-			$(window).resize(function () {
+			$(window).on('resize', function () {
 				if (isIOSSafari) { return; }
 				if ($(window).width() > 1000) {
 					$('nav').show();
@@ -96,6 +96,7 @@ var cyclescapeui = (function ($) {
 				}
 			});
 
+			// Listen for escape key to close menu
 			$(document).on('keydown', function (event) {
 				if (event.key == "Escape") {
 					if ($('nav').hasClass('open')) {
@@ -120,6 +121,12 @@ var cyclescapeui = (function ($) {
 
 		// Close the nav bar
 		closeNav: function () {
+			// Close group change popover
+			var exampleTriggerEl = document.getElementById('group-popover')
+			var popover = bootstrap.Popover.getOrCreateInstance(exampleTriggerEl) // Returns a Bootstrap popover instance
+			popover.hide();
+
+			// Close menu
 			$('#shade').fadeOut();
 			$('nav').removeClass('open');
 			$('nav').hide("slide", { direction: "left" }, 300);
@@ -270,7 +277,7 @@ var cyclescapeui = (function ($) {
 			var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 			var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 				return new bootstrap.Popover(popoverTriggerEl)
-			})
+			});
 		},
 
 
