@@ -43,6 +43,7 @@ var cyclescapeui = (function ($) {
 			cyclescapeui.navBar();
 			cyclescapeui.searchBar();
 			cyclescapeui.autocomplete();
+			cyclescapeui.filterable();
 			cyclescapeui.tagsAutocomplete();
 			cyclescapeui.geocoder();
 			cyclescapeui.sideContent();
@@ -320,6 +321,17 @@ var cyclescapeui = (function ($) {
 				yScroll = document.body.scrollTop;
 			}
 			return yScroll;
+		},
+
+
+		// Enable type-to-filter (TTF) in library and other views
+		filterable: function () {
+			$('input.filter').on('keyup', function () {
+				var value = $(this).val().toLowerCase();
+				$('.filterable h2').filter(function () {
+					$(this).closest('li').toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			});
 		},
 
 
