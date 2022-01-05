@@ -40,6 +40,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 
 .content-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
 .main-content {flex-direction: column; flex: 2; padding: 10px; margin-right: 40px;}
+.main-content h2 {margin-top: 10px;}
 .main-content.full-screen {margin: 0 10px; height: calc(100vh - 245px); border-radius: 25px; padding: 0;}
 .side-content {display: flex; flex-direction: column; flex: 1; padding: 10px; max-width: 300px; z-index: 101;}
 
@@ -484,6 +485,7 @@ ul.application-types {list-style-type: none; padding: 0; margin: 0;}
 ul.application-types li {display: inline-block; padding: 2.5px 15px 2.5px 5px; margin: 2.5px; color: white; border-radius: 25px;}
 ul.application-types li label {color: white;}
 .planning-applications input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 20px; width: 100%;}
+.planning-applications .main-content>input.filter {width: 80%;}
 
 /* Help & feedback */
 .help .modal-body input, .help .modal-body textarea {display: block; width: 100%;}
@@ -649,6 +651,8 @@ ul.application-types li label {color: white;}
     .avatar {width: 35px;}
 
     a.action {width: unset;}
+
+    .widget.standalone {margin: 20px 10px;}
     
     .ios-segmented-control {margin: 10px 5px;}
     .ios-segmented-control .option label {font-size: 16px;}
@@ -733,7 +737,6 @@ ul.application-types li label {color: white;}
 }
 
 @media (max-height: 666px) {
-    nav .padding {padding: 5px;}
     nav hr {margin: 5px 0 5px -10px;}
     nav li {font-size: 15px; padding: 7.5px 5px;}
     div.search input {font-size: 19px; line-height: 30px;}
@@ -741,7 +744,13 @@ ul.application-types li label {color: white;}
 }
 
 @media (max-width: 375px) {
-    button.primary {font-size: 12px; font-size: 14px; padding: 5px 8px;}
+    button.primary {font-size: 12px; font-size: 14px; padding: 5px 8px 5px 12px;}
+    nav li {padding: 8px 2.5px;}
+}
+
+@media (max-width: 330px) {
+    .side-content {left: 10px;}
+    .widget.standalone {width: 270px;}
 }
 
 @media (max-width: 414px) {
