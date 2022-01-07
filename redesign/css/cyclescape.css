@@ -423,7 +423,10 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-idea form {overflow: scroll;}
 .new-idea .main-content.full-screen.full-map {height: calc(100vh - 190px);}
 .modal-content .modal-body button.done {position: relative; display: block; margin: 30px 10px 0;}
-
+.new-idea .geocoder {position: absolute; right: 30px; top: 210px; z-index: 3;}
+@media (min-width: 1570px) {
+    .new-idea .geocoder {right: unset; left: 1470px;}
+}
 
 /* Library */
 ul.library {list-style-type: unstyled; padding-left: 0;}

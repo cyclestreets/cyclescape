@@ -134,6 +134,10 @@
 			<button class="show-map-controls" data-close-text="Hide" data-close-icon="fas fa-eye-slash" data-open-text="Continue" data-open-icon="fas fa-pencil">New idea <i class="fas fa-fw fa-plus-circle"></i></button>
 			<div class="main-content full-screen full-map">
 				<div id="map"></div>
+				<div class="geocoder" id="geocoder absolute top-right">
+					<i class="fas fa-fw fa-search"></i>
+					<input type="search" placeholder="Search for a place or postcode" />
+				</div>
 				<div class="map-controls absolute">
 					<form>
 						<div class="widget">
@@ -185,7 +189,7 @@
 						</div>
 						<div class="widget">
 							<div class="title">
-								<h2><i class="fas fa-fw fa-hashtag"></i> Tags</h2>
+								<h2><i class="fas fa-fw fa-hashtag"></i> Issue tags</h2>
 							</div>
 							<div class="widget-content">
 								<ul class="tags">
