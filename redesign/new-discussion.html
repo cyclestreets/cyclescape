@@ -156,10 +156,10 @@
 				<hr />
 				<form method="POST" action="">
 					<label for="title">Title</label>
-					<input type="text" id="title" name="title" autofocus="autofocus"
+					<input type="text" id="title" name="title" required="required" autofocus="autofocus"
 						placeholder="Click to add a title…" />
 					<label for="description">Description</label>
-					<textarea id="description" name="description" placeholder="Click to add a description…"
+					<textarea id="description" name="description" required="required" placeholder="Click to add a description…"
 						rows="6"></textarea>
 					<label for="photo">Photo (optional)</label>
 					<div class="category tags">
@@ -190,7 +190,7 @@
 						<button type="button" class="primary" data-bs-toggle="modal"
 							data-bs-target="#locationModal">Draw on the map</button>
 					</div>
-					<label for="tags">Tags</label>
+					<label for="tags">Issue tags</label>
 					<div class="category tags">
 						<div class="widget">
 							<input type="search" placeholder="Type to add a tag…" />
