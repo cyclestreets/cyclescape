@@ -15,7 +15,7 @@
 //= require jquery-ui/dialog
 //= require jquery-ui/slider
 //= require cocoon
-//= require js-cookie
+//= require js-cookie/src/js.cookie
 //= require cocoon_fields
 //= require timeago
 //= require tinymce-jquery
