@@ -14,6 +14,8 @@ class MessageThreadsController < ApplicationController
   end
 
   def show
+    messages = thread.messages.approved
+
     respond_to do |format|
       format.html do
         set_page_title thread.title
@@ -27,7 +29,6 @@ class MessageThreadsController < ApplicationController
         else
           @subscribers = thread.subscribers.is_public
         end
-        messages = thread.messages.approved
         messages = messages.after_date_with_n_before(after_date: last_viewed, n_before: 10) if last_viewed
 
         @messages = messages.includes(
@@ -46,13 +47,14 @@ class MessageThreadsController < ApplicationController
         @subscribers = @subscribers.ordered(thread.group_id).includes(:groups)
       end
       format.js do
-        messages = thread.messages.approved
         initially_loaded_from = Time.zone.iso8601(params["initiallyLoadedFrom"])
-        messages = messages.before_date(initially_loaded_from)
+        messages = messages.before_date_with_n_before(before_date: initially_loaded_from, n_before: 40)
 
         @messages = messages.includes(
           *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]
-        )
+        ).to_a.reverse!
+
+        @initially_loaded_from = @messages.first&.created_at&.iso8601
       end
     end
   end
