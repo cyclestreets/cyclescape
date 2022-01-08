@@ -752,6 +752,7 @@ var cyclescapeui = (function ($) {
 				event.preventDefault();
 
 				if ($(this).hasClass('favourited')) {
+					$(this).toggleClass('animate__heartBeat');
 					// Add API call	
 				}
 			});
