@@ -365,6 +365,7 @@ ul.thread li .content .post ul li {margin: 2.5x 0; padding: 0; display: list-ite
 ul.thread li .post-actions {align-self: flex-end; margin: 0 10px; text-align: end;}
 ul.thread li .post-actions button {border: none; outline: none; background-color: #eeeeee; border: 1px solid transparent; color: #588734; border-radius: 25px; opacity: .85;}
 ul.thread li .post-actions button:hover {background-color: white; border-color: #eeeeee; opacity: 1;}
+ul.thread li .post-actions button.liked {background-color: #588734; color: white;}
 ul.thread li.reply .content {border: 0.5px solid #dbdada; border-radius: 25px; padding: 5px 0 0 0; overflow: hidden;}
 ul.thread li.reply:hover {background: none;}
 ul.thread li.reply .reply-footer {background-color: #f6f6f6; border-top-left-radius: 25px; border-top-right-radius: 25px; padding: 5px 10px 10px;}

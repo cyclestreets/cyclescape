@@ -798,6 +798,13 @@ var cyclescapeui = (function ($) {
 					// Add API call	
 				}
 			});
+
+			// Clicking a like button likes the post
+			$('.like').on('click', function () {
+				$(this).toggleClass('liked');
+
+				$(this).toggleClass('animate__heartBeat', $(this).hasClass('liked'));
+			});
 			
 			// Enable rich-content-adding modal
 			$('body').on('click', 'ul.add-content li', function () {
