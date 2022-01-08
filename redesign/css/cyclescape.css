@@ -722,6 +722,8 @@ ul.application-types li label {color: white;}
     .new-discussion div.category.tags input {width: calc(100vw - 80px);}
     .new-discussion div.radio input {width: auto;}
 
+    .new-idea .geocoder {top: 176px; right: 12px;}
+
     .browse-issues ul.issues {margin-top: 0;}
     .browse-issues ul.issues li {display: block; max-width: unset;}
     .browse-issues .map-controls {width: unset;}
@@ -770,6 +772,7 @@ ul.application-types li label {color: white;}
 @media (max-width: 330px) {
     .side-content {left: 10px;}
     .widget.standalone {width: 270px;}
+    .new-idea .geocoder {top: 190px;}
 }
 
 @media (max-width: 414px) {
