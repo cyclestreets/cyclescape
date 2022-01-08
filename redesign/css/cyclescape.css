@@ -41,7 +41,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .content-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
 .main-content {flex-direction: column; flex: 2; padding: 10px; margin-right: 40px;}
 .main-content h2 {margin-top: 10px;}
-.main-content.full-screen {margin: 0 10px; height: calc(100vh - 245px); border-radius: 25px; padding: 0;}
+.main-content.full-screen {margin: 0 10px; height: calc(100vh - 300px); border-radius: 25px; padding: 0;}
 .side-content {display: flex; flex-direction: column; flex: 1; padding: 10px; max-width: 300px; z-index: 101;}
 
 .show-side-content, .show-map-controls {display: none; position: fixed; bottom: 0; right: 5%; padding: 10px; margin: 10px auto; border-radius: 25px; color: white; font-size: 100%; height: 50px; border: none; outline: none; background-color: #AC3E27; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: 0.2s; line-height: 1; z-index: 98}
@@ -68,7 +68,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 
 
 /* Nav */
-nav {position: fixed; display: flex; flex-direction: column; background-color: #eeeeee; height: calc(100vh - 20px); max-width: 260px; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); z-index: 103; min-height: 469px;}
+nav {position: fixed; display: flex; flex-direction: column; background-color: #eeeeee; height: calc(100vh - 30px); max-width: 260px; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); z-index: 103; min-height: 469px;}
 nav hr {color: white; margin: 12.5px 0 12.5px -10px; height: 2px !important; opacity: .6; width: calc(100% + 20px);}
 nav .title img {width: 30px; margin-top: -16px;}
 nav .title h1 {display: inline; font-style: italic; font-size: 35px;}
@@ -108,6 +108,7 @@ div.geocoder i {font-size: 20px; font-weight: 500;}
 div.geocoder input {display: none; width: 300px; border-radius: 25px; padding: 0 10px; border: none; outline: none; font-size: 16px;}
 div.geocoder.expanded:hover {background-color: #FFFFFF;}
 div.geocoder.expanded input {display: inline-block;}
+.modal div.geocoder {float: unset; position: absolute; top: 0;}
 
 
 /* Geocoder autocomplete */
@@ -130,6 +131,8 @@ button.disabled {opacity: .8; filter: grayscale(100%); -webkit-filter: grayscale
 button.social {align-self: flex-start; display: inline-block; width: auto; border: none; background-color: #eeeeee; border-radius: 25px; padding: 5px 10px; margin: 5px; font-size: 11px; font-weight: bold;}
 button.social.twitter {background-color: #7ABCFF; color: white;}
 button.social.facebook {background-color: #7C9EFF; color: white;}
+button.donate {background-color: #FBBE5F; color: white;}
+button.donate:hover {color: #FBBE5F;}
 
 a.action {display: inline-flex; width: 270px; flex-direction: row; border: 1px solid #eeeeee; border-radius: 25px; color: #185B3D; padding: 10px 5px; margin: 7.5px 7.5px 7.5px 0; cursor: pointer; transition: .1s; text-decoration: none; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); background-color: #eeeeee;}
 a.action:hover {background-color: #FFFFFF;}
@@ -142,6 +145,7 @@ ul.unstyled {list-style: none;}
 
 ul.avatars {padding: 0;}
 ul.avatars li a {color: black; text-decoration: none;}
+ul.avatars li a i {margin-top: 12.5px; margin-right: 5px; float: right;}
 ul.avatars li {margin: 6px 0; padding: 2.5px 10px 2.5px 15px; border: 1px solid transparent; border-radius: 25px; cursor: pointer;}
 ul.avatars li:hover {border-color: #eeeeee;}
 ul.links li {margin: 5px 0; text-decoration: underline; cursor: pointer;}
@@ -210,7 +214,7 @@ form .radio input {margin-left: 5px;}
 form input[type="submit"] {width: fit-content; border: none; background-color: #eeeeee; color: #AC3E27; border-radius: 25px; padding: 6px 15px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 form input[type="submit"]:hover {background-color: white;}
 form input[type="checkbox"] {margin: 5px}
-form div.draganddrop {width: calc(300px + 4px + 4px); height: calc(200px + 4px + 4px); border: 2px dashed gray; border-radius: 25px;}
+form div.draganddrop {width: calc(300px + 4px + 4px); height: calc(200px + 4px + 4px); border: 2px dashed gray; border-radius: 25px; overflow: hidden;}
 form div.draganddrop p {width: 300px; height: 200px; text-align: center; padding: 15px; color: gray;}
 form div.draganddrop input {position: absolute; margin: 0; padding: 0; width: 300px; height: 200px; outline: none; opacity: 0;}
 
@@ -310,17 +314,18 @@ ul.discussions li div.minimap {flex: 0; padding: 10px; margin: auto;}
 ul.discussions li div.minimap .unread {position: absolute; padding-left: 90px;}
 ul.discussions li div.minimap .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 ul.discussions li div.minimap img {border-radius: 50%; width: 120px; height: 120px;}
-ul.discussions li i.favourite {padding: 30px; align-self: center; font-size: 20px; color: #dbdbdb;}
+i.favourite {padding: 30px; align-self: center; font-size: 20px; color: #dbdbdb;}
+i.favourite.favourited {color: #FEAE00;}
 ul.discussions li:hover i.favourite {color: #feae0054;}
-ul.discussions li i.favourite.favourited {color: #FEAE00;}
+ul.discussions li:hover i.favourite.favourited {color: #FEAE00;}
 .discussions .side-content h3 {margin-top: 15px;}
 div.location {width: 100px; height: 100px; display: inline-block; margin: 5px;}
 div.location img {position: absolute; width: 100px; height: 100px; border-radius: 100%;}
 div.location.unchecked img {-webkit-filter: grayscale(100%); filter: grayscale(100%); opacity: 0.7;}
 div.location input {position: absolute; margin-top: 77px; font-size: 200%;}
 div.location input::not(:checked)::before {display: none;}
-div.location i {position: absolute; margin: 67px; padding: 10px; border-radius: 100%; border: 1px solid transparent; cursor: pointer;}
-div.location i:hover {border-color: black;}
+div.location i {position: absolute; margin: 73px; padding: 0; font-size: 23px; border-radius: 100%; border: 1px solid transparent; cursor: pointer; color: #AC3E27;}
+div.location i:hover {color: #f5310a;}
 div.categories input[type="checkbox"] {font-size: 30px; color: #185B3D;}
 
 
@@ -341,7 +346,9 @@ ul.deadlines .actions i {padding: 0;}
 
 /* Discussion */
 .discussion .content-wrapper {margin-bottom: 40px;}
-.discussion img.minimap {border-radius: 50%; width: 100%;}
+.discussion i.favourite {padding: 5px;}
+.discussion img.minimap {border-radius: 50%; width: 100%; border: 1px solid transparent; cursor: pointer; transition: 0.5s;}
+.discussion img.minimap:hover {transform: scale(1.02); box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 ul.thread {padding: 0;}
 ul.thread li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; margin: 5px 0; padding: 10px 0;}
 ul.thread li .poster-avatar {flex: 1;}
@@ -419,13 +426,13 @@ ul.thread #post:hover {background: #f0eeee;}
 
 /* New issue */
 .new-idea #map {height: -webkit-fill-available; border-radius: 25px; z-index: 1;}
-.new-idea .map-controls {width: 400px; max-height: calc(100vh - 210px); overflow: scroll; z-index: 2;}
+.new-idea .map-controls {width: 400px; max-height: calc(100vh - 235px); overflow: scroll; z-index: 2;}
 .new-idea form input, .new-idea form textarea {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
 .new-idea form input {width: -webkit-fill-available;}
 .new-idea form textarea {width: 100%;}
 .new-idea form .light {font-size: 12px;}
 .new-idea form {overflow: scroll;}
-.new-idea .main-content.full-screen.full-map {height: calc(100vh - 190px);}
+.new-idea .main-content.full-screen.full-map {height: calc(100vh - 230px);}
 .modal-content .modal-body button.done {position: relative; display: block; margin: 30px 10px 0;}
 .new-idea .geocoder {position: absolute; right: 30px; top: 210px; z-index: 3;}
 @media (min-width: 1570px) {
@@ -615,6 +622,11 @@ ul.application-types li label {color: white;}
 
 }
 
+/* Responsive */
+@media (max-width: 1200px) {
+    ul.discussions>h2, ul.deadlines>h2 {display: block;}
+}
+
 
 /* Responsive */
 @media (max-width: 1000px) {
@@ -623,8 +635,6 @@ ul.application-types li label {color: white;}
     button#hamburger {display: inline-block;}
     #content {margin-left: 0; margin-top: 60px;}
     #top-menu {display: flex;}
-    
-    ul.discussions>h2, ul.deadlines>h2 {display: block;}
     
     div.location {margin: 5px 2.5px;}
 }
