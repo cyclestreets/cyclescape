@@ -207,10 +207,12 @@ div.controls ul.map-buttons li p {text-align: center; font-size: 13px;}
 
 /* Forms */
 form input, form textarea {padding: 10px; outline: none; border: 1px solid #eeeeee; border-radius: 25px; margin: 10px 0 5px;}
-form .radio, form .category {display: flex; background-color: #eeeeee; border-radius: 25px; padding: 5px;}
+form .radio, form .category {display: flex; background-color: #f8f6f6; border-radius: 25px; padding: 5px;}
 form .radio input, form .radio label {align-self: center;}
 form .radio label {margin: 5px 15px 5px 5px;}
 form .radio input {margin-left: 5px;}
+form>label.decorated {grid-column: 1 / 2; height: 35px; color: #185B3D; font-weight: bold; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); border-radius: 25px; padding: 5px 20px 5px 20px; background-color: #eeeeee;}
+form>label.hidden {opacity: 0;}
 form input[type="submit"] {width: fit-content; border: none; background-color: #eeeeee; color: #AC3E27; border-radius: 25px; padding: 6px 15px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 form input[type="submit"]:hover {background-color: white;}
 form input[type="checkbox"] {margin: 5px}
@@ -388,14 +390,13 @@ ul.thread #post:hover {background: #f0eeee;}
 
 /* New discussion */
 .new-discussion .main-content form {display: grid; grid-template-columns: 150px 1fr; grid-gap: 17px;}
-.new-discussion .main-content form>label {grid-column: 1 / 2; color: #185B3D; font-weight: bold;}
 .new-discussion .main-content input, .new-discussion .main-content textarea {margin: 0;}
 .new-discussion .main-content form>input>button {grid-column: 2 / 3;}
 .new-discussion .main-content .minimap {height: 150px; width: 150px; border-radius: 100%; text-align: end; border: 1px solid transparent; cursor: pointer;}
 .new-discussion .main-content .minimap:hover {box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 .new-discussion div.radio {padding: 5px 20px;}
 .new-discussion div.category div.widget {margin: 0;}
-.new-discussion div.category.tags {background-color: #eeeeee; border-radius: 25px; padding: 10px;}
+.new-discussion div.category.tags {background-color: #f8f6f6; border-radius: 25px; padding: 10px;}
 .new-discussion div.category.tags p {font-size: 12px; margin-left: 15px;}
 .new-discussion div.category.tags input[type="search"] {margin-left: 10px;}
 .locationModal img.map {width: 100%;}

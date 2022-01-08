@@ -159,13 +159,13 @@
 			<div class="main-content">
 				<hr />
 				<form method="POST">
-					<label for="title">Title</label>
+					<label class="decorated" for="title"><i class="fas fa-fw fa-paragraph"></i> Discussion</label>
 					<input type="text" id="title" name="title" required="required" autofocus="autofocus"
 						placeholder="Click to add a title…" />
-					<label for="description">Description</label>
+					<label class="hidden" for="description">Description</label>
 					<textarea id="description" name="description" required="required"
 						placeholder="Click to add a description…" rows="6"></textarea>
-					<label for="photo">Photo (optional)</label>
+					<label class="decorated" for="photo"><i class="fas fa-fw fa-image"></i> Photo</label>
 					<div class="category tags">
 						<div class="widget">
 							<p>Help others visualise the situation</p>
@@ -177,7 +177,7 @@
 							</div>
 						</div>
 					</div>
-					<label for="category">Category</label>
+					<label class="decorated" for="category"><i class="fas fa-fw fa-ball-pile"></i> Category</label>
 					<div class="radio" tabindex="0">
 						<input type="radio" id="campaigning" name="category" value="campaigning" required="required">
 						<label for="campaigning">Campaigning</label><br>
@@ -186,7 +186,7 @@
 						<input type="radio" id="general" name="category" value="general">
 						<label for="general">General chat</label>
 					</div>
-					<label for="location">Location</label>
+					<label class="decorated" for="location"><i class="fas fa-fw fa-map-pin"> </i>Location</label>
 					<div class="category">
 						<img data-bs-toggle="modal" data-bs-target="#locationModal" class="minimap"
 							src="images/placeholders/minimap2.png" />
@@ -194,7 +194,7 @@
 						<button type="button" class="primary" data-bs-toggle="modal"
 							data-bs-target="#locationModal">Draw on the map</button>
 					</div>
-					<label for="tags">Issue tags</label>
+					<label class="decorated" for="tags"><i class="fas fa-fw fa-hashtag"></i> Issue tags</label>
 					<div class="category tags">
 						<div class="widget">
 							<input type="search" placeholder="Type to add a tag…" />
@@ -207,7 +207,7 @@
 							</div>
 						</div>
 					</div>
-					<label for="privacy">Privacy</label>
+					<label class="decorated" for="privacy"><i class="fas fa-fw fa-user-secret"></i> Privacy</label>
 					<div class="category tags">
 						<div class="widget">
 							<div class="widget-content">
