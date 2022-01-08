@@ -68,7 +68,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 
 
 /* Nav */
-nav {position: fixed; display: flex; flex-direction: column; background-color: #eeeeee; height: calc(100vh - 20px); max-width: 260px; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); z-index: 103; min-height: 469px; overflow-y: scroll;}
+nav {position: fixed; display: flex; flex-direction: column; background-color: #eeeeee; height: calc(100vh - 20px); max-width: 260px; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); z-index: 103; min-height: 469px;}
 nav hr {color: white; margin: 12.5px 0 12.5px -10px; height: 2px !important; opacity: .6; width: calc(100% + 20px);}
 nav .title img {width: 30px; margin-top: -16px;}
 nav .title h1 {display: inline; font-style: italic; font-size: 35px;}
@@ -748,6 +748,7 @@ ul.application-types li label {color: white;}
     nav li {font-size: 15px; padding: 7.5px 5px;}
     div.search input {font-size: 19px; line-height: 30px;}
     button.primary i {padding-left: 8px; padding-right: 18px;}
+    nav {overflow-y: scroll;}
 }
 
 @media (max-width: 375px) {
