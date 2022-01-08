@@ -787,6 +787,18 @@ var cyclescapeui = (function ($) {
 		discussion: function () {
 			var addContentModal = new bootstrap.Modal(document.getElementById('addContentModal'), {})
 
+			// Clicking on a star toggles favourite status
+			// !TODO Implement API call
+			$('.favourite').on('click', function (event) {
+				$(this).toggleClass('favourited');
+				event.preventDefault();
+
+				if ($(this).hasClass('favourited')) {
+					$(this).toggleClass('animate__heartBeat');
+					// Add API call	
+				}
+			});
+			
 			// Enable rich-content-adding modal
 			$('body').on('click', 'ul.add-content li', function () {
 				addContentModal.toggle();
