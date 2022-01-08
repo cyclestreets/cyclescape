@@ -307,7 +307,8 @@ ul.discussions li div.minimap {flex: 0; padding: 10px; margin: auto;}
 ul.discussions li div.minimap .unread {position: absolute; padding-left: 90px;}
 ul.discussions li div.minimap .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 ul.discussions li div.minimap img {border-radius: 50%; width: 120px; height: 120px;}
-ul.discussions li i.favourite {padding: 30px; align-self: center; font-size: 20px; color: #F6F6F6;}
+ul.discussions li i.favourite {padding: 30px; align-self: center; font-size: 20px; color: #dbdbdb;}
+ul.discussions li:hover i.favourite {color: #feae0054;}
 ul.discussions li i.favourite.favourited {color: #FEAE00;}
 .discussions .side-content h3 {margin-top: 15px;}
 div.location {width: 100px; height: 100px; display: inline-block; margin: 5px;}
