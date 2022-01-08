@@ -15,7 +15,8 @@ var cyclescapeui = (function ($) {
 		'discussions',
 		'index',
 		'discussion',
-		'newIdea'
+		'newIdea',
+		'profile'
 	];
 
 	// Class properties
@@ -51,6 +52,7 @@ var cyclescapeui = (function ($) {
 			cyclescapeui.sideContent();
 			cyclescapeui.mapControls();
 			cyclescapeui.popovers();
+			cyclescapeui.toasts();
 			cyclescapeui.segmentedControl();
 			cyclescapeui.contentToggle();
 			cyclescapeui.enableWizard();
@@ -367,6 +369,15 @@ var cyclescapeui = (function ($) {
 			var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
 			var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 				return new bootstrap.Popover(popoverTriggerEl)
+			});
+		},
+
+
+		// Enable Bootstrap toasts
+		toasts: function () {
+			var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+			var toastList = toastElList.map(function (toastEl) {
+  				return new bootstrap.Toast(toastEl, {animation: true, delay: 1500})
 			});
 		},
 
@@ -878,6 +889,21 @@ var cyclescapeui = (function ($) {
 				});
 			});
 
+		},
+
+
+		// Page-specific initialisation
+		profile: function () {
+			$('#submit-message').on('click', function (event) {
+				event.preventDefault()
+				// !TODO Add APi call
+				$('#messageModal').modal('toggle');
+
+				var myToastEl = document.getElementById('toast')
+				var myToast = bootstrap.Toast.getOrCreateInstance(myToastEl) // Returns a Bootstrap toast instance
+				myToast.show();
+				
+			});
 		},
 
 

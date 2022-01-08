@@ -40,13 +40,60 @@
 	<script src="/js/cyclescape.js" type="text/javascript"></script>
 	<script>
 		$(function () {
-			cyclescapeui.initialise(config);
+			cyclescapeui.initialise(config, 'profile');
 		});
 	</script>
 
 	<link rel="stylesheet" href="/css/cyclescape.css?201224" />
 
 </head>
+
+
+<div class="modal fade messageModal" id="messageModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title"><i class="fas fa-fw fa-message"></i> Message Jeffrey</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form method="POST" action="">
+					<label class="decorated" for="feedback"><i class="far fa-fw fa-comment"></i> Your message</label>
+					<textarea autofocus="autofocus" id="feedback" name="feedback"
+						placeholder="Click to add your message. Remember to keep things polite." rows="6"></textarea>
+					<label class="decorated" for="photo"><i class="far fa-fw fa-image"></i> Photo or screenshot
+						(optional)</label>
+					<div class="category tags">
+						<div class="widget">
+							<div class="draganddrop">
+								<input name="form[photograph]" id="form_photograph" type="file" size="30" />
+								<div id="form_thumbnailpreview" style="width: 300px; height: 300px;">
+									<p class="comment">Click here to pick photo, or drag and drop into this box.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<input id="submit-message" type="submit" value="Send message" />
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="toast-container">
+	<div class="toast top-0 start-50 translate-middle-x" id="toast" style="position: absolute; margin: 10px;">
+		<div class="toast-header" style="color: green">
+			<i class="fa fa-fw fa-comment-check"></i>
+			<strong class="me-auto"> Success</strong>
+			
+			<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+		  </div>
+		<div class="toast-body">
+			Your message has been sent.
+		</div>
+	</div>
+</div>
+
 
 <body class="profile">
 	<div id="shade">
@@ -89,8 +136,8 @@
 			<hr>
 		</ul>
 		<ul class="padding bottom">
-			<li id="group-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
-				data-bs-content="
+			<li id="group-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true"
+				data-bs-placement="top" data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
 							<li>Cambridge Cycling Campaign</li>
@@ -120,7 +167,8 @@
 				<h1><img class="avatar" src="/images/placeholders/avatar1.png" /> Jeffrey Mosley</h1>
 			</div>
 			<div class="action-buttons">
-				<button class="primary"><i class="fas fa-fw fa-envelope"></i> Message Jeffrey</button>
+				<button data-bs-toggle="modal" data-bs-target="#messageModal" class="primary"><i
+						class="fas fa-fw fa-envelope"></i> Message Jeffrey</button>
 				<button class="primary"><i class="fas fa-fw fa-user-edit"></i> Edit profile</button>
 			</div>
 		</div>
