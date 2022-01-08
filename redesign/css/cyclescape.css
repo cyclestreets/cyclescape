@@ -274,11 +274,11 @@ ul.add-content li:hover {border-color: #185B3D;}
 .index a.action .text h2 {color: white; font-size: 14px;}
 .index a.action .text p {font-size: 13px;}
 .index input {width: 100%; padding-left: 50px; margin: 10px 0;}
-.index img.flow {position: fixed; top: 0; right: -520px;}
+.index img.flow {position: fixed; top: 0; right: -520px; opacity: 0.8;}
 .index div.tags {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-block; border-radius: 25px; padding: 10px;}
 .index ul.tags {list-style: none; max-width: 400px;}
 .index ul.tags li {display: inline-block; border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px; margin: 7.5px; font-size: small; color: #185B3D; cursor: pointer; transition: 0.2s;}
-.index ul.tags li:hover {background-color: rgba(255, 255, 255, 0.787);}
+.index ul.tags li:hover {background-color: rgba(221, 221, 221, 0.787);}
 
 
 /* Group home page */
