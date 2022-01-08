@@ -219,6 +219,7 @@ form input[type="checkbox"] {margin: 5px}
 form div.draganddrop {width: calc(300px + 4px + 4px); height: calc(200px + 4px + 4px); border: 2px dashed gray; border-radius: 25px; overflow: hidden;}
 form div.draganddrop p {width: 300px; height: 200px; text-align: center; padding: 15px; color: gray;}
 form div.draganddrop input {position: absolute; margin: 0; padding: 0; width: 300px; height: 200px; outline: none; opacity: 0;}
+.modal-body input, .modal-body textarea {display: block; width: 100%;}
 
 
 /* Modal */
@@ -502,9 +503,6 @@ ul.application-types li {display: inline-block; padding: 2.5px 15px 2.5px 5px; m
 ul.application-types li label {color: white;}
 .planning-applications input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 20px; width: 100%;}
 .planning-applications .main-content>input.filter {width: 80%; margin-top: 0;}
-
-/* Help & feedback */
-.help .modal-body input, .help .modal-body textarea {display: block; width: 100%;}
 
 
 /* Dark mode */
