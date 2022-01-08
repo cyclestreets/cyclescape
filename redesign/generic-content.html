@@ -174,13 +174,13 @@
 				</div>
 				<hr />
 				<form>
-					<label for="title">Input</label>
+					<label class="decorated" for="title"><i class="fas fa-fw fa-i-cursor"></i> Input</label>
 					<input type="text" id="title" name="title" autofocus="autofocus"
 						placeholder="Click to add a title…" />
-					<label for="description">Textarea</label>
+					<label class="decorated" for="description"><i class="fas fa-fw fa-paragraph"></i> Textarea</label>
 					<textarea id="description" name="description" placeholder="Click to add a description…"
 						rows="4"></textarea>
-					<label for="category">Category</label>
+					<label class="decorated" for="category"><i class="fas fa-fw fa-ball-pile"></i> Category</label>
 					<div class="radio">
 						<input type="radio" id="campaigning" name="category" value="campaigning">
 						<label for="campaigning">A</label><br>
@@ -189,7 +189,7 @@
 						<input type="radio" id="general" name="category" value="general">
 						<label for="general">C</label>
 					</div>
-					<label for="tags">Tags</label>
+					<label class="decorated" for="tags"><i class="fas fa-fw fa-tag"></i> Tags</label>
 					<div class="category tags">
 						<div class="widget">
 							<input type="search" placeholder="Type to add a tag…" />
@@ -202,7 +202,7 @@
 							</div>
 						</div>
 					</div>
-					<label for="submit"></label>
+					<label class="hidden" for="submit"></label>
 					<input type="submit" value="Button" />
 				</form>
 			</div>
