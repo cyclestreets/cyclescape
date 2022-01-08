@@ -714,6 +714,11 @@ var cyclescapeui = (function ($) {
 			$('.post-actions .reply').on('click', function () {
 				var quotedText = $(this).parent('.post-actions').siblings('.content').find('.post').first().text();
 				tinymce.activeEditor.setContent(tinymce.activeEditor.getContent() + '<i>' + quotedText + '</i>');
+				
+				// Animate scrolling to bottom
+				$('html, body').animate({
+					scrollTop: $('li.reply').offset().top
+				}, 1000);
 			});
 		},
 
