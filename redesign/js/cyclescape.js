@@ -44,6 +44,8 @@ var cyclescapeui = (function ($) {
 			cyclescapeui.searchBar();
 			cyclescapeui.autocomplete();
 			cyclescapeui.filterable();
+			cyclescapeui.uploadPreview();
+			cyclescapeui.autofocus();
 			cyclescapeui.tagsAutocomplete();
 			cyclescapeui.geocoder();
 			cyclescapeui.sideContent();
@@ -130,6 +132,94 @@ var cyclescapeui = (function ($) {
 			$('#shade').fadeOut();
 			$('nav').removeClass('open');
 			$('nav').hide("slide", { direction: "left" }, 300);
+		},
+
+
+		// Autofocus inputs contained in Bootstrap modals
+		autofocus: function () {
+			$(document).on('shown.bs.modal', function () {
+				$('input:visible:enabled:first', this).focus();
+			});
+		},
+
+
+		// Enable preview of photos to be uploaded
+		thumbWrapper: function (files, selector) {
+
+			thumb(files);
+
+			function thumb(files) {
+
+				if (files == null || files == undefined) {
+					$(selector).html('<p><em>Unable to show a thumbnail, as this web browser is too old to support this.</em></p>');
+					return false;
+				}
+
+				for (var i = 0; i < files.length; i++) {
+					var file = files[i];
+					var imageType = /image.*/;
+
+					if (!file.type.match(imageType)) {
+						continue;
+					}
+
+					var reader = new FileReader();
+
+					if (reader != null) {
+						reader.onload = GetThumbnail;
+						reader.readAsDataURL(file);
+					}
+				}
+			}
+
+			function GetThumbnail(e) {
+
+				var thumbnailCanvas = document.createElement('canvas');
+				var img = new Image();
+				img.src = e.target.result;
+
+				img.onload = function () {
+
+					var originalImageWidth = img.width;
+					var originalImageHeight = img.height;
+
+					thumbnailCanvas.id = 'myTempCanvas';
+					thumbnailCanvas.width = $(selector).width();
+					thumbnailCanvas.height = $(selector).height();
+
+					// Scale the thumbnail to fit the box
+					if (originalImageWidth >= originalImageHeight) {
+						var scaledWidth = Math.min(thumbnailCanvas.width, originalImageWidth);	// Ensure width is no greater than the available size
+						var scaleFactor = (scaledWidth / originalImageWidth);
+						var scaledHeight = Math.round(scaleFactor * originalImageHeight);	// Scale to same proportion, and round
+					} else {
+						var scaledHeight = Math.min(thumbnailCanvas.height, originalImageHeight);
+						var scaleFactor = (scaledHeight / originalImageHeight);
+						var scaledWidth = Math.round(scaleFactor * originalImageWidth);
+					}
+
+					if (thumbnailCanvas.getContext) {
+						var canvasContext = thumbnailCanvas.getContext('2d');
+						canvasContext.drawImage(img, 0, 0, scaledWidth, scaledHeight);
+						var dataURL = thumbnailCanvas.toDataURL();
+
+						if (dataURL != null && dataURL != undefined) {
+							var nImg = document.createElement('img');
+							nImg.src = dataURL;
+							$(selector).html(nImg);
+						} else {
+							$(selector).html('<p><em>Unable to read the image.</em></p>');
+						}
+					}
+				}
+			}
+		},
+
+
+		uploadPreview: function () {
+			$('#form_photograph').on('change', function () {
+				cyclescapeui.thumbWrapper(this.files, '#form_thumbnailpreview');
+			});
 		},
 
 
@@ -660,7 +750,7 @@ var cyclescapeui = (function ($) {
 			$('ul.discussions .favourite').on('click', function (event) {
 				$(this).toggleClass('favourited');
 				event.preventDefault();
-				
+
 				if ($(this).hasClass('favourited')) {
 					// Add API call	
 				}
@@ -704,6 +794,7 @@ var cyclescapeui = (function ($) {
 			// Initialise tinymce
 			tinymce.init({
 				selector: 'textarea',
+				plugins: 'autoresize',
 				statusbar: false,
 				menubar: false,
 				skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
@@ -713,12 +804,18 @@ var cyclescapeui = (function ($) {
 			// Clicking reply adds that text to the editor
 			$('.post-actions .reply').on('click', function () {
 				var quotedText = $(this).parent('.post-actions').siblings('.content').find('.post').first().text();
-				tinymce.activeEditor.setContent(tinymce.activeEditor.getContent() + '<i>' + quotedText + '</i>');
-				
+				tinymce.activeEditor.setContent(tinymce.activeEditor.getContent() + '<blockquote>' + quotedText + '</blockquote><br/> <br/>');
+
 				// Animate scrolling to bottom
 				$('html, body').animate({
 					scrollTop: $('li.reply').offset().top
 				}, 1000);
+
+				// Set focus (to last line) in editor
+				tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
+				tinyMCE.activeEditor.selection.collapse(false);
+				tinyMCE.activeEditor.focus();
+
 			});
 		},
 

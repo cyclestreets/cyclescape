@@ -57,6 +57,7 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-body">
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				<h3 class="icon text-centered"><i class="fas fa-fw fa-paperclip"></i></h3>
 				<h3>Generic add media modal</h3>
 				<input type="file" />
@@ -66,24 +67,40 @@
 </div>
 
 
+<div class="modal fade locationModal" id="locationModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-lg-down">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Browse map</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body unpadded">
+				<img class="map" src="/images/placeholders/map.png" />
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="modal fade userListModal" id="userListModal" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Subscribers</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
 			<div class="modal-body">
 				<div class="widget">
-					<div class="title">
-						<i class="fas fa-fw fa-users"></i> Subscribers
-					</div>
 					<div class="widget-content">
 						<ul class="unstyled avatars">
 							<li data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover"
 								data-bs-html="true" data-bs-placement="top"
 								data-bs-content="<i class='far fa-user-crown'></i> Discussion leader">
 								<a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
-									Steve Lopes <i class="far fa-user-crown"></i></a></li>
+									Steve Lopes <i class="far fa-fw fa-user-crown"></i></a></li>
 							<li data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover"
 								data-bs-html="true" data-bs-placement="top"
-								data-bs-content="<i class='far fa-users'></i> Commitee member"><a
+								data-bs-content="<i class='far fa-fw fa-users'></i> Commitee member"><a
 									href="profile.html"><img class="avatar" src="/images/placeholders/avatar2.png" />
 									Paula Oakenfield <i class="far fa-users"></i></a></li>
 							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar3.png" />
@@ -151,8 +168,8 @@
 			<hr>
 		</ul>
 		<ul class="padding bottom">
-			<li id="group-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
-				data-bs-content="
+			<li id="group-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true"
+				data-bs-placement="top" data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
 							<li>Cambridge Cycling Campaign</li>
@@ -180,6 +197,7 @@
 			<div class="section-title">
 				<h1><i class="fas fa-fw fa-microphone"></i> Guided bus flooded</h1>
 				<p class="badge">#5590</p>
+				<i class="fas fa-fw favourite favourited fa-star"></i>
 			</div>
 
 		</div>
@@ -191,7 +209,7 @@
 				<hr />
 				<ul class="thread">
 					<li class="load-more">
-						<p>Load 31 more posts…</p>
+						<p>Load 20 earlier posts</p>
 					</li>
 					<li>
 						<div class="poster-avatar">
@@ -330,21 +348,22 @@
 				</ul>
 			</div>
 			<div class="side-content">
-				<img class="minimap" src="/images/placeholders/minimap.png" />
+				<img title="Click to open a larger map" data-bs-toggle="modal" data-bs-target="#locationModal"
+					class="minimap" src="/images/placeholders/minimap.png" />
 				<div class="widget">
 					<div class="title">
 						<i class="fas fa-fw fa-hashtag"></i> Tags
 					</div>
 					<div class="widget-content">
 						<ul class="tags">
-							<li class="tag">Station Parking</li>
-							<li class="tag">Community</li>
+							<li class="tag"><a href="issue.html">Station Parking</a></li>
+							<li class="tag"><a href="issue.html">Community</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="widget">
 					<div class="title">
-						<i class="fas fa-fw fa-users"></i> Subscribers
+						<i class="fas fa-fw fa-users"></i> 52 Subscribers
 					</div>
 					<div class="widget-content">
 						<ul class="unstyled avatars">
@@ -352,10 +371,10 @@
 								data-bs-html="true" data-bs-placement="top"
 								data-bs-content="<i class='far fa-user-crown'></i> Discussion leader">
 								<a href="profile.html"><img class="avatar" src="/images/placeholders/avatar1.png" />
-									Steve Lopes <i class="far fa-user-crown"></i></a></li>
+									Steve Lopes <i class="far fa-fw fa-user-crown"></i></a></li>
 							<li data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover"
 								data-bs-html="true" data-bs-placement="top"
-								data-bs-content="<i class='far fa-users'></i> Commitee member"><a
+								data-bs-content="<i class='far fa-fw fa-users'></i> Commitee member"><a
 									href="profile.html"><img class="avatar" src="/images/placeholders/avatar2.png" />
 									Paula Oakenfield <i class="far fa-users"></i></a></li>
 							<li><a href="profile.html"><img class="avatar" src="/images/placeholders/avatar3.png" />
@@ -375,6 +394,7 @@
 						<button class="social facebook"><i class="fas fa-fw fa-facebook"></i> Share</button>
 					</div>
 				</div>
+				<button class="button primary align-self-center">Unfollow this thread</button>
 
 			</div>
 		</div>

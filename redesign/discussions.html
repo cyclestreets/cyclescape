@@ -57,6 +57,10 @@
 			</div>
 			<div class="modal-body unpadded">
 				<img class="map" src="/images/placeholders/map.png" />
+				<div class="geocoder" id="geocoder">
+					<i class="fas fa-fw fa-search"></i>
+					<input type="search" placeholder="Search for a place or postcode" />
+				</div>
 				<div class="controls">
 					<h3 class="icon text-centered"><i class="fas fa-fw fa-map-pin"></i></h3>
 					<h3>Mark the location on the map</h3>
@@ -88,7 +92,9 @@
 		<i class="far fa-times-circle close"></i>
 	</div>
 	<div id="top-menu">
-		<a class="unstyled" href="index.html"><h1>cyclescape</h1></a>
+		<a class="unstyled" href="index.html">
+			<h1>cyclescape</h1>
+		</a>
 	</div>
 	<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 	<nav>
@@ -97,7 +103,9 @@
 			<a class="unstyled" href="index.html">
 				<h1>cyclescape</h1>
 			</a>
-			<a class="unstyled group" href="group.html"><p>York Cycle Campaign</p></a>
+			<a class="unstyled group" href="group.html">
+				<p>York Cycle Campaign</p>
+			</a>
 		</div>
 		<ul class="padding">
 			<a href="discussions.html">
@@ -120,8 +128,8 @@
 			<hr>
 		</ul>
 		<ul class="padding bottom">
-			<li id="group-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
-				data-bs-content="
+			<li id="group-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true"
+				data-bs-placement="top" data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
 							<li>Cambridge Cycling Campaign</li>
@@ -437,7 +445,7 @@
 				<ul class="deadlines">
 					<h2>Deadlines</h2>
 					<button class="primary">Subscribe to main calendar feed <i title="Subscribe to main calendar feed"
-						class="fas fa-fw fa-calendar-plus"></i></button>
+							class="fas fa-fw fa-calendar-plus"></i></button>
 					<li>
 						<div class="date">
 							<h3>18</h3>
@@ -542,8 +550,12 @@
 					<form>
 						<div class="widget-content">
 							<ul class="tags">
-								<li class="tag large-tag toggle"><input type="checkbox" checked="checked" id="parking" title="Temporarily show or hide this tag" /> <label for="parking">Station parking</label></li>
-								<li class="tag large-tag toggle"><input type="checkbox" checked="checked" id="community" title="Temporarily show or hide this tag" /> <label for="community">Community</label></li>
+								<li class="tag large-tag toggle"><input type="checkbox" checked="checked" id="parking"
+										title="Temporarily show or hide this tag" /> <label for="parking">Station
+										parking</label></li>
+								<li class="tag large-tag toggle"><input type="checkbox" checked="checked" id="community"
+										title="Temporarily show or hide this tag" /> <label
+										for="community">Community</label></li>
 								<input type="search" placeholder="Type to add a tag…" />
 							</ul>
 						</div>
@@ -558,14 +570,15 @@
 						<div class="location">
 							<img src="/images/placeholders/minimap.png" />
 							<input type="checkbox" checked title="Temporarily show or hide this location" />
-							<i title="Delete" title="Remove this location from the filter" class="fa fa-trash-alt"></i>
+							<i title="Remove this location from the filter" class="fa fa-times-circle"></i>
 						</div>
 						<div class="location unchecked">
 							<img src="/images/placeholders/minimap.png" />
 							<input type="checkbox" title="Temporarily show or hide this location" />
-							<i title="Delete" title="Remove this location from the filter" class="fa fa-trash-alt"></i>
+							<i title="Remove this location from the filter" class="fa fa-times-circle"></i>
 						</div>
-						<button data-bs-toggle="modal" data-bs-target="#locationModal" class="primary">Add location...</button>
+						<button data-bs-toggle="modal" data-bs-target="#locationModal" class="primary">Add
+							location...</button>
 					</div>
 				</div>
 
