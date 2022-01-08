@@ -653,7 +653,18 @@ var cyclescapeui = (function ($) {
 			$('ul.discussions ul.tags li').on('click', function (event) {
 				event.preventDefault();
 				window.location.href = "generic-content.html";
-			})
+			});
+
+			// Clicking on a star toggles favourite status
+			// !TODO Implement API call
+			$('ul.discussions .favourite').on('click', function (event) {
+				$(this).toggleClass('favourited');
+				event.preventDefault();
+				
+				if ($(this).hasClass('favourited')) {
+					// Add API call	
+				}
+			});
 		},
 
 
