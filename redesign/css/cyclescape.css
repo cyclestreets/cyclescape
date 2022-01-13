@@ -785,7 +785,19 @@ ul.application-types li label {color: white;}
     nav {overflow-y: scroll;}
 }
 
+@media (max-width: 414px) {
+    div.geocoder input {width: 270px;}
+    ul.discussions div.minimap {display: none;}
+    .side-content {width: 100vw;}
+
+    .index .section-title img {width: 30px;}
+    .index .section-title h4 {font-size: 25px;}
+    .index .section-title h1 {font-size: 29px;}
+    .index p.description {font-size: 16px;}
+}
+
 @media (max-width: 375px) {
+    .index 
     button.primary {font-size: 12px; font-size: 14px; padding: 5px 8px 5px 12px;}
     nav li {padding: 8px 2.5px;}
 }
@@ -793,11 +805,6 @@ ul.application-types li label {color: white;}
 @media (max-width: 330px) {
     .side-content {left: 10px;}
     .widget.standalone {width: 270px;}
-    .new-idea .geocoder {top: 190px;}
-}
+    .new-idea .geocoder {top: 239px;}
 
-@media (max-width: 414px) {
-    div.geocoder input {width: 270px;}
-    ul.discussions div.minimap {display: none;}
-    .side-content {width: 100vw;}
 }
