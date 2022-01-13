@@ -422,6 +422,7 @@ ul.thread #post:hover {background: #f0eeee;}
 
 
 /* Issue */
+.issue .section-title h1 {color: #185B3D; border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px 10px; font-size: 30px;}
 .issue .title-wrapper textarea {border: none; border-radius: 10px; padding: 2.5px 10px; width: 100%;}
 .issue .main-content {max-width: 600px;}
 .issue .side-content {width: 250px; max-width: unset;}
@@ -439,7 +440,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-idea form {overflow: scroll;}
 .new-idea .main-content.full-screen.full-map {height: calc(100vh - 230px);}
 .modal-content .modal-body button.done {position: relative; display: block; margin: 30px 10px 0;}
-.new-idea .geocoder {position: absolute; right: 30px; top: 210px; z-index: 3;}
+.new-idea .geocoder {position: absolute; right: 30px; top: 233px; z-index: 3;}
 @media (min-width: 1570px) {
     .new-idea .geocoder {right: unset; left: 1470px;}
 }
