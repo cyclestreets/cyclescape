@@ -81,6 +81,24 @@
 	</div>
 </div>
 
+<div class="modal" id="deleteModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Remove attachment</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to remove this attachment? You can upload more attachments later.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary remove-attachment">Remove attachment</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <div class="modal fade userListModal" id="userListModal" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered">
@@ -132,15 +150,14 @@
 		<i class="far fa-times-circle close"></i>
 	</div>
 	<div id="top-menu">
-		<a class="unstyled" href="index.html">
+		<a class="unstyled" href="index.html"><img class="mobile-logo" src="/images/cyclescape-icon.png" alt="" />
 			<h1>cyclescape</h1>
 		</a>
 	</div>
 	<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 	<nav>
 		<div class="title padding">
-			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="" /></a>
-			<a class="unstyled" href="index.html">
+			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="" />
 				<h1>cyclescape</h1>
 			</a>
 			<a class="unstyled group" href="group.html">
@@ -197,6 +214,7 @@
 			<div class="section-title">
 				<h1><i class="fas fa-fw fa-microphone"></i> Guided bus flooded</h1>
 				<p class="badge">#5590</p>
+				<p class="badge">Campaigning</p>
 				<i class="fas fa-fw favourite favourited fa-star animate__animated"></i>
 			</div>
 
@@ -212,29 +230,32 @@
 						<p>Load 20 earlier posts</p>
 					</li>
 					<li>
-						<div class="poster-avatar">
-							<img class="avatar" src="/images/placeholders/avatar1.png" />
-						</div>
-						<div class="content">
-							<h3>Steve Lopes</h3>
-							<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
-								<p>one day ago</p>
-							</a>
-							<div class="post">
-								<p>The new A14 is, bar a few trees, all fininished now. I thought I would see
-									where the new cycle super highway from Girton would get me.
-									The signs point to Huntingdon but does it go there?
-									Here's a summary ( and a bit of a rant, sorry) of what I found.
-									It's a shame we don't have a safe direct route to Huntingdon but I suppose the A1307
-									was
-									intended to be a quiet backwater to amble along.</p>
+						<div class="flex">
+							<div class="poster-avatar">
+								<img class="avatar" src="/images/placeholders/avatar1.png" />
+							</div>
+							<div class="content">
+								<h3>Steve Lopes</h3>
+								<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
+									<p>one day ago</p>
+								</a>
+								<div class="post">
+									<p>The new A14 is, bar a few trees, all fininished now. I thought I would see
+										where the new cycle super highway from Girton would get me.
+										The signs point to Huntingdon but does it go there?
+										Here's a summary ( and a bit of a rant, sorry) of what I found.
+										It's a shame we don't have a safe direct route to Huntingdon but I suppose the
+										A1307
+										was
+										intended to be a quiet backwater to amble along.</p>
+								</div>
 							</div>
 						</div>
 						<div class="post-actions">
 							<button title="Flag this post"><i class="fas fa-fw fa-flag"></i></button>
 							<button class="reply" title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
-							<button class="like animate__animated" data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover"
-								data-bs-html="true" data-bs-placement="top" data-bs-content="
+							<button class="like animate__animated" data-bs-container="body" data-bs-toggle="popover"
+								data-bs-trigger="hover" data-bs-html="true" data-bs-placement="top" data-bs-content="
 									<ul class='popover-avatar'>
 										<li><img src='/images/placeholders/avatar1.png' /> Stella K</li>
 										<li><img src='/images/placeholders/avatar2.png' /> Pingkee C</li>
@@ -247,79 +268,91 @@
 						</div>
 					</li>
 					<li>
-						<div class="poster-avatar">
-							<img class="avatar" src="/images/placeholders/avatar3.png" />
-						</div>
-						<div class="content">
-							<h3>Steve Lopes</h3>
-							<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
-								<p>one day ago</p>
-							</a>
-							<div class="post">
-								<p>The new A14 is, bar a few trees, all fininished now. I thought I would see
-									where the new cycle super highway from Girton would get me.
-									The signs point to Huntingdon but does it go there?
-									Here's a summary ( and a bit of a rant, sorry) of what I found.
-									It's a shame we don't have a safe direct route to Huntingdon but I suppose the A1307
-									was
-									intended to be a quiet backwater to amble along.</p>
-								<ul>
-									<li>Item 1</li>
-									<li>The signs point to Huntingdon but does it go there?</li>
-								</ul>
-								<p>It's a shame we don't have a safe direct route to Huntingdon but I suppose the A1307
-									was
-									intended to be a quiet backwater to amble along.</p>
+						<div class="flex">
+							<div class="poster-avatar">
+								<img class="avatar" src="/images/placeholders/avatar3.png" />
+							</div>
+							<div class="content">
+								<h3>Steve Lopes</h3>
+								<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
+									<p>one day ago</p>
+								</a>
+								<div class="post">
+									<p>The new A14 is, bar a few trees, all fininished now. I thought I would see
+										where the new cycle super highway from Girton would get me.
+										The signs point to Huntingdon but does it go there?
+										Here's a summary ( and a bit of a rant, sorry) of what I found.
+										It's a shame we don't have a safe direct route to Huntingdon but I suppose the
+										A1307
+										was
+										intended to be a quiet backwater to amble along.</p>
+									<ul>
+										<li>Item 1</li>
+										<li>The signs point to Huntingdon but does it go there?</li>
+									</ul>
+									<p>It's a shame we don't have a safe direct route to Huntingdon but I suppose the
+										A1307
+										was
+										intended to be a quiet backwater to amble along.</p>
+								</div>
 							</div>
 						</div>
 						<div class="post-actions">
 							<button class="reply" title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
-							<button class="like liked animate__animated" title="Like this post"><i class="fas fa-fw fa-thumbs-up"></i></button>
+							<button class="like liked animate__animated" title="Like this post"><i
+									class="fas fa-fw fa-thumbs-up"></i></button>
 						</div>
 					</li>
 					<li>
-						<div class="poster-avatar">
-							<img class="avatar" src="/images/placeholders/avatar2.png" />
-						</div>
-						<div class="content">
-							<h3>Matthew Danish</h3>
-							<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
-								<p>one hour ago</p>
-							</a>
-							<div class="post">
-								<p>Nice summary of some of the screw-ups. But I wouldn't say the first five
-									miles are 'well engineered'. <a href="#">Test link.</a> Large gaps where they dump
-									you onto informal crossings of
-									slip roads and a mysterious sharp zig-zag around a strange concrete grid 'thing'
-									near
-									Bar Hill (before the diner). Oh, and the permanently shut pool shop gets priority
-									over
-									the cycleway.
-								</p>
-								<p>Not to mention the deadly roundabouts with 'run & pray' crossings.
-									Lovely
-									engineering…
-									The farm road they built north of the A14 is better than the shared-use pavement on
-									the
-									local access road.</p>
+						<div class="flex">
+							<div class="poster-avatar">
+								<img class="avatar" src="/images/placeholders/avatar2.png" />
+							</div>
+							<div class="content">
+								<h3>Matthew Danish</h3>
+								<a href="#" title="Posted at 6:45pm, on 12th December 2021" class="timestamp">
+									<p>one hour ago</p>
+								</a>
+								<div class="post">
+									<p>Nice summary of some of the screw-ups. But I wouldn't say the first five
+										miles are 'well engineered'. <a href="#">Test link.</a> Large gaps where they
+										dump
+										you onto informal crossings of
+										slip roads and a mysterious sharp zig-zag around a strange concrete grid 'thing'
+										near
+										Bar Hill (before the diner). Oh, and the permanently shut pool shop gets
+										priority
+										over
+										the cycleway.
+									</p>
+									<p>Not to mention the deadly roundabouts with 'run & pray' crossings.
+										Lovely
+										engineering…
+										The farm road they built north of the A14 is better than the shared-use pavement
+										on
+										the
+										local access road.</p>
+								</div>
 							</div>
 						</div>
 						<div class="post-actions">
 							<button class="reply" title="Reply to this post"><i class="fas fa-fw fa-reply"></i></button>
-							<button class="like animate__animated" title="Like this post"><i class="fas fa-fw fa-thumbs-up"></i></button>
+							<button class="like animate__animated" title="Like this post"><i
+									class="fas fa-fw fa-thumbs-up"></i></button>
 						</div>
 					</li>
 					<li class="reply">
 						<div class="poster-avatar">
-							<img class="avatar animate__animated animate__pulse animate__infinite animate__slower" src="/images/placeholders/avatar1.png" />
+							<img class="avatar animate__animated animate__pulse animate__infinite animate__slower"
+								src="/images/placeholders/avatar1.png" />
 						</div>
 						<div class="content">
 							<form method="POST" action="">
 								<textarea id="reply"></textarea>
 								<div class="reply-footer">
 									<ul class="attachments">
-										<li><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
-										<li><i class="fas fa-fw fa-map"></i> Map</li>
+										<li class="attachment"><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
+										<li class="attachment"><i class="fas fa-fw fa-map"></i> Map</li>
 										<li><a tabindex="0" class="add-content" href="javascript://"
 												title="Add more content" data-bs-container="body"
 												data-bs-trigger="focus" data-bs-toggle="popover" data-bs-html="true"
@@ -390,8 +423,8 @@
 						<i class="fas fa-fw fa-share-square"></i> Share
 					</div>
 					<div class="widget-content centered">
-						<button class="social twitter"><i class="fas fa-fw fa-twitter"></i> Tweet</button>
-						<button class="social facebook"><i class="fas fa-fw fa-facebook"></i> Share</button>
+						<button class="social twitter"><i class="fa fa-fw fa-twitter"></i> Tweet</button>
+						<button class="social facebook"><i class="fa fa-fw fa-facebook"></i> Share</button>
 					</div>
 				</div>
 				<button class="button primary align-self-center">Unfollow this thread</button>
