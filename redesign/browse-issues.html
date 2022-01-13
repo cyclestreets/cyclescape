@@ -21,7 +21,7 @@
 
 	<!-- Cookies -->
 	<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
-	
+
 	<!-- Bootstrap -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -53,16 +53,19 @@
 		<i class="far fa-times-circle close"></i>
 	</div>
 	<div id="top-menu">
-		<a class="unstyled" href="index.html"><h1>cyclescape</h1></a>
+		<a class="unstyled" href="index.html"><img class="mobile-logo" src="/images/cyclescape-icon.png" alt="" />
+			<h1>cyclescape</h1>
+		</a>
 	</div>
 	<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 	<nav>
 		<div class="title padding">
-			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="" /></a>
-			<a class="unstyled" href="index.html">
+			<a class="unstyled" href="index.html"><img src="/images/cyclescape-icon.png" alt="" />
 				<h1>cyclescape</h1>
 			</a>
-			<a class="unstyled group" href="group.html"><p>York Cycle Campaign</p></a>
+			<a class="unstyled group" href="group.html">
+				<p>York Cycle Campaign</p>
+			</a>
 		</div>
 		<ul class="padding">
 			<a href="discussions.html">
@@ -85,8 +88,8 @@
 			<hr>
 		</ul>
 		<ul class="padding bottom">
-			<li id="group-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
-				data-bs-content="
+			<li id="group-popover" data-bs-container="body" data-bs-toggle="popover" data-bs-html="true"
+				data-bs-placement="top" data-bs-content="
 						<ul class='popover-group'>
 							<li>York Cycle Campaign</li>
 							<li>Cambridge Cycling Campaign</li>
@@ -116,7 +119,9 @@
 				<div class="container">
 					<div class="row align-items-start">
 						<div class="col">
-							<p class="light">This is a map of the issues being by the York Cycle Campaign. You might also want to <a href="new-idea.html">browse the ideas map</a>.</p>
+							<p class="light">This is a map of the issues being discussed by the York Cycle Campaign. You
+								might
+								also want to <a href="new-idea.html">browse the ideas map</a>.</p>
 							<br />
 							<a class="text" href="#">Browse beyond…</a>
 						</div>
@@ -143,7 +148,9 @@
 
 
 		<div class="content-wrapper" id="content-map">
-			<button class="show-map-controls" data-close-text="Hide" data-close-icon="fas fa-eye-slash" data-open-text="Continue" data-open-icon="fas fa-pencil">Filter items <i class="fas fa-fw fa-filter"></i></button>
+			<button class="show-map-controls" data-close-text="Hide" data-close-icon="fas fa-eye-slash"
+				data-open-text="Continue" data-open-icon="fas fa-pencil">Filter items <i
+					class="fas fa-fw fa-filter"></i></button>
 			<div class="main-content full-screen full-map"
 				style="background-image: url('/images/placeholders/map.png');">
 				<div class="geocoder" id="geocoder">
@@ -158,8 +165,12 @@
 							</div>
 							<div class="widget-content">
 								<ul class="tags">
-									<li class="tag large-tag toggle"><input type="checkbox" checked="checked" id="parking" title="Temporarily show or hide this tag" /> <label for="parking">Station parking</label></li>
-									<li class="tag large-tag toggle"><input type="checkbox" checked="checked" id="community" title="Temporarily show or hide this tag" /> <label for="community">Community</label></li>
+									<li class="tag large-tag toggle"><input type="checkbox" checked="checked"
+											id="parking" title="Temporarily show or hide this tag" /> <label
+											for="parking">Station parking</label></li>
+									<li class="tag large-tag toggle"><input type="checkbox" checked="checked"
+											id="community" title="Temporarily show or hide this tag" /> <label
+											for="community">Community</label></li>
 									<input type="search" placeholder="Type to add a tag…" />
 								</ul>
 							</div>
@@ -181,7 +192,8 @@
 							</div>
 							<div class="issue-content">
 								<h2>Community</h2>
-								<p class="light">Introductory text to the issue, explaining why it is important. Truncated for longer...</p>
+								<p class="light">Introductory text to the issue, explaining why it is important.
+									Truncated for longer...</p>
 								<p>7 discussions in Cambridge.</p>
 							</div>
 						</a>
@@ -192,8 +204,11 @@
 								<img src="/images/placeholders/minimap2.png" />
 							</div>
 							<div class="issue-content">
-								<h2>Community</h2>
-								<p>7 discussions in Cambridge.</p>
+								<h2>Station parking</h2>
+								<p class="light">Suscipit rerum facilis nemo assumenda voluptatem possimus. Blanditiis
+									ut suscipit iure voluptas ipsa voluptas reprehenderit. Recusandae numquam architecto
+									est.</p>
+								<p>10 discussions in Cambridge.</p>
 							</div>
 						</a>
 					</li>
@@ -203,8 +218,8 @@
 								<img src="/images/placeholders/minimap2.png" />
 							</div>
 							<div class="issue-content">
-								<h2>Community</h2>
-								<p>7 discussions in Cambridge.</p>
+								<h2>Chisholm trail</h2>
+								<p>12 discussions in Cambridge.</p>
 							</div>
 						</a>
 					</li>
@@ -247,7 +262,7 @@
 			<div class="side-content">
 				<div class="widget">
 					<div class="title">
-						<i class="fas fa-filter results"></i> Filter results
+						<i class="fas fa-sort-alpha-up results"></i> Sort issues
 					</div>
 					<div class="widget-content">
 						<div class="controls">

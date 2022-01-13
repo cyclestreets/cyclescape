@@ -10,9 +10,9 @@ input, select, textarea {font-size: 15px;}
 p.light {font-weight: 300;}
 p a {color: #AC3E27;}
 
-.drop-cap:first-child:first-letter {color: #AC3E27; float: left; line-height: 60px; padding-top: 4px; padding-right: 8px; padding-left: 3px;}
-p.drop-cap:first-child:first-letter {font-size: 75px;}
-h3.drop-cap:first-child:first-letter {font-size: 62px; line-height: 42px;}
+.drop-cap:first-child:first-letter {color: #AC3E27; float: left; line-height: 41px; padding-top: 4px; padding-right: 8px; padding-left: 3px;}
+p.drop-cap:first-child:first-letter {font-size: 46px;}
+h3.drop-cap:first-child:first-letter {font-size: 46px; line-height: 30px;}
 a.text {color: #AC3E27;}
 
 html.fa-events-icons-loading .fa-fw {display: inline-block; width: 1.28571429em;;}
@@ -33,7 +33,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .title-wrapper .section-title {flex-direction: column; flex: 3; padding: 10px; margin-right: 40px; align-items: center; justify-content: center;}
 .title-wrapper .section-title h1, .title-wrapper .section-title p.badge {display: inline-block; width: fit-content;}
 .title-wrapper .section-title h1 {margin-right: 20px; margin-bottom: 15px;}
-.title-wrapper .section-title p.badge {background-color: #eeeeee; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 20px 0 0; font-size: 18px; font-weight: 300; align-self: center;}
+.title-wrapper .section-title p.badge {background-color: #eeeeee; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 7.5px 0 0; font-size: 14px; font-weight: 300; align-self: center;}
 .title-wrapper .action-buttons {display: flex; padding: 10px; max-width: 400px;}
 
 .content-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
@@ -60,9 +60,10 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .map-controls h2 {padding: 10px; text-align: center; margin: 0 auto;}
 
 #top-menu {display: none; position: fixed; z-index: 98; width: 100%; height: 75px; margin-left: -10px; margin-top: -10px; background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); flex-direction: column; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
-#top-menu a {display: block; margin: auto; font-style: italic; font-size: 35px;}
-#top-menu a h1 {margin: 0;}
+#top-menu a {display: block; margin: auto; font-style: italic; font-size: 30px;}
+#top-menu a h1 {margin: 0; display: inline-block;}
 #top-menu img {width: 30px;}
+#top-menu img.mobile-logo {width: 25px;}
 
 
 /* Nav */
@@ -266,9 +267,10 @@ ul.add-content li:hover {border-color: #185B3D;}
 .index h4 {color: #AC3E27; font-weight: 500; font-size: 38px;}
 .index h1 {font-size: 44px; font-style: italic;}
 .index .content-wrapper {z-index: 5;}
-.index .section-title {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-block; border-radius: 25px; padding: 10px 30px; z-index: 50; margin: 10px 12.5px 0;}
+.index .section-title {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-flex; flex-direction: row; border-radius: 25px; padding: 10px 30px; z-index: 50; margin: 10px 12.5px 0;}
 .index .section-title h4 {margin-bottom: 0;}
 .index .section-title h4, .index .title-wrapper h1 {display: inline-block;}
+.index .title-wrapper img {width: 60px; margin-right: 20px;}
 .index .title-wrapper .section-title {flex: unset;}
 .index .jumbotron {background-color: #ac3d27df; color: white; padding: 30px; border-radius: 25px; margin-top: 30px; margin-bottom: 30px; max-width: 1200px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);}
 .index .jumbotron p.description {font-size: 20px;}
@@ -282,6 +284,7 @@ ul.add-content li:hover {border-color: #185B3D;}
 .index img.flow {position: fixed; top: 0; right: -520px; opacity: 0.8;}
 .index div.tags {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-block; border-radius: 25px; padding: 10px;}
 .index ul.tags {list-style: none; max-width: 400px;}
+.index ul.tags a {text-decoration: none;}
 .index ul.tags li {display: inline-block; border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px; margin: 7.5px; font-size: small; color: #185B3D; cursor: pointer; transition: 0.2s;}
 .index ul.tags li:hover {background-color: rgba(221, 221, 221, 0.787);}
 
@@ -294,7 +297,7 @@ ul.add-content li:hover {border-color: #185B3D;}
 .groups .header .content .links {display: inline; float: right; padding-right: 10px; margin: 2.5px; font-size: 30px;}
 .groups .header .content .links a {color: white; padding: 10px; border: 1px solid transparent; border-radius: 25px; cursor: pointer;}
 .groups .header .content .links a:hover {border-color: white;}
-.groups .header .minimap {position: relative; float: right; bottom: 100px; right: 50px; height: 200px; width: 200px; border-radius: 100%; background-size: contain; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
+.groups .header .minimap {position: relative; float: right; bottom: 100px; right: 50px; height: 200px; width: 200px; border-radius: 25px; background-size: contain; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 .groups #content hr {margin-top: 40px; margin-bottom: 30px; margin-right: 300px;}
 .groups #content button.primary {margin: 30px 10px 30px 0;}
 .groups #content .side-content {padding-top: 70px;}
@@ -307,15 +310,15 @@ ul.discussions li {display: block; flex-direction: row; flex-wrap: wrap; border-
 ul.discussions li>a {text-decoration: none; display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0; padding: 0 20px;}
 ul.discussions li>a:hover {background: #F6F6F6;}
 ul.discussions li div.content {flex-direction: column; align-self: center; flex: 2; padding: 10px;}
-ul.discussions li div.content h3 {font-size: 17px;}
+ul.discussions li div.content h3 {font-size: 15px;}
 ul.discussions li div.content h3, p {margin: 5px 0;}
 ul.discussions li div.content p {display: inline-block; line-height: 15px; font-weight: 300; width: fit-content; font-size: 13px; color: black;}
 ul.discussions li div.content img {display: inline; padding-left: 20px;}
 ul.discussions li div.minimap {flex: 0; padding: 10px; margin: auto;}
-ul.discussions li div.minimap .unread {position: absolute; padding-left: 90px;}
+ul.discussions li div.minimap .unread {position: absolute; padding-left: 100px;}
 ul.discussions li div.minimap .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
-ul.discussions li div.minimap img {border-radius: 50%; width: 120px; height: 120px;}
-i.favourite {padding: 30px; align-self: center; font-size: 20px; color: #dbdbdb;}
+ul.discussions li div.minimap img {border-radius: 25px; width: 120px; height: 120px;}
+i.favourite {padding: 10px 20px 10px 10px; align-self: center; font-size: 20px; color: #dbdbdb;}
 i.favourite.favourited {color: #FEAE00;}
 ul.discussions li:hover i.favourite {color: #feae0054;}
 ul.discussions li:hover i.favourite.favourited {color: #FEAE00;}
@@ -348,7 +351,7 @@ ul.deadlines .actions i {padding: 0;}
 /* Discussion */
 .discussion .content-wrapper {margin-bottom: 40px;}
 .discussion i.favourite {padding: 5px;}
-.discussion img.minimap {border-radius: 50%; width: 100%; border: 1px solid transparent; cursor: pointer; transition: 0.5s;}
+.discussion img.minimap {border-radius: 25px; width: 100%; border: 1px solid transparent; cursor: pointer; transition: 0.5s;}
 .discussion img.minimap:hover {transform: scale(1.02); box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 ul.thread {padding: 0;}
 ul.thread li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; margin: 5px 0; padding: 10px 0;}
@@ -361,7 +364,7 @@ ul.thread li .content a.timestamp:hover {text-decoration: underline;}
 ul.thread li .content .post {font-size: 14px; font-weight: 400;}
 ul.thread li .content .post ul {list-style-type: circle; font-size: 14px;}
 ul.thread li .content .post ul li {margin: 2.5x 0; padding: 0; display: list-item;}
-ul.thread li .post-actions {align-self: flex-end; margin: 0 10px; text-align: end;}
+ul.thread li .post-actions {align-self: flex-end; margin: 5px 0 0 auto; text-align: end;}
 ul.thread li .post-actions button {border: none; outline: none; background-color: #eeeeee; border: 1px solid transparent; color: #588734; border-radius: 25px; opacity: .85;}
 ul.thread li .post-actions button:hover {background-color: white; border-color: #eeeeee; opacity: 1;}
 ul.thread li .post-actions button.liked {background-color: #588734; color: white;}
@@ -392,7 +395,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-discussion .main-content form {display: grid; grid-template-columns: 150px 1fr; grid-gap: 17px;}
 .new-discussion .main-content input, .new-discussion .main-content textarea {margin: 0;}
 .new-discussion .main-content form>input>button {grid-column: 2 / 3;}
-.new-discussion .main-content .minimap {height: 150px; width: 150px; border-radius: 100%; text-align: end; border: 1px solid transparent; cursor: pointer;}
+.new-discussion .main-content .minimap {height: 150px; width: 150px; border-radius: 25px; text-align: end; border: 1px solid transparent; cursor: pointer;}
 .new-discussion .main-content .minimap:hover {box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 .new-discussion div.radio {padding: 5px 20px;}
 .new-discussion div.category div.widget {margin: 0;}
@@ -412,7 +415,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .browse-issues ul.issues li a {display: flex; cursor: pointer; text-align: left; text-decoration: none;}
 .browse-issues ul.issues li a div.minimap {flex: 1; padding: 20px 10px;}
 .browse-issues ul.issues li a div.issue-content {flex: 5; padding: 10px; align-self: center;}
-.browse-issues ul.issues li a div.minimap img {border-radius: 100%; width: 100px; height: 100px;}
+.browse-issues ul.issues li a div.minimap img {border-radius: 25px; width: 100px; height: 100px;}
 .browse-issues ul.issues li a h2 {border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px;}
 .browse-issues ul.issues li a p {color: black;}
 .browse-issues a.embed {color: rgb(105, 105, 105); position: absolute; bottom: 0; right: 0; margin-right: 60px; padding: 5px; background-color: #eeeeeee5; -webkit-backdrop-filter: (5px); backdrop-filter: (5px); border-radius: 25px;}
@@ -420,14 +423,15 @@ ul.thread #post:hover {background: #f0eeee;}
 
 /* Issue */
 .issue .title-wrapper textarea {border: none; border-radius: 10px; padding: 2.5px 10px; width: 100%;}
-.issue .side-content {width: 250px;}
+.issue .main-content {max-width: 600px;}
+.issue .side-content {width: 250px; max-width: unset;}
 .issue .side-content img {border-radius: 25px; height: 100%;}
 .issue .side-content button {position: fixed; align-self: center; display: block; margin: auto; bottom: 50px;}
 
 
-/* New issue */
+/* New idea */
 .new-idea #map {height: -webkit-fill-available; border-radius: 25px; z-index: 1;}
-.new-idea .map-controls {width: 400px; max-height: calc(100vh - 235px); overflow: scroll; z-index: 2;}
+.new-idea .map-controls {display: none; width: 400px; max-height: calc(100vh - 235px); overflow: scroll; z-index: 2;}
 .new-idea form input, .new-idea form textarea {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
 .new-idea form input {width: -webkit-fill-available;}
 .new-idea form textarea {width: 100%;}
@@ -450,10 +454,11 @@ ul.library li img.map {height: 100px;}
 ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 .library input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 10px 10px 20px; width: 100%;}
 .library div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
-.library-item img.minimap {border-radius: 50%; width: 100%;}
+.library-item img.minimap {border-radius: 25px; width: 100%;}
 
 
 /* Profile */
+.profile .title-wrapper .section-title {flex: unset;}
 .profile .website-link {margin: 10px;}
 .profile .website-link i {margin-right: 5px;}
 .profile img.avatar {width: 100px;}
@@ -630,6 +635,11 @@ ul.application-types li label {color: white;}
 }
 
 
+@media (min-width: 1001px) and (max-width: 1169px) {
+    ul.discussions li i.favourite {display: none;}
+}
+
+
 /* Responsive */
 @media (max-width: 1000px) {
     nav {display: none;}
@@ -639,12 +649,18 @@ ul.application-types li label {color: white;}
     #top-menu {display: flex;}
     
     div.location {margin: 5px 2.5px;}
+
+    .index img.flow {display: none;}
 }
 
 @media (max-width: 992px) {
     .locationModal img.map {height: 100%; border-radius: 0;}
     .locationModal div.controls {padding: 10px; bottom: 0; width: calc(100% - 10px); margin: 5px; top: unset;}
     .locationModal h3.icon.text-centered {display: none;}
+}
+
+@media (max-width: 876px) {
+    ul.discussions li i.favourite {display: none;}
 }
 
 
@@ -686,7 +702,7 @@ ul.application-types li label {color: white;}
     .index div.action {width: auto;}
     .index input {padding-left: 10px;}
     .index .jumbotron {padding: 15px;}
-    .index .title-wrapper .section-title {display: inline-block; margin-right: 15px; width: 100%;}
+    .index .title-wrapper .section-title {display: inline-flex; margin-right: 15px; width: 100%;}
 
     .groups hr {display: none;}
     .groups .main-content {margin-top: 120px;}
@@ -702,10 +718,11 @@ ul.application-types li label {color: white;}
     ul.thread li.reply .content {max-width: calc(100vw - 5px);}
 
     ul.discussions li div.content {flex: 1.5; padding: 8px 0 8px 8px;}
-    ul.discussions li i.favourite {padding: 5px;}
+    ul.discussions li i.favourite {padding: 5px; display: block;}
     ul.discussions li h3 {font-size: 16px;}
     ul.discussions li div.minimap {padding: 10px 0;}
     ul.discussions li div.minimap img {width: 90px; height: 90px;}
+    ul.discussions li div.minimap .unread {padding-left: 30px;}
 
     .discussion .content-wrapper {padding: 5px; width: calc(100vw - 10px);}
     .discussion p.drop-cap:first-child:first-letter {font-size: 50px;}
@@ -728,11 +745,13 @@ ul.application-types li label {color: white;}
     .browse-issues ul.issues {margin-top: 0;}
     .browse-issues ul.issues li {display: block; max-width: unset;}
     .browse-issues .map-controls {width: unset;}
+    .browse-issues .main-content {margin: 0;}
     
     ul.planning-applications li a.convert, ul.planning-applications li a.hide {display: block; text-align: center;}
 
     .new-idea .map-controls {width: 100vw; max-height: unset;}
     .new-idea .title-wrapper .section-title {flex: 1;}
+    .new-idea .show-side-panel {display: none;}
 
     ul.library {text-align: center;}
     .library input.filter {width: calc(100% - 20px);}

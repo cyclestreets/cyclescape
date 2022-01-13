@@ -16,7 +16,8 @@ var cyclescapeui = (function ($) {
 		'index',
 		'discussion',
 		'newIdea',
-		'profile'
+		'profile',
+		'newDiscussion'
 	];
 
 	// Class properties
@@ -27,6 +28,7 @@ var cyclescapeui = (function ($) {
 
 	var _map = null; // Leaflet map
 	var _addIdeaMarker = null; // Save the Leaflet marker in newIdea
+	var _selectedAttachment = null; // Selected attachment in Discussion view
 
 
 	return {
@@ -817,6 +819,18 @@ var cyclescapeui = (function ($) {
 				$(this).toggleClass('animate__heartBeat', $(this).hasClass('liked'));
 			});
 
+			// Clicking an added piece of rich-content prompts to delete it
+			$('ul.attachments li.attachment').on('click', function () {
+				_selectedAttachment = $(this);
+				$('#deleteModal').modal('toggle')
+			});
+
+			// Handler for deleteModal delete button
+			$('.remove-attachment').on('click', function () {
+				$('#deleteModal').modal('toggle');
+				_selectedAttachment.fadeOut();
+			});
+
 			// Enable rich-content-adding modal
 			$('body').on('click', 'ul.add-content li', function () {
 				addContentModal.toggle();
@@ -874,7 +888,9 @@ var cyclescapeui = (function ($) {
 				accessToken: config.mapboxglAccessToken
 			}).addTo(_map);
 
+			// On click, add a marker
 			_map.on('click', function (e) {
+				console.log();
 				// Set a quick marker first, which will be adjusted once the API call comes back
 				if (_addIdeaMarker) {
 					_addIdeaMarker.setLatLng(e.latlng).update();
@@ -889,6 +905,74 @@ var cyclescapeui = (function ($) {
 				});
 			});
 
+			// Exceptionally, this page has a button to hide/show side-panel when in desktop view
+			$('.show-side-panel').on('click', function () {
+				$('.map-controls').slideToggle();
+			});
+
+			// Add in a bunch of dummy markers for testing
+			var dummyMarkers = [
+				[51.5182, -0.057163],
+				[51.5760, -0.137163],
+				[51.5672, -0.067163],
+				[51.5480, -0.060163],
+				[51.4860, -0.040163],
+				[51.5252, -0.060163],
+				[51.5169, -0.072163],
+				[51.5163, -0.057163],
+			];
+
+			$.each(dummyMarkers, function (indexInArray, latlng) {
+				L.marker(latlng).addTo(_map).bindPopup(`
+					<form>
+					<h3>Eos odit qui odio molestiae eum ab dolor sit.</h3>
+					<p>Enim itaque harum ut aut sed aut et voluptas. Reiciendis et quia voluptate fuga recusandae sequi optio voluptas. Harum vitae alias consequatur ratione. Natus sapiente totam voluptas. Dolor ea qui culpa quo ratione vel.</p>
+					</form>
+					<a href="new-discussion.html?autofill"><button class="button primary">Start discussion on this</button></a>
+				`
+				).on('click', function () {
+					// Do something
+				});
+			});
+
+
+		},
+
+
+		// Page-specific initialisation
+		newDiscussion: function () {
+			// For testing, if submitted with autofill param in URL, autofill.
+			if (cyclescapeui.getUrlParameter('autofill')) {
+				$('#title').val('Eos odit qui odio molestiae eum ab dolor sit.');
+				$('#description').val('Enim itaque harum ut aut sed aut et voluptas. Reiciendis et quia voluptate fuga recusandae sequi optio voluptas. Harum vitae alias consequatur ratione. Natus sapiente totam voluptas. Dolor ea qui culpa quo ratione vel.');
+			}
+
+			// Initialise tinymce
+			tinymce.init({
+				selector: 'textarea',
+				plugins: 'autoresize',
+				statusbar: false,
+				menubar: false,
+				skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
+				content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')
+			});
+
+		},
+
+		getUrlParameter: function (sParam) {
+			var sPageURL = window.location.search.substring(1),
+				sURLVariables = sPageURL.split('&'),
+				sParameterName,
+				i;
+
+			for (i = 0; i < sURLVariables.length; i++) {
+				sParameterName = sURLVariables[i].split('=');
+
+				if (sParameterName[0] === sParam) {
+					return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+				}
+			}
+			return false;
 		},
 
 
