@@ -17,9 +17,7 @@ a.text {color: #AC3E27;}
 
 html.fa-events-icons-loading .fa-fw {display: inline-block; width: 1.28571429em;;}
 html.fa-events-icons-loading .fa-fw::before {content: "\00a0";}
-html.fa-events-icons-loading body {
-    display: none;
-}
+html.fa-events-icons-loading body {display: none;}
 
 
 /* Basic layout */
@@ -622,6 +620,10 @@ ul.application-types li label {color: white;}
 
 }
 
+@media (max-width: 1255px) {
+    .browse-issues ul.issues li {max-width: 100%;}
+}   
+
 /* Responsive */
 @media (max-width: 1200px) {
     ul.discussions>h2, ul.deadlines>h2 {display: block;}
@@ -646,7 +648,7 @@ ul.application-types li label {color: white;}
 }
 
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
     body {padding: 5px;}
     #shade {width: calc(100vw + 5px); height: calc(100vh + 5px);}
     .content-wrapper {display: block;}

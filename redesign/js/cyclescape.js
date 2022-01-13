@@ -377,7 +377,7 @@ var cyclescapeui = (function ($) {
 		toasts: function () {
 			var toastElList = [].slice.call(document.querySelectorAll('.toast'))
 			var toastList = toastElList.map(function (toastEl) {
-  				return new bootstrap.Toast(toastEl, {animation: true, delay: 1500})
+				return new bootstrap.Toast(toastEl, { animation: true, delay: 1500 })
 			});
 		},
 
@@ -400,7 +400,7 @@ var cyclescapeui = (function ($) {
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
 			$(window).on('resize', function () {
 				if (isIOSSafari) { return; }
-				if ($(window).width() > 750) {
+				if ($(window).width() > 768) {
 					$('.side-content').show();
 				} else {
 					$('.side-content').hide();
@@ -475,7 +475,7 @@ var cyclescapeui = (function ($) {
 			// If we have hidden the side content and window resizes, CSS doesn't kick it - override
 			$(window).on('resize', function () {
 				if (isIOSSafari) { return; }
-				if ($(window).width() > 750) {
+				if ($(window).width() > 768) {
 					$('.side-content').show();
 				} else {
 					$('.side-content').hide();
@@ -816,7 +816,7 @@ var cyclescapeui = (function ($) {
 
 				$(this).toggleClass('animate__heartBeat', $(this).hasClass('liked'));
 			});
-			
+
 			// Enable rich-content-adding modal
 			$('body').on('click', 'ul.add-content li', function () {
 				addContentModal.toggle();
@@ -902,7 +902,7 @@ var cyclescapeui = (function ($) {
 				var myToastEl = document.getElementById('toast')
 				var myToast = bootstrap.Toast.getOrCreateInstance(myToastEl) // Returns a Bootstrap toast instance
 				myToast.show();
-				
+
 			});
 		},
 
@@ -939,7 +939,7 @@ var cyclescapeui = (function ($) {
 				$('.side-content').html('');
 			} else {
 				$('.side-content').html(_sideContentHtml);
-				if ($(window).width() > 750) {
+				if ($(window).width() > 768) {
 					$('.side-content').show();
 				}
 			}
