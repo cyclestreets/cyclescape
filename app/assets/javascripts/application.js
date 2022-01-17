@@ -6,6 +6,7 @@
 //
 //= require constants
 //= require jquery
+//= require intersection-observer/intersection-observer
 //= require rails-ujs
 //= require jquery.selectboxes
 //= require jquery.extentions
