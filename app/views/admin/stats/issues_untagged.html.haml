@@ -1,0 +1,5 @@
+%div Issues with threads where neither the issue or the thread have tags
+%ul
+  - @issues_untagged.each do |issue|
+    %li= link_to issue.title, issue
+

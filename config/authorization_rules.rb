@@ -16,7 +16,7 @@ authorization do
     has_permission_on :admin_user_locations, to: %i[manage geometry combined_geometry]
     has_permission_on :admin_home, to: :view
     has_permission_on :admin_message_moderations, to: :view
-    has_permission_on :admin_stats, to: :view
+    has_permission_on :admin_stats, to: %i[view issues_untagged issues_with_multiple_threads]
     has_permission_on :admin_planning_filters, to: :manage
     has_permission_on :admin_site_configs, to: :manage
     has_permission_on :admin_templates, to: :show

@@ -8,6 +8,8 @@
   %li= link_to t(".manage_message_moderations"), admin_message_moderations_path
   %li= link_to t(".manage_site_config"), admin_site_config_path
   %li= link_to t(".stats"), admin_stats_path
+  %li= link_to "Issues Untagged", issues_untagged_admin_stats_path
+  %li= link_to "Issues with multiple threads", issues_with_multiple_threads_admin_stats_path
   %li= link_to t(".resque"), resque_server_path
   %li= link_to t(".manage_planning_filters"), admin_planning_filters_path
   %li= link_to t(".mail_previews"), "/rails/mailers"
