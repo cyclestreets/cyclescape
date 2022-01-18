@@ -1,6 +1,22 @@
 # frozen_string_literal: true
 
 class Admin::StatsController < ApplicationController
+  def issues_untagged
+    @issues_untagged = Issue.joins(:threads).where(
+      <<~SQL
+        not exists (select 1 from issue_tags where issue_tags.issue_id = issues.id)
+        and not exists (select 1 from message_thread_tags where message_thread_tags.thread_id = message_threads.id)
+      SQL
+    ).distinct
+  end
+
+  def issues_with_multiple_threads
+    multiple_ids = Issue.joins(:threads).group(:id).having("count(*) > 1").ids
+    @issues_with_multiple_threads = Issue.where(id: multiple_ids).left_joins(:tags).group(:id, :title).select(
+      "issues.id, title, json_agg(tags.name) as tag_names"
+    )
+  end
+
   def index
     users_scope = User.all
     messages_scope = Message.all

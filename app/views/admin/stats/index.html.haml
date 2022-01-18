@@ -5,6 +5,7 @@
 - else
   %h3 For the whole site:
 - month_sum = usr_sum = 0
+
 %div= line_chart(@users.map{ |usr| [ usr.month, usr_sum += usr.count]}, ytitle: 'New Users (Cumulative)', library: {title: 'Users'})
 
 %div= line_chart(@messages.map{ |mes| [ mes.month, month_sum += mes.count]}, ytitle: 'New Messages (Cumulative)', library: {title: 'Messages'})

@@ -60,7 +60,10 @@ Rails.application.routes.draw do
       put :disable, :enable, on: :member
     end
     resource :site_config
-    resources :stats, only: :index
+    resources :stats, only: :index do
+      get :issues_untagged, on: :collection
+      get :issues_with_multiple_threads, on: :collection
+    end
     resources :message_moderations, only: :index
     resources :planning_filters
     resources :users do
