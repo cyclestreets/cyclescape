@@ -234,7 +234,7 @@ var cyclescapeui = (function ($) {
 			var data = [
 				{ label: 'Discussion', value: 'discussion.html' },
 				{ label: 'Discussions', value: 'discussions.html' },
-				{ label: 'Browse issues', value: 'browse-issues.html' },
+				{ label: 'Browse issues', value: 'browse-topics.html' },
 				{ label: 'Profile', value: 'profile.html' }
 			];
 
