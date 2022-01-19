@@ -452,6 +452,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-idea .leaflet-popup-content img {height: 150px; border-radius: .5em; display: block; margin: 0 auto;}
 .new-idea .leaflet-popup-content a button {display: block; margin: 10px auto; text-decoration: none;}
 .new-idea .leaflet-popup-content a {text-decoration: none;}
+.new-idea div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
 
 /* Library */
 ul.library {list-style-type: unstyled; padding-left: 0;}
