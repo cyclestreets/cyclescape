@@ -868,7 +868,7 @@ var cyclescapeui = (function ($) {
 		// Page-specific initialisation
 		newIdea: function () {
 			// Initialise map
-			_map = L.map('map', {
+			_map = L.map('ideamap', {
 				zoomControl: false,
 				tap: false // c.f. https://stackoverflow.com/questions/65030691/click-event-fires-twice-for-item-inside-a-loop
 			}).setView([51.505, -0.09], 13);
@@ -890,7 +890,6 @@ var cyclescapeui = (function ($) {
 
 			// On click, add a marker
 			_map.on('click', function (e) {
-				console.log();
 				// Set a quick marker first, which will be adjusted once the API call comes back
 				if (_addIdeaMarker) {
 					_addIdeaMarker.setLatLng(e.latlng).update();
@@ -927,6 +926,7 @@ var cyclescapeui = (function ($) {
 					<form>
 					<h3>Eos odit qui odio molestiae eum ab dolor sit.</h3>
 					<p>Enim itaque harum ut aut sed aut et voluptas. Reiciendis et quia voluptate fuga recusandae sequi optio voluptas. Harum vitae alias consequatur ratione. Natus sapiente totam voluptas. Dolor ea qui culpa quo ratione vel.</p>
+					<img src="https://www.cyclestreets.net/location/1/cyclestreets1-size300.jpg" />
 					</form>
 					<a href="new-discussion.html?autofill"><button class="button primary">Start discussion on this</button></a>
 				`

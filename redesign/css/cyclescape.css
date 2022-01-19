@@ -99,6 +99,11 @@ div.search input {-webkit-appearance: none; border: none; outline: none; font-si
 div.search.expanded input {display: inline; background-color: #FFFFFF;}
 
 
+/* Filter bar */
+input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 20px; width: 100%;}
+.main-content>input.filter {width: 80%; margin-top: 0;}
+
+
 /* Geocoder */
 div.geocoder {float: left; margin: 10px; padding: 10px 12px; border-radius: 25px; background-color: #FFFFFF; color: #AC3E27; transition: 0.2s; overflow: hidden;}
 div.geocoder:hover {background-color: #eeeeee;}
@@ -431,19 +436,22 @@ ul.thread #post:hover {background: #f0eeee;}
 
 
 /* New idea */
-.new-idea #map {height: -webkit-fill-available; border-radius: 25px; z-index: 1;}
+.new-idea #ideamap {height: -webkit-fill-available; border-radius: 25px; z-index: 1;}
 .new-idea .map-controls {display: none; width: 400px; max-height: calc(100vh - 235px); overflow: scroll; z-index: 2;}
 .new-idea form input, .new-idea form textarea {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
 .new-idea form input {width: -webkit-fill-available;}
 .new-idea form textarea {width: 100%;}
 .new-idea form .light {font-size: 12px;}
 .new-idea form {overflow: scroll;}
-.new-idea .main-content.full-screen.full-map {height: calc(100vh - 230px);}
+.new-idea .main-content.full-screen.full-map {height: calc(100vh - 325px);}
 .modal-content .modal-body button.done {position: relative; display: block; margin: 30px 10px 0;}
-.new-idea .geocoder {position: absolute; right: 30px; top: 233px; z-index: 3;}
+.new-idea .geocoder {position: absolute; right: 30px; top: 320px; z-index: 3;}
 @media (min-width: 1570px) {
     .new-idea .geocoder {right: unset; left: 1470px;}
 }
+.new-idea .leaflet-popup-content img {height: 150px; border-radius: .5em; display: block; margin: 0 auto;}
+.new-idea .leaflet-popup-content a button {display: block; margin: 10px auto; text-decoration: none;}
+.new-idea .leaflet-popup-content a {text-decoration: none;}
 
 /* Library */
 ul.library {list-style-type: unstyled; padding-left: 0;}
@@ -505,8 +513,6 @@ ul.planning-applications li a.hide:hover {background-color: #c7c7c7;}
 ul.application-types {list-style-type: none; padding: 0; margin: 0;}
 ul.application-types li {display: inline-block; padding: 2.5px 15px 2.5px 5px; margin: 2.5px; color: white; border-radius: 25px;}
 ul.application-types li label {color: white;}
-.planning-applications input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 20px; width: 100%;}
-.planning-applications .main-content>input.filter {width: 80%; margin-top: 0;}
 
 
 /* Dark mode */
@@ -741,7 +747,7 @@ ul.application-types li label {color: white;}
     .new-discussion div.category.tags input {width: calc(100vw - 80px);}
     .new-discussion div.radio input {width: auto;}
 
-    .new-idea .geocoder {top: 216px; right: 12px;}
+    .new-idea .geocoder {top: 336px; right: 12px;}
 
     .browse-issues ul.issues {margin-top: 0;}
     .browse-issues ul.issues li {display: block; max-width: unset;}
