@@ -124,24 +124,46 @@
 		<div class="title-wrapper">
 			<div class="section-title">
 				<h1><i class="fas fa-fw fa-map-marker-plus"></i> Ideas</h1>
-				<p class="light">This page displays ideas and issues that campaigners can use. If you have a suggestion for the <a href="group.html">York Cycle Campaign</a>, submit an
-					idea!</p>
-				<hr />
-			</div>
-			<div class="action-buttons">
-				<button class="button primary show-side-panel" data-close-text="Hide" data-close-icon="fas fa-eye-slash"
-					data-open-text="Continue" data-open-icon="fas fa-pencil">Add an idea <i
-						class="fas fa-fw fa-plus-circle"></i></button>
+				<div class="container">
+					<div class="row align-items-start">
+						<div class="col">
+							<p class="light">This page displays ideas and issues that campaigners can use. If you have a
+								suggestion for the <a href="group.html">York Cycle Campaign</a>, submit an
+								idea!</p>
+							<br />
+							<button class="button primary show-side-panel" data-close-text="Hide"
+								data-close-icon="fas fa-eye-slash" data-open-text="Continue"
+								data-open-icon="fas fa-pencil">Add an idea <i
+									class="fas fa-fw fa-plus-circle"></i></button>
+						</div>
+						<div class="col">
+							<form id="content-view">
+								<div class="ios-segmented-control content-toggle">
+									<span class="selection"></span>
+									<div class="option">
+										<input type="radio" id="map" name="content-view" value="map" checked />
+										<label for="map"><span><i class="fas fa-fw fa-map"></i> Map (31)</span></label>
+									</div>
+									<div class="option">
+										<input type="radio" id="list" name="content-view" value="list" />
+										<label for="list"><span><i class="fas fa-fw fa-list"></i> List</span></label>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<hr />
+				</div>
 			</div>
 		</div>
 
 
-		<div class="content-wrapper">
+		<div class="content-wrapper" id="content-map">
 			<button class="show-map-controls" data-close-text="Hide" data-close-icon="fas fa-eye-slash"
 				data-open-text="Continue" data-open-icon="fas fa-pencil">New idea <i
 					class="fas fa-fw fa-plus-circle"></i></button>
 			<div class="main-content full-screen full-map">
-				<div id="map"></div>
+				<div id="ideamap"></div>
 				<div class="geocoder" id="geocoder absolute top-right">
 					<i class="fas fa-fw fa-search"></i>
 					<input type="search" placeholder="Search for a place or postcode" />
@@ -177,7 +199,8 @@
 											<p>Area</p>
 										</li>
 									</ul>
-									<p class="light">Click the map to mark the point. Drag the point to reposition. Zoom
+									<p class="light">Click the map to mark the point. Drag the point to reposition.
+										Zoom
 										in and pan to select the correct place.</p>
 								</div>
 								<p class="location-name"></p>
@@ -192,7 +215,8 @@
 								<div class="draganddrop">
 									<input name="form[photograph]" id="form_photograph" type="file" size="30" />
 									<div id="form_thumbnailpreview" style="width: 300px; height: 300px;">
-										<p class="comment">Click here to pick photo, or drag and drop into this box.</p>
+										<p class="comment">Click here to pick photo, or drag and drop into this box.
+										</p>
 									</div>
 								</div>
 							</div>
@@ -215,7 +239,32 @@
 
 			</div>
 		</div>
-	</div>
+
+
+		<div class="content-wrapper" id="content-list">
+			<div class="main-content container">
+				<input class="filter" type="search" placeholder="Filter on title…" />
+				<ul class="planning-applications filterable">
+					<li>
+						<div class="minimap">
+							<img src="/images/placeholders/minimap2.png" />
+						</div>
+						<div class="issue-content">
+							<h2>Eos odit qui odio molestiae eum ab dolor sit.
+							</h2>
+							<p>Enim itaque harum ut aut sed aut et voluptas. Reiciendis et quia voluptate fuga
+								recusandae sequi optio voluptas. Harum vitae alias consequatur ratione. Natus sapiente
+								totam voluptas. Dolor ea qui culpa quo ratione vel.</p>
+							<a href="new-discussion.html?autofill" class="convert"><i
+									class="fas fa-fw fa-comment-plus"></i> Start a
+								discussion</a>
+
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
 	</div>
 
 </body>
