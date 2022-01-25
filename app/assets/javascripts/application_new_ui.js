@@ -1,0 +1,10 @@
+//= require constants
+//= require jquery3
+//= require popper
+//= require bootstrap
+//= require rails-ujs
+//= require jquery-ui
+//= require js-cookie/src/js.cookie
+//= require leaflet
+//= require jquery-touch-events
+//= require new_ui
