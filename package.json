@@ -1,12 +1,15 @@
 {
   "name": "cyclescape",
   "dependencies": {
+    "@benmajor/jquery-touch-events": "^2.0.3",
     "autosize": "^1.18.13",
     "browserify": "^14.5.0",
     "browserify-incremental": "^3.1.0",
     "coffeeify": "~0.6",
     "cropperjs": "^1.5.11",
     "intersection-observer": "^0.11.0",
+    "jquery-migrate": "^3.3.2",
+    "jquery-touch-events": "^1.0.7",
     "jquery-ui-timepicker-addon": "1.5.5",
     "js-cookie": "^2.2.1",
     "jsdom": "^9.0.0",
