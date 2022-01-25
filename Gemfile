@@ -14,6 +14,7 @@ end
 # gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
+gem "bootstrap"
 gem "browserify-rails"
 gem "chartkick"
 gem "cocoon"

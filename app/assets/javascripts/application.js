@@ -5,11 +5,12 @@
 // the compiled file.
 //
 //= require constants
-//= require jquery
+//= require jquery3
 //= require intersection-observer/intersection-observer
 //= require rails-ujs
 //= require jquery.selectboxes
 //= require jquery.extentions
+//= require jquery-migrate/dist/jquery-migrate
 //= require jquery-ui/autocomplete
 //= require jquery-ui/tabs
 //= require jquery-ui/datepicker
