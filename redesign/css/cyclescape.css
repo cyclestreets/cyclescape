@@ -386,6 +386,7 @@ ul.thread li.reply ul.attachments {list-style: none; padding: 0;}
 ul.thread li.reply ul.attachments li {border: 0.5px solid #185B3D; border-radius: 25px; display: inline-block; background-color: white; color: #185B3D; padding: 2.5px 10px; margin-right: 5px; cursor: pointer;}
 ul.thread li.reply ul.attachments li:not(:last-child):after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
 ul.thread li.reply ul.attachments li:hover {background: #f0eeee;}
+ul.thread li.reply .post-wrapper .autosave {display: none; font-size: 12px; color: #c0c0c0; margin-right: 20px;}
 ul.thread li.load-more {display: block; margin: 10px auto; width: 150px; background-color: #EEEEEE; color: #226244; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); text-align: center; cursor: pointer;}
 ul.thread li.load-more:hover {background-color: #FFFFFF;}
 ul.thread li.load-more p {margin: 0; padding: 0; font-size: 13px;}
@@ -395,7 +396,8 @@ ul.thread a.add-content:hover {background: #f0eeee;}
 ul.thread .post-wrapper {text-align: right;}
 ul.thread #post {display: inline-block; border: 0.5px solid #dbdada; background-color: white; color: #B2412B; outline: none; padding: 6.5px 10px; margin: 5px 0 0; border-radius: 25px; text-decoration: none;}
 ul.thread #post:hover {background: #f0eeee;}
-.widget .show-more {color: #555555; text-align: center; font-size: 14px; cursor: pointer;}
+.widget .show-more {color: #555555; text-align: center; font-size: 14px; cursor: pointer; border-radius: 25px; width: 120px; margin: 0 auto;}
+.widget .show-more:hover {background-color: #eeeeee;}
 
 
 /* tinymce overrides */
