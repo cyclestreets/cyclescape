@@ -848,7 +848,7 @@ var cyclescapeui = (function ($) {
 
 			// Clicking reply adds that text to the editor
 			$('.post-actions .reply').on('click', function () {
-				var quotedText = $(this).parent('.post-actions').siblings('.content').find('.post').first().text();
+				var quotedText = $(this).parent('.post-actions').siblings('.flex').find('.post').first().text();
 				tinymce.activeEditor.setContent(tinymce.activeEditor.getContent() + '<blockquote>' + quotedText + '</blockquote><br/> <br/>');
 
 				// Animate scrolling to bottom
