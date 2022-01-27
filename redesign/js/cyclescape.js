@@ -391,6 +391,7 @@ var cyclescapeui = (function ($) {
 				if ($('.side-content').hasClass('visible')) {
 					cyclescapeui.closeSideContent();
 				} else {
+					$('.main-content').css('position', 'unset')
 					_pageScroll = cyclescapeui.getPageScroll();
 					window.scrollTo(0, 0);
 					$('.show-side-content').html('Done <i class="fas fa-fw fa-check"></i>');
@@ -413,6 +414,7 @@ var cyclescapeui = (function ($) {
 
 		// Close side content
 		closeSideContent: function () {
+			$('.main-content').css('position', 'relative');
 			$('.show-side-content').html('Filter <i class="fas fa-fw fa-filter"></i>');
 			$('#shade').fadeOut('fast');
 			$('.side-content').removeClass('visible').hide();
@@ -466,6 +468,7 @@ var cyclescapeui = (function ($) {
 					var openText = $(this).data('open-text') + ' <i class="' + $(this).data('open-icon') + '"></i>'
 					cyclescapeui.closeMapControls(openText);
 				} else {
+					$('.main-content').css('position', 'unset')
 					_pageScroll = cyclescapeui.getPageScroll();
 					window.scrollTo(0, 0);
 					$('.show-map-controls').html($(this).data('close-text') + ' <i class="' + $(this).data('close-icon') + '"></i>');
@@ -487,6 +490,7 @@ var cyclescapeui = (function ($) {
 
 
 		closeMapControls: function (buttonLabel = 'Filter <i class="fas fa-fw fa-filter"></i>') {
+			$('.main-content').css('position', 'relative');
 			$('.show-map-controls').html(buttonLabel);
 			$('#shade').fadeOut('fast');
 			$('.map-controls').removeClass('visible').hide();

@@ -458,7 +458,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-idea form .light {font-size: 12px;}
 .new-idea form {overflow-y: scroll;}
 .new-idea form#content-view {overflow: hidden;}
-.new-idea .main-content.full-screen.full-map {height: calc(100vh - 325px);}
+.new-idea .main-content.full-screen.full-map {height: calc(100vh - 375px);}
 .modal-content .modal-body button.done {position: relative; display: block; margin: 30px 10px 0;}
 .new-idea .geocoder {position: absolute; right: 5px; top: 5px; z-index: 3;}
 .new-idea .leaflet-popup-content img {height: 150px; border-radius: .5em; display: block; margin: 0 auto;}
@@ -507,7 +507,7 @@ ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 
 /* Planning applications */
 .planning-applications form .radio, form .category {background-color: transparent;}
-.planning-applications form .map-controls {max-width: 310px; height: calc(100vh - 255px); overflow: scroll;}
+.planning-applications form .map-controls {max-width: 310px; height: calc(100vh - 310px); overflow: scroll;}
 .planning-applications form .category {flex-wrap: wrap;}
 .planning-applications form .category .label {padding-right: 30px;}
 .planning-applications .widget {margin: 20px 0;}
@@ -827,6 +827,7 @@ ul.application-types li label {color: white;}
 }
 
 @media (max-width: 414px) {
+    .section-title p {font-size: 14px;}
     div.geocoder input {width: 250px; font-size: 15px;}
     ul.discussions div.minimap {display: none;}
     .side-content {width: 100vw;}
