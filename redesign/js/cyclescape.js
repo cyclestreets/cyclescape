@@ -932,7 +932,7 @@ var cyclescapeui = (function ($) {
 						<a href="new-discussion.html?autofill" title="Create a private discussion in your group about this idea"><button class="button primary">Start discussion on this</button></a>
 						<button class="like" title="Upvote this to show your support">
 							<i class="fas fa-fw fa-thumbs-up"></i> 3
-						</buttonc>
+						</button>
 					</div>
 				`
 				).on('click', function () {

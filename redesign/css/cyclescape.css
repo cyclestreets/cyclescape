@@ -453,9 +453,11 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-idea .leaflet-popup-content div.post-actions {display: flex;}
 .new-idea .leaflet-popup-content a button {display: block; margin: 10px auto; text-decoration: none;}
 .new-idea .leaflet-popup-content a {text-decoration: none;}
-.new-idea .leaflet-popup-content button.like {background-color: #287622; color: white; border: none; outline: none; border-radius: 25px; padding: 3px 15px; margin: 9px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
-.new-idea .leaflet-popup-content button.like:hover {background-color: #348f2d;}
+.new-idea button.like {background-color: #287622; color: white; border: none; outline: none; border-radius: 25px; padding: 3px 15px; margin: 9px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
+.new-idea button.like:hover {background-color: #348f2d;}
 .new-idea div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
+
+
 /* Library */
 ul.library {list-style-type: unstyled; padding-left: 0;}
 ul.library a {text-decoration: none;}
