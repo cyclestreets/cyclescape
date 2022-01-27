@@ -33,7 +33,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .title-wrapper .section-title {flex-direction: column; flex: 3; padding: 10px; margin-right: 40px; align-items: center; justify-content: center;}
 .title-wrapper .section-title h1, .title-wrapper .section-title p.badge {display: inline-block; width: fit-content;}
 .title-wrapper .section-title h1 {margin-right: 20px; margin-bottom: 15px;}
-.title-wrapper .section-title>i {font-size: 40px; color: #AC3E27; width: 45px; height: 40px; line-height: 40px;}
+.title-wrapper .section-title>i:not(.favourite) {font-size: 40px; color: #AC3E27; width: 45px; height: 40px; line-height: 40px;}
 .title-wrapper .section-title p.badge {background-color: #eeeeee; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 7.5px 0 0; font-size: 14px; font-weight: 300; align-self: center;}
 .title-wrapper .action-buttons {display: flex; padding: 10px; max-width: 400px;}
 
@@ -216,6 +216,8 @@ form .radio, form .category {display: flex; background-color: #f8f6f6; border-ra
 form .radio input, form .radio label {align-self: center;}
 form .radio label {margin: 5px 15px 5px 5px;}
 form .radio input {margin-left: 5px;}
+form .radio .help {transition: .2s; padding: 5px;}
+form .radio .help:hover {color: #155437; transform: scale(1.05);}
 form>label.decorated {grid-column: 1 / 2; height: 35px; color: #185B3D; font-weight: bold; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); border-radius: 25px; padding: 5px 20px 5px 20px; background-color: #eeeeee;}
 form>label.hidden {opacity: 0;}
 form input[type="submit"] {width: fit-content; border: none; background-color: #eeeeee; color: #AC3E27; border-radius: 25px; padding: 6px 15px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}

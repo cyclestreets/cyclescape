@@ -91,6 +91,21 @@
 	</div>
 </div>
 
+
+<div class="modal fade categoryHelpModal" id="categoryHelpModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Find out about categories</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<p>Placeholder</p>
+			</div>
+		</div>
+	</div>
+</div>
+
 <body class="new-discussion">
 	<div id="shade">
 		<i class="far fa-times-circle close"></i>
@@ -118,7 +133,7 @@
 				<li><i class="fas fa-fw fa-hashtag"></i>Browse topics</li>
 			</a>
 			<hr>
-						<a href="planning-applications.html">
+			<a href="planning-applications.html">
 				<li><i class="fas fa-fw fa-sign"></i>Planning applications</li>
 			</a>
 			<a href="ideas.html">
@@ -192,6 +207,8 @@
 						<label for="administration">Administration</label><br>
 						<input type="radio" id="general" name="category" value="general">
 						<label for="general">General chat</label>
+						<i data-bs-target="#categoryHelpModal" data-bs-toggle="modal"
+							class="help fas fa-info-circle"></i>
 					</div>
 					<label class="decorated" for="location"><i class="fas fa-fw fa-map-pin"> </i>Location</label>
 					<div class="category">
@@ -204,6 +221,7 @@
 					<label class="decorated" for="tags"><i class="fas fa-fw fa-hashtag"></i> Tags</label>
 					<div class="category tags">
 						<div class="widget">
+							<p>This will help others find your idea</p>
 							<input type="search" placeholder="Type to add a tag…" />
 							<div class="widget-content">
 								<ul class="tags">
