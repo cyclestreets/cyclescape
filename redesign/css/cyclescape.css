@@ -34,16 +34,16 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .title-wrapper .section-title h1, .title-wrapper .section-title p.badge {display: inline-block; width: fit-content;}
 .title-wrapper .section-title h1 {margin-right: 20px; margin-bottom: 15px;}
 .title-wrapper .section-title>i:not(.favourite) {font-size: 40px; color: #AC3E27; width: 45px; height: 40px; line-height: 40px;}
-.title-wrapper .section-title p.badge {background-color: #eeeeee; color: #AC3E27; padding: 10px; border-radius: 25px; margin: 0 7.5px 0 0; font-size: 14px; font-weight: 300; align-self: center;}
+.title-wrapper .section-title p.badge {background-color: #eeeeee; color: #AC3E27; padding: 10px; border-radius: 20px; margin: 0 7.5px 0 0; font-size: 14px; font-weight: 300; align-self: center;}
 .title-wrapper .action-buttons {display: flex; padding: 10px; max-width: 400px;}
 
 .content-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
 .main-content {flex-direction: column; flex: 2; padding: 10px; margin-right: 40px; position: relative;}
 .main-content h2 {margin-top: 10px;}
-.main-content.full-screen {margin: 0 10px; height: calc(100vh - 300px); border-radius: 25px; padding: 0;}
+.main-content.full-screen {margin: 0 10px; height: calc(100vh - 300px); border-radius: 20px; padding: 0;}
 .side-content {display: flex; flex-direction: column; flex: 1; padding: 10px; max-width: 300px; z-index: 101;}
 
-.show-side-content, .show-map-controls {display: none; position: fixed; bottom: 0; right: 5%; padding: 10px; margin: 10px auto; border-radius: 25px; color: white; font-size: 100%; height: 50px; border: none; outline: none; background-color: #AC3E27; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: 0.2s; line-height: 1; z-index: 98}
+.show-side-content, .show-map-controls {display: none; position: fixed; bottom: 0; right: 5%; padding: 10px; margin: 10px auto; border-radius: 20px; color: white; font-size: 100%; height: 50px; border: none; outline: none; background-color: #AC3E27; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: 0.2s; line-height: 1; z-index: 98}
 .show-side-content:hover, .show-map-controls:hover {background-color: #c76a58;}
 .show-map-controls, .show-side-content {z-index: 102;}
 
@@ -54,8 +54,8 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .text-centered {text-align: center;}
 .flex {display: flex; flex-direction: row; justify-content: center; flex-wrap: wrap;}
 
-.full-map {width: 100%; border-radius: 25px;}
-.map-controls {float: right; background-color: rgba(255, 255, 255, 0.871); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); border-radius: 25px; padding: 0 10px 10px; margin: 5px;}
+.full-map {width: 100%; border-radius: 20px;}
+.map-controls {float: right; background-color: rgba(255, 255, 255, 0.871); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); border-radius: 20px; padding: 0 10px 10px; margin: 5px;}
 .map-controls.left {float: left;}
 .map-controls.absolute {position: absolute; top: 210px;}
 .map-controls h2 {padding: 10px; text-align: center; margin: 0 auto;}
@@ -68,7 +68,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 
 
 /* Nav */
-nav {position: fixed; display: flex; flex-direction: column; background-color: #eeeeee; height: calc(100vh - 30px); max-width: 260px; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); z-index: 103; min-height: 469px;}
+nav {position: fixed; display: flex; flex-direction: column; background-color: #eeeeee; height: calc(100vh - 30px); max-width: 260px; border-radius: 20px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); z-index: 103; min-height: 469px;}
 nav hr {color: white; margin: 12.5px 0 12.5px -10px; height: 2px !important; opacity: .6; width: calc(100% + 20px);}
 nav .title img {width: 30px; margin-top: -16px;}
 nav .title h1 {display: inline; font-style: italic; font-size: 35px;}
@@ -78,10 +78,10 @@ nav .title a.group:hover {text-decoration: underline;}
 nav i {padding-left: 10px; padding-right: 30px; color: #939393; font-size: 20px; width: 40px; height: 20px; line-height: 20px;}
 nav ul {list-style-type: none; padding: 0; margin: 0;}
 nav ul a {text-decoration: none;}
-nav li {padding: 10px 2.5px; margin: 5px 0; color: #185B3D; border-radius: 25px; font-size: 17px; cursor: pointer;}
+nav li {padding: 10px 2.5px; margin: 5px 0; color: #185B3D; border-radius: 20px; font-size: 17px; cursor: pointer;}
 nav li.active {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 nav li:hover {background-color: #ffffffa6;}
-nav select {appearance: none; -webkit-appearance: none; outline: 0; border: none; background-color: #eeeeee; color: #185B3D; font-size: 17px; cursor: pointer; width: 190px; padding: 10px 5px; margin: 2.5px 0; border-radius: 25px;}
+nav select {appearance: none; -webkit-appearance: none; outline: 0; border: none; background-color: #eeeeee; color: #185B3D; font-size: 17px; cursor: pointer; width: 190px; padding: 10px 5px; margin: 2.5px 0; border-radius: 20px;}
 nav select:hover {background-color: #ffffffa6;}
 nav .unread {display: inline-block; width: 30px; margin-left: 5px; margin-right: 7.5px;}
 nav .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
@@ -92,25 +92,25 @@ button#hamburger:hover {background-color: #eeeeee;}
 
 
 /* Search bar */
-div.search {position: fixed; z-index: 102; top: 5px; right: 0; margin-right: 15px; margin-left: 15px; height: 49.25px; width: 56.28px; margin-top: 5px; padding: 5px 15px 5px 12.5px; color: #AC3E27; font-size: 25px; font-weight: 300; border-radius: 25px; border: .5px solid rgba(128, 128, 128, 0.199); transition: box-shadow 1s; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); cursor: pointer; background-color: #FFFFFF;}
+div.search {position: fixed; z-index: 102; top: 5px; right: 0; margin-right: 15px; margin-left: 15px; height: 49.25px; width: 51.28px; margin-top: 5px; padding: 5px 5px 5px 9.5px; color: #AC3E27; font-size: 25px; font-weight: 300; border-radius: 100%; border: .5px solid rgba(128, 128, 128, 0.199); transition: box-shadow 1s; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); cursor: pointer; background-color: #FFFFFF;}
 div.search:hover {background-color: #eeeeee;}
-div.search.expanded {box-shadow: 0 0 0 1000px rgba(0,0,0,.3); box-shadow: 0 0 0 100vmax rgba(0,0,0,.3); padding: 5px 15px; width: 75vw; max-width: 1000px; background-color: white;}
+div.search.expanded {box-shadow: 0 0 0 1000px rgba(0,0,0,.3); box-shadow: 0 0 0 100vmax rgba(0,0,0,.3); padding: 5px 15px; width: 75vw; max-width: 1000px; background-color: white; border-radius: 20px;}
 div.search.expanded:hover {background-color: white;}
 div.search input {-webkit-appearance: none; border: none; outline: none; font-size: 25px; width: calc(100% - 60px); display: none; transition: 1s;}
 div.search.expanded input {display: inline; background-color: #FFFFFF;}
 
 
 /* Filter bar */
-input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 20px; width: 100%;}
+input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 20px; margin: 20px; width: 100%;}
 .main-content>input.filter {width: 80%; margin-top: 0;}
 
 
 /* Geocoder */
-div.geocoder {float: left; margin: 10px; padding: 10px 12px; border-radius: 25px; background-color: #FFFFFF; color: #AC3E27; transition: 0.2s; overflow: hidden;}
+div.geocoder {float: left; margin: 10px; padding: 10px 12px; border-radius: 20px; background-color: #FFFFFF; color: #AC3E27; transition: 0.2s; overflow: hidden;}
 div.geocoder:hover {background-color: #eeeeee;}
 div.geocoder:active {background-color: #d8d8d8;}
 div.geocoder i {font-size: 20px; font-weight: 500;}
-div.geocoder input {display: none; width: 300px; border-radius: 25px; padding: 0 10px; border: none; outline: none; font-size: 16px;}
+div.geocoder input {display: none; width: 300px; border-radius: 20px; padding: 0 10px; border: none; outline: none; font-size: 16px;}
 div.geocoder.expanded:hover {background-color: #FFFFFF;}
 div.geocoder.expanded input {display: inline-block;}
 .modal div.geocoder {float: unset; position: absolute; top: 0;}
@@ -119,7 +119,7 @@ div.geocoder.expanded input {display: inline-block;}
 /* Geocoder autocomplete */
 .ui-autocomplete-loading + .loader {display: inline-block;}
 .ui-autocomplete {background-color: white; width: 200px; list-style: none; margin: 10px 0 0 0; padding-left: 0; padding-top: 5px; padding: 5px; border-radius: 10px; z-index: 9999;}
-.ui-autocomplete li div {list-style: none; margin: 2.5px; padding: 2.5px 10px; border-radius: 25px;}
+.ui-autocomplete li div {list-style: none; margin: 2.5px; padding: 2.5px 10px; border-radius: 20px;}
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {background-color: #eeeeee;}
 .ui-autocomplete li:first-child a {padding-top: 9px;}
 .ui-autocomplete li a {padding: 5px 15px 3px; display: block; color: #4d0026;}
@@ -129,17 +129,17 @@ div.geocoder.expanded input {display: inline-block;}
 
 
 /* Generic elements */
-button.primary {align-self: flex-start; width: auto; border: none; background-color: #eeeeee; color: #AC3E27; border-radius: 25px; padding: 6px 15px; margin: 5px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
+button.primary {align-self: flex-start; width: auto; border: none; background-color: #eeeeee; color: #AC3E27; border-radius: 20px; padding: 6px 15px; margin: 5px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 button.primary:hover {background-color: white;}
 button.primary i {padding-left: 10px; padding-right: 20px;}
 button.disabled {opacity: .8; filter: grayscale(100%); -webkit-filter: grayscale(100%); cursor: not-allowed !important;}
-button.social {align-self: flex-start; display: inline-block; width: auto; border: none; background-color: #eeeeee; border-radius: 25px; padding: 5px 10px; margin: 5px; font-size: 11px; font-weight: bold;}
+button.social {align-self: flex-start; display: inline-block; width: auto; border: none; background-color: #eeeeee; border-radius: 20px; padding: 5px 10px; margin: 5px; font-size: 11px; font-weight: bold;}
 button.social.twitter {background-color: #7ABCFF; color: white;}
 button.social.facebook {background-color: #7C9EFF; color: white;}
 button.donate {background-color: #FBBE5F; color: white;}
 button.donate:hover {color: #FBBE5F;}
 
-a.action {display: inline-flex; width: 270px; flex-direction: row; border: 1px solid #eeeeee; border-radius: 25px; color: #185B3D; padding: 10px 5px; margin: 7.5px 7.5px 7.5px 0; cursor: pointer; transition: .1s; text-decoration: none; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); background-color: #eeeeee;}
+a.action {display: inline-flex; width: 270px; flex-direction: row; border: 1px solid #eeeeee; border-radius: 20px; color: #185B3D; padding: 10px 5px; margin: 7.5px 7.5px 7.5px 0; cursor: pointer; transition: .1s; text-decoration: none; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); background-color: #eeeeee;}
 a.action:hover {background-color: #FFFFFF;}
 a.action .icon {display: flex; flex-direction: column; flex-basis: 100%; flex: 1; align-self: center; text-align: center; font-size: 25px; padding: 0 15px;}
 a.action .text {display: flex; flex-direction: column; flex-basis: 100%; flex: 4; text-decoration: none;}
@@ -151,12 +151,12 @@ ul.unstyled {list-style: none;}
 ul.avatars {padding: 0;}
 ul.avatars li a {color: black; text-decoration: none;}
 ul.avatars li a i {margin-top: 12.5px; margin-right: 5px; float: right;}
-ul.avatars li {margin: 6px 0; padding: 2.5px 10px 2.5px 15px; border: 1px solid transparent; border-radius: 25px; cursor: pointer;}
+ul.avatars li {margin: 6px 0; padding: 2.5px 10px 2.5px 15px; border: 1px solid transparent; border-radius: 20px; cursor: pointer;}
 ul.avatars li:hover {border-color: #eeeeee;}
 ul.links li {margin: 5px 0; text-decoration: underline; cursor: pointer;}
 
 ul.tags {margin: 5px 0; padding: 0;}
-ul.tags li.tag {list-style: none; display: inline-block; border-radius: 25px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.8; padding: 2px 5px; margin: 0 5px 10px 0; transition: 0.2s; cursor: pointer;}
+ul.tags li.tag {list-style: none; display: inline-block; border-radius: 20px; border: 1px solid #185B3D; color: #185B3D; font-size: 12px; opacity: 0.8; padding: 2px 5px; margin: 0 5px 10px 0; transition: 0.2s; cursor: pointer;}
 ul.tags li.tag a {display: inline-block; margin: 0; padding: 0; text-decoration: none; color: #185B3D;}
 ul.tags li.tag:hover {opacity: 1; background: rgb(243, 243, 243);}
 ul.tags li.large-tag {font-size: 15px; opacity: 0.97;}
@@ -166,22 +166,22 @@ ul.tags li.large-tag::after {padding-left: 5px; font-family: "Font Awesome 5 Pro
 ul.tags li.large-tag:last-of-type {margin-bottom: 0;}
 
 ul.wizard {margin: 5px; padding: 0; height: 35px; background-color: transparent; text-align: center;}
-ul.wizard li {display: inline-block; border-radius: 25px; cursor: pointer;}
+ul.wizard li {display: inline-block; border-radius: 20px; cursor: pointer;}
 ul.wizard li h2 {display: inline-block; border-radius: 100%; color: white; background-color: #b3b3b3; padding: 2.5px; width: 30px; height: 30px; text-align: center; margin-left: 10px;}
 ul.wizard li h2.complete {background-color: #185B3D;}
 ul.wizard li h2.active {background-color: #B2412B;}
 ul.wizard li p {display: inline-block; font-size: 16px; margin: 0 20px 0 10px;}
 ul.wizard li:hover p {text-decoration: underline;}
 ul.wizard hr {width: 100px; margin: 0 auto 5px; display: inline-block;}
-i.wizard-back {height: 40px; width: 40px; border: 1px solid #eeeeee; border-radius: 25px; line-height: 38px; font-size: 17px; cursor: pointer;}
+i.wizard-back {height: 40px; width: 40px; border: 1px solid #eeeeee; border-radius: 20px; line-height: 38px; font-size: 17px; cursor: pointer;}
 i.wizard-back:hover {background-color: #dfdfdf;}
 .wizard-content {padding: 0 50px;}
 
 ul.checkboxes {list-style: none; margin: 0; padding: 0;}
 
-.widget {border-radius: 25px; margin: 10px 0 5px;}
+.widget {border-radius: 20px; margin: 10px 0 5px;}
 .widget.standalone {width: 300px; margin: 20px 30px; display: inline-block;}
-.widget .title, .widget h2 {background-color: #eeeeee; color: #185B3D; font-size: 18px; border-radius: 25px; padding: 5px 5px 5px 20px;}
+.widget .title, .widget h2 {background-color: #eeeeee; color: #185B3D; font-size: 18px; border-radius: 20px; padding: 5px 5px 5px 20px;}
 .widget .title {box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 .widget h2 {padding: 0 15px 0 0; margin: 0; font-weight: normal; font-size: 18px;}
 .widget .widget-content {padding: 10px;}
@@ -197,40 +197,40 @@ hr {margin: 15px 0;}
 .stylised-or hr {width: 100px; margin: 0 auto; display: inline-block; text-align: center;}
 .stylised-or p {display: inline-block; border: 1px solid #afafaf; border-radius: 100%; padding: 2.5px; width: 30px; height: 30px; text-align: center; margin: -5px; line-height: 20px;}
 
-div.controls ul.map-buttons {display: flex; border-radius: 25px; padding: 7.5px; margin: 0; list-style: none; background-color: rgba(255, 255, 255, 0.178); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); margin: 5px; width: -webkit-fill-available;}
-div.controls ul.map-buttons li {flex: 1; padding: 10px 0 0 0; border-radius: 25px; margin: 0 2.5px; cursor: pointer;}
+div.controls ul.map-buttons {display: flex; border-radius: 20px; padding: 7.5px; margin: 0; list-style: none; background-color: rgba(255, 255, 255, 0.178); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); margin: 5px; width: -webkit-fill-available;}
+div.controls ul.map-buttons li {flex: 1; padding: 10px 0 0 0; border-radius: 20px; margin: 0 2.5px; cursor: pointer;}
 div.controls ul.map-buttons li.active {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04)}
 div.controls ul.map-buttons li:hover {background-color: #ffffff;}
 div.controls ul.map-buttons li i {display: block; text-align: center; color: #B2412B; font-size: 20px; margin: 0 auto;}
 div.controls ul.map-buttons li p {text-align: center; font-size: 13px;}
 
-.pagination {display: block; margin: 15px auto; background-color: #EEEEEE; border-radius: 25px; text-align: center; width: 300px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
-.pagination a {padding: 10px; color: #185B3D; border-radius: 25px;}
+.pagination {display: block; margin: 15px auto; background-color: #EEEEEE; border-radius: 20px; text-align: center; width: 300px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
+.pagination a {padding: 10px; color: #185B3D; border-radius: 20px;}
 .pagination a:hover {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 .pagination p {display: inline-block; color: #185B3D; padding: 10px; margin: 0;}
 
 
 /* Forms */
-form input, form textarea {padding: 10px; outline: none; border: 1px solid #eeeeee; border-radius: 25px; margin: 10px 0 5px;}
-form .radio, form .category {display: flex; background-color: #f8f6f6; border-radius: 25px; padding: 5px;}
+form input, form textarea {padding: 10px; outline: none; border: 1px solid #eeeeee; border-radius: 20px; margin: 10px 0 5px;}
+form .radio, form .category {display: flex; background-color: #f8f6f6; border-radius: 20px; padding: 5px;}
 form .radio input, form .radio label {align-self: center;}
 form .radio label {margin: 5px 15px 5px 5px;}
 form .radio input {margin-left: 5px;}
 form .radio .help {transition: .2s; padding: 5px;}
 form .radio .help:hover {color: #155437; transform: scale(1.05);}
-form>label.decorated {grid-column: 1 / 2; height: 35px; color: #185B3D; font-weight: bold; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); border-radius: 25px; padding: 5px 20px 5px 20px; background-color: #eeeeee;}
+form>label.decorated {grid-column: 1 / 2; height: 35px; color: #185B3D; font-weight: bold; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); border-radius: 20px; padding: 5px 20px 5px 20px; background-color: #eeeeee;}
 form>label.hidden {opacity: 0;}
-form input[type="submit"] {width: fit-content; border: none; background-color: #eeeeee; color: #AC3E27; border-radius: 25px; padding: 6px 15px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
+form input[type="submit"] {width: fit-content; border: none; background-color: #eeeeee; color: #AC3E27; border-radius: 20px; padding: 6px 15px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 form input[type="submit"]:hover {background-color: white;}
 form input[type="checkbox"] {margin: 5px}
-form div.draganddrop {width: calc(300px + 4px + 4px); height: calc(200px + 4px + 4px); border: 2px dashed gray; border-radius: 25px; overflow: hidden;}
+form div.draganddrop {width: calc(300px + 4px + 4px); height: calc(200px + 4px + 4px); border: 2px dashed gray; border-radius: 20px; overflow: hidden;}
 form div.draganddrop p {width: 300px; height: 200px; text-align: center; padding: 15px; color: gray;}
 form div.draganddrop input {position: absolute; margin: 0; padding: 0; width: 300px; height: 200px; outline: none; opacity: 0;}
 .modal-body input, .modal-body textarea {display: block; width: 100%;}
 
 
 /* Modal */
-.modal-content {border-radius: 25px;}
+.modal-content {border-radius: 20px;}
 .modal-content .modal-body.unpadded {padding: 0;}
 .modal-content .modal-body button.x {position: absolute; top: 0; right: 0; margin: 10px;}
 .modal-content .modal-body button.done {position: absolute; bottom: 0; right: 0;}
@@ -243,10 +243,10 @@ form div.draganddrop input {position: absolute; margin: 0; padding: 0; width: 30
 .popover-header {margin-top: 0; border-top-left-radius: 20px; border-top-right-radius: 20px;}
 ul.popover-avatar, ul.popover-group {list-style: none; padding: 0; margin: 0;}
 ul.popover-avatar li img {width: 50px; height: 50px;}
-ul.popover-group li {padding: 2.5px 10px; margin: 2.5px; border: 0.5px solid transparent; border-radius: 25px; cursor: pointer;}
+ul.popover-group li {padding: 2.5px 10px; margin: 2.5px; border: 0.5px solid transparent; border-radius: 20px; cursor: pointer;}
 ul.popover-group li:hover {border-color: #eeeeee;}
 ul.add-content {list-style: none; padding: 0; margin: 0; width: 300px;}
-ul.add-content li {padding: 5px 10px; border: 1px solid transparent; border-radius: 25px; display: inline-block; cursor: pointer;}
+ul.add-content li {padding: 5px 10px; border: 1px solid transparent; border-radius: 20px; display: inline-block; cursor: pointer;}
 ul.add-content li:hover {border-color: #185B3D;}
 
 
@@ -277,38 +277,40 @@ ul.add-content li:hover {border-color: #185B3D;}
 .index h4 {color: #AC3E27; font-weight: 500; font-size: 38px;}
 .index h1 {font-size: 44px; font-style: italic;}
 .index .content-wrapper {z-index: 5;}
-.index .section-title {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-flex; flex-direction: row; border-radius: 25px; padding: 10px 30px; z-index: 50; margin: 10px 12.5px 0;}
+.index .section-title {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-flex; flex-direction: row; border-radius: 20px; padding: 10px 30px; z-index: 50; margin: 10px 12.5px 0;}
 .index .section-title h4 {margin-bottom: 0;}
 .index .title-wrapper h1 {line-height: 30px;}
 .index .section-title h4, .index .title-wrapper h1  {display: inline-block;}
 .index .title-wrapper img {width: 60px; margin-right: 20px;}
 .index .title-wrapper .section-title {flex: unset;}
-.index .jumbotron {background-color: #ac3d27df; color: white; padding: 30px; border-radius: 25px; margin-top: 30px; margin-bottom: 30px; max-width: 1200px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);}
+.index .jumbotron {background-color: #ac3d27df; color: white; padding: 30px; border-radius: 20px; margin-top: 30px; margin-bottom: 30px; max-width: 1200px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);}
 .index .jumbotron p.description {font-size: 20px;}
-.index a.action {color: white; background-color: #CA7F72;}
-.index a.action {margin: 10px; border: transparent; width: 240px; padding-right: 10px;}
-.index a.action:hover {background-color: #f3f3f3ad;}
+.index a.action {color: black; background-color: white; box-shadow: none; transition: .2s;}
+.index a.action {margin: 5px; border: 1px solid #EEEEEE; width: 240px; padding-right: 10px;}
+.index a.action:hover {color: #185B3D; transform: scale(1.05);}
+.index a.action i {transition: .2s;}
+.index a.action:hover i {transform: scale(1.3);}
 .index a.action .text {flex: 5;}
-.index a.action .text h2 {color: white; font-size: 14px;}
+.index a.action .text h2 {color: black; font-size: 14px;}
 .index a.action .text p {font-size: 13px;}
 .index input {width: 100%; padding-left: 50px; margin: 10px 0;}
 .index img.flow {position: fixed; top: 0; right: -520px; opacity: 0.8;}
-.index div.tags {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-block; border-radius: 25px; padding: 10px;}
+.index div.tags {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-block; border-radius: 20px; padding: 10px;}
 .index ul.tags {list-style: none; max-width: 400px;}
 .index ul.tags a {text-decoration: none;}
-.index ul.tags li {display: inline-block; border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px; margin: 7.5px; font-size: small; color: #185B3D; cursor: pointer; transition: 0.2s;}
+.index ul.tags li {display: inline-block; border: 1px solid #185B3D; border-radius: 20px; padding: 5px 10px; margin: 7.5px; font-size: small; color: #185B3D; cursor: pointer; transition: 0.2s;}
 .index ul.tags li:hover {background-color: rgba(221, 221, 221, 0.787);}
 
 
 /* Group home page */
-.groups .header {height: 300px; width: 100%; border-radius: 25px; background-size: cover; background-position: center center; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
-.groups .header .content {width: 100%; height: 100%; background: rgb(150,158,157); background: linear-gradient(180deg, rgba(150,158,157,1) 0%, rgba(150,158,157,0.8785889355742297) 24%, rgba(150,158,157,0.788953081232493) 39%, rgba(255,255,255,0) 100%);; border-radius: 25px; padding: 10px; color: white;}
+.groups .header {height: 300px; width: 100%; border-radius: 20px; background-size: cover; background-position: center center; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
+.groups .header .content {width: 100%; height: 100%; background: rgb(150,158,157); background: linear-gradient(180deg, rgba(150,158,157,1) 0%, rgba(150,158,157,0.8785889355742297) 24%, rgba(150,158,157,0.788953081232493) 39%, rgba(255,255,255,0) 100%);; border-radius: 20px; padding: 10px; color: white;}
 .groups .header .content h1 {color: white; font-size: 35px;}
 .groups .header .content img.logo {margin: 0 20px; width: 50px;}
 .groups .header .content .links {display: inline; float: right; padding-right: 10px; margin: 2.5px; font-size: 30px;}
-.groups .header .content .links a {color: white; padding: 10px; border: 1px solid transparent; border-radius: 25px; cursor: pointer;}
+.groups .header .content .links a {color: white; padding: 10px; border: 1px solid transparent; border-radius: 20px; cursor: pointer;}
 .groups .header .content .links a:hover {border-color: white;}
-.groups .header .minimap {position: relative; float: right; bottom: 100px; right: 50px; height: 200px; width: 200px; border-radius: 25px; background-size: contain; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
+.groups .header .minimap {position: relative; float: right; bottom: 100px; right: 50px; height: 200px; width: 200px; border-radius: 20px; background-size: contain; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 .groups #content hr {margin-top: 40px; margin-bottom: 30px; margin-right: 300px;}
 .groups #content button.primary {margin: 30px 10px 30px 0;}
 .groups #content .side-content {padding-top: 70px;}
@@ -317,8 +319,8 @@ ul.add-content li:hover {border-color: #185B3D;}
 /* Discussions */
 ul.discussions {padding: 0; margin: 15px 0;}
 ul.discussions>h2, ul.deadlines>h2 {display: none; padding: 5px; margin: 5px auto;}
-ul.discussions li {display: block; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0;}
-ul.discussions li>a {text-decoration: none; display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0; padding: 0 20px;}
+ul.discussions li {display: block; flex-direction: row; flex-wrap: wrap; border-radius: 20px; cursor: pointer; margin: 5px 0;}
+ul.discussions li>a {text-decoration: none; display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 20px; cursor: pointer; margin: 5px 0; padding: 0 20px;}
 ul.discussions li>a:hover {background: #F6F6F6;}
 ul.discussions li div.content {flex-direction: column; align-self: center; flex: 2; padding: 10px;}
 ul.discussions li div.content h3 {font-size: 15px;}
@@ -328,7 +330,7 @@ ul.discussions li div.content img {display: inline; padding-left: 20px;}
 ul.discussions li div.minimap {flex: 0; padding: 10px; margin: auto;}
 ul.discussions li div.minimap .unread {position: absolute; padding-left: 100px;}
 ul.discussions li div.minimap .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
-ul.discussions li div.minimap img {border-radius: 25px; width: 120px; height: 120px;}
+ul.discussions li div.minimap img {border-radius: 20px; width: 120px; height: 120px;}
 i.favourite {padding: 10px 20px 10px 10px; align-self: center; font-size: 20px; color: #dbdbdb;}
 i.favourite.favourited {color: #FEAE00;}
 ul.discussions li:hover i.favourite {color: #feae0054;}
@@ -346,7 +348,7 @@ div.categories input[type="checkbox"] {font-size: 30px; color: #185B3D;}
 
 /* Deadlines */
 ul.deadlines {padding: 0; margin: 15px 0;}
-ul.deadlines li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; cursor: pointer; margin: 5px 0; padding: 10px 0;}
+ul.deadlines li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 20px; cursor: pointer; margin: 5px 0; padding: 10px 0;}
 ul.deadlines li:hover {background: #F6F6F6;}
 ul.deadlines .date {flex: 2; color: #AC3E27; text-align: center; align-self: center;}
 ul.deadlines .date h3, ul.deadlines .date p {display: inline; margin: 0; color: #AC3E27;}
@@ -362,10 +364,10 @@ ul.deadlines .actions i {padding: 0;}
 /* Discussion */
 .discussion .content-wrapper {margin-bottom: 40px;}
 .discussion i.favourite {padding: 5px;}
-.discussion img.minimap {border-radius: 25px; width: 100%; border: 1px solid transparent; cursor: pointer; transition: 0.5s;}
+.discussion img.minimap {border-radius: 20px; width: 100%; border: 1px solid transparent; cursor: pointer; transition: 0.5s;}
 .discussion img.minimap:hover {transform: scale(1.02); box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 ul.thread {padding: 0;}
-ul.thread li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 25px; margin: 5px 0; padding: 10px 0;}
+ul.thread li {display: flex; flex-direction: row; flex-wrap: wrap; border-radius: 20px; margin: 5px 0; padding: 10px 0;}
 ul.thread li .poster-avatar {flex: 1;}
 ul.thread li .content {flex: 15;}
 ul.thread li .content, ul.thread li .poster-avatar {padding: 2px 10px;}
@@ -377,30 +379,30 @@ ul.thread li .content .post ul {list-style-type: circle; font-size: 14px;}
 ul.thread li .content .post ul li {margin: 2.5x 0; padding: 0; display: list-item;}
 ul.thread li .content .post .posted-image:first-of-type {margin-top: 10px;}
 ul.thread li .content .post .posted-image:last-of-type {margin-bottom: 10px;}
-ul.thread li .content .post .posted-image {border-radius: 25px; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); width: 200px; max-height: 200px; cursor: pointer; transition: .2s;}
+ul.thread li .content .post .posted-image {border-radius: 20px; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); width: 200px; max-height: 200px; cursor: pointer; transition: .2s;}
 ul.thread li .content .post .posted-image:hover {transform: scale(1.02); filter: brightness(105%) saturate(105%);}
 ul.thread li .post-actions {align-self: flex-end; margin: 5px 0 0 auto; text-align: end;}
-ul.thread li .post-actions button {border: none; outline: none; background-color: #eeeeee; border: 1px solid transparent; color: #588734; border-radius: 25px; opacity: .85;}
+ul.thread li .post-actions button {border: none; outline: none; background-color: #eeeeee; border: 1px solid transparent; color: #588734; border-radius: 20px; opacity: .85;}
 ul.thread li .post-actions button:hover {background-color: white; border-color: #eeeeee; opacity: 1;}
 ul.thread li .post-actions button.liked {background-color: #588734; color: white;}
-ul.thread li.reply .content {border: 0.5px solid #dbdada; border-radius: 25px; padding: 5px 0 0 0; overflow: hidden;}
+ul.thread li.reply .content {border: 0.5px solid #dbdada; border-radius: 20px; padding: 5px 0 0 0; overflow: hidden;}
 ul.thread li.reply:hover {background: none;}
 ul.thread li.reply .reply-footer {background-color: #f6f6f6; border-top-left-radius: 25px; border-top-right-radius: 25px; padding: 5px 10px 10px;}
 ul.thread li.reply ul.attachments {list-style: none; padding: 0;}
-ul.thread li.reply ul.attachments li {border: 0.5px solid #185B3D; border-radius: 25px; display: inline-block; background-color: white; color: #185B3D; padding: 2.5px 10px; margin-right: 5px; cursor: pointer;}
+ul.thread li.reply ul.attachments li {border: 0.5px solid #185B3D; border-radius: 20px; display: inline-block; background-color: white; color: #185B3D; padding: 2.5px 10px; margin-right: 5px; cursor: pointer;}
 ul.thread li.reply ul.attachments li:not(:last-child):after {padding-left: 5px; font-family: "Font Awesome 5 Pro"; font-weight: 400; content: "\f057";}
 ul.thread li.reply ul.attachments li:hover {background: #f0eeee;}
 ul.thread li.reply .post-wrapper .autosave {display: none; font-size: 12px; color: #c0c0c0; margin-right: 20px;}
-ul.thread li.load-more {display: block; margin: 10px auto; width: 150px; background-color: #EEEEEE; color: #226244; border-radius: 25px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); text-align: center; cursor: pointer;}
+ul.thread li.load-more {display: block; margin: 10px auto; width: 150px; background-color: #EEEEEE; color: #226244; border-radius: 20px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); text-align: center; cursor: pointer;}
 ul.thread li.load-more:hover {background-color: #FFFFFF;}
 ul.thread li.load-more p {margin: 0; padding: 0; font-size: 13px;}
 ul.thread a.add-content {display: inline-block; background-color: white; color: #185B3D; text-decoration: none;}
 ul.thread a.add-content i {padding: 0 2.5px;}
 ul.thread a.add-content:hover {background: #f0eeee;}
 ul.thread .post-wrapper {text-align: right;}
-ul.thread #post {display: inline-block; border: 0.5px solid #dbdada; background-color: white; color: #B2412B; outline: none; padding: 6.5px 10px; margin: 5px 0 0; border-radius: 25px; text-decoration: none;}
+ul.thread #post {display: inline-block; border: 0.5px solid #dbdada; background-color: white; color: #B2412B; outline: none; padding: 6.5px 10px; margin: 5px 0 0; border-radius: 20px; text-decoration: none;}
 ul.thread #post:hover {background: #f0eeee;}
-.widget .show-more {color: #555555; text-align: center; font-size: 14px; cursor: pointer; border-radius: 25px; width: 120px; margin: 0 auto;}
+.widget .show-more {color: #555555; text-align: center; font-size: 14px; cursor: pointer; border-radius: 20px; width: 120px; margin: 0 auto;}
 .widget .show-more:hover {background-color: #eeeeee;}
 
 
@@ -412,43 +414,43 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-discussion .main-content form {display: grid; grid-template-columns: 150px 1fr; grid-gap: 17px;}
 .new-discussion .main-content input, .new-discussion .main-content textarea {margin: 0;}
 .new-discussion .main-content form>input>button {grid-column: 2 / 3;}
-.new-discussion .main-content .minimap {height: 150px; width: 150px; border-radius: 25px; text-align: end; border: 1px solid transparent; cursor: pointer;}
+.new-discussion .main-content .minimap {height: 150px; width: 150px; border-radius: 20px; text-align: end; border: 1px solid transparent; cursor: pointer;}
 .new-discussion .main-content .minimap:hover {box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 .new-discussion div.radio {padding: 5px 20px;}
 .new-discussion div.category div.widget {margin: 0;}
-.new-discussion div.category.tags {background-color: #f8f6f6; border-radius: 25px; padding: 10px;}
+.new-discussion div.category.tags {background-color: #f8f6f6; border-radius: 20px; padding: 10px;}
 .new-discussion div.category.tags p {font-size: 12px; margin-left: 15px;}
 .new-discussion div.category.tags input[type="search"] {margin-left: 10px;}
 .locationModal img.map {width: 100%;}
-.locationModal div.controls {position: absolute; top: 0; right: 0; padding: 20px; width: 300px; border-radius: 25px; background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); margin: 5px;}
+.locationModal div.controls {position: absolute; top: 0; right: 0; padding: 20px; width: 300px; border-radius: 20px; background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); margin: 5px;}
 
 
 /* Browse issues */
 .browse-issues .map-controls {width: 250px;}
 .browse-issues div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
 .browse-issues ul.issues {list-style-type: none; margin: 0; padding: 0;}
-.browse-issues ul.issues li {display: inline-block; border-radius: 25px; cursor: pointer; margin: 5px 0; max-width: 45%; transition: .2s; min-width: 300px;}
+.browse-issues ul.issues li {display: inline-block; border-radius: 20px; cursor: pointer; margin: 5px 0; max-width: 45%; transition: .2s; min-width: 300px;}
 .browse-issues ul.issues li:hover {background: #F6F6F6; }
 .browse-issues ul.issues li a {display: flex; cursor: pointer; text-align: left; text-decoration: none;}
 .browse-issues ul.issues li a div.minimap {flex: 1; padding: 20px 10px;}
 .browse-issues ul.issues li a div.issue-content {flex: 5; padding: 10px; align-self: center;}
-.browse-issues ul.issues li a div.minimap img {border-radius: 25px; width: 100px; height: 100px;}
-.browse-issues ul.issues li a h2 {border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px;}
+.browse-issues ul.issues li a div.minimap img {border-radius: 20px; width: 100px; height: 100px;}
+.browse-issues ul.issues li a h2 {border: 1px solid #185B3D; border-radius: 20px; padding: 5px 10px;}
 .browse-issues ul.issues li a p {color: black;}
-.browse-issues a.embed {color: rgb(105, 105, 105); position: absolute; bottom: 0; right: 0; margin-right: 60px; padding: 5px; background-color: #eeeeeee5; -webkit-backdrop-filter: (5px); backdrop-filter: (5px); border-radius: 25px;}
+.browse-issues a.embed {color: rgb(105, 105, 105); position: absolute; bottom: 0; right: 0; margin-right: 60px; padding: 5px; background-color: #eeeeeee5; -webkit-backdrop-filter: (5px); backdrop-filter: (5px); border-radius: 20px;}
 
 
 /* Issue */
-.issue .section-title h1 {color: #185B3D; border: 1px solid #185B3D; border-radius: 25px; padding: 5px 10px 10px; font-size: 30px;}
+.issue .section-title h1 {color: #185B3D; border: 1px solid #185B3D; border-radius: 20px; padding: 5px 10px 10px; font-size: 30px;}
 .issue .title-wrapper textarea {border: none; border-radius: 10px; padding: 2.5px 10px; width: 100%;}
 .issue .main-content {max-width: 600px;}
 .issue .side-content {width: 250px; max-width: unset;}
-.issue .side-content img {border-radius: 25px; height: 100%;}
+.issue .side-content img {border-radius: 20px; height: 100%;}
 .issue .side-content button {position: fixed; align-self: center; display: block; margin: auto; bottom: 50px;}
 
 
 /* New idea */
-.new-idea #ideamap {height: -webkit-fill-available; border-radius: 25px; z-index: 1;}
+.new-idea #ideamap {height: -webkit-fill-available; border-radius: 20px; z-index: 1;}
 .new-idea .map-controls {display: none; position: absolute; top: 0; width: 400px; max-height: calc(100vh - 235px); overflow: scroll; z-index: 2;}
 .new-idea form input, .new-idea form textarea {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
 .new-idea form input {width: -webkit-fill-available;}
@@ -463,7 +465,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-idea .leaflet-popup-content div.post-actions {display: flex;}
 .new-idea .leaflet-popup-content a button {display: block; margin: 10px auto; text-decoration: none;}
 .new-idea .leaflet-popup-content a {text-decoration: none;}
-.new-idea button.like {background-color: #287622; color: white; border: none; outline: none; border-radius: 25px; padding: 3px 15px; margin: 9px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
+.new-idea button.like {background-color: #287622; color: white; border: none; outline: none; border-radius: 20px; padding: 3px 15px; margin: 9px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
 .new-idea button.like:hover {background-color: #348f2d;}
 .new-idea div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
 
@@ -471,14 +473,14 @@ ul.thread #post:hover {background: #f0eeee;}
 /* Library */
 ul.library {list-style-type: unstyled; padding-left: 0;}
 ul.library a {text-decoration: none;}
-ul.library li {display: inline-block; border-radius: 25px; width: 280px; height: 405px; overflow: hidden; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: .1s; margin: 5px 10px; cursor: pointer;}
+ul.library li {display: inline-block; border-radius: 20px; width: 280px; height: 405px; overflow: hidden; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: .1s; margin: 5px 10px; cursor: pointer;}
 ul.library li:hover {box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 ul.library li img {height: 230px; width: 280px;}
 ul.library li img.map {height: 100px;}
 ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
-.library input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 25px; margin: 10px 10px 20px; width: 100%;}
+.library input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 20px; margin: 10px 10px 20px; width: 100%;}
 .library div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
-.library-item img.minimap {border-radius: 25px; width: 100%;}
+.library-item img.minimap {border-radius: 20px; width: 100%;}
 
 
 /* Profile */
@@ -490,7 +492,7 @@ ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 
 
 /* Create account */
-.create-account .main-content {border: 1px solid #eeeeee; border-radius: 25px; max-width: 1000px; margin: 50px auto;}
+.create-account .main-content {border: 1px solid #eeeeee; border-radius: 20px; max-width: 1000px; margin: 50px auto;}
 .create-account ul.wizard {width: auto; margin: 0 auto 50px; display: block;}
 .create-account div.social-sign-in img {width: 400px; display: block; margin: 20px auto;}
 .create-account h3 {color: #AC3E27; font-size: 30px;}
@@ -511,7 +513,7 @@ ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 .planning-applications .widget {margin: 20px 0;}
 
 ul.planning-applications {list-style-type: unstyled; margin: 0; padding: 0;}
-ul.planning-applications li {display: flex; border-radius: 25px; overflow: hidden; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: .1s; margin: 10px 0; cursor: pointer;}
+ul.planning-applications li {display: flex; border-radius: 20px; overflow: hidden; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: .1s; margin: 10px 0; cursor: pointer;}
 ul.planning-applications li:hover {box-shadow: 2px 6px 12px -7px rgba(0, 0, 0, 0.075);}
 ul.planning-applications div.issue-content {padding: 5px 10px;}
 ul.planning-applications div.minimap {height: 160px;}
@@ -521,12 +523,12 @@ ul.planning-applications li h2 {margin: 10px 5px; padding: 0; color: black; font
 ul.planning-applications li p {font-size: 13px; margin: 10px 5px 15px;}
 ul.planning-applications li p.uid {font-style: italic;}
 ul.planning-applications li a {margin: 5px;}
-ul.planning-applications li a.convert {background-color: #185B3D; color: white; padding: 5px 10px; border-radius: 25px; text-decoration: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
+ul.planning-applications li a.convert {background-color: #185B3D; color: white; padding: 5px 10px; border-radius: 20px; text-decoration: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 ul.planning-applications li a.convert:hover {background-color: #39956c;}
-ul.planning-applications li a.hide {background-color: #dfdfdf; color: black; padding: 5px 10px; border-radius: 25px; text-decoration: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
+ul.planning-applications li a.hide {background-color: #dfdfdf; color: black; padding: 5px 10px; border-radius: 20px; text-decoration: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
 ul.planning-applications li a.hide:hover {background-color: #c7c7c7;}
 ul.application-types {list-style-type: none; padding: 0; margin: 0;}
-ul.application-types li {display: inline-block; padding: 2.5px 15px 2.5px 5px; margin: 2.5px; color: white; border-radius: 25px;}
+ul.application-types li {display: inline-block; padding: 2.5px 15px 2.5px 5px; margin: 2.5px; color: white; border-radius: 20px;}
 ul.application-types li label {color: white;}
 
 
@@ -671,8 +673,21 @@ ul.application-types li label {color: white;}
     #top-menu {display: flex;}
     
     div.location {margin: 5px 2.5px;}
+    div.search.expanded {width: 85vw;}
+    div.search.expanded input {font-size: 20px;}
 
     .index img.flow {display: none;}
+    .index .section-title img {display: none;}
+    .index .section-title {background-color: transparent;}
+    .index .title-wrapper .section-title {padding: 0;}
+    .index .jumbotron {margin-left: -30px; width: calc(100% + 60px); border-radius: 0;}
+
+    .index div.tags {margin-left: -30px; margin-top: 5px; width: calc(100% + 60px); background-color: #EEEEEE; border-radius: 0;}
+    .index ul.tags {width: 100%; max-width: unset;}
+    .index ul.tags li {background-color: white;}
+    .index .jumbotron {margin-bottom: 5px;}
+    .index .jumbotron p.description {font-size: 17px;}
+    .index .action-buttons i {color: #185B3D;}
 }
 
 @media (max-width: 992px) {
@@ -723,7 +738,8 @@ ul.application-types li label {color: white;}
 
     .index div.action {width: auto;}
     .index input {padding-left: 10px;}
-    .index .jumbotron {padding: 15px;}
+    .index .jumbotron {margin-left: -15px; width: calc(100% + 30px); padding: 15px;}
+    .index div.tags {margin-left: -15px; width: calc(100% + 30px);}
     .index .title-wrapper .section-title {display: inline-flex; margin-right: 15px; width: 100%;}
 
     .groups hr {display: none;}
@@ -747,7 +763,7 @@ ul.application-types li label {color: white;}
     ul.discussions li div.minimap img {width: 90px; height: 90px;}
     ul.discussions li div.minimap .unread {padding-left: 30px;}
 
-    .discussion .content-wrapper {padding: 5px; width: calc(100vw - 10px);}
+    .discussion .content-wrapper {padding: 5px; width: calc(100vw - 20px);}
     .discussion p.drop-cap:first-child:first-letter {font-size: 50px;}
     .discussion .drop-cap:first-child:first-letter {line-height: 41px;}
 
@@ -805,6 +821,11 @@ ul.application-types li label {color: white;}
     nav {overflow-y: scroll;}
 }
 
+@media (max-width: 550px) {
+    .index .action-buttons {display: block;}
+    .index .action-buttons a.action {width: 100%;}
+}
+
 @media (max-width: 414px) {
     div.geocoder input {width: 250px; font-size: 15px;}
     ul.discussions div.minimap {display: none;}
@@ -820,6 +841,7 @@ ul.application-types li label {color: white;}
     .index 
     button.primary {font-size: 12px; font-size: 14px; padding: 5px 8px 5px 12px;}
     nav li {padding: 8px 2.5px;}
+    div.search.expanded input {font-size: 15px;}
 }
 
 @media (max-width: 330px) {
