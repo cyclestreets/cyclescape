@@ -860,8 +860,15 @@ var cyclescapeui = (function ($) {
 				tinyMCE.activeEditor.selection.select(tinyMCE.activeEditor.getBody(), true);
 				tinyMCE.activeEditor.selection.collapse(false);
 				tinyMCE.activeEditor.focus();
-
 			});
+
+			// Demo for autosave appearing every now and then
+			setInterval(function() {
+				$('.autosave').fadeIn().css('display', 'inline-block');
+				setTimeout(function () {
+					$('.autosave').fadeOut();
+				}, 1500);
+			}, 4000);
 		},
 
 
