@@ -67,6 +67,23 @@
 </div>
 
 
+<div class="modal fade photoModal" id="photoModal" tabindex="-1">
+	<div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-lg-down">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">View attachment</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body unpadded">
+				<img class="map img-fluid" src="/images/placeholders/group-header.jpeg" />
+				<a class="original" href="images/placeholders/group-header.jpeg"><button class="button primary">View
+						original</button></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="modal fade locationModal" id="locationModal" tabindex="-1">
 	<div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-lg-down">
 		<div class="modal-content">
@@ -248,6 +265,8 @@
 										A1307
 										was
 										intended to be a quiet backwater to amble along.</p>
+									<img class="posted-image" data-bs-toggle="modal" data-bs-target="#photoModal"
+										src="images/placeholders/group-header.jpeg" />
 								</div>
 							</div>
 						</div>
@@ -352,7 +371,8 @@
 								<div class="reply-footer">
 									<ul class="attachments">
 										<li class="attachment"><i class="fas fa-fw fa-calendar"></i> Deadline/date</li>
-										<li class="attachment"><i class="fas fa-fw fa-paperclip"></i> attached_filename.doc</li>
+										<li class="attachment"><i class="fas fa-fw fa-paperclip"></i>
+											attached_filename.doc</li>
 										<li class="attachment"><i class="fas fa-fw fa-paperclip"></i> pres.ppt</li>
 										<li><a tabindex="0" class="add-content" href="javascript://"
 												title="Add more content" data-bs-container="body"
