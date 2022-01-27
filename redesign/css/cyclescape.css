@@ -231,6 +231,7 @@ form div.draganddrop input {position: absolute; margin: 0; padding: 0; width: 30
 .modal-content .modal-body.unpadded {padding: 0;}
 .modal-content .modal-body button.x {position: absolute; top: 0; right: 0; margin: 10px;}
 .modal-content .modal-body button.done {position: absolute; bottom: 0; right: 0;}
+.modal-content .modal-body a.original {position: absolute; bottom: 0; right: 0;}
 
 
 /* Popover */
@@ -371,6 +372,9 @@ ul.thread li .content a.timestamp:hover {text-decoration: underline;}
 ul.thread li .content .post {font-size: 14px; font-weight: 400;}
 ul.thread li .content .post ul {list-style-type: circle; font-size: 14px;}
 ul.thread li .content .post ul li {margin: 2.5x 0; padding: 0; display: list-item;}
+ul.thread li .content .post .posted-image:first-of-type {margin-top: 10px;}
+ul.thread li .content .post .posted-image {border-radius: 25px; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); width: 200px; max-height: 200px; cursor: pointer; transition: .2s;}
+ul.thread li .content .post .posted-image:hover {transform: scale(1.02); filter: brightness(105%) saturate(105%);}
 ul.thread li .post-actions {align-self: flex-end; margin: 5px 0 0 auto; text-align: end;}
 ul.thread li .post-actions button {border: none; outline: none; background-color: #eeeeee; border: 1px solid transparent; color: #588734; border-radius: 25px; opacity: .85;}
 ul.thread li .post-actions button:hover {background-color: white; border-color: #eeeeee; opacity: 1;}
