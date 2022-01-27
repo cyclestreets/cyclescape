@@ -37,7 +37,7 @@ body {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; padding:
 .title-wrapper .action-buttons {display: flex; padding: 10px; max-width: 400px;}
 
 .content-wrapper {display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;}
-.main-content {flex-direction: column; flex: 2; padding: 10px; margin-right: 40px;}
+.main-content {flex-direction: column; flex: 2; padding: 10px; margin-right: 40px; position: relative;}
 .main-content h2 {margin-top: 10px;}
 .main-content.full-screen {margin: 0 10px; height: calc(100vh - 300px); border-radius: 25px; padding: 0;}
 .side-content {display: flex; flex-direction: column; flex: 1; padding: 10px; max-width: 300px; z-index: 101;}
@@ -246,6 +246,7 @@ ul.add-content li {padding: 5px 10px; border: 1px solid transparent; border-radi
 ul.add-content li:hover {border-color: #185B3D;}
 
 
+
 /* iOS style segmented control */
 .ios-segmented-control {background: #eeeeee; border-radius: 30px; margin: 5px; padding: 2px; border: none; outline: none; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); cursor: pointer;}
 .ios-segmented-control .option {position: relative; cursor: pointer;}
@@ -437,23 +438,23 @@ ul.thread #post:hover {background: #f0eeee;}
 
 /* New idea */
 .new-idea #ideamap {height: -webkit-fill-available; border-radius: 25px; z-index: 1;}
-.new-idea .map-controls {display: none; width: 400px; max-height: calc(100vh - 235px); overflow: scroll; z-index: 2;}
+.new-idea .map-controls {display: none; position: absolute; top: 0; width: 400px; max-height: calc(100vh - 235px); overflow: scroll; z-index: 2;}
 .new-idea form input, .new-idea form textarea {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
 .new-idea form input {width: -webkit-fill-available;}
 .new-idea form textarea {width: 100%;}
 .new-idea form .light {font-size: 12px;}
-.new-idea form {overflow: scroll;}
+.new-idea form {overflow-y: scroll;}
+.new-idea form#content-view {overflow: hidden;}
 .new-idea .main-content.full-screen.full-map {height: calc(100vh - 325px);}
 .modal-content .modal-body button.done {position: relative; display: block; margin: 30px 10px 0;}
-.new-idea .geocoder {position: absolute; right: 30px; top: 320px; z-index: 3;}
-@media (min-width: 1570px) {
-    .new-idea .geocoder {right: unset; left: 1470px;}
-}
+.new-idea .geocoder {position: absolute; right: 5px; top: 5px; z-index: 3;}
 .new-idea .leaflet-popup-content img {height: 150px; border-radius: .5em; display: block; margin: 0 auto;}
+.new-idea .leaflet-popup-content div.post-actions {display: flex;}
 .new-idea .leaflet-popup-content a button {display: block; margin: 10px auto; text-decoration: none;}
 .new-idea .leaflet-popup-content a {text-decoration: none;}
+.new-idea .leaflet-popup-content button.like {background-color: #287622; color: white; border: none; outline: none; border-radius: 25px; padding: 3px 15px; margin: 9px 7.5px; font-weight: bold; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); transition: .1s;}
+.new-idea .leaflet-popup-content button.like:hover {background-color: #348f2d;}
 .new-idea div.controls ul.map-buttons li {padding: 10px 0 10px 0; text-align: center;}
-
 /* Library */
 ul.library {list-style-type: unstyled; padding-left: 0;}
 ul.library a {text-decoration: none;}
@@ -748,8 +749,6 @@ ul.application-types li label {color: white;}
     .new-discussion div.category.tags input {width: calc(100vw - 80px);}
     .new-discussion div.radio input {width: auto;}
 
-    .new-idea .geocoder {top: 336px; right: 12px;}
-
     .browse-issues ul.issues {margin-top: 0;}
     .browse-issues ul.issues li {display: block; max-width: unset;}
     .browse-issues .map-controls {width: unset;}
@@ -793,7 +792,7 @@ ul.application-types li label {color: white;}
 }
 
 @media (max-width: 414px) {
-    div.geocoder input {width: 270px;}
+    div.geocoder input {width: 250px; font-size: 15px;}
     ul.discussions div.minimap {display: none;}
     .side-content {width: 100vw;}
 
@@ -812,6 +811,5 @@ ul.application-types li label {color: white;}
 @media (max-width: 330px) {
     .side-content {left: 10px;}
     .widget.standalone {width: 270px;}
-    .new-idea .geocoder {top: 239px;}
 
 }
