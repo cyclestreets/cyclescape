@@ -376,6 +376,7 @@ ul.thread li .content .post {font-size: 14px; font-weight: 400;}
 ul.thread li .content .post ul {list-style-type: circle; font-size: 14px;}
 ul.thread li .content .post ul li {margin: 2.5x 0; padding: 0; display: list-item;}
 ul.thread li .content .post .posted-image:first-of-type {margin-top: 10px;}
+ul.thread li .content .post .posted-image:last-of-type {margin-bottom: 10px;}
 ul.thread li .content .post .posted-image {border-radius: 25px; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); width: 200px; max-height: 200px; cursor: pointer; transition: .2s;}
 ul.thread li .content .post .posted-image:hover {transform: scale(1.02); filter: brightness(105%) saturate(105%);}
 ul.thread li .post-actions {align-self: flex-end; margin: 5px 0 0 auto; text-align: end;}
@@ -732,9 +733,10 @@ ul.application-types li label {color: white;}
     .drop-cap:first-child:first-letter {padding-right: 3px;}
 
     .main-content {margin-right: 0; padding: 0 10px;}
-
+    .discussion .main-content {padding: 0 10px 0 0;}
+    
     ul.thread li {display: block; margin: 5px 0; padding: 10px 0;}
-    ul.thread li .content, ul.thread li .poster-avatar {padding: 0 4px;}
+    ul.thread li .content, ul.thread li .poster-avatar {padding: 0 4px 0 0;}
     ul.thread li.reply {display: block;}
     ul.thread li.reply .content {max-width: calc(100vw - 5px);}
 
