@@ -928,7 +928,12 @@ var cyclescapeui = (function ($) {
 					<p>Enim itaque harum ut aut sed aut et voluptas. Reiciendis et quia voluptate fuga recusandae sequi optio voluptas. Harum vitae alias consequatur ratione. Natus sapiente totam voluptas. Dolor ea qui culpa quo ratione vel.</p>
 					<img src="https://www.cyclestreets.net/location/1/cyclestreets1-size300.jpg" />
 					</form>
-					<a href="new-discussion.html?autofill"><button class="button primary">Start discussion on this</button></a>
+					<div class="post-actions">
+						<a href="new-discussion.html?autofill" title="Create a private discussion in your group about this idea"><button class="button primary">Start discussion on this</button></a>
+						<button class="like" title="Upvote this to show your support">
+							<i class="fas fa-fw fa-thumbs-up"></i> 3
+						</buttonc>
+					</div>
 				`
 				).on('click', function () {
 					// Do something
