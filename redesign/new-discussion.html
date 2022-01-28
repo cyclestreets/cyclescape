@@ -100,7 +100,23 @@
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
 			<div class="modal-body">
-				<p>Placeholder</p>
+				<table class="table">
+					<tbody>
+						<tr>
+							<th scope="row">Campaigning</th>
+							<td>Want something to change? Discuss issues, whether they are just a local street or
+								relevant to your whole city. You’ll need to set a map location.</td>
+						</tr>
+						<tr>
+							<th scope="row">Administration</th>
+							<td>Help your group organise general meetings or help with running the group.</td>
+						</tr>
+						<tr>
+							<th scope="row">General chat</th>
+							<td>Talk about bikes, fixing them, get route advice, and more.</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -203,15 +219,16 @@
 					<div class="radio" tabindex="0">
 						<input type="radio" id="campaigning" name="category" value="campaigning" required="required">
 						<label for="campaigning">Campaigning</label><br>
-						<input type="radio" id="administration" name="category" value="adminstration">
+						<input type="radio" id="administration" name="category" value="administration">
 						<label for="administration">Administration</label><br>
 						<input type="radio" id="general" name="category" value="general">
 						<label for="general">General chat</label>
 						<i data-bs-target="#categoryHelpModal" data-bs-toggle="modal"
 							class="help fas fa-info-circle"></i>
 					</div>
-					<label class="decorated" for="location"><i class="fas fa-fw fa-map-pin"> </i>Location</label>
-					<div class="category">
+					<label class="decorated locationControls" for="location"><i class="fas fa-fw fa-map-pin">
+						</i>Location</label>
+					<div class="category locationControls">
 						<img data-bs-toggle="modal" data-bs-target="#locationModal" class="minimap"
 							src="images/placeholders/minimap2.png" />
 						<br />

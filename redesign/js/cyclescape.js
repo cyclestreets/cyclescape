@@ -17,7 +17,8 @@ var cyclescapeui = (function ($) {
 		'discussion',
 		'newIdea',
 		'profile',
-		'newDiscussion'
+		'newDiscussion',
+		'issue'
 	];
 
 	// Class properties
@@ -801,6 +802,31 @@ var cyclescapeui = (function ($) {
 
 
 		// Page-specific initialisation
+		issue: function () {
+			// Initialise map
+			_map = L.map('map', {
+				zoomControl: false,
+				tap: false // c.f. https://stackoverflow.com/questions/65030691/click-event-fires-twice-for-item-inside-a-loop
+			}).setView([51.505, -0.09], 13);
+
+			// Add zoom control to bottom right
+			L.control.zoom({
+				position: 'bottomright'
+			}).addTo(_map);
+
+			// Load in a tile layer
+			L.tileLayer(`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${config.mapboxglAccessToken}`, {
+				attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+				maxZoom: 18,
+				id: 'mapbox/streets-v11',
+				tileSize: 512,
+				zoomOffset: -1,
+				accessToken: config.mapboxglAccessToken
+			}).addTo(_map);
+		},
+
+
+		// Page-specific initialisation
 		discussion: function () {
 			var addContentModal = new bootstrap.Modal(document.getElementById('addContentModal'), {})
 
@@ -873,6 +899,12 @@ var cyclescapeui = (function ($) {
 					$('.autosave').fadeOut();
 				}, 1500);
 			}, 4000);
+
+
+			// Clicking the load more button spins the spinner
+			$('li.load-more').on('click', function () {
+				$(this).find('p i').addClass('fa-spin');
+			});
 		},
 
 
@@ -971,6 +1003,17 @@ var cyclescapeui = (function ($) {
 				menubar: false,
 				skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
 				content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')
+			});
+
+			//  The Location row should fade out and disappear if Administration or General chat are selected. 
+			var hideLocationCategories = ['administration', 'general'];
+			$('form .radio').on('change', function () {
+				var selectedRadioButton = $('form .radio input[name="category"]:checked').val();
+				if (hideLocationCategories.includes(selectedRadioButton)) {
+					$('.locationControls').fadeOut();
+				} else {
+					$('.locationControls').fadeIn();
+				}
 			});
 
 		},

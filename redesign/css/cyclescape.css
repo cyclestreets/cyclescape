@@ -83,8 +83,8 @@ nav li.active {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.1
 nav li:hover {background-color: #ffffffa6;}
 nav select {appearance: none; -webkit-appearance: none; outline: 0; border: none; background-color: #eeeeee; color: #185B3D; font-size: 17px; cursor: pointer; width: 190px; padding: 10px 5px; margin: 2.5px 0; border-radius: 20px;}
 nav select:hover {background-color: #ffffffa6;}
-nav .unread {display: inline-block; width: 30px; margin-left: 5px; margin-right: 7.5px;}
-nav .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
+nav .unread {display: inline-block; width: 25px; margin-left: 50px; margin-right: 7.5px;}
+nav .unread p {margin: 0; border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 0 7px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75); font-size: 15px;}
 nav li.profile {padding: 2px 0;}
 nav .padding.bottom {margin-top: auto;}
 button#hamburger {display: none; position: fixed; padding: 10px; margin: 0 5px; border-radius: 100%; color: #AC3E27; font-size: 150%; width: 50px; height: 50px; border: none; outline: none; background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); transition: 0.2s; line-height: 1; z-index: 98;}
@@ -94,11 +94,16 @@ button#hamburger:hover {background-color: #eeeeee;}
 /* Search bar */
 div.search {position: fixed; z-index: 102; top: 5px; right: 0; margin-right: 15px; margin-left: 15px; height: 49.25px; width: 51.28px; margin-top: 5px; padding: 5px 5px 5px 9.5px; color: #AC3E27; font-size: 25px; font-weight: 300; border-radius: 100%; border: .5px solid rgba(128, 128, 128, 0.199); transition: box-shadow 1s; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); cursor: pointer; background-color: #FFFFFF;}
 div.search:hover {background-color: #eeeeee;}
-div.search.expanded {box-shadow: 0 0 0 1000px rgba(0,0,0,.3); box-shadow: 0 0 0 100vmax rgba(0,0,0,.3); padding: 5px 15px; width: 75vw; max-width: 1000px; background-color: white; border-radius: 20px;}
+div.search.expanded {box-shadow: 0 0 0 1000px rgba(0,0,0,.3); box-shadow: 0 0 0 100vmax rgba(0,0,0,.3); padding: 5px 15px; width: 75vw; max-width: 1000px; background-color: white; border-radius: 25px;}
 div.search.expanded:hover {background-color: white;}
 div.search input {-webkit-appearance: none; border: none; outline: none; font-size: 25px; width: calc(100% - 60px); display: none; transition: 1s;}
 div.search.expanded input {display: inline; background-color: #FFFFFF;}
 
+
+/* User login icon */
+div.login-button {position: fixed; z-index: 101; top: 5px; right: 80px; margin-top: 5px; padding: 5px 10px; color: #AC3E27; font-size: 25px; font-weight: 300; border-radius: 100%; border: .5px solid rgba(128, 128, 128, 0.199); transition: box-shadow 1s; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); cursor: pointer; background-color: #FFFFFF;}
+div.login-button a {color: #AC3E27;}
+div.login-button:hover {background-color: #eeeeee;}
 
 /* Filter bar */
 input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 20px; margin: 20px; width: 100%;}
@@ -288,13 +293,14 @@ ul.add-content li:hover {border-color: #185B3D;}
 .index a.action {margin: 10px; border: 1px solid #185B3D; width: 240px; padding-right: 10px; color: black; background-color: white; box-shadow: none; transition: .2s;}
 .index a.action:hover {color: #185B3D; transform: scale(1.05);}
 .index a.action:hover .text h2 {color: #185B3D;}
-.index a.action i {transition: .1s;}
+.index a.action i {transition: .2s;}
 .index a.action:hover i {transform: scale(1.3);}
 .index a.action .text {flex: 5;}
 .index a.action .text h2 {color: black; font-size: 14px;}
 .index a.action .text p {font-size: 13px;}
-.index input {width: 100%; padding-left: 50px; margin: 10px 0;}
+.index input#groups {width: 100%; padding-left: 50px; margin: 10px 0;}
 .index img.flow {position: fixed; top: 0; right: -520px; opacity: 0.8;}
+.index a {text-decoration: none;}
 .index div.tags {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); display: inline-block; border-radius: 20px; padding: 10px;}
 .index ul.tags {list-style: none; max-width: 400px;}
 .index ul.tags a {text-decoration: none;}
@@ -423,6 +429,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .new-discussion .main-content form>input>button {grid-column: 2 / 3;}
 .new-discussion .main-content .minimap {height: 150px; width: 150px; border-radius: 20px; text-align: end; border: 1px solid transparent; cursor: pointer;}
 .new-discussion .main-content .minimap:hover {box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
+.new-discussion .tox-editor-container {border: 1px solid #EEEEEE; border-radius: 20px; padding: 2.5px;}
 .new-discussion div.radio {padding: 5px 20px;}
 .new-discussion div.category div.widget {margin: 0;}
 .new-discussion div.category.tags {background-color: #f8f6f6; border-radius: 20px; padding: 10px;}
@@ -439,7 +446,9 @@ ul.thread #post:hover {background: #f0eeee;}
 .browse-issues ul.issues li {display: inline-block; border-radius: 20px; cursor: pointer; margin: 5px 0; max-width: 45%; transition: .2s; min-width: 300px;}
 .browse-issues ul.issues li:hover {background: #F6F6F6; }
 .browse-issues ul.issues li a {display: flex; cursor: pointer; text-align: left; text-decoration: none;}
-.browse-issues ul.issues li a div.minimap {flex: 1; padding: 20px 10px;}
+.browse-issues ul.issues li a div.minimap {flex: 1; padding: 20px 10px; position: relative;}
+.browse-issues ul.issues li a div.minimap .unread {position: absolute; padding-left: 8px;}
+.browse-issues ul.issues li a div.minimap .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 .browse-issues ul.issues li a div.issue-content {flex: 5; padding: 10px; align-self: center;}
 .browse-issues ul.issues li a div.minimap img {border-radius: 20px; width: 100px; height: 100px;}
 .browse-issues ul.issues li a h2 {border: 1px solid #185B3D; border-radius: 20px; padding: 5px 10px;}
@@ -452,8 +461,9 @@ ul.thread #post:hover {background: #f0eeee;}
 .issue .title-wrapper textarea {border: none; border-radius: 10px; padding: 2.5px 10px; width: 100%;}
 .issue .main-content {max-width: 600px;}
 .issue .side-content {width: 250px; max-width: unset;}
-.issue .side-content img {border-radius: 20px; height: 100%;}
+.issue .side-content #map {position: fixed; border-radius: 20px; height: calc(100vh - 300px);}
 .issue .side-content button {position: fixed; align-self: center; display: block; margin: auto; bottom: 50px;}
+.issue.geocoder {position: absolute; top: 0; left: 0;}
 
 
 /* New idea */
@@ -499,7 +509,7 @@ ul.library li h2 {margin: 10px 5px; padding: 0 5px; color: black; height: 55px;}
 
 
 /* Create account */
-.create-account .main-content {border: 1px solid #eeeeee; border-radius: 20px; max-width: 1000px; margin: 50px auto;}
+.create-account .main-content {border: 1px solid #eeeeee; border-radius: 20px; max-width: 1000px; margin: 50px auto; padding: 20px}
 .create-account ul.wizard {width: auto; margin: 0 auto 50px; display: block;}
 .create-account div.social-sign-in img {width: 400px; display: block; margin: 20px auto;}
 .create-account h3 {color: #AC3E27; font-size: 30px;}
@@ -530,9 +540,9 @@ ul.planning-applications li h2 {margin: 10px 5px; padding: 0; color: black; font
 ul.planning-applications li p {font-size: 13px; margin: 10px 5px 15px;}
 ul.planning-applications li p.uid {font-style: italic;}
 ul.planning-applications li a {margin: 5px;}
-ul.planning-applications li a.convert {background-color: #185B3D; color: white; padding: 5px 10px; border-radius: 20px; text-decoration: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
+ul.planning-applications li a.convert {display: inline-block; background-color: #185B3D; color: white; padding: 5px 10px; border-radius: 20px; text-decoration: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); margin: 5px;}
 ul.planning-applications li a.convert:hover {background-color: #39956c;}
-ul.planning-applications li a.hide {background-color: #dfdfdf; color: black; padding: 5px 10px; border-radius: 20px; text-decoration: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);}
+ul.planning-applications li a.hide {display: inline-block; background-color: #dfdfdf; color: black; padding: 5px 10px; border-radius: 20px; text-decoration: none; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); margin: 5px;}
 ul.planning-applications li a.hide:hover {background-color: #c7c7c7;}
 ul.application-types {list-style-type: none; padding: 0; margin: 0;}
 ul.application-types li {display: inline-block; padding: 2.5px 15px 2.5px 5px; margin: 2.5px; color: white; border-radius: 20px;}
@@ -543,6 +553,7 @@ ul.application-types li label {color: white;}
 @media (prefers-color-scheme: dark) {
     #top-menu {background-color: #AC3E27;}
     #top-menu h1 {color: white;}
+    #top-menu img {filter: invert(100%);}
     
     h1, h2 {color: #ce5740;}
     h3, h4, h5, h6, body, select, textarea, label {color: white;}
@@ -557,9 +568,11 @@ ul.application-types li label {color: white;}
     nav li.active {background-color: #63646d; box-shadow: 0 3px 8px 0 rgba(170, 170, 170, 0.12), 0 3px 1px 0 rgba(145, 145, 145, 0.04);}
     nav li:hover {background-color: #c0c0c0a6; color: white;}
 
-    div.search {background-color: #63646D; color: white;}
+    div.search, div.login-button {background-color: #63646D; color: white;}
+    div.login-button a {color: white;}
     div.search.expanded i {color: #963E2C;}
-    div.search:hover {background-color: rgb(167, 167, 167);}
+    div.search.expanded input[type="search"] {margin-top: 0;}
+    div.search:hover, div.login-button:hover {background-color: rgb(167, 167, 167);}
     div.search li {color: #963E2C;}
 
     button.primary {background-color: #ce5740; color: white;}
@@ -639,6 +652,7 @@ ul.application-types li label {color: white;}
     .index a.action p {color: black;}
     .index a.action i {color: black;}
     .index a.action:hover {background-color: #EEEEEE;}
+    .index a.action:hover .text h2 {color: black;}
     .index div.tags {background-color: #2d303e54;}
     .index ul.tags li {background-color: #1d8b5a; color: white; opacity: 0.8;}
     .index ul.tags li:hover {opacity: 1; background: #22b170;}
@@ -677,7 +691,8 @@ ul.application-types li label {color: white;}
 /* Responsive */
 @media (max-width: 1000px) {
     nav {display: none;}
-    div.search {z-index: 98;}
+    div.search {z-index: 99;}
+    div.login-button {z-index: 98;}
     button#hamburger {display: inline-block;}
     #content {margin-left: 0; margin-top: 60px;}
     #top-menu {display: flex;}
@@ -697,6 +712,7 @@ ul.application-types li label {color: white;}
     .index ul.tags li {background-color: white;}
     .index .jumbotron {margin-bottom: 5px;}
     .index .jumbotron p.description {font-size: 17px;}
+    .index .action-buttons {padding-top: 5px; padding-bottom: 5px;}
     .index .action-buttons i {color: #185B3D;}
 }
 
@@ -705,6 +721,7 @@ ul.application-types li label {color: white;}
     .index a.action {background-color: #676767;}
     .index a.action:hover {background-color: #838282;}
     .index a.action .text h2, .index a.action p, .index a.action i {color: white;}
+    .index a.action:hover .text h2 {color: white;}
     .index ul.tags li {background-color: #676767; color: white;}
 }
 
@@ -735,8 +752,9 @@ ul.application-types li label {color: white;}
     #top-menu {height: 65px; width: calc(100vw + 5px);}
     #top-menu h1 {font-size: 20px;}
     
-    div.search {margin-top: 0;}
+    div.search, div.login-button {margin-top: 0;}
     div.search.expanded input {margin-top: 0;}
+    
 
     .avatar {width: 35px;}
 
@@ -841,7 +859,7 @@ ul.application-types li label {color: white;}
 
 @media (max-width: 550px) {
     .index .action-buttons {display: block;}
-    .index .action-buttons a.action {width: 100%;}
+    .index .action-buttons a.action {width: 93%;}
 }
 
 @media (max-width: 414px) {
@@ -850,6 +868,8 @@ ul.application-types li label {color: white;}
     ul.discussions div.minimap {display: none;}
     .side-content {width: 100vw;}
 
+    .index #top-menu h1 {display: none;}
+    .index .section-title {text-align: center;}
     .index .section-title img {width: 30px;}
     .index .section-title h4 {font-size: 25px;}
     .index .section-title h1 {font-size: 29px;}
