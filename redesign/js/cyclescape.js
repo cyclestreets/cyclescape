@@ -130,8 +130,12 @@ var cyclescapeui = (function ($) {
 		closeNav: function () {
 			// Close group change popover
 			var exampleTriggerEl = document.getElementById('group-popover')
-			var popover = bootstrap.Popover.getOrCreateInstance(exampleTriggerEl) // Returns a Bootstrap popover instance
-			popover.hide();
+			try {
+				var popover = bootstrap.Popover.getOrCreateInstance(exampleTriggerEl) // Returns a Bootstrap popover instance
+				popover.hide();
+			} catch (e) {
+				// No popover found
+			}
 
 			// Close menu
 			$('#shade').fadeOut();
@@ -893,7 +897,7 @@ var cyclescapeui = (function ($) {
 			});
 
 			// Demo for autosave appearing every now and then
-			setInterval(function() {
+			setInterval(function () {
 				$('.autosave').fadeIn().css('display', 'inline-block');
 				setTimeout(function () {
 					$('.autosave').fadeOut();
