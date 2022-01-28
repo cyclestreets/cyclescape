@@ -903,7 +903,7 @@ var cyclescapeui = (function ($) {
 
 			// Clicking the load more button spins the spinner
 			$('li.load-more').on('click', function () {
-				$(this).find('p i').addClass('fa-spin');
+				$(this).find('p i').fadeIn().css('display', 'inline-block').addClass('fa-spin');
 			});
 		},
 
