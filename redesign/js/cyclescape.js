@@ -18,7 +18,7 @@ var cyclescapeui = (function ($) {
 		'newIdea',
 		'profile',
 		'newDiscussion',
-		'issue'
+		'topic'
 	];
 
 	// Class properties
@@ -802,7 +802,7 @@ var cyclescapeui = (function ($) {
 
 
 		// Page-specific initialisation
-		issue: function () {
+		topic: function () {
 			// Initialise map
 			_map = L.map('map', {
 				zoomControl: false,
