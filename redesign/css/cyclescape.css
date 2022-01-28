@@ -10,7 +10,7 @@ input, select, textarea {font-size: 15px;}
 p.light {font-weight: 300;}
 p a {color: #AC3E27;}
 
-.drop-cap:first-child:first-letter {color: #AC3E27; float: left; line-height: 41px; padding-top: 4px; padding-right: 8px; padding-left: 3px;}
+.drop-cap:first-child:first-letter {color: #AC3E27; float: left; line-height: 41px; padding-top: 4px; padding-right: 8px;}
 p.drop-cap:first-child:first-letter {font-size: 46px;}
 h3.drop-cap:first-child:first-letter {font-size: 46px; line-height: 30px;}
 a.text {color: #AC3E27;}
