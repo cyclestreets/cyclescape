@@ -285,10 +285,10 @@ ul.add-content li:hover {border-color: #185B3D;}
 .index .title-wrapper .section-title {flex: unset;}
 .index .jumbotron {background-color: #ac3d27df; color: white; padding: 30px; border-radius: 20px; margin-top: 30px; margin-bottom: 30px; max-width: 1200px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);}
 .index .jumbotron p.description {font-size: 20px;}
-.index a.action {color: black; background-color: white; box-shadow: none; transition: .2s;}
-.index a.action {margin: 5px; border: 1px solid #EEEEEE; width: 240px; padding-right: 10px;}
+.index a.action {margin: 10px; border: 1px solid #185B3D; width: 240px; padding-right: 10px; color: black; background-color: white; box-shadow: none; transition: .2s;}
 .index a.action:hover {color: #185B3D; transform: scale(1.05);}
-.index a.action i {transition: .2s;}
+.index a.action:hover .text h2 {color: #185B3D;}
+.index a.action i {transition: .1s;}
 .index a.action:hover i {transform: scale(1.3);}
 .index a.action .text {flex: 5;}
 .index a.action .text h2 {color: black; font-size: 14px;}
@@ -377,8 +377,15 @@ ul.thread li .content a.timestamp:hover {text-decoration: underline;}
 ul.thread li .content .post {font-size: 14px; font-weight: 400;}
 ul.thread li .content .post ul {list-style-type: circle; font-size: 14px;}
 ul.thread li .content .post ul li {margin: 2.5x 0; padding: 0; display: list-item;}
-ul.thread li .content .post .posted-image:first-of-type {margin-top: 10px;}
-ul.thread li .content .post .posted-image:last-of-type {margin-bottom: 10px;}
+ul.thread li .content .post div.image {position: relative; display: inline-block;}
+ul.thread li .content .post div.image:hover i.expand {background-color: #dddbdb;}
+ul.thread li .content .post div.image i {padding: 5px; margin: 5px; border-radius: 20px; background-color: #EEEEEE; transition: .2s; cursor: pointer;}
+ul.thread li .content .post div.image i:hover {background-color: #cecece;}
+ul.thread li .content .post div.image a {color: #588734;}
+ul.thread li .content .post div.image .download {position: absolute; bottom: 0; right: 0;}
+ul.thread li .content .post div.image .expand {position: absolute; top: 0; right: 0;}
+ul.thread li .content .post div.image:first-of-type {margin-top: 10px;}
+ul.thread li .content .post div.image:last-of-type {margin-bottom: 10px;}
 ul.thread li .content .post .posted-image {border-radius: 20px; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04); width: 200px; max-height: 200px; cursor: pointer; transition: .2s;}
 ul.thread li .content .post .posted-image:hover {transform: scale(1.02); filter: brightness(105%) saturate(105%);}
 ul.thread li .post-actions {align-self: flex-end; margin: 5px 0 0 auto; text-align: end;}
@@ -629,6 +636,9 @@ ul.application-types li label {color: white;}
     .browse-issues ul.issues li h2 {background-color: #1d8b5a; color: white;}
     .browse-issues ul.issues li a p {color: white;}
 
+    .index a.action p {color: black;}
+    .index a.action i {color: black;}
+    .index a.action:hover {background-color: #EEEEEE;}
     .index div.tags {background-color: #2d303e54;}
     .index ul.tags li {background-color: #1d8b5a; color: white; opacity: 0.8;}
     .index ul.tags li:hover {opacity: 1; background: #22b170;}
@@ -688,6 +698,14 @@ ul.application-types li label {color: white;}
     .index .jumbotron {margin-bottom: 5px;}
     .index .jumbotron p.description {font-size: 17px;}
     .index .action-buttons i {color: #185B3D;}
+}
+
+@media (prefers-color-scheme: dark) and (max-width: 1000px) {
+    .index div.tags {background-color: #3E464A;}
+    .index a.action {background-color: #676767;}
+    .index a.action:hover {background-color: #838282;}
+    .index a.action .text h2, .index a.action p, .index a.action i {color: white;}
+    .index ul.tags li {background-color: #676767; color: white;}
 }
 
 @media (max-width: 992px) {
