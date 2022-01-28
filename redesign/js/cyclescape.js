@@ -26,6 +26,7 @@ var cyclescapeui = (function ($) {
 	var _pageScroll = 0; // Save page scroll when opening an overlay on mobile
 	var _sideContentHtml = '';
 	const isIOSSafari = !!window.navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+	var _scrollProgress = 0; // Track scroll progress to hide filter button when we are low down
 
 	var _map = null; // Leaflet map
 	var _addIdeaMarker = null; // Save the Leaflet marker in newIdea
@@ -909,6 +910,26 @@ var cyclescapeui = (function ($) {
 			$('li.load-more').on('click', function () {
 				$(this).find('p i').fadeIn().css('display', 'inline-block').addClass('fa-spin');
 			});
+
+			// Hide the filter button when we are at the bottom of the page (i.e. in reply reply box)
+			$(window).on('scroll', function (e) {
+				var scrollTop = $(window).scrollTop();
+				var docHeight = $(document).height();
+				var winHeight = $(window).height();
+				var scrollPercent = (scrollTop) / (docHeight - winHeight);
+				_scrollProgress = Math.round(scrollPercent * 100);
+				cyclescapeui.updateScrollProgress ();
+			});
+		},
+
+		
+		// Hide side content button if we are at the bottom of the page
+		updateScrollProgress: function () {
+			if (_scrollProgress > 80) {
+				$('.show-side-content').fadeOut();
+			} else {
+				$('.show-side-content').fadeIn();
+			}
 		},
 
 
