@@ -448,7 +448,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .browse-issues ul.issues li:hover {background: #F6F6F6; }
 .browse-issues ul.issues li a {display: flex; cursor: pointer; text-align: left; text-decoration: none;}
 .browse-issues ul.issues li a div.minimap {flex: 1; padding: 20px 10px; position: relative;}
-.browse-issues ul.issues li a div.minimap .unread {position: absolute; padding-left: 8px;}
+.browse-issues ul.issues li a div.minimap .unread {position: absolute; right: 17px;}
 .browse-issues ul.issues li a div.minimap .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 .browse-issues ul.issues li a div.issue-content {flex: 5; padding: 10px; align-self: center;}
 .browse-issues ul.issues li a div.minimap img {border-radius: 20px; width: 100px; height: 100px;}
