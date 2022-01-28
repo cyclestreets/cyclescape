@@ -35,12 +35,20 @@
 	<!-- Animations -->
 	<link rel="stylesheet" href="vendor/animate-4.1.1/animate.min.css" />
 
+	<!-- Leaflet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+		integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+		crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+		integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+		crossorigin=""></script>
+
 	<!-- UI -->
 	<script src="/.config.js" type="text/javascript"></script>
 	<script src="/js/cyclescape.js" type="text/javascript"></script>
 	<script>
 		$(function () {
-			cyclescapeui.initialise(config);
+			cyclescapeui.initialise(config, 'issue');
 		});
 	</script>
 
@@ -75,7 +83,7 @@
 				<li class="active"><i class="fas fa-fw fa-hashtag"></i>Browse topics</li>
 			</a>
 			<hr>
-						<a href="planning-applications.html">
+			<a href="planning-applications.html">
 				<li><i class="fas fa-fw fa-sign"></i>Planning applications</li>
 			</a>
 			<a href="ideas.html">
@@ -243,11 +251,110 @@
 							</div>
 						</a>
 					</li>
+					<li>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
+							</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
+							</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
+							</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
+							</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="discussion.html">
+							<div class="content">
+								<h3 class="drop-cap">York Way: road safety changes</h3>
+								<p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+								<p class="italic">Hyperweaver posted one day ago</p>
+								<ul class="tags">
+									<li class="tag">Activism</li>
+									<li class="tag">Chisholm trail</li>
+								</ul>
+							</div>
+							<div class="minimap">
+								<div class="unread">
+									<p>5</p>
+								</div>
+								<img src="/images/placeholders/minimap2.png" />
+							</div>
+						</a>
+					</li>
 				</ul>
 			</div>
 
 			<div class="side-content">
-				<img src="images/placeholders/map.png" />
+				<div id="map"></div>
+				<div class="geocoder" id="geocoder absolute top-right">
+					<i class="fas fa-fw fa-search"></i>
+					<input type="search" placeholder="Search for a place or postcode" />
+				</div>
 				<button class="primary">Browse beyond Cambridge…</button>
 			</div>
 
