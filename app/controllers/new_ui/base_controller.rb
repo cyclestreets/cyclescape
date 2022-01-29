@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module NewUi
-  class ApplicationController < ::ActionController::Base
+  class BaseController < ApplicationController
     layout "application_new_ui"
   end
 end

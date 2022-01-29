@@ -1,5 +1,5 @@
 //= require constants
-//= require jquery3
+//= require jquery
 //= require popper
 //= require bootstrap
 //= require rails-ujs

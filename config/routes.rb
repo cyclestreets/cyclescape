@@ -54,6 +54,10 @@ Rails.application.routes.draw do
 
   issues_route
 
+  namespace :new_ui do
+    resources :groups, only: :index
+  end
+
   namespace :admin do
     get "templates/:template", to: "templates#show", as: :template
     resources :groups do
