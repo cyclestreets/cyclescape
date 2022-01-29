@@ -191,7 +191,7 @@ ul.checkboxes {list-style: none; margin: 0; padding: 0;}
 .widget h2 {padding: 0 15px 0 0; margin: 0; font-weight: normal; font-size: 18px;}
 .widget .widget-content {padding: 10px;}
 .widget .widget-content.padded {padding: 10px 12.5px;}
-.widget input {margin-bottom: 0};
+.widget input {margin-bottom: 0;}
 .widget button.primary {margin-bottom: 10px;}
 
 .avatar {width: 40px;}
@@ -274,7 +274,7 @@ ul.add-content li:hover {border-color: #185B3D;}
 .ios-segmented-control .option label span {display: block; position: relative; z-index: 2; -webkit-transition: all .2s ease; transition: all .2s ease; will-change: transform;}
 .ios-segmented-control .option label span {font-family: 'Font Awesome\ 5 Pro', sans-serif;}
 .ios-segmented-control.adjustable-icons .option label span {margin: 10px;}
-.ios-segmented-control .option input:checked+label::before, .ios-segmented-control .option input:checked+label::after {background: var(--background);z-index: 1;}
+.ios-segmented-control .option input:checked+label::before, .ios-segmented-control .option input:checked+label::after {background: rgba(142,142,147,.15); z-index: 1;}
 .ios-segmented-control .option input:checked+label {cursor: default;}
 
 
@@ -346,7 +346,7 @@ div.location {width: 100px; height: 100px; display: inline-block; margin: 5px;}
 div.location img {position: absolute; width: 100px; height: 100px; border-radius: 100%;}
 div.location.unchecked img {-webkit-filter: grayscale(100%); filter: grayscale(100%); opacity: 0.7;}
 div.location input {position: absolute; margin-top: 77px; font-size: 200%;}
-div.location input::not(:checked)::before {display: none;}
+div.location input:not(:checked)::before {display: none;}
 div.location i {position: absolute; margin: 73px; padding: 0; font-size: 23px; border-radius: 100%; border: 1px solid transparent; cursor: pointer; color: #AC3E27;}
 div.location i:hover {color: #f5310a;}
 div.categories input[type="checkbox"] {font-size: 30px; color: #185B3D;}
@@ -382,7 +382,7 @@ ul.thread li .content a.timestamp {font-style: italic; text-decoration: none; fo
 ul.thread li .content a.timestamp:hover {text-decoration: underline;}
 ul.thread li .content .post {font-size: 14px; font-weight: 400;}
 ul.thread li .content .post ul {list-style-type: circle; font-size: 14px;}
-ul.thread li .content .post ul li {margin: 2.5x 0; padding: 0; display: list-item;}
+ul.thread li .content .post ul li {margin: 2.5px 0; padding: 0; display: list-item;}
 ul.thread li .content .post div.image {position: relative; display: inline-block;}
 ul.thread li .content .post div.image:hover i.expand {background-color: #dddbdb;}
 ul.thread li .content .post div.image i {padding: 5px; margin: 5px; border-radius: 20px; background-color: #EEEEEE; transition: .2s; cursor: pointer;}
@@ -454,7 +454,7 @@ ul.thread #post:hover {background: #f0eeee;}
 .browse-issues ul.issues li a div.minimap img {border-radius: 20px; width: 100px; height: 100px;}
 .browse-issues ul.issues li a h2 {border: 1px solid #185B3D; border-radius: 20px; padding: 5px 10px;}
 .browse-issues ul.issues li a p {color: black;}
-.browse-issues a.embed {color: rgb(105, 105, 105); position: absolute; bottom: 0; right: 0; margin-right: 60px; padding: 5px; background-color: #eeeeeee5; -webkit-backdrop-filter: (5px); backdrop-filter: (5px); border-radius: 20px;}
+.browse-issues a.embed {color: rgb(105, 105, 105); position: absolute; bottom: 0; right: 0; margin-right: 60px; padding: 5px; background-color: #eeeeeee5; -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); border-radius: 20px;}
 
 
 /* Issue */
@@ -812,7 +812,7 @@ ul.application-types li label {color: white;}
     .new-discussion .main-content input, .new-discussion .main-content textarea {width: calc(100vw - 40px);}
     .new-discussion .content-wrapper {padding: 5px; width: calc(100vw - 10px);}
     form .radio, form .category {display: block;}
-    .new-discussion div.radio, .new-discussion div.category.tags {width: calc(100vw - 40px)};
+    .new-discussion div.radio, .new-discussion div.category.tags {width: calc(100vw - 40px);}
     .new-discussion div.category.tags input {width: calc(100vw - 80px);}
     .new-discussion div.radio input {width: auto;}
 
