@@ -31,6 +31,13 @@ module Photo
     default_thumb("50x50>")
   end
 
+  def photo_preview_height
+    self["photo_preview_height"] || update(photo_preview_height: photo_preview.height) && photo_preview.height
+  rescue Dragonfly::Job::Fetch::NotFound
+    nil
+  end
+
+
   private
 
   def default_thumb(resize_options)

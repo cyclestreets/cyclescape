@@ -109,7 +109,7 @@ group :development do
   gem "ruby_parser"
 
   # For memory profiling
-  gem "rack-mini-profiler", require: false
+  gem "rack-mini-profiler"
 
   gem "memory_profiler"
 

@@ -1,6 +1,7 @@
 %figure.photo
   = link_to thread_cyclestreets_photo_path(component.message.thread, component), target: "_blank" do
     = image_tag component.photo_preview.url,
+        height: component.photo_preview_height,
         alt: t(".photo_alt", caption: component.caption)
   %figcaption
     = simple_format(component.caption)

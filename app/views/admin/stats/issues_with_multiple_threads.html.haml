@@ -1,0 +1,10 @@
+%table
+  %thead
+    %th Issue
+    %th Tags (on the issue only)
+  %tbody
+    - @issues_with_multiple_threads.each do |issue|
+      %tr
+        %td= link_to issue.title, issue
+        %td= issue.tag_names.compact
+

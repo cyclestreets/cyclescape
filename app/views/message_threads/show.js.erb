@@ -1,6 +1,14 @@
 var lastViewedMessageIdDom = document.querySelector('[data-view-message-id]')
 var curScrollPos = lastViewedMessageIdDom.scrollTop;
 var oldScroll = lastViewedMessageIdDom.scrollHeight - lastViewedMessageIdDom.clientHeight;
-$('[data-initially-loaded-from]').replaceWith('<%= escape_javascript render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true %>')
+
+var initiallyLoaded = $('[data-initially-loaded-from]')
+initiallyLoaded.after('<%= escape_javascript render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true %>')
+<% if @initially_loaded_from %>
+initiallyLoaded[0].dataset.initiallyLoadedFrom = '<%= @initially_loaded_from %>'
+<% else %>
+initiallyLoaded.remove()
+<% end %>
+
 var newScroll = lastViewedMessageIdDom.scrollHeight - lastViewedMessageIdDom.clientHeight
 lastViewedMessageIdDom.scrollTop = curScrollPos + (newScroll - oldScroll)

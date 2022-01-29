@@ -6,8 +6,8 @@
 //
 //= require constants
 //= require jquery
+//= require intersection-observer/intersection-observer
 //= require rails-ujs
-//= require jquery.cookie
 //= require jquery.selectboxes
 //= require jquery.extentions
 //= require jquery-ui/autocomplete
@@ -16,6 +16,7 @@
 //= require jquery-ui/dialog
 //= require jquery-ui/slider
 //= require cocoon
+//= require js-cookie/src/js.cookie
 //= require cocoon_fields
 //= require timeago
 //= require tinymce-jquery

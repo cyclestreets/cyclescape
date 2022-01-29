@@ -8,6 +8,7 @@
     "cropperjs": "^1.5.11",
     "intersection-observer": "^0.11.0",
     "jquery-ui-timepicker-addon": "1.5.5",
+    "js-cookie": "^2.2.1",
     "jsdom": "^9.0.0",
     "knockout": "^3.5.1",
     "leaflet-draw": "0.4.7",

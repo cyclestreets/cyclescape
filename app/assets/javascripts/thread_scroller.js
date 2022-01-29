@@ -6,17 +6,28 @@ $(document).ready(function () {
     lastViewedMessage && lastViewedMessage.scrollIntoView()
   }
   var initiallyLoadedFrom = document.querySelector('[data-initially-loaded-from]')
-  if (initiallyLoadedFrom && lastViewedMessage) {
+  if (initiallyLoadedFrom) {
     var options = {
-      rootMargin: '-65px 0px 0px 0px',
-      threshold: 1.0
+      rootMargin: '1500px 0px 0px 0px',
+      threshold: 0
     }
     var obs = new IntersectionObserver(function (entries) {
-      if (lastViewedMessage && entries[0] && entries[0].isIntersecting) {
-        $.ajax({url: window.location.pathname, data: {initiallyLoadedFrom: document.querySelector('[data-initially-loaded-from]').dataset.initiallyLoadedFrom}, dataType: 'script'})
-        obs.unobserve(lastViewedMessage)
+      if (entries[0] && entries[0].isIntersecting) {
+        obs.unobserve(initiallyLoadedFrom)
+        $.ajax(
+          {
+            url: window.location.pathname,
+            data: {initiallyLoadedFrom: document.querySelector('[data-initially-loaded-from]').dataset.initiallyLoadedFrom},
+            dataType: 'script'
+          }
+        ).then(function() {
+          initiallyLoadedFrom = document.querySelector('[data-initially-loaded-from]')
+          if (initiallyLoadedFrom) {
+            obs.observe(initiallyLoadedFrom)
+          }
+        })
       }
     }, options)
-    obs.observe(lastViewedMessage)
+    obs.observe(initiallyLoadedFrom)
   }
 })
