@@ -63,6 +63,9 @@ gem "redis-rails"
 gem "resque"
 gem "resque-retry"
 gem "resque-rollbar"
+# We get: "No route matches [GET] "/fonts/tinymce.woff" on higher versions,
+# maybe related to #478 on sprockets-rails
+gem "sprockets-rails", "= 3.2.2"
 gem "thin"
 gem "thumbs_up", "~> 0.4.6"
 gem "whenever"

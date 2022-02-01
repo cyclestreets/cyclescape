@@ -345,7 +345,7 @@ GEM
     pg_query (1.2.0)
     pghero (2.7.0)
       activerecord (>= 5)
-    popper_js (1.16.0)
+    popper_js (2.9.3)
     pr_geohash (1.0.0)
     progress_bar (1.3.0)
       highline (>= 1.6, < 3)
@@ -549,9 +549,9 @@ GEM
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
-    sprockets-rails (3.4.2)
-      actionpack (>= 5.2)
-      activesupport (>= 5.2)
+    sprockets-rails (3.2.2)
+      actionpack (>= 4.0)
+      activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     stackprof (0.2.12)
     sunspot (2.4.0)
@@ -699,6 +699,7 @@ DEPENDENCIES
   shoulda-matchers
   spring
   spring-commands-rspec
+  sprockets-rails (= 3.2.2)
   stackprof
   sunspot_rails (= 2.4.0)
   sunspot_solr (= 2.4.0)
