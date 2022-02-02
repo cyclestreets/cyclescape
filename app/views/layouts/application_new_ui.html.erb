@@ -22,9 +22,6 @@
       <meta content="<%= page_title.gsub(" - #{@site_config.application_name}", "") %>" property="og:title"/>
     <% end %>
     <meta content="<%= @site_config.application_name %>" property="og:site_name"/>
-
-    <!-- Animations -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   </head>
   <body class=<% [Rails.env, controller_path.tr("/_", "-")].join(" ") %>>
     <%= render "layouts/header" %>
