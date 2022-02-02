@@ -1056,4 +1056,8 @@ var cyclescapeui = (function ($) {
     },
 
   };
-}(jQuery));
+}(jQuery))
+
+$(function () {
+  cyclescapeui.initialise()
+})
