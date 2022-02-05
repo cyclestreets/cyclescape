@@ -25,3 +25,6 @@
   </head>
   <body class=<% [Rails.env, controller_path.tr("/_", "-")].join(" ") %>>
     <%= render "layouts/header" %>
+    <%= yield %>
+  </body>
+</html>
