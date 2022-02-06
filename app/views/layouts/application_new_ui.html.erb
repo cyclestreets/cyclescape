@@ -23,7 +23,7 @@
     <% end %>
     <meta content="<%= @site_config.application_name %>" property="og:site_name"/>
   </head>
-  <body class=<% [Rails.env, controller_path.tr("/_", "-")].join(" ") %>>
+  <body class="<%= [Rails.env, controller_path.tr("/_", "-")].join(" ") %>">
     <%= render "layouts/header" %>
     <%= yield %>
   </body>
