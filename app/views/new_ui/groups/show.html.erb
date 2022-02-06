@@ -4,9 +4,9 @@
       <%= image_tag("placeholders/group-logo.png", class: "logo inline") %>
       <h1 class="inline"><%= @group.name %></h1>
       <div class="links">
-        <a href="#"><i class="fa fa-fw fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-fw fa-facebook-square"></i></a>
-        <a href="#"><i class="fa fa-fw fa-globe-europe"></i></a>
+        <a href="#"><i class="fab fa-fw fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-fw fa-facebook-square"></i></a>
+        <a href="#"><i class="fas fa-fw fa-globe-europe"></i></a>
       </div>
     </div>
     <div class="minimap" style="background-image: url('/images/placeholders/minimap.png');"></div>
@@ -18,7 +18,7 @@
       <a href="create-account.html"><button class="primary">Join our discussions<i
                                             class="fas fa-fw fa-user-plus"></i></button></a>
       <% if current_user && @group.committee_members.include?(current_user) %>
-        <button class="primary">Edit page<i class="fas fa-fw fa-pencil"></i></button>
+        <button class="primary">Edit page<i class="fas fa-fw fa-pencil-alt"></i></button>
         <br>
       <% end %>
       <a class="action" href="discussions.html">
