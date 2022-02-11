@@ -9,14 +9,30 @@
         <a href="#"><i class="fas fa-fw fa-globe-europe"></i></a>
       </div>
     </div>
-    <div class="minimap" style="background-image: url('/images/placeholders/minimap.png');"></div>
+    <% if (profile = @group.profile) && profile.location %>
+      <% map_id = "leaflet-#{dom_id(@group)}" %>
+      <div class="minimap" id="<%= map_id %>">
+        <div class="hidden">
+          <div
+            class="map-data"
+            data-center="<%= location_to_geojson(profile.location)%>"
+            data-opts="<%={ domid: map_id, hidelayers: true, feature: item_to_geojson(profile), hidezoom: true }.to_json%>">
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
   <hr>
   <div class="content-wrapper">
     <div class="main-content">
-      <p class="light drop-cap"><%= auto_link simple_format @group.description %></p>
-      <a href="create-account.html"><button class="primary">Join our discussions<i
-                                            class="fas fa-fw fa-user-plus"></i></button></a>
+      <div class="light drop-cap">
+        <%= auto_link simple_format @group.description %>
+      </div>
+      <a href="create-account.html">
+          <button class="primary">Join our discussions
+            <i class="fas fa-fw fa-user-plus"></i>
+          </button>
+      </a>
       <% if current_user && @group.committee_members.include?(current_user) %>
         <button class="primary">Edit page<i class="fas fa-fw fa-pencil-alt"></i></button>
         <br>

@@ -26,5 +26,14 @@
   <body class="<%= [Rails.env, controller_path.tr("/_", "-")].join(" ") %>">
     <%= render "layouts/header" %>
     <%= yield %>
+    <%
+        tile_servers = [
+          { name: @site_config.tile_server1_name, url: @site_config.tile_server1_url, type: @site_config.tile_server1_type, options: @site_config.tile_server1_options },
+          { name: @site_config.tile_server2_name, url: @site_config.tile_server2_url, type: @site_config.tile_server2_type, options: @site_config.tile_server2_options },
+          { name: @site_config.tile_server3_name, url: @site_config.tile_server3_url, type: @site_config.tile_server3_type, options: @site_config.tile_server3_options }
+      ]
+    %>
+    <div id="map-tiles" data-tileservers="<%= tile_servers.to_json %>"></div>
+    <div id="map-geocode" data-url="<%= @site_config.geocoder_url %>" data-key="<%= @site_config.geocoder_key %>" data-streetview="<%= @site_config.google_street_view_api_key %>"></div>
   </body>
 </html>

@@ -4,9 +4,9 @@
 //= require bootstrap
 //= require rails-ujs
 //= require jquery-ui
-//= require @fortawesome/fontawesome-free/js/all
 //= require fontawesome
 //= require js-cookie/src/js.cookie
 //= require leaflet
 //= require jquery-touch-events
+//= require map_display
 //= require new_ui
