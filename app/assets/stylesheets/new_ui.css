@@ -5,13 +5,13 @@ h2 {color: #185B3D; font-weight: 500; font-size: 20px; width: fit-content;}
 h3 {color: #185B3D; font-size: 20px; margin: 20px 0;}
 h3, h4, h5, h6, body, input, select, textarea, label {color: #212322;}
 input, select, textarea {font-size: 15px;}
-.drop-cap:first-letter {color: #AC3E27;}
+.drop-cap p:first-letter {color: #AC3E27;}
 .italic {font-style: italic;}
-p.light {font-weight: 300;}
+.light p {font-weight: 300;}
 p a {color: #AC3E27;}
 
-.drop-cap:first-child:first-letter {color: #AC3E27; float: left; line-height: 41px; padding-top: 4px; padding-right: 8px;}
-p.drop-cap:first-child:first-letter {font-size: 46px;}
+.drop-cap p:first-child:first-letter {color: #AC3E27; float: left; line-height: 41px; padding-top: 4px; padding-right: 8px;}
+.drop-cap p:first-child:first-letter {font-size: 46px;}
 h3.drop-cap:first-child:first-letter {font-size: 46px; line-height: 30px;}
 a.text {color: #AC3E27;}
 
