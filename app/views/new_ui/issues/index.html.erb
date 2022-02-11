@@ -1,0 +1,324 @@
+<div id="content">
+  <div class="title-wrapper">
+    <div class="section-title">
+      <i class="fas fa-fw fa-microphone"></i>
+      <h1>301 discussions</h1>
+      <br />
+      <a href="new-discussion.html"><button class="primary">New discussion<i
+                                            class="fas fa-fw fa-comment-alt-plus"></i></button></a>
+    </div>
+  </div>
+  <hr>
+  <div class="content-wrapper">
+    <button class="show-side-content">Filter items <i class="fas fa-fw fa-filter"></i></button>
+    <div class="main-content">
+      <div class="ios-segmented-control adjustable-icons small">
+        <span class="selection"></span>
+        <div class="option" title="All discussions">
+          <input type="radio" id="all" name="discussions-view" value="all" checked="checked" />
+          <label for="all"><span class="fas fa-globe-europe" data-text="All" data-icon="fa-globe-europe">
+              All</span></label>
+        </div>
+        <div class="option" title="Favourites">
+          <input type="radio" id="favourites" name="discussions-view" value="favourites" />
+          <label for="favourites"><span class="fas fa-star" data-text="Favourites" data-icon="fa-star">
+              Favourites</span></label>
+        </div>
+        <div class="option" title="Discussions I've participated in">
+          <input type="radio" id="mine" name="discussions-view" value="mine" />
+          <label for="mine"><span class="fas fa-seedling" data-text="Mine" data-icon="fa-pencil">
+              Mine</span></label>
+        </div>
+        <div class="option" title="Popular topics">
+          <input type="radio" id="popular" name="discussions-view" value="popular" />
+          <label for="popular"><span class="fas fa-fire-alt" data-text="Popular" data-icon="fa-fire-alt">
+              Popular</span></label>
+        </div>
+        <div class="option" title="Dates and deadlines">
+          <input type="radio" id="deadlines" name="discussions-view" value="dates" />
+          <label for="deadlines"><span class="fas fa-calendar-star" data-text="Deadlines"
+                                                                   data-icon="fa-calendar-star"> Deadlines</span></label>
+        </div>
+      </div>
+
+      <ul class="discussions all">
+        <h2>All discussions</h2>
+        <%= render partial: "issue", collection: @issues, as: :issue %>
+      <ul class="discussions favourites">
+        <h2>Favourite discussions</h2>
+        <li>
+          <a href="discussion.html">
+            <div class="content">
+              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
+                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
+              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+              <p class="italic">Hyperweaver posted one day ago</p>
+              <ul class="tags">
+                <li class="tag">Activism</li>
+                <li class="tag">Chisholm trail</li>
+              </ul>
+            </div>
+            <div class="minimap">
+              <div class="unread">
+                <p>5</p>
+              </div>
+              <img src="/images/placeholders/minimap2.png" />
+            </div>
+            <i class="favourite favourited fa fa-fw fa-star"></i>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="discussions mine">
+        <h2>Discussions I've participated in</h2>
+        <li>
+          <a href="discussion.html">
+            <div class="content">
+              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
+                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
+              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+              <p class="italic">Hyperweaver posted one day ago</p>
+              <ul class="tags">
+                <li class="tag">Activism</li>
+                <li class="tag">Chisholm trail</li>
+              </ul>
+            </div>
+            <div class="minimap">
+              <div class="unread">
+                <p>5</p>
+              </div>
+              <img src="/images/placeholders/minimap2.png" />
+            </div>
+            <i class="favourite favourited fa fa-fw fa-star"></i>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="discussions popular">
+        <h2>Popular discussions</h2>
+        <li>
+          <a href="discussion.html">
+            <div class="content">
+              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
+                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
+              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+              <p class="italic">Hyperweaver posted one day ago</p>
+              <ul class="tags">
+                <li class="tag">Activism</li>
+                <li class="tag">Chisholm trail</li>
+              </ul>
+            </div>
+            <div class="minimap">
+              <div class="unread">
+                <p>5</p>
+              </div>
+              <img src="/images/placeholders/minimap2.png" />
+            </div>
+            <i class="favourite favourited fa fa-fw fa-star"></i>
+          </a>
+        </li>
+        <li>
+          <a href="discussion.html">
+            <div class="content">
+              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
+                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
+              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+              <p class="italic">Hyperweaver posted one day ago</p>
+              <ul class="tags">
+                <li class="tag">Activism</li>
+                <li class="tag">Chisholm trail</li>
+              </ul>
+            </div>
+            <div class="minimap">
+              <div class="unread">
+                <p>5</p>
+              </div>
+              <img src="/images/placeholders/minimap2.png" />
+            </div>
+            <i class="favourite favourited fa fa-fw fa-star"></i>
+          </a>
+        </li>
+        <li>
+          <a href="discussion.html">
+            <div class="content">
+              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
+                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
+              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+              <p class="italic">Hyperweaver posted one day ago</p>
+              <ul class="tags">
+                <li class="tag">Activism</li>
+                <li class="tag">Chisholm trail</li>
+              </ul>
+            </div>
+            <div class="minimap">
+              <div class="unread">
+                <p>5</p>
+              </div>
+              <img src="/images/placeholders/minimap2.png" />
+            </div>
+            <i class="favourite favourited fa fa-fw fa-star"></i>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="deadlines">
+        <h2>Deadlines</h2>
+        <button class="primary">Subscribe to main calendar feed <i title="Subscribe to main calendar feed"
+                                                                   class="fas fa-fw fa-calendar-plus"></i></button>
+        <li>
+          <div class="date">
+            <h3>18</h3>
+            <p>Oct</p>
+            <p class="time">Monday 14:00</p>
+          </div>
+          <div class="content">
+            <h2>Voluptatibus totam sed nihil doloribus et reprehenderit est. Eum rerum illum voluptatem.
+              Planning meeting</h2>
+            <p class="light">Voluptatibus totam sed nihil doloribus et reprehenderit est. Eum rerum
+              illum voluptatem. York Way: Road safety changes</p>
+          </div>
+          <div class="actions">
+            <button class="primary"><i title="Add to calendar"
+                                       class="fas fa-fw fa-calendar-plus"></i></button>
+          </div>
+        </li>
+        <li>
+          <div class="date">
+            <h3>18</h3>
+            <p>Oct</p>
+            <p class="time">Tuesday 14:00</p>
+          </div>
+          <div class="content">
+            <h2>Planning meeting</h2>
+            <p class="light">York Way: Road safety changes</p>
+          </div>
+          <div class="actions">
+            <button class="primary"><i title="Add to calendar"
+                                       class="fas fa-fw fa-calendar-plus"></i></button>
+          </div>
+        </li>
+        <li>
+          <div class="date">
+            <h3>18</h3>
+            <p>Oct</p>
+            <p class="time">Saturday 14:00</p>
+          </div>
+          <div class="content">
+            <h2>Planning meeting</h2>
+            <p class="light">York Way: Road safety changes</p>
+          </div>
+          <div class="actions">
+            <button class="primary"><i title="Add to calendar"
+                                       class="fas fa-fw fa-calendar-plus"></i></button>
+          </div>
+        </li>
+        <li>
+          <div class="date">
+            <h3>18</h3>
+            <p>Oct</p>
+            <p class="time">Sunday 14:00</p>
+          </div>
+          <div class="content">
+            <h2>Planning meeting</h2>
+            <p class="light">York Way: Road safety changes</p>
+          </div>
+          <div class="actions">
+            <button class="primary"><i title="Add to calendar"
+                                       class="fas fa-fw fa-calendar-plus"></i></button>
+          </div>
+        </li>
+        <li>
+          <div class="date">
+            <h3>18</h3>
+            <p>Oct</p>
+            <p class="time">Monday 14:00</p>
+          </div>
+          <div class="content">
+            <h2>Planning meeting</h2>
+            <p class="light">York Way: Road safety changes</p>
+          </div>
+          <div class="actions">
+            <button class="primary"><i title="Add to calendar"
+                                       class="fas fa-fw fa-calendar-plus"></i></button>
+          </div>
+        </li>
+        <li>
+          <div class="date">
+            <h3>18</h3>
+            <p>Oct</p>
+            <p class="time">Friday 14:00</p>
+          </div>
+          <div class="content">
+            <h2>Planning meeting</h2>
+            <p class="light">York Way: Road safety changes</p>
+          </div>
+          <div class="actions">
+            <button class="primary"><i title="Add to calendar"
+                                       class="fas fa-fw fa-calendar-plus"></i></button>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+    <div class="side-content">
+      <h3>Filter discussions</h3>
+      <div class="widget">
+        <div class="title">
+          <i class="fas fa-fw fa-hashtag"></i> Tags
+        </div>
+        <form>
+          <div class="widget-content">
+            <ul class="tags">
+              <li class="tag large-tag toggle"><input type="checkbox" checked="checked" id="parking"
+                                                                                        title="Temporarily show or hide this tag" /> <label for="parking">Station
+                                                                                          parking</label></li>
+              <li class="tag large-tag toggle"><input type="checkbox" checked="checked" id="community"
+                                                                                        title="Temporarily show or hide this tag" /> <label
+                                                                                        for="community">Community</label></li>
+              <input type="search" placeholder="Type to add a tag…" />
+            </ul>
+          </div>
+        </form>
+      </div>
+
+      <div class="widget">
+        <div class="title">
+          <i class="fas fa-fw fa-map-pin"></i> Locations
+        </div>
+        <div class="widget-content">
+          <div class="location">
+            <img src="/images/placeholders/minimap.png" />
+            <input type="checkbox" checked title="Temporarily show or hide this location" />
+            <i title="Remove this location from the filter" class="fa fa-times-circle"></i>
+          </div>
+          <div class="location unchecked">
+            <img src="/images/placeholders/minimap.png" />
+            <input type="checkbox" title="Temporarily show or hide this location" />
+            <i title="Remove this location from the filter" class="fa fa-times-circle"></i>
+          </div>
+          <button data-bs-toggle="modal" data-bs-target="#locationModal" class="primary">Add
+            location...</button>
+        </div>
+      </div>
+
+      <div class="widget">
+        <div class="title">
+          <i class="fas fa-fw fa-ball-pile"></i> Categories
+        </div>
+        <div class="widget-content">
+          <form>
+            <div class="categories">
+              <input type="checkbox" id="campaigning" name="categories" value="campaigning">
+              <label for="campaigning"> Campaigning</label><br>
+              <input type="checkbox" id="administration" name="categories" value="administration">
+              <label for="administration"> Administration</label><br>
+              <input type="checkbox" id="general_chat" name="categories" value="general_chat">
+              <label for="general_chat"> General chat</label><br>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

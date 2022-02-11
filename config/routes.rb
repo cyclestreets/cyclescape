@@ -56,6 +56,7 @@ Rails.application.routes.draw do
 
   namespace :new_ui do
     resources :groups, only: :show
+    resources :issues, only: :index
   end
 
   namespace :admin do

@@ -11,7 +11,7 @@ var cyclescapeui = (function ($) {
     }
 
   var _actions = [
-    'discussions',
+    'issues',
     'index',
     'discussion',
     'newIdea',
@@ -728,7 +728,7 @@ var cyclescapeui = (function ($) {
 
 
     // Page-specific initialisation
-    discussions: function () {
+    issues: function () {
       $('.ios-segmented-control div.option').on('click', function () {
         var desiredUl = $(this).find('input').prop('id');
         cyclescapeui.setDiscussionsView(desiredUl);
@@ -1059,5 +1059,5 @@ var cyclescapeui = (function ($) {
 }(jQuery))
 
 $(function () {
-  cyclescapeui.initialise()
+  cyclescapeui.initialise(document.body.classList[0])
 })

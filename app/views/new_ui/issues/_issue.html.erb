@@ -1,0 +1,27 @@
+<li>
+  <a href=<%= issues_path(issue) %> >
+    <div class="content">
+      <h3 class="drop-cap"><%= issue.title %></h3>
+      <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+      <p class="italic">
+        <% if permitted_to? :view_profile, issue.created_by %>
+          <%= issue.created_by.name  %>
+        <% else %>
+          <%= issue.created_by.display_name_or_anon  %>
+        <% end %>
+        <%= formatted_created_at(issue)  %>
+      </p>
+      <ul class="tags">
+        <li class="tag">Activism</li>
+        <li class="tag">Chisholm trail</li>
+      </ul>
+    </div>
+    <div class="minimap">
+      <div class="unread">
+        <p>5</p>
+      </div>
+      <img src="/images/placeholders/minimap2.png" />
+    </div>
+    <i class="favourite favourited fas fa-fw fa-star animate__animated"></i>
+  </a>
+</li>
