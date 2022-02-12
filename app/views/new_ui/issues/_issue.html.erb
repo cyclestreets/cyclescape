@@ -18,7 +18,7 @@
     </div>
     <div class="minimap">
       <div class="unread">
-        <p>5</p>
+        <p><%= @unviewed_message_count[issue.id] %></p>
       </div>
       <% prefix = "list" unless local_assigns.has_key? :prefix %>
       <% map_id = "leaflet-#{dom_id(issue, prefix)}" %>
