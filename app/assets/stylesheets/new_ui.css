@@ -6,6 +6,7 @@ h3 {color: #185B3D; font-size: 20px; margin: 20px 0;}
 h3, h4, h5, h6, body, input, select, textarea, label {color: #212322;}
 input, select, textarea {font-size: 15px;}
 .drop-cap p:first-letter {color: #AC3E27;}
+.drop-cap:first-letter {color: #AC3E27;}
 .italic {font-style: italic;}
 .light p {font-weight: 300;}
 p a {color: #AC3E27;}
@@ -334,9 +335,9 @@ ul.discussions li div.content h3, p {margin: 5px 0;}
 ul.discussions li div.content p {display: inline-block; line-height: 15px; font-weight: 300; width: fit-content; font-size: 13px; color: black;}
 ul.discussions li div.content img {display: inline; padding-left: 20px;}
 ul.discussions li div.minimap {flex: 0; padding: 10px; margin: auto;}
-ul.discussions li div.minimap .unread {position: absolute; padding-left: 100px;}
+ul.discussions li div.minimap .unread {position: absolute; padding-left: 100px; z-index: 1}
 ul.discussions li div.minimap .unread p {border-radius: 100%; background-color: white; color: #AC3E27; font-style: italic; font-weight: 500; border: 1px solid #eeeeee; padding: 2px 10px; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
-ul.discussions li div.minimap img {border-radius: 20px; width: 120px; height: 120px;}
+ul.discussions li div.minimap .map {border-radius: 20px; width: 120px; height: 120px;}
 i.favourite {padding: 10px 20px 10px 10px; align-self: center; font-size: 20px; color: #dbdbdb;}
 i.favourite.favourited {color: #FEAE00;}
 ul.discussions li:hover i.favourite {color: #feae0054;}
