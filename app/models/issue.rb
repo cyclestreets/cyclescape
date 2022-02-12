@@ -48,6 +48,18 @@ class Issue < ApplicationRecord
     ).distinct
   end
 
+  scope :unviewed_messages, ->(user) do
+    thread_ids = joins(:threads).pluck(Arel.sql("message_threads.id"))
+    thread_views = ThreadView.where(user: user, thread_id: thread_ids).to_a
+    (thread_ids - thread_views.map(&:thread_id)).each do |thread_id|
+      thread_views.push(ThreadView.new(thread_id: thread_id, viewed_at: Time.zone.at(0)))
+    end
+    where_sql = thread_views.map { |_| "(messages.thread_id = ? and messages.created_at > ?)" }.join(" OR ")
+    joins(threads: :messages)
+      .merge(Message.approved)
+      .where(where_sql, *thread_views.map { |v| [v.thread_id, v.viewed_at] }.flatten)
+  end
+
   after_commit :update_search
   normalize_attribute :external_url, with: :url
 

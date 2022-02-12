@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class ThreadView < ApplicationRecord
   belongs_to :user, inverse_of: :thread_views
   belongs_to :thread, class_name: "MessageThread"
