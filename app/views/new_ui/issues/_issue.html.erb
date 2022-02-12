@@ -12,8 +12,9 @@
         <%= formatted_created_at(issue)  %>
       </p>
       <ul class="tags">
-        <li class="tag">Activism</li>
-        <li class="tag">Chisholm trail</li>
+        <% issue.tags.pluck(:name).each do |tag| %>
+          <li class="tag"><%= tag %></li>
+        <% end %>
       </ul>
     </div>
     <div class="minimap">
