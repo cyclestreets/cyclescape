@@ -4,8 +4,11 @@
       <i class="fas fa-fw fa-microphone"></i>
       <h1>301 discussions</h1>
       <br />
-      <a href="new-discussion.html"><button class="primary">New discussion<i
-                                            class="fas fa-fw fa-comment-alt-plus"></i></button></a>
+      <a href="new-discussion.html">
+        <button class="primary">New discussion
+          <i class="fas fa-fw fa-comment-alt-plus"></i>
+        </button>
+      </a>
     </div>
   </div>
   <hr>
@@ -44,6 +47,7 @@
       <ul class="discussions all">
         <h2>All discussions</h2>
         <%= render partial: "issue", collection: @issues, as: :issue %>
+      </ul>
       <ul class="discussions favourites">
         <h2>Favourite discussions</h2>
         <li>
@@ -321,4 +325,3 @@
     </div>
   </div>
 </div>
-

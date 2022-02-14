@@ -1,0 +1,3 @@
+$('#favourite-<%= @thread.id  %>').replaceWith('<%= escape_javascript render "form", thread: @thread, user_favourite: @favourite %>');
+cyclescapeui.initFavourites()
+<%= render 'shared/flash' %>
