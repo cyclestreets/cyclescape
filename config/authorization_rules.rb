@@ -9,6 +9,7 @@ authorization do
     includes :member
     has_permission_on :new_ui_groups, to: :manage
     has_permission_on :new_ui_issues, to: :manage
+    has_permission_on :new_ui_user_favourites, to: :manage
     has_permission_on :group_members, :group_memberships, :group_membership_requests, :group_profiles, :group_prefs, to: :manage
     has_permission_on :admin_groups, to: %i[manage disable enable]
     has_permission_on :group_requests do

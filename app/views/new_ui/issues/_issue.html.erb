@@ -28,6 +28,6 @@
         <div class="map-data" data-center="<%= location_to_geojson(issue.location) %>" data-opts="<%= { domid: map_id, hidelayers: true, feature: item_to_geojson(issue), hidezoom: true }.to_json %>"></div>
       </div>
     </div>
-    <i class="favourite favourited fas fa-fw fa-star animate__animated"></i>
+    <%= render "new_ui/user_favourites/form", thread: issue.threads.first %>
   </a>
 </li>

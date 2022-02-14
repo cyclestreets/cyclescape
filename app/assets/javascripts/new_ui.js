@@ -751,16 +751,7 @@ var cyclescapeui = (function ($) {
       });
 
       // Clicking on a star toggles favourite status
-      // !TODO Implement API call
-      $('ul.discussions .favourite').on('click', function (event) {
-        $(this).toggleClass('favourited');
-        event.preventDefault();
-
-        if ($(this).hasClass('favourited')) {
-          $(this).toggleClass('animate__heartBeat');
-          // Add API call
-        }
-      });
+      cyclescapeui.initFavourites()
     },
 
 
@@ -792,17 +783,7 @@ var cyclescapeui = (function ($) {
     discussion: function () {
       var addContentModal = new bootstrap.Modal(document.getElementById('addContentModal'), {})
 
-      // Clicking on a star toggles favourite status
-      // !TODO Implement API call
-      $('.favourite').on('click', function (event) {
-        $(this).toggleClass('favourited');
-        event.preventDefault();
-
-        if ($(this).hasClass('favourited')) {
-          $(this).toggleClass('animate__heartBeat');
-          // Add API call
-        }
-      });
+      cyclescapeui.initFavourites()
 
       // Clicking a like button likes the post
       $('.like').on('click', function () {
@@ -1055,6 +1036,22 @@ var cyclescapeui = (function ($) {
       });
     },
 
+    initFavourites: function() {
+      $(".favourite:not([data-fav='1'])").on('click', function (event) {
+        var $this = $(this)
+        event.preventDefault();
+
+        $this.toggleClass('animate__heartBeat');
+        var type
+        if ($this.hasClass("favourited")) {
+          type = "DELETE"
+        } else {
+          type = "POST"
+        }
+        $.ajax({ url: $this.data('url'), type: type })
+      })
+      $(".favourite").attr("data-fav", "1")
+    },
   };
 }(jQuery))
 
