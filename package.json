@@ -2,7 +2,7 @@
   "name": "cyclescape",
   "dependencies": {
     "@benmajor/jquery-touch-events": "^2.0.3",
-    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/fontawesome-pro": "^6.0.0",
     "animate.css": "^4.1.1",
     "autosize": "^1.18.13",
     "browserify": "^14.5.0",
@@ -31,7 +31,7 @@
     "url": "https://github.com/cyclestreets/cyclescape"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
+    "eslint": "^8.9.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^6.0.1",
