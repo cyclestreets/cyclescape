@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class GroupProfile < ApplicationRecord
   MAX_LOCAL_AREA = 10
 
