@@ -1,0 +1,159 @@
+/* Discussions */
+ul {
+  &.discussions {
+    padding: 0;
+    margin: 15px 0;
+    li {
+      display: block;
+      flex-direction: row;
+      flex-wrap: wrap;
+      border-radius: 20px;
+      cursor: pointer;
+      margin: 5px 0;
+      & > a {
+        text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-radius: 20px;
+        cursor: pointer;
+        margin: 5px 0;
+        padding: 0 20px;
+        &:hover {
+          background: #F6F6F6;
+        }
+      }
+      div {
+        &.content {
+          flex-direction: column;
+          align-self: center;
+          flex: 2;
+          padding: 10px;
+          h3 {
+            font-size: 15px;
+          }
+          p {
+            display: inline-block;
+            line-height: 15px;
+            font-weight: 300;
+            width: fit-content;
+            font-size: 13px;
+            color: black;
+          }
+          img {
+            display: inline;
+            padding-left: 20px;
+          }
+        }
+        &.minimap {
+          flex: 0;
+          padding: 10px;
+          margin: auto;
+          .unread {
+            position: absolute;
+            padding-left: 100px;
+            z-index: 1;
+            p {
+              border-radius: 100%;
+              background-color: white;
+              color: $color-pastel-red;
+              font-style: italic;
+              font-weight: 500;
+              border: 1px solid #eeeeee;
+              padding: 2px 10px;
+              box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);
+            }
+          }
+          .map {
+            border-radius: 20px;
+            width: 120px;
+            height: 120px;
+          }
+        }
+      }
+      &:hover {
+        i {
+          &.favourite {
+            color: #feae0054;
+            &.favourited {
+              color: #FEAE00;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+ul.discussions>h2, ul.deadlines>h2 {
+  display: none;
+  padding: 5px;
+  margin: 5px auto;
+}
+ul.discussions li div.content h3, p {
+  margin: 5px 0;
+}
+i {
+  &.favourite {
+    padding: 10px 20px 10px 10px;
+    align-self: center;
+    font-size: 20px;
+    color: #dbdbdb;
+    &.favourited {
+      color: #FEAE00;
+    }
+  }
+}
+.issues {
+  .side-content {
+    h3 {
+      margin-top: 15px;
+    }
+  }
+}
+.location {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin: 5px;
+  .map {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+  }
+  &.unchecked {
+    img {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+      opacity: 0.7;
+    }
+  }
+  input {
+    position: absolute;
+    margin-top: 77px;
+    font-size: 200%;
+    &:not(:checked)::before {
+      display: none;
+    }
+  }
+  i {
+    position: absolute;
+    margin: 73px;
+    padding: 0;
+    font-size: 23px;
+    border-radius: 100%;
+    border: 1px solid transparent;
+    cursor: pointer;
+    color: $color-pastel-red;
+    &:hover {
+      color: #f5310a;
+    }
+  }
+}
+
+.categories {
+  input[type="checkbox"] {
+    font-size: 30px;
+    color: $color-green;
+  }
+}
