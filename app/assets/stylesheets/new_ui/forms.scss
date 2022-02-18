@@ -1,0 +1,96 @@
+form input, form textarea {
+  padding: 10px;
+  outline: none;
+  border: 1px solid #eeeeee;
+  border-radius: 20px;
+  margin: 10px 0 5px;
+}
+form .radio, form .category {
+  display: flex;
+  background-color: #f8f6f6;
+  border-radius: 20px;
+  padding: 5px;
+}
+form .radio input, form .radio label {
+  align-self: center;
+}
+form {
+  .radio {
+    label {
+      margin: 5px 15px 5px 5px;
+    }
+    input {
+      margin-left: 5px;
+    }
+    .help {
+      transition: .2s;
+      padding: 5px;
+      &:hover {
+        color: #155437;
+        transform: scale(1.05);
+      }
+    }
+  }
+  & > label {
+    &.decorated {
+      grid-column: 1 / 2;
+      height: 35px;
+      color: $color-green;
+      font-weight: bold;
+      box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);
+      border-radius: 20px;
+      padding: 5px 20px 5px 20px;
+      background-color: #eeeeee;
+    }
+    &.hidden {
+      opacity: 0;
+      height: 0;
+    }
+  }
+  input[type="submit"] {
+    width: fit-content;
+    border: none;
+    background-color: #eeeeee;
+    color: $color-pastel-red;
+    border-radius: 20px;
+    padding: 6px 15px;
+    font-weight: bold;
+    box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);
+    transition: .1s;
+  }
+  input[type="submit"]:hover {
+    background-color: white;
+  }
+  input[type="checkbox"] {
+    margin: 5px;
+  }
+  div {
+    &.draganddrop {
+      width: calc(300px + 4px + 4px);
+      height: calc(200px + 4px + 4px);
+      border: 2px dashed gray;
+      border-radius: 20px;
+      overflow: hidden;
+      p {
+        width: 300px;
+        height: 200px;
+        text-align: center;
+        padding: 15px;
+        color: gray;
+      }
+      input {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        width: 300px;
+        height: 200px;
+        outline: none;
+        opacity: 0;
+      }
+    }
+  }
+}
+.modal-body input, .modal-body textarea {
+  display: block;
+  width: 100%;
+}
