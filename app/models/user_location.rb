@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class UserLocation < ApplicationRecord
   include Locatable
 
