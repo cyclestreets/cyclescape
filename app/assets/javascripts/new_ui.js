@@ -375,7 +375,6 @@ var cyclescapeui = (function ($) {
       });
     },
 
-
     // Set up mobile side-content view
     sideContent: function () {
       // Handle filter button
@@ -734,9 +733,6 @@ var cyclescapeui = (function ($) {
         cyclescapeui.setDiscussionsView(desiredUl);
       });
 
-      // Save the side content HTML for toggling on/off
-      _sideContentHtml = $('.side-content').html()
-
       // At launch, set to first div
       var firstDiv = $('.ios-segmented-control input').first().prop('id');
       cyclescapeui.setDiscussionsView(firstDiv);
@@ -989,16 +985,15 @@ var cyclescapeui = (function ($) {
 
     // Set discussion internal toggle
     setDiscussionsView: function (desiredUl) {
-      $('.main-content>ul').hide();
-      $('.main-content>ul.' + desiredUl).show();
+      $('.main-content>ul').addClass("hidden")
+      $('.main-content>ul.' + desiredUl).removeClass("hidden");
 
       if (desiredUl == 'deadlines') {
-        $('.side-content').html('');
+        $('.side-content').addClass("hidden")
+      } else if ($(window).width() > 768) {
+        $('.side-content').removeClass("hidden")
       } else {
-        $('.side-content').html(_sideContentHtml);
-        if ($(window).width() > 768) {
-          $('.side-content').show();
-        }
+        $('.side-content').addClass("hidden")
       }
     },
 
