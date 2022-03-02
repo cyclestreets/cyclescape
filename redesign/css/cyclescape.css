@@ -202,7 +202,7 @@ hr {margin: 15px 0;}
 .stylised-or hr {width: 100px; margin: 0 auto; display: inline-block; text-align: center;}
 .stylised-or p {display: inline-block; border: 1px solid #afafaf; border-radius: 100%; padding: 2.5px; width: 30px; height: 30px; text-align: center; margin: -5px; line-height: 20px;}
 
-div.controls ul.map-buttons {display: flex; border-radius: 20px; padding: 7.5px; margin: 0; list-style: none; background-color: rgba(255, 255, 255, 0.178); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); margin: 5px; width: -webkit-fill-available;}
+div.controls ul.map-buttons {display: flex; border-radius: 20px; padding: 7.5px; margin: 0; list-style: none; background-color: rgba(255, 255, 255, 0.178); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); margin: 5px; width: 100%; width: -moz-available; width: -webkit-fill-available; width: fill-available;}
 div.controls ul.map-buttons li {flex: 1; padding: 10px 0 0 0; border-radius: 20px; margin: 0 2.5px; cursor: pointer;}
 div.controls ul.map-buttons li.active {background-color: #FFFFFF; box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04)}
 div.controls ul.map-buttons li:hover {background-color: #ffffff;}
@@ -468,10 +468,10 @@ ul.thread #post:hover {background: #f0eeee;}
 
 
 /* New idea */
-.new-idea #ideamap {height: -webkit-fill-available; border-radius: 20px; z-index: 1;}
+.new-idea #ideamap {height: 100%; min-height: -moz-available; height: -webkit-fill-available; height: fill-available; border-radius: 20px; z-index: 1;}
 .new-idea .map-controls {display: none; position: absolute; top: 0; width: 400px; max-height: calc(100vh - 235px); overflow: scroll; z-index: 2;}
 .new-idea form input, .new-idea form textarea {background-color: rgba(255, 255, 255, 0.671); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px);}
-.new-idea form input {width: -webkit-fill-available;}
+.new-idea form input {width: 100%; width: -moz-available; width: -webkit-fill-available; width: fill-available;}
 .new-idea form textarea {width: 100%;}
 .new-idea form .light {font-size: 12px;}
 .new-idea form {overflow-y: scroll;}
