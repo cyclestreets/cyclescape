@@ -2,8 +2,10 @@
 
 class ThreadList
   class << self
-    def recent_from_groups(groups, limit)
-      MessageThread.where(group_id: groups).approved.order_by_latest_message.limit(limit)
+    def recent_from_groups(groups, limit = nil)
+      threads = MessageThread.where(group_id: groups).approved.order_by_latest_message
+      threads = threads.limit(limit) if limit
+      threads
     end
 
     def recent_public_from_groups(groups, limit)
