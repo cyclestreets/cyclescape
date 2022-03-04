@@ -88,12 +88,12 @@
 
       <ul class="discussions all">
         <h2>All discussions</h2>
-        <%= render partial: "issue", collection: @issues, as: :issue %>
+        <%= render partial: "thread", collection: @all, as: :thread %>
       </ul>
 
       <ul class="discussions favourites">
         <h2>Favourite discussions</h2>
-        <%= render partial: "issue", collection: @issues, as: :issue, locals: { prefix: "fav" } %>
+        <%= render partial: "thread", collection: @favourite, as: :thread, locals: { prefix: "fav" } %>
       </ul>
 
       <ul class="discussions mine">

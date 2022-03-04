@@ -11,7 +11,7 @@ var cyclescapeui = (function ($) {
     }
 
   var _actions = [
-    'issues',
+    'threads',
     'index',
     'discussion',
     'newIdea',
@@ -727,7 +727,7 @@ var cyclescapeui = (function ($) {
 
 
     // Page-specific initialisation
-    issues: function () {
+    threads: function () {
       $('.ios-segmented-control div.option').on('click', function () {
         var desiredUl = $(this).find('input').prop('id');
         cyclescapeui.setDiscussionsView(desiredUl);
