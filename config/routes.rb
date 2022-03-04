@@ -56,7 +56,7 @@ Rails.application.routes.draw do
 
   namespace :new_ui do
     resources :groups, only: :show
-    resources :issues, only: :index
+    resources :threads, only: :index
     resource :user_favourites, only: %i[create destroy]
   end
 

@@ -1,9 +1,0 @@
-<div class="location minimap <%= local_assigns.has_key? :checked ? "checked" : "unchecked" %>">
-  <% map_id = "leaflet-#{dom_id(locatable)}" %>
-  <div class="map" id="<%= map_id %>"></div>
-  <div class="hidden">
-    <div class="map-data" data-center="<%= location_to_geojson(locatable.location) %>" data-opts="<%= { domid: map_id, hidelayers: true, feature: item_to_geojson(locatable), hidezoom: true }.to_json %>"></div>
-  </div>
-  <input type="checkbox" <%= local_assigns.has_key? :checked ? "checked" : "" %> title="Temporarily show or hide this location" />
-  <i title="Remove this location from the filter" class="fa fa-times-circle"></i>
-</div>
