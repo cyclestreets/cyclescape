@@ -326,7 +326,10 @@ div {
         -webkit-backdrop-filter: blur(5px);
         backdrop-filter: blur(5px);
         margin: 5px;
+        width: 100%;
+        width: -moz-available;
         width: -webkit-fill-available;
+        width: fill-available;
         li {
           flex: 1;
           padding: 10px 0 0 0;
