@@ -98,94 +98,12 @@
 
       <ul class="discussions mine">
         <h2>Discussions I've participated in</h2>
-        <li>
-          <a href="discussion.html">
-            <div class="content">
-              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
-                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
-              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
-              <p class="italic">Hyperweaver posted one day ago</p>
-              <ul class="tags">
-                <li class="tag">Activism</li>
-                <li class="tag">Chisholm trail</li>
-              </ul>
-            </div>
-            <div class="minimap">
-              <div class="unread">
-                <p>5</p>
-              </div>
-              <img src="/images/placeholders/minimap2.png" />
-            </div>
-            <i class="favourite favourited fa fa-fw fa-star"></i>
-          </a>
-        </li>
+        <%= render partial: "thread", collection: @mine, as: :thread, locals: { prefix: "mine" } %>
       </ul>
 
       <ul class="discussions popular">
         <h2>Popular discussions</h2>
-        <li>
-          <a href="discussion.html">
-            <div class="content">
-              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
-                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
-              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
-              <p class="italic">Hyperweaver posted one day ago</p>
-              <ul class="tags">
-                <li class="tag">Activism</li>
-                <li class="tag">Chisholm trail</li>
-              </ul>
-            </div>
-            <div class="minimap">
-              <div class="unread">
-                <p>5</p>
-              </div>
-              <img src="/images/placeholders/minimap2.png" />
-            </div>
-            <i class="favourite favourited fa fa-fw fa-star"></i>
-          </a>
-        </li>
-        <li>
-          <a href="discussion.html">
-            <div class="content">
-              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
-                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
-              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
-              <p class="italic">Hyperweaver posted one day ago</p>
-              <ul class="tags">
-                <li class="tag">Activism</li>
-                <li class="tag">Chisholm trail</li>
-              </ul>
-            </div>
-            <div class="minimap">
-              <div class="unread">
-                <p>5</p>
-              </div>
-              <img src="/images/placeholders/minimap2.png" />
-            </div>
-            <i class="favourite favourited fa fa-fw fa-star"></i>
-          </a>
-        </li>
-        <li>
-          <a href="discussion.html">
-            <div class="content">
-              <h3 class="drop-cap">York Way: road safety changes Voluptatibus totam sed nihil
-                doloribus et reprehenderit est. Eum rerum illum voluptatem. </h3>
-              <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
-              <p class="italic">Hyperweaver posted one day ago</p>
-              <ul class="tags">
-                <li class="tag">Activism</li>
-                <li class="tag">Chisholm trail</li>
-              </ul>
-            </div>
-            <div class="minimap">
-              <div class="unread">
-                <p>5</p>
-              </div>
-              <img src="/images/placeholders/minimap2.png" />
-            </div>
-            <i class="favourite favourited fa fa-fw fa-star"></i>
-          </a>
-        </li>
+        <%= render partial: "thread", collection: @popular, as: :thread, locals: { prefix: "popular" } %>
       </ul>
 
       <ul class="deadlines">
