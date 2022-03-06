@@ -1,6 +1,9 @@
 @import "bootstrap";
 @import "animate.css/animate";
-$fa-font-path: '@fortawesome/fontawesome-pro/webfonts/';
-@import "@fortawesome/fontawesome-pro/css/all.css";
+$fa-font-path: '@fortawesome/fontawesome-pro/webfonts';
+@import '@fortawesome/fontawesome-pro/scss/fontawesome';
+@import '@fortawesome/fontawesome-pro/scss/brands';
+@import '@fortawesome/fontawesome-pro/scss/solid';
+@import '@fortawesome/fontawesome-pro/scss/regular';
 @import "leaflet";
 @import "new_ui/index";
