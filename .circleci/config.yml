@@ -37,10 +37,10 @@ jobs:
     # In many cases you can simplify this from what is generated here.
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
-    - run: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    - run: curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
     - run: sudo apt-get update
     - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromedriver
-    - run: sudo npm install -g npm@6.4.1
+    - run: sudo npm install -g npm@8.2.0
 
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
@@ -55,6 +55,8 @@ jobs:
     - run: if [ -z "${NODE_ENV:-}" ]; then export NODE_ENV=test; fi
     - run: export PATH="~/cyclestreets/cyclescape/node_modules/.bin:$PATH"
     - run: npm install
+    - run: cp node_modules/@fortawesome/fontawesome-pro/css/all.css vendor/assets/stylesheets/_fontawesome.css
+    - run: sed -i 's:url("\.\.:asset-url("@fortawesome/fontawesome-pro:g' vendor/assets/stylesheets/_fontawesome.css
     - run: 'bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3'
     # Save dependency cache
     - save_cache:
