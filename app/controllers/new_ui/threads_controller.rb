@@ -3,13 +3,20 @@
 module NewUi
   class ThreadsController < BaseController
     def index
+      threads = MessageThread.approved.includes(group: :profile)
       if current_user
         @current_group = current_user.groups.first
-        threads = ThreadList.recent_from_groups(current_user.groups)
-        @all = threads.where.not(issue_id: nil).page(1)
-        @popular = @current_group.threads.where.not(issue_id: nil).ordered_by_nos_of_messages.page(1)
+        threads =
+          if params[:cat] && params[:cat] == ["administration"]
+            threads.where(group: @current_group).without_issue
+          else
+            issue_ids = Issue.preloaded.intersects(current_group.profile.location).ids
+            threads.where(issue_id: issue_ids)
+          end
+        @all = threads.order_by_latest_message.page(1)
+        @popular = threads.ordered_by_nos_of_messages.page(1)
         @mine = threads.where(created_by: current_user).page(1)
-        @favourite = current_user.favourite_threads.page(1)
+        @favourite = threads.where(id: current_user.favourite_threads.ids).order_by_latest_message.page(1)
 
         @unviewed_message_count = {}
         @current_group = current_user.groups.first

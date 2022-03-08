@@ -1,8 +1,13 @@
 <li>
-  <a href=<%= issues_path(thread.issue) %> >
+  <a href=<%= threads_path(thread) %> >
     <div class="content">
-      <h3 class="drop-cap"><%= thread.issue.title %></h3>
-      <p>Camden Cyclists</p><img class="avatar" src="/images/placeholders/avatar1.png" />
+      <h3 class="drop-cap"><%= thread.title %></h3>
+      <% if thread.group %>
+        <p><%= thread.group.name %></p>
+        <% if thread.group.profile.logo %>
+          <%= image_tag thread.group.profile.logo_thumbnail.url, class: "avatar" %>
+        <% end %>
+      <% end %>
       <p class="italic">
         <% if permitted_to? :view_profile, thread.created_by %>
           <%= thread.created_by.name  %>
@@ -24,9 +29,11 @@
       <% prefix = "list" unless local_assigns.has_key? :prefix %>
       <% map_id = "leaflet-#{dom_id(thread, prefix)}" %>
       <div class="map" id="<%= map_id %>"></div>
-      <div class="hidden">
-        <div class="map-data" data-center="<%= location_to_geojson(thread.issue.location) %>" data-opts="<%= { domid: map_id, hidelayers: true, feature: item_to_geojson(thread.issue), hidezoom: true }.to_json %>"></div>
-      </div>
+      <% if thread.issue %>
+        <div class="hidden">
+          <div class="map-data" data-center="<%= location_to_geojson(thread.issue.location) %>" data-opts="<%= { domid: map_id, hidelayers: true, feature: item_to_geojson(thread.issue), hidezoom: true }.to_json %>"></div>
+        </div>
+      <% end %>
     </div>
     <%= render "new_ui/user_favourites/form", thread: thread %>
   </a>

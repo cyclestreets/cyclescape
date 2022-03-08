@@ -250,16 +250,14 @@
           <i class="fas fa-fw fa-ball-pile"></i> Categories
         </div>
         <div class="widget-content">
-          <form>
+          <%= form_for :categories, url: new_ui_discussions_path, method: :get do |f| %>
             <div class="categories">
-              <input type="checkbox" id="campaigning" name="categories" value="campaigning">
-              <label for="campaigning"> Campaigning</label><br>
-              <input type="checkbox" id="administration" name="categories" value="administration">
-              <label for="administration"> Administration</label><br>
-              <input type="checkbox" id="general_chat" name="categories" value="general_chat">
-              <label for="general_chat"> General chat</label><br>
+              <%= radio_button "cat", "", "campaigning", checked: (params[:cat] != ["administration"]), onchange: 'this.form.submit();' %>
+              <%= label "cat", "", "Campaigning" %><br>
+              <%= radio_button "cat", "", "administration", checked: (params[:cat] == ["administration"]), onchange: 'this.form.submit();'%>
+              <%= label "cat", "", "Administration" %><br>
             </div>
-          </form>
+          <% end %>
         </div>
       </div>
     </div>
