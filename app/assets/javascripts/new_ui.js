@@ -28,12 +28,14 @@ var cyclescapeui = (function ($) {
   var _map = null; // Leaflet map
   var _addIdeaMarker = null; // Save the Leaflet marker in newIdea
   var _selectedAttachment = null; // Selected attachment in Discussion view
+  var _nav = null
 
 
   return {
 
     // Main function
     initialise: function (page = false) {
+      _nav = $('nav.sidebar-nav')
       // Initialise the UI
       cyclescapeui.navBar();
       cyclescapeui.searchBar();
@@ -71,33 +73,23 @@ var cyclescapeui = (function ($) {
       // Enable normal "click" close
       $('body').on('click', function (event) {
         if (event.target.tagName != 'LI') {
-          if ($('nav').hasClass('open')) {
+          if (_nav.hasClass('open')) {
             cyclescapeui.closeNav();
           }
         }
       });
 
       // Enable swipe-to-close
-      $('nav').on('swipeleft', function () {
-        if ($('nav').hasClass('open')) {
+      _nav.on('swipeleft', function () {
+        if (_nav.hasClass('open')) {
           cyclescapeui.closeNav();
-        }
-      });
-
-      // Listen for resize, if hamburger is set to hidden but window expands to desktop
-      $(window).on('resize', function () {
-        if (isIOSSafari) { return; }
-        if ($(window).width() > 1000) {
-          $('nav').show();
-        } else {
-          $('nav').hide();
         }
       });
 
       // Listen for escape key to close menu
       $(document).on('keydown', function (event) {
         if (event.key == "Escape") {
-          if ($('nav').hasClass('open')) {
+          if (_nav.hasClass('open')) {
             cyclescapeui.closeNav();
           }
         }
@@ -111,8 +103,8 @@ var cyclescapeui = (function ($) {
       $('#shade').removeClass('white').fadeIn('fast');
 
       // Slide the nav out from the left
-      $('nav').show('slide', { direction: 'left' }, 300, function () {
-        $('nav').addClass('open');
+      _nav.show('slide', { direction: 'left' }, 300, function () {
+        _nav.addClass('open');
       })
     },
 
@@ -126,8 +118,8 @@ var cyclescapeui = (function ($) {
 
       // Close menu
       $('#shade').fadeOut();
-      $('nav').removeClass('open');
-      $('nav').hide("slide", { direction: "left" }, 300);
+      _nav.removeClass('open');
+      _nav.hide("slide", { direction: "left" }, 300);
     },
 
 

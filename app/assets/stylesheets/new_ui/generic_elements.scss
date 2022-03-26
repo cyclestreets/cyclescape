@@ -383,6 +383,9 @@ div {
     margin: 0;
   }
 }
+nav.pagination {
+  width: unset;
+}
 
 .hidden {
   display: none !important;
