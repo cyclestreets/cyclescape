@@ -1,0 +1,109 @@
+<div id="content">
+  <div class="title-wrapper">
+    <div class="section-title">
+      <i class="fas fa-fw fa-microphone"></i>
+      <h1>301 discussions</h1>
+      <br />
+      <a href="new-discussion.html">
+        <button class="primary">New discussion
+          <i class="fas fa-fw fa-comment-alt-plus"></i>
+        </button>
+      </a>
+    </div>
+  </div>
+  <hr>
+  <div class="content-wrapper">
+    <button class="show-side-content">
+      Filter items <i class="fas fa-fw fa-filter"></i>
+    </button>
+    <div class="main-content">
+      <div class="ios-segmented-control adjustable-icons small">
+        <span class="selection"></span>
+        <div class="option" title="All discussions">
+          <input type="radio" id="all" name="discussions-view" value="all" checked="checked" />
+          <label for="all"><span class="fas fa-globe-europe" data-text="All" data-icon="fa-globe-europe">
+              All</span></label>
+        </div>
+        <div class="option" title="Favourites">
+          <input type="radio" id="favourites" name="discussions-view" value="favourites" />
+          <label for="favourites"><span class="fas fa-star" data-text="Favourites" data-icon="fa-star">
+              Favourites</span></label>
+        </div>
+        <div class="option" title="Discussions I've participated in">
+          <input type="radio" id="mine" name="discussions-view" value="mine" />
+          <label for="mine"><span class="fas fa-seedling" data-text="Mine" data-icon="fa-pencil">
+              Mine</span></label>
+        </div>
+        <div class="option" title="Popular topics">
+          <input type="radio" id="popular" name="discussions-view" value="popular" />
+          <label for="popular"><span class="fas fa-fire-alt" data-text="Popular" data-icon="fa-fire-alt">
+              Popular</span></label>
+        </div>
+        <div class="option" title="Dates and deadlines">
+          <input type="radio" id="deadlines" name="discussions-view" value="dates" />
+          <label for="deadlines"><span class="fas fa-calendar-star" data-text="Deadlines"
+                                                                   data-icon="fa-calendar-star"> Deadlines</span></label>
+        </div>
+      </div>
+      <%= render "discussions" %>
+    </div>
+    <div class="side-content">
+      <h3>Filter discussions</h3>
+      <div class="widget">
+        <div class="title">
+          <i class="fas fa-fw fa-hashtag"></i> Tags
+        </div>
+        <form>
+          <div class="widget-content">
+            <ul class="tags">
+              <li class="tag large-tag toggle">
+                <input type="checkbox" checked="checked" id="parking" title="Temporarily show or hide this tag" />
+                <label for="parking">Station parking</label>
+              </li>
+              <li class="tag large-tag toggle">
+                <input type="checkbox" checked="checked" id="community" title="Temporarily show or hide this tag" />
+                <label for="community">Community</label>
+              </li>
+              <input type="search" placeholder="Type to add a tag…" />
+            </ul>
+          </div>
+        </form>
+      </div>
+
+      <div class="widget">
+        <div class="title">
+          <i class="fas fa-fw fa-map-pin"></i> Locations
+        </div>
+        <div class="widget-content">
+          <% if location = current_group&.profile&.location %>
+            <%= render "location", locatable: current_group.profile, checked: true %>
+          <% end %>
+          <% if location = current_user&.location %>
+            <%= render "location", locatable: current_user.location %>
+          <% end %>
+          <button data-bs-toggle="modal" data-bs-target="#locationModal" class="primary">
+            Add location...
+          </button>
+        </div>
+      </div>
+
+      <div class="widget">
+        <div class="title">
+          <i class="fas fa-fw fa-ball-pile"></i> Categories
+        </div>
+        <div class="widget-content">
+          <%= form_for :categories, url: new_ui_discussions_path, method: :get do |f| %>
+            <div class="categories">
+              <%= radio_button "cat", "", "campaigning", checked: (params[:cat] != ["administration"]), onchange: 'this.form.submit();' %>
+              <%= label "cat", "", "Campaigning" %><br>
+              <%= radio_button "cat", "", "administration", checked: (params[:cat] == ["administration"]), onchange: 'this.form.submit();'%>
+              <%= label "cat", "", "Administration" %><br>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
