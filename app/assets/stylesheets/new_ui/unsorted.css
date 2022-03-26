@@ -403,7 +403,7 @@ ul.application-types li label {color: white;}
 
 /* Responsive */
 @media (max-width: 1000px) {
-    nav {display: none;}
+    nav.sidebar-nav {display: none;}
     div.search {z-index: 99;}
     div.login-button {z-index: 98;}
     button#hamburger {display: inline-block;}

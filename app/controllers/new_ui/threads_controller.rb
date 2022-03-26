@@ -3,37 +3,73 @@
 module NewUi
   class ThreadsController < BaseController
     def index
-      threads = MessageThread.approved.includes(group: :profile)
-      if current_user
-        @current_group = current_user.groups.first
-        threads =
-          if params[:cat] && params[:cat] == ["administration"]
-            threads.where(group: @current_group).without_issue
-          else
-            issue_ids = Issue.preloaded.intersects(current_group.profile.location).ids
-            threads.where(issue_id: issue_ids)
-          end
-        @all = threads.order_by_latest_message.page(1)
-        @popular = threads.ordered_by_nos_of_messages.page(1)
-        @mine = threads.where(created_by: current_user).page(1)
-        @favourite = threads.where(id: current_user.favourite_threads.ids).order_by_latest_message.page(1)
+      @current_group = current_user.groups.first
+      unviewed_message_count
+    end
 
-        @unviewed_message_count = {}
-        @current_group = current_user.groups.first
-        ids = @all.map(&:id) + @popular.map(&:id) + @mine.map(&:id) + @favourite.map(&:id)
-        MessageThread
-          .where(id: ids).unviewed_message_counts(current_user)
-          .each_with_object(@unviewed_message_count) do |(issue_id, count), hsh|
-          hsh[issue_id] = count
+    private
+
+    def threads_scope
+      return @_scope if @_scope
+      @_scope = MessageThread.approved.includes(:created_by, :issue, group: :profile)
+      @_scope ||=
+        if params[:cat] && params[:cat] == ["administration"]
+          @_scope.where(group: @current_group).without_issue
+        else
+          issue_ids = Issue.preloaded.intersects(current_group.profile.location).ids
+          @_scope.where(issue_id: issue_ids)
         end
-      else
-        threads = ThreadList.recent_public
-        @all = threads.where.not(issue_id: nil).page(1)
-        @popular = MessageThread.none
-        @mine = MessageThread.none
-        @favourite = MessageThread.none
-        @unviewed_message_counts = {}
+    end
+
+    def unviewed_message_count
+      return @unviewed_message_count if @unviewed_message_count
+
+      @unviewed_message_count = {}
+      MessageThread
+        .where(id: all_thread_tabs.map(&:id)).unviewed_message_counts(current_user)
+        .each_with_object(@unviewed_message_count) do |(issue_id, count), hsh|
+        hsh[issue_id] = count
       end
+    end
+
+    def all_thread_tabs
+      all + popular + mine + favourite
+    end
+
+    def all
+      @all ||=
+        if params[:all_page] || !request.xhr?
+          threads_scope.order_by_latest_message.page(params[:all_page])
+        else
+          MessageThread.none.page(1)
+        end
+    end
+
+    def popular
+      @popular ||=
+        if !request.xhr? || params[:pop_page]
+          threads_scope.ordered_by_nos_of_messages.page(params[:pop_page])
+        else
+          MessageThread.none.page(1)
+        end
+    end
+
+    def mine
+      @mine ||=
+        if !request.xhr? || params[:mine_page]
+          threads_scope.where(created_by: current_user).page(params[:mine_page])
+        else
+          MessageThread.none.page(1)
+        end
+    end
+
+    def favourite
+      @favourite ||=
+        if !request.xhr? || params[:fav_page]
+          threads_scope.where(id: current_user.favourite_threads.ids).order_by_latest_message.page(params[:fav_page])
+        else
+          MessageThread.none.page(1)
+        end
     end
   end
 end

@@ -1,5 +1,8 @@
 /* Nav */
-nav {
+nav.pagination {
+  padding: 10px;
+}
+nav.sidebar-nav {
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -118,6 +121,7 @@ nav {
     }
   }
 }
+
 button#hamburger {
   display: none;
   position: fixed;
