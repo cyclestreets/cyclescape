@@ -1,0 +1,40 @@
+<div class="modal fade locationModal" id="locationModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg modal-fullscreen-lg-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Enter a location</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body unpadded">
+        <img class="map" src="/images/placeholders/map.png" />
+        <div class="geocoder" id="geocoder">
+          <i class="fas fa-fw fa-search"></i>
+          <input type="search" placeholder="Search for a place or postcode" />
+        </div>
+        <div class="controls">
+          <h3 class="icon text-centered"><i class="fas fa-fw fa-map-pin"></i></h3>
+          <h3>Mark the location on the map</h3>
+          <ul class="map-buttons">
+            <li class="active"><i class="fas fa-fw fa-thumbtack"></i>
+              <p>Point</p>
+            </li>
+            <li><i class="fas fa-fw fa-route"></i>
+              <p>Route</p>
+            </li>
+            <li><i class="fas fa-fw fa-draw-square"></i>
+              <p>Area</p>
+            </li>
+          </ul>
+          <p>Click the map to mark the point.</p>
+          <p>Drag the point to reposition.</p>
+          <p>Zoom in and pan to select the correct place.</p>
+          <button type="button" title="You have not set a location on the map" class="primary done disabled" data-bs-dismiss="modal">
+            Done
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+

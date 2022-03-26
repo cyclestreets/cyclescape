@@ -720,8 +720,33 @@ var cyclescapeui = (function ($) {
 
     // Page-specific initialisation
     threads: function () {
+      var paginationNav = $("nav.pagination:visible")
+      var options = {
+        rootMargin: '0px 0px 1000px 0px',
+        threshold: 0
+      }
+      var obs = new IntersectionObserver(function (entries) {
+        if (entries[0] && entries[0].isIntersecting) {
+          obs.unobserve(paginationNav[0])
+          $.ajax(
+            {
+              url: $("nav.pagination .next:visible a").attr("href"),
+              dataType: 'script'
+            }
+          ).then(function() {
+            window.leafletMapInit()
+            paginationNav = $("nav.pagination:visible")
+            obs.observe(paginationNav[0])
+          })
+        }
+      }, options)
+      obs.observe(paginationNav[0])
+
       $('.ios-segmented-control div.option').on('click', function () {
         var desiredUl = $(this).find('input').prop('id');
+        obs.unobserve(paginationNav[0])
+        paginationNav = $("nav.pagination:visible")
+        obs.observe(paginationNav[0])
         cyclescapeui.setDiscussionsView(desiredUl);
       });
 
