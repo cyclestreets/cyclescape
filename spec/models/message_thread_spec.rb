@@ -421,10 +421,11 @@ describe MessageThread do
 
     it "should save the event" do
       subject.close_by!(user)
+      user.destroy
       close_event = subject.message_thread_closes.last
 
       expect(close_event.event).to eq "closed"
-      expect(close_event.user).to eq user
+      expect(subject.closed_by.last).to eq user
     end
   end
 
