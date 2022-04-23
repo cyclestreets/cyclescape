@@ -1,25 +1,26 @@
 <ul class="discussions all">
   <h2>All discussions</h2>
   <%= render partial: "thread", collection: @all, as: :thread %>
-  <%= paginate @all, param_name: :all_page, params: {anchor: 'all'} %>
+  <%= render "pagination", items: @all, name: :all %>
 </ul>
 
 <ul class="discussions favourites">
   <h2>Favourite discussions</h2>
   <%= render partial: "thread", collection: @favourite, as: :thread, locals: { prefix: "fav" } %>
-  <%= paginate @favourite, param_name: :fav_page, params: {anchor: 'fav'} %>
+  <%= render "pagination", items: @favourite, name: 'fav' %>
 </ul>
 
 <ul class="discussions mine">
   <h2>Discussions I've participated in</h2>
   <%= render partial: "thread", collection: @mine, as: :thread, locals: { prefix: "mine" } %>
   <%= paginate @mine, param_name: :mine_page, params: {anchor: 'mine'} %>
+  <%= render "pagination", items: @mine, name: 'mine' %>
 </ul>
 
 <ul class="discussions popular">
   <h2>Popular discussions</h2>
   <%= render partial: "thread", collection: @popular, as: :thread, locals: { prefix: "popular" } %>
-  <%= paginate @popular, param_name: :pop_page, params: {anchor: 'pop'} %>
+  <%= render "pagination", items: @popular, name: 'pop' %>
 </ul>
 
 <ul class="deadlines">
