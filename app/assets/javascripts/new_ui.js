@@ -721,6 +721,10 @@ var cyclescapeui = (function ($) {
     // Page-specific initialisation
     threads: function () {
       var paginationNav = $("nav.pagination:visible")
+
+      if(!paginationNav[0]){
+        return
+      }
       var options = {
         rootMargin: '0px 0px 1000px 0px',
         threshold: 0
@@ -730,13 +734,15 @@ var cyclescapeui = (function ($) {
           obs.unobserve(paginationNav[0])
           $.ajax(
             {
-              url: $("nav.pagination .next:visible a").attr("href"),
+              url: $("nav.pagination:visible i[data-pagination-href]").data("pagination-href"),
               dataType: 'script'
             }
           ).then(function() {
             window.leafletMapInit()
             paginationNav = $("nav.pagination:visible")
-            obs.observe(paginationNav[0])
+            if (paginationNav[0]){
+              obs.observe(paginationNav[0])
+            }
           })
         }
       }, options)
@@ -744,9 +750,13 @@ var cyclescapeui = (function ($) {
 
       $('.ios-segmented-control div.option').on('click', function () {
         var desiredUl = $(this).find('input').prop('id');
-        obs.unobserve(paginationNav[0])
+        if (paginationNav[0]){
+          obs.unobserve(paginationNav[0])
+        }
         paginationNav = $("nav.pagination:visible")
-        obs.observe(paginationNav[0])
+        if (paginationNav[0]){
+          obs.observe(paginationNav[0])
+        }
         cyclescapeui.setDiscussionsView(desiredUl);
       });
 
