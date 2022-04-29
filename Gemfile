@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 5.2"
+gem "rails", "~> 6.0"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -16,8 +16,8 @@ end
 # Front-end gems
 gem "browserify-rails"
 gem "chartkick"
-gem "formtastic"
 gem "cocoon"
+gem "formtastic"
 gem "haml-rails"
 gem "jqcloud-rails", github: "GovSciences/jqcloud-rails"
 gem "jquery-rails", "~> 4.1.1"
@@ -35,7 +35,7 @@ gem "tinymce-rails", "= 4.7.13" # See #877
 # Back-end gems
 gem "aasm"
 gem "actionview-encoded_mail_to"
-gem "declarative_authorization", github: "xymist/declarative_authorization", branch: "allow_rails_5"
+gem "declarative_authorization", github: "xymist/declarative_authorization", branch: "allow_rails_6"
 gem "devise"
 gem "devise-i18n", "< 1.5" # Bug in devise-i18n 1.5, fixed if we bump devise > 4.4 https://github.com/tigrish/devise-i18n/blob/v1.5.0/rails/locales/en-GB.yml#L43
 gem "devise_invitable"
@@ -45,6 +45,7 @@ gem "email_reply_parser"
 gem "excon"
 gem "font-awesome-rails"
 gem "foreman"
+gem "hotwire-rails"
 gem "html2text"
 gem "http_accept_language"
 gem "icalendar"
@@ -52,8 +53,8 @@ gem "mustache"
 gem "normalizr"
 gem "omniauth"
 gem "omniauth-facebook"
-gem "omniauth-twitter"
 gem "omniauth-rails_csrf_protection"
+gem "omniauth-twitter"
 gem "paranoia", "~> 2.0"
 gem "pg_query"
 gem "pghero"
@@ -78,7 +79,7 @@ gem "rollbar"
 
 gem "coffee-rails"
 gem "jquery-ui-rails", "~> 5.0.0"
-gem "sass-rails"
+gem "sass-rails", "~> 5.0"
 # gem 'turbolinks'
 gem "lograge"
 gem "nokogiri", ">= 1.11.0"
@@ -96,10 +97,10 @@ group :staging do
 end
 
 group :development do
-  gem "annotate", "< 2.7.5", require: false # https://github.com/ctran/annotate_models/issues/621
+  gem "annotate", require: false
   gem "better_errors"
   gem "binding_of_caller"
-  gem "bullet", "= 5.9.0" # https://github.com/flyerhzm/bullet/issues/455
+  gem "bullet"
   gem "letter_opener"
   gem "rubocop"
   gem "rubocop-rails"

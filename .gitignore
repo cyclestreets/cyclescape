@@ -1,6 +1,7 @@
 .bundle
 .rvmrc
 .rbenv-version
+.env
 db/*.sqlite3
 log/*
 tmp/

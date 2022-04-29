@@ -16,8 +16,8 @@
  *= require "leaflet"
  *= require "slick"
  *= require "jquery-ui-timepicker-addon.min"
- *= require "leaflet-search.scss"
- *= require "leaflet.draw.scss"
+ *= require "leaflet-search.css"
+ *= require "leaflet.draw.css"
  *= require "jqcloud"
  *= require "image-edit"
  *= require font-awesome
