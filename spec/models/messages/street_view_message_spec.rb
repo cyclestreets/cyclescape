@@ -17,7 +17,7 @@ describe StreetViewMessage, type: :model do
   end
 
   it "sets location from a string" do
-    subject.update_attributes(location_string: "(53.456, -1.123)")
+    subject.update!(location_string: "(53.456, -1.123)")
     expect(subject.location.x).to eq(-1.123)
     expect(subject.location.y).to eq(53.456)
   end

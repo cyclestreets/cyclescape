@@ -157,7 +157,7 @@ describe "Message threads", type: :feature do
 
         it "should not let you censor a message" do
           page.driver.put censor_thread_message_path(thread, thread.messages[0])
-          expect(page).to have_content("You are not authorised to access that page.")
+          expect(page).to have_content(I18n.t("shared.permission_denied.login"))
         end
       end
 
@@ -195,7 +195,7 @@ describe "Message threads", type: :feature do
 
         it "should not let you delete a thread" do
           page.driver.delete thread_path(thread)
-          expect(page).to have_content("You are not authorised to access that page.")
+          expect(page).to have_content(I18n.t("shared.permission_denied.login"))
         end
       end
 
@@ -211,7 +211,7 @@ describe "Message threads", type: :feature do
           expect(page).to have_content(delete_thread)
 
           page.driver.delete thread_path(thread)
-          expect(page).to_not have_content("You are not authorised to access that page.")
+          expect(page).to_not have_content(I18n.t("shared.permission_denied.login"))
           expect(page.driver.response.location).to include(threads_path)
         end
       end
@@ -249,7 +249,7 @@ describe "Message threads", type: :feature do
 
         it "should not let you edit a thread" do
           visit edit_thread_path(thread)
-          expect(page).to have_content("You are not authorised to access that page.")
+          expect(page).to have_content(I18n.t("shared.permission_denied.login"))
           expect(page).to have_no_content("Edit thread")
         end
       end
@@ -366,12 +366,12 @@ describe "Message threads", type: :feature do
 
       it "should not show the private thread" do
         visit thread_path(private_thread)
-        expect(page).to have_content("You are not authorised to access that page.")
+        expect(page).to have_content(I18n.t("shared.permission_denied.login"))
       end
 
       it "should not show the committee thread" do
         visit thread_path(committee_thread)
-        expect(page).to have_content("You are not authorised to access that page.")
+        expect(page).to have_content(I18n.t("shared.permission_denied.login"))
       end
     end
 
@@ -388,7 +388,7 @@ describe "Message threads", type: :feature do
 
       it "should not show the committee thread" do
         visit thread_path(group_committee_thread)
-        expect(page).to have_content("You are not authorised to access that page.")
+        expect(page).to have_content(I18n.t("shared.permission_denied.login"))
       end
     end
 

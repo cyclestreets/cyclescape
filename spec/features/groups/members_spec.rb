@@ -11,7 +11,7 @@ describe "Group members" do
     end
 
     it "should not let you view the page" do
-      expect(page).to have_content("You are not authorised to access that page.")
+      expect(page).to have_content(I18n.t("shared.permission_denied.login"))
     end
   end
 

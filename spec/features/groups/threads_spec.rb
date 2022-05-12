@@ -324,7 +324,7 @@ describe "Group threads", use: :subdomain do
 
       it "should not show the private thread" do
         visit group_thread_path(private_thread.group, private_thread)
-        expect(page).to have_content("You are not authorised to access that page.")
+        expect(page).to have_content(I18n.t("shared.permission_denied.login"))
       end
     end
 

@@ -14,7 +14,7 @@ class UserLocation < ApplicationRecord
   def buffered
     buffered_loc = location.buffer(Geo::USER_LOCATIONS_BUFFER)
     union_self = buffered_loc.union(location)
-    if union_self && !union_self.try(:is_empty?)
+    if union_self && !union_self.try(:empty?)
       union_self
     else
       buffered_loc

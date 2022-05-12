@@ -27,7 +27,7 @@ describe "Group profiles" do
     describe "editing the group profile" do
       it "should refuse" do
         visit edit_group_profile_path(current_group)
-        expect(page).to have_content("You are not authorised to access that page.")
+        expect(page).to have_content(I18n.t("shared.permission_denied.login"))
       end
     end
   end
