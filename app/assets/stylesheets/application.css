@@ -2,17 +2,23 @@
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require "reset"
+ *= require "cropperjs/dist/cropper"
  *= require "jquery-ui/core"
+ *= require "jquery-ui/theme"
  *= require "jquery-ui/autocomplete"
  *= require "jquery-ui/datepicker"
  *= require "jquery-ui/slider"
  *= require "jquery.tagsinput"
  *= require "formtastic"
+ *= require "formtastic_changes"
+ *= require "screen"
  *= require "leaflet"
  *= require "slick"
  *= require "jquery-ui-timepicker-addon.min"
- *= require "leaflet-search"
+ *= require "leaflet-search.css"
  *= require "leaflet.draw.css"
  *= require "jqcloud"
+ *= require "image-edit"
  *= require font-awesome
 */

@@ -1,11 +1,10 @@
 {
   "name": "cyclescape",
   "dependencies": {
-    "@rails/webpacker": "5.4.3",
     "autosize": "^1.18.13",
-    "coffee-loader": "^3.0.0",
+    "browserify": "^14.5.0",
+    "browserify-incremental": "^3.1.0",
     "coffeeify": "~0.6",
-    "coffeescript": "1.12.7",
     "cropperjs": "^1.5.11",
     "intersection-observer": "^0.11.0",
     "jquery-ui-timepicker-addon": "1.5.5",
@@ -16,11 +15,8 @@
     "leaflet-layerjson": "^0.3.3",
     "leaflet-search": "1.9.8",
     "planer": "^1.1.1",
-    "rails-erb-loader": "^5.5.2",
     "slick-carousel-browserify": "1.6.12",
-    "timeago": "^1.6.7",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
+    "timeago": "^1.6.7"
   },
   "license": "MIT",
   "engines": {
@@ -36,7 +32,6 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "webpack-dev-server": "^3"
+    "eslint-plugin-standard": "^3.1.0"
   }
 }

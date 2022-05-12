@@ -13,4 +13,8 @@ fallback_token = "a1bcbfb276fb310924d6c5f8c7ca23d880200b"
 # TODO: remove secret_file (this is now secret key base)
 secret_key_base = Rails.root.join("config", "secret_token")
 
+if Rails.env.production?
+  Rails.application.secrets.secret_key_base = File.read(secret_key_base).strip
+else
   Rails.application.secrets.secret_key_base = fallback_token
+end

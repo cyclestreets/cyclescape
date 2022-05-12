@@ -14,6 +14,7 @@ end
 # gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
+gem "browserify-rails"
 gem "chartkick"
 gem "cocoon"
 gem "formtastic"
@@ -30,7 +31,6 @@ gem "retryable"
 gem "rgeo-geojson"
 # gem 'jquery-turbolinks'
 gem "tinymce-rails", "= 4.7.13" # See #877
-gem 'webpacker', '~> 5.0'
 
 # Back-end gems
 gem "aasm"
@@ -59,6 +59,7 @@ gem "paranoia", "~> 2.0"
 gem "pg_query"
 gem "pghero"
 gem "rack-cache", require: "rack/cache"
+gem "redis-rails"
 gem "resque"
 gem "resque-retry"
 gem "resque-rollbar"
