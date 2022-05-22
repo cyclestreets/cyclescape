@@ -19,7 +19,11 @@ config/cyclestreets
 config/schedule.yml
 public/assets
 bin/
-solr/
+solr/data
+solr/test/data
+solr/development/data
+solr/default/data
+solr/pids
 routes.txt
 public/system
 .DS_Store
