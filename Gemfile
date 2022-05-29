@@ -130,14 +130,14 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara"
+  gem "capybara", "= 3.15.1" # get strange sessionID errors
   gem "database_cleaner"
   gem "email_spec"
   gem "factory_bot_rails"
   gem "launchy"
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
-  gem "selenium-webdriver"
+  gem "selenium-webdriver", "< 4" # get strange sessionID errors
   gem "shoulda-matchers"
   gem "sunspot_test"
   gem "webmock"
