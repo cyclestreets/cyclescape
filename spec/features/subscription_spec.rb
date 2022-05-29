@@ -17,6 +17,6 @@ describe "Subscriptions", type: :feature do
 
   it "should not let other user's public token unsubscribe" do
     visit edit_thread_subscription_path(thread, subscription, t: other_sub.user.public_token)
-    expect(page).to have_content(t("application.permission_denied"))
+    expect(page).to have_content(t("devise.failure.unauthenticated"))
   end
 end
