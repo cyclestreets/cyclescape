@@ -19,7 +19,7 @@
 //= require js-cookie/src/js.cookie
 //= require cocoon_fields
 //= require timeago
-//= require tinymce-jquery
+//= require tinymce
 //= require tinymce_init
 //= require leaflet
 //= require superbly-tagfield.min

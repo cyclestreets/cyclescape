@@ -50,9 +50,9 @@ module Cyclescape
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.tinymce.install = :compile
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = "1.0"
     config.assets.paths << "node_modules"
 
     # Set cache storage

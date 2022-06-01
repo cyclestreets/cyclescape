@@ -30,7 +30,7 @@ gem "ratelimit"
 gem "retryable"
 gem "rgeo-geojson"
 # gem 'jquery-turbolinks'
-gem "tinymce-rails", "= 4.7.13" # See #877
+gem "tinymce-rails", "< 6" # Get Promise.allSettled in JS specs
 
 # Back-end gems
 gem "aasm"
