@@ -1,7 +1,8 @@
 var lastViewedMessageIdDom = document.querySelector('[data-view-message-id]')
 var curScrollPos = lastViewedMessageIdDom.scrollTop;
 var oldScroll = lastViewedMessageIdDom.scrollHeight - lastViewedMessageIdDom.clientHeight;
-
+var oldTopMessage = document.querySelector(".message>[id^='message_']")
+var messageWantedID = window.location.hash.substr(1)
 var initiallyLoaded = $('[data-initially-loaded-from]')
 initiallyLoaded.after('<%= escape_javascript render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true %>')
 <% if @initially_loaded_from %>
@@ -11,4 +12,19 @@ initiallyLoaded.remove()
 <% end %>
 
 var newScroll = lastViewedMessageIdDom.scrollHeight - lastViewedMessageIdDom.clientHeight
-lastViewedMessageIdDom.scrollTop = curScrollPos + (newScroll - oldScroll)
+
+// If the user is too near the top of the page then scroll them further down or
+// else we will keep triggering the load more indefinitely.
+if(newScroll < 200) {
+  messageWantedEl = document.getElementById(messageWantedID)
+  if(messageWantedEl && !messageWantedEl.dataset.scrolled) {
+    // If we are wanting to get to a specific message then scroll to this one
+    // but only do it once (hence the scrolled data attribute
+    messageWantedEl.scrollIntoView()
+    messageWantedEl.dataset.scrolled = 1
+  } else {
+    oldTopMessage.scrollIntoView()
+  }
+} else {
+  lastViewedMessageIdDom.scrollTop = curScrollPos + (newScroll - oldScroll)
+}
