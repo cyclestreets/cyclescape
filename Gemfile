@@ -27,6 +27,7 @@ gem "leaflet-rails", "= 0.7.7"
 gem "map_layers"
 gem "rails_autolink"
 gem "ratelimit"
+gem "redis", "<= 4.5.1" # Deprecate pipelined but Resque needs a release https://github.com/resque/resque/pull/1806
 gem "retryable"
 gem "rgeo-geojson"
 # gem 'jquery-turbolinks'
