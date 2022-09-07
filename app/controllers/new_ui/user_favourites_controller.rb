@@ -5,6 +5,7 @@ module NewUi
     respond_to :json
 
     def create
+      authorize favourite
       if favourite.save
         flash[:notice] = t(".success")
       else
