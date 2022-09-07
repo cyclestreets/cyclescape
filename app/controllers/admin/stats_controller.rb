@@ -12,7 +12,10 @@ class Admin::StatsController < ApplicationController
 
   def issues_with_multiple_threads
     multiple_ids = Issue.joins(:threads).group(:id).having("count(*) > 1").ids
-    @issues_with_multiple_threads = Issue.where(id: multiple_ids).left_joins(:tags).group(:id, :title).select(
+    multiple_tag_ids = Tag.joins(:issues).where(issues: {id: multiple_ids}).ids
+    uniq_multiple_tag_ids = Tag.where(id: multiple_tag_ids).joins(:issues, :threads).group(:id).having("count(*) = 1").ids
+    already_uniq = Issue.joins(:tags).where(id: multiple_ids, tags: {id: uniq_multiple_tag_ids}).ids
+    @issues_with_multiple_threads = Issue.where(id: multiple_ids - already_uniq).left_joins(:tags).group(:id, :title).select(
       "issues.id, title, json_agg(tags.name) as tag_names"
     )
   end
