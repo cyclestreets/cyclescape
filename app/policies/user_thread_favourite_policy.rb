@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class UserThreadFavouritePolicy
+class UserThreadFavouritePolicy < ApplicationPolicy
   def create?
-    current_user && current_user.id == record.user_id
+    user && user.id == record.user_id
   end
 end

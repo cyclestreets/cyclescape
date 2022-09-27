@@ -4,6 +4,8 @@ class ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
+    raise Pundit::NotAuthorizedError, "must be logged in" unless user
+
     @user = user
     @record = record
   end
@@ -51,8 +53,24 @@ class ApplicationPolicy
     attr_reader :user, :scope
   end
 
+  def root_or_admin?
+    root? || admin?
+  end
+
   def created_by_current_user_or_admin
-    root? || admin? || (current_use && current_use.id == resource.created_by_id)
+    root_or_admin? || (user && user.id == record.created_by_id)
+  end
+
+  def in_group_committee?
+    root_or_admin? || (user && group && group.committee_members.where(id: user.id).exists?)
+  end
+
+  def view_full_name?(other_user)
+    return true if root_or_admin? || other_user.profile.visibility == "public"
+    return false unless user
+
+    user.id == other_user.id || (user.group_ids & other_user.group_ids).present? ||
+      (user.in_group_committee.ids & other_user.requested_groups.ids).present?
   end
 
   delegate :root?, :admin?, to: :@user, allow_nil: true

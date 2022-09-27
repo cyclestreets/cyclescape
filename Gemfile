@@ -142,6 +142,7 @@ group :test do
   gem "email_spec"
   gem "factory_bot_rails"
   gem "launchy"
+  gem "pundit-matchers"
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
   gem "selenium-webdriver", "< 4" # get strange sessionID errors

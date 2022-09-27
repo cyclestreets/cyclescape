@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class IssuePolicy
+class IssuePolicy < ApplicationPolicy
   def new?
-    current_user
+    user
   end
 
   alias edit? created_by_current_user_or_admin

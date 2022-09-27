@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AdminPolicy
+class AdminPolicy < ApplicationPolicy
   def initialize(user, _record)
     @user = user
   end
