@@ -6,6 +6,8 @@ class MessageThreadsController < ApplicationController
   include MessageCreator
 
   def index
+    skip_authorization
+
     threads = ThreadList.recent_public.page(params[:page])
     @user_favourites = current_user&.thread_favourites&.where(thread: threads)
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
@@ -119,7 +121,9 @@ class MessageThreadsController < ApplicationController
     @thread ||= begin
                   scope = MessageThread.all
                   scope = scope.approved unless current_user.try(:admin?)
-                  scope.find params[:id]
+                  thread = scope.find params[:id]
+                  authorize thread
+                  thread
                 end
   end
 

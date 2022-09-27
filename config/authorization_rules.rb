@@ -64,9 +64,6 @@ authorization do
       if_attribute committee_members: contains { user }
     end
     has_permission_on :group_membership_requests do
-      to %i[new create]
-    end
-    has_permission_on :group_membership_requests do
       to :cancel
       if_attribute user: is { user }
     end

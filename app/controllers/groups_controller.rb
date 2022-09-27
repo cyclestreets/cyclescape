@@ -2,6 +2,7 @@
 
 class GroupsController < ApplicationController
   def index
+    skip_authorization
     groups = Group.ordered.enabled
 
     respond_to do |format|

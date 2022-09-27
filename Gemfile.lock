@@ -396,6 +396,8 @@ GEM
     public_suffix (5.0.5)
     pundit (2.2.0)
       activesupport (>= 3.0.0)
+    pundit-matchers (1.7.0)
+      rspec-rails (>= 3.0.0)
     raabro (1.4.0)
     racc (1.7.3)
     rack (2.2.9)
@@ -690,6 +692,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   pundit
+  pundit-matchers
   rack-cache
   rack-cors
   rack-mini-profiler

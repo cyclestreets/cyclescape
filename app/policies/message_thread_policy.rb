@@ -1,0 +1,69 @@
+# frozen_string_literal: true
+
+class MessageThreadPolicy < ApplicationPolicy
+  def initialize(user, thread)
+    @user = user
+    @thread = thread
+  end
+
+  def new?
+    return false unless user
+
+    if thread.has_issue?
+      true
+    elsif thread.group_id
+      user.group_ids.include?(thread.group_id)
+    elsif thread.user
+      view_full_name?(thread.user) &&
+        !UserBlock.where(user: user, blocked: thread.user).or(UserBlock.where(user: thread.user, blocked: user)).exist?
+    end
+  end
+
+  alias create? new?
+
+  def show?
+    return true if thread.public? || root_or_admin
+    return false unless user
+
+    if thread.private_to_committee?
+      thread.group_committee_members.include?(user)
+    elsif thread.private_message?
+      thread.user == user || thread.created_by == user
+    elsif thread.private_to_group?
+      user.group_ids.include?(thread.group_id)
+    end
+  end
+
+  def edit?
+    return true if root_or_admin
+
+    if user && thread.created_by == user && 24.hours.ago > thread.created_at
+      return true
+    end
+
+    in_group_committee? && show?
+  end
+
+  alias update? edit?
+
+  def destroy?
+    in_group_committee? && show?
+  end
+
+  def open?
+    user && thead.closed && (thread.subscribers.include?(user) || root_or_admin)
+  end
+
+  def close?
+    user && !thead.closed && (thread.subscribers.include?(user) || root_or_admin)
+  end
+
+  def vote_detail?
+    user && show?
+  end
+
+  private
+
+  attr_reader :thread
+  delegate :group, to: :thread, allow_nil: true
+end
