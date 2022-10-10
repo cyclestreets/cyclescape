@@ -6,6 +6,7 @@ FactoryBot.define do
     sequence(:full_name) { |n| "User #{n}" }
     sequence(:password) { |n| "password#{n}" }
     sequence(:password_confirmation) { |n| "password#{n}" }
+    sequence(:api_key) { |n| "very-secret-#{n}" }
     after(:build, &:skip_confirmation!)
     approved { true }
 
