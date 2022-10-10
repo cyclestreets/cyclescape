@@ -8,21 +8,26 @@ class MessageThreadPolicy < ApplicationPolicy
 
   def new?
     return false unless user
+    return true if root_or_admin?
 
     if thread.has_issue?
       true
     elsif thread.group_id
-      user.group_ids.include?(thread.group_id)
+      if thread.private_to_committee?
+        thread.group_committee_members.include?(user)
+      else
+        user.group_ids.include?(thread.group_id)
+      end
     elsif thread.user
       view_full_name?(thread.user) &&
-        !UserBlock.where(user: user, blocked: thread.user).or(UserBlock.where(user: thread.user, blocked: user)).exist?
+        !UserBlock.where(user: user, blocked: thread.user).or(UserBlock.where(user: thread.user, blocked: user)).exists?
     end
   end
 
   alias create? new?
 
   def show?
-    return true if thread.public? || root_or_admin
+    return true if thread.public? || root_or_admin?
     return false unless user
 
     if thread.private_to_committee?
@@ -35,7 +40,7 @@ class MessageThreadPolicy < ApplicationPolicy
   end
 
   def edit?
-    return true if root_or_admin
+    return true if root_or_admin?
 
     if user && thread.created_by == user && 24.hours.ago > thread.created_at
       return true
@@ -51,11 +56,11 @@ class MessageThreadPolicy < ApplicationPolicy
   end
 
   def open?
-    user && thead.closed && (thread.subscribers.include?(user) || root_or_admin)
+    user && thread.closed && (thread.subscribers.include?(user) || root_or_admin?)
   end
 
   def close?
-    user && !thead.closed && (thread.subscribers.include?(user) || root_or_admin)
+    user && !thread.closed && (thread.subscribers.include?(user) || root_or_admin?)
   end
 
   def vote_detail?
