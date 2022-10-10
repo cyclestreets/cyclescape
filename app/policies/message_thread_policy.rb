@@ -42,7 +42,7 @@ class MessageThreadPolicy < ApplicationPolicy
   def edit?
     return true if root_or_admin?
 
-    if user && thread.created_by == user && 24.hours.ago > thread.created_at
+    if user && thread.created_by == user && thread.created_at > 24.hours.ago
       return true
     end
 
