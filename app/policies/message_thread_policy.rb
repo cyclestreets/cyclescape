@@ -39,6 +39,8 @@ class MessageThreadPolicy < ApplicationPolicy
     end
   end
 
+  alias update_tags? show?
+
   def edit?
     return true if root_or_admin?
 
