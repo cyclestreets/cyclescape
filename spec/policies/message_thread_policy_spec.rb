@@ -4,9 +4,11 @@ require "spec_helper"
 
 RSpec.describe MessageThreadPolicy do
   subject { described_class.new(user, thread) }
+  let(:all_actions) { %i[new create show edit update destroy close vote_detail] }
+  let(:forbiden_actions) { all_actions - allowed_actions }
 
   context "being an admin" do
-    let(:allowed_actions) { %i[new create show edit update destroy close vote_detail] }
+    let(:allowed_actions) { all_actions }
     let(:user) { build_stubbed :user, :admin }
     let(:thread) { build :message_thread }
 
@@ -22,7 +24,6 @@ RSpec.describe MessageThreadPolicy do
 
     context "with a thread in your group" do
       let(:allowed_actions) { %i[new create show edit update destroy vote_detail] }
-      let(:forbiden_actions) { %i[open close] }
       let(:group) { membership.group }
 
       context "committee thread" do
@@ -47,7 +48,7 @@ RSpec.describe MessageThreadPolicy do
 
     context "with a thread in another group" do
       let(:group) { create :group }
-      let(:forbiden_actions) { %i[new create show edit update destroy vote_detail open close] }
+      let(:forbiden_actions) { all_actions }
 
       context "private to group thread" do
         let(:privacy) { MessageThread::GROUP }
@@ -66,13 +67,12 @@ RSpec.describe MessageThreadPolicy do
 
     context "with a thread in your group" do
       let(:allowed_actions) { %i[new create show vote_detail] }
-      let(:forbiden_actions) { %i[edit update destroy open close] }
       let(:group) { membership.group }
 
       context "committee thread" do
         let(:other_user) { create :user }
         let(:privacy) { MessageThread::COMMITTEE }
-        let(:forbiden_actions) { %i[new create show edit update destroy vote_detail open close] }
+        let(:forbiden_actions) { all_actions }
 
         it do
           expect(subject).to forbid_actions(forbiden_actions)
@@ -86,18 +86,54 @@ RSpec.describe MessageThreadPolicy do
           expect(subject).to permit_actions(allowed_actions)
           expect(subject).to forbid_actions(forbiden_actions)
         end
+
+        context "when you are subscribed" do
+          before do
+            thread.add_subscriber user
+          end
+
+          let(:allowed_actions) { %i[new create show vote_detail close] }
+
+          it do
+            expect(subject).to permit_actions(allowed_actions)
+            expect(subject).to forbid_actions(forbiden_actions)
+          end
+        end
       end
     end
 
     context "with a thread in another group" do
       let(:group) { create :group }
-      let(:forbiden_actions) { %i[new create show edit update destroy vote_detail open close] }
 
       context "private to group thread" do
         let(:privacy) { MessageThread::GROUP }
+        let(:forbiden_actions) { all_actions }
 
         it do
           expect(subject).to forbid_actions(forbiden_actions)
+        end
+      end
+
+      context "public thread in group" do
+        let(:privacy) { MessageThread::PUBLIC }
+        let(:allowed_actions) { %i[show vote_detail] }
+
+        it do
+          expect(subject).to permit_actions(allowed_actions)
+          expect(subject).to forbid_actions(forbiden_actions)
+        end
+
+        context "when you are subscribed" do
+          before do
+            thread.add_subscriber user
+          end
+
+          let(:allowed_actions) { %i[show vote_detail close] }
+
+          it do
+            expect(subject).to permit_actions(allowed_actions)
+            expect(subject).to forbid_actions(forbiden_actions)
+          end
         end
       end
     end
@@ -107,7 +143,6 @@ RSpec.describe MessageThreadPolicy do
     let(:thread) { create :message_thread }
     let(:user) { nil }
     let(:allowed_actions) { %i[show] }
-    let(:forbiden_actions) { %i[new create edit update destroy close vote_detail] }
 
     it do
       expect(subject).to permit_actions(allowed_actions)
@@ -116,42 +151,121 @@ RSpec.describe MessageThreadPolicy do
   end
 
   context "private thread (direct messages)" do
-    let(:user) { creating_user }
     let(:thread) { create :message_thread, created_by: creating_user, user: recieving_user, privacy: MessageThread::PRIVATE  }
 
     context "both users have public profiles" do
       let(:creating_user) { create :user }
       let(:recieving_user) { create :user }
       let(:allowed_actions) { %i[new create show edit update close vote_detail] }
-      let(:forbiden_actions) { %i[open destroy] }
 
-      it do
-        expect(subject).to permit_actions(allowed_actions)
+      context "when current_user created the thread" do
+        let(:user) { creating_user }
+        it do
+          expect(subject).to permit_actions(allowed_actions)
+          expect(subject).to forbid_actions(forbiden_actions)
+        end
       end
-      context "same with recieving_user" do
+
+      context "when current_user is recieving thread" do
         let(:user) { recieving_user }
         let(:allowed_actions) { %i[new create show close vote_detail] }
-        let(:forbiden_actions) { %i[open destroy edit update] }
+
+        it do
+          expect(subject).to permit_actions(allowed_actions)
+          expect(subject).to forbid_actions(forbiden_actions)
+        end
+      end
+
+      context "when current user is not involved in thread" do
+        let(:membership) { create :group_membership, :committee }
+        let(:group) { membership.group }
+        let(:user) { membership.user }
+
+        before do
+          create :group_membership, user: creating_user, group: group
+          create :group_membership, user: recieving_user, group: group
+        end
+
+        let(:allowed_actions) { %i[new create] }
 
         it do
           expect(subject).to permit_actions(allowed_actions)
         end
       end
+
+      describe "user blocks" do
+        let(:user) { creating_user }
+        let(:other_user) { ([creating_user, recieving_user] - [user]).first }
+        let(:allowed_actions) { %i[show vote_detail close edit update] }
+
+        context "current user has blocked other user" do
+          before { user.user_blocks.create!(blocked: other_user) }
+
+          it do
+            expect(subject).to permit_actions(allowed_actions)
+            expect(subject).to forbid_actions(forbiden_actions)
+          end
+        end
+
+        context "other user has blocked current user" do
+          before { other_user.user_blocks.create!(blocked: user) }
+
+          it do
+            expect(subject).to permit_actions(allowed_actions)
+            expect(subject).to forbid_actions(forbiden_actions)
+          end
+        end
+      end
     end
 
-    context "have private profile but share a group" do
-    end
+    context "have private profile" do
+      let(:creating_user) { create :user }
+      let(:recieving_user) { create(:user_profile, visibility: "group").user }
+      let(:user) { creating_user }
 
-    context "have private profile and requesting to be in a group other is committee of" do
-    end
+      context "when the users share a group" do
+        before do
+          membership = create :group_membership, user: creating_user
+          create :group_membership, user: recieving_user, group: membership.group
+        end
 
-    context "have private profile and do not share a group" do
-    end
+        let(:allowed_actions) { %i[new edit update create show vote_detail close] }
 
-    context "creating user has blocked other user" do
-    end
+        it do
+          expect(subject).to permit_actions(allowed_actions)
+          expect(subject).to forbid_actions(forbiden_actions)
+        end
+      end
 
-    context "other user has blocked creating user" do
+      context "when current_user is in a committee" do
+        context "when other user is requesting to join group" do
+          before do
+            membership = create :group_membership_request, user: recieving_user
+            create :group_membership, :committee, user: creating_user, group: membership.group
+          end
+
+          let(:allowed_actions) { %i[new create edit update show vote_detail close] }
+
+          it do
+            expect(subject).to permit_actions(allowed_actions)
+            expect(subject).to forbid_actions(forbiden_actions)
+          end
+        end
+
+        context "when other user is in no overlapping group" do
+          before do
+            create :group_membership, :committee, user: creating_user
+            create :group_membership, :committee, user: recieving_user
+          end
+
+          let(:allowed_actions) { %i[edit update show vote_detail close] }
+
+          it do
+            expect(subject).to permit_actions(allowed_actions)
+            expect(subject).to forbid_actions(forbiden_actions)
+          end
+        end
+      end
     end
   end
 end
