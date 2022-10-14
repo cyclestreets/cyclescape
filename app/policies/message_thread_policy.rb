@@ -56,11 +56,11 @@ class MessageThreadPolicy < ApplicationPolicy
   end
 
   def open?
-    user && thread.closed && (thread.subscribers.include?(user) || root_or_admin?)
+    thread.closed && subscribed_or_admin?
   end
 
   def close?
-    user && !thread.closed && (thread.subscribers.include?(user) || root_or_admin?)
+    !thread.closed && subscribed_or_admin?
   end
 
   def vote_detail?
@@ -68,6 +68,10 @@ class MessageThreadPolicy < ApplicationPolicy
   end
 
   private
+
+  def subscribed_or_admin?
+    user && (thread.subscribers.include?(user) || root_or_admin?)
+  end
 
   attr_reader :thread
   delegate :group, to: :thread, allow_nil: true
