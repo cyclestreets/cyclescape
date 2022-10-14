@@ -2,6 +2,7 @@
 
 class PrivateMessagesController < ApplicationController
   def index
+    skip_authorization
     count = if current_user
               MessageThread.unviewed_private_count(current_user)
             else

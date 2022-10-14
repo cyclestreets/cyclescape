@@ -4,7 +4,7 @@ module Admin
   class UsersController < BaseController
     def index
       @full_page = true
-      @users = User.order("created_at DESC").page(params[:page]).includes(:profile)
+      @users = ::User.order("created_at DESC").page(params[:page]).includes(:profile)
       @users = @users.search_by_full_name(params[:full_name]) if params[:full_name]
       @users = @users.search_by_display_name(params[:display_name]) if params[:display_name]
       @users = @users.search_by_email(params[:email]) if params[:email]
@@ -39,7 +39,7 @@ module Admin
     protected
 
     def user
-      @user ||= User.find(params[:id])
+      @user ||= ::User.find(params[:id])
     end
 
     def permitted_params
