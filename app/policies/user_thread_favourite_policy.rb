@@ -2,6 +2,7 @@
 
 class UserThreadFavouritePolicy < ApplicationPolicy
   def create?
-    user && user.id == record.user_id
+    user.id == record.user_id
   end
+  alias destroy? create?
 end
