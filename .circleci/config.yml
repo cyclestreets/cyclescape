@@ -37,7 +37,7 @@ jobs:
     # In many cases you can simplify this from what is generated here.
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
-    - run: curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+    - run: curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     - run: sudo apt-get update
     - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromedriver
     - run: sudo npm install -g npm@8.2.0
