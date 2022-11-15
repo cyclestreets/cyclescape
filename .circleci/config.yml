@@ -9,6 +9,8 @@
 version: 2
 jobs:
   build:
+    context:
+      - font awesome
     working_directory: ~/cyclestreets/cyclescape
     parallelism: 1
     shell: /bin/bash --login
@@ -18,13 +20,13 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: circleci/ruby:2.6.5-stretch-node
+      - image: cimg/ruby:2.7-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-      - image: circleci/postgres:10.10-postgis-ram
+      - image: cimg/postgres:10.17-postgis
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
@@ -39,7 +41,7 @@ jobs:
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     - run: sudo apt-get update
-    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromedriver
+    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromium-chromedriver
     - run: sudo npm install -g npm@8.2.0
 
     # Dependencies
