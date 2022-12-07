@@ -9,8 +9,6 @@
 version: 2
 jobs:
   build:
-    context:
-      - font awesome
     working_directory: ~/cyclestreets/cyclescape
     parallelism: 1
     shell: /bin/bash --login
@@ -57,8 +55,6 @@ jobs:
     - run: if [ -z "${NODE_ENV:-}" ]; then export NODE_ENV=test; fi
     - run: export PATH="~/cyclestreets/cyclescape/node_modules/.bin:$PATH"
     - run: npm install
-    - run: cp node_modules/@fortawesome/fontawesome-free/css/all.css vendor/assets/stylesheets/_fontawesome.css
-    - run: sed -i 's:url("\.\.:asset-url("@fortawesome/fontawesome-free:g' vendor/assets/stylesheets/_fontawesome.css
     - run: 'bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3'
     # Save dependency cache
     - save_cache:

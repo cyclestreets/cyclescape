@@ -2,7 +2,6 @@
   "name": "cyclescape",
   "dependencies": {
     "@benmajor/jquery-touch-events": "^2.0.3",
-    "@fortawesome/fontawesome-free": "^5.15.4",
     "animate.css": "^4.1.1",
     "autosize": "^1.18.13",
     "browserify": "^14.5.0",
