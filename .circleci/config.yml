@@ -90,7 +90,7 @@ jobs:
     - run:
         command: sudo service redis-server start
     - run:
-        command: SOLR=1 bundle exec rspec --colour --order rand --format progress spec
+        command: SOLR=1 bundle exec rspec -b --colour --order rand --format progress spec
     # Teardown
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # Save test results
