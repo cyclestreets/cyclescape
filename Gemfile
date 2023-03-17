@@ -77,6 +77,7 @@ gem "grape-swagger"
 gem "grape-swagger-rails"
 gem "kaminari-grape"
 
+gem "cgi", ">= 0.3.6", require: false
 gem "rack-cors", require: "rack/cors"
 gem "rakismet"
 gem "rollbar"
