@@ -1,0 +1,8 @@
+<% if signed_in? %>
+  <% user_favourite = @user_favourites&.present? ? @user_favourites.find { |uf| uf.thread_id == thread.id} : thread.favourite_for(current_user) %>
+  <% if user_favourite&.persisted? %>
+    <i id="favourite-<%= thread.id %>" class="favourite favourited fas fa-fw fa-star animate__animated" data-url="<%= new_ui_user_favourites_path(id: thread.id) %>"></i>
+  <% else %>
+    <i id="favourite-<%= thread.id %>" class="favourite fas fa-fw fa-star animate__animated" data-url="<%= new_ui_user_favourites_path(id: thread.id) %>"></i>
+  <% end %>
+<% end %>

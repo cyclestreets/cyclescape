@@ -1,0 +1,9 @@
+<% if !@all.out_of_range? %>
+$('.discussions.all .pagination').replaceWith('<%= j render partial: "thread", collection: @all, as: :thread %> <%= j render "pagination", items: @all, name: "all" %>');
+<% elsif !@favourite.out_of_range? %>
+$('.discussions.favourites .pagination').replaceWith('<%= j render partial: "thread", collection: @favourite, as: :thread, locals: { prefix: "fav" } %> <%= j render "pagination", items: @all, name: :fav %> ');
+<% elsif !@mine.out_of_range? %>
+$('.discussions.mine .pagination').replaceWith(' <%= j render partial: "thread", collection: @mine, as: :thread, locals: { prefix: "mine" } %> <%= j render "pagination", items: @mine, name: :mine %> ');
+<% elsif !@popular.out_of_range? %>
+$('.discussions.popular .pagination').replaceWith(' <%= j render partial: "thread", collection: @popular, as: :thread, locals: { prefix: "popular" }%> <%= j render "pagination", items: @popular, name: :pop_page %> ');
+<% end %>

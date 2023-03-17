@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 class UserProfile < ApplicationRecord
   VISIBILITY_OPTIONS = %w[public group].freeze
 

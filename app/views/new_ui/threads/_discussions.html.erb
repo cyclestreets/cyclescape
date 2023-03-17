@@ -1,0 +1,122 @@
+<ul class="discussions all">
+  <h2>All discussions</h2>
+  <%= render partial: "thread", collection: @all, as: :thread %>
+  <%= render "pagination", items: @all, name: :all %>
+</ul>
+
+<ul class="discussions favourites">
+  <h2>Favourite discussions</h2>
+  <%= render partial: "thread", collection: @favourite, as: :thread, locals: { prefix: "fav" } %>
+  <%= render "pagination", items: @favourite, name: 'fav' %>
+</ul>
+
+<ul class="discussions mine">
+  <h2>Discussions I've participated in</h2>
+  <%= render partial: "thread", collection: @mine, as: :thread, locals: { prefix: "mine" } %>
+  <%= paginate @mine, param_name: :mine_page, params: {anchor: 'mine'} %>
+  <%= render "pagination", items: @mine, name: 'mine' %>
+</ul>
+
+<ul class="discussions popular">
+  <h2>Popular discussions</h2>
+  <%= render partial: "thread", collection: @popular, as: :thread, locals: { prefix: "popular" } %>
+  <%= render "pagination", items: @popular, name: 'pop' %>
+</ul>
+
+<ul class="deadlines">
+  <h2>Deadlines</h2>
+  <button class="primary">Subscribe to main calendar feed <i title="Subscribe to main calendar feed"
+                                                             class="fas fa-fw fa-calendar-plus"></i></button>
+  <li>
+    <div class="date">
+      <h3>18</h3>
+      <p>Oct</p>
+      <p class="time">Monday 14:00</p>
+    </div>
+    <div class="content">
+      <h2>Voluptatibus totam sed nihil doloribus et reprehenderit est. Eum rerum illum voluptatem.
+        Planning meeting</h2>
+      <p class="light">Voluptatibus totam sed nihil doloribus et reprehenderit est. Eum rerum
+        illum voluptatem. York Way: Road safety changes</p>
+    </div>
+    <div class="actions">
+      <button class="primary"><i title="Add to calendar"
+                                 class="fas fa-fw fa-calendar-plus"></i></button>
+    </div>
+  </li>
+  <li>
+    <div class="date">
+      <h3>18</h3>
+      <p>Oct</p>
+      <p class="time">Tuesday 14:00</p>
+    </div>
+    <div class="content">
+      <h2>Planning meeting</h2>
+      <p class="light">York Way: Road safety changes</p>
+    </div>
+    <div class="actions">
+      <button class="primary"><i title="Add to calendar"
+                                 class="fas fa-fw fa-calendar-plus"></i></button>
+    </div>
+  </li>
+  <li>
+    <div class="date">
+      <h3>18</h3>
+      <p>Oct</p>
+      <p class="time">Saturday 14:00</p>
+    </div>
+    <div class="content">
+      <h2>Planning meeting</h2>
+      <p class="light">York Way: Road safety changes</p>
+    </div>
+    <div class="actions">
+      <button class="primary"><i title="Add to calendar"
+                                 class="fas fa-fw fa-calendar-plus"></i></button>
+    </div>
+  </li>
+  <li>
+    <div class="date">
+      <h3>18</h3>
+      <p>Oct</p>
+      <p class="time">Sunday 14:00</p>
+    </div>
+    <div class="content">
+      <h2>Planning meeting</h2>
+      <p class="light">York Way: Road safety changes</p>
+    </div>
+    <div class="actions">
+      <button class="primary"><i title="Add to calendar"
+                                 class="fas fa-fw fa-calendar-plus"></i></button>
+    </div>
+  </li>
+  <li>
+    <div class="date">
+      <h3>18</h3>
+      <p>Oct</p>
+      <p class="time">Monday 14:00</p>
+    </div>
+    <div class="content">
+      <h2>Planning meeting</h2>
+      <p class="light">York Way: Road safety changes</p>
+    </div>
+    <div class="actions">
+      <button class="primary"><i title="Add to calendar"
+                                 class="fas fa-fw fa-calendar-plus"></i></button>
+    </div>
+  </li>
+  <li>
+    <div class="date">
+      <h3>18</h3>
+      <p>Oct</p>
+      <p class="time">Friday 14:00</p>
+    </div>
+    <div class="content">
+      <h2>Planning meeting</h2>
+      <p class="light">York Way: Road safety changes</p>
+    </div>
+    <div class="actions">
+      <button class="primary"><i title="Add to calendar"
+                                 class="fas fa-fw fa-calendar-plus"></i></button>
+    </div>
+  </li>
+</ul>

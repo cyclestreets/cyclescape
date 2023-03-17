@@ -1,0 +1,40 @@
+<li>
+  <a href=<%= threads_path(thread) %> >
+    <div class="content">
+      <h3 class="drop-cap"><%= thread.title %></h3>
+      <% if thread.group %>
+        <p><%= thread.group.name %></p>
+        <% if thread.group.profile.logo %>
+          <%= image_tag thread.group.profile.logo_thumbnail.url, class: "avatar" %>
+        <% end %>
+      <% end %>
+      <p class="italic">
+        <% if permitted_to? :view_profile, thread.created_by %>
+          <%= thread.created_by.name  %>
+        <% else %>
+          <%= thread.created_by.display_name_or_anon  %>
+        <% end %>
+        <%= formatted_created_at(thread)  %>
+      </p>
+      <ul class="tags">
+        <% thread.tags.pluck(:name).each do |tag| %>
+          <li class="tag"><%= tag %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="minimap">
+      <div class="unread">
+        <p><%= @unviewed_message_count[thread.id] %></p>
+      </div>
+      <% prefix = "list" unless local_assigns.has_key? :prefix %>
+      <% map_id = "leaflet-#{dom_id(thread, prefix)}" %>
+      <div class="map" id="<%= map_id %>"></div>
+      <% if thread.issue %>
+        <div class="hidden">
+          <div class="map-data" data-center="<%= location_to_geojson(thread.issue.location) %>" data-opts="<%= { domid: map_id, hidelayers: true, feature: item_to_geojson(thread.issue), hidezoom: true }.to_json %>"></div>
+        </div>
+      <% end %>
+    </div>
+    <%= render "new_ui/user_favourites/form", thread: thread %>
+  </a>
+</li>

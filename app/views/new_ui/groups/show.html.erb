@@ -1,0 +1,77 @@
+<div id="content">
+  <div class="header" style="background-image: url('<%= image_url("placeholders/group-header.jpeg") %>');">
+    <div class="content">
+      <%= image_tag("placeholders/group-logo.png", class: "logo inline") %>
+      <h1 class="inline"><%= @group.name %></h1>
+      <div class="links">
+        <a href="#"><i class="fab fa-fw fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-fw fa-facebook-square"></i></a>
+        <a href="#"><i class="fas fa-fw fa-globe-europe"></i></a>
+      </div>
+    </div>
+    <% if (profile = @group.profile) && profile.location %>
+      <% map_id = "leaflet-#{dom_id(@group)}" %>
+      <div class="minimap" id="<%= map_id %>">
+        <div class="hidden">
+          <div
+            class="map-data"
+            data-center="<%= location_to_geojson(profile.location)%>"
+            data-opts="<%={ domid: map_id, hidelayers: true, feature: item_to_geojson(profile), hidezoom: true }.to_json%>">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <hr>
+  <div class="content-wrapper">
+    <div class="main-content">
+      <div class="light drop-cap">
+        <%= auto_link simple_format @group.description %>
+      </div>
+      <a href="create-account.html">
+          <button class="primary">Join our discussions
+            <i class="fas fa-fw fa-user-plus"></i>
+          </button>
+      </a>
+      <% if current_user && @group.committee_members.include?(current_user) %>
+        <button class="primary">Edit page<i class="fas fa-fw fa-pencil-alt"></i></button>
+      <% end %>
+      <br>
+      <a class="action" href="discussions.html">
+        <div class="icon"><i class="fas fa-fw fa-book-open"></i></div>
+        <div class="text">
+          <h2>View discussions</h2>
+          <p class="description">There are 23 new discussions in your area. See what’s going on!</p>
+        </div>
+      </a>
+      <a class="action" href="browse-topics.html">
+        <div class="icon"><i class="fas fa-fw fa-rocket"></i></div>
+        <div class="text">
+          <h2>Browse issues</h2>
+          <p class="description">Browse our map to see what's happening in this area.</p>
+        </div>
+      </a>
+    </div>
+    <div class="side-content">
+      <div class="widget">
+        <div class="title">
+          <h2><i class="fas fa-fw fa-biking"></i> Committee members</h2>
+        </div>
+        <div class="widget-content">
+          <ul class="unstyled avatars">
+            <% @group.committee_members.includes(:profile).each do |member| %>
+              <li>
+                <%= link_to user_profile_path(member) do %>
+                  <% if member.profile.picture %>
+                    <%= image_tag member.profile.picture_thumbnail.url %>
+                  <% end %>
+                  <%= member.name %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

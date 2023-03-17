@@ -30,7 +30,7 @@ class MessageThread < ApplicationRecord
 
   belongs_to :created_by, -> { with_deleted }, class_name: "User"
   belongs_to :group, inverse_of: :threads, counter_cache: true
-  belongs_to :issue, inverse_of: :threads
+  belongs_to :issue, inverse_of: :threads, optional: true
   belongs_to :user, inverse_of: :private_threads
   has_many :messages, -> { ordered_for_thread_view }, foreign_key: "thread_id", autosave: true, inverse_of: :thread
   has_many :subscriptions, -> { where(deleted_at: nil) }, class_name: "ThreadSubscription", foreign_key: "thread_id", inverse_of: :thread
@@ -73,6 +73,8 @@ class MessageThread < ApplicationRecord
   scope :after_date, ->(date) { where(arel_table[:created_at].gteq(date)) }
   scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
   scope :after_id, ->(id) { where(arel_table[:id].gt(id)) }
+  scope :favourite_for, ->(user) { join(:user_favourites).merge(UserThreadFavourite.where(user: user)) }
+  scope :ordered_by_nos_of_messages, -> { joins(:messages).merge(Message.approved).group(column_names).order(Arel.sql("count(*) desc")) }
 
   default_scope { where(deleted_at: nil) }
 
@@ -99,6 +101,21 @@ class MessageThread < ApplicationRecord
   end
 
   class << self
+    def unviewed_message_counts(usr)
+      return none unless usr
+
+      thread_views = ThreadView.where(user: usr, thread_id: all).select(:thread_id, :viewed_at).to_a
+      (ids - thread_views.map(&:thread_id)).each do |thread_id|
+        thread_views.push(ThreadView.new(thread_id: thread_id, viewed_at: Time.zone.at(0)))
+      end
+      where_sql = thread_views.map { |_| "(messages.thread_id = ? and messages.created_at > ?)" }.join(" OR ")
+      joins(:messages)
+        .merge(Message.approved)
+        .where(where_sql, *thread_views.map { |v| [v.thread_id, v.viewed_at] }.flatten)
+        .group(:id)
+        .pluck(:id, Arel.sql("count(*)"))
+    end
+
     def non_committee_privacies_map
       NON_COMMITTEE_ALLOWED_PRIVACY.map do |n|
         [I18n.t("thread_privacy_options.#{n}"), n]

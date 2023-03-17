@@ -1,0 +1,6 @@
+<% next_page = path_to_next_page(items, param_name: "#{name}_page", params: {anchor: name}) %>
+<% if next_page %>
+  <nav class="pagination">
+    <i class="fa fa-spinner fa-spin" data-pagination-href="<%= next_page %>"> </i>
+  </nav>
+<% end %>

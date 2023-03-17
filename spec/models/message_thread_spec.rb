@@ -76,6 +76,25 @@ describe MessageThread do
       expect(described_class.unviewed_for(user)).to eq []
     end
 
+    it ".unviewed_messages" do
+      # with no thread views
+      create(:message, thread: thread_from)
+      create(:message, thread: thread_to)
+      create(:message, thread: thread_to, created_at: 2.hours.from_now)
+      expect(described_class.unviewed_message_counts(user)).to match_array [[thread_from.id, 1], [thread_to.id, 2]]
+      expect(described_class.where(id: thread_to.id).unviewed_message_counts(user)).to match_array [[thread_to.id, 2]]
+
+      # with one recent thread view
+      create :thread_view, thread: thread_to, viewed_at: 1.hour.ago, user: thread_to.created_by
+      create :thread_view, thread: thread_to, viewed_at: 1.hour.from_now, user: user
+      user_view = create :thread_view, thread: thread_from, viewed_at: 1.hour.ago, user: user
+      expect(described_class.unviewed_message_counts(user)).to match_array [[thread_from.id, 1], [thread_to.id, 1]]
+
+      # where both threads have been viewed recently
+      user_view.update_column(:viewed_at, 3.hours.from_now)
+      expect(described_class.unviewed_message_counts(user)).to match_array [[thread_to.id, 1]]
+    end
+
     context "with upcoming deadlines" do
       let(:deadline_soon) { create(:message_thread) }
       let(:deadline_further) { create(:message_thread) }
@@ -98,6 +117,25 @@ describe MessageThread do
       it ".with_upcoming_deadlines" do
         expect(described_class.with_upcoming_deadlines).to eq([deadline_soon, deadline_further])
       end
+    end
+
+    describe ".ordered_by_nos_of_messages" do
+      let(:user) { one_approved_message.created_by }
+      let(:one_approved_message) { create(:message_thread) }
+      let(:two_approved_messages) { create(:message_thread, created_by: user) }
+      let(:three_approved_messages) { create(:message_thread, created_by: user) }
+
+      before do
+        create_list(:message, 1, created_by: user, thread: one_approved_message)
+        create_list(:message, 2, created_by: user, thread: two_approved_messages)
+        create_list(:message, 3, created_by: user, thread: three_approved_messages)
+        create_list(:message, 2, :possible_spam, created_by: user, thread: one_approved_message)
+      end
+
+      it do
+        expect(described_class.ordered_by_nos_of_messages).to eq [three_approved_messages, two_approved_messages, one_approved_message]
+      end
+
     end
   end
 

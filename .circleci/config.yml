@@ -18,13 +18,13 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: circleci/ruby:2.6.5-stretch-node
+      - image: cimg/ruby:2.7-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-      - image: circleci/postgres:10.10-postgis-ram
+      - image: cimg/postgres:10.17-postgis
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
@@ -37,10 +37,10 @@ jobs:
     # In many cases you can simplify this from what is generated here.
     # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
-    - run: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    - run: curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     - run: sudo apt-get update
-    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromedriver
-    - run: sudo npm install -g npm@6.4.1
+    - run: sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick default-jre chromium-chromedriver
+    - run: sudo npm install -g npm@8.2.0
 
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
@@ -90,7 +90,7 @@ jobs:
     - run:
         command: sudo service redis-server start
     - run:
-        command: SOLR=1 bundle exec rspec --colour --order rand --format progress spec
+        command: SOLR=1 bundle exec rspec -b --colour --order rand --format progress spec
     # Teardown
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # Save test results

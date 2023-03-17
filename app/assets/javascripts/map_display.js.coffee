@@ -27,7 +27,8 @@ class window.LeafletMap
   constructor: (center, opts) ->
     @domId = opts.domid || 'map'
     @map = L.map(@domId, maxZoom: 18)
-    @map.attributionControl.setPrefix('').addAttribution(
+    @map.attributionControl.setPrefix('')
+    @map.attributionControl.addAttribution(
       """
         <a
           href="#{CONSTANTS.images.mapKey}"
@@ -43,7 +44,7 @@ class window.LeafletMap
           Map key
         </a>
       """
-    ).setPosition('bottomleft')
+    ).setPosition('bottomleft') unless opts.hidekey?
     @setCenter(center)
     @map.on('baselayerchange', (e) ->
       window.localStorage.setItem('map.baselayer.name', e.name)

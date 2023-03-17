@@ -1,0 +1,82 @@
+/* Typography */
+h1, h2, h3, h4, h5, h6, body, input, select, textarea, label {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+h1 {
+  color: $color-pastel-red;
+  font-weight: 500;
+}
+h2 {
+  color: $color-green;
+  font-weight: 500;
+  font-size: 20px;
+  width: fit-content;
+}
+h3 {
+  color: $color-green;
+  font-size: 20px;
+  margin: 20px 0;
+  &.drop-cap {
+    &:first-child {
+      &:first-letter {
+        font-size: 46px;
+        line-height: 30px;
+      }
+    }
+  }
+}
+h3, h4, h5, h6, body, input, select, textarea, label {
+  color: #212322;
+}
+
+input, select, textarea {
+  font-size: 15px;
+}
+.drop-cap {
+  p {
+    &:first-letter { color: $color-pastel-red; }
+    &:first-child {
+      &:first-letter {
+        color: $color-pastel-red;
+        float: left;
+        line-height: 41px;
+        padding-top: 4px;
+        padding-right: 8px;
+        font-size: 46px;
+      }
+    }
+  }
+  &:first-letter { color: $color-pastel-red; }
+  &:first-child {
+    &:first-letter {
+      color: $color-pastel-red;
+      float: left;
+      line-height: 41px;
+      padding-top: 4px;
+      padding-right: 8px;
+      font-size: 46px;
+    }
+  }
+}
+.italic { font-style: italic; }
+.light  p { font-weight: 300; }
+p a { color: $color-pastel-red; }
+a {
+  &.text {
+    color: $color-pastel-red;
+  }
+}
+html {
+  &.fa-events-icons-loading {
+    .fa-fw {
+      display: inline-block;
+      width: 1.28571429em;
+      &::before {
+        content: "\00a0";
+      }
+    }
+    body {
+      display: none;
+    }
+  }
+}

@@ -14,6 +14,7 @@ end
 # gem 'ruby-debug19', require: 'ruby-debug'
 
 # Front-end gems
+gem "bootstrap"
 gem "browserify-rails"
 gem "chartkick"
 gem "cocoon"
@@ -63,6 +64,9 @@ gem "rack-cache", require: "rack/cache"
 gem "resque"
 gem "resque-retry"
 gem "resque-rollbar"
+# We get: "No route matches [GET] "/fonts/tinymce.woff" on higher versions,
+# maybe related to #478 on sprockets-rails
+gem "sprockets-rails", "= 3.2.2"
 gem "thin"
 gem "thumbs_up", "~> 0.4.6"
 gem "whenever"

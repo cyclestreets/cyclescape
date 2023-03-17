@@ -33,3 +33,4 @@ node_modules/
 *.sql
 *.sql.gz
 .byebug_history
+redesign/.config.js

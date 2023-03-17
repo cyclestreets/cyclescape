@@ -1,0 +1,145 @@
+/* Nav */
+nav.pagination {
+  padding: 10px;
+}
+nav.sidebar-nav {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: #eeeeee;
+  height: calc(100vh - 30px);
+  max-width: 260px;
+  border-radius: 20px;
+  box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);
+  z-index: 103;
+  min-height: 469px;
+  hr {
+    color: white;
+    margin: 12.5px 0 12.5px -10px;
+    height: 2px !important;
+    opacity: .6;
+    width: calc(100% + 20px);
+  }
+  .title {
+    img {
+      width: 30px;
+      margin-top: -16px;
+    }
+    h1 {
+      display: inline;
+      font-style: italic;
+      font-size: 35px;
+    }
+    p {
+      font-style: italic;
+      font-size: 14px;
+      color: $color-pastel-red;
+      margin-left: 35px;
+    }
+    a {
+      &.group {
+        color: $color-pastel-red;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  i {
+    padding-left: 10px;
+    padding-right: 30px;
+    color: #939393;
+    font-size: 20px;
+    width: 40px;
+    height: 20px;
+    line-height: 20px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    a {
+      text-decoration: none;
+    }
+  }
+  li {
+    padding: 10px 2.5px;
+    margin: 5px 0;
+    color: $color-green;
+    border-radius: 20px;
+    font-size: 17px;
+    cursor: pointer;
+    &.active {
+      background-color: #FFFFFF;
+      box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);
+    }
+    &:hover {
+      background-color: #ffffffa6;
+    }
+    &.profile {
+      padding: 2px 0;
+    }
+  }
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    outline: 0;
+    border: none;
+    background-color: #eeeeee;
+    color: $color-green;
+    font-size: 17px;
+    cursor: pointer;
+    width: 190px;
+    padding: 10px 5px;
+    margin: 2.5px 0;
+    border-radius: 20px;
+    &:hover {
+      background-color: #ffffffa6;
+    }
+  }
+  .unread {
+    display: inline-block;
+    width: 25px;
+    margin-left: 50px;
+    margin-right: 7.5px;
+    p {
+      margin: 0;
+      border-radius: 100%;
+      background-color: white;
+      color: $color-pastel-red;
+      font-style: italic;
+      font-weight: 500;
+      border: 1px solid #eeeeee;
+      padding: 0 7px;
+      box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);
+      font-size: 15px;
+    }
+  }
+  .padding {
+    &.bottom {
+      margin-top: auto;
+    }
+  }
+}
+
+button#hamburger {
+  display: none;
+  position: fixed;
+  padding: 10px;
+  margin: 0 5px;
+  border-radius: 100%;
+  color: $color-pastel-red;
+  font-size: 150%;
+  width: 50px;
+  height: 50px;
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);
+  transition: 0.2s;
+  line-height: 1;
+  z-index: 98;
+  &:hover {
+    background-color: #eeeeee;
+  }
+}

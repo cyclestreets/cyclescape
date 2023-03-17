@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= page_title %></title>
+    <meta name="theme-color" content="#AC3E27" />
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <%= favicon_link_tag 'favicon.ico', type: "image/x-icon" %>
+
+    <%= stylesheet_link_tag "application_new_ui", media: "all" %>
+    <%= javascript_include_tag "application_new_ui" %>
+    <%= csrf_meta_tags %>
+    <% if page_image %>
+      <meta content="<%= page_image %>" property="og:image"/>
+    <% end %>
+    <% if page_description %>
+      <meta content="<%= page_description %>" name="description"/>
+      <meta content="<%= page_description %>" property="og:description"/>
+    <% end %>
+    <% if page_title %>
+      <meta content="<%= page_title.gsub(" - #{@site_config.application_name}", "") %>" property="og:title"/>
+    <% end %>
+    <meta content="<%= @site_config.application_name %>" property="og:site_name"/>
+  </head>
+  <body class="<%= controller_path.delete_prefix("new_ui/").tr("/_", "-") %>">
+    <%= render "layouts/header" %>
+    <%= yield %>
+    <%
+        tile_servers = [
+          { name: @site_config.tile_server1_name, url: @site_config.tile_server1_url, type: @site_config.tile_server1_type, options: @site_config.tile_server1_options },
+          { name: @site_config.tile_server2_name, url: @site_config.tile_server2_url, type: @site_config.tile_server2_type, options: @site_config.tile_server2_options },
+          { name: @site_config.tile_server3_name, url: @site_config.tile_server3_url, type: @site_config.tile_server3_type, options: @site_config.tile_server3_options }
+      ]
+    %>
+    <div id="map-tiles" data-tileservers="<%= tile_servers.to_json %>"></div>
+    <div id="map-geocode" data-url="<%= @site_config.geocoder_url %>" data-key="<%= @site_config.geocoder_key %>" data-streetview="<%= @site_config.google_street_view_api_key %>"></div>
+  </body>
+</html>

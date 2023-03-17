@@ -1,0 +1,14 @@
+//= require constants
+//= require jquery
+//= require popper
+//= require bootstrap
+//= require rails-ujs
+//= require jquery-ui
+//= require fontawesome
+//= require js-cookie/src/js.cookie
+//= require leaflet
+//= require jquery-touch-events
+//= require timeago
+//= require timeago_ui
+//= require map_display
+//= require new_ui
