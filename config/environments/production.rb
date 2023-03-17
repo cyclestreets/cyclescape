@@ -82,6 +82,11 @@ Rails.application.configure do
 
   # Do not use Strict-Transport-Security
   config.ssl_options = { hsts: false }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    enable_starttls_auto: false,
+    openssl_verify_mode: :none
+  }
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new

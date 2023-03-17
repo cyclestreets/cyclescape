@@ -62,11 +62,6 @@ module Cyclescape
     # ActionMailer default URL options
     # To set the URL set the ENV["SERVER_NAME"].  The SubdomainConstraint adds the staging subdomain.
     config.action_mailer.default_url_options = { host: "#{::SubdomainConstraint.subdomain('www')}.#{ENV.fetch('SERVER_NAME', 'cyclescape.org')}" }
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-      enable_starttls_auto: false,
-      openssl_verify_mode: :none
-    }
 
     # Git info
     config.git_hash = `git rev-parse --short HEAD`.chomp
