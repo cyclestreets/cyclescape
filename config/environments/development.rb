@@ -78,6 +78,7 @@ Rails.application.configure do
 
   config.action_view.raise_on_missing_translations = true
   config.assets.raise_runtime_errors = true
+  config.sass.inline_source_maps = true
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker

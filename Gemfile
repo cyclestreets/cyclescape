@@ -84,7 +84,7 @@ gem "rollbar"
 
 gem "coffee-rails"
 gem "jquery-ui-rails", "~> 5.0.0"
-gem "sass-rails", "~> 5.0"
+gem "sassc-rails"
 # gem 'turbolinks'
 gem "lograge"
 gem "nokogiri", ">= 1.11.0"
