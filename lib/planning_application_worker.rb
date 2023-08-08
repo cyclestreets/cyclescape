@@ -23,9 +23,7 @@ class PlanningApplicationWorker
           headers: { "Accept" => Mime[:json].to_s, "Content-Type" => Mime[:json].to_s },
           expects: 200, retry_limit: 5
         ).request(
-          api_query.merge(
-            method: :get, query: { select: :area_name }
-          )
+          method: :get, query: api_query.merge(select: :area_name, area_type: :active, pg_sz: 450)
         ).body
       )["records"].map { |record| record["area_name"] }
     end

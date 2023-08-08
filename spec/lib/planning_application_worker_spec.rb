@@ -60,7 +60,9 @@ describe PlanningApplicationWorker do
 
   describe "local_authorities" do
     before do
-      stub_request(:get, "#{Rails.application.config.planning_areas_url}?select=area_name").to_return(
+      stub_request(:get, Rails.application.config.planning_areas_url).with(
+        query: { apikey: "planit_api_key", select: :area_name, area_type: :active, pg_sz: 450 }
+      ).to_return(
         status: 200,
         body: { "records" => [{ area_name: "aa" }, { area_name: "zz" }] }.to_json
       )
