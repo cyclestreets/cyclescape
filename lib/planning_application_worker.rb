@@ -23,7 +23,9 @@ class PlanningApplicationWorker
           headers: { "Accept" => Mime[:json].to_s, "Content-Type" => Mime[:json].to_s },
           expects: 200, retry_limit: 5
         ).request(
-          method: :get, query: api_query.merge(select: :area_name, area_type: :active, pg_sz: 450)
+          method: :get, query: api_query.merge(
+            select: :area_name, area_type: :active
+          )
         ).body
       )["records"].map { |record| record["area_name"] }
     end
@@ -97,7 +99,7 @@ class PlanningApplicationWorker
         auth: authority,
         start_date: dates[:start_date].to_date.to_s,
         end_date: dates[:end_date].to_date.to_s,
-        pg_sz: 500, sort: "-start_date"
+        sort: "-start_date"
       )
     }
   end
@@ -105,9 +107,9 @@ class PlanningApplicationWorker
   def api_query
     @api_query ||=
       if SiteConfig.first.planit_api_key
-        { apikey: SiteConfig.first.planit_api_key }
+        { apikey: SiteConfig.first.planit_api_key, pg_sz: 500 }
       else
-        {}
+        { pg_sz: 500 }
       end
   end
 end
