@@ -367,7 +367,7 @@ describe MessageThread do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_body_no_starting_div"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(new_message.body).to eq("<p>Text just after the body tag followed by a div</p><p>  Another div</p><p>Text’s now split by brs<br>Second and third<br>Finally the last<a href=\"%5C%22http://example.org%5C%22\">example.org</a><br>Follow us at <a href=\"%5C%22http://example.com/%5C%22\">example.com/</a>\n</p>\n\n<br>\n<br>\n\n\n")
+          expect(new_message.body).to eq("<p>Text just after the body tag followed by a div</p><p>  Another div</p><p>Text’s now split by brs<br>Second and third<br>Finally the last<a href=\"\\%22http://example.org\\%22\">example.org</a><br>Follow us at <a href=\"\\%22http://example.com/\\%22\">example.com/</a>\n</p>\n\n<br>\n<br>\n\n\n")
         end
       end
 
@@ -375,7 +375,7 @@ describe MessageThread do
         let(:mail) { InboundMail.new(raw_message: File.read(raw_email_path("html_style_in_head"))) }
         it "should remove HTML signatures" do
           thread.add_messages_from_email!(mail, nil)
-          expect(new_message.body).to eq("<p></p>\n<p>Thank you Martin!</p>\n<p></p>\n<p>Nikolai</p>\n\n")
+          expect(new_message.body).to eq("\n<p>Thank you Martin!</p>\n<p>Nikolai</p>\n\n")
         end
       end
 
