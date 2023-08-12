@@ -12,7 +12,7 @@
     "jquery-touch-events": "^1.0.7",
     "jquery-ui-timepicker-addon": "1.5.5",
     "js-cookie": "^2.2.1",
-    "jsdom": "^9.0.0",
+    "jsdom": "^22.1.0",
     "knockout": "^3.5.1",
     "leaflet-draw": "0.4.7",
     "leaflet-layerjson": "^0.3.3",
