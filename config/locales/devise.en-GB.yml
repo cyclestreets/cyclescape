@@ -42,8 +42,10 @@ en-GB:
         no_confirmation_instructions: Didn't receive confirmation instructions?
         no_unlock_instructions: Didn't receive unlock instructions?
     mailer:
+      confirmation_instructions:
+        subject: "Please confirm your Cyclescape account"
       invitation_instructions:
-        subject: Invitation instructions
+        subject: "You have been invited to join Cyclescape"
         hello: Hello %{email}
         someone_invited_you: Someone has invited you to %{url}, you can accept it
           through the link below.
