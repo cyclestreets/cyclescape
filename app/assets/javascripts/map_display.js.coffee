@@ -26,9 +26,9 @@ class window.LeafletMap
 
   constructor: (center, opts) ->
     @domId = opts.domid || 'map'
-    @map = L.map(@domId, maxZoom: 18)
-    @map.attributionControl.setPrefix('')
-    @map.attributionControl.addAttribution(
+    maxZoom = if opts.hidezoom? then 15 else 18
+    @map = L.map(@domId, maxZoom: maxZoom)
+    @map.attributionControl.setPrefix('').addAttribution(
       """
         <a
           href="#{CONSTANTS.images.mapKey}"
