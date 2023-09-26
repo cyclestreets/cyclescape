@@ -83,7 +83,7 @@ gem "rakismet"
 gem "rollbar"
 
 gem "coffee-rails"
-gem "jquery-ui-rails", "~> 5.0.0"
+gem "jquery-ui-rails", "~> 6.0.1"
 gem "sassc-rails"
 # gem 'turbolinks'
 gem "lograge"
