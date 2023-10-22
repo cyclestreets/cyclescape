@@ -4,6 +4,7 @@ class IssuePolicy < ApplicationPolicy
   def new?
     user
   end
+  alias tag_update? new?
 
   alias edit? created_by_current_user_or_admin
   alias update? created_by_current_user_or_admin

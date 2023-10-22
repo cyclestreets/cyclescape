@@ -5,7 +5,8 @@ class Group::MessageModerationsController < MessageThreadsController
   before_action :group
 
   def index
-    authorize @group, policy_class: GroupMessageModerationPolicy
+    authorize @group, :in_group_committee?
+
     @messages = Message.mod_queued.in_group(group.id).page params[:page]
   end
 
