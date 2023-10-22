@@ -5,14 +5,18 @@ class Group::ProfilesController < ApplicationController
   filter_access_to :edit, :update, attribute_check: true, model: Group
   filter_access_to :all
 
-  def show; end
+  def show
+    skip_authorization
+  end
 
   def edit
+    authorize @group, :in_group_committee?
     # This needs more thought!
     @start_location = SiteConfig.first.nowhere_location
   end
 
   def update
+    authorize @group, :in_group_committee?
     if @profile.update permitted_params
       set_flash_message :success
       redirect_to action: :show
@@ -23,6 +27,7 @@ class Group::ProfilesController < ApplicationController
   end
 
   def geometry
+    skip_authorization
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(@profile.loc_feature(thumbnail: view_context.image_path("map-icons/m-misc.png"))) }
     end
