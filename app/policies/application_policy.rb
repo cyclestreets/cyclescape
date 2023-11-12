@@ -57,7 +57,7 @@ class ApplicationPolicy
     root? || admin?
   end
 
-  def created_by_current_user_or_admin
+  def created_by_current_user_or_admin?
     root_or_admin? || (user && user.id == record.created_by_id)
   end
 

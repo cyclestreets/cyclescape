@@ -24,5 +24,6 @@ class MessageThread::UserFavouritesController < MessageThread::BaseController
   def favourite
     @favourite ||= @thread.favourite_for(current_user)
     authorize @favourite
+    @favourite
   end
 end

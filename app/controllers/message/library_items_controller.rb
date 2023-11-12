@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class Message::LibraryItemsController < MessagesController
-  filter_access_to :create, attribute_check: true, model: LibraryItemMessage, load_method: :build_library_item_message
+  before_action :build_message, only: :create
 
   def create
+    @message.library_item_messages.build(permitted_params).tap { |lim| lim.thread = thread }
     super
   end
 
@@ -19,9 +20,7 @@ class Message::LibraryItemsController < MessagesController
 
   def build_message
     @message ||= thread.messages.build permitted_message_params.merge(created_by: current_user)
-  end
-
-  def build_library_item_message
-    @library_item_message ||= @message.library_item_messages.build(permitted_params).tap { |lim| lim.thread = thread }
+    authorize @message
+    @message
   end
 end

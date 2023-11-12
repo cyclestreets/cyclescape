@@ -2,6 +2,8 @@
 
 class DashboardsController < ApplicationController
   def show
+    authorize :dashboard
+
     @user = current_user
     @groups = @user.groups
 
@@ -37,6 +39,7 @@ class DashboardsController < ApplicationController
   end
 
   def deadlines
+    skip_authorization
     cal = Icalendar::Calendar.new
     ThreadList.with_upcoming_deadlines(User.find_by(public_token: params[:public_token]), 50).each do |thread|
       thread.to_icals.each { |evt| cal.add_event(evt) }
@@ -46,6 +49,7 @@ class DashboardsController < ApplicationController
 
   def search
     # Ideally, this would be delegated to the different controllers.
+    skip_authorization
 
     @query = params[:query]
 

@@ -6,6 +6,7 @@ class PlanningApplication::IssuesController < IssuesController
 
   def new
     @issue = @planning_application.populate_issue
+    authorize @issue
     @start_location = @planning_application.location
     new_issue_setup
     @issue.threads.first.title = nil

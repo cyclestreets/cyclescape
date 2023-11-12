@@ -6,5 +6,6 @@ class MessageLibrary::NotesController < Library::NotesController
     @note = Library::Note.new
     @note.body = @message.body
     @start_location = current_user.start_location
+    authorize @note
   end
 end

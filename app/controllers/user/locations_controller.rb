@@ -30,7 +30,7 @@ class User::LocationsController < ApplicationController
   end
 
   def update
-    skip_authorizatio # see #create
+    skip_authorization # see #create
     @location = current_user.location
 
     if @location.update permitted_params
