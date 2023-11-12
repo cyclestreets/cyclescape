@@ -153,7 +153,7 @@ RSpec.describe MessageThreadPolicy do
   context "private thread (direct messages)" do
     let(:thread) { create :message_thread, created_by: creating_user, user: recieving_user, privacy: MessageThread::PRIVATE  }
 
-    context "both users have public profiles" do
+    context "when both users have public profiles" do
       let(:creating_user) { create :user }
       let(:recieving_user) { create :user }
       let(:allowed_actions) { %i[new create show edit update close vote_detail] }
@@ -180,13 +180,12 @@ RSpec.describe MessageThreadPolicy do
         let(:membership) { create :group_membership, :committee }
         let(:group) { membership.group }
         let(:user) { membership.user }
+        let(:allowed_actions) { %i[new create] }
 
         before do
           create :group_membership, user: creating_user, group: group
           create :group_membership, user: recieving_user, group: group
         end
-
-        let(:allowed_actions) { %i[new create] }
 
         it do
           expect(subject).to permit_actions(allowed_actions)

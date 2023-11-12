@@ -5,12 +5,14 @@ class Library::DocumentsController < ApplicationController
 
   def new
     @document = Library::Document.new
+    authorize @document
     @start_location = current_user.start_location
   end
 
   def create
     @document = Library::Document.new permitted_params
     @document.created_by = current_user
+    authorize @document
 
     if @document.save
       redirect_to library_document_path @document
@@ -21,6 +23,7 @@ class Library::DocumentsController < ApplicationController
   end
 
   def show
+    skip_authorization
     @notes = Library::ItemDecorator.decorate_collection(@document.notes.map(&:item))
     @note = Library::Note.new_on_document @document
     @tag_panel = TagPanelDecorator.new(@document.item, form_url: library_tag_path(@document.item), auth_context: :library_tags)
@@ -51,6 +54,8 @@ class Library::DocumentsController < ApplicationController
 
   def load_document
     @document = Library::Document.find params[:id]
+    authorize @document unless action_name == "show"
+    @document
   end
 
   def set_location

@@ -10,5 +10,7 @@ class Message::PhotosController < ApplicationController
 
   def photo
     @photo ||= PhotoMessage.find params[:id]
+    authorize @photo
+    @photo
   end
 end

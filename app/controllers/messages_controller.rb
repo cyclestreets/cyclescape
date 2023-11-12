@@ -2,7 +2,6 @@
 
 class MessagesController < ApplicationController
   before_action :build_message, only: :create
-  filter_access_to :all, attribute_check: true
 
   def create
     return redirect_to(:back) if thread.private_message? && !(permitted_to? :send_private_message, thread.other_user(current_user))
@@ -64,7 +63,9 @@ class MessagesController < ApplicationController
   protected
 
   def build_message
-    @message ||= thread.messages.build permitted_params.merge(created_by: current_user)
+    @message = thread.messages.build permitted_params.merge(created_by: current_user)
+    authorize @message
+    @message
   end
 
   def check_reason
