@@ -15,7 +15,7 @@ class UserPref < ApplicationRecord
     EmailStatus.new(2, :digest)
   ].index_by(&:id).freeze
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :prefs
 
   INVOLVEMENT_OPTIONS = %w[none notify subscribe].freeze
 

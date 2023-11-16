@@ -153,7 +153,7 @@ RSpec.describe MessageThreadPolicy do
   context "private thread (direct messages)" do
     let(:thread) { create :message_thread, created_by: creating_user, user: recieving_user, privacy: MessageThread::PRIVATE  }
 
-    context "when both users have public profiles" do
+    context "both users have public profiles" do
       let(:creating_user) { create :user }
       let(:recieving_user) { create :user }
       let(:allowed_actions) { %i[new create show edit update close vote_detail] }

@@ -65,12 +65,12 @@ class ApplicationPolicy
     root_or_admin? || (user && group && group.committee_members.where(id: user.id).exists?)
   end
 
-  def view_full_name?(other_user)
-    return true if root_or_admin? || other_user.profile.visibility == "public"
+  def view_full_name?(user_being_viewed)
+    return true if root_or_admin? || user_being_viewed.profile.visibility == "public"
     return false unless user
 
-    user.id == other_user.id || (user.group_ids & other_user.group_ids).present? ||
-      (user.in_group_committee.ids & other_user.requested_groups.ids).present?
+    user.id == user_being_viewed.id || (user.group_ids & user_being_viewed.group_ids).present? ||
+      (user.in_group_committee.ids & user_being_viewed.requested_groups.ids).present?
   end
 
   delegate :root?, :admin?, to: :@user, allow_nil: true

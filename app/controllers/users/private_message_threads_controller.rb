@@ -7,6 +7,7 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
 
   def new
     @thread = @user.private_threads.build
+    authorize @thread
     @message = @thread.messages.build
   end
 
@@ -14,10 +15,13 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
     @thread = @user.private_threads.build(
       permitted_params.merge(created_by: current_user, privacy: "private")
     )
+    authorize @thread
     super
   end
 
   def index
+    skip_authorization # done via current_user
+
     threads = MessageThread.private_for(current_user).order_by_latest_message.to_a
     @private_threads = PrivateMessageDecorator.decorate_collection(threads)
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
