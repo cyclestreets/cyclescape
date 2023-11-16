@@ -2,6 +2,8 @@
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def twitter
+    skip_authorization
+
     @user = User.from_omniauth(request.env["omniauth.auth"])
     store_location_for(@user, current_user_profile_path) if @user.new_record?
     if @user.persisted? || @user.save
@@ -15,6 +17,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def facebook
+    skip_authorization
+
     @user = User.from_omniauth(request.env["omniauth.auth"])
     store_location_for(@user, current_user_profile_path) if @user.new_record?
     if @user.persisted? || @user.save
@@ -28,6 +32,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
+    skip_authorization
+
     redirect_to root_path
   end
 end

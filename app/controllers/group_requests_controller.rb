@@ -4,16 +4,19 @@ class GroupRequestsController < ApplicationController
   before_action :load_group_request, only: %i[show edit update destroy review confirm reject]
 
   def index
+    authorize GroupRequest
     @requests = GroupRequest.order("created_at desc").includes(:user)
   end
 
   def new
     @request = GroupRequest.new
+    authorize @request
   end
 
   def create
     @request = GroupRequest.new permitted_params
     @request.user = current_user
+    authorize @request
 
     if @request.save
       Notifications.new_group_request(@request, User.admin.ids).deliver_later
@@ -23,11 +26,14 @@ class GroupRequestsController < ApplicationController
     end
   end
 
-  def review; end
+  def review
+    authorize GroupRequest
+  end
 
   def confirm
     @request.actioned_by = current_user
-    if res = @request.confirm!
+    authorize @request
+    if @request.confirm!
       @group = Group.find_by! name: @request.name
       Notifications.group_request_confirmed(@group, @request).deliver_later
       set_flash_message :success
@@ -38,6 +44,8 @@ class GroupRequestsController < ApplicationController
   end
 
   def reject
+    authorize @request
+
     @request.actioned_by = current_user
     @request.update_column :rejection_message, params[:group_request][:rejection_message]
     if @request.reject!
@@ -50,6 +58,7 @@ class GroupRequestsController < ApplicationController
   end
 
   def destroy
+    authorize @request
     if @request.destroy
       set_flash_message :success
     else

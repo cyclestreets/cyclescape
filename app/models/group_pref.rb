@@ -2,7 +2,7 @@
 
 
 class GroupPref < ApplicationRecord
-  belongs_to :group
+  belongs_to :group, inverse_of: :prefs
   belongs_to :membership_secretary, class_name: "User"
 end
 

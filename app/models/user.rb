@@ -41,7 +41,7 @@ class User < ApplicationRecord
   has_many :blocked_by_users, through: :user_blocked_by, source: :user
   has_many :poll_votes, dependent: :destroy
   has_many :poll_options, through: :poll_votes
-  has_one :profile, class_name: "UserProfile"
+  has_one :profile, class_name: "UserProfile", dependent: :destroy
   has_one :prefs, class_name: "UserPref"
   has_one :location, class_name: "UserLocation", dependent: :destroy
   belongs_to :remembered_group, class_name: "Group"
