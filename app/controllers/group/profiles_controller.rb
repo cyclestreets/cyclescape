@@ -2,21 +2,19 @@
 
 class Group::ProfilesController < ApplicationController
   before_action :load_group_profile
-  filter_access_to :edit, :update, attribute_check: true, model: Group
-  filter_access_to :all
 
   def show
     skip_authorization
   end
 
   def edit
-    authorize @group, :in_group_committee?
+    authorize @profile
     # This needs more thought!
     @start_location = SiteConfig.first.nowhere_location
   end
 
   def update
-    authorize @group, :in_group_committee?
+    authorize @profile
     if @profile.update permitted_params
       set_flash_message :success
       redirect_to action: :show

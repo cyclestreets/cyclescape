@@ -1,13 +1,13 @@
 %article#content.library.note
   %header
     %h1= @note.title
-    - if permitted_to?(:edit, @note)
+    - if policy(@note).edit?
       %menu.tools
         %ul
           %li= link_to t(".edit"), edit_library_note_path(@note)
   %section.meta
     %p
-      - if permitted_to? :view_profile, @note.created_by
+      - if policy(@note.created_by).view_profile?
         - profile_link = link_to_profile @note.created_by
       - else
         - profile_link = @note.created_by.display_name_or_anon

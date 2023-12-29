@@ -19,6 +19,8 @@ class GroupsController < ApplicationController
   end
 
   def show
+    skip_authorization
+
     if group
       recent_threads = if @group.has_member?(current_user)
                          ThreadList.recent_from_groups(group, 10)

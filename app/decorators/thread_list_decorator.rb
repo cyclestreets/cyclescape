@@ -17,6 +17,10 @@ class ThreadListDecorator < ApplicationDecorator
     "deadline_message" => "cal"
   }.freeze
 
+  def model_name
+    "MessageThread"
+  end
+
   def latest_activity
     latest = thread.latest_message
     h.content_tag(:ul, class: "content-icon-list") do
@@ -36,7 +40,7 @@ class ThreadListDecorator < ApplicationDecorator
   end
 
   def title
-    if h.permitted_to? :show, thread
+    if h.policy(thread).show?
       thread.display_title
     else
       I18n.t("decorators.thread_list.private_thread_title")

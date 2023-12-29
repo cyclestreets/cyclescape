@@ -21,7 +21,8 @@ class Issue::MessageThreadsController < MessageThreadsController
   end
 
   def create
-    @thread = issue.threads.build permitted_params.merge(created_by: current_user, tags: issue.tags)
+    @thread = issue.threads.build 
+    @thread.assign_attributes permitted_params.merge(created_by: current_user, tags: issue.tags)
     authorize @thread
     super
   end

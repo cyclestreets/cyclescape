@@ -121,6 +121,7 @@ describe "Thread subscriptions" do
     def attempt_subscription(t)
       page.driver.post thread_subscriptions_path(t)
       t.reload
+    rescue Pundit::NotAuthorizedError
     end
 
     context "as a site user" do

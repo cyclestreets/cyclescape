@@ -1,12 +1,12 @@
 %article.issue#content.content-wide-sidebar
   %header
     %h1= @issue.title
-    - if permitted_to? [:edit, :destroy], @issue
+    - if policy(@issue).edit? || policy(@issue).destroy?
       %menu.tools
         %ul
-          - if permitted_to?(:edit, @issue)
+          - if policy(@thread).edit?
             %li= link_to t(".edit_issue"), edit_issue_path(@issue)
-          - if permitted_to?(:destroy, @issue)
+          - if policy(@thread).destroy?
             %li= link_to t(".delete_issue"), issue_path(@issue), data: { confirm: t("are_you_sure") }, method: :delete
   .main
     %section.voting
@@ -47,7 +47,7 @@
     = link_to t(".issues-nearby"), issues_path(anchor: 'map-pane', issue_id: @issue.id), class: "btn-green"
 
 %aside#sidebar.wide
-  - if permitted_to? :create, :issue_message_threads
+  - if policy(@issue.threads.build).create?
     = link_to t(".new_thread", count: @issue.threads.count), new_issue_thread_path(@issue), class: "btn-green"
   %section.social
     = tweet_button text: @issue.title, link: issue_url(@issue)

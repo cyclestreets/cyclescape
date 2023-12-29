@@ -23,7 +23,8 @@ class Group::MessageThreadsController < MessageThreadsController
   end
 
   def create
-    @thread = group.threads.build permitted_params.merge(created_by: current_user)
+    @thread = group.threads.build
+    @thread.assign_attributes permitted_params.merge(created_by: current_user)
     authorize @thread
     super
   end

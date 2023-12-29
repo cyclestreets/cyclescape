@@ -10,12 +10,8 @@ describe "Thread" do
   context "as site user" do
     include_context "signed in as a site user"
 
-    before do
-      visit edit_thread_path(thread)
-    end
-
     it "is unautharized" do
-      expect(page.status_code).to eq 401
+      expect { visit edit_thread_path(thread) }.to raise_error Pundit::NotAuthorizedError
     end
   end
 

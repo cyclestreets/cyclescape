@@ -2,8 +2,6 @@
 
 class Group::MembershipRequestsController < ApplicationController
   before_action :load_group
-  filter_access_to :cancel, attribute_check: true, model: GroupMembershipRequest
-  filter_access_to :all, attribute_check: true, model: Group
 
   def index
     authorize_group

@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
   after_action :remember_current_group
   after_action :store_location
   layout :set_xhr_layout
-  filter_access_to :all
   helper_method :group_subdomain?
   before_action :configure_permitted_parameters, if: :devise_controller?
 
