@@ -156,10 +156,12 @@ RSpec.describe MessageThreadPolicy do
     context "both users have public profiles" do
       let(:creating_user) { create :user }
       let(:recieving_user) { create :user }
-      let(:allowed_actions) { %i[new create show edit update close vote_detail] }
 
       context "when current_user created the thread" do
         let(:user) { creating_user }
+        let(:allowed_actions) { %i[show edit update close vote_detail] }
+        let(:forbiden_actions) { %i[new create] } # need to share a group etc. to start a thread
+
         it do
           expect(subject).to permit_actions(allowed_actions)
           expect(subject).to forbid_actions(forbiden_actions)

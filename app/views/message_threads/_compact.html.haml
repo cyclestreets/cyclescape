@@ -1,13 +1,13 @@
 %li
   .item-content
-    %h4= link_to_if (permitted_to? :show, thread), thread.title, thread_path(thread), class: "primary-link"
+    %h4= link_to_if policy(thread).show?, thread.title, thread_path(thread), class: "primary-link"
     .meta
       %p
         - if thread.group
           = link_to_profile(thread.group)
           %br
-        - if permitted_to? :show, thread
-          - if permitted_to? :view_profile, thread.latest_activity_by
+        - if policy(thread).show?
+          - if policy(thread.latest_activity_by).view_profile?
             = link_to_profile(thread.latest_activity_by)
           - else
             = thread.latest_activity_by.display_name_or_anon

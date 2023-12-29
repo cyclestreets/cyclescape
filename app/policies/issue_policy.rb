@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class IssuePolicy < ApplicationPolicy
+  def initialize(user, record)
+    @user = user
+    @record = record
+  end
+
   def new?
     user
   end

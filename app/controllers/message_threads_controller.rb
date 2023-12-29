@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class MessageThreadsController < ApplicationController
-  filter_access_to :show, :edit, :update, :approve, :reject, :close, :open, :destroy, attribute_check: true
   protect_from_forgery except: :vote_detail
   include MessageCreator
 
@@ -129,7 +128,7 @@ class MessageThreadsController < ApplicationController
 
   def permitted_params
     permitted =
-      if permitted_to?(:edit_all_fields, @thread)
+      if Pundit.policy!(current_user, @thread).edit_all_fields?
         %i[privacy group_id issue_id tags_string]
       else
         []

@@ -3,7 +3,6 @@
 # Note inheritance
 class Users::PrivateMessageThreadsController < MessageThreadsController
   before_action :load_user, only: %i[create new]
-  filter_access_to :create, :new, attribute_check: true, model: User
 
   def new
     @thread = @user.private_threads.build

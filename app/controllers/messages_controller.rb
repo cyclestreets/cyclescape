@@ -4,8 +4,6 @@ class MessagesController < ApplicationController
   before_action :build_message, only: :create
 
   def create
-    return redirect_to(:back) if thread.private_message? && !(permitted_to? :send_private_message, thread.other_user(current_user))
-
     message.check_reason = check_reason unless thread.private_message?
 
     message.components.each do |component|
@@ -32,6 +30,8 @@ class MessagesController < ApplicationController
   end
 
   def censor
+    authorize message
+
     if message.censor!
       set_flash_message :success
     else
@@ -41,14 +41,20 @@ class MessagesController < ApplicationController
   end
 
   def approve
+    authorize message
+
     message.approve!
   end
 
   def reject
+    authorize message
+
     message.reject!
   end
 
   def vote_up
+    authorize message
+
     current_user.with_lock do
       current_user.vote_exclusively_for message unless current_user.voted_for? message
     end
@@ -56,6 +62,8 @@ class MessagesController < ApplicationController
   end
 
   def vote_clear
+    authorize message
+
     current_user.clear_votes message
     render partial: "shared/vote_detail", locals: { resource: message }
   end

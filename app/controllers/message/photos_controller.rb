@@ -2,7 +2,6 @@
 
 class Message::PhotosController < ApplicationController
   before_action :photo
-  filter_access_to :all, attribute_check: true
 
   def show; end
 

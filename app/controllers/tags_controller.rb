@@ -31,7 +31,7 @@ class TagsController < ApplicationController
       @issues = IssueDecorator.decorate_collection issues
       unfiltered_results = MessageThread.find_by_tag(@tag).includes(:issue, :group).order(updated_at: :desc)
       threads = Kaminari.paginate_array(
-        unfiltered_results.select { |t| permitted_to?(:show, t) }
+        unfiltered_results.select { |t| Pundit.policy(t).show? }
       ).page(params[:thread_page])
 
       @threads = ThreadListDecorator.decorate_collection threads

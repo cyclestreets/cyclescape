@@ -19,7 +19,7 @@ class MessageThreadPolicy < ApplicationPolicy
         user.group_ids.include?(thread.group_id)
       end
     elsif thread.user
-      view_full_name?(thread.user) &&
+      view_full_name?(thread.user) && user.id != thread.user_id &&
         !UserBlock.where(user: user, blocked: thread.user).or(UserBlock.where(user: thread.user, blocked: user)).exists?
     end
   end
@@ -55,6 +55,10 @@ class MessageThreadPolicy < ApplicationPolicy
 
   def destroy?
     in_group_committee? && show?
+  end
+
+  def edit_all_fields?
+    in_group_committee?
   end
 
   def open?

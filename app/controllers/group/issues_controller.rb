@@ -2,9 +2,6 @@
 
 # Note inheritance
 class Group::IssuesController < IssuesController
-  filter_access_to %i[edit update destroy], attribute_check: true, context: :issues
-  filter_access_to :all, context: :issues
-
   def index
     skip_authorization
 

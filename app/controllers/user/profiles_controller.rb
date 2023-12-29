@@ -2,8 +2,6 @@
 
 class User::ProfilesController < ApplicationController
   before_action :load_user
-  filter_access_to :show, :edit, :create, :update, attribute_check: true, model: User
-  filter_access_to :all
 
   def show
     @user = UserDecorator.decorate(@user)
