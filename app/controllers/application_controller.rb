@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_config
   around_action :set_time_zone
+  around_action :redirect_no_user
   before_action :load_group_from_subdomain
   before_action :set_page_title
   before_action :set_last_seen_at, if: proc { |_p| user_signed_in? && (session[:last_seen_at].nil? || session[:last_seen_at] < 15.minutes.ago) }
@@ -173,5 +174,11 @@ class ApplicationController < ActionController::Base
 
   def set_time_zone
     Time.use_zone(current_user.try(:time_zone) || @site_config.try(:time_zone) || "London") { yield }
+  end
+
+  def redirect_no_user
+    yield
+  rescue Pundit::NotAuthorizedError
+    permission_denied
   end
 end

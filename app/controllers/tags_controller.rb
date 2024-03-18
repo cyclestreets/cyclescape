@@ -4,6 +4,8 @@ class TagsController < ApplicationController
   include IssueFeature
 
   def autocomplete_tag_name
+    skip_authorization
+
     term = params[:term]
 
     items =
@@ -19,6 +21,8 @@ class TagsController < ApplicationController
   end
 
   def show
+    skip_authorization
+
     @tag = Tag.find_by name: params[:id]
     if @tag
       @query = @tag.name
@@ -49,10 +53,14 @@ class TagsController < ApplicationController
   end
 
   def index
+    skip_authorization
+
     @tags = Tag.top_tags(200)
   end
 
   def all_geometries
+    skip_authorization
+
     tag = Tag.find_by name: params[:id]
     bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
     issues = Issue.find_by_tag(tag).by_most_recent

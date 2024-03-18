@@ -4,9 +4,9 @@
     - if policy(@issue).edit? || policy(@issue).destroy?
       %menu.tools
         %ul
-          - if policy(@thread).edit?
+          - if policy(@issue).edit?
             %li= link_to t(".edit_issue"), edit_issue_path(@issue)
-          - if policy(@thread).destroy?
+          - if policy(@issue).destroy?
             %li= link_to t(".delete_issue"), issue_path(@issue), data: { confirm: t("are_you_sure") }, method: :delete
   .main
     %section.voting
@@ -14,7 +14,7 @@
         locals: { resource: @issue.object }
     %section.meta
       %p
-      - if permitted_to? :view_profile, @issue.created_by
+      - if policy(@issue.created_by).view_profile?
         - profile_link = link_to_profile @issue.created_by
       - else
         - profile_link = @issue.created_by.display_name_or_anon

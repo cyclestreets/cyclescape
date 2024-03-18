@@ -2,11 +2,15 @@
 
 class UserBlocksController < ApplicationController
   def create
+    skip_authorization
+
     current_user.blocked_user_ids |= [blocked_user_id]
     redirect_to(:back)
   end
 
   def destroy
+    skip_authorization
+
     current_user.user_blocks.find_by(blocked_id: blocked_user_id).destroy
     redirect_to(:back)
   end
