@@ -16,7 +16,7 @@ class Message::PollsController < ApplicationController
 
   def poll_option
     @poll_option ||= PollOption.find(params[:poll_vote][:poll_option_id])
-    authorize poll_option.poll_message
+    authorize @poll_option.poll_message
     @poll_option
   end
 end
