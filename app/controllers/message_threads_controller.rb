@@ -95,7 +95,7 @@ class MessageThreadsController < ApplicationController
   end
 
   def permission_denied
-    @group ||= thread.try(:group)
+    @group ||= thread(auth: false).try(:group)
     super
   end
 
@@ -116,12 +116,12 @@ class MessageThreadsController < ApplicationController
     end
   end
 
-  def thread
+  def thread(auth: true)
     @thread ||= begin
                   scope = MessageThread.all
                   scope = scope.approved unless current_user.try(:admin?)
                   thread = scope.find params[:id]
-                  authorize thread
+                  authorize thread if auth
                   thread
                 end
   end

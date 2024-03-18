@@ -8,7 +8,7 @@
       %li= link_to t(".our_areas"), "#area-map"
       %li= link_to t(".recent_threads"), "#recent-threads"
       %li= link_to t(".recent_issues"), "#recent-issues"
-      - if policy(@group).view_active_users?
+      - if current_user && policy(@group).view_active_users?
         %li= link_to t(".active_users"), "#active-users"
     .panes
       #area-map.pane.area-map
