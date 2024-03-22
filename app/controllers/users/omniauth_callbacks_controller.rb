@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  skip_before_action :block_guests, on: %i[twitter facebook failure]
+
   def twitter
     skip_authorization
 

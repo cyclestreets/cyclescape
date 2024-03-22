@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
+  skip_before_action :block_guests, on: %i[show]
+
   def show
     skip_authorization
 

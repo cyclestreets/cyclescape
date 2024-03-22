@@ -7,10 +7,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :no_disabled_users
   before_action :set_auth_user
+  before_action :block_guests, if: -> { !devise_controller? }
   before_action :set_locale
   before_action :set_config
   around_action :set_time_zone
-  around_action :redirect_no_user
+  around_action :redirect_not_authorized
   before_action :load_group_from_subdomain
   before_action :set_page_title
   before_action :set_last_seen_at, if: proc { |_p| user_signed_in? && (session[:last_seen_at].nil? || session[:last_seen_at] < 15.minutes.ago) }
@@ -27,6 +28,13 @@ class ApplicationController < ActionController::Base
       "no-user"
     end
   end
+
+  def block_guests
+    return if current_user
+
+    permission_denied
+  end
+
 
   private
 
@@ -176,7 +184,7 @@ class ApplicationController < ActionController::Base
     Time.use_zone(current_user.try(:time_zone) || @site_config.try(:time_zone) || "London") { yield }
   end
 
-  def redirect_no_user
+  def redirect_not_authorized
     yield
   rescue Pundit::NotAuthorizedError
     permission_denied

@@ -56,7 +56,7 @@
           %li#menu-threads= link_to t(".threads"), threads_path, title: t(".threads_tooltip")
           %li#menu-library= link_to t(".library"), library_path, title: t(".library_tooltip")
           %li#menu-tags= link_to t(".tags"), tags_path, title: t(".tags_tooltip")
-          - if current_user && defined?(current_group) && current_group && policy(:group_membership_request).index?
+          - if current_user && defined?(current_group) && current_group && policy(GroupMembershipRequest.new(group: current_group)).index?
             %li#menu-membership= link_to t(".membership"), group_membership_requests_path(current_group)
           - if current_user&.admin?
             %li#menu-admin= link_to t(".admin"), admin_home_path, title: t(".admin_tooltip")

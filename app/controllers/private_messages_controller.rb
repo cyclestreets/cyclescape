@@ -2,7 +2,8 @@
 
 class PrivateMessagesController < ApplicationController
   def index
-    skip_authorization
+    authorize User, :logged_in?
+
     count = if current_user
               MessageThread.unviewed_private_count(current_user)
             else

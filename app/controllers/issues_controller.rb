@@ -3,6 +3,7 @@
 class IssuesController < ApplicationController
   include MessageCreator
   include IssueFeature
+  skip_before_action :block_guests, on: %i[index show vote_detail]
 
   protect_from_forgery except: :vote_detail
 
@@ -119,16 +120,22 @@ class IssuesController < ApplicationController
   end
 
   def vote_up
+    authorize User, :logged_in?
+
     current_user.vote_exclusively_for(issue) unless current_user.voted_for?(issue)
     render partial: "shared/vote_detail", locals: { resource: @issue }
   end
 
   def vote_clear
+    authorize User, :logged_in?
+
     current_user.clear_votes issue
     render partial: "shared/vote_detail", locals: { resource: @issue }
   end
 
   def vote_detail
+    skip_authorization
+
     issues = Issue.where(id: params[:ids])
     render partial: "shared/vote_detail", collection: issues, as: :resource
   end

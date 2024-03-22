@@ -2,6 +2,8 @@
 
 class Group
   class HashtagsController < ApplicationController
+    skip_before_action :block_guests, on: %i[index show]
+
     before_action :load_group
 
     def index

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Issue::MessageThreadsController < MessageThreadsController
+  before_action :block_guests
+  skip_before_action :block_guests, only: %i[index]
+
   def index
     skip_authorization
     threads = issue.threads.order_by_latest_message.page(params[:page])
@@ -21,7 +24,7 @@ class Issue::MessageThreadsController < MessageThreadsController
   end
 
   def create
-    @thread = issue.threads.build 
+    @thread = issue.threads.build
     @thread.assign_attributes permitted_params.merge(created_by: current_user, tags: issue.tags)
     authorize @thread
     super

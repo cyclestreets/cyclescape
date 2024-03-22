@@ -2,6 +2,6 @@
 
 class GroupMemberPolicy < ApplicationPolicy
   alias index? in_group_committee?
-  
-  delegate :group, to: :record
+
+  alias group record
 end
