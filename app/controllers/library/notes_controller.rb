@@ -2,6 +2,7 @@
 
 class Library::NotesController < ApplicationController
   before_action :load_note, except: %i[new create]
+  skip_before_action :block_guests, on: %i[show]
 
   def new
     @note = Library::Note.new

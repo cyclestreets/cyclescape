@@ -5,11 +5,11 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
   before_action :load_subscription
 
   def edit
-    skip_authorization # done via current_user
+    authorize User, :logged_in?
   end
 
   def create
-    skip_authorization
+    authorize User, :logged_in?
 
     respond_to do |format|
       if @thread.add_subscriber current_user
@@ -23,7 +23,7 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
   end
 
   def destroy
-    skip_authorization # done via current_user
+    authorize User, :logged_in?
 
     @subscription.destroy
     respond_to do |format|

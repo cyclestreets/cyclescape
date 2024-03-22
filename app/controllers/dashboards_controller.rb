@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class DashboardsController < ApplicationController
+  skip_before_action :block_guests, on: %i[deadlines search]
+
   def show
     authorize :dashboard
 

@@ -2,6 +2,8 @@
 
 class TagsController < ApplicationController
   include IssueFeature
+  skip_before_action :block_guests, on: %i[autocomplete_tag_name index all_geometries show]
+
 
   def autocomplete_tag_name
     skip_authorization

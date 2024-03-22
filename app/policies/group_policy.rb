@@ -7,7 +7,5 @@ class GroupPolicy < ApplicationPolicy
 
   alias view_active_users? index?
 
-  private
-
   alias group record
 end

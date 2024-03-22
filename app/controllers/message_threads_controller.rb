@@ -2,6 +2,7 @@
 
 class MessageThreadsController < ApplicationController
   protect_from_forgery except: :vote_detail
+  skip_before_action :block_guests, only: %i[show index]
   include MessageCreator
 
   def index

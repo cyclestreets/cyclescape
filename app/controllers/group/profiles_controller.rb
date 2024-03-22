@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Group::ProfilesController < ApplicationController
+  skip_before_action :block_guests, on: %i[show geometry]
   before_action :load_group_profile
 
   def show

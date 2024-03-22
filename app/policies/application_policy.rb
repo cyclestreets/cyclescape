@@ -60,8 +60,12 @@ class ApplicationPolicy
     root? || admin?
   end
 
+  def created_by_id
+    record.created_by_id
+  end
+
   def created_by_current_user_or_admin?
-    root_or_admin? || (user && user.id == record.created_by_id)
+    root_or_admin? || (user && user.id == created_by_id)
   end
 
   def in_group_committee?

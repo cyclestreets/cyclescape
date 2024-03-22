@@ -19,7 +19,7 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
   end
 
   def index
-    skip_authorization # done via current_user
+    authorize User, :logged_in?
 
     threads = MessageThread.private_for(current_user).order_by_latest_message.to_a
     @private_threads = PrivateMessageDecorator.decorate_collection(threads)

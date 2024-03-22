@@ -6,6 +6,10 @@ class UserPolicy < ApplicationPolicy
     @record = record
   end
 
+  def logged_in?
+    @user
+  end
+
   def view_full_name?
     super(record)
   end
