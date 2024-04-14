@@ -6,7 +6,7 @@ require "planning_filter"
 describe PlanningApplicationWorker do
   let(:planning_record_alt) { planning_record.merge("uid" => "345") }
 
-  let(:base_query) { { apikey: "planit_api_key", start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: "-start_date", pg_sz: described_class::PAGE_SIZE, page: 1 } }
+  let(:base_query) { { apikey: "planit_api_key", start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: "-start_date", pg_sz: described_class::PAGE_SIZE, page: 1, compress: "on" } }
 
   let!(:london_req) do
     no_url = planning_record.dup.tap { |pr| pr.delete "url" }

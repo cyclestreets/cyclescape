@@ -94,7 +94,8 @@ class PlanningApplicationWorker
         start_date: dates[:start_date].to_date.to_s,
         end_date: dates[:end_date].to_date.to_s,
         page: page,
-        sort: "-start_date"
+        sort: "-start_date",
+        compress: "on"
       )
     }
   end
