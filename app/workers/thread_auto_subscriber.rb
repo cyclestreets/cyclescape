@@ -59,7 +59,7 @@ class ThreadAutoSubscriber
     end
 
     def only_one(id, changes)
-      r = Redis.current
+      r = Thread.current[:redis] || Redis.new
       redis_key = ["tas", "threadid", id].join(":")
 
       unless r.set(redis_key, 1, ex: 5, nx: true)
