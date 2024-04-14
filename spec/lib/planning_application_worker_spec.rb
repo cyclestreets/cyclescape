@@ -6,14 +6,16 @@ require "planning_filter"
 describe PlanningApplicationWorker do
   let(:planning_record_alt) { planning_record.merge("uid" => "345") }
 
+  let(:base_query) { { apikey: "planit_api_key", start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: "-start_date", pg_sz: described_class::PAGE_SIZE, page: 1 } }
+
   let!(:london_req) do
     no_url = planning_record.dup.tap { |pr| pr.delete "url" }
     stub_request(:get, Rails.application.config.planning_applications_url)
-      .with(query: { apikey: "planit_api_key", auth: "London", start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: "-start_date", pg_sz: 500 },
+      .with(query: base_query.merge(auth: "London"),
             headers: { "Accept" => "application/json", "Content-Type" => "application/json", "Host" => "www.planit.org.uk:443" })
       .to_return(status: 200, body: {
         "count" => 1,
-        "page_size" => 500,
+        "page_size" => described_class::PAGE_SIZE,
         "records" => [no_url, planning_record_alt]
       }.to_json)
   end
@@ -22,10 +24,10 @@ describe PlanningApplicationWorker do
     no_lat = planning_record.dup.merge("uid" => "123").tap { |pr| pr.delete "lng" }
     no_uid = planning_record.dup.tap { |pr| pr.delete "uid" }
     stub_request(:get, Rails.application.config.planning_applications_url)
-      .with(query: { apikey: "planit_api_key", auth: "Cambridge", start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: "-start_date", pg_sz: 500 },
+      .with(query: base_query.merge(auth: "Cambridge"),
             headers: { "Accept" => "application/json", "Content-Type" => "application/json", "Host" => "www.planit.org.uk:443" })
       .to_return(status: 200, body: {
-        "count" => 1, "page_size" => 500, "records" => [no_uid, planning_record, no_lat]
+        "count" => 1, "page_size" => described_class::PAGE_SIZE, "records" => [no_uid, planning_record, no_lat]
       }.to_json)
   end
 
@@ -61,7 +63,7 @@ describe PlanningApplicationWorker do
   describe "local_authorities" do
     before do
       stub_request(:get, Rails.application.config.planning_areas_url).with(
-        query: { pg_sz: 500, select: :area_name, apikey: "planit_api_key", area_type: :active }
+        query: { pg_sz: described_class::PAGE_SIZE, select: :area_name, apikey: "planit_api_key", area_type: :active }
       ).to_return(
         status: 200,
         body: { "records" => [{ area_name: "aa" }, { area_name: "zz" }] }.to_json
@@ -88,40 +90,40 @@ describe PlanningApplicationWorker do
     end
   end
 
-  context "with an authority with more than 500 planning applications" do
+  context "with an authority with more than PAGE_SIZE planning applications" do
     before do
       allow(subject).to receive(:local_authorities).and_return(["Multi Page LA"])
     end
 
     let!(:multi_page_tot_req) do
       stub_request(:get, Rails.application.config.planning_applications_url)
-        .with(query: { apikey: "planit_api_key", auth: "Multi Page LA", start_date: (Date.today - 14.days).to_s, end_date: Date.today, sort: "-start_date", pg_sz: 500 })
+        .with(query: base_query.merge(auth: "Multi Page LA"))
         .to_return(status: 200, body: {
-          "count" => 500, "page_size" => 500, "records" => [planning_record]
+          "count" => described_class::PAGE_SIZE, "page_size" => described_class::PAGE_SIZE, "records" => [planning_record]
         }.to_json)
     end
 
     let!(:multi_page_0_req) do
       stub_request(:get, Rails.application.config.planning_applications_url)
-        .with(query: { apikey: "planit_api_key", auth: "Multi Page LA", start_date: (Date.today - 14.days).to_s, end_date: (Date.today - 10.days), sort: "-start_date", pg_sz: 500 })
+        .with(query: base_query.merge(auth: "Multi Page LA", page: 2))
         .to_return(status: 200, body: {
-          "count" => 500, "page_size" => 500, "records" => [planning_record]
+          "count" => described_class::PAGE_SIZE, "page_size" => described_class::PAGE_SIZE, "records" => [planning_record]
         }.to_json)
     end
 
     let!(:multi_page_1_req) do
       stub_request(:get, Rails.application.config.planning_applications_url)
-        .with(query: { apikey: "planit_api_key", auth: "Multi Page LA", start_date: (Date.today - 9.days).to_s, end_date: (Date.today - 5.days), sort: "-start_date", pg_sz: 500 })
+        .with(query: base_query.merge(auth: "Multi Page LA", page: 3))
         .to_return(status: 200, body: {
-          "count" => 500, "page_size" => 500, "records" => [planning_record]
+          "count" => described_class::PAGE_SIZE, "page_size" => described_class::PAGE_SIZE, "records" => [planning_record]
         }.to_json)
     end
 
     let!(:multi_page_2_req) do
       stub_request(:get, Rails.application.config.planning_applications_url)
-        .with(query: { apikey: "planit_api_key", auth: "Multi Page LA", start_date: (Date.today - 4.days).to_s, end_date: (Date.today - 0.days), sort: "-start_date", pg_sz: 500 })
+        .with(query: base_query.merge(auth: "Multi Page LA", page: 4))
         .to_return(status: 200, body: {
-          "count" => 500, "page_size" => 500, "records" => [planning_record_alt]
+          "count" => described_class::PAGE_SIZE - 1, "page_size" => described_class::PAGE_SIZE, "records" => [planning_record_alt]
         }.to_json)
     end
 

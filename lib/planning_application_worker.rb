@@ -3,6 +3,7 @@
 class PlanningApplicationWorker
   # Update to use
   # http://planit.org.uk/find/areas/json
+  PAGE_SIZE = 200
 
   def initialize(end_date = Date.current)
     @end_date = end_date
@@ -59,15 +60,13 @@ class PlanningApplicationWorker
   end
 
   def get_authority(authority)
-    total = conn_request(generate_authority_requests(authority))
-    if total["count"] == 500
-      multi_total = (0..2).map do |days_offset|
-        conn_request(generate_authority_requests(authority, days_offset))
-      end
-      multi_total.map { |resp| resp["records"] }
-    else
-      total["records"]
+    page = 1
+    responses = [conn_request(generate_authority_requests(authority, page))]
+    while responses.last["count"] == PAGE_SIZE
+      page += 1
+      responses.push(conn_request(generate_authority_requests(authority, page)))
     end
+    responses.map { |res| res["records"] }
   end
 
   def add_applications(planning_applications)
@@ -86,19 +85,15 @@ class PlanningApplicationWorker
     end
   end
 
-  def generate_authority_requests(authority, days_offset = nil)
+  def generate_authority_requests(authority, page)
     dates = { start_date: (@end_date - 14.days), end_date: @end_date }
-
-    if days_offset
-      dates = { start_date: (@end_date - 14.days + (5 * days_offset).days),
-                end_date: (@end_date - 10.days + (5 * days_offset).days) }
-    end
     {
       method: :get, query:
       api_query.merge(
         auth: authority,
         start_date: dates[:start_date].to_date.to_s,
         end_date: dates[:end_date].to_date.to_s,
+        page: page,
         sort: "-start_date"
       )
     }
@@ -107,9 +102,9 @@ class PlanningApplicationWorker
   def api_query
     @api_query ||=
       if SiteConfig.first.planit_api_key
-        { apikey: SiteConfig.first.planit_api_key, pg_sz: 500 }
+        { apikey: SiteConfig.first.planit_api_key, pg_sz: PAGE_SIZE }
       else
-        { pg_sz: 500 }
+        { pg_sz: PAGE_SIZE }
       end
   end
 end
