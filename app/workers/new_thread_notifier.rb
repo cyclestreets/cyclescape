@@ -82,7 +82,7 @@ class NewThreadNotifier
       next if loc.user.subscribed_to_thread?(thread)
 
       # Only send notifications to people who have permission to read the thread
-      next unless Authorization::Engine.instance.permit? :show, object: thread, user: loc.user
+      next unless MessageThreadPolicy.new(loc.user, thread).show?
 
       # Symbol keys are converted to strings by Resque
       opts = { "thread_id" => thread.id, "user_location_id" => loc.id }

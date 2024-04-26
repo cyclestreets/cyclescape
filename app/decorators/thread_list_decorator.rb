@@ -3,10 +3,6 @@
 class ThreadListDecorator < ApplicationDecorator
   alias thread object
 
-  def self.decl_auth_context
-    :message_threads
-  end
-
   def self.base_class
     MessageThread.base_class
   end

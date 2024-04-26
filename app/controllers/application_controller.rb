@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_action :no_disabled_users
-  before_action :set_auth_user
   before_action :block_guests, if: -> { !devise_controller? }
   before_action :set_locale
   before_action :set_config
@@ -87,10 +86,6 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = current_user.try(:profile).try(:locale) ||
                   http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
-  end
-
-  def set_auth_user
-    Authorization.current_user = current_user
   end
 
   def set_xhr_layout

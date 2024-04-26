@@ -9,7 +9,6 @@ require "rspec/rails"
 require "capybara/rspec"
 require "email_spec"
 require "database_cleaner"
-require "declarative_authorization/maintenance"
 require "webmock/rspec"
 require "pundit/matchers"
 
@@ -36,8 +35,6 @@ RSpec.configure do |config|
 
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
-  config.include Authorization::TestHelper, type: :controller
-  config.include Authorization::TestHelper, type: :view
   config.include RSpec::Helpers::StubAkismet, type: :feature
   config.include WaitForAjax, type: :feature
 
