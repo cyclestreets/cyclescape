@@ -2,7 +2,6 @@
 
 class Library::DocumentsController < ApplicationController
   before_action :load_document, only: %i[show download edit update destroy]
-  skip_before_action :block_guests, on: %i[show]
 
   def new
     @document = Library::Document.new

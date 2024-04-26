@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
   before_action :no_disabled_users
-  before_action :block_guests, if: -> { !devise_controller? }
   before_action :set_locale
   before_action :set_config
   around_action :set_time_zone
@@ -27,13 +26,6 @@ class ApplicationController < ActionController::Base
       "no-user"
     end
   end
-
-  def block_guests
-    return if current_user
-
-    permission_denied
-  end
-
 
   private
 

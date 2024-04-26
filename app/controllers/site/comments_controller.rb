@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Site::CommentsController < ApplicationController
-  skip_before_action :block_guests, on: %i[new create]
-
   def index
     @site_comments = SiteComment.order("created_at desc").page params[:page]
     authorize SiteComment

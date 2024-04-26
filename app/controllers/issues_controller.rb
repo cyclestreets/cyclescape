@@ -3,7 +3,6 @@
 class IssuesController < ApplicationController
   include MessageCreator
   include IssueFeature
-  skip_before_action :block_guests, on: %i[index show vote_detail]
 
   protect_from_forgery except: :vote_detail
 

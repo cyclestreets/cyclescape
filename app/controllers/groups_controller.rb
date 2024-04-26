@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class GroupsController < ApplicationController
-  skip_before_action :block_guests, on: %i[index show all_geometries search]
-
   def index
     skip_authorization
     groups = Group.ordered.enabled

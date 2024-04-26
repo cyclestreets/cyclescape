@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class LibrariesController < ApplicationController
-  skip_before_action :block_guests, on: %i[show search relevant]
-
   def show
     skip_authorization
 

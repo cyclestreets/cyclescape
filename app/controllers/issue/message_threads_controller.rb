@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class Issue::MessageThreadsController < MessageThreadsController
-  before_action :block_guests
-  skip_before_action :block_guests, only: %i[index]
-
   def index
     skip_authorization
     threads = issue.threads.order_by_latest_message.page(params[:page])
