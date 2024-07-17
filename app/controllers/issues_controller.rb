@@ -34,6 +34,8 @@ class IssuesController < ApplicationController
   end
 
   def create
+    return permission_denied unless current_user.approved?
+
     issue_params = permitted_params.merge(created_by: current_user)
     # Something is buggy, Issue.new(photo: "", retained_photo: "") complains the photo isn't valid
     issue_params.delete(:photo) if issue_params[:photo].blank?
