@@ -17,7 +17,7 @@ describe User, type: :model do
   end
 
   describe "#api_key" do
-    subject { build :user }
+    subject { build :user, api_key: nil }
 
     context "if one is set" do
       before { subject.api_key = "abc" }
