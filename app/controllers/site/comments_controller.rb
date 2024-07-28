@@ -3,14 +3,19 @@
 class Site::CommentsController < ApplicationController
   def index
     @site_comments = SiteComment.order("created_at desc").page params[:page]
+    authorize SiteComment
   end
 
   def new
+    skip_authorization
+
     session[:site_comment_referer] = request.referer
     @site_comment = current_user ? current_user.site_comments.new : SiteComment.new
   end
 
   def create
+    skip_authorization
+
     @site_comment = SiteComment.new permitted_params
 
     @site_comment.user = current_user
@@ -30,6 +35,7 @@ class Site::CommentsController < ApplicationController
 
   def destroy
     @site_comment = SiteComment.find params[:id]
+    authorize @site_comment
 
     if @site_comment.destroy
       set_flash_message(:success)

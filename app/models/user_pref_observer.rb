@@ -69,6 +69,6 @@ class UserPrefObserver < ActiveRecord::Observer
   end
 
   def permissions_check(user, thread)
-    Authorization::Engine.instance.permit? :show, object: thread, user: user, user_roles: %i[member guest]
+    MessageThreadPolicy.new(user, thread).show?
   end
 end

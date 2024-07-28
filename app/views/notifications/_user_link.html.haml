@@ -1,4 +1,4 @@
-- if Authorization::Engine.instance.permit?(:view_profile, object: user, user: recipient)
+- if UserPolicy.new(recipient, user).view_profile?
   - if user.profile.picture
     %div{style: "float: left; margin-right: 10px; max-width: 100px; max-height: 100px"}
       = image_tag(path_to_url(user.profile.picture_thumbnail.url), alt: I18n.t("user.profiles.show.profile_picture_title", name: user.name), style: "max-width:100%;max-height:100%")

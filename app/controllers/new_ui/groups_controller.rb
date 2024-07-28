@@ -3,7 +3,7 @@
 module NewUi
   class GroupsController < BaseController
     def show
-      group
+      skip_authorization
       recent_threads = if group.has_member?(current_user)
                          ThreadList.recent_from_groups(group, 10)
                        else

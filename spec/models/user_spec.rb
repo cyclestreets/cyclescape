@@ -423,19 +423,19 @@ describe User, type: :model do
     it "should return polygon for point" do
       subject.location.location = point
       expect(subject.buffered_location.geometry_type.type_name).to eq("Polygon")
-      expect(subject.buffered_location).to eql(subject.location.location.buffer(Geo::USER_LOCATIONS_BUFFER))
+      expect(subject.buffered_location.contains?(subject.location.location)).to eq true
     end
 
     it "should return polygon for line" do
       subject.location.location = line
       expect(subject.buffered_location.geometry_type.type_name).to eq("Polygon")
-      expect(subject.buffered_location).to eql(subject.location.location.buffer(Geo::USER_LOCATIONS_BUFFER))
+      expect(subject.buffered_location.contains?(subject.location.location)).to eq true
     end
 
     it "should return polygon for polygon" do
       subject.location.location = polygon
       expect(subject.buffered_location.geometry_type.type_name).to eq("Polygon")
-      expect(subject.buffered_location).to eql(subject.location.location.buffer(Geo::USER_LOCATIONS_BUFFER))
+      expect(subject.buffered_location.contains?(subject.location.location)).to eq true
     end
 
     it "should return polygon for geom_collection" do

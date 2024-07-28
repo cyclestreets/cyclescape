@@ -59,7 +59,7 @@
             = link_to "#new-thread-leader-message" do
               = t ".thread_leader_message"
               %span.nub
-      - if cannot_post?
+      - unless current_user
         .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
       - else
         - message = @thread.messages.build
@@ -87,7 +87,7 @@
             = f.actions do
               = f.action :submit, button_html: message_button_html
 
-      - if permitted_to?(:create, :messages) && @thread.latest_message
+      - if current_user && @thread.latest_message
         %p
           = t '.reply_by'
           = email_message @thread.latest_message
@@ -118,7 +118,7 @@
               = t ".back"
             .library-content(data-bind="template: {name: 'library-item-selected', foreach: selected()}")
 
-  - if permitted_to? :close, @thread
+  - if policy(@thread).close?
     .pull-right= button_to t(".close"), close_thread_path(@thread), method: :put, class: 'btn-green part-hidden', data: { confirm: t("are_you_sure") }
 
 // Template for library items

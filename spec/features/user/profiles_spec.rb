@@ -63,7 +63,7 @@ describe "User profiles" do
 
     it "should prevent you editing someone elses" do
       visit edit_user_profile_path(user)
-      expect(page).to have_content(I18n.t("shared.permission_denied.login"))
+      expect(page).to have_content(I18n.t("application.permission_denied"))
     end
   end
 

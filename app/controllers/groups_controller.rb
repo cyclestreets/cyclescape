@@ -2,6 +2,7 @@
 
 class GroupsController < ApplicationController
   def index
+    skip_authorization
     groups = Group.ordered.enabled
 
     respond_to do |format|
@@ -18,6 +19,8 @@ class GroupsController < ApplicationController
   end
 
   def show
+    skip_authorization
+
     if group
       recent_threads = if @group.has_member?(current_user)
                          ThreadList.recent_from_groups(group, 10)
@@ -35,6 +38,8 @@ class GroupsController < ApplicationController
   end
 
   def all_geometries
+    skip_authorization
+
     if params[:bbox]
       bbox = bbox_from_string(params[:bbox], GroupProfile.rgeo_factory)
       group_profiles = GroupProfile.intersects(bbox.to_geometry)
@@ -51,6 +56,8 @@ class GroupsController < ApplicationController
   end
 
   def search
+    skip_authorization
+
     @query = params[:query]
     set_page_title t(".title", group: group.name)
     _group = group

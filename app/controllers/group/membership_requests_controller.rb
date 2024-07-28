@@ -2,22 +2,23 @@
 
 class Group::MembershipRequestsController < ApplicationController
   before_action :load_group
-  filter_access_to :cancel, attribute_check: true, model: GroupMembershipRequest
-  filter_access_to :all, attribute_check: true, model: Group
 
   def index
+    authorize_group
     set_page_title t("group.membership_requests.index.title", group: @group.name)
 
     @requests = @group.membership_requests.order("created_at desc").includes(:user)
   end
 
   def new
+    authorize_group
     set_page_title t("group.membership_requests.new.title", group_name: @group.name)
 
     @request = @group.membership_requests.build
   end
 
   def create
+    authorize_group
     if current_user.groups.include? @group
       redirect_to @group, alert: t("group.membership_requests.create.already_member")
     elsif current_user.membership_request_pending_for? @group
@@ -39,10 +40,12 @@ class Group::MembershipRequestsController < ApplicationController
   # for large groups with many pending membership requests.
   def review
     @request = @group.membership_requests.find params[:id]
+    authorize @request
   end
 
   def confirm
     @request = @group.membership_requests.find params[:id]
+    authorize @request
     @request.actioned_by = current_user
     if @request.confirm!
       Notifications.group_membership_request_confirmed(@request).deliver_later
@@ -55,6 +58,7 @@ class Group::MembershipRequestsController < ApplicationController
 
   def reject
     @request = @group.membership_requests.find params[:id]
+    authorize @request
     @request.actioned_by = current_user
     if @request.reject!
       @request.update rejection_message: params[:group_membership_request][:rejection_message]
@@ -68,6 +72,7 @@ class Group::MembershipRequestsController < ApplicationController
 
   def cancel
     @request = @group.membership_requests.find params[:id]
+    authorize @request
     if @request.user == current_user && @request.cancel!
       set_flash_message :success
     else
@@ -76,7 +81,11 @@ class Group::MembershipRequestsController < ApplicationController
     redirect_to @group
   end
 
-  protected
+  private
+
+  def authorize_group
+    authorize GroupMembershipRequest.new(group: @group)
+  end
 
   def load_group
     @group = Group.find params[:group_id]

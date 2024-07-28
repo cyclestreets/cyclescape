@@ -6,7 +6,7 @@ class UserLocationObserver < ActiveRecord::Observer
     if user.prefs.involve_my_locations == "subscribe"
       Issue.intersects(user_location.location).each do |issue|
         issue.threads.each do |thread|
-          thread.add_subscriber(user) if permissions_check(user, thread) && !user.ever_subscribed_to_thread?(thread)
+          thread.add_subscriber(user) if MessageThreadPolicy.new(user, thread).show? && !user.ever_subscribed_to_thread?(thread)
         end
       end
     end
@@ -31,11 +31,5 @@ class UserLocationObserver < ActiveRecord::Observer
         end
       end
     end
-  end
-
-  private
-
-  def permissions_check(user, thread)
-    Authorization::Engine.instance.permit? :show, object: thread, user: user, user_roles: %i[member guest]
   end
 end

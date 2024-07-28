@@ -22,6 +22,11 @@ class Library::Component < ApplicationRecord
     @created_by || item&.created_by
   end
 
+  # added for auth checks
+  def created_by_id
+    created_by&.id
+  end
+
   def created_at
     item&.created_at
   end

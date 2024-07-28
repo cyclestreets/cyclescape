@@ -2,14 +2,15 @@
 
 class User::PrefsController < ApplicationController
   before_action :load_user
-  filter_access_to :edit, :update, attribute_check: true, model: User
 
   def edit
     @prefs = @user.prefs
+    authorize @prefs
   end
 
   def update
     @prefs = @user.prefs
+    authorize @prefs
 
     if @prefs.update permitted_params
       set_flash_message :success
@@ -23,7 +24,7 @@ class User::PrefsController < ApplicationController
 
   def load_user
     @user = params[:user_id] ? User.find(params[:user_id]) : current_user
-    permission_denied unless @user
+    return permission_denied unless @user
   end
 
   def permitted_params

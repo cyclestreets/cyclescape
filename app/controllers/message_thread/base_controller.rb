@@ -7,5 +7,7 @@ class MessageThread::BaseController < ApplicationController
 
   def load_thread
     @thread = MessageThread.find(params[:thread_id])
+    authorize @thread, :show?
+    @thread
   end
 end

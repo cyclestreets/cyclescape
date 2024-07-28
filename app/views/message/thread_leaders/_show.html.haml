@@ -1,7 +1,7 @@
 .link
   %p
     - leader = component.created_by
-    - if permitted_to? :view_profile, leader
+    - if policy(leader.profile).show?
       - leader_link = link_to_profile(leader)
     - else
       = leader_link = leader.display_name_or_anon

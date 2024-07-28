@@ -6,11 +6,11 @@
       %p.pre-title= t(".user_profile")
       %h1= @user.name
       = @user.picture_standard_image
-      - if permitted_to? :send_private_message, @user
+      - if policy(@user).send_private_message?
         =link_to t('.send_private_message'), new_user_private_message_path(@user), class: 'btn-green'
       %p
     %dl
-      - if permitted_to? :view_full_name, @user
+      - if policy(@user).view_full_name?
         %dt= t(".full_name")
         %dd= @user.full_name
       %dt= t(".about_label")

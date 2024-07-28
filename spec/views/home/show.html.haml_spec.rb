@@ -12,6 +12,9 @@ describe "home/show.html.haml", type: :view do
     assign :unviewed_thread_ids, []
     assign :site_config, site_config
     warden.set_user user
+    allow(view).to receive(:policy) do |record|
+      Pundit.policy(user, record)
+    end
   end
 
   it "should have the intro text" do

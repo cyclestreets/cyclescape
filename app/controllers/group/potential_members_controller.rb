@@ -2,7 +2,6 @@
 
 class Group::PotentialMembersController < ApplicationController
   before_action :load_group
-  filter_access_to :all, attribute_check: true, model: Group
 
   def new; end
 
@@ -19,6 +18,7 @@ class Group::PotentialMembersController < ApplicationController
 
   def load_group
     @group = Group.find params[:group_id]
+    authorize @group, :in_group_committee?
   end
 
   def permitted_params

@@ -3,10 +3,6 @@
 class ThreadListDecorator < ApplicationDecorator
   alias thread object
 
-  def self.decl_auth_context
-    :message_threads
-  end
-
   def self.base_class
     MessageThread.base_class
   end
@@ -16,6 +12,10 @@ class ThreadListDecorator < ApplicationDecorator
     "link_message" => "link",
     "deadline_message" => "cal"
   }.freeze
+
+  def model_name
+    "MessageThread"
+  end
 
   def latest_activity
     latest = thread.latest_message
@@ -36,7 +36,7 @@ class ThreadListDecorator < ApplicationDecorator
   end
 
   def title
-    if h.permitted_to? :show, thread
+    if h.policy(thread).show?
       thread.display_title
     else
       I18n.t("decorators.thread_list.private_thread_title")

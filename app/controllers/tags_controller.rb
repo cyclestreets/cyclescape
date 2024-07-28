@@ -3,7 +3,10 @@
 class TagsController < ApplicationController
   include IssueFeature
 
+
   def autocomplete_tag_name
+    skip_authorization
+
     term = params[:term]
 
     items =
@@ -19,6 +22,8 @@ class TagsController < ApplicationController
   end
 
   def show
+    skip_authorization
+
     @tag = Tag.find_by name: params[:id]
     if @tag
       @query = @tag.name
@@ -31,7 +36,7 @@ class TagsController < ApplicationController
       @issues = IssueDecorator.decorate_collection issues
       unfiltered_results = MessageThread.find_by_tag(@tag).includes(:issue, :group).order(updated_at: :desc)
       threads = Kaminari.paginate_array(
-        unfiltered_results.select { |t| permitted_to?(:show, t) }
+        unfiltered_results.select { |t| MessageThreadPolicy.new(current_user, t).show? }
       ).page(params[:thread_page])
 
       @threads = ThreadListDecorator.decorate_collection threads
@@ -49,10 +54,14 @@ class TagsController < ApplicationController
   end
 
   def index
+    skip_authorization
+
     @tags = Tag.top_tags(200)
   end
 
   def all_geometries
+    skip_authorization
+
     tag = Tag.find_by name: params[:id]
     bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
     issues = Issue.find_by_tag(tag).by_most_recent

@@ -2,15 +2,16 @@
 
 class Group::MembershipsController < ApplicationController
   before_action :load_group
-  filter_access_to :all, attribute_check: true, model: Group
 
   def new
     @membership = @group.memberships.new
+    authorize @membership
     @membership.build_user
   end
 
   def create
     @membership = @group.memberships.new permitted_params
+    authorize @membership
 
     if @membership.save
       Notifications.added_to_group(@membership).deliver_later if @membership.user.accepted_or_not_invited?
@@ -22,10 +23,12 @@ class Group::MembershipsController < ApplicationController
 
   def edit
     @membership = @group.memberships.find params[:id]
+    authorize @membership
   end
 
   def update
     @membership = @group.memberships.find params[:id]
+    authorize @membership
 
     if @membership.update permitted_params
       set_flash_message :success
@@ -38,6 +41,7 @@ class Group::MembershipsController < ApplicationController
 
   def destroy
     @membership = @group.memberships.find params[:id]
+    authorize @membership
 
     if @membership.destroy
       set_flash_message :success

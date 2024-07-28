@@ -12,7 +12,7 @@ describe "Group Membership Requests" do
     describe "viewing the requests" do
       it "should refuse" do
         visit group_membership_requests_path(gmr.group)
-        expect(page).to have_content(I18n.t("shared.permission_denied.login"))
+        expect(page).to have_content(I18n.t("application.permission_denied"))
       end
     end
   end

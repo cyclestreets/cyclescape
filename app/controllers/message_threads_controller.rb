@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class MessageThreadsController < ApplicationController
-  filter_access_to :show, :edit, :update, :approve, :reject, :close, :open, :destroy, attribute_check: true
   protect_from_forgery except: :vote_detail
   include MessageCreator
 
   def index
+    skip_authorization
+
     threads = ThreadList.recent_public.page(params[:page])
     @user_favourites = current_user&.thread_favourites&.where(thread: threads)
     @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
@@ -94,7 +95,7 @@ class MessageThreadsController < ApplicationController
   end
 
   def permission_denied
-    @group ||= thread.try(:group)
+    @group ||= thread(auth: false).try(:group)
     super
   end
 
@@ -115,17 +116,19 @@ class MessageThreadsController < ApplicationController
     end
   end
 
-  def thread
+  def thread(auth: true)
     @thread ||= begin
                   scope = MessageThread.all
                   scope = scope.approved unless current_user.try(:admin?)
-                  scope.find params[:id]
+                  thread = scope.find params[:id]
+                  authorize thread if auth
+                  thread
                 end
   end
 
   def permitted_params
     permitted =
-      if permitted_to?(:edit_all_fields, @thread)
+      if Pundit.policy!(current_user, @thread).edit_all_fields?
         %i[privacy group_id issue_id tags_string]
       else
         []

@@ -9,7 +9,7 @@
         <% end %>
       <% end %>
       <p class="italic">
-        <% if permitted_to? :view_profile, thread.created_by %>
+        <% if policy(thead.created_by).view_profile? %>
           <%= thread.created_by.name  %>
         <% else %>
           <%= thread.created_by.display_name_or_anon  %>

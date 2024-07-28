@@ -18,7 +18,7 @@ class ThreadSubscriber
     constraint = thread.issue ? pref : pref.and(t[:involve_my_groups_admin].eq(true))
     members = thread.group.members.active.joins(:prefs).where(constraint)
     members.each do |member|
-      if Authorization::Engine.instance.permit? :show, object: thread, user: member, user_roles: %i[member guest]
+      if permissions_check(member, thread)
         thread.add_subscriber(member)
       end
     end
@@ -34,9 +34,13 @@ class ThreadSubscriber
 
     locations.each do |loc|
       user = loc.user
-      if Authorization::Engine.instance.permit? :show, object: thread, user: user, user_roles: %i[member guest]
+      if permissions_check(user, thread)
         thread.add_subscriber(user)
       end
     end
+  end
+
+  private_class_method def self.permissions_check(user, thread)
+    MessageThreadPolicy.new(user, thread).auto_subscribe?
   end
 end

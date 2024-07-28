@@ -205,7 +205,7 @@ class User < ApplicationRecord
   end
 
   def buffered_location
-    location.try(:buffered)
+    location&.buffered unless location&.destroyed?
   end
 
   # Returns issues that are within a small distance of their user_locations

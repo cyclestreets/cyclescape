@@ -272,7 +272,7 @@ describe "Issues" do
         visit issue_path(issue)
         # Use the slightly-unofficial capybara mechanism to simulate a delete
         page.driver.delete issue_path(issue)
-        expect(page).to have_content(I18n.t("shared.permission_denied.login"))
+        expect(page).to have_content(I18n.t("application.permission_denied"))
       end
     end
 

@@ -31,12 +31,12 @@
     - if @issue
       .description
         %p= @issue.description
-    - if permitted_to? [:edit, :destroy], @thread
+    - if policy(@thread).edit? || policy(@thread).destroy?
       %menu.tools
         %ul
-          - if permitted_to? :edit, @thread
+          - if policy(@thread).edit?
             %li= link_to t(".edit"), edit_thread_path(@thread)
-          - if permitted_to? :destroy, @thread
+          - if policy(@thread).destroy?
             %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t("are_you_sure") }
   - if @view_from
     %article.message{ data: {"initially-loaded-from" => @initially_loaded_from } }
@@ -45,12 +45,12 @@
         Loading more content
   = render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
   - if @thread.closed
-    - closed_by = permitted_to?(:view_profile, @thread.closed_by.last) ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon
+    - closed_by = policy(@thread.closed_by.last).view_profile? ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon
     = t '.closed_html', by: closed_by, at: time_ago_in_words(@thread.message_thread_closes.last.created_at)
     %p
-    - if permitted_to? :open, @thread
+    - if policy(@thread).open?
       = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green', data: { confirm: t("are_you_sure") }
-  - elsif @thread.private_message? && !(permitted_to? :send_private_message, other_user) # Do not allow new messages if messages are not permitted
+  - elsif @thread.private_message? && !policy(other_user).send_private_message? # Do not allow new messages if messages are not permitted
   - else
     #messages-new-partial
       = render "messages/new"

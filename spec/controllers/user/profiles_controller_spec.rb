@@ -64,13 +64,13 @@ describe User::ProfilesController, type: :controller do
 
         it "should be hidden" do
           get :show, params: { user_id: user.id }
-          expect(response.body).to include(I18n.t("devise.failure.unauthenticated"))
+          expect(response.body).to include(I18n.t("application.permission_denied"))
         end
 
         context "where the user does not exist" do
           it "should be hidden" do
             get :show, params: { user_id: -1 }
-            expect(response.body).to include(I18n.t("devise.failure.unauthenticated"))
+            expect(response.body).to include(I18n.t("application.permission_denied"))
           end
         end
       end
@@ -116,7 +116,7 @@ describe User::ProfilesController, type: :controller do
           end
 
           it "should be hidden" do
-            expect(response.body).to include(I18n.t("devise.failure.unauthenticated"))
+            expect(response.body).to include(I18n.t("application.permission_denied"))
           end
         end
       end

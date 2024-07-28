@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
+  after_action :verify_authorized, if: -> { !devise_controller? }
+
   protect_from_forgery
   before_action :no_disabled_users
-  before_action :set_auth_user
   before_action :set_locale
   before_action :set_config
   around_action :set_time_zone
+  around_action :redirect_not_authorized
   before_action :load_group_from_subdomain
   before_action :set_page_title
   before_action :set_last_seen_at, if: proc { |_p| user_signed_in? && (session[:last_seen_at].nil? || session[:last_seen_at] < 15.minutes.ago) }
   after_action :remember_current_group
   after_action :store_location
   layout :set_xhr_layout
-  filter_access_to :all
   helper_method :group_subdomain?
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -76,10 +78,6 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.locale = current_user.try(:profile).try(:locale) ||
                   http_accept_language.compatible_language_from(I18n.available_locales) || I18n.default_locale
-  end
-
-  def set_auth_user
-    Authorization.current_user = current_user
   end
 
   def set_xhr_layout
@@ -171,5 +169,11 @@ class ApplicationController < ActionController::Base
 
   def set_time_zone
     Time.use_zone(current_user.try(:time_zone) || @site_config.try(:time_zone) || "London") { yield }
+  end
+
+  def redirect_not_authorized
+    yield
+  rescue Pundit::NotAuthorizedError
+    permission_denied
   end
 end

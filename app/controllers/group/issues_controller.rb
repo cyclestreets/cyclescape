@@ -2,10 +2,9 @@
 
 # Note inheritance
 class Group::IssuesController < IssuesController
-  filter_access_to %i[edit update destroy], attribute_check: true, context: :issues
-  filter_access_to :all, context: :issues
-
   def index
+    skip_authorization
+
     set_page_title t("group.issues.index.title", group_name: current_group.name)
 
     issues = Issue.preloaded.intersects(current_group.profile.location).by_most_recent.page(params[:page])

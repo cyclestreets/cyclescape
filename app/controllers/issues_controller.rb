@@ -4,10 +4,11 @@ class IssuesController < ApplicationController
   include MessageCreator
   include IssueFeature
 
-  filter_access_to %i[edit update destroy], attribute_check: true
   protect_from_forgery except: :vote_detail
 
   def index
+    skip_authorization
+
     issues = Issue.preloaded.by_most_recent.page(params[:page])
 
     popular_issues = Issue.preloaded.by_score.page(params[:pop_issues_page])
@@ -18,6 +19,8 @@ class IssuesController < ApplicationController
   end
 
   def show
+    skip_authorization
+
     redirect_to issue_url(issue) unless request.original_url.end_with?(issue_path(issue))
 
     @issue = IssueDecorator.decorate issue
@@ -29,25 +32,28 @@ class IssuesController < ApplicationController
   end
 
   def new
+    authorize Issue
     @issue = Issue.new
     new_issue_setup
   end
 
   def create
-    return permission_denied unless current_user.approved?
-
     issue_params = permitted_params.merge(created_by: current_user)
     # Something is buggy, Issue.new(photo: "", retained_photo: "") complains the photo isn't valid
     issue_params.delete(:photo) if issue_params[:photo].blank?
     issue_params.delete(:retained_photo) if issue_params[:retained_photo].blank?
 
     @issue = current_user.issues.new issue_params
+
+    authorize @issue
+
     thread = @issue.threads.last
     if thread
       thread.tags = @issue.tags
       thread.created_by = current_user
       @message = create_message(thread)
     end
+
 
     if @issue.save
       NewIssueNotifier.new_issue @issue
@@ -63,11 +69,13 @@ class IssuesController < ApplicationController
   end
 
   def edit
-    @issue.description = helpers.simple_format(@issue.description) if @issue.plain_text?
+    authorize issue
+    issue.description = helpers.simple_format(issue.description) if issue.plain_text?
     @start_location = issue.location
   end
 
   def update
+    authorize issue
     if issue.update permitted_params
       set_flash_message :success
       redirect_to action: :show
@@ -78,6 +86,8 @@ class IssuesController < ApplicationController
   end
 
   def destroy
+    authorize issue
+
     if issue.destroy
       set_flash_message :success
       redirect_to issues_path
@@ -88,12 +98,16 @@ class IssuesController < ApplicationController
   end
 
   def geometry
+    skip_authorization
+
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(issue_feature(IssueDecorator.decorate(issue))) }
     end
   end
 
   def all_geometries
+    skip_authorization
+
     bbox = bbox_from_string(params[:bbox], Issue.rgeo_factory)
     issues = geom_issue_scope.by_most_recent.limit(50).includes(:created_by)
     issues = issues.with_center_inside(bbox.to_geometry) if bbox
@@ -107,16 +121,22 @@ class IssuesController < ApplicationController
   end
 
   def vote_up
+    authorize User, :logged_in?
+
     current_user.vote_exclusively_for(issue) unless current_user.voted_for?(issue)
     render partial: "shared/vote_detail", locals: { resource: @issue }
   end
 
   def vote_clear
+    authorize User, :logged_in?
+
     current_user.clear_votes issue
     render partial: "shared/vote_detail", locals: { resource: @issue }
   end
 
   def vote_detail
+    skip_authorization
+
     issues = Issue.where(id: params[:ids])
     render partial: "shared/vote_detail", collection: issues, as: :resource
   end

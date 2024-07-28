@@ -1,5 +1,5 @@
 %li
-  - if permitted_to?(:view_profile, user)
+  - if policy(user).view_profile?
     = link_to user_profile_path(user), class: ("leading" if leading) do
       %span.thumb{style: "max-width: 100px; max-height: 100px"}
         - if user.profile.picture

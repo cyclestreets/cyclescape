@@ -2,6 +2,8 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   def create
+    skip_authorization
+
     if params[:bicycle_wheels].try(:strip) == "12" && params[:real_name].blank?
       super
     else
