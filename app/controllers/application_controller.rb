@@ -134,7 +134,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       respond_to do |format|
         format.html { authenticate_user! }
-        format.js { render "shared/permission_denied", status: :unauthorized }
+        format.js { render "shared/permission_denied_js", status: :unauthorized }
       end
     else
       render "shared/permission_denied", status: :unauthorized
