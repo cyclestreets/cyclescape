@@ -20,7 +20,7 @@ class UserProfile < ApplicationRecord
 
   enum locale: all_locales.values.each_with_object({}).each { |loc, memo| memo[loc.locale] = loc.id }
 
-  belongs_to :user
+  belongs_to :user, inverse_of: :profile
 
   validates :website, url: true
   validates :visibility, inclusion: { in: VISIBILITY_OPTIONS }

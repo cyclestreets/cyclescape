@@ -3,8 +3,8 @@
 class UserLocation < ApplicationRecord
   include Locatable
 
-  belongs_to :user
-  belongs_to :category, class_name: "LocationCategory"
+  belongs_to :user, inverse_of: :location
+  belongs_to :category, class_name: "LocationCategory", inverse_of: :user_locations
 
   validates :location, presence: true
   validates :user, presence: true, uniqueness: true
