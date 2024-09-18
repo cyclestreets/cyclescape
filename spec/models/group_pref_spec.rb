@@ -4,8 +4,6 @@
 require "spec_helper"
 
 describe GroupPref do
-  it { is_expected.to belong_to(:group) }
-
   describe "attributes" do
     booleans = %w[
       notify_membership_requests

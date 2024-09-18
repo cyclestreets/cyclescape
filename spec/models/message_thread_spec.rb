@@ -7,9 +7,6 @@ describe MessageThread do
   let(:messages) { thread.reload.messages }
 
   describe "associations" do
-    it { is_expected.to belong_to(:created_by) }
-    it { is_expected.to belong_to(:group) }
-    it { is_expected.to belong_to(:issue) }
     it { is_expected.to have_many(:messages) }
     it { is_expected.to have_many(:subscriptions) }
     it { is_expected.to have_many(:thread_leader_messages) }

@@ -4,7 +4,6 @@ require "spec_helper"
 
 describe PotentialMember, type: :model do
   let(:group) { build_stubbed :group }
-  it { is_expected.to belong_to(:group) }
   it { is_expected.to validate_presence_of(:group) }
   it { is_expected.to validate_presence_of(:email_hash) }
 

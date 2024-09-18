@@ -18,9 +18,9 @@ describe "Deadline messages" do
     it "opens datepicker modal before and after posting", js: true do
       stub_request(:post, "https://development.rest.akismet.com/1.1/comment-check").to_return(status: 200, body: "false")
       click_on "Deadline/date"
-      expect(page).to have_no_css(".ui-datepicker")
+      expect(page).to have_no_selector(".ui-datepicker")
       find("#message_deadline_messages_attributes_0_deadline").click
-      expect(page).to have_css(".ui-datepicker")
+      expect(page).to have_selector(".ui-datepicker")
 
       fill_in "Deadline", with: future_date.to_s
       fill_in "Title", with: "Submission deadline"

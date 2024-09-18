@@ -41,5 +41,5 @@ Rails.application.configure do
 
   # Allow pass debug_assets=true as a query parameter to load pages with unpackaged assets
   config.assets.allow_debugging = true
-  config.action_view.raise_on_missing_translations = true
+  config.i18n.raise_on_missing_translations = true
 end

@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 6.0"
+gem "rails", "~> 6.1"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -51,6 +51,7 @@ gem "html2text"
 gem "http_accept_language"
 gem "icalendar"
 gem "mustache"
+gem "net-http" # https://github.com/ruby/net-imap/issues/16
 gem "normalizr"
 gem "omniauth"
 gem "omniauth-facebook"
@@ -65,9 +66,7 @@ gem "rack-utf8_sanitizer"
 gem "resque"
 gem "resque-retry"
 gem "resque-rollbar"
-# We get: "No route matches [GET] "/fonts/tinymce.woff" on higher versions,
-# maybe related to #478 on sprockets-rails
-gem "sprockets-rails", "= 3.2.2"
+gem "sprockets-rails"
 gem "thin"
 gem "thumbs_up", "~> 0.4.6"
 gem "whenever"

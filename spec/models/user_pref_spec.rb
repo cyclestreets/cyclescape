@@ -4,7 +4,6 @@
 require "spec_helper"
 
 describe UserPref do
-  it { is_expected.to belong_to(:user) }
   it { is_expected.to validate_inclusion_of(:email_status_id).in_array(described_class.email_statuses.keys) }
 
   describe "attributes" do

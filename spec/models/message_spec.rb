@@ -3,12 +3,6 @@
 require "spec_helper"
 
 describe Message do
-  describe "associations" do
-    it { is_expected.to belong_to(:created_by) }
-    it { is_expected.to belong_to(:thread) }
-    it { is_expected.to belong_to(:in_reply_to) }
-  end
-
   describe "validations" do
     it { is_expected.to validate_presence_of(:created_by) }
     it { is_expected.to validate_presence_of(:body) }

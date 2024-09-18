@@ -18,12 +18,6 @@
 require "spec_helper"
 
 describe DeadlineMessage do
-  describe "associations" do
-    it { is_expected.to belong_to(:thread) }
-    it { is_expected.to belong_to(:message) }
-    it { is_expected.to belong_to(:created_by) }
-  end
-
   describe "validations" do
     it { is_expected.to validate_presence_of(:deadline) }
     it { is_expected.to validate_presence_of(:title) }

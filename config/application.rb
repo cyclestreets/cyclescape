@@ -56,6 +56,9 @@ module Cyclescape
     # Version of your assets, change this if you want to expire all your assets
     config.assets.paths << "node_modules"
 
+    config.assets.configure do |env|
+      env.export_concurrent = false
+    end
     # Set cache storage
     config.cache_store = :redis_cache_store, { url: "redis://localhost:6379/1", expires_in: 1.week, compress: true, namespace: "cs" }
 
