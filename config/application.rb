@@ -110,5 +110,7 @@ module Cyclescape
     # config.browserify_rails.node_env = "production"
     config.action_mailer.preview_path = Rails.root.join("app", "controllers", "admin", "mailers")
     config.action_mailer.show_previews = true
+
+    config.middleware.insert 0, Rack::UTF8Sanitizer # fix ArgumentError invalid %-encoding bugs, https://gist.github.com/bf4/d26259acfa29f3b9882b#file-exception_app-rb
   end
 end
