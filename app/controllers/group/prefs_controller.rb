@@ -2,7 +2,6 @@
 
 class Group::PrefsController < ApplicationController
   before_action :load_group
-  filter_access_to :edit, :update, attribute_check: true, model: Group
 
   def edit
     @prefs = @group.prefs
@@ -24,6 +23,7 @@ class Group::PrefsController < ApplicationController
 
   def load_group
     @group = Group.find params[:group_id]
+    authorize @group, :in_group_committee?
   end
 
   def permitted_params

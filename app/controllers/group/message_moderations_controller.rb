@@ -3,9 +3,10 @@
 # Note inheritance
 class Group::MessageModerationsController < MessageThreadsController
   before_action :group
-  filter_access_to :index, attribute_check: true, model: Group
 
   def index
+    authorize @group, :in_group_committee?
+
     @messages = Message.mod_queued.in_group(group.id).page params[:page]
   end
 

@@ -1,5 +1,5 @@
 .tag-form.hide
-  - if permitted_to?(:update, auth_context)
+  - if policy(context).update_tags?
     = semantic_form_for context, url: form_url, remote: true, html: {class: "edit-tags", data: {type: "json"} } do |f|
       = f.inputs do
         = f.input :tags_string

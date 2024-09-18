@@ -16,7 +16,6 @@ describe "Subscriptions", type: :feature do
   end
 
   it "should not let other user's public token unsubscribe" do
-    visit edit_thread_subscription_path(thread, subscription, t: other_sub.user.public_token)
-    expect(page).to have_content(t("devise.failure.unauthenticated"))
+    expect { visit edit_thread_subscription_path(thread, subscription, t: other_sub.user.public_token) }.to raise_error ActiveRecord::RecordNotFound
   end
 end

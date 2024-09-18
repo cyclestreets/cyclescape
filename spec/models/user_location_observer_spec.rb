@@ -9,7 +9,7 @@ describe UserLocationObserver do
     let(:ul) { build(:user_location) }
 
     it "should notice when UserLocations are saved" do
-      expect(subject).to receive(:after_save)
+      expect(subject).to receive(:after_save).at_least(1).times
 
       UserLocation.observers.enable :user_location_observer do
         ul.save

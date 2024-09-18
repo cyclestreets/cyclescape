@@ -59,13 +59,9 @@ module MessageThreadsHelper
     render defaults.merge(options)
   end
 
-  def cannot_post?
-    !permitted_to? :create, :messages
-  end
-
   def message_button_html
     {
-      class: "btn-green", disabled: cannot_post?, data: { disable_with: t("formtastic.actions.saving") }
+      class: "btn-green", disabled: !current_user, data: { disable_with: t("formtastic.actions.saving") }
     }
   end
 end

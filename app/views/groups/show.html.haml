@@ -8,7 +8,7 @@
       %li= link_to t(".our_areas"), "#area-map"
       %li= link_to t(".recent_threads"), "#recent-threads"
       %li= link_to t(".recent_issues"), "#recent-issues"
-      - if permitted_to? :view_active_users, @group
+      - if current_user && policy(@group).view_active_users?
         %li= link_to t(".active_users"), "#active-users"
     .panes
       #area-map.pane.area-map
@@ -40,7 +40,7 @@
             %ul.issue-list
               = render partial: "issues/compact", collection: @recent_issues, as: :issue
 
-      - if permitted_to? :view_active_users, @group
+      - if policy(@group).view_active_users?
         #active-users.pane.active-users
           %p= t ".committee_only"
           %table.table-full-width
@@ -52,7 +52,7 @@
                 - user = user_count[:user]
                 %tr
                   %td
-                    - if permitted_to? :view_profile, user
+                    - if policy(user.profile).show?
                       = link_to user_profile_path(user) do
                         %span.thumb
                           - if user.profile.picture

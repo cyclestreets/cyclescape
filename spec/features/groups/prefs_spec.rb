@@ -13,7 +13,7 @@ describe "Group prefs" do
     describe "editing the group preferences" do
       it "should refuse" do
         visit edit_group_prefs_path(current_group)
-        expect(page).to have_content(I18n.t("shared.permission_denied.login"))
+        expect(page).to have_content(I18n.t("application.permission_denied"))
       end
     end
   end

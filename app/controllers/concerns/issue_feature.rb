@@ -5,12 +5,12 @@ module IssueFeature
 
   def issue_feature(issue, bbox = nil)
     geom = bbox.to_geometry if bbox
-    creator_name = if permitted_to? :view_profile, issue.created_by
+    creator_name = if policy(issue.created_by.profile).show?
                      issue.created_by.name
                    else
                      issue.created_by.display_name_or_anon
                    end
-    creator_url = if permitted_to? :view_profile, issue.created_by
+    creator_url = if policy(issue.created_by.profile).show?
                     view_context.url_for user_profile_path(issue.created_by)
                   else
                     "#"

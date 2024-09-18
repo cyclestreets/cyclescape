@@ -1,11 +1,16 @@
 # frozen_string_literal: true
 
 class MessageThread::SubscriptionsController < MessageThread::BaseController
-  filter_access_to :all, attribute_check: true, load_method: :load_subscription
+  skip_before_action :load_thread
+  before_action :load_subscription
 
-  def edit; end
+  def edit
+    authorize User, :logged_in?
+  end
 
   def create
+    authorize User, :logged_in?
+
     respond_to do |format|
       if @thread.add_subscriber current_user
         set_flash_message :success
@@ -18,6 +23,8 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
   end
 
   def destroy
+    authorize User, :logged_in?
+
     @subscription.destroy
     respond_to do |format|
       set_flash_message :success
@@ -41,7 +48,7 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
   def load_subscription
     subscriptions = load_thread.subscriptions
     @subscription = if params[:id]
-                      subscriptions.find params[:id]
+                      subscriptions.where(user: current_user).find params[:id]
                     else
                       subscriptions.build
                     end

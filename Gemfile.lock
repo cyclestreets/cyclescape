@@ -5,15 +5,6 @@ GIT
     jqcloud-rails (2.0.1)
       jquery-rails
 
-GIT
-  remote: https://github.com/xymist/declarative_authorization.git
-  revision: 6c9bfdaac5ad2afa02816dadb1e576620c89da1e
-  branch: allow_rails_6
-  specs:
-    declarative_authorization (1.3.0)
-      rails (>= 4.1.0, < 6.1)
-      ruby_parser (>= 3.6.6)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -394,6 +385,10 @@ GEM
     pry-rails (0.3.9)
       pry (>= 0.10.4)
     public_suffix (5.0.5)
+    pundit (2.2.0)
+      activesupport (>= 3.0.0)
+    pundit-matchers (1.7.0)
+      rspec-rails (>= 3.0.0)
     raabro (1.4.0)
     racc (1.7.3)
     rack (2.2.9)
@@ -636,7 +631,6 @@ DEPENDENCIES
   cocoon
   coffee-rails
   database_cleaner
-  declarative_authorization!
   devise
   devise-i18n (< 1.5)
   devise_invitable
@@ -687,6 +681,8 @@ DEPENDENCIES
   pry
   pry-byebug
   pry-rails
+  pundit
+  pundit-matchers
   rack-cache
   rack-cors
   rack-mini-profiler
@@ -710,7 +706,6 @@ DEPENDENCIES
   rubocop-rails
   rubocop-rspec
   ruby-prof
-  ruby_parser
   sanitize_email
   sassc-rails
   selenium-webdriver (< 4)

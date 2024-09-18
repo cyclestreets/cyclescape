@@ -2,11 +2,10 @@
 
 class User::ProfilesController < ApplicationController
   before_action :load_user
-  filter_access_to :show, :edit, :create, :update, attribute_check: true, model: User
-  filter_access_to :all
 
   def show
     @user = UserDecorator.decorate(@user)
+    authorize @user.profile
 
     involved_threads = ThreadList.public_recent_involved_with(@user, 10).includes(:group)
     @involved_threads = ThreadListDecorator.decorate_collection(involved_threads)
@@ -21,6 +20,7 @@ class User::ProfilesController < ApplicationController
   def edit
     @user = UserDecorator.decorate(@user)
     @profile = @user.profile
+    authorize @profile
   end
 
   def create
@@ -28,6 +28,7 @@ class User::ProfilesController < ApplicationController
   end
 
   def update
+    authorize @user.profile
     if @user.profile.update permitted_params
       set_flash_message :success
       redirect_to action: :show
@@ -42,7 +43,7 @@ class User::ProfilesController < ApplicationController
 
   def load_user
     @user = params[:user_id] ? User.find_by(id: params[:user_id]) : current_user
-    permission_denied unless @user
+    return permission_denied unless @user
   end
 
   def permitted_params

@@ -43,7 +43,7 @@ describe "Site feedback" do
 
     it "should not let you browse the feedback" do
       visit site_comments_path
-      expect(page).to have_content(I18n.t("shared.permission_denied.login"))
+      expect(page).to have_content(I18n.t("application.permission_denied"))
     end
   end
 

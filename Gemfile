@@ -37,7 +37,6 @@ gem "tinymce-rails", "< 6" # Get Promise.allSettled in JS specs
 # Back-end gems
 gem "aasm"
 gem "actionview-encoded_mail_to"
-gem "declarative_authorization", github: "xymist/declarative_authorization", branch: "allow_rails_6"
 gem "devise"
 gem "devise-i18n", "< 1.5" # Bug in devise-i18n 1.5, fixed if we bump devise > 4.4 https://github.com/tigrish/devise-i18n/blob/v1.5.0/rails/locales/en-GB.yml#L43
 gem "devise_invitable"
@@ -60,6 +59,7 @@ gem "omniauth-twitter"
 gem "paranoia", "~> 2.0"
 gem "pg_query"
 gem "pghero"
+gem "pundit"
 gem "rack-cache", require: "rack/cache"
 gem "resque"
 gem "resque-retry"
@@ -110,9 +110,6 @@ group :development do
   gem "rubocop"
   gem "rubocop-rails"
   gem "rubocop-rspec"
-  # Following is required for Resque workers in development to load due to
-  # declarative_authorization development dependency when Rails engines are eager loaded
-  gem "ruby_parser"
 
   # For memory profiling
   gem "rack-mini-profiler"
@@ -141,6 +138,7 @@ group :test do
   gem "email_spec"
   gem "factory_bot_rails"
   gem "launchy"
+  gem "pundit-matchers"
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
   gem "selenium-webdriver", "< 4" # get strange sessionID errors

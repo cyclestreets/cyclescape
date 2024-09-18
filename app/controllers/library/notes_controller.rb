@@ -2,16 +2,17 @@
 
 class Library::NotesController < ApplicationController
   before_action :load_note, except: %i[new create]
-  filter_access_to %i[edit update], attribute_check: true, load_method: :load_note
 
   def new
     @note = Library::Note.new
+    authorize @note
     @start_location = current_user.start_location
   end
 
   def create
     @note = Library::Note.new permitted_params
     @note.created_by = current_user
+    authorize @note
 
     if @note.save
       if @note.document?
@@ -26,7 +27,9 @@ class Library::NotesController < ApplicationController
   end
 
   def show
-    @tag_panel = TagPanelDecorator.new(@note.item, form_url: library_tag_path(@note.item), auth_context: :library_tags)
+    skip_authorization
+
+    @tag_panel = TagPanelDecorator.new(@note.item, form_url: library_tag_path(@note.item))
     @threads = @note.item.threads.is_public.order_by_latest_message.limit 10
     @item = Library::ItemDecorator.decorate @note.item
   end
@@ -58,6 +61,8 @@ class Library::NotesController < ApplicationController
 
   def load_note
     @note = Library::Note.find params[:id]
+    authorize @note unless action_name == "show"
+    @note
   end
 
   def permitted_params

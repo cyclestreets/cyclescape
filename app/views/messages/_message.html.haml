@@ -2,7 +2,7 @@
   .header-fix{id: dom_id(message)}
   .details
     .author
-      - if permitted_to? :view_profile, message.created_by
+      - if policy(message.created_by).view_profile?
         %span.thumbnail
           - if message.created_by.profile.picture
             = image_tag message.created_by.profile.picture_thumbnail.url, alt: ""
@@ -32,10 +32,10 @@
 
       - if message.completing_action_messages.to_a.present?
         = render "shared/resolves_actions", actions: message.completing_action_messages
-  - if permitted_to?([:censor], message) # TODO re-add `|| library_type_for(message)`
+  - if policy(message).censor? # TODO re-add `|| library_type_for(message)`
     %menu.tools
       %ul
-        - if permitted_to?(:censor, message)
+        - if policy(message).censor?
           %li= link_to t(".censor"), censor_thread_message_path(thread, message), method: :put
         -# - case library_type_for(message)
         -# - when "note"

@@ -2,7 +2,6 @@
 
 class Message::PhotosController < ApplicationController
   before_action :photo
-  filter_access_to :all, attribute_check: true
 
   def show; end
 
@@ -10,5 +9,7 @@ class Message::PhotosController < ApplicationController
 
   def photo
     @photo ||= PhotoMessage.find params[:id]
+    authorize @photo
+    @photo
   end
 end

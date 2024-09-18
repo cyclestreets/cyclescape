@@ -1,5 +1,5 @@
 <% leader = component.created_by %>
-<% leader_link = if Authorization::Engine.instance.permit?(:view_profile, object: leader, user: @subscriber)
+<% leader_link = if UserPolicy.new(@subscriber, leader).view_profile?
                    "#{leader.name} (#{user_profile_url(leader)})"
                  else
                    leader.display_name_or_anon

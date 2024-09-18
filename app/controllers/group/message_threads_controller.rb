@@ -5,6 +5,7 @@ class Group::MessageThreadsController < MessageThreadsController
   before_action :group
 
   def index
+    skip_authorization
     set_page_title t("group.message_threads.index.title", group: group.name)
 
     issue_threads = ThreadList.issue_threads_from_group(group).page(params[:issue_threads_page])
@@ -17,11 +18,14 @@ class Group::MessageThreadsController < MessageThreadsController
 
   def new
     @thread = group.threads.build privacy: group.default_thread_privacy
+    authorize @thread
     @message = @thread.messages.build
   end
 
   def create
-    @thread = group.threads.build permitted_params.merge(created_by: current_user)
+    @thread = group.threads.build
+    @thread.assign_attributes permitted_params.merge(created_by: current_user)
+    authorize @thread
     super
   end
 
