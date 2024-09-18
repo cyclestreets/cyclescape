@@ -1,10 +1,11 @@
 
-# AI scraping is NOT PERMITTED without express permission: see: https://www.cyclestreets.net/privacy/
-# We additionally list these known agents, but this is not exhaustive and other AI bots not listed are also not permitted
-# See: https://neil-clarke.com/block-the-bots-that-feed-ai-models-by-scraping-your-website/
 User-Agent: *
 Disallow: /threads
 Disallow: /users
+
+# AI scraping is NOT PERMITTED without express permission: see: https://www.cyclestreets.net/privacy/
+# We additionally list these known agents, but this is not exhaustive and other AI bots not listed are also not permitted
+# See: https://neil-clarke.com/block-the-bots-that-feed-ai-models-by-scraping-your-website/
 User-agent: CCBot
 Disallow: /
 User-agent: ChatGPT-User
