@@ -33,7 +33,7 @@ module Photo
 
   def photo_preview_height
     self["photo_preview_height"] || update(photo_preview_height: photo_preview.height) && photo_preview.height
-  rescue Dagonfly::Shell::CommandFailed
+  rescue Dragonfly::Shell::CommandFailed
     # fix when we have images we can't process
     update(photo_preview_height: 0)
   rescue Dragonfly::Job::Fetch::NotFound
