@@ -11,9 +11,11 @@ class Users::PrivateMessageThreadsController < MessageThreadsController
   end
 
   def create
-    @thread = @user.private_threads.build(
+    @thread = @user.private_threads.build
+    @thread.assign_attributes(
       permitted_params.merge(created_by: current_user, privacy: "private")
     )
+
     authorize @thread
     super
   end
