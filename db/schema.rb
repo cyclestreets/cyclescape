@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_01_141922) do
+ActiveRecord::Schema.define(version: 2024_09_24_200507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -139,6 +139,8 @@ ActiveRecord::Schema.define(version: 2022_01_01_141922) do
     t.string "logo_uid"
     t.index ["group_id"], name: "index_group_profiles_on_group_id"
     t.index ["location"], name: "index_group_profiles_on_location", using: :gist
+    t.check_constraint "st_ndims(location) = 2", name: "enforce_dims_location"
+    t.check_constraint "st_srid(location) = 4326", name: "enforce_srid_location"
   end
 
   create_table "group_requests", id: :serial, force: :cascade do |t|
@@ -235,6 +237,8 @@ ActiveRecord::Schema.define(version: 2022_01_01_141922) do
     t.index ["deleted_at"], name: "index_issues_on_deleted_at"
     t.index ["location"], name: "index_issues_on_location", using: :gist
     t.index ["planning_application_id"], name: "index_issues_on_planning_application_id"
+    t.check_constraint "st_ndims(location) = 2", name: "enforce_dims_location"
+    t.check_constraint "st_srid(location) = 4326", name: "enforce_srid_location"
   end
 
   create_table "library_documents", id: :serial, force: :cascade do |t|
@@ -279,6 +283,8 @@ ActiveRecord::Schema.define(version: 2022_01_01_141922) do
     t.index ["component_id", "component_type"], name: "index_library_items_on_component_id_and_component_type"
     t.index ["created_by_id"], name: "index_library_items_on_created_by_id"
     t.index ["location"], name: "index_library_items_on_location", using: :gist
+    t.check_constraint "st_ndims(location) = 2", name: "enforce_dims_location"
+    t.check_constraint "st_srid(location) = 4326", name: "enforce_srid_location"
   end
 
   create_table "library_notes", id: :serial, force: :cascade do |t|
@@ -625,6 +631,8 @@ ActiveRecord::Schema.define(version: 2022_01_01_141922) do
     t.index ["category_id"], name: "index_user_locations_on_category_id"
     t.index ["location"], name: "index_user_locations_on_location", using: :gist
     t.index ["user_id"], name: "index_user_locations_on_user_id", unique: true
+    t.check_constraint "st_ndims(location) = 2", name: "enforce_dims_location"
+    t.check_constraint "st_srid(location) = 4326", name: "enforce_srid_location"
   end
 
   create_table "user_prefs", id: :serial, force: :cascade do |t|
