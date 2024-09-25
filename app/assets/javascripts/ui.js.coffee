@@ -4,7 +4,7 @@ window.jsonpTransportRequired = ->
   navigator.appVersion.indexOf('MSIE') != -1 &&
     parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
 
-jQuery ->
+$(document).ready ->
   $("#issue_start_discussion").change((evt)->
     form = $("[data='start-discussion-form']")
     btn = $(form).parent().find("input[type=submit]")
