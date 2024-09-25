@@ -1,7 +1,3 @@
-require('leaflet-search/dist/leaflet-search.src.js')
-require('leaflet-draw')
-require('leaflet-layerjson')
-
 class window.LeafletMap
   @default_marker_anchor: [30 / 2, 42]
   @cyclestreetsPeekImg: (feature)->
