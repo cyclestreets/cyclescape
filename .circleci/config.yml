@@ -92,8 +92,21 @@ jobs:
         background: true
     - run:
         command: sudo service redis-server start
+
+    - restore_cache:
+        keys:
+          - v1-asset-cache-{{ arch }}-{{ .Branch }}
+          - v1-asset-cache-
+
+    - run: RAILS_ENV=test bundle exec rake assets:precompile
+
+    - save_cache:
+        key: v1-asset-cache-{{ arch }}-{{ .Branch }}-{{ epoch }}
+        paths:
+          - public/assets
+          - tmp/cache/assets/sprockets
     - run:
-        command: SOLR=1 bundle exec rspec -b --colour --order rand --format progress spec
+        command: SOLR=1 TEST_ASSETS_PRECOMPILED=1 bundle exec rspec -b --colour --order rand --format progress spec
     # Teardown
     #   If you break your build into multiple jobs with workflows, you will probably want to do the parts of this that are relevant in each
     # Save test results
