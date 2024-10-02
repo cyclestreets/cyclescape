@@ -117,7 +117,7 @@ class User < ApplicationRecord
       includes(:prefs, :subscribed_threads).where(user_prefs: { email_status_id: 2 }).references(:user_prefs).find_each do |user|
         threads_messages = {}
         user.subscribed_threads.each do |thread|
-          new_messages = thread.messages.where("updated_at > ?", 24.hours.ago)
+          new_messages = thread.messages.approved.where("updated_at > ?", 24.hours.ago)
           threads_messages[thread] = new_messages if new_messages.present?
         end
         ThreadMailer.digest(user, threads_messages).deliver_now if threads_messages.present?

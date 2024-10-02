@@ -559,12 +559,14 @@ describe User, type: :model do
       let!(:thread_subscription) { create :thread_subscription, user: user }
       let!(:thread)              { thread_subscription.thread }
       let!(:new_message)         { create :message, updated_at: 1.hour.ago, thread: thread }
+      let!(:new_spam_message)    { create :message, updated_at: 1.hour.ago, thread: thread, status: "mod_queued" }
       let!(:old_message)         { create :message, updated_at: 1.week.ago, thread: thread }
 
       it "should send digests" do
         expect { described_class.email_digests! }.to change { all_emails.count }.by(1)
         expect(all_emails.last.text_part.decoded).to include(new_message.public_token)
-        expect(all_emails.last.text_part.decoded).to_not include(old_message.public_token)
+        expect(all_emails.last.text_part.decoded).not_to include(old_message.public_token)
+        expect(all_emails.last.text_part.decoded).not_to include(new_spam_message.public_token)
       end
     end
 
