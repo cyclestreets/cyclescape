@@ -16,7 +16,7 @@
     "knockout": "^3.5.1",
     "leaflet-draw": "0.4.7",
     "leaflet-layerjson": "^0.3.3",
-    "leaflet-search": "1.9.8",
+    "leaflet-search": "4.0.0",
     "planer": "^1.1.1",
     "slick-carousel-browserify": "1.6.12",
     "timeago": "^1.6.7"

@@ -1,4 +1,4 @@
-$ ->
+$(document).ready ->
   setupTags = ->
     $("div.tag-form").hide()
     $("div.tag-form li.cancel a").click ->

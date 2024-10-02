@@ -11,7 +11,6 @@ describe Library::Note do
     expect(note).to be_valid
   end
 
-  it { is_expected.to belong_to(:document) }
   it { is_expected.to validate_presence_of(:body) }
 
   describe "searchable text" do

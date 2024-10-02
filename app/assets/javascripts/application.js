@@ -22,6 +22,9 @@
 //= require tinymce
 //= require tinymce_init
 //= require leaflet
+//= require leaflet-search
+//= require leaflet-draw
+//= require leaflet-layerjson
 //= require superbly-tagfield.min
 //= require map_display
 //= require ui

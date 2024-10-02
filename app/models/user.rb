@@ -44,7 +44,7 @@ class User < ApplicationRecord
   has_one :profile, class_name: "UserProfile"
   has_one :prefs, class_name: "UserPref"
   has_one :location, class_name: "UserLocation", dependent: :destroy, inverse_of: :user
-  belongs_to :remembered_group, class_name: "Group"
+  belongs_to :remembered_group, class_name: "Group", optional: true
 
   accepts_nested_attributes_for :profile, update_only: true
 

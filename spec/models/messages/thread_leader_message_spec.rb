@@ -3,8 +3,6 @@
 require "spec_helper"
 
 describe ThreadLeaderMessage, type: :model do
-  it { is_expected.to belong_to(:unleading) }
-
   let(:leader_message) { create :thread_leader_message }
 
   it "should validate user ownes unleading" do

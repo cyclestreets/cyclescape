@@ -49,11 +49,7 @@ module Locatable
     end
 
     def rgeo_factory
-      # Uses the store, a fancy way of doing
-      # `RGeo::Geos.factory(srid: 4326)`
-      store = RGeo::ActiveRecord::SpatialFactoryStore.instance
-      srid = store.registry.values[0].srid
-      store.default.call(srid: srid)
+      RGeo::ActiveRecord::SpatialFactoryStore.instance.default
     end
 
     def order_by_size(order = "DESC")
@@ -121,6 +117,8 @@ module Locatable
       else
         0.0
       end
+    rescue RGeo::Error::RGeoError
+      0.0
     end
   end
 

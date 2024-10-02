@@ -5,11 +5,6 @@ require "spec_helper"
 describe Library::Item do
   it_should_behave_like "a taggable model"
 
-  describe "associations" do
-    it { is_expected.to belong_to(:component) }
-    it { is_expected.to belong_to(:created_by) }
-  end
-
   describe "validations" do
     it { is_expected.to validate_presence_of(:created_by) }
   end

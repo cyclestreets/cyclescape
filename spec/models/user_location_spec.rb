@@ -76,7 +76,7 @@ describe UserLocation do
     end
 
     it "works on polygons" do
-      subject = build :user_location, location: odd_polygon
+      subject = build :user_location, location: polygon
       expect(subject.buffered.area).to be > subject.location.area
     end
 

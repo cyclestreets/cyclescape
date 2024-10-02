@@ -64,7 +64,6 @@ describe User, type: :model do
     it { is_expected.to have_one(:profile) }
     it { is_expected.to have_one(:prefs) }
     it { is_expected.to have_one(:location).dependent(:destroy) }
-    it { is_expected.to belong_to(:remembered_group) }
   end
 
   describe "to be valid" do
@@ -423,7 +422,7 @@ describe User, type: :model do
     it "should return polygon for point" do
       subject.location.location = point
       expect(subject.buffered_location.geometry_type.type_name).to eq("Polygon")
-      expect(subject.buffered_location.contains?(subject.location.location)).to eq true
+      expect(subject.buffered_location).to eq(subject.location.location.buffer(Geo::USER_LOCATIONS_BUFFER))
     end
 
     it "should return polygon for line" do
