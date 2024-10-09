@@ -107,7 +107,7 @@ class ApplicationController < ActionController::Base
 
   def set_page_title(title = nil, value = nil)
     key = "#{controller_path.tr('/', '.')}.#{params[:action]}.title"
-    page_title = title || I18n.translate(key, (value || { default: "" }))
+    page_title = title || I18n.t(key, **(value || { default: "" }))
     app_title = @site_config.application_name
     @page_title = page_title == "" ? app_title : "#{page_title} - #{app_title}"
   end
@@ -144,7 +144,7 @@ class ApplicationController < ActionController::Base
   def set_flash_message(type, options = {})
     flash_key = type == :success ? :notice : :alert
     options.reverse_merge!(scope: "#{controller_path.gsub('/', '.')}.#{action_name}")
-    flash[flash_key] = I18n.t(type, options)
+    flash[flash_key] = I18n.t(type, **options)
   end
 
   # A method to convert an openlayers-format bbox string into an rgeo bbox object

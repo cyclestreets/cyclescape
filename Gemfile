@@ -91,6 +91,7 @@ gem "lograge"
 gem "nokogiri", ">= 1.11.0"
 gem "progress_bar"
 gem "rails-i18n"
+gem "i18n", "=1.14.5" # 1.14.6 drops < ruby 3.2
 gem "rails-observers"
 gem "sunspot_rails", "= 2.4.0" # Getting issues along the lines of https://github.com/sunspot/sunspot/issues/948
 gem "sunspot_solr", "= 2.4.0"
@@ -134,7 +135,8 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara", "= 3.15.1" # get strange sessionID errors
+  gem "capybara"
+  gem "webrick"
   gem "database_cleaner"
   gem "email_spec"
   gem "factory_bot_rails"
@@ -142,7 +144,7 @@ group :test do
   gem "pundit-matchers"
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
-  gem "selenium-webdriver", "< 4" # get strange sessionID errors
+  gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "sunspot_test"
   gem "webmock"
