@@ -30,6 +30,7 @@ gem "rails_autolink"
 gem "ratelimit"
 gem "redis"
 gem "retryable"
+gem "rgeo", "< 3" # Older ruby version doesn't support RGeo::Geos.capi_supported?
 gem "rgeo-geojson"
 # gem 'jquery-turbolinks'
 gem "tinymce-rails", "< 6" # Get Promise.allSettled in JS specs

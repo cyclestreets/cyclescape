@@ -500,7 +500,7 @@ GEM
       resque (>= 1.27)
       rufus-scheduler (~> 3.2, != 3.3)
     retryable (3.0.4)
-    rgeo (3.0.0)
+    rgeo (2.4.0)
     rgeo-activerecord (7.0.1)
       activerecord (>= 5.0)
       rgeo (>= 1.0.0)
@@ -722,6 +722,7 @@ DEPENDENCIES
   resque-retry
   resque-rollbar
   retryable
+  rgeo (< 3)
   rgeo-geojson
   rollbar
   rspec-collection_matchers
