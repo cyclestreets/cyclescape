@@ -22,6 +22,9 @@ module Cyclescape
     config.autoload_paths += %W[#{config.root}/app/models/messages]
     config.autoload_paths += %W[#{config.root}/app/models/validators]
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.eager_load_paths += %W[#{config.root}/app/models/messages]
+    config.eager_load_paths += %W[#{config.root}/app/models/validators]
+    config.eager_load_paths += Dir["#{config.root}/lib/**/"]
 
     config.paths.add File.join("app", "api"), glob: File.join("**", "*.rb")
     # Only load the plugins named here, in the order given (default is alphabetical).
