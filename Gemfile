@@ -105,7 +105,6 @@ end
 group :development do
   gem "annotate", require: false
   gem "better_errors"
-  gem "binding_of_caller"
   gem "bullet"
   gem "letter_opener"
   gem "rubocop"
@@ -124,9 +123,6 @@ end
 
 group :development, :test do
   gem "parallel_tests"
-  gem "pry"
-  gem "pry-byebug"
-  gem "pry-rails"
   gem "rspec-rails"
   gem "ruby-prof"
   gem "spring"
@@ -134,7 +130,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara", "= 3.15.1" # get strange sessionID errors
+  gem "capybara"
   gem "database_cleaner"
   gem "email_spec"
   gem "factory_bot_rails"
