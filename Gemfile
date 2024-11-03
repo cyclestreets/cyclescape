@@ -69,7 +69,7 @@ gem "resque-retry"
 gem "resque-rollbar"
 gem "sprockets-rails"
 gem "thin"
-gem "thumbs_up", "~> 0.4.6"
+gem "thumbs_up"
 gem "whenever"
 
 gem "grape"
@@ -88,7 +88,7 @@ gem "jquery-ui-rails", "~> 5.0.0"
 gem "sassc-rails"
 # gem 'turbolinks'
 gem "lograge"
-gem "nokogiri", ">= 1.11.0"
+gem "nokogiri"
 gem "progress_bar"
 gem "rails-i18n"
 gem "rails-observers"
@@ -138,8 +138,9 @@ group :test do
   gem "pundit-matchers"
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
-  gem "selenium-webdriver", "< 4" # get strange sessionID errors
+  gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "sunspot_test"
   gem "webmock"
+  gem "webrick"
 end
