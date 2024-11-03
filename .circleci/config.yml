@@ -18,7 +18,7 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: cimg/ruby:2.7-node
+      - image: cimg/ruby:3.0-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -41,7 +41,7 @@ jobs:
     - run: sudo apt-get update && sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick openjdk-8-jre-headless
     - run: curl -L -o google-chrome.deb https://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.198-1_amd64.deb && sudo apt install ./google-chrome.deb --fix-broken
     - run: curl -L -o chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && chmod +x chromedriver && sudo mv -f chromedriver /usr/local/share/chromedriver && sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver && sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver && rm chromedriver_linux64.zip
-    - run: sudo npm install -g npm@8.2.0
+    - run: sudo npm install -g npm@14.21.1
 
     # Dependencies
     #   This would typically go in either a build or a build-and-test job when using workflows
