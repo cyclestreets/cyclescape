@@ -11,7 +11,7 @@ class Issue::MessageThreadsController < MessageThreadsController
   def new
     @thread = issue.threads.build
     authorize @thread
-    set_page_title nil, issue: issue.title
+    set_page_title issue.title
     if current_group
       @thread.group = current_group
       @thread.privacy = current_group.default_thread_privacy

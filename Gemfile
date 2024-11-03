@@ -69,7 +69,7 @@ gem "resque-retry"
 gem "resque-rollbar"
 gem "sprockets-rails"
 gem "thin"
-gem "thumbs_up", "~> 0.4.6"
+gem "thumbs_up"
 gem "whenever"
 
 gem "grape"
@@ -88,7 +88,7 @@ gem "jquery-ui-rails", "~> 5.0.0"
 gem "sassc-rails"
 # gem 'turbolinks'
 gem "lograge"
-gem "nokogiri", ">= 1.11.0"
+gem "nokogiri"
 gem "progress_bar"
 gem "rails-i18n"
 gem "rails-observers"
@@ -105,7 +105,6 @@ end
 group :development do
   gem "annotate", require: false
   gem "better_errors"
-  gem "binding_of_caller"
   gem "bullet"
   gem "letter_opener"
   gem "rubocop"
@@ -124,9 +123,6 @@ end
 
 group :development, :test do
   gem "parallel_tests"
-  gem "pry"
-  gem "pry-byebug"
-  gem "pry-rails"
   gem "rspec-rails"
   gem "ruby-prof"
   gem "spring"
@@ -134,7 +130,7 @@ group :development, :test do
 end
 
 group :test do
-  gem "capybara", "= 3.15.1" # get strange sessionID errors
+  gem "capybara"
   gem "database_cleaner"
   gem "email_spec"
   gem "factory_bot_rails"
@@ -142,8 +138,9 @@ group :test do
   gem "pundit-matchers"
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
-  gem "selenium-webdriver", "< 4" # get strange sessionID errors
+  gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "sunspot_test"
   gem "webmock"
+  gem "webrick"
 end
