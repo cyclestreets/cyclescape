@@ -235,9 +235,9 @@ GEM
       mustermann-grape (~> 1.1.0)
       rack (>= 2)
       zeitwerk
-    grape-kaminari (0.1.9)
-      grape
-      kaminari
+    grape-kaminari (0.4.5)
+      grape (>= 1.6.1)
+      kaminari-grape
     grape-swagger (2.1.1)
       grape (>= 1.7, < 3.0)
       rack-test (~> 2)
