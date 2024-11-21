@@ -10,8 +10,7 @@ Bundler.require(*Rails.groups)
 
 module Cyclescape
   class Application < Rails::Application
-    config.load_defaults 6.0
-    config.action_mailer.delivery_job = "ActionMailer::MailDeliveryJob"
+    config.load_defaults 7.0
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -114,7 +113,7 @@ module Cyclescape
     #
     # defaults to Rails.env
     # config.browserify_rails.node_env = "production"
-    config.action_mailer.preview_path = Rails.root.join("app", "controllers", "admin", "mailers")
+    config.action_mailer.preview_paths = [Rails.root.join("app", "controllers", "admin", "mailers")]
     config.action_mailer.show_previews = true
 
     config.middleware.insert 0, Rack::UTF8Sanitizer # fix ArgumentError invalid %-encoding bugs, https://gist.github.com/bf4/d26259acfa29f3b9882b#file-exception_app-rb

@@ -87,7 +87,7 @@ class ApplicationController < ActionController::Base
   def load_group_from_subdomain
     if SubdomainConstraint.matches?(request)
       @current_group = Group.find_by(short_name: SubdomainConstraint.subdomain_from_request(request))
-      redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www")) unless @current_group
+      redirect_to(root_url(subdomain: SubdomainConstraint.subdomain("www")), allow_other_host: true) unless @current_group
     end
   end
 
@@ -175,5 +175,15 @@ class ApplicationController < ActionController::Base
     yield
   rescue Pundit::NotAuthorizedError
     permission_denied
+  rescue UnsafeRedirectError => e
+    # https://github.com/heartcombo/responders/issues/237
+    # if the sign in location is to a different subdomain Devise uses
+    # responders and this can't pass in allow_other_host: true
+    # This catches the error and checks if the URL is a subdomain
+    url_in_errror = e.message.match(/"(http[^\s]+)"/)
+    raise e unless url_in_errror
+
+    redirect_host = URI(url_in_errror[1]).host
+    raise e unless redirect_host.ends_with?(".#{request.domain}")
   end
 end

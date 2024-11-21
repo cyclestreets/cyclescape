@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 6.1"
+gem "rails", "~> 7.0"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -92,8 +92,8 @@ gem "nokogiri"
 gem "progress_bar"
 gem "rails-i18n"
 gem "rails-observers"
-gem "sunspot_rails", "= 2.4.0" # Getting issues along the lines of https://github.com/sunspot/sunspot/issues/948
-gem "sunspot_solr", "= 2.4.0"
+gem "sunspot_rails"
+gem "sunspot_solr"
 gem "tagsinput-rails"
 gem "uglifier", ">= 1.3.0"
 gem "will-paginate-i18n"

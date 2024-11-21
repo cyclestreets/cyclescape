@@ -22,13 +22,13 @@ Resque.before_fork do
 end
 
 module ActionMailer
-  class DeliveryJob
-    retry_on StandardError, wait: :exponentially_longer, attempts: 5
+  class MailDeliveryJob
+    retry_on StandardError, wait: :polynomially_longer, attempts: 5
   end
 end
 
 module ActiveJob
   class Base
-    retry_on StandardError, wait: :exponentially_longer, attempts: 5
+    retry_on StandardError, wait: :polynomially_longer, attempts: 5
   end
 end

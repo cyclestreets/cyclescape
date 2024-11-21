@@ -33,7 +33,7 @@ class GroupsController < ApplicationController
       @recent_issues = IssueDecorator.decorate_collection group.recent_issues.limit(10).includes(:created_by)
       @group = GroupDecorator.decorate group
     else
-      redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www"))
+      redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www")), allow_other_host: true
     end
   end
 

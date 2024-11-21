@@ -7,7 +7,7 @@ class ThreadMailer < ApplicationMailer
     set_time_zone(user) do
       mail(
         to: @subscriber.name_with_email,
-        subject: t("mailers.thread_mailer.digest.subject", date: Date.current.to_s(:long), application_name: site_config.application_name),
+        subject: t("mailers.thread_mailer.digest.subject", date: Date.current.to_formatted_s(:long), application_name: site_config.application_name),
         reply_to: no_reply_address
       )
     end

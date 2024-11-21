@@ -157,7 +157,7 @@ class MessageThread < ApplicationRecord
     # @return [Array<Integer>] ids of unviewed threads
     def unviewed_thread_ids(user:, threads:)
       ids = if threads.is_a?(ActiveRecord::Relation) && !threads.loaded?
-              threads.ids
+              threads.pluck(:id)
             else
               threads.map(&:id)
             end
