@@ -28,7 +28,7 @@ class MessageThreadsController < ApplicationController
           last_viewed = current_user.viewed_thread_at(thread)
           ThreadRecorder.thread_viewed thread, current_user
         else
-          @subscribers = thread.subscribers.is_public
+          @subscribers = thread.subscribers.is_public.includes(:profile)
         end
         messages = messages.after_date_with_n_before(after_date: last_viewed, n_before: 10) if last_viewed
 
