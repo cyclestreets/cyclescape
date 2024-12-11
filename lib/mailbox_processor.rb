@@ -5,16 +5,7 @@ require "net/imap"
 class MailboxProcessor
   attr_accessor :config
 
-  def self.mailboxes_config
-    return @config if @config
-
-    config_path = Rails.root + "config" + "mailboxes.yml"
-    raise "Mailboxes config file not found at #{config_path}" unless config_path.exist?
-
-    @config ||= YAML.safe_load(File.read(config_path)).with_indifferent_access
-  end
-
-  def initialize(config = {})
+  def initialize(config)
     @config = config
   end
 

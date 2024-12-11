@@ -2,7 +2,7 @@
 
 namespace :scheduled do
   task process_all_mailboxes: :environment do
-    MailboxReader.mailboxes_config.each do |_name, config|
+    Rails.application.credentials.mail.each_value do |config|
       MailboxReader.new(config).run
     end
   end

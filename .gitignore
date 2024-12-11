@@ -34,3 +34,7 @@ node_modules/
 *.sql.gz
 .byebug_history
 redesign/.config.js
+
+/config/credentials/production.key
+
+/config/master.key
