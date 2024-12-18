@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-class ThreadMailerMailerPreview < ActionMailer::Preview
-  before_action :verify_admin
-
+class ThreadMailerPreview < ActionMailer::Preview
   def digest_message
     messages = Message.order(updated_at: :desc).limit(30).includes(:thread).to_a
     ThreadMailer.digest(User.last, messages.group_by(&:thread))
@@ -57,9 +55,5 @@ class ThreadMailerMailerPreview < ActionMailer::Preview
   def message(klass)
     mes = klass.last
     [mes.message, mes.thread.subscribers.sample]
-  end
-
-  def verify_admin
-    authorize :admin, :all?
   end
 end
