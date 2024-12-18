@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Site feedback" do
   before do
     visit root_path
-    stub_request(:post, "https://api.cyclestreets.net/v2/feedback.add")
+    stub_request(:post, "https://api.cyclestreets.net/v2/feedback.add").to_return(body: "{}")
   end
 
   context "as a public user" do

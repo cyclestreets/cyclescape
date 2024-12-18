@@ -18,7 +18,7 @@ class UserProfile < ApplicationRecord
     Locale.new(3, "Italiano", "it")
   ].index_by(&:id).freeze
 
-  enum locale: all_locales.values.each_with_object({}).each { |loc, memo| memo[loc.locale] = loc.id }
+  enum(:locale, all_locales.values.each_with_object({}).each { |loc, memo| memo[loc.locale] = loc.id })
 
   belongs_to :user, inverse_of: :profile
 

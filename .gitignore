@@ -9,14 +9,6 @@ tmp/
 *~
 *.swp
 .sass-cache/
-config/database.yml
-config/mailboxes.yml
-config/secret_token
-config/akismet
-config/facebook_*
-config/twitter_*
-config/google_*
-config/cyclestreets
 config/schedule.yml
 public/assets
 bin/
