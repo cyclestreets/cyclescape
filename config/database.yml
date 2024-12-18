@@ -1,0 +1,25 @@
+postgres: &postgres
+  adapter: postgis
+  encoding: unicode
+  pool: 5
+  prepared_statements: false
+  username:
+  password:
+
+test:
+  <<: *postgres
+  database: cyclescape_test
+
+development:
+  <<: *postgres
+  database: cyclescape_development
+
+staging:
+  <<: *postgres
+  database: cyclescape_production
+  username: cyclescape
+
+production:
+  <<: *postgres
+  database: cyclescape_production
+  username: cyclescape

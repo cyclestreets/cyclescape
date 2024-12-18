@@ -9,6 +9,7 @@ describe MailboxCleaner do
   end
 
   let(:imap) { double("IMAP connection") }
+  subject { described_class.new(config) }
 
   describe "#search_query" do
     it "should search for seen messages" do
