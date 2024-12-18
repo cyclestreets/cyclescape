@@ -3,6 +3,7 @@
 module Admin
   class StatsController < BaseController
     def issues_untagged
+      authorize :admin, :all?
       @issues_untagged = Issue.joins(:threads).where(
         <<~SQL
         not exists (select 1 from issue_tags where issue_tags.issue_id = issues.id)
@@ -12,6 +13,7 @@ module Admin
     end
 
     def issues_with_multiple_threads
+      authorize :admin, :all?
       multiple_ids = Issue.joins(:threads).group(:id).having("count(*) > 1").ids
       multiple_tag_ids = Tag.joins(:issues).where(issues: {id: multiple_ids}).ids
       uniq_multiple_tag_ids = Tag.where(id: multiple_tag_ids).joins(:issues, :threads).group(:id).having("count(*) = 1").ids
@@ -22,7 +24,8 @@ module Admin
     end
 
     def index
-      users_scope = User.all
+      authorize :admin, :all?
+      users_scope = ::User.all
       messages_scope = Message.all
 
       if @current_group
