@@ -7,6 +7,7 @@ describe MailboxCleaner do
     { host: "mail.example.com", user_name: "user@example.com", password: "secret",
       authentication: "PLAIN", mailbox: "INBOX", days_to_retain: 10 }
   end
+  subject { described_class.new(config) }
 
   let(:imap) { double("IMAP connection") }
 
