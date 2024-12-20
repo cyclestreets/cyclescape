@@ -175,15 +175,5 @@ class ApplicationController < ActionController::Base
     yield
   rescue Pundit::NotAuthorizedError
     permission_denied
-  rescue UnsafeRedirectError => e
-    # https://github.com/heartcombo/responders/issues/237
-    # if the sign in location is to a different subdomain Devise uses
-    # responders and this can't pass in allow_other_host: true
-    # This catches the error and checks if the URL is a subdomain
-    url_in_errror = e.message.match(/"(http[^\s]+)"/)
-    raise e unless url_in_errror
-
-    redirect_host = URI(url_in_errror[1]).host
-    raise e unless redirect_host.ends_with?(".#{request.domain}")
   end
 end

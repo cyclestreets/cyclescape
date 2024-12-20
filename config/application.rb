@@ -64,6 +64,20 @@ module Cyclescape
     # Set cache storage
     config.cache_store = :redis_cache_store, { url: "redis://localhost:6379/1", expires_in: 1.week, compress: true, namespace: "cs" }
 
+    # When https://github.com/rails/rails/pull/45680 we can set the hosts but the feature is a bit too broken for us.
+    config.action_controller.raise_on_open_redirects = false
+    # config.hosts << '*.cyclescape.org'
+    # config.hosts << ->(host) {
+    #   @urls ||= begin
+    #     url_helpers = Rails.application.routes.url_helpers
+    #     [URI(url_helpers.root_url).host] +
+    #       Group.pluck(:short_name).map do |subdomain|
+    #         URI(url_helpers.root_url(subdomain: SubdomainConstraint.subdomain(subdomain))).host
+    #       end
+    #   end
+    #   @urls.include?(host)
+    # }
+
     # ActionMailer default URL options
     # To set the URL set the ENV["SERVER_NAME"].  The SubdomainConstraint adds the staging subdomain.
     config.action_mailer.default_url_options = { host: "#{::SubdomainConstraint.subdomain('www')}.#{ENV.fetch('SERVER_NAME', 'cyclescape.org')}" }
