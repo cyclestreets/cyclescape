@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class NotificationsMailerPreview < ActionMailer::Preview
-  before_action :verify_admin
-
   def group_membership_request_confirmed
     Notifications.group_membership_request_confirmed(GroupMembershipRequest.last)
   end
@@ -53,9 +51,5 @@ class NotificationsMailerPreview < ActionMailer::Preview
 
   def group
     Group.find(2)
-  end
-
-  def verify_admin
-    authorize :admin, :all?
   end
 end
