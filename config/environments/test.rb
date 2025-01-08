@@ -56,6 +56,16 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   config.i18n.raise_on_missing_translations = true
+  # config.hosts << ".example.com"
+  # config.hosts << ->(host) {
+  #   @test_urls ||= begin
+  #     %w[www.example.com] +
+  #       Group.pluck(:short_name).map do |subdomain|
+  #         "#{subdomain}.example.com"
+  #       end
+  #   end
+  #   @test_urls.include?(host)
+  # }
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true

@@ -52,8 +52,4 @@ class NotificationsMailerPreview < ActionMailer::Preview
   def group
     Group.find(2)
   end
-
-  def verify_admin
-    authorize :admin, :all?
-  end
 end
