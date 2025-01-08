@@ -18,7 +18,7 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-      - image: cimg/ruby:3.0-node
+      - image: cimg/ruby:3.3-node
         environment:
           RAILS_ENV: test
           RACK_ENV: test
@@ -39,7 +39,7 @@ jobs:
     - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
     - run: curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     - run: sudo apt-get update && sudo apt-get install -y nodejs postgresql-client libgeos-dev redis-server imagemagick openjdk-8-jre-headless
-    - run: curl -f --retry 10 --retry-all-errors -L -o google-chrome.deb https://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.198-1_amd64.deb && sudo dpkg -i google-chrome.deb && sudo apt --fix-broken install
+    - run: curl -f --retry 10 --retry-all-errors -L -o google-chrome.deb https://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.198-1_amd64.deb && sudo dpkg -i google-chrome.deb || sudo apt --fix-broken install
     - run: curl -f --retry 5 --retry-all-errors -L -o chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && chmod +x chromedriver && sudo mv -f chromedriver /usr/local/share/chromedriver && sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver && sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver && rm chromedriver_linux64.zip
     - run: sudo npm install -g npm@8.2.0
 
