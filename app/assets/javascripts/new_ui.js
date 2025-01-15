@@ -1,5 +1,5 @@
 /* jslint browser: true, white: true, single: true, for: true, long: true */
-/* global $, jQuery, console, window, CONSTANTS */
+/* global $, console, window, CONSTANTS */
 
 var cyclescapeui = (function ($) {
   'use strict'

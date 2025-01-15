@@ -45,3 +45,7 @@
 //= require vote
 //= require ajax_file_upload
 //= require street_view
+
+//= require popper
+//= require bootstrap
+//= require new_ui

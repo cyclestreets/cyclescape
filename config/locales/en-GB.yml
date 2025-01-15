@@ -627,7 +627,8 @@
       max_length_error_html: is over the maximum length of&nbsp;
       use_groups_location: Use group's location
   layouts:
-    application:
+    header:
+      group_selector: Group
       admin: Admin
       admin_tooltip: Admin area, for system administrators
       dashboard: My %{application_name}
@@ -670,7 +671,6 @@
         contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
     group_selector:
-      group_selector: Group
       no_group: No Group
     search:
       search: Search
