@@ -1,7 +1,6 @@
 //= require constants
 //= require jquery
 //= require popper
-//= require bootstrap
 //= require rails-ujs
 //= require jquery-ui
 //= require fontawesome

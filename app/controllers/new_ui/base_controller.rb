@@ -2,6 +2,6 @@
 
 module NewUi
   class BaseController < ApplicationController
-    layout -> (controller) { controller.request.xhr? ? false : 'application_new_ui' }
+    layout -> (controller) { controller.request.xhr? ? false : 'application' }
   end
 end

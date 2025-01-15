@@ -1,5 +1,5 @@
 /*jslint browser: true, white: true, single: true, for: true, long: true */
-/*global $, jQuery, layerviewer, routing, EXIF, findEXIFinHEIC, vex, osm2geo, alert, console, window */
+/*global $, findEXIFinHEIC, vex, osm2geo, alert, console, window */
 
 var cyclescapeui = (function ($) {
 
@@ -273,7 +273,7 @@ var cyclescapeui = (function ($) {
 				}
 			});
 
-			// Close search box on escape key		
+			// Close search box on escape key
 			document.onkeydown = function (evt) {
 				evt = evt || window.event;
 				var isEscape = false;
@@ -462,7 +462,7 @@ var cyclescapeui = (function ($) {
 			});
 
 
-			// Handle clicking 
+			// Handle clicking
 			$('.map-buttons li').on('click', function () {
 				$('.map-buttons li').removeClass('active');
 				$(this).addClass('active');
@@ -631,7 +631,7 @@ var cyclescapeui = (function ($) {
 				// Hide all
 				divs.hide();
 
-				// Show the next one 
+				// Show the next one
 				if (_currentWizardPage < divs.length) {
 					$(divs[_currentWizardPage]).show();
 
@@ -671,7 +671,7 @@ var cyclescapeui = (function ($) {
 			// Hide all
 			divs.hide();
 
-			// Show the next one 
+			// Show the next one
 			if (divIndex < divs.length) {
 				$(divs[divIndex]).show();
 			}
@@ -697,7 +697,7 @@ var cyclescapeui = (function ($) {
 		},
 
 
-		// Display a notification popup with a message 
+		// Display a notification popup with a message
 		displayNotification: function (notificationText, imageSrc, callback) {
 
 			// Add this notification to the queue
@@ -776,7 +776,7 @@ var cyclescapeui = (function ($) {
 
 				if ($(this).hasClass('favourited')) {
 					$(this).toggleClass('animate__heartBeat');
-					// Add API call	
+					// Add API call
 				}
 			});
 		},
@@ -843,7 +843,7 @@ var cyclescapeui = (function ($) {
 
 				if ($(this).hasClass('favourited')) {
 					$(this).toggleClass('animate__heartBeat');
-					// Add API call	
+					// Add API call
 				}
 			});
 
@@ -922,7 +922,7 @@ var cyclescapeui = (function ($) {
 			});
 		},
 
-		
+
 		// Hide side content button if we are at the bottom of the page
 		updateScrollProgress: function () {
 			if (_scrollProgress > 80) {
@@ -1030,7 +1030,7 @@ var cyclescapeui = (function ($) {
 				content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')
 			});
 
-			//  The Location row should fade out and disappear if Administration or General chat are selected. 
+			//  The Location row should fade out and disappear if Administration or General chat are selected.
 			var hideLocationCategories = ['administration', 'general'];
 			$('form .radio').on('change', function () {
 				var selectedRadioButton = $('form .radio input[name="category"]:checked').val();

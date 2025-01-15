@@ -68,23 +68,23 @@ a .thumb {
 // Will Paginate compatible styling
 .pagination {
   span, a, em {
-    display: block;
-    float: left;
-    background: $pane1;
-    margin: 0 2px;
-    padding-top: 1px;
-    min-width: 22px;
-    height: 21px;
-    font-size: 14px;
-    text: {
-      align: center;
-      decoration: none;
-    }
-    color: $lightgrey2;
-    &:hover {
-      color: $pane1;
-      background: $lightergrey;
-    }
+//    display: block;
+//    float: left;
+//    background: $pane1;
+//    margin: 0 2px;
+//    padding-top: 1px;
+//    min-width: 22px;
+//    height: 21px;
+//    font-size: 16px;
+//    text: {
+//      align: center;
+//      decoration: none;
+//    }
+//    color: $lightgrey2;
+//    &:hover {
+//      color: $pane1;
+//      background: $lightergrey;
+//    }
   }
   .current {
     font-weight: bold;

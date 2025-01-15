@@ -627,7 +627,8 @@
       max_length_error_html: is over the maximum length of&nbsp;
       use_groups_location: Use group's location
   layouts:
-    application:
+    header:
+      group_selector: Group
       admin: Admin
       admin_tooltip: Admin area, for system administrators
       dashboard: My %{application_name}
@@ -637,7 +638,7 @@
       user_guide: User guide
       sign_out: Sign out
       sign_in: Sign in
-      sign_up: Sign up
+      sign_up: Create an account
       private_messages: Private Messages
       feedback: Feedback
       home: Home
@@ -645,6 +646,7 @@
       issues_tooltip: Listed problems, browsable on the map or as a list
       library: Library
       library_tooltip: Reusable resources for campaigning
+      planning_applications: Planning applications
       loading: Please wait…
       membership: Membership
       threads: Discussion threads
@@ -670,7 +672,6 @@
         contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
     group_selector:
-      group_selector: Group
       no_group: No Group
     search:
       search: Search

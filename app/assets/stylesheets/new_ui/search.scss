@@ -18,6 +18,16 @@
   box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);
   cursor: pointer;
   background-color: #FFFFFF;
+  // Additions start
+  box-sizing: border-box;
+  line-height: 1.5;
+  i {
+    box-sizing: border-box;
+    &:before {
+      box-sizing: border-box;
+    }
+  }
+  // Additions end
   &:hover {
     background-color: #eeeeee;
   }
