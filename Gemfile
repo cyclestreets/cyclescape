@@ -139,7 +139,7 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
   gem "selenium-webdriver"
-  gem "shoulda-matchers"
+  gem "shoulda-matchers", "< 6" # v6 adds normalize matcher which clashes with normalizr TODO: move to ActiveRecord::Base::normalizes API.
   gem "sunspot_test"
   gem "webmock"
   gem "webrick"
