@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 7.0"
+gem "rails", "~> 7.2"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -30,7 +30,7 @@ gem "rails_autolink"
 gem "ratelimit"
 gem "redis"
 gem "retryable"
-gem "rgeo", "< 3" # Older ruby version doesn't support RGeo::Geos.capi_supported?
+gem "rgeo"
 gem "rgeo-geojson"
 # gem 'jquery-turbolinks'
 gem "tinymce-rails", "< 6" # Get Promise.allSettled in JS specs
@@ -58,7 +58,7 @@ gem "omniauth"
 gem "omniauth-facebook"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-twitter"
-gem "paranoia", "~> 2.0"
+gem "paranoia"
 gem "pg_query"
 gem "pghero"
 gem "pundit"
@@ -139,7 +139,7 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-collection_matchers"
   gem "selenium-webdriver"
-  gem "shoulda-matchers"
+  gem "shoulda-matchers", "< 6" # v6 adds normalize matcher which clashes with normalizr TODO: move to ActiveRecord::Base::normalizes API.
   gem "sunspot_test"
   gem "webmock"
   gem "webrick"

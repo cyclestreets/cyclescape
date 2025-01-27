@@ -133,7 +133,7 @@ module Locatable
     feature =
       begin
         RGeo::GeoJSON.decode(json_str, geo_factory: factory)
-      rescue JSON::ParserError
+      rescue JSON::ParserError, MultiJson::ParseError
         nil
       end
     return unless feature
