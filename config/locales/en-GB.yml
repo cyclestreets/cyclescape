@@ -214,28 +214,28 @@
       areas_you_are_watching: areas you are watching
       converted_to_issue: 'Converted to Issue:'
       deadlines: Deadlines and dates
-      deadline_thread_updated: thread updated
+      deadline_thread_updated: Discussion updated
       issues_lower: issues
-      involved_threads: Involved Threads
+      involved_threads: Involved Discussions
       issues_in_your_area: Issues in your area
-      new_group_thread: Start a new group thread
+      new_group_thread: Start a new group discussion
       my_issues_nearby_introduction_html: Issues in the %{areas_you_are_watching_link}
         are shown below, most recent first.
       my_issues_nearby_issues_pointer_html: (You can also %{browse_all_other_issues_link}
         from outside your area(s).)
       browse_all_other_issues: browse all other issues
       my_favourites_introduction: 'This is a listing of the favourites you have set:'
-      my_threads_introduction: 'Latest updates on the discussion threads you are subscribed to:'
+      my_threads_introduction: 'Latest updates on the discussions you are subscribed to:'
       my_upcoming_deadline_introduction: 'Upcoming deadlines and dates within the
-        discussion threads you are subscribed to:'
-      no_upcoming_deadline_threads: You aren't involved in any discussion threads
+        discussions you are subscribed to:'
+      no_upcoming_deadline_threads: You aren't involved in any discussions
         with upcoming deadlines or dates.
-      no_subscribed_threads_html: 'You aren''t subscribed to any threads yet. You could
+      no_subscribed_threads_html: 'You aren''t subscribed to any discussions yet. You could
         have a look through the %{threads_link} and see if there''s anything that
         you want to help with, or maybe you could %{add_issue_link} instead?
 
 '
-      no_favourite_threads_html: 'You haven''t prioritised any threads yet. You
+      no_favourite_threads_html: 'You haven''t prioritised any discussions yet. You
         could have a look through the %{threads_link} and see if there''s anything
         that you think is important, or maybe you could %{add_issue_link} instead?
 
@@ -251,9 +251,9 @@
       planning_applications_introduction_html: 'These are the most recent planning
         applications (courtesy of the PlanIt website) in your %{location_link}:'
       planning_applications_lower: planning applications
-      recent_threads: recent threads
+      recent_threads: recent discussions
       my_favourites: My favourites
-      my_threads: Subscribed threads
+      my_threads: Subscribed discussions
       issues_nearby: Latest issues nearby
       map: Map
       posted:
@@ -301,7 +301,7 @@
         add_directly: you can add them directly
         committee: Committee members
         committee_guidance: Committee members can manage the group membership list,
-          change the group's profile and update group thread information.
+          change the group's profile and update group discussion information.
         email: Email address
         group_joining_date: Group joining date
         group_members_guidance: On this page you can view the existing members of
@@ -311,10 +311,10 @@
         new_members_guidance_introduction: 'To add a member:'
         new_members_guidance_method1_html: If you know their email address, %{add_directly_link}.
         new_members_guidance_method2_html: If they are already using %{application_name}, click
-          on their name from within a discussion thread, and you can add them from
+          on their name from within a discussion, and you can add them from
           their user profile page.
         ordinary_members_guidance: Ordinary members get access to your private group
-          threads, and can create new group threads.
+          discussions, and can create new group discussions.
         pending_requests: Pending membership requests
         review_membership_requests_html: Users of the site can also apply to join
           this group. You can %{review_membership_requests_link}.
@@ -383,27 +383,26 @@
         no_message: There was no message included with this membership request.
     message_threads:
       destroy:
-        failure: Couldn't delete thread
-        success: Thread deleted
+        failure: Couldn't delete discussion
+        success: Discussion deleted
       index:
-        title: Discussion threads for %{group}
+        title: Discussions for %{group}
         threads_explanation_html: Each of the %{issues_link} may have one or more
-          discussion threads.
+          discussions.
         issues: issues
-        new_group_thread: New Group Administrative thread
+        new_group_thread: New Group Administrative discussion
         issue_threads: Issue discussions
         issue_threads_description: These are public and private issue-based discussions
           belonging to %{group_name} on listed issues, shown most recent first.
-        issue_threads_addition_description: To start a new issue-based discussion
-          thread, go to the relevant issue.
+        issue_threads_addition_description: To start a new issue-based discussion, go to the relevant issue.
         general_threads: Administrative discussions
         general_threads_description: These are public and private general discussions
           for administrative purposes, e.g. arranging a general meeting.
       new:
         for_group: for %{name}
-        title: New Group Thread
+        title: New Group Discussion
       update:
-        success: Thread updated
+        success: Discussion updated
     prefs:
       edit:
         no_email_warning: Warning! Your settings indicate that you want notifications
@@ -464,7 +463,7 @@
       join_title: Join our %{application_name} group
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
-      no_threads: This group doesn't have any public threads
+      no_threads: This group doesn't have any public discussions
       our_areas: Our Area
       recent_issues: Recent Issues In Our Area
       recent_threads: Latest Discussions
@@ -544,9 +543,9 @@
   issue:
     message_threads:
       new: &issue_message_threads_new
-        new_hint: "Start a conversation (thread) on this, describing your thoughts on what should be done. There could be many different discussion threads \n
+        new_hint: "Start a discussion on this, describing your thoughts on what should be done. There could be many different discussions\n
                  that one issue creates e.g. a new planning application may affect traffic on a road and affect cycle access to woods."
-        title: New Thread on %{issue}
+        title: New Discussion on %{issue}
     photos:
       show: &issue_photos_show
         photo_alt: The photo for %{caption}.
@@ -559,8 +558,8 @@
       created_by_html: Created by %{creator_link}
       votes: votes
       thread_count:
-        one: 1 thread
-        other: '%{count} threads'
+        one: 1 discussion
+        other: '%{count} discussions'
     destroy:
       failure: Can't delete that issue
       success: Issue deleted
@@ -597,7 +596,7 @@
         below.
       new_issue_privacy_warning: Please note that all issues are publicly viewable.
       admin_thread_pointer_html: You can %{administrative_matters_link} with no geographical
-        context (e.g. organising a general meeting) in the group admin threads section.
+        context (e.g. organising a general meeting) in the group admin discussion section.
       administrative_matters: add a purely administrative matter
       start_discussion: Start a discussion
       no_discussion_create: Create issue
@@ -607,15 +606,14 @@
       edit_issue: Edit this issue
       new_thread:
         zero: Discuss
-        one: New Thread
-        other: New Thread
-      no_threads_yet: There are no discussion threads for this issue yet.
+        other: New Discussion
+      no_threads_yet: There are no discussions for this issue yet.
       group_private: Private to %{group}
       group_public: Public, by %{group}
       public: Public
       sign_in: sign in
       sign_in_to_discuss_html: You can %{sign_in_link} to start the discussion.
-      threads: Threads
+      threads: Discussions
       location: Location
       deadline: Deadline
       issues-nearby: Issues nearby
@@ -632,7 +630,7 @@
       admin: Admin
       admin_tooltip: Admin area, for system administrators
       dashboard: My %{application_name}
-      dashboard_tooltip: Your personal dashboard, showing updates on discussion threads
+      dashboard_tooltip: Your personal dashboard, showing updates on discussions
         you are subscribed to
       about: About
       user_guide: User guide
@@ -649,7 +647,7 @@
       planning_applications: Planning applications
       loading: Please wait…
       membership: Membership
-      threads: Discussion threads
+      threads: Discuss
       threads_tooltip: Discussions on each issue
       tags: Tags
       tags_tooltip: Cloud of the top 100 most used tags
@@ -687,7 +685,7 @@
       title: Library
       overview_description_html: The Library contains <strong>reusable resources</strong>
         for campaigning. Please add items you think might be useful in future.
-      overview_usage: You can link to library items from discussion threads.
+      overview_usage: You can link to library items from discussions.
       latest: Latest items
       item_created: Posted %{time_ago} ago
       search: 'Search the library:'
@@ -715,15 +713,15 @@
         added_by_html: Added by %{name} %{time}
         attach_note: Attach Note
         attach_note_instructions_html: You can create new notes linked to this document.
-          When referenced in a thread they will link to this document as well.
+          When referenced in a discussion they will link to this document as well.
         comments: Comments
         download: Download document
         edit: Edit Document
         notes: Notes
-        no_threads: This document hasn't been included in any public threads. If you
-          add this document to a public thread, the thread will be listed here.
-        public_threads: Public Threads
-        threads_explanation: 'This document has been mentioned in these public threads:'
+        no_threads: This document hasn't been included in any public discussions. If you
+          add this document to a public discussions, the discussion will be listed here.
+        public_threads: Public Discussions
+        threads_explanation: 'This document has been mentioned in these public discussions:'
     notes:
       edit:
         title: Edit Library Note
@@ -733,10 +731,10 @@
         added_by_html: Added by %{name} %{time}
         edit: Edit Note
         note_on_document_html: 'This note is attached to a document: %{document}'
-        no_threads: This note hasn't been included in any public threads. If you add
-          this note to a public thread, the thread will be listed here.
-        public_threads: Public Threads
-        threads_explanation: 'This note has been mentioned in these public threads:'
+        no_threads: This note hasn't been included in any public discussions. If you add
+          this note to a public discussion, the discussion will be listed here.
+        public_threads: Public Discussions
+        threads_explanation: 'This note has been mentioned in these public discussions:'
       update:
         success: Library Note Updated
   mailers:
@@ -767,7 +765,7 @@
       new_user_location_issue:
         subject: '[%{application_name}] New issue - "%{issue_title}"'
       new_user_location_issue_thread:
-        subject: '[%{application_name}] New thread started on issue "%{issue_title}"'
+        subject: '[%{application_name}] New discussion started on issue "%{issue_title}"'
       group_request_confirmed:
         subject: '[%{application_name}] [Admin] New Group "%{group_name}" has been created'
       group_request_rejected:
@@ -791,9 +789,9 @@
   message_thread:
     subscriptions:
       create:
-        success: You are now subscribed to this thread
+        success: You are now subscribed to this discussion
       destroy:
-        success: You are now unsubscribed from this thread
+        success: You are now unsubscribed from this discussion
       edit:
         unsubscribe: are sure you want to unsubscribe
     tags:
@@ -812,7 +810,7 @@
         remove_favourite: Remove Favourite
     leaders:
       create:
-        success: You are now a leader of this thread
+        success: You are now a leader of this discussion
       destroy:
         success: You are no longer a leader
   message_threads:
@@ -823,69 +821,68 @@
       public: Public
       posted_at: posted
     edit:
-      title: Edit thread properties
-      description: As a group administrator, you can fix up thread properties here.
+      title: Edit discussion properties
+      description: As a group administrator, you can fix up discussion properties here.
       thread_fix_warning_html: <strong>Warning:</strong> your group may have a policy
-        about changing thread privacy.
+        about changing discussion privacy.
       everyone: Everyone
     destroy:
-      failure: Couldn't delete the thread
-      success: Thread deleted
+      failure: Couldn't delete the discussion
+      success: Discussion deleted
     index:
       latest_activity: Latest activity %{ago} ago
-      search: 'Search all threads:'
+      search: 'Search all discussions:'
       search_submit: Search
-      title: Discussion threads (public)
-      threads_explanation_html: Each of the %{issues_link} may have one or more discussion
-        threads, shown below (most recently-updated first).
+      title: Discussions (public)
+      threads_explanation_html: Each of the %{issues_link} may have one or more discussions, shown below (most recently-updated first).
       issues: issues
-      introduction: Below are latest updates on discussion threads (across all of
+      introduction: Below are latest updates on discussions (across all of
         %{application_name}) that are public (including those owned by groups and/or administrative.)
       introduction_group_pointer: To show only discussions from a group you are a
         member of, use the group switcher on the top right.
     library_panel:
       library: Library
-      no_library_items: Couldn't find any relevant library items based on the thread
+      no_library_items: Couldn't find any relevant library items based on the
         tags.
-      tag_thread_guidance: Add tags to this thread to find relevant library items.
+      tag_thread_guidance: Add tags to this discussion to find relevant library items.
     new:
-      title: New Thread
+      title: New Discussion
     favourite_panel:
-      thread_favourite: My Thread Favourite
+      thread_favourite: My Discussion Favourite
     search:
       clear_submit: Clear
       no_results_found: No results found for '%{query}'.
       results_found:
         one: One result found for '%{query}'.
         other: '%{count} results found for ''%{query}'''
-      search: 'Search all threads:'
+      search: 'Search all discussions:'
       search_submit: Search
-      title: Thread Search Results
+      title: Discussion Search Results
     show:
       back: Back
-      closed_html: Thread has been closed by %{by} %{at} ago
-      open: Re-open this thread
-      edit: Edit this thread
-      destroy: Delete this thread
+      closed_html: Discussion has been closed by %{by} %{at} ago
+      open: Re-open this discussion
+      edit: Edit this discussion
+      destroy: Delete this discussion
       issues-nearby: Issues nearby
       private_to_committee_message: 'Private: Only committee members of %{group} can
-        view and post messages to this thread.'
+        view and post messages to this discussion.'
       private_to_group_message: 'Private: Only members of %{group} can view and post
-        messages to this thread.'
+        messages to this discussion.'
       private_html: Private Message between %{creator} and %{message_to}.
-      public_message: 'Public: Everyone can view this thread and post messages.'
-      thread: Thread
+      public_message: 'Public: Everyone can view this discussion and post messages.'
+      thread: Discussion
       block_private_messages: Block user's private messages
       unblock_private_messages: Unblock user's private messages
     subscribe_panel:
-      subscribed: You are subscribed to this thread.
+      subscribed: You are subscribed to this discussion.
     subscribers_panel:
       owner: Owner
-      subscribers: Subscribed to this thread
+      subscribers: Subscribed to this discussion
     connected_to_thread:
       leading: " [leading]"
     update:
-      success: Thread updated
+      success: Discussion updated
     widget:
       group_private: Group Private
       public: Public
@@ -930,7 +927,7 @@
       create:
         success: Your leader status has been updated
       new:
-        introduction: The leader of this discussion thread will ensure that the matter continues to move forward.
+        introduction: The leader of this discussion will ensure that the matter continues to move forward.
         introduction_action: I will take responsibility for leading this discussion.
         default_leader_message_html: You may wish to describe your motivation for leading this discussion
         default_unleading_message_html: You may wish to describe your motivation for being unable to lead this discussion anymore
@@ -964,13 +961,12 @@
       search_results: Search Results
       go: Go
       back: Back
-      close: Close this thread
+      close: Close this discussion
       select_header: Select
-      add_item_to_thread: Add item to thread
+      add_item_to_thread: Add item to discussion
       explain_library_item: Explain how this library item relates to the discussion
-        thread
       view_document: View Document
-      add_to_thread: Add to thread
+      add_to_thread: Add to Discussion
       search_library: Search library
       deadline_message: Deadline/date
       map_message: Map
@@ -980,7 +976,7 @@
       new_message: New message
       photo_message: Photo
       cyclestreets_photo_message: CycleStreets photo
-      thread_leader_message: Thread leader
+      thread_leader_message: Discussion leader
       action_message: Call to action
       sign_in_to_post_html: Please %{sign_in_link} to post a message.
       text_message: Text
@@ -1010,15 +1006,15 @@
       resolves_actions: "Resolves actions:"
     search:
       no_results_found: No results found for '%{query}'
-      thread_results: Threads (%{count})
+      thread_results: Discussions (%{count})
       issue_results: Issues (%{count})
       library_results: Library (%{count})
       planning_results: Planning applications (%{count})
       hashtag_results: Hashtags (%{count})
       threads_found:
-        zero: No threads found for '%{query}'.
-        one: 'One thread found for ''%{query}'':'
-        other: '%{count} threads found for ''%{query}'':'
+        zero: No discussions found for '%{query}'.
+        one: 'One discussion found for ''%{query}'':'
+        other: '%{count} discussions found for ''%{query}'':'
       issues_found:
         zero: No issues found for '%{query}'.
         one: 'One issue found for ''%{query}'':'
@@ -1117,7 +1113,7 @@
       new:
         title: Feedback
         introduction: This form is for giving feedback on the website, e.g. to report problems or suggest new features.
-          To respond to an issue under discussion, please click on that issue and subscribe to the discussion thread links.
+          To respond to an issue under discussion, please click on that issue and subscribe to the discussion links.
       create:
         success: Thank you for your feedback!
   tags:
@@ -1164,11 +1160,11 @@
     new_action_message:
       type: a call to action
     footer:
-      thread: "%{application_name} discussion thread"
-      unsubscribe: You can unsubscribe from this thread by visiting
+      thread: "%{application_name} discussion"
+      unsubscribe: You can unsubscribe from this discussion by visiting
       thread_html: "From %{application_name} %{link}."
       unsubscribe_html: "You can %{link}."
-      stop_following: unsubscribe from this thread
+      stop_following: unsubscribe from this discussion
   thread_privacy_options:
     public: Public (everyone)
     group: Group (members only)
@@ -1196,14 +1192,14 @@
           together. We use this to help figure out which issues are relevant to you,
           and which groups you might be interested in.
         combined_locations_guidance_none_html: If you want to receive notifications
-          when issues are created in these areas, and optionally subscribe to the discussion
-          threads on those issues, you can %{edit_prefs_link}.
+          when issues are created in these areas, and optionally subscribe to the discussions
+          on those issues, you can %{edit_prefs_link}.
         combined_locations_guidance_notify_html: You currently receive notifications
           when issues are created in these areas, but aren't automatically subscribed to
-          discussion threads on those issues. To change these settings, you can %{edit_prefs_link}.
+          discussions on those issues. To change these settings, you can %{edit_prefs_link}.
         combined_locations_guidance_subscribe_html: You currently receive notifications
-          when issues are created in these areas, and are subscribed to all discussion
-          threads on those issues. To change these settings, you can %{edit_prefs_link}.
+          when issues are created in these areas, and are subscribed to all discussions
+          on those issues. To change these settings, you can %{edit_prefs_link}.
         edit: Edit
         edit_your_prefs: edit your preferences
         my_locations: My Locations
@@ -1238,8 +1234,8 @@
         title: Subscription Preferences
         back: Return to your profile
         none: No notifications
-        notify: Notify me of new issues and when new threads are started
-        subscribe: Notify me of new issues and automatically subscribe me to all new threads
+        notify: Notify me of new issues and when new discussions are started
+        subscribe: Notify me of new issues and automatically subscribe me to all new discussions
         your_profile: your profile
       update:
         success: Preferences saved
@@ -1270,7 +1266,7 @@
         no_groups: None
         no_website: None
         profile_picture_title: '%{name}''s picture'
-        recent_threads: Recent Threads
+        recent_threads: Recent Discussions
         reported_issues: Listed Issues
         user_profile: User Profile
         website_label: 'Web site:'

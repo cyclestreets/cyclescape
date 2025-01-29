@@ -14,7 +14,7 @@
         short_name: The proposed %{application_name} web address
         website: Your organisation's main website
         email: Your organisation's main e-mail address
-        default_thread_privacy: Default privacy for discussion threads
+        default_thread_privacy: Default privacy for discussions
       group_membership:
         role: Membership type
       potential_member:
@@ -123,7 +123,7 @@
             who can see your profile.
           bicycle_wheels: To help stop automated sign-ups please enter the amount
             (in numbers) of wheels on six bicycles
-          disabled: This stops a user getting emails and stops them being able to log in.  It does not remove them from any groups or thread subscriptions.
+          disabled: This stops a user getting emails and stops them being able to log in.  It does not remove them from any groups or discussion subscriptions.
         edit:
           password: Leave this blank to keep your current password.
           current_password: Please confirm your current password to make changes on
@@ -162,7 +162,7 @@
         logo: To be displayed on the group page, ideally 330x192 pixels
       issue:
         new: &hints_issue_new
-          description: Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion thread about this issue.
+          description: Please give details about the problem and what effect it is having on cycling.  Remember that all issues are publicly viewable. On the next page you will start a discussion about this issue.
           deadline: (optional)
           external_url: If another web page is relevant you can add it here.
           photo: (optional), 6MB max, the image will be automatically resized to an appropriate size.
@@ -172,9 +172,9 @@
         edit: *hints_issue_new
         update: *hints_issue_new
       message_thread:
-        privacy: This specifies who can see and edit this discussion thread.
-        issue: This specifies which issue this discussion thread is attached to. If
-          none, this will be an administrative thread.
+        privacy: This specifies who can see and edit this discussion.
+        issue: This specifies which issue this discussion is attached to. If
+          none, this will be an administrative discussion.
       library/note:
         <<: *tags_string_hints
       photo_message:
@@ -228,7 +228,7 @@
       message:
         create: Post Message
       thread:
-        create: Create Thread
+        create: Create Discussion
       potential_member:
         submit: Submit potential members list
       site_comment:
@@ -241,6 +241,6 @@
       user_profile:
         create: Save
       thread_subscription:
-        create: Follow this thread
-        delete: Unfollow this thread
+        create: Follow this discussion
+        delete: Unfollow this discussion
         delete_from_listing: Unfollow
