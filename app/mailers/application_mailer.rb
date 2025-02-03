@@ -8,9 +8,8 @@ class ApplicationMailer < ActionMailer::Base
   private
 
   def site_config
-    @site_config ||= Rails.cache.fetch(SiteConfig::KEY, expires_in: 1.week) do
-      SiteConfig.first.to_struct
-    end
+    # Kept getting RGeo::Error::ParseError: Unrecognized type: CS
+    @site_config ||= SiteConfig.select(*SiteConfig.attribute_names.reject { |attr| attr == 'nowhere_location' }).first.to_struct
   end
 
   def set_time_zone(user)
