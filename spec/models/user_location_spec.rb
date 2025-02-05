@@ -66,9 +66,11 @@ describe UserLocation do
     let(:geom_collection) do
       "GEOMETRYCOLLECTION (#{line}, #{polygon})"
     end
+
     let(:strange_geom_collection) do
       "GEOMETRYCOLLECTION (POLYGON ((-3.788091732031289 55.28171639104471, -3.282720638281247 55.01017018336803, -4.351141048437512 54.8476193969965, -3.788091732031289 55.28171639104471)), POLYGON ((-4.11245981848872 55.305395022157526, -3.5630216447403713 54.90747510684706, -5.182749306205093 54.91177262081619, -4.11245981848872 55.305395022157526)))"
     end
+
     subject { build :user_location, location: geom_collection }
 
     it "works on geom collections" do
@@ -82,7 +84,11 @@ describe UserLocation do
 
     it "makes location's valid" do
       subject = build :user_location, location: odd_polygon
-      expect(subject.location).to_not be_valid
+      expect(subject.location).not_to be_valid
+      subject.save
+      expect(subject.reload.location).to be_valid
+      subject.location = odd_polygon
+      expect(subject.location).not_to be_valid
       subject.save
       expect(subject.reload.location).to be_valid
     end

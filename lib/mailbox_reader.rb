@@ -5,17 +5,15 @@ require "net/imap"
 class MailboxReader < MailboxProcessor
   def run
     fetch_message_ids(config[:mailbox]).each do |mid|
-      begin
-        # Fetch message from IMAP server
-        message = fetch_raw_message(mid)
-        # Save to database
-        ar_message = save_message(message)
-        # Send to the mail processor
-        enqueue(ar_message)
-      ensure
-        # Mark message as read in IMAP mailbox
-        mark_as_seen(mid)
-      end
+      # Fetch message from IMAP server
+      message = fetch_raw_message(mid)
+      # Save to database
+      ar_message = save_message(message)
+      # Send to the mail processor
+      enqueue(ar_message)
+    ensure
+      # Mark message as read in IMAP mailbox
+      mark_as_seen(mid)
     end
   ensure
     disconnect
