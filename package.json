@@ -1,9 +1,15 @@
 {
   "name": "cyclescape",
   "dependencies": {
+    "@babel/cli": "^7.26.4",
+    "@babel/core": "^7.26.7",
+    "@babel/plugin-transform-modules-commonjs": "^7.26.3",
+    "@babel/preset-env": "^7.26.7",
     "@benmajor/jquery-touch-events": "^2.0.3",
+    "@hotwired/turbo-rails": "~7",
     "animate.css": "^4.1.1",
     "autosize": "^1.18.13",
+    "babelify": "10.0.0",
     "browserify": "^14.5.0",
     "browserify-incremental": "^3.1.0",
     "coffeeify": "~0.6",

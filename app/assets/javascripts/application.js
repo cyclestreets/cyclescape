@@ -49,3 +49,6 @@
 //= require popper
 //= require bootstrap
 //= require new_ui
+window.Turbo = require('@hotwired/turbo-rails')
+//= require tooltip
+

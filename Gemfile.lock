@@ -800,6 +800,7 @@ DEPENDENCIES
   thin
   thumbs_up
   tinymce-rails (< 6)
+  turbo-rails
   uglifier (>= 1.3.0)
   webmock
   webrick
