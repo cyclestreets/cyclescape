@@ -1,9 +1,10 @@
 - if signed_in?
-  - user_favourite = @user_favourites&.present? ? @user_favourites.find { |up| up.thread_id == thread.id} : thread.favourite_for(current_user)
-  %div{ id: "favourite-#{thread.id}"}
-    - if user_favourite&.persisted?
-      =link_to thread_user_favourites_path(thread), method: :delete, remote: true do
-        %i.fas.fa-star{style: "color: gold", title: t(".remove_favourite")}
-    - else
-      = link_to thread_user_favourites_path(thread), method: :post, style: "color: grey", remote: true do
-        %i.far.fa-star{title: t(".make_favourite")}
+  = turbo_frame_tag "favourite_#{thread.id}" do
+    - user_favourite = @user_favourites&.present? ? @user_favourites.find { |up| up.thread_id == thread.id} : thread.favourite_for(current_user)
+    %span{class: "favourite", id: "favourite-#{thread.id}"}
+      - if user_favourite&.persisted?
+        =link_to thread_user_favourites_path(thread), data: { turbo_method: :delete } do
+          %i.fas.fa-star{style: "color: gold", title: t(".remove_favourite")}
+      - else
+        = link_to thread_user_favourites_path(thread), data: { turbo_method: :post }, style: "color: grey" do
+          %i.far.fa-star{title: t(".make_favourite")}
