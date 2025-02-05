@@ -7,7 +7,7 @@
       %strong
         = t(".introduction_action")
   - leader = message.thread_leader_messages.build
-  = message_form.semantic_fields_for :thread_thread_leaders, leader do |f|
+  = message_form.semantic_fields_for :thread_leader_messages, leader do |f|
     = f.inputs do
       - if already_leading
         = f.input :description, input_html: { placeholder: t(".default_unleading_message_html") }
