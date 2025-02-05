@@ -37,6 +37,24 @@ module MessageThreadsHelper
     end
   end
 
+  def privacy_badge_title_text(thread:)
+    if thread.private_to_committee?
+      title = t "message_threads.show.private_to_committee_message_title", group: thread.group.name
+      text = t "message_threads.show.private_to_committee_message_text"
+    elsif thread.private_to_group?
+      title = t "message_threads.show.private_to_group_message_title", group: thread.group.name
+      text = t "message_threads.show.private_to_group_message_text"
+    elsif thread.private_message?
+      title = t "message_threads.show.private_html", creator: link_to_profile(thread.created_by), message_to: link_to_profile(thread.user)
+      text = t "message_threads.show.private_text"
+    else
+      title = t "message_threads.show.public_message_title"
+      text = t "message_threads.show.public_message_text"
+    end
+
+    [title, text]
+  end
+
   def message_controller_map(message)
     path = MESSAGE_CONTROLLER_MAP[message.class.to_s]
     raise "Message controller not found for #{message.class.to_s.inspect}" if path.nil?

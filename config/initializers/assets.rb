@@ -10,4 +10,4 @@ Rails.application.config.assets.configure do |env|
 end
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif ie7.css street_view.js chartkick.js application_new_ui.css application_new_ui.js]
+Rails.application.config.assets.precompile += %w[*.png *.jpg *.jpeg *.gif ie7.css street_view.js chartkick.js]

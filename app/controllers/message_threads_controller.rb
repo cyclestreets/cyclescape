@@ -42,7 +42,6 @@ class MessageThreadsController < ApplicationController
         @initially_loaded_from = @messages.first&.created_at&.iso8601
 
         @library_items = Library::Item.find_by_tags_from(thread).limit(5)
-        @tag_panel = TagPanelDecorator.new(thread, form_url: thread_tags_path(thread))
 
         @subscribers = @subscribers.ordered(thread.group_id).includes(:groups)
       end

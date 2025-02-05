@@ -143,12 +143,6 @@ dl {
   }
 }
 
-// buttons
-button,
-input.submit,
-input.btn-grey, .btn-grey {
-  @include button-text-grey;
-}
 .btn-green, .formtastic input.btn-green {
   @include button-text-green;
 }

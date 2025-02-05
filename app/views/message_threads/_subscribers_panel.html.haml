@@ -1,10 +1,13 @@
-%section.subscribers.box
-  %h2= t ".subscribers"
+.widget
+  .title
+    %i{class: "fas fa-fw fa-users"}
+    = subscribers.count
+  .widget-content
   - if group
     %dl
-      %dt.title= t ".owner"
-      %dd.title= link_to_profile group
-  %ul.thread-metadata-listings
-    - leaders = @thread.leaders.ordered(group.try(:id))
-    = render collection: leaders, as: :user, partial: "connected_to_thread", locals: { leading: true }, cached: true
-    = render collection: (subscribers - leaders), as: :user, partial: "connected_to_thread", locals: { leading: false }, cached: true
+      %dt= t ".owner"
+      %dd= link_to_profile group
+    %ul{class: "unstyled-avatars"}
+      - leaders = @thread.leaders.ordered(group.try(:id))
+      = render collection: leaders, as: :user, partial: "connected_to_thread", locals: { leading: true }, cached: true
+      = render collection: (subscribers - leaders), as: :user, partial: "connected_to_thread", locals: { leading: false }, cached: true

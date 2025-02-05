@@ -1,14 +1,16 @@
-%section.library.box
-  %h2= t ".library"
-  - if thread_tags.empty?
-    %p= t ".tag_thread_guidance"
-  - elsif items.empty?
-    %p= t ".no_library_items"
-  - else
-    %ul.thread-metadata-listings
-      - items.each do |item|
-        %li
-          = link_to item.component do
-            %span.thumb
-            %p= item.title
-
+.widget
+  .title
+    %i{class: "fas fa-fw fa-books"}
+    = t ".library"
+  .widget-content.centered
+    - if thread_tags.empty?
+      %p= t ".tag_thread_guidance"
+    - elsif items.empty?
+      %p= t ".no_library_items"
+    - else
+      %ul.thread-metadata-listings
+        - items.each do |item|
+          %li
+            = link_to item.component do
+              %span.thumb
+              %p= item.title

@@ -241,6 +241,6 @@
       user_profile:
         create: Save
       thread_subscription:
-        create: Follow this discussion
-        delete: Unfollow this discussion
+        create: Follow
+        delete: Unfollow
         delete_from_listing: Unfollow

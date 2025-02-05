@@ -1,16 +1,13 @@
-%li
-  .item-content
-    %h4= link_to_if policy(thread).show?, thread.title, thread_path(thread), class: "primary-link"
-    .meta
-      %p
-        - if thread.group
-          = link_to_profile(thread.group)
-          %br
-        - if policy(thread).show?
-          - if policy(thread.latest_activity_by).view_profile?
-            = link_to_profile(thread.latest_activity_by)
-          - else
-            = thread.latest_activity_by.display_name_or_anon
-          = t ".posted_at"
-          = time_tag_with_title(thread.latest_activity_at)
+%h3.drop-cap= link_to_if policy(thread).show?, thread.title, thread_path(thread), class: "primary-link"
+%p
+  - if thread.group
+    = link_to_profile(thread.group)
+    %br
+  - if policy(thread).show?
+    - if policy(thread.latest_activity_by).view_profile?
+      = link_to_profile(thread.latest_activity_by)
+    - else
+      = thread.latest_activity_by.display_name_or_anon
+    = t ".posted_at"
+    = time_tag_with_title(thread.latest_activity_at)
   .permissions= thread_type(thread)

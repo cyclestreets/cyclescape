@@ -1,36 +1,33 @@
-%section#content.thread{ data: {"view-message-id" => @view_from&.id} }
-  %header
+.title-wrapper{ data: {"view-message-id" => @view_from&.id} }
+  .section-title
+    %h1
+      %i{class: "fas fa-fw fa-microphone"}
+      = @thread.display_title
+    %p{class: "badge"}= @thread.display_id
+    - if @thread.private_message?
+      - other_user = @thread.other_user(current_user)
+      - existing_block = current_user.user_blocks.find_by(blocked_id: other_user.id)
+      - method = existing_block ? :delete : :post
+      - label = existing_block ? t(".unblock_private_messages") : t(".block_private_messages")
+      = semantic_form_for current_user.user_blocks.build, method: method  do |f|
+        = f.input :blocked_id, as: :hidden, input_html: { value: other_user.id }
+        = f.actions do
+          = f.action :submit, label: label, button_html: {class: "btn-red submit", data: { disable_with: t("formtastic.actions.saving") }}
+    - title, text = privacy_badge_title_text(thread: @thread)
+    %p{class: "badge", title: title}
+      %i{class: "fas fa-fw fa-eye"}
+      = text
+    = render "message_thread/user_favourites/form", thread: @thread
+
     - if @issue
-      %p.pre-title= link_to @issue.title, issue_path(@issue)
-    %p.thread-number
-      = t ".thread"
-      %br/
-      = @thread.display_id
-    %h1= @thread.display_title
+      %h3= link_to @issue.title, issue_path(@issue)
+%section#content.thread
+  %header
     .meta
       .privacy
-        - other_user = @thread.other_user(current_user)
-        - if @thread.private_to_committee?
-          %p= t ".private_to_committee_message", group: @thread.group.name
-        - elsif @thread.private_to_group?
-          %p= t ".private_to_group_message", group: @thread.group.name
-        - elsif @thread.private_message?
-          %p= t ".private_html", creator: link_to_profile(@thread.created_by), message_to: link_to_profile(@thread.user)
-
-          - existing_block = current_user.user_blocks.find_by(blocked_id: other_user.id)
-          - method = existing_block ? :delete : :post
-          - label = existing_block ? t(".unblock_private_messages") : t(".block_private_messages")
-          = semantic_form_for current_user.user_blocks.build, method: method  do |f|
-            = f.input :blocked_id, as: :hidden, input_html: { value: other_user.id }
-            = f.actions do
-              = f.action :submit, label: label, button_html: {class: "btn-red submit", data: { disable_with: t("formtastic.actions.saving") }}
-        - else
-          %p= t ".public_message"
-      %section.tags
-        = @tag_panel.render
     - if @issue
       .description
-        %p= @issue.description
+        %p
     - if policy(@thread).edit? || policy(@thread).destroy?
       %menu.tools
         %ul
@@ -38,38 +35,45 @@
             %li= link_to t(".edit"), edit_thread_path(@thread)
           - if policy(@thread).destroy?
             %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t("are_you_sure") }
-  - if @view_from
-    %article.message{ data: {"initially-loaded-from" => @initially_loaded_from } }
-      .body
-        = ajax_spinner_image
-        Loading more content
-  = render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
-  - if @thread.closed
-    - closed_by = policy(@thread.closed_by.last).view_profile? ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon
-    = t '.closed_html', by: closed_by, at: time_ago_in_words(@thread.message_thread_closes.last.created_at)
-    %p
-    - if policy(@thread).open?
-      = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green', data: { confirm: t("are_you_sure") }
-  - elsif @thread.private_message? && !policy(other_user).send_private_message? # Do not allow new messages if messages are not permitted
-  - else
-    #messages-new-partial
-      = render "messages/new"
-
-%aside#sidebar
-  = render "subscribe_panel", thread: @thread
-  - if @issue
-    - map_id = "leaflet-#{dom_id(@issue)}"
-    %section.map.box
+.content-wrapper
+  .main-content{ data: {"initially-loaded-from" => @initially_loaded_from } }
+    %p{class: "drop-cap"}= @issue.description
+    %hr
+    %ul{class: "thread"}
+      %li{class: "load-more"}
+        %p= t "shared.load_more"
+      = render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
+    - if @thread.closed
+      - closed_by = policy(@thread.closed_by.last).view_profile? ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon
+      = t '.closed_html', by: closed_by, at: time_ago_in_words(@thread.message_thread_closes.last.created_at)
+      %p
+      - if policy(@thread).open?
+        = button_to t(".open"), open_thread_path(@thread), method: :put, class: 'btn-green', data: { confirm: t("are_you_sure") }
+    - elsif @thread.private_message? && !policy(other_user).send_private_message? # Do not allow new messages if messages are not permitted
+    - else
+      #messages-new-partial
+        = render "messages/new"
+  .side-content
+    - if @issue
+      - map_id = "leaflet-#{dom_id(@issue)}"
       .minimap{id: map_id}
       .hidden
         .map-data{"data-center" => location_to_geojson(@issue.location),
           "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(@issue), hidezoom: true }.to_json}
       = link_to t(".issues-nearby"), '/issues#map-pane', class: "btn-green"
-  - if @issue
-    %section.social
-      = tweet_button text: @thread.title, link: thread_url(@issue)
-      = facebook_like thread_url(@issue)
-  = render "message_thread/user_favourites/form", thread: @thread
-  %p
-  = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
-  = render "library_panel", items: @library_items, thread_tags: @thread.tags
+      .widget
+        = render "shared/tags/widget", resource: @issue
+    = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
+    .widget
+      = render "subscribe_panel", thread: @thread
+    - if @issue
+      .widget
+        .title
+          %i{class: "fas fa-fw fa-share-square"}
+          Share
+        .widget-content.centered
+          = tweet_button text: @thread.title, link: thread_url(@issue)
+          = facebook_like thread_url(@issue)
+
+
+    = render "library_panel", items: @library_items, thread_tags: @thread.tags

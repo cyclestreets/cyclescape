@@ -865,13 +865,16 @@
       edit: Edit this discussion
       destroy: Delete this discussion
       issues-nearby: Issues nearby
-      private_to_committee_message: 'Private: Only committee members of %{group} can
+      private_to_committee_message_title: 'Private: Only committee members of %{group} can
         view and post messages to this discussion.'
-      private_to_group_message: 'Private: Only members of %{group} can view and post
+      private_to_committee_message_text: Private to comittee
+      private_to_group_message_title: 'Private: Only members of %{group} can view and post
         messages to this discussion.'
-      private_html: Private Message between %{creator} and %{message_to}.
-      public_message: 'Public: Everyone can view this discussion and post messages.'
-      thread: Discussion
+      private_to_group_message_text: Private to members
+      private_title_html: Private Message between %{creator} and %{message_to}.
+      private_text: "Private message"
+      public_message_title: 'Public: Everyone can view this discussion and post messages.'
+      public_message_text: Public
       block_private_messages: Block user's private messages
       unblock_private_messages: Unblock user's private messages
     subscribe_panel:
@@ -1071,9 +1074,9 @@
     permission_denied:
       login: Login?
       committee_only_html: This discussion is for committee only members of %{group_link}
-      apply_to_group_html: This discussion is owned by %{group_name}. Would you like
+      apply_to_group_html: "This discussion is owned by %{group_name}. Would you like
         to <a href='%{join_link}'><strong>apply to join %{group_name}'s %{application_name}
-        group</strong></a>?
+        group</strong></a>?"
     tags:
       panel:
         edit_tags: Edit tags
@@ -1093,6 +1096,7 @@
       group_private: Group Private
       public: Public
       posted_at: posted
+    load_more: load more
     votable:
       sign_in_to_vote_html: Please %{sign_in_link} to vote.
   site:
@@ -1164,7 +1168,7 @@
       unsubscribe: You can unsubscribe from this discussion by visiting
       thread_html: "From %{application_name} %{link}."
       unsubscribe_html: "You can %{link}."
-      stop_following: unsubscribe from this discussion
+      stop_following: unsubscribe
   thread_privacy_options:
     public: Public (everyone)
     group: Group (members only)

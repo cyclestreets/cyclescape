@@ -1,47 +1,39 @@
-%article.message
-  .header-fix{id: dom_id(message)}
-  .details
-    .author
-      - if policy(message.created_by).view_profile?
-        %span.thumbnail
-          - if message.created_by.profile.picture
-            = image_tag message.created_by.profile.picture_thumbnail.url, alt: ""
-        %span.name
+%li{id: dom_id(message)}
+  .flex
+    .poster-avatar
+      - if policy(message.created_by).view_profile? && message.created_by.profile.picture
+        = image_tag message.created_by.profile.picture_thumbnail.url
+    .content
+      %h3
+        - if policy(message.created_by).view_profile?
           = link_to_profile message.created_by
-      - else
-        %span.thumbnail
-        %span.name
+        - else
           = message.created_by.display_name_or_anon
-      = t '.committee' if message.committee_created?
+        = t '.committee' if message.committee_created?
+      %span
+        = time_tag_with_title(message.created_at)
       = link_to thread_path(message.thread_id, anchor: dom_id(message)), class: "permalink" do
         = t ".posted_date"
-        = time_tag_with_title(message.created_at)
-  .body
-    - if message.censored?
-      .censored
-        %p= t ".censored"
-    - else
-      .message-text
-        - unless message.library_item_messages.present?
-          - display_message = sanitize(message_linkify(message))
-          - if message.plain_text?
-            - display_message = simple_format(display_message, sanitize: false)
-          = auto_link(display_message)
-      - message.components.each do |component|
-        = render "message/#{message_controller_map(component)}/show", component: component
+      .post
+        - if message.censored?
+          .censored
+            %p= t ".censored"
+        - else
+          .message-text
+            - unless message.library_item_messages.present?
+              - display_message = sanitize(message_linkify(message))
+              - if message.plain_text?
+                - display_message = simple_format(display_message, sanitize: false)
+              = auto_link(display_message)
+          - message.components.each do |component|
+            = render "message/#{message_controller_map(component)}/show", component: component
 
-      - if message.completing_action_messages.to_a.present?
-        = render "shared/resolves_actions", actions: message.completing_action_messages
-  - if policy(message).censor? # TODO re-add `|| library_type_for(message)`
-    %menu.tools
-      %ul
-        - if policy(message).censor?
-          %li= link_to t(".censor"), censor_thread_message_path(thread, message), method: :put
-        -# - case library_type_for(message)
-        -# - when "note"
-        -#   %li= link_to t(".create_note"), new_thread_message_note_path(thread, message)
-        -# - when "document"
-        -#   %li= link_to t(".create_document"), new_thread_message_document_path(thread, message)
-  %section.voting
-    =render partial: "shared/votable",
-      locals: { resource: message }
+          - if message.completing_action_messages.to_a.present?
+            = render "shared/resolves_actions", actions: message.completing_action_messages
+  .post-actions
+    - if policy(message).censor? # TODO re-add `|| library_type_for(message)`
+      %menu.tools
+        %ul
+          - if policy(message).censor?
+            %li= link_to t(".censor"), censor_thread_message_path(thread, message), method: :put
+    = render partial: "shared/votable", locals: { resource: message }

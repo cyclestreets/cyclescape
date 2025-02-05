@@ -1,8 +1,5 @@
 %div{ id: "subscribe_#{thread.id}"}
   - if signed_in? && current_user.subscribed_to_thread?(thread, all_subscriptions: @user_subscriptions)
-    .following
-      = image_tag('check-checked.png')
-      = I18n.t('decorators.thread_list.following')
     - subscription = current_user.thread_subscriptions.to(thread)
     = semantic_form_for subscription, url: thread_subscription_path(thread, subscription, action: :destroy), remote: true, method: :delete do |f|
       = f.actions do
