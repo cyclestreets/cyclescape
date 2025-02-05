@@ -1,0 +1,3 @@
+<%= turbo_stream.update "votable_#{resource.id}" do %>
+  <%= render partial: "shared/votable", locals: { resource: resource } %>
+<% end %>

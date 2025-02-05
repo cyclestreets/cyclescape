@@ -10,17 +10,19 @@ ul {
       border-radius: 20px;
       cursor: pointer;
       margin: 5px 0;
-      & > a {
+      & > .disccusion-item {
         text-decoration: none;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         border-radius: 20px;
-        cursor: pointer;
         margin: 5px 0;
         padding: 0 20px;
         &:hover {
           background: #F6F6F6;
+        }
+        & > .favourite {
+          padding-left: 20px;
         }
       }
       div {

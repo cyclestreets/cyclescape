@@ -4,7 +4,7 @@ require "spec_helper"
 
 RSpec.describe MessageThreadPolicy do
   subject { described_class.new(user, thread) }
-  let(:all_actions) { %i[new create show edit update destroy close vote_detail edit_all_fields] }
+  let(:all_actions) { %i[new create show edit update destroy close edit_all_fields] }
   let(:forbiden_actions) { all_actions - allowed_actions }
 
   context "being an admin" do
@@ -23,7 +23,7 @@ RSpec.describe MessageThreadPolicy do
     let(:thread) { create :message_thread, group: group, privacy: privacy  }
 
     context "with a thread in your group" do
-      let(:allowed_actions) { %i[new create show edit update destroy vote_detail edit_all_fields] }
+      let(:allowed_actions) { %i[new create show edit update destroy edit_all_fields] }
       let(:group) { membership.group }
 
       context "committee thread" do
@@ -66,7 +66,7 @@ RSpec.describe MessageThreadPolicy do
     let(:thread) { create :message_thread, group: group, privacy: privacy  }
 
     context "with a thread in your group" do
-      let(:allowed_actions) { %i[new create show vote_detail] }
+      let(:allowed_actions) { %i[new create show] }
       let(:group) { membership.group }
 
       context "committee thread" do
@@ -92,7 +92,7 @@ RSpec.describe MessageThreadPolicy do
             thread.add_subscriber user
           end
 
-          let(:allowed_actions) { %i[new create show vote_detail close] }
+          let(:allowed_actions) { %i[new create show close] }
 
           it do
             expect(subject).to permit_actions(allowed_actions)
@@ -116,7 +116,7 @@ RSpec.describe MessageThreadPolicy do
 
       context "public thread in group" do
         let(:privacy) { MessageThread::PUBLIC }
-        let(:allowed_actions) { %i[show vote_detail] }
+        let(:allowed_actions) { %i[show ] }
 
         it do
           expect(subject).to permit_actions(allowed_actions)
@@ -128,7 +128,7 @@ RSpec.describe MessageThreadPolicy do
             thread.add_subscriber user
           end
 
-          let(:allowed_actions) { %i[show vote_detail close] }
+          let(:allowed_actions) { %i[show close] }
 
           it do
             expect(subject).to permit_actions(allowed_actions)
@@ -171,7 +171,7 @@ RSpec.describe MessageThreadPolicy do
 
       context "when current_user created the thread" do
         let(:user) { creating_user }
-        let(:allowed_actions) { %i[show edit update close vote_detail] }
+        let(:allowed_actions) { %i[show edit update close] }
         let(:forbiden_actions) { %i[new create] } # need to share a group etc. to start a thread
 
         it do
@@ -182,7 +182,7 @@ RSpec.describe MessageThreadPolicy do
 
       context "when current_user is recieving thread" do
         let(:user) { recieving_user }
-        let(:allowed_actions) { %i[show close vote_detail] }
+        let(:allowed_actions) { %i[show close] }
 
         it do
           expect(subject).to permit_actions(allowed_actions)
@@ -209,7 +209,7 @@ RSpec.describe MessageThreadPolicy do
       describe "user blocks" do
         let(:user) { creating_user }
         let(:other_user) { ([creating_user, recieving_user] - [user]).first }
-        let(:allowed_actions) { %i[show vote_detail close edit update] }
+        let(:allowed_actions) { %i[show close edit update] }
 
         context "current user has blocked other user" do
           before { user.user_blocks.create!(blocked: other_user) }
@@ -242,7 +242,7 @@ RSpec.describe MessageThreadPolicy do
           create :group_membership, user: recieving_user, group: membership.group
         end
 
-        let(:allowed_actions) { %i[new edit update create show vote_detail close] }
+        let(:allowed_actions) { %i[new edit update create show close] }
 
         it do
           expect(subject).to permit_actions(allowed_actions)
@@ -257,7 +257,7 @@ RSpec.describe MessageThreadPolicy do
             create :group_membership, :committee, user: creating_user, group: membership.group
           end
 
-          let(:allowed_actions) { %i[new create edit update show vote_detail close] }
+          let(:allowed_actions) { %i[new create edit update show close] }
 
           it do
             expect(subject).to permit_actions(allowed_actions)
@@ -271,7 +271,7 @@ RSpec.describe MessageThreadPolicy do
             create :group_membership, :committee, user: recieving_user
           end
 
-          let(:allowed_actions) { %i[edit update show vote_detail close] }
+          let(:allowed_actions) { %i[edit update show close] }
 
           it do
             expect(subject).to permit_actions(allowed_actions)

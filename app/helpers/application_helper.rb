@@ -45,6 +45,13 @@ module ApplicationHelper
     link_to commit, url
   end
 
+  def bs_popover(container: "body", toggle: "popover", trigger: "hover", html: "true", placement: "top", content:)
+    {
+      "bs-container" => container, "bs-toggle" => toggle, "bs-trigger" => trigger,
+      "bs-html" => html, "bs-placement" => placement, "bs-content" => content
+    }
+  end
+
   def email_message(message)
     mail_to "message-#{message.public_token}@#{domain}", t(".email"), encode: "hex"
   end
@@ -78,13 +85,11 @@ module ApplicationHelper
       {
         clear: vote_clear_thread_message_path(resource.thread, resource),
         up: vote_up_thread_message_path(resource.thread, resource),
-        details: vote_detail_thread_path(resource.thread)
       }
     when Issue
       {
         clear: vote_clear_issue_path(resource),
         up: vote_up_issue_path(resource),
-        details: vote_detail_issues_path
       }
     end
   end

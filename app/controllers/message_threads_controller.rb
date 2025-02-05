@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class MessageThreadsController < ApplicationController
-  protect_from_forgery except: :vote_detail
   include MessageCreator
 
   def index
@@ -97,11 +96,6 @@ class MessageThreadsController < ApplicationController
   def permission_denied
     @group ||= thread(auth: false).try(:group)
     super
-  end
-
-  def vote_detail
-    messages = thread.messages.approved.where(id: params[:ids])
-    render partial: "shared/vote_detail", collection: messages, as: :resource
   end
 
   protected

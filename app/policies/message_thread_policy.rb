@@ -73,10 +73,6 @@ class MessageThreadPolicy < GuestsAllowedPolicy
     !thread.closed && subscribed_or_admin?
   end
 
-  def vote_detail?
-    user && show?
-  end
-
   private
 
   def subscribed_or_admin?

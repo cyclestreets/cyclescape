@@ -4,8 +4,6 @@ class IssuesController < ApplicationController
   include MessageCreator
   include IssueFeature
 
-  protect_from_forgery except: :vote_detail
-
   def index
     skip_authorization
 
@@ -132,13 +130,6 @@ class IssuesController < ApplicationController
 
     current_user.clear_votes issue
     render partial: "shared/vote_detail", locals: { resource: @issue }
-  end
-
-  def vote_detail
-    skip_authorization
-
-    issues = Issue.where(id: params[:ids])
-    render partial: "shared/vote_detail", collection: issues, as: :resource
   end
 
   protected

@@ -42,7 +42,6 @@
 //= require leaflet_draw_override
 //= require cropperjs/dist/cropper
 //= require image_edit
-//= require vote
 //= require ajax_file_upload
 //= require street_view
 

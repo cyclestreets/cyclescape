@@ -1,8 +1,11 @@
-.votes{id: "voteable_#{resource.id}", data: { url: "#{vote_link(resource)[:details]}", id: resource.id } }
-  .hide.voted
-    = link_to "", vote_link(resource)[:clear], method: :put, class: "vote-count", remote: true
-  .hide.not-voted
-    = link_to "", vote_link(resource)[:up], method: :put, class: "vote-count unvoted", remote: true
-  %span.tally
-  - if !current_user
-    .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)
+= turbo_frame_tag "votable_#{resource.id}" do
+  .votes
+    - voters = resource.voters_who_voted
+    - voted = current_user ? voters.include?(current_user) : false
+    - bs_content = voters.present? ? "<ul class='popover-avatar'> <li>#{voters.map { |usr| policy(usr).show? ? link_to_profile(usr) : usr.display_name_or_anon }.join('</li><li>') } </li></ul>" : ''
+    - data = bs_popover(content: bs_content).merge(turbo_method: :post)
+    = button_to vote_link(resource)[voted ? :clear : :up], class: "like animate__animated #{'liked' if voted}", data: data do
+      %i{class: "fas fa-fw fa-thumbs-up"}
+      = voters.size
+- if !current_user
+  .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)
