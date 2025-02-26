@@ -26,6 +26,7 @@ class IssuesController < ApplicationController
     set_page_description @issue.description
     set_page_image @issue.photo.try(:url)
     @threads = ThreadListDecorator.decorate_collection @issue.threads.approved.order_by_latest_message.includes(:group)
+    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: @threads)
   end
 
   def new
