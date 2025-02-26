@@ -61,6 +61,13 @@ class window.LeafletMap
     @map.removeControl(@map.zoomControl) if opts.hidezoom?
     @map.zoomControl.setPosition(opts.zoomposition) if opts.zoomposition
     @drawnFeatures = {}
+
+    # Maps not on the first tab do not render properly.  Force a re-render when changing jQueryUI tabs
+    # tabsactivate is the event that jQueryUI emits.
+    $(document).on("tabsactivate", ()=>
+      @map.invalidateSize()
+      @setCenter(center)
+    )
     @
 
   featurePointToLayer: (feature, latlng) ->

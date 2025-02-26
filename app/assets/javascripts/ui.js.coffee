@@ -1,4 +1,5 @@
 require('autosize/build/jquery.autosize.js')
+require('jquery-ui/tabs')
 
 window.jsonpTransportRequired = ->
   navigator.appVersion.indexOf('MSIE') != -1 &&

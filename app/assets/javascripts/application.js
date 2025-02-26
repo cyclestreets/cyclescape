@@ -11,7 +11,6 @@
 //= require jquery.selectboxes
 //= require jquery.extentions
 //= require jquery-ui/autocomplete
-//= require jquery-ui/tabs
 //= require jquery-ui/datepicker
 //= require jquery-ui/dialog
 //= require jquery-ui/slider
