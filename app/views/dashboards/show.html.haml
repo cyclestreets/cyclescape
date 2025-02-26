@@ -35,7 +35,7 @@
             %p= t ".my_issues_nearby_introduction_html", areas_you_are_watching_link: link_to(t(".areas_you_are_watching"), current_user_locations_path)
             %p.comment= t ".my_issues_nearby_issues_pointer_html", browse_all_other_issues_link: link_to(t(".browse_all_other_issues"), issues_path)
             %ul.issue-list
-              = issues_list @relevant_issues, collapsed: true
+              = render partial: "issues/compact", collection: @relevant_issues, as: :issue, locals: { prefix: "list" }, cached: true, collapsed: true
         - if @relevant_issues.respond_to?(:total_pages)
           = paginate @relevant_issues, param_name: :relevant_issues_page, params: {anchor: 'issues-nearby'}
       #my-favourites

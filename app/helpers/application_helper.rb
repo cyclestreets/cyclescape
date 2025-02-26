@@ -26,10 +26,10 @@ module ApplicationHelper
   end
 
   # Generate link to user or group profiles
-  def link_to_profile(item, options = {})
+  def link_to_profile(item, link_suffix = nil)
     case item
     when User
-      link_to item.name, user_profile_path(item), options
+      link_to item.name, "#{user_profile_path(item)}#{link_suffix}"
     when Group
       link_to_group_home(item)
     end

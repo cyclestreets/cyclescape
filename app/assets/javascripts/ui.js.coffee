@@ -4,7 +4,7 @@ window.jsonpTransportRequired = ->
   navigator.appVersion.indexOf('MSIE') != -1 &&
     parseFloat(navigator.appVersion.split('MSIE')[1]) <= 9
 
-$(document).ready ->
+initializeComponents = ()->
   $("#issue_start_discussion").change((evt)->
     form = $("[data='start-discussion-form']")
     btn = $(form).parent().find("input[type=submit]")
@@ -174,3 +174,6 @@ $(document).ready ->
     )
     $(copyToEl.data("copyfromid")).on("propertychange change click keyup input paste", copyFrom(copyToEl))
   )
+$(document).ready initializeComponents
+document.addEventListener("turbo:load", initializeComponents)
+document.addEventListener("turbo:load", window.leafletMapInit)

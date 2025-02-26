@@ -126,7 +126,7 @@ class Message < ApplicationRecord
   end
 
   def committee_created?
-    created_by.id.in?(thread.try(:group).try(:committee_members).try(:ids) || [])
+    created_by.id.in?(thread&.group_committee_members&.ids || [])
   end
 
   def as_json(_options = nil)
