@@ -600,3 +600,25 @@ ul.application-types li label {color: white;}
     .side-content {left: 10px;}
     .widget.standalone {width: 270px;}
 }
+
+.votes {
+    button {
+        border: none;
+        outline: none;
+        background-color: #eeeeee;
+        border: 1px solid transparent;
+        color: #588734;
+        border-radius: 20px;
+        opacity: .85;
+        font-size: unset;
+        &:hover {
+            background-color: white;
+            border-color: #eeeeee;
+            opacity: 1;
+        }
+        &.liked {
+            background-color: #588734;
+            color: white;
+        }
+    }
+}
