@@ -23,10 +23,7 @@ class MessagesController < ApplicationController
 
     ThreadRecorder.thread_viewed thread, current_user
 
-    respond_to do |format|
-      format.html { redirect_to thread_path(thread) }
-      format.js { render "messages/created" }
-    end
+    redirect_to thread_path(thread, anchor: helpers.dom_id(message), st: helpers.dom_id(message))
   end
 
   def censor

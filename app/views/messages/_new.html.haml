@@ -63,7 +63,7 @@
         .access-denied= t(".sign_in_to_post_html", sign_in_link: link_to_sign_in)
       - else
         - message = @thread.messages.build
-        - opts = { html: { class: "navigate-away-warning" }, remote: true }
+        - opts = { html: { class: "navigate-away-warning" } }
         = semantic_form_for message, opts.merge(url: thread_messages_path(@thread)) do |f|
           - form_options = { message_form: f, message: message }
           = f.inputs do
