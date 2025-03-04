@@ -2,7 +2,7 @@ production: &solr_prod
   solr:
     hostname: localhost
     port: 8983
-    log_level: WARNING
+    log_level: WARN
     path: /solr/default
     memory: 512M
     read_timeout: 20
@@ -31,5 +31,5 @@ test:
   solr:
     hostname: localhost
     port: 8981
-    log_level: WARNING
+    log_level: WARN
     path: /solr/test
