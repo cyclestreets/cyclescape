@@ -5,7 +5,8 @@
     "jsonpTransportRequired": true,
     "L": true,
     "Cropper": true,
-    "CONSTANTS": true
+    "CONSTANTS": true,
+    "Turbo": true
   },
   "env": {
     "browser": true,

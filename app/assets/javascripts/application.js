@@ -3,7 +3,6 @@
 // be included in the compiled file accessible from http://example.com/assets/application.js
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
-//
 //= require constants
 //= require jquery
 //= require intersection-observer/intersection-observer
@@ -26,8 +25,6 @@
 //= require leaflet-layerjson
 //= require superbly-tagfield.min
 //= require map_display
-//= require ui
-//= require timeago_ui
 //= require tags
 //= require library_message
 //= require thread_scroller
@@ -37,7 +34,6 @@
 //= require jqcloud
 //= require social
 //= require location_preset
-//= require navigate_away_warning
 //= require leaflet_draw_override
 //= require cropperjs/dist/cropper
 //= require image_edit
@@ -48,4 +44,12 @@
 //= require bootstrap
 //= require new_ui
 //= require tooltip
-require('@hotwired/turbo-rails')
+
+import '@hotwired/turbo-rails'
+import { Application } from '@hotwired/stimulus'
+import UiController from 'controllers/ui_controller'
+
+// Start Stimulus and register controllers
+const application = Application.start()
+application.register('ui', UiController)
+Turbo.session.drive = false

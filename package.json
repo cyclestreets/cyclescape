@@ -6,6 +6,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.26.3",
     "@babel/preset-env": "^7.26.7",
     "@benmajor/jquery-touch-events": "^2.0.3",
+    "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "~7",
     "animate.css": "^4.1.1",
     "autosize": "^1.18.13",

@@ -92,5 +92,3 @@ window.initImageEdit = function () {
     upload.dataset.imageeditinit = '1'
   })
 }
-
-$(document).ready(window.initImageEdit)

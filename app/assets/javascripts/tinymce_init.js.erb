@@ -14,8 +14,3 @@ window.tinymceOpts = {
     });
   }
 }
-
-$(window).ready(function () {
-  $("textarea.tinymce").closest("form").find("input:submit").prop('disabled', true)
-  tinyMCE.init(window.tinymceOpts)
-})

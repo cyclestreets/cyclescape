@@ -132,5 +132,3 @@ window.streetViewInit = function () {
 
   domNeedStreetView.each(function (_, el) { observer.observe(el) })
 }
-
-$(document).ready(window.streetViewInit)

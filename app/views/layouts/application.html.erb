@@ -24,7 +24,7 @@
     <% end %>
     <meta content="<%= @site_config.application_name %>" property="og:site_name"/>
   </head>
-  <body class="<%= controller_path.delete_prefix("new_ui/").tr("/_", "-") %>">
+  <body class="<%= controller_path.delete_prefix("new_ui/").tr("/_", "-") %>" data-controller="ui">
     <%= render "layouts/header" %>
     <div id="content">
       <%= yield %>

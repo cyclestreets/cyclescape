@@ -431,6 +431,3 @@ window.leafletMapInit = ->
     domMap = $(mapData)
     new LeafletMap(domMap.data('center'), domMap.data('opts')) unless domMap.data('skip')
     domMap.data("skip", true)
-
-jQuery ->
-  window.leafletMapInit()
