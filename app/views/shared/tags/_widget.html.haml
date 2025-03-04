@@ -1,7 +1,4 @@
 .title
   %i{class: "fas fa-fw fa-hashtag"}
   Tags
-.widget-content
-  %ul{class: "tags"}
-    - resource.tags.each do |tag|
-      %li{class: "tag"}= link_to tag.name, tag_path(tag)
+= render "shared/tags/widget_content", resource: resource

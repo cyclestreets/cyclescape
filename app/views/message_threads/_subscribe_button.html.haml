@@ -7,4 +7,4 @@
   - else
     = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: thread, action: :create), remote: true do |f|
       = f.actions do
-        = f.action :submit, button_html: {class: "btn-green"}
+        = f.action :submit

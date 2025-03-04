@@ -4,8 +4,14 @@
     - voted = current_user ? voters.include?(current_user) : false
     - bs_content = voters.present? ? "<ul class='popover-avatar'> <li>#{voters.map { |usr| policy(usr).show? ? link_to_profile(usr) : usr.display_name_or_anon }.join('</li><li>') } </li></ul>" : ''
     - data = bs_popover(content: bs_content).merge(turbo_method: :post)
-    = button_to vote_link(resource)[voted ? :clear : :up], class: "like animate__animated #{'liked' if voted}", data: data do
-      %i{class: "fas fa-fw fa-thumbs-up"}
-      = voters.size
+    - if current_user
+      = button_to vote_link(resource)[voted ? :clear : :up], class: "like animate__animated #{'liked' if voted}", data: data do
+        %i{class: "fas fa-fw fa-thumbs-up"}
+        = voters.size
+    - else
+      %button{data: data}
+        %i{class: "fas fa-fw fa-thumbs-up"}
+        = voters.size
+
 - if !current_user
   .access-denied= t(".sign_in_to_vote_html", sign_in_link: link_to_sign_in)

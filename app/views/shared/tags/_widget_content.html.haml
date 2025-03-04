@@ -1,0 +1,4 @@
+.widget-content
+  %ul{class: "tags"}
+    - resource.tags.each do |tag|
+      %li{class: "tag"}= link_to tag.name, tag_path(tag)
