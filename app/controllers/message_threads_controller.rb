@@ -45,15 +45,21 @@ class MessageThreadsController < ApplicationController
 
         @subscribers = @subscribers.ordered(thread.group_id).includes(:groups)
       end
-      format.js do
-        initially_loaded_from = Time.zone.iso8601(params["initiallyLoadedFrom"])
+      format.turbo_stream do
+        initially_loaded_from = Time.zone.iso8601(params[:from])
         messages = messages.before_date_with_n_before(before_date: initially_loaded_from, n_before: 40)
 
         @messages = messages.includes(
           *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]
         ).to_a.reverse!
 
-        @initially_loaded_from = @messages.first&.created_at&.iso8601
+        render turbo_stream: [
+          turbo_stream.prepend(
+            :messages,
+            collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
+          ),
+          turbo_stream.replace(:load_more, partial: "message_threads/load_more")
+        ]
       end
     end
   end

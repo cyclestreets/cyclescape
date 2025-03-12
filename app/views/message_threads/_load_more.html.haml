@@ -1,0 +1,7 @@
+= turbo_frame_tag :load_more do
+  - first_message = @messages.first
+  - if first_message && first_message != @thread.messages.approved.first
+    .load-more
+      %i{class: "fa fa-spinner fa-spin"}
+      = link_to thread_path(@thread, from: first_message.created_at.iso8601), data: { turbo_action: "advance", turbo_stream: true, turbo: true } do
+        %p= t "shared.load_more"

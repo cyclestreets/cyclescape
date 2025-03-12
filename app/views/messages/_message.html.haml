@@ -1,8 +1,10 @@
 %li{id: dom_id(message)}
-  .flex
+  .css-grid
     .poster-avatar
       - if policy(message.created_by).view_profile? && message.created_by.profile.picture
         = image_tag message.created_by.profile.picture_thumbnail.url
+      - else
+        %i{class: "fas fa-fw fa-bicycle"}
     .content
       %h3
         - if policy(message.created_by).view_profile?

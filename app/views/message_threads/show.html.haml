@@ -40,9 +40,9 @@
     %p{class: "drop-cap"}= @issue.description
     %hr
     %ul{class: "thread"}
-      %li{class: "load-more"}
-        %p= t "shared.load_more"
-      = render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
+      = render "load_more"
+      = turbo_frame_tag :messages do
+        = render collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
     - if @thread.closed
       - closed_by = policy(@thread.closed_by.last).view_profile? ? link_to_profile(@thread.closed_by.last) : @thread.closed_by.last.display_name_or_anon
       = t '.closed_html', by: closed_by, at: time_ago_in_words(@thread.message_thread_closes.last.created_at)

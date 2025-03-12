@@ -221,22 +221,33 @@ a.read-more-simple {
 
 .load-more {
   display: block;
-  margin: auto;
+  margin: 10px auto;
+  width: 150px;
+  background-color: #EEEEEE;
+  color: #226244;
+  border-radius: 20px;
+  box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);
   text-align: center;
-  font:  {
-    size: 16px;
-    weight: bold;
-  }
-  color: $grey2;
-  width: 120px;
-  padding: 10px;
-  border: 1px solid $paneborder;
-  border-radius: 2px;
+  padding: 10px 0;
   &:hover {
-    color: $grey2;
-    background: $pane1;
-    text-decoration: none;
+    background-color: #FFFFFF;
   }
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+  }
+  i {
+    display: none;
+  }
+}
+
+[aria-busy="true"] .load-more a {
+  display: none;
+}
+
+[aria-busy="true"] .load-more i {
+  display: inline-block;
 }
 
 .fancy-down-arrow {
