@@ -24,9 +24,9 @@
 //= require leaflet-layerjson
 //= require superbly-tagfield.min
 //= require map_display
-//= require tags
 //= require library_message
 //= require jquery.tagsinput
+//= require tags
 //= require jquery-ui-sliderAccess
 //= require jquery-ui-timepicker-addon.min
 //= require jqcloud
