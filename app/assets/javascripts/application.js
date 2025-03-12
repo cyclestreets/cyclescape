@@ -26,7 +26,6 @@
 //= require map_display
 //= require tags
 //= require library_message
-//= require thread_scroller
 //= require jquery.tagsinput
 //= require jquery-ui-sliderAccess
 //= require jquery-ui-timepicker-addon.min
