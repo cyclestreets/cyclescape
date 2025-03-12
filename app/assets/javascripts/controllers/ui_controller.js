@@ -12,8 +12,7 @@ export default class extends Controller {
     window.streetViewInit()
     window.initImageEdit()
     $('time.timeago').timeago()
-    FontAwesome.dom.i2svg()
-    $("textarea.tinymce").closest("form").find("input:submit").prop('disabled', true)
+    $('textarea.tinymce').closest('form').find('input:submit').prop('disabled', true)
     tinyMCE.init(window.tinymceOpts)
   }
 
@@ -167,16 +166,19 @@ export default class extends Controller {
     // Autosize text areas, but only with the right CSS class
     $('textarea.autosize').autosize()
 
-    const copyFrom = function (copyToEl) {
-      if (copyToEl.data('touched')) { return }
-      copyToEl.val(this.value)
+    const copyFrom = function (toEl) {
+      return function () {
+        if (toEl.data('touched')) { return }
+        toEl.val(this.value)
+      }
     }
 
     $('[data-copyfromid]').each(function () {
-      const copyToEl = $(this)
-      if (!!copyToEl.val()) { copyToEl.data('touched', true); }
-      copyToEl.on('propertychange change keyup input paste', () => copyToEl.data('touched', true))
-      $(copyToEl.data('copyfromid')).on('propertychange change click keyup input paste', copyFrom(copyToEl))
+      const toEl = $(this)
+      const fromEl = $(toEl.data('copyfromid'))
+      if (toEl.val()) { toEl.data('touched', true) }
+      toEl.on('propertychange change keyup input paste', () => toEl.data('touched', true))
+      fromEl.on('propertychange change click keyup input paste', copyFrom(toEl))
     })
   }
 

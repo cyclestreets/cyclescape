@@ -6,7 +6,8 @@
     "L": true,
     "Cropper": true,
     "CONSTANTS": true,
-    "Turbo": true
+    "Turbo": true,
+    "tinyMCE": true
   },
   "env": {
     "browser": true,
