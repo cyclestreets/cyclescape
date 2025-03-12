@@ -32,7 +32,7 @@ class MessageThreadsController < ApplicationController
         messages = messages.after_date_with_n_before(after_date: last_viewed, n_before: 10) if last_viewed
 
         @messages = messages.includes(
-          *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]
+          *Message::COMPONENT_TYPES, :completing_action_messages, :votes, created_by: %i[profile memberships groups membership_requests]
         )
 
         if last_viewed

@@ -1,4 +1,4 @@
-- committee = !leading && @thread&.group_committee_members.include?(user)
+- committee = !leading && committee_members.include?(user)
 - popover_data = ''
 - popover_data = bs_popover(content: "<i class='far fa-user-crown'></i> Discussion leader") if leading
 - popover_data = bs_popover(content: "<i class='far fa-users'></i> Committee") if committee
