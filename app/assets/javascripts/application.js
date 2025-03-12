@@ -15,7 +15,6 @@
 //= require jquery-ui/slider
 //= require cocoon
 //= require js-cookie/src/js.cookie
-//= require cocoon_fields
 //= require timeago
 //= require tinymce
 //= require tinymce_init
@@ -48,8 +47,10 @@
 import '@hotwired/turbo-rails'
 import { Application } from '@hotwired/stimulus'
 import UiController from 'controllers/ui_controller'
+import PollOptionsController from 'controllers/poll_options_controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
 application.register('ui', UiController)
+application.register('pollOptions', PollOptionsController)
 Turbo.session.drive = false
