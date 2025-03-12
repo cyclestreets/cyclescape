@@ -24,6 +24,8 @@
 //= require leaflet-layerjson
 //= require superbly-tagfield.min
 //= require map_display
+//= require knockout
+//= require slick-carousel
 //= require library_message
 //= require jquery.tagsinput
 //= require tags
@@ -37,7 +39,6 @@
 //= require image_edit
 //= require ajax_file_upload
 //= require street_view
-
 //= require popper
 //= require bootstrap
 //= require new_ui
