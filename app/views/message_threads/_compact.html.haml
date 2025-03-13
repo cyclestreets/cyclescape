@@ -1,5 +1,5 @@
-%h3.drop-cap= link_to_if policy(thread).show?, thread.title, thread_path(thread), class: "primary-link"
-%p
+%li
+  %h3.drop-cap= link_to_if policy(thread).show?, thread.title, thread_path(thread), class: "primary-link"
   - if thread.group
     = link_to_profile(thread.group)
     %br
