@@ -1,4 +1,4 @@
-form input, form textarea {
+form input:not([type='search']), form textarea {
   padding: 10px;
   outline: none;
   border: 1px solid #eeeeee;

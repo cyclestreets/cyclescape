@@ -176,9 +176,6 @@ body.libraries {
   .head {
     @include column($full-span);
   }
-//  .search {
-//    @include column($full-span);
-//  }
   ul.library-selector {
     @include column(6);
     @include push(1);

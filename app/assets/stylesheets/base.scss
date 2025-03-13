@@ -1,15 +1,5 @@
 /* 2. BASIC TYPOGRAPHY, LINKS, BUTTONS, LISTS AND IMAGES
 -------------------------------------------------------------- */
-body {
-  background: $pane1;
-  // default highlight on buttons links etc
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-  // Prevent mobile zooming while remain desktop zooming.
-  // github.com/shichuan/mobile-html5-boilerplate/issues/closed#issue/14
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: none;
-}
-
 // type
 body {
   font-family: "Liberation Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;

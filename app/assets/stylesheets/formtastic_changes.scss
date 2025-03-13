@@ -25,7 +25,7 @@ form.formtastic fieldset > ol {
     padding: 2px;
   }
   > li {
-    &.string, &.password, &.numeric, &.email, &.url, &.phone, &.search {
+    &.string, &.password, &.numeric, &.email, &.url, &.phone {
       input {
         width: 70%;
       }
