@@ -79,27 +79,6 @@ export default class extends Controller {
       $(this).find('.collapse').slideUp
     ).find('.collapse').hide()
 
-    window.dateTimeInit = function () {
-      const dateTimeOpts = {
-        dateFormat: 'dd-mm-yy',
-        stepMinute: 15,
-        firstDay: 1,
-        showButtonPanel: false,
-        minDateTime: new Date((new(Date)).setMinutes(0))
-      }
-
-      // Apply date selector to all date inputs
-      $(':input.date').datetimepicker(dateTimeOpts)
-
-      return $('.all-day:input').change(function () {
-        dateTimeOpts.showTimepicker = !$(this).is(':checked')
-        dateTimeOpts.timeFormat = ($(this).is(':checked')) ? '' : 'HH:mm'
-
-        $(':input.date').datetimepicker('destroy').datetimepicker(dateTimeOpts)
-      })
-    }
-    window.dateTimeInit()
-
     // Automatic setting of values and visibility from select drop-downs
     const AutoSet = {
       selector: 'select',

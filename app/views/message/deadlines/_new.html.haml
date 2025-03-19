@@ -1,4 +1,4 @@
-#new-deadline-message.pane
+#new-deadline-message.pane{ data: { controller: "date-time-picker" } }
   - deadline = message.deadline_messages.build
   = message_form.semantic_fields_for :deadline_messages, deadline do |f|
     = f.inputs do

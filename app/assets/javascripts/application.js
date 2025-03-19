@@ -49,10 +49,12 @@ import { Application } from '@hotwired/stimulus'
 import UiController from 'controllers/ui-controller'
 import PollOptionsController from 'controllers/poll-options-controller'
 import MapLayerToggleController from 'controllers/map-layer-toggle-controller'
+import DateTimePickerController from 'controllers/date-time-picker-controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
 application.register('ui', UiController)
 application.register('poll-options', PollOptionsController)
 application.register('map-layer-toggle', MapLayerToggleController)
+application.register('date-time-picker', DateTimePickerController)
 Turbo.session.drive = false
