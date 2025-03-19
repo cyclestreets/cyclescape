@@ -46,11 +46,11 @@
 
 import '@hotwired/turbo-rails'
 import { Application } from '@hotwired/stimulus'
-import UiController from 'controllers/ui_controller'
-import PollOptionsController from 'controllers/poll_options_controller'
+import UiController from 'controllers/ui-controller'
+import PollOptionsController from 'controllers/poll-options-controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
 application.register('ui', UiController)
-application.register('pollOptions', PollOptionsController)
+application.register('poll-options', PollOptionsController)
 Turbo.session.drive = false
