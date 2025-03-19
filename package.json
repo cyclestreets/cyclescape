@@ -13,7 +13,6 @@
     "babelify": "10.0.0",
     "browserify": "^14.5.0",
     "browserify-incremental": "^3.1.0",
-    "coffeeify": "~0.6",
     "cropperjs": "^1.5.11",
     "intersection-observer": "^0.11.0",
     "jquery-touch-events": "^1.0.7",

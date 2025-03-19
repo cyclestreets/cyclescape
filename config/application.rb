@@ -121,7 +121,7 @@ module Cyclescape
     # Command line options used when running browserify
     #
     # can be provided as a string:
-    config.browserify_rails.commandline_options = "-t coffeeify --extension=\".js.coffee\" -t [ babelify --global --presets [ @babel/preset-env ] --plugins [ @babel/plugin-transform-modules-commonjs ] --sourceType unambiguous  ]"
+    config.browserify_rails.commandline_options = "-t [ babelify --global --presets [ @babel/preset-env ] --plugins [ @babel/plugin-transform-modules-commonjs ] --sourceType unambiguous  ]"
 
     # Define NODE_ENV to be used with envify
     #

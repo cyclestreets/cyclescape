@@ -43,7 +43,6 @@ $(document).ready(function () {
         url: '/api/issues',
         // jshint camelcase: false
         data: { geo_collection: geoCollection, start_date: date.toJSON() },
-        dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
         timeout: 10000,
         success: updateNosIssues
       });
@@ -123,7 +122,6 @@ $(document).ready(function () {
       var params = {
         // jshint camelcase: false
         data: { bbox: map.map.getBounds().toBBoxString(), per_page: 4 },
-        dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
         timeout: 10000
       };
 
@@ -185,7 +183,6 @@ $(document).ready(function () {
         ];
         $.ajax({
           url: 'https://www.cyclestreets.net/api/journey.json?' + $.param(params),
-          dataType: jsonpTransportRequired() ? 'jsonp' : void 0,
           timeout: 10000,
           success: function(json) {
             var route = L.polyline([]), points, p, pLen;

@@ -83,7 +83,6 @@ gem "rack-cors", require: "rack/cors"
 gem "rakismet"
 gem "rollbar"
 
-gem "coffee-rails"
 gem "jquery-ui-rails", "~> 5.0.0"
 gem "sassc-rails"
 gem 'turbo-rails'

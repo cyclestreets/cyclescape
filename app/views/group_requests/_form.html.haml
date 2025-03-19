@@ -9,10 +9,11 @@
   = f.actions do
     = f.action :submit, button_html: {class: "btn-green submit", data: { disable_with: t("formtastic.actions.saving") }}
 
-:coffeescript
-  shortName = $('#group_request_short_name')
-  shortName.after $('<input id="group_request_webname" readonly disabled style="width:200px">')
-  $('#group_request_webname').val(".#{request.domain}")
+:javascript
+  const shortName = $('#group_request_short_name');
+  shortName.after($('<input id="group_request_webname" readonly disabled style="width:200px">'));
+  $('#group_request_webname').val(`.${request.domain}`);
 
-  shortName.bind 'keypress keyup input', ->
-    $('#group_request_webname').val(@.value + ".#{request.domain}")
+  shortName.bind('keypress keyup input', function() {
+    $('#group_request_webname').val(this.value + `.${request.domain}`);
+  });
