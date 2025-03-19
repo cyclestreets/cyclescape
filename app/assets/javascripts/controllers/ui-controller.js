@@ -17,46 +17,8 @@ export default class extends Controller {
   }
 
   initialize () {
-    $('#issue_start_discussion').change(function (evt) {
-      const form = $('[data="start-discussion-form"]')
-      const btn = $(form).parent().find('input[type=submit]')
-      if (evt.target.checked) {
-        form.show()
-        btn.prop('value', btn.data('startDiscussion'))
-      } else {
-        form.hide()
-        btn.prop('value', btn.data('noDiscussion'))
-      }
-    })
-
     // Tabs
     $('.tabs').parent().tabs()
-
-    const unviewedPrivateCount = $('#unviewed-pm-count')
-
-    const updatePmCount = function (count) {
-      if (count > 0) {
-        unviewedPrivateCount.text(count).addClass('text-image-overlay');
-      } else {
-        unviewedPrivateCount.removeClass('text-image-overlay');
-      }
-    }
-
-    if (unviewedPrivateCount[0]) {
-      updatePmCount(Cookies.get('unviewed_private_count'));
-      const getPmCount = () => $.ajax({
-        type: 'GET',
-        url: '/private_messages',
-        dataType: 'json',
-        success (data) {
-          Cookies.set('unviewed_private_count', data.count);
-          updatePmCount(data.count);
-        }
-      })
-
-      setTimeout(getPmCount, 5000)
-      setTimeout(getPmCount, 20000)
-    }
 
     $(document).on('keypress', 'input.search-input', function (event) {
       // do not submit from when searching
@@ -173,7 +135,7 @@ export default class extends Controller {
         let isClean = true
 
         formEl.find(':input').each(function () {
-          var initialValue = $(this).data('initialValue')
+          const initialValue = $(this).data('initialValue')
           if (initialValue && initialValue !== $(this).val()) {
             isClean = false
           }
@@ -185,7 +147,7 @@ export default class extends Controller {
         // If we haven't been passed the event get the window.event
         e = e || window.event
 
-        var message = CONSTANTS.i18n.navigateAwayWarning
+        const message = CONSTANTS.i18n.navigateAwayWarning
 
         // For IE6-8 and Firefox prior to version 4
         if (e) {

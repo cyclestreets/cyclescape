@@ -50,6 +50,7 @@ import UiController from 'controllers/ui-controller'
 import PollOptionsController from 'controllers/poll-options-controller'
 import MapLayerToggleController from 'controllers/map-layer-toggle-controller'
 import DateTimePickerController from 'controllers/date-time-picker-controller'
+import PmCountController from 'controllers/pm-count-controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
@@ -57,4 +58,5 @@ application.register('ui', UiController)
 application.register('poll-options', PollOptionsController)
 application.register('map-layer-toggle', MapLayerToggleController)
 application.register('date-time-picker', DateTimePickerController)
+application.register('pm-count', PmCountController)
 Turbo.session.drive = false

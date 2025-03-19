@@ -49,6 +49,9 @@
           <li><i class="fas fa-fw fa-users-cog"></i><%= t(".membership") %></li>
         <% end %>
       <% end %>
+      <%= link_to user_private_messages_path(current_user) do %>
+        <li data-controller="pm-count"><i class="fas fa-fw fa-envelope"><span class="private-message-counter" data-pm-count-target="count" hidden></span></i><%= t(".private_messages") %></li>
+      <% end %>
       <%= link_to current_user_profile_path do %>
         <li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
       <% end %>
