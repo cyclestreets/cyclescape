@@ -91,8 +91,8 @@
         %p
           = t '.reply_by'
           = email_message @thread.latest_message
-    #from-library.pane
-      .scrollable
+    #from-library.pane{data: { controller: "library-message" }}
+      .scrollable{style: "width: 600px"}
         %div
           .listing
             = form_tag search_library_path, {method: :get, class: "library-search filters", target: "#library-results", remote: true} do
@@ -108,7 +108,7 @@
               .library-results.hide#library-results
                 %h3
                   = t ".search_results"
-                %ul.content-icon-list(data-bind="template: {name: 'library-item-template', foreach: search_results() }")
+                %ul.content-icon-list(data-bind="template: {name: 'library-item-template', foreach: results() }")
 
         %div
           #add-library-item
@@ -116,7 +116,7 @@
               = t ".add_item_to_thread"
             %a.prev.btn-grey
               = t ".back"
-            .library-content(data-bind="template: {name: 'library-item-selected', foreach: selected()}")
+            .library-content(data-bind="template: {name: 'library-item-selected', foreach: selected_item()}")
 
   - if policy(@thread).close?
     .pull-right= button_to t(".close"), close_thread_path(@thread), method: :put, class: 'btn-green part-hidden', data: { confirm: t("are_you_sure") }

@@ -26,7 +26,6 @@
 //= require map_display
 //= require knockout
 //= require slick-carousel
-//= require library_message
 //= require jquery.tagsinput
 //= require tags
 //= require jquery-ui-sliderAccess
@@ -51,6 +50,7 @@ import PollOptionsController from 'controllers/poll-options-controller'
 import MapLayerToggleController from 'controllers/map-layer-toggle-controller'
 import DateTimePickerController from 'controllers/date-time-picker-controller'
 import PmCountController from 'controllers/pm-count-controller'
+import LibraryMessageController from 'controllers/library-message-controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
@@ -59,4 +59,5 @@ application.register('poll-options', PollOptionsController)
 application.register('map-layer-toggle', MapLayerToggleController)
 application.register('date-time-picker', DateTimePickerController)
 application.register('pm-count', PmCountController)
+application.register('library-message', LibraryMessageController)
 Turbo.session.drive = false
