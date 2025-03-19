@@ -32,12 +32,12 @@
       %section.external_url
         = link_to @issue.external_url, @issue.external_url
 
-  %section.map
+  %section.map{data: { controller: "map-layer-toggle" } }
     %h2= t ".location"
     .pull-right
-      = check_box_tag('collisions')
+      = check_box_tag('collisions', data: { map_layer_toggle_target: 'collisions' })
       = label_tag 'collisions', t('.show_collisions')
-      = check_box_tag('photos')
+      = check_box_tag('photos', data: { map_layer_toggle_target: 'photos' })
       = label_tag 'photos', t('.show_photos')
     %div{id: 'map'}
     .hidden
@@ -67,21 +67,3 @@
       %section.photos.issue-photo
         = link_to issue_photo_path(@issue), target: "_blank" do
           = image_tag @issue.photo_sidebar.url
-
-:javascript
-  $( document ).ready(function() {
-    var updateMap = function (mapEl, checkboxEl) {
-      mapEl.change(function() {
-        checkboxEl.prop('checked', this.checked);
-      });
-      checkboxEl.change(function() {
-        mapEl.click();
-      });
-    };
-    var layers = [{ map: $("span:contains('Collisions')").prev(), checkbox: $('#collisions') },
-                  { map: $("span:contains('Photos')").prev(), checkbox: $('#photos') }];
-
-    for ( var i = 0; i < layers.length; i++) {
-      updateMap(layers[i].map, layers[i].checkbox);
-    }
-  })
