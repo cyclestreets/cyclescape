@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "poll_#{@poll_option.poll_message_id}" do %>
+  <%= render 'message/polls/show', component: @poll_option.poll_message %>
+<% end %>

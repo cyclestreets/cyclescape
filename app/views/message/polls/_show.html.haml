@@ -1,16 +1,15 @@
-.poll-message
-  = component.question
-  - if current_user
-    = semantic_form_for(current_user.poll_votes.joins(:poll_option).find_by(poll_options: {poll_message: component}) || current_user.poll_votes.build, url: vote_thread_poll_path(component.message.thread, component),
-      remote: true,
-      html: { method: :put, id: "message-poll-#{component.id}" }) do |f|
-      = f.inputs do
-        = f.input(:poll_option,
-          label: false,
-          as: :radio,
-          collection: component.poll_options.order(:id).includes(:poll_votes).map { |opt| ["#{opt.option} [#{t('.votes', count: opt.poll_votes.size)}]", opt.id] },
-          input_html: { onchange: "Rails.fire(document.getElementById('message-poll-#{component.id}'), 'submit')" })
-  - else
-    %ul
-      - component.poll_options.order(:id).includes(:poll_votes).each do |opt|
-        %li= "#{opt.option} [#{t('.votes', count: opt.poll_votes.size)}]"
+= turbo_frame_tag "poll_#{component.id}" do
+  .poll-message
+    = component.question
+    - if current_user
+      = semantic_form_for(current_user.poll_votes.joins(:poll_option).find_by(poll_options: {poll_message: component}) || current_user.poll_votes.build, url: vote_thread_poll_path(component.message.thread, component), data: { turbo: true }) do |f|
+        = f.inputs do
+          = f.input(:poll_option,
+            label: false,
+            as: :radio,
+            collection: component.poll_options.order(:id).includes(:poll_votes).map { |opt| ["#{opt.option} [#{t('.votes', count: opt.poll_votes.size)}]", opt.id] },
+            input_html: { onchange: "this.form.requestSubmit()" })
+    - else
+      %ul
+        - component.poll_options.order(:id).includes(:poll_votes).each do |opt|
+          %li= "#{opt.option} [#{t('.votes', count: opt.poll_votes.size)}]"

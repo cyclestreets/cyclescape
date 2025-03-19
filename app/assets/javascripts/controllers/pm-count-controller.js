@@ -25,7 +25,6 @@ export default class extends Controller {
       url: '/private_messages',
       dataType: 'json',
       success: (data) => {
-        console.log('Connected to pm-count-controller')
         Cookies.set('unviewed_private_count', data.count)
         this.updatePmCount(data.count)
       }

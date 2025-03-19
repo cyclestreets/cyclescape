@@ -127,7 +127,7 @@ Rails.application.routes.draw do
       resources :library_items, only: [:create]
       resources :documents, only: %i[show]
       resources :polls, only: [] do
-        put :vote, on: :member
+        patch :vote, on: :member
       end
     end
 
