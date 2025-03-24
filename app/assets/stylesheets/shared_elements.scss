@@ -196,7 +196,7 @@ ul.thread-list {
   @include list-reset-soft;
   margin: 20px 0;
   border-top: 3px solid $grey;
-  li {
+  > li {
     padding: 20px 0;
     border-bottom: 3px solid $grey;
     overflow: hidden;
