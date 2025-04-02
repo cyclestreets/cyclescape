@@ -6,7 +6,7 @@ class MessagePolicy < GuestsAllowedPolicy
   end
 
   def censor?
-    user && in_group_committee?
+    user && in_group_committee? && !record.censored?
   end
   alias approve? censor?
   alias reject? censor?
