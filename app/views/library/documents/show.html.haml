@@ -1,27 +1,23 @@
-%article.library.document
-  %header
-    %h1= @document.title
-    - if policy(@document).edit?
-      %menu.tools
+.title-wrapper
+  .section-title
+    %h1
+      %i{class: "fas fa-fw fa-book-open"}
+      = @document.title
+    = bs_menu(placement: "bottom") do
+      - if policy(@document).edit?
         %ul
           %li= link_to t(".edit"), edit_library_document_path(@document)
-  %section.meta
+
+.content-wrapper
+  .main-content
     %p
       - if policy(@document.created_by).view_profile?
         - profile_link = link_to_profile @document.created_by
       - else
         - profile_link = @document.created_by.display_name_or_anon
       = t ".added_by_html", name: profile_link, time: formatted_created_at(@document)
-  %section.tags
-    = @tag_panel.render
-  %section.document
-    = @item.icon
-    %h3
-      = link_to t(".download"), @document.file.url
-      = "(#{number_to_human_size(@document.file_size)})"
-  %section.notes
-    %h2= t ".notes"
-    - if @notes
+    - if @notes.present?
+      %h2= t ".notes"
       %ul.library-list
         - @notes.each do |item|
           %li
@@ -29,23 +25,31 @@
             .lib-content
               = render partial: "library/notes/note", locals: { note: item.component }
             .meta
-              = item.created_at
-%aside#sidebar
-  %section.threads
-    %h2= t ".public_threads"
-    - unless @threads.empty?
-      %p= t ".threads_explanation"
-      %ul.sidebar-threadlist
-        = render partial: "message_threads/compact", collection: @threads, as: :thread
-    - else
-      %p= t ".no_threads"
-  %section.new_note.box
-    %h2= t ".attach_note"
-    %p= t ".attach_note_instructions_html"
-    .form
-      = semantic_form_for @note do |f|
-        = f.inputs do
-          = f.input :body, input_html: { rows: 10 }
-          = f.input :library_document_id, as: :hidden
-        = f.actions do
-          = f.action :submit, label: :attach_to_document
+              = formatted_created_at(item)
+
+    = @item.icon
+    %h3
+      = link_to t(".download"), @document.file.url
+      = "(#{number_to_human_size(@document.file_size)})"
+  .side-content
+    .widget
+      = render "shared/tags/widget", resource: @document.item
+    .widget
+      .title
+        = t ".public_threads"
+      - unless @threads.empty?
+        %p= t ".threads_explanation"
+        %ul.sidebar-threadlist
+          = render partial: "message_threads/compact", collection: @threads, as: :thread
+      - else
+        %p= t ".no_threads"
+    .widget
+      .title= t ".attach_note"
+      %p= t ".attach_note_instructions_html"
+      .form
+        = semantic_form_for @note do |f|
+          = f.inputs do
+            = f.input :body, input_html: { rows: 10 }
+            = f.input :library_document_id, as: :hidden
+          = f.actions do
+            = f.action :submit, label: :attach_to_document

@@ -1,11 +1,14 @@
-%article.library.note
-  %header
-    %h1= @note.title
-    - if policy(@note).edit?
-      %menu.tools
+.title-wrapper
+  .section-title
+    %h1
+      %i{class: "fas fa-fw fa-book-open"}
+      = @note.title
+    = bs_menu(placement: "bottom") do
+      - if policy(@note).edit?
         %ul
           %li= link_to t(".edit"), edit_library_note_path(@note)
-  %section.meta
+.content-wrapper
+  .main-content
     %p
       - if policy(@note.created_by).view_profile?
         - profile_link = link_to_profile @note.created_by
@@ -14,18 +17,18 @@
       = t ".added_by_html", name: profile_link, time: formatted_created_at(@note)
     - if @note.document
       %p= t ".note_on_document_html", document: link_to(@note.document.title, @note.document)
-  %section.tags
-    = @tag_panel.render
-  %section.note
+    %hr
     = @item.icon
     = render partial: "note", locals: { note: @note }
-
-%aside#sidebar
-  %section.threads
-    %h2= t ".public_threads"
-    - unless @threads.empty?
-      %p= t ".threads_explanation"
-      %ul.sidebar-threadlist
-        = render partial: "message_threads/compact", collection: @threads, as: :thread
-    - else
-      %p= t ".no_threads"
+  .side-content
+    .widget
+      = render "shared/tags/widget", resource: @note.item
+    .widget
+      .title
+        = t ".public_threads"
+      - unless @threads.empty?
+        %p= t ".threads_explanation"
+        %ul.sidebar-threadlist
+          = render partial: "message_threads/compact", collection: @threads, as: :thread
+      - else
+        %p= t ".no_threads"
