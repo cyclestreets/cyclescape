@@ -988,8 +988,6 @@ es-MX:
       private_html: Private Message between %{creator} and %{message_to}.
       public_message: 'Public: Everyone can view this thread and post messages.'
       thread: Thread
-    subscribe_panel:
-      subscribed: You are following this thread.
     subscribers_panel:
       owner: Owner
       subscribers: Following this thread

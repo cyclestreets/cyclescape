@@ -1,10 +1,13 @@
-%div{ id: "subscribe_#{thread.id}"}
+- frame_id = "thread_subscription_#{thread.id}"
+= turbo_frame_tag frame_id do
   - if signed_in? && current_user.subscribed_to_thread?(thread, all_subscriptions: @user_subscriptions)
     - subscription = current_user.thread_subscriptions.to(thread)
-    = semantic_form_for subscription, url: thread_subscription_path(thread, subscription, action: :destroy), remote: true, method: :delete do |f|
-      = f.actions do
-        = f.action :submit, label: :delete_from_listing, button_html: {class: "btn-grey btn-unsubscribe"}
+    = form_with model: subscription,
+      url: thread_subscription_path(thread, subscription),
+      method: :delete,
+      data: { turbo_frame: frame_id },
+      class: "unsubscribe-form" do |f|
+      = f.submit label: :delete, class: "btn-grey btn-unsubscribe"
   - else
-    = semantic_form_for ThreadSubscription.new, url: thread_subscriptions_path(thread_id: thread, action: :create), remote: true do |f|
-      = f.actions do
-        = f.action :submit
+    = form_with model: ThreadSubscription.new, url: thread_subscriptions_path(thread_id: thread), data: { turbo_frame: frame_id } do |f|
+      = f.submit

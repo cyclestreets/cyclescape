@@ -1,4 +1,9 @@
 "en-GB":
+  helpers:
+    submit:
+      thread_subscription:
+        create: Follow
+        update: Unfollow
   cancel: Cancel
   formtastic:
     labels:
@@ -240,7 +245,3 @@
         create: Save this location
       user_profile:
         create: Save
-      thread_subscription:
-        create: Follow
-        delete: Unfollow
-        delete_from_listing: Unfollow

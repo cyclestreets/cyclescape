@@ -1,0 +1,3 @@
+<%= turbo_stream.update "thread_subscription_#{@thread.id}" do %>
+  <%= render partial: "message_threads/subscribe_button", locals: { thread: @thread } %>
+<% end %>

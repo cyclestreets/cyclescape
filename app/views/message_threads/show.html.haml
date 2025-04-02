@@ -59,7 +59,7 @@
         = render "shared/tags/widget", resource: @issue
     = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
     .widget
-      = render "subscribe_panel", thread: @thread
+      = render "subscribe_button", thread: @thread, show_subscribed: true
     - if @issue
       .widget
         .title

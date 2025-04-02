@@ -18,7 +18,7 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
         set_flash_message :failure
       end
       format.html { redirect_to thread_path @thread }
-      format.js   {}
+      format.turbo_stream {}
     end
   end
 
@@ -35,7 +35,7 @@ class MessageThread::SubscriptionsController < MessageThread::BaseController
           redirect_to thread_path @thread
         end
       end
-      format.js {}
+      format.turbo_stream {}
     end
   end
 
