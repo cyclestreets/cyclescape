@@ -103,6 +103,7 @@ end
 
 group :development do
   gem "annotate", require: false
+  gem "binding_of_caller"
   gem "better_errors"
   gem "bullet"
   gem "letter_opener"
