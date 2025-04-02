@@ -1069,6 +1069,7 @@
       edit_preferences: Subscription Preferences
       my_locations: My Locations
       update_account: Update My Account Details
+      send_private_message: Send private message
     permission_denied:
       login: Login?
       committee_only_html: This discussion is for committee only members of %{group_link}
@@ -1273,7 +1274,6 @@
         user_profile: User Profile
         website_label: 'Web site:'
         full_name: Full Name
-        send_private_message: Send private message
       update:
         success: Profile Updated
   user_locations:
