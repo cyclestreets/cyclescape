@@ -33,9 +33,14 @@
           - if message.completing_action_messages.to_a.present?
             = render "shared/resolves_actions", actions: message.completing_action_messages
   .post-actions
-    - if policy(message).censor? # TODO re-add `|| library_type_for(message)`
-      %menu.tools
-        %ul
-          - if policy(message).censor?
-            %li= link_to t(".censor"), censor_thread_message_path(thread, message), method: :put
+    = bs_menu(p_class: nil) do
+      %ul
+        - if policy(message).censor?
+          %li
+            - form_id = "censor_#{dom_id(message)}"
+            - onclick = "document.getElementById(\"#{form_id.strip}\").click();"
+            = form_with url: censor_thread_message_path(thread, message), method: :put, data: { turbo: false } do |form|
+              = form.submit id: form_id, hidden: true
+            %a{href: "#", onclick: onclick}
+              = t(".censor")
     = render partial: "shared/votable", locals: { resource: message }

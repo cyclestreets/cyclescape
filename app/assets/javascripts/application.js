@@ -42,6 +42,14 @@
 //= require bootstrap
 //= require new_ui
 //= require tooltip
+//
+bootstrap.Tooltip.Default.allowList['*'] = ['*']
+bootstrap.Tooltip.Default.sanitizeFn = (content) => content
+bootstrap.Tooltip.Default.sanitize = false
+
+bootstrap.Popover.Default.allowList['*'] = ['*']
+bootstrap.Popover.Default.sanitizeFn = (content) => content
+bootstrap.Popover.Default.sanitize = false
 
 import '@hotwired/turbo-rails'
 import { Application } from '@hotwired/stimulus'

@@ -45,11 +45,23 @@ module ApplicationHelper
     link_to commit, url
   end
 
-  def bs_popover(container: "body", toggle: "popover", trigger: "hover", html: "true", placement: "top", content:)
+  def bs_popover(container: "body", toggle: "popover", trigger: "hover", html: "true", placement: "top", delay: 0, content:)
     {
-      "bs-container" => container, "bs-toggle" => toggle, "bs-trigger" => trigger,
+      "bs-container" => container, "bs-toggle" => toggle, "bs-trigger" => trigger, bs_delay: delay,
       "bs-html" => html, "bs-placement" => placement, "bs-content" => content
     }
+  end
+
+  def bs_menu(p_class: "badge", placement: "auto", &content)
+    menu = capture(&content)
+    return unless menu.include?("<li>")
+
+    content_tag(
+      :p,
+      content_tag(:i, nil, class: "fas fa-fw fa-cog"),
+      class: p_class,
+      data: bs_popover(content: menu, placement:, delay: '{ "show": 0, "hide": 2000 }')
+    )
   end
 
   def email_message(message)

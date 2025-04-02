@@ -131,6 +131,8 @@ ul {
         align-self: flex-end;
         margin: 5px 0 0 auto;
         text-align: end;
+        display: flex;
+        gap: 10px;
       }
       &.reply {
         .content {

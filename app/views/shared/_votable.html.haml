@@ -2,7 +2,15 @@
   .votes
     - voters = resource.voters_who_voted
     - voted = current_user ? voters.include?(current_user) : false
-    - bs_content = voters.present? ? "<ul class='popover-avatar'> <li>#{voters.map { |usr| policy(usr).show? ? link_to_profile(usr) : usr.display_name_or_anon }.join('</li><li>') } </li></ul>" : ''
+    - bs_content = capture do
+      - if voters.present?
+        %ul.popover-avatar
+          %li
+            - voters.each do |usr|
+              - if policy(usr).show?
+                = link_to_profile(usr)
+              - else
+                = usr.display_name_or_anon
     - data = bs_popover(content: bs_content).merge(turbo_method: :post)
     - if current_user
       = button_to vote_link(resource)[voted ? :clear : :up], class: "like animate__animated #{'liked' if voted}", data: data do

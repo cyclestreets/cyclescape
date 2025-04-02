@@ -11,7 +11,8 @@
     "Cropper": true,
     "CONSTANTS": true,
     "Turbo": true,
-    "tinyMCE": true
+    "tinyMCE": true,
+    "bootstrap": true,
   },
   "env": {
     "es6": true,

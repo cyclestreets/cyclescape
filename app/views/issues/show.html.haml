@@ -1,8 +1,10 @@
 %article.issue.content-wide-sidebar
-  %header
-    %h1= @issue.title
-    - if policy(@issue).edit? || policy(@issue).destroy?
-      %menu.tools
+  .title-wrapper
+    .section-title
+      %h1{style: "border: none"}
+        %i{class: "fas fa-fw fa-hashtag"}
+        = @issue.title
+      = bs_menu(placement: "bottom") do
         %ul
           - if policy(@issue).edit?
             %li= link_to t(".edit_issue"), edit_issue_path(@issue)
