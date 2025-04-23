@@ -27,7 +27,7 @@
 
     var createOrUpdateErrorCount = function(errorEl, count) {
       if (errorEl.html().indexOf("[") === -1) {
-        errorEl.append(". ", title.data().error, title.attr("maxlength"), " [", count, "]");
+        errorEl.append(title.data().error, title.attr("maxlength"), " [", count, "]");
       } else {
         errorEl.html(errorEl.html().replace(/\[.*?\]/g, "[" + count + "]") );
       }

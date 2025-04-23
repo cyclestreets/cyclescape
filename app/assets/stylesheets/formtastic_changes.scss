@@ -33,12 +33,19 @@ form.formtastic fieldset > ol {
   }
 }
 
+.formtastic .inline-errors {
+  margin:0;
+}
+
 // Fieldset widths
 form.formtastic {
   &#new_message {
     fieldset {
       width: 100%;
     }
+  }
+  fieldset.inputs {
+    width: 100%;
   }
   fieldset.actions {
     padding-left: 14%;
