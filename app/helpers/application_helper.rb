@@ -112,6 +112,16 @@ module ApplicationHelper
     end
   end
 
+  def thread_display_title(thread)
+    state, title = thread.display_title
+    safe_join(
+      [
+        content_tag(:span, state, class: "status"),
+        content_tag(:span, title, class: "title")
+      ], " "
+    )
+  end
+
   # used to turn references to threads into hyperlinks
   #
   # examples for threads:

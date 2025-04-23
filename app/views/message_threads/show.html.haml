@@ -2,7 +2,7 @@
   .section-title
     %h1
       %i{class: "fas fa-fw fa-microphone"}
-      = @thread.display_title
+      = thread_display_title(@thread)
 
     %p{class: "badge"}= @thread.display_id
     - if @thread.private_message?
@@ -31,7 +31,8 @@
       %h3= link_to @issue.title, issue_path(@issue)
 .content-wrapper
   .main-content{ data: {"initially-loaded-from" => @initially_loaded_from } }
-    %p{class: "drop-cap"}= @issue.description
+    %p{class: "drop-cap"}
+      .title= @issue.description
     %hr
     %ul{class: "thread"}
       = render "load_more"

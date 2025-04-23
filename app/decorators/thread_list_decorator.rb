@@ -37,7 +37,7 @@ class ThreadListDecorator < ApplicationDecorator
 
   def title
     if h.policy(thread).show?
-      thread.display_title
+      h.thread_display_title(thread)
     else
       I18n.t("decorators.thread_list.private_thread_title")
     end

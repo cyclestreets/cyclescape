@@ -17,10 +17,10 @@ h3 {
   font-size: 20px;
   margin: 20px 0;
   &.drop-cap {
-    &:first-child {
+    .title {
       &:first-letter {
         font-size: 44px;
-        line-height: 29px;
+        // line-height: 29px;
       }
     }
   }
@@ -33,9 +33,10 @@ input, select, textarea {
   font-size: 15px;
 }
 .drop-cap {
+  /*
   p {
     &:first-letter { color: $color-pastel-red; }
-    &:first-child {
+    .title {
       &:first-letter {
         color: $color-pastel-red;
         float: left;
@@ -46,8 +47,13 @@ input, select, textarea {
       }
     }
   }
-  &:first-letter { color: $color-pastel-red; }
-  &:first-child {
+  */
+  //&:first-letter { color: $color-pastel-red; }
+  .status {
+    font-size: 0.7em;
+  }
+  .title {
+    display: block;
     &:first-letter {
       color: $color-pastel-red;
       float: left;

@@ -281,7 +281,13 @@ ul.application-types li label {color: white;}
 
     h1, h2 {color: #ce5740;}
     h3, h4, h5, h6, body, select, textarea, label {color: white;}
-    .drop-cap:first-child:first-letter {color: #ce5740;}
+
+    /*
+    .drop-cap:first-child:first-letter {color: #ce5740; padding-right: 3px;}
+    h3.drop-cap:first-child:first-letter {font-size: 37px; line-height: 31px;}
+    .discussion p.drop-cap:first-child:first-letter {font-size: 50px;}
+    .discussion .drop-cap:first-child:first-letter {line-height: 41px;}
+    */
 
     #shade.white {background-color:rgba(0, 0, 0, 0.558);}
 
@@ -505,8 +511,6 @@ ul.application-types li label {color: white;}
     .groups hr {display: none;}
     .groups .main-content {margin-top: 120px;}
 
-    h3.drop-cap:first-child:first-letter {font-size: 37px; line-height: 31px;}
-    .drop-cap:first-child:first-letter {padding-right: 3px;}
 
     .main-content {margin-right: 0; padding: 0 10px;}
     .discussion .main-content {padding: 0 10px 0 0;}
@@ -524,8 +528,6 @@ ul.application-types li label {color: white;}
     ul.discussions li div.minimap .unread {padding-left: 30px;}
 
     .discussion .content-wrapper {padding: 5px; width: calc(100vw - 20px);}
-    .discussion p.drop-cap:first-child:first-letter {font-size: 50px;}
-    .discussion .drop-cap:first-child:first-letter {line-height: 41px;}
 
     ul.deadlines .content {padding-left: 10px;}
 

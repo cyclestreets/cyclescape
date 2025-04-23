@@ -171,11 +171,11 @@ class MessageThread < ApplicationRecord
 
   def display_title
     if closed
-      "(#{self.class.human_attribute_name(:closed)}) #{title}"
+      ["(#{self.class.human_attribute_name(:closed)})", title]
     elsif mod_queued?
-      "(#{self.class.human_attribute_name(:moderated)}) #{title}"
+      ["(#{self.class.human_attribute_name(:moderated)})", title]
     else
-      title
+      [nil, title]
     end
   end
 
