@@ -82,6 +82,7 @@ Rails.application.routes.draw do
   end
 
   resources :groups do
+    get :autocomplete, on: :collection
     scope module: :group do
       resources :members
       resources :potential_members, only: %i[new create]

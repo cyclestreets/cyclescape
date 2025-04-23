@@ -11,11 +11,19 @@ class GroupsController < ApplicationController
         @groups = GroupDecorator.decorate_collection groups
         @start_location = index_start_location
       end
-
-      format.js do
-        @groups = groups.from_geo_or_name params["homepage-find"]
-      end
     end
+  end
+
+  def autocomplete
+    skip_authorization
+    groups = Group.from_geo_or_name(params[:term]).limit(10)
+    render json: groups.map { |group|
+      {
+        label: "#{group.name} (#{group.members.count} members)",
+        value: group.name,
+        url: root_url(subdomain: SubdomainConstraint.subdomain(group.short_name)),
+      }
+    }
   end
 
   def show
