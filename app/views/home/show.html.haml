@@ -12,8 +12,9 @@
         %p.description
           Cyclescape is an online campaigning toolkit for people working for better
           cycling across the UK.
-        %form
-          %input#groups{:placeholder => "Search for groups local to you…", :type => "search"}/
+        %form{data: {controller: "group-search"}}
+          %input#groups{placeholder: "Search for groups local to you…", type: "search"}/
+          %i.fa.fa-spinner.fa-spin.autocomplete-spinner(style="display: none")
       .flex.action-buttons
         = link_to new_issue_path, class: "action" do
           .icon

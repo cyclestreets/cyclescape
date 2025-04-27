@@ -12,7 +12,7 @@
     "CONSTANTS": true,
     "Turbo": true,
     "tinyMCE": true,
-    "bootstrap": true,
+    "bootstrap": true
   },
   "env": {
     "es6": true,

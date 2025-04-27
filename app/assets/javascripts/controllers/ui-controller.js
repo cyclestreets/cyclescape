@@ -17,15 +17,6 @@ export default class extends Controller {
   }
 
   initialize () {
-    $(".index input#groups").autocomplete({
-      appendTo: ".group-search",
-      source: "/groups/autocomplete",
-      minLength: 2,
-      select: function(event, ui) {
-        window.location.href = ui.item.url;
-      }
-    });
-
     // Tabs
     $('.tabs').parent().tabs()
 

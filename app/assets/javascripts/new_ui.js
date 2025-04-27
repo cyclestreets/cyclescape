@@ -673,31 +673,6 @@ var cyclescapeui = (function ($) {
       cyclescapeui.initFavourites()
     },
 
-
-    // Page-specific initialisation
-    index: function () {
-      var data = [
-        { label: 'Cambridge Cycling Campaign', value: 'group.html' },
-        { label: 'Oxford Cycling Campaign', value: 'group.html' },
-        { label: 'Durham Cycling Campaign', value: 'group.html' },
-        { label: 'Manchester Cycling Campaign', value: 'group.html' },
-        { label: 'Cardiff Cycling Campaign', value: 'group.html' },
-      ];
-      $('#groups').autocomplete({
-        source: data,
-        focus: function (event, ui) {
-          $(event.target).val(ui.item.label);
-          return false;
-        },
-        select: function (event, ui) {
-          $(event.target).val(ui.item.label);
-          window.location = ui.item.value;
-          return false;
-        }
-      });
-    },
-
-
     // Page-specific initialisation
     discussion: function () {
       var addContentModal = new bootstrap.Modal(document.getElementById('addContentModal'), {})
