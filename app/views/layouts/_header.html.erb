@@ -1,8 +1,9 @@
 <div id="shade">
   <i class="far fa-times-circle close"></i>
 </div>
+<% top_link = current_user ? dashboard_path : root_path %>
 <div id="top-menu">
-  <%= link_to root_path, class: "unstyled" do %>
+  <%= link_to top_link, class: "unstyled" do %>
     <%= image_tag("new-ui/cyclescape-icon.png", class: "mobile_logo") %>
     <h1><%= @site_config.application_name %></h1>
   <% end %>
@@ -10,7 +11,7 @@
 <button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
 <nav class="sidebar-nav">
   <div class="title padding">
-    <%= link_to root_path, class: "unstyled" do %>
+    <%= link_to top_link, class: "unstyled" do %>
       <%= image_tag("new-ui/cyclescape-icon.png", class: "mobile_logo") %>
       <h1><%= @site_config.application_name %></h1>
     <% end %>
