@@ -671,8 +671,7 @@
     group_selector:
       no_group: No Group
     search:
-      search: Search
-      search_button: Go
+      search: Search for anything…
   libraries:
     search:
       no_results_found: No results found for '%{query}'.

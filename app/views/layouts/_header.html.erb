@@ -71,10 +71,4 @@
     </a>
   </ul>
 </nav>
-
-<%= form_tag(search_dashboard_path, method: :get, class: "filters") do %>
-  <div id="search" class="search">
-    <i class="fal fa-fw fa-search"></i>
-    <input type="search" name="search" placeholder="Search for anything…" />
-  </div>
-<% end %>
+<%= render "layouts/search" %>

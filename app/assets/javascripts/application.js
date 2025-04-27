@@ -59,6 +59,7 @@ import MapLayerToggleController from 'controllers/map-layer-toggle-controller'
 import DateTimePickerController from 'controllers/date-time-picker-controller'
 import PmCountController from 'controllers/pm-count-controller'
 import LibraryMessageController from 'controllers/library-message-controller'
+import SearchController from 'controllers/search-controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
@@ -68,4 +69,5 @@ application.register('map-layer-toggle', MapLayerToggleController)
 application.register('date-time-picker', DateTimePickerController)
 application.register('pm-count', PmCountController)
 application.register('library-message', LibraryMessageController)
+application.register('search', SearchController)
 Turbo.session.drive = false

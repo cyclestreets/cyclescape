@@ -5,11 +5,6 @@ var cyclescapeui = (function ($) {
   'use strict'
 
   // Default settings
-  var _settings =
-    {
-      disactivateCloseSearch: false
-    }
-
   var _actions = [
     'threads',
     'index',
@@ -38,12 +33,10 @@ var cyclescapeui = (function ($) {
       _nav = $('nav.sidebar-nav')
       // Initialise the UI
       cyclescapeui.navBar();
-      cyclescapeui.searchBar();
       cyclescapeui.autocomplete();
       cyclescapeui.filterable();
       cyclescapeui.uploadPreview();
       cyclescapeui.autofocus();
-      cyclescapeui.tagsAutocomplete();
       cyclescapeui.geocoder();
       cyclescapeui.sideContent();
       cyclescapeui.mapControls();
@@ -210,84 +203,6 @@ var cyclescapeui = (function ($) {
       });
     },
 
-
-    // Set up the search bar
-    searchBar: function () {
-
-      // Initialise results
-      var data = [
-        { label: 'Discussion', value: 'discussion.html' },
-        { label: 'Discussions', value: 'discussions.html' },
-        { label: 'Browse issues', value: 'browse-topics.html' },
-        { label: 'Profile', value: 'profile.html' }
-      ];
-
-      $('#search input').autocomplete({
-        appendTo: '#search',
-        source: data,
-        focus: function (event, ui) {
-          $(event.target).val(ui.item.label);
-          return false;
-        },
-        select: function (event, ui) {
-          $(event.target).val(ui.item.label);
-          window.location = ui.item.value;
-          return false;
-        }
-      });
-
-      // Open the search bar if clicking the icon
-      $('#search').on('click', function () {
-        if (!$('#search').hasClass('expanded')) {
-          $('#search i').toggleClass('fa-search').toggleClass('fa-times-circle');
-          $('#search').addClass('expanded');
-
-
-          $('#search input').focus();
-          _settings.disactivateCloseSearch = true;
-          setTimeout(function () {
-            _settings.disactivateCloseSearch = false;
-          }, 100);
-        }
-      });
-
-      // Close search box on escape key
-      document.onkeydown = function (evt) {
-        evt = evt || window.event;
-        var isEscape = false;
-        if ("key" in evt) {
-          isEscape = (evt.key === "Escape" || evt.key === "Esc");
-        } else {
-          isEscape = (evt.keyCode === 27);
-        }
-        if (isEscape) {
-          cyclescapeui.closeSearchBar();
-        }
-      };
-
-      // Close the search bar if clicking on the x
-      $('#search fa-times-circle').on('click', function () {
-        cyclescapeui.closeSearchBar();
-      });
-
-      // Close the search bar if clicking outside it
-      $('body').on('click', function (event) {
-        if (event.target.localName != 'input') {
-          cyclescapeui.closeSearchBar();
-        }
-      });
-    },
-
-
-    // Close search bar
-    closeSearchBar: function () {
-      if ($('#search').hasClass('expanded') && _settings.disactivateCloseSearch === false) {
-        $('#search').removeClass('expanded')
-        $('#search i').toggleClass('fa-search').toggleClass('fa-times-circle');
-      }
-    },
-
-
     // Enable geocoder animations
     geocoder: function () {
       $('.geocoder i').on('click', function () {
@@ -330,25 +245,6 @@ var cyclescapeui = (function ($) {
         source: availableTags
       });
     },
-
-
-    // Enable autocomplete
-    // !TODO add real data
-    tagsAutocomplete: function () {
-      var availableTags = [
-        "Cambridge Cycling Campaign",
-        "Leeds Cycling Campaign",
-        "London Cycling Campaign",
-        "Oxford Cycling Campaign",
-        "Durham Cycling Campaign",
-        "Manchester Cycling Campaign",
-      ];
-      $("input.group-autocomplete").autocomplete({
-        appendTo: ".group-search",
-        source: availableTags
-      });
-    },
-
 
     // Enable Bootstrap popovers
     popovers: function () {
