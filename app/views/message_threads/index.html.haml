@@ -1,5 +1,13 @@
 %section.threads
-  %h1= t ".title"
+  .title-wrapper
+    .section-title
+      %i{class: "fas fa-fw fa-microphone"}
+      %h1= t ".title"
+      %br
+      = link_to new_thread_path do
+        %button.primary
+          = t(".new_thread")
+          %i{class: "fas fa-fw fa-comment-alt-plus"}
   %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
   %p= t(".introduction", application_name: @site_config.application_name)
   %p= t ".introduction_group_pointer"
