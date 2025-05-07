@@ -18,8 +18,9 @@ h3 {
   margin: 20px 0;
   &.drop-cap {
     .title {
+      color: $color-black;
       &:first-letter {
-        font-size: 44px;
+        font-size: 46px;
         // line-height: 29px;
       }
     }
