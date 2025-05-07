@@ -1,27 +1,27 @@
 /* 2. BASIC TYPOGRAPHY, LINKS, BUTTONS, LISTS AND IMAGES
 -------------------------------------------------------------- */
 // type
-body {
-  font-family: "Liberation Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: $lightblack;
-  font-size: 100%;
-}
-p, h1, h2, h3 {
-  margin-bottom: 15px;
-  line-height: 20px;
-}
-h1, h2, h3, h4 {
-  color: $black;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-}
-p, td, table {
-  font-size: 14px;
-  line-height: 20px;
-}
-th {
-  font-weight: bold;
-}
+// body {
+//   font-family: "Liberation Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+//   color: $lightblack;
+//   font-size: 100%;
+// }
+// p, h1, h2, h3 {
+//   margin-bottom: 15px;
+//   line-height: 20px;
+// }
+// h1, h2, h3, h4 {
+//   color: $black;
+//   overflow-wrap: break-word;
+//   word-wrap: break-word;
+// }
+// p, td, table {
+//   font-size: 14px;
+//   line-height: 20px;
+// }
+// th {
+//   font-weight: bold;
+// }
 table {
   border-collapse: collapse;
   td, th {
@@ -47,33 +47,33 @@ small {
   color: $colour2;
 }
 
-h1 {
-  font:  {
-    size: 30px;
-    weight: normal;
-  }
-  line-height: 30px;
-}
-h2 {
-  font:  {
-    size: 18px;
-    weight: bold;
-  }
-  margin-bottom: 10px;
-}
-h3 {
-  font:  {
-    size: 16px;
-    weight: bold;
-  }
-  margin-bottom: 10px;
-}
-h4 {
-  font:  {
-    size: 14px;
-    weight: bold;
-  }
-}
+//h1 {
+//  font:  {
+//    size: 30px;
+//    weight: normal;
+//  }
+//  line-height: 30px;
+//}
+//h2 {
+//  font:  {
+//    size: 18px;
+//    weight: bold;
+//  }
+//  margin-bottom: 10px;
+//}
+//h3 {
+//  font:  {
+//    size: 16px;
+//    weight: bold;
+//  }
+//  margin-bottom: 10px;
+//}
+//h4 {
+//  font:  {
+//    size: 14px;
+//    weight: bold;
+//  }
+//}
 
 a {
   color: $colour1;
@@ -84,12 +84,12 @@ a {
   border-bottom: 1px solid $colour2;
 }
 
-p a, ul.bullets li a {
-  border-bottom: 1px solid #eee;
-  &:hover {
-    border-bottom-color: $colour2;
-  }
-}
+//p a, ul.bullets li a {
+//  border-bottom: 1px solid #eee;
+//  &:hover {
+//    border-bottom-color: $colour2;
+//  }
+//}
 
 strong, b {
   font-weight: bolder;
