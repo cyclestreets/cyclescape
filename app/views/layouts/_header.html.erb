@@ -2,9 +2,8 @@
   <div id="shade" data-sidebar-nav-target="shade">
     <i class="far fa-times-circle close"></i>
   </div>
-  <% top_link = current_user ? dashboard_path : root_path %>
   <div id="top-menu">
-    <%= link_to top_link, class: "unstyled" do %>
+    <%= link_to root_path, class: "unstyled" do %>
       <%= image_tag("new-ui/cyclescape-icon.png", class: "mobile_logo") %>
       <h1><%= @site_config.application_name %></h1>
     <% end %>
@@ -12,7 +11,7 @@
   <button id="hamburger" data-sidebar-nav-target="hamburger"><i class="fas fa-fw fa-bars"></i></button>
   <nav class="sidebar-nav" data-sidebar-nav-target="sidebarNav">
     <div class="title padding">
-      <%= link_to top_link, class: "unstyled" do %>
+      <%= link_to root_path, class: "unstyled" do %>
         <%= image_tag("new-ui/cyclescape-icon.png", class: "mobile_logo") %>
         <h1><%= @site_config.application_name %></h1>
       <% end %>
@@ -23,6 +22,9 @@
       <% end %>
     </div>
     <ul class="padding">
+      <%= link_to dashboard_path, title: t(".dashboard_tooltip") do %>
+        <li><i class="fas fa-fw fa-chart-network"></i><%= t(".dashboard", application_name: @site_config.application_name) %></li>
+      <% end %>
       <%= link_to threads_path, title: t(".threads_tooltip") do %>
         <li><i class="fas fa-fw fa-microphone"></i><%= t(".threads") %></li>
       <% end %>
