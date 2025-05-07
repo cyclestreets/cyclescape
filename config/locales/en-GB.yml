@@ -625,7 +625,7 @@
       use_groups_location: Use group's location
   layouts:
     header:
-      group_selector: Group
+      group_selector: Change Group ▾
       admin: Admin
       admin_tooltip: Admin area, for system administrators
       dashboard: My %{application_name}
