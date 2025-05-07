@@ -39,8 +39,11 @@ class Group < ApplicationRecord
     return none if geo_name.blank?
 
     connection = Excon.new(SiteConfig.first.geocoder_url || Geocoder::GEO_URL, headers: { "Accept" => Mime[:json].to_s })
-    rsp = connection.get(query: { q: geo_name, key: SiteConfig.first.geocoder_key || Geocoder::API_KEY })
-    json = JSON.parse(rsp.body)
+
+    json = Rails.cache.fetch("geocoder/#{geo_name}", expires_in: 2.weeks) do
+      rsp = connection.get(query: { q: geo_name, key: SiteConfig.first.geocoder_key || Geocoder::API_KEY })
+      JSON.parse(rsp.body)
+    end
     bboxes = json["features"].map { |fe| BboxCoerce.call(fe["properties"]["bbox"]) }
     joins(:profile)
       .merge(GroupProfile.local.intersects(bboxes.map(&:to_geometry).inject(&:union)))

@@ -16,7 +16,7 @@ class GroupsController < ApplicationController
 
   def autocomplete
     skip_authorization
-    groups = Group.from_geo_or_name(params[:term]).limit(10)
+    groups = Group.from_geo_or_name(params[:term]).left_joins(:members).group(:id).order("COUNT(users.id) DESC", :name).limit(10)
     render json: groups.map { |group|
       {
         label: "#{group.name} (#{group.members.count} members)",
