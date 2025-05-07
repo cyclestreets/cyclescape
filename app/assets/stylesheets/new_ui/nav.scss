@@ -22,6 +22,9 @@ nav.sidebar-nav {
     width: calc(100% + 20px);
   }
   .title {
+    align-items: center;
+    white-space: nowrap;
+    min-width: 100%;
     img {
       width: 30px;
       margin-top: -16px;

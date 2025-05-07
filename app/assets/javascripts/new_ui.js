@@ -23,16 +23,13 @@ var cyclescapeui = (function ($) {
   var _map = null; // Leaflet map
   var _addIdeaMarker = null; // Save the Leaflet marker in newIdea
   var _selectedAttachment = null; // Selected attachment in Discussion view
-  var _nav = null
 
 
   return {
 
     // Main function
     initialise: function (page = false) {
-      _nav = $('nav.sidebar-nav')
       // Initialise the UI
-      cyclescapeui.navBar();
       cyclescapeui.autocomplete();
       cyclescapeui.filterable();
       cyclescapeui.uploadPreview();
@@ -46,75 +43,11 @@ var cyclescapeui = (function ($) {
       cyclescapeui.contentToggle();
       cyclescapeui.enableWizard();
 
-
       // Initialise each section
       if (_actions.includes(page)) {
         cyclescapeui[page]();
       };
     },
-
-
-    /*
-     * Nav bar functions
-     */
-    navBar: function () {
-      // Open nav on click
-      $('#hamburger').on('click', function () {
-        cyclescapeui.openNav();
-      });
-
-      // Enable normal "click" close
-      $('body').on('click', function (event) {
-        if (event.target.tagName != 'LI') {
-          if (_nav.hasClass('open')) {
-            cyclescapeui.closeNav();
-          }
-        }
-      });
-
-      // Enable swipe-to-close
-      _nav.on('swipeleft', function () {
-        if (_nav.hasClass('open')) {
-          cyclescapeui.closeNav();
-        }
-      });
-
-      // Listen for escape key to close menu
-      $(document).on('keydown', function (event) {
-        if (event.key == "Escape") {
-          if (_nav.hasClass('open')) {
-            cyclescapeui.closeNav();
-          }
-        }
-      });
-    },
-
-
-    // Open the nav bar
-    openNav: function () {
-      // Add shades
-      $('#shade').removeClass('white').fadeIn('fast');
-
-      // Slide the nav out from the left
-      _nav.show('slide', { direction: 'left' }, 300, function () {
-        _nav.addClass('open');
-      })
-    },
-
-
-    // Close the nav bar
-    closeNav: function () {
-      // Close group change popover
-      var exampleTriggerEl = document.getElementById('group-popover')
-      var popover = bootstrap.Popover.getOrCreateInstance(exampleTriggerEl) // Returns a Bootstrap popover instance
-      popover.hide();
-
-      // Close menu
-      $('#shade').fadeOut();
-      _nav.removeClass('open');
-      _nav.hide("slide", { direction: "left" }, 300);
-    },
-
 
     // Autofocus inputs contained in Bootstrap modals
     autofocus: function () {
@@ -122,7 +55,6 @@ var cyclescapeui = (function ($) {
         $('input:visible:enabled:first', this).focus();
       });
     },
-
 
     // Enable preview of photos to be uploaded
     thumbWrapper: function (files, selector) {

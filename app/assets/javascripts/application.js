@@ -9,6 +9,8 @@
 //= require rails-ujs
 //= require jquery.selectboxes
 //= require jquery.extentions
+//= require jquery-ui/effect
+//= require jquery-ui/effect-slide
 //= require jquery-ui/autocomplete
 //= require jquery-ui/datepicker
 //= require jquery-ui/dialog
@@ -61,6 +63,7 @@ import PmCountController from 'controllers/pm-count-controller'
 import LibraryMessageController from 'controllers/library-message-controller'
 import SearchController from 'controllers/search-controller'
 import GroupSearchController from 'controllers/group-search-controller'
+import SidebarNavController from 'controllers/sidebar-nav-controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
@@ -72,4 +75,5 @@ application.register('pm-count', PmCountController)
 application.register('library-message', LibraryMessageController)
 application.register('search', SearchController)
 application.register('group-search', GroupSearchController)
+application.register('sidebar-nav', SidebarNavController)
 Turbo.session.drive = false

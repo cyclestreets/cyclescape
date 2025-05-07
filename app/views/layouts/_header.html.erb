@@ -1,75 +1,77 @@
-<div id="shade">
-  <i class="far fa-times-circle close"></i>
-</div>
-<% top_link = current_user ? dashboard_path : root_path %>
-<div id="top-menu">
-  <%= link_to top_link, class: "unstyled" do %>
-    <%= image_tag("new-ui/cyclescape-icon.png", class: "mobile_logo") %>
-    <h1><%= @site_config.application_name %></h1>
-  <% end %>
-</div>
-<button id="hamburger"><i class="fas fa-fw fa-bars"></i></button>
-<nav class="sidebar-nav">
-  <div class="title padding">
+<div data-controller="sidebar-nav">
+  <div id="shade" data-sidebar-nav-target="shade">
+    <i class="far fa-times-circle close"></i>
+  </div>
+  <% top_link = current_user ? dashboard_path : root_path %>
+  <div id="top-menu">
     <%= link_to top_link, class: "unstyled" do %>
       <%= image_tag("new-ui/cyclescape-icon.png", class: "mobile_logo") %>
       <h1><%= @site_config.application_name %></h1>
     <% end %>
-    <% if current_user && defined?(current_group) && current_group %>
-      <%= link_to root_path, class: "unstyled group" do %>
-        <p><%= current_group.name %></p>
-      <% end %>
-    <% end %>
   </div>
-  <ul class="padding">
-    <%= link_to threads_path, title: t(".threads_tooltip") do %>
-      <li><i class="fas fa-fw fa-microphone"></i><%= t(".threads") %></li>
-    <% end %>
-    <%= link_to issues_path, title: t(".issues_tooltip") do %>
-      <li><i class="fas fa-fw fa-hashtag"></i><%= t(".issues") %></li>
-    <% end %>
-    <hr>
-    <%= link_to library_path, title: t(".library_tooltip") do %>
-      <li><i class="fas fa-fw fa-book-open"></i><%= t(".library") %></li>
-    <% end %>
-    <hr>
-  </ul>
-  <ul class="padding bottom">
-    <% if current_user %>
-      <% if !current_user.groups.empty? %>
-        <li id="group-popover"
-            data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
-            data-bs-content='<ul class="popover-group">
-              <%= raw(current_user.groups.except {|g| g == current_group }.map { |group| "<li>#{link_to_group_home group}</li>" }.join(" ")) %>
-            </ul>'
-        ><i class="fas fa-fw fa-users"></i><%= t(".group_selector") %></li>
+  <button id="hamburger" data-sidebar-nav-target="hamburger"><i class="fas fa-fw fa-bars"></i></button>
+  <nav class="sidebar-nav" data-sidebar-nav-target="sidebarNav">
+    <div class="title padding">
+      <%= link_to top_link, class: "unstyled" do %>
+        <%= image_tag("new-ui/cyclescape-icon.png", class: "mobile_logo") %>
+        <h1><%= @site_config.application_name %></h1>
       <% end %>
-
-      <% if defined?(current_group) && current_group && policy(GroupMembershipRequest.new(group: current_group)).index? %>
-        <%= link_to group_memberships_path(current_group) do %>
-          <li><i class="fas fa-fw fa-users-cog"></i><%= t(".membership") %></li>
+      <% if current_user && defined?(current_group) && current_group %>
+        <%= link_to root_path, class: "unstyled group" do %>
+          <p><%= current_group.name %></p>
         <% end %>
       <% end %>
-      <%= link_to user_private_messages_path(current_user) do %>
-        <li data-controller="pm-count"><i class="fas fa-fw fa-envelope"><span class="private-message-counter" data-pm-count-target="count" hidden></span></i><%= t(".private_messages") %></li>
+    </div>
+    <ul class="padding">
+      <%= link_to threads_path, title: t(".threads_tooltip") do %>
+        <li><i class="fas fa-fw fa-microphone"></i><%= t(".threads") %></li>
       <% end %>
-      <%= link_to current_user_profile_path do %>
-        <li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
+      <%= link_to issues_path, title: t(".issues_tooltip") do %>
+        <li><i class="fas fa-fw fa-hashtag"></i><%= t(".issues") %></li>
       <% end %>
-      <%= link_to destroy_user_session_path, method: :delete do %>
-        <li><i class="fas fa-fw fa-sign-out"></i><%= t(".sign_out") %></li>
+      <hr>
+      <%= link_to library_path, title: t(".library_tooltip") do %>
+        <li><i class="fas fa-fw fa-book-open"></i><%= t(".library") %></li>
       <% end %>
-    <% else %>
-      <%= link_to new_user_session_path do %>
-        <li><i class="fas fa-fw fa-user"></i><%= t(".sign_in") %></li>
+      <hr>
+    </ul>
+    <ul class="padding bottom">
+      <% if current_user %>
+        <% if !current_user.groups.empty? %>
+          <li id="group-popover" data-sidebar-nav-target="groupPopover"
+                                 data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
+                                                                                                       data-bs-content='<ul class="popover-group">
+                                                                                                         <%= raw(current_user.groups.except {|g| g == current_group }.map { |group| "<li>#{link_to_group_home group}</li>" }.join(" ")) %>
+                                                                                                       </ul>'
+                                                                                                                                                                                       ><i class="fas fa-fw fa-users"></i><%= t(".group_selector") %></li>
+        <% end %>
+
+        <% if defined?(current_group) && current_group && policy(GroupMembershipRequest.new(group: current_group)).index? %>
+          <%= link_to group_memberships_path(current_group) do %>
+            <li><i class="fas fa-fw fa-users-cog"></i><%= t(".membership") %></li>
+          <% end %>
+        <% end %>
+        <%= link_to user_private_messages_path(current_user) do %>
+          <li data-controller="pm-count"><i class="fas fa-fw fa-envelope"><span class="private-message-counter" data-pm-count-target="count" hidden></span></i><%= t(".private_messages") %></li>
+        <% end %>
+        <%= link_to current_user_profile_path do %>
+          <li><i class="fas fa-fw fa-id-card-alt"></i>My profile</li>
+        <% end %>
+        <%= link_to destroy_user_session_path, method: :delete do %>
+          <li><i class="fas fa-fw fa-sign-out"></i><%= t(".sign_out") %></li>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path do %>
+          <li><i class="fas fa-fw fa-user"></i><%= t(".sign_in") %></li>
+        <% end %>
+        <%= link_to new_user_registration_path do %>
+          <li><i class="fas fa-fw fa-user-plus"></i><%= t(".sign_up") %></li>
+        <% end %>
       <% end %>
-      <%= link_to new_user_registration_path do %>
-        <li><i class="fas fa-fw fa-user-plus"></i><%= t(".sign_up") %></li>
-      <% end %>
-    <% end %>
-    <a href="help.html">
-      <li><i class="fas fa-fw fa-hands-helping"></i>Help & feedback</li>
-    </a>
-  </ul>
-</nav>
+      <a href="help.html">
+        <li><i class="fas fa-fw fa-hands-helping"></i>Help & feedback</li>
+      </a>
+    </ul>
+  </nav>
+</div>
 <%= render "layouts/search" %>
