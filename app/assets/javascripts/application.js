@@ -64,6 +64,7 @@ import LibraryMessageController from 'controllers/library-message-controller'
 import SearchController from 'controllers/search-controller'
 import GroupSearchController from 'controllers/group-search-controller'
 import SidebarNavController from 'controllers/sidebar-nav-controller'
+import ThreadsController from 'controllers/threads-controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
@@ -76,4 +77,5 @@ application.register('library-message', LibraryMessageController)
 application.register('search', SearchController)
 application.register('group-search', GroupSearchController)
 application.register('sidebar-nav', SidebarNavController)
+application.register('threads', ThreadsController)
 Turbo.session.drive = false

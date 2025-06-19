@@ -57,7 +57,6 @@ var cyclescapeui = (function ($) {
 			cyclescapeui.mapControls();
 			cyclescapeui.popovers();
 			cyclescapeui.toasts();
-			cyclescapeui.segmentedControl();
 			cyclescapeui.contentToggle();
 			cyclescapeui.enableWizard();
 
@@ -502,100 +501,6 @@ var cyclescapeui = (function ($) {
 			$('.map-controls').removeClass('visible').hide();
 			window.scrollTo(0, _pageScroll);
 		},
-
-
-		// Segmented control
-		segmentedControl: function () {
-			// Constants
-			const SEGMENTED_CONTROL_BASE_SELECTOR = ".ios-segmented-control";
-			const SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR = ".ios-segmented-control .option input";
-			const SEGMENTED_CONTROL_BACKGROUND_PILL_SELECTOR = ".ios-segmented-control .selection";
-
-			forEachElement(SEGMENTED_CONTROL_BASE_SELECTOR, (elem) => {
-				elem.addEventListener('change', updatePillPosition);
-			});
-			window.addEventListener('resize',
-				updatePillPosition
-			); // Prevent pill from detaching from element when window resized. Becuase this is rare I haven't bothered with throttling the event
-
-			function updatePillPosition() {
-				forEachElement(SEGMENTED_CONTROL_INDIVIDUAL_SEGMENT_SELECTOR, (elem, index) => {
-					if (elem.checked) moveBackgroundPillToElement(elem, index);
-				});
-			}
-
-			function moveBackgroundPillToElement(elem, index) {
-				document.querySelector(SEGMENTED_CONTROL_BACKGROUND_PILL_SELECTOR).style.transform = 'translateX(' + (elem.offsetWidth * index) + 'px)';
-			}
-
-			// Helper functions
-			function forEachElement(className, fn) {
-				Array.from(document.querySelectorAll(className)).forEach(fn);
-			}
-
-			// Watch window width to swap text for icons
-			$(window).on('resize', function () {
-				cyclescapeui.setSegmentedControlIcons();
-			});
-
-			// Adjust icons on startup, too
-			cyclescapeui.setSegmentedControlIcons();
-
-			// Remember each page's segmented control position
-			$('#content-view').on('change', function () {
-				var divId = '#content-' + $('input[name=content-view]:checked', '#content-view').val();
-				var pageId = 'cyclescape-' + $('body').attr('class');
-				Cookies.set(pageId, divId, { expires: 7 })
-			});
-
-			// On startup, if we have a stored cookie for page view, change to that view
-			var pageId = 'cyclescape-' + $('body').attr('class');
-			var savedCookie = Cookies.get(pageId);
-			if (savedCookie !== undefined) {
-				// Uncheck all #content inputs
-				$.each($('input[name=content-view]'), function (indexInArray, input) {
-					$(input).attr('checked', false);
-				});
-
-				// Check the div referred to in the cookie
-				// Cookie = #content-list
-				var desiredId = savedCookie.split('-').pop();
-				$('input#' + desiredId).attr('checked', true).trigger('change');
-				updatePillPosition();
-			}
-
-		},
-
-		// Function to set icons and text on segmented control
-		setSegmentedControlIcons: function () {
-			if ($(window).width() > 1200) {
-				// Show text
-				$.each($('.ios-segmented-control.adjustable-icons .option label span'), function (index, span) {
-					$(span).text(' ' + $(span).data('text'));
-				})
-			} else {
-				// Show icons
-				var icon;
-				$.each($('.ios-segmented-control.adjustable-icons .option label span'), function (index, span) {
-					icon = $("<span />", {
-						html: 'Spanned <i class="fas fa-fw fa-angle-double-left"></i>',
-						class: "myClass"
-					});
-					$(span).empty().html("<i class='fa " + $(span).data('icon') + "></i>");
-				})
-			}
-		},
-
-
-		// Searches for a content-view toggle and displays on the checked toggle
-		changeToSelectedView: function () {
-			var desiredDivId = '#content-' + $('input[name=content-view]:checked', '#content-view').val();
-			$('.content-wrapper').hide();
-			$(desiredDivId).show();
-		},
-
-
-		// Enable content toggles between main-content divs on the same page
 		// If a toggle named content-view is found, corresponding divs (named content-#id) will be shown dynamically
 		contentToggle: function () {
 			// At page launch, hide all but default content div

@@ -385,19 +385,26 @@
       destroy:
         failure: Couldn't delete discussion
         success: Discussion deleted
-      index:
+      index: &thread_index
+        filter_items: Filter items
+        all: All
         title: Discussions for %{group}
-        threads_explanation_html: Each of the %{issues_link} may have one or more
-          discussions.
+        threads_explanation_html: Each of the %{issues_link} may have one or more discussions.
         issues: issues
         new_group_thread: New Group Administrative discussion
         issue_threads: Issue discussions
-        issue_threads_description: These are public and private issue-based discussions
-          belonging to %{group_name} on listed issues, shown most recent first.
-        issue_threads_addition_description: To start a new issue-based discussion, go to the relevant issue.
+        issue_threads_description: These are public and private discussions
+          belonging to %{group_name}.
         general_threads: Administrative discussions
         general_threads_description: These are public and private general discussions
           for administrative purposes, e.g. arranging a general meeting.
+        all_threads: All discussions
+        favourites: Favourites
+        my_threads: My discussions
+        my_threads_description: Discussions I've participated in
+        popular: Popular
+        deadlines: Deadlines
+        deadlines_description: Upcoming deadlines and dates
       new:
         for_group: for %{name}
         title: New Group Discussion
@@ -828,12 +835,12 @@
       failure: Couldn't delete the discussion
       success: Discussion deleted
     index:
+      <<: *thread_index
       latest_activity: Latest activity %{ago} ago
       search: 'Search all discussions:'
       search_submit: Search
       title: Discussions (public)
       threads_explanation_html: Each of the %{issues_link} may have one or more discussions, shown below (most recently-updated first).
-      issues: issues
       introduction: Below are latest updates on discussions (across all of
         %{application_name}) that are public (including those owned by groups and/or administrative.)
       introduction_group_pointer: To show only discussions from a group you are a

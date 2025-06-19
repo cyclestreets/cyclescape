@@ -8,12 +8,40 @@ class Group::MessageThreadsController < MessageThreadsController
     skip_authorization
     set_page_title t("group.message_threads.index.title", group: group.name)
 
-    issue_threads = ThreadList.issue_threads_from_group(group).page(params[:issue_threads_page])
-    @issue_threads = ThreadListDecorator.decorate_collection issue_threads
+    @ar_threads =
+      if current_user
+        case params[:view]
+        when nil, "all"
+          if group.has_member?(current_user)
+            MessageThread.order_by_latest_message
+          else
+            MessageThread.is_public.order_by_latest_message
+          end
+        when "general"
+          MessageThread.order_by_latest_message.without_issue
+        when "favourites"
+          current_user.favourite_threads.order_by_latest_message
+        when "mine"
+          current_user.subscribed_threads.order_by_latest_message
+        when "deadlines"
+          current_user.subscribed_threads.with_upcoming_deadlines
+        when "popular"
+          MessageThread.popular
+        end
+      else
+        MessageThread.is_public.order_by_latest_message.where(group: group).page(params[:page])
+      end
+    @ar_threads = @ar_threads.approved.where(group: group).page(params[:page])
 
-    general_threads = ThreadList.general_threads_from_group(group).page params[:general_threads_page]
-    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: general_threads + issue_threads)
-    @general_threads = ThreadListDecorator.decorate_collection general_threads
+    thread_ids = @ar_threads.map(&:id)
+    if current_user
+      @user_favourites = current_user.thread_favourites.where(thread_id: thread_ids).to_a
+      @user_subscriptions = current_user.thread_subscriptions.where(thread_id: thread_ids).active.to_a
+    end
+
+    @threads = ThreadListDecorator.decorate_collection @ar_threads
+    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: @ar_threads)
+    @latest_activity = Message.where(thread_id: thread_ids).latest_activities
   end
 
   def new

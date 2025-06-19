@@ -29,7 +29,7 @@ class ThreadList
     end
 
     def recent_public
-      MessageThread.approved.is_public.order_by_latest_message.includes(:issue, :group, :messages)
+      MessageThread.approved.is_public.order_by_latest_message.includes(:group, issue: :tags)
     end
 
     def with_upcoming_deadlines(user, limit)

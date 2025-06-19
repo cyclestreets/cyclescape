@@ -1,21 +1,68 @@
-%h1= t ".title", group: @group.name
 %section.threads
-  %ul.tabs.styled-tabs.with-history
-    %li= link_to t(".issue_threads"), "#issue-threads"
-    %li= link_to t(".general_threads"), "#general-threads"
-  .panes
-    #issue-threads.pane
-      %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
-      %p= t ".issue_threads_description", group_name: @group.name
-      %p= t ".issue_threads_addition_description"
-      %ul.thread-list
-        = render_threads_list @issue_threads
-      = paginate @issue_threads, param_name: "issue_threads_page", params: {anchor: "issue-threads"}
-    #general-threads.pane
-      %p= t ".general_threads_description"
-      %nav
-        %ul
-          %li= link_to t(".new_group_thread"), {action: :new}, class: "btn-green"
-      %ul.thread-list
-        = render_threads_list @general_threads
-      = paginate @general_threads, param_name: "general_threads_page", params: {anchor: "general-threads"}
+  .title-wrapper
+    .section-title
+      %i{class: "fas fa-fw fa-microphone"}
+      %h1= t ".title", group: @group.name
+      %br
+      - # = link_to new_thread_path do
+      - #   %button.primary
+      - #     = t(".new_thread")
+      - #     %i{class: "fas fa-fw fa-comment-alt-plus"}
+  .content-wrapper
+    .show-side-content
+      = t ".filter_items"
+      %i{class: "fas fa-fw fa-filter"}
+    .main-content
+      - if current_user
+        = form_with method: :get, data: { turbo_frame: "threads_frame", controller: "threads", action: "change->threads#saveState" }, local: false, class: "ios-segmented-control adjustable-icons small" do
+          %span.selection{ data: { threads_target: "selection" } }
+          %div.option{ title: t(".all_threads") }
+            - all_checked = ["all", nil].include?(params[:view])
+            = radio_button_tag "view", "all", all_checked, data: { threads_target: "option" }
+
+            = label_tag "view_all" do
+              %span.fas.fa-globe-europe{ data: { text: t(".all"), threads_target: "label" } }
+                = t(".all")
+
+          %div.option{title: t(".general_threads")}
+            = radio_button_tag "view", "general", params[:view] == "general", data: { threads_target: "option" }
+            = label_tag "view_general" do
+              %span.fas.fa-bullhorn{ data: {text: t(".general_threads") } }
+                = t(".general_threads")
+
+          %div.option{ title: t(".favourites") }
+            = radio_button_tag "view", "favourites", params[:view] == "favourites", data: { threads_target: "option" }
+            = label_tag "view_favourites" do
+              %span.fas.fa-star{ data: { text: t(".favourites"), threads_target: "label" } }
+                = t(".favourites")
+
+          %div.option{ title: t(".my_threads_description") }
+            = radio_button_tag "view", "mine", params[:view] == "mine", data: { threads_target: "option" }
+            = label_tag "view_mine" do
+              %span.fas.fa-seedling{ data: { text: t(".my_threads"), threads_target: "label" } }
+                = t(".my_threads")
+
+          %div.option{ title: t(".popular") }
+            = radio_button_tag "view", "popular", params[:view] == "popular", data: { threads_target: "option" }
+            = label_tag "view_popular" do
+              %span.fas.fa-fire-alt{ data: { text: t(".popular"), threads_target: "label" } }
+                = t(".popular")
+
+          %div.option{title: t(".deadlines_description")}
+            = radio_button_tag "view", "deadlines", params[:view] == "deadlines", data: { threads_target: "option" }
+            = label_tag "view_deadlines" do
+              %span.fas.fa-calendar-star{data: {text: t(".deadlines"), threads_target: "label" } }
+                = t ".deadlines"
+
+      %ul.discussions
+        - if params[:view] == "general"
+          - intro = capture do
+            %p= t ".general_threads_description"
+            %hr
+        - else
+          - intro = capture do
+            %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
+            %p= t ".issue_threads_description", group_name: @group.name
+            %hr
+        = render "shared/message_threads_list_frame", threads: @threads, intro: intro
+    .side-content

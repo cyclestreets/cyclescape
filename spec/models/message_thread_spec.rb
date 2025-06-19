@@ -116,23 +116,22 @@ describe MessageThread do
       end
     end
 
-    describe ".ordered_by_nos_of_messages" do
+    describe ".popular" do
       let(:user) { one_approved_message.created_by }
       let(:one_approved_message) { create(:message_thread) }
-      let(:two_approved_messages) { create(:message_thread, created_by: user) }
+      let(:two_approved_messages_old) { create(:message_thread, created_by: user) }
       let(:three_approved_messages) { create(:message_thread, created_by: user) }
 
       before do
         create_list(:message, 1, created_by: user, thread: one_approved_message)
-        create_list(:message, 2, created_by: user, thread: two_approved_messages)
+        create_list(:message, 2, created_by: user, thread: two_approved_messages_old, created_at: 3.months.ago)
         create_list(:message, 3, created_by: user, thread: three_approved_messages)
         create_list(:message, 2, :possible_spam, created_by: user, thread: one_approved_message)
       end
 
       it do
-        expect(described_class.ordered_by_nos_of_messages).to eq [three_approved_messages, two_approved_messages, one_approved_message]
+        expect(described_class.popular).to eq [three_approved_messages, one_approved_message]
       end
-
     end
   end
 

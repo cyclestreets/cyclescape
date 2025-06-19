@@ -6,11 +6,40 @@ class MessageThreadsController < ApplicationController
   def index
     skip_authorization
 
-    threads = ThreadList.recent_public.page(params[:page])
-    @user_favourites = current_user&.thread_favourites&.where(thread: threads)
-    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
-    @threads = ThreadListDecorator.decorate_collection threads
-    @user_subscriptions = current_user.thread_subscriptions.active.where(thread: threads).to_a if current_user
+    @ar_threads =
+      if current_user
+        case params[:view]
+        when nil, "all"
+          ThreadList.recent_public.page(params[:page])
+        when "favourites"
+          current_user.favourite_threads.page(params[:page])
+        when "mine"
+          current_user.subscribed_threads.page(params[:page])
+        when "deadlines"
+          current_user.subscribed_threads.with_upcoming_deadlines.page(params[:page])
+        when "popular"
+          MessageThread.popular
+        end
+      else
+        ThreadList.recent_public
+      end
+    @ar_threads = @ar_threads.approved.page(params[:page])
+
+    thread_ids = @ar_threads.map(&:id)
+    if current_user
+      @user_favourites = current_user.thread_favourites.where(thread_id: thread_ids).to_a
+      @user_subscriptions = current_user.thread_subscriptions.where(thread_id: thread_ids).active.to_a
+    end
+
+    @threads = ThreadListDecorator.decorate_collection @ar_threads
+    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: @ar_threads)
+    @latest_activity = Message.where(thread_id: thread_ids).latest_activities
+
+    if turbo_frame_request?
+      render partial: "shared/message_threads_list_frame", locals: { threads: @threads }
+    else
+      render :index
+    end
   end
 
   def show
@@ -35,9 +64,7 @@ class MessageThreadsController < ApplicationController
           *Message::COMPONENT_TYPES, :completing_action_messages, :votes, created_by: %i[profile memberships groups membership_requests]
         )
 
-        if last_viewed
-          @view_from = @messages.detect { |m| m.created_at >= last_viewed } || @messages.last
-        end
+        @view_from = @messages.detect { |m| m.created_at >= last_viewed } || @messages.last if last_viewed
 
         @initially_loaded_from = @messages.first&.created_at&.iso8601
 

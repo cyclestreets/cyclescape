@@ -37,9 +37,7 @@ class Message < ApplicationRecord
 
   COMPONENT_TYPES.each do |component_type|
     has_many component_type, dependent: :destroy, inverse_of: :message
-    unless %i[poll_messages deadline_messages].include? component_type
-      accepts_nested_attributes_for component_type, reject_if: :all_blank
-    end
+    accepts_nested_attributes_for component_type, reject_if: :all_blank unless %i[poll_messages deadline_messages].include? component_type
   end
   accepts_nested_attributes_for :deadline_messages, reject_if: proc { |attr| attr["deadline"].blank? }
   accepts_nested_attributes_for :poll_messages, reject_if: proc { |attr| attr["question"].blank? }
@@ -53,18 +51,18 @@ class Message < ApplicationRecord
   scope :recent, -> { ordered.limit(3) }
   scope :ordered, -> { order(created_at: :desc) }
   scope :ordered_for_thread_view, -> { order(created_at: :asc) }
-  scope :approved,   -> { where(status: [nil, "approved"]) }
+  scope :approved,   -> { where(status: [nil, "approved"]).where(censored_at: nil) }
   scope :mod_queued, -> { where(status: "mod_queued") }
   scope :in_group,   ->(group_id) { includes(:thread).where(message_threads: { group_id: group_id }).references(:thread) }
   scope :after_date, ->(date) { where(arel_table[:created_at].gteq(date)) }
   scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
-  scope :after_date_with_n_before, ->(after_date:, n_before:) do
+  scope :after_date_with_n_before, lambda { |after_date:, n_before:|
     after_date(after_date).or(where(id: before_date(after_date).reorder(created_at: :desc).limit(n_before + 1).ids))
-  end
+  }
 
-  scope :before_date_with_n_before, ->(before_date:, n_before:) do
+  scope :before_date_with_n_before, lambda { |before_date:, n_before:|
     before_date(before_date).reorder(created_at: :desc).limit(n_before)
-  end
+  }
 
   validates :created_by, presence: true
   validates :body, presence: true, unless: :components?
@@ -96,6 +94,11 @@ class Message < ApplicationRecord
     event :approve do
       transitions to: :approved, after: %i[ham! approve_related]
     end
+  end
+
+  def self.latest_activities
+    select("DISTINCT ON (thread_id) *")
+      .approved.order(:thread_id, created_at: :desc).includes(created_by: :profile)
   end
 
   def censor!

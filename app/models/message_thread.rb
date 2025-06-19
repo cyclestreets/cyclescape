@@ -74,7 +74,12 @@ class MessageThread < ApplicationRecord
   scope :before_date, ->(date) { where(arel_table[:created_at].lteq(date)) }
   scope :after_id, ->(id) { where(arel_table[:id].gt(id)) }
   scope :favourite_for, ->(user) { join(:user_favourites).merge(UserThreadFavourite.where(user: user)) }
-  scope :ordered_by_nos_of_messages, -> { joins(:messages).merge(Message.approved).group(column_names).order(Arel.sql("count(*) desc")) }
+  scope :popular, lambda {
+    joins(:messages)
+      .merge(Message.approved.where(created_at: (2.months.ago..)))
+      .group(:id)
+      .order(Arel.sql("COUNT(messages.id) DESC"))
+  }
 
   default_scope { where(deleted_at: nil) }
 
@@ -142,10 +147,10 @@ class MessageThread < ApplicationRecord
       cols = MessageThread.column_names.map { |cn| "message_threads.#{cn}" }
       joins(messages: :deadline_messages)
         .where("deadline_messages.deadline >= ?", 1.hour.ago) # To give a bit of time after the event might have started
-        .where(messages: {censored_at: nil})
-        .order(Arel.sql("MIN(deadline_messages.deadline) ASC"))
+        .where(messages: { censored_at: nil })
+        .order(Arel.sql("next_deadline ASC"))
         .group(cols.join(", "))
-        .select((cols + ["MIN(deadline_messages.deadline)"]).join(", "))
+        .select((cols + ["MIN(deadline_messages.deadline) as next_deadline"]).join(", "))
     end
 
     def unviewed_private_count(user)
@@ -232,9 +237,7 @@ class MessageThread < ApplicationRecord
       body: text, created_by: user, in_reply_to: in_reply_to, inbound_mail: mail
     )
 
-    if new_message.body.blank?
-      return add_messages_from_email!(mail, in_reply_to, try_html: false)
-    end
+    return add_messages_from_email!(mail, in_reply_to, try_html: false) if new_message.body.blank?
 
     # Attachments
     mail.message.attachments.each do |attachment|

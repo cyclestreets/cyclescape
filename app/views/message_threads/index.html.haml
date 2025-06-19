@@ -4,15 +4,52 @@
       %i{class: "fas fa-fw fa-microphone"}
       %h1= t ".title"
       %br
-      = link_to new_thread_path do
+      = link_to new_thread_path, class: "float-end" do
         %button.primary
           = t(".new_thread")
           %i{class: "fas fa-fw fa-comment-alt-plus"}
   %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
   %p= t(".introduction", application_name: @site_config.application_name)
   %p= t ".introduction_group_pointer"
-  = paginate @threads
-  .clear
-  %ul.discussions
-    = render partial: "shared/message_threads_list", collection: @threads, as: :thread
-  = paginate @threads
+  %hr
+  .content-wrapper
+    .show-side-content
+      = t ".filter_items"
+      %i{class: "fas fa-fw fa-filter"}
+    .main-content
+      - if current_user
+        = form_with method: :get, data: { turbo_frame: "threads_frame", controller: "threads", action: "change->threads#saveState" }, local: false, class: "ios-segmented-control adjustable-icons small" do
+          %span.selection{ data: { threads_target: "selection" } }
+          %div.option{ title: t(".all_threads") }
+            = radio_button_tag "view", "all", ["all", nil].include?(params[:view]), data: { threads_target: "option" }
+
+            = label_tag "view_all" do
+              %span.fas.fa-globe-europe{ data: { text: t(".all"), threads_target: "label" } }
+                = t(".all")
+
+          %div.option{ title: t(".favourites") }
+            = radio_button_tag "view", "favourites", params[:view] == "favourites", data: { threads_target: "option" }
+            = label_tag "view_favourites" do
+              %span.fas.fa-star{ data: { text: t(".favourites"), threads_target: "label" } }
+                = t(".favourites")
+
+          %div.option{ title: t(".my_threads_description") }
+            = radio_button_tag "view", "mine", params[:view] == "mine", data: { threads_target: "option" }
+            = label_tag "view_mine" do
+              %span.fas.fa-seedling{ data: { text: t(".my_threads"), threads_target: "label" } }
+                = t(".my_threads")
+
+          %div.option{ title: t(".popular") }
+            = radio_button_tag "view", "popular", params[:view] == "popular", data: { threads_target: "option" }
+            = label_tag "view_popular" do
+              %span.fas.fa-fire-alt{ data: { text: t(".popular"), threads_target: "label" } }
+                = t(".popular")
+
+          %div.option{title: t(".deadlines_description")}
+            = radio_button_tag "view", "deadlines", params[:view] == "deadlines", data: { threads_target: "option" }
+            = label_tag "view_deadlines" do
+              %span.fas.fa-calendar-star{data: {text: t(".deadlines"), threads_target: "label" } }
+                = t ".deadlines"
+      %ul.discussions
+        = render "shared/message_threads_list_frame", threads: @threads
+    .side-content

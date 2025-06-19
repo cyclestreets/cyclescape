@@ -43,6 +43,30 @@ describe Message do
     end
   end
 
+  describe ".latest_activities" do
+    let(:thread) { create(:message_thread) }
+    let(:thread_other) { create(:message_thread) }
+    let(:user) { create :user }
+
+    it "should return the newest message for all the threads (and include the user)" do
+      create(:message, created_by: user, thread: thread, created_at: 2.days.ago)
+      newest_message = create(:message, created_by: user, thread: thread, created_at: 3.hours.ago)
+      create(:message, created_by: user, thread: thread, created_at: 1.day.ago)
+      newest_message_other = create(:message, created_by: user, thread: thread_other, created_at: 1.hour.ago)
+
+      latest_activities = Message.where(thread: [thread, thread_other]).latest_activities.to_a
+      latest_activity_on_thread = latest_activities.select { |me| me.thread_id == thread.id }
+
+      expect(latest_activity_on_thread).to eq [newest_message]
+
+      user.update!(display_name: "Now changed")
+
+      expect(latest_activity_on_thread[0].created_by.display_name).not_to eq "Now changed"
+
+      expect(latest_activities.select { |me| me.thread_id == thread_other.id }).to eq [newest_message_other]
+    end
+  end
+
   describe "newly created" do
     subject { create(:message) }
 

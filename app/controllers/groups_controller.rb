@@ -39,6 +39,7 @@ class GroupsController < ApplicationController
       @user_favourites = current_user&.thread_favourites&.where(thread: recent_threads)
       @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: recent_threads)
       @recent_issues = IssueDecorator.decorate_collection group.recent_issues.limit(10).includes(:created_by)
+      @latest_activity = Message.where(thread_id: @recent_threads.map(&:id)).latest_activities
       @group = GroupDecorator.decorate group
     else
       redirect_to root_url(subdomain: SubdomainConstraint.subdomain("www")), allow_other_host: true
