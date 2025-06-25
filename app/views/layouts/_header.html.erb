@@ -49,7 +49,7 @@
         <% end %>
 
         <% if defined?(current_group) && current_group && policy(GroupMembershipRequest.new(group: current_group)).index? %>
-          <%= link_to group_memberships_path(current_group) do %>
+          <%= link_to group_membership_requests_path(current_group) do %>
             <li><i class="fas fa-fw fa-users-cog"></i><%= t(".membership") %></li>
           <% end %>
         <% end %>
