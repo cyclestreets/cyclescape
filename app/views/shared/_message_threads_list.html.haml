@@ -21,6 +21,9 @@
             = latest_activity.created_by.display_name_or_anon
           = t ".posted_at"
           = time_tag_with_title(latest_activity.updated_at)
+      %ul{class: "tags"}
+        - thread.tags.each do |tag|
+          %li{class: "tag"}= link_to tag.name, tag_path(tag), target: "_top"
     = render 'message_threads/subscribe_button', thread: thread
     = render "message_thread/user_favourites/form", thread: thread, cached: true
     .permissions= thread_type(thread)
