@@ -1,114 +1,117 @@
-%article
-  %section.top-box.group-top-box
-    %h1= @group.name
-    %p= auto_link simple_format @group.description
+%section.group
+  .title-wrapper
+    .section-title
+      %h1= @group.name
+  %p= auto_link simple_format @group.description
+  .content-wrapper
+    .main-content
+      %section.group-homepage-tabs
+        %ul.tabs.styled-tabs.with-history
+          %li= link_to t(".our_areas"), "#area-map"
+          %li= link_to t(".recent_threads"), "#recent-threads"
+          %li= link_to t(".recent_issues"), "#recent-issues"
+          - if current_user && policy(@group).view_active_users?
+            %li= link_to t(".active_users"), "#active-users"
+        .panes
+          #area-map.pane.area-map
+            - if (profile = @group.profile) && profile.location
+              - map_id = "leaflet-#{dom_id(@group)}"
+              .tinymap{id: map_id}
+              .hidden
+                .map-data{"data-center" => location_to_geojson(profile.location),
+                  "data-opts" => { domid: map_id, feature: item_to_geojson(profile), hidezoom: true }.to_json}
+            - else
+              %p= t ".no_location"
+          #recent-threads.pane.recent-threads
+            - if @recent_threads.empty?
+              %p= t ".no_threads"
+            - else
+              %ul.thread-list.group-latest-discussions
+                = render_threads_list @recent_threads
+          #recent-issues.pane.recent-issues
+            .issue-map
+              - if l = @group.profile.location
+                .map#map
+                .hidden
+                  .map-data{"data-center" => location_to_geojson(l),
+                    "data-opts" => {remote: [{name: 'Issues', url: all_geometries_issues_path(:json)}]}.to_json}
+            .issue-list
+              - if @recent_issues.empty?
+                %p= t ".no_issues"
+              - else
+                %ul.issue-list
+                  = render partial: "issues/compact", collection: @recent_issues, as: :issue
 
-  %section.group-homepage-tabs
-    %ul.tabs.styled-tabs.with-history
-      %li= link_to t(".our_areas"), "#area-map"
-      %li= link_to t(".recent_threads"), "#recent-threads"
-      %li= link_to t(".recent_issues"), "#recent-issues"
-      - if current_user && policy(@group).view_active_users?
-        %li= link_to t(".active_users"), "#active-users"
-    .panes
-      #area-map.pane.area-map
-        - if (profile = @group.profile) && profile.location
-          - map_id = "leaflet-#{dom_id(@group)}"
-          .tinymap{id: map_id}
-          .hidden
-            .map-data{"data-center" => location_to_geojson(profile.location),
-              "data-opts" => { domid: map_id, feature: item_to_geojson(profile), hidezoom: true }.to_json}
-        - else
-          %p= t ".no_location"
-      #recent-threads.pane.recent-threads
-        - if @recent_threads.empty?
-          %p= t ".no_threads"
-        - else
-          %ul.thread-list.group-latest-discussions
-            = render_threads_list @recent_threads
-      #recent-issues.pane.recent-issues
-        .issue-map
-          - if l = @group.profile.location
-            .map#map
-            .hidden
-              .map-data{"data-center" => location_to_geojson(l),
-                "data-opts" => {remote: [{name: 'Issues', url: all_geometries_issues_path(:json)}]}.to_json}
-        .issue-list
-          - if @recent_issues.empty?
-            %p= t ".no_issues"
-          - else
-            %ul.issue-list
-              = render partial: "issues/compact", collection: @recent_issues, as: :issue
+          - if policy(@group).view_active_users?
+            #active-users.pane.active-users
+              %p= t ".committee_only"
+              %table.table-full-width
+                %thead
+                  %th= t ".display_name"
+                  %th.table-messages= t ".messages_last_year"
+                %tbody
+                  - @group.active_user_counts(limit: 25).each do |user_count|
+                    - user = user_count[:user]
+                    %tr
+                      %td
+                        - if policy(user.profile).show?
+                          = link_to user_profile_path(user) do
+                            %span.thumb
+                              - if user.profile.picture
+                                = image_tag user.profile.picture_thumbnail.url
+                            %span.user-name
+                              = user.name
+                        - else
+                          = user.display_name_or_anon
+                      %td= user_count[:count]
 
-      - if policy(@group).view_active_users?
-        #active-users.pane.active-users
-          %p= t ".committee_only"
-          %table.table-full-width
-            %thead
-              %th= t ".display_name"
-              %th.table-messages= t ".messages_last_year"
-            %tbody
-              - @group.active_user_counts(limit: 25).each do |user_count|
-                - user = user_count[:user]
-                %tr
-                  %td
-                    - if policy(user.profile).show?
-                      = link_to user_profile_path(user) do
-                        %span.thumb
-                          - if user.profile.picture
-                            = image_tag user.profile.picture_thumbnail.url
-                        %span.user-name
-                          = user.name
-                    - else
-                      = user.display_name_or_anon
-                  %td= user_count[:count]
-
-%aside#sidebar
-  - if @group.profile.logo
-    %section.group-homepage-logo
-      = image_tag @group.profile.logo_thumbnail.url
-  - if @group.profile.picture
-    %section.group-homepage-image
-      = image_tag @group.profile.picture_thumbnail.url
-  - membership = @group.memberships.find_by(user: current_user)
-  - if current_user && !membership
-    %section.group-homepage-join
-      %h2= t(".join_title", application_name: @site_config.application_name)
-      = render partial: "join", locals: {group: @group}
-  - if current_user && @group.committee_members.include?(current_user)
-    %section.box
-      %h2= t ".group_management"
-      %ul.thread-metadata-listings
-        %li
-          = link_to edit_group_profile_path(@group) do
-            %p= t(".edit_group_profile")
-        %li
-          = link_to edit_group_prefs_path(@group) do
-            %p= t(".edit_group_prefs")
-        %li
-          = link_to group_members_path(@group) do
-            %p= t(".edit_group_members")
-        %li
-          = link_to new_group_potential_member_path(@group) do
-            %p= t("group.update_potential_members")
-        %li
-          = link_to group_membership_requests_path(@group) do
-            %p= t(".view_membership_requests", count: @group.pending_membership_requests.count)
-        %li
-          = link_to group_message_moderations_path(@group) do
-            %p= t(".view_message_moderations")
-  %section.box
-    %h2= t ".group_organisers"
-    %ul.thread-metadata-listings
-      - @group.committee_members.includes(:profile).each do |member|
-        %li
-          = link_to user_profile_path(member) do
-            %span.thumb
-              - if member.profile.picture
-                = image_tag member.profile.picture_thumbnail.url
-            %p= member.name
-  - if current_user && membership
-    %section.group-homepage-leave
-      = button_to safe_join([t(".leave_group"), "…"]),
-        group_membership_path(@group, membership),
-        method: :delete, data: {confirm: t('are_you_sure')}, class: "btn-red"
+    .side-content
+      %aside#sidebar
+        - if @group.profile.logo
+          %section.group-homepage-logo
+            = image_tag @group.profile.logo_thumbnail.url
+        - if @group.profile.picture
+          %section.group-homepage-image
+            = image_tag @group.profile.picture_thumbnail.url
+        - membership = @group.memberships.find_by(user: current_user)
+        - if current_user && !membership
+          %section.group-homepage-join
+            %h2= t(".join_title", application_name: @site_config.application_name)
+            = render partial: "join", locals: {group: @group}
+        - if current_user && @group.committee_members.include?(current_user)
+          %section.box
+            %h2= t ".group_management"
+            %ul.thread-metadata-listings
+              %li
+                = link_to edit_group_profile_path(@group) do
+                  %p= t(".edit_group_profile")
+              %li
+                = link_to edit_group_prefs_path(@group) do
+                  %p= t(".edit_group_prefs")
+              %li
+                = link_to group_members_path(@group) do
+                  %p= t(".edit_group_members")
+              %li
+                = link_to new_group_potential_member_path(@group) do
+                  %p= t("group.update_potential_members")
+              %li
+                = link_to group_membership_requests_path(@group) do
+                  %p= t(".view_membership_requests", count: @group.pending_membership_requests.count)
+              %li
+                = link_to group_message_moderations_path(@group) do
+                  %p= t(".view_message_moderations")
+      %section.box
+        %h2= t ".group_organisers"
+        %ul.thread-metadata-listings
+          - @group.committee_members.includes(:profile).each do |member|
+            %li
+              = link_to user_profile_path(member) do
+                %span.thumb
+                  - if member.profile.picture
+                    = image_tag member.profile.picture_thumbnail.url
+                %p= member.name
+      - if current_user && membership
+        %section.group-homepage-leave
+          = button_to safe_join([t(".leave_group"), "…"]),
+            group_membership_path(@group, membership),
+            method: :delete, data: {confirm: t('are_you_sure')}, class: "btn-red"
