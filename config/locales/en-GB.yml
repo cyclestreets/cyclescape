@@ -680,6 +680,8 @@
       no_group: No Group
     search:
       search: Search for anything…
+      sign_in: Sign in
+      my_profile: My profile
   libraries:
     search:
       no_results_found: No results found for '%{query}'.
