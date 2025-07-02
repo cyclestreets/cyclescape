@@ -9,16 +9,16 @@ class MessageThreadsController < ApplicationController
     @ar_threads =
       if current_user
         case params[:view]
-        when nil, "all"
+        when "all"
           ThreadList.recent_public.page(params[:page])
         when "favourites"
           current_user.favourite_threads.page(params[:page])
-        when "mine"
-          current_user.subscribed_threads.page(params[:page])
         when "deadlines"
           current_user.subscribed_threads.with_upcoming_deadlines.page(params[:page])
         when "popular"
           MessageThread.popular
+        else
+          current_user.subscribed_threads.page(params[:page])
         end
       else
         ThreadList.recent_public

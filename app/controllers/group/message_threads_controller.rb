@@ -11,7 +11,7 @@ class Group::MessageThreadsController < MessageThreadsController
     @ar_threads =
       if current_user
         case params[:view]
-        when nil, "all"
+        when "all"
           if group.has_member?(current_user)
             MessageThread.order_by_latest_message
           else
@@ -21,12 +21,12 @@ class Group::MessageThreadsController < MessageThreadsController
           MessageThread.order_by_latest_message.without_issue
         when "favourites"
           current_user.favourite_threads.order_by_latest_message
-        when "mine"
-          current_user.subscribed_threads.order_by_latest_message
         when "deadlines"
           current_user.subscribed_threads.with_upcoming_deadlines
         when "popular"
           MessageThread.popular
+        else
+          current_user.subscribed_threads.order_by_latest_message
         end
       else
         MessageThread.is_public.order_by_latest_message.where(group: group).page(params[:page])
