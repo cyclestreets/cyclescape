@@ -3,14 +3,13 @@
 class TagsController < ApplicationController
   include IssueFeature
 
-
   def autocomplete_tag_name
     skip_authorization
 
     term = params[:term]
 
     items =
-      if term&.present?
+      if term.present?
         Tag.top_tags_fresh(5, term).map do |tag|
           { id: tag.id, label: tag.autocomplete_tag_name, value: tag.name }
         end

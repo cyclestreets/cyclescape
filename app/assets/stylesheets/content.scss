@@ -602,6 +602,7 @@ section#user-locations {
     background-image:image-url("sprite.png");
     background-position:5px -1078px;
     background-repeat: no-repeat;
+    width: 100%;
   }
   .tabs a.map-pin,
   .tabs a.map-pin:hover,
@@ -611,6 +612,7 @@ section#user-locations {
     background-image:image-url("sprite.png");
     background-position:5px -292px;
     background-repeat: no-repeat;
+    width: 100%;
   }
   .pagination {
     margin:15px 0;
@@ -947,7 +949,6 @@ article.message .message-text, .mce-content-body {
   position: relative;
   /* use this value to count block height */
   line-height: 1.2em;
-  max-height: 5.8em;
   /* fix problem when last visible word doesn't adjoin right side  */
   text-align: justify;
   /* place for '...' */

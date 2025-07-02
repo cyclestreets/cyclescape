@@ -101,3 +101,6 @@
 .no-close .ui-dialog-titlebar-close {
   display: none;
 }
+.ui-helper-clearfix::before, .ui-helper-clearfix::after {
+  content: none;
+}

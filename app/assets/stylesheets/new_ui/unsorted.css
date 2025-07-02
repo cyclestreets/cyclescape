@@ -24,6 +24,11 @@ div.geocoder.expanded input {display: inline-block;}
 .ui-autocomplete {background-color: white; width: 200px; list-style: none; margin: 10px 0 0 0; padding-left: 0; padding-top: 5px; padding: 5px; border-radius: 10px; z-index: 9999;}
 .ui-autocomplete li div {list-style: none; margin: 2.5px; padding: 2.5px 10px; border-radius: 20px;}
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active, a.ui-button:active, .ui-button:active, .ui-button.ui-state-active:hover {background-color: #eeeeee;}
+.tabs .ui-state-active {
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+}
 
 /* Hack so the above CSS does not effect #compose-new */
 #compose-new .ui-state-active,

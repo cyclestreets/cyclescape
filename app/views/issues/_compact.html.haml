@@ -18,8 +18,9 @@
           = formatted_created_at(issue)
           \//
           = t(".thread_count", count: issue.thread_count)
-        .tags
-          = issue.tags_list
+        %ul{class: "tags"}
+          - issue.tags.each do |tag|
+            %li{class: "tag"}= link_to tag.name, tag_path(tag), target: "_top"
       .issue-truncate
         %p
           = issue.description

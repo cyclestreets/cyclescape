@@ -95,6 +95,10 @@
   }
 }
 
+li.ui-state-default{
+  margin: 0;
+}
+
 @mixin list-reset-soft {
   margin: 0;
   padding: 0;
