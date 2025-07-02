@@ -65,6 +65,7 @@ import SearchController from 'controllers/search-controller'
 import GroupSearchController from 'controllers/group-search-controller'
 import SidebarNavController from 'controllers/sidebar-nav-controller'
 import ThreadsController from 'controllers/threads-controller'
+import TimeagoController from 'controllers/timeago-controller'
 
 // Start Stimulus and register controllers
 const application = Application.start()
@@ -78,4 +79,5 @@ application.register('search', SearchController)
 application.register('group-search', GroupSearchController)
 application.register('sidebar-nav', SidebarNavController)
 application.register('threads', ThreadsController)
+application.register('timeago', TimeagoController)
 Turbo.session.drive = false

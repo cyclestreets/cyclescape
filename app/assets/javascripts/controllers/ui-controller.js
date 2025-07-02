@@ -11,7 +11,6 @@ export default class extends Controller {
     window.leafletMapInit()
     window.streetViewInit()
     window.initImageEdit()
-    $('time.timeago').timeago()
     $('textarea.tinymce').closest('form').find('input:submit').prop('disabled', true)
     tinyMCE.init(window.tinymceOpts)
   }

@@ -79,6 +79,8 @@ module ApplicationHelper
   # Taken from Rails 4, which allows passing a block for content.
   def time_tag(date_or_time, *args, &block)
     options  = args.extract_options!
+    options[:data] ||= {}
+    options[:data][:controller] = "timeago"
     format   = options.delete(:format) || :long
     content  = args.first || I18n.l(date_or_time, format: format)
     datetime = date_or_time.acts_like?(:time) ? date_or_time.xmlschema : date_or_time.iso8601
