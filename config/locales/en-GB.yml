@@ -400,6 +400,7 @@
           for administrative purposes, e.g. arranging a general meeting.
         all_threads: All discussions
         favourites: Favourites
+        new_thread: New discussion
         my_threads: My discussions
         my_threads_description: Discussions I've participated in
         popular: Popular
@@ -407,7 +408,7 @@
         deadlines_description: Upcoming deadlines and dates
       new:
         for_group: for %{name}
-        title: New Group Discussion
+        title: New Group Administrative Discussion
       update:
         success: Discussion updated
     prefs:
@@ -845,7 +846,6 @@
         %{application_name}) that are public (including those owned by groups and/or administrative.)
       introduction_group_pointer: To show only discussions from a group you are a
         member of, use the group switcher on the top right.
-      new_thread: New discussion
     library_panel:
       library: Library
       no_library_items: Couldn't find any relevant library items based on the

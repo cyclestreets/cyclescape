@@ -55,12 +55,16 @@
                 = t ".deadlines"
 
       %ul.discussions
-        - if params[:view] == "general"
-          - intro = capture do
+        - intro = capture do
+          - if params[:view] == "general"
             %p= t ".general_threads_description"
+            = link_to new_thread_path, target: "_top" do
+              %button.primary
+                = t(".new_group_thread")
+                %i{class: "fas fa-fw fa-comment-alt-plus"}
+
             %hr
-        - else
-          - intro = capture do
+          - else
             %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
             %p= t ".issue_threads_description", group_name: @group.name
             %hr
