@@ -31,8 +31,9 @@
       %h3= link_to @issue.title, issue_path(@issue)
 .content-wrapper
   .main-content{ data: {"initially-loaded-from" => @initially_loaded_from } }
-    %p{class: "drop-cap"}
-      .title= @issue.description
+    - if @issue
+      %p{class: "drop-cap"}
+        .title= @issue.description
     %hr
     %ul{class: "thread"}
       = render "load_more"
