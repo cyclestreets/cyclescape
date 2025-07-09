@@ -22,9 +22,6 @@
       <% end %>
     </div>
     <ul class="padding">
-      <%= link_to dashboard_path, title: t(".dashboard_tooltip") do %>
-        <li><i class="fas fa-fw fa-chart-network"></i><%= t(".dashboard", application_name: @site_config.application_name) %></li>
-      <% end %>
       <%= link_to threads_path, title: t(".threads_tooltip") do %>
         <li><i class="fas fa-fw fa-microphone"></i><%= t(".threads") %></li>
       <% end %>
@@ -34,6 +31,9 @@
       <hr>
       <%= link_to library_path, title: t(".library_tooltip") do %>
         <li><i class="fas fa-fw fa-book-open"></i><%= t(".library") %></li>
+      <% end %>
+      <%= link_to planning_applications_path do %>
+        <li><i class="fas fa-fw fa-sign"></i><%= t(".planning_applications") %></li>
       <% end %>
       <hr>
     </ul>

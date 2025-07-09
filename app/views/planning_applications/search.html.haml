@@ -6,7 +6,6 @@
   = text_field_tag :q, params[:q], placeholder: t(".planning_applications_search")
   = button_tag t(".planning_application_search_button")
 
-%p= link_to(t(".your_planning_applications"), dashboard_path + "#planning-applications")
 %table.dashboard-planning-applications.listing
   %tbody
     = render partial: 'planning_application', collection: @planning_applications, as: :planning_application

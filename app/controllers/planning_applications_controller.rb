@@ -1,8 +1,16 @@
 # frozen_string_literal: true
 
 class PlanningApplicationsController < ApplicationController
-  before_action :set_planning_application, only: %i[show show_uid geometry search]
+  before_action :set_planning_application, only: %i[show show_uid geometry]
   respond_to :js, only: %i[hide unhide]
+
+  def index
+    authorize PlanningApplication
+    @planning_applications = PlanningApplicationDecorator.decorate_collection(
+      current_user
+      .planning_applications_near_locations.ordered.page(params[:page]).per(10).includes(:issue, :users)
+    )
+  end
 
   def show
     skip_authorization

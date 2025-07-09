@@ -154,26 +154,39 @@
     hide:
       success: Planning application hidden from overview
       failure: Could not hide that application
-    index:
-      planning_applications: Planning applications
-      pointer_to_dashboard_html: You can browse planning applications in your area
-        on your %{dashboard_planning_link} page.
-      explanation: You can promote any planning application to an issue so that it
-        is like any other submitted issue.
     planning_application: &planning_applications_search
       page_title: Search Results for '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
       planning_applications: Planning applications
       planning_applications_search: e.g. (07/0811/FUL)
       planning_application_search_button: Search Applications by Reference
+      no_planning_applications_nearby_html: There are no planning applications in
+        your area. You could %{add_location_link}.
+      no_locations_guidance_html: You haven't set a location yet! If you %{add_some_locations_link},
+        we will show you the nearby %{things} here.
+      location: location
+      map: Map
+      planning_applications_search: e.g. (07/0811/FUL)
+      planning_application_search_button: Search Applications by Reference
+      planning_applications_in_your_area: Planning applications in your location
+      planning_applications_introduction_html: 'These are the most recent planning
+        applications (courtesy of the PlanIt website) in your %{location_link}:'
+      planning_applications_lower: planning applications
       no_results_found: No results found
-      your_planning_applications: Your local planning applications
       hide: Vote to hide
       unhide: Remove my vote
       hide_tooltip: If enough users vote to hide this application it will be hidden
         for everyone
       part_hidden: Part Hidden
       converted_to_issue: 'Converted to Issue:'
+    index:
+      <<: *planning_applications_search
+      planning_applications: Planning applications
+      pointer_to_dashboard_html: You can browse planning applications in your area
+        on your %{dashboard_planning_link} page.
+      explanation: You can promote any planning application to an issue so that it
+        is like any other submitted issue.
+
     show:
       address_label: 'Address:'
       council_label: 'Council:'
@@ -199,8 +212,6 @@
       page_title: Search Results for '%{q}'
       convert_to_issue_html: Convert to an Issue &hellip;
       planning_applications: Planning applications
-      planning_applications_search: e.g. (07/0811/FUL)
-      planning_application_search_button: Search Applications by Reference
       no_results_found: No results found
       your_planning_applications: Your local planning applications
       hide: Vote to hide
@@ -243,14 +254,6 @@
       no_issues_nearby_html: There's no issues in your area. You could %{add_issue_link},
         or %{add_location_link}.
       location: location
-      no_locations_guidance_html: You haven't set a location yet! If you %{add_some_locations_link},
-        we will show you the nearby %{things} here.
-      no_planning_applications_nearby_html: There are no planning applications in
-        your area. You could %{add_location_link}.
-      planning_applications_in_your_area: Planning applications in your location
-      planning_applications_introduction_html: 'These are the most recent planning
-        applications (courtesy of the PlanIt website) in your %{location_link}:'
-      planning_applications_lower: planning applications
       recent_threads: recent discussions
       my_favourites: My favourites
       my_threads: Subscribed discussions
@@ -574,9 +577,6 @@
       new_issue: Create new issue
       title: Issues
       list_tab: List
-      list_introduction: 'Listed issues, most recent first:'
-      list_introduction_groupwise_html: 'Listed issues, most recent first, limited
-        to the %{area_of_group_link}:'
       area_of_group: area of %{group_name}
       map_tab: Map
       map_introduction: 'This map shows all issues, whether points, routes, or areas:'
@@ -588,10 +588,8 @@
       no_results_found: No issues found.
       title_introduction: This section lists issues - problems on the street network
         and related matters.
-      introduction_geographical_basis: Issues always relate to some geographical location,
-        whether very local or perhaps city-wide.
-      title_introduction_report_html: You can %{report_new_issue_link} using the button
-        on the right.
+      introduction_geographical_basis_html: Issues always relate to some geographical location,
+        whether very local or perhaps city-wide. These are limited to the %{area_of_group_link}.
       report_new_issue: create a new issue
     new:
       <<: *issue_message_threads_new
@@ -634,9 +632,7 @@
       group_selector: Change Group ▾
       admin: Admin
       admin_tooltip: Admin area, for system administrators
-      dashboard: My %{application_name}
-      dashboard_tooltip: Your personal dashboard, showing updates on discussions
-        you are subscribed to
+      planning_applications: Planning Applications
       about: About
       user_guide: User guide
       sign_out: Sign out

@@ -32,10 +32,6 @@ class DashboardsController < ApplicationController
 
     @favourite_threads = ThreadListDecorator.decorate_collection(favourite_threads)
     @user_favourites = current_user.thread_favourites.where(thread: favourite_threads + subscribed_threads).to_a
-    @planning_applications = PlanningApplicationDecorator.decorate_collection(
-      current_user
-      .planning_applications_near_locations.ordered.page(params[:planning_page]).per(10).includes(:issue, :users)
-    )
   end
 
   def deadlines
