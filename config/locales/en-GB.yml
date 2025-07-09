@@ -277,7 +277,7 @@
     group_management: Group management
     membership_list_tab: Membership list
     membership_requests_tab: Membership requests
-    update_potential_members: Update the potential members email list
+    update_potential_members: Potential member emails
     home_page_tab: Home page
     issues:
       destroy:
@@ -370,7 +370,7 @@
           unconfirmed: Unconfirmed
           rejected: Rejected
       new:
-        title: Request membership of %{group_name}
+        title: Request membership of %{group_name} %{application_name} group
         your_membership_request_will: Please click the button below to apply to join
           this group's %{application_name} area.
       reject:
@@ -458,31 +458,29 @@
     join:
       join_body: You can request membership of this %{application_name} group, if you want
         to be involved in the %{group} activities.
-      join_this_group: Join this %{application_name} group
+      join: Join
       group_request_pending: Your request to join this group is pending.
     show:
-      edit_group_profile: Edit the group profile
-      edit_group_prefs: Edit the group preferences
-      edit_group_members: Edit the membership list
+      browse_discussions: Browse discussions
+      discussions_description: There are new discussions our area. See what's going on!
+      browse_issues: Browse issues
+      issues_description: Browse our map to see what's happening in this area.
+      edit_group_profile: Group profile
+      edit_group_prefs: Group preferences
+      edit_group_members: Membership list
       group_management: Group management
       group_organisers: Group organisers
       leave_group: Leave the group
-      join_title: Join our %{application_name} group
+      join_title: Our %{application_name} group
       no_issues: There are no issues in this group's area yet
       no_location: This group doesn't have a location yet
       no_threads: This group doesn't have any public discussions
-      our_areas: Our Area
-      recent_issues: Recent Issues In Our Area
-      recent_threads: Latest Discussions
-      active_users: Most active users
-      committee_only: Please note, this tab is is only visible to committee members.
-      display_name: Name
-      messages_last_year: Number of messages last year
+      committee_only: This tab is is only visible to committee members.
       view_membership_requests:
-        zero: Review membership requests
-        one: View pending membership request
-        other: View pending membership requests (%{count})
-      view_message_moderations: View moderated group messages
+        zero: No membership requests
+        one: Membership request
+        other: Membership requests (%{count})
+      view_message_moderations: Moderated messages
     group:
       members: members
   group_requests:

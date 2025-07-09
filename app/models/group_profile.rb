@@ -17,12 +17,8 @@ class GroupProfile < ApplicationRecord
 
   validates :new_user_email, presence: true
 
-  def picture_thumbnail
-    picture.thumb("330x192#")
-  end
-
   def logo_thumbnail
-    logo.thumb("330x>")
+    logo&.thumb("330x>")
   end
 
   belongs_to :group, inverse_of: :profile

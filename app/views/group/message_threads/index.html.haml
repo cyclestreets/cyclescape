@@ -16,7 +16,7 @@
       - if current_user
         = form_with method: :get, data: { turbo_frame: "threads_frame", controller: "threads", action: "change->threads#saveState" }, local: false, class: "ios-segmented-control adjustable-icons small" do
           %span.selection{ data: { threads_target: "selection" } }
-          %div.option{ title: t(".my_threads_description") }
+          .option{ title: t(".my_threads_description") }
             - mine_checked = ["mine", nil].include?(params[:view])
             = radio_button_tag "view", "mine", mine_checked, data: { threads_target: "option" }
             = label_tag "view_mine" do

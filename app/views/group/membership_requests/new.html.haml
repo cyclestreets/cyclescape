@@ -1,4 +1,4 @@
-%h1= t ".title", group_name: @group.name
+%h1= t ".title", group_name: @group.name, application_name: @site_config.application_name
 
 %p= auto_link simple_format @group.profile.joining_instructions
 .explain

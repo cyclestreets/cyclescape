@@ -131,7 +131,7 @@ ul.add-content li:hover {border-color: $color-green;}
 .groups .header .content .links a:hover {border-color: white;}
 .groups .header .minimap {position: relative; float: right; bottom: 100px; right: 50px; height: 200px; width: 200px; border-radius: 20px; background-size: contain; box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);}
 .groups #content hr {margin-top: 40px; margin-bottom: 30px; margin-right: 300px;}
-.groups #content button.primary {margin: 30px 10px 30px 0;}
+.groups #content .button.primary {margin: 30px 10px 30px 0;}
 .groups #content .side-content {padding-top: 70px;}
 
 

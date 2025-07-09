@@ -1,9 +1,12 @@
 - if group.profile.joining_instructions
-  %p= auto_link simple_format group.profile.joining_instructions.truncate(100)
+  %p= auto_link simple_format group.profile.joining_instructions
 - else
   %p= t(".join_body", group: group.name, application_name: @site_config.application_name)
 
 - if current_user && current_user.membership_request_pending_for?(group)
   %p= t ".group_request_pending"
 - else
-  = link_to t(".join_this_group", application_name: @site_config.application_name), new_group_membership_request_path(group), class: "btn-green"
+  .mt-3
+  = link_to  new_group_membership_request_path(group), class: "button primary" do
+    = t(".join")
+    %i.fas.fa-fw.fa-user-plus

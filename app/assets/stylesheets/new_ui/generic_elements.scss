@@ -1,7 +1,7 @@
-button {
+button, .button {
   &.primary {
     align-self: flex-start;
-    width: auto;
+    width: fit-content;
     border: none;
     background-color: #eeeeee;
     color: $color-pastel-red;
