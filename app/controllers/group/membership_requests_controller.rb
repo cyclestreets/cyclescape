@@ -12,7 +12,7 @@ class Group::MembershipRequestsController < ApplicationController
 
   def new
     authorize_group
-    set_page_title t("group.membership_requests.new.title", group_name: @group.name)
+    set_page_title t("group.membership_requests.new.title", group_name: @group.name, application_name: @site_config.application_name)
 
     @request = @group.membership_requests.build
   end

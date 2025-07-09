@@ -49,7 +49,7 @@ class Group::MembershipsController < ApplicationController
       set_flash_message :failure
     end
 
-    redirect_to group_members_path
+    redirect_to group_path(@group)
   end
 
   protected
