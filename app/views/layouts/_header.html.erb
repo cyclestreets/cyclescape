@@ -70,9 +70,9 @@
           <li><i class="fas fa-fw fa-user-plus"></i><%= t(".sign_up") %></li>
         <% end %>
       <% end %>
-      <a href="help.html">
+      <%= link_to new_site_comment_path do %>
         <li><i class="fas fa-fw fa-hands-helping"></i>Help & feedback</li>
-      </a>
+      <% end %>
     </ul>
   </nav>
 </div>

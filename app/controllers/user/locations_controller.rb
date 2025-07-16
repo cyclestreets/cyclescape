@@ -3,6 +3,7 @@
 class User::LocationsController < ApplicationController
   def index
     authorize User, :logged_in?
+    @user = current_user
   end
 
   def create
