@@ -1,7 +1,7 @@
 = form_tag(search_dashboard_path, {method: :get, class: "filters", data: {controller: "search"}}) do
   #search.search
     %i.fal.fa-fw.fa-search
-      = search_field_tag :query, params[:query], placeholder: t(".search")
+    = search_field_tag :query, params[:query], placeholder: t(".search")
 .login-button
   - if current_user
     = link_to current_user_profile_path do
