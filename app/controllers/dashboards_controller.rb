@@ -1,39 +1,6 @@
 # frozen_string_literal: true
 
 class DashboardsController < ApplicationController
-  def show
-    authorize :dashboard
-
-    @user = current_user
-    @groups = @user.groups
-
-    @relevant_issues = IssueDecorator.decorate_collection(
-      current_user.issues_near_locations.order(updated_at: :desc)
-      .page(params[:relevant_issues_page]).per(10)
-    )
-
-    subscribed_threads =
-      current_user
-      .subscribed_threads.order_by_latest_message.page(params[:subscribed_threads_page]).per(12)
-
-    @subscribed_threads = ThreadListDecorator.decorate_collection(
-      subscribed_threads.includes(:issue, latest_message: %i[created_by])
-    )
-    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: subscribed_threads)
-
-    deadline_threads = ThreadList.with_upcoming_deadlines(current_user, 30).includes(:issue, :latest_message)
-    @deadline_threads = ThreadListDecorator.decorate_collection deadline_threads
-
-    favourite_threads =
-      current_user
-      .favourite_threads.order_by_latest_message
-      .includes(:issue, latest_message: %i[created_by])
-      .page(params[:favourited_threads_page]).per(20)
-
-    @favourite_threads = ThreadListDecorator.decorate_collection(favourite_threads)
-    @user_favourites = current_user.thread_favourites.where(thread: favourite_threads + subscribed_threads).to_a
-  end
-
   def deadlines
     skip_authorization
     cal = Icalendar::Calendar.new
