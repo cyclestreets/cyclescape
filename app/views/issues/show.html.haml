@@ -10,43 +10,44 @@
             %li= link_to t(".edit_issue"), edit_issue_path(@issue)
           - if policy(@issue).destroy?
             %li= link_to t(".delete_issue"), issue_path(@issue), data: { confirm: t("are_you_sure") }, method: :delete
-  .main
-    %section.voting
-      =render partial: "shared/votable",
-        locals: { resource: @issue.object }
-    %section.meta
-      %p
-      - if policy(@issue.created_by).view_profile?
-        - profile_link = link_to_profile @issue.created_by
-      - else
-        - profile_link = @issue.created_by.display_name_or_anon
-      = t ".added_by_html", name: profile_link, time: formatted_created_at(@issue)
-    %section.tags
-      = render "shared/tags/widget_content", resource: @issue
-    %section.description
-      = @issue.description
-    - if @issue.deadline
-      %section.deadline
-        %h3= t ".deadline"
-        = @issue.formatted_deadline.to_formatted_s(:long_ordinal)
-        = render partial: "shared/deadline", locals: {deadline: @issue.deadline}
-    - if @issue.external_url
-      %section.external_url
-        = link_to @issue.external_url, @issue.external_url
+  .grid-2c
+    .main
+      %section.voting
+        =render partial: "shared/votable",
+          locals: { resource: @issue.object }
+      %section.meta
+        %p{class: "italic created-by-details"}
+          - if policy(@issue.created_by).view_profile?
+            - profile_link = link_to_profile @issue.created_by
+          - else
+            - profile_link = @issue.created_by.display_name_or_anon
+          = t ".added_by_html", name: profile_link, time: formatted_created_at(@issue)
+      %section.tags
+        = render "shared/tags/widget_content", resource: @issue
+      %section.description
+        = @issue.description
+      - if @issue.deadline
+        %section.deadline
+          %h3= t ".deadline"
+          = @issue.formatted_deadline.to_formatted_s(:long_ordinal)
+          = render partial: "shared/deadline", locals: {deadline: @issue.deadline}
+      - if @issue.external_url
+        %section.external_url
+          = link_to @issue.external_url, @issue.external_url
 
-  %section.map{data: { controller: "map-layer-toggle" } }
-    %h2= t ".location"
-    .pull-right
-      = check_box_tag('collisions', data: { map_layer_toggle_target: 'collisions' })
-      = label_tag 'collisions', t('.show_collisions')
-      = check_box_tag('photos', data: { map_layer_toggle_target: 'photos' })
-      = label_tag 'photos', t('.show_photos')
-    %div{id: 'map'}
-    .hidden
-      .map-data{"data-center" => location_to_geojson(@issue.location),
-        "data-opts" => { collisions: true, feature: item_to_geojson(@issue), photos: true }.to_json}
+    %section.map{data: { controller: "map-layer-toggle" } }
+      %h3= t ".location"
+      .pull-right
+        = check_box_tag('collisions', data: { map_layer_toggle_target: 'collisions' })
+        = label_tag 'collisions', t('.show_collisions')
+        = check_box_tag('photos', data: { map_layer_toggle_target: 'photos' })
+        = label_tag 'photos', t('.show_photos')
+      %div{id: 'map'}
+      .hidden
+        .map-data{"data-center" => location_to_geojson(@issue.location),
+          "data-opts" => { collisions: true, feature: item_to_geojson(@issue), photos: true }.to_json}
 
-    = link_to t(".issues-nearby"), issues_path(anchor: 'map-pane', issue_id: @issue.id), class: "btn-green"
+      = link_to t(".issues-nearby"), issues_path(anchor: 'map-pane', issue_id: @issue.id), class: "btn-green"
 
   %aside#sidebar.wide
     - if policy(@issue.threads.build).create?

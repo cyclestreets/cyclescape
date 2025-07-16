@@ -577,6 +577,7 @@
       new_issue: Create new issue
       title: Issues
       list_tab: List
+      list_introduction_groupwise_html: 'Limited to the %{area_of_group_link}:'
       area_of_group: area of %{group_name}
       map_tab: Map
       map_introduction: 'This map shows all issues, whether points, routes, or areas:'

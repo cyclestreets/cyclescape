@@ -10,89 +10,68 @@ ul {
       border-radius: 20px;
       // cursor: pointer;
       margin: 5px 0;
-      & > .disccusion-item {
-        text-decoration: none;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        border-radius: 20px;
-        margin: 5px 0;
-        padding: 0 20px;
-        &:hover {
-          background: #F6F6F6;
-        }
-        & > .favourite {
-          padding-left: 20px;
-        }
-      }
-      div {
-        &.content {
-          flex-direction: column;
-          align-self: center;
-          flex: 2;
-          padding: 10px;
-          h3 {
-            font-size: 15px;
-          }
-          p {
-            display: inline-block;
-            line-height: 15px;
-            font-weight: 300;
-            width: fit-content;
-            font-size: 13px;
-            color: black;
-          }
-          img {
-            display: inline;
-            padding-left: 20px;
-          }
-        }
-        &.minimap {
-          flex: 0;
-          padding: 10px;
-          margin: auto;
-          .unread {
-            position: absolute;
-            padding-left: 100px;
-            z-index: 1;
-            p {
-              border-radius: 100%;
-              background-color: white;
-              color: $color-pastel-red;
-              font-style: italic;
-              font-weight: 500;
-              border: 1px solid #eeeeee;
-              padding: 2px 10px;
-              box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);
-            }
-          }
-          .map {
-            border-radius: 20px;
-            width: 120px;
-            height: 120px;
-          }
-        }
-      }
-      &:hover {
-        i {
-          &.favourite {
-            color: #feae0054;
-            &.favourited {
-              color: #FEAE00;
-            }
-          }
-        }
-      }
     }
   }
 }
+.disccusion-item {
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: 20px;
+  margin: 5px 0;
+  padding: 0 20px;
+  &:hover {
+    background: #F6F6F6;
+  }
+  & > .favourite {
+    padding-left: 20px;
+  }
+  & > .content {
+    flex-direction: column;
+    align-self: center;
+    flex: 2;
+    padding: 10px;
+    h3 {
+      font-size: 15px;
+      margin: 5px 0;
+    }
+    img {
+      display: inline;
+      padding-left: 20px;
+    }
+  }
+  &.minimap {
+    flex: 0;
+    padding: 10px;
+    margin: auto;
+    .unread {
+      position: absolute;
+      padding-left: 100px;
+      z-index: 1;
+      p {
+        border-radius: 100%;
+        background-color: white;
+        color: $color-pastel-red;
+        font-style: italic;
+        font-weight: 500;
+        border: 1px solid #eeeeee;
+        padding: 2px 10px;
+        box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);
+      }
+    }
+    .map {
+      border-radius: 20px;
+      width: 120px;
+      height: 120px;
+    }
+  }
+}
+
 ul.discussions>h2, ul.deadlines>h2 {
   display: none;
   padding: 5px;
   margin: 5px auto;
-}
-ul.discussions li div.content h3, p {
-  margin: 5px 0;
 }
 i {
   &.favourite {
@@ -150,6 +129,18 @@ i {
     &:hover {
       color: #f5310a;
     }
+  }
+}
+p.created-by-details {
+  display: inline-block;
+  line-height: 15px;
+  font-weight: 300;
+  width: fit-content;
+  font-size: 13px;
+  color: black;
+  margin: 5px 0;
+  a {
+    color: $color-pastel-red;
   }
 }
 
