@@ -118,3 +118,10 @@ body.issues, body.group-issues {
     float: none;
   }
 }
+
+.formtastic .choices-group {
+  --responsive-padding: 15vw;
+  --min-padding: 150px;
+  padding-left: clamp(var(--min-padding), var(--responsive-padding), 300px);
+  width: auto;
+}

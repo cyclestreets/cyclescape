@@ -487,6 +487,11 @@ textarea {
 // 2. Reset the default outline behavior of fieldsets so they don't affect page layout.
 
 fieldset {
+  legend {
+    font-size: inherit;
+  }
+}
+fieldset {
   min-width: 0; // 1
   padding: 0; // 2
   margin: 0; // 2
