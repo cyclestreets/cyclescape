@@ -69,7 +69,9 @@ class TagsController < ApplicationController
     issues = issues.with_center_inside(bbox.to_geometry) if bbox
 
     # TODO: refactor this into decorater
-    decorated_issues = issues.select_area.order(:area).map { |issue| issue_feature(IssueDecorator.decorate(issue), bbox) }
+    decorated_issues =
+      issues.order(Arel.sql("ST_Area(location) asc")).includes(created_by: :profile).limit(100)
+      .map { |issue| issue_feature(IssueDecorator.decorate(issue), bbox) }
     collection = RGeo::GeoJSON::EntityFactory.new.feature_collection(decorated_issues)
     respond_to do |format|
       format.json { render json: RGeo::GeoJSON.encode(collection) }
