@@ -35,6 +35,9 @@
       <%= link_to planning_applications_path do %>
         <li><i class="fas fa-fw fa-sign"></i><%= t(".planning_applications") %></li>
       <% end %>
+      <%= link_to tags_path, title: t(".tags_tooltip") do %>
+        <li><i class="fas fa-fw fa-tags"></i><%= t(".tags") %></li>
+      <% end %>
       <hr>
     </ul>
     <ul class="padding bottom">

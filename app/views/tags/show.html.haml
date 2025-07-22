@@ -5,10 +5,11 @@
   - map_id = "leaflet-all-tags"
   .grid-2c
     = render partial: 'shared/search'
-    .map-tag{id: map_id}
-    .hidden
-      .map-data{"data-center" => @start_location,
-        "data-opts" => {domid: map_id, search: true, remote: [{name: 'Issues', url: all_geometries_tag_path(@tag, :json), color: 'black'}]}.to_json}
+    - if @issues.present?
+      .map-tag{id: map_id}
+      .hidden
+        .map-data{"data-center" => @start_location,
+          "data-opts" => {domid: map_id, search: true, remote: [{name: 'Issues', url: all_geometries_tag_path(@tag, :json), color: 'black'}]}.to_json}
 
 - else
   %h1= t ".heading", name: @unrecognised_tag_name
