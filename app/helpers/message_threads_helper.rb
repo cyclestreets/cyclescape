@@ -45,7 +45,7 @@ module MessageThreadsHelper
       title = t "message_threads.show.private_to_group_message_title", group: thread.group.name
       text = t "message_threads.show.private_to_group_message_text"
     elsif thread.private_message?
-      title = t "message_threads.show.private_html", creator: link_to_profile(thread.created_by), message_to: link_to_profile(thread.user)
+      title = t "message_threads.show.private_title_html", creator: link_to_profile(thread.created_by), message_to: link_to_profile(thread.user)
       text = t "message_threads.show.private_text"
     else
       title = t "message_threads.show.public_message_title"

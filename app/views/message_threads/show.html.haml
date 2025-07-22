@@ -5,15 +5,6 @@
       = thread_display_title(@thread)
 
     %p{class: "badge"}= @thread.display_id
-    - if @thread.private_message?
-      - other_user = @thread.other_user(current_user)
-      - existing_block = current_user.user_blocks.find_by(blocked_id: other_user.id)
-      - method = existing_block ? :delete : :post
-      - label = existing_block ? t(".unblock_private_messages") : t(".block_private_messages")
-      = semantic_form_for current_user.user_blocks.build, method: method  do |f|
-        = f.input :blocked_id, as: :hidden, input_html: { value: other_user.id }
-        = f.actions do
-          = f.action :submit, label: label, button_html: {class: "btn-red submit", data: { disable_with: t("formtastic.actions.saving") }}
     - title, text = privacy_badge_title_text(thread: @thread)
     %p{class: "badge", title: title}
       %i{class: "fas fa-fw fa-eye"}
@@ -26,6 +17,15 @@
           %li= link_to t(".destroy"), thread_path(@thread), method: :delete, data: { confirm: t("are_you_sure") }
 
     = render "message_thread/user_favourites/form", thread: @thread
+    - if @thread.private_message?
+      - other_user = @thread.other_user(current_user)
+      - existing_block = current_user.user_blocks.find_by(blocked_id: other_user.id)
+      - method = existing_block ? :delete : :post
+      - label = existing_block ? t(".unblock_private_messages") : t(".block_private_messages")
+      = semantic_form_for current_user.user_blocks.build, method: method  do |f|
+        = f.input :blocked_id, as: :hidden, input_html: { value: other_user.id }
+        = f.actions do
+          = f.action :submit, label: label, button_html: {class: "btn-red submit", data: { disable_with: t("formtastic.actions.saving") }}
 
     - if @issue
       %h3= link_to @issue.title, issue_path(@issue)

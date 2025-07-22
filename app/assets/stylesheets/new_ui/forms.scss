@@ -58,7 +58,7 @@ form {
     box-shadow: 2px 6px 12px -7px rgba(0,0,0,0.75);
     transition: .1s;
   }
-  input[type="submit"]:hover {
+  input[type="submit"]:hover:not(.btn-red) {
     background-color: white;
   }
   input[type="checkbox"] {
