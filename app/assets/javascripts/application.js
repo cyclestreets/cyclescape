@@ -66,9 +66,12 @@ import GroupSearchController from 'controllers/group-search-controller'
 import SidebarNavController from 'controllers/sidebar-nav-controller'
 import ThreadsController from 'controllers/threads-controller'
 import TimeagoController from 'controllers/timeago-controller'
+import AlertController from 'controllers/alert-controller'
+
 
 // Start Stimulus and register controllers
 const application = Application.start()
+application.register('alert', AlertController)
 application.register('ui', UiController)
 application.register('poll-options', PollOptionsController)
 application.register('map-layer-toggle', MapLayerToggleController)

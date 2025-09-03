@@ -3,6 +3,9 @@ div.login-button {position: fixed; z-index: 101; top: 5px; right: 80px; margin-t
 div.login-button a {color: $color-pastel-red;}
 div.login-button:hover {background-color: #eeeeee;}
 
+.alert {position: fixed; z-index: 101; top: 5px; right: 180px; margin-top: 5px; padding: 5px 30px; max-width: 700px}
+.alert-dismissible .close {position: absolute; top: 5px; right: 5px}
+
 /* Filter bar */
 input.filter {border: 1px solid #eeeeee; font-size: 20px; padding: 10px 20px; border-radius: 20px; margin: 20px; width: 100%;}
 .main-content>input.filter {width: 80%; margin-top: 0;}

@@ -39,26 +39,6 @@ ul.horizontal, ol.horizontal {
   }
 }
 
-// Flash
-
-div.flash-container .flash {
-  padding: 6px;
-  padding-left: 12px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-weight: bold;
-  border-radius: 5px;
-  &.alert {
-    background: $red;
-    color: white;
-    width: 95%;
-  }
-  &.notice {
-    background: $lightgreen;
-    color: white;
-  }
-}
-
 // Tabs
 
 ul.tabs {

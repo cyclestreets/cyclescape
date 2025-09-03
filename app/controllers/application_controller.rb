@@ -142,7 +142,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_flash_message(type, options = {})
-    flash_key = type == :success ? :notice : :alert
+    flash_key =
+      case type
+      when :success, :notice then :success
+      else :alert
+      end
     options.reverse_merge!(scope: "#{controller_path.gsub('/', '.')}.#{action_name}")
     flash[flash_key] = I18n.t(type, **options)
   end
