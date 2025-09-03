@@ -13,7 +13,7 @@
     = f.semantic_errors :location
     = f.semantic_errors :size
     = render partial: "shared/edit_map", locals: {location: @start_location, f: f}
-  = f.input :tags_string
+  = f.input :tags_string, input_html: { data: {controller: "tags" } }
   = f.input :description, input_html: { class: "tinymce" }
   = f.input :external_url, as: :url
   = f.inputs do

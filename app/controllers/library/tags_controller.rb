@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Library::TagsController < ApplicationController
+  def edit
+    @item = Library::Item.find params[:id]
+    authorize @item, :update_tags?
+  end
+
   def update
     @item = Library::Item.find params[:id]
     authorize @item, :update_tags?

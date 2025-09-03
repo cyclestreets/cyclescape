@@ -4,6 +4,9 @@
       thread_subscription:
         create: Follow
         update: Unfollow
+    label:
+      issue:
+        tags_string: comma separated list of tags e.g. cycle parking, obstruction
   cancel: Cancel
   formtastic:
     labels:
@@ -118,8 +121,6 @@
         update: *labels_user_new
     hints:
       currently: Currently is
-      tags_string_hints: &tags_string_hints
-        tags_string: comma separated list of tags e.g. cycle parking, obstruction
       user:
         new: &hints_user_new
           display_name: If you set a display name, it will be shown to people who
@@ -172,7 +173,6 @@
           external_url: If another web page is relevant you can add it here.
           photo: (optional), 6MB max, the image will be automatically resized to an appropriate size.
           title: Please be brief and specific
-          <<: *tags_string_hints
         create: *hints_issue_new
         edit: *hints_issue_new
         update: *hints_issue_new
@@ -180,11 +180,8 @@
         privacy: This specifies who can see and edit this discussion.
         issue: This specifies which issue this discussion is attached to. If
           none, this will be an administrative discussion.
-      library/note:
-        <<: *tags_string_hints
       photo_message:
         photo: 6MB max, the image will be automatically resized to an appropriate size.
-      library/document: *tags_string_hints
       site_comment:
         bicycle_wheels: To help us identify real comments please enter the amount (in numbers) of wheels on 4 bicycles
       site_config:

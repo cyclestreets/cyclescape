@@ -558,9 +558,6 @@
       show: &issue_photos_show
         photo_alt: The photo for %{caption}.
         view_original: View original photo.
-    tags:
-      panel:
-        edit_tags: edit tags
   issues:
     compact:
       created_by_html: Created by %{creator_link}
@@ -1001,6 +998,7 @@
         title: New issue from Planning application
         title_prefix: Planning application
   shared:
+    tags_string: comma separated list of tags e.g. cycle parking, obstruction
     actions:
       resolve_action: "Resolve outstanding actions:"
     message_thread_form:
@@ -1079,7 +1077,7 @@
         to <a href='%{join_link}'><strong>apply to join %{group_name}'s %{application_name}
         group</strong></a>?"
     tags:
-      panel:
+      widget_content:
         edit_tags: Edit tags
     message_moderations:
       approve: Approve

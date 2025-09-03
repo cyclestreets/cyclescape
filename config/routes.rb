@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       scope module: "issue" do
         resource :photo, only: [:show]
         resources :threads, controller: "message_threads"
-        resource :tags, only: [:update]
+        resource :tags, only: [:update, :edit]
       end
     end
   end
@@ -34,7 +34,11 @@ Rails.application.routes.draw do
 
   constraints(SubdomainConstraint) do
     root to: "groups#show", as: :subroot
-    resources :threads, controller: "group/message_threads"
+    resources :threads, controller: "group/message_threads" do
+      scope module: :message_thread, as: :message do
+        resource :tags, only: %i[update edit]
+      end
+    end
     issues_route controller: "group/issues"
     get "overview/search", to: "groups#search"
     resources :hashtags, only: %i[index show], param: :name, controller: "group/hashtags"
@@ -126,9 +130,11 @@ Rails.application.routes.draw do
       end
     end
 
+    scope module: :message_thread, as: :message do
+      resource :tags, only: %i[update edit]
+    end
     scope module: :message_thread do
       resources :subscriptions, only: %i[edit create destroy]
-      resource :tags, only: [:update]
       resource :user_favourites, only: %i[create destroy]
       resource :leaders, only: %i[create destroy]
     end
@@ -139,7 +145,7 @@ Rails.application.routes.draw do
     scope module: "library" do
       resources :documents, only: %i[new create show edit update destroy]
       resources :notes, only: %i[new create show edit update destroy]
-      resources :tags, only: [:update]
+      resources :tags, only: %i[update edit]
     end
   end
 

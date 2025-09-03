@@ -1,0 +1,8 @@
+= turbo_frame_tag dom_id(resource, :tags) do
+  = form_with model: resource, url: polymorphic_path([resource, :tags]) do |f|
+    = f.text_field :tags_string, data: {controller: "tags" }
+    %small.form-text.text-muted
+      = t("shared.tags_string")
+    %div
+      = f.submit t("formtastic.actions.update_tags")
+

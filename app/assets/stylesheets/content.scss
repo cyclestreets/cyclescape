@@ -23,42 +23,6 @@
     &.content-wide-sidebar {
       width: 570px;
     }
-    div.tags {
-      overflow: hidden;
-      p {
-        font-size: 12px;
-        display: inline;
-        float: left;
-        color: $lightgrey;
-        margin: 0 10px 5px 0;
-      }
-      ul {
-        @include list-reset;
-        display: inline;
-        float: left;
-        li {
-          a {
-            font-size: 12px;
-            background: $grey;
-            color: $black;
-            margin-right: 5px;
-            margin-bottom: 2px;
-            line-height: 1;
-            padding: 4px 6px;
-            border-radius: 5px;
-            &:hover {
-              text-decoration: none;
-              border: none;
-              background: $lightergrey;
-            }
-          }
-        }
-      }
-      // Edit link
-      a[rel="edit-tags"] {
-        font-size: 12px;
-      }
-    }
     section {
       header {
         overflow: hidden;
@@ -852,23 +816,15 @@ body.home {
 }
 
 div.tagsinput{
+  div {
+    display: inline;
+  }
   border: none !important;
-  min-height: 65px !important;
+  min-height: 25px !important;
+  height: auto !important;
   input {
     border: none !important;
     box-shadow: none !important;
-  }
-  span.tag {
-    @extend .tag-item;
-    margin-right: 5px;
-    a {
-      color: $lightblack;
-      &:hover {
-        text-decoration: none;
-        border: none;
-        color: $black;
-      }
-    }
   }
 }
 

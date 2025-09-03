@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class MessageThread::TagsController < MessageThread::BaseController
+  def edit
+    authorize @thread, :update_tags?
+  end
+
   def update
     authorize @thread, :update_tags?
     if @thread.update(tags_string: params[:message_thread][:tags_string])
