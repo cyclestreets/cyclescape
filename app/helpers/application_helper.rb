@@ -54,7 +54,7 @@ module ApplicationHelper
 
   def bs_menu(p_class: "badge", placement: "auto", &content)
     menu = capture(&content)
-    return unless menu.include?("<li>")
+    return unless menu&.include?("<li>")
 
     content_tag(
       :p,

@@ -5,7 +5,7 @@ require "spec_helper"
 describe "Issue threads" do
   let!(:issue) { create(:issue) }
   let(:issue_with_tags) { create(:issue) }
-  let(:edit_thread) { "Edit this thread" }
+  let(:edit_thread) { "Edit this discussion" }
 
   context "new" do
     context "as a site user" do
@@ -15,7 +15,7 @@ describe "Issue threads" do
         visit issue_path(issue)
         click_on "Discuss"
         fill_in "Message", with: "Awesome!"
-        click_on "Create Thread"
+        click_on "Create Discussion"
         expect(page).to have_content(issue.title)
         expect(page).to have_content("Awesome!")
         expect(current_user.subscribed_to_thread?(issue.threads.last)).to be_truthy
@@ -31,9 +31,9 @@ describe "Issue threads" do
         visit issue_path(issue)
         click_on "Discuss"
         fill_in "Message", with: "Awesome!"
-        click_on "Create Thread"
+        click_on "Create Discussion"
         visit issue_path(issue)
-        click_on "New Thread"
+        click_on "New Discussion"
         expect(find_field("Discussion title").value).to be_nil
       end
 
@@ -41,7 +41,7 @@ describe "Issue threads" do
         visit issue_path(issue_with_tags)
         click_on "Discuss"
         fill_in "Message", with: "Foo"
-        click_on "Create Thread"
+        click_on "Create Discussion"
         expect(MessageThread.last.tags.length).to be > 0
       end
     end
@@ -73,10 +73,10 @@ describe "Issue threads" do
         visit issue_path(issue)
         click_on "Discuss"
         fill_in "Message", with: "Awesome!"
-        click_on "Create Thread"
+        click_on "Create Discussion"
         expect(page).to have_content(issue.title)
         expect(page).to have_content("Awesome!")
-        expect(page).to have_content("Public: Everyone can view this thread and post messages.")
+        expect(page).to have_selector('[title="Public: Everyone can view this discussion and post messages."]')
       end
 
       it "should create a new public group thread" do
@@ -85,10 +85,10 @@ describe "Issue threads" do
         select current_group.name, from: "Owned by"
         fill_in "Message", with: "Awesome!"
         select "Public", from: "Privacy"
-        click_on "Create Thread"
+        click_on "Create Discussion"
         expect(page).to have_content(issue.title)
         expect(page).to have_content("Awesome!")
-        expect(page).to have_content("Public: Everyone can view this thread and post messages.")
+        expect(page).to have_selector('[title="Public: Everyone can view this discussion and post messages."]')
       end
 
       it "should create a new private group thread" do
@@ -97,10 +97,10 @@ describe "Issue threads" do
         select current_group.name, from: "Owned by"
         fill_in "Message", with: "Awesome!"
         select "Group", from: "Privacy"
-        click_on "Create Thread"
+        click_on "Create Discussion"
         expect(page).to have_content(issue.title)
         expect(page).to have_content("Awesome!")
-        expect(page).to have_content("Private: Only members of #{current_group.name} can view and post messages to this thread.")
+        expect(page).to have_selector("[title='Private: Only members of #{current_group.name} can view and post messages to this discussion.']")
       end
 
       context "group thread notification" do
@@ -121,7 +121,7 @@ describe "Issue threads" do
           click_on "Discuss"
           select current_group.name, from: "Owned by"
           fill_in "Message", with: message
-          click_on "Create Thread"
+          click_on "Create Discussion"
           message
         end
 
@@ -168,7 +168,7 @@ describe "Issue threads" do
         click_on "Discuss"
         fill_in "Discussion title", with: "Lorem & Ipsum"
         fill_in "Message", with: message
-        click_on "Create Thread"
+        click_on "Create Discussion"
         message
       end
 
@@ -177,7 +177,7 @@ describe "Issue threads" do
         email = open_last_email_for(notifiee.email)
         message = Message.find_by(body: message_body)
 
-        expect(email).to have_subject("[Cyclescape] New thread started on issue \"#{issue.title}\"")
+        expect(email).to have_subject("[Cyclescape] New discussion started on issue \"#{issue.title}\"")
         expect(email).to have_body_text(issue.title)
         expect(email).to have_body_text("Lorem & Ipsum")
         expect(email.html_part.decoded).to include(message_body)
@@ -201,7 +201,7 @@ describe "Issue threads" do
         fill_in "Message", with: "Don't tell anyone, but..."
 
         email_count = all_emails.count
-        click_on "Create Thread"
+        click_on "Create Discussion"
         expect(all_emails.count).to eql(email_count)
 
         email = open_last_email_for(notifiee.email)
@@ -241,7 +241,7 @@ describe "Issue threads" do
         click_on "Discuss"
         fill_in "Discussion title", with: "Lorem & Ipsum"
         fill_in "Message", with: "Something or other"
-        click_on "Create Thread"
+        click_on "Create Discussion"
       end
 
       context "with a potential subscriber" do
@@ -295,10 +295,12 @@ describe "Issue threads" do
 
       it "should let you edit the thread" do
         visit issue_thread_path(issue, thread)
-        click_on edit_thread
+        expect(page).to have_selector('[data-bs-content*="Edit this discussion"]')
+        expect(page).to have_selector("[data-bs-content*='#{edit_thread_path(thread)}']")
+        visit edit_thread_path(thread)
         fill_in I18n.t("activerecord.attributes.message_thread.title"), with: "New title please"
         click_on "Save"
-        expect(page).to have_content("Thread updated")
+        expect(page).to have_content("Discussion updated")
         expect(page).to have_content("New title please")
       end
     end

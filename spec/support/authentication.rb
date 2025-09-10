@@ -7,7 +7,7 @@ shared_context "signs in" do
     fill_in "Email", with: current_user.email
     fill_in "Password", with: password
     click_button "Sign in"
-    expect(page).to have_content("Sign out")
+    expect(page.find_all(".fa-sign-out", visible: :all).size).to eq(1)
   end
 end
 

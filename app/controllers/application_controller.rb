@@ -54,9 +54,9 @@ class ApplicationController < ActionController::Base
       end
     else
       if current_user.remembered_group?
-        dashboard_url(subdomain: SubdomainConstraint.subdomain(current_user.remembered_group.short_name))
+        threads_url(subdomain: SubdomainConstraint.subdomain(current_user.remembered_group.short_name))
       else
-        dashboard_url
+        threads_url
       end
     end
   end

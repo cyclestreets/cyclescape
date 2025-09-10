@@ -279,11 +279,6 @@ describe "Issues" do
     context "as an admin" do
       include_context "signed in as admin"
 
-      it "should show you a delete link" do
-        visit issue_path(issue)
-        expect(page).to have_content(delete_text)
-      end
-
       it "should let you delete the issue" do
         visit issue_path(issue)
         click_on delete_text
@@ -301,13 +296,9 @@ describe "Issues" do
 
       let(:issue) { create(:issue) }
 
-      it "should show you an edit link" do
+      it "should let you edit the issue", js: true do
         visit issue_path(issue)
-        expect(page).to have_content(edit_text)
-      end
-
-      it "should let you edit the issue" do
-        visit issue_path(issue)
+        page.find('.fa-cog').hover
         click_on edit_text
         expect(page).to have_content("Edit Issue")
         fill_in "Title", with: "Something New"
@@ -324,8 +315,9 @@ describe "Issues" do
       context "recent" do
         let(:issue) { create(:issue, created_by: current_user) }
 
-        it "should show you an edit link" do
+        it "should show you an edit link", js: true do
           visit issue_path(issue)
+          page.find('.fa-cog').hover
           expect(page).to have_content(edit_text)
         end
       end
@@ -335,8 +327,9 @@ describe "Issues" do
       include_context "signed in as a site user"
       let(:issue) { create(:issue) }
 
-      it "should not show you an edit link" do
+      it "should not show you an edit link", js: true do
         visit issue_path(issue)
+        page.find('.fa-cog').hover
         expect(page).not_to have_content(edit_text)
       end
     end
@@ -359,29 +352,28 @@ describe "Issues" do
 
       it "should not allow you to vote" do
         expect(page).to have_content("Please sign in to vote")
-        find(:css, ".vote-count.unvoted").click
-        expect(page).to have_content("You need to sign in or sign up before continuing.")
-        expect(issue.votes_count).to eql(1)
+        find(:css, ".fa-thumbs-up").click
+        expect(issue.votes_count).to be(1)
       end
     end
 
     shared_examples "vote and cancel your vote" do
       it "vote and cancel", js: true do
-        within ".tally" do
+        within ".votes" do
           expect(page).to have_content("0")
           expect(page).to_not have_content("1")
         end
 
-        find(:css, ".vote-count").click
+        find(:css, ".fa-thumbs-up").click
 
-        within ".tally" do
+        within ".votes" do
           expect(page).to have_content("1")
-          expect(page).to_not have_content("0")
+          expect(page).not_to have_content("0")
         end
 
-        find(:css, ".vote-count").click
+        find(:css, ".fa-thumbs-up").click
 
-        within ".tally" do
+        within ".votes" do
           expect(page).to have_content("0")
           expect(page).to_not have_content("1")
         end

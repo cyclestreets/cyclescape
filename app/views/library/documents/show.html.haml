@@ -3,8 +3,8 @@
     %h1
       %i{class: "fas fa-fw fa-book-open"}
       = @document.title
-    = bs_menu(placement: "bottom") do
-      - if policy(@document).edit?
+    - if policy(@document).edit?
+      = bs_menu(placement: "bottom") do
         %ul
           %li= link_to t(".edit"), edit_library_document_path(@document)
 
