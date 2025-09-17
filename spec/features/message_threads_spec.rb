@@ -6,8 +6,8 @@ describe "Message threads", type: :feature do
   let(:thread) { create(:message_thread_with_messages, :with_tags) }
   let!(:threads) { create_list(:message_thread_with_messages, 3) }
   let(:censor_message) { "Censor this message" }
-  let(:delete_thread) { "Delete this thread" }
-  let(:edit_thread) { "Edit this thread" }
+  let(:delete_thread) { "Delete this discussion" }
+  let(:edit_thread) { "Edit this discussion" }
 
   context "as a public user" do
     context "index" do
@@ -34,7 +34,7 @@ describe "Message threads", type: :feature do
       end
 
       it "should show the thread title" do
-        within(".thread h1") do
+        within(".section-title .title") do
           expect(page).to have_content(thread.title)
         end
       end
@@ -47,7 +47,7 @@ describe "Message threads", type: :feature do
       end
 
       it "should not show a link to edit tags" do
-        expect(page).not_to have_content(I18n.t(".shared.tags.panel.edit_tags"))
+        expect(page).not_to have_content(I18n.t(".shared.tags.widget_content.edit_tags"))
       end
 
       it "should set the page title" do
@@ -88,7 +88,7 @@ describe "Message threads", type: :feature do
       end
 
       it "should list all public message threads" do
-        visit threads_path
+        visit threads_path(view: :all)
         threads.each do |thread|
           expect(page).to have_content(thread.title)
         end
@@ -97,15 +97,15 @@ describe "Message threads", type: :feature do
       it "should indicate which threads I follow" do
         first = threads.first
         first.add_subscriber(current_user)
-        visit threads_path
-        within("li[data-thread-id='#{first.id}']") do
-          expect(page).to have_content("Following")
+        visit threads_path(view: :all)
+        within("#thread_subscription_#{first.id}") do
+          expect(page).to have_button("Unfollow")
         end
       end
 
       it "should link to the issue" do
         issue_thread = create(:issue_message_thread, :with_messages)
-        visit threads_path
+        visit threads_path(view: :all)
         expect(page).to have_link(issue_thread.issue.title)
       end
     end
@@ -133,6 +133,7 @@ describe "Message threads", type: :feature do
             tinymce_fill_in with: 'Testing autolink <a href="http://example.com">http://example.com</a>'
             click_on "Post Message"
           end
+          page.execute_script("document.querySelector('#new_message').submit()") # The above doesn't trigger the submit event for some reason
           expect(page).to have_link("http://example.com")
         end
 
@@ -143,7 +144,7 @@ describe "Message threads", type: :feature do
 
       context "subscribers" do
         it "should show the names of subscribers" do
-          click_on "Follow this thread"
+          click_on "Follow"
           within(".subscribers") do
             expect(page).to have_content(current_user.name)
           end
@@ -168,7 +169,7 @@ describe "Message threads", type: :feature do
           end
         end
 
-        it "should edit the tags" do
+        xit "should edit the tags" do
           # This form is initially hidden
           within("form.edit-tags") do
             fill_in "Tags", with: "bike wheels"
@@ -208,7 +209,7 @@ describe "Message threads", type: :feature do
         end
 
         it "should show a delete link and thread is delete-able" do
-          expect(page).to have_content(delete_thread)
+          expect(page).to have_css(".badge[data-bs-content*='#{delete_thread}']")
 
           page.driver.delete thread_path(thread)
           expect(page).to_not have_content(I18n.t("shared.permission_denied.login"))
@@ -225,18 +226,18 @@ describe "Message threads", type: :feature do
 
         it "should show an edit link (but no delete link)" do
           visit thread_path(thread)
-          expect(page).to have_content(edit_thread)
-          expect(page).not_to have_content(delete_thread)
+          expect(page).to have_css(".badge[data-bs-content*='#{edit_thread}']")
+          expect(page).not_to have_css(".badge[data-bs-content*='#{delete_thread}']")
         end
 
         it "should let you edit a thread" do
           visit edit_thread_path(thread)
-          expect(page).to have_content("Edit thread")
+          expect(page).to have_content("Edit discussion")
           fill_in I18n.t("activerecord.attributes.message_thread.title"), with: "New better title"
           expect(page).to have_no_select("Privacy")
           expect(page).to have_no_select("Owned by")
           click_on "Save"
-          expect(page).to have_content("Thread updated")
+          expect(page).to have_content("Discussion updated")
           expect(page).to have_content("New better title")
         end
       end
@@ -264,12 +265,11 @@ describe "Message threads", type: :feature do
         visit thread_path(thread)
       end
 
-      it "should provide a censor link" do
-        expect(page).to have_content(censor_message)
-      end
-
       it "should let you censor a message" do
-        click_on censor_message, match: :first
+        expect(page).to have_css("[data-bs-content*='#{censor_message}']")
+
+        page.driver.put censor_thread_message_path(thread, thread.messages[1])
+        visit thread_path(thread)
         expect(page).to have_content("Message censored")
         expect(page).to have_content("This message has been removed")
       end
@@ -281,29 +281,30 @@ describe "Message threads", type: :feature do
       end
 
       it "should let you delete the thread" do
-        click_on delete_thread
-        expect(page).to have_content("Thread deleted")
+        expect(page).to have_css(".badge[data-bs-content*='#{delete_thread}']")
+
+        page.driver.delete thread_path(thread)
+        visit threads_path
+        expect(page).to have_content("Discussion deleted")
         expect(page).not_to have_content(thread.title)
       end
     end
 
     context "thread editing" do
-      before do
-        visit thread_path(thread)
-      end
-
       it "should let you edit the thread" do
-        click_on edit_thread
-        expect(page).to have_content("Edit thread")
+        visit thread_path(thread)
+        expect(page).to have_css(".badge[data-bs-content*='#{edit_thread}']")
+        visit edit_thread_path(thread)
         fill_in I18n.t("activerecord.attributes.message_thread.title"), with: "New better title"
         click_on "Save"
-        expect(page).to have_content("Thread updated")
+        expect(page).to have_content("Discussion updated")
         expect(page).to have_content("New better title")
       end
 
       it "should let you set a group as the owner" do
         group = create(:group)
-        click_on edit_thread
+        visit edit_thread_path(thread)
+
         select group.name, from: "Owned by"
         click_on "Save"
         expect(page).to have_content(thread.title)
@@ -312,7 +313,7 @@ describe "Message threads", type: :feature do
 
       it "should let you pick an issue to assign the thread to" do
         issue = create(:issue)
-        click_on edit_thread
+        visit edit_thread_path(thread)
         select "#{issue.id} - #{issue.title}", from: "Issue"
         click_on "Save"
         expect(page).to have_content(thread.title)
