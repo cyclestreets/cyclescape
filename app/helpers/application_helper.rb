@@ -115,6 +115,10 @@ module ApplicationHelper
   end
 
   def thread_display_title(thread)
+    if !policy(thread).show?
+      return t("decorators.thread_list.private_thread_title")
+    end
+
     state, title = thread.display_title
     safe_join(
       [

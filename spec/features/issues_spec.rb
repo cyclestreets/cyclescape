@@ -75,7 +75,7 @@ describe "Issues" do
       end
 
       it "should not show you an edit tags link" do
-        expect(page).not_to have_content(I18n.t(".shared.tags.panel.edit_tags"))
+        expect(page).not_to have_content(I18n.t(".shared.tags.widget_content.edit_tags"))
       end
 
       it "should show you a twitter link" do
@@ -101,7 +101,7 @@ describe "Issues" do
 
         it "should censor the private thread title" do
           visit issue_path(issue)
-          expect(page).to have_content("[Private thread]")
+          expect(page).to have_content("[Private discussion]")
         end
       end
     end
