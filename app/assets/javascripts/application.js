@@ -67,6 +67,7 @@ import ThreadsController from 'controllers/threads-controller'
 import TimeagoController from 'controllers/timeago-controller'
 import AlertController from 'controllers/alert-controller'
 import TagsController from 'controllers/tags-controller'
+import NewIssueController from 'controllers/new-issue-controller'
 
 
 // Start Stimulus and register controllers
@@ -84,4 +85,5 @@ application.register('sidebar-nav', SidebarNavController)
 application.register('threads', ThreadsController)
 application.register('timeago', TimeagoController)
 application.register('tags', TagsController)
+application.register('new-issue', NewIssueController)
 Turbo.session.drive = false

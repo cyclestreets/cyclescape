@@ -43,7 +43,7 @@ describe "Issue notifications" do
       fill_in_issue
       click_on I18n.t("formtastic.actions.issue.create")
 
-      within("#content header") do
+      within(".section-title") do
         expect(page).to have_content(issue_values[:title])
       end
       expect(page).to have_content("parking")
@@ -56,7 +56,7 @@ describe "Issue notifications" do
 
         fill_in I18n.t("formtastic.labels.issue.new.title"), with: issue_values[:title]
         tinymce_fill_in id: "issue_description", with: issue_values[:description]
-        fill_in "issue_tags_string_tag", with: "parking parking"
+        fill_in "issue_tags_string_tag", with: "parking, parking"
 
         page.evaluate_script("$('#issue_loc_json').val('#{location}')") # Would prefer to click on the map
         fill_in I18n.t("activerecord.attributes.message_thread.title"), with: thread_values[:title]
@@ -179,7 +179,7 @@ describe "Issue notifications" do
       click_on I18n.t("formtastic.actions.issue.create")
       expect(all_emails.count).to eq(email_count + 2)
       expect(all_emails.map(&:subject)).to match_array(
-        [/\[Cyclescape\] New issue/, /\[Cyclescape\] New thread started on issue/]
+        [/\[Cyclescape\] New issue/, /\[Cyclescape\] New discussion started on issue/]
       )
     end
 
@@ -195,7 +195,7 @@ describe "Issue notifications" do
         emails_by_to = all_emails.group_by(&:to)
         emails_by_to.values do |emails|
           expect(emails.map(&:subject)).to match_array(
-            [/\[Cyclescape\] New issue/, /\[Cyclescape\] New thread started on issue/]
+            [/\[Cyclescape\] New issue/, /\[Cyclescape\] New discussion started on issue/]
           )
         end
         expect(emails_by_to.keys.flatten).to match_array [user.email, user2.email]
@@ -227,7 +227,7 @@ describe "Issue notifications" do
       click_on I18n.t("formtastic.actions.issue.create")
       expect(all_emails.count).to eq(email_count + 2)
       expect(all_emails.map(&:subject)).to match_array(
-        [/\[Cyclescape\] New issue/, /\[Cyclescape\] New thread started on issue/]
+        [/\[Cyclescape\] New issue/, /\[Cyclescape\] New discussion started on issue/]
       )
     end
   end
