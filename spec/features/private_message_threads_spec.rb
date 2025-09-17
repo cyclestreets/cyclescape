@@ -20,7 +20,7 @@ describe "Message threads", type: :feature do
       fill_in "Discussion title", with: "Why hello"
       fill_in "Message", with: "Testing a new message!", match: :first
       click_on "Send Private message"
-      expect(page).to have_content("Private Message between")
+      expect(page).to have_css(".badge[title^='Private Message between']")
       expect(page).to have_content("Why hello")
     end
   end

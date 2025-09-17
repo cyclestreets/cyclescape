@@ -15,14 +15,14 @@ Rails.application.routes.draw do
       scope module: "issue" do
         resource :photo, only: [:show]
         resources :threads, controller: "message_threads"
-        resource :tags, only: [:update, :edit]
+        resource :tags, only: %i[update edit]
       end
     end
   end
 
   devise_for(
     :users, skip: :registrations,
-    controllers: { confirmations: "confirmations", omniauth_callbacks: 'users/omniauth_callbacks' }
+            controllers: { confirmations: "confirmations", omniauth_callbacks: "users/omniauth_callbacks" }
   )
   scope :settings do
     get :profile, to: "user/profiles#edit", as: :current_user_profile_edit

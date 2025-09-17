@@ -7,11 +7,10 @@
       - if thread.group
         %p
           = link_to_profile(thread.group, target: "_top")
-        - if policy(thread).show?
-          - if thread.issue
-            %br
-            = t ".discussion_on_issue"
-            = link_to thread.issue.title, issue_path(thread.issue)
+      - if policy(thread).show? && thread.issue
+        %br
+        = t ".discussion_on_issue"
+        = link_to thread.issue.title, issue_path(thread.issue)
       %div
         %p{class: "italic created-by-details"}
           - latest_activity = @latest_activity.find { |m| m.thread_id == thread.id }

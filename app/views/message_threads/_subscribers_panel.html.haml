@@ -2,11 +2,11 @@
   .title
     %i{class: "fas fa-fw fa-users"}
     = subscribers.count
-  .widget-content
-  - if group
-    %dl
-      %dt= t ".owner"
-      %dd= link_to_profile group
+  .widget-content.subscribers
+    - if group
+      %dl
+        %dt= t ".owner"
+        %dd= link_to_profile group
     %ul{class: "unstyled avatars"}
       - leaders = @thread.leaders.ordered(group.try(:id))
       - committee_members = @thread&.group_committee_members&.to_a

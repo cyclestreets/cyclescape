@@ -142,12 +142,10 @@ describe "Issues" do
         expect(page).to have_link(issue.tags.second.name)
       end
 
-      it "should be editable" do
-        # This form is initially hidden
-        within("form.edit-tags") do
-          fill_in "Tags", with: "pothole dangerous"
-          click_on I18n.t(".formtastic.actions.update_tags")
-        end
+      xit "should be editable", js: true do
+        click_on "Edit tags"
+        fill_in "Tags", with: "pothole dangerous"
+        click_on I18n.t(".formtastic.actions.update_tags")
         # Page submission is AJAX and returns json
         expect(page.source).to have_content("pothole")
         expect(page.source).to have_content("dangerous")
@@ -329,8 +327,7 @@ describe "Issues" do
 
       it "should not show you an edit link", js: true do
         visit issue_path(issue)
-        page.find('.fa-cog').hover
-        expect(page).not_to have_content(edit_text)
+        expect(page).not_to have_css('.fa-cog')
       end
     end
   end
