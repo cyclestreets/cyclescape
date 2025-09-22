@@ -14,7 +14,7 @@
       %div
         %p{class: "italic created-by-details"}
           - latest_activity = @latest_activity.find { |m| m.thread_id == thread.id }
-          - if policy(latest_activity.created_by.profile).show?
+          - if policy(thread).show? && policy(latest_activity.created_by.profile).show?
             = link_to_profile(latest_activity.created_by, target: "_top")
           - else
             = latest_activity.created_by.display_name_or_anon
