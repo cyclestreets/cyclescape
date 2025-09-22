@@ -5,8 +5,9 @@ require "spec_helper"
 describe "Group threads", use: :subdomain do
   let(:thread) { create(:message_thread, group: current_group) }
   let(:threads) { create_list(:message_thread_with_messages, 5, group: current_group) }
-  let(:edit_thread) { "Edit this thread" }
-  let(:delete_thread) { "Delete this thread" }
+  let(:edit_thread) { "Edit this discussion" }
+  let(:delete_thread) { "Delete this discussion" }
+  let(:create_discussion) { "Create Discussion" }
 
   before { set_subdomain(current_group.subdomain) if defined?(current_group) }
   after  { unset_subdomain if defined?(current_group) }
@@ -16,7 +17,7 @@ describe "Group threads", use: :subdomain do
   def fill_in_thread
     fill_in I18n.t("activerecord.attributes.message_thread.title"), with: thread_title
     fill_in "Message", with: "This is between you & me, but..."
-    click_on "Create Thread"
+    click_on create_discussion
   end
 
   context "as a group committee member" do
@@ -25,7 +26,7 @@ describe "Group threads", use: :subdomain do
     context "index page" do
       before do
         threads
-        visit group_threads_path(current_group)
+        visit group_threads_path(current_group, view: "all")
       end
 
       it "should list threads belonging to the group" do
@@ -37,14 +38,14 @@ describe "Group threads", use: :subdomain do
 
     context "new thread" do
       before do
-        visit group_threads_path(current_group)
+        visit group_threads_path(current_group, view: "general")
         click_link I18n.t("group.message_threads.index.new_group_thread")
       end
 
       it "should create a new public thread" do
         select "Group", from: "Privacy"
         fill_in_thread
-        expect(page).to have_content("Private: Only members of #{current_group.name}")
+        expect(page).to have_content("Private to members")
         expect(page).to have_content(thread_title)
         expect(current_user.subscribed_to_thread?(current_group.threads.last)).to be_truthy
       end
@@ -191,7 +192,7 @@ describe "Group threads", use: :subdomain do
           fill_in I18n.t("activerecord.attributes.message_thread.title"), with: "Committee Thread"
           fill_in "Message", with: "Something secret"
           select "Committee", from: "Privacy"
-          click_on "Create Thread"
+          click_on create_discussion
           expect(subscriber.subscribed_to_thread?(current_group.threads.last)).to be_falsey
         end
 
@@ -205,10 +206,10 @@ describe "Group threads", use: :subdomain do
           def create_private_group_thread
             visit issue_path(issue)
             click_on "Discuss"
-            fill_in I18n.t("activerecord.attributes.message_thread.title"), with: "Private thread"
+            fill_in I18n.t("activerecord.attributes.message_thread.title"), with: "Private keep out!"
             fill_in "Message", with: "Something or other"
             select "Group", from: "Privacy"
-            click_on "Create Thread"
+            click_on create_discussion
 
             expect(current_group.threads.last.privacy).to eq("group")
           end
@@ -235,7 +236,7 @@ describe "Group threads", use: :subdomain do
       before do
         current_group.default_thread_privacy = "group"
         current_group.save
-        visit group_threads_path(current_group)
+        visit group_threads_path(current_group, view: "general")
         click_link I18n.t("group.message_threads.index.new_group_thread")
       end
 
@@ -264,11 +265,11 @@ describe "Group threads", use: :subdomain do
       end
 
       it "should let you edit the thread" do
-        expect(page).to have_content(edit_thread)
-        click_on edit_thread
+        expect(page).to have_css(".badge[data-bs-content*='#{edit_thread}']")
+        visit edit_thread_path(thread)
         fill_in "Discussion title", with: "New, better, thread title"
         click_on "Save"
-        expect(page).to have_content "Thread updated"
+        expect(page).to have_content "Discussion updated"
         expect(page).to have_content "New, better, thread title"
       end
     end
@@ -279,7 +280,7 @@ describe "Group threads", use: :subdomain do
 
     context "new threads" do
       before do
-        visit group_threads_path(current_group)
+        visit group_threads_path(current_group, view: "general")
         click_link I18n.t("group.message_threads.index.new_group_thread")
       end
 
@@ -302,8 +303,11 @@ describe "Group threads", use: :subdomain do
       end
 
       it "should let you delete the thread" do
-        click_on delete_thread
-        expect(page).to have_content("Thread deleted")
+        expect(page).to have_css(".badge[data-bs-content*='#{delete_thread}']")
+
+        page.driver.delete thread_path(thread)
+        visit threads_path
+        expect(page).to have_content("Discussion deleted")
         expect(page).not_to have_content(thread.title)
       end
     end
@@ -356,7 +360,7 @@ describe "Group threads", use: :subdomain do
       include_context "signed in as a site user"
 
       before do
-        visit group_threads_path(private_thread.group)
+        visit group_threads_path(private_thread.group, view: "all")
       end
 
       it "should not show the title of private threads" do

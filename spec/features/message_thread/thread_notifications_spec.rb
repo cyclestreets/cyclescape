@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "thread notifications" do
   let(:thread) { create(:message_thread_with_messages) }
-  let(:subscribe_button) { find_button(I18n.t("formtastic.actions.thread_subscription.create")) }
+  let(:subscribe_button) { find_button(I18n.t("helpers.submit.thread_subscription.create")) }
 
   context "new messages" do
     include_context "signed in as a site user"

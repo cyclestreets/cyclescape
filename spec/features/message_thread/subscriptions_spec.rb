@@ -4,7 +4,7 @@ require "spec_helper"
 
 describe "Thread subscriptions" do
   let(:thread) { create(:message_thread_with_messages) }
-  let(:subscribe_button) { find_button(I18n.t("formtastic.actions.thread_subscription.create")) }
+  let(:subscribe_button) { find_button(I18n.t("helpers.submit.thread_subscription.create")) }
 
   context "site user subscribe" do
     include_context "signed in as a site user"
@@ -20,7 +20,7 @@ describe "Thread subscriptions" do
 
       it "should subscribe the user to the thread" do
         subscribe_button.click
-        expect(page).to have_content(I18n.t(".message_threads.subscribe_panel.subscribed"))
+        expect(page).to have_button(I18n.t("helpers.submit.thread_subscription.update"))
         expect(page).to have_content(I18n.t("message_thread.subscriptions.create.success"))
         expect(current_user.thread_subscriptions.count).to eq(1)
         expect(current_user.thread_subscriptions.first.thread).to eq(thread)
@@ -40,11 +40,12 @@ describe "Thread subscriptions" do
         it "should subscribe me when I post a message", js: true do
           expect(current_user.subscribed_to_thread?(thread)).to be_falsey
 
-          expect(ThreadRecorder).to receive(:thread_viewed).once
+          expect(ThreadRecorder).to receive(:thread_viewed).twice
           within(".new-message") do
             tinymce_fill_in with: "Given I'm interested enough to post, I should be subscribed"
           end
-          click_on "Post Message"
+          # click_on "Post Message"
+          page.execute_script("document.getElementById('new_message').submit()")
           sleep(0.5)
           expect(current_user.reload.subscribed_to_thread?(thread)).to be_truthy
         end

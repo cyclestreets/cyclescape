@@ -11,7 +11,7 @@ describe "Subscriptions", type: :feature do
   it "should let the subscription user's public token unsubscribe" do
     visit edit_thread_subscription_path(thread, subscription, t: sub_user.public_token)
     expect(page).to have_content(thread.title)
-    click_on t("formtastic.actions.thread_subscription.delete")
+    click_on t("helpers.submit.thread_subscription.update")
     expect(page).to have_content(t("message_thread.subscriptions.destroy.success"))
   end
 
