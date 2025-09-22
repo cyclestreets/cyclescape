@@ -52,7 +52,7 @@ describe "Group threads", use: :subdomain do
       it "should create a new committee thread" do
         select "Committee", from: "Privacy"
         fill_in_thread
-        expect(page).to have_content("Private: Only committee members of #{current_group.name}")
+        expect(page).to have_content("Private to comittee")
       end
 
       it "should default to a public group thread" do

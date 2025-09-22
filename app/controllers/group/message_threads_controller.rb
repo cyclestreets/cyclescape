@@ -12,11 +12,7 @@ class Group::MessageThreadsController < MessageThreadsController
       if current_user
         case params[:view]
         when "all"
-          if group.has_member?(current_user)
-            MessageThread.order_by_latest_message
-          else
-            MessageThread.is_public.order_by_latest_message
-          end
+          MessageThread.order_by_latest_message
         when "general"
           MessageThread.order_by_latest_message.without_issue
         when "favourites"
