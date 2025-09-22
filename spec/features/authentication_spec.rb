@@ -45,9 +45,9 @@ describe "Authentication and authorization" do
       click_button "Sign in"
     end
 
-    it "should direct you to your dashboard page instead of homepage" do
+    it "should direct you to your threads page instead of homepage" do
       choose_to_log_in_from(root_path)
-      expect(page.current_path).to eq(dashboard_path)
+      expect(page.current_path).to eq(threads_path)
     end
 
     it "should otherwise direct you page to where you started" do
@@ -61,10 +61,8 @@ describe "Authentication and authorization" do
     let(:group_url) { root_url(subdomain: current_group.subdomain) }
 
     def switch_to_group_and_sign_out
-      within ".group-selector" do
-        click_on current_group.name
-      end
-      expect(page.current_url).to eq(group_url)
+      expect(page).to have_selector("#group-popover[data-bs-content*='#{group_url}']")
+      visit group_url
       click_on "Sign out"
       expect(page).to have_no_content(current_user.name)
     end
@@ -76,7 +74,7 @@ describe "Authentication and authorization" do
       fill_in "Email", with: current_user.email
       fill_in "Password", with: password
       click_button "Sign in"
-      expect(page.current_url).to eq(dashboard_url(subdomain: current_group.short_name))
+      expect(page.current_url).to eq(threads_url(subdomain: current_group.short_name))
     end
 
     it "should not blow up if the group doesn't exist" do
@@ -87,13 +85,13 @@ describe "Authentication and authorization" do
       fill_in "Email", with: current_user.email
       fill_in "Password", with: password
       click_button "Sign in"
-      expect(page.current_url).to eq(dashboard_url(subdomain: "www"))
+      expect(page.current_url).to eq(threads_url(subdomain: "www"))
     end
   end
 
   it "should validate bicycle captch" do
     visit root_path
-    click_link "Sign up"
+    click_link "Create account"
     fill_in "Full name", with: credentials[:full_name]
     fill_in "Email", with: credentials[:email]
     fill_in "Password", with: credentials[:password], match: :first
@@ -106,7 +104,7 @@ describe "Authentication and authorization" do
   context "when signing up" do
     before do
       visit root_path
-      click_link "Sign up"
+      click_link "Create account"
       fill_in "Full name", with: credentials[:full_name]
       fill_in "Email", with: credentials[:email]
       fill_in "Password", with: credentials[:password], match: :first
@@ -168,7 +166,7 @@ describe "Authentication and authorization" do
     it "should log me out" do
       sign_in
       cancel_account
-      visit dashboard_path
+      visit threads_path
       expect(page).to have_content("You need to sign in or sign up before continuing.")
     end
 
