@@ -79,15 +79,9 @@
     </ul>
   </nav>
 </div>
-<% { alert: :alert, success: :success, notice: :success}.each do |type, klass| %>
-  <% if flash[type] %>
-    <div data-controller="alert" class="alert alert-<%= klass %> alert-dismissible fade show" role="alert">
-      <%= flash[type] %>
-      <button data-alert-target="close" type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <% end %>
-<% end %>
+
+<div id= 'flash'>
+  <%= render "layouts/flash" %>
+</div>
 
 <%= render "layouts/search" %>
