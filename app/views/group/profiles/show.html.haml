@@ -9,7 +9,7 @@
 
 %h2= t ".picture"
 - if @profile.picture
-  = image_tag @profile.picture_thumbnail.url
+  = image_tag @profile.picture.url
 - else
   %p= t ".no_picture"
 
