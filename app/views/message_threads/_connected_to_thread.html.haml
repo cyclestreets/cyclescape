@@ -3,10 +3,11 @@
 - popover_data = bs_popover(content: "<i class='far fa-user-crown'></i> Discussion leader") if leading
 - popover_data = bs_popover(content: "<i class='far fa-users'></i> Committee") if committee
 %li{data: popover_data}
-  - if policy(user).view_profile? && user.profile.picture
-    = image_tag user.profile.picture_thumbnail.url
   - if policy(user).view_profile?
     = link_to user_profile_path(user) do
+      %span{class: "avatar"}
+        - if policy(user).view_profile? && user.profile.picture
+          = image_tag user.profile.picture_thumbnail.url
       = user.name
       - if leading
         %i{class: "fas fa-fw fa-user-crown"}
@@ -14,6 +15,9 @@
         %i{class: "fas fa-fw fa-users"}
   - else
     %a
+      %span{class: "avatar"}
+        - if policy(user).view_profile? && user.profile.picture
+          = image_tag user.profile.picture_thumbnail.url
       = user.display_name_or_anon
       - if leading
         %i{class: "fas fa-fw fa-user-crown"}
