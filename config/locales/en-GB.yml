@@ -398,7 +398,7 @@
         issue_threads: Issue discussions
         issue_threads_description: These are public and private discussions
           belonging to %{group_name}.
-        general_threads: Administrative discussions
+        general_threads: Admin items
         general_threads_description: These are public and private general discussions
           for administrative purposes, e.g. arranging a general meeting.
         all_threads: All discussions
@@ -635,8 +635,7 @@
       sign_out: Sign out
       sign_in: Sign in
       sign_up: Create an account
-      private_messages: Private Messages
-      feedback: Feedback
+      private_messages: Private messages
       home: Home
       issues: Issues
       issues_tooltip: Listed problems, browsable on the map or as a list
@@ -644,11 +643,13 @@
       library_tooltip: Reusable resources for campaigning
       planning_applications: Planning applications
       loading: Please wait…
-      membership: Membership
+      group_management: Group management
       threads: Discussions
       threads_tooltip: Discussions on each issue
       tags: Tags
       tags_tooltip: Cloud of the top 200 most used tags
+      feedback: Feedback
+      my_profile: My profile
     footer:
       application_version_html: 'Version ref: %{version}'
       github_page_link_html: View the source at <a href='https://github.com/cyclestreets/cyclescape/'>GitHub</a>
