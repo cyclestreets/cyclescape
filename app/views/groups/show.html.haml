@@ -14,45 +14,48 @@
     %p= t ".no_location"
 
 %hr
-.content-wrapper
-  .main-content
-    %p.light.drop-cap= auto_link simple_format @group.description
-    - if current_user && @group.committee_members.include?(current_user)
-      = link_to edit_group_profile_path(@group) do
-        .button.primary{title: t(".committee_only")}
-          =t(".group_management")
-          %i.fas.fa-fw.fa-pencil
-    = link_to threads_path, class: "action" do
-      .icon
-        %i.fas.fa-fw.fa-rocket
-      .text
-        %h2= t(".browse_discussions")
-        %p.description= t(".discussions_description")
-    = link_to issues_path(anchor: "map-pane"), class: "action mx-1" do
-      .icon
-        %i.fas.fa-fw.fa-book-open
-      .text
-        %h2= t(".browse_issues")
-        %p.description= t(".issues_description")
-  .side-content
-    - membership = @group.memberships.find_by(user: current_user)
-    - if current_user && !membership
+
+.index
+  .content-wrapper
+    .main-content.full-screen
+      %p.light.drop-cap= auto_link simple_format @group.description
+      - if current_user && @group.committee_members.include?(current_user)
+        = link_to edit_group_profile_path(@group) do
+          .button.primary{title: t(".committee_only")}
+            =t(".group_management")
+            %i.fas.fa-fw.fa-pencil
+      .flex.action-buttons
+        = link_to threads_path, class: "action" do
+          .icon
+            %i.fas.fa-fw.fa-rocket
+          .text
+            %h2= t(".browse_discussions")
+            %p.description= t(".discussions_description")
+        = link_to issues_path(anchor: "map-pane"), class: "action" do
+          .icon
+            %i.fas.fa-fw.fa-book-open
+          .text
+            %h2= t(".browse_issues")
+            %p.description= t(".issues_description")
+    .side-content
+      - membership = @group.memberships.find_by(user: current_user)
+      - if current_user && !membership
+        .widget
+          .title
+            %h2
+              = t(".join_title", application_name: @site_config.application_name)
+          .widget-content
+            = render partial: "join", locals: {group: @group}
       .widget
         .title
           %h2
-            = t(".join_title", application_name: @site_config.application_name)
+            %i.fas.fa-fw.fa-biking
+            = t ".group_organisers"
         .widget-content
-          = render partial: "join", locals: {group: @group}
-    .widget
-      .title
-        %h2
-          %i.fas.fa-fw.fa-biking
-          = t ".group_organisers"
-      .widget-content
-        %ul.unstyled.avatars
-          = render collection: @group.committee_members.includes(:profile), as: :user, partial: "message_threads/connected_to_thread", locals: { leading: false, committee_members: [] }, cached: true
-    - if current_user && membership
-      .widget
-        = button_to safe_join([t(".leave_group"), "…"]),
-          group_membership_path(@group, membership),
-          method: :delete, data: {confirm: t('are_you_sure')}, class: "primary"
+          %ul.unstyled.avatars
+            = render collection: @group.committee_members.includes(:profile), as: :user, partial: "message_threads/connected_to_thread", locals: { leading: false, committee_members: [] }, cached: true
+      - if current_user && membership
+        .widget
+          = button_to safe_join([t(".leave_group"), "…"]),
+            group_membership_path(@group, membership),
+            method: :delete, data: {confirm: t('are_you_sure')}, class: "primary"
