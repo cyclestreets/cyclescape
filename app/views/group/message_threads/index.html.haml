@@ -69,4 +69,8 @@
             %p= t ".issue_threads_description", group_name: @group.name
             %hr
         = render "shared/message_threads_list_frame", threads: @threads, intro: intro
+        .spinner-overlay
+          .spinner-border.text-primary{ role: "status" }
+            %span.visually-hidden Loading...
+
     .side-content
