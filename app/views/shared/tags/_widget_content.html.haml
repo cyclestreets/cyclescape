@@ -1,7 +1,6 @@
-.widget-content.tags
-  = turbo_frame_tag dom_id(resource, :tags) do
-    %ul{class: "tags"}
-      - resource.tags.each do |tag|
-        %li{class: "tag"}= link_to tag.name, tag_path(tag), target: "_top"
-    - if policy(resource).update_tags?
-      = link_to t(".edit_tags"), edit_polymorphic_path([resource, :tags]), data: { turbo: true }
+%div{id: dom_id(resource, :tags)}
+  %ul{class: "tags"}
+    - resource.tags.each do |tag|
+      %li{class: "tag"}= link_to tag.name, tag_path(tag)
+  - if policy(resource).update_tags?
+    = link_to t(".edit_tags"), edit_polymorphic_path([resource, :tag]), data: { turbo: true }

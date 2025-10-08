@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       scope module: "issue" do
         resource :photo, only: [:show]
         resources :threads, controller: "message_threads"
-        resource :tags, only: %i[update edit]
+        resources :tags, only: %i[update edit]
       end
     end
   end
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     root to: "groups#show", as: :subroot
     resources :threads, controller: "group/message_threads" do
       scope module: :message_thread, as: :message do
-        resource :tags, only: %i[update edit]
+        resources :tags, only: %i[update edit]
       end
     end
     issues_route controller: "group/issues"
@@ -131,7 +131,7 @@ Rails.application.routes.draw do
     end
 
     scope module: :message_thread, as: :message do
-      resource :tags, only: %i[update edit]
+      resources :tags, only: %i[update edit]
     end
     scope module: :message_thread do
       resources :subscriptions, only: %i[edit create destroy]
@@ -145,7 +145,7 @@ Rails.application.routes.draw do
     scope module: "library" do
       resources :documents, only: %i[new create show edit update destroy]
       resources :notes, only: %i[new create show edit update destroy]
-      resources :tags, only: %i[update edit]
+      resources :tags, only: %i[update edit], as: "item_tags"
     end
   end
 

@@ -1,5 +1,5 @@
-= turbo_frame_tag dom_id(resource, :tags) do
-  = form_with model: resource, url: polymorphic_path([resource, :tags]) do |f|
+%div{id: dom_id(resource, :tags)}
+  = form_with model: resource, scope: :resource, url: polymorphic_path([resource, :tag]), data: {turbo: true} do |f|
     = f.text_field :tags_string, data: {controller: "tags" }
     %small.form-text.text-muted
       = t("shared.tags_string")

@@ -1,18 +1,9 @@
 # frozen_string_literal: true
 
-class Library::TagsController < ApplicationController
-  def edit
-    @item = Library::Item.find params[:id]
-    authorize @item, :update_tags?
-  end
+class Library::TagsController < BaseTagsController
+  private
 
-  def update
-    @item = Library::Item.find params[:id]
-    authorize @item, :update_tags?
-    if @item.update tags_string: params[:library_item][:tags_string]
-      render json: { tagspanel: TagPanelDecorator.new(@item, form_url: url_for).render }
-    else
-      head :conflict
-    end
+  def resource
+    @resource ||= Library::Item.find params[:id]
   end
 end
