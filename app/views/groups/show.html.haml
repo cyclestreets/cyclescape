@@ -9,7 +9,7 @@
         .w-100.h-100.tinymap{id: map_id}
         .hidden
           .map-data{"data-center" => location_to_geojson(profile.location),
-            "data-opts" => { domid: map_id, feature: item_to_geojson(profile), hidezoom: true, nosearch: true }.to_json}
+            "data-opts" => { domid: map_id, feature: item_to_geojson(profile), hidezoom: true, nosearch: true, hidelayers: true }.to_json}
   - else
     %p= t ".no_location"
 
