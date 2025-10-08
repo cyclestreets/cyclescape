@@ -58,8 +58,8 @@
         - intro = capture do
           - if params[:view] == "general"
             %p= t ".general_threads_description"
-            = link_to new_thread_path, target: "_top" do
-              %button.primary
+            = link_to new_thread_path, target: "_top", class: "container" do
+              %button.primary.float-end
                 = t(".new_group_thread")
                 %i{class: "fas fa-fw fa-comment-alt-plus"}
 
