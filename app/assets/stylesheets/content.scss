@@ -392,15 +392,12 @@ section#user-locations {
   }
 }
 
-.dashboard-threads, .thread-list {
-  h4 {
-    a {
-      color: $black;
-      &.new {
-        color: $lightblue;
-      }
-    }
-  }
+a.new::after {
+  content: "•";
+  color: var(--bs-danger);
+  font-size: 1em;
+  margin-left: 4px;
+  vertical-align: middle;
 }
 
 /* Dashbaord */

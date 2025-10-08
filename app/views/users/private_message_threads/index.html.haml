@@ -1,12 +1,16 @@
 %h2= t '.private_messages'
 %p=t '.private_introduction'
-%table.dashboard-threads
-  %tbody
-    - @private_threads.each do |thread|
-      %tr
-        %td.title
-          %h4= link_to thread.title, thread_path(thread), class: (@unviewed_thread_ids.include?(thread.id) ? "new" : "")
-        %td.activity
-          = t '.with_html', other: link_to_profile(thread.other(current_user))
-        %td.activity
-          = formatted_created_at thread.latest_message
+%ul.discussions
+  - @private_threads.each do |thread|
+    %li
+      .disccusion-item
+        .content
+          - link_class = (@unviewed_thread_ids.include?(thread.id) ? "new primary-link" : "primary-link")
+          %h3.drop-cap{data: {'thread-id' => thread.id}}
+            = link_to thread.title, thread_path(thread), class: link_class, target: "_top"
+          %div
+            %p{class: "italic created-by-details"}
+              = t ".with"
+              = link_to_profile(thread.other(current_user), target: "_top")
+              = t ".posted_at"
+              = time_tag_with_title(thread.latest_message.created_at)

@@ -1288,7 +1288,8 @@
           see.
         send: Send Private message
       index:
-        with_html: with %{other}.
+        with: with
+        posted_at: posted at
         private_messages: Private Messages
         private_introduction: These are private messages that only you and one other
           person can see.  You can send a private message to another user by clicking
