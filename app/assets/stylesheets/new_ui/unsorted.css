@@ -486,7 +486,7 @@ ul.application-types li label {color: white;}
     button.primary i {padding-left: 3px; padding-right: 14px;}
 
     /* Make sure Leaflet controls don't show through our popups */
-    .leaflet-bottom.leaflet-right {z-index: 10 !important;}
+    .leaflet-bottom, .leaflet-right {z-index: 10 !important;}
 
     #top-menu {height: 65px; width: calc(100vw + 5px);}
     #top-menu h1 {font-size: 20px;}
