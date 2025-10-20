@@ -12,13 +12,13 @@ class MessageThreadsController < ApplicationController
         when "all"
           ThreadList.recent_public.page(params[:page])
         when "favourites"
-          current_user.favourite_threads.page(params[:page])
+          current_user.favourite_threads.order_by_latest_message.page(params[:page])
         when "deadlines"
           current_user.subscribed_threads.with_upcoming_deadlines.page(params[:page])
         when "popular"
-          MessageThread.popular
+          MessageThread.popular.order_by_latest_message
         else
-          current_user.subscribed_threads.page(params[:page])
+          current_user.subscribed_threads.order_by_latest_message.page(params[:page])
         end
       else
         ThreadList.recent_public
