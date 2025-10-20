@@ -1,4 +1,4 @@
-= turbo_frame_tag "poll_#{component.id}" do
+= turbo_frame_tag dom_id(component) do
   .poll-message
     = component.question
     - if current_user
