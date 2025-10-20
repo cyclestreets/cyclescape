@@ -1,5 +1,5 @@
 .action-buttons
-  - if policy(@user).send_private_message? && @user != current_user
+  - if @user && policy(@user).send_private_message? && @user != current_user
     %button{class: "primary"}
       %i{ class: "fas fa-fw fa-envelope" }
       =link_to t('.send_private_message'), new_user_private_message_path(@user)
