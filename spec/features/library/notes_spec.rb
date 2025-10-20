@@ -13,7 +13,7 @@ describe "Library notes" do
     it "should show the note body correctly" do
       expect(page).to have_content(note.body)
       expect(page).to have_link(note.created_by.name)
-      expect(page).not_to have_content(I18n.t(".shared.tags.panel.edit_tags"))
+      expect(page).not_to have_content(I18n.t("shared.tags.widget_content.edit_tags"))
     end
   end
 
@@ -66,11 +66,16 @@ describe "Library notes" do
       visit library_note_path(note)
     end
 
-    it "should be taggable" do
+    it "should be taggable", js: true do
       click_on "Edit tags"
-      fill_in "Tags", with: "cycle parking"
-      click_on I18n.t(".formtastic.actions.update_tags")
-      expect(JSON.parse(page.source)["tagspanel"]).to have_content("parking")
+
+      expect(page).not_to have_button("Edit tags")
+      fill_in "resource_tags_string_tag", with: "cycle parking,"
+      click_on I18n.t("shared.edit_tags.update")
+
+      within(".widget-content.tags") do
+        expect(page).to have_link("cycle-parking", href: "/tags/cycle-parking")
+      end
     end
   end
 
@@ -81,11 +86,13 @@ describe "Library notes" do
 
       it "should show you a link" do
         visit library_note_path(note)
-        expect(page).to have_link(edit_text)
+        expect(page).to have_selector("[data-bs-content*='#{edit_text}'] > .fa-cog")
       end
 
-      it "should let you edit the note" do
+      it "should let you edit the note", js: true do
         visit library_note_path(note)
+
+        page.find('.fa-cog').hover
         click_on edit_text
 
         expect(page).to have_content(I18n.t(".library.notes.edit.title"))
@@ -103,7 +110,7 @@ describe "Library notes" do
         let(:note) { create(:library_note, created_by: current_user) }
         it "should show you a link" do
           visit library_note_path(note)
-          expect(page).to have_link(edit_text)
+          expect(page).to have_selector("[data-bs-content*='#{edit_text}'] > .fa-cog")
         end
       end
     end
@@ -113,7 +120,7 @@ describe "Library notes" do
 
       it "should not show you a link" do
         visit library_note_path(note)
-        expect(page).not_to have_link(edit_text)
+        expect(page).not_to have_selector("[data-bs-content*='#{edit_text}'] > .fa-cog")
       end
     end
   end

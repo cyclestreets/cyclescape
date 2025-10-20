@@ -2,7 +2,7 @@
   = form_with model: resource, scope: :resource, url: polymorphic_path([resource, :tag]), data: {turbo: true} do |f|
     = f.text_field :tags_string, data: {controller: "tags" }
     %small.form-text.text-muted
-      = t("shared.tags_string")
+      = t(".help")
     %div
-      = f.submit t("formtastic.actions.update_tags")
+      = f.submit t(".update")
 

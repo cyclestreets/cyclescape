@@ -16,8 +16,11 @@ Capybara.register_driver :selenium_chrome_headless_wide do |app|
     opts.add_argument("disable-backgrounding-occluded-windows")
     opts.add_argument("disable-renderer-backgrounding")
 
-    # Only line that is added from the default :selenium_chrome_headless
-    opts.add_argument("--window-size=1001,800")
+    # Below is added from the default :selenium_chrome_headless
+    opts.add_argument("--window-size=1201,900")
+    opts.add_preference("credentials_enable_service", false)
+    opts.add_preference("profile.password_manager_enabled", false)
+    opts.add_argument("--disable-features=AutofillServerCommunication,PasswordManagerOnboarding,PasswordCheck")
   end
 
   Capybara::Selenium::Driver.new(app, **{ :browser => :chrome, options_key => browser_options })

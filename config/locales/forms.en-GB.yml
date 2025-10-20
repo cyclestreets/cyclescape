@@ -4,9 +4,6 @@
       thread_subscription:
         create: Follow
         update: Unfollow
-    label:
-      issue:
-        tags_string: comma separated list of tags e.g. cycle parking, obstruction
   cancel: Cancel
   formtastic:
     labels:
@@ -209,7 +206,6 @@
       update: Save
       saving: Saving…
       cancel: Cancel
-      update_tags: Update Tags
       group_membership:
         create: Add member
       group_request:

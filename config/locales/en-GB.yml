@@ -794,10 +794,6 @@
         success: You are now unsubscribed from this discussion
       edit:
         unsubscribe: are sure you want to unsubscribe
-    tags:
-      panel:
-        edit_tags: edit
-        tags: tags
     user_favourites:
       create:
         success: Favourite saved
@@ -999,7 +995,10 @@
         title: New issue from Planning application
         title_prefix: Planning application
   shared:
-    tags_string: comma separated list of tags e.g. cycle parking, obstruction
+    edit_tags:
+      help: comma separated list of tags e.g. cycle parking, obstruction
+      update: Update tags
+    tags: Tags
     actions:
       resolve_action: "Resolve outstanding actions:"
     message_thread_form:

@@ -22,7 +22,7 @@ describe "Library documents" do
     end
 
     it "should not show a link to edit tags" do
-      expect(page).not_to have_content(I18n.t(".shared.tags.panel.edit_tags"))
+      expect(page).not_to have_content(I18n.t(".shared.tags.widget_content.edit_tags"))
     end
   end
 
@@ -86,11 +86,15 @@ describe "Library documents" do
       visit library_document_path(document)
     end
 
-    it "should be taggable" do
+    it "should be taggable", js: true do
       click_on "Edit tags"
-      fill_in "Tags", with: "cycle parking"
-      click_on I18n.t(".formtastic.actions.update_tags")
-      expect(JSON.parse(page.source)["tagspanel"]).to have_content("parking")
+      expect(page).to have_button(I18n.t("shared.edit_tags.update"))
+      fill_in "resource_tags_string_tag", with: "cycle parking,"
+      click_on I18n.t("shared.edit_tags.update")
+
+      within(".widget-content.tags") do
+        expect(page).to have_link("cycle-parking", href: "/tags/cycle-parking")
+      end
     end
   end
 
@@ -101,7 +105,7 @@ describe "Library documents" do
 
       it "should show you a link" do
         visit library_document_path(document)
-        expect(page).to have_link(edit_text)
+        expect(page).to have_selector("[data-bs-content*='#{edit_text}'] > .fa-cog")
       end
     end
 
@@ -111,8 +115,10 @@ describe "Library documents" do
         document.item.update!(created_by: current_user)
       end
 
-      it "should let you edit the document" do
+      it "should let you edit the document", js: true do
         visit library_document_path(document)
+
+        page.find('.fa-cog').hover
         click_on edit_text
 
         expect(page).to have_content(I18n.t(".library.documents.edit.title"))
