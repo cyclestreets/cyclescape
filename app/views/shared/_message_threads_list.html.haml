@@ -13,7 +13,7 @@
         = link_to thread.issue.title, issue_path(thread.issue)
       %div
         %p{class: "italic created-by-details"}
-          - latest_activity = @latest_activity.find { |m| m.thread_id == thread.id }
+          - latest_activity = @latest_activity.find { |m| m.thread_id == thread.id } || thread
           - if policy(thread).show? && policy(latest_activity.created_by.profile).show?
             = link_to_profile(latest_activity.created_by, target: "_top")
           - else
