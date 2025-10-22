@@ -1,7 +1,9 @@
-- committee = !leading && committee_members.include?(user)
+- committee = committee_members.include?(user)
 - popover_data = ''
-- popover_data = bs_popover(content: "<i class='far fa-user-crown'></i> Discussion leader") if leading
-- popover_data = bs_popover(content: "<i class='far fa-users'></i> Committee") if committee
+- popover_content = []
+- popover_content.push("<i class='far fa-users'></i> Committee") if committee
+- popover_content.push("<i class='far fa-user-crown'></i> Discussion leader") if leading
+- popover_data = bs_popover(content: popover_content.to_sentence) if popover_content.present?
 %li{data: popover_data}
   - if policy(user).view_profile?
     = link_to user_profile_path(user) do
@@ -11,7 +13,7 @@
       = user.name
       - if leading
         %i{class: "fas fa-fw fa-user-crown"}
-      - elsif committee
+      - if committee
         %i{class: "fas fa-fw fa-users"}
   - else
     %a
@@ -21,6 +23,6 @@
       = user.display_name_or_anon
       - if leading
         %i{class: "fas fa-fw fa-user-crown"}
-      - elsif committee
+      - if committee
         %i{class: "fas fa-fw fa-users"}
 
