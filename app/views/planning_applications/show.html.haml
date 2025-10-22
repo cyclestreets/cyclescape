@@ -40,7 +40,7 @@
         method: :put, class: "btn-grey"
     -else
       = link_to t(".hide"), hide_planning_application_path(@planning_application),
-        method: :put, title: t('.hide_tooltip'), class: "btn-grey"
+        method: :put, data: bs_popover(content: t('.hide_tooltip')), class: "btn-grey"
   %section.source.box
     %header
       %h2= t ".data_source"

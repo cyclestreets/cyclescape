@@ -20,7 +20,7 @@
       - if current_user
         = form_with method: :get, data: { turbo_frame: "threads_frame", controller: "threads", action: "change->threads#saveState" }, local: false, class: "ios-segmented-control adjustable-icons small" do
           %span.selection{ data: { threads_target: "selection" } }
-          %div.option{ title: t(".my_threads_description") }
+          %div.option{ data: bs_popover(content: t(".my_threads_description")) }
             - mine_checked = ["mine", nil].include?(params[:view])
             = radio_button_tag "view", "mine", mine_checked, data: { threads_target: "option" }
             = label_tag "view_mine" do
@@ -28,28 +28,28 @@
                 %span.d-none.d-sm-inline
                   = t(".my_threads")
 
-          %div.option{ title: t(".all_threads") }
+          %div.option{ data: bs_popover(content: t(".all_threads")) }
             = radio_button_tag "view", "all", params[:view] == "all", data: { threads_target: "option" }
             = label_tag "view_all" do
               %span.fas.fa-globe-europe{ data: { text: t(".all"), threads_target: "label" } }
                 %span.d-none.d-sm-inline
                   = t(".all")
 
-          %div.option{ title: t(".favourites") }
+          %div.option{ data: bs_popover(content: t(".favourites")) }
             = radio_button_tag "view", "favourites", params[:view] == "favourites", data: { threads_target: "option" }
             = label_tag "view_favourites" do
               %span.fas.fa-star{ data: { text: t(".favourites"), threads_target: "label" } }
                 %span.d-none.d-sm-inline
                   = t(".favourites")
 
-          %div.option{ title: t(".popular") }
+          %div.option{ data: bs_popover(content: t(".popular")) }
             = radio_button_tag "view", "popular", params[:view] == "popular", data: { threads_target: "option" }
             = label_tag "view_popular" do
               %span.fas.fa-fire-alt{ data: { text: t(".popular"), threads_target: "label" } }
                 %span.d-none.d-sm-inline
                   = t(".popular")
 
-          %div.option{title: t(".deadlines_description")}
+          %div.option{data: bs_popover(content: t(".deadlines_description"))}
             = radio_button_tag "view", "deadlines", params[:view] == "deadlines", data: { threads_target: "option" }
             = label_tag "view_deadlines" do
               %span.fas.fa-calendar-star{data: {text: t(".deadlines"), threads_target: "label" } }

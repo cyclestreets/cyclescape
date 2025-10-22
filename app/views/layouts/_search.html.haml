@@ -5,7 +5,7 @@
 .login-button
   - if current_user
     = link_to current_user_profile_path do
-      %i.fal.fa-fw.fa-id-card-alt{ title: t(".my_profile") }
+      %i.fal.fa-fw.fa-id-card-alt{ data: bs_popover(content: t(".my_profile")) }
   - else
     = link_to new_user_session_path do
-      %i.fal.fa-fw.fa-user{ title: t(".sign_in") }
+      %i.fal.fa-fw.fa-user{ data: bs_popover(content: t(".sign_in")) }

@@ -22,20 +22,20 @@
       <% end %>
     </div>
     <ul class="padding">
-      <%= link_to threads_path, title: t(".threads_tooltip") do %>
+      <%= link_to threads_path, data: bs_popover(content: t(".threads_tooltip")) do %>
         <li><i class="fas fa-fw fa-microphone"></i><%= t(".threads") %></li>
       <% end %>
-      <%= link_to issues_path, title: t(".issues_tooltip") do %>
+      <%= link_to issues_path, data: bs_popover(content: t(".issues_tooltip")) do %>
         <li><i class="fas fa-fw fa-hashtag"></i><%= t(".issues") %></li>
       <% end %>
       <hr>
-      <%= link_to library_path, title: t(".library_tooltip") do %>
+      <%= link_to library_path, data: bs_popover(content: t(".library_tooltip")) do %>
         <li><i class="fas fa-fw fa-book-open"></i><%= t(".library") %></li>
       <% end %>
       <%= link_to planning_applications_path do %>
         <li><i class="fas fa-fw fa-sign"></i><%= t(".planning_applications") %></li>
       <% end %>
-      <%= link_to tags_path, title: t(".tags_tooltip") do %>
+      <%= link_to tags_path, data: bs_popover(content: t(".tags_tooltip")) do %>
         <li><i class="fas fa-fw fa-tags"></i><%= t(".tags") %></li>
       <% end %>
       <hr>

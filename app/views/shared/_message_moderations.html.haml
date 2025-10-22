@@ -14,7 +14,7 @@
         %td= link_to "#{"(Thread Deleted) " if thread.deleted_at?}#{thread.title.truncate(100)}", thread_path(thread)
         %td= t(".#{message.check_reason}")
         %td= thread.approved?
-        %td{title: message.body}= message.body.truncate(300)
+        %td{ data: bs_popover(content: message.body) }= message.body.truncate(300)
         %td= link_to(message.created_by.full_name, user_profile_path(message.created_by))
         %td
           = link_to t(".approve"), approve_thread_message_path(thread, message),

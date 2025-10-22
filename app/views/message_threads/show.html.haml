@@ -6,7 +6,7 @@
 
     %p{class: "badge"}= @thread.display_id
     - title, text = privacy_badge_title_text(thread: @thread)
-    %p{class: "badge", title: title}
+    %p{class: "badge", data: bs_popover(content: title)}
       %i{class: "fas fa-fw fa-eye"}
       = text
     = bs_menu(placement: "bottom") do

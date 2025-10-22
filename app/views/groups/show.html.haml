@@ -21,7 +21,7 @@
       %p.light.drop-cap= auto_link simple_format @group.description
       - if current_user && @group.committee_members.include?(current_user)
         = link_to edit_group_profile_path(@group) do
-          .button.primary{title: t(".committee_only")}
+          .button.primary{ data: bs_popover(content: t(".committee_only")) }
             =t(".group_management")
             %i.fas.fa-fw.fa-pencil
       .flex.action-buttons

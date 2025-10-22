@@ -12,7 +12,7 @@
             .left
               %label.label{for: "user_location", style: "width: auto"}
                 = t(".my_location")
-              %a#current_location.btn-grey.hide{href: "#", title: "Create a location based on where you are now"}
+              %a#current_location.btn-grey.hide{href: "#", data: bs_popover(content: "Create a location based on where you are now") }
                 = t(".current_location")
             .leaflet-search-outside#user_location{data: {current_location: I18n.t("user.locations.large_map.current_location_placeholder")}}
           %li.boardered

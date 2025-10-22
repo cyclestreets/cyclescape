@@ -5,7 +5,7 @@
         = planning_application.tinymap
   %td.title
     - title_length= planning_application.part_hidden? ? 80 : 150
-    %h3{title: planning_application.title}= link_to (truncate planning_application.title, length: title_length, separator: ' '),
+    %h3{data: bs_popover(content: planning_application.title)}= link_to (truncate planning_application.title, length: title_length, separator: ' '),
       show_uid_planning_applications_path(authority_param: planning_application.authority_param, uid: planning_application.uid)
     - if planning_application.part_hidden?
       .tag-item
@@ -27,7 +27,7 @@
 
   %td
     %p= planning_application.authority_name
-  %td{title: planning_application.description}
+  %td{data: bs_popover(content: planning_application.description)}
     %p= planning_application.description.try(:truncate, 300)
   %td
     %p= link_to planning_application.uid, planning_application.url
