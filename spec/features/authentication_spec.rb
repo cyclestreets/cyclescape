@@ -165,9 +165,10 @@ describe "Authentication and authorization" do
 
     it "should log me out" do
       sign_in
+      expect(page).not_to have_link("Sign in")
       cancel_account
       visit threads_path
-      expect(page).to have_content("You need to sign in or sign up before continuing.")
+      expect(page).to have_link("Sign in")
     end
 
     it "should not let me log back in" do

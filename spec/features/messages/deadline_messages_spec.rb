@@ -19,7 +19,7 @@ describe "Deadline messages" do
       stub_request(:post, "https://development.rest.akismet.com/1.1/comment-check").to_return(status: 200, body: "false")
       click_on "Deadline/date"
       expect(page).to have_no_selector(".ui-datepicker")
-      find("#message_deadline_messages_attributes_0_deadline").click
+      find("#message_deadline_messages_attributes_0_deadline", wait: 5).click
       expect(page).to have_selector(".ui-datepicker")
 
       fill_in "Deadline", with: future_date.to_s
@@ -27,11 +27,8 @@ describe "Deadline messages" do
 
       click_on "Post Message"
 
-      wait_for_ajax
-
-      expect(page).to have_no_css(".ui-datepicker")
-      find("#message_deadline_messages_attributes_0_deadline").click
-      expect(page).to have_css(".ui-datepicker")
+      expect(page).to have_content("Submission deadline")
+      expect(page).to have_content("5 days away")
     end
 
     it "should post a new deadline message" do

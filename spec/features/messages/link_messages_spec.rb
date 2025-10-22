@@ -17,13 +17,11 @@ describe "Link messages" do
     end
 
     it "should post a link message", js: true do
-      expect(ThreadRecorder).to receive(:thread_viewed).once
+      expect(ThreadRecorder).to receive(:thread_viewed).with(thread, current_user).exactly(:twice)
 
       click_on "Link"
-      link_form do
-        fill_in "Web address", with: link_message_attrs[:url]
-        fill_in "Title", with: link_message_attrs[:title]
-      end
+      fill_in "Web address", with: link_message_attrs[:url]
+      fill_in "Title", with: link_message_attrs[:title]
       click_on "Post Message"
 
       sleep(0.4)

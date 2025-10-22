@@ -280,10 +280,10 @@ describe "Issues" do
       it "should let you delete the issue", js: true do
         visit issue_path(issue)
         page.find('.fa-cog').hover
-        click_on delete_text
         accept_alert do
-          click_button "OK"
+          click_on delete_text
         end
+
         expect(page).to have_content("Issue deleted")
         expect(page).not_to have_content(issue.title)
       end

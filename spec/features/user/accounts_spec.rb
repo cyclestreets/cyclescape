@@ -12,10 +12,8 @@ describe "User accounts" do
 
   it "should let you edit your account settings" do
     visit root_path
-    within("#top-menu") do
-      click_on current_user.name
-    end
-    click_on I18n.t(".shared.profile_menu.update_account")
+    click_on I18n.t("layouts.header.my_profile")
+    click_on I18n.t(".shared.profile_menu.update_account"), match: :first
     expect(page).to have_content(I18n.t(".devise.registrations.edit.title"))
   end
 end

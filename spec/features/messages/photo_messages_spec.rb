@@ -5,10 +5,6 @@ require "spec_helper"
 describe "Photo messages", type: :feature do
   let(:thread) { create(:message_thread) }
 
-  def photo_form
-    within("#new-photo-message") { yield }
-  end
-
   context "new" do
     include_context "signed in as a site user"
 
@@ -20,10 +16,8 @@ describe "Photo messages", type: :feature do
       stub_request(:post, "https://development.rest.akismet.com/1.1/comment-check").to_return(status: 200, body: "false")
       thread.created_by.prefs.update_column(:email_status_id, 1)
       click_on "Photo"
-      photo_form do
-        attach_file("Photo", abstract_image_path)
-        fill_in "Caption", with: "An abstract image"
-      end
+      attach_file("Photo", abstract_image_path)
+      fill_in "Caption", with: "An abstract image"
       click_on "Post Message"
       expect(page).to have_css(".photo img")
       within("figcaption") do

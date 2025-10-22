@@ -63,7 +63,8 @@ describe "Issues in a group subdomain" do
     # Check decl_auth context is set correctly for nested controller
     it "should let you edit the issue" do
       visit issue_path(issue)
-      click_on edit_text
+      expect(page).to have_selector("[data-bs-content*='#{edit_text}'] > .fa-cog")
+      visit edit_issue_path(issue)
       expect(page).to have_content("Edit Issue")
       fill_in "Title", with: "Something New"
       click_on I18n.t("formtastic.actions.issue.update")
