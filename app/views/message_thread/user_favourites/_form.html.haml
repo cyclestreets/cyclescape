@@ -1,7 +1,7 @@
 - if signed_in?
-  = turbo_frame_tag "favourite_#{thread.id}" do
+  = turbo_frame_tag dom_id(thread, :favourite) do
     - user_favourite = @user_favourites ? @user_favourites.find { |up| up.thread_id == thread.id} : thread.favourite_for(current_user)
-    %span{class: "favourite", id: "favourite-#{thread.id}"}
+    %span{class: "favourite"}
       - if user_favourite&.persisted?
         =link_to thread_user_favourites_path(thread), data: { turbo_method: :delete } do
           %i.fas.fa-star{style: "color: gold", data: bs_popover(content: t(".remove_favourite"))}

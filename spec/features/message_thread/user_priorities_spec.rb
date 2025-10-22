@@ -8,11 +8,11 @@ describe "user favourites", js: true do
 
   it "allows changing favourites" do
     visit thread_path(thread)
-    find(".fa-star-o").click
+    find(".far.fa-star").click
 
     expect(page).to have_content(I18n.t("message_thread.user_favourites.create.success"))
 
-    find(".fa-star").click
+    find(".fas.fa-star").click
 
     expect(page).to have_content(I18n.t("message_thread.user_favourites.destroy.success"))
   end

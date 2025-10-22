@@ -2,6 +2,6 @@
   <%= render "layouts/flash" %>
 <% end %>
 
-<%= turbo_stream.update "favourite_#{@thread.id}" do %>
+<%= turbo_stream.replace dom_id(@thread, :favourite) do %>
   <%= render partial: "message_thread/user_favourites/form", locals: { thread: @thread } %>
 <% end %>
