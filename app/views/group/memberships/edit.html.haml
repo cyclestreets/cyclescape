@@ -1,11 +1,12 @@
-= render partial: "group/tabs"
+%section.content-no-sidebar
+  = render partial: "group/tabs"
 
-%h2= t ".title", user_name: @membership.user.name
+  %h2= t ".title", user_name: @membership.user.name
 
-= semantic_form_for @membership, url: group_membership_path(@group, @membership) do |f|
-  = f.semantic_errors
-  = f.inputs do
-    = f.input :role, :as => :radio, :collection => f.object.class.allowed_roles_map
-  = f.actions do
-    = f.action :submit
-    = cancel_link group_members_path
+  = semantic_form_for @membership, url: group_membership_path(@group, @membership) do |f|
+    = f.semantic_errors
+    = f.inputs do
+      = f.input :role, :as => :radio, :collection => f.object.class.allowed_roles_map
+    = f.actions do
+      = f.action :submit
+      = cancel_link group_members_path

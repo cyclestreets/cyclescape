@@ -1,34 +1,35 @@
-.title-wrapper
-  .section-title
-    %h1
-      %i{class: "fas fa-fw fa-book-open"}
-      = @note.title
-    = bs_menu(placement: "bottom") do
-      - if policy(@note).edit?
-        %ul
-          %li= link_to t(".edit"), edit_library_note_path(@note)
-.content-wrapper
-  .main-content
-    %p
-      - if policy(@note.created_by).view_profile?
-        - profile_link = link_to_profile @note.created_by
-      - else
-        - profile_link = @note.created_by.display_name_or_anon
-      = t ".added_by_html", name: profile_link, time: formatted_created_at(@note)
-    - if @note.document
-      %p= t ".note_on_document_html", document: link_to(@note.document.title, @note.document)
-    %hr
-    = @item.icon
-    = render partial: "note", locals: { note: @note }
-  .side-content
-    .widget
-      = render "shared/tags/widget", resource: @note.item
-    .widget
-      .title
-        = t ".public_threads"
-      - unless @threads.empty?
-        %p= t ".threads_explanation"
-        %ul.sidebar-threadlist
-          = render partial: "message_threads/compact", collection: @threads, as: :thread
-      - else
-        %p= t ".no_threads"
+%section.content-no-sidebar
+  .title-wrapper
+    .section-title
+      %h1
+        %i{class: "fas fa-fw fa-book-open"}
+        = @note.title
+      = bs_menu(placement: "bottom") do
+        - if policy(@note).edit?
+          %ul
+            %li= link_to t(".edit"), edit_library_note_path(@note)
+  .content-wrapper
+    .main-content
+      %p
+        - if policy(@note.created_by).view_profile?
+          - profile_link = link_to_profile @note.created_by
+        - else
+          - profile_link = @note.created_by.display_name_or_anon
+        = t ".added_by_html", name: profile_link, time: formatted_created_at(@note)
+      - if @note.document
+        %p= t ".note_on_document_html", document: link_to(@note.document.title, @note.document)
+      %hr
+      = @item.icon
+      = render partial: "note", locals: { note: @note }
+    .side-content
+      .widget
+        = render "shared/tags/widget", resource: @note.item
+      .widget
+        .title
+          = t ".public_threads"
+        - unless @threads.empty?
+          %p= t ".threads_explanation"
+          %ul.sidebar-threadlist
+            = render partial: "message_threads/compact", collection: @threads, as: :thread
+        - else
+          %p= t ".no_threads"
