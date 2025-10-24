@@ -3,6 +3,10 @@
 class ApplicationDecorator < Draper::Decorator
   delegate_all
 
+  def to_model
+    object
+  end
+
   def self.collection_decorator_class
     PaginatingDecorator
   end
