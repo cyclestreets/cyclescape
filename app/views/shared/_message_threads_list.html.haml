@@ -2,7 +2,7 @@
   .disccusion-item
     .content
       - link_class = (@unviewed_thread_ids.include?(thread.id) ? "new primary-link" : "primary-link")
-      %h3.drop-cap{class: thread.icon_class, data: {'thread-id' => thread.id}}
+      %h3{class: thread.icon_class, data: {'thread-id' => thread.id}}
         = link_to_if policy(thread).show?, thread_display_title(thread), thread_path(thread), class: link_class, target: "_top"
       - if thread.group
         %p

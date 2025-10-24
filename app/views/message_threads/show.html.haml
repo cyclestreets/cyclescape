@@ -32,7 +32,7 @@
 .content-wrapper
   .main-content{ data: {"initially-loaded-from" => @initially_loaded_from } }
     - if @issue
-      %p{class: "drop-cap"}
+      %p
         .title= @issue.description
     %hr
     %ul{class: "thread"}
