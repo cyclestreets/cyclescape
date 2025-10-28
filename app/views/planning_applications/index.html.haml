@@ -1,5 +1,11 @@
 %section.content-no-sidebar
-  %h2= t ".planning_applications_in_your_area"
+  .title-wrapper
+    .section-title
+      %i{class: "fas fa-fw fa-sign"}
+      %h1= PlanningApplication.model_name.human.pluralize
+  .content-wrapper
+    .main-content
+      %p= t ".planning_applications_in_your_area"
   %br
   = form_tag(search_planning_applications_path, {method: :get, class: "filters"}) do
     = text_field_tag :q, params[:q], placeholder: t(".planning_applications_search")
