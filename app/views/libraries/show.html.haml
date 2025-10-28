@@ -1,25 +1,28 @@
 %section.content-no-sidebar
-  %h1= t ".title"
-  %p= t ".overview_description_html"
-  %p= t ".overview_usage"
-  = paginate @items
-  %h2.clear= t ".latest"
-  .wrapper
-    %ul.library-list
-      - @items.each do |item|
-        %li
-          = item.icon
-          .lib-content
-            = item.link
-            - if item.location
-              - map_id = "leaflet-#{dom_id(item)}"
-              .tinyermap{id: map_id}
-              .hidden
-                .map-data{"data-center" => location_to_geojson(item.location),
-                  "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(item), hidezoom: true }.to_json}
-          .meta
-            = formatted_created_at item
-    = paginate @items
-
-%aside#sidebar
-  = link_to t(".new_library_item"), new_library_path, class: "open-dialog btn-green"
+  .title-wrapper
+    .section-title
+      %h1= t ".title"
+  .content-wrapper
+    .main-content
+      %p= t ".overview_description_html"
+      %p= t ".overview_usage"
+  .content-wrapper
+    .main-content
+      = paginate @items
+      %ul.library-list
+        - @items.each do |item|
+          %li
+            = item.icon
+            .lib-content
+              = item.link
+              - if item.location
+                - map_id = "leaflet-#{dom_id(item)}"
+                .tinyermap{id: map_id}
+                .hidden
+                  .map-data{"data-center" => location_to_geojson(item.location),
+                    "data-opts" => { domid: map_id, hidelayers: true, feature: item_to_geojson(item), hidezoom: true }.to_json}
+            .meta
+              = formatted_created_at item
+      = paginate @items
+    .side-content
+      = link_to t(".new_library_item"), new_library_path, class: "open-dialog btn-green"
