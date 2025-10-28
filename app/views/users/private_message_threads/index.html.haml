@@ -1,16 +1,24 @@
-%h2= t '.private_messages'
-%p=t '.private_introduction'
-%ul.discussions
-  - @private_threads.each do |thread|
-    %li
-      .disccusion-item
-        .content
-          - link_class = (@unviewed_thread_ids.include?(thread.id) ? "new primary-link" : "primary-link")
-          %h3.drop-cap{data: {'thread-id' => thread.id}}
-            = link_to thread.title, thread_path(thread), class: link_class, target: "_top"
-          %div
-            %p{class: "italic created-by-details"}
-              = t ".with"
-              = link_to_profile(thread.other(current_user), target: "_top")
-              = t ".posted_at"
-              = time_tag_with_title(thread.latest_message.created_at)
+%section.content-no-sidebar
+  .title-wrapper
+    .section-title
+      %h1= t '.private_messages'
+  .content-wrapper
+    .main-content
+      %p=t '.private_introduction'
+
+      %hr
+
+      %ul.discussions
+        - @private_threads.each do |thread|
+          %li
+            .disccusion-item
+              .content
+                - link_class = (@unviewed_thread_ids.include?(thread.id) ? "new primary-link" : "primary-link")
+                %h3.drop-cap{data: {'thread-id' => thread.id}}
+                  = link_to thread.title, thread_path(thread), class: link_class, target: "_top"
+                %div
+                  %p{class: "italic created-by-details"}
+                    = t ".with"
+                    = link_to_profile(thread.other(current_user), target: "_top")
+                    = t ".posted_at"
+                    = time_tag_with_title(thread.latest_message.created_at)
