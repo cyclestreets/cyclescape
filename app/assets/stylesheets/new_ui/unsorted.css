@@ -483,7 +483,7 @@ ul.application-types li label {color: white;}
     .side-content {display: none; position: absolute; top: 0; left: 10%; margin: auto;}
     .main-content { max-width: 100vw }
 
-    .show-side-content, .show-map-controls {display: block;}
+    /*.show-side-content, .show-map-controls {display: block;} */
     .map-controls.absolute {top: 0;}
     .title-wrapper .section-title {margin-right: 0; flex: unset; width: 100%;}
     button.primary i {padding-left: 3px; padding-right: 14px;}
