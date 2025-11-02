@@ -8,7 +8,7 @@ class PlanningApplicationsController < ApplicationController
     authorize PlanningApplication
     @planning_applications = PlanningApplicationDecorator.decorate_collection(
       current_user
-      .planning_applications_near_locations.ordered.page(params[:page]).per(10).includes(:issue, :users)
+      .planning_applications_near_locations.ordered.page(params[:planning_page]).per(10).includes(:issue, :users)
     )
   end
 
