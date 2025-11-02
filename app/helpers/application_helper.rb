@@ -213,6 +213,12 @@ module ApplicationHelper
     [page.to_i, 1].max
   end
 
+  def request_path
+    # https://github.com/rails/rails/blob/b47cc51b989e09e8a00616bc336c8da7347a90d5/actionview/lib/action_view/helpers/url_helper.rb#L590
+    # with leading slash removed
+    URI::RFC2396_PARSER.unescape(request.path).force_encoding(Encoding::BINARY)[1..]
+  end
+
   THREAD_FORMAT_MAP = {
     "thread :number" => /thread \d+/,
     "thread no :number" => /thread no \d+/,
