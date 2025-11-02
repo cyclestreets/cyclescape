@@ -57,24 +57,6 @@ body {
 }
 
 
-// Content grouping
-//
-// 1. Reset Firefox's gray color
-// 2. Set correct height and prevent the `size` attribute to make the `hr` look like an input field
-
-hr {
-  margin: $hr-margin-y 0;
-  color: $hr-color; // 1
-  background-color: currentColor;
-  border: 0;
-  opacity: $hr-opacity;
-}
-
-hr:not([size]) {
-  height: $hr-height; // 2
-}
-
-
 // Typography
 //
 // 1. Remove top margins from headings
