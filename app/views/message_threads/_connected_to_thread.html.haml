@@ -6,23 +6,25 @@
 - popover_data = bs_popover(content: popover_content.to_sentence) if popover_content.present?
 %li{data: popover_data}
   - if policy(user).view_profile?
-    = link_to user_profile_path(user) do
-      %span{class: "avatar"}
+    = link_to user_profile_path(user), class: "d-flex align-items-start" do
+      .avatar.flex-shrink-0
         - if policy(user).view_profile? && user.profile.picture
           = image_tag user.profile.picture_thumbnail.url
-      = user.name
-      - if leading
-        %i{class: "fas fa-fw fa-user-crown"}
-      - if committee
-        %i{class: "fas fa-fw fa-users"}
+      .flex-fill
+        = user.name
+        - if leading
+          %i{class: "fas fa-fw fa-user-crown"}
+        - if committee
+          %i{class: "fas fa-fw fa-users"}
   - else
-    %a
-      %span{class: "avatar"}
+    %a.d-flex.align-items-start
+      .avatar.flex-shrink-0
         - if policy(user).view_profile? && user.profile.picture
           = image_tag user.profile.picture_thumbnail.url
-      = user.display_name_or_anon
-      - if leading
-        %i{class: "fas fa-fw fa-user-crown"}
-      - if committee
-        %i{class: "fas fa-fw fa-users"}
+      .flex-fill
+        = user.display_name_or_anon
+        - if leading
+          %i{class: "fas fa-fw fa-user-crown"}
+        - if committee
+          %i{class: "fas fa-fw fa-users"}
 
