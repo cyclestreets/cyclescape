@@ -945,7 +945,6 @@
       failure: Could not add message
       success: Message successfully posted
     message:
-      posted_date: posted
       censor: Censor this message
       censored: This message has been removed
       create_note: Create Library Note

@@ -45,18 +45,16 @@ ul {
           width: fit-content;
           display: inline-block;
         }
-        a {
-          &.timestamp {
-            font-style: italic;
-            text-decoration: none;
-            font-weight: 300;
-            font-size: 12px;
-            display: inline-block;
-            padding-left: 10px;
-            color: black;
-            &:hover {
-              text-decoration: underline;
-            }
+        time {
+          font-style: italic;
+          text-decoration: none;
+          font-weight: 300;
+          font-size: 12px;
+          display: inline-block;
+          padding-left: 10px;
+          color: black;
+          &:hover {
+            text-decoration: underline;
           }
         }
         .post {
