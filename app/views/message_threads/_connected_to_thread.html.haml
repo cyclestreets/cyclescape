@@ -9,7 +9,7 @@
     = link_to user_profile_path(user), class: "d-flex align-items-start" do
       .avatar.flex-shrink-0
         - if policy(user).view_profile? && user.profile.picture
-          = image_tag user.profile.picture_thumbnail.url
+          = image_tag user.profile.picture_thumbnail.url, class: "img-fluid"
       .flex-fill
         = user.name
         - if leading
@@ -20,7 +20,7 @@
     %a.d-flex.align-items-start
       .avatar.flex-shrink-0
         - if policy(user).view_profile? && user.profile.picture
-          = image_tag user.profile.picture_thumbnail.url
+          = image_tag user.profile.picture_thumbnail.url, class: "img-fluid"
       .flex-fill
         = user.display_name_or_anon
         - if leading

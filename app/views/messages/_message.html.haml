@@ -2,7 +2,7 @@
   .css-grid
     .poster-avatar
       - if policy(message.created_by).view_profile? && message.created_by.profile.picture
-        = image_tag message.created_by.profile.picture_thumbnail.url
+        = image_tag message.created_by.profile.picture_thumbnail.url, class: "img-fluid"
       - else
         %i{class: "fas fa-fw fa-bicycle"}
     .content
