@@ -4,10 +4,7 @@
       %i{class: "fas fa-fw fa-microphone"}
       %h1= t ".title", group: @group.name
       %br
-      - # = link_to new_thread_path do
-      - #   %button.primary
-      - #     = t(".new_thread")
-      - #     %i{class: "fas fa-fw fa-comment-alt-plus"}
+
   .content-wrapper
     .show-side-content
       = t ".filter_items"
@@ -65,6 +62,10 @@
 
             %hr
           - else
+            = link_to new_issue_path, target: "_top", class: "float-end" do
+              %button.primary
+                = t(".new_thread")
+                %i{class: "fas fa-fw fa-comment-alt-plus"}
             %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
             %p= t ".issue_threads_description", group_name: @group.name
             %hr
