@@ -68,6 +68,9 @@
         a {
           font-size: small;
         }
+        span {
+          background: white image-url("sprite.png") 4px -534px no-repeat;
+        }
       }
       a {
         display:block;
@@ -86,7 +89,7 @@
           height:50px;
           display:block;
           border:1px solid $black;
-          background: $grey image-url("sprite.png") 4px -534px no-repeat;
+          background: $grey2 image-url("sprite.png") 4px -534px no-repeat;
           border-radius: 8px;
           &.area {
             background-position:4px -534px;
