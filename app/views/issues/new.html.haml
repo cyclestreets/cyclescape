@@ -1,25 +1,31 @@
-%section.content-no-sidebar{data: { controller: "new-issue"} }
-  %header
-    %h1= t ".title"
-    %p= t ".new_issue_introduction"
-    %p= t ".new_issue_privacy_warning"
-    - if current_group
-      %p.comment= t ".admin_thread_pointer_html", administrative_matters_link: link_to(t(".administrative_matters"), new_thread_path)
-  = semantic_form_for @issue, html: {class: "guided navigate-away-warning", multipart: true} do |f|
-    = render "form", f: f
+%section
+  .title-wrapper
+    .section-title
+      %h1
+        %i{class: "fas fa-fw fa-hashtag"}
+        %h1= t ".title"
+  %p= t ".new_issue_introduction"
+  %p= t ".new_issue_privacy_warning"
+  - if current_group
+    %p.comment= t ".admin_thread_pointer_html", administrative_matters_link: link_to(t(".administrative_matters"), new_thread_path)
+  %hr
+  .content-wrapper
+    .main-content{data: { controller: "new-issue"} }
+      = semantic_form_for @issue, html: {class: "guided navigate-away-warning", multipart: true} do |f|
+        = render "form", f: f
 
-    %h2=t ".start_discussion"
-    %p
-      %label
-        = f.check_box "start_discussion", { checked: true, data: { action: "new-issue#toggle" } }
-        = t(".start_discussion")
-      %br
-    %div{data: { new_issue_target: "form" } }
-      %br
-      %i= simple_format t ".new_hint"
-      = f.semantic_fields_for :threads do |ft|
-        = render "shared/message_thread_form", f: ft, thread_dom_prefix: "issue_threads_attributes_0"
-    = f.actions do
-      = f.action :submit,
-        button_html: { class: "btn-green submit",
-        data: { new_issue_target: "submit", start_discussion: t("formtastic.actions.issue.create"), no_discussion: t(".no_discussion_create") } }
+        %h2=t ".start_discussion"
+        %p
+          %label
+            = f.check_box "start_discussion", { checked: true, data: { action: "new-issue#toggle" } }
+            = t(".start_discussion")
+          %br
+        %div{data: { new_issue_target: "form" } }
+          %br
+          %i= simple_format t ".new_hint"
+          = f.semantic_fields_for :threads do |ft|
+            = render "shared/message_thread_form", f: ft, thread_dom_prefix: "issue_threads_attributes_0"
+        = f.actions do
+          = f.button :submit,
+            class: "primary",
+            data: { new_issue_target: "submit", start_discussion: t("formtastic.actions.issue.create"), no_discussion: t(".no_discussion_create") }
