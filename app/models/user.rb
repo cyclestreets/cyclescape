@@ -65,7 +65,7 @@ class User < ApplicationRecord
   }
 
   validates :full_name, presence: true, format: { without: /[\[\]]/ }
-  validates :display_name, uniqueness: true, allow_nil: true
+  validates :display_name, uniqueness: true, allow_nil: true, format: { without: /@/ }
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
   validates :email, format: { with: /\A[^<].*[^>]\z/ }, uniqueness: true
 

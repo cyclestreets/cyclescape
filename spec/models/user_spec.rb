@@ -102,6 +102,13 @@ describe User, type: :model do
       subject.full_name = "defg"
     end
 
+    it "must have no @ in display_name" do
+      subject.display_name = "abc@"
+      expect(subject).to have(1).error_on(:display_name)
+      subject.display_name = "defg"
+      expect(subject).to have(0).error_on(:display_name)
+    end
+
     it "must have a password" do
       subject.password = ""
       expect(subject).to have_at_least(1).error_on(:password)
