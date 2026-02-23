@@ -10,10 +10,12 @@ describe "user favourites", js: true do
     visit thread_path(thread)
     find(".far.fa-star").click
 
-    expect(page).to have_content(I18n.t("message_thread.user_favourites.create.success"))
+    # Wait for the star to change to filled (gold), indicating the favourite was saved
+    expect(page).to have_css(".fas.fa-star")
 
     find(".fas.fa-star").click
 
-    expect(page).to have_content(I18n.t("message_thread.user_favourites.destroy.success"))
+    # Wait for the star to change back to empty, indicating the favourite was removed
+    expect(page).to have_css(".far.fa-star")
   end
 end

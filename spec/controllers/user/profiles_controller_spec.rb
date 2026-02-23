@@ -51,7 +51,7 @@ describe User::ProfilesController, type: :controller do
         it "should be visible and not show PM option" do
           get :show, params: { user_id: current_user.id } # NB current_user
           expect(response).to be_successful
-          expect(response.body).to_not include(I18n.t("user.profiles.show.send_private_message"))
+          expect(response.body).to_not include(I18n.t("shared.profile_menu.send_private_message"))
         end
       end
 
@@ -87,7 +87,7 @@ describe User::ProfilesController, type: :controller do
 
         it "should be visible and show PM option" do
           expect(response).to be_successful
-          expect(response.body).to include(I18n.t("user.profiles.show.send_private_message"))
+          expect(response.body).to include(I18n.t("shared.profile_menu.send_private_message"))
         end
       end
 

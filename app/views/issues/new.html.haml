@@ -26,6 +26,5 @@
           = f.semantic_fields_for :threads do |ft|
             = render "shared/message_thread_form", f: ft, thread_dom_prefix: "issue_threads_attributes_0"
         = f.actions do
-          = f.button :submit,
-            class: "primary",
-            data: { new_issue_target: "submit", start_discussion: t("formtastic.actions.issue.create"), no_discussion: t(".no_discussion_create") }
+          = f.action :submit,
+            button_html: { class: "primary", data: { new_issue_target: "submit", start_discussion: t("formtastic.actions.issue.create"), no_discussion: t(".no_discussion_create") } }

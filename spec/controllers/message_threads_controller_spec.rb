@@ -73,7 +73,7 @@ describe MessageThreadsController do
 
         context "with JS (and initially_loaded_from)" do
           it "shows messages before the initially_loaded_from" do
-            get :show, params: { id: thread.id, format: :js, initiallyLoadedFrom: message_12.created_at.in_time_zone("London").iso8601 }, xhr: true
+            get :show, params: { id: thread.id, format: :turbo_stream, from: message_12.created_at.in_time_zone("London").iso8601 }, xhr: true
             expect(assigns(:messages)).to eq [message_14, message_13]
           end
         end
@@ -174,7 +174,7 @@ describe MessageThreadsController do
 
         it "does allow the change" do
           expect(subject.status).to eq 302
-          expect(flash[:notice]).to be_present
+          expect(flash[:success]).to be_present
         end
       end
     end
@@ -187,7 +187,7 @@ describe MessageThreadsController do
 
         it "does allow the change" do
           expect(subject.status).to eq 302
-          expect(flash[:notice]).to be_present
+          expect(flash[:success]).to be_present
         end
       end
     end

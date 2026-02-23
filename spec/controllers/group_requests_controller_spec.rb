@@ -78,7 +78,7 @@ RSpec.describe GroupRequestsController, type: :controller do
       end
 
       it "sets the flash" do
-        expect(flash[:notice]).to be_present
+        expect(flash[:success]).to be_present
       end
 
       it "emails the requester" do
@@ -99,7 +99,7 @@ RSpec.describe GroupRequestsController, type: :controller do
       end
 
       it "sets the flash" do
-        expect(flash[:notice]).to be_present
+        expect(flash[:success]).to be_present
       end
 
       it "emails the new groups owner" do

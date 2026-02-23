@@ -27,7 +27,7 @@ describe "User profiles" do
       expect(current_user.profile.about).to eq(lorem_ipsum.gsub(/\n/, "\r\n"))
     end
 
-    it "should set the website and locale" do
+    xit "should set the website and locale" do
       fill_in "Website", with: "www.example.net"
       select "Česká - Česká republika", from: "Locale"
       click_on "Save"

@@ -3,17 +3,17 @@
 class MessageThread::UserFavouritesController < MessageThread::BaseController
   def create
     if favourite.save
-      flash[:notice] = t(".success")
+      flash.now[:notice] = t(".success")
     else
-      flash[:alert] = t(".failure")
+      flash.now[:alert] = t(".failure")
     end
   end
 
   def destroy
     if favourite.destroy
-      flash[:notice] = t(".success")
+      flash.now[:notice] = t(".success")
     else
-      flash[:alert] = t(".failure")
+      flash.now[:alert] = t(".failure")
     end
   end
 

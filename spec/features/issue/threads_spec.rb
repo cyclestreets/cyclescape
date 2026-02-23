@@ -76,7 +76,7 @@ describe "Issue threads" do
         click_on "Create Discussion"
         expect(page).to have_content(issue.title)
         expect(page).to have_content("Awesome!")
-        expect(page).to have_selector('[title="Public: Everyone can view this discussion and post messages."]')
+        expect(page).to have_selector('[data-bs-content="Public: Everyone can view this discussion and post messages."]')
       end
 
       it "should create a new public group thread" do
@@ -88,7 +88,7 @@ describe "Issue threads" do
         click_on "Create Discussion"
         expect(page).to have_content(issue.title)
         expect(page).to have_content("Awesome!")
-        expect(page).to have_selector('[title="Public: Everyone can view this discussion and post messages."]')
+        expect(page).to have_selector('[data-bs-content="Public: Everyone can view this discussion and post messages."]')
       end
 
       it "should create a new private group thread" do
@@ -100,7 +100,7 @@ describe "Issue threads" do
         click_on "Create Discussion"
         expect(page).to have_content(issue.title)
         expect(page).to have_content("Awesome!")
-        expect(page).to have_selector("[title='Private: Only members of #{current_group.name} can view and post messages to this discussion.']")
+        expect(page).to have_selector("[data-bs-content='Private: Only members of #{current_group.name} can view and post messages to this discussion.']")
       end
 
       context "group thread notification" do

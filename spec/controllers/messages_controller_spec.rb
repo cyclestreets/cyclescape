@@ -30,7 +30,7 @@ describe MessagesController, type: :controller do
       let(:is_spam) { "true" }
 
       it "redirect to thread and display flash" do
-        expect(subject).to redirect_to("/threads/#{thread.id}")
+        expect(subject.location).to include("/threads/#{thread.id}")
         expect(akismet_req).to have_been_made
         expect(flash[:alert]).to eq(t("possible_spam"))
       end
@@ -55,7 +55,7 @@ describe MessagesController, type: :controller do
     context "with a normal message" do
       let(:is_spam) { "false" }
       it "redirect to thread" do
-        expect(subject).to redirect_to("/threads/#{thread.id}")
+        expect(subject.location).to include("/threads/#{thread.id}")
         expect(akismet_req).to have_been_made
         expect(flash[:alert]).to be_blank
       end

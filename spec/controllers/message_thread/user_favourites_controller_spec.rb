@@ -10,8 +10,8 @@ describe MessageThread::UserFavouritesController, type: :controller do
     warden.set_user user
   end
 
-  describe "POST create.json" do
-    subject { post :create, params: { thread_id: thread.id, format: :js } }
+  describe "POST create.turbo" do
+    subject { post :create, params: { thread_id: thread.id, format: :turbo_stream } }
 
     it "should respond" do
       expect(subject.body).to include("Favourite saved")
@@ -19,12 +19,12 @@ describe MessageThread::UserFavouritesController, type: :controller do
     end
   end
 
-  describe "DELETE destroy.json" do
+  describe "DELETE destroy.turbo" do
     before do
       create :user_thread_favourite, thread: thread, user: user
     end
 
-    subject { delete :destroy, params: { thread_id: thread.id, format: :js } }
+    subject { delete :destroy, params: { thread_id: thread.id, format: :turbo_stream } }
 
     it "should respond" do
       expect(subject.body).to include("Favourite removed")

@@ -12,7 +12,7 @@ describe Issue::MessageThreadsController, type: :controller do
 
   it "has index" do
     get :index, params: { issue_id: thread.issue.id }
-    expect(response.status).to eq(200)
+    expect(response).to redirect_to(issue_path(issue))
   end
 
   describe "creating" do

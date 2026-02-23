@@ -3,9 +3,7 @@
 class Issue::MessageThreadsController < MessageThreadsController
   def index
     skip_authorization
-    threads = issue.threads.order_by_latest_message.page(params[:page])
-    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
-    @threads = ThreadListDecorator.decorate_collection threads
+    redirect_to issue_path(issue)
   end
 
   def new

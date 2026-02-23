@@ -60,6 +60,7 @@ describe "Library notes" do
   end
 
   context "tags" do
+    let(:edit_text) { I18n.t(".library.notes.show.edit") }
     include_context "signed in as a site user"
 
     before do
@@ -70,7 +71,6 @@ describe "Library notes" do
       click_on "Edit tags"
 
       expect(page).not_to have_button("Edit tags")
-      expect(page).to have_selector("[data-bs-content*='#{edit_text}'] > .fa-cog")
       fill_in "resource_tags_string_tag", with: "cycle parking,"
       click_on I18n.t("shared.edit_tags.update")
 

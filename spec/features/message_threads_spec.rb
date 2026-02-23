@@ -98,7 +98,7 @@ describe "Message threads", type: :feature do
         first = threads.first
         first.add_subscriber(current_user)
         visit threads_path(view: :all)
-        within("#thread_subscription_#{first.id}") do
+        within("#subscription_message_thread_#{first.id}") do
           expect(page).to have_button("Unfollow")
         end
       end
