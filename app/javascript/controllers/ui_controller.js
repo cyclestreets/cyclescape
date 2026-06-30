@@ -1,7 +1,5 @@
 import { Controller } from '@hotwired/stimulus'
-
-require('autosize/build/jquery.autosize.js')
-require('jquery-ui/tabs')
+import autosize from 'autosize'
 
 export default class extends Controller {
   connect () {
@@ -104,7 +102,7 @@ export default class extends Controller {
     groupSelector.on('mouseleave', () => setTimeout(() => groupSelector.removeClass('open'), 500))
 
     // Autosize text areas, but only with the right CSS class
-    $('textarea.autosize').autosize()
+    autosize(document.querySelectorAll('textarea.autosize'))
 
     const copyFrom = function (toEl) {
       return function () {

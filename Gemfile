@@ -15,7 +15,7 @@ end
 
 # Front-end gems
 gem "bootstrap"
-gem "browserify-rails"
+gem "importmap-rails"
 gem "chartkick"
 gem "cocoon"
 gem "formtastic"

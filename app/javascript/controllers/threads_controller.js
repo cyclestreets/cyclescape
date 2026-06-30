@@ -51,7 +51,7 @@ export default class extends Controller {
     const savedCookie = Cookies.get(pageId)
 
     if (savedCookie) {
-      this.optionTargets.forEach((input, index) => {
+      this.optionTargets.forEach((input) => {
         if (input.value === savedCookie) {
           input.checked = true
           input.dispatchEvent(new Event('change'))
@@ -62,9 +62,17 @@ export default class extends Controller {
 
   navigate = (event) => {
     const url = new URL(window.location.href)
+    const currentView = url.searchParams.get('view')
     url.searchParams.set('view', event.target.value)
 
-    Turbo.visit(url.toString(), { frame: 'threads_frame' })
+    if (currentView !== event.target.value) {
+      const frame = document.getElementById('threads_frame')
+      if (frame) {
+        frame.src = url.toString()
+      } else {
+        Turbo.visit(url.toString(), { frame: 'threads_frame' })
+      }
+    }
     this.updatePillPosition()
   }
 
