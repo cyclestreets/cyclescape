@@ -18,8 +18,8 @@ describe MailboxProcessor do
       allow(imap).to receive(:authenticate).and_return(imap)
     end
 
-    it "should connect to the given host" do
-      expect(Net::IMAP).to receive(:new).with(config[:host])
+    it "should connect to the given host over SSL on the IMAPS port" do
+      expect(Net::IMAP).to receive(:new).with(config[:host], port: 993, ssl: true)
       subject.establish_connection
     end
 

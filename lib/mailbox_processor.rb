@@ -10,7 +10,7 @@ class MailboxProcessor
   end
 
   def establish_connection
-    @imap = Net::IMAP.new(config[:host])
+    @imap = Net::IMAP.new(config[:host], port: 993, ssl: true)
     @imap.authenticate(config[:authentication], config[:user_name], config[:password])
     @imap
   end
