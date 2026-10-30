@@ -1,27 +1,20 @@
 import { Controller } from '@hotwired/stimulus'
+import { Turbo } from '@hotwired/turbo-rails'
 import Cookies from 'js-cookie'
 
 export default class extends Controller {
   static targets = ['option', 'selection', 'label']
 
   connect () {
+    this.currentView = this.selectedOption?.value
     this.updatePillPosition()
     this.setSegmentedControlIcons()
-
-    this.optionTargets.forEach((option) => {
-      option.addEventListener('change', this.navigate)
-    })
-
     window.addEventListener('resize', this.resizeHandler)
-
-    this.restoreSegmentedControlState()
+    this.restoreSavedView()
   }
 
   disconnect () {
     window.removeEventListener('resize', this.resizeHandler)
-    this.optionTargets.forEach((option) => {
-      option.removeEventListener('change', this.navigate)
-    })
   }
 
   resizeHandler = () => {
@@ -29,7 +22,7 @@ export default class extends Controller {
     this.setSegmentedControlIcons()
   }
 
-  updatePillPosition = () => {
+  updatePillPosition () {
     this.optionTargets.forEach((input, index) => {
       if (input.checked) {
         this.selectionTarget.style.transform = `translateX(${input.offsetWidth * index}px)`
@@ -46,41 +39,38 @@ export default class extends Controller {
     })
   }
 
-  restoreSegmentedControlState () {
-    const pageId = 'cyclescape-' + document.body.className
-    const savedCookie = Cookies.get(pageId)
+  // An explicit ?view= in the URL wins over the view saved in the cookie
+  restoreSavedView () {
+    if (new URL(window.location.href).searchParams.has('view')) return
 
-    if (savedCookie) {
-      this.optionTargets.forEach((input) => {
-        if (input.value === savedCookie) {
-          input.checked = true
-          input.dispatchEvent(new Event('change'))
-        }
-      })
+    const option = this.optionTargets.find(input => input.value === Cookies.get(this.cookieName))
+    if (option) {
+      option.checked = true
+      this.showView(option.value)
     }
   }
 
-  navigate = (event) => {
-    const url = new URL(window.location.href)
-    const currentView = url.searchParams.get('view')
-    url.searchParams.set('view', event.target.value)
+  navigate () {
+    this.showView(this.selectedOption.value)
+    Cookies.set(this.cookieName, this.currentView, { expires: 7 })
+  }
 
-    if (currentView !== event.target.value) {
-      const frame = document.getElementById('threads_frame')
-      if (frame) {
-        frame.src = url.toString()
-      } else {
-        Turbo.visit(url.toString(), { frame: 'threads_frame' })
-      }
-    }
+  showView (view) {
     this.updatePillPosition()
+    if (view === this.currentView) return
+
+    this.currentView = view
+    const url = new URL(window.location.href)
+    url.searchParams.set('view', view)
+    url.searchParams.delete('page')
+    Turbo.visit(url, { frame: 'threads_frame' })
   }
 
-  saveState () {
-    const selected = this.optionTargets.find(input => input.checked)
-    if (!selected) return
+  get selectedOption () {
+    return this.optionTargets.find(input => input.checked)
+  }
 
-    const pageId = `cyclescape-${document.body.className}`
-    Cookies.set(pageId, selected.value, { expires: 7 })
+  get cookieName () {
+    return `cyclescape-${document.body.className}`
   }
 }
