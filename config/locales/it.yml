@@ -797,9 +797,6 @@ it:
       osm_credit_html: Map data &copy; <a href='http://www.openstreetmap.org'> OpenStreetMap</a>
         contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
-    group_selector:
-      group_selector: Gruppo
-      no_group: Nessun gruppo
     search:
       search: Cerca
       search_button: Vai

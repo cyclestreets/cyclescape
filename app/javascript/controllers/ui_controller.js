@@ -1,11 +1,9 @@
 import { Controller } from '@hotwired/stimulus'
-
-require('autosize/build/jquery.autosize.js')
-require('jquery-ui/tabs')
+import autosize from 'autosize'
 
 export default class extends Controller {
   connect () {
-    this.initialize()
+    this.setup()
     this.navigateAwayWarning()
     this.toolMenu()
     window.leafletMapInit()
@@ -15,7 +13,7 @@ export default class extends Controller {
     tinyMCE.init(window.tinymceOpts)
   }
 
-  initialize () {
+  setup () {
     // Tabs
     $('.tabs').parent().tabs()
 
@@ -32,13 +30,6 @@ export default class extends Controller {
     $('.clickable').click(function () {
       window.location.href = $(this).find('a.primary-link').attr('href')
     })
-
-    // When .collapsible item is hovered in/out the .collapse elements inside
-    // expand and collapse
-    $('.collapsible').hover(
-      $(this).find('.collapse').slideDown,
-      $(this).find('.collapse').slideUp
-    ).find('.collapse').hide()
 
     // Automatic setting of values and visibility from select drop-downs
     const AutoSet = {
@@ -99,12 +90,8 @@ export default class extends Controller {
       AutoSet.triggerAll($(this))
     }))
 
-    const groupSelector = $('div.group-selector')
-    groupSelector.on('click', e => groupSelector.toggleClass('open'))
-    groupSelector.on('mouseleave', () => setTimeout(() => groupSelector.removeClass('open'), 500))
-
     // Autosize text areas, but only with the right CSS class
-    $('textarea.autosize').autosize()
+    autosize(document.querySelectorAll('textarea.autosize'))
 
     const copyFrom = function (toEl) {
       return function () {

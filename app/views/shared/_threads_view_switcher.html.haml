@@ -1,0 +1,10 @@
+-# options: [{ view:, icon:, label:, description: }, ...]
+- current_view = params[:view] || "mine"
+= form_with method: :get, data: { turbo_frame: "threads_frame", controller: "threads", action: "change->threads#navigate" }, local: false, class: "ios-segmented-control adjustable-icons small" do
+  %span.selection{ data: { threads_target: "selection" } }
+  - options.each do |option|
+    .option{ data: bs_popover(content: option[:description]) }
+      = radio_button_tag "view", option[:view], current_view == option[:view], data: { threads_target: "option" }
+      = label_tag "view_#{option[:view]}" do
+        %span{ class: "fas #{option[:icon]}", data: { text: option[:label], threads_target: "label" } }
+          = option[:label]

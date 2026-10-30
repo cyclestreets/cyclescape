@@ -1,4 +1,4 @@
-= turbo_frame_tag "threads_frame" do
+= turbo_frame_tag "threads_frame", data: { turbo_action: "advance" } do
   = raw(intro) if defined?(intro)
   = paginate threads
   = render partial: "shared/message_threads_list", collection: threads, as: :thread

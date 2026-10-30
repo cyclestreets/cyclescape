@@ -25,7 +25,7 @@ class Group::MessageThreadsController < MessageThreadsController
           current_user.subscribed_threads.order_by_latest_message
         end
       else
-        MessageThread.is_public.order_by_latest_message.where(group: group).page(params[:page])
+        MessageThread.is_public.order_by_latest_message
       end
     @ar_threads = @ar_threads.approved.where(group: group).page(params[:page])
 

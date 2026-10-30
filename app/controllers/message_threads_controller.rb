@@ -10,15 +10,15 @@ class MessageThreadsController < ApplicationController
       if current_user
         case params[:view]
         when "all"
-          ThreadList.recent_public.page(params[:page])
+          ThreadList.recent_public
         when "favourites"
-          current_user.favourite_threads.order_by_latest_message.page(params[:page])
+          current_user.favourite_threads.order_by_latest_message
         when "deadlines"
-          current_user.subscribed_threads.with_upcoming_deadlines.page(params[:page])
+          current_user.subscribed_threads.with_upcoming_deadlines
         when "popular"
-          MessageThread.popular.order_by_latest_message
+          MessageThread.popular
         else
-          current_user.subscribed_threads.order_by_latest_message.page(params[:page])
+          current_user.subscribed_threads.order_by_latest_message
         end
       else
         ThreadList.recent_public

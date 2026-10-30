@@ -78,7 +78,7 @@ class MessageThread < ApplicationRecord
     joins(:messages)
       .merge(Message.approved.where(created_at: (2.months.ago..)))
       .group(:id)
-      .order(Arel.sql("COUNT(messages.id) DESC"))
+      .order(Arel.sql("COUNT(messages.id) DESC, MAX(messages.created_at) DESC"))
   }
 
   default_scope { where(deleted_at: nil) }

@@ -5,3 +5,5 @@
 //= link_directory ../../../vendor/assets/stylesheets .css
 //= link grape_swagger_rails/application.css
 //= link grape_swagger_rails/application.js
+//= link_tree ../../../vendor/javascript .js
+//= link_tree ../../javascript .js

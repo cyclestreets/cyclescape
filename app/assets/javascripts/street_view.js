@@ -1,4 +1,3 @@
-require('intersection-observer')
 // This is called when:
 //   1. The Google StreetView JS is loaded
 //   2. A message is created (via Ajax)

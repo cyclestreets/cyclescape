@@ -20,7 +20,9 @@ Capybara.register_driver :selenium_chrome_headless_wide do |app|
     opts.add_argument("--window-size=1201,900")
     opts.add_preference("credentials_enable_service", false)
     opts.add_preference("profile.password_manager_enabled", false)
-    opts.add_argument("--disable-features=AutofillServerCommunication,PasswordManagerOnboarding,PasswordCheck")
+    # The "change your password" leak warning after signing in steals the next click
+    opts.add_preference("profile.password_manager_leak_detection", false)
+    opts.add_argument("--disable-features=AutofillServerCommunication,PasswordManagerOnboarding,PasswordCheck,PasswordLeakDetection")
   end
 
   Capybara::Selenium::Driver.new(app, **{ :browser => :chrome, options_key => browser_options })

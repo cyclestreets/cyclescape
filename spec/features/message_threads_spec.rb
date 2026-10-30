@@ -108,6 +108,13 @@ describe "Message threads", type: :feature do
         visit threads_path(view: :all)
         expect(page).to have_link(issue_thread.issue.title)
       end
+
+      it "should list popular message threads" do
+        visit threads_path(view: :popular)
+        threads.each do |thread|
+          expect(page).to have_content(thread.title)
+        end
+      end
     end
 
     context "show" do

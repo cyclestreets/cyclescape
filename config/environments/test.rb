@@ -11,7 +11,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.cache_classes = true
-  config.assets.compile = ENV.fetch("TEST_ASSETS_PRECOMPILED", false)
+  config.assets.compile = true
 
   # Do not eager load code on boot. This avoids loading your whole application
   # just for the purpose of running a single test. If you are using a tool that
