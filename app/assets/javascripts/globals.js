@@ -42,7 +42,7 @@
 //= require popper
 //= require bootstrap
 //= require new_ui
-//= require tooltip
+//= require scroll_to
 
 bootstrap.Tooltip.Default.allowList['*'] = ['*']
 bootstrap.Tooltip.Default.sanitizeFn = (content) => content
