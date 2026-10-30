@@ -7,6 +7,6 @@
   %p= t ".group_request_pending"
 - else
   .mt-3
-  = link_to  new_group_membership_request_path(group), class: "button primary" do
-    = t(".join")
-    %i.fas.fa-fw.fa-user-plus
+    = link_to new_group_membership_request_path(group), class: "button primary" do
+      = t(".join")
+      %i.fas.fa-fw.fa-user-plus

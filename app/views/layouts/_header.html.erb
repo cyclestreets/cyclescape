@@ -32,8 +32,10 @@
       <%= link_to library_path, data: bs_popover(content: t(".library_tooltip")) do %>
         <li class="<%= class_names(active: request_path.start_with?("library")) %>"><i class="fas fa-fw fa-book-open"></i><%= t(".library") %></li>
       <% end %>
-      <%= link_to planning_applications_path do %>
-        <li class="<%= class_names(active: request_path.start_with?("planning_applications")) %>"><i class="fas fa-fw fa-sign"></i><%= t(".planning_applications") %></li>
+      <% if current_user %>
+        <%= link_to planning_applications_path do %>
+          <li class="<%= class_names(active: request_path.start_with?("planning_applications")) %>"><i class="fas fa-fw fa-sign"></i><%= t(".planning_applications") %></li>
+        <% end %>
       <% end %>
       <%= link_to tags_path, data: bs_popover(content: t(".tags_tooltip")) do %>
         <li class="<%= class_names(active: request_path.start_with?("tags")) %>"><i class="fas fa-fw fa-tags"></i><%= t(".tags") %></li>
@@ -59,6 +61,11 @@
         <% end %>
         <%= link_to current_user_profile_path do %>
           <li><i class="fas fa-fw fa-id-card-alt"></i><%= t(".my_profile") %></li>
+        <% end %>
+        <% if current_user.admin? %>
+          <%= link_to admin_home_path, data: bs_popover(content: t(".admin_tooltip")) do %>
+            <li><i class="fas fa-fw fa-user-shield"></i><%= t(".admin") %></li>
+          <% end %>
         <% end %>
         <%= link_to destroy_user_session_path, method: :delete do %>
           <li><i class="fas fa-fw fa-sign-out"></i><%= t(".sign_out") %></li>

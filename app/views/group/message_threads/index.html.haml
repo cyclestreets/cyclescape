@@ -32,7 +32,7 @@
               %button.primary
                 = t(".new_thread")
                 %i{class: "fas fa-fw fa-comment-alt-plus"}
-            %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path)
+            %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path, target: "_top")
             %p= t ".issue_threads_description", group_name: @group.name
             %hr
         = render "shared/message_threads_list_frame", threads: @threads, intro: intro

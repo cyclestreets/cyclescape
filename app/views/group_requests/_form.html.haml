@@ -12,8 +12,8 @@
 :javascript
   const shortName = $('#group_request_short_name');
   shortName.after($('<input id="group_request_webname" readonly disabled style="width:200px">'));
-  $('#group_request_webname').val(`.${request.domain}`);
+  $('#group_request_webname').val('.#{j request.domain}');
 
   shortName.bind('keypress keyup input', function() {
-    $('#group_request_webname').val(this.value + `.${request.domain}`);
+    $('#group_request_webname').val(this.value + '.#{j request.domain}');
   });

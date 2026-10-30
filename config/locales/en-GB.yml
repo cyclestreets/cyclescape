@@ -164,6 +164,8 @@
         your area. You could %{add_location_link}.
       no_locations_guidance_html: You haven't set a location yet! If you %{add_some_locations_link},
         we will show you the nearby %{things} here.
+      add_some_locations: add a location
+      add_another_location: add another location
       location: location
       map: Map
       planning_applications_search: e.g. (07/0811/FUL)
@@ -280,6 +282,7 @@
     group_management: Group management
     membership_list_tab: Membership list
     membership_requests_tab: Membership requests
+    message_moderations_tab: Moderated messages
     update_potential_members: Potential member emails
     home_page_tab: Home page
     issues:
@@ -455,6 +458,7 @@
       send_some_feedback: send some feedback
       title: Groups directory
       group_request: Request New Group
+      no_results_found: No results found
     compact:
       already_member: You are already a member of this group
       no_location: This group doesn't have a location yet.

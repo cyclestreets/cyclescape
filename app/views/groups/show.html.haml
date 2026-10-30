@@ -1,6 +1,7 @@
 .header{style: "background-image: url(#{@group.profile&.picture&.url})"}
   .content
-    %img.logo.inline{src: @group.profile&.logo_thumbnail&.url}
+    - if @group.profile&.logo
+      %img.logo.inline{src: @group.profile.logo_thumbnail.url}
     %h1.inline= @group.name
   - if (profile = @group.profile) && profile.location
     .minimap

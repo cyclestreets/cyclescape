@@ -1,9 +1,10 @@
+- user = @user || current_user
 .action-buttons
-  - if @user && policy(@user).send_private_message? && @user != current_user
+  - if user && policy(user).send_private_message? && user != current_user
     %button{class: "primary"}
       %i{ class: "fas fa-fw fa-envelope" }
-      =link_to t('.send_private_message'), new_user_private_message_path(@user)
-  - if @user == current_user
+      =link_to t('.send_private_message'), new_user_private_message_path(user)
+  - if user == current_user
     %button{class: "primary"}= link_to t(".edit"), current_user_profile_edit_url
     %button{class: "primary"}= link_to t(".update_account"), edit_user_registration_url
     %button{class: "primary"}= link_to t(".my_locations"), current_user_locations_url

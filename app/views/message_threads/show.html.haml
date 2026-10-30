@@ -61,15 +61,15 @@
       = render "shared/tags/widget", resource: @thread
     = render "subscribers_panel", group: @thread.group, subscribers: @subscribers
     .widget
-      = render "subscribe_button", thread: @thread, show_subscribed: true
+      = render "subscribe_button", thread: @thread
     - if @issue
       .widget
         .title
           %i{class: "fas fa-fw fa-share-square"}
           Share
         .widget-content.centered
-          = tweet_button text: @thread.title, link: thread_url(@issue)
-          = facebook_like thread_url(@issue)
+          = tweet_button text: @thread.title, link: thread_url(@thread)
+          = facebook_like thread_url(@thread)
 
 
     = render "library_panel", items: @library_items, thread_tags: @thread.tags
