@@ -1,7 +1,7 @@
-= form_tag(search_dashboard_path, {method: :get, class: "filters", data: {controller: "search"}}) do
-  #search.search
-    %i.fal.fa-fw.fa-search
-    = search_field_tag :query, params[:query], placeholder: t(".search")
+= form_tag(search_dashboard_path, {method: :get, class: "filters", data: {controller: "search", action: "click@window->search#click keydown.esc@window->search#close"}}) do
+  #search.search{ data: { search_target: "box" } }
+    %i.fal.fa-fw.fa-search{ data: { search_target: "icon" } }
+    = search_field_tag :query, params[:query], placeholder: t(".search"), data: { search_target: "input" }
 .login-button
   - if current_user
     = link_to current_user_profile_path do

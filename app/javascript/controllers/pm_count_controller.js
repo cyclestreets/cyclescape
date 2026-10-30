@@ -6,6 +6,8 @@ export default class extends Controller {
 
   connect () {
     if (this.hasCountTarget) {
+      // Show the last known count straight away, then refresh it
+      this.updatePmCount(Cookies.get('unviewed_private_count'))
       setTimeout(this.getPmCount.bind(this), 5000)
       setTimeout(this.getPmCount.bind(this), 20000)
     }

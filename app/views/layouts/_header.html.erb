@@ -1,4 +1,4 @@
-<div data-controller="sidebar-nav">
+<div data-controller="sidebar-nav" data-action="click@window->sidebar-nav#closeOnClick keydown.esc@window->sidebar-nav#closeNav">
   <div id="shade" data-sidebar-nav-target="shade">
     <i class="far fa-times-circle close"></i>
   </div>
@@ -8,7 +8,7 @@
       <h1><%= @site_config.application_name %></h1>
     <% end %>
   </div>
-  <button id="hamburger" data-sidebar-nav-target="hamburger"><i class="fas fa-fw fa-bars"></i></button>
+  <button id="hamburger" data-action="sidebar-nav#openNav"><i class="fas fa-fw fa-bars"></i></button>
   <nav class="sidebar-nav" data-sidebar-nav-target="sidebarNav">
     <div class="title padding">
       <%= link_to root_path, class: "unstyled" do %>

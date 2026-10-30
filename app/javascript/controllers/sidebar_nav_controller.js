@@ -1,43 +1,23 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static targets = ['shade', 'hamburger', 'groupPopover', 'sidebarNav']
+  static targets = ['shade', 'groupPopover', 'sidebarNav']
 
   connect () {
     this.nav = $(this.sidebarNavTarget)
     this.shade = $(this.shadeTarget)
-    this.hamburgerTarget.addEventListener('click', () => this.openNav())
 
-    // Enable normal "click" close
-    $('body').on('click', (event) => {
-      if (event.target.tagName !== 'LI') {
-        if (this.nav.hasClass('open')) {
-          this.closeNav()
-        }
-      }
-    })
+    // Swipe-to-close (jquery-touch-events only triggers jQuery events)
+    this.nav.on('swipeleft', () => this.closeNav())
+  }
 
-    // Enable swipe-to-close
-    this.nav.on('swipeleft', () => {
-      if (this.nav.hasClass('open')) {
-        this.closeNav()
-      }
-    })
-
-    // Listen for escape key to close menu
-    $(document).on('keydown', (event) => {
-      if (event.key === 'Escape') {
-        if (this.nav.hasClass('open')) {
-          this.closeNav()
-        }
-      }
-    })
+  disconnect () {
+    this.nav.off('swipeleft')
   }
 
   openNav () {
     // Add shades
     this.shade.removeClass('white').fadeIn('fast')
-    console.log('SidebarNavController openNav')
 
     // Slide the nav out from the left
     this.nav.show('slide', { direction: 'left' }, 300, () => {
@@ -45,12 +25,16 @@ export default class extends Controller {
     })
   }
 
+  // Clicking anywhere except a menu item closes the menu
+  closeOnClick (event) {
+    if (event.target.tagName !== 'LI') this.closeNav()
+  }
+
   closeNav () {
-    try {
-      const popover = bootstrap.Popover.getOrCreateInstance(this.groupPopoverTarget) // Returns a Bootstrap popover instance
-      popover.hide()
-    } catch (e) {
-      // No popover found
+    if (!this.nav.hasClass('open')) return
+
+    if (this.hasGroupPopoverTarget) {
+      bootstrap.Popover.getInstance(this.groupPopoverTarget)?.hide()
     }
     // Close menu
     this.shade.fadeOut()
