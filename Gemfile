@@ -102,7 +102,7 @@ group :staging do
 end
 
 group :development do
-  gem "annotate", require: false
+  gem "annotaterb"
   gem "binding_of_caller"
   gem "better_errors"
   gem "bullet"
