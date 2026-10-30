@@ -45,10 +45,14 @@ module ApplicationHelper
     link_to commit, url
   end
 
-  def bs_popover(container: "body", toggle: "popover", trigger: "hover", html: "true", placement: "top", delay: 0, content:)
+  # Popover content is plain text unless html: true. Bootstrap's sanitizer is
+  # disabled (see globals.js) so only pass html: true for trusted markup.
+  # The content is passed as a plain String as Rails' tag helpers don't
+  # escape html_safe attribute values, which the browser would then unescape.
+  def bs_popover(container: "body", toggle: "popover", trigger: "hover", html: false, placement: "top", delay: 0, content:)
     {
-      "bs-container" => container, "bs-toggle" => toggle, "bs-trigger" => trigger, bs_delay: delay,
-      "bs-html" => html, "bs-placement" => placement, "bs-content" => content
+      controller: "popover", "bs-container" => container, "bs-toggle" => toggle, "bs-trigger" => trigger, bs_delay: delay,
+      "bs-html" => html.to_s, "bs-placement" => placement, "bs-content" => String.new(content.to_s)
     }
   end
 
@@ -60,7 +64,7 @@ module ApplicationHelper
       :p,
       content_tag(:i, nil, class: "fas fa-fw fa-cog"),
       class: p_class,
-      data: bs_popover(content: menu, placement:, delay: '{ "show": 0, "hide": 2000 }')
+      data: bs_popover(content: menu, html: true, placement:, delay: '{ "show": 0, "hide": 2000 }')
     )
   end
 

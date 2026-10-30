@@ -42,13 +42,11 @@
     </ul>
     <ul class="padding bottom">
       <% if current_user %>
-        <% if !current_user.groups.empty? %>
-          <li id="group-popover" data-sidebar-nav-target="groupPopover"
-                                 data-bs-container="body" data-bs-toggle="popover" data-bs-html="true" data-bs-placement="top"
-                                                                                                       data-bs-content='<ul class="popover-group">
-                                                                                                         <%= raw(current_user.groups.except {|g| g == current_group }.map { |group| "<li>#{link_to_group_home group}</li>" }.join(" ")) %>
-                                                                                                       </ul>'
-                                                                                                                                                                                       ><i class="fas fa-fw fa-users"></i><%= t(".group_selector") %></li>
+        <% other_groups = current_user.groups %>
+        <% other_groups = other_groups.where.not(id: current_group.id) if defined?(current_group) && current_group %>
+        <% if other_groups.exists? %>
+          <% group_links = safe_join(other_groups.map { |group| tag.li(link_to_group_home(group)) }) %>
+          <%= tag.li id: "group-popover", data: bs_popover(content: tag.ul(group_links, class: "popover-group"), html: true, trigger: "click").merge(sidebar_nav_target: "groupPopover") do %><i class="fas fa-fw fa-users"></i><%= t(".group_selector") %><% end %>
         <% end %>
 
         <% if defined?(current_group) && current_group && policy(GroupMembershipRequest.new(group: current_group)).index? %>

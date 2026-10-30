@@ -11,7 +11,7 @@
                 = link_to_profile(usr)
               - else
                 = usr.display_name_or_anon
-    - data = bs_popover(content: bs_content).merge(turbo_method: :post)
+    - data = bs_popover(content: bs_content, html: true)
     - if current_user
       = button_to vote_link(resource)[voted ? :clear : :up], class: "like animate__animated #{'liked' if voted}", data: data do
         %i{class: "fas fa-fw fa-thumbs-up"}
