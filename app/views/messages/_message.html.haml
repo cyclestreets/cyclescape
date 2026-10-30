@@ -1,36 +1,38 @@
 %li{id: dom_id(message)}
-  .css-grid
-    .poster-avatar
-      - if policy(message.created_by).view_profile? && message.created_by.profile.picture
-        = image_tag message.created_by.profile.picture_thumbnail.url, class: "img-fluid"
-      - else
-        %i{class: "fas fa-fw fa-bicycle"}
-    .content
-      %h3
-        - if policy(message.created_by).view_profile?
-          = link_to_profile message.created_by
+  -# Votes are rendered outside the cache as they change without touching the message
+  - cache message do
+    .css-grid
+      .poster-avatar
+        - if policy(message.created_by).view_profile? && message.created_by.profile.picture
+          = image_tag message.created_by.profile.picture_thumbnail.url, class: "img-fluid"
         - else
-          = message.created_by.display_name_or_anon
-        = t '.committee' if message.committee_created?
-      %span
-      = link_to thread_path(message.thread_id, anchor: dom_id(message)), class: "permalink" do
-        = time_tag_with_title(message.created_at)
-      .post
-        - if message.censored?
-          .censored
-            %p= t ".censored"
-        - else
-          .message-text
-            - unless message.library_item_messages.present?
-              - display_message = sanitize(message_linkify(message))
-              - if message.plain_text?
-                - display_message = simple_format(display_message, sanitize: false)
-              = auto_link(display_message)
-          - message.components.each do |component|
-            = render "message/#{message_controller_map(component)}/show", component: component
+          %i{class: "fas fa-fw fa-bicycle"}
+      .content
+        %h3
+          - if policy(message.created_by).view_profile?
+            = link_to_profile message.created_by
+          - else
+            = message.created_by.display_name_or_anon
+          = t '.committee' if message.committee_created?
+        %span
+        = link_to thread_path(message.thread_id, anchor: dom_id(message)), class: "permalink" do
+          = time_tag_with_title(message.created_at)
+        .post
+          - if message.censored?
+            .censored
+              %p= t ".censored"
+          - else
+            .message-text
+              - unless message.library_item_messages.present?
+                - display_message = sanitize(message_linkify(message))
+                - if message.plain_text?
+                  - display_message = simple_format(display_message, sanitize: false)
+                = auto_link(display_message)
+            - message.components.each do |component|
+              = render "message/#{message_controller_map(component)}/show", component: component
 
-          - if message.completing_action_messages.to_a.present?
-            = render "shared/resolves_actions", actions: message.completing_action_messages
+            - if message.completing_action_messages.to_a.present?
+              = render "shared/resolves_actions", actions: message.completing_action_messages
   .post-actions
     = bs_menu(p_class: nil) do
       %ul

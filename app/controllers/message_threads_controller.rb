@@ -61,7 +61,7 @@ class MessageThreadsController < ApplicationController
         messages = messages.after_date_with_n_before(after_date: last_viewed, n_before: 10) if last_viewed
 
         @messages = messages.includes(
-          *Message::COMPONENT_TYPES, :completing_action_messages, :votes, created_by: %i[profile memberships groups membership_requests]
+          *Message::COMPONENT_TYPES, :completing_action_messages, votes: { voter: :profile }, created_by: %i[profile memberships groups membership_requests]
         )
 
         @view_from = @messages.detect { |m| m.created_at >= last_viewed } || @messages.last if last_viewed
@@ -77,13 +77,13 @@ class MessageThreadsController < ApplicationController
         messages = messages.before_date_with_n_before(before_date: initially_loaded_from, n_before: 40)
 
         @messages = messages.includes(
-          *Message::COMPONENT_TYPES, :completing_action_messages, created_by: %i[profile memberships groups membership_requests]
+          *Message::COMPONENT_TYPES, :completing_action_messages, votes: { voter: :profile }, created_by: %i[profile memberships groups membership_requests]
         ).to_a.reverse!
 
         render turbo_stream: [
           turbo_stream.prepend(
             :messages,
-            collection: @messages, partial: "messages/message", locals: { thread: @thread }, cached: true
+            collection: @messages, partial: "messages/message", locals: { thread: @thread }
           ),
           turbo_stream.replace(:load_more, partial: "message_threads/load_more")
         ]

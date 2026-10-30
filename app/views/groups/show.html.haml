@@ -53,7 +53,7 @@
             = t ".group_organisers"
         .widget-content
           %ul.unstyled.avatars
-            = render collection: @group.committee_members.includes(:profile), as: :user, partial: "message_threads/connected_to_thread", locals: { leading: false, committee_members: [] }, cached: true
+            = render collection: @group.committee_members.includes(:profile), as: :user, partial: "message_threads/connected_to_thread", locals: { leading: false, committee_members: [] }
       - if current_user && membership
         .widget
           = button_to safe_join([t(".leave_group"), "…"]),

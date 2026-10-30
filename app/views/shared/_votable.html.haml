@@ -1,4 +1,4 @@
-= turbo_frame_tag "votable_#{resource.id}" do
+= turbo_frame_tag dom_id(resource, :votable) do
   .votes
     - voters = resource.voters_who_voted
     - voted = current_user ? voters.include?(current_user) : false
