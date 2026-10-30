@@ -668,8 +668,6 @@
       osm_credit_html: Map data &copy; <a href='http://www.openstreetmap.org'> OpenStreetMap</a>
         contributors, available under the <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
-    group_selector:
-      no_group: No Group
     search:
       search: Search for anything…
       sign_in: Sign in

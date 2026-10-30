@@ -31,13 +31,6 @@ export default class extends Controller {
       window.location.href = $(this).find('a.primary-link').attr('href')
     })
 
-    // When .collapsible item is hovered in/out the .collapse elements inside
-    // expand and collapse
-    $('.collapsible').hover(
-      $(this).find('.collapse').slideDown,
-      $(this).find('.collapse').slideUp
-    ).find('.collapse').hide()
-
     // Automatic setting of values and visibility from select drop-downs
     const AutoSet = {
       selector: 'select',
@@ -96,10 +89,6 @@ export default class extends Controller {
     $(document).on('ajax:success', () => $(AutoSet.selector).each(function () {
       AutoSet.triggerAll($(this))
     }))
-
-    const groupSelector = $('div.group-selector')
-    groupSelector.on('click', e => groupSelector.toggleClass('open'))
-    groupSelector.on('mouseleave', () => setTimeout(() => groupSelector.removeClass('open'), 500))
 
     // Autosize text areas, but only with the right CSS class
     autosize(document.querySelectorAll('textarea.autosize'))

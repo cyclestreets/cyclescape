@@ -792,9 +792,6 @@ cs-CZ:
       osm_credit_html: Mapová data &copy; přispěvatelé <a href='http://www.openstreetmap.org'>
         OpenStreetMap</a>, dostupné pod <a href='http://www.opendatacommons.org/licenses/odbl'>Open
         Database Licence</a>.
-    group_selector:
-      group_selector: Skupina
-      no_group: Bez skupiny
     search:
       search: Hledání
       search_button: Odeslat
