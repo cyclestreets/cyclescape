@@ -16,10 +16,13 @@ class GroupsController < ApplicationController
 
   def autocomplete
     skip_authorization
-    groups = Group.from_geo_or_name(params[:term]).left_joins(:members).group(:id).order("COUNT(users.id) DESC", :name).limit(10)
+    groups = Group.enabled.from_geo_or_name(params[:term])
+                  .left_joins(:members).group(:id)
+                  .select("groups.*, COUNT(users.id) AS members_count")
+                  .order("members_count DESC", :name).limit(10)
     render json: groups.map { |group|
       {
-        label: "#{group.name} (#{group.members.count} members)",
+        label: "#{group.name} (#{group.members_count} members)",
         value: group.name,
         url: root_url(subdomain: SubdomainConstraint.subdomain(group.short_name)),
       }
@@ -91,6 +94,8 @@ class GroupsController < ApplicationController
     end
     @unviewed_thread_ids = MessageThread.where(id: threads.results.map(&:id)).unviewed_for(current_user).ids.uniq
     @threads = ThreadListDecorator.decorate_collection threads.results
+    @user_favourites = current_user&.thread_favourites&.where(thread: threads.results)
+    @latest_activity = Message.where(thread_id: @threads.map(&:id)).latest_activities
 
     # Issues
     issues = Issue.search(include: %i[created_by tags]) do

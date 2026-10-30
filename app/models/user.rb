@@ -65,7 +65,9 @@ class User < ApplicationRecord
   }
 
   validates :full_name, presence: true, format: { without: /[\[\]]/ }
-  validates :display_name, uniqueness: true, allow_nil: true, format: { without: /@/ }
+  validates :display_name, uniqueness: true, allow_nil: true
+  # Only on change so existing users with an @ can still save (e.g. password resets)
+  validates :display_name, format: { without: /@/ }, allow_nil: true, if: :will_save_change_to_display_name?
   validates :role, presence: true, inclusion: { in: ALLOWED_ROLES }
   validates :email, format: { with: /\A[^<].*[^>]\z/ }, uniqueness: true
 
@@ -177,7 +179,7 @@ class User < ApplicationRecord
 
   def subscribed_to_thread?(thread, all_subscriptions: nil)
     if all_subscriptions
-      all_subscriptions.to_a.find { |sub| sub.thread == thread }
+      all_subscriptions.to_a.find { |sub| sub.thread_id == thread.id }
     else
       thread_subscriptions.active.to(thread)
     end

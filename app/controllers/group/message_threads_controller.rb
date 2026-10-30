@@ -27,7 +27,7 @@ class Group::MessageThreadsController < MessageThreadsController
       else
         MessageThread.is_public.order_by_latest_message
       end
-    @ar_threads = @ar_threads.approved.where(group: group).page(params[:page])
+    @ar_threads = @ar_threads.approved.where(group: group).includes(:tags, :group, :issue).page(params[:page])
 
     thread_ids = @ar_threads.map(&:id)
     if current_user

@@ -1,12 +1,11 @@
 = turbo_frame_tag dom_id(thread, :subscription), class: "w-8em" do
   - if signed_in?
-    - if current_user.subscribed_to_thread?(thread, all_subscriptions: @user_subscriptions)
-      - subscription = current_user.thread_subscriptions.to(thread)
+    - if (subscription = current_user.subscribed_to_thread?(thread, all_subscriptions: @user_subscriptions))
       = form_with model: subscription,
         url: thread_subscription_path(thread, subscription),
         method: :delete,
         class: "unsubscribe-form" do |f|
-        = f.submit label: :delete, class: "btn-grey btn-unsubscribe"
+        = f.submit class: "btn-grey btn-unsubscribe"
     - else
       = form_with model: ThreadSubscription.new, url: thread_subscriptions_path(thread_id: thread) do |f|
         = f.submit

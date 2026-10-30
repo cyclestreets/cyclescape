@@ -16,14 +16,14 @@ class MessageThreadsController < ApplicationController
         when "deadlines"
           current_user.subscribed_threads.with_upcoming_deadlines
         when "popular"
-          MessageThread.popular
+          MessageThread.is_public.popular
         else
           current_user.subscribed_threads.order_by_latest_message
         end
       else
         ThreadList.recent_public
       end
-    @ar_threads = @ar_threads.approved.page(params[:page])
+    @ar_threads = @ar_threads.approved.includes(:tags, :group, :issue).page(params[:page])
 
     thread_ids = @ar_threads.map(&:id)
     if current_user

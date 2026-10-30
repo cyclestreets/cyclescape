@@ -3,4 +3,4 @@
     - resource.tags.each do |tag|
       %li{class: "tag"}= link_to tag.name, tag_path(tag)
   - if policy(resource).update_tags?
-    = link_to t(".edit_tags"), edit_polymorphic_path([resource, :tag]), data: { turbo: true }
+    = link_to t(".edit_tags"), edit_polymorphic_path([resource, :tag]), data: { turbo: true, turbo_stream: true }
