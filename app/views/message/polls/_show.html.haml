@@ -2,7 +2,7 @@
   .poll-message
     = component.question
     - if current_user
-      = semantic_form_for(current_user.poll_votes.joins(:poll_option).find_by(poll_options: {poll_message: component}) || current_user.poll_votes.build, url: vote_thread_poll_path(component.message.thread, component), data: { turbo: true }) do |f|
+      = semantic_form_for(current_user.poll_votes.joins(:poll_option).find_by(poll_options: {poll_message: component}) || current_user.poll_votes.build, url: vote_thread_poll_path(component.message.thread, component)) do |f|
         = f.inputs do
           = f.input(:poll_option,
             label: false,

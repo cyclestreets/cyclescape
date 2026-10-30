@@ -72,11 +72,6 @@ module MessageThreadsHelper
     render defaults.merge(options)
   end
 
-  def render_threads_list(threads, options = {})
-    defaults = { partial: "shared/message_threads_list", collection: threads, as: :thread }
-    render defaults.merge(options)
-  end
-
   def message_button_html
     {
       class: "btn-green", disabled: !current_user, data: { disable_with: t("formtastic.actions.saving") }

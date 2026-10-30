@@ -76,12 +76,7 @@ class IssuesController < ApplicationController
     authorize issue
     if issue.update permitted_params
       set_flash_message :success
-      respond_to do |format|
-        format.html { redirect_to action: :show }
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(issue, partial: "shared/tags/widget_content", locals: { resource: issue })
-        end
-      end
+      redirect_to action: :show
     else
       @start_location = current_user.start_location
       render :edit

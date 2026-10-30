@@ -1,6 +1,0 @@
-.tags
-  %ul
-    - context.tags.each do |tag|
-      %li.tag= link_to tag.name, tag_path(tag)
-  - if policy(context).update_tags?
-    = link_to t(".edit_tags"), "#", rel: "edit-tags"
