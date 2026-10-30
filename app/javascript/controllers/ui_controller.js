@@ -3,7 +3,7 @@ import autosize from 'autosize'
 
 export default class extends Controller {
   connect () {
-    this.initialize()
+    this.setup()
     this.navigateAwayWarning()
     this.toolMenu()
     window.leafletMapInit()
@@ -13,7 +13,7 @@ export default class extends Controller {
     tinyMCE.init(window.tinymceOpts)
   }
 
-  initialize () {
+  setup () {
     // Tabs
     $('.tabs').parent().tabs()
 
