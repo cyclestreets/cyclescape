@@ -80,8 +80,8 @@ class MessageThread < ApplicationRecord
 
   before_validation :set_public_token, on: :create
   after_create      :add_subscribers
-  after_commit      :add_auto_subscribers
   after_commit      :approve_related
+  after_commit      :add_auto_subscribers
 
   validates :title, :created_by, presence: true
   validates :privacy, inclusion: { in: ALL_ALLOWED_PRIVACY }
