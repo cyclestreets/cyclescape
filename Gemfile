@@ -103,7 +103,7 @@ group :staging do
 end
 
 group :development do
-  gem "annotaterb"
+  gem "annotaterb", require: false
   gem "better_errors"
   gem "bullet"
   gem "letter_opener"
