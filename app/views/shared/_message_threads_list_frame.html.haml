@@ -1,5 +1,10 @@
 = turbo_frame_tag "threads_frame", data: { turbo_action: "replace" } do
   = local_assigns[:intro]
+  - if local_assigns[:view] == "deadlines" && current_user
+    %p.float-end
+      = link_to deadlines_calendar_url(public_token: current_user.public_token, format: :ics), target: "_top" do
+        = image_tag "ical.gif", alt: ""
+        = t ".subscribe_to_deadlines"
   = paginate threads
   = render partial: "shared/message_threads_list", collection: threads, as: :thread
   = paginate threads

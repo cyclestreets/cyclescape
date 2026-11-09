@@ -3,12 +3,14 @@
 class MessageThreadsController < ApplicationController
   include MessageCreator
 
+  before_action :set_threads_view, only: :index
+
   def index
     skip_authorization
 
     @ar_threads =
       if current_user
-        case params[:view]
+        case @view
         when "all"
           ThreadList.recent_public
         when "favourites"
@@ -36,7 +38,7 @@ class MessageThreadsController < ApplicationController
     @latest_activity = Message.where(thread_id: thread_ids).latest_activities
 
     if turbo_frame_request?
-      render partial: "shared/message_threads_list_frame", locals: { threads: @threads }
+      render partial: "shared/message_threads_list_frame", locals: { threads: @threads, view: @view }
     else
       render :index
     end
@@ -131,6 +133,13 @@ class MessageThreadsController < ApplicationController
   end
 
   protected
+
+  # The last view chosen is remembered, separately for site and group thread lists
+  def set_threads_view
+    cookie = "cyclescape-#{controller_path.tr('/_', '-')}"
+    cookies[cookie] = { value: params[:view], expires: 1.week } if params[:view].present?
+    @view = params[:view].presence || cookies[cookie] || "mine"
+  end
 
   def create
     # Thread is created in issue or group message thread controller

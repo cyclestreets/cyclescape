@@ -10,7 +10,7 @@ class Group::MessageThreadsController < MessageThreadsController
 
     @ar_threads =
       if current_user
-        case params[:view]
+        case @view
         when "all"
           MessageThread.order_by_latest_message
         when "general"

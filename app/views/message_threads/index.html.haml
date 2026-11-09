@@ -18,13 +18,13 @@
       %i{class: "fas fa-fw fa-filter"}
     .main-content
       - if current_user
-        = render "shared/threads_view_switcher", options: [{ view: "mine", icon: "fa-seedling", label: t(".my_threads"), description: t(".my_threads_description") },
+        = render "shared/threads_view_switcher", current_view: @view, options: [{ view: "mine", icon: "fa-seedling", label: t(".my_threads"), description: t(".my_threads_description") },
                                                            { view: "all", icon: "fa-globe-europe", label: t(".all"), description: t(".all_threads") },
                                                            { view: "favourites", icon: "fa-star", label: t(".favourites"), description: t(".favourites") },
                                                            { view: "popular", icon: "fa-fire-alt", label: t(".popular"), description: t(".popular") },
                                                            { view: "deadlines", icon: "fa-calendar-star", label: t(".deadlines"), description: t(".deadlines_description") }]
       %ul.discussions
-        = render "shared/message_threads_list_frame", threads: @threads
+        = render "shared/message_threads_list_frame", threads: @threads, view: @view
         .spinner-overlay
           .spinner-border.text-primary{ role: "status" }
             %span.visually-hidden Loading...

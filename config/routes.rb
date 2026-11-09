@@ -52,7 +52,7 @@ Rails.application.routes.draw do
   resource :overview, as: :dashboard, controller: "dashboards" do
     get :search
   end
-  get "overview/:public_token/deadlines", to: "dashboards#deadlines"
+  get "overview/:public_token/deadlines", to: "dashboards#deadlines", as: :deadlines_calendar
 
   issues_route
 

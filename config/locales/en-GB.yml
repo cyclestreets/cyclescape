@@ -1089,6 +1089,8 @@
       explanation: These messages are held for moderation.  This can be because they
         look like potential spam or that the user has not been approved.  If you approve
         then the message will be sent out and the creator approved.
+    message_threads_list_frame:
+      subscribe_to_deadlines: Subscribe to your deadlines calendar (iCal)
     message_threads_list:
       discussion_on_issue: A discussion on issue
       group_committee: Group Committee

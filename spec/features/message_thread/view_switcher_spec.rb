@@ -52,13 +52,35 @@ describe "threads view switcher", js: true do
     expect(page).to have_no_css("turbo-frame#threads_frame[src]")
   end
 
-  it "restores the saved view when the URL has none" do
+  it "renders the saved view when the URL has none, without reloading the frame" do
+    thread = create(:message_thread_with_messages)
     visit threads_path
     save_view("all")
     visit threads_path
 
+    wait_for_switcher
     expect(page).to have_checked_field("view_all", visible: :all)
+    expect(page).to have_no_css("turbo-frame#threads_frame[src]")
+    expect(page).to have_content(thread.title)
+  end
+
+  it "remembers the view chosen" do
+    thread = create(:message_thread_with_messages)
+    visit threads_path(view: "mine")
+    choose("view_all", allow_label_click: true)
     expect_frame_view("all")
+
+    visit threads_path
+    expect(page).to have_checked_field("view_all", visible: :all)
+    expect(page).to have_content(thread.title)
+  end
+
+  it "links to the deadlines calendar on the deadlines view" do
+    visit threads_path(view: "all")
+    expect(page).to have_no_link(href: /deadlines\.ics/)
+
+    choose("view_deadlines", allow_label_click: true)
+    expect(page).to have_link(href: %r{/overview/#{current_user.public_token}/deadlines\.ics\z})
   end
 
   it "updates the URL when paginating" do
