@@ -1,0 +1,5 @@
+# Only options that differ from annotaterb's defaults
+:position: after
+:exclude_tests: true
+:hide_default_column_types: 'json,jsonb,hstore'
+:hide_limit_column_types: 'integer,boolean'
