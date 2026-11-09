@@ -55,3 +55,9 @@ end
 every 1.day, at: "6:50 am" do
   rake "scheduled:email_user_digests"
 end
+
+# Rack::Cache's file entitystore never expires bodies; drop ones unused for 7 days
+every 1.day, at: "3:12 am" do
+  body_dir = File.expand_path("../tmp/dragonfly/cache/body", __dir__)
+  command "test -d #{body_dir} && find #{body_dir} -type f -atime +7 -delete"
+end
