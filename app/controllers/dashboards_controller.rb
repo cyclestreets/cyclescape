@@ -42,10 +42,7 @@ class DashboardsController < ApplicationController
       end
       paginate page: helpers.safe_search_page(params[:thread_page]), per_page: 40
     end
-    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads.results)
-    @threads = ThreadListDecorator.decorate_collection threads.results
-    @user_favourites = current_user&.thread_favourites&.where(thread: threads.results)
-    @latest_activity = Message.where(thread_id: @threads.map(&:id)).latest_activities
+    prepare_thread_list threads.results
 
     # Issues
     issues = Issue.search(include: %i[created_by tags]) do

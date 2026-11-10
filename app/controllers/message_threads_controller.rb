@@ -7,35 +7,7 @@ class MessageThreadsController < ApplicationController
 
   def index
     skip_authorization
-
-    @ar_threads =
-      if current_user
-        case @view
-        when "all"
-          ThreadList.recent_public
-        when "favourites"
-          current_user.favourite_threads.order_by_latest_message
-        when "deadlines"
-          current_user.subscribed_threads.with_upcoming_deadlines
-        when "popular"
-          MessageThread.is_public.popular
-        else
-          current_user.subscribed_threads.order_by_latest_message
-        end
-      else
-        ThreadList.recent_public
-      end
-    @ar_threads = @ar_threads.approved.includes(:tags, :group, :issue).page(params[:page])
-
-    thread_ids = @ar_threads.map(&:id)
-    if current_user
-      @user_favourites = current_user.thread_favourites.where(thread_id: thread_ids).to_a
-      @user_subscriptions = current_user.thread_subscriptions.where(thread_id: thread_ids).active.to_a
-    end
-
-    @threads = ThreadListDecorator.decorate_collection @ar_threads
-    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: @ar_threads)
-    @latest_activity = Message.where(thread_id: thread_ids).latest_activities
+    prepare_thread_list threads_scope.approved.includes(:tags, :group, :issue).page(params[:page])
 
     if turbo_frame_request?
       render partial: "shared/message_threads_list_frame", locals: { threads: @threads, view: @view }
@@ -133,6 +105,22 @@ class MessageThreadsController < ApplicationController
   end
 
   protected
+
+  def threads_scope
+    return ThreadList.recent_public unless current_user
+
+    case @view
+    when "all" then ThreadList.recent_public
+    when "favourites" then current_user.favourite_threads.order_by_latest_message
+    when "deadlines" then current_user.subscribed_threads.with_upcoming_deadlines
+    when "popular" then MessageThread.is_public.popular
+    else current_user.subscribed_threads.order_by_latest_message
+    end
+  end
+
+  # Partial rendered at the top of the threads frame, if any
+  def threads_intro_partial; end
+  helper_method :threads_intro_partial
 
   # The last view chosen is remembered, separately for site and group thread lists
   def set_threads_view

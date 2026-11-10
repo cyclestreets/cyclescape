@@ -29,6 +29,18 @@ class ApplicationController < ActionController::Base
 
   private
 
+  # Sets @threads and everything shared/_message_threads_list needs for the viewer
+  def prepare_thread_list(threads)
+    thread_ids = threads.map(&:id)
+    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
+    @latest_activity = Message.where(thread_id: thread_ids).latest_activities
+    if current_user
+      @user_favourites = current_user.thread_favourites.where(thread_id: thread_ids).to_a
+      @user_subscriptions = current_user.thread_subscriptions.where(thread_id: thread_ids).active.to_a
+    end
+    @threads = ThreadListDecorator.decorate_collection threads
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name display_name])
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[full_name display_name])

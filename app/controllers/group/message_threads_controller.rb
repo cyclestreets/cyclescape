@@ -5,39 +5,8 @@ class Group::MessageThreadsController < MessageThreadsController
   before_action :group
 
   def index
-    skip_authorization
     set_page_title t("group.message_threads.index.title", group: group.name)
-
-    @ar_threads =
-      if current_user
-        case @view
-        when "all"
-          MessageThread.order_by_latest_message
-        when "general"
-          MessageThread.order_by_latest_message.without_issue
-        when "favourites"
-          current_user.favourite_threads.order_by_latest_message
-        when "deadlines"
-          current_user.subscribed_threads.with_upcoming_deadlines
-        when "popular"
-          MessageThread.popular
-        else
-          current_user.subscribed_threads.order_by_latest_message
-        end
-      else
-        MessageThread.is_public.order_by_latest_message
-      end
-    @ar_threads = @ar_threads.approved.where(group: group).includes(:tags, :group, :issue).page(params[:page])
-
-    thread_ids = @ar_threads.map(&:id)
-    if current_user
-      @user_favourites = current_user.thread_favourites.where(thread_id: thread_ids).to_a
-      @user_subscriptions = current_user.thread_subscriptions.where(thread_id: thread_ids).active.to_a
-    end
-
-    @threads = ThreadListDecorator.decorate_collection @ar_threads
-    @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: @ar_threads)
-    @latest_activity = Message.where(thread_id: thread_ids).latest_activities
+    super
   end
 
   def new
@@ -54,6 +23,27 @@ class Group::MessageThreadsController < MessageThreadsController
   end
 
   protected
+
+  def threads_scope
+    scope =
+      if current_user
+        case @view
+        when "all" then MessageThread.order_by_latest_message
+        when "general" then MessageThread.order_by_latest_message.without_issue
+        when "favourites" then current_user.favourite_threads.order_by_latest_message
+        when "deadlines" then current_user.subscribed_threads.with_upcoming_deadlines
+        when "popular" then MessageThread.popular
+        else current_user.subscribed_threads.order_by_latest_message
+        end
+      else
+        MessageThread.is_public.order_by_latest_message
+      end
+    scope.where(group: group)
+  end
+
+  def threads_intro_partial
+    "group/message_threads/intro"
+  end
 
   def group
     @group ||= Group.find_by(id: params[:group_id]) || current_group

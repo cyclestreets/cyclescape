@@ -1,0 +1,17 @@
+- scope = "group.message_threads.index"
+- if view == "general"
+  %p= t "general_threads_description", scope: scope
+  = link_to new_thread_path, target: "_top", class: "container" do
+    %button.primary.float-end
+      = t("new_group_thread", scope: scope)
+      %i{class: "fas fa-fw fa-comment-alt-plus"}
+
+  %hr
+- else
+  = link_to new_issue_path, target: "_top", class: "float-end" do
+    %button.primary
+      = t("new_thread", scope: scope)
+      %i{class: "fas fa-fw fa-comment-alt-plus"}
+  %p= t "threads_explanation_html", scope: scope, issues_link: link_to(t("issues", scope: scope), issues_path, target: "_top")
+  %p= t "issue_threads_description", scope: scope, group_name: @group.name
+  %hr

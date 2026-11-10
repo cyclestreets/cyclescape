@@ -92,10 +92,7 @@ class GroupsController < ApplicationController
       end
       paginate page: helpers.safe_search_page(params[:thread_page]), per_page: 40
     end
-    @unviewed_thread_ids = MessageThread.where(id: threads.results.map(&:id)).unviewed_for(current_user).ids.uniq
-    @threads = ThreadListDecorator.decorate_collection threads.results
-    @user_favourites = current_user&.thread_favourites&.where(thread: threads.results)
-    @latest_activity = Message.where(thread_id: @threads.map(&:id)).latest_activities
+    prepare_thread_list threads.results
 
     # Issues
     issues = Issue.search(include: %i[created_by tags]) do

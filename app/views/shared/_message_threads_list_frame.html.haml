@@ -1,6 +1,7 @@
 = turbo_frame_tag "threads_frame", data: { turbo_action: "replace" } do
-  = local_assigns[:intro]
-  - if local_assigns[:view] == "deadlines" && current_user
+  - if threads_intro_partial
+    = render threads_intro_partial, view: view
+  - if view == "deadlines" && current_user
     %p.float-end
       = link_to deadlines_calendar_url(public_token: current_user.public_token, format: :ics), target: "_top" do
         = image_tag "ical.gif", alt: ""

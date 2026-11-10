@@ -38,9 +38,7 @@ class TagsController < ApplicationController
         unfiltered_results.select { |t| MessageThreadPolicy.new(current_user, t).show? }
       ).page(params[:thread_page])
 
-      @threads = ThreadListDecorator.decorate_collection threads
-      @unviewed_thread_ids = MessageThread.unviewed_thread_ids(user: current_user, threads: threads)
-      @latest_activity = Message.where(thread: threads).latest_activities
+      prepare_thread_list threads
 
       @library_items = Library::Item.find_by_tag(@tag).order("updated_at desc").page(params[:library_page])
       planning_applications = PlanningApplication.search(params[:query])

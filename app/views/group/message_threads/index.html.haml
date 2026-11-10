@@ -18,24 +18,7 @@
                                                            { view: "popular", icon: "fa-fire-alt", label: t(".popular"), description: t(".popular") },
                                                            { view: "deadlines", icon: "fa-calendar-star", label: t(".deadlines"), description: t(".deadlines_description") }]
       %ul.discussions
-        - intro = capture do
-          - if @view == "general"
-            %p= t ".general_threads_description"
-            = link_to new_thread_path, target: "_top", class: "container" do
-              %button.primary.float-end
-                = t(".new_group_thread")
-                %i{class: "fas fa-fw fa-comment-alt-plus"}
-
-            %hr
-          - else
-            = link_to new_issue_path, target: "_top", class: "float-end" do
-              %button.primary
-                = t(".new_thread")
-                %i{class: "fas fa-fw fa-comment-alt-plus"}
-            %p= t ".threads_explanation_html", issues_link: link_to(t(".issues"), issues_path, target: "_top")
-            %p= t ".issue_threads_description", group_name: @group.name
-            %hr
-        = render "shared/message_threads_list_frame", threads: @threads, view: @view, intro: intro
+        = render "shared/message_threads_list_frame", threads: @threads, view: @view
         .spinner-overlay
           .spinner-border.text-primary{ role: "status" }
             %span.visually-hidden Loading...
