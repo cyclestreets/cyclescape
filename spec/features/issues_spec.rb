@@ -142,13 +142,17 @@ describe "Issues" do
         expect(page).to have_link(issue.tags.second.name)
       end
 
-      xit "should be editable", js: true do
-        click_on "Edit tags"
-        fill_in "Tags", with: "pothole dangerous"
-        click_on I18n.t(".formtastic.actions.update_tags")
-        # Page submission is AJAX and returns json
-        expect(page.source).to have_content("pothole")
-        expect(page.source).to have_content("dangerous")
+      it "should be editable", js: true do
+        click_on I18n.t("shared.tags.widget_content.edit_tags")
+        find("#resource_tags_string_tag").send_keys("pothole", ",", "dangerous", ",")
+        click_on I18n.t("shared.edit_tags.update")
+
+        within("turbo-frame##{ActionView::RecordIdentifier.dom_id(issue, :tags)}") do
+          expect(page).to have_link("pothole", href: tag_path("pothole"))
+          expect(page).to have_link("dangerous")
+          expect(page).to have_no_button(I18n.t("shared.edit_tags.update"))
+        end
+        expect(issue.reload.tags.map(&:name)).to include("pothole", "dangerous")
       end
     end
   end

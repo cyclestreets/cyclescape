@@ -19,6 +19,14 @@ describe "new UI regressions", js: true do
     visit thread_path(thread)
     expect(page).to have_no_css("#message_#{message.id} button.liked")
   end
+
+  it "votes on an issue" do
+    issue = create(:issue)
+    visit issue_path(issue)
+    find("turbo-frame#votable_issue_#{issue.id} button.like").click
+    expect(page).to have_css("turbo-frame#votable_issue_#{issue.id} button.liked", text: "1")
+    expect(issue.reload.votes_for).to eq(1)
+  end
 end
 
 describe "message moderation popovers", js: true do

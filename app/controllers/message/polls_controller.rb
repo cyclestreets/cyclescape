@@ -11,6 +11,7 @@ class Message::PollsController < ApplicationController
       poll_option.poll_message.poll_votes.where(user: current_user).destroy_all
       poll_option.poll_votes.find_or_create_by!(user: current_user)
     end
+    render partial: "message/polls/show", locals: { component: poll_option.poll_message }
   end
 
   private

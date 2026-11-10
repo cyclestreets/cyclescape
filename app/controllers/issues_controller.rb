@@ -120,14 +120,14 @@ class IssuesController < ApplicationController
     authorize User, :logged_in?
 
     current_user.vote_exclusively_for(issue) unless current_user.voted_for?(issue)
-    render partial: "shared/vote_detail", locals: { resource: @issue }
+    render partial: "shared/votable", locals: { resource: @issue }
   end
 
   def vote_clear
     authorize User, :logged_in?
 
     current_user.clear_votes issue
-    render partial: "shared/vote_detail", locals: { resource: @issue }
+    render partial: "shared/votable", locals: { resource: @issue }
   end
 
   protected

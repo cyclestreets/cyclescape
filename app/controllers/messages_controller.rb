@@ -55,14 +55,14 @@ class MessagesController < ApplicationController
     current_user.with_lock do
       current_user.vote_exclusively_for message unless current_user.voted_for? message
     end
-    render partial: "shared/vote_detail", locals: { resource: message }
+    render partial: "shared/votable", locals: { resource: message }
   end
 
   def vote_clear
     authorize message
 
     current_user.clear_votes message
-    render partial: "shared/vote_detail", locals: { resource: message }
+    render partial: "shared/votable", locals: { resource: message }
   end
 
   protected

@@ -1,6 +1,6 @@
-%div{id: dom_id(resource, :tags)}
+= turbo_frame_tag dom_id(resource, :tags) do
   %ul{class: "tags"}
     - resource.tags.each do |tag|
-      %li{class: "tag"}= link_to tag.name, tag_path(tag)
+      %li{class: "tag"}= link_to tag.name, tag_path(tag), target: "_top"
   - if policy(resource).update_tags?
-    = link_to t(".edit_tags"), edit_polymorphic_path([resource, :tag]), data: { turbo: true, turbo_stream: true }
+    = link_to t(".edit_tags"), edit_polymorphic_path([resource, :tag])

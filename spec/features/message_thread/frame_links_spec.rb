@@ -17,7 +17,7 @@ describe "links inside turbo frames", js: true do
   it "opens a message author's profile from the thread" do
     author = thread.messages.first.created_by
     visit thread_path(thread)
-    within("turbo-frame#messages") { click_link(author.name, match: :first) }
+    within("#messages") { click_link(author.name, match: :first) }
 
     expect(page).to have_current_path(user_profile_path(author))
   end

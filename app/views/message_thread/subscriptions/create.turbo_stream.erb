@@ -1,7 +1,2 @@
-<%= turbo_stream.update 'flash' do %>
-  <%= render "layouts/flash" %>
-<% end %>
-
-<%= turbo_stream.replace dom_id(@thread, :subscription) do %>
-  <%= render partial: "message_threads/subscribe_button", locals: { thread: @thread } %>
-<% end %>
+<%= turbo_stream.update "flash", partial: "layouts/flash" %>
+<%= turbo_stream.replace dom_id(@thread, :subscription), partial: "message_threads/subscribe_button", locals: { thread: @thread } %>

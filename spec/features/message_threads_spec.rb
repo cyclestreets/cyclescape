@@ -176,17 +176,13 @@ describe "Message threads", type: :feature do
           end
         end
 
-        xit "should edit the tags" do
-          # This form is initially hidden
-          within("form.edit-tags") do
-            fill_in "Tags", with: "bike wheels"
-            click_on I18n.t(".formtastic.actions.update_tags")
-          end
-          # Page submission is AJAX and returns json
-          expect(page.source).to have_content("bike")
-          expect(page.source).to have_content("wheels")
-          # Check the response has information for the library panel.
-          expect(JSON.parse(page.source)["librarypanel"]).not_to be_nil
+        it "should edit the tags", js: true do
+          click_on I18n.t("shared.tags.widget_content.edit_tags")
+          find("#resource_tags_string_tag").send_keys("bike", ",", "wheels", ",")
+          click_on I18n.t("shared.edit_tags.update")
+
+          expect(page).to have_link("wheels", href: tag_path("wheels"))
+          expect(thread.reload.tags.map(&:name)).to include("bike", "wheels")
         end
       end
     end
