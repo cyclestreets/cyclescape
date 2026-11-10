@@ -220,4 +220,40 @@ describe MessageThreadsController do
       end
     end
   end
+
+  describe "#index view" do
+    let(:user) { create(:user) }
+    let(:cookie) { "cyclescape-message-threads" }
+
+    before { warden.set_user user }
+
+    it "remembers the view in the URL" do
+      get :index, params: { view: "all" }
+      expect(cookies[cookie]).to eq("all")
+    end
+
+    it "uses the remembered view when the URL has none" do
+      cookies[cookie] = "favourites"
+      get :index
+      expect(assigns(:view)).to eq("favourites")
+    end
+
+    it "prefers the view in the URL over the remembered one" do
+      cookies[cookie] = "favourites"
+      get :index, params: { view: "all" }
+      expect(assigns(:view)).to eq("all")
+    end
+
+    context "with views rendered" do
+      render_views
+
+      it "links to the deadlines calendar only on the deadlines view" do
+        ical = "/overview/#{user.public_token}/deadlines.ics"
+        get :index, params: { view: "all" }
+        expect(response.body).not_to include(ical)
+        get :index, params: { view: "deadlines" }
+        expect(response.body).to include(ical)
+      end
+    end
+  end
 end
