@@ -71,8 +71,8 @@ gem "sprockets-rails"
 gem "thin"
 gem "whenever"
 
-gem "grape"
-gem "grape-kaminari"
+gem "grape", "~> 3.2.1" # 3.3 needs mustermann 4, which sinatra (resque) can't use yet.
+gem "grape-kaminari" # un-maintained
 gem "grape-swagger"
 gem "grape-swagger-rails"
 gem "kaminari-grape"
