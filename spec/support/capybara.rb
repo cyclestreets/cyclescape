@@ -6,6 +6,8 @@ Capybara.register_driver :selenium_chrome_headless_wide do |app|
   version = Capybara::Selenium::Driver.load_selenium
   options_key = Capybara::Selenium::Driver::CAPS_VERSION.satisfied_by?(version) ? :capabilities : :options
   browser_options = Selenium::WebDriver::Chrome::Options.new.tap do |opts|
+    # e.g. CHROME_BIN=/usr/bin/chromium to pair the browser with a distro chromedriver
+    opts.binary = ENV["CHROME_BIN"] if ENV["CHROME_BIN"].present?
     opts.add_argument("--headless=new")
     opts.add_argument("--disable-gpu") if Gem.win_platform?
     # Workaround https://bugs.chromium.org/p/chromedriver/issues/detail?id=2650&q=load&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary
