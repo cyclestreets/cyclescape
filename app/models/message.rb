@@ -48,7 +48,7 @@ class Message < ApplicationRecord
   before_create :set_in_reply_to
   before_save :attach_tags
   after_commit :update_search
-  acts_as_voteable
+  include Voteable
 
   scope :recent, -> { ordered.limit(3) }
   scope :ordered, -> { order(created_at: :desc) }

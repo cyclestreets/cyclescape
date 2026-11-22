@@ -69,7 +69,6 @@ gem "resque-retry"
 gem "resque-rollbar"
 gem "sprockets-rails"
 gem "thin"
-gem "thumbs_up"
 gem "whenever"
 
 gem "grape"

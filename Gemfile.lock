@@ -632,7 +632,6 @@ GEM
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
     stackprof (0.2.27)
-    statistics2 (0.54)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     stringio (3.1.2)
@@ -655,9 +654,6 @@ GEM
       eventmachine (~> 1.0, >= 1.0.4)
       rack (>= 1, < 3)
     thor (1.3.2)
-    thumbs_up (0.6.7)
-      activerecord
-      statistics2
     tilt (2.6.0)
     timeout (0.4.3)
     tinymce-rails (5.10.9)
@@ -802,7 +798,6 @@ DEPENDENCIES
   sunspot_test
   tagsinput-rails
   thin
-  thumbs_up
   tinymce-rails (< 6)
   uglifier (>= 1.3.0)
   webmock
