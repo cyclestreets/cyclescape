@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 7.2"
+gem "rails", "~> 8.1"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -69,11 +69,10 @@ gem "resque-retry"
 gem "resque-rollbar"
 gem "sprockets-rails"
 gem "thin"
-gem "thumbs_up"
 gem "whenever"
 
-gem "grape"
-gem "grape-kaminari"
+gem "grape", "~> 3.2.1" # 3.3 needs mustermann 4, which sinatra (resque) can't use yet.
+gem "grape-kaminari" # un-maintained
 gem "grape-swagger"
 gem "grape-swagger-rails"
 gem "kaminari-grape"
@@ -102,7 +101,7 @@ group :staging do
 end
 
 group :development do
-  gem "annotate", require: false
+  gem "annotaterb", require: false
   gem "binding_of_caller"
   gem "better_errors"
   gem "bullet"

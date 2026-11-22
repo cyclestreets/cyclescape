@@ -1,0 +1,19 @@
+# Grape 3.2 prints the raw key (e.g. "grape.errors.messages.invalid_message_body.summary")
+# for any message step it has no translation for. Blank steps are skipped.
+# Fixed in Grape 3.3; remove this file after upgrading.
+en:
+  grape:
+    errors:
+      messages:
+        invalid_accept_header:
+          summary: ""
+        invalid_message_body:
+          summary: ""
+        invalid_version_header:
+          summary: ""
+        invalid_versioner_option:
+          summary: ""
+        invalid_with_option_for_represent:
+          summary: ""
+        missing_mime_type:
+          summary: ""

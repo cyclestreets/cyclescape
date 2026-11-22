@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   include Searchable
 
-  acts_as_voter
+  include Voter
   acts_as_paranoid
 
   devise(:database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :validatable, :invitable,

@@ -70,6 +70,9 @@ RSpec.configure do |config|
     I18n.reload!
   end
 
+  # Rakismet stores request vars globally and only clears them if the request doesn't raise
+  config.before { Rakismet.clear_request }
+
   config.around(:each) do |ex|
     DatabaseCleaner.strategy = :transaction
     truncate_clean = ex.metadata[:db_truncate] || ex.metadata[:js]

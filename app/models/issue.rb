@@ -15,7 +15,7 @@ class Issue < ApplicationRecord
     latlon(:location) { Sunspot::Util::Coordinates.new(centre.y, centre.x) }
   end
 
-  acts_as_voteable
+  include Voteable
 
   scope :by_score, lambda {
     joins(:votes).group(:id)

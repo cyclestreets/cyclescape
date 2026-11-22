@@ -6,10 +6,11 @@ Rails.application.routes.draw do
 
   # Pretty evil but beats copy pasting
   def issues_route(opts = {})
-    resources :issues, opts do
+    resources :issues, **opts do
       member do
         get :geometry
-        post :vote_up, :vote_clear
+        post :vote_up
+        post :vote_clear
       end
       get :all_geometries, on: :collection
       scope module: "issue" do
@@ -58,7 +59,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get "templates/:template", to: "templates#show", as: :template
     resources :groups do
-      put :disable, :enable, on: :member
+      put :disable, on: :member
+      put :enable, on: :member
     end
     resource :site_config
     resources :stats, only: :index do
@@ -89,7 +91,9 @@ Rails.application.routes.draw do
       resources :membership_requests do
         member do
           get :review
-          post :confirm, :reject, :cancel
+          post :confirm
+          post :reject
+          post :cancel
         end
       end
       resources :threads, controller: "message_threads"
@@ -104,20 +108,25 @@ Rails.application.routes.draw do
   resources :group_requests do
     member do
       get :review
-      put :confirm, :reject
+      put :confirm
+      put :reject
     end
   end
 
   resources :threads, controller: "message_threads" do
     member do
-      put :open, :close
+      put :open
+      put :close
     end
     resources :messages do
       resources :documents, controller: "message_library/documents"
       resources :notes, controller: "message_library/notes", only: %i[new create show edit update destroy]
       member do
-        put :approve, :reject, :censor
-        post :vote_up, :vote_clear
+        put :approve
+        put :reject
+        put :censor
+        post :vote_up
+        post :vote_clear
       end
     end
     scope module: :message do
@@ -142,7 +151,8 @@ Rails.application.routes.draw do
   end
 
   resource :library do
-    get :search, :relevant
+    get :search
+    get :relevant
     scope module: "library" do
       resources :documents, only: %i[new create show edit update destroy]
       resources :notes, only: %i[new create show edit update destroy]
@@ -155,7 +165,8 @@ Rails.application.routes.draw do
     get "uid/:authority_param/*uid", action: :show_uid, on: :collection, as: :show_uid
     member do
       get :geometry
-      put :hide, :unhide
+      put :hide
+      put :unhide
     end
     scope module: :planning_application do
       resource :issue, only: :new
