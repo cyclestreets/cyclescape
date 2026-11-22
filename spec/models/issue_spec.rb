@@ -347,6 +347,13 @@ describe Issue do
       brian.vote_exclusively_against(subject)
       expect(subject.plusminus).to eql(-2)
     end
+
+    it "should list the voters who voted either way" do
+      expect(subject.voters_who_voted).to be_empty
+      brian.vote_for(subject)
+      meg.vote_against(subject)
+      expect(subject.voters_who_voted).to contain_exactly(brian, meg)
+    end
   end
 
   describe "with a photo" do

@@ -35,6 +35,10 @@ module Voteable
     votes.size
   end
 
+  def voters_who_voted
+    votes.includes(:voter).map(&:voter).uniq
+  end
+
   def plusminus
     has_attribute?(:plusminus_tally) ? plusminus_tally : votes_for - votes_against
   end
