@@ -1,7 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.configure do
-  config.action_dispatch.rack_cache = true
+  # Metadata in Redis, Dragonfly response bodies on disk (not duplicated in Redis).
+  # tmp/dragonfly is symlinked to the shared dir so it survives deploys.
+  config.action_dispatch.rack_cache = {
+    metastore: "rails:/",
+    entitystore: "file:#{Rails.root.join('tmp/dragonfly/cache/body')}",
+    verbose: false
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

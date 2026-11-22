@@ -61,6 +61,24 @@ describe Route::IssueApi do
       end
     end
 
+    context "ordered by vote_count" do
+      let(:voters) { create_list(:user, 2) }
+      let!(:unvoted) { create :issue }
+      let!(:popular) { create :issue }
+      let!(:unpopular) { create :issue }
+
+      before do
+        voters.each { |voter| voter.vote_for(popular) }
+        voters.first.vote_against(unpopular)
+        get "/api/issues", order: "vote_count"
+      end
+
+      it "returns issues from most to least net votes, including unvoted ones" do
+        expect(geojson_response.map { |iss| iss["id"] }).to eq([popular.id, unvoted.id, unpopular.id])
+        expect(geojson_response.map { |iss| iss["vote_count"] }).to eq([2, 0, -1])
+      end
+    end
+
     context "with open threads" do
       let(:open_threads) { (create :message_thread, :belongs_to_issue).issue }
       let!(:no_thread) { create :issue }

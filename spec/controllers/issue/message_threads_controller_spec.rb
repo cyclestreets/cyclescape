@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "issue/message_threads_controller"
 
 describe Issue::MessageThreadsController, type: :controller do
   let(:approved)   { false }

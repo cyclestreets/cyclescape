@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "activerecord-postgis-adapter"
 gem "pg"
-gem "rails", "~> 7.2"
+gem "rails", "~> 8.1"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -69,7 +69,6 @@ gem "resque-retry"
 gem "resque-rollbar"
 gem "sprockets-rails"
 gem "thin"
-gem "thumbs_up"
 gem "whenever"
 
 gem "grape"
@@ -103,7 +102,7 @@ group :staging do
 end
 
 group :development do
-  gem "annotate", require: false
+  gem "annotaterb", require: false
   gem "better_errors"
   gem "bullet"
   gem "letter_opener"

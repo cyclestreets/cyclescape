@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "planning_filter"
 
 describe PlanningApplicationWorker do
   let(:planning_record_alt) { planning_record.merge("uid" => "345") }
